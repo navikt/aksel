@@ -15,6 +15,13 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
+const DATA = [
+  { name: "Arne", age: 42, city: "Oslo" },
+  { name: "Bjørg", age: 31, city: "Bergen" },
+  { name: "Carl", age: 55, city: "Trondheim" },
+  { name: "Diana", age: 28, city: "Stavanger" },
+];
+
 export const Resize: Story = {
   render: () => (
     <DataTable withKeyboardNav>
@@ -62,6 +69,75 @@ export const Resize: Story = {
           <DataTable.Td textAlign="center">Maybe</DataTable.Td>
           <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
         </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const FrAutoSizing: Story = {
+  render: () => (
+    <DataTable style={{ width: "800px" }}>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th>Auto 1fr</DataTable.Th>
+          <DataTable.Th>Auto 1fr</DataTable.Th>
+          <DataTable.Th>Auto 1fr</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        {DATA.map((row) => (
+          <DataTable.Tr key={row.name}>
+            <DataTable.Td>{row.name}</DataTable.Td>
+            <DataTable.Td>{row.age}</DataTable.Td>
+            <DataTable.Td>{row.city}</DataTable.Td>
+          </DataTable.Tr>
+        ))}
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const MixedFrAndFixed: Story = {
+  render: () => (
+    <DataTable style={{ width: "800px" }}>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th defaultWidth={100}>Fixed 100px</DataTable.Th>
+          <DataTable.Th defaultWidth="2fr">2fr</DataTable.Th>
+          <DataTable.Th defaultWidth="1fr">1fr</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        {DATA.map((row) => (
+          <DataTable.Tr key={row.name}>
+            <DataTable.Td>{row.name}</DataTable.Td>
+            <DataTable.Td>{row.age}</DataTable.Td>
+            <DataTable.Td>{row.city}</DataTable.Td>
+          </DataTable.Tr>
+        ))}
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const UnequalFr: Story = {
+  render: () => (
+    <DataTable style={{ width: "800px" }}>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th defaultWidth="1fr">1fr</DataTable.Th>
+          <DataTable.Th defaultWidth="2fr">2fr</DataTable.Th>
+          <DataTable.Th defaultWidth="3fr">3fr</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        {DATA.map((row) => (
+          <DataTable.Tr key={row.name}>
+            <DataTable.Td>{row.name}</DataTable.Td>
+            <DataTable.Td>{row.age}</DataTable.Td>
+            <DataTable.Td>{row.city}</DataTable.Td>
+          </DataTable.Tr>
+        ))}
       </DataTable.Tbody>
     </DataTable>
   ),

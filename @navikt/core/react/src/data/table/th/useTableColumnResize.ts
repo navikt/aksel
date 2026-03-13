@@ -1,4 +1,6 @@
 import { type DOMAttributes, useCallback, useState } from "react";
+import { useClientLayoutEffect } from "../../../utils-external/hooks/useClientLayoutEffect";
+import { useId } from "../../../utils-external/hooks/useId";
 import { useControllableState } from "../../../utils/hooks";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
@@ -13,6 +15,10 @@ type ResizeProps = {
   width?: ColumnWidth;
   /**
    * Initial width of the column. Only used when `width` is not set.
+   *
+   * Supports fr units (e.g. `"1fr"`, `"2fr"`) for proportional distribution
+   * of remaining space. Defaults to `"1fr"` when neither `width` nor
+   * `defaultWidth` is provided.
    */
   defaultWidth?: ColumnWidth;
   /**
@@ -57,18 +63,12 @@ type TableColumnResizeResult =
       enabled: false;
     };
 
-/**
- * TODO:
- * - Do we allow % widths?
- * - Auto-width mode is hard now since that might cause layout-shifts on mount. But would be preferable to
- * be able to set "1fr" or similar and have it fill remaining space.
- */
 function useTableColumnResize(
   args: TableColumnResizeArgs,
 ): TableColumnResizeResult {
   const {
     width: userWidth,
-    defaultWidth = 140,
+    defaultWidth,
     onWidthChange,
     maxWidth = Infinity,
     minWidth = 40,
@@ -76,16 +76,19 @@ function useTableColumnResize(
   } = args;
 
   const tableContext = useDataTableContext();
+  const columnId = useId();
 
-  const [width, _setWidth] = useControllableState({
+  const frConfig = parseFrValue(defaultWidth);
+  const isFr =
+    userWidth === undefined &&
+    (frConfig !== undefined || defaultWidth === undefined);
+
+  const [width, _setWidth] = useControllableState<ColumnWidth | undefined>({
     value: userWidth,
-    defaultValue: defaultWidth,
-    /**
-     * TODO:
-     * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
-     * Otherwise, this could cause excessive calls when resizing quickly.
-     */
-    onChange: onWidthChange,
+    defaultValue: isFr ? undefined : (parseWidth(defaultWidth) ?? 140),
+    onChange: onWidthChange as
+      | ((value: ColumnWidth | undefined) => void)
+      | undefined,
   });
 
   const [isResizingWithKeyboard, setIsResizingWithKeyboard] = useState(false);
@@ -95,9 +98,13 @@ function useTableColumnResize(
     (newWidth: number) => {
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
-      _setWidth(Math.min(Math.max(newWidth, min), max));
+      const clamped = Math.min(Math.max(newWidth, min), max);
+      _setWidth(clamped);
+      if (tableContext.layout === "fixed") {
+        tableContext.notifyResize(columnId, clamped);
+      }
     },
-    [maxWidth, minWidth, _setWidth],
+    [maxWidth, minWidth, _setWidth, tableContext, columnId],
   );
 
   const handleKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"] =
@@ -179,6 +186,22 @@ function useTableColumnResize(
       [setWidth],
     );
 
+  useClientLayoutEffect(() => {
+    if (tableContext.layout !== "fixed") return;
+
+    tableContext.registerColumn(columnId, {
+      type: isFr ? "fr" : "fixed",
+      frValue: frConfig ?? 1,
+      fixedWidth: isFr ? 0 : (parseWidth(userWidth ?? defaultWidth) ?? 140),
+      minWidth: parseWidth(minWidth) ?? 0,
+      maxWidth: parseWidth(maxWidth) ?? Infinity,
+      setResolvedWidth: (w) => _setWidth(w),
+    });
+
+    return () => tableContext.unregisterColumn(columnId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnId, tableContext.layout]);
+
   if (tableContext.layout !== "fixed") {
     return {
       width: style?.width,
@@ -212,6 +235,14 @@ function parseWidth(width: ColumnWidth | undefined): number | undefined {
     return Number.isNaN(parsed) ? undefined : parsed;
   }
   return undefined;
+}
+
+function parseFrValue(width: ColumnWidth | undefined): number | undefined {
+  if (typeof width !== "string") return undefined;
+  const match = width.match(/^(\d+(?:\.\d+)?)fr$/);
+  if (!match) return undefined;
+  const value = Number(match[1]);
+  return value > 0 ? value : undefined;
 }
 
 export { useTableColumnResize };

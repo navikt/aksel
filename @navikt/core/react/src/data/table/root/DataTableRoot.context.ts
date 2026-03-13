@@ -1,7 +1,19 @@
 import { createStrictContext } from "../../../utils/helpers";
 
+interface ColumnRegistration {
+  type: "fr" | "fixed";
+  frValue: number;
+  fixedWidth: number;
+  minWidth: number;
+  maxWidth: number;
+  setResolvedWidth: (width: number) => void;
+}
+
 interface DataTableContextProps {
   layout: "fixed" | "auto";
+  registerColumn: (id: string, config: ColumnRegistration) => void;
+  unregisterColumn: (id: string) => void;
+  notifyResize: (id: string, newWidth: number) => void;
 }
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
@@ -11,3 +23,4 @@ const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
   });
 
 export { DataTableContextProvider, useDataTableContext };
+export type { ColumnRegistration };

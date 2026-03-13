@@ -1,4 +1,5 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useCallback, useRef, useState } from "react";
+import { useClientLayoutEffect } from "../../../utils-external/hooks/useClientLayoutEffect";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
@@ -20,7 +21,10 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
-import { DataTableContextProvider } from "./DataTableRoot.context";
+import {
+  type ColumnRegistration,
+  DataTableContextProvider,
+} from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
 interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -186,15 +190,97 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     forwardedRef,
   ) => {
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
-    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+    const tableElRef = useRef<HTMLTableElement | null>(null);
+    const mergedRef = useMergeRefs(
+      forwardedRef,
+      setTableRef,
+      (el: HTMLTableElement | null) => {
+        tableElRef.current = el;
+      },
+    );
 
     const { tabIndex } = useTableKeyboardNav(tableRef, {
       enabled: withKeyboardNav,
       shouldBlockNavigation,
     });
 
+    const columnsRef = useRef(new Map<string, ColumnRegistration>());
+
+    const resolveColumns = useCallback(() => {
+      const tableEl = tableElRef.current;
+      if (!tableEl || layout !== "fixed") return;
+
+      const columns = columnsRef.current;
+      if (columns.size === 0) return;
+
+      const tableWidth = tableEl.offsetWidth;
+
+      let fixedSum = 0;
+      let totalFr = 0;
+
+      for (const col of columns.values()) {
+        if (col.type === "fixed") {
+          fixedSum += col.fixedWidth;
+        } else {
+          totalFr += col.frValue;
+        }
+      }
+
+      if (totalFr === 0) return;
+
+      const remaining = Math.max(0, tableWidth - fixedSum);
+
+      for (const col of columns.values()) {
+        if (col.type === "fr") {
+          const resolvedWidth = (col.frValue / totalFr) * remaining;
+          const clamped = Math.min(
+            Math.max(resolvedWidth, col.minWidth),
+            col.maxWidth,
+          );
+          col.setResolvedWidth(clamped);
+        }
+      }
+    }, [layout]);
+
+    const registerColumn = useCallback(
+      (id: string, config: ColumnRegistration) => {
+        columnsRef.current.set(id, config);
+        resolveColumns();
+      },
+      [resolveColumns],
+    );
+
+    const unregisterColumn = useCallback(
+      (id: string) => {
+        columnsRef.current.delete(id);
+        resolveColumns();
+      },
+      [resolveColumns],
+    );
+
+    const notifyResize = useCallback(
+      (id: string, newWidth: number) => {
+        const col = columnsRef.current.get(id);
+        if (col) {
+          col.type = "fixed";
+          col.fixedWidth = newWidth;
+        }
+        resolveColumns();
+      },
+      [resolveColumns],
+    );
+
+    useClientLayoutEffect(() => {
+      resolveColumns();
+    });
+
     return (
-      <DataTableContextProvider layout={layout}>
+      <DataTableContextProvider
+        layout={layout}
+        registerColumn={registerColumn}
+        unregisterColumn={unregisterColumn}
+        notifyResize={notifyResize}
+      >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
             <table
