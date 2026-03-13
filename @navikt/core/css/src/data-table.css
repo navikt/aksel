@@ -140,6 +140,15 @@
   color: var(--ax-text-neutral);
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
+  font-weight: var(--ax-font-weight-bold);
+
+  &:has(.aksel-data-table__th-sort-button):hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:has(.aksel-data-table__th-sort-button):active {
+    background-color: var(--ax-bg-neutral-moderate-pressed);
+  }
 
   &[data-sortable="true"] {
     padding: 0;
@@ -158,14 +167,7 @@
   text-align: start;
   background-color: transparent;
   border: none;
-
-  &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hover);
-  }
-
-  &:active {
-    background-color: var(--ax-bg-neutral-moderate-pressed);
-  }
+  font-weight: inherit;
 
   &:focus-visible {
     outline: none;
