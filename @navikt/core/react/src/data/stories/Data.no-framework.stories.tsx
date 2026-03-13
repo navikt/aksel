@@ -73,9 +73,6 @@ export const WithoutTanstack: Story = {
       left: string[];
       right: string[];
     }>({ left: [], right: [] });*/
-    const [columnSizes, setColumnSizes] = useState<{ [key: string]: number }>(
-      {},
-    );
 
     const globalFilterLower = deferredFilterString.toLowerCase();
     // Perf: Memoize data to avoid rerendering table body on unrelated state changes (the filtering itself is not expensive)
@@ -90,45 +87,6 @@ export const WithoutTanstack: Story = {
           : sampleData,
       [deferredFilterString, globalFilterLower],
     );
-
-    function resizeHandler(
-      event:
-        | React.MouseEvent<HTMLButtonElement>
-        | React.TouchEvent<HTMLButtonElement>,
-    ) {
-      const startX =
-        "touches" in event ? event.touches[0].clientX : event.clientX;
-      const th = (event.target as HTMLElement).closest(
-        "th",
-      ) as HTMLTableCellElement;
-      const startWidth = th.offsetWidth;
-
-      function onMove(clientX: number) {
-        const newWidth = startWidth + (clientX - startX);
-        const colKey = th.dataset.key;
-        if (!colKey) return;
-        setColumnSizes((prev) => ({
-          ...prev,
-          [colKey]: newWidth,
-        }));
-      }
-      function onMouseMove(e: MouseEvent) {
-        onMove(e.clientX);
-      }
-      function onTouchMove(e: TouchEvent) {
-        onMove(e.touches[0].clientX);
-      }
-      function cleanup() {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", cleanup);
-        document.removeEventListener("touchmove", onTouchMove);
-        document.removeEventListener("touchend", cleanup);
-      }
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", cleanup);
-      document.addEventListener("touchmove", onTouchMove);
-      document.addEventListener("touchend", cleanup);
-    }
 
     return (
       <VStack gap="space-16">
@@ -146,9 +104,8 @@ export const WithoutTanstack: Story = {
                 return (
                   <DataTable.Th
                     key={column.header}
-                    size={columnSizes[column.accessorKey] ?? 150}
+                    defaultWidth={150}
                     //style={{ width: `var(--header-${header.id}-size)` }}
-                    resizeHandler={resizeHandler}
                     data-key={column.accessorKey}
                     /* pinningHandler={() => {
                       const isPinned = columnPinning.left.includes(

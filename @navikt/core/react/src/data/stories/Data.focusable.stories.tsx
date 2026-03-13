@@ -48,22 +48,10 @@ export const TanstackDemo: Story = {
       columnResizeMode: "onChange",
     });
 
-    const columnSizeVars = () => {
-      const headers = table.getFlatHeaders();
-      const colSizes: { [key: string]: `${number}px` } = {};
-      for (let i = 0; i < headers.length; i++) {
-        const header = headers[i];
-        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
-        colSizes[`--col-${header.column.id}-size`] =
-          `${header.column.getSize()}px`;
-      }
-      return colSizes;
-    };
-
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
         <button>Focuable before</button>
-        <DataTable withKeyboardNav style={columnSizeVars()}>
+        <DataTable withKeyboardNav>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -73,19 +61,7 @@ export const TanstackDemo: Story = {
                       <DataTable.Th
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
-                        resizeHandler={header.getResizeHandler()}
-                        keyboardResizingHandler={(increment) => {
-                          const newColumnSizing = {};
-                          table.getFlatHeaders().forEach((h) => {
-                            if (h.id === header.id) {
-                              newColumnSizing[h.id] =
-                                header.getSize() + increment;
-                            } else {
-                              newColumnSizing[h.id] = h.getSize();
-                            }
-                          });
-                          table.setColumnSizing(newColumnSizing);
-                        }}
+                        defaultWidth={header.getSize()}
                         sortable
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortClick={(event) => {

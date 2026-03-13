@@ -7,16 +7,17 @@ import {
   SortUpIcon,
 } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
+import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 type SortDirection = "asc" | "desc" | "none";
 
-interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
+interface DataTableThProps
+  extends React.HTMLAttributes<HTMLTableCellElement>, ResizeProps {
   resizeHandler?: (
     event:
       | React.MouseEvent<HTMLButtonElement>
       | React.TouchEvent<HTMLButtonElement>,
   ) => void;
-  size?: number; // TODO: size should be required when resizeHandler is set
   /**
    * Content alignment inside cell
    * @default "left"
@@ -49,7 +50,6 @@ interface DataTableThProps extends React.HTMLAttributes<HTMLTableCellElement> {
    */
   colSpan?: number;
   rowSpan?: number;
-  keyboardResizingHandler?: (size: number) => void;
 }
 
 const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
@@ -67,36 +67,31 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
     {
       className,
       children,
-      resizeHandler,
-      size,
       sortable = false,
       sortDirection = "none",
       onSortClick,
       style,
-      keyboardResizingHandler,
       textAlign = "left",
+      width,
+      minWidth,
+      maxWidth,
+      onWidthChange,
+      defaultWidth,
       ...rest
     },
     forwardedRef,
   ) => {
-    const [resizeHandlerActive, setResizeHandlerActive] = React.useState(false);
     const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
 
-    const keyDownHandler = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (keyboardResizingHandler) {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          setResizeHandlerActive((active) => !active);
-        } else if (
-          resizeHandlerActive &&
-          (event.key === "ArrowLeft" || event.key === "ArrowRight")
-        ) {
-          event.preventDefault();
-          keyboardResizingHandler(event.key === "ArrowRight" ? 10 : -10);
-        }
-      }
-    };
+    const resizeResult = useTableColumnResize({
+      width,
+      defaultWidth,
+      minWidth,
+      maxWidth,
+      onWidthChange,
+      style,
+    });
 
     const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
 
@@ -106,7 +101,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
         data-sortable={sortable}
-        style={{ width: size, ...style }}
+        style={{ width: resizeResult.width, ...style }}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
         onPointerEnter={() => {
           const el = contentRef.current;
@@ -140,19 +135,14 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
           </div>
         )}
 
-        {resizeHandler && (
+        {resizeResult.enabled && (
           <button
-            // TODO: Should probably not be a button since it doesn't have onClick
-            onMouseDown={resizeHandler}
-            onTouchStart={resizeHandler}
-            onBlur={() => setResizeHandlerActive(false)}
+            {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
-            data-active={resizeHandlerActive}
-            // TODO Very open to a better name for this
+            data-active={resizeResult.isResizingWithKeyboard}
             data-block-keyboard-nav
-            onKeyDown={keyDownHandler}
           >
-            {resizeHandlerActive && (
+            {resizeResult.isResizingWithKeyboard && (
               <>
                 <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
                   <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />

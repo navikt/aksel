@@ -74,8 +74,7 @@ export const TanstackColumnFilter: Story = {
                   return (
                     <DataTable.Th
                       key={header.id}
-                      size={200}
-                      resizeHandler={header.getResizeHandler()}
+                      defaultWidth={200}
                       sortable
                       sortDirection={header.column.getIsSorted() || "none"}
                       onSortClick={(event) => {

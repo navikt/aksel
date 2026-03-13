@@ -183,18 +183,6 @@ export const TanstackExample: Story = {
       debugColumns: true,
     });
 
-    const columnSizeVars = () => {
-      const headers = table.getFlatHeaders();
-      const colSizes: { [key: string]: `${number}px` } = {};
-      for (let i = 0; i < headers.length; i++) {
-        const header = headers[i];
-        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
-        colSizes[`--col-${header.column.id}-size`] =
-          `${header.column.getSize()}px`;
-      }
-      return colSizes;
-    };
-
     return (
       <VStack gap="space-16">
         <DataToolbar>
@@ -310,7 +298,6 @@ export const TanstackExample: Story = {
         </DataActionBar>
 
         <DataTable
-          style={columnSizeVars()}
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
@@ -324,7 +311,7 @@ export const TanstackExample: Story = {
                       <DataTable.Th
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
-                        resizeHandler={header.getResizeHandler()}
+                        defaultWidth={header.getSize()}
                         /* pinningHandler={
                           header.column.getIsPinned() === "left"
                             ? () => header.column.pin(false)
@@ -337,18 +324,6 @@ export const TanstackExample: Story = {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);
-                        }}
-                        keyboardResizingHandler={(increment) => {
-                          const newColumnSizing = {};
-                          table.getFlatHeaders().forEach((h) => {
-                            if (h.id === header.id) {
-                              newColumnSizing[h.id] =
-                                header.getSize() + increment;
-                            } else {
-                              newColumnSizing[h.id] = h.getSize();
-                            }
-                          });
-                          table.setColumnSizing(newColumnSizing);
                         }}
                       >
                         {header.isPlaceholder
