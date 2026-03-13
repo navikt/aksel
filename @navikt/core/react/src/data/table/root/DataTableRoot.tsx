@@ -191,13 +191,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   ) => {
     const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
     const tableElRef = useRef<HTMLTableElement | null>(null);
-    const mergedRef = useMergeRefs(
-      forwardedRef,
-      setTableRef,
-      (el: HTMLTableElement | null) => {
-        tableElRef.current = el;
-      },
-    );
+    const mergedRef = useMergeRefs(forwardedRef, setTableRef, tableElRef);
 
     const { tabIndex } = useTableKeyboardNav(tableRef, {
       enabled: withKeyboardNav,
