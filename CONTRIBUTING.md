@@ -21,6 +21,15 @@ Storybook: http://localhost:6006
 
 Nettside: http://localhost:3000
 
+## Tilgang til GitHub Package Registry
+
+Noen avhengigheter hentes fra GitHub Package Registry. Sett opp en PAT med `read:packages` (autorisert for organisasjonen `navikt`):
+https://github.com/settings/tokens
+
+Legg token i shell-profilen din (`.zshrc` eller `.bashrc`):
+
+`export NPM_AUTH_TOKEN=<din_pat_med_read:packages>`
+
 ### Ikke Nav-ansatt?
 
 Nettsiden avhenger av pakker som ikke er åpent tilgjengelig. Du kan likevel bidra på andre deler av repoet ved å kjøre denne kommandoen i stedet for `yarn install`:
@@ -34,7 +43,7 @@ yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navi
 Vi bruker [Storybook](https://storybook.js.org/) for utvikling av nye komponenter.
 Lag [stories](https://storybook.js.org/docs/writing-stories) for komponentene du vil teste.
 
-### safeguards
+### Safeguards
 
 Om man vil ha en ekstra safeguard for å hindre at man kjører diverse sanity scripts fra lokal maskin mot produksjons-datasettet så kan du legge til denne variabelen i filen `./aksel.nav.no/website/.env`:
 
