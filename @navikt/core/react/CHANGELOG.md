@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 8.7.1
+
+### Patch Changes
+
+- Dialog: Improved scrollbar handling when opening dialog-popup. ([#4703](https://github.com/navikt/aksel/pull/4703))
+
+- useDatepicker, useMonthpicker: Add JsDoc to validation object ([#4722](https://github.com/navikt/aksel/pull/4722))
+
+- DatePicker, MonthPicker: Removed controlled tabindex on Input-button based on open-state. ([#4714](https://github.com/navikt/aksel/pull/4714))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.7.1
+  - @navikt/aksel-icons@8.7.1
+
 ## 8.7.0
 
 ### Minor Changes
