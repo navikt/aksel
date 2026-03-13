@@ -47,6 +47,7 @@ type TableColumnResizeResult =
         onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
         onKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"];
         onBlur: DOMAttributes<HTMLButtonElement>["onBlur"];
+        onDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"];
       };
       isResizingWithKeyboard: boolean;
       enabled: true;
@@ -58,8 +59,9 @@ type TableColumnResizeResult =
 
 /**
  * TODO:
- * - Do we allow % widths? If so, need to get current width before updating when changing from cell
- *
+ * - Do we allow % widths?
+ * - Auto-width mode is hard now since that might cause layout-shifts on mount. But would be preferable to
+ * be able to set "1fr" or similar and have it fill remaining space.
  */
 function useTableColumnResize(
   args: TableColumnResizeArgs,
@@ -152,6 +154,31 @@ function useTableColumnResize(
       [setWidth],
     );
 
+  /**
+   * TODO: Do we even want this?
+   * - + 32px padding is hardcoded now, fix this
+   * - Need to find widest element in column, not the header itself.
+   * - Should doubleclick just reset to defaultWidth? Or add a autoWidth prop.
+   */
+  const handleDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"] =
+    useCallback(
+      (event) => {
+        const th = (event.target as HTMLElement).closest(
+          "th",
+        ) as HTMLTableCellElement;
+
+        const contentEl = th.getElementsByClassName(
+          "aksel-data-table__th-content",
+        )[0];
+        const range = document.createRange();
+        range.selectNodeContents(contentEl);
+        const contentWidth = range.getBoundingClientRect().width;
+
+        setWidth(contentWidth + 32);
+      },
+      [setWidth],
+    );
+
   if (tableContext.layout !== "fixed") {
     return {
       width: style?.width,
@@ -166,6 +193,7 @@ function useTableColumnResize(
       onTouchMove: () => {},
       onKeyDown: handleKeyDown,
       onBlur: () => setIsResizingWithKeyboard(false),
+      onDoubleClick: handleDoubleClick,
     },
     isResizingWithKeyboard,
     enabled: true,
