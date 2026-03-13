@@ -342,7 +342,7 @@
   }
 
   &[data-keyboard-dragging="true"] {
-    .aksel-data-drag-and-drop-drag-handler__button {
+    .aksel-data-drag-and-drop__drag-handler__button {
       outline: 2px solid var(--ax-border-focus);
       outline-offset: -1px;
       border-radius: var(--ax-radius-8);
@@ -354,7 +354,7 @@
   }
 }
 
-.aksel-data-drag-and-drop-drag-handler__button {
+.aksel-data-drag-and-drop__drag-handler__button {
   cursor: grab;
   height: 1.5rem;
   position: relative;
@@ -369,6 +369,24 @@
   }
 }
 
-.aksel-data-drag-and-drop-drag-handler__arrow {
+.aksel-data-drag-and-drop__drag-handler__arrow {
   height: 1.2rem;
+}
+
+.aksel-data-drag-and-drop__drag-handler__alt {
+  position: relative;
+
+  .aksel-data-drag-and-drop__drag-handler__arrow {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &[data-direction="up"] {
+      top: -10px;
+    }
+
+    &[data-direction="down"] {
+      bottom: calc(-100% - 6px);
+    }
+  }
 }

@@ -61,6 +61,7 @@ const DataDragAndDropItem = React.forwardRef<
         <DataDragAndDropDragHandler
           handleRef={handleRef}
           keyboardDragging={keyboardDragging}
+          alt
         />
         <div>{children}</div>
       </div>

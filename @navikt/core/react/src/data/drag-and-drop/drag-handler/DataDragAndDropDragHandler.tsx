@@ -19,6 +19,8 @@ export interface DataDragAndDropDragHandlerProps {
    * Handle ref is forwarded to the button element serving as drag handle.
    */
   handleRef: React.Ref<HTMLDivElement>;
+  // Just for testing purposes, to render an alternative drag handler
+  alt?: boolean;
 }
 
 /**
@@ -30,7 +32,40 @@ export interface DataDragAndDropDragHandlerProps {
 export const DataDragAndDropDragHandler = React.forwardRef<
   HTMLButtonElement,
   DataDragAndDropDragHandlerProps
->(({ keyboardDragging, handleRef }) => {
+>(({ keyboardDragging, handleRef, alt }) => {
+  if (alt) {
+    return (
+      <div className="aksel-data-drag-and-drop__drag-handler__alt">
+        {keyboardDragging && (
+          <span
+            className="aksel-data-drag-and-drop__drag-handler__arrow"
+            data-direction="up"
+          >
+            <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
+          </span>
+        )}
+        <div
+          ref={handleRef}
+          className="aksel-data-drag-and-drop__drag-handler__button"
+        >
+          <DragVerticalIcon
+            aria-hidden
+            title="Dra for å flytte"
+            fontSize="1.5rem"
+          />
+        </div>
+        {keyboardDragging && (
+          <span
+            className="aksel-data-drag-and-drop__drag-handler__arrow"
+            data-direction="down"
+          >
+            <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
+          </span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <Floating>
       {keyboardDragging && (
@@ -38,7 +73,7 @@ export const DataDragAndDropDragHandler = React.forwardRef<
           side="top"
           avoidCollisions={false}
           updatePositionStrategy="always"
-          className="aksel-data-drag-and-drop-drag-handler__arrow"
+          className="aksel-data-drag-and-drop__drag-handler__arrow"
         >
           <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
         </Floating.Content>
@@ -46,7 +81,7 @@ export const DataDragAndDropDragHandler = React.forwardRef<
       <Floating.Anchor asChild>
         <div
           ref={handleRef}
-          className="aksel-data-drag-and-drop-drag-handler__button"
+          className="aksel-data-drag-and-drop__drag-handler__button"
         >
           <DragVerticalIcon
             aria-hidden
@@ -59,7 +94,7 @@ export const DataDragAndDropDragHandler = React.forwardRef<
         <Floating.Content
           avoidCollisions={false}
           updatePositionStrategy="always"
-          className="aksel-data-drag-and-drop-drag-handler__arrow"
+          className="aksel-data-drag-and-drop__drag-handler__arrow"
         >
           <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
         </Floating.Content>
@@ -67,5 +102,3 @@ export const DataDragAndDropDragHandler = React.forwardRef<
     </Floating>
   );
 });
-
-DataDragAndDropDragHandler.displayName = "DataDragAndDropDragHandler";
