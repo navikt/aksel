@@ -27,6 +27,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
           <td
             aria-hidden
             className="aksel-data-table__th aksel-data-table__filler-cell"
+            data-block-keyboard-nav
           />
         )}
       </tr>

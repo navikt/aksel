@@ -121,6 +121,7 @@ function useTableColumnResize(
 
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
+          event.stopPropagation();
 
           const th = (event.target as HTMLElement).closest(
             "th",
