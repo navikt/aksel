@@ -23,7 +23,11 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         {children}
         {renderFillerCell && (
           /* TODO: Consider chaning between th and td based on context */
-          <div className="aksel-data-table__th aksel-data-table__filler-cell" />
+          /* using div causes illegal dom structure */
+          <td
+            aria-hidden
+            className="aksel-data-table__th aksel-data-table__filler-cell"
+          />
         )}
       </tr>
     );
