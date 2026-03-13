@@ -61,6 +61,8 @@ const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
 /**
  * TODO:
  * - Plan for pinning: Move it into "settings" dialog like here: https://cloudscape.design/examples/react/table.html
+ * - Keyboard-nav breaks in headers now because of the resize-handles.
+ * Toggling `data-block-keyboard-nav` does not work since the created "grid" does not update when toggling this attribute.
  */
 const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
   (

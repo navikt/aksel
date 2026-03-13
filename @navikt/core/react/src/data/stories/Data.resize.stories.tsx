@@ -17,7 +17,7 @@ type Story = StoryObj<typeof DataTable>;
 
 export const Resize: Story = {
   render: () => (
-    <DataTable>
+    <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
           <DataTable.Th
