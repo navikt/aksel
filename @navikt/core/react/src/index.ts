@@ -178,6 +178,7 @@ export {
   type InfoCardHeaderProps,
   type InfoCardTitleProps,
   type InfoCardContentProps,
+  type InfoCardMessageProps,
 } from "./alert/info-card";
 export {
   LocalAlert,
