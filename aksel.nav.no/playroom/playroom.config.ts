@@ -20,7 +20,7 @@ module.exports = {
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
   openBrowser: false,
   paramType: "search", // default is 'hash'
-  iframeSandbox: "allow-scripts allow-same-origin allow-modals",
+  iframeSandbox: "allow-scripts allow-same-origin allow-modals allow-forms",
   exampleCode: `
 <GlobalAlert status="success">
   <GlobalAlert.Header>
