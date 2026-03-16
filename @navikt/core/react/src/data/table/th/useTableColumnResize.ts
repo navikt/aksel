@@ -41,6 +41,10 @@ type ResizeProps = {
    * Forwarded styles
    */
   style?: React.CSSProperties;
+  /**
+   * Forwarded colSpan
+   */
+  colSpan?: number;
 };
 
 type TableColumnResizeArgs = ResizeProps & {};
@@ -73,6 +77,7 @@ function useTableColumnResize(
     maxWidth = Infinity,
     minWidth = 40,
     style,
+    colSpan,
   } = args;
 
   const tableContext = useDataTableContext();
@@ -188,11 +193,13 @@ function useTableColumnResize(
     );
 
   useClientLayoutEffect(() => {
-    if (tableContext.layout !== "fixed") return;
+    if (tableContext.layout !== "fixed") {
+      return;
+    }
 
     tableContext.registerColumn(columnId, {
       type: isFr ? "fr" : "fixed",
-      frValue: frConfig ?? 1,
+      frValue: frConfig ?? colSpan ?? 1,
       fixedWidth: isFr ? 0 : (parseWidth(userWidth ?? defaultWidth) ?? 140),
       minWidth: parseWidth(minWidth) ?? 0,
       maxWidth: parseWidth(maxWidth) ?? Infinity,
