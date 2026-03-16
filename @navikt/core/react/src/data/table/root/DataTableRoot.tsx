@@ -10,6 +10,10 @@ import {
   type DataTableEmptyStateProps,
 } from "../empty-state/DataTableEmptyState";
 import {
+  DataTableLoadingState,
+  type DataTableLoadingStateProps,
+} from "../loading-state/DataTableLoadingState";
+import {
   DataTableTbody,
   type DataTableTbodyProps,
 } from "../tbody/DataTableTbody";
@@ -179,6 +183,18 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   EmptyState: typeof DataTableEmptyState;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.LoadingState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  LoadingState: typeof DataTableLoadingState;
 }
 
 /**
@@ -241,6 +257,7 @@ DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
 DataTable.Tfoot = DataTableTfoot;
 DataTable.EmptyState = DataTableEmptyState;
+DataTable.LoadingState = DataTableLoadingState;
 
 export {
   DataTable,
@@ -252,6 +269,7 @@ export {
   DataTableThead,
   DataTableTr,
   DataTableEmptyState,
+  DataTableLoadingState,
 };
 export default DataTable;
 export type {
@@ -264,4 +282,5 @@ export type {
   DataTableThProps,
   DataTableTrProps,
   DataTableEmptyStateProps,
+  DataTableLoadingStateProps,
 };

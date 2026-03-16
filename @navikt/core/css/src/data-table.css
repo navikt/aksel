@@ -403,3 +403,46 @@
   gap: var(--ax-space-8);
   justify-items: center;
 }
+
+.aksel-data-table__loading-state {
+  display: grid;
+  place-content: center;
+  padding-block: var(--ax-space-32);
+  padding-inline: var(--ax-space-16);
+  text-align: center;
+  gap: var(--ax-space-8);
+  justify-items: center;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inline-size: 100%;
+    block-size: 2px;
+    inset-block-start: -1px;
+    background-color: var(--ax-bg-strong);
+    animation: animateDataTableLoading 1s linear infinite;
+  }
+}
+
+@keyframes animateDataTableLoading {
+  0% {
+    inset-inline-start: 0;
+    inline-size: 0;
+  }
+
+  20% {
+    inset-inline-start: 0;
+    inline-size: 40%;
+  }
+
+  80% {
+    inset-inline-start: 60%;
+    inline-size: 40%;
+  }
+
+  100% {
+    inset-inline-start: 100%;
+    inline-size: 0;
+  }
+}

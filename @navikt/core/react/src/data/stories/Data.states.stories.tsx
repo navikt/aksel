@@ -55,3 +55,37 @@ export const EmptyStateFixed: Story = {
     </DataTable>
   ),
 };
+
+export const LoadingStateAuto: Story = {
+  render: () => (
+    <DataTable layout="auto" withKeyboardNav>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th>Column 1</DataTable.Th>
+          <DataTable.Th>Column 2</DataTable.Th>
+          <DataTable.Th>Column 3</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.LoadingState>Loading resources...</DataTable.LoadingState>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const LoadingStateFixed: Story = {
+  render: () => (
+    <DataTable layout="fixed" withKeyboardNav>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th>Column 1</DataTable.Th>
+          <DataTable.Th>Column 2</DataTable.Th>
+          <DataTable.Th>Column 3</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.LoadingState>Loading resources...</DataTable.LoadingState>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
