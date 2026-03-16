@@ -35,6 +35,10 @@ type ResizeProps = {
    * Forwarded styles
    */
   style?: React.CSSProperties;
+  /**
+   * Forwarded colSpan
+   */
+  colSpan?: number;
 };
 
 type TableColumnResizeArgs = ResizeProps & {};
@@ -68,18 +72,19 @@ function useTableColumnResize(
 ): TableColumnResizeResult {
   const {
     width: userWidth,
-    defaultWidth = 140,
+    defaultWidth,
     onWidthChange,
     maxWidth = Infinity,
     minWidth = 40,
     style,
+    colSpan,
   } = args;
 
   const tableContext = useDataTableContext();
 
   const [width, _setWidth] = useControllableState({
     value: userWidth,
-    defaultValue: defaultWidth,
+    defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.

@@ -332,6 +332,7 @@
 .aksel-data-table__filler-cell {
   width: auto;
   display: table-cell;
+  padding: 0;
 }
 
 .aksel-data-table__drag-and-drop-item {

@@ -79,6 +79,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       maxWidth,
       onWidthChange,
       defaultWidth,
+      colSpan,
       ...rest
     },
     forwardedRef,
@@ -93,6 +94,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       maxWidth,
       onWidthChange,
       style,
+      colSpan,
     });
 
     const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
@@ -113,6 +115,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         onPointerLeave={() => setIsOverflowing(false)}
         tabIndex={-1}
         data-align={textAlign}
+        colSpan={colSpan}
       >
         {sortable ? (
           <button
