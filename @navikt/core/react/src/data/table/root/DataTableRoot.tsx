@@ -76,6 +76,20 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
+  /**
+   * Enables selection of rows.
+   *
+   *
+   * When set to "single", only one row can be selected at a time.
+   *
+   * When set to "multiple", multiple rows can be selected.
+   *
+   * TODO:
+   * - Implement callbacks for selection changes (e.g. onRowSelect, onSelectAll)
+   * - Implement controlled state
+   * - Implement auto-add checkbox to rows and header when selection is enabled
+   */
+  selectionMode?: "single" | "multiple";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -213,6 +227,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       truncateContent = true,
       shouldBlockNavigation,
       layout = "fixed",
+      selectionMode,
       ...rest
     },
     forwardedRef,
@@ -229,6 +244,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
+        selectionMode={selectionMode}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
