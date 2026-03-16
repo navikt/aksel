@@ -7,13 +7,13 @@ import DataDragAndDropItem, {
 } from "../item/DataDragAndDropItem";
 import { DataDragAndDropContext } from "./DataDragAndDrop.context";
 
-interface DataDragAndDropProps extends React.HTMLAttributes<HTMLTableElement> {
+interface DataDragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
   children: any[];
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
-  DataDragAndDropProps & React.RefAttributes<HTMLTableElement>
+  DataDragAndDropProps & React.RefAttributes<HTMLDivElement>
 > {
   /**
    * @see 🏷️ {@link DataDragAndDropItemProps}

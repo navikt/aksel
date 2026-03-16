@@ -34,7 +34,11 @@ function restoreTabIndex(cell: Element): void {
  */
 function findFocusableElementInCell(cell: Element): HTMLElement | null {
   const el = cell as HTMLElement | null;
-  if (!el || isHiddenElement(el)) {
+  if (
+    !el ||
+    isHiddenElement(el) ||
+    el.hasAttribute("data-block-keyboard-nav")
+  ) {
     return null;
   }
 
@@ -48,6 +52,11 @@ function findFocusableElementInCell(cell: Element): HTMLElement | null {
 
   for (let i = 0; i < focusables.length; i += 1) {
     const focusable = focusables[i] as HTMLElement;
+    /* Ignore element if it has [data-block-keyboard-nav="true"] */
+    if (focusable.hasAttribute("data-block-keyboard-nav")) {
+      continue;
+    }
+
     if (!isHiddenElement(focusable) && !isDisabledElement(focusable)) {
       return focusable;
     }

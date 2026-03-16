@@ -194,7 +194,10 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     });
 
     return (
-      <DataTableContextProvider layout={layout}>
+      <DataTableContextProvider
+        layout={layout}
+        withKeyboardNav={withKeyboardNav}
+      >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
             <table

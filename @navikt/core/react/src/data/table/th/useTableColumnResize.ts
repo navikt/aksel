@@ -5,6 +5,7 @@ import { useDataTableContext } from "../root/DataTableRoot.context";
 type ColumnWidth = number | string;
 
 type ResizeProps = {
+  ref: HTMLTableCellElement | null;
   /**
    * Controlled width of the column.
    *
@@ -35,13 +36,17 @@ type ResizeProps = {
    * Forwarded styles
    */
   style?: React.CSSProperties;
+  /**
+   * Forwarded colSpan
+   */
+  colSpan?: number;
 };
 
 type TableColumnResizeArgs = ResizeProps & {};
 
 type TableColumnResizeResult =
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
         onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
@@ -53,7 +58,7 @@ type TableColumnResizeResult =
       enabled: true;
     }
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       enabled: false;
     };
 
@@ -67,19 +72,21 @@ function useTableColumnResize(
   args: TableColumnResizeArgs,
 ): TableColumnResizeResult {
   const {
+    ref,
     width: userWidth,
-    defaultWidth = 140,
+    defaultWidth,
     onWidthChange,
     maxWidth = Infinity,
     minWidth = 40,
     style,
+    colSpan,
   } = args;
 
   const tableContext = useDataTableContext();
 
   const [width, _setWidth] = useControllableState({
     value: userWidth,
-    defaultValue: defaultWidth,
+    defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
@@ -93,11 +100,28 @@ function useTableColumnResize(
 
   const setWidth = useCallback(
     (newWidth: number) => {
+      const currentWidth = ref?.offsetWidth;
+      if (!currentWidth) {
+        return;
+      }
+
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
-      _setWidth(Math.min(Math.max(newWidth, min), max));
+      const clamped = Math.min(Math.max(newWidth, min), max);
+
+      if (newWidth <= currentWidth && newWidth > max) {
+        _setWidth(newWidth);
+        return;
+      }
+
+      if (newWidth >= currentWidth && newWidth > max) {
+        _setWidth(currentWidth);
+        return;
+      }
+
+      _setWidth(clamped);
     },
-    [maxWidth, minWidth, _setWidth],
+    [minWidth, maxWidth, _setWidth, ref],
   );
 
   const handleKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"] =
@@ -181,13 +205,16 @@ function useTableColumnResize(
 
   if (tableContext.layout !== "fixed") {
     return {
-      width: style?.width,
+      style,
       enabled: false,
     };
   }
 
   return {
-    width,
+    style: {
+      ...style,
+      width,
+    },
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
       onTouchMove: () => {},
