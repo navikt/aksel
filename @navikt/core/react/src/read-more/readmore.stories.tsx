@@ -51,38 +51,30 @@ export const Open: Story = {
   },
 };
 
-export const Moderate: Story = {
-  render: (args) => (
+const ModerateDemo = ({ heading }: { heading: string }) => {
+  return (
     <VStack gap="space-16" maxWidth="35rem">
-      <ReadMore
-        variant="moderate"
-        size="large"
-        header={args?.header ?? Default?.args?.header}
-      >
+      <ReadMore variant="moderate" size="large" header={heading}>
         {Content}
       </ReadMore>
-      <ReadMore
-        variant="moderate"
-        size="medium"
-        header={args?.header ?? Default?.args?.header}
-      >
+      <ReadMore variant="moderate" size="medium" header={heading}>
         {Content}
       </ReadMore>
-      <ReadMore
-        variant="moderate"
-        size="small"
-        header={args?.header ?? Default?.args?.header}
-      >
+      <ReadMore variant="moderate" size="small" header={heading}>
         {Content}
       </ReadMore>
     </VStack>
+  );
+};
+
+export const ModerateWithLongHeader: Story = {
+  render: () => (
+    <ModerateDemo heading="Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, tempore corporis exercitationem minus dignissimos eius aspernatur fugiat iusto." />
   ),
-  args: {
-    ...Default.args,
-    header:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, tempore corporis exercitationem minus dignissimos eius aspernatur fugiat iusto.",
-    open: true,
-  },
+};
+
+export const ModerateWithShortHeader: Story = {
+  render: () => <ModerateDemo heading="Lorem ipsum dolor sit amet " />,
 };
 
 export const Ghost: Story = {
@@ -158,8 +150,12 @@ export const Chromatic: Story = {
         </div>
 
         <div>
-          <h2>Moderate</h2>
-          {Moderate?.render?.(...props)}
+          <h2>Moderate Long</h2>
+          {ModerateWithLongHeader.render?.(...props)}
+        </div>
+        <div>
+          <h2>Moderate Short</h2>
+          {ModerateWithShortHeader.render?.(...props)}
         </div>
         <div>
           <h2>Ghost</h2>
