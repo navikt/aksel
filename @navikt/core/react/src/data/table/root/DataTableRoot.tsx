@@ -6,6 +6,10 @@ import {
   type DataTableCaptionProps,
 } from "../caption/DataTableCaption";
 import {
+  DataTableEmptyState,
+  type DataTableEmptyStateProps,
+} from "../empty-state/DataTableEmptyState";
+import {
   DataTableTbody,
   type DataTableTbodyProps,
 } from "../tbody/DataTableTbody";
@@ -163,6 +167,18 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Tfoot: typeof DataTableTfoot;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.EmptyState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  EmptyState: typeof DataTableEmptyState;
 }
 
 /**
@@ -224,6 +240,7 @@ DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
 DataTable.Tfoot = DataTableTfoot;
+DataTable.EmptyState = DataTableEmptyState;
 
 export {
   DataTable,
@@ -234,6 +251,7 @@ export {
   DataTableTh,
   DataTableThead,
   DataTableTr,
+  DataTableEmptyState,
 };
 export default DataTable;
 export type {
@@ -245,4 +263,5 @@ export type {
   DataTableTheadProps,
   DataTableThProps,
   DataTableTrProps,
+  DataTableEmptyStateProps,
 };

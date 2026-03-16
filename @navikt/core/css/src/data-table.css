@@ -393,3 +393,13 @@
     }
   }
 }
+
+.aksel-data-table__empty-state {
+  display: grid;
+  place-content: center;
+  padding-block: var(--ax-space-32);
+  padding-inline: var(--ax-space-16);
+  text-align: center;
+  gap: var(--ax-space-8);
+  justify-items: center;
+}
