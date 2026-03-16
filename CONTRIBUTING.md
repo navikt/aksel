@@ -30,6 +30,8 @@ Legg token i shell-profilen din (`.zshrc` eller `.bashrc`):
 
 `export NPM_AUTH_TOKEN=<din_pat_med_read:packages>`
 
+På Windows kan du legge inn tokenet som en lokal miljøvariabel.
+
 ### Ikke Nav-ansatt?
 
 Nettsiden avhenger av pakker som ikke er åpent tilgjengelig. Du kan likevel bidra på andre deler av repoet ved å kjøre denne kommandoen i stedet for `yarn install`:
