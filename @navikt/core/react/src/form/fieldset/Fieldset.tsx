@@ -10,25 +10,48 @@ import { useFieldset } from "./useFieldset";
 export interface FieldsetProps
   extends FormFieldProps, FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
-   * FormFields in Fieldset
+   * Form fields in Fieldset.
    */
   children: React.ReactNode;
   /**
-   * Fieldset legend
+   * Fieldset legend.
    */
   legend: React.ReactNode;
   /**
-   * If enabled shows the legend and description for screenreaders only
+   * If enabled, shows the legend and description for screen readers only.
    */
   hideLegend?: boolean;
   /**
-   * Toggles error propagation to child-elements
+   * Toggles error propagation to child-elements.
    * @default true
    */
   errorPropagation?: boolean;
+  /**
+   * When `false`, the "lock" icon displayed when the `readOnly` prop is true will have an accessible name ("Read-only").
+   *
+   * Set to `false` if one or more of the fields in the fieldset does not support native `readOnly`.
+   * @default true
+   */
   nativeReadOnly?: boolean;
 }
 
+/**
+ * Component for grouping form fields.
+ *
+ * **NB: Only for special use cases.** Form fields should not be grouped by default,
+ * except for checkboxes and radio buttons, for which CheckboxGroup/RadioGroup should be used instead.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fieldset)
+ * @see 🏷️ {@link FieldsetProps}
+ *
+ * @example
+ * ```jsx
+ * <Fieldset legend="Telefonnummer">
+ *   <TextField label="Landkode" />
+ *   <TextField label="Nummer" />
+ * </Fieldset>
+ * ```
+ */
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
     const legendId = useId();
