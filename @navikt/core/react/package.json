@@ -704,7 +704,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
-    "@floating-ui/react-dom": "^2.1.6",
+    "@floating-ui/react-dom": "^2.1.8",
     "@navikt/aksel-icons": "^8.7.0",
     "@navikt/ds-tokens": "^8.7.0",
     "date-fns": "^4.0.0",
