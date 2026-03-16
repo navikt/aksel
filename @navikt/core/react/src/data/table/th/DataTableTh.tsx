@@ -8,6 +8,7 @@ import {
 } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 type SortDirection = "asc" | "desc" | "none";
@@ -85,6 +86,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
     },
     forwardedRef,
   ) => {
+    const { withKeyboardNav } = useDataTableContext();
     const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
     const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
@@ -119,7 +121,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
           console.info("is overflowing", isOverflowing);
         }}
         onPointerLeave={() => setIsOverflowing(false)}
-        tabIndex={-1}
+        tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
         colSpan={colSpan}
       >
