@@ -107,7 +107,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "^10.2.10",
-    "eslint-plugin-testing-library": "^7.6.3",
+    "eslint-plugin-testing-library": "^7.16.0",
     "fast-glob": "3.3.3",
     "globals": "^17.4.0",
     "husky": "^8.0.0",
