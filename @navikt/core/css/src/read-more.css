@@ -9,7 +9,7 @@
   }
 
   &[data-variant="moderate"] {
-    --__axc-read-more-radius: calc(var(--__axc-read-more-pb) * 2 + var(--ax-font-line-height-large) / 2);
+    --__axc-read-more-radius: calc((var(--__axc-read-more-pb) * 2 + var(--ax-font-line-height-large)) / 2);
   }
 }
 
@@ -36,7 +36,7 @@
   &[data-variant="moderate"] {
     --__axc-read-more-pi-start: var(--ax-space-8);
     --__axc-read-more-pi-end: var(--ax-space-16);
-    --__axc-read-more-radius: calc(var(--__axc-read-more-pb) * 2 + var(--ax-font-line-height-medium) / 2);
+    --__axc-read-more-radius: calc((var(--__axc-read-more-pb) * 2 + var(--ax-font-line-height-medium)) / 2);
   }
 }
 
