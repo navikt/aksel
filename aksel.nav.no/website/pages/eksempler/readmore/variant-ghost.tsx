@@ -45,4 +45,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Ghost er en nedtonet variant av ReadMore som skal brukes når innholdet er koblet til en annen kontekst, for eksempel et skjema.",
 };
