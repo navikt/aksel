@@ -5,6 +5,7 @@ import { useDataTableContext } from "../root/DataTableRoot.context";
 type ColumnWidth = number | string;
 
 type ResizeProps = {
+  ref: HTMLTableCellElement | null;
   /**
    * Controlled width of the column.
    *
@@ -71,6 +72,7 @@ function useTableColumnResize(
   args: TableColumnResizeArgs,
 ): TableColumnResizeResult {
   const {
+    ref,
     width: userWidth,
     defaultWidth,
     onWidthChange,
@@ -98,11 +100,28 @@ function useTableColumnResize(
 
   const setWidth = useCallback(
     (newWidth: number) => {
+      const currentWidth = ref?.offsetWidth;
+      if (!currentWidth) {
+        return;
+      }
+
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
-      _setWidth(Math.min(Math.max(newWidth, min), max));
+      const clamped = Math.min(Math.max(newWidth, min), max);
+
+      if (newWidth <= currentWidth && newWidth > max) {
+        _setWidth(newWidth);
+        return;
+      }
+
+      if (newWidth >= currentWidth && newWidth > max) {
+        _setWidth(currentWidth);
+        return;
+      }
+
+      _setWidth(clamped);
     },
-    [maxWidth, minWidth, _setWidth],
+    [minWidth, maxWidth, _setWidth, ref],
   );
 
   const handleKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"] =
