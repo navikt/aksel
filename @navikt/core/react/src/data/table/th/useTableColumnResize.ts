@@ -45,7 +45,7 @@ type TableColumnResizeArgs = ResizeProps & {};
 
 type TableColumnResizeResult =
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
         onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
@@ -57,7 +57,7 @@ type TableColumnResizeResult =
       enabled: true;
     }
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       enabled: false;
     };
 
@@ -186,13 +186,16 @@ function useTableColumnResize(
 
   if (tableContext.layout !== "fixed") {
     return {
-      width: style?.width,
+      style,
       enabled: false,
     };
   }
 
   return {
-    width,
+    style: {
+      ...style,
+      width,
+    },
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
       onTouchMove: () => {},

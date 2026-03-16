@@ -105,7 +105,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         ref={forwardedRef}
         className={cl("aksel-data-table__th", className)}
         data-sortable={sortable}
-        style={{ width: resizeResult.width, ...style }}
+        style={resizeResult.style}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
         onPointerEnter={() => {
           const el = contentRef.current;
