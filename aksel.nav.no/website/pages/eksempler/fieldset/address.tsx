@@ -7,7 +7,7 @@ const Example = () => {
       <TextField label="Gateadresse" />
       <TextField label="Postnummer" htmlSize={8} />
       <TextField label="Sted" />
-      <TextField label="Land" htmlSize={30} />
+      <TextField label="Land" />
     </Fieldset>
   );
 };
