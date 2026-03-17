@@ -6,7 +6,7 @@ const Example = () => {
     <Fieldset legend="Arbeidsgivers telefonnummer">
       <HStack gap="space-16">
         <Select label="Landkode">
-          <option value=""></option>
+          <option></option>
           <option>+45</option>
           <option>+46</option>
           <option>+47</option>
