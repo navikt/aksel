@@ -151,31 +151,48 @@ function useTableColumnResize(
       [isResizingWithKeyboard, setWidth],
     );
 
-  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseMove"] =
+  const startResize = useCallback(
+    (th: HTMLTableCellElement, startX: number) => {
+      setIsResizingWithMouse(true);
+      const startWidth = th.offsetWidth;
+
+      function onPointerMove(clientX: number) {
+        setWidth(startWidth + (clientX - startX));
+      }
+
+      function onMouseMove(e: MouseEvent) {
+        onPointerMove(e.clientX);
+      }
+
+      function onTouchMove(e: TouchEvent) {
+        e.preventDefault();
+        onPointerMove(e.touches[0].clientX);
+      }
+
+      function cleanup() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("touchmove", onTouchMove);
+        setIsResizingWithMouse(false);
+      }
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("mouseup", cleanup, { once: true });
+      document.addEventListener("touchend", cleanup, { once: true });
+      document.addEventListener("touchcancel", cleanup, { once: true });
+    },
+    [setWidth],
+  );
+
+  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
     useCallback(
       (event) => {
-        setIsResizingWithMouse(true);
-
         const th = (event.target as HTMLElement).closest(
           "th",
         ) as HTMLTableCellElement;
-
-        const startX = event.clientX;
-        const startWidth = th.offsetWidth;
-
-        function onMouseMove(e: MouseEvent) {
-          const newWidth = startWidth + (e.clientX - startX);
-          setWidth(newWidth);
-        }
-
-        function cleanup() {
-          document.removeEventListener("mousemove", onMouseMove);
-          setIsResizingWithMouse(false);
-        }
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", cleanup, { once: true });
+        startResize(th, event.clientX);
       },
-      [setWidth],
+      [startResize],
     );
 
   const handleTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"] =
@@ -184,26 +201,9 @@ function useTableColumnResize(
         const th = (event.target as HTMLElement).closest(
           "th",
         ) as HTMLTableCellElement;
-
-        const startX = event.touches[0].clientX;
-        const startWidth = th.offsetWidth;
-
-        function onTouchMove(e: TouchEvent) {
-          e.preventDefault();
-          const newWidth = startWidth + (e.touches[0].clientX - startX);
-          setWidth(newWidth);
-        }
-
-        function cleanup() {
-          document.removeEventListener("touchmove", onTouchMove);
-        }
-        document.addEventListener("touchmove", onTouchMove, {
-          passive: false,
-        });
-        document.addEventListener("touchend", cleanup, { once: true });
-        document.addEventListener("touchcancel", cleanup, { once: true });
+        startResize(th, event.touches[0].clientX);
       },
-      [setWidth],
+      [startResize],
     );
 
   /**
