@@ -84,7 +84,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
           "aksel-radio-group",
           `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
-        nativeReadOnly={false}
+        _fieldsSupportNativeReadOnly={false}
       >
         <RadioGroupContext.Provider
           value={{

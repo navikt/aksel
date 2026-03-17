@@ -10,25 +10,45 @@ import { useFieldset } from "./useFieldset";
 export interface FieldsetProps
   extends FormFieldProps, FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
-   * FormFields in Fieldset
+   * Form fields in Fieldset.
    */
   children: React.ReactNode;
   /**
-   * Fieldset legend
+   * Fieldset legend.
    */
   legend: React.ReactNode;
   /**
-   * If enabled shows the legend and description for screenreaders only
+   * If enabled, shows the legend and description for screen readers only.
    */
   hideLegend?: boolean;
   /**
-   * Toggles error propagation to child-elements
+   * Toggles error propagation to child-elements.
    * @default true
    */
   errorPropagation?: boolean;
-  nativeReadOnly?: boolean;
+  /**
+   * @private
+   */
+  _fieldsSupportNativeReadOnly?: boolean;
 }
 
+/**
+ * Component for grouping form fields.
+ *
+ * **NB: Only for special use cases.** Form fields should not be grouped by default,
+ * except for checkboxes and radio buttons, for which CheckboxGroup/RadioGroup should be used instead.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fieldset)
+ * @see 🏷️ {@link FieldsetProps}
+ *
+ * @example
+ * ```jsx
+ * <Fieldset legend="Telefonnummer">
+ *   <TextField label="Landkode" />
+ *   <TextField label="Nummer" />
+ * </Fieldset>
+ * ```
+ */
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
     const legendId = useId();
@@ -51,7 +71,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
-      nativeReadOnly = true,
+      _fieldsSupportNativeReadOnly = true,
       ...rest
     } = props;
 
@@ -93,7 +113,11 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             })}
           >
             {readOnly &&
-              (nativeReadOnly ? <ReadOnlyIcon /> : <ReadOnlyIconWithTitle />)}
+              (_fieldsSupportNativeReadOnly ? (
+                <ReadOnlyIcon />
+              ) : (
+                <ReadOnlyIconWithTitle />
+              ))}
             {legend}
           </Label>
           {!!description && (
