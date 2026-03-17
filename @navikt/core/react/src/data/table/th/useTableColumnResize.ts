@@ -49,7 +49,7 @@ type TableColumnResizeResult =
       style?: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
-        onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
+        onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
         onKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"];
         onBlur: DOMAttributes<HTMLButtonElement>["onBlur"];
         onDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"];
@@ -151,31 +151,62 @@ function useTableColumnResize(
       [isResizingWithKeyboard, setWidth],
     );
 
-  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseMove"] =
+  const startResize = useCallback(
+    (th: HTMLTableCellElement, startX: number) => {
+      setIsResizingWithMouse(true);
+      const startWidth = th.offsetWidth;
+
+      function onPointerMove(clientX: number) {
+        setWidth(startWidth + (clientX - startX));
+      }
+
+      function onMouseMove(e: MouseEvent) {
+        onPointerMove(e.clientX);
+      }
+
+      function onTouchMove(e: TouchEvent) {
+        e.preventDefault();
+        onPointerMove(e.touches[0].clientX);
+      }
+
+      function cleanup() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("mouseup", cleanup);
+        document.removeEventListener("touchend", cleanup);
+        document.removeEventListener("touchcancel", cleanup);
+        setIsResizingWithMouse(false);
+      }
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("mouseup", cleanup);
+      document.addEventListener("touchend", cleanup);
+      document.addEventListener("touchcancel", cleanup);
+    },
+    [setWidth],
+  );
+
+  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
     useCallback(
       (event) => {
-        setIsResizingWithMouse(true);
-
         const th = (event.target as HTMLElement).closest(
           "th",
         ) as HTMLTableCellElement;
-
-        const startX = event.clientX;
-        const startWidth = th.offsetWidth;
-
-        function onMouseMove(e: MouseEvent) {
-          const newWidth = startWidth + (e.clientX - startX);
-          setWidth(newWidth);
-        }
-
-        function cleanup() {
-          document.removeEventListener("mousemove", onMouseMove);
-          setIsResizingWithMouse(false);
-        }
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", cleanup, { once: true });
+        startResize(th, event.clientX);
       },
-      [setWidth],
+      [startResize],
+    );
+
+  const handleTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"] =
+    useCallback(
+      (event) => {
+        const th = (event.target as HTMLElement).closest(
+          "th",
+        ) as HTMLTableCellElement;
+        startResize(th, event.touches[0].clientX);
+      },
+      [startResize],
     );
 
   /**
@@ -217,7 +248,7 @@ function useTableColumnResize(
     },
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
-      onTouchMove: () => {},
+      onTouchStart: handleTouchStart,
       onKeyDown: handleKeyDown,
       onBlur: () => setIsResizingWithKeyboard(false),
       onDoubleClick: handleDoubleClick,
@@ -228,7 +259,7 @@ function useTableColumnResize(
 }
 
 function parseWidth(width: ColumnWidth | undefined): number | undefined {
-  if (!width) {
+  if (width == null) {
     return undefined;
   }
   if (typeof width === "number") {
