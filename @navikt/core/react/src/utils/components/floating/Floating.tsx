@@ -73,7 +73,7 @@ const Floating: FloatingComponent = ({ children }: FloatingProps) => {
  */
 type FloatingAnchorProps = HTMLAttributes<HTMLDivElement> &
   AsChildProps & {
-    virtualRef?: React.RefObject<Measurable>;
+    virtualRef?: Measurable;
   };
 
 /**
@@ -90,7 +90,7 @@ const FloatingAnchor = forwardRef<HTMLDivElement, FloatingAnchorProps>(
     useEffect(() => {
       // Allows anchoring the floating to non-DOM nodes like a cursor position.
       // We replace `anchorRef` with a virtual ref in such cases.
-      context.onAnchorChange(virtualRef?.current || ref.current);
+      context.onAnchorChange(virtualRef || ref.current);
     });
 
     const Comp = asChild ? Slot : "div";

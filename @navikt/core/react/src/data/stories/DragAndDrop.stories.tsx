@@ -3,6 +3,7 @@ import React from "react";
 import { DragVerticalIcon } from "@navikt/aksel-icons";
 import { Switch } from "../../form/switch";
 import { HStack } from "../../primitives/stack";
+import { Floating } from "../../utils/components/floating/Floating";
 import DragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
 
 const meta: Meta<typeof DragAndDrop> = {
@@ -102,6 +103,7 @@ export const NoDndkit: Story = {
         {items.map((item, index) => {
           return (
             <HStack key={item.id} gap="space-8" asChild>
+              {/** biome-ignore lint/a11y/noStaticElementInteractions: TEMP */}
               <div
                 key={item.id}
                 style={{
@@ -124,6 +126,7 @@ export const NoDndkit: Story = {
                   }
                 }}
               >
+                {/** biome-ignore lint/a11y/noStaticElementInteractions: TEMP */}
                 <div
                   draggable
                   onDragStart={(e) => handleDragStart(e, item, index)}
@@ -146,4 +149,81 @@ export const NoDndkit: Story = {
       </>
     );
   },
+};
+
+export const _DNDAnchor = () => {
+  const events = (src: string) => {
+    return {
+      onPointerMove: () => console.info(`${src} onPointerMove`),
+      style: {
+        paddibng: "1rem",
+        border: "1px solid black",
+        marginBottom: "0.5rem",
+        cursor: "move",
+      },
+    };
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const [virtualRef, setVirtualRef] = React.useState({
+    getBoundingClientRect: () =>
+      DOMRect.fromRect({ width: 0, height: 0, x: 0, y: 0 }),
+  });
+
+  const handleOpen = (event: React.MouseEvent | React.PointerEvent) => {
+    setVirtualRef({
+      getBoundingClientRect: () =>
+        DOMRect.fromRect({
+          width: 0,
+          height: 0,
+          x: event.clientX,
+          y: event.clientY,
+        }),
+    });
+    setOpen(true);
+
+    function moveListener(_event: PointerEvent) {
+      setVirtualRef({
+        getBoundingClientRect: () =>
+          DOMRect.fromRect({
+            width: 0,
+            height: 0,
+            x: _event.clientX,
+            y: _event.clientY,
+          }),
+      });
+    }
+
+    window.addEventListener("pointermove", moveListener);
+
+    const handleClose = () => {
+      setOpen(false);
+      window.removeEventListener("pointermove", moveListener);
+    };
+
+    window.addEventListener("pointerup", handleClose, { once: true });
+  };
+
+  return (
+    <div>
+      <button onPointerDown={handleOpen}>Open</button>
+      <div {...events("One")}>Element 1</div>
+      {open && (
+        <div>
+          <Floating>
+            <Floating.Anchor virtualRef={virtualRef}>
+              <span />
+            </Floating.Anchor>
+            <Floating.Content>
+              <div style={{ ...events("one").style }}>Element 1 floating</div>
+            </Floating.Content>
+          </Floating>
+        </div>
+      )}
+      <div {...events("Two")}>Element 2</div>
+      <div {...events("Three")}>Element 3</div>
+      <div {...events("Four")}>Element 4</div>
+    </div>
+  );
 };
