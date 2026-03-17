@@ -34,5 +34,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "Bruk av Fieldset her gjør at man unngår å gjenta konteksten i hver Select. Alternativt kunne man hatt spørsmålet på en separat side.",
+  desc: "Bruk av Fieldset her gjør at man unngår å gjenta konteksten i hver Select.",
 };

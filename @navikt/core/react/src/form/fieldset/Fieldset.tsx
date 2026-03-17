@@ -27,12 +27,9 @@ export interface FieldsetProps
    */
   errorPropagation?: boolean;
   /**
-   * When `false`, the "lock" icon displayed when the `readOnly` prop is true will have an accessible name ("Read-only").
-   *
-   * Set to `false` if one or more of the fields in the fieldset does not support native `readOnly`.
-   * @default true
+   * @private
    */
-  nativeReadOnly?: boolean;
+  _fieldsSupportNativeReadOnly?: boolean;
 }
 
 /**
@@ -74,7 +71,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
-      nativeReadOnly = true,
+      _fieldsSupportNativeReadOnly = true,
       ...rest
     } = props;
 
@@ -116,7 +113,11 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             })}
           >
             {readOnly &&
-              (nativeReadOnly ? <ReadOnlyIcon /> : <ReadOnlyIconWithTitle />)}
+              (_fieldsSupportNativeReadOnly ? (
+                <ReadOnlyIcon />
+              ) : (
+                <ReadOnlyIconWithTitle />
+              ))}
             {legend}
           </Label>
           {!!description && (
