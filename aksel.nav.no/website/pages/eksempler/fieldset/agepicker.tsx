@@ -3,8 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack asChild gap="space-16">
-      <Fieldset legend="Når vil du ta ut alderspensjon?">
+    <Fieldset legend="Når vil du ta ut alderspensjon?">
+      <HStack gap="space-16">
         <Select label="Velg år">
           <option value=""></option>
           <option>62 år</option>
@@ -19,8 +19,8 @@ const Example = () => {
           <option>2 mnd. (juni)</option>
           <option>...</option>
         </Select>
-      </Fieldset>
-    </HStack>
+      </HStack>
+    </Fieldset>
   );
 };
 
