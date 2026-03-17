@@ -172,14 +172,17 @@ function useTableColumnResize(
       function cleanup() {
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("mouseup", cleanup);
+        document.removeEventListener("touchend", cleanup);
+        document.removeEventListener("touchcancel", cleanup);
         setIsResizingWithMouse(false);
       }
 
       document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("touchmove", onTouchMove, { passive: false });
-      document.addEventListener("mouseup", cleanup, { once: true });
-      document.addEventListener("touchend", cleanup, { once: true });
-      document.addEventListener("touchcancel", cleanup, { once: true });
+      document.addEventListener("mouseup", cleanup);
+      document.addEventListener("touchend", cleanup);
+      document.addEventListener("touchcancel", cleanup);
     },
     [setWidth],
   );
@@ -256,7 +259,7 @@ function useTableColumnResize(
 }
 
 function parseWidth(width: ColumnWidth | undefined): number | undefined {
-  if (!width) {
+  if (width == null) {
     return undefined;
   }
   if (typeof width === "number") {
