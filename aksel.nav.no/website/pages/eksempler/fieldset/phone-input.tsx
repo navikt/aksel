@@ -3,8 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack asChild gap="space-16">
-      <Fieldset legend="Arbeidsgivers telefonnummer">
+    <Fieldset legend="Arbeidsgivers telefonnummer">
+      <HStack gap="space-16">
         <Select label="Landkode">
           <option value=""></option>
           <option>+45</option>
@@ -13,8 +13,8 @@ const Example = () => {
           <option>...</option>
         </Select>
         <TextField label="Nummer" htmlSize={8} />
-      </Fieldset>
-    </HStack>
+      </HStack>
+    </Fieldset>
   );
 };
 
