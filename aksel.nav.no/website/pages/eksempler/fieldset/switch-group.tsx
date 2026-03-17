@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Fieldset legend="Hvordan ønsker du bli varslet?">
+    <Fieldset legend="Hvordan ønsker du å bli varslet?">
       <div>
         <Switch>E-post</Switch>
         <Switch>SMS</Switch>
