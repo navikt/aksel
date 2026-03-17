@@ -6,6 +6,14 @@ import {
   type DataTableCaptionProps,
 } from "../caption/DataTableCaption";
 import {
+  DataTableEmptyState,
+  type DataTableEmptyStateProps,
+} from "../empty-state/DataTableEmptyState";
+import {
+  DataTableLoadingState,
+  type DataTableLoadingStateProps,
+} from "../loading-state/DataTableLoadingState";
+import {
   DataTableTbody,
   type DataTableTbodyProps,
 } from "../tbody/DataTableTbody";
@@ -68,6 +76,20 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
+  /**
+   * Enables selection of rows.
+   *
+   *
+   * When set to "single", only one row can be selected at a time.
+   *
+   * When set to "multiple", multiple rows can be selected.
+   *
+   * TODO:
+   * - Implement callbacks for selection changes (e.g. onRowSelect, onSelectAll)
+   * - Implement controlled state
+   * - Implement auto-add checkbox to rows and header when selection is enabled
+   */
+  selectionMode?: "single" | "multiple";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -163,6 +185,30 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Tfoot: typeof DataTableTfoot;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.EmptyState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  EmptyState: typeof DataTableEmptyState;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.LoadingState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  LoadingState: typeof DataTableLoadingState;
 }
 
 /**
@@ -181,6 +227,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       truncateContent = true,
       shouldBlockNavigation,
       layout = "fixed",
+      selectionMode,
       ...rest
     },
     forwardedRef,
@@ -197,6 +244,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
+        selectionMode={selectionMode}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
@@ -224,6 +272,8 @@ DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
 DataTable.Tfoot = DataTableTfoot;
+DataTable.EmptyState = DataTableEmptyState;
+DataTable.LoadingState = DataTableLoadingState;
 
 export {
   DataTable,
@@ -234,6 +284,8 @@ export {
   DataTableTh,
   DataTableThead,
   DataTableTr,
+  DataTableEmptyState,
+  DataTableLoadingState,
 };
 export default DataTable;
 export type {
@@ -245,4 +297,6 @@ export type {
   DataTableTheadProps,
   DataTableThProps,
   DataTableTrProps,
+  DataTableEmptyStateProps,
+  DataTableLoadingStateProps,
 };
