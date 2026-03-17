@@ -49,7 +49,7 @@ type TableColumnResizeResult =
       style?: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
-        onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
+        onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
         onKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"];
         onBlur: DOMAttributes<HTMLButtonElement>["onBlur"];
         onDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"];
@@ -178,6 +178,34 @@ function useTableColumnResize(
       [setWidth],
     );
 
+  const handleTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"] =
+    useCallback(
+      (event) => {
+        const th = (event.target as HTMLElement).closest(
+          "th",
+        ) as HTMLTableCellElement;
+
+        const startX = event.touches[0].clientX;
+        const startWidth = th.offsetWidth;
+
+        function onTouchMove(e: TouchEvent) {
+          e.preventDefault();
+          const newWidth = startWidth + (e.touches[0].clientX - startX);
+          setWidth(newWidth);
+        }
+
+        function cleanup() {
+          document.removeEventListener("touchmove", onTouchMove);
+        }
+        document.addEventListener("touchmove", onTouchMove, {
+          passive: false,
+        });
+        document.addEventListener("touchend", cleanup, { once: true });
+        document.addEventListener("touchcancel", cleanup, { once: true });
+      },
+      [setWidth],
+    );
+
   /**
    * TODO: Do we even want this?
    * - + 32px padding is hardcoded now, fix this
@@ -217,7 +245,7 @@ function useTableColumnResize(
     },
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
-      onTouchMove: () => {},
+      onTouchStart: handleTouchStart,
       onKeyDown: handleKeyDown,
       onBlur: () => setIsResizingWithKeyboard(false),
       onDoubleClick: handleDoubleClick,
