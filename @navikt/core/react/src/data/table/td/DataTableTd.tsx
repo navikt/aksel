@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
+import { useDataTableContext } from "../root/DataTableRoot.context";
 
 interface DataTableTdProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
@@ -26,12 +27,14 @@ const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
     { className, children, contentMaxWidth, textAlign = "left", ...rest },
     forwardedRef,
   ) => {
+    const { withKeyboardNav } = useDataTableContext();
+
     return (
       <td
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-table__td", className)}
-        tabIndex={-1}
+        tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
       >
         <div style={{ maxWidth: contentMaxWidth }}>{children}</div>

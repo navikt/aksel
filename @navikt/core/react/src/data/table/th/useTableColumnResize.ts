@@ -5,6 +5,7 @@ import { useDataTableContext } from "../root/DataTableRoot.context";
 type ColumnWidth = number | string;
 
 type ResizeProps = {
+  ref: HTMLTableCellElement | null;
   /**
    * Controlled width of the column.
    *
@@ -35,16 +36,20 @@ type ResizeProps = {
    * Forwarded styles
    */
   style?: React.CSSProperties;
+  /**
+   * Forwarded colSpan
+   */
+  colSpan?: number;
 };
 
 type TableColumnResizeArgs = ResizeProps & {};
 
 type TableColumnResizeResult =
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
-        onTouchMove: DOMAttributes<HTMLButtonElement>["onTouchMove"];
+        onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
         onKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"];
         onBlur: DOMAttributes<HTMLButtonElement>["onBlur"];
         onDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"];
@@ -53,7 +58,7 @@ type TableColumnResizeResult =
       enabled: true;
     }
   | {
-      width: ColumnWidth | undefined;
+      style?: React.CSSProperties;
       enabled: false;
     };
 
@@ -67,19 +72,21 @@ function useTableColumnResize(
   args: TableColumnResizeArgs,
 ): TableColumnResizeResult {
   const {
+    ref,
     width: userWidth,
-    defaultWidth = 140,
+    defaultWidth,
     onWidthChange,
     maxWidth = Infinity,
     minWidth = 40,
     style,
+    colSpan,
   } = args;
 
   const tableContext = useDataTableContext();
 
   const [width, _setWidth] = useControllableState({
     value: userWidth,
-    defaultValue: defaultWidth,
+    defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
@@ -93,11 +100,28 @@ function useTableColumnResize(
 
   const setWidth = useCallback(
     (newWidth: number) => {
+      const currentWidth = ref?.offsetWidth;
+      if (!currentWidth) {
+        return;
+      }
+
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
-      _setWidth(Math.min(Math.max(newWidth, min), max));
+      const clamped = Math.min(Math.max(newWidth, min), max);
+
+      if (newWidth <= currentWidth && newWidth > max) {
+        _setWidth(newWidth);
+        return;
+      }
+
+      if (newWidth >= currentWidth && newWidth > max) {
+        _setWidth(currentWidth);
+        return;
+      }
+
+      _setWidth(clamped);
     },
-    [maxWidth, minWidth, _setWidth],
+    [minWidth, maxWidth, _setWidth, ref],
   );
 
   const handleKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"] =
@@ -127,31 +151,62 @@ function useTableColumnResize(
       [isResizingWithKeyboard, setWidth],
     );
 
-  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseMove"] =
+  const startResize = useCallback(
+    (th: HTMLTableCellElement, startX: number) => {
+      setIsResizingWithMouse(true);
+      const startWidth = th.offsetWidth;
+
+      function onPointerMove(clientX: number) {
+        setWidth(startWidth + (clientX - startX));
+      }
+
+      function onMouseMove(e: MouseEvent) {
+        onPointerMove(e.clientX);
+      }
+
+      function onTouchMove(e: TouchEvent) {
+        e.preventDefault();
+        onPointerMove(e.touches[0].clientX);
+      }
+
+      function cleanup() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("mouseup", cleanup);
+        document.removeEventListener("touchend", cleanup);
+        document.removeEventListener("touchcancel", cleanup);
+        setIsResizingWithMouse(false);
+      }
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("mouseup", cleanup);
+      document.addEventListener("touchend", cleanup);
+      document.addEventListener("touchcancel", cleanup);
+    },
+    [setWidth],
+  );
+
+  const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
     useCallback(
       (event) => {
-        setIsResizingWithMouse(true);
-
         const th = (event.target as HTMLElement).closest(
           "th",
         ) as HTMLTableCellElement;
-
-        const startX = event.clientX;
-        const startWidth = th.offsetWidth;
-
-        function onMouseMove(e: MouseEvent) {
-          const newWidth = startWidth + (e.clientX - startX);
-          setWidth(newWidth);
-        }
-
-        function cleanup() {
-          document.removeEventListener("mousemove", onMouseMove);
-          setIsResizingWithMouse(false);
-        }
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", cleanup, { once: true });
+        startResize(th, event.clientX);
       },
-      [setWidth],
+      [startResize],
+    );
+
+  const handleTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"] =
+    useCallback(
+      (event) => {
+        const th = (event.target as HTMLElement).closest(
+          "th",
+        ) as HTMLTableCellElement;
+        startResize(th, event.touches[0].clientX);
+      },
+      [startResize],
     );
 
   /**
@@ -181,16 +236,19 @@ function useTableColumnResize(
 
   if (tableContext.layout !== "fixed") {
     return {
-      width: style?.width,
+      style,
       enabled: false,
     };
   }
 
   return {
-    width,
+    style: {
+      ...style,
+      width,
+    },
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
-      onTouchMove: () => {},
+      onTouchStart: handleTouchStart,
       onKeyDown: handleKeyDown,
       onBlur: () => setIsResizingWithKeyboard(false),
       onDoubleClick: handleDoubleClick,
@@ -201,7 +259,7 @@ function useTableColumnResize(
 }
 
 function parseWidth(width: ColumnWidth | undefined): number | undefined {
-  if (!width) {
+  if (width == null) {
     return undefined;
   }
   if (typeof width === "number") {

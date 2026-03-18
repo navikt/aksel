@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
@@ -7,6 +7,8 @@ import {
   SortUpIcon,
 } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
+import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 type SortDirection = "asc" | "desc" | "none";
@@ -79,20 +81,28 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       maxWidth,
       onWidthChange,
       defaultWidth,
+      colSpan,
       ...rest
     },
     forwardedRef,
   ) => {
+    const { withKeyboardNav } = useDataTableContext();
     const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
+    const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
+      null,
+    );
+    const mergedRef = useMergeRefs(forwardedRef, setThRefState);
 
     const resizeResult = useTableColumnResize({
+      ref: thRefState,
       width,
       defaultWidth,
       minWidth,
       maxWidth,
       onWidthChange,
       style,
+      colSpan,
     });
 
     const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
@@ -100,10 +110,10 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
     return (
       <th
         {...rest}
-        ref={forwardedRef}
+        ref={mergedRef}
         className={cl("aksel-data-table__th", className)}
         data-sortable={sortable}
-        style={{ width: resizeResult.width, ...style }}
+        style={resizeResult.style}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
         onPointerEnter={() => {
           const el = contentRef.current;
@@ -111,8 +121,9 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
           console.info("is overflowing", isOverflowing);
         }}
         onPointerLeave={() => setIsOverflowing(false)}
-        tabIndex={-1}
+        tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
+        colSpan={colSpan}
       >
         {sortable ? (
           <button

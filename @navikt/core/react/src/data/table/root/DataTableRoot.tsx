@@ -1,10 +1,18 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
+import { useControllableState, useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableCaption,
   type DataTableCaptionProps,
 } from "../caption/DataTableCaption";
+import {
+  DataTableEmptyState,
+  type DataTableEmptyStateProps,
+} from "../empty-state/DataTableEmptyState";
+import {
+  DataTableLoadingState,
+  type DataTableLoadingStateProps,
+} from "../loading-state/DataTableLoadingState";
 import {
   DataTableTbody,
   type DataTableTbodyProps,
@@ -20,10 +28,15 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
-import { DataTableContextProvider } from "./DataTableRoot.context";
+import {
+  DataTableContextProvider,
+  type SelectionProps,
+} from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
+import { useTableSelection } from "./useTableSelection";
 
-interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
+interface DataTableProps
+  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
   children: React.ReactNode;
   /**
    * Controls vertical cell padding.
@@ -163,6 +176,30 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Tfoot: typeof DataTableTfoot;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.EmptyState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  EmptyState: typeof DataTableEmptyState;
+  /**
+   * @see 🏷️ {@link DataTableEmptyStateProps}
+   * @example
+   * ```jsx
+   * <DataTable>
+   *   <DataTable.TBody>
+   *     <DataTable.LoadingState />
+   *   </DataTable.TBody>
+   * </DataTable>
+   * ```
+   */
+  LoadingState: typeof DataTableLoadingState;
 }
 
 /**
@@ -181,6 +218,12 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       truncateContent = true,
       shouldBlockNavigation,
       layout = "fixed",
+      selectionMode = "none",
+      selectedKeys: selectedKeysProp,
+      defaultSelectedKeys,
+      onSelectionChange,
+      disabledKeys = [],
+
       ...rest
     },
     forwardedRef,
@@ -193,8 +236,61 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       shouldBlockNavigation,
     });
 
+    const { register, unRegister, values } = useTableSelection();
+
+    const [selectedKeys, setSelectedKeys] = useControllableState({
+      value: selectedKeysProp,
+      defaultValue: defaultSelectedKeys ?? [],
+      onChange: onSelectionChange,
+    });
+
+    const handleSelectionChange = (key: { value: string } | "all") => {
+      if (selectionMode === "none") return;
+
+      const allKeys = Array.from(values);
+      const currentlyAllSelected =
+        selectedKeys === "all" ||
+        allKeys.every((id) => selectedKeys.includes(id));
+
+      if (key === "all") {
+        if (currentlyAllSelected) {
+          setSelectedKeys([]);
+        } else {
+          setSelectedKeys("all");
+        }
+        return;
+      }
+
+      if (selectedKeys === "all") {
+        setSelectedKeys(allKeys.filter((k) => k !== key.value));
+
+        return;
+      }
+
+      const newSelectedKeys = selectedKeys.includes(key.value)
+        ? selectedKeys.filter((k) => k !== key.value)
+        : [...selectedKeys, key.value];
+
+      if (allKeys.every((id) => newSelectedKeys.includes(id))) {
+        setSelectedKeys("all");
+        return;
+      }
+
+      setSelectedKeys?.(newSelectedKeys);
+    };
+
     return (
-      <DataTableContextProvider layout={layout}>
+      <DataTableContextProvider
+        layout={layout}
+        withKeyboardNav={withKeyboardNav}
+        selectionMode={selectionMode}
+        selectedKeys={selectedKeys}
+        disabledKeys={disabledKeys}
+        handleSelectionChange={handleSelectionChange}
+        register={register}
+        unRegister={unRegister}
+        values={values}
+      >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
             <table
@@ -221,10 +317,14 @@ DataTable.Th = DataTableTh;
 DataTable.Tr = DataTableTr;
 DataTable.Td = DataTableTd;
 DataTable.Tfoot = DataTableTfoot;
+DataTable.EmptyState = DataTableEmptyState;
+DataTable.LoadingState = DataTableLoadingState;
 
 export {
   DataTable,
   DataTableCaption,
+  DataTableEmptyState,
+  DataTableLoadingState,
   DataTableTbody,
   DataTableTd,
   DataTableTfoot,
@@ -235,6 +335,8 @@ export {
 export default DataTable;
 export type {
   DataTableCaptionProps,
+  DataTableEmptyStateProps,
+  DataTableLoadingStateProps,
   DataTableProps,
   DataTableTbodyProps,
   DataTableTdProps,

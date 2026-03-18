@@ -4,7 +4,6 @@ import {
   CaretUpCircleFillIcon,
   DragVerticalIcon,
 } from "@navikt/aksel-icons";
-import { Floating } from "../../../utils/components/floating/Floating";
 
 export interface DataDragAndDropDragHandlerProps {
   /**
@@ -19,8 +18,6 @@ export interface DataDragAndDropDragHandlerProps {
    * Handle ref is forwarded to the button element serving as drag handle.
    */
   handleRef: React.Ref<HTMLDivElement>;
-  // Just for testing purposes, to render an alternative drag handler
-  alt?: boolean;
 }
 
 /**
@@ -32,73 +29,35 @@ export interface DataDragAndDropDragHandlerProps {
 export const DataDragAndDropDragHandler = React.forwardRef<
   HTMLButtonElement,
   DataDragAndDropDragHandlerProps
->(({ keyboardDragging, handleRef, alt }) => {
-  if (alt) {
-    return (
-      <div className="aksel-data-drag-and-drop__drag-handler__alt">
-        {keyboardDragging && (
-          <span
-            className="aksel-data-drag-and-drop__drag-handler__arrow"
-            data-direction="up"
-          >
-            <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
-          </span>
-        )}
-        <div
-          ref={handleRef}
-          className="aksel-data-drag-and-drop__drag-handler__button"
-        >
-          <DragVerticalIcon
-            aria-hidden
-            title="Dra for å flytte"
-            fontSize="1.5rem"
-          />
-        </div>
-        {keyboardDragging && (
-          <span
-            className="aksel-data-drag-and-drop__drag-handler__arrow"
-            data-direction="down"
-          >
-            <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
-          </span>
-        )}
-      </div>
-    );
-  }
-
+>(({ keyboardDragging, handleRef }) => {
   return (
-    <Floating>
+    <div className="aksel-data-drag-and-drop__drag-handler__alt">
       {keyboardDragging && (
-        <Floating.Content
-          side="top"
-          avoidCollisions={false}
-          updatePositionStrategy="always"
+        <span
           className="aksel-data-drag-and-drop__drag-handler__arrow"
+          data-direction="up"
         >
           <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
-        </Floating.Content>
+        </span>
       )}
-      <Floating.Anchor asChild>
-        <div
-          ref={handleRef}
-          className="aksel-data-drag-and-drop__drag-handler__button"
-        >
-          <DragVerticalIcon
-            aria-hidden
-            title="Dra for å flytte"
-            fontSize="1.5rem"
-          />
-        </div>
-      </Floating.Anchor>
+      <div
+        ref={handleRef}
+        className="aksel-data-drag-and-drop__drag-handler__button"
+      >
+        <DragVerticalIcon
+          aria-hidden
+          title="Dra for å flytte"
+          fontSize="1.5rem"
+        />
+      </div>
       {keyboardDragging && (
-        <Floating.Content
-          avoidCollisions={false}
-          updatePositionStrategy="always"
+        <span
           className="aksel-data-drag-and-drop__drag-handler__arrow"
+          data-direction="down"
         >
           <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
-        </Floating.Content>
+        </span>
       )}
-    </Floating>
+    </div>
   );
 });
