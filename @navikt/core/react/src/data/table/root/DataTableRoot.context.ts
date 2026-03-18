@@ -23,14 +23,17 @@ type SelectionProps = {
   defaultSelectedKeys?: SelectionT;
   onSelectionChange?: (keys: SelectionT) => void;
   disabledKeys?: string[];
+
   /* disallowEmptySelection?: boolean; */
-  getAllRowIds?: () => string[];
 };
 
 type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
   handleSelectionChange: (key: { value: string } | "all") => void;
+  register: (value: string) => void;
+  unRegister: (value: string) => void;
+  values: any;
 } & Required<
   Pick<SelectionProps, "selectedKeys" | "selectionMode" | "disabledKeys">
 >;

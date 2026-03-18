@@ -33,6 +33,7 @@ import {
   type SelectionProps,
 } from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
+import { useTableSelection } from "./useTableSelection";
 
 interface DataTableProps
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
@@ -222,7 +223,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       defaultSelectedKeys,
       onSelectionChange,
       disabledKeys = [],
-      getAllRowIds,
+
       ...rest
     },
     forwardedRef,
@@ -235,6 +236,8 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       shouldBlockNavigation,
     });
 
+    const { register, unRegister, values } = useTableSelection();
+
     const [selectedKeys, setSelectedKeys] = useControllableState({
       value: selectedKeysProp,
       defaultValue: defaultSelectedKeys ?? [],
@@ -244,7 +247,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     const handleSelectionChange = (key: { value: string } | "all") => {
       if (selectionMode === "none") return;
 
-      const allKeys = getAllRowIds?.() ?? [];
+      const allKeys = Array.from(values);
       const currentlyAllSelected =
         selectedKeys === "all" ||
         allKeys.every((id) => selectedKeys.includes(id));
@@ -284,6 +287,9 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         selectedKeys={selectedKeys}
         disabledKeys={disabledKeys}
         handleSelectionChange={handleSelectionChange}
+        register={register}
+        unRegister={unRegister}
+        values={values}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import Checkbox from "../../../form/checkbox/Checkbox";
+import { useClientLayoutEffect } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 import { DataTableTd } from "../td/DataTableTd";
@@ -15,9 +16,22 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
   ({ className, children, selected = false, value, ...rest }, forwardedRef) => {
-    const { layout, selectionMode } = useDataTableContext();
+    const { layout, selectionMode, register, unRegister } =
+      useDataTableContext();
 
     const renderFillerCell = layout === "fixed" && children;
+
+    useClientLayoutEffect(() => {
+      if (!value || selectionMode === "none") {
+        return;
+      }
+
+      register(value);
+
+      return () => {
+        unRegister(value);
+      };
+    }, [register, selectionMode, unRegister, value]);
 
     return (
       <tr
@@ -48,7 +62,8 @@ type SelectionCellProps = {
 };
 
 function SelectionCell({ value }: SelectionCellProps) {
-  const { handleSelectionChange, selectedKeys } = useDataTableContext();
+  const { handleSelectionChange, selectedKeys, disabledKeys, values } =
+    useDataTableContext();
   const isInThead = useDataTableThead();
 
   if (!value && !isInThead) {
@@ -63,13 +78,26 @@ function SelectionCell({ value }: SelectionCellProps) {
 
   const checkedState = () => {
     if (isInThead) {
+      const allKeys = Array.from(values);
+
       if (selectedKeys === "all") {
         return true;
       }
+
+      if (selectedKeys.every((id) => allKeys.includes(id))) {
+        return true;
+      }
+
       if (selectedKeys.length === 0) {
         return false;
       }
       return "indeterminate";
+    }
+
+    const isDisabled = disabledKeys?.includes(value!);
+
+    if (isDisabled) {
+      return false;
     }
 
     if (selectedKeys === "all") {
@@ -88,6 +116,7 @@ function SelectionCell({ value }: SelectionCellProps) {
         onChange={handleChange}
         checked={checked === "indeterminate" ? false : checked}
         indeterminate={checked === "indeterminate"}
+        disabled={disabledKeys?.includes(value!)}
       >
         {" "}
       </Checkbox>
