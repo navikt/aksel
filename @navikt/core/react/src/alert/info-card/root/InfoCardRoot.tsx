@@ -79,9 +79,11 @@ interface InfoCardComponent extends React.ForwardRefExoticComponent<
    * @see 🏷️ {@link InfoCardMessageProps}
    * @example
    * ```jsx
-   *  <InfoCard.Message data-color="info" icon={<InformationSquareIcon aria-hidden />}>
-   *    Message contents
-   *  </InfoCard.Message>
+   * <InfoCard data-color="info">
+   *   <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+   *     Message contents
+   *   </InfoCard.Message>
+   * </InfoCard>
    * ```
    */
   Message: typeof InfoCardMessage;
