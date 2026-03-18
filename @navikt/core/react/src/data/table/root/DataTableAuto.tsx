@@ -1,6 +1,11 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useControllableState, useMergeRefs } from "../../../utils/hooks";
+import { DataTableTbody } from "../tbody/DataTableTbody";
+import { DataTableTd } from "../td/DataTableTd";
+import { DataTableTh } from "../th/DataTableTh";
+import { DataTableThead } from "../thead/DataTableThead";
+import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
 import {
   DataTableContextProvider,
@@ -12,7 +17,6 @@ import { useTableSelection } from "./useTableSelection";
 interface DataTableProps<T>
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
   children?: never;
-  data: T[];
   /**
    * Controls vertical cell padding.
    * @default "normal"
@@ -60,6 +64,7 @@ interface DataTableProps<T>
    *
    */
   columnDefinitions: ColumnDefinitions<T>;
+  data: T[];
 }
 
 function DataTableAutoInner<T>(
@@ -129,7 +134,45 @@ function DataTableAutoInner<T>(
             data-layout={layout}
             tabIndex={tabIndex}
           >
-            TODO
+            <DataTableThead>
+              <DataTableTr>
+                {columnDefinitions.map((colDef, colDefIndex) => {
+                  return (
+                    <DataTableTh
+                      maxWidth="400px"
+                      minWidth="100px"
+                      defaultWidth="100%"
+                      textAlign="left"
+                      key={colDef.id || colDefIndex}
+                    >
+                      {colDef.header}
+                    </DataTableTh>
+                  );
+                })}
+              </DataTableTr>
+            </DataTableThead>
+            <DataTableTbody>
+              {data.map((rowData, rowIndex) => {
+                return (
+                  <DataTableTr
+                    key={
+                      rowIndex /* TODO: Should be more flexible to allow user to define the key? */
+                    }
+                  >
+                    {columnDefinitions.map((colDef, colDefIndex) => {
+                      return (
+                        <DataTableTd
+                          textAlign="left"
+                          key={colDef.id || colDefIndex}
+                        >
+                          {colDef.cell(rowData)}
+                        </DataTableTd>
+                      );
+                    })}
+                  </DataTableTr>
+                );
+              })}
+            </DataTableTbody>
           </table>
         </div>
       </div>

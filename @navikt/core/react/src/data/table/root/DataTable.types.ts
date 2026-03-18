@@ -5,6 +5,9 @@ type ColumnDefinition<T> = {
   minWidth?: number | string;
   maxWidth?: number | string;
   /* isRowHeader?: boolean; */
+  /**
+   * TODO: Could add table/row/cell context into callback
+   */
   cell: (item: T) => React.ReactNode;
 };
 

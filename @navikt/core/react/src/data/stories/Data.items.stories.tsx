@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { DataTable } from "../table";
+import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import DataTableAuto from "../table/root/DataTableAuto";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/ItemsAsData",
@@ -8,6 +10,9 @@ const meta: Meta<typeof DataTable> = {
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
   },
 };
 
@@ -23,28 +28,31 @@ type UserDataTest = {
   time: Date;
 };
 
-const userColumnDef: ColumnDef<UserDataTest> = [
+const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
+    id: "id",
     header: "Id",
-    accessor: "id",
+    cell: ({ id }) => id,
   },
   {
-    accessor: "foo",
+    id: "foo",
     header: "Foo",
+    cell: ({ foo }) => foo,
   },
   {
-    accessor: "bar",
+    id: "bar",
     header: "Bar",
+    cell: ({ bar }) => bar,
   },
   {
-    accessor: "on",
+    id: "on",
     header: "Boolean demo",
-    Cell: ({ value }) => (value ? "Yes" : "No"),
+    cell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
-    accessor: "time",
+    id: "time",
     header: "Time",
-    Cell: ({ value }) => value.toISOString(),
+    cell: ({ time }) => time.toISOString(),
   },
 ];
 
@@ -63,61 +71,17 @@ const userData = [
     on: false,
     time: new Date(),
   },
+  {
+    id: 3,
+    foo: "foo3",
+    bar: "bar3",
+    on: true,
+    time: new Date(),
+  },
 ];
 
 export const ItemsAsData: Story = {
   render: () => {
-    return <DataTableAsItems columns={userColumnDef} data={userData} />;
-  },
-  parameters: {
-    a11y: { disable: true },
-    controls: { disable: true },
-    docs: { disable: true },
+    return <DataTableAuto columnDefinitions={userColumnDef} data={userData} />;
   },
 };
-
-type ColumnDefItem<T, K extends keyof T = keyof T> = {
-  accessor: K;
-  header: string;
-  Cell?: (data: { value: T[K] }) => React.ReactNode;
-};
-
-type ColumnDef<T> = { [K in keyof T]: ColumnDefItem<T, K> }[keyof T][];
-
-type Items<T> = T[];
-
-function DataTableAsItems<T>({
-  columns,
-  data,
-}: {
-  columns: ColumnDef<T>;
-  data: Items<T>;
-}) {
-  return (
-    <DataTable layout="auto">
-      <DataTable.Thead>
-        <DataTable.Tr>
-          {columns.map((column) => {
-            return (
-              <DataTable.Th key={column.header}>{column.header}</DataTable.Th>
-            );
-          })}
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        {data.map((row, rowIndex) => (
-          <DataTable.Tr key={rowIndex}>
-            {columns.map((column) => {
-              const value = row[column.accessor];
-              return (
-                <DataTable.Td key={column.accessor as string}>
-                  {column.Cell ? column.Cell({ value }) : String(value)}
-                </DataTable.Td>
-              );
-            })}
-          </DataTable.Tr>
-        ))}
-      </DataTable.Tbody>
-    </DataTable>
-  );
-}
