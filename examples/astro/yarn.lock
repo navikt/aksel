@@ -822,6 +822,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.7.5":
+  version: 1.7.5
+  resolution: "@floating-ui/core@npm:1.7.5"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.11"
+  checksum: 10/fecdc9b3ce93f02bf78a6114b93730a4cb9fa8234c62f9a949016186297a039c9f9cd3c5c81ff74b93ebddf0b32048c4af7a528afe7904b75423ed2e7491b888
+  languageName: node
+  linkType: hard
+
 "@floating-ui/dom@npm:^1.7.5":
   version: 1.7.5
   resolution: "@floating-ui/dom@npm:1.7.5"
@@ -832,7 +841,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:^2.1.2, @floating-ui/react-dom@npm:^2.1.6":
+"@floating-ui/dom@npm:^1.7.6":
+  version: 1.7.6
+  resolution: "@floating-ui/dom@npm:1.7.6"
+  dependencies:
+    "@floating-ui/core": "npm:^1.7.5"
+    "@floating-ui/utils": "npm:^0.2.11"
+  checksum: 10/84dff2ffdf85c8b92d7edafc543c55869abbeaeb3007fa983159467e050153b507a0f5fe8e84f88c3f28c35a82de9df9c20a6eef5560cbba3afae19141444ff2
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^2.1.2":
   version: 2.1.7
   resolution: "@floating-ui/react-dom@npm:2.1.7"
   dependencies:
@@ -841,6 +860,18 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: 10/870eb2109af3ab09ea0076eb8e0ad307da274978c3dfe28e83422136a7f85cac700f62c37663c75bc25b174d33457c0224d1944e80b9a7ca5ff7b28b8f77b7ab
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "@floating-ui/react-dom@npm:2.1.8"
+  dependencies:
+    "@floating-ui/dom": "npm:^1.7.6"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10/39c3e3e5538a111a3eadf1b9ca486d7dc17c7eb24b83a0ea9b4c189fa7dbe5abe01357388d8cf6a4badb2d3fec2b1090e10529537bde91acbcfe19b0a8d10f90
   languageName: node
   linkType: hard
 
@@ -862,6 +893,13 @@ __metadata:
   version: 0.2.10
   resolution: "@floating-ui/utils@npm:0.2.10"
   checksum: 10/b635ea865a8be2484b608b7157f5abf9ed439f351011a74b7e988439e2898199a9a8b790f52291e05bdcf119088160dc782d98cff45cc98c5a271bc6f51327ae
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.11":
+  version: 0.2.11
+  resolution: "@floating-ui/utils@npm:0.2.11"
+  checksum: 10/72150138ba1c274d757a1da85233202fa9fdfd2272ec1fb0883eb0ffdf138863af81573049ed2c20b98adb4b7ae2236065541ce14037fe328955089831a678d5
   languageName: node
   linkType: hard
 
@@ -1170,17 +1208,17 @@ __metadata:
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
   version: 8.7.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=810a65&locator=irregular-iron%40workspace%3A."
-  checksum: 10/7061463c7d0f0cb0bfdd54d9c2f20b0ee74870960d7134e742745d5236c8f8fc74c3e37a59ce9ee88fd0aaa266e7c473137360b050f81c7d63a4c21facb10903
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=2b1473&locator=irregular-iron%40workspace%3A."
+  checksum: 10/ca1204921d607419b1daa2711b7e82410eb992db30dfee3fc203f052532e6d0598e3a016a60ad92b9733a542c60252b62948254d00b6f2cc7996112856ebbe5e
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
   version: 8.7.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=d353f0&locator=irregular-iron%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=777b49&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
-    "@floating-ui/react-dom": "npm:^2.1.6"
+    "@floating-ui/react-dom": "npm:^2.1.8"
     "@navikt/aksel-icons": "npm:^8.7.0"
     "@navikt/ds-tokens": "npm:^8.7.0"
     date-fns: "npm:^4.0.0"
@@ -1192,7 +1230,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/e5fd9a3100d0b20580a6468555989d627cc9fe6caf008d4e1816603774cdc0a5df48fdbeba0e61ada206c6de7774f981ad1b1c42e1a07bb0291e1c08254d83e4
+  checksum: 10/4f899b6380e4663e79f79ef719e159d30642370697994b5f77910b54efcb92996bcb9f0f40fef180d0767bae505a3f71b25de8744bae6d1a4779b9a0860b4b06
   languageName: node
   linkType: hard
 
@@ -2343,9 +2381,9 @@ __metadata:
   linkType: hard
 
 "devalue@npm:^5.6.2":
-  version: 5.6.3
-  resolution: "devalue@npm:5.6.3"
-  checksum: 10/fba14656bdbd3c23bd850906a504ca2dc94e3dc199c84e6e51c327a425b19d4f431dd7e2a4d9ee51ff49458ef6d10f59f781166bc2d9d8ce1182e863e58d9449
+  version: 5.6.4
+  resolution: "devalue@npm:5.6.4"
+  checksum: 10/e54e04524f8e47cc4c86dd7c7139c2f67eca351f6f34129a4033cc09d0060d83e37db1abbe0443eb689b30a1e62ca5af47a41120a5b0db7d97665a024aae07e1
   languageName: node
   linkType: hard
 
@@ -2866,8 +2904,8 @@ __metadata:
   linkType: hard
 
 "h3@npm:^1.15.5":
-  version: 1.15.5
-  resolution: "h3@npm:1.15.5"
+  version: 1.15.6
+  resolution: "h3@npm:1.15.6"
   dependencies:
     cookie-es: "npm:^1.2.2"
     crossws: "npm:^0.3.5"
@@ -2878,7 +2916,7 @@ __metadata:
     radix3: "npm:^1.1.2"
     ufo: "npm:^1.6.3"
     uncrypto: "npm:^0.1.3"
-  checksum: 10/95a6a1b6db286d71983f41b6e25d85ecc554c088675811eabf5d871dec6657a88b659b94536e1ec10a1cae7d1269a51d4f5d96d6b4a1e15c10c80719da9b4326
+  checksum: 10/abed5e03c6e036af70f56c265af867a4553d044fbaf98adae87d209f32ccd74ee3748d5cdd82e20e94d8640f4686fb3d31c7130e52bf1d0cb9c2cb151f6353de
   languageName: node
   linkType: hard
 
