@@ -15,6 +15,8 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
+const allRowIds = ["row-1", "row-2", "row-3", "row-4", "row-5"];
+
 export const SelectionMultiple: Story = {
   render: () => (
     <DataTable
@@ -22,6 +24,7 @@ export const SelectionMultiple: Story = {
       withKeyboardNav
       selectionMode="multiple"
       disabledKeys={["row-4"]}
+      getAllRowIds={() => allRowIds}
     >
       <DataTable.Thead>
         <DataTable.Tr>

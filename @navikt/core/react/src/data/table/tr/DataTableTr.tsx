@@ -63,17 +63,32 @@ function SelectionCell({ value }: SelectionCellProps) {
 
   const checkedState = () => {
     if (isInThead) {
-      return false;
+      if (selectedKeys === "all") {
+        return true;
+      }
+      if (selectedKeys.length === 0) {
+        return false;
+      }
+      return "indeterminate";
     }
+
     if (selectedKeys === "all") {
       return true;
     }
+
     return selectedKeys.includes(value!);
   };
 
+  const checked = checkedState();
+
   return (
     <DataTableTd align="center" width="60px">
-      <Checkbox hideLabel onChange={handleChange} checked={checkedState()}>
+      <Checkbox
+        hideLabel
+        onChange={handleChange}
+        checked={checked === "indeterminate" ? false : checked}
+        indeterminate={checked === "indeterminate"}
+      >
         {" "}
       </Checkbox>
     </DataTableTd>

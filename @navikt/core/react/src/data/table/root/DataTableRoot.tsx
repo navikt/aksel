@@ -222,6 +222,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       defaultSelectedKeys,
       onSelectionChange,
       disabledKeys = [],
+      getAllRowIds,
       ...rest
     },
     forwardedRef,
@@ -243,15 +244,34 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     const handleSelectionChange = (key: { value: string } | "all") => {
       if (selectionMode === "none") return;
 
+      const allKeys = getAllRowIds?.() ?? [];
+      const currentlyAllSelected =
+        selectedKeys === "all" ||
+        allKeys.every((id) => selectedKeys.includes(id));
+
       if (key === "all") {
+        if (currentlyAllSelected) {
+          setSelectedKeys([]);
+        } else {
+          setSelectedKeys("all");
+        }
         return;
-      } else if (selectedKeys === "all") {
+      }
+
+      if (selectedKeys === "all") {
+        setSelectedKeys(allKeys.filter((k) => k !== key.value));
+
         return;
       }
 
       const newSelectedKeys = selectedKeys.includes(key.value)
         ? selectedKeys.filter((k) => k !== key.value)
         : [...selectedKeys, key.value];
+
+      if (allKeys.every((id) => newSelectedKeys.includes(id))) {
+        setSelectedKeys("all");
+        return;
+      }
 
       setSelectedKeys?.(newSelectedKeys);
     };

@@ -24,6 +24,7 @@ type SelectionProps = {
   onSelectionChange?: (keys: SelectionT) => void;
   disabledKeys?: string[];
   /* disallowEmptySelection?: boolean; */
+  getAllRowIds?: () => string[];
 };
 
 type DataTableContextProps = {
