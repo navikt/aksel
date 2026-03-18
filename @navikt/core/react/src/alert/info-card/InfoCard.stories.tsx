@@ -179,7 +179,7 @@ export const Message: Story = {
     return (
       <VStack gap="space-16">
         <InfoCard data-color="brand-magenta">
-          <InfoCard.Message icon={<InformationSquareIcon />}>
+          <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
             tempore corrupti asperiores praesentium? Asperiores, doloribus?
             Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
@@ -187,7 +187,7 @@ export const Message: Story = {
           </InfoCard.Message>
         </InfoCard>
         <InfoCard size="small" data-color="brand-magenta">
-          <InfoCard.Message icon={<InformationSquareIcon />}>
+          <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
             tempore corrupti asperiores praesentium? Asperiores, doloribus?
             Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
@@ -203,7 +203,7 @@ export const MessageWithLink: Story = {
   render: () => {
     return (
       <InfoCard data-color="brand-magenta">
-        <InfoCard.Message icon={<InformationSquareIcon />}>
+        <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
           tempore corrupti asperiores praesentium? Asperiores, doloribus?
           <Link href="#123">Molestias, laudantium saepe</Link>. Nihil in alias

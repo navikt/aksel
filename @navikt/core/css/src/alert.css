@@ -206,7 +206,7 @@
   padding: var(--ax-space-12) var(--ax-space-16);
 
   & > .aksel-base-alert__icon {
-    margin-top: 2px;
+    margin-top: var(--ax-space-2);
   }
 
   &[data-size="small"] > .aksel-base-alert__icon {

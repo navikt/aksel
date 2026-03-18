@@ -10,7 +10,7 @@ import {
 } from "../header/InfoCardHeader";
 import {
   InfoCardMessage,
-  InfoCardMessageProps,
+  type InfoCardMessageProps,
 } from "../message/InfoCardMessage";
 import { InfoCardTitle, type InfoCardTitleProps } from "../title/InfoCardTitle";
 
