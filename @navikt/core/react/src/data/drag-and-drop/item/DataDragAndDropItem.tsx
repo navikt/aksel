@@ -1,14 +1,6 @@
-import { useSortable } from "@dnd-kit/react/sortable";
-import React, { useRef } from "react";
-import {
-  CaretDownCircleFillIcon,
-  CaretUpCircleFillIcon,
-  DragVerticalIcon,
-} from "@navikt/aksel-icons";
+import React from "react";
 import { HStack } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
-import { DataDragAndDropContext } from "../root/DataDragAndDrop.context";
 
 interface DataDragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -36,60 +28,21 @@ interface DataDragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> 
 const DataDragAndDropItem = React.forwardRef<
   HTMLDivElement,
   DataDragAndDropItemProps
->(({ children, id, index, className, ...rest }, forwardedRef) => {
-  const handleRef = useRef<HTMLDivElement>(null);
-  const { ref, isDragging, isDropTarget } = useSortable({
-    id,
-    index,
-    handle: handleRef,
-  });
-  const mergedRef = useMergeRefs(ref, forwardedRef);
-  const context = React.useContext(DataDragAndDropContext);
-  const mouseDragging = isDragging && context?.inputMethod === "mouse";
-  const mouseDropTarget = isDropTarget && context?.inputMethod === "mouse";
-  const keyboardDragging = isDragging && context?.inputMethod === "keyboard";
+>(({ children, className, ...rest }, forwardedRef) => {
+  // const context = useDataDragAndDropContext();
 
   return (
     <HStack gap="space-8" align="center" wrap={false} asChild>
       {/* TODO Should this be a <li>? */}
       <div
-        ref={mergedRef}
+        ref={forwardedRef}
         {...rest}
         className={cl("aksel-data-table__drag-and-drop-item", className)}
-        data-dragging={isDragging}
+        /*data-dragging={isDragging}
         data-mouse-dragging={mouseDragging}
         data-keyboard-dragging={keyboardDragging}
-        data-drop-target={mouseDropTarget}
-        tabIndex={-1}
+        data-drop-target={mouseDropTarget}*/
       >
-        <div
-          className="aksel-data-table__drag-and-drop-item-drag-handler"
-          ref={handleRef}
-          // TODO Consider moving this to its own component
-          // TODO Perhaps make it a button where clicking also enables arrow icons?
-        >
-          {keyboardDragging && (
-            <span
-              className="aksel-data-table__drag-and-drop-item-keyboard-drag-icon"
-              data-direction="up"
-            >
-              <CaretUpCircleFillIcon aria-hidden fontSize="1.2rem" />
-            </span>
-          )}
-          <DragVerticalIcon
-            aria-hidden
-            title="Dra for å flytte"
-            fontSize="1.5rem"
-          />
-          {keyboardDragging && (
-            <span
-              className="aksel-data-table__drag-and-drop-item-keyboard-drag-icon"
-              data-direction="down"
-            >
-              <CaretDownCircleFillIcon aria-hidden fontSize="1.2rem" />
-            </span>
-          )}
-        </div>
         <div>{children}</div>
       </div>
     </HStack>

@@ -118,8 +118,7 @@ export const NoPageScroll: Story = {
                       return (
                         <DataTable.Th
                           key={header.id}
-                          size={header.getSize()}
-                          resizeHandler={header.getResizeHandler()}
+                          defaultWidth={header.getSize()}
                           sortable
                           sortDirection={header.column.getIsSorted() || "none"}
                           onSortClick={(event) => {

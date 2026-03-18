@@ -23,7 +23,7 @@ import DataActionBar from "../action-bar/root/DataActionBarRoot";
 import DataDragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
-import { DataTableProfiler } from "./DataTableProfiler";
+/* import { DataTableProfiler } from "./DataTableProfiler"; */
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -33,7 +33,7 @@ const meta: Meta<typeof DataTable> = {
     chromatic: { disable: true },
     layout: "padded",
   },
-  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
+  /* decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>], */
 };
 
 export default meta;
@@ -83,6 +83,72 @@ export const Default: Story = {
   ),
 };
 
+export const TextAlign: Story = {
+  render: () => (
+    <DataTable layout="auto" withKeyboardNav>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th>Left</DataTable.Th>
+          <DataTable.Th textAlign="center">Center</DataTable.Th>
+          <DataTable.Th textAlign="right">Right</DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.Tr>
+          <DataTable.Td>Data 1</DataTable.Td>
+          <DataTable.Td textAlign="center">Yes</DataTable.Td>
+          <DataTable.Td textAlign="right">100 500</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 2</DataTable.Td>
+          <DataTable.Td textAlign="center">No</DataTable.Td>
+          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 3</DataTable.Td>
+          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
+          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
+        </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
+export const TextAlignSortable: Story = {
+  render: () => (
+    <DataTable layout="auto" withKeyboardNav>
+      <DataTable.Thead>
+        <DataTable.Tr>
+          <DataTable.Th sortable>Left</DataTable.Th>
+          <DataTable.Th sortable textAlign="center">
+            Center
+          </DataTable.Th>
+          <DataTable.Th sortable textAlign="right">
+            Right
+          </DataTable.Th>
+        </DataTable.Tr>
+      </DataTable.Thead>
+      <DataTable.Tbody>
+        <DataTable.Tr>
+          <DataTable.Td>Data 1</DataTable.Td>
+          <DataTable.Td textAlign="center">Yes</DataTable.Td>
+          <DataTable.Td textAlign="right">100 500</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 2</DataTable.Td>
+          <DataTable.Td textAlign="center">No</DataTable.Td>
+          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
+        </DataTable.Tr>
+        <DataTable.Tr>
+          <DataTable.Td>Data 3</DataTable.Td>
+          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
+          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
+        </DataTable.Tr>
+      </DataTable.Tbody>
+    </DataTable>
+  ),
+};
+
 export const TanstackExample: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
@@ -116,18 +182,6 @@ export const TanstackExample: Story = {
       debugHeaders: true,
       debugColumns: true,
     });
-
-    const columnSizeVars = () => {
-      const headers = table.getFlatHeaders();
-      const colSizes: { [key: string]: `${number}px` } = {};
-      for (let i = 0; i < headers.length; i++) {
-        const header = headers[i];
-        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
-        colSizes[`--col-${header.column.id}-size`] =
-          `${header.column.getSize()}px`;
-      }
-      return colSizes;
-    };
 
     return (
       <VStack gap="space-16">
@@ -244,7 +298,6 @@ export const TanstackExample: Story = {
         </DataActionBar>
 
         <DataTable
-          style={columnSizeVars()}
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
@@ -258,7 +311,7 @@ export const TanstackExample: Story = {
                       <DataTable.Th
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
-                        resizeHandler={header.getResizeHandler()}
+                        defaultWidth={header.getSize()}
                         /* pinningHandler={
                           header.column.getIsPinned() === "left"
                             ? () => header.column.pin(false)
@@ -271,18 +324,6 @@ export const TanstackExample: Story = {
                           const handler =
                             header.column.getToggleSortingHandler();
                           handler?.(event);
-                        }}
-                        keyboardResizingHandler={(increment) => {
-                          const newColumnSizing = {};
-                          table.getFlatHeaders().forEach((h) => {
-                            if (h.id === header.id) {
-                              newColumnSizing[h.id] =
-                                header.getSize() + increment;
-                            } else {
-                              newColumnSizing[h.id] = h.getSize();
-                            }
-                          });
-                          table.setColumnSizing(newColumnSizing);
                         }}
                       >
                         {header.isPlaceholder

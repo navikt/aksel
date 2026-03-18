@@ -48,22 +48,10 @@ export const TanstackDemo: Story = {
       columnResizeMode: "onChange",
     });
 
-    const columnSizeVars = () => {
-      const headers = table.getFlatHeaders();
-      const colSizes: { [key: string]: `${number}px` } = {};
-      for (let i = 0; i < headers.length; i++) {
-        const header = headers[i];
-        colSizes[`--header-${header.id}-size`] = `${header.getSize()}px`;
-        colSizes[`--col-${header.column.id}-size`] =
-          `${header.column.getSize()}px`;
-      }
-      return colSizes;
-    };
-
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
         <button>Focuable before</button>
-        <DataTable withKeyboardNav style={columnSizeVars()}>
+        <DataTable withKeyboardNav>
           <DataTable.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
@@ -73,19 +61,7 @@ export const TanstackDemo: Story = {
                       <DataTable.Th
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
-                        resizeHandler={header.getResizeHandler()}
-                        keyboardResizingHandler={(increment) => {
-                          const newColumnSizing = {};
-                          table.getFlatHeaders().forEach((h) => {
-                            if (h.id === header.id) {
-                              newColumnSizing[h.id] =
-                                header.getSize() + increment;
-                            } else {
-                              newColumnSizing[h.id] = h.getSize();
-                            }
-                          });
-                          table.setColumnSizing(newColumnSizing);
-                        }}
+                        defaultWidth={header.getSize()}
                         sortable
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortClick={(event) => {
@@ -119,7 +95,7 @@ export const TanstackDemo: Story = {
 export const Spans: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th colSpan={2}>Group A</DataTable.Th>
@@ -208,7 +184,7 @@ export const Spans: Story = {
 export const Inputs: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th>Col 1</DataTable.Th>
@@ -334,7 +310,7 @@ export const Inputs: Story = {
 export const DisabledCells: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav>
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th>Col 1</DataTable.Th>
@@ -445,7 +421,7 @@ export const Cache: Story = {
         <button onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
-        <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable style={{ width: "100%" }} layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
               <DataTable.Th>Col 1</DataTable.Th>
@@ -489,7 +465,7 @@ export const FocusElementInsideTable: Story = {
   render: () => {
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-        <DataTable style={{ width: "100%" }} withKeyboardNav>
+        <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
               <DataTable.Th>Col 1</DataTable.Th>

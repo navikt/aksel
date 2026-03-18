@@ -15,7 +15,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       resolve(ctx) {
         const { params } = ctx;
         return {
-          filter: `_type == "komponent_artikkel" && slug.current == $slug}`,
+          filter: `_type == "komponent_artikkel" && slug.current == $slug`,
           params: {
             slug: `komponenter/${params.category}/${params.slug}`,
           },
@@ -27,7 +27,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       resolve(ctx) {
         const { params } = ctx;
         return {
-          filter: `_type == "ds_artikkel" && slug.current == $slug}`,
+          filter: `_type == "ds_artikkel" && slug.current == $slug`,
           params: {
             slug: `grunnleggende/${params.category}/${params.slug}`,
           },
@@ -39,7 +39,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       resolve(ctx) {
         const { params } = ctx;
         return {
-          filter: `_type == "templates_artikkel" && slug.current == $slug}`,
+          filter: `_type == "templates_artikkel" && slug.current == $slug`,
           params: {
             slug: `monster-maler/${params.category}/${params.slug}`,
           },
@@ -51,7 +51,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       resolve(ctx) {
         const { params } = ctx;
         return {
-          filter: `_type == "aksel_artikkel" && slug.current == $slug}`,
+          filter: `_type == "aksel_artikkel" && slug.current == $slug`,
           params: {
             slug: `god-praksis/artikler/${params.slug}`,
           },
@@ -63,7 +63,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       resolve(ctx) {
         const { params } = ctx;
         return {
-          filter: `_type == "aksel_blogg" && slug.current == $slug}`,
+          filter: `_type == "aksel_blogg" && slug.current == $slug`,
           params: {
             slug: `produktbloggen/${params.slug}`,
           },

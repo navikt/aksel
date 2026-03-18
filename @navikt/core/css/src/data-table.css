@@ -33,14 +33,14 @@
     min-width: 100%;
   }
 
-  --__axc-data-table-density: var(--ax-space-16) 0;
+  --__axc-data-table-density: var(--ax-space-16);
 
   &[data-density="condensed"] {
-    --__axc-data-table-density: var(--ax-space-8) 0;
+    --__axc-data-table-density: var(--ax-space-8);
   }
 
   &[data-density="spacious"] {
-    --__axc-data-table-density: var(--ax-space-32) 0;
+    --__axc-data-table-density: var(--ax-space-32);
   }
 
   &[data-zebra-stripes="true"] {
@@ -118,6 +118,18 @@
 .aksel-data-table__td {
   /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+
+  &[data-align="left"] {
+    text-align: left;
+  }
+
+  &[data-align="center"] {
+    text-align: center;
+  }
+
+  &[data-align="right"] {
+    text-align: right;
+  }
 }
 
 /* BORDER STYLING END */
@@ -128,10 +140,19 @@
   color: var(--ax-text-neutral);
   padding: var(--ax-space-8) var(--ax-space-16);
   text-align: start;
+  font-weight: var(--ax-font-weight-bold);
+
+  &:has(.aksel-data-table__th-sort-button):hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:has(.aksel-data-table__th-sort-button):active {
+    background-color: var(--ax-bg-neutral-moderate-pressed);
+  }
 
   &[data-sortable="true"] {
     padding: 0;
-    block-size: 2rem;
+    block-size: calc(var(--__axc-data-table-density) + 1.5rem);
   }
 }
 
@@ -140,35 +161,36 @@
   align-items: center;
   gap: var(--ax-space-2);
   padding-inline-start: var(--ax-space-16);
-  block-size: 2rem;
+  block-size: calc(var(--__axc-data-table-density) + 1.5rem);
   width: 100%;
   cursor: pointer;
   text-align: start;
   background-color: transparent;
   border: none;
-
-  &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hover);
-  }
-
-  &:active {
-    background-color: var(--ax-bg-neutral-moderate-pressed);
-  }
+  font-weight: inherit;
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: -2px;
+    outline: none;
   }
 }
 
 .aksel-data-table__th-sort-icon {
   flex-shrink: 0;
+  margin-left: auto;
 
   &[data-sort-direction="none"] {
-    display: none;
+    visibility: hidden;
   }
 
   .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
+    visibility: visible;
+  }
+
+  .aksel-data-table[data-layout="fixed"] &[data-sort-direction="none"] {
+    display: none;
+  }
+
+  .aksel-data-table[data-layout="fixed"] .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
     display: block;
   }
 }
@@ -194,8 +216,8 @@
   width: 19px; /* TODO: Violation of WCAG SC 2.5.8 Target Size? https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html */
 
   &:focus-visible {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: -3px;
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
     border-radius: var(--ax-radius-8);
   }
 
@@ -204,6 +226,11 @@
     position: absolute;
     inset-block: 0;
     width: 3px;
+    height: 75%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: var(--ax-radius-full);
+    transition: background 50ms linear;
   }
 
   &:hover::after {
@@ -212,11 +239,11 @@
   }
 
   &:active::after,
-  &:focus::after {
+  &:focus-visible::after {
     background: var(--ax-bg-strong-pressed);
   }
 
-  .aksel-data-table__th:last-child & {
+  .aksel-data-table__th:last-of-type & {
     inset-inline-end: 0;
     width: 15px;
 
@@ -280,7 +307,7 @@
   color: var(--ax-text-neutral-subtle);
 
   > div {
-    padding: var(--__axc-data-table-density);
+    padding-block: var(--__axc-data-table-density);
     padding-inline: 1rem;
   }
 }
@@ -290,7 +317,9 @@
   scroll-margin-block: var(--ax-space-0);
   scroll-margin-inline: var(--ax-space-0);
 
-  &:focus-visible {
+  &:focus-visible,
+  /* Focus instead of focus-visible so that effect of sort-icon staying isnt strange */
+  &:has(.aksel-data-table__th-sort-button:focus) {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
   }
@@ -303,6 +332,7 @@
 .aksel-data-table__filler-cell {
   width: auto;
   display: table-cell;
+  padding: 0;
 }
 
 .aksel-data-table__drag-and-drop-item {
@@ -315,7 +345,7 @@
   }
 
   &[data-keyboard-dragging="true"] {
-    .aksel-data-table__drag-and-drop-item-drag-handler {
+    .aksel-data-drag-and-drop__drag-handler__button {
       outline: 2px solid var(--ax-border-focus);
       outline-offset: -1px;
       border-radius: var(--ax-radius-8);
@@ -327,10 +357,13 @@
   }
 }
 
-.aksel-data-table__drag-and-drop-item-drag-handler {
+.aksel-data-drag-and-drop__drag-handler__button {
   cursor: grab;
   height: 1.5rem;
   position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
 
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
@@ -339,17 +372,86 @@
   }
 }
 
-.aksel-data-table__drag-and-drop-item-keyboard-drag-icon {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.aksel-data-drag-and-drop__drag-handler__arrow {
   height: 1.2rem;
+}
 
-  &[data-direction="up"] {
-    top: -10px;
+.aksel-data-drag-and-drop__drag-handler__alt {
+  position: relative;
+
+  .aksel-data-drag-and-drop__drag-handler__arrow {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &[data-direction="up"] {
+      top: -10px;
+    }
+
+    &[data-direction="down"] {
+      bottom: calc(-100% - 6px);
+    }
+  }
+}
+
+.aksel-data-table__empty-state {
+  display: grid;
+  place-content: center;
+  padding-block: var(--ax-space-32);
+  padding-inline: var(--ax-space-16);
+  text-align: center;
+  gap: var(--ax-space-8);
+  justify-items: center;
+}
+
+.aksel-data-table__loading-state {
+  display: grid;
+  place-content: center;
+  padding-block: var(--ax-space-32);
+  padding-inline: var(--ax-space-16);
+  text-align: center;
+  gap: var(--ax-space-8);
+  justify-items: center;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inline-size: 100%;
+    block-size: 2px;
+    inset-block-start: -1px;
+    background-color: var(--ax-bg-strong);
+    animation: animateDataTableLoading 1s linear infinite;
+  }
+}
+
+@keyframes animateDataTableLoading {
+  0% {
+    inset-inline-start: 0;
+    inline-size: 0;
   }
 
-  &[data-direction="down"] {
-    bottom: -29px;
+  20% {
+    inset-inline-start: 0;
+    inline-size: 40%;
   }
+
+  80% {
+    inset-inline-start: 60%;
+    inline-size: 40%;
+  }
+
+  100% {
+    inset-inline-start: 100%;
+    inline-size: 0;
+  }
+}
+
+/* TODO: Look to handle "inline"-checkbox better than custom CSS-overrides in the future. */
+.aksel-data-table tr .aksel-checkbox {
+  padding: 0;
+}
+
+.aksel-data-table tr .aksel-checkbox:focus-within::after {
+  inset: 0;
 }

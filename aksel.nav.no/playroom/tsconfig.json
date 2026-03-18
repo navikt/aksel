@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": ["./playroom.config.ts"]
+}

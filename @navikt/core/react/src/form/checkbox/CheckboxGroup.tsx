@@ -81,7 +81,7 @@ export const CheckboxGroup = forwardRef<
           "aksel-checkbox-group",
           `aksel-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
         )}
-        nativeReadOnly={false}
+        _fieldsSupportNativeReadOnly={false}
       >
         <CheckboxGroupContext.Provider
           value={{

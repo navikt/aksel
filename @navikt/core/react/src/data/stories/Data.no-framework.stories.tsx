@@ -65,7 +65,7 @@ const columns = [
   },
 ];
 
-export const ExampleWithoutTanstack: Story = {
+export const WithoutTanstack: Story = {
   render: () => {
     const [globalFilter, setGlobalFilter] = useState("");
     const deferredFilterString = useDeferredValue(globalFilter); // Perf: Makes input rerender independently of table
@@ -73,12 +73,9 @@ export const ExampleWithoutTanstack: Story = {
       left: string[];
       right: string[];
     }>({ left: [], right: [] });*/
-    const [columnSizes, setColumnSizes] = useState<{ [key: string]: number }>(
-      {},
-    );
 
     const globalFilterLower = deferredFilterString.toLowerCase();
-    // Perf: Memoize data to avoid rerendering table body when unrelated state changes (the filtering itself is not expensive)
+    // Perf: Memoize data to avoid rerendering table body on unrelated state changes (the filtering itself is not expensive)
     const data = useMemo(
       () =>
         deferredFilterString
@@ -90,34 +87,6 @@ export const ExampleWithoutTanstack: Story = {
           : sampleData,
       [deferredFilterString, globalFilterLower],
     );
-
-    function resizeHandler(
-      event:
-        | React.MouseEvent<HTMLButtonElement>
-        | React.TouchEvent<HTMLButtonElement>,
-    ) {
-      // @ts-expect-error // TODO: Handle touch
-      const startX = event.clientX;
-      const th = (event.target as HTMLElement).closest(
-        "th",
-      ) as HTMLTableCellElement;
-      const startWidth = th.offsetWidth;
-      function onMouseMove(e: MouseEvent) {
-        const newWidth = startWidth + (e.clientX - startX);
-        const colKey = th.dataset.key;
-        if (!colKey) return;
-        setColumnSizes((prev) => ({
-          ...prev,
-          [colKey]: newWidth,
-        }));
-      }
-      function onMouseUp() {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
-      }
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    }
 
     return (
       <VStack gap="space-16">
@@ -135,9 +104,8 @@ export const ExampleWithoutTanstack: Story = {
                 return (
                   <DataTable.Th
                     key={column.header}
-                    size={columnSizes[column.accessorKey] ?? 150}
+                    defaultWidth={150}
                     //style={{ width: `var(--header-${header.id}-size)` }}
-                    resizeHandler={resizeHandler}
                     data-key={column.accessorKey}
                     /* pinningHandler={() => {
                       const isPinned = columnPinning.left.includes(
