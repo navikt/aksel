@@ -1,11 +1,10 @@
-import { AkselColorTheme } from "../../types";
 import { StyleDictionaryToken } from "../tokens.util";
 
-export function opacityTokenConfig(theme: AkselColorTheme) {
+export function opacityTokenConfig() {
   return {
     opacity: {
       disabled: {
-        value: theme === "light" ? `0.3` : `0.4`,
+        value: "0.45",
         type: "opacity",
         comment: "Used for setting opacity on disabled elements.",
         figmaIgnore: true,
