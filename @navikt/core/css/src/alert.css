@@ -195,9 +195,8 @@
 
 .aksel-base-alert__message {
   border-radius: var(--ax-radius-12);
-  overflow: clip;
   height: fit-content;
-  outline: 1px solid var(--ax-border-subtleA);
+  outline: 1px solid var(--ax-border-default);
   outline-offset: -1px;
   background: var(--ax-bg-moderate);
   color: var(--ax-text-default);
