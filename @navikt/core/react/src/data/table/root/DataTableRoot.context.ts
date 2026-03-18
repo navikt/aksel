@@ -1,10 +1,38 @@
 import { createStrictContext } from "../../../utils/helpers";
 
-interface DataTableContextProps {
+type SelectionT = string[] | "all";
+
+type SelectionProps = {
+  /**
+   * Enables selection of rows.
+   *
+   *
+   * When set to "single", only one row can be selected at a time.
+   *
+   * When set to "multiple", multiple rows can be selected.
+   *
+   * TODO:
+   * - Implement callbacks for selection changes (e.g. onRowSelect, onSelectAll)
+   * - Implement controlled state
+   * - Implement auto-add checkbox to rows and header when selection is enabled
+   *
+   * @default "none"
+   */
+  selectionMode?: "none" | "single" | "multiple";
+  selectedKeys?: SelectionT;
+  defaultSelectedKeys?: SelectionT;
+  onSelectionChange?: (keys: SelectionT) => void;
+  disabledKeys?: string[];
+  /* disallowEmptySelection?: boolean; */
+};
+
+type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
-  selectionMode?: "single" | "multiple";
-}
+  handleSelectionChange: (key: { value: string } | "all") => void;
+} & Required<
+  Pick<SelectionProps, "selectedKeys" | "selectionMode" | "disabledKeys">
+>;
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
   createStrictContext<DataTableContextProps>({
@@ -13,3 +41,4 @@ const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
   });
 
 export { DataTableContextProvider, useDataTableContext };
+export type { SelectionProps };

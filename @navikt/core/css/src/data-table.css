@@ -446,3 +446,12 @@
     inline-size: 0;
   }
 }
+
+/* TODO: Look to handle "inline"-checkbox better than custom CSS-overrides in the future. */
+.aksel-data-table tr .aksel-checkbox {
+  padding: 0;
+}
+
+.aksel-data-table tr .aksel-checkbox:focus-within::after {
+  inset: 0;
+}

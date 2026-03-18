@@ -17,7 +17,12 @@ type Story = StoryObj<typeof DataTable>;
 
 export const SelectionMultiple: Story = {
   render: () => (
-    <DataTable layout="auto" withKeyboardNav selectionMode="multiple">
+    <DataTable
+      layout="auto"
+      withKeyboardNav
+      selectionMode="multiple"
+      disabledKeys={["row-4"]}
+    >
       <DataTable.Thead>
         <DataTable.Tr>
           <DataTable.Th>Column 1</DataTable.Th>
@@ -26,27 +31,27 @@ export const SelectionMultiple: Story = {
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
-        <DataTable.Tr>
+        <DataTable.Tr value="row-1">
           <DataTable.Td>Test</DataTable.Td>
           <DataTable.Td>Data</DataTable.Td>
           <DataTable.Td>Example</DataTable.Td>
         </DataTable.Tr>
-        <DataTable.Tr>
+        <DataTable.Tr value="row-2">
           <DataTable.Td>Test</DataTable.Td>
           <DataTable.Td>Data</DataTable.Td>
           <DataTable.Td>Example</DataTable.Td>
         </DataTable.Tr>
-        <DataTable.Tr>
+        <DataTable.Tr value="row-3">
           <DataTable.Td>Test</DataTable.Td>
           <DataTable.Td>Data</DataTable.Td>
           <DataTable.Td>Example</DataTable.Td>
         </DataTable.Tr>
-        <DataTable.Tr>
+        <DataTable.Tr value="row-4">
           <DataTable.Td>Test</DataTable.Td>
           <DataTable.Td>Data</DataTable.Td>
           <DataTable.Td>Example</DataTable.Td>
         </DataTable.Tr>
-        <DataTable.Tr>
+        <DataTable.Tr value="row-5">
           <DataTable.Td>Test</DataTable.Td>
           <DataTable.Td>Data</DataTable.Td>
           <DataTable.Td>Example</DataTable.Td>

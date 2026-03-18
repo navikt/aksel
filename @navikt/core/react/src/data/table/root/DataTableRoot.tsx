@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
+import { useControllableState, useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableCaption,
   type DataTableCaptionProps,
@@ -28,10 +28,14 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
-import { DataTableContextProvider } from "./DataTableRoot.context";
+import {
+  DataTableContextProvider,
+  type SelectionProps,
+} from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
 
-interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
+interface DataTableProps
+  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
   children: React.ReactNode;
   /**
    * Controls vertical cell padding.
@@ -76,20 +80,6 @@ interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
-  /**
-   * Enables selection of rows.
-   *
-   *
-   * When set to "single", only one row can be selected at a time.
-   *
-   * When set to "multiple", multiple rows can be selected.
-   *
-   * TODO:
-   * - Implement callbacks for selection changes (e.g. onRowSelect, onSelectAll)
-   * - Implement controlled state
-   * - Implement auto-add checkbox to rows and header when selection is enabled
-   */
-  selectionMode?: "single" | "multiple";
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -227,7 +217,11 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       truncateContent = true,
       shouldBlockNavigation,
       layout = "fixed",
-      selectionMode,
+      selectionMode = "none",
+      selectedKeys: selectedKeysProp,
+      defaultSelectedKeys,
+      onSelectionChange,
+      disabledKeys = [],
       ...rest
     },
     forwardedRef,
@@ -240,11 +234,36 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       shouldBlockNavigation,
     });
 
+    const [selectedKeys, setSelectedKeys] = useControllableState({
+      value: selectedKeysProp,
+      defaultValue: defaultSelectedKeys ?? [],
+      onChange: onSelectionChange,
+    });
+
+    const handleSelectionChange = (key: { value: string } | "all") => {
+      if (selectionMode === "none") return;
+
+      if (key === "all") {
+        return;
+      } else if (selectedKeys === "all") {
+        return;
+      }
+
+      const newSelectedKeys = selectedKeys.includes(key.value)
+        ? selectedKeys.filter((k) => k !== key.value)
+        : [...selectedKeys, key.value];
+
+      setSelectedKeys?.(newSelectedKeys);
+    };
+
     return (
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
         selectionMode={selectionMode}
+        selectedKeys={selectedKeys}
+        disabledKeys={disabledKeys}
+        handleSelectionChange={handleSelectionChange}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
@@ -278,18 +297,20 @@ DataTable.LoadingState = DataTableLoadingState;
 export {
   DataTable,
   DataTableCaption,
+  DataTableEmptyState,
+  DataTableLoadingState,
   DataTableTbody,
   DataTableTd,
   DataTableTfoot,
   DataTableTh,
   DataTableThead,
   DataTableTr,
-  DataTableEmptyState,
-  DataTableLoadingState,
 };
 export default DataTable;
 export type {
   DataTableCaptionProps,
+  DataTableEmptyStateProps,
+  DataTableLoadingStateProps,
   DataTableProps,
   DataTableTbodyProps,
   DataTableTdProps,
@@ -297,6 +318,4 @@ export type {
   DataTableTheadProps,
   DataTableThProps,
   DataTableTrProps,
-  DataTableEmptyStateProps,
-  DataTableLoadingStateProps,
 };
