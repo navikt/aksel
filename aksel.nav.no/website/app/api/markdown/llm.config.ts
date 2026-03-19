@@ -1,5 +1,6 @@
-/* import Komponenter from "./routes/komponenter";
-import LLM from "./routes/llm"; */
+import Komponenter from "./routes/komponenter";
+/* import Komponent from "./routes/komponent"; */
+import LLM from "./routes/llm";
 
 type MarkdownRoute = () => Promise<string>;
 
@@ -7,8 +8,9 @@ type Routes = Record<`/${string}`, MarkdownRoute>;
 
 const MARKDOWN_ROUTES: Routes = {
   /* Uncomment to test route */
-  /* "/komponenter": Komponenter.markdown,
-  "/llm": LLM.markdown, */
+  "/komponenter": Komponenter.markdown,
+  /* "/komponent": Komponent.markdown, */
+  "/llm": LLM.markdown,
 };
 
 const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);

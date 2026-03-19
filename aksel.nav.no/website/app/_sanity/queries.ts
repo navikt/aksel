@@ -450,7 +450,7 @@ export {
 
 /* TODO: Testing query for markdown. Will fetch all komponenter-routes when implemented */
 const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
-  `*[_type == "komponent_artikkel" && slug.current == "komponenter/core/select"][0]{
+  `*[_type == "komponent_artikkel"]{
     ...,
     content[]{
       ...,
@@ -459,4 +459,14 @@ const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
   }`,
 );
 
-export { ALL_KOMPONENTS_MARKDOWN_QUERY };
+const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "komponent_artikkel" && slug.current == $slug][0]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+export { ALL_KOMPONENTS_MARKDOWN_QUERY, KOMPONENT_BY_SLUG_MARKDOWN_QUERY };

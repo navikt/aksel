@@ -6,29 +6,57 @@ import { portableMarkdown } from "../helpers/portable-markdown";
 
 async function markdown() {
   const { data } = await sanityMarkdownFetch({
+    /* TODO: Catch all query, cant be cached. With tag based revalidation. Does this matter here? */
     query: ALL_KOMPONENTS_MARKDOWN_QUERY,
   });
 
-  if (!data || !data.content || !data.heading) {
+  if (!data || data.length === 0) {
     throw new Error("No data returned from Sanity");
   }
+  const markdownResults: string[] = [];
 
-  const slug = data.slug?.current ?? "";
-  const metadata = buildMetadataHeader({
-    title: data.heading,
-    url: `https://aksel.nav.no/${slug}`,
-    status: data.status?.tag,
-    category: data.kategori,
-    packages: data.kodepakker,
+  const sortedData = data.sort((a, b) => {
+    const sidebarSort = (a.sidebarindex ?? 0) - (b.sidebarindex ?? 0);
+
+    if (sidebarSort !== 0) {
+      return sidebarSort;
+    }
+    return (a.heading ?? "").localeCompare(b.heading ?? "");
   });
 
-  const content = portableMarkdown(data.content);
+  for (const item of sortedData) {
+    if (!item.slug?.current || !item.heading || !item.content) {
+      continue;
+    }
+
+    const slug = item.slug.current;
+    const metadata = buildMetadataHeader({
+      title: item.heading,
+      url: `https://aksel.nav.no/${slug}`,
+      status: item.status?.tag,
+      category: item.kategori,
+      packages: item.kodepakker,
+    });
+
+    const content = portableMarkdown(item.content);
+    markdownResults.push(
+      buildMarkdown(
+        metadata,
+        { heading: item.heading },
+        portableMarkdown(item.intro?.body),
+        content,
+      ),
+    );
+  }
 
   return buildMarkdown(
-    metadata,
-    { heading: data.heading },
-    portableMarkdown(data.intro?.body),
-    content,
+    buildMetadataHeader({
+      title: "Alle komponenter i Aksel",
+      url: "https://aksel.nav.no/komponenter.md",
+    }),
+    { heading: "Alle komponenter", level: 1 },
+    "Oversikt over alle komponenter i Aksel",
+    markdownResults.join("\n\n---\n\n"),
   );
 }
 
