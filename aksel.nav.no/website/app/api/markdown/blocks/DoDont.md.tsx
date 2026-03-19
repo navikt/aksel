@@ -2,9 +2,9 @@ import { type ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types"
 import { buildMarkdown } from "@/app/api/markdown/helpers/build-markdown";
 
 const VARIANT_LABELS: Record<string, string> = {
-  do: "✅ Gjør",
-  dont: "❌ Unngå",
-  warning: "⚠️ Pass på",
+  do: "DO:",
+  dont: "DON'T:",
+  warning: "PASS PÅ:",
 };
 
 function DoDontMarkdown(

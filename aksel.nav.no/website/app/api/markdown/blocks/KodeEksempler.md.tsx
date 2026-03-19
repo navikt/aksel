@@ -18,7 +18,7 @@ function KodeEksemplerMarkdown(
   const markdownExamples: string[] = [];
 
   for (const fil of dir.filer) {
-    fil.title && markdownExamples.push(`### ${fil.title}`);
+    fil.title && markdownExamples.push(`### Eksempel: ${fil.title}`);
     fil.description && markdownExamples.push(`${fil.description}`);
     fil.innhold && markdownExamples.push(`\`\`\`tsx\n${fil.innhold}\n\`\`\``);
   }

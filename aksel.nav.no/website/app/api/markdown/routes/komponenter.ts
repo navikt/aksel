@@ -1,7 +1,7 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 import { ALL_KOMPONENTS_MARKDOWN_QUERY } from "@/app/_sanity/queries";
 import { buildMarkdown } from "../helpers/build-markdown";
-import { buildMetadataHeader } from "../helpers/metadata-header";
+import { buildXMLTag } from "../helpers/metadata-header";
 import { portableMarkdown } from "../helpers/portable-markdown";
 
 async function markdown() {
@@ -29,34 +29,29 @@ async function markdown() {
       continue;
     }
 
-    const slug = item.slug.current;
-    const metadata = buildMetadataHeader({
-      title: item.heading,
-      url: `https://aksel.nav.no/${slug}`,
-      status: item.status?.tag,
-      category: item.kategori,
-      packages: item.kodepakker,
+    const { open, close } = buildXMLTag("component", {
+      name: item.heading,
+      status: item.status?.tag ?? "stable",
+      category: item.kategori ?? "Ukjent",
+      packages: (item.kodepakker ?? []).join(", ") || "Ukjent",
     });
 
     const content = portableMarkdown(item.content);
     markdownResults.push(
       buildMarkdown(
-        metadata,
+        open,
         { heading: item.heading },
         portableMarkdown(item.intro?.body),
         content,
+        close,
       ),
     );
   }
 
   return buildMarkdown(
-    buildMetadataHeader({
-      title: "Alle komponenter i Aksel",
-      url: "https://aksel.nav.no/komponenter.md",
-    }),
-    { heading: "Alle komponenter", level: 1 },
+    { heading: "Alle komponenter i Aksel", level: 1 },
     "Oversikt over alle komponenter i Aksel",
-    markdownResults.join("\n\n---\n\n"),
+    markdownResults.join("\n\n"),
   );
 }
 

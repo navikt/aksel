@@ -32,4 +32,21 @@ function buildMetadataHeader(config: MetadataConfig): string {
   return lines.join("\n");
 }
 
-export { buildMetadataHeader, type MetadataConfig };
+function buildXMLTag(tag: string, attributes: Record<string, string> = {}) {
+  if (attributes) {
+    const attrString = Object.entries(attributes)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(" ");
+    return {
+      open: `<${tag} ${attrString}>`,
+      close: `</${tag}>`,
+    };
+  }
+
+  return {
+    open: `<${tag}>`,
+    close: `</${tag}>`,
+  };
+}
+
+export { buildMetadataHeader, type MetadataConfig, buildXMLTag };

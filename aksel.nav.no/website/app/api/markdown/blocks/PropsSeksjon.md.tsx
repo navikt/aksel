@@ -53,13 +53,17 @@ function PropsSeksjonMarkdown(
       const header = "| Prop | Type | Default | Required | Description |";
       const separator = "| --- | --- | --- | --- | --- |";
       const rows = propList.map((prop) => {
-        const name = prop.deprecated ? `~~${prop.name}~~` : prop.name;
+        const name = prop.deprecated ? `Deprecated: ${prop.name}` : prop.name;
         const type = escapeCell(prop.type ?? "");
         const defaultVal = escapeCell(prop.defaultValue ?? "-");
         const required = prop.required ? "Yes" : "No";
-        const desc = prop.deprecated
+        let desc = prop.deprecated
           ? `**Deprecated:** ${prop.deprecated}`
           : escapeCell(prop.description ?? "");
+
+        if (name === "ref") {
+          desc = "";
+        }
         return `| \`${name}\` | \`${type}\` | ${defaultVal} | ${required} | ${desc} |`;
       });
 
