@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const markdown = await markdownForRoute("/komponenter");
+    const markdown = await markdownForRoute(basePath);
 
     if (!markdown || markdown.length === 0) {
       return new NextResponse(
