@@ -26,6 +26,7 @@ export const SelectionMultiple: Story = {
         selectionMode="multiple"
         defaultSelectedKeys={allRowIds}
       >
+        <h2>Temp out of commision while rewriting selection API</h2>
         <DataTable.Thead>
           <DataTable.Tr>
             <DataTable.Th>Column 1</DataTable.Th>
@@ -34,27 +35,27 @@ export const SelectionMultiple: Story = {
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
-          <DataTable.Tr value="row-1">
+          <DataTable.Tr>
             <DataTable.Td>Test</DataTable.Td>
             <DataTable.Td>Data</DataTable.Td>
             <DataTable.Td>Example</DataTable.Td>
           </DataTable.Tr>
-          <DataTable.Tr value="row-2">
+          <DataTable.Tr>
             <DataTable.Td>Test</DataTable.Td>
             <DataTable.Td>Data</DataTable.Td>
             <DataTable.Td>Example</DataTable.Td>
           </DataTable.Tr>
-          <DataTable.Tr value="row-3">
+          <DataTable.Tr>
             <DataTable.Td>Test</DataTable.Td>
             <DataTable.Td>Data</DataTable.Td>
             <DataTable.Td>Example</DataTable.Td>
           </DataTable.Tr>
-          <DataTable.Tr value="row-4">
+          <DataTable.Tr>
             <DataTable.Td>Test</DataTable.Td>
             <DataTable.Td>Data</DataTable.Td>
             <DataTable.Td>Example</DataTable.Td>
           </DataTable.Tr>
-          <DataTable.Tr value="row-5">
+          <DataTable.Tr>
             <DataTable.Td>Test</DataTable.Td>
             <DataTable.Td>Data</DataTable.Td>
             <DataTable.Td>Example</DataTable.Td>

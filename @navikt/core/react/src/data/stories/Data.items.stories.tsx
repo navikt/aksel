@@ -82,6 +82,12 @@ const userData = [
 
 export const ItemsAsData: Story = {
   render: () => {
-    return <DataTableAuto columnDefinitions={userColumnDef} data={userData} />;
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="multiple"
+      />
+    );
   },
 };

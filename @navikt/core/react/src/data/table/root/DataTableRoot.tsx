@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
-import { useControllableState, useMergeRefs } from "../../../utils/hooks";
+import { useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableCaption,
   type DataTableCaptionProps,
@@ -28,12 +28,9 @@ import {
   type DataTableTheadProps,
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
-import {
-  DataTableContextProvider,
-  type SelectionProps,
-} from "./DataTableRoot.context";
+import { DataTableContextProvider } from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
-import { useTableSelection } from "./useTableSelection";
+import { type SelectionProps } from "./useTableSelection";
 
 interface DataTableProps
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
@@ -218,12 +215,6 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       truncateContent = true,
       shouldBlockNavigation,
       layout = "fixed",
-      selectionMode = "none",
-      selectedKeys: selectedKeysProp,
-      defaultSelectedKeys,
-      onSelectionChange,
-      disabledKeys = [],
-
       ...rest
     },
     forwardedRef,
@@ -236,60 +227,10 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       shouldBlockNavigation,
     });
 
-    const { register, unRegister, values } = useTableSelection();
-
-    const [selectedKeys, setSelectedKeys] = useControllableState({
-      value: selectedKeysProp,
-      defaultValue: defaultSelectedKeys ?? [],
-      onChange: onSelectionChange,
-    });
-
-    const handleSelectionChange = (key: { value: string } | "all") => {
-      if (selectionMode === "none") return;
-
-      const allKeys = Array.from(values);
-      const currentlyAllSelected =
-        selectedKeys === "all" ||
-        allKeys.every((id) => selectedKeys.includes(id));
-
-      if (key === "all") {
-        if (currentlyAllSelected) {
-          setSelectedKeys([]);
-        } else {
-          setSelectedKeys("all");
-        }
-        return;
-      }
-
-      if (selectedKeys === "all") {
-        setSelectedKeys(allKeys.filter((k) => k !== key.value));
-
-        return;
-      }
-
-      const newSelectedKeys = selectedKeys.includes(key.value)
-        ? selectedKeys.filter((k) => k !== key.value)
-        : [...selectedKeys, key.value];
-
-      if (allKeys.every((id) => newSelectedKeys.includes(id))) {
-        setSelectedKeys("all");
-        return;
-      }
-
-      setSelectedKeys?.(newSelectedKeys);
-    };
-
     return (
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
-        selectionMode={selectionMode}
-        selectedKeys={selectedKeys}
-        disabledKeys={disabledKeys}
-        handleSelectionChange={handleSelectionChange}
-        register={register}
-        unRegister={unRegister}
-        values={values}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

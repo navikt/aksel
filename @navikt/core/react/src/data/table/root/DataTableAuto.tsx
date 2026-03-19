@@ -1,18 +1,16 @@
 import React, { forwardRef, useState } from "react";
+import { Checkbox } from "../../../form/checkbox";
 import { cl } from "../../../utils/helpers";
-import { useControllableState, useMergeRefs } from "../../../utils/hooks";
+import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableTd } from "../td/DataTableTd";
 import { DataTableTh } from "../th/DataTableTh";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
-import {
-  DataTableContextProvider,
-  type SelectionProps,
-} from "./DataTableRoot.context";
+import { DataTableContextProvider } from "./DataTableRoot.context";
 import { useTableKeyboardNav } from "./useTableKeyboardNav";
-import { useTableSelection } from "./useTableSelection";
+import { type SelectionProps, useTableSelection } from "./useTableSelection";
 
 interface DataTableProps<T>
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
@@ -64,7 +62,7 @@ interface DataTableProps<T>
    *
    */
   columnDefinitions: ColumnDefinitions<T>;
-  data: T[];
+  data: (T & { id: string | number })[];
 }
 
 function DataTableAutoInner<T>(
@@ -76,8 +74,8 @@ function DataTableAutoInner<T>(
     truncateContent = true,
     shouldBlockNavigation,
     layout = "fixed",
-    selectionMode = "none",
-    selectedKeys: selectedKeysProp,
+    selectionMode: selectionModeProp = "none",
+    selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
     disabledKeys = [],
@@ -95,33 +93,18 @@ function DataTableAutoInner<T>(
     shouldBlockNavigation,
   });
 
-  const { register, unRegister, values } = useTableSelection();
-
-  const [selectedKeys, setSelectedKeys] = useControllableState({
-    value: selectedKeysProp,
-    defaultValue: defaultSelectedKeys ?? [],
-    onChange: onSelectionChange,
-  });
-
-  const handleSelectionChange = (key: { value: string } | "all") => {
-    console.info({ key });
-    setSelectedKeys([]);
-  };
-
-  console.info(data, columnDefinitions);
+  const { getTheadCheckboxProps, selectionMode, getRowCheckboxProps } =
+    useTableSelection({
+      selectionMode: selectionModeProp,
+      selectedKeys,
+      defaultSelectedKeys,
+      onSelectionChange,
+      disabledKeys,
+      data,
+    });
 
   return (
-    <DataTableContextProvider
-      layout={layout}
-      withKeyboardNav={withKeyboardNav}
-      selectionMode={selectionMode}
-      selectedKeys={selectedKeys}
-      disabledKeys={disabledKeys}
-      handleSelectionChange={handleSelectionChange}
-      register={register}
-      unRegister={unRegister}
-      values={values}
-    >
+    <DataTableContextProvider layout={layout} withKeyboardNav={withKeyboardNav}>
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">
           <table
@@ -136,6 +119,11 @@ function DataTableAutoInner<T>(
           >
             <DataTableThead>
               <DataTableTr>
+                {getTheadCheckboxProps && (
+                  <DataTableTd align="center" width="60px">
+                    <Checkbox {...getTheadCheckboxProps()} />
+                  </DataTableTd>
+                )}
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
                     <DataTableTh
@@ -159,6 +147,11 @@ function DataTableAutoInner<T>(
                       rowIndex /* TODO: Should be more flexible to allow user to define the key? */
                     }
                   >
+                    {selectionMode !== "none" && getRowCheckboxProps && (
+                      <DataTableTd align="center" width="60px">
+                        <Checkbox {...getRowCheckboxProps(rowData.id)} />
+                      </DataTableTd>
+                    )}
                     {columnDefinitions.map((colDef, colDefIndex) => {
                       return (
                         <DataTableTd
