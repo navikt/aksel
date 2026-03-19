@@ -52,7 +52,10 @@ function useTableSelection({
     }
 
     if (key === "all") {
-      if (selectedKeys === "all") {
+      if (
+        selectedKeys === "all" ||
+        (Array.isArray(selectedKeys) && selectedKeys.length === data.length)
+      ) {
         setSelectedKeys([]);
       } else {
         const allKeys = data.map((item) => item.id);
