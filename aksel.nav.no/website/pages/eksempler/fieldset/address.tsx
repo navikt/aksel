@@ -1,16 +1,29 @@
-import { Fieldset, TextField, VStack } from "@navikt/ds-react";
+import { Fieldset, Heading, TextField, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <VStack gap="space-36">
-      <Fieldset legend="Privat adresse">
+      <Fieldset
+        legend={
+          <Heading as="span" size="small">
+            Privat adresse
+          </Heading>
+        }
+      >
         <TextField label="Gate" />
         <TextField label="Postnummer" htmlSize={8} />
         <TextField label="Sted" />
         <TextField label="Land" style={{ maxWidth: "300px" }} />
       </Fieldset>
-      <Fieldset legend="Arbeidsgivers adresse">
+
+      <Fieldset
+        legend={
+          <Heading as="span" size="small">
+            Arbeidsgivers adresse
+          </Heading>
+        }
+      >
         <TextField label="Gate" />
         <TextField label="Postnummer" htmlSize={8} />
         <TextField label="Sted" />
@@ -30,5 +43,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Fieldset kan brukes for å legge til ledetekst på felter som opptrer flere ganger.",
+  desc: "Fieldset kan brukes for å legge til ledetekst på felter som opptrer flere ganger. (Her har vi justert opp størrelsen på legend-teksten for å skape et tydeligere hierarki.)",
 };
