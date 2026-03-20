@@ -203,35 +203,40 @@
 }
 
 .aksel-date__field-input {
-  &.aksel-text-field__input {
-    padding-right: var(--ax-space-48);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+
+  &:focus-visible {
+    outline: none;
   }
 
-  .aksel-form-field--small & {
-    padding-right: var(--ax-space-32);
+  .aksel-date__field--error &:not(:disabled) {
+    box-shadow:
+      inset -2px 0 0 0 var(--ax-border-danger-strong),
+      inset 0 0 0 1px var(--ax-border-danger-strong);
   }
 }
 
 .aksel-date__field-button {
-  position: absolute;
-  right: 0.0625rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--ax-text-neutral);
-  display: inline-flex;
-  cursor: pointer;
-  margin: 0;
-  text-decoration: none;
-  border: none;
-  background: none;
-  border-radius: calc(var(--ax-radius-8) - 1px);
-  padding: var(--ax-space-12);
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  height: calc(100% - 0.125rem);
+  --__axc-button-border-width: 1px;
+  --__axc-button-border-color: var(--ax-border-neutral);
+
   border-start-start-radius: 0;
   border-end-start-radius: 0;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  .aksel-date__field:not(.aksel-date__field--readonly):has(.aksel-date__field-input:not(:disabled)) &:hover,
+  .aksel-date__field:not(.aksel-date__field--readonly, .aksel-date__field--error):has(
+      .aksel-date__field-input:is(:focus-visible, :hover):not(:disabled)
+    )
+    & {
+    --__axc-button-border-color: var(--ax-border-strong);
+  }
 
   .aksel-form-field--small & {
     padding: var(--ax-space-4);
@@ -244,19 +249,24 @@
 
   /* Readonly */
   .aksel-date__field--readonly & {
-    cursor: default;
-  }
+    --__axc-button-border-color: var(--ax-border-neutral-subtleA);
 
-  &:focus-visible {
-    outline-color: var(--ax-border-focus);
+    cursor: default;
+    opacity: 1;
+    background-color: var(--ax-bg-neutral-moderate);
+    color: var(--ax-text-neutral);
   }
 }
 
 .aksel-date__field-wrapper {
   display: inline-flex;
-  align-items: center;
-  position: relative;
   width: fit-content;
+  border-radius: var(--ax-radius-8);
+
+  &:has(.aksel-date__field-input:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }
 
 .aksel-date__week-row {

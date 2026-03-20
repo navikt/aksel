@@ -248,7 +248,11 @@ export const useDatepicker = (
 
     if (day && !selected) {
       handleOpen(false);
-      anchorRef?.focus();
+      // Before we can focus the open button, we have to wait until the title is updated and
+      // (on mobile) the Modal is closed (native modal dialogs doesn't allow focus outside).
+      queueMicrotask(() =>
+        focusElement(anchorRef, { sync: false, preventScroll: true }),
+      );
     }
 
     if (selected) {
