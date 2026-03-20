@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 8.8.0
+
+### Minor Changes
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+### Patch Changes
+
+- Dialog: Improved scrollbar handling when opening dialog-popup. ([#4703](https://github.com/navikt/aksel/pull/4703))
+
+- useDatepicker, useMonthpicker: Add JsDoc to validation object ([#4722](https://github.com/navikt/aksel/pull/4722))
+
+- Dialog: Fixed issue where tabbing would not always work with links. ([#4747](https://github.com/navikt/aksel/pull/4747))
+
+- DatePicker, MonthPicker: Removed controlled tabindex on Input-button based on open-state. ([#4714](https://github.com/navikt/aksel/pull/4714))
+
+- Updated dependencies [[`232ed45`](https://github.com/navikt/aksel/commit/232ed4569414e70f5a6f8e7bab584226f191a889)]:
+  - @navikt/ds-tokens@8.8.0
+  - @navikt/aksel-icons@8.8.0
+
 ## 8.7.0
 
 ### Minor Changes

@@ -1,5 +1,37 @@
 # Changelog
 
+## 8.8.0
+
+### @navikt/aksel-stylelint
+
+- ReadMore: Deprecated classes `aksel-read-more--open` and `aksel-read-more__content--closed`. Use `data-state` instead to access state. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+### @navikt/ds-css
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+* GlobalAlert, LocalAlert: Content outline changed from 4px to 2px. ([#4745](https://github.com/navikt/aksel/pull/4745))
+
+### @navikt/ds-react
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+* Dialog: Improved scrollbar handling when opening dialog-popup. ([#4703](https://github.com/navikt/aksel/pull/4703))
+
+* useDatepicker, useMonthpicker: Add JsDoc to validation object ([#4722](https://github.com/navikt/aksel/pull/4722))
+
+* Dialog: Fixed issue where tabbing would not always work with links. ([#4747](https://github.com/navikt/aksel/pull/4747))
+
+* DatePicker, MonthPicker: Removed controlled tabindex on Input-button based on open-state. ([#4714](https://github.com/navikt/aksel/pull/4714))
+
+### @navikt/ds-tokens
+
+- Tokens: `--ax-opacity-disabled` adjusted from 0.3 to 0.45. ([#4734](https://github.com/navikt/aksel/pull/4734))
+
 ## 8.7.0
 
 ### @navikt/ds-css

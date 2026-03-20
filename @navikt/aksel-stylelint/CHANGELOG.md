@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 8.8.0
+
+### Patch Changes
+
+- ReadMore: Deprecated classes `aksel-read-more--open` and `aksel-read-more__content--closed`. Use `data-state` instead to access state. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
 ## 8.7.0
 
 ## 8.6.0
