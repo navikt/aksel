@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 8.8.0
+
+### Minor Changes
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+### Patch Changes
+
+- GlobalAlert, LocalAlert: Content outline changed from 4px to 2px. ([#4745](https://github.com/navikt/aksel/pull/4745))
+
 ## 8.7.0
 
 ### Minor Changes
