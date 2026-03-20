@@ -87,6 +87,21 @@ export const ItemsAsData: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selectionMode="multiple"
+        onSelectionChange={console.info}
+      />
+    );
+  },
+};
+
+export const ItemsAsDataWithCustomRowId: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="multiple"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.foo + row.bar}
       />
     );
   },

@@ -63,7 +63,8 @@ interface DataTableProps<T>
    *
    */
   columnDefinitions: ColumnDefinitions<T>;
-  data: (T & { id: string | number })[];
+  data: T[];
+  getRowId?: (rowData: T, index: number) => string | number;
 }
 
 function DataTableAutoInner<T>(
@@ -82,6 +83,7 @@ function DataTableAutoInner<T>(
     disabledKeys = [],
     data,
     columnDefinitions,
+    getRowId,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -94,7 +96,11 @@ function DataTableAutoInner<T>(
     shouldBlockNavigation,
   });
 
-  const { getTheadCheckboxProps, selectionMode, getRowCheckboxProps } =
+  const resolvedGetRowId =
+    getRowId ??
+    (((_row: T, index: number) => index) as (rowData: T) => string | number);
+
+  const { allKeys, getTheadCheckboxProps, selectionMode, getRowCheckboxProps } =
     useTableSelection({
       selectionMode: selectionModeProp,
       selectedKeys,
@@ -102,6 +108,7 @@ function DataTableAutoInner<T>(
       onSelectionChange,
       disabledKeys,
       data,
+      getRowId: resolvedGetRowId,
     });
 
   return (
@@ -142,15 +149,12 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
+                const rowId = allKeys[rowIndex];
                 return (
-                  <DataTableTr
-                    key={
-                      rowIndex /* TODO: Should be more flexible to allow user to define the key? */
-                    }
-                  >
+                  <DataTableTr key={rowId}>
                     {selectionMode !== "none" && getRowCheckboxProps && (
                       <DataTableTd align="center" width="60px">
-                        <Checkbox {...getRowCheckboxProps(rowData.id)} />
+                        <Checkbox {...getRowCheckboxProps(rowId)} />
                       </DataTableTd>
                     )}
                     {columnDefinitions.map((colDef, colDefIndex) => {
