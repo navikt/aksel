@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useState } from "react";
 import { Checkbox } from "../../../form/checkbox";
 import { cl } from "../../../utils/helpers";

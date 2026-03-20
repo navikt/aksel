@@ -27,8 +27,6 @@ import { IconPageProvider } from "./IconPage.provider";
 import { IconPageSidebar } from "./IconPage.sidebar";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
-/* eslint-disable import/namespace */
-
 function IconPage({
   iconName,
   iconQuery,
