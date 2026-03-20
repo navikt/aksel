@@ -33,7 +33,6 @@ const InfoCardMessage = forwardRef<HTMLDivElement, InfoCardMessageProps>(
       <div
         ref={forwardedRef}
         className={cl(className, "aksel-base-alert__message")}
-        data-size={context.size}
         {...restProps}
       >
         <div className="aksel-base-alert__icon">{icon}</div>
