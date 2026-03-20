@@ -653,6 +653,46 @@ export const AriaAttributes: Story = {
   },
 };
 
+export const TabToLinks: Story = {
+  render: () => {
+    return (
+      <Dialog defaultOpen aria-labelledby="popup-title">
+        <DialogPopup className="popupCSS" data-testid="popup">
+          <DialogTitle id="popup-title">Dialog title</DialogTitle>
+          <Dialog.Body>
+            <input placeholder="test" type="text" />
+            <a data-testid="link-1" href="#123">
+              Test link
+            </a>
+            <a data-testid="link-2" href="#123">
+              Test link
+            </a>
+            <a data-testid="link-3" href="#123">
+              Test link
+            </a>
+            <a data-testid="link-4" href="#123">
+              Test link
+            </a>
+          </Dialog.Body>
+        </DialogPopup>
+      </Dialog>
+    );
+  },
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas } = testUtils(canvasElement, args);
+
+    await userEvent.tab();
+    expect(canvas.getByPlaceholderText("test")).toHaveFocus();
+    await userEvent.tab();
+    expect(canvas.getByTestId("link-1")).toHaveFocus();
+    await userEvent.tab();
+    expect(canvas.getByTestId("link-2")).toHaveFocus();
+    await userEvent.tab({ shift: true });
+    expect(canvas.getByTestId("link-1")).toHaveFocus();
+  },
+};
+
 /* ------------------------------- Test setup ------------------------------- */
 type BaseDialogProps = {
   rootProps?: Omit<DialogProps, "children"> & { children?: React.ReactNode };
