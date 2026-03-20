@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { Tag } from "../../tag";
 import { DataTable } from "../table";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import DataTableAuto from "../table/root/DataTableAuto";
@@ -42,7 +43,11 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "bar",
     header: "Bar",
-    cell: ({ bar }) => bar,
+    cell: ({ bar }) => (
+      <Tag variant="strong" size="xsmall">
+        {bar}
+      </Tag>
+    ),
   },
   {
     id: "on",
@@ -82,14 +87,7 @@ const userData = [
 
 export const ItemsAsData: Story = {
   render: () => {
-    return (
-      <DataTableAuto
-        columnDefinitions={userColumnDef}
-        data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
-      />
-    );
+    return <DataTableAuto columnDefinitions={userColumnDef} data={userData} />;
   },
 };
 
@@ -100,6 +98,34 @@ export const ItemsAsDataWithCustomRowId: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selectionMode="multiple"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.foo + row.bar}
+      />
+    );
+  },
+};
+
+export const SelectionModeMultiple: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="multiple"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.foo + row.bar}
+      />
+    );
+  },
+};
+
+export const SelectionModeSingle: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="single"
         onSelectionChange={console.info}
         getRowId={(row) => row.foo + row.bar}
       />

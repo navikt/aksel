@@ -3,6 +3,11 @@ import React, { forwardRef, useState } from "react";
 import { Checkbox } from "../../../form/checkbox";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
+import {
+  type SelectionProps,
+  useTableSelection,
+} from "../hooks/useTableSelection";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableTd } from "../td/DataTableTd";
 import { DataTableTh } from "../th/DataTableTh";
@@ -10,8 +15,6 @@ import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
 import { DataTableContextProvider } from "./DataTableRoot.context";
-import { useTableKeyboardNav } from "./useTableKeyboardNav";
-import { type SelectionProps, useTableSelection } from "./useTableSelection";
 
 interface DataTableProps<T>
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
@@ -100,16 +103,15 @@ function DataTableAutoInner<T>(
     getRowId ??
     (((_row: T, index: number) => index) as (rowData: T) => string | number);
 
-  const { allKeys, getTheadCheckboxProps, selectionMode, getRowCheckboxProps } =
-    useTableSelection({
-      selectionMode: selectionModeProp,
-      selectedKeys,
-      defaultSelectedKeys,
-      onSelectionChange,
-      disabledKeys,
-      data,
-      getRowId: resolvedGetRowId,
-    });
+  const selection = useTableSelection({
+    selectionMode: selectionModeProp,
+    selectedKeys,
+    defaultSelectedKeys,
+    onSelectionChange,
+    disabledKeys,
+    data,
+    getRowId: resolvedGetRowId,
+  });
 
   return (
     <DataTableContextProvider layout={layout} withKeyboardNav={withKeyboardNav}>
@@ -127,14 +129,20 @@ function DataTableAutoInner<T>(
           >
             <DataTableThead>
               <DataTableTr>
-                {getTheadCheckboxProps && (
-                  <DataTableTd align="center" width="60px">
-                    <Checkbox {...getTheadCheckboxProps()} />
-                  </DataTableTd>
+                {selection.selectionMode === "multiple" && (
+                  /* TODO: Overflow/focus is clipped. Alignment is off */
+                  /* TODO: Should not be resizable */
+                  <DataTableTh textAlign="center" width="60px">
+                    <Checkbox {...selection.getTheadCheckboxProps()} />
+                  </DataTableTh>
+                )}
+                {selection.selectionMode === "single" && (
+                  <DataTableTd align="center" width="60px" />
                 )}
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
                     <DataTableTh
+                      /* TODO: Make these user-changable */
                       maxWidth="400px"
                       minWidth="100px"
                       defaultWidth="100%"
@@ -149,12 +157,22 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
-                const rowId = allKeys[rowIndex];
+                const rowId = selection.allKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId}>
-                    {selectionMode !== "none" && getRowCheckboxProps && (
+                    {selection.selectionMode === "multiple" && (
                       <DataTableTd align="center" width="60px">
-                        <Checkbox {...getRowCheckboxProps(rowId)} />
+                        <Checkbox {...selection.getRowCheckboxProps(rowId)} />
+                      </DataTableTd>
+                    )}
+                    {selection.selectionMode === "single" && (
+                      <DataTableTd align="center" width="60px">
+                        {/**
+                         * TODO: This should be a radio, but our current Radio implementation has some issues:
+                         * - Checked cant be controlled outside of radiogroup
+                         * - Cant hide label
+                         * */}
+                        <Checkbox {...selection.getRowRadioProps(rowId)} />
                       </DataTableTd>
                     )}
                     {columnDefinitions.map((colDef, colDefIndex) => {

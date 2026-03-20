@@ -14,7 +14,7 @@ import {
   getNavigationAction,
   shouldBlockNavigation,
 } from "../helpers/table-keyboard";
-import { useGridCache } from "../hooks/useGridCache";
+import { useGridCache } from "./useGridCache";
 
 type UseTableKeyboardNavOptions = {
   enabled: boolean;

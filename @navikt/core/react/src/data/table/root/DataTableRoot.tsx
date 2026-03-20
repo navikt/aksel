@@ -9,6 +9,8 @@ import {
   DataTableEmptyState,
   type DataTableEmptyStateProps,
 } from "../empty-state/DataTableEmptyState";
+import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
+import { type SelectionProps } from "../hooks/useTableSelection";
 import {
   DataTableLoadingState,
   type DataTableLoadingStateProps,
@@ -29,8 +31,6 @@ import {
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 import { DataTableContextProvider } from "./DataTableRoot.context";
-import { useTableKeyboardNav } from "./useTableKeyboardNav";
-import { type SelectionProps } from "./useTableSelection";
 
 interface DataTableProps
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
