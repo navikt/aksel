@@ -117,7 +117,7 @@
   }
 
   &[data-variant="strong"] {
-    outline: 10px solid var(--ax-border-default);
+    outline: 2px solid var(--ax-border-default);
     outline-offset: -2px;
 
     &[data-color="neutral"] {
