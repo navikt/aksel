@@ -32,6 +32,7 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
       href={href}
       prefetch={false}
       data-current={isActive()}
+      aria-current={isActive() ? "page" : undefined}
       className={styles.headerLink}
       onClick={() => umamiTrack("navigere", { kilde: "header", url: href })}
     >
