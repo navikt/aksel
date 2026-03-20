@@ -1,15 +1,8 @@
 import { buildMarkdown } from "../helpers/build-markdown";
-import { buildMetadataHeader } from "../helpers/metadata-header";
 
 const title = "Aksel designsystem - Dokumentasjon for LLMs";
 async function markdown() {
-  const metadata = buildMetadataHeader({
-    title,
-    url: `https://aksel.nav.no/llm.md`,
-  });
-
   return buildMarkdown(
-    metadata,
     { heading: title, level: 1 },
     { heading: "Notes", level: 2 },
     "This page is a work in progress. All content should be treated as temporary.",
