@@ -47,7 +47,7 @@ jobs:
           buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
           untraced: "**/package.json|yarn.lock|**/*.md"
-          externals: "**/core/css/*.css|**/core/css/baseline/*.css|**/core/css/form/*.css|**/core/css/primitives/*.css"
+          externals: "**/core/css/src/**/*.css"
           traceChanged: true
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
