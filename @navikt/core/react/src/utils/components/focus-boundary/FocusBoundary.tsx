@@ -31,7 +31,6 @@ interface FocusBoundaryProps extends React.HTMLAttributes<HTMLDivElement> {
    * tabbing. If focus is moved outside the boundary programmatically or by
    * pointer, it will not be moved back.
    *
-   * - Links (`<a>` elements), are not considered tabbable for the purpose of looping.
    * - Hidden inputs (i.e. `<input type="hidden">`) are not considered tabbable.
    * - Elements that are `display: none` or `visibility: hidden` are not considered tabbable.
    * - Elements with `tabIndex < 0` are not considered tabbable.
@@ -392,7 +391,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
  * Returns the first and last tabbable elements inside a container as a tuple.
  */
 function getTabbableEdges(container: HTMLElement) {
-  const candidates = getTabbableCandidates(container);
+  const candidates = getTabbableCandidates(container, { omitLinks: false });
   return [
     findFirstVisible(candidates, container),
     findFirstVisible(candidates.reverse(), container),

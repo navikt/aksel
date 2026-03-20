@@ -5,7 +5,10 @@
  * See: https://developer.mozilla.org/en-US/docs/Web/API/TreeWalker
  * Credit: https://github.com/discord/focus-layers/blob/master/src/util/wrapFocus.tsx#L1
  */
-function getTabbableCandidates(container: HTMLElement) {
+function getTabbableCandidates(
+  container: HTMLElement,
+  { omitLinks = true } = {},
+) {
   const nodes: HTMLElement[] = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
     acceptNode: (node: any) => {
@@ -29,7 +32,7 @@ function getTabbableCandidates(container: HTMLElement) {
     nodes.push(walker.currentNode as HTMLElement);
   }
 
-  return removeLinks(nodes);
+  return omitLinks ? removeLinks(nodes) : nodes;
 }
 
 function removeLinks(items: HTMLElement[]) {
