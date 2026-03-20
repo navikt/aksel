@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
   "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "javascript": {
     "jsxRuntime": "reactClassic"
@@ -15,8 +15,23 @@
       "tailwindDirectives": true
     }
   },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
-    "maxSize": 2000000
+    "maxSize": 2000000,
+    "includes": [
+      "**",
+      "!**/public",
+      "!**/examples",
+      "!**/codemod/**/*.js",
+      "!**/modal/dialog-polyfill.ts",
+      "!**/_sanity/query-types.ts",
+      "!**/transforms/**/*.input.*",
+      "!**/transforms/**/*.output.*"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -57,24 +72,6 @@
         "useArrowFunction": "off",
         "noImportantStyles": "off"
       }
-    },
-    "includes": [
-      "**",
-      "!**/node_modules/**",
-      "!**/lib/**",
-      "!**/public/**",
-      "!**/examples/**",
-      "!**/esm/**",
-      "!**/cjs/**",
-      "!**/dist/**",
-      "!**/figma/**/plugin.js",
-      "!**/codemod/**/*.js",
-      "!**/tailwind/tailwind.config.js",
-      "!**/.next/**",
-      "!**/modal/dialog-polyfill.ts",
-      "!**/_sanity/query-types.ts",
-      "!**/transforms/**/*.input.*",
-      "!**/transforms/**/*.output.*"
-    ]
+    }
   }
 }
