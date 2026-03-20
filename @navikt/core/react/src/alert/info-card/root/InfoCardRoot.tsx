@@ -8,6 +8,10 @@ import {
   InfoCardHeader,
   type InfoCardHeaderProps,
 } from "../header/InfoCardHeader";
+import {
+  InfoCardMessage,
+  type InfoCardMessageProps,
+} from "../message/InfoCardMessage";
 import { InfoCardTitle, type InfoCardTitleProps } from "../title/InfoCardTitle";
 
 type InfoCardProps = Omit<
@@ -70,6 +74,19 @@ interface InfoCardComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Content: typeof InfoCardContent;
+
+  /**
+   * @see 🏷️ {@link InfoCardMessageProps}
+   * @example
+   * ```jsx
+   * <InfoCard data-color="info">
+   *   <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+   *     Message contents
+   *   </InfoCard.Message>
+   * </InfoCard>
+   * ```
+   */
+  Message: typeof InfoCardMessage;
 }
 
 /**
@@ -111,12 +128,14 @@ export const InfoCard = forwardRef<HTMLDivElement, InfoCardProps>(
 InfoCard.Header = InfoCardHeader;
 InfoCard.Title = InfoCardTitle;
 InfoCard.Content = InfoCardContent;
+InfoCard.Message = InfoCardMessage;
 
 export default InfoCard;
-export { InfoCardContent, InfoCardHeader, InfoCardTitle };
+export { InfoCardContent, InfoCardHeader, InfoCardTitle, InfoCardMessage };
 export type {
   InfoCardProps,
   InfoCardHeaderProps,
   InfoCardTitleProps,
   InfoCardContentProps,
+  InfoCardMessageProps,
 };
