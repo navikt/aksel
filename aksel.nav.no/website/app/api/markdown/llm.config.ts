@@ -1,15 +1,17 @@
+import Grunnleggende from "./routes/grunnleggende";
 import Komponenter from "./routes/komponenter";
 /* import Komponent from "./routes/komponent"; */
 import LLM from "./routes/llm";
+import Maler from "./routes/maler";
 
 type MarkdownRoute = () => Promise<string>;
 
 type Routes = Record<`/${string}`, MarkdownRoute>;
 
 const MARKDOWN_ROUTES: Routes = {
-  /* Uncomment to test route */
   "/komponenter": Komponenter.markdown,
-  /* "/komponent": Komponent.markdown, */
+  "/grunnleggende": Grunnleggende.markdown,
+  "/monster-maler": Maler.markdown,
   "/llm": LLM.markdown,
 };
 
