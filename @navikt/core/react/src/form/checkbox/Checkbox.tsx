@@ -50,9 +50,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           as="label"
           htmlFor={inputProps.id}
           size={size}
-          className={cl("aksel-checkbox__label", {
-            "aksel-sr-only": props.hideLabel,
-          })}
+          className="aksel-checkbox__label"
+          visuallyHidden={props.hideLabel}
         >
           {!nested && readOnly && <ReadOnlyIconWithTitle />}
           {props.children}
