@@ -335,15 +335,35 @@
   padding: 0;
 }
 
+.aksel-data-drag-and-drop__drag-handler__button {
+  height: 1.5rem;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  &:hover {
+    cursor: grab;
+  }
+
+  &:focus-visible,
+  &[data-drag-handler-active="true"] {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -1px;
+    border-radius: var(--ax-radius-8);
+  }
+}
+
 .aksel-data-table__drag-and-drop-item {
-  &[data-dragging="true"] {
-    background: var(--ax-bg-default);
-  }
+  background-color: var(--ax-bg-default);
 
-  &[data-mouse-dragging="true"]:not(:active) {
+  &[data-overlay="true"] {
+    width: 100%;
     opacity: 0.8;
+    box-shadow: var(--ax-shadow-dialog);
   }
 
+  /* TODO - might be removable */
   &[data-keyboard-dragging="true"] {
     .aksel-data-drag-and-drop__drag-handler__button {
       outline: 2px solid var(--ax-border-focus);
@@ -352,23 +372,8 @@
     }
   }
 
-  &[data-drop-target="true"] {
+  &[data-drop-target="true"]:not([data-overlay="true"]) {
     background: var(--ax-bg-neutral-moderate);
-  }
-}
-
-.aksel-data-drag-and-drop__drag-handler__button {
-  cursor: grab;
-  height: 1.5rem;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-
-  &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: -1px;
-    border-radius: var(--ax-radius-8);
   }
 }
 
@@ -376,8 +381,10 @@
   height: 1.2rem;
 }
 
-.aksel-data-drag-and-drop__drag-handler__alt {
+.aksel-data-drag-and-drop__drag-handler__alt,
+.aksel-data-drag-and-drop__drag-handler {
   position: relative;
+  height: 1.5rem;
 
   .aksel-data-drag-and-drop__drag-handler__arrow {
     position: absolute;
@@ -454,4 +461,14 @@
 
 .aksel-data-table tr .aksel-checkbox:focus-within::after {
   inset: 0;
+}
+
+/* TODO -
+* This is needed to prevent the cursor from changing back to default when dragging over interactive elements in the row.
+* Not sure if this is the best approach or breaks styling elsewhere */
+html[data-dragging="true"],
+html[data-dragging="true"] *,
+html[data-dragging="true"] *::before,
+html[data-dragging="true"] *::after {
+  cursor: grabbing !important;
 }
