@@ -91,9 +91,9 @@
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitest/browser": "4.0.18",
-    "@vitest/browser-playwright": "4.0.18",
-    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/browser": "4.1.0",
+    "@vitest/browser-playwright": "4.1.0",
+    "@vitest/coverage-v8": "4.1.0",
     "@vitest/eslint-plugin": "1.6.9",
     "chromatic": "15.1.0",
     "concurrently": "9.2.1",
@@ -127,7 +127,7 @@
     "vite": "^7.2.4",
     "vite-plugin-turbosnap": "^1.0.3",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "4.0.18"
+    "vitest": "4.1.0"
   },
   "packageManager": "yarn@4.12.0"
 }
