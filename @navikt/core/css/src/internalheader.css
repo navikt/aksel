@@ -67,9 +67,25 @@
   gap: var(--ax-space-8);
   border-left: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
+  text-decoration: none;
+  position: relative;
 
   &:hover {
     background: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  &[data-active="true"] {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: -1px;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-color: var(--ax-border-strong);
+    }
   }
 }
 
