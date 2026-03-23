@@ -1,8 +1,5 @@
 .aksel-checkbox,
 .aksel-radio {
-  --__axc-radio-checkbox-marker-size: 1.5rem;
-  --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
-
   position: relative;
   width: fit-content;
   display: grid;
@@ -58,8 +55,29 @@
 
 /* Checkbox has a wrapper around input and checkmark svg (consider creating the checkmark with css in the future) */
 .aksel-checkbox__input-wrapper {
+  --__axc-radio-checkbox-marker-size: 1.5rem;
+  --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
+
   position: relative;
   height: var(--__axc-radio-checkbox-marker-size);
+
+  .aksel-checkbox--small & {
+    --__axc-radio-checkbox-marker-size: 1.25rem;
+    --__axc-radio-checkbox-marker-target: 2rem;
+  }
+
+  &[data-standalone="true"] {
+    margin: calc(calc(var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2);
+  }
+
+  &[data-standalone="true"] > .aksel-checkbox__input:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  &[data-compact="true"] {
+    --__axc-radio-checkbox-marker-target: 2rem;
+  }
 }
 
 /* The input acts as a container for the marker (since the click area should be larger than the visible marker) */
@@ -95,7 +113,28 @@
 
 /* Radio marker should be round */
 .aksel-radio__input {
+  --__axc-radio-checkbox-marker-size: 1.5rem;
+  --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
+
+  .aksel-radio--small & {
+    --__axc-radio-checkbox-marker-size: 1.25rem;
+    --__axc-radio-checkbox-marker-target: 2rem;
+  }
+
   border-radius: var(--ax-radius-full);
+
+  &[data-standalone="true"] {
+    margin: calc(calc(var(--__axc-radio-checkbox-marker-target) - var(--__axc-radio-checkbox-marker-size)) / 2);
+
+    &:focus-visible {
+      outline: 3px solid var(--ax-border-focus);
+      outline-offset: 3px;
+    }
+  }
+
+  &[data-compact="true"] {
+    --__axc-radio-checkbox-marker-target: 2rem;
+  }
 }
 
 /* Checkbox indeterminate: Center the icon */

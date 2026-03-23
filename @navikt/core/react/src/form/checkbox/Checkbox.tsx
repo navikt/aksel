@@ -43,6 +43,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }) || undefined
           }
           indeterminate={indeterminate ?? false}
+          standalone={false}
         />
         <BodyShort
           as="label"
@@ -59,6 +60,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             id={descriptionId}
             size={size}
             className="aksel-form-field__subdescription aksel-checkbox__description"
+            visuallyHidden={hideLabel}
           >
             {description}
           </BodyShort>

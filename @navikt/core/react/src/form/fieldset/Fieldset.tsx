@@ -108,9 +108,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             id={legendId}
             size={size}
             as="legend"
-            className={cl("aksel-fieldset__legend", {
-              "aksel-sr-only": !!hideLegend,
-            })}
+            className="aksel-fieldset__legend"
+            visuallyHidden={!!hideLegend}
           >
             {readOnly &&
               (_fieldsSupportNativeReadOnly ? (
@@ -122,9 +121,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           </Label>
           {!!description && (
             <BodyShort
-              className={cl("aksel-fieldset__description", {
-                "aksel-sr-only": !!hideLegend,
-              })}
+              className="aksel-fieldset__description"
+              visuallyHidden={!!hideLegend}
               id={inputDescriptionId}
               size={size ?? "medium"}
               as="div"

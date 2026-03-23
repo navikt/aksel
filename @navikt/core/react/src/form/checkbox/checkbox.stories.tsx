@@ -4,6 +4,7 @@ import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Checkbox from "./Checkbox";
 import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";
+import { CheckboxInput } from "./checkbox-input/CheckboxInput";
 
 const meta: Meta<typeof CheckboxGroup> = {
   title: "ds-react/Checkbox",
@@ -140,6 +141,7 @@ export const GroupDescription = () => (
       legend="Group legend"
       description="Group description"
       size="small"
+      hideLegend
     >
       <Checkbox value="tekst">Checkboxtekst</Checkbox>
     </CheckboxGroup>
@@ -344,6 +346,22 @@ export const ColorRole = () => (
   </div>
 );
 
+export const StandaloneInput = () => (
+  <div>
+    <CheckboxInput value="val-1" />
+    <CheckboxInput value="val-2" />
+    <CheckboxInput value="val-2" />
+  </div>
+);
+
+export const StandaloneInputCompact = () => (
+  <div>
+    <CheckboxInput value="val-1" compact />
+    <CheckboxInput value="val-2" compact />
+    <CheckboxInput value="val-2" compact />
+  </div>
+);
+
 export const Chromatic = renderStoriesForChromatic({
   Group,
   GroupError,
@@ -353,6 +371,8 @@ export const Chromatic = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
@@ -364,6 +384,8 @@ export const ChromaticDark = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 ChromaticDark.globals = { theme: "dark" };
 
@@ -376,6 +398,8 @@ export const ChromaticPrint = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 
 ChromaticPrint.parameters = {

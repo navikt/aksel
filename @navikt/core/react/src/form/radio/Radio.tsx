@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { omit, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
+import { RadioInput } from "./radio-input/RadioInput";
 import { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
 
@@ -21,7 +22,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         })}
         data-color={hasError ? "danger" : props["data-color"]}
       >
-        <input
+        <RadioInput
           ref={forwardedRef}
           {...omit(props, ["children", "size", "description", "readOnly"])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
@@ -30,7 +31,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
               [descriptionId]: description,
             }) || undefined
           }
-          className="aksel-radio__input"
+          standalone={false}
         />
         <BodyShort
           as="label"

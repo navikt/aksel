@@ -4,10 +4,18 @@ import { useMergeRefs } from "../../../utils/hooks";
 type CheckboxInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   indeterminate?: boolean;
   children?: never;
+  standalone?: boolean;
+  /**
+   * Reduces psuedo-element target-size.
+   */
+  compact?: boolean;
 };
 
 const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
-  ({ indeterminate, ...rest }: CheckboxInputProps, forwardedRef) => {
+  (
+    { indeterminate, standalone = true, compact, ...rest }: CheckboxInputProps,
+    forwardedRef,
+  ) => {
     const indeterminateRef = useCallback(
       (el: HTMLInputElement | null) => {
         if (el) {
@@ -20,7 +28,11 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
     const mergedRef = useMergeRefs(indeterminateRef, forwardedRef);
 
     return (
-      <div className="aksel-checkbox__input-wrapper">
+      <div
+        className="aksel-checkbox__input-wrapper"
+        data-standalone={standalone}
+        data-compact={compact}
+      >
         <input
           {...rest}
           type="checkbox"
