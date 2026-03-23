@@ -264,8 +264,13 @@ export const UserWithMenuGridIconMenu = () => (
 export const ActiveButton = () => (
   <InternalHeader style={{ width: 600 }}>
     <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
-    <InternalHeader.Button isActive>Link 1</InternalHeader.Button>
-    <InternalHeader.Button>Link 2</InternalHeader.Button>
+    <InternalHeader.Button isActive as="a" href="#123">
+      Link 1
+    </InternalHeader.Button>
+    <InternalHeader.Button as="a" href="#123">
+      Link 2
+    </InternalHeader.Button>
+    <InternalHeader.Button>Button 1</InternalHeader.Button>
     <InternalHeader.Button isActive>Button 1</InternalHeader.Button>
   </InternalHeader>
 );
