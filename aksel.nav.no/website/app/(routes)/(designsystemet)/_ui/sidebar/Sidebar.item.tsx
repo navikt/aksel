@@ -51,6 +51,7 @@ function DesignsystemSidebarItem(props: {
         className={`${styles.navListItemLink} ${styles.navListNotch}`}
         data-notch={active}
         data-current={active}
+        aria-current={active ? "page" : undefined}
         onClick={() =>
           umamiTrack("navigere", {
             kilde: "sidebar",

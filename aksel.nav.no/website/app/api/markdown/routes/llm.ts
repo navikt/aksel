@@ -19,6 +19,16 @@ const docPages: { title: string; url: string; desc: string }[] = [
     url: "https://aksel.nav.no/komponenter.md",
     desc: "Complete list of all avaliable LLMs accessible documentation for React components.",
   },
+  {
+    title: "Foundations",
+    url: "https://aksel.nav.no/grunnleggende.md",
+    desc: "Complete list of all avaliable LLMs accessible documentation for the foundations of Aksel designsystem.",
+  },
+  {
+    title: "Templates and Patterns",
+    url: "https://aksel.nav.no/monster-maler.md",
+    desc: "Complete list of all avaliable LLMs accessible documentation for Templates and patterns build on Aksel designsystem.",
+  },
 ];
 
 export default { markdown };

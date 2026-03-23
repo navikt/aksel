@@ -448,9 +448,28 @@ export {
 
 /* MARKDOWN QUERIES */
 
-/* TODO: Testing query for markdown. Will fetch all komponenter-routes when implemented */
 const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
   `*[_type == "komponent_artikkel" && defined(slug.current)]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+const ALL_GRUNNLEGGENDE_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "ds_artikkel" && defined(slug.current)]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+const ALL_TEMPLATES_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "templates_artikkel" && defined(slug.current)]{
     ...,
     content[]{
       ...,
@@ -469,4 +488,9 @@ const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
   }`,
 );
 
-export { ALL_KOMPONENTS_MARKDOWN_QUERY, KOMPONENT_BY_SLUG_MARKDOWN_QUERY };
+export {
+  ALL_KOMPONENTS_MARKDOWN_QUERY,
+  KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
+  ALL_GRUNNLEGGENDE_MARKDOWN_QUERY,
+  ALL_TEMPLATES_MARKDOWN_QUERY,
+};
