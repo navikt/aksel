@@ -205,6 +205,8 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
       setCombinedDropTarget(item);
     };
 
+    // TODO - Make overlay same width as the OG item, currently jumps to content width
+
     return (
       <DragAndDropProvider
         activeItem={activeItem}
