@@ -254,7 +254,7 @@
     cursor: default;
     opacity: 1;
     background-color: var(--ax-bg-neutral-moderate);
-    color: var(--ax-text-neutral);
+    color: var(--ax-text-neutral-subtle);
   }
 }
 
