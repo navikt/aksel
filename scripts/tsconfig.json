@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es2023",
-    "moduleResolution": "bundler",
+    "module": "nodenext",
     "skipLibCheck": true
   },
   "include": ["./clean.mts"]
