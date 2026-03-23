@@ -1,4 +1,4 @@
-import type { CheckboxProps } from "../../../../form/checkbox/types";
+import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { SelectionT } from "./selection.types";
 
 type GetMultipleSelectPropsArgs = {
@@ -39,14 +39,15 @@ function getMultipleSelectProps({
     (Array.isArray(selectedKeys) && selectedKeys.includes(key));
 
   return {
-    getTheadCheckboxProps: (): CheckboxProps => {
+    getTheadCheckboxProps: (): CheckboxInputProps => {
       const indeterminate =
         Array.isArray(selectedKeys) &&
         selectedKeys.length > 0 &&
         selectedKeys.length < totalCount;
 
       return {
-        children: "Select all rows",
+        /* TODO: Add support for label visuallyhidden */
+        /* children: "Select all rows", */
         onChange: handleToggleAll,
         checked:
           (selectedKeys === "all" ||
@@ -54,15 +55,14 @@ function getMultipleSelectProps({
           !indeterminate,
         indeterminate,
         disabled: disabledKeys.length === totalCount,
-        hideLabel: true,
       };
     },
-    getRowCheckboxProps: (key: string | number): CheckboxProps => ({
-      children: `Select row with id ${key}`,
+    getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
+      /* TODO: Add support for label visuallyhidden */
+      /* children: `Select row with id ${key}`, */
       onChange: () => handleToggleRow(key),
       checked: isChecked(key),
       disabled: disabledKeys.includes(key),
-      hideLabel: true,
     }),
   };
 }

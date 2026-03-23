@@ -1,4 +1,4 @@
-import type { RadioProps } from "../../../../form/radio/types";
+import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
 type GetSingleSelectPropsArgs = {
   selectedKeys: (string | number)[];
@@ -20,12 +20,15 @@ function getSingleSelectProps({
   };
 
   return {
-    getRowRadioProps: (key: string | number): RadioProps => ({
-      children: `Select row with id ${key}`,
+    getRowRadioProps: (key: string | number): RadioInputProps => ({
+      /* TODO: Add support for label visuallyhidden */
+      /* children: `Select row with id ${key}`, */
       checked: selectedKeys.includes(key),
       onChange: () => handleSelectionChange(key),
       disabled: disabledKeys.includes(key),
       value: key,
+      /* TODO: Make this unique to avoid issue with multipe tables */
+      name: "data-table-single-select",
     }),
   };
 }

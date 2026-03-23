@@ -59,3 +59,4 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
 );
 
 export { CheckboxInput };
+export type { CheckboxInputProps };

@@ -25,3 +25,4 @@ const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(
 );
 
 export { RadioInput };
+export type { RadioInputProps };
