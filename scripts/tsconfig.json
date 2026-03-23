@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2023",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true
+  },
+  "include": ["./clean.mts"]
+}
