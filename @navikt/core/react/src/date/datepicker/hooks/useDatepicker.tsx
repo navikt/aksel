@@ -248,7 +248,9 @@ export const useDatepicker = (
 
     if (day && !selected) {
       handleOpen(false);
-      anchorRef?.focus();
+      // We use sync:false so that when Modal is used (see Date.Dialog.tsx), it is closed before
+      // we try to focus the open button (since native modal dialogs don't allow focus outside).
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     }
 
     if (selected) {
@@ -326,10 +328,7 @@ export const useDatepicker = (
     open,
     onClose: () => {
       handleOpen(false);
-      /* Delay focus to allow "open"-button to update title before focus */
-      queueMicrotask(() =>
-        focusElement(anchorRef, { sync: false, preventScroll: true }),
-      );
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     },
     onOpenToggle: () => handleOpen(!open),
     disabled,

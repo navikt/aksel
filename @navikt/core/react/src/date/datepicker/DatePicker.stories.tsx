@@ -544,6 +544,22 @@ export const ColorRole = () => (
   </div>
 );
 
+export const ColorRoleInput = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    defaultSelected: new Date("2021-02-01"),
+  });
+  return (
+    <DatePicker {...datepickerProps} dropdownCaption>
+      <DatePicker.Input
+        size="medium"
+        {...inputProps}
+        label="Velg dato"
+        data-color="meta-purple"
+      />
+    </DatePicker>
+  );
+};
+
 export const DateRangeWithCommonError: Story = {
   render: () => {
     const { datepickerProps, fromInputProps, toInputProps } =
