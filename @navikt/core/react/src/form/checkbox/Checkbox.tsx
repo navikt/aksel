@@ -12,18 +12,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
     const descriptionId = useId();
 
+    const { className, description, children, indeterminate, hideLabel } =
+      props;
+
     return (
       <div
-        className={cl(
-          props.className,
-          "aksel-checkbox",
-          `aksel-checkbox--${size}`,
-          {
-            "aksel-checkbox--error": hasError,
-            "aksel-checkbox--disabled": inputProps.disabled,
-            "aksel-checkbox--readonly": readOnly,
-          },
-        )}
+        className={cl(className, "aksel-checkbox", `aksel-checkbox--${size}`, {
+          "aksel-checkbox--error": hasError,
+          "aksel-checkbox--disabled": inputProps.disabled,
+          "aksel-checkbox--readonly": readOnly,
+        })}
         data-color={hasError ? "danger" : props["data-color"]}
       >
         <CheckboxInput
@@ -41,28 +39,28 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           aria-describedby={
             cl(inputProps["aria-describedby"], {
-              [descriptionId]: props.description,
+              [descriptionId]: description,
             }) || undefined
           }
-          indeterminate={props.indeterminate ?? false}
+          indeterminate={indeterminate ?? false}
         />
         <BodyShort
           as="label"
           htmlFor={inputProps.id}
           size={size}
           className="aksel-checkbox__label"
-          visuallyHidden={props.hideLabel}
+          visuallyHidden={hideLabel}
         >
           {!nested && readOnly && <ReadOnlyIconWithTitle />}
-          {props.children}
+          {children}
         </BodyShort>
-        {props.description && (
+        {description && (
           <BodyShort
             id={descriptionId}
             size={size}
             className="aksel-form-field__subdescription aksel-checkbox__description"
           >
-            {props.description}
+            {description}
           </BodyShort>
         )}
       </div>
