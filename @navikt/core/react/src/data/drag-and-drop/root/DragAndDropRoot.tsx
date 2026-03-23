@@ -161,6 +161,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         setCombinedDropTarget(null);
       };
 
+      // TODO - Look into adding a cancel listener event
       window.addEventListener("pointermove", handlePointerMove);
       window.addEventListener("pointerup", handlePointerUp);
 
