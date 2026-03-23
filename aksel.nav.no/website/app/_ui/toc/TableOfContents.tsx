@@ -83,6 +83,7 @@ function TableOfContents({
                     [styles.tocNavListNotch]: active,
                   })}
                   data-current={active}
+                  aria-current={active ? "location" : undefined}
                 >
                   {removeEmojiesFromText(stegaClean(node.title)).trim()}
                 </NextLink>
