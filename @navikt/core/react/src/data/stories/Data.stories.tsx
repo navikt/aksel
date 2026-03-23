@@ -20,7 +20,7 @@ import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
 import DataActionBar from "../action-bar/root/DataActionBarRoot";
-import DataDragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
+import DataDragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
 /* import { DataTableProfiler } from "./DataTableProfiler"; */
