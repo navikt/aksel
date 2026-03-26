@@ -58,7 +58,7 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
+  transpilePackages: ["@navikt/ds-tokens"],
   /**
    * @important: These are always included in JS-bundle!
    * Only use for public runtime config that is not sensitive
