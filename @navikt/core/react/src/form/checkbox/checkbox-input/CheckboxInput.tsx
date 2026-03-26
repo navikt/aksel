@@ -1,4 +1,5 @@
 import React, { forwardRef, useCallback } from "react";
+import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 
 type CheckboxInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
@@ -13,7 +14,13 @@ type CheckboxInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
   (
-    { indeterminate, standalone = true, compact, ...rest }: CheckboxInputProps,
+    {
+      className,
+      indeterminate,
+      standalone = true,
+      compact,
+      ...rest
+    }: CheckboxInputProps,
     forwardedRef,
   ) => {
     const indeterminateRef = useCallback(
@@ -35,8 +42,8 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
       >
         <input
           {...rest}
+          className={cl("aksel-checkbox__input", className)}
           type="checkbox"
-          className="aksel-checkbox__input"
           ref={mergedRef}
         />
         <svg

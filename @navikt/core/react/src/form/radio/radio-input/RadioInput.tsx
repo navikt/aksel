@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { cl } from "../../../utils/helpers";
 
 type RadioInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   children?: never;
@@ -10,15 +11,18 @@ type RadioInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(
-  ({ standalone = true, compact, ...rest }: RadioInputProps, forwardedRef) => {
+  (
+    { className, standalone = true, compact, ...rest }: RadioInputProps,
+    forwardedRef,
+  ) => {
     return (
       <input
+        {...rest}
         ref={forwardedRef}
-        className="aksel-radio__input"
+        className={cl("aksel-radio__input", className)}
         data-standalone={standalone}
         data-compact={compact}
         type="radio"
-        {...rest}
       />
     );
   },
