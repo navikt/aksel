@@ -1,4 +1,5 @@
-name: Deploy aksel.nav.no
+name: Deploy prod (aksel.nav.no)
+
 on:
   push:
     branches:
@@ -6,15 +7,20 @@ on:
     paths:
       - "aksel.nav.no/**"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   IMAGE: ghcr.io/navikt/aksel
 
 jobs:
   sync_data_with_sanity:
-    name: Update component data
+    name: Sync component data with Sanity
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
 
       - name: Setup project
         uses: ./.github/actions/setup
@@ -56,10 +62,11 @@ jobs:
           sanity_deploy_studio: ${{ secrets.SANITY_DEPLOY_STUDIO }}
           next_encryption_key: ${{ secrets.NEXT_ENCRYPTION_KEY }}
 
-      - name: Get complete tag
+      - name: Generate deploy tag
         run: echo "TAG=PROD-$( date +%s )" >> $GITHUB_ENV
 
-      - uses: nais/docker-build-push@v0
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem

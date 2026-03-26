@@ -1,9 +1,14 @@
-name: Deploy aksel.ansatt.dev.nav.no
+name: Deploy dev (aksel.ansatt.dev.nav.no)
+
 on:
   workflow_dispatch:
   push:
     branches:
       - next
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build_and_deploy:
@@ -30,10 +35,11 @@ jobs:
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
-      - name: Get complete tag
+      - name: Generate deploy tag
         run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
 
-      - uses: nais/docker-build-push@v0
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem

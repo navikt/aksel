@@ -1,9 +1,14 @@
-name: Deploy aksel-v7.nav.no
+name: Deploy prod (aksel-v7.nav.no)
+
 on:
   workflow_dispatch:
   push:
     branches:
       - v7-aksel.nav.no
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build_and_deploy:
@@ -38,10 +43,11 @@ jobs:
         run: cd v7-aksel.nav.no && yarn build
         shell: bash
 
-      - name: Get complete tag
+      - name: Generate deploy tag
         run: echo "TAG=PROD-V7-$( date +%s )" >> $GITHUB_ENV
 
-      - uses: nais/docker-build-push@v0
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem
