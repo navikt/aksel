@@ -1,5 +1,5 @@
-import { execSync, spawnSync } from "child_process";
-import FastGlob from "fast-glob";
+import { execSync, spawnSync } from "node:child_process";
+import { globSync } from "node:fs";
 import { rmSync } from "node:fs";
 
 /**
@@ -13,16 +13,14 @@ const globPatterns = [
   "./@navikt/**/cjs",
   "./@navikt/aksel-icons/src",
   "**/playwright-report",
-  "**/.next",
+  "./aksel.nav.no/website/.next",
 ];
 
 console.group("Cleaning up build artifacts");
 
 for (const globPattern of globPatterns) {
-  const folders = FastGlob.sync(globPattern, {
-    dot: true,
-    onlyDirectories: true,
-    ignore: ["**/node_modules"],
+  const folders = globSync(globPattern, {
+    exclude: ["**/node_modules"],
   });
   folders
     /* Longest folder-names first, so that nested dirs are removed bottom-up */
@@ -43,19 +41,18 @@ if (!process.argv.includes("--reset")) {
 if (process.platform === "win32") {
   const tasklist = execSync("tasklist").toString();
   const nodeCount = (tasklist.match(/node\.exe/g) || []).length;
-  if (nodeCount > 1) {
+  if (nodeCount > 2) {
     console.warn(
-      `There are ${nodeCount} node.exe processes running. You might want to close them before trying to delete node_modules.`,
+      `There are ${nodeCount - 2} other node.exe processes running. You might want to close them before trying to delete node_modules.`,
     );
+    spawnSync("pause", { shell: true, stdio: [0, 1, 2] });
   }
-  spawnSync("pause", { shell: true, stdio: [0, 1, 2] });
 }
 
 console.group("Cleaning up node_modules. This may take a while...");
 
-const nodeModulesFolders = FastGlob.sync("**/node_modules", {
-  onlyDirectories: true,
-  ignore: ["**/node_modules/**/node_modules"], // Ignore nested node_modules
+const nodeModulesFolders = globSync("**/node_modules", {
+  exclude: ["**/node_modules/**/node_modules"], // Ignore nested node_modules
 });
 
 for (const folder of nodeModulesFolders) {
