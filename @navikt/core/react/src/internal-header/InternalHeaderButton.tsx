@@ -20,11 +20,11 @@ export const InternalHeaderButton: OverridableComponent<
   ({ as: Component = "button", className, isActive = false, ...rest }, ref) => {
     return (
       <Component
+        aria-current={isActive || undefined}
         {...rest}
         ref={ref}
         className={cl("aksel-internalheader__button", className)}
         data-active={isActive}
-        aria-current={isActive || undefined}
       />
     );
   },
