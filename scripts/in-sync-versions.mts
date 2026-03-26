@@ -63,21 +63,21 @@ function validateVersions() {
 
   if (depsOutOfSync.length > 0) {
     console.log("");
+
+    const joinedDependencies = depsOutOfSync
+      .map(
+        ({ dependency, filteredVersions }) =>
+          `${dependency} (${filteredVersions.join(", ")})`,
+      )
+      .join(", ");
+
     actionsError(
-      "Workspaces local dependency versions not synced across repository:",
+      `Workspaces local dependency versions not synced across repository: \n ${joinedDependencies}. \n Please make sure all workspaces have the same version for each dependency.`,
       {
         title: "Inconsistent dependency versions",
         file: "yarn.lock",
         startLine: 1,
       },
-    );
-
-    for (const { dependency, filteredVersions } of depsOutOfSync) {
-      logDependency(dependency, filteredVersions);
-    }
-
-    console.error(
-      "Please make sure all workspaces have the same version for each dependency.\n",
     );
 
     process.exit(1);
