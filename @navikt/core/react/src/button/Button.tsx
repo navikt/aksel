@@ -6,7 +6,6 @@ import type { OverridableComponent } from "../utils-external";
 import { omit } from "../utils-external";
 import { cl, composeEventHandlers } from "../utils/helpers";
 
-// test
 type legacyVariants =
   | "primary-neutral"
   | "secondary-neutral"
