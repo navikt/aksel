@@ -71,7 +71,7 @@ function validateVersions() {
     }
 
     console.warn(
-      "Please make sure all workspaces have the same version for each dependency.\n",
+      "::warning:: TEST \n Please make sure all workspaces have the same version for each dependency.\n",
     );
 
     const joinedWarnings = warnings
@@ -81,11 +81,7 @@ function validateVersions() {
       )
       .join("\n");
     actionsWarning(
-      `${joinedWarnings}\nPlease make sure all workspaces have the same version for each dependency.`,
-      {
-        title:
-          "Workspaces local dependency versions not synced across repository",
-      },
+      `Workspaces local dependency versions not synced across repository: \n${joinedWarnings}. \nPlease make sure all workspaces have the same version for each dependency.`,
     );
 
     process.exit(1);
