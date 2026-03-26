@@ -69,7 +69,6 @@ function validateVersions() {
         title: "Inconsistent dependency versions",
         file: "yarn.lock",
         startLine: 1,
-        endLine: 2,
       },
     );
 
