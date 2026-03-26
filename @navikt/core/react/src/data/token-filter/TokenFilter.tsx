@@ -28,6 +28,7 @@ type TokenFilterProps = {
  * TODO:
  * - Implement onChange handler to update query state when user selects an autocomplete option.
  * - Handle token rendering and editing (e.g., show tokens for matched properties/operators/values, allow deleting tokens).
+ * - Writing "stance" still shows status and hostname options
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
   ({ query, className, propertyDefinitions, options, onChange }, ref) => {
