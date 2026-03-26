@@ -1,5 +1,5 @@
 import { createStrictContext } from "../../../utils/helpers";
-import { DragAndDropElement } from "./DragAndDropRoot";
+import { DragAndDropElement } from "../types";
 
 interface DragAndDropContextType {
   activeItem: DragAndDropElement | null;

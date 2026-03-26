@@ -1,12 +1,8 @@
 import React, { forwardRef, useEffect } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
+import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
-
-interface DragAndDropElement {
-  id: string;
-  index: number;
-}
 
 interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
   children: any[];
@@ -246,4 +242,4 @@ DragAndDrop.Item = DragAndDropItem;
 
 export { DragAndDrop, DragAndDropItem };
 export default DragAndDrop;
-export type { DragAndDropItemProps, DragAndDropProps, DragAndDropElement };
+export type { DragAndDropItemProps, DragAndDropProps };
