@@ -1,4 +1,5 @@
-import React from "react";
+import React, { forwardRef } from "react";
+import { Spacer } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import DataToolbarButton, {
   DataToolbarButtonProps,
@@ -12,23 +13,15 @@ import DataToolbarToggleButton, {
 } from "../toggle-button/DataToolbarToggleButton";
 
 interface DataToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+  children?: never;
+  renderInput?: React.ReactNode;
+  renderPreferences?: React.ReactNode;
+  renderPagination?: React.ReactNode;
 }
 
 interface DataToolbarRootComponent extends React.ForwardRefExoticComponent<
   DataToolbarProps & React.RefAttributes<HTMLDivElement>
 > {
-  /**
-   * @see 🏷️ {@link DataToolbarSearchFieldProps}
-   * @example
-   * ```tsx
-   * <DataToolbar>
-   *   <DataToolbar.SearchField />
-   * </DataToolbar>
-   * ```
-   */
-  SearchField: typeof DataToolbarSearchField;
-
   /**
    * @see 🏷️ {@link DataToolbarButtonProps}
    * @example
@@ -39,37 +32,40 @@ interface DataToolbarRootComponent extends React.ForwardRefExoticComponent<
    * ```
    */
   Button: typeof DataToolbarButton;
-
-  /**
-   * @see 🏷️ {@link DataToolbarToggleButtonProps}
-   * @example
-   * ```tsx
-   * <DataToolbar>
-   *   <DataToolbar.ToggleButton />
-   * </DataToolbar>
-   * ```
-   */
-  ToggleButton: typeof DataToolbarToggleButton;
 }
 
-const DataToolbar = React.forwardRef<HTMLDivElement, DataToolbarProps>(
-  ({ children, className, ...rest }, forwardRef) => {
+const DataToolbar = forwardRef<HTMLDivElement, DataToolbarProps>(
+  (
+    { className, renderInput, renderPreferences, renderPagination, ...rest },
+    forwardedRef,
+  ) => {
     return (
       <div
-        ref={forwardRef}
+        ref={forwardedRef}
         {...rest}
         className={cl("aksel-data-toolbar", className)}
         role="toolbar"
       >
-        {children}
+        {renderInput && (
+          <div className="aksel-data-toolbar__input">{renderInput}</div>
+        )}
+        <Spacer />
+        {renderPagination && (
+          <div className="aksel-data-toolbar__pagination">
+            {renderPagination}
+          </div>
+        )}
+        {renderPreferences && (
+          <div className="aksel-data-toolbar__preferences">
+            {renderPreferences}
+          </div>
+        )}
       </div>
     );
   },
 ) as DataToolbarRootComponent;
 
-DataToolbar.SearchField = DataToolbarSearchField;
 DataToolbar.Button = DataToolbarButton;
-DataToolbar.ToggleButton = DataToolbarToggleButton;
 
 export {
   DataToolbar,

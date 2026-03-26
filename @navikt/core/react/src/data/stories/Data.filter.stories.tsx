@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
-  type Column,
   type ColumnFiltersState,
   Table,
   flexRender,
@@ -12,13 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useMemo, useState } from "react";
-import { CheckmarkIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { Select } from "../../form/select";
-import { Box } from "../../primitives/box";
-import { HStack, VStack } from "../../primitives/stack";
-import { BodyShort } from "../../typography";
+import React, { useState } from "react";
 import { DataTable } from "../table";
 import { DataTableProfiler } from "./DataTableProfiler";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
@@ -138,106 +131,6 @@ export const TanstackColumnFilter: Story = {
     docs: { disable: true },
   },
 };
-
-export function DummyFilter({
-  column,
-  title,
-}: {
-  column: Column<PersonInfo, unknown>;
-  title: string;
-}) {
-  const [filterState, setFilterState] = useState({
-    operator: "is",
-    value: "",
-  });
-
-  const sortedUniqueValues = useMemo(
-    () => Array.from(column.getFacetedUniqueValues().keys()),
-    [column],
-  );
-
-  const columnFilterValue = column.getFilterValue();
-
-  return (
-    <VStack gap="space-8" padding="space-8">
-      <BodyShort as="div" size="large" weight="semibold">
-        {title}
-      </BodyShort>
-      <HStack gap="space-8">
-        <Select
-          label="Operator"
-          hideLabel
-          onChange={(e) =>
-            setFilterState((prev) => ({ ...prev, operator: e.target.value }))
-          }
-        >
-          <option value="is">is</option>
-          <option value="is-not">is not</option>
-          <option value="is-any">is any of</option>
-          <option value="is-none">is none of</option>
-        </Select>
-        <Select
-          label="Verdi"
-          hideLabel
-          onChange={(e) =>
-            setFilterState((prev) => ({ ...prev, value: e.target.value }))
-          }
-          value={columnFilterValue?.toString()}
-        >
-          <option value="">-- Velg verdi --</option>
-          {sortedUniqueValues.map((value) => (
-            <option key={value} value={value}>
-              {value}
-            </option>
-          ))}
-        </Select>
-      </HStack>
-      <Box
-        as="hr"
-        width="100%"
-        borderWidth="0 0 1 0"
-        borderColor="neutral-subtleA"
-      />
-      <HStack gap="space-6" justify="space-between">
-        <Button
-          data-color="neutral"
-          variant="tertiary"
-          size="small"
-          onClick={() => {
-            /* TODO: State does not reset selects here when deleted */
-            setFilterState({
-              operator: "is",
-              value: "",
-            });
-            column.setFilterValue(undefined);
-          }}
-        >
-          Slett
-        </Button>
-        <Button
-          data-color="neutral"
-          variant="primary"
-          size="small"
-          icon={<CheckmarkIcon aria-hidden />}
-          onClick={() => {
-            /* TODO: Column filters do not work as expected. Do they need to be globel, or do column accessors need to implement filterFn? */
-            if (filterState.operator === "is") {
-              column.setFilterValue(filterState.value);
-            } else if (filterState.operator === "is-not") {
-              column.setFilterValue({ not: filterState.value });
-            } else if (filterState.operator === "is-any") {
-              column.setFilterValue({ in: [filterState.value] });
-            } else if (filterState.operator === "is-none") {
-              column.setFilterValue({ notIn: [filterState.value] });
-            }
-          }}
-        >
-          Lagre
-        </Button>
-      </HStack>
-    </VStack>
-  );
-}
 
 const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
   <DataTable.Tbody>
