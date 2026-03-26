@@ -14,8 +14,6 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-  /* TODO: Temp disabled CI-tests */
-  tags: ["!play-fn", "skip-test"],
 } satisfies Meta<typeof DatePicker>;
 
 type Story = StoryObj<typeof DatePicker>;

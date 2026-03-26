@@ -11,8 +11,6 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-  /* TODO: Temp disabled CI-tests */
-  tags: ["!play-fn", "skip-test"],
 } satisfies Meta<typeof MonthPicker>;
 
 type Story = StoryObj<typeof MonthPicker>;
