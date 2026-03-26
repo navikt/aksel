@@ -321,10 +321,9 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     onClose: () => {
       handleOpen(false);
-      /* Delay focus to allow "open"-button to update title before focus */
-      queueMicrotask(() =>
-        focusElement(anchorRef, { sync: false, preventScroll: true }),
-      );
+      // We use sync:false so that when Modal is used (see Date.Dialog.tsx), it is closed before
+      // we try to focus the open button (since native modal dialogs don't allow focus outside).
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     },
     disabled,
   };

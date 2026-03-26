@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import DragAndDrop from "../drag-and-drop/root/DataDragAndDropRoot";
+import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 
 const meta: Meta<typeof DragAndDrop> = {
   title: "ds-react/Data/DragAndDrop",
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof DragAndDrop>;
 
 export const Default: Story = {
   render: () => {
-    /*const [items, setItems] = React.useState([
+    const [items, setItems] = React.useState([
       { id: "id", content: "Id" },
       { id: "name", content: "Name" },
       { id: "nationality", content: "Nationality" },
@@ -29,8 +29,16 @@ export const Default: Story = {
       { id: "forceSensitive", content: "Force sensitive" },
       { id: "homeSystem", content: "Home system" },
       { id: "skills", content: "Skills" },
-    ]);*/
+    ]);
 
-    return <>Test</>;
+    return (
+      <DragAndDrop setItems={setItems}>
+        {items.map((item, index) => (
+          <DragAndDrop.Item key={item.id} id={item.id} index={index}>
+            {item.content}
+          </DragAndDrop.Item>
+        ))}
+      </DragAndDrop>
+    );
   },
 };
