@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "boot": "yarn workspaces foreach -vv -pA --topological-dev --no-private run build",
-    "clean": "node scripts/clean.mjs",
-    "clean:reset": "node scripts/clean.mjs --reset",
+    "clean": "node scripts/clean.mts",
+    "clean:reset": "node scripts/clean.mts --reset",
     "test": "yarn workspaces foreach -vv -pA run test",
     "dev": "yarn workspace aksel.nav.no dev",
     "lint": "yarn lint:eslint && yarn lint:css && yarn lint:biome",
