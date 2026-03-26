@@ -6,7 +6,7 @@ type CheckboxInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   children?: never;
   standalone?: boolean;
   /**
-   * Reduces psuedo-element target-size.
+   * Reduces pseudo-element target-size.
    */
   compact?: boolean;
 };
