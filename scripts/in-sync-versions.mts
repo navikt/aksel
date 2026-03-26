@@ -9,8 +9,7 @@ function validateVersions() {
   const workspaces = getYarnWorkspacesList();
 
   if (workspaces.length === 0) {
-    console.error("No workspaces found");
-    return;
+    exitWithError("No workspaces found");
   }
 
   const dependencies = new Map<string, string[]>();
@@ -62,26 +61,17 @@ function validateVersions() {
   }
 
   if (warnings.length > 0) {
-    console.warn(
-      "\nWorkspaces local dependency versions not synced across repository:",
+    actionsWarning(
+      `Workspaces local dependency versions not synced across repository: \n`,
+      { title: "Inconsistent dependency versions" },
     );
 
     for (const { dependency, filteredVersions } of warnings) {
-      logWarning(dependency, filteredVersions);
+      logDependencyWarning(dependency, filteredVersions);
     }
 
     console.warn(
-      "::warning:: TEST \n Please make sure all workspaces have the same version for each dependency.\n",
-    );
-
-    const joinedWarnings = warnings
-      .map(
-        ({ dependency, filteredVersions }) =>
-          `- ${dependency}: ${filteredVersions.join(", ")}`,
-      )
-      .join("\n");
-    actionsWarning(
-      `Workspaces local dependency versions not synced across repository: \n${joinedWarnings}. \nPlease make sure all workspaces have the same version for each dependency.`,
+      "Please make sure all workspaces have the same version for each dependency.\n",
     );
 
     process.exit(1);
@@ -107,7 +97,7 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
 
     return workspaces;
   } catch {
-    console.error("Failed to get workspaces list");
+    exitWithError("Failed to get workspaces list");
   }
   return [];
 }
@@ -115,7 +105,7 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
 /**
  * Adds some colors to better highlight the warning
  */
-function logWarning(dependency: string, filteredVersions: string[]) {
+function logDependencyWarning(dependency: string, filteredVersions: string[]) {
   const colors = {
     reset: "\x1b[0m",
     red: "\x1b[31m",
@@ -128,4 +118,9 @@ function logWarning(dependency: string, filteredVersions: string[]) {
   }`;
 
   console.warn(`- ${coloredDependency}: ${coloredVersions}`);
+}
+
+function exitWithError(message: string) {
+  console.error(message);
+  process.exit(1);
 }
