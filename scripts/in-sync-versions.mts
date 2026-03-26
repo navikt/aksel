@@ -1,4 +1,4 @@
-import { warning as actionsWarning } from "@actions/core";
+import { error as actionsError } from "@actions/core";
 import { execSync } from "child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -36,7 +36,8 @@ function validateVersions() {
     }
   }
 
-  const warnings: { dependency: string; filteredVersions: string[] }[] = [];
+  const depsOutOfSync: { dependency: string; filteredVersions: string[] }[] =
+    [];
 
   for (const [dependency, versions] of dependencies) {
     /**
@@ -52,7 +53,7 @@ function validateVersions() {
     );
 
     if (!versionsAreEqual) {
-      warnings.push({
+      depsOutOfSync.push({
         dependency,
         /* To keep console simple, we hide duplicates */
         filteredVersions: [...new Set(filteredVersions)],
@@ -60,19 +61,19 @@ function validateVersions() {
     }
   }
 
-  if (warnings.length > 0) {
-    console.log("\n");
-    actionsWarning(
-      "Workspaces local dependency versions not synced across repository",
+  if (depsOutOfSync.length > 0) {
+    console.log("");
+    actionsError(
+      "Workspaces local dependency versions not synced across repository:",
       { title: "Inconsistent dependency versions" },
     );
 
-    for (const { dependency, filteredVersions } of warnings) {
-      logDependencyWarning(dependency, filteredVersions);
+    for (const { dependency, filteredVersions } of depsOutOfSync) {
+      logDependency(dependency, filteredVersions);
     }
 
-    console.warn(
-      "Please make sure all workspaces have the same version for each dependency.\n\n",
+    console.error(
+      "Please make sure all workspaces have the same version for each dependency.\n",
     );
 
     process.exit(1);
@@ -106,7 +107,7 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
 /**
  * Adds some colors to better highlight the warning
  */
-function logDependencyWarning(dependency: string, filteredVersions: string[]) {
+function logDependency(dependency: string, filteredVersions: string[]) {
   const colors = {
     reset: "\x1b[0m",
     red: "\x1b[31m",
@@ -118,7 +119,7 @@ function logDependencyWarning(dependency: string, filteredVersions: string[]) {
     colors.reset
   }`;
 
-  console.warn(`- ${coloredDependency}: ${coloredVersions}`);
+  console.error(`- ${coloredDependency}: ${coloredVersions}`);
 }
 
 function exitWithError(message: string) {
