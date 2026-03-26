@@ -261,6 +261,20 @@ export const UserWithMenuGridIconMenu = () => (
   </InternalHeader>
 );
 
+export const ActiveButton = () => (
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title href="/#home">Tittel med lenke</InternalHeader.Title>
+    <InternalHeader.Button isActive as="a" href="#123">
+      Link 1
+    </InternalHeader.Button>
+    <InternalHeader.Button as="a" href="#123">
+      Link 2
+    </InternalHeader.Button>
+    <InternalHeader.Button>Button 1</InternalHeader.Button>
+    <InternalHeader.Button isActive>Button 1</InternalHeader.Button>
+  </InternalHeader>
+);
+
 export const UserButton = () => (
   <InternalHeader style={{ width: 600 }}>
     <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
@@ -322,6 +336,10 @@ export const Chromatic: Story = {
       <div>
         <h2>UserButton</h2>
         <UserButton />
+      </div>
+      <div>
+        <h2>ActiveButton</h2>
+        <ActiveButton />
       </div>
     </VStack>
   ),

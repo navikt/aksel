@@ -177,6 +177,9 @@ async function buildThemedRolesCSS() {
 async function buildOtherTokenFormats() {
   const SDDictionaryNonCSSFormats = new StyleDictionary({
     tokens: allTokens(),
+    log: {
+      verbosity: "silent",
+    },
     platforms: {
       /* We don't want to build any files with CSS here, but have to add this for the formatting support */
       css: {
@@ -346,7 +349,9 @@ async function buildCSSBundleForTokens({
   const SDictionary = new StyleDictionary({
     tokens,
     /* Since we end up filtering out references for some tokens, we filter out warnings */
-    log: { warnings: "disabled" },
+    log: {
+      verbosity: "silent",
+    },
     platforms: {
       [filename]: {
         transformGroup: "css",
