@@ -1,3 +1,4 @@
+import { warning as actionsWarning } from "@actions/core";
 import { execSync } from "child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -70,8 +71,24 @@ function validateVersions() {
     }
 
     console.warn(
-      "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
+      "Please make sure all workspaces have the same version for each dependency.\n",
     );
+
+    const joinedWarnings = warnings
+      .map(
+        ({ dependency, filteredVersions }) =>
+          `- ${dependency}: ${filteredVersions.join(", ")}`,
+      )
+      .join("\n");
+    actionsWarning(
+      `${joinedWarnings}\nPlease make sure all workspaces have the same version for each dependency.`,
+      {
+        title:
+          "Workspaces local dependency versions not synced across repository",
+      },
+    );
+
+    process.exit(1);
   }
 }
 
