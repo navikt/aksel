@@ -350,7 +350,7 @@ export const StandaloneInput = () => (
   <div>
     <CheckboxInput value="val-1" />
     <CheckboxInput value="val-2" />
-    <CheckboxInput value="val-2" />
+    <CheckboxInput value="val-3" />
   </div>
 );
 
@@ -358,7 +358,7 @@ export const StandaloneInputCompact = () => (
   <div>
     <CheckboxInput value="val-1" compact />
     <CheckboxInput value="val-2" compact />
-    <CheckboxInput value="val-2" compact />
+    <CheckboxInput value="val-3" compact />
   </div>
 );
 
