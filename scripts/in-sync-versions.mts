@@ -68,7 +68,7 @@ function validateVersions() {
       const joinedDependencies = depsOutOfSync
         .map(
           ({ dependency, filteredVersions }) =>
-            `- ${dependency} (${filteredVersions.join(", ")})`,
+            `- ${dependency}: ${filteredVersions.join(", ")}`,
         )
         .join(" \n");
       actionsError(
