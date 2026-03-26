@@ -65,7 +65,11 @@ function validateVersions() {
     console.log("");
     actionsError(
       "Workspaces local dependency versions not synced across repository:",
-      { title: "Inconsistent dependency versions", file: "yarn.lock" },
+      {
+        title: "Inconsistent dependency versions",
+        file: "yarn.lock",
+        startLine: 0,
+      },
     );
 
     for (const { dependency, filteredVersions } of depsOutOfSync) {
