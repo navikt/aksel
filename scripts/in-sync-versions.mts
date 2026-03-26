@@ -61,7 +61,7 @@ function validateVersions() {
   }
 
   if (warnings.length > 0) {
-    console.log("");
+    console.log("\n");
     actionsWarning(
       "Workspaces local dependency versions not synced across repository",
       { title: "Inconsistent dependency versions" },
@@ -72,7 +72,7 @@ function validateVersions() {
     }
 
     console.warn(
-      "Please make sure all workspaces have the same version for each dependency.\n",
+      "Please make sure all workspaces have the same version for each dependency.\n\n",
     );
 
     process.exit(1);
