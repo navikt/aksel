@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 8.9.0
+
+### Minor Changes
+
+- InternalHeader: Added `isActive`-prop to `InternalHeader.Button`. ([#4761](https://github.com/navikt/aksel/pull/4761))
+
+### Patch Changes
+
+- DatePicker, MonthPicker: Make open button more prominent ([#4751](https://github.com/navikt/aksel/pull/4751))
+
 ## 8.8.0
 
 ### Minor Changes
