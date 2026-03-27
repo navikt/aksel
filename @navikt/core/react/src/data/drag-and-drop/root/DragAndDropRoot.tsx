@@ -5,8 +5,10 @@ import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
 interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: any[];
-  setItems: React.Dispatch<React.SetStateAction<any[]>>;
+  children: React.ReactElement<DragAndDropItemProps>[];
+  setItems: React.Dispatch<
+    React.SetStateAction<React.ReactElement<DragAndDropItemProps>[]>
+  >;
 }
 
 interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
@@ -28,15 +30,17 @@ interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
 
 /**
  * TODO
- * setItems on root
- * state : active element
- * pointer over listener / state, onPointerEnter, onPointerLeave
- * Overlay - Use floating component
- * Keyboard navigation
- * Handle - button, arrows also button
- * UU - announce on drag start, item moved, drag end
- *
- * []
+ * [x] setItems on root
+ * [x] state : active element
+ * [x] pointer over listener / state, onPointerEnter, onPointerLeave
+ * [x] Overlay - Use floating component
+ * [x] Keyboard navigation
+ * [ ] UU - announce on drag start, item moved, drag end
+ * [x] Make overlay same width as the OG item, currently jumps to content width
+ * [ ] Look into adding a cancel listener event
+ * [ ] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
+ * [ ] Talk to design about what should happen on ESC key press, currently just cancels dragging, should it also reset position?
+ * [ ] Make arrow icons into buttons that react to keyboard events, currently just decorative
  */
 
 const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
@@ -47,9 +51,13 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
       React.useState<DragAndDropElement | null>(null);
     const [dragHandlerActive, setDragHandlerActive] =
       React.useState<DragAndDropElement | null>(null);
+    const [overlayWidth, setOverlayWidth] = React.useState<number | null>(null);
 
     const activeItemRef = React.useRef<DragAndDropElement | null>(null);
     const dropTargetRef = React.useRef<DragAndDropElement | null>(null);
+    const activeChild = children.find(
+      (child) => child.props.id === activeItem?.id,
+    );
 
     const [virtualRef, setVirtualRef] = React.useState({
       getBoundingClientRect: () =>
@@ -153,6 +161,8 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
             return newItems;
           });
         }
+        setOverlayWidth(null);
+        setDragHandlerActive(null);
         setCombinedActiveItem(null);
         setCombinedDropTarget(null);
       };
@@ -187,6 +197,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
     const onDragStart = (
       event: React.PointerEvent | React.MouseEvent,
       item: DragAndDropElement,
+      element?: HTMLElement | null,
     ) => {
       setVirtualRef({
         getBoundingClientRect: () =>
@@ -197,6 +208,9 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
             y: event.clientY,
           }),
       });
+
+      setOverlayWidth(element?.getBoundingClientRect().width ?? null);
+
       setCombinedActiveItem(item);
       setCombinedDropTarget(item);
     };
@@ -215,7 +229,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         onDragStart={onDragStart}
       >
         <div ref={forwardedRef}>{children}</div>
-        {activeItem && (
+        {activeChild && (
           <Floating>
             <Floating.Anchor virtualRef={virtualRef}>
               <span />
@@ -223,12 +237,14 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
             <Floating.Content
               align="start"
               updatePositionStrategy="always"
-              style={{ pointerEvents: "none" }}
+              style={{
+                pointerEvents: "none",
+                boxSizing: "border-box",
+                width: overlayWidth ? `${overlayWidth}px` : "fit-content",
+              }}
             >
-              {React.cloneElement(children[activeItem.index], {
-                "data-dnd-id": undefined,
-                "data-dnd-index": undefined,
-                "data-overlay": true,
+              {React.cloneElement(activeChild, {
+                isOverlay: true,
               })}
             </Floating.Content>
           </Floating>

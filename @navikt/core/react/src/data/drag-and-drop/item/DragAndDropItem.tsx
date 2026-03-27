@@ -14,6 +14,10 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> {
    * Index of the item being dragged
    */
   index: number;
+  /**
+   * Indicates if the item is an overlay
+   */
+  isOverlay?: boolean;
 }
 
 /**
@@ -28,7 +32,10 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  */
 const DragAndDropItem = React.forwardRef<HTMLDivElement, DragAndDropItemProps>(
-  ({ children, id, index, className, ...rest }, forwardedRef) => {
+  (
+    { children, id, index, className, isOverlay = false, ...rest },
+    forwardedRef,
+  ) => {
     const ref = React.useRef<HTMLDivElement>(null);
     const context = useDragAndDropContext();
     const item = { id, index };
@@ -45,20 +52,17 @@ const DragAndDropItem = React.forwardRef<HTMLDivElement, DragAndDropItemProps>(
       >
         {/* TODO Should this be a <li>? */}
         <div
-          id={id}
+          id={isOverlay ? undefined : id}
           ref={ref}
           {...rest}
-          data-dnd-id={id}
-          data-dnd-index={index}
-          role="button"
+          data-dnd-id={isOverlay ? undefined : id}
+          data-dnd-index={isOverlay ? undefined : index}
           className={cl("aksel-data-table__drag-and-drop-item", className)}
-          data-drop-target={isDropTarget}
-          /*
-          data-keyboard-dragging={keyboardDragging}
-          */
-          tabIndex={-1}
+          data-drop-target={isOverlay ? undefined : isDropTarget}
+          data-overlay={isOverlay}
+          tabIndex={isOverlay ? undefined : -1}
         >
-          <DragAndDropDragHandler item={item} />
+          <DragAndDropDragHandler item={item} itemRef={ref} />
           <div>{children}</div>
         </div>
       </HStack>

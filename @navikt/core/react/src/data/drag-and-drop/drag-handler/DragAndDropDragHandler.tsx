@@ -9,6 +9,7 @@ import { DragAndDropElement } from "../types";
 
 export interface DragAndDropDragHandlerProps {
   item: DragAndDropElement;
+  itemRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 /**
@@ -20,9 +21,12 @@ export interface DragAndDropDragHandlerProps {
 export const DragAndDropDragHandler = React.forwardRef<
   HTMLDivElement,
   DragAndDropDragHandlerProps
->(({ item }, forwardedRef) => {
+>(({ item, itemRef }, forwardedRef) => {
   const context = useDragAndDropContext();
-  const active = context?.dragHandlerActive?.id === item.id;
+  const active =
+    context?.dragHandlerActive &&
+    item &&
+    context?.dragHandlerActive?.id === item.id;
 
   return (
     <div className="aksel-data-drag-and-drop__drag-handler" ref={forwardedRef}>
@@ -40,7 +44,7 @@ export const DragAndDropDragHandler = React.forwardRef<
         data-drag-handler-active={active}
         onPointerDown={(event) => {
           event.stopPropagation();
-          context?.onDragStart(event, item);
+          context?.onDragStart(event, item, itemRef?.current || null);
         }}
         onClick={() => context?.setDragHandlerActive(item)}
         onKeyDown={(event) => {

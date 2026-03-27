@@ -12,6 +12,7 @@ interface DragAndDropContextType {
   onDragStart: (
     event: React.PointerEvent | React.MouseEvent,
     item: DragAndDropElement,
+    element?: HTMLElement | null,
   ) => void;
 }
 
