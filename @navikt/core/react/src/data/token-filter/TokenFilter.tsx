@@ -1,9 +1,8 @@
 import React, { forwardRef, useState } from "react";
-import { Chips } from "../../chips";
-import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import { AutoCompleteOption } from "./AutoSuggest.types";
+import { TokenFilterChips } from "./FilterChip";
 import type {
   ExternalOptions,
   ExternalPropertyDefinitions,
@@ -46,7 +45,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       parsedPropertyOptions,
     );
 
-    const { addToken, removeToken } = createActionHandlers({
+    const { addToken, removeToken, updateOperation } = createActionHandlers({
       query,
       onChange,
     });
@@ -116,34 +115,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           open={open}
           setOpen={setOpen}
         />
-        {query.tokens.length > 0 && (
-          <HStack
-            marginBlock="space-12 space-0"
-            gap="space-8"
-            align="center"
-            width="fit-content"
-          >
-            {query.tokens.map((token, index) => {
-              return (
-                <React.Fragment
-                  key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
-                >
-                  <Chips.Removable
-                    key={index}
-                    onClick={() => {
-                      removeToken(index);
-                    }}
-                  >
-                    {`${token.propertyKey} ${token.operator} ${token.value}`}
-                  </Chips.Removable>
-                  {index < query.tokens.length - 1 && (
-                    <span>{query.operation}</span>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </HStack>
-        )}
+        <TokenFilterChips
+          tokens={query.tokens}
+          removeToken={removeToken}
+          updateOperation={updateOperation}
+          operation={query.operation}
+        />
       </div>
     );
   },
