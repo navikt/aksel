@@ -1,19 +1,20 @@
 import { cl } from "../../utils/helpers";
-import {
-  type FormFieldProps,
-  containsReadMore,
-  useFormField,
-} from "../useFormField";
+import { containsReadMore, useFormField } from "../useFormField";
+import type { FieldsetProps } from "./Fieldset";
 
 /**
  * Handles props for Fieldset in context with parent Fieldset.
  */
-export const useFieldset = (props: FormFieldProps, legendId: string) => {
+export const useFieldset = (props: FieldsetProps, legendId: string) => {
   const formField = useFormField(props, "fieldset");
 
   return {
     ...formField,
     inputProps: {
+      ...(props.role === "radiogroup"
+        ? { "aria-invalid": formField.inputProps["aria-invalid"] }
+        : {}),
+
       // Having both legend and description in labelledby seems to work best, ref. https://mortentollefsen.no/demo/radio-description.html
       "aria-labelledby":
         props["aria-labelledby"] ||
