@@ -117,7 +117,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           setOpen={setOpen}
         />
         {query.tokens.length > 0 && (
-          <HStack marginBlock="space-12 space-0" gap="space-8">
+          <HStack
+            marginBlock="space-12 space-0"
+            gap="space-8"
+            align="center"
+            width="fit-content"
+          >
             {query.tokens.map((token, index) => {
               return (
                 <React.Fragment

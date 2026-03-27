@@ -1,3 +1,8 @@
+/* .aksel-property-filter {
+  flex: 1 1 fit-content;
+  max-inline-size: 100%;
+} */
+
 .aksel-property-filter__popup {
   overflow: hidden;
   border-radius: var(--ax-radius-8);

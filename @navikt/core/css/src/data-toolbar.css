@@ -18,8 +18,8 @@
 }
 
 .aksel-data-toolbar__input {
-  /* max-inline-size: 600px; */
-  width: 100%;
+  flex: 1 1 fit-content;
+  max-inline-size: 100%;
 }
 
 .aksel-data-toolbar__pagination {
