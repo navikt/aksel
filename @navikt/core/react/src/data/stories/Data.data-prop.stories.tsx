@@ -6,7 +6,7 @@ import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import DataTableAuto from "../table/root/DataTableAuto";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data/ItemsAsData",
+  title: "ds-react/Data/Data Prop",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },

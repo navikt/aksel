@@ -17,7 +17,7 @@ import { DataToolbar } from "../toolbar";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data",
+  title: "ds-react/Data/Scroll",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },

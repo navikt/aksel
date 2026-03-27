@@ -7,7 +7,7 @@ import { DataToolbar } from "../toolbar";
 import { PersonInfo, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data",
+  title: "ds-react/Data/No framework",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },
