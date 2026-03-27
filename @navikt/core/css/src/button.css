@@ -44,7 +44,9 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color="neutral"] {
+    &[data-color="neutral"],
+    [data-color="neutral"] > &:not([data-color]),
+    [data-color="neutral"] :not([data-color]) &:not([data-color]) {
       color: var(--ax-text-default);
     }
 
@@ -62,7 +64,8 @@
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color="neutral"] {
+      &[data-color="neutral"],
+      [data-color="neutral"] > &:not([data-color]) {
         color: var(--ax-text-default);
       }
     }
@@ -72,7 +75,9 @@
     background-color: transparent;
     color: var(--ax-text-subtle);
 
-    &[data-color="neutral"] {
+    &[data-color="neutral"],
+    [data-color="neutral"] > &:not([data-color]),
+    [data-color="neutral"] :not([data-color]) &:not([data-color]) {
       color: var(--ax-text-default);
     }
 
@@ -93,7 +98,8 @@
       color: var(--ax-text-subtle);
       background-color: transparent;
 
-      &[data-color="neutral"] {
+      &[data-color="neutral"],
+      [data-color="neutral"] > &:not([data-color]) {
         color: var(--ax-text-default);
       }
     }
