@@ -64,6 +64,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
                 }}
                 onFocus={() => setOpen(true)}
                 size="small"
+                autoComplete="off"
                 /* onKeyDown={(e) => {
               if (e.key === "Enter") {
                 createToken(filterText);
