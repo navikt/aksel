@@ -43,6 +43,8 @@ interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
 
 const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
   ({ setItems, children }, forwardedRef) => {
+    const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
+
     const [activeItem, setActiveItem] =
       React.useState<DragAndDropElement | null>(null);
     const [dropTarget, setDropTarget] =
@@ -62,6 +64,32 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         DOMRect.fromRect({ width: 0, height: 0, x: 0, y: 0 }),
     });
 
+    const pendingDragStartRef = React.useRef<{
+      item: DragAndDropElement;
+      element: HTMLElement | null;
+      pointerId: number;
+      startX: number;
+      startY: number;
+    } | null>(null);
+
+    const startPendingDragStart = (
+      event: React.PointerEvent,
+      item: DragAndDropElement,
+      element?: HTMLElement | null,
+    ) => {
+      pendingDragStartRef.current = {
+        item,
+        element: element || null,
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+      };
+    };
+
+    const cancelDragStart = () => {
+      pendingDragStartRef.current = null;
+    };
+
     const setCombinedActiveItem = React.useCallback(
       (item: DragAndDropElement | null) => {
         activeItemRef.current = item;
@@ -79,24 +107,50 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
     );
 
     useEffect(() => {
+      /* This useEffect is used to toggle a class on the html element when dragging, 
+      to prevent cursor issues when dragging over interactive elements, 
+      and to prevent text selection during dragging. */
+
       if (activeItem) {
-        document.documentElement.setAttribute("data-dragging", "true");
+        document.documentElement.setAttribute("data-dragging-cursor", "true");
         document.body.style.userSelect = "none";
       } else {
-        document.documentElement.removeAttribute("data-dragging");
+        document.documentElement.removeAttribute("data-dragging-cursor");
         document.body.style.userSelect = "";
       }
 
       return () => {
-        document.documentElement.removeAttribute("data-dragging");
+        document.documentElement.removeAttribute("data-dragging-cursor");
         document.body.style.userSelect = "";
       };
     }, [activeItem]);
 
     useEffect(() => {
-      if (!activeItem) return;
-
       const handlePointerMove = (event: PointerEvent) => {
+        const pendingStart = pendingDragStartRef.current;
+        const activeRef = activeItemRef.current;
+        const element = pendingStart?.element;
+
+        if (!activeRef && pendingStart) {
+          const deltaX = Math.abs(event.clientX - pendingStart.startX);
+          const deltaY = Math.abs(event.clientY - pendingStart.startY);
+
+          if (deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD) {
+            if (element) {
+              element.setPointerCapture(pendingStart.pointerId);
+            }
+
+            setOverlayWidth(element?.getBoundingClientRect().width ?? null);
+            setCombinedActiveItem(pendingStart.item);
+            setCombinedDropTarget(pendingStart.item);
+            pendingDragStartRef.current = null;
+          }
+          return;
+        }
+
+        const active = activeItemRef.current;
+        if (!active) return;
+
         setVirtualRef({
           getBoundingClientRect: () =>
             DOMRect.fromRect({
@@ -106,9 +160,6 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
               y: event.clientY,
             }),
         });
-
-        const active = activeItemRef.current;
-        if (!active) return;
 
         const elements = document.elementsFromPoint(
           event.clientX,
@@ -148,6 +199,11 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
       };
 
       const handlePointerUp = () => {
+        if (!activeItemRef.current) {
+          pendingDragStartRef.current = null;
+          return;
+        }
+
         const active = activeItemRef.current;
         const target = dropTargetRef.current;
 
@@ -163,6 +219,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         setDragHandlerActive(null);
         setCombinedActiveItem(null);
         setCombinedDropTarget(null);
+        pendingDragStartRef.current = null;
       };
 
       // TODO - Look into adding a cancel listener event
@@ -173,7 +230,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         window.removeEventListener("pointermove", handlePointerMove);
         window.removeEventListener("pointerup", handlePointerUp);
       };
-    }, [activeItem, setCombinedDropTarget, setCombinedActiveItem, setItems]);
+    }, [setCombinedDropTarget, setCombinedActiveItem, setItems]);
 
     const onKeyboardDragEnd = (diff: number) => {
       if (!dragHandlerActive) return;
@@ -192,29 +249,6 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
       setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
     };
 
-    const onDragStart = (
-      event: React.PointerEvent | React.MouseEvent,
-      item: DragAndDropElement,
-      element?: HTMLElement | null,
-    ) => {
-      setVirtualRef({
-        getBoundingClientRect: () =>
-          DOMRect.fromRect({
-            width: 0,
-            height: 0,
-            x: event.clientX,
-            y: event.clientY,
-          }),
-      });
-
-      setOverlayWidth(element?.getBoundingClientRect().width ?? null);
-
-      setCombinedActiveItem(item);
-      setCombinedDropTarget(item);
-    };
-
-    // TODO - Make overlay same width as the OG item, currently jumps to content width
-
     return (
       <DragAndDropProvider
         activeItem={activeItem}
@@ -224,10 +258,11 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         dragHandlerActive={dragHandlerActive}
         setDragHandlerActive={setDragHandlerActive}
         onKeyboardDragEnd={onKeyboardDragEnd}
-        onDragStart={onDragStart}
+        beforeDragStart={startPendingDragStart}
+        cancelDragStart={cancelDragStart}
       >
         <div ref={forwardedRef}>{children}</div>
-        {activeChild && (
+        {activeItem && activeChild && (
           <Floating>
             <Floating.Anchor virtualRef={virtualRef}>
               <span />
