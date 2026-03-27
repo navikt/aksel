@@ -6,9 +6,7 @@ import { DragAndDropProvider } from "./DragAndDrop.context";
 
 interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement<DragAndDropItemProps>[];
-  setItems: React.Dispatch<
-    React.SetStateAction<React.ReactElement<DragAndDropItemProps>[]>
-  >;
+  setItems: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<

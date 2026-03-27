@@ -21,7 +21,7 @@ import { Search } from "../../form/search";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
-import DataDragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
+import DataDragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
 import { DataTable } from "../table";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
