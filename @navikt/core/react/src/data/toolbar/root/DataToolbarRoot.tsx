@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { Spacer } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import DataToolbarButton, {
   DataToolbarButtonProps,
@@ -49,17 +48,19 @@ const DataToolbar = forwardRef<HTMLDivElement, DataToolbarProps>(
         {renderInput && (
           <div className="aksel-data-toolbar__input">{renderInput}</div>
         )}
-        <Spacer />
-        {renderPagination && (
-          <div className="aksel-data-toolbar__pagination">
-            {renderPagination}
-          </div>
-        )}
-        {renderPreferences && (
-          <div className="aksel-data-toolbar__preferences">
-            {renderPreferences}
-          </div>
-        )}
+
+        <div className="aksel-data-toolbar__actions">
+          {renderPagination && (
+            <div className="aksel-data-toolbar__pagination">
+              {renderPagination}
+            </div>
+          )}
+          {renderPreferences && (
+            <div className="aksel-data-toolbar__preferences">
+              {renderPreferences}
+            </div>
+          )}
+        </div>
       </div>
     );
   },
@@ -69,14 +70,14 @@ DataToolbar.Button = DataToolbarButton;
 
 export {
   DataToolbar,
-  DataToolbarSearchField,
   DataToolbarButton,
+  DataToolbarSearchField,
   DataToolbarToggleButton,
 };
 export default DataToolbar;
 export type {
+  DataToolbarButtonProps,
   DataToolbarProps,
   DataToolbarSearchFieldProps,
-  DataToolbarButtonProps,
   DataToolbarToggleButtonProps,
 };

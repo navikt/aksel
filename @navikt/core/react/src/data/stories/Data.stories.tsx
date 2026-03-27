@@ -188,21 +188,25 @@ export const TanstackExample: Story = {
             />
           }
           renderPagination={
-            <HStack gap="space-8" wrap={false} align="center">
+            <HStack gap="space-2" wrap={false} align="center">
               <Button
                 size="small"
                 variant="tertiary"
                 icon={<ChevronLeftIcon aria-hidden />}
                 data-color="neutral"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
               />
-              <BodyShort as="pre" size="small">
-                Side 1 av 15
+              <BodyShort as="div" style={{ whiteSpace: "pre" }} size="small">
+                {`Side ${table.getState().pagination.pageIndex + 1} av ${table.getPageCount() + 1}`}
               </BodyShort>
               <Button
                 size="small"
                 variant="tertiary"
                 icon={<ChevronRightIcon aria-hidden />}
                 data-color="neutral"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
               />
             </HStack>
           }
