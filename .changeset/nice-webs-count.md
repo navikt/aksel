@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Button: Set correct text color when a parent has data-color=neutral
+Button: Use correct text color when inherited `data-color` is "neutral"
