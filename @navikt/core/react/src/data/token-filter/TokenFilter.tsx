@@ -116,27 +116,29 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           open={open}
           setOpen={setOpen}
         />
-        <HStack marginBlock="space-8" gap="space-8">
-          {query.tokens.map((token, index) => {
-            return (
-              <React.Fragment
-                key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
-              >
-                <Chips.Removable
-                  key={index}
-                  onClick={() => {
-                    removeToken(index);
-                  }}
+        {query.tokens.length > 0 && (
+          <HStack marginBlock="space-12 space-0" gap="space-8">
+            {query.tokens.map((token, index) => {
+              return (
+                <React.Fragment
+                  key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
                 >
-                  {`${token.propertyKey} ${token.operator} ${token.value}`}
-                </Chips.Removable>
-                {index < query.tokens.length - 1 && (
-                  <span>{query.operation}</span>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </HStack>
+                  <Chips.Removable
+                    key={index}
+                    onClick={() => {
+                      removeToken(index);
+                    }}
+                  >
+                    {`${token.propertyKey} ${token.operator} ${token.value}`}
+                  </Chips.Removable>
+                  {index < query.tokens.length - 1 && (
+                    <span>{query.operation}</span>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </HStack>
+        )}
       </div>
     );
   },

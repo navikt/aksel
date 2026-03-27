@@ -1,9 +1,8 @@
 .aksel-data-toolbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--ax-space-8);
-  grid-template-columns: 1fr 1fr;
 }
 
 .aksel-data-toolbar__actions {
@@ -19,7 +18,7 @@
 }
 
 .aksel-data-toolbar__input {
-  max-inline-size: 600px;
+  /* max-inline-size: 600px; */
   width: 100%;
 }
 

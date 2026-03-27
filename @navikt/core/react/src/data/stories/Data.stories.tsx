@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -24,8 +24,14 @@ import { BodyShort } from "../../typography";
 import DataDragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import { DataTable } from "../table";
 import { TokenFilter } from "../token-filter/TokenFilter";
+import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
-import { PersonInfo, columns, sampleData } from "./dummy-data";
+import {
+  PersonInfo,
+  columns,
+  homeSystemOptions,
+  sampleData,
+} from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data",
@@ -280,6 +286,77 @@ export const KitchenSink: Story = {
   },
 };
 
+const dayJobValues = [
+  "Jedi Knight",
+  "Bounty Hunter",
+  "Sith Lord",
+  "Smuggler",
+  "Imperial Officer",
+  "Rebel Pilot",
+  "Moisture Farmer",
+  "Podracer",
+  "Clone Trooper",
+  "Droid Mechanic",
+];
+
+const filterPropertyDefs = [
+  {
+    key: "name",
+    label: "Name",
+    group: "Person",
+    operators: [":", "!:", "=", "!=", "^", "!^"],
+  },
+  {
+    key: "nationalId",
+    label: "National Id",
+    group: "Person",
+    operators: ["=", ":"],
+  },
+  {
+    key: "dayJob",
+    label: "Day job",
+    group: "Workplace",
+    operators: ["=", "!=", ":", "!:"],
+  },
+  {
+    key: "supervisor",
+    label: "Supervisor",
+    group: "Workplace",
+    operators: ["=", "!=", ":", "!:"],
+  },
+  {
+    key: "homeSystem",
+    label: "Home system",
+    groupLabel: "Home system",
+    group: "Home",
+    operators: ["=", "!=", ":", "!:"],
+  },
+];
+
+const filterOptions = [
+  ...dayJobValues.map((v) => ({ propertyKey: "dayJob", value: v })),
+  ...homeSystemOptions.map((v) => ({
+    propertyKey: "homeSystem",
+    value: v,
+  })),
+  ...Array.from(new Set(sampleData.map((row) => row.supervisor))).map(
+    (value) => ({
+      propertyKey: "supervisor",
+      value,
+    }),
+  ),
+  ...Array.from(new Set(sampleData.map((row) => row.nationalId))).map(
+    (value) => ({
+      propertyKey: "nationalId",
+      value,
+    }),
+  ),
+  ...Array.from(new Set(sampleData.map((row) => row.name))).map((value) => ({
+    propertyKey: "name",
+    value,
+  })),
+];
+
 export const KitchenSinkAdvancedFilter: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
@@ -291,14 +368,57 @@ export const KitchenSinkAdvancedFilter: Story = {
       columns.map((col) => col.accessorKey!),
     );
 
-    const [query, setQuery] = useState<any>({
+    const [query, setQuery] = useState<ExternalQuery>({
       tokens: [],
       operation: "and",
     });
 
+    const filteredData = useMemo(() => {
+      if (query.tokens.length === 0) {
+        return sampleData;
+      }
+
+      return sampleData.filter((row) => {
+        const results = query.tokens.map((token) => {
+          const value = row[token.propertyKey as keyof PersonInfo];
+          if (token.operator === "=") {
+            return value === token.value;
+          }
+          if (token.operator === "!=") {
+            return value !== token.value;
+          }
+          if (token.operator === ":") {
+            return String(value)
+              .toLowerCase()
+              .includes(String(token.value).toLowerCase());
+          }
+          if (token.operator === "!:") {
+            return !String(value)
+              .toLowerCase()
+              .includes(String(token.value).toLowerCase());
+          }
+          if (token.operator === "^") {
+            return String(value)
+              .toLowerCase()
+              .startsWith(String(token.value).toLowerCase());
+          }
+          if (token.operator === "!^") {
+            return !String(value)
+              .toLowerCase()
+              .startsWith(String(token.value).toLowerCase());
+          }
+          return true;
+        });
+
+        return query.operation === "and"
+          ? results.every(Boolean)
+          : results.some(Boolean);
+      });
+    }, [query]);
+
     const table = useReactTable({
       columns,
-      data: sampleData,
+      data: filteredData,
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
@@ -326,9 +446,9 @@ export const KitchenSinkAdvancedFilter: Story = {
           renderInput={
             <TokenFilter
               query={query}
-              onChange={(newQuery) => setQuery(newQuery)}
-              options={[]}
-              propertyDefinitions={[]}
+              onChange={setQuery}
+              options={filterOptions}
+              propertyDefinitions={filterPropertyDefs}
             />
           }
           renderPagination={

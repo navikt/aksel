@@ -29,3 +29,7 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
 }
+
+.aksel-property-filter__input {
+  max-inline-size: 640px;
+}
