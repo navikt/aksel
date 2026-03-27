@@ -76,8 +76,8 @@
     color: var(--ax-text-subtle);
 
     &[data-color="neutral"],
-    [data-color="neutral"] > &:not([data-color]),
-    [data-color="neutral"] :not([data-color]) &:not([data-color]) {
+    [data-color="neutral"] > &:not([data-color], [data-pressed="true"]),
+    [data-color="neutral"] :not([data-color]) &:not([data-color], [data-pressed="true"]) {
       color: var(--ax-text-default);
     }
 
