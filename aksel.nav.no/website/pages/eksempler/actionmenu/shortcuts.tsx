@@ -59,5 +59,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Du vil selv måtte legge til funksjonalitet for å lytte til tastatursnarveier.",
+  desc: "Du vil selv måtte legge til funksjonalitet for å lytte til tastatursnarveier, f.eks. med [TanStack Hotkeys](https://tanstack.com/hotkeys/latest).",
 };
