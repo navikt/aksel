@@ -44,7 +44,7 @@ export const DragAndDropDragHandler = React.forwardRef<
         data-drag-handler-active={active}
         onPointerDown={(event) => {
           event.stopPropagation();
-          context?.onDragStart(event, item, itemRef?.current || null);
+          context?.startPendingDragStart(event, item, itemRef?.current || null);
         }}
         onClick={() => context?.setDragHandlerActive(item)}
         onKeyDown={(event) => {

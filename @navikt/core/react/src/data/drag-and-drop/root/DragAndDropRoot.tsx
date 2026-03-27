@@ -258,7 +258,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         dragHandlerActive={dragHandlerActive}
         setDragHandlerActive={setDragHandlerActive}
         onKeyboardDragEnd={onKeyboardDragEnd}
-        beforeDragStart={startPendingDragStart}
+        startPendingDragStart={startPendingDragStart}
         cancelDragStart={cancelDragStart}
       >
         <div ref={forwardedRef}>{children}</div>
