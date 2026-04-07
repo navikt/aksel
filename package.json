@@ -13,7 +13,7 @@
     "lint:eslint": "yarn eslint --max-warnings=0 .",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "lint:biome": "yarn biome lint .",
-    "lint:cycle": "yarn biome lint --only=suspicious/noImportCycles ./@navikt ./scripts",
+    "lint:cycle": "yarn biome lint --only=suspicious/noImportCycles --error-on-warnings ./@navikt ./scripts",
     "storybook": "WITH_WEBSITE=true storybook dev -p 6006",
     "storybook:aksel": "WITH_WEBSITE=true storybook dev -c aksel.nav.no/website/.storybook -p 6007",
     "storybook:test": "vitest run --config ./vitest.config.ts --project=storybook --silent",
