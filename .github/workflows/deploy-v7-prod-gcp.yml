@@ -43,9 +43,6 @@ jobs:
         run: cd v7-aksel.nav.no && yarn build
         shell: bash
 
-      - name: Generate deploy tag
-        run: echo "TAG=PROD-V7-$( date +%s )" >> $GITHUB_ENV
-
       - name: Build and push Docker image
         uses: nais/docker-build-push@v0
         id: docker-push

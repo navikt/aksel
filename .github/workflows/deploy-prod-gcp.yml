@@ -62,9 +62,6 @@ jobs:
           sanity_deploy_studio: ${{ secrets.SANITY_DEPLOY_STUDIO }}
           next_encryption_key: ${{ secrets.NEXT_ENCRYPTION_KEY }}
 
-      - name: Generate deploy tag
-        run: echo "TAG=PROD-$( date +%s )" >> $GITHUB_ENV
-
       - name: Build and push Docker image
         uses: nais/docker-build-push@v0
         id: docker-push

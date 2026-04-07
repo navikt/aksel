@@ -35,9 +35,6 @@ jobs:
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
-      - name: Generate deploy tag
-        run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
-
       - name: Build and push Docker image
         uses: nais/docker-build-push@v0
         id: docker-push
