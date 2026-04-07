@@ -133,7 +133,11 @@ function DataTableAutoInner<T>(
                 {selection.selectionMode === "multiple" && (
                   /* TODO: Overflow/focus is clipped. Alignment is off */
                   /* TODO: Should not be resizable */
-                  <DataTableTh textAlign="center" width="60px">
+                  <DataTableTh
+                    textAlign="center"
+                    width="60px"
+                    UNSAFE_isSelection
+                  >
                     <CheckboxInput
                       {...selection.getTheadCheckboxProps()}
                       compact
@@ -141,7 +145,7 @@ function DataTableAutoInner<T>(
                   </DataTableTh>
                 )}
                 {selection.selectionMode === "single" && (
-                  <DataTableTd align="center" width="60px" />
+                  <DataTableTh width="60px" UNSAFE_isSelection />
                 )}
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
@@ -165,7 +169,11 @@ function DataTableAutoInner<T>(
                 return (
                   <DataTableTr key={rowId}>
                     {selection.selectionMode === "multiple" && (
-                      <DataTableTd align="center" width="60px">
+                      <DataTableTd
+                        align="center"
+                        width="60px"
+                        UNSAFE_isSelection
+                      >
                         <CheckboxInput
                           {...selection.getRowCheckboxProps(rowId)}
                           compact
@@ -175,7 +183,7 @@ function DataTableAutoInner<T>(
                     {/* TODO: Alignment is off: Make cell-padding handle it */}
 
                     {selection.selectionMode === "single" && (
-                      <DataTableTd align="center" width="60px">
+                      <DataTableTd width="60px" UNSAFE_isSelection>
                         {/* used with keyboard nav is funky, no longer auto-selects on keyboard-nav. Probably preventDefault somewhere breaking it. */}
                         <RadioInput {...selection.getRowRadioProps(rowId)} />
                       </DataTableTd>

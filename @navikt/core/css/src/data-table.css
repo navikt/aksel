@@ -306,7 +306,7 @@
   vertical-align: middle;
   color: var(--ax-text-neutral-subtle);
 
-  > div {
+  &:not(.aksel-data-table--UNSAFE_isSelection) > div {
     padding-block: var(--__axc-data-table-density);
     padding-inline: 1rem;
   }
@@ -322,6 +322,11 @@
   &:has(.aksel-data-table__th-sort-button:focus) {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
+  }
+
+  &.aksel-data-table--UNSAFE_isSelection > div {
+    display: grid;
+    place-content: center;
   }
 }
 

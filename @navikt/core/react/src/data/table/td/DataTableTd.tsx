@@ -20,11 +20,22 @@ interface DataTableTdProps extends React.TdHTMLAttributes<HTMLTableCellElement> 
    * @default "left"
    */
   textAlign?: "left" | "center" | "right";
+  /**
+   * Temp hack to solve overflow and alignment
+   */
+  UNSAFE_isSelection?: boolean;
 }
 
 const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
   (
-    { className, children, contentMaxWidth, textAlign = "left", ...rest },
+    {
+      className,
+      children,
+      contentMaxWidth,
+      textAlign = "left",
+      UNSAFE_isSelection,
+      ...rest
+    },
     forwardedRef,
   ) => {
     const { withKeyboardNav } = useDataTableContext();
@@ -33,7 +44,9 @@ const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
       <td
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__td", className)}
+        className={cl("aksel-data-table__td", className, {
+          "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
+        })}
         tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
       >

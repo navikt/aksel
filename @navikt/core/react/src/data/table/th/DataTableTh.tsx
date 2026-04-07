@@ -52,6 +52,10 @@ interface DataTableThProps
    */
   colSpan?: number;
   rowSpan?: number;
+  /**
+   * Temp hack to solve overflow and alignment
+   */
+  UNSAFE_isSelection?: boolean;
 }
 
 const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
@@ -82,6 +86,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
       onWidthChange,
       defaultWidth,
       colSpan,
+      UNSAFE_isSelection,
       ...rest
     },
     forwardedRef,
@@ -143,12 +148,20 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             )}
           </button>
         ) : (
-          <div ref={contentRef} className="aksel-data-table__th-content">
+          <div
+            ref={contentRef}
+            className={cl(
+              !UNSAFE_isSelection && "aksel-data-table__th-content",
+              {
+                "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
+              },
+            )}
+          >
             {children}
           </div>
         )}
 
-        {resizeResult.enabled && (
+        {resizeResult.enabled && !UNSAFE_isSelection && (
           <button
             {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
