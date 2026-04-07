@@ -141,6 +141,25 @@ export const GroupDescription = () => (
       legend="Group legend"
       description="Group description"
       size="small"
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+  </VStack>
+);
+
+export const GroupDescriptionHideLegend = () => (
+  <VStack gap="space-16">
+    <CheckboxGroup
+      legend="Group legend"
+      description="Group description"
+      hideLegend
+    >
+      <Checkbox value="tekst">Checkboxtekst</Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Group legend"
+      description="Group description"
+      size="small"
       hideLegend
     >
       <Checkbox value="tekst">Checkboxtekst</Checkbox>
