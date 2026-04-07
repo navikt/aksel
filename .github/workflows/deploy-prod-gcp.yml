@@ -30,7 +30,7 @@ jobs:
       - name: Run ts-docgen
         run: yarn docgen
 
-      - name: Update sanity sync
+      - name: Update Sanity
         env:
           SANITY_WRITE: ${{ secrets.SANITY_WRITE }}
         run: yarn workspace aksel.nav.no sanity:update
