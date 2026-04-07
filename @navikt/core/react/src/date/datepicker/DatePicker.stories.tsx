@@ -649,6 +649,43 @@ export const FixedWeeks = () => {
   );
 };
 
+export const ColoredBg = () => {
+  const { datepickerProps, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    toDate: new Date("Feb 23 2024"),
+    onDateChange: console.log,
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <div>
+        <DatePicker {...datepickerProps} dropdownCaption>
+          <DatePicker.Input
+            size="medium"
+            {...inputProps}
+            value="01.02.2021"
+            label="Velg dato"
+          />
+        </DatePicker>
+      </div>
+      <div
+        style={{
+          background: "purple",
+        }}
+      >
+        <DatePicker {...datepickerProps} dropdownCaption>
+          <DatePicker.Input
+            size="medium"
+            {...inputProps}
+            value="01.02.2021"
+            label="Velg dato"
+          />
+        </DatePicker>
+      </div>
+    </div>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   DropdownCaption,
   DisabledDays,
