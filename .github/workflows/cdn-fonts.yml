@@ -1,4 +1,4 @@
-name: "push-to-cdn"
+name: Upload fonts to CDN
 
 on:
   workflow_dispatch:
@@ -10,17 +10,19 @@ on:
 
 jobs:
   upload:
+    name: Upload fonts to CDN
     runs-on: ubuntu-latest
 
     permissions:
-      contents: "read"
-      id-token: "write"
-      deployments: "write"
+      contents: read
+      id-token: write
 
     steps:
-      - uses: "actions/checkout@v6"
+      - name: Checkout code
+        uses: "actions/checkout@v6"
 
-      - id: upload
+      - name: Upload fonts to CDN
+        id: upload
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
           team: aksel
@@ -29,5 +31,6 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
-      - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
+      - name: Log uploaded file
+        run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
         shell: bash

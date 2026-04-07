@@ -18,7 +18,8 @@
 }
 
 /* Applied when hideLegend is applied to fieldset */
-.aksel-fieldset > .aksel-sr-only + :not(:first-child, :empty) {
+.aksel-fieldset > .aksel-sr-only + :not(:first-child, :empty),
+.aksel-fieldset > .aksel-typo--visually-hidden + :not(:first-child, :empty) {
   margin-top: 0;
 }
 

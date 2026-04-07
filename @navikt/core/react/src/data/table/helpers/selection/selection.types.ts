@@ -1,5 +1,5 @@
-import type { CheckboxProps } from "../../../../form/checkbox/types";
-import type { RadioProps } from "../../../../form/radio/types";
+import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
+import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
 type SelectionT = (string | number)[] | "all";
 
@@ -32,7 +32,7 @@ type SingleSelection = {
   allKeys: (string | number)[];
   selectedKeys: (string | number)[];
   disabledKeys: (string | number)[];
-  getRowRadioProps: (key: string | number) => RadioProps;
+  getRowRadioProps: (key: string | number) => RadioInputProps;
 };
 
 type MultipleSelection = {
@@ -40,8 +40,8 @@ type MultipleSelection = {
   allKeys: (string | number)[];
   selectedKeys: SelectionT;
   disabledKeys: (string | number)[];
-  getTheadCheckboxProps: () => CheckboxProps;
-  getRowCheckboxProps: (key: string | number) => CheckboxProps;
+  getTheadCheckboxProps: () => CheckboxInputProps;
+  getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
 };
 
 type TableSelection = NoneSelection | SingleSelection | MultipleSelection;

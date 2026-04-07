@@ -1,4 +1,5 @@
 import React from "react";
+import { Label } from "../../../../typography";
 import { useId } from "../../../../utils-external";
 
 interface ListboxGroupProps {
@@ -15,9 +16,15 @@ function ListboxGroup({ label, children }: ListboxGroupProps) {
       className="aksel-listbox__group"
       aria-labelledby={labelId}
     >
-      <div id={labelId} aria-hidden>
+      <Label
+        as="div"
+        size="small"
+        id={labelId}
+        aria-hidden
+        className="aksel-listbox__group-label"
+      >
         {label}
-      </div>
+      </Label>
       {children}
     </div>
   );

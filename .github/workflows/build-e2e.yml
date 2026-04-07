@@ -1,4 +1,4 @@
-name: E2E / Playwright Tests
+name: E2E tests (Playwright)
 on:
   push:
     branches: [main, next]
@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   prebuild-app-for-playwright:
-    name: "Prebuild app for Playwright tests"
+    name: Build app for Playwright
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ${{ github.repository }}-e2e
@@ -59,7 +59,7 @@ jobs:
 
   run-playwright:
     needs: [prebuild-app-for-playwright]
-    name: Playwright shard ${{ matrix.shardIndex }}
+    name: Playwright shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.58.1-noble
@@ -111,6 +111,7 @@ jobs:
           retention-days: 1
 
   merge-reports:
+    name: Merge Playwright reports
     if: ${{ !cancelled() }}
     needs: [run-playwright]
     runs-on: ubuntu-latest

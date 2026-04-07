@@ -13,4 +13,4 @@
 - [ ] Exports (`@navikt/core/react/src/index.ts` and `@navikt/core/react/package.json`)
 - [ ] New component? CSS import (`@navikt/core/css/index.css`)
 - [ ] Breaking change? Update migration guide. Consider codemod.
-- [ ] Changeset (Format: `<Component>: <gitmoji?> <Text>.` E.g. "Button: :sparkles: Add feature xyz.")
+- [ ] Changeset (Format: `<Component>: <gitmoji?> <Text>` E.g. "Button: :sparkles: Add feature xyz")

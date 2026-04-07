@@ -6,7 +6,7 @@ import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import DataTableAuto from "../table/root/DataTableAuto";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data/ItemsAsData",
+  title: "ds-react/Data/Data Prop",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },
@@ -114,6 +114,7 @@ export const SelectionModeMultiple: Story = {
         selectionMode="multiple"
         onSelectionChange={console.info}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
       />
     );
   },
@@ -128,6 +129,7 @@ export const SelectionModeSingle: Story = {
         selectionMode="single"
         onSelectionChange={console.info}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
       />
     );
   },

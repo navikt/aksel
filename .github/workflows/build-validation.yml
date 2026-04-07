@@ -1,4 +1,4 @@
-name: CI
+name: Validation (Lint, Tests)
 
 on:
   push:
@@ -8,9 +8,16 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   lint:
-    name: "Linter: eslint, stylelint"
+    name: Lint (ESLint, Stylelint etc.)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,7 +34,7 @@ jobs:
         run: yarn lint
 
   validate-examples:
-    name: "Validate Aksel.nav.no component examples"
+    name: Validate component examples
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -44,7 +51,7 @@ jobs:
         run: yarn validate:eksempler
 
   test:
-    name: "Tests: Unit and integration"
+    name: Unit and integration tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -61,7 +68,7 @@ jobs:
         run: yarn test
 
   ui:
-    name: "Tests: UI"
+    name: UI tests (Storybook)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:

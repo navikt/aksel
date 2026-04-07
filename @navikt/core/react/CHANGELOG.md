@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 8.9.1
+
+### Patch Changes
+
+- Button: Use correct text color when inherited `data-color` is "neutral" ([#4772](https://github.com/navikt/aksel/pull/4772))
+
+- Checkbox, Radio: Internal updates. ([#4760](https://github.com/navikt/aksel/pull/4760))
+
+- Datepicker, Monthpicker: Sync background on DateInput button to Input. ([#4781](https://github.com/navikt/aksel/pull/4781))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.9.1
+  - @navikt/aksel-icons@8.9.1
+
+## 8.9.0
+
+### Minor Changes
+
+- InternalHeader: Added `isActive`-prop to `InternalHeader.Button`. ([#4761](https://github.com/navikt/aksel/pull/4761))
+
+### Patch Changes
+
+- DatePicker, MonthPicker: Make open button more prominent ([#4751](https://github.com/navikt/aksel/pull/4751))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.9.0
+  - @navikt/aksel-icons@8.9.0
+
 ## 8.8.0
 
 ### Minor Changes

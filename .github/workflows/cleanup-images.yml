@@ -1,0 +1,49 @@
+name: Cleanup E2E Docker images
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  packages: write
+
+jobs:
+  cleanup-e2e:
+    name: Delete old E2E images from GHCR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old E2E container images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: aksel-e2e
+          package-type: container
+          min-versions-to-keep: 10
+          delete-only-untagged-versions: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  cleanup-legacy-build:
+    name: Delete old website images from GHCR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old website container images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: designsystemet
+          package-type: container
+          min-versions-to-keep: 0
+          delete-only-untagged-versions: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  cleanup-legacy-build-2:
+    name: Delete old website images from GHCR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old website container images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: aksel
+          package-type: container
+          min-versions-to-keep: 0
+          delete-only-untagged-versions: false
+          token: ${{ secrets.GITHUB_TOKEN }}

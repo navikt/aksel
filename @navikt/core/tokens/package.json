@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "8.8.0",
+  "version": "8.9.1",
   "description": "Design-tokens for Nav designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -20,7 +20,7 @@
     "build": "tsx ./src && yarn build:figma-config && yarn build:plugin && tsx ./config/version-tag.ts",
     "build:figma-config": "tsx ./src/figma",
     "build:plugin-dev": "esbuild src/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='src/figma/plugin/plugin.js'",
-    "build:plugin": "esbuild src/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='src/figma/plugin/plugin.js'",
+    "build:plugin": "esbuild src/figma/plugin/plugin.ts --log-level=warning --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='src/figma/plugin/plugin.js'",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
