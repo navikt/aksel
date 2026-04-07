@@ -1,4 +1,4 @@
-name: Visual Regression Tests
+name: Visual regression (Chromatic)
 
 on:
   push:
@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   chromatic:
+    name: Run Chromatic
     runs-on: ubuntu-latest
     permissions:
       issues: write

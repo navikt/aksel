@@ -1,18 +1,25 @@
-name: Backup sanity dateset to gcp
+name: Backup Sanity dataset
+
 on:
   workflow_dispatch:
   schedule:
-    # 12.00 every 3 days
     - cron: "0 0 */3 * *"
+
+permissions:
+  contents: read
+
 jobs:
   execute:
+    name: Export and upload Sanity backup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
-          fetch-depth: 0 # Required to retrieve git history
+          fetch-depth: 1
 
-      - uses: actions/setup-node@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: yarn
@@ -28,11 +35,13 @@ jobs:
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
 
-      - name: Upload GCP bucket
+      - name: Authenticate with GCP
         uses: "google-github-actions/auth@v3"
         with:
           credentials_json: "${{ secrets.gcp_credentials_prod }}"
-      - uses: "google-github-actions/upload-cloud-storage@v3"
+
+      - name: Upload backup to GCS bucket
+        uses: "google-github-actions/upload-cloud-storage@v3"
         with:
           path: ./aksel.nav.no/website
           destination: "aksel-website-prod/backups"

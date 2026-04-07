@@ -1,4 +1,4 @@
-name: "Update remote token config for figma variables plugin"
+name: Upload Figma token config to CDN
 
 on:
   workflow_dispatch:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   upload:
+    name: Build and upload token config
     runs-on: ubuntu-latest
 
     permissions:
@@ -17,11 +18,13 @@ jobs:
       id-token: "write"
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
-      - uses: actions/setup-node@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: yarn
@@ -35,7 +38,8 @@ jobs:
       - name: Build tokens
         run: yarn workspace @navikt/ds-tokens build
 
-      - id: upload
+      - name: Upload config to CDN
+        id: upload
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
           team: designsystem
@@ -46,5 +50,6 @@ jobs:
           source_keep_parent_name: false
           no_cache_paths: "@navikt/tokens/figma-config.json"
 
-      - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
+      - name: Log uploaded file
+        run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
         shell: bash
