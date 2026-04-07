@@ -1,4 +1,4 @@
-name: Build validation (Lint, Tests)
+name: Validation (Lint, Tests)
 
 on:
   push:
