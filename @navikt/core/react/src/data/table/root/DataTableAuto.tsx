@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useState } from "react";
-import { Checkbox } from "../../../form/checkbox";
+import { CheckboxInput } from "../../../form/checkbox/checkbox-input/CheckboxInput";
+import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
@@ -133,7 +134,10 @@ function DataTableAutoInner<T>(
                   /* TODO: Overflow/focus is clipped. Alignment is off */
                   /* TODO: Should not be resizable */
                   <DataTableTh textAlign="center" width="60px">
-                    <Checkbox {...selection.getTheadCheckboxProps()} />
+                    <CheckboxInput
+                      {...selection.getTheadCheckboxProps()}
+                      compact
+                    />
                   </DataTableTh>
                 )}
                 {selection.selectionMode === "single" && (
@@ -162,17 +166,18 @@ function DataTableAutoInner<T>(
                   <DataTableTr key={rowId}>
                     {selection.selectionMode === "multiple" && (
                       <DataTableTd align="center" width="60px">
-                        <Checkbox {...selection.getRowCheckboxProps(rowId)} />
+                        <CheckboxInput
+                          {...selection.getRowCheckboxProps(rowId)}
+                          compact
+                        />
                       </DataTableTd>
                     )}
+                    {/* TODO: Alignment is off: Make cell-padding handle it */}
+
                     {selection.selectionMode === "single" && (
                       <DataTableTd align="center" width="60px">
-                        {/**
-                         * TODO: This should be a radio, but our current Radio implementation has some issues:
-                         * - Checked cant be controlled outside of radiogroup
-                         * - Cant hide label
-                         * */}
-                        <Checkbox {...selection.getRowRadioProps(rowId)} />
+                        {/* used with keyboard nav is funky, no longer auto-selects on keyboard-nav. Probably preventDefault somewhere breaking it. */}
+                        <RadioInput {...selection.getRowRadioProps(rowId)} />
                       </DataTableTd>
                     )}
                     {columnDefinitions.map((colDef, colDefIndex) => {

@@ -114,6 +114,7 @@ export const SelectionModeMultiple: Story = {
         selectionMode="multiple"
         onSelectionChange={console.info}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
       />
     );
   },
@@ -128,6 +129,7 @@ export const SelectionModeSingle: Story = {
         selectionMode="single"
         onSelectionChange={console.info}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
       />
     );
   },
