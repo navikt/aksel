@@ -1,9 +1,8 @@
 import React, { forwardRef, useState } from "react";
-import { Chips } from "../../chips";
-import { HStack } from "../../primitives/stack";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import { AutoCompleteOption } from "./AutoSuggest.types";
+import { TokenFilterChips } from "./FilterChip";
 import type {
   ExternalOptions,
   ExternalPropertyDefinitions,
@@ -28,6 +27,7 @@ type TokenFilterProps = {
  * TODO:
  * - Implement onChange handler to update query state when user selects an autocomplete option.
  * - Handle token rendering and editing (e.g., show tokens for matched properties/operators/values, allow deleting tokens).
+ * - Writing "stance" still shows status and hostname options
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
   ({ query, className, propertyDefinitions, options, onChange }, ref) => {
@@ -45,7 +45,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
       parsedPropertyOptions,
     );
 
-    const { addToken, removeToken } = createActionHandlers({
+    const { addToken, removeToken, updateOperation } = createActionHandlers({
       query,
       onChange,
     });
@@ -115,27 +115,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           open={open}
           setOpen={setOpen}
         />
-        <HStack marginBlock="space-8" gap="space-8">
-          {query.tokens.map((token, index) => {
-            return (
-              <React.Fragment
-                key={`${token.propertyKey}-${token.operator}-${token.value}-${index}`}
-              >
-                <Chips.Removable
-                  key={index}
-                  onClick={() => {
-                    removeToken(index);
-                  }}
-                >
-                  {`${token.propertyKey} ${token.operator} ${token.value}`}
-                </Chips.Removable>
-                {index < query.tokens.length - 1 && (
-                  <span>{query.operation}</span>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </HStack>
+        <TokenFilterChips
+          tokens={query.tokens}
+          removeToken={removeToken}
+          updateOperation={updateOperation}
+          operation={query.operation}
+        />
       </div>
     );
   },

@@ -9,9 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
-import { CogIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
-import { ActionMenu } from "../../action-menu";
-import { Button } from "../../button";
+import { Search } from "../../form/search";
 import { Box } from "../../primitives/box";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
@@ -19,7 +17,7 @@ import { DataToolbar } from "../toolbar";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data",
+  title: "ds-react/Data/Scroll",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },
@@ -65,48 +63,16 @@ export const NoPageScroll: Story = {
           Aktive filtre her
         </Box>
 
-        <DataToolbar>
-          <DataToolbar.SearchField
-            label="Tekstfilter"
-            onChange={(value) => table.setGlobalFilter(value)}
-          />
-          <DataToolbar.ToggleButton icon={<RectangleSectionsIcon />} />
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                data-color="neutral"
-                variant="tertiary"
-                size="small"
-                icon={<CogIcon title="Kolonner" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.CheckboxItem
-                checked={table.getIsAllColumnsVisible()}
-                onSelect={(event) => {
-                  const handler = table.getToggleAllColumnsVisibilityHandler();
-                  handler(event);
-                }}
-              >
-                Vis alle
-              </ActionMenu.CheckboxItem>
-              {table.getAllLeafColumns().map((column) => {
-                return (
-                  <ActionMenu.CheckboxItem
-                    key={column.id}
-                    checked={column.getIsVisible()}
-                    onSelect={(event) => {
-                      const handler = column.getToggleVisibilityHandler();
-                      handler(event);
-                    }}
-                  >
-                    {column.id}
-                  </ActionMenu.CheckboxItem>
-                );
-              })}
-            </ActionMenu.Content>
-          </ActionMenu>
-        </DataToolbar>
+        <DataToolbar
+          renderInput={
+            <Search
+              label="Tekstfilter"
+              variant="simple"
+              size="small"
+              onChange={(value) => table.setGlobalFilter(value)}
+            />
+          }
+        />
 
         <Box flexGrow="1" overflow="hidden">
           <DataTable withKeyboardNav>

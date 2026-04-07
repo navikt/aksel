@@ -1,7 +1,7 @@
-import React, { forwardRef, useState } from "react";
+import React, { type JSX, forwardRef, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
-import { Detail, Label } from "../../typography";
+import { BodyShort, Detail } from "../../typography";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
@@ -63,6 +63,8 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
                   setOpen(true);
                 }}
                 onFocus={() => setOpen(true)}
+                size="small"
+                autoComplete="off"
                 /* onKeyDown={(e) => {
               if (e.key === "Enter") {
                 createToken(filterText);
@@ -79,6 +81,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
               setFocusedValue={setVirtuallyFocusedOptionId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
+              autoSuggestValue={value}
             />
           )}
         </Listbox>
@@ -94,6 +97,7 @@ type AutoSuggestPopupProps = {
   setFocusedValue: (value: string) => void;
   onClose: () => void;
   safeZoneAnchor: HTMLInputElement | null;
+  autoSuggestValue: string;
 };
 
 const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
@@ -105,6 +109,7 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
       setFocusedValue,
       onClose,
       safeZoneAnchor,
+      autoSuggestValue,
     },
     ref,
   ) => {
@@ -134,7 +139,12 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
                       hasVirtualFocus={focusedValue === item.value}
                     >
                       <VStack gap="space-0">
-                        <Label as="div">{item.label}</Label>
+                        <BodyShort as="div" size="small">
+                          <HighlightText
+                            text={item.label}
+                            highlightText={autoSuggestValue}
+                          />
+                        </BodyShort>
                         {item.description && (
                           <Detail as="div">{item.description}</Detail>
                         )}
@@ -157,5 +167,57 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
     );
   },
 );
+
+function HighlightText({
+  text,
+  highlightText,
+}: {
+  text: string;
+  highlightText: string;
+}) {
+  if (!text || !highlightText) {
+    return <span>{text}</span>;
+  }
+
+  if (text === highlightText) {
+    return <Highlight text={text} />;
+  }
+
+  const { noMatches, matches } = highlightSplit(text, highlightText);
+
+  const highlighted: (string | JSX.Element)[] = [];
+
+  noMatches.forEach((noMatch, idx) => {
+    highlighted.push(<span key={`noMatch-${idx}`}>{noMatch}</span>);
+
+    if (matches && idx < matches.length) {
+      highlighted.push(<Highlight key={`match-${idx}`} text={matches[idx]} />);
+    }
+  });
+
+  return <span>{highlighted}</span>;
+}
+
+function Highlight({ text }: { text: string }) {
+  return <mark className="aksel-listbox__highlight">{text}</mark>;
+}
+
+function highlightSplit(text: string, highlightText: string) {
+  /* Skip loooong texts */
+  if (highlightText.length > 1000) {
+    return { noMatches: [text], matches: null };
+  }
+
+  /* Case insensitive filtering */
+  const filteringPattern = highlightText.replace(
+    /[-[\]/{}()*+?.\\^$|]/g,
+    "\\$&",
+  );
+  const regexp = new RegExp(filteringPattern, "gi");
+  const noMatches = text.split(regexp);
+  const matches = text.match(regexp);
+
+  return { noMatches, matches };
+}
 
 export { AutoSuggest };

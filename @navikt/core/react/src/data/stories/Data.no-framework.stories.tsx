@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useDeferredValue, useMemo, useState } from "react";
+import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data",
+  title: "ds-react/Data/No framework",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },
@@ -90,12 +91,16 @@ export const WithoutTanstack: Story = {
 
     return (
       <VStack gap="space-16">
-        <DataToolbar>
-          <DataToolbar.SearchField
-            label="Tekstfilter"
-            onChange={(e) => setGlobalFilter(e)}
-          />
-        </DataToolbar>
+        <DataToolbar
+          renderInput={
+            <Search
+              label="Tekstfilter"
+              variant="simple"
+              size="small"
+              onChange={(e) => setGlobalFilter(e)}
+            />
+          }
+        />
 
         <DataTable>
           <DataTable.Thead>

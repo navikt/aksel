@@ -4,7 +4,7 @@ import { Button } from "../../button";
 import { DataTable } from "../table";
 
 const meta: Meta<typeof DataTable> = {
-  title: "ds-react/Data",
+  title: "ds-react/Data/States",
   component: DataTable,
   parameters: {
     chromatic: { disable: true },

@@ -1,3 +1,4 @@
+import { error as actionsError } from "@actions/core";
 import { execSync } from "child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -8,8 +9,7 @@ function validateVersions() {
   const workspaces = getYarnWorkspacesList();
 
   if (workspaces.length === 0) {
-    console.error("No workspaces found");
-    return;
+    exitWithError("No workspaces found");
   }
 
   const dependencies = new Map<string, string[]>();
@@ -36,7 +36,8 @@ function validateVersions() {
     }
   }
 
-  const warnings: { dependency: string; filteredVersions: string[] }[] = [];
+  const depsOutOfSync: { dependency: string; filteredVersions: string[] }[] =
+    [];
 
   for (const [dependency, versions] of dependencies) {
     /**
@@ -52,7 +53,7 @@ function validateVersions() {
     );
 
     if (!versionsAreEqual) {
-      warnings.push({
+      depsOutOfSync.push({
         dependency,
         /* To keep console simple, we hide duplicates */
         filteredVersions: [...new Set(filteredVersions)],
@@ -60,18 +61,37 @@ function validateVersions() {
     }
   }
 
-  if (warnings.length > 0) {
-    console.warn(
-      "\nWorkspaces local dependency versions not synced across repository:",
-    );
+  if (depsOutOfSync.length > 0) {
+    console.log("");
 
-    for (const { dependency, filteredVersions } of warnings) {
-      logWarning(dependency, filteredVersions);
+    if (process.env.CI) {
+      const joinedDependencies = depsOutOfSync
+        .map(
+          ({ dependency, filteredVersions }) =>
+            `- ${dependency}: ${filteredVersions.join(", ")}`,
+        )
+        .join(" \n");
+      actionsError(
+        `Workspaces local dependency versions not synced across repository: \n${joinedDependencies} \nPlease make sure all workspaces have the same version for each dependency.`,
+        {
+          title: "Inconsistent dependency versions",
+          file: "yarn.lock",
+          startLine: 1,
+        },
+      );
+    } else {
+      console.error(
+        "Workspaces local dependency versions not synced across repository:",
+      );
+      for (const { dependency, filteredVersions } of depsOutOfSync) {
+        logDependency(dependency, filteredVersions);
+      }
+      console.error(
+        "Please make sure all workspaces have the same version for each dependency.\n",
+      );
     }
 
-    console.warn(
-      "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
-    );
+    process.exit(1);
   }
 }
 
@@ -94,7 +114,7 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
 
     return workspaces;
   } catch {
-    console.error("Failed to get workspaces list");
+    exitWithError("Failed to get workspaces list");
   }
   return [];
 }
@@ -102,7 +122,7 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
 /**
  * Adds some colors to better highlight the warning
  */
-function logWarning(dependency: string, filteredVersions: string[]) {
+function logDependency(dependency: string, filteredVersions: string[]) {
   const colors = {
     reset: "\x1b[0m",
     red: "\x1b[31m",
@@ -114,5 +134,10 @@ function logWarning(dependency: string, filteredVersions: string[]) {
     colors.reset
   }`;
 
-  console.warn(`- ${coloredDependency}: ${coloredVersions}`);
+  console.error(`- ${coloredDependency}: ${coloredVersions}`);
+}
+
+function exitWithError(message: string) {
+  console.error(message);
+  process.exit(1);
 }
