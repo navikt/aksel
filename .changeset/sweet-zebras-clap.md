@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Datepicker: Sync background on DateInput button to Input.
+Datepicker, Monthpicker: Sync background on DateInput button to Input.
