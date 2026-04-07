@@ -16,7 +16,7 @@ env:
 
 jobs:
   sync_data_with_sanity:
-    name: Sync component data with Sanity
+    name: Sync data to Sanity
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
