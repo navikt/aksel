@@ -22,9 +22,6 @@
 /* Small */
 .aksel-checkbox--small,
 .aksel-radio--small {
-  --__axc-radio-checkbox-marker-size: 1.25rem;
-  --__axc-radio-checkbox-marker-target: 2rem;
-
   padding: var(--ax-space-6) 0;
 
   /* Focus outline */
