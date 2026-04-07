@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
+  type RowSelectionState,
   Table,
   flexRender,
   getCoreRowModel,
@@ -16,7 +17,9 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
+import { CheckboxInput } from "../../form/checkbox/checkbox-input/CheckboxInput";
 import { Radio, RadioGroup } from "../../form/radio";
+import { RadioInput } from "../../form/radio/radio-input/RadioInput";
 import { Search } from "../../form/search";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
@@ -373,6 +376,11 @@ export const KitchenSinkAdvancedFilter: Story = {
       operation: "and",
     });
 
+    const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+    const [selectionMode, setSelectionMode] = useState<"single" | "multiple">(
+      "multiple",
+    );
+
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
         return sampleData;
@@ -432,8 +440,12 @@ export const KitchenSinkAdvancedFilter: Story = {
       },
       state: {
         columnOrder,
+        rowSelection,
       },
       onColumnOrderChange: setColumnOrder,
+      onRowSelectionChange: setRowSelection,
+      enableRowSelection: true,
+      enableMultiRowSelection: selectionMode === "multiple",
       columnResizeMode: "onChange",
       debugTable: false,
       debugHeaders: false,
@@ -522,6 +534,18 @@ export const KitchenSinkAdvancedFilter: Story = {
                       >
                         Stripede rader
                       </Switch>
+                      <Switch
+                        size="small"
+                        checked={selectionMode === "multiple"}
+                        onChangeCapture={(e) =>
+                          setSelectionMode(
+                            e.target.checked ? "multiple" : "single",
+                          )
+                        }
+                        description="Slår på flervalg"
+                      >
+                        Flervalg
+                      </Switch>
                     </VStack>
                     <VStack maxWidth="50%" gap="space-16">
                       <BodyShort weight="semibold">Vis kolonner</BodyShort>
@@ -580,6 +604,19 @@ export const KitchenSinkAdvancedFilter: Story = {
             {table.getHeaderGroups().map((headerGroup) => {
               return (
                 <DataTable.Tr key={headerGroup.id}>
+                  {table.options.enableMultiRowSelection ? (
+                    <DataTable.Th textAlign="center" width="60px">
+                      <CheckboxInput
+                        compact
+                        checked={table.getIsAllPageRowsSelected()}
+                        indeterminate={table.getIsSomePageRowsSelected()}
+                        onChange={table.getToggleAllPageRowsSelectedHandler()}
+                        aria-label="Velg alle rader"
+                      />
+                    </DataTable.Th>
+                  ) : (
+                    <DataTable.Th textAlign="center" width="60px" />
+                  )}
                   {headerGroup.headers.map((header) => {
                     return (
                       <DataTable.Th
@@ -620,6 +657,7 @@ export const KitchenSinkAdvancedFilter: Story = {
             <DataTable.Tfoot>
               {table.getFooterGroups().map((footerGroup) => (
                 <DataTable.Tr key={footerGroup.id}>
+                  <DataTable.Td />
                   {footerGroup.headers.map((header) => (
                     <DataTable.Td key={header.id}>
                       {header.isPlaceholder
@@ -646,6 +684,9 @@ export const KitchenSinkAdvancedFilter: Story = {
 };
 
 const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
+  const hasRowSelection = table.options.enableRowSelection;
+  const multiRowSelection = table.options.enableMultiRowSelection;
+
   if (table.getRowModel().rows.length === 0) {
     return (
       <DataTable.Tbody>
@@ -661,7 +702,28 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
     <DataTable.Tbody>
       {table.getRowModel().rows.map((row) => {
         return (
-          <DataTable.Tr key={row.id}>
+          <DataTable.Tr key={row.id} selected={row.getIsSelected()}>
+            {hasRowSelection && (
+              <DataTable.Td textAlign="center" UNSAFE_isSelection>
+                {multiRowSelection ? (
+                  <CheckboxInput
+                    compact
+                    checked={row.getIsSelected()}
+                    disabled={!row.getCanSelect()}
+                    onChange={row.getToggleSelectedHandler()}
+                    aria-label={`Velg rad ${row.id}`}
+                  />
+                ) : (
+                  <RadioInput
+                    compact
+                    checked={row.getIsSelected()}
+                    disabled={!row.getCanSelect()}
+                    onChange={row.getToggleSelectedHandler()}
+                    aria-label={`Velg rad ${row.id}`}
+                  />
+                )}
+              </DataTable.Td>
+            )}
             {row.getVisibleCells().map((cell) => {
               return (
                 <DataTable.Td key={cell.id}>

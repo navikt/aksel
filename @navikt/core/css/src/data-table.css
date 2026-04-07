@@ -50,7 +50,7 @@
   }
 
   &[data-truncate-content="true"] {
-    .aksel-data-table__td > div {
+    .aksel-data-table__td:not(.aksel-data-table--UNSAFE_isSelection) > div {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
