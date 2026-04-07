@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   lint:
-    name: Lint (ESLint, Stylelint)
+    name: Lint (ESLint, Stylelint etc.)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
