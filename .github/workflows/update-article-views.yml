@@ -3,9 +3,6 @@ name: Update article views (Naisjob)
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   execute:
     name: Build and deploy article views job
