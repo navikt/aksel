@@ -35,6 +35,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/internal-helpers@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@astrojs/internal-helpers@npm:0.8.0"
+  dependencies:
+    picomatch: "npm:^4.0.3"
+  checksum: 10/9cfeb895c167d708a8b3b7cbc0c8114c15d36ee485db136a1a2e2137a1ae8f96d9655317b789f9226ffa5e11ac2a5365da0d87a3991b4a5f72bf83d77e75a026
+  languageName: node
+  linkType: hard
+
 "@astrojs/language-server@npm:^2.16.1":
   version: 2.16.4
   resolution: "@astrojs/language-server@npm:2.16.4"
@@ -100,16 +109,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/node@npm:^9.5.5":
-  version: 9.5.5
-  resolution: "@astrojs/node@npm:9.5.5"
+"@astrojs/node@npm:^10.0.0":
+  version: 10.0.4
+  resolution: "@astrojs/node@npm:10.0.4"
   dependencies:
-    "@astrojs/internal-helpers": "npm:0.7.6"
+    "@astrojs/internal-helpers": "npm:0.8.0"
     send: "npm:^1.2.1"
     server-destroy: "npm:^1.0.1"
   peerDependencies:
-    astro: ^5.17.3
-  checksum: 10/b55bc0b178d5805c0ef3d7ede19931dc5388e97d8caf08b7760a9c5712ad083a8a1907eadabb652b040d2514b83026eeb3c264d3b1fc0f87a72493ec6742470d
+    astro: ^6.0.0
+  checksum: 10/89e6e71be961cf3a087e2246ff3ede9e41a34b2a21d08777227e3b5b8904bea3b926628b4aa74e624e36fe58a44d4f76a39c792dbdbaf533f3e1059d08a57d42
   languageName: node
   linkType: hard
 
@@ -1155,34 +1164,34 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
-  version: 8.8.0
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=30dd8c&locator=irregular-iron%40workspace%3A."
-  checksum: 10/d2df41fc807d713ace4f96f7c348862e05eb153f40b222349ad607fc4201ecec02ce3a78c38618fbe268c9a6cc702065a025b38e385153b4c106af2cf4f75101
+  version: 8.9.0
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=97f0b2&locator=irregular-iron%40workspace%3A."
+  checksum: 10/3307cd70df247142e8dc390e0677275c5165f9e899f63c5661b3a8e94e212a2780e7c10108b1abac9ae4158f2e8d337dbe4aa34a677e05c65aec83642b7a9f58
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.8.0":
-  version: 8.8.0
-  resolution: "@navikt/aksel-icons@npm:8.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.8.0%2F9b61d6181f2dec2ea5f721c40f24d10e8fb42d21"
-  checksum: 10/bd0af050899cf925689704815ad10ade00006a3270a3195a63b5ce964db250baf5bac0b926e60de6923b859b4a9ea7f49a8a8bd96b8a2886ff64bf77ef573740
+"@navikt/aksel-icons@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "@navikt/aksel-icons@npm:8.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.9.0%2F6aa76719a9783fd0de5c01291adc8b920d2cf065"
+  checksum: 10/8475ee3ca22ef807d426eb4e72975e535042b131e7c5cd5aeab7ddc31069d2f28a85f1574a6a59ebd232a9748ad1563d73c7cf30e202ea822a234448f93e4958
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
-  version: 8.8.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=8ee6a6&locator=irregular-iron%40workspace%3A."
-  checksum: 10/16c733a0e82ba6b0948757430876c90fc3aafc72d811fb4605b1daa538471986b0bdf7487037731d88b8604f3ead2fe2058e2ff05960ae7744a9794a6616829f
+  version: 8.9.0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=838f28&locator=irregular-iron%40workspace%3A."
+  checksum: 10/fe65700172b961ddd681985cc7711cd0f4a946a6ef12dd7c1eefb6d8ff360fedf16ba0c9a6a325c95cddb009909880551a3f4d45537b3edb531e0f6cad169a57
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
-  version: 8.8.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=5d21ae&locator=irregular-iron%40workspace%3A."
+  version: 8.9.0
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=dc514d&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.8"
-    "@navikt/aksel-icons": "npm:^8.8.0"
-    "@navikt/ds-tokens": "npm:^8.8.0"
+    "@navikt/aksel-icons": "npm:^8.9.0"
+    "@navikt/ds-tokens": "npm:^8.9.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
@@ -1192,14 +1201,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/4c09a4004ef42b8ee1f69f4881758b6450d4a19511a3e8776e9db869b0bfbb2fa2b9c7a6ca52eae95ba27f4320af4defee676fd722562a17ebc09810faf730b4
+  checksum: 10/30915ac0daf2e95549bc59501b7c6b4d0e7bb026e0ce40419dda25536ae99c6220388f00fe7a2c73a8443fdde43df830b71730601e66e2d3c0b3b2b0926f608f
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^8.8.0":
-  version: 8.8.0
-  resolution: "@navikt/ds-tokens@npm:8.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.8.0%2F1b64643ec409921069ede0fc5eab1850afa23393"
-  checksum: 10/f3c32b5e12f1f1a09bc5c856a440f1e0940f3089bd535fd10fc035a4da6857309b1eaeac96b71eea385bddc009fe1b7385877628961f195172534d9e8b239f4b
+"@navikt/ds-tokens@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "@navikt/ds-tokens@npm:8.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.9.0%2Fc7f62f91df5fb35b063add5aad4636a7cfc4b802"
+  checksum: 10/2558ccab59ac0ba68abe2b2d4b035d0713bee4f97a7a500c448fbb67a749d4db61900df624fb02b14210aff2e6239cbadedaa831de973a17a6dffdcf2a25f4bb
   languageName: node
   linkType: hard
 
@@ -1983,11 +1992,11 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^5.0.2":
-  version: 5.0.4
-  resolution: "brace-expansion@npm:5.0.4"
+  version: 5.0.5
+  resolution: "brace-expansion@npm:5.0.5"
   dependencies:
     balanced-match: "npm:^4.0.2"
-  checksum: 10/cfd57e20d8ded9578149e47ae4d3fff2b2f78d06b54a32a73057bddff65c8e9b930613f0cbcfefedf12dd117151e19d4da16367d5127c54f3bff02d8a4479bb2
+  checksum: 10/f259b2ddf04489da9512ad637ba6b4ef2d77abd4445d20f7f1714585f153435200a53fa6a2e4a5ee974df14ddad4cd16421f6f803e96e8b452bd48598878d0ee
   languageName: node
   linkType: hard
 
@@ -2866,8 +2875,8 @@ __metadata:
   linkType: hard
 
 "h3@npm:^1.15.5":
-  version: 1.15.6
-  resolution: "h3@npm:1.15.6"
+  version: 1.15.10
+  resolution: "h3@npm:1.15.10"
   dependencies:
     cookie-es: "npm:^1.2.2"
     crossws: "npm:^0.3.5"
@@ -2878,7 +2887,7 @@ __metadata:
     radix3: "npm:^1.1.2"
     ufo: "npm:^1.6.3"
     uncrypto: "npm:^0.1.3"
-  checksum: 10/abed5e03c6e036af70f56c265af867a4553d044fbaf98adae87d209f32ccd74ee3748d5cdd82e20e94d8640f4686fb3d31c7130e52bf1d0cb9c2cb151f6353de
+  checksum: 10/058ddf8025518ece17f50fcdd14f13609a3d04054177a3ea347d90f110284307a623b36c2f1cedac8b143119b221659faffe279a5d794e2234d149b095f6e26b
   languageName: node
   linkType: hard
 
@@ -3122,7 +3131,7 @@ __metadata:
   resolution: "irregular-iron@workspace:."
   dependencies:
     "@astrojs/check": "npm:^0.9.7"
-    "@astrojs/node": "npm:^9.5.5"
+    "@astrojs/node": "npm:^10.0.0"
     "@astrojs/react": "npm:^4.4.2"
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons"
     "@navikt/ds-css": "file:./../../@navikt/core/css"
@@ -4211,9 +4220,9 @@ __metadata:
   linkType: hard
 
 "picomatch@npm:^2.0.4":
-  version: 2.3.1
-  resolution: "picomatch@npm:2.3.1"
-  checksum: 10/60c2595003b05e4535394d1da94850f5372c9427ca4413b71210f437f7b2ca091dbd611c45e8b37d10036fa8eade25c1b8951654f9d3973bfa66a2ff4d3b08bc
+  version: 2.3.2
+  resolution: "picomatch@npm:2.3.2"
+  checksum: 10/b788ef8148a2415b9dec12f0bb350ae6a5830f8f1950e472abc2f5225494debf7d1b75eb031df0ceaea9e8ec3e7bad599e8dbf3c60d61b42be429ba41bff4426
   languageName: node
   linkType: hard
 
@@ -4830,9 +4839,9 @@ __metadata:
   linkType: hard
 
 "smol-toml@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "smol-toml@npm:1.6.0"
-  checksum: 10/965315168134bdcc410cda1b71a5e79cb72efd4891584a4cfb1430795437f83ed3bfc40c36dede94023682d2f9aac3b6d52d191036ffc474692da68c4a2292c8
+  version: 1.6.1
+  resolution: "smol-toml@npm:1.6.1"
+  checksum: 10/9a0d86cc7f8abef429c915b373b9a1f369fe57a87efbbec46b967fb41dc28af753a2fa62c9c4848907c3b47c282be15c8854aa4e2942ef1fa86ff95a76d13856
   languageName: node
   linkType: hard
 
