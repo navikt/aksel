@@ -77,6 +77,7 @@ export const KitchenSink: Story = {
       state: {
         columnOrder,
       },
+      enableRowSelection: false,
       onColumnOrderChange: setColumnOrder,
       columnResizeMode: "onChange",
       debugTable: false,
