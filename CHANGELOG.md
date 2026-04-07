@@ -1,5 +1,23 @@
 # Changelog
 
+## 8.9.1
+
+### @navikt/ds-css
+
+- Button: Use correct text color when inherited `data-color` is "neutral" ([#4772](https://github.com/navikt/aksel/pull/4772))
+
+- Checkbox, Radio: Internal updates. ([#4760](https://github.com/navikt/aksel/pull/4760))
+
+- Datepicker, Monthpicker: Sync background on DateInput button to Input. ([#4781](https://github.com/navikt/aksel/pull/4781))
+
+### @navikt/ds-react
+
+- Button: Use correct text color when inherited `data-color` is "neutral" ([#4772](https://github.com/navikt/aksel/pull/4772))
+
+- Checkbox, Radio: Internal updates. ([#4760](https://github.com/navikt/aksel/pull/4760))
+
+- Datepicker, Monthpicker: Sync background on DateInput button to Input. ([#4781](https://github.com/navikt/aksel/pull/4781))
+
 ## 8.9.0
 
 ### @navikt/ds-css
