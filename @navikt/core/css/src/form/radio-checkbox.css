@@ -111,7 +111,7 @@
   );
 }
 
-/* Radio marker should be round */
+/* Radio marker */
 .aksel-radio__input {
   --__axc-radio-checkbox-marker-size: 1.5rem;
   --__axc-radio-checkbox-marker-target: 2.75rem; /* We want the click area to be a bit larger than the visible radio/checkbox */
