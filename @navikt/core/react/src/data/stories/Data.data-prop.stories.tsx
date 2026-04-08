@@ -134,3 +134,19 @@ export const SelectionModeSingle: Story = {
     );
   },
 };
+
+export const SelectionWithDisabledRows: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="multiple"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.id}
+        withKeyboardNav
+        disabledKeys={[1, 2]}
+      />
+    );
+  },
+};

@@ -92,6 +92,12 @@
   border: var(--__axc-radio-checkbox-marker-border) solid var(--ax-border-neutral);
   border-radius: var(--ax-radius-4);
   position: relative;
+
+  &[data-standalone="true"]:disabled,
+  .aksel-checkbox__input-wrapper[data-standalone="true"] > &:disabled {
+    opacity: var(--ax-opacity-disabled);
+    cursor: not-allowed;
+  }
 }
 
 /* Visible marker */
