@@ -37,9 +37,8 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
       <tr
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__tr", className, {
-          "aksel-data-table__tr--selected": selected,
-        })}
+        className={cl("aksel-data-table__tr", className)}
+        data-selected={selected}
       >
         <RowSelectionCell rowId={rowId} />
         {children}
