@@ -42,15 +42,7 @@ function useTableSelection<T>({
         return false;
       }
 
-      if (selectionMode === "single") {
-        return selectedKeys === rowId;
-      }
-
-      if (selectionMode === "multiple") {
-        return selectedKeys === "all" ? true : selectedKeys.includes(rowId);
-      }
-
-      return false;
+      return selectedKeys.includes(rowId);
     },
     [selectedKeys, selectionMode],
   );
@@ -66,9 +58,8 @@ function useTableSelection<T>({
   }
 
   if (selectionMode === "single") {
-    const arrayKeys = Array.isArray(selectedKeys) ? selectedKeys : [];
     const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeys: arrayKeys,
+      selectedKeys,
       setSelectedKeys,
       disabledKeys,
       name: radioGroupName,
@@ -77,7 +68,7 @@ function useTableSelection<T>({
     return {
       selectionMode,
       allKeys,
-      selectedKeys: arrayKeys,
+      selectedKeys,
       disabledKeys,
       getRowRadioProps,
       isRowSelected,

@@ -1,7 +1,7 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
-type SelectionT = (string | number)[] | "all";
+type SelectedKeysT = (string | number)[];
 
 type SelectionProps = {
   /**
@@ -14,32 +14,32 @@ type SelectionProps = {
    * @default "none"
    */
   selectionMode?: "none" | "single" | "multiple";
-  selectedKeys?: SelectionT;
-  defaultSelectedKeys?: SelectionT;
-  onSelectionChange?: (keys: SelectionT) => void;
-  disabledKeys?: (string | number)[];
+  selectedKeys?: SelectedKeysT;
+  defaultSelectedKeys?: SelectedKeysT;
+  onSelectionChange?: (keys: SelectedKeysT) => void;
+  disabledKeys?: SelectedKeysT;
 };
 
 type NoneSelection = {
   selectionMode: "none";
-  allKeys: (string | number)[];
-  selectedKeys: (string | number)[];
-  disabledKeys: (string | number)[];
+  allKeys: SelectedKeysT;
+  selectedKeys: SelectedKeysT;
+  disabledKeys: SelectedKeysT;
 };
 
 type SingleSelection = {
   selectionMode: "single";
-  allKeys: (string | number)[];
-  selectedKeys: (string | number)[];
-  disabledKeys: (string | number)[];
+  allKeys: SelectedKeysT;
+  selectedKeys: SelectedKeysT;
+  disabledKeys: SelectedKeysT;
   getRowRadioProps: (key: string | number) => RadioInputProps;
 };
 
 type MultipleSelection = {
   selectionMode: "multiple";
-  allKeys: (string | number)[];
-  selectedKeys: SelectionT;
-  disabledKeys: (string | number)[];
+  allKeys: SelectedKeysT;
+  selectedKeys: SelectedKeysT;
+  disabledKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
   getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
 };
@@ -55,7 +55,6 @@ export type {
   MultipleSelection,
   NoneSelection,
   SelectionProps,
-  SelectionT,
   SingleSelection,
   TableSelection,
 };
