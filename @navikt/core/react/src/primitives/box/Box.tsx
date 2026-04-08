@@ -77,7 +77,7 @@ interface BoxComponentType extends OverridableComponent<
   /**
    * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
    *
-   * **Run `npx @navikt/aksel@latest codemod v8-box-new`> to migrate.**
+   * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
    */
   New: typeof BoxNew;
 }
