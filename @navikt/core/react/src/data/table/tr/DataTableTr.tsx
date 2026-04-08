@@ -11,6 +11,8 @@ import {
 import { DataTableTd } from "../td/DataTableTd";
 import { DataTableTh } from "../th/DataTableTh";
 
+const SELECTION_CELL_WIDTH = "50px";
+
 type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
   selected?: boolean;
   /**
@@ -70,7 +72,11 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "multiple" && location === "thead") {
     return (
-      <DataTableTh textAlign="center" width="50px" UNSAFE_isSelection>
+      <DataTableTh
+        textAlign="center"
+        width={SELECTION_CELL_WIDTH}
+        UNSAFE_isSelection
+      >
         <Label htmlFor={inputId} visuallyHidden>
           Velg alle rader
         </Label>
@@ -85,7 +91,11 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "single" && location === "thead") {
     return (
-      <DataTableTh width="50px" UNSAFE_isSelection data-block-keyboard-nav />
+      <DataTableTh
+        width={SELECTION_CELL_WIDTH}
+        UNSAFE_isSelection
+        data-block-keyboard-nav
+      />
     );
   }
 
@@ -95,7 +105,11 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
-      <DataTableTd align="center" width="50px" UNSAFE_isSelection>
+      <DataTableTd
+        align="center"
+        width={SELECTION_CELL_WIDTH}
+        UNSAFE_isSelection
+      >
         <Label htmlFor={inputId} visuallyHidden>
           Velg rad
         </Label>
@@ -110,7 +124,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "single" && location === "tbody") {
     return (
-      <DataTableTd width="50px" UNSAFE_isSelection>
+      <DataTableTd width={SELECTION_CELL_WIDTH} UNSAFE_isSelection>
         <Label htmlFor={inputId} visuallyHidden>
           Velg rad
         </Label>
