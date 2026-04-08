@@ -374,26 +374,29 @@
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__arrow {
-  height: 1.2rem;
-}
-
 .aksel-data-drag-and-drop__drag-handler__alt,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
 
   .aksel-data-drag-and-drop__drag-handler__arrow {
+    height: 1.8rem;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    z-index: 1;
 
     &[data-direction="up"] {
-      top: -10px;
+      top: -18px;
     }
 
     &[data-direction="down"] {
-      bottom: calc(-100% - 6px);
+      bottom: calc(-100% - 22px);
     }
   }
 }
