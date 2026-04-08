@@ -4,12 +4,14 @@ type GetSingleSelectPropsArgs = {
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeys: (string | number)[];
+  name: string;
 };
 
 function getSingleSelectProps({
   selectedKeys,
   setSelectedKeys,
   disabledKeys,
+  name,
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number) => {
     if (selectedKeys.includes(key)) {
@@ -27,8 +29,7 @@ function getSingleSelectProps({
       onChange: () => handleSelectionChange(key),
       disabled: disabledKeys.includes(key),
       value: key,
-      /* TODO: Make this unique to avoid issue with multipe tables */
-      name: "data-table-single-select",
+      name,
     }),
   };
 }

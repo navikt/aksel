@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from "react";
+import { useId } from "../../../utils-external";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
@@ -22,6 +23,8 @@ function useTableSelection<T>({
   data,
   getRowId,
 }: UseTableSelectionArgs<T>): TableSelection {
+  const radioGroupName = useId();
+
   const allKeys = useMemo(
     () => data.map((item, index) => getRowId(item, index)),
     [data, getRowId],
@@ -68,6 +71,7 @@ function useTableSelection<T>({
       selectedKeys: arrayKeys,
       setSelectedKeys,
       disabledKeys,
+      name: radioGroupName,
     });
 
     return {
