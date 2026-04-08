@@ -15,7 +15,7 @@ export const useFieldset = (props: FieldsetProps, legendId: string) => {
 
   return {
     ...formField,
-    readOnlyIconNeedsTitle: !checkboxGroupContext && !radioGroupContext,
+    readOnlyIconNeedsTitle: checkboxGroupContext || radioGroupContext,
     inputProps: {
       ...(checkboxGroupContext || radioGroupContext
         ? { "aria-invalid": formField.inputProps["aria-invalid"] }
