@@ -15,6 +15,7 @@ export interface RadioGroupContextProps {
 export const RadioGroupContext =
   React.createContext<RadioGroupContextProps | null>(null);
 
+// TODO: Omit "role" in next major
 export interface RadioGroupProps extends Omit<
   FieldsetProps,
   "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
@@ -76,6 +77,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
 
     return (
       <Fieldset
+        role="radiogroup"
         {...rest}
         readOnly={readOnly}
         ref={ref}
