@@ -76,30 +76,29 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     const nameId = useId();
 
     return (
-      <Fieldset
-        role="radiogroup"
-        {...rest}
-        readOnly={readOnly}
-        ref={ref}
-        className={cl(
-          className,
-          "aksel-radio-group",
-          `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
-        )}
-        _fieldsSupportNativeReadOnly={false}
+      <RadioGroupContext.Provider
+        value={{
+          name: name ?? `radioGroupName-${nameId}`,
+          defaultValue,
+          value,
+          onChange,
+          required,
+        }}
       >
-        <RadioGroupContext.Provider
-          value={{
-            name: name ?? `radioGroupName-${nameId}`,
-            defaultValue,
-            value,
-            onChange,
-            required,
-          }}
+        <Fieldset
+          role="radiogroup"
+          {...rest}
+          readOnly={readOnly}
+          ref={ref}
+          className={cl(
+            className,
+            "aksel-radio-group",
+            `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
+          )}
         >
           <div className="aksel-radio-buttons">{children}</div>
-        </RadioGroupContext.Provider>
-      </Fieldset>
+        </Fieldset>
+      </RadioGroupContext.Provider>
     );
   },
 );

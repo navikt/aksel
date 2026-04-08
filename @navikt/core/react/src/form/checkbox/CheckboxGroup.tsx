@@ -73,26 +73,25 @@ export const CheckboxGroup = forwardRef<
     };
 
     return (
-      <Fieldset
-        {...rest}
-        ref={ref}
-        className={cl(
-          className,
-          "aksel-checkbox-group",
-          `aksel-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
-        )}
-        _fieldsSupportNativeReadOnly={false}
+      <CheckboxGroupContext.Provider
+        value={{
+          value,
+          defaultValue,
+          toggleValue,
+        }}
       >
-        <CheckboxGroupContext.Provider
-          value={{
-            value,
-            defaultValue,
-            toggleValue,
-          }}
+        <Fieldset
+          {...rest}
+          ref={ref}
+          className={cl(
+            className,
+            "aksel-checkbox-group",
+            `aksel-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
+          )}
         >
           <div className="aksel-checkboxes">{children}</div>
-        </CheckboxGroupContext.Provider>
-      </Fieldset>
+        </Fieldset>
+      </CheckboxGroupContext.Provider>
     );
   },
 );
