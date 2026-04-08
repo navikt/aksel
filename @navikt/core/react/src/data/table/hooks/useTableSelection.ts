@@ -81,7 +81,6 @@ function useTableSelection<T>({
       setSelectedKeys,
       disabledKeys,
       allKeys,
-      totalCount: data.length,
     },
   );
 

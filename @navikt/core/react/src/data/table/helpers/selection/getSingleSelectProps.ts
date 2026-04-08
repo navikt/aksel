@@ -14,11 +14,7 @@ function getSingleSelectProps({
   name,
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number) => {
-    if (selectedKeys.includes(key)) {
-      setSelectedKeys([]);
-    } else {
-      setSelectedKeys([key]);
-    }
+    setSelectedKeys([key]);
   };
 
   return {

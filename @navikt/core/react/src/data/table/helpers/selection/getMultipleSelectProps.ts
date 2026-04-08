@@ -5,7 +5,6 @@ type GetMultipleSelectPropsArgs = {
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeys: (string | number)[];
   allKeys: (string | number)[];
-  totalCount: number;
 };
 
 function getMultipleSelectProps({
@@ -13,11 +12,20 @@ function getMultipleSelectProps({
   setSelectedKeys,
   disabledKeys,
   allKeys,
-  totalCount,
 }: GetMultipleSelectPropsArgs) {
+  const selectableKeys = allKeys.filter((k) => !disabledKeys.includes(k));
+  const disabledSelected = selectedKeys.filter((k) => disabledKeys.includes(k));
+
   const handleToggleAll = () => {
-    const allSelected = selectedKeys.length === totalCount;
-    setSelectedKeys(allSelected ? [] : allKeys);
+    const allSelectableSelected = selectableKeys.every((k) =>
+      selectedKeys.includes(k),
+    );
+
+    if (allSelectableSelected) {
+      setSelectedKeys(disabledSelected);
+    } else {
+      setSelectedKeys([...new Set([...disabledSelected, ...selectableKeys])]);
+    }
   };
 
   const handleToggleRow = (key: string | number) => {
@@ -30,14 +38,18 @@ function getMultipleSelectProps({
 
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => {
+      const selectedSelectableCount = selectableKeys.filter((k) =>
+        selectedKeys.includes(k),
+      ).length;
       const indeterminate =
-        selectedKeys.length > 0 && selectedKeys.length < totalCount;
+        selectedSelectableCount > 0 &&
+        selectedSelectableCount < selectableKeys.length;
 
       return {
         onChange: handleToggleAll,
-        checked: selectedKeys.length > 0 && !indeterminate,
+        checked: selectedSelectableCount > 0 && !indeterminate,
         indeterminate,
-        disabled: disabledKeys.length === totalCount,
+        disabled: selectableKeys.length === 0,
       };
     },
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
