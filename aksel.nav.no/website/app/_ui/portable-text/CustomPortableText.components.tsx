@@ -101,7 +101,7 @@ function marksComponents() {
       return <WebsiteLink href={href}>{text}</WebsiteLink>;
     },
     internalLink: ({ text, value: { slug, anchor } }) => {
-      if (!slug || !slug.current) {
+      if (!slug?.current) {
         return <span>{text}</span>;
       }
       return (
