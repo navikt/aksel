@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useId } from "../../../utils-external";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
 import type {
+  SelectedKeysT,
   SelectionProps,
-  SelectionT,
   TableSelection,
 } from "../helpers/selection/selection.types";
 
@@ -22,35 +23,55 @@ function useTableSelection<T>({
   data,
   getRowId,
 }: UseTableSelectionArgs<T>): TableSelection {
+  const radioGroupName = useId();
+
   const allKeys = useMemo(
     () => data.map((item, index) => getRowId(item, index)),
     [data, getRowId],
   );
 
-  const [selectedKeys, setSelectedKeys] = useControllableState<SelectionT>({
+  const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
     value: selectionMode !== "none" ? selectedKeysProp : undefined,
     defaultValue: defaultSelectedKeys ?? [],
     onChange: onSelectionChange,
   });
 
+  const isRowSelected = useCallback(
+    (rowId: string | number) => {
+      if (selectionMode === "none") {
+        return false;
+      }
+
+      return selectedKeys.includes(rowId);
+    },
+    [selectedKeys, selectionMode],
+  );
+
   if (selectionMode === "none") {
-    return { selectionMode, allKeys, selectedKeys: [], disabledKeys };
+    return {
+      selectionMode,
+      allKeys,
+      selectedKeys: [],
+      disabledKeys,
+      isRowSelected,
+    };
   }
 
   if (selectionMode === "single") {
-    const arrayKeys = Array.isArray(selectedKeys) ? selectedKeys : [];
     const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeys: arrayKeys,
+      selectedKeys,
       setSelectedKeys,
       disabledKeys,
+      name: radioGroupName,
     });
 
     return {
       selectionMode,
       allKeys,
-      selectedKeys: arrayKeys,
+      selectedKeys,
       disabledKeys,
       getRowRadioProps,
+      isRowSelected,
     };
   }
 
@@ -71,8 +92,9 @@ function useTableSelection<T>({
     disabledKeys,
     getTheadCheckboxProps,
     getRowCheckboxProps,
+    isRowSelected,
   };
 }
 
 export { useTableSelection };
-export type { SelectionProps, SelectionT };
+export type { SelectionProps };
