@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import { CheckboxInput } from "../../../form/checkbox/checkbox-input/CheckboxInput";
 import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
+import { Label } from "../../../typography";
+import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import {
   useDataTableContext,
@@ -18,10 +20,16 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
 };
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
-  ({ className, children, selected = false, rowId, ...rest }, forwardedRef) => {
+  (
+    { className, children, selected: selectedProp = false, rowId, ...rest },
+    forwardedRef,
+  ) => {
     const { layout } = useDataTableContext();
+    const { selectionState } = useDataTableContext();
 
     const renderFillerCell = layout === "fixed" && children;
+
+    const selected = selectionState?.isRowSelected(rowId ?? "") ?? selectedProp;
 
     return (
       <tr
@@ -49,10 +57,12 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
 /**
  * TODO: How do these cells handle multiple thead rows, or col/rowspans?
+ * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   const { selectionState } = useDataTableContext();
   const { location } = useDataTableLocation();
+  const inputId = useId();
 
   if (!selectionState || selectionState.selectionMode === "none") {
     return null;
@@ -61,7 +71,14 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selectionState.selectionMode === "multiple" && location === "thead") {
     return (
       <DataTableTh textAlign="center" width="50px" UNSAFE_isSelection>
-        <CheckboxInput {...selectionState.getTheadCheckboxProps()} compact />
+        <Label htmlFor={inputId} visuallyHidden>
+          Velg alle rader
+        </Label>
+        <CheckboxInput
+          {...selectionState.getTheadCheckboxProps()}
+          id={inputId}
+          compact
+        />
       </DataTableTh>
     );
   }
@@ -79,7 +96,14 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
       <DataTableTd align="center" width="50px" UNSAFE_isSelection>
-        <CheckboxInput {...selectionState.getRowCheckboxProps(rowId)} compact />
+        <Label htmlFor={inputId} visuallyHidden>
+          Velg rad
+        </Label>
+        <CheckboxInput
+          {...selectionState.getRowCheckboxProps(rowId)}
+          id={inputId}
+          compact
+        />
       </DataTableTd>
     );
   }
@@ -87,7 +111,10 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selectionState.selectionMode === "single" && location === "tbody") {
     return (
       <DataTableTd width="50px" UNSAFE_isSelection>
-        <RadioInput {...selectionState.getRowRadioProps(rowId)} />
+        <Label htmlFor={inputId} visuallyHidden>
+          Velg rad
+        </Label>
+        <RadioInput {...selectionState.getRowRadioProps(rowId)} id={inputId} />
       </DataTableTd>
     );
   }

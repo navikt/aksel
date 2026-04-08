@@ -278,13 +278,13 @@ describe("useTableSelection", () => {
       expect(theadProps.checked).toBe(true);
     });
 
-    test("deselecting one row when selectedKeys is 'all'", () => {
+    test("deselecting one row when all rows are selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
           data: items,
           getRowId,
-          defaultSelectedKeys: "all",
+          defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
 
