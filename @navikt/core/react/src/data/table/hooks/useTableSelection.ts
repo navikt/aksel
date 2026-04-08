@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
@@ -33,8 +33,33 @@ function useTableSelection<T>({
     onChange: onSelectionChange,
   });
 
+  const isRowSelected = useCallback(
+    (rowId: string | number) => {
+      if (selectionMode === "none") {
+        return false;
+      }
+
+      if (selectionMode === "single") {
+        return selectedKeys === rowId;
+      }
+
+      if (selectionMode === "multiple") {
+        return selectedKeys === "all" ? true : selectedKeys.includes(rowId);
+      }
+
+      return false;
+    },
+    [selectedKeys, selectionMode],
+  );
+
   if (selectionMode === "none") {
-    return { selectionMode, allKeys, selectedKeys: [], disabledKeys };
+    return {
+      selectionMode,
+      allKeys,
+      selectedKeys: [],
+      disabledKeys,
+      isRowSelected,
+    };
   }
 
   if (selectionMode === "single") {
@@ -51,6 +76,7 @@ function useTableSelection<T>({
       selectedKeys: arrayKeys,
       disabledKeys,
       getRowRadioProps,
+      isRowSelected,
     };
   }
 
@@ -71,6 +97,7 @@ function useTableSelection<T>({
     disabledKeys,
     getTheadCheckboxProps,
     getRowCheckboxProps,
+    isRowSelected,
   };
 }
 

@@ -44,7 +44,12 @@ type MultipleSelection = {
   getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
 };
 
-type TableSelection = NoneSelection | SingleSelection | MultipleSelection;
+type TableSelectionBase = {
+  isRowSelected: (rowId: string | number) => boolean;
+};
+
+type TableSelection = TableSelectionBase &
+  (NoneSelection | SingleSelection | MultipleSelection);
 
 export type {
   MultipleSelection,

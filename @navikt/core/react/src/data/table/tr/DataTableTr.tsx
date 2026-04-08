@@ -18,10 +18,16 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
 };
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
-  ({ className, children, selected = false, rowId, ...rest }, forwardedRef) => {
+  (
+    { className, children, selected: selectedProp = false, rowId, ...rest },
+    forwardedRef,
+  ) => {
     const { layout } = useDataTableContext();
+    const { selectionState } = useDataTableContext();
 
     const renderFillerCell = layout === "fixed" && children;
+
+    const selected = selectionState?.isRowSelected(rowId ?? "") ?? selectedProp;
 
     return (
       <tr
