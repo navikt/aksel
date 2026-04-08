@@ -6,6 +6,8 @@ dist/
 
 # dependencies
 node_modules/
+.yarn
+yarn.lock
 
 # logs
 npm-debug.log*
@@ -19,4 +21,3 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-.yarn
