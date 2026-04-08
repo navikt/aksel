@@ -4,8 +4,8 @@ import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
 import type {
+  SelectedKeysT,
   SelectionProps,
-  SelectionT,
   TableSelection,
 } from "../helpers/selection/selection.types";
 
@@ -30,7 +30,7 @@ function useTableSelection<T>({
     [data, getRowId],
   );
 
-  const [selectedKeys, setSelectedKeys] = useControllableState<SelectionT>({
+  const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
     value: selectionMode !== "none" ? selectedKeysProp : undefined,
     defaultValue: defaultSelectedKeys ?? [],
     onChange: onSelectionChange,
@@ -97,4 +97,4 @@ function useTableSelection<T>({
 }
 
 export { useTableSelection };
-export type { SelectionProps, SelectionT };
+export type { SelectionProps };

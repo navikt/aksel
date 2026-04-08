@@ -57,4 +57,5 @@ export type {
   SelectionProps,
   SingleSelection,
   TableSelection,
+  SelectedKeysT,
 };

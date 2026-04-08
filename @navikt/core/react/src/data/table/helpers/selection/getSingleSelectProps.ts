@@ -23,8 +23,6 @@ function getSingleSelectProps({
 
   return {
     getRowRadioProps: (key: string | number): RadioInputProps => ({
-      /* TODO: Add support for label visuallyhidden */
-      /* children: `Select row with id ${key}`, */
       checked: selectedKeys.includes(key),
       onChange: () => handleSelectionChange(key),
       disabled: disabledKeys.includes(key),

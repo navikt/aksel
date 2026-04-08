@@ -34,8 +34,6 @@ function getMultipleSelectProps({
         selectedKeys.length > 0 && selectedKeys.length < totalCount;
 
       return {
-        /* TODO: Add support for label visuallyhidden */
-        /* children: "Select all rows", */
         onChange: handleToggleAll,
         checked: selectedKeys.length > 0 && !indeterminate,
         indeterminate,
@@ -43,8 +41,6 @@ function getMultipleSelectProps({
       };
     },
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
-      /* TODO: Add support for label visuallyhidden */
-      /* children: `Select row with id ${key}`, */
       onChange: () => handleToggleRow(key),
       checked: selectedKeys.includes(key),
       disabled: disabledKeys.includes(key),
