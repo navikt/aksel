@@ -1,27 +1,37 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 
 type GetMultipleSelectPropsArgs = {
+  selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeys: (string | number)[];
+  disabledKeysSet: Set<string | number>;
   allKeys: (string | number)[];
-  totalCount: number;
 };
 
 function getMultipleSelectProps({
+  selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disabledKeys,
+  disabledKeysSet,
   allKeys,
-  totalCount,
 }: GetMultipleSelectPropsArgs) {
+  const selectableKeys = allKeys.filter((k) => !disabledKeysSet.has(k));
+  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
+
   const handleToggleAll = () => {
-    const allSelected = selectedKeys.length === totalCount;
-    setSelectedKeys(allSelected ? [] : allKeys);
+    const allSelectableSelected = selectableKeys.every((k) =>
+      selectedKeysSet.has(k),
+    );
+
+    if (allSelectableSelected) {
+      setSelectedKeys(disabledSelected);
+    } else {
+      setSelectedKeys([...new Set([...disabledSelected, ...selectableKeys])]);
+    }
   };
 
   const handleToggleRow = (key: string | number) => {
-    if (selectedKeys.includes(key)) {
+    if (selectedKeysSet.has(key)) {
       setSelectedKeys(selectedKeys.filter((k) => k !== key));
     } else {
       setSelectedKeys([...selectedKeys, key]);
@@ -30,20 +40,24 @@ function getMultipleSelectProps({
 
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => {
+      const selectedSelectableCount = selectableKeys.filter((k) =>
+        selectedKeysSet.has(k),
+      ).length;
       const indeterminate =
-        selectedKeys.length > 0 && selectedKeys.length < totalCount;
+        selectedSelectableCount > 0 &&
+        selectedSelectableCount < selectableKeys.length;
 
       return {
         onChange: handleToggleAll,
-        checked: selectedKeys.length > 0 && !indeterminate,
+        checked: selectedSelectableCount > 0 && !indeterminate,
         indeterminate,
-        disabled: disabledKeys.length === totalCount,
+        disabled: selectableKeys.length === 0,
       };
     },
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
       onChange: () => handleToggleRow(key),
-      checked: selectedKeys.includes(key),
-      disabled: disabledKeys.includes(key),
+      checked: selectedKeysSet.has(key),
+      disabled: disabledKeysSet.has(key),
     }),
   };
 }

@@ -68,21 +68,9 @@
   background-color: var(--ax-bg-raised);
 }
 
-.aksel-data-table__tr--selected {
-  background-color: var(--ax-bg-softA);
-  box-shadow:
-    inset 1px 0 0 0 var(--ax-border-default),
-    inset -1px 0 0 0 var(--ax-border-default);
-
-  &:first-of-type {
-    box-shadow:
-      inset 1px 0 0 0 var(--ax-border-default),
-      inset -1px 0 0 0 var(--ax-border-default),
-      inset 0 1px 0 0 var(--ax-border-default);
-  }
-
-  & :is(.aksel-data-table__td, .aksel-data-table__th) {
-    border-color: var(--ax-border-default);
+.aksel-data-table__tr {
+  &[data-selected="true"] {
+    background-color: var(--ax-bg-softA);
   }
 }
 
@@ -386,26 +374,29 @@
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__arrow {
-  height: 1.2rem;
-}
-
 .aksel-data-drag-and-drop__drag-handler__alt,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
 
   .aksel-data-drag-and-drop__drag-handler__arrow {
+    height: 1.8rem;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    z-index: 1;
 
     &[data-direction="up"] {
-      top: -10px;
+      top: -18px;
     }
 
     &[data-direction="down"] {
-      bottom: calc(-100% - 6px);
+      bottom: calc(-100% - 22px);
     }
   }
 }

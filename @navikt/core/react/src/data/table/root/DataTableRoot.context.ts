@@ -6,6 +6,7 @@ type DataTableContextProps = {
   withKeyboardNav: boolean;
   /* TODO: Temp optional, should be required */
   selectionState?: TableSelection;
+  dataLength: number;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
