@@ -4,7 +4,7 @@ import { buildMarkdown } from "@/app/api/markdown/helpers/build-markdown";
 function KodeMarkdown(data: ExtractPortableMarkdownComponentProps<"kode">) {
   const { code, title } = data.value;
 
-  if (!code || !code.code) {
+  if (!code?.code) {
     return "";
   }
 

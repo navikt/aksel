@@ -183,7 +183,7 @@ const initialValidation = (
   range?: DateRange,
   opt?: UseRangeDatepickerOptions,
 ): RangeValidationT => {
-  if (!range || !range?.from) {
+  if (!range?.from) {
     return getValidationMessage(
       { isEmpty: true, isValidDate: false },
       { isEmpty: true, isValidDate: false },

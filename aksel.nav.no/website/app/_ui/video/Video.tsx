@@ -8,7 +8,7 @@ function Video(props: ExtractPortableComponentProps<"video">) {
 
   const transcriptId = useId();
 
-  if (((!webm || !webm.url) && (!fallback || !fallback.url)) || !alt) {
+  if ((!webm?.url && !fallback?.url) || !alt) {
     return null;
   }
 

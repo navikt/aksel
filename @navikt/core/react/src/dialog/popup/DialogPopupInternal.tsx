@@ -266,7 +266,7 @@ function translateHeight(
 }
 
 function isFocusable(element: Element | null) {
-  if (!element || !element.isConnected) {
+  if (!element?.isConnected) {
     return false;
   }
 

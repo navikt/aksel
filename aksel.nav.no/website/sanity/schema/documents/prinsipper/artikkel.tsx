@@ -35,7 +35,7 @@ export const Prinsipp = defineType({
       type: "slug",
       validation: (Rule) =>
         Rule.required().custom((slug, { document }: any) => {
-          if (!slug || !slug.current)
+          if (!slug?.current)
             return `Må ha noe innhold. Har du husket å velget et prinsipp først?`;
           const maxLength = document?.prinsipp?.hovedside ? 2 : 3;
           const newPrefix = `${prefix}${document?.prinsipp?.prinsippvalg}`;
