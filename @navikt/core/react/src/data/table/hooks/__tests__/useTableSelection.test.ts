@@ -4,7 +4,10 @@ import type {
   MultipleSelection,
   SingleSelection,
 } from "../../helpers/selection/selection.types";
-import { useTableSelection } from "../useTableSelection";
+import {
+  type UseTableSelectionReturn,
+  useTableSelection,
+} from "../useTableSelection";
 
 type Item = { id: string; name: string };
 
@@ -16,16 +19,16 @@ const items: Item[] = [
 
 const getRowId = (item: Item) => item.id;
 
-function asSingle(
-  result: ReturnType<typeof renderHook>["result"],
-): SingleSelection {
-  return result.current as SingleSelection;
+function asSingle(result: {
+  current: UseTableSelectionReturn;
+}): SingleSelection {
+  return result.current.selection as SingleSelection;
 }
 
-function asMultiple(
-  result: ReturnType<typeof renderHook>["result"],
-): MultipleSelection {
-  return result.current as MultipleSelection;
+function asMultiple(result: {
+  current: UseTableSelectionReturn;
+}): MultipleSelection {
+  return result.current.selection as MultipleSelection;
 }
 
 describe("useTableSelection", () => {
@@ -39,8 +42,8 @@ describe("useTableSelection", () => {
         }),
       );
 
-      expect(result.current.selectionMode).toBe("none");
-      expect(result.current.selectedKeys).toEqual([]);
+      expect(result.current.selection.selectionMode).toBe("none");
+      expect(result.current.selection.selectedKeys).toEqual([]);
       expect(result.current.allKeys).toEqual(["a", "b", "c"]);
     });
   });
@@ -55,7 +58,7 @@ describe("useTableSelection", () => {
         }),
       );
 
-      expect(result.current.selectionMode).toBe("single");
+      expect(result.current.selection.selectionMode).toBe("single");
       expect(asSingle(result).getRowRadioProps).toBeDefined();
     });
 
@@ -161,7 +164,7 @@ describe("useTableSelection", () => {
         }),
       );
 
-      expect(result.current.selectionMode).toBe("multiple");
+      expect(result.current.selection.selectionMode).toBe("multiple");
       expect(asMultiple(result).getTheadCheckboxProps).toBeDefined();
       expect(asMultiple(result).getRowCheckboxProps).toBeDefined();
     });

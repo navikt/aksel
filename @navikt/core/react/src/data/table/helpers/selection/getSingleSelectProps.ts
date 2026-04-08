@@ -1,16 +1,16 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
 type GetSingleSelectPropsArgs = {
-  selectedKeys: (string | number)[];
+  selectedKeysSet: Set<string | number>;
   setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeys: (string | number)[];
+  disabledKeysSet: Set<string | number>;
   name: string;
 };
 
 function getSingleSelectProps({
-  selectedKeys,
+  selectedKeysSet,
   setSelectedKeys,
-  disabledKeys,
+  disabledKeysSet,
   name,
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number) => {
@@ -19,9 +19,9 @@ function getSingleSelectProps({
 
   return {
     getRowRadioProps: (key: string | number): RadioInputProps => ({
-      checked: selectedKeys.includes(key),
+      checked: selectedKeysSet.has(key),
       onChange: () => handleSelectionChange(key),
-      disabled: disabledKeys.includes(key),
+      disabled: disabledKeysSet.has(key),
       value: key,
       name,
     }),

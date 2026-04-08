@@ -14,6 +14,11 @@ type UseTableSelectionArgs<T> = SelectionProps & {
   getRowId: (rowData: T, index: number) => string | number;
 };
 
+type UseTableSelectionReturn = {
+  selection: TableSelection;
+  allKeys: SelectedKeysT;
+};
+
 function useTableSelection<T>({
   selectionMode = "none",
   defaultSelectedKeys,
@@ -22,7 +27,7 @@ function useTableSelection<T>({
   disabledKeys = [],
   data,
   getRowId,
-}: UseTableSelectionArgs<T>): TableSelection {
+}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const radioGroupName = useId();
 
   const allKeys = useMemo(
@@ -36,64 +41,75 @@ function useTableSelection<T>({
     onChange: onSelectionChange,
   });
 
+  const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
+
+  const disabledKeysSet = useMemo(() => new Set(disabledKeys), [disabledKeys]);
+
   const isRowSelected = useCallback(
     (rowId: string | number) => {
       if (selectionMode === "none") {
         return false;
       }
 
-      return selectedKeys.includes(rowId);
+      return selectedKeysSet.has(rowId);
     },
-    [selectedKeys, selectionMode],
+    [selectedKeysSet, selectionMode],
   );
 
   if (selectionMode === "none") {
     return {
-      selectionMode,
       allKeys,
-      selectedKeys: [],
-      disabledKeys,
-      isRowSelected,
+      selection: {
+        selectionMode,
+        selectedKeys: [],
+        disabledKeys,
+        isRowSelected,
+      },
     };
   }
 
   if (selectionMode === "single") {
     const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeys,
+      selectedKeysSet,
       setSelectedKeys,
-      disabledKeys,
+      disabledKeysSet,
       name: radioGroupName,
     });
 
     return {
-      selectionMode,
       allKeys,
-      selectedKeys,
-      disabledKeys,
-      getRowRadioProps,
-      isRowSelected,
+      selection: {
+        selectionMode,
+        selectedKeys,
+        disabledKeys,
+        getRowRadioProps,
+        isRowSelected,
+      },
     };
   }
 
   const { getTheadCheckboxProps, getRowCheckboxProps } = getMultipleSelectProps(
     {
+      selectedKeysSet,
       selectedKeys,
       setSelectedKeys,
-      disabledKeys,
+      disabledKeysSet,
       allKeys,
     },
   );
 
   return {
-    selectionMode,
     allKeys,
-    selectedKeys,
-    disabledKeys,
-    getTheadCheckboxProps,
-    getRowCheckboxProps,
-    isRowSelected,
+    selection: {
+      selectionMode,
+      selectedKeys,
+      disabledKeys,
+      getTheadCheckboxProps,
+      getRowCheckboxProps,
+      isRowSelected,
+    },
   };
 }
 
 export { useTableSelection };
-export type { SelectionProps };
+export type { SelectionProps, UseTableSelectionReturn };

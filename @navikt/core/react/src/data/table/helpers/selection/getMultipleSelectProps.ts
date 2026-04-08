@@ -1,24 +1,26 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 
 type GetMultipleSelectPropsArgs = {
+  selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeys: (string | number)[];
+  disabledKeysSet: Set<string | number>;
   allKeys: (string | number)[];
 };
 
 function getMultipleSelectProps({
+  selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disabledKeys,
+  disabledKeysSet,
   allKeys,
 }: GetMultipleSelectPropsArgs) {
-  const selectableKeys = allKeys.filter((k) => !disabledKeys.includes(k));
-  const disabledSelected = selectedKeys.filter((k) => disabledKeys.includes(k));
+  const selectableKeys = allKeys.filter((k) => !disabledKeysSet.has(k));
+  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
 
   const handleToggleAll = () => {
     const allSelectableSelected = selectableKeys.every((k) =>
-      selectedKeys.includes(k),
+      selectedKeysSet.has(k),
     );
 
     if (allSelectableSelected) {
@@ -29,7 +31,7 @@ function getMultipleSelectProps({
   };
 
   const handleToggleRow = (key: string | number) => {
-    if (selectedKeys.includes(key)) {
+    if (selectedKeysSet.has(key)) {
       setSelectedKeys(selectedKeys.filter((k) => k !== key));
     } else {
       setSelectedKeys([...selectedKeys, key]);
@@ -39,7 +41,7 @@ function getMultipleSelectProps({
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => {
       const selectedSelectableCount = selectableKeys.filter((k) =>
-        selectedKeys.includes(k),
+        selectedKeysSet.has(k),
       ).length;
       const indeterminate =
         selectedSelectableCount > 0 &&
@@ -54,8 +56,8 @@ function getMultipleSelectProps({
     },
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
       onChange: () => handleToggleRow(key),
-      checked: selectedKeys.includes(key),
-      disabled: disabledKeys.includes(key),
+      checked: selectedKeysSet.has(key),
+      disabled: disabledKeysSet.has(key),
     }),
   };
 }

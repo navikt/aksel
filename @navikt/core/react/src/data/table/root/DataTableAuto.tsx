@@ -102,7 +102,7 @@ function DataTableAutoInner<T>(
     getRowId ??
     (((_row: T, index: number) => index) as (rowData: T) => string | number);
 
-  const selection = useTableSelection({
+  const { selection, allKeys } = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
@@ -150,7 +150,7 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
-                const rowId = selection.allKeys[rowIndex];
+                const rowId = allKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId} rowId={rowId}>
                     {columnDefinitions.map((colDef, colDefIndex) => {

@@ -22,14 +22,12 @@ type SelectionProps = {
 
 type NoneSelection = {
   selectionMode: "none";
-  allKeys: SelectedKeysT;
   selectedKeys: SelectedKeysT;
   disabledKeys: SelectedKeysT;
 };
 
 type SingleSelection = {
   selectionMode: "single";
-  allKeys: SelectedKeysT;
   selectedKeys: SelectedKeysT;
   disabledKeys: SelectedKeysT;
   getRowRadioProps: (key: string | number) => RadioInputProps;
@@ -37,7 +35,6 @@ type SingleSelection = {
 
 type MultipleSelection = {
   selectionMode: "multiple";
-  allKeys: SelectedKeysT;
   selectedKeys: SelectedKeysT;
   disabledKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
