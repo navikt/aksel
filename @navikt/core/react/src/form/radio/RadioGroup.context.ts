@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-interface RadioGroupContextProps {
+export interface RadioGroupContextProps {
   name: string;
   defaultValue?: any;
   value?: any;

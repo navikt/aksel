@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-interface CheckboxGroupContextProps {
+export interface CheckboxGroupContextProps {
   readonly defaultValue?: readonly any[];
   readonly value?: readonly any[];
   toggleValue(value: any): void;
