@@ -1,17 +1,8 @@
-import React, { createContext, forwardRef, useContext, useState } from "react";
+import React, { forwardRef, useContext, useState } from "react";
 import { cl } from "../../utils/helpers";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
-
-export interface CheckboxGroupState {
-  readonly defaultValue?: readonly any[];
-  readonly value?: readonly any[];
-  toggleValue(value: any): void;
-}
-
-export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
-  null,
-);
+import { CheckboxGroupContext } from "./CheckboxGroup.context";
 
 export interface CheckboxGroupProps extends Omit<
   FieldsetProps,

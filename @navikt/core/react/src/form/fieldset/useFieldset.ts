@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { cl } from "../../utils/helpers";
-import { CheckboxGroupContext } from "../checkbox/CheckboxGroup";
-import { RadioGroupContext } from "../radio/RadioGroup";
+import { CheckboxGroupContext } from "../checkbox/CheckboxGroup.context";
+import { RadioGroupContext } from "../radio/RadioGroup.context";
 import { containsReadMore, useFormField } from "../useFormField";
 import type { FieldsetProps } from "./Fieldset";
 

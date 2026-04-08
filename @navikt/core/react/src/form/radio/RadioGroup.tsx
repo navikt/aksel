@@ -3,17 +3,7 @@ import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
-
-export interface RadioGroupContextProps {
-  name: string;
-  defaultValue?: any;
-  value?: any;
-  onChange: (value: any) => void;
-  required?: boolean;
-}
-
-export const RadioGroupContext =
-  React.createContext<RadioGroupContextProps | null>(null);
+import { RadioGroupContext } from "./RadioGroup.context";
 
 // TODO: Omit "role" in next major
 export interface RadioGroupProps extends Omit<

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { omit } from "../../utils-external";
 import { useFormField } from "../useFormField";
-import { RadioGroupContext } from "./RadioGroup";
+import { RadioGroupContext } from "./RadioGroup.context";
 import { RadioProps } from "./types";
 
 /**
