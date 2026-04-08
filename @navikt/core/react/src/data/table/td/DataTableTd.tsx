@@ -44,11 +44,10 @@ const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
       <td
         {...rest}
         ref={forwardedRef}
-        className={cl("aksel-data-table__td", className, {
-          "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
-        })}
+        className={cl("aksel-data-table__td", className)}
         tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
+        data-selectable={UNSAFE_isSelection}
       >
         <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
       </td>

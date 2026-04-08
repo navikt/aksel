@@ -118,6 +118,7 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         ref={mergedRef}
         className={cl("aksel-data-table__th", className)}
         data-sortable={sortable}
+        data-selectable={UNSAFE_isSelection}
         style={resizeResult.style}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
         onPointerEnter={() => {
@@ -152,7 +153,6 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
             ref={contentRef}
             className={cl({
               "aksel-data-table__th-content": !UNSAFE_isSelection,
-              "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
             })}
           >
             {children}

@@ -1,8 +1,10 @@
 import { createStrictContext } from "../../../utils/helpers";
+import type { TableSelection } from "../helpers/selection/selection.types";
 
 type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
+  selectionState: TableSelection;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
@@ -11,4 +13,20 @@ const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
     errorMessage: "useDataTableContext must be used within DataTable",
   });
 
-export { DataTableContextProvider, useDataTableContext };
+type DataTableLocation = "thead" | "tbody" | "tfoot";
+
+const {
+  Provider: DataTableLocationProvider,
+  useContext: useDataTableLocation,
+} = createStrictContext<{ location: DataTableLocation }>({
+  name: "DataTableLocation",
+  errorMessage:
+    "Some component is using table context outside of Thead, Tbody or Tfoot. Please make sure to wrap it in the appropriate component.",
+});
+
+export {
+  DataTableContextProvider,
+  DataTableLocationProvider,
+  useDataTableContext,
+  useDataTableLocation,
+};

@@ -1,19 +1,19 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
-import { DataTableTheadContext } from "./DataTableThead.context";
+import { DataTableLocationProvider } from "../root/DataTableRoot.context";
 
 type DataTableTheadProps = React.HTMLAttributes<HTMLTableSectionElement>;
 
 const DataTableThead = forwardRef<HTMLTableSectionElement, DataTableTheadProps>(
   ({ className, ...rest }, forwardedRef) => {
     return (
-      <DataTableTheadContext.Provider value={true}>
+      <DataTableLocationProvider location="thead">
         <thead
           {...rest}
           ref={forwardedRef}
           className={cl("aksel-data-table__thead", className)}
         />
-      </DataTableTheadContext.Provider>
+      </DataTableLocationProvider>
     );
   },
 );

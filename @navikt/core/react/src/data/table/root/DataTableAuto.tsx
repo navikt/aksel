@@ -1,7 +1,5 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useState } from "react";
-import { CheckboxInput } from "../../../form/checkbox/checkbox-input/CheckboxInput";
-import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
@@ -115,7 +113,11 @@ function DataTableAutoInner<T>(
   });
 
   return (
-    <DataTableContextProvider layout={layout} withKeyboardNav={withKeyboardNav}>
+    <DataTableContextProvider
+      layout={layout}
+      withKeyboardNav={withKeyboardNav}
+      selectionState={selection}
+    >
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">
           <table
@@ -130,21 +132,6 @@ function DataTableAutoInner<T>(
           >
             <DataTableThead>
               <DataTableTr>
-                {selection.selectionMode === "multiple" && (
-                  <DataTableTh
-                    textAlign="center"
-                    width="60px"
-                    UNSAFE_isSelection
-                  >
-                    <CheckboxInput
-                      {...selection.getTheadCheckboxProps()}
-                      compact
-                    />
-                  </DataTableTh>
-                )}
-                {selection.selectionMode === "single" && (
-                  <DataTableTh width="64px" UNSAFE_isSelection />
-                )}
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
                     <DataTableTh
@@ -165,29 +152,11 @@ function DataTableAutoInner<T>(
               {data.map((rowData, rowIndex) => {
                 const rowId = selection.allKeys[rowIndex];
                 return (
-                  <DataTableTr key={rowId}>
-                    {selection.selectionMode === "multiple" && (
-                      <DataTableTd
-                        align="center"
-                        width="60px"
-                        UNSAFE_isSelection
-                      >
-                        <CheckboxInput
-                          {...selection.getRowCheckboxProps(rowId)}
-                          compact
-                        />
-                      </DataTableTd>
-                    )}
-
-                    {selection.selectionMode === "single" && (
-                      <DataTableTd width="64px" UNSAFE_isSelection>
-                        {/* used with keyboard nav is funky, no longer auto-selects on keyboard-nav. Probably preventDefault somewhere breaking it. */}
-                        <RadioInput {...selection.getRowRadioProps(rowId)} />
-                      </DataTableTd>
-                    )}
+                  <DataTableTr key={rowId} rowId={rowId}>
                     {columnDefinitions.map((colDef, colDefIndex) => {
                       return (
                         <DataTableTd
+                          /* TODO: Make this configurable */
                           textAlign="left"
                           key={colDef.id || colDefIndex}
                         >
