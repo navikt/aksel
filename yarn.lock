@@ -4797,7 +4797,7 @@ __metadata:
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.20.6"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     unified: "npm:11.0.5"
     vitest: "npm:4.1.0"
   languageName: unknown
@@ -4815,7 +4815,7 @@ __metadata:
     stylelint: "npm:^17.2.0"
     stylelint-test-rule-node: "npm:^1.0.0"
     tsx: "npm:^4.20.6"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
   languageName: unknown
   linkType: soft
 
@@ -4838,7 +4838,7 @@ __metadata:
     jscodeshift-add-imports: "npm:1.0.11"
     lodash: "npm:4.18.1"
     rimraf: "npm:6.1.3"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     vitest: "npm:4.1.0"
   bin:
     aksel: ./dist/index.js
@@ -4889,7 +4889,7 @@ __metadata:
     swr: "npm:^2.3.6"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.20.6"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     vitest: "npm:4.1.0"
   peerDependencies:
     "@types/react": ^17.0.30 || ^18 || ^19
@@ -4908,7 +4908,7 @@ __metadata:
     "@navikt/ds-tokens": "npm:^8.9.1"
     tailwindcss: "npm:^3.3.3"
     tsx: "npm:^4.20.6"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     vitest: "npm:4.1.0"
   languageName: unknown
   linkType: soft
@@ -4924,7 +4924,7 @@ __metadata:
     lodash: "npm:4.18.1"
     style-dictionary: "npm:^4.1.1"
     tsx: "npm:^4.20.6"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     vitest: "npm:4.1.0"
   languageName: unknown
   linkType: soft
@@ -9599,7 +9599,7 @@ __metadata:
     fuse.js: "npm:^7.0.0"
     react: "npm:19.2.4"
     react-dom: "npm:19.2.4"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     vite: "npm:^7.2.4"
     vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-svgr: "npm:^4.2.0"
@@ -9666,7 +9666,7 @@ __metadata:
     stylelint-config-standard: "npm:^40.0.0"
     stylelint-declaration-block-no-ignored-properties: "npm:^3.0.0"
     stylelint-value-no-unknown-custom-properties: "npm:^6.1.1"
-    typescript: "npm:5.9.3"
+    typescript: "npm:6.0.2"
     typescript-eslint: "npm:^8.39.0"
     vite: "npm:^7.2.4"
     vite-plugin-turbosnap: "npm:^1.0.3"
@@ -24507,6 +24507,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:6.0.2":
+  version: 6.0.2
+  resolution: "typescript@npm:6.0.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/b9fc2fcee7ee8e5ca6f5138181964550531e18e2d20ecb71b802d4d495881e3444e0ef94cbb6e84eb2ba41e913f6feae3ca33cc722b32e6e6dfadb32d23b80e6
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A>=5.0.0#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
@@ -24514,6 +24524,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10/696e1b017bc2635f4e0c94eb4435357701008e2f272f553d06e35b494b8ddc60aa221145e286c28ace0c89ee32827a28c2040e3a69bdc108b1a5dc8fb40b72e3
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A6.0.2#optional!builtin<compat/typescript>":
+  version: 6.0.2
+  resolution: "typescript@patch:typescript@npm%3A6.0.2#optional!builtin<compat/typescript>::version=6.0.2&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/e5501dfcf8c5b6b9a61f6fa53decc40187cebe3a2b7b2bd51c615007ad4cf6d58298461fef63294f6be9d5f2f33019b2a2e2bf02d9cb7d7f6ec94372bf24ffa2
   languageName: node
   linkType: hard
 
