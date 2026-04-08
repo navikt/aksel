@@ -6,8 +6,8 @@ const Example = () => {
   return (
     <InfoCard data-color="info">
       <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
-        Fremhevet statisk informasjon som ikke krever handling, often bare en
-        kort melding som du ønsker å fremheve for brukeren.
+        Fremhevet informasjon som ikke krever handling, often bare en kort
+        melding som du ønsker å fremheve for brukeren.
       </InfoCard.Message>
     </InfoCard>
   );

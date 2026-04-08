@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <InfoCard data-color="info">
       <InfoCard.Header>
-        <InfoCard.Title>Fremhevet statisk informasjon</InfoCard.Title>
+        <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
       </InfoCard.Header>
       <InfoCard.Content>
         InfoCard brukes for å fremheve informasjon på en side, uten at det er
