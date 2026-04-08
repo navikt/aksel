@@ -137,10 +137,11 @@ function DataTableAutoInner<T>(
                   return (
                     <DataTableTh
                       /* TODO: Make these user-changable */
-                      maxWidth="400px"
-                      minWidth="100px"
-                      defaultWidth="100%"
-                      textAlign="left"
+                      maxWidth={colDef.maxWidth}
+                      minWidth={colDef.minWidth}
+                      width={colDef.width}
+                      defaultWidth={colDef.defaultWidth ?? "100%"}
+                      textAlign={colDef.type === "number" ? "right" : "left"}
                       key={colDef.id || colDefIndex}
                     >
                       {colDef.header}
@@ -158,7 +159,9 @@ function DataTableAutoInner<T>(
                       return (
                         <DataTableTd
                           /* TODO: Make this configurable */
-                          textAlign="left"
+                          textAlign={
+                            colDef.type === "number" ? "right" : "left"
+                          }
                           key={colDef.id || colDefIndex}
                         >
                           {colDef.cell(rowData)}

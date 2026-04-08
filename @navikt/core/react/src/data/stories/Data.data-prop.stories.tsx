@@ -35,6 +35,8 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
     id: "id",
     header: "Id",
     cell: ({ id }) => id,
+    type: "number",
+    defaultWidth: "100px",
   },
   {
     id: "foo",
