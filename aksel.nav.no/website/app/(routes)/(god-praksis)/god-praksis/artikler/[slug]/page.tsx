@@ -78,7 +78,7 @@ export default async function Page(props: Props) {
     }),
   ]);
 
-  if (!pageData || !pageData.heading) {
+  if (!pageData?.heading) {
     notFound();
   }
 

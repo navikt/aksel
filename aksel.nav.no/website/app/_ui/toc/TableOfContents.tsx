@@ -100,7 +100,7 @@ function TableOfContents({
 function TableOfContentsLinks({
   feedback,
 }: Pick<TableOfContentsProps, "feedback">) {
-  if (!feedback || !feedback.name) {
+  if (!feedback?.name) {
     return null;
   }
 
