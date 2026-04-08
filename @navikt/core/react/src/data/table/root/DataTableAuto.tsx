@@ -131,8 +131,6 @@ function DataTableAutoInner<T>(
             <DataTableThead>
               <DataTableTr>
                 {selection.selectionMode === "multiple" && (
-                  /* TODO: Overflow/focus is clipped. Alignment is off */
-                  /* TODO: Should not be resizable */
                   <DataTableTh
                     textAlign="center"
                     width="60px"
@@ -145,7 +143,7 @@ function DataTableAutoInner<T>(
                   </DataTableTh>
                 )}
                 {selection.selectionMode === "single" && (
-                  <DataTableTh width="60px" UNSAFE_isSelection />
+                  <DataTableTh width="64px" UNSAFE_isSelection />
                 )}
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
@@ -180,10 +178,9 @@ function DataTableAutoInner<T>(
                         />
                       </DataTableTd>
                     )}
-                    {/* TODO: Alignment is off: Make cell-padding handle it */}
 
                     {selection.selectionMode === "single" && (
-                      <DataTableTd width="60px" UNSAFE_isSelection>
+                      <DataTableTd width="64px" UNSAFE_isSelection>
                         {/* used with keyboard nav is funky, no longer auto-selects on keyboard-nav. Probably preventDefault somewhere breaking it. */}
                         <RadioInput {...selection.getRowRadioProps(rowId)} />
                       </DataTableTd>

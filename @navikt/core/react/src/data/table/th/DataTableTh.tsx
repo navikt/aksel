@@ -150,12 +150,10 @@ const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
         ) : (
           <div
             ref={contentRef}
-            className={cl(
-              !UNSAFE_isSelection && "aksel-data-table__th-content",
-              {
-                "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
-              },
-            )}
+            className={cl({
+              "aksel-data-table__th-content": !UNSAFE_isSelection,
+              "aksel-data-table--UNSAFE_isSelection": UNSAFE_isSelection,
+            })}
           >
             {children}
           </div>

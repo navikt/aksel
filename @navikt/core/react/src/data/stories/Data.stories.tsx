@@ -606,7 +606,7 @@ export const KitchenSinkAdvancedFilter: Story = {
               return (
                 <DataTable.Tr key={headerGroup.id}>
                   {table.options.enableMultiRowSelection ? (
-                    <DataTable.Th textAlign="center" width="60px">
+                    <DataTable.Th textAlign="center" width="64px">
                       <CheckboxInput
                         compact
                         checked={table.getIsAllPageRowsSelected()}
@@ -616,7 +616,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                       />
                     </DataTable.Th>
                   ) : (
-                    <DataTable.Th textAlign="center" width="60px" />
+                    <DataTable.Th textAlign="center" width="64px" />
                   )}
                   {headerGroup.headers.map((header) => {
                     return (
