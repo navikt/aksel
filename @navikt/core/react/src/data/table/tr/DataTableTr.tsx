@@ -62,11 +62,15 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
-  const { selectionState } = useDataTableContext();
+  const { selectionState, dataLength } = useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
 
-  if (!selectionState || selectionState.selectionMode === "none") {
+  if (
+    !selectionState ||
+    selectionState.selectionMode === "none" ||
+    dataLength === 0
+  ) {
     return null;
   }
 

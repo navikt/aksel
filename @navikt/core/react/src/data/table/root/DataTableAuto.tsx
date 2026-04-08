@@ -117,6 +117,7 @@ function DataTableAutoInner<T>(
       layout={layout}
       withKeyboardNav={withKeyboardNav}
       selectionState={selection}
+      dataLength={data.length ?? 0}
     >
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">

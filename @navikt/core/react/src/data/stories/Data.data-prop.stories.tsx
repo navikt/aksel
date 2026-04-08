@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "../../button";
 import { Tag } from "../../tag";
 import { DataTable } from "../table";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
@@ -135,6 +136,20 @@ export const SelectionModeSingle: Story = {
   },
 };
 
+export const SelectionModeSingleWithoutKeyboardNav: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="single"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.foo + row.bar}
+      />
+    );
+  },
+};
+
 export const SelectionWithDisabledRows: Story = {
   render: () => {
     return (
@@ -146,6 +161,75 @@ export const SelectionWithDisabledRows: Story = {
         getRowId={(row) => row.id}
         withKeyboardNav
         disabledKeys={[1, 2]}
+      />
+    );
+  },
+};
+
+export const ControlledSelection: Story = {
+  render: () => {
+    const [selectedKeys, setSelectedKeys] = useState<(string | number)[]>([1]);
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <Button size="small" onClick={() => setSelectedKeys([1, 2, 3])}>
+            Select all
+          </Button>
+          <Button size="small" onClick={() => setSelectedKeys([])}>
+            Clear selection
+          </Button>
+        </div>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={userData}
+          selectionMode="multiple"
+          selectedKeys={selectedKeys}
+          onSelectionChange={setSelectedKeys}
+          getRowId={(row) => row.id}
+        />
+      </div>
+    );
+  },
+};
+
+export const DefaultSelectedKeys: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="multiple"
+        defaultSelectedKeys={[1, 3]}
+        onSelectionChange={console.info}
+        getRowId={(row) => row.id}
+      />
+    );
+  },
+};
+
+export const SingleSelectionWithDisabledRows: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selectionMode="single"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.id}
+        disabledKeys={[2]}
+      />
+    );
+  },
+};
+
+export const EmptyData: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={[]}
+        selectionMode="multiple"
       />
     );
   },
