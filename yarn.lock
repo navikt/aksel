@@ -9487,7 +9487,7 @@ __metadata:
     "@types/node": "npm:^24.10.9"
     concurrently: "npm:9.2.1"
     flat: "npm:6.0.1"
-    mlly: "npm:1.8.0"
+    mlly: "npm:1.8.2"
     pkg-types: "npm:^2.3.0"
     rimraf: "npm:6.1.3"
     rolldown: "npm:latest"
@@ -18226,7 +18226,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mlly@npm:1.8.0, mlly@npm:^1.4.2, mlly@npm:^1.7.4":
+"mlly@npm:1.8.2":
+  version: 1.8.2
+  resolution: "mlly@npm:1.8.2"
+  dependencies:
+    acorn: "npm:^8.16.0"
+    pathe: "npm:^2.0.3"
+    pkg-types: "npm:^1.3.1"
+    ufo: "npm:^1.6.3"
+  checksum: 10/e13b79edb113ac9d3ce8b5998d490cd979e907d31b562b9c6630e59623d32710cc83be1da46755ccd3143c57d50debcf98a9903d55e6e07e57910dc3369d96c1
+  languageName: node
+  linkType: hard
+
+"mlly@npm:^1.4.2, mlly@npm:^1.7.4":
   version: 1.8.0
   resolution: "mlly@npm:1.8.0"
   dependencies:
@@ -24443,7 +24455,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ufo@npm:^1.6.1":
+"ufo@npm:^1.6.1, ufo@npm:^1.6.3":
   version: 1.6.3
   resolution: "ufo@npm:1.6.3"
   checksum: 10/79803984f3e414567273a666183d6a50d1bec0d852100a98f55c1e393cb705e3b88033e04029dd651714e6eec99e1b00f54fdc13f32404968251a16f8898cfe5
