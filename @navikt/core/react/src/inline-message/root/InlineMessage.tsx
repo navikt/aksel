@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../theme/Theme";
 import { BodyLong } from "../../typography";
-import { type OverridableComponent, useId } from "../../utils-external";
+import { type OverridableComponent } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";
@@ -58,10 +58,7 @@ export const InlineMessage: OverridableComponent<
     forwardedRef,
   ) => {
     const themeContext = useThemeInternal();
-
     const translate = useI18n("global");
-    const statusId = useId();
-    const contentId = useId();
 
     return (
       <BodyLong
@@ -75,18 +72,11 @@ export const InlineMessage: OverridableComponent<
       >
         <InlineMessageIcon status={status} />
         {status && (
-          <BodyLong id={statusId} aria-hidden visuallyHidden>
+          <BodyLong as="span" visuallyHidden>
             {`${translate(status)}: `}
           </BodyLong>
         )}
-        {/** biome-ignore lint/a11y/useAriaPropsSupportedByRole: Testing shows that this works. */}
-        <span
-          data-color={themeContext?.color}
-          id={contentId}
-          aria-labelledby={cl(statusId, contentId)}
-        >
-          {children}
-        </span>
+        <span data-color={themeContext?.color}>{children}</span>
       </BodyLong>
     );
   },
