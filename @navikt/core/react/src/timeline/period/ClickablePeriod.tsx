@@ -79,15 +79,13 @@ const ClickablePeriod = React.memo(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
-    const click = useClick(context, {
-      ignoreMouse: true,
-    });
+    const click = useClick(context);
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
+      click,
       hover,
       focus,
       dismiss,
-      click,
     ]);
 
     const mergedRef = useMergeRefs(refs.setReference, periodRef);
