@@ -264,11 +264,14 @@ export function getMigrationsForVersion(version: string) {
 /**
  * Returns the override migrations available for a specific version.
  */
+function isOverrideVersion(
+  version: string,
+): version is keyof typeof migrationStringOverride {
+  return version in migrationStringOverride;
+}
+
 export function getOverridesForVersion(version: string) {
-  return (
-    migrationStringOverride[version as keyof typeof migrationStringOverride] ??
-    []
-  );
+  return isOverrideVersion(version) ? migrationStringOverride[version] : [];
 }
 
 /**
@@ -295,7 +298,7 @@ export function getMigrationString() {
   Object.entries(migrations).forEach(([version, vMigrations]) => {
     str += `\n${chalk.underline(version)}\n`;
 
-    const overrideMigrations = migrationStringOverride[version] || [];
+    const overrideMigrations = getOverridesForVersion(version);
     overrideMigrations.forEach((migration) => {
       str += `${chalk.blue(migration.value)}: ${migration.description}\n`;
     });

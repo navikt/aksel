@@ -4,23 +4,24 @@ import type {
   FileInfo,
   ImportDeclaration,
   JSXAttribute,
+  JSXElement,
   JSXSpreadAttribute,
 } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
-const headingSizeMap = {
+const headingSizeMap: Record<string, string> = {
   small: "xsmall",
   medium: "small",
   large: "medium",
 };
 
-const bodySizeMap = {
+const bodySizeMap: Record<string, string> = {
   small: "small",
   medium: "medium",
   large: "large",
 };
 
-const boxMarginMap = {
+const boxMarginMap: Record<string, string> = {
   small: "space-12",
   medium: "space-16",
   large: "space-16",
@@ -50,19 +51,19 @@ export default function transformer(file: FileInfo, api: API) {
       path.node.specifiers?.forEach((specifier) => {
         if (specifier.type === "ImportSpecifier") {
           if (specifier.imported.name === "List") {
-            localListName = specifier.local?.name || "List";
+            localListName = String(specifier.local?.name || "List");
             hasListImport = true;
           }
           if (specifier.imported.name === "Heading") {
-            localHeadingName = specifier.local?.name || "Heading";
+            localHeadingName = String(specifier.local?.name || "Heading");
             hasHeadingImport = true;
           }
           if (specifier.imported.name === "BodyShort") {
-            localBodyShortName = specifier.local?.name || "BodyShort";
+            localBodyShortName = String(specifier.local?.name || "BodyShort");
             hasBodyShortImport = true;
           }
           if (specifier.imported.name === "Box") {
-            localBoxName = specifier.local?.name || "Box";
+            localBoxName = String(specifier.local?.name || "Box");
             hasBoxImport = true;
           }
         }
@@ -71,7 +72,7 @@ export default function transformer(file: FileInfo, api: API) {
       path.node.specifiers?.forEach((specifier) => {
         if (specifier.type === "ImportSpecifier") {
           if (specifier.imported.name === "List") {
-            localListName = specifier.local?.name || "List";
+            localListName = String(specifier.local?.name || "List");
             hasListImport = true;
           }
         }
@@ -91,6 +92,10 @@ export default function transformer(file: FileInfo, api: API) {
     })
     .forEach((path) => {
       const attributes = path.node.openingElement.attributes;
+
+      if (!attributes) {
+        return;
+      }
 
       const titleAttr = attributes.find(
         (attr) => attr.type === "JSXAttribute" && attr.name.name === "title",
@@ -138,7 +143,7 @@ export default function transformer(file: FileInfo, api: API) {
       ];
       const divAttributes: (JSXSpreadAttribute | JSXAttribute)[] = [];
 
-      attributes?.forEach((attr) => {
+      attributes.forEach((attr) => {
         if (attr.type !== "JSXAttribute") {
           // Spread attributes or others -> move to div
           divAttributes.push(attr);
@@ -168,7 +173,7 @@ export default function transformer(file: FileInfo, api: API) {
         }
       });
 
-      const newNodes = [];
+      const newNodes: JSXElement[] = [];
 
       // Create Heading
       if (titleValue) {
@@ -189,11 +194,13 @@ export default function transformer(file: FileInfo, api: API) {
           );
         }
 
-        let children = [];
+        let children: (ReturnType<typeof j.jsxText> | typeof titleValue)[];
         if (titleValue.type === "StringLiteral") {
           children = [j.jsxText(titleValue.value)];
         } else if (titleValue.type === "JSXExpressionContainer") {
           children = [titleValue];
+        } else {
+          children = [];
         }
 
         const heading = j.jsxElement(
@@ -209,7 +216,7 @@ export default function transformer(file: FileInfo, api: API) {
         if (!hasBodyShortImport) {
           newImports.add("BodyShort");
         }
-        const bodyAttrs = [];
+        const bodyAttrs: JSXAttribute[] = [];
         const mappedSize = bodySizeMap[sizeValue];
         if (mappedSize && mappedSize !== "medium") {
           bodyAttrs.push(
@@ -220,11 +227,13 @@ export default function transformer(file: FileInfo, api: API) {
           );
         }
 
-        let children = [];
+        let children: (ReturnType<typeof j.jsxText> | typeof descValue)[];
         if (descValue.type === "StringLiteral") {
           children = [j.jsxText(descValue.value)];
         } else if (descValue.type === "JSXExpressionContainer") {
           children = [descValue];
+        } else {
+          children = [];
         }
 
         const body = j.jsxElement(
@@ -278,15 +287,14 @@ export default function transformer(file: FileInfo, api: API) {
   // Add imports
   if (newImports.size > 0) {
     if (dsReactImportPath) {
+      const importPath = dsReactImportPath as ASTPath<ImportDeclaration>;
       const existingSpecifiers = new Set(
-        dsReactImportPath.node.specifiers?.map(
-          (specifier) => specifier.local?.name,
-        ),
+        importPath.node.specifiers?.map((specifier) => specifier.local?.name),
       );
 
       newImports.forEach((imp) => {
         if (!existingSpecifiers.has(imp)) {
-          dsReactImportPath!.node.specifiers?.push(
+          importPath.node.specifiers?.push(
             j.importSpecifier(j.identifier(imp)),
           );
         }

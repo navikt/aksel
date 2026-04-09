@@ -44,7 +44,7 @@ export function moveVariantToDataColor(
         specifier.type === "ImportSpecifier" &&
         specifier.imported.name === rootComponent
       ) {
-        localName = specifier.local?.name || specifier.imported.name;
+        localName = String(specifier.local?.name || specifier.imported.name);
       }
     });
   });

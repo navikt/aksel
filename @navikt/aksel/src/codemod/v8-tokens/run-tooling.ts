@@ -372,7 +372,12 @@ async function getNextTask(status?: any): Promise<TaskName> {
     } as any);
     return response.task;
   } catch (error) {
-    if (error.isTtyError) {
+    if (
+      error != null &&
+      typeof error === "object" &&
+      "isTtyError" in error &&
+      error.isTtyError
+    ) {
       console.info(
         "Oops, something went wrong! Looks like @navikt/aksel can't run in this terminal. " +
           "Contact Aksel for support if this persists, or try another terminal.",

@@ -4,6 +4,7 @@
     "sourceMap": false,
     "esModuleInterop": true,
     "target": "es2015",
+    "lib": ["ES2021"],
     "preserveWatchOutput": true,
     "declaration": false,
     "types": ["node"],

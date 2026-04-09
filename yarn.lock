@@ -4826,6 +4826,8 @@ __metadata:
     "@navikt/ds-css": "npm:^8.9.1"
     "@navikt/ds-tokens": "npm:^8.9.1"
     "@types/cli-progress": "npm:3.11.6"
+    "@types/is-git-clean": "npm:1.1.2"
+    "@types/jscodeshift": "npm:17.3.0"
     chalk: "npm:5.6.2"
     cli-progress: "npm:3.12.0"
     clipboardy: "npm:5.0.1"
@@ -4871,7 +4873,8 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.5.2"
-    "@types/jscodeshift": "npm:^0.11.11"
+    "@types/jscodeshift": "npm:17.3.0"
+    "@types/node": "npm:^24.10.9"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     aksel: "workspace:^"
@@ -8139,6 +8142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/is-git-clean@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@types/is-git-clean@npm:1.1.2"
+  checksum: 10/d2df1719f59630acd852eef8e133415dca3b1e04f637367e9d61a89147d9365c50e48378f534c3f319cfb8506990af2207986cbd671bb4d6fb63b4e000f38930
+  languageName: node
+  linkType: hard
+
 "@types/js-yaml@npm:^4.0.9":
   version: 4.0.9
   resolution: "@types/js-yaml@npm:4.0.9"
@@ -8146,13 +8156,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jscodeshift@npm:^0.11.11":
-  version: 0.11.11
-  resolution: "@types/jscodeshift@npm:0.11.11"
+"@types/jscodeshift@npm:17.3.0":
+  version: 17.3.0
+  resolution: "@types/jscodeshift@npm:17.3.0"
   dependencies:
-    ast-types: "npm:^0.14.1"
-    recast: "npm:^0.20.3"
-  checksum: 10/9e3c7c3e61f9a37d792b7c7cccb0f1383d8b52abc56a492a481a8c340bcbbbd12341e6a69570fa057c12e77abdd4bb6592d44baf2c678f4f950d0c9f79594204
+    ast-types: "npm:^0.16.1"
+    recast: "npm:^0.23.11"
+  checksum: 10/aa608bb08042a6afe52a4bee855088620ceba9239c45934fa372259b952320a29a11f54f79240fbb1ce0fe1b97331c743467766deb3f58b42dbb3f1cfc58303b
   languageName: node
   linkType: hard
 
@@ -10078,15 +10088,6 @@ __metadata:
   version: 0.0.8
   resolution: "ast-types-flow@npm:0.0.8"
   checksum: 10/85a1c24af4707871c27cfe456bd2ff7fcbe678f3d1c878ac968c9557735a171a17bdcc8c8f903ceab3fc3c49d5b3da2194e6ab0a6be7fec0e133fa028f21ba1b
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.14.2, ast-types@npm:^0.14.1":
-  version: 0.14.2
-  resolution: "ast-types@npm:0.14.2"
-  dependencies:
-    tslib: "npm:^2.0.1"
-  checksum: 10/7c74b3090c90aa600b49a7a8cecc99e329f190600bcaa75ad087472a1a5a7ef23795a17ea00a74c2a8e822b336cd4f874e2e1b815a9877b4dba5e401566b0433
   languageName: node
   linkType: hard
 
@@ -19940,6 +19941,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.29.0"
     "@babel/preset-react": "npm:^7.28.5"
     "@babel/preset-typescript": "npm:^7.28.5"
+    "@types/node": "npm:^24.10.9"
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
     playroom: "npm:^1.2.1"
@@ -21104,18 +21106,6 @@ __metadata:
   version: 0.2.0
   resolution: "real-require@npm:0.2.0"
   checksum: 10/ddf44ee76301c774e9c9f2826da8a3c5c9f8fc87310f4a364e803ef003aa1a43c378b4323051ced212097fff1af459070f4499338b36a7469df1d4f7e8c0ba4c
-  languageName: node
-  linkType: hard
-
-"recast@npm:^0.20.3":
-  version: 0.20.5
-  resolution: "recast@npm:0.20.5"
-  dependencies:
-    ast-types: "npm:0.14.2"
-    esprima: "npm:~4.0.0"
-    source-map: "npm:~0.6.1"
-    tslib: "npm:^2.0.1"
-  checksum: 10/7b270187e12f06ba0f5695590158005170a49a5996ab5d30ec4af2a2b1db8b0f74b1449b7eb6984f6d381438448e05cb46dcbf9b647fc49c6fc5139b2e40fca0
   languageName: node
   linkType: hard
 
@@ -25583,7 +25573,7 @@ __metadata:
     "@sanity/table": "npm:2.0.1"
     "@sanity/vision": "npm:5.11.0"
     "@slack/web-api": "npm:^7.8.0"
-    "@types/jscodeshift": "npm:^0.11.11"
+    "@types/jscodeshift": "npm:17.3.0"
     "@types/jsdom": "npm:^27.0.0"
     "@types/lodash": "npm:4.17.20"
     "@types/react": "npm:19.2.14"

@@ -14,7 +14,7 @@ export default function transformer(file: FileInfo) {
   let src = file.source;
 
   for (const config of Object.values(legacyTokenConfig)) {
-    if (config.replacement.length > 0) {
+    if (config.replacement.length > 0 && config.regexes.less) {
       src = src.replace(
         config.regexes.less,
         translateToken(`--ax-${config.replacement}`, "less"),
