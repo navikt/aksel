@@ -5,6 +5,7 @@ import type {
   JSXElement,
   JSXSpreadAttribute,
 } from "jscodeshift";
+import { getJSXLiteralValue } from "../../../utils/jsx-string-value";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 export default function transformer(file: FileInfo, api: API) {
@@ -13,30 +14,13 @@ export default function transformer(file: FileInfo, api: API) {
 
   const root = j(file.source);
 
-  function getStringValue(attrValue: JSXAttribute["value"]) {
-    if (!attrValue) return null;
-    if ("value" in attrValue) {
-      return attrValue.value;
-    }
-
-    if (
-      attrValue.type === "JSXExpressionContainer" &&
-      attrValue.expression &&
-      "value" in attrValue.expression
-    ) {
-      return attrValue.expression.value;
-    }
-
-    return null;
-  }
-
   function addMigrationTag(node: JSXElement) {
     const attributes = node.openingElement.attributes;
     const isMigrated = attributes?.find(
       (attr: JSXAttribute | JSXSpreadAttribute) =>
         attr.type === "JSXAttribute" &&
         attr.name.name === "data-version" &&
-        getStringValue(attr.value) === "v1",
+        getJSXLiteralValue(attr.value) === "v1",
     );
 
     if (!isMigrated && attributes) {
@@ -86,14 +70,14 @@ export default function transformer(file: FileInfo, api: API) {
         (attr: JSXAttribute | JSXSpreadAttribute) =>
           attr.type === "JSXAttribute" &&
           attr.name.name === "data-version" &&
-          getStringValue(attr.value) === "v1",
+          getJSXLiteralValue(attr.value) === "v1",
       );
 
       parent.value.openingElement?.attributes?.forEach(
         (x: JSXAttribute | JSXSpreadAttribute) => {
           let didUpdate = false;
           if (x.type === "JSXAttribute" && x.name?.name === "size" && !skip) {
-            const value = getStringValue(x.value);
+            const value = getJSXLiteralValue(x.value);
             if (value === "medium") {
               x.value = j.literal("small");
               didUpdate = true;

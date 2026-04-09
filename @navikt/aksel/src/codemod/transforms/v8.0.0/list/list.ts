@@ -7,6 +7,7 @@ import type {
   JSXElement,
   JSXSpreadAttribute,
 } from "jscodeshift";
+import { getJSXStringValue } from "../../../utils/jsx-string-value";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 const headingSizeMap: Record<string, string> = {
@@ -128,13 +129,15 @@ export default function transformer(file: FileInfo, api: API) {
       const descValue = descAttr?.value;
 
       let sizeValue = "medium";
-      if (sizeAttr && sizeAttr.value?.type === "StringLiteral") {
-        sizeValue = sizeAttr.value.value;
+      const extractedSize = getJSXStringValue(sizeAttr?.value);
+      if (extractedSize) {
+        sizeValue = extractedSize;
       }
 
       let headingAs = "h3";
-      if (headingTagAttr && headingTagAttr.value?.type === "StringLiteral") {
-        headingAs = headingTagAttr.value.value;
+      const extractedHeadingAs = getJSXStringValue(headingTagAttr?.value);
+      if (extractedHeadingAs) {
+        headingAs = extractedHeadingAs;
       }
 
       // Separate attributes
