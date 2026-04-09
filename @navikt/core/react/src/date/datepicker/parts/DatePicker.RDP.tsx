@@ -172,9 +172,18 @@ const ReactDayPicker = ({
           [],
         ),
         Weekdays: useCallback(
-          (props) => (
-            <thead {...props} className="rdp-head" aria-hidden>
-              <tr className="rdp-head_row">{props.children}</tr>
+          ({
+            className: weekdaysClassName,
+            children: weekdaysChildren,
+            ...restWeekdaysProps
+          }) => (
+            <thead className="rdp-head" aria-hidden>
+              <tr
+                className={cl("rdp-head_row", weekdaysClassName)}
+                {...restWeekdaysProps}
+              >
+                {weekdaysChildren}
+              </tr>
             </thead>
           ),
           [],

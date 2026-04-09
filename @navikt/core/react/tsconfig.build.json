@@ -9,7 +9,8 @@
     "module": "commonjs",
     "noImplicitAny": false,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["@types/node"]
   },
   "include": ["./src"],
   "exclude": [
