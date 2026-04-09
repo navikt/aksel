@@ -1,4 +1,10 @@
-import type { API, FileInfo, JSXElement } from "jscodeshift";
+import type {
+  API,
+  FileInfo,
+  JSXAttribute,
+  JSXElement,
+  JSXSpreadAttribute,
+} from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 export default function transformer(file: FileInfo, api: API) {
@@ -7,19 +13,33 @@ export default function transformer(file: FileInfo, api: API) {
 
   const root = j(file.source);
 
+  function getStringValue(attrValue: JSXAttribute["value"]) {
+    if (!attrValue) return null;
+    if ("value" in attrValue) {
+      return attrValue.value;
+    }
+
+    if (
+      attrValue.type === "JSXExpressionContainer" &&
+      attrValue.expression &&
+      "value" in attrValue.expression
+    ) {
+      return attrValue.expression.value;
+    }
+
+    return null;
+  }
+
   function addMigrationTag(node: JSXElement) {
     const attributes = node.openingElement.attributes;
-    if (!attributes) return;
-
-    const isMigrated = attributes.find(
-      (attr) =>
+    const isMigrated = attributes?.find(
+      (attr: JSXAttribute | JSXSpreadAttribute) =>
         attr.type === "JSXAttribute" &&
         attr.name.name === "data-version" &&
-        attr.value?.type === "Literal" &&
-        attr.value.value === "v1",
+        getStringValue(attr.value) === "v1",
     );
 
-    if (!isMigrated) {
+    if (!isMigrated && attributes) {
       attributes.push(
         j.jsxAttribute(j.jsxIdentifier("data-version"), j.literal("v1")),
       );
@@ -29,13 +49,12 @@ export default function transformer(file: FileInfo, api: API) {
   /* https://github.com/mui/material-ui/blob/master/packages/mui-codemod/src/v5.0.0/variant-prop.js */
   function addExplicitStandardProp(node: JSXElement) {
     const attributes = node.openingElement.attributes;
-    if (!attributes) return;
-
-    const variant = attributes.find(
-      (attr) => attr.type === "JSXAttribute" && attr.name.name === "size",
+    const variant = attributes?.find(
+      (attr: JSXAttribute | JSXSpreadAttribute) =>
+        attr.type === "JSXAttribute" && attr.name.name === "size",
     );
 
-    if (!variant) {
+    if (!variant && attributes) {
       attributes.unshift(
         j.jsxAttribute(j.jsxIdentifier("size"), j.literal("small")),
       );
@@ -49,13 +68,14 @@ export default function transformer(file: FileInfo, api: API) {
     .filter((path) => path.node.source.value === "@navikt/ds-react")
     .forEach((imp) => {
       imp.value.specifiers?.forEach((x) => {
-        if (x.type !== "ImportSpecifier") return;
         if (
+          x.type === "ImportSpecifier" &&
+          x.imported.type === "Identifier" &&
           x.imported.name === "Pagination" &&
-          x.local &&
-          x.local.name !== x.imported.name
+          x.local?.name !== x.imported.name &&
+          x.local?.name
         ) {
-          localName = String(x.local.name);
+          localName = String(x.local?.name);
         }
       });
     });
@@ -63,30 +83,29 @@ export default function transformer(file: FileInfo, api: API) {
   if (j(file.source).findJSXElements(localName)) {
     root.findJSXElements(`${localName}`).forEach((parent) => {
       const skip = !!parent.value.openingElement?.attributes?.find(
-        (x) =>
-          x.type === "JSXAttribute" &&
-          x.name.name === "data-version" &&
-          x.value?.type === "Literal" &&
-          x.value.value === "v1",
+        (attr: JSXAttribute | JSXSpreadAttribute) =>
+          attr.type === "JSXAttribute" &&
+          attr.name.name === "data-version" &&
+          getStringValue(attr.value) === "v1",
       );
 
-      parent.value.openingElement?.attributes?.forEach((x) => {
-        let didUpdate = false;
-        if (x.type === "JSXAttribute" && x.name.name === "size" && !skip) {
-          /* addExplicitStandardProp */
-          if (x.value?.type === "Literal" && x.value.value === "medium") {
-            x.value = j.literal("small");
-            didUpdate = true;
-          } else if (x.value?.type === "Literal" && x.value.value === "small") {
-            x.value = j.literal("xsmall");
-            didUpdate = true;
-          }
+      parent.value.openingElement?.attributes?.forEach(
+        (x: JSXAttribute | JSXSpreadAttribute) => {
+          let didUpdate = false;
+          if (x.type === "JSXAttribute" && x.name?.name === "size" && !skip) {
+            const value = getStringValue(x.value);
+            if (value === "medium") {
+              x.value = j.literal("small");
+              didUpdate = true;
+            } else if (value === "small") {
+              x.value = j.literal("xsmall");
+              didUpdate = true;
+            }
 
-          if (didUpdate) {
-            addMigrationTag(parent.value);
+            didUpdate && addMigrationTag(parent.value);
           }
-        }
-      });
+        },
+      );
       addExplicitStandardProp(parent.value);
     });
   }
