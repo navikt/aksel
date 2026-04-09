@@ -265,7 +265,10 @@ export function getMigrationsForVersion(version: string) {
  * Returns the override migrations available for a specific version.
  */
 export function getOverridesForVersion(version: string) {
-  return migrationStringOverride[version] ?? [];
+  return (
+    migrationStringOverride[version as keyof typeof migrationStringOverride] ??
+    []
+  );
 }
 
 /**

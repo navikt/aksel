@@ -138,7 +138,7 @@ export default function transformer(file: FileInfo, api: API) {
       ];
       const divAttributes: (JSXSpreadAttribute | JSXAttribute)[] = [];
 
-      attributes.forEach((attr) => {
+      attributes?.forEach((attr) => {
         if (attr.type !== "JSXAttribute") {
           // Spread attributes or others -> move to div
           divAttributes.push(attr);

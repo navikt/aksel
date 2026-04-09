@@ -107,7 +107,12 @@ export async function runTooling(
         () => getStatus(filepaths, "no-print"),
       );
     } catch (error) {
-      program.error(chalk.red("Error:", error.message));
+      program.error(
+        chalk.red(
+          "Error:",
+          error instanceof Error ? error.message : String(error),
+        ),
+      );
     }
 
     task = await getNextTask(currentStatus.status);
@@ -261,15 +266,21 @@ function getScopedFilesForTask(
   return safeFilepaths.filter((f) => {
     switch (task) {
       case "css-tokens":
-        return !!status.css.legacy.find((config) => config.fileName === f);
+        return !!status.css.legacy.find((config: any) => config.fileName === f);
       case "scss-tokens":
-        return !!status.scss.legacy.find((config) => config.fileName === f);
+        return !!status.scss.legacy.find(
+          (config: any) => config.fileName === f,
+        );
       case "less-tokens":
-        return !!status.less.legacy.find((config) => config.fileName === f);
+        return !!status.less.legacy.find(
+          (config: any) => config.fileName === f,
+        );
       case "js-tokens":
-        return !!status.js.legacy.find((config) => config.fileName === f);
+        return !!status.js.legacy.find((config: any) => config.fileName === f);
       case "tailwind-tokens":
-        return !!status.tailwind.legacy.find((config) => config.fileName === f);
+        return !!status.tailwind.legacy.find(
+          (config: any) => config.fileName === f,
+        );
       default:
         return false;
     }
