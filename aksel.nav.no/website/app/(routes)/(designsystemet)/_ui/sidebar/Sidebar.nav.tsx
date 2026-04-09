@@ -82,7 +82,6 @@ function DesignsystemSidebarNav(props: SidebarNavProps) {
           variant="simple"
           size={layout === "sidebar" ? "small" : "medium"}
           label="Filtrer navigasjon"
-          clearButton={false}
           onChange={setFilterText}
           autoComplete="off"
         />
