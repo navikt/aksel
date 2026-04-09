@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { cl } from "../../utils/helpers";
+import { CheckboxGroupContext } from "../checkbox/CheckboxGroup.context";
+import { RadioGroupContext } from "../radio/RadioGroup.context";
 import { containsReadMore, useFormField } from "../useFormField";
 import type { FieldsetProps } from "./Fieldset";
 
@@ -7,11 +10,14 @@ import type { FieldsetProps } from "./Fieldset";
  */
 export const useFieldset = (props: FieldsetProps, legendId: string) => {
   const formField = useFormField(props, "fieldset");
+  const checkboxGroupContext = useContext(CheckboxGroupContext);
+  const radioGroupContext = useContext(RadioGroupContext);
 
   return {
     ...formField,
+    readOnlyIconNeedsTitle: checkboxGroupContext || radioGroupContext,
     inputProps: {
-      ...(props.role === "radiogroup"
+      ...(checkboxGroupContext || radioGroupContext
         ? { "aria-invalid": formField.inputProps["aria-invalid"] }
         : {}),
 
