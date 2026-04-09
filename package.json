@@ -78,7 +78,7 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.4",
+    "@biomejs/biome": "2.4.10",
     "@changesets/cli": "2.29.7",
     "@dnd-kit/react": "0.3.2",
     "@eslint/js": "^10.0.1",

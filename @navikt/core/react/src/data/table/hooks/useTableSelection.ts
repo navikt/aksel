@@ -1,16 +1,22 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useId } from "../../../utils-external";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
 import type {
+  SelectedKeysT,
   SelectionProps,
-  SelectionT,
   TableSelection,
 } from "../helpers/selection/selection.types";
 
 type UseTableSelectionArgs<T> = SelectionProps & {
   data: T[];
   getRowId: (rowData: T, index: number) => string | number;
+};
+
+type UseTableSelectionReturn = {
+  selection: TableSelection;
+  allKeys: SelectedKeysT;
 };
 
 function useTableSelection<T>({
@@ -21,58 +27,89 @@ function useTableSelection<T>({
   disabledKeys = [],
   data,
   getRowId,
-}: UseTableSelectionArgs<T>): TableSelection {
+}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
+  const radioGroupName = useId();
+
   const allKeys = useMemo(
     () => data.map((item, index) => getRowId(item, index)),
     [data, getRowId],
   );
 
-  const [selectedKeys, setSelectedKeys] = useControllableState<SelectionT>({
+  const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
     value: selectionMode !== "none" ? selectedKeysProp : undefined,
     defaultValue: defaultSelectedKeys ?? [],
     onChange: onSelectionChange,
   });
 
+  const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
+
+  const disabledKeysSet = useMemo(() => new Set(disabledKeys), [disabledKeys]);
+
+  const isRowSelected = useCallback(
+    (rowId: string | number) => {
+      if (selectionMode === "none") {
+        return false;
+      }
+
+      return selectedKeysSet.has(rowId);
+    },
+    [selectedKeysSet, selectionMode],
+  );
+
   if (selectionMode === "none") {
-    return { selectionMode, allKeys, selectedKeys: [], disabledKeys };
+    return {
+      allKeys,
+      selection: {
+        selectionMode,
+        selectedKeys: [],
+        disabledKeys,
+        isRowSelected,
+      },
+    };
   }
 
   if (selectionMode === "single") {
-    const arrayKeys = Array.isArray(selectedKeys) ? selectedKeys : [];
     const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeys: arrayKeys,
+      selectedKeysSet,
       setSelectedKeys,
-      disabledKeys,
+      disabledKeysSet,
+      name: radioGroupName,
     });
 
     return {
-      selectionMode,
       allKeys,
-      selectedKeys: arrayKeys,
-      disabledKeys,
-      getRowRadioProps,
+      selection: {
+        selectionMode,
+        selectedKeys,
+        disabledKeys,
+        getRowRadioProps,
+        isRowSelected,
+      },
     };
   }
 
   const { getTheadCheckboxProps, getRowCheckboxProps } = getMultipleSelectProps(
     {
+      selectedKeysSet,
       selectedKeys,
       setSelectedKeys,
-      disabledKeys,
+      disabledKeysSet,
       allKeys,
-      totalCount: data.length,
     },
   );
 
   return {
-    selectionMode,
     allKeys,
-    selectedKeys,
-    disabledKeys,
-    getTheadCheckboxProps,
-    getRowCheckboxProps,
+    selection: {
+      selectionMode,
+      selectedKeys,
+      disabledKeys,
+      getTheadCheckboxProps,
+      getRowCheckboxProps,
+      isRowSelected,
+    },
   };
 }
 
 export { useTableSelection };
-export type { SelectionProps, SelectionT };
+export type { SelectionProps, UseTableSelectionReturn };

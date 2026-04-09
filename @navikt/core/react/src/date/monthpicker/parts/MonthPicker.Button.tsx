@@ -63,7 +63,7 @@ export const MonthButton = ({
 
   useEffect(() => {
     if (focus) {
-      isSameMonth(month, focus) && ref.current && ref.current.focus();
+      isSameMonth(month, focus) && ref.current?.focus();
       setFocus();
     }
   }, [focus, month, setFocus]);

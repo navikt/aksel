@@ -52,6 +52,7 @@ export default {
     "keyframes-name-pattern": null,
     "function-url-quotes": null,
     "property-no-vendor-prefix": null,
+    "comment-empty-line-before": null,
     "alpha-value-notation": "number",
     "media-feature-range-notation": "prefix",
     "import-notation": "string",

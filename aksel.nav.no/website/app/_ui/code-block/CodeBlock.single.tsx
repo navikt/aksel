@@ -7,7 +7,7 @@ function SingleCodeBlock(props: ExtractPortableComponentProps<"kode">) {
   const { code, title } = props.value;
   const id = useId();
 
-  if (!code || !code.code) {
+  if (!code?.code) {
     return null;
   }
 

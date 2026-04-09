@@ -1,68 +1,63 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
-import type { SelectionT } from "./selection.types";
 
 type GetMultipleSelectPropsArgs = {
-  selectedKeys: SelectionT;
-  setSelectedKeys: (keys: SelectionT) => void;
-  disabledKeys: (string | number)[];
+  selectedKeysSet: Set<string | number>;
+  selectedKeys: (string | number)[];
+  setSelectedKeys: (keys: (string | number)[]) => void;
+  disabledKeysSet: Set<string | number>;
   allKeys: (string | number)[];
-  totalCount: number;
 };
 
 function getMultipleSelectProps({
+  selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disabledKeys,
+  disabledKeysSet,
   allKeys,
-  totalCount,
 }: GetMultipleSelectPropsArgs) {
-  const handleToggleAll = () => {
-    const allSelected =
-      selectedKeys === "all" ||
-      (Array.isArray(selectedKeys) && selectedKeys.length === totalCount);
+  const selectableKeys = allKeys.filter((k) => !disabledKeysSet.has(k));
+  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
 
-    setSelectedKeys(allSelected ? [] : allKeys);
+  const handleToggleAll = () => {
+    const allSelectableSelected = selectableKeys.every((k) =>
+      selectedKeysSet.has(k),
+    );
+
+    if (allSelectableSelected) {
+      setSelectedKeys(disabledSelected);
+    } else {
+      setSelectedKeys([...new Set([...disabledSelected, ...selectableKeys])]);
+    }
   };
 
   const handleToggleRow = (key: string | number) => {
-    if (selectedKeys === "all") {
-      setSelectedKeys(allKeys.filter((id) => id !== key));
-    } else if (selectedKeys.includes(key)) {
+    if (selectedKeysSet.has(key)) {
       setSelectedKeys(selectedKeys.filter((k) => k !== key));
     } else {
       setSelectedKeys([...selectedKeys, key]);
     }
   };
 
-  const isChecked = (key: string | number) =>
-    selectedKeys === "all" ||
-    (Array.isArray(selectedKeys) && selectedKeys.includes(key));
-
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => {
+      const selectedSelectableCount = selectableKeys.filter((k) =>
+        selectedKeysSet.has(k),
+      ).length;
       const indeterminate =
-        Array.isArray(selectedKeys) &&
-        selectedKeys.length > 0 &&
-        selectedKeys.length < totalCount;
+        selectedSelectableCount > 0 &&
+        selectedSelectableCount < selectableKeys.length;
 
       return {
-        /* TODO: Add support for label visuallyhidden */
-        /* children: "Select all rows", */
         onChange: handleToggleAll,
-        checked:
-          (selectedKeys === "all" ||
-            (Array.isArray(selectedKeys) && selectedKeys.length > 0)) &&
-          !indeterminate,
+        checked: selectedSelectableCount > 0 && !indeterminate,
         indeterminate,
-        disabled: disabledKeys.length === totalCount,
+        disabled: selectableKeys.length === 0,
       };
     },
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
-      /* TODO: Add support for label visuallyhidden */
-      /* children: `Select row with id ${key}`, */
       onChange: () => handleToggleRow(key),
-      checked: isChecked(key),
-      disabled: disabledKeys.includes(key),
+      checked: selectedKeysSet.has(key),
+      disabled: disabledKeysSet.has(key),
     }),
   };
 }

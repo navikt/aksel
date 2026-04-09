@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { omit } from "../../utils-external";
 import { useFormField } from "../useFormField";
-import { CheckboxGroupContext } from "./CheckboxGroup";
+import { CheckboxGroupContext } from "./CheckboxGroup.context";
 import { CheckboxProps } from "./types";
 
 /**

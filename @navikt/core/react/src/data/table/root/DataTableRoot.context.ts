@@ -4,7 +4,9 @@ import type { TableSelection } from "../helpers/selection/selection.types";
 type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
-  selectionState: TableSelection;
+  /* TODO: Temp optional, should be required */
+  selectionState?: TableSelection;
+  dataLength: number;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =

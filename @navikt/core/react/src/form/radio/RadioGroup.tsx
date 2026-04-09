@@ -3,18 +3,9 @@ import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
+import { RadioGroupContext } from "./RadioGroup.context";
 
-export interface RadioGroupContextProps {
-  name: string;
-  defaultValue?: any;
-  value?: any;
-  onChange: (value: any) => void;
-  required?: boolean;
-}
-
-export const RadioGroupContext =
-  React.createContext<RadioGroupContextProps | null>(null);
-
+// TODO: Omit "role" in next major
 export interface RadioGroupProps extends Omit<
   FieldsetProps,
   "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
@@ -75,29 +66,29 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     const nameId = useId();
 
     return (
-      <Fieldset
-        {...rest}
-        readOnly={readOnly}
-        ref={ref}
-        className={cl(
-          className,
-          "aksel-radio-group",
-          `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
-        )}
-        _fieldsSupportNativeReadOnly={false}
+      <RadioGroupContext.Provider
+        value={{
+          name: name ?? `radioGroupName-${nameId}`,
+          defaultValue,
+          value,
+          onChange,
+          required,
+        }}
       >
-        <RadioGroupContext.Provider
-          value={{
-            name: name ?? `radioGroupName-${nameId}`,
-            defaultValue,
-            value,
-            onChange,
-            required,
-          }}
+        <Fieldset
+          role="radiogroup"
+          {...rest}
+          readOnly={readOnly}
+          ref={ref}
+          className={cl(
+            className,
+            "aksel-radio-group",
+            `aksel-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`,
+          )}
         >
           <div className="aksel-radio-buttons">{children}</div>
-        </RadioGroupContext.Provider>
-      </Fieldset>
+        </Fieldset>
+      </RadioGroupContext.Provider>
     );
   },
 );

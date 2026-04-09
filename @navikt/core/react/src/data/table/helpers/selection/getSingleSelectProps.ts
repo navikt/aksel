@@ -1,34 +1,29 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
 type GetSingleSelectPropsArgs = {
-  selectedKeys: (string | number)[];
+  selectedKeysSet: Set<string | number>;
   setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeys: (string | number)[];
+  disabledKeysSet: Set<string | number>;
+  name: string;
 };
 
 function getSingleSelectProps({
-  selectedKeys,
+  selectedKeysSet,
   setSelectedKeys,
-  disabledKeys,
+  disabledKeysSet,
+  name,
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number) => {
-    if (selectedKeys.includes(key)) {
-      setSelectedKeys([]);
-    } else {
-      setSelectedKeys([key]);
-    }
+    setSelectedKeys([key]);
   };
 
   return {
     getRowRadioProps: (key: string | number): RadioInputProps => ({
-      /* TODO: Add support for label visuallyhidden */
-      /* children: `Select row with id ${key}`, */
-      checked: selectedKeys.includes(key),
+      checked: selectedKeysSet.has(key),
       onChange: () => handleSelectionChange(key),
-      disabled: disabledKeys.includes(key),
+      disabled: disabledKeysSet.has(key),
       value: key,
-      /* TODO: Make this unique to avoid issue with multipe tables */
-      name: "data-table-single-select",
+      name,
     }),
   };
 }

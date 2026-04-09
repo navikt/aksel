@@ -102,7 +102,7 @@ function DataTableAutoInner<T>(
     getRowId ??
     (((_row: T, index: number) => index) as (rowData: T) => string | number);
 
-  const selection = useTableSelection({
+  const { selection, allKeys } = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
@@ -117,6 +117,7 @@ function DataTableAutoInner<T>(
       layout={layout}
       withKeyboardNav={withKeyboardNav}
       selectionState={selection}
+      dataLength={data.length ?? 0}
     >
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">
@@ -136,10 +137,11 @@ function DataTableAutoInner<T>(
                   return (
                     <DataTableTh
                       /* TODO: Make these user-changable */
-                      maxWidth="400px"
-                      minWidth="100px"
-                      defaultWidth="100%"
-                      textAlign="left"
+                      maxWidth={colDef.maxWidth}
+                      minWidth={colDef.minWidth}
+                      width={colDef.width}
+                      defaultWidth={colDef.defaultWidth ?? "100%"}
+                      textAlign={colDef.type === "number" ? "right" : "left"}
                       key={colDef.id || colDefIndex}
                     >
                       {colDef.header}
@@ -150,14 +152,16 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
-                const rowId = selection.allKeys[rowIndex];
+                const rowId = allKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId} rowId={rowId}>
                     {columnDefinitions.map((colDef, colDefIndex) => {
                       return (
                         <DataTableTd
                           /* TODO: Make this configurable */
-                          textAlign="left"
+                          textAlign={
+                            colDef.type === "number" ? "right" : "left"
+                          }
                           key={colDef.id || colDefIndex}
                         >
                           {colDef.cell(rowData)}

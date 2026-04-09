@@ -26,10 +26,6 @@ export interface FieldsetProps
    * @default true
    */
   errorPropagation?: boolean;
-  /**
-   * @private
-   */
-  _fieldsSupportNativeReadOnly?: boolean;
 }
 
 /**
@@ -60,6 +56,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       size,
       readOnly,
       inputDescriptionId,
+      readOnlyIconNeedsTitle,
     } = useFieldset(props, legendId);
 
     const fieldset = useContext(FieldsetContext);
@@ -71,7 +68,6 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
-      _fieldsSupportNativeReadOnly = true,
       ...rest
     } = props;
 
@@ -112,10 +108,10 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             visuallyHidden={!!hideLegend}
           >
             {readOnly &&
-              (_fieldsSupportNativeReadOnly ? (
-                <ReadOnlyIcon />
-              ) : (
+              (readOnlyIconNeedsTitle ? (
                 <ReadOnlyIconWithTitle />
+              ) : (
+                <ReadOnlyIcon />
               ))}
             {legend}
           </Label>

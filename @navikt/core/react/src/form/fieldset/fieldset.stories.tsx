@@ -41,13 +41,6 @@ const content = (
   </>
 );
 
-const contentWithError = (
-  <>
-    <TextField label="Textfield label" hideLabel error="Må være fylt ut" />
-    <TextField label="Textfield label" hideLabel />
-  </>
-);
-
 export const Default: Story = {
   args: {
     legend: "Mollit eiusmod",
@@ -69,21 +62,22 @@ export const Small: Story = {
   },
 };
 
-export const ErrorPropagation: Story = {
-  args: {
-    legend: "Mollit eiusmod",
-    description:
-      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
-    errorPropagation: false,
-    children: contentWithError,
-  },
-};
-
 export const WithError: Story = {
   args: {
     legend: "Mollit eiusmod",
     description:
       "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    children: content,
+    error: "Laborum officia nisi aliqua esse minim in amet.",
+  },
+};
+
+export const WithErrorNoPropagation: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    errorPropagation: false,
     children: content,
     error: "Laborum officia nisi aliqua esse minim in amet.",
   },
@@ -113,7 +107,7 @@ export const Chromatic = renderStoriesForChromatic(
   {
     Default,
     Small,
-    ErrorPropagation,
+    WithErrorNoPropagation,
     WithError,
     WithErrorSmall: {
       ...WithError,
