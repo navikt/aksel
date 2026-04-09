@@ -1,7 +1,10 @@
 {
   "extends": "../../../tsconfig.build.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "rootDir": "./src",
     "outDir": "./cjs",
+    "lib": ["es2020", "dom", "dom.iterable"],
     "moduleResolution": "node",
     "module": "commonjs",
     "noImplicitAny": false,
