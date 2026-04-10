@@ -17,6 +17,8 @@ type SelectionProps = {
   selectedKeys?: SelectedKeysT;
   defaultSelectedKeys?: SelectedKeysT;
   onSelectionChange?: (keys: SelectedKeysT) => void;
+  /* TODO: Consider renaming to disabledSelectionIds */
+  /* TODO: Consider stronger typing */
   disabledKeys?: SelectedKeysT;
 };
 

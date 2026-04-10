@@ -102,10 +102,12 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     );
   }
 
-  if (!rowId) {
+  if (rowId == null) {
     return null;
   }
 
+  /* TODO: Might not need label "velg rad" for radio/checkbox. Table row header element (th) should be announced auto */
+  /* TODO: Need to add `isRowHeader`-value to columnDef */
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
       <DataTableTd

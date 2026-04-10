@@ -8,6 +8,7 @@ type ColumnDefinition<T> = {
   /**
    * Currently only handles cell alignment.
    * TODO: Should this include centering?
+   * type "icon" or something to avoid ellipsis on actions, tags etc
    */
   type?: "string" | "number";
   /* isRowHeader?: boolean; */

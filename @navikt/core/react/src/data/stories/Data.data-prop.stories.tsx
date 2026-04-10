@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { Tag } from "../../tag";
 import { DataTable } from "../table";
@@ -83,6 +84,13 @@ const userData = [
     id: 3,
     foo: "foo3",
     bar: "bar3",
+    on: true,
+    time: new Date(),
+  },
+  {
+    id: 4,
+    foo: "foo4",
+    bar: "bar4",
     on: true,
     time: new Date(),
   },
@@ -234,5 +242,104 @@ export const EmptyData: Story = {
         selectionMode="multiple"
       />
     );
+  },
+};
+
+const selectionPaginationSpy = fn();
+
+export const SelectionPagination: Story = {
+  render: () => {
+    const [page, setPage] = useState<"0" | "1">("0");
+
+    const dataToShow =
+      page === "0" ? userData.slice(0, 2) : userData.slice(2, 4);
+
+    return (
+      <div>
+        <button onClick={() => setPage("0")}>Page 1</button>
+        <button onClick={() => setPage("1")}>Page 2</button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={dataToShow}
+          selectionMode="multiple"
+          onSelectionChange={(keys) => {
+            console.info({ keys });
+            selectionPaginationSpy(keys);
+          }}
+          getRowId={(row) => row.foo + row.bar}
+        />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    selectionPaginationSpy.mockClear();
+    const canvas = within(canvasElement);
+    const page1Button = canvas.getByRole("button", { name: "Page 1" });
+    const page2Button = canvas.getByRole("button", { name: "Page 2" });
+
+    /* keys */
+    await userEvent.click(page1Button);
+
+    /* Page 1 rows: foo1bar1, foo2bar2 */
+    let checkboxes = canvas.getAllByRole("checkbox");
+    const theadCheckbox = () =>
+      canvas.getAllByRole("checkbox")[0] as HTMLInputElement;
+
+    /* Select first row on page 1 */
+    await userEvent.click(checkboxes[1]);
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo1bar1"]);
+
+    /* Thead should be indeterminate (1 of 2 visible rows selected) */
+    expect(theadCheckbox().indeterminate).toBe(true);
+    expect(theadCheckbox().checked).toBe(false);
+
+    /* Switch to page 2 (rows: foo3bar3, foo4bar4) */
+    await userEvent.click(page2Button);
+
+    /* Thead should NOT be indeterminate (no visible rows are selected) */
+    expect(theadCheckbox().indeterminate).toBe(false);
+    expect(theadCheckbox().checked).toBe(false);
+
+    /* Select first row on page 2 */
+    checkboxes = canvas.getAllByRole("checkbox");
+    await userEvent.click(checkboxes[1]);
+
+    /* onSelectionChange should include foo1bar1 from page 1 */
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
+      "foo1bar1",
+      "foo3bar3",
+    ]);
+
+    /* Thead should be indeterminate (1 of 2 visible rows selected) */
+    expect(theadCheckbox().indeterminate).toBe(true);
+
+    /* Click thead checkbox (indeterminate -> select all visible) */
+    /* Should preserve selections from other pages */
+    await userEvent.click(theadCheckbox());
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
+      "foo1bar1",
+      "foo3bar3",
+      "foo4bar4",
+    ]);
+
+    /* Thead should now be checked (all visible selected) */
+    expect(theadCheckbox().checked).toBe(true);
+    expect(theadCheckbox().indeterminate).toBe(false);
+
+    /* Click thead checkbox again (all selected -> unselect all visible) */
+    /* Should NOT unselect rows from other pages */
+    await userEvent.click(theadCheckbox());
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo1bar1"]);
+
+    /* Thead should not be checked or indeterminate */
+    expect(theadCheckbox().checked).toBe(false);
+    expect(theadCheckbox().indeterminate).toBe(false);
+
+    /* Switch back to page 1 - foo1bar1 should still be selected */
+    await userEvent.click(page1Button);
+    checkboxes = canvas.getAllByRole("checkbox");
+    expect(theadCheckbox().indeterminate).toBe(true);
+    expect((checkboxes[1] as HTMLInputElement).checked).toBe(true);
+    expect((checkboxes[2] as HTMLInputElement).checked).toBe(false);
   },
 };

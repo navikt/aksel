@@ -382,6 +382,8 @@ export const KitchenSinkAdvancedFilter: Story = {
       "multiple",
     );
 
+    console.log(rowSelection);
+
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
         return sampleData;
