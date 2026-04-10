@@ -170,7 +170,7 @@ export const SelectionWithDisabledRows: Story = {
         onSelectionChange={console.info}
         getRowId={(row) => row.id}
         withKeyboardNav
-        disabledKeys={[1, 2]}
+        disabledSelectionKeys={[1, 2]}
       />
     );
   },
@@ -227,7 +227,7 @@ export const SingleSelectionWithDisabledRows: Story = {
         selectionMode="single"
         onSelectionChange={console.info}
         getRowId={(row) => row.id}
-        disabledKeys={[2]}
+        disabledSelectionKeys={[2]}
       />
     );
   },

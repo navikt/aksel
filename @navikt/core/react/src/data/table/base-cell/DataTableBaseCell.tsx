@@ -12,6 +12,7 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
    * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
    */
   colSpan?: number;
+  rowSpan?: number;
   /**
    * Temp hack to solve overflow and alignment
    */

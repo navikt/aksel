@@ -127,7 +127,7 @@ describe("useTableSelection", () => {
           selectionMode: "single",
           data: items,
           getRowId,
-          disabledKeys: ["b"],
+          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -257,7 +257,7 @@ describe("useTableSelection", () => {
           selectionMode: "multiple",
           data: items,
           getRowId,
-          disabledKeys: ["b"],
+          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -277,7 +277,7 @@ describe("useTableSelection", () => {
           data: items,
           getRowId,
           defaultSelectedKeys: ["a", "b", "c"],
-          disabledKeys: ["b"],
+          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -327,7 +327,7 @@ describe("useTableSelection", () => {
           data: items,
           getRowId,
           defaultSelectedKeys: ["a", "c"],
-          disabledKeys: ["b"],
+          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -361,7 +361,7 @@ describe("useTableSelection", () => {
           selectionMode: "multiple",
           data: items,
           getRowId,
-          disabledKeys: ["b"],
+          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -375,7 +375,7 @@ describe("useTableSelection", () => {
           selectionMode: "multiple",
           data: items,
           getRowId,
-          disabledKeys: ["a", "b", "c"],
+          disabledSelectionKeys: ["a", "b", "c"],
         }),
       );
 
