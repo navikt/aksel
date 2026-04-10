@@ -4,7 +4,7 @@
 # Only run tests when pushing to main branch
 while read local_ref local_sha remote_ref remote_sha; do
   if [ "$remote_ref" = "refs/heads/main" ]; then
-    echo "Pushing to main branch - running tests..."
+    echo "Pushing to main branch - running tests...\n"
     yarn test
     exit $?
   fi
