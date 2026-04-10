@@ -62,10 +62,25 @@ interface DataTableProps<T>
    */
   layout?: "fixed" | "auto";
   /**
+   * Defines the columns of the table and how to render them.
    *
+   *
+   * Each column definition should have a unique `id` (or use the column index as fallback) and a `cell`-renderer function that takes the row data as argument and returns a React node.
    */
   columnDefinitions: ColumnDefinitions<T>;
+  /**
+   * The data to display in the table.
+   *
+   *
+   * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
+   */
   data: T[];
+  /**
+   * Function to get unique row id from row data.
+   *
+   *
+   * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
+   */
   getRowId?: (rowData: T, index: number) => string | number;
 }
 
