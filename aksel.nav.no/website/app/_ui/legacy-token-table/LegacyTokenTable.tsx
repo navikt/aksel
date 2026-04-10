@@ -20,12 +20,12 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
   return (
     <InfoCard data-color="info">
       <InfoCardHeader>
-        <InfoCardTitle>Komponent-tokens er fjernet i versjon 8</InfoCardTitle>
+        <InfoCardTitle>Komponent-tokens ble fjernet i versjon 8</InfoCardTitle>
       </InfoCardHeader>
       <InfoCardContent>
         Gammel dokumentasjon for disse finner du på{" "}
         <Link href="https://cdn.jsdelivr.net/npm/@navikt/ds-css@7/tokens.json">
-          JsDelivery
+          jsDelivr
         </Link>
       </InfoCardContent>
     </InfoCard>
