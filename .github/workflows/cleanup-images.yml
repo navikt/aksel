@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 4 * * 1"
   workflow_dispatch:
+    inputs:
+      num-old-versions-to-delete:
+        description: "Number of old versions to delete"
+        type: number
+        default: 1
 
 permissions:
   packages: write
@@ -21,6 +26,7 @@ jobs:
           min-versions-to-keep: 10
           delete-only-untagged-versions: false
           token: ${{ secrets.GITHUB_TOKEN }}
+          num-old-versions-to-delete: ${{ inputs.num-old-versions-to-delete }}
 
   cleanup-legacy-build:
     name: Delete old website images from GHCR
@@ -34,6 +40,7 @@ jobs:
           min-versions-to-keep: 0
           delete-only-untagged-versions: false
           token: ${{ secrets.GITHUB_TOKEN }}
+          num-old-versions-to-delete: ${{ inputs.num-old-versions-to-delete }}
 
   cleanup-legacy-build-2:
     name: Delete old website images from GHCR
@@ -47,3 +54,4 @@ jobs:
           min-versions-to-keep: 0
           delete-only-untagged-versions: false
           token: ${{ secrets.GITHUB_TOKEN }}
+          num-old-versions-to-delete: ${{ inputs.num-old-versions-to-delete }}
