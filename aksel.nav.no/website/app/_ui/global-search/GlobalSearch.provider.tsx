@@ -65,7 +65,6 @@ function GlobalSearchResultProvider({
 
   useEffect(() => {
     if (!paramValue) {
-      // eslint-disable-next-line
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchResults(null);
       return;

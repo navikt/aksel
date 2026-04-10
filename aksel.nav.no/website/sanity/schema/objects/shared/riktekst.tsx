@@ -36,8 +36,10 @@ function HeadingInput(props: StringInputProps) {
   }, [reference._ref]);
 
   if (!props.schemaType.options) {
+    // eslint-disable-next-line react-hooks/immutability
     props.schemaType.options = {};
   }
+  // eslint-disable-next-line react-hooks/immutability
   props.schemaType.options.list =
     props.value && !headings.find((h) => h.value === props.value)
       ? [{ title: props.value, value: props.value }, ...headings]

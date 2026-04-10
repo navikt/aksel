@@ -51,9 +51,10 @@ export const withDsExample = (
     const pathParts = pathname.split("/");
     const themeOptions = theme || { switch: true };
 
+    // Prevent hydration mismatch due to `resolvedTheme` (used in ExampleThemingSwitch) not being available on the server
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
-      setMounted(true);
+      setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
     }, []);
 
     if (!mounted) {

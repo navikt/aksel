@@ -342,7 +342,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
           originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
-          ownerDoc.body.style.pointerEvents = "none";
+          ownerDoc.body.style.pointerEvents = "none"; // eslint-disable-line react-hooks/immutability
         }
         context.layersWithOutsidePointerEventsDisabled.add(node);
       }
