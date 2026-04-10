@@ -26,7 +26,9 @@ type SelectionProps = {
    * Callback with array of selected keys.
    */
   onSelectionChange?: (keys: SelectedKeysT) => void;
-  /* TODO: Consider stronger typing */
+  /**
+   * Keys that should be disabled for selection. These keys will not be selectable and will be styled as disabled.
+   */
   disabledSelectionKeys?: SelectedKeysT;
 };
 
