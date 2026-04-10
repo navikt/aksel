@@ -77,6 +77,7 @@ const DataTableColumnHeader = forwardRef<
       onWidthChange,
       defaultWidth,
       colSpan,
+      rowSpan,
       UNSAFE_isSelection,
       ...rest
     },
@@ -118,6 +119,8 @@ const DataTableColumnHeader = forwardRef<
         }}
         onPointerLeave={() => setIsOverflowing(false)}
         UNSAFE_isSelection={UNSAFE_isSelection}
+        colSpan={colSpan}
+        rowSpan={rowSpan}
       >
         {sortable ? (
           <button

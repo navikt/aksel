@@ -43,6 +43,7 @@ const DataTableBaseCell = forwardRef<
       colSpan,
       UNSAFE_isSelection,
       contentMaxWidth,
+      rowSpan,
       ...rest
     },
     forwardedRef,
@@ -58,6 +59,7 @@ const DataTableBaseCell = forwardRef<
         data-align={textAlign}
         data-selectable={UNSAFE_isSelection}
         colSpan={colSpan}
+        rowSpan={rowSpan}
       >
         <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
       </Component>
