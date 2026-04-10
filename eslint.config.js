@@ -64,6 +64,7 @@ module.exports = defineConfig([
       "import/no-unresolved": "off",
       "import/namespace": "off", // Biome has equivalent
       "import/no-named-as-default": "off", // Temporary
+      "react-hooks/refs": "off", // Too many false positives
       "react-hooks/exhaustive-deps": [
         "warn",
         { additionalHooks: "(useClientLayoutEffect)" },

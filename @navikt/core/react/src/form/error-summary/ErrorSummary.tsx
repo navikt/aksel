@@ -95,7 +95,6 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           `aksel-error-summary--${size}`,
         )}
         tabIndex={-1}
-        // eslint-disable-next-line react-hooks/refs
         onFocus={composeEventHandlers(rest.onFocus, (event) => {
           if (event.target === wrapperRef.current) {
             headingRef?.current?.focus();

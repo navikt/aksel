@@ -17,18 +17,14 @@ export function useTabs({
     onChange,
   });
 
-  /**
-   * Sync focused `value` with controlled `selectedValue`
-   */
+  /* Sync focused `value` with controlled `selectedValue` */
   useEffect(() => {
     if (value != null) {
-      setFocusedValue(value);
+      setFocusedValue(value); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [value]);
 
-  /**
-   * Scope ids for better tracking
-   */
+  /* Scope ids for better tracking */
   const uuid = useId();
 
   return {

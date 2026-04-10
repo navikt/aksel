@@ -99,7 +99,6 @@ const FileUploadDropzone = forwardRef<
         onDragOver={dropzoneCtx.onDragOver}
         onDragLeave={dropzoneCtx.onDragLeave}
         onDrop={dropzoneCtx.onDrop}
-        // eslint-disable-next-line react-hooks/refs
         onClick={composeEventHandlers(onClick, () => inputRef.current?.click())}
         data-disabled={inputProps.disabled}
         data-color={color}

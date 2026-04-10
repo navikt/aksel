@@ -61,7 +61,6 @@ const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
           ref={forwardedRef}
           {...restProps}
           className={cl("aksel-link-anchor__overlay", className)}
-          // eslint-disable-next-line react-hooks/refs
           onClick={composeEventHandlers(onClick, (e) => {
             if (
               e.target === anchorRef.current ||
