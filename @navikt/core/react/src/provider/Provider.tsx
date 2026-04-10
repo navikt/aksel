@@ -3,7 +3,7 @@ import { PartialTranslations, Translations } from "../utils/i18n/i18n.types";
 import nb from "../utils/i18n/locales/nb";
 
 type ProviderContextType = {
-  rootElement?: HTMLElement;
+  rootElement?: HTMLElement | null;
   locale: Translations;
   translations?: PartialTranslations | PartialTranslations[];
 };
@@ -17,7 +17,7 @@ export type ProviderProps = {
   /**
    * Global root-element to attach portals to. Used by Tooltip, Modal (optionally) and ActionMenu.
    */
-  rootElement?: HTMLElement;
+  rootElement?: HTMLElement | null;
 } & (
   | {
       /**

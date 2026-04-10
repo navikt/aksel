@@ -91,7 +91,7 @@ const BaseAlert = forwardRef<HTMLDivElement, BaseAlertProps>(
           data-variant={type}
           data-global={global}
         >
-          <div role={role}>{children}</div>
+          {role ? <div role={role}>{children}</div> : children}
         </Component>
       </BaseAlertProvider>
     );

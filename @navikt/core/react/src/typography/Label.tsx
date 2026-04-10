@@ -6,7 +6,8 @@ import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface LabelProps
-  extends Omit<TypoProps, "weight" | "align" | "truncate">,
+  extends
+    Omit<TypoProps, "weight" | "align" | "truncate">,
     React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * medium: 18px, small: 16px.

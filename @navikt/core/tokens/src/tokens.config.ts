@@ -15,7 +15,7 @@ import { spaceTokenConfig } from "./tokens/space";
 export const lightModeTokens = (withSemanticRoles = true) => {
   const config = [
     shadowTokenConfig("light"),
-    opacityTokenConfig("light"),
+    opacityTokenConfig(),
     withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("light"),
     globalLightTokens,
@@ -27,7 +27,7 @@ export const lightModeTokens = (withSemanticRoles = true) => {
 export const darkModeTokens = (withSemanticRoles = true) => {
   const config = [
     shadowTokenConfig("dark"),
-    opacityTokenConfig("dark"),
+    opacityTokenConfig(),
     withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("dark"),
     globalDarkTokens,

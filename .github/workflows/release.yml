@@ -1,4 +1,4 @@
-name: Release
+name: Release packages
 
 on:
   push:
@@ -13,8 +13,8 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   build:
-    name: "Release packages"
-    if: ${{!contains(github.event.head_commit.message, '[ci skip]')}}
+    name: Release packages
+    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
     runs-on: ubuntu-latest
     permissions:
       id-token: "write"
@@ -22,17 +22,20 @@ jobs:
       packages: "write"
       pull-requests: "write"
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: yarn
           cache-dependency-path: "yarn.lock"
 
-      - uses: denoland/setup-deno@v2
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
         with:
           deno-version: v1.x
 
@@ -55,7 +58,7 @@ jobs:
           # Needed for push to main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Creating .npmrc
+      - name: Create .npmrc for GPR
         run: |
           cat << EOF > "$HOME/.npmrc"
             @navikt:registry=https://npm.pkg.github.com

@@ -1,4 +1,6 @@
 .aksel-date {
+  --__axc-date-button-size: 2.5rem;
+
   padding: var(--ax-space-16);
 
   .rdp-table {
@@ -7,6 +9,17 @@
 
   .rdp-cell {
     padding: 1px; /* Some CSS-resets sets padding:0 on all items */
+
+    &[data-outside="true"] {
+      width: var(--__axc-date-button-size);
+      height: var(--__axc-date-button-size);
+
+      /* Padding is ignored when element is empty */
+      &:empty {
+        width: calc(var(--__axc-date-button-size) + 2px);
+        height: calc(var(--__axc-date-button-size) + 2px);
+      }
+    }
   }
 
   .rdp-day_range_middle {
@@ -40,8 +53,8 @@
   .rdp-button {
     all: unset;
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: var(--__axc-date-button-size);
+    height: var(--__axc-date-button-size);
     text-align: center;
     border-radius: var(--ax-radius-8);
   }
@@ -129,6 +142,13 @@
   }
 }
 
+.aksel-date__popover {
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
 .aksel-date__caption {
   display: flex;
   justify-content: space-between;
@@ -183,35 +203,41 @@
 }
 
 .aksel-date__field-input {
-  &.aksel-text-field__input {
-    padding-right: var(--ax-space-48);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+
+  &:focus-visible {
+    outline: none;
   }
 
-  .aksel-form-field--small & {
-    padding-right: var(--ax-space-32);
+  .aksel-date__field--error &:not(:disabled) {
+    box-shadow:
+      inset -2px 0 0 0 var(--ax-border-danger-strong),
+      inset 0 0 0 1px var(--ax-border-danger-strong);
   }
 }
 
 .aksel-date__field-button {
-  position: absolute;
-  right: 0.0625rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--ax-text-neutral);
-  display: inline-flex;
-  cursor: pointer;
-  margin: 0;
-  text-decoration: none;
-  border: none;
-  background: none;
-  border-radius: calc(var(--ax-radius-8) - 1px);
-  padding: var(--ax-space-12);
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  height: calc(100% - 0.125rem);
+  --__axc-button-border-width: 1px;
+  --__axc-button-border-color: var(--ax-border-neutral);
+
   border-start-start-radius: 0;
   border-end-start-radius: 0;
+  position: relative;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  .aksel-date__field:not(.aksel-date__field--readonly):has(.aksel-date__field-input:not(:disabled)) &:hover,
+  .aksel-date__field:not(.aksel-date__field--readonly, .aksel-date__field--error):has(
+      .aksel-date__field-input:is(:focus-visible, :hover):not(:disabled)
+    )
+    & {
+    --__axc-button-border-color: var(--ax-border-strong);
+  }
 
   .aksel-form-field--small & {
     padding: var(--ax-space-4);
@@ -224,19 +250,37 @@
 
   /* Readonly */
   .aksel-date__field--readonly & {
+    --__axc-button-border-color: var(--ax-border-neutral-subtleA);
+
     cursor: default;
+    opacity: 1;
+    background-color: var(--ax-bg-neutral-moderate);
+    color: var(--ax-text-neutral-subtle);
   }
 
-  &:focus-visible {
-    outline-color: var(--ax-border-focus);
+  /* Syncs button-bg with input while respecting hover/active states */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--ax-bg-input);
+    z-index: -1;
   }
 }
 
 .aksel-date__field-wrapper {
   display: inline-flex;
-  align-items: center;
-  position: relative;
   width: fit-content;
+  border-radius: var(--ax-radius-8);
+
+  /* Initializes stacking context to allow z-index: -1 on button to work. */
+  z-index: 0;
+
+  &:has(.aksel-date__field-input:focus-visible) {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }
 
 .aksel-date__week-row {
@@ -272,6 +316,8 @@
 
 @media (min-width: 480px) {
   .aksel-date {
+    --__axc-date-button-size: 3rem;
+
     padding: var(--ax-space-20);
   }
 
@@ -283,7 +329,6 @@
     gap: var(--ax-space-8);
   }
 
-  .aksel-date .rdp-button,
   .aksel-date__caption-button {
     width: 3rem;
     height: 3rem;

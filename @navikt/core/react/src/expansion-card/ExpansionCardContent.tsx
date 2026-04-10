@@ -4,8 +4,7 @@ import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
 import { ExpansionCardContext } from "./context";
 
-export interface ExpansionCardContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExpansionCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

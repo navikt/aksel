@@ -3,8 +3,7 @@ import { AkselColor } from "../types";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 
-export interface ChipsToggleProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ChipsToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
    * Toggles aria-pressed and visual changes

@@ -6,10 +6,11 @@ interface ZoomProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
 }
 
-export interface ZoomType<Props = ZoomProps>
-  extends React.ForwardRefExoticComponent<
-    Props & React.RefAttributes<HTMLUListElement>
-  > {
+export interface ZoomType<
+  Props = ZoomProps,
+> extends React.ForwardRefExoticComponent<
+  Props & React.RefAttributes<HTMLUListElement>
+> {
   Button: ZoomButtonType;
   componentType: string;
 }

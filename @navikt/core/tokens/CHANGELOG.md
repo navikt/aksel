@@ -1,5 +1,29 @@
 # @navikt/ds-tokens
 
+## 8.9.1
+
+## 8.9.0
+
+## 8.8.0
+
+### Patch Changes
+
+- Tokens: `--ax-opacity-disabled` adjusted from 0.3 to 0.45. ([#4734](https://github.com/navikt/aksel/pull/4734))
+
+## 8.7.0
+
+## 8.6.0
+
+## 8.5.2
+
+## 8.5.1
+
+## 8.5.0
+
+## 8.4.1
+
+## 8.4.0
+
 ## 8.3.0
 
 ## 8.2.2

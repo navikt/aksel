@@ -8,6 +8,7 @@ import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Radio from "./Radio";
 import RadioGroup, { RadioGroupProps } from "./RadioGroup";
+import { RadioInput } from "./radio-input/RadioInput";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "ds-react/Radio",
@@ -274,6 +275,22 @@ export const ColorRole = () => (
   </VStack>
 );
 
+export const StandaloneInput = () => (
+  <div>
+    <RadioInput name="radio-test" value="v1" />
+    <RadioInput name="radio-test" value="v2" />
+    <RadioInput name="radio-test" value="v3" />
+  </div>
+);
+
+export const StandaloneInputCompact = () => (
+  <div>
+    <RadioInput name="radio-test" value="v1" compact />
+    <RadioInput name="radio-test" value="v2" compact />
+    <RadioInput name="radio-test" value="v3" compact />
+  </div>
+);
+
 export const Chromatic = renderStoriesForChromatic({
   Group,
   GroupError,
@@ -281,6 +298,8 @@ export const Chromatic = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
@@ -290,6 +309,8 @@ export const ChromaticDark = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 ChromaticDark.globals = { theme: "dark" };
 
@@ -300,6 +321,8 @@ export const ChromaticPrint = renderStoriesForChromatic({
   Readonly,
   Disabled,
   ColorRole,
+  StandaloneInput,
+  StandaloneInputCompact,
 });
 
 ChromaticPrint.parameters = {

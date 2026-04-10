@@ -83,7 +83,6 @@ function IconPageIconDetails({
             Last ned SVG
           </Button>
         )}
-
         <Button
           variant="secondary"
           as="a"
@@ -95,7 +94,9 @@ function IconPageIconDetails({
           Meld fra bug
         </Button>
       </HStack>
+
       <CodeBlock
+        key={`${iconName}-import`}
         showLineNumbers={false}
         tabs={[
           {
@@ -106,8 +107,12 @@ function IconPageIconDetails({
           },
         ]}
       />
-
-      <CodeBlock showLineNumbers={false} tabs={codeTabs} defaultWrap={false} />
+      <CodeBlock
+        key={`${iconName}-usage`}
+        showLineNumbers={false}
+        tabs={codeTabs}
+        defaultWrap={false}
+      />
     </>
   );
 

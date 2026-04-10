@@ -57,6 +57,16 @@ interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
+  /**
+   * Changes the HTML element used for the root element.
+   *
+   * **When using `section`, provide either `aria-label` or `aria-labelledby` for better accessibility.**
+   * `axe-core` might warn about unique landmarks if you have multiple Accordions on page with the same label.
+   * In those cases consider updating to unique `aria-label` or `aria-labelledby` props.
+   * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
+   * @default "div"
+   */
+  as?: "div" | "section";
 }
 
 /**
@@ -81,7 +91,14 @@ interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    { className, variant = "default", size = "medium", indent = true, ...rest },
+    {
+      className,
+      variant = "default",
+      size = "medium",
+      indent = true,
+      as: Component = "div",
+      ...rest
+    },
     ref,
   ) => {
     const localRef = useRef<HTMLDivElement | null>(null);
@@ -117,7 +134,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           variant,
         }}
       >
-        <div
+        <Component
           {...omit(rest, ["headingSize"])}
           className={cl(
             "aksel-accordion",

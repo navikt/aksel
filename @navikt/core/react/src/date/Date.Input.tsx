@@ -1,5 +1,6 @@
-import React, { InputHTMLAttributes, forwardRef, useRef } from "react";
+import React, { InputHTMLAttributes, forwardRef } from "react";
 import { CalendarIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
 import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
@@ -35,8 +36,7 @@ export const {
 });
 
 export interface DateInputProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  extends FormFieldProps, Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Input label
    */
@@ -69,10 +69,10 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     description,
     variant = "datepicker",
     setAnchorRef,
+    "data-color": dataColor,
     ...rest
   } = props;
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const translate = useDateTranslationContext().translate;
 
   const isDatepickerVariant = variant === "datepicker";
@@ -114,6 +114,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "aksel-date__field--readonly": readOnly,
         },
       )}
+      data-color={dataColor}
     >
       <Label
         htmlFor={inputProps.id}
@@ -143,7 +144,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
-          aria-controls={context?.open ? context.ariaId : undefined}
+          aria-controls={context.open ? context.ariaId : undefined}
           readOnly={readOnly}
           className={cl(
             "aksel-date__field-input",
@@ -153,23 +154,22 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           )}
           size={isDatepickerVariant ? 11 : 14}
         />
-        <button
+        <Button
           disabled={inputProps.disabled || readOnly}
-          tabIndex={readOnly ? -1 : context?.open ? -1 : 0}
-          onClick={() => {
-            context?.onOpen();
-            setAnchorRef?.(buttonRef.current);
-          }}
+          tabIndex={readOnly ? -1 : undefined}
+          onClick={context.onOpen}
           type="button"
           className="aksel-date__field-button"
-          ref={buttonRef}
-        >
-          <CalendarIcon
-            title={translate(
-              conditionalVariables.iconTitle[context?.open ? "close" : "open"],
-            )}
-          />
-        </button>
+          ref={setAnchorRef}
+          icon={<CalendarIcon aria-hidden />}
+          // If we have the title on the icon, NVDA will read "close" when focusing
+          // the button after closing the popup, even if we wait a tick.
+          title={translate(
+            conditionalVariables.iconTitle[context.open ? "close" : "open"],
+          )}
+          variant="secondary"
+          size={size}
+        />
       </div>
       <div
         className="aksel-form-field__error"

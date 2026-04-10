@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AVALIABLE_MARKDOWN_ROUTES } from "@/app/api/markdown/llm.config";
+import {
+  AVALIABLE_MARKDOWN_ROUTES,
+  markdownForRoute,
+} from "@/app/api/markdown/llm.config";
 
 /**
  * Central markdown route handler
@@ -11,26 +14,45 @@ export async function GET(request: NextRequest) {
       status: 400,
     });
   }
+
   const basePath = request.nextUrl.pathname.slice(0, -3);
 
+  /**
+   * TODO: Need to fetch available markdown routes from Sanity to avoid hardcoding them in the llm.config file.
+   */
   if (!AVALIABLE_MARKDOWN_ROUTES.includes(basePath)) {
-    return new NextResponse("Markdown version not available for this route", {
-      status: 404,
-    });
+    return new NextResponse(
+      "ERROR: Markdown version not available for this route",
+      {
+        status: 404,
+      },
+    );
   }
 
   try {
-    return new NextResponse(`## Hello world`, {
+    const markdown = await markdownForRoute(basePath);
+
+    if (!markdown || markdown.length === 0) {
+      return new NextResponse(
+        "ERROR: Markdown version not available for this route",
+        {
+          status: 404,
+        },
+      );
+    }
+
+    return new NextResponse(markdown, {
       headers: {
         "Content-Type": "text/markdown; charset=utf-8",
         "Cache-Control": "public, max-age=3600, s-maxage=3600",
       },
     });
-    /* return new NextResponse("Markdown version not available for this route", {
-      status: 404,
-    }); */
-  } catch (error) {
-    console.error("Error generating markdown:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+  } catch {
+    return new NextResponse(
+      "ERROR: Markdown version not available for this route",
+      {
+        status: 404,
+      },
+    );
   }
 }

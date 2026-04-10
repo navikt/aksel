@@ -155,7 +155,7 @@ const App = () => {
                       <div className="icons-wrapper">
                         {sub.icons.map((i) => {
                           // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
-                          const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
+                          const T = Icons[`${i.id}Icon`];
                           if (T === undefined) {
                             return null;
                           }

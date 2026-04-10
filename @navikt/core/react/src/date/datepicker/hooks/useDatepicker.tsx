@@ -1,25 +1,25 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayEventHandler, dateMatchModifiers } from "react-day-picker";
+import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
 import { DatePickerProps } from "../DatePicker";
 
-export interface UseDatepickerOptions
-  extends Pick<
-    DatePickerProps,
-    | "locale"
-    | "fromDate"
-    | "toDate"
-    | "today"
-    | "toDate"
-    | "fromDate"
-    | "toDate"
-    | "disabled"
-    | "disableWeekends"
-  > {
+export interface UseDatepickerOptions extends Pick<
+  DatePickerProps,
+  | "locale"
+  | "fromDate"
+  | "toDate"
+  | "today"
+  | "toDate"
+  | "fromDate"
+  | "toDate"
+  | "disabled"
+  | "disableWeekends"
+> {
   /**
    * The initially selected Date
    */
@@ -90,12 +90,23 @@ interface UseDatepickerValue {
 }
 
 export type DateValidationT = {
-  isDisabled: boolean;
-  isWeekend: boolean;
-  isEmpty: boolean;
-  isInvalid: boolean;
+  /**
+   * Whether there are any validation errors.
+   * - When `true`, all the other properties will be `false`.
+   * - When `false`, at least one of the other properties will be `true`.
+   */
   isValidDate: boolean;
+  /** Whether the date is a disabled date */
+  isDisabled: boolean;
+  /** Whether the date falls on a weekend and `disableWeekends` is true */
+  isWeekend: boolean;
+  /** Whether the input field is empty */
+  isEmpty: boolean;
+  /** Whether the entered value cannot be parsed as a date (i.e. wrong format or non-existing date) */
+  isInvalid: boolean;
+  /** Whether the date is before `fromDate` */
   isBefore: boolean;
+  /** Whether the date is after `toDate` */
   isAfter: boolean;
 };
 
@@ -161,8 +172,9 @@ export const useDatepicker = (
   const handleOpen = useCallback(
     (newOpen: boolean) => {
       setOpen(newOpen);
-      newOpen &&
+      if (newOpen) {
         setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+      }
     },
     [defaultMonth, defaultSelected, selectedDay, today],
   );
@@ -236,7 +248,9 @@ export const useDatepicker = (
 
     if (day && !selected) {
       handleOpen(false);
-      anchorRef?.focus();
+      // We use sync:false so that when Modal is used (see Date.Dialog.tsx), it is closed before
+      // we try to focus the open button (since native modal dialogs don't allow focus outside).
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     }
 
     if (selected) {
@@ -314,7 +328,7 @@ export const useDatepicker = (
     open,
     onClose: () => {
       handleOpen(false);
-      anchorRef?.focus();
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     },
     onOpenToggle: () => handleOpen(!open),
     disabled,

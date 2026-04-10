@@ -47,7 +47,7 @@ export default function SearchField({
             data-color="neutral"
             className={styles.searchField}
           />
-          <HStack align="center" gap="space-4">
+          <HStack align="center" gap="space-6">
             <Checkbox
               value="semver"
               onClick={() => {

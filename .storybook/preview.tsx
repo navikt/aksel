@@ -2,8 +2,10 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/data-table.css";
+import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";
+import "../@navikt/core/css/src/listbox.css";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
 import { en, nb, nn } from "../@navikt/core/react/src/utils/i18n/locales";
@@ -14,6 +16,22 @@ const locales: Record<Language, Translations> = {
   nb,
   nn,
   en,
+};
+
+const LanguageDecorator = ({
+  children,
+  lang,
+}: {
+  children: React.ReactNode;
+  lang: Language | undefined;
+}) => {
+  useEffect(() => {
+    document.documentElement.lang = lang || "nb";
+  }, [lang]);
+
+  return (
+    <Provider locale={lang ? locales[lang] : undefined}>{children}</Provider>
+  );
 };
 
 const fonts = ["Source Sans 3", "Open Sans"];
@@ -28,9 +46,13 @@ const TypoDecorator = ({
   useEffect(() => {
     const fontVariable = fonts.includes(font) ? `"${font}", sans-serif` : null;
     document.body.style.setProperty("--ax-font-family", fontVariable);
+
+    return () => {
+      document.body.style.removeProperty("--ax-font-family");
+    };
   }, [font]);
 
-  return children;
+  return <>{children}</>;
 };
 
 export default {
@@ -97,14 +119,11 @@ export default {
         <StoryFn />
       </TypoDecorator>
     ),
-    (StoryFn, context) =>
-      context.globals.language ? (
-        <Provider locale={locales[context.globals.language as Language]}>
-          <StoryFn />
-        </Provider>
-      ) : (
+    (StoryFn, context) => (
+      <LanguageDecorator lang={context.globals.language}>
         <StoryFn />
-      ),
+      </LanguageDecorator>
+    ),
     withThemeByClassName({
       themes: {
         light: "light",

@@ -95,8 +95,6 @@
   padding-left: var(--ax-space-6);
 }
 
-/* -------------------------- start old CSS --------------------------  */
-
 /* ----------------------------- Chips removable ---------------------------- */
 .aksel-chips__removable {
   gap: 0;

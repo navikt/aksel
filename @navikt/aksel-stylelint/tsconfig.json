@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "sourceMap": false,
     "esModuleInterop": true,
     "target": "es2020",

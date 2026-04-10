@@ -86,10 +86,16 @@ function KodeEksemplerProvider(props: {
       return;
     }
 
-    setLoaded(false);
-
     const id = nameToId(dir?.title ?? "", exampleName);
-    router.push(pathname + "?" + createQueryString(id), { scroll: false });
+    const newQueryString = createQueryString(id);
+
+    if (newQueryString === searchParams?.toString()) {
+      iframeRef.current?.contentWindow?.location.reload();
+      return;
+    }
+
+    setLoaded(false);
+    router.push(pathname + "?" + newQueryString, { scroll: false });
     iframeRef.current?.focus({ preventScroll: true });
   };
 

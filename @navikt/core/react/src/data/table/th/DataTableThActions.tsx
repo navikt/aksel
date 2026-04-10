@@ -7,7 +7,7 @@ function DataTableThActions({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   /* TODO: Fix this */
   // @ts-expect-error Temp hack to hide when no children present
-  if (!children || !children.filter(Boolean).length) {
+  if (!children?.filter(Boolean).length) {
     return null;
   }
 

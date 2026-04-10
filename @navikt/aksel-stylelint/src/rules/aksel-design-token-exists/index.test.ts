@@ -1,5 +1,5 @@
 import { testRule } from "stylelint-test-rule-node";
-import rule, { messages } from ".";
+import rule, { messages } from "./index.js";
 
 testRule({
   plugins: ["./dist/index.js"],

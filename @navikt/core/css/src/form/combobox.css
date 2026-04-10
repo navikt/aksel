@@ -157,6 +157,11 @@
   line-height: var(--ax-font-line-height-large);
   margin: 0;
   padding-left: 0.25rem;
+
+  .aksel-form-field--small & {
+    font-size: var(--ax-font-size-medium);
+    line-height: var(--ax-font-line-height-medium);
+  }
 }
 
 .aksel-combobox__input-wrapper {

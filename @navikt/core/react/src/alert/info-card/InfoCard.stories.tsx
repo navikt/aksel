@@ -174,6 +174,46 @@ export const WrappingTitle: Story = {
   },
 };
 
+export const Message: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-16">
+        <InfoCard data-color="brand-magenta">
+          <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+            tempore corrupti asperiores praesentium? Asperiores, doloribus?
+            Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
+            ipsam? Accusantium libero quia quis!
+          </InfoCard.Message>
+        </InfoCard>
+        <InfoCard size="small" data-color="brand-magenta">
+          <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+            tempore corrupti asperiores praesentium? Asperiores, doloribus?
+            Molestias, laudantium saepe. Nihil in alias praesentium maxime iure
+            ipsam? Accusantium libero quia quis!
+          </InfoCard.Message>
+        </InfoCard>
+      </VStack>
+    );
+  },
+};
+
+export const MessageWithLink: Story = {
+  render: () => {
+    return (
+      <InfoCard data-color="brand-magenta">
+        <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat
+          tempore corrupti asperiores praesentium? Asperiores, doloribus?
+          <Link href="#123">Molestias, laudantium saepe</Link>. Nihil in alias
+          praesentium maxime iure ipsam? Accusantium libero quia quis!
+        </InfoCard.Message>
+      </InfoCard>
+    );
+  },
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   SizeSmall,
@@ -181,6 +221,8 @@ export const Chromatic = renderStoriesForChromatic({
   Compositions,
   CustomHeaders,
   WrappingTitle,
+  Message,
+  MessageWithLink,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
@@ -190,6 +232,8 @@ export const ChromaticDark = renderStoriesForChromatic({
   Compositions,
   CustomHeaders,
   WrappingTitle,
+  Message,
+  MessageWithLink,
 });
 ChromaticDark.globals = { theme: "dark" };
 

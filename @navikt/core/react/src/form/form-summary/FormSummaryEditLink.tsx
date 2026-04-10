@@ -6,8 +6,7 @@ import { CompositionWarning } from "../../utils/components/composition-warning";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 
-export interface FormSummaryEditProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface FormSummaryEditProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * URL to the relevant part of the form, where the answers can be edited.
    */

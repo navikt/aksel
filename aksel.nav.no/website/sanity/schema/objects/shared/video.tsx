@@ -11,7 +11,7 @@ const sanityClient = createClient({
 const query = groq`*[_id == $id][0]{size}`;
 
 const validateFileSize = (maxSizeInMb: number, file?: FileValue) => {
-  if (!file || !file.asset?._ref) {
+  if (!file?.asset?._ref) {
     return true;
   }
 

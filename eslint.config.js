@@ -33,7 +33,6 @@ module.exports = defineConfig([
     "**/tokens/**/plugin.js",
     "**/.next",
     "**/query-types.ts",
-    "examples/referansesider",
     "examples/astro/.astro",
     ".yarn",
     "**/next-env.d.ts",
@@ -63,6 +62,7 @@ module.exports = defineConfig([
       "react/prop-types": "off", // Temporary
       "react/display-name": "off", // Temporary
       "import/no-unresolved": "off",
+      "import/namespace": "off", // Biome has equivalent
       "import/no-named-as-default": "off", // Temporary
       "react-hooks/exhaustive-deps": [
         "warn",

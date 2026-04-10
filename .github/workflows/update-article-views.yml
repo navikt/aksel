@@ -1,16 +1,22 @@
-name: Redeploy Naisjob (update-article-views)
+name: Update article views (Naisjob)
+
 on:
   workflow_dispatch:
+
 jobs:
   execute:
+    name: Build and deploy article views job
     runs-on: ubuntu-latest
     permissions:
-      id-token: "write"
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
-      - uses: nais/docker-build-push@v0
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem
@@ -19,7 +25,7 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
-      - name: start naisjob prod-gcp
+      - name: Deploy Naisjob to prod-gcp
         uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}

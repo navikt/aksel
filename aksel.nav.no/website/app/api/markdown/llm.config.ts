@@ -1,3 +1,30 @@
-const AVALIABLE_MARKDOWN_ROUTES: string[] = [];
+import Grunnleggende from "./routes/grunnleggende";
+import Komponenter from "./routes/komponenter";
+/* import Komponent from "./routes/komponent"; */
+import LLM from "./routes/llm";
+import Maler from "./routes/maler";
 
-export { AVALIABLE_MARKDOWN_ROUTES };
+type MarkdownRoute = () => Promise<string>;
+
+type Routes = Record<`/${string}`, MarkdownRoute>;
+
+const MARKDOWN_ROUTES: Routes = {
+  "/komponenter": Komponenter.markdown,
+  "/grunnleggende": Grunnleggende.markdown,
+  "/monster-maler": Maler.markdown,
+  "/llm": LLM.markdown,
+};
+
+const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
+
+function markdownForRoute(route: string): Promise<string> {
+  const markdownFunc = MARKDOWN_ROUTES[route as keyof Routes];
+
+  if (!markdownFunc) {
+    return Promise.reject(new Error("Markdown route not found"));
+  }
+
+  return markdownFunc();
+}
+
+export { AVALIABLE_MARKDOWN_ROUTES, markdownForRoute };

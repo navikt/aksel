@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: PageProps) {
   const searchText = paramTextFilter.toString().trim();
   const textFilter = searchText.split(" ");
 
-  let logEntries: ENDRINGSLOGG_QUERY_RESULT = [];
+  let logEntries: ENDRINGSLOGG_QUERY_RESULT;
 
   if (isSemverSearch) {
     const semverRange = semverValidRange(textFilter.join(" "));

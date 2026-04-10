@@ -26,7 +26,7 @@ class CustomComponent extends HTMLElement {
         <style>{styles}</style>
         <ActionMenuDemo />
         <Button>Click me!</Button>
-        <CheckboxGroup legend="Legend" defaultValue={["tekst2"]}>
+        <CheckboxGroup legend="CheckboxGroup legend" defaultValue={["tekst2"]}>
           <Checkbox value="tekst">Checkboxtekst</Checkbox>
           <Checkbox value="tekst2">Checkboxtekst</Checkbox>
         </CheckboxGroup>
@@ -48,7 +48,12 @@ const ModalWrapper = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open modal</Button>
-      <Modal portal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal
+        portal
+        aria-label="Demo"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
         <Modal.Body>modal content</Modal.Body>
       </Modal>
     </>

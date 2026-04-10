@@ -1,16 +1,16 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
+import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
 import { MonthPickerProps } from "../MonthPicker.types";
 
-export interface UseMonthPickerOptions
-  extends Pick<
-    MonthPickerProps,
-    "locale" | "fromDate" | "toDate" | "disabled" | "defaultSelected"
-  > {
+export interface UseMonthPickerOptions extends Pick<
+  MonthPickerProps,
+  "locale" | "fromDate" | "toDate" | "disabled" | "defaultSelected"
+> {
   /**
    * Make Date-selection required
    */
@@ -74,11 +74,21 @@ interface UseMonthPickerValue {
 }
 
 export type MonthValidationT = {
-  isDisabled: boolean;
-  isEmpty: boolean;
-  isInvalid: boolean;
+  /**
+   * Whether there are any validation errors.
+   * - When `true`, all the other properties will be `false`.
+   * - When `false`, at least one of the other properties will be `true`.
+   */
   isValidMonth: boolean;
+  /** Whether the month is a disabled month */
+  isDisabled: boolean;
+  /** Whether the input field is empty */
+  isEmpty: boolean;
+  /** Whether the entered value cannot be parsed as a month (i.e. wrong format) */
+  isInvalid: boolean;
+  /** Whether the month is before `fromDate` */
   isBefore: boolean;
+  /** Whether the month is after `toDate` */
   isAfter: boolean;
 };
 
@@ -311,7 +321,9 @@ export const useMonthpicker = (
     onOpenToggle: () => handleOpen(!open),
     onClose: () => {
       handleOpen(false);
-      anchorRef?.focus();
+      // We use sync:false so that when Modal is used (see Date.Dialog.tsx), it is closed before
+      // we try to focus the open button (since native modal dialogs don't allow focus outside).
+      focusElement(anchorRef, { sync: false, preventScroll: true });
     },
     disabled,
   };

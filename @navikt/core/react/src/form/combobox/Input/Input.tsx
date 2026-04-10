@@ -13,19 +13,18 @@ import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsCon
 import { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
-interface InputProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    | "value"
-    | "disabled"
-    | "onClick"
-    | "onInput"
-    | "type"
-    | "role"
-    | "onKeyUp"
-    | "onKeyDown"
-    | "autoComplete"
-  > {
+interface InputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  | "value"
+  | "disabled"
+  | "onClick"
+  | "onInput"
+  | "type"
+  | "role"
+  | "onKeyUp"
+  | "onKeyDown"
+  | "autoComplete"
+> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
   shouldShowSelectedOptions?: boolean;
@@ -256,8 +255,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
 
     const onChangeHandler = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = event.target.value;
+      (event: React.InputEvent<HTMLInputElement>) => {
+        const newValue = event.currentTarget.value;
         if (newValue && newValue !== "") {
           toggleIsListOpen(true);
         } else if (filteredOptions.length === 0) {

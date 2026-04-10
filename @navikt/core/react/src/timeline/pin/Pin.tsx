@@ -4,10 +4,9 @@ import { useTimelineContext } from "../hooks/useTimelineContext";
 import { TimelineComponentTypes } from "../utils/types.internal";
 import PinInternal, { type TimelinePinProps } from "./PinInternal";
 
-export interface PinType
-  extends React.ForwardRefExoticComponent<
-    TimelinePinProps & React.RefAttributes<HTMLButtonElement>
-  > {
+export interface PinType extends React.ForwardRefExoticComponent<
+  TimelinePinProps & React.RefAttributes<HTMLButtonElement>
+> {
   componentType: TimelineComponentTypes;
 }
 

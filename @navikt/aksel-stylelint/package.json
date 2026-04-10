@@ -1,6 +1,10 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "8.3.0",
+  "version": "8.9.1",
+  "type": "module",
+  "engines": {
+    "node": ">=18.12.0"
+  },
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -30,20 +34,20 @@
   ],
   "scripts": {
     "test": "yarn build && node --import tsx --test ./dist/**/*.test.js",
-    "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
-    "copy-tokens": "node -e \"require('fs').copyFileSync('legacy-tokens.json','dist/tokens.json')\"",
+    "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/global/tokens.css','dist/global-tokens.css')\"",
+    "copy-tokens": "node -e \"require('fs').copyFileSync('legacy-tokens.json','dist/component-tokens.json')\"",
     "copy": "yarn copy-css && yarn copy-tokens",
     "build": "tsc -p . && concurrently \"yarn:copy-*\"",
     "watch:lint": "tsc --watch -p .",
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^8.3.0",
-    "@navikt/ds-tokens": "^8.3.0",
+    "@navikt/ds-css": "^8.9.1",
+    "@navikt/ds-tokens": "^8.9.1",
     "concurrently": "9.2.1",
     "postcss-selector-parser": "^7.1.0",
     "postcss-value-parser": "^4.2.0",
-    "stylelint": "^16.24.0",
+    "stylelint": "^17.2.0",
     "stylelint-test-rule-node": "^1.0.0",
     "tsx": "^4.20.6",
     "typescript": "5.9.3"

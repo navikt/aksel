@@ -39,7 +39,6 @@
 
 /* SAFARI HACK START */
 
-/* biome-ignore lint/a11y/useGenericFontNames: Hack for targeting Safari */
 @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
   .aksel-list ol {
     padding-left: 2.1rem;

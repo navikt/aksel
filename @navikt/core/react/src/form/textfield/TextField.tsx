@@ -6,8 +6,7 @@ import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface TextFieldProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  extends FormFieldProps, Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Controlled value
    */

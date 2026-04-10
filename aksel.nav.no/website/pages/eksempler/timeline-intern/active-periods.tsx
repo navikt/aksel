@@ -54,9 +54,9 @@ const Example = () => {
           aria-controls={activePeriod}
           id="timeline-panel"
           marginBlock="space-32 space-0"
-        >{`${activePeriod}: ${[...person, ...jobb].find(
-          (p) => p.id === activePeriod,
-        )?.start}`}</Box>
+        >{`${activePeriod}: ${
+          [...person, ...jobb].find((p) => p.id === activePeriod)?.start
+        }`}</Box>
       )}
     </Box>
   );

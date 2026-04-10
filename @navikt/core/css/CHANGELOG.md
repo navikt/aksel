@@ -1,5 +1,73 @@
 # @navikt/ds-css
 
+## 8.9.1
+
+### Patch Changes
+
+- Button: Use correct text color when inherited `data-color` is "neutral" ([#4772](https://github.com/navikt/aksel/pull/4772))
+
+- Checkbox, Radio: Internal updates. ([#4760](https://github.com/navikt/aksel/pull/4760))
+
+- Datepicker, Monthpicker: Sync background on DateInput button to Input. ([#4781](https://github.com/navikt/aksel/pull/4781))
+
+## 8.9.0
+
+### Minor Changes
+
+- InternalHeader: Added `isActive`-prop to `InternalHeader.Button`. ([#4761](https://github.com/navikt/aksel/pull/4761))
+
+### Patch Changes
+
+- DatePicker, MonthPicker: Make open button more prominent ([#4751](https://github.com/navikt/aksel/pull/4751))
+
+## 8.8.0
+
+### Minor Changes
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+### Patch Changes
+
+- GlobalAlert, LocalAlert: Content outline changed from 4px to 2px. ([#4745](https://github.com/navikt/aksel/pull/4745))
+
+## 8.7.0
+
+### Minor Changes
+
+- Datepicker, MonthPicker: Opening popover now auto-focuses it. ([#4676](https://github.com/navikt/aksel/pull/4676))
+
+### Patch Changes
+
+- Datepicker: Fixed issue where using `fixedWeeks` still caused layout-changes in some edgecases. ([#4701](https://github.com/navikt/aksel/pull/4701))
+
+- InlineMessage: Now uses BodyLong instead of BodyShort. Icon has some small adjustments to align with new typo. ([#4683](https://github.com/navikt/aksel/pull/4683))
+
+## 8.6.0
+
+## 8.5.2
+
+### Patch Changes
+
+- Timeline: Adjust pin position ([#4664](https://github.com/navikt/aksel/pull/4664))
+
+## 8.5.1
+
+## 8.5.0
+
+## 8.4.1
+
+### Patch Changes
+
+- Combobox: Single-select typo now scales based on 'size'-prop ([#4638](https://github.com/navikt/aksel/pull/4638))
+
+## 8.4.0
+
+### Patch Changes
+
+- ActionMenu: SubTrigger-icon is now right aligned, updated open-transition effect. ([#4612](https://github.com/navikt/aksel/pull/4612))
+
 ## 8.3.0
 
 ### Minor Changes

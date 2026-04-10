@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { Label } from "../../typography";
 
-export interface FormSummaryLabelProps
-  extends React.HTMLAttributes<HTMLElement> {
+export interface FormSummaryLabelProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 

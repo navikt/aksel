@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 
-export interface ErrorSummaryItemProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ErrorSummaryItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Link text
    */

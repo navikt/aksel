@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 import { cl } from "../utils/helpers";
 
-export interface PopoverContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

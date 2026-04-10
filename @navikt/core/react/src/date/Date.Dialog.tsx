@@ -5,6 +5,7 @@ import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
 import { cl } from "../utils/helpers";
+import { focusElement } from "../utils/helpers/focus";
 import { useMedia } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import type { TFunction } from "../utils/i18n/i18n.types";
@@ -30,6 +31,10 @@ type DateWrapperProps = {
     id?: string;
     strategy?: "absolute" | "fixed";
   };
+  /**
+   * Id for the label of the popup, used for aria-labelledby
+   */
+  popupLabelId?: string;
 };
 
 const DateDialog = ({
@@ -41,6 +46,7 @@ const DateDialog = ({
   translate,
   variant,
   popoverProps,
+  popupLabelId,
 }: DateWrapperProps) => {
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
 
@@ -68,6 +74,10 @@ const DateDialog = ({
           "aksel-date": variant === "month",
         })}
         {...popoverProps}
+        ref={focusPopoverOnOpen}
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby={popupLabelId}
       >
         {children}
       </Popover>
@@ -104,4 +114,9 @@ const DateDialog = ({
     </Modal>
   );
 };
+
+function focusPopoverOnOpen(element: HTMLDivElement | null) {
+  focusElement(element, { preventScroll: true, sync: false });
+}
+
 export { DateDialog };

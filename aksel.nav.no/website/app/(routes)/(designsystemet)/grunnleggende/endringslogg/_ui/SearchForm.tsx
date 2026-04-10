@@ -49,10 +49,10 @@ export const SearchForm = ({
   const updateSearchParam = (param: string, newValue: string) => {
     const newParams = new URLSearchParams();
 
+    if (searchInput) {
+      newParams.set("fritekst", searchInput);
+    }
     if (param !== "semver") {
-      if (searchInput) {
-        newParams.set("fritekst", searchInput);
-      }
       if (semverSearch) {
         newParams.set("semver", "true");
       }

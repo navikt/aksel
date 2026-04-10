@@ -67,7 +67,7 @@ export const Avatar = ({
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
           >
-            <Detail as="span" textColor="subtle">
+            <Detail as="div" textColor="subtle">
               {type}
             </Detail>
           </Box>
@@ -77,7 +77,7 @@ export const Avatar = ({
             marginInline="space-2 space-0"
           >
             <BodyShort
-              as="span"
+              as="div"
               className={styles.avatarName}
             >{`${name}`}</BodyShort>
           </Box>

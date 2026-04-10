@@ -5,7 +5,6 @@ import type { fuseGlobalSearch } from "@/app/_ui/global-search/server/GlobalSear
 
 type GlobalSearchContextType = {
   open: boolean;
-  openSearch: () => void;
   closeSearch: () => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
 };

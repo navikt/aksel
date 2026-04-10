@@ -2,7 +2,8 @@ import { InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
 export interface CheckboxProps
-  extends FormFieldProps,
+  extends
+    FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Adds error indication on checkbox.
@@ -18,7 +19,7 @@ export interface CheckboxProps
    */
   children: React.ReactNode;
   /**
-   * Hides label and makes it viewable for screen-readers only.
+   * Visually hides label and description, and makes it viewable for screen-readers only.
    */
   hideLabel?: boolean;
   /**

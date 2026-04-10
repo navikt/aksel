@@ -175,7 +175,7 @@ export const block = {
                 if (
                   url.startsWith("#") ||
                   url.startsWith("https://") ||
-                  url.startsWith("mailto://") ||
+                  url.startsWith("mailto:") ||
                   url.startsWith("/")
                 ) {
                   return true;

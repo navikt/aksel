@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 
-export interface IngressProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface IngressProps extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * Ingress text
    */

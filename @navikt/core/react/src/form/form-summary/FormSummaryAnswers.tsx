@@ -3,8 +3,7 @@ import { cl } from "../../utils/helpers";
 
 const FormSummaryAnswersContext = React.createContext(false);
 
-export interface FormSummaryAnswersProps
-  extends React.HTMLAttributes<HTMLDListElement> {
+export interface FormSummaryAnswersProps extends React.HTMLAttributes<HTMLDListElement> {
   /**
    * Must include one or more of `<FormSummary.Answer>`.
    */

@@ -17,8 +17,10 @@ import {
   type LocalAlertTitleProps,
 } from "../title/LocalAlertTitle";
 
-interface LocalAlertProps
-  extends Omit<BaseAlert.RootProps, "type" | "global" | "data-color"> {
+interface LocalAlertProps extends Omit<
+  BaseAlert.RootProps,
+  "type" | "global" | "data-color"
+> {
   status: Exclude<BaseAlert.RootProps["status"], undefined>;
   /**
    * data-color has no effect on LocalAlert.
@@ -26,10 +28,9 @@ interface LocalAlertProps
   "data-color"?: never;
 }
 
-interface LocalAlertComponent
-  extends React.ForwardRefExoticComponent<
-    LocalAlertProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface LocalAlertComponent extends React.ForwardRefExoticComponent<
+  LocalAlertProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link LocalAlertHeaderProps}
    * @example

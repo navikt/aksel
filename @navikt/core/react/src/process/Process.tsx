@@ -15,7 +15,7 @@ interface ProcessProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * `<Process.Event />` elements.
    */
-  children: React.ReactElement<typeof ProcessEvent>[];
+  children: React.ReactNode;
   /**
    * Hides the "aktiv"-text when the event is active.
    * @default false
@@ -40,10 +40,9 @@ const { Provider: ProcessContextProvider, useContext: useProcessContext } =
       "`<Process.Event />` must be used within a `<Process />` component.",
   });
 
-interface ProcessComponent
-  extends React.ForwardRefExoticComponent<
-    ProcessProps & React.RefAttributes<HTMLOListElement>
-  > {
+interface ProcessComponent extends React.ForwardRefExoticComponent<
+  ProcessProps & React.RefAttributes<HTMLOListElement>
+> {
   /**
    * @see 🏷️ {@link ProcessEventProps}
    */

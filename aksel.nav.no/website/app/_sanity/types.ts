@@ -1,3 +1,4 @@
+import type { PortableTextRendererOptions } from "@portabletext/markdown";
 import { PortableTextComponentProps } from "next-sanity";
 import {
   BLOGG_BY_SLUG_QUERY_RESULT,
@@ -27,4 +28,11 @@ type ExtractPortableType<T extends PortableContentTypes> = Extract<
 type ExtractPortableComponentProps<T extends PortableContentTypes> =
   PortableTextComponentProps<ExtractPortableType<T>>;
 
-export type { ExtractPortableComponentProps, PortableContentTypes };
+type ExtractPortableMarkdownComponentProps<T extends PortableContentTypes> =
+  PortableTextRendererOptions<ExtractPortableType<T>>;
+
+export type {
+  ExtractPortableComponentProps,
+  ExtractPortableMarkdownComponentProps,
+  PortableContentTypes,
+};

@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
     params: { slug: `prinsipper/${prinsipp.join("/")}` },
   });
 
-  if (!pageData || !pageData.content || !pageData.heading) {
+  if (!pageData?.content || !pageData.heading) {
     notFound();
   }
 

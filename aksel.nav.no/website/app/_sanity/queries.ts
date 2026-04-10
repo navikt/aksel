@@ -168,8 +168,6 @@ const TOC_BY_SLUG_QUERY =
 
 const METADATA_BY_SLUG_QUERY = defineQuery(`*[slug.current == $slug][0]{
   heading,
-  ingress,
-  publishedAt,
   seo
 }`);
 
@@ -446,4 +444,53 @@ export {
   SLUG_BY_TYPE_QUERY,
   TOC_BY_SLUG_QUERY,
   DS_PROMO_QUERY,
+};
+
+/* MARKDOWN QUERIES */
+
+const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "komponent_artikkel" && defined(slug.current)]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+const ALL_GRUNNLEGGENDE_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "ds_artikkel" && defined(slug.current)]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+const ALL_TEMPLATES_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "templates_artikkel" && defined(slug.current)]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "komponent_artikkel" && slug.current == $slug][0]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
+  }`,
+);
+
+export {
+  ALL_KOMPONENTS_MARKDOWN_QUERY,
+  KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
+  ALL_GRUNNLEGGENDE_MARKDOWN_QUERY,
+  ALL_TEMPLATES_MARKDOWN_QUERY,
 };

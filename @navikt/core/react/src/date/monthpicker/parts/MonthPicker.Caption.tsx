@@ -13,7 +13,11 @@ import { Select } from "../../../form/select";
 import { useDateTranslationContext } from "../../Date.locale";
 import { useMonthPickerContext } from "../MonthPicker.context";
 
-const MonthPickerCaption = () => {
+type MonthPickerCaptionProps = {
+  popupLabelId?: string;
+};
+
+const MonthPickerCaption = ({ popupLabelId }: MonthPickerCaptionProps) => {
   const { fromDate, toDate, locale, year, onYearChange, caption } =
     useMonthPickerContext();
 
@@ -58,6 +62,16 @@ const MonthPickerCaption = () => {
 
   return (
     <div className="aksel-date__caption">
+      {caption === "dropdown" && (
+        <span
+          aria-live="polite"
+          aria-atomic="true"
+          className="aksel-sr-only"
+          id={popupLabelId}
+        >
+          {year.getFullYear()}
+        </span>
+      )}
       <Button
         className="aksel-date__caption-button"
         disabled={disablePreviousYear()}
@@ -82,7 +96,11 @@ const MonthPickerCaption = () => {
           ))}
         </Select>
       ) : (
-        <span className="aksel-date__year-label" aria-live="polite">
+        <span
+          className="aksel-date__year-label"
+          aria-live="polite"
+          id={popupLabelId}
+        >
           {year.getFullYear()}
         </span>
       )}

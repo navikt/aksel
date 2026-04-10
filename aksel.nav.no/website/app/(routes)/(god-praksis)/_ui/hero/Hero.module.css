@@ -111,6 +111,11 @@
     outline-offset: 3px;
   }
 
+  &:hover {
+    background: var(--ax-bg-brand-blue-strong-hover);
+    cursor: pointer;
+  }
+
   &[data-open="true"] {
     background: var(--ax-bg-brand-blue-strong-pressed);
   }

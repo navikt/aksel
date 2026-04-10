@@ -33,6 +33,19 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
+  /**
+   * Changes the HTML element used for the root element.
+   *
+   * **When using `section`, provide either `aria-label` or `aria-labelledby` for better accessibility.**
+   * `axe-core` might warn about unique landmarks if you have multiple Accordions on page with the same label.
+   * In those cases consider updating to unique `aria-label` or `aria-labelledby` props.
+   * @see [📝 Landmarks unique](https://dequeuniversity.com/rules/axe/4.6/landmark-unique)
+   *
+   *
+   * **When using `article`, make sure `<LinkCard.Title />` is a heading and not a `span`.**
+   * @default "div"
+   */
+  as?: "div" | "section" | "article";
 }
 
 type LinkCardContextProps = {
@@ -44,10 +57,9 @@ const { Provider: LinkCardContextProvider, useContext: useLinkCardContext } =
     name: "LinkCardContextProvider",
   });
 
-interface LinkCardComponent
-  extends React.ForwardRefExoticComponent<
-    LinkCardProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface LinkCardComponent extends React.ForwardRefExoticComponent<
+  LinkCardProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link LinkCardTitleProps}
    */
@@ -107,6 +119,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       arrow = true,
       arrowPosition = "baseline",
       size = "medium",
+      as: Component = "div",
       ...restProps
     }: LinkCardProps,
     forwardedRef,
@@ -115,7 +128,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       <LinkCardContextProvider size={size}>
         <LinkAnchorOverlay asChild>
           <BodyLong
-            as="div"
+            as={Component}
             size={size}
             ref={forwardedRef}
             data-color="neutral"

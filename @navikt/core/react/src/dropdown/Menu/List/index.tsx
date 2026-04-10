@@ -10,10 +10,9 @@ export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
 }
 
-export interface ListType
-  extends React.ForwardRefExoticComponent<
-    ListProps & React.RefAttributes<HTMLUListElement>
-  > {
+export interface ListType extends React.ForwardRefExoticComponent<
+  ListProps & React.RefAttributes<HTMLUListElement>
+> {
   /**
    * @see 🏷️ {@link ListItemProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support

@@ -1,6 +1,6 @@
 import selectorParser from "postcss-selector-parser";
 import stylelint from "stylelint";
-import { deprecations } from "../../deprecations";
+import { deprecations } from "../../deprecations.js";
 
 const ruleName = "aksel/no-deprecated-classes";
 

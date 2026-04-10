@@ -1,5 +1,143 @@
 # @navikt/ds-react
 
+## 8.9.1
+
+### Patch Changes
+
+- Button: Use correct text color when inherited `data-color` is "neutral" ([#4772](https://github.com/navikt/aksel/pull/4772))
+
+- Checkbox, Radio: Internal updates. ([#4760](https://github.com/navikt/aksel/pull/4760))
+
+- Datepicker, Monthpicker: Sync background on DateInput button to Input. ([#4781](https://github.com/navikt/aksel/pull/4781))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.9.1
+  - @navikt/aksel-icons@8.9.1
+
+## 8.9.0
+
+### Minor Changes
+
+- InternalHeader: Added `isActive`-prop to `InternalHeader.Button`. ([#4761](https://github.com/navikt/aksel/pull/4761))
+
+### Patch Changes
+
+- DatePicker, MonthPicker: Make open button more prominent ([#4751](https://github.com/navikt/aksel/pull/4751))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.9.0
+  - @navikt/aksel-icons@8.9.0
+
+## 8.8.0
+
+### Minor Changes
+
+- ReadMore: Added variant `moderate`. ([#4723](https://github.com/navikt/aksel/pull/4723))
+
+- InfoCard: New sub-component InfoCard.Message. ([#4717](https://github.com/navikt/aksel/pull/4717))
+
+### Patch Changes
+
+- Dialog: Improved scrollbar handling when opening dialog-popup. ([#4703](https://github.com/navikt/aksel/pull/4703))
+
+- useDatepicker, useMonthpicker: Add JsDoc to validation object ([#4722](https://github.com/navikt/aksel/pull/4722))
+
+- Dialog: Fixed issue where tabbing would not always work with links. ([#4747](https://github.com/navikt/aksel/pull/4747))
+
+- DatePicker, MonthPicker: Removed controlled tabindex on Input-button based on open-state. ([#4714](https://github.com/navikt/aksel/pull/4714))
+
+- Updated dependencies [[`232ed45`](https://github.com/navikt/aksel/commit/232ed4569414e70f5a6f8e7bab584226f191a889)]:
+  - @navikt/ds-tokens@8.8.0
+  - @navikt/aksel-icons@8.8.0
+
+## 8.7.0
+
+### Minor Changes
+
+- Datepicker, MonthPicker: Opening popover now auto-focuses it. ([#4676](https://github.com/navikt/aksel/pull/4676))
+
+### Patch Changes
+
+- Provider: rootElement-prop now accepts null. ([#4700](https://github.com/navikt/aksel/pull/4700))
+
+- InlineMessage: Now uses BodyLong instead of BodyShort. Icon has some small adjustments to align with new typo. ([#4683](https://github.com/navikt/aksel/pull/4683))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.7.0
+  - @navikt/aksel-icons@8.7.0
+
+## 8.6.0
+
+### Patch Changes
+
+- ToggleGroup: Fixed focus related issue introduced in v8.4.0. ([#4668](https://github.com/navikt/aksel/pull/4668))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.6.0
+  - @navikt/aksel-icons@8.6.0
+
+## 8.5.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.5.2
+  - @navikt/aksel-icons@8.5.2
+
+## 8.5.1
+
+### Patch Changes
+
+- Tooltip: Legger til manglende `key` prop for flere shortcuts. ([#4656](https://github.com/navikt/aksel/pull/4656))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.5.1
+  - @navikt/aksel-icons@8.5.1
+
+## 8.5.0
+
+### Minor Changes
+
+- Accordion: Now supports 'as'-prop for making element either: div or section. ([#4641](https://github.com/navikt/aksel/pull/4641))
+
+- LinkCard: Now supports 'as'-prop for making element either: div, section or article. ([#4641](https://github.com/navikt/aksel/pull/4641))
+
+### Patch Changes
+
+- Process: Allow mix of single items and array as children ([#4643](https://github.com/navikt/aksel/pull/4643))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.5.0
+  - @navikt/aksel-icons@8.5.0
+
+## 8.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.4.1
+  - @navikt/aksel-icons@8.4.1
+
+## 8.4.0
+
+### Minor Changes
+
+- Timeline: Row label now supports React.ReactNode. ([#4626](https://github.com/navikt/aksel/pull/4626))
+
+### Patch Changes
+
+- ToggleGroup: Remove unnecessary useEffect ([#4625](https://github.com/navikt/aksel/pull/4625))
+
+- Switch: Remove unnecessary useEffect ([#4620](https://github.com/navikt/aksel/pull/4620))
+
+- useEventListener: Add return type to interface ([#4632](https://github.com/navikt/aksel/pull/4632))
+
+- Combobox: Handle scenario with no options + filteredOptions. ([#4627](https://github.com/navikt/aksel/pull/4627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.4.0
+  - @navikt/aksel-icons@8.4.0
+
 ## 8.3.0
 
 ### Minor Changes

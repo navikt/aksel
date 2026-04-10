@@ -7,7 +7,7 @@ type TimelineRowPropsWithRef = React.ComponentProps<typeof TimelineRow>;
 type TimelinePeriodPropsWithRef = React.ComponentProps<typeof TimelinePeriod>;
 
 type ParsedRow = {
-  label: string;
+  label: React.ReactNode;
   icon?: React.ReactNode;
   headingTag?: string;
   periods: Omit<Period, "id" | "endInclusive">[];

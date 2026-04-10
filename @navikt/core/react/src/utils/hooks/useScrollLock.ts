@@ -6,6 +6,46 @@ let originalHtmlStyles: Partial<CSSStyleDeclaration> = {};
 let originalBodyStyles: Partial<CSSStyleDeclaration> = {};
 let originalHtmlScrollBehavior = "";
 
+function supportsStableScrollbarGutter(referenceElement: Element | null) {
+  const supported =
+    typeof CSS !== "undefined" &&
+    CSS.supports &&
+    CSS.supports("scrollbar-gutter", "stable");
+
+  if (!supported || typeof document === "undefined") {
+    return false;
+  }
+
+  /*
+   * We need to do aditional checks since the scenario:
+   * - Scrollbar is edited with `::-webkit-scrollbar`
+   * - MacOS setting: Show scroll bars -> Automatically based on mouse or tracked
+   * Causes the calculation of scrollbar width to be incorrect, and thus the scrollbar gutter to not work as intended.
+   */
+
+  const doc = ownerDocument(referenceElement);
+  const html = doc.documentElement;
+  const body = doc.body;
+
+  const scrollContainer = isOverflowElement(html) ? html : body;
+
+  const originalScrollContainerOverflowY = scrollContainer.style.overflowY;
+  const originalHtmlStyleGutter = html.style.scrollbarGutter;
+
+  html.style.scrollbarGutter = "stable";
+
+  scrollContainer.style.overflowY = "scroll";
+  const before = scrollContainer.offsetWidth;
+
+  scrollContainer.style.overflowY = "hidden";
+  const after = scrollContainer.offsetWidth;
+
+  scrollContainer.style.overflowY = originalScrollContainerOverflowY;
+  html.style.scrollbarGutter = originalHtmlStyleGutter;
+
+  return before === after;
+}
+
 function hasInsetScrollbars(referenceElement: Element | null) {
   if (typeof document === "undefined") {
     return false;
@@ -59,6 +99,9 @@ function preventScrollStandard(referenceElement: Element | null) {
 
     const htmlStyles = win.getComputedStyle(html);
     const bodyStyles = win.getComputedStyle(body);
+    const htmlScrollbarGutterValue = htmlStyles.scrollbarGutter || "";
+    const hasBothEdges = htmlScrollbarGutterValue.includes("both-edges");
+    const scrollbarGutterValue = hasBothEdges ? "stable both-edges" : "stable";
 
     scrollTop = html.scrollTop;
     scrollLeft = html.scrollLeft;
@@ -103,26 +146,27 @@ function preventScrollStandard(referenceElement: Element | null) {
     /**
      * Check support for stable scrollbar gutter to avoid layout shift when scrollbars appear/disappear.
      */
-    const supportsStableScrollbarGutter =
-      typeof CSS !== "undefined" &&
-      CSS.supports?.("scrollbar-gutter", "stable");
+    const supportsScrollbarGutter =
+      supportsStableScrollbarGutter(referenceElement);
+
     /*
      * DOM writes:
      * Do not read the DOM past this point!
      */
 
+    if (supportsScrollbarGutter) {
+      const elementToLock = isOverflowElement(html) ? html : body;
+
+      html.style.scrollbarGutter = scrollbarGutterValue;
+      elementToLock.style.overflowY = "hidden";
+      elementToLock.style.overflowX = "hidden";
+      return;
+    }
+
     Object.assign(html.style, {
       scrollbarGutter: "stable",
-      overflowY:
-        !supportsStableScrollbarGutter &&
-        (isScrollableY || hasConstantOverflowY)
-          ? "scroll"
-          : "hidden",
-      overflowX:
-        !supportsStableScrollbarGutter &&
-        (isScrollableX || hasConstantOverflowX)
-          ? "scroll"
-          : "hidden",
+      overflowY: isScrollableY || hasConstantOverflowY ? "scroll" : "hidden",
+      overflowX: isScrollableX || hasConstantOverflowX ? "scroll" : "hidden",
     });
 
     Object.assign(body.style, {

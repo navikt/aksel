@@ -6,8 +6,7 @@ import type { TimelineComponentTypes } from "../utils/types.internal";
 import ClickablePeriod from "./ClickablePeriod";
 import NonClickablePeriod from "./NonClickablePeriod";
 
-export interface TimelinePeriodProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface TimelinePeriodProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Period start date.
    */
@@ -60,11 +59,9 @@ export interface TimelinePeriodProps
   placement?: "top" | "bottom";
 }
 
-export interface PeriodType
-  extends React.ForwardRefExoticComponent<
-    TimelinePeriodProps &
-      React.RefAttributes<HTMLDivElement | HTMLButtonElement>
-  > {
+export interface PeriodType extends React.ForwardRefExoticComponent<
+  TimelinePeriodProps & React.RefAttributes<HTMLDivElement | HTMLButtonElement>
+> {
   componentType: TimelineComponentTypes;
 }
 

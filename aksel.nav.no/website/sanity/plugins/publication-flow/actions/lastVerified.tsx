@@ -2,191 +2,109 @@
 
 import { format } from "date-fns";
 import { useState } from "react";
+import { DocumentActionComponent, useDocumentOperation } from "sanity";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
-  DocumentActionComponent,
-  DocumentActionsContext,
-  InsufficientPermissionsMessage,
-  useCurrentUser,
-  useDocumentOperation,
-  useDocumentPairPermissions,
-} from "sanity";
-import { SealCheckmarkIcon } from "@navikt/aksel-icons";
-import { Button, Heading, List, Stack } from "@navikt/ds-react";
-import { SANITY_API_VERSION } from "@/sanity/config";
+  BodyLong,
+  Button,
+  HGrid,
+  HStack,
+  Heading,
+  List,
+  VStack,
+} from "@navikt/ds-react";
 
-/**
- * Adds "lastVerified" to the document's on first publish, and updates it on subsequent publishes.
- * Includes a dialog for the user to confirm the publish action.
- * This is useful for documents that require a quality check before publishing.
- */
+type Steps = "1" | "2";
+
 export function setLastVerified(
   originalAction: DocumentActionComponent,
 ): DocumentActionComponent {
   return (props) => {
     const originalResult = originalAction(props);
-
     const { patch } = useDocumentOperation(props.id, props.type);
+    const [currentStep, setCurrentStep] = useState<Steps>("1");
 
     const [isDialogOpen, setDialogOpen] = useState(false);
 
-    const toggleDialog = () => setDialogOpen((isOpen) => !isOpen);
+    const openDialog = () => setDialogOpen(true);
+
+    const closeDialog = () => {
+      setDialogOpen(false);
+      setCurrentStep("1");
+    };
+
+    const publishDocument = (withNewVerify: boolean = false) => {
+      closeDialog();
+      if (withNewVerify) {
+        patch.execute([
+          {
+            set: {
+              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
+            },
+          },
+        ]);
+      }
+      originalResult?.onHandle?.();
+    };
+
+    const handleContinue = () => {
+      if (props.published) {
+        setCurrentStep("2");
+      } else {
+        /* Sanity functions handles initial lastVerified timestamp creation */
+        publishDocument(false);
+      }
+    };
 
     if (!originalResult) {
       return null;
     }
 
-    const publishDocument = () => {
-      toggleDialog();
-      patch.execute([
-        {
-          set: {
-            updateInfo: {
-              lastVerified: format(new Date(), "yyyy-MM-dd"),
-            },
-          },
-        },
-        { setIfMissing: { publishedAt: new Date().toISOString() } },
-      ]);
-      originalResult?.onHandle?.();
-    };
-
     return {
       ...originalResult,
-      label: props.published
-        ? "Godkjenn og publiser innhold"
-        : originalResult.label,
-      onHandle: toggleDialog,
+      onHandle: openDialog,
       dialog: isDialogOpen && {
-        header: "Kvalitetssjekk før publisering",
-        onClose: toggleDialog,
-        footer: (
-          <Stack justify="end" gap="space-16">
-            <Button variant="tertiary" onClick={toggleDialog}>
-              Nei, jeg vil endre noe først
-            </Button>
-            <Button onClick={publishDocument}>
-              Godkjenn og publiser innhold
-            </Button>
-          </Stack>
+        header: (
+          <Heading level="2" size="medium">
+            {currentStep === "1"
+              ? "Huskeliste før publisering"
+              : "Publiser artikkel"}
+          </Heading>
         ),
-        content: props.published ? (
-          <>
-            <AfterPublish />
-            <BeforePublish title="Huskeliste" />
-          </>
-        ) : (
-          <BeforePublish />
-        ),
+        onClose: closeDialog,
+        content:
+          currentStep === "1" ? (
+            <StepOne
+              onCancel={closeDialog}
+              onContinue={handleContinue}
+              isPublished={!!props.published}
+            />
+          ) : (
+            <StepTwo
+              onPublish={publishDocument}
+              lastVerified={
+                (props.draft as any)?.updateInfo?.lastVerified ??
+                (props.published as any)?.updateInfo?.lastVerified
+              }
+            />
+          ),
       },
     };
   };
 }
 
-export function setLastVerifiedWithoutPublish(
-  context: DocumentActionsContext,
-): DocumentActionComponent {
-  return (props) => {
-    const client = context.getClient({ apiVersion: SANITY_API_VERSION });
+type StepOneProps = {
+  onContinue: () => void;
+  onCancel: () => void;
+  isPublished: boolean;
+};
 
-    const currentUser = useCurrentUser();
+function StepOne(props: StepOneProps) {
+  const { onContinue, onCancel, isPublished = false } = props;
 
-    const [permissions, isPermissionsLoading] = useDocumentPairPermissions({
-      id: props.id,
-      type: props.type,
-      permission: "publish",
-    });
-
-    const [isDialogOpen, setDialogOpen] = useState(false);
-
-    if (!props.published) {
-      return null;
-    }
-
-    const toggleDialog = () => setDialogOpen((isOpen) => !isOpen);
-
-    const update = async () => {
-      toggleDialog();
-
-      if (!props.published) {
-        return null;
-      }
-
-      await client
-        .patch(props.published._id)
-        .set({
-          updateInfo: {
-            lastVerified: format(new Date(), "yyyy-MM-dd"),
-          },
-        })
-        .commit();
-
-      if (props.draft) {
-        await client
-          .patch(props.draft._id)
-          .set({
-            updateInfo: {
-              lastVerified: format(new Date(), "yyyy-MM-dd"),
-            },
-          })
-          .commit();
-      }
-
-      props.onComplete();
-    };
-
-    if (!isPermissionsLoading && !permissions?.granted) {
-      return {
-        tone: "default",
-        label: "Godkjenn innhold uten å publisere",
-        title: (
-          <InsufficientPermissionsMessage
-            context="publish-document"
-            currentUser={currentUser}
-          />
-        ),
-        disabled: true,
-      };
-    }
-
-    return {
-      disabled: isPermissionsLoading,
-      label: "Godkjenn innhold uten å publisere",
-      onHandle: toggleDialog,
-      icon: () => <SealCheckmarkIcon data-sanity-icon aria-hidden />,
-      dialog: isDialogOpen && {
-        header: "Kvalitetssjekk før publisering",
-        onClose: toggleDialog,
-        footer: (
-          <Stack justify="end" gap="space-16">
-            <Button variant="tertiary" onClick={toggleDialog}>
-              Nei, jeg vil endre noe først
-            </Button>
-            <Button onClick={update}>Oppdatert godkjent dato</Button>
-          </Stack>
-        ),
-        content: (
-          <>
-            <AfterPublish />
-            <BeforePublish title="Huskeliste" />
-          </>
-        ),
-      },
-    };
-  };
-}
-
-function BeforePublish({
-  title = "Før første publisering, har du husket dette?",
-}: {
-  title?: string;
-}) {
   return (
     <div>
-      <Heading level="2" size="medium" spacing>
-        {title}
-      </Heading>
       <List>
-        <List.Item>Brukt riktig overskriftsnivå?</List.Item>
         <List.Item>
           Brukt et aktivt og forståelig språk? Og ellers skrevet i tråd med slik
           vi skriver på Aksel?
@@ -201,29 +119,60 @@ function BeforePublish({
           artikkelen?
         </List.Item>
       </List>
+      <HStack justify="end" gap="space-8" marginBlock="space-8 space-0">
+        <Button onClick={onCancel} variant="secondary">
+          Jeg vil endre noe først
+        </Button>
+        {isPublished ? (
+          <Button
+            onClick={onContinue}
+            iconPosition="right"
+            icon={<ChevronRightIcon aria-hidden />}
+          >
+            Fortsett
+          </Button>
+        ) : (
+          <Button onClick={onContinue}>Publiser</Button>
+        )}
+      </HStack>
     </div>
   );
 }
 
-function AfterPublish() {
+type StepTwoProps = {
+  onPublish: (withNewVerify: boolean) => void;
+  lastVerified?: string;
+};
+
+function StepTwo(props: StepTwoProps) {
+  const { onPublish, lastVerified } = props;
+
   return (
     <div>
-      <Heading level="2" size="medium" spacing>
-        Før du godkjenner innholdet på nytt, har du vurdert dette?
-      </Heading>
-      <List>
-        <List.Item>
-          Er artikkelen fortsatt relevant for produktteam i Nav?
-        </List.Item>
-        <List.Item>
-          Har du oppdatert artikkelen dersom det er behov for det?
-        </List.Item>
-        <List.Item>Er lenkene fortsatt relevante?</List.Item>
-        <List.Item>
-          Har det blitt publisert noe nytt på Aksel som denne artikkelen bør
-          lenke til?
-        </List.Item>
-      </List>
+      <VStack gap="space-8">
+        <BodyLong>
+          Hvis innholdet fortsatt er relevant og oppdatert, kan du velge å
+          publisere med oppdatert godkjenningsdato. Hvis du derimot mener at
+          innholdet trenger en gjennomgang, kan du publisere uten å oppdatere
+          godkjenningsdatoen.
+        </BodyLong>
+        {lastVerified && (
+          <BodyLong>
+            Nåværende godkjenningsdato:{" "}
+            <BodyLong as="strong" size="large" weight="semibold">
+              {format(new Date(lastVerified), "dd.MM.yyyy")}
+            </BodyLong>
+          </BodyLong>
+        )}
+      </VStack>
+      <HGrid gap="space-8" marginBlock="space-16 space-0">
+        <Button variant="secondary" onClick={() => onPublish(false)}>
+          Bruk eksisterende godkjenningsdato
+        </Button>
+        <Button onClick={() => onPublish(true)}>
+          Oppdater godkjenningsdato
+        </Button>
+      </HGrid>
     </div>
   );
 }

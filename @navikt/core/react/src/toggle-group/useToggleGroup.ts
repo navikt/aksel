@@ -8,16 +8,13 @@ export function useToggleGroup({
   defaultValue = "",
 }: Pick<ToggleGroupProps, "onChange" | "value" | "defaultValue">) {
   const [focusedValue, setFocusedValue] = useState(defaultValue);
-
   const [selectedValue, setSelectedValue] = useControllableState({
     defaultValue,
     value,
     onChange,
   });
 
-  /**
-   * Sync focused `value` with controlled `selectedValue`
-   */
+  /* Sync focused `value` with controlled `selectedValue` */
   useEffect(() => {
     if (value != null) {
       setFocusedValue(value);

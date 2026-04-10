@@ -4,6 +4,7 @@ export {
   InfoCardHeader,
   InfoCardTitle,
   InfoCardContent,
+  InfoCardMessage,
 } from "./root/InfoCardRoot";
 
 export type {
@@ -11,4 +12,5 @@ export type {
   InfoCardHeaderProps,
   InfoCardTitleProps,
   InfoCardContentProps,
+  InfoCardMessageProps,
 } from "./root/InfoCardRoot";

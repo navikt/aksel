@@ -83,6 +83,7 @@ function TableOfContents({
                     [styles.tocNavListNotch]: active,
                   })}
                   data-current={active}
+                  aria-current={active ? "location" : undefined}
                 >
                   {removeEmojiesFromText(stegaClean(node.title)).trim()}
                 </NextLink>
@@ -99,7 +100,7 @@ function TableOfContents({
 function TableOfContentsLinks({
   feedback,
 }: Pick<TableOfContentsProps, "feedback">) {
-  if (!feedback || !feedback.name) {
+  if (!feedback?.name) {
     return null;
   }
 

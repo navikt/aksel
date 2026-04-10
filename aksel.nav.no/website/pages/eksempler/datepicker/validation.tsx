@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { Box, DatePicker, useDatepicker } from "@navikt/ds-react";
+import {
+  Box,
+  DatePicker,
+  DateValidationT,
+  useDatepicker,
+} from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [hasError, setHasError] = useState(false);
+  const [validation, setValidation] = useState<DateValidationT | null>(null);
+  const [validationToShow, setValidationToShow] =
+    useState<DateValidationT | null>(null);
+
   const { datepickerProps, inputProps } = useDatepicker({
-    onValidate: (validation) => {
-      setHasError(!validation.isValidDate);
-      console.info(validation);
+    onValidate: (newValidation) => {
+      setValidation(newValidation);
+      console.info(newValidation);
     },
   });
 
@@ -16,11 +24,12 @@ const Example = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           {...inputProps}
-          label="Velg dato"
+          label="Velg startdato"
           description="Format: dd.mm.åååå"
+          onBlur={() => setValidationToShow(validation)}
           error={
-            hasError &&
-            "Du må skrive en dato, f.eks. på denne måten: dd.mm.åååå"
+            validationToShow?.isValidDate === false &&
+            "Du må velge eller skrive inn en startdato. Format: dd.mm.åååå"
           }
         />
       </DatePicker>
@@ -40,5 +49,5 @@ export const Demo = {
 
 export const args = {
   index: 9,
-  desc: "Bruk `onValidate`-callback for å håndtere validering.",
+  desc: "Bruk `onValidate`-callback for å håndtere validering. Se også [Mønster for skjemavalidering](/monster-maler/soknadsdialog/monster-for-skjemavalidering).",
 };

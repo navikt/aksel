@@ -3,8 +3,7 @@ import type { OverridableComponent } from "../../../utils-external";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DropdownContext } from "../../context";
 
-export interface GroupedItemProps
-  extends React.ButtonHTMLAttributes<HTMLElement> {
+export interface GroupedItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
   /**
    * Menu item content
    */

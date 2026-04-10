@@ -1,6 +1,6 @@
 import { testRule } from "stylelint-test-rule-node";
-import rule, { messages } from ".";
-import { deprecations } from "../../deprecations";
+import { deprecations } from "../../deprecations.js";
+import rule, { messages } from "./index.js";
 
 testRule({
   plugins: ["./dist/index.js"],

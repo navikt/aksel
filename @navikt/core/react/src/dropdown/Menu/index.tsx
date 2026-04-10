@@ -39,10 +39,11 @@ interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
     | "left-end";
 }
 
-export interface MenuType<Props = DropdownMenuProps>
-  extends React.ForwardRefExoticComponent<
-    Props & React.RefAttributes<HTMLDivElement>
-  > {
+export interface MenuType<
+  Props = DropdownMenuProps,
+> extends React.ForwardRefExoticComponent<
+  Props & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * @see 🏷️ {@link ListType}
    */

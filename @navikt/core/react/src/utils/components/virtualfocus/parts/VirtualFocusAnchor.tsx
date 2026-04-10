@@ -7,8 +7,10 @@ import {
   useVirtualFocusInternalContext,
 } from "../Context";
 
-export interface VirtualFocusAnchorProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
+export interface VirtualFocusAnchorProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "id"
+> {
   /**
    * The role of the container. This is a limited subset of roles that
    * require manual focus management.

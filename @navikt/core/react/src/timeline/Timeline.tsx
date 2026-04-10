@@ -44,8 +44,7 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   axisLabelTemplates?: AxisLabelTemplates;
 }
 
-interface TimelineComponent
-  extends React.ForwardRefExoticComponent<TimelineProps> {
+interface TimelineComponent extends React.ForwardRefExoticComponent<TimelineProps> {
   /**
    * @see 🏷️ {@link TimelineRowType}
    */

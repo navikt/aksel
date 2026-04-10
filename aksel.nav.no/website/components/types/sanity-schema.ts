@@ -45,8 +45,7 @@ type ArticleT = {
 };
 
 export interface AkselStandaloneDocT
-  extends DocumentT<"aksel_standalone">,
-    Omit<ArticleT, "ingress" | "seo"> {}
+  extends DocumentT<"aksel_standalone">, Omit<ArticleT, "ingress" | "seo"> {}
 
 export interface AkselBloggFrontpageT extends DocumentT<"blogg_landingsside"> {
   intro: any[];
@@ -58,8 +57,7 @@ export interface AkselBloggDocT extends DocumentT<"aksel_blogg">, ArticleT {
 }
 
 export interface AkselGodPraksisDocT
-  extends DocumentT<"aksel_artikkel">,
-    ArticleT {
+  extends DocumentT<"aksel_artikkel">, ArticleT {
   tema: { _ref: string }[];
   updateInfo?: {
     lastVerified?: string;
@@ -68,14 +66,12 @@ export interface AkselGodPraksisDocT
 }
 
 export interface AkselPrinsippDocT
-  extends DocumentT<"aksel_prinsipp">,
-    ArticleT {
+  extends DocumentT<"aksel_prinsipp">, ArticleT {
   prinsipp: { prinsippvalg: string; hovedside: boolean };
 }
 
 export interface AkselKomponentDocT
-  extends DocumentT<"komponent_artikkel">,
-    ArticleT {
+  extends DocumentT<"komponent_artikkel">, ArticleT {
   kategori: (typeof komponentKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
@@ -98,8 +94,7 @@ export interface AkselKomponentDocT
 }
 
 export interface AkselGrunnleggendeDocT
-  extends DocumentT<"ds_artikkel">,
-    ArticleT {
+  extends DocumentT<"ds_artikkel">, ArticleT {
   kategori: (typeof grunnleggendeKategorier)[number]["value"];
   status: {
     tag?: "beta" | "new" | "ready" | "deprecated";
@@ -177,14 +172,14 @@ export type ArticleListT = {
 export type LandingPageTypeT<T extends string> = `${T}_landingsside`;
 export type IngressT<T extends string> = `${T}_ingress`;
 
-export interface AkselLandingPageDocT
-  extends DocumentT<LandingPageTypeT<"komponenter">> {
+export interface AkselLandingPageDocT extends DocumentT<
+  LandingPageTypeT<"komponenter">
+> {
   intro: any[];
   seo?: ArticleT["seo"];
 }
 
-export interface AkselGodPraksisLandingPageDocT
-  extends DocumentT<"godpraksis_landingsside"> {
+export interface AkselGodPraksisLandingPageDocT extends DocumentT<"godpraksis_landingsside"> {
   intro: any[];
   seo?: ArticleT["seo"];
 }

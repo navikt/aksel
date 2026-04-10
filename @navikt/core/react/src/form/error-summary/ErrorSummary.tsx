@@ -5,8 +5,10 @@ import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
-export interface ErrorSummaryProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "tabIndex"> {
+export interface ErrorSummaryProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "tabIndex"
+> {
   /**
    * Collection of `ErrorSummary.Item`.
    */
@@ -28,10 +30,9 @@ export interface ErrorSummaryProps
   headingTag?: React.ElementType<any>;
 }
 
-interface ErrorSummaryComponent
-  extends React.ForwardRefExoticComponent<
-    ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
-  > {
+interface ErrorSummaryComponent extends React.ForwardRefExoticComponent<
+  ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
+> {
   /**
    * Error message with link to field.
    *

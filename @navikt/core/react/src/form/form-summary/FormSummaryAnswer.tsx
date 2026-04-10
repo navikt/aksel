@@ -2,8 +2,7 @@ import React from "react";
 import { useThemeInternal } from "../../theme/Theme";
 import { cl } from "../../utils/helpers";
 
-export interface FormSummaryAnswerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormSummaryAnswerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Must include:
    * - `<FormSummary.Label>`

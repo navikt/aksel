@@ -7,8 +7,10 @@ import {
   useVirtualFocusInternalContext,
 } from "../Context";
 
-export interface VirtualFocusItemProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id" | "tabIndex"> {
+export interface VirtualFocusItemProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "id" | "tabIndex"
+> {
   /**
    * The function that is run when the element is focused
    * (virtually, not actual focus, eg. set a border around an item)

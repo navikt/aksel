@@ -4,7 +4,13 @@ import { BodyShort, Box, Dialog, Heading } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 
-function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
+function GlobalSearchDialog({
+  children,
+  isMac,
+}: {
+  children: React.ReactNode;
+  isMac: boolean;
+}) {
   return (
     <Dialog.Popup
       position="center"
@@ -22,7 +28,7 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
         as="span"
       >
         <span>
-          <Kbd>Ctrl</Kbd>
+          <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
           <Box as="span" marginInline="space-2">
             +
           </Box>

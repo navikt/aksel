@@ -5,8 +5,10 @@ import { cl, composeEventHandlers } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { SearchContext } from "./context";
 
-export interface SearchButtonProps
-  extends Omit<ButtonProps, "size" | "children" | "variant"> {
+export interface SearchButtonProps extends Omit<
+  ButtonProps,
+  "size" | "children" | "variant"
+> {
   /**
    * Text set after <Search/> icon
    */

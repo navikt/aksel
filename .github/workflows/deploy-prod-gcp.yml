@@ -1,0 +1,81 @@
+name: Deploy prod (aksel.nav.no)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "aksel.nav.no/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  IMAGE: ghcr.io/navikt/aksel
+
+jobs:
+  sync_data_with_sanity:
+    name: Sync data to Sanity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup project
+        uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+
+      - name: Run ts-docgen
+        run: yarn docgen
+
+      - name: Update Sanity
+        env:
+          SANITY_WRITE: ${{ secrets.SANITY_WRITE }}
+        run: yarn workspace aksel.nav.no sanity:update
+
+  build_and_deploy:
+    name: Build and deploy to prod-gcp
+    runs-on: ubuntu-latest
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
+      deployments: "write"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Setup and build Next.js application
+        uses: ./.github/actions/build-website
+        with:
+          use_cdn_assets: true
+          production: true
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+          nais_id_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          sanity_read_token: ${{ secrets.SANITY_READ }}
+          sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+          sanity_deploy_studio: ${{ secrets.SANITY_DEPLOY_STUDIO }}
+          next_encryption_key: ${{ secrets.NEXT_ENCRYPTION_KEY }}
+
+      - name: Build and push Docker image
+        uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: designsystem
+          push_image: true
+          dockerfile: aksel.nav.no/Dockerfile
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
+      - name: Deploy to prod-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: aksel.nav.no/nais-prod.yaml
+          CLUSTER: prod-gcp
+          IMAGE: ${{ steps.docker-push.outputs.image }}

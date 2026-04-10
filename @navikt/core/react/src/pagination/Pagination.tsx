@@ -11,11 +11,10 @@ import PaginationItem, {
   PaginationItemType,
 } from "./PaginationItem";
 
-interface RenderItemProps
-  extends Pick<
-    PaginationItemProps,
-    "className" | "disabled" | "selected" | "icon" | "iconPosition"
-  > {
+interface RenderItemProps extends Pick<
+  PaginationItemProps,
+  "className" | "disabled" | "selected" | "icon" | "iconPosition"
+> {
   children: React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   page: number;
@@ -81,10 +80,9 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
-interface PaginationType
-  extends React.ForwardRefExoticComponent<
-    PaginationProps & React.RefAttributes<HTMLElement>
-  > {
+interface PaginationType extends React.ForwardRefExoticComponent<
+  PaginationProps & React.RefAttributes<HTMLElement>
+> {
   Item: PaginationItemType;
 }
 

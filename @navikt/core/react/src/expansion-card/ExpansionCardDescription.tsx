@@ -3,8 +3,7 @@ import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
 import { ExpansionCardContext } from "./context";
 
-export interface ExpansionCardDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface ExpansionCardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
   children: React.ReactNode;
 }
 

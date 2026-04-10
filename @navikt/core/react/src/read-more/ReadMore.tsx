@@ -6,8 +6,7 @@ import { BodyLong } from "../typography";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useControllableState } from "../utils/hooks";
 
-export interface ReadMoreProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ReadMoreProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Content inside ReadMore.
    */
@@ -44,6 +43,16 @@ export interface ReadMoreProps
    * @private
    */
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
+  /**
+   * Changes variant of ReadMore.
+   *
+   * `moderate` is a more visually prominent variant.
+   *
+   *
+   * `ghost` is more subtle, mainly for use in forms.
+   * @default "ghost"
+   */
+  variant?: "moderate" | "ghost";
 }
 
 /**
@@ -67,6 +76,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       onClick,
       size = "medium",
       onOpenChange,
+      variant = "ghost",
       ...rest
     }: ReadMoreProps,
     ref,
@@ -81,13 +91,9 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
     return (
       <div
-        className={cl(
-          "aksel-read-more",
-          `aksel-read-more--${size}`,
-          className,
-          { "aksel-read-more--open": _open },
-        )}
-        data-volume="low"
+        className={cl("aksel-read-more", `aksel-read-more--${size}`, className)}
+        data-variant={variant}
+        data-state={_open ? "open" : "closed"}
       >
         <button
           {...rest}
@@ -98,7 +104,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
-          data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
             className="aksel-read-more__expand-icon"
@@ -107,14 +112,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           <span>{header}</span>
         </button>
 
-        <BodyLong
-          as="div"
-          className={cl("aksel-read-more__content", {
-            "aksel-read-more__content--closed": !_open,
-          })}
-          size={typoSize}
-          data-state={_open ? "open" : "closed"}
-        >
+        <BodyLong as="div" className="aksel-read-more__content" size={typoSize}>
           {children}
         </BodyLong>
       </div>

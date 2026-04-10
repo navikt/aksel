@@ -8,7 +8,8 @@ import { useTimeout } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface CopyButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
+  extends
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
     Pick<ButtonProps, "iconPosition" | "size"> {
   /**
    * @deprecated Use `data-color` attribute instead.

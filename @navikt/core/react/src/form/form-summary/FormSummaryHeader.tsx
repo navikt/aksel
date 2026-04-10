@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import { CompositionWarning } from "../../utils/components/composition-warning";
 import { cl } from "../../utils/helpers";
 
-export interface FormSummaryHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormSummaryHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Must include `<FormSummary.Heading>`.
    */

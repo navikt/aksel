@@ -5,8 +5,7 @@ import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 import InternalHeaderButton from "./InternalHeaderButton";
 
-export interface InternalHeaderUserButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface InternalHeaderUserButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * User name
    */

@@ -37,20 +37,6 @@ export const Default: Story = {
   },
 };
 
-export const Large: Story = {
-  args: {
-    ...Default.args,
-    size: "large",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    ...Default.args,
-    size: "small",
-  },
-};
-
 export const DefaultOpen: Story = {
   args: {
     ...Default.args,
@@ -65,20 +51,62 @@ export const Open: Story = {
   },
 };
 
-export const BrandVolumeLow: Story = {
-  render: () => (
-    <VStack gap="space-16">
-      <ReadMore size="large" header={Default.args?.header}>
+const ModerateDemo = ({ heading }: { heading: string }) => {
+  return (
+    <VStack gap="space-16" maxWidth="35rem">
+      <ReadMore variant="moderate" size="large" header={heading}>
         {Content}
       </ReadMore>
-      <ReadMore header={Default.args?.header}>{Content}</ReadMore>
-      <ReadMore size="small" header={Default.args?.header}>
+      <ReadMore variant="moderate" size="medium" header={heading}>
+        {Content}
+      </ReadMore>
+      <ReadMore variant="moderate" size="small" header={heading}>
+        {Content}
+      </ReadMore>
+    </VStack>
+  );
+};
+
+export const ModerateWithLongHeader: Story = {
+  render: () => (
+    <ModerateDemo heading="Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, tempore corporis exercitationem minus dignissimos eius aspernatur fugiat iusto." />
+  ),
+};
+
+export const ModerateWithShortHeader: Story = {
+  render: () => <ModerateDemo heading="Lorem ipsum dolor sit amet " />,
+};
+
+export const Ghost: Story = {
+  render: (args) => (
+    <VStack gap="space-16" maxWidth="35rem">
+      <ReadMore
+        variant="ghost"
+        size="large"
+        header={args?.header ?? Default?.args?.header}
+      >
+        {Content}
+      </ReadMore>
+      <ReadMore
+        variant="ghost"
+        size="medium"
+        header={args?.header ?? Default?.args?.header}
+      >
+        {Content}
+      </ReadMore>
+      <ReadMore
+        variant="ghost"
+        size="small"
+        header={args?.header ?? Default?.args?.header}
+      >
         {Content}
       </ReadMore>
     </VStack>
   ),
   args: {
     ...Default.args,
+    header:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, tempore corporis exercitationem minus dignissimos eius aspernatur fugiat iusto.",
     open: true,
   },
 };
@@ -111,16 +139,6 @@ export const Chromatic: Story = {
           <ReadMore {...Default.args} />
         </div>
         <div>
-          <h2>Small</h2>
-          {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
-          <ReadMore {...Small.args} />
-        </div>
-        <div>
-          <h2>Large</h2>
-          {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
-          <ReadMore {...Large.args} />
-        </div>
-        <div>
           <h2>DefaultOpen</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...DefaultOpen.args} />
@@ -130,9 +148,18 @@ export const Chromatic: Story = {
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...Open.args} />
         </div>
+
         <div>
-          <h2>BrandVolumeLow</h2>
-          {BrandVolumeLow?.render?.(...props)}
+          <h2>Moderate Long</h2>
+          {ModerateWithLongHeader.render?.(...props)}
+        </div>
+        <div>
+          <h2>Moderate Short</h2>
+          {ModerateWithShortHeader.render?.(...props)}
+        </div>
+        <div>
+          <h2>Ghost</h2>
+          {Ghost?.render?.(...props)}
         </div>
         <div>
           <h2>ColorRole</h2>

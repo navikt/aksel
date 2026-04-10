@@ -29,6 +29,17 @@ const {
 
 type LinkAnchorOverlayProps = HTMLAttributes<HTMLDivElement> & AsChildProps;
 
+/*
+ * NB: Clicks on the overlay are captured with onClick. This does not work with middle-mouse-click.
+ * We could capture such click with onAuxClick, but last time we tried that,
+ * "forwarding" the click with dispatchEvent didn't work properly.
+ * - Chrome: Worked if we dispatched a regular click event.
+ * - Firefox: Did not work.
+ * - Safari: Opened the link in the same tab (tested in BrowserStack).
+ * We could use window.open() instead, but this would not run on(Aux)Click-callbacks on the link.
+ * We consider this unacceptable since many rely on this for tracking etc.
+ */
+
 const LinkAnchorOverlay = forwardRef<HTMLDivElement, LinkAnchorOverlayProps>(
   (
     {
