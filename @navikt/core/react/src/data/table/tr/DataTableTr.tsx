@@ -73,7 +73,15 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     return null;
   }
 
+  /* TODO: A11y support */
   if (selectionState.selectionMode === "multiple" && location === "thead") {
+    const theadCheckboxProps = selectionState.getTheadCheckboxProps();
+
+    let labelText = "Velg alle synlige rader";
+    if (theadCheckboxProps.checked) {
+      labelText = "Fjern alle synlige valgte rader";
+    }
+
     return (
       <DataTableTh
         textAlign="center"
@@ -81,13 +89,9 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         UNSAFE_isSelection
       >
         <Label htmlFor={inputId} visuallyHidden>
-          Velg alle rader
+          {labelText}
         </Label>
-        <CheckboxInput
-          {...selectionState.getTheadCheckboxProps()}
-          id={inputId}
-          compact
-        />
+        <CheckboxInput {...theadCheckboxProps} id={inputId} compact />
       </DataTableTh>
     );
   }
@@ -106,8 +110,6 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     return null;
   }
 
-  /* TODO: Might not need label "velg rad" for radio/checkbox. Table row header element (th) should be announced auto */
-  /* TODO: Need to add `isRowHeader`-value to columnDef */
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
       <DataTableTd
@@ -115,14 +117,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
       >
-        <Label htmlFor={inputId} visuallyHidden>
-          Velg rad
-        </Label>
-        <CheckboxInput
-          {...selectionState.getRowCheckboxProps(rowId)}
-          id={inputId}
-          compact
-        />
+        <CheckboxInput {...selectionState.getRowCheckboxProps(rowId)} compact />
       </DataTableTd>
     );
   }
@@ -130,10 +125,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selectionState.selectionMode === "single" && location === "tbody") {
     return (
       <DataTableTd width={SELECTION_CELL_WIDTH} UNSAFE_isSelection>
-        <Label htmlFor={inputId} visuallyHidden>
-          Velg rad
-        </Label>
-        <RadioInput {...selectionState.getRowRadioProps(rowId)} id={inputId} />
+        <RadioInput {...selectionState.getRowRadioProps(rowId)} />
       </DataTableTd>
     );
   }
