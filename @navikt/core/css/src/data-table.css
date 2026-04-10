@@ -94,29 +94,16 @@
   box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
-.aksel-data-table__th {
-  /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
-  box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
-
-  &[data-align="left"] {
-    text-align: left;
-  }
-
-  &[data-align="center"] {
-    text-align: center;
-  }
-
-  &[data-align="right"] {
-    text-align: right;
-  }
-}
-
 .aksel-data-table__cell {
   /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
   text-align: start;
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
+
+  .aksel-data-table__thead & {
+    background-color: var(--ax-bg-neutral-soft);
+  }
 
   &[data-align="left"] {
     text-align: start;
@@ -149,7 +136,7 @@
 
   &:not([data-selectable="true"]) > div {
     padding-block: var(--__axc-data-table-density);
-    padding-inline: 1rem;
+    padding-inline: var(--ax-space-16);
 
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
@@ -161,12 +148,11 @@
 
 /* BORDER STYLING END */
 
-.aksel-data-table__th {
+.aksel-data-table__column-header {
+  /* TODO: Might want this to be dynamic */
+  --__axc-data-table-density: var(--ax-space-8);
+
   position: relative;
-  background-color: var(--ax-bg-neutral-soft);
-  color: var(--ax-text-neutral);
-  padding: var(--ax-space-8) var(--ax-space-16);
-  text-align: start;
   font-weight: var(--ax-font-weight-bold);
 
   &:has(.aksel-data-table__th-sort-button):hover {

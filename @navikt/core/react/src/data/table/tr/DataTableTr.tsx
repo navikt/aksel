@@ -4,12 +4,12 @@ import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
+import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import {
   useDataTableContext,
   useDataTableLocation,
 } from "../root/DataTableRoot.context";
 import { DataTableTd } from "../td/DataTableTd";
-import { DataTableTh } from "../th/DataTableTh";
 
 const SELECTION_CELL_WIDTH = "50px";
 
@@ -43,11 +43,10 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         <RowSelectionCell rowId={rowId} />
         {children}
         {renderFillerCell && (
-          /* TODO: Consider changing between th and td based on context */
-          /* using div causes illegal dom structure */
+          /* Using div causes illegal dom structure */
           <td
             aria-hidden
-            className="aksel-data-table__th aksel-data-table__filler-cell"
+            className="aksel-data-table__cell"
             data-block-keyboard-nav
           />
         )}
@@ -83,7 +82,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     }
 
     return (
-      <DataTableTh
+      <DataTableColumnHeader
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
@@ -92,13 +91,13 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
           {labelText}
         </Label>
         <CheckboxInput {...theadCheckboxProps} id={inputId} compact />
-      </DataTableTh>
+      </DataTableColumnHeader>
     );
   }
 
   if (selectionState.selectionMode === "single" && location === "thead") {
     return (
-      <DataTableTh
+      <DataTableColumnHeader
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
         data-block-keyboard-nav

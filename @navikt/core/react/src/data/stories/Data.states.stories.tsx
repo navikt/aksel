@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../../button";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/States",
@@ -21,9 +22,9 @@ export const EmptyStateAuto: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Column 1</DataTable.Th>
-          <DataTable.Th>Column 2</DataTable.Th>
-          <DataTable.Th>Column 3</DataTable.Th>
+          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -41,9 +42,9 @@ export const EmptyStateFixed: Story = {
     <DataTable layout="fixed" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Column 1</DataTable.Th>
-          <DataTable.Th>Column 2</DataTable.Th>
-          <DataTable.Th>Column 3</DataTable.Th>
+          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -61,9 +62,9 @@ export const LoadingStateAuto: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Column 1</DataTable.Th>
-          <DataTable.Th>Column 2</DataTable.Th>
-          <DataTable.Th>Column 3</DataTable.Th>
+          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -78,9 +79,9 @@ export const LoadingStateFixed: Story = {
     <DataTable layout="fixed" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Column 1</DataTable.Th>
-          <DataTable.Th>Column 2</DataTable.Th>
-          <DataTable.Th>Column 3</DataTable.Th>
+          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>

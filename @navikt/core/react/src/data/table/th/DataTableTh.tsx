@@ -1,196 +1,24 @@
-import React, { forwardRef, useState } from "react";
-import {
-  ArrowsUpDownIcon,
-  CaretLeftCircleFillIcon,
-  CaretRightCircleFillIcon,
-  SortDownIcon,
-  SortUpIcon,
-} from "@navikt/aksel-icons";
+import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
-import { useDataTableContext } from "../root/DataTableRoot.context";
-import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
+import {
+  DataTableBaseCell,
+  type DataTableBaseCellProps,
+} from "../base-cell/DataTableBaseCell";
 
-type SortDirection = "asc" | "desc" | "none";
+type DataTableThProps = DataTableBaseCellProps;
 
-interface DataTableThProps
-  extends React.HTMLAttributes<HTMLTableCellElement>, ResizeProps {
-  resizeHandler?: (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.TouchEvent<HTMLButtonElement>,
-  ) => void;
-  /**
-   * Content alignment inside cell
-   * @default "left"
-   */
-  textAlign?: "left" | "center" | "right";
-  /**
-   * Makes the column header sortable. The entire header cell content becomes
-   * a clickable button when true.
-   */
-  sortable?: boolean;
-  /**
-   * Current sort direction. Only relevant when `sortable` is true.
-   * Uses values matching the `aria-sort` attribute directly.
-   * @default "none"
-   */
-  sortDirection?: SortDirection;
-  /**
-   * Called when the user clicks the sortable header.
-   * The consumer is responsible for determining and setting the next sort state.
-   */
-  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  render?: {
-    filterMenu?: {
-      title: string;
-      content: React.ReactNode;
-    };
-  };
-  /**
-   * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
-   */
-  colSpan?: number;
-  rowSpan?: number;
-  /**
-   * Temp hack to solve overflow and alignment
-   */
-  UNSAFE_isSelection?: boolean;
-}
-
-const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
-  asc: SortUpIcon,
-  desc: SortDownIcon,
-  none: ArrowsUpDownIcon,
-};
-
-/**
- * TODO:
- * - Plan for pinning: Move it into "settings" dialog like here: https://cloudscape.design/examples/react/table.html
- * - Keyboard-nav breaks in headers now because of the resize-handles.
- * Toggling `data-block-keyboard-nav` does not work since the created "grid" does not update when toggling this attribute.
- */
 const DataTableTh = forwardRef<HTMLTableCellElement, DataTableThProps>(
-  (
-    {
-      className,
-      children,
-      sortable = false,
-      sortDirection = "none",
-      onSortClick,
-      style,
-      textAlign = "left",
-      width,
-      minWidth,
-      maxWidth,
-      onWidthChange,
-      defaultWidth,
-      colSpan,
-      UNSAFE_isSelection,
-      ...rest
-    },
-    forwardedRef,
-  ) => {
-    const { withKeyboardNav } = useDataTableContext();
-    const [isOverflowing, setIsOverflowing] = React.useState(false);
-    const contentRef = React.useRef<HTMLDivElement>(null);
-    const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
-      null,
-    );
-    const mergedRef = useMergeRefs(forwardedRef, setThRefState);
-
-    const resizeResult = useTableColumnResize({
-      ref: thRefState,
-      width,
-      defaultWidth,
-      minWidth,
-      maxWidth,
-      onWidthChange,
-      style,
-      colSpan,
-    });
-
-    const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
-
+  ({ className, ...rest }, forwardedRef) => {
     return (
-      <th
+      <DataTableBaseCell
+        ref={forwardedRef}
         {...rest}
-        ref={mergedRef}
+        as="th"
         className={cl("aksel-data-table__th", className)}
-        data-sortable={sortable}
-        data-selectable={UNSAFE_isSelection}
-        style={resizeResult.style}
-        aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
-        onPointerEnter={() => {
-          const el = contentRef.current;
-          setIsOverflowing(el ? el.scrollWidth > el.offsetWidth : false);
-          console.info("is overflowing", isOverflowing);
-        }}
-        onPointerLeave={() => setIsOverflowing(false)}
-        tabIndex={withKeyboardNav ? -1 : undefined}
-        data-align={textAlign}
-        colSpan={colSpan}
-      >
-        {sortable ? (
-          <button
-            className="aksel-data-table__th-sort-button"
-            onClick={sortable ? onSortClick : undefined}
-          >
-            <div ref={contentRef} className="aksel-data-table__th-content">
-              {children}
-            </div>
-            {SortIcon && (
-              <SortIcon
-                aria-hidden
-                data-sort-direction={sortDirection}
-                className="aksel-data-table__th-sort-icon"
-                fontSize="1.25rem"
-              />
-            )}
-          </button>
-        ) : (
-          <div
-            ref={contentRef}
-            className={cl({
-              "aksel-data-table__th-content": !UNSAFE_isSelection,
-            })}
-          >
-            {children}
-          </div>
-        )}
-
-        {resizeResult.enabled && !UNSAFE_isSelection && (
-          <button
-            {...resizeResult.resizeHandlerProps}
-            className="aksel-data-table__th-resize-handle"
-            data-active={resizeResult.isResizingWithKeyboard}
-            data-block-keyboard-nav
-          >
-            {resizeResult.isResizingWithKeyboard && (
-              <>
-                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
-                  <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
-                </span>
-                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
-                  <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
-                </span>
-              </>
-            )}
-          </button>
-        )}
-      </th>
+      />
     );
   },
 );
-
-function getAriaSort(
-  sortDirection: SortDirection | undefined,
-): "ascending" | "descending" | "none" | undefined {
-  if (sortDirection === "asc") return "ascending";
-  if (sortDirection === "desc") return "descending";
-  if (sortDirection === "none") return "none";
-  return undefined;
-}
 
 export { DataTableTh };
 export type { DataTableThProps };

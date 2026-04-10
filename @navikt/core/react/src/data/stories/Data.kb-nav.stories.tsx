@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { DataTableProfiler } from "./DataTableProfiler";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
@@ -58,7 +59,7 @@ export const TanstackDemo: Story = {
                 <DataTable.Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <DataTable.Th
+                      <DataTableColumnHeader
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         defaultWidth={header.getSize()}
@@ -76,7 +77,7 @@ export const TanstackDemo: Story = {
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                      </DataTable.Th>
+                      </DataTableColumnHeader>
                     );
                   })}
                 </DataTable.Tr>
@@ -98,14 +99,14 @@ export const Spans: Story = {
       <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th colSpan={2}>Group A</DataTable.Th>
-            <DataTable.Th colSpan={2}>Group B</DataTable.Th>
+            <DataTableColumnHeader colSpan={2}>Group A</DataTableColumnHeader>
+            <DataTableColumnHeader colSpan={2}>Group B</DataTableColumnHeader>
           </DataTable.Tr>
           <DataTable.Tr>
-            <DataTable.Th>Col 1</DataTable.Th>
-            <DataTable.Th>Col 2</DataTable.Th>
-            <DataTable.Th>Col 3</DataTable.Th>
-            <DataTable.Th>Col 4</DataTable.Th>
+            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -187,10 +188,10 @@ export const Inputs: Story = {
       <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th>Col 1</DataTable.Th>
-            <DataTable.Th>Col 2</DataTable.Th>
-            <DataTable.Th>Col 3</DataTable.Th>
-            <DataTable.Th>Col 4</DataTable.Th>
+            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -313,10 +314,10 @@ export const DisabledCells: Story = {
       <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th>Col 1</DataTable.Th>
-            <DataTable.Th>Col 2</DataTable.Th>
-            <DataTable.Th>Col 3</DataTable.Th>
-            <DataTable.Th>Col 4</DataTable.Th>
+            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -424,10 +425,10 @@ export const Cache: Story = {
         <DataTable style={{ width: "100%" }} layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTable.Th>Col 1</DataTable.Th>
-              <DataTable.Th>Col 2</DataTable.Th>
-              <DataTable.Th>Col 3</DataTable.Th>
-              <DataTable.Th>Col 4</DataTable.Th>
+              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>
@@ -468,10 +469,10 @@ export const FocusElementInsideTable: Story = {
         <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTable.Th>Col 1</DataTable.Th>
-              <DataTable.Th>Col 2</DataTable.Th>
-              <DataTable.Th>Col 3</DataTable.Th>
-              <DataTable.Th>Col 4</DataTable.Th>
+              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>

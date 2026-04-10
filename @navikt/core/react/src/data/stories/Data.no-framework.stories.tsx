@@ -3,6 +3,7 @@ import React, { useDeferredValue, useMemo, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, sampleData } from "./dummy-data";
 
@@ -107,7 +108,7 @@ export const WithoutTanstack: Story = {
             <DataTable.Tr>
               {columns.map((column) => {
                 return (
-                  <DataTable.Th
+                  <DataTableColumnHeader
                     key={column.header}
                     defaultWidth={150}
                     //style={{ width: `var(--header-${header.id}-size)` }}
@@ -129,7 +130,7 @@ export const WithoutTanstack: Story = {
                     isPinned={columnPinning.left.includes(column.accessorKey)} */
                   >
                     {column.header}
-                  </DataTable.Th>
+                  </DataTableColumnHeader>
                 );
               })}
             </DataTable.Tr>

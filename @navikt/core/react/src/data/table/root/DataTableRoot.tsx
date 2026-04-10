@@ -135,12 +135,6 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * @see 🏷️ {@link DataTableThProps}
    * @example
    * ```jsx
-   * <DataTable>
-   *   <DataTable.Thead>
-   *     <DataTable.Th>Header 1</DataTable.Th>
-   *     <DataTable.Th>Header 2</DataTable.Th>
-   *   </DataTable.Thead>
-   * </DataTable>
    * ```
    */
   Th: typeof DataTableTh;

@@ -2,14 +2,14 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
+import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
   useTableSelection,
 } from "../hooks/useTableSelection";
 import { DataTableTbody } from "../tbody/DataTableTbody";
-import { DataTableTd } from "../td/DataTableTd";
-import { DataTableTh } from "../th/DataTableTh";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
@@ -164,8 +164,7 @@ function DataTableAutoInner<T>(
               <DataTableTr>
                 {columnDefinitions.map((colDef, colDefIndex) => {
                   return (
-                    <DataTableTh
-                      /* TODO: Make these user-changable */
+                    <DataTableColumnHeader
                       maxWidth={colDef.maxWidth}
                       minWidth={colDef.minWidth}
                       width={colDef.width}
@@ -174,7 +173,7 @@ function DataTableAutoInner<T>(
                       key={colDef.id || colDefIndex}
                     >
                       {colDef.header}
-                    </DataTableTh>
+                    </DataTableColumnHeader>
                   );
                 })}
               </DataTableTr>
@@ -186,15 +185,16 @@ function DataTableAutoInner<T>(
                   <DataTableTr key={rowId} rowId={rowId}>
                     {columnDefinitions.map((colDef, colDefIndex) => {
                       return (
-                        <DataTableTd
+                        <DataTableBaseCell
                           /* TODO: Make this configurable */
                           textAlign={
                             colDef.type === "number" ? "right" : "left"
                           }
                           key={colDef.id || colDefIndex}
+                          as={colDef.isRowHeader ? "th" : "td"}
                         >
                           {colDef.cell(rowData)}
-                        </DataTableTd>
+                        </DataTableBaseCell>
                       );
                     })}
                   </DataTableTr>

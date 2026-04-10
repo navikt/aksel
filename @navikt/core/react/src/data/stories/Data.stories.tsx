@@ -26,6 +26,7 @@ import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
 import DataDragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
@@ -227,7 +228,7 @@ export const KitchenSink: Story = {
                 <DataTable.Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <DataTable.Th
+                      <DataTableColumnHeader
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         defaultWidth={header.getSize()}
@@ -251,7 +252,7 @@ export const KitchenSink: Story = {
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                      </DataTable.Th>
+                      </DataTableColumnHeader>
                     );
                   })}
                 </DataTable.Tr>
@@ -608,7 +609,7 @@ export const KitchenSinkAdvancedFilter: Story = {
               return (
                 <DataTable.Tr key={headerGroup.id}>
                   {table.options.enableMultiRowSelection ? (
-                    <DataTable.Th textAlign="center" width="64px">
+                    <DataTableColumnHeader textAlign="center" width="64px">
                       <CheckboxInput
                         compact
                         checked={table.getIsAllPageRowsSelected()}
@@ -616,13 +617,13 @@ export const KitchenSinkAdvancedFilter: Story = {
                         onChange={table.getToggleAllPageRowsSelectedHandler()}
                         aria-label="Velg alle rader"
                       />
-                    </DataTable.Th>
+                    </DataTableColumnHeader>
                   ) : (
-                    <DataTable.Th textAlign="center" width="64px" />
+                    <DataTableColumnHeader textAlign="center" width="64px" />
                   )}
                   {headerGroup.headers.map((header) => {
                     return (
-                      <DataTable.Th
+                      <DataTableColumnHeader
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         defaultWidth={header.getSize()}
@@ -646,7 +647,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                      </DataTable.Th>
+                      </DataTableColumnHeader>
                     );
                   })}
                 </DataTable.Tr>

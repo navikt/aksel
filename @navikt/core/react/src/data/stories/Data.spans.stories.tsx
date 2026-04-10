@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Spans",
@@ -23,18 +24,18 @@ export const Spans: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTable.Th width="100%" colSpan={2}>
+              <DataTableColumnHeader width="100%" colSpan={2}>
                 Group A
-              </DataTable.Th>
-              <DataTable.Th width="100%" colSpan={2}>
+              </DataTableColumnHeader>
+              <DataTableColumnHeader width="100%" colSpan={2}>
                 Group B
-              </DataTable.Th>
+              </DataTableColumnHeader>
             </DataTable.Tr>
             <DataTable.Tr>
-              <DataTable.Th>Col 1</DataTable.Th>
-              <DataTable.Th>Col 2</DataTable.Th>
-              <DataTable.Th>Col 3</DataTable.Th>
-              <DataTable.Th>Col 4</DataTable.Th>
+              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
+              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>
@@ -104,18 +105,18 @@ export const SpansSortable: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTable.Th width="100%" colSpan={2} sortable>
+              <DataTableColumnHeader width="100%" colSpan={2} sortable>
                 Group A
-              </DataTable.Th>
-              <DataTable.Th width="100%" colSpan={2} sortable>
+              </DataTableColumnHeader>
+              <DataTableColumnHeader width="100%" colSpan={2} sortable>
                 Group B
-              </DataTable.Th>
+              </DataTableColumnHeader>
             </DataTable.Tr>
             <DataTable.Tr>
-              <DataTable.Th sortable>Col 1</DataTable.Th>
-              <DataTable.Th sortable>Col 2</DataTable.Th>
-              <DataTable.Th sortable>Col 3</DataTable.Th>
-              <DataTable.Th sortable>Col 4</DataTable.Th>
+              <DataTableColumnHeader sortable>Col 1</DataTableColumnHeader>
+              <DataTableColumnHeader sortable>Col 2</DataTableColumnHeader>
+              <DataTableColumnHeader sortable>Col 3</DataTableColumnHeader>
+              <DataTableColumnHeader sortable>Col 4</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>
