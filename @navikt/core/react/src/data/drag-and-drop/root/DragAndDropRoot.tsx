@@ -1,16 +1,16 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useCallback, useEffect } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
-interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DragAndDropProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactElement<DragAndDropItemProps>[];
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
-  DragAndDropProps & React.RefAttributes<HTMLDivElement>
+  DragAndDropProps & React.RefAttributes<HTMLUListElement>
 > {
   /**
    * @see 🏷️ {@link DragAndDropItemProps}
@@ -35,16 +35,20 @@ interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
  * [x] Keyboard navigation
  * [ ] UU - announce on drag start, item moved, drag end
  * [x] Make overlay same width as the OG item, currently jumps to content width
- * [ ] Look into adding a cancel listener event
- * [ ] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
+ * [x] Look into adding a cancel listener event
+ * [x] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
  * [ ] Talk to design about what should happen on ESC key press, currently just cancels dragging, should it also reset position?
- * [ ] Make arrow icons into buttons that react to keyboard events, currently just decorative
+ * [x] Make arrow icons into buttons that react to keyboard events, currently just decorative
+ * [x] Keep handler focus after clicking arrows for dragging
+ * [ ] Look into data-based API vs component-based API
+ * [ ] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
+ * [ ] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - should we build it for a future Aksel-component now or wait?
  */
 
-const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
-  ({ setItems, children }, forwardedRef) => {
-    const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
+const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 
+const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
+  ({ setItems, children }, forwardedRef) => {
     const [activeItem, setActiveItem] =
       React.useState<DragAndDropElement | null>(null);
     const [dropTarget, setDropTarget] =
@@ -72,7 +76,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
       startY: number;
     } | null>(null);
 
-    const startPendingDragStart = (
+    const startPendingDrag = (
       event: React.PointerEvent,
       item: DragAndDropElement,
       element?: HTMLElement | null,
@@ -84,10 +88,6 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         startX: event.clientX,
         startY: event.clientY,
       };
-    };
-
-    const cancelDragStart = () => {
-      pendingDragStartRef.current = null;
     };
 
     const setCombinedActiveItem = React.useCallback(
@@ -104,6 +104,18 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         setDropTarget(item);
       },
       [],
+    );
+
+    const reorderItems = useCallback(
+      (fromIndex: number, toIndex: number) => {
+        setItems((items) => {
+          const newItems = [...items];
+          const [movedItem] = newItems.splice(fromIndex, 1);
+          newItems.splice(toIndex, 0, movedItem);
+          return newItems;
+        });
+      },
+      [setItems],
     );
 
     useEffect(() => {
@@ -208,13 +220,9 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         const target = dropTargetRef.current;
 
         if (active && target && active.id !== target.id) {
-          setItems((items) => {
-            const newItems = [...items];
-            const [movedItem] = newItems.splice(active.index, 1);
-            newItems.splice(target.index, 0, movedItem);
-            return newItems;
-          });
+          reorderItems(active.index, target.index);
         }
+
         setOverlayWidth(null);
         setDragHandlerActive(null);
         setCombinedActiveItem(null);
@@ -222,15 +230,24 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         pendingDragStartRef.current = null;
       };
 
-      // TODO - Look into adding a cancel listener event
+      const handlePointerCancel = () => {
+        setOverlayWidth(null);
+        setDragHandlerActive(null);
+        setCombinedActiveItem(null);
+        setCombinedDropTarget(null);
+        pendingDragStartRef.current = null;
+      };
+
       window.addEventListener("pointermove", handlePointerMove);
       window.addEventListener("pointerup", handlePointerUp);
+      window.addEventListener("pointercancel", handlePointerCancel);
 
       return () => {
         window.removeEventListener("pointermove", handlePointerMove);
         window.removeEventListener("pointerup", handlePointerUp);
+        window.removeEventListener("pointercancel", handlePointerCancel);
       };
-    }, [setCombinedDropTarget, setCombinedActiveItem, setItems]);
+    }, [setCombinedDropTarget, setCombinedActiveItem, reorderItems]);
 
     const onKeyboardDragEnd = (diff: number) => {
       if (!dragHandlerActive) return;
@@ -240,12 +257,7 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         return;
       }
 
-      setItems((items) => {
-        const newItems = [...items];
-        const [movedItem] = newItems.splice(dragHandlerActive.index, 1);
-        newItems.splice(targetIndex, 0, movedItem);
-        return newItems;
-      });
+      reorderItems(dragHandlerActive.index, targetIndex);
       setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
     };
 
@@ -258,10 +270,12 @@ const DragAndDrop = forwardRef<HTMLDivElement, DragAndDropProps>(
         dragHandlerActive={dragHandlerActive}
         setDragHandlerActive={setDragHandlerActive}
         onKeyboardDragEnd={onKeyboardDragEnd}
-        startPendingDragStart={startPendingDragStart}
-        cancelDragStart={cancelDragStart}
+        startPendingDrag={startPendingDrag}
+        itemAmount={children.length}
       >
-        <div ref={forwardedRef}>{children}</div>
+        <ul ref={forwardedRef} aria-label="Dra og slipp elementer">
+          {children}
+        </ul>
         {activeItem && activeChild && (
           <Floating>
             <Floating.Anchor virtualRef={virtualRef}>

@@ -397,7 +397,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: var(--ax-bg-default);
     border: none;
     cursor: pointer;
     padding: 0;
@@ -410,6 +410,11 @@
 
     &[data-direction="down"] {
       bottom: calc(-100% - 22px);
+    }
+
+    &:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
     }
   }
 }
@@ -479,9 +484,9 @@
 /* TODO -
 * This is needed to prevent the cursor from changing back to default when dragging over interactive elements in the row.
 * Not sure if this is the best approach or breaks styling elsewhere */
-html[data-dragging="true"],
-html[data-dragging="true"] *,
-html[data-dragging="true"] *::before,
-html[data-dragging="true"] *::after {
+html[data-dragging-cursor="true"],
+html[data-dragging-cursor="true"] *,
+html[data-dragging-cursor="true"] *::before,
+html[data-dragging-cursor="true"] *::after {
   cursor: grabbing !important;
 }

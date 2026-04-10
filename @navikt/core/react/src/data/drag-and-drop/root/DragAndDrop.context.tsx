@@ -9,12 +9,12 @@ interface DragAndDropContextType {
   dragHandlerActive: DragAndDropElement | null;
   setDragHandlerActive: (active: DragAndDropElement | null) => void;
   onKeyboardDragEnd: (diff: number) => void;
-  startPendingDragStart: (
+  startPendingDrag: (
     event: React.PointerEvent,
     item: DragAndDropElement,
     element?: HTMLElement | null,
   ) => void;
-  cancelDragStart: () => void;
+  itemAmount: number;
 }
 
 export const {
