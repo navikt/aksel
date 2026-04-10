@@ -13,18 +13,25 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
    */
   colSpan?: number;
   /**
-   * Cell type
-   */
-  as: "th" | "td";
-  /**
    * Temp hack to solve overflow and alignment
    */
   UNSAFE_isSelection?: boolean;
+  /**
+   * Sets a max-width on the content wrapper div inside the cell.
+   * This is only needed when using `layout="auto"` together with
+   * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
+   */
+  contentMaxWidth?: number | `${number}${string}`;
 }
 
 const DataTableBaseCell = forwardRef<
   HTMLTableCellElement,
-  DataTableBaseCellProps
+  DataTableBaseCellProps & {
+    /**
+     * Cell type
+     */
+    as: "th" | "td";
+  }
 >(
   (
     {
@@ -34,6 +41,7 @@ const DataTableBaseCell = forwardRef<
       textAlign = "left",
       colSpan,
       UNSAFE_isSelection,
+      contentMaxWidth,
       ...rest
     },
     forwardedRef,
@@ -50,7 +58,7 @@ const DataTableBaseCell = forwardRef<
         data-selectable={UNSAFE_isSelection}
         colSpan={colSpan}
       >
-        <div>{children}</div>
+        <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
       </Component>
     );
   },

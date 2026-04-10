@@ -112,11 +112,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
-      <DataTableTd
-        align="center"
-        width={SELECTION_CELL_WIDTH}
-        UNSAFE_isSelection
-      >
+      <DataTableTd UNSAFE_isSelection>
         <CheckboxInput {...selectionState.getRowCheckboxProps(rowId)} compact />
       </DataTableTd>
     );
@@ -124,7 +120,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "single" && location === "tbody") {
     return (
-      <DataTableTd width={SELECTION_CELL_WIDTH} UNSAFE_isSelection>
+      <DataTableTd UNSAFE_isSelection>
         <RadioInput {...selectionState.getRowRadioProps(rowId)} />
       </DataTableTd>
     );
