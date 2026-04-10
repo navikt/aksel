@@ -46,67 +46,47 @@ function useTableSelection<T>({
   const disabledKeysSet = useMemo(() => new Set(disabledKeys), [disabledKeys]);
 
   const isRowSelected = useCallback(
-    (rowId: string | number) => {
-      if (selectionMode === "none") {
-        return false;
-      }
-
-      return selectedKeysSet.has(rowId);
-    },
-    [selectedKeysSet, selectionMode],
+    (rowId: string | number) => selectedKeysSet.has(rowId),
+    [selectedKeysSet],
   );
+
+  const baseSelection = { selectedKeys, disabledKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {
       allKeys,
-      selection: {
-        selectionMode,
-        selectedKeys: [],
-        disabledKeys,
-        isRowSelected,
-      },
+      selection: { selectionMode, ...baseSelection, selectedKeys: [] },
     };
   }
 
   if (selectionMode === "single") {
-    const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeysSet,
-      setSelectedKeys,
-      disabledKeysSet,
-      name: radioGroupName,
-    });
-
     return {
       allKeys,
       selection: {
         selectionMode,
-        selectedKeys,
-        disabledKeys,
-        getRowRadioProps,
-        isRowSelected,
+        ...baseSelection,
+        ...getSingleSelectProps({
+          selectedKeysSet,
+          setSelectedKeys,
+          disabledKeysSet,
+          name: radioGroupName,
+        }),
       },
     };
   }
-
-  const { getTheadCheckboxProps, getRowCheckboxProps } = getMultipleSelectProps(
-    {
-      selectedKeysSet,
-      selectedKeys,
-      setSelectedKeys,
-      disabledKeysSet,
-      allKeys,
-    },
-  );
 
   return {
     allKeys,
     selection: {
       selectionMode,
-      selectedKeys,
-      disabledKeys,
-      getTheadCheckboxProps,
-      getRowCheckboxProps,
-      isRowSelected,
+      ...baseSelection,
+      ...getMultipleSelectProps({
+        selectedKeysSet,
+        selectedKeys,
+        setSelectedKeys,
+        disabledKeysSet,
+        allKeys,
+      }),
     },
   };
 }
