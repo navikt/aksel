@@ -5,6 +5,7 @@ import {
   offset,
   safePolygon,
   shift,
+  useClick,
   useDismiss,
   useFloating,
   useFocus,
@@ -78,8 +79,10 @@ const ClickablePeriod = React.memo(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
+    const click = useClick(context);
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
+      click,
       hover,
       focus,
       dismiss,
@@ -116,12 +119,8 @@ const ClickablePeriod = React.memo(
             },
             onKeyDown: (e) => {
               restProps?.onKeydown?.(e);
-              if (e.key === "Enter") {
-                setOpen((prev) => !prev);
-              }
               if (e.key === " ") {
                 onSelectPeriod?.(e);
-                setOpen(false);
               }
             },
             style: {

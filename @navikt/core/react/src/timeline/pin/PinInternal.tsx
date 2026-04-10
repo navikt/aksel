@@ -36,13 +36,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
 
     const translate = useI18n("Timeline");
 
-    const {
-      context,
-      placement,
-
-      refs,
-      floatingStyles,
-    } = useFloating({
+    const { context, placement, refs, floatingStyles } = useFloating({
       placement: "top",
       open,
       onOpenChange: (_open) => setOpen(_open),
