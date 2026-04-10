@@ -82,6 +82,16 @@ interface DataTableProps<T>
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
   getRowId?: (rowData: T, index: number) => string | number;
+  /**
+   * Sticky columns that remain visible when horizontally scrolling the table.
+   *
+   * You can specify up to 2 sticky columns on the left and 1 on the right.
+   * The values indicate how many columns from each side should be sticky.
+   */
+  stickyColumns?: {
+    first?: "1";
+    last?: "1";
+  };
 }
 
 function DataTableAutoInner<T>(
@@ -101,6 +111,7 @@ function DataTableAutoInner<T>(
     data,
     columnDefinitions,
     getRowId,
+    stickyColumns,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -126,6 +137,9 @@ function DataTableAutoInner<T>(
     data,
     getRowId: resolvedGetRowId,
   });
+
+  /* Lint ignore temp */
+  console.info(stickyColumns);
 
   return (
     <DataTableContextProvider

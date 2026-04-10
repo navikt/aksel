@@ -343,3 +343,24 @@ export const SelectionPagination: Story = {
     expect((checkboxes[2] as HTMLInputElement).checked).toBe(false);
   },
 };
+
+export const StickyLeftOne: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef.map((col) => ({
+          ...col,
+          defaultWidth: "350px",
+        }))}
+        data={userData}
+        selectionMode="multiple"
+        onSelectionChange={console.info}
+        getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
+        stickyColumns={{
+          first: "1",
+        }}
+      />
+    );
+  },
+};
