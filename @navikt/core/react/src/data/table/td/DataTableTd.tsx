@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { cl } from "../../../utils/helpers";
 import {
   DataTableBaseCell,
   type DataTableBaseCellProps,
@@ -7,8 +8,15 @@ import {
 type DataTableTdProps = DataTableBaseCellProps;
 
 const DataTableTd = forwardRef<HTMLTableCellElement, DataTableTdProps>(
-  (props, forwardedRef) => {
-    return <DataTableBaseCell ref={forwardedRef} {...props} as="td" />;
+  ({ className, ...rest }, forwardedRef) => {
+    return (
+      <DataTableBaseCell
+        ref={forwardedRef}
+        {...rest}
+        as="td"
+        className={cl("aksel-data-table__td", className)}
+      />
+    );
   },
 );
 

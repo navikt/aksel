@@ -48,14 +48,6 @@
       background-color: var(--ax-bg-neutral-softA);
     }
   }
-
-  &[data-truncate-content="true"] {
-    .aksel-data-table__td:not([data-selectable="true"]) > div {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
 }
 
 .aksel-data-table__thead {
@@ -102,8 +94,7 @@
   box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
-.aksel-data-table__th,
-.aksel-data-table__td {
+.aksel-data-table__th {
   /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
 
@@ -117,6 +108,54 @@
 
   &[data-align="right"] {
     text-align: right;
+  }
+}
+
+.aksel-data-table__cell {
+  /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
+  box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+  text-align: start;
+  vertical-align: middle;
+  scroll-margin: var(--ax-space-0);
+
+  &[data-align="left"] {
+    text-align: start;
+  }
+
+  &[data-align="center"] {
+    text-align: center;
+  }
+
+  &[data-align="right"] {
+    text-align: end;
+  }
+
+  &:focus-visible,
+  /* Focus instead of focus-visible so that effect of sort-icon staying isnt strange */
+  /* TODO: Update from th to generic */
+  &:has(.aksel-data-table__th-sort-button:focus) {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+
+  &[data-selectable="true"] {
+    padding: 0;
+
+    & > div {
+      display: grid;
+      place-content: center;
+    }
+  }
+
+  &:not([data-selectable="true"]) > div {
+    padding-block: var(--__axc-data-table-density);
+    padding-inline: 1rem;
+
+    .aksel-data-table[data-truncate-content="true"] & {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 }
 
@@ -289,18 +328,6 @@
   }
 }
 
-.aksel-data-table__td {
-  text-align: start;
-  vertical-align: middle;
-  color: var(--ax-text-neutral-subtle);
-
-  &:not([data-selectable="true"]) > div {
-    padding-block: var(--__axc-data-table-density);
-    padding-inline: 1rem;
-  }
-}
-
-.aksel-data-table__td,
 .aksel-data-table__th {
   scroll-margin-block: var(--ax-space-0);
   scroll-margin-inline: var(--ax-space-0);
