@@ -14,31 +14,39 @@ type SelectionProps = {
    * @default "none"
    */
   selectionMode?: "none" | "single" | "multiple";
+  /**
+   * Controlled selected keys. Should be used in conjunction with `onSelectionChange`.
+   */
   selectedKeys?: SelectedKeysT;
+  /**
+   * Default selected keys when using uncontrolled selection. Should not be used together with `selectedKeys`.
+   */
   defaultSelectedKeys?: SelectedKeysT;
+  /**
+   * Callback with array of selected keys.
+   */
   onSelectionChange?: (keys: SelectedKeysT) => void;
-  /* TODO: Consider renaming to disabledSelectionIds */
   /* TODO: Consider stronger typing */
-  disabledKeys?: SelectedKeysT;
+  disabledSelectionKeys?: SelectedKeysT;
 };
 
 type NoneSelection = {
   selectionMode: "none";
   selectedKeys: SelectedKeysT;
-  disabledKeys: SelectedKeysT;
+  disabledSelectionKeys: SelectedKeysT;
 };
 
 type SingleSelection = {
   selectionMode: "single";
   selectedKeys: SelectedKeysT;
-  disabledKeys: SelectedKeysT;
+  disabledSelectionKeys: SelectedKeysT;
   getRowRadioProps: (key: string | number) => RadioInputProps;
 };
 
 type MultipleSelection = {
   selectionMode: "multiple";
   selectedKeys: SelectedKeysT;
-  disabledKeys: SelectedKeysT;
+  disabledSelectionKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
   getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
 };

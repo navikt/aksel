@@ -24,7 +24,7 @@ function useTableSelection<T>({
   defaultSelectedKeys,
   selectedKeys: selectedKeysProp,
   onSelectionChange,
-  disabledKeys = [],
+  disabledSelectionKeys = [],
   data,
   getRowId,
 }: UseTableSelectionArgs<T>): UseTableSelectionReturn {
@@ -43,14 +43,17 @@ function useTableSelection<T>({
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  const disabledKeysSet = useMemo(() => new Set(disabledKeys), [disabledKeys]);
+  const disabledKeysSet = useMemo(
+    () => new Set(disabledSelectionKeys),
+    [disabledSelectionKeys],
+  );
 
   const isRowSelected = useCallback(
     (rowId: string | number) => selectedKeysSet.has(rowId),
     [selectedKeysSet],
   );
 
-  const baseSelection = { selectedKeys, disabledKeys, isRowSelected };
+  const baseSelection = { selectedKeys, disabledSelectionKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {

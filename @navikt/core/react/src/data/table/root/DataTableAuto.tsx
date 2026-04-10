@@ -82,7 +82,7 @@ function DataTableAutoInner<T>(
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
-    disabledKeys = [],
+    disabledSelectionKeys = [],
     data,
     columnDefinitions,
     getRowId,
@@ -107,7 +107,7 @@ function DataTableAutoInner<T>(
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
-    disabledKeys,
+    disabledSelectionKeys,
     data,
     getRowId: resolvedGetRowId,
   });
