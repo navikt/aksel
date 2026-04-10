@@ -18,15 +18,19 @@ function getMultipleSelectProps({
   const selectableKeys = allKeys.filter((k) => !disabledKeysSet.has(k));
   const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
 
+  const allKeysSet = new Set(allKeys);
+  const selectedKeysNotInView = selectedKeys.filter((k) => !allKeysSet.has(k));
+  const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
+
   const handleToggleAll = () => {
     const allSelectableSelected = selectableKeys.every((k) =>
       selectedKeysSet.has(k),
     );
 
     if (allSelectableSelected) {
-      setSelectedKeys(disabledSelected);
+      setSelectedKeys(preservedKeys);
     } else {
-      setSelectedKeys([...new Set([...disabledSelected, ...selectableKeys])]);
+      setSelectedKeys([...new Set([...preservedKeys, ...selectableKeys])]);
     }
   };
 
@@ -43,6 +47,7 @@ function getMultipleSelectProps({
       const selectedSelectableCount = selectableKeys.filter((k) =>
         selectedKeysSet.has(k),
       ).length;
+
       const indeterminate =
         selectedSelectableCount > 0 &&
         selectedSelectableCount < selectableKeys.length;
