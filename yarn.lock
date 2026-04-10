@@ -20973,7 +20973,7 @@ __metadata:
   dependencies:
     react-fast-compare: "npm:^3.2.2"
   peerDependencies:
-    react: ^16.8 || 17.x || 18.x || 19.x
+    react: ^16.8 || 17.x || 18.x || 19.x
     react-dom: ^16.8 || 17.x || 18.x || 19.x
   checksum: 10/427f54a26c46928664cf741ed434467f573a57997277f990665e9a585da837e15e422dbe4b822448f372fb296dc1a379d3e9559242d054d0838a5f8fabef4655
   languageName: node
