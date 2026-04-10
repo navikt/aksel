@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname $0)/_/husky.sh"
+
+# Only run tests when pushing to main branch
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    echo "Pushing to main branch - running tests..."
+    yarn test
+    exit $?
+  fi
+done
+
+exit 0
