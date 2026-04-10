@@ -21,8 +21,7 @@ export const useMedia = (
     }
     const mediaQueryList = window.matchMedia(media);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMatches(mediaQueryList.matches);
+    setMatches(mediaQueryList.matches); // eslint-disable-line react-hooks/set-state-in-effect
 
     const listener = (evt: MediaQueryListEvent) => {
       setMatches(evt.matches);
