@@ -23,6 +23,10 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
    * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
    */
   contentMaxWidth?: number | `${number}${string}`;
+  /**
+   * Makes the cell sticky.
+   */
+  isSticky?: "start" | "end" | false;
 }
 
 const DataTableBaseCell = forwardRef<
@@ -44,6 +48,7 @@ const DataTableBaseCell = forwardRef<
       UNSAFE_isSelection,
       contentMaxWidth,
       rowSpan,
+      isSticky,
       ...rest
     },
     forwardedRef,
@@ -58,6 +63,7 @@ const DataTableBaseCell = forwardRef<
         tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
         data-selectable={UNSAFE_isSelection}
+        data-sticky={isSticky || undefined}
         colSpan={colSpan}
         rowSpan={rowSpan}
       >

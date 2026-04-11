@@ -344,7 +344,7 @@ export const SelectionPagination: Story = {
   },
 };
 
-export const StickyLeftOne: Story = {
+export const StickySelection: Story = {
   render: () => {
     return (
       <DataTableAuto
@@ -359,6 +359,64 @@ export const StickyLeftOne: Story = {
         withKeyboardNav
         stickyColumns={{
           first: "1",
+        }}
+      />
+    );
+  },
+};
+
+export const StickyLeftOne: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef.map((col) => ({
+          ...col,
+          defaultWidth: "350px",
+        }))}
+        data={userData}
+        getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
+        stickyColumns={{
+          first: "1",
+        }}
+      />
+    );
+  },
+};
+
+export const StickyRightOne: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef.map((col) => ({
+          ...col,
+          defaultWidth: "350px",
+        }))}
+        data={userData}
+        getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
+        stickyColumns={{
+          last: "1",
+        }}
+      />
+    );
+  },
+};
+
+export const StickyBothOne: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef.map((col) => ({
+          ...col,
+          defaultWidth: "350px",
+        }))}
+        data={userData}
+        getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
+        stickyColumns={{
+          first: "1",
+          last: "1",
         }}
       />
     );

@@ -117,6 +117,40 @@
     text-align: end;
   }
 
+  &[data-sticky] {
+    position: sticky;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      pointer-events: none;
+      border-color: var(--ax-border-neutral-subtle);
+      border-style: solid;
+      border-width: 0;
+    }
+
+    &[data-sticky="start"] {
+      left: 0;
+
+      &::after {
+        inset-inline: 0 -1px;
+        border-right-width: 1px;
+      }
+    }
+
+    &[data-sticky="end"] {
+      right: 0;
+    }
+
+    background-color: var(--ax-bg-default);
+
+    .aksel-data-table__thead & {
+      background-color: var(--ax-bg-neutral-soft);
+    }
+  }
+
   &:focus-visible,
   /* Focus instead of focus-visible so that effect of sort-icon staying isnt strange */
   /* TODO: Update from th to generic */

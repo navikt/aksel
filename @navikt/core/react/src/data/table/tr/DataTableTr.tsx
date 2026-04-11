@@ -60,7 +60,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
-  const { selectionState, dataLength } = useDataTableContext();
+  const { selectionState, dataLength, stickySelection } = useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
 
@@ -86,6 +86,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
+        isSticky={stickySelection && "start"}
       >
         <Label htmlFor={inputId} visuallyHidden>
           {labelText}
@@ -101,6 +102,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
         data-block-keyboard-nav
+        isSticky={stickySelection && "start"}
       />
     );
   }
@@ -111,7 +113,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "multiple" && location === "tbody") {
     return (
-      <DataTableTd UNSAFE_isSelection>
+      <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
         <CheckboxInput {...selectionState.getRowCheckboxProps(rowId)} compact />
       </DataTableTd>
     );
@@ -119,7 +121,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selectionState.selectionMode === "single" && location === "tbody") {
     return (
-      <DataTableTd UNSAFE_isSelection>
+      <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
         <RadioInput {...selectionState.getRowRadioProps(rowId)} />
       </DataTableTd>
     );

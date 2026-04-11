@@ -4,6 +4,7 @@ import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
+import { useColumnOptions } from "../hooks/useColumnOptions";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
@@ -138,8 +139,10 @@ function DataTableAutoInner<T>(
     getRowId: resolvedGetRowId,
   });
 
-  /* Lint ignore temp */
-  console.info(stickyColumns);
+  const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
+    stickyColumns,
+    selectionMode: selection.selectionMode,
+  });
 
   return (
     <DataTableContextProvider
@@ -147,6 +150,7 @@ function DataTableAutoInner<T>(
       withKeyboardNav={withKeyboardNav}
       selectionState={selection}
       dataLength={data.length ?? 0}
+      stickySelection={stickySelection}
     >
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">
@@ -162,7 +166,7 @@ function DataTableAutoInner<T>(
           >
             <DataTableThead>
               <DataTableTr>
-                {columnDefinitions.map((colDef, colDefIndex) => {
+                {columns.map(({ isSticky, colDef }, colDefIndex) => {
                   return (
                     <DataTableColumnHeader
                       maxWidth={colDef.maxWidth}
@@ -171,6 +175,7 @@ function DataTableAutoInner<T>(
                       defaultWidth={colDef.defaultWidth ?? "100%"}
                       textAlign={colDef.type === "number" ? "right" : "left"}
                       key={colDef.id || colDefIndex}
+                      isSticky={isSticky}
                     >
                       {colDef.header}
                     </DataTableColumnHeader>
@@ -183,7 +188,7 @@ function DataTableAutoInner<T>(
                 const rowId = allKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId} rowId={rowId}>
-                    {columnDefinitions.map((colDef, colDefIndex) => {
+                    {columns.map(({ isSticky, colDef }, colDefIndex) => {
                       return (
                         <DataTableBaseCell
                           /* TODO: Make this configurable */
@@ -192,6 +197,7 @@ function DataTableAutoInner<T>(
                           }
                           key={colDef.id || colDefIndex}
                           as={colDef.isRowHeader ? "th" : "td"}
+                          isSticky={isSticky}
                         >
                           {colDef.cell(rowData)}
                         </DataTableBaseCell>

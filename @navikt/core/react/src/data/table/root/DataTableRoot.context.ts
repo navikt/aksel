@@ -7,6 +7,7 @@ type DataTableContextProps = {
   /* TODO: Temp optional, should be required */
   selectionState?: TableSelection;
   dataLength: number;
+  stickySelection: boolean;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
