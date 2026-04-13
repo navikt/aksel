@@ -1,4 +1,5 @@
 import NextImage from "next/image";
+import { Events } from "@navikt/analytics-types";
 import {
   BodyLong,
   Tag as DsTag,
@@ -135,9 +136,10 @@ export const Highlight = ({
           <Link
             as={NextLink}
             onClick={() =>
-              umamiTrack("navigere", {
-                kilde: "global sok",
-                url: `/${article.slug}`,
+              umamiTrack(Events.NAVIGERE, {
+                lenketekst: article?.heading ?? "",
+                destinasjon: `/${article.slug}`,
+                lenkegruppe: "fremhevet artikkel",
               })
             }
             href={`/${article.slug}`}

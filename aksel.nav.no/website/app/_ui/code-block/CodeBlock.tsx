@@ -3,8 +3,10 @@
 import { Highlight } from "prism-react-renderer";
 import { useId, useRef } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { Button, CopyButton, HStack, Spacer, Tabs } from "@navikt/ds-react";
 import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./CodeBlock.module.css";
 import {
   CodeBlockProvider,
@@ -45,7 +47,17 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
         className={styles.codeBlock}
         {...props}
       >
-        <Tabs defaultValue={tabs[0].value ?? ""} onChange={codeSnippet.update}>
+        <Tabs
+          defaultValue={tabs[0].value ?? ""}
+          onChange={(value) => {
+            codeSnippet.update(value);
+            const tab = tabs.find((t) => t.value === value);
+            umamiTrack(Events.FANE_BYTTET, {
+              tilFane: value,
+              tilFaneTekst: tab?.text ?? value,
+            });
+          }}
+        >
           <CodeBlockHeader />
           {tabs?.map((tab) => (
             <CodeBlockEditor
@@ -257,7 +269,13 @@ function ActionButtons() {
         }
       />
       {codeSnippet.current && (
-        <CopyButton copyText={codeSnippet.current} size="small" />
+        <CopyButton
+          copyText={codeSnippet.current}
+          size="small"
+          onCopy={() =>
+            umamiTrack(Events.TEKST_KOPIERT, { tekst: "kodeblokk" })
+          }
+        />
       )}
     </HStack>
   );

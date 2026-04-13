@@ -1,4 +1,7 @@
+"use client";
+
 import { PortableTextBlock, stegaClean } from "next-sanity";
+import { Events } from "@navikt/analytics-types";
 import {
   ExpansionCard,
   ExpansionCardContent,
@@ -8,6 +11,7 @@ import {
 } from "@navikt/ds-react/ExpansionCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 const cardSize = {
   h2: "large",
@@ -29,6 +33,13 @@ function WebsiteExpansionCard(
       id="aksel-expansioncard"
       aria-label={heading}
       data-block-margin="space-28"
+      onToggle={(open) => {
+        if (open) {
+          umamiTrack(Events.UTVIDBART_KORT_APNET, { tittel: heading });
+        } else {
+          umamiTrack(Events.UTVIDBART_KORT_LUKKET, { tittel: heading });
+        }
+      }}
     >
       <ExpansionCardHeader>
         <ExpansionCardTitle

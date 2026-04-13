@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Events } from "@navikt/analytics-types";
 import { Tag as DsTag, HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
   LinkCardAnchor,
@@ -105,9 +106,10 @@ const Card = ({ article, visible }: CardProps) => {
         <LinkCardAnchor asChild>
           <NextLink
             onNavigate={() =>
-              umamiTrack("navigere", {
-                kilde: "forsidekort",
-                url: `/${article.slug}`,
+              umamiTrack(Events.NAVIGERE, {
+                lenketekst: article.heading ?? "",
+                destinasjon: `/${article.slug}`,
+                lenkegruppe: "forsidekort",
               })
             }
             href={`/${article.slug}`}

@@ -1,6 +1,10 @@
+"use client";
+
 import { useId } from "react";
+import { Events } from "@navikt/analytics-types";
 import { BodyLong, Box, ReadMore, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./Video.module.css";
 
 function Video(props: ExtractPortableComponentProps<"video">) {
@@ -25,6 +29,8 @@ function Video(props: ExtractPortableComponentProps<"video">) {
         aria-describedby={transkripsjon ? transcriptId : undefined}
         poster="/images/og/video-poster.png"
         crossOrigin="anonymous" // Needed for the <track>
+        onPlay={() => umamiTrack(Events.VIDEO_START, { tittel: alt })}
+        onPause={() => umamiTrack(Events.VIDEO_STOPP, { tittel: alt })}
       >
         {webm.url && (
           <source src={webm.url} type={`video/${webm?.extension}`} />
