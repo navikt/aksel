@@ -35,6 +35,10 @@
     }
   }
 
+  .rdp-button.rdp-day__range-hover-middle {
+    background-color: var(--ax-bg-moderate-hoverA);
+  }
+
   .rdp-month,
   &.rdp-month {
     display: grid;
