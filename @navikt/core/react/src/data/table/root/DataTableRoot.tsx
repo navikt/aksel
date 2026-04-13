@@ -227,6 +227,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         withKeyboardNav={withKeyboardNav}
         dataLength={0}
         stickySelection={false}
+        stickyHeader={false}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

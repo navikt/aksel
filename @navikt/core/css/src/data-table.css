@@ -52,8 +52,6 @@
 
 .aksel-data-table__thead {
   background-color: var(--ax-bg-raised);
-  position: sticky;
-  top: 0;
 }
 
 .aksel-data-table__tbody {
@@ -63,6 +61,12 @@
 .aksel-data-table__tr {
   &[data-selected="true"] {
     background-color: var(--ax-bg-softA);
+  }
+
+  .aksel-data-table__thead &[data-sticky="true"] {
+    position: sticky;
+    top: 0;
+    z-index: 3;
   }
 }
 

@@ -93,6 +93,10 @@ interface DataTableProps<T>
     first?: "1";
     last?: "1";
   };
+  /**
+   * @default false
+   */
+  stickyHeader?: boolean;
 }
 
 function DataTableAutoInner<T>(
@@ -113,6 +117,7 @@ function DataTableAutoInner<T>(
     columnDefinitions,
     getRowId,
     stickyColumns,
+    stickyHeader = false,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -151,6 +156,7 @@ function DataTableAutoInner<T>(
       selectionState={selection}
       dataLength={data.length ?? 0}
       stickySelection={stickySelection}
+      stickyHeader={stickyHeader}
     >
       <div className="aksel-data-table__border-wrapper">
         <div className="aksel-data-table__scroll-wrapper">

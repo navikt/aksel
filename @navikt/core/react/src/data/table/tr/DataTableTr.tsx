@@ -26,12 +26,14 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     { className, children, selected: selectedProp = false, rowId, ...rest },
     forwardedRef,
   ) => {
-    const { layout } = useDataTableContext();
+    const { layout, stickyHeader } = useDataTableContext();
     const { selectionState } = useDataTableContext();
+    const { location } = useDataTableLocation();
 
     const renderFillerCell = layout === "fixed" && children;
 
     const selected = selectionState?.isRowSelected(rowId ?? "") ?? selectedProp;
+    const isSticky = location === "thead" && stickyHeader;
 
     return (
       <tr
@@ -39,6 +41,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         ref={forwardedRef}
         className={cl("aksel-data-table__tr", className)}
         data-selected={selected}
+        data-sticky={isSticky || undefined}
       >
         <RowSelectionCell rowId={rowId} />
         {children}

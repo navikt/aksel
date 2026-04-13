@@ -65,36 +65,16 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   },
 ];
 
-const userData = [
-  {
-    id: 1,
-    foo: "foo1",
-    bar: "bar1",
-    on: true,
+const generateUserData = (count: number): UserDataTest[] =>
+  Array.from({ length: count }, (_, i) => ({
+    id: i + 1,
+    foo: `foo${i + 1}`,
+    bar: `bar${i + 1}`,
+    on: i % 2 === 0,
     time: new Date(),
-  },
-  {
-    id: 2,
-    foo: "foo2",
-    bar: "bar2",
-    on: false,
-    time: new Date(),
-  },
-  {
-    id: 3,
-    foo: "foo3",
-    bar: "bar3",
-    on: true,
-    time: new Date(),
-  },
-  {
-    id: 4,
-    foo: "foo4",
-    bar: "bar4",
-    on: true,
-    time: new Date(),
-  },
-];
+  }));
+
+const userData = generateUserData(4);
 
 export const ItemsAsData: Story = {
   render: () => {
@@ -409,7 +389,7 @@ export const StickyBothOne: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
-          defaultWidth: "350px",
+          defaultWidth: "250px",
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
@@ -419,6 +399,45 @@ export const StickyBothOne: Story = {
           last: "1",
         }}
       />
+    );
+  },
+};
+
+export const StickyHeader: Story = {
+  render: () => {
+    return (
+      <div style={{ height: "300px" }}>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={generateUserData(20)}
+          getRowId={(row) => row.foo + row.bar}
+          withKeyboardNav
+          stickyHeader
+        />
+      </div>
+    );
+  },
+};
+
+export const StickyHeaderAndColumns: Story = {
+  render: () => {
+    return (
+      <div style={{ height: "300px" }}>
+        <DataTableAuto
+          columnDefinitions={userColumnDef.map((col) => ({
+            ...col,
+            defaultWidth: "250px",
+          }))}
+          data={generateUserData(20)}
+          getRowId={(row) => row.foo + row.bar}
+          withKeyboardNav
+          stickyHeader
+          stickyColumns={{
+            first: "1",
+            last: "1",
+          }}
+        />
+      </div>
     );
   },
 };
