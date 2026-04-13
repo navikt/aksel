@@ -272,7 +272,7 @@ function ActionButtons() {
         <CopyButton
           copyText={codeSnippet.current}
           size="small"
-          onCopy={() =>
+          onClick={() =>
             umamiTrack(Events.TEKST_KOPIERT, { tekst: "kodeblokk" })
           }
         />
