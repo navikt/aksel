@@ -394,7 +394,7 @@
 }
 
 .aksel-data-table__filler-cell {
-  width: 100%;
+  width: auto;
   display: table-cell;
   padding: 0;
 }
