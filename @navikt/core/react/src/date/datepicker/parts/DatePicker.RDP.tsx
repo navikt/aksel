@@ -47,7 +47,7 @@ type ReactDayPickerProps = DatePickerDefaultProps &
     /**
      * Id for the label of the popup, used for aria-labelledby
      */
-    popupLabelId: string;
+    popupLabelId?: string;
   };
 
 const ReactDayPicker = ({
