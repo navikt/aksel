@@ -39,7 +39,7 @@ function GlobalSearchResultProvider({
       debounce((query: string) => {
         maybeEnableComicSans(query);
 
-        umamiTrack(Events.SOK, { sokefrase: query });
+        umamiTrack(Events.SOK, { tekst: "global søk" });
         setParam(query);
       }, 200),
     [setParam],

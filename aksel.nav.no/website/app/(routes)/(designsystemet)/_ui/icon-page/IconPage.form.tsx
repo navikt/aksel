@@ -25,7 +25,6 @@ function IconPageForm({
           params.set("iconQuery", query);
           umamiTrack(Events.SOK, {
             tekst: "ikonsøk",
-            sokefrase: query,
             seksjon: "ikonside",
           });
         } else {

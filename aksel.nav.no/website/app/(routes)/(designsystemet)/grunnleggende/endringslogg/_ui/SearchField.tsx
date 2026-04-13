@@ -33,7 +33,6 @@ export default function SearchField({
     onSearch();
     umamiTrack(Events.SOK, {
       tekst: "endringslogg søk",
-      sokefrase: searchInput,
       seksjon: "endringslogg",
     });
   }
