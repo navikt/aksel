@@ -1,3 +1,5 @@
+"use client";
+
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
 // import { startTransition, useOptimistic } from "react";
 import { Events } from "@navikt/analytics-types";

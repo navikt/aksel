@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Events } from "@navikt/analytics-types";
 import { Tag as DsTag, HStack, LinkCard, VStack } from "@navikt/ds-react";

@@ -1,3 +1,5 @@
+"use client";
+
 import NextImage from "next/image";
 import { Events } from "@navikt/analytics-types";
 import {
