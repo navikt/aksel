@@ -49,7 +49,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
           /* Using div causes illegal dom structure */
           <td
             aria-hidden
-            className="aksel-data-table__cell"
+            className="aksel-data-table__cell aksel-data-table__filler-cell"
             data-block-keyboard-nav
           />
         )}
