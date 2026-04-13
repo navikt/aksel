@@ -1,9 +1,5 @@
-"use client";
-
 import { PortableTextBlock, stegaClean } from "next-sanity";
-import { Events } from "@navikt/analytics-types";
 import {
-  ExpansionCard,
   ExpansionCardContent,
   ExpansionCardDescription,
   ExpansionCardHeader,
@@ -11,7 +7,7 @@ import {
 } from "@navikt/ds-react/ExpansionCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { WebsiteExpansionCardTracked } from "./WebsiteExpansionCardTracked";
 
 const cardSize = {
   h2: "large",
@@ -29,18 +25,7 @@ function WebsiteExpansionCard(
   }
 
   return (
-    <ExpansionCard
-      id="aksel-expansioncard"
-      aria-label={heading}
-      data-block-margin="space-28"
-      onToggle={(open) => {
-        if (open) {
-          umamiTrack(Events.UTVIDBART_KORT_APNET, { tittel: heading });
-        } else {
-          umamiTrack(Events.UTVIDBART_KORT_LUKKET, { tittel: heading });
-        }
-      }}
-    >
+    <WebsiteExpansionCardTracked heading={heading}>
       <ExpansionCardHeader>
         <ExpansionCardTitle
           as={stegaClean(heading_level)}
@@ -55,7 +40,7 @@ function WebsiteExpansionCard(
       <ExpansionCardContent>
         <CustomPortableText value={body as PortableTextBlock[]} />
       </ExpansionCardContent>
-    </ExpansionCard>
+    </WebsiteExpansionCardTracked>
   );
 }
 
