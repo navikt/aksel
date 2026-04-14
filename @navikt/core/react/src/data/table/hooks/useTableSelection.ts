@@ -9,31 +9,24 @@ import type {
   TableSelection,
 } from "../helpers/selection/selection.types";
 
-type UseTableSelectionArgs<T> = SelectionProps & {
-  data: T[];
-  getRowId: (rowData: T, index: number) => string | number;
+type UseTableSelectionArgs = SelectionProps & {
+  /* This is needed for multiple selection to know which keys to select when "select all" is used */
+  allRowKeys: (string | number)[];
 };
 
 type UseTableSelectionReturn = {
   selection: TableSelection;
-  allKeys: SelectedKeysT;
 };
 
-function useTableSelection<T>({
+function useTableSelection({
   selectionMode = "none",
   defaultSelectedKeys,
   selectedKeys: selectedKeysProp,
   onSelectionChange,
   disabledSelectionKeys = [],
-  data,
-  getRowId,
-}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
+  allRowKeys,
+}: UseTableSelectionArgs): UseTableSelectionReturn {
   const radioGroupName = useId();
-
-  const allKeys = useMemo(
-    () => data.map((item, index) => getRowId(item, index)),
-    [data, getRowId],
-  );
 
   const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
     value: selectionMode !== "none" ? selectedKeysProp : undefined,
@@ -57,14 +50,12 @@ function useTableSelection<T>({
 
   if (selectionMode === "none") {
     return {
-      allKeys,
       selection: { selectionMode, ...baseSelection, selectedKeys: [] },
     };
   }
 
   if (selectionMode === "single") {
     return {
-      allKeys,
       selection: {
         selectionMode,
         ...baseSelection,
@@ -79,7 +70,6 @@ function useTableSelection<T>({
   }
 
   return {
-    allKeys,
     selection: {
       selectionMode,
       ...baseSelection,
@@ -88,7 +78,7 @@ function useTableSelection<T>({
         selectedKeys,
         setSelectedKeys,
         disabledKeysSet,
-        allKeys,
+        allRowKeys,
       }),
     },
   };

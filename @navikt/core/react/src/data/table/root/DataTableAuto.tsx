@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
@@ -129,18 +129,21 @@ function DataTableAutoInner<T>(
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const resolvedGetRowId =
-    getRowId ??
-    (((_row: T, index: number) => index) as (rowData: T) => string | number);
+  const allRowKeys = useMemo(() => {
+    const resolvedGetRowId =
+      getRowId ??
+      (((_row: T, index: number) => index) as (rowData: T) => string | number);
 
-  const { selection, allKeys } = useTableSelection({
+    return data.map((item, index) => resolvedGetRowId(item, index));
+  }, [data, getRowId]);
+
+  const { selection } = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
     disabledSelectionKeys,
-    data,
-    getRowId: resolvedGetRowId,
+    allRowKeys,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
@@ -190,7 +193,7 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
-                const rowId = allKeys[rowIndex];
+                const rowId = allRowKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId} rowId={rowId}>
                     {columns.map(({ isSticky, colDef }, colDefIndex) => {
