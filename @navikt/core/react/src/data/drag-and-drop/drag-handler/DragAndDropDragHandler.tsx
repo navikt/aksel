@@ -51,15 +51,22 @@ export const DragAndDropDragHandler = React.forwardRef<
           onClick={() => context?.onKeyboardDragEnd(-1)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={context?.dragHandlerActive?.index === 0}
-          aria-label={`Flytt opp element ${item.index + 1}`} // TODO - Find better label?
+          aria-label={`Flytt opp element ${item.index + 1}`} // TODO - Nesessary label?
           type="button"
         >
           <CaretUpCircleFillIcon aria-hidden fontSize="1.8rem" />
         </button>
       )}
       <button
-        aria-label={`Dra for å flytte element ${item.index + 1}`} // TODO - Find better label?
+        // TODO - Bedre formulering av aria-label?
+        //aria-label={`Flytt element ${item.index + 1}. Trykk Enter eller Mellomrom for å aktivere, deretter piltastene for å flytte elementet.`}
+        aria-label={
+          active
+            ? `Flytt element ${item.index + 1}. Bruk piltastene for å flytte elementet.`
+            : `Flytt element ${item.index + 1}. Trykk Enter eller Mellomrom for å aktivere flytting.`
+        }
         aria-pressed={Boolean(active)}
+        aria-roledescription="draggable"
         type="button"
         className="aksel-data-drag-and-drop__drag-handler__button"
         data-drag-handler-active={active}
@@ -118,7 +125,7 @@ export const DragAndDropDragHandler = React.forwardRef<
           disabled={
             context?.dragHandlerActive?.index === context?.itemAmount - 1
           }
-          aria-label={`Flytt ned element ${item.index + 1}`} // TODO - Find better label?
+          aria-label={`Flytt ned element ${item.index + 1}`} // TODO - Nesessary label?
         >
           <CaretDownCircleFillIcon aria-hidden fontSize="1.8rem" />
         </button>

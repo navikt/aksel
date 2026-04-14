@@ -1,12 +1,13 @@
 import React, { forwardRef, useCallback, useEffect } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
-import { DragAndDropElement } from "../types";
+import { DragAndDropElement, DragAndDropItemData } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
 interface DragAndDropProps extends React.HTMLAttributes<HTMLUListElement> {
-  children: React.ReactElement<DragAndDropItemProps>[];
-  setItems: React.Dispatch<React.SetStateAction<any[]>>;
+  items: DragAndDropItemData[];
+  setItems: React.Dispatch<React.SetStateAction<DragAndDropItemData[]>>;
+  renderItem: (item: DragAndDropItemData, index: number) => React.ReactNode;
 }
 
 interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
@@ -40,15 +41,17 @@ interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
  * [ ] Talk to design about what should happen on ESC key press, currently just cancels dragging, should it also reset position?
  * [x] Make arrow icons into buttons that react to keyboard events, currently just decorative
  * [x] Keep handler focus after clicking arrows for dragging
- * [ ] Look into data-based API vs component-based API
+ * [x] Look into data-based API vs component-based API
  * [ ] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
- * [ ] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - should we build it for a future Aksel-component now or wait?
+ * [x] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - just for table for now
+ * [ ] Discuss items type
+ * [ ] Discuss how to implement label best
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 
 const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
-  ({ setItems, children }, forwardedRef) => {
+  ({ items, setItems, renderItem }, forwardedRef) => {
     const [activeItem, setActiveItem] =
       React.useState<DragAndDropElement | null>(null);
     const [dropTarget, setDropTarget] =
@@ -56,12 +59,11 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
     const [dragHandlerActive, setDragHandlerActive] =
       React.useState<DragAndDropElement | null>(null);
     const [overlayWidth, setOverlayWidth] = React.useState<number | null>(null);
+    const [announcement, setAnnouncement] = React.useState("");
+    const activeData = items.find((item) => item.id === activeItem?.id);
 
     const activeItemRef = React.useRef<DragAndDropElement | null>(null);
     const dropTargetRef = React.useRef<DragAndDropElement | null>(null);
-    const activeChild = children.find(
-      (child) => child.props.id === activeItem?.id,
-    );
 
     const [virtualRef, setVirtualRef] = React.useState({
       getBoundingClientRect: () =>
@@ -108,8 +110,8 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
 
     const reorderItems = useCallback(
       (fromIndex: number, toIndex: number) => {
-        setItems((items) => {
-          const newItems = [...items];
+        setItems((currentItems) => {
+          const newItems = [...currentItems];
           const [movedItem] = newItems.splice(fromIndex, 1);
           newItems.splice(toIndex, 0, movedItem);
           return newItems;
@@ -221,6 +223,9 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
 
         if (active && target && active.id !== target.id) {
           reorderItems(active.index, target.index);
+          setAnnouncement(
+            `Element flyttet til posisjon ${target?.index + 1} av ${items.length}`,
+          ); // TODO - Bedre formulering?
         }
 
         setOverlayWidth(null);
@@ -247,18 +252,26 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
         window.removeEventListener("pointerup", handlePointerUp);
         window.removeEventListener("pointercancel", handlePointerCancel);
       };
-    }, [setCombinedDropTarget, setCombinedActiveItem, reorderItems]);
+    }, [
+      setCombinedDropTarget,
+      setCombinedActiveItem,
+      reorderItems,
+      items.length,
+    ]);
 
     const onKeyboardDragEnd = (diff: number) => {
       if (!dragHandlerActive) return;
 
       const targetIndex = dragHandlerActive.index + diff;
-      if (targetIndex < 0 || targetIndex >= children.length) {
+      if (targetIndex < 0 || targetIndex >= items.length) {
         return;
       }
 
       reorderItems(dragHandlerActive.index, targetIndex);
       setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
+      setAnnouncement(
+        `Element flyttet til posisjon ${targetIndex + 1} av ${items.length}`,
+      ); // TODO - Bedre formulering?
     };
 
     return (
@@ -271,12 +284,18 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
         setDragHandlerActive={setDragHandlerActive}
         onKeyboardDragEnd={onKeyboardDragEnd}
         startPendingDrag={startPendingDrag}
-        itemAmount={children.length}
+        itemAmount={items.length}
       >
         <ul ref={forwardedRef} aria-label="Dra og slipp elementer">
-          {children}
+          {items.map((item, index) => {
+            return (
+              <DragAndDropItem key={item.id} id={item.id} index={index}>
+                {renderItem(item, index)}
+              </DragAndDropItem>
+            );
+          })}
         </ul>
-        {activeItem && activeChild && (
+        {activeItem && activeData && (
           <Floating>
             <Floating.Anchor virtualRef={virtualRef}>
               <span />
@@ -290,12 +309,23 @@ const DragAndDrop = forwardRef<HTMLUListElement, DragAndDropProps>(
                 width: overlayWidth ? `${overlayWidth}px` : "fit-content",
               }}
             >
-              {React.cloneElement(activeChild, {
-                isOverlay: true,
-              })}
+              <DragAndDropItem
+                id={activeItem.id}
+                index={activeItem.index}
+                isOverlay
+              >
+                {renderItem(activeData, activeItem.index)}
+              </DragAndDropItem>
             </Floating.Content>
           </Floating>
         )}
+        <div
+          aria-live="polite"
+          /* TODO - assertive ? */ className="sr-only"
+          aria-atomic="true"
+        >
+          {announcement}
+        </div>
       </DragAndDropProvider>
     );
   },
