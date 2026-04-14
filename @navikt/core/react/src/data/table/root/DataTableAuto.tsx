@@ -129,15 +129,15 @@ function DataTableAutoInner<T>(
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
+  const { tabIndex, setTableRef } = useTableKeyboardNav({
+    enabled: withKeyboardNav,
+    shouldBlockNavigation,
+  });
+
   const { sortState, onSortClick } = useTableSort({
     defaultSort,
     onSortChange,
     sort: sortProp,
-  });
-
-  const { tabIndex, setTableRef } = useTableKeyboardNav({
-    enabled: withKeyboardNav,
-    shouldBlockNavigation,
   });
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
@@ -202,7 +202,7 @@ function DataTableAutoInner<T>(
                       isSticky={isSticky}
                       sortable={colDef.sortable}
                       sortDirection={sortDirection}
-                      onSortClick={() => onSortClick(colDef.id)}
+                      onSortClick={(event) => onSortClick(colDef.id, event)}
                     >
                       {colDef.header}
                     </DataTableColumnHeader>
