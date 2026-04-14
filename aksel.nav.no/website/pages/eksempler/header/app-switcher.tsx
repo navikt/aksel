@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
+import { MenuGridIcon } from "@navikt/aksel-icons";
 import { ActionMenu, InternalHeader, Spacer, Theme } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -22,44 +22,19 @@ const Example = () => {
           <Theme theme={resolvedTheme as "light" | "dark"}>
             <ActionMenu.Content align="end">
               <ActionMenu.Group label="Systemer og oppslagsverk">
-                <ActionMenu.Item
-                  as="a"
-                  target="_blank"
-                  href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
-                >
+                <ActionMenu.Item as="a" target="_blank" href="#">
                   A.Inntekt
                 </ActionMenu.Item>
-                <ActionMenu.Item
-                  as="a"
-                  target="_blank"
-                  href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
-                >
+                <ActionMenu.Item as="a" target="_blank" href="#">
                   Aa-registeret
                 </ActionMenu.Item>
-                <ActionMenu.Item
-                  as="a"
-                  target="_blank"
-                  href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
-                >
+                <ActionMenu.Item as="a" target="_blank" href="#">
                   Gosys
                 </ActionMenu.Item>
-                <ActionMenu.Item
-                  as="a"
-                  target="_blank"
-                  href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
-                >
+                <ActionMenu.Item as="a" target="_blank" href="#">
                   Modia personoversikt
                 </ActionMenu.Item>
-                <ActionMenu.Item
-                  as="a"
-                  target="_blank"
-                  href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
-                >
+                <ActionMenu.Item as="a" target="_blank" href="#">
                   Oppdrag
                 </ActionMenu.Item>
               </ActionMenu.Group>
