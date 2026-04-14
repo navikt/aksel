@@ -16,6 +16,7 @@ type UseTableSelectionArgs = SelectionProps & {
 
 type UseTableSelectionReturn = {
   selection: TableSelection;
+  renderSelection: boolean;
 };
 
 function useTableSelection({
@@ -50,7 +51,12 @@ function useTableSelection({
 
   if (selectionMode === "none") {
     return {
-      selection: { selectionMode, ...baseSelection, selectedKeys: [] },
+      selection: {
+        selectionMode,
+        ...baseSelection,
+        selectedKeys: [],
+      },
+      renderSelection: false,
     };
   }
 
@@ -66,6 +72,7 @@ function useTableSelection({
           name: radioGroupName,
         }),
       },
+      renderSelection: allRowKeys.length !== 0,
     };
   }
 
@@ -81,6 +88,7 @@ function useTableSelection({
         allRowKeys,
       }),
     },
+    renderSelection: allRowKeys.length !== 0,
   };
 }
 

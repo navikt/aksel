@@ -224,7 +224,6 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
-        dataLength={0}
         stickySelection={false}
         stickyHeader={false}
       >

@@ -137,7 +137,7 @@ function DataTableAutoInner<T>(
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
 
-  const { selection } = useTableSelection({
+  const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
@@ -148,15 +148,14 @@ function DataTableAutoInner<T>(
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
     stickyColumns,
-    selectionMode: selection.selectionMode,
+    selectionMode: tableSelectionState.selection.selectionMode,
   });
 
   return (
     <DataTableContextProvider
       layout={layout}
       withKeyboardNav={withKeyboardNav}
-      selectionState={selection}
-      dataLength={data.length ?? 0}
+      selectionState={tableSelectionState}
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
     >

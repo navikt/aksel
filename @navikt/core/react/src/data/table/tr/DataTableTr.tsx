@@ -32,7 +32,9 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
     const renderFillerCell = layout === "fixed" && children;
 
-    const selected = selectionState?.isRowSelected(rowId ?? "") ?? selectedProp;
+    const selected =
+      selectionState?.selection.isRowSelected(rowId ?? "") ?? selectedProp;
+
     const isSticky = location === "thead" && stickyHeader;
 
     return (
@@ -63,21 +65,23 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
-  const { selectionState, dataLength, stickySelection } = useDataTableContext();
+  const { selectionState, stickySelection } = useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
 
-  if (
-    !selectionState ||
-    selectionState.selectionMode === "none" ||
-    dataLength === 0
-  ) {
+  if (!selectionState) {
+    return null;
+  }
+
+  const { selection, renderSelection } = selectionState;
+
+  if (selection.selectionMode === "none" || !renderSelection) {
     return null;
   }
 
   /* TODO: A11y support */
-  if (selectionState.selectionMode === "multiple" && location === "thead") {
-    const theadCheckboxProps = selectionState.getTheadCheckboxProps();
+  if (selection.selectionMode === "multiple" && location === "thead") {
+    const theadCheckboxProps = selection.getTheadCheckboxProps();
 
     let labelText = "Velg alle synlige rader";
     if (theadCheckboxProps.checked) {
@@ -99,7 +103,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     );
   }
 
-  if (selectionState.selectionMode === "single" && location === "thead") {
+  if (selection.selectionMode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
         width={SELECTION_CELL_WIDTH}
@@ -114,18 +118,18 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     return null;
   }
 
-  if (selectionState.selectionMode === "multiple" && location === "tbody") {
+  if (selection.selectionMode === "multiple" && location === "tbody") {
     return (
       <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
-        <CheckboxInput {...selectionState.getRowCheckboxProps(rowId)} compact />
+        <CheckboxInput {...selection.getRowCheckboxProps(rowId)} compact />
       </DataTableTd>
     );
   }
 
-  if (selectionState.selectionMode === "single" && location === "tbody") {
+  if (selection.selectionMode === "single" && location === "tbody") {
     return (
       <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
-        <RadioInput {...selectionState.getRowRadioProps(rowId)} />
+        <RadioInput {...selection.getRowRadioProps(rowId)} />
       </DataTableTd>
     );
   }
