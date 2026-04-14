@@ -623,3 +623,78 @@ export const SortableColumnsUncontrolled: Story = {
     );
   },
 };
+
+const rowClickSpy = fn();
+
+const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
+  { id: "id", header: "Id", cell: ({ id }) => id, type: "number" },
+  { id: "foo", header: "Foo", cell: ({ foo }) => foo },
+  {
+    id: "link",
+    header: "Link",
+    cell: ({ foo }) => (
+      <a href="/example" onClick={(e) => e.preventDefault()}>
+        {foo} link
+      </a>
+    ),
+  },
+  {
+    id: "button",
+    header: "Button",
+    cell: ({ foo }) => <button type="button">{foo} action</button>,
+  },
+  {
+    id: "text",
+    header: "Text",
+    cell: () => <input type="text" />,
+  },
+];
+
+export const RowClick: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => alert("Row clicked!")}
+      selectionMode="multiple"
+    />
+  ),
+};
+
+export const RowClickTest: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={rowClickSpy}
+      selectionMode="multiple"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    rowClickSpy.mockClear();
+    const canvas = within(canvasElement);
+
+    // Click a plain text cell — should fire onRowClick
+    const allCells = canvas.getAllByRole("cell");
+    await userEvent.click(allCells[1]); // "foo" cell of first row
+    expect(rowClickSpy).toHaveBeenCalledTimes(1);
+    rowClickSpy.mockClear();
+
+    // Click a link — should NOT fire onRowClick
+    const links = canvas.getAllByRole("link");
+    await userEvent.click(links[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a button — should NOT fire onRowClick
+    const buttons = canvas.getAllByRole("button");
+    await userEvent.click(buttons[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a checkbox — should NOT fire onRowClick
+    const inputs = canvas.getAllByRole("textbox");
+    await userEvent.click(inputs[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+  },
+};

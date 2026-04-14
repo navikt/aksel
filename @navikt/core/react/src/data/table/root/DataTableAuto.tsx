@@ -106,6 +106,15 @@ interface DataTableProps<T>
    */
   stickyHeader?: boolean;
   /**
+   * Callback invoked when a data row is clicked.
+   * Not called when clicking header, loading, or empty-state rows.
+   */
+  onRowClick?: (
+    rowData: T,
+    rowId: string | number,
+    event: React.MouseEvent<HTMLTableRowElement>,
+  ) => void;
+  /**
    * Content to render when `data` is empty.
    * Rendered inside a `DataTable.EmptyState` row spanning all columns.
    */
@@ -159,6 +168,7 @@ function DataTableAutoInner<T>(
     sort: sortProp,
     defaultSort = [],
     onSortChange,
+    onRowClick,
     emptyState,
     isLoading = false,
     loadingState,
@@ -260,6 +270,7 @@ function DataTableAutoInner<T>(
                 loadingRows={loadingRows}
                 loadingLabel={loadingLabel}
                 emptyState={emptyState}
+                onRowClick={onRowClick}
               />
             </DataTableTbody>
           </table>
@@ -278,6 +289,7 @@ interface DataTableAutoTBodyContentProps<T> {
   loadingRows: number;
   loadingLabel: string;
   emptyState: React.ReactNode;
+  onRowClick?: DataTableProps<T>["onRowClick"];
 }
 
 function DataTableAutoTBodyContent<T>({
@@ -289,6 +301,7 @@ function DataTableAutoTBodyContent<T>({
   loadingRows,
   loadingLabel,
   emptyState,
+  onRowClick,
 }: DataTableAutoTBodyContentProps<T>) {
   if (isLoading && loadingState !== undefined) {
     return (
@@ -335,7 +348,18 @@ function DataTableAutoTBodyContent<T>({
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
     return (
-      <DataTableTr key={rowId} rowId={rowId}>
+      <DataTableTr
+        key={rowId}
+        rowId={rowId}
+        onClick={(event) => {
+          if (!onRowClick || isInteractiveTarget(event.target)) {
+            return;
+          }
+
+          onRowClick(rowData, rowId, event);
+        }}
+        style={onRowClick ? { cursor: "pointer" } : undefined}
+      >
         {columns.map(({ isSticky, colDef }, colDefIndex) => {
           return (
             <DataTableBaseCell
@@ -352,6 +376,12 @@ function DataTableAutoTBodyContent<T>({
       </DataTableTr>
     );
   });
+}
+
+function isInteractiveTarget(target: EventTarget | null): boolean {
+  return !!(target as HTMLElement | null)?.closest(
+    "a, button, input, select, textarea",
+  );
 }
 
 const DataTableAuto = forwardRef(DataTableAutoInner) as <T>(
