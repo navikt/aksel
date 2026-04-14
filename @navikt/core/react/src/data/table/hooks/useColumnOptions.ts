@@ -45,3 +45,4 @@ function useColumnOptions<T>(
 }
 
 export { useColumnOptions };
+export type { UseColumnOptionsResult };

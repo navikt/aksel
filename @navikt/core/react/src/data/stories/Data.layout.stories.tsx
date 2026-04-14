@@ -189,3 +189,59 @@ export const AutoLayoutSortable: Story = {
     </DataTable>
   ),
 };
+
+export const FixedLayoutMinimal: Story = {
+  render: () => {
+    return (
+      <DataTable layout="fixed">
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Test</DataTable.Td>
+            <DataTable.Td>Example</DataTable.Td>
+            <DataTable.Td>Demo of small table</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    );
+  },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
+};
+
+export const FixedLayoutDynamicWidth: Story = {
+  render: () => {
+    return (
+      <DataTable layout="fixed">
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTableColumnHeader width="100%">Column 1</DataTableColumnHeader>
+            <DataTableColumnHeader width="100%">Column 2</DataTableColumnHeader>
+            <DataTableColumnHeader width="100%">Column 3</DataTableColumnHeader>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Test</DataTable.Td>
+            <DataTable.Td>Example</DataTable.Td>
+            <DataTable.Td>Demo of small table</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    );
+  },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
+};

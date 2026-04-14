@@ -5,7 +5,7 @@ type GetMultipleSelectPropsArgs = {
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeysSet: Set<string | number>;
-  allKeys: (string | number)[];
+  allRowKeys: (string | number)[];
 };
 
 function getMultipleSelectProps({
@@ -13,10 +13,10 @@ function getMultipleSelectProps({
   selectedKeys,
   setSelectedKeys,
   disabledKeysSet,
-  allKeys,
+  allRowKeys,
 }: GetMultipleSelectPropsArgs) {
-  const allKeysSet = new Set(allKeys);
-  const selectableKeys = allKeys.filter((k) => !disabledKeysSet.has(k));
+  const allRowKeysSet = new Set(allRowKeys);
+  const selectableKeys = allRowKeys.filter((k) => !disabledKeysSet.has(k));
 
   const selectedSelectableCount = selectableKeys.filter((k) =>
     selectedKeysSet.has(k),
@@ -30,7 +30,9 @@ function getMultipleSelectProps({
     selectedSelectableCount > 0 &&
     selectedSelectableCount < selectableKeys.length;
 
-  const selectedKeysNotInView = selectedKeys.filter((k) => !allKeysSet.has(k));
+  const selectedKeysNotInView = selectedKeys.filter(
+    (k) => !allRowKeysSet.has(k),
+  );
   const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
   const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
 

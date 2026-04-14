@@ -67,6 +67,15 @@
     position: sticky;
     top: 0;
     z-index: 3;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      bottom: -1px;
+      pointer-events: none;
+      border-bottom: 1px solid var(--ax-border-neutral-subtle);
+    }
   }
 }
 
@@ -84,6 +93,7 @@
     pointer-events: none;
     border: 1px solid var(--ax-border-neutral-subtle);
     border-radius: var(--ax-radius-12);
+    z-index: 3;
   }
 }
 
@@ -95,6 +105,7 @@
 }
 
 .aksel-data-table__thead {
+  position: relative; /* Shadow ends up behind loading/empty-state without, consider after-element instead like with sticky */
   box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
@@ -148,7 +159,7 @@
       right: 0;
     }
 
-    background-color: var(--ax-bg-default);
+    background-color: var(--ax-bg-raised);
 
     .aksel-data-table__thead & {
       background-color: var(--ax-bg-neutral-soft);
@@ -211,7 +222,6 @@
   display: flex;
   align-items: center;
   gap: var(--ax-space-2);
-  padding-inline-start: var(--ax-space-16);
   block-size: calc(var(--__axc-data-table-density) + 1.5rem);
   width: 100%;
   cursor: pointer;
@@ -253,7 +263,7 @@
 }
 
 .aksel-data-table__th-resize-handle {
-  z-index: 2;
+  z-index: 1;
   position: absolute;
   cursor: col-resize;
   margin: 0;
@@ -284,6 +294,13 @@
     transition: background 50ms linear;
   }
 
+  &:hover,
+  &:focus-visible,
+  &:active {
+    /* Avoids clipping when having sticky columns */
+    z-index: 3;
+  }
+
   &:hover::after {
     /* TODO: Consider if the resize-handle should be visible already when hovering the column header */
     background: var(--ax-bg-strong);
@@ -294,7 +311,7 @@
     background: var(--ax-bg-strong-pressed);
   }
 
-  .aksel-data-table__th:last-of-type & {
+  .aksel-data-table__column-header:last-of-type & {
     inset-inline-end: 0;
     width: 15px;
 

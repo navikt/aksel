@@ -1,5 +1,7 @@
+type SortDirection = "asc" | "desc" | "none";
+
 type ColumnDefinition<T> = {
-  id?: string;
+  id: string;
   width?: number | string;
   defaultWidth?: number | string;
   minWidth?: number | string;
@@ -27,8 +29,38 @@ type ColumnDefinition<T> = {
    * Renders table-cell
    */
   cell: (item: T) => React.ReactNode;
+  /**
+   * Makes the column sortable. Renders the header as a sort button.
+   * Use `sort` and `onSortChange` on the root component to control sort state.
+   */
+  sortable?: boolean;
 };
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];
 
-export type { ColumnDefinition, ColumnDefinitions };
+/**
+ * A single sort entry representing a column's current sort state.
+ * Absent from the `sort` array means the column is unsorted.
+ */
+type SortEntry = {
+  columnId: string;
+  direction: "asc" | "desc";
+};
+
+/**
+ * The column that changed in a sort operation, passed as the second argument
+ * to `onSortChange`. Useful for triggering targeted server-side sort requests.
+ */
+type SortChangeDetail = {
+  columnId: string;
+  /** The new direction for this column. `"none"` means the column was removed from the sort. */
+  direction: "asc" | "desc" | "none";
+};
+
+export type {
+  ColumnDefinition,
+  ColumnDefinitions,
+  SortDirection,
+  SortEntry,
+  SortChangeDetail,
+};
