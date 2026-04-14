@@ -12,9 +12,8 @@ import {
   DataTableBaseCell,
   type DataTableBaseCellProps,
 } from "../base-cell/DataTableBaseCell";
+import type { SortDirection } from "../root/DataTable.types";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
-
-type SortDirection = "asc" | "desc" | "none";
 
 interface DataTableColumnHeaderProps
   extends ResizeProps, DataTableBaseCellProps {
@@ -125,7 +124,7 @@ const DataTableColumnHeader = forwardRef<
         {sortable ? (
           <button
             className="aksel-data-table__th-sort-button"
-            onClick={sortable ? onSortClick : undefined}
+            onClick={onSortClick}
           >
             <div ref={contentRef} className="aksel-data-table__th-content">
               {children}

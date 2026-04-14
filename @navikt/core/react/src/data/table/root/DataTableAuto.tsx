@@ -10,6 +10,7 @@ import {
   type SelectionProps,
   useTableSelection,
 } from "../hooks/useTableSelection";
+import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
@@ -17,7 +18,10 @@ import type { ColumnDefinitions } from "./DataTable.types";
 import { DataTableContextProvider } from "./DataTableRoot.context";
 
 interface DataTableProps<T>
-  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
+  extends
+    React.HTMLAttributes<HTMLTableElement>,
+    SelectionProps,
+    TableSortOptions {
   children?: never;
   /**
    * Controls vertical cell padding.
@@ -118,10 +122,19 @@ function DataTableAutoInner<T>(
     getRowId,
     stickyColumns,
     stickyHeader = false,
+    sort: sortProp,
+    defaultSort = [],
+    onSortChange,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
+  const { sortState, onSortClick } = useTableSort({
+    defaultSort,
+    onSortChange,
+    sort: sortProp,
+  });
+
   const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled: withKeyboardNav,
     shouldBlockNavigation,
@@ -173,7 +186,11 @@ function DataTableAutoInner<T>(
           >
             <DataTableThead>
               <DataTableTr>
-                {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                {columns.map(({ isSticky, colDef }) => {
+                  const sortEntry = sortState.find(
+                    (s) => s.columnId === colDef.id,
+                  );
+                  const sortDirection = sortEntry?.direction ?? "none";
                   return (
                     <DataTableColumnHeader
                       maxWidth={colDef.maxWidth}
@@ -181,8 +198,11 @@ function DataTableAutoInner<T>(
                       width={colDef.width}
                       defaultWidth={colDef.defaultWidth ?? "100%"}
                       textAlign={colDef.type === "number" ? "right" : "left"}
-                      key={colDef.id || colDefIndex}
+                      key={colDef.id}
                       isSticky={isSticky}
+                      sortable={colDef.sortable}
+                      sortDirection={sortDirection}
+                      onSortClick={() => onSortClick(colDef.id)}
                     >
                       {colDef.header}
                     </DataTableColumnHeader>
