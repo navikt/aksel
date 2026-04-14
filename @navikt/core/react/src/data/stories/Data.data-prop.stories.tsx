@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
+import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
 import { DataTable } from "../table";
 import type {
@@ -224,6 +225,75 @@ export const EmptyData: Story = {
         data={[]}
         selectionMode="multiple"
       />
+    );
+  },
+};
+
+export const EmptyDataWithEmptyState: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={[]}
+        emptyState="Ingen data å vise"
+      />
+    );
+  },
+};
+
+export const LoadingWithSkeletonRows: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+          loadingRows={4}
+        />
+      </VStack>
+    );
+  },
+};
+
+export const LoadingWithLoadingState: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+          loadingState="Laster data..."
+        />
+      </VStack>
+    );
+  },
+};
+
+export const LoadingWhileKeepingData: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
+          loadingRows={4}
+        />
+      </VStack>
     );
   },
 };

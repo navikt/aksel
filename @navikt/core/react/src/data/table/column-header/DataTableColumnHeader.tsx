@@ -38,12 +38,6 @@ interface DataTableColumnHeaderProps
    * The consumer is responsible for determining and setting the next sort state.
    */
   onSortClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  render?: {
-    filterMenu?: {
-      title: string;
-      content: React.ReactNode;
-    };
-  };
 }
 
 const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
