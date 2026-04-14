@@ -18,27 +18,25 @@ type Story = StoryObj<typeof DragAndDrop>;
 export const Default: Story = {
   render: () => {
     const [items, setItems] = React.useState([
-      { id: "id", content: "Id" },
-      { id: "name", content: "Name" },
-      { id: "nationality", content: "Nationality" },
-      { id: "dayJob", content: "Day job" },
-      { id: "supervisor", content: "Supervisor" },
-      { id: "dateReceived", content: "Date received" },
-      { id: "message", content: "Message" },
-      { id: "age", content: "Age" },
-      { id: "forceSensitive", content: "Force sensitive" },
-      { id: "homeSystem", content: "Home system" },
-      { id: "skills", content: "Skills" },
+      { id: "id", label: "Id" },
+      { id: "name", label: "Name" },
+      { id: "nationality", label: "Nationality" },
+      { id: "dayJob", label: "Day job" },
+      { id: "supervisor", label: "Supervisor" },
+      { id: "dateReceived", label: "Date received" },
+      { id: "message", label: "Message" },
+      { id: "age", label: "Age" },
+      { id: "forceSensitive", label: "Force sensitive" },
+      { id: "homeSystem", label: "Home system" },
+      { id: "skills", label: "Skills" },
     ]);
 
     return (
-      <DragAndDrop setItems={setItems}>
-        {items.map((item, index) => (
-          <DragAndDrop.Item key={item.id} id={item.id} index={index}>
-            {item.content}
-          </DragAndDrop.Item>
-        ))}
-      </DragAndDrop>
+      <DragAndDrop
+        setItems={setItems}
+        items={items}
+        renderItem={(item) => item.label}
+      />
     );
   },
 };

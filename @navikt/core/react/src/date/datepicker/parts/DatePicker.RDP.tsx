@@ -221,6 +221,7 @@ const ReactDayPicker = ({
       startMonth={fromDate}
       endMonth={toDate}
       month={clampDisplayMonth({ month, start: fromDate, end: toDate })}
+      resetOnSelect // Range mode: Starts a new range when selecting a day even when a range is already selected
       {...omit(rest, ["onSelect", "role", "id", "defaultSelected"])}
     />
   );

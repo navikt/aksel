@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
@@ -122,39 +122,40 @@ function DataTableAutoInner<T>(
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
-  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
-
-  const { tabIndex } = useTableKeyboardNav(tableRef, {
+  const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled: withKeyboardNav,
     shouldBlockNavigation,
   });
 
-  const resolvedGetRowId =
-    getRowId ??
-    (((_row: T, index: number) => index) as (rowData: T) => string | number);
+  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const { selection, allKeys } = useTableSelection({
+  const allRowKeys = useMemo(() => {
+    const resolvedGetRowId =
+      getRowId ??
+      (((_row: T, index: number) => index) as (rowData: T) => string | number);
+
+    return data.map((item, index) => resolvedGetRowId(item, index));
+  }, [data, getRowId]);
+
+  const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
     disabledSelectionKeys,
-    data,
-    getRowId: resolvedGetRowId,
+    allRowKeys,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
     stickyColumns,
-    selectionMode: selection.selectionMode,
+    selectionMode: tableSelectionState.selection.selectionMode,
   });
 
   return (
     <DataTableContextProvider
       layout={layout}
       withKeyboardNav={withKeyboardNav}
-      selectionState={selection}
-      dataLength={data.length ?? 0}
+      selectionState={tableSelectionState}
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
     >
@@ -191,7 +192,7 @@ function DataTableAutoInner<T>(
             </DataTableThead>
             <DataTableTbody>
               {data.map((rowData, rowIndex) => {
-                const rowId = allKeys[rowIndex];
+                const rowId = allRowKeys[rowIndex];
                 return (
                   <DataTableTr key={rowId} rowId={rowId}>
                     {columns.map(({ isSticky, colDef }, colDefIndex) => {
