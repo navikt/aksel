@@ -1,23 +1,32 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useMemo } from "react";
+import { Skeleton } from "../../../skeleton";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
+import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
 import { useColumnOptions } from "../hooks/useColumnOptions";
+import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
   useTableSelection,
 } from "../hooks/useTableSelection";
+import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
+import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
 import { DataTableTbody } from "../tbody/DataTableTbody";
+import { DataTableTd } from "../td/DataTableTd";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
 import { DataTableContextProvider } from "./DataTableRoot.context";
 
 interface DataTableProps<T>
-  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
+  extends
+    React.HTMLAttributes<HTMLTableElement>,
+    SelectionProps,
+    TableSortOptions {
   children?: never;
   /**
    * Controls vertical cell padding.
@@ -86,8 +95,7 @@ interface DataTableProps<T>
   /**
    * Sticky columns that remain visible when horizontally scrolling the table.
    *
-   * You can specify up to 2 sticky columns on the left and 1 on the right.
-   * The values indicate how many columns from each side should be sticky.
+   * You can specify 1 sticky column on the left and 1 on the right.
    */
   stickyColumns?: {
     first?: "1";
@@ -97,6 +105,36 @@ interface DataTableProps<T>
    * @default false
    */
   stickyHeader?: boolean;
+  /**
+   * Content to render when `data` is empty.
+   * Rendered inside a `DataTable.EmptyState` row spanning all columns.
+   */
+  emptyState?: React.ReactNode;
+  /**
+   * Shows the table in a loading state.
+   *
+   * - When `loadingState` is provided, it is rendered inside a `DataTable.LoadingState` row.
+   * - When `loadingState` is **not** provided, skeleton placeholder rows are rendered instead.
+   * @default false
+   */
+  isLoading?: boolean;
+  /**
+   * Custom content to render when `isLoading` is `true`.
+   * Rendered inside a `DataTable.LoadingState` row spanning all columns.
+   * When omitted, skeleton rows are rendered based on `loadingRows`.
+   */
+  loadingState?: React.ReactNode;
+  /**
+   * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
+   * @default 5
+   */
+  loadingRows?: number;
+  /**
+   * Visually hidden label announced to screen readers when skeleton rows are shown.
+   * Only used when `isLoading` is `true` and no `loadingState` is provided.
+   * @default "Laster innhold"
+   */
+  loadingLabel?: string;
 }
 
 function DataTableAutoInner<T>(
@@ -118,6 +156,14 @@ function DataTableAutoInner<T>(
     getRowId,
     stickyColumns,
     stickyHeader = false,
+    sort: sortProp,
+    defaultSort = [],
+    onSortChange,
+    emptyState,
+    isLoading = false,
+    loadingState,
+    loadingRows = 5,
+    loadingLabel = "Laster innhold",
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -125,6 +171,12 @@ function DataTableAutoInner<T>(
   const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled: withKeyboardNav,
     shouldBlockNavigation,
+  });
+
+  const { sortState, onSortClick } = useTableSort({
+    defaultSort,
+    onSortChange,
+    sort: sortProp,
   });
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
@@ -170,10 +222,15 @@ function DataTableAutoInner<T>(
             data-density={rowDensity}
             data-layout={layout}
             tabIndex={tabIndex}
+            aria-busy={isLoading || undefined}
           >
             <DataTableThead>
               <DataTableTr>
-                {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                {columns.map(({ isSticky, colDef }) => {
+                  const sortEntry = sortState.find(
+                    (s) => s.columnId === colDef.id,
+                  );
+                  const sortDirection = sortEntry?.direction ?? "none";
                   return (
                     <DataTableColumnHeader
                       maxWidth={colDef.maxWidth}
@@ -181,8 +238,11 @@ function DataTableAutoInner<T>(
                       width={colDef.width}
                       defaultWidth={colDef.defaultWidth ?? "100%"}
                       textAlign={colDef.type === "number" ? "right" : "left"}
-                      key={colDef.id || colDefIndex}
+                      key={colDef.id}
                       isSticky={isSticky}
+                      sortable={colDef.sortable}
+                      sortDirection={sortDirection}
+                      onSortClick={(event) => onSortClick(colDef.id, event)}
                     >
                       {colDef.header}
                     </DataTableColumnHeader>
@@ -191,34 +251,107 @@ function DataTableAutoInner<T>(
               </DataTableTr>
             </DataTableThead>
             <DataTableTbody>
-              {data.map((rowData, rowIndex) => {
-                const rowId = allRowKeys[rowIndex];
-                return (
-                  <DataTableTr key={rowId} rowId={rowId}>
-                    {columns.map(({ isSticky, colDef }, colDefIndex) => {
-                      return (
-                        <DataTableBaseCell
-                          /* TODO: Make this configurable */
-                          textAlign={
-                            colDef.type === "number" ? "right" : "left"
-                          }
-                          key={colDef.id || colDefIndex}
-                          as={colDef.isRowHeader ? "th" : "td"}
-                          isSticky={isSticky}
-                        >
-                          {colDef.cell(rowData)}
-                        </DataTableBaseCell>
-                      );
-                    })}
-                  </DataTableTr>
-                );
-              })}
+              <DataTableAutoTBodyContent
+                columns={columns}
+                data={data}
+                allRowKeys={allRowKeys}
+                isLoading={isLoading}
+                loadingState={loadingState}
+                loadingRows={loadingRows}
+                loadingLabel={loadingLabel}
+                emptyState={emptyState}
+              />
             </DataTableTbody>
           </table>
         </div>
       </div>
     </DataTableContextProvider>
   );
+}
+
+interface DataTableAutoTBodyContentProps<T> {
+  columns: UseColumnOptionsResult<T>["columns"];
+  data: T[];
+  allRowKeys: (string | number)[];
+  isLoading: boolean;
+  loadingState: React.ReactNode;
+  loadingRows: number;
+  loadingLabel: string;
+  emptyState: React.ReactNode;
+}
+
+function DataTableAutoTBodyContent<T>({
+  columns,
+  data,
+  allRowKeys,
+  isLoading,
+  loadingState,
+  loadingRows,
+  loadingLabel,
+  emptyState,
+}: DataTableAutoTBodyContentProps<T>) {
+  if (isLoading && loadingState !== undefined) {
+    return (
+      <DataTableLoadingState colSpan={columns.length}>
+        {loadingState}
+      </DataTableLoadingState>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <DataTableTr>
+          <DataTableTd colSpan={columns.length} className="aksel-sr-only">
+            {loadingLabel}
+          </DataTableTd>
+        </DataTableTr>
+        {Array.from({ length: loadingRows }, (_, rowIndex) => (
+          <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
+            {columns.map(({ isSticky, colDef }, colDefIndex) => (
+              <DataTableBaseCell
+                textAlign={colDef.type === "number" ? "right" : "left"}
+                key={colDef.id || colDefIndex}
+                as={colDef.isRowHeader ? "th" : "td"}
+                isSticky={isSticky}
+              >
+                <Skeleton variant="text" />
+              </DataTableBaseCell>
+            ))}
+          </DataTableTr>
+        ))}
+      </>
+    );
+  }
+
+  if (data.length === 0 && emptyState !== undefined) {
+    return (
+      <DataTableEmptyState colSpan={columns.length}>
+        {emptyState}
+      </DataTableEmptyState>
+    );
+  }
+
+  return data.map((rowData, rowIndex) => {
+    const rowId = allRowKeys[rowIndex];
+    return (
+      <DataTableTr key={rowId} rowId={rowId}>
+        {columns.map(({ isSticky, colDef }, colDefIndex) => {
+          return (
+            <DataTableBaseCell
+              /* TODO: Make this configurable */
+              textAlign={colDef.type === "number" ? "right" : "left"}
+              key={colDef.id || colDefIndex}
+              as={colDef.isRowHeader ? "th" : "td"}
+              isSticky={isSticky}
+            >
+              {colDef.cell(rowData)}
+            </DataTableBaseCell>
+          );
+        })}
+      </DataTableTr>
+    );
+  });
 }
 
 const DataTableAuto = forwardRef(DataTableAutoInner) as <T>(
