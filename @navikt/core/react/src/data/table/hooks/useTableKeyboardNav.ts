@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useEventCallback } from "../../../utils/hooks";
 import { focusInitialTableTarget } from "../helpers/table-cell";
 import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
@@ -25,10 +25,11 @@ type UseTableKeyboardNavOptions = {
   shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
 };
 
-function useTableKeyboardNav(
-  tableRef: HTMLTableElement | null,
-  { enabled, shouldBlockNavigation: customBlockFn }: UseTableKeyboardNavOptions,
-) {
+function useTableKeyboardNav({
+  enabled,
+  shouldBlockNavigation: customBlockFn,
+}: UseTableKeyboardNavOptions) {
+  const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
   const { getTableGrid, activeCell, setActiveCell } = useGridCache(
     tableRef,
     enabled,
@@ -173,6 +174,7 @@ function useTableKeyboardNav(
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
     tabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
+    setTableRef,
   };
 }
 

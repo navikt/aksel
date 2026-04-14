@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
@@ -122,13 +122,12 @@ function DataTableAutoInner<T>(
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
-  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
-
-  const { tabIndex } = useTableKeyboardNav(tableRef, {
+  const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled: withKeyboardNav,
     shouldBlockNavigation,
   });
+
+  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const resolvedGetRowId =
     getRowId ??
