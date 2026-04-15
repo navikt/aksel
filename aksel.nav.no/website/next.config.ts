@@ -25,7 +25,7 @@ const cspHeader = `
     frame-src 'self' localhost:3000 http://localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
-    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io https://sanity-cdn.com *.api.sanity.io https://reops-event-proxy.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
+    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io https://sanity-cdn.com *.api.sanity.io https://reops-event-proxy.ekstern.dev.nav.no https://reops-event-proxy.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
     ${isProduction ? "upgrade-insecure-requests;" : ""}
 `;
 
@@ -67,9 +67,7 @@ const nextConfig: NextConfig = {
     UMAMI_TRACKING_ID: isProduction
       ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
-    UMAMI_HOST_URL: isProduction
-      ? "https://reops-event-proxy.nav.no"
-      : "https://reops-event-proxy.ekstern.dev.nav.no",
+    PRODUCTION: isProduction ? "true" : "false",
   },
   cacheHandler: require.resolve("./cache-handler.mjs"),
   cacheMaxMemorySize: 0,

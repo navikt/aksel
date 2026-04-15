@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Events } from "@navikt/analytics-types";
 import { Link } from "@navikt/ds-react";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
@@ -20,7 +21,11 @@ function WebsiteLink({ href, children }: Props) {
       href={href}
       inlineText
       onClick={() =>
-        umamiTrack("navigere", { kilde: "inline lenke", url: href })
+        umamiTrack(Events.NAVIGERE, {
+          lenketekst: typeof children === "string" ? children : href,
+          destinasjon: href,
+          lenkegruppe: "inline lenke",
+        })
       }
       {...(isOutbound
         ? {

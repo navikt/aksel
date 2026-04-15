@@ -1,6 +1,5 @@
 import { PortableTextBlock, stegaClean } from "next-sanity";
 import {
-  ExpansionCard,
   ExpansionCardContent,
   ExpansionCardDescription,
   ExpansionCardHeader,
@@ -8,6 +7,7 @@ import {
 } from "@navikt/ds-react/ExpansionCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import { WebsiteExpansionCardTracked } from "./WebsiteExpansionCardTracked";
 
 const cardSize = {
   h2: "large",
@@ -25,11 +25,7 @@ function WebsiteExpansionCard(
   }
 
   return (
-    <ExpansionCard
-      id="aksel-expansioncard"
-      aria-label={heading}
-      data-block-margin="space-28"
-    >
+    <WebsiteExpansionCardTracked heading={heading}>
       <ExpansionCardHeader>
         <ExpansionCardTitle
           as={stegaClean(heading_level)}
@@ -44,7 +40,7 @@ function WebsiteExpansionCard(
       <ExpansionCardContent>
         <CustomPortableText value={body as PortableTextBlock[]} />
       </ExpansionCardContent>
-    </ExpansionCard>
+    </WebsiteExpansionCardTracked>
   );
 }
 
