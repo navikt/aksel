@@ -19,6 +19,7 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLLIElement> {
    * Indicates if the item is an overlay
    */
   isOverlay?: boolean;
+  itemLabel: string;
 }
 
 /**
@@ -34,7 +35,7 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLLIElement> {
  */
 const DragAndDropItem = React.forwardRef<HTMLLIElement, DragAndDropItemProps>(
   (
-    { children, id, index, className, isOverlay = false, ...rest },
+    { children, id, index, className, isOverlay = false, itemLabel, ...rest },
     forwardedRef,
   ) => {
     const ref = React.useRef<HTMLLIElement>(null);
@@ -66,6 +67,7 @@ const DragAndDropItem = React.forwardRef<HTMLLIElement, DragAndDropItemProps>(
             item={item}
             itemRef={ref}
             isOverlay={isOverlay}
+            itemLabel={itemLabel}
           />
           <div>{children}</div>
         </li>

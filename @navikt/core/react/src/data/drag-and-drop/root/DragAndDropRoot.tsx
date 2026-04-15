@@ -287,7 +287,12 @@ function DragAndDropInner<T>(
       <ul ref={forwardedRef} aria-label="Dra og slipp elementer">
         {items.map((item, index) => {
           return (
-            <DragAndDropItem key={item.id} id={item.id} index={index}>
+            <DragAndDropItem
+              key={item.id}
+              id={item.id}
+              index={index}
+              itemLabel={item.label}
+            >
               {renderItem(item, index)}
             </DragAndDropItem>
           );
@@ -311,6 +316,7 @@ function DragAndDropInner<T>(
               id={activeItem.id}
               index={activeItem.index}
               isOverlay
+              itemLabel={activeData.label}
             >
               {renderItem(activeData, activeItem.index)}
             </DragAndDropItem>
