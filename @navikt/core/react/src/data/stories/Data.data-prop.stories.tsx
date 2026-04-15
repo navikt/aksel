@@ -564,10 +564,23 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     cell: ({ id }) => id,
     type: "number",
     sortable: true,
+    label: "Id",
   },
-  { id: "foo", header: "Foo", cell: ({ foo }) => foo, sortable: true },
-  { id: "name", header: "Name", cell: ({ name }) => name, sortable: true },
-  { id: "bar", header: "Bar", cell: ({ bar }) => bar },
+  {
+    id: "foo",
+    header: "Foo",
+    cell: ({ foo }) => foo,
+    sortable: true,
+    label: "Foo",
+  },
+  {
+    id: "name",
+    header: "Name",
+    cell: ({ name }) => name,
+    sortable: true,
+    label: "Name",
+  },
+  { id: "bar", header: "Bar", cell: ({ bar }) => bar, label: "Bar" },
 ];
 
 function applySortEntries<T extends Record<string, unknown>>(
@@ -632,11 +645,12 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, type: "number" },
-  { id: "foo", header: "Foo", cell: ({ foo }) => foo },
+  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
   {
     id: "link",
     header: "Link",
+    label: "Link",
     cell: ({ foo }) => (
       <a href="/example" onClick={(e) => e.preventDefault()}>
         {foo} link
@@ -646,11 +660,13 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "button",
     header: "Button",
+    label: "Button",
     cell: ({ foo }) => <button type="button">{foo} action</button>,
   },
   {
     id: "text",
     header: "Text",
+    label: "Text",
     cell: () => <input type="text" />,
   },
 ];
