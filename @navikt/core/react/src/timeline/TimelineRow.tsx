@@ -4,7 +4,10 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../typography/BodyShort";
 import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
-import { useTimelineKeyboardContext } from "./hooks/TimelineKeyboardNavProvider";
+import {
+  useTimelineKeyboardActiveRow,
+  useTimelineKeyboardContext,
+} from "./hooks/TimelineKeyboardNavProvider";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import Period from "./period";
@@ -51,8 +54,8 @@ export interface TimelineRowType extends React.ForwardRefExoticComponent<
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
     const { periods } = useRowContext();
-    const { updateActiveRow, handleRowKeyDown, activeRow } =
-      useTimelineKeyboardContext();
+    const { updateActiveRow, handleRowKeyDown } = useTimelineKeyboardContext();
+    const { activeRow } = useTimelineKeyboardActiveRow();
     const translate = useI18n("Timeline");
 
     const [elementRefState, setElementRefState] =

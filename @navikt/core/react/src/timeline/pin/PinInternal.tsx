@@ -91,11 +91,6 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
             {...getReferenceProps({
               onKeyDown: (e) => {
                 rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
-                if (e.key === "Enter") {
-                  setOpen((prev) => !prev);
-                } else if (e.key === " ") {
-                  setOpen(false);
-                }
                 handlePinKeyDown(e);
               },
             })}

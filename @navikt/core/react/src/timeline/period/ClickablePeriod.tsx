@@ -107,7 +107,7 @@ const ClickablePeriod = React.memo(
           aria-current={isActive || undefined}
           {...getReferenceProps({
             onKeyDown: (e) => {
-              restProps?.onKeydown?.(e);
+              restProps?.onKeyDown?.(e);
               if (e.key === " ") {
                 onSelectPeriod?.(e);
               }
