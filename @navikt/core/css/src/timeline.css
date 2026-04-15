@@ -73,6 +73,7 @@
 }
 
 .aksel-timeline__period {
+  container-type: inline-size;
   height: 100%;
   border-radius: var(--ax-radius-full);
   position: absolute;
@@ -98,7 +99,7 @@
 }
 
 .aksel-timeline__period--inner {
-  margin: 0 var(--ax-space-8);
+  margin: 0 clamp(var(--ax-space-4), 17cqi, var(--ax-space-8));
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;
@@ -109,6 +110,12 @@
 
 .aksel-timeline__period--inner svg {
   flex-shrink: 0;
+}
+
+@container (inline-size < 1.5rem) {
+  .aksel-timeline__period--inner svg {
+    display: none;
+  }
 }
 
 .aksel-timeline__period--clickable {
