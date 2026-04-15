@@ -5,6 +5,7 @@ import {
   offset,
   safePolygon,
   shift,
+  useClick,
   useDismiss,
   useFloating,
   useFocus,
@@ -56,8 +57,10 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
+    const click = useClick(context);
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
+      click,
       hover,
       focus,
       dismiss,
