@@ -24,11 +24,15 @@ type ColumnDefinition<T> = {
   /**
    * Renders table header-cell
    */
-  header: React.ReactNode;
+  header?: React.ReactNode;
   /**
    * Renders table-cell
    */
   cell: (item: T) => React.ReactNode;
+  /**
+   * Label of header. Renders if header is not provided.
+   */
+  label: string;
   /**
    * Makes the column sortable. Renders the header as a sort button.
    * Use `sort` and `onSortChange` on the root component to control sort state.

@@ -39,6 +39,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "id",
     header: "Id",
+    label: "Id",
     cell: ({ id }) => id,
     type: "number",
     defaultWidth: "100px",
@@ -46,11 +47,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "foo",
     header: "Foo",
+    label: "Foo",
     cell: ({ foo }) => foo,
   },
   {
     id: "bar",
     header: "Bar",
+    label: "Bar",
     cell: ({ bar }) => (
       <Tag variant="strong" size="xsmall">
         {bar}
@@ -60,11 +63,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "on",
     header: "Boolean demo",
+    label: "Boolean demo",
     cell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
     id: "time",
     header: "Time",
+    label: "Time",
     cell: ({ time }) => time.toISOString(),
   },
 ];
