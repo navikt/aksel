@@ -19,9 +19,12 @@ const {
 
 type TimelineKeyboardNavProviderProps = {
   children: React.ReactNode;
+  timelineElement: HTMLDivElement | null;
 };
 
 function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
+  const { timelineElement } = props;
+
   const [activeRow, setActiveRow] = React.useState<HTMLElement | null>(null);
 
   const updateActiveRow = (element: HTMLElement | null) => {
@@ -36,6 +39,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
     const { key } = event;
 
     if (key === "ArrowDown" || key === "ArrowUp") {
+      event.preventDefault();
       const rows = activeRow.parentElement?.querySelectorAll(
         "[data-timeline-row]",
       );
@@ -48,6 +52,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       }
 
       const currentIndex = Array.from(rows).indexOf(activeRow);
+      if (currentIndex === -1) {
+        return;
+      }
+
       const atBoundary = currentIndex === 0 && key === "ArrowUp";
 
       if (atBoundary && firstPin) {
@@ -75,6 +83,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
     }
 
     if (key === "ArrowRight" || key === "ArrowLeft") {
+      event.preventDefault();
       const periods = activeRow.querySelectorAll("[data-timeline-period]");
       if (periods.length === 0) {
         return;
@@ -83,6 +92,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       const currentIndex = Array.from(periods).indexOf(
         document.activeElement as HTMLElement,
       );
+      if (currentIndex === -1) {
+        return;
+      }
+
       const nextIndex =
         key === "ArrowRight" ? currentIndex + 1 : currentIndex - 1;
 
@@ -95,10 +108,15 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
   };
 
   const handlePinKeyDown = (event: React.KeyboardEvent<Element>) => {
+    if (!timelineElement) {
+      return;
+    }
+
     const { key } = event;
 
     if (key === "ArrowDown") {
-      const rows = document.querySelectorAll("[data-timeline-row]");
+      event.preventDefault();
+      const rows = timelineElement.querySelectorAll("[data-timeline-row]");
       if (rows.length === 0) {
         return;
       }
@@ -116,7 +134,8 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
     }
 
     if (key === "ArrowRight" || key === "ArrowLeft") {
-      const pins = document.querySelectorAll("[data-timeline-pin]");
+      event.preventDefault();
+      const pins = timelineElement.querySelectorAll("[data-timeline-pin]");
       if (pins.length === 0) {
         return;
       }
@@ -124,6 +143,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       const currentIndex = Array.from(pins).indexOf(
         document.activeElement as HTMLElement,
       );
+      if (currentIndex === -1) {
+        return;
+      }
+
       const nextIndex =
         key === "ArrowRight" ? currentIndex + 1 : currentIndex - 1;
 
