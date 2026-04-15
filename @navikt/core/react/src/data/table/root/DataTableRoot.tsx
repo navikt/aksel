@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
@@ -213,19 +213,17 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     },
     forwardedRef,
   ) => {
-    const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
-    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
-
-    const { tabIndex } = useTableKeyboardNav(tableRef, {
+    const { tabIndex, setTableRef } = useTableKeyboardNav({
       enabled: withKeyboardNav,
       shouldBlockNavigation,
     });
+
+    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
     return (
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
-        dataLength={0}
         stickySelection={false}
         stickyHeader={false}
       >

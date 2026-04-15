@@ -2,9 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
+import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
 import { DataTable } from "../table";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import type {
+  ColumnDefinitions,
+  SortEntry,
+} from "../table/root/DataTable.types";
 import DataTableAuto from "../table/root/DataTableAuto";
 
 const meta: Meta<typeof DataTable> = {
@@ -35,6 +39,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "id",
     header: "Id",
+    label: "Id",
     cell: ({ id }) => id,
     type: "number",
     defaultWidth: "100px",
@@ -42,11 +47,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "foo",
     header: "Foo",
+    label: "Foo",
     cell: ({ foo }) => foo,
   },
   {
     id: "bar",
     header: "Bar",
+    label: "Bar",
     cell: ({ bar }) => (
       <Tag variant="strong" size="xsmall">
         {bar}
@@ -56,11 +63,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "on",
     header: "Boolean demo",
+    label: "Boolean demo",
     cell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
     id: "time",
     header: "Time",
+    label: "Time",
     cell: ({ time }) => time.toISOString(),
   },
 ];
@@ -221,6 +230,75 @@ export const EmptyData: Story = {
         data={[]}
         selectionMode="multiple"
       />
+    );
+  },
+};
+
+export const EmptyDataWithEmptyState: Story = {
+  render: () => {
+    return (
+      <DataTableAuto
+        columnDefinitions={userColumnDef}
+        data={[]}
+        emptyState="Ingen data å vise"
+      />
+    );
+  },
+};
+
+export const LoadingWithSkeletonRows: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+          loadingRows={4}
+        />
+      </VStack>
+    );
+  },
+};
+
+export const LoadingWithLoadingState: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+          loadingState="Laster data..."
+        />
+      </VStack>
+    );
+  },
+};
+
+export const LoadingWhileKeepingData: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
+          loadingRows={4}
+        />
+      </VStack>
     );
   },
 };
@@ -439,5 +517,205 @@ export const StickyHeaderAndColumns: Story = {
         />
       </div>
     );
+  },
+};
+
+type SortableUserDataTest = UserDataTest & { name: string };
+
+const sortableUserData: SortableUserDataTest[] = [
+  {
+    id: 3,
+    foo: "banana",
+    bar: "bar3",
+    on: true,
+    time: new Date(),
+    name: "Charlie",
+  },
+  {
+    id: 1,
+    foo: "apple",
+    bar: "bar1",
+    on: false,
+    time: new Date(),
+    name: "Alice",
+  },
+  {
+    id: 4,
+    foo: "cherry",
+    bar: "bar4",
+    on: true,
+    time: new Date(),
+    name: "Dave",
+  },
+  {
+    id: 2,
+    foo: "apple",
+    bar: "bar2",
+    on: false,
+    time: new Date(),
+    name: "Bob",
+  },
+];
+
+const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
+  {
+    id: "id",
+    header: "Id",
+    cell: ({ id }) => id,
+    type: "number",
+    sortable: true,
+    label: "Id",
+  },
+  {
+    id: "foo",
+    header: "Foo",
+    cell: ({ foo }) => foo,
+    sortable: true,
+    label: "Foo",
+  },
+  {
+    id: "name",
+    header: "Name",
+    cell: ({ name }) => name,
+    sortable: true,
+    label: "Name",
+  },
+  { id: "bar", header: "Bar", cell: ({ bar }) => bar, label: "Bar" },
+];
+
+function applySortEntries<T extends Record<string, unknown>>(
+  data: T[],
+  sort: SortEntry[],
+): T[] {
+  if (sort.length === 0) return data;
+  return [...data].sort((a, b) => {
+    for (const { columnId, direction } of sort) {
+      const aVal = a[columnId] as string | number;
+      const bVal = b[columnId] as string | number;
+      const cmp = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+      if (cmp !== 0) return direction === "asc" ? cmp : -cmp;
+    }
+    return 0;
+  });
+}
+
+export const SortableColumns: Story = {
+  render: () => {
+    const [sort, setSort] = useState<SortEntry[]>([]);
+    const sortedData = applySortEntries(sortableUserData, sort);
+
+    return (
+      <DataTableAuto
+        columnDefinitions={sortableColumnDef}
+        data={sortedData}
+        getRowId={(row) => row.id}
+        sort={sort}
+        onSortChange={(next, detail) => {
+          console.info("changed column:", detail);
+          setSort(next);
+        }}
+      />
+    );
+  },
+};
+
+export const SortableColumnsUncontrolled: Story = {
+  render: () => {
+    const [loggedDetail, setLoggedDetail] = useState<string>("");
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        {loggedDetail && (
+          <pre style={{ fontSize: "0.75rem" }}>{loggedDetail}</pre>
+        )}
+        <DataTableAuto
+          columnDefinitions={sortableColumnDef}
+          data={sortableUserData}
+          getRowId={(row) => row.id}
+          defaultSort={[{ columnId: "name", direction: "asc" }]}
+          onSortChange={(_sort, detail) =>
+            setLoggedDetail(JSON.stringify(detail, null, 2))
+          }
+        />
+      </div>
+    );
+  },
+};
+
+const rowClickSpy = fn();
+
+const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
+  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
+  {
+    id: "link",
+    header: "Link",
+    label: "Link",
+    cell: ({ foo }) => (
+      <a href="/example" onClick={(e) => e.preventDefault()}>
+        {foo} link
+      </a>
+    ),
+  },
+  {
+    id: "button",
+    header: "Button",
+    label: "Button",
+    cell: ({ foo }) => <button type="button">{foo} action</button>,
+  },
+  {
+    id: "text",
+    header: "Text",
+    label: "Text",
+    cell: () => <input type="text" />,
+  },
+];
+
+export const RowClick: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => alert("Row clicked!")}
+      selectionMode="multiple"
+    />
+  ),
+};
+
+export const RowClickTest: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={rowClickSpy}
+      selectionMode="multiple"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    rowClickSpy.mockClear();
+    const canvas = within(canvasElement);
+
+    // Click a plain text cell — should fire onRowClick
+    const allCells = canvas.getAllByRole("cell");
+    await userEvent.click(allCells[1]); // "foo" cell of first row
+    expect(rowClickSpy).toHaveBeenCalledTimes(1);
+    rowClickSpy.mockClear();
+
+    // Click a link — should NOT fire onRowClick
+    const links = canvas.getAllByRole("link");
+    await userEvent.click(links[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a button — should NOT fire onRowClick
+    const buttons = canvas.getAllByRole("button");
+    await userEvent.click(buttons[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a checkbox — should NOT fire onRowClick
+    const inputs = canvas.getAllByRole("textbox");
+    await userEvent.click(inputs[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
   },
 };

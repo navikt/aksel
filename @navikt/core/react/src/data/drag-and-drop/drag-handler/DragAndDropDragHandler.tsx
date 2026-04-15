@@ -11,6 +11,7 @@ export interface DragAndDropDragHandlerProps {
   item: DragAndDropElement;
   itemRef: React.RefObject<HTMLLIElement | null>;
   isOverlay: boolean;
+  itemLabel: string;
 }
 
 /**
@@ -22,7 +23,7 @@ export interface DragAndDropDragHandlerProps {
 export const DragAndDropDragHandler = React.forwardRef<
   HTMLDivElement,
   DragAndDropDragHandlerProps
->(({ item, itemRef, isOverlay }, forwardedRef) => {
+>(({ item, itemRef, isOverlay, itemLabel }, forwardedRef) => {
   const context = useDragAndDropContext();
   const active =
     context?.dragHandlerActive &&
@@ -51,15 +52,21 @@ export const DragAndDropDragHandler = React.forwardRef<
           onClick={() => context?.onKeyboardDragEnd(-1)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={context?.dragHandlerActive?.index === 0}
-          aria-label={`Flytt opp element ${item.index + 1}`} // TODO - Find better label?
           type="button"
         >
           <CaretUpCircleFillIcon aria-hidden fontSize="1.8rem" />
         </button>
       )}
       <button
-        aria-label={`Dra for å flytte element ${item.index + 1}`} // TODO - Find better label?
+        // TODO - Bedre formulering av aria-label?
+        //aria-label={`Flytt element ${item.index + 1}. Trykk Enter eller Mellomrom for å aktivere, deretter piltastene for å flytte elementet.`}
+        aria-label={
+          active
+            ? `Flytt element ${itemLabel || item.index + 1}. Bruk piltastene for å flytte elementet.`
+            : `Flytt element ${itemLabel || item.index + 1}. Trykk Enter eller Mellomrom for å aktivere flytting.`
+        }
         aria-pressed={Boolean(active)}
+        aria-roledescription="draggable"
         type="button"
         className="aksel-data-drag-and-drop__drag-handler__button"
         data-drag-handler-active={active}
@@ -118,7 +125,6 @@ export const DragAndDropDragHandler = React.forwardRef<
           disabled={
             context?.dragHandlerActive?.index === context?.itemAmount - 1
           }
-          aria-label={`Flytt ned element ${item.index + 1}`} // TODO - Find better label?
         >
           <CaretDownCircleFillIcon aria-hidden fontSize="1.8rem" />
         </button>

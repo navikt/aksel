@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.27.8",
+    "@navikt/analytics-types": "0.0.7",
     "@navikt/next-logger": "4.4.1",
     "@navikt/oasis": "3.2.1",
     "@neshca/cache-handler": "1.9.0",

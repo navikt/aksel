@@ -1,12 +1,11 @@
 import { createStrictContext } from "../../../utils/helpers";
-import type { TableSelection } from "../helpers/selection/selection.types";
+import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 
 type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
   /* TODO: Temp optional, should be required */
-  selectionState?: TableSelection;
-  dataLength: number;
+  selectionState?: UseTableSelectionReturn;
   stickySelection: boolean;
   stickyHeader: boolean;
 };
