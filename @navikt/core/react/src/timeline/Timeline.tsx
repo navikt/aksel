@@ -133,7 +133,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
     const [start, setStart] = useState(initialStartDate);
-    const [activeRow] = useState<number | null>(null);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows })),
     );
@@ -178,7 +177,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
-          activeRow,
         }}
       >
         <TimelineKeyboardNavProvider timelineElement={timelineElement}>

@@ -105,6 +105,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
           >
             <div
               className="aksel-timeline__popover"
+              data-timeline-popover
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"

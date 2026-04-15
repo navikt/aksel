@@ -54,6 +54,11 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         return;
       }
 
+      /* Skip interaction of focus is inside popover */
+      if (document.activeElement?.closest("[data-timeline-popover]")) {
+        return;
+      }
+
       const { key } = event;
 
       if (key === "ArrowDown" || key === "ArrowUp") {
@@ -133,6 +138,11 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
     (event: React.KeyboardEvent<Element>) => {
       const timelineEl = timelineElementRef.current;
       if (!timelineEl) {
+        return;
+      }
+
+      /* Skip interaction of focus is inside popover */
+      if (document.activeElement?.closest("[data-timeline-popover]")) {
         return;
       }
 
