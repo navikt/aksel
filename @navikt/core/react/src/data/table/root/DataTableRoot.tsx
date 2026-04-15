@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
@@ -226,6 +227,8 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         withKeyboardNav={withKeyboardNav}
         stickySelection={false}
         stickyHeader={false}
+        tableId={useId()}
+        showLoadingSkeletons={false}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
