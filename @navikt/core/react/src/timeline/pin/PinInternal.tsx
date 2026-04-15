@@ -79,6 +79,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
+            data-timeline-pin
             {...rest}
             ref={mergedRef}
             className="aksel-timeline__pin-button"

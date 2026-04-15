@@ -7,9 +7,6 @@ interface TimelineContextProps {
   setStart: (d: Date) => void;
   setEndInclusive: (d: Date) => void;
   activeRow: number | null;
-  setActiveRow: (i: string) => void;
-  initiate: (i: number) => void;
-  addFocusable: (ref: HTMLButtonElement | null, id: number) => void;
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
@@ -19,9 +16,6 @@ export const TimelineContext = createContext<TimelineContextProps>({
   setStart: () => null,
   setEndInclusive: () => null,
   activeRow: 0,
-  setActiveRow: () => null,
-  initiate: () => null,
-  addFocusable: () => null,
 });
 
 export const useTimelineContext = () => {
