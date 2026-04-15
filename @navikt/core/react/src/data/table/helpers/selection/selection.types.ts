@@ -28,8 +28,17 @@ type SelectionProps = {
   onSelectionChange?: (keys: SelectedKeysT) => void;
   /**
    * Keys that should be disabled for selection. These keys will not be selectable and will be styled as disabled.
+   *
+   *
+   * TODO: Consider making this optionally a callback with (rowData:T) => boolean, to allow for more dynamic disabling of selection based on row data.
    */
   disabledSelectionKeys?: SelectedKeysT;
+  /**
+   * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
+   *
+   * @default false
+   */
+  disableRowSelectionOnClick?: boolean;
 };
 
 type NoneSelection = {
@@ -43,6 +52,7 @@ type SingleSelection = {
   selectedKeys: SelectedKeysT;
   disabledSelectionKeys: SelectedKeysT;
   getRowRadioProps: (key: string | number) => RadioInputProps;
+  toggleSelection: (key: string | number) => void;
 };
 
 type MultipleSelection = {
@@ -51,6 +61,7 @@ type MultipleSelection = {
   disabledSelectionKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
   getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
+  toggleSelection: (key: string | number) => void;
 };
 
 type TableSelectionBase = {

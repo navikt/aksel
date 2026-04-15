@@ -1,10 +1,20 @@
 import React, { forwardRef } from "react";
+import {
+  ChevronDownUpIcon,
+  ChevronUpDownIcon,
+  MinusIcon,
+  PlusIcon,
+} from "@navikt/aksel-icons";
+import { Button } from "../../../button";
 import { CheckboxInput } from "../../../form/checkbox/checkbox-input/CheckboxInput";
 import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
+import { Skeleton } from "../../../skeleton";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
+import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
+import { useDataTableExpansion } from "../hooks/useTableExpansion";
 import {
   useDataTableContext,
   useDataTableLocation,
@@ -45,6 +55,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         data-selected={selected}
         data-sticky={isSticky || undefined}
       >
+        <RowExpansionCell rowId={rowId} />
         <RowSelectionCell rowId={rowId} />
         {children}
         {renderFillerCell && (
@@ -60,12 +71,112 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
   },
 );
 
+function RowExpansionCell({ rowId }: { rowId?: string | number }) {
+  const {
+    isExpanded,
+    toggleExpansion,
+    enableExpansion,
+    isAllExpanded,
+    toggleAll,
+    showExpandAll,
+  } = useDataTableExpansion();
+  const { tableId, showLoadingSkeletons } = useDataTableContext();
+  const { location } = useDataTableLocation();
+
+  if (!enableExpansion) {
+    return null;
+  }
+
+  if (showLoadingSkeletons) {
+    if (location === "thead") {
+      return (
+        <DataTableColumnHeader
+          width={SELECTION_CELL_WIDTH}
+          UNSAFE_isSelection
+          data-block-keyboard-nav
+          /* isSticky={stickySelection && "start"} */
+        />
+      );
+    }
+    return (
+      <DataTableBaseCell as="td">
+        <Skeleton variant="text" />
+      </DataTableBaseCell>
+    );
+  }
+
+  if (location === "thead" && !showExpandAll) {
+    return (
+      <DataTableColumnHeader
+        width={SELECTION_CELL_WIDTH}
+        UNSAFE_isSelection
+        data-block-keyboard-nav
+        /* isSticky={stickySelection && "start"} */
+      />
+    );
+  }
+
+  if (location === "thead") {
+    return (
+      <DataTableColumnHeader
+        textAlign="center"
+        width={SELECTION_CELL_WIDTH}
+        UNSAFE_isSelection
+        /* isSticky={stickySelection && "start"} */
+      >
+        <Button
+          variant="tertiary"
+          data-color="neutral"
+          size="xsmall"
+          onClick={toggleAll}
+          aria-expanded={isAllExpanded}
+          aria-label={isAllExpanded ? "Skjul alle rader" : "Vis alle rader"}
+          icon={
+            isAllExpanded ? (
+              <ChevronDownUpIcon aria-hidden />
+            ) : (
+              <ChevronUpDownIcon aria-hidden />
+            )
+          }
+        />
+      </DataTableColumnHeader>
+    );
+  }
+
+  if (!rowId) {
+    return null;
+  }
+
+  const isRowExpanded = isExpanded(rowId);
+
+  return (
+    <DataTableTd UNSAFE_isSelection>
+      <Button
+        variant="tertiary"
+        data-color="neutral"
+        size="xsmall"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleExpansion(rowId);
+        }}
+        aria-expanded={isRowExpanded}
+        aria-controls={`${tableId}-expansion-${rowId}`}
+        aria-label={isRowExpanded ? "Skjul detaljer" : "Vis detaljer"}
+        icon={
+          isRowExpanded ? <MinusIcon aria-hidden /> : <PlusIcon aria-hidden />
+        }
+      />
+    </DataTableTd>
+  );
+}
+
 /**
  * TODO: How do these cells handle multiple thead rows, or col/rowspans?
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
-  const { selectionState, stickySelection } = useDataTableContext();
+  const { selectionState, stickySelection, showLoadingSkeletons } =
+    useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
 
@@ -77,6 +188,25 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selection.selectionMode === "none" || !renderSelection) {
     return null;
+  }
+
+  if (showLoadingSkeletons) {
+    if (location === "thead") {
+      return (
+        <DataTableColumnHeader
+          width={SELECTION_CELL_WIDTH}
+          UNSAFE_isSelection
+          data-block-keyboard-nav
+          isSticky={stickySelection && "start"}
+        />
+      );
+    }
+
+    return (
+      <DataTableBaseCell as="td">
+        <Skeleton variant="text" />
+      </DataTableBaseCell>
+    );
   }
 
   /* TODO: A11y support */

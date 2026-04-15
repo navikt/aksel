@@ -677,8 +677,9 @@ export const RowClick: Story = {
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
-      onRowClick={() => alert("Row clicked!")}
+      onRowClick={() => console.info("Row clicked!")}
       selectionMode="multiple"
+      withKeyboardNav
     />
   ),
 };
@@ -718,4 +719,37 @@ export const RowClickTest: Story = {
     await userEvent.click(inputs[0]);
     expect(rowClickSpy).not.toHaveBeenCalled();
   },
+};
+
+export const RowExpansion: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => console.info("Row clicked!")}
+      selectionMode="multiple"
+      withKeyboardNav
+      getDetailsPanelContent={(rowData) => {
+        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      }}
+    />
+  ),
+};
+
+export const RowExpansionAll: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => console.info("Row clicked!")}
+      selectionMode="multiple"
+      withKeyboardNav
+      getDetailsPanelContent={(rowData) => {
+        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      }}
+      showExpandAll
+    />
+  ),
 };
