@@ -1,6 +1,10 @@
+"use client";
+
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
 // import { startTransition, useOptimistic } from "react";
+import { Events } from "@navikt/analytics-types";
 import { Chips, Label, VStack } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { capitalizeText } from "@/ui-utils/format-text";
 
 export default function FilterGroup({
@@ -54,6 +58,11 @@ export default function FilterGroup({
               onClick={() => {
                 if (selected !== option) {
                   setSelected(option);
+                  umamiTrack(Events.FILTERVALG, {
+                    kategori: label,
+                    filternavn: option,
+                    seksjon: "endringslogg",
+                  });
                 } else {
                   setSelected("");
                 }

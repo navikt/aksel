@@ -3,6 +3,7 @@
 import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { SquareGridFillIcon, SquareGridIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { BodyShort, HStack, Tag } from "@navikt/ds-react";
 import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
@@ -53,9 +54,10 @@ function DesignsystemSidebarItem(props: {
         data-current={active}
         aria-current={active ? "page" : undefined}
         onClick={() =>
-          umamiTrack("navigere", {
-            kilde: "sidebar",
-            url: `/${page.slug}`,
+          umamiTrack(Events.NAVIGERE, {
+            lenketekst: page.heading,
+            destinasjon: `/${page.slug}`,
+            lenkegruppe: "sidebar",
           })
         }
       >

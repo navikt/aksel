@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import { Events } from "@navikt/analytics-types";
 import { Heading } from "@navikt/ds-react";
 import {
   useGlobalSearch,
@@ -74,7 +75,11 @@ function GlobalSearchLink(props: {
             as={NextLink}
             href={href}
             onClick={() =>
-              umamiTrack("navigere", { kilde: "global sok", url: href })
+              umamiTrack(Events.NAVIGERE, {
+                lenketekst: hit.item.heading,
+                destinasjon: href,
+                lenkegruppe: "globalt søk",
+              })
             }
             onNavigate={() => {
               context.closeSearch();
