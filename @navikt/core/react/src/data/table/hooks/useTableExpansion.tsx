@@ -2,14 +2,14 @@ import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 
-type DataTableExpansionContextT<T> = {
+type DataTableExpansionContextT = {
   expandedIds: (string | number)[];
   isExpanded: (id: string | number) => boolean;
   toggleExpansion: (id: string | number) => void;
   toggleAll: () => void;
   isAllExpanded: boolean;
-  getDetailsPanelContent?: (row: T) => React.ReactNode;
-  getDetailsPanelHeight?: (row: T) => number | "auto";
+  getDetailsPanelContent?: (row: unknown) => React.ReactNode;
+  getDetailsPanelHeight?: (row: unknown) => number | "auto";
   showExpandAll?: boolean;
   enableExpansion: boolean;
 };
@@ -17,10 +17,10 @@ type DataTableExpansionContextT<T> = {
 const {
   Provider: DataTableExpansionContextProvider,
   useContext: useDataTableExpansion,
-} = createStrictContext<DataTableExpansionContextT<any>>({
+} = createStrictContext<DataTableExpansionContextT>({
   name: "DataTableExpansionContext",
   errorMessage:
-    "useTableExpansionContext must be used within a DataTableExpansionProvider.",
+    "useDataTableExpansion must be used within a DataTableExpansionProvider.",
 });
 
 type TableExpansionOptions<T> = {
@@ -81,8 +81,14 @@ function DataTableExpansionProvider<T>({
       toggleExpansion={toggleExpansion}
       toggleAll={toggleAll}
       isAllExpanded={isAllExpanded}
-      getDetailsPanelContent={getDetailsPanelContent}
-      getDetailsPanelHeight={getDetailsPanelHeight}
+      getDetailsPanelContent={
+        getDetailsPanelContent as
+          | ((row: unknown) => React.ReactNode)
+          | undefined
+      }
+      getDetailsPanelHeight={
+        getDetailsPanelHeight as ((row: unknown) => number | "auto") | undefined
+      }
       showExpandAll={showExpandAll}
       enableExpansion={!!getDetailsPanelContent}
     >

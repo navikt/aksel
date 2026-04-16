@@ -303,6 +303,24 @@ export const LoadingWhileKeepingData: Story = {
   },
 };
 
+export const LoadingWhileKeepingDataNoPlaceholders: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
+        />
+      </VStack>
+    );
+  },
+};
+
 const selectionPaginationSpy = fn();
 
 export const SelectionPagination: Story = {

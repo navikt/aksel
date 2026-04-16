@@ -12,6 +12,7 @@ import {
 } from "../empty-state/DataTableEmptyState";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import { type SelectionProps } from "../hooks/useTableSelection";
+import { noSelectionState } from "../hooks/useTableSelection";
 import {
   DataTableLoadingState,
   type DataTableLoadingStateProps,
@@ -225,10 +226,14 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
+        selectionState={noSelectionState}
         stickySelection={false}
         stickyHeader={false}
         tableId={useId()}
         showLoadingSkeletons={false}
+        onRowClick={undefined}
+        disableRowSelectionOnClick={false}
+        showLoadingOverlay={false}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

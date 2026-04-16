@@ -117,7 +117,6 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowData: T,
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
@@ -142,7 +141,9 @@ interface DataTableProps<T>
   loadingState?: React.ReactNode;
   /**
    * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-   * @default 5
+   *
+   *
+   * If not provided, the rendered content will get a temporarily overlay while loading
    */
   loadingRows?: number;
   /**
@@ -210,7 +211,7 @@ function DataTableAutoInner<T>(
     emptyState,
     isLoading = false,
     loadingState,
-    loadingRows = 5,
+    loadingRows,
     loadingLabel = "Laster innhold",
     disableRowSelectionOnClick = false,
     getDetailsPanelContent,
@@ -237,9 +238,8 @@ function DataTableAutoInner<T>(
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const allRowKeys = useMemo(() => {
-    const resolvedGetRowId =
-      getRowId ??
-      (((_row: T, index: number) => index) as (rowData: T) => string | number);
+    const resolvedGetRowId = (item: T, index: number): string | number =>
+      getRowId?.(item, index) ?? index;
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
@@ -268,7 +268,11 @@ function DataTableAutoInner<T>(
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
       tableId={tableId}
-      showLoadingSkeletons={isLoading && !loadingState}
+      showLoadingSkeletons={isLoading && loadingState == null}
+      onRowClick={onRowClick}
+      disableRowSelectionOnClick={disableRowSelectionOnClick}
+      isLoading={isLoading}
+      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
     >
       <DataTableExpansionProvider
         detailsPanelRowIds={detailsPanelRowIds}
@@ -289,6 +293,7 @@ function DataTableAutoInner<T>(
               data-truncate-content={truncateContent}
               data-density={rowDensity}
               data-layout={layout}
+              data-loading={isLoading || undefined}
               tabIndex={tabIndex}
               aria-busy={isLoading || undefined}
             >
@@ -323,13 +328,10 @@ function DataTableAutoInner<T>(
                   columns={columns}
                   data={data}
                   allRowKeys={allRowKeys}
-                  isLoading={isLoading}
                   loadingState={loadingState}
                   loadingRows={loadingRows}
                   loadingLabel={loadingLabel}
                   emptyState={emptyState}
-                  onRowClick={onRowClick}
-                  disableRowSelectionOnClick={disableRowSelectionOnClick}
                 />
               </DataTableTbody>
             </table>
@@ -344,29 +346,24 @@ interface DataTableAutoTBodyContentProps<T> {
   columns: UseColumnOptionsResult<T>["columns"];
   data: T[];
   allRowKeys: (string | number)[];
-  isLoading: boolean;
   loadingState: React.ReactNode;
-  loadingRows: number;
   loadingLabel: string;
+  loadingRows?: number;
   emptyState: React.ReactNode;
-  onRowClick?: DataTableProps<T>["onRowClick"];
-  disableRowSelectionOnClick: boolean;
 }
 
 function DataTableAutoTBodyContent<T>({
   columns,
   data,
   allRowKeys,
-  isLoading,
   loadingState,
   loadingRows,
   loadingLabel,
   emptyState,
-  onRowClick,
-  disableRowSelectionOnClick,
 }: DataTableAutoTBodyContentProps<T>) {
-  const { selectionState } = useDataTableContext();
-  if (isLoading && loadingState !== undefined) {
+  const { isLoading } = useDataTableContext();
+
+  if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
         {loadingState}
@@ -374,7 +371,7 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
-  if (isLoading) {
+  if (isLoading && loadingRows) {
     return (
       <>
         <tr>
@@ -408,26 +405,20 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
+  const renderLoadingAnnoucement = isLoading && !loadingState && !loadingRows;
+
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
     return (
       <React.Fragment key={rowId}>
-        <DataTableTr
-          rowId={rowId}
-          onClick={(event) => {
-            if (isInteractiveTarget(event.target)) {
-              return;
-            }
-            if (
-              !disableRowSelectionOnClick &&
-              selectionState?.selection.selectionMode !== "none"
-            ) {
-              selectionState?.selection.toggleSelection(rowId);
-            }
-
-            onRowClick?.(rowData, rowId, event);
-          }}
-        >
+        {renderLoadingAnnoucement && (
+          <tr>
+            <td colSpan={columns.length} className="aksel-sr-only">
+              {loadingLabel}
+            </td>
+          </tr>
+        )}
+        <DataTableTr rowId={rowId}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
             return (
               <DataTableBaseCell
@@ -462,8 +453,15 @@ function DataTableExpandedRow<T>({
   columnCount: number;
 }) {
   const { tableId } = useDataTableContext();
-  const { isExpanded, getDetailsPanelHeight, getDetailsPanelContent } =
-    useDataTableExpansion();
+  const expansionContext = useDataTableExpansion(false);
+
+  /* TODO: Is this the way we want to opt out? Might just be temp until auto and root is merged so they use same context */
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
+    expansionContext;
 
   if (!isExpanded(rowId)) {
     return null;
@@ -483,12 +481,6 @@ function DataTableExpandedRow<T>({
         </div>
       </td>
     </tr>
-  );
-}
-
-function isInteractiveTarget(target: EventTarget | null): boolean {
-  return !!(target as HTMLElement | null)?.closest(
-    "a, button, input, select, textarea",
   );
 }
 
