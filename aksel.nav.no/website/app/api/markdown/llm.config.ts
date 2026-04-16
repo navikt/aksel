@@ -1,5 +1,6 @@
 import DesignTokens from "./routes/design-tokens";
 import Grunnleggende from "./routes/grunnleggende";
+import Ikoner from "./routes/ikoner";
 import Komponenter from "./routes/komponenter";
 /* import Komponent from "./routes/komponent"; */
 import LLM from "./routes/llm";
@@ -13,6 +14,7 @@ const MARKDOWN_ROUTES: Routes = {
   "/komponenter": Komponenter.markdown,
   "/grunnleggende": Grunnleggende.markdown,
   "/grunnleggende/styling/design-tokens": DesignTokens.markdown,
+  "/komponenter/ikoner": Ikoner.markdown,
   "/monster-maler": Maler.markdown,
   "/llm": LLM.markdown,
 };
