@@ -77,7 +77,6 @@ export default function transformer(file: FileInfo, api: API) {
       openingElement: { name: { name: localName } },
     });
 
-    // ...existing code...
     compRoot.forEach((x) => {
       const openingName = x.node.openingElement.name;
       if (openingName.type === "JSXIdentifier") {
@@ -90,7 +89,6 @@ export default function transformer(file: FileInfo, api: API) {
         }
       }
     });
-    // ...existing code...
   }
 
   return root.toSource(getLineTerminator(file.source));
