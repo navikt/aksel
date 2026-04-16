@@ -8360,6 +8360,13 @@
                 },
                 "optional": true
               },
+              "enum": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
               "ref": {
                 "type": "objectAttribute",
                 "value": {

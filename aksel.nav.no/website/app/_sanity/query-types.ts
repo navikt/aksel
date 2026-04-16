@@ -15,6 +15,14 @@ import "@sanity/client";
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;
+
 // Source: sanity-schema.json
 export type Seo = {
   meta?: string;
@@ -1420,6 +1428,7 @@ export type Ds_props = {
     description?: string;
     required?: boolean;
     type?: string;
+    enum?: string;
     ref?: boolean;
     return?: string;
     example?: string;
@@ -1926,14 +1935,6 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
-
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
 
 // Source: ../app/_sanity/queries.ts
 // Variable: DS_FRONT_PAGE_QUERY
@@ -3735,6 +3736,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
@@ -4757,6 +4759,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
@@ -6337,6 +6340,7 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
@@ -7128,6 +7132,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 description?: string;
                 required?: boolean;
                 type?: string;
+                enum?: string;
                 ref?: boolean;
                 return?: string;
                 example?: string;
@@ -7914,6 +7919,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 description?: string;
                 required?: boolean;
                 type?: string;
+                enum?: string;
                 ref?: boolean;
                 return?: string;
                 example?: string;
@@ -8700,6 +8706,7 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 description?: string;
                 required?: boolean;
                 type?: string;
+                enum?: string;
                 ref?: boolean;
                 return?: string;
                 example?: string;
@@ -12223,6 +12230,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
@@ -13029,6 +13037,7 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
@@ -14585,6 +14594,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               description?: string;
               required?: boolean;
               type?: string;
+              enum?: string;
               ref?: boolean;
               return?: string;
               example?: string;
