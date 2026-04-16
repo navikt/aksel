@@ -64,8 +64,16 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         if (
           location !== "tbody" ||
           rowId === undefined ||
-          isInteractiveTarget(event.target)
+          isInteractiveTarget(event.target) ||
+          (event.target as HTMLElement | null)?.closest(
+            "[data-prevent-row-click]",
+          )
         ) {
+          return;
+        }
+
+        const selection = window.getSelection();
+        if (selection && selection.toString().length > 0) {
           return;
         }
 
@@ -75,7 +83,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         ) {
           selectionState.selection.toggleSelection(rowId);
         }
-
         onRowClick?.(rowId, event);
       },
       [
@@ -191,7 +198,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   const isRowExpanded = isExpanded(rowId);
 
   return (
-    <DataTableTd UNSAFE_isSelection>
+    <DataTableTd UNSAFE_isSelection preventRowClick>
       <Button
         variant="tertiary"
         data-color="neutral"
