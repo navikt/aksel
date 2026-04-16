@@ -59,7 +59,7 @@ export default function transformer(file: FileInfo, api: API) {
           x.local?.name !== x.imported.name &&
           x.local?.name
         ) {
-          localName = String(x.local?.name);
+          localName = String(x.local.name);
         }
       });
     });

@@ -60,7 +60,7 @@ export default function moveAndRenameImport(
     j.ImportSpecifier,
     (node) => {
       if (node.imported.name === fromName && node.local?.name) {
-        localname = String(node.local?.name);
+        localname = String(node.local.name);
       }
       return node.imported.name === fromName;
     },
