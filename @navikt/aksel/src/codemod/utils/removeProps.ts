@@ -11,6 +11,10 @@ export default function removePropsFromComponent(
   component.forEach((node) => {
     const attributes = node.node.openingElement.attributes;
 
+    if (!attributes) {
+      return;
+    }
+
     for (let i = attributes.length - 1; i >= 0; i--) {
       const attribute = attributes[i];
 

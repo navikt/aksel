@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["node"]
   },
   "include": ["./playroom.config.ts"]
 }

@@ -43,7 +43,7 @@ export default function transformer(file: FileInfo, api: API) {
     for (const prop of propsAffected) {
       findProps({ j, path: astElement, name: prop }).forEach((attr) => {
         const attrvalue = attr.value.value;
-        if (attrvalue.type === "StringLiteral") {
+        if (attrvalue?.type === "StringLiteral") {
           /**
            * Skips if the replacement token already set
            */
@@ -65,7 +65,7 @@ export default function transformer(file: FileInfo, api: API) {
             tokenComments.push(tokenComment);
           }
         } else if (
-          attrvalue.type === "JSXExpressionContainer" &&
+          attrvalue?.type === "JSXExpressionContainer" &&
           attrvalue.expression.type === "StringLiteral"
         ) {
           const literal = attrvalue.expression;
@@ -96,10 +96,10 @@ export default function transformer(file: FileInfo, api: API) {
     findProps({ j, path: astElement, name: "borderRadius" }).forEach((attr) => {
       const attrValue = attr.value.value;
 
-      if (attrValue.type === "StringLiteral") {
+      if (attrValue?.type === "StringLiteral") {
         /* borderRadius="xlarge" */
         attrValue.value = convertBorderRadiusToRadius(attrValue.value);
-      } else if (attrValue.type === "JSXExpressionContainer") {
+      } else if (attrValue?.type === "JSXExpressionContainer") {
         /* borderRadius={{xs: "xlarge", sm: "large"}} */
         const expression = attrValue.expression;
         if (expression.type === "ObjectExpression") {
@@ -189,7 +189,9 @@ function convertBorderRadiusToRadius(oldValue: string): string {
       console.warn(`Possibly invalid radius token found: ${radiusToken}\n`);
       newRadius.push(radiusToken);
     } else {
-      newRadius.push(`${legacyBorderRadiusNameTokenLookup[radiusToken]}`);
+      newRadius.push(
+        `${legacyBorderRadiusNameTokenLookup[radiusToken as keyof typeof legacyBorderRadiusNameTokenLookup]}`,
+      );
     }
   }
 

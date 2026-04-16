@@ -1,16 +1,13 @@
 import chalk from "chalk";
+import type { API, Collection, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import moveAndRenameImport from "../../../utils/packageImports";
 import removePropsFromComponent from "../../../utils/removeProps";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
 
-  let root: any;
+  let root: Collection<any>;
   try {
     root = j(file.source);
   } catch {
@@ -46,13 +43,14 @@ export default function transformer(file, api) {
       const children = node.node.children;
       let flagged = false;
       if (
+        children &&
         children.length > 0 &&
-        !node.node.openingElement.attributes.some(
-          (attr) => attr.name.name === "text",
+        !node.node.openingElement.attributes?.some(
+          (attr) => attr.type === "JSXAttribute" && attr.name.name === "text",
         )
       ) {
         if (children.length === 1 && children[0].type === "JSXText") {
-          node.node.openingElement.attributes.push(
+          node.node.openingElement.attributes?.push(
             j.jsxAttribute(
               j.jsxIdentifier("text"),
               j.literal(children[0].value.trim()),
@@ -80,9 +78,15 @@ export default function transformer(file, api) {
     });
 
     compRoot.forEach((x) => {
-      x.node.openingElement.name.name = "CopyButton";
-      if (x.node.children.length > 0) {
-        x.node.closingElement.name.name = "CopyButton";
+      const openingName = x.node.openingElement.name;
+      if (openingName.type === "JSXIdentifier") {
+        openingName.name = "CopyButton";
+      }
+      if (x.node.children && x.node.children.length > 0) {
+        const closingName = x.node.closingElement?.name;
+        if (closingName?.type === "JSXIdentifier") {
+          closingName.name = "CopyButton";
+        }
       }
     });
   }
