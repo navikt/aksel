@@ -1,5 +1,8 @@
 import PackageJson from "@navikt/ds-react/package.json";
-import { ALL_KOMPONENTS_MARKDOWN_QUERY } from "@/app/_sanity/queries";
+import {
+  ALL_KOMPONENTS_MARKDOWN_QUERY,
+  KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
+} from "@/app/_sanity/queries";
 import type { ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { createRoute } from "./create-route";
 
@@ -31,6 +34,7 @@ Oversikt over alle komponenter i Aksel
 
 export default createRoute<KomponentItem>({
   query: ALL_KOMPONENTS_MARKDOWN_QUERY,
+  slugQuery: KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
   xmlTag: "component",
   heading: "Alle komponenter i Aksel",
   description,

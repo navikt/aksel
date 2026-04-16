@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  AVALIABLE_MARKDOWN_ROUTES,
-  markdownForRoute,
-} from "@/app/api/markdown/llm.config";
+import { isValidRoute, markdownForRoute } from "@/app/api/markdown/llm.config";
 
 /**
  * Central markdown route handler
@@ -17,10 +14,7 @@ export async function GET(request: NextRequest) {
 
   const basePath = request.nextUrl.pathname.slice(0, -3);
 
-  /**
-   * TODO: Need to fetch available markdown routes from Sanity to avoid hardcoding them in the llm.config file.
-   */
-  if (!AVALIABLE_MARKDOWN_ROUTES.includes(basePath)) {
+  if (!isValidRoute(basePath)) {
     return new NextResponse(
       "ERROR: Markdown version not available for this route",
       {

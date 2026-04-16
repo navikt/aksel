@@ -17,14 +17,44 @@ const MARKDOWN_ROUTES: Routes = {
 
 const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
 
-function markdownForRoute(route: string): Promise<string> {
-  const markdownFunc = MARKDOWN_ROUTES[route as keyof Routes];
+/**
+ * Allows for dynamic routes under the specified prefixes,
+ * e.g. "/komponenter/core/button"
+ */
+const DYNAMIC_ROUTE_PREFIXES = [
+  "/komponenter/",
+  "/grunnleggende/",
+  "/monster-maler/",
+] as const;
 
-  if (!markdownFunc) {
-    return Promise.reject(new Error("Markdown route not found"));
+function isValidRoute(route: string): boolean {
+  if (AVALIABLE_MARKDOWN_ROUTES.includes(route)) {
+    return true;
   }
 
-  return markdownFunc();
+  return DYNAMIC_ROUTE_PREFIXES.some((prefix) => route.startsWith(prefix));
 }
 
-export { AVALIABLE_MARKDOWN_ROUTES, markdownForRoute };
+async function markdownForRoute(route: string): Promise<string> {
+  const staticHandler = MARKDOWN_ROUTES[route as keyof Routes];
+  if (staticHandler) {
+    return staticHandler();
+  }
+
+  /* Strip the leading slash to get the Sanity slug, e.g. "komponenter/core/button" */
+  const slug = route.slice(1);
+
+  if (route.startsWith("/komponenter/")) {
+    return Komponenter.markdownForSlug(slug);
+  }
+  if (route.startsWith("/grunnleggende/")) {
+    return Grunnleggende.markdownForSlug(slug);
+  }
+  if (route.startsWith("/monster-maler/")) {
+    return Maler.markdownForSlug(slug);
+  }
+
+  return Promise.reject(new Error("Markdown route not found"));
+}
+
+export { AVALIABLE_MARKDOWN_ROUTES, isValidRoute, markdownForRoute };
