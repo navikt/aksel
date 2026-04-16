@@ -1,10 +1,11 @@
+import type { API, FileInfo, Options } from "jscodeshift";
 import renameProps from "../../utils/rename-props";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api, options) {
+export default function transformer(
+  file: FileInfo,
+  api: API,
+  options: Options,
+) {
   const j = api.jscodeshift;
   const root = j(file.source);
 

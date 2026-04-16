@@ -1,10 +1,10 @@
 import type {
   API,
   FileInfo,
-  JSXAttribute,
   JSXExpressionContainer,
   Literal,
 } from "jscodeshift";
+import { getJSXStringValue } from "./jsx-value";
 import { getLineTerminator } from "./lineterminator";
 
 export interface MigrationConfig {
@@ -44,7 +44,7 @@ export function moveVariantToDataColor(
         specifier.type === "ImportSpecifier" &&
         specifier.imported.name === rootComponent
       ) {
-        localName = specifier.local?.name || specifier.imported.name;
+        localName = String(specifier.local?.name || specifier.imported.name);
       }
     });
   });
@@ -77,7 +77,7 @@ export function moveVariantToDataColor(
       if (attr.type !== "JSXAttribute") return;
       if (attr.name.name === config.prop) {
         variantPropIndex = index;
-        const value = getStringValue(attr.value);
+        const value = getJSXStringValue(attr.value);
         if (value) {
           variantValue = value;
         }
@@ -133,26 +133,4 @@ export function moveVariantToDataColor(
 
   const toSourceOptions = getLineTerminator(file.source);
   return root.toSource(toSourceOptions);
-}
-
-type AttributeValue =
-  | JSXAttribute["value"]
-  | JSXExpressionContainer["expression"];
-
-function getStringValue(node: AttributeValue): string | null {
-  if (!node) return null;
-  if (node.type === "StringLiteral" || node.type === "Literal") {
-    return node.value as string;
-  }
-  if (
-    node.type === "TemplateLiteral" &&
-    node.expressions.length === 0 &&
-    node.quasis.length === 1
-  ) {
-    return node.quasis[0].value.cooked ?? null;
-  }
-  if (node.type === "JSXExpressionContainer") {
-    return getStringValue(node.expression);
-  }
-  return null;
 }

@@ -24,8 +24,8 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "^5.1.0",
-    "typescript": "5.9.3",
-    "vite": "^7.3.2",
+    "typescript": "6.0.2",
+    "vite": "^7.2.4",
     "vite-plugin-singlefile": "^2.3.0",
     "vite-plugin-svgr": "^4.2.0"
   }

@@ -1,11 +1,8 @@
+import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import moveAndRenameImport from "../../../utils/packageImports";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
 
   let root: any;

@@ -1,10 +1,7 @@
+import type { FileInfo } from "jscodeshift";
 import { tokens } from "../../../tokens-map.js";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file) {
+export default function transformer(file: FileInfo) {
   let src = file.source;
 
   tokens.forEach((tok) => {
