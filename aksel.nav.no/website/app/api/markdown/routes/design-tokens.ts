@@ -6,6 +6,10 @@ import { buildXMLTag } from "../helpers/metadata-header";
 async function markdown(): Promise<string> {
   const categoryBlocks: string[] = [];
 
+  /**
+   * We print the tokens grouped by their category,
+   * and within each category we group them by role (color).
+   */
   for (const category of TOKEN_CATEGORIES) {
     const categoryTokens = tokens.filter((t) => t.category === category.id);
 

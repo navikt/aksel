@@ -1,46 +1,12 @@
-import DesignTokens from "./routes/design-tokens";
+import { MARKDOWN_ROUTES } from "@/app/api/markdown/route.config";
 import Grunnleggende from "./routes/grunnleggende";
-import Ikoner from "./routes/ikoner";
 import Komponenter from "./routes/komponenter";
-/* import Komponent from "./routes/komponent"; */
-import LLM from "./routes/llm";
 import Maler from "./routes/maler";
 
-type MarkdownRoute = () => Promise<string>;
-
-type Routes = Record<`/${string}`, MarkdownRoute>;
-
-const MARKDOWN_ROUTES: Routes = {
-  "/komponenter": Komponenter.markdown,
-  "/grunnleggende": Grunnleggende.markdown,
-  "/grunnleggende/styling/design-tokens": DesignTokens.markdown,
-  "/komponenter/ikoner": Ikoner.markdown,
-  "/monster-maler": Maler.markdown,
-  "/llm": LLM.markdown,
-};
-
-const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
-
-/**
- * Allows for dynamic routes under the specified prefixes,
- * e.g. "/komponenter/core/button"
- */
-const DYNAMIC_ROUTE_PREFIXES = [
-  "/komponenter/",
-  "/grunnleggende/",
-  "/monster-maler/",
-] as const;
-
-function isValidRoute(route: string): boolean {
-  if (AVALIABLE_MARKDOWN_ROUTES.includes(route)) {
-    return true;
-  }
-
-  return DYNAMIC_ROUTE_PREFIXES.some((prefix) => route.startsWith(prefix));
-}
-
 async function markdownForRoute(route: string): Promise<string> {
-  const staticHandler = MARKDOWN_ROUTES[route as keyof Routes];
+  const staticHandler = MARKDOWN_ROUTES[route];
+
+  /* Found "static" version, ie a spesific route created for path */
   if (staticHandler) {
     return staticHandler();
   }
@@ -48,6 +14,7 @@ async function markdownForRoute(route: string): Promise<string> {
   /* Strip the leading slash to get the Sanity slug, e.g. "komponenter/core/button" */
   const slug = route.slice(1);
 
+  /* Handles all "dynamic" paths like komponenter/core/button etc that has no "hardcoded" route */
   if (route.startsWith("/komponenter/")) {
     return Komponenter.markdownForSlug(slug);
   }
@@ -61,4 +28,4 @@ async function markdownForRoute(route: string): Promise<string> {
   return Promise.reject(new Error("Markdown route not found"));
 }
 
-export { AVALIABLE_MARKDOWN_ROUTES, isValidRoute, markdownForRoute };
+export { markdownForRoute };

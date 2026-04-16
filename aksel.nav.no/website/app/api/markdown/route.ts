@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isValidRoute, markdownForRoute } from "@/app/api/markdown/llm.config";
+import { markdownForRoute } from "@/app/api/markdown/llm.config";
+import { isValidRoute } from "@/app/api/markdown/route.config";
 
 /**
  * Central markdown route handler

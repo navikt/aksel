@@ -4,7 +4,7 @@ import {
   KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
 } from "@/app/_sanity/queries";
 import type { ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT } from "@/app/_sanity/query-types";
-import { createRoute } from "./create-route";
+import { createRoute } from "../helpers/create-route";
 
 type KomponentItem = ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT[number];
 

@@ -15,13 +15,7 @@ import { RelatertInnholdMarkdown } from "@/app/api/markdown/blocks/RelatertInnho
 import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
-
-/** Sanity slug prefixes that have individual .md endpoints available */
-const MARKDOWN_SLUG_PREFIXES = [
-  "komponenter/",
-  "grunnleggende/",
-  "monster-maler/",
-];
+import { DYNAMIC_ROUTE_PREFIXES } from "@/app/api/markdown/route.config";
 
 const AKSEL_BASE_URL = "https://aksel.nav.no";
 
@@ -45,8 +39,8 @@ function portableMarkdown(input?: any[]) {
           return children;
         }
         const anchor = value?.anchor ? `#${value.anchor}` : "";
-        const suffix = MARKDOWN_SLUG_PREFIXES.some((prefix) =>
-          slug.startsWith(prefix),
+        const suffix = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
+          `/${slug}`.startsWith(prefix),
         )
           ? ".md"
           : "";
@@ -88,8 +82,8 @@ function toMarkdownUrl(href: string): string {
   const [pathWithoutAnchor, anchor] = path.split("#");
   const [pathWithoutQuery, query] = pathWithoutAnchor.split("?");
   const slug = pathWithoutQuery.replace(/^\//, ""); // strip leading slash
-  const hasMdEndpoint = MARKDOWN_SLUG_PREFIXES.some((prefix) =>
-    slug.startsWith(prefix),
+  const hasMdEndpoint = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
+    `/${slug}`.startsWith(prefix),
   );
 
   if (!hasMdEndpoint) {

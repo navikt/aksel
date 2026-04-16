@@ -38,16 +38,21 @@ const sectionConfig: Record<
 const title = "Aksel designsystem - Dokumentasjon for LLMs";
 
 async function markdown() {
-  const { data } = await sanityMarkdownFetch({
+  const { data: items = [] } = await sanityMarkdownFetch({
     query: ALL_MARKDOWN_ARTICLES_INDEX_QUERY,
   });
 
-  const items = data ?? [];
-
-  const byType = new Map<string, typeof data>();
-
+  /**
+   * Start out by grouping all articles by their Sanity "_type",
+   * which corresponds to the main category of the documentation.
+   * This allows us to create sections in the markdown output for each category, and list relevant articles within them.
+   */
+  const byType = new Map<string, typeof items>();
   for (const item of items) {
-    if (!item.slug || !item.heading) continue;
+    if (!item.slug || !item.heading) {
+      continue;
+    }
+
     const list = byType.get(item._type) ?? [];
     list.push(item);
     byType.set(item._type, list);
@@ -60,13 +65,19 @@ async function markdown() {
   );
 
   for (const [type, config] of sortedTypes) {
+    /* Account for custom indexing of pages in sanity */
     const typeItems = (byType.get(type) ?? []).sort((a, b) => {
       const sidebarSort = (a.sidebarindex ?? 0) - (b.sidebarindex ?? 0);
-      if (sidebarSort !== 0) return sidebarSort;
+      if (sidebarSort !== 0) {
+        return sidebarSort;
+      }
+
       return (a.heading ?? "").localeCompare(b.heading ?? "");
     });
 
-    if (typeItems.length === 0) continue;
+    if (typeItems.length === 0) {
+      continue;
+    }
 
     const lines = typeItems.map(
       (item) =>

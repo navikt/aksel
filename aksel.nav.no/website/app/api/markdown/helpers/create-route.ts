@@ -1,7 +1,7 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
-import { buildMarkdown } from "../helpers/build-markdown";
-import { buildXMLTag } from "../helpers/metadata-header";
-import { portableMarkdown } from "../helpers/portable-markdown";
+import { buildMarkdown } from "./build-markdown";
+import { buildXMLTag } from "./metadata-header";
+import { portableMarkdown } from "./portable-markdown";
 
 type RouteItemBase = {
   slug?: { current?: string } | null;
