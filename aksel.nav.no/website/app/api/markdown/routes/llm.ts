@@ -6,22 +6,32 @@ const BASE_URL = "https://aksel.nav.no";
 
 const sectionConfig: Record<
   string,
-  { title: string; prefix: string; order: number }
+  {
+    title: string;
+    prefix: string;
+    order: number;
+    staticPages: { title: string; slug: string }[];
+  }
 > = {
   komponent_artikkel: {
     title: "Components",
     prefix: "komponenter",
     order: 0,
+    staticPages: [{ title: "Ikoner", slug: "/komponenter/ikoner" }],
   },
   ds_artikkel: {
     title: "Foundations",
     prefix: "grunnleggende",
     order: 1,
+    staticPages: [
+      { title: "Design tokens", slug: "/grunnleggende/styling/design-tokens" },
+    ],
   },
   templates_artikkel: {
     title: "Templates and Patterns",
     prefix: "monster-maler",
     order: 2,
+    staticPages: [],
   },
 };
 
@@ -63,10 +73,15 @@ async function markdown() {
         `- [${item.heading}](${BASE_URL}/${item.slug}.md)${item.kategori ? ` (${item.kategori})` : ""}`,
     );
 
+    const staticPages = config.staticPages.map(
+      (page) => `- [${page.title}](${BASE_URL}${page.slug}.md)`,
+    );
+
     sections.push(
       buildMarkdown(
         { heading: config.title, level: 2 },
         `Collection: [All ${config.title}](${BASE_URL}/${config.prefix}.md)`,
+        ...staticPages,
         lines.join("\n"),
       ),
     );
