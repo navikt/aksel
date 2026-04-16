@@ -22,19 +22,44 @@ const Example = () => {
           <Theme theme={resolvedTheme as "light" | "dark"}>
             <ActionMenu.Content align="end">
               <ActionMenu.Group label="Systemer og oppslagsverk">
-                <ActionMenu.Item as="a" target="_blank" href="#">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  rel="noreferrer noopener"
+                >
                   A.Inntekt
                 </ActionMenu.Item>
-                <ActionMenu.Item as="a" target="_blank" href="#">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  rel="noreferrer noopener"
+                >
                   Aa-registeret
                 </ActionMenu.Item>
-                <ActionMenu.Item as="a" target="_blank" href="#">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  rel="noreferrer noopener"
+                >
                   Gosys
                 </ActionMenu.Item>
-                <ActionMenu.Item as="a" target="_blank" href="#">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  rel="noreferrer noopener"
+                >
                   Modia personoversikt
                 </ActionMenu.Item>
-                <ActionMenu.Item as="a" target="_blank" href="#">
+                <ActionMenu.Item
+                  as="a"
+                  target="_blank"
+                  href="#"
+                  rel="noreferrer noopener"
+                >
                   Oppdrag
                 </ActionMenu.Item>
               </ActionMenu.Group>
