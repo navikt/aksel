@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -70,9 +71,9 @@ export const AutoLayoutMinimal: Story = {
       <DataTable layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th>Column 1</DataTable.Th>
-            <DataTable.Th>Column 2</DataTable.Th>
-            <DataTable.Th>Column 3</DataTable.Th>
+            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -100,7 +101,9 @@ export const AutoLayoutOverflowX: Story = {
           <DataTable.Tr>
             {columns.map((column) => {
               return (
-                <DataTable.Th key={column.header}>{column.header}</DataTable.Th>
+                <DataTableColumnHeader key={column.header}>
+                  {column.header}
+                </DataTableColumnHeader>
               );
             })}
           </DataTable.Tr>
@@ -131,7 +134,9 @@ export const AutoLayoutNoCellTruncation: Story = {
         <DataTable.Thead>
           <DataTable.Tr>
             {columns.map((column) => (
-              <DataTable.Th key={column.header}>{column.header}</DataTable.Th>
+              <DataTableColumnHeader key={column.header}>
+                {column.header}
+              </DataTableColumnHeader>
             ))}
           </DataTable.Tr>
         </DataTable.Thead>
@@ -159,9 +164,9 @@ export const AutoLayoutSortable: Story = {
     <DataTable layout="auto">
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th sortable>Left</DataTable.Th>
-          <DataTable.Th sortable>Center</DataTable.Th>
-          <DataTable.Th sortable>Right</DataTable.Th>
+          <DataTableColumnHeader sortable>Left</DataTableColumnHeader>
+          <DataTableColumnHeader sortable>Center</DataTableColumnHeader>
+          <DataTableColumnHeader sortable>Right</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -183,4 +188,60 @@ export const AutoLayoutSortable: Story = {
       </DataTable.Tbody>
     </DataTable>
   ),
+};
+
+export const FixedLayoutMinimal: Story = {
+  render: () => {
+    return (
+      <DataTable layout="fixed">
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
+            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Test</DataTable.Td>
+            <DataTable.Td>Example</DataTable.Td>
+            <DataTable.Td>Demo of small table</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    );
+  },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
+};
+
+export const FixedLayoutDynamicWidth: Story = {
+  render: () => {
+    return (
+      <DataTable layout="fixed">
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTableColumnHeader width="100%">Column 1</DataTableColumnHeader>
+            <DataTableColumnHeader width="100%">Column 2</DataTableColumnHeader>
+            <DataTableColumnHeader width="100%">Column 3</DataTableColumnHeader>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Test</DataTable.Td>
+            <DataTable.Td>Example</DataTable.Td>
+            <DataTable.Td>Demo of small table</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>
+    );
+  },
+  parameters: {
+    a11y: { disable: true },
+    controls: { disable: true },
+    docs: { disable: true },
+  },
 };

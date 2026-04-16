@@ -43,7 +43,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
           </svg>
         )}
       </Box>
-      <UmamiLink href={href} umamiKilde="God Praksis Forside">
+      <UmamiLink href={href} lenkegruppe="God Praksis Forside">
         {children}
       </UmamiLink>
     </HStack>

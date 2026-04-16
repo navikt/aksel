@@ -43,7 +43,6 @@ function IconPageIconDetails({
       }),
     );
 
-    // eslint-disable-next-line
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDownloadLink(url);
 

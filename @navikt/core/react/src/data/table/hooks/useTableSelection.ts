@@ -9,31 +9,25 @@ import type {
   TableSelection,
 } from "../helpers/selection/selection.types";
 
-type UseTableSelectionArgs<T> = SelectionProps & {
-  data: T[];
-  getRowId: (rowData: T, index: number) => string | number;
+type UseTableSelectionArgs = SelectionProps & {
+  /* This is needed for multiple selection to know which keys to select when "select all" is used */
+  allRowKeys: (string | number)[];
 };
 
 type UseTableSelectionReturn = {
   selection: TableSelection;
-  allKeys: SelectedKeysT;
+  renderSelection: boolean;
 };
 
-function useTableSelection<T>({
+function useTableSelection({
   selectionMode = "none",
   defaultSelectedKeys,
   selectedKeys: selectedKeysProp,
   onSelectionChange,
-  disabledKeys = [],
-  data,
-  getRowId,
-}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
+  disabledSelectionKeys = [],
+  allRowKeys,
+}: UseTableSelectionArgs): UseTableSelectionReturn {
   const radioGroupName = useId();
-
-  const allKeys = useMemo(
-    () => data.map((item, index) => getRowId(item, index)),
-    [data, getRowId],
-  );
 
   const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
     value: selectionMode !== "none" ? selectedKeysProp : undefined,
@@ -43,73 +37,73 @@ function useTableSelection<T>({
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  const disabledKeysSet = useMemo(() => new Set(disabledKeys), [disabledKeys]);
+  const disabledKeysSet = useMemo(
+    () => new Set(disabledSelectionKeys),
+    [disabledSelectionKeys],
+  );
 
   const isRowSelected = useCallback(
-    (rowId: string | number) => {
-      if (selectionMode === "none") {
-        return false;
-      }
-
-      return selectedKeysSet.has(rowId);
-    },
-    [selectedKeysSet, selectionMode],
+    (rowId: string | number) => selectedKeysSet.has(rowId),
+    [selectedKeysSet],
   );
+
+  const baseSelection = { selectedKeys, disabledSelectionKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {
-      allKeys,
       selection: {
         selectionMode,
+        ...baseSelection,
         selectedKeys: [],
-        disabledKeys,
-        isRowSelected,
       },
+      renderSelection: false,
     };
   }
 
   if (selectionMode === "single") {
-    const { getRowRadioProps } = getSingleSelectProps({
-      selectedKeysSet,
-      setSelectedKeys,
-      disabledKeysSet,
-      name: radioGroupName,
-    });
-
     return {
-      allKeys,
       selection: {
         selectionMode,
-        selectedKeys,
-        disabledKeys,
-        getRowRadioProps,
-        isRowSelected,
+        ...baseSelection,
+        ...getSingleSelectProps({
+          selectedKeysSet,
+          setSelectedKeys,
+          disabledKeysSet,
+          name: radioGroupName,
+        }),
       },
+      renderSelection: allRowKeys.length !== 0,
     };
   }
 
-  const { getTheadCheckboxProps, getRowCheckboxProps } = getMultipleSelectProps(
-    {
-      selectedKeysSet,
-      selectedKeys,
-      setSelectedKeys,
-      disabledKeysSet,
-      allKeys,
-    },
-  );
-
   return {
-    allKeys,
     selection: {
       selectionMode,
-      selectedKeys,
-      disabledKeys,
-      getTheadCheckboxProps,
-      getRowCheckboxProps,
-      isRowSelected,
+      ...baseSelection,
+      ...getMultipleSelectProps({
+        selectedKeysSet,
+        selectedKeys,
+        setSelectedKeys,
+        disabledKeysSet,
+        allRowKeys,
+      }),
     },
+    renderSelection: allRowKeys.length !== 0,
   };
 }
 
-export { useTableSelection };
+/**
+ * TODO: Only temp needed to keep Root happy
+ */
+const noSelectionState: UseTableSelectionReturn = {
+  selection: {
+    selectionMode: "none",
+    selectedKeys: [],
+    disabledSelectionKeys: [],
+    isRowSelected: () => false,
+  },
+  renderSelection: false,
+};
+
+export { useTableSelection, noSelectionState };
 export type { SelectionProps, UseTableSelectionReturn };

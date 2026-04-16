@@ -7,6 +7,7 @@ import {
   useState,
   useTransition,
 } from "react";
+import { Events } from "@navikt/analytics-types";
 import { debounce } from "@navikt/ds-react";
 import {
   type GlobalSearchActionReturnT,
@@ -38,7 +39,7 @@ function GlobalSearchResultProvider({
       debounce((query: string) => {
         maybeEnableComicSans(query);
 
-        umamiTrack("sok", {});
+        umamiTrack(Events.SOK, { tekst: "global søk" });
         setParam(query);
       }, 200),
     [setParam],
@@ -65,7 +66,6 @@ function GlobalSearchResultProvider({
 
   useEffect(() => {
     if (!paramValue) {
-      // eslint-disable-next-line
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchResults(null);
       return;

@@ -1,4 +1,5 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
+import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
@@ -11,6 +12,7 @@ import {
 } from "../empty-state/DataTableEmptyState";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import { type SelectionProps } from "../hooks/useTableSelection";
+import { noSelectionState } from "../hooks/useTableSelection";
 import {
   DataTableLoadingState,
   type DataTableLoadingStateProps,
@@ -135,12 +137,6 @@ interface DataTableRootComponent extends React.ForwardRefExoticComponent<
    * @see 🏷️ {@link DataTableThProps}
    * @example
    * ```jsx
-   * <DataTable>
-   *   <DataTable.Thead>
-   *     <DataTable.Th>Header 1</DataTable.Th>
-   *     <DataTable.Th>Header 2</DataTable.Th>
-   *   </DataTable.Thead>
-   * </DataTable>
    * ```
    */
   Th: typeof DataTableTh;
@@ -219,19 +215,25 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
     },
     forwardedRef,
   ) => {
-    const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
-    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
-
-    const { tabIndex } = useTableKeyboardNav(tableRef, {
+    const { tabIndex, setTableRef } = useTableKeyboardNav({
       enabled: withKeyboardNav,
       shouldBlockNavigation,
     });
+
+    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
     return (
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
-        dataLength={0}
+        selectionState={noSelectionState}
+        stickySelection={false}
+        stickyHeader={false}
+        tableId={useId()}
+        showLoadingSkeletons={false}
+        onRowClick={undefined}
+        disableRowSelectionOnClick={false}
+        showLoadingOverlay={false}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

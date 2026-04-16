@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Settings",
@@ -20,9 +21,11 @@ export const TextAlign: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Left</DataTable.Th>
-          <DataTable.Th textAlign="center">Center</DataTable.Th>
-          <DataTable.Th textAlign="right">Right</DataTable.Th>
+          <DataTableColumnHeader>Left</DataTableColumnHeader>
+          <DataTableColumnHeader textAlign="center">
+            Center
+          </DataTableColumnHeader>
+          <DataTableColumnHeader textAlign="right">Right</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -51,13 +54,13 @@ export const TextAlignSortable: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th sortable>Left</DataTable.Th>
-          <DataTable.Th sortable textAlign="center">
+          <DataTableColumnHeader sortable>Left</DataTableColumnHeader>
+          <DataTableColumnHeader sortable textAlign="center">
             Center
-          </DataTable.Th>
-          <DataTable.Th sortable textAlign="right">
+          </DataTableColumnHeader>
+          <DataTableColumnHeader sortable textAlign="right">
             Right
-          </DataTable.Th>
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>

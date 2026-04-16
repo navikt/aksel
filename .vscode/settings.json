@@ -1,8 +1,5 @@
 {
-  "cssVariables.lookupFiles": [
-    "@navikt/core/tokens/dist/tokens.css",
-    "@navikt/core/tokens/dist/darkside/tokens.css"
-  ],
+  "cssVariables.lookupFiles": ["@navikt/core/tokens/dist/tokens.css"],
   "eslint.problems.shortenToSingleLine": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.watcherExclude": {
@@ -12,6 +9,6 @@
     "**/cjs": true
   },
   "playwright.reuseBrowser": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "deno.enablePaths": ["./scripts/deno"]
 }

@@ -2,6 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { TokenFilter } from "./TokenFilter";
 import type {
   ExternalPropertyDefinition,
@@ -406,10 +407,10 @@ export const WithDataTable: Story = {
         <DataTable zebraStripes layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTable.Th>Name</DataTable.Th>
-              <DataTable.Th>Status</DataTable.Th>
-              <DataTable.Th>Region</DataTable.Th>
-              <DataTable.Th>CPU</DataTable.Th>
+              <DataTableColumnHeader>Name</DataTableColumnHeader>
+              <DataTableColumnHeader>Status</DataTableColumnHeader>
+              <DataTableColumnHeader>Region</DataTableColumnHeader>
+              <DataTableColumnHeader>CPU</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>

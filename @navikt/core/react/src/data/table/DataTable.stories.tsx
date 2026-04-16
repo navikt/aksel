@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { DataTable } from ".";
 import { Checkbox } from "../../form/checkbox";
+import { DataTableColumnHeader } from "./column-header/DataTableColumnHeader";
 
 type SortDirection = "asc" | "desc" | "none";
 
@@ -27,8 +28,8 @@ export const Default: Story = {
     >
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTable.Th>Header 1</DataTable.Th>
-          <DataTable.Th>Header 2</DataTable.Th>
+          <DataTableColumnHeader>Header 1</DataTableColumnHeader>
+          <DataTableColumnHeader>Header 2</DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -91,7 +92,7 @@ export const Selected: Story = {
       <DataTable style={{ width: "500px" }}>
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th>
+            <DataTableColumnHeader>
               <Checkbox
                 size="small"
                 indeterminate={
@@ -113,9 +114,9 @@ export const Selected: Story = {
               >
                 Velg alle
               </Checkbox>
-            </DataTable.Th>
-            <DataTable.Th>Header 1</DataTable.Th>
-            <DataTable.Th>Header 2</DataTable.Th>
+            </DataTableColumnHeader>
+            <DataTableColumnHeader>Header 1</DataTableColumnHeader>
+            <DataTableColumnHeader>Header 2</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -215,21 +216,21 @@ export const Sortable: Story = {
       <DataTable style={{ width: "500px" }}>
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTable.Th
+            <DataTableColumnHeader
               sortable
               sortDirection={dirFor("name")}
               onSortClick={() => handleSort("name")}
             >
               Navn
-            </DataTable.Th>
-            <DataTable.Th
+            </DataTableColumnHeader>
+            <DataTableColumnHeader
               sortable
               sortDirection={dirFor("age")}
               onSortClick={() => handleSort("age")}
             >
               Alder
-            </DataTable.Th>
-            <DataTable.Th>By</DataTable.Th>
+            </DataTableColumnHeader>
+            <DataTableColumnHeader>By</DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>

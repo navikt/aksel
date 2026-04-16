@@ -13,6 +13,7 @@ import { Search } from "../../form/search";
 import { Box } from "../../primitives/box";
 import { VStack } from "../../primitives/stack";
 import { DataTable } from "../table";
+import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 
@@ -82,7 +83,7 @@ export const NoPageScroll: Story = {
                   <DataTable.Tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       return (
-                        <DataTable.Th
+                        <DataTableColumnHeader
                           key={header.id}
                           defaultWidth={header.getSize()}
                           sortable
@@ -99,7 +100,7 @@ export const NoPageScroll: Story = {
                                 header.column.columnDef.header,
                                 header.getContext(),
                               )}
-                        </DataTable.Th>
+                        </DataTableColumnHeader>
                       );
                     })}
                   </DataTable.Tr>

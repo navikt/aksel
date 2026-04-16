@@ -53,7 +53,6 @@ function useTableOfContents(toc: NonNullable<TOC_BY_SLUG_QUERY_RESULT>) {
      * `activeId` updates state in TOC, causes hydration-errors if we change initial state on load outside effect.
      */
 
-    // eslint-disable-next-line
     /* eslint-disable-next-line react-hooks/set-state-in-effect  */
     window.location.hash && setActiveId(window.location.hash.replace("#", ""));
   }, []);
