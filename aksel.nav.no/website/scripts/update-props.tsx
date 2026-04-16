@@ -149,8 +149,9 @@ function propList() {
            */
           type: val.type.raw ?? val.type.name,
           enum:
-            (val.type.value as EnumValues)?.map((x) => x.value).join(" | ") ??
-            null,
+            val.type.name === "enum" && Array.isArray(val.type.value)
+              ? (val.type.value as EnumValues).map((x) => x.value).join(" | ")
+              : null,
         };
       }),
     };

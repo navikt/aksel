@@ -151,15 +151,16 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 }`;
 
 /**
- * Inclued replaces value with enum if it exists for more verbose prop-docs
+ * Include replaces value with enum if it exists for more verbose prop-docs
  */
-const propsSeksjonForForMarkdown = `_type == "props_seksjon" =>{
+const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
   ...,
   komponenter[]{
     ...,
     "propref": propref->{..., "proplist": proplist[]{
       ...,
-      "type": coalesce(enum, type)
+      "type": coalesce(enum, type),
+      "enum": null
     }}
   },
 }`;
@@ -190,7 +191,7 @@ ${propsSeksjon},
 
 export const destructureBlocksForMarkdown = `
 ${baseBlocks},
-${propsSeksjonForForMarkdown},
+${propsSeksjonForMarkdown},
 `;
 
 export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;

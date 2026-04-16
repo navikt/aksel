@@ -453,7 +453,7 @@ const newTokensWithoutRegex: TokensWithTailwindTag = {
 
 type TokensWithRegexes = Record<
   string,
-  { tw: string; regexes: ReturnType<typeof getFrameworkRegexes> }
+  { tw: string | null; regexes: ReturnType<typeof getFrameworkRegexes> }
 >;
 
 const v8TokenConfig: TokensWithRegexes = Object.entries(
