@@ -1,6 +1,5 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
-import { useMergeRefs } from "../utils/hooks";
 import { AxisLabels } from "./AxisLabels";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { TimelineKeyboardNavProvider } from "./hooks/TimelineKeyboardNavProvider";
@@ -94,12 +93,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       axisLabelTemplates,
       ...rest
     },
-    ref,
+    forwardedRef,
   ) => {
-    const [timelineElement, setTimelineElement] =
-      useState<HTMLDivElement | null>(null);
-
-    const mergedRefs = useMergeRefs(setTimelineElement, ref);
     const isMultipleRows = Array.isArray(children);
 
     if (!isMultipleRows) {
@@ -179,8 +174,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           setEndInclusive: (d) => setEndInclusive(d),
         }}
       >
-        <TimelineKeyboardNavProvider timelineElement={timelineElement}>
-          <div {...rest} ref={mergedRefs}>
+        <TimelineKeyboardNavProvider>
+          <div {...rest} ref={forwardedRef}>
             <div className="aksel-timeline">
               <AxisLabels templates={axisLabelTemplates} />
 

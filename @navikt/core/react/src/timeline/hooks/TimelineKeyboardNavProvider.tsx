@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
+import { Slot } from "../../utils/components/slot/Slot";
 import { createStrictContext } from "../../utils/helpers";
 
 type TimelineKeyboardNavStableContextType = {
@@ -30,17 +31,16 @@ const {
 });
 
 type TimelineKeyboardNavProviderProps = {
-  children: React.ReactNode;
-  timelineElement: HTMLDivElement | null;
+  children: React.ReactElement;
 };
 
-function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
-  const { timelineElement } = props;
-
+function TimelineKeyboardNavProvider({
+  children,
+}: TimelineKeyboardNavProviderProps) {
   const [activeRow, setActiveRow] = React.useState<HTMLElement | null>(null);
   const activeRowRef = React.useRef<HTMLElement | null>(null);
-  const timelineElementRef = React.useRef<HTMLDivElement | null>(null);
-  timelineElementRef.current = timelineElement;
+
+  const timelineElementRef = useRef<HTMLTableElement>(null);
 
   const updateActiveRow = React.useCallback((element: HTMLElement | null) => {
     activeRowRef.current = element;
@@ -101,10 +101,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
           return;
         }
 
-        /* Next index need to take into account looping */
         const nextIndex =
           key === "ArrowDown" ? currentIndex + 1 : currentIndex - 1;
 
+        /* We want to avoid looping */
         if (nextIndex < 0 || nextIndex >= rows.length) {
           return;
         }
@@ -139,6 +139,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         const nextIndex =
           key === "ArrowRight" ? currentIndex + 1 : currentIndex - 1;
 
+        /* We want to avoid looping */
         if (nextIndex < 0 || nextIndex >= periods.length) {
           return;
         }
@@ -151,8 +152,8 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
 
   const handlePinKeyDown = useCallback(
     (event: React.KeyboardEvent<Element>) => {
-      const timelineEl = timelineElementRef.current;
-      if (!timelineEl) {
+      const timelineElement = timelineElementRef.current;
+      if (!timelineElement) {
         return;
       }
 
@@ -164,7 +165,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       const { key } = event;
 
       if (key === "ArrowDown") {
-        const rows = timelineEl.querySelectorAll("[data-timeline-row]");
+        const rows = timelineElement.querySelectorAll("[data-timeline-row]");
         if (rows.length === 0) {
           return;
         }
@@ -185,7 +186,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
 
       if (key === "ArrowRight" || key === "ArrowLeft") {
         event.preventDefault();
-        const pins = timelineEl.querySelectorAll("[data-timeline-pin]");
+        const pins = timelineElement.querySelectorAll("[data-timeline-pin]");
         if (pins.length === 0) {
           return;
         }
@@ -200,6 +201,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         const nextIndex =
           key === "ArrowRight" ? currentIndex + 1 : currentIndex - 1;
 
+        /* We want to avoid looping */
         if (nextIndex < 0 || nextIndex >= pins.length) {
           return;
         }
@@ -217,7 +219,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       handlePinKeyDown={handlePinKeyDown}
     >
       <TimelineKeyboardNavActiveRowContextProvider activeRow={activeRow}>
-        {props.children}
+        <Slot ref={timelineElementRef}>{children}</Slot>
       </TimelineKeyboardNavActiveRowContextProvider>
     </TimelineKeyboardNavStableContextProvider>
   );
