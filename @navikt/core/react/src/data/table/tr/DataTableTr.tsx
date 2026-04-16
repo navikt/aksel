@@ -120,6 +120,14 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 );
 
 function RowExpansionCell({ rowId }: { rowId?: string | number }) {
+  const { tableId, showLoadingSkeletons } = useDataTableContext();
+  const { location } = useDataTableLocation();
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext) {
+    return null;
+  }
+
   const {
     isExpanded,
     toggleExpansion,
@@ -127,9 +135,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
     isAllExpanded,
     toggleAll,
     showExpandAll,
-  } = useDataTableExpansion();
-  const { tableId, showLoadingSkeletons } = useDataTableContext();
-  const { location } = useDataTableLocation();
+  } = expansionContext;
 
   if (!enableExpansion) {
     return null;
