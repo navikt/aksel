@@ -20,7 +20,7 @@ const {
 } = createStrictContext<DataTableExpansionContextT>({
   name: "DataTableExpansionContext",
   errorMessage:
-    "useTableExpansionContext must be used within a DataTableExpansionProvider.",
+    "useDataTableExpansion must be used within a DataTableExpansionProvider.",
 });
 
 type TableExpansionOptions<T> = {
