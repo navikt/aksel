@@ -1,6 +1,6 @@
 import jscodeshift from "jscodeshift";
 import { describe, expect, test } from "vitest";
-import { getJSXLiteralValue, getJSXStringValue } from "../jsx-string-value";
+import { getJSXLiteralValue, getJSXStringValue } from "../jsx-value";
 
 const j = jscodeshift.withParser("tsx");
 
@@ -83,8 +83,8 @@ describe("getJSXLiteralValue", () => {
   });
 
   test("handles strings with special characters", () => {
-    const node = getAttrValue('<Component prop="hello-world_123" />');
-    expect(getJSXLiteralValue(node)).toBe("hello-world_123");
+    const node = getAttrValue('<Component prop={"hello, world! 👋"} />');
+    expect(getJSXLiteralValue(node)).toBe("hello, world! 👋");
   });
 
   test("handles multiline template literal without expressions", () => {

@@ -1,13 +1,4 @@
-import type {
-  BooleanLiteral,
-  JSXAttribute,
-  JSXExpressionContainer,
-  Literal,
-  NumericLiteral,
-  StringLiteral,
-  TemplateLiteral,
-  UnaryExpression,
-} from "jscodeshift";
+import type { JSXAttribute, JSXExpressionContainer } from "jscodeshift";
 
 type AttributeValue =
   | JSXAttribute["value"]
@@ -38,27 +29,27 @@ export function getJSXLiteralValue(node: AttributeValue): LiteralValue | null {
   if (!node) return null;
 
   if (node.type === "StringLiteral") {
-    return (node as StringLiteral).value;
+    return node.value;
   }
 
   if (node.type === "NumericLiteral") {
-    return (node as NumericLiteral).value;
+    return node.value;
   }
 
   if (node.type === "UnaryExpression") {
-    const unary = node as UnaryExpression;
+    const unary = node;
     if (unary.operator === "-" && unary.argument.type === "NumericLiteral") {
-      return -(unary.argument as NumericLiteral).value;
+      return -unary.argument.value;
     }
     return null;
   }
 
   if (node.type === "BooleanLiteral") {
-    return (node as BooleanLiteral).value;
+    return node.value;
   }
 
   if (node.type === "Literal") {
-    const value = (node as Literal).value;
+    const value = node.value;
     if (
       typeof value === "string" ||
       typeof value === "number" ||
@@ -70,7 +61,7 @@ export function getJSXLiteralValue(node: AttributeValue): LiteralValue | null {
   }
 
   if (node.type === "TemplateLiteral") {
-    const template = node as TemplateLiteral;
+    const template = node;
     if (template.expressions.length === 0 && template.quasis.length === 1) {
       return template.quasis[0].value.cooked ?? null;
     }
@@ -78,9 +69,7 @@ export function getJSXLiteralValue(node: AttributeValue): LiteralValue | null {
   }
 
   if (node.type === "JSXExpressionContainer") {
-    return getJSXLiteralValue(
-      (node as JSXExpressionContainer).expression as AttributeValue,
-    );
+    return getJSXLiteralValue(node.expression);
   }
 
   return null;

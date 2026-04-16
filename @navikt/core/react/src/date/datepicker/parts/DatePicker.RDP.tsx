@@ -178,10 +178,7 @@ const ReactDayPicker = ({
             ...restWeekdaysProps
           }) => (
             <thead className="rdp-head" aria-hidden>
-              <tr
-                className={cl("rdp-head_row", weekdaysClassName)}
-                {...restWeekdaysProps}
-              >
+              <tr className={cl(weekdaysClassName)} {...restWeekdaysProps}>
                 {weekdaysChildren}
               </tr>
             </thead>

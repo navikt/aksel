@@ -7,7 +7,7 @@ import type {
   JSXElement,
   JSXSpreadAttribute,
 } from "jscodeshift";
-import { getJSXStringValue } from "../../../utils/jsx-string-value";
+import { getJSXStringValue } from "../../../utils/jsx-value";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 const headingSizeMap: Record<string, string> = {
@@ -34,7 +34,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   let localListName = "List";
   let hasListImport = false;
-  let dsReactImportPath: ASTPath<ImportDeclaration> | null = null;
+  let dsReactImportPath: ASTPath<ImportDeclaration> | undefined;
 
   let localHeadingName = "Heading";
   let hasHeadingImport = false;
@@ -128,17 +128,11 @@ export default function transformer(file: FileInfo, api: API) {
       const titleValue = titleAttr?.value;
       const descValue = descAttr?.value;
 
-      let sizeValue = "medium";
       const extractedSize = getJSXStringValue(sizeAttr?.value);
-      if (extractedSize) {
-        sizeValue = extractedSize;
-      }
+      const sizeValue = extractedSize || "medium";
 
-      let headingAs = "h3";
       const extractedHeadingAs = getJSXStringValue(headingTagAttr?.value);
-      if (extractedHeadingAs) {
-        headingAs = extractedHeadingAs;
-      }
+      const headingAs = extractedHeadingAs || "h3";
 
       // Separate attributes
       const listAttributes: JSXAttribute[] = [
@@ -290,14 +284,15 @@ export default function transformer(file: FileInfo, api: API) {
   // Add imports
   if (newImports.size > 0) {
     if (dsReactImportPath) {
-      const importPath = dsReactImportPath as ASTPath<ImportDeclaration>;
       const existingSpecifiers = new Set(
-        importPath.node.specifiers?.map((specifier) => specifier.local?.name),
+        dsReactImportPath.node.specifiers?.map(
+          (specifier) => specifier.local?.name,
+        ),
       );
 
       newImports.forEach((imp) => {
-        if (!existingSpecifiers.has(imp)) {
-          importPath.node.specifiers?.push(
+        if (!existingSpecifiers.has(imp) && dsReactImportPath) {
+          dsReactImportPath.node.specifiers?.push(
             j.importSpecifier(j.identifier(imp)),
           );
         }

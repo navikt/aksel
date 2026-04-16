@@ -4,7 +4,7 @@ import type {
   JSXExpressionContainer,
   Literal,
 } from "jscodeshift";
-import { getJSXStringValue } from "./jsx-string-value";
+import { getJSXStringValue } from "./jsx-value";
 import { getLineTerminator } from "./lineterminator";
 
 export interface MigrationConfig {

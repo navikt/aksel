@@ -44,6 +44,10 @@ class TokenStatus {
     };
   }
 
+  resetStatus() {
+    this.status = this.initStatus();
+  }
+
   add({
     isLegacy,
     type,

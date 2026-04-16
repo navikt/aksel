@@ -5,7 +5,7 @@ import type {
   JSXElement,
   JSXSpreadAttribute,
 } from "jscodeshift";
-import { getJSXLiteralValue } from "../../../utils/jsx-string-value";
+import { getJSXLiteralValue } from "../../../utils/jsx-value";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 export default function transformer(file: FileInfo, api: API) {
