@@ -47,6 +47,22 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
     setActiveRow(element);
   }, []);
 
+  const focusElement = useCallback(
+    (
+      element: HTMLElement | Element | null,
+      event: React.KeyboardEvent<HTMLElement | Element>,
+    ) => {
+      if (!element) {
+        return;
+      }
+
+      event.preventDefault();
+
+      (element as HTMLElement).focus();
+    },
+    [],
+  );
+
   const handleRowKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
       const currentActiveRow = activeRowRef.current;
@@ -62,7 +78,6 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       const { key } = event;
 
       if (key === "ArrowDown" || key === "ArrowUp") {
-        event.preventDefault();
         const rows = currentActiveRow.parentElement?.querySelectorAll(
           "[data-timeline-row]",
         );
@@ -82,7 +97,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         const atBoundary = currentIndex === 0 && key === "ArrowUp";
 
         if (atBoundary && firstPin) {
-          (firstPin as HTMLElement | null)?.focus();
+          focusElement(firstPin, event);
           return;
         }
 
@@ -98,9 +113,9 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         const periods = nextRow?.querySelectorAll("[data-timeline-period]");
 
         if (periods?.length > 0) {
-          (periods[0] as HTMLElement).focus();
+          focusElement(periods[0], event);
         } else if (nextRow) {
-          (nextRow as HTMLElement).focus();
+          focusElement(nextRow, event);
         }
         return;
       }
@@ -128,10 +143,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
           return;
         }
 
-        (periods[nextIndex] as HTMLElement).focus();
+        focusElement(periods[nextIndex], event);
       }
     },
-    [],
+    [focusElement],
   );
 
   const handlePinKeyDown = useCallback(
@@ -149,7 +164,6 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
       const { key } = event;
 
       if (key === "ArrowDown") {
-        event.preventDefault();
         const rows = timelineEl.querySelectorAll("[data-timeline-row]");
         if (rows.length === 0) {
           return;
@@ -162,9 +176,9 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
           );
 
           if (periods?.length > 0) {
-            (periods[0] as HTMLElement).focus();
+            focusElement(periods[0], event);
           } else if (rowToFocus) {
-            (rowToFocus as HTMLElement).focus();
+            focusElement(rowToFocus, event);
           }
         }
       }
@@ -190,10 +204,10 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
           return;
         }
 
-        (pins[nextIndex] as HTMLElement).focus();
+        focusElement(pins[nextIndex], event);
       }
     },
-    [],
+    [focusElement],
   );
 
   return (
