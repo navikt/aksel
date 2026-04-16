@@ -1,13 +1,18 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useMemo } from "react";
 import { Skeleton } from "../../../skeleton";
+import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
-import { useColumnOptions } from "../hooks/useColumnOptions";
 import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
+import { useColumnOptions } from "../hooks/useColumnOptions";
+import {
+  DataTableExpansionProvider,
+  useDataTableExpansion,
+} from "../hooks/useTableExpansion";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
@@ -16,11 +21,13 @@ import {
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
 import { DataTableTbody } from "../tbody/DataTableTbody";
-import { DataTableTd } from "../td/DataTableTd";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type { ColumnDefinitions } from "./DataTable.types";
-import { DataTableContextProvider } from "./DataTableRoot.context";
+import {
+  DataTableContextProvider,
+  useDataTableContext,
+} from "./DataTableRoot.context";
 
 interface DataTableProps<T>
   extends
@@ -110,7 +117,6 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowData: T,
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
@@ -135,7 +141,9 @@ interface DataTableProps<T>
   loadingState?: React.ReactNode;
   /**
    * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-   * @default 5
+   *
+   *
+   * If not provided, the rendered content will get a temporarily overlay while loading
    */
   loadingRows?: number;
   /**
@@ -144,11 +152,42 @@ interface DataTableProps<T>
    * @default "Laster innhold"
    */
   loadingLabel?: string;
+  /**
+   * Renders a details panel below the row when expanded.
+   * When provided, an expand toggle column is added automatically.
+   */
+  getDetailsPanelContent?: (rowData: T) => React.ReactNode;
+  /**
+   * Controlled list of expanded row IDs.
+   * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
+   */
+  detailsPanelRowIds?: (string | number)[];
+  /**
+   * Initial list of expanded row IDs for uncontrolled usage.
+   * @default []
+   */
+  defaultDetailsPanelRowIds?: (string | number)[];
+  /**
+   * Called when the list of expanded row IDs changes.
+   */
+  onDetailsPanelChange?: (ids: (string | number)[]) => void;
+  /**
+   * Returns the height (in px) or `"auto"` for a row's details panel.
+   * When a number is returned, the panel scrolls within that fixed height.
+   * @default "auto"
+   */
+  getDetailsPanelHeight?: (rowData: T) => number | "auto";
+  /**
+   * Shows an expand-all toggle button in the expand column header.
+   * @default false
+   */
+  showExpandAll?: boolean;
 }
 
 function DataTableAutoInner<T>(
   {
     className,
+    id,
     rowDensity = "normal",
     withKeyboardNav = false,
     zebraStripes = false,
@@ -172,8 +211,15 @@ function DataTableAutoInner<T>(
     emptyState,
     isLoading = false,
     loadingState,
-    loadingRows = 5,
+    loadingRows,
     loadingLabel = "Laster innhold",
+    disableRowSelectionOnClick = false,
+    getDetailsPanelContent,
+    getDetailsPanelHeight,
+    showExpandAll = false,
+    detailsPanelRowIds,
+    defaultDetailsPanelRowIds,
+    onDetailsPanelChange,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -192,9 +238,8 @@ function DataTableAutoInner<T>(
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const allRowKeys = useMemo(() => {
-    const resolvedGetRowId =
-      getRowId ??
-      (((_row: T, index: number) => index) as (rowData: T) => string | number);
+    const resolvedGetRowId = (item: T, index: number): string | number =>
+      getRowId?.(item, index) ?? index;
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
@@ -213,6 +258,8 @@ function DataTableAutoInner<T>(
     selectionMode: tableSelectionState.selection.selectionMode,
   });
 
+  const tableId = useId(id);
+
   return (
     <DataTableContextProvider
       layout={layout}
@@ -220,62 +267,77 @@ function DataTableAutoInner<T>(
       selectionState={tableSelectionState}
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
+      tableId={tableId}
+      showLoadingSkeletons={isLoading && loadingState == null}
+      onRowClick={onRowClick}
+      disableRowSelectionOnClick={disableRowSelectionOnClick}
+      isLoading={isLoading}
+      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
     >
-      <div className="aksel-data-table__border-wrapper">
-        <div className="aksel-data-table__scroll-wrapper">
-          <table
-            {...rest}
-            ref={mergedRef}
-            className={cl("aksel-data-table", className)}
-            data-zebra-stripes={zebraStripes}
-            data-truncate-content={truncateContent}
-            data-density={rowDensity}
-            data-layout={layout}
-            tabIndex={tabIndex}
-            aria-busy={isLoading || undefined}
-          >
-            <DataTableThead>
-              <DataTableTr>
-                {columns.map(({ isSticky, colDef }) => {
-                  const sortEntry = sortState.find(
-                    (s) => s.columnId === colDef.id,
-                  );
-                  const sortDirection = sortEntry?.direction ?? "none";
-                  return (
-                    <DataTableColumnHeader
-                      maxWidth={colDef.maxWidth}
-                      minWidth={colDef.minWidth}
-                      width={colDef.width}
-                      defaultWidth={colDef.defaultWidth ?? "100%"}
-                      textAlign={colDef.type === "number" ? "right" : "left"}
-                      key={colDef.id}
-                      isSticky={isSticky}
-                      sortable={colDef.sortable}
-                      sortDirection={sortDirection}
-                      onSortClick={(event) => onSortClick(colDef.id, event)}
-                    >
-                      {colDef.header}
-                    </DataTableColumnHeader>
-                  );
-                })}
-              </DataTableTr>
-            </DataTableThead>
-            <DataTableTbody>
-              <DataTableAutoTBodyContent
-                columns={columns}
-                data={data}
-                allRowKeys={allRowKeys}
-                isLoading={isLoading}
-                loadingState={loadingState}
-                loadingRows={loadingRows}
-                loadingLabel={loadingLabel}
-                emptyState={emptyState}
-                onRowClick={onRowClick}
-              />
-            </DataTableTbody>
-          </table>
+      <DataTableExpansionProvider
+        detailsPanelRowIds={detailsPanelRowIds}
+        defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
+        onDetailsPanelChange={onDetailsPanelChange}
+        allRowKeys={allRowKeys}
+        getDetailsPanelContent={getDetailsPanelContent}
+        getDetailsPanelHeight={getDetailsPanelHeight}
+        showExpandAll={showExpandAll}
+      >
+        <div className="aksel-data-table__border-wrapper">
+          <div className="aksel-data-table__scroll-wrapper">
+            <table
+              {...rest}
+              ref={mergedRef}
+              className={cl("aksel-data-table", className)}
+              data-zebra-stripes={zebraStripes}
+              data-truncate-content={truncateContent}
+              data-density={rowDensity}
+              data-layout={layout}
+              data-loading={isLoading || undefined}
+              tabIndex={tabIndex}
+              aria-busy={isLoading || undefined}
+            >
+              <DataTableThead>
+                <DataTableTr>
+                  {columns.map(({ isSticky, colDef }) => {
+                    const sortEntry = sortState.find(
+                      (s) => s.columnId === colDef.id,
+                    );
+                    const sortDirection = sortEntry?.direction ?? "none";
+                    return (
+                      <DataTableColumnHeader
+                        maxWidth={colDef.maxWidth}
+                        minWidth={colDef.minWidth}
+                        width={colDef.width}
+                        defaultWidth={colDef.defaultWidth ?? "100%"}
+                        textAlign={colDef.type === "number" ? "right" : "left"}
+                        key={colDef.id}
+                        isSticky={isSticky}
+                        sortable={colDef.sortable}
+                        sortDirection={sortDirection}
+                        onSortClick={(event) => onSortClick(colDef.id, event)}
+                      >
+                        {colDef.header}
+                      </DataTableColumnHeader>
+                    );
+                  })}
+                </DataTableTr>
+              </DataTableThead>
+              <DataTableTbody>
+                <DataTableAutoTBodyContent
+                  columns={columns}
+                  data={data}
+                  allRowKeys={allRowKeys}
+                  loadingState={loadingState}
+                  loadingRows={loadingRows}
+                  loadingLabel={loadingLabel}
+                  emptyState={emptyState}
+                />
+              </DataTableTbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </DataTableExpansionProvider>
     </DataTableContextProvider>
   );
 }
@@ -284,26 +346,24 @@ interface DataTableAutoTBodyContentProps<T> {
   columns: UseColumnOptionsResult<T>["columns"];
   data: T[];
   allRowKeys: (string | number)[];
-  isLoading: boolean;
   loadingState: React.ReactNode;
-  loadingRows: number;
   loadingLabel: string;
+  loadingRows?: number;
   emptyState: React.ReactNode;
-  onRowClick?: DataTableProps<T>["onRowClick"];
 }
 
 function DataTableAutoTBodyContent<T>({
   columns,
   data,
   allRowKeys,
-  isLoading,
   loadingState,
   loadingRows,
   loadingLabel,
   emptyState,
-  onRowClick,
 }: DataTableAutoTBodyContentProps<T>) {
-  if (isLoading && loadingState !== undefined) {
+  const { isLoading } = useDataTableContext();
+
+  if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
         {loadingState}
@@ -311,14 +371,14 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
-  if (isLoading) {
+  if (isLoading && loadingRows) {
     return (
       <>
-        <DataTableTr>
-          <DataTableTd colSpan={columns.length} className="aksel-sr-only">
+        <tr>
+          <td colSpan={columns.length} className="aksel-sr-only">
             {loadingLabel}
-          </DataTableTd>
-        </DataTableTr>
+          </td>
+        </tr>
         {Array.from({ length: loadingRows }, (_, rowIndex) => (
           <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
             {columns.map(({ isSticky, colDef }, colDefIndex) => (
@@ -345,42 +405,82 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
+  const renderLoadingAnnoucement = isLoading && !loadingState && !loadingRows;
+
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
     return (
-      <DataTableTr
-        key={rowId}
-        rowId={rowId}
-        onClick={(event) => {
-          if (!onRowClick || isInteractiveTarget(event.target)) {
-            return;
-          }
-
-          onRowClick(rowData, rowId, event);
-        }}
-        style={onRowClick ? { cursor: "pointer" } : undefined}
-      >
-        {columns.map(({ isSticky, colDef }, colDefIndex) => {
-          return (
-            <DataTableBaseCell
-              /* TODO: Make this configurable */
-              textAlign={colDef.type === "number" ? "right" : "left"}
-              key={colDef.id || colDefIndex}
-              as={colDef.isRowHeader ? "th" : "td"}
-              isSticky={isSticky}
-            >
-              {colDef.cell(rowData)}
-            </DataTableBaseCell>
-          );
-        })}
-      </DataTableTr>
+      <React.Fragment key={rowId}>
+        {renderLoadingAnnoucement && (
+          <tr>
+            <td colSpan={columns.length} className="aksel-sr-only">
+              {loadingLabel}
+            </td>
+          </tr>
+        )}
+        <DataTableTr rowId={rowId}>
+          {columns.map(({ isSticky, colDef }, colDefIndex) => {
+            return (
+              <DataTableBaseCell
+                /* TODO: Make this configurable */
+                textAlign={colDef.type === "number" ? "right" : "left"}
+                key={colDef.id || colDefIndex}
+                as={colDef.isRowHeader ? "th" : "td"}
+                isSticky={isSticky}
+              >
+                {colDef.cell(rowData)}
+              </DataTableBaseCell>
+            );
+          })}
+        </DataTableTr>
+        <DataTableExpandedRow
+          rowId={rowId}
+          rowData={rowData}
+          columnCount={columns.length}
+        />
+      </React.Fragment>
     );
   });
 }
 
-function isInteractiveTarget(target: EventTarget | null): boolean {
-  return !!(target as HTMLElement | null)?.closest(
-    "a, button, input, select, textarea",
+function DataTableExpandedRow<T>({
+  rowId,
+  rowData,
+  columnCount,
+}: {
+  rowId: string | number;
+  rowData: T;
+  columnCount: number;
+}) {
+  const { tableId } = useDataTableContext();
+  const expansionContext = useDataTableExpansion(false);
+
+  /* TODO: Is this the way we want to opt out? Might just be temp until auto and root is merged so they use same context */
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
+    expansionContext;
+
+  if (!isExpanded(rowId)) {
+    return null;
+  }
+
+  const content = getDetailsPanelContent?.(rowData);
+
+  if (!content) {
+    return null;
+  }
+
+  return (
+    <tr>
+      <td id={`${tableId}-expansion-${rowId}`} colSpan={columnCount}>
+        <div style={{ height: getDetailsPanelHeight?.(rowData) }}>
+          {content}
+        </div>
+      </td>
+    </tr>
   );
 }
 

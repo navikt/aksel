@@ -25,6 +25,7 @@ function getSingleSelectProps({
       value: key,
       name,
     }),
+    toggleSelection: handleSelectionChange,
   };
 }
 

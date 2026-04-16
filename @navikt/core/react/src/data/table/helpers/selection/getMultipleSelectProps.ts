@@ -64,6 +64,7 @@ function getMultipleSelectProps({
       checked: selectedKeysSet.has(key),
       disabled: disabledKeysSet.has(key),
     }),
+    toggleSelection: handleToggleRow,
   };
 }
 

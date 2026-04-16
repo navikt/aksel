@@ -92,5 +92,18 @@ function useTableSelection({
   };
 }
 
-export { useTableSelection };
+/**
+ * TODO: Only temp needed to keep Root happy
+ */
+const noSelectionState: UseTableSelectionReturn = {
+  selection: {
+    selectionMode: "none",
+    selectedKeys: [],
+    disabledSelectionKeys: [],
+    isRowSelected: () => false,
+  },
+  renderSelection: false,
+};
+
+export { useTableSelection, noSelectionState };
 export type { SelectionProps, UseTableSelectionReturn };
