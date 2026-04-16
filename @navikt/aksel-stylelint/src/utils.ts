@@ -8,22 +8,25 @@ const __dirname = dirname(__filename);
 
 const flattenObject = (
   obj: Record<string, string | Record<string, string>>,
-) => {
-  const flattened = Object.keys(obj).reduce((acc, key) => {
-    if (typeof obj[key] === "string") {
-      acc.push(key);
-    } else {
-      acc.push(flattenObject(obj[key]));
-    }
-    return acc;
-  }, []);
+): string[] => {
+  const flattened = Object.keys(obj).reduce<(string | string[])[]>(
+    (acc, key) => {
+      if (typeof obj[key] === "string") {
+        acc.push(key);
+      } else {
+        acc.push(flattenObject(obj[key]));
+      }
+      return acc;
+    },
+    [],
+  );
   return flattened.flat();
 };
 
 const tokenCSSFile = "./global-tokens.css";
 const tokenJsonFile = "./component-tokens.json";
 
-const allowedTokenNames = [];
+const allowedTokenNames: string[] = [];
 
 export const tokenExists = (
   controlledPrefixes: string[],

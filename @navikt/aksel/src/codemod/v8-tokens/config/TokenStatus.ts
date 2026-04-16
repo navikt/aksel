@@ -29,11 +29,11 @@ class TokenStatus {
   status: StatusT;
 
   constructor() {
-    this.initStatus();
+    this.status = this.initStatus();
   }
 
   initStatus() {
-    this.status = {
+    return {
       css: { legacy: [], updated: [] },
       scss: { legacy: [], updated: [] },
       less: { legacy: [], updated: [] },
@@ -42,6 +42,10 @@ class TokenStatus {
       component: { legacy: [], updated: [] },
       deprecated: { legacy: [], updated: [] },
     };
+  }
+
+  resetStatus() {
+    this.status = this.initStatus();
   }
 
   add({
@@ -96,11 +100,9 @@ class TokenStatus {
     let statusDataObj: StatusDataT;
     if (type === "summary") {
       statusDataObj = {
-        legacy: [].concat(
-          ...Object.values(this.status).map((_status) => _status.legacy),
-        ),
-        updated: [].concat(
-          ...Object.values(this.status).map((_status) => _status.updated),
+        legacy: Object.values(this.status).flatMap((_status) => _status.legacy),
+        updated: Object.values(this.status).flatMap(
+          (_status) => _status.updated,
         ),
       };
 

@@ -1,25 +1,29 @@
+import type {
+  API,
+  FileInfo,
+  JSXAttribute,
+  JSXElement,
+  JSXSpreadAttribute,
+} from "jscodeshift";
+import { getJSXLiteralValue } from "../../../utils/jsx-value";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   let localName = "Pagination";
 
   const root = j(file.source);
 
-  function addMigrationTag(node) {
+  function addMigrationTag(node: JSXElement) {
     const attributes = node.openingElement.attributes;
-    const isMigrated = attributes.find(
-      (attr) =>
+    const isMigrated = attributes?.find(
+      (attr: JSXAttribute | JSXSpreadAttribute) =>
         attr.type === "JSXAttribute" &&
         attr.name.name === "data-version" &&
-        attr.value.value === "v1",
+        getJSXLiteralValue(attr.value) === "v1",
     );
 
-    if (!isMigrated) {
+    if (!isMigrated && attributes) {
       attributes.push(
         j.jsxAttribute(j.jsxIdentifier("data-version"), j.literal("v1")),
       );
@@ -27,13 +31,14 @@ export default function transformer(file, api) {
   }
 
   /* https://github.com/mui/material-ui/blob/master/packages/mui-codemod/src/v5.0.0/variant-prop.js */
-  function addExplicitStandardProp(node) {
+  function addExplicitStandardProp(node: JSXElement) {
     const attributes = node.openingElement.attributes;
-    const variant = attributes.find(
-      (attr) => attr.type === "JSXAttribute" && attr.name.name === "size",
+    const variant = attributes?.find(
+      (attr: JSXAttribute | JSXSpreadAttribute) =>
+        attr.type === "JSXAttribute" && attr.name.name === "size",
     );
 
-    if (!variant) {
+    if (!variant && attributes) {
       attributes.unshift(
         j.jsxAttribute(j.jsxIdentifier("size"), j.literal("small")),
       );
@@ -46,37 +51,45 @@ export default function transformer(file, api) {
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === "@navikt/ds-react")
     .forEach((imp) => {
-      imp.value.specifiers.forEach((x) => {
+      imp.value.specifiers?.forEach((x) => {
         if (
+          x.type === "ImportSpecifier" &&
+          x.imported.type === "Identifier" &&
           x.imported.name === "Pagination" &&
-          x.local.name !== x.imported.name
+          x.local?.name !== x.imported.name &&
+          x.local?.name
         ) {
-          localName = x.local.name;
+          localName = String(x.local.name);
         }
       });
     });
 
   if (j(file.source).findJSXElements(localName)) {
     root.findJSXElements(`${localName}`).forEach((parent) => {
-      const skip = !!parent.value.openingElement?.attributes.find(
-        (x) => x.name.name === "data-version" && x.value.value === "v1",
+      const skip = !!parent.value.openingElement?.attributes?.find(
+        (attr: JSXAttribute | JSXSpreadAttribute) =>
+          attr.type === "JSXAttribute" &&
+          attr.name.name === "data-version" &&
+          getJSXLiteralValue(attr.value) === "v1",
       );
 
-      parent.value.openingElement?.attributes.forEach((x) => {
-        let didUpdate = false;
-        if (x.name?.name === "size" && x.type === "JSXAttribute" && !skip) {
-          /* addExplicitStandardProp */
-          if (x.value.value === "medium") {
-            x.value = j.literal("small");
-            didUpdate = true;
-          } else if (x.value.value === "small") {
-            x.value = j.literal("xsmall");
-            didUpdate = true;
-          }
+      parent.value.openingElement?.attributes?.forEach(
+        (x: JSXAttribute | JSXSpreadAttribute) => {
+          let didUpdate = false;
+          if (x.type === "JSXAttribute" && x.name?.name === "size" && !skip) {
+            const value = getJSXLiteralValue(x.value);
+            if (value === "medium") {
+              x.value = j.literal("small");
+              didUpdate = true;
+            } else if (value === "small") {
+              x.value = j.literal("xsmall");
+              didUpdate = true;
+            }
 
-          didUpdate && addMigrationTag(parent.value);
-        }
-      });
+            didUpdate && addMigrationTag(parent.value);
+          }
+        },
+      );
       addExplicitStandardProp(parent.value);
     });
   }

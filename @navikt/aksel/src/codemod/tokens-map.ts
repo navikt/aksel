@@ -363,6 +363,6 @@ const tokens = [
 ["--navdsi-header-color-hover", "--a-surface-inverted-hover"],
 ["--navdsi-header-color-active", "--a-surface-inverted-active"],
 ["--navds-button-icon-adjustment", "--ac-button-icon-margin"]
-]
+] as const
 
-module.exports = { tokens };
+export { tokens };
