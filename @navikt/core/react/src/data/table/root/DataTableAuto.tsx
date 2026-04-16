@@ -420,9 +420,9 @@ function DataTableAutoTBodyContent<T>({
             }
             if (
               !disableRowSelectionOnClick &&
-              selectionState?.selection.selectionMode !== "none"
+              selectionState.selection.selectionMode !== "none"
             ) {
-              selectionState?.selection.toggleSelection(rowId);
+              selectionState.selection.toggleSelection(rowId);
             }
 
             onRowClick?.(rowData, rowId, event);
@@ -462,7 +462,7 @@ function DataTableExpandedRow<T>({
   columnCount: number;
 }) {
   const { tableId } = useDataTableContext();
-  const { isExpanded, getDetailsPanelHeight, getDetailsPanelContent } =
+  const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
     useDataTableExpansion();
 
   if (!isExpanded(rowId)) {

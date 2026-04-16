@@ -4,8 +4,7 @@ import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 type DataTableContextProps = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
-  /* TODO: Temp optional, should be required */
-  selectionState?: UseTableSelectionReturn;
+  selectionState: UseTableSelectionReturn;
   stickySelection: boolean;
   stickyHeader: boolean;
   tableId: string;

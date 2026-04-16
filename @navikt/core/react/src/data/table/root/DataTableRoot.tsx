@@ -12,6 +12,7 @@ import {
 } from "../empty-state/DataTableEmptyState";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import { type SelectionProps } from "../hooks/useTableSelection";
+import { noSelectionState } from "../hooks/useTableSelection";
 import {
   DataTableLoadingState,
   type DataTableLoadingStateProps,
@@ -225,6 +226,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       <DataTableContextProvider
         layout={layout}
         withKeyboardNav={withKeyboardNav}
+        selectionState={noSelectionState}
         stickySelection={false}
         stickyHeader={false}
         tableId={useId()}

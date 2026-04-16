@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useControllableState } from "../../../utils/hooks";
 import type { SortChangeDetail, SortEntry } from "../root/DataTable.types";
 
@@ -47,25 +48,25 @@ function useTableSort(options: TableSortOptions): UseTableSortResults {
     defaultValue: defaultSort,
   });
 
-  const handleSortClick = (
-    id: string,
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-  ) => {
-    if (id === undefined) {
-      if (process.env.NODE_ENV === "development") {
-        console.warn(
-          `Aksel: Column id is undefined for sort event on target ${event.target}. Make sure your column definitions include an 'id' property.`,
-        );
+  const handleSortClick = useCallback(
+    (id: string, event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (id === undefined) {
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            `Aksel: Column id is undefined for sort event on target ${event.target}. Make sure your column definitions include an 'id' property.`,
+          );
+        }
+        return;
       }
-      return;
-    }
 
-    const cumulative = event.shiftKey;
-    const base = cumulative ? sort : sort.filter((s) => s.columnId === id);
-    const { next, detail } = nextSortEntries(base, id);
-    setSort(next);
-    onSortChange?.(next, detail);
-  };
+      const cumulative = event.shiftKey;
+      const base = cumulative ? sort : sort.filter((s) => s.columnId === id);
+      const { next, detail } = nextSortEntries(base, id);
+      setSort(next);
+      onSortChange?.(next, detail);
+    },
+    [onSortChange, setSort, sort],
+  );
 
   return {
     onSortClick: handleSortClick,

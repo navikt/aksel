@@ -43,7 +43,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     const renderFillerCell = layout === "fixed" && children;
 
     const selected =
-      selectionState?.selection.isRowSelected(rowId ?? "") ?? selectedProp;
+      selectionState.selection.isRowSelected(rowId ?? "") ?? selectedProp;
 
     const isSticky = location === "thead" && stickyHeader;
 
@@ -179,10 +179,6 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
-
-  if (!selectionState) {
-    return null;
-  }
 
   const { selection, renderSelection } = selectionState;
 
