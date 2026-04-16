@@ -279,7 +279,7 @@
 }
 
 .aksel-table__expandable-row {
-  &:has(+ .aksel-table__expandable-row[data-state="closed"] + .aksel-table__row--selected) > :is(th, td) {
+  &:has(+ .aksel-table__expanded-row[data-state="closed"] + .aksel-table__row--selected) > :is(th, td) {
     border-color: var(--ax-border-default);
   }
 }
