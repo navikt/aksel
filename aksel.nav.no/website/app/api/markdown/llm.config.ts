@@ -1,3 +1,4 @@
+import DesignTokens from "./routes/design-tokens";
 import Grunnleggende from "./routes/grunnleggende";
 import Komponenter from "./routes/komponenter";
 /* import Komponent from "./routes/komponent"; */
@@ -11,6 +12,7 @@ type Routes = Record<`/${string}`, MarkdownRoute>;
 const MARKDOWN_ROUTES: Routes = {
   "/komponenter": Komponenter.markdown,
   "/grunnleggende": Grunnleggende.markdown,
+  "/grunnleggende/styling/design-tokens": DesignTokens.markdown,
   "/monster-maler": Maler.markdown,
   "/llm": LLM.markdown,
 };
