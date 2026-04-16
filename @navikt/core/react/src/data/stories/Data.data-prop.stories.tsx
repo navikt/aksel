@@ -39,6 +39,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "id",
     header: "Id",
+    label: "Id",
     cell: ({ id }) => id,
     type: "number",
     defaultWidth: "100px",
@@ -46,11 +47,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "foo",
     header: "Foo",
+    label: "Foo",
     cell: ({ foo }) => foo,
   },
   {
     id: "bar",
     header: "Bar",
+    label: "Bar",
     cell: ({ bar }) => (
       <Tag variant="strong" size="xsmall">
         {bar}
@@ -60,11 +63,13 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "on",
     header: "Boolean demo",
+    label: "Boolean demo",
     cell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
     id: "time",
     header: "Time",
+    label: "Time",
     cell: ({ time }) => time.toISOString(),
   },
 ];
@@ -559,10 +564,23 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     cell: ({ id }) => id,
     type: "number",
     sortable: true,
+    label: "Id",
   },
-  { id: "foo", header: "Foo", cell: ({ foo }) => foo, sortable: true },
-  { id: "name", header: "Name", cell: ({ name }) => name, sortable: true },
-  { id: "bar", header: "Bar", cell: ({ bar }) => bar },
+  {
+    id: "foo",
+    header: "Foo",
+    cell: ({ foo }) => foo,
+    sortable: true,
+    label: "Foo",
+  },
+  {
+    id: "name",
+    header: "Name",
+    cell: ({ name }) => name,
+    sortable: true,
+    label: "Name",
+  },
+  { id: "bar", header: "Bar", cell: ({ bar }) => bar, label: "Bar" },
 ];
 
 function applySortEntries<T extends Record<string, unknown>>(
@@ -622,4 +640,116 @@ export const SortableColumnsUncontrolled: Story = {
       </div>
     );
   },
+};
+
+const rowClickSpy = fn();
+
+const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
+  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
+  {
+    id: "link",
+    header: "Link",
+    label: "Link",
+    cell: ({ foo }) => (
+      <a href="/example" onClick={(e) => e.preventDefault()}>
+        {foo} link
+      </a>
+    ),
+  },
+  {
+    id: "button",
+    header: "Button",
+    label: "Button",
+    cell: ({ foo }) => <button type="button">{foo} action</button>,
+  },
+  {
+    id: "text",
+    header: "Text",
+    label: "Text",
+    cell: () => <input type="text" />,
+  },
+];
+
+export const RowClick: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => console.info("Row clicked!")}
+      selectionMode="multiple"
+      withKeyboardNav
+    />
+  ),
+};
+
+export const RowClickTest: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={rowClickSpy}
+      selectionMode="multiple"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    rowClickSpy.mockClear();
+    const canvas = within(canvasElement);
+
+    // Click a plain text cell — should fire onRowClick
+    const allCells = canvas.getAllByRole("cell");
+    await userEvent.click(allCells[1]); // "foo" cell of first row
+    expect(rowClickSpy).toHaveBeenCalledTimes(1);
+    rowClickSpy.mockClear();
+
+    // Click a link — should NOT fire onRowClick
+    const links = canvas.getAllByRole("link");
+    await userEvent.click(links[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a button — should NOT fire onRowClick
+    const buttons = canvas.getAllByRole("button");
+    await userEvent.click(buttons[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+
+    // Click a checkbox — should NOT fire onRowClick
+    const inputs = canvas.getAllByRole("textbox");
+    await userEvent.click(inputs[0]);
+    expect(rowClickSpy).not.toHaveBeenCalled();
+  },
+};
+
+export const RowExpansion: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => console.info("Row clicked!")}
+      selectionMode="multiple"
+      withKeyboardNav
+      getDetailsPanelContent={(rowData) => {
+        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      }}
+    />
+  ),
+};
+
+export const RowExpansionAll: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={userData}
+      getRowId={(row) => row.id}
+      onRowClick={() => console.info("Row clicked!")}
+      selectionMode="multiple"
+      withKeyboardNav
+      getDetailsPanelContent={(rowData) => {
+        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      }}
+      showExpandAll
+    />
+  ),
 };

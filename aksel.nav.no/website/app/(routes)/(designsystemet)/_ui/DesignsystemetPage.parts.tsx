@@ -1,6 +1,7 @@
 "use client";
 
 import { ClockDashedIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { HStack, Link } from "@navikt/ds-react";
 import { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
@@ -56,9 +57,10 @@ function KomponentLinks({
           rel="noreferrer noopener"
           href={gitConfig.git}
           onClick={() =>
-            umamiTrack("navigere", {
-              kilde: "komponent-header",
-              url: gitConfig.git,
+            umamiTrack(Events.NAVIGERE, {
+              lenketekst: "Github",
+              destinasjon: gitConfig.git,
+              lenkegruppe: "komponent-header",
             })
           }
           data-color="neutral"
@@ -72,9 +74,10 @@ function KomponentLinks({
           rel="noreferrer noopener"
           href={data.figma_link}
           onClick={() =>
-            umamiTrack("navigere", {
-              kilde: "komponent-header",
-              url: data.figma_link ?? "",
+            umamiTrack(Events.NAVIGERE, {
+              lenketekst: "Figma",
+              destinasjon: data.figma_link ?? "",
+              lenkegruppe: "komponent-header",
             })
           }
           data-color="neutral"
@@ -86,9 +89,10 @@ function KomponentLinks({
         href={`/grunnleggende/endringslogg${heading ? `?fritekst=${removeEmojiesFromText(heading).trim()}` : ""}`}
         data-color="neutral"
         onClick={() =>
-          umamiTrack("navigere", {
-            kilde: "komponent-header",
-            url: `/grunnleggende/endringslogg`,
+          umamiTrack(Events.NAVIGERE, {
+            lenketekst: "Endringslogg",
+            destinasjon: `/grunnleggende/endringslogg`,
+            lenkegruppe: "komponent-header",
           })
         }
       >
