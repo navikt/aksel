@@ -85,7 +85,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
             <div className="aksel-timeline__row-label">{label}</div>
           ))}
 
-        {/** biome-ignore lint/a11y/noStaticElementInteractions: temp */}
+        {/** biome-ignore lint/a11y/noStaticElementInteractions: onKeyDown just captures events on child-elements here. Regular interaction patterns still works as expected. */}
         <div
           className={cl("aksel-timeline__row", {
             "aksel-timeline__row--active": activeRow === elementRefState,

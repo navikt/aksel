@@ -95,36 +95,43 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     },
     forwardedRef,
   ) => {
-    const isMultipleRows = Array.isArray(children);
-
-    if (!isMultipleRows) {
-      children = [children];
-    }
+    const childArray = useMemo(
+      () =>
+        React.Children.toArray(Array.isArray(children) ? children : [children]),
+      [children],
+    );
 
     const rowChildren = useMemo(() => {
-      return React.Children.toArray(children).filter(
-        (c: any) => c?.type?.componentType === "row",
-      );
-    }, [children]);
+      return childArray.filter((c: any) => c?.type?.componentType === "row");
+    }, [childArray]);
 
-    const pins = React.Children.toArray(children)
-      .filter((c: any) => c?.type?.componentType === "pin")
-      .map((x) => () => x);
+    const pins = useMemo(
+      () =>
+        childArray
+          .filter((c: any) => c?.type?.componentType === "pin")
+          .map((x) => () => x),
+      [childArray],
+    );
 
-    const zoomComponent = React.Children.toArray(children).find(
-      (c: any) => c?.type?.componentType === "zoom",
+    const zoomComponent = useMemo(
+      () => childArray.find((c: any) => c?.type?.componentType === "zoom"),
+      [childArray],
     );
 
     const rowsRaw = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
 
-    const rows = rowsRaw.map((r) => {
-      if (r?.periods) {
-        return r.periods;
-      }
-      return [];
-    });
+    const rows = useMemo(
+      () =>
+        rowsRaw.map((r) => {
+          if (r?.periods) {
+            return r.periods;
+          }
+          return [];
+        }),
+      [rowsRaw],
+    );
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
     const [start, setStart] = useState(initialStartDate);
