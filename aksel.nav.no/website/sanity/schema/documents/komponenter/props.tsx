@@ -61,6 +61,11 @@ export const Props = defineType({
               type: "string",
             },
             {
+              title: "Enum",
+              name: "enum",
+              type: "string",
+            },
+            {
               title: "isRef",
               name: "ref",
               type: "boolean",
