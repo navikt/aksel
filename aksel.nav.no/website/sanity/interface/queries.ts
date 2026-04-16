@@ -153,7 +153,7 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 /**
  * Include replaces value with enum if it exists for more verbose prop-docs
  */
-const propsSeksjonForForMarkdown = `_type == "props_seksjon" =>{
+const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
   ...,
   komponenter[]{
     ...,
@@ -190,7 +190,7 @@ ${propsSeksjon},
 
 export const destructureBlocksForMarkdown = `
 ${baseBlocks},
-${propsSeksjonForForMarkdown},
+${propsSeksjonForMarkdown},
 `;
 
 export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;
