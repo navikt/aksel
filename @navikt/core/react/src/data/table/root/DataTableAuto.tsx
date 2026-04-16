@@ -453,8 +453,15 @@ function DataTableExpandedRow<T>({
   columnCount: number;
 }) {
   const { tableId } = useDataTableContext();
+  const expansionContext = useDataTableExpansion(false);
+
+  /* TODO: Is this the way we want to opt out? Might just be temp until auto and root is merged so they use same context */
+  if (!expansionContext) {
+    return null;
+  }
+
   const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
-    useDataTableExpansion();
+    expansionContext;
 
   if (!isExpanded(rowId)) {
     return null;
