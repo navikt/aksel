@@ -159,7 +159,8 @@ const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
     ...,
     "propref": propref->{..., "proplist": proplist[]{
       ...,
-      "type": coalesce(enum, type)
+      "type": coalesce(enum, type),
+      "enum": null
     }}
   },
 }`;
