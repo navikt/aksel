@@ -141,7 +141,9 @@ interface DataTableProps<T>
   loadingState?: React.ReactNode;
   /**
    * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-   * @default 5
+   *
+   *
+   * If not provided, the rendered content will get a temporarily overlay while loading
    */
   loadingRows?: number;
   /**
@@ -209,7 +211,7 @@ function DataTableAutoInner<T>(
     emptyState,
     isLoading = false,
     loadingState,
-    loadingRows = 5,
+    loadingRows,
     loadingLabel = "Laster innhold",
     disableRowSelectionOnClick = false,
     getDetailsPanelContent,
@@ -269,6 +271,8 @@ function DataTableAutoInner<T>(
       showLoadingSkeletons={isLoading && loadingState == null}
       onRowClick={onRowClick}
       disableRowSelectionOnClick={disableRowSelectionOnClick}
+      isLoading={isLoading}
+      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
     >
       <DataTableExpansionProvider
         detailsPanelRowIds={detailsPanelRowIds}
@@ -289,6 +293,7 @@ function DataTableAutoInner<T>(
               data-truncate-content={truncateContent}
               data-density={rowDensity}
               data-layout={layout}
+              data-loading={isLoading || undefined}
               tabIndex={tabIndex}
               aria-busy={isLoading || undefined}
             >
@@ -323,7 +328,6 @@ function DataTableAutoInner<T>(
                   columns={columns}
                   data={data}
                   allRowKeys={allRowKeys}
-                  isLoading={isLoading}
                   loadingState={loadingState}
                   loadingRows={loadingRows}
                   loadingLabel={loadingLabel}
@@ -342,10 +346,9 @@ interface DataTableAutoTBodyContentProps<T> {
   columns: UseColumnOptionsResult<T>["columns"];
   data: T[];
   allRowKeys: (string | number)[];
-  isLoading: boolean;
   loadingState: React.ReactNode;
-  loadingRows: number;
   loadingLabel: string;
+  loadingRows?: number;
   emptyState: React.ReactNode;
 }
 
@@ -353,12 +356,13 @@ function DataTableAutoTBodyContent<T>({
   columns,
   data,
   allRowKeys,
-  isLoading,
   loadingState,
   loadingRows,
   loadingLabel,
   emptyState,
 }: DataTableAutoTBodyContentProps<T>) {
+  const { isLoading } = useDataTableContext();
+
   if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
@@ -367,7 +371,7 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
-  if (isLoading) {
+  if (isLoading && loadingRows) {
     return (
       <>
         <tr>
@@ -401,10 +405,19 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
+  const renderLoadingAnnoucement = isLoading && !loadingState && !loadingRows;
+
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
     return (
       <React.Fragment key={rowId}>
+        {renderLoadingAnnoucement && (
+          <tr>
+            <td colSpan={columns.length} className="aksel-sr-only">
+              {loadingLabel}
+            </td>
+          </tr>
+        )}
         <DataTableTr rowId={rowId}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
             return (

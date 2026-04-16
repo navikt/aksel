@@ -14,6 +14,8 @@ type DataTableContextProps = {
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
   disableRowSelectionOnClick: boolean;
+  isLoading?: boolean;
+  showLoadingOverlay: boolean;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
