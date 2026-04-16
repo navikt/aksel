@@ -70,7 +70,7 @@ function TimelineKeyboardNavProvider(props: TimelineKeyboardNavProviderProps) {
         return;
       }
 
-      /* Skip interaction of focus is inside popover */
+      /* Skip interaction if focus is inside popover */
       if (document.activeElement?.closest("[data-timeline-popover]")) {
         return;
       }
