@@ -190,7 +190,10 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       clipboardy.writeSync(JSON.stringify(jsonOutput, null, 2));
       console.info("✅ Report (JSON) copied to clipboard!");
     } catch (error) {
-      console.error("❌ Failed to copy to clipboard:", error.message);
+      console.error(
+        "❌ Failed to copy to clipboard:",
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

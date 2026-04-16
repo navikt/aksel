@@ -33,14 +33,14 @@ function findComponentImport(input: {
       return;
     }
 
-    path.node.specifiers.forEach((specifier) => {
+    path.node.specifiers?.forEach((specifier) => {
       if (
         specifier.type === "ImportSpecifier" &&
         specifier.imported.name === name
       ) {
-        foundName = specifier.local
-          ? specifier.local.name
-          : specifier.imported.name;
+        foundName = String(
+          specifier.local ? specifier.local.name : specifier.imported.name,
+        );
       }
     });
   });

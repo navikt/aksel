@@ -41,7 +41,7 @@
     "lodash": "4.18.1",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.20.6",
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "vitest": "4.1.0"
   },
   "publishConfig": {
