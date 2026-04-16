@@ -16,6 +16,15 @@ import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
 
+/** Sanity slug prefixes that have individual .md endpoints available */
+const MARKDOWN_SLUG_PREFIXES = [
+  "komponenter/",
+  "grunnleggende/",
+  "monster-maler/",
+];
+
+const AKSEL_BASE_URL = "https://aksel.nav.no";
+
 function portableMarkdown(input?: any[]) {
   if (!input || !Array.isArray(input)) {
     return "";
@@ -25,13 +34,23 @@ function portableMarkdown(input?: any[]) {
     marks: {
       kbd: ({ children }) => `<kbd>${children}</kbd>`,
       quote: ({ children }) => `"${children}"`,
+      link: ({ children, value }) => {
+        const href = value?.href;
+        if (!href) return children;
+        return `[${children}](${toMarkdownUrl(href)})`;
+      },
       internalLink: ({ children, value }) => {
         const slug = value?.slug?.current;
         if (!slug) {
           return children;
         }
         const anchor = value?.anchor ? `#${value.anchor}` : "";
-        return `[${children}](https://aksel.nav.no/${slug}${anchor})`;
+        const suffix = MARKDOWN_SLUG_PREFIXES.some((prefix) =>
+          slug.startsWith(prefix),
+        )
+          ? ".md"
+          : "";
+        return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
     },
     types: {
@@ -55,6 +74,28 @@ function portableMarkdown(input?: any[]) {
       language: LanguageMarkdown,
     } satisfies Record<PortableContentTypes, (props: any) => string | null>,
   });
+}
+
+/** Returns the URL rewritten to point to the .md endpoint if applicable, otherwise unchanged. */
+function toMarkdownUrl(href: string): string {
+  if (!href.startsWith(AKSEL_BASE_URL)) {
+    return href;
+  }
+
+  // e.g. "/komponenter/core/button"
+  const path = href.slice(AKSEL_BASE_URL.length);
+
+  const [pathWithoutAnchor, anchor] = path.split("#");
+  const [pathWithoutQuery, query] = pathWithoutAnchor.split("?");
+  const slug = pathWithoutQuery.replace(/^\//, ""); // strip leading slash
+  const hasMdEndpoint = MARKDOWN_SLUG_PREFIXES.some((prefix) =>
+    slug.startsWith(prefix),
+  );
+
+  if (!hasMdEndpoint) {
+    return href;
+  }
+  return `${AKSEL_BASE_URL}/${slug}.md${query ? `?${query}` : ""}${anchor ? `#${anchor}` : ""}`;
 }
 
 export { portableMarkdown };
