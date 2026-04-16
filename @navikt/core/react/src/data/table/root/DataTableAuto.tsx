@@ -237,9 +237,8 @@ function DataTableAutoInner<T>(
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const allRowKeys = useMemo(() => {
-    const resolvedGetRowId =
-      getRowId ??
-      (((_row: T, index: number) => index) as (rowData: T) => string | number);
+    const resolvedGetRowId = (item: T, index: number): string | number =>
+      getRowId?.(item, index) ?? index;
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
@@ -268,7 +267,7 @@ function DataTableAutoInner<T>(
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
       tableId={tableId}
-      showLoadingSkeletons={isLoading && !loadingState}
+      showLoadingSkeletons={isLoading && loadingState == null}
     >
       <DataTableExpansionProvider
         detailsPanelRowIds={detailsPanelRowIds}
@@ -366,7 +365,8 @@ function DataTableAutoTBodyContent<T>({
   disableRowSelectionOnClick,
 }: DataTableAutoTBodyContentProps<T>) {
   const { selectionState } = useDataTableContext();
-  if (isLoading && loadingState !== undefined) {
+
+  if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
         {loadingState}
