@@ -101,7 +101,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
             context={context}
             modal={false}
             initialFocus={-1}
-            returnFocus={false}
+            returnFocus
           >
             <div
               className="aksel-timeline__popover"
