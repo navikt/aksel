@@ -16,7 +16,7 @@ export interface MonthPickerStandaloneProps extends Omit<
   "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
 > {
   /**
-   * Monthpicker classname
+   * MonthPicker class name
    */
   className?: string;
 }
