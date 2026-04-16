@@ -9,6 +9,11 @@ type DataTableContextProps = {
   stickyHeader: boolean;
   tableId: string;
   showLoadingSkeletons: boolean;
+  onRowClick?: (
+    rowId: string | number,
+    event: React.MouseEvent<HTMLTableRowElement>,
+  ) => void;
+  disableRowSelectionOnClick: boolean;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =

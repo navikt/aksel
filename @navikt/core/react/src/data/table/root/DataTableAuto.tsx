@@ -117,7 +117,6 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowData: T,
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
@@ -268,6 +267,8 @@ function DataTableAutoInner<T>(
       stickyHeader={stickyHeader}
       tableId={tableId}
       showLoadingSkeletons={isLoading && loadingState == null}
+      onRowClick={onRowClick}
+      disableRowSelectionOnClick={disableRowSelectionOnClick}
     >
       <DataTableExpansionProvider
         detailsPanelRowIds={detailsPanelRowIds}
@@ -327,8 +328,6 @@ function DataTableAutoInner<T>(
                   loadingRows={loadingRows}
                   loadingLabel={loadingLabel}
                   emptyState={emptyState}
-                  onRowClick={onRowClick}
-                  disableRowSelectionOnClick={disableRowSelectionOnClick}
                 />
               </DataTableTbody>
             </table>
@@ -348,8 +347,6 @@ interface DataTableAutoTBodyContentProps<T> {
   loadingRows: number;
   loadingLabel: string;
   emptyState: React.ReactNode;
-  onRowClick?: DataTableProps<T>["onRowClick"];
-  disableRowSelectionOnClick: boolean;
 }
 
 function DataTableAutoTBodyContent<T>({
@@ -361,11 +358,7 @@ function DataTableAutoTBodyContent<T>({
   loadingRows,
   loadingLabel,
   emptyState,
-  onRowClick,
-  disableRowSelectionOnClick,
 }: DataTableAutoTBodyContentProps<T>) {
-  const { selectionState } = useDataTableContext();
-
   if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
@@ -412,22 +405,7 @@ function DataTableAutoTBodyContent<T>({
     const rowId = allRowKeys[rowIndex];
     return (
       <React.Fragment key={rowId}>
-        <DataTableTr
-          rowId={rowId}
-          onClick={(event) => {
-            if (isInteractiveTarget(event.target)) {
-              return;
-            }
-            if (
-              !disableRowSelectionOnClick &&
-              selectionState.selection.selectionMode !== "none"
-            ) {
-              selectionState.selection.toggleSelection(rowId);
-            }
-
-            onRowClick?.(rowData, rowId, event);
-          }}
-        >
+        <DataTableTr rowId={rowId}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
             return (
               <DataTableBaseCell
@@ -483,12 +461,6 @@ function DataTableExpandedRow<T>({
         </div>
       </td>
     </tr>
-  );
-}
-
-function isInteractiveTarget(target: EventTarget | null): boolean {
-  return !!(target as HTMLElement | null)?.closest(
-    "a, button, input, select, textarea",
   );
 }
 

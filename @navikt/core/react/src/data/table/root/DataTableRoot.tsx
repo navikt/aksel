@@ -231,6 +231,8 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         stickyHeader={false}
         tableId={useId()}
         showLoadingSkeletons={false}
+        onRowClick={undefined}
+        disableRowSelectionOnClick={false}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">

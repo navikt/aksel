@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 import {
   ChevronDownUpIcon,
   ChevronUpDownIcon,
@@ -11,7 +11,7 @@ import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { Skeleton } from "../../../skeleton";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
-import { cl } from "../../../utils/helpers";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { useDataTableExpansion } from "../hooks/useTableExpansion";
@@ -33,11 +33,23 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
   (
-    { className, children, selected: selectedProp = false, rowId, ...rest },
+    {
+      className,
+      children,
+      selected: selectedProp = false,
+      rowId,
+      onClick,
+      ...rest
+    },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader } = useDataTableContext();
-    const { selectionState } = useDataTableContext();
+    const {
+      layout,
+      stickyHeader,
+      selectionState,
+      onRowClick,
+      disableRowSelectionOnClick,
+    } = useDataTableContext();
     const { location } = useDataTableLocation();
 
     const renderFillerCell = layout === "fixed" && children;
@@ -47,9 +59,38 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
     const isSticky = location === "thead" && stickyHeader;
 
+    const handleClick = useCallback(
+      (event: React.MouseEvent<HTMLTableRowElement>) => {
+        if (
+          location !== "tbody" ||
+          rowId === undefined ||
+          isInteractiveTarget(event.target)
+        ) {
+          return;
+        }
+
+        if (
+          !disableRowSelectionOnClick &&
+          selectionState.selection.selectionMode !== "none"
+        ) {
+          selectionState.selection.toggleSelection(rowId);
+        }
+
+        onRowClick?.(rowId, event);
+      },
+      [
+        disableRowSelectionOnClick,
+        location,
+        onRowClick,
+        rowId,
+        selectionState.selection,
+      ],
+    );
+
     return (
       <tr
         {...rest}
+        onClick={composeEventHandlers(onClick, handleClick)}
         ref={forwardedRef}
         className={cl("aksel-data-table__tr", className)}
         data-selected={selected}
@@ -261,6 +302,13 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   }
 
   return null;
+}
+
+/* Utils */
+function isInteractiveTarget(target: EventTarget | null): boolean {
+  return !!(target as HTMLElement | null)?.closest(
+    "a, button, input, select, textarea",
+  );
 }
 
 export { DataTableTr };
