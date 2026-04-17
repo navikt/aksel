@@ -110,8 +110,8 @@ For dynamic and adaptable components we recommend using these, but for most stat
     `Never use the hex or raw CSS value provided. Always use the token name, e.g. \`--ax-bg-accent-strong\`, and let the system resolve the correct value. This ensures that you get the correct value in all contexts, e.g. dark mode, and also makes sure that you get any updates to the token values without having to change your code.`,
     "If you find instances of hardcoded values that can be tokens, update the code to use the correct token instead.",
     `Tokens are used as CSS custom properties with the prefix \`--ax-\`, e.g. \`var(--ax-bg-accent-strong)\`. They are also available as SCSS variables (\`$ax-...\`), Less variables (\`@ax-...\`) and JS constants.`,
-    `If you have installed \`@navikt/ds-css\`, you don't need to manually import token-package. The tokens will be included automatically.
-If you are using the token-package separately, you can install it with \`pnpm add @navikt/ds-tokens\`. Then you can import the tokens with \`import { TokenName } from '@navikt/ds-tokens/js'\`. Note that SCSS, Less and JS are exported from separate entry points, so make sure to import from the correct path.`,
+    `If you have installed \`@navikt/ds-css\`, you don't need to install the token-package \`@navikt/ds-tokens\`. The tokens will be included automatically.
+If you are using the token-package separately, you can import the tokens with \`import { TokenName } from '@navikt/ds-tokens/js'\`. Note that SCSS, Less and JS are exported from separate entry points, so make sure to import from the correct path.`,
     'All of these tokens works out of the box with light and dark mode. Just set class="light" (default) or class="dark" to get the correct color scheme.',
     baseTokenDocs,
     categoryBlocks.join("\n\n"),
