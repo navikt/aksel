@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-InfoCard, LocalAlert, GlobalAlert: Update content typography.
+InfoCard, LocalAlert, GlobalAlert: Update content typography use and sizing.
