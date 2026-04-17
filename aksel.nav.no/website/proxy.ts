@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextResponse, userAgent } from "next/server";
+import { logger } from "@navikt/next-logger";
 import { sanityClient } from "@/sanity/client.server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
@@ -17,6 +18,11 @@ export async function proxy(req: NextRequest) {
    * published content, leading to 404-erros in presentation-mode. By stripping the query,
    * we default to draft-mode, which is the expected behaviour when coming from the studio.
    */
+  if (req.nextUrl.pathname.startsWith("/secret-route/for-testing-llm")) {
+    const uA = userAgent(req);
+    logger.info({ ...uA, pathname: req.nextUrl.pathname });
+  }
+
   if (req.nextUrl.pathname.startsWith("/admin/intent/edit")) {
     const editUrl = req.nextUrl.clone();
     if (editUrl.searchParams.get("perspective") === "published") {
