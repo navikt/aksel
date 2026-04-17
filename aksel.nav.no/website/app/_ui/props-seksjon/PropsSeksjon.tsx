@@ -50,6 +50,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
       type: "React.ElementType",
       _type: "prop",
       _key: "overridable",
+      enum: null,
     });
   }
 
