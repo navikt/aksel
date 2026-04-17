@@ -77,6 +77,27 @@ export const SizeSmall: Story = {
   },
 };
 
+export const NoIcon: Story = {
+  render: () => {
+    return (
+      <VStack gap="space-8">
+        <InfoCard>
+          <InfoCardHeader>
+            <InfoCardTitle>InfoCard Title</InfoCardTitle>
+          </InfoCardHeader>
+          <DemoContent />
+        </InfoCard>
+        <InfoCard size="small">
+          <InfoCardHeader>
+            <InfoCardTitle>InfoCard Title</InfoCardTitle>
+          </InfoCardHeader>
+          <DemoContent />
+        </InfoCard>
+      </VStack>
+    );
+  },
+};
+
 export const OnlyHeader: Story = {
   render: () => {
     return (
@@ -223,6 +244,7 @@ export const Chromatic = renderStoriesForChromatic({
   WrappingTitle,
   Message,
   MessageWithLink,
+  NoIcon,
 });
 
 export const ChromaticDark = renderStoriesForChromatic({
@@ -234,6 +256,7 @@ export const ChromaticDark = renderStoriesForChromatic({
   WrappingTitle,
   Message,
   MessageWithLink,
+  NoIcon,
 });
 ChromaticDark.globals = { theme: "dark" };
 
