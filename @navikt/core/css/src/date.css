@@ -97,9 +97,9 @@
 
   .rdp-day_disabled .rdp-day__inner {
     cursor: not-allowed;
-    text-decoration: line-through;
     background-color: var(--ax-bg-neutral-moderateA);
     color: var(--ax-text-neutral-subtle);
+    opacity: var(--ax-opacity-disabled);
   }
 
   .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
