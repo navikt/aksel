@@ -37,13 +37,6 @@ export const workspaceConfig = defineConfig([
     scheduledDrafts: {
       enabled: false,
     },
-    beta: {
-      form: {
-        enhancedObjectDialog: {
-          enabled: true,
-        },
-      },
-    },
     plugins: [
       structureTool({
         title: "Editor",
@@ -90,13 +83,6 @@ export const workspaceConfig = defineConfig([
     },
     scheduledDrafts: {
       enabled: false,
-    },
-    beta: {
-      form: {
-        enhancedObjectDialog: {
-          enabled: true,
-        },
-      },
     },
     plugins: [
       structureTool({
