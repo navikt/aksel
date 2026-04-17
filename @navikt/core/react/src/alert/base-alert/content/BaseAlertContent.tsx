@@ -34,7 +34,7 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
         as="div"
         ref={forwardedRef}
         data-color={themeContext?.color}
-        size={size === "small" ? "small" : "medium"}
+        size={size}
         {...restProps}
         className={cl(className, "aksel-base-alert__content")}
       >
