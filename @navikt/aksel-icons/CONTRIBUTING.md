@@ -2,7 +2,7 @@
 
 ## Foreslå nye ikoner
 
-Om du ikke finner ikonet du leter etter kan du [lage et issue på GitHub](https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+).
+Om du ikke finner ikonet du leter etter kan du [lage et issue på GitHub](https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+).
 
 ## Oppdatere ikon
 
