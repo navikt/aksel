@@ -142,8 +142,6 @@
   padding: 0 var(--__axc-base-alert-pi);
   border-bottom: 1px solid;
 
-  /* padding: var(--__axc-base-alert-content-p); */
-
   .aksel-base-alert[data-global="true"] & {
     padding-inline: var(--__axc-global-alert-alignment);
   }
