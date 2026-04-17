@@ -117,6 +117,11 @@ function TimelineKeyboardNavProvider({
           document.activeElement as HTMLElement,
         );
         if (currentIndex === -1) {
+          /* If just the row has focus, we want to focus either the first or last period inside based on key */
+          focusElement(
+            periods[key === "ArrowRight" ? 0 : periods.length - 1],
+            event,
+          );
           return;
         }
 
