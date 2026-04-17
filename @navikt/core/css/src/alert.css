@@ -115,7 +115,7 @@
     outline: 1px solid var(--ax-border-default);
     outline-offset: -1px;
 
-    /* Needed to align InfoCard header without icon to content */
+    /* Adjust horizontal padding for small moderate alerts */
     &[data-size="small"] {
       --__axc-base-alert-pi: var(--ax-space-16);
     }
