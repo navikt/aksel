@@ -36,7 +36,7 @@ async function markdown(): Promise<string> {
         const tokenRows = roleTokens.map((t) => {
           const parts = [`- \`--ax-${t.name}\``];
           if (t.rawValue) parts.push(`value: \`${t.rawValue}\``);
-          if (t.comment) parts.push(`— ${t.comment}`);
+          if (t.comment) parts.push(`- ${t.comment}`);
           return parts.join(" | ");
         });
 
@@ -54,7 +54,7 @@ async function markdown(): Promise<string> {
       const tokenRows = categoryTokens.map((t) => {
         const parts = [`- \`--ax-${t.name}\``];
         if (t.rawValue) parts.push(`value: \`${t.rawValue}\``);
-        if (t.comment) parts.push(`— ${t.comment}`);
+        if (t.comment) parts.push(`- ${t.comment}`);
         return parts.join(" | ");
       });
       tokenContent = tokenRows.join("\n");
