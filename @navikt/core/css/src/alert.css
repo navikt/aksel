@@ -150,6 +150,9 @@
     background: var(--ax-bg-moderate);
     color: var(--ax-text-default);
     border-color: var(--ax-border-subtleA);
+
+    /* Optical alignment */
+    padding-top: var(--ax-space-1);
   }
 
   .aksel-base-alert[data-variant="strong"] & {
