@@ -14,6 +14,9 @@ function getSingleSelectProps({
   name,
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number) => {
+    if (disabledKeysSet.has(key)) {
+      return;
+    }
     setSelectedKeys([key]);
   };
 

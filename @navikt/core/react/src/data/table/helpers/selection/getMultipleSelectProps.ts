@@ -45,6 +45,9 @@ function getMultipleSelectProps({
   };
 
   const handleToggleRow = (key: string | number) => {
+    if (disabledKeysSet.has(key)) {
+      return;
+    }
     if (selectedKeysSet.has(key)) {
       setSelectedKeys(selectedKeys.filter((k) => k !== key));
     } else {
