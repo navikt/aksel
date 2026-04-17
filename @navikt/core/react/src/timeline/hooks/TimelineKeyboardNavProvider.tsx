@@ -47,22 +47,6 @@ function TimelineKeyboardNavProvider({
     setActiveRow(element);
   }, []);
 
-  const focusElement = useCallback(
-    (
-      element: HTMLElement | Element | null,
-      event: React.KeyboardEvent<HTMLElement | Element>,
-    ) => {
-      if (!element) {
-        return;
-      }
-
-      event.preventDefault();
-
-      (element as HTMLElement).focus();
-    },
-    [],
-  );
-
   const handleRowKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
       const currentActiveRow = activeRowRef.current;
@@ -147,7 +131,7 @@ function TimelineKeyboardNavProvider({
         focusElement(periods[nextIndex], event);
       }
     },
-    [focusElement],
+    [],
   );
 
   const handlePinKeyDown = useCallback(
@@ -209,7 +193,7 @@ function TimelineKeyboardNavProvider({
         focusElement(pins[nextIndex], event);
       }
     },
-    [focusElement],
+    [],
   );
 
   return (
@@ -223,6 +207,22 @@ function TimelineKeyboardNavProvider({
       </TimelineKeyboardNavActiveRowContextProvider>
     </TimelineKeyboardNavStableContextProvider>
   );
+}
+
+/**
+ * Focuses the given element and prevents default behavior of the event if focus is called.
+ */
+function focusElement(
+  element: HTMLElement | Element | null,
+  event: React.KeyboardEvent<HTMLElement | Element>,
+) {
+  if (!element) {
+    return;
+  }
+
+  event.preventDefault();
+
+  (element as HTMLElement).focus();
 }
 
 export {
