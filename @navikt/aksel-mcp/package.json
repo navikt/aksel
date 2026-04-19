@@ -2,8 +2,21 @@
   "name": "aksel-mcp",
   "private": true,
   "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc"
+  },
+  "type": "module",
+  "bin": {
+    "aksel-mcp": "./dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
