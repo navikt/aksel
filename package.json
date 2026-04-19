@@ -35,6 +35,7 @@
     "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
+    "@navikt/aksel-mcp",
     "aksel.nav.no",
     "scripts/eslint",
     "scripts/analyzer",
