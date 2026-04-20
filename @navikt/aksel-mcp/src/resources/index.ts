@@ -1,4 +1,5 @@
 import type { McpResource } from "../types.js";
+import { llmIndexResource } from "./llm-index.js";
 
 /**
  * Register all resources here.
@@ -7,6 +8,6 @@ import type { McpResource } from "../types.js";
  * Read more about resources:
  * - https://modelcontextprotocol.io/docs/learn/server-concepts#resources
  */
-const resources: McpResource[] = [];
+const resources: McpResource[] = [llmIndexResource];
 
 export { resources };

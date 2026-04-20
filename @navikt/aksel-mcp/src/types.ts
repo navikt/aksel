@@ -30,6 +30,7 @@ type McpPrompt<T extends ZodInputSchema = ZodInputSchema> = {
   callback: (args: { [K in keyof T]: z.infer<T[K]> }) => Promise<PromptResult>;
 };
 
+/* TODO: Consider simplifying return then let the loop in index assign the data to fields */
 type ResourceResult = {
   contents: (
     | { uri: string; mimeType?: string; text: string }
