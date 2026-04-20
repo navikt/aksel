@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import pkg from "../package.json" with { type: "json" };
+import { prompts } from "./prompts/index.js";
 import { tools } from "./tools/index.js";
 
 const server = new McpServer({
@@ -13,6 +14,14 @@ for (const tool of tools) {
     tool.name,
     { description: tool.description, inputSchema: tool.inputSchema },
     tool.callback,
+  );
+}
+
+for (const prompt of prompts) {
+  server.registerPrompt(
+    prompt.name,
+    { description: prompt.description, argsSchema: prompt.argsSchema },
+    prompt.callback,
   );
 }
 
