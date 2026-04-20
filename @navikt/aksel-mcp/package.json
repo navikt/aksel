@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "inspect": "yarn mcp-inspector"
+    "inspect": "yarn mcp-inspector",
+    "test": "yarn vitest"
   },
   "type": "module",
   "bin": "./dist/index.js",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.21.1",
     "@types/node": "^24.10.9",
-    "typescript": "6.0.2"
+    "typescript": "6.0.2",
+    "vitest": "4.1.4"
   }
 }
