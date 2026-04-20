@@ -4,7 +4,9 @@ import Komponenter from "./routes/komponenter";
 import Maler from "./routes/maler";
 
 async function markdownForRoute(route: string): Promise<string> {
-  const staticHandler = MARKDOWN_ROUTES[route];
+  const staticHandler = Object.hasOwn(MARKDOWN_ROUTES, route)
+    ? MARKDOWN_ROUTES[route]
+    : undefined;
 
   /* Found "static" version, i.e. a specific route created for path */
   if (staticHandler) {

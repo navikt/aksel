@@ -72,16 +72,18 @@ function portableMarkdown(input?: any[]) {
 
 /** Returns the URL rewritten to point to the .md endpoint if applicable, otherwise unchanged. */
 function toMarkdownUrl(href: string): string {
-  if (!href.startsWith(AKSEL_BASE_URL)) {
+  let parsed: URL;
+  try {
+    parsed = new URL(href);
+  } catch {
+    return href;
+  }
+  if (parsed.hostname !== "aksel.nav.no") {
     return href;
   }
 
   // e.g. "/komponenter/core/button"
-  const path = href.slice(AKSEL_BASE_URL.length);
-
-  const [pathWithoutAnchor, anchor] = path.split("#");
-  const [pathWithoutQuery, query] = pathWithoutAnchor.split("?");
-  const slug = pathWithoutQuery.replace(/^\//, ""); // strip leading slash
+  const slug = parsed.pathname.replace(/^\//, ""); // strip leading slash
   const hasMdEndpoint = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
     `/${slug}`.startsWith(prefix),
   );
@@ -89,6 +91,8 @@ function toMarkdownUrl(href: string): string {
   if (!hasMdEndpoint) {
     return href;
   }
+  const query = parsed.search ? parsed.search.slice(1) : "";
+  const anchor = parsed.hash ? parsed.hash.slice(1) : "";
   return `${AKSEL_BASE_URL}/${slug}.md${query ? `?${query}` : ""}${anchor ? `#${anchor}` : ""}`;
 }
 

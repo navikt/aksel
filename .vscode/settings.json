@@ -11,5 +11,12 @@
   "playwright.reuseBrowser": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "deno.enablePaths": ["./scripts/deno"],
-  "cSpell.words": ["grunnleggende", "ikoner", "komponenter", "maler", "maxage"]
+  "cSpell.words": [
+    "AKSEL",
+    "grunnleggende",
+    "ikoner",
+    "komponenter",
+    "maler",
+    "maxage"
+  ]
 }
