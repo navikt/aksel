@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.10.1
+
+### @navikt/ds-react
+
+- Modal: Changing `size` had no effect before ([#4823](https://github.com/navikt/aksel/pull/4823))
+
+### @navikt/ds-css
+
+- Modal: Changing `size` had no effect before ([#4823](https://github.com/navikt/aksel/pull/4823))
+
 ## 8.10.0
 
 ### @navikt/ds-react
