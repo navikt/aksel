@@ -4,12 +4,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "inspect": "yarn mcp-inspect"
   },
   "type": "module",
-  "bin": {
-    "aksel-mcp": "./dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -23,6 +22,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.21.1",
     "@types/node": "^24.10.9",
     "typescript": "6.0.2"
   }
