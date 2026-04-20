@@ -1,5 +1,25 @@
 # @navikt/ds-css
 
+## 8.10.0
+
+### Minor Changes
+
+- DatePicker: Highlight days between start and hovered day ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+### Patch Changes
+
+- Skeleton: Text-variant now has properly rounded edges ([#4808](https://github.com/navikt/aksel/pull/4808))
+
+- ExpandableRow: Fix selected row top border not showing when row above was collapsed ([#4810](https://github.com/navikt/aksel/pull/4810))
+
+- Timeline: Icons in periods now scale based on avaliable space. No longer clips on smaller periods ([#4809](https://github.com/navikt/aksel/pull/4809))
+
+- DatePicker, MonthPicker: Change styling on disabled days/months ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+- InfoCard: Align header with content when no icon is present for small version. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- InfoCard, LocalAlert, GlobalAlert: Update content typography use and sizing. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
 ## 8.9.1
 
 ### Patch Changes

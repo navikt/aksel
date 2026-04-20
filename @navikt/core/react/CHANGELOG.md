@@ -1,5 +1,35 @@
 # @navikt/ds-react
 
+## 8.10.0
+
+### Minor Changes
+
+- Timeline: Added keyboard-navigation support between rows and periods ([#4809](https://github.com/navikt/aksel/pull/4809))
+
+- DatePicker: Highlight days between start and hovered day ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+- DatePicker: Reset range when selecting a new day ([#4799](https://github.com/navikt/aksel/pull/4799))
+
+- DatePicker, MonthPicker: ⬆️ Upgrade dependency react-day-picker `9.7.0` -> `9.14.0` ([#4799](https://github.com/navikt/aksel/pull/4799))
+
+### Patch Changes
+
+- CheckboxGroup: Set `aria-invalid` on error ([#4790](https://github.com/navikt/aksel/pull/4790))
+
+- RadioGroup: Set `role="radiogroup"`, and set `aria-invalid` on error. ([#4773](https://github.com/navikt/aksel/pull/4773))
+
+- Timeline: Improved support for JAWS, popups now open on click. ([#4793](https://github.com/navikt/aksel/pull/4793))
+
+- InlineMessage: Improve screen reader experience ([#4792](https://github.com/navikt/aksel/pull/4792))
+
+- InfoCard: Align header with content when no icon is present for small version. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- InfoCard, LocalAlert, GlobalAlert: Update content typography use and sizing. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.0
+  - @navikt/aksel-icons@8.10.0
+
 ## 8.9.1
 
 ### Patch Changes
