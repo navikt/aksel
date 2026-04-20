@@ -8360,7 +8360,7 @@
                 },
                 "optional": true
               },
-              "enum": {
+              "unpackedType": {
                 "type": "objectAttribute",
                 "value": {
                   "type": "string"

@@ -145,13 +145,14 @@ const propsSeksjon = `_type == "props_seksjon" =>{
     ...,
     "propref": propref->{..., "proplist": proplist[]{
       ...,
-      "enum": null
+      "unpackedType": null
     }}
   },
 }`;
 
 /**
- * Include replaces value with enum if it exists for more verbose prop-docs
+ * Replace type with unpackedType if unpackedType exists.
+ * This allows for more verbose prop-types for LLMs
  */
 const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
   ...,
@@ -159,8 +160,8 @@ const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
     ...,
     "propref": propref->{..., "proplist": proplist[]{
       ...,
-      "type": coalesce(enum, type),
-      "enum": null
+      "type": coalesce(unpackedType, type),
+      "unpackedType": null
     }}
   },
 }`;

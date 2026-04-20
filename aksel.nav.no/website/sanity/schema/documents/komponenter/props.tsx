@@ -61,8 +61,8 @@ export const Props = defineType({
               type: "string",
             },
             {
-              title: "Enum",
-              name: "enum",
+              title: "Unpacked Type",
+              name: "unpackedType",
               type: "string",
             },
             {
