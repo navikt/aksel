@@ -55,7 +55,7 @@ async function markdown(): Promise<string> {
         const parts = [`- \`--ax-${t.name}\``];
         if (t.rawValue) parts.push(`value: \`${t.rawValue}\``);
         if (t.comment) parts.push(`${t.comment}`);
-        return parts.join(",");
+        return parts.join(", ");
       });
       tokenContent = tokenRows.join("\n");
     }
