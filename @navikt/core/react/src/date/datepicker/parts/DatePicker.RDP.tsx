@@ -1,5 +1,5 @@
 import { isBefore, isSameDay, isWeekend } from "date-fns";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../primitives/responsive";
 import { omit } from "../../../utils-external";
@@ -8,7 +8,7 @@ import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../Date.locale";
 import { DateRange, isDateRange } from "../../Date.typeutils";
 import { clampDisplayMonth, isDateOutsideRange } from "../../date-utils";
-import {
+import type {
   ConditionalModeProps,
   DatePickerDefaultProps,
 } from "../DatePicker.types";
@@ -70,8 +70,8 @@ const ReactDayPicker = ({
 }: ReactDayPickerProps) => {
   const langProviderLocale = useDateLocale();
   const locale = _locale ? getLocaleFromString(_locale) : langProviderLocale;
-
   const mode = _mode ?? ("single" as any);
+  const [dayHovering, setDayHovering] = useState<Date>();
 
   return (
     <DayPicker
@@ -172,35 +172,47 @@ const ReactDayPicker = ({
           [],
         ),
         Weekdays: useCallback(
-          ({
-            className: weekdaysClassName,
-            children: weekdaysChildren,
-            ...restWeekdaysProps
-          }) => (
+          (props) => (
             <thead className="rdp-head" aria-hidden>
-              <tr className={cl(weekdaysClassName)} {...restWeekdaysProps}>
-                {weekdaysChildren}
-              </tr>
+              <tr {...props} />
             </thead>
           ),
           [],
         ),
       }}
       className={cl("aksel-date", className)}
-      disabled={(day) => {
-        return (
-          (disableWeekends && isWeekend(day)) ||
-          dateMatchModifiers(day, disabled) ||
-          isDateOutsideRange({ day, fromDate, toDate })
-        );
-      }}
+      disabled={(day) =>
+        (disableWeekends && isWeekend(day)) ||
+        dateMatchModifiers(day, disabled) ||
+        isDateOutsideRange({ day, fromDate, toDate })
+      }
       weekStartsOn={1}
       modifiers={{
         weekend: (day) => disableWeekends && isWeekend(day),
+        hoverRange: (day: Date) => {
+          if (
+            !isDateRange(selected) ||
+            !selected.from ||
+            (selected.from && selected.to) ||
+            !dayHovering
+          ) {
+            return false;
+          }
+
+          const dayTime = day.getTime();
+          const fromTime = selected.from.getTime();
+          const hoverTime = dayHovering.getTime();
+
+          // Hovering after the start date
+          if (hoverTime > fromTime) {
+            return dayTime > fromTime && dayTime < hoverTime;
+          }
+          // Hovering before the start date
+          return dayTime < fromTime && dayTime > hoverTime;
+        },
       }}
-      modifiersClassNames={{
-        weekend: "rdp-day__weekend",
-      }}
+      onDayMouseEnter={setDayHovering}
+      onDayMouseLeave={() => setDayHovering(undefined)}
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus={false}
       showWeekNumber={showWeekNumber}
