@@ -6,7 +6,7 @@ import Maler from "./routes/maler";
 async function markdownForRoute(route: string): Promise<string> {
   const staticHandler = MARKDOWN_ROUTES[route];
 
-  /* Found "static" version, ie a spesific route created for path */
+  /* Found "static" version, i.e. a specific route created for path */
   if (staticHandler) {
     return staticHandler();
   }
