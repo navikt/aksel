@@ -5028,7 +5028,7 @@ __metadata:
     js-yaml: "npm:^4.1.1"
     lodash: "npm:4.18.1"
     prettier: "npm:3.8.1"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.8.16"
     tsx: "npm:^4.20.6"
@@ -5126,7 +5126,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     jscodeshift: "npm:17.3.0"
     jsdom: "npm:27.1.0"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     react-day-picker: "npm:9.14.0"
     react-dom: "npm:19.2.5"
     react-router: "npm:^7.13.1"
@@ -10062,7 +10062,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@vitejs/plugin-react": "npm:^5.1.0"
     fuse.js: "npm:^7.0.0"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     react-dom: "npm:19.2.5"
     typescript: "npm:6.0.2"
     vite: "npm:^7.3.2"
@@ -10122,7 +10122,7 @@ __metadata:
     lint-staged: "npm:16.4.0"
     playwright: "npm:^1.57.0"
     prettier: "npm:3.8.1"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     react-docgen-typescript: "npm:2.2.2"
     react-dom: "npm:19.2.5"
     storybook: "npm:^10.3.5"
@@ -20385,7 +20385,7 @@ __metadata:
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
     playroom: "npm:^1.2.1"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     style-loader: "npm:^4.0.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:6.0.2"
@@ -21104,17 +21104,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.2.4, react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
-  version: 19.2.4
-  resolution: "react-dom@npm:19.2.4"
-  dependencies:
-    scheduler: "npm:^0.27.0"
-  peerDependencies:
-    react: ^19.2.4
-  checksum: 10/ec17721a8cb131bc33480a9f738bc5bbfe4bd11b11cf69f3f473605346578a329ad26ceef6ef0761ea67a4b455803407dd7ed4ba3d8a5abd2cee8c32d221e498
-  languageName: node
-  linkType: hard
-
 "react-dom@npm:19.2.5, react-dom@npm:^19.2.4":
   version: 19.2.5
   resolution: "react-dom@npm:19.2.5"
@@ -21123,6 +21112,17 @@ __metadata:
   peerDependencies:
     react: ^19.2.5
   checksum: 10/ba14b022c7191d27b723314b964a1a4d839832e6edd231294097e323973808f97ac647bcf182ab0104e20ae6532dbc36733aec3e8333a1446a7183099c96b255
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+  version: 19.2.4
+  resolution: "react-dom@npm:19.2.4"
+  dependencies:
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.4
+  checksum: 10/ec17721a8cb131bc33480a9f738bc5bbfe4bd11b11cf69f3f473605346578a329ad26ceef6ef0761ea67a4b455803407dd7ed4ba3d8a5abd2cee8c32d221e498
   languageName: node
   linkType: hard
 
@@ -21418,17 +21418,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.4, react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
-  version: 19.2.4
-  resolution: "react@npm:19.2.4"
-  checksum: 10/18179fe217f67eb2d0bc61cd04e7ad3c282ea09a1dface7eacd71816f62609f4bbf566c447c704335284deb8397b00bca084e0cd60e6f437279a7498e2d0bfe0
-  languageName: node
-  linkType: hard
-
-"react@npm:^19.2.4":
+"react@npm:19.2.5, react@npm:^19.2.4":
   version: 19.2.5
   resolution: "react@npm:19.2.5"
   checksum: 10/1c3c7ffecb90b7f89a5c3ef635e6811f3a84600097f203b918150cb7e6b0a52915e858e5b4c82317a520dffccfa46ee4819ccf92c59c5b2d6c25cffe258dd20c
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+  version: 19.2.4
+  resolution: "react@npm:19.2.4"
+  checksum: 10/18179fe217f67eb2d0bc61cd04e7ad3c282ea09a1dface7eacd71816f62609f4bbf566c447c704335284deb8397b00bca084e0cd60e6f437279a7498e2d0bfe0
   languageName: node
   linkType: hard
 
@@ -25987,8 +25987,8 @@ __metadata:
     pino: "npm:^8.21.0"
     pino-pretty: "npm:^10.0.0"
     prism-react-renderer: "npm:^2.0.0"
-    react: "npm:19.2.4"
-    react-dom: "npm:19.2.4"
+    react: "npm:19.2.5"
+    react-dom: "npm:19.2.5"
     react-hook-form: "npm:^7.53.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.2.0"
