@@ -2,9 +2,7 @@ import type { z } from "zod";
 
 type ZodInputSchema = Record<string, z.ZodType>;
 
-type ToolResult = {
-  content: { type: "text"; text: string }[];
-};
+type ToolResult = string;
 
 type McpTool<T extends ZodInputSchema = ZodInputSchema> = {
   name: string;
@@ -13,15 +11,7 @@ type McpTool<T extends ZodInputSchema = ZodInputSchema> = {
   callback: (args: { [K in keyof T]: z.infer<T[K]> }) => Promise<ToolResult>;
 };
 
-type PromptResult = {
-  messages: {
-    role: "user" | "assistant";
-    content: {
-      type: "text";
-      text: string;
-    };
-  }[];
-};
+type PromptResult = string;
 
 type McpPrompt<T extends ZodInputSchema = ZodInputSchema> = {
   name: string;
@@ -32,10 +22,7 @@ type McpPrompt<T extends ZodInputSchema = ZodInputSchema> = {
 
 /* TODO: Consider simplifying return then let the loop in index assign the data to fields */
 type ResourceResult = {
-  contents: (
-    | { uri: string; mimeType?: string; text: string }
-    | { uri: string; mimeType?: string; blob: string }
-  )[];
+  contents: { uri: string; mimeType?: string; text: string }[];
 };
 
 type McpResource = {

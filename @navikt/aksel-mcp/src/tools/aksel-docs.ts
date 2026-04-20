@@ -33,17 +33,10 @@ Example:
     if (!response.ok) {
       // If 404, suggest checking the index
       if (response.status === 404) {
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify({
-                error: "NOT_FOUND",
-                message: `Documentation not found at path: "${path}". This path may be outdated. Please read the \`aksel-docs://llm-index\` resource to find the current correct path.`,
-              }),
-            },
-          ],
-        };
+        return JSON.stringify({
+          error: "NOT_FOUND",
+          message: `Documentation not found at path: "${path}". This path may be outdated. Please read the \`aksel-docs://llm-index\` resource to find the current correct path.`,
+        });
       }
       throw new Error(
         `Failed to fetch documentation: ${response.status} ${response.statusText}`,
@@ -52,18 +45,11 @@ Example:
 
     const markdown = await response.text();
 
-    return {
-      content: [
-        {
-          type: "text",
-          text: JSON.stringify({
-            path,
-            url,
-            content: markdown,
-          }),
-        },
-      ],
-    };
+    return JSON.stringify({
+      path,
+      url,
+      content: markdown,
+    });
   },
 };
 
