@@ -30,4 +30,27 @@ type McpPrompt<T extends ZodInputSchema = ZodInputSchema> = {
   callback: (args: { [K in keyof T]: z.infer<T[K]> }) => Promise<PromptResult>;
 };
 
-export type { McpTool, ToolResult, ZodInputSchema, McpPrompt, PromptResult };
+type ResourceResult = {
+  contents: (
+    | { uri: string; mimeType?: string; text: string }
+    | { uri: string; mimeType?: string; blob: string }
+  )[];
+};
+
+type McpResource = {
+  name: string;
+  uri: string;
+  description?: string;
+  mimeType?: string;
+  callback: (uri: URL) => Promise<ResourceResult>;
+};
+
+export type {
+  McpTool,
+  ToolResult,
+  ZodInputSchema,
+  McpPrompt,
+  PromptResult,
+  McpResource,
+  ResourceResult,
+};
