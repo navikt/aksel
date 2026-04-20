@@ -9,20 +9,19 @@ const description = `
 Oversikt over alle komponenter i Aksel
 
 <system-prop-definitions>
-
-  Props that use 'ResponsiveProp' support this API for responsive values:
   type BreakpointsAlias = "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
   type SpaceDelimitedAttribute<T extends string> =
-    | T
-    | T T
-    | T T T
-    | T T T T
+    | \${T}
+    | \${T} \${T}
+    | \${T} \${T} \${T}
+    | \${T} \${T} \${T} \${T}
 
   type FixedResponsiveT<T> = {
     [Breakpoint in BreakpointsAlias]?: T;
   };
 
   type ResponsiveProp<T> = T | FixedResponsiveT<T>;
+
   <example>
     margin={{xs: "space-2", md: "space-8", lg: "space-12 space-8 space-4 space-2"}}
   </example>

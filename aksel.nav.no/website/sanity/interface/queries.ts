@@ -151,7 +151,8 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 }`;
 
 /**
- * Include replaces value with enum if it exists for more verbose prop-docs
+ * Replace type with enum if enum exists.
+ * This allows for more verbose prop-types for LLMs
  */
 const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
   ...,
