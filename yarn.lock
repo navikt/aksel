@@ -11086,7 +11086,7 @@ __metadata:
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
     "@types/node": "npm:^24.10.9"
     typescript: "npm:6.0.2"
-    zod: "npm:^4.3.6"
+    zod: "npm:^3.22.4"
   bin:
     aksel-mcp: ./dist/index.js
   languageName: unknown
