@@ -1,9 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import pkg from "../package.json" with { type: "json" };
-import { prompts } from "./prompts/index.js";
-import { resources } from "./resources/index.js";
-import { tools } from "./tools/index.js";
+import { prompts } from "./prompts/prompts.js";
+import { resources } from "./resources/resources.js";
+import { tools } from "./tools/tools.js";
 
 const server = new McpServer({
   name: "aksel-mcp",
