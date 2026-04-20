@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.10.1
+
+### Patch Changes
+
+- Modal: Changing `size` had no effect before ([#4823](https://github.com/navikt/aksel/pull/4823))
+
 ## 8.10.0
 
 ### Minor Changes
