@@ -148,7 +148,7 @@ function propList() {
            * { name: "enum", raw: "value1 | ... 50 more ... | value3", value: [{value: "value1"}, {value: "value2"}] }
            */
           type: val.type.raw ?? val.type.name,
-          enum:
+          unpackedType:
             val.type.name === "enum" && Array.isArray(val.type.value)
               ? (val.type.value as EnumValues).map((x) => x.value).join(" | ")
               : null,

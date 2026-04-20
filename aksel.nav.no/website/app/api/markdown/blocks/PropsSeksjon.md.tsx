@@ -25,7 +25,7 @@ function PropsSeksjonMarkdown(
           type: "React.ElementType",
           _type: "prop" as const,
           _key: "overridable",
-          enum: null,
+          unpackedType: null,
         });
       }
 
