@@ -18,7 +18,7 @@ const MARKDOWN_ROUTES: Routes = {
   "/llm": LLM.markdown,
 };
 
-const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
+const AVAILABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
 
 /**
  * Allows for dynamic routes under the specified prefixes,
@@ -31,7 +31,7 @@ const DYNAMIC_ROUTE_PREFIXES = [
 ] as const;
 
 function isValidRoute(route: string): boolean {
-  if (AVALIABLE_MARKDOWN_ROUTES.includes(route)) {
+  if (AVAILABLE_MARKDOWN_ROUTES.includes(route)) {
     return true;
   }
 
@@ -39,7 +39,7 @@ function isValidRoute(route: string): boolean {
 }
 
 export {
-  AVALIABLE_MARKDOWN_ROUTES,
+  AVAILABLE_MARKDOWN_ROUTES,
   MARKDOWN_ROUTES,
   DYNAMIC_ROUTE_PREFIXES,
   isValidRoute,
