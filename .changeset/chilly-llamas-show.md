@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Modal: Changing modal-size had no effect before
+Modal: Changing `size` had no effect before
