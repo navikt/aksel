@@ -5128,7 +5128,7 @@ __metadata:
     jsdom: "npm:27.1.0"
     react: "npm:19.2.4"
     react-day-picker: "npm:9.14.0"
-    react-dom: "npm:19.2.4"
+    react-dom: "npm:19.2.5"
     react-router: "npm:^7.13.1"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.3.6"
@@ -10063,7 +10063,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.0"
     fuse.js: "npm:^7.0.0"
     react: "npm:19.2.4"
-    react-dom: "npm:19.2.4"
+    react-dom: "npm:19.2.5"
     typescript: "npm:6.0.2"
     vite: "npm:^7.3.2"
     vite-plugin-singlefile: "npm:^2.3.0"
@@ -10124,7 +10124,7 @@ __metadata:
     prettier: "npm:3.8.1"
     react: "npm:19.2.4"
     react-docgen-typescript: "npm:2.2.2"
-    react-dom: "npm:19.2.4"
+    react-dom: "npm:19.2.5"
     storybook: "npm:^10.3.5"
     storybook-addon-pseudo-states: "npm:^10.3.5"
     stylelint: "npm:^17.2.0"
@@ -21115,7 +21115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.2.4":
+"react-dom@npm:19.2.5, react-dom@npm:^19.2.4":
   version: 19.2.5
   resolution: "react-dom@npm:19.2.5"
   dependencies:
