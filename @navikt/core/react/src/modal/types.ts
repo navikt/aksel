@@ -1,6 +1,7 @@
 interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
    * Affects internal padding
+   * @default "medium"
    */
   size?: "small" | "medium";
   /**

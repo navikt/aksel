@@ -49,13 +49,7 @@
   left: 0;
 }
 
-.aksel-modal--medium {
-  width: 700px;
-}
-
 .aksel-modal--small {
-  width: 450px;
-
   & .aksel-modal__header {
     padding: var(--ax-space-12) var(--ax-space-16);
   }
@@ -68,6 +62,14 @@
     padding-block: var(--ax-space-12) var(--ax-space-16);
     padding-inline: var(--ax-space-16);
   }
+}
+
+.aksel-modal--width-medium {
+  width: 700px;
+}
+
+.aksel-modal--width-small {
+  width: 450px;
 }
 
 @media (min-width: 480px) {

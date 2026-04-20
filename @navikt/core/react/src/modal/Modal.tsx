@@ -93,6 +93,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       style,
       onClick,
       onMouseDown,
+      size = "medium",
       ...rest
     }: ModalProps,
     ref,
@@ -153,12 +154,17 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
-    const mergedClassName = cl("aksel-modal", className, {
-      [polyfillClassName]: needPolyfill,
-      "aksel-modal--autowidth": !width,
-      [`aksel-modal--${width}`]: isWidthPreset,
-      "aksel-modal--top": placement === "top" && !needPolyfill,
-    });
+    const mergedClassName = cl(
+      "aksel-modal",
+      className,
+      `aksel-modal--${size}`,
+      {
+        [polyfillClassName]: needPolyfill,
+        "aksel-modal--autowidth": !width,
+        [`aksel-modal--width-${width}`]: isWidthPreset,
+        "aksel-modal--top": placement === "top" && !needPolyfill,
+      },
+    );
 
     const mergedStyle = {
       ...style,

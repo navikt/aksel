@@ -143,13 +143,32 @@ const propsSeksjon = `_type == "props_seksjon" =>{
   ...,
   komponenter[]{
     ...,
-    "propref": propref->{...}
+    "propref": propref->{..., "proplist": proplist[]{
+      ...,
+      "unpackedType": null
+    }}
+  },
+}`;
+
+/**
+ * Replace type with unpackedType if unpackedType exists.
+ * This allows for more verbose prop-types for LLMs
+ */
+const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
+  ...,
+  komponenter[]{
+    ...,
+    "propref": propref->{..., "proplist": proplist[]{
+      ...,
+      "type": coalesce(unpackedType, type),
+      "unpackedType": null
+    }}
   },
 }`;
 
 const tokenRef = `_type == "token_ref"=>@->`;
 
-export const destructureBlocks = `
+const baseBlocks = `
 ${language},
 ${alert},
 ${attachment},
@@ -159,12 +178,21 @@ ${markDef},
 ${introSeksjon},
 ${relatertInnhold},
 ${liveSeksjon},
-${propsSeksjon},
 ${installSeksjon},
 ${accordionBlock},
 ${expansionCardBlock},
 ${defaultBlock},
-${table},
+${table}
+`;
+
+export const destructureBlocks = `
+${baseBlocks},
+${propsSeksjon},
+`;
+
+export const destructureBlocksForMarkdown = `
+${baseBlocks},
+${propsSeksjonForMarkdown},
 `;
 
 export const writersAll = `"writers": array::compact(writers[]->{title, description, avatar_id, type})`;

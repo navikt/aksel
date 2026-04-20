@@ -49,7 +49,6 @@ const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
 /**
  * TODO:
  * - Plan for pinning: Move it into "settings" dialog like here: https://cloudscape.design/examples/react/table.html
- * - Keyboard-nav breaks in headers now because of the resize-handles.
  * Toggling `data-block-keyboard-nav` does not work since the created "grid" does not update when toggling this attribute.
  */
 const DataTableColumnHeader = forwardRef<
@@ -148,6 +147,7 @@ const DataTableColumnHeader = forwardRef<
             {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
             data-active={resizeResult.isResizingWithKeyboard}
+            data-disable-keyboard-nav={resizeResult.isResizingWithKeyboard}
             data-block-keyboard-nav
           >
             {resizeResult.isResizingWithKeyboard && (

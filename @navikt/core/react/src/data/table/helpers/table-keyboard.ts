@@ -64,6 +64,10 @@ function shouldBlockNavigation(event: KeyboardEvent): boolean {
     return false;
   }
 
+  if (el.dataset.disableKeyboardNav === "true") {
+    return true;
+  }
+
   if (el.isContentEditable) {
     return true;
   }

@@ -61,6 +61,11 @@ export const Props = defineType({
               type: "string",
             },
             {
+              title: "Unpacked Type",
+              name: "unpackedType",
+              type: "string",
+            },
+            {
               title: "isRef",
               name: "ref",
               type: "boolean",
