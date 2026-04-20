@@ -145,13 +145,13 @@ const propsSeksjon = `_type == "props_seksjon" =>{
     ...,
     "propref": propref->{..., "proplist": proplist[]{
       ...,
-      "enum": null
+      "unpackedType": null
     }}
   },
 }`;
 
 /**
- * Replace type with enum if enum exists.
+ * Replace type with unpackedType if unpackedType exists.
  * This allows for more verbose prop-types for LLMs
  */
 const propsSeksjonForMarkdown = `_type == "props_seksjon" =>{
