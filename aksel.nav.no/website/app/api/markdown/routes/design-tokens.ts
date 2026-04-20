@@ -112,7 +112,7 @@ For dynamic and adaptable components we recommend using these, but for most stat
     `Tokens are used as CSS custom properties with the prefix \`--ax-\`, e.g. \`var(--ax-bg-accent-strong)\`. They are also available as SCSS variables (\`$ax-...\`), Less variables (\`@ax-...\`) and JS constants.`,
     `If you have installed \`@navikt/ds-css\`, you don't need to install the token-package \`@navikt/ds-tokens\`. The tokens will be included automatically.
 If you are using the token-package separately, you can import the tokens with \`import { TokenName } from '@navikt/ds-tokens/js'\`. Note that SCSS, Less and JS are exported from separate entry points, so make sure to import from the correct path.`,
-    'All of these tokens works out of the box with light and dark mode. Just set class="light" (default) or class="dark" to get the correct color scheme.',
+    'All of these tokens work out of the box with light and dark mode. Just set class="light" (default) or class="dark" to get the correct color scheme.',
     baseTokenDocs,
     categoryBlocks.join("\n\n"),
   );
