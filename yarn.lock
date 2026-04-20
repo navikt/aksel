@@ -23968,18 +23968,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:^2.3.6":
-  version: 2.4.0
-  resolution: "swr@npm:2.4.0"
-  dependencies:
-    dequal: "npm:^2.0.3"
-    use-sync-external-store: "npm:^1.6.0"
-  peerDependencies:
-    react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/3536db25748b49659d87450ed40e391b0a8c2cfe387e41224ee505a18ae739477bd60caba1d8ff7bd961db923cf3d6771e4aee13de822855436a7bca9e343ccc
-  languageName: node
-  linkType: hard
-
 "swr@npm:^2.4.1":
   version: 2.4.1
   resolution: "swr@npm:2.4.1"
@@ -25961,7 +25949,7 @@ __metadata:
     sharp: "npm:0.33.5"
     showdown: "npm:^2.1.0"
     styled-components: "npm:^6.0.0"
-    swr: "npm:^2.3.6"
+    swr: "npm:^2.4.1"
     tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:6.0.2"
