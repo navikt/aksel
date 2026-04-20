@@ -1,11 +1,15 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../typography/BodyShort";
 import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
+import {
+  useTimelineKeyboardActiveRow,
+  useTimelineKeyboardContext,
+} from "./hooks/TimelineKeyboardNavProvider";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
-import { useTimelineContext } from "./hooks/useTimelineContext";
 import Period from "./period";
 import {
   PositionedPeriod,
@@ -49,9 +53,13 @@ export interface TimelineRowType extends React.ForwardRefExoticComponent<
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
-    const { periods, active } = useRowContext();
-    const { setActiveRow } = useTimelineContext();
+    const { periods } = useRowContext();
+    const { updateActiveRow, handleRowKeyDown } = useTimelineKeyboardContext();
+    const { activeRow } = useTimelineKeyboardActiveRow();
     const translate = useI18n("Timeline");
+
+    const [elementRefState, setElementRefState] =
+      React.useState<HTMLDivElement | null>(null);
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
@@ -60,10 +68,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     const earliest = periods.reduce((a, b) => {
       return a.end < b.end ? a : b;
     }, {} as PositionedPeriod);
-
-    const firstFocusable = periods.find(
-      (p) => !!p.children || !!p.onSelectPeriod,
-    );
 
     return (
       <>
@@ -80,15 +84,20 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           ) : (
             <div className="aksel-timeline__row-label">{label}</div>
           ))}
+
+        {/** biome-ignore lint/a11y/noStaticElementInteractions: onKeyDown just captures events on child-elements here. Regular interaction patterns still works as expected. */}
         <div
           className={cl("aksel-timeline__row", {
-            "aksel-timeline__row--active": active,
+            "aksel-timeline__row--active": activeRow === elementRefState,
           })}
+          ref={setElementRefState}
+          tabIndex={-1}
+          onFocusCapture={() => updateActiveRow(elementRefState)}
+          onKeyDown={handleRowKeyDown}
+          data-timeline-row
         >
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <ol
             {...rest}
-            tabIndex={-1}
             ref={ref}
             aria-label={
               periods.length === 0
@@ -99,12 +108,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                   })
             }
             className={cl("aksel-timeline__row-periods", className)}
-            onKeyDown={(e) => {
-              if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-                e.preventDefault();
-                setActiveRow(e.key);
-              }
-            }}
           >
             {periods?.map((period) => {
               return (
@@ -112,7 +115,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                   <PeriodContext.Provider
                     value={{
                       periodId: period.id,
-                      firstFocus: firstFocusable?.id === period.id,
                       restProps: period?.restProps,
                     }}
                   >

@@ -151,6 +151,7 @@
   text-align: start;
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
+  padding: 0;
 
   .aksel-data-table__thead & {
     background-color: var(--ax-bg-neutral-soft);
@@ -265,6 +266,7 @@
   background-color: transparent;
   border: none;
   font-weight: inherit;
+  padding: 0;
 
   &:focus-visible {
     outline: none;

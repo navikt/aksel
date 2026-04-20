@@ -1,5 +1,10 @@
 type SortDirection = "asc" | "desc" | "none";
 
+/**
+ * TODO:
+ * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
+ * - Add "align" property for better control over text alignment in cells.
+ */
 type ColumnDefinition<T> = {
   id: string;
   width?: number | string;
