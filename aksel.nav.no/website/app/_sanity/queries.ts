@@ -492,9 +492,43 @@ const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
   }`,
 );
 
+const GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "ds_artikkel" && slug.current == $slug][0]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocksForMarkdown}
+    }
+  }`,
+);
+
+const TEMPLATES_BY_SLUG_MARKDOWN_QUERY = defineQuery(
+  `*[_type == "templates_artikkel" && slug.current == $slug][0]{
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocksForMarkdown}
+    }
+  }`,
+);
+
+const ALL_MARKDOWN_ARTICLES_INDEX_QUERY = defineQuery(
+  `*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(slug.current)]{
+    _type,
+    heading,
+    "slug": slug.current,
+    kategori,
+    "tag": status.tag,
+    sidebarindex
+  }`,
+);
+
 export {
   ALL_KOMPONENTS_MARKDOWN_QUERY,
   KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
+  GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY,
+  TEMPLATES_BY_SLUG_MARKDOWN_QUERY,
   ALL_GRUNNLEGGENDE_MARKDOWN_QUERY,
   ALL_TEMPLATES_MARKDOWN_QUERY,
+  ALL_MARKDOWN_ARTICLES_INDEX_QUERY,
 };
