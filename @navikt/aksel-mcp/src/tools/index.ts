@@ -1,6 +1,5 @@
 import type { McpTool } from "../types.js";
-import { getAlerts } from "./get-alerts.js";
-import { getForecast } from "./get-forecast.js";
+import { getAkselDocs } from "./aksel-docs.js";
 
 /**
  * Register all tools here.
@@ -10,6 +9,6 @@ import { getForecast } from "./get-forecast.js";
  * Read more about tools:
  * - https://modelcontextprotocol.io/docs/learn/server-concepts#tools
  */
-const tools: McpTool<any>[] = [getAlerts, getForecast];
+const tools: McpTool<any>[] = [getAkselDocs];
 
 export { tools };
