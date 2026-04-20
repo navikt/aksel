@@ -19,10 +19,20 @@ for (const tool of tools) {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
+
   console.error("Aksel MCP Server running on stdio");
+
+  function shutdown() {
+    console.error("Server terminated");
+
+    process.exit(0);
+  }
+
+  process.on("SIGINT", shutdown);
+  process.on("SIGTERM", shutdown);
 }
 
 main().catch((error) => {
-  console.error("Fatal error in main():", error);
+  console.error("Server error:", error);
   process.exit(1);
 });
