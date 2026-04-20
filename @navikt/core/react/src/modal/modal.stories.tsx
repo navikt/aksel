@@ -5,7 +5,7 @@ import { Button } from "../button";
 import { Checkbox, CheckboxGroup } from "../form/checkbox";
 import { VStack } from "../primitives/stack";
 import { Tooltip } from "../tooltip";
-import { BodyLong, BodyShort, Heading } from "../typography";
+import { BodyLong, Heading } from "../typography";
 import Modal from "./Modal";
 
 const meta: Meta<typeof Modal> = {
@@ -148,12 +148,11 @@ export const EmptyHeader: StoryFn = () => (
   </Modal>
 );
 
-export const Small: StoryFn = () => (
+export const SizeSmall: StoryFn = () => (
   <>
     <Modal
       open
       onClose={() => null}
-      width="small"
       header={{
         heading: "Simple header",
         size: "small",
@@ -161,7 +160,7 @@ export const Small: StoryFn = () => (
       size="small"
     >
       <Modal.Body>
-        <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
+        <BodyLong>Lorem ipsum dolor sit amet.</BodyLong>
       </Modal.Body>
       <Modal.Footer>
         <Button size="small" variant="secondary">
@@ -171,9 +170,29 @@ export const Small: StoryFn = () => (
     </Modal>
   </>
 );
-Small.storyName = "Size = Small";
+SizeSmall.storyName = "Size = Small";
 
-export const MediumWithPortal: StoryFn = () => (
+export const WidthSmall: StoryFn = () => (
+  <Modal
+    open
+    onClose={() => null}
+    width="small"
+    header={{
+      heading: "Simple header",
+      size: "small",
+    }}
+  >
+    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+    <Modal.Footer>
+      <Button size="small" variant="secondary">
+        Dummy button
+      </Button>
+    </Modal.Footer>
+  </Modal>
+);
+WidthSmall.storyName = "Width = Small";
+
+export const WidthMediumWithPortal: StoryFn = () => (
   <Modal
     open
     onClose={() => null}
@@ -181,14 +200,12 @@ export const MediumWithPortal: StoryFn = () => (
     width="medium"
     header={{ heading: "Simple header" }}
   >
-    <Modal.Body>
-      <BodyShort size="small">Lorem ipsum dolor sit amet.</BodyShort>
-    </Modal.Body>
+    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
-MediumWithPortal.storyName = "Size = Medium (with portal)";
+WidthMediumWithPortal.storyName = "Width = Medium (with portal)";
 
-export const Large800: StoryFn = () => (
+export const Width800: StoryFn = () => (
   <Modal
     open
     onClose={() => null}
@@ -198,7 +215,7 @@ export const Large800: StoryFn = () => (
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
-Large800.storyName = "Size = 800px";
+Width800.storyName = "Width = 800px";
 
 export const PlacementTopShort: StoryFn = () => (
   <div style={{ width: "100vw", height: "100vh" }}>
