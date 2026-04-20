@@ -7,7 +7,8 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "inspect": "yarn mcp-inspector",
-    "test": "yarn vitest"
+    "test": "yarn vitest run",
+    "test:watch": "yarn vitest run"
   },
   "type": "module",
   "bin": "./dist/index.js",
