@@ -26,8 +26,8 @@ export const getChangelogs = (path: string) => {
     "react",
     "css",
     "tokens",
-    "tailwind",
     "aksel-icons",
+    "tailwind",
     "aksel-stylelint",
   ];
   return changelogs.sort((a, b) => {
