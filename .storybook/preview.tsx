@@ -1,4 +1,7 @@
-import { withThemeByClassName } from "@storybook/addon-themes";
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
+import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
+import addonVitest from "@storybook/addon-vitest";
 import { definePreview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/data-table.css";
@@ -56,6 +59,7 @@ const TypoDecorator = ({
 };
 
 export default definePreview({
+  addons: [addonA11y(), addonThemes(), addonDocs(), addonVitest()],
   parameters: {
     options: {
       storySort: {
