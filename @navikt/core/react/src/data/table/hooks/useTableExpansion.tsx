@@ -10,6 +10,7 @@ type DataTableExpansionContextT = {
   isAllExpanded: boolean;
   getDetailsPanelContent?: (row: unknown) => React.ReactNode;
   getDetailsPanelHeight?: (row: unknown) => number | "auto";
+  getSubRows?: (row: unknown) => unknown[];
   showExpandAll?: boolean;
   enableExpansion: boolean;
 };
@@ -43,6 +44,7 @@ function DataTableExpansionProvider<T>({
   getDetailsPanelContent,
   getDetailsPanelHeight,
   showExpandAll = false,
+  getSubRows,
 }: TableExpansionOptions<T> & { children: React.ReactNode }) {
   const [expandedIds, setExpandedIds] = useControllableState({
     value: detailsPanelRowIds,
@@ -90,8 +92,9 @@ function DataTableExpansionProvider<T>({
       getDetailsPanelHeight={
         getDetailsPanelHeight as ((row: unknown) => number | "auto") | undefined
       }
+      getSubRows={getSubRows as ((row: unknown) => unknown[]) | undefined}
       showExpandAll={showExpandAll}
-      enableExpansion={!!getDetailsPanelContent}
+      enableExpansion={!!getDetailsPanelContent || !!getSubRows}
     >
       {children}
     </DataTableExpansionContextProvider>

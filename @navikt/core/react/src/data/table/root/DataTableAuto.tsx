@@ -445,6 +445,11 @@ function DataTableAutoTBodyContent<T>({
           rowData={rowData}
           columnCount={columns.length}
         />
+        <DataTableSubRows
+          parentRowId={rowId}
+          rowData={rowData}
+          columns={columns}
+        />
       </React.Fragment>
     );
   });
@@ -488,6 +493,63 @@ function DataTableExpandedRow<T>({
         </div>
       </td>
     </tr>
+  );
+}
+
+function DataTableSubRows<T>({
+  parentRowId,
+  rowData,
+  columns,
+}: {
+  parentRowId: string | number;
+  rowData: T;
+  columns: UseColumnOptionsResult<T>["columns"];
+}) {
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, getSubRows } = expansionContext;
+
+  if (!getSubRows || !isExpanded(parentRowId)) {
+    return null;
+  }
+
+  const subRows = getSubRows(rowData) as T[];
+
+  if (!subRows || subRows.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {subRows.map((subRowData, subRowIndex) => {
+        const subRowId = `${parentRowId}-${subRowIndex}`;
+        return (
+          <React.Fragment key={subRowId}>
+            <DataTableTr rowId={subRowId}>
+              {columns.map(({ isSticky, colDef }, colDefIndex) => (
+                <DataTableBaseCell
+                  textAlign={colDef.type === "number" ? "right" : "left"}
+                  key={colDef.id || colDefIndex}
+                  as={colDef.isRowHeader ? "th" : "td"}
+                  isSticky={isSticky}
+                >
+                  {colDef.cell(subRowData)}
+                </DataTableBaseCell>
+              ))}
+            </DataTableTr>
+            <DataTableSubRows
+              parentRowId={subRowId}
+              rowData={subRowData}
+              columns={columns}
+            />
+          </React.Fragment>
+        );
+      })}
+    </>
   );
 }
 
