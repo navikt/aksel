@@ -146,9 +146,25 @@ const DataTableColumnHeader = forwardRef<
           <button
             {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
+            aria-label={
+              resizeResult.isResizingWithKeyboard
+                ? "Bruk pil venstre/høyre"
+                : "Endre bredde"
+            } // TODO Translate
             data-active={resizeResult.isResizingWithKeyboard}
             data-disable-keyboard-nav={resizeResult.isResizingWithKeyboard}
             data-block-keyboard-nav
+            role="slider"
+            aria-valuenow={
+              typeof resizeResult.style.width === "number"
+                ? resizeResult.style.width
+                : 0
+            }
+            aria-valuetext={
+              typeof resizeResult.style.width === "number"
+                ? resizeResult.style.width.toString()
+                : undefined
+            } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
               <>
