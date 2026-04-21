@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/nextjs-vite";
+import { defineMain } from "@storybook/nextjs-vite/node";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
@@ -13,7 +13,7 @@ const require = createRequire(import.meta.url);
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
-const sbConfig: StorybookConfig = {
+export default defineMain({
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in .storybook/main.ts
     const customIndexer = async (fileName: string, opts: any) => {
@@ -86,8 +86,7 @@ const sbConfig: StorybookConfig = {
       ],
     });
   },
-};
-export default sbConfig;
+});
 
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));

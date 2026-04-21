@@ -1,4 +1,4 @@
-import { StorybookConfig } from "@storybook/react-vite";
+import { defineMain } from "@storybook/react-vite/node";
 import FG from "fast-glob";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -17,7 +17,7 @@ const includeWebsiteStories = process.env.WITH_WEBSITE === "true";
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
-export default {
+export default defineMain({
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in aksel.nav.no/website/.storybook/main.ts
     const customIndexer = async (fileName: string, opts: any) => {
@@ -126,9 +126,9 @@ export default {
   features: {
     actions: false,
   },
-} satisfies StorybookConfig;
+});
 
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string) {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
