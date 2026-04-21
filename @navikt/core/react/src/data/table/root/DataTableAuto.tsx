@@ -405,13 +405,13 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
-  const renderLoadingAnnoucement = isLoading && !loadingState && !loadingRows;
+  const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
 
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
     return (
       <React.Fragment key={rowId}>
-        {renderLoadingAnnoucement && (
+        {renderLoadingAnnouncement && (
           <tr>
             <td colSpan={columns.length} className="aksel-sr-only">
               {loadingLabel}
