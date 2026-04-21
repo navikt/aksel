@@ -46,7 +46,7 @@ type TableColumnResizeArgs = ResizeProps & {};
 
 type TableColumnResizeResult =
   | {
-      style?: React.CSSProperties;
+      style: React.CSSProperties;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
         onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
