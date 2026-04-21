@@ -801,3 +801,17 @@ export const NestedRows: Story = {
     />
   ),
 };
+
+export const NestedLeftAlignedContentRows: Story = {
+  render: () => (
+    <DataTableAuto
+      /* Removes right aligned id column */
+      columnDefinitions={rowClickColumnDef.slice(1)}
+      data={nestedRowData}
+      getRowId={(row) => row.id}
+      selectionMode="multiple"
+      withKeyboardNav
+      getSubRows={(row) => row.children}
+    />
+  ),
+};

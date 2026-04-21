@@ -1,5 +1,7 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useMemo } from "react";
+import { ChevronDownIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { Button } from "../../../button";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
@@ -169,6 +171,10 @@ interface DataTableProps<T>
   defaultDetailsPanelRowIds?: (string | number)[];
   /**
    * Called when the list of expanded row IDs changes.
+   *
+   *
+   * TODO:
+   * - Docs: This pattern is called "Master / Detail" in general terms
    */
   onDetailsPanelChange?: (ids: (string | number)[]) => void;
   /**
@@ -369,6 +375,7 @@ function DataTableAutoTBodyContent<T>({
   emptyState,
 }: DataTableAutoTBodyContentProps<T>) {
   const { isLoading } = useDataTableContext();
+  const expansionContext = useDataTableExpansion(false);
 
   if (isLoading && loadingState != null) {
     return (
@@ -416,6 +423,10 @@ function DataTableAutoTBodyContent<T>({
 
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
+
+    const subRows = expansionContext?.getSubRows
+      ? expansionContext?.getSubRows(rowData)
+      : undefined;
     return (
       <React.Fragment key={rowId}>
         {renderLoadingAnnouncement && (
@@ -427,6 +438,15 @@ function DataTableAutoTBodyContent<T>({
         )}
         <DataTableTr rowId={rowId}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
+            const renderNestedToggle =
+              colDefIndex === 0 &&
+              subRows &&
+              expansionContext?.enableNestedRows;
+
+            const style: React.CSSProperties = {
+              "--__axc-data-table-nested-depth": 1,
+            };
+
             return (
               <DataTableBaseCell
                 /* TODO: Make this configurable */
@@ -434,7 +454,12 @@ function DataTableAutoTBodyContent<T>({
                 key={colDef.id || colDefIndex}
                 as={colDef.isRowHeader ? "th" : "td"}
                 isSticky={isSticky}
+                data-nested-toggle={renderNestedToggle || undefined}
+                style={style}
               >
+                {renderNestedToggle && (
+                  <NestedRowToggle rowId={rowId} rows={subRows} />
+                )}
                 {colDef.cell(rowData)}
               </DataTableBaseCell>
             );
@@ -447,12 +472,57 @@ function DataTableAutoTBodyContent<T>({
         />
         <DataTableSubRows
           parentRowId={rowId}
-          rowData={rowData}
+          rows={subRows}
           columns={columns}
         />
       </React.Fragment>
     );
   });
+}
+
+function NestedRowToggle({
+  rowId,
+  rows,
+}: {
+  rowId: string | number;
+  rows: unknown[];
+}) {
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, toggleExpansion } = expansionContext;
+
+  const subRows = rows;
+  const hasSubRows = subRows && subRows.length > 0;
+  const isRowExpanded = isExpanded(rowId);
+
+  return (
+    <div className="aksel-data-table__nested-toggle">
+      {hasSubRows && (
+        <Button
+          variant="tertiary"
+          data-color="neutral"
+          size="small"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleExpansion(rowId);
+          }}
+          aria-expanded={isRowExpanded}
+          aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
+          icon={
+            isRowExpanded ? (
+              <ChevronDownIcon aria-hidden />
+            ) : (
+              <ChevronRightIcon aria-hidden />
+            )
+          }
+        />
+      )}
+    </div>
+  );
 }
 
 function DataTableExpandedRow<T>({
@@ -498,26 +568,26 @@ function DataTableExpandedRow<T>({
 
 function DataTableSubRows<T>({
   parentRowId,
-  rowData,
+  rows: subRows,
   columns,
+  depth = 2,
 }: {
   parentRowId: string | number;
-  rowData: T;
+  rows?: unknown[];
   columns: UseColumnOptionsResult<T>["columns"];
+  depth?: number;
 }) {
   const expansionContext = useDataTableExpansion(false);
 
-  if (!expansionContext) {
+  if (!expansionContext || !subRows) {
     return null;
   }
 
-  const { isExpanded, getSubRows } = expansionContext;
+  const { isExpanded } = expansionContext;
 
-  if (!getSubRows || !isExpanded(parentRowId)) {
+  if (!isExpanded(parentRowId)) {
     return null;
   }
-
-  const subRows = getSubRows(rowData) as T[];
 
   if (!subRows || subRows.length === 0) {
     return null;
@@ -527,24 +597,42 @@ function DataTableSubRows<T>({
     <>
       {subRows.map((subRowData, subRowIndex) => {
         const subRowId = `${parentRowId}-${subRowIndex}`;
+        const nestedSubRows = expansionContext.getSubRows
+          ? expansionContext.getSubRows(subRowData)
+          : undefined;
+
         return (
           <React.Fragment key={subRowId}>
             <DataTableTr rowId={subRowId}>
-              {columns.map(({ isSticky, colDef }, colDefIndex) => (
-                <DataTableBaseCell
-                  textAlign={colDef.type === "number" ? "right" : "left"}
-                  key={colDef.id || colDefIndex}
-                  as={colDef.isRowHeader ? "th" : "td"}
-                  isSticky={isSticky}
-                >
-                  {colDef.cell(subRowData)}
-                </DataTableBaseCell>
-              ))}
+              {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                const renderNestedToggle = colDefIndex === 0 && !!nestedSubRows;
+
+                const style: React.CSSProperties = {
+                  "--__axc-data-table-nested-depth": depth,
+                };
+
+                return (
+                  <DataTableBaseCell
+                    textAlign={colDef.type === "number" ? "right" : "left"}
+                    key={colDef.id || colDefIndex}
+                    as={colDef.isRowHeader ? "th" : "td"}
+                    isSticky={isSticky}
+                    data-nested-toggle={renderNestedToggle || undefined}
+                    style={style}
+                  >
+                    {renderNestedToggle && (
+                      <NestedRowToggle rowId={subRowId} rows={nestedSubRows} />
+                    )}
+                    {colDef.cell(subRowData as T)}
+                  </DataTableBaseCell>
+                );
+              })}
             </DataTableTr>
             <DataTableSubRows
               parentRowId={subRowId}
-              rowData={subRowData}
+              rows={nestedSubRows}
               columns={columns}
+              depth={depth + 1}
             />
           </React.Fragment>
         );

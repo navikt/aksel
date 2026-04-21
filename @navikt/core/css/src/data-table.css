@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable no-duplicate-selectors */
 
 .aksel-data-table__border-wrapper {
@@ -152,6 +153,14 @@
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
   padding: 0;
+
+  &[data-nested-toggle] {
+    position: relative;
+
+    & > div {
+      margin-inline-start: calc(var(--__axc-data-table-nested-depth) * var(--ax-space-24));
+    }
+  }
 
   .aksel-data-table__thead & {
     background-color: var(--ax-bg-neutral-soft);
@@ -572,4 +581,13 @@ html[data-dragging-cursor="true"] *,
 html[data-dragging-cursor="true"] *::before,
 html[data-dragging-cursor="true"] *::after {
   cursor: grabbing !important;
+}
+
+/* TODO: alignment not optimal when resizing column with nesting */
+.aksel-data-table__nested-toggle {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--__axc-data-table-nested-depth, 2) * var(--ax-space-16));
+  display: flex;
+  align-items: center;
 }

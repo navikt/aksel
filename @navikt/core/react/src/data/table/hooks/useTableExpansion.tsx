@@ -12,7 +12,8 @@ type DataTableExpansionContextT = {
   getDetailsPanelHeight?: (row: unknown) => number | "auto";
   getSubRows?: (row: unknown) => unknown[];
   showExpandAll?: boolean;
-  enableExpansion: boolean;
+  enableDetailsPanel: boolean;
+  enableNestedRows: boolean;
 };
 
 const {
@@ -94,7 +95,8 @@ function DataTableExpansionProvider<T>({
       }
       getSubRows={getSubRows as ((row: unknown) => unknown[]) | undefined}
       showExpandAll={showExpandAll}
-      enableExpansion={!!getDetailsPanelContent || !!getSubRows}
+      enableDetailsPanel={!!getDetailsPanelContent}
+      enableNestedRows={!!getSubRows}
     >
       {children}
     </DataTableExpansionContextProvider>

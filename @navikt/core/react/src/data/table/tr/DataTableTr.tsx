@@ -131,13 +131,13 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   const {
     isExpanded,
     toggleExpansion,
-    enableExpansion,
+    enableDetailsPanel,
     isAllExpanded,
     toggleAll,
     showExpandAll,
   } = expansionContext;
 
-  if (!enableExpansion) {
+  if (!enableDetailsPanel) {
     return null;
   }
 
@@ -225,7 +225,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
 }
 
 /**
- * TODO: How do these cells handle multiple thead rows, or col/rowspans?
+ * TODO: How do these cells handle multiple thead rows, or col/row-spans?
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
