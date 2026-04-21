@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import {
   ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
@@ -77,13 +77,11 @@ const DataTableColumnHeader = forwardRef<
   ) => {
     const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
-    const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
-      null,
-    );
-    const mergedRef = useMergeRefs(forwardedRef, setThRefState);
+    const thRef = useRef<HTMLTableCellElement>(null);
+    const mergedRef = useMergeRefs(forwardedRef, thRef);
 
     const resizeResult = useTableColumnResize({
-      ref: thRefState,
+      thRef,
       width,
       defaultWidth,
       minWidth,
