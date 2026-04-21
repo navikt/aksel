@@ -1,5 +1,8 @@
-import { withThemeByClassName } from "@storybook/addon-themes";
-import type { Preview } from "@storybook/nextjs-vite";
+import a11yAddon from "@storybook/addon-a11y";
+import docsAddon from "@storybook/addon-docs";
+import themesAddon, { withThemeByClassName } from "@storybook/addon-themes";
+import { definePreview } from "@storybook/nextjs-vite";
+import type { JSX } from "react";
 import { Box, Theme } from "@navikt/ds-react";
 import "./aksel-storybook.css";
 
@@ -13,7 +16,8 @@ const withTheme = (Story: () => JSX.Element) => {
   );
 };
 
-const preview: Preview = {
+const preview = definePreview({
+  addons: [a11yAddon(), themesAddon(), docsAddon()],
   parameters: {
     options: {
       // The `a` and `b` arguments in this function have a type of `import('storybook/internal/types').IndexEntry`.
@@ -42,6 +46,6 @@ const preview: Preview = {
       defaultTheme: "light",
     }),
   ],
-};
+});
 
 export default preview;
