@@ -31,6 +31,7 @@ type TableExpansionOptions<T> = {
   getDetailsPanelContent?: (row: T) => React.ReactNode;
   getDetailsPanelHeight?: (row: T) => number | "auto";
   showExpandAll?: boolean;
+  getSubRows?: (rowData: T) => T[];
 };
 
 function DataTableExpansionProvider<T>({

@@ -182,6 +182,11 @@ interface DataTableProps<T>
    * @default false
    */
   showExpandAll?: boolean;
+  /**
+   * Function to get sub-rows for a given row, used for nested rows.
+   * When provided, an expand toggle column is added automatically.
+   */
+  getSubRows?: (rowData: T) => T[];
 }
 
 function DataTableAutoInner<T>(
@@ -220,6 +225,7 @@ function DataTableAutoInner<T>(
     detailsPanelRowIds,
     defaultDetailsPanelRowIds,
     onDetailsPanelChange,
+    getSubRows,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -282,6 +288,7 @@ function DataTableAutoInner<T>(
         getDetailsPanelContent={getDetailsPanelContent}
         getDetailsPanelHeight={getDetailsPanelHeight}
         showExpandAll={showExpandAll}
+        getSubRows={getSubRows}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
