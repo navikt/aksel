@@ -493,11 +493,11 @@ function NestedRowToggle({
     return null;
   }
 
-  const { isExpanded, toggleExpansion } = expansionContext;
+  const { isNestedRowsExpanded, toggleNestedRowsExpansion } = expansionContext;
 
   const subRows = rows;
   const hasSubRows = subRows && subRows.length > 0;
-  const isRowExpanded = isExpanded(rowId);
+  const isRowExpanded = isNestedRowsExpanded(rowId);
 
   return (
     <div className="aksel-data-table__nested-toggle">
@@ -508,7 +508,7 @@ function NestedRowToggle({
           size="small"
           onClick={(e) => {
             e.stopPropagation();
-            toggleExpansion(rowId);
+            toggleNestedRowsExpansion(rowId);
           }}
           aria-expanded={isRowExpanded}
           aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
@@ -583,9 +583,9 @@ function DataTableSubRows<T>({
     return null;
   }
 
-  const { isExpanded } = expansionContext;
+  const { isNestedRowsExpanded } = expansionContext;
 
-  if (!isExpanded(parentRowId)) {
+  if (!isNestedRowsExpanded(parentRowId)) {
     return null;
   }
 

@@ -4,8 +4,11 @@ import { useControllableState } from "../../../utils/hooks";
 
 type DataTableExpansionContextT = {
   expandedIds: (string | number)[];
+  nestedExpandedIds: (string | number)[];
   isExpanded: (id: string | number) => boolean;
   toggleExpansion: (id: string | number) => void;
+  isNestedRowsExpanded: (id: string | number) => boolean;
+  toggleNestedRowsExpansion: (id: string | number) => void;
   toggleAll: () => void;
   isAllExpanded: boolean;
   getDetailsPanelContent?: (row: unknown) => React.ReactNode;
@@ -51,6 +54,9 @@ function DataTableExpansionProvider<T>({
     value: detailsPanelRowIds,
     defaultValue: defaultDetailsPanelRowIds,
   });
+  const [nestedExpandedIds, setNestedExpandedIds] = React.useState<
+    (string | number)[]
+  >([]);
 
   const isExpanded = useCallback(
     (id: string | number) => expandedIds.includes(id),
@@ -68,6 +74,17 @@ function DataTableExpansionProvider<T>({
     [expandedIds, setExpandedIds, onDetailsPanelChange],
   );
 
+  const isNestedRowsExpanded = useCallback(
+    (id: string | number) => nestedExpandedIds.includes(id),
+    [nestedExpandedIds],
+  );
+
+  const toggleNestedRowsExpansion = useCallback((id: string | number) => {
+    setNestedExpandedIds((prev) =>
+      prev.includes(id) ? prev.filter((eid) => eid !== id) : [...prev, id],
+    );
+  }, []);
+
   const isAllExpanded =
     allRowKeys.length > 0 &&
     allRowKeys.every((key) => expandedIds.includes(key));
@@ -81,8 +98,11 @@ function DataTableExpansionProvider<T>({
   return (
     <DataTableExpansionContextProvider
       expandedIds={expandedIds}
+      nestedExpandedIds={nestedExpandedIds}
       isExpanded={isExpanded}
       toggleExpansion={toggleExpansion}
+      isNestedRowsExpanded={isNestedRowsExpanded}
+      toggleNestedRowsExpansion={toggleNestedRowsExpansion}
       toggleAll={toggleAll}
       isAllExpanded={isAllExpanded}
       getDetailsPanelContent={

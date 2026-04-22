@@ -878,5 +878,32 @@ export const NestedRowsWithMasterDetail: Story = {
       getDetailsPanelHeight={() => 100}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis detaljer" })[0],
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul detaljer" }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul under-rader" }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Skjul detaljer" }),
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul under-rader" }),
+    ).toBeInTheDocument();
+  },
   ...selectionControls,
 };
