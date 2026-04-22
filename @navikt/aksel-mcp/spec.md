@@ -8,6 +8,7 @@ The Aksel MCP server currently implements:
 
 - **Tool**: `aksel_docs` — Fetches Aksel documentation by path
 - **Resource**: `aksel-docs://llm-index` — Full documentation index from aksel.nav.no/llm.md
+- **Resource**: `aksel-tokens://all` — Complete design token catalog (breakpoints, colors, spacing, typography) ✅
 - **Prompts**: Empty array (no prompts implemented yet)
 
 ## Priority Features
@@ -27,7 +28,7 @@ The Aksel MCP server currently implements:
 
 ### Phase 1 (Immediate—complete the foundation)
 
-1. **Design tokens resource** (`aksel-tokens://all`) — Read-only resource exposing `docs.json` content
+1. ✅ **Design tokens resource** (`aksel-tokens://all`) — Read-only resource exposing `docs.json` content **[COMPLETED]**
 2. **Icon search tool** (`aksel_icons_search`) — Search icons by name/keyword/category from metadata
 3. **Component usage prompt** (`aksel_component_usage`) — Template for proper component scaffolding
 

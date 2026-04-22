@@ -5227,6 +5227,7 @@ __metadata:
   dependencies:
     "@modelcontextprotocol/inspector": "npm:^0.21.1"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
+    "@navikt/ds-tokens": "npm:^8.10.1"
     "@types/node": "npm:^24.10.9"
     typescript: "npm:6.0.2"
     vitest: "npm:4.1.4"

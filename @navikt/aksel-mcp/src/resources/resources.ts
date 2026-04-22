@@ -1,4 +1,5 @@
 import type { McpResource } from "../types.js";
+import { designTokensResource } from "./design-tokens.js";
 import { llmIndexResource } from "./llm-index.js";
 
 /**
@@ -8,6 +9,6 @@ import { llmIndexResource } from "./llm-index.js";
  * Read more about resources:
  * - https://modelcontextprotocol.io/docs/learn/server-concepts#resources
  */
-const resources: McpResource[] = [llmIndexResource];
+const resources: McpResource[] = [llmIndexResource, designTokensResource];
 
 export { resources };
