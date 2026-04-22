@@ -75,7 +75,6 @@ const DataTableColumnHeader = forwardRef<
     },
     forwardedRef,
   ) => {
-    const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
     const thRef = useRef<HTMLTableCellElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, thRef);
@@ -102,12 +101,6 @@ const DataTableColumnHeader = forwardRef<
         data-sortable={sortable}
         style={resizeResult.style}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
-        onPointerEnter={() => {
-          const el = contentRef.current;
-          setIsOverflowing(el ? el.scrollWidth > el.offsetWidth : false);
-          console.info("is overflowing", isOverflowing);
-        }}
-        onPointerLeave={() => setIsOverflowing(false)}
         UNSAFE_isSelection={UNSAFE_isSelection}
         colSpan={colSpan}
         rowSpan={rowSpan}

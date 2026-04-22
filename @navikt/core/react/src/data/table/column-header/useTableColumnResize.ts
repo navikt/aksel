@@ -1,4 +1,10 @@
-import { type DOMAttributes, useCallback, useRef, useState } from "react";
+import {
+  type DOMAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useControllableState } from "../../../utils/hooks";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
@@ -14,7 +20,13 @@ type ResizeProps = {
   /**
    * Initial width of the column. Only used when `width` is not set.
    */
-  defaultWidth?: ColumnWidth;
+  defaultWidth?: ColumnWidth | "auto"; // Men man bør kunne sende inn en initial width også...🤔
+  /**
+   * Whether the column should automatically resize to fit its content on mount. // TODO: Skal vi lytte til endringer?
+   * TODO si noe om onWidthChange og sånn
+   * NB: This can cause layout shift. We recommend setting `width` or `defaultWidth` as well to mitigate this.
+   */
+  autoWidth?: boolean;
   /**
    * Minimum width of the column.
    *
@@ -102,28 +114,23 @@ function useTableColumnResize(
 
   const setWidth = useCallback(
     (newWidth: number) => {
-      const currentWidth = thRef.current?.offsetWidth;
-      if (!currentWidth) {
-        return;
-      }
-
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
-
-      if (newWidth > max) {
-        _setWidth(newWidth < currentWidth ? newWidth : currentWidth);
-        return;
-      }
-      if (newWidth < min) {
-        _setWidth(newWidth > currentWidth ? newWidth : currentWidth);
-        return;
-      }
-
       const clamped = Math.min(Math.max(newWidth, min), max);
       _setWidth(clamped);
     },
-    [minWidth, maxWidth, _setWidth, thRef],
+    [minWidth, maxWidth, _setWidth],
   );
+
+  useEffect(() => {
+    if (userWidth === "auto" || defaultWidth === "auto") {
+      const newColumnWidth = getAutoColumnWidth(thRef);
+      if (newColumnWidth) {
+        console.log("auto", { newColumnWidth }, thRef);
+        setWidth(newColumnWidth);
+      }
+    }
+  }, [userWidth, defaultWidth, thRef, setWidth]);
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
     useCallback(() => {
@@ -145,12 +152,26 @@ function useTableColumnResize(
         if (!isResizingWithKeyboard) {
           return;
         }
+        const currentWidth = thRef.current?.offsetWidth ?? 0;
 
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
-          const startWidth = thRef.current?.offsetWidth ?? 0;
           const delta = event.key === "ArrowRight" ? 20 : -20;
-          setWidth(startWidth + delta);
+          setWidth(currentWidth + delta);
+          return;
+        }
+        if (event.key === "Home") {
+          event.preventDefault();
+          setWidth(0); // will fall back to minWidth
+          return;
+        }
+        if (event.key === "End") {
+          event.preventDefault();
+          const autoWidth = getAutoColumnWidth(thRef);
+          if (autoWidth && autoWidth > currentWidth) {
+            setWidth(autoWidth);
+          }
+          return;
         }
         if (event.key === "Escape") {
           setIsResizingWithKeyboard(false);
@@ -164,7 +185,22 @@ function useTableColumnResize(
       const startWidth = thRef.current?.offsetWidth ?? 0;
 
       function onPointerMove(clientX: number) {
-        setWidth(startWidth + (clientX - startX));
+        const currentWidth = thRef.current?.offsetWidth ?? 0;
+        const newWidth = startWidth + (clientX - startX);
+
+        const min = parseWidth(minWidth) ?? 0;
+        const max = parseWidth(maxWidth) ?? Infinity;
+
+        if (newWidth > max) {
+          setWidth(newWidth < currentWidth ? newWidth : currentWidth);
+          return;
+        }
+        if (newWidth < min) {
+          setWidth(newWidth > currentWidth ? newWidth : currentWidth);
+          return;
+        }
+
+        setWidth(newWidth);
       }
 
       function onMouseMove(e: MouseEvent) {
@@ -192,7 +228,7 @@ function useTableColumnResize(
       document.addEventListener("touchend", cleanup, { once: true });
       document.addEventListener("touchcancel", cleanup, { once: true });
     },
-    [setWidth, thRef],
+    [maxWidth, minWidth, setWidth, thRef],
   );
 
   const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
@@ -214,75 +250,10 @@ function useTableColumnResize(
   // Auto-size column to fit content on double click. NB: Doesn't work with block content!
   const handleDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"] =
     useCallback(() => {
-      const th = thRef.current!;
-      const thContent = th.querySelector(".aksel-data-table__th-content");
-      const thPaddingEl = th.querySelector("div");
-      const rows = th.closest("table")?.querySelectorAll("tbody tr, tfoot tr");
-      if (!thContent || !thPaddingEl || !rows) {
-        return;
+      const newColumnWidth = getAutoColumnWidth(thRef);
+      if (newColumnWidth) {
+        setWidth(newColumnWidth);
       }
-
-      // Find needed width for header cell
-      const contentWidth = thContent.scrollWidth;
-      const paddingElStyle = window.getComputedStyle(thPaddingEl);
-      const thInlinePadding =
-        parseInt(paddingElStyle.paddingLeft, 10) +
-        parseInt(paddingElStyle.paddingRight, 10);
-      let newColumnWidth = contentWidth + thInlinePadding;
-
-      // Find column position
-      let columnPosition = 1;
-      let prevSibling = th.previousElementSibling;
-      while (prevSibling) {
-        columnPosition += (prevSibling as HTMLTableCellElement).colSpan;
-        prevSibling = prevSibling.previousElementSibling;
-      }
-
-      // Find needed width for each cell in column in tbody and tfoot
-      const range = document.createRange();
-      let skipRows = 0;
-      for (const row of rows) {
-        // Skip rows where the cell in this column is covered by a rowspan from a previous row
-        if (skipRows > 0) {
-          skipRows--;
-          continue;
-        }
-
-        // Find cell
-        let cell = row.firstChild as HTMLTableCellElement;
-        let currentPosition = cell.colSpan;
-        while (columnPosition > currentPosition && cell.nextElementSibling) {
-          cell = cell.nextElementSibling as HTMLTableCellElement;
-          currentPosition += cell.colSpan;
-        }
-        skipRows = cell.rowSpan - 1;
-
-        // Find needed width
-        const cellContent = cell.firstChild as HTMLElement;
-        range.selectNodeContents(cellContent);
-        const cellContentWidth = range.getBoundingClientRect().width;
-        const contentElStyle = window.getComputedStyle(cellContent);
-        const inlinePadding =
-          parseInt(contentElStyle.paddingLeft, 10) +
-          parseInt(contentElStyle.paddingRight, 10);
-        const widthNeededForThisCell =
-          (cellContentWidth + inlinePadding) / cell.colSpan;
-        if (widthNeededForThisCell > newColumnWidth) {
-          newColumnWidth = widthNeededForThisCell;
-        }
-      }
-
-      // Make sure new width is not wider than the table container since that would be impractical
-      const container = th.closest("div");
-      const maxColWidth =
-        (container?.offsetWidth || document.documentElement.clientWidth * 0.9) *
-        0.95;
-
-      setWidth(
-        newColumnWidth > maxColWidth
-          ? Math.floor(maxColWidth)
-          : Math.ceil(newColumnWidth),
-      );
     }, [setWidth, thRef]);
 
   if (tableContext.layout !== "fixed") {
@@ -322,6 +293,78 @@ function parseWidth(width: ColumnWidth | undefined): number | undefined {
     return Number.isNaN(parsed) ? undefined : parsed;
   }
   return undefined;
+}
+
+function getAutoColumnWidth(
+  thRef: React.RefObject<HTMLTableCellElement | null>,
+) {
+  const th = thRef.current!;
+  const thContent = th.querySelector(".aksel-data-table__th-content");
+  const thPaddingEl = th.querySelector("div");
+  const rows = th.closest("table")?.querySelectorAll("tbody tr, tfoot tr");
+  if (!thContent || !thPaddingEl || !rows) {
+    return;
+  }
+
+  // Find needed width for header cell
+  const contentWidth = thContent.scrollWidth;
+  const paddingElStyle = window.getComputedStyle(thPaddingEl);
+  const thInlinePadding =
+    parseInt(paddingElStyle.paddingLeft, 10) +
+    parseInt(paddingElStyle.paddingRight, 10);
+  let newColumnWidth = contentWidth + thInlinePadding;
+
+  // Find column position
+  let columnPosition = 1;
+  let prevSibling = th.previousElementSibling;
+  while (prevSibling) {
+    columnPosition += (prevSibling as HTMLTableCellElement).colSpan;
+    prevSibling = prevSibling.previousElementSibling;
+  }
+
+  // Find needed width for each cell in column in tbody and tfoot
+  const range = document.createRange();
+  let skipRows = 0;
+  for (const row of rows) {
+    // Skip rows where the cell in this column is covered by a rowspan from a previous row
+    if (skipRows > 0) {
+      skipRows--;
+      continue;
+    }
+
+    // Find cell
+    let cell = row.firstChild as HTMLTableCellElement;
+    let currentPosition = cell.colSpan;
+    while (columnPosition > currentPosition && cell.nextElementSibling) {
+      cell = cell.nextElementSibling as HTMLTableCellElement;
+      currentPosition += cell.colSpan;
+    }
+    skipRows = cell.rowSpan - 1;
+
+    // Find needed width
+    const cellContent = cell.firstChild as HTMLElement;
+    range.selectNodeContents(cellContent);
+    const cellContentWidth = range.getBoundingClientRect().width;
+    const contentElStyle = window.getComputedStyle(cellContent);
+    const inlinePadding =
+      parseInt(contentElStyle.paddingLeft, 10) +
+      parseInt(contentElStyle.paddingRight, 10);
+    const widthNeededForThisCell =
+      (cellContentWidth + inlinePadding) / cell.colSpan;
+    if (widthNeededForThisCell > newColumnWidth) {
+      newColumnWidth = widthNeededForThisCell;
+    }
+  }
+
+  // Make sure new width is not wider than the table container since that would be impractical
+  const container = th.closest("div");
+  const maxColWidth =
+    (container?.offsetWidth || document.documentElement.clientWidth * 0.9) *
+    0.95;
+
+  return newColumnWidth > maxColWidth
+    ? Math.floor(maxColWidth)
+    : Math.ceil(newColumnWidth);
 }
 
 export { useTableColumnResize };
