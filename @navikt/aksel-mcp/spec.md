@@ -33,7 +33,8 @@ The Aksel MCP server currently implements:
 
 1. ✅ **Design tokens (resource + tool)** — `aksel-tokens://list` resource (lightweight browsing) + `aksel_token_details` tool (detailed lookups) **[COMPLETED]**
 2. ✅ **Icon search (resource + tool)** — `aksel-icons://categories` resource for scoping + `aksel_icons_search` tool with category/subcategory/keyword/variant filters **[COMPLETED]**
-3. **Component usage prompt** (`aksel_component_usage`) — Template for proper component scaffolding
+
+Ignore part 3 for now. Lets revisit it later. 3. **Component usage prompt** (`aksel_component_usage`) — Template for proper component scaffolding
 
 ### Phase 2 (After Phase 1 validation)
 
