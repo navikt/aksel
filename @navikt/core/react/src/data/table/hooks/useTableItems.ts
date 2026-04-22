@@ -1,19 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/** biome-ignore-all lint/correctness/noUnusedVariables: temp */
 import { useControllableState } from "../../../utils/hooks";
 
 type UseTableItemsArgs<T> = {
   items: T[];
+  getRowId?: (rowData: T, index: number) => string | number;
   /**
    * Master - Detail pattern props
    */
-  expandedDetailsPanelIds?: (string | number)[];
+  /* expandedDetailsPanelIds?: (string | number)[];
   defaultExpandedDetailsPanelIds?: (string | number)[];
   isDetailsPanelExpandable?: (rowData: T) => boolean;
   onDetailsPanelChange?: (ids: (string | number)[]) => void;
 
   getDetailsPanelHeight?: (row: T) => number | "auto";
-  getDetailsPanelContent?: (row: T) => React.ReactNode;
+  getDetailsPanelContent?: (row: T) => React.ReactNode; */
   /**
    * Expanded/Nested rows pattern props
    */
@@ -26,8 +25,6 @@ type UseTableItemsArgs<T> = {
 
 interface ItemDetail<T> {
   level: number;
-  setSize: number;
-  posInSet: number;
   parent: null | T;
   children: readonly T[];
 }
@@ -35,33 +32,61 @@ interface ItemDetail<T> {
 function useTableItems<T>(args: UseTableItemsArgs<T>) {
   const {
     items,
-    defaultExpandedDetailsPanelIds,
-    expandedDetailsPanelIds,
     expandedSubRowIds,
     defaultExpandedSubRowIds,
-    getDetailsPanelContent,
     getSubRows,
+    getRowId,
   } = args;
 
-  const [expandedIds, setExpandedIds] = useControllableState({
-    value: expandedDetailsPanelIds,
-    defaultValue: defaultExpandedDetailsPanelIds,
-  });
+  const resolvedGetRowId = (item: T, index: number): string | number =>
+    getRowId?.(item, index) ?? index;
 
-  const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
+  const [nestedSubRowsExpandedIds /* , setNestedSubRowsExpandedIds */] =
     useControllableState({
       value: expandedSubRowIds,
-      defaultValue: defaultExpandedSubRowIds,
+      defaultValue: defaultExpandedSubRowIds ?? [],
     });
 
   const allItems = items;
 
   const itemWithDetails = new Map<T, ItemDetail<T>>();
 
-  const isExpandable = !!getDetailsPanelContent || !!getSubRows;
+  const isExpandable = !!getSubRows;
 
   if (isExpandable) {
-    return null;
+    const visibleItemRows: T[] = [];
+
+    function traverseRows(
+      item: T,
+      details: Omit<ItemDetail<T>, "children">,
+      index: number,
+      isRootLevel = false,
+    ) {
+      const itemId = resolvedGetRowId(item, index);
+      const children = getSubRows?.(item) || [];
+      itemWithDetails.set(item, { ...details, children });
+
+      if (!nestedSubRowsExpandedIds.includes(itemId) && !isRootLevel) {
+        return;
+      }
+      visibleItemRows.push(item);
+
+      for (let i = 0; i < children.length; i++) {
+        traverseRows(
+          children[i],
+          {
+            level: details.level + 1,
+            parent: item,
+          },
+          /* TODO: Need to get a "global counter since this will overlap now" */
+          index + i,
+        );
+      }
+    }
+
+    for (let i = 0; i < allItems.length; i++) {
+      traverseRows(allItems[i], { level: 0, parent: null }, i, true);
+    }
   }
 
   return [];
