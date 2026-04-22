@@ -5146,7 +5146,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^8.10.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
@@ -10078,6 +10078,7 @@ __metadata:
     "@navikt/aksel-icons": "npm:^8.10.1"
     "@navikt/ds-css": "npm:^8.10.1"
     "@navikt/ds-react": "npm:^8.10.1"
+    "@navikt/ds-tailwind": "npm:^8.10.1"
     "@navikt/ds-tokens": "npm:^8.10.1"
   languageName: unknown
   linkType: soft
