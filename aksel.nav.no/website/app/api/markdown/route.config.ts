@@ -4,6 +4,7 @@ import Ikoner from "./routes/ikoner";
 import Komponenter from "./routes/komponenter";
 import LLM from "./routes/llm";
 import Maler from "./routes/maler";
+import TailwindConfig from "./routes/tailwind-config";
 
 type MarkdownRoute = () => Promise<string>;
 
@@ -13,6 +14,7 @@ const MARKDOWN_ROUTES: Routes = {
   "/komponenter": Komponenter.markdown,
   "/grunnleggende": Grunnleggende.markdown,
   "/grunnleggende/styling/design-tokens": DesignTokens.markdown,
+  "/grunnleggende/styling/tailwind-config": TailwindConfig.markdown,
   "/komponenter/ikoner": Ikoner.markdown,
   "/monster-maler": Maler.markdown,
   "/llm": LLM.markdown,

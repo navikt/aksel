@@ -25,6 +25,10 @@ const sectionConfig: Record<
     order: 1,
     staticPages: [
       { title: "Design tokens", slug: "/grunnleggende/styling/design-tokens" },
+      {
+        title: "Tailwind config for `@navikt/ds-tailwind`",
+        slug: "/grunnleggende/styling/tailwind-config",
+      },
     ],
   },
   templates_artikkel: {
