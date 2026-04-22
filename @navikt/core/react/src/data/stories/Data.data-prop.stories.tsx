@@ -27,6 +27,23 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
+const selectionControls = {
+  args: {
+    selectionMode: "multiple",
+  },
+  parameters: {
+    controls: {
+      disable: false,
+    },
+  },
+  argTypes: {
+    selectionMode: {
+      control: { type: "select" },
+      options: ["none", "single", "multiple"],
+    },
+  },
+} as const;
+
 type UserDataTest = {
   id: number;
   foo: string;
@@ -746,29 +763,30 @@ export const RowClickTest: Story = {
 };
 
 export const RowExpansion: Story = {
-  render: () => (
+  render: (args) => (
     <DataTableAuto
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode="multiple"
+      selectionMode={args.selectionMode}
       withKeyboardNav
       getDetailsPanelContent={(rowData) => {
         return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
       }}
     />
   ),
+  ...selectionControls,
 };
 
 export const RowExpansionAll: Story = {
-  render: () => (
+  render: (args) => (
     <DataTableAuto
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode="multiple"
+      selectionMode={args.selectionMode}
       withKeyboardNav
       getDetailsPanelContent={(rowData) => {
         return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
@@ -776,6 +794,7 @@ export const RowExpansionAll: Story = {
       showExpandAll
     />
   ),
+  ...selectionControls,
 };
 
 const nestedRowData = userData.map((user) => ({
@@ -790,28 +809,101 @@ const nestedRowData = userData.map((user) => ({
 }));
 
 export const NestedRows: Story = {
-  render: () => (
+  render: (args) => (
     <DataTableAuto
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode="multiple"
+      selectionMode={args.selectionMode}
       withKeyboardNav
       getSubRows={(row) => row.children}
     />
   ),
+  ...selectionControls,
 };
 
 export const NestedLeftAlignedContentRows: Story = {
-  render: () => (
+  render: (args) => (
     <DataTableAuto
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode="multiple"
+      selectionMode={args.selectionMode}
       withKeyboardNav
       getSubRows={(row) => row.children}
     />
   ),
+  ...selectionControls,
+};
+
+export const NestedOneLevelLeftAlignedContentRows: Story = {
+  render: (args) => (
+    <DataTableAuto
+      /* Removes right aligned id column */
+      columnDefinitions={rowClickColumnDef.slice(1)}
+      data={userData.map((user) => ({
+        ...user,
+        children: [...generateUserData(3, user.id * 100)].map((child) => ({
+          ...child,
+          children: [],
+        })),
+      }))}
+      getRowId={(row) => row.id}
+      selectionMode={args.selectionMode}
+      withKeyboardNav
+      getSubRows={(row) => row.children}
+    />
+  ),
+  ...selectionControls,
+};
+
+export const NestedRowsWithMasterDetail: Story = {
+  render: (args) => (
+    <DataTableAuto
+      /* Removes right aligned id column */
+      columnDefinitions={rowClickColumnDef.slice(1)}
+      data={userData.map((user) => ({
+        ...user,
+        children: [...generateUserData(3, user.id * 100)].map((child) => ({
+          ...child,
+          children: [],
+        })),
+      }))}
+      getRowId={(row) => row.id}
+      selectionMode={args.selectionMode}
+      withKeyboardNav
+      getSubRows={(row) => row.children}
+      getDetailsPanelContent={() => <div>Placeholder content</div>}
+      getDetailsPanelHeight={() => 100}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis detaljer" })[0],
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul detaljer" }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul under-rader" }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Skjul detaljer" }),
+    );
+
+    expect(
+      canvas.getByRole("button", { name: "Skjul under-rader" }),
+    ).toBeInTheDocument();
+  },
+  ...selectionControls,
 };

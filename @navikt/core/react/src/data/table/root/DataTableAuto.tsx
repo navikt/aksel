@@ -160,6 +160,11 @@ interface DataTableProps<T>
    */
   getDetailsPanelContent?: (rowData: T) => React.ReactNode;
   /**
+   * Determines whether a row can be expanded to show details panel content.
+   * @default () => true
+   */
+  isDetailsPanelExpandable?: (rowData: T) => boolean;
+  /**
    * Controlled list of expanded row IDs.
    * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
    */
@@ -226,6 +231,7 @@ function DataTableAutoInner<T>(
     loadingLabel = "Laster innhold",
     disableRowSelectionOnClick = false,
     getDetailsPanelContent,
+    isDetailsPanelExpandable,
     getDetailsPanelHeight,
     showExpandAll = false,
     detailsPanelRowIds,
@@ -255,6 +261,15 @@ function DataTableAutoInner<T>(
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
+
+  const rowsWithIds = useMemo(
+    () =>
+      data.map((rowData, index) => ({
+        id: allRowKeys[index],
+        rowData,
+      })),
+    [data, allRowKeys],
+  );
 
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
@@ -290,8 +305,10 @@ function DataTableAutoInner<T>(
         detailsPanelRowIds={detailsPanelRowIds}
         defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
         onDetailsPanelChange={onDetailsPanelChange}
+        rowsWithIds={rowsWithIds}
         allRowKeys={allRowKeys}
         getDetailsPanelContent={getDetailsPanelContent}
+        isDetailsPanelExpandable={isDetailsPanelExpandable}
         getDetailsPanelHeight={getDetailsPanelHeight}
         showExpandAll={showExpandAll}
         getSubRows={getSubRows}
@@ -444,7 +461,7 @@ function DataTableAutoTBodyContent<T>({
               expansionContext?.enableNestedRows;
 
             const style: React.CSSProperties = {
-              "--__axc-data-table-nested-depth": 1,
+              "--__axc-data-table-nested-depth": 0,
             };
 
             return (
@@ -493,11 +510,11 @@ function NestedRowToggle({
     return null;
   }
 
-  const { isExpanded, toggleExpansion } = expansionContext;
+  const { isNestedRowsExpanded, toggleNestedRowsExpansion } = expansionContext;
 
   const subRows = rows;
   const hasSubRows = subRows && subRows.length > 0;
-  const isRowExpanded = isExpanded(rowId);
+  const isRowExpanded = isNestedRowsExpanded(rowId);
 
   return (
     <div className="aksel-data-table__nested-toggle">
@@ -508,7 +525,7 @@ function NestedRowToggle({
           size="small"
           onClick={(e) => {
             e.stopPropagation();
-            toggleExpansion(rowId);
+            toggleNestedRowsExpansion(rowId);
           }}
           aria-expanded={isRowExpanded}
           aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
@@ -570,7 +587,7 @@ function DataTableSubRows<T>({
   parentRowId,
   rows: subRows,
   columns,
-  depth = 2,
+  depth = 1,
 }: {
   parentRowId: string | number;
   rows?: unknown[];
@@ -583,9 +600,9 @@ function DataTableSubRows<T>({
     return null;
   }
 
-  const { isExpanded } = expansionContext;
+  const { isNestedRowsExpanded } = expansionContext;
 
-  if (!isExpanded(parentRowId)) {
+  if (!isNestedRowsExpanded(parentRowId)) {
     return null;
   }
 

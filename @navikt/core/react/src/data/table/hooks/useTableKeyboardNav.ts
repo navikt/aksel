@@ -114,12 +114,12 @@ function useTableKeyboardNav({
       return;
     }
 
-    if (shouldBlockNavigation(event)) {
+    const action = getNavigationAction(event);
+    if (!action) {
       return;
     }
 
-    const action = getNavigationAction(event);
-    if (!action) {
+    if (shouldBlockNavigation(event)) {
       return;
     }
 

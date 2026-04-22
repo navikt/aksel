@@ -55,10 +55,6 @@ function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
  */
 function shouldBlockNavigation(event: KeyboardEvent): boolean {
   const key = event.key;
-  if (!(key in keyToCoord)) {
-    return false;
-  }
-
   const el = event.target as HTMLElement | null;
   if (!el) {
     return false;
