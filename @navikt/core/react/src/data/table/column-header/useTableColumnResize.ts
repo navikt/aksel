@@ -1,10 +1,4 @@
-import {
-  type DOMAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type DOMAttributes, useCallback, useRef, useState } from "react";
 import { useControllableState } from "../../../utils/hooks";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
@@ -20,13 +14,7 @@ type ResizeProps = {
   /**
    * Initial width of the column. Only used when `width` is not set.
    */
-  defaultWidth?: ColumnWidth | "auto"; // Men man bør kunne sende inn en initial width også...🤔
-  /**
-   * Whether the column should automatically resize to fit its content on mount. // TODO: Skal vi lytte til endringer?
-   * TODO si noe om onWidthChange og sånn
-   * NB: This can cause layout shift. We recommend setting `width` or `defaultWidth` as well to mitigate this.
-   */
-  autoWidth?: boolean;
+  defaultWidth?: ColumnWidth;
   /**
    * Minimum width of the column.
    *
@@ -121,16 +109,6 @@ function useTableColumnResize(
     },
     [minWidth, maxWidth, _setWidth],
   );
-
-  useEffect(() => {
-    if (userWidth === "auto" || defaultWidth === "auto") {
-      const newColumnWidth = getAutoColumnWidth(thRef);
-      if (newColumnWidth) {
-        console.log("auto", { newColumnWidth }, thRef);
-        setWidth(newColumnWidth);
-      }
-    }
-  }, [userWidth, defaultWidth, thRef, setWidth]);
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
     useCallback(() => {
