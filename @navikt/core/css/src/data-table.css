@@ -158,7 +158,7 @@
     position: relative;
 
     & > div {
-      margin-inline-start: calc(var(--__axc-data-table-nested-depth) * var(--ax-space-24));
+      margin-inline-start: calc(32px + 8px + calc(var(--__axc-data-table-nested-depth) * var(--ax-space-16)));
     }
   }
 
@@ -229,9 +229,11 @@
     }
   }
 
+  --__axc-data-table-pi-cell: var(--ax-space-16);
+
   &:not([data-selectable="true"]) > div {
     padding-block: var(--__axc-data-table-density);
-    padding-inline: var(--ax-space-16);
+    padding-inline: var(--__axc-data-table-pi-cell);
 
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
@@ -587,7 +589,7 @@ html[data-dragging-cursor="true"] *::after {
 .aksel-data-table__nested-toggle {
   position: absolute;
   inset-block: 0;
-  left: calc(var(--__axc-data-table-nested-depth, 2) * var(--ax-space-16));
+  left: calc(var(--__axc-data-table-pi-cell) + var(--__axc-data-table-nested-depth) * var(--ax-space-16));
   display: flex;
   align-items: center;
 }

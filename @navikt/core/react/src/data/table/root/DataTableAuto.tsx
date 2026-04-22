@@ -444,7 +444,7 @@ function DataTableAutoTBodyContent<T>({
               expansionContext?.enableNestedRows;
 
             const style: React.CSSProperties = {
-              "--__axc-data-table-nested-depth": 1,
+              "--__axc-data-table-nested-depth": 0,
             };
 
             return (
@@ -570,7 +570,7 @@ function DataTableSubRows<T>({
   parentRowId,
   rows: subRows,
   columns,
-  depth = 2,
+  depth = 1,
 }: {
   parentRowId: string | number;
   rows?: unknown[];
