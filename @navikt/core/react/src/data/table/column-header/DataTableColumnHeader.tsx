@@ -159,9 +159,10 @@ const DataTableColumnHeader = forwardRef<
                 : 0
             }
             aria-valuetext={
-              typeof resizeResult.style.width === "number"
+              typeof resizeResult.style.width === "number" &&
+              resizeResult.isResizingWithKeyboard
                 ? resizeResult.style.width.toString()
-                : undefined
+                : "" // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
             } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
