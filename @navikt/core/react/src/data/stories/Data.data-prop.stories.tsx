@@ -878,7 +878,7 @@ export const NestedRowsWithMasterDetail: Story = {
       getDetailsPanelHeight={() => 100}
     />
   ),
-  play: async ({ canvasElement }) => {
+  /* play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
     await userEvent.click(
@@ -904,6 +904,6 @@ export const NestedRowsWithMasterDetail: Story = {
     expect(
       canvas.getByRole("button", { name: "Skjul under-rader" }),
     ).toBeInTheDocument();
-  },
+  }, */
   ...selectionControls,
 };

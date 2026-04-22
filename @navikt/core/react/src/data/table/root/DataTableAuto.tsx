@@ -255,20 +255,56 @@ function DataTableAutoInner<T>(
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const allRowKeys = useMemo(() => {
+  const topLevelRowKeys = useMemo(() => {
     const resolvedGetRowId = (item: T, index: number): string | number =>
       getRowId?.(item, index) ?? index;
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
 
+  const allRowKeys = useMemo(() => {
+    if (!getSubRows) {
+      return topLevelRowKeys;
+    }
+
+    const keys: (string | number)[] = [];
+
+    const collectNestedRowKeys = (
+      rows: T[],
+      resolvedRowKeys: (string | number)[],
+    ) => {
+      rows.forEach((rowData, rowIndex) => {
+        const fallbackRowKey = resolvedRowKeys[rowIndex];
+        const rowKey = getRowId?.(rowData, rowIndex) ?? fallbackRowKey;
+        keys.push(rowKey);
+
+        const subRows = getSubRows(rowData);
+
+        if (!subRows?.length) {
+          return;
+        }
+
+        const subRowKeys = subRows.map(
+          (subRowData, subRowIndex) =>
+            getRowId?.(subRowData, subRowIndex) ?? `${rowKey}-${subRowIndex}`,
+        );
+
+        collectNestedRowKeys(subRows, subRowKeys);
+      });
+    };
+
+    collectNestedRowKeys(data, topLevelRowKeys);
+
+    return keys;
+  }, [data, getRowId, getSubRows, topLevelRowKeys]);
+
   const rowsWithIds = useMemo(
     () =>
       data.map((rowData, index) => ({
-        id: allRowKeys[index],
+        id: topLevelRowKeys[index],
         rowData,
       })),
-    [data, allRowKeys],
+    [data, topLevelRowKeys],
   );
 
   const tableSelectionState = useTableSelection({
@@ -306,7 +342,7 @@ function DataTableAutoInner<T>(
         defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
         onDetailsPanelChange={onDetailsPanelChange}
         rowsWithIds={rowsWithIds}
-        allRowKeys={allRowKeys}
+        allRowKeys={topLevelRowKeys}
         getDetailsPanelContent={getDetailsPanelContent}
         isDetailsPanelExpandable={isDetailsPanelExpandable}
         getDetailsPanelHeight={getDetailsPanelHeight}
@@ -357,7 +393,7 @@ function DataTableAutoInner<T>(
                 <DataTableAutoTBodyContent
                   columns={columns}
                   data={data}
-                  allRowKeys={allRowKeys}
+                  topLevelRowKeys={topLevelRowKeys}
                   loadingState={loadingState}
                   loadingRows={loadingRows}
                   loadingLabel={loadingLabel}
@@ -375,7 +411,7 @@ function DataTableAutoInner<T>(
 interface DataTableAutoTBodyContentProps<T> {
   columns: UseColumnOptionsResult<T>["columns"];
   data: T[];
-  allRowKeys: (string | number)[];
+  topLevelRowKeys: (string | number)[];
   loadingState: React.ReactNode;
   loadingLabel: string;
   loadingRows?: number;
@@ -385,7 +421,7 @@ interface DataTableAutoTBodyContentProps<T> {
 function DataTableAutoTBodyContent<T>({
   columns,
   data,
-  allRowKeys,
+  topLevelRowKeys,
   loadingState,
   loadingRows,
   loadingLabel,
@@ -439,7 +475,7 @@ function DataTableAutoTBodyContent<T>({
   const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
 
   return data.map((rowData, rowIndex) => {
-    const rowId = allRowKeys[rowIndex];
+    const rowId = topLevelRowKeys[rowIndex];
 
     const subRows = expansionContext?.getSubRows
       ? expansionContext?.getSubRows(rowData)
