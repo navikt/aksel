@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef } from "react";
 import {
   ChevronDownUpIcon,
   ChevronUpDownIcon,
@@ -59,45 +59,41 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
     const isSticky = location === "thead" && stickyHeader;
 
-    const handleClick = useCallback(
-      (event: React.MouseEvent<HTMLTableRowElement>) => {
-        if (
-          location !== "tbody" ||
-          rowId === undefined ||
-          isInteractiveTarget(event.target) ||
-          (event.target as HTMLElement | null)?.closest(
-            "[data-prevent-row-click]",
-          )
-        ) {
-          return;
-        }
+    const handleClick =
+      location === "tbody" && rowId !== undefined
+        ? (event: React.MouseEvent<HTMLTableRowElement>) => {
+            if (
+              rowId === undefined ||
+              isInteractiveTarget(event.target) ||
+              (event.target as HTMLElement | null)?.closest(
+                "[data-prevent-row-click]",
+              )
+            ) {
+              return;
+            }
 
-        const selection = window.getSelection();
-        if (selection && selection.toString().length > 0) {
-          return;
-        }
+            const selection = window.getSelection();
+            if (selection && selection.toString().length > 0) {
+              return;
+            }
 
-        if (
-          !disableRowSelectionOnClick &&
-          selectionState.selection.selectionMode !== "none"
-        ) {
-          selectionState.selection.toggleSelection(rowId);
-        }
-        onRowClick?.(rowId, event);
-      },
-      [
-        disableRowSelectionOnClick,
-        location,
-        onRowClick,
-        rowId,
-        selectionState.selection,
-      ],
-    );
+            if (
+              !disableRowSelectionOnClick &&
+              selectionState.selection.selectionMode !== "none"
+            ) {
+              selectionState.selection.toggleSelection(rowId);
+            }
+            onRowClick?.(rowId, event);
+          }
+        : undefined;
 
     return (
       <tr
         {...rest}
-        onClick={composeEventHandlers(onClick, handleClick)}
+        // Avoid setting onClick if not needed, since this causes NVDA to announce the row as clickable.
+        onClick={
+          (onClick || handleClick) && composeEventHandlers(onClick, handleClick)
+        }
         ref={forwardedRef}
         className={cl("aksel-data-table__tr", className)}
         data-selected={selected}
