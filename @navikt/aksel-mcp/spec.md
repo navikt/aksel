@@ -7,28 +7,29 @@ Where possible, use `reference-MCP.js` implementation of a MCP server as referen
 The Aksel MCP server currently implements:
 
 - **Tool**: `aksel_docs` — Fetches Aksel documentation by path
+- **Tool**: `aksel_token_details` — Fetches complete details for a specific design token by name ✅
 - **Resource**: `aksel-docs://llm-index` — Full documentation index from aksel.nav.no/llm.md
-- **Resource**: `aksel-tokens://all` — Complete design token catalog (breakpoints, colors, spacing, typography) ✅
+- **Resource**: `aksel-tokens://list` — Lightweight token list (names, descriptions, categories) ✅
 - **Prompts**: Empty array (no prompts implemented yet)
 
 ## Priority Features
 
-| Feature                              | MCP Primitive | Priority   | Rationale                                                                                                                                                                                                                                                                                                          |
-| ------------------------------------ | ------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Design tokens resource**           | Resource      | **High**   | Tokens are queried constantly during development. The structured `docs.json` already exists with all token data (colors, spacing, typography, breakpoints). Very low implementation cost, minimal maintenance, extremely high frequency of use. Enables AI to suggest correct tokens instead of hard-coded values. |
-| **Icon search tool**                 | Tool          | **High**   | Developers search for icons dozens of times per day. Metadata with keywords/categories already exists in structured format. Moderate implementation complexity, high developer value. Would allow semantic search ("find me a calendar icon") instead of browsing.                                                 |
-| **Component scaffolding prompt**     | Prompt        | **High**   | Guides AI to generate component usage with proper imports, props, accessibility attributes, and Aksel patterns. Currently prompts array is empty—this is the most impactful first prompt to implement. Medium complexity but very high value for onboarding and consistent usage.                                  |
-| **Component props API tool**         | Tool          | **Medium** | Useful for discovering available props without reading full docs. However, documentation already covers this well via existing `aksel_docs` tool. Moderate value, moderate complexity. Would require extracting prop data from TypeScript definitions or Sanity CMS.                                               |
-| **Migration/codemod discovery tool** | Tool          | **Medium** | Critical during version upgrades but infrequent. The `@navikt/aksel` CLI already handles this well. Adding MCP exposure would help AI suggest the right migration command. Low implementation cost (codemods list already structured), but lower frequency makes it medium priority.                               |
-| **Import path helper tool**          | Tool          | **Medium** | Helps developers use correct tree-shakeable imports (`@navikt/ds-react/Button` vs `@navikt/ds-react`). Useful for performance and bundle size. Moderate value, low complexity (can be static mapping), but documentation covers this.                                                                              |
-| **Token validation tool**            | Tool          | **Low**    | Validates if a token is being used correctly for its semantic purpose. However, `@navikt/aksel-stylelint` already provides this at build time. Lower priority since linting is more reliable than runtime AI checks.                                                                                               |
-| **Component selector prompt**        | Prompt        | **Low**    | "Which component should I use for X scenario?" High value but requires domain knowledge modeling and decision trees. Complex to implement well—needs curation of use cases and anti-patterns. Better as Phase 2 after gathering user feedback.                                                                     |
+| Feature                              | MCP Primitive   | Priority   | Rationale                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------ | --------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Design tokens (list + details)**   | Resource + Tool | **High**   | ✅ **COMPLETED** — Tokens are queried constantly during development. Implemented as lightweight list resource (~10kB) plus detailed lookup tool to avoid passing 160kB every query. Zero maintenance burden, extremely high frequency of use. Enables AI to suggest correct tokens instead of hard-coded values. |
+| **Icon search tool**                 | Tool            | **High**   | Developers search for icons dozens of times per day. Metadata with keywords/categories already exists in structured format. Moderate implementation complexity, high developer value. Would allow semantic search ("find me a calendar icon") instead of browsing.                                               |
+| **Component scaffolding prompt**     | Prompt          | **High**   | Guides AI to generate component usage with proper imports, props, accessibility attributes, and Aksel patterns. Currently prompts array is empty—this is the most impactful first prompt to implement. Medium complexity but very high value for onboarding and consistent usage.                                |
+| **Component props API tool**         | Tool            | **Medium** | Useful for discovering available props without reading full docs. However, documentation already covers this well via existing `aksel_docs` tool. Moderate value, moderate complexity. Would require extracting prop data from TypeScript definitions or Sanity CMS.                                             |
+| **Migration/codemod discovery tool** | Tool            | **Medium** | Critical during version upgrades but infrequent. The `@navikt/aksel` CLI already handles this well. Adding MCP exposure would help AI suggest the right migration command. Low implementation cost (codemods list already structured), but lower frequency makes it medium priority.                             |
+| **Import path helper tool**          | Tool            | **Medium** | Helps developers use correct tree-shakeable imports (`@navikt/ds-react/Button` vs `@navikt/ds-react`). Useful for performance and bundle size. Moderate value, low complexity (can be static mapping), but documentation covers this.                                                                            |
+| **Token validation tool**            | Tool            | **Low**    | Validates if a token is being used correctly for its semantic purpose. However, `@navikt/aksel-stylelint` already provides this at build time. Lower priority since linting is more reliable than runtime AI checks.                                                                                             |
+| **Component selector prompt**        | Prompt          | **Low**    | "Which component should I use for X scenario?" High value but requires domain knowledge modeling and decision trees. Complex to implement well—needs curation of use cases and anti-patterns. Better as Phase 2 after gathering user feedback.                                                                   |
 
 ## Recommended Implementation Sequence
 
 ### Phase 1 (Immediate—complete the foundation)
 
-1. ✅ **Design tokens resource** (`aksel-tokens://all`) — Read-only resource exposing `docs.json` content **[COMPLETED]**
+1. ✅ **Design tokens (resource + tool)** — `aksel-tokens://list` resource (lightweight browsing) + `aksel_token_details` tool (detailed lookups) **[COMPLETED]**
 2. **Icon search tool** (`aksel_icons_search`) — Search icons by name/keyword/category from metadata
 3. **Component usage prompt** (`aksel_component_usage`) — Template for proper component scaffolding
 
@@ -46,13 +47,14 @@ The Aksel MCP server currently implements:
 
 ## Why This Prioritization?
 
-### Tokens (Priority #1)
+### Tokens (Priority #1) ✅ COMPLETED
 
 - Solves the #1 hard-coded value problem in design system adoption
-- Data already exists in perfect format (`@navikt/core/tokens/docs.json`)
+- Data already exists in perfect format (`@navikt/core/tokens/token_docs.js`)
 - Zero maintenance burden (updates automatically with token releases)
 - Complements existing Stylelint plugin
-- Can be implemented in <1 hour
+- **Implementation**: Resource for browsing (~10kB list) + Tool for detailed lookups (avoids 160kB context bloat)
+- Completed in <1 hour as predicted
 
 ### Icons (Priority #2)
 
@@ -82,10 +84,10 @@ By implementing Phase 1, developers will be able to:
 
 ## Data Sources Already Available
 
-- **Tokens**: `@navikt/core/tokens/docs.json` (structured JSON with all tokens)
+- **Tokens**: `@navikt/core/tokens/token_docs.js` (structured array with all tokens) ✅ In use
 - **Icons**: `@navikt/aksel-icons/dist/metadata.js` (icon metadata with keywords/categories)
 - **Codemods**: `@navikt/aksel/src/codemod/migrations.ts` (structured migration list)
-- **Documentation**: Already accessible via existing `aksel_docs` tool
+- **Documentation**: Already accessible via existing `aksel_docs` tool ✅ In use
 
 ## Implementation Notes
 
