@@ -126,6 +126,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
 
   const {
     isExpanded,
+    isDetailsPanelExpandable,
     toggleExpansion,
     enableDetailsPanel,
     isAllExpanded,
@@ -198,6 +199,11 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   }
 
   const isRowExpanded = isExpanded(rowId);
+  const canExpandRow = isDetailsPanelExpandable(rowId);
+
+  if (!canExpandRow) {
+    return <DataTableTd UNSAFE_isSelection preventRowClick />;
+  }
 
   return (
     <DataTableTd UNSAFE_isSelection preventRowClick>

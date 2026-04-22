@@ -160,6 +160,11 @@ interface DataTableProps<T>
    */
   getDetailsPanelContent?: (rowData: T) => React.ReactNode;
   /**
+   * Determines whether a row can be expanded to show details panel content.
+   * @default () => true
+   */
+  isDetailsPanelExpandable?: (rowData: T) => boolean;
+  /**
    * Controlled list of expanded row IDs.
    * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
    */
@@ -226,6 +231,7 @@ function DataTableAutoInner<T>(
     loadingLabel = "Laster innhold",
     disableRowSelectionOnClick = false,
     getDetailsPanelContent,
+    isDetailsPanelExpandable,
     getDetailsPanelHeight,
     showExpandAll = false,
     detailsPanelRowIds,
@@ -255,6 +261,15 @@ function DataTableAutoInner<T>(
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
+
+  const rowsWithIds = useMemo(
+    () =>
+      data.map((rowData, index) => ({
+        id: allRowKeys[index],
+        rowData,
+      })),
+    [data, allRowKeys],
+  );
 
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
@@ -290,8 +305,10 @@ function DataTableAutoInner<T>(
         detailsPanelRowIds={detailsPanelRowIds}
         defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
         onDetailsPanelChange={onDetailsPanelChange}
+        rowsWithIds={rowsWithIds}
         allRowKeys={allRowKeys}
         getDetailsPanelContent={getDetailsPanelContent}
+        isDetailsPanelExpandable={isDetailsPanelExpandable}
         getDetailsPanelHeight={getDetailsPanelHeight}
         showExpandAll={showExpandAll}
         getSubRows={getSubRows}
