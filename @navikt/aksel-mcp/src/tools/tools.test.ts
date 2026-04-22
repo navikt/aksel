@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import { iconSearchTool } from "./icon-search.js";
 import { tokenDetailsTool } from "./token-details.js";
 
 describe("Tools", () => {
@@ -44,6 +45,66 @@ describe("Tools", () => {
         "Fetch complete details for a specific Aksel design token",
       );
       expect(tokenDetailsTool.inputSchema).toHaveProperty("tokenName");
+    });
+  });
+
+  describe("iconSearchTool", () => {
+    test("should search icons by keyword", async () => {
+      const result = await iconSearchTool.callback({
+        keyword: "chat",
+        limit: 10,
+        category: undefined,
+        subcategory: undefined,
+        variant: "both",
+      });
+
+      const response = JSON.parse(result);
+      expect(response).toHaveProperty("icons");
+      expect(Array.isArray(response.icons)).toBe(true);
+      expect(response.totalMatches).toBeGreaterThan(0);
+      expect(response.icons[0]).toHaveProperty("name");
+      expect(response.icons[0]).toHaveProperty("category");
+      expect(response.icons[0]).toHaveProperty("variant");
+    });
+
+    test("should filter icons by category", async () => {
+      const result = await iconSearchTool.callback({
+        subcategory: undefined,
+        variant: "both",
+        keyword: undefined,
+        category: "Interface",
+        limit: 5,
+      });
+
+      const response = JSON.parse(result);
+      expect(response).toHaveProperty("icons");
+      expect(response.icons.length).toBeGreaterThan(0);
+      expect(
+        response.icons.every((icon: any) => icon.category === "Interface"),
+      ).toBe(true);
+    });
+
+    test("should return helpful message when no results", async () => {
+      const result = await iconSearchTool.callback({
+        category: undefined,
+        subcategory: undefined,
+        variant: "both",
+        limit: 20,
+        keyword: "nonexistent-icon-xyz-123",
+      });
+
+      const response = JSON.parse(result);
+      expect(response).toHaveProperty("message");
+      expect(response.message).toContain("No icons found");
+    });
+
+    test("should have proper metadata", () => {
+      expect(iconSearchTool.name).toBe("aksel_icons_search");
+      expect(iconSearchTool.description).toContain(
+        "Search and filter Aksel icons",
+      );
+      expect(iconSearchTool.inputSchema).toHaveProperty("keyword");
+      expect(iconSearchTool.inputSchema).toHaveProperty("category");
     });
   });
 });
