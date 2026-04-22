@@ -1,5 +1,7 @@
 # Aksel MCP Server - Priority Features
 
+Where possible, use `reference-MCP.js` implementation of a MCP server as reference for how another component library has implemented some features.
+
 ## Current State
 
 The Aksel MCP server currently implements:

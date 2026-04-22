@@ -5221,6 +5221,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/aksel-mcp@workspace:@navikt/aksel-mcp":
+  version: 0.0.0-use.local
+  resolution: "@navikt/aksel-mcp@workspace:@navikt/aksel-mcp"
+  dependencies:
+    "@modelcontextprotocol/inspector": "npm:^0.21.1"
+    "@modelcontextprotocol/sdk": "npm:^1.29.0"
+    "@types/node": "npm:^24.10.9"
+    typescript: "npm:6.0.2"
+    vitest: "npm:4.1.4"
+    zod: "npm:^3.22.4"
+  bin:
+    aksel-mcp: ./dist/index.js
+  languageName: unknown
+  linkType: soft
+
 "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
@@ -11075,21 +11090,6 @@ __metadata:
     vite: "npm:^7.3.2"
     vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-svgr: "npm:^4.2.0"
-  languageName: unknown
-  linkType: soft
-
-"aksel-mcp@workspace:@navikt/aksel-mcp":
-  version: 0.0.0-use.local
-  resolution: "aksel-mcp@workspace:@navikt/aksel-mcp"
-  dependencies:
-    "@modelcontextprotocol/inspector": "npm:^0.21.1"
-    "@modelcontextprotocol/sdk": "npm:^1.29.0"
-    "@types/node": "npm:^24.10.9"
-    typescript: "npm:6.0.2"
-    vitest: "npm:4.1.4"
-    zod: "npm:^3.22.4"
-  bin:
-    aksel-mcp: ./dist/index.js
   languageName: unknown
   linkType: soft
 
