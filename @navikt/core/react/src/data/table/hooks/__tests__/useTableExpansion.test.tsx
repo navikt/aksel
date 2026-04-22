@@ -1,0 +1,136 @@
+import { act, renderHook } from "@testing-library/react";
+import React from "react";
+import { describe, expect, test, vi } from "vitest";
+import {
+  DataTableExpansionProvider,
+  useDataTableExpansion,
+} from "../useTableExpansion";
+
+type TestRow = {
+  id: number;
+  children?: TestRow[];
+};
+
+function createWrapper(
+  options: {
+    onDetailsPanelChange?: (ids: (string | number)[]) => void;
+    isDetailsPanelExpandable?: (row: TestRow) => boolean;
+  } = {},
+) {
+  const rows: TestRow[] = [{ id: 1 }, { id: 2 }];
+
+  return function Wrapper({ children }: { children: React.ReactNode }) {
+    return (
+      <DataTableExpansionProvider<TestRow>
+        allRowKeys={[1, 2]}
+        rowsWithIds={rows.map((row) => ({ id: row.id, rowData: row }))}
+        getDetailsPanelContent={(row) => row.id}
+        isDetailsPanelExpandable={options.isDetailsPanelExpandable}
+        getSubRows={(row) => row.children ?? []}
+        onDetailsPanelChange={options.onDetailsPanelChange}
+      >
+        {children}
+      </DataTableExpansionProvider>
+    );
+  };
+}
+
+describe("useTableExpansion", () => {
+  test("handles details panel and nested rows independently", () => {
+    const { result } = renderHook(() => useDataTableExpansion(), {
+      wrapper: createWrapper(),
+    });
+
+    expect(result.current.isExpanded(1)).toBe(false);
+    expect(result.current.isNestedRowsExpanded(1)).toBe(false);
+
+    act(() => {
+      result.current.toggleExpansion(1);
+    });
+
+    expect(result.current.isExpanded(1)).toBe(true);
+    expect(result.current.isNestedRowsExpanded(1)).toBe(false);
+
+    act(() => {
+      result.current.toggleNestedRowsExpansion(1);
+    });
+
+    expect(result.current.isExpanded(1)).toBe(true);
+    expect(result.current.isNestedRowsExpanded(1)).toBe(true);
+
+    act(() => {
+      result.current.toggleExpansion(1);
+    });
+
+    expect(result.current.isExpanded(1)).toBe(false);
+    expect(result.current.isNestedRowsExpanded(1)).toBe(true);
+  });
+
+  test("only details panel changes trigger onDetailsPanelChange", () => {
+    const onDetailsPanelChange = vi.fn();
+
+    const { result } = renderHook(() => useDataTableExpansion(), {
+      wrapper: createWrapper({ onDetailsPanelChange }),
+    });
+
+    act(() => {
+      result.current.toggleNestedRowsExpansion(1);
+    });
+
+    expect(onDetailsPanelChange).not.toHaveBeenCalled();
+
+    act(() => {
+      result.current.toggleExpansion(1);
+    });
+
+    expect(onDetailsPanelChange).toHaveBeenCalledWith([1]);
+  });
+
+  test("does not allow toggling rows that are not expandable", () => {
+    const onDetailsPanelChange = vi.fn();
+
+    const { result } = renderHook(() => useDataTableExpansion(), {
+      wrapper: createWrapper({
+        onDetailsPanelChange,
+        isDetailsPanelExpandable: (row) => row.id === 1,
+      }),
+    });
+
+    expect(result.current.isDetailsPanelExpandable(1)).toBe(true);
+    expect(result.current.isDetailsPanelExpandable(2)).toBe(false);
+
+    act(() => {
+      result.current.toggleExpansion(2);
+    });
+
+    expect(result.current.isExpanded(2)).toBe(false);
+    expect(onDetailsPanelChange).not.toHaveBeenCalled();
+
+    act(() => {
+      result.current.toggleExpansion(1);
+    });
+
+    expect(result.current.isExpanded(1)).toBe(true);
+    expect(onDetailsPanelChange).toHaveBeenCalledWith([1]);
+  });
+
+  test("expand all only expands expandable rows", () => {
+    const onDetailsPanelChange = vi.fn();
+
+    const { result } = renderHook(() => useDataTableExpansion(), {
+      wrapper: createWrapper({
+        onDetailsPanelChange,
+        isDetailsPanelExpandable: (row) => row.id === 1,
+      }),
+    });
+
+    act(() => {
+      result.current.toggleAll();
+    });
+
+    expect(result.current.isExpanded(1)).toBe(true);
+    expect(result.current.isExpanded(2)).toBe(false);
+    expect(result.current.isAllExpanded).toBe(true);
+    expect(onDetailsPanelChange).toHaveBeenCalledWith([1]);
+  });
+});

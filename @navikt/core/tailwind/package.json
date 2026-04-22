@@ -49,6 +49,7 @@
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
       }
-    }
+    },
+    "./package.json": "./package.json"
   }
 }

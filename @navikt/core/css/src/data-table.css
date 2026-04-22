@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable no-duplicate-selectors */
 
 .aksel-data-table__border-wrapper {
@@ -153,6 +154,14 @@
   scroll-margin: var(--ax-space-0);
   padding: 0;
 
+  &[data-nested-toggle] {
+    position: relative;
+
+    & > div {
+      margin-inline-start: calc(32px + 8px + calc(var(--__axc-data-table-nested-depth) * var(--ax-space-16)));
+    }
+  }
+
   .aksel-data-table__thead & {
     background-color: var(--ax-bg-neutral-soft);
   }
@@ -220,9 +229,11 @@
     }
   }
 
+  --__axc-data-table-pi-cell: var(--ax-space-16);
+
   &:not([data-selectable="true"]) > div {
     padding-block: var(--__axc-data-table-density);
-    padding-inline: var(--ax-space-16);
+    padding-inline: var(--__axc-data-table-pi-cell);
 
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
@@ -241,11 +252,11 @@
   position: relative;
   font-weight: var(--ax-font-weight-bold);
 
-  &:has(.aksel-data-table__th-sort-button):hover {
+  &:has(.aksel-data-table__th-sort-button:hover) {
     background-color: var(--ax-bg-neutral-moderate-hover);
   }
 
-  &:has(.aksel-data-table__th-sort-button):active {
+  &:has(.aksel-data-table__th-sort-button:active) {
     background-color: var(--ax-bg-neutral-moderate-pressed);
   }
 
@@ -572,4 +583,13 @@ html[data-dragging-cursor="true"] *,
 html[data-dragging-cursor="true"] *::before,
 html[data-dragging-cursor="true"] *::after {
   cursor: grabbing !important;
+}
+
+/* TODO: alignment not optimal when resizing column with nesting */
+.aksel-data-table__nested-toggle {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--__axc-data-table-pi-cell) + var(--__axc-data-table-nested-depth) * var(--ax-space-16));
+  display: flex;
+  align-items: center;
 }

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import {
   ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
@@ -75,15 +75,12 @@ const DataTableColumnHeader = forwardRef<
     },
     forwardedRef,
   ) => {
-    const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
-    const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
-      null,
-    );
-    const mergedRef = useMergeRefs(forwardedRef, setThRefState);
+    const thRef = useRef<HTMLTableCellElement>(null);
+    const mergedRef = useMergeRefs(forwardedRef, thRef);
 
     const resizeResult = useTableColumnResize({
-      ref: thRefState,
+      thRef,
       width,
       defaultWidth,
       minWidth,
@@ -104,12 +101,6 @@ const DataTableColumnHeader = forwardRef<
         data-sortable={sortable}
         style={resizeResult.style}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
-        onPointerEnter={() => {
-          const el = contentRef.current;
-          setIsOverflowing(el ? el.scrollWidth > el.offsetWidth : false);
-          console.info("is overflowing", isOverflowing);
-        }}
-        onPointerLeave={() => setIsOverflowing(false)}
         UNSAFE_isSelection={UNSAFE_isSelection}
         colSpan={colSpan}
         rowSpan={rowSpan}
@@ -146,9 +137,26 @@ const DataTableColumnHeader = forwardRef<
           <button
             {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
+            aria-label={
+              resizeResult.isResizingWithKeyboard
+                ? "Bruk pil venstre/høyre"
+                : "Endre bredde"
+            } // TODO Translate
             data-active={resizeResult.isResizingWithKeyboard}
             data-disable-keyboard-nav={resizeResult.isResizingWithKeyboard}
             data-block-keyboard-nav
+            role="slider"
+            aria-valuenow={
+              typeof resizeResult.style.width === "number"
+                ? resizeResult.style.width
+                : 0
+            }
+            aria-valuetext={
+              typeof resizeResult.style.width === "number" &&
+              resizeResult.isResizingWithKeyboard
+                ? resizeResult.style.width.toString()
+                : "" // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
+            } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
               <>
