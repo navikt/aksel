@@ -74,14 +74,20 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   },
 ];
 
-const generateUserData = (count: number): UserDataTest[] =>
-  Array.from({ length: count }, (_, i) => ({
-    id: i + 1,
-    foo: `foo${i + 1}`,
-    bar: `bar${i + 1}`,
-    on: i % 2 === 0,
+const generateUserData = (
+  count: number,
+  countFrom: number = 0,
+): UserDataTest[] => {
+  const num = (index: number) => (countFrom ? index + countFrom : index + 1);
+
+  return Array.from({ length: count }, (_, i) => ({
+    id: num(i) + 1,
+    foo: `foo${num(i) + 1}`,
+    bar: `bar${num(i) + 1}`,
+    on: num(i) % 2 === 0,
     time: new Date(),
   }));
+};
 
 const userData = generateUserData(4);
 
@@ -297,6 +303,24 @@ export const LoadingWhileKeepingData: Story = {
           data={userData}
           isLoading={isLoading}
           loadingRows={4}
+        />
+      </VStack>
+    );
+  },
+};
+
+export const LoadingWhileKeepingDataNoPlaceholders: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    return (
+      <VStack gap="space-12">
+        <Button onClick={() => setIsLoading((prev) => !prev)}>
+          Toggle loading
+        </Button>
+        <DataTableAuto
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
         />
       </VStack>
     );
@@ -750,6 +774,44 @@ export const RowExpansionAll: Story = {
         return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
       }}
       showExpandAll
+    />
+  ),
+};
+
+const nestedRowData = userData.map((user) => ({
+  ...user,
+  children: [...generateUserData(3, user.id * 100)].map((child) => ({
+    ...child,
+    children: [...generateUserData(2, child.id * 1000)].map((grandChild) => ({
+      ...grandChild,
+      children: [],
+    })),
+  })),
+}));
+
+export const NestedRows: Story = {
+  render: () => (
+    <DataTableAuto
+      columnDefinitions={rowClickColumnDef}
+      data={nestedRowData}
+      getRowId={(row) => row.id}
+      selectionMode="multiple"
+      withKeyboardNav
+      getSubRows={(row) => row.children}
+    />
+  ),
+};
+
+export const NestedLeftAlignedContentRows: Story = {
+  render: () => (
+    <DataTableAuto
+      /* Removes right aligned id column */
+      columnDefinitions={rowClickColumnDef.slice(1)}
+      data={nestedRowData}
+      getRowId={(row) => row.id}
+      selectionMode="multiple"
+      withKeyboardNav
+      getSubRows={(row) => row.children}
     />
   ),
 };

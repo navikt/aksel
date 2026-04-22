@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import { ExternalLinkIcon, MenuGridIcon } from "@navikt/aksel-icons";
+import { MenuGridIcon } from "@navikt/aksel-icons";
 import { ActionMenu, InternalHeader, Spacer, Theme } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -26,7 +26,7 @@ const Example = () => {
                   as="a"
                   target="_blank"
                   href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
+                  rel="noreferrer noopener"
                 >
                   A.Inntekt
                 </ActionMenu.Item>
@@ -34,7 +34,7 @@ const Example = () => {
                   as="a"
                   target="_blank"
                   href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
+                  rel="noreferrer noopener"
                 >
                   Aa-registeret
                 </ActionMenu.Item>
@@ -42,7 +42,7 @@ const Example = () => {
                   as="a"
                   target="_blank"
                   href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
+                  rel="noreferrer noopener"
                 >
                   Gosys
                 </ActionMenu.Item>
@@ -50,7 +50,7 @@ const Example = () => {
                   as="a"
                   target="_blank"
                   href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
+                  rel="noreferrer noopener"
                 >
                   Modia personoversikt
                 </ActionMenu.Item>
@@ -58,7 +58,7 @@ const Example = () => {
                   as="a"
                   target="_blank"
                   href="#"
-                  icon={<ExternalLinkIcon aria-hidden />}
+                  rel="noreferrer noopener"
                 >
                   Oppdrag
                 </ActionMenu.Item>

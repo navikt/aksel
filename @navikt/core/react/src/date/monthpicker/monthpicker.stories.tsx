@@ -13,7 +13,7 @@ import { useMonthpicker } from "./hooks/useMonthPicker";
 const year = new Date().getFullYear();
 
 export default {
-  title: "ds-react/Monthpicker",
+  title: "ds-react/MonthPicker",
   component: MonthPicker,
   parameters: {
     chromatic: { disable: true },

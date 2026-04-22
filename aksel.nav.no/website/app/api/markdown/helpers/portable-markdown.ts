@@ -15,6 +15,9 @@ import { RelatertInnholdMarkdown } from "@/app/api/markdown/blocks/RelatertInnho
 import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
+import { DYNAMIC_ROUTE_PREFIXES } from "@/app/api/markdown/route.config";
+
+const AKSEL_BASE_URL = "https://aksel.nav.no";
 
 function portableMarkdown(input?: any[]) {
   if (!input || !Array.isArray(input)) {
@@ -25,13 +28,23 @@ function portableMarkdown(input?: any[]) {
     marks: {
       kbd: ({ children }) => `<kbd>${children}</kbd>`,
       quote: ({ children }) => `"${children}"`,
+      link: ({ children, value }) => {
+        const href = value?.href;
+        if (!href) return children;
+        return `[${children}](${toMarkdownUrl(href)})`;
+      },
       internalLink: ({ children, value }) => {
         const slug = value?.slug?.current;
         if (!slug) {
           return children;
         }
         const anchor = value?.anchor ? `#${value.anchor}` : "";
-        return `[${children}](https://aksel.nav.no/${slug}${anchor})`;
+        const suffix = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
+          `/${slug}`.startsWith(prefix),
+        )
+          ? ".md"
+          : "";
+        return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
     },
     types: {
@@ -55,6 +68,32 @@ function portableMarkdown(input?: any[]) {
       language: LanguageMarkdown,
     } satisfies Record<PortableContentTypes, (props: any) => string | null>,
   });
+}
+
+/** Returns the URL rewritten to point to the .md endpoint if applicable, otherwise unchanged. */
+function toMarkdownUrl(href: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(href);
+  } catch {
+    return href;
+  }
+  if (parsed.hostname !== "aksel.nav.no") {
+    return href;
+  }
+
+  // e.g. "/komponenter/core/button"
+  const slug = parsed.pathname.replace(/^\//, ""); // strip leading slash
+  const hasMdEndpoint = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
+    `/${slug}`.startsWith(prefix),
+  );
+
+  if (!hasMdEndpoint) {
+    return href;
+  }
+  const query = parsed.search ? parsed.search.slice(1) : "";
+  const anchor = parsed.hash ? parsed.hash.slice(1) : "";
+  return `${AKSEL_BASE_URL}/${slug}.md${query ? `?${query}` : ""}${anchor ? `#${anchor}` : ""}`;
 }
 
 export { portableMarkdown };

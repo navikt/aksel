@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../../theme/Theme";
+import { BodyLong } from "../../../typography";
 import { cl } from "../../../utils/helpers";
+import { useBaseAlert } from "../root/BaseAlertRoot.context";
 
 interface BaseAlertContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -25,16 +27,19 @@ const BaseAlertContent = forwardRef<HTMLDivElement, BaseAlertContentProps>(
     forwardedRef,
   ) => {
     const themeContext = useThemeInternal();
+    const { size } = useBaseAlert();
 
     return (
-      <div
+      <BodyLong
+        as="div"
         ref={forwardedRef}
         data-color={themeContext?.color}
+        size={size}
         {...restProps}
         className={cl(className, "aksel-base-alert__content")}
       >
         {children}
-      </div>
+      </BodyLong>
     );
   },
 );

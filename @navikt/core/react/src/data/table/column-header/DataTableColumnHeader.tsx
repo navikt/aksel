@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import {
   ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
@@ -49,7 +49,6 @@ const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
 /**
  * TODO:
  * - Plan for pinning: Move it into "settings" dialog like here: https://cloudscape.design/examples/react/table.html
- * - Keyboard-nav breaks in headers now because of the resize-handles.
  * Toggling `data-block-keyboard-nav` does not work since the created "grid" does not update when toggling this attribute.
  */
 const DataTableColumnHeader = forwardRef<
@@ -78,13 +77,11 @@ const DataTableColumnHeader = forwardRef<
   ) => {
     const [isOverflowing, setIsOverflowing] = React.useState(false);
     const contentRef = React.useRef<HTMLDivElement>(null);
-    const [thRefState, setThRefState] = useState<HTMLTableCellElement | null>(
-      null,
-    );
-    const mergedRef = useMergeRefs(forwardedRef, setThRefState);
+    const thRef = useRef<HTMLTableCellElement>(null);
+    const mergedRef = useMergeRefs(forwardedRef, thRef);
 
     const resizeResult = useTableColumnResize({
-      ref: thRefState,
+      thRef,
       width,
       defaultWidth,
       minWidth,
@@ -147,8 +144,25 @@ const DataTableColumnHeader = forwardRef<
           <button
             {...resizeResult.resizeHandlerProps}
             className="aksel-data-table__th-resize-handle"
+            aria-label={
+              resizeResult.isResizingWithKeyboard
+                ? "Bruk pil venstre/høyre"
+                : "Endre bredde"
+            } // TODO Translate
             data-active={resizeResult.isResizingWithKeyboard}
+            data-disable-keyboard-nav={resizeResult.isResizingWithKeyboard}
             data-block-keyboard-nav
+            role="slider"
+            aria-valuenow={
+              typeof resizeResult.style.width === "number"
+                ? resizeResult.style.width
+                : 0
+            }
+            aria-valuetext={
+              typeof resizeResult.style.width === "number"
+                ? resizeResult.style.width.toString()
+                : undefined
+            } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
               <>

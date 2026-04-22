@@ -5,6 +5,7 @@ import {
   offset,
   safePolygon,
   shift,
+  useClick,
   useDismiss,
   useFloating,
   useFocus,
@@ -15,6 +16,7 @@ import { format } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { useTimelineKeyboardContext } from "../hooks/TimelineKeyboardNavProvider";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { position } from "../utils/calc";
 
@@ -32,6 +34,7 @@ export interface TimelinePinProps extends React.HTMLAttributes<HTMLButtonElement
 export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
     const { startDate, endDate, direction } = useTimelineContext();
+    const { handlePinKeyDown } = useTimelineKeyboardContext();
     const [open, setOpen] = useState(false);
 
     const translate = useI18n("Timeline");
@@ -56,8 +59,10 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
     });
     const focus = useFocus(context);
     const dismiss = useDismiss(context);
+    const click = useClick(context);
 
     const { getFloatingProps, getReferenceProps } = useInteractions([
+      click,
       hover,
       focus,
       dismiss,
@@ -76,6 +81,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
+            data-timeline-pin
             {...rest}
             ref={mergedRef}
             className="aksel-timeline__pin-button"
@@ -85,11 +91,7 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
             {...getReferenceProps({
               onKeyDown: (e) => {
                 rest?.onKeyDown?.(e as React.KeyboardEvent<HTMLButtonElement>);
-                if (e.key === "Enter") {
-                  setOpen((prev) => !prev);
-                } else if (e.key === " ") {
-                  setOpen(false);
-                }
+                handlePinKeyDown(e);
               },
             })}
           />
@@ -99,10 +101,11 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
             context={context}
             modal={false}
             initialFocus={-1}
-            returnFocus={false}
+            returnFocus
           >
             <div
               className="aksel-timeline__popover"
+              data-timeline-popover
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"

@@ -18,6 +18,12 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
    */
   UNSAFE_isSelection?: boolean;
   /**
+   * When true, clicking this cell will not trigger `onRowClick` on the row.
+   * Useful for cells that contain their own interactive content or actions
+   * that should be independent of row-level click handling.
+   */
+  preventRowClick?: boolean;
+  /**
    * Sets a max-width on the content wrapper div inside the cell.
    * This is only needed when using `layout="auto"` together with
    * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
@@ -29,6 +35,11 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
   isSticky?: "start" | "end" | false;
 }
 
+/**
+ * TODO:
+ * - Need a "type" or something that centers content instead of relying on isSelection prop.
+ * - Need a separate prop do disabled resizing instead of relying on isSelection prop.
+ */
 const DataTableBaseCell = forwardRef<
   HTMLTableCellElement,
   DataTableBaseCellProps & {
@@ -46,6 +57,7 @@ const DataTableBaseCell = forwardRef<
       textAlign = "left",
       colSpan,
       UNSAFE_isSelection,
+      preventRowClick,
       contentMaxWidth,
       rowSpan,
       isSticky,
@@ -63,6 +75,9 @@ const DataTableBaseCell = forwardRef<
         tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
         data-selectable={UNSAFE_isSelection}
+        data-prevent-row-click={
+          preventRowClick || UNSAFE_isSelection || undefined
+        }
         data-sticky={isSticky || undefined}
         colSpan={colSpan}
         rowSpan={rowSpan}

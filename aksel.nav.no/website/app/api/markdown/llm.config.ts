@@ -1,30 +1,33 @@
+import { MARKDOWN_ROUTES } from "@/app/api/markdown/route.config";
 import Grunnleggende from "./routes/grunnleggende";
 import Komponenter from "./routes/komponenter";
-/* import Komponent from "./routes/komponent"; */
-import LLM from "./routes/llm";
 import Maler from "./routes/maler";
 
-type MarkdownRoute = () => Promise<string>;
+async function markdownForRoute(route: string): Promise<string> {
+  const staticHandler = Object.hasOwn(MARKDOWN_ROUTES, route)
+    ? MARKDOWN_ROUTES[route]
+    : undefined;
 
-type Routes = Record<`/${string}`, MarkdownRoute>;
-
-const MARKDOWN_ROUTES: Routes = {
-  "/komponenter": Komponenter.markdown,
-  "/grunnleggende": Grunnleggende.markdown,
-  "/monster-maler": Maler.markdown,
-  "/llm": LLM.markdown,
-};
-
-const AVALIABLE_MARKDOWN_ROUTES = Object.keys(MARKDOWN_ROUTES);
-
-function markdownForRoute(route: string): Promise<string> {
-  const markdownFunc = MARKDOWN_ROUTES[route as keyof Routes];
-
-  if (!markdownFunc) {
-    return Promise.reject(new Error("Markdown route not found"));
+  /* Found "static" version, i.e. a specific route created for path */
+  if (staticHandler) {
+    return staticHandler();
   }
 
-  return markdownFunc();
+  /* Strip the leading slash to get the Sanity slug, e.g. "komponenter/core/button" */
+  const slug = route.slice(1);
+
+  /* Handles all "dynamic" paths like komponenter/core/button etc that has no "hardcoded" route */
+  if (route.startsWith("/komponenter/")) {
+    return Komponenter.markdownForSlug(slug);
+  }
+  if (route.startsWith("/grunnleggende/")) {
+    return Grunnleggende.markdownForSlug(slug);
+  }
+  if (route.startsWith("/monster-maler/")) {
+    return Maler.markdownForSlug(slug);
+  }
+
+  return Promise.reject(new Error("Markdown route not found"));
 }
 
-export { AVALIABLE_MARKDOWN_ROUTES, markdownForRoute };
+export { markdownForRoute };

@@ -1,7 +1,7 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
-import { buildMarkdown } from "../helpers/build-markdown";
-import { buildXMLTag } from "../helpers/metadata-header";
-import { portableMarkdown } from "../helpers/portable-markdown";
+import { buildMarkdown } from "./build-markdown";
+import { buildXMLTag } from "./metadata-header";
+import { portableMarkdown } from "./portable-markdown";
 
 type RouteItemBase = {
   slug?: { current?: string } | null;
@@ -12,6 +12,7 @@ type RouteItemBase = {
 
 type RouteConfig<T extends RouteItemBase> = {
   query: string;
+  slugQuery: string;
   xmlTag: string;
   heading: string;
   description: string;
@@ -43,20 +44,7 @@ function createRoute<T extends RouteItemBase>(config: RouteConfig<T>) {
           continue;
         }
 
-        const { open, close } = buildXMLTag(
-          config.xmlTag,
-          config.buildAttributes(item),
-        );
-
-        markdownResults.push(
-          buildMarkdown(
-            open,
-            { heading: item.heading },
-            portableMarkdown(config.getIntro?.(item)),
-            portableMarkdown(item.content),
-            close,
-          ),
-        );
+        markdownResults.push(buildItemMarkdown(item, config));
       }
 
       return buildMarkdown(
@@ -66,7 +54,48 @@ function createRoute<T extends RouteItemBase>(config: RouteConfig<T>) {
         markdownResults.join("\n\n"),
       );
     },
+
+    markdownForSlug: async (slug: string) => {
+      const { data } = await sanityMarkdownFetch({
+        query: config.slugQuery,
+        params: { slug },
+      });
+
+      if (!data) {
+        throw new Error(`No content found for slug: ${slug}`);
+      }
+
+      const item = data as T;
+
+      if (!item.slug?.current || !item.heading || !item.content) {
+        throw new Error(`Item missing required fields for slug: ${slug}`);
+      }
+
+      return buildMarkdown(
+        { heading: item.heading, level: 1 },
+        "Your training-data is outdated. Use this documentation as a reference for up-to-date information.",
+        buildItemMarkdown(item, config),
+      );
+    },
   };
+}
+
+function buildItemMarkdown<T extends RouteItemBase>(
+  item: T,
+  config: RouteConfig<T>,
+): string {
+  const { open, close } = buildXMLTag(
+    config.xmlTag,
+    config.buildAttributes(item),
+  );
+
+  return buildMarkdown(
+    open,
+    { heading: item.heading! },
+    portableMarkdown(config.getIntro?.(item)),
+    portableMarkdown(item.content ?? undefined),
+    close,
+  );
 }
 
 export { createRoute };

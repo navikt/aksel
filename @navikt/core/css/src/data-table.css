@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable no-duplicate-selectors */
 
 .aksel-data-table__border-wrapper {
@@ -52,10 +53,46 @@
 
 .aksel-data-table__thead {
   background-color: var(--ax-bg-raised);
+
+  .aksel-data-table[data-loading="true"] &::after {
+    content: "";
+    position: absolute;
+    block-size: 2px;
+    inset-block-end: -2px;
+    background-color: var(--ax-bg-strong);
+    animation: animateDataTableLoading 1s linear infinite;
+    z-index: 11;
+  }
 }
 
 .aksel-data-table__tbody {
   background-color: var(--ax-bg-raised);
+  position: relative;
+
+  &[inert] {
+    transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: var(--ax-opacity-disabled);
+
+    @starting-style {
+      opacity: 0.001;
+    }
+  }
+
+  &[inert]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--ax-bg-overlay);
+    transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 10;
+    opacity: 0.2;
+
+    /* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
+
+    @starting-style {
+      opacity: 0.001;
+    }
+  }
 }
 
 .aksel-data-table__tr {
@@ -115,6 +152,15 @@
   text-align: start;
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
+  padding: 0;
+
+  &[data-nested-toggle] {
+    position: relative;
+
+    & > div {
+      margin-inline-start: calc(var(--__axc-data-table-nested-depth) * var(--ax-space-24));
+    }
+  }
 
   .aksel-data-table__thead & {
     background-color: var(--ax-bg-neutral-soft);
@@ -229,6 +275,7 @@
   background-color: transparent;
   border: none;
   font-weight: inherit;
+  padding: 0;
 
   &:focus-visible {
     outline: none;
@@ -493,16 +540,6 @@
   gap: var(--ax-space-8);
   justify-items: center;
   position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inline-size: 100%;
-    block-size: 2px;
-    inset-block-start: -1px;
-    background-color: var(--ax-bg-strong);
-    animation: animateDataTableLoading 1s linear infinite;
-  }
 }
 
 @keyframes animateDataTableLoading {
@@ -544,4 +581,13 @@ html[data-dragging-cursor="true"] *,
 html[data-dragging-cursor="true"] *::before,
 html[data-dragging-cursor="true"] *::after {
   cursor: grabbing !important;
+}
+
+/* TODO: alignment not optimal when resizing column with nesting */
+.aksel-data-table__nested-toggle {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--__axc-data-table-nested-depth, 2) * var(--ax-space-16));
+  display: flex;
+  align-items: center;
 }

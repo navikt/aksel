@@ -1,5 +1,7 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, { forwardRef, useMemo } from "react";
+import { ChevronDownIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { Button } from "../../../button";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
@@ -117,7 +119,6 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowData: T,
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
@@ -142,7 +143,9 @@ interface DataTableProps<T>
   loadingState?: React.ReactNode;
   /**
    * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-   * @default 5
+   *
+   *
+   * If not provided, the rendered content will get a temporarily overlay while loading
    */
   loadingRows?: number;
   /**
@@ -168,6 +171,10 @@ interface DataTableProps<T>
   defaultDetailsPanelRowIds?: (string | number)[];
   /**
    * Called when the list of expanded row IDs changes.
+   *
+   *
+   * TODO:
+   * - Docs: This pattern is called "Master / Detail" in general terms
    */
   onDetailsPanelChange?: (ids: (string | number)[]) => void;
   /**
@@ -181,6 +188,11 @@ interface DataTableProps<T>
    * @default false
    */
   showExpandAll?: boolean;
+  /**
+   * Function to get sub-rows for a given row, used for nested rows.
+   * When provided, an expand toggle column is added automatically.
+   */
+  getSubRows?: (rowData: T) => T[];
 }
 
 function DataTableAutoInner<T>(
@@ -210,7 +222,7 @@ function DataTableAutoInner<T>(
     emptyState,
     isLoading = false,
     loadingState,
-    loadingRows = 5,
+    loadingRows,
     loadingLabel = "Laster innhold",
     disableRowSelectionOnClick = false,
     getDetailsPanelContent,
@@ -219,6 +231,7 @@ function DataTableAutoInner<T>(
     detailsPanelRowIds,
     defaultDetailsPanelRowIds,
     onDetailsPanelChange,
+    getSubRows,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -237,9 +250,8 @@ function DataTableAutoInner<T>(
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const allRowKeys = useMemo(() => {
-    const resolvedGetRowId =
-      getRowId ??
-      (((_row: T, index: number) => index) as (rowData: T) => string | number);
+    const resolvedGetRowId = (item: T, index: number): string | number =>
+      getRowId?.(item, index) ?? index;
 
     return data.map((item, index) => resolvedGetRowId(item, index));
   }, [data, getRowId]);
@@ -268,7 +280,11 @@ function DataTableAutoInner<T>(
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
       tableId={tableId}
-      showLoadingSkeletons={isLoading && !loadingState}
+      showLoadingSkeletons={isLoading && loadingState == null}
+      onRowClick={onRowClick}
+      disableRowSelectionOnClick={disableRowSelectionOnClick}
+      isLoading={isLoading}
+      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
     >
       <DataTableExpansionProvider
         detailsPanelRowIds={detailsPanelRowIds}
@@ -278,6 +294,7 @@ function DataTableAutoInner<T>(
         getDetailsPanelContent={getDetailsPanelContent}
         getDetailsPanelHeight={getDetailsPanelHeight}
         showExpandAll={showExpandAll}
+        getSubRows={getSubRows}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
@@ -289,6 +306,7 @@ function DataTableAutoInner<T>(
               data-truncate-content={truncateContent}
               data-density={rowDensity}
               data-layout={layout}
+              data-loading={isLoading || undefined}
               tabIndex={tabIndex}
               aria-busy={isLoading || undefined}
             >
@@ -323,13 +341,10 @@ function DataTableAutoInner<T>(
                   columns={columns}
                   data={data}
                   allRowKeys={allRowKeys}
-                  isLoading={isLoading}
                   loadingState={loadingState}
                   loadingRows={loadingRows}
                   loadingLabel={loadingLabel}
                   emptyState={emptyState}
-                  onRowClick={onRowClick}
-                  disableRowSelectionOnClick={disableRowSelectionOnClick}
                 />
               </DataTableTbody>
             </table>
@@ -344,29 +359,25 @@ interface DataTableAutoTBodyContentProps<T> {
   columns: UseColumnOptionsResult<T>["columns"];
   data: T[];
   allRowKeys: (string | number)[];
-  isLoading: boolean;
   loadingState: React.ReactNode;
-  loadingRows: number;
   loadingLabel: string;
+  loadingRows?: number;
   emptyState: React.ReactNode;
-  onRowClick?: DataTableProps<T>["onRowClick"];
-  disableRowSelectionOnClick: boolean;
 }
 
 function DataTableAutoTBodyContent<T>({
   columns,
   data,
   allRowKeys,
-  isLoading,
   loadingState,
   loadingRows,
   loadingLabel,
   emptyState,
-  onRowClick,
-  disableRowSelectionOnClick,
 }: DataTableAutoTBodyContentProps<T>) {
-  const { selectionState } = useDataTableContext();
-  if (isLoading && loadingState !== undefined) {
+  const { isLoading } = useDataTableContext();
+  const expansionContext = useDataTableExpansion(false);
+
+  if (isLoading && loadingState != null) {
     return (
       <DataTableLoadingState colSpan={columns.length}>
         {loadingState}
@@ -374,7 +385,7 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
-  if (isLoading) {
+  if (isLoading && loadingRows) {
     return (
       <>
         <tr>
@@ -408,27 +419,34 @@ function DataTableAutoTBodyContent<T>({
     );
   }
 
+  const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
+
   return data.map((rowData, rowIndex) => {
     const rowId = allRowKeys[rowIndex];
+
+    const subRows = expansionContext?.getSubRows
+      ? expansionContext?.getSubRows(rowData)
+      : undefined;
     return (
       <React.Fragment key={rowId}>
-        <DataTableTr
-          rowId={rowId}
-          onClick={(event) => {
-            if (isInteractiveTarget(event.target)) {
-              return;
-            }
-            if (
-              !disableRowSelectionOnClick &&
-              selectionState?.selection.selectionMode !== "none"
-            ) {
-              selectionState?.selection.toggleSelection(rowId);
-            }
-
-            onRowClick?.(rowData, rowId, event);
-          }}
-        >
+        {renderLoadingAnnouncement && (
+          <tr>
+            <td colSpan={columns.length} className="aksel-sr-only">
+              {loadingLabel}
+            </td>
+          </tr>
+        )}
+        <DataTableTr rowId={rowId}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
+            const renderNestedToggle =
+              colDefIndex === 0 &&
+              subRows &&
+              expansionContext?.enableNestedRows;
+
+            const style: React.CSSProperties = {
+              "--__axc-data-table-nested-depth": 1,
+            };
+
             return (
               <DataTableBaseCell
                 /* TODO: Make this configurable */
@@ -436,7 +454,12 @@ function DataTableAutoTBodyContent<T>({
                 key={colDef.id || colDefIndex}
                 as={colDef.isRowHeader ? "th" : "td"}
                 isSticky={isSticky}
+                data-nested-toggle={renderNestedToggle || undefined}
+                style={style}
               >
+                {renderNestedToggle && (
+                  <NestedRowToggle rowId={rowId} rows={subRows} />
+                )}
                 {colDef.cell(rowData)}
               </DataTableBaseCell>
             );
@@ -447,9 +470,59 @@ function DataTableAutoTBodyContent<T>({
           rowData={rowData}
           columnCount={columns.length}
         />
+        <DataTableSubRows
+          parentRowId={rowId}
+          rows={subRows}
+          columns={columns}
+        />
       </React.Fragment>
     );
   });
+}
+
+function NestedRowToggle({
+  rowId,
+  rows,
+}: {
+  rowId: string | number;
+  rows: unknown[];
+}) {
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, toggleExpansion } = expansionContext;
+
+  const subRows = rows;
+  const hasSubRows = subRows && subRows.length > 0;
+  const isRowExpanded = isExpanded(rowId);
+
+  return (
+    <div className="aksel-data-table__nested-toggle">
+      {hasSubRows && (
+        <Button
+          variant="tertiary"
+          data-color="neutral"
+          size="small"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleExpansion(rowId);
+          }}
+          aria-expanded={isRowExpanded}
+          aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
+          icon={
+            isRowExpanded ? (
+              <ChevronDownIcon aria-hidden />
+            ) : (
+              <ChevronRightIcon aria-hidden />
+            )
+          }
+        />
+      )}
+    </div>
+  );
 }
 
 function DataTableExpandedRow<T>({
@@ -462,8 +535,15 @@ function DataTableExpandedRow<T>({
   columnCount: number;
 }) {
   const { tableId } = useDataTableContext();
-  const { isExpanded, getDetailsPanelHeight, getDetailsPanelContent } =
-    useDataTableExpansion();
+  const expansionContext = useDataTableExpansion(false);
+
+  /* TODO: Is this the way we want to opt out? Might just be temp until auto and root is merged so they use same context */
+  if (!expansionContext) {
+    return null;
+  }
+
+  const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
+    expansionContext;
 
   if (!isExpanded(rowId)) {
     return null;
@@ -486,9 +566,78 @@ function DataTableExpandedRow<T>({
   );
 }
 
-function isInteractiveTarget(target: EventTarget | null): boolean {
-  return !!(target as HTMLElement | null)?.closest(
-    "a, button, input, select, textarea",
+function DataTableSubRows<T>({
+  parentRowId,
+  rows: subRows,
+  columns,
+  depth = 2,
+}: {
+  parentRowId: string | number;
+  rows?: unknown[];
+  columns: UseColumnOptionsResult<T>["columns"];
+  depth?: number;
+}) {
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext || !subRows) {
+    return null;
+  }
+
+  const { isExpanded } = expansionContext;
+
+  if (!isExpanded(parentRowId)) {
+    return null;
+  }
+
+  if (!subRows || subRows.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {subRows.map((subRowData, subRowIndex) => {
+        const subRowId = `${parentRowId}-${subRowIndex}`;
+        const nestedSubRows = expansionContext.getSubRows
+          ? expansionContext.getSubRows(subRowData)
+          : undefined;
+
+        return (
+          <React.Fragment key={subRowId}>
+            <DataTableTr rowId={subRowId}>
+              {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                const renderNestedToggle = colDefIndex === 0 && !!nestedSubRows;
+
+                const style: React.CSSProperties = {
+                  "--__axc-data-table-nested-depth": depth,
+                };
+
+                return (
+                  <DataTableBaseCell
+                    textAlign={colDef.type === "number" ? "right" : "left"}
+                    key={colDef.id || colDefIndex}
+                    as={colDef.isRowHeader ? "th" : "td"}
+                    isSticky={isSticky}
+                    data-nested-toggle={renderNestedToggle || undefined}
+                    style={style}
+                  >
+                    {renderNestedToggle && (
+                      <NestedRowToggle rowId={subRowId} rows={nestedSubRows} />
+                    )}
+                    {colDef.cell(subRowData as T)}
+                  </DataTableBaseCell>
+                );
+              })}
+            </DataTableTr>
+            <DataTableSubRows
+              parentRowId={subRowId}
+              rows={nestedSubRows}
+              columns={columns}
+              depth={depth + 1}
+            />
+          </React.Fragment>
+        );
+      })}
+    </>
   );
 }
 

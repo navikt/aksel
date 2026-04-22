@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 import {
   ChevronDownUpIcon,
   ChevronUpDownIcon,
@@ -11,7 +11,7 @@ import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { Skeleton } from "../../../skeleton";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
-import { cl } from "../../../utils/helpers";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { useDataTableExpansion } from "../hooks/useTableExpansion";
@@ -33,23 +33,71 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
   (
-    { className, children, selected: selectedProp = false, rowId, ...rest },
+    {
+      className,
+      children,
+      selected: selectedProp = false,
+      rowId,
+      onClick,
+      ...rest
+    },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader } = useDataTableContext();
-    const { selectionState } = useDataTableContext();
+    const {
+      layout,
+      stickyHeader,
+      selectionState,
+      onRowClick,
+      disableRowSelectionOnClick,
+    } = useDataTableContext();
     const { location } = useDataTableLocation();
 
     const renderFillerCell = layout === "fixed" && children;
 
     const selected =
-      selectionState?.selection.isRowSelected(rowId ?? "") ?? selectedProp;
+      selectionState.selection.isRowSelected(rowId ?? "") ?? selectedProp;
 
     const isSticky = location === "thead" && stickyHeader;
+
+    const handleClick = useCallback(
+      (event: React.MouseEvent<HTMLTableRowElement>) => {
+        if (
+          location !== "tbody" ||
+          rowId === undefined ||
+          isInteractiveTarget(event.target) ||
+          (event.target as HTMLElement | null)?.closest(
+            "[data-prevent-row-click]",
+          )
+        ) {
+          return;
+        }
+
+        const selection = window.getSelection();
+        if (selection && selection.toString().length > 0) {
+          return;
+        }
+
+        if (
+          !disableRowSelectionOnClick &&
+          selectionState.selection.selectionMode !== "none"
+        ) {
+          selectionState.selection.toggleSelection(rowId);
+        }
+        onRowClick?.(rowId, event);
+      },
+      [
+        disableRowSelectionOnClick,
+        location,
+        onRowClick,
+        rowId,
+        selectionState.selection,
+      ],
+    );
 
     return (
       <tr
         {...rest}
+        onClick={composeEventHandlers(onClick, handleClick)}
         ref={forwardedRef}
         className={cl("aksel-data-table__tr", className)}
         data-selected={selected}
@@ -72,18 +120,24 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 );
 
 function RowExpansionCell({ rowId }: { rowId?: string | number }) {
+  const { tableId, showLoadingSkeletons } = useDataTableContext();
+  const { location } = useDataTableLocation();
+  const expansionContext = useDataTableExpansion(false);
+
+  if (!expansionContext) {
+    return null;
+  }
+
   const {
     isExpanded,
     toggleExpansion,
-    enableExpansion,
+    enableDetailsPanel,
     isAllExpanded,
     toggleAll,
     showExpandAll,
-  } = useDataTableExpansion();
-  const { tableId, showLoadingSkeletons } = useDataTableContext();
-  const { location } = useDataTableLocation();
+  } = expansionContext;
 
-  if (!enableExpansion) {
+  if (!enableDetailsPanel) {
     return null;
   }
 
@@ -150,7 +204,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   const isRowExpanded = isExpanded(rowId);
 
   return (
-    <DataTableTd UNSAFE_isSelection>
+    <DataTableTd UNSAFE_isSelection preventRowClick>
       <Button
         variant="tertiary"
         data-color="neutral"
@@ -171,7 +225,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
 }
 
 /**
- * TODO: How do these cells handle multiple thead rows, or col/rowspans?
+ * TODO: How do these cells handle multiple thead rows, or col/row-spans?
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
@@ -179,10 +233,6 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     useDataTableContext();
   const { location } = useDataTableLocation();
   const inputId = useId();
-
-  if (!selectionState) {
-    return null;
-  }
 
   const { selection, renderSelection } = selectionState;
 
@@ -265,6 +315,13 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   }
 
   return null;
+}
+
+/* Utils */
+function isInteractiveTarget(target: EventTarget | null): boolean {
+  return !!(target as HTMLElement | null)?.closest(
+    "a, button, input, select, textarea",
+  );
 }
 
 export { DataTableTr };

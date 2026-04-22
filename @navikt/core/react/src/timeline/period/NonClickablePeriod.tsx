@@ -25,7 +25,9 @@ const NonClickablePeriod = ({
 
   return (
     <div
+      data-timeline-period
       ref={periodRef}
+      tabIndex={-1}
       {...restProps}
       data-color={restProps?.["data-color"] ?? status}
       className={cl(
