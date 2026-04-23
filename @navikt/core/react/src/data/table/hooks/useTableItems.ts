@@ -85,7 +85,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     function traverseRows(
       item: T,
       details: Omit<ItemDetail<T>, "children" | "id">,
-      isRootLevel = false,
+      isVisible: boolean,
     ) {
       indexCounter++;
       const itemId = resolvedGetRowId(item, indexCounter);
@@ -93,16 +93,23 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
       const children = (isRowExpandable ? getSubRows?.(item) : []) ?? [];
       localItemDetails.set(item, { ...details, children, id: itemId });
 
-      if (!expandedIdsSet.has(itemId) && !isRootLevel) {
+      if (isVisible) {
+        localVisibleItems.push(item);
+      }
+
+      if (!expandedIdsSet.has(itemId)) {
         return;
       }
-      localVisibleItems.push(item);
 
       for (let i = 0; i < children.length; i++) {
-        traverseRows(children[i], {
-          level: details.level + 1,
-          parent: item,
-        });
+        traverseRows(
+          children[i],
+          {
+            level: details.level + 1,
+            parent: item,
+          },
+          isVisible,
+        );
       }
     }
 
