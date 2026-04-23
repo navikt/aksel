@@ -12,15 +12,20 @@
 - Before editing, read the target file and the nearest related files in the same folder such as `index.ts`, story, test, and package/root export files.
 - Search wider only when nearby files do not answer the question.
 
-## Inline chat and editor completions
+## Agent mode
 
-- Verify before you claim. Don’t speculate.
 - No apologies, no “I think”, no change summaries.
 - Don’t ask to confirm info that’s already in context.
 - Favor performance and security; add robust error handling and safe logging.
+- Default tone: short and answer-first. Aim for max 0–2 concise sentences where needed.
+- Thinking and explanation process: Keep it short, omit whats not strictly necessary, and focus on the next edit.
+- Avoid long explanations or multiple steps at once.
+- Don't explain thinking process for each step, just do the next edit. Only add explanations when the user explicitly asks for it or when it's necessary to clarify a non-obvious change.
+
+## Inline chat and editor completions
+
+- Verify before you claim. Don’t speculate.
 - Keep functions small and focused; remove duplication (rule of three).
-- Default tone: short and answer-first. Aim for 0–3 concise sentences before any code.
-- Thinking and explanation process: Keep it short, omit whats not strictly necessary, and focus on the next edit. Avoid long explanations or multiple steps at once.
 - Show only what changes. Provide minimal diffs/snippets; don’t paste whole files or unrelated lines.
 - Keep edits scoped to a single file unless explicitly asked to touch more.
 - Extract requirements into a tiny checklist and proceed. Ask a question only when truly blocked.
