@@ -52,18 +52,6 @@ function DataTableExpansionProvider<T>({
     defaultValue: defaultDetailsPanelRowIds,
   });
 
-  const topLevelRowsWithIds = React.useMemo(() => {
-    const rowsWithIds: { id: string | number; rowData: T }[] = [];
-
-    for (const [rowData, details] of itemDetails.entries()) {
-      if (details.level === 0) {
-        rowsWithIds.push({ id: details.id, rowData });
-      }
-    }
-
-    return rowsWithIds;
-  }, [itemDetails]);
-
   const expandableIds = React.useMemo(() => {
     if (!getDetailsPanelContent) {
       return new Set<string | number>();
@@ -71,14 +59,19 @@ function DataTableExpansionProvider<T>({
 
     const ids = new Set<string | number>();
 
-    for (const { id, rowData } of topLevelRowsWithIds) {
+    for (const [rowData, { id, level }] of itemDetails.entries()) {
+      /* We only allow Master - Details pattern on top level rows */
+      if (level > 0) {
+        continue;
+      }
+
       if (!isDetailsPanelExpandable || isDetailsPanelExpandable(rowData)) {
         ids.add(id);
       }
     }
 
     return ids;
-  }, [getDetailsPanelContent, isDetailsPanelExpandable, topLevelRowsWithIds]);
+  }, [getDetailsPanelContent, isDetailsPanelExpandable, itemDetails]);
 
   const isDetailsPanelExpandableById = useCallback(
     (id: string | number) => expandableIds.has(id),
