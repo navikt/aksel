@@ -303,6 +303,12 @@ function DataTableAutoInner<T>(
     selectionMode: tableSelectionState.selection.selectionMode,
   });
 
+  const fullWidthColSpan =
+    columns.length +
+    (layout === "fixed" ? 1 : 0) +
+    (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
+    (getDetailsPanelContent ? 1 : 0);
+
   const tableId = useId(id);
 
   return (
@@ -382,6 +388,7 @@ function DataTableAutoInner<T>(
                     loadingRows={loadingRows}
                     loadingLabel={loadingLabel}
                     emptyState={emptyState}
+                    fullWidthColSpan={fullWidthColSpan}
                   />
                 </DataTableTbody>
               </TableItemsProvider>
@@ -398,6 +405,7 @@ interface DataTableAutoTBodyContentProps {
   loadingLabel: string;
   loadingRows?: number;
   emptyState: React.ReactNode;
+  fullWidthColSpan: number;
 }
 
 function DataTableAutoTBodyContent({
@@ -405,13 +413,14 @@ function DataTableAutoTBodyContent({
   loadingRows,
   loadingLabel,
   emptyState,
+  fullWidthColSpan,
 }: DataTableAutoTBodyContentProps) {
   const { items, itemDetails } = useTableItemsContext();
   const { columns, isLoading } = useDataTableContext();
 
   if (isLoading && loadingState != null) {
     return (
-      <DataTableLoadingState colSpan={columns.length}>
+      <DataTableLoadingState colSpan={fullWidthColSpan}>
         {loadingState}
       </DataTableLoadingState>
     );
@@ -421,7 +430,7 @@ function DataTableAutoTBodyContent({
     return (
       <>
         <tr>
-          <td colSpan={columns.length} className="aksel-sr-only">
+          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
             {loadingLabel}
           </td>
         </tr>
@@ -445,7 +454,7 @@ function DataTableAutoTBodyContent({
 
   if (items.length === 0 && emptyState !== undefined) {
     return (
-      <DataTableEmptyState colSpan={columns.length}>
+      <DataTableEmptyState colSpan={fullWidthColSpan}>
         {emptyState}
       </DataTableEmptyState>
     );
@@ -467,7 +476,7 @@ function DataTableAutoTBodyContent({
       <React.Fragment key={details.id}>
         {renderLoadingAnnouncement && (
           <tr>
-            <td colSpan={columns.length} className="aksel-sr-only">
+            <td colSpan={fullWidthColSpan} className="aksel-sr-only">
               {loadingLabel}
             </td>
           </tr>
@@ -501,7 +510,7 @@ function DataTableAutoTBodyContent({
         <DataTableExpandedRow
           rowId={details.id}
           rowData={rowData}
-          columnCount={columns.length}
+          fullWidthColSpan={fullWidthColSpan}
         />
       </React.Fragment>
     );
@@ -545,11 +554,11 @@ function NestedRowToggle({ details }: { details: ItemDetail<any> }) {
 function DataTableExpandedRow<T>({
   rowId,
   rowData,
-  columnCount,
+  fullWidthColSpan,
 }: {
   rowId: string | number;
   rowData: T;
-  columnCount: number;
+  fullWidthColSpan: number;
 }) {
   const { tableId } = useDataTableContext();
   const {
@@ -576,7 +585,7 @@ function DataTableExpandedRow<T>({
 
   return (
     <tr>
-      <td id={expansionId} colSpan={columnCount}>
+      <td id={expansionId} colSpan={fullWidthColSpan}>
         <div style={{ height: getDetailsPanelHeight?.(rowData) }}>
           {content}
         </div>
