@@ -63,12 +63,16 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   );
 
   const { itemDetails, visibleItems } = useMemo(() => {
-    if (!getSubRows) {
+    /**
+     * TODO: Can we somehow bypass the parsing if nesting is not enabled
+     * - Still need rowIds for selection, but maybe we can do that in a separate pass only for the visible rows?
+     */
+    /* if (!getSubRows) {
       return {
         visibleItems: items,
         itemDetails: new Map<T, ItemDetail<T>>(),
       };
-    }
+    } */
 
     const resolvedGetRowId = (item: T, index: number): string | number =>
       getRowId?.(item, index) ?? index;
