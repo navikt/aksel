@@ -386,7 +386,7 @@ export const SelectionPagination: Story = {
 
     /* Select first row on page 1 */
     await userEvent.click(checkboxes[1]);
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo1bar1"]);
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
 
     /* Thead should be indeterminate (1 of 2 visible rows selected) */
     expect(theadCheckbox().indeterminate).toBe(true);
@@ -405,8 +405,8 @@ export const SelectionPagination: Story = {
 
     /* onSelectionChange should include foo1bar1 from page 1 */
     expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo1bar1",
-      "foo3bar3",
+      "foo2bar2",
+      "foo4bar4",
     ]);
 
     /* Thead should be indeterminate (1 of 2 visible rows selected) */
@@ -416,9 +416,9 @@ export const SelectionPagination: Story = {
     /* Should preserve selections from other pages */
     await userEvent.click(theadCheckbox());
     expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo1bar1",
-      "foo3bar3",
+      "foo2bar2",
       "foo4bar4",
+      "foo5bar5",
     ]);
 
     /* Thead should now be checked (all visible selected) */
@@ -428,7 +428,7 @@ export const SelectionPagination: Story = {
     /* Click thead checkbox again (all selected -> unselect all visible) */
     /* Should NOT unselect rows from other pages */
     await userEvent.click(theadCheckbox());
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo1bar1"]);
+    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
 
     /* Thead should not be checked or indeterminate */
     expect(theadCheckbox().checked).toBe(false);
