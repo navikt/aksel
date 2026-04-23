@@ -37,16 +37,24 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
     defaultExpandedSubRowIds,
     getSubRows,
     getRowId,
+    onExpandedSubRowIdsChange,
+    isSubRowExpandable,
   } = args;
 
-  const [nestedSubRowsExpandedIds /* , setNestedSubRowsExpandedIds */] =
+  const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
     useControllableState({
       value: expandedSubRowIds,
       defaultValue: defaultExpandedSubRowIds ?? [],
+      onChange: onExpandedSubRowIdsChange,
     });
 
+  const expandedIdsSet = useMemo(
+    () => new Set(nestedSubRowsExpandedIds),
+    [nestedSubRowsExpandedIds],
+  );
+
   const { itemDetails, visibleItems } = useMemo(() => {
-    if (getSubRows) {
+    if (!getSubRows) {
       return {
         visibleItems: items,
         itemDetails: new Map<T, ItemDetail<T>>(),
@@ -56,11 +64,10 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
     const resolvedGetRowId = (item: T, index: number): string | number =>
       getRowId?.(item, index) ?? index;
 
-    const allItems = items;
-    const itemWithDetails = new Map<T, ItemDetail<T>>();
+    const localItemDetails = new Map<T, ItemDetail<T>>();
 
-    const visibleItemRows: T[] = [];
-    let indexCounter = 0;
+    const localVisibleItems: T[] = [];
+    let indexCounter = -1;
 
     function traverseRows(
       item: T,
@@ -69,13 +76,14 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
     ) {
       indexCounter++;
       const itemId = resolvedGetRowId(item, indexCounter);
-      const children = getSubRows?.(item) || [];
-      itemWithDetails.set(item, { ...details, children });
+      const isRowExpandable = isSubRowExpandable?.(item);
+      const children = (isRowExpandable ? getSubRows?.(item) : []) ?? [];
+      localItemDetails.set(item, { ...details, children });
 
-      if (!nestedSubRowsExpandedIds.includes(itemId) && !isRootLevel) {
+      if (!expandedIdsSet.has(itemId) && !isRootLevel) {
         return;
       }
-      visibleItemRows.push(item);
+      localVisibleItems.push(item);
 
       for (let i = 0; i < children.length; i++) {
         traverseRows(children[i], {
@@ -85,19 +93,29 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
       }
     }
 
-    for (let i = 0; i < allItems.length; i++) {
-      traverseRows(allItems[i], { level: 0, parent: null }, true);
+    for (let i = 0; i < items.length; i++) {
+      traverseRows(items[i], { level: 0, parent: null }, true);
     }
 
     return {
-      visibleItems: visibleItemRows,
-      itemDetails: itemWithDetails,
+      visibleItems: localVisibleItems,
+      itemDetails: localItemDetails,
     };
-  }, [getRowId, getSubRows, items, nestedSubRowsExpandedIds]);
+  }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
+
+  const handleExpandedSubRowIdChange = (id: string | number) => {
+    if (expandedIdsSet.has(id)) {
+      expandedIdsSet.delete(id);
+      setNestedSubRowsExpandedIds(Array.from(expandedIdsSet));
+      return;
+    }
+    setNestedSubRowsExpandedIds([...nestedSubRowsExpandedIds, id]);
+  };
 
   return {
     visibleItems,
     itemDetails,
+    onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
   };
 }
 

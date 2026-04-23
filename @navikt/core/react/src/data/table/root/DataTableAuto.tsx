@@ -15,6 +15,7 @@ import {
   DataTableExpansionProvider,
   useDataTableExpansion,
 } from "../hooks/useTableExpansion";
+import { useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
@@ -198,6 +199,10 @@ interface DataTableProps<T>
    * When provided, an expand toggle column is added automatically.
    */
   getSubRows?: (rowData: T) => T[];
+  expandedSubRowIds?: (string | number)[];
+  defaultExpandedSubRowIds?: (string | number)[];
+  isSubRowExpandable?: (rowData: T) => boolean;
+  onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
 }
 
 function DataTableAutoInner<T>(
@@ -238,6 +243,10 @@ function DataTableAutoInner<T>(
     defaultDetailsPanelRowIds,
     onDetailsPanelChange,
     getSubRows,
+    expandedSubRowIds,
+    defaultExpandedSubRowIds,
+    isSubRowExpandable,
+    onExpandedSubRowIdsChange,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -306,6 +315,17 @@ function DataTableAutoInner<T>(
       })),
     [data, topLevelRowKeys],
   );
+
+  const test = useTableItems({
+    items: data,
+    getRowId,
+    getSubRows,
+    expandedSubRowIds,
+    defaultExpandedSubRowIds,
+    isSubRowExpandable,
+    onExpandedSubRowIdsChange,
+  });
+  console.info(test);
 
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
