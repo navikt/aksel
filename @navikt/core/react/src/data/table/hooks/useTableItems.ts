@@ -1,6 +1,10 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
+import {
+  type ItemDetail,
+  collectTableRowEntries,
+} from "../helpers/collectTableRowEntries";
 
 type UseTableItemsArgs<T> = {
   items: T[];
@@ -24,13 +28,6 @@ type UseTableItemsArgs<T> = {
   isSubRowExpandable?: (rowData: T) => boolean;
   onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
 };
-
-interface ItemDetail<T> {
-  id: string | number;
-  level: number;
-  parent: null | T;
-  children: readonly T[];
-}
 
 type useTableItemsReturn<T> = {
   items: T[];
@@ -63,74 +60,48 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   );
 
   const { itemDetails, visibleItems } = useMemo(() => {
-    /**
-     * TODO: Can we somehow bypass the parsing if nesting is not enabled
-     * - Still need rowIds for selection, but maybe we can do that in a separate pass only for the visible rows?
-     */
-    /* if (!getSubRows) {
-      return {
-        visibleItems: items,
-        itemDetails: new Map<T, ItemDetail<T>>(),
-      };
-    } */
-
-    const resolvedGetRowId = (item: T, index: number): string | number =>
-      getRowId?.(item, index) ?? index;
-
-    const localItemDetails = new Map<T, ItemDetail<T>>();
+    const rowEntriesMap = collectTableRowEntries({
+      items,
+      getRowId,
+      getSubRows,
+      isSubRowExpandable,
+    });
 
     const localVisibleItems: T[] = [];
-    let indexCounter = -1;
+    const addVisibleRows = (rowData: T) => {
+      localVisibleItems.push(rowData);
 
-    function traverseRows(
-      item: T,
-      details: Omit<ItemDetail<T>, "children" | "id">,
-      isVisible: boolean,
-    ) {
-      indexCounter++;
-      const itemId = resolvedGetRowId(item, indexCounter);
-      const isRowExpandable = isSubRowExpandable?.(item) ?? true;
-      const children = (isRowExpandable ? getSubRows?.(item) : []) ?? [];
-      localItemDetails.set(item, { ...details, children, id: itemId });
+      const details = rowEntriesMap.get(rowData);
 
-      if (isVisible) {
-        localVisibleItems.push(item);
-      }
-
-      if (!expandedIdsSet.has(itemId)) {
+      if (!details || !expandedIdsSet.has(details.id)) {
         return;
       }
 
-      for (let i = 0; i < children.length; i++) {
-        traverseRows(
-          children[i],
-          {
-            level: details.level + 1,
-            parent: item,
-          },
-          isVisible,
-        );
+      for (const childRow of details.children) {
+        addVisibleRows(childRow);
       }
-    }
+    };
 
-    for (let i = 0; i < items.length; i++) {
-      traverseRows(items[i], { level: 0, parent: null }, true);
+    for (const rowData of items) {
+      addVisibleRows(rowData);
     }
 
     return {
       visibleItems: localVisibleItems,
-      itemDetails: localItemDetails,
+      itemDetails: rowEntriesMap,
     };
   }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
 
-  const handleExpandedSubRowIdChange = (id: string | number) => {
-    if (expandedIdsSet.has(id)) {
-      expandedIdsSet.delete(id);
-      setNestedSubRowsExpandedIds(Array.from(expandedIdsSet));
-      return;
-    }
-    setNestedSubRowsExpandedIds([...nestedSubRowsExpandedIds, id]);
-  };
+  const handleExpandedSubRowIdChange = useCallback(
+    (id: string | number) => {
+      setNestedSubRowsExpandedIds((prev) =>
+        prev.includes(id)
+          ? prev.filter((expandedId) => expandedId !== id)
+          : [...prev, id],
+      );
+    },
+    [setNestedSubRowsExpandedIds],
+  );
 
   return {
     items: visibleItems,

@@ -18,6 +18,18 @@ const data: TestRow[] = [
   },
 ];
 
+const fallbackIdData: TestRow[] = [
+  {
+    id: "unused-root-1",
+    name: "Root",
+    subRows: [{ id: "unused-child", name: "Child" }],
+  },
+  {
+    id: "unused-root-2",
+    name: "Sibling",
+  },
+];
+
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
@@ -55,5 +67,28 @@ describe("DataTableAuto", () => {
         .getAllByRole("checkbox")
         .every((checkbox) => (checkbox as HTMLInputElement).checked),
     ).toBe(true);
+  });
+
+  test("select-all checks all visible rows when fallback ids are used", () => {
+    render(
+      <DataTableAuto
+        columnDefinitions={columns}
+        data={fallbackIdData}
+        getSubRows={(row) => row.subRows ?? []}
+        defaultExpandedSubRowIds={[0]}
+        selectionMode="multiple"
+      />,
+    );
+
+    fireEvent.click(
+      screen.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+
+    const rowCheckboxes = screen
+      .getAllByRole("checkbox")
+      .slice(1) as HTMLInputElement[];
+
+    expect(rowCheckboxes).toHaveLength(3);
+    expect(rowCheckboxes.every((checkbox) => checkbox.checked)).toBe(true);
   });
 });

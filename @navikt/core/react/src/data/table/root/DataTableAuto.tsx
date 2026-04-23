@@ -9,6 +9,7 @@ import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
+import { collectTableRowEntries } from "../helpers/collectTableRowEntries";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableExpansionProvider,
@@ -268,57 +269,27 @@ function DataTableAutoInner<T>(
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const topLevelRowKeys = useMemo(() => {
-    const resolvedGetRowId = (item: T, index: number): string | number =>
-      getRowId?.(item, index) ?? index;
+  const { topLevelRowKeys, allRowKeys, rowsWithIds } = useMemo(() => {
+    const rowEntriesMap = collectTableRowEntries({
+      items: data,
+      getRowId,
+      getSubRows,
+      isSubRowExpandable,
+    });
+    const rowEntries = Array.from(rowEntriesMap.entries());
+    const topLevelRowEntries = rowEntries.filter(
+      (entry) => entry[1].level === 0,
+    );
 
-    return data.map((item, index) => resolvedGetRowId(item, index));
-  }, [data, getRowId]);
-
-  const allRowKeys = useMemo(() => {
-    if (!getSubRows) {
-      return topLevelRowKeys;
-    }
-
-    const keys: (string | number)[] = [];
-
-    const collectNestedRowKeys = (
-      rows: T[],
-      resolvedRowKeys: (string | number)[],
-    ) => {
-      rows.forEach((rowData, rowIndex) => {
-        const fallbackRowKey = resolvedRowKeys[rowIndex];
-        const rowKey = getRowId?.(rowData, rowIndex) ?? fallbackRowKey;
-        keys.push(rowKey);
-
-        const subRows = getSubRows(rowData);
-
-        if (!subRows?.length) {
-          return;
-        }
-
-        const subRowKeys = subRows.map(
-          (subRowData, subRowIndex) =>
-            getRowId?.(subRowData, subRowIndex) ?? `${rowKey}-${subRowIndex}`,
-        );
-
-        collectNestedRowKeys(subRows, subRowKeys);
-      });
-    };
-
-    collectNestedRowKeys(data, topLevelRowKeys);
-
-    return keys;
-  }, [data, getRowId, getSubRows, topLevelRowKeys]);
-
-  const rowsWithIds = useMemo(
-    () =>
-      data.map((rowData, index) => ({
-        id: topLevelRowKeys[index],
+    return {
+      topLevelRowKeys: topLevelRowEntries.map((entry) => entry[1].id),
+      allRowKeys: rowEntries.map((entry) => entry[1].id),
+      rowsWithIds: topLevelRowEntries.map(([rowData, { id: localId }]) => ({
+        id: localId,
         rowData,
       })),
-    [data, topLevelRowKeys],
-  );
+    };
+  }, [data, getRowId, getSubRows, isSubRowExpandable]);
 
   const tableItems = useTableItems({
     items: data,
