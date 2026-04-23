@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
+    "@navikt/aksel": "^8.10.1",
     "@navikt/aksel-icons": "^8.10.1",
     "@navikt/ds-tokens": "^8.10.1",
     "zod": "^3.22.4"

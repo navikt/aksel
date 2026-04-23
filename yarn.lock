@@ -5227,6 +5227,7 @@ __metadata:
   dependencies:
     "@modelcontextprotocol/inspector": "npm:^0.21.1"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
+    "@navikt/aksel": "npm:^8.10.1"
     "@navikt/aksel-icons": "npm:^8.10.1"
     "@navikt/ds-tokens": "npm:^8.10.1"
     "@types/node": "npm:^24.10.9"
@@ -5254,7 +5255,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/aksel@workspace:@navikt/aksel":
+"@navikt/aksel@npm:^8.10.1, @navikt/aksel@workspace:@navikt/aksel":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
