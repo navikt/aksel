@@ -23,6 +23,13 @@
     "test:watch": "vitest watch"
   },
   "bin": "./dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    "./migrations": {
+      "import": "./dist/migrations-config.js",
+      "types": "./dist/migrations-config.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git",

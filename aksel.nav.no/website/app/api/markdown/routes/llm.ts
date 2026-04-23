@@ -43,6 +43,11 @@ const sectionConfig = {
         slug: "/grunnleggende/styling/tailwind-config",
         category: "styling",
       },
+      {
+        title: "Codemods and migration scripts to run with `@navikt/aksel` CLI",
+        slug: "/grunnleggende/kode/codemods-config",
+        category: "kode",
+      },
     ],
   } satisfies SectionEntry<typeof grunnleggendeKategorier>,
   templates_artikkel: {

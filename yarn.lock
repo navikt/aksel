@@ -5054,7 +5054,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/aksel@workspace:@navikt/aksel":
+"@navikt/aksel@npm:^8.10.1, @navikt/aksel@workspace:@navikt/aksel":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
@@ -10075,6 +10075,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
+    "@navikt/aksel": "npm:^8.10.1"
     "@navikt/aksel-icons": "npm:^8.10.1"
     "@navikt/ds-css": "npm:^8.10.1"
     "@navikt/ds-react": "npm:^8.10.1"

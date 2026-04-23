@@ -6,7 +6,7 @@
     "target": "es2015",
     "lib": ["ES2021"],
     "preserveWatchOutput": true,
-    "declaration": false,
+    "declaration": true,
     "types": ["node"],
     "outDir": "dist",
     "rootDir": "./src",
