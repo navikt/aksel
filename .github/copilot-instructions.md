@@ -34,8 +34,6 @@ Public-package-only install:
 yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint
 ```
 
-- Prefer scoped commands when possible; use root commands for cross-workspace changes.
-
 ## Definition of done
 
 - Behavior or visual change: update the implementation, closest story, and closest test.
@@ -44,6 +42,8 @@ yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navi
 - Validate with the narrowest workspace command first; use root commands only for cross-workspace changes.
 
 ### Common local commands
+
+Always prefer using these commands that already exists in workspaces before running custom commands or doing manual steps. These are optimized for local development and validation. For example:
 
 - `yarn boot` - build all workspaces
 - `yarn test` - run all workspace tests
