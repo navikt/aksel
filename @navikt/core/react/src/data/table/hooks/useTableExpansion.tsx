@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
+import type { ItemDetail } from "./useTableItems";
 
 type DataTableExpansionContextT = {
   expandedIds: (string | number)[];
@@ -28,8 +29,7 @@ type TableExpansionOptions<T> = {
   detailsPanelRowIds?: (string | number)[];
   defaultDetailsPanelRowIds?: (string | number)[];
   onDetailsPanelChange?: (ids: (string | number)[]) => void;
-  rowsWithIds?: { id: string | number; rowData: T }[];
-  allRowKeys: (string | number)[];
+  itemDetails: Map<T, ItemDetail<T>>;
   getDetailsPanelContent?: (row: T) => React.ReactNode;
   isDetailsPanelExpandable?: (rowData: T) => boolean;
   getDetailsPanelHeight?: (row: T) => number | "auto";
@@ -41,8 +41,7 @@ function DataTableExpansionProvider<T>({
   detailsPanelRowIds,
   defaultDetailsPanelRowIds = [],
   onDetailsPanelChange,
-  rowsWithIds,
-  allRowKeys,
+  itemDetails,
   getDetailsPanelContent,
   isDetailsPanelExpandable,
   getDetailsPanelHeight,
@@ -53,26 +52,33 @@ function DataTableExpansionProvider<T>({
     defaultValue: defaultDetailsPanelRowIds,
   });
 
+  const topLevelRowsWithIds = React.useMemo(() => {
+    const rowsWithIds: { id: string | number; rowData: T }[] = [];
+
+    for (const [rowData, details] of itemDetails.entries()) {
+      if (details.level === 0) {
+        rowsWithIds.push({ id: details.id, rowData });
+      }
+    }
+
+    return rowsWithIds;
+  }, [itemDetails]);
+
   const expandableIds = React.useMemo(() => {
     if (!getDetailsPanelContent) {
       return new Set<string | number>();
     }
 
-    if (!isDetailsPanelExpandable) {
-      return new Set(allRowKeys);
+    const ids = new Set<string | number>();
+
+    for (const { id, rowData } of topLevelRowsWithIds) {
+      if (!isDetailsPanelExpandable || isDetailsPanelExpandable(rowData)) {
+        ids.add(id);
+      }
     }
 
-    return new Set(
-      (rowsWithIds ?? [])
-        .filter(({ rowData }) => isDetailsPanelExpandable(rowData))
-        .map(({ id }) => id),
-    );
-  }, [
-    getDetailsPanelContent,
-    isDetailsPanelExpandable,
-    allRowKeys,
-    rowsWithIds,
-  ]);
+    return ids;
+  }, [getDetailsPanelContent, isDetailsPanelExpandable, topLevelRowsWithIds]);
 
   const isDetailsPanelExpandableById = useCallback(
     (id: string | number) => expandableIds.has(id),

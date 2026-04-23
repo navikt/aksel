@@ -9,7 +9,6 @@ import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
-import { collectTableRowEntries } from "../helpers/collectTableRowEntries";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableExpansionProvider,
@@ -269,28 +268,6 @@ function DataTableAutoInner<T>(
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const { topLevelRowKeys, allRowKeys, rowsWithIds } = useMemo(() => {
-    const rowEntriesMap = collectTableRowEntries({
-      items: data,
-      getRowId,
-      getSubRows,
-      isSubRowExpandable,
-    });
-    const rowEntries = Array.from(rowEntriesMap.entries());
-    const topLevelRowEntries = rowEntries.filter(
-      (entry) => entry[1].level === 0,
-    );
-
-    return {
-      topLevelRowKeys: topLevelRowEntries.map((entry) => entry[1].id),
-      allRowKeys: rowEntries.map((entry) => entry[1].id),
-      rowsWithIds: topLevelRowEntries.map(([rowData, { id: localId }]) => ({
-        id: localId,
-        rowData,
-      })),
-    };
-  }, [data, getRowId, getSubRows, isSubRowExpandable]);
-
   const tableItems = useTableItems({
     items: data,
     getRowId,
@@ -300,6 +277,16 @@ function DataTableAutoInner<T>(
     isSubRowExpandable,
     onExpandedSubRowIdsChange,
   });
+
+  const allRowKeys = useMemo(() => {
+    const rowKeys: (string | number)[] = [];
+
+    for (const details of tableItems.itemDetails.values()) {
+      rowKeys.push(details.id);
+    }
+
+    return rowKeys;
+  }, [tableItems.itemDetails]);
 
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
@@ -336,8 +323,7 @@ function DataTableAutoInner<T>(
         detailsPanelRowIds={detailsPanelRowIds}
         defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
         onDetailsPanelChange={onDetailsPanelChange}
-        rowsWithIds={rowsWithIds}
-        allRowKeys={topLevelRowKeys}
+        itemDetails={tableItems.itemDetails}
         getDetailsPanelContent={getDetailsPanelContent}
         isDetailsPanelExpandable={isDetailsPanelExpandable}
         getDetailsPanelHeight={getDetailsPanelHeight}

@@ -5,10 +5,11 @@ import {
   DataTableExpansionProvider,
   useDataTableExpansion,
 } from "../useTableExpansion";
+import { useTableItems } from "../useTableItems";
 
 type TestRow = {
   id: number;
-  children?: TestRow[];
+  subRows?: TestRow[];
 };
 
 function createWrapper(
@@ -17,13 +18,18 @@ function createWrapper(
     isDetailsPanelExpandable?: (row: TestRow) => boolean;
   } = {},
 ) {
-  const rows: TestRow[] = [{ id: 1 }, { id: 2 }];
+  const rows: TestRow[] = [{ id: 1, subRows: [{ id: 10 }] }, { id: 2 }];
 
   return function Wrapper({ children }: { children: React.ReactNode }) {
+    const tableItems = useTableItems({
+      items: rows,
+      getRowId: (row) => row.id,
+      getSubRows: (row) => row.subRows ?? [],
+    });
+
     return (
       <DataTableExpansionProvider<TestRow>
-        allRowKeys={[1, 2]}
-        rowsWithIds={rows.map((row) => ({ id: row.id, rowData: row }))}
+        itemDetails={tableItems.itemDetails}
         getDetailsPanelContent={(row) => row.id}
         isDetailsPanelExpandable={options.isDetailsPanelExpandable}
         onDetailsPanelChange={options.onDetailsPanelChange}
@@ -47,6 +53,7 @@ describe("useTableExpansion", () => {
 
     expect(result.current.isDetailsPanelExpandable(1)).toBe(true);
     expect(result.current.isDetailsPanelExpandable(2)).toBe(false);
+    expect(result.current.isDetailsPanelExpandable(10)).toBe(false);
 
     act(() => {
       result.current.toggleExpansion(2);
@@ -81,5 +88,28 @@ describe("useTableExpansion", () => {
     expect(result.current.isExpanded(2)).toBe(false);
     expect(result.current.isAllExpanded).toBe(true);
     expect(onDetailsPanelChange).toHaveBeenCalledWith([1]);
+  });
+
+  test("expand all only targets top-level table items", () => {
+    const onDetailsPanelChange = vi.fn();
+
+    const { result } = renderHook(() => useDataTableExpansion(), {
+      wrapper: createWrapper({
+        onDetailsPanelChange,
+      }),
+    });
+
+    expect(result.current.isDetailsPanelExpandable(1)).toBe(true);
+    expect(result.current.isDetailsPanelExpandable(2)).toBe(true);
+    expect(result.current.isDetailsPanelExpandable(10)).toBe(false);
+
+    act(() => {
+      result.current.toggleAll();
+    });
+
+    expect(result.current.isExpanded(1)).toBe(true);
+    expect(result.current.isExpanded(2)).toBe(true);
+    expect(result.current.isExpanded(10)).toBe(false);
+    expect(onDetailsPanelChange).toHaveBeenCalledWith([1, 2]);
   });
 });
