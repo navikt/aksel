@@ -1,6 +1,7 @@
 import type { McpTool } from "../types.js";
 import { getAkselDocs } from "./aksel-docs.js";
 import { iconSearchTool } from "./icon-search.js";
+import { migrationsTool } from "./migrations.js";
 import { tokenDetailsTool } from "./token-details.js";
 
 /**
@@ -11,6 +12,11 @@ import { tokenDetailsTool } from "./token-details.js";
  * Read more about tools:
  * - https://modelcontextprotocol.io/docs/learn/server-concepts#tools
  */
-const tools: McpTool<any>[] = [getAkselDocs, tokenDetailsTool, iconSearchTool];
+const tools: McpTool<any>[] = [
+  getAkselDocs,
+  tokenDetailsTool,
+  iconSearchTool,
+  migrationsTool,
+];
 
 export { tools };
