@@ -2,9 +2,15 @@
 
 ## Use this file first
 
-- Trust these instructions. Search only if this file is incomplete or wrong.
+- Trust these instructions to narrow the search space, but still read the target code and nearest related files before editing.
 - Optimize for local work. Prefer known paths, nearby patterns, and existing scripts over broad repo searches.
 - Ignore release, deploy, changelog, CMS sync, and other remote/ops scripts unless the user asks.
+
+## How to use this file
+
+- Use this file to narrow the search space, not to replace reading code.
+- Before editing, read the target file and the nearest related files in the same folder such as `index.ts`, story, test, and package/root export files.
+- Search wider only when nearby files do not answer the question.
 
 ## Repo summary
 
@@ -29,6 +35,13 @@ yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navi
 ```
 
 - Prefer scoped commands when possible; use root commands for cross-workspace changes.
+
+## Definition of done
+
+- Behavior or visual change: update the implementation, closest story, and closest test.
+- New public export: update the component `index.ts`, package `src/index.ts`, and `package.json` exports.
+- User-facing package change: add a changeset unless the task says otherwise.
+- Validate with the narrowest workspace command first; use root commands only for cross-workspace changes.
 
 ### Common local commands
 
