@@ -1,7 +1,8 @@
 import { createStrictContext } from "../../../utils/helpers";
+import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 
-type DataTableContextProps = {
+type DataTableContextProps<T> = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
   selectionState: UseTableSelectionReturn;
@@ -16,10 +17,11 @@ type DataTableContextProps = {
   disableRowSelectionOnClick: boolean;
   isLoading?: boolean;
   showLoadingOverlay: boolean;
+  columns: UseColumnOptionsResult<T>["columns"];
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
-  createStrictContext<DataTableContextProps>({
+  createStrictContext<DataTableContextProps<any>>({
     name: "DataTableContext",
     errorMessage: "useDataTableContext must be used within DataTable",
   });

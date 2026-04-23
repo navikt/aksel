@@ -1,4 +1,10 @@
+import { useCallback, useMemo } from "react";
+import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
+import {
+  type ItemDetail,
+  collectTableRowEntries,
+} from "../helpers/collectTableRowEntries";
 
 type UseTableItemsArgs<T> = {
   items: T[];
@@ -23,73 +29,95 @@ type UseTableItemsArgs<T> = {
   onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
 };
 
-interface ItemDetail<T> {
-  level: number;
-  parent: null | T;
-  children: readonly T[];
-}
+type useTableItemsReturn<T> = {
+  items: T[];
+  itemDetails: Map<T, ItemDetail<T>>;
+  onExpandedSubRowIdsChange: (id: string | number) => void;
+  isSubRowExpanded: (id: string | number) => boolean;
+};
 
-function useTableItems<T>(args: UseTableItemsArgs<T>) {
+function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   const {
     items,
     expandedSubRowIds,
     defaultExpandedSubRowIds,
     getSubRows,
     getRowId,
+    onExpandedSubRowIdsChange,
+    isSubRowExpandable,
   } = args;
 
-  const resolvedGetRowId = (item: T, index: number): string | number =>
-    getRowId?.(item, index) ?? index;
-
-  const [nestedSubRowsExpandedIds /* , setNestedSubRowsExpandedIds */] =
+  const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
     useControllableState({
       value: expandedSubRowIds,
       defaultValue: defaultExpandedSubRowIds ?? [],
+      onChange: onExpandedSubRowIdsChange,
     });
 
-  const allItems = items;
+  const expandedIdsSet = useMemo(
+    () => new Set(nestedSubRowsExpandedIds),
+    [nestedSubRowsExpandedIds],
+  );
 
-  const itemWithDetails = new Map<T, ItemDetail<T>>();
+  const { itemDetails, visibleItems } = useMemo(() => {
+    const rowEntriesMap = collectTableRowEntries({
+      items,
+      getRowId,
+      getSubRows,
+      isSubRowExpandable,
+    });
 
-  const isExpandable = !!getSubRows;
+    const localVisibleItems: T[] = [];
+    const addVisibleRows = (rowData: T) => {
+      localVisibleItems.push(rowData);
 
-  if (isExpandable) {
-    const visibleItemRows: T[] = [];
+      const details = rowEntriesMap.get(rowData);
 
-    function traverseRows(
-      item: T,
-      details: Omit<ItemDetail<T>, "children">,
-      index: number,
-      isRootLevel = false,
-    ) {
-      const itemId = resolvedGetRowId(item, index);
-      const children = getSubRows?.(item) || [];
-      itemWithDetails.set(item, { ...details, children });
-
-      if (!nestedSubRowsExpandedIds.includes(itemId) && !isRootLevel) {
+      if (!details || !expandedIdsSet.has(details.id)) {
         return;
       }
-      visibleItemRows.push(item);
 
-      for (let i = 0; i < children.length; i++) {
-        traverseRows(
-          children[i],
-          {
-            level: details.level + 1,
-            parent: item,
-          },
-          /* TODO: Need to get a "global counter since this will overlap now" */
-          index + i,
-        );
+      for (const childRow of details.children) {
+        addVisibleRows(childRow);
       }
+    };
+
+    for (const rowData of items) {
+      addVisibleRows(rowData);
     }
 
-    for (let i = 0; i < allItems.length; i++) {
-      traverseRows(allItems[i], { level: 0, parent: null }, i, true);
-    }
-  }
+    return {
+      visibleItems: localVisibleItems,
+      itemDetails: rowEntriesMap,
+    };
+  }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
 
-  return [];
+  const handleExpandedSubRowIdChange = useCallback(
+    (id: string | number) => {
+      setNestedSubRowsExpandedIds((prev) =>
+        prev.includes(id)
+          ? prev.filter((expandedId) => expandedId !== id)
+          : [...prev, id],
+      );
+    },
+    [setNestedSubRowsExpandedIds],
+  );
+
+  return {
+    items: visibleItems,
+    itemDetails,
+    onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
+    isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
+  };
 }
 
-export { useTableItems };
+const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
+  /* TODO: Can we type this better? */
+  createStrictContext<useTableItemsReturn<any>>({
+    name: "TableItemsContext",
+    errorMessage:
+      "useTableItemsContext must be used within a TableItemsProvider",
+  });
+
+export { useTableItems, TableItemsProvider, useTableItemsContext };
+export type { ItemDetail };

@@ -14,7 +14,10 @@ import { useId } from "../../../utils-external";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
-import { useDataTableExpansion } from "../hooks/useTableExpansion";
+import {
+  getDataTableExpansionId,
+  useDataTableExpansion,
+} from "../hooks/useTableExpansion";
 import {
   useDataTableContext,
   useDataTableLocation,
@@ -118,11 +121,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   const { tableId, showLoadingSkeletons } = useDataTableContext();
   const { location } = useDataTableLocation();
-  const expansionContext = useDataTableExpansion(false);
-
-  if (!expansionContext) {
-    return null;
-  }
 
   const {
     isExpanded,
@@ -132,7 +130,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
     isAllExpanded,
     toggleAll,
     showExpandAll,
-  } = expansionContext;
+  } = useDataTableExpansion();
 
   if (!enableDetailsPanel) {
     return null;
@@ -200,6 +198,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
 
   const isRowExpanded = isExpanded(rowId);
   const canExpandRow = isDetailsPanelExpandable(rowId);
+  const expansionId = getDataTableExpansionId(tableId, rowId);
 
   if (!canExpandRow) {
     return <DataTableTd UNSAFE_isSelection preventRowClick />;
@@ -216,7 +215,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
           toggleExpansion(rowId);
         }}
         aria-expanded={isRowExpanded}
-        aria-controls={`${tableId}-expansion-${rowId}`}
+        aria-controls={expansionId}
         aria-label={isRowExpanded ? "Skjul detaljer" : "Vis detaljer"}
         icon={
           isRowExpanded ? <MinusIcon aria-hidden /> : <PlusIcon aria-hidden />

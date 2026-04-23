@@ -154,7 +154,7 @@
   scroll-margin: var(--ax-space-0);
   padding: 0;
 
-  &[data-nested-toggle] {
+  &[data-nested="true"] {
     position: relative;
 
     & > div {

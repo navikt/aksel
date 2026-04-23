@@ -10,6 +10,8 @@ import {
   DataTableEmptyState,
   type DataTableEmptyStateProps,
 } from "../empty-state/DataTableEmptyState";
+import { DataTableExpansionProvider } from "../hooks/useTableExpansion";
+import type { ItemDetail } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import { type SelectionProps } from "../hooks/useTableSelection";
 import { noSelectionState } from "../hooks/useTableSelection";
@@ -33,6 +35,8 @@ import {
 } from "../thead/DataTableThead";
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 import { DataTableContextProvider } from "./DataTableRoot.context";
+
+const EMPTY_ITEM_DETAILS = new Map<never, ItemDetail<never>>();
 
 interface DataTableProps
   extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
@@ -234,21 +238,24 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         onRowClick={undefined}
         disableRowSelectionOnClick={false}
         showLoadingOverlay={false}
+        columns={[]}
       >
-        <div className="aksel-data-table__border-wrapper">
-          <div className="aksel-data-table__scroll-wrapper">
-            <table
-              {...rest}
-              ref={mergedRef}
-              className={cl("aksel-data-table", className)}
-              data-zebra-stripes={zebraStripes}
-              data-truncate-content={truncateContent}
-              data-density={rowDensity}
-              data-layout={layout}
-              tabIndex={tabIndex}
-            />
+        <DataTableExpansionProvider itemDetails={EMPTY_ITEM_DETAILS}>
+          <div className="aksel-data-table__border-wrapper">
+            <div className="aksel-data-table__scroll-wrapper">
+              <table
+                {...rest}
+                ref={mergedRef}
+                className={cl("aksel-data-table", className)}
+                data-zebra-stripes={zebraStripes}
+                data-truncate-content={truncateContent}
+                data-density={rowDensity}
+                data-layout={layout}
+                tabIndex={tabIndex}
+              />
+            </div>
           </div>
-        </div>
+        </DataTableExpansionProvider>
       </DataTableContextProvider>
     );
   },
