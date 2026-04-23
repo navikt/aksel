@@ -24,11 +24,10 @@
   },
   "bin": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
     "./package.json": "./package.json",
     "./migrations": {
-      "import": "./dist/codemod/migrations.llm.js",
-      "types": "./dist/codemod/migrations.llm.d.ts"
+      "import": "./dist/migrations-config.js",
+      "types": "./dist/migrations-config.d.ts"
     }
   },
   "repository": {

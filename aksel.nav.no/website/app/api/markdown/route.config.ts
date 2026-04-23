@@ -1,3 +1,4 @@
+import Codemods from "./routes/codemods";
 import DesignTokens from "./routes/design-tokens";
 import Grunnleggende from "./routes/grunnleggende";
 import Ikoner from "./routes/ikoner";
@@ -15,6 +16,7 @@ const MARKDOWN_ROUTES: Routes = {
   "/grunnleggende": Grunnleggende.markdown,
   "/grunnleggende/styling/design-tokens": DesignTokens.markdown,
   "/grunnleggende/styling/tailwind-config": TailwindConfig.markdown,
+  "/grunnleggende/kode/codemods-config": Codemods.markdown,
   "/komponenter/ikoner": Ikoner.markdown,
   "/monster-maler": Maler.markdown,
   "/llm": LLM.markdown,

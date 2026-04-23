@@ -1,4 +1,6 @@
 import IconMetadata from "@navikt/aksel-icons/metadata";
+import pkg from "@navikt/aksel-icons/package.json";
+import { buildXMLTag } from "@/app/api/markdown/helpers/metadata-header";
 import { buildMarkdown } from "../helpers/build-markdown";
 
 async function markdown(): Promise<string> {
@@ -11,7 +13,9 @@ async function markdown(): Promise<string> {
     grouped[category][sub_category].push(iconName);
   }
 
-  const jsonBlock = `\`\`\`json\n${JSON.stringify(grouped, null, 2)}\n\`\`\``;
+  const { open, close } = buildXMLTag("icon-metadata", {
+    version: pkg.version,
+  });
 
   return buildMarkdown(
     { heading: "Ikoner", level: 1 },
@@ -26,7 +30,7 @@ export const Icon = () => <AirplaneIcon aria-label="Airplane" />;
     `## A11y`,
     `For decorative icons, add \`aria-hidden="true"\` to the component. For icons that convey meaning, ensure to provide appropriate \`title\` or \`aria-label\`.`,
     "Oversikt over ikoner i Aksel designsystem",
-    jsonBlock,
+    buildMarkdown(open, JSON.stringify(grouped), close),
   );
 }
 

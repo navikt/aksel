@@ -10,7 +10,7 @@ async function markdown(): Promise<string> {
 
   const tailwindConfig = buildMarkdown(
     openBase,
-    JSON.stringify(CONFIG, null, 2),
+    JSON.stringify(CONFIG),
     closeBase,
   );
 
