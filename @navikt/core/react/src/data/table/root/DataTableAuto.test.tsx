@@ -1,8 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, test } from "vitest";
+import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import type { ColumnDefinitions } from "./DataTable.types";
 import { DataTableAuto } from "./DataTableAuto";
+import { DataTable } from "./DataTableRoot";
 
 type TestRow = {
   id: string;
@@ -90,5 +92,27 @@ describe("DataTableAuto", () => {
 
     expect(rowCheckboxes).toHaveLength(3);
     expect(rowCheckboxes.every((checkbox) => checkbox.checked)).toBe(true);
+  });
+
+  test("does not render expansion controls in the manual table variant", () => {
+    render(
+      <DataTable>
+        <DataTable.Thead>
+          <DataTable.Tr>
+            <DataTableColumnHeader>Name</DataTableColumnHeader>
+          </DataTable.Tr>
+        </DataTable.Thead>
+        <DataTable.Tbody>
+          <DataTable.Tr>
+            <DataTable.Td>Root</DataTable.Td>
+          </DataTable.Tr>
+        </DataTable.Tbody>
+      </DataTable>,
+    );
+
+    expect(screen.getByText("Root")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /vis detaljer|skjul detaljer/i }),
+    ).not.toBeInTheDocument();
   });
 });

@@ -12,6 +12,7 @@ import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableExpansionProvider,
+  getDataTableExpansionId,
   useDataTableExpansion,
 } from "../hooks/useTableExpansion";
 import {
@@ -551,21 +552,23 @@ function DataTableExpandedRow<T>({
   columnCount: number;
 }) {
   const { tableId } = useDataTableContext();
-  const expansionContext = useDataTableExpansion(false);
+  const {
+    enableDetailsPanel,
+    isExpanded,
+    getDetailsPanelContent,
+    getDetailsPanelHeight,
+  } = useDataTableExpansion();
 
-  /* TODO: Is this the way we want to opt out? Might just be temp until auto and root is merged so they use same context */
-  if (!expansionContext) {
+  if (!enableDetailsPanel) {
     return null;
   }
-
-  const { isExpanded, getDetailsPanelContent, getDetailsPanelHeight } =
-    expansionContext;
 
   if (!isExpanded(rowId)) {
     return null;
   }
 
   const content = getDetailsPanelContent?.(rowData);
+  const expansionId = getDataTableExpansionId(tableId, rowId);
 
   if (!content) {
     return null;
@@ -573,7 +576,7 @@ function DataTableExpandedRow<T>({
 
   return (
     <tr>
-      <td id={`${tableId}-expansion-${rowId}`} colSpan={columnCount}>
+      <td id={expansionId} colSpan={columnCount}>
         <div style={{ height: getDetailsPanelHeight?.(rowData) }}>
           {content}
         </div>

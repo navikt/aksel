@@ -11,7 +11,7 @@ type DataTableExpansionContextT = {
   isAllExpanded: boolean;
   getDetailsPanelContent?: (row: unknown) => React.ReactNode;
   getDetailsPanelHeight?: (row: unknown) => number | "auto";
-  showExpandAll?: boolean;
+  showExpandAll: boolean;
   enableDetailsPanel: boolean;
 };
 
@@ -35,6 +35,10 @@ type TableExpansionOptions<T> = {
   showExpandAll?: boolean;
 };
 
+function getDataTableExpansionId(tableId: string, rowId: string | number) {
+  return `${tableId}-expansion-${rowId}`;
+}
+
 function DataTableExpansionProvider<T>({
   children,
   detailsPanelRowIds,
@@ -49,6 +53,7 @@ function DataTableExpansionProvider<T>({
   const [expandedIds, setExpandedIds] = useControllableState({
     value: detailsPanelRowIds,
     defaultValue: defaultDetailsPanelRowIds,
+    onChange: onDetailsPanelChange,
   });
 
   const expandableIds = React.useMemo(() => {
@@ -89,18 +94,13 @@ function DataTableExpansionProvider<T>({
         return;
       }
 
-      const next = expandedIds.includes(id)
-        ? expandedIds.filter((eid) => eid !== id)
-        : [...expandedIds, id];
-      setExpandedIds(next);
-      onDetailsPanelChange?.(next);
+      setExpandedIds((currentExpandedIds) =>
+        currentExpandedIds.includes(id)
+          ? currentExpandedIds.filter((expandedId) => expandedId !== id)
+          : [...currentExpandedIds, id],
+      );
     },
-    [
-      expandedIds,
-      isDetailsPanelExpandableById,
-      setExpandedIds,
-      onDetailsPanelChange,
-    ],
+    [isDetailsPanelExpandableById, setExpandedIds],
   );
 
   const isAllExpanded =
@@ -108,10 +108,8 @@ function DataTableExpansionProvider<T>({
     Array.from(expandableIds).every((key) => expandedIds.includes(key));
 
   const toggleAll = useCallback(() => {
-    const next = isAllExpanded ? [] : Array.from(expandableIds);
-    setExpandedIds(next);
-    onDetailsPanelChange?.(next);
-  }, [isAllExpanded, expandableIds, setExpandedIds, onDetailsPanelChange]);
+    setExpandedIds(isAllExpanded ? [] : Array.from(expandableIds));
+  }, [expandableIds, isAllExpanded, setExpandedIds]);
 
   return (
     <DataTableExpansionContextProvider
@@ -136,4 +134,8 @@ function DataTableExpansionProvider<T>({
   );
 }
 
-export { DataTableExpansionProvider, useDataTableExpansion };
+export {
+  DataTableExpansionProvider,
+  getDataTableExpansionId,
+  useDataTableExpansion,
+};
