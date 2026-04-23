@@ -55,14 +55,15 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
 
   if (isExpandable) {
     const visibleItemRows: T[] = [];
+    let indexCounter = 0;
 
     function traverseRows(
       item: T,
       details: Omit<ItemDetail<T>, "children">,
-      index: number,
       isRootLevel = false,
     ) {
-      const itemId = resolvedGetRowId(item, index);
+      indexCounter++;
+      const itemId = resolvedGetRowId(item, indexCounter);
       const children = getSubRows?.(item) || [];
       itemWithDetails.set(item, { ...details, children });
 
@@ -72,20 +73,15 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
       visibleItemRows.push(item);
 
       for (let i = 0; i < children.length; i++) {
-        traverseRows(
-          children[i],
-          {
-            level: details.level + 1,
-            parent: item,
-          },
-          /* TODO: Need to get a "global counter since this will overlap now" */
-          index + i,
-        );
+        traverseRows(children[i], {
+          level: details.level + 1,
+          parent: item,
+        });
       }
     }
 
     for (let i = 0; i < allItems.length; i++) {
-      traverseRows(allItems[i], { level: 0, parent: null }, i, true);
+      traverseRows(allItems[i], { level: 0, parent: null }, true);
     }
   }
 
