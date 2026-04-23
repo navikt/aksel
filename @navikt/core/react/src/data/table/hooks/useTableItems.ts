@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useControllableState } from "../../../utils/hooks";
 
 type UseTableItemsArgs<T> = {
@@ -38,22 +39,26 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
     getRowId,
   } = args;
 
-  const resolvedGetRowId = (item: T, index: number): string | number =>
-    getRowId?.(item, index) ?? index;
-
   const [nestedSubRowsExpandedIds /* , setNestedSubRowsExpandedIds */] =
     useControllableState({
       value: expandedSubRowIds,
       defaultValue: defaultExpandedSubRowIds ?? [],
     });
 
-  const allItems = items;
+  const { itemDetails, visibleItems } = useMemo(() => {
+    if (getSubRows) {
+      return {
+        visibleItems: items,
+        itemDetails: new Map<T, ItemDetail<T>>(),
+      };
+    }
 
-  const itemWithDetails = new Map<T, ItemDetail<T>>();
+    const resolvedGetRowId = (item: T, index: number): string | number =>
+      getRowId?.(item, index) ?? index;
 
-  const isExpandable = !!getSubRows;
+    const allItems = items;
+    const itemWithDetails = new Map<T, ItemDetail<T>>();
 
-  if (isExpandable) {
     const visibleItemRows: T[] = [];
     let indexCounter = 0;
 
@@ -83,9 +88,17 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
     for (let i = 0; i < allItems.length; i++) {
       traverseRows(allItems[i], { level: 0, parent: null }, true);
     }
-  }
 
-  return [];
+    return {
+      visibleItems: visibleItemRows,
+      itemDetails: itemWithDetails,
+    };
+  }, [getRowId, getSubRows, items, nestedSubRowsExpandedIds]);
+
+  return {
+    visibleItems,
+    itemDetails,
+  };
 }
 
 export { useTableItems };
