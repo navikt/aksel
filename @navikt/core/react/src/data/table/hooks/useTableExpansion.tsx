@@ -4,7 +4,6 @@ import { useControllableState } from "../../../utils/hooks";
 import type { ItemDetail } from "./useTableItems";
 
 type DataTableExpansionContextT = {
-  expandedIds: (string | number)[];
   isExpanded: (id: string | number) => boolean;
   isDetailsPanelExpandable: (id: string | number) => boolean;
   toggleExpansion: (id: string | number) => void;
@@ -116,7 +115,6 @@ function DataTableExpansionProvider<T>({
 
   return (
     <DataTableExpansionContextProvider
-      expandedIds={expandedIds}
       isExpanded={isExpanded}
       isDetailsPanelExpandable={isDetailsPanelExpandableById}
       toggleExpansion={toggleExpansion}
