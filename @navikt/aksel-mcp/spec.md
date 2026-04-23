@@ -9,6 +9,7 @@ The Aksel MCP server currently implements:
 - **Tool**: `aksel_docs` — Fetches Aksel documentation by path
 - **Tool**: `aksel_token_details` — Fetches complete details for a specific design token by name ✅
 - **Tool**: `aksel_icons_search` — Search icons by category, subcategory, keywords, or name ✅
+- **Tool**: `aksel_migrations` — Returns all available codemods with names, descriptions, and warnings ✅
 - **Resource**: `aksel-docs://llm-index` — Full documentation index from aksel.nav.no/llm.md
 - **Resource**: `aksel-tokens://list` — Lightweight token list (names, descriptions, categories) ✅
 - **Resource**: `aksel-icons://categories` — Icon categories and subcategories for scoped search ✅
@@ -16,16 +17,16 @@ The Aksel MCP server currently implements:
 
 ## Priority Features
 
-| Feature                               | MCP Primitive   | Priority   | Rationale                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------- | --------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Design tokens (list + details)**    | Resource + Tool | **High**   | ✅ **COMPLETED** — Tokens are queried constantly during development. Implemented as lightweight list resource (~10kB) plus detailed lookup tool to avoid passing 160kB every query. Zero maintenance burden, extremely high frequency of use. Enables AI to suggest correct tokens instead of hard-coded values. |
-| **Icon search (categories + search)** | Resource + Tool | **High**   | ✅ **COMPLETED** — Icons are the second-most-queried design system asset. Implemented as categories resource for scoping plus search tool with filters (category, subcategory, keyword, variant). Avoids loading 250kB metadata. Enables natural language icon search ("calendar icon").                         |
-| **Component scaffolding prompt**      | Prompt          | **High**   | Guides AI to generate component usage with proper imports, props, accessibility attributes, and Aksel patterns. Currently prompts array is empty—this is the most impactful first prompt to implement. Medium complexity but very high value for onboarding and consistent usage.                                |
-| **Component props API tool**          | Tool            | **Medium** | Useful for discovering available props without reading full docs. However, documentation already covers this well via existing `aksel_docs` tool. Moderate value, moderate complexity. Would require extracting prop data from TypeScript definitions or Sanity CMS.                                             |
-| **Migration/codemod discovery tool**  | Tool            | **Medium** | Critical during version upgrades but infrequent. The `@navikt/aksel` CLI already handles this well. Adding MCP exposure helps AI suggest the right migration command. Low implementation cost (codemods list already structured), but lower frequency makes it medium priority.                                  |
-| **Import path helper tool**           | Tool            | **Medium** | Helps developers use correct tree-shakeable imports (`@navikt/ds-react/Button` vs `@navikt/ds-react`). Useful for performance and bundle size. Moderate value, low complexity (can be static mapping), but documentation covers this.                                                                            |
-| **Token validation tool**             | Tool            | **Low**    | Validates if a token is being used correctly for its semantic purpose. However, `@navikt/aksel-stylelint` already provides this at build time. Lower priority since linting is more reliable than runtime AI checks.                                                                                             |
-| **Component selector prompt**         | Prompt          | **Low**    | "Which component should I use for X scenario?" High value but requires domain knowledge modeling and decision trees. Complex to implement well—needs curation of use cases and anti-patterns. Better as Phase 2 after gathering user feedback.                                                                   |
+| Feature                               | MCP Primitive   | Priority   | Rationale                                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------- | --------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Design tokens (list + details)**    | Resource + Tool | **High**   | ✅ **COMPLETED** — Tokens are queried constantly during development. Implemented as lightweight list resource (~10kB) plus detailed lookup tool to avoid passing 160kB every query. Zero maintenance burden, extremely high frequency of use. Enables AI to suggest correct tokens instead of hard-coded values.                 |
+| **Icon search (categories + search)** | Resource + Tool | **High**   | ✅ **COMPLETED** — Icons are the second-most-queried design system asset. Implemented as categories resource for scoping plus search tool with filters (category, subcategory, keyword, variant). Avoids loading 250kB metadata. Enables natural language icon search ("calendar icon").                                         |
+| **Component scaffolding prompt**      | Prompt          | **High**   | Guides AI to generate component usage with proper imports, props, accessibility attributes, and Aksel patterns. Currently prompts array is empty—this is the most impactful first prompt to implement. Medium complexity but very high value for onboarding and consistent usage.                                                |
+| **Component props API tool**          | Tool            | **Medium** | Useful for discovering available props without reading full docs. However, documentation already covers this well via existing `aksel_docs` tool. Moderate value, moderate complexity. Would require extracting prop data from TypeScript definitions or Sanity CMS.                                                             |
+| **Migration/codemod discovery tool**  | Tool            | **Medium** | ✅ **COMPLETED** — Critical during version upgrades but infrequent. The `@navikt/aksel` CLI already handles this well. Adding MCP exposure helps AI suggest the right migration command. Implemented as a single tool (no resource needed — data is small). Imports directly from `@navikt/aksel/migrations` (zero maintenance). |
+| **Import path helper tool**           | Tool            | **Medium** | Helps developers use correct tree-shakeable imports (`@navikt/ds-react/Button` vs `@navikt/ds-react`). Useful for performance and bundle size. Moderate value, low complexity (can be static mapping), but documentation covers this.                                                                                            |
+| **Token validation tool**             | Tool            | **Low**    | Validates if a token is being used correctly for its semantic purpose. However, `@navikt/aksel-stylelint` already provides this at build time. Lower priority since linting is more reliable than runtime AI checks.                                                                                                             |
+| **Component selector prompt**         | Prompt          | **Low**    | "Which component should I use for X scenario?" High value but requires domain knowledge modeling and decision trees. Complex to implement well—needs curation of use cases and anti-patterns. Better as Phase 2 after gathering user feedback.                                                                                   |
 
 ## Recommended Implementation Sequence
 
@@ -38,7 +39,7 @@ Ignore part 3 for now. Lets revisit it later. 3. **Component usage prompt** (`ak
 
 ### Phase 2 (After Phase 1 validation)
 
-4. `aksel_migrations` tool returning full migration list with commands
+4. ✅ `aksel_migrations` tool returning full migration list with commands **[COMPLETED]**
 5. Component props API explorer
 6. Token-to-CSS variable mapping tool
 
@@ -93,11 +94,12 @@ By completing tokens and icons, we've addressed the two most-queried design syst
 
 - **Tokens**: `@navikt/core/tokens/token_docs.js` (structured array with all tokens) ✅ In use
 - **Icons**: `@navikt/aksel-icons/metadata.js` (icon metadata with keywords/categories) ✅ In use
+- **Migrations**: `@navikt/aksel/migrations` (structured codemod list) ✅ In use
 - **Documentation**: Already accessible via existing `aksel_docs` tool ✅ In use
 
 ## Implementation Notes
 
-✅ **Phase 1 Parts 1-2 Complete**: All features leverage existing, maintained data sources. No new data pipelines or maintenance overhead required. Design tokens, icon metadata, and migration docs are already part of the build process and stay automatically synchronized with releases.
+✅ **Phase 1 Parts 1-2 and Phase 2 Part 4 Complete**: All features leverage existing, maintained data sources. No new data pipelines or maintenance overhead required. Design tokens, icon metadata, and migration data are already part of the build process and stay automatically synchronized with releases.
 
 **Scoped approach**: Tokens and icons use a lightweight resource for browsing/scoping + detailed tool for lookups. Migrations return the full list directly (low volume — no scoping needed). This pattern:
 
