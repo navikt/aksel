@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 
 type UseTableItemsArgs<T> = {
@@ -25,12 +26,20 @@ type UseTableItemsArgs<T> = {
 };
 
 interface ItemDetail<T> {
+  id: string | number;
   level: number;
   parent: null | T;
   children: readonly T[];
 }
 
-function useTableItems<T>(args: UseTableItemsArgs<T>) {
+type useTableItemsReturn<T> = {
+  items: T[];
+  itemDetails: Map<T, ItemDetail<T>>;
+  onExpandedSubRowIdsChange: (id: string | number) => void;
+  isSubRowExpanded: (id: string | number) => boolean;
+};
+
+function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   const {
     items,
     expandedSubRowIds,
@@ -71,14 +80,14 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
 
     function traverseRows(
       item: T,
-      details: Omit<ItemDetail<T>, "children">,
+      details: Omit<ItemDetail<T>, "children" | "id">,
       isRootLevel = false,
     ) {
       indexCounter++;
       const itemId = resolvedGetRowId(item, indexCounter);
-      const isRowExpandable = isSubRowExpandable?.(item);
+      const isRowExpandable = isSubRowExpandable?.(item) ?? true;
       const children = (isRowExpandable ? getSubRows?.(item) : []) ?? [];
-      localItemDetails.set(item, { ...details, children });
+      localItemDetails.set(item, { ...details, children, id: itemId });
 
       if (!expandedIdsSet.has(itemId) && !isRootLevel) {
         return;
@@ -113,10 +122,20 @@ function useTableItems<T>(args: UseTableItemsArgs<T>) {
   };
 
   return {
-    visibleItems,
+    items: visibleItems,
     itemDetails,
     onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
+    isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
   };
 }
 
-export { useTableItems };
+const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
+  /* TODO: Can we type this better? */
+  createStrictContext<useTableItemsReturn<any>>({
+    name: "TableItemsContext",
+    errorMessage:
+      "useTableItemsContext must be used within a TableItemsProvider",
+  });
+
+export { useTableItems, TableItemsProvider, useTableItemsContext };
+export type { ItemDetail };
