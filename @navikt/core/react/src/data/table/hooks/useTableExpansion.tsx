@@ -4,20 +4,15 @@ import { useControllableState } from "../../../utils/hooks";
 
 type DataTableExpansionContextT = {
   expandedIds: (string | number)[];
-  nestedExpandedIds: (string | number)[];
   isExpanded: (id: string | number) => boolean;
   isDetailsPanelExpandable: (id: string | number) => boolean;
   toggleExpansion: (id: string | number) => void;
-  isNestedRowsExpanded: (id: string | number) => boolean;
-  toggleNestedRowsExpansion: (id: string | number) => void;
   toggleAll: () => void;
   isAllExpanded: boolean;
   getDetailsPanelContent?: (row: unknown) => React.ReactNode;
   getDetailsPanelHeight?: (row: unknown) => number | "auto";
-  getSubRows?: (row: unknown) => unknown[];
   showExpandAll?: boolean;
   enableDetailsPanel: boolean;
-  enableNestedRows: boolean;
 };
 
 const {
@@ -39,7 +34,6 @@ type TableExpansionOptions<T> = {
   isDetailsPanelExpandable?: (rowData: T) => boolean;
   getDetailsPanelHeight?: (row: T) => number | "auto";
   showExpandAll?: boolean;
-  getSubRows?: (rowData: T) => T[];
 };
 
 function DataTableExpansionProvider<T>({
@@ -53,15 +47,11 @@ function DataTableExpansionProvider<T>({
   isDetailsPanelExpandable,
   getDetailsPanelHeight,
   showExpandAll = false,
-  getSubRows,
 }: TableExpansionOptions<T> & { children: React.ReactNode }) {
   const [expandedIds, setExpandedIds] = useControllableState({
     value: detailsPanelRowIds,
     defaultValue: defaultDetailsPanelRowIds,
   });
-  const [nestedExpandedIds, setNestedExpandedIds] = React.useState<
-    (string | number)[]
-  >([]);
 
   const expandableIds = React.useMemo(() => {
     if (!getDetailsPanelContent) {
@@ -115,17 +105,6 @@ function DataTableExpansionProvider<T>({
     ],
   );
 
-  const isNestedRowsExpanded = useCallback(
-    (id: string | number) => nestedExpandedIds.includes(id),
-    [nestedExpandedIds],
-  );
-
-  const toggleNestedRowsExpansion = useCallback((id: string | number) => {
-    setNestedExpandedIds((prev) =>
-      prev.includes(id) ? prev.filter((eid) => eid !== id) : [...prev, id],
-    );
-  }, []);
-
   const isAllExpanded =
     expandableIds.size > 0 &&
     Array.from(expandableIds).every((key) => expandedIds.includes(key));
@@ -139,12 +118,9 @@ function DataTableExpansionProvider<T>({
   return (
     <DataTableExpansionContextProvider
       expandedIds={expandedIds}
-      nestedExpandedIds={nestedExpandedIds}
       isExpanded={isExpanded}
       isDetailsPanelExpandable={isDetailsPanelExpandableById}
       toggleExpansion={toggleExpansion}
-      isNestedRowsExpanded={isNestedRowsExpanded}
-      toggleNestedRowsExpansion={toggleNestedRowsExpansion}
       toggleAll={toggleAll}
       isAllExpanded={isAllExpanded}
       getDetailsPanelContent={
@@ -155,10 +131,8 @@ function DataTableExpansionProvider<T>({
       getDetailsPanelHeight={
         getDetailsPanelHeight as ((row: unknown) => number | "auto") | undefined
       }
-      getSubRows={getSubRows as ((row: unknown) => unknown[]) | undefined}
       showExpandAll={showExpandAll}
       enableDetailsPanel={!!getDetailsPanelContent}
-      enableNestedRows={!!getSubRows}
     >
       {children}
     </DataTableExpansionContextProvider>

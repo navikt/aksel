@@ -371,7 +371,6 @@ function DataTableAutoInner<T>(
         isDetailsPanelExpandable={isDetailsPanelExpandable}
         getDetailsPanelHeight={getDetailsPanelHeight}
         showExpandAll={showExpandAll}
-        getSubRows={getSubRows}
       >
         <div className="aksel-data-table__border-wrapper">
           <div className="aksel-data-table__scroll-wrapper">
@@ -451,7 +450,6 @@ function DataTableAutoTBodyContent({
 }: DataTableAutoTBodyContentProps) {
   const { items, itemDetails } = useTableItemsContext();
   const { columns, isLoading } = useDataTableContext();
-  const expansionContext = useDataTableExpansion(false);
 
   if (isLoading && loadingState != null) {
     return (
@@ -518,10 +516,7 @@ function DataTableAutoTBodyContent({
         )}
         <DataTableTr rowId={details.id}>
           {columns.map(({ isSticky, colDef }, colDefIndex) => {
-            const renderNestedToggle =
-              colDefIndex === 0 &&
-              subRows &&
-              expansionContext?.enableNestedRows;
+            const renderNestedToggle = colDefIndex === 0 && subRows.length > 0;
 
             const style: React.CSSProperties = {
               "--__axc-data-table-nested-depth": 0,

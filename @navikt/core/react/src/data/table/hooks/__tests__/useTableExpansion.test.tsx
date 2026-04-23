@@ -26,7 +26,6 @@ function createWrapper(
         rowsWithIds={rows.map((row) => ({ id: row.id, rowData: row }))}
         getDetailsPanelContent={(row) => row.id}
         isDetailsPanelExpandable={options.isDetailsPanelExpandable}
-        getSubRows={(row) => row.children ?? []}
         onDetailsPanelChange={options.onDetailsPanelChange}
       >
         {children}
@@ -36,56 +35,6 @@ function createWrapper(
 }
 
 describe("useTableExpansion", () => {
-  test("handles details panel and nested rows independently", () => {
-    const { result } = renderHook(() => useDataTableExpansion(), {
-      wrapper: createWrapper(),
-    });
-
-    expect(result.current.isExpanded(1)).toBe(false);
-    expect(result.current.isNestedRowsExpanded(1)).toBe(false);
-
-    act(() => {
-      result.current.toggleExpansion(1);
-    });
-
-    expect(result.current.isExpanded(1)).toBe(true);
-    expect(result.current.isNestedRowsExpanded(1)).toBe(false);
-
-    act(() => {
-      result.current.toggleNestedRowsExpansion(1);
-    });
-
-    expect(result.current.isExpanded(1)).toBe(true);
-    expect(result.current.isNestedRowsExpanded(1)).toBe(true);
-
-    act(() => {
-      result.current.toggleExpansion(1);
-    });
-
-    expect(result.current.isExpanded(1)).toBe(false);
-    expect(result.current.isNestedRowsExpanded(1)).toBe(true);
-  });
-
-  test("only details panel changes trigger onDetailsPanelChange", () => {
-    const onDetailsPanelChange = vi.fn();
-
-    const { result } = renderHook(() => useDataTableExpansion(), {
-      wrapper: createWrapper({ onDetailsPanelChange }),
-    });
-
-    act(() => {
-      result.current.toggleNestedRowsExpansion(1);
-    });
-
-    expect(onDetailsPanelChange).not.toHaveBeenCalled();
-
-    act(() => {
-      result.current.toggleExpansion(1);
-    });
-
-    expect(onDetailsPanelChange).toHaveBeenCalledWith([1]);
-  });
-
   test("does not allow toggling rows that are not expandable", () => {
     const onDetailsPanelChange = vi.fn();
 
