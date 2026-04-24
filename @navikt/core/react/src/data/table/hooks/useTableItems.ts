@@ -35,8 +35,8 @@ type useTableItemsReturn<T> = {
   itemDetails: Map<T, ItemDetail<T>>;
   /** Row ids for the rows currently rendered in the table body. */
   visibleRowIds: TableRowEntryId[];
-  /** Full subtree ids for each row, including descendants that are currently hidden. */
-  descendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
+  /** Direct child ids for each row, used to traverse selection groups lazily. */
+  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
   onExpandedSubRowIdsChange: (id: string | number) => void;
   isSubRowExpanded: (id: string | number) => boolean;
 };
@@ -64,17 +64,15 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     [nestedSubRowsExpandedIds],
   );
 
-  const { itemDetails, visibleItems, visibleRowIds, descendantRowIdsById } =
+  const { itemDetails, visibleItems, visibleRowIds, childRowIdsById } =
     useMemo(() => {
-      const {
-        itemDetails: rowEntriesMap,
-        descendantRowIdsById: _descendantRowIdsById,
-      } = collectTableRowEntries({
-        items,
-        getRowId,
-        getSubRows,
-        isSubRowExpandable,
-      });
+      const { itemDetails: rowEntriesMap, childRowIdsById: _childRowIdsById } =
+        collectTableRowEntries({
+          items,
+          getRowId,
+          getSubRows,
+          isSubRowExpandable,
+        });
 
       const localVisibleItems: T[] = [];
       const localVisibleRowIds: TableRowEntryId[] = [];
@@ -108,7 +106,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
       return {
         visibleItems: localVisibleItems,
         visibleRowIds: localVisibleRowIds,
-        descendantRowIdsById: _descendantRowIdsById,
+        childRowIdsById: _childRowIdsById,
         itemDetails: rowEntriesMap,
       };
     }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
@@ -128,7 +126,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     items: visibleItems,
     itemDetails,
     visibleRowIds,
-    descendantRowIdsById,
+    childRowIdsById,
     onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
     isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
   };
@@ -137,7 +135,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
   createStrictContext<
-    Omit<useTableItemsReturn<any>, "visibleRowIds" | "descendantRowIdsById">
+    Omit<useTableItemsReturn<any>, "visibleRowIds" | "childRowIdsById">
   >({
     name: "TableItemsContext",
     errorMessage:

@@ -17,10 +17,10 @@ interface ItemDetail<T> {
 type CollectTableRowEntriesReturn<T> = {
   itemDetails: Map<T, ItemDetail<T>>;
   /**
-   * Full subtree ids for each row, used by nested selection to keep
-   * collapsed and expanded rows in sync.
+   * Direct child ids for each row, used to traverse nested selection groups
+   * without storing every descendant list on each ancestor.
    */
-  descendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
+  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
 };
 
 function collectTableRowEntries<T>({
@@ -30,9 +30,7 @@ function collectTableRowEntries<T>({
   isSubRowExpandable,
 }: CollectTableRowEntriesArgs<T>): CollectTableRowEntriesReturn<T> {
   const itemDetailsMap = new Map<T, ItemDetail<T>>();
-  // Precompute subtree ids once during the tree walk so selection can treat
-  // collapsed parents and visible descendants as the same selection group.
-  const descendantRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
+  const childRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
 
   const traverseRow = (
     rowData: T,
@@ -40,7 +38,7 @@ function collectTableRowEntries<T>({
     level: number,
     parent: T | null,
     parentId?: TableRowEntryId,
-  ): TableRowEntryId[] => {
+  ): TableRowEntryId => {
     const rowId =
       getRowId?.(rowData, rowIndex) ??
       (parentId == null ? rowIndex : `${parentId}-${rowIndex}`);
@@ -54,29 +52,23 @@ function collectTableRowEntries<T>({
       children,
     });
 
-    const descendantRowIds: TableRowEntryId[] = [];
+    const childRowIds: TableRowEntryId[] = [];
 
     for (let childIndex = 0; childIndex < children.length; childIndex++) {
       const childRow = children[childIndex];
-      const childDescendantRowIds = traverseRow(
+      const childRowId = traverseRow(
         childRow,
         childIndex,
         level + 1,
         rowData,
         rowId,
       );
-      const childDetails = itemDetailsMap.get(childRow);
-
-      if (!childDetails) {
-        continue;
-      }
-
-      descendantRowIds.push(childDetails.id, ...childDescendantRowIds);
+      childRowIds.push(childRowId);
     }
 
-    descendantRowIdsById.set(rowId, descendantRowIds);
+    childRowIdsById.set(rowId, childRowIds);
 
-    return descendantRowIds;
+    return rowId;
   };
 
   for (let rowIndex = 0; rowIndex < items.length; rowIndex++) {
@@ -85,7 +77,7 @@ function collectTableRowEntries<T>({
 
   return {
     itemDetails: itemDetailsMap,
-    descendantRowIdsById,
+    childRowIdsById,
   };
 }
 

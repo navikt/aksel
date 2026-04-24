@@ -18,8 +18,8 @@ const items: Item[] = [
 ];
 
 const visibleRowIds = items.map((item) => item.id);
-const descendantRowIdsById = new Map<string | number, (string | number)[]>([
-  ["a", ["a1", "a2", "a2a"]],
+const childRowIdsById = new Map<string | number, (string | number)[]>([
+  ["a", ["a1", "a2"]],
   ["a1", []],
   ["a2", ["a2a"]],
   ["a2a", []],
@@ -231,7 +231,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a"],
-          descendantRowIdsById,
+          childRowIdsById,
         }),
       );
 
@@ -267,7 +267,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a"],
-          descendantRowIdsById,
+          childRowIdsById,
           defaultSelectedKeys: ["a", "a1", "a2", "a2a", "external"],
         }),
       );
@@ -409,7 +409,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a", "a1", "a2"],
-          descendantRowIdsById,
+          childRowIdsById,
           defaultSelectedKeys: ["a1"],
         }),
       );
@@ -425,7 +425,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a", "a1", "a2"],
-          descendantRowIdsById,
+          childRowIdsById,
         }),
       );
 
@@ -451,7 +451,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a"],
-          descendantRowIdsById,
+          childRowIdsById,
         }),
       );
 

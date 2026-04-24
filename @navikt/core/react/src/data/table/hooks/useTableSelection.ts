@@ -12,8 +12,8 @@ import type {
 type UseTableSelectionArgs = SelectionProps & {
   /* Visible rows manage the header checkbox state and render selection cells. */
   visibleRowIds: (string | number)[];
-  /* Descendant ids let parent rows include hidden nested rows in their selection group. */
-  descendantRowIdsById?: Map<string | number, (string | number)[]>;
+  /* Direct child ids let selection walk nested rows lazily. */
+  childRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 type UseTableSelectionReturn = {
@@ -28,7 +28,7 @@ function useTableSelection({
   onSelectionChange,
   disabledSelectionKeys = [],
   visibleRowIds = [],
-  descendantRowIdsById,
+  childRowIdsById,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
   const radioGroupName = useId();
 
@@ -89,7 +89,7 @@ function useTableSelection({
         setSelectedKeys,
         disabledKeysSet,
         visibleRowIds,
-        descendantRowIdsById,
+        childRowIdsById,
       }),
     },
     renderSelection: visibleRowIds.length !== 0,

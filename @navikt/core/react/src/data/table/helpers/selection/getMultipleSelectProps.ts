@@ -1,4 +1,5 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
+import { SelectionSubtreeHelper } from "./SelectionSubtreeHelper";
 
 type GetMultipleSelectPropsArgs = {
   selectedKeysSet: Set<string | number>;
@@ -6,7 +7,7 @@ type GetMultipleSelectPropsArgs = {
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeysSet: Set<string | number>;
   visibleRowIds: (string | number)[];
-  descendantRowIdsById?: Map<string | number, (string | number)[]>;
+  childRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 function getMultipleSelectProps({
@@ -15,23 +16,17 @@ function getMultipleSelectProps({
   setSelectedKeys,
   disabledKeysSet,
   visibleRowIds,
-  descendantRowIdsById,
+  childRowIdsById,
 }: GetMultipleSelectPropsArgs) {
-  const getSelectionGroupKeys = (key: string | number) => [
-    key,
-    ...(descendantRowIdsById?.get(key) ?? []),
-  ];
+  const subtreeHelper = new SelectionSubtreeHelper({
+    childRowIdsById,
+    disabledKeysSet,
+    selectedKeysSet,
+  });
 
-  const getSelectableGroupKeys = (key: string | number) =>
-    getSelectionGroupKeys(key).filter(
-      (groupKey) => !disabledKeysSet.has(groupKey),
-    );
-
-  // Header selection uses the union of the visible rows and each row's full
-  // descendant group, so collapsed nested rows are included too.
-  const headerSelectableKeys = [
-    ...new Set(visibleRowIds.flatMap(getSelectableGroupKeys)),
-  ];
+  // Header selection traverses the visible roots and skips already visited
+  // descendants, so expanded trees stay linear in the number of rows.
+  const headerSelectableKeys = subtreeHelper.getSelectableKeys(visibleRowIds);
   const headerSelectableKeysSet = new Set(headerSelectableKeys);
 
   const selectedSelectableCount = headerSelectableKeys.filter((k) =>
@@ -54,9 +49,14 @@ function getMultipleSelectProps({
     ...new Set([...selectedKeysNotInView, ...disabledSelected]),
   ];
 
-  const isGroupFullySelected = (groupKeys: (string | number)[]) =>
-    groupKeys.length > 0 &&
-    groupKeys.every((groupKey) => selectedKeysSet.has(groupKey));
+  const isGroupFullySelected = (key: string | number) => {
+    const groupStats = subtreeHelper.getSelectionStats(key);
+
+    return (
+      groupStats.selectableCount > 0 &&
+      groupStats.selectedCount === groupStats.selectableCount
+    );
+  };
 
   const handleToggleAll = () => {
     if (allSelectableSelected) {
@@ -73,9 +73,9 @@ function getMultipleSelectProps({
       return;
     }
 
-    const groupKeys = getSelectableGroupKeys(key);
+    const groupKeys = subtreeHelper.getSelectableKeys([key]);
 
-    if (isGroupFullySelected(groupKeys)) {
+    if (isGroupFullySelected(key)) {
       const groupKeysSet = new Set(groupKeys);
       setSelectedKeys(
         selectedKeys.filter((selectedKey) => !groupKeysSet.has(selectedKey)),
@@ -93,16 +93,14 @@ function getMultipleSelectProps({
       disabled: headerSelectableKeys.length === 0,
     }),
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => {
-      const groupKeys = getSelectableGroupKeys(key);
-      const selectedGroupCount = groupKeys.filter((groupKey) =>
-        selectedKeysSet.has(groupKey),
-      ).length;
+      const groupStats = subtreeHelper.getSelectionStats(key);
 
       return {
         onChange: () => handleToggleRow(key),
-        checked: isGroupFullySelected(groupKeys),
+        checked: isGroupFullySelected(key),
         indeterminate:
-          selectedGroupCount > 0 && selectedGroupCount < groupKeys.length,
+          groupStats.selectedCount > 0 &&
+          groupStats.selectedCount < groupStats.selectableCount,
         disabled: disabledKeysSet.has(key),
       };
     },

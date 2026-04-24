@@ -86,7 +86,7 @@ describe("useTableItems", () => {
     expect(getVisibleIds(result.current.items)).toEqual(["a", "a1", "a2", "b"]);
   });
 
-  test("collects descendant row ids even when nested rows are collapsed", () => {
+  test("collects direct child row ids even when nested rows are collapsed", () => {
     const { result } = renderHook(() =>
       useTableItems({
         items: nestedRows,
@@ -95,13 +95,9 @@ describe("useTableItems", () => {
       }),
     );
 
-    expect(result.current.descendantRowIdsById.get("a")).toEqual([
-      "a1",
-      "a2",
-      "a2a",
-    ]);
-    expect(result.current.descendantRowIdsById.get("a2")).toEqual(["a2a"]);
-    expect(result.current.descendantRowIdsById.get("b")).toEqual(["b1"]);
+    expect(result.current.childRowIdsById.get("a")).toEqual(["a1", "a2"]);
+    expect(result.current.childRowIdsById.get("a2")).toEqual(["a2a"]);
+    expect(result.current.childRowIdsById.get("b")).toEqual(["b1"]);
   });
 
   test("uses the same fallback root id to reveal child rows when getRowId is omitted", () => {
