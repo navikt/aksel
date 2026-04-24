@@ -23,6 +23,10 @@ const COMPONENT_PROPS_QUERY = defineQuery(
   }`,
 );
 
+/**
+ * Route allows external tools (Aksel-mcp) to fetch props related to a specific component:
+ * Example: https://aksel.nav.no/api/component-props?slug=komponenter/core/button
+ */
 export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get("slug");
 
