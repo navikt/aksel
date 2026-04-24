@@ -34,7 +34,7 @@ type useTableItemsReturn<T> = {
   items: T[];
   itemDetails: Map<T, ItemDetail<T>>;
   visibleRowIds: TableRowEntryId[];
-  visibleDescendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
+  descendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
   onExpandedSubRowIdsChange: (id: string | number) => void;
   isSubRowExpanded: (id: string | number) => boolean;
 };
@@ -62,61 +62,86 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     [nestedSubRowsExpandedIds],
   );
 
-  const {
-    itemDetails,
-    visibleItems,
-    visibleRowIds,
-    visibleDescendantRowIdsById,
-  } = useMemo(() => {
-    const rowEntriesMap = collectTableRowEntries({
-      items,
-      getRowId,
-      getSubRows,
-      isSubRowExpandable,
-    });
+  const { itemDetails, visibleItems, visibleRowIds, descendantRowIdsById } =
+    useMemo(() => {
+      const rowEntriesMap = collectTableRowEntries({
+        items,
+        getRowId,
+        getSubRows,
+        isSubRowExpandable,
+      });
 
-    const localVisibleItems: T[] = [];
-    const localVisibleRowIds: TableRowEntryId[] = [];
-    const localVisibleDescendantRowIdsById = new Map<
-      TableRowEntryId,
-      TableRowEntryId[]
-    >();
+      const localVisibleItems: T[] = [];
+      const localVisibleRowIds: TableRowEntryId[] = [];
+      const localDescendantRowIdsById = new Map<
+        TableRowEntryId,
+        TableRowEntryId[]
+      >();
 
-    const addVisibleRows = (rowData: T): TableRowEntryId[] => {
-      const details = rowEntriesMap.get(rowData);
+      const collectDescendantRowIds = (rowData: T): TableRowEntryId[] => {
+        const details = rowEntriesMap.get(rowData);
 
-      if (!details) {
-        return [];
-      }
-
-      localVisibleItems.push(rowData);
-      localVisibleRowIds.push(details.id);
-
-      const visibleDescendantRowIds: TableRowEntryId[] = [];
-
-      if (expandedIdsSet.has(details.id)) {
-        for (const childRow of details.children) {
-          const childVisibleRowIds = addVisibleRows(childRow);
-          visibleDescendantRowIds.push(...childVisibleRowIds);
+        if (!details) {
+          return [];
         }
+
+        const descendantRowIds: TableRowEntryId[] = [];
+
+        for (const childRow of details.children) {
+          const childDetails = rowEntriesMap.get(childRow);
+
+          if (!childDetails) {
+            continue;
+          }
+
+          descendantRowIds.push(
+            childDetails.id,
+            ...collectDescendantRowIds(childRow),
+          );
+        }
+
+        localDescendantRowIdsById.set(details.id, descendantRowIds);
+
+        return descendantRowIds;
+      };
+
+      for (const rowData of items) {
+        collectDescendantRowIds(rowData);
       }
 
-      localVisibleDescendantRowIdsById.set(details.id, visibleDescendantRowIds);
+      const addVisibleRows = (rowData: T): TableRowEntryId[] => {
+        const details = rowEntriesMap.get(rowData);
 
-      return [details.id, ...visibleDescendantRowIds];
-    };
+        if (!details) {
+          return [];
+        }
 
-    for (const rowData of items) {
-      addVisibleRows(rowData);
-    }
+        localVisibleItems.push(rowData);
+        localVisibleRowIds.push(details.id);
 
-    return {
-      visibleItems: localVisibleItems,
-      visibleRowIds: localVisibleRowIds,
-      visibleDescendantRowIdsById: localVisibleDescendantRowIdsById,
-      itemDetails: rowEntriesMap,
-    };
-  }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
+        const visibleDescendantRowIds: TableRowEntryId[] = [];
+
+        if (expandedIdsSet.has(details.id)) {
+          for (const childRow of details.children) {
+            const childVisibleRowIds = addVisibleRows(childRow);
+            visibleDescendantRowIds.push(...childVisibleRowIds);
+          }
+        }
+
+        return [details.id, ...visibleDescendantRowIds];
+      };
+
+      for (const rowData of items) {
+        addVisibleRows(rowData);
+      }
+
+      return {
+        visibleItems: localVisibleItems,
+        visibleRowIds: localVisibleRowIds,
+        descendantRowIdsById: localDescendantRowIdsById,
+        itemDetails: rowEntriesMap,
+      };
+    }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
 
   const handleExpandedSubRowIdChange = useCallback(
     (id: string | number) => {
@@ -133,7 +158,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     items: visibleItems,
     itemDetails,
     visibleRowIds,
-    visibleDescendantRowIdsById,
+    descendantRowIdsById,
     onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
     isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
   };
@@ -142,10 +167,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
   createStrictContext<
-    Omit<
-      useTableItemsReturn<any>,
-      "visibleRowIds" | "visibleDescendantRowIdsById"
-    >
+    Omit<useTableItemsReturn<any>, "visibleRowIds" | "descendantRowIdsById">
   >({
     name: "TableItemsContext",
     errorMessage:

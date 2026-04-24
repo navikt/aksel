@@ -12,7 +12,7 @@ import type {
 type UseTableSelectionArgs = SelectionProps & {
   /* Visible rows are needed for "select all" and nested row selection. */
   visibleRowIds: (string | number)[];
-  visibleDescendantRowIdsById?: Map<string | number, (string | number)[]>;
+  descendantRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 type UseTableSelectionReturn = {
@@ -27,7 +27,7 @@ function useTableSelection({
   onSelectionChange,
   disabledSelectionKeys = [],
   visibleRowIds = [],
-  visibleDescendantRowIdsById,
+  descendantRowIdsById,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
   const radioGroupName = useId();
 
@@ -88,7 +88,7 @@ function useTableSelection({
         setSelectedKeys,
         disabledKeysSet,
         visibleRowIds,
-        visibleDescendantRowIdsById,
+        descendantRowIdsById,
       }),
     },
     renderSelection: visibleRowIds.length !== 0,

@@ -18,13 +18,11 @@ const items: Item[] = [
 ];
 
 const visibleRowIds = items.map((item) => item.id);
-const visibleDescendantRowIdsById = new Map<
-  string | number,
-  (string | number)[]
->([
-  ["a", ["a1", "a2"]],
+const descendantRowIdsById = new Map<string | number, (string | number)[]>([
+  ["a", ["a1", "a2", "a2a"]],
   ["a1", []],
-  ["a2", []],
+  ["a2", ["a2a"]],
+  ["a2a", []],
 ]);
 
 function asSingle(result: {
@@ -228,6 +226,24 @@ describe("useTableSelection", () => {
       expect(asMultiple(result).selectedKeys).toEqual(["a", "b", "c"]);
     });
 
+    test("select all via thead includes hidden descendants for visible parents", () => {
+      const { result } = renderHook(() =>
+        useTableSelection({
+          selectionMode: "multiple",
+          visibleRowIds: ["a"],
+          descendantRowIdsById,
+        }),
+      );
+
+      act(() => {
+        asMultiple(result)
+          .getTheadCheckboxProps()
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual(["a", "a1", "a2", "a2a"]);
+    });
+
     test("deselect all when all are selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
@@ -244,6 +260,25 @@ describe("useTableSelection", () => {
       });
 
       expect(asMultiple(result).selectedKeys).toEqual([]);
+    });
+
+    test("deselect all clears hidden descendants for visible parents but preserves unrelated keys", () => {
+      const { result } = renderHook(() =>
+        useTableSelection({
+          selectionMode: "multiple",
+          visibleRowIds: ["a"],
+          descendantRowIdsById,
+          defaultSelectedKeys: ["a", "a1", "a2", "a2a", "external"],
+        }),
+      );
+
+      act(() => {
+        asMultiple(result)
+          .getTheadCheckboxProps()
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual(["external"]);
     });
 
     test("select all skips disabled keys", () => {
@@ -374,7 +409,7 @@ describe("useTableSelection", () => {
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a", "a1", "a2"],
-          visibleDescendantRowIdsById,
+          descendantRowIdsById,
           defaultSelectedKeys: ["a1"],
         }),
       );
@@ -385,12 +420,12 @@ describe("useTableSelection", () => {
       expect(parentProps.indeterminate).toBe(true);
     });
 
-    test("toggling a parent row selects and deselects its visible descendants", () => {
+    test("toggling a parent row selects and deselects its descendants", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
           visibleRowIds: ["a", "a1", "a2"],
-          visibleDescendantRowIdsById,
+          descendantRowIdsById,
         }),
       );
 
@@ -400,7 +435,33 @@ describe("useTableSelection", () => {
           .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
       });
 
-      expect(asMultiple(result).selectedKeys).toEqual(["a", "a1", "a2"]);
+      expect(asMultiple(result).selectedKeys).toEqual(["a", "a1", "a2", "a2a"]);
+
+      act(() => {
+        asMultiple(result)
+          .getRowCheckboxProps("a")
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual([]);
+    });
+
+    test("toggling a collapsed parent selects and deselects hidden descendants", () => {
+      const { result } = renderHook(() =>
+        useTableSelection({
+          selectionMode: "multiple",
+          visibleRowIds: ["a"],
+          descendantRowIdsById,
+        }),
+      );
+
+      act(() => {
+        asMultiple(result)
+          .getRowCheckboxProps("a")
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual(["a", "a1", "a2", "a2a"]);
 
       act(() => {
         asMultiple(result)

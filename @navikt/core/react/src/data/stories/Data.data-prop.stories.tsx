@@ -817,6 +817,7 @@ export const NestedRows: Story = {
       selectionMode={args.selectionMode}
       withKeyboardNav
       getSubRows={(row) => row.children}
+      onSelectionChange={console.info}
     />
   ),
   play: async ({ canvasElement }) => {

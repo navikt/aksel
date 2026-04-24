@@ -286,7 +286,7 @@ function DataTableAutoInner<T>(
     onSelectionChange,
     disabledSelectionKeys,
     visibleRowIds: tableItems.visibleRowIds,
-    visibleDescendantRowIdsById: tableItems.visibleDescendantRowIdsById,
+    descendantRowIdsById: tableItems.descendantRowIdsById,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {

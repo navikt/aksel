@@ -6,7 +6,7 @@ type GetMultipleSelectPropsArgs = {
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeysSet: Set<string | number>;
   visibleRowIds: (string | number)[];
-  visibleDescendantRowIdsById?: Map<string | number, (string | number)[]>;
+  descendantRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 function getMultipleSelectProps({
@@ -15,38 +15,42 @@ function getMultipleSelectProps({
   setSelectedKeys,
   disabledKeysSet,
   visibleRowIds,
-  visibleDescendantRowIdsById,
+  descendantRowIdsById,
 }: GetMultipleSelectPropsArgs) {
-  const visibleRowIdsSet = new Set(visibleRowIds);
-  const selectableKeys = visibleRowIds.filter((k) => !disabledKeysSet.has(k));
-
-  const selectedSelectableCount = selectableKeys.filter((k) =>
-    selectedKeysSet.has(k),
-  ).length;
-
-  const allSelectableSelected =
-    selectableKeys.length > 0 &&
-    selectedSelectableCount === selectableKeys.length;
-
-  const indeterminate =
-    selectedSelectableCount > 0 &&
-    selectedSelectableCount < selectableKeys.length;
-
-  const selectedKeysNotInView = selectedKeys.filter(
-    (k) => !visibleRowIdsSet.has(k),
-  );
-  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
-  const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
-
   const getSelectionGroupKeys = (key: string | number) => [
     key,
-    ...(visibleDescendantRowIdsById?.get(key) ?? []),
+    ...(descendantRowIdsById?.get(key) ?? []),
   ];
 
   const getSelectableGroupKeys = (key: string | number) =>
     getSelectionGroupKeys(key).filter(
       (groupKey) => !disabledKeysSet.has(groupKey),
     );
+
+  const headerSelectableKeys = [
+    ...new Set(visibleRowIds.flatMap(getSelectableGroupKeys)),
+  ];
+  const headerSelectableKeysSet = new Set(headerSelectableKeys);
+
+  const selectedSelectableCount = headerSelectableKeys.filter((k) =>
+    selectedKeysSet.has(k),
+  ).length;
+
+  const allSelectableSelected =
+    headerSelectableKeys.length > 0 &&
+    selectedSelectableCount === headerSelectableKeys.length;
+
+  const indeterminate =
+    selectedSelectableCount > 0 &&
+    selectedSelectableCount < headerSelectableKeys.length;
+
+  const selectedKeysNotInView = selectedKeys.filter(
+    (k) => !headerSelectableKeysSet.has(k),
+  );
+  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
+  const preservedKeys = [
+    ...new Set([...selectedKeysNotInView, ...disabledSelected]),
+  ];
 
   const isGroupFullySelected = (groupKeys: (string | number)[]) =>
     groupKeys.length > 0 &&
@@ -56,7 +60,9 @@ function getMultipleSelectProps({
     if (allSelectableSelected) {
       setSelectedKeys(preservedKeys);
     } else {
-      setSelectedKeys([...new Set([...preservedKeys, ...selectableKeys])]);
+      setSelectedKeys([
+        ...new Set([...preservedKeys, ...headerSelectableKeys]),
+      ]);
     }
   };
 
@@ -82,7 +88,7 @@ function getMultipleSelectProps({
       onChange: handleToggleAll,
       checked: allSelectableSelected,
       indeterminate,
-      disabled: selectableKeys.length === 0,
+      disabled: headerSelectableKeys.length === 0,
     }),
     getRowCheckboxProps: (key: string | number): CheckboxInputProps => {
       const groupKeys = getSelectableGroupKeys(key);

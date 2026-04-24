@@ -86,6 +86,24 @@ describe("useTableItems", () => {
     expect(getVisibleIds(result.current.items)).toEqual(["a", "a1", "a2", "b"]);
   });
 
+  test("collects descendant row ids even when nested rows are collapsed", () => {
+    const { result } = renderHook(() =>
+      useTableItems({
+        items: nestedRows,
+        getRowId: (row) => row.id,
+        getSubRows,
+      }),
+    );
+
+    expect(result.current.descendantRowIdsById.get("a")).toEqual([
+      "a1",
+      "a2",
+      "a2a",
+    ]);
+    expect(result.current.descendantRowIdsById.get("a2")).toEqual(["a2a"]);
+    expect(result.current.descendantRowIdsById.get("b")).toEqual(["b1"]);
+  });
+
   test("uses the same fallback root id to reveal child rows when getRowId is omitted", () => {
     const { result } = renderHook(() =>
       useTableItems({
