@@ -326,62 +326,64 @@ function DataTableAutoInner<T>(
       showLoadingOverlay={isLoading && !loadingState && !loadingRows}
       columns={columns}
     >
-      <DataTableExpansionProvider
-        detailsPanelRowIds={detailsPanelRowIds}
-        defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
-        onDetailsPanelChange={onDetailsPanelChange}
+      <TableItemsProvider
         itemDetails={tableItems.itemDetails}
-        getDetailsPanelContent={getDetailsPanelContent}
-        isDetailsPanelExpandable={isDetailsPanelExpandable}
-        getDetailsPanelHeight={getDetailsPanelHeight}
-        showExpandAll={showExpandAll}
+        items={tableItems.items}
+        onExpandedSubRowIdsChange={tableItems.onExpandedSubRowIdsChange}
+        isSubRowExpanded={tableItems.isSubRowExpanded}
       >
-        <div className="aksel-data-table__border-wrapper">
-          <div className="aksel-data-table__scroll-wrapper">
-            <table
-              {...rest}
-              ref={mergedRef}
-              className={cl("aksel-data-table", className)}
-              data-zebra-stripes={zebraStripes}
-              data-truncate-content={truncateContent}
-              data-density={rowDensity}
-              data-layout={layout}
-              data-loading={isLoading || undefined}
-              tabIndex={tabIndex}
-              aria-busy={isLoading || undefined}
-            >
-              <DataTableThead>
-                <DataTableTr>
-                  {columns.map(({ isSticky, colDef }) => {
-                    const sortEntry = sortState.find(
-                      (s) => s.columnId === colDef.id,
-                    );
-                    const sortDirection = sortEntry?.direction ?? "none";
-                    return (
-                      <DataTableColumnHeader
-                        maxWidth={colDef.maxWidth}
-                        minWidth={colDef.minWidth}
-                        width={colDef.width}
-                        defaultWidth={colDef.defaultWidth ?? "100%"}
-                        textAlign={colDef.type === "number" ? "right" : "left"}
-                        key={colDef.id}
-                        isSticky={isSticky}
-                        sortable={colDef.sortable}
-                        sortDirection={sortDirection}
-                        onSortClick={(event) => onSortClick(colDef.id, event)}
-                      >
-                        {colDef.header}
-                      </DataTableColumnHeader>
-                    );
-                  })}
-                </DataTableTr>
-              </DataTableThead>
-              <TableItemsProvider
-                itemDetails={tableItems.itemDetails}
-                items={tableItems.items}
-                onExpandedSubRowIdsChange={tableItems.onExpandedSubRowIdsChange}
-                isSubRowExpanded={tableItems.isSubRowExpanded}
+        <DataTableExpansionProvider
+          detailsPanelRowIds={detailsPanelRowIds}
+          defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
+          onDetailsPanelChange={onDetailsPanelChange}
+          getDetailsPanelContent={getDetailsPanelContent}
+          isDetailsPanelExpandable={isDetailsPanelExpandable}
+          getDetailsPanelHeight={getDetailsPanelHeight}
+          showExpandAll={showExpandAll}
+        >
+          <div className="aksel-data-table__border-wrapper">
+            <div className="aksel-data-table__scroll-wrapper">
+              <table
+                {...rest}
+                ref={mergedRef}
+                className={cl("aksel-data-table", className)}
+                data-zebra-stripes={zebraStripes}
+                data-truncate-content={truncateContent}
+                data-density={rowDensity}
+                data-layout={layout}
+                data-loading={isLoading || undefined}
+                tabIndex={tabIndex}
+                aria-busy={isLoading || undefined}
               >
+                <DataTableThead>
+                  <DataTableTr>
+                    {columns.map(({ isSticky, colDef }) => {
+                      const sortEntry = sortState.find(
+                        (s) => s.columnId === colDef.id,
+                      );
+                      const sortDirection = sortEntry?.direction ?? "none";
+                      return (
+                        <DataTableColumnHeader
+                          maxWidth={colDef.maxWidth}
+                          minWidth={colDef.minWidth}
+                          width={colDef.width}
+                          defaultWidth={colDef.defaultWidth ?? "100%"}
+                          textAlign={
+                            colDef.type === "number" ? "right" : "left"
+                          }
+                          key={colDef.id}
+                          isSticky={isSticky}
+                          sortable={colDef.sortable}
+                          sortDirection={sortDirection}
+                          onSortClick={(event) => onSortClick(colDef.id, event)}
+                        >
+                          {colDef.header}
+                        </DataTableColumnHeader>
+                      );
+                    })}
+                  </DataTableTr>
+                </DataTableThead>
+
                 <DataTableTbody>
                   <DataTableAutoTBodyContent
                     loadingState={loadingState}
@@ -391,11 +393,11 @@ function DataTableAutoInner<T>(
                     fullWidthColSpan={fullWidthColSpan}
                   />
                 </DataTableTbody>
-              </TableItemsProvider>
-            </table>
+              </table>
+            </div>
           </div>
-        </div>
-      </DataTableExpansionProvider>
+        </DataTableExpansionProvider>
+      </TableItemsProvider>
     </DataTableContextProvider>
   );
 }

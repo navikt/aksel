@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
-import type { ItemDetail } from "./useTableItems";
+import { useTableItemsContext } from "./useTableItems";
 
 type DataTableExpansionContextT = {
   isExpanded: (id: string | number) => boolean;
@@ -28,7 +28,6 @@ type TableExpansionOptions<T> = {
   detailsPanelRowIds?: (string | number)[];
   defaultDetailsPanelRowIds?: (string | number)[];
   onDetailsPanelChange?: (ids: (string | number)[]) => void;
-  itemDetails: Map<T, ItemDetail<T>>;
   getDetailsPanelContent?: (row: T) => React.ReactNode;
   isDetailsPanelExpandable?: (rowData: T) => boolean;
   getDetailsPanelHeight?: (row: T) => number | "auto";
@@ -44,7 +43,6 @@ function DataTableExpansionProvider<T>({
   detailsPanelRowIds,
   defaultDetailsPanelRowIds = [],
   onDetailsPanelChange,
-  itemDetails,
   getDetailsPanelContent,
   isDetailsPanelExpandable,
   getDetailsPanelHeight,
@@ -55,6 +53,13 @@ function DataTableExpansionProvider<T>({
     defaultValue: defaultDetailsPanelRowIds,
     onChange: onDetailsPanelChange,
   });
+
+  /* TODO: False is just fallback until auto and root is merged */
+  const tableItemsContext = useTableItemsContext(false);
+
+  const { itemDetails } = tableItemsContext ?? {
+    itemDetails: new Map(),
+  };
 
   const expandableIds = React.useMemo(() => {
     if (!getDetailsPanelContent) {
