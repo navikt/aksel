@@ -64,7 +64,10 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
   const { itemDetails, visibleItems, visibleRowIds, descendantRowIdsById } =
     useMemo(() => {
-      const rowEntriesMap = collectTableRowEntries({
+      const {
+        itemDetails: rowEntriesMap,
+        descendantRowIdsById: _descendantRowIdsById,
+      } = collectTableRowEntries({
         items,
         getRowId,
         getSubRows,
@@ -73,41 +76,6 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
       const localVisibleItems: T[] = [];
       const localVisibleRowIds: TableRowEntryId[] = [];
-      const localDescendantRowIdsById = new Map<
-        TableRowEntryId,
-        TableRowEntryId[]
-      >();
-
-      const collectDescendantRowIds = (rowData: T): TableRowEntryId[] => {
-        const details = rowEntriesMap.get(rowData);
-
-        if (!details) {
-          return [];
-        }
-
-        const descendantRowIds: TableRowEntryId[] = [];
-
-        for (const childRow of details.children) {
-          const childDetails = rowEntriesMap.get(childRow);
-
-          if (!childDetails) {
-            continue;
-          }
-
-          descendantRowIds.push(
-            childDetails.id,
-            ...collectDescendantRowIds(childRow),
-          );
-        }
-
-        localDescendantRowIdsById.set(details.id, descendantRowIds);
-
-        return descendantRowIds;
-      };
-
-      for (const rowData of items) {
-        collectDescendantRowIds(rowData);
-      }
 
       const addVisibleRows = (rowData: T): TableRowEntryId[] => {
         const details = rowEntriesMap.get(rowData);
@@ -138,7 +106,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
       return {
         visibleItems: localVisibleItems,
         visibleRowIds: localVisibleRowIds,
-        descendantRowIdsById: localDescendantRowIdsById,
+        descendantRowIdsById: _descendantRowIdsById,
         itemDetails: rowEntriesMap,
       };
     }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
