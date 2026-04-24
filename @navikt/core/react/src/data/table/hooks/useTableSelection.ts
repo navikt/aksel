@@ -10,8 +10,9 @@ import type {
 } from "../helpers/selection/selection.types";
 
 type UseTableSelectionArgs = SelectionProps & {
-  /* Visible rows are needed for "select all" and nested row selection. */
+  /* Visible rows manage the header checkbox state and render selection cells. */
   visibleRowIds: (string | number)[];
+  /* Descendant ids let parent rows include hidden nested rows in their selection group. */
   descendantRowIdsById?: Map<string | number, (string | number)[]>;
 };
 

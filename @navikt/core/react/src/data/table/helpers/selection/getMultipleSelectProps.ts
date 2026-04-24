@@ -27,6 +27,8 @@ function getMultipleSelectProps({
       (groupKey) => !disabledKeysSet.has(groupKey),
     );
 
+  // Header selection uses the union of the visible rows and each row's full
+  // descendant group, so collapsed nested rows are included too.
   const headerSelectableKeys = [
     ...new Set(visibleRowIds.flatMap(getSelectableGroupKeys)),
   ];

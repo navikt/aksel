@@ -16,6 +16,10 @@ interface ItemDetail<T> {
 
 type CollectTableRowEntriesReturn<T> = {
   itemDetails: Map<T, ItemDetail<T>>;
+  /**
+   * Full subtree ids for each row, used by nested selection to keep
+   * collapsed and expanded rows in sync.
+   */
   descendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
 };
 
@@ -26,6 +30,8 @@ function collectTableRowEntries<T>({
   isSubRowExpandable,
 }: CollectTableRowEntriesArgs<T>): CollectTableRowEntriesReturn<T> {
   const itemDetailsMap = new Map<T, ItemDetail<T>>();
+  // Precompute subtree ids once during the tree walk so selection can treat
+  // collapsed parents and visible descendants as the same selection group.
   const descendantRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
 
   const traverseRow = (

@@ -33,7 +33,9 @@ type UseTableItemsArgs<T> = {
 type useTableItemsReturn<T> = {
   items: T[];
   itemDetails: Map<T, ItemDetail<T>>;
+  /** Row ids for the rows currently rendered in the table body. */
   visibleRowIds: TableRowEntryId[];
+  /** Full subtree ids for each row, including descendants that are currently hidden. */
   descendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
   onExpandedSubRowIdsChange: (id: string | number) => void;
   isSubRowExpanded: (id: string | number) => boolean;
