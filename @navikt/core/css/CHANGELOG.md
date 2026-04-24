@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.10.2
+
+### Patch Changes
+
+- Dialog: Now aligns to bottom when centered at 480px instead of 768px screen width ([#4831](https://github.com/navikt/aksel/pull/4831))
+
 ## 8.10.1
 
 ### Patch Changes
