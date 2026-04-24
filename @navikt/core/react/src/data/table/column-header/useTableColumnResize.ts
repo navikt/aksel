@@ -1,4 +1,10 @@
-import { type DOMAttributes, useCallback, useRef, useState } from "react";
+import {
+  type DOMAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useControllableState } from "../../../utils/hooks";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
@@ -15,6 +21,17 @@ type ResizeProps = {
    * Initial width of the column. Only used when `width` is not set.
    */
   defaultWidth?: ColumnWidth;
+  /**
+   * Whether the column should automatically resize to fit its content. **Runs only once.**
+   *
+   * `onWidthChange` will be called with the new size. `minWidth` and `maxWidth` will be respected.
+   *
+   * If you don't need manual resizing support and want most of the columns to resize automatically,
+   * consider using `layout="auto"` on the root instead for better performance.
+   *
+   * **NB:** This can cause a layout shift. Set a good initial width with `width` or `defaultWidth` to mitigate this.
+   */
+  autoWidth?: boolean;
   /**
    * Minimum width of the column.
    *
@@ -41,7 +58,12 @@ type ResizeProps = {
   colSpan?: number;
 };
 
-type TableColumnResizeArgs = ResizeProps & {
+type WithUndefined<T> = {
+  [K in keyof T]: T[K] | undefined;
+};
+type Unomittable<T> = WithUndefined<Required<T>>;
+
+type TableColumnResizeArgs = Unomittable<ResizeProps> & {
   thRef: React.RefObject<HTMLTableCellElement | null>;
 };
 
@@ -77,6 +99,7 @@ function useTableColumnResize(
     thRef,
     width: userWidth,
     defaultWidth,
+    autoWidth,
     onWidthChange,
     maxWidth = Infinity,
     minWidth = 40,
@@ -108,6 +131,21 @@ function useTableColumnResize(
       _setWidth(clamped);
     },
     [minWidth, maxWidth, _setWidth],
+  );
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoWidth changes
+  useEffect(
+    function autoResizeColumn() {
+      if (!autoWidth) {
+        return;
+      }
+
+      const newColumnWidth = getAutoColumnWidth(thRef);
+      if (newColumnWidth) {
+        setWidth(newColumnWidth);
+      }
+    },
+    [autoWidth], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
@@ -145,9 +183,9 @@ function useTableColumnResize(
         }
         if (event.key === "End") {
           event.preventDefault();
-          const autoWidth = getAutoColumnWidth(thRef);
-          if (autoWidth && autoWidth > currentWidth) {
-            setWidth(autoWidth);
+          const newWidth = getAutoColumnWidth(thRef);
+          if (newWidth && newWidth > currentWidth) {
+            setWidth(newWidth);
           }
           return;
         }
