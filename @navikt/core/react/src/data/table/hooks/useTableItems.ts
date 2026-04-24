@@ -3,6 +3,7 @@ import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import {
   type ItemDetail,
+  type TableRowEntryId,
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
 
@@ -32,6 +33,8 @@ type UseTableItemsArgs<T> = {
 type useTableItemsReturn<T> = {
   items: T[];
   itemDetails: Map<T, ItemDetail<T>>;
+  visibleRowIds: TableRowEntryId[];
+  visibleDescendantRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
   onExpandedSubRowIdsChange: (id: string | number) => void;
   isSubRowExpanded: (id: string | number) => boolean;
 };
@@ -59,7 +62,12 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     [nestedSubRowsExpandedIds],
   );
 
-  const { itemDetails, visibleItems } = useMemo(() => {
+  const {
+    itemDetails,
+    visibleItems,
+    visibleRowIds,
+    visibleDescendantRowIdsById,
+  } = useMemo(() => {
     const rowEntriesMap = collectTableRowEntries({
       items,
       getRowId,
@@ -68,18 +76,34 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     });
 
     const localVisibleItems: T[] = [];
-    const addVisibleRows = (rowData: T) => {
-      localVisibleItems.push(rowData);
+    const localVisibleRowIds: TableRowEntryId[] = [];
+    const localVisibleDescendantRowIdsById = new Map<
+      TableRowEntryId,
+      TableRowEntryId[]
+    >();
 
+    const addVisibleRows = (rowData: T): TableRowEntryId[] => {
       const details = rowEntriesMap.get(rowData);
 
-      if (!details || !expandedIdsSet.has(details.id)) {
-        return;
+      if (!details) {
+        return [];
       }
 
-      for (const childRow of details.children) {
-        addVisibleRows(childRow);
+      localVisibleItems.push(rowData);
+      localVisibleRowIds.push(details.id);
+
+      const visibleDescendantRowIds: TableRowEntryId[] = [];
+
+      if (expandedIdsSet.has(details.id)) {
+        for (const childRow of details.children) {
+          const childVisibleRowIds = addVisibleRows(childRow);
+          visibleDescendantRowIds.push(...childVisibleRowIds);
+        }
       }
+
+      localVisibleDescendantRowIdsById.set(details.id, visibleDescendantRowIds);
+
+      return [details.id, ...visibleDescendantRowIds];
     };
 
     for (const rowData of items) {
@@ -88,6 +112,8 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
     return {
       visibleItems: localVisibleItems,
+      visibleRowIds: localVisibleRowIds,
+      visibleDescendantRowIdsById: localVisibleDescendantRowIdsById,
       itemDetails: rowEntriesMap,
     };
   }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
@@ -106,6 +132,8 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   return {
     items: visibleItems,
     itemDetails,
+    visibleRowIds,
+    visibleDescendantRowIdsById,
     onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
     isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
   };
@@ -113,7 +141,12 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
-  createStrictContext<useTableItemsReturn<any>>({
+  createStrictContext<
+    Omit<
+      useTableItemsReturn<any>,
+      "visibleRowIds" | "visibleDescendantRowIdsById"
+    >
+  >({
     name: "TableItemsContext",
     errorMessage:
       "useTableItemsContext must be used within a TableItemsProvider",

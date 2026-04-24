@@ -17,7 +17,15 @@ const items: Item[] = [
   { id: "c", name: "Charlie" },
 ];
 
-const allRowKeys = items.map((item) => item.id);
+const visibleRowIds = items.map((item) => item.id);
+const visibleDescendantRowIdsById = new Map<
+  string | number,
+  (string | number)[]
+>([
+  ["a", ["a1", "a2"]],
+  ["a1", []],
+  ["a2", []],
+]);
 
 function asSingle(result: {
   current: UseTableSelectionReturn;
@@ -37,7 +45,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "none",
-          allRowKeys,
+          visibleRowIds,
         }),
       );
 
@@ -51,7 +59,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "single",
-          allRowKeys,
+          visibleRowIds,
         }),
       );
 
@@ -64,7 +72,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "single",
-          allRowKeys,
+          visibleRowIds,
           onSelectionChange: onChange,
         }),
       );
@@ -83,7 +91,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "single",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a"],
         }),
       );
@@ -101,7 +109,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "single",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a"],
         }),
       );
@@ -119,7 +127,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "single",
-          allRowKeys,
+          visibleRowIds,
           disabledSelectionKeys: ["b"],
         }),
       );
@@ -133,7 +141,7 @@ describe("useTableSelection", () => {
         ({ selectedKeys }) =>
           useTableSelection({
             selectionMode: "single",
-            allRowKeys,
+            visibleRowIds,
             selectedKeys,
           }),
         { initialProps: { selectedKeys: ["a"] as (string | number)[] } },
@@ -151,7 +159,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
         }),
       );
 
@@ -164,7 +172,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
         }),
       );
 
@@ -189,7 +197,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "b"],
         }),
       );
@@ -207,7 +215,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
         }),
       );
 
@@ -224,7 +232,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
@@ -242,7 +250,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           disabledSelectionKeys: ["b"],
         }),
       );
@@ -260,7 +268,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "b", "c"],
           disabledSelectionKeys: ["b"],
         }),
@@ -279,7 +287,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a"],
         }),
       );
@@ -293,7 +301,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
@@ -307,7 +315,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "c"],
           disabledSelectionKeys: ["b"],
         }),
@@ -322,7 +330,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
@@ -340,7 +348,7 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           disabledSelectionKeys: ["b"],
         }),
       );
@@ -353,12 +361,54 @@ describe("useTableSelection", () => {
       const { result } = renderHook(() =>
         useTableSelection({
           selectionMode: "multiple",
-          allRowKeys,
+          visibleRowIds,
           disabledSelectionKeys: ["a", "b", "c"],
         }),
       );
 
       expect(asMultiple(result).getTheadCheckboxProps().disabled).toBe(true);
+    });
+
+    test("parent rows show indeterminate when visible descendants are partially selected", () => {
+      const { result } = renderHook(() =>
+        useTableSelection({
+          selectionMode: "multiple",
+          visibleRowIds: ["a", "a1", "a2"],
+          visibleDescendantRowIdsById,
+          defaultSelectedKeys: ["a1"],
+        }),
+      );
+
+      const parentProps = asMultiple(result).getRowCheckboxProps("a");
+
+      expect(parentProps.checked).toBe(false);
+      expect(parentProps.indeterminate).toBe(true);
+    });
+
+    test("toggling a parent row selects and deselects its visible descendants", () => {
+      const { result } = renderHook(() =>
+        useTableSelection({
+          selectionMode: "multiple",
+          visibleRowIds: ["a", "a1", "a2"],
+          visibleDescendantRowIdsById,
+        }),
+      );
+
+      act(() => {
+        asMultiple(result)
+          .getRowCheckboxProps("a")
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual(["a", "a1", "a2"]);
+
+      act(() => {
+        asMultiple(result)
+          .getRowCheckboxProps("a")
+          .onChange?.({} as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(asMultiple(result).selectedKeys).toEqual([]);
     });
   });
 });

@@ -94,6 +94,38 @@ describe("DataTableAuto", () => {
     expect(rowCheckboxes.every((checkbox) => checkbox.checked)).toBe(true);
   });
 
+  test("parent row selection follows visible nested rows", () => {
+    render(
+      <DataTableAuto
+        columnDefinitions={columns}
+        data={data}
+        getRowId={(row) => row.id}
+        getSubRows={(row) => row.subRows ?? []}
+        selectionMode="multiple"
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    const getCheckboxes = () =>
+      screen.getAllByRole("checkbox") as HTMLInputElement[];
+
+    fireEvent.click(getCheckboxes()[2]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[1].indeterminate).toBe(true);
+
+    fireEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    fireEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+  });
+
   test("does not render expansion controls in the manual table variant", () => {
     render(
       <DataTable>
