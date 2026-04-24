@@ -819,6 +819,42 @@ export const NestedRows: Story = {
       getSubRows={(row) => row.children}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const getCheckboxes = () =>
+      canvas.getAllByRole("checkbox") as HTMLInputElement[];
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+
+    await userEvent.click(getCheckboxes()[2]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[1].indeterminate).toBe(true);
+
+    await userEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    await userEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+
+    /* Nested "hidden items" selection */
+    await userEvent.click(getCheckboxes()[2]);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+    expect(getCheckboxes()[2].indeterminate).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(true);
+    expect(getCheckboxes()[3].checked).toBe(true);
+    expect(getCheckboxes()[4].checked).toBe(true);
+  },
   ...selectionControls,
 };
 
