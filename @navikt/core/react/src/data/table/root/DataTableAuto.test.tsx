@@ -20,6 +20,20 @@ const data: TestRow[] = [
   },
 ];
 
+const deepNestedData: TestRow[] = [
+  {
+    id: "root",
+    name: "Root",
+    subRows: [
+      {
+        id: "child",
+        name: "Child",
+        subRows: [{ id: "grandchild", name: "Grandchild" }],
+      },
+    ],
+  },
+];
+
 const fallbackIdData: TestRow[] = [
   {
     id: "unused-root-1",
@@ -92,6 +106,118 @@ describe("DataTableAuto", () => {
 
     expect(rowCheckboxes).toHaveLength(3);
     expect(rowCheckboxes.every((checkbox) => checkbox.checked)).toBe(true);
+  });
+
+  test("parent row selection follows visible nested rows", () => {
+    render(
+      <DataTableAuto
+        columnDefinitions={columns}
+        data={data}
+        getRowId={(row) => row.id}
+        getSubRows={(row) => row.subRows ?? []}
+        selectionMode="multiple"
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    const getCheckboxes = () =>
+      screen.getAllByRole("checkbox") as HTMLInputElement[];
+
+    fireEvent.click(getCheckboxes()[2]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[1].indeterminate).toBe(true);
+
+    fireEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    fireEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+  });
+
+  test("collapsed parent selection includes hidden descendants and can clear them again", () => {
+    render(
+      <DataTableAuto
+        columnDefinitions={columns}
+        data={deepNestedData}
+        getRowId={(row) => row.id}
+        getSubRows={(row) => row.subRows ?? []}
+        selectionMode="multiple"
+      />,
+    );
+
+    const getCheckboxes = () =>
+      screen.getAllByRole("checkbox") as HTMLInputElement[];
+
+    fireEvent.click(getCheckboxes()[1]);
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[3].checked).toBe(true);
+
+    fireEvent.click(
+      screen.getAllByRole("button", { name: "Skjul under-rader" })[0],
+    );
+    fireEvent.click(getCheckboxes()[1]);
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+    expect(getCheckboxes()[3].checked).toBe(false);
+  });
+
+  test("select-all includes hidden descendants for collapsed parents and clears them again", () => {
+    render(
+      <DataTableAuto
+        columnDefinitions={columns}
+        data={deepNestedData}
+        getRowId={(row) => row.id}
+        getSubRows={(row) => row.subRows ?? []}
+        selectionMode="multiple"
+      />,
+    );
+
+    const getCheckboxes = () =>
+      screen.getAllByRole("checkbox") as HTMLInputElement[];
+
+    fireEvent.click(
+      screen.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[3].checked).toBe(true);
+
+    fireEvent.click(
+      screen.getByRole("checkbox", { name: "Fjern alle synlige valgte rader" }),
+    );
+
+    expect(getCheckboxes()[0].checked).toBe(false);
+
+    fireEvent.click(
+      screen.getAllByRole("button", { name: "Skjul under-rader" })[0],
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Vis under-rader" }));
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+    expect(getCheckboxes()[3].checked).toBe(false);
   });
 
   test("does not render expansion controls in the manual table variant", () => {

@@ -10,6 +10,7 @@ type SelectionProps = {
    * When set to "single", only one row can be selected at a time (renders radio buttons).
    *
    * When set to "multiple", multiple rows can be selected (renders checkboxes).
+   * Nested rows use cascading selection, so selecting a parent toggles its descendants too.
    *
    * @default "none"
    */
