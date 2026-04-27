@@ -17,7 +17,10 @@ const COMPONENT_PROPS_QUERY = defineQuery(
         required,
         description,
         defaultValue,
-        deprecated
+        deprecated,
+        example,
+        params,
+        return
       }
     }
   }`,
@@ -59,6 +62,9 @@ export async function GET(request: NextRequest) {
         description: string | null;
         defaultValue: string | null;
         deprecated: string | null;
+        example: string | null;
+        params: string | null;
+        return: string | null;
       }[];
     }[] = [];
 
@@ -87,6 +93,9 @@ export async function GET(request: NextRequest) {
           description: "Override the root element (OverridableComponent API).",
           defaultValue: null,
           deprecated: null,
+          example: null,
+          params: null,
+          return: null,
         });
       }
 
