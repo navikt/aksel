@@ -54,7 +54,6 @@
     "./dist/*": {
       "types": "./types.d.ts",
       "default": "./dist/*"
-    },
-    "./config/_mappings": "./config/_mappings.js"
+    }
   }
 }
