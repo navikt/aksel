@@ -1,11 +1,13 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
+import { SelectionSubtreeHelper } from "./SelectionSubtreeHelper";
 
 type GetMultipleSelectPropsArgs = {
   selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
   disabledKeysSet: Set<string | number>;
-  allRowKeys: (string | number)[];
+  visibleRowIds: (string | number)[];
+  childRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 function getMultipleSelectProps({
@@ -13,34 +15,56 @@ function getMultipleSelectProps({
   selectedKeys,
   setSelectedKeys,
   disabledKeysSet,
-  allRowKeys,
+  visibleRowIds,
+  childRowIdsById,
 }: GetMultipleSelectPropsArgs) {
-  const allRowKeysSet = new Set(allRowKeys);
-  const selectableKeys = allRowKeys.filter((k) => !disabledKeysSet.has(k));
+  const subtreeHelper = new SelectionSubtreeHelper({
+    childRowIdsById,
+    disabledKeysSet,
+    selectedKeysSet,
+  });
 
-  const selectedSelectableCount = selectableKeys.filter((k) =>
+  // Header selection traverses the visible roots and skips already visited
+  // descendants, so expanded trees stay linear in the number of rows.
+  const headerSelectableKeys = subtreeHelper.getSelectableKeys(visibleRowIds);
+  const headerSelectableKeysSet = new Set(headerSelectableKeys);
+
+  const selectedSelectableCount = headerSelectableKeys.filter((k) =>
     selectedKeysSet.has(k),
   ).length;
 
   const allSelectableSelected =
-    selectableKeys.length > 0 &&
-    selectedSelectableCount === selectableKeys.length;
+    headerSelectableKeys.length > 0 &&
+    selectedSelectableCount === headerSelectableKeys.length;
 
   const indeterminate =
     selectedSelectableCount > 0 &&
-    selectedSelectableCount < selectableKeys.length;
+    selectedSelectableCount < headerSelectableKeys.length;
 
   const selectedKeysNotInView = selectedKeys.filter(
-    (k) => !allRowKeysSet.has(k),
+    (k) => !headerSelectableKeysSet.has(k),
   );
   const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
-  const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
+  const preservedKeys = [
+    ...new Set([...selectedKeysNotInView, ...disabledSelected]),
+  ];
+
+  const isGroupFullySelected = (key: string | number) => {
+    const groupStats = subtreeHelper.getSelectionStats(key);
+
+    return (
+      groupStats.selectableCount > 0 &&
+      groupStats.selectedCount === groupStats.selectableCount
+    );
+  };
 
   const handleToggleAll = () => {
     if (allSelectableSelected) {
       setSelectedKeys(preservedKeys);
     } else {
-      setSelectedKeys([...new Set([...preservedKeys, ...selectableKeys])]);
+      setSelectedKeys([
+        ...new Set([...preservedKeys, ...headerSelectableKeys]),
+      ]);
     }
   };
 
@@ -48,10 +72,16 @@ function getMultipleSelectProps({
     if (disabledKeysSet.has(key)) {
       return;
     }
-    if (selectedKeysSet.has(key)) {
-      setSelectedKeys(selectedKeys.filter((k) => k !== key));
+
+    const groupKeys = subtreeHelper.getSelectableKeys([key]);
+
+    if (isGroupFullySelected(key)) {
+      const groupKeysSet = new Set(groupKeys);
+      setSelectedKeys(
+        selectedKeys.filter((selectedKey) => !groupKeysSet.has(selectedKey)),
+      );
     } else {
-      setSelectedKeys([...selectedKeys, key]);
+      setSelectedKeys([...new Set([...selectedKeys, ...groupKeys])]);
     }
   };
 
@@ -60,13 +90,20 @@ function getMultipleSelectProps({
       onChange: handleToggleAll,
       checked: allSelectableSelected,
       indeterminate,
-      disabled: selectableKeys.length === 0,
+      disabled: headerSelectableKeys.length === 0,
     }),
-    getRowCheckboxProps: (key: string | number): CheckboxInputProps => ({
-      onChange: () => handleToggleRow(key),
-      checked: selectedKeysSet.has(key),
-      disabled: disabledKeysSet.has(key),
-    }),
+    getRowCheckboxProps: (key: string | number): CheckboxInputProps => {
+      const groupStats = subtreeHelper.getSelectionStats(key);
+
+      return {
+        onChange: () => handleToggleRow(key),
+        checked: isGroupFullySelected(key),
+        indeterminate:
+          groupStats.selectedCount > 0 &&
+          groupStats.selectedCount < groupStats.selectableCount,
+        disabled: disabledKeysSet.has(key),
+      };
+    },
     toggleSelection: handleToggleRow,
   };
 }
