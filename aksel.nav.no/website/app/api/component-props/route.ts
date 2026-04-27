@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import { type NextRequest, NextResponse } from "next/server";
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 
-export const revalidate = false;
+export const revalidate = 86400;
 
 const COMPONENT_PROPS_QUERY = defineQuery(
   `*[_type == "komponent_artikkel" && slug.current == $slug][0] {
@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
       { title: data.title, slug, parts },
       {
         headers: {
-          "Cache-Control": "public, max-age=31536000, immutable",
+          "Cache-Control": "public, max-age=86400, s-maxage=86400",
         },
       },
     );
