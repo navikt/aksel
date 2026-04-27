@@ -31,11 +31,23 @@ const COMPONENT_PROPS_QUERY = defineQuery(
  * Example: https://aksel.nav.no/api/component-props?slug=komponenter/core/button
  */
 export async function GET(request: NextRequest) {
-  const slug = request.nextUrl.searchParams.get("slug");
+  const rawSlug = request.nextUrl.searchParams.get("slug");
+
+  if (!rawSlug) {
+    return NextResponse.json(
+      { error: "Missing required query parameter: slug" },
+      { status: 400 },
+    );
+  }
+
+  const slug = normalizeComponentSlug(rawSlug);
 
   if (!slug) {
     return NextResponse.json(
-      { error: "Missing required query parameter: slug" },
+      {
+        error:
+          "Invalid slug. Expected a component slug starting with 'komponenter/'.",
+      },
       { status: 400 },
     );
   }
@@ -118,4 +130,18 @@ export async function GET(request: NextRequest) {
       { status: 500 },
     );
   }
+}
+
+const COMPONENT_SLUG_PREFIX = "komponenter/";
+const COMPONENT_SLUG_PATTERN = /^komponenter\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/;
+
+function normalizeComponentSlug(rawSlug: string) {
+  const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
+  if (
+    !normalizedSlug.startsWith(COMPONENT_SLUG_PREFIX) ||
+    !COMPONENT_SLUG_PATTERN.test(normalizedSlug)
+  ) {
+    return null;
+  }
+  return normalizedSlug;
 }
