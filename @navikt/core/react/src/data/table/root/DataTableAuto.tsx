@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
 import { ChevronDownIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Skeleton } from "../../../skeleton";
@@ -279,23 +279,14 @@ function DataTableAutoInner<T>(
     onExpandedSubRowIdsChange,
   });
 
-  const allRowKeys = useMemo(() => {
-    const rowKeys: (string | number)[] = [];
-
-    for (const details of tableItems.itemDetails.values()) {
-      rowKeys.push(details.id);
-    }
-
-    return rowKeys;
-  }, [tableItems.itemDetails]);
-
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
     disabledSelectionKeys,
-    allRowKeys,
+    visibleRowIds: tableItems.visibleRowIds,
+    childRowIdsById: tableItems.childRowIdsById,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {

@@ -62,6 +62,7 @@ const DataTableColumnHeader = forwardRef<
       sortable = false,
       sortDirection = "none",
       onSortClick,
+      resizable = true,
       style,
       width,
       defaultWidth,
@@ -81,6 +82,7 @@ const DataTableColumnHeader = forwardRef<
     const mergedRef = useMergeRefs(forwardedRef, thRef);
 
     const resizeResult = useTableColumnResize({
+      resizable,
       thRef,
       width,
       defaultWidth,
