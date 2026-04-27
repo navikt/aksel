@@ -11,6 +11,14 @@ type SelectionSubtreeHelperArgs = {
   selectedKeysSet: Set<SelectionKey>;
 };
 
+/**
+ * Helper class for managing selection state in a tree structure.
+ * - It provides methods to get selectable keys in a subtree
+ * - Compute selection statistics for a subtree
+ * - Determine if a subtree is fully selected.
+ *
+ * Results of selection statistics are cached to optimize performance for repeated calls on the same subtree.
+ */
 class SelectionSubtreeHelper {
   private childRowIdsById: Map<SelectionKey, SelectionKey[]>;
   private disabledKeysSet: Set<SelectionKey>;
