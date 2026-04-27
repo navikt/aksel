@@ -14,7 +14,8 @@
   "files": [
     "*",
     "!dist/version",
-    "!config/bundle.js"
+    "!config/bundle.ts",
+    "!config/get-version.js"
   ],
   "repository": {
     "type": "git",
@@ -46,9 +47,13 @@
   ],
   "main": "./dist/index.css",
   "exports": {
-    ".": "./dist/index.css",
-    "./dist/*": "./dist/*",
-    "./tokens.json": "./tokens.json",
-    "./config/_mappings": "./config/_mappings.js"
+    ".": {
+      "types": "./types.d.ts",
+      "default": "./dist/index.css"
+    },
+    "./dist/*": {
+      "types": "./types.d.ts",
+      "default": "./dist/*"
+    }
   }
 }
