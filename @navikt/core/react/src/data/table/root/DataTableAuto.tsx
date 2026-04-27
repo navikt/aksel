@@ -38,10 +38,7 @@ import {
 } from "./DataTableRoot.context";
 
 interface DataTableProps<T>
-  extends
-    React.HTMLAttributes<HTMLTableElement>,
-    SelectionProps,
-    TableSortOptions {
+  extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {
   children?: never;
   /**
    * Controls vertical cell padding.
@@ -212,6 +209,10 @@ interface DataTableProps<T>
   defaultExpandedSubRowIds?: (string | number)[];
   isSubRowExpandable?: (rowData: T) => boolean;
   onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
+  /**
+   * Props for row selection functionality.
+   */
+  selection?: SelectionProps;
 }
 
 function DataTableAutoInner<T>(
@@ -224,11 +225,7 @@ function DataTableAutoInner<T>(
     truncateContent = true,
     shouldBlockNavigation,
     layout = "fixed",
-    selectionMode: selectionModeProp = "none",
-    selectedKeys,
-    defaultSelectedKeys,
-    onSelectionChange,
-    disabledSelectionKeys = [],
+    selection,
     data,
     columnDefinitions,
     getRowId,
@@ -243,7 +240,6 @@ function DataTableAutoInner<T>(
     loadingState,
     loadingRows,
     loadingLabel = "Laster innhold",
-    disableRowSelectionOnClick = false,
     getDetailsPanelContent,
     isDetailsPanelExpandable,
     getDetailsPanelHeight,
@@ -282,6 +278,15 @@ function DataTableAutoInner<T>(
     isSubRowExpandable,
     onExpandedSubRowIdsChange,
   });
+
+  const {
+    selectionMode: selectionModeProp = "none",
+    selectedKeys,
+    defaultSelectedKeys,
+    onSelectionChange,
+    disabledSelectionKeys = [],
+    disableRowSelectionOnClick = false,
+  } = selection || {};
 
   const tableSelectionState = useTableSelection({
     selectionMode: selectionModeProp,
