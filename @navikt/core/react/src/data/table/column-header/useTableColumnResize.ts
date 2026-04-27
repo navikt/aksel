@@ -12,13 +12,20 @@ type ColumnWidth = number | string;
 
 type ResizeProps = {
   /**
+   * Whether the column should be resizable by the user.
+   *
+   * **NB:** This is always disabled when `layout="auto"` on the root component.
+   * @default true
+   */
+  resizable?: boolean;
+  /**
    * Controlled width of the column.
    *
    * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
    */
   width?: ColumnWidth;
   /**
-   * Initial width of the column. Only used when `width` is not set.
+   * Initial width of the column. Only used when `width` is not set and `resizable` is true.
    */
   defaultWidth?: ColumnWidth;
   /**
@@ -96,6 +103,7 @@ function useTableColumnResize(
   args: TableColumnResizeArgs,
 ): TableColumnResizeResult {
   const {
+    resizable,
     thRef,
     width: userWidth,
     defaultWidth,
@@ -112,7 +120,7 @@ function useTableColumnResize(
   const [isResizingWithKeyboard, setIsResizingWithKeyboard] = useState(false);
   const ignoreNextOnClick = useRef(false);
 
-  const [width, _setWidth] = useControllableState({
+  const [width, setWidth] = useControllableState({
     value: userWidth,
     defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
     /**
@@ -123,14 +131,14 @@ function useTableColumnResize(
     onChange: onWidthChange,
   });
 
-  const setWidth = useCallback(
+  const setClampedWidth = useCallback(
     (newWidth: number) => {
       const min = parseWidth(minWidth) ?? 0;
       const max = parseWidth(maxWidth) ?? Infinity;
       const clamped = Math.min(Math.max(newWidth, min), max);
-      _setWidth(clamped);
+      setWidth(clamped);
     },
-    [minWidth, maxWidth, _setWidth],
+    [minWidth, maxWidth, setWidth],
   );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoWidth changes
@@ -142,7 +150,7 @@ function useTableColumnResize(
 
       const newColumnWidth = getAutoColumnWidth(thRef);
       if (newColumnWidth) {
-        setWidth(newColumnWidth);
+        setClampedWidth(newColumnWidth);
       }
     },
     [autoWidth], // eslint-disable-line react-hooks/exhaustive-deps
@@ -173,19 +181,19 @@ function useTableColumnResize(
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
           const delta = event.key === "ArrowRight" ? 20 : -20;
-          setWidth(currentWidth + delta);
+          setClampedWidth(currentWidth + delta);
           return;
         }
         if (event.key === "Home") {
           event.preventDefault();
-          setWidth(0); // will fall back to minWidth
+          setClampedWidth(0); // will fall back to minWidth
           return;
         }
         if (event.key === "End") {
           event.preventDefault();
           const newWidth = getAutoColumnWidth(thRef);
           if (newWidth && newWidth > currentWidth) {
-            setWidth(newWidth);
+            setClampedWidth(newWidth);
           }
           return;
         }
@@ -193,7 +201,7 @@ function useTableColumnResize(
           setIsResizingWithKeyboard(false);
         }
       },
-      [isResizingWithKeyboard, setWidth, thRef],
+      [isResizingWithKeyboard, setClampedWidth, thRef],
     );
 
   const startResize = useCallback(
@@ -216,7 +224,7 @@ function useTableColumnResize(
           return;
         }
 
-        setWidth(newWidth);
+        setClampedWidth(newWidth);
       }
 
       function onMouseMove(e: MouseEvent) {
@@ -244,7 +252,7 @@ function useTableColumnResize(
       document.addEventListener("touchend", cleanup, { once: true });
       document.addEventListener("touchcancel", cleanup, { once: true });
     },
-    [maxWidth, minWidth, setWidth, thRef],
+    [maxWidth, minWidth, setWidth, setClampedWidth, thRef],
   );
 
   const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
@@ -268,13 +276,23 @@ function useTableColumnResize(
     useCallback(() => {
       const newColumnWidth = getAutoColumnWidth(thRef);
       if (newColumnWidth) {
-        setWidth(newColumnWidth);
+        setClampedWidth(newColumnWidth);
       }
-    }, [setWidth, thRef]);
+    }, [setClampedWidth, thRef]);
 
   if (tableContext.layout !== "fixed") {
     return {
       style,
+      enabled: false,
+    };
+  }
+
+  if (!resizable) {
+    return {
+      style: {
+        ...style,
+        width,
+      },
       enabled: false,
     };
   }

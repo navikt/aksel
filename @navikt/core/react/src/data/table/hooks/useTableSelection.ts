@@ -10,8 +10,10 @@ import type {
 } from "../helpers/selection/selection.types";
 
 type UseTableSelectionArgs = SelectionProps & {
-  /* This is needed for multiple selection to know which keys to select when "select all" is used */
-  allRowKeys: (string | number)[];
+  /* Visible rows manage the header checkbox state and render selection cells. */
+  visibleRowIds: (string | number)[];
+  /* Direct child ids let selection walk nested rows lazily. */
+  childRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 type UseTableSelectionReturn = {
@@ -25,7 +27,8 @@ function useTableSelection({
   selectedKeys: selectedKeysProp,
   onSelectionChange,
   disabledSelectionKeys = [],
-  allRowKeys,
+  visibleRowIds = [],
+  childRowIdsById,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
   const radioGroupName = useId();
 
@@ -72,7 +75,7 @@ function useTableSelection({
           name: radioGroupName,
         }),
       },
-      renderSelection: allRowKeys.length !== 0,
+      renderSelection: visibleRowIds.length !== 0,
     };
   }
 
@@ -85,10 +88,11 @@ function useTableSelection({
         selectedKeys,
         setSelectedKeys,
         disabledKeysSet,
-        allRowKeys,
+        visibleRowIds,
+        childRowIdsById,
       }),
     },
-    renderSelection: allRowKeys.length !== 0,
+    renderSelection: visibleRowIds.length !== 0,
   };
 }
 
