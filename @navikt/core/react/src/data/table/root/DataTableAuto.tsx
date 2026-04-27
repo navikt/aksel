@@ -202,6 +202,10 @@ interface DataTableProps<T>
   /**
    * Function to get sub-rows for a given row, used for nested rows.
    * When provided, an expand toggle column is added automatically.
+   *
+   *
+   * TODO:
+   * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
   getSubRows?: (rowData: T) => T[];
   expandedSubRowIds?: (string | number)[];
@@ -455,59 +459,65 @@ function DataTableAutoTBodyContent({
 
   const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
 
-  return items.map((rowData) => {
-    const details = itemDetails.get(rowData);
+  return (
+    <>
+      {renderLoadingAnnouncement && (
+        <tr>
+          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
+            {loadingLabel}
+          </td>
+        </tr>
+      )}
+      {items.map((rowData) => {
+        const details = itemDetails.get(rowData);
 
-    /* Should in theory be impossible. Look about typing this? */
-    if (!details) {
-      return null;
-    }
+        /* Should in theory be impossible. Look about typing this? */
+        if (!details) {
+          return null;
+        }
 
-    const hasSubRows = details.children.length > 0;
+        const hasSubRows = details.children.length > 0;
 
-    return (
-      <React.Fragment key={details.id}>
-        {renderLoadingAnnouncement && (
-          <tr>
-            <td colSpan={fullWidthColSpan} className="aksel-sr-only">
-              {loadingLabel}
-            </td>
-          </tr>
-        )}
-        <DataTableTr rowId={details.id}>
-          {columns.map(({ isSticky, colDef }, colDefIndex) => {
-            const renderNestedToggle = colDefIndex === 0 && hasSubRows;
-            const renderNestedIndent =
-              colDefIndex === 0 && (details.level > 0 || hasSubRows);
+        return (
+          <React.Fragment key={details.id}>
+            <DataTableTr rowId={details.id}>
+              {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                const renderNestedToggle = colDefIndex === 0 && hasSubRows;
+                const renderNestedIndent =
+                  colDefIndex === 0 && (details.level > 0 || hasSubRows);
 
-            const style: React.CSSProperties = {
-              "--__axc-data-table-nested-depth": details.level,
-            };
+                const style: React.CSSProperties = {
+                  "--__axc-data-table-nested-depth": details.level,
+                };
 
-            return (
-              <DataTableBaseCell
-                /* TODO: Make this configurable */
-                textAlign={colDef.type === "number" ? "right" : "left"}
-                key={colDef.id || colDefIndex}
-                as={colDef.isRowHeader ? "th" : "td"}
-                isSticky={isSticky}
-                data-nested={renderNestedIndent || undefined}
-                style={style}
-              >
-                {renderNestedToggle && <NestedRowToggle details={details} />}
-                {colDef.cell(rowData)}
-              </DataTableBaseCell>
-            );
-          })}
-        </DataTableTr>
-        <DataTableExpandedRow
-          rowId={details.id}
-          rowData={rowData}
-          fullWidthColSpan={fullWidthColSpan}
-        />
-      </React.Fragment>
-    );
-  });
+                return (
+                  <DataTableBaseCell
+                    /* TODO: Make this configurable */
+                    textAlign={colDef.type === "number" ? "right" : "left"}
+                    key={colDef.id || colDefIndex}
+                    as={colDef.isRowHeader ? "th" : "td"}
+                    isSticky={isSticky}
+                    data-nested={renderNestedIndent || undefined}
+                    style={style}
+                  >
+                    {renderNestedToggle && (
+                      <NestedRowToggle details={details} />
+                    )}
+                    {colDef.cell(rowData)}
+                  </DataTableBaseCell>
+                );
+              })}
+            </DataTableTr>
+            <DataTableExpandedRow
+              rowId={details.id}
+              rowData={rowData}
+              fullWidthColSpan={fullWidthColSpan}
+            />
+          </React.Fragment>
+        );
+      })}
+    </>
+  );
 }
 
 function NestedRowToggle({ details }: { details: ItemDetail<any> }) {

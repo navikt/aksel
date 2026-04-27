@@ -338,9 +338,16 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
           columnDefinitions={userColumnDef}
           data={userData}
           isLoading={isLoading}
+          loadingLabel="Laster innhold for tabell"
         />
       </VStack>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getAllByText("Laster innhold for tabell")).toHaveLength(1);
+    expect(canvas.getByText("foo2")).toBeInTheDocument();
   },
 };
 
