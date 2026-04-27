@@ -12,11 +12,12 @@ type ColumnDefinition<T> = {
   minWidth?: number | string;
   maxWidth?: number | string;
   /**
-   * Currently only handles cell alignment.
-   * TODO: Should this include centering?
-   * type "icon" or something to avoid ellipsis on actions, tags etc
+   * Text alignment for cells in this column.
+   *
+   *
+   * @default "left"
    */
-  type?: "string" | "number";
+  align?: "left" | "right" | "center";
   /**
    * Assigned to the cell's `th` element instead of `td` if true.
    *

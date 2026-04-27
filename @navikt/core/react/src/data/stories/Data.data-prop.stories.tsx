@@ -58,7 +58,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Id",
     label: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     defaultWidth: "100px",
   },
   {
@@ -610,7 +610,7 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     id: "id",
     header: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     sortable: true,
     label: "Id",
   },
@@ -693,7 +693,7 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "id", header: "Id", cell: ({ id }) => id, align: "right", label: "Id" },
   { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
   {
     id: "link",

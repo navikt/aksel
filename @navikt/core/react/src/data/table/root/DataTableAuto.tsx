@@ -363,9 +363,7 @@ function DataTableAutoInner<T>(
                           minWidth={colDef.minWidth}
                           width={colDef.width}
                           defaultWidth={colDef.defaultWidth ?? "100%"}
-                          textAlign={
-                            colDef.type === "number" ? "right" : "left"
-                          }
+                          textAlign={colDef.align ?? "left"}
                           key={colDef.id}
                           isSticky={isSticky}
                           sortable={colDef.sortable}
@@ -435,7 +433,7 @@ function DataTableAutoTBodyContent({
           <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
             {columns.map(({ isSticky, colDef }, colDefIndex) => (
               <DataTableBaseCell
-                textAlign={colDef.type === "number" ? "right" : "left"}
+                textAlign={colDef.align ?? "left"}
                 key={colDef.id || colDefIndex}
                 as={colDef.isRowHeader ? "th" : "td"}
                 isSticky={isSticky}
@@ -492,8 +490,7 @@ function DataTableAutoTBodyContent({
 
                 return (
                   <DataTableBaseCell
-                    /* TODO: Make this configurable */
-                    textAlign={colDef.type === "number" ? "right" : "left"}
+                    textAlign={colDef.align ?? "left"}
                     key={colDef.id || colDefIndex}
                     as={colDef.isRowHeader ? "th" : "td"}
                     isSticky={isSticky}
