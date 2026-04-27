@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Radio, Checkbox: Fix regression where `className` were mistakenly passed to `input`-element
+Radio, Checkbox: Fix regression where `className` was mistakenly passed to `input`-element
