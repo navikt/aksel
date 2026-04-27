@@ -62,7 +62,7 @@ describe("DataTableAuto", () => {
         columnDefinitions={columns}
         data={data}
         getRowId={(row) => row.id}
-        getSubRows={(row) => row.subRows ?? []}
+        subRows={{ getSubRows: (row) => row.subRows ?? [] }}
         selection={{ selectionMode: "multiple" }}
       />,
     );
@@ -90,8 +90,10 @@ describe("DataTableAuto", () => {
       <DataTableAuto
         columnDefinitions={columns}
         data={fallbackIdData}
-        getSubRows={(row) => row.subRows ?? []}
-        defaultExpandedSubRowIds={[0]}
+        subRows={{
+          getSubRows: (row) => row.subRows ?? [],
+          defaultExpandedSubRowIds: [0],
+        }}
         selection={{ selectionMode: "multiple" }}
       />,
     );
@@ -114,7 +116,7 @@ describe("DataTableAuto", () => {
         columnDefinitions={columns}
         data={data}
         getRowId={(row) => row.id}
-        getSubRows={(row) => row.subRows ?? []}
+        subRows={{ getSubRows: (row) => row.subRows ?? [] }}
         selection={{ selectionMode: "multiple" }}
       />,
     );
@@ -146,7 +148,7 @@ describe("DataTableAuto", () => {
         columnDefinitions={columns}
         data={deepNestedData}
         getRowId={(row) => row.id}
-        getSubRows={(row) => row.subRows ?? []}
+        subRows={{ getSubRows: (row) => row.subRows ?? [] }}
         selection={{ selectionMode: "multiple" }}
       />,
     );
@@ -183,7 +185,7 @@ describe("DataTableAuto", () => {
         columnDefinitions={columns}
         data={deepNestedData}
         getRowId={(row) => row.id}
-        getSubRows={(row) => row.subRows ?? []}
+        subRows={{ getSubRows: (row) => row.subRows ?? [] }}
         selection={{ selectionMode: "multiple" }}
       />,
     );

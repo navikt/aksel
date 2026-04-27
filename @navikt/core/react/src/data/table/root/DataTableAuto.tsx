@@ -130,72 +130,36 @@ interface DataTableProps<T>
    * Rendered inside a `DataTable.EmptyState` row spanning all columns.
    */
   emptyState?: React.ReactNode;
-  /**
-   * Shows the table in a loading state.
-   *
-   * - When `loadingState` is provided, it is rendered inside a `DataTable.LoadingState` row.
-   * - When `loadingState` is **not** provided, skeleton placeholder rows are rendered instead.
-   * @default false
-   */
-  isLoading?: boolean;
-  /**
-   * Custom content to render when `isLoading` is `true`.
-   * Rendered inside a `DataTable.LoadingState` row spanning all columns.
-   * When omitted, skeleton rows are rendered based on `loadingRows`.
-   */
-  loadingState?: React.ReactNode;
-  /**
-   * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-   *
-   *
-   * If not provided, the rendered content will get a temporarily overlay while loading
-   */
-  loadingRows?: number;
-  /**
-   * Visually hidden label announced to screen readers when skeleton rows are shown.
-   * Only used when `isLoading` is `true` and no `loadingState` is provided.
-   * @default "Laster innhold"
-   */
-  loadingLabel?: string;
-  /**
-   * Renders a details panel below the row when expanded.
-   * When provided, an expand toggle column is added automatically.
-   */
-  getDetailsPanelContent?: (rowData: T) => React.ReactNode;
-  /**
-   * Determines whether a row can be expanded to show details panel content.
-   * @default () => true
-   */
-  isDetailsPanelExpandable?: (rowData: T) => boolean;
-  /**
-   * Controlled list of expanded row IDs.
-   * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
-   */
-  detailsPanelRowIds?: (string | number)[];
-  /**
-   * Initial list of expanded row IDs for uncontrolled usage.
-   * @default []
-   */
-  defaultDetailsPanelRowIds?: (string | number)[];
-  /**
-   * Called when the list of expanded row IDs changes.
-   *
-   *
-   * TODO:
-   * - Docs: This pattern is called "Master / Detail" in general terms
-   */
-  onDetailsPanelChange?: (ids: (string | number)[]) => void;
-  /**
-   * Returns the height (in px) or `"auto"` for a row's details panel.
-   * When a number is returned, the panel scrolls within that fixed height.
-   * @default "auto"
-   */
-  getDetailsPanelHeight?: (rowData: T) => number | "auto";
-  /**
-   * Shows an expand-all toggle button in the expand column header.
-   * @default false
-   */
-  showExpandAll?: boolean;
+  loading?: {
+    /**
+     * Shows the table in a loading state.
+     *
+     * - When `loadingState` is provided, it is rendered inside a `DataTable.LoadingState` row.
+     * - When `loadingState` is **not** provided, skeleton placeholder rows are rendered instead.
+     * @default false
+     */
+    isLoading?: boolean;
+    /**
+     * Custom content to render when `isLoading` is `true`.
+     * Rendered inside a `DataTable.LoadingState` row spanning all columns.
+     * When omitted, skeleton rows are rendered based on `loadingRows`.
+     */
+    loadingState?: React.ReactNode;
+    /**
+     * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
+     *
+     *
+     * If not provided, the rendered content will get a temporarily overlay while loading
+     */
+    loadingRows?: number;
+    /**
+     * Visually hidden label announced to screen readers when skeleton rows are shown.
+     * Only used when `isLoading` is `true` and no `loadingState` is provided.
+     * @default "Laster innhold"
+     */
+    loadingLabel?: string;
+  };
+
   /**
    * Function to get sub-rows for a given row, used for nested rows.
    * When provided, an expand toggle column is added automatically.
@@ -204,15 +168,62 @@ interface DataTableProps<T>
    * TODO:
    * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
-  getSubRows?: (rowData: T) => T[];
-  expandedSubRowIds?: (string | number)[];
-  defaultExpandedSubRowIds?: (string | number)[];
-  isSubRowExpandable?: (rowData: T) => boolean;
-  onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
+
   /**
    * Props for row selection functionality.
    */
   selection?: SelectionProps;
+  /**
+   *
+   */
+  subRows?: {
+    getSubRows?: (rowData: T) => T[];
+    expandedSubRowIds?: (string | number)[];
+    defaultExpandedSubRowIds?: (string | number)[];
+    isSubRowExpandable?: (rowData: T) => boolean;
+    onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
+  };
+  detailsPanel?: {
+    /**
+     * Renders a details panel below the row when expanded.
+     * When provided, an expand toggle column is added automatically.
+     */
+    getDetailsPanelContent?: (rowData: T) => React.ReactNode;
+    /**
+     * Determines whether a row can be expanded to show details panel content.
+     * @default () => true
+     */
+    isDetailsPanelExpandable?: (rowData: T) => boolean;
+    /**
+     * Controlled list of expanded row IDs.
+     * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
+     */
+    detailsPanelRowIds?: (string | number)[];
+    /**
+     * Initial list of expanded row IDs for uncontrolled usage.
+     * @default []
+     */
+    defaultDetailsPanelRowIds?: (string | number)[];
+    /**
+     * Called when the list of expanded row IDs changes.
+     *
+     *
+     * TODO:
+     * - Docs: This pattern is called "Master / Detail" in general terms
+     */
+    onDetailsPanelChange?: (ids: (string | number)[]) => void;
+    /**
+     * Returns the height (in px) or `"auto"` for a row's details panel.
+     * When a number is returned, the panel scrolls within that fixed height.
+     * @default "auto"
+     */
+    getDetailsPanelHeight?: (rowData: T) => number | "auto";
+    /**
+     * Shows an expand-all toggle button in the expand column header.
+     * @default false
+     */
+    showExpandAll?: boolean;
+  };
 }
 
 function DataTableAutoInner<T>(
@@ -236,22 +247,9 @@ function DataTableAutoInner<T>(
     onSortChange,
     onRowClick,
     emptyState,
-    isLoading = false,
-    loadingState,
-    loadingRows,
-    loadingLabel = "Laster innhold",
-    getDetailsPanelContent,
-    isDetailsPanelExpandable,
-    getDetailsPanelHeight,
-    showExpandAll = false,
-    detailsPanelRowIds,
-    defaultDetailsPanelRowIds,
-    onDetailsPanelChange,
-    getSubRows,
-    expandedSubRowIds,
-    defaultExpandedSubRowIds,
-    isSubRowExpandable,
-    onExpandedSubRowIdsChange,
+    loading,
+    detailsPanel,
+    subRows,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
@@ -268,6 +266,14 @@ function DataTableAutoInner<T>(
   });
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+
+  const {
+    getSubRows,
+    expandedSubRowIds,
+    defaultExpandedSubRowIds,
+    isSubRowExpandable,
+    onExpandedSubRowIdsChange,
+  } = subRows || {};
 
   const tableItems = useTableItems({
     items: data,
@@ -302,6 +308,23 @@ function DataTableAutoInner<T>(
     stickyColumns,
     selectionMode: tableSelectionState.selection.selectionMode,
   });
+
+  const {
+    getDetailsPanelContent,
+    isDetailsPanelExpandable,
+    getDetailsPanelHeight,
+    showExpandAll = false,
+    detailsPanelRowIds,
+    defaultDetailsPanelRowIds,
+    onDetailsPanelChange,
+  } = detailsPanel || {};
+
+  const {
+    isLoading = false,
+    loadingState,
+    loadingRows,
+    loadingLabel = "Laster innhold",
+  } = loading || {};
 
   const fullWidthColSpan =
     columns.length +

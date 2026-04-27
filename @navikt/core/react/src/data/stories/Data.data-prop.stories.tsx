@@ -298,8 +298,7 @@ export const LoadingWithSkeletonRows: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={[]}
-          isLoading={isLoading}
-          loadingRows={4}
+          loading={{ isLoading, loadingRows: 4 }}
         />
       </VStack>
     );
@@ -317,8 +316,7 @@ export const LoadingWithLoadingState: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={[]}
-          isLoading={isLoading}
-          loadingState="Laster data..."
+          loading={{ isLoading, loadingState: "Laster data..." }}
         />
       </VStack>
     );
@@ -336,8 +334,7 @@ export const LoadingWhileKeepingData: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={userData}
-          isLoading={isLoading}
-          loadingRows={4}
+          loading={{ isLoading, loadingRows: 4 }}
         />
       </VStack>
     );
@@ -355,8 +352,7 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={userData}
-          isLoading={isLoading}
-          loadingLabel="Laster innhold for tabell"
+          loading={{ isLoading, loadingLabel: "Laster innhold for tabell" }}
         />
       </VStack>
     );
@@ -806,8 +802,10 @@ export const RowExpansion: Story = {
         selectionMode: args.selectionMode,
       }}
       withKeyboardNav
-      getDetailsPanelContent={(rowData) => {
-        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      detailsPanel={{
+        getDetailsPanelContent: (rowData) => {
+          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+        },
       }}
     />
   ),
@@ -825,10 +823,12 @@ export const RowExpansionAll: Story = {
         selectionMode: args.selectionMode,
       }}
       withKeyboardNav
-      getDetailsPanelContent={(rowData) => {
-        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      detailsPanel={{
+        getDetailsPanelContent: (rowData) => {
+          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+        },
+        showExpandAll: true,
       }}
-      showExpandAll
     />
   ),
   ...selectionControls,
@@ -856,7 +856,9 @@ export const NestedRows: Story = {
         onSelectionChange: console.info,
       }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getSubRows: (row) => row.children,
+      }}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -909,7 +911,9 @@ export const NestedLeftAlignedContentRows: Story = {
         selectionMode: args.selectionMode,
       }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getSubRows: (row) => row.children,
+      }}
     />
   ),
   ...selectionControls,
@@ -932,7 +936,9 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
         selectionMode: args.selectionMode,
       }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getSubRows: (row) => row.children,
+      }}
     />
   ),
   ...selectionControls,
@@ -955,9 +961,19 @@ export const NestedRowsWithMasterDetail: Story = {
         selectionMode: args.selectionMode,
       }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
-      getDetailsPanelContent={() => <div>Placeholder content</div>}
-      getDetailsPanelHeight={() => 100}
+      subRows={{
+        getSubRows: (row) => row.children,
+      }}
+      detailsPanel={{
+        getDetailsPanelContent: () => (
+          <div>
+            This is the details panel content. It should be possible to interact
+            with the content here without triggering row clicks or affecting row
+            selection.
+          </div>
+        ),
+        getDetailsPanelHeight: () => 100,
+      }}
     />
   ),
   /* play: async ({ canvasElement }) => {
