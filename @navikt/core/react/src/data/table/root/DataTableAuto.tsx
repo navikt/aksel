@@ -11,11 +11,11 @@ import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
-  DataTableExpansionProvider,
+  DataTableDetailsPanelProvider,
   type DetailsPanelProps,
-  getDataTableExpansionId,
-  useDataTableExpansion,
-} from "../hooks/useTableExpansion";
+  getDataTableDetailsPanelId,
+  useDataTableDetailsPanel,
+} from "../hooks/useTableDetailsPanel";
 import {
   type ItemDetail,
   type SubRowsProps,
@@ -268,7 +268,7 @@ function DataTableAutoInner<T>(
         onExpandedSubRowIdsChange={tableItems.onExpandedSubRowIdsChange}
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
-        <DataTableExpansionProvider detailsPanel={detailsPanel}>
+        <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
           <div className="aksel-data-table__border-wrapper">
             <div className="aksel-data-table__scroll-wrapper">
               <table
@@ -322,7 +322,7 @@ function DataTableAutoInner<T>(
               </table>
             </div>
           </div>
-        </DataTableExpansionProvider>
+        </DataTableDetailsPanelProvider>
       </TableItemsProvider>
     </DataTableContextProvider>
   );
@@ -499,7 +499,7 @@ function DataTableExpandedRow<T>({
     isExpanded,
     getDetailsPanelContent,
     getDetailsPanelHeight,
-  } = useDataTableExpansion();
+  } = useDataTableDetailsPanel();
 
   if (!enableDetailsPanel) {
     return null;
@@ -510,7 +510,7 @@ function DataTableExpandedRow<T>({
   }
 
   const content = getDetailsPanelContent?.(rowData);
-  const expansionId = getDataTableExpansionId(tableId, rowId);
+  const expansionId = getDataTableDetailsPanelId(tableId, rowId);
 
   if (!content) {
     return null;

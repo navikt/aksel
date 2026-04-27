@@ -45,7 +45,7 @@ type DetailsPanelProps<T> = {
   showExpandAll?: boolean;
 };
 
-type DataTableExpansionContextT = {
+type DataTableDetailsPanelContextT = {
   isExpanded: (id: string | number) => boolean;
   isDetailsPanelExpandable: (id: string | number) => boolean;
   toggleExpansion: (id: string | number) => void;
@@ -58,15 +58,15 @@ type DataTableExpansionContextT = {
 };
 
 const {
-  Provider: DataTableExpansionContextProvider,
-  useContext: useDataTableExpansion,
-} = createStrictContext<DataTableExpansionContextT>({
-  name: "DataTableExpansionContext",
+  Provider: DataTableDetailsPanelContextProvider,
+  useContext: useDataTableDetailsPanel,
+} = createStrictContext<DataTableDetailsPanelContextT>({
+  name: "DataTableDetailsPanelContext",
   errorMessage:
-    "useDataTableExpansion must be used within a DataTableExpansionProvider.",
+    "useDataTableDetailsPanel must be used within a DataTableDetailsPanelProvider.",
 });
 
-function DataTableExpansionProvider<T>({
+function DataTableDetailsPanelProvider<T>({
   children,
   detailsPanel = {},
 }: { detailsPanel?: DetailsPanelProps<T> } & { children: React.ReactNode }) {
@@ -149,7 +149,7 @@ function DataTableExpansionProvider<T>({
   }, [expandableIds, isAllExpanded, setExpandedIds]);
 
   return (
-    <DataTableExpansionContextProvider
+    <DataTableDetailsPanelContextProvider
       isExpanded={isExpanded}
       isDetailsPanelExpandable={isDetailsPanelExpandableById}
       toggleExpansion={toggleExpansion}
@@ -167,18 +167,18 @@ function DataTableExpansionProvider<T>({
       enableDetailsPanel={!!getDetailsPanelContent}
     >
       {children}
-    </DataTableExpansionContextProvider>
+    </DataTableDetailsPanelContextProvider>
   );
 }
 
-function getDataTableExpansionId(tableId: string, rowId: string | number) {
+function getDataTableDetailsPanelId(tableId: string, rowId: string | number) {
   return `${tableId}-expansion-${rowId}`;
 }
 
 export {
-  DataTableExpansionProvider,
-  getDataTableExpansionId,
-  useDataTableExpansion,
+  DataTableDetailsPanelProvider,
+  getDataTableDetailsPanelId,
+  useDataTableDetailsPanel,
 };
 
 export type { DetailsPanelProps };

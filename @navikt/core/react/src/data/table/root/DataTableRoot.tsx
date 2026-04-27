@@ -10,7 +10,7 @@ import {
   DataTableEmptyState,
   type DataTableEmptyStateProps,
 } from "../empty-state/DataTableEmptyState";
-import { DataTableExpansionProvider } from "../hooks/useTableExpansion";
+import { DataTableDetailsPanelProvider } from "../hooks/useTableDetailsPanel";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
@@ -238,7 +238,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         showLoadingOverlay={false}
         columns={[]}
       >
-        <DataTableExpansionProvider>
+        <DataTableDetailsPanelProvider>
           <div className="aksel-data-table__border-wrapper">
             <div className="aksel-data-table__scroll-wrapper">
               <table
@@ -253,7 +253,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
               />
             </div>
           </div>
-        </DataTableExpansionProvider>
+        </DataTableDetailsPanelProvider>
       </DataTableContextProvider>
     );
   },

@@ -78,8 +78,10 @@ describe("useTableItems", () => {
       useTableItems({
         items: nestedRows,
         getRowId: (row) => row.id,
-        getSubRows,
-        defaultExpandedSubRowIds: ["a"],
+        subRows: {
+          getSubRows,
+          defaultExpandedSubRowIds: ["a"],
+        },
       }),
     );
 
@@ -91,7 +93,7 @@ describe("useTableItems", () => {
       useTableItems({
         items: nestedRows,
         getRowId: (row) => row.id,
-        getSubRows,
+        subRows: { getSubRows },
       }),
     );
 
@@ -104,8 +106,11 @@ describe("useTableItems", () => {
     const { result } = renderHook(() =>
       useTableItems({
         items: fallbackRows,
-        getSubRows: (row) => row.subRows ?? [],
-        defaultExpandedSubRowIds: [0],
+        getRowId: (_, index) => index,
+        subRows: {
+          getSubRows: (row: any) => row.subRows ?? [],
+          defaultExpandedSubRowIds: [0],
+        },
       }),
     );
 
@@ -121,8 +126,10 @@ describe("useTableItems", () => {
         useTableItems({
           items: nestedRows,
           getRowId: (row) => row.id,
-          getSubRows,
-          expandedSubRowIds: expandedIds,
+          subRows: {
+            getSubRows,
+            expandedSubRowIds: expandedIds,
+          },
         }),
       {
         initialProps: { expandedIds: [] as (string | number)[] },

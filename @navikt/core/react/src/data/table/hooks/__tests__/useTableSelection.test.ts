@@ -42,7 +42,7 @@ describe("useTableSelection", () => {
     test("returns empty selectedKeys and no prop getters", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "none",
+          selection: { selectionMode: "none" },
           visibleRowIds,
         }),
       );
@@ -56,7 +56,7 @@ describe("useTableSelection", () => {
     test("returns getRowRadioProps", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "single",
+          selection: { selectionMode: "single" },
           visibleRowIds,
         }),
       );
@@ -69,9 +69,8 @@ describe("useTableSelection", () => {
       const onChange = vi.fn();
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "single",
+          selection: { selectionMode: "single", onSelectionChange: onChange },
           visibleRowIds,
-          onSelectionChange: onChange,
         }),
       );
 
@@ -88,9 +87,8 @@ describe("useTableSelection", () => {
     test("toggling the same row keeps it selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "single",
+          selection: { selectionMode: "single", defaultSelectedKeys: ["a"] },
           visibleRowIds,
-          defaultSelectedKeys: ["a"],
         }),
       );
 
@@ -106,9 +104,8 @@ describe("useTableSelection", () => {
     test("selecting a new row replaces the previous", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "single",
+          selection: { selectionMode: "single", defaultSelectedKeys: ["a"] },
           visibleRowIds,
-          defaultSelectedKeys: ["a"],
         }),
       );
 
@@ -124,9 +121,8 @@ describe("useTableSelection", () => {
     test("disabled rows have disabled prop", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "single",
+          selection: { selectionMode: "single", disabledSelectionKeys: ["b"] },
           visibleRowIds,
-          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -138,9 +134,8 @@ describe("useTableSelection", () => {
       const { result, rerender } = renderHook(
         ({ selectedKeys }) =>
           useTableSelection({
-            selectionMode: "single",
+            selection: { selectionMode: "single", selectedKeys },
             visibleRowIds,
-            selectedKeys,
           }),
         { initialProps: { selectedKeys: ["a"] as (string | number)[] } },
       );
@@ -156,7 +151,7 @@ describe("useTableSelection", () => {
     test("returns getTheadCheckboxProps and getRowCheckboxProps", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds,
         }),
       );
@@ -169,7 +164,7 @@ describe("useTableSelection", () => {
     test("selecting individual rows", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds,
         }),
       );
@@ -194,9 +189,11 @@ describe("useTableSelection", () => {
     test("deselecting a row", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "b"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "b"],
         }),
       );
 
@@ -212,7 +209,7 @@ describe("useTableSelection", () => {
     test("select all via thead checkbox", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds,
         }),
       );
@@ -229,7 +226,7 @@ describe("useTableSelection", () => {
     test("select all via thead includes hidden descendants for visible parents", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds: ["a"],
           childRowIdsById,
         }),
@@ -247,9 +244,11 @@ describe("useTableSelection", () => {
     test("deselect all when all are selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "b", "c"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
 
@@ -265,10 +264,12 @@ describe("useTableSelection", () => {
     test("deselect all clears hidden descendants for visible parents but preserves unrelated keys", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "a1", "a2", "a2a", "external"],
+          },
           visibleRowIds: ["a"],
           childRowIdsById,
-          defaultSelectedKeys: ["a", "a1", "a2", "a2a", "external"],
         }),
       );
 
@@ -284,9 +285,11 @@ describe("useTableSelection", () => {
     test("select all skips disabled keys", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            disabledSelectionKeys: ["b"],
+          },
           visibleRowIds,
-          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -302,10 +305,12 @@ describe("useTableSelection", () => {
     test("deselect all preserves disabled-but-selected rows", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "b", "c"],
+            disabledSelectionKeys: ["b"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "b", "c"],
-          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -321,9 +326,8 @@ describe("useTableSelection", () => {
     test("thead checkbox shows indeterminate when partially selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple", defaultSelectedKeys: ["a"] },
           visibleRowIds,
-          defaultSelectedKeys: ["a"],
         }),
       );
 
@@ -335,9 +339,11 @@ describe("useTableSelection", () => {
     test("thead checkbox shows checked when all selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "b", "c"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
 
@@ -349,10 +355,12 @@ describe("useTableSelection", () => {
     test("thead checkbox shows checked when all selectable rows are selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "c"],
+            disabledSelectionKeys: ["b"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "c"],
-          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -364,9 +372,11 @@ describe("useTableSelection", () => {
     test("deselecting one row when all rows are selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            defaultSelectedKeys: ["a", "b", "c"],
+          },
           visibleRowIds,
-          defaultSelectedKeys: ["a", "b", "c"],
         }),
       );
 
@@ -382,9 +392,11 @@ describe("useTableSelection", () => {
     test("disabled rows have disabled prop", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            disabledSelectionKeys: ["b"],
+          },
           visibleRowIds,
-          disabledSelectionKeys: ["b"],
         }),
       );
 
@@ -395,9 +407,11 @@ describe("useTableSelection", () => {
     test("thead checkbox disabled when all rows disabled", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: {
+            selectionMode: "multiple",
+            disabledSelectionKeys: ["a", "b", "c"],
+          },
           visibleRowIds,
-          disabledSelectionKeys: ["a", "b", "c"],
         }),
       );
 
@@ -407,10 +421,9 @@ describe("useTableSelection", () => {
     test("parent rows show indeterminate when visible descendants are partially selected", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple", defaultSelectedKeys: ["a1"] },
           visibleRowIds: ["a", "a1", "a2"],
           childRowIdsById,
-          defaultSelectedKeys: ["a1"],
         }),
       );
 
@@ -423,7 +436,7 @@ describe("useTableSelection", () => {
     test("toggling a parent row selects and deselects its descendants", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds: ["a", "a1", "a2"],
           childRowIdsById,
         }),
@@ -449,7 +462,7 @@ describe("useTableSelection", () => {
     test("toggling a collapsed parent selects and deselects hidden descendants", () => {
       const { result } = renderHook(() =>
         useTableSelection({
-          selectionMode: "multiple",
+          selection: { selectionMode: "multiple" },
           visibleRowIds: ["a"],
           childRowIdsById,
         }),
