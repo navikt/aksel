@@ -586,12 +586,16 @@ function DataTableExpandedRow<T>({
     return null;
   }
 
+  const panelHeight = getDetailsPanelHeight?.(rowData);
+
+  const style: React.CSSProperties = panelHeight
+    ? { height: panelHeight, overflow: "auto" }
+    : { height: "auto" };
+
   return (
     <tr>
       <td id={expansionId} colSpan={fullWidthColSpan}>
-        <div style={{ height: getDetailsPanelHeight?.(rowData) }}>
-          {content}
-        </div>
+        <div style={style}>{content}</div>
       </td>
     </tr>
   );
