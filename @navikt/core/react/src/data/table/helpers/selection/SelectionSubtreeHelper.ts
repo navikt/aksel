@@ -65,6 +65,15 @@ class SelectionSubtreeHelper {
    *
    * The selectable count excludes disabled rows, and the selected count excludes disabled rows that are selected.
    * The method is implemented iteratively to handle deep trees without hitting call stack limits.
+   *
+   * How it works:
+   * - Manually add root ID to stack to get processing going. Note that the ready-flag is `false`.
+   * - Pop stack until empty. For each entry:
+   * - - If entry is already cached, skip it.
+   * - - If entry is not ready, push it back as ready and push all its children as not ready.
+   * - - If entry is ready, compute its stats based on its own state and the stats of its children, then cache the result.
+   * - Since we add all the children to the stack after pushing element with ready: true, while "popping" the stack we will always encounter the children before their parent is ready, ensuring that the stats for all children are computed and cached before computing the stats for their parent.
+   * - Finally, return the cached stats for the root ID.
    */
   getSelectionStats(rootId: SelectionKey): SelectionStats {
     const cachedStats = this.selectionStatsCache.get(rootId);
@@ -73,7 +82,7 @@ class SelectionSubtreeHelper {
       return cachedStats;
     }
 
-    // Compute subtree totals iteratively so deep trees do not depend on call stack depth.
+    /* Compute subtree totals iteratively so deep trees do not depend on call stack depth. */
     const stack: { key: SelectionKey; ready: boolean }[] = [
       { key: rootId, ready: false },
     ];
