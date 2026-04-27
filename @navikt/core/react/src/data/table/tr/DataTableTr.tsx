@@ -46,13 +46,8 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const {
-      layout,
-      stickyHeader,
-      selectionState,
-      onRowClick,
-      disableRowSelectionOnClick,
-    } = useDataTableContext();
+    const { layout, stickyHeader, selectionState, onRowClick } =
+      useDataTableContext();
     const { location } = useDataTableLocation();
 
     const renderFillerCell = layout === "fixed" && children;
@@ -81,7 +76,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
             }
 
             if (
-              !disableRowSelectionOnClick &&
+              !selectionState.disableRowSelectionOnClick &&
               selectionState.selection.selectionMode !== "none"
             ) {
               selectionState.selection.toggleSelection(rowId);

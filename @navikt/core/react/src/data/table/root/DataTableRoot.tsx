@@ -235,7 +235,6 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         tableId={useId()}
         showLoadingSkeletons={false}
         onRowClick={undefined}
-        disableRowSelectionOnClick={false}
         showLoadingOverlay={false}
         columns={[]}
       >

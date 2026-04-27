@@ -14,7 +14,6 @@ type DataTableContextProps<T> = {
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
-  disableRowSelectionOnClick: boolean;
   isLoading?: boolean;
   showLoadingOverlay: boolean;
   columns: UseColumnOptionsResult<T>["columns"];

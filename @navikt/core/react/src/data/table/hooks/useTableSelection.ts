@@ -9,7 +9,8 @@ import type {
   TableSelection,
 } from "../helpers/selection/selection.types";
 
-type UseTableSelectionArgs = SelectionProps & {
+type UseTableSelectionArgs = {
+  selection?: SelectionProps;
   /* Visible rows manage the header checkbox state and render selection cells. */
   visibleRowIds: (string | number)[];
   /* Direct child ids let selection walk nested rows lazily. */
@@ -19,17 +20,23 @@ type UseTableSelectionArgs = SelectionProps & {
 type UseTableSelectionReturn = {
   selection: TableSelection;
   renderSelection: boolean;
+  disableRowSelectionOnClick: boolean;
 };
 
 function useTableSelection({
-  selectionMode = "none",
-  defaultSelectedKeys,
-  selectedKeys: selectedKeysProp,
-  onSelectionChange,
-  disabledSelectionKeys = [],
+  selection = {},
   visibleRowIds = [],
   childRowIdsById,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
+  const {
+    selectionMode = "none",
+    defaultSelectedKeys,
+    selectedKeys: selectedKeysProp,
+    onSelectionChange,
+    disabledSelectionKeys = [],
+    disableRowSelectionOnClick = false,
+  } = selection;
+
   const radioGroupName = useId();
 
   const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
@@ -59,6 +66,7 @@ function useTableSelection({
         ...baseSelection,
         selectedKeys: [],
       },
+      disableRowSelectionOnClick,
       renderSelection: false,
     };
   }
@@ -75,6 +83,7 @@ function useTableSelection({
           name: radioGroupName,
         }),
       },
+      disableRowSelectionOnClick,
       renderSelection: visibleRowIds.length !== 0,
     };
   }
@@ -92,6 +101,7 @@ function useTableSelection({
         childRowIdsById,
       }),
     },
+    disableRowSelectionOnClick,
     renderSelection: visibleRowIds.length !== 0,
   };
 }
@@ -106,6 +116,7 @@ const noSelectionState: UseTableSelectionReturn = {
     disabledSelectionKeys: [],
     isRowSelected: () => false,
   },
+  disableRowSelectionOnClick: false,
   renderSelection: false,
 };
 

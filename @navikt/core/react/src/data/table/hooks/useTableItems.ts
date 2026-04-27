@@ -7,27 +7,18 @@ import {
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
 
-type UseTableItemsArgs<T> = {
-  items: T[];
-  getRowId?: (rowData: T, index: number) => string | number;
-  /**
-   * Master - Detail pattern props
-   */
-  /* expandedDetailsPanelIds?: (string | number)[];
-  defaultExpandedDetailsPanelIds?: (string | number)[];
-  isDetailsPanelExpandable?: (rowData: T) => boolean;
-  onDetailsPanelChange?: (ids: (string | number)[]) => void;
-
-  getDetailsPanelHeight?: (row: T) => number | "auto";
-  getDetailsPanelContent?: (row: T) => React.ReactNode; */
-  /**
-   * Expanded/Nested rows pattern props
-   */
+type SubRowsProps<T> = {
   getSubRows?: (rowData: T) => T[];
   expandedSubRowIds?: (string | number)[];
   defaultExpandedSubRowIds?: (string | number)[];
   isSubRowExpandable?: (rowData: T) => boolean;
   onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
+};
+
+type UseTableItemsArgs<T> = {
+  items: T[];
+  getRowId: (rowData: T, index: number) => TableRowEntryId;
+  subRows?: SubRowsProps<T>;
 };
 
 type useTableItemsReturn<T> = {
@@ -42,15 +33,16 @@ type useTableItemsReturn<T> = {
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
+  const { items, subRows = {}, getRowId } = args;
+
   const {
-    items,
     expandedSubRowIds,
     defaultExpandedSubRowIds,
     getSubRows,
-    getRowId,
+
     onExpandedSubRowIdsChange,
     isSubRowExpandable,
-  } = args;
+  } = subRows;
 
   const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
     useControllableState({
@@ -143,4 +135,4 @@ const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   });
 
 export { useTableItems, TableItemsProvider, useTableItemsContext };
-export type { ItemDetail };
+export type { ItemDetail, SubRowsProps };

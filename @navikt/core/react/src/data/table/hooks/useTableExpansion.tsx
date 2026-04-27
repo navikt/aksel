@@ -3,6 +3,48 @@ import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import { useTableItemsContext } from "./useTableItems";
 
+type DetailsPanelProps<T> = {
+  /**
+   * Renders a details panel below the row when expanded.
+   * When provided, an expand toggle column is added automatically.
+   */
+  getDetailsPanelContent?: (rowData: T) => React.ReactNode;
+  /**
+   * Determines whether a row can be expanded to show details panel content.
+   * @default () => true
+   */
+  isDetailsPanelExpandable?: (rowData: T) => boolean;
+  /**
+   * Controlled list of expanded row IDs.
+   * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
+   */
+  detailsPanelRowIds?: (string | number)[];
+  /**
+   * Initial list of expanded row IDs for uncontrolled usage.
+   * @default []
+   */
+  defaultDetailsPanelRowIds?: (string | number)[];
+  /**
+   * Called when the list of expanded row IDs changes.
+   *
+   *
+   * TODO:
+   * - Docs: This pattern is called "Master / Detail" in general terms
+   */
+  onDetailsPanelChange?: (ids: (string | number)[]) => void;
+  /**
+   * Returns the height (in px) or `"auto"` for a row's details panel.
+   * When a number is returned, the panel scrolls within that fixed height.
+   * @default "auto"
+   */
+  getDetailsPanelHeight?: (rowData: T) => number | "auto";
+  /**
+   * Shows an expand-all toggle button in the expand column header.
+   * @default false
+   */
+  showExpandAll?: boolean;
+};
+
 type DataTableExpansionContextT = {
   isExpanded: (id: string | number) => boolean;
   isDetailsPanelExpandable: (id: string | number) => boolean;
@@ -24,30 +66,20 @@ const {
     "useDataTableExpansion must be used within a DataTableExpansionProvider.",
 });
 
-type TableExpansionOptions<T> = {
-  detailsPanelRowIds?: (string | number)[];
-  defaultDetailsPanelRowIds?: (string | number)[];
-  onDetailsPanelChange?: (ids: (string | number)[]) => void;
-  getDetailsPanelContent?: (row: T) => React.ReactNode;
-  isDetailsPanelExpandable?: (rowData: T) => boolean;
-  getDetailsPanelHeight?: (row: T) => number | "auto";
-  showExpandAll?: boolean;
-};
-
-function getDataTableExpansionId(tableId: string, rowId: string | number) {
-  return `${tableId}-expansion-${rowId}`;
-}
-
 function DataTableExpansionProvider<T>({
   children,
-  detailsPanelRowIds,
-  defaultDetailsPanelRowIds = [],
-  onDetailsPanelChange,
-  getDetailsPanelContent,
-  isDetailsPanelExpandable,
-  getDetailsPanelHeight,
-  showExpandAll = false,
-}: TableExpansionOptions<T> & { children: React.ReactNode }) {
+  detailsPanel = {},
+}: { detailsPanel?: DetailsPanelProps<T> } & { children: React.ReactNode }) {
+  const {
+    detailsPanelRowIds,
+    defaultDetailsPanelRowIds = [],
+    onDetailsPanelChange,
+    getDetailsPanelContent,
+    isDetailsPanelExpandable,
+    getDetailsPanelHeight,
+    showExpandAll = false,
+  } = detailsPanel;
+
   const [expandedIds, setExpandedIds] = useControllableState({
     value: detailsPanelRowIds,
     defaultValue: defaultDetailsPanelRowIds,
@@ -139,8 +171,14 @@ function DataTableExpansionProvider<T>({
   );
 }
 
+function getDataTableExpansionId(tableId: string, rowId: string | number) {
+  return `${tableId}-expansion-${rowId}`;
+}
+
 export {
   DataTableExpansionProvider,
   getDataTableExpansionId,
   useDataTableExpansion,
 };
+
+export type { DetailsPanelProps };

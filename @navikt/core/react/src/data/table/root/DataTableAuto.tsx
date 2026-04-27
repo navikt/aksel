@@ -12,11 +12,13 @@ import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableExpansionProvider,
+  type DetailsPanelProps,
   getDataTableExpansionId,
   useDataTableExpansion,
 } from "../hooks/useTableExpansion";
 import {
   type ItemDetail,
+  type SubRowsProps,
   TableItemsProvider,
   useTableItems,
   useTableItemsContext,
@@ -168,62 +170,9 @@ interface DataTableProps<T>
    * TODO:
    * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
-
-  /**
-   * Props for row selection functionality.
-   */
   selection?: SelectionProps;
-  /**
-   *
-   */
-  subRows?: {
-    getSubRows?: (rowData: T) => T[];
-    expandedSubRowIds?: (string | number)[];
-    defaultExpandedSubRowIds?: (string | number)[];
-    isSubRowExpandable?: (rowData: T) => boolean;
-    onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
-  };
-  detailsPanel?: {
-    /**
-     * Renders a details panel below the row when expanded.
-     * When provided, an expand toggle column is added automatically.
-     */
-    getDetailsPanelContent?: (rowData: T) => React.ReactNode;
-    /**
-     * Determines whether a row can be expanded to show details panel content.
-     * @default () => true
-     */
-    isDetailsPanelExpandable?: (rowData: T) => boolean;
-    /**
-     * Controlled list of expanded row IDs.
-     * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
-     */
-    detailsPanelRowIds?: (string | number)[];
-    /**
-     * Initial list of expanded row IDs for uncontrolled usage.
-     * @default []
-     */
-    defaultDetailsPanelRowIds?: (string | number)[];
-    /**
-     * Called when the list of expanded row IDs changes.
-     *
-     *
-     * TODO:
-     * - Docs: This pattern is called "Master / Detail" in general terms
-     */
-    onDetailsPanelChange?: (ids: (string | number)[]) => void;
-    /**
-     * Returns the height (in px) or `"auto"` for a row's details panel.
-     * When a number is returned, the panel scrolls within that fixed height.
-     * @default "auto"
-     */
-    getDetailsPanelHeight?: (rowData: T) => number | "auto";
-    /**
-     * Shows an expand-all toggle button in the expand column header.
-     * @default false
-     */
-    showExpandAll?: boolean;
-  };
+  subRows?: SubRowsProps<T>;
+  detailsPanel?: DetailsPanelProps<T>;
 }
 
 function DataTableAutoInner<T>(
@@ -267,39 +216,14 @@ function DataTableAutoInner<T>(
 
   const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-  const {
-    getSubRows,
-    expandedSubRowIds,
-    defaultExpandedSubRowIds,
-    isSubRowExpandable,
-    onExpandedSubRowIdsChange,
-  } = subRows || {};
-
   const tableItems = useTableItems({
     items: data,
-    getRowId,
-    getSubRows,
-    expandedSubRowIds,
-    defaultExpandedSubRowIds,
-    isSubRowExpandable,
-    onExpandedSubRowIdsChange,
+    getRowId: getRowId ?? ((_, index) => index),
+    subRows,
   });
 
-  const {
-    selectionMode: selectionModeProp = "none",
-    selectedKeys,
-    defaultSelectedKeys,
-    onSelectionChange,
-    disabledSelectionKeys = [],
-    disableRowSelectionOnClick = false,
-  } = selection || {};
-
   const tableSelectionState = useTableSelection({
-    selectionMode: selectionModeProp,
-    selectedKeys,
-    defaultSelectedKeys,
-    onSelectionChange,
-    disabledSelectionKeys,
+    selection,
     visibleRowIds: tableItems.visibleRowIds,
     childRowIdsById: tableItems.childRowIdsById,
   });
@@ -308,16 +232,6 @@ function DataTableAutoInner<T>(
     stickyColumns,
     selectionMode: tableSelectionState.selection.selectionMode,
   });
-
-  const {
-    getDetailsPanelContent,
-    isDetailsPanelExpandable,
-    getDetailsPanelHeight,
-    showExpandAll = false,
-    detailsPanelRowIds,
-    defaultDetailsPanelRowIds,
-    onDetailsPanelChange,
-  } = detailsPanel || {};
 
   const {
     isLoading = false,
@@ -330,7 +244,7 @@ function DataTableAutoInner<T>(
     columns.length +
     (layout === "fixed" ? 1 : 0) +
     (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
-    (getDetailsPanelContent ? 1 : 0);
+    (detailsPanel?.getDetailsPanelContent ? 1 : 0);
 
   const tableId = useId(id);
 
@@ -344,7 +258,6 @@ function DataTableAutoInner<T>(
       tableId={tableId}
       showLoadingSkeletons={isLoading && loadingState == null}
       onRowClick={onRowClick}
-      disableRowSelectionOnClick={disableRowSelectionOnClick}
       isLoading={isLoading}
       showLoadingOverlay={isLoading && !loadingState && !loadingRows}
       columns={columns}
@@ -355,15 +268,7 @@ function DataTableAutoInner<T>(
         onExpandedSubRowIdsChange={tableItems.onExpandedSubRowIdsChange}
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
-        <DataTableExpansionProvider
-          detailsPanelRowIds={detailsPanelRowIds}
-          defaultDetailsPanelRowIds={defaultDetailsPanelRowIds}
-          onDetailsPanelChange={onDetailsPanelChange}
-          getDetailsPanelContent={getDetailsPanelContent}
-          isDetailsPanelExpandable={isDetailsPanelExpandable}
-          getDetailsPanelHeight={getDetailsPanelHeight}
-          showExpandAll={showExpandAll}
-        >
+        <DataTableExpansionProvider detailsPanel={detailsPanel}>
           <div className="aksel-data-table__border-wrapper">
             <div className="aksel-data-table__scroll-wrapper">
               <table

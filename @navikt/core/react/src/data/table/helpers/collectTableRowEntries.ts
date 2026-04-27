@@ -2,7 +2,7 @@ type TableRowEntryId = string | number;
 
 type CollectTableRowEntriesArgs<T> = {
   items: T[];
-  getRowId?: (rowData: T, index: number) => TableRowEntryId;
+  getRowId: (rowData: T, index: number) => TableRowEntryId;
   getSubRows?: (rowData: T) => T[];
   isSubRowExpandable?: (rowData: T) => boolean;
 };
@@ -37,11 +37,8 @@ function collectTableRowEntries<T>({
     rowIndex: number,
     level: number,
     parent: T | null,
-    parentId?: TableRowEntryId,
   ): TableRowEntryId => {
-    const rowId =
-      getRowId?.(rowData, rowIndex) ??
-      (parentId == null ? rowIndex : `${parentId}-${rowIndex}`);
+    const rowId = getRowId(rowData, rowIndex);
     const isRowExpandable = isSubRowExpandable?.(rowData) ?? true;
     const children = (isRowExpandable ? getSubRows?.(rowData) : []) ?? [];
 
@@ -56,13 +53,7 @@ function collectTableRowEntries<T>({
 
     for (let childIndex = 0; childIndex < children.length; childIndex++) {
       const childRow = children[childIndex];
-      const childRowId = traverseRow(
-        childRow,
-        childIndex,
-        level + 1,
-        rowData,
-        rowId,
-      );
+      const childRowId = traverseRow(childRow, childIndex, level + 1, rowData);
       childRowIds.push(childRowId);
     }
 
