@@ -803,7 +803,7 @@ export const RowExpansion: Story = {
       }}
       withKeyboardNav
       detailsPanel={{
-        getDetailsPanelContent: (rowData) => {
+        getContent: (rowData) => {
           return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
         },
       }}
@@ -824,7 +824,7 @@ export const RowExpansionAll: Story = {
       }}
       withKeyboardNav
       detailsPanel={{
-        getDetailsPanelContent: (rowData) => {
+        getContent: (rowData) => {
           return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
         },
         showExpandAll: true,
@@ -857,7 +857,7 @@ export const NestedRows: Story = {
       }}
       withKeyboardNav
       subRows={{
-        getSubRows: (row) => row.children,
+        getRows: (row) => row.children,
       }}
     />
   ),
@@ -912,7 +912,7 @@ export const NestedLeftAlignedContentRows: Story = {
       }}
       withKeyboardNav
       subRows={{
-        getSubRows: (row) => row.children,
+        getRows: (row) => row.children,
       }}
     />
   ),
@@ -937,7 +937,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
       }}
       withKeyboardNav
       subRows={{
-        getSubRows: (row) => row.children,
+        getRows: (row) => row.children,
       }}
     />
   ),
@@ -962,17 +962,17 @@ export const NestedRowsWithMasterDetail: Story = {
       }}
       withKeyboardNav
       subRows={{
-        getSubRows: (row) => row.children,
+        getRows: (row) => row.children,
       }}
       detailsPanel={{
-        getDetailsPanelContent: () => (
+        getContent: () => (
           <div>
             This is the details panel content. It should be possible to interact
             with the content here without triggering row clicks or affecting row
             selection.
           </div>
         ),
-        getDetailsPanelHeight: () => 100,
+        getHeight: () => 100,
       }}
     />
   ),

@@ -8,22 +8,22 @@ type DetailsPanelProps<T> = {
    * Renders a details panel below the row when expanded.
    * When provided, an expand toggle column is added automatically.
    */
-  getDetailsPanelContent?: (rowData: T) => React.ReactNode;
+  getContent?: (rowData: T) => React.ReactNode;
   /**
    * Determines whether a row can be expanded to show details panel content.
    * @default () => true
    */
-  isDetailsPanelExpandable?: (rowData: T) => boolean;
+  isRowExpandable?: (rowData: T) => boolean;
   /**
    * Controlled list of expanded row IDs.
    * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
    */
-  detailsPanelRowIds?: (string | number)[];
+  expandedRowIds?: (string | number)[];
   /**
    * Initial list of expanded row IDs for uncontrolled usage.
    * @default []
    */
-  defaultDetailsPanelRowIds?: (string | number)[];
+  defaultExpandedRowIds?: (string | number)[];
   /**
    * Called when the list of expanded row IDs changes.
    *
@@ -31,13 +31,13 @@ type DetailsPanelProps<T> = {
    * TODO:
    * - Docs: This pattern is called "Master / Detail" in general terms
    */
-  onDetailsPanelChange?: (ids: (string | number)[]) => void;
+  onExpandedRowIdsChange?: (ids: (string | number)[]) => void;
   /**
    * Returns the height (in px) or `"auto"` for a row's details panel.
    * When a number is returned, the panel scrolls within that fixed height.
    * @default "auto"
    */
-  getDetailsPanelHeight?: (rowData: T) => number | "auto";
+  getHeight?: (rowData: T) => number | "auto";
   /**
    * Shows an expand-all toggle button in the expand column header.
    * @default false
@@ -71,19 +71,19 @@ function DataTableDetailsPanelProvider<T>({
   detailsPanel = {},
 }: { detailsPanel?: DetailsPanelProps<T> } & { children: React.ReactNode }) {
   const {
-    detailsPanelRowIds,
-    defaultDetailsPanelRowIds = [],
-    onDetailsPanelChange,
-    getDetailsPanelContent,
-    isDetailsPanelExpandable,
-    getDetailsPanelHeight,
+    expandedRowIds,
+    defaultExpandedRowIds = [],
+    onExpandedRowIdsChange,
+    getContent,
+    isRowExpandable,
+    getHeight,
     showExpandAll = false,
   } = detailsPanel;
 
   const [expandedIds, setExpandedIds] = useControllableState({
-    value: detailsPanelRowIds,
-    defaultValue: defaultDetailsPanelRowIds,
-    onChange: onDetailsPanelChange,
+    value: expandedRowIds,
+    defaultValue: defaultExpandedRowIds,
+    onChange: onExpandedRowIdsChange,
   });
 
   /* TODO: False is just fallback until auto and root is merged */
@@ -94,7 +94,7 @@ function DataTableDetailsPanelProvider<T>({
   };
 
   const expandableIds = React.useMemo(() => {
-    if (!getDetailsPanelContent) {
+    if (!getContent) {
       return new Set<string | number>();
     }
 
@@ -106,13 +106,13 @@ function DataTableDetailsPanelProvider<T>({
         continue;
       }
 
-      if (!isDetailsPanelExpandable || isDetailsPanelExpandable(rowData)) {
+      if (!isRowExpandable || isRowExpandable(rowData)) {
         ids.add(id);
       }
     }
 
     return ids;
-  }, [getDetailsPanelContent, isDetailsPanelExpandable, itemDetails]);
+  }, [getContent, isRowExpandable, itemDetails]);
 
   const isDetailsPanelExpandableById = useCallback(
     (id: string | number) => expandableIds.has(id),
@@ -156,15 +156,13 @@ function DataTableDetailsPanelProvider<T>({
       toggleAll={toggleAll}
       isAllExpanded={isAllExpanded}
       getDetailsPanelContent={
-        getDetailsPanelContent as
-          | ((row: unknown) => React.ReactNode)
-          | undefined
+        getContent as ((row: unknown) => React.ReactNode) | undefined
       }
       getDetailsPanelHeight={
-        getDetailsPanelHeight as ((row: unknown) => number | "auto") | undefined
+        getHeight as ((row: unknown) => number | "auto") | undefined
       }
       showExpandAll={showExpandAll}
-      enableDetailsPanel={!!getDetailsPanelContent}
+      enableDetailsPanel={!!getContent}
     >
       {children}
     </DataTableDetailsPanelContextProvider>

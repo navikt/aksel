@@ -249,7 +249,7 @@ function DataTableAutoInner<T>(
     columns.length +
     (layout === "fixed" ? 1 : 0) +
     (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
-    (detailsPanel?.getDetailsPanelContent ? 1 : 0);
+    (detailsPanel?.getContent ? 1 : 0);
 
   const tableId = useId(id);
 
@@ -270,7 +270,7 @@ function DataTableAutoInner<T>(
       <TableItemsProvider
         itemDetails={tableItems.itemDetails}
         items={tableItems.items}
-        onExpandedSubRowIdsChange={tableItems.onExpandedSubRowIdsChange}
+        onExpandedRowIdsChange={tableItems.onExpandedRowIdsChange}
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
         <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
@@ -459,8 +459,7 @@ function DataTableAutoTBodyContent({
 }
 
 function NestedRowToggle({ details }: { details: ItemDetail<any> }) {
-  const { isSubRowExpanded, onExpandedSubRowIdsChange } =
-    useTableItemsContext();
+  const { isSubRowExpanded, onExpandedRowIdsChange } = useTableItemsContext();
 
   const subRows = details.children;
   const hasSubRows = subRows && subRows.length > 0;
@@ -475,7 +474,7 @@ function NestedRowToggle({ details }: { details: ItemDetail<any> }) {
           size="small"
           onClick={(e) => {
             e.stopPropagation();
-            onExpandedSubRowIdsChange(details.id);
+            onExpandedRowIdsChange(details.id);
           }}
           aria-expanded={isRowExpanded}
           aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}

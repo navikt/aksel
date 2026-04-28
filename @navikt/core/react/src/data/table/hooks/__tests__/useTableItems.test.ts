@@ -79,8 +79,8 @@ describe("useTableItems", () => {
         items: nestedRows,
         getRowId: (row) => row.id,
         subRows: {
-          getSubRows,
-          defaultExpandedSubRowIds: ["a"],
+          getRows: getSubRows,
+          defaultExpandedRowIds: ["a"],
         },
       }),
     );
@@ -93,7 +93,7 @@ describe("useTableItems", () => {
       useTableItems({
         items: nestedRows,
         getRowId: (row) => row.id,
-        subRows: { getSubRows },
+        subRows: { getRows: getSubRows },
       }),
     );
 
@@ -108,8 +108,8 @@ describe("useTableItems", () => {
         items: fallbackRows,
         getRowId: (_, index) => index,
         subRows: {
-          getSubRows: (row: any) => row.subRows ?? [],
-          defaultExpandedSubRowIds: [0],
+          getRows: (row: any) => row.subRows ?? [],
+          defaultExpandedRowIds: [0],
         },
       }),
     );
@@ -127,8 +127,8 @@ describe("useTableItems", () => {
           items: nestedRows,
           getRowId: (row) => row.id,
           subRows: {
-            getSubRows,
-            expandedSubRowIds: expandedIds,
+            getRows: getSubRows,
+            expandedRowIds: expandedIds,
           },
         }),
       {

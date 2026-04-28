@@ -76,7 +76,7 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
-      subRows={{ getSubRows }}
+      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
     />
   ),
@@ -108,8 +108,8 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
       columnDefinitions={columns}
       data={fallbackIdData}
       subRows={{
-        getSubRows,
-        defaultExpandedSubRowIds: [0],
+        getRows: getSubRows,
+        defaultExpandedRowIds: [0],
       }}
       getRowId={(row) => row.id}
       selection={{ selectionMode: "multiple" }}
@@ -137,7 +137,7 @@ export const ParentSelectionFollowsVisibleNestedRows: Story = {
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
-      subRows={{ getSubRows }}
+      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
     />
   ),
@@ -171,7 +171,7 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      subRows={{ getSubRows }}
+      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
     />
   ),
@@ -214,7 +214,7 @@ export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      subRows={{ getSubRows }}
+      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
     />
   ),

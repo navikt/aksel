@@ -3,8 +3,8 @@ type TableRowEntryId = string | number;
 type CollectTableRowEntriesArgs<T> = {
   items: T[];
   getRowId: (rowData: T, index: number) => TableRowEntryId;
-  getSubRows?: (rowData: T) => T[];
-  isSubRowExpandable?: (rowData: T) => boolean;
+  getRows?: (rowData: T) => T[];
+  isRowExpandable?: (rowData: T) => boolean;
 };
 
 interface ItemDetail<T> {
@@ -26,8 +26,8 @@ type CollectTableRowEntriesReturn<T> = {
 function collectTableRowEntries<T>({
   items,
   getRowId,
-  getSubRows,
-  isSubRowExpandable,
+  getRows,
+  isRowExpandable,
 }: CollectTableRowEntriesArgs<T>): CollectTableRowEntriesReturn<T> {
   const itemDetailsMap = new Map<T, ItemDetail<T>>();
   const childRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
@@ -39,8 +39,9 @@ function collectTableRowEntries<T>({
     parent: T | null,
   ): TableRowEntryId => {
     const rowId = getRowId(rowData, rowIndex);
-    const isRowExpandable = isSubRowExpandable?.(rowData) ?? true;
-    const children = (isRowExpandable ? getSubRows?.(rowData) : []) ?? [];
+
+    const children =
+      ((isRowExpandable?.(rowData) ?? true) ? getRows?.(rowData) : []) ?? [];
 
     itemDetailsMap.set(rowData, {
       id: rowId,
