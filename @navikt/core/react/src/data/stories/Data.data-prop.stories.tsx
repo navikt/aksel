@@ -58,7 +58,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Id",
     label: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     defaultWidth: "100px",
   },
   {
@@ -120,8 +120,10 @@ export const ItemsAsDataWithCustomRowId: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
       />
     );
@@ -134,8 +136,10 @@ export const SelectionModeMultiple: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
       />
@@ -149,8 +153,10 @@ export const SelectionModeSingle: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
       />
@@ -164,8 +170,10 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
       />
     );
@@ -178,11 +186,13 @@ export const SelectionWithDisabledRows: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          disabledSelectionKeys: [1, 2],
+        }}
         getRowId={(row) => row.id}
         withKeyboardNav
-        disabledSelectionKeys={[1, 2]}
       />
     );
   },
@@ -205,9 +215,11 @@ export const ControlledSelection: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={userData}
-          selectionMode="multiple"
-          selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: setSelectedKeys,
+            selectedKeys,
+          }}
           getRowId={(row) => row.id}
         />
       </div>
@@ -221,9 +233,11 @@ export const DefaultSelectedKeys: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        defaultSelectedKeys={[1, 3]}
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          defaultSelectedKeys: [1, 3],
+        }}
         getRowId={(row) => row.id}
       />
     );
@@ -236,10 +250,12 @@ export const SingleSelectionWithDisabledRows: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          disabledSelectionKeys: [2],
+        }}
         getRowId={(row) => row.id}
-        disabledSelectionKeys={[2]}
       />
     );
   },
@@ -251,7 +267,9 @@ export const EmptyData: Story = {
       <DataTableAuto
         columnDefinitions={userColumnDef}
         data={[]}
-        selectionMode="multiple"
+        selection={{
+          selectionMode: "multiple",
+        }}
       />
     );
   },
@@ -338,9 +356,16 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
           columnDefinitions={userColumnDef}
           data={userData}
           isLoading={isLoading}
+          loadingLabel="Laster innhold for tabell"
         />
       </VStack>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getAllByText("Laster innhold for tabell")).toHaveLength(1);
+    expect(canvas.getByText("foo2")).toBeInTheDocument();
   },
 };
 
@@ -360,10 +385,12 @@ export const SelectionPagination: Story = {
         <DataTableAuto
           columnDefinitions={userColumnDef}
           data={dataToShow}
-          selectionMode="multiple"
-          onSelectionChange={(keys) => {
-            console.info({ keys });
-            selectionPaginationSpy(keys);
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: (keys) => {
+              console.info({ keys });
+              selectionPaginationSpy(keys);
+            },
           }}
           getRowId={(row) => row.foo + row.bar}
         />
@@ -452,8 +479,10 @@ export const StickySelection: Story = {
           defaultWidth: "350px",
         }))}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
@@ -603,7 +632,7 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     id: "id",
     header: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     sortable: true,
     label: "Id",
   },
@@ -686,7 +715,7 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "id", header: "Id", cell: ({ id }) => id, align: "right", label: "Id" },
   { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
   {
     id: "link",
@@ -719,7 +748,9 @@ export const RowClick: Story = {
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode="multiple"
+      selection={{
+        selectionMode: "multiple",
+      }}
       withKeyboardNav
     />
   ),
@@ -732,7 +763,9 @@ export const RowClickTest: Story = {
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={rowClickSpy}
-      selectionMode="multiple"
+      selection={{
+        selectionMode: "multiple",
+      }}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -769,7 +802,9 @@ export const RowExpansion: Story = {
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+      }}
       withKeyboardNav
       getDetailsPanelContent={(rowData) => {
         return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
@@ -786,7 +821,9 @@ export const RowExpansionAll: Story = {
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+      }}
       withKeyboardNav
       getDetailsPanelContent={(rowData) => {
         return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
@@ -814,10 +851,12 @@ export const NestedRows: Story = {
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+        onSelectionChange: console.info,
+      }}
       withKeyboardNav
       getSubRows={(row) => row.children}
-      onSelectionChange={console.info}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -866,7 +905,9 @@ export const NestedLeftAlignedContentRows: Story = {
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+      }}
       withKeyboardNav
       getSubRows={(row) => row.children}
     />
@@ -887,7 +928,9 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
         })),
       }))}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+      }}
       withKeyboardNav
       getSubRows={(row) => row.children}
     />
@@ -908,7 +951,9 @@ export const NestedRowsWithMasterDetail: Story = {
         })),
       }))}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selectionMode,
+      }}
       withKeyboardNav
       getSubRows={(row) => row.children}
       getDetailsPanelContent={() => <div>Placeholder content</div>}

@@ -15,11 +15,11 @@
     "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel": "^8.10.2",
-    "@navikt/aksel-icons": "^8.10.2",
-    "@navikt/ds-css": "^8.10.2",
-    "@navikt/ds-react": "^8.10.2",
-    "@navikt/ds-tailwind": "^8.10.2",
-    "@navikt/ds-tokens": "^8.10.2"
+    "@navikt/aksel": "^8.10.3",
+    "@navikt/aksel-icons": "^8.10.3",
+    "@navikt/ds-css": "^8.10.3",
+    "@navikt/ds-react": "^8.10.3",
+    "@navikt/ds-tailwind": "^8.10.3",
+    "@navikt/ds-tokens": "^8.10.3"
   }
 }

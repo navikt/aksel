@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "8.10.2",
+  "version": "8.10.3",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -14,7 +14,8 @@
   "files": [
     "*",
     "!dist/version",
-    "!config/bundle.js"
+    "!config/bundle.ts",
+    "!config/get-version.js"
   ],
   "repository": {
     "type": "git",
@@ -30,7 +31,7 @@
     "css:get-version": "node config/get-version.js"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^8.10.2",
+    "@navikt/ds-tokens": "^8.10.3",
     "browserslist": "^4.25.0",
     "esbuild": "^0.27.4",
     "fast-glob": "3.3.3",
@@ -46,9 +47,13 @@
   ],
   "main": "./dist/index.css",
   "exports": {
-    ".": "./dist/index.css",
-    "./dist/*": "./dist/*",
-    "./tokens.json": "./tokens.json",
-    "./config/_mappings": "./config/_mappings.js"
+    ".": {
+      "types": "./types.d.ts",
+      "default": "./dist/index.css"
+    },
+    "./dist/*": {
+      "types": "./types.d.ts",
+      "default": "./dist/*"
+    }
   }
 }
