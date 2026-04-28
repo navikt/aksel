@@ -8,9 +8,8 @@ import {
 import { useControllableState } from "../../../utils/hooks";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
-type ColumnWidth = number | string;
-
 type ResizeProps = {
+  // If/when we add support for composition, consider mentioning that resizing only works on first row in thead.
   /**
    * Whether the column should be resizable by the user.
    *
@@ -18,16 +17,23 @@ type ResizeProps = {
    * @default true
    */
   resizable?: boolean;
+  // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
   /**
-   * Controlled width of the column.
+   * Controlled width of the column. Does not respect `minWidth` and `maxWidth`.
    *
    * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
    */
-  width?: ColumnWidth;
+  width?: number | string;
   /**
    * Initial width of the column. Only used when `width` is not set and `resizable` is true.
+   * Does not respect `minWidth` and `maxWidth`.
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
+   * @default 140px
    */
-  defaultWidth?: ColumnWidth;
+  defaultWidth?: number | string;
   /**
    * Whether the column should automatically resize to fit its content. **Runs only once.**
    *
@@ -40,21 +46,19 @@ type ResizeProps = {
    */
   autoWidth?: boolean;
   /**
-   * Minimum width of the column.
-   *
-   * Should be used in conjunction with `width` or `defaultWidth` to set limits when resizing.
+   * Minimum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
+   * @default 40
    */
-  minWidth?: ColumnWidth;
+  minWidth?: number;
   /**
-   * Maximum width of the column.
-   *
-   * Should be used in conjunction with `width` or `defaultWidth` to set limits when resizing.
+   * Maximum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
    */
-  maxWidth?: ColumnWidth;
+  maxWidth?: number;
   /**
    * Called when the column width changes.
+   * @param width New width in pixels.
    */
-  onWidthChange?: (width: ColumnWidth) => void;
+  onWidthChange?: (width: number | string) => void;
   /**
    * Forwarded styles
    */
@@ -133,10 +137,7 @@ function useTableColumnResize(
 
   const setClampedWidth = useCallback(
     (newWidth: number) => {
-      const min = parseWidth(minWidth) ?? 0;
-      const max = parseWidth(maxWidth) ?? Infinity;
-      const clamped = Math.min(Math.max(newWidth, min), max);
-      setWidth(clamped);
+      setWidth(Math.min(Math.max(newWidth, minWidth), maxWidth));
     },
     [minWidth, maxWidth, setWidth],
   );
@@ -212,14 +213,11 @@ function useTableColumnResize(
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        const min = parseWidth(minWidth) ?? 0;
-        const max = parseWidth(maxWidth) ?? Infinity;
-
-        if (newWidth > max) {
+        if (newWidth > maxWidth) {
           setWidth(newWidth < currentWidth ? newWidth : currentWidth);
           return;
         }
-        if (newWidth < min) {
+        if (newWidth < minWidth) {
           setWidth(newWidth > currentWidth ? newWidth : currentWidth);
           return;
         }
@@ -313,20 +311,6 @@ function useTableColumnResize(
     isResizingWithKeyboard,
     enabled: true,
   };
-}
-
-function parseWidth(width: ColumnWidth | undefined): number | undefined {
-  if (width == null) {
-    return undefined;
-  }
-  if (typeof width === "number") {
-    return width;
-  }
-  if (typeof width === "string") {
-    const parsed = parseInt(width, 10);
-    return Number.isNaN(parsed) ? undefined : parsed;
-  }
-  return undefined;
 }
 
 function getAutoColumnWidth(

@@ -224,9 +224,15 @@ export const FixedLayoutDynamicWidth: Story = {
       <DataTable layout="fixed">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTableColumnHeader width="100%">Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 3</DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 1
+            </DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 2
+            </DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 3
+            </DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>

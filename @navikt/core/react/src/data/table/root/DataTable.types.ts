@@ -1,3 +1,5 @@
+import type { ResizeProps } from "../column-header/useTableColumnResize";
+
 type SortDirection = "asc" | "desc" | "none";
 
 /**
@@ -5,12 +7,17 @@ type SortDirection = "asc" | "desc" | "none";
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
  * - Add "align" property for better control over text alignment in cells.
  */
-type ColumnDefinition<T> = {
+type ColumnDefinition<T> = Pick<
+  ResizeProps,
+  | "resizable"
+  | "width"
+  | "defaultWidth"
+  | "autoWidth"
+  | "minWidth"
+  | "maxWidth"
+  | "onWidthChange"
+> & {
   id: string;
-  width?: number | string;
-  defaultWidth?: number | string;
-  minWidth?: number | string;
-  maxWidth?: number | string;
   /**
    * Text alignment for cells in this column.
    *

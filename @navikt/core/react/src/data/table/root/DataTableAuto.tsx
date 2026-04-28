@@ -297,10 +297,13 @@ function DataTableAutoInner<T>(
                       const sortDirection = sortEntry?.direction ?? "none";
                       return (
                         <DataTableColumnHeader
-                          maxWidth={colDef.maxWidth}
-                          minWidth={colDef.minWidth}
+                          resizable={colDef.resizable}
                           width={colDef.width}
-                          defaultWidth={colDef.defaultWidth ?? "100%"}
+                          defaultWidth={colDef.defaultWidth}
+                          autoWidth={colDef.autoWidth}
+                          minWidth={colDef.minWidth}
+                          maxWidth={colDef.maxWidth}
+                          onWidthChange={colDef.onWidthChange}
                           textAlign={colDef.align ?? "left"}
                           key={colDef.id}
                           isSticky={isSticky}
