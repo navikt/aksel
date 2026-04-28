@@ -1,5 +1,0 @@
-{
-  "tasks": {
-    "createMainChangelog": "deno run --watch -RW ./createMainChangelog.ts"
-  }
-}

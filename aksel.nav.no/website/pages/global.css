@@ -1,8 +1,0 @@
-@layer tw-snapshot, aksel;
-
-@import "../tailwind-snapshot.css" layer(tw-snapshot);
-@import "@navikt/ds-css" layer(aksel);
-
-body {
-  background-color: var(--ax-bg-default);
-}

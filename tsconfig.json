@@ -1,12 +1,15 @@
 {
+  "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true,
-    "target": "es6",
-    "moduleResolution": "bundler",
-    "incremental": true,
+    "ignoreDeprecations": "6.0",
+    "rootDir": "./src",
+    "outDir": "./dist/react/cjs",
+    "moduleResolution": "node",
+    "module": "commonjs",
     "skipLibCheck": true,
-    "resolveJsonModule": true
-  }
+    "declaration": true,
+    "sourceMap": true
+  },
+  "exclude": ["./util", "./__tests__", "**/*.stories.*"],
+  "include": ["./src"]
 }

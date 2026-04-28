@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "aksel-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./@navikt/aksel-mcp/dist/index.js"]
+    }
+  }
+}

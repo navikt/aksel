@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "strict": true,
-    "module": "nodenext",
-    "skipLibCheck": true
-  },
-  "include": ["./clean.mts"]
-}

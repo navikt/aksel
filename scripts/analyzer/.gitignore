@@ -1,6 +1,0 @@
-.bundle-input*
-package-report*
-**/temp/local/*
-**/temp/remote/*
-*-results.json
-compare-markdown.md

@@ -1,7 +1,0 @@
-import "react";
-
-declare module "react" {
-  interface CSSProperties {
-    [key: `--__axc-${string}`]: string | number | undefined;
-  }
-}
