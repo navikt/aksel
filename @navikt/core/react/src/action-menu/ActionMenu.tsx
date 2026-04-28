@@ -384,7 +384,7 @@ export const ActionMenuContent = forwardRef<
           {...rest}
           align={align}
           sideOffset={4}
-          collisionPadding={10}
+          collisionPadding={5}
           returnFocus={context.triggerRef}
           safeZone={{
             anchor: context.triggerRef.current,
