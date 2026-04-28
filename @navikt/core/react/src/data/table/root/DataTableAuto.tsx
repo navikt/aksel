@@ -61,7 +61,7 @@ interface DataTableProps<T>
   truncateContent?: boolean; // TODO: Consider making this default false when layout=auto, and maybe disallow it but add a wrap prop on the td-comp.
   /**
    * Enables keyboard navigation for table rows and cells.
-   * @default false
+   * @default true
    */
   withKeyboardNav?: boolean;
   /**
@@ -180,7 +180,7 @@ function DataTableAutoInner<T>(
     className,
     id,
     rowDensity = "normal",
-    withKeyboardNav = false,
+    withKeyboardNav = true,
     zebraStripes = false,
     truncateContent = true,
     shouldBlockNavigation,
