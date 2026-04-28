@@ -296,9 +296,9 @@ export const Cache: Story = {
     const [showThatSingleRow, setShowThatSingleRow] = useState(true);
 
     const data: CacheRow[] = [
-      { id: 1, col1: "Col 1" },
+      { id: 1, col1: "Row 1" },
       ...(showThatSingleRow ? [{ id: 2, col1: "Custom row" }] : []),
-      { id: 3, col1: "Col 1" },
+      { id: 3, col1: "Row 3" },
     ];
 
     return (
@@ -307,6 +307,7 @@ export const Cache: Story = {
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
         <DataTable
+          withKeyboardNav
           layout="auto"
           columnDefinitions={cacheColumnDef}
           data={data}
@@ -315,6 +316,38 @@ export const Cache: Story = {
       </div>
     );
   },
+  /* TODO: Does not work now, cache does not update correctly */
+  /* play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const { down, expectNodeFocus } = keyboardUtils();
+
+    const table = canvas.getByRole("table");
+    const toggleButton = canvas.getByRole("button", {
+      name: /toggle single row/i,
+    });
+
+    table.focus();
+    await down();
+    expectNodeFocus("Row 1");
+    await down();
+    expectNodeFocus("Custom row");
+
+
+    await userEvent.click(toggleButton);
+    table.focus();
+    await down();
+    expectNodeFocus("Row 1");
+    await down();
+    expectNodeFocus("Row 3");
+
+
+    await userEvent.click(toggleButton);
+    table.focus();
+    await down();
+    expectNodeFocus("Row 1");
+    await down();
+    expectNodeFocus("Custom row");
+  }, */
 };
 
 type FocusRow = { id: number };
