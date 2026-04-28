@@ -136,6 +136,13 @@ const COMPONENT_SLUG_PATTERN = /^komponenter\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/;
 
 function normalizeComponentSlug(rawSlug: string) {
   const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
+
+  const segments = normalizedSlug.split("/");
+
+  if (segments.length > 4) {
+    return null;
+  }
+
   if (!COMPONENT_SLUG_PATTERN.test(normalizedSlug)) {
     return null;
   }
