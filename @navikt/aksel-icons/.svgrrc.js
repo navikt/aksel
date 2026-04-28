@@ -11,6 +11,7 @@ module.exports = {
     role: "img",
   },
   replaceAttrValues: {
+    /* TODO: Replace this based on default icon stroke/fill color */
     "#202733": "currentColor",
   },
   template,
