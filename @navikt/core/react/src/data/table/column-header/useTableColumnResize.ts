@@ -58,7 +58,7 @@ type ResizeProps = {
    * Called when the column width changes.
    * @param width New width in pixels.
    */
-  onWidthChange?: (width: number | string) => void;
+  onWidthChange?: (width: number) => void;
   /**
    * Forwarded styles
    */
