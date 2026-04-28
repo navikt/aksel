@@ -118,7 +118,7 @@ export async function GET(request: NextRequest) {
       { title: data.title, slug, parts },
       {
         headers: {
-          "Cache-Control": "public, max-age=7200, s-maxage=7200",
+          "Cache-Control": `public, max-age=${revalidate}`,
         },
       },
     );
