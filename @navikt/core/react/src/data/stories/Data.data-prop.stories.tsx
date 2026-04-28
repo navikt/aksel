@@ -9,7 +9,7 @@ import type {
   ColumnDefinitions,
   SortEntry,
 } from "../table/root/DataTable.types";
-import DataTableAuto from "../table/root/DataTableAuto";
+import DataTableAuto from "../table/root/DataTableRoot";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Data Prop",
@@ -29,7 +29,9 @@ type Story = StoryObj<typeof DataTable>;
 
 const selectionControls = {
   args: {
-    selectionMode: "multiple",
+    selection: {
+      selectionMode: "multiple",
+    },
   },
   parameters: {
     controls: {
@@ -37,9 +39,11 @@ const selectionControls = {
     },
   },
   argTypes: {
-    selectionMode: {
-      control: { type: "select" },
-      options: ["none", "single", "multiple"],
+    selection: {
+      selectionMode: {
+        control: { type: "select" },
+        options: ["none", "single", "multiple"],
+      },
     },
   },
 } as const;
@@ -799,7 +803,7 @@ export const RowExpansion: Story = {
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
       }}
       withKeyboardNav
       detailsPanel={{
@@ -820,7 +824,7 @@ export const RowExpansionAll: Story = {
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
       }}
       withKeyboardNav
       detailsPanel={{
@@ -852,7 +856,7 @@ export const NestedRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
         onSelectionChange: console.info,
       }}
       withKeyboardNav
@@ -908,7 +912,7 @@ export const NestedLeftAlignedContentRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
       }}
       withKeyboardNav
       subRows={{
@@ -933,7 +937,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
       }))}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
       }}
       withKeyboardNav
       subRows={{
@@ -958,7 +962,7 @@ export const NestedRowsWithMasterDetail: Story = {
       }))}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selectionMode,
+        selectionMode: args.selection?.selectionMode,
       }}
       withKeyboardNav
       subRows={{

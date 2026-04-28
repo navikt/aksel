@@ -1,19 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Table,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 import { DataTableProfiler } from "./DataTableProfiler";
-import { PersonInfo, columns, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Keyboard Navigation",
@@ -29,71 +19,8 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
-export const TanstackDemo: Story = {
-  render: () => {
-    const table = useReactTable({
-      columns,
-      data: sampleData,
-      getCoreRowModel: getCoreRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      globalFilterFn: "includesString",
-      getPaginationRowModel: getPaginationRowModel(),
-      initialState: {
-        pagination: {
-          pageIndex: 1,
-          pageSize: 5,
-        },
-      },
-      state: {},
-      columnResizeMode: "onChange",
-    });
-
-    return (
-      <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-        <button>Focuable before</button>
-        <DataTable withKeyboardNav>
-          <DataTable.Thead>
-            {table.getHeaderGroups().map((headerGroup) => {
-              return (
-                <DataTable.Tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <DataTableColumnHeader
-                        key={header.id}
-                        style={{ width: `var(--header-${header.id}-size)` }}
-                        defaultWidth={header.getSize()}
-                        sortable
-                        sortDirection={header.column.getIsSorted() || "none"}
-                        onSortClick={(event) => {
-                          const handler =
-                            header.column.getToggleSortingHandler();
-                          handler?.(event);
-                        }}
-                      >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
-                      </DataTableColumnHeader>
-                    );
-                  })}
-                </DataTable.Tr>
-              );
-            })}
-          </DataTable.Thead>
-
-          <MemoizedTableBody table={table} />
-        </DataTable>
-        <button>Focuable after</button>
-      </div>
-    );
-  },
-};
-
-export const Spans: Story = {
+/* TODO: Not supported with spans yet */
+/* export const Spans: Story = {
   render: () => (
     <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
       <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
@@ -180,7 +107,7 @@ export const Spans: Story = {
     await step(left, "Rowspan 2-2");
     await step(right, "R4C2");
   },
-};
+}; */
 
 export const Inputs: Story = {
   render: () => (
@@ -514,29 +441,6 @@ export const FocusElementInsideTable: Story = {
     expectCellFocus("Col 2");
   },
 };
-
-const TableBody = ({ table }: { table: Table<PersonInfo> }) => (
-  <DataTable.Tbody>
-    {table.getRowModel().rows.map((row) => {
-      return (
-        <DataTable.Tr key={row.id}>
-          {row.getVisibleCells().map((cell) => {
-            return (
-              <DataTable.Td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </DataTable.Td>
-            );
-          })}
-        </DataTable.Tr>
-      );
-    })}
-  </DataTable.Tbody>
-);
-
-const MemoizedTableBody = React.memo(
-  TableBody,
-  (_prev, next) => !!next.table.getState().columnSizingInfo.isResizingColumn,
-) as typeof TableBody;
 
 function keyboardUtils() {
   return {

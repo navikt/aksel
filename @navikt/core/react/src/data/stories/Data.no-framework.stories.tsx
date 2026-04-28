@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useDeferredValue, useMemo, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, sampleData } from "./dummy-data";
 

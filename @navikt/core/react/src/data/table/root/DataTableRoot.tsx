@@ -1,45 +1,44 @@
-import React, { forwardRef } from "react";
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
+import React, { forwardRef, useMemo } from "react";
+import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
+import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
+import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
+import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
+import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
-  DataTableCaption,
-  type DataTableCaptionProps,
-} from "../caption/DataTableCaption";
+  DataTableDetailsPanelProvider,
+  type DetailsPanelProps,
+} from "../hooks/useTableDetailsPanel";
 import {
-  DataTableEmptyState,
-  type DataTableEmptyStateProps,
-} from "../empty-state/DataTableEmptyState";
-import { DataTableDetailsPanelProvider } from "../hooks/useTableDetailsPanel";
+  type SubRowsProps,
+  TableItemsProvider,
+  useTableItems,
+  useTableItemsContext,
+} from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
-  noSelectionState,
+  useTableSelection,
 } from "../hooks/useTableSelection";
+import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
+import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
+import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
+import { DataTableTbody } from "../tbody/DataTableTbody";
+import { DataTableThead } from "../thead/DataTableThead";
+import { DataTableTr } from "../tr/DataTableTr";
+import type { ColumnDefinitions } from "./DataTable.types";
 import {
-  DataTableLoadingState,
-  type DataTableLoadingStateProps,
-} from "../loading-state/DataTableLoadingState";
-import {
-  DataTableTbody,
-  type DataTableTbodyProps,
-} from "../tbody/DataTableTbody";
-import { DataTableTd, type DataTableTdProps } from "../td/DataTableTd";
-import {
-  DataTableTfoot,
-  type DataTableTfootProps,
-} from "../tfoot/DataTableTfoot";
-import { DataTableTh, type DataTableThProps } from "../th/DataTableTh";
-import {
-  DataTableThead,
-  type DataTableTheadProps,
-} from "../thead/DataTableThead";
-import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
-import { DataTableContextProvider } from "./DataTableRoot.context";
+  DataTableContextProvider,
+  useDataTableContext,
+} from "./DataTableRoot.context";
 
-interface DataTableProps
-  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
-  children: React.ReactNode;
+interface DataTableProps<T>
+  extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {
+  children?: never;
   /**
    * Controls vertical cell padding.
    * @default "normal"
@@ -59,7 +58,7 @@ interface DataTableProps
   truncateContent?: boolean; // TODO: Consider making this default false when layout=auto, and maybe disallow it but add a wrap prop on the td-comp.
   /**
    * Enables keyboard navigation for table rows and cells.
-   * @default false
+   * @default true
    */
   withKeyboardNav?: boolean;
   /**
@@ -83,163 +82,204 @@ interface DataTableProps
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
+  /**
+   * Defines the columns of the table and how to render them.
+   *
+   *
+   * Each column definition should have a unique `id` (or use the column index as fallback) and a `cell`-renderer function that takes the row data as argument and returns a React node.
+   */
+  columnDefinitions: ColumnDefinitions<T>;
+  /**
+   * The data to display in the table.
+   *
+   *
+   * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
+   */
+  data: T[];
+  /**
+   * Function to get unique row id from row data.
+   *
+   *
+   * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
+   */
+  getRowId?: (rowData: T, index: number) => string | number;
+  /**
+   * Sticky columns that remain visible when horizontally scrolling the table.
+   *
+   * You can specify 1 sticky column on the left and 1 on the right.
+   */
+  stickyColumns?: {
+    first?: "1";
+    last?: "1";
+  };
+  /**
+   * @default false
+   */
+  stickyHeader?: boolean;
+  /**
+   * Callback invoked when a data row is clicked.
+   * Not called when clicking header, loading, or empty-state rows.
+   */
+  onRowClick?: (
+    rowId: string | number,
+    event: React.MouseEvent<HTMLTableRowElement>,
+  ) => void;
+  /**
+   * Content to render when `data` is empty.
+   * Rendered inside a `DataTable.EmptyState` row spanning all columns.
+   */
+  emptyState?: React.ReactNode;
+  loading?: {
+    /**
+     * Shows the table in a loading state.
+     *
+     * - When `loadingState` is provided, it is rendered inside a `DataTable.LoadingState` row.
+     * - When `loadingState` is **not** provided, skeleton placeholder rows are rendered instead.
+     * @default false
+     */
+    isLoading?: boolean;
+    /**
+     * Custom content to render when `isLoading` is `true`.
+     * Rendered inside a `DataTable.LoadingState` row spanning all columns.
+     * When omitted, skeleton rows are rendered based on `loadingRows`.
+     */
+    loadingState?: React.ReactNode;
+    /**
+     * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
+     *
+     *
+     * If not provided, the rendered content will get a temporarily overlay while loading
+     */
+    loadingRows?: number;
+    /**
+     * Visually hidden label announced to screen readers when skeleton rows are shown.
+     * Only used when `isLoading` is `true` and no `loadingState` is provided.
+     * @default "Laster innhold"
+     */
+    loadingLabel?: string;
+  };
+
+  /**
+   * Function to get sub-rows for a given row, used for nested rows.
+   * When provided, an expand toggle column is added automatically.
+   *
+   *
+   * TODO:
+   * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
+   */
+  selection?: SelectionProps;
+  subRows?: SubRowsProps<T>;
+  detailsPanel?: DetailsPanelProps<T>;
 }
 
-interface DataTableRootComponent extends React.ForwardRefExoticComponent<
-  DataTableProps & React.RefAttributes<HTMLTableElement>
-> {
-  /**
-   * @see 🏷️ {@link DataTableCaptionProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Caption>
-   *     Lorem ipsum
-   *   </DataTable.Caption
-   * </DataTable>
-   * ```
-   */
-  Caption: typeof DataTableCaption;
-  /**
-   * @see 🏷️ {@link DataTableTheadProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Thead>
-   *     ... TODO
-   *   </DataTable.Thead>
-   * </DataTable>
-   * ```
-   */
-  Thead: typeof DataTableThead;
-  /**
-   * @see 🏷️ {@link DataTableTbodyProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Tbody>
-   *     ... TODO
-   *   </DataTable.Tbody>
-   * </DataTable>
-   * ```
-   */
-  Tbody: typeof DataTableTbody;
-  /**
-   * @see 🏷️ {@link DataTableTrProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Tr>
-   *     ... TODO
-   *   </DataTable.Tr
-   * </DataTable>
-   * ```
-   */
-  Tr: typeof DataTableTr;
-  /**
-   * @see 🏷️ {@link DataTableThProps}
-   * @example
-   * ```jsx
-   * ```
-   */
-  Th: typeof DataTableTh;
-  /**
-   * @see 🏷️ {@link DataTableTdProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Tbody>
-   *     <DataTable.Td>
-   *       Lorem ipsum
-   *     </DataTable.Td>
-   *     <DataTable.Td>
-   *       Dolor sit amet
-   *     </DataTable.Td>
-   *   </DataTable.Tbody>
-   * </DataTable>
-   * ```
-   */
-  Td: typeof DataTableTd;
-  /**
-   * @see 🏷️ {@link DataTableTfootProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.Tfoot>
-   *     ...
-   *   </DataTable.Tfoot>
-   * </DataTable>
-   * ```
-   */
-  Tfoot: typeof DataTableTfoot;
-  /**
-   * @see 🏷️ {@link DataTableEmptyStateProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.TBody>
-   *     <DataTable.EmptyState />
-   *   </DataTable.TBody>
-   * </DataTable>
-   * ```
-   */
-  EmptyState: typeof DataTableEmptyState;
-  /**
-   * @see 🏷️ {@link DataTableEmptyStateProps}
-   * @example
-   * ```jsx
-   * <DataTable>
-   *   <DataTable.TBody>
-   *     <DataTable.LoadingState />
-   *   </DataTable.TBody>
-   * </DataTable>
-   * ```
-   */
-  LoadingState: typeof DataTableLoadingState;
-}
+function DataTableInner<T>(
+  {
+    className,
+    id,
+    rowDensity = "normal",
+    withKeyboardNav = true,
+    zebraStripes = false,
+    truncateContent = true,
+    shouldBlockNavigation,
+    layout = "fixed",
+    selection,
+    data,
+    columnDefinitions,
+    getRowId,
+    stickyColumns,
+    stickyHeader = false,
+    sort: sortProp,
+    defaultSort = [],
+    onSortChange,
+    onRowClick,
+    emptyState,
+    loading,
+    detailsPanel,
+    subRows,
+    ...rest
+  }: DataTableProps<T>,
+  forwardedRef: React.ForwardedRef<HTMLTableElement>,
+) {
+  const { tabIndex, setTableRef } = useTableKeyboardNav({
+    enabled: withKeyboardNav,
+    shouldBlockNavigation,
+  });
 
-/**
- * TODO Component description etc.
- *
- * **NB:** To get sticky headers, you have to set a height restriction on the table container. You can use VStack for this:
- * TODO example
- */
-const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
-  (
-    {
-      className,
-      rowDensity = "normal",
-      withKeyboardNav = false,
-      zebraStripes = false,
-      truncateContent = true,
-      shouldBlockNavigation,
-      layout = "fixed",
-      ...rest
-    },
-    forwardedRef,
-  ) => {
-    const { tabIndex, setTableRef } = useTableKeyboardNav({
-      enabled: withKeyboardNav,
-      shouldBlockNavigation,
-    });
+  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
-    const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+  const { sortState, onSortClick } = useTableSort({
+    defaultSort,
+    onSortChange,
+    sort: sortProp,
+  });
 
+  /**
+   * TODO:
+   * - If user currently does not give a getRowsId function, and data is nested (getSubRows)
+   *   we end up in an infinite loop since the index based ids repeat for children and causes chaos.
+   */
+  const tableItems = useTableItems({
+    items: data,
+    getRowId: getRowId ?? ((_, index) => index),
+    subRows,
+  });
+
+  const tableSelectionState = useTableSelection({
+    selection,
+    visibleRowIds: tableItems.visibleRowIds,
+    childRowIdsById: tableItems.childRowIdsById,
+  });
+
+  const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
+    stickyColumns,
+    selectionMode: tableSelectionState.selection.selectionMode,
+  });
+
+  const {
+    isLoading = false,
+    loadingState,
+    loadingRows,
+    loadingLabel = "Laster innhold",
+  } = loading || {};
+
+  const fullWidthColSpan = useMemo(() => {
     return (
-      <DataTableContextProvider
-        layout={layout}
-        withKeyboardNav={withKeyboardNav}
-        selectionState={noSelectionState}
-        stickySelection={false}
-        stickyHeader={true}
-        tableId={useId()}
-        showLoadingSkeletons={false}
-        onRowClick={undefined}
-        showLoadingOverlay={false}
-        columns={[]}
-        fullWidthColSpan={9999}
+      columns.length +
+      (layout === "fixed" ? 1 : 0) +
+      (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
+      (detailsPanel?.getContent ? 1 : 0)
+    );
+  }, [
+    columns,
+    layout,
+    tableSelectionState.selection.selectionMode,
+    detailsPanel,
+  ]);
+
+  const tableId = useId(id);
+
+  return (
+    <DataTableContextProvider
+      layout={layout}
+      withKeyboardNav={withKeyboardNav}
+      selectionState={tableSelectionState}
+      stickySelection={stickySelection}
+      stickyHeader={stickyHeader}
+      tableId={tableId}
+      showLoadingSkeletons={isLoading && loadingState == null}
+      onRowClick={onRowClick}
+      isLoading={isLoading}
+      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
+      columns={columns}
+      fullWidthColSpan={fullWidthColSpan}
+    >
+      <TableItemsProvider
+        itemDetails={tableItems.itemDetails}
+        items={tableItems.items}
+        onExpandedRowIdsChange={tableItems.onExpandedRowIdsChange}
+        isSubRowExpanded={tableItems.isSubRowExpanded}
       >
-        <DataTableDetailsPanelProvider>
+        <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
           <div className="aksel-data-table__border-wrapper">
             <div className="aksel-data-table__scroll-wrapper">
               <table
@@ -250,48 +290,177 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
                 data-truncate-content={truncateContent}
                 data-density={rowDensity}
                 data-layout={layout}
+                data-loading={isLoading || undefined}
                 tabIndex={tabIndex}
-              />
+                aria-busy={isLoading || undefined}
+              >
+                <DataTableThead>
+                  <DataTableTr>
+                    {columns.map(({ isSticky, colDef }) => {
+                      const sortEntry = sortState.find(
+                        (s) => s.columnId === colDef.id,
+                      );
+                      const sortDirection = sortEntry?.direction ?? "none";
+                      return (
+                        <DataTableColumnHeader
+                          resizable={colDef.resizable}
+                          width={colDef.width}
+                          defaultWidth={colDef.defaultWidth}
+                          autoWidth={colDef.autoWidth}
+                          minWidth={colDef.minWidth}
+                          maxWidth={colDef.maxWidth}
+                          onWidthChange={colDef.onWidthChange}
+                          textAlign={colDef.align ?? "left"}
+                          key={colDef.id}
+                          isSticky={isSticky}
+                          sortable={colDef.sortable}
+                          sortDirection={sortDirection}
+                          onSortClick={(event) => onSortClick(colDef.id, event)}
+                        >
+                          {colDef.header}
+                        </DataTableColumnHeader>
+                      );
+                    })}
+                  </DataTableTr>
+                </DataTableThead>
+
+                <DataTableTbody>
+                  <DataTableTBodyContent
+                    loadingState={loadingState}
+                    loadingRows={loadingRows}
+                    loadingLabel={loadingLabel}
+                    emptyState={emptyState}
+                  />
+                </DataTableTbody>
+              </table>
             </div>
           </div>
         </DataTableDetailsPanelProvider>
-      </DataTableContextProvider>
+      </TableItemsProvider>
+    </DataTableContextProvider>
+  );
+}
+
+interface DataTableTBodyContentProps {
+  loadingState: React.ReactNode;
+  loadingLabel: string;
+  loadingRows?: number;
+  emptyState: React.ReactNode;
+}
+
+function DataTableTBodyContent({
+  loadingState,
+  loadingRows,
+  loadingLabel,
+  emptyState,
+}: DataTableTBodyContentProps) {
+  const { items, itemDetails } = useTableItemsContext();
+  const { columns, isLoading, fullWidthColSpan } = useDataTableContext();
+
+  if (isLoading && loadingState != null) {
+    return (
+      <DataTableLoadingState colSpan={fullWidthColSpan}>
+        {loadingState}
+      </DataTableLoadingState>
     );
-  },
-) as DataTableRootComponent;
+  }
 
-DataTable.Caption = DataTableCaption;
-DataTable.Thead = DataTableThead;
-DataTable.Tbody = DataTableTbody;
-DataTable.Th = DataTableTh;
-DataTable.Tr = DataTableTr;
-DataTable.Td = DataTableTd;
-DataTable.Tfoot = DataTableTfoot;
-DataTable.EmptyState = DataTableEmptyState;
-DataTable.LoadingState = DataTableLoadingState;
+  if (isLoading && loadingRows) {
+    return (
+      <>
+        <tr>
+          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
+            {loadingLabel}
+          </td>
+        </tr>
+        {Array.from({ length: loadingRows }, (_, rowIndex) => (
+          <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
+            {columns.map(({ isSticky, colDef }, colDefIndex) => (
+              <DataTableBaseCell
+                textAlign={colDef.align ?? "left"}
+                key={colDef.id || colDefIndex}
+                as={colDef.isRowHeader ? "th" : "td"}
+                isSticky={isSticky}
+              >
+                <Skeleton variant="text" />
+              </DataTableBaseCell>
+            ))}
+          </DataTableTr>
+        ))}
+      </>
+    );
+  }
 
-export {
-  DataTable,
-  DataTableCaption,
-  DataTableEmptyState,
-  DataTableLoadingState,
-  DataTableTbody,
-  DataTableTd,
-  DataTableTfoot,
-  DataTableTh,
-  DataTableThead,
-  DataTableTr,
-};
+  if (items.length === 0 && emptyState !== undefined) {
+    return (
+      <DataTableEmptyState colSpan={fullWidthColSpan}>
+        {emptyState}
+      </DataTableEmptyState>
+    );
+  }
+
+  const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
+
+  return (
+    <>
+      {renderLoadingAnnouncement && (
+        <tr>
+          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
+            {loadingLabel}
+          </td>
+        </tr>
+      )}
+      {items.map((rowData) => {
+        const details = itemDetails.get(rowData);
+
+        /* Should in theory be impossible. Look about typing this? */
+        if (!details) {
+          return null;
+        }
+
+        const hasSubRows = details.children.length > 0;
+
+        return (
+          <React.Fragment key={details.id}>
+            <DataTableTr rowId={details.id}>
+              {columns.map(({ isSticky, colDef }, colDefIndex) => {
+                const renderNestedToggle = colDefIndex === 0 && hasSubRows;
+                const renderNestedIndent =
+                  colDefIndex === 0 && (details.level > 0 || hasSubRows);
+
+                const style: React.CSSProperties = {
+                  "--__axc-data-table-nested-depth": details.level,
+                };
+
+                return (
+                  <DataTableBaseCell
+                    textAlign={colDef.align ?? "left"}
+                    key={colDef.id || colDefIndex}
+                    as={colDef.isRowHeader ? "th" : "td"}
+                    isSticky={isSticky}
+                    data-nested={renderNestedIndent || undefined}
+                    style={style}
+                  >
+                    {renderNestedToggle && (
+                      <DataTableSubRowToggle details={details} />
+                    )}
+                    {colDef.cell(rowData)}
+                  </DataTableBaseCell>
+                );
+              })}
+            </DataTableTr>
+            <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
+          </React.Fragment>
+        );
+      })}
+    </>
+  );
+}
+
+const DataTable = forwardRef(DataTableInner) as <T>(
+  props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
+) => React.ReactElement | null;
+
+export { DataTable };
+export type { DataTableProps };
 export default DataTable;
-export type {
-  DataTableCaptionProps,
-  DataTableEmptyStateProps,
-  DataTableLoadingStateProps,
-  DataTableProps,
-  DataTableTbodyProps,
-  DataTableTdProps,
-  DataTableTfootProps,
-  DataTableTheadProps,
-  DataTableThProps,
-  DataTableTrProps,
-};

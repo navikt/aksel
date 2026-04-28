@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 import type { ColumnDefinitions } from "./DataTable.types";
-import { DataTableAuto } from "./DataTableAuto";
+import { DataTable } from "./DataTableRoot";
 
 type TestRow = {
   id: string;
@@ -10,9 +10,9 @@ type TestRow = {
   subRows?: TestRow[];
 };
 
-const meta: Meta<typeof DataTableAuto> = {
+const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/DataTable/Tests",
-  component: DataTableAuto,
+  component: DataTable,
   parameters: {
     chromatic: { disable: true },
   },
@@ -20,7 +20,7 @@ const meta: Meta<typeof DataTableAuto> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTableAuto>;
+type Story = StoryObj<typeof DataTable>;
 
 const data: TestRow[] = [
   {
@@ -72,7 +72,7 @@ const getCheckboxes = (canvasElement: HTMLElement) =>
 
 export const ExpandedChildRowsIncludedInSelectAll: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
@@ -104,7 +104,7 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
 
 export const FallbackIdsSelectAllVisibleRows: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={columns}
       data={fallbackIdData}
       subRows={{
@@ -133,7 +133,7 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
 
 export const ParentSelectionFollowsVisibleNestedRows: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
@@ -167,7 +167,7 @@ export const ParentSelectionFollowsVisibleNestedRows: Story = {
 
 export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
@@ -210,7 +210,7 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
 
 export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
