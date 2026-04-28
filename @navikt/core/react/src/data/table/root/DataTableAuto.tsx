@@ -208,13 +208,13 @@ function DataTableAutoInner<T>(
     shouldBlockNavigation,
   });
 
+  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
+
   const { sortState, onSortClick } = useTableSort({
     defaultSort,
     onSortChange,
     sort: sortProp,
   });
-
-  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
 
   const tableItems = useTableItems({
     items: data,
