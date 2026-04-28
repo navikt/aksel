@@ -132,14 +132,9 @@ export async function GET(request: NextRequest) {
   }
 }
 
-const COMPONENT_SLUG_PATTERN = /^komponenter\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/;
+const COMPONENT_SLUG_PATTERN = /^komponenter(?:\/[a-z0-9-]+){2}$/;
 
 function normalizeComponentSlug(rawSlug: string) {
-  const segments = rawSlug.trim().split("/");
-  if (segments.length > 4) {
-    return null;
-  }
-
   const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
 
   if (!COMPONENT_SLUG_PATTERN.test(normalizedSlug)) {
