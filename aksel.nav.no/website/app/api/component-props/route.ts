@@ -132,15 +132,11 @@ export async function GET(request: NextRequest) {
   }
 }
 
-const COMPONENT_SLUG_PREFIX = "komponenter/";
 const COMPONENT_SLUG_PATTERN = /^komponenter\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/;
 
 function normalizeComponentSlug(rawSlug: string) {
   const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
-  if (
-    !normalizedSlug.startsWith(COMPONENT_SLUG_PREFIX) ||
-    !COMPONENT_SLUG_PATTERN.test(normalizedSlug)
-  ) {
+  if (!COMPONENT_SLUG_PATTERN.test(normalizedSlug)) {
     return null;
   }
   return normalizedSlug;
