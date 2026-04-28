@@ -237,6 +237,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         onRowClick={undefined}
         showLoadingOverlay={false}
         columns={[]}
+        fullWidthColSpan={9999}
       >
         <DataTableDetailsPanelProvider>
           <div className="aksel-data-table__border-wrapper">

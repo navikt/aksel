@@ -1,23 +1,19 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef } from "react";
-import { ChevronDownIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { Button } from "../../../button";
+import React, { forwardRef, useMemo } from "react";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
+import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableDetailsPanelProvider,
   type DetailsPanelProps,
-  getDataTableDetailsPanelId,
-  useDataTableDetailsPanel,
 } from "../hooks/useTableDetailsPanel";
 import {
-  type ItemDetail,
   type SubRowsProps,
   TableItemsProvider,
   useTableItems,
@@ -30,6 +26,7 @@ import {
 } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
+import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
@@ -245,11 +242,19 @@ function DataTableAutoInner<T>(
     loadingLabel = "Laster innhold",
   } = loading || {};
 
-  const fullWidthColSpan =
-    columns.length +
-    (layout === "fixed" ? 1 : 0) +
-    (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
-    (detailsPanel?.getContent ? 1 : 0);
+  const fullWidthColSpan = useMemo(() => {
+    return (
+      columns.length +
+      (layout === "fixed" ? 1 : 0) +
+      (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
+      (detailsPanel?.getContent ? 1 : 0)
+    );
+  }, [
+    columns,
+    layout,
+    tableSelectionState.selection.selectionMode,
+    detailsPanel,
+  ]);
 
   const tableId = useId(id);
 
@@ -266,6 +271,7 @@ function DataTableAutoInner<T>(
       isLoading={isLoading}
       showLoadingOverlay={isLoading && !loadingState && !loadingRows}
       columns={columns}
+      fullWidthColSpan={fullWidthColSpan}
     >
       <TableItemsProvider
         itemDetails={tableItems.itemDetails}
@@ -324,7 +330,6 @@ function DataTableAutoInner<T>(
                     loadingRows={loadingRows}
                     loadingLabel={loadingLabel}
                     emptyState={emptyState}
-                    fullWidthColSpan={fullWidthColSpan}
                   />
                 </DataTableTbody>
               </table>
@@ -341,7 +346,6 @@ interface DataTableAutoTBodyContentProps {
   loadingLabel: string;
   loadingRows?: number;
   emptyState: React.ReactNode;
-  fullWidthColSpan: number;
 }
 
 function DataTableAutoTBodyContent({
@@ -349,10 +353,9 @@ function DataTableAutoTBodyContent({
   loadingRows,
   loadingLabel,
   emptyState,
-  fullWidthColSpan,
 }: DataTableAutoTBodyContentProps) {
   const { items, itemDetails } = useTableItemsContext();
-  const { columns, isLoading } = useDataTableContext();
+  const { columns, isLoading, fullWidthColSpan } = useDataTableContext();
 
   if (isLoading && loadingState != null) {
     return (
@@ -439,102 +442,18 @@ function DataTableAutoTBodyContent({
                     style={style}
                   >
                     {renderNestedToggle && (
-                      <NestedRowToggle details={details} />
+                      <DataTableSubRowToggle details={details} />
                     )}
                     {colDef.cell(rowData)}
                   </DataTableBaseCell>
                 );
               })}
             </DataTableTr>
-            <DataTableExpandedRow
-              rowId={details.id}
-              rowData={rowData}
-              fullWidthColSpan={fullWidthColSpan}
-            />
+            <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
           </React.Fragment>
         );
       })}
     </>
-  );
-}
-
-function NestedRowToggle({ details }: { details: ItemDetail<any> }) {
-  const { isSubRowExpanded, onExpandedRowIdsChange } = useTableItemsContext();
-
-  const subRows = details.children;
-  const hasSubRows = subRows && subRows.length > 0;
-  const isRowExpanded = isSubRowExpanded(details.id);
-
-  return (
-    <div className="aksel-data-table__nested-toggle">
-      {hasSubRows && (
-        <Button
-          variant="tertiary"
-          data-color="neutral"
-          size="small"
-          onClick={(e) => {
-            e.stopPropagation();
-            onExpandedRowIdsChange(details.id);
-          }}
-          aria-expanded={isRowExpanded}
-          aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
-          icon={
-            isRowExpanded ? (
-              <ChevronDownIcon aria-hidden />
-            ) : (
-              <ChevronRightIcon aria-hidden />
-            )
-          }
-        />
-      )}
-    </div>
-  );
-}
-
-function DataTableExpandedRow<T>({
-  rowId,
-  rowData,
-  fullWidthColSpan,
-}: {
-  rowId: string | number;
-  rowData: T;
-  fullWidthColSpan: number;
-}) {
-  const { tableId } = useDataTableContext();
-  const {
-    enableDetailsPanel,
-    isExpanded,
-    getDetailsPanelContent,
-    getDetailsPanelHeight,
-  } = useDataTableDetailsPanel();
-
-  if (!enableDetailsPanel) {
-    return null;
-  }
-
-  if (!isExpanded(rowId)) {
-    return null;
-  }
-
-  const content = getDetailsPanelContent?.(rowData);
-  const expansionId = getDataTableDetailsPanelId(tableId, rowId);
-
-  if (!content) {
-    return null;
-  }
-
-  const panelHeight = getDetailsPanelHeight?.(rowData);
-
-  const style: React.CSSProperties = panelHeight
-    ? { height: panelHeight, overflow: "auto" }
-    : { height: "auto" };
-
-  return (
-    <tr>
-      <td id={expansionId} colSpan={fullWidthColSpan}>
-        <div style={style}>{content}</div>
-      </td>
-    </tr>
   );
 }
 
