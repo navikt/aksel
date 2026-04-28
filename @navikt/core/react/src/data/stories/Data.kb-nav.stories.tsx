@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
-import { DataTable } from "../table/root/DataTableRoot.legacy";
-import { DataTableProfiler } from "./DataTableProfiler";
+import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import { DataTable } from "../table/root/DataTableRoot";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Keyboard Navigation",
@@ -12,164 +11,82 @@ const meta: Meta<typeof DataTable> = {
     chromatic: { disable: true },
     layout: "padded",
   },
-  decorators: [(Story) => <DataTableProfiler>{Story()}</DataTableProfiler>],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
-/* TODO: Not supported with spans yet */
-/* export const Spans: Story = {
-  render: () => (
-    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader colSpan={2}>Group A</DataTableColumnHeader>
-            <DataTableColumnHeader colSpan={2}>Group B</DataTableColumnHeader>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td rowSpan={2}>Rowspan 2-1</DataTable.Td>
-            <DataTable.Td>R1C2</DataTable.Td>
-            <DataTable.Td colSpan={2}>Colspan 2-1</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>R2C2</DataTable.Td>
-            <DataTable.Td>R2C3</DataTable.Td>
-            <DataTable.Td>R2C4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>R3C1</DataTable.Td>
-            <DataTable.Td colSpan={2}>Colspan 2-2</DataTable.Td>
-            <DataTable.Td>R3C4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td rowSpan={2}>Rowspan 2-2</DataTable.Td>
-            <DataTable.Td>R4C2</DataTable.Td>
-            <DataTable.Td>R4C3</DataTable.Td>
-            <DataTable.Td>R4C4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td colSpan={3}>Colspan 3</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
-    </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+type InputRow = { id: 1 | 2 | 3 };
 
-    const { expectNodeFocus, right, left, down, up } = keyboardUtils();
+const inputsData: InputRow[] = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
-    const step = async (action: () => Promise<any>, text: string) => {
-      await action();
-      expectNodeFocus(text);
-    };
-
-    const table = canvas.getByRole("table");
-    expect(table).toBeInTheDocument();
-
-    table.focus();
-
-    expectNodeFocus("Group A");
-    await step(right, "Group B");
-    await step(down, "Col 3");
-    await step(up, "Group B");
-    await down();
-    await step(right, "Col 4");
-    await left();
-    await step(left, "Col 2");
-    await step(down, "R1C2");
-    await step(down, "R2C2");
-    await step(right, "R2C3");
-    await step(down, "Colspan 2-2");
-    await step(up, "R2C2");
-    await step(down, "Colspan 2-2");
-    await step(left, "R3C1");
-    await step(up, "Rowspan 2-1");
-    await step(right, "R1C2");
-    await left();
-    await down();
-    await step(down, "Rowspan 2-2");
-    await step(right, "R4C2");
-    await step(right, "R4C3");
-    await step(right, "R4C4");
-    await step(down, "Colspan 3");
-    await step(left, "Rowspan 2-2");
-    await step(right, "R4C2");
+const inputsColumnDef: ColumnDefinitions<InputRow> = [
+  {
+    id: "col1",
+    header: "Col 1",
+    label: "Col 1",
+    cell: ({ id }) =>
+      id === 1 ? (
+        <input type="checkbox" data-testid="checkbox-1" />
+      ) : (
+        <input type="checkbox" />
+      ),
   },
-}; */
+  {
+    id: "col2",
+    header: "Col 2",
+    label: "Col 2",
+    cell: ({ id }) => {
+      if (id === 1)
+        return (
+          <input type="text" placeholder="Col 2" data-testid="input-col-2" />
+        );
+      if (id === 2)
+        return (
+          <input
+            type="text"
+            placeholder="Col 2"
+            defaultValue="Test"
+            data-testid="input-2"
+          />
+        );
+      return <textarea placeholder="Col 2" data-testid="textarea-col-2" />;
+    },
+  },
+  {
+    id: "col3",
+    header: "Col 3",
+    label: "Col 3",
+    cell: ({ id }) =>
+      id === 2 ? (
+        <select data-testid="select">
+          <option value="">Select</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+        </select>
+      ) : (
+        "Col 3"
+      ),
+  },
+  {
+    id: "col4",
+    header: "Col 4",
+    label: "Col 4",
+    cell: () => "Col 4",
+  },
+];
 
 export const Inputs: Story = {
   render: () => (
-    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>
-              <input type="checkbox" data-testid="checkbox-1" />
-            </DataTable.Td>
-            <DataTable.Td>
-              <input
-                type="text"
-                placeholder="Col 2"
-                data-testid="input-col-2"
-              />
-            </DataTable.Td>
-            <DataTable.Td>Col 3</DataTable.Td>
-            <DataTable.Td>Col 4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>
-              <input type="checkbox" />
-            </DataTable.Td>
-            <DataTable.Td>
-              <input
-                type="text"
-                placeholder="Col 2"
-                defaultValue="Test"
-                data-testid="input-2"
-              />
-            </DataTable.Td>
-            <DataTable.Td>
-              <select data-testid="select">
-                <option value="">Select</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-              </select>
-            </DataTable.Td>
-            <DataTable.Td>Col 4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>
-              <input type="checkbox" />
-            </DataTable.Td>
-            <DataTable.Td>
-              <textarea placeholder="Col 2" data-testid="textarea-col-2" />
-            </DataTable.Td>
-            <DataTable.Td>Col 3</DataTable.Td>
-            <DataTable.Td>Col 4</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
-    </div>
+    <DataTable
+      style={{ width: "100%" }}
+      withKeyboardNav
+      layout="auto"
+      columnDefinitions={inputsColumnDef}
+      data={inputsData}
+      getRowId={(row) => row.id}
+    />
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -235,62 +152,83 @@ export const Inputs: Story = {
   },
 };
 
+type DisabledRow = { id: 1 | 2 | 3 };
+
+const disabledData: DisabledRow[] = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
+  {
+    id: "col1",
+    header: "Col 1",
+    label: "Col 1",
+    cell: ({ id }) => {
+      if (id === 2) return <button disabled>Disabled button</button>;
+      if (id === 3)
+        return <button aria-disabled="true">Aria-Disabled button</button>;
+      return "Row 1 Col 1";
+    },
+  },
+  {
+    id: "col2",
+    header: "Col 2",
+    label: "Col 2",
+    cell: ({ id }) => {
+      if (id === 2)
+        return (
+          <input
+            type="text"
+            disabled
+            defaultValue="Disabled input"
+            data-testid="disabled-input"
+          />
+        );
+      if (id === 3) return "Aria Disabled 2";
+      return "Row 1 Col 2";
+    },
+  },
+  {
+    id: "col3",
+    header: "Col 3",
+    label: "Col 3",
+    cell: ({ id }) => {
+      if (id === 2)
+        return (
+          <select disabled data-testid="disabled-select">
+            <option>Disabled select</option>
+          </select>
+        );
+      if (id === 3) return "Aria Disabled 3";
+      return "Row 1 Col 3";
+    },
+  },
+  {
+    id: "col4",
+    header: "Col 4",
+    label: "Col 4",
+    cell: ({ id }) => {
+      if (id === 2)
+        return (
+          <textarea
+            disabled
+            defaultValue="Disabled textarea"
+            data-testid="disabled-textarea"
+          />
+        );
+      if (id === 3) return "Aria Disabled 4";
+      return "Row 1 Col 4";
+    },
+  },
+];
+
 export const DisabledCells: Story = {
   render: () => (
-    <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-            <DataTableColumnHeader>Col 4</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>Hidden 1</DataTable.Td>
-            <DataTable.Td>Hidden 2</DataTable.Td>
-            <DataTable.Td style={{ display: "none" }}>Hidden 3</DataTable.Td>
-            <DataTable.Td style={{ visibility: "hidden" }}>
-              Hidden 4
-            </DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>
-              <button disabled>Disabled button</button>
-            </DataTable.Td>
-            <DataTable.Td data-testid="disabled-input">
-              <input type="text" disabled defaultValue="Disabled input" />
-            </DataTable.Td>
-            <DataTable.Td data-testid="disabled-select">
-              <select disabled>
-                <option>Disabled select</option>
-              </select>
-            </DataTable.Td>
-            <DataTable.Td data-testid="disabled-textarea">
-              <textarea disabled defaultValue="Disabled textarea" />
-            </DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>
-              <button aria-disabled="true">Aria-Disabled button</button>
-            </DataTable.Td>
-            <DataTable.Td>Aria Disabled 2</DataTable.Td>
-            <DataTable.Td>Aria Disabled 3</DataTable.Td>
-            <DataTable.Td>Aria Disabled 4</DataTable.Td>
-          </DataTable.Tr>
-          <DataTable.Tr>
-            <DataTable.Td>Normal 1</DataTable.Td>
-            <DataTable.Td style={{ visibility: "hidden" }}>
-              <button disabled>Disabled button</button>
-            </DataTable.Td>
-            <DataTable.Td>Normal 3</DataTable.Td>
-            <DataTable.Td>Normal 4</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
-    </div>
+    <DataTable
+      withKeyboardNav
+      layout="auto"
+      columnDefinitions={disabledColumnDef}
+      data={disabledData}
+      getRowId={(row) => row.id}
+    />
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -315,22 +253,21 @@ export const DisabledCells: Story = {
     expectNodeFocus("Col 1");
     await step(right, "Col 2");
     await step(left, "Col 1");
-    await step(down, "Hidden 1");
-    await step(right, "Hidden 2");
-    await step(right, "Hidden 2");
+    await step(down, "Row 1 Col 1");
+    await step(right, "Row 1 Col 2");
 
     await left();
     await stepCell(down, "Disabled button");
     await right();
-    expect(canvas.getByTestId("disabled-input")).toHaveFocus();
+    expect(canvas.getByTestId("disabled-input").closest("td")).toHaveFocus();
     await right();
-    expect(canvas.getByTestId("disabled-select")).toHaveFocus();
+    expect(canvas.getByTestId("disabled-select").closest("td")).toHaveFocus();
     await right();
-    expect(canvas.getByTestId("disabled-textarea")).toHaveFocus();
+    expect(canvas.getByTestId("disabled-textarea").closest("td")).toHaveFocus();
     await left();
-    expect(canvas.getByTestId("disabled-select")).toHaveFocus();
+    expect(canvas.getByTestId("disabled-select").closest("td")).toHaveFocus();
     await left();
-    expect(canvas.getByTestId("disabled-input")).toHaveFocus();
+    expect(canvas.getByTestId("disabled-input").closest("td")).toHaveFocus();
     await left();
     expectCellFocus("Disabled button");
     await stepCell(down, "Aria-Disabled button");
@@ -340,89 +277,78 @@ export const DisabledCells: Story = {
   },
 };
 
+type CacheRow = { id: number; col1: string };
+
+const cacheColumnDef: ColumnDefinitions<CacheRow> = [
+  { id: "col1", header: "Col 1", label: "Col 1", cell: ({ col1 }) => col1 },
+  { id: "col2", header: "Col 2", label: "Col 2", cell: () => "Col 2" },
+  {
+    id: "col3",
+    header: "Col 3",
+    label: "Col 3",
+    cell: ({ id }) => (id === 1 ? <input type="checkbox" /> : "Col 3"),
+  },
+  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+];
+
 export const Cache: Story = {
   render: () => {
     const [showThatSingleRow, setShowThatSingleRow] = useState(true);
+
+    const data: CacheRow[] = [
+      { id: 1, col1: "Col 1" },
+      ...(showThatSingleRow ? [{ id: 2, col1: "Custom row" }] : []),
+      { id: 3, col1: "Col 1" },
+    ];
 
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
         <button onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
-        <DataTable style={{ width: "100%" }} layout="auto">
-          <DataTable.Thead>
-            <DataTable.Tr>
-              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
-            </DataTable.Tr>
-          </DataTable.Thead>
-          <DataTable.Tbody>
-            <DataTable.Tr>
-              <DataTable.Td>Col 1</DataTable.Td>
-              <DataTable.Td>Col 2</DataTable.Td>
-              <DataTable.Td>
-                <input type="checkbox" />
-              </DataTable.Td>
-              <DataTable.Td>Col 4</DataTable.Td>
-            </DataTable.Tr>
-            {showThatSingleRow && (
-              <DataTable.Tr>
-                <DataTable.Td>Custom row</DataTable.Td>
-                <DataTable.Td>Col 2</DataTable.Td>
-                <DataTable.Td>Col 3</DataTable.Td>
-                <DataTable.Td>Col 4</DataTable.Td>
-              </DataTable.Tr>
-            )}
-
-            <DataTable.Tr>
-              <DataTable.Td>Col 1</DataTable.Td>
-              <DataTable.Td>Col 2</DataTable.Td>
-              <DataTable.Td>Col 3</DataTable.Td>
-              <DataTable.Td>Col 4</DataTable.Td>
-            </DataTable.Tr>
-          </DataTable.Tbody>
-        </DataTable>
+        <DataTable
+          layout="auto"
+          columnDefinitions={cacheColumnDef}
+          data={data}
+          getRowId={(row) => row.id}
+        />
       </div>
     );
   },
 };
 
-export const FocusElementInsideTable: Story = {
-  render: () => {
-    return (
-      <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-        <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto">
-          <DataTable.Thead>
-            <DataTable.Tr>
-              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
-            </DataTable.Tr>
-          </DataTable.Thead>
-          <DataTable.Tbody>
-            <DataTable.Tr>
-              <DataTable.Td>Col 1</DataTable.Td>
-              <DataTable.Td>
-                <button>Focusable button</button>
-              </DataTable.Td>
-              <DataTable.Th>Col 3</DataTable.Th>
-              <DataTable.Td>Col 4</DataTable.Td>
-            </DataTable.Tr>
+type FocusRow = { id: number };
 
-            <DataTable.Tr>
-              <DataTable.Td>Col 1</DataTable.Td>
-              <DataTable.Td>Col 2</DataTable.Td>
-              <DataTable.Td>Col 3</DataTable.Td>
-              <DataTable.Td>Col 4</DataTable.Td>
-            </DataTable.Tr>
-          </DataTable.Tbody>
-        </DataTable>
-      </div>
-    );
+const focusData: FocusRow[] = [{ id: 1 }, { id: 2 }];
+
+const focusColumnDef: ColumnDefinitions<FocusRow> = [
+  { id: "col1", header: "Col 1", label: "Col 1", cell: () => "Col 1" },
+  {
+    id: "col2",
+    header: "Col 2",
+    label: "Col 2",
+    cell: ({ id }) => (id === 1 ? <button>Focusable button</button> : "Col 2"),
   },
+  {
+    id: "col3",
+    header: "Col 3",
+    label: "Col 3",
+    cell: () => "Col 3",
+    isRowHeader: true,
+  },
+  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+];
+
+export const FocusElementInsideTable: Story = {
+  render: () => (
+    <DataTable
+      withKeyboardNav
+      layout="auto"
+      columnDefinitions={focusColumnDef}
+      data={focusData}
+      getRowId={(row) => row.id}
+    />
+  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
