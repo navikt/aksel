@@ -207,6 +207,10 @@
 
     background-color: var(--ax-bg-raised);
 
+    .aksel-data-table__tr[data-selected="true"] & {
+      background-color: var(--ax-bg-soft);
+    }
+
     .aksel-data-table__thead & {
       background-color: var(--ax-bg-neutral-soft);
     }

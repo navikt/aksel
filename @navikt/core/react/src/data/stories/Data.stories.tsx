@@ -383,10 +383,10 @@ export const KitchenSinkAdvancedFilter: Story = {
       first: "none" | "first";
       last: "none" | "last";
     }>({
-      first: "none",
-      last: "none",
+      first: "first",
+      last: "last",
     });
-    const [showDetailsPanel, setShowDetailsPanel] = useState(true);
+    const [showDetailsPanel, setShowDetailsPanel] = useState(false);
     const [showNestedRows, setNestedRows] = useState(false);
 
     const [query, setQuery] = useState<ExternalQuery>({
@@ -395,7 +395,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["selectionMode"]>("none");
+      useState<SelectionProps["selectionMode"]>("multiple");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
