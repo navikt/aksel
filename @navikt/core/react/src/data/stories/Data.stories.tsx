@@ -26,10 +26,12 @@ import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
 import DataDragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
-import { DataTable } from "../table/root/DataTableRoot.legacy";
+import { DataTable } from "../table/root/DataTableRoot";
+import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
+import { TEST_DATA, columnDef_TEST_DATA } from "./Data.test-data";
 import {
   PersonInfo,
   columns,
@@ -216,16 +218,16 @@ export const KitchenSink: Story = {
           }
         />
 
-        <DataTable
+        <DataTableLegacy
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
           withKeyboardNav
         >
-          <DataTable.Thead>
+          <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
-                <DataTable.Tr key={headerGroup.id}>
+                <DataTableLegacy.Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
                       <DataTableColumnHeader
@@ -255,32 +257,32 @@ export const KitchenSink: Story = {
                       </DataTableColumnHeader>
                     );
                   })}
-                </DataTable.Tr>
+                </DataTableLegacy.Tr>
               );
             })}
-          </DataTable.Thead>
+          </DataTableLegacy.Thead>
 
           <MemoizedTableBody table={table} />
 
           {table.getRowModel().rows.length > 0 && (
-            <DataTable.Tfoot>
+            <DataTableLegacy.Tfoot>
               {table.getFooterGroups().map((footerGroup) => (
-                <DataTable.Tr key={footerGroup.id}>
+                <DataTableLegacy.Tr key={footerGroup.id}>
                   {footerGroup.headers.map((header) => (
-                    <DataTable.Td key={header.id}>
+                    <DataTableLegacy.Td key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.footer,
                             header.getContext(),
                           )}
-                    </DataTable.Td>
+                    </DataTableLegacy.Td>
                   ))}
-                </DataTable.Tr>
+                </DataTableLegacy.Tr>
               ))}
-            </DataTable.Tfoot>
+            </DataTableLegacy.Tfoot>
           )}
-        </DataTable>
+        </DataTableLegacy>
       </VStack>
     );
   },
@@ -382,8 +384,6 @@ export const KitchenSinkAdvancedFilter: Story = {
     const [selectionMode, setSelectionMode] = useState<"single" | "multiple">(
       "multiple",
     );
-
-    console.log(rowSelection);
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -599,15 +599,24 @@ export const KitchenSinkAdvancedFilter: Story = {
         />
 
         <DataTable
+          columnDefinitions={columnDef_TEST_DATA}
+          data={TEST_DATA}
+          rowDensity={rowDensity}
+          zebraStripes={zebraStripes}
+          truncateContent={truncateContent}
+          withKeyboardNav
+        />
+
+        <DataTableLegacy
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
           withKeyboardNav
         >
-          <DataTable.Thead>
+          <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
               return (
-                <DataTable.Tr key={headerGroup.id}>
+                <DataTableLegacy.Tr key={headerGroup.id}>
                   {table.options.enableMultiRowSelection ? (
                     <DataTableColumnHeader textAlign="center" width="64px">
                       <CheckboxInput
@@ -650,33 +659,33 @@ export const KitchenSinkAdvancedFilter: Story = {
                       </DataTableColumnHeader>
                     );
                   })}
-                </DataTable.Tr>
+                </DataTableLegacy.Tr>
               );
             })}
-          </DataTable.Thead>
+          </DataTableLegacy.Thead>
 
           <MemoizedTableBody table={table} />
 
           {table.getRowModel().rows.length > 0 && (
-            <DataTable.Tfoot>
+            <DataTableLegacy.Tfoot>
               {table.getFooterGroups().map((footerGroup) => (
-                <DataTable.Tr key={footerGroup.id}>
-                  <DataTable.Td />
+                <DataTableLegacy.Tr key={footerGroup.id}>
+                  <DataTableLegacy.Td />
                   {footerGroup.headers.map((header) => (
-                    <DataTable.Td key={header.id}>
+                    <DataTableLegacy.Td key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.footer,
                             header.getContext(),
                           )}
-                    </DataTable.Td>
+                    </DataTableLegacy.Td>
                   ))}
-                </DataTable.Tr>
+                </DataTableLegacy.Tr>
               ))}
-            </DataTable.Tfoot>
+            </DataTableLegacy.Tfoot>
           )}
-        </DataTable>
+        </DataTableLegacy>
       </VStack>
     );
   },
@@ -693,22 +702,22 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
 
   if (table.getRowModel().rows.length === 0) {
     return (
-      <DataTable.Tbody>
-        <DataTable.EmptyState>
+      <DataTableLegacy.Tbody>
+        <DataTableLegacy.EmptyState>
           <div>No data available</div>
           <Button size="small">Create data</Button>
-        </DataTable.EmptyState>
-      </DataTable.Tbody>
+        </DataTableLegacy.EmptyState>
+      </DataTableLegacy.Tbody>
     );
   }
 
   return (
-    <DataTable.Tbody>
+    <DataTableLegacy.Tbody>
       {table.getRowModel().rows.map((row) => {
         return (
-          <DataTable.Tr key={row.id} selected={row.getIsSelected()}>
+          <DataTableLegacy.Tr key={row.id} selected={row.getIsSelected()}>
             {hasRowSelection && (
-              <DataTable.Td textAlign="center" UNSAFE_isSelection>
+              <DataTableLegacy.Td textAlign="center" UNSAFE_isSelection>
                 {multiRowSelection ? (
                   <CheckboxInput
                     compact
@@ -726,19 +735,19 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
                     aria-label={`Velg rad ${row.id}`}
                   />
                 )}
-              </DataTable.Td>
+              </DataTableLegacy.Td>
             )}
             {row.getVisibleCells().map((cell) => {
               return (
-                <DataTable.Td key={cell.id}>
+                <DataTableLegacy.Td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </DataTable.Td>
+                </DataTableLegacy.Td>
               );
             })}
-          </DataTable.Tr>
+          </DataTableLegacy.Tr>
         );
       })}
-    </DataTable.Tbody>
+    </DataTableLegacy.Tbody>
   );
 };
 
