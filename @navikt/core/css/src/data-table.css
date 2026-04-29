@@ -104,15 +104,17 @@
     position: sticky;
     top: 0;
     z-index: 3;
+    box-shadow: 1px 1px 0 0 var(--ax-border-neutral-subtle);
 
-    &::after {
+    /* This breaks filler-cells ⬇️. Trying box-shadow instead ⬆️ */
+    /* &::after {
       content: "";
       position: absolute;
       inset-inline: 0;
       bottom: -1px;
       pointer-events: none;
       border-bottom: 1px solid var(--ax-border-neutral-subtle);
-    }
+    } */
   }
 }
 
@@ -238,11 +240,11 @@
   &:not([data-selectable="true"]) > div {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
+    overflow: hidden;
 
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden;
     }
   }
 }
@@ -450,7 +452,7 @@
 .aksel-data-table__filler-cell {
   display: table-cell;
   padding: 0;
-  width: 100%;
+  width: auto;
 }
 
 .aksel-data-drag-and-drop__drag-handler__button {
