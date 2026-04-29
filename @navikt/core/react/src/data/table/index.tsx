@@ -20,4 +20,4 @@ export type {
   DataTableTfootProps,
 } from "./root/DataTableRoot.legacy"; */
 
-export { DataTable, DataTableProps } from "./root/DataTableRoot";
+export { DataTable, type DataTableProps } from "./root/DataTableRoot";

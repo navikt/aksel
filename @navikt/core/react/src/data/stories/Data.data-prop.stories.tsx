@@ -9,7 +9,6 @@ import type {
   ColumnDefinitions,
   SortEntry,
 } from "../table/root/DataTable.types";
-import DataTableAuto from "../table/root/DataTableRoot";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Data Prop",
@@ -114,14 +113,14 @@ const userData = generateUserData(4);
 
 export const ItemsAsData: Story = {
   render: () => {
-    return <DataTableAuto columnDefinitions={userColumnDef} data={userData} />;
+    return <DataTable columnDefinitions={userColumnDef} data={userData} />;
   },
 };
 
 export const ItemsAsDataWithCustomRowId: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -137,7 +136,7 @@ export const ItemsAsDataWithCustomRowId: Story = {
 export const SelectionModeMultiple: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -154,7 +153,7 @@ export const SelectionModeMultiple: Story = {
 export const SelectionModeSingle: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -171,7 +170,7 @@ export const SelectionModeSingle: Story = {
 export const SelectionModeSingleWithoutKeyboardNav: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -187,7 +186,7 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
 export const SelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -216,7 +215,7 @@ export const ControlledSelection: Story = {
             Clear selection
           </Button>
         </div>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
           selection={{
@@ -234,7 +233,7 @@ export const ControlledSelection: Story = {
 export const DefaultSelectedKeys: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -251,7 +250,7 @@ export const DefaultSelectedKeys: Story = {
 export const SingleSelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
@@ -268,7 +267,7 @@ export const SingleSelectionWithDisabledRows: Story = {
 export const EmptyData: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={[]}
         selection={{
@@ -282,7 +281,7 @@ export const EmptyData: Story = {
 export const EmptyDataWithEmptyState: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={[]}
         emptyState="Ingen data å vise"
@@ -299,7 +298,7 @@ export const LoadingWithSkeletonRows: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
           loading={{ isLoading, loadingRows: 4 }}
@@ -317,7 +316,7 @@ export const LoadingWithLoadingState: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
           loading={{ isLoading, loadingState: "Laster data..." }}
@@ -335,7 +334,7 @@ export const LoadingWhileKeepingData: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
           loading={{ isLoading, loadingRows: 4 }}
@@ -353,7 +352,7 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
           loading={{ isLoading, loadingLabel: "Laster innhold for tabell" }}
@@ -382,7 +381,7 @@ export const SelectionPagination: Story = {
       <div>
         <button onClick={() => setPage("0")}>Page 1</button>
         <button onClick={() => setPage("1")}>Page 2</button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={dataToShow}
           selection={{
@@ -473,7 +472,7 @@ export const SelectionPagination: Story = {
 export const StickySelection: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
@@ -496,7 +495,7 @@ export const StickySelection: Story = {
 export const StickyLeftOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
@@ -515,7 +514,7 @@ export const StickyLeftOne: Story = {
 export const StickyRightOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
@@ -534,7 +533,7 @@ export const StickyRightOne: Story = {
 export const StickyBothOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "250px",
@@ -555,7 +554,7 @@ export const StickyHeader: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
@@ -571,7 +570,7 @@ export const StickyHeaderAndColumns: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef.map((col) => ({
             ...col,
             defaultWidth: "250px",
@@ -675,7 +674,7 @@ export const SortableColumns: Story = {
     const sortedData = applySortEntries(sortableUserData, sort);
 
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id}
@@ -698,7 +697,7 @@ export const SortableColumnsUncontrolled: Story = {
         {loggedDetail && (
           <pre style={{ fontSize: "0.75rem" }}>{loggedDetail}</pre>
         )}
-        <DataTableAuto
+        <DataTable
           columnDefinitions={sortableColumnDef}
           data={sortableUserData}
           getRowId={(row) => row.id}
@@ -743,7 +742,7 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
 
 export const RowClick: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
@@ -758,7 +757,7 @@ export const RowClick: Story = {
 
 export const RowClickTest: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
@@ -797,7 +796,7 @@ export const RowClickTest: Story = {
 
 export const RowExpansion: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
@@ -818,7 +817,7 @@ export const RowExpansion: Story = {
 
 export const RowExpansionAll: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
@@ -851,7 +850,7 @@ const nestedRowData = userData.map((user) => ({
 
 export const NestedRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
       getRowId={(row) => row.id}
@@ -906,7 +905,7 @@ export const NestedRows: Story = {
 
 export const NestedLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
@@ -925,7 +924,7 @@ export const NestedLeftAlignedContentRows: Story = {
 
 export const NestedOneLevelLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
@@ -950,7 +949,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
 
 export const NestedRowsWithMasterDetail: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
