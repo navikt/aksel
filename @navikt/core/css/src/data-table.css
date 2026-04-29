@@ -593,3 +593,7 @@ html[data-dragging-cursor="true"] *::after {
   display: flex;
   align-items: center;
 }
+
+.aksel-data-table__details-panel-row {
+  box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+}

@@ -386,7 +386,7 @@ export const KitchenSinkAdvancedFilter: Story = {
       first: "none",
       last: "none",
     });
-    const [showDetailsPanel, setShowDetailsPanel] = useState(false);
+    const [showDetailsPanel, setShowDetailsPanel] = useState(true);
     const [showNestedRows, setNestedRows] = useState(false);
 
     const [query, setQuery] = useState<ExternalQuery>({

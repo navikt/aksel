@@ -42,7 +42,7 @@ function DataTableDetailsPanelRow<T>({
     : { height: "auto" };
 
   return (
-    <tr>
+    <tr className="aksel-data-table__details-panel-row">
       <td id={expansionId} colSpan={fullWidthColSpan}>
         <div style={style}>{content}</div>
       </td>
