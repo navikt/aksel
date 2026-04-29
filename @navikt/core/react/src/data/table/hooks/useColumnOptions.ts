@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type {
   ColumnDefinition,
   ColumnDefinitions,
@@ -28,19 +29,32 @@ function useColumnOptions<T>(
 
   const hasSelection = selectionMode !== "none";
 
-  return {
-    stickySelection: selectionMode !== "none" && stickyColumns?.first === "1",
-    columns: columnDefinitions.map((colDef, index) => {
+  const columns = useMemo(() => {
+    return columnDefinitions.map((colDef, index) => {
       const isFirstSticky =
         stickyColumns?.first === "1" && index === 0 && !hasSelection;
       const isLastSticky =
         stickyColumns?.last === "1" && index === columnDefinitions.length - 1;
 
       return {
-        isSticky: isFirstSticky ? "start" : isLastSticky ? "end" : false,
+        isSticky: isFirstSticky
+          ? ("start" as const)
+          : isLastSticky
+            ? ("end" as const)
+            : (false as const),
         colDef,
       };
-    }),
+    });
+  }, [
+    columnDefinitions,
+    hasSelection,
+    stickyColumns?.first,
+    stickyColumns?.last,
+  ]);
+
+  return {
+    stickySelection: selectionMode !== "none" && stickyColumns?.first === "1",
+    columns,
   };
 }
 
