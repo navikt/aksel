@@ -7,7 +7,7 @@ type SortDirection = "asc" | "desc" | "none";
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
  * - Add "align" property for better control over text alignment in cells.
  */
-type ColumnDefinition<T> = Pick<
+type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
   ResizeProps,
   | "resizable"
   | "width"
@@ -51,9 +51,16 @@ type ColumnDefinition<T> = Pick<
    * Use `sort` and `onSortChange` on the root component to control sort state.
    */
   sortable?: boolean;
+  /**
+   * Additional metadata that can be used for filtering or other purposes. Not used by the table itself.
+   */
+  details?: DetailsT;
 };
 
-type ColumnDefinitions<T> = ColumnDefinition<T>[];
+type ColumnDefinitions<T, DetailsT = Record<string, any>> = ColumnDefinition<
+  T,
+  DetailsT
+>[];
 
 /**
  * A single sort entry representing a column's current sort state.

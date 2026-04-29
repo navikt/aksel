@@ -444,9 +444,9 @@
 }
 
 .aksel-data-table__filler-cell {
-  width: auto;
   display: table-cell;
   padding: 0;
+  width: 100%;
 }
 
 .aksel-data-drag-and-drop__drag-handler__button {

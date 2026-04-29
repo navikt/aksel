@@ -14,51 +14,83 @@ type SWData = {
   forceSensitive: boolean;
   homeSystem: string;
   skills: string[];
+  nestedRows: Omit<NestedSWData, "nestedRows">[];
 };
 
-const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
+type Details = {
+  visible: boolean;
+};
+
+const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
   {
     id: "id",
     label: "Id",
     cell: (row) => row.id,
     align: "right",
+    autoWidth: true,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Name",
     id: "name",
-    cell: (row) => row.name,
+    cell: (row) =>
+      `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "National id",
     id: "nationalId",
     cell: (row) => row.nationalId,
     align: "right",
+    autoWidth: true,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Day job",
     id: "dayJob",
     cell: (row) => row.dayJob,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Supervisor",
     id: "supervisor",
     cell: (row) => row.supervisor,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Date received",
     id: "dateReceived",
     cell: (row) => new Date(row.dateReceived).toLocaleDateString("no-NB"),
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Message",
     id: "message",
     cell: (row) => row.message,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Age",
     id: "age",
     cell: (row) => row.age,
     align: "right",
+    details: {
+      visible: true,
+    },
     /* TODO: NOt yet implemented */
     /* footer: ({ table }) => {
       const ages: number[] = [];
@@ -79,16 +111,26 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
         data-color={row.forceSensitive ? "accent" : "warning"}
       >{`${row.forceSensitive ? "Yes" : "No"}`}</Tag>
     ),
+    autoWidth: true,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Home system",
     id: "homeSystem",
     cell: (row) => row.homeSystem,
+    details: {
+      visible: true,
+    },
   },
   {
     label: "Skills",
     id: "skills",
     cell: (row) => row.skills,
+    details: {
+      visible: true,
+    },
   },
 ];
 
@@ -1597,9 +1639,49 @@ const TEST_DATA: SWData[] = baseData.map((item) => ({
   forceSensitive: Math.random() > 0.5,
   homeSystem: getRandomItem(homeSystemOptions),
   skills: getRandomItems(skillOptions),
+  nestedRows: [], // This will be populated later for nested data
 }));
 
-export { columnDef_TEST_DATA, TEST_DATA };
+type NestedSWData = Omit<
+  SWData,
+  "message" | "supervisor" | "dateReceived" | "id"
+>;
+
+const supervisors = [...new Set(TEST_DATA.map((x) => x.supervisor))];
+
+const TEST_DATA_NESTED: NestedSWData[] = supervisors.map((supervisor) => ({
+  age: getRandomInt(20, 60),
+  forceSensitive: Math.random() > 0.5,
+  homeSystem: getRandomItem(homeSystemOptions),
+  skills: getRandomItems(skillOptions),
+  name: supervisor,
+  nationalId: baseData[Math.floor(Math.random() * baseData.length)].nationalId,
+  dayJob: "Supervisor",
+  nestedRows: TEST_DATA.filter((x) => x.supervisor === supervisor).map((x) => ({
+    age: x.age,
+    forceSensitive: x.forceSensitive,
+    homeSystem: x.homeSystem,
+    skills: x.skills,
+    name: x.name,
+    nationalId: x.nationalId,
+    dayJob: x.dayJob,
+  })),
+}));
+
+const columnDef_TEST_DATA_NESTED = columnDef_TEST_DATA.filter(
+  (col) =>
+    col.id !== "id" &&
+    col.id !== "message" &&
+    col.id !== "supervisor" &&
+    col.id !== "dateReceived",
+);
+
+export {
+  columnDef_TEST_DATA,
+  TEST_DATA,
+  TEST_DATA_NESTED,
+  columnDef_TEST_DATA_NESTED,
+};
 
 // Helper function to get random integer between min and max (inclusive)
 function getRandomInt(min: number, max: number) {
