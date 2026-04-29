@@ -2,8 +2,8 @@
 import React, { forwardRef, useMemo } from "react";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
+import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
@@ -200,13 +200,6 @@ function DataTableInner<T>(
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const { tabIndex, setTableRef } = useTableKeyboardNav({
-    enabled: withKeyboardNav,
-    shouldBlockNavigation,
-  });
-
-  const mergedRef = useMergeRefs(forwardedRef, setTableRef);
-
   const { sortState, onSortClick } = useTableSort({
     defaultSort,
     onSortChange,
@@ -282,62 +275,93 @@ function DataTableInner<T>(
         <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
           <div className="aksel-data-table__border-wrapper">
             <div className="aksel-data-table__scroll-wrapper">
-              <table
-                {...rest}
-                ref={mergedRef}
-                className={cl("aksel-data-table", className)}
-                data-zebra-stripes={zebraStripes}
-                data-truncate-content={truncateContent}
-                data-density={rowDensity}
-                data-layout={layout}
-                data-loading={isLoading || undefined}
-                tabIndex={tabIndex}
-                aria-busy={isLoading || undefined}
+              <TableElementWrapper
+                shouldBlockNavigation={shouldBlockNavigation}
+                enabled={withKeyboardNav}
               >
-                <DataTableThead>
-                  <DataTableTr>
-                    {columns.map(({ isSticky, colDef }) => {
-                      const sortEntry = sortState.find(
-                        (s) => s.columnId === colDef.id,
-                      );
-                      const sortDirection = sortEntry?.direction ?? "none";
-                      return (
-                        <DataTableColumnHeader
-                          resizable={colDef.resizable}
-                          width={colDef.width}
-                          defaultWidth={colDef.defaultWidth}
-                          autoWidth={colDef.autoWidth}
-                          minWidth={colDef.minWidth}
-                          maxWidth={colDef.maxWidth}
-                          onWidthChange={colDef.onWidthChange}
-                          textAlign={colDef.align ?? "left"}
-                          key={colDef.id}
-                          isSticky={isSticky}
-                          sortable={colDef.sortable}
-                          sortDirection={sortDirection}
-                          onSortClick={(event) => onSortClick(colDef.id, event)}
-                        >
-                          {colDef.header ?? colDef.label}
-                        </DataTableColumnHeader>
-                      );
-                    })}
-                  </DataTableTr>
-                </DataTableThead>
+                <table
+                  {...rest}
+                  ref={forwardedRef}
+                  className={cl("aksel-data-table", className)}
+                  data-zebra-stripes={zebraStripes}
+                  data-truncate-content={truncateContent}
+                  data-density={rowDensity}
+                  data-layout={layout}
+                  data-loading={isLoading || undefined}
+                  aria-busy={isLoading || undefined}
+                >
+                  <DataTableThead>
+                    <DataTableTr>
+                      {columns.map(({ isSticky, colDef }) => {
+                        const sortEntry = sortState.find(
+                          (s) => s.columnId === colDef.id,
+                        );
+                        const sortDirection = sortEntry?.direction ?? "none";
+                        return (
+                          <DataTableColumnHeader
+                            resizable={colDef.resizable}
+                            width={colDef.width}
+                            defaultWidth={colDef.defaultWidth}
+                            autoWidth={colDef.autoWidth}
+                            minWidth={colDef.minWidth}
+                            maxWidth={colDef.maxWidth}
+                            onWidthChange={colDef.onWidthChange}
+                            textAlign={colDef.align ?? "left"}
+                            key={colDef.id}
+                            isSticky={isSticky}
+                            sortable={colDef.sortable}
+                            sortDirection={sortDirection}
+                            onSortClick={(event) =>
+                              onSortClick(colDef.id, event)
+                            }
+                          >
+                            {colDef.header ?? colDef.label}
+                          </DataTableColumnHeader>
+                        );
+                      })}
+                    </DataTableTr>
+                  </DataTableThead>
 
-                <DataTableTbody>
-                  <DataTableTBodyContent
-                    loadingState={loadingState}
-                    loadingRows={loadingRows}
-                    loadingLabel={loadingLabel}
-                    emptyState={emptyState}
-                  />
-                </DataTableTbody>
-              </table>
+                  <DataTableTbody>
+                    <DataTableTBodyContent
+                      loadingState={loadingState}
+                      loadingRows={loadingRows}
+                      loadingLabel={loadingLabel}
+                      emptyState={emptyState}
+                    />
+                  </DataTableTbody>
+                </table>
+              </TableElementWrapper>
             </div>
           </div>
         </DataTableDetailsPanelProvider>
       </TableItemsProvider>
     </DataTableContextProvider>
+  );
+}
+
+/**
+ * Temp optimization to avoid re-renders on every keyboard-move, selection change etc
+ */
+function TableElementWrapper({
+  children,
+  enabled,
+  shouldBlockNavigation,
+}: {
+  children: React.ReactNode;
+  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
+  enabled: boolean;
+}) {
+  const { tabIndex, setTableRef } = useTableKeyboardNav({
+    enabled,
+    shouldBlockNavigation,
+  });
+
+  return (
+    /* @ts-expect-error Ref is not typed correctly to handle this case */
+    <Slot tabIndex={tabIndex} ref={setTableRef}>
+      {children}
+    </Slot>
   );
 }
 
