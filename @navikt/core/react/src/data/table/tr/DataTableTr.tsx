@@ -15,9 +15,9 @@ import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import {
-  getDataTableExpansionId,
-  useDataTableExpansion,
-} from "../hooks/useTableExpansion";
+  getDataTableDetailsPanelId,
+  useDataTableDetailsPanel,
+} from "../hooks/useTableDetailsPanel";
 import {
   useDataTableContext,
   useDataTableLocation,
@@ -46,13 +46,8 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const {
-      layout,
-      stickyHeader,
-      selectionState,
-      onRowClick,
-      disableRowSelectionOnClick,
-    } = useDataTableContext();
+    const { layout, stickyHeader, selectionState, onRowClick } =
+      useDataTableContext();
     const { location } = useDataTableLocation();
 
     const renderFillerCell = layout === "fixed" && children;
@@ -81,7 +76,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
             }
 
             if (
-              !disableRowSelectionOnClick &&
+              !selectionState.disableRowSelectionOnClick &&
               selectionState.selection.selectionMode !== "none"
             ) {
               selectionState.selection.toggleSelection(rowId);
@@ -130,7 +125,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
     isAllExpanded,
     toggleAll,
     showExpandAll,
-  } = useDataTableExpansion();
+  } = useDataTableDetailsPanel();
 
   if (!enableDetailsPanel) {
     return null;
@@ -198,7 +193,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
 
   const isRowExpanded = isExpanded(rowId);
   const canExpandRow = isDetailsPanelExpandable(rowId);
-  const expansionId = getDataTableExpansionId(tableId, rowId);
+  const expansionId = getDataTableDetailsPanelId(tableId, rowId);
 
   if (!canExpandRow) {
     return <DataTableTd UNSAFE_isSelection preventRowClick />;

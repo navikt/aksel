@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Settings",

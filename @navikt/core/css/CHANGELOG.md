@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 8.10.3
+
+### Patch Changes
+
+- Add module declaration to avoid TypeScript error when importing ([`92f6d9e`](https://github.com/navikt/aksel/commit/92f6d9e93b879962df8415f7fad22203174dd3a8))
+
+## 8.10.2
+
+### Patch Changes
+
+- Dialog: Now aligns to bottom when centered at 480px instead of 768px screen width ([#4831](https://github.com/navikt/aksel/pull/4831))
+
 ## 8.10.1
 
 ### Patch Changes

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { VStack } from "../../primitives/stack";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Spans",
@@ -24,10 +24,10 @@ export const Spans: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTableColumnHeader width="100%" colSpan={2}>
+              <DataTableColumnHeader defaultWidth="100%" colSpan={2}>
                 Group A
               </DataTableColumnHeader>
-              <DataTableColumnHeader width="100%" colSpan={2}>
+              <DataTableColumnHeader defaultWidth="100%" colSpan={2}>
                 Group B
               </DataTableColumnHeader>
             </DataTable.Tr>
@@ -105,10 +105,10 @@ export const SpansSortable: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTableColumnHeader width="100%" colSpan={2} sortable>
+              <DataTableColumnHeader defaultWidth="100%" colSpan={2} sortable>
                 Group A
               </DataTableColumnHeader>
-              <DataTableColumnHeader width="100%" colSpan={2} sortable>
+              <DataTableColumnHeader defaultWidth="100%" colSpan={2} sortable>
                 Group B
               </DataTableColumnHeader>
             </DataTable.Tr>

@@ -1,3 +1,5 @@
+import type { ResizeProps } from "../column-header/useTableColumnResize";
+
 type SortDirection = "asc" | "desc" | "none";
 
 /**
@@ -5,18 +7,24 @@ type SortDirection = "asc" | "desc" | "none";
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
  * - Add "align" property for better control over text alignment in cells.
  */
-type ColumnDefinition<T> = {
+type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
+  ResizeProps,
+  | "resizable"
+  | "width"
+  | "defaultWidth"
+  | "autoWidth"
+  | "minWidth"
+  | "maxWidth"
+  | "onWidthChange"
+> & {
   id: string;
-  width?: number | string;
-  defaultWidth?: number | string;
-  minWidth?: number | string;
-  maxWidth?: number | string;
   /**
-   * Currently only handles cell alignment.
-   * TODO: Should this include centering?
-   * type "icon" or something to avoid ellipsis on actions, tags etc
+   * Text alignment for cells in this column.
+   *
+   *
+   * @default "left"
    */
-  type?: "string" | "number";
+  align?: "left" | "right" | "center";
   /**
    * Assigned to the cell's `th` element instead of `td` if true.
    *
@@ -43,9 +51,16 @@ type ColumnDefinition<T> = {
    * Use `sort` and `onSortChange` on the root component to control sort state.
    */
   sortable?: boolean;
+  /**
+   * Additional metadata that can be used for filtering or other purposes. Not used by the table itself.
+   */
+  details?: DetailsT;
 };
 
-type ColumnDefinitions<T> = ColumnDefinition<T>[];
+type ColumnDefinitions<T, DetailsT = Record<string, any>> = ColumnDefinition<
+  T,
+  DetailsT
+>[];
 
 /**
  * A single sort entry representing a column's current sort state.

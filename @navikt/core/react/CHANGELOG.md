@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 8.10.3
+
+### Patch Changes
+
+- Radio, Checkbox: Fix regression where `className` was mistakenly passed to `input`-element ([#4837](https://github.com/navikt/aksel/pull/4837))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.3
+  - @navikt/aksel-icons@8.10.3
+
+## 8.10.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.2
+  - @navikt/aksel-icons@8.10.2
+
 ## 8.10.1
 
 ### Patch Changes

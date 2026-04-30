@@ -9,7 +9,6 @@ import type {
   ColumnDefinitions,
   SortEntry,
 } from "../table/root/DataTable.types";
-import DataTableAuto from "../table/root/DataTableAuto";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Data Prop",
@@ -29,7 +28,9 @@ type Story = StoryObj<typeof DataTable>;
 
 const selectionControls = {
   args: {
-    selectionMode: "multiple",
+    selection: {
+      selectionMode: "multiple",
+    },
   },
   parameters: {
     controls: {
@@ -37,9 +38,11 @@ const selectionControls = {
     },
   },
   argTypes: {
-    selectionMode: {
-      control: { type: "select" },
-      options: ["none", "single", "multiple"],
+    selection: {
+      selectionMode: {
+        control: { type: "select" },
+        options: ["none", "single", "multiple"],
+      },
     },
   },
 } as const;
@@ -58,7 +61,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Id",
     label: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     defaultWidth: "100px",
   },
   {
@@ -110,18 +113,20 @@ const userData = generateUserData(4);
 
 export const ItemsAsData: Story = {
   render: () => {
-    return <DataTableAuto columnDefinitions={userColumnDef} data={userData} />;
+    return <DataTable columnDefinitions={userColumnDef} data={userData} />;
   },
 };
 
 export const ItemsAsDataWithCustomRowId: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
       />
     );
@@ -131,11 +136,13 @@ export const ItemsAsDataWithCustomRowId: Story = {
 export const SelectionModeMultiple: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
       />
@@ -146,11 +153,13 @@ export const SelectionModeMultiple: Story = {
 export const SelectionModeSingle: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
       />
@@ -161,11 +170,13 @@ export const SelectionModeSingle: Story = {
 export const SelectionModeSingleWithoutKeyboardNav: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
       />
     );
@@ -175,14 +186,16 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
 export const SelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          disabledSelectionKeys: [1, 2],
+        }}
         getRowId={(row) => row.id}
         withKeyboardNav
-        disabledSelectionKeys={[1, 2]}
       />
     );
   },
@@ -202,12 +215,14 @@ export const ControlledSelection: Story = {
             Clear selection
           </Button>
         </div>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
-          selectionMode="multiple"
-          selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: setSelectedKeys,
+            selectedKeys,
+          }}
           getRowId={(row) => row.id}
         />
       </div>
@@ -218,12 +233,14 @@ export const ControlledSelection: Story = {
 export const DefaultSelectedKeys: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="multiple"
-        defaultSelectedKeys={[1, 3]}
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          defaultSelectedKeys: [1, 3],
+        }}
         getRowId={(row) => row.id}
       />
     );
@@ -233,13 +250,15 @@ export const DefaultSelectedKeys: Story = {
 export const SingleSelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={userData}
-        selectionMode="single"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          disabledSelectionKeys: [2],
+        }}
         getRowId={(row) => row.id}
-        disabledSelectionKeys={[2]}
       />
     );
   },
@@ -248,10 +267,12 @@ export const SingleSelectionWithDisabledRows: Story = {
 export const EmptyData: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={[]}
-        selectionMode="multiple"
+        selection={{
+          selectionMode: "multiple",
+        }}
       />
     );
   },
@@ -260,7 +281,7 @@ export const EmptyData: Story = {
 export const EmptyDataWithEmptyState: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef}
         data={[]}
         emptyState="Ingen data å vise"
@@ -277,11 +298,10 @@ export const LoadingWithSkeletonRows: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
-          isLoading={isLoading}
-          loadingRows={4}
+          loading={{ isLoading, loadingRows: 4 }}
         />
       </VStack>
     );
@@ -296,11 +316,10 @@ export const LoadingWithLoadingState: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
-          isLoading={isLoading}
-          loadingState="Laster data..."
+          loading={{ isLoading, loadingState: "Laster data..." }}
         />
       </VStack>
     );
@@ -315,11 +334,10 @@ export const LoadingWhileKeepingData: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
-          isLoading={isLoading}
-          loadingRows={4}
+          loading={{ isLoading, loadingRows: 4 }}
         />
       </VStack>
     );
@@ -334,13 +352,19 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
-          isLoading={isLoading}
+          loading={{ isLoading, loadingLabel: "Laster innhold for tabell" }}
         />
       </VStack>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getAllByText("Laster innhold for tabell")).toHaveLength(1);
+    expect(canvas.getByText("foo2")).toBeInTheDocument();
   },
 };
 
@@ -357,13 +381,15 @@ export const SelectionPagination: Story = {
       <div>
         <button onClick={() => setPage("0")}>Page 1</button>
         <button onClick={() => setPage("1")}>Page 2</button>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={dataToShow}
-          selectionMode="multiple"
-          onSelectionChange={(keys) => {
-            console.info({ keys });
-            selectionPaginationSpy(keys);
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: (keys) => {
+              console.info({ keys });
+              selectionPaginationSpy(keys);
+            },
           }}
           getRowId={(row) => row.foo + row.bar}
         />
@@ -446,14 +472,16 @@ export const SelectionPagination: Story = {
 export const StickySelection: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
         }))}
         data={userData}
-        selectionMode="multiple"
-        onSelectionChange={console.info}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+        }}
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
@@ -467,7 +495,7 @@ export const StickySelection: Story = {
 export const StickyLeftOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
@@ -486,7 +514,7 @@ export const StickyLeftOne: Story = {
 export const StickyRightOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
@@ -505,7 +533,7 @@ export const StickyRightOne: Story = {
 export const StickyBothOne: Story = {
   render: () => {
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "250px",
@@ -526,7 +554,7 @@ export const StickyHeader: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
@@ -542,7 +570,7 @@ export const StickyHeaderAndColumns: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTableAuto
+        <DataTable
           columnDefinitions={userColumnDef.map((col) => ({
             ...col,
             defaultWidth: "250px",
@@ -603,7 +631,7 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     id: "id",
     header: "Id",
     cell: ({ id }) => id,
-    type: "number",
+    align: "right",
     sortable: true,
     label: "Id",
   },
@@ -646,7 +674,7 @@ export const SortableColumns: Story = {
     const sortedData = applySortEntries(sortableUserData, sort);
 
     return (
-      <DataTableAuto
+      <DataTable
         columnDefinitions={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id}
@@ -669,7 +697,7 @@ export const SortableColumnsUncontrolled: Story = {
         {loggedDetail && (
           <pre style={{ fontSize: "0.75rem" }}>{loggedDetail}</pre>
         )}
-        <DataTableAuto
+        <DataTable
           columnDefinitions={sortableColumnDef}
           data={sortableUserData}
           getRowId={(row) => row.id}
@@ -686,7 +714,7 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, type: "number", label: "Id" },
+  { id: "id", header: "Id", cell: ({ id }) => id, align: "right", label: "Id" },
   { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
   {
     id: "link",
@@ -714,12 +742,14 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
 
 export const RowClick: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode="multiple"
+      selection={{
+        selectionMode: "multiple",
+      }}
       withKeyboardNav
     />
   ),
@@ -727,12 +757,14 @@ export const RowClick: Story = {
 
 export const RowClickTest: Story = {
   render: () => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={rowClickSpy}
-      selectionMode="multiple"
+      selection={{
+        selectionMode: "multiple",
+      }}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -764,15 +796,19 @@ export const RowClickTest: Story = {
 
 export const RowExpansion: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selection?.selectionMode,
+      }}
       withKeyboardNav
-      getDetailsPanelContent={(rowData) => {
-        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      detailsPanel={{
+        getContent: (rowData) => {
+          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+        },
       }}
     />
   ),
@@ -781,17 +817,21 @@ export const RowExpansion: Story = {
 
 export const RowExpansionAll: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
-      selectionMode={args.selectionMode}
-      withKeyboardNav
-      getDetailsPanelContent={(rowData) => {
-        return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+      selection={{
+        selectionMode: args.selection?.selectionMode,
       }}
-      showExpandAll
+      withKeyboardNav
+      detailsPanel={{
+        getContent: (rowData) => {
+          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
+        },
+        showExpandAll: true,
+      }}
     />
   ),
   ...selectionControls,
@@ -810,28 +850,73 @@ const nestedRowData = userData.map((user) => ({
 
 export const NestedRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selection?.selectionMode,
+        onSelectionChange: console.info,
+      }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getRows: (row) => row.children,
+      }}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const getCheckboxes = () =>
+      canvas.getAllByRole("checkbox") as HTMLInputElement[];
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+
+    await userEvent.click(getCheckboxes()[2]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[1].indeterminate).toBe(true);
+
+    await userEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(true);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    await userEvent.click(getCheckboxes()[1]);
+
+    expect(getCheckboxes()[1].checked).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(false);
+
+    /* Nested "hidden items" selection */
+    await userEvent.click(getCheckboxes()[2]);
+    expect(getCheckboxes()[2].checked).toBe(true);
+
+    await userEvent.click(
+      canvas.getAllByRole("button", { name: "Vis under-rader" })[0],
+    );
+    expect(getCheckboxes()[2].indeterminate).toBe(false);
+    expect(getCheckboxes()[2].checked).toBe(true);
+    expect(getCheckboxes()[3].checked).toBe(true);
+    expect(getCheckboxes()[4].checked).toBe(true);
+  },
   ...selectionControls,
 };
 
 export const NestedLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selection?.selectionMode,
+      }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getRows: (row) => row.children,
+      }}
     />
   ),
   ...selectionControls,
@@ -839,7 +924,7 @@ export const NestedLeftAlignedContentRows: Story = {
 
 export const NestedOneLevelLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
@@ -850,9 +935,13 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
         })),
       }))}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selection?.selectionMode,
+      }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
+      subRows={{
+        getRows: (row) => row.children,
+      }}
     />
   ),
   ...selectionControls,
@@ -860,7 +949,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
 
 export const NestedRowsWithMasterDetail: Story = {
   render: (args) => (
-    <DataTableAuto
+    <DataTable
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
@@ -871,11 +960,23 @@ export const NestedRowsWithMasterDetail: Story = {
         })),
       }))}
       getRowId={(row) => row.id}
-      selectionMode={args.selectionMode}
+      selection={{
+        selectionMode: args.selection?.selectionMode,
+      }}
       withKeyboardNav
-      getSubRows={(row) => row.children}
-      getDetailsPanelContent={() => <div>Placeholder content</div>}
-      getDetailsPanelHeight={() => 100}
+      subRows={{
+        getRows: (row) => row.children,
+      }}
+      detailsPanel={{
+        getContent: () => (
+          <div>
+            This is the details panel content. It should be possible to interact
+            with the content here without triggering row clicks or affecting row
+            selection.
+          </div>
+        ),
+        getHeight: () => 100,
+      }}
     />
   ),
   /* play: async ({ canvasElement }) => {

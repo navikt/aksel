@@ -9,24 +9,34 @@ import type {
   TableSelection,
 } from "../helpers/selection/selection.types";
 
-type UseTableSelectionArgs = SelectionProps & {
-  /* This is needed for multiple selection to know which keys to select when "select all" is used */
-  allRowKeys: (string | number)[];
+type UseTableSelectionArgs = {
+  selection?: SelectionProps;
+  /* Visible rows manage the header checkbox state and render selection cells. */
+  visibleRowIds: (string | number)[];
+  /* Direct child ids let selection walk nested rows lazily. */
+  childRowIdsById?: Map<string | number, (string | number)[]>;
 };
 
 type UseTableSelectionReturn = {
   selection: TableSelection;
   renderSelection: boolean;
+  disableRowSelectionOnClick: boolean;
 };
 
 function useTableSelection({
-  selectionMode = "none",
-  defaultSelectedKeys,
-  selectedKeys: selectedKeysProp,
-  onSelectionChange,
-  disabledSelectionKeys = [],
-  allRowKeys,
+  selection = {},
+  visibleRowIds = [],
+  childRowIdsById,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
+  const {
+    selectionMode = "none",
+    defaultSelectedKeys,
+    selectedKeys: selectedKeysProp,
+    onSelectionChange,
+    disabledSelectionKeys = [],
+    disableRowSelectionOnClick = false,
+  } = selection;
+
   const radioGroupName = useId();
 
   const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
@@ -56,6 +66,7 @@ function useTableSelection({
         ...baseSelection,
         selectedKeys: [],
       },
+      disableRowSelectionOnClick,
       renderSelection: false,
     };
   }
@@ -72,7 +83,8 @@ function useTableSelection({
           name: radioGroupName,
         }),
       },
-      renderSelection: allRowKeys.length !== 0,
+      disableRowSelectionOnClick,
+      renderSelection: visibleRowIds.length !== 0,
     };
   }
 
@@ -85,10 +97,12 @@ function useTableSelection({
         selectedKeys,
         setSelectedKeys,
         disabledKeysSet,
-        allRowKeys,
+        visibleRowIds,
+        childRowIdsById,
       }),
     },
-    renderSelection: allRowKeys.length !== 0,
+    disableRowSelectionOnClick,
+    renderSelection: visibleRowIds.length !== 0,
   };
 }
 
@@ -102,6 +116,7 @@ const noSelectionState: UseTableSelectionReturn = {
     disabledSelectionKeys: [],
     isRowSelected: () => false,
   },
+  disableRowSelectionOnClick: false,
   renderSelection: false,
 };
 

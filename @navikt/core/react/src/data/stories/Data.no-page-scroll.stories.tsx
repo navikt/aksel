@@ -12,8 +12,8 @@ import React from "react";
 import { Search } from "../../form/search";
 import { Box } from "../../primitives/box";
 import { VStack } from "../../primitives/stack";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 import { DataToolbar } from "../toolbar";
 import { PersonInfo, columns, sampleData } from "./dummy-data";
 

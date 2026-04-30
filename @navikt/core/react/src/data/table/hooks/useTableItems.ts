@@ -3,55 +3,51 @@ import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import {
   type ItemDetail,
+  type TableRowEntryId,
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
 
+type SubRowsProps<T> = {
+  getRows?: (rowData: T) => T[];
+  expandedRowIds?: (string | number)[];
+  defaultExpandedRowIds?: (string | number)[];
+  isRowExpandable?: (rowData: T) => boolean;
+  onExpandedRowIdsChange?: (ids: (string | number)[]) => void;
+};
+
 type UseTableItemsArgs<T> = {
   items: T[];
-  getRowId?: (rowData: T, index: number) => string | number;
-  /**
-   * Master - Detail pattern props
-   */
-  /* expandedDetailsPanelIds?: (string | number)[];
-  defaultExpandedDetailsPanelIds?: (string | number)[];
-  isDetailsPanelExpandable?: (rowData: T) => boolean;
-  onDetailsPanelChange?: (ids: (string | number)[]) => void;
-
-  getDetailsPanelHeight?: (row: T) => number | "auto";
-  getDetailsPanelContent?: (row: T) => React.ReactNode; */
-  /**
-   * Expanded/Nested rows pattern props
-   */
-  getSubRows?: (rowData: T) => T[];
-  expandedSubRowIds?: (string | number)[];
-  defaultExpandedSubRowIds?: (string | number)[];
-  isSubRowExpandable?: (rowData: T) => boolean;
-  onExpandedSubRowIdsChange?: (ids: (string | number)[]) => void;
+  getRowId: (rowData: T, index: number) => TableRowEntryId;
+  subRows?: SubRowsProps<T>;
 };
 
 type useTableItemsReturn<T> = {
   items: T[];
   itemDetails: Map<T, ItemDetail<T>>;
-  onExpandedSubRowIdsChange: (id: string | number) => void;
+  /** Row ids for the rows currently rendered in the table body. */
+  visibleRowIds: TableRowEntryId[];
+  /** Direct child ids for each row, used to traverse selection groups lazily. */
+  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
+  onExpandedRowIdsChange: (id: string | number) => void;
   isSubRowExpanded: (id: string | number) => boolean;
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
+  const { items, subRows = {}, getRowId } = args;
+
   const {
-    items,
-    expandedSubRowIds,
-    defaultExpandedSubRowIds,
-    getSubRows,
-    getRowId,
-    onExpandedSubRowIdsChange,
-    isSubRowExpandable,
-  } = args;
+    expandedRowIds,
+    defaultExpandedRowIds,
+    getRows,
+    onExpandedRowIdsChange,
+    isRowExpandable,
+  } = subRows;
 
   const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
     useControllableState({
-      value: expandedSubRowIds,
-      defaultValue: defaultExpandedSubRowIds ?? [],
-      onChange: onExpandedSubRowIdsChange,
+      value: expandedRowIds,
+      defaultValue: defaultExpandedRowIds ?? [],
+      onChange: onExpandedRowIdsChange,
     });
 
   const expandedIdsSet = useMemo(
@@ -59,38 +55,52 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
     [nestedSubRowsExpandedIds],
   );
 
-  const { itemDetails, visibleItems } = useMemo(() => {
-    const rowEntriesMap = collectTableRowEntries({
-      items,
-      getRowId,
-      getSubRows,
-      isSubRowExpandable,
-    });
+  const { itemDetails, visibleItems, visibleRowIds, childRowIdsById } =
+    useMemo(() => {
+      const { itemDetails: rowEntriesMap, childRowIdsById: _childRowIdsById } =
+        collectTableRowEntries({
+          items,
+          getRowId,
+          getRows,
+          isRowExpandable,
+        });
 
-    const localVisibleItems: T[] = [];
-    const addVisibleRows = (rowData: T) => {
-      localVisibleItems.push(rowData);
+      const localVisibleItems: T[] = [];
+      const localVisibleRowIds: TableRowEntryId[] = [];
 
-      const details = rowEntriesMap.get(rowData);
+      const addVisibleRows = (rowData: T): TableRowEntryId[] => {
+        const details = rowEntriesMap.get(rowData);
 
-      if (!details || !expandedIdsSet.has(details.id)) {
-        return;
+        if (!details) {
+          return [];
+        }
+
+        localVisibleItems.push(rowData);
+        localVisibleRowIds.push(details.id);
+
+        const visibleDescendantRowIds: TableRowEntryId[] = [];
+
+        if (expandedIdsSet.has(details.id)) {
+          for (const childRow of details.children) {
+            const childVisibleRowIds = addVisibleRows(childRow);
+            visibleDescendantRowIds.push(...childVisibleRowIds);
+          }
+        }
+
+        return [details.id, ...visibleDescendantRowIds];
+      };
+
+      for (const rowData of items) {
+        addVisibleRows(rowData);
       }
 
-      for (const childRow of details.children) {
-        addVisibleRows(childRow);
-      }
-    };
-
-    for (const rowData of items) {
-      addVisibleRows(rowData);
-    }
-
-    return {
-      visibleItems: localVisibleItems,
-      itemDetails: rowEntriesMap,
-    };
-  }, [getSubRows, items, getRowId, isSubRowExpandable, expandedIdsSet]);
+      return {
+        visibleItems: localVisibleItems,
+        visibleRowIds: localVisibleRowIds,
+        childRowIdsById: _childRowIdsById,
+        itemDetails: rowEntriesMap,
+      };
+    }, [getRows, items, getRowId, isRowExpandable, expandedIdsSet]);
 
   const handleExpandedSubRowIdChange = useCallback(
     (id: string | number) => {
@@ -106,18 +116,22 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
   return {
     items: visibleItems,
     itemDetails,
-    onExpandedSubRowIdsChange: handleExpandedSubRowIdChange,
+    visibleRowIds,
+    childRowIdsById,
+    onExpandedRowIdsChange: handleExpandedSubRowIdChange,
     isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
   };
 }
 
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
-  createStrictContext<useTableItemsReturn<any>>({
+  createStrictContext<
+    Omit<useTableItemsReturn<any>, "visibleRowIds" | "childRowIdsById">
+  >({
     name: "TableItemsContext",
     errorMessage:
       "useTableItemsContext must be used within a TableItemsProvider",
   });
 
 export { useTableItems, TableItemsProvider, useTableItemsContext };
-export type { ItemDetail };
+export type { ItemDetail, SubRowsProps };

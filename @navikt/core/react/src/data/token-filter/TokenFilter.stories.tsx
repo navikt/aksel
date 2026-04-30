@@ -1,8 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { VStack } from "../../primitives/stack";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "./TokenFilter";
 import type {
   ExternalPropertyDefinition,

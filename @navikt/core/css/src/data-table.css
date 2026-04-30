@@ -11,6 +11,7 @@
   overflow: auto;
   width: 100%;
   position: relative;
+  scroll-timeline: --horizontal-table-scroll inline;
 }
 
 .aksel-data-table {
@@ -104,15 +105,17 @@
     position: sticky;
     top: 0;
     z-index: 3;
+    box-shadow: 1px 1px 0 0 var(--ax-border-neutral-subtle);
 
-    &::after {
+    /* This breaks filler-cells ⬇️. Trying box-shadow instead ⬆️ */
+    /* &::after {
       content: "";
       position: absolute;
       inset-inline: 0;
       bottom: -1px;
       pointer-events: none;
       border-bottom: 1px solid var(--ax-border-neutral-subtle);
-    }
+    } */
   }
 }
 
@@ -144,6 +147,27 @@
 .aksel-data-table__thead {
   position: relative; /* Shadow ends up behind loading/empty-state without, consider after-element instead like with sticky */
   box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
+}
+
+@keyframes scroll-shadow-fade-start {
+  0% {
+    opacity: 0;
+  }
+
+  10%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-shadow-fade-end {
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .aksel-data-table__cell {
@@ -195,6 +219,24 @@
     &[data-sticky="start"] {
       left: 0;
 
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        box-shadow: 4px 0 8px 1px var(--ax-border-neutral-subtleA);
+        clip-path: inset(0 -24px 0 0);
+        opacity: 0;
+      }
+
+      .aksel-data-table[data-scroll] &::before {
+        opacity: 1;
+        animation: scroll-shadow-fade-start 1s linear;
+        animation-timeline: --horizontal-table-scroll;
+      }
+
       &::after {
         inset-inline: 0 -1px;
         border-right-width: 1px;
@@ -203,9 +245,31 @@
 
     &[data-sticky="end"] {
       right: 0;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        box-shadow: -4px 0 8px 1px var(--ax-border-neutral-subtleA);
+        clip-path: inset(0 0 0 -24px);
+        opacity: 0;
+      }
+
+      .aksel-data-table[data-scroll] &::before {
+        opacity: 1;
+        animation: scroll-shadow-fade-end 1s linear;
+        animation-timeline: --horizontal-table-scroll;
+      }
     }
 
     background-color: var(--ax-bg-raised);
+
+    .aksel-data-table__tr[data-selected="true"] & {
+      background-color: var(--ax-bg-soft);
+    }
 
     .aksel-data-table__thead & {
       background-color: var(--ax-bg-neutral-soft);
@@ -234,11 +298,11 @@
   &:not([data-selectable="true"]) > div {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
+    overflow: hidden;
 
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden;
     }
   }
 }
@@ -444,9 +508,9 @@
 }
 
 .aksel-data-table__filler-cell {
-  width: auto;
   display: table-cell;
   padding: 0;
+  width: auto;
 }
 
 .aksel-data-drag-and-drop__drag-handler__button {
@@ -592,4 +656,8 @@ html[data-dragging-cursor="true"] *::after {
   left: calc(var(--__axc-data-table-pi-cell) + var(--__axc-data-table-nested-depth) * var(--ax-space-16));
   display: flex;
   align-items: center;
+}
+
+.aksel-data-table__details-panel-row {
+  box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
 }

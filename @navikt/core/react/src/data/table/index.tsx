@@ -1,5 +1,5 @@
 "use client";
-export {
+/* export {
   default as DataTable,
   DataTableCaption,
   DataTableThead,
@@ -8,7 +8,7 @@ export {
   DataTableTh,
   DataTableTd,
   DataTableTfoot,
-} from "./root/DataTableRoot";
+} from "./root/DataTableRoot.legacy";
 export type {
   DataTableProps,
   DataTableCaptionProps,
@@ -18,4 +18,6 @@ export type {
   DataTableThProps,
   DataTableTdProps,
   DataTableTfootProps,
-} from "./root/DataTableRoot";
+} from "./root/DataTableRoot.legacy"; */
+
+export { DataTable, type DataTableProps } from "./root/DataTableRoot";

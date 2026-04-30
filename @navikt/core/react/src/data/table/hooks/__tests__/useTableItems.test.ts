@@ -78,20 +78,39 @@ describe("useTableItems", () => {
       useTableItems({
         items: nestedRows,
         getRowId: (row) => row.id,
-        getSubRows,
-        defaultExpandedSubRowIds: ["a"],
+        subRows: {
+          getRows: getSubRows,
+          defaultExpandedRowIds: ["a"],
+        },
       }),
     );
 
     expect(getVisibleIds(result.current.items)).toEqual(["a", "a1", "a2", "b"]);
   });
 
+  test("collects direct child row ids even when nested rows are collapsed", () => {
+    const { result } = renderHook(() =>
+      useTableItems({
+        items: nestedRows,
+        getRowId: (row) => row.id,
+        subRows: { getRows: getSubRows },
+      }),
+    );
+
+    expect(result.current.childRowIdsById.get("a")).toEqual(["a1", "a2"]);
+    expect(result.current.childRowIdsById.get("a2")).toEqual(["a2a"]);
+    expect(result.current.childRowIdsById.get("b")).toEqual(["b1"]);
+  });
+
   test("uses the same fallback root id to reveal child rows when getRowId is omitted", () => {
     const { result } = renderHook(() =>
       useTableItems({
         items: fallbackRows,
-        getSubRows: (row) => row.subRows ?? [],
-        defaultExpandedSubRowIds: [0],
+        getRowId: (_, index) => index,
+        subRows: {
+          getRows: (row: any) => row.subRows ?? [],
+          defaultExpandedRowIds: [0],
+        },
       }),
     );
 
@@ -107,8 +126,10 @@ describe("useTableItems", () => {
         useTableItems({
           items: nestedRows,
           getRowId: (row) => row.id,
-          getSubRows,
-          expandedSubRowIds: expandedIds,
+          subRows: {
+            getRows: getSubRows,
+            expandedRowIds: expandedIds,
+          },
         }),
       {
         initialProps: { expandedIds: [] as (string | number)[] },

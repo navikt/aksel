@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 import { sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
@@ -224,9 +224,15 @@ export const FixedLayoutDynamicWidth: Story = {
       <DataTable layout="fixed">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTableColumnHeader width="100%">Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 3</DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 1
+            </DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 2
+            </DataTableColumnHeader>
+            <DataTableColumnHeader defaultWidth="100%">
+              Column 3
+            </DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>

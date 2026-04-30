@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataTable } from "../table";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
+import { DataTable } from "../table/root/DataTableRoot.legacy";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Resize",
@@ -54,23 +54,19 @@ export const ResizeMinMax: Story = {
     <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader
-            maxWidth="400px"
-            minWidth="100px"
-            textAlign="left"
-          >
+          <DataTableColumnHeader maxWidth={400} minWidth={100} textAlign="left">
             Left
           </DataTableColumnHeader>
           <DataTableColumnHeader
-            maxWidth="400px"
-            minWidth="50px"
+            maxWidth={400}
+            minWidth={50}
             textAlign="center"
           >
             Center
           </DataTableColumnHeader>
           <DataTableColumnHeader
-            maxWidth="400px"
-            minWidth="200px"
+            maxWidth={400}
+            minWidth={200}
             textAlign="right"
           >
             Right

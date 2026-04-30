@@ -14,10 +14,14 @@ type DataTableContextProps<T> = {
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
-  disableRowSelectionOnClick: boolean;
   isLoading?: boolean;
   showLoadingOverlay: boolean;
   columns: UseColumnOptionsResult<T>["columns"];
+  /**
+   * Used to set exact colspan for detailsPanel, loadingState and emptyState.
+   * This is necessary to ensure that these components span the entire width of the table.
+   */
+  fullWidthColSpan: number;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =
