@@ -4,6 +4,14 @@ import type { McpTool } from "../types.js";
 const componentPropsInputSchema = {
   slug: z
     .string()
+    .trim()
+    .min(1, "Slug is required")
+    .refine((value) => !value.startsWith("/"), {
+      message: "Slug must not start with '/'",
+    })
+    .refine((value) => !value.endsWith(".md"), {
+      message: "Slug must not end with '.md'",
+    })
     .describe(
       "The component documentation slug (e.g., 'komponenter/core/button'). Read the aksel-docs://llm-index resource to find the correct slug — strip the leading '/' and trailing '.md' from the path.",
     ),
