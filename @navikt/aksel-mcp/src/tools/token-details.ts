@@ -2,12 +2,19 @@ import { z } from "zod";
 import { tokens } from "../resources/design-tokens.js";
 import type { McpTool } from "../types.js";
 
+const tokenNames = Array.from(
+  new Set(tokens.map((token: any) => token.name)),
+).sort();
+
+const tokenNameSchema = z.enum(tokenNames as [string, ...string[]], {
+  invalid_type_error: "tokenName must be a string",
+  required_error: "tokenName is required",
+});
+
 const tokenDetailsInputSchema = {
-  tokenName: z
-    .string()
-    .describe(
-      "The exact name of the token to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog')",
-    ),
+  tokenName: tokenNameSchema.describe(
+    "The exact name of the token to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog')",
+  ),
 };
 
 const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {

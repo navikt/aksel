@@ -17,6 +17,10 @@ Example:
   inputSchema: {
     path: z
       .string()
+      .trim()
+      .min(1, "Path is required")
+      .startsWith("/", "Path must start with '/'")
+      .endsWith(".md", "Path must end with '.md'")
       .describe(
         "Documentation path from the llm.md index (e.g., '/komponenter/core/button.md'). You MUST get this path from the aksel-docs://llm-index resource.",
       ),

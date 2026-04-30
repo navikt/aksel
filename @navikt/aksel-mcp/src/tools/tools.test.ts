@@ -1,10 +1,55 @@
 import { describe, expect, test } from "vitest";
+import { z } from "zod";
+import { getAkselDocs } from "./aksel-docs.js";
 import { iconSearchTool } from "./icon-search.js";
 import { akselMigrationsTool } from "./migrations.js";
 import { tokenDetailsTool } from "./token-details.js";
 
 describe("Tools", () => {
+  describe("getAkselDocs", () => {
+    test("should require path to end with .md", () => {
+      const strictSchema = z.object(getAkselDocs.inputSchema).strict();
+
+      const valid = strictSchema.safeParse({
+        path: "/komponenter/core/button.md",
+      });
+      const invalid = strictSchema.safeParse({
+        path: "/komponenter/core/button",
+      });
+      const empty = strictSchema.safeParse({
+        path: "",
+      });
+
+      expect(valid.success).toBe(true);
+      expect(invalid.success).toBe(false);
+      expect(empty.success).toBe(false);
+    });
+  });
+
   describe("tokenDetailsTool", () => {
+    test("should reject unknown tokenName values in schema", () => {
+      const strictSchema = z.object(tokenDetailsTool.inputSchema).strict();
+
+      const valid = strictSchema.safeParse({ tokenName: "shadow-dialog" });
+      const invalid = strictSchema.safeParse({
+        tokenName: "nonexistent-token-xyz",
+      });
+
+      expect(valid.success).toBe(true);
+      expect(invalid.success).toBe(false);
+    });
+
+    test("should reject unknown fields in strict mode", () => {
+      const strictSchema = z.object(tokenDetailsTool.inputSchema).strict();
+
+      const parseResult = strictSchema.safeParse({
+        tokenName: "shadow-dialog",
+        extraField: "unexpected",
+      });
+
+      expect(parseResult.success).toBe(false);
+    });
+
     test("should fetch details for valid token", async () => {
       const result = await tokenDetailsTool.callback({
         tokenName: "shadow-dialog",
@@ -110,6 +155,16 @@ describe("Tools", () => {
   });
 
   describe("akselMigrationsTool", () => {
+    test("should reject any arguments in strict mode", () => {
+      const strictSchema = z.object(akselMigrationsTool.inputSchema).strict();
+
+      const invalidParse = strictSchema.safeParse({ foo: "bar" });
+      const validParse = strictSchema.safeParse({});
+
+      expect(invalidParse.success).toBe(false);
+      expect(validParse.success).toBe(true);
+    });
+
     test("should return all migrations", async () => {
       const result = await akselMigrationsTool.callback({});
       const response = JSON.parse(result);
