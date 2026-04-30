@@ -5194,7 +5194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.10.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^8.10.1, @navikt/aksel-icons@npm:^8.10.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -5255,7 +5255,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/aksel@npm:^8.10.3, @navikt/aksel@workspace:@navikt/aksel":
+"@navikt/aksel@npm:^8.10.1, @navikt/aksel@npm:^8.10.3, @navikt/aksel@workspace:@navikt/aksel":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
@@ -5359,7 +5359,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^8.10.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^8.10.1, @navikt/ds-tokens@npm:^8.10.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
