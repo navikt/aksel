@@ -70,7 +70,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
   {
     label: "Date received",
     id: "dateReceived",
-    cell: (row) => new Date(row.dateReceived).toLocaleDateString("no-NB"),
+    cell: (row) => row.dateReceived,
     details: {
       visible: true,
     },
