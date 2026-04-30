@@ -284,7 +284,6 @@ function DataTableInner<T>(
           <TableElementWrapper
             shouldBlockNavigation={shouldBlockNavigation}
             enabled={withKeyboardNav}
-            hasStickyColumns={!!stickyColumns?.first || !!stickyColumns?.last}
           >
             <table
               {...rest}
@@ -350,17 +349,12 @@ function TableElementWrapper({
   children,
   enabled,
   shouldBlockNavigation,
-  hasStickyColumns = false,
 }: {
   children: React.ReactNode;
   shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
   enabled: boolean;
-  hasStickyColumns?: boolean;
 }) {
-  type StickyScrollState = "start" | "end" | "both" | "none";
-
-  const [applyStickyStyles, setApplyStickyStyles] =
-    useState<StickyScrollState>("none");
+  const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
 
   const tableWrapperRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLTableElement>(null);
@@ -373,26 +367,14 @@ function TableElementWrapper({
   const mergedTableRefs = useMergeRefs(tableRef, setTableRef);
 
   const updateStickyStyles = useCallback(() => {
-    if (!tableWrapperRef.current || !tableRef.current) {
+    if (!tableWrapperRef.current) {
       return;
     }
 
-    const { isStuckToTheInlineStart, isStuckToTheInlineEnd } = updateScroll(
-      tableWrapperRef.current,
-      tableRef.current,
-    );
-    const nextStickyState: StickyScrollState =
-      isStuckToTheInlineStart && isStuckToTheInlineEnd
-        ? "both"
-        : isStuckToTheInlineStart
-          ? "start"
-          : isStuckToTheInlineEnd
-            ? "end"
-            : "none";
+    const doesWrapperHasScroll =
+      tableWrapperRef.current.scrollWidth > tableWrapperRef.current.clientWidth;
 
-    setApplyStickyStyles((prevStickyState) =>
-      prevStickyState === nextStickyState ? prevStickyState : nextStickyState,
-    );
+    setApplyStickyStyles(doesWrapperHasScroll);
   }, []);
 
   const scheduleStickyStylesUpdate = useCallback(() => {
@@ -409,15 +391,11 @@ function TableElementWrapper({
   useEffect(() => {
     const tableWrapperElement = tableWrapperRef.current;
 
-    if (!tableWrapperElement || !hasStickyColumns) {
+    if (!tableWrapperElement) {
       return;
     }
 
     const handleResize = () => scheduleStickyStylesUpdate();
-
-    tableWrapperElement.addEventListener("scroll", scheduleStickyStylesUpdate, {
-      passive: true,
-    });
 
     window.addEventListener("resize", handleResize);
 
@@ -433,10 +411,6 @@ function TableElementWrapper({
     scheduleStickyStylesUpdate();
 
     return () => {
-      tableWrapperElement.removeEventListener(
-        "scroll",
-        scheduleStickyStylesUpdate,
-      );
       window.removeEventListener("resize", handleResize);
       resizeObserver?.disconnect();
       if (rafRef.current !== null) {
@@ -444,52 +418,22 @@ function TableElementWrapper({
         rafRef.current = null;
       }
     };
-  }, [hasStickyColumns, scheduleStickyStylesUpdate]);
-
-  const stickyAttrb =
-    applyStickyStyles !== "none" && hasStickyColumns
-      ? { "data-sticky-scroll": applyStickyStyles }
-      : {};
+  }, [scheduleStickyStylesUpdate]);
 
   return (
     <div className="aksel-data-table__border-wrapper">
       <div ref={tableWrapperRef} className="aksel-data-table__scroll-wrapper">
-        {/* @ts-expect-error Ref is not typed correctly to handle this case */}
-        <Slot tabIndex={tabIndex} ref={mergedTableRefs} {...stickyAttrb}>
+        <Slot
+          tabIndex={tabIndex}
+          /* @ts-expect-error Ref is not typed correctly to handle this case */
+          ref={mergedTableRefs}
+          data-scroll={applyStickyStyles ? "true" : undefined}
+        >
           {children}
         </Slot>
       </div>
     </div>
   );
-}
-
-function updateScroll(wrapperElement: HTMLElement, tableElement: HTMLElement) {
-  const wrapperScrollInlineStart = getScrollInlineStart(wrapperElement);
-  const wrapperScrollWidth = wrapperElement.scrollWidth;
-  const wrapperClientWidth = wrapperElement.clientWidth;
-  const tablePaddingInlineStart =
-    parseFloat(getComputedStyle(tableElement).paddingInlineStart) || 0;
-  const tablePaddingInlineEnd =
-    parseFloat(getComputedStyle(tableElement).paddingInlineEnd) || 0;
-
-  const isStuckToTheInlineStart =
-    wrapperScrollInlineStart > tablePaddingInlineStart;
-
-  // Math.ceil() is used here to address an edge-case in certain browsers, where they return non-integer wrapperScrollInlineStart values
-  // which are lower than expected (sub-pixel difference), resulting in the table always being in the "stuck to the right" state
-  /* TODO: need to handle border better than + 2 */
-  const isStuckToTheInlineEnd =
-    Math.ceil(wrapperScrollInlineStart) + 2 <
-    wrapperScrollWidth - wrapperClientWidth - tablePaddingInlineEnd;
-
-  return {
-    isStuckToTheInlineStart,
-    isStuckToTheInlineEnd,
-  };
-}
-
-export function getScrollInlineStart(element: HTMLElement) {
-  return Math.floor(element.scrollLeft);
 }
 
 interface DataTableTBodyContentProps {

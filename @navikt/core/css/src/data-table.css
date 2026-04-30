@@ -11,6 +11,7 @@
   overflow: auto;
   width: 100%;
   position: relative;
+  scroll-timeline: --horizontal-table-scroll inline;
 }
 
 .aksel-data-table {
@@ -148,6 +149,27 @@
   box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
+@keyframes scroll-shadow-fade-start {
+  0% {
+    opacity: 0;
+  }
+
+  10%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-shadow-fade-end {
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .aksel-data-table__cell {
   /* border doesn't work on sticky thead when we have collapsed borders, so using box-shadow instead */
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
@@ -197,7 +219,7 @@
     &[data-sticky="start"] {
       left: 0;
 
-      :where([data-sticky-scroll="start"], [data-sticky-scroll="both"]) &::before {
+      &::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -206,6 +228,13 @@
         pointer-events: none;
         box-shadow: 4px 0 8px 1px var(--ax-border-neutral-subtleA);
         clip-path: inset(0 -24px 0 0);
+        opacity: 0;
+      }
+
+      .aksel-data-table[data-scroll] &::before {
+        opacity: 1;
+        animation: scroll-shadow-fade-start 1s linear;
+        animation-timeline: --horizontal-table-scroll;
       }
 
       &::after {
@@ -217,7 +246,7 @@
     &[data-sticky="end"] {
       right: 0;
 
-      :where([data-sticky-scroll="end"], [data-sticky-scroll="both"]) &::before {
+      &::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -226,6 +255,13 @@
         pointer-events: none;
         box-shadow: -4px 0 8px 1px var(--ax-border-neutral-subtleA);
         clip-path: inset(0 0 0 -24px);
+        opacity: 0;
+      }
+
+      .aksel-data-table[data-scroll] &::before {
+        opacity: 1;
+        animation: scroll-shadow-fade-end 1s linear;
+        animation-timeline: --horizontal-table-scroll;
       }
     }
 
