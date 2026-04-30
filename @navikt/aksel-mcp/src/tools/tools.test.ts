@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
+import { metadata } from "../resources/icon-categories.js";
 import { getAkselDocs } from "./aksel-docs.js";
 import { iconSearchTool } from "./icon-search.js";
 import { akselMigrationsTool } from "./migrations.js";
@@ -95,9 +96,35 @@ describe("Tools", () => {
   });
 
   describe("iconSearchTool", () => {
+    test("should reject invalid enum inputs", () => {
+      const strictSchema = z.object(iconSearchTool.inputSchema).strict();
+
+      const invalidCategory = strictSchema.safeParse({
+        category: "NotARealCategory",
+      });
+      const invalidSubcategory = strictSchema.safeParse({
+        subcategory: "NotARealSubcategory",
+      });
+      const invalidKeyword = strictSchema.safeParse({
+        keyword: "not-a-real-icon-keyword",
+      });
+      const invalidVariant = strictSchema.safeParse({
+        variant: "outline",
+      });
+
+      expect(invalidCategory.success).toBe(false);
+      expect(invalidSubcategory.success).toBe(false);
+      expect(invalidKeyword.success).toBe(false);
+      expect(invalidVariant.success).toBe(false);
+    });
+
     test("should search icons by keyword", async () => {
+      const firstKeyword = Object.values(metadata)[0]?.keywords?.[0];
+
+      expect(firstKeyword).toBeDefined();
+
       const result = await iconSearchTool.callback({
-        keyword: "chat",
+        keyword: firstKeyword,
         limit: 10,
         category: undefined,
         subcategory: undefined,

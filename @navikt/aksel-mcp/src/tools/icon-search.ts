@@ -2,32 +2,49 @@ import { z } from "zod";
 import { metadata } from "../resources/icon-categories.js";
 import type { McpTool } from "../types.js";
 
+const icons = Object.values(metadata);
+const categories = Array.from(
+  new Set(icons.map((icon) => icon.category)),
+).sort();
+const subcategories = Array.from(
+  new Set(icons.map((icon) => icon.sub_category)),
+).sort();
+const keywords = Array.from(
+  new Set(icons.flatMap((icon) => icon.keywords)),
+).sort();
+const variants = Array.from(
+  new Set([...icons.map((icon) => icon.variant), "both"]),
+).sort();
+
 const iconSearchInputSchema = {
   category: z
-    .string()
+    .enum(categories as [string, ...string[]])
     .optional()
     .describe(
       "Filter by main category (e.g., 'Interface', 'Arrows', 'People'). Use aksel-icons://categories resource to see all available categories.",
     ),
   subcategory: z
-    .string()
+    .enum(subcategories as [string, ...string[]])
     .optional()
     .describe(
       "Filter by subcategory (e.g., 'Communication', 'Arrow', 'Body parts')",
     ),
   keyword: z
-    .string()
+    .enum(keywords as [string, ...string[]])
     .optional()
     .describe(
       "Search by keyword (e.g., 'chat', 'calendar', 'arrow'). Matches against icon keywords and names.",
     ),
   variant: z
-    .enum(["Stroke", "Fill", "both"])
+    .enum(variants as [string, ...string[]])
     .optional()
     .default("both")
     .describe("Filter by icon variant: Stroke, Fill, or both"),
   limit: z
     .number()
+    .int()
+    .min(1)
+    .max(100)
     .optional()
     .default(20)
     .describe("Maximum number of results to return (default: 20, max: 100)"),
@@ -39,8 +56,7 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
     "Search and filter Aksel icons by category, subcategory, keywords, or name. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
   inputSchema: iconSearchInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
-    const maxLimit = Math.min(limit || 20, 100);
-    const icons = Object.values(metadata);
+    const maxLimit = limit || 20;
 
     let filtered = icons;
 
@@ -70,9 +86,7 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
 
     // Filter by variant
     if (variant && variant !== "both") {
-      filtered = filtered.filter(
-        (icon) => icon.variant === variant.toLowerCase(),
-      );
+      filtered = filtered.filter((icon) => icon.variant === variant);
     }
 
     // Limit results
