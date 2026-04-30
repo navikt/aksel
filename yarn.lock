@@ -5520,7 +5520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.57.0":
+"@playwright/test@npm:1.59.1":
   version: 1.59.1
   resolution: "@playwright/test@npm:1.59.1"
   dependencies:
@@ -9403,7 +9403,7 @@ __metadata:
     globals: "npm:^17.4.0"
     husky: "npm:^8.0.0"
     lint-staged: "npm:16.4.0"
-    playwright: "npm:^1.57.0"
+    playwright: "npm:1.59.1"
     prettier: "npm:3.8.1"
     react: "npm:19.2.5"
     react-docgen-typescript: "npm:2.2.2"
@@ -19194,7 +19194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright@npm:1.59.1, playwright@npm:^1.57.0":
+"playwright@npm:1.59.1":
   version: 1.59.1
   resolution: "playwright@npm:1.59.1"
   dependencies:
@@ -24568,7 +24568,7 @@ __metadata:
     "@neshca/cache-handler": "npm:1.9.0"
     "@next/bundle-analyzer": "npm:16.2.3"
     "@next/eslint-plugin-next": "npm:16.2.3"
-    "@playwright/test": "npm:^1.57.0"
+    "@playwright/test": "npm:1.59.1"
     "@portabletext/block-tools": "npm:^5.1.1"
     "@portabletext/markdown": "npm:^1.2.0"
     "@portabletext/react": "npm:^6.0.3"
