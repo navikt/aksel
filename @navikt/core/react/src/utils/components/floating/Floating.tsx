@@ -263,13 +263,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const desiredPlacement = (side +
       (align !== "center" ? "-" + align : "")) as Placement;
 
-    let collisionPadding = collisionPaddingProp as {
-      top: number;
-      right: number;
-      bottom: number;
-      left: number;
-    };
-
     /**
      * Create a bias to the preferred side.
      * On iOS, when the mobile software keyboard opens, the input is exactly centered
@@ -281,21 +274,20 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const biasLeft = side === "right" ? bias : 0;
     const biasRight = side === "left" ? bias : 0;
 
-    if (typeof collisionPadding === "number") {
-      collisionPadding = {
-        top: collisionPadding + biasTop,
-        right: collisionPadding + biasRight,
-        bottom: collisionPadding + biasBottom,
-        left: collisionPadding + biasLeft,
-      };
-    } else if (collisionPadding) {
-      collisionPadding = {
-        top: (collisionPadding.top || 0) + biasTop,
-        right: (collisionPadding.right || 0) + biasRight,
-        bottom: (collisionPadding.bottom || 0) + biasBottom,
-        left: (collisionPadding.left || 0) + biasLeft,
-      };
-    }
+    const collisionPadding =
+      typeof collisionPaddingProp === "number"
+        ? {
+            top: collisionPaddingProp + biasTop,
+            right: collisionPaddingProp + biasRight,
+            bottom: collisionPaddingProp + biasBottom,
+            left: collisionPaddingProp + biasLeft,
+          }
+        : {
+            top: (collisionPaddingProp.top || 0) + biasTop,
+            right: (collisionPaddingProp.right || 0) + biasRight,
+            bottom: (collisionPaddingProp.bottom || 0) + biasBottom,
+            left: (collisionPaddingProp.left || 0) + biasLeft,
+          };
 
     const boundary = Array.isArray(collisionBoundary)
       ? collisionBoundary
@@ -351,12 +343,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
         avoidCollisions &&
           flip({
             ...detectOverflowOptions,
-            padding: {
-              top: collisionPadding.top + bias,
-              right: collisionPadding.right + bias,
-              bottom: collisionPadding.bottom + bias,
-              left: collisionPadding.left + bias,
-            },
+            padding: collisionPadding,
           }),
         size({
           ...detectOverflowOptions,
