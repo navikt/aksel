@@ -113,7 +113,7 @@ interface DataTableProps<T>
     last?: "1";
   };
   /**
-   * @default false
+   * @default true
    */
   stickyHeader?: boolean;
   /**
@@ -187,7 +187,7 @@ function DataTableInner<T>(
     columnDefinitions,
     getRowId,
     stickyColumns,
-    stickyHeader = false,
+    stickyHeader = true,
     sort: sortProp,
     defaultSort = [],
     onSortChange,
