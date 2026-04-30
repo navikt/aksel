@@ -122,9 +122,7 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
       canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
     );
 
-    const rowCheckboxes = getCheckboxes(canvasElement).slice(
-      1,
-    ) as HTMLInputElement[];
+    const rowCheckboxes = getCheckboxes(canvasElement) as HTMLInputElement[];
 
     expect(rowCheckboxes).toHaveLength(3);
     expect(rowCheckboxes.every((checkbox) => checkbox.checked)).toBe(true);
