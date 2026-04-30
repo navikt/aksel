@@ -1,9 +1,17 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
-import React, { forwardRef, useMemo } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
@@ -273,67 +281,62 @@ function DataTableInner<T>(
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
         <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-          <div className="aksel-data-table__border-wrapper">
-            <div className="aksel-data-table__scroll-wrapper">
-              <TableElementWrapper
-                shouldBlockNavigation={shouldBlockNavigation}
-                enabled={withKeyboardNav}
-              >
-                <table
-                  {...rest}
-                  ref={forwardedRef}
-                  className={cl("aksel-data-table", className)}
-                  data-zebra-stripes={zebraStripes}
-                  data-truncate-content={truncateContent}
-                  data-density={rowDensity}
-                  data-layout={layout}
-                  data-loading={isLoading || undefined}
-                  aria-busy={isLoading || undefined}
-                >
-                  <DataTableThead>
-                    <DataTableTr>
-                      {columns.map(({ isSticky, colDef }) => {
-                        const sortEntry = sortState.find(
-                          (s) => s.columnId === colDef.id,
-                        );
-                        const sortDirection = sortEntry?.direction ?? "none";
-                        return (
-                          <DataTableColumnHeader
-                            resizable={colDef.resizable}
-                            width={colDef.width}
-                            defaultWidth={colDef.defaultWidth}
-                            autoWidth={colDef.autoWidth}
-                            minWidth={colDef.minWidth}
-                            maxWidth={colDef.maxWidth}
-                            onWidthChange={colDef.onWidthChange}
-                            textAlign={colDef.align ?? "left"}
-                            key={colDef.id}
-                            isSticky={isSticky}
-                            sortable={colDef.sortable}
-                            sortDirection={sortDirection}
-                            onSortClick={(event) =>
-                              onSortClick(colDef.id, event)
-                            }
-                          >
-                            {colDef.header ?? colDef.label}
-                          </DataTableColumnHeader>
-                        );
-                      })}
-                    </DataTableTr>
-                  </DataTableThead>
+          <TableElementWrapper
+            shouldBlockNavigation={shouldBlockNavigation}
+            enabled={withKeyboardNav}
+            hasStickyColumns={!!stickyColumns?.first || !!stickyColumns?.last}
+          >
+            <table
+              {...rest}
+              ref={forwardedRef}
+              className={cl("aksel-data-table", className)}
+              data-zebra-stripes={zebraStripes}
+              data-truncate-content={truncateContent}
+              data-density={rowDensity}
+              data-layout={layout}
+              data-loading={isLoading || undefined}
+              aria-busy={isLoading || undefined}
+            >
+              <DataTableThead>
+                <DataTableTr>
+                  {columns.map(({ isSticky, colDef }) => {
+                    const sortEntry = sortState.find(
+                      (s) => s.columnId === colDef.id,
+                    );
+                    const sortDirection = sortEntry?.direction ?? "none";
+                    return (
+                      <DataTableColumnHeader
+                        resizable={colDef.resizable}
+                        width={colDef.width}
+                        defaultWidth={colDef.defaultWidth}
+                        autoWidth={colDef.autoWidth}
+                        minWidth={colDef.minWidth}
+                        maxWidth={colDef.maxWidth}
+                        onWidthChange={colDef.onWidthChange}
+                        textAlign={colDef.align ?? "left"}
+                        key={colDef.id}
+                        isSticky={isSticky}
+                        sortable={colDef.sortable}
+                        sortDirection={sortDirection}
+                        onSortClick={(event) => onSortClick(colDef.id, event)}
+                      >
+                        {colDef.header ?? colDef.label}
+                      </DataTableColumnHeader>
+                    );
+                  })}
+                </DataTableTr>
+              </DataTableThead>
 
-                  <DataTableTbody>
-                    <DataTableTBodyContent
-                      loadingState={loadingState}
-                      loadingRows={loadingRows}
-                      loadingLabel={loadingLabel}
-                      emptyState={emptyState}
-                    />
-                  </DataTableTbody>
-                </table>
-              </TableElementWrapper>
-            </div>
-          </div>
+              <DataTableTbody>
+                <DataTableTBodyContent
+                  loadingState={loadingState}
+                  loadingRows={loadingRows}
+                  loadingLabel={loadingLabel}
+                  emptyState={emptyState}
+                />
+              </DataTableTbody>
+            </table>
+          </TableElementWrapper>
         </DataTableDetailsPanelProvider>
       </TableItemsProvider>
     </DataTableContextProvider>
@@ -347,22 +350,128 @@ function TableElementWrapper({
   children,
   enabled,
   shouldBlockNavigation,
+  hasStickyColumns = false,
 }: {
   children: React.ReactNode;
   shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
   enabled: boolean;
+  hasStickyColumns?: boolean;
 }) {
+  const [applyStickyStyles, setApplyStickyStyles] = useState<
+    "start" | "end" | "both" | "none"
+  >("none");
+
+  const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled,
     shouldBlockNavigation,
   });
 
-  return (
-    /* @ts-expect-error Ref is not typed correctly to handle this case */
-    <Slot tabIndex={tabIndex} ref={setTableRef}>
-      {children}
-    </Slot>
+  const mergedTableRefs = useMergeRefs(tableRef, setTableRef);
+
+  const updateStickyStyles = useCallback(() => {
+    if (!tableWrapperRef.current || !tableRef.current) {
+      return;
+    }
+
+    const { isStuckToTheInlineStart, isStuckToTheInlineEnd } = updateScroll(
+      tableWrapperRef.current,
+      tableRef.current,
+    );
+    if (isStuckToTheInlineStart && isStuckToTheInlineEnd) {
+      setApplyStickyStyles("both");
+    } else if (isStuckToTheInlineStart) {
+      setApplyStickyStyles("start");
+    } else if (isStuckToTheInlineEnd) {
+      setApplyStickyStyles("end");
+    } else {
+      setApplyStickyStyles("none");
+    }
+  }, []);
+
+  const updateTableWrapperRef = useCallback(
+    (node: HTMLTableElement | null) => {
+      if (!hasStickyColumns) {
+        return;
+      }
+
+      if (tableWrapperRef.current) {
+        tableWrapperRef.current.removeEventListener(
+          "scroll",
+          updateStickyStyles,
+        );
+      }
+
+      /* TODO: Add check if sticky is even enabled */
+      if (node) {
+        node.addEventListener("scroll", updateStickyStyles, { passive: true });
+      }
+
+      tableWrapperRef.current = node;
+    },
+    [hasStickyColumns, updateStickyStyles],
   );
+
+  useEffect(
+    function updateStickyStylesOnMount() {
+      if (tableWrapperRef.current && tableRef.current && hasStickyColumns) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        updateStickyStyles();
+      }
+    },
+    [hasStickyColumns, updateStickyStyles],
+  );
+
+  const stickyAttrb =
+    applyStickyStyles !== "none" && hasStickyColumns
+      ? { "data-sticky-scroll": applyStickyStyles }
+      : {};
+
+  /* TODO: Need to listen for resize-events */
+
+  return (
+    <div className="aksel-data-table__border-wrapper">
+      <div
+        ref={updateTableWrapperRef}
+        className="aksel-data-table__scroll-wrapper"
+      >
+        {/* @ts-expect-error Ref is not typed correctly to handle this case */}
+        <Slot tabIndex={tabIndex} ref={mergedTableRefs} {...stickyAttrb}>
+          {children}
+        </Slot>
+      </div>
+    </div>
+  );
+}
+
+function updateScroll(wrapperElement: HTMLElement, tableElement: HTMLElement) {
+  const wrapperScrollInlineStart = getScrollInlineStart(wrapperElement);
+  const wrapperScrollWidth = wrapperElement.scrollWidth;
+  const wrapperClientWidth = wrapperElement.clientWidth;
+  const tablePaddingInlineStart =
+    parseFloat(getComputedStyle(tableElement).paddingInlineStart) || 0;
+  const tablePaddingInlineEnd =
+    parseFloat(getComputedStyle(tableElement).paddingInlineEnd) || 0;
+
+  const isStuckToTheInlineStart =
+    wrapperScrollInlineStart > tablePaddingInlineStart;
+
+  // Math.ceil() is used here to address an edge-case in certain browsers, where they return non-integer wrapperScrollInlineStart values
+  // which are lower than expected (sub-pixel difference), resulting in the table always being in the "stuck to the right" state
+  /* TODO: need to handle border better than + 2 */
+  const isStuckToTheInlineEnd =
+    Math.ceil(wrapperScrollInlineStart) + 2 <
+    wrapperScrollWidth - wrapperClientWidth - tablePaddingInlineEnd;
+
+  return {
+    isStuckToTheInlineStart,
+    isStuckToTheInlineEnd,
+  };
+}
+
+export function getScrollInlineStart(element: HTMLElement) {
+  return Math.floor(element.scrollLeft);
 }
 
 interface DataTableTBodyContentProps {
