@@ -197,8 +197,7 @@
     &[data-sticky="start"] {
       left: 0;
 
-      /* TODO: Toggle when actually sticky */
-      &::before {
+      :where([data-sticky-scroll="start"], [data-sticky-scroll="both"]) &::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -218,8 +217,7 @@
     &[data-sticky="end"] {
       right: 0;
 
-      /* TODO: Toggle when actually sticky */
-      &::before {
+      :where([data-sticky-scroll="end"], [data-sticky-scroll="both"]) &::before {
         content: "";
         position: absolute;
         inset: 0;
