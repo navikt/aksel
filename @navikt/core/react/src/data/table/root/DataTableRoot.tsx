@@ -416,7 +416,6 @@ function TableElementWrapper({
   useEffect(
     function updateStickyStylesOnMount() {
       if (tableWrapperRef.current && tableRef.current && hasStickyColumns) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         updateStickyStyles();
       }
     },
