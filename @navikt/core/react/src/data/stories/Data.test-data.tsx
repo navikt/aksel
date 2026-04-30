@@ -88,6 +88,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     id: "age",
     cell: (row) => row.age,
     align: "right",
+    autoWidth: true,
     details: {
       visible: true,
     },
@@ -112,6 +113,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
       >{`${row.forceSensitive ? "Yes" : "No"}`}</Tag>
     ),
     autoWidth: true,
+    align: "center",
     details: {
       visible: true,
     },
