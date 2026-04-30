@@ -357,12 +357,14 @@ function TableElementWrapper({
   enabled: boolean;
   hasStickyColumns?: boolean;
 }) {
-  const [applyStickyStyles, setApplyStickyStyles] = useState<
-    "start" | "end" | "both" | "none"
-  >("none");
+  type StickyScrollState = "start" | "end" | "both" | "none";
+
+  const [applyStickyStyles, setApplyStickyStyles] =
+    useState<StickyScrollState>("none");
 
   const tableWrapperRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLTableElement>(null);
+  const rafRef = useRef<number | null>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled,
     shouldBlockNavigation,
@@ -379,63 +381,79 @@ function TableElementWrapper({
       tableWrapperRef.current,
       tableRef.current,
     );
-    if (isStuckToTheInlineStart && isStuckToTheInlineEnd) {
-      setApplyStickyStyles("both");
-    } else if (isStuckToTheInlineStart) {
-      setApplyStickyStyles("start");
-    } else if (isStuckToTheInlineEnd) {
-      setApplyStickyStyles("end");
-    } else {
-      setApplyStickyStyles("none");
-    }
+    const nextStickyState: StickyScrollState =
+      isStuckToTheInlineStart && isStuckToTheInlineEnd
+        ? "both"
+        : isStuckToTheInlineStart
+          ? "start"
+          : isStuckToTheInlineEnd
+            ? "end"
+            : "none";
+
+    setApplyStickyStyles((prevStickyState) =>
+      prevStickyState === nextStickyState ? prevStickyState : nextStickyState,
+    );
   }, []);
 
-  const updateTableWrapperRef = useCallback(
-    (node: HTMLTableElement | null) => {
-      if (!hasStickyColumns) {
-        return;
-      }
+  const scheduleStickyStylesUpdate = useCallback(() => {
+    if (rafRef.current !== null) {
+      return;
+    }
 
-      if (tableWrapperRef.current) {
-        tableWrapperRef.current.removeEventListener(
-          "scroll",
-          updateStickyStyles,
-        );
-      }
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateStickyStyles();
+    });
+  }, [updateStickyStyles]);
 
-      /* TODO: Add check if sticky is even enabled */
-      if (node) {
-        node.addEventListener("scroll", updateStickyStyles, { passive: true });
-      }
+  useEffect(() => {
+    const tableWrapperElement = tableWrapperRef.current;
 
-      tableWrapperRef.current = node;
-    },
-    [hasStickyColumns, updateStickyStyles],
-  );
+    if (!tableWrapperElement || !hasStickyColumns) {
+      return;
+    }
 
-  useEffect(
-    function updateStickyStylesOnMount() {
-      if (tableWrapperRef.current && tableRef.current && hasStickyColumns) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        updateStickyStyles();
+    const handleResize = () => scheduleStickyStylesUpdate();
+
+    tableWrapperElement.addEventListener("scroll", scheduleStickyStylesUpdate, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleResize);
+
+    let resizeObserver: ResizeObserver | undefined;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(tableWrapperElement);
+      if (tableRef.current) {
+        resizeObserver.observe(tableRef.current);
       }
-    },
-    [hasStickyColumns, updateStickyStyles],
-  );
+    }
+
+    scheduleStickyStylesUpdate();
+
+    return () => {
+      tableWrapperElement.removeEventListener(
+        "scroll",
+        scheduleStickyStylesUpdate,
+      );
+      window.removeEventListener("resize", handleResize);
+      resizeObserver?.disconnect();
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [hasStickyColumns, scheduleStickyStylesUpdate]);
 
   const stickyAttrb =
     applyStickyStyles !== "none" && hasStickyColumns
       ? { "data-sticky-scroll": applyStickyStyles }
       : {};
 
-  /* TODO: Need to listen for resize-events */
-
   return (
     <div className="aksel-data-table__border-wrapper">
-      <div
-        ref={updateTableWrapperRef}
-        className="aksel-data-table__scroll-wrapper"
-      >
+      <div ref={tableWrapperRef} className="aksel-data-table__scroll-wrapper">
         {/* @ts-expect-error Ref is not typed correctly to handle this case */}
         <Slot tabIndex={tabIndex} ref={mergedTableRefs} {...stickyAttrb}>
           {children}
