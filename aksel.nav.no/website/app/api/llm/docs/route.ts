@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 import { ALL_MARKDOWN_ARTICLES_INDEX_QUERY } from "@/app/_sanity/queries";
-import { llmSectionConfig } from "@/app/api/markdown/routes/llm";
+import { groupLlmDocumentation } from "@/app/api/llm/helpers/docs-structure";
 
 type DocEntry = {
   name: string;
@@ -44,48 +44,12 @@ export async function GET() {
       query: ALL_MARKDOWN_ARTICLES_INDEX_QUERY,
     });
 
-    const byType = new Map<string, typeof items>();
-    for (const item of items) {
-      if (!item.slug || !item.heading) {
-        continue;
-      }
-      const list = byType.get(item._type) ?? [];
-      list.push(item);
-      byType.set(item._type, list);
-    }
-
     const entries: DocEntry[] = [];
     const seenPaths = new Set<string>();
 
-    const sortedConfig = Object.entries(llmSectionConfig).sort(
-      ([, a], [, b]) => a.order - b.order,
-    );
-
-    for (const [type, config] of sortedConfig) {
-      const typeItems = (byType.get(type) ?? []).sort((a, b) => {
-        const sidebarSort = (a.sidebarindex ?? 0) - (b.sidebarindex ?? 0);
-        if (sidebarSort !== 0) return sidebarSort;
-        return (a.heading ?? "").localeCompare(b.heading ?? "");
-      });
-
-      const itemsByKategori = new Map<string, typeof typeItems>();
-      for (const item of typeItems) {
-        if (!item.kategori) {
-          continue;
-        }
-
-        const list = itemsByKategori.get(item.kategori) ?? [];
-        list.push(item);
-        itemsByKategori.set(item.kategori, list);
-      }
-
-      for (const kategori of config.kategorier) {
-        const categoryItems = itemsByKategori.get(kategori.value) ?? [];
-        const categoryStatics = config.staticPages.filter(
-          (page) => page.category === kategori.value,
-        );
-
-        for (const page of categoryStatics) {
+    for (const section of groupLlmDocumentation(items)) {
+      for (const category of section.categories) {
+        for (const page of category.staticPages) {
           const path = addMarkdownExtension(page.slug);
           if (seenPaths.has(path)) {
             continue;
@@ -95,12 +59,12 @@ export async function GET() {
           entries.push({
             name: page.title,
             path,
-            section: config.title,
-            subcategory: kategori.title,
+            section: section.config.title,
+            subcategory: category.kategori.title,
           });
         }
 
-        for (const item of categoryItems) {
+        for (const item of category.items) {
           const path = addMarkdownExtension(`/${item.slug}`);
           if (seenPaths.has(path)) {
             continue;
@@ -110,8 +74,8 @@ export async function GET() {
           entries.push({
             name: item.heading ?? "",
             path,
-            section: config.title,
-            subcategory: kategori.title,
+            section: section.config.title,
+            subcategory: category.kategori.title,
           });
         }
       }
