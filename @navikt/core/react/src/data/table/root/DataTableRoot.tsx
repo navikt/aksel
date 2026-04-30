@@ -318,6 +318,7 @@ function DataTableInner<T>(
                         sortable={colDef.sortable}
                         sortDirection={sortDirection}
                         onSortClick={(event) => onSortClick(colDef.id, event)}
+                        label={colDef.label}
                       >
                         {colDef.header ?? colDef.label}
                       </DataTableColumnHeader>

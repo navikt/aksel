@@ -254,6 +254,9 @@ export const KitchenSink: Story = {
                             header.column.getToggleSortingHandler();
                           handler?.(event);
                         }}
+                        label={(
+                          header.column.columnDef.header || ""
+                        ).toString()}
                       >
                         {header.isPlaceholder
                           ? null

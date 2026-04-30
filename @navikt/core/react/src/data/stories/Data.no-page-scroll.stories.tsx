@@ -85,6 +85,9 @@ export const NoPageScroll: Story = {
                       return (
                         <DataTableColumnHeader
                           key={header.id}
+                          label={(
+                            header.column.columnDef.header || ""
+                          ).toString()}
                           defaultWidth={header.getSize()}
                           sortable
                           sortDirection={header.column.getIsSorted() || "none"}

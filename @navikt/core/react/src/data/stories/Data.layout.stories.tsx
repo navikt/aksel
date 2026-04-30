@@ -71,9 +71,15 @@ export const AutoLayoutMinimal: Story = {
       <DataTable layout="auto">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 1">
+              Column 1
+            </DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 2">
+              Column 2
+            </DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 3">
+              Column 3
+            </DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -101,7 +107,10 @@ export const AutoLayoutOverflowX: Story = {
           <DataTable.Tr>
             {columns.map((column) => {
               return (
-                <DataTableColumnHeader key={column.header}>
+                <DataTableColumnHeader
+                  key={column.header}
+                  label={column.header}
+                >
                   {column.header}
                 </DataTableColumnHeader>
               );
@@ -134,7 +143,7 @@ export const AutoLayoutNoCellTruncation: Story = {
         <DataTable.Thead>
           <DataTable.Tr>
             {columns.map((column) => (
-              <DataTableColumnHeader key={column.header}>
+              <DataTableColumnHeader key={column.header} label={column.header}>
                 {column.header}
               </DataTableColumnHeader>
             ))}
@@ -164,9 +173,15 @@ export const AutoLayoutSortable: Story = {
     <DataTable layout="auto">
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader sortable>Left</DataTableColumnHeader>
-          <DataTableColumnHeader sortable>Center</DataTableColumnHeader>
-          <DataTableColumnHeader sortable>Right</DataTableColumnHeader>
+          <DataTableColumnHeader label="Left" sortable>
+            Left
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Center" sortable>
+            Center
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Right" sortable>
+            Right
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -196,9 +211,15 @@ export const FixedLayoutMinimal: Story = {
       <DataTable layout="fixed">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 1">
+              Column 1
+            </DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 2">
+              Column 2
+            </DataTableColumnHeader>
+            <DataTableColumnHeader label="Column 3">
+              Column 3
+            </DataTableColumnHeader>
           </DataTable.Tr>
         </DataTable.Thead>
         <DataTable.Tbody>
@@ -224,13 +245,13 @@ export const FixedLayoutDynamicWidth: Story = {
       <DataTable layout="fixed">
         <DataTable.Thead>
           <DataTable.Tr>
-            <DataTableColumnHeader defaultWidth="100%">
+            <DataTableColumnHeader label="Column 1" defaultWidth="100%">
               Column 1
             </DataTableColumnHeader>
-            <DataTableColumnHeader defaultWidth="100%">
+            <DataTableColumnHeader label="Column 2" defaultWidth="100%">
               Column 2
             </DataTableColumnHeader>
-            <DataTableColumnHeader defaultWidth="100%">
+            <DataTableColumnHeader label="Column 3" defaultWidth="100%">
               Column 3
             </DataTableColumnHeader>
           </DataTable.Tr>
