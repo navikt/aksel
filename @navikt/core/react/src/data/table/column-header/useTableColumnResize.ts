@@ -325,7 +325,9 @@ function getAutoColumnWidth(
   }
 
   // Find needed width for header cell
-  const contentWidth = thContent.scrollWidth;
+  const range = document.createRange();
+  range.selectNodeContents(thContent);
+  const contentWidth = range.getBoundingClientRect().width;
   const paddingElStyle = window.getComputedStyle(thPaddingEl);
   const thInlinePadding =
     parseInt(paddingElStyle.paddingLeft, 10) +
@@ -341,7 +343,6 @@ function getAutoColumnWidth(
   }
 
   // Find needed width for each cell in column in tbody and tfoot
-  const range = document.createRange();
   let skipRows = 0;
   for (const row of rows) {
     // Skip rows where the cell in this column is covered by a rowspan from a previous row
