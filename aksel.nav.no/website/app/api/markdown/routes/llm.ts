@@ -17,7 +17,7 @@ type SectionEntry<T extends readonly { title: string; value: string }[]> = {
   staticPages: { title: string; slug: string; category: T[number]["value"] }[];
 };
 
-const sectionConfig = {
+const llmSectionConfig = {
   komponent_artikkel: {
     title: "Components",
     prefix: "komponenter",
@@ -84,7 +84,7 @@ async function markdown() {
 
   const sections: string[] = [];
 
-  const sortedTypes = Object.entries(sectionConfig).sort(
+  const sortedTypes = Object.entries(llmSectionConfig).sort(
     ([, a], [, b]) => a.order - b.order,
   );
 
@@ -152,3 +152,4 @@ async function markdown() {
 }
 
 export default { markdown };
+export { llmSectionConfig };
