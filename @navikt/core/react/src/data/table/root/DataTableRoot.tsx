@@ -214,14 +214,9 @@ function DataTableInner<T>(
     sort: sortProp,
   });
 
-  /**
-   * TODO:
-   * - If user currently does not give a getRowsId function, and data is nested (getSubRows)
-   *   we end up in an infinite loop since the index based ids repeat for children and causes chaos.
-   */
   const tableItems = useTableItems({
     items: data,
-    getRowId: getRowId ?? ((_, index) => index),
+    getRowId,
     subRows,
   });
 

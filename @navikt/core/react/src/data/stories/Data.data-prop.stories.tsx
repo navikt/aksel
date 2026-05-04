@@ -746,7 +746,7 @@ export const RowClick: Story = {
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id}
-      onRowClick={() => console.info("Row clicked!")}
+      onRowClick={(rowId) => console.info("Row clicked!: ", rowId)}
       selection={{
         selectionMode: "multiple",
       }}

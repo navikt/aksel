@@ -2,7 +2,7 @@ type TableRowEntryId = string | number;
 
 type CollectTableRowEntriesArgs<T> = {
   items: T[];
-  getRowId: (rowData: T, index: number) => TableRowEntryId;
+  getRowId?: (rowData: T, index: number) => TableRowEntryId;
   getRows?: (rowData: T) => T[];
   isRowExpandable?: (rowData: T) => boolean;
 };
@@ -37,8 +37,11 @@ function collectTableRowEntries<T>({
     rowIndex: number,
     level: number,
     parent: T | null,
+    parentRowId: TableRowEntryId | null,
   ): TableRowEntryId => {
-    const rowId = getRowId(rowData, rowIndex);
+    const rowId = getRowId
+      ? getRowId(rowData, rowIndex)
+      : getFallbackTableRowId(rowIndex, parentRowId);
 
     const children =
       ((isRowExpandable?.(rowData) ?? true) ? getRows?.(rowData) : []) ?? [];
@@ -54,7 +57,13 @@ function collectTableRowEntries<T>({
 
     for (let childIndex = 0; childIndex < children.length; childIndex++) {
       const childRow = children[childIndex];
-      const childRowId = traverseRow(childRow, childIndex, level + 1, rowData);
+      const childRowId = traverseRow(
+        childRow,
+        childIndex,
+        level + 1,
+        rowData,
+        rowId,
+      );
       childRowIds.push(childRowId);
     }
 
@@ -64,13 +73,20 @@ function collectTableRowEntries<T>({
   };
 
   for (let rowIndex = 0; rowIndex < items.length; rowIndex++) {
-    traverseRow(items[rowIndex], rowIndex, 0, null);
+    traverseRow(items[rowIndex], rowIndex, 0, null, null);
   }
 
   return {
     itemDetails: itemDetailsMap,
     childRowIdsById,
   };
+}
+
+function getFallbackTableRowId(
+  rowIndex: number,
+  parentRowId: TableRowEntryId | null,
+): string {
+  return parentRowId == null ? String(rowIndex) : `${parentRowId}.${rowIndex}`;
 }
 
 export { collectTableRowEntries };

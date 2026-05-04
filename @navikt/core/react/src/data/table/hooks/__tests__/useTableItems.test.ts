@@ -102,14 +102,13 @@ describe("useTableItems", () => {
     expect(result.current.childRowIdsById.get("b")).toEqual(["b1"]);
   });
 
-  test("uses the same fallback root id to reveal child rows when getRowId is omitted", () => {
+  test("uses unique fallback ids to reveal child rows when getRowId is omitted", () => {
     const { result } = renderHook(() =>
       useTableItems({
         items: fallbackRows,
-        getRowId: (_, index) => index,
         subRows: {
           getRows: (row: any) => row.subRows ?? [],
-          defaultExpandedRowIds: [0],
+          defaultExpandedRowIds: ["0"],
         },
       }),
     );
@@ -118,6 +117,7 @@ describe("useTableItems", () => {
       "Parent",
       "Child",
     ]);
+    expect(result.current.childRowIdsById.get("0")).toEqual(["0.0"]);
   });
 
   test("updates visible rows in depth-first order for controlled expanded ids", () => {
