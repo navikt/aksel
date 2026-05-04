@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-ActionMenu: Now biases more towards bottom/top side placement
+ActionMenu: Now locked to bottom/top side placement, left/right for sub-menus.
