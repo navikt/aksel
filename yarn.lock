@@ -9342,7 +9342,7 @@ __metadata:
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@vitejs/plugin-react": "npm:^6.0.1"
-    fuse.js: "npm:^7.0.0"
+    fuse.js: "npm:^7.3.0"
     react: "npm:19.2.5"
     react-dom: "npm:19.2.5"
     typescript: "npm:6.0.2"
@@ -13805,7 +13805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^7.0.0":
+"fuse.js@npm:^7.3.0":
   version: 7.3.0
   resolution: "fuse.js@npm:7.3.0"
   checksum: 10/b2cdc39e46acb9524fe900356af74c987ecb1dbc67412df651a5291fa072d212e6d74457f0b5d1c39baf79539481f62b613ac792afd8995dd1fc3d20b5354914
@@ -24599,7 +24599,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.0.0"
     date-fns: "npm:^4.0.0"
-    fuse.js: "npm:^7.0.0"
+    fuse.js: "npm:^7.3.0"
     isomorphic-dompurify: "npm:2.26.0"
     jscodeshift: "npm:17.3.0"
     jsdom: "npm:27.1.0"
