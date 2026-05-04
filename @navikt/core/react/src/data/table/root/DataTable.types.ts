@@ -29,9 +29,6 @@ type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
    * Assigned to the cell's `th` element instead of `td` if true.
    *
    * Should be used for cells that act as row headers. Each row should have one rowheader, and only have one cell with `isRowHeader: true`,
-   *
-   * TODO: Not implemented
-   * - Add a generic tablecell component that can render either a td or th based on context or this prop.
    */
   isRowHeader?: boolean;
   /**
