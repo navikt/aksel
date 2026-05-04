@@ -111,6 +111,7 @@ const DataTableColumnHeader = forwardRef<
       >
         {sortable ? (
           <button
+            type="button"
             className="aksel-data-table__th-sort-button"
             onClick={onSortClick}
           >
@@ -140,6 +141,7 @@ const DataTableColumnHeader = forwardRef<
         {resizeResult.enabled && !UNSAFE_isSelection && (
           <button
             {...resizeResult.resizeHandlerProps}
+            type="button"
             className="aksel-data-table__th-resize-handle"
             aria-label={
               resizeResult.isResizingWithKeyboard
