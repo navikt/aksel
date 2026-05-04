@@ -674,7 +674,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                                     setColumnView(newColumnView);
                                   }}
                                 >
-                                  {column.id}
+                                  {column.label}
                                 </Switch>
                               </DataDragAndDrop.Item>
                             );
