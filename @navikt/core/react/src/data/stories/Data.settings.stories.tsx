@@ -21,11 +21,13 @@ export const TextAlign: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader>Left</DataTableColumnHeader>
-          <DataTableColumnHeader textAlign="center">
+          <DataTableColumnHeader label="Left">Left</DataTableColumnHeader>
+          <DataTableColumnHeader label="Center" textAlign="center">
             Center
           </DataTableColumnHeader>
-          <DataTableColumnHeader textAlign="right">Right</DataTableColumnHeader>
+          <DataTableColumnHeader label="Right" textAlign="right">
+            Right
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -54,11 +56,13 @@ export const TextAlignSortable: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader sortable>Left</DataTableColumnHeader>
-          <DataTableColumnHeader sortable textAlign="center">
+          <DataTableColumnHeader label="Left" sortable>
+            Left
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Center" sortable textAlign="center">
             Center
           </DataTableColumnHeader>
-          <DataTableColumnHeader sortable textAlign="right">
+          <DataTableColumnHeader label="Right" sortable textAlign="right">
             Right
           </DataTableColumnHeader>
         </DataTable.Tr>

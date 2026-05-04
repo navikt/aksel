@@ -14,8 +14,9 @@
   "files": [
     "*",
     "!dist/version",
-    "!config/bundle.ts",
-    "!config/get-version.js"
+    "!config",
+    "!.gitignore",
+    "!CHANGELOG.md"
   ],
   "repository": {
     "type": "git",

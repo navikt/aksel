@@ -21,11 +21,15 @@ export const Resize: Story = {
     <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader textAlign="left">Left</DataTableColumnHeader>
-          <DataTableColumnHeader textAlign="center">
+          <DataTableColumnHeader label="Left" textAlign="left">
+            Left
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Center" textAlign="center">
             Center
           </DataTableColumnHeader>
-          <DataTableColumnHeader textAlign="right">Right</DataTableColumnHeader>
+          <DataTableColumnHeader label="Right" textAlign="right">
+            Right
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -54,10 +58,16 @@ export const ResizeMinMax: Story = {
     <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader maxWidth={400} minWidth={100} textAlign="left">
+          <DataTableColumnHeader
+            label="Left"
+            maxWidth={400}
+            minWidth={100}
+            textAlign="left"
+          >
             Left
           </DataTableColumnHeader>
           <DataTableColumnHeader
+            label="Center"
             maxWidth={400}
             minWidth={50}
             textAlign="center"
@@ -65,6 +75,7 @@ export const ResizeMinMax: Story = {
             Center
           </DataTableColumnHeader>
           <DataTableColumnHeader
+            label="Right"
             maxWidth={400}
             minWidth={200}
             textAlign="right"
@@ -99,13 +110,25 @@ export const ResizeDefaultStaticWidth: Story = {
     <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader defaultWidth="300px" textAlign="left">
+          <DataTableColumnHeader
+            label="Left"
+            defaultWidth="300px"
+            textAlign="left"
+          >
             Left
           </DataTableColumnHeader>
-          <DataTableColumnHeader defaultWidth="300px" textAlign="center">
+          <DataTableColumnHeader
+            label="Center"
+            defaultWidth="300px"
+            textAlign="center"
+          >
             Center
           </DataTableColumnHeader>
-          <DataTableColumnHeader defaultWidth="300px" textAlign="right">
+          <DataTableColumnHeader
+            label="Right"
+            defaultWidth="300px"
+            textAlign="right"
+          >
             Right
           </DataTableColumnHeader>
         </DataTable.Tr>
@@ -136,13 +159,25 @@ export const ResizeDefaultDynamicWidth: Story = {
     <DataTable withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader defaultWidth="100%" textAlign="left">
+          <DataTableColumnHeader
+            label="Left"
+            defaultWidth="100%"
+            textAlign="left"
+          >
             Left
           </DataTableColumnHeader>
-          <DataTableColumnHeader defaultWidth="100%" textAlign="center">
+          <DataTableColumnHeader
+            label="Center"
+            defaultWidth="100%"
+            textAlign="center"
+          >
             Center
           </DataTableColumnHeader>
-          <DataTableColumnHeader defaultWidth="100%" textAlign="right">
+          <DataTableColumnHeader
+            label="Right"
+            defaultWidth="100%"
+            textAlign="right"
+          >
             Right
           </DataTableColumnHeader>
         </DataTable.Tr>

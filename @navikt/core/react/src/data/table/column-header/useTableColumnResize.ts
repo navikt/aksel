@@ -17,23 +17,6 @@ type ResizeProps = {
    * @default true
    */
   resizable?: boolean;
-  // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
-  /**
-   * Controlled width of the column. Does not respect `minWidth` and `maxWidth`.
-   *
-   * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
-   *
-   * **NB:** Percentage as initial width does not work well with resizing.
-   */
-  width?: number | string;
-  /**
-   * Initial width of the column. Only used when `width` is not set and `resizable` is true.
-   * Does not respect `minWidth` and `maxWidth`.
-   *
-   * **NB:** Percentage as initial width does not work well with resizing.
-   * @default 140px
-   */
-  defaultWidth?: number | string;
   /**
    * Whether the column should automatically resize to fit its content. **Runs only once.**
    *
@@ -54,6 +37,23 @@ type ResizeProps = {
    * Maximum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
    */
   maxWidth?: number;
+  // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
+  /**
+   * Controlled width of the column. Does not respect `minWidth` and `maxWidth`.
+   *
+   * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
+   */
+  width?: number | string;
+  /**
+   * Initial width of the column. Only used when `width` is not set and `resizable` is true.
+   * Does not respect `minWidth` and `maxWidth`.
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
+   * @default 140px
+   */
+  defaultWidth?: number | string;
   /**
    * Called when the column width changes.
    * @param width New width in pixels.

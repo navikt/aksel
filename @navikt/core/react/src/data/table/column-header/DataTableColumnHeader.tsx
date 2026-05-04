@@ -17,11 +17,10 @@ import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 interface DataTableColumnHeaderProps
   extends ResizeProps, DataTableBaseCellProps {
-  resizeHandler?: (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.TouchEvent<HTMLButtonElement>,
-  ) => void;
+  /**
+   * Accessible name of the column.
+   */
+  label: string;
   /**
    * Makes the column header sortable. The entire header cell content becomes
    * a clickable button when true.
@@ -59,6 +58,7 @@ const DataTableColumnHeader = forwardRef<
     {
       className,
       children,
+      label,
       sortable = false,
       sortDirection = "none",
       onSortClick,
@@ -144,7 +144,7 @@ const DataTableColumnHeader = forwardRef<
             aria-label={
               resizeResult.isResizingWithKeyboard
                 ? "Bruk pil venstre/høyre"
-                : "Endre bredde"
+                : `Endre bredde ${label}`
             } // TODO Translate
             data-active={resizeResult.isResizingWithKeyboard}
             data-disable-keyboard-nav={resizeResult.isResizingWithKeyboard}

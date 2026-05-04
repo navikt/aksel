@@ -24,18 +24,26 @@ export const Spans: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTableColumnHeader defaultWidth="100%" colSpan={2}>
+              <DataTableColumnHeader
+                label="Group A"
+                defaultWidth="100%"
+                colSpan={2}
+              >
                 Group A
               </DataTableColumnHeader>
-              <DataTableColumnHeader defaultWidth="100%" colSpan={2}>
+              <DataTableColumnHeader
+                label="Group B"
+                defaultWidth="100%"
+                colSpan={2}
+              >
                 Group B
               </DataTableColumnHeader>
             </DataTable.Tr>
             <DataTable.Tr>
-              <DataTableColumnHeader>Col 1</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 2</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 3</DataTableColumnHeader>
-              <DataTableColumnHeader>Col 4</DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 1">Col 1</DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 2">Col 2</DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 3">Col 3</DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 4">Col 4</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>
@@ -105,18 +113,36 @@ export const SpansSortable: Story = {
         <DataTable>
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTableColumnHeader defaultWidth="100%" colSpan={2} sortable>
+              <DataTableColumnHeader
+                label="Group A"
+                defaultWidth="100%"
+                colSpan={2}
+                sortable
+              >
                 Group A
               </DataTableColumnHeader>
-              <DataTableColumnHeader defaultWidth="100%" colSpan={2} sortable>
+              <DataTableColumnHeader
+                label="Group B"
+                defaultWidth="100%"
+                colSpan={2}
+                sortable
+              >
                 Group B
               </DataTableColumnHeader>
             </DataTable.Tr>
             <DataTable.Tr>
-              <DataTableColumnHeader sortable>Col 1</DataTableColumnHeader>
-              <DataTableColumnHeader sortable>Col 2</DataTableColumnHeader>
-              <DataTableColumnHeader sortable>Col 3</DataTableColumnHeader>
-              <DataTableColumnHeader sortable>Col 4</DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 1" sortable>
+                Col 1
+              </DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 2" sortable>
+                Col 2
+              </DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 3" sortable>
+                Col 3
+              </DataTableColumnHeader>
+              <DataTableColumnHeader label="Col 4" sortable>
+                Col 4
+              </DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>

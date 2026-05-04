@@ -22,9 +22,15 @@ export const EmptyStateAuto: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 1">
+            Column 1
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 2">
+            Column 2
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 3">
+            Column 3
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -42,9 +48,15 @@ export const EmptyStateFixed: Story = {
     <DataTable layout="fixed" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 1">
+            Column 1
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 2">
+            Column 2
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 3">
+            Column 3
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -62,9 +74,15 @@ export const LoadingStateAuto: Story = {
     <DataTable layout="auto" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 1">
+            Column 1
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 2">
+            Column 2
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 3">
+            Column 3
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>
@@ -79,9 +97,15 @@ export const LoadingStateFixed: Story = {
     <DataTable layout="fixed" withKeyboardNav>
       <DataTable.Thead>
         <DataTable.Tr>
-          <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-          <DataTableColumnHeader>Column 3</DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 1">
+            Column 1
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 2">
+            Column 2
+          </DataTableColumnHeader>
+          <DataTableColumnHeader label="Column 3">
+            Column 3
+          </DataTableColumnHeader>
         </DataTable.Tr>
       </DataTable.Thead>
       <DataTable.Tbody>

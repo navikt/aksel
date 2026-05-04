@@ -138,6 +138,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
           width={SELECTION_CELL_WIDTH}
           UNSAFE_isSelection
           data-block-keyboard-nav
+          label=""
           /* isSticky={stickySelection && "start"} */
         />
       );
@@ -155,6 +156,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
         data-block-keyboard-nav
+        label=""
         /* isSticky={stickySelection && "start"} */
       />
     );
@@ -166,6 +168,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
+        label=""
         /* isSticky={stickySelection && "start"} */
       >
         <Button
@@ -242,6 +245,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         <DataTableColumnHeader
           width={SELECTION_CELL_WIDTH}
           UNSAFE_isSelection
+          label=""
           data-block-keyboard-nav
           isSticky={stickySelection && "start"}
         />
@@ -269,6 +273,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
+        label=""
         isSticky={stickySelection && "start"}
       >
         <Label htmlFor={inputId} visuallyHidden>
@@ -284,6 +289,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
       <DataTableColumnHeader
         width={SELECTION_CELL_WIDTH}
         UNSAFE_isSelection
+        label=""
         data-block-keyboard-nav
         isSticky={stickySelection && "start"}
       />

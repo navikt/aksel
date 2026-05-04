@@ -80,7 +80,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.10",
     "@changesets/cli": "2.29.7",
-    "@dnd-kit/react": "0.3.2",
+    "@dnd-kit/react": "0.4.0",
     "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",

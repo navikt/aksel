@@ -407,10 +407,14 @@ export const WithDataTable: Story = {
         <DataTable zebraStripes layout="auto">
           <DataTable.Thead>
             <DataTable.Tr>
-              <DataTableColumnHeader>Name</DataTableColumnHeader>
-              <DataTableColumnHeader>Status</DataTableColumnHeader>
-              <DataTableColumnHeader>Region</DataTableColumnHeader>
-              <DataTableColumnHeader>CPU</DataTableColumnHeader>
+              <DataTableColumnHeader label="Name">Name</DataTableColumnHeader>
+              <DataTableColumnHeader label="Status">
+                Status
+              </DataTableColumnHeader>
+              <DataTableColumnHeader label="Region">
+                Region
+              </DataTableColumnHeader>
+              <DataTableColumnHeader label="CPU">CPU</DataTableColumnHeader>
             </DataTable.Tr>
           </DataTable.Thead>
           <DataTable.Tbody>

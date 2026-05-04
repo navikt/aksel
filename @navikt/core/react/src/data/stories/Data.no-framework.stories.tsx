@@ -128,6 +128,7 @@ export const WithoutTanstack: Story = {
                       });
                     }}
                     isPinned={columnPinning.left.includes(column.accessorKey)} */
+                    label={column.header}
                   >
                     {column.header}
                   </DataTableColumnHeader>
