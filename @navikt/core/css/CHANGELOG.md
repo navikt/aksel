@@ -1,5 +1,7 @@
 # @navikt/ds-css
 
+## 8.10.4
+
 ## 8.10.3
 
 ### Patch Changes
