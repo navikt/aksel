@@ -61,7 +61,7 @@ function KodeEksemplerIFrame(props: {
 
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
-    setHasMounted(true);
+    setHasMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   return (
