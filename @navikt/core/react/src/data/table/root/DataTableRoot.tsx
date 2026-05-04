@@ -384,37 +384,40 @@ function TableElementWrapper({
     });
   }, [updateStickyStyles]);
 
-  useEffect(() => {
-    const tableWrapperElement = tableWrapperRef.current;
+  useEffect(
+    function observeAndUpdateStickyStyles() {
+      const tableWrapperElement = tableWrapperRef.current;
 
-    if (!tableWrapperElement) {
-      return;
-    }
-
-    const handleResize = () => scheduleStickyStylesUpdate();
-
-    window.addEventListener("resize", handleResize);
-
-    let resizeObserver: ResizeObserver | undefined;
-    if (typeof ResizeObserver !== "undefined") {
-      resizeObserver = new ResizeObserver(handleResize);
-      resizeObserver.observe(tableWrapperElement);
-      if (tableRef.current) {
-        resizeObserver.observe(tableRef.current);
+      if (!tableWrapperElement) {
+        return;
       }
-    }
 
-    scheduleStickyStylesUpdate();
+      const handleResize = () => scheduleStickyStylesUpdate();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      resizeObserver?.disconnect();
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
+      window.addEventListener("resize", handleResize);
+
+      let resizeObserver: ResizeObserver | undefined;
+      if (typeof ResizeObserver !== "undefined") {
+        resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(tableWrapperElement);
+        if (tableRef.current) {
+          resizeObserver.observe(tableRef.current);
+        }
       }
-    };
-  }, [scheduleStickyStylesUpdate]);
+
+      scheduleStickyStylesUpdate();
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        resizeObserver?.disconnect();
+        if (rafRef.current !== null) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
+      };
+    },
+    [scheduleStickyStylesUpdate],
+  );
 
   return (
     <div className="aksel-data-table__border-wrapper">
