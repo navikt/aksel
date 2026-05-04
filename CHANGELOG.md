@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.10.4
+
+### @navikt/ds-react
+
+- ActionMenu: Now locked to bottom/top side placement, left/right for sub-menus. ([#4843](https://github.com/navikt/aksel/pull/4843))
+
 ## 8.10.3
 
 ### @navikt/ds-react
