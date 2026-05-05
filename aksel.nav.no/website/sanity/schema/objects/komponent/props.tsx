@@ -8,13 +8,6 @@ export const PropsSeksjon = defineType({
   icon: () => <BulletListIcon aria-hidden />,
   fields: [
     defineField({
-      title: "Tittel (h2)",
-      name: "title",
-      type: "string",
-      initialValue: "Props",
-      readOnly: true,
-    }),
-    defineField({
       title: "Props",
       type: "array",
       name: "komponenter",
@@ -25,20 +18,28 @@ export const PropsSeksjon = defineType({
           name: "komponent",
           fields: [
             {
-              title: "Komponent navn",
-              description: "Slik man ville brukt den, eks Accordion.Item",
+              title: "Komponentnavn",
+              description: "Slik man ville brukt den, f.eks. Accordion.Item",
               type: "string",
               name: "title",
             },
+            defineField({
+              title: "Overstyr overskriftsnivå",
+              name: "heading_level",
+              type: "string",
+              options: {
+                list: ["3", "4"],
+              },
+            }),
             {
-              title: "Bruker komponenten OverridableComponent API-et",
+              title: "Komponenten bruker OverridableComponent API-et",
               type: "boolean",
               name: "overridable",
               initialValue: false,
             },
             {
               name: "propref",
-              title: "Komponent referanse",
+              title: "Komponent-referanse",
               type: "reference",
               to: [{ type: "ds_props" }],
             },

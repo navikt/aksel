@@ -387,13 +387,6 @@
             "value": "props_seksjon"
           }
         },
-        "title": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
         "komponenter": {
           "type": "objectAttribute",
           "value": {
@@ -405,6 +398,23 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
+                  },
+                  "optional": true
+                },
+                "heading_level": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "string",
+                        "value": "3"
+                      },
+                      {
+                        "type": "string",
+                        "value": "4"
+                      }
+                    ]
                   },
                   "optional": true
                 },
