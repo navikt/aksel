@@ -58,16 +58,11 @@ export const DragAndDropDragHandler = React.forwardRef<
         </button>
       )}
       <button
-        // TODO - Bedre formulering av aria-label?
-        //aria-label={`Flytt element ${item.index + 1}. Trykk Enter eller Mellomrom for å aktivere, deretter piltastene for å flytte elementet.`}
-        aria-label={
-          active
-            ? `Flytt element ${itemLabel || item.index + 1}. Bruk piltastene for å flytte elementet.`
-            : `Flytt element ${itemLabel || item.index + 1}. Trykk Enter eller Mellomrom for å aktivere flytting.`
-        }
+        aria-label={`${itemLabel}. Plass ${item.index + 1}.`}
         aria-pressed={Boolean(active)}
         aria-roledescription="draggable"
         type="button"
+        aria-live={active ? "assertive" : "off"}
         className="aksel-data-drag-and-drop__drag-handler__button"
         data-drag-handler-active={active}
         onPointerDown={(event) => {
@@ -77,18 +72,18 @@ export const DragAndDropDragHandler = React.forwardRef<
         }}
         onClick={(event) => {
           if (!active) {
-            context?.setDragHandlerActive(item);
+            context?.onKeyboardDragStart(item);
             event.currentTarget.focus();
           } else {
-            context?.setDragHandlerActive(null);
+            context?.onKeyboardDragStart(null);
           }
         }}
-        onBlur={() => context?.setDragHandlerActive(null)}
+        onBlur={() => context?.onKeyboardDragStart(null)}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             // Enter or space, currently active item - end keyboard dragging
             event.preventDefault();
-            context?.setDragHandlerActive(active ? null : item);
+            context?.onKeyboardDragStart(active ? null : item);
             return;
           }
 
@@ -98,7 +93,7 @@ export const DragAndDropDragHandler = React.forwardRef<
             // Cancel dragging
             // TODO Handle reset
             event.preventDefault();
-            context?.setDragHandlerActive(null);
+            context?.cancelDrag(true);
             return;
           } else if (event.key === "ArrowUp") {
             // Move item up

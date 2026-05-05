@@ -7,7 +7,7 @@ interface DragAndDropContextType {
   dropTarget: DragAndDropElement | null;
   setDropTarget: (id: DragAndDropElement | null) => void;
   dragHandlerActive: DragAndDropElement | null;
-  setDragHandlerActive: (active: DragAndDropElement | null) => void;
+  onKeyboardDragStart: (active: DragAndDropElement | null) => void;
   onKeyboardDragEnd: (diff: number) => void;
   startPendingDrag: (
     event: React.PointerEvent,
@@ -15,6 +15,7 @@ interface DragAndDropContextType {
     element?: HTMLElement | null,
   ) => void;
   itemAmount: number;
+  cancelDrag: (resetOrder?: boolean) => void;
 }
 
 export const {

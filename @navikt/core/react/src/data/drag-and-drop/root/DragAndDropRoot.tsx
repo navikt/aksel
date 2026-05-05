@@ -46,6 +46,7 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
  * [ ] Make ESC reset position, not just cancel dragging
  * [ ] Make instructions for keyboard users (visible?)
  * [ ] Ask design about visible keyboard instructions
+ * [ ] Update design from Figma
  *
  */
 
@@ -60,7 +61,7 @@ function DragAndDropInner<T>(
   const [dragHandlerActive, setDragHandlerActive] =
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
-  const [announcement, setAnnouncement] = useState("");
+  const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
   const activeData = items.find((item) => item.id === activeItem?.id);
 
   const activeItemRef = useRef<DragAndDropElement | null>(null);
@@ -78,6 +79,19 @@ function DragAndDropInner<T>(
     startX: number;
     startY: number;
   } | null>(null);
+
+  const saveInitialItems = useCallback(() => {
+    initialItemsRef.current = items;
+  }, [items]);
+
+  const keyboardDragStart = (item: DragAndDropElement | null) => {
+    if (item) {
+      saveInitialItems();
+    } else {
+      initialItemsRef.current = null;
+    }
+    setDragHandlerActive(item);
+  };
 
   const startPendingDrag = (
     event: React.PointerEvent,
@@ -121,6 +135,21 @@ function DragAndDropInner<T>(
     [setItems],
   );
 
+  const cancelDrag = useCallback(
+    (resetOrder = false) => {
+      if (resetOrder && initialItemsRef.current) {
+        setItems(initialItemsRef.current);
+      }
+      setOverlayWidth(null);
+      setDragHandlerActive(null);
+      setCombinedActiveItem(null);
+      setCombinedDropTarget(null);
+      pendingDragStartRef.current = null;
+      initialItemsRef.current = null;
+    },
+    [setItems, setCombinedActiveItem, setCombinedDropTarget],
+  );
+
   useEffect(() => {
     /* This useEffect is used to toggle a class on the html element when dragging, 
       to prevent cursor issues when dragging over interactive elements, 
@@ -156,6 +185,7 @@ function DragAndDropInner<T>(
           }
 
           setOverlayWidth(element?.getBoundingClientRect().width ?? null);
+          saveInitialItems();
           setCombinedActiveItem(pendingStart.item);
           setCombinedDropTarget(pendingStart.item);
           pendingDragStartRef.current = null;
@@ -221,24 +251,13 @@ function DragAndDropInner<T>(
 
       if (active && target && active.id !== target.id) {
         reorderItems(active.index, target.index);
-        setAnnouncement(
-          `Element flyttet til posisjon ${target?.index + 1} av ${items.length}`,
-        ); // TODO - Bedre formulering?
       }
 
-      setOverlayWidth(null);
-      setDragHandlerActive(null);
-      setCombinedActiveItem(null);
-      setCombinedDropTarget(null);
-      pendingDragStartRef.current = null;
+      cancelDrag();
     };
 
     const handlePointerCancel = () => {
-      setOverlayWidth(null);
-      setDragHandlerActive(null);
-      setCombinedActiveItem(null);
-      setCombinedDropTarget(null);
-      pendingDragStartRef.current = null;
+      cancelDrag();
     };
 
     window.addEventListener("pointermove", handlePointerMove);
@@ -254,7 +273,8 @@ function DragAndDropInner<T>(
     setCombinedDropTarget,
     setCombinedActiveItem,
     reorderItems,
-    items.length,
+    saveInitialItems,
+    cancelDrag,
   ]);
 
   const onKeyboardDragEnd = (diff: number) => {
@@ -267,9 +287,6 @@ function DragAndDropInner<T>(
 
     reorderItems(dragHandlerActive.index, targetIndex);
     setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
-    setAnnouncement(
-      `Element flyttet til posisjon ${targetIndex + 1} av ${items.length}`,
-    ); // TODO - Bedre formulering?
   };
 
   return (
@@ -279,12 +296,13 @@ function DragAndDropInner<T>(
       dropTarget={dropTarget}
       setDropTarget={setCombinedDropTarget}
       dragHandlerActive={dragHandlerActive}
-      setDragHandlerActive={setDragHandlerActive}
+      onKeyboardDragStart={keyboardDragStart}
       onKeyboardDragEnd={onKeyboardDragEnd}
       startPendingDrag={startPendingDrag}
+      cancelDrag={cancelDrag}
       itemAmount={items.length}
     >
-      <ul ref={forwardedRef} aria-label="Dra og slipp elementer">
+      <ul ref={forwardedRef} aria-label="Kolonneinnstillinger">
         {items.map((item, index) => {
           return (
             <DragAndDropItem
@@ -323,9 +341,6 @@ function DragAndDropInner<T>(
           </Floating.Content>
         </Floating>
       )}
-      <div aria-live="assertive" className="sr-only" aria-atomic="true">
-        {announcement}
-      </div>
     </DragAndDropProvider>
   );
 }
