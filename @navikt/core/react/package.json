@@ -698,7 +698,7 @@
     "clean": "rimraf cjs esm",
     "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "concurrently \"TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
+    "test": "concurrently \"cross-env TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
     "test-sb-build": "tsc -p tsconfig.sb.json",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
@@ -723,6 +723,7 @@
     "aksel": "workspace:^",
     "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",
+    "cross-env": "^10.1.0",
     "fast-glob": "3.3.3",
     "jscodeshift": "17.3.0",
     "jsdom": "27.1.0",

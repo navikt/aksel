@@ -4960,6 +4960,7 @@ __metadata:
     aksel: "workspace:^"
     concurrently: "npm:9.2.1"
     copyfiles: "npm:^2.4.1"
+    cross-env: "npm:^10.1.0"
     date-fns: "npm:^4.0.0"
     fast-glob: "npm:3.3.3"
     jscodeshift: "npm:17.3.0"
@@ -9390,7 +9391,7 @@ __metadata:
     "@vitest/eslint-plugin": "npm:1.6.16"
     chromatic: "npm:15.1.0"
     concurrently: "npm:9.2.1"
-    cross-env: "npm:^10.0.0"
+    cross-env: "npm:^10.1.0"
     eslint: "npm:^9.39.2"
     eslint-plugin-aksel-local: "npm:*"
     eslint-plugin-import: "npm:^2.32.0"
@@ -11308,7 +11309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^10.0.0":
+"cross-env@npm:^10.1.0":
   version: 10.1.0
   resolution: "cross-env@npm:10.1.0"
   dependencies:
@@ -24576,7 +24577,7 @@ __metadata:
     codesandbox-import-utils: "npm:^2.2.3"
     concurrently: "npm:9.2.1"
     copyfiles: "npm:^2.4.1"
-    cross-env: "npm:^10.0.0"
+    cross-env: "npm:^10.1.0"
     date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.3.0"
     isomorphic-dompurify: "npm:2.26.0"
