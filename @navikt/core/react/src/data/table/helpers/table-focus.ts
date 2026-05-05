@@ -121,49 +121,70 @@ function prepareCellFocus(cell: Element): HTMLElement | null {
 /**
  * Applies focus and scroll to an element.
  */
-function applyFocusAndScroll(element: HTMLElement): void {
-  const stickyHeader = document.querySelector(
+function getStickyOffsets(element: HTMLElement): {
+  stickyOffsetStart: number;
+  stickyOffsetEnd: number;
+  stickyHeaderHeight: number;
+} {
+  const table = element.closest(".aksel-data-table");
+
+  if (!table) {
+    return {
+      stickyOffsetStart: 0,
+      stickyOffsetEnd: 0,
+      stickyHeaderHeight: 0,
+    };
+  }
+
+  const stickyHeader = table.querySelector<HTMLElement>(
     `.aksel-data-table__tr[data-sticky="true"]`,
   );
 
-  const stickyNodesStart = document.querySelectorAll(
+  const stickyNodesStart = table.querySelectorAll<HTMLElement>(
     `.aksel-data-table__column-header[data-sticky="start"]`,
   );
 
-  const stickyNodesEnd = document.querySelectorAll(
+  const stickyNodesEnd = table.querySelectorAll<HTMLElement>(
     `.aksel-data-table__column-header[data-sticky="end"]`,
   );
 
-  /* Width of all sticky nodes */
-  const stickyOffsetStart = Array.from(stickyNodesStart).reduce(
-    (offset, node) => offset + node.getBoundingClientRect().width,
-    0,
-  );
+  return {
+    stickyOffsetStart: Array.from(stickyNodesStart).reduce(
+      (offset, node) => offset + node.getBoundingClientRect().width,
+      0,
+    ),
+    stickyOffsetEnd: Array.from(stickyNodesEnd).reduce(
+      (offset, node) => offset + node.getBoundingClientRect().width,
+      0,
+    ),
+    stickyHeaderHeight: stickyHeader?.getBoundingClientRect().height ?? 0,
+  };
+}
 
-  const stickyOffsetEnd = Array.from(stickyNodesEnd).reduce(
-    (offset, node) => offset + node.getBoundingClientRect().width,
-    0,
-  );
+function applyFocusAndScroll(element: HTMLElement): void {
+  const { stickyOffsetStart, stickyOffsetEnd, stickyHeaderHeight } =
+    getStickyOffsets(element);
 
   const originalScrollMarginInline = element.style.scrollMarginInline;
   const originalScrollMarginBlockStart = element.style.scrollMarginBlockStart;
 
   element.style.scrollMarginInline = `${stickyOffsetStart}px ${stickyOffsetEnd}px`;
-  element.style.scrollMarginBlockStart = `${stickyHeader?.getBoundingClientRect().height ?? 0}px`;
+  element.style.scrollMarginBlockStart = `${stickyHeaderHeight}px`;
 
-  element.focus({
-    preventScroll: true,
-  });
+  try {
+    element.focus({
+      preventScroll: true,
+    });
 
-  element.scrollIntoView({
-    behavior: "auto",
-    block: "nearest",
-    inline: "nearest",
-  });
-
-  /* Reset margins after scroll */
-  element.style.scrollMarginBlockStart = originalScrollMarginBlockStart;
-  element.style.scrollMarginInline = originalScrollMarginInline;
+    element.scrollIntoView({
+      behavior: "auto",
+      block: "nearest",
+      inline: "nearest",
+    });
+  } finally {
+    element.style.scrollMarginBlockStart = originalScrollMarginBlockStart;
+    element.style.scrollMarginInline = originalScrollMarginInline;
+  }
 }
 
 /**

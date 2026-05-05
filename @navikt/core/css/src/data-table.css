@@ -202,10 +202,6 @@
     text-align: end;
   }
 
-  &:not([data-sticky]) {
-    scroll-margin-inline: var(--__axc-data-table-scroll-offset, var(--ax-space-0));
-  }
-
   &[data-sticky] {
     position: sticky;
     z-index: 1;
