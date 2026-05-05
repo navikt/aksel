@@ -11,10 +11,7 @@
 2. **Column resizing is present, but the preview API still reads as unfinished.**
    Resizing is effectively opt-out in fixed layout because `DataTableColumnHeader` defaults `resizable` to `true`. The interaction also still has unfinished accessibility and i18n details, and `onWidthChange` currently fires for every width step while dragging.
 
-3. **Row metadata is keyed by object identity, not row id.**
-   `itemDetails` is keyed by the row object itself. If the same object reference appears more than once in `data`, the later entry overwrites the earlier one and row rendering can produce wrong ids or duplicate React keys. Internal row metadata should be keyed by row id, not object identity.
-
-4. **Critical behaviors are under-tested for a preview launch.**
+3. **Critical behaviors are under-tested for a preview launch.**
    Existing tests cover selection trees, item expansion state, and low-level keyboard helpers, but not the end-to-end behaviors users will notice first: sorting, details panels, loading states, row click behavior, column resizing, and selection accessibility.
 
 ### Feature Gap Table
@@ -29,7 +26,6 @@
 | 6   | Controlled/uncontrolled details panel expansion     | ✅ Present | —               | MUI                          | Good baseline, limited to top-level rows by design.                     |
 | 7   | Loading overlay / loading rows / empty state        | ✅ Present | —               | MUI, Spectrum                | Baseline states exist.                                                  |
 | 9   | Visible caption / built-in accessible naming path   | ❌ Missing | 🔴 Expected     | React Aria, Spectrum         | Auto API cannot render `caption`; users only get raw HTML attrs.        |
-| 12  | Stable internal row metadata keyed by row id        | ❌ Missing | 🔴 Expected     | MUI, React Aria              | Internal maps should not rely on object identity.                       |
 | 13  | Opt-in / polished column resize API                 | ⚠️ Partial | 🟡 Valuable     | MUI, Cloudscape              | Feature exists, but defaults and a11y polish are not preview-ready yet. |
 | 14  | Per-row disabled selection callback                 | ❌ Missing | 🟡 Valuable     | React Aria, MUI              | Current API only accepts disabled keys, not row-driven logic.           |
 | 15  | Row-level prop/className callback                   | ❌ Missing | 🟡 Valuable     | MUI                          | No way to attach row-specific attrs/classes without custom rendering.   |
@@ -46,13 +42,6 @@
 - **Reference behavior:** React Aria tables require an accessible label; Spectrum and MUI also expose a clear naming path.
 - **Approach here:** Keep `children` forbidden, but add a `caption?: React.ReactNode` prop that renders a native `caption`. Optionally add `captionProps` for styling hooks.
 - **Props/API additions needed:** `caption?: React.ReactNode`, optionally `captionProps?: React.HTMLAttributes<HTMLTableCaptionElement>`.
-
-#### 12. Stable internal row metadata keyed by row id
-
-- **What it does:** Makes expansion, details, and selection metadata stable even if row objects are duplicated or recreated.
-- **Reference behavior:** Mature grid implementations key internal caches by stable row ids.
-- **Approach here:** Replace `Map<T, ItemDetail<T>>` with `Map<TableRowEntryId, ItemDetail<T>>` and keep a visible row-entry list that already contains `rowData + id + level` together. That removes object-identity coupling from the render path.
-- **Props/API additions needed:** None. This is an internal fix.
 
 #### 13. Opt-in / polished column resize API
 
@@ -77,7 +66,7 @@
 
 ### Internal Refactors
 
-1. Split the current root into a small orchestration hook plus presentational subcomponents. `DataTableRoot.tsx` currently owns state setup, context assembly, loading/empty rendering, row rendering, and sticky-wrapper logic in one file.
+1. Split the current root into a small orchestration hook plus presentational sub-components. `DataTableRoot.tsx` currently owns state setup, context assembly, loading/empty rendering, row rendering, and sticky-wrapper logic in one file.
 
 2. Replace object-keyed `itemDetails` lookups with id-keyed row entries. This fixes the duplicate-object bug and simplifies details-panel and selection wiring.
 
