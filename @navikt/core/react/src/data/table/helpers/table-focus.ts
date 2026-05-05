@@ -122,15 +122,48 @@ function prepareCellFocus(cell: Element): HTMLElement | null {
  * Applies focus and scroll to an element.
  */
 function applyFocusAndScroll(element: HTMLElement): void {
+  const stickyHeader = document.querySelector(
+    `.aksel-data-table__tr[data-sticky="true"]`,
+  );
+
+  const stickyNodesStart = document.querySelectorAll(
+    `.aksel-data-table__column-header[data-sticky="start"]`,
+  );
+
+  const stickyNodesEnd = document.querySelectorAll(
+    `.aksel-data-table__column-header[data-sticky="end"]`,
+  );
+
+  /* Width of all sticky nodes */
+  const stickyOffsetStart = Array.from(stickyNodesStart).reduce(
+    (offset, node) => offset + node.getBoundingClientRect().width,
+    0,
+  );
+
+  const stickyOffsetEnd = Array.from(stickyNodesEnd).reduce(
+    (offset, node) => offset + node.getBoundingClientRect().width,
+    0,
+  );
+
+  const originalScrollMarginInline = element.style.scrollMarginInline;
+  const originalScrollMarginBlockStart = element.style.scrollMarginBlockStart;
+
+  element.style.scrollMarginInline = `${stickyOffsetStart}px ${stickyOffsetEnd}px`;
+  element.style.scrollMarginBlockStart = `${stickyHeader?.getBoundingClientRect().height ?? 0}px`;
+
   element.focus({
     preventScroll: true,
   });
 
   element.scrollIntoView({
-    behavior: "smooth",
+    behavior: "auto",
     block: "nearest",
     inline: "nearest",
   });
+
+  /* Reset margins after scroll */
+  element.style.scrollMarginBlockStart = originalScrollMarginBlockStart;
+  element.style.scrollMarginInline = originalScrollMarginInline;
 }
 
 /**
