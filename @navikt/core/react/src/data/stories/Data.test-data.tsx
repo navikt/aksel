@@ -26,7 +26,6 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     id: "id",
     label: "Id",
     cell: (row) => row.id,
-    align: "right",
     autoWidth: true,
     details: {
       visible: true,
