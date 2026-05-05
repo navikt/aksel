@@ -661,3 +661,10 @@ html[data-dragging-cursor="true"] *::after {
 .aksel-data-table__details-panel-row {
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
 }
+
+.aksel-data-table__details-panel-row-cell {
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
+}

@@ -43,7 +43,11 @@ function DataTableDetailsPanelRow<T>({
 
   return (
     <tr className="aksel-data-table__details-panel-row">
-      <td id={expansionId} colSpan={fullWidthColSpan}>
+      <td
+        id={expansionId}
+        colSpan={fullWidthColSpan}
+        className="aksel-data-table__details-panel-row-cell"
+      >
         <div style={style}>{content}</div>
       </td>
     </tr>
