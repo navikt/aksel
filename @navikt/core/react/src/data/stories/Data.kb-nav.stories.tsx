@@ -316,10 +316,9 @@ export const Cache: Story = {
       </div>
     );
   },
-  /* TODO: Does not work now, cache does not update correctly */
-  /* play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const { down, expectNodeFocus } = keyboardUtils();
+    const { down, up, expectNodeFocus } = keyboardUtils();
 
     const table = canvas.getByRole("table");
     const toggleButton = canvas.getByRole("button", {
@@ -332,7 +331,6 @@ export const Cache: Story = {
     await down();
     expectNodeFocus("Custom row");
 
-
     await userEvent.click(toggleButton);
     table.focus();
     await down();
@@ -340,14 +338,13 @@ export const Cache: Story = {
     await down();
     expectNodeFocus("Row 3");
 
-
     await userEvent.click(toggleButton);
     table.focus();
     await down();
-    expectNodeFocus("Row 1");
-    await down();
+    expectNodeFocus("Row 3");
+    await up();
     expectNodeFocus("Custom row");
-  }, */
+  },
 };
 
 type FocusRow = { id: number };

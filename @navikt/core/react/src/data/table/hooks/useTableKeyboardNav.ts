@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useEventCallback } from "../../../utils/hooks";
 import { focusInitialTableTarget } from "../helpers/table-cell";
-import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
+import { focusCell, focusCellAndUpdateTabIndex } from "../helpers/table-focus";
 import {
   findFirstCell,
   findFirstCellInRow,
@@ -137,6 +137,10 @@ function useTableKeyboardNav({
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
+      if (activeCell) {
+        focusCell(activeCell);
+        return;
+      }
       focusInitialTableTarget(tableRef);
       return;
     }
@@ -173,7 +177,7 @@ function useTableKeyboardNav({
 
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
-    tabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
+    tabIndex: enabled ? 0 : undefined,
     setTableRef,
   };
 }
