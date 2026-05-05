@@ -56,14 +56,6 @@ const fallbackIdData: TestRow[] = [
   },
 ];
 
-const duplicateObjectRow: TestRow = {
-  id: "shared-root",
-  name: "Root",
-  subRows: [{ id: "shared-child", name: "Child" }],
-};
-
-const duplicateObjectData: TestRow[] = [duplicateObjectRow, duplicateObjectRow];
-
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
@@ -262,25 +254,5 @@ export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
     expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[2].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[3].checked).toBe(false);
-  },
-};
-
-export const DuplicateObjectRowsKeepDistinctMetadata: Story = {
-  render: () => (
-    <DataTable
-      columnDefinitions={columns}
-      data={duplicateObjectData}
-      getRowId={(_row, index) => String(index)}
-      subRows={{
-        getRows: getSubRows,
-        defaultExpandedRowIds: ["0"],
-      }}
-    />
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    expect(canvas.getAllByText("Root")).toHaveLength(2);
-    expect(canvas.getByText("Child")).toBeInTheDocument();
   },
 };

@@ -110,7 +110,7 @@ interface DataTableProps<T>
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
-  getRowId?: (rowData: T, index: number) => string | number;
+  getRowId?: (rowData: T) => string | number;
   /**
    * Sticky columns that remain visible when horizontally scrolling the table.
    *

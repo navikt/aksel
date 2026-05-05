@@ -17,7 +17,7 @@ type SubRowsProps<T> = {
 
 type UseTableItemsArgs<T> = {
   items: T[];
-  getRowId?: (rowData: T, index: number) => TableRowEntryId;
+  getRowId?: (rowData: T) => TableRowEntryId;
   subRows?: SubRowsProps<T>;
 };
 
