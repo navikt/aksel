@@ -49,7 +49,7 @@ export const DragAndDropDragHandler = React.forwardRef<
         <button
           className="aksel-data-drag-and-drop__drag-handler__arrow"
           data-direction="up"
-          onClick={() => context?.onKeyboardDragEnd(-1)}
+          onClick={() => context?.onKeyboardDragEnd(-1, itemLabel)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={context?.dragHandlerActive?.index === 0}
           type="button"
@@ -62,7 +62,6 @@ export const DragAndDropDragHandler = React.forwardRef<
         aria-pressed={Boolean(active)}
         aria-roledescription="draggable"
         type="button"
-        aria-live={active ? "assertive" : "off"}
         className="aksel-data-drag-and-drop__drag-handler__button"
         data-drag-handler-active={active}
         onPointerDown={(event) => {
@@ -78,7 +77,7 @@ export const DragAndDropDragHandler = React.forwardRef<
             context?.onKeyboardDragStart(null);
           }
         }}
-        onBlur={() => context?.onKeyboardDragStart(null)}
+        onBlur={() => context?.cancelDrag()}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             // Enter or space, currently active item - end keyboard dragging
@@ -93,17 +92,18 @@ export const DragAndDropDragHandler = React.forwardRef<
             // Cancel dragging
             // TODO Handle reset
             event.preventDefault();
+            context?.setAnnouncer(`Flytting av ${itemLabel} avbrutt.`);
             context?.cancelDrag(true);
             return;
           } else if (event.key === "ArrowUp") {
             // Move item up
             event.preventDefault();
-            context?.onKeyboardDragEnd(-1);
+            context?.onKeyboardDragEnd(-1, itemLabel);
             return;
           } else if (event.key === "ArrowDown") {
             // Move item down
             event.preventDefault();
-            context?.onKeyboardDragEnd(1);
+            context?.onKeyboardDragEnd(1, itemLabel);
             return;
           }
         }}
@@ -115,7 +115,7 @@ export const DragAndDropDragHandler = React.forwardRef<
           className="aksel-data-drag-and-drop__drag-handler__arrow"
           data-direction="down"
           type="button"
-          onClick={() => context?.onKeyboardDragEnd(1)}
+          onClick={() => context?.onKeyboardDragEnd(1, itemLabel)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={
             context?.dragHandlerActive?.index === context?.itemAmount - 1

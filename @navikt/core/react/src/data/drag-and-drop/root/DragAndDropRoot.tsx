@@ -28,7 +28,7 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
  * [x] pointer over listener / state, onPointerEnter, onPointerLeave
  * [x] Overlay - Use floating component
  * [x] Keyboard navigation
- * [ ] UU - announce on drag start, item moved, drag end
+ * [x] UU - announce on drag start, item moved, drag end
  * [x] Make overlay same width as the OG item, currently jumps to content width
  * [x] Look into adding a cancel listener event
  * [x] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
@@ -36,21 +36,22 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
  * [x] Make arrow icons into buttons that react to keyboard events, currently just decorative
  * [x] Keep handler focus after clicking arrows for dragging
  * [x] Look into data-based API vs component-based API
- * [ ] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
+ * [x] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
  * [x] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - just for table for now
  * [x] Discuss items type
- * [ ] Discuss how to implement label best
+ * [x] Discuss how to implement label best
  * [ ] Quick nav (< > samtidig) - få piltastene til å fungere
  * [x] Implement new type for items - ColumnDefinitions<T>
- * [ ] Remove announcer div and use a live region component instead
- * [ ] Make ESC reset position, not just cancel dragging
- * [ ] Make instructions for keyboard users (visible?)
+ * [x] Remove announcer div and use a live region component instead
+ * [x] Make ESC reset position, not just cancel dragging
+ * [x] Make instructions for keyboard users (visible?)
  * [ ] Ask design about visible keyboard instructions
  * [ ] Update design from Figma
  *
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
+const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
 function DragAndDropInner<T>(
   { items, setItems, renderItem }: DragAndDropProps<T>,
@@ -61,6 +62,7 @@ function DragAndDropInner<T>(
   const [dragHandlerActive, setDragHandlerActive] =
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
+  const [announcer, setAnnouncer] = useState("");
   const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
   const activeData = items.find((item) => item.id === activeItem?.id);
 
@@ -256,9 +258,7 @@ function DragAndDropInner<T>(
       cancelDrag();
     };
 
-    const handlePointerCancel = () => {
-      cancelDrag();
-    };
+    const handlePointerCancel = () => cancelDrag(true);
 
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerup", handlePointerUp);
@@ -277,7 +277,7 @@ function DragAndDropInner<T>(
     cancelDrag,
   ]);
 
-  const onKeyboardDragEnd = (diff: number) => {
+  const onKeyboardDragEnd = (diff: number, label: string) => {
     if (!dragHandlerActive) return;
 
     const targetIndex = dragHandlerActive.index + diff;
@@ -285,6 +285,7 @@ function DragAndDropInner<T>(
       return;
     }
 
+    setAnnouncer(`${label}. Plass ${targetIndex + 1} av ${items.length}.`);
     reorderItems(dragHandlerActive.index, targetIndex);
     setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
   };
@@ -300,9 +301,22 @@ function DragAndDropInner<T>(
       onKeyboardDragEnd={onKeyboardDragEnd}
       startPendingDrag={startPendingDrag}
       cancelDrag={cancelDrag}
+      setAnnouncer={setAnnouncer}
       itemAmount={items.length}
     >
-      <ul ref={forwardedRef} aria-label="Kolonneinnstillinger">
+      <span id={SR_INSTRUCTIONS_ID} className="sr-only">
+        Bruk Tab for å fokusere på en kolonne. Trykk mellomrom eller enter for å
+        starte flytting, bruk piltastene for å flytte kolonnen, trykk mellomrom
+        eller enter for å slippe, eller Escape for å avbryte.
+      </span>
+      <div aria-live="assertive" className="sr-only">
+        {announcer}
+      </div>
+      <ul
+        ref={forwardedRef}
+        aria-label="Kolonneinnstillinger"
+        aria-describedby={SR_INSTRUCTIONS_ID}
+      >
         {items.map((item, index) => {
           return (
             <DragAndDropItem
@@ -329,6 +343,7 @@ function DragAndDropInner<T>(
               boxSizing: "border-box",
               width: overlayWidth ? `${overlayWidth}px` : "fit-content",
             }}
+            aria-hidden
           >
             <DragAndDropItem
               id={activeItem.id}
