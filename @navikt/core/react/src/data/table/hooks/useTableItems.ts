@@ -23,7 +23,7 @@ type UseTableItemsArgs<T> = {
 
 type useTableItemsReturn<T> = {
   items: T[];
-  itemDetails: Map<T, ItemDetail<T>>;
+  itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
   /** Row ids for the rows currently rendered in the table body. */
   visibleRowIds: TableRowEntryId[];
   /** Direct child ids for each row, used to traverse selection groups lazily. */
@@ -57,32 +57,35 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
   const { itemDetails, visibleItems, visibleRowIds, childRowIdsById } =
     useMemo(() => {
-      const { itemDetails: rowEntriesMap, childRowIdsById: _childRowIdsById } =
-        collectTableRowEntries({
-          items,
-          getRowId,
-          getRows,
-          isRowExpandable,
-        });
+      const {
+        itemDetails: rowEntriesMap,
+        rootRowIds,
+        childRowIdsById: _childRowIdsById,
+      } = collectTableRowEntries({
+        items,
+        getRowId,
+        getRows,
+        isRowExpandable,
+      });
 
       const localVisibleItems: T[] = [];
       const localVisibleRowIds: TableRowEntryId[] = [];
 
-      const addVisibleRows = (rowData: T): TableRowEntryId[] => {
-        const details = rowEntriesMap.get(rowData);
+      const addVisibleRows = (rowId: TableRowEntryId): TableRowEntryId[] => {
+        const details = rowEntriesMap.get(rowId);
 
         if (!details) {
           return [];
         }
 
-        localVisibleItems.push(rowData);
+        localVisibleItems.push(details.rowData);
         localVisibleRowIds.push(details.id);
 
         const visibleDescendantRowIds: TableRowEntryId[] = [];
 
         if (expandedIdsSet.has(details.id)) {
-          for (const childRow of details.children) {
-            const childVisibleRowIds = addVisibleRows(childRow);
+          for (const childRowId of details.children) {
+            const childVisibleRowIds = addVisibleRows(childRowId);
             visibleDescendantRowIds.push(...childVisibleRowIds);
           }
         }
@@ -90,8 +93,8 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
         return [details.id, ...visibleDescendantRowIds];
       };
 
-      for (const rowData of items) {
-        addVisibleRows(rowData);
+      for (const rowId of rootRowIds) {
+        addVisibleRows(rowId);
       }
 
       return {
@@ -125,9 +128,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
-  createStrictContext<
-    Omit<useTableItemsReturn<any>, "visibleRowIds" | "childRowIdsById">
-  >({
+  createStrictContext<Omit<useTableItemsReturn<any>, "childRowIdsById">>({
     name: "TableItemsContext",
     errorMessage:
       "useTableItemsContext must be used within a TableItemsProvider",

@@ -90,7 +90,10 @@ function DataTableDetailsPanelProvider<T>({
   const tableItemsContext = useTableItemsContext(false);
 
   const { itemDetails } = tableItemsContext ?? {
-    itemDetails: new Map(),
+    itemDetails: new Map<
+      string | number,
+      { rowData: T; id: string | number; level: number }
+    >(),
   };
 
   const expandableIds = React.useMemo(() => {
@@ -100,7 +103,7 @@ function DataTableDetailsPanelProvider<T>({
 
     const ids = new Set<string | number>();
 
-    for (const [rowData, { id, level }] of itemDetails.entries()) {
+    for (const { rowData, id, level } of itemDetails.values()) {
       /* We only allow Master - Details pattern on top level rows */
       if (level > 0) {
         continue;

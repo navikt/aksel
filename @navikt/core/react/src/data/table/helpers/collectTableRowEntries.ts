@@ -8,14 +8,16 @@ type CollectTableRowEntriesArgs<T> = {
 };
 
 interface ItemDetail<T> {
-  id: string | number;
+  id: TableRowEntryId;
+  rowData: T;
   level: number;
-  parent: null | T;
-  children: readonly T[];
+  parentId: TableRowEntryId | null;
+  children: readonly TableRowEntryId[];
 }
 
 type CollectTableRowEntriesReturn<T> = {
-  itemDetails: Map<T, ItemDetail<T>>;
+  itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
+  rootRowIds: TableRowEntryId[];
   /**
    * Direct child ids for each row, used to traverse nested selection groups
    * without storing every descendant list on each ancestor.
@@ -29,14 +31,14 @@ function collectTableRowEntries<T>({
   getRows,
   isRowExpandable,
 }: CollectTableRowEntriesArgs<T>): CollectTableRowEntriesReturn<T> {
-  const itemDetailsMap = new Map<T, ItemDetail<T>>();
+  const itemDetailsMap = new Map<TableRowEntryId, ItemDetail<T>>();
   const childRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
+  const rootRowIds: TableRowEntryId[] = [];
 
   const traverseRow = (
     rowData: T,
     rowIndex: number,
     level: number,
-    parent: T | null,
     parentRowId: TableRowEntryId | null,
   ): TableRowEntryId => {
     const rowId = getRowId
@@ -46,26 +48,21 @@ function collectTableRowEntries<T>({
     const children =
       ((isRowExpandable?.(rowData) ?? true) ? getRows?.(rowData) : []) ?? [];
 
-    itemDetailsMap.set(rowData, {
-      id: rowId,
-      level,
-      parent,
-      children,
-    });
-
     const childRowIds: TableRowEntryId[] = [];
 
     for (let childIndex = 0; childIndex < children.length; childIndex++) {
       const childRow = children[childIndex];
-      const childRowId = traverseRow(
-        childRow,
-        childIndex,
-        level + 1,
-        rowData,
-        rowId,
-      );
+      const childRowId = traverseRow(childRow, childIndex, level + 1, rowId);
       childRowIds.push(childRowId);
     }
+
+    itemDetailsMap.set(rowId, {
+      id: rowId,
+      rowData,
+      level,
+      parentId: parentRowId,
+      children: childRowIds,
+    });
 
     childRowIdsById.set(rowId, childRowIds);
 
@@ -73,11 +70,12 @@ function collectTableRowEntries<T>({
   };
 
   for (let rowIndex = 0; rowIndex < items.length; rowIndex++) {
-    traverseRow(items[rowIndex], rowIndex, 0, null, null);
+    rootRowIds.push(traverseRow(items[rowIndex], rowIndex, 0, null));
   }
 
   return {
     itemDetails: itemDetailsMap,
+    rootRowIds,
     childRowIdsById,
   };
 }

@@ -45,6 +45,12 @@ const fallbackRows: FallbackTestRow[] = [
   },
 ];
 
+const duplicatedRowObject: TestRow = {
+  id: "shared",
+  name: "Shared",
+  subRows: [{ id: "shared-child", name: "Child" }],
+};
+
 const getSubRows = (row: TestRow) => row.subRows ?? [];
 
 const getVisibleIds = (rows: TestRow[]) => rows.map((row) => row.id);
@@ -59,16 +65,18 @@ describe("useTableItems", () => {
     );
 
     expect(getVisibleIds(result.current.items)).toEqual(["a", "b"]);
-    expect(result.current.itemDetails.get(plainRows[0])).toMatchObject({
+    expect(result.current.itemDetails.get("a")).toMatchObject({
       id: "a",
+      rowData: plainRows[0],
       level: 0,
-      parent: null,
+      parentId: null,
       children: [],
     });
-    expect(result.current.itemDetails.get(plainRows[1])).toMatchObject({
+    expect(result.current.itemDetails.get("b")).toMatchObject({
       id: "b",
+      rowData: plainRows[1],
       level: 0,
-      parent: null,
+      parentId: null,
       children: [],
     });
   });
@@ -148,5 +156,36 @@ describe("useTableItems", () => {
       "b",
       "b1",
     ]);
+  });
+
+  test("tracks duplicated row objects by row id instead of object identity", () => {
+    const { result } = renderHook(() =>
+      useTableItems({
+        items: [duplicatedRowObject, duplicatedRowObject],
+        subRows: {
+          getRows: getSubRows,
+          defaultExpandedRowIds: ["0"],
+        },
+      }),
+    );
+
+    expect(result.current.visibleRowIds).toEqual(["0", "0.0", "1"]);
+    expect(getVisibleIds(result.current.items)).toEqual([
+      "shared",
+      "shared-child",
+      "shared",
+    ]);
+    expect(result.current.itemDetails.get("0")).toMatchObject({
+      id: "0",
+      rowData: duplicatedRowObject,
+      parentId: null,
+      children: ["0.0"],
+    });
+    expect(result.current.itemDetails.get("1")).toMatchObject({
+      id: "1",
+      rowData: duplicatedRowObject,
+      parentId: null,
+      children: ["1.0"],
+    });
   });
 });

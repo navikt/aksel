@@ -272,6 +272,7 @@ function DataTableInner<T>(
       <TableItemsProvider
         itemDetails={tableItems.itemDetails}
         items={tableItems.items}
+        visibleRowIds={tableItems.visibleRowIds}
         onExpandedRowIdsChange={tableItems.onExpandedRowIdsChange}
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
@@ -448,7 +449,7 @@ function DataTableTBodyContent({
   loadingLabel,
   emptyState,
 }: DataTableTBodyContentProps) {
-  const { items, itemDetails } = useTableItemsContext();
+  const { items, itemDetails, visibleRowIds } = useTableItemsContext();
   const { columns, isLoading, fullWidthColSpan } = useDataTableContext();
 
   if (isLoading && loadingState != null) {
@@ -504,8 +505,9 @@ function DataTableTBodyContent({
           </td>
         </tr>
       )}
-      {items.map((rowData) => {
-        const details = itemDetails.get(rowData);
+      {items.map((rowData, rowIndex) => {
+        const rowId = visibleRowIds[rowIndex];
+        const details = rowId != null ? itemDetails.get(rowId) : undefined;
 
         /* Should in theory be impossible. Look about typing this? */
         if (!details) {
