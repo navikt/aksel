@@ -733,7 +733,7 @@
     "swr": "^2.4.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "4.1.5"
   },
   "peerDependencies": {
