@@ -38,6 +38,13 @@ type GroupedLlmSection = {
   }[];
 };
 
+const MARKDOWN_PAGE_PATHS = {
+  TOKENS: "/grunnleggende/styling/design-tokens",
+  CODEMODS: "/grunnleggende/kode/codemods-config",
+  TAILWIND_CONFIG: "/grunnleggende/styling/tailwind-config",
+  ICONS: "/komponenter/ikoner",
+} as const;
+
 const llmSectionConfig = {
   komponent_artikkel: {
     title: "Components",
@@ -45,7 +52,7 @@ const llmSectionConfig = {
     order: 0,
     kategorier: komponentKategorier,
     staticPages: [
-      { title: "Ikoner", slug: "/komponenter/ikoner", category: "core" },
+      { title: "Ikoner", slug: MARKDOWN_PAGE_PATHS.ICONS, category: "core" },
     ],
   } satisfies SectionEntry<typeof komponentKategorier>,
   ds_artikkel: {
@@ -56,17 +63,17 @@ const llmSectionConfig = {
     staticPages: [
       {
         title: "Design tokens",
-        slug: "/grunnleggende/styling/design-tokens",
+        slug: MARKDOWN_PAGE_PATHS.TOKENS,
         category: "styling",
       },
       {
         title: "Tailwind config for `@navikt/ds-tailwind`",
-        slug: "/grunnleggende/styling/tailwind-config",
+        slug: MARKDOWN_PAGE_PATHS.TAILWIND_CONFIG,
         category: "styling",
       },
       {
         title: "Codemods and migration scripts to run with `@navikt/aksel` CLI",
-        slug: "/grunnleggende/kode/codemods-config",
+        slug: MARKDOWN_PAGE_PATHS.CODEMODS,
         category: "kode",
       },
     ],
@@ -132,5 +139,5 @@ function groupLlmDocumentation(items: MarkdownArticle[]): GroupedLlmSection[] {
   });
 }
 
-export { groupLlmDocumentation, llmSectionConfig };
+export { groupLlmDocumentation, llmSectionConfig, MARKDOWN_PAGE_PATHS };
 export type { GroupedLlmSection, MarkdownArticle, SectionEntry };

@@ -6,7 +6,7 @@ import { groupLlmDocumentation } from "@/app/api/llm/helpers/docs-structure";
 type DocEntry = {
   name: string;
   path: string;
-  section: string;
+  category: string;
   subcategory: string;
 };
 
@@ -26,13 +26,13 @@ const addMarkdownExtension = (slug: string) =>
  *    {
  *      "name": "Page",
  *      "path": "/komponenter/primitives/page.md",
- *      "section": "Components",
+ *      "category": "Components",
  *      "subcategory": "Primitives"
  *    },
  *    {
  *      "name": "HGrid",
  *      "path": "/komponenter/primitives/hgrid.md",
- *      "section": "Components",
+ *      "category": "Components",
  *      "subcategory": "Primitives"
  *    }
  *  ]}
@@ -45,36 +45,27 @@ export async function GET() {
     });
 
     const entries: DocEntry[] = [];
-    const seenPaths = new Set<string>();
 
     for (const section of groupLlmDocumentation(items)) {
       for (const category of section.categories) {
         for (const page of category.staticPages) {
           const path = addMarkdownExtension(page.slug);
-          if (seenPaths.has(path)) {
-            continue;
-          }
 
-          seenPaths.add(path);
           entries.push({
             name: page.title,
             path,
-            section: section.config.title,
+            category: section.config.title,
             subcategory: category.kategori.title,
           });
         }
 
         for (const item of category.items) {
           const path = addMarkdownExtension(`/${item.slug}`);
-          if (seenPaths.has(path)) {
-            continue;
-          }
 
-          seenPaths.add(path);
           entries.push({
             name: item.heading ?? "",
             path,
-            section: section.config.title,
+            category: section.config.title,
             subcategory: category.kategori.title,
           });
         }
