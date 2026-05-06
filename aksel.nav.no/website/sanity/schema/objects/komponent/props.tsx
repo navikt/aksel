@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { BulletListIcon } from "@navikt/aksel-icons";
+import type { Props_seksjon } from "@/app/_sanity/query-types";
 
 export const PropsSeksjon = defineType({
   title: "Props",
@@ -49,9 +50,13 @@ export const PropsSeksjon = defineType({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      komponenter: "komponenter",
+    },
+    prepare({ komponenter }: { komponenter: Props_seksjon["komponenter"] }) {
       return {
         title: "Props",
+        subtitle: komponenter?.map((k) => k.title).join(", "),
         media: () => <BulletListIcon aria-hidden />,
       };
     },
