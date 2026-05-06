@@ -99,7 +99,7 @@
     "@vitest/eslint-plugin": "1.6.16",
     "chromatic": "15.1.0",
     "concurrently": "9.2.1",
-    "cross-env": "^10.0.0",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
