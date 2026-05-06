@@ -53,10 +53,10 @@ export const PropsSeksjon = defineType({
     select: {
       komponenter: "komponenter",
     },
-    prepare({ komponenter }: { komponenter: Props_seksjon["komponenter"] }) {
+    prepare({ komponenter }) {
       return {
         title: "Props",
-        subtitle: komponenter
+        subtitle: (komponenter as Props_seksjon["komponenter"])
           ?.map((k) =>
             k.heading_level ? `${k.title} (h${k.heading_level})` : k.title,
           )
