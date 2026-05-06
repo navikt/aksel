@@ -56,7 +56,11 @@ export const PropsSeksjon = defineType({
     prepare({ komponenter }: { komponenter: Props_seksjon["komponenter"] }) {
       return {
         title: "Props",
-        subtitle: komponenter?.map((k) => k.title).join(", "),
+        subtitle: komponenter
+          ?.map((k) =>
+            k.heading_level ? `${k.title} (h${k.heading_level})` : k.title,
+          )
+          .join(", "),
         media: () => <BulletListIcon aria-hidden />,
       };
     },
