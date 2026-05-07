@@ -17,7 +17,7 @@ import { DragAndDropProvider } from "./DragAndDrop.context";
 
 interface DragAndDropProps<
   T,
-  DetailsT = Record<string, any>,
+  DetailsT extends Record<string, any>,
 > extends React.HTMLAttributes<HTMLUListElement> {
   items: ColumnDefinitions<T, DetailsT>;
   setItems: React.Dispatch<
@@ -57,14 +57,14 @@ interface DragAndDropProps<
  * [ ] Update design from Figma
  * [ ] Look at instructions text
  * [x] Remove default ul styling
- * [ ] Fix setItems type
+ * [x] Fix setItems type
  *
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
-function DragAndDropInner<T, DetailsT = Record<string, any>>(
+function DragAndDropInner<T, DetailsT extends Record<string, any>>(
   { items, setItems, renderItem }: DragAndDropProps<T, DetailsT>,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ) {
@@ -372,8 +372,11 @@ function DragAndDropInner<T, DetailsT = Record<string, any>>(
   );
 }
 
-const DragAndDrop = forwardRef(DragAndDropInner) as <T>(
-  props: DragAndDropProps<T> & React.RefAttributes<HTMLUListElement>,
+const DragAndDrop = forwardRef(DragAndDropInner) as <
+  T,
+  DetailsT extends Record<string, any>,
+>(
+  props: DragAndDropProps<T, DetailsT> & React.RefAttributes<HTMLUListElement>,
 ) => React.ReactElement | null;
 
 export { DragAndDrop, DragAndDropItem };

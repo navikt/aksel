@@ -29,7 +29,6 @@ import DragAndDropLegacy from "../drag-and-drop-legacy/root/DragAndDropLegacyRoo
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "../token-filter/TokenFilter";
@@ -383,8 +382,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
-    const [columnView, setColumnView] =
-      React.useState<ColumnDefinitions<any, any>>(columnDef_TEST_DATA);
+    const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
     const [stickyColumns, setStickyColumns] = React.useState<{
       first: "none" | "first";
       last: "none" | "last";
@@ -710,6 +708,7 @@ export const KitchenSinkAdvancedFilter: Story = {
               : undefined,
           }}
           subRows={{
+            /* @ts-expect-error Test-data just hacked together now  */
             getRows: showNestedRows
               ? (rowData) => rowData.nestedRows
               : undefined,
