@@ -111,7 +111,7 @@ function KodeEksemplerIFrame(props: {
           aria-label={`Kode for ${current?.title}`}
           tabs={[
             {
-              text: "TSX",
+              text: "App.tsx",
               value: "example",
               lang: "tsx",
               code:
