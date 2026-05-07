@@ -247,6 +247,15 @@
       color: highlight;
       box-shadow: none;
     }
+
+    &[data-variant="tertiary"][data-pressed="true"] {
+      background-color: selecteditem;
+      color: selecteditemtext;
+
+      & span {
+        forced-color-adjust: none;
+      }
+    }
   }
 
   .aksel-button:not(:disabled):hover span {
