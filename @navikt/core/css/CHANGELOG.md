@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 8.10.5
+
+### Patch Changes
+
+- Pagination: Fix selected-styling in forced-colors mode ([#4858](https://github.com/navikt/aksel/pull/4858))
+
+- Button: Fix issue where secondary and tertiary variants did not have correct text color is certain cases ([#4857](https://github.com/navikt/aksel/pull/4857))
+
 ## 8.10.4
 
 ## 8.10.3
