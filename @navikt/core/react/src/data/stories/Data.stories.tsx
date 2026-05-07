@@ -710,7 +710,6 @@ export const KitchenSinkAdvancedFilter: Story = {
               : undefined,
           }}
           subRows={{
-            /* @ts-expect-error Test-data just hacked together now  */
             getRows: showNestedRows
               ? (rowData) => rowData.nestedRows
               : undefined,
