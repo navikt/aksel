@@ -513,6 +513,11 @@
   width: auto;
 }
 
+.aksel-data-table__drag-and-drop-root {
+  padding: 0;
+  margin: 0;
+}
+
 .aksel-data-drag-and-drop__drag-handler__button {
   height: 1.5rem;
   position: relative;
@@ -533,12 +538,11 @@
 }
 
 .aksel-data-table__drag-and-drop-item {
-  background-color: var(--ax-bg-default);
-
   &[data-overlay="true"] {
     width: 100%;
     opacity: 0.8;
     box-shadow: var(--ax-shadow-dialog);
+    background-color: var(--ax-bg-default);
   }
 
   /* TODO - might be removable */
@@ -555,7 +559,7 @@
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__alt,
+.aksel-data-drag-and-drop__drag-handler__legacy,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
