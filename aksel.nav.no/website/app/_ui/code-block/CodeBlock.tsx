@@ -240,6 +240,7 @@ function ActionButtons() {
   const { codeSnippet, wrapCode } = useCodeBlock();
 
   const titleId = useId();
+  const codeSnippetValue = codeSnippet.current;
 
   return (
     <HStack gap="space-4" align="center" wrap={false}>
@@ -268,9 +269,9 @@ function ActionButtons() {
           </svg>
         }
       />
-      {codeSnippet.current && (
+      {codeSnippetValue && (
         <CopyButton
-          copyText={codeSnippet.current}
+          copyText={codeSnippetValue}
           size="small"
           onClick={() =>
             umamiTrack(Events.TEKST_KOPIERT, { tekst: "kodeblokk" })
