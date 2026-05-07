@@ -3,10 +3,10 @@ import React, { useRef } from "react";
 import { HStack } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
-import { DataDragAndDropDragHandler } from "../drag-handler/DataDragAndDropDragHandler";
-import { DataDragAndDropContext } from "../root/DataDragAndDrop.context";
+import { DragAndDropDragHandlerLegacy } from "../drag-handler/DragAndDropDragHandlerLegacy";
+import { DragAndDropLegacyContext } from "../root/DragAndDropLegacy.context";
 
-interface DataDragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DragAndDropItemLegacyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Unique id
@@ -21,17 +21,17 @@ interface DataDragAndDropItemProps extends React.HTMLAttributes<HTMLDivElement> 
 /**
  * TODO
  *
- * @see 🏷️ {@link DataDragAndDropItemProps}
+ * @see 🏷️ {@link DragAndDropItemLegacyProps}
  * @example
  * ```tsx
- * <DragAndDrop.Item numOfSelectedRows={selectedRows.length} onClear={handleClear}>
+ * <DragAndDropLegacy.Item numOfSelectedRows={selectedRows.length} onClear={handleClear}>
  *   TODO
- * </DragAndDrop.Item>
+ * </DragAndDropLegacy.Item>
  * ```
  */
-const DataDragAndDropItem = React.forwardRef<
+const DragAndDropItemLegacy = React.forwardRef<
   HTMLDivElement,
-  DataDragAndDropItemProps
+  DragAndDropItemLegacyProps
 >(({ children, id, index, className, ...rest }, forwardedRef) => {
   const handleRef = useRef<HTMLDivElement>(null);
   const { ref, isDragging, isDropTarget } = useSortable({
@@ -40,7 +40,7 @@ const DataDragAndDropItem = React.forwardRef<
     handle: handleRef,
   });
   const mergedRef = useMergeRefs(ref, forwardedRef);
-  const context = React.useContext(DataDragAndDropContext);
+  const context = React.useContext(DragAndDropLegacyContext);
   const mouseDragging = isDragging && context?.inputMethod === "mouse";
   const mouseDropTarget = isDropTarget && context?.inputMethod === "mouse";
   const keyboardDragging = isDragging && context?.inputMethod === "keyboard";
@@ -58,7 +58,7 @@ const DataDragAndDropItem = React.forwardRef<
         data-drop-target={mouseDropTarget}
         tabIndex={-1}
       >
-        <DataDragAndDropDragHandler
+        <DragAndDropDragHandlerLegacy
           handleRef={handleRef}
           keyboardDragging={keyboardDragging}
           alt
@@ -69,6 +69,6 @@ const DataDragAndDropItem = React.forwardRef<
   );
 });
 
-export default DataDragAndDropItem;
-export { DataDragAndDropItem };
-export type { DataDragAndDropItemProps };
+export default DragAndDropItemLegacy;
+export { DragAndDropItemLegacy };
+export type { DragAndDropItemLegacyProps };

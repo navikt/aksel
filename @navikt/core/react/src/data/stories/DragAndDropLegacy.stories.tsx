@@ -4,7 +4,7 @@ import { DragVerticalIcon } from "@navikt/aksel-icons";
 import { Switch } from "../../form/switch";
 import { HStack } from "../../primitives/stack";
 import { Floating } from "../../utils/components/floating/Floating";
-import DragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
+import DragAndDrop from "../drag-and-drop-legacy/root/DragAndDropLegacyRoot";
 
 const meta: Meta<typeof DragAndDrop> = {
   title: "ds-react/Data/OldDragAndDrop",

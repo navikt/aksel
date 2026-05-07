@@ -2,34 +2,32 @@ import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { isSortable } from "@dnd-kit/react/sortable";
 import React, { forwardRef, isValidElement } from "react";
 import { VStack } from "../../../primitives/stack";
-import DataDragAndDropItem, {
-  DataDragAndDropItemProps,
-} from "../item/DataDragAndDropItem";
-import { DataDragAndDropContext } from "./DataDragAndDrop.context";
+import DragAndDropItemLegacy from "../item/DragAndDropItemLegacy";
+import { DragAndDropLegacyContext } from "./DragAndDropLegacy.context";
 
-interface DataDragAndDropProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DragAndDropLegacyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: any[];
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-interface DataDragAndDropRootComponent extends React.ForwardRefExoticComponent<
-  DataDragAndDropProps & React.RefAttributes<HTMLDivElement>
+interface DragAndDropLegacyRootComponent extends React.ForwardRefExoticComponent<
+  DragAndDropLegacyProps & React.RefAttributes<HTMLDivElement>
 > {
   /**
-   * @see 🏷️ {@link DataDragAndDropItemProps}
+   * @see 🏷️ {@link DragAndDropItemLegacyProps}
    * * @example
    * ```jsx
-   * <DragAndDrop>
-   *   <DragAndDrop.Item id="1" index={0}>
+   * <DragAndDropLegacy>
+   *   <DragAndDropLegacy.Item id="1" index={0}>
    *     ...
-   *   </DragAndDrop.Item>
-   * </DragAndDrop>
+   *   </DragAndDropLegacy.Item>
+   * </DragAndDropLegacy>
    * ```
    */
-  Item: typeof DataDragAndDropItem;
+  Item: typeof DragAndDropItemLegacy;
 }
 
-const DataDragAndDrop = forwardRef<HTMLDivElement, DataDragAndDropProps>(
+const DragAndDropLegacy = forwardRef<HTMLDivElement, DragAndDropLegacyProps>(
   ({ setItems, children, ...rest }, forwardedRef) => {
     const [inputMethod, setInputMethod] = React.useState<
       "mouse" | "keyboard" | null
@@ -45,7 +43,7 @@ const DataDragAndDrop = forwardRef<HTMLDivElement, DataDragAndDropProps>(
     };
 
     return (
-      <DataDragAndDropContext.Provider value={{ inputMethod }}>
+      <DragAndDropLegacyContext.Provider value={{ inputMethod }}>
         <DragDropProvider
           // TODO Look into overriding default keybinds, might eliminate context need
           onBeforeDragStart={(event) =>
@@ -84,13 +82,13 @@ const DataDragAndDrop = forwardRef<HTMLDivElement, DataDragAndDropProps>(
             }}
           </DragOverlay>
         </DragDropProvider>
-      </DataDragAndDropContext.Provider>
+      </DragAndDropLegacyContext.Provider>
     );
   },
-) as DataDragAndDropRootComponent;
+) as DragAndDropLegacyRootComponent;
 
-DataDragAndDrop.Item = DataDragAndDropItem;
+DragAndDropLegacy.Item = DragAndDropItemLegacy;
 
-export { DataDragAndDrop, DataDragAndDropItem };
-export default DataDragAndDrop;
-export type { DataDragAndDropItemProps, DataDragAndDropProps };
+export { DragAndDropLegacy, DragAndDropItemLegacy };
+export default DragAndDropLegacy;
+export type { DragAndDropLegacyProps };

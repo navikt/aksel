@@ -25,9 +25,11 @@ import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
-import DataDragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
+import DragAndDropLegacy from "../drag-and-drop-legacy/root/DragAndDropLegacyRoot";
+import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
+import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "../token-filter/TokenFilter";
@@ -192,10 +194,10 @@ export const KitchenSink: Story = {
                         >
                           Velg alle
                         </Switch>
-                        <DataDragAndDrop setItems={setColumnOrder}>
+                        <DragAndDropLegacy setItems={setColumnOrder}>
                           {table.getAllLeafColumns().map((column, index) => {
                             return (
-                              <DataDragAndDrop.Item
+                              <DragAndDropLegacy.Item
                                 id={column.id}
                                 index={index}
                                 key={column.id}
@@ -212,10 +214,10 @@ export const KitchenSink: Story = {
                                 >
                                   {column.id}
                                 </Switch>
-                              </DataDragAndDrop.Item>
+                              </DragAndDropLegacy.Item>
                             );
                           })}
-                        </DataDragAndDrop>
+                        </DragAndDropLegacy>
                       </VStack>
                     </VStack>
                   </HStack>
@@ -381,7 +383,8 @@ export const KitchenSinkAdvancedFilter: Story = {
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
-    const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
+    const [columnView, setColumnView] =
+      React.useState<ColumnDefinitions<any, any>>(columnDef_TEST_DATA);
     const [stickyColumns, setStickyColumns] = React.useState<{
       first: "none" | "first";
       last: "none" | "last";
@@ -650,36 +653,32 @@ export const KitchenSinkAdvancedFilter: Story = {
                         >
                           Velg alle
                         </Switch>
-                        <DataDragAndDrop setItems={setColumnView}>
-                          {columnView.map((column, index) => {
+                        <DragAndDrop
+                          items={columnView}
+                          setItems={setColumnView}
+                          renderItem={(item, index) => {
                             return (
-                              <DataDragAndDrop.Item
-                                id={column.id}
-                                index={index}
-                                key={column.id}
+                              <Switch
+                                key={item.id}
+                                size="small"
+                                checked={item.details?.visible}
+                                onChange={(event) => {
+                                  const newColumnView = [...columnView];
+                                  newColumnView[index] = {
+                                    ...item,
+                                    details: {
+                                      ...item.details,
+                                      visible: event.target.checked,
+                                    },
+                                  };
+                                  setColumnView(newColumnView);
+                                }}
                               >
-                                <Switch
-                                  key={column.id}
-                                  size="small"
-                                  checked={column.details?.visible}
-                                  onChange={(event) => {
-                                    const newColumnView = [...columnView];
-                                    newColumnView[index] = {
-                                      ...column,
-                                      details: {
-                                        ...column.details,
-                                        visible: event.target.checked,
-                                      },
-                                    };
-                                    setColumnView(newColumnView);
-                                  }}
-                                >
-                                  {column.label}
-                                </Switch>
-                              </DataDragAndDrop.Item>
+                                {item.label}
+                              </Switch>
                             );
-                          })}
-                        </DataDragAndDrop>
+                          }}
+                        />
                       </VStack>
                     </VStack>
                   </HStack>

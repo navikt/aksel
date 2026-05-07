@@ -6,7 +6,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Floating } from "../../../utils/components/floating/Floating";
 
-export interface DataDragAndDropDragHandlerProps {
+export interface DragAndDropDragHandlerLegacyProps {
   /**
    * Whether the drag handler is disabled
    */
@@ -24,18 +24,18 @@ export interface DataDragAndDropDragHandlerProps {
 }
 
 /**
- * DataDragAndDropDragHandler
+ * DragAndDropDragHandlerLegacy
  *
  * A button component that serves as a drag handle for drag and drop operations.
  * Can be used to initiate dragging of elements in a data table or list.
  */
-export const DataDragAndDropDragHandler = React.forwardRef<
+export const DragAndDropDragHandlerLegacy = React.forwardRef<
   HTMLButtonElement,
-  DataDragAndDropDragHandlerProps
+  DragAndDropDragHandlerLegacyProps
 >(({ keyboardDragging, handleRef, alt }) => {
   if (alt) {
     return (
-      <div className="aksel-data-drag-and-drop__drag-handler__alt">
+      <div className="aksel-data-drag-and-drop__drag-handler__legacy">
         {keyboardDragging && (
           <span
             className="aksel-data-drag-and-drop__drag-handler__arrow"
