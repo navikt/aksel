@@ -1,91 +1,27 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
-import { SelectionSubtreeHelper } from "./SelectionSubtreeHelper";
 
 type GetMultipleSelectPropsArgs = {
   selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeysSet: Set<string | number>;
   visibleRowIds: (string | number)[];
   childRowIdsById?: Map<string | number, (string | number)[]>;
+  disableRowSelection?: ({
+    row,
+    id,
+  }: {
+    row: any;
+    id: string | number;
+  }) => boolean;
 };
 
 function getMultipleSelectProps({
   selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disabledKeysSet,
-  visibleRowIds,
-  childRowIdsById,
+  disableRowSelection,
 }: GetMultipleSelectPropsArgs) {
-  const subtreeHelper = new SelectionSubtreeHelper({
-    childRowIdsById,
-    disabledKeysSet,
-    selectedKeysSet,
-  });
-
-  // Header selection traverses the visible roots and skips already visited
-  // descendants, so expanded trees stay linear in the number of rows.
-  const headerSelectableKeys = subtreeHelper.getSelectableKeys(visibleRowIds);
-  const headerSelectableKeysSet = new Set(headerSelectableKeys);
-
-  const selectedSelectableCount = headerSelectableKeys.filter((k) =>
-    selectedKeysSet.has(k),
-  ).length;
-
-  const allSelectableSelected =
-    headerSelectableKeys.length > 0 &&
-    selectedSelectableCount === headerSelectableKeys.length;
-
-  const indeterminate =
-    selectedSelectableCount > 0 &&
-    selectedSelectableCount < headerSelectableKeys.length;
-
-  const selectedKeysNotInView = selectedKeys.filter(
-    (k) => !headerSelectableKeysSet.has(k),
-  );
-  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
-  const preservedKeys = [
-    ...new Set([...selectedKeysNotInView, ...disabledSelected]),
-  ];
-
-  const isGroupFullySelected = (key: string | number) => {
-    const groupStats = subtreeHelper.getSelectionStats(key);
-
-    return (
-      groupStats.selectableCount > 0 &&
-      groupStats.selectedCount === groupStats.selectableCount
-    );
-  };
-
-  const handleToggleAll = () => {
-    if (allSelectableSelected) {
-      setSelectedKeys(preservedKeys);
-    } else {
-      setSelectedKeys([
-        ...new Set([...preservedKeys, ...headerSelectableKeys]),
-      ]);
-    }
-  };
-
-  const handleToggleRow = (key: string | number) => {
-    if (disabledKeysSet.has(key)) {
-      return;
-    }
-
-    const groupKeys = subtreeHelper.getSelectableKeys([key]);
-
-    if (isGroupFullySelected(key)) {
-      const groupKeysSet = new Set(groupKeys);
-      setSelectedKeys(
-        selectedKeys.filter((selectedKey) => !groupKeysSet.has(selectedKey)),
-      );
-    } else {
-      setSelectedKeys([...new Set([...selectedKeys, ...groupKeys])]);
-    }
-  };
-
-  return {
+  /* return {
     getTheadCheckboxProps: (): CheckboxInputProps => ({
       onChange: handleToggleAll,
       checked: allSelectableSelected,
@@ -102,6 +38,76 @@ function getMultipleSelectProps({
           groupStats.selectedCount > 0 &&
           groupStats.selectedCount < groupStats.selectableCount,
         disabled: disabledKeysSet.has(key),
+      };
+    },
+    toggleSelection: handleToggleRow,
+  }; */
+
+  /* const allRowKeysSet = new Set(allRowKeys);
+  const selectableKeys = allRowKeys.filter((k) => !disabledKeysSet.has(k));
+
+  const selectedSelectableCount = selectableKeys.filter((k) =>
+    selectedKeysSet.has(k),
+  ).length;
+
+  const allSelectableSelected =
+    selectableKeys.length > 0 &&
+    selectedSelectableCount === selectableKeys.length;
+
+  const indeterminate =
+    selectedSelectableCount > 0 &&
+    selectedSelectableCount < selectableKeys.length;
+
+  const selectedKeysNotInView = selectedKeys.filter(
+    (k) => !allRowKeysSet.has(k),
+  );
+  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
+  const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
+
+  const handleToggleAll = () => {
+    if (allSelectableSelected) {
+      setSelectedKeys(preservedKeys);
+    } else {
+      setSelectedKeys([...new Set([...preservedKeys, ...selectableKeys])]);
+    }
+  }; */
+
+  const handleToggleRow = (key: string | number, row: any) => {
+    if (!row) {
+      console.warn(
+        `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
+      );
+    }
+    if (disableRowSelection?.({ row, id: key })) {
+      return;
+    }
+
+    if (selectedKeysSet.has(key)) {
+      setSelectedKeys(selectedKeys.filter((k) => k !== key));
+    } else {
+      setSelectedKeys([...selectedKeys, key]);
+    }
+  };
+
+  return {
+    getTheadCheckboxProps: (): CheckboxInputProps => ({
+      /* onChange: handleToggleAll,
+      checked: allSelectableSelected,
+      indeterminate,
+      disabled: selectableKeys.length === 0, */
+    }),
+    getRowCheckboxProps: (
+      key: string | number,
+      row: any,
+    ): CheckboxInputProps => {
+      const isSelectionDisabled =
+        disableRowSelection?.({ row, id: key }) ?? false;
+
+      return {
+        onChange: () => handleToggleRow(key, row),
+        checked: selectedKeysSet.has(key),
+        indeterminate: false,
+        disabled: isSelectionDisabled,
       };
     },
     toggleSelection: handleToggleRow,

@@ -3,7 +3,7 @@ import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioIn
 
 type SelectedKeysT = (string | number)[];
 
-type SelectionProps = {
+type SelectionProps<T = any> = {
   /**
    * Enables selection of rows.
    *
@@ -28,12 +28,16 @@ type SelectionProps = {
    */
   onSelectionChange?: (keys: SelectedKeysT) => void;
   /**
-   * Keys that should be disabled for selection. These keys will not be selectable and will be styled as disabled.
-   *
-   *
-   * TODO: Consider making this optionally a callback with (rowData:T) => boolean, to allow for more dynamic disabling of selection based on row data.
+   * Callback to determine if a row should be disabled for selection.
+   * Disabled rows will not be selectable and will be styled as disabled.
    */
-  disabledSelectionKeys?: SelectedKeysT;
+  disableRowSelection?: ({
+    row,
+    id,
+  }: {
+    row: T;
+    id: string | number;
+  }) => boolean | boolean;
   /**
    * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
    *
@@ -45,24 +49,21 @@ type SelectionProps = {
 type NoneSelection = {
   selectionMode: "none";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
 };
 
 type SingleSelection = {
   selectionMode: "single";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
-  getRowRadioProps: (key: string | number) => RadioInputProps;
-  toggleSelection: (key: string | number) => void;
+  getRowRadioProps: (key: string | number, row: any) => RadioInputProps;
+  toggleSelection: (key: string | number, row: any) => void;
 };
 
 type MultipleSelection = {
   selectionMode: "multiple";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
-  getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
-  toggleSelection: (key: string | number) => void;
+  getRowCheckboxProps: (key: string | number, row: any) => CheckboxInputProps;
+  toggleSelection: (key: string | number, row: any) => void;
 };
 
 type TableSelectionBase = {
@@ -80,3 +81,42 @@ export type {
   TableSelection,
   SelectedKeysT,
 };
+
+/* type TESTWITHDATA<T> = {
+  disabledRowSelection?: ({
+    row,
+    id,
+  }: {
+    row: T;
+    id: string;
+  }) => boolean | boolean;
+  data: T[];
+  children?: never;
+};
+
+type TESTNODATA = {
+  disabledRowSelection?: ({ id }: { id: string }) => boolean | boolean;
+  data?: never;
+  children: React.ReactNode;
+};
+
+function COMPARE<T>(props: TESTWITHDATA<T>);
+function COMPARE(props: TESTNODATA);
+function COMPARE<T>(props: TESTNODATA | TESTWITHDATA<T>) {
+  console.log(props);
+  return null;
+}
+
+const A = () => {
+  return (
+    <>
+      <COMPARE
+        disabledRowSelection={({row, id}) => row.id}
+        data={[{ id: 1 }, { id: 2 }]}
+      />
+      <COMPARE disabledRowSelection={({ id }) => true}>
+        <div>Test</div>
+      </COMPARE>
+    </>
+  );
+}; */

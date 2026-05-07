@@ -33,7 +33,7 @@ function useTableSelection({
     defaultSelectedKeys,
     selectedKeys: selectedKeysProp,
     onSelectionChange,
-    disabledSelectionKeys = [],
+    disableRowSelection,
     disableRowSelectionOnClick = false,
   } = selection;
 
@@ -47,17 +47,12 @@ function useTableSelection({
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  const disabledKeysSet = useMemo(
-    () => new Set(disabledSelectionKeys),
-    [disabledSelectionKeys],
-  );
-
   const isRowSelected = useCallback(
     (rowId: string | number) => selectedKeysSet.has(rowId),
     [selectedKeysSet],
   );
 
-  const baseSelection = { selectedKeys, disabledSelectionKeys, isRowSelected };
+  const baseSelection = { selectedKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {
@@ -79,8 +74,8 @@ function useTableSelection({
         ...getSingleSelectProps({
           selectedKeysSet,
           setSelectedKeys,
-          disabledKeysSet,
           name: radioGroupName,
+          disableRowSelection,
         }),
       },
       disableRowSelectionOnClick,
@@ -96,9 +91,9 @@ function useTableSelection({
         selectedKeysSet,
         selectedKeys,
         setSelectedKeys,
-        disabledKeysSet,
         visibleRowIds,
         childRowIdsById,
+        disableRowSelection,
       }),
     },
     disableRowSelectionOnClick,
@@ -113,7 +108,6 @@ const noSelectionState: UseTableSelectionReturn = {
   selection: {
     selectionMode: "none",
     selectedKeys: [],
-    disabledSelectionKeys: [],
     isRowSelected: () => false,
   },
   disableRowSelectionOnClick: false,
