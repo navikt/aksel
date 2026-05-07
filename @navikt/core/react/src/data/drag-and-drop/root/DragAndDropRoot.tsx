@@ -15,10 +15,18 @@ import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
-interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
-  items: ColumnDefinitions<T>;
-  setItems: React.Dispatch<React.SetStateAction<ColumnDefinitions<T>>>;
-  renderItem: (item: ColumnDefinition<T>, index: number) => React.ReactNode;
+interface DragAndDropProps<
+  T,
+  DetailsT = Record<string, any>,
+> extends React.HTMLAttributes<HTMLUListElement> {
+  items: ColumnDefinitions<T, DetailsT>;
+  setItems: React.Dispatch<
+    React.SetStateAction<ColumnDefinitions<T, DetailsT>>
+  >;
+  renderItem: (
+    item: ColumnDefinition<T, DetailsT>,
+    index: number,
+  ) => React.ReactNode;
 }
 
 /**
@@ -47,14 +55,17 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
  * [x] Make instructions for keyboard users (visible?)
  * [ ] Ask design about visible keyboard instructions
  * [ ] Update design from Figma
+ * [ ] Look at instructions text
+ * [x] Remove default ul styling
+ * [ ] Fix setItems type
  *
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
-function DragAndDropInner<T>(
-  { items, setItems, renderItem }: DragAndDropProps<T>,
+function DragAndDropInner<T, DetailsT = Record<string, any>>(
+  { items, setItems, renderItem }: DragAndDropProps<T, DetailsT>,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ) {
   const [activeItem, setActiveItem] = useState<DragAndDropElement | null>(null);
@@ -63,7 +74,7 @@ function DragAndDropInner<T>(
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
   const [announcer, setAnnouncer] = useState("");
-  const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
+  const initialItemsRef = useRef<ColumnDefinitions<T, DetailsT> | null>(null);
   const activeData = items.find((item) => item.id === activeItem?.id);
 
   const activeItemRef = useRef<DragAndDropElement | null>(null);
@@ -309,13 +320,14 @@ function DragAndDropInner<T>(
         starte flytting, bruk piltastene for å flytte kolonnen, trykk mellomrom
         eller enter for å slippe, eller Escape for å avbryte.
       </span>
-      <div aria-live="assertive" className="sr-only">
+      <div aria-live="assertive" className="sr-only" aria-atomic>
         {announcer}
       </div>
       <ul
         ref={forwardedRef}
         aria-label="Kolonneinnstillinger"
         aria-describedby={SR_INSTRUCTIONS_ID}
+        className="aksel-data-table__drag-and-drop-root"
       >
         {items.map((item, index) => {
           return (
@@ -338,12 +350,12 @@ function DragAndDropInner<T>(
           <Floating.Content
             align="start"
             updatePositionStrategy="always"
+            aria-hidden
             style={{
               pointerEvents: "none",
               boxSizing: "border-box",
               width: overlayWidth ? `${overlayWidth}px` : "fit-content",
             }}
-            aria-hidden
           >
             <DragAndDropItem
               id={activeItem.id}
