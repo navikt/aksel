@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.10.5
+
+### Patch Changes
+
+- Dependencies: Bumped `@floating-ui/react` from v0.27.8 -> v0.27.19 ([#4851](https://github.com/navikt/aksel/pull/4851))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.5
+  - @navikt/aksel-icons@8.10.5
+
 ## 8.10.4
 
 ### Patch Changes
