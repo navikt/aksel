@@ -2,17 +2,14 @@ import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
-interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellElement> {
+interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
-   * Content alignment inside cell
+   * Content alignment inside cell.
+   *
+   * Quantitative figures like amounts and percentages should be right‑aligned (but not phone numbers, postal codes etc.)
    * @default "left"
    */
   textAlign?: "left" | "center" | "right";
-  /**
-   * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
-   */
-  colSpan?: number;
-  rowSpan?: number;
   /**
    * Temp hack to solve overflow and alignment
    */
@@ -28,7 +25,7 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
    * This is only needed when using `layout="auto"` together with
    * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
    */
-  contentMaxWidth?: number | `${number}${string}`;
+  contentMaxWidth?: number | `${number}${string}`; // TODO: Consider just `number | string` so that we can support CSS functions like var(), calc()
   /**
    * Makes the cell sticky.
    */
@@ -55,12 +52,12 @@ const DataTableBaseCell = forwardRef<
       children,
       as: Component,
       textAlign = "left",
-      colSpan,
       UNSAFE_isSelection,
       preventRowClick,
       contentMaxWidth,
-      rowSpan,
       isSticky,
+      colSpan,
+      rowSpan,
       ...rest
     },
     forwardedRef,
