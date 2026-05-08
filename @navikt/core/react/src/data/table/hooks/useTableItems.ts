@@ -135,4 +135,4 @@ const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   });
 
 export { useTableItems, TableItemsProvider, useTableItemsContext };
-export type { ItemDetail, SubRowsProps };
+export type { ItemDetail, SubRowsProps, useTableItemsReturn };

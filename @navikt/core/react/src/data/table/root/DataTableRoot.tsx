@@ -222,8 +222,7 @@ function DataTableInner<T>(
 
   const tableSelectionState = useTableSelection({
     selection,
-    visibleRowIds: tableItems.visibleRowIds,
-    childRowIdsById: tableItems.childRowIdsById,
+    tableItems,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {

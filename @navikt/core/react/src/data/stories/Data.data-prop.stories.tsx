@@ -192,7 +192,7 @@ export const SelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disabledSelectionKeys: [1, 2],
+          disableRowSelection: ({ id }) => id === 2 || id === 1,
         }}
         getRowId={(row) => row.id}
         withKeyboardNav
@@ -256,7 +256,7 @@ export const SingleSelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disabledSelectionKeys: [2],
+          disableRowSelection: ({ id }) => id === 2,
         }}
         getRowId={(row) => row.id}
       />
@@ -965,6 +965,7 @@ export const NestedRowsWithMasterDetail: Story = {
       }}
       withKeyboardNav
       subRows={{
+        defaultExpandedRowIds: [3],
         getRows: (row) => row.children,
       }}
       detailsPanel={{

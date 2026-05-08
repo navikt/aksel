@@ -8,13 +8,11 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
+import type { useTableItemsReturn } from "./useTableItems";
 
-type UseTableSelectionArgs = {
+type UseTableSelectionArgs<T = any> = {
   selection?: SelectionProps;
-  /* Visible rows manage the header checkbox state and render selection cells. */
-  visibleRowIds: (string | number)[];
-  /* Direct child ids let selection walk nested rows lazily. */
-  childRowIdsById?: Map<string | number, (string | number)[]>;
+  tableItems: useTableItemsReturn<T>;
 };
 
 type UseTableSelectionReturn = {
@@ -25,8 +23,7 @@ type UseTableSelectionReturn = {
 
 function useTableSelection({
   selection = {},
-  visibleRowIds = [],
-  childRowIdsById,
+  tableItems,
 }: UseTableSelectionArgs): UseTableSelectionReturn {
   const {
     selectionMode = "none",
@@ -36,6 +33,8 @@ function useTableSelection({
     disableRowSelection,
     disableRowSelectionOnClick = false,
   } = selection;
+
+  const { visibleRowIds = [], childRowIdsById } = tableItems;
 
   const radioGroupName = useId();
 
@@ -94,6 +93,7 @@ function useTableSelection({
         visibleRowIds,
         childRowIdsById,
         disableRowSelection,
+        tableItems,
       }),
     },
     disableRowSelectionOnClick,

@@ -1,9 +1,12 @@
+import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
+import type { useTableItemsReturn } from "../../hooks/useTableItems";
+import type { SelectedKeysT } from "./selection.types";
 
-type GetMultipleSelectPropsArgs = {
+type GetMultipleSelectPropsArgs<T = any> = {
   selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
-  setSelectedKeys: (keys: (string | number)[]) => void;
+  setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   visibleRowIds: (string | number)[];
   childRowIdsById?: Map<string | number, (string | number)[]>;
   disableRowSelection?: ({
@@ -13,6 +16,7 @@ type GetMultipleSelectPropsArgs = {
     row: any;
     id: string | number;
   }) => boolean;
+  tableItems: useTableItemsReturn<T>;
 };
 
 function getMultipleSelectProps({
@@ -20,58 +24,8 @@ function getMultipleSelectProps({
   selectedKeys,
   setSelectedKeys,
   disableRowSelection,
+  tableItems,
 }: GetMultipleSelectPropsArgs) {
-  /* return {
-    getTheadCheckboxProps: (): CheckboxInputProps => ({
-      onChange: handleToggleAll,
-      checked: allSelectableSelected,
-      indeterminate,
-      disabled: headerSelectableKeys.length === 0,
-    }),
-    getRowCheckboxProps: (key: string | number): CheckboxInputProps => {
-      const groupStats = subtreeHelper.getSelectionStats(key);
-
-      return {
-        onChange: () => handleToggleRow(key),
-        checked: isGroupFullySelected(key),
-        indeterminate:
-          groupStats.selectedCount > 0 &&
-          groupStats.selectedCount < groupStats.selectableCount,
-        disabled: disabledKeysSet.has(key),
-      };
-    },
-    toggleSelection: handleToggleRow,
-  }; */
-
-  /* const allRowKeysSet = new Set(allRowKeys);
-  const selectableKeys = allRowKeys.filter((k) => !disabledKeysSet.has(k));
-
-  const selectedSelectableCount = selectableKeys.filter((k) =>
-    selectedKeysSet.has(k),
-  ).length;
-
-  const allSelectableSelected =
-    selectableKeys.length > 0 &&
-    selectedSelectableCount === selectableKeys.length;
-
-  const indeterminate =
-    selectedSelectableCount > 0 &&
-    selectedSelectableCount < selectableKeys.length;
-
-  const selectedKeysNotInView = selectedKeys.filter(
-    (k) => !allRowKeysSet.has(k),
-  );
-  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
-  const preservedKeys = [...selectedKeysNotInView, ...disabledSelected];
-
-  const handleToggleAll = () => {
-    if (allSelectableSelected) {
-      setSelectedKeys(preservedKeys);
-    } else {
-      setSelectedKeys([...new Set([...preservedKeys, ...selectableKeys])]);
-    }
-  }; */
-
   const handleToggleRow = (key: string | number, row: any) => {
     if (!row) {
       console.warn(
@@ -89,12 +43,53 @@ function getMultipleSelectProps({
     }
   };
 
+  const isAllRowsSelected = () => {
+    if (!tableItems.itemDetails.size || !selectedKeys.length) {
+      return false;
+    }
+
+    for (const [id, { rowData }] of tableItems.itemDetails) {
+      const isSelectable = !disableRowSelection?.({ row: rowData, id });
+      if (isSelectable && !selectedKeysSet.has(id)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const isSomeRowsSelected = () => {
+    const totalSelected = selectedKeys.length;
+    return totalSelected > 0 && totalSelected < tableItems.itemDetails.size;
+  };
+
+  const toggleAllRowSelected: ChangeEventHandler<
+    HTMLInputElement,
+    HTMLInputElement
+  > = (event) => {
+    setSelectedKeys(() => {
+      /* Checked-state is optimistically updated, so while its not currently checked, the event return says it is */
+      if (!event.target.checked) {
+        return [];
+      }
+
+      const newSelectedKeys: SelectedKeysT = [];
+      for (const [id, { rowData }] of tableItems.itemDetails) {
+        const isSelectable = !disableRowSelection?.({ row: rowData, id });
+        if (isSelectable) {
+          newSelectedKeys.push(id);
+        }
+      }
+
+      return newSelectedKeys;
+    });
+  };
+
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => ({
-      /* onChange: handleToggleAll,
-      checked: allSelectableSelected,
-      indeterminate,
-      disabled: selectableKeys.length === 0, */
+      checked: isAllRowsSelected(),
+      indeterminate: isSomeRowsSelected(),
+      onChange: toggleAllRowSelected,
     }),
     getRowCheckboxProps: (
       key: string | number,
