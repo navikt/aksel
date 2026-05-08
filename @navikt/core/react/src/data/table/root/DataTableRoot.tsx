@@ -166,6 +166,11 @@ interface DataTableProps<T>
      */
     loadingLabel?: string;
   };
+  /**
+   * Adjusts font-size
+   * @default "medium"
+   */
+  textSize?: "small" | "medium" | "large";
 
   /**
    * Function to get sub-rows for a given row, used for nested rows.
@@ -185,6 +190,7 @@ function DataTableInner<T>(
     className,
     id,
     rowDensity = "normal",
+    textSize = "medium",
     withKeyboardNav = true,
     zebraStripes = false,
     truncateContent = true,
@@ -288,6 +294,7 @@ function DataTableInner<T>(
               data-zebra-stripes={zebraStripes}
               data-truncate-content={truncateContent}
               data-density={rowDensity}
+              data-text-size={textSize}
               data-layout={layout}
               data-loading={isLoading || undefined}
               aria-busy={isLoading || undefined}
