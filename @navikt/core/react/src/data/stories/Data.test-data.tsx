@@ -1,4 +1,6 @@
 import React from "react";
+import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
 import { Tag } from "../../tag";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
 
@@ -128,7 +130,53 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
   {
     label: "Skills",
     id: "skills",
-    cell: (row) => row.skills,
+    cell: (row) =>
+      row.skills.map((skill) => (
+        <Tag key={skill} size="small" variant="moderate">
+          {skill}
+        </Tag>
+      )),
+    /* cell: (row) => (
+      <Bleed marginBlock="space-4" marginInline="space-4">
+        {row.skills.map((skill) => (
+          <Box
+            key={skill}
+            style={{ display: "inline-block" }}
+            padding="space-4"
+          >
+            <Tag size="small" variant="moderate">
+              {skill}
+            </Tag>
+          </Box>
+        ))}
+      </Bleed>
+    ), */
+    details: {
+      visible: true,
+    },
+  },
+  {
+    label: "Actions",
+    id: "actions",
+    autoWidth: true,
+    cell: (row) => (
+      <>
+        <Button
+          size="xsmall"
+          variant="secondary"
+          data-color="neutral"
+          onClick={() => alert(`Edit ${row.name}`)}
+        >
+          Edit
+        </Button>
+        <Button
+          size="xsmall"
+          variant="secondary"
+          data-color="neutral"
+          icon={<MenuElipsisVerticalIcon title="Meny" />}
+        />
+      </>
+    ),
     details: {
       visible: true,
     },
