@@ -26,6 +26,13 @@ function getMultipleSelectProps({
   disableRowSelection,
   tableItems,
 }: GetMultipleSelectPropsArgs) {
+  const selectableIds: (string | number)[] = [];
+  for (const [id, { rowData }] of tableItems.itemDetails) {
+    if (!disableRowSelection?.({ row: rowData, id })) {
+      selectableIds.push(id);
+    }
+  }
+
   const handleToggleRow = (key: string | number, row: any) => {
     if (!row) {
       console.warn(
@@ -43,54 +50,32 @@ function getMultipleSelectProps({
     }
   };
 
+  // True only when every selectable row is checked.
   const isAllRowsSelected = () => {
-    if (!tableItems.itemDetails.size || !selectedKeys.length) {
+    if (!selectableIds.length || !selectedKeys.length) {
       return false;
     }
-
-    for (const [id, { rowData }] of tableItems.itemDetails) {
-      const isSelectable = !disableRowSelection?.({ row: rowData, id });
-      if (isSelectable && !selectedKeysSet.has(id)) {
-        return false;
-      }
-    }
-
-    return true;
+    return selectableIds.every((id) => selectedKeysSet.has(id));
   };
 
-  const isSomeRowsSelected = () => {
-    const totalSelected = selectedKeys.length;
-    return totalSelected > 0 && totalSelected < tableItems.itemDetails.size;
-  };
-
-  const toggleAllRowSelected: ChangeEventHandler<
-    HTMLInputElement,
-    HTMLInputElement
-  > = (event) => {
-    setSelectedKeys(() => {
-      /* Checked-state is optimistically updated, so while its not currently checked, the event return says it is */
-      if (!event.target.checked) {
-        return [];
-      }
-
-      const newSelectedKeys: SelectedKeysT = [];
-      for (const [id, { rowData }] of tableItems.itemDetails) {
-        const isSelectable = !disableRowSelection?.({ row: rowData, id });
-        if (isSelectable) {
-          newSelectedKeys.push(id);
-        }
-      }
-
-      return newSelectedKeys;
-    });
+  // Checked-state is optimistically updated in the event, so a checked event
+  // means the user intends to select all, and unchecked means deselect all.
+  const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    setSelectedKeys(event.target.checked ? selectableIds : []);
   };
 
   return {
-    getTheadCheckboxProps: (): CheckboxInputProps => ({
-      checked: isAllRowsSelected(),
-      indeterminate: isSomeRowsSelected(),
-      onChange: toggleAllRowSelected,
-    }),
+    getTheadCheckboxProps: (): CheckboxInputProps => {
+      const isAllSelected = isAllRowsSelected();
+      return {
+        checked: isAllRowsSelected(),
+        // True when at least one row is checked but not all selectable rows are.
+        indeterminate: selectedKeys.length > 0 && !isAllSelected,
+        onChange: toggleAllRowSelected,
+      };
+    },
     getRowCheckboxProps: (
       key: string | number,
       row: any,
