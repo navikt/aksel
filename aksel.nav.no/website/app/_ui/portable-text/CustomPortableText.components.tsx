@@ -17,6 +17,7 @@ import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
 import { LegacyTokenTable } from "@/app/_ui/legacy-token-table/LegacyTokenTable";
 import { Bilde } from "../bilde/Bilde";
+import { DescriptionList } from "../description-list/DescriptionList";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
 import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
@@ -64,6 +65,7 @@ function customPortableTextComponents({
       attachment: Attachment,
       compare_images: CompareImages,
       language: LocalCustomPortableText,
+      description_list: DescriptionList,
     } satisfies Record<PortableContentTypes, (props: any) => React.ReactNode>,
     block,
     marks,

@@ -235,6 +235,7 @@ const Riktekst = (
     "video",
     "exampletext_block",
     "language",
+    "description_list",
   ];
 
   const accordion = [
