@@ -50,7 +50,6 @@ function getMultipleSelectProps({
     }
   };
 
-  // True only when every selectable row is checked.
   const isAllRowsSelected = () => {
     if (!selectableIds.length || !selectedKeys.length) {
       return false;
@@ -58,8 +57,6 @@ function getMultipleSelectProps({
     return selectableIds.every((id) => selectedKeysSet.has(id));
   };
 
-  // Checked-state is optimistically updated in the event, so a checked event
-  // means the user intends to select all, and unchecked means deselect all.
   const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
@@ -71,7 +68,7 @@ function getMultipleSelectProps({
       const isAllSelected = isAllRowsSelected();
       return {
         checked: isAllRowsSelected(),
-        // True when at least one row is checked but not all selectable rows are.
+
         indeterminate: selectedKeys.length > 0 && !isAllSelected,
         onChange: toggleAllRowSelected,
       };
