@@ -1,0 +1,17 @@
+.description-list--horizontal > dt:not(:first-child)::after {
+  content: "";
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-top: -4px;
+}
+
+.description-list--vertical > div:not(:first-child) dt::after {
+  content: "";
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-top: -4px;
+}

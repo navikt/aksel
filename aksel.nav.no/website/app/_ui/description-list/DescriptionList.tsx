@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyLong, HGrid, VStack } from "@navikt/ds-react";
 import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import "./DescriptionList.css";
 
 interface DescriptionListProps extends React.HTMLAttributes<HTMLDivElement> {
   items: {
@@ -36,9 +37,11 @@ function AkselDescriptionList({
     return (
       <HGrid
         as="dl"
+        className="description-list--horizontal"
         gap="space-8 space-16"
         columns="auto auto"
         width="fit-content"
+        position="relative"
         {...rest}
       >
         {itemsJsx}
@@ -47,7 +50,14 @@ function AkselDescriptionList({
   }
 
   return (
-    <VStack as="dl" gap="space-8" {...rest}>
+    <VStack
+      as="dl"
+      className="description-list--vertical"
+      gap="space-8"
+      width="fit-content"
+      position="relative"
+      {...rest}
+    >
       {itemsJsx.map((item, index) => (
         <div key={index}>{item}</div>
       ))}
