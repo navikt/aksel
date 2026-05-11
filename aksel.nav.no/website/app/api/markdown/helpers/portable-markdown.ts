@@ -16,6 +16,7 @@ import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
 import { DYNAMIC_ROUTE_PREFIXES } from "@/app/api/markdown/route.config";
+import { DescriptionListMarkdown } from "../blocks/DescriptionList.md";
 
 const AKSEL_BASE_URL = "https://aksel.nav.no";
 
@@ -66,6 +67,7 @@ function portableMarkdown(input?: any[]) {
       attachment: AttachmentMarkdown,
       compare_images: () => "",
       language: LanguageMarkdown,
+      description_list: DescriptionListMarkdown,
     } satisfies Record<PortableContentTypes, (props: any) => string | null>,
   });
 }
