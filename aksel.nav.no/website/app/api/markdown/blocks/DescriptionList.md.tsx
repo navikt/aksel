@@ -6,7 +6,7 @@ function DescriptionListMarkdown(
   const { items } = props.value;
 
   if (!items || items.length === 0) {
-    return null;
+    return "";
   }
 
   return items.map((item) => `- ${item.label}: ${item.value}`).join("\n");

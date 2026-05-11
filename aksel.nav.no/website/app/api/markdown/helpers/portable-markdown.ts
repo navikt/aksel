@@ -68,7 +68,7 @@ function portableMarkdown(input?: any[]) {
       compare_images: () => "",
       language: LanguageMarkdown,
       description_list: DescriptionListMarkdown,
-    } satisfies Record<PortableContentTypes, (props: any) => string | null>,
+    } satisfies Record<PortableContentTypes, (props: any) => string>,
   });
 }
 
