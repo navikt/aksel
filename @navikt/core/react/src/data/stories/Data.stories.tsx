@@ -15,7 +15,6 @@ import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
