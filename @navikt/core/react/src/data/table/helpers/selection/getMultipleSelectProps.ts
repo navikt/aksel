@@ -3,14 +3,13 @@ import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-inpu
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
-import { canSelectTableRow } from "./selection.utils";
+import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
 type GetMultipleSelectPropsArgs<T> = {
   selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   visibleRowIds: (string | number)[];
-  childRowIdsById?: Map<string | number, (string | number)[]>;
   tableItems: UseTableItemsReturn<T>;
 } & Pick<SelectionProps<T>, "disableRowSelection">;
 
@@ -44,14 +43,19 @@ function getMultipleSelectProps<T>({
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
       );
     }
-    if (!canSelectTableRow(disableRowSelection, { row, id: key })) {
-      return;
-    }
 
-    if (selectedKeysSet.has(key)) {
-      setSelectedKeys(selectedKeys.filter((k) => k !== key));
-    } else {
-      setSelectedKeys([...selectedKeys, key]);
+    const checked = !selectedKeysSet.has(key);
+    const nextSet = new Set(selectedKeysSet);
+    const changed = mutateRowSelection({
+      selectedRowIds: nextSet,
+      rowId: key,
+      checked,
+      childRowIdsById: tableItems.childRowIdsById,
+      itemDetails: tableItems.itemDetails,
+      disableRowSelection,
+    });
+    if (changed) {
+      setSelectedKeys([...nextSet]);
     }
   };
 

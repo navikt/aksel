@@ -34,7 +34,7 @@ function useTableSelection<T>({
     disableRowSelectionOnClick = false,
   } = selection;
 
-  const { visibleRowIds = [], childRowIdsById } = tableItems;
+  const { visibleRowIds = [] } = tableItems;
 
   const radioGroupName = useId();
 
@@ -91,7 +91,6 @@ function useTableSelection<T>({
         selectedKeys,
         setSelectedKeys,
         visibleRowIds,
-        childRowIdsById,
         disableRowSelection,
         tableItems,
       }),
