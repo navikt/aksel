@@ -8,11 +8,11 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
-import type { useTableItemsReturn } from "./useTableItems";
+import type { UseTableItemsReturn } from "./useTableItems";
 
 type UseTableSelectionArgs<T> = {
   selection?: SelectionProps<T>;
-  tableItems: useTableItemsReturn<T>;
+  tableItems: UseTableItemsReturn<T>;
 };
 
 type UseTableSelectionReturn = {

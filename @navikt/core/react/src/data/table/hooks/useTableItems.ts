@@ -21,7 +21,7 @@ type UseTableItemsArgs<T> = {
   subRows?: SubRowsProps<T>;
 };
 
-type useTableItemsReturn<T> = {
+type UseTableItemsReturn<T> = {
   items: T[];
   itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
   /** Row ids for the rows currently rendered in the table body. */
@@ -32,7 +32,7 @@ type useTableItemsReturn<T> = {
   isSubRowExpanded: (id: string | number) => boolean;
 };
 
-function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
+function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
   const { items, subRows = {}, getRowId } = args;
 
   const {
@@ -128,11 +128,11 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): useTableItemsReturn<T> {
 
 const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
   /* TODO: Can we type this better? */
-  createStrictContext<Omit<useTableItemsReturn<any>, "childRowIdsById">>({
+  createStrictContext<Omit<UseTableItemsReturn<any>, "childRowIdsById">>({
     name: "TableItemsContext",
     errorMessage:
       "useTableItemsContext must be used within a TableItemsProvider",
   });
 
 export { useTableItems, TableItemsProvider, useTableItemsContext };
-export type { ItemDetail, SubRowsProps, useTableItemsReturn };
+export type { ItemDetail, SubRowsProps, UseTableItemsReturn };

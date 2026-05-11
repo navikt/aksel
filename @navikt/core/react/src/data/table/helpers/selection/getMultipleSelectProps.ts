@@ -1,7 +1,7 @@
 import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
-import type { useTableItemsReturn } from "../../hooks/useTableItems";
+import type { UseTableItemsReturn } from "../../hooks/useTableItems";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
@@ -11,7 +11,7 @@ type GetMultipleSelectPropsArgs<T> = {
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   visibleRowIds: (string | number)[];
   childRowIdsById?: Map<string | number, (string | number)[]>;
-  tableItems: useTableItemsReturn<T>;
+  tableItems: UseTableItemsReturn<T>;
 } & Pick<SelectionProps<T>, "disableRowSelection">;
 
 function getMultipleSelectProps<T>({
