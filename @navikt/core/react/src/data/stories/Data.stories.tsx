@@ -25,10 +25,10 @@ import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
-import DragAndDropLegacy from "../drag-and-drop-legacy/root/DragAndDropLegacyRoot";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
+import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "../token-filter/TokenFilter";
@@ -67,8 +67,14 @@ export const KitchenSink: Story = {
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
-    const [columnOrder, setColumnOrder] = React.useState<string[]>(
-      columns.map((col) => col.accessorKey!),
+    const [columnOrder, setColumnOrder] = React.useState<
+      ColumnDefinitions<any, any>
+    >(
+      columns.map((col) => ({
+        id: col.accessorKey!,
+        label: col.accessorKey!,
+        cell: () => <></>,
+      })),
     );
 
     const table = useReactTable({
@@ -86,10 +92,9 @@ export const KitchenSink: Story = {
         },
       },
       state: {
-        columnOrder,
+        columnOrder: columnOrder.map((col) => col.id),
       },
       enableRowSelection: false,
-      onColumnOrderChange: setColumnOrder,
       columnResizeMode: "onChange",
       debugTable: false,
       debugHeaders: false,
@@ -193,30 +198,29 @@ export const KitchenSink: Story = {
                         >
                           Velg alle
                         </Switch>
-                        <DragAndDropLegacy setItems={setColumnOrder}>
-                          {table.getAllLeafColumns().map((column, index) => {
+                        <DragAndDrop
+                          items={columnOrder}
+                          setItems={setColumnOrder}
+                          renderItem={(item) => {
+                            const column = table
+                              .getAllLeafColumns()
+                              .find((col) => col.id === item.id);
                             return (
-                              <DragAndDropLegacy.Item
-                                id={column.id}
-                                index={index}
-                                key={column.id}
+                              <Switch
+                                key={item.id}
+                                size="small"
+                                checked={column?.getIsVisible()}
+                                onChange={(event) => {
+                                  const handler =
+                                    column?.getToggleVisibilityHandler();
+                                  handler?.(event);
+                                }}
                               >
-                                <Switch
-                                  key={column.id}
-                                  size="small"
-                                  checked={column.getIsVisible()}
-                                  onChange={(event) => {
-                                    const handler =
-                                      column.getToggleVisibilityHandler();
-                                    handler(event);
-                                  }}
-                                >
-                                  {column.id}
-                                </Switch>
-                              </DragAndDropLegacy.Item>
+                                {item.id}
+                              </Switch>
                             );
-                          })}
-                        </DragAndDropLegacy>
+                          }}
+                        />
                       </VStack>
                     </VStack>
                   </HStack>

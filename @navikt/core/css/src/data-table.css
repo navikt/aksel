@@ -572,21 +572,11 @@
     background-color: var(--ax-bg-default);
   }
 
-  /* TODO - might be removable */
-  &[data-keyboard-dragging="true"] {
-    .aksel-data-drag-and-drop__drag-handler__button {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: -1px;
-      border-radius: var(--ax-radius-8);
-    }
-  }
-
   &[data-drop-target="true"]:not([data-overlay="true"]) {
     background: var(--ax-bg-neutral-moderate);
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__legacy,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
