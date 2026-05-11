@@ -73,8 +73,8 @@ type TableSelection = TableSelectionBase &
 export type {
   MultipleSelection,
   NoneSelection,
+  SelectedKeysT,
   SelectionProps,
   SingleSelection,
   TableSelection,
-  SelectedKeysT,
 };

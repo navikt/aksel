@@ -1,11 +1,12 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
-import type { SelectionProps } from "./selection.types";
+import type { TableRowEntryId } from "../collectTableRowEntries";
+import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
 type GetSingleSelectPropsArgs<T> = {
-  selectedKeysSet: Set<string | number>;
-  setSelectedKeys: (keys: (string | number)[]) => void;
+  selectedKeysSet: Set<TableRowEntryId>;
+  setSelectedKeys: (keys: SelectedKeysT) => void;
   name: string;
 } & Pick<SelectionProps<T>, "disableRowSelection">;
 
@@ -29,7 +30,7 @@ function getSingleSelectProps<T>({
   };
 
   return {
-    getRowRadioProps: (key: string | number, row: T): RadioInputProps => {
+    getRowRadioProps: (key: TableRowEntryId, row: T): RadioInputProps => {
       const isSelectionDisabled = !canSelectTableRow(disableRowSelection, {
         row,
         id: key,

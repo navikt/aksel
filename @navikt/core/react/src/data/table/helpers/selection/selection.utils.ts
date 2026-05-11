@@ -11,6 +11,15 @@ function canSelectTableRow(
   return disableRowSelection === false || disableRowSelection === undefined;
 }
 
+type MutateRowSelectionArgs<T> = {
+  selectedRowIds: Set<TableRowEntryId>;
+  rowId: TableRowEntryId;
+  checked: boolean;
+  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
+  itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
+  disableRowSelection?: SelectionProps<T>["disableRowSelection"];
+};
+
 /**
  * Traverses the row and its children and updates selected-state directly on given selectedRowIds set.
  * Returns true if any changes were made to the set, false otherwise.
@@ -22,14 +31,7 @@ function mutateRowSelection<T>({
   childRowIdsById,
   itemDetails,
   disableRowSelection,
-}: {
-  selectedRowIds: Set<TableRowEntryId>;
-  rowId: TableRowEntryId;
-  checked: boolean;
-  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
-  itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
-  disableRowSelection?: SelectionProps<T>["disableRowSelection"];
-}): boolean {
+}: MutateRowSelectionArgs<T>): boolean {
   let changed = false;
   const item = itemDetails.get(rowId);
 

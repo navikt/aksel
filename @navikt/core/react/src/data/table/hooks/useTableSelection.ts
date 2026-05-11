@@ -90,7 +90,6 @@ function useTableSelection<T>({
         selectedKeysSet,
         selectedKeys,
         setSelectedKeys,
-        visibleRowIds,
         disableRowSelection,
         tableItems,
       }),

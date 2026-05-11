@@ -2,14 +2,14 @@ import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
+import type { TableRowEntryId } from "../collectTableRowEntries";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
 type GetMultipleSelectPropsArgs<T> = {
-  selectedKeysSet: Set<string | number>;
-  selectedKeys: (string | number)[];
+  selectedKeysSet: Set<TableRowEntryId>;
+  selectedKeys: SelectedKeysT;
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
-  visibleRowIds: (string | number)[];
   tableItems: UseTableItemsReturn<T>;
 } & Pick<SelectionProps<T>, "disableRowSelection">;
 
@@ -76,7 +76,7 @@ function getMultipleSelectProps<T>({
       indeterminate: !isAllSelected && someSelected,
       onChange: toggleAllRowSelected,
     }),
-    getRowCheckboxProps: (key: string | number, row: T): CheckboxInputProps => {
+    getRowCheckboxProps: (key: TableRowEntryId, row: T): CheckboxInputProps => {
       return {
         onChange: () => handleToggleRow(key, row),
         checked: selectedKeysSet.has(key),
