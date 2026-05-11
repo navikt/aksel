@@ -14,7 +14,7 @@ function SingleCodeBlock(props: ExtractPortableComponentProps<"kode">) {
   const tab: CodeBlockTabsT[number] = {
     code: code.code,
     lang: (code.language as any) ?? "tsx",
-    text: title ?? code.language?.toUpperCase() ?? "Kode",
+    text: title ?? code.language ?? "Kode",
     value: id,
   };
 

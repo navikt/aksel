@@ -15,6 +15,7 @@ import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
+import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
@@ -47,8 +48,14 @@ type Story = StoryObj<typeof DataTable>;
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
-    const [columnOrder, setColumnOrder] = React.useState<string[]>(
-      columns.map((col) => col.accessorKey!),
+    const [columnOrder, setColumnOrder] = React.useState<
+      ColumnDefinitions<any, any>
+    >(
+      columns.map((col) => ({
+        id: col.accessorKey!,
+        label: col.accessorKey!,
+        cell: () => <></>,
+      })),
     );
 
     const table = useReactTable({
@@ -66,10 +73,9 @@ type Story = StoryObj<typeof DataTable>;
         },
       },
       state: {
-        columnOrder,
+        columnOrder: columnOrder.map((col) => col.id),
       },
       enableRowSelection: false,
-      onColumnOrderChange: setColumnOrder,
       columnResizeMode: "onChange",
       debugTable: false,
       debugHeaders: false,
@@ -173,30 +179,29 @@ type Story = StoryObj<typeof DataTable>;
                         >
                           Velg alle
                         </Switch>
-                        <DragAndDropLegacy setItems={setColumnOrder}>
-                          {table.getAllLeafColumns().map((column, index) => {
+                        <DragAndDrop
+                          items={columnOrder}
+                          setItems={setColumnOrder}
+                          renderItem={(item) => {
+                            const column = table
+                              .getAllLeafColumns()
+                              .find((col) => col.id === item.id);
                             return (
-                              <DragAndDropLegacy.Item
-                                id={column.id}
-                                index={index}
-                                key={column.id}
+                              <Switch
+                                key={item.id}
+                                size="small"
+                                checked={column?.getIsVisible()}
+                                onChange={(event) => {
+                                  const handler =
+                                    column?.getToggleVisibilityHandler();
+                                  handler?.(event);
+                                }}
                               >
-                                <Switch
-                                  key={column.id}
-                                  size="small"
-                                  checked={column.getIsVisible()}
-                                  onChange={(event) => {
-                                    const handler =
-                                      column.getToggleVisibilityHandler();
-                                    handler(event);
-                                  }}
-                                >
-                                  {column.id}
-                                </Switch>
-                              </DragAndDropLegacy.Item>
+                                {item.id}
+                              </Switch>
                             );
-                          })}
-                        </DragAndDropLegacy>
+                          }}
+                        />
                       </VStack>
                     </VStack>
                   </HStack>
@@ -354,6 +359,9 @@ export const KitchenSinkAdvancedFilter: Story = {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
     >("normal");
+    const [textSize, setTextSize] = React.useState<
+      "small" | "medium" | "large"
+    >("medium");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
     const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
@@ -514,6 +522,16 @@ export const KitchenSinkAdvancedFilter: Story = {
                         <Radio value="normal">Normal</Radio>
                         <Radio value="spacious">Løs</Radio>
                       </RadioGroup>
+                      <RadioGroup
+                        legend="Velg tekststørrelse"
+                        onChange={setTextSize}
+                        size="small"
+                        value={textSize}
+                      >
+                        <Radio value="small">Liten</Radio>
+                        <Radio value="medium">Medium</Radio>
+                        <Radio value="large">Stor</Radio>
+                      </RadioGroup>
                       <Switch
                         size="small"
                         checked={truncateContent}
@@ -666,6 +684,7 @@ export const KitchenSinkAdvancedFilter: Story = {
           data={pagedData.paginatedData}
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
+          textSize={textSize}
           truncateContent={truncateContent}
           withKeyboardNav
           selection={{

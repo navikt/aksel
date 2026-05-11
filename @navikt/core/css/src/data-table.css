@@ -35,14 +35,25 @@
     min-width: 100%;
   }
 
-  --__axc-data-table-density: var(--ax-space-16);
+  --__axc-data-table-text-size: var(--ax-font-size-medium);
+  --__axc-data-table-density-base: var(--ax-space-16);
+  --__axc-data-table-density-scale: calc(var(--__axc-data-table-text-size) / var(--ax-font-size-medium));
+  --__axc-data-table-density: calc(var(--__axc-data-table-density-base) * var(--__axc-data-table-density-scale));
+
+  &[data-text-size="small"] {
+    --__axc-data-table-text-size: var(--ax-font-size-small);
+  }
+
+  &[data-text-size="large"] {
+    --__axc-data-table-text-size: var(--ax-font-size-large);
+  }
 
   &[data-density="condensed"] {
-    --__axc-data-table-density: var(--ax-space-8);
+    --__axc-data-table-density-base: var(--ax-space-8);
   }
 
   &[data-density="spacious"] {
-    --__axc-data-table-density: var(--ax-space-32);
+    --__axc-data-table-density-base: var(--ax-space-32);
   }
 
   &[data-zebra-stripes="true"] {
@@ -177,6 +188,7 @@
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
   padding: 0;
+  font-size: var(--__axc-data-table-text-size);
 
   &[data-nested="true"] {
     position: relative;
@@ -303,6 +315,21 @@
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      /* TODO: Too magical? Consider prop instead */
+      > :is(.aksel-tag, .aksel-button) {
+        vertical-align: top;
+
+        &:not(:last-child) {
+          margin-right: var(--ax-space-8);
+        }
+      }
+    }
+
+    .aksel-data-table[data-truncate-content="false"] &:has(.aksel-tag, .aksel-button) {
+      display: flex;
+      gap: var(--ax-space-8);
+      flex-wrap: wrap;
     }
   }
 }
@@ -545,21 +572,11 @@
     background-color: var(--ax-bg-default);
   }
 
-  /* TODO - might be removable */
-  &[data-keyboard-dragging="true"] {
-    .aksel-data-drag-and-drop__drag-handler__button {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: -1px;
-      border-radius: var(--ax-radius-8);
-    }
-  }
-
   &[data-drop-target="true"]:not([data-overlay="true"]) {
     background: var(--ax-bg-neutral-moderate);
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__legacy,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
