@@ -112,6 +112,15 @@ export const workspaceConfig = defineConfig([
     releases: {
       enabled: false,
     },
+    /* Dev-workspace is only visible for admins or devs */
+    hidden: ({ currentUser }) => {
+      if (currentUser === null) {
+        return false;
+      }
+      return !currentUser.roles.some((role) => {
+        return role.name === "administrator" || role.name === "developer";
+      });
+    },
   },
 ]);
 
