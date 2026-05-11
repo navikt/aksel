@@ -1,5 +1,6 @@
 import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
+import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { useTableItemsReturn } from "../../hooks/useTableItems";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
@@ -29,7 +30,7 @@ function getMultipleSelectProps({
 
   const handleToggleRow = (key: string | number, row: any) => {
     if (!row) {
-      console.warn(
+      consoleWarning(
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
       );
     }

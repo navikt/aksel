@@ -12,6 +12,7 @@ import { Skeleton } from "../../../skeleton";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import {
@@ -84,7 +85,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               const rowData = itemDetails.get(rowId)?.rowData;
 
               if (!rowData) {
-                console.warn(
+                consoleWarning(
                   `No row data found for rowId ${rowId}. This may cause issues with selection if disableRowSelection is used.`,
                 );
               }

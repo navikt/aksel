@@ -1,4 +1,5 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
+import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
@@ -23,7 +24,7 @@ function getSingleSelectProps({
 }: GetSingleSelectPropsArgs) {
   const handleSelectionChange = (key: string | number, row: any) => {
     if (!row) {
-      console.warn(
+      consoleWarning(
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
       );
     }
