@@ -18,6 +18,12 @@ export const DescriptionList = defineType({
           title: "Element",
           name: "item",
           type: "object",
+          preview: {
+            select: {
+              title: "label",
+              subtitle: "value",
+            },
+          },
           fields: [
             defineField({
               title: "Etikett",
