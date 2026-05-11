@@ -157,7 +157,7 @@ export const SelectionModeSingle: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
-          selectionMode: "multiple",
+          selectionMode: "single",
           onSelectionChange: console.info,
         }}
         getRowId={(row) => row.foo + row.bar}
@@ -174,10 +174,11 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
-          selectionMode: "multiple",
+          selectionMode: "single",
           onSelectionChange: console.info,
         }}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav={false}
       />
     );
   },
