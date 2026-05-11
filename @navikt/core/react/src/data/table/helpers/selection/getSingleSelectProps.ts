@@ -1,4 +1,6 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
+import type { SelectionProps } from "./selection.types";
+import { canSelectTableRow } from "./selection.utils";
 
 type GetSingleSelectPropsArgs = {
   selectedKeysSet: Set<string | number>;
@@ -11,7 +13,7 @@ type GetSingleSelectPropsArgs = {
     row: any;
     id: string | number;
   }) => boolean;
-};
+} & Pick<SelectionProps, "disableRowSelection">;
 
 function getSingleSelectProps({
   selectedKeysSet,
@@ -25,7 +27,7 @@ function getSingleSelectProps({
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
       );
     }
-    if (disableRowSelection?.({ row, id: key })) {
+    if (!canSelectTableRow(disableRowSelection, { row, id: key })) {
       return;
     }
 
@@ -34,8 +36,10 @@ function getSingleSelectProps({
 
   return {
     getRowRadioProps: (key: string | number, row: any): RadioInputProps => {
-      const isSelectionDisabled =
-        disableRowSelection?.({ row, id: key }) ?? false;
+      const isSelectionDisabled = !canSelectTableRow(disableRowSelection, {
+        row,
+        id: key,
+      });
 
       return {
         checked: selectedKeysSet.has(key),

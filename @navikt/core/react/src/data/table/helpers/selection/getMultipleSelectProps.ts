@@ -1,7 +1,8 @@
 import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { useTableItemsReturn } from "../../hooks/useTableItems";
-import type { SelectedKeysT } from "./selection.types";
+import type { SelectedKeysT, SelectionProps } from "./selection.types";
+import { canSelectTableRow } from "./selection.utils";
 
 type GetMultipleSelectPropsArgs<T = any> = {
   selectedKeysSet: Set<string | number>;
@@ -9,15 +10,8 @@ type GetMultipleSelectPropsArgs<T = any> = {
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   visibleRowIds: (string | number)[];
   childRowIdsById?: Map<string | number, (string | number)[]>;
-  disableRowSelection?: ({
-    row,
-    id,
-  }: {
-    row: any;
-    id: string | number;
-  }) => boolean;
   tableItems: useTableItemsReturn<T>;
-};
+} & Pick<SelectionProps, "disableRowSelection">;
 
 function getMultipleSelectProps({
   selectedKeysSet,
@@ -28,7 +22,7 @@ function getMultipleSelectProps({
 }: GetMultipleSelectPropsArgs) {
   const selectableIds: (string | number)[] = [];
   for (const [id, { rowData }] of tableItems.itemDetails) {
-    if (!disableRowSelection?.({ row: rowData, id })) {
+    if (canSelectTableRow(disableRowSelection, { row: rowData, id })) {
       selectableIds.push(id);
     }
   }
@@ -39,7 +33,7 @@ function getMultipleSelectProps({
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
       );
     }
-    if (disableRowSelection?.({ row, id: key })) {
+    if (!canSelectTableRow(disableRowSelection, { row, id: key })) {
       return;
     }
 
@@ -77,14 +71,11 @@ function getMultipleSelectProps({
       key: string | number,
       row: any,
     ): CheckboxInputProps => {
-      const isSelectionDisabled =
-        disableRowSelection?.({ row, id: key }) ?? false;
-
       return {
         onChange: () => handleToggleRow(key, row),
         checked: selectedKeysSet.has(key),
         indeterminate: false,
-        disabled: isSelectionDisabled,
+        disabled: !canSelectTableRow(disableRowSelection, { row, id: key }),
       };
     },
     toggleSelection: handleToggleRow,
