@@ -7,7 +7,7 @@ function canSelectTableRow(
   if (typeof disableRowSelection === "function") {
     return !disableRowSelection(args);
   }
-  return disableRowSelection === false;
+  return disableRowSelection === false || disableRowSelection === undefined;
 }
 
 export { canSelectTableRow };

@@ -28,6 +28,15 @@ function getMultipleSelectProps({
     }
   }
 
+  let selectedOnPageCount = 0;
+  for (const id of selectableIds) {
+    selectedKeysSet.has(id) && selectedOnPageCount++;
+  }
+
+  const isAllSelected =
+    selectableIds.length > 0 && selectedOnPageCount === selectableIds.length;
+  const someSelected = selectedOnPageCount > 0;
+
   const handleToggleRow = (key: string | number, row: any) => {
     if (!row) {
       consoleWarning(
@@ -45,29 +54,25 @@ function getMultipleSelectProps({
     }
   };
 
-  const isAllRowsSelected = () => {
-    if (!selectableIds.length || !selectedKeys.length) {
-      return false;
-    }
-    return selectableIds.every((id) => selectedKeysSet.has(id));
-  };
-
   const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    setSelectedKeys(event.target.checked ? selectableIds : []);
+    const selectableSet = new Set(selectableIds);
+
+    if (event.target.checked) {
+      const preserved = selectedKeys.filter((k) => !selectableSet.has(k));
+      setSelectedKeys([...preserved, ...selectableIds]);
+    } else {
+      setSelectedKeys(selectedKeys.filter((k) => !selectableSet.has(k)));
+    }
   };
 
   return {
-    getTheadCheckboxProps: (): CheckboxInputProps => {
-      const isAllSelected = isAllRowsSelected();
-      return {
-        checked: isAllRowsSelected(),
-
-        indeterminate: selectedKeys.length > 0 && !isAllSelected,
-        onChange: toggleAllRowSelected,
-      };
-    },
+    getTheadCheckboxProps: (): CheckboxInputProps => ({
+      checked: isAllSelected,
+      indeterminate: !isAllSelected && someSelected,
+      onChange: toggleAllRowSelected,
+    }),
     getRowCheckboxProps: (
       key: string | number,
       row: any,
