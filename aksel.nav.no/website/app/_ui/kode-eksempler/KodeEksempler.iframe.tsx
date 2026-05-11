@@ -64,6 +64,10 @@ function KodeEksemplerIFrame(props: {
     setHasMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
+  const getCurrentCode = () => {
+    return (hasJSXSnippet ? current?.kompaktInnhold : current?.innhold) ?? "";
+  };
+
   return (
     <div>
       <div className={styles.kodeExampleContainer}>
@@ -114,9 +118,7 @@ function KodeEksemplerIFrame(props: {
               text: "App.tsx",
               value: "example",
               lang: "tsx",
-              code:
-                (hasJSXSnippet ? current?.kompaktInnhold : current?.innhold) ??
-                "",
+              code: getCurrentCode(),
               extraCode: hasJSXSnippet ? current?.innhold : undefined,
             },
           ]}
