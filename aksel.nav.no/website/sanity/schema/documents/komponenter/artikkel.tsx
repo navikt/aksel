@@ -61,6 +61,7 @@ export const KomponentArtikkel = defineType({
           options: {
             list: [
               { title: "Beta", value: "beta" },
+              { title: "Preview", value: "preview" },
               { title: "New", value: "new" },
               { title: "Stable", value: "ready" },
               { title: "Legacy", value: "deprecated" },

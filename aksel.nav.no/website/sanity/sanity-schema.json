@@ -7935,6 +7935,10 @@
                   },
                   {
                     "type": "string",
+                    "value": "preview"
+                  },
+                  {
+                    "type": "string",
                     "value": "new"
                   },
                   {
