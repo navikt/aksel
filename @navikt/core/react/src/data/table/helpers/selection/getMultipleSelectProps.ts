@@ -21,20 +21,21 @@ function getMultipleSelectProps({
   disableRowSelection,
   tableItems,
 }: GetMultipleSelectPropsArgs) {
-  const selectableIds: (string | number)[] = [];
+  const selectableIdsSet: Set<string | number> = new Set();
+
   for (const [id, { rowData }] of tableItems.itemDetails) {
     if (canSelectTableRow(disableRowSelection, { row: rowData, id })) {
-      selectableIds.push(id);
+      selectableIdsSet.add(id);
     }
   }
 
   let selectedOnPageCount = 0;
-  for (const id of selectableIds) {
+  for (const id of selectableIdsSet) {
     selectedKeysSet.has(id) && selectedOnPageCount++;
   }
 
   const isAllSelected =
-    selectableIds.length > 0 && selectedOnPageCount === selectableIds.length;
+    selectableIdsSet.size > 0 && selectedOnPageCount === selectableIdsSet.size;
   const someSelected = selectedOnPageCount > 0;
 
   const handleToggleRow = (key: string | number, row: any) => {
@@ -57,13 +58,11 @@ function getMultipleSelectProps({
   const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    const selectableSet = new Set(selectableIds);
-
     if (event.target.checked) {
-      const preserved = selectedKeys.filter((k) => !selectableSet.has(k));
-      setSelectedKeys([...preserved, ...selectableIds]);
+      const preserved = selectedKeys.filter((k) => !selectableIdsSet.has(k));
+      setSelectedKeys([...preserved, ...selectableIdsSet]);
     } else {
-      setSelectedKeys(selectedKeys.filter((k) => !selectableSet.has(k)));
+      setSelectedKeys(selectedKeys.filter((k) => !selectableIdsSet.has(k)));
     }
   };
 
