@@ -1,7 +1,7 @@
-import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types";
 
 function DescriptionListMarkdown(
-  props: ExtractPortableComponentProps<"description_list">,
+  props: ExtractPortableMarkdownComponentProps<"description_list">,
 ) {
   const { items } = props.value;
 
