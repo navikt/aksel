@@ -1,9 +1,9 @@
 import type { ItemDetail, TableRowEntryId } from "../collectTableRowEntries";
 import type { SelectionProps } from "./selection.types";
 
-function canSelectTableRow(
-  disableRowSelection: SelectionProps["disableRowSelection"],
-  args: { row: any; id: string | number },
+function canSelectTableRow<T>(
+  disableRowSelection: SelectionProps<T>["disableRowSelection"],
+  args: { row: T; id: string | number },
 ): boolean {
   if (typeof disableRowSelection === "function") {
     return !disableRowSelection(args);
