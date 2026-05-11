@@ -30,7 +30,9 @@ type SelectionProps<T = any> = {
   onSelectionChange?: (keys: SelectedKeysT) => void;
   /**
    * Callback to determine if a row should be disabled for selection.
-   * Disabled rows will not be selectable and will be styled as disabled.
+   *
+   *
+   * If set to a boolean, it will disable selection for all rows when true, and enable selection for all rows when false.
    */
   disableRowSelection?:
     | (({ row, id }: { row: T; id: string | number }) => boolean)
