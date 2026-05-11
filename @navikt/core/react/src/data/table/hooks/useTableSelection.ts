@@ -10,8 +10,8 @@ import type {
 } from "../helpers/selection/selection.types";
 import type { useTableItemsReturn } from "./useTableItems";
 
-type UseTableSelectionArgs<T = any> = {
-  selection?: SelectionProps;
+type UseTableSelectionArgs<T> = {
+  selection?: SelectionProps<T>;
   tableItems: useTableItemsReturn<T>;
 };
 
@@ -21,10 +21,10 @@ type UseTableSelectionReturn = {
   disableRowSelectionOnClick: boolean;
 };
 
-function useTableSelection({
+function useTableSelection<T>({
   selection = {},
   tableItems,
-}: UseTableSelectionArgs): UseTableSelectionReturn {
+}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const {
     selectionMode = "none",
     defaultSelectedKeys,

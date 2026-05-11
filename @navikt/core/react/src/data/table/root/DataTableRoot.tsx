@@ -175,7 +175,7 @@ interface DataTableProps<T>
    * TODO:
    * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
-  selection?: SelectionProps;
+  selection?: SelectionProps<T>;
   subRows?: SubRowsProps<T>;
   detailsPanel?: DetailsPanelProps<T>;
 }

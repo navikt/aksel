@@ -3,7 +3,7 @@ import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
-type GetSingleSelectPropsArgs = {
+type GetSingleSelectPropsArgs<T> = {
   selectedKeysSet: Set<string | number>;
   setSelectedKeys: (keys: (string | number)[]) => void;
   name: string;
@@ -11,18 +11,18 @@ type GetSingleSelectPropsArgs = {
     row,
     id,
   }: {
-    row: any;
+    row: T;
     id: string | number;
   }) => boolean;
-} & Pick<SelectionProps, "disableRowSelection">;
+} & Pick<SelectionProps<T>, "disableRowSelection">;
 
-function getSingleSelectProps({
+function getSingleSelectProps<T>({
   selectedKeysSet,
   setSelectedKeys,
   name,
   disableRowSelection,
-}: GetSingleSelectPropsArgs) {
-  const handleSelectionChange = (key: string | number, row: any) => {
+}: GetSingleSelectPropsArgs<T>) {
+  const handleSelectionChange = (key: string | number, row: T) => {
     if (!row) {
       consoleWarning(
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
@@ -36,7 +36,7 @@ function getSingleSelectProps({
   };
 
   return {
-    getRowRadioProps: (key: string | number, row: any): RadioInputProps => {
+    getRowRadioProps: (key: string | number, row: T): RadioInputProps => {
       const isSelectionDisabled = !canSelectTableRow(disableRowSelection, {
         row,
         id: key,

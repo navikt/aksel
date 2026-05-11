@@ -5,22 +5,22 @@ import type { useTableItemsReturn } from "../../hooks/useTableItems";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
-type GetMultipleSelectPropsArgs<T = any> = {
+type GetMultipleSelectPropsArgs<T> = {
   selectedKeysSet: Set<string | number>;
   selectedKeys: (string | number)[];
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   visibleRowIds: (string | number)[];
   childRowIdsById?: Map<string | number, (string | number)[]>;
   tableItems: useTableItemsReturn<T>;
-} & Pick<SelectionProps, "disableRowSelection">;
+} & Pick<SelectionProps<T>, "disableRowSelection">;
 
-function getMultipleSelectProps({
+function getMultipleSelectProps<T>({
   selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
   disableRowSelection,
   tableItems,
-}: GetMultipleSelectPropsArgs) {
+}: GetMultipleSelectPropsArgs<T>) {
   const selectableIdsSet: Set<string | number> = new Set();
 
   for (const [id, { rowData }] of tableItems.itemDetails) {
@@ -38,7 +38,7 @@ function getMultipleSelectProps({
     selectableIdsSet.size > 0 && selectedOnPageCount === selectableIdsSet.size;
   const someSelected = selectedOnPageCount > 0;
 
-  const handleToggleRow = (key: string | number, row: any) => {
+  const handleToggleRow = (key: string | number, row: T) => {
     if (!row) {
       consoleWarning(
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
@@ -72,10 +72,7 @@ function getMultipleSelectProps({
       indeterminate: !isAllSelected && someSelected,
       onChange: toggleAllRowSelected,
     }),
-    getRowCheckboxProps: (
-      key: string | number,
-      row: any,
-    ): CheckboxInputProps => {
+    getRowCheckboxProps: (key: string | number, row: T): CheckboxInputProps => {
       return {
         onChange: () => handleToggleRow(key, row),
         checked: selectedKeysSet.has(key),
