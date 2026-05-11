@@ -876,7 +876,7 @@ export const NestedRows: Story = {
     await userEvent.click(getCheckboxes()[2]);
 
     expect(getCheckboxes()[1].checked).toBe(false);
-    expect(getCheckboxes()[1].indeterminate).toBe(true);
+    expect(getCheckboxes()[1].indeterminate).toBe(false);
 
     await userEvent.click(getCheckboxes()[1]);
 

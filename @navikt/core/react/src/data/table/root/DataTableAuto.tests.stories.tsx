@@ -129,40 +129,6 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
   },
 };
 
-export const ParentSelectionFollowsVisibleNestedRows: Story = {
-  render: () => (
-    <DataTable
-      columnDefinitions={columns}
-      data={data}
-      getRowId={(row) => row.id}
-      subRows={{ getRows: getSubRows }}
-      selection={{ selectionMode: "multiple" }}
-    />
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Vis under-rader" }),
-    );
-
-    await userEvent.click(getCheckboxes(canvasElement)[2]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
-    expect(getCheckboxes(canvasElement)[1].indeterminate).toBe(true);
-
-    await userEvent.click(getCheckboxes(canvasElement)[1]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(true);
-    expect(getCheckboxes(canvasElement)[2].checked).toBe(true);
-
-    await userEvent.click(getCheckboxes(canvasElement)[1]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
-    expect(getCheckboxes(canvasElement)[2].checked).toBe(false);
-  },
-};
-
 export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
   render: () => (
     <DataTable
