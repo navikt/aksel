@@ -3,6 +3,7 @@ import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioIn
 
 type SelectedKeysT = (string | number)[];
 
+// TODO: Remove `any` if possible
 type SelectionProps<T = any> = {
   /**
    * Enables selection of rows.
