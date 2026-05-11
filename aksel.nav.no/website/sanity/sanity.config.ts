@@ -23,7 +23,6 @@ export const workspaceConfig = defineConfig([
   {
     projectId: SANITY_PROJECT_ID,
     title: "Aksel",
-    description: "Production environment for Aksel",
     name: "default",
     dataset: "production",
     basePath: "/admin",
@@ -70,7 +69,6 @@ export const workspaceConfig = defineConfig([
   {
     projectId: SANITY_PROJECT_ID,
     title: "Aksel Development",
-    description: "Development environment for Aksel",
     name: "dev",
     dataset: "development",
     basePath: "/admin-dev",
