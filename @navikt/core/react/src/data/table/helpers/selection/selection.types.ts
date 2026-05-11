@@ -3,7 +3,8 @@ import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioIn
 
 type SelectedKeysT = (string | number)[];
 
-type SelectionProps = {
+// TODO: Remove `any` if possible
+type SelectionProps<T = any> = {
   /**
    * Enables selection of rows.
    *
@@ -28,12 +29,14 @@ type SelectionProps = {
    */
   onSelectionChange?: (keys: SelectedKeysT) => void;
   /**
-   * Keys that should be disabled for selection. These keys will not be selectable and will be styled as disabled.
+   * Callback to determine if a row should be disabled for selection.
    *
    *
-   * TODO: Consider making this optionally a callback with (rowData:T) => boolean, to allow for more dynamic disabling of selection based on row data.
+   * If set to a boolean, it will disable selection for all rows when true, and enable selection for all rows when false.
    */
-  disabledSelectionKeys?: SelectedKeysT;
+  disableRowSelection?:
+    | (({ row, id }: { row: T; id: string | number }) => boolean)
+    | boolean;
   /**
    * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
    *
@@ -45,24 +48,21 @@ type SelectionProps = {
 type NoneSelection = {
   selectionMode: "none";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
 };
 
 type SingleSelection = {
   selectionMode: "single";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
-  getRowRadioProps: (key: string | number) => RadioInputProps;
-  toggleSelection: (key: string | number) => void;
+  getRowRadioProps: (key: string | number, row: any) => RadioInputProps;
+  toggleSelection: (key: string | number, row: any) => void;
 };
 
 type MultipleSelection = {
   selectionMode: "multiple";
   selectedKeys: SelectedKeysT;
-  disabledSelectionKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
-  getRowCheckboxProps: (key: string | number) => CheckboxInputProps;
-  toggleSelection: (key: string | number) => void;
+  getRowCheckboxProps: (key: string | number, row: any) => CheckboxInputProps;
+  toggleSelection: (key: string | number, row: any) => void;
 };
 
 type TableSelectionBase = {
@@ -75,8 +75,8 @@ type TableSelection = TableSelectionBase &
 export type {
   MultipleSelection,
   NoneSelection,
+  SelectedKeysT,
   SelectionProps,
   SingleSelection,
   TableSelection,
-  SelectedKeysT,
 };

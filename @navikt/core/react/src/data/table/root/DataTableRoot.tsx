@@ -180,7 +180,7 @@ interface DataTableProps<T>
    * TODO:
    * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
-  selection?: SelectionProps;
+  selection?: SelectionProps<T>;
   subRows?: SubRowsProps<T>;
   detailsPanel?: DetailsPanelProps<T>;
 }
@@ -196,7 +196,6 @@ function DataTableInner<T>(
     truncateContent = true,
     shouldBlockNavigation,
     layout = "fixed",
-    selection,
     data,
     columnDefinitions,
     getRowId,
@@ -207,6 +206,7 @@ function DataTableInner<T>(
     onSortChange,
     onRowClick,
     emptyState,
+    selection,
     loading,
     detailsPanel,
     subRows,
@@ -228,8 +228,7 @@ function DataTableInner<T>(
 
   const tableSelectionState = useTableSelection({
     selection,
-    visibleRowIds: tableItems.visibleRowIds,
-    childRowIdsById: tableItems.childRowIdsById,
+    tableItems,
   });
 
   const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {

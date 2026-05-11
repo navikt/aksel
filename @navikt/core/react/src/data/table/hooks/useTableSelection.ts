@@ -8,13 +8,11 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
+import type { UseTableItemsReturn } from "./useTableItems";
 
-type UseTableSelectionArgs = {
-  selection?: SelectionProps;
-  /* Visible rows manage the header checkbox state and render selection cells. */
-  visibleRowIds: (string | number)[];
-  /* Direct child ids let selection walk nested rows lazily. */
-  childRowIdsById?: Map<string | number, (string | number)[]>;
+type UseTableSelectionArgs<T> = {
+  selection?: SelectionProps<T>;
+  tableItems: UseTableItemsReturn<T>;
 };
 
 type UseTableSelectionReturn = {
@@ -23,19 +21,20 @@ type UseTableSelectionReturn = {
   disableRowSelectionOnClick: boolean;
 };
 
-function useTableSelection({
+function useTableSelection<T>({
   selection = {},
-  visibleRowIds = [],
-  childRowIdsById,
-}: UseTableSelectionArgs): UseTableSelectionReturn {
+  tableItems,
+}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const {
     selectionMode = "none",
     defaultSelectedKeys,
     selectedKeys: selectedKeysProp,
     onSelectionChange,
-    disabledSelectionKeys = [],
+    disableRowSelection,
     disableRowSelectionOnClick = false,
   } = selection;
+
+  const { visibleRowIds = [] } = tableItems;
 
   const radioGroupName = useId();
 
@@ -47,17 +46,12 @@ function useTableSelection({
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  const disabledKeysSet = useMemo(
-    () => new Set(disabledSelectionKeys),
-    [disabledSelectionKeys],
-  );
-
   const isRowSelected = useCallback(
     (rowId: string | number) => selectedKeysSet.has(rowId),
     [selectedKeysSet],
   );
 
-  const baseSelection = { selectedKeys, disabledSelectionKeys, isRowSelected };
+  const baseSelection = { selectedKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {
@@ -79,8 +73,8 @@ function useTableSelection({
         ...getSingleSelectProps({
           selectedKeysSet,
           setSelectedKeys,
-          disabledKeysSet,
           name: radioGroupName,
+          disableRowSelection,
         }),
       },
       disableRowSelectionOnClick,
@@ -96,9 +90,8 @@ function useTableSelection({
         selectedKeysSet,
         selectedKeys,
         setSelectedKeys,
-        disabledKeysSet,
-        visibleRowIds,
-        childRowIdsById,
+        disableRowSelection,
+        tableItems,
       }),
     },
     disableRowSelectionOnClick,
@@ -113,7 +106,6 @@ const noSelectionState: UseTableSelectionReturn = {
   selection: {
     selectionMode: "none",
     selectedKeys: [],
-    disabledSelectionKeys: [],
     isRowSelected: () => false,
   },
   disableRowSelectionOnClick: false,

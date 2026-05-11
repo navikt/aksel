@@ -157,7 +157,7 @@ export const SelectionModeSingle: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
-          selectionMode: "multiple",
+          selectionMode: "single",
           onSelectionChange: console.info,
         }}
         getRowId={(row) => row.foo + row.bar}
@@ -174,10 +174,11 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
         columnDefinitions={userColumnDef}
         data={userData}
         selection={{
-          selectionMode: "multiple",
+          selectionMode: "single",
           onSelectionChange: console.info,
         }}
         getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav={false}
       />
     );
   },
@@ -192,7 +193,7 @@ export const SelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disabledSelectionKeys: [1, 2],
+          disableRowSelection: ({ id }) => id === 2 || id === 1,
         }}
         getRowId={(row) => row.id}
         withKeyboardNav
@@ -256,7 +257,7 @@ export const SingleSelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disabledSelectionKeys: [2],
+          disableRowSelection: ({ id }) => id === 2,
         }}
         getRowId={(row) => row.id}
       />
@@ -876,7 +877,7 @@ export const NestedRows: Story = {
     await userEvent.click(getCheckboxes()[2]);
 
     expect(getCheckboxes()[1].checked).toBe(false);
-    expect(getCheckboxes()[1].indeterminate).toBe(true);
+    expect(getCheckboxes()[1].indeterminate).toBe(false);
 
     await userEvent.click(getCheckboxes()[1]);
 
@@ -965,6 +966,7 @@ export const NestedRowsWithMasterDetail: Story = {
       }}
       withKeyboardNav
       subRows={{
+        defaultExpandedRowIds: [3],
         getRows: (row) => row.children,
       }}
       detailsPanel={{
