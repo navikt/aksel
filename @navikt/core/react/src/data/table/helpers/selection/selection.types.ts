@@ -32,13 +32,9 @@ type SelectionProps<T = any> = {
    * Callback to determine if a row should be disabled for selection.
    * Disabled rows will not be selectable and will be styled as disabled.
    */
-  disableRowSelection?: ({
-    row,
-    id,
-  }: {
-    row: T;
-    id: string | number;
-  }) => boolean | boolean;
+  disableRowSelection?:
+    | (({ row, id }: { row: T; id: string | number }) => boolean)
+    | boolean;
   /**
    * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
    *

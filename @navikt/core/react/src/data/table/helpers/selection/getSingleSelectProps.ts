@@ -7,13 +7,6 @@ type GetSingleSelectPropsArgs<T> = {
   selectedKeysSet: Set<string | number>;
   setSelectedKeys: (keys: (string | number)[]) => void;
   name: string;
-  disableRowSelection?: ({
-    row,
-    id,
-  }: {
-    row: T;
-    id: string | number;
-  }) => boolean;
 } & Pick<SelectionProps<T>, "disableRowSelection">;
 
 function getSingleSelectProps<T>({
