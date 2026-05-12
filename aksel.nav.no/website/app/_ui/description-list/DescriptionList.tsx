@@ -1,5 +1,5 @@
 import React from "react";
-import { BodyLong, HGrid, VStack } from "@navikt/ds-react";
+import { BodyLong, HGrid } from "@navikt/ds-react";
 import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import "./DescriptionList.css";
 
@@ -20,50 +20,36 @@ function AkselDescriptionList({
   divider,
   ...rest
 }: DescriptionListProps) {
-  const itemsJsx = items.map((item, index) => (
-    <React.Fragment key={index}>
-      <BodyLong
-        as="dt"
-        textColor={variant === "subtle" ? "subtle" : undefined}
-        weight={variant === "bold" ? "semibold" : undefined}
-      >
-        {item.label}
-      </BodyLong>
-      <BodyLong as="dd" textColor={variant === "bold" ? "subtle" : undefined}>
-        {item.value}
-      </BodyLong>
-    </React.Fragment>
-  ));
-
-  if (direction === "horizontal") {
-    return (
-      <HGrid
-        as="dl"
-        className={divider ? "description-list--horizontal" : ""}
-        gap="space-8 space-16"
-        columns="auto auto"
-        width="fit-content"
-        position="relative"
-        {...rest}
-      >
-        {itemsJsx}
-      </HGrid>
-    );
-  }
+  const ItemWrapper = direction === "horizontal" ? React.Fragment : "div";
 
   return (
-    <VStack
+    <HGrid
       as="dl"
-      className={divider ? "description-list--vertical" : ""}
-      gap="space-8"
+      className={divider ? "description-list--with-divider" : ""}
+      columns={direction === "horizontal" ? "auto auto" : "auto"}
+      gap="space-8 space-16"
       width="fit-content"
       position="relative"
       {...rest}
     >
-      {itemsJsx.map((item, index) => (
-        <div key={index}>{item}</div>
+      {items.map((item, index) => (
+        <ItemWrapper key={index}>
+          <BodyLong
+            as="dt"
+            textColor={variant === "subtle" ? "subtle" : undefined}
+            weight={variant === "bold" ? "semibold" : undefined}
+          >
+            {item.label}
+          </BodyLong>
+          <BodyLong
+            as="dd"
+            textColor={variant === "bold" ? "subtle" : undefined}
+          >
+            {item.value}
+          </BodyLong>
+        </ItemWrapper>
       ))}
-    </VStack>
+    </HGrid>
   );
 }
 
