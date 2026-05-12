@@ -76,13 +76,6 @@ interface DataTableProps<T>
    */
   withKeyboardNav?: boolean;
   /**
-   * Custom callback to determine if navigation should be blocked.
-   * Called before default blocking logic.
-   * Requires `withKeyboardNav` to be `true`.
-   * TODO: Pri zero Better naming
-   */
-  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
-  /**
    * Controls table layout.
    *
    * ### fixed
@@ -208,7 +201,6 @@ function DataTableInner<T>(
     withKeyboardNav = true,
     zebraStripes = false,
     truncateContent = true,
-    shouldBlockNavigation,
     layout = "fixed",
     data,
     columnDefinitions,
@@ -296,10 +288,7 @@ function DataTableInner<T>(
         isSubRowExpanded={tableItems.isSubRowExpanded}
       >
         <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-          <TableElementWrapper
-            shouldBlockNavigation={shouldBlockNavigation}
-            enabled={withKeyboardNav}
-          >
+          <TableElementWrapper enabled={withKeyboardNav}>
             <table
               {...rest}
               ref={forwardedRef}
@@ -365,10 +354,8 @@ function DataTableInner<T>(
 function TableElementWrapper({
   children,
   enabled,
-  shouldBlockNavigation,
 }: {
   children: React.ReactNode;
-  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
   enabled: boolean;
 }) {
   const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
@@ -378,7 +365,6 @@ function TableElementWrapper({
   const rafRef = useRef<number | null>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
     enabled,
-    shouldBlockNavigation,
   });
 
   const mergedTableRefs = useMergeRefs(tableRef, setTableRef);
