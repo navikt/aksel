@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "./CodeBlock";
-import { CodeBlockTabsT } from "./CodeBlock.provider";
+import type { CodeBlockTabsT } from "./CodeBlock.provider";
 
 function CodeBlockHandler(props: ExtractPortableComponentProps<"kode">) {
   const { blokker, code, title } = props.value;
