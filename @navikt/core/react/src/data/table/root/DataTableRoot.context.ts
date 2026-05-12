@@ -1,5 +1,8 @@
 import { createStrictContext } from "../../../utils/helpers";
-import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
+import type {
+  StickyStartState,
+  UseColumnOptionsResult,
+} from "../hooks/useColumnOptions";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 import type {
   DataTableLoadingConfig,
@@ -10,7 +13,7 @@ type DataTableContextProps<T> = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
   selectionState: UseTableSelectionReturn;
-  stickySelection: boolean;
+  stickyStart: StickyStartState;
   stickyHeader: boolean;
   tableId: string;
   loading: DataTableLoadingConfig | undefined;

@@ -27,7 +27,9 @@ import {
 } from "../root/DataTableRoot.context";
 import { DataTableTd } from "../td/DataTableTd";
 
-const SELECTION_CELL_WIDTH = "50px";
+const ACTION_CELL_WIDTH = 50;
+
+const ACTION_CELL_CSS_WIDTH = `${ACTION_CELL_WIDTH}px`;
 
 type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
   selected?: boolean;
@@ -125,7 +127,8 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 );
 
 function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
-  const { tableId, loading } = useDataTableContext();
+  const { tableId, loading, stickyStart } = useDataTableContext();
+  const stickyExpansion = stickyStart.expansion;
 
   const { location } = useDataTableLocation();
 
@@ -147,16 +150,21 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          width={SELECTION_CELL_WIDTH}
+          width={ACTION_CELL_CSS_WIDTH}
           cellType="action"
           data-block-keyboard-nav
           label=""
-          /* isSticky={stickySelection && "start"} */
+          isSticky={stickyExpansion && "start"}
+          style={stickyExpansion ? { left: 0 } : undefined}
         />
       );
     }
     return (
-      <DataTableBaseCell as="td">
+      <DataTableBaseCell
+        as="td"
+        isSticky={stickyExpansion && "start"}
+        style={stickyExpansion ? { left: 0 } : undefined}
+      >
         <Skeleton variant="text" />
       </DataTableBaseCell>
     );
@@ -165,11 +173,12 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead" && !showExpandAll) {
     return (
       <DataTableColumnHeader
-        width={SELECTION_CELL_WIDTH}
+        width={ACTION_CELL_CSS_WIDTH}
         cellType="action"
         data-block-keyboard-nav
         label=""
-        /* isSticky={stickySelection && "start"} */
+        isSticky={stickyExpansion && "start"}
+        style={stickyExpansion ? { left: 0 } : undefined}
       />
     );
   }
@@ -178,10 +187,11 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return (
       <DataTableColumnHeader
         textAlign="center"
-        width={SELECTION_CELL_WIDTH}
+        width={ACTION_CELL_CSS_WIDTH}
         cellType="action"
         label=""
-        /* isSticky={stickySelection && "start"} */
+        isSticky={stickyExpansion && "start"}
+        style={stickyExpansion ? { left: 0 } : undefined}
       >
         <Button
           variant="tertiary"
@@ -211,11 +221,23 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const expansionId = getDataTableDetailsPanelId(tableId, rowId);
 
   if (!canExpandRow) {
-    return <DataTableTd cellType="action" preventRowClick />;
+    return (
+      <DataTableTd
+        cellType="action"
+        preventRowClick
+        isSticky={stickyExpansion && "start"}
+        style={stickyExpansion ? { left: 0 } : undefined}
+      />
+    );
   }
 
   return (
-    <DataTableTd cellType="action" preventRowClick>
+    <DataTableTd
+      cellType="action"
+      preventRowClick
+      isSticky={stickyExpansion && "start"}
+      style={stickyExpansion ? { left: 0 } : undefined}
+    >
       <Button
         variant="tertiary"
         data-color="neutral"
@@ -240,7 +262,9 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
-  const { selectionState, stickySelection, loading } = useDataTableContext();
+  const { selectionState, stickyStart, loading } = useDataTableContext();
+  const stickySelection = stickyStart.selection;
+  const stickySelectionOffset = stickyStart.selectionOffset;
   const { location } = useDataTableLocation();
   const { itemDetails } = useTableItemsContext();
   const inputId = useId();
@@ -255,17 +279,22 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          width={SELECTION_CELL_WIDTH}
+          width={ACTION_CELL_CSS_WIDTH}
           cellType="action"
           label=""
           data-block-keyboard-nav
           isSticky={stickySelection && "start"}
+          style={stickySelection ? { left: stickySelectionOffset } : undefined}
         />
       );
     }
 
     return (
-      <DataTableBaseCell as="td">
+      <DataTableBaseCell
+        as="td"
+        isSticky={stickySelection && "start"}
+        style={stickySelection ? { left: stickySelectionOffset } : undefined}
+      >
         <Skeleton variant="text" />
       </DataTableBaseCell>
     );
@@ -283,10 +312,11 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return (
       <DataTableColumnHeader
         textAlign="center"
-        width={SELECTION_CELL_WIDTH}
+        width={ACTION_CELL_CSS_WIDTH}
         cellType="action"
         label=""
         isSticky={stickySelection && "start"}
+        style={stickySelection ? { left: stickySelectionOffset } : undefined}
       >
         <Label htmlFor={inputId} visuallyHidden>
           {labelText}
@@ -299,11 +329,12 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (selection.selectionMode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
-        width={SELECTION_CELL_WIDTH}
+        width={ACTION_CELL_CSS_WIDTH}
         cellType="action"
         label=""
         data-block-keyboard-nav
         isSticky={stickySelection && "start"}
+        style={stickySelection ? { left: stickySelectionOffset } : undefined}
       />
     );
   }
@@ -314,7 +345,11 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
   if (selection.selectionMode === "multiple" && location === "tbody") {
     return (
-      <DataTableTd cellType="action" isSticky={stickySelection && "start"}>
+      <DataTableTd
+        cellType="action"
+        isSticky={stickySelection && "start"}
+        style={stickySelection ? { left: stickySelectionOffset } : undefined}
+      >
         <CheckboxInput
           {...selection.getRowCheckboxProps(
             rowId,
@@ -328,7 +363,11 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
   if (selection.selectionMode === "single" && location === "tbody") {
     return (
-      <DataTableTd cellType="action" isSticky={stickySelection && "start"}>
+      <DataTableTd
+        cellType="action"
+        isSticky={stickySelection && "start"}
+        style={stickySelection ? { left: stickySelectionOffset } : undefined}
+      >
         <RadioInput
           {...selection.getRowRadioProps(
             rowId,
@@ -349,5 +388,5 @@ function isInteractiveTarget(target: EventTarget | null): boolean {
   );
 }
 
-export { DataTableTr };
+export { DataTableTr, ACTION_CELL_WIDTH };
 export type { DataTableTrProps };

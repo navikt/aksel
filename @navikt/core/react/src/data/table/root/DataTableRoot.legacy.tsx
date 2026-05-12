@@ -222,7 +222,12 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         layout={layout}
         withKeyboardNav={withKeyboardNav}
         selectionState={noSelectionState}
-        stickySelection={false}
+        stickyStart={{
+          expansion: false,
+          selection: false,
+          selectionOffset: 0,
+          firstColumnOffset: 0,
+        }}
         stickyHeader={true}
         tableId={useId()}
         loading={undefined}
