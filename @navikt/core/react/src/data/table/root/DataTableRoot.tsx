@@ -113,7 +113,6 @@ interface DataTableProps<T>
    *
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
-   * TODO: Pri zero Standardize to "string" always. Update selection etc to support this.
    */
   getRowId?: (rowData: T) => TableRowEntryId;
   /**
