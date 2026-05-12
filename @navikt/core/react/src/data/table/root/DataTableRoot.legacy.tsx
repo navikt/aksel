@@ -225,9 +225,8 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         stickySelection={false}
         stickyHeader={true}
         tableId={useId()}
-        showLoadingSkeletons={false}
+        loading={undefined}
         onRowClick={undefined}
-        showLoadingOverlay={false}
         columns={[]}
         fullWidthColSpan={9999}
       >
