@@ -20,7 +20,7 @@ const statusToColorRole: Record<NonNullable<StatusTagT>, AkselColor> = {
   deprecated: "neutral",
   new: "success",
   ready: "info",
-  preview: "aksel-brand-pink",
+  preview: "meta-purple",
 } as const;
 
 const statusToText: Record<NonNullable<StatusTagT>, string> = {
