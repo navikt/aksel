@@ -3,16 +3,16 @@ import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import {
   type ItemDetail,
-  type TableRowEntryId,
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
+import type { TableRowEntryId } from "../root/DataTable.types";
 
 type SubRowsProps<T> = {
   getRows?: (rowData: T) => T[];
-  expandedRowIds?: (string | number)[];
-  defaultExpandedRowIds?: (string | number)[];
+  expandedRowIds?: TableRowEntryId[];
+  defaultExpandedRowIds?: TableRowEntryId[];
   isRowExpandable?: (rowData: T) => boolean;
-  onExpandedRowIdsChange?: (ids: (string | number)[]) => void;
+  onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
 };
 
 type UseTableItemsArgs<T> = {
@@ -28,8 +28,8 @@ type UseTableItemsReturn<T> = {
   visibleRowIds: TableRowEntryId[];
   /** Direct child ids for each row, used to traverse selection groups lazily. */
   childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
-  onExpandedRowIdsChange: (id: string | number) => void;
-  isSubRowExpanded: (id: string | number) => boolean;
+  onExpandedRowIdsChange: (id: TableRowEntryId) => void;
+  isSubRowExpanded: (id: TableRowEntryId) => boolean;
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
@@ -106,7 +106,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     }, [getRows, items, getRowId, isRowExpandable, expandedIdsSet]);
 
   const handleExpandedSubRowIdChange = useCallback(
-    (id: string | number) => {
+    (id: TableRowEntryId) => {
       setNestedSubRowsExpandedIds((prev) =>
         prev.includes(id)
           ? prev.filter((expandedId) => expandedId !== id)
@@ -122,7 +122,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     visibleRowIds,
     childRowIdsById,
     onExpandedRowIdsChange: handleExpandedSubRowIdChange,
-    isSubRowExpanded: (id: string | number) => expandedIdsSet.has(id),
+    isSubRowExpanded: (id: TableRowEntryId) => expandedIdsSet.has(id),
   };
 }
 

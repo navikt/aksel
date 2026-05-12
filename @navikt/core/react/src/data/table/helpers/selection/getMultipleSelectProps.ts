@@ -2,7 +2,7 @@ import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
-import type { TableRowEntryId } from "../collectTableRowEntries";
+import type { TableRowEntryId } from "../../root/DataTable.types";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
@@ -20,7 +20,7 @@ function getMultipleSelectProps<T>({
   disableRowSelection,
   tableItems,
 }: GetMultipleSelectPropsArgs<T>) {
-  const selectableIdsSet: Set<string | number> = new Set();
+  const selectableIdsSet: Set<TableRowEntryId> = new Set();
 
   for (const [id, { rowData }] of tableItems.itemDetails) {
     if (canSelectTableRow(disableRowSelection, { row: rowData, id })) {
@@ -37,7 +37,7 @@ function getMultipleSelectProps<T>({
     selectableIdsSet.size > 0 && selectedOnPageCount === selectableIdsSet.size;
   const someSelected = selectedOnPageCount > 0;
 
-  const handleToggleRow = (key: string | number, row: T) => {
+  const handleToggleRow = (key: TableRowEntryId, row: T) => {
     if (!row) {
       consoleWarning(
         `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,

@@ -100,6 +100,8 @@ type DataTableLoadingConfig = {
     }
 );
 
+type TableRowEntryId = string;
+
 export type {
   ColumnDefinition,
   ColumnDefinitions,
@@ -107,4 +109,5 @@ export type {
   SortDirection,
   SortEntry,
   SortChangeDetail,
+  TableRowEntryId,
 };

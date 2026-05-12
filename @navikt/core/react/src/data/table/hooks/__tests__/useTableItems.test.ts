@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
+import type { TableRowEntryId } from "../../root/DataTable.types";
 import { useTableItems } from "../useTableItems";
 
 type TestRow = {
@@ -140,7 +141,7 @@ describe("useTableItems", () => {
           },
         }),
       {
-        initialProps: { expandedIds: [] as (string | number)[] },
+        initialProps: { expandedIds: [] as TableRowEntryId[] },
       },
     );
 

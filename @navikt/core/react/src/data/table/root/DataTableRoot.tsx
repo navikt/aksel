@@ -41,6 +41,7 @@ import { DataTableTr } from "../tr/DataTableTr";
 import type {
   ColumnDefinitions,
   DataTableLoadingConfig,
+  TableRowEntryId,
 } from "./DataTable.types";
 import {
   DataTableContextProvider,
@@ -114,7 +115,7 @@ interface DataTableProps<T>
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    * TODO: Pri zero Standardize to "string" always. Update selection etc to support this.
    */
-  getRowId?: (rowData: T) => string | number;
+  getRowId?: (rowData: T) => TableRowEntryId;
   /**
    * Sticky columns that remain visible when horizontally scrolling the table.
    *
@@ -134,7 +135,7 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowId: string | number,
+    rowId: TableRowEntryId,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
   /**

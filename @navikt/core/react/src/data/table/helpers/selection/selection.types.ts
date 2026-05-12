@@ -1,7 +1,8 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
+import type { TableRowEntryId } from "../../root/DataTable.types";
 
-type SelectedKeysT = (string | number)[];
+type SelectedKeysT = TableRowEntryId[];
 
 // TODO: Remove `any` if possible
 type SelectionProps<T = any> = {
@@ -35,7 +36,7 @@ type SelectionProps<T = any> = {
    * If set to a boolean, it will disable selection for all rows when true, and enable selection for all rows when false.
    */
   disableRowSelection?:
-    | (({ row, id }: { row: T; id: string | number }) => boolean)
+    | (({ row, id }: { row: T; id: TableRowEntryId }) => boolean)
     | boolean;
   /**
    * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
@@ -53,20 +54,20 @@ type NoneSelection = {
 type SingleSelection = {
   selectionMode: "single";
   selectedKeys: SelectedKeysT;
-  getRowRadioProps: (key: string | number, row: any) => RadioInputProps;
-  toggleSelection: (key: string | number, row: any) => void;
+  getRowRadioProps: (key: TableRowEntryId, row: any) => RadioInputProps;
+  toggleSelection: (key: TableRowEntryId, row: any) => void;
 };
 
 type MultipleSelection = {
   selectionMode: "multiple";
   selectedKeys: SelectedKeysT;
   getTheadCheckboxProps: () => CheckboxInputProps;
-  getRowCheckboxProps: (key: string | number, row: any) => CheckboxInputProps;
-  toggleSelection: (key: string | number, row: any) => void;
+  getRowCheckboxProps: (key: TableRowEntryId, row: any) => CheckboxInputProps;
+  toggleSelection: (key: TableRowEntryId, row: any) => void;
 };
 
 type TableSelectionBase = {
-  isRowSelected: (rowId: string | number) => boolean;
+  isRowSelected: (rowId: TableRowEntryId) => boolean;
 };
 
 type TableSelection = TableSelectionBase &

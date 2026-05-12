@@ -20,6 +20,7 @@ import {
   useDataTableDetailsPanel,
 } from "../hooks/useTableDetailsPanel";
 import { useTableItemsContext } from "../hooks/useTableItems";
+import type { TableRowEntryId } from "../root/DataTable.types";
 import {
   useDataTableContext,
   useDataTableLocation,
@@ -33,7 +34,7 @@ type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
   /**
    * Unique identifier for the row, used for selection..
    */
-  rowId?: string | number;
+  rowId?: TableRowEntryId;
 };
 
 const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
@@ -123,7 +124,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
   },
 );
 
-function RowExpansionCell({ rowId }: { rowId?: string | number }) {
+function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const { tableId, loading } = useDataTableContext();
 
   const { location } = useDataTableLocation();
@@ -238,7 +239,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
  * TODO: How do these cells handle multiple thead rows, or col/row-spans?
  * TODO: a11y for labels
  */
-function RowSelectionCell({ rowId }: { rowId?: string | number }) {
+function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const { selectionState, stickySelection, loading } = useDataTableContext();
   const { location } = useDataTableLocation();
   const { itemDetails } = useTableItemsContext();

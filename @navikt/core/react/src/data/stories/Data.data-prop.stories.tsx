@@ -193,9 +193,9 @@ export const SelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disableRowSelection: ({ id }) => id === 2 || id === 1,
+          disableRowSelection: ({ id }) => id === "2" || id === "1",
         }}
-        getRowId={(row) => row.id}
+        getRowId={(row) => row.id.toString()}
         withKeyboardNav
       />
     );
@@ -204,12 +204,12 @@ export const SelectionWithDisabledRows: Story = {
 
 export const ControlledSelection: Story = {
   render: () => {
-    const [selectedKeys, setSelectedKeys] = useState<(string | number)[]>([1]);
+    const [selectedKeys, setSelectedKeys] = useState<string[]>(["1"]);
 
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          <Button size="small" onClick={() => setSelectedKeys([1, 2, 3])}>
+          <Button size="small" onClick={() => setSelectedKeys(["1", "2", "3"])}>
             Select all
           </Button>
           <Button size="small" onClick={() => setSelectedKeys([])}>
@@ -224,7 +224,7 @@ export const ControlledSelection: Story = {
             onSelectionChange: setSelectedKeys,
             selectedKeys,
           }}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.id.toString()}
         />
       </div>
     );
@@ -240,9 +240,9 @@ export const DefaultSelectedKeys: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          defaultSelectedKeys: [1, 3],
+          defaultSelectedKeys: ["1", "3"],
         }}
-        getRowId={(row) => row.id}
+        getRowId={(row) => row.id.toString()}
       />
     );
   },
@@ -257,9 +257,9 @@ export const SingleSelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disableRowSelection: ({ id }) => id === 2,
+          disableRowSelection: ({ id }) => id === "2",
         }}
-        getRowId={(row) => row.id}
+        getRowId={(row) => row.id.toString()}
       />
     );
   },
@@ -664,8 +664,8 @@ function applySortEntries<T extends Record<string, unknown>>(
   if (sort.length === 0) return data;
   return [...data].sort((a, b) => {
     for (const { columnId, direction } of sort) {
-      const aVal = a[columnId] as string | number;
-      const bVal = b[columnId] as string | number;
+      const aVal = a[columnId] as string;
+      const bVal = b[columnId] as string;
       const cmp = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
       if (cmp !== 0) return direction === "asc" ? cmp : -cmp;
     }
@@ -682,7 +682,7 @@ export const SortableColumns: Story = {
       <DataTable
         columnDefinitions={sortableColumnDef}
         data={sortedData}
-        getRowId={(row) => row.id}
+        getRowId={(row) => row.id.toString()}
         sort={sort}
         onSortChange={(next, detail) => {
           console.info("changed column:", detail);
@@ -705,7 +705,7 @@ export const SortableColumnsUncontrolled: Story = {
         <DataTable
           columnDefinitions={sortableColumnDef}
           data={sortableUserData}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.id.toString()}
           defaultSort={[{ columnId: "name", direction: "asc" }]}
           onSortChange={(_sort, detail) =>
             setLoggedDetail(JSON.stringify(detail, null, 2))
@@ -750,7 +750,7 @@ export const RowClick: Story = {
     <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       onRowClick={(rowId) => console.info("Row clicked!: ", rowId)}
       selection={{
         selectionMode: "multiple",
@@ -765,7 +765,7 @@ export const RowClickTest: Story = {
     <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       onRowClick={rowClickSpy}
       selection={{
         selectionMode: "multiple",
@@ -804,7 +804,7 @@ export const RowExpansion: Story = {
     <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
@@ -825,7 +825,7 @@ export const RowExpansionAll: Story = {
     <DataTable
       columnDefinitions={rowClickColumnDef}
       data={userData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
@@ -858,7 +858,7 @@ export const NestedRows: Story = {
     <DataTable
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
         onSelectionChange: console.info,
@@ -914,7 +914,7 @@ export const NestedLeftAlignedContentRows: Story = {
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
       }}
@@ -939,7 +939,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
           children: [],
         })),
       }))}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
       }}
@@ -964,13 +964,13 @@ export const NestedRowsWithMasterDetail: Story = {
           children: [],
         })),
       }))}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
       selection={{
         selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       subRows={{
-        defaultExpandedRowIds: [3],
+        defaultExpandedRowIds: ["3"],
         getRows: (row) => row.children,
       }}
       detailsPanel={{
