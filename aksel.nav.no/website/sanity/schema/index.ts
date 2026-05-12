@@ -65,6 +65,7 @@ export const schema: SchemaPluginOptions = {
     object.Attachment,
     object.Language,
     object.CompareImages,
+    object.DescriptionList,
 
     /* Riktekst */
     object.RiktekstKomponent,
