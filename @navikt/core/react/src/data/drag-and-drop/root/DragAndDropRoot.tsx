@@ -15,18 +15,10 @@ import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
-interface DragAndDropProps<
-  T,
-  DetailsT extends Record<string, any>,
-> extends React.HTMLAttributes<HTMLUListElement> {
-  items: ColumnDefinitions<T, DetailsT>;
-  setItems: React.Dispatch<
-    React.SetStateAction<ColumnDefinitions<T, DetailsT>>
-  >;
-  renderItem: (
-    item: ColumnDefinition<T, DetailsT>,
-    index: number,
-  ) => React.ReactNode;
+interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
+  items: ColumnDefinitions<T>;
+  setItems: React.Dispatch<React.SetStateAction<ColumnDefinitions<T>>>;
+  renderItem: (item: ColumnDefinition<T>, index: number) => React.ReactNode;
 }
 
 /**
@@ -64,8 +56,8 @@ interface DragAndDropProps<
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
-function DragAndDropInner<T, DetailsT extends Record<string, any>>(
-  { items, setItems, renderItem }: DragAndDropProps<T, DetailsT>,
+function DragAndDropInner<T>(
+  { items, setItems, renderItem }: DragAndDropProps<T>,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ) {
   const [activeItem, setActiveItem] = useState<DragAndDropElement | null>(null);
@@ -74,7 +66,7 @@ function DragAndDropInner<T, DetailsT extends Record<string, any>>(
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
   const [announcer, setAnnouncer] = useState("");
-  const initialItemsRef = useRef<ColumnDefinitions<T, DetailsT> | null>(null);
+  const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
   const activeData = items.find((item) => item.id === activeItem?.id);
 
   const activeItemRef = useRef<DragAndDropElement | null>(null);
@@ -164,8 +156,8 @@ function DragAndDropInner<T, DetailsT extends Record<string, any>>(
   );
 
   useEffect(() => {
-    /* This useEffect is used to toggle a class on the html element when dragging, 
-      to prevent cursor issues when dragging over interactive elements, 
+    /* This useEffect is used to toggle a class on the html element when dragging,
+      to prevent cursor issues when dragging over interactive elements,
       and to prevent text selection during dragging. */
 
     if (activeItem) {
@@ -372,11 +364,8 @@ function DragAndDropInner<T, DetailsT extends Record<string, any>>(
   );
 }
 
-const DragAndDrop = forwardRef(DragAndDropInner) as <
-  T,
-  DetailsT extends Record<string, any>,
->(
-  props: DragAndDropProps<T, DetailsT> & React.RefAttributes<HTMLUListElement>,
+const DragAndDrop = forwardRef(DragAndDropInner) as <T>(
+  props: DragAndDropProps<T> & React.RefAttributes<HTMLUListElement>,
 ) => React.ReactElement | null;
 
 export { DragAndDrop, DragAndDropItem };

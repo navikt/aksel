@@ -19,28 +19,18 @@ type SWData = {
   nestedRows: Omit<NestedSWData, "nestedRows">[];
 };
 
-type Details = {
-  visible: boolean;
-};
-
-const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
+const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     id: "id",
     label: "Id",
     cell: (row) => row.id,
     autoWidth: true,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Name",
     id: "name",
     cell: (row) =>
       `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "National id",
@@ -48,41 +38,26 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     cell: (row) => row.nationalId,
     align: "right",
     autoWidth: true,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Day job",
     id: "dayJob",
     cell: (row) => row.dayJob,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Supervisor",
     id: "supervisor",
     cell: (row) => row.supervisor,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Date received",
     id: "dateReceived",
     cell: (row) => row.dateReceived,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Message",
     id: "message",
     cell: (row) => row.message,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Age",
@@ -90,9 +65,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     cell: (row) => row.age,
     align: "right",
     autoWidth: true,
-    details: {
-      visible: true,
-    },
+
     /* TODO: NOt yet implemented */
     /* footer: ({ table }) => {
       const ages: number[] = [];
@@ -115,17 +88,11 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     ),
     autoWidth: true,
     align: "center",
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Home system",
     id: "homeSystem",
     cell: (row) => row.homeSystem,
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Skills",
@@ -151,9 +118,6 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
         ))}
       </Bleed>
     ), */
-    details: {
-      visible: true,
-    },
   },
   {
     label: "Actions",
@@ -177,9 +141,6 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
         />
       </>
     ),
-    details: {
-      visible: true,
-    },
   },
 ];
 
