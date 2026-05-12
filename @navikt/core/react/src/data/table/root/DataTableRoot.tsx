@@ -49,6 +49,15 @@ import {
 } from "./DataTableRoot.context";
 
 /**
+ * TODO: For consideration:
+ * - Use namespacing for types. There will be a lot of standalone types connected to this component,
+ * it could make sense to access them under DataTable.X instead of separate imports.
+ * - Consider having a "Wrapper" component that only handles context and logic like,
+ * "DataTableRoot" or "DataGrid" or something, and then have the main "DataTable" component only handle rendering of table itself.
+ * This would make props more focused and discoverable since its not mixed with htmltable-props.
+ */
+
+/**
  * TODO:
  * - Pri zero: Move sorting-state into column definitions.
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
