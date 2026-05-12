@@ -3,7 +3,7 @@ import { MenuHamburgerIcon } from "@navikt/aksel-icons";
 import { AkselDescriptionList } from "@/app/_ui/description-list/DescriptionList";
 
 export const DescriptionList = defineType({
-  title: "Beskrivelsesliste",
+  title: "Definisjonsliste",
   name: "description_list",
   type: "object",
   icon: () => <MenuHamburgerIcon aria-hidden />,
@@ -57,7 +57,7 @@ export const DescriptionList = defineType({
     },
     prepare(props) {
       return {
-        title: "Beskrivelsesliste",
+        title: "Definisjonsliste",
         ...props,
       };
     },
