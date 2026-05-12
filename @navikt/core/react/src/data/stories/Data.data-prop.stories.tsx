@@ -302,7 +302,7 @@ export const LoadingWithSkeletonRows: Story = {
         <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
-          loading={{ isLoading, loadingRows: 4 }}
+          loading={{ isLoading, variant: "skeleton", rows: 4 }}
         />
       </VStack>
     );
@@ -320,7 +320,7 @@ export const LoadingWithLoadingState: Story = {
         <DataTable
           columnDefinitions={userColumnDef}
           data={[]}
-          loading={{ isLoading, loadingState: "Laster data..." }}
+          loading={{ isLoading, variant: "content", content: "Laster data..." }}
         />
       </VStack>
     );
@@ -338,7 +338,7 @@ export const LoadingWhileKeepingData: Story = {
         <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
-          loading={{ isLoading, loadingRows: 4 }}
+          loading={{ isLoading, variant: "skeleton", rows: 4 }}
         />
       </VStack>
     );
@@ -356,7 +356,11 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <DataTable
           columnDefinitions={userColumnDef}
           data={userData}
-          loading={{ isLoading, loadingLabel: "Laster innhold for tabell" }}
+          loading={{
+            isLoading,
+            variant: "overlay",
+            label: "Laster innhold for tabell",
+          }}
         />
       </VStack>
     );

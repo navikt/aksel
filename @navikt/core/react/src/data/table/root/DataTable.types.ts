@@ -82,9 +82,28 @@ type SortChangeDetail = {
   direction: "asc" | "desc" | "none";
 };
 
+type DataTableLoadingConfig = {
+  isLoading?: boolean;
+} & (
+  | {
+      variant: "content";
+      content: React.ReactNode;
+    }
+  | {
+      variant: "skeleton";
+      rows?: number;
+      label?: string;
+    }
+  | {
+      variant: "overlay";
+      label?: string;
+    }
+);
+
 export type {
   ColumnDefinition,
   ColumnDefinitions,
+  DataTableLoadingConfig,
   SortDirection,
   SortEntry,
   SortChangeDetail,

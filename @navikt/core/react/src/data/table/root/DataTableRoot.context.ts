@@ -1,6 +1,7 @@
 import { createStrictContext } from "../../../utils/helpers";
 import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
+import type { DataTableLoadingConfig } from "./DataTable.types";
 
 type DataTableContextProps<T> = {
   layout: "fixed" | "auto";
@@ -9,13 +10,11 @@ type DataTableContextProps<T> = {
   stickySelection: boolean;
   stickyHeader: boolean;
   tableId: string;
-  showLoadingSkeletons: boolean;
+  loading: DataTableLoadingConfig | undefined;
   onRowClick?: (
     rowId: string | number,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
-  isLoading?: boolean;
-  showLoadingOverlay: boolean;
   columns: UseColumnOptionsResult<T>["columns"];
   /**
    * Used to set exact colspan for detailsPanel, loadingState and emptyState.

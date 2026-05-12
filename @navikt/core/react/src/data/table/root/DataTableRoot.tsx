@@ -38,7 +38,10 @@ import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
-import type { ColumnDefinitions } from "./DataTable.types";
+import type {
+  ColumnDefinitions,
+  DataTableLoadingConfig,
+} from "./DataTable.types";
 import {
   DataTableContextProvider,
   useDataTableContext,
@@ -140,39 +143,15 @@ interface DataTableProps<T>
    */
   /* TODO: Pri zero New name for this prop. Match with loading state */
   emptyState?: React.ReactNode;
-  loading?: {
-    /**
-     * Shows the table in a loading state.
-     *
-     * - When `loadingState` is provided, it is rendered inside a `DataTable.LoadingState` row.
-     * - When `loadingState` is **not** provided, skeleton placeholder rows are rendered instead.
-     * @default false
-     */
-    isLoading?: boolean;
-    /**
-     * Custom content to render when `isLoading` is `true`.
-     * Rendered inside a `DataTable.LoadingState` row spanning all columns.
-     * When omitted, skeleton rows are rendered based on `loadingRows`.
-     */
-    /* TODO: Pri zero New name for this prop: Content, render etc */
-    loadingState?: React.ReactNode;
-
-    /**
-     * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
-     *
-     *
-     * If not provided, the rendered content will get a temporarily overlay while loading
-     */
-    /* TODO: Pri zero disable in first version */
-    loadingRows?: number;
-    /**
-     * Visually hidden label announced to screen readers when skeleton rows are shown.
-     * Only used when `isLoading` is `true` and no `loadingState` is provided.
-     * @default "Laster innhold"
-     */
-    /* TODO: Pri zero disable in first version */
-    loadingLabel?: string;
-  };
+  /**
+   * Configures how the table behaves during loading.
+   *
+   * Use `variant` to select the loading strategy:
+   * - `"content"` — renders custom content inside a full-width row.
+   * - `"skeleton"` — renders skeleton placeholder rows.
+   * - `"overlay"` — keeps existing data visible with a loading overlay.
+   */
+  loading?: DataTableLoadingConfig;
   /**
    * Adjusts font-size
    * @default "medium"
@@ -242,13 +221,6 @@ function DataTableInner<T>(
     selectionMode: tableSelectionState.selection.selectionMode,
   });
 
-  const {
-    isLoading = false,
-    loadingState,
-    loadingRows,
-    loadingLabel = "Laster innhold",
-  } = loading || {};
-
   const fullWidthColSpan = useMemo(() => {
     return (
       columns.length +
@@ -273,10 +245,8 @@ function DataTableInner<T>(
       stickySelection={stickySelection}
       stickyHeader={stickyHeader}
       tableId={tableId}
-      showLoadingSkeletons={isLoading && loadingState == null}
+      loading={loading}
       onRowClick={onRowClick}
-      isLoading={isLoading}
-      showLoadingOverlay={isLoading && !loadingState && !loadingRows}
       columns={columns}
       fullWidthColSpan={fullWidthColSpan}
     >
@@ -298,8 +268,8 @@ function DataTableInner<T>(
               data-density={rowDensity}
               data-text-size={textSize}
               data-layout={layout}
-              data-loading={isLoading || undefined}
-              aria-busy={isLoading || undefined}
+              data-loading={loading?.isLoading || undefined}
+              aria-busy={loading?.isLoading || undefined}
             >
               <DataTableThead>
                 <DataTableTr>
@@ -333,12 +303,7 @@ function DataTableInner<T>(
               </DataTableThead>
 
               <DataTableTbody>
-                <DataTableTBodyContent
-                  loadingState={loadingState}
-                  loadingRows={loadingRows}
-                  loadingLabel={loadingLabel}
-                  emptyState={emptyState}
-                />
+                <DataTableTBodyContent emptyState={emptyState} />
               </DataTableTbody>
             </table>
           </TableElementWrapper>
@@ -443,38 +408,32 @@ function TableElementWrapper({
 }
 
 interface DataTableTBodyContentProps {
-  loadingState: React.ReactNode;
-  loadingLabel: string;
-  loadingRows?: number;
   emptyState: React.ReactNode;
 }
 
-function DataTableTBodyContent({
-  loadingState,
-  loadingRows,
-  loadingLabel,
-  emptyState,
-}: DataTableTBodyContentProps) {
+function DataTableTBodyContent({ emptyState }: DataTableTBodyContentProps) {
   const { items, itemDetails, visibleRowIds } = useTableItemsContext();
-  const { columns, isLoading, fullWidthColSpan } = useDataTableContext();
+  const { columns, loading, fullWidthColSpan } = useDataTableContext();
 
-  if (isLoading && loadingState != null) {
+  if (loading?.isLoading && loading?.variant === "content") {
     return (
       <DataTableLoadingState colSpan={fullWidthColSpan}>
-        {loadingState}
+        {loading.content}
       </DataTableLoadingState>
     );
   }
 
-  if (isLoading && loadingRows) {
+  if (loading?.isLoading && loading?.variant === "skeleton") {
+    const rows = loading.rows ?? 5;
+    const label = loading.label ?? "Laster innhold";
     return (
       <>
         <tr>
           <td colSpan={fullWidthColSpan} className="aksel-sr-only">
-            {loadingLabel}
+            {label}
           </td>
         </tr>
-        {Array.from({ length: loadingRows }, (_, rowIndex) => (
+        {Array.from({ length: rows }, (_, rowIndex) => (
           <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
             {columns.map(({ isSticky, colDef }, colDefIndex) => (
               <DataTableBaseCell
@@ -500,14 +459,20 @@ function DataTableTBodyContent({
     );
   }
 
-  const renderLoadingAnnouncement = isLoading && !loadingState && !loadingRows;
+  const renderLoadingAnnouncement =
+    loading?.isLoading && loading?.variant === "overlay";
+
+  const overlayLabel =
+    loading?.variant === "overlay"
+      ? (loading.label ?? "Laster innhold")
+      : "Laster innhold";
 
   return (
     <>
       {renderLoadingAnnouncement && (
         <tr>
           <td colSpan={fullWidthColSpan} className="aksel-sr-only">
-            {loadingLabel}
+            {overlayLabel}
           </td>
         </tr>
       )}

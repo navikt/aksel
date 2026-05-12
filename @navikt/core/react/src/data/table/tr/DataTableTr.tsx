@@ -124,7 +124,8 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 );
 
 function RowExpansionCell({ rowId }: { rowId?: string | number }) {
-  const { tableId, showLoadingSkeletons } = useDataTableContext();
+  const { tableId, loading } = useDataTableContext();
+
   const { location } = useDataTableLocation();
 
   const {
@@ -141,7 +142,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
     return null;
   }
 
-  if (showLoadingSkeletons) {
+  if (loading?.isLoading && loading?.variant === "skeleton") {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
@@ -238,8 +239,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: string | number }) {
-  const { selectionState, stickySelection, showLoadingSkeletons } =
-    useDataTableContext();
+  const { selectionState, stickySelection, loading } = useDataTableContext();
   const { location } = useDataTableLocation();
   const { itemDetails } = useTableItemsContext();
   const inputId = useId();
@@ -250,7 +250,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     return null;
   }
 
-  if (showLoadingSkeletons) {
+  if (loading?.isLoading && loading?.variant === "skeleton") {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
