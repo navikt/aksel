@@ -10,12 +10,14 @@ interface DescriptionListProps extends React.HTMLAttributes<HTMLDivElement> {
   }[];
   variant?: "subtle" | "bold";
   direction?: "vertical" | "horizontal";
+  divider?: boolean;
 }
 
 function AkselDescriptionList({
   items,
   variant = "subtle",
   direction,
+  divider,
   ...rest
 }: DescriptionListProps) {
   const itemsJsx = items.map((item, index) => (
@@ -37,7 +39,7 @@ function AkselDescriptionList({
     return (
       <HGrid
         as="dl"
-        className="description-list--horizontal"
+        className={divider ? "description-list--horizontal" : ""}
         gap="space-8 space-16"
         columns="auto auto"
         width="fit-content"
@@ -52,7 +54,7 @@ function AkselDescriptionList({
   return (
     <VStack
       as="dl"
-      className="description-list--vertical"
+      className={divider ? "description-list--vertical" : ""}
       gap="space-8"
       width="fit-content"
       position="relative"
