@@ -11,7 +11,7 @@ import {
   PortableContentTypes,
 } from "@/app/_sanity/types";
 import { Attachment } from "@/app/_ui/attachment/Attachment";
-import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
+import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.handler";
 import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
 import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
