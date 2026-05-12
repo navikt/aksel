@@ -29,10 +29,12 @@ type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
    * Assigned to the cell's `th` element instead of `td` if true.
    *
    * Should be used for cells that act as row headers. Each row should have one rowheader, and only have one cell with `isRowHeader: true`,
+   * TODO: Better documentation, consider warning if not one column has this set to true.
    */
   isRowHeader?: boolean;
   /**
    * Renders table header-cell
+   * TODO: Pri zero rename to headerCell
    */
   header?: React.ReactNode;
   /**
@@ -41,6 +43,7 @@ type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
   cell: (item: T) => React.ReactNode;
   /**
    * Label of header. Renders if header is not provided.
+   * TODO: Pri zero consider renaming to header
    */
   label: string;
   /**
@@ -50,6 +53,7 @@ type ColumnDefinition<T, DetailsT = Record<string, any>> = Pick<
   sortable?: boolean;
   /**
    * Additional metadata that can be used for filtering or other purposes. Not used by the table itself.
+   * TODO: Pri zero Can be removed?
    */
   details?: DetailsT;
 };

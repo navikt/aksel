@@ -14,6 +14,8 @@ type SelectionProps<T = any> = {
    * Nested rows use cascading selection, so selecting a parent toggles its descendants too.
    *
    * @default "none"
+   *
+   * TODO: Pri zero Make required
    */
   selectionMode?: "none" | "single" | "multiple";
   /**

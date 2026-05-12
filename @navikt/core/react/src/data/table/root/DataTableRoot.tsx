@@ -44,6 +44,12 @@ import {
   useDataTableContext,
 } from "./DataTableRoot.context";
 
+/**
+ * TODO:
+ * - Pri zero: Move sorting-state into column definitions.
+ * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
+ * - Pri zero: Consider prop that is true by default: "disabledNestedRowSelection" to disable selection of child-rows when parent row is selected. Or just considre this to be the default state and avoid extra prop.
+ */
 interface DataTableProps<T>
   extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {
   children?: never;
@@ -73,6 +79,7 @@ interface DataTableProps<T>
    * Custom callback to determine if navigation should be blocked.
    * Called before default blocking logic.
    * Requires `withKeyboardNav` to be `true`.
+   * TODO: Pri zero Better naming
    */
   shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
   /**
@@ -109,6 +116,7 @@ interface DataTableProps<T>
    *
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
+   * TODO: Pri zero Standardize to "string" always. Update selection etc to support this.
    */
   getRowId?: (rowData: T) => string | number;
   /**
@@ -117,6 +125,7 @@ interface DataTableProps<T>
    * You can specify 1 sticky column on the left and 1 on the right.
    */
   stickyColumns?: {
+    /* TODO: Pri zero Change to start/end */
     first?: "1";
     last?: "1";
   };
@@ -136,6 +145,7 @@ interface DataTableProps<T>
    * Content to render when `data` is empty.
    * Rendered inside a `DataTable.EmptyState` row spanning all columns.
    */
+  /* TODO: Pri zero New name for this prop. Match with loading state */
   emptyState?: React.ReactNode;
   loading?: {
     /**
@@ -151,19 +161,23 @@ interface DataTableProps<T>
      * Rendered inside a `DataTable.LoadingState` row spanning all columns.
      * When omitted, skeleton rows are rendered based on `loadingRows`.
      */
+    /* TODO: Pri zero New name for this prop: Content, render etc */
     loadingState?: React.ReactNode;
+
     /**
      * Number of skeleton rows to render when `isLoading` is `true` and no `loadingState` is provided.
      *
      *
      * If not provided, the rendered content will get a temporarily overlay while loading
      */
+    /* TODO: Pri zero disable in first version */
     loadingRows?: number;
     /**
      * Visually hidden label announced to screen readers when skeleton rows are shown.
      * Only used when `isLoading` is `true` and no `loadingState` is provided.
      * @default "Laster innhold"
      */
+    /* TODO: Pri zero disable in first version */
     loadingLabel?: string;
   };
   /**

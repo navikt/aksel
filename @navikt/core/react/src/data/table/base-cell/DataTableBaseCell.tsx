@@ -12,6 +12,7 @@ interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellEle
   textAlign?: "left" | "center" | "right";
   /**
    * Temp hack to solve overflow and alignment
+   * TODO: Pri zero Remove/replace
    */
   UNSAFE_isSelection?: boolean;
   /**
