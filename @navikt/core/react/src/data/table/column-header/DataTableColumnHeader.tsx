@@ -22,24 +22,24 @@ interface DataTableColumnHeaderProps
    */
   label: string;
   /**
-   * Makes the column header sortable. The entire header cell content becomes
-   * a clickable button when true.
+   * Makes the column sortable by clicking on the header.
+   * The entire header cell content becomes a clickable button when true.
    */
-  sortable?: boolean;
+  sortable?: boolean; // TODO: Consider merging sortable, sortDirection and onSortClick into a single "sort" object prop
   /**
    * Current sort direction. Only relevant when `sortable` is true.
-   * Uses values matching the `aria-sort` attribute directly.
+   * Uses values matching the `aria-sort` attribute directly. // TODO: What does this mean? (Can we just remove it?)
    * @default "none"
    */
   sortDirection?: SortDirection;
   /**
-   * Called when the user clicks the sortable header.
-   * The consumer is responsible for determining and setting the next sort state.
+   * Called when the user clicks the header. Only relevant when `sortable` is true.
+   * The consumer is responsible for determining and setting the next sort state. // TODO: We don't use the term "consumer" in JSDoc anywhere else
    */
   onSortClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const SORT_ICON: Record<SortDirection, React.ElementType | null> = {
+const SORT_ICON: Record<SortDirection, React.ElementType> = {
   asc: SortUpIcon,
   desc: SortDownIcon,
   none: ArrowsUpDownIcon,
@@ -70,14 +70,11 @@ const DataTableColumnHeader = forwardRef<
       minWidth,
       maxWidth,
       onWidthChange,
-      colSpan,
-      rowSpan,
       UNSAFE_isSelection,
       ...rest
     },
     forwardedRef,
   ) => {
-    const contentRef = React.useRef<HTMLDivElement>(null);
     const thRef = useRef<HTMLTableCellElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, thRef);
 
@@ -90,8 +87,7 @@ const DataTableColumnHeader = forwardRef<
       minWidth,
       maxWidth,
       onWidthChange,
-      style,
-      colSpan,
+      colSpan: rest.colSpan,
     });
 
     const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
@@ -103,11 +99,9 @@ const DataTableColumnHeader = forwardRef<
         ref={mergedRef}
         className={cl("aksel-data-table__column-header", className)}
         data-sortable={sortable}
-        style={resizeResult.style}
+        style={{ ...style, width: resizeResult.width }}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
         UNSAFE_isSelection={UNSAFE_isSelection}
-        colSpan={colSpan}
-        rowSpan={rowSpan}
       >
         {sortable ? (
           <button
@@ -115,9 +109,7 @@ const DataTableColumnHeader = forwardRef<
             className="aksel-data-table__th-sort-button"
             onClick={onSortClick}
           >
-            <div ref={contentRef} className="aksel-data-table__th-content">
-              {children}
-            </div>
+            <div className="aksel-data-table__th-content">{children}</div>
             {SortIcon && (
               <SortIcon
                 aria-hidden
@@ -129,7 +121,6 @@ const DataTableColumnHeader = forwardRef<
           </button>
         ) : (
           <div
-            ref={contentRef}
             className={cl({
               "aksel-data-table__th-content": !UNSAFE_isSelection,
             })}
@@ -153,23 +144,21 @@ const DataTableColumnHeader = forwardRef<
             data-block-keyboard-nav
             role="slider"
             aria-valuenow={
-              typeof resizeResult.style.width === "number"
-                ? resizeResult.style.width
-                : 0
+              typeof resizeResult.width === "number" ? resizeResult.width : 0
             }
             aria-valuetext={
-              typeof resizeResult.style.width === "number" &&
+              typeof resizeResult.width === "number" &&
               resizeResult.isResizingWithKeyboard
-                ? resizeResult.style.width.toString()
+                ? resizeResult.width.toString()
                 : "" // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
             } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
               <>
-                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--start">
+                <span className="aksel-data-table__th-resize-handle-indicator">
                   <CaretLeftCircleFillIcon aria-hidden fontSize="1.5rem" />
                 </span>
-                <span className="aksel-data-table__th-resize-handle-indicator aksel-data-table__th-resize-handle-indicator--end">
+                <span className="aksel-data-table__th-resize-handle-indicator">
                   <CaretRightCircleFillIcon aria-hidden fontSize="1.5rem" />
                 </span>
               </>

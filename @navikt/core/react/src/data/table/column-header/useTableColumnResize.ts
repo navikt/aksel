@@ -60,10 +60,6 @@ type ResizeProps = {
    */
   onWidthChange?: (width: number) => void;
   /**
-   * Forwarded styles
-   */
-  style?: React.CSSProperties;
-  /**
    * Forwarded colSpan
    */
   colSpan?: number;
@@ -80,7 +76,7 @@ type TableColumnResizeArgs = Unomittable<ResizeProps> & {
 
 type TableColumnResizeResult =
   | {
-      style: React.CSSProperties;
+      width: number | string;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
         onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
@@ -93,7 +89,7 @@ type TableColumnResizeResult =
       enabled: true;
     }
   | {
-      style?: React.CSSProperties;
+      width?: number | string;
       enabled: false;
     };
 
@@ -103,22 +99,17 @@ type TableColumnResizeResult =
  * - Auto-width mode is hard now since that might cause layout-shifts on mount. But would be preferable to
  * be able to set "1fr" or similar and have it fill remaining space.
  */
-function useTableColumnResize(
-  args: TableColumnResizeArgs,
-): TableColumnResizeResult {
-  const {
-    resizable,
-    thRef,
-    width: userWidth,
-    defaultWidth,
-    autoWidth,
-    onWidthChange,
-    maxWidth = Infinity,
-    minWidth = 40,
-    style,
-    colSpan,
-  } = args;
-
+function useTableColumnResize({
+  resizable,
+  thRef,
+  width: userWidth,
+  defaultWidth,
+  autoWidth,
+  onWidthChange,
+  maxWidth = Infinity,
+  minWidth = 40,
+  colSpan,
+}: TableColumnResizeArgs): TableColumnResizeResult {
   const tableContext = useDataTableContext();
 
   const [isResizingWithKeyboard, setIsResizingWithKeyboard] = useState(false);
@@ -280,26 +271,20 @@ function useTableColumnResize(
 
   if (tableContext.layout !== "fixed") {
     return {
-      style,
       enabled: false,
     };
   }
 
   if (!resizable) {
     return {
-      style: {
-        ...style,
-        width,
-      },
+      width,
+
       enabled: false,
     };
   }
 
   return {
-    style: {
-      ...style,
-      width,
-    },
+    width,
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
       onTouchStart: handleTouchStart,

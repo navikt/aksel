@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React from "react";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
-import { DataTable } from "../table/root/DataTableRoot.legacy";
+import { expect, within } from "storybook/test";
+import { DataTable } from "../table";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Resize",
@@ -16,189 +15,201 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
+type Row = {
+  left: string;
+  center: string;
+  right: string;
+};
+
+const testData = [
+  {
+    left: "Data 1",
+    center: "Yes",
+    right: "100 500",
+  },
+  {
+    left: "Data 2",
+    center: "No",
+    right: "2 000 200",
+  },
+  {
+    left: "Data 3",
+    center: "Maybe",
+    right: "1 000 200",
+  },
+];
+
 export const Resize: Story = {
-  render: () => (
-    <DataTable withKeyboardNav>
-      <DataTable.Thead>
-        <DataTable.Tr>
-          <DataTableColumnHeader label="Left" textAlign="left">
-            Left
-          </DataTableColumnHeader>
-          <DataTableColumnHeader label="Center" textAlign="center">
-            Center
-          </DataTableColumnHeader>
-          <DataTableColumnHeader label="Right" textAlign="right">
-            Right
-          </DataTableColumnHeader>
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        <DataTable.Tr>
-          <DataTable.Td>Data 1</DataTable.Td>
-          <DataTable.Td textAlign="center">Yes</DataTable.Td>
-          <DataTable.Td textAlign="right">100 500</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 2</DataTable.Td>
-          <DataTable.Td textAlign="center">No</DataTable.Td>
-          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 3</DataTable.Td>
-          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
-          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
-        </DataTable.Tr>
-      </DataTable.Tbody>
-    </DataTable>
-  ),
+  args: {
+    data: testData,
+    columnDefinitions: [
+      {
+        id: "left",
+        label: "Left",
+        align: "left",
+        cell: (row) => (row as Row).left,
+      },
+      {
+        id: "center",
+        label: "Center",
+        align: "center",
+        cell: (row) => (row as Row).center,
+      },
+      {
+        id: "right",
+        label: "Right",
+        align: "right",
+        cell: (row) => (row as Row).right,
+      },
+    ],
+  },
 };
 
 export const ResizeMinMax: Story = {
-  render: () => (
-    <DataTable withKeyboardNav>
-      <DataTable.Thead>
-        <DataTable.Tr>
-          <DataTableColumnHeader
-            label="Left"
-            maxWidth={400}
-            minWidth={100}
-            textAlign="left"
-          >
-            Left
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Center"
-            maxWidth={400}
-            minWidth={50}
-            textAlign="center"
-          >
-            Center
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Right"
-            maxWidth={400}
-            minWidth={200}
-            textAlign="right"
-          >
-            Right
-          </DataTableColumnHeader>
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        <DataTable.Tr>
-          <DataTable.Td>Data 1</DataTable.Td>
-          <DataTable.Td textAlign="center">Yes</DataTable.Td>
-          <DataTable.Td textAlign="right">100 500</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 2</DataTable.Td>
-          <DataTable.Td textAlign="center">No</DataTable.Td>
-          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 3</DataTable.Td>
-          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
-          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
-        </DataTable.Tr>
-      </DataTable.Tbody>
-    </DataTable>
-  ),
+  args: {
+    data: testData,
+    columnDefinitions: [
+      {
+        id: "left",
+        label: "Left",
+        align: "left",
+        minWidth: 100,
+        maxWidth: 200,
+        defaultWidth: 250,
+        cell: (row) => (row as Row).left,
+      },
+      {
+        id: "center",
+        label: "Center",
+        align: "center",
+        minWidth: 50,
+        maxWidth: 400,
+        cell: (row) => (row as Row).center,
+      },
+      {
+        id: "right",
+        label: "Right",
+        align: "right",
+        minWidth: 200,
+        maxWidth: 400,
+        defaultWidth: 150,
+        cell: (row) => (row as Row).right,
+      },
+    ],
+  },
 };
 
 export const ResizeDefaultStaticWidth: Story = {
-  render: () => (
-    <DataTable withKeyboardNav>
-      <DataTable.Thead>
-        <DataTable.Tr>
-          <DataTableColumnHeader
-            label="Left"
-            defaultWidth="300px"
-            textAlign="left"
-          >
-            Left
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Center"
-            defaultWidth="300px"
-            textAlign="center"
-          >
-            Center
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Right"
-            defaultWidth="300px"
-            textAlign="right"
-          >
-            Right
-          </DataTableColumnHeader>
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        <DataTable.Tr>
-          <DataTable.Td>Data 1</DataTable.Td>
-          <DataTable.Td textAlign="center">Yes</DataTable.Td>
-          <DataTable.Td textAlign="right">100 500</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 2</DataTable.Td>
-          <DataTable.Td textAlign="center">No</DataTable.Td>
-          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 3</DataTable.Td>
-          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
-          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
-        </DataTable.Tr>
-      </DataTable.Tbody>
-    </DataTable>
-  ),
+  args: {
+    data: testData,
+    columnDefinitions: [
+      {
+        id: "left",
+        label: "Left",
+        align: "left",
+        defaultWidth: "300px",
+        cell: (row) => (row as Row).left,
+      },
+      {
+        id: "center",
+        label: "Center",
+        align: "center",
+        defaultWidth: "300px",
+        cell: (row) => (row as Row).center,
+      },
+      {
+        id: "right",
+        label: "Right",
+        align: "right",
+        defaultWidth: "300px",
+        cell: (row) => (row as Row).right,
+      },
+    ],
+  },
 };
 
 export const ResizeDefaultDynamicWidth: Story = {
-  render: () => (
-    <DataTable withKeyboardNav>
-      <DataTable.Thead>
-        <DataTable.Tr>
-          <DataTableColumnHeader
-            label="Left"
-            defaultWidth="100%"
-            textAlign="left"
-          >
-            Left
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Center"
-            defaultWidth="100%"
-            textAlign="center"
-          >
-            Center
-          </DataTableColumnHeader>
-          <DataTableColumnHeader
-            label="Right"
-            defaultWidth="100%"
-            textAlign="right"
-          >
-            Right
-          </DataTableColumnHeader>
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        <DataTable.Tr>
-          <DataTable.Td>Data 1</DataTable.Td>
-          <DataTable.Td textAlign="center">Yes</DataTable.Td>
-          <DataTable.Td textAlign="right">100 500</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 2</DataTable.Td>
-          <DataTable.Td textAlign="center">No</DataTable.Td>
-          <DataTable.Td textAlign="right">2 000 200</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 3</DataTable.Td>
-          <DataTable.Td textAlign="center">Maybe</DataTable.Td>
-          <DataTable.Td textAlign="right">1 000 200</DataTable.Td>
-        </DataTable.Tr>
-      </DataTable.Tbody>
-    </DataTable>
-  ),
+  args: {
+    data: testData,
+    columnDefinitions: [
+      {
+        id: "left",
+        label: "Left",
+        align: "left",
+        defaultWidth: "100%",
+        cell: (row) => (row as Row).left,
+      },
+      {
+        id: "center",
+        label: "Center",
+        align: "center",
+        defaultWidth: "100%",
+        cell: (row) => (row as Row).center,
+      },
+      {
+        id: "right",
+        label: "Right",
+        align: "right",
+        defaultWidth: "100%",
+        cell: (row) => (row as Row).right,
+      },
+    ],
+  },
+};
+
+export const ResizeAutoWidth: Story = {
+  args: {
+    data: testData,
+    columnDefinitions: [
+      {
+        id: "left",
+        label: "L",
+        align: "left",
+        defaultWidth: 200,
+        autoWidth: true,
+        cell: (row) => (row as Row).left,
+      },
+      {
+        id: "center",
+        label: "C",
+        align: "center",
+        defaultWidth: 200,
+        autoWidth: true,
+        cell: (row) => (row as Row).center,
+      },
+      {
+        id: "right",
+        label: "R",
+        align: "right",
+        defaultWidth: 200,
+        autoWidth: true,
+        cell: (row) => (row as Row).right,
+      },
+      {
+        id: "headingIsWidest",
+        label: "Heading is widest",
+        defaultWidth: 50,
+        autoWidth: true,
+        cell: () => "Test",
+      },
+      {
+        id: "headingIsWidest",
+        label: "Heading is widest + sortable",
+        defaultWidth: 50,
+        autoWidth: true,
+        sortable: true,
+        cell: () => "Test",
+      },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const headers = canvas.getAllByRole("columnheader");
+    expect(headers.length).toBe(5);
+    expect(headers[0].getBoundingClientRect().width).toBe(74);
+    expect(headers[1].getBoundingClientRect().width).toBe(76);
+    expect(headers[2].getBoundingClientRect().width).toBe(95);
+    expect(headers[3].getBoundingClientRect().width).toBe(153);
+    expect(headers[4].getBoundingClientRect().width).toBe(224);
+  },
 };

@@ -5,12 +5,12 @@ import type {
 } from "../root/DataTable.types";
 import type { SelectionProps } from "./useTableSelection";
 
-type UseColumnOptions = {
+type UseColumnOptions<T> = {
   stickyColumns?: {
     first?: "1";
     last?: "1";
   };
-  selectionMode: SelectionProps["selectionMode"];
+  selectionMode: SelectionProps<T>["selectionMode"];
 };
 
 type UseColumnOptionsResult<T> = {
@@ -23,7 +23,7 @@ type UseColumnOptionsResult<T> = {
 
 function useColumnOptions<T>(
   columnDefinitions: ColumnDefinitions<T>,
-  options: UseColumnOptions,
+  options: UseColumnOptions<T>,
 ): UseColumnOptionsResult<T> {
   const { stickyColumns, selectionMode } = options;
 

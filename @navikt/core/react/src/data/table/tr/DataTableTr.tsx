@@ -12,12 +12,14 @@ import { Skeleton } from "../../../skeleton";
 import { Label } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import {
   getDataTableDetailsPanelId,
   useDataTableDetailsPanel,
 } from "../hooks/useTableDetailsPanel";
+import { useTableItemsContext } from "../hooks/useTableItems";
 import {
   useDataTableContext,
   useDataTableLocation,
@@ -49,6 +51,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     const { layout, stickyHeader, selectionState, onRowClick } =
       useDataTableContext();
     const { location } = useDataTableLocation();
+    const { itemDetails } = useTableItemsContext();
 
     const renderFillerCell = layout === "fixed" && children;
 
@@ -79,7 +82,14 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               !selectionState.disableRowSelectionOnClick &&
               selectionState.selection.selectionMode !== "none"
             ) {
-              selectionState.selection.toggleSelection(rowId);
+              const rowData = itemDetails.get(rowId)?.rowData;
+
+              if (!rowData) {
+                consoleWarning(
+                  `No row data found for rowId ${rowId}. This may cause issues with selection if disableRowSelection is used.`,
+                );
+              }
+              selectionState.selection.toggleSelection(rowId, rowData);
             }
             onRowClick?.(rowId, event);
           }
@@ -231,6 +241,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   const { selectionState, stickySelection, showLoadingSkeletons } =
     useDataTableContext();
   const { location } = useDataTableLocation();
+  const { itemDetails } = useTableItemsContext();
   const inputId = useId();
 
   const { selection, renderSelection } = selectionState;
@@ -303,7 +314,13 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selection.selectionMode === "multiple" && location === "tbody") {
     return (
       <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
-        <CheckboxInput {...selection.getRowCheckboxProps(rowId)} compact />
+        <CheckboxInput
+          {...selection.getRowCheckboxProps(
+            rowId,
+            itemDetails.get(rowId)?.rowData,
+          )}
+          compact
+        />
       </DataTableTd>
     );
   }
@@ -311,7 +328,12 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
   if (selection.selectionMode === "single" && location === "tbody") {
     return (
       <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
-        <RadioInput {...selection.getRowRadioProps(rowId)} />
+        <RadioInput
+          {...selection.getRowRadioProps(
+            rowId,
+            itemDetails.get(rowId)?.rowData,
+          )}
+        />
       </DataTableTd>
     );
   }

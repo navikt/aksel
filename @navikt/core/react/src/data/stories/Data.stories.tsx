@@ -1,13 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Table,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import {
   ChevronLeftIcon,
@@ -17,20 +8,14 @@ import {
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { Checkbox } from "../../form/checkbox";
-import { CheckboxInput } from "../../form/checkbox/checkbox-input/CheckboxInput";
 import { Radio, RadioGroup } from "../../form/radio";
-import { RadioInput } from "../../form/radio/radio-input/RadioInput";
-import { Search } from "../../form/search";
 import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
-import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
@@ -40,12 +25,7 @@ import {
   columnDef_TEST_DATA,
   columnDef_TEST_DATA_NESTED,
 } from "./Data.test-data";
-import {
-  PersonInfo,
-  columns,
-  homeSystemOptions,
-  sampleData,
-} from "./dummy-data";
+import { PersonInfo, homeSystemOptions } from "./dummy-data";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data",
@@ -60,7 +40,7 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
-export const KitchenSink: Story = {
+/* export const KitchenSink: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
@@ -246,12 +226,6 @@ export const KitchenSink: Story = {
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         defaultWidth={header.getSize()}
-                        /* pinningHandler={
-                          header.column.getIsPinned() === "left"
-                            ? () => header.column.pin(false)
-                            : () => header.column.pin("left")
-                        }
-                        isPinned={header.column.getIsPinned() === "left"} */
                         sortable
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortClick={(event) => {
@@ -306,7 +280,7 @@ export const KitchenSink: Story = {
     controls: { disable: true },
     docs: { disable: true },
   },
-};
+}; */
 
 const dayJobValues = [
   "Jedi Knight",
@@ -780,7 +754,7 @@ function usePaginatedData<T extends any[]>(data: T) {
   };
 }
 
-const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
+/* const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
   const hasRowSelection = table.options.enableRowSelection;
   const multiRowSelection = table.options.enableMultiRowSelection;
 
@@ -833,9 +807,9 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
       })}
     </DataTableLegacy.Tbody>
   );
-};
-
+}; */
+/*
 const MemoizedTableBody = React.memo(
   TableBody,
   (_prev, next) => !!next.table.getState().columnSizingInfo.isResizingColumn,
-) as typeof TableBody;
+) as typeof TableBody; */
