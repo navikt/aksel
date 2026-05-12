@@ -22,11 +22,13 @@ type UseTableSelectionReturn = {
 };
 
 function useTableSelection<T>({
-  selection = {},
+  selection = {
+    selectionMode: "none",
+  },
   tableItems,
 }: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const {
-    selectionMode = "none",
+    selectionMode,
     defaultSelectedKeys,
     selectedKeys: selectedKeysProp,
     onSelectionChange,
