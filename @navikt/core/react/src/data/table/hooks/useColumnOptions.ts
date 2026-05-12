@@ -7,8 +7,8 @@ import type { SelectionProps } from "./useTableSelection";
 
 type UseColumnOptions<T> = {
   stickyColumns?: {
-    first?: "1";
-    last?: "1";
+    start?: "1";
+    end?: "1";
   };
   selectionMode: SelectionProps<T>["selectionMode"];
 };
@@ -32,9 +32,9 @@ function useColumnOptions<T>(
   const columns = useMemo(() => {
     return columnDefinitions.map((colDef, index) => {
       const isFirstSticky =
-        stickyColumns?.first === "1" && index === 0 && !hasSelection;
+        stickyColumns?.start === "1" && index === 0 && !hasSelection;
       const isLastSticky =
-        stickyColumns?.last === "1" && index === columnDefinitions.length - 1;
+        stickyColumns?.end === "1" && index === columnDefinitions.length - 1;
 
       return {
         isSticky: isFirstSticky
@@ -45,15 +45,10 @@ function useColumnOptions<T>(
         colDef,
       };
     });
-  }, [
-    columnDefinitions,
-    hasSelection,
-    stickyColumns?.first,
-    stickyColumns?.last,
-  ]);
+  }, [columnDefinitions, hasSelection, stickyColumns]);
 
   return {
-    stickySelection: selectionMode !== "none" && stickyColumns?.first === "1",
+    stickySelection: selectionMode !== "none" && stickyColumns?.start === "1",
     columns,
   };
 }

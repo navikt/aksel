@@ -490,7 +490,7 @@ export const StickySelection: Story = {
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
-          first: "1",
+          start: "1",
         }}
       />
     );
@@ -509,7 +509,7 @@ export const StickyLeftOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
-          first: "1",
+          start: "1",
         }}
       />
     );
@@ -528,7 +528,7 @@ export const StickyRightOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
-          last: "1",
+          end: "1",
         }}
       />
     );
@@ -547,8 +547,8 @@ export const StickyBothOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         withKeyboardNav
         stickyColumns={{
-          first: "1",
-          last: "1",
+          start: "1",
+          end: "1",
         }}
       />
     );
@@ -585,8 +585,8 @@ export const StickyHeaderAndColumns: Story = {
           withKeyboardNav
           stickyHeader
           stickyColumns={{
-            first: "1",
-            last: "1",
+            start: "1",
+            end: "1",
           }}
         />
       </div>
