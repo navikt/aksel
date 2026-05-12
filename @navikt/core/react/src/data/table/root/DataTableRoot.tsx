@@ -141,8 +141,7 @@ interface DataTableProps<T>
    * Content to render when `data` is empty.
    * Rendered inside a `DataTable.EmptyState` row spanning all columns.
    */
-  /* TODO: Pri zero New name for this prop. Match with loading state */
-  emptyState?: React.ReactNode;
+  emptyContent?: React.ReactNode;
   /**
    * Configures how the table behaves during loading.
    *
@@ -190,7 +189,7 @@ function DataTableInner<T>(
     defaultSort = [],
     onSortChange,
     onRowClick,
-    emptyState,
+    emptyContent,
     selection,
     loading,
     detailsPanel,
@@ -303,7 +302,7 @@ function DataTableInner<T>(
               </DataTableThead>
 
               <DataTableTbody>
-                <DataTableTBodyContent emptyState={emptyState} />
+                <DataTableTBodyContent emptyContent={emptyContent} />
               </DataTableTbody>
             </table>
           </TableElementWrapper>
@@ -408,10 +407,10 @@ function TableElementWrapper({
 }
 
 interface DataTableTBodyContentProps {
-  emptyState: React.ReactNode;
+  emptyContent: React.ReactNode;
 }
 
-function DataTableTBodyContent({ emptyState }: DataTableTBodyContentProps) {
+function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   const { items, itemDetails, visibleRowIds } = useTableItemsContext();
   const { columns, loading, fullWidthColSpan } = useDataTableContext();
 
@@ -451,10 +450,10 @@ function DataTableTBodyContent({ emptyState }: DataTableTBodyContentProps) {
     );
   }
 
-  if (items.length === 0 && emptyState !== undefined) {
+  if (items.length === 0 && emptyContent !== undefined) {
     return (
       <DataTableEmptyState colSpan={fullWidthColSpan}>
-        {emptyState}
+        {emptyContent}
       </DataTableEmptyState>
     );
   }

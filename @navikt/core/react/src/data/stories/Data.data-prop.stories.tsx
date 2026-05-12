@@ -285,7 +285,7 @@ export const EmptyDataWithEmptyState: Story = {
       <DataTable
         columnDefinitions={userColumnDef}
         data={[]}
-        emptyState="Ingen data å vise"
+        emptyContent="Ingen data å vise"
       />
     );
   },
