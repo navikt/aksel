@@ -803,7 +803,7 @@ export const RowExpansion: Story = {
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       detailsPanel={{
@@ -824,7 +824,7 @@ export const RowExpansionAll: Story = {
       getRowId={(row) => row.id}
       onRowClick={() => console.info("Row clicked!")}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       detailsPanel={{
@@ -856,7 +856,7 @@ export const NestedRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
         onSelectionChange: console.info,
       }}
       withKeyboardNav
@@ -912,7 +912,7 @@ export const NestedLeftAlignedContentRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       subRows={{
@@ -937,7 +937,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
       }))}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       subRows={{
@@ -962,7 +962,7 @@ export const NestedRowsWithMasterDetail: Story = {
       }))}
       getRowId={(row) => row.id}
       selection={{
-        selectionMode: args.selection?.selectionMode,
+        selectionMode: args.selection?.selectionMode ?? "none",
       }}
       withKeyboardNav
       subRows={{

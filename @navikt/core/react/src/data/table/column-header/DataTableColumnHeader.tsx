@@ -70,7 +70,7 @@ const DataTableColumnHeader = forwardRef<
       minWidth,
       maxWidth,
       onWidthChange,
-      UNSAFE_isSelection,
+      cellType,
       ...rest
     },
     forwardedRef,
@@ -101,7 +101,7 @@ const DataTableColumnHeader = forwardRef<
         data-sortable={sortable}
         style={{ ...style, width: resizeResult.width }}
         aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
-        UNSAFE_isSelection={UNSAFE_isSelection}
+        cellType={cellType}
       >
         {sortable ? (
           <button
@@ -122,14 +122,14 @@ const DataTableColumnHeader = forwardRef<
         ) : (
           <div
             className={cl({
-              "aksel-data-table__th-content": !UNSAFE_isSelection,
+              "aksel-data-table__th-content": cellType !== "action",
             })}
           >
             {children}
           </div>
         )}
 
-        {resizeResult.enabled && !UNSAFE_isSelection && (
+        {resizeResult.enabled && cellType !== "action" && (
           <button
             {...resizeResult.resizeHandlerProps}
             type="button"

@@ -11,9 +11,11 @@ interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellEle
    */
   textAlign?: "left" | "center" | "right";
   /**
-   * Temp hack to solve overflow and alignment
+   * Internal cell type that controls padding, alignment, row-click prevention, and resize behavior.
+   * - `"action"`: Centers content, removes cell padding, prevents row click, and disables column resize.
+   *    Used for selection (checkbox/radio) and expansion (expand/collapse) cells.
    */
-  UNSAFE_isSelection?: boolean;
+  cellType?: "action";
   /**
    * When true, clicking this cell will not trigger `onRowClick` on the row.
    * Useful for cells that contain their own interactive content or actions
@@ -32,11 +34,6 @@ interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellEle
   isSticky?: "start" | "end" | false;
 }
 
-/**
- * TODO:
- * - Need a "type" or something that centers content instead of relying on isSelection prop.
- * - Need a separate prop do disabled resizing instead of relying on isSelection prop.
- */
 const DataTableBaseCell = forwardRef<
   HTMLTableCellElement,
   DataTableBaseCellProps & {
@@ -52,7 +49,7 @@ const DataTableBaseCell = forwardRef<
       children,
       as: Component,
       textAlign = "left",
-      UNSAFE_isSelection,
+      cellType,
       preventRowClick,
       contentMaxWidth,
       isSticky,
@@ -71,9 +68,9 @@ const DataTableBaseCell = forwardRef<
         className={cl("aksel-data-table__cell", className)}
         tabIndex={withKeyboardNav ? -1 : undefined}
         data-align={textAlign}
-        data-selectable={UNSAFE_isSelection}
+        data-cell-type={cellType || undefined}
         data-prevent-row-click={
-          preventRowClick || UNSAFE_isSelection || undefined
+          preventRowClick || cellType === "action" || undefined
         }
         data-sticky={isSticky || undefined}
         colSpan={colSpan}

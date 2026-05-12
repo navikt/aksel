@@ -24,6 +24,7 @@ type TableSortOptions = {
    * - `sort` — the full updated sort array after cycling: unsorted → asc → desc → unsorted.
    * - `detail` — the specific column that changed, including its new direction (`"none"` means removed).
    */
+  /* TODO: Sort `onSortChange` may double-fire in controlled mode, check state */
   onSortChange?: (sort: SortEntry[], detail: SortChangeDetail) => void;
 };
 

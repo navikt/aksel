@@ -37,8 +37,7 @@ import {
 import { DataTableTr, type DataTableTrProps } from "../tr/DataTableTr";
 import { DataTableContextProvider } from "./DataTableRoot.context";
 
-interface DataTableProps
-  extends React.HTMLAttributes<HTMLTableElement>, SelectionProps {
+interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
   /**
    * Controls vertical cell padding.
@@ -63,12 +62,6 @@ interface DataTableProps
    */
   withKeyboardNav?: boolean;
   /**
-   * Custom callback to determine if navigation should be blocked.
-   * Called before default blocking logic.
-   * Requires `withKeyboardNav` to be `true`.
-   */
-  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
-  /**
    * Controls table layout.
    *
    * ### fixed
@@ -83,6 +76,7 @@ interface DataTableProps
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
+  selection?: SelectionProps;
 }
 
 interface DataTableRootComponent extends React.ForwardRefExoticComponent<
@@ -212,7 +206,6 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
       withKeyboardNav = false,
       zebraStripes = false,
       truncateContent = true,
-      shouldBlockNavigation,
       layout = "fixed",
       ...rest
     },
@@ -220,7 +213,6 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
   ) => {
     const { tabIndex, setTableRef } = useTableKeyboardNav({
       enabled: withKeyboardNav,
-      shouldBlockNavigation,
     });
 
     const mergedRef = useMergeRefs(forwardedRef, setTableRef);

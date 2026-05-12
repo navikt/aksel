@@ -15,7 +15,7 @@ type SelectionProps<T = any> = {
    *
    * @default "none"
    */
-  selectionMode?: "none" | "single" | "multiple";
+  selectionMode: "none" | "single" | "multiple";
   /**
    * Controlled selected keys. Should be used in conjunction with `onSelectionChange`.
    */

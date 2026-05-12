@@ -18,17 +18,9 @@ import { useGridCache } from "./useGridCache";
 
 type UseTableKeyboardNavOptions = {
   enabled: boolean;
-  /**
-   * Custom callback to determine if navigation should be blocked.
-   * Called before default blocking logic.
-   */
-  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
 };
 
-function useTableKeyboardNav({
-  enabled,
-  shouldBlockNavigation: customBlockFn,
-}: UseTableKeyboardNavOptions) {
+function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
   const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
   const { getTableGrid, activeCell, setActiveCell } = useGridCache(
     tableRef,
@@ -110,10 +102,6 @@ function useTableKeyboardNav({
    * Checks if navigation should be blocked based on current focus context.
    */
   const handleTableKeyDown = useEventCallback((event: KeyboardEvent): void => {
-    if (customBlockFn?.(event)) {
-      return;
-    }
-
     const action = getNavigationAction(event);
     if (!action) {
       return;

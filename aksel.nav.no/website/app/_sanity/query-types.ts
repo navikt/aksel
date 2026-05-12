@@ -231,6 +231,9 @@ export type Riktekst_blogg = Array<
     } & Language)
   | ({
       _key: string;
+    } & Description_list)
+  | ({
+      _key: string;
     } & Compare_images)
 >;
 
@@ -367,6 +370,9 @@ export type Riktekst_standalone = Array<
   | ({
       _key: string;
     } & Language)
+  | ({
+      _key: string;
+    } & Description_list)
 >;
 
 export type Riktekst_prinsipp = Array<
@@ -439,6 +445,9 @@ export type Riktekst_prinsipp = Array<
   | ({
       _key: string;
     } & Language)
+  | ({
+      _key: string;
+    } & Description_list)
 >;
 
 export type Riktekst_standard = Array<
@@ -511,6 +520,9 @@ export type Riktekst_standard = Array<
   | ({
       _key: string;
     } & Language)
+  | ({
+      _key: string;
+    } & Description_list)
 >;
 
 export type Riktekst_templates = Array<
@@ -583,6 +595,9 @@ export type Riktekst_templates = Array<
   | ({
       _key: string;
     } & Language)
+  | ({
+      _key: string;
+    } & Description_list)
   | ({
       _key: string;
     } & Kode_eksempler)
@@ -658,6 +673,9 @@ export type Riktekst_grunnleggende = Array<
   | ({
       _key: string;
     } & Language)
+  | ({
+      _key: string;
+    } & Description_list)
   | ({
       _key: string;
     } & Attachment)
@@ -772,6 +790,9 @@ export type Riktekst_komponent = Array<
     } & Language)
   | ({
       _key: string;
+    } & Description_list)
+  | ({
+      _key: string;
     } & Props_seksjon)
   | ({
       _key: string;
@@ -780,6 +801,16 @@ export type Riktekst_komponent = Array<
       _key: string;
     } & Token_ref)
 >;
+
+export type Description_list = {
+  _type: "description_list";
+  items?: Array<{
+    label?: string;
+    value?: string;
+    _type: "item";
+    _key: string;
+  }>;
+};
 
 export type Compare_images = {
   _type: "compare_images";
@@ -1880,6 +1911,7 @@ export type AllSanitySchemaTypes =
   | Riktekst_grunnleggende
   | Riktekst_enkel
   | Riktekst_komponent
+  | Description_list
   | Compare_images
   | Language
   | SanityFileAssetReference
@@ -2191,6 +2223,17 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -2437,6 +2480,17 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
         caption?: string;
         border?: boolean;
         background?: Color;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
         markDefs: null;
       }
     | {
@@ -3210,6 +3264,17 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -3433,6 +3498,17 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -4241,6 +4317,17 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -4509,6 +4596,17 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -5055,6 +5153,17 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -5278,6 +5387,17 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -5852,6 +5972,17 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -6120,6 +6251,17 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -6659,6 +6801,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "description_list";
+                  items?: Array<{
+                    label?: string;
+                    value?: string;
+                    _type: "item";
+                    _key: string;
+                  }>;
+                  markDefs: null;
+                }
+              | {
+                  _key: string;
                   _type: "do_dont";
                   blokker?: Array<
                     {
@@ -6927,6 +7080,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           level?: number;
           _type: "block";
           _key: string;
+        }
+      | {
+          _key: string;
+          _type: "description_list";
+          items?: Array<{
+            label?: string;
+            value?: string;
+            _type: "item";
+            _key: string;
+          }>;
+          markDefs: null;
         }
       | {
           _key: string;
@@ -7461,6 +7625,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "description_list";
+                  items?: Array<{
+                    label?: string;
+                    value?: string;
+                    _type: "item";
+                    _key: string;
+                  }>;
+                  markDefs: null;
+                }
+              | {
+                  _key: string;
                   _type: "do_dont";
                   blokker?: Array<
                     {
@@ -7729,6 +7904,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           level?: number;
           _type: "block";
           _key: string;
+        }
+      | {
+          _key: string;
+          _type: "description_list";
+          items?: Array<{
+            label?: string;
+            value?: string;
+            _type: "item";
+            _key: string;
+          }>;
+          markDefs: null;
         }
       | {
           _key: string;
@@ -8263,6 +8449,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "description_list";
+                  items?: Array<{
+                    label?: string;
+                    value?: string;
+                    _type: "item";
+                    _key: string;
+                  }>;
+                  markDefs: null;
+                }
+              | {
+                  _key: string;
                   _type: "do_dont";
                   blokker?: Array<
                     {
@@ -8531,6 +8728,17 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           level?: number;
           _type: "block";
           _key: string;
+        }
+      | {
+          _key: string;
+          _type: "description_list";
+          items?: Array<{
+            label?: string;
+            value?: string;
+            _type: "item";
+            _key: string;
+          }>;
+          markDefs: null;
         }
       | {
           _key: string;
@@ -9244,6 +9452,17 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -9467,6 +9686,17 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -10346,6 +10576,17 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -10569,6 +10810,17 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -11068,6 +11320,17 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -11291,6 +11554,17 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -11854,6 +12128,17 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -12077,6 +12362,17 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -12669,6 +12965,17 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -12937,6 +13244,17 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -13483,6 +13801,17 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -13706,6 +14035,17 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -14263,6 +14603,17 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -14486,6 +14837,17 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -15078,6 +15440,17 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -15346,6 +15719,17 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;
@@ -15892,6 +16276,17 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               }
             | {
                 _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
                 _type: "do_dont";
                 blokker?: Array<
                   {
@@ -16115,6 +16510,17 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         level?: number;
         _type: "block";
         _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
       }
     | {
         _key: string;

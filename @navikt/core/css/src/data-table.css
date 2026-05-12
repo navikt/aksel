@@ -296,7 +296,7 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
     & > div {
@@ -307,7 +307,7 @@
 
   --__axc-data-table-pi-cell: var(--ax-space-16);
 
-  &:not([data-selectable="true"]) > div {
+  &:not([data-cell-type="action"]) > div {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
     overflow: hidden;
@@ -468,11 +468,11 @@
       transform: translateY(-50%);
       height: 1.5rem;
 
-      &.aksel-data-table__th-resize-handle-indicator--start {
+      &:first-child {
         right: 12px;
       }
 
-      &.aksel-data-table__th-resize-handle-indicator--end {
+      &:last-child {
         left: 12px;
       }
     }
@@ -520,7 +520,7 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
     & > div {

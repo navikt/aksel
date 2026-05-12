@@ -775,7 +775,7 @@ function usePaginatedData<T extends any[]>(data: T) {
         return (
           <DataTableLegacy.Tr key={row.id} selected={row.getIsSelected()}>
             {hasRowSelection && (
-              <DataTableLegacy.Td textAlign="center" UNSAFE_isSelection>
+              <DataTableLegacy.Td textAlign="center" cellType="action">
                 {multiRowSelection ? (
                   <CheckboxInput
                     compact
