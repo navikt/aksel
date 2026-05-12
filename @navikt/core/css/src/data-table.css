@@ -468,11 +468,11 @@
       transform: translateY(-50%);
       height: 1.5rem;
 
-      &.aksel-data-table__th-resize-handle-indicator--start {
+      &:first-child {
         right: 12px;
       }
 
-      &.aksel-data-table__th-resize-handle-indicator--end {
+      &:last-child {
         left: 12px;
       }
     }
