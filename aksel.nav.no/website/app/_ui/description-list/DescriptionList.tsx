@@ -1,9 +1,10 @@
 import React from "react";
 import { BodyLong, HGrid } from "@navikt/ds-react";
 import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import "./DescriptionList.css";
 
-interface DescriptionListProps extends React.HTMLAttributes<HTMLDivElement> {
+//import "./DescriptionList.css"; // Needed for divider
+
+interface DescriptionListProps extends React.HTMLAttributes<HTMLElement> {
   items: {
     label: React.ReactNode;
     value: React.ReactNode;

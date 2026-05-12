@@ -4,6 +4,7 @@ import { AccordionMarkdown } from "@/app/api/markdown/blocks/Accordion.md";
 import { AlertMarkdown } from "@/app/api/markdown/blocks/Alert.md";
 import { AttachmentMarkdown } from "@/app/api/markdown/blocks/Attachment.md";
 import { BildeMarkdown } from "@/app/api/markdown/blocks/Bilde.md";
+import { DescriptionListMarkdown } from "@/app/api/markdown/blocks/DescriptionList.md";
 import { DoDontMarkdown } from "@/app/api/markdown/blocks/DoDont.md";
 import { ExampleTextMarkdown } from "@/app/api/markdown/blocks/ExampleText.md";
 import { ExpansionCardMarkdown } from "@/app/api/markdown/blocks/ExpansionCard.md";
@@ -16,7 +17,6 @@ import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
 import { DYNAMIC_ROUTE_PREFIXES } from "@/app/api/markdown/route.config";
-import { DescriptionListMarkdown } from "../blocks/DescriptionList.md";
 
 const AKSEL_BASE_URL = "https://aksel.nav.no";
 
