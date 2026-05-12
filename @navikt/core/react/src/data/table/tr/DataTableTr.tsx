@@ -146,7 +146,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
       return (
         <DataTableColumnHeader
           width={SELECTION_CELL_WIDTH}
-          UNSAFE_isSelection
+          cellType="action"
           data-block-keyboard-nav
           label=""
           /* isSticky={stickySelection && "start"} */
@@ -164,7 +164,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
     return (
       <DataTableColumnHeader
         width={SELECTION_CELL_WIDTH}
-        UNSAFE_isSelection
+        cellType="action"
         data-block-keyboard-nav
         label=""
         /* isSticky={stickySelection && "start"} */
@@ -177,7 +177,7 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
       <DataTableColumnHeader
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
-        UNSAFE_isSelection
+        cellType="action"
         label=""
         /* isSticky={stickySelection && "start"} */
       >
@@ -209,11 +209,11 @@ function RowExpansionCell({ rowId }: { rowId?: string | number }) {
   const expansionId = getDataTableDetailsPanelId(tableId, rowId);
 
   if (!canExpandRow) {
-    return <DataTableTd UNSAFE_isSelection preventRowClick />;
+    return <DataTableTd cellType="action" preventRowClick />;
   }
 
   return (
-    <DataTableTd UNSAFE_isSelection preventRowClick>
+    <DataTableTd cellType="action" preventRowClick>
       <Button
         variant="tertiary"
         data-color="neutral"
@@ -255,7 +255,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
       return (
         <DataTableColumnHeader
           width={SELECTION_CELL_WIDTH}
-          UNSAFE_isSelection
+          cellType="action"
           label=""
           data-block-keyboard-nav
           isSticky={stickySelection && "start"}
@@ -283,7 +283,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
       <DataTableColumnHeader
         textAlign="center"
         width={SELECTION_CELL_WIDTH}
-        UNSAFE_isSelection
+        cellType="action"
         label=""
         isSticky={stickySelection && "start"}
       >
@@ -299,7 +299,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
     return (
       <DataTableColumnHeader
         width={SELECTION_CELL_WIDTH}
-        UNSAFE_isSelection
+        cellType="action"
         label=""
         data-block-keyboard-nav
         isSticky={stickySelection && "start"}
@@ -313,7 +313,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selection.selectionMode === "multiple" && location === "tbody") {
     return (
-      <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
+      <DataTableTd cellType="action" isSticky={stickySelection && "start"}>
         <CheckboxInput
           {...selection.getRowCheckboxProps(
             rowId,
@@ -327,7 +327,7 @@ function RowSelectionCell({ rowId }: { rowId?: string | number }) {
 
   if (selection.selectionMode === "single" && location === "tbody") {
     return (
-      <DataTableTd UNSAFE_isSelection isSticky={stickySelection && "start"}>
+      <DataTableTd cellType="action" isSticky={stickySelection && "start"}>
         <RadioInput
           {...selection.getRowRadioProps(
             rowId,

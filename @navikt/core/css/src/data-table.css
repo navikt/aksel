@@ -296,7 +296,7 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
     & > div {
@@ -307,7 +307,7 @@
 
   --__axc-data-table-pi-cell: var(--ax-space-16);
 
-  &:not([data-selectable="true"]) > div {
+  &:not([data-cell-type="action"]) > div {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
     overflow: hidden;
@@ -520,7 +520,7 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
     & > div {
