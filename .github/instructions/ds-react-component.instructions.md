@@ -1,13 +1,13 @@
-description: "Use for ds-react components and component CSS."
+---
+description: "ds-react components and component CSS."
 applyTo: "@navikt/core/react/src/**", "@navikt/core/css/src/**"
-
 ---
 
-# ds-react and component instructions
+# ds-react component instructions
 
 - Read the full component folder before editing.
-- Preserve the surrounding `forwardRef`, `className`, `...rest`, and `as`/`OverridableComponent` patterns.
+- Preserve `forwardRef`, `className`, `...rest`, `as`/`OverridableComponent` patterns.
 - Keep `@navikt/*` code React 17 API compatible.
-- Use tokens, not hardcoded component values.
-- If behavior or visuals change, update the nearest story and test.
-- If a public component changes, keep component exports, package exports, and root exports in sync.
+- Use tokens, not hardcoded values.
+- Behavior/visual change: update nearest story and test.
+- Public component change: keep component, package, and root exports in sync.
