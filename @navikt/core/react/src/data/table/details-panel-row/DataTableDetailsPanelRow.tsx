@@ -12,7 +12,7 @@ function DataTableDetailsPanelRow<T>({
   rowId: string;
   rowData: T;
 }) {
-  const { tableId, fullWidthColSpan } = useDataTableContext();
+  const { tableId, totalColSpan } = useDataTableContext();
   const {
     enableDetailsPanel,
     isExpanded,
@@ -45,7 +45,7 @@ function DataTableDetailsPanelRow<T>({
     <tr className="aksel-data-table__details-panel-row">
       <td
         id={expansionId}
-        colSpan={fullWidthColSpan}
+        colSpan={totalColSpan}
         className="aksel-data-table__details-panel-row-cell"
       >
         <div style={style}>{content}</div>

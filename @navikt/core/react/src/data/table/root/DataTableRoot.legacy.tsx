@@ -233,7 +233,7 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         loading={undefined}
         onRowClick={undefined}
         columns={[]}
-        fullWidthColSpan={9999}
+        totalColSpan={9999}
         tableItems={{
           childRowIdsById: new Map(),
           visibleRowIds: [],

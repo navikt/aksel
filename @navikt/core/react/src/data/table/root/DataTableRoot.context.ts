@@ -28,7 +28,7 @@ type DataTableContextProps<T> = {
    * Used to set exact colspan for detailsPanel, loadingState and emptyState.
    * This is necessary to ensure that these components span the entire width of the table.
    */
-  fullWidthColSpan: number;
+  totalColSpan: number;
   /**
    * The current items and related metadata.
    */

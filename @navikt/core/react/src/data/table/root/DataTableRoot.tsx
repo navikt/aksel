@@ -3,7 +3,6 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -211,25 +210,15 @@ function DataTableInner<T>(
     tableItems,
   });
 
-  const { columns, stickyStart } = useColumnOptions(columnDefinitions, {
-    stickyColumns,
-    hasSelection: tableSelectionState.selection.selectionMode !== "none",
-    hasDetailsPanel: !!detailsPanel?.getContent,
-  });
-
-  const fullWidthColSpan = useMemo(() => {
-    return (
-      columns.length +
-      (layout === "fixed" ? 1 : 0) +
-      (tableSelectionState.selection.selectionMode !== "none" ? 1 : 0) +
-      (detailsPanel?.getContent ? 1 : 0)
-    );
-  }, [
-    columns,
-    layout,
-    tableSelectionState.selection.selectionMode,
-    detailsPanel,
-  ]);
+  const { columns, stickyStart, totalColSpan } = useColumnOptions(
+    columnDefinitions,
+    {
+      stickyColumns,
+      hasSelection: tableSelectionState.selection.selectionMode !== "none",
+      hasDetailsPanel: !!detailsPanel?.getContent,
+      layout,
+    },
+  );
 
   const tableId = useId(id);
 
@@ -246,7 +235,7 @@ function DataTableInner<T>(
       loading={loading}
       onRowClick={onRowClick}
       columns={columns}
-      fullWidthColSpan={fullWidthColSpan}
+      totalColSpan={totalColSpan}
       tableItems={tableItems}
       sortingState={sortingState}
     >
@@ -407,12 +396,11 @@ interface DataTableTBodyContentProps {
 }
 
 function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
-  const { columns, loading, fullWidthColSpan, tableItems } =
-    useDataTableContext();
+  const { columns, loading, totalColSpan, tableItems } = useDataTableContext();
 
   if (loading?.isLoading && loading?.variant === "content") {
     return (
-      <DataTableLoadingState colSpan={fullWidthColSpan}>
+      <DataTableLoadingState colSpan={totalColSpan}>
         {loading.content}
       </DataTableLoadingState>
     );
@@ -424,7 +412,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
     return (
       <>
         <tr>
-          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
+          <td colSpan={totalColSpan} className="aksel-sr-only">
             {label}
           </td>
         </tr>
@@ -457,7 +445,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   if (tableItems.items.length === 0 && emptyContent !== undefined) {
     return (
-      <DataTableEmptyState colSpan={fullWidthColSpan}>
+      <DataTableEmptyState colSpan={totalColSpan}>
         {emptyContent}
       </DataTableEmptyState>
     );
@@ -475,7 +463,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
     <>
       {renderLoadingAnnouncement && (
         <tr>
-          <td colSpan={fullWidthColSpan} className="aksel-sr-only">
+          <td colSpan={totalColSpan} className="aksel-sr-only">
             {overlayLabel}
           </td>
         </tr>

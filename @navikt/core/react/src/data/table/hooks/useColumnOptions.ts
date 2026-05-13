@@ -12,6 +12,7 @@ type UseColumnOptions = {
   };
   hasSelection: boolean;
   hasDetailsPanel: boolean;
+  layout: "fixed" | "auto";
 };
 
 type StickyStartState = {
@@ -29,13 +30,14 @@ type UseColumnOptionsResult<T> = {
     colDef: ColumnDefinition<T>;
   }[];
   stickyStart: StickyStartState;
+  totalColSpan: number;
 };
 
 function useColumnOptions<T>(
   columnDefinitions: ColumnDefinitions<T>,
   options: UseColumnOptions,
 ): UseColumnOptionsResult<T> {
-  const { stickyColumns, hasSelection, hasDetailsPanel } = options;
+  const { stickyColumns, hasSelection, hasDetailsPanel, layout } = options;
 
   const hasStickyStart = stickyColumns?.start === "1";
 
@@ -71,6 +73,12 @@ function useColumnOptions<T>(
     stickyFirstColumnOffset,
   ]);
 
+  const totalColSpan =
+    columns.length +
+    (layout === "fixed" ? 1 : 0) +
+    (hasSelection ? 1 : 0) +
+    (hasDetailsPanel ? 1 : 0);
+
   return {
     stickyStart: {
       selection: stickySelection,
@@ -79,6 +87,7 @@ function useColumnOptions<T>(
       firstColumnOffset: stickyFirstColumnOffset,
     },
     columns,
+    totalColSpan,
   };
 }
 
