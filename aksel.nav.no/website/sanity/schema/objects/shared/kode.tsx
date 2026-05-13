@@ -5,7 +5,6 @@ const codeField = defineField({
   name: "code",
   title: "Kode",
   type: "code",
-  hidden: ({ parent }) => parent?.variant,
   validation: (Rule) => Rule.required(),
   initialValue: {
     language: "tsx",
