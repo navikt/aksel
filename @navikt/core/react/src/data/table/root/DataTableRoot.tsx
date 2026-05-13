@@ -59,11 +59,9 @@ import {
 
 /**
  * TODO:
- * - Pri zero: Move sorting-state into column definitions.
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
  */
-interface DataTableProps<T>
-  extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {
+interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
   /**
    * Controls vertical cell padding.
@@ -176,6 +174,7 @@ interface DataTableProps<T>
   selection?: SelectionProps<T>;
   subRows?: SubRowsProps<T>;
   detailsPanel?: DetailsPanelProps<T>;
+  sorting?: TableSortOptions;
 }
 
 function DataTableInner<T>(
@@ -193,24 +192,18 @@ function DataTableInner<T>(
     getRowId,
     stickyColumns,
     stickyHeader = true,
-    sort: sortProp,
-    defaultSort = [],
-    onSortChange,
     onRowClick,
     emptyContent,
     selection,
     loading,
     detailsPanel,
     subRows,
+    sorting,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const { sortState, onSortClick } = useTableSort({
-    defaultSort,
-    onSortChange,
-    sort: sortProp,
-  });
+  const { sortState, onSortClick } = useTableSort(sorting);
 
   const tableItems = useTableItems({
     items: data,

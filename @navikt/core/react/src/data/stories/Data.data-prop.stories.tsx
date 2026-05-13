@@ -701,10 +701,12 @@ export const SortableColumns: Story = {
         columnDefinitions={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id.toString()}
-        sort={sort}
-        onSortChange={(next, detail) => {
-          console.info("changed column:", detail);
-          setSort(next);
+        sorting={{
+          sort,
+          onSortChange: (next, detail) => {
+            console.info("changed column:", detail);
+            setSort(next);
+          },
         }}
       />
     );
@@ -724,10 +726,12 @@ export const SortableColumnsUncontrolled: Story = {
           columnDefinitions={sortableColumnDef}
           data={sortableUserData}
           getRowId={(row) => row.id.toString()}
-          defaultSort={[{ columnId: "name", direction: "asc" }]}
-          onSortChange={(_sort, detail) =>
-            setLoggedDetail(JSON.stringify(detail, null, 2))
-          }
+          sorting={{
+            defaultSort: [{ columnId: "name", direction: "asc" }],
+            onSortChange: (_, detail) => {
+              setLoggedDetail(JSON.stringify(detail, null, 2));
+            },
+          }}
         />
       </div>
     );
