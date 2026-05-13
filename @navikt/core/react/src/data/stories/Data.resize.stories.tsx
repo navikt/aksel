@@ -206,10 +206,10 @@ export const ResizeAutoWidth: Story = {
     const canvas = within(canvasElement);
     const headers = canvas.getAllByRole("columnheader");
     expect(headers.length).toBe(5);
-    expect(headers[0].getBoundingClientRect().width).toBe(74);
-    expect(headers[1].getBoundingClientRect().width).toBe(76);
-    expect(headers[2].getBoundingClientRect().width).toBe(95);
-    expect(headers[3].getBoundingClientRect().width).toBe(153);
-    expect(headers[4].getBoundingClientRect().width).toBe(224);
+    expect(headers[0].getBoundingClientRect().width).toBe(80);
+    expect(headers[1].getBoundingClientRect().width).toBe(82);
+    expect(headers[2].getBoundingClientRect().width).toBe(102);
+    expect(headers[3].getBoundingClientRect().width).toBe(168);
+    expect(headers[4].getBoundingClientRect().width).toBe(248);
   },
 };
