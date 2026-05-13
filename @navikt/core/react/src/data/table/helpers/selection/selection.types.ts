@@ -30,20 +30,19 @@ type SelectionProps<T = any> = {
    */
   onSelectionChange?: (keys: SelectedKeysT) => void;
   /**
-   * Callback to determine if a row should be disabled for selection.
+   * Callback to determine if a row should be enabled for selection.
    *
    *
-   * If set to a boolean, it will disable selection for all rows when true, and enable selection for all rows when false.
+   * If set to a boolean, it will enable selection for all rows when true, and disable selection for all rows when false.
    */
-  disableRowSelection?:
+  enableRowSelection?:
     | (({ row, id }: { row: T; id: TableRowEntryId }) => boolean)
     | boolean;
   /**
-   * If true, stops clicking a row from toggling its selection state. This can be used if you want to only allow selection through the checkboxes/radios, and not have the entire row be clickable for selection.
-   *
-   * @default false
+   * Determines if selection is triggered by clicking the row or the selection control (checkbox/radio).
+   * @default "row"
    */
-  disableRowSelectionOnClick?: boolean;
+  selectionTrigger?: "row" | "control";
 };
 
 type NoneSelection = {

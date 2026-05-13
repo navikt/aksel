@@ -136,7 +136,7 @@ describe("mutateRowSelection", () => {
       checked: true,
       childRowIdsById,
       itemDetails,
-      disableRowSelection: ({ row }) => row.disabled,
+      enableRowSelection: ({ row }) => !row.disabled,
     });
     expect(set.has("parent")).toBe(true);
     expect(set.has("child1")).toBe(false);
@@ -153,7 +153,7 @@ describe("mutateRowSelection", () => {
       checked: true,
       childRowIdsById: new Map(),
       itemDetails,
-      disableRowSelection: true,
+      enableRowSelection: false,
     });
     expect(set.size).toBe(0);
     expect(changed).toBe(false);

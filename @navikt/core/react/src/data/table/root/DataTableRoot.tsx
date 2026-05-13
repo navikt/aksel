@@ -59,12 +59,9 @@ import {
 
 /**
  * TODO:
- * - Pri zero: Move sorting-state into column definitions.
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
- * - Pri zero: Consider prop that is true by default: "disabledNestedRowSelection" to disable selection of child-rows when parent row is selected. Or just considre this to be the default state and avoid extra prop.
  */
-interface DataTableProps<T>
-  extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {
+interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
   /**
    * Controls vertical cell padding.
@@ -79,10 +76,11 @@ interface DataTableProps<T>
   /**
    * Truncate content in cells and show ellipsis for overflowed text.
    *
-   * **NB:** When using `layout="auto"`, you have to manually set a `maxWidth` on columns that should be truncated.
-   * @default true
+   * **NB:** When using this together with `layout="auto"`,
+   * you have to manually set a `maxWidth` on columns that should be truncated.
+   * @default false if layout="auto", else true
    */
-  truncateContent?: boolean; // TODO: Consider making this default false when layout=auto, and maybe disallow it but add a wrap prop on the td-comp.
+  truncateContent?: boolean;
   /**
    * Enables keyboard navigation for table rows and cells.
    * @default true
@@ -176,6 +174,7 @@ interface DataTableProps<T>
   selection?: SelectionProps<T>;
   subRows?: SubRowsProps<T>;
   detailsPanel?: DetailsPanelProps<T>;
+  sorting?: TableSortOptions;
 }
 
 function DataTableInner<T>(
@@ -186,31 +185,25 @@ function DataTableInner<T>(
     textSize = "medium",
     withKeyboardNav = true,
     zebraStripes = false,
-    truncateContent = true,
+    truncateContent: truncateContentProp,
     layout = "fixed",
     data,
     columnDefinitions,
     getRowId,
     stickyColumns,
     stickyHeader = true,
-    sort: sortProp,
-    defaultSort = [],
-    onSortChange,
     onRowClick,
     emptyContent,
     selection,
     loading,
     detailsPanel,
     subRows,
+    sorting,
     ...rest
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const { sortState, onSortClick } = useTableSort({
-    defaultSort,
-    onSortChange,
-    sort: sortProp,
-  });
+  const { sortState, onSortClick } = useTableSort(sorting);
 
   const tableItems = useTableItems({
     items: data,
@@ -244,6 +237,8 @@ function DataTableInner<T>(
   ]);
 
   const tableId = useId(id);
+
+  const truncateContent = truncateContentProp ?? layout !== "auto";
 
   return (
     <DataTableContextProvider

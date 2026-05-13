@@ -27,7 +27,7 @@ interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellEle
    * This is only needed when using `layout="auto"` together with
    * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
    */
-  contentMaxWidth?: number | `${number}${string}`; // TODO: Consider just `number | string` so that we can support CSS functions like var(), calc()
+  contentMaxWidth?: number | string;
   /**
    * Makes the cell sticky.
    */

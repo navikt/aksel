@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import { DataTable } from "../table";
+import { DataTable, type DataTableProps } from "../table";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Resize",
@@ -13,7 +13,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<DataTableProps<Row>>;
 
 type Row = {
   left: string;
@@ -47,19 +47,19 @@ export const Resize: Story = {
         id: "left",
         label: "Left",
         align: "left",
-        cell: (row) => (row as Row).left,
+        cell: (row) => row.left,
       },
       {
         id: "center",
         label: "Center",
         align: "center",
-        cell: (row) => (row as Row).center,
+        cell: (row) => row.center,
       },
       {
         id: "right",
         label: "Right",
         align: "right",
-        cell: (row) => (row as Row).right,
+        cell: (row) => row.right,
       },
     ],
   },
@@ -76,7 +76,7 @@ export const ResizeMinMax: Story = {
         minWidth: 100,
         maxWidth: 200,
         defaultWidth: 250,
-        cell: (row) => (row as Row).left,
+        cell: (row) => row.left,
       },
       {
         id: "center",
@@ -84,7 +84,7 @@ export const ResizeMinMax: Story = {
         align: "center",
         minWidth: 50,
         maxWidth: 400,
-        cell: (row) => (row as Row).center,
+        cell: (row) => row.center,
       },
       {
         id: "right",
@@ -93,7 +93,7 @@ export const ResizeMinMax: Story = {
         minWidth: 200,
         maxWidth: 400,
         defaultWidth: 150,
-        cell: (row) => (row as Row).right,
+        cell: (row) => row.right,
       },
     ],
   },
@@ -108,21 +108,21 @@ export const ResizeDefaultStaticWidth: Story = {
         label: "Left",
         align: "left",
         defaultWidth: "300px",
-        cell: (row) => (row as Row).left,
+        cell: (row) => row.left,
       },
       {
         id: "center",
         label: "Center",
         align: "center",
         defaultWidth: "300px",
-        cell: (row) => (row as Row).center,
+        cell: (row) => row.center,
       },
       {
         id: "right",
         label: "Right",
         align: "right",
         defaultWidth: "300px",
-        cell: (row) => (row as Row).right,
+        cell: (row) => row.right,
       },
     ],
   },
@@ -137,21 +137,21 @@ export const ResizeDefaultDynamicWidth: Story = {
         label: "Left",
         align: "left",
         defaultWidth: "100%",
-        cell: (row) => (row as Row).left,
+        cell: (row) => row.left,
       },
       {
         id: "center",
         label: "Center",
         align: "center",
         defaultWidth: "100%",
-        cell: (row) => (row as Row).center,
+        cell: (row) => row.center,
       },
       {
         id: "right",
         label: "Right",
         align: "right",
         defaultWidth: "100%",
-        cell: (row) => (row as Row).right,
+        cell: (row) => row.right,
       },
     ],
   },
@@ -167,7 +167,7 @@ export const ResizeAutoWidth: Story = {
         align: "left",
         defaultWidth: 200,
         autoWidth: true,
-        cell: (row) => (row as Row).left,
+        cell: (row) => row.left,
       },
       {
         id: "center",
@@ -175,7 +175,7 @@ export const ResizeAutoWidth: Story = {
         align: "center",
         defaultWidth: 200,
         autoWidth: true,
-        cell: (row) => (row as Row).center,
+        cell: (row) => row.center,
       },
       {
         id: "right",
@@ -183,7 +183,7 @@ export const ResizeAutoWidth: Story = {
         align: "right",
         defaultWidth: 200,
         autoWidth: true,
-        cell: (row) => (row as Row).right,
+        cell: (row) => row.right,
       },
       {
         id: "headingIsWidest",

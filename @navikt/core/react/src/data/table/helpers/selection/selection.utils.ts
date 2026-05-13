@@ -3,13 +3,13 @@ import type { ItemDetail } from "../collectTableRowEntries";
 import type { SelectionProps } from "./selection.types";
 
 function canSelectTableRow<T>(
-  disableRowSelection: SelectionProps<T>["disableRowSelection"],
+  enableRowSelection: SelectionProps<T>["enableRowSelection"],
   args: { row: T; id: TableRowEntryId },
 ): boolean {
-  if (typeof disableRowSelection === "function") {
-    return !disableRowSelection(args);
+  if (typeof enableRowSelection === "function") {
+    return enableRowSelection(args);
   }
-  return disableRowSelection === false || disableRowSelection === undefined;
+  return enableRowSelection ?? true;
 }
 
 type MutateRowSelectionArgs<T> = {
@@ -18,7 +18,7 @@ type MutateRowSelectionArgs<T> = {
   checked: boolean;
   childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
   itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
-  disableRowSelection?: SelectionProps<T>["disableRowSelection"];
+  enableRowSelection?: SelectionProps<T>["enableRowSelection"];
 };
 
 /**
@@ -31,14 +31,14 @@ function mutateRowSelection<T>({
   checked,
   childRowIdsById,
   itemDetails,
-  disableRowSelection,
+  enableRowSelection,
 }: MutateRowSelectionArgs<T>): boolean {
   let changed = false;
   const item = itemDetails.get(rowId);
 
   if (
     item &&
-    canSelectTableRow(disableRowSelection, { row: item.rowData, id: rowId })
+    canSelectTableRow(enableRowSelection, { row: item.rowData, id: rowId })
   ) {
     if (checked && !selectedRowIds.has(rowId)) {
       selectedRowIds.add(rowId);
@@ -59,7 +59,7 @@ function mutateRowSelection<T>({
           checked,
           childRowIdsById,
           itemDetails,
-          disableRowSelection,
+          enableRowSelection,
         })
       ) {
         changed = true;
