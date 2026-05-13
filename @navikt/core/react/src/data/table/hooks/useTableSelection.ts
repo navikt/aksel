@@ -19,7 +19,7 @@ type UseTableSelectionArgs<T> = {
 type UseTableSelectionReturn = {
   selection: TableSelection;
   renderSelection: boolean;
-  disableRowSelectionOnClick: boolean;
+  selectionTrigger: "row" | "control";
 };
 
 function useTableSelection<T>({
@@ -33,8 +33,8 @@ function useTableSelection<T>({
     defaultSelectedKeys,
     selectedKeys: selectedKeysProp,
     onSelectionChange,
-    disableRowSelection,
-    disableRowSelectionOnClick = false,
+    enableRowSelection,
+    selectionTrigger = "row",
   } = selection;
 
   const { visibleRowIds = [] } = tableItems;
@@ -63,7 +63,7 @@ function useTableSelection<T>({
         ...baseSelection,
         selectedKeys: [],
       },
-      disableRowSelectionOnClick,
+      selectionTrigger,
       renderSelection: false,
     };
   }
@@ -77,10 +77,10 @@ function useTableSelection<T>({
           selectedKeysSet,
           setSelectedKeys,
           name: radioGroupName,
-          disableRowSelection,
+          enableRowSelection,
         }),
       },
-      disableRowSelectionOnClick,
+      selectionTrigger,
       renderSelection: visibleRowIds.length !== 0,
     };
   }
@@ -93,11 +93,11 @@ function useTableSelection<T>({
         selectedKeysSet,
         selectedKeys,
         setSelectedKeys,
-        disableRowSelection,
+        enableRowSelection,
         tableItems,
       }),
     },
-    disableRowSelectionOnClick,
+    selectionTrigger,
     renderSelection: visibleRowIds.length !== 0,
   };
 }
@@ -111,7 +111,7 @@ const noSelectionState: UseTableSelectionReturn = {
     selectedKeys: [],
     isRowSelected: () => false,
   },
-  disableRowSelectionOnClick: false,
+  selectionTrigger: "row",
   renderSelection: false,
 };
 

@@ -61,7 +61,6 @@ import {
  * TODO:
  * - Pri zero: Move sorting-state into column definitions.
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
- * - Pri zero: Consider prop that is true by default: "disabledNestedRowSelection" to disable selection of child-rows when parent row is selected. Or just considre this to be the default state and avoid extra prop.
  */
 interface DataTableProps<T>
   extends React.HTMLAttributes<HTMLTableElement>, TableSortOptions {

@@ -150,6 +150,24 @@ export const SelectionModeMultiple: Story = {
   },
 };
 
+export const SelectionModeOnControlsOnly: Story = {
+  render: () => {
+    return (
+      <DataTable
+        columnDefinitions={userColumnDef}
+        data={userData}
+        selection={{
+          selectionMode: "multiple",
+          onSelectionChange: console.info,
+          selectionTrigger: "control",
+        }}
+        getRowId={(row) => row.foo + row.bar}
+        withKeyboardNav
+      />
+    );
+  },
+};
+
 export const SelectionModeSingle: Story = {
   render: () => {
     return (
@@ -193,7 +211,7 @@ export const SelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disableRowSelection: ({ id }) => id === "2" || id === "1",
+          enableRowSelection: ({ id }) => id !== "2" && id !== "1",
         }}
         getRowId={(row) => row.id.toString()}
         withKeyboardNav
@@ -257,7 +275,7 @@ export const SingleSelectionWithDisabledRows: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          disableRowSelection: ({ id }) => id === "2",
+          enableRowSelection: ({ id }) => id !== "2",
         }}
         getRowId={(row) => row.id.toString()}
       />

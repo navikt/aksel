@@ -82,14 +82,14 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
             }
 
             if (
-              !selectionState.disableRowSelectionOnClick &&
+              selectionState.selectionTrigger === "row" &&
               selectionState.selection.selectionMode !== "none"
             ) {
               const rowData = itemDetails.get(rowId)?.rowData;
 
               if (!rowData) {
                 consoleWarning(
-                  `No row data found for rowId ${rowId}. This may cause issues with selection if disableRowSelection is used.`,
+                  `No row data found for rowId ${rowId}. This may cause issues with selection if enableRowSelection is used.`,
                 );
               }
               selectionState.selection.toggleSelection(rowId, rowData);

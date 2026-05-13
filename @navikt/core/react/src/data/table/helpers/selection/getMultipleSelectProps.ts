@@ -11,19 +11,19 @@ type GetMultipleSelectPropsArgs<T> = {
   selectedKeys: SelectedKeysT;
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   tableItems: UseTableItemsReturn<T>;
-} & Pick<SelectionProps<T>, "disableRowSelection">;
+} & Pick<SelectionProps<T>, "enableRowSelection">;
 
 function getMultipleSelectProps<T>({
   selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disableRowSelection,
+  enableRowSelection,
   tableItems,
 }: GetMultipleSelectPropsArgs<T>) {
   const selectableIdsSet: Set<TableRowEntryId> = new Set();
 
   for (const [id, { rowData }] of tableItems.itemDetails) {
-    if (canSelectTableRow(disableRowSelection, { row: rowData, id })) {
+    if (canSelectTableRow(enableRowSelection, { row: rowData, id })) {
       selectableIdsSet.add(id);
     }
   }
@@ -40,7 +40,7 @@ function getMultipleSelectProps<T>({
   const handleToggleRow = (key: TableRowEntryId, row: T) => {
     if (!row) {
       consoleWarning(
-        `Row data is undefined for key ${key}. This may cause issues with selection if disableRowSelection is used.`,
+        `Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
       );
     }
 
@@ -52,7 +52,7 @@ function getMultipleSelectProps<T>({
       checked,
       childRowIdsById: tableItems.childRowIdsById,
       itemDetails: tableItems.itemDetails,
-      disableRowSelection,
+      enableRowSelection,
     });
     if (changed) {
       setSelectedKeys([...nextSet]);
@@ -81,7 +81,7 @@ function getMultipleSelectProps<T>({
         onChange: () => handleToggleRow(key, row),
         checked: selectedKeysSet.has(key),
         indeterminate: false,
-        disabled: !canSelectTableRow(disableRowSelection, { row, id: key }),
+        disabled: !canSelectTableRow(enableRowSelection, { row, id: key }),
       };
     },
     toggleSelection: handleToggleRow,
