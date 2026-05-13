@@ -22,34 +22,11 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 /**
- * TODO
- * [x] setItems on root
- * [x] state : active element
- * [x] pointer over listener / state, onPointerEnter, onPointerLeave
- * [x] Overlay - Use floating component
- * [x] Keyboard navigation
- * [x] UU - announce on drag start, item moved, drag end
- * [x] Make overlay same width as the OG item, currently jumps to content width
- * [x] Look into adding a cancel listener event
- * [x] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
- * [x] Talk to design about what should happen on ESC key press, currently just cancels dragging, should it also reset position?
- * [x] Make arrow icons into buttons that react to keyboard events, currently just decorative
- * [x] Keep handler focus after clicking arrows for dragging
- * [x] Look into data-based API vs component-based API
- * [x] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
- * [x] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - just for table for now
- * [x] Discuss items type
- * [x] Discuss how to implement label best
- * [ ] Quick nav (< > samtidig) - få piltastene til å fungere
- * [x] Implement new type for items - ColumnDefinitions<T>
- * [x] Remove announcer div and use a live region component instead
- * [x] Make ESC reset position, not just cancel dragging
- * [x] Make instructions for keyboard users (visible?)
- * [ ] Ask design about visible keyboard instructions
- * [ ] Update design from Figma
+ * TODO:
+ *
+ * Backlog:
+ * [ ] Quick nav (< > samtidig) - få piltastene til å fungere - ignore?
  * [ ] Look at instructions text
- * [x] Remove default ul styling
- * [x] Fix setItems type
  *
  */
 
