@@ -51,6 +51,7 @@ export const schema: SchemaPluginOptions = {
     /* Objects */
     object.RelatertInnhold,
     object.Kode,
+    object.CodeBlock,
 
     // @ts-expect-error - sanity-table does not correctly infer type for schema
     object.Tabell,

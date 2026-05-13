@@ -951,10 +951,21 @@ export type Bilde = {
 
 export type Tabell_v2 = Table;
 
+export type Code_block = {
+  _type: "code_block";
+  code?: Code;
+  title?: string;
+};
+
 export type Kode = {
   _type: "kode";
   code?: Code;
   title?: string;
+  blokker?: Array<
+    {
+      _key: string;
+    } & Code_block
+  >;
 };
 
 export type Relatert_innhold = {
@@ -1914,6 +1925,7 @@ export type AllSanitySchemaTypes =
   | Do_dont
   | Bilde
   | Tabell_v2
+  | Code_block
   | Kode
   | Relatert_innhold
   | Prinsipper_landingsside
@@ -2251,6 +2263,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -2615,6 +2632,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -2707,6 +2729,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -3277,6 +3304,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -3617,6 +3649,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -3747,6 +3784,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -4315,6 +4357,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -4700,6 +4747,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -4792,6 +4844,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -5136,6 +5193,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -5476,6 +5538,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -5606,6 +5673,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -5940,6 +6012,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -6325,6 +6402,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -6417,6 +6499,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -6754,6 +6841,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   _type: "kode";
                   code?: Code;
                   title?: string;
+                  blokker?: Array<
+                    {
+                      _key: string;
+                    } & Code_block
+                  >;
                   markDefs: null;
                   ref: null;
                 }
@@ -7139,6 +7231,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -7231,6 +7328,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           _type: "kode";
           code?: Code;
           title?: string;
+          blokker?: Array<
+            {
+              _key: string;
+            } & Code_block
+          >;
           markDefs: null;
           ref: null;
         }
@@ -7563,6 +7665,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   _type: "kode";
                   code?: Code;
                   title?: string;
+                  blokker?: Array<
+                    {
+                      _key: string;
+                    } & Code_block
+                  >;
                   markDefs: null;
                   ref: null;
                 }
@@ -7948,6 +8055,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -8040,6 +8152,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           _type: "kode";
           code?: Code;
           title?: string;
+          blokker?: Array<
+            {
+              _key: string;
+            } & Code_block
+          >;
           markDefs: null;
           ref: null;
         }
@@ -8372,6 +8489,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   _type: "kode";
                   code?: Code;
                   title?: string;
+                  blokker?: Array<
+                    {
+                      _key: string;
+                    } & Code_block
+                  >;
                   markDefs: null;
                   ref: null;
                 }
@@ -8757,6 +8879,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -8849,6 +8976,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
           _type: "kode";
           code?: Code;
           title?: string;
+          blokker?: Array<
+            {
+              _key: string;
+            } & Code_block
+          >;
           markDefs: null;
           ref: null;
         }
@@ -9360,6 +9492,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -9700,6 +9837,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -9792,6 +9934,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -10469,6 +10616,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -10809,6 +10961,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -10901,6 +11058,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -11198,6 +11360,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -11538,6 +11705,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -11630,6 +11802,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -11991,6 +12168,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -12331,6 +12513,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -12461,6 +12648,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -12813,6 +13005,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -13198,6 +13395,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -13290,6 +13492,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -13634,6 +13841,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -13974,6 +14186,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -14104,6 +14321,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -14421,6 +14643,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -14761,6 +14988,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -14891,6 +15123,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -15243,6 +15480,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -15628,6 +15870,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -15720,6 +15967,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
@@ -16064,6 +16316,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "kode";
                 code?: Code;
                 title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
                 markDefs: null;
                 ref: null;
               }
@@ -16404,6 +16661,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
               _type: "kode";
               code?: Code;
               title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
               markDefs: null;
               ref: null;
             }
@@ -16534,6 +16796,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         _type: "kode";
         code?: Code;
         title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
         markDefs: null;
         ref: null;
       }
