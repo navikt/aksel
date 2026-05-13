@@ -79,10 +79,11 @@ interface DataTableProps<T>
   /**
    * Truncate content in cells and show ellipsis for overflowed text.
    *
-   * **NB:** When using `layout="auto"`, you have to manually set a `maxWidth` on columns that should be truncated.
-   * @default true
+   * **NB:** When using this together with `layout="auto"`,
+   * you have to manually set a `maxWidth` on columns that should be truncated.
+   * @default false if layout="auto", else true
    */
-  truncateContent?: boolean; // TODO: Consider making this default false when layout=auto, and maybe disallow it but add a wrap prop on the td-comp.
+  truncateContent?: boolean;
   /**
    * Enables keyboard navigation for table rows and cells.
    * @default true
@@ -186,7 +187,7 @@ function DataTableInner<T>(
     textSize = "medium",
     withKeyboardNav = true,
     zebraStripes = false,
-    truncateContent = true,
+    truncateContent: truncateContentProp,
     layout = "fixed",
     data,
     columnDefinitions,
@@ -244,6 +245,8 @@ function DataTableInner<T>(
   ]);
 
   const tableId = useId(id);
+
+  const truncateContent = truncateContentProp ?? layout !== "auto";
 
   return (
     <DataTableContextProvider
