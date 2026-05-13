@@ -231,7 +231,7 @@
     &[data-sticky="start"] {
       left: 0;
 
-      &::before {
+      &[data-sticky-last]::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -243,13 +243,13 @@
         opacity: 0;
       }
 
-      .aksel-data-table[data-scroll] &::before {
+      .aksel-data-table[data-scroll] &[data-sticky-last]::before {
         opacity: 1;
         animation: scroll-shadow-fade-start 1s linear;
         animation-timeline: --horizontal-table-scroll;
       }
 
-      &::after {
+      &[data-sticky-last]::after {
         inset-inline: 0 -1px;
         border-right-width: 1px;
       }

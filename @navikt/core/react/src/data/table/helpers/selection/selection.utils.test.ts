@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { ItemDetail, TableRowEntryId } from "../collectTableRowEntries";
+import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { ItemDetail } from "../collectTableRowEntries";
 import { mutateRowSelection } from "./selection.utils";
 
 function makeItemDetails<T>(

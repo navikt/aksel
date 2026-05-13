@@ -109,7 +109,7 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
       data={fallbackIdData}
       subRows={{
         getRows: getSubRows,
-        defaultExpandedRowIds: [0],
+        defaultExpandedRowIds: ["0"],
       }}
       getRowId={(row) => row.id}
       selection={{ selectionMode: "multiple" }}

@@ -41,11 +41,21 @@ import { DataTableTr } from "../tr/DataTableTr";
 import type {
   ColumnDefinitions,
   DataTableLoadingConfig,
+  TableRowEntryId,
 } from "./DataTable.types";
 import {
   DataTableContextProvider,
   useDataTableContext,
 } from "./DataTableRoot.context";
+
+/**
+ * TODO: For consideration:
+ * - Use namespacing for types. There will be a lot of standalone types connected to this component,
+ * it could make sense to access them under DataTable.X instead of separate imports.
+ * - Consider having a "Wrapper" component that only handles context and logic like,
+ * "DataTableRoot" or "DataGrid" or something, and then have the main "DataTable" component only handle rendering of table itself.
+ * This would make props more focused and discoverable since its not mixed with htmltable-props.
+ */
 
 /**
  * TODO:
@@ -112,18 +122,16 @@ interface DataTableProps<T>
    *
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
-   * TODO: Pri zero Standardize to "string" always. Update selection etc to support this.
    */
-  getRowId?: (rowData: T) => string | number;
+  getRowId?: (rowData: T) => TableRowEntryId;
   /**
    * Sticky columns that remain visible when horizontally scrolling the table.
    *
    * You can specify 1 sticky column on the left and 1 on the right.
    */
   stickyColumns?: {
-    /* TODO: Pri zero Change to start/end */
-    first?: "1";
-    last?: "1";
+    start?: "1";
+    end?: "1";
   };
   /**
    * @default true
@@ -134,7 +142,7 @@ interface DataTableProps<T>
    * Not called when clicking header, loading, or empty-state rows.
    */
   onRowClick?: (
-    rowId: string | number,
+    rowId: TableRowEntryId,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
   /**
@@ -215,9 +223,10 @@ function DataTableInner<T>(
     tableItems,
   });
 
-  const { columns, stickySelection } = useColumnOptions<T>(columnDefinitions, {
+  const { columns, stickyStart } = useColumnOptions(columnDefinitions, {
     stickyColumns,
-    selectionMode: tableSelectionState.selection.selectionMode,
+    hasSelection: tableSelectionState.selection.selectionMode !== "none",
+    hasDetailsPanel: !!detailsPanel?.getContent,
   });
 
   const fullWidthColSpan = useMemo(() => {
@@ -241,7 +250,7 @@ function DataTableInner<T>(
       layout={layout}
       withKeyboardNav={withKeyboardNav}
       selectionState={tableSelectionState}
-      stickySelection={stickySelection}
+      stickyStart={stickyStart}
       stickyHeader={stickyHeader}
       tableId={tableId}
       loading={loading}
@@ -272,32 +281,40 @@ function DataTableInner<T>(
             >
               <DataTableThead>
                 <DataTableTr>
-                  {columns.map(({ isSticky, colDef }) => {
-                    const sortEntry = sortState.find(
-                      (s) => s.columnId === colDef.id,
-                    );
-                    const sortDirection = sortEntry?.direction ?? "none";
-                    return (
-                      <DataTableColumnHeader
-                        resizable={colDef.resizable}
-                        width={colDef.width}
-                        defaultWidth={colDef.defaultWidth}
-                        autoWidth={colDef.autoWidth}
-                        minWidth={colDef.minWidth}
-                        maxWidth={colDef.maxWidth}
-                        onWidthChange={colDef.onWidthChange}
-                        textAlign={colDef.align ?? "left"}
-                        key={colDef.id}
-                        isSticky={isSticky}
-                        sortable={colDef.sortable}
-                        sortDirection={sortDirection}
-                        onSortClick={(event) => onSortClick(colDef.id, event)}
-                        label={colDef.label}
-                      >
-                        {colDef.header ?? colDef.label}
-                      </DataTableColumnHeader>
-                    );
-                  })}
+                  {columns.map(
+                    ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
+                      const sortEntry = sortState.find(
+                        (s) => s.columnId === colDef.id,
+                      );
+                      const sortDirection = sortEntry?.direction ?? "none";
+                      return (
+                        <DataTableColumnHeader
+                          resizable={colDef.resizable}
+                          width={colDef.width}
+                          defaultWidth={colDef.defaultWidth}
+                          autoWidth={colDef.autoWidth}
+                          minWidth={colDef.minWidth}
+                          maxWidth={colDef.maxWidth}
+                          onWidthChange={colDef.onWidthChange}
+                          textAlign={colDef.align ?? "left"}
+                          key={colDef.id}
+                          isSticky={isSticky}
+                          sortable={colDef.sortable}
+                          sortDirection={sortDirection}
+                          onSortClick={(event) => onSortClick(colDef.id, event)}
+                          label={colDef.label}
+                          style={
+                            stickyLeftOffset
+                              ? { left: stickyLeftOffset }
+                              : undefined
+                          }
+                          data-sticky-last={isStickyLast || undefined}
+                        >
+                          {colDef.header ?? colDef.label}
+                        </DataTableColumnHeader>
+                      );
+                    },
+                  )}
                 </DataTableTr>
               </DataTableThead>
 
@@ -434,16 +451,25 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
         </tr>
         {Array.from({ length: rows }, (_, rowIndex) => (
           <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
-            {columns.map(({ isSticky, colDef }, colDefIndex) => (
-              <DataTableBaseCell
-                textAlign={colDef.align ?? "left"}
-                key={colDef.id || colDefIndex}
-                as={colDef.isRowHeader ? "th" : "td"}
-                isSticky={isSticky}
-              >
-                <Skeleton variant="text" />
-              </DataTableBaseCell>
-            ))}
+            {columns.map(
+              (
+                { isSticky, isStickyLast, stickyLeftOffset, colDef },
+                colDefIndex,
+              ) => (
+                <DataTableBaseCell
+                  textAlign={colDef.align ?? "left"}
+                  key={colDef.id || colDefIndex}
+                  as={colDef.isRowHeader ? "th" : "td"}
+                  isSticky={isSticky}
+                  style={
+                    stickyLeftOffset ? { left: stickyLeftOffset } : undefined
+                  }
+                  data-sticky-last={isStickyLast || undefined}
+                >
+                  <Skeleton variant="text" />
+                </DataTableBaseCell>
+              ),
+            )}
           </DataTableTr>
         ))}
       </>
@@ -489,31 +515,38 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
         return (
           <React.Fragment key={details.id}>
             <DataTableTr rowId={details.id}>
-              {columns.map(({ isSticky, colDef }, colDefIndex) => {
-                const renderNestedToggle = colDefIndex === 0 && hasSubRows;
-                const renderNestedIndent =
-                  colDefIndex === 0 && (details.level > 0 || hasSubRows);
+              {columns.map(
+                (
+                  { isSticky, isStickyLast, stickyLeftOffset, colDef },
+                  colDefIndex,
+                ) => {
+                  const renderNestedToggle = colDefIndex === 0 && hasSubRows;
+                  const renderNestedIndent =
+                    colDefIndex === 0 && (details.level > 0 || hasSubRows);
 
-                const style: React.CSSProperties = {
-                  "--__axc-data-table-nested-depth": details.level,
-                };
+                  const style: React.CSSProperties = {
+                    "--__axc-data-table-nested-depth": details.level,
+                    ...(stickyLeftOffset ? { left: stickyLeftOffset } : {}),
+                  };
 
-                return (
-                  <DataTableBaseCell
-                    textAlign={colDef.align ?? "left"}
-                    key={colDef.id || colDefIndex}
-                    as={colDef.isRowHeader ? "th" : "td"}
-                    isSticky={isSticky}
-                    data-nested={renderNestedIndent || undefined}
-                    style={style}
-                  >
-                    {renderNestedToggle && (
-                      <DataTableSubRowToggle details={details} />
-                    )}
-                    {colDef.cell(rowData)}
-                  </DataTableBaseCell>
-                );
-              })}
+                  return (
+                    <DataTableBaseCell
+                      textAlign={colDef.align ?? "left"}
+                      key={colDef.id || colDefIndex}
+                      as={colDef.isRowHeader ? "th" : "td"}
+                      isSticky={isSticky}
+                      data-nested={renderNestedIndent || undefined}
+                      data-sticky-last={isStickyLast || undefined}
+                      style={style}
+                    >
+                      {renderNestedToggle && (
+                        <DataTableSubRowToggle details={details} />
+                      )}
+                      {colDef.cell(rowData)}
+                    </DataTableBaseCell>
+                  );
+                },
+              )}
             </DataTableTr>
             <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
           </React.Fragment>

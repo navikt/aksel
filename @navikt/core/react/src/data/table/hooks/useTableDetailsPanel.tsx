@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
+import type { TableRowEntryId } from "../root/DataTable.types";
 import { useTableItemsContext } from "./useTableItems";
 
 type DetailsPanelProps<T> = {
@@ -18,12 +19,12 @@ type DetailsPanelProps<T> = {
    * Controlled list of expanded row IDs.
    * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
    */
-  expandedRowIds?: (string | number)[];
+  expandedRowIds?: TableRowEntryId[];
   /**
    * Initial list of expanded row IDs for uncontrolled usage.
    * @default []
    */
-  defaultExpandedRowIds?: (string | number)[];
+  defaultExpandedRowIds?: TableRowEntryId[];
   /**
    * Called when the list of expanded row IDs changes.
    *
@@ -31,7 +32,7 @@ type DetailsPanelProps<T> = {
    * TODO:
    * - Docs: This pattern is called "Master / Detail" in general terms
    */
-  onExpandedRowIdsChange?: (ids: (string | number)[]) => void;
+  onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
   /**
    * Returns the height (in px) or `"auto"` for a row's details panel.
    * When a number is returned, the panel scrolls within that fixed height.
@@ -46,9 +47,9 @@ type DetailsPanelProps<T> = {
 };
 
 type DataTableDetailsPanelContextT = {
-  isExpanded: (id: string | number) => boolean;
-  isDetailsPanelExpandable: (id: string | number) => boolean;
-  toggleExpansion: (id: string | number) => void;
+  isExpanded: (id: TableRowEntryId) => boolean;
+  isDetailsPanelExpandable: (id: TableRowEntryId) => boolean;
+  toggleExpansion: (id: TableRowEntryId) => void;
   toggleAll: () => void;
   isAllExpanded: boolean;
   getDetailsPanelContent?: (row: unknown) => React.ReactNode;
@@ -91,17 +92,17 @@ function DataTableDetailsPanelProvider<T>({
 
   const { itemDetails } = tableItemsContext ?? {
     itemDetails: new Map<
-      string | number,
-      { rowData: T; id: string | number; level: number }
+      TableRowEntryId,
+      { rowData: T; id: TableRowEntryId; level: number }
     >(),
   };
 
   const expandableIds = React.useMemo(() => {
     if (!getContent) {
-      return new Set<string | number>();
+      return new Set<TableRowEntryId>();
     }
 
-    const ids = new Set<string | number>();
+    const ids = new Set<TableRowEntryId>();
 
     for (const { rowData, id, level } of itemDetails.values()) {
       /* We only allow Master - Details pattern on top level rows */
@@ -118,18 +119,18 @@ function DataTableDetailsPanelProvider<T>({
   }, [getContent, isRowExpandable, itemDetails]);
 
   const isDetailsPanelExpandableById = useCallback(
-    (id: string | number) => expandableIds.has(id),
+    (id: TableRowEntryId) => expandableIds.has(id),
     [expandableIds],
   );
 
   const isExpanded = useCallback(
-    (id: string | number) =>
+    (id: TableRowEntryId) =>
       isDetailsPanelExpandableById(id) && expandedIds.includes(id),
     [expandedIds, isDetailsPanelExpandableById],
   );
 
   const toggleExpansion = useCallback(
-    (id: string | number) => {
+    (id: TableRowEntryId) => {
       if (!isDetailsPanelExpandableById(id)) {
         return;
       }
@@ -172,7 +173,7 @@ function DataTableDetailsPanelProvider<T>({
   );
 }
 
-function getDataTableDetailsPanelId(tableId: string, rowId: string | number) {
+function getDataTableDetailsPanelId(tableId: string, rowId: TableRowEntryId) {
   return `${tableId}-expansion-${rowId}`;
 }
 

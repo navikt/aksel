@@ -353,6 +353,8 @@ const filterOptions = [
   })),
 ];
 
+const allColumnIds = columnDef_TEST_DATA.map((col) => col.id);
+
 export const KitchenSinkAdvancedFilter: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
@@ -364,6 +366,9 @@ export const KitchenSinkAdvancedFilter: Story = {
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
     const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
+    const [visibleColumns, setVisibleColumns] =
+      useState<string[]>(allColumnIds);
+
     const [stickyColumns, setStickyColumns] = React.useState<{
       first: "none" | "first";
       last: "none" | "last";
@@ -622,22 +627,14 @@ export const KitchenSinkAdvancedFilter: Story = {
                       <BodyShort weight="semibold">Vis kolonner</BodyShort>
                       <VStack gap="space-8">
                         <Switch
-                          checked={columnView.every(
-                            (col) => col.details?.visible,
-                          )}
+                          checked={
+                            visibleColumns.length === allColumnIds.length
+                          }
                           size="small"
                           onChange={() => {
-                            const allVisible = columnView.every(
-                              (col) => col.details?.visible,
-                            );
-                            const newColumnView = columnView.map((col) => ({
-                              ...col,
-                              details: {
-                                ...col.details,
-                                visible: !allVisible,
-                              },
-                            }));
-                            setColumnView(newColumnView);
+                            const allVisible =
+                              visibleColumns.length === allColumnIds.length;
+                            setVisibleColumns(allVisible ? [] : allColumnIds);
                           }}
                         >
                           Velg alle
@@ -645,22 +642,20 @@ export const KitchenSinkAdvancedFilter: Story = {
                         <DragAndDrop
                           items={columnView}
                           setItems={setColumnView}
-                          renderItem={(item, index) => {
+                          renderItem={(item) => {
                             return (
                               <Switch
                                 key={item.id}
                                 size="small"
-                                checked={item.details?.visible}
+                                checked={visibleColumns.includes(item.id)}
                                 onChange={(event) => {
-                                  const newColumnView = [...columnView];
-                                  newColumnView[index] = {
-                                    ...item,
-                                    details: {
-                                      ...item.details,
-                                      visible: event.target.checked,
-                                    },
-                                  };
-                                  setColumnView(newColumnView);
+                                  const isChecked = event.target.checked;
+                                  setVisibleColumns((prev) => {
+                                    if (isChecked) {
+                                      return [...prev, item.id];
+                                    }
+                                    return prev.filter((id) => id !== item.id);
+                                  });
                                 }}
                               >
                                 {item.label}
@@ -679,7 +674,9 @@ export const KitchenSinkAdvancedFilter: Story = {
 
         <DataTable
           getRowId={(row) => row.name}
-          columnDefinitions={columnView.filter((col) => col.details?.visible)}
+          columnDefinitions={columnView.filter((col) =>
+            visibleColumns.find((c) => c === col.id),
+          )}
           data={pagedData.paginatedData}
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
@@ -691,8 +688,8 @@ export const KitchenSinkAdvancedFilter: Story = {
           }}
           stickyHeader
           stickyColumns={{
-            first: stickyColumns.first === "first" ? "1" : undefined,
-            last: stickyColumns.last === "last" ? "1" : undefined,
+            start: stickyColumns.first === "first" ? "1" : undefined,
+            end: stickyColumns.last === "last" ? "1" : undefined,
           }}
           detailsPanel={{
             getContent: showDetailsPanel

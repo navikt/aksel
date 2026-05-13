@@ -85,7 +85,7 @@ export const Inputs: Story = {
       layout="auto"
       columnDefinitions={inputsColumnDef}
       data={inputsData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -227,7 +227,7 @@ export const DisabledCells: Story = {
       layout="auto"
       columnDefinitions={disabledColumnDef}
       data={disabledData}
-      getRowId={(row) => row.id}
+      getRowId={(row) => row.id.toString()}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -311,7 +311,7 @@ export const Cache: Story = {
           layout="auto"
           columnDefinitions={cacheColumnDef}
           data={data}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.id.toString()}
         />
       </div>
     );
@@ -347,9 +347,9 @@ export const Cache: Story = {
   },
 };
 
-type FocusRow = { id: number };
+type FocusRow = { id: string };
 
-const focusData: FocusRow[] = [{ id: 1 }, { id: 2 }];
+const focusData: FocusRow[] = [{ id: "1" }, { id: "2" }];
 
 const focusColumnDef: ColumnDefinitions<FocusRow> = [
   { id: "col1", header: "Col 1", label: "Col 1", cell: () => "Col 1" },
@@ -357,7 +357,8 @@ const focusColumnDef: ColumnDefinitions<FocusRow> = [
     id: "col2",
     header: "Col 2",
     label: "Col 2",
-    cell: ({ id }) => (id === 1 ? <button>Focusable button</button> : "Col 2"),
+    cell: ({ id }) =>
+      id === "1" ? <button>Focusable button</button> : "Col 2",
   },
   {
     id: "col3",

@@ -8,6 +8,7 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
+import type { TableRowEntryId } from "../root/DataTable.types";
 import type { UseTableItemsReturn } from "./useTableItems";
 
 type UseTableSelectionArgs<T> = {
@@ -49,7 +50,7 @@ function useTableSelection<T>({
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
   const isRowSelected = useCallback(
-    (rowId: string | number) => selectedKeysSet.has(rowId),
+    (rowId: TableRowEntryId) => selectedKeysSet.has(rowId),
     [selectedKeysSet],
   );
 

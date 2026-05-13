@@ -9,7 +9,7 @@ function DataTableDetailsPanelRow<T>({
   rowId,
   rowData,
 }: {
-  rowId: string | number;
+  rowId: string;
   rowData: T;
 }) {
   const { tableId, fullWidthColSpan } = useDataTableContext();

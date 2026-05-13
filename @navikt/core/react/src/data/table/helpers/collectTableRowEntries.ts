@@ -1,4 +1,4 @@
-type TableRowEntryId = string | number;
+import type { TableRowEntryId } from "../root/DataTable.types";
 
 type CollectTableRowEntriesArgs<T> = {
   items: T[];
@@ -91,6 +91,5 @@ export { collectTableRowEntries };
 export type {
   CollectTableRowEntriesArgs,
   CollectTableRowEntriesReturn,
-  TableRowEntryId,
   ItemDetail,
 };
