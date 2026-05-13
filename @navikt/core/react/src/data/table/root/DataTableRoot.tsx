@@ -250,8 +250,8 @@ function DataTableInner<T>(
       tableItems={tableItems}
       sortingState={sortingState}
     >
-      <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-        <TableElementWrapper enabled={withKeyboardNav}>
+      <TableElementWrapper enabled={withKeyboardNav}>
+        <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
           <table
             {...rest}
             ref={forwardedRef}
@@ -302,8 +302,8 @@ function DataTableInner<T>(
               <DataTableTBodyContent emptyContent={emptyContent} />
             </DataTableTbody>
           </table>
-        </TableElementWrapper>
-      </DataTableDetailsPanelProvider>
+        </DataTableDetailsPanelProvider>
+      </TableElementWrapper>
     </DataTableContextProvider>
   );
 }
