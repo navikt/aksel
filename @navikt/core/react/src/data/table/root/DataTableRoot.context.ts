@@ -3,6 +3,7 @@ import type {
   StickyStartState,
   UseColumnOptionsResult,
 } from "../hooks/useColumnOptions";
+import type { UseTableItemsReturn } from "../hooks/useTableItems";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 import type {
   DataTableLoadingConfig,
@@ -27,6 +28,10 @@ type DataTableContextProps<T> = {
    * This is necessary to ensure that these components span the entire width of the table.
    */
   fullWidthColSpan: number;
+  /**
+   * The current items and related metadata.
+   */
+  tableItems: UseTableItemsReturn<T>;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =

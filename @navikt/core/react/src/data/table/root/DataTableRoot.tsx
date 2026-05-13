@@ -21,12 +21,7 @@ import {
   DataTableDetailsPanelProvider,
   type DetailsPanelProps,
 } from "../hooks/useTableDetailsPanel";
-import {
-  type SubRowsProps,
-  TableItemsProvider,
-  useTableItems,
-  useTableItemsContext,
-} from "../hooks/useTableItems";
+import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
   type SelectionProps,
@@ -252,74 +247,67 @@ function DataTableInner<T>(
       onRowClick={onRowClick}
       columns={columns}
       fullWidthColSpan={fullWidthColSpan}
+      tableItems={tableItems}
     >
-      <TableItemsProvider
-        itemDetails={tableItems.itemDetails}
-        items={tableItems.items}
-        visibleRowIds={tableItems.visibleRowIds}
-        onExpandedRowIdsChange={tableItems.onExpandedRowIdsChange}
-        isSubRowExpanded={tableItems.isSubRowExpanded}
-      >
-        <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-          <TableElementWrapper enabled={withKeyboardNav}>
-            <table
-              {...rest}
-              ref={forwardedRef}
-              className={cl("aksel-data-table", className)}
-              data-zebra-stripes={zebraStripes}
-              data-truncate-content={truncateContent}
-              data-density={rowDensity}
-              data-text-size={textSize}
-              data-layout={layout}
-              data-loading={loading?.isLoading || undefined}
-              aria-busy={loading?.isLoading || undefined}
-            >
-              <DataTableThead>
-                <DataTableTr>
-                  {columns.map(
-                    ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
-                      const sortEntry = sortState.find(
-                        (s) => s.columnId === colDef.id,
-                      );
-                      const sortDirection = sortEntry?.direction ?? "none";
-                      return (
-                        <DataTableColumnHeader
-                          resizable={colDef.resizable}
-                          width={colDef.width}
-                          defaultWidth={colDef.defaultWidth}
-                          autoWidth={colDef.autoWidth}
-                          minWidth={colDef.minWidth}
-                          maxWidth={colDef.maxWidth}
-                          onWidthChange={colDef.onWidthChange}
-                          textAlign={colDef.align ?? "left"}
-                          key={colDef.id}
-                          isSticky={isSticky}
-                          sortable={colDef.sortable}
-                          sortDirection={sortDirection}
-                          onSortClick={(event) => onSortClick(colDef.id, event)}
-                          label={colDef.label}
-                          style={
-                            stickyLeftOffset
-                              ? { left: stickyLeftOffset }
-                              : undefined
-                          }
-                          data-sticky-last={isStickyLast || undefined}
-                        >
-                          {colDef.header ?? colDef.label}
-                        </DataTableColumnHeader>
-                      );
-                    },
-                  )}
-                </DataTableTr>
-              </DataTableThead>
+      <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
+        <TableElementWrapper enabled={withKeyboardNav}>
+          <table
+            {...rest}
+            ref={forwardedRef}
+            className={cl("aksel-data-table", className)}
+            data-zebra-stripes={zebraStripes}
+            data-truncate-content={truncateContent}
+            data-density={rowDensity}
+            data-text-size={textSize}
+            data-layout={layout}
+            data-loading={loading?.isLoading || undefined}
+            aria-busy={loading?.isLoading || undefined}
+          >
+            <DataTableThead>
+              <DataTableTr>
+                {columns.map(
+                  ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
+                    const sortEntry = sortState.find(
+                      (s) => s.columnId === colDef.id,
+                    );
+                    const sortDirection = sortEntry?.direction ?? "none";
+                    return (
+                      <DataTableColumnHeader
+                        resizable={colDef.resizable}
+                        width={colDef.width}
+                        defaultWidth={colDef.defaultWidth}
+                        autoWidth={colDef.autoWidth}
+                        minWidth={colDef.minWidth}
+                        maxWidth={colDef.maxWidth}
+                        onWidthChange={colDef.onWidthChange}
+                        textAlign={colDef.align ?? "left"}
+                        key={colDef.id}
+                        isSticky={isSticky}
+                        sortable={colDef.sortable}
+                        sortDirection={sortDirection}
+                        onSortClick={(event) => onSortClick(colDef.id, event)}
+                        label={colDef.label}
+                        style={
+                          stickyLeftOffset
+                            ? { left: stickyLeftOffset }
+                            : undefined
+                        }
+                        data-sticky-last={isStickyLast || undefined}
+                      >
+                        {colDef.header ?? colDef.label}
+                      </DataTableColumnHeader>
+                    );
+                  },
+                )}
+              </DataTableTr>
+            </DataTableThead>
 
-              <DataTableTbody>
-                <DataTableTBodyContent emptyContent={emptyContent} />
-              </DataTableTbody>
-            </table>
-          </TableElementWrapper>
-        </DataTableDetailsPanelProvider>
-      </TableItemsProvider>
+            <DataTableTbody>
+              <DataTableTBodyContent emptyContent={emptyContent} />
+            </DataTableTbody>
+          </table>
+        </TableElementWrapper>
+      </DataTableDetailsPanelProvider>
     </DataTableContextProvider>
   );
 }
@@ -423,8 +411,8 @@ interface DataTableTBodyContentProps {
 }
 
 function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
-  const { items, itemDetails, visibleRowIds } = useTableItemsContext();
-  const { columns, loading, fullWidthColSpan } = useDataTableContext();
+  const { columns, loading, fullWidthColSpan, tableItems } =
+    useDataTableContext();
 
   if (loading?.isLoading && loading?.variant === "content") {
     return (
@@ -471,7 +459,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
     );
   }
 
-  if (items.length === 0 && emptyContent !== undefined) {
+  if (tableItems.items.length === 0 && emptyContent !== undefined) {
     return (
       <DataTableEmptyState colSpan={fullWidthColSpan}>
         {emptyContent}
@@ -496,9 +484,10 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
           </td>
         </tr>
       )}
-      {items.map((rowData, rowIndex) => {
-        const rowId = visibleRowIds[rowIndex];
-        const details = rowId != null ? itemDetails.get(rowId) : undefined;
+      {tableItems.items.map((rowData, rowIndex) => {
+        const rowId = tableItems.visibleRowIds[rowIndex];
+        const details =
+          rowId != null ? tableItems.itemDetails.get(rowId) : undefined;
 
         /* Should in theory be impossible. Look about typing this? */
         if (!details) {

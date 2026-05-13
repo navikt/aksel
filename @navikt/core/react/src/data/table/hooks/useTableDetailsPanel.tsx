@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import type { TableRowEntryId } from "../root/DataTable.types";
-import { useTableItemsContext } from "./useTableItems";
+import { useDataTableContext } from "../root/DataTableRoot.context";
 
 type DetailsPanelProps<T> = {
   /**
@@ -88,9 +88,9 @@ function DataTableDetailsPanelProvider<T>({
   });
 
   /* TODO: False is just fallback until auto and root is merged */
-  const tableItemsContext = useTableItemsContext(false);
+  const tableContext = useDataTableContext(false);
 
-  const { itemDetails } = tableItemsContext ?? {
+  const { itemDetails } = tableContext?.tableItems ?? {
     itemDetails: new Map<
       TableRowEntryId,
       { rowData: T; id: TableRowEntryId; level: number }

@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from "react";
-import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import {
   type ItemDetail,
@@ -126,13 +125,5 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
   };
 }
 
-const { Provider: TableItemsProvider, useContext: useTableItemsContext } =
-  /* TODO: Can we type this better? */
-  createStrictContext<Omit<UseTableItemsReturn<any>, "childRowIdsById">>({
-    name: "TableItemsContext",
-    errorMessage:
-      "useTableItemsContext must be used within a TableItemsProvider",
-  });
-
-export { useTableItems, TableItemsProvider, useTableItemsContext };
+export { useTableItems };
 export type { ItemDetail, SubRowsProps, UseTableItemsReturn };

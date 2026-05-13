@@ -234,6 +234,14 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
         onRowClick={undefined}
         columns={[]}
         fullWidthColSpan={9999}
+        tableItems={{
+          childRowIdsById: new Map(),
+          visibleRowIds: [],
+          itemDetails: new Map(),
+          items: [],
+          isSubRowExpanded: () => false,
+          onExpandedRowIdsChange: () => null,
+        }}
       >
         <DataTableDetailsPanelProvider>
           <div className="aksel-data-table__border-wrapper">

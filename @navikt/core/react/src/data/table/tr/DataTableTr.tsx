@@ -19,7 +19,6 @@ import {
   getDataTableDetailsPanelId,
   useDataTableDetailsPanel,
 } from "../hooks/useTableDetailsPanel";
-import { useTableItemsContext } from "../hooks/useTableItems";
 import type { TableRowEntryId } from "../root/DataTable.types";
 import {
   useDataTableContext,
@@ -54,7 +53,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     const { layout, stickyHeader, selectionState, onRowClick } =
       useDataTableContext();
     const { location } = useDataTableLocation();
-    const { itemDetails } = useTableItemsContext();
+    const { tableItems } = useDataTableContext();
 
     const renderFillerCell = layout === "fixed" && children;
 
@@ -85,7 +84,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               selectionState.selectionTrigger === "row" &&
               selectionState.selection.selectionMode !== "none"
             ) {
-              const rowData = itemDetails.get(rowId)?.rowData;
+              const rowData = tableItems.itemDetails.get(rowId)?.rowData;
 
               if (!rowData) {
                 consoleWarning(
@@ -266,7 +265,9 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const stickySelection = stickyStart.selection;
   const stickySelectionOffset = stickyStart.selectionOffset;
   const { location } = useDataTableLocation();
-  const { itemDetails } = useTableItemsContext();
+
+  const { tableItems } = useDataTableContext();
+
   const inputId = useId();
 
   const { selection, renderSelection } = selectionState;
@@ -353,7 +354,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
         <CheckboxInput
           {...selection.getRowCheckboxProps(
             rowId,
-            itemDetails.get(rowId)?.rowData,
+            tableItems.itemDetails.get(rowId)?.rowData,
           )}
           compact
         />
@@ -371,7 +372,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
         <RadioInput
           {...selection.getRowRadioProps(
             rowId,
-            itemDetails.get(rowId)?.rowData,
+            tableItems.itemDetails.get(rowId)?.rowData,
           )}
         />
       </DataTableTd>
