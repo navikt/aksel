@@ -24,7 +24,7 @@ type ColumnDefinition<T> = Pick<
    *
    * @default "left"
    */
-  align?: "left" | "right" | "center";
+  align?: "left" | "right" | "center"; // TODO: Pri zero: Use same name as in DataTableColumnHeaderProps (DataTableBaseCellProps) so that we can just Pick<DataTableColumnHeaderProps, "textAlign">
   /**
    * Assigned to the cell's `th` element instead of `td` if true.
    *

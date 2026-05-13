@@ -26,6 +26,8 @@ type ResizeProps = {
    * consider using `layout="auto"` on the root instead for better performance.
    *
    * **NB:** This can cause a layout shift. Set a good initial width with `width` or `defaultWidth` to mitigate this.
+   *
+   * **NB:** Does not work with block content.
    */
   autoWidth?: boolean;
   /**
@@ -95,7 +97,6 @@ type TableColumnResizeResult =
 
 /**
  * TODO:
- * - Do we allow % widths?
  * - Auto-width mode is hard now since that might cause layout-shifts on mount. But would be preferable to
  * be able to set "1fr" or similar and have it fill remaining space.
  */
@@ -151,14 +152,13 @@ function useTableColumnResize({
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
     useCallback(() => {
       // We need to use the onClick event in order to support screen readers properly,
-      // since some of them only send a mouse click when pressing enter/space.
+      // since some of them only send a mouse click (no kbd events) when pressing enter/space.
       // We detect a "screen reader click" by checking if we had a mouseUp event right before.
 
       if (ignoreNextOnClick.current) {
         ignoreNextOnClick.current = false;
         return;
       }
-
       setIsResizingWithKeyboard((prev) => !prev);
     }, []);
 
@@ -260,7 +260,7 @@ function useTableColumnResize({
       [startResize],
     );
 
-  // Auto-size column to fit content on double click. NB: Doesn't work with block content!
+  // Auto-size column to fit content on double click
   const handleDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"] =
     useCallback(() => {
       const newColumnWidth = getAutoColumnWidth(thRef);
@@ -298,6 +298,10 @@ function useTableColumnResize({
   };
 }
 
+/**
+ * Figures out how wide the column needs to be to fit all the content without truncation.
+ * NB: Does not work with block content!
+ */
 function getAutoColumnWidth(
   thRef: React.RefObject<HTMLTableCellElement | null>,
 ) {
