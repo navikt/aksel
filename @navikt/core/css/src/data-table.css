@@ -35,17 +35,14 @@
     min-width: 100%;
   }
 
-  --__axc-data-table-text-size: var(--ax-font-size-medium);
+  /* Default font size is prop "medium", which is variable --ax-font-size-large */
+  --__axc-data-table-text-size: var(--ax-font-size-large);
   --__axc-data-table-density-base: var(--ax-space-16);
-  --__axc-data-table-density-scale: calc(var(--__axc-data-table-text-size) / var(--ax-font-size-medium));
+  --__axc-data-table-density-scale: calc(var(--__axc-data-table-text-size) / var(--ax-font-size-large));
   --__axc-data-table-density: calc(var(--__axc-data-table-density-base) * var(--__axc-data-table-density-scale));
 
   &[data-text-size="small"] {
-    --__axc-data-table-text-size: var(--ax-font-size-small);
-  }
-
-  &[data-text-size="large"] {
-    --__axc-data-table-text-size: var(--ax-font-size-large);
+    --__axc-data-table-text-size: var(--ax-font-size-medium);
   }
 
   &[data-density="condensed"] {

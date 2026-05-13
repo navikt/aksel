@@ -156,7 +156,7 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * Adjusts font-size
    * @default "medium"
    */
-  textSize?: "small" | "medium" | "large";
+  textSize?: "small" | "medium";
 
   /**
    * Function to get sub-rows for a given row, used for nested rows.

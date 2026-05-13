@@ -360,9 +360,9 @@ export const KitchenSinkAdvancedFilter: Story = {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
     >("normal");
-    const [textSize, setTextSize] = React.useState<
-      "small" | "medium" | "large"
-    >("medium");
+    const [textSize, setTextSize] = React.useState<"small" | "medium">(
+      "medium",
+    );
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
     const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
@@ -534,7 +534,6 @@ export const KitchenSinkAdvancedFilter: Story = {
                       >
                         <Radio value="small">Liten</Radio>
                         <Radio value="medium">Medium</Radio>
-                        <Radio value="large">Stor</Radio>
                       </RadioGroup>
                       <Switch
                         size="small"
