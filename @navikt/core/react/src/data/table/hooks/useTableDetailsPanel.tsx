@@ -27,12 +27,8 @@ type DetailsPanelProps<T> = {
   defaultExpandedRowIds?: TableRowEntryId[];
   /**
    * Called when the list of expanded row IDs changes.
-   *
-   *
-   * TODO:
-   * - Docs: This pattern is called "Master / Detail" in general terms
    */
-  onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
+  onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void; // TODO: Docs: This pattern is called "Master / Detail" in general terms
   /**
    * Returns the height (in px) or `"auto"` for a row's details panel.
    * When a number is returned, the panel scrolls within that fixed height.

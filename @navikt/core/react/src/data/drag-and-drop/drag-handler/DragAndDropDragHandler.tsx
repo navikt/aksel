@@ -90,7 +90,6 @@ export const DragAndDropDragHandler = React.forwardRef<
 
           if (event.key === "Escape") {
             // Cancel dragging
-            // TODO Handle reset
             event.preventDefault();
             context?.setAnnouncer(`Flytting av ${itemLabel} avbrutt.`);
             context?.cancelDrag(true);
