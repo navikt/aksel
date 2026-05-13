@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useMemo, useRef } from "react";
 import {
   ArrowsUpDownIcon,
   CaretLeftCircleFillIcon,
@@ -13,10 +13,15 @@ import {
   type DataTableBaseCellProps,
 } from "../base-cell/DataTableBaseCell";
 import type { SortDirection } from "../root/DataTable.types";
+import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 interface DataTableColumnHeaderProps
   extends ResizeProps, DataTableBaseCellProps {
+  /**
+   * Unique identifier for the column. Required for sortable columns to identify which column is being sorted.
+   */
+  id?: string;
   /**
    * Accessible name of the column.
    */
@@ -56,12 +61,11 @@ const DataTableColumnHeader = forwardRef<
 >(
   (
     {
+      id,
       className,
       children,
       label,
       sortable = false,
-      sortDirection = "none",
-      onSortClick,
       resizable = true,
       style,
       width,
@@ -77,6 +81,8 @@ const DataTableColumnHeader = forwardRef<
   ) => {
     const thRef = useRef<HTMLTableCellElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, thRef);
+    const { sortingState } = useDataTableContext();
+    const { onSortClick, sortState } = sortingState;
 
     const resizeResult = useTableColumnResize({
       resizable,
@@ -90,7 +96,14 @@ const DataTableColumnHeader = forwardRef<
       colSpan: rest.colSpan,
     });
 
-    const SortIcon = sortable ? SORT_ICON[sortDirection] : null;
+    const sortDirection = useMemo(() => {
+      const sortEntry = sortState.find((s) => s.columnId === id);
+      return sortEntry?.direction ?? "none";
+    }, [id, sortState]);
+
+    const canSort = sortable && id !== undefined;
+
+    const SortIcon = canSort ? SORT_ICON[sortDirection] : null;
 
     return (
       <DataTableBaseCell
@@ -98,16 +111,16 @@ const DataTableColumnHeader = forwardRef<
         {...rest}
         ref={mergedRef}
         className={cl("aksel-data-table__column-header", className)}
-        data-sortable={sortable}
+        data-sortable={canSort}
         style={{ ...style, width: resizeResult.width }}
-        aria-sort={sortable ? getAriaSort(sortDirection) : undefined}
+        aria-sort={canSort ? getAriaSort(sortDirection) : undefined}
         cellType={cellType}
       >
-        {sortable ? (
+        {canSort ? (
           <button
             type="button"
             className="aksel-data-table__th-sort-button"
-            onClick={onSortClick}
+            onClick={(event) => onSortClick(id, event)}
           >
             <div className="aksel-data-table__th-content">{children}</div>
             {SortIcon && (

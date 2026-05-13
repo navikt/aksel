@@ -101,4 +101,4 @@ function nextSortEntries(
 }
 
 export { useTableSort };
-export type { TableSortOptions };
+export type { TableSortOptions, UseTableSortResults };

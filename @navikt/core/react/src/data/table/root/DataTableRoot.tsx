@@ -198,7 +198,7 @@ function DataTableInner<T>(
   }: DataTableProps<T>,
   forwardedRef: React.ForwardedRef<HTMLTableElement>,
 ) {
-  const { sortState, onSortClick } = useTableSort(sorting);
+  const sortingState = useTableSort(sorting);
 
   const tableItems = useTableItems({
     items: data,
@@ -248,6 +248,7 @@ function DataTableInner<T>(
       columns={columns}
       fullWidthColSpan={fullWidthColSpan}
       tableItems={tableItems}
+      sortingState={sortingState}
     >
       <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
         <TableElementWrapper enabled={withKeyboardNav}>
@@ -267,12 +268,9 @@ function DataTableInner<T>(
               <DataTableTr>
                 {columns.map(
                   ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
-                    const sortEntry = sortState.find(
-                      (s) => s.columnId === colDef.id,
-                    );
-                    const sortDirection = sortEntry?.direction ?? "none";
                     return (
                       <DataTableColumnHeader
+                        id={colDef.id}
                         resizable={colDef.resizable}
                         width={colDef.width}
                         defaultWidth={colDef.defaultWidth}
@@ -284,8 +282,6 @@ function DataTableInner<T>(
                         key={colDef.id}
                         isSticky={isSticky}
                         sortable={colDef.sortable}
-                        sortDirection={sortDirection}
-                        onSortClick={(event) => onSortClick(colDef.id, event)}
                         label={colDef.label}
                         style={
                           stickyLeftOffset

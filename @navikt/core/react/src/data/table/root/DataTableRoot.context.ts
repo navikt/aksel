@@ -5,6 +5,7 @@ import type {
 } from "../hooks/useColumnOptions";
 import type { UseTableItemsReturn } from "../hooks/useTableItems";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
+import type { UseTableSortResults } from "../hooks/useTableSort";
 import type {
   DataTableLoadingConfig,
   TableRowEntryId,
@@ -32,6 +33,7 @@ type DataTableContextProps<T> = {
    * The current items and related metadata.
    */
   tableItems: UseTableItemsReturn<T>;
+  sortingState: UseTableSortResults;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =

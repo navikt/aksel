@@ -242,6 +242,10 @@ const DataTable = forwardRef<HTMLTableElement, DataTableProps>(
           isSubRowExpanded: () => false,
           onExpandedRowIdsChange: () => null,
         }}
+        sortingState={{
+          onSortClick: () => null,
+          sortState: [],
+        }}
       >
         <DataTableDetailsPanelProvider>
           <div className="aksel-data-table__border-wrapper">
