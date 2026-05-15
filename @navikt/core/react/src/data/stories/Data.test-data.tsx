@@ -24,7 +24,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     id: "id",
     label: "Id",
     cell: (row) => row.id,
-    autoWidth: true,
+    width: { autoResizeOnce: true },
   },
   {
     label: "Name",
@@ -37,7 +37,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     id: "nationalId",
     cell: (row) => row.nationalId,
     align: "right",
-    autoWidth: true,
+    width: { autoResizeOnce: true },
   },
   {
     label: "Day job",
@@ -64,7 +64,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     id: "age",
     cell: (row) => row.age,
     align: "right",
-    autoWidth: true,
+    width: { autoResizeOnce: true },
 
     /* TODO: NOt yet implemented */
     /* footer: ({ table }) => {
@@ -86,7 +86,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
         data-color={row.forceSensitive ? "accent" : "warning"}
       >{`${row.forceSensitive ? "Yes" : "No"}`}</Tag>
     ),
-    autoWidth: true,
+    width: { autoResizeOnce: true },
     align: "center",
   },
   {
@@ -122,7 +122,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     label: "Actions",
     id: "actions",
-    autoWidth: true,
+    width: { autoResizeOnce: true },
     cell: (row) => (
       <>
         <Button

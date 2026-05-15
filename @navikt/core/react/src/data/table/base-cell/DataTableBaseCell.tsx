@@ -2,7 +2,10 @@ import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
-interface DataTableBaseCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+interface DataTableBaseCellProps extends Omit<
+  React.TdHTMLAttributes<HTMLTableCellElement>,
+  "width"
+> {
   /**
    * Content alignment inside cell.
    *

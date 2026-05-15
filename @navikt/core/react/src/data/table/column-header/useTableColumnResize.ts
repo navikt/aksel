@@ -29,51 +29,43 @@ type ResizeProps = {
    *
    * **NB:** Does not work with block content.
    */
-  autoWidth?: boolean;
+  autoResizeOnce?: boolean;
   /**
-   * Minimum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
+   * Minimum width of the column when resizing. Only used when `resizable` or `autoResizeOnce` is enabled.
    * @default 40
    */
-  minWidth?: number;
+  resizeMin?: number;
   /**
-   * Maximum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
+   * Maximum width of the column when resizing. Only used when `resizable` or `autoResizeOnce` is enabled.
    */
-  maxWidth?: number;
+  resizeMax?: number;
   // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
   /**
-   * Controlled width of the column. Does not respect `minWidth` and `maxWidth`.
+   * Controlled width of the column. (Does not respect `resizeMin` and `resizeMax`.)
    *
-   * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
+   * Should only be used to fully control column width state. Otherwise, use `default` and let the component handle resizing.
    *
    * **NB:** Percentage as initial width does not work well with resizing.
    */
-  width?: number | string;
+  value?: number | string;
   /**
-   * Initial width of the column. Only used when `width` is not set and `resizable` is true.
-   * Does not respect `minWidth` and `maxWidth`.
+   * Initial width of the column. Only used when `value` is not set.
+   * (Does not respect `resizeMin` and `resizeMax`.)
    *
    * **NB:** Percentage as initial width does not work well with resizing.
    * @default 140px
    */
-  defaultWidth?: number | string;
+  default?: number | string;
   /**
    * Called when the column width changes.
    * @param width New width in pixels.
    */
-  onWidthChange?: (width: number) => void;
-  /**
-   * Forwarded colSpan
-   */
-  colSpan?: number;
+  onChange?: (width: number) => void;
 };
 
-type WithUndefined<T> = {
-  [K in keyof T]: T[K] | undefined;
-};
-type Unomittable<T> = WithUndefined<Required<T>>;
-
-type TableColumnResizeArgs = Unomittable<ResizeProps> & {
+type TableColumnResizeArgs = ResizeProps & {
   thRef: React.RefObject<HTMLTableCellElement | null>;
+  colSpan: number | undefined;
 };
 
 type TableColumnResizeResult =
@@ -101,14 +93,14 @@ type TableColumnResizeResult =
  * be able to set "1fr" or similar and have it fill remaining space.
  */
 function useTableColumnResize({
-  resizable,
+  resizable = true,
+  autoResizeOnce,
+  resizeMin = 40,
+  resizeMax = Infinity,
+  value,
+  default: defaultProp,
+  onChange,
   thRef,
-  width: userWidth,
-  defaultWidth,
-  autoWidth,
-  onWidthChange,
-  maxWidth = Infinity,
-  minWidth = 40,
   colSpan,
 }: TableColumnResizeArgs): TableColumnResizeResult {
   const tableContext = useDataTableContext();
@@ -117,27 +109,27 @@ function useTableColumnResize({
   const ignoreNextOnClick = useRef(false);
 
   const [width, setWidth] = useControllableState({
-    value: userWidth,
-    defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
+    value,
+    defaultValue: defaultProp ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
      * Otherwise, this could cause excessive calls when resizing quickly.
      */
-    onChange: onWidthChange,
+    onChange,
   });
 
   const setClampedWidth = useCallback(
     (newWidth: number) => {
-      setWidth(Math.min(Math.max(newWidth, minWidth), maxWidth));
+      setWidth(Math.min(Math.max(newWidth, resizeMin), resizeMax));
     },
-    [minWidth, maxWidth, setWidth],
+    [resizeMin, resizeMax, setWidth],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoWidth changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoResizeOnce changes
   useEffect(
     function autoResizeColumn() {
-      if (!autoWidth) {
+      if (!autoResizeOnce) {
         return;
       }
 
@@ -146,7 +138,7 @@ function useTableColumnResize({
         setClampedWidth(newColumnWidth);
       }
     },
-    [autoWidth], // eslint-disable-line react-hooks/exhaustive-deps
+    [autoResizeOnce], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
@@ -204,11 +196,11 @@ function useTableColumnResize({
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        if (newWidth > maxWidth) {
+        if (newWidth > resizeMax) {
           setWidth(newWidth < currentWidth ? newWidth : currentWidth);
           return;
         }
-        if (newWidth < minWidth) {
+        if (newWidth < resizeMin) {
           setWidth(newWidth > currentWidth ? newWidth : currentWidth);
           return;
         }
@@ -241,7 +233,7 @@ function useTableColumnResize({
       document.addEventListener("touchend", cleanup, { once: true });
       document.addEventListener("touchcancel", cleanup, { once: true });
     },
-    [maxWidth, minWidth, setWidth, setClampedWidth, thRef],
+    [resizeMax, resizeMin, setWidth, setClampedWidth, thRef],
   );
 
   const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =

@@ -260,13 +260,7 @@ function DataTableInner<T>(
                     return (
                       <DataTableColumnHeader
                         id={colDef.id}
-                        resizable={colDef.resizable}
                         width={colDef.width}
-                        defaultWidth={colDef.defaultWidth}
-                        autoWidth={colDef.autoWidth}
-                        minWidth={colDef.minWidth}
-                        maxWidth={colDef.maxWidth}
-                        onWidthChange={colDef.onWidthChange}
                         textAlign={colDef.align ?? "left"}
                         key={colDef.id}
                         isSticky={isSticky}

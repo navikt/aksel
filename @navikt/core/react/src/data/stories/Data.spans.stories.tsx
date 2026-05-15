@@ -26,14 +26,14 @@ export const Spans: Story = {
             <DataTable.Tr>
               <DataTableColumnHeader
                 label="Group A"
-                defaultWidth="100%"
+                width={{ default: "100%" }}
                 colSpan={2}
               >
                 Group A
               </DataTableColumnHeader>
               <DataTableColumnHeader
                 label="Group B"
-                defaultWidth="100%"
+                width={{ default: "100%" }}
                 colSpan={2}
               >
                 Group B
@@ -115,7 +115,7 @@ export const SpansSortable: Story = {
             <DataTable.Tr>
               <DataTableColumnHeader
                 label="Group A"
-                defaultWidth="100%"
+                width={{ default: "100%" }}
                 colSpan={2}
                 sortable
               >
@@ -123,7 +123,7 @@ export const SpansSortable: Story = {
               </DataTableColumnHeader>
               <DataTableColumnHeader
                 label="Group B"
-                defaultWidth="100%"
+                width={{ default: "100%" }}
                 colSpan={2}
                 sortable
               >

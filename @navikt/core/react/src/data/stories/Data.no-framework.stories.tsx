@@ -110,7 +110,7 @@ export const WithoutTanstack: Story = {
                 return (
                   <DataTableColumnHeader
                     key={column.header}
-                    defaultWidth={150}
+                    width={{ default: 150 }}
                     //style={{ width: `var(--header-${header.id}-size)` }}
                     data-key={column.accessorKey}
                     /* pinningHandler={() => {

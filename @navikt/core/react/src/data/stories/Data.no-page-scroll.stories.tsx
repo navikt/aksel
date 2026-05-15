@@ -88,7 +88,7 @@ export const NoPageScroll: Story = {
                           label={(
                             header.column.columnDef.header || ""
                           ).toString()}
-                          defaultWidth={header.getSize()}
+                          width={{ default: header.getSize() }}
                           sortable
                           sortDirection={header.column.getIsSorted() || "none"}
                           onSortClick={(event) => {

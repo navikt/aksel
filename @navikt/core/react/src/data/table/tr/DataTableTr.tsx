@@ -149,7 +149,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          width={ACTION_CELL_CSS_WIDTH}
+          width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           data-block-keyboard-nav
           label=""
@@ -172,7 +172,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead" && !showExpandAll) {
     return (
       <DataTableColumnHeader
-        width={ACTION_CELL_CSS_WIDTH}
+        width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         data-block-keyboard-nav
         label=""
@@ -186,7 +186,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return (
       <DataTableColumnHeader
         textAlign="center"
-        width={ACTION_CELL_CSS_WIDTH}
+        width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
         isSticky={stickyExpansion && "start"}
@@ -280,7 +280,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          width={ACTION_CELL_CSS_WIDTH}
+          width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           label=""
           data-block-keyboard-nav
@@ -313,7 +313,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return (
       <DataTableColumnHeader
         textAlign="center"
-        width={ACTION_CELL_CSS_WIDTH}
+        width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
         isSticky={stickySelection && "start"}
@@ -330,7 +330,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (selection.selectionMode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
-        width={ACTION_CELL_CSS_WIDTH}
+        width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
         data-block-keyboard-nav

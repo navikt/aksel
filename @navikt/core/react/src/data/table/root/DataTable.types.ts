@@ -1,4 +1,4 @@
-import type { ResizeProps } from "../column-header/useTableColumnResize";
+import type { DataTableColumnHeaderProps } from "../column-header/DataTableColumnHeader";
 
 type SortDirection = "asc" | "desc" | "none";
 
@@ -7,20 +7,10 @@ type SortDirection = "asc" | "desc" | "none";
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
  * - Add "align" property for better control over text alignment in cells.
  */
-type ColumnDefinition<T> = Pick<
-  ResizeProps,
-  | "resizable"
-  | "width"
-  | "defaultWidth"
-  | "autoWidth"
-  | "minWidth"
-  | "maxWidth"
-  | "onWidthChange"
-> & {
+type ColumnDefinition<T> = {
   id: string;
   /**
    * Text alignment for cells in this column.
-   *
    *
    * @default "left"
    */
@@ -51,7 +41,7 @@ type ColumnDefinition<T> = Pick<
    * Use `sort` and `onSortChange` on the root component to control sort state.
    */
   sortable?: boolean;
-};
+} & Pick<DataTableColumnHeaderProps, "width">;
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];
 

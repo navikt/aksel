@@ -16,8 +16,7 @@ import type { SortDirection } from "../root/DataTable.types";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
-interface DataTableColumnHeaderProps
-  extends ResizeProps, DataTableBaseCellProps {
+interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
   /**
    * Unique identifier for the column. Required for sortable columns to identify which column is being sorted.
    */
@@ -36,12 +35,26 @@ interface DataTableColumnHeaderProps
    * Uses values matching the `aria-sort` attribute directly. // TODO: What does this mean? (Can we just remove it?)
    * @default "none"
    */
-  sortDirection?: SortDirection;
+  sortDirection?: SortDirection; // TODO Not in use???
   /**
    * Called when the user clicks the header. Only relevant when `sortable` is true.
    * The consumer is responsible for determining and setting the next sort state. // TODO: We don't use the term "consumer" in JSDoc anywhere else
    */
-  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO Not in use???
+  /**
+   * Props related to column width and resizing. Summary:
+   *
+   * - `resizable?: boolean` - Whether the column should be resizable by the user.
+   * - `autoResizeOnce?: boolean` - Whether the column should automatically resize to fit its content.
+   * - `resizeMin?: number` - Minimum width of the column when resizing.
+   * - `resizeMax?: number` - Maximum width of the column when resizing.
+   * - `value?: number | string` - Controlled width of the column.
+   * - `default?: number | string` - Initial width of the column.
+   * - `onChange?: (width: number) => void` - Called when the column width changes.
+   *
+   * See individual props for details and defaults.
+   */
+  width?: ResizeProps;
 }
 
 const SORT_ICON: Record<SortDirection, React.ElementType> = {
@@ -62,19 +75,13 @@ const DataTableColumnHeader = forwardRef<
   (
     {
       id,
-      className,
-      children,
       label,
       sortable = false,
-      resizable = true,
-      style,
       width,
-      defaultWidth,
-      autoWidth,
-      minWidth,
-      maxWidth,
-      onWidthChange,
       cellType,
+      className,
+      children,
+      style,
       ...rest
     },
     forwardedRef,
@@ -85,14 +92,8 @@ const DataTableColumnHeader = forwardRef<
     const { onSortClick, sortState } = sortingState;
 
     const resizeResult = useTableColumnResize({
-      resizable,
+      ...width,
       thRef,
-      width,
-      defaultWidth,
-      autoWidth,
-      minWidth,
-      maxWidth,
-      onWidthChange,
       colSpan: rest.colSpan,
     });
 
