@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, within } from "storybook/test";
 import { DataTable, type DataTableProps } from "../table";
 
@@ -163,7 +164,7 @@ export const ResizeDefaultDynamicWidth: Story = {
   },
 };
 
-export const ResizeAutoWidth: Story = {
+export const ResizeAuto: Story = {
   args: {
     data: testData,
     columnDefinitions: [
@@ -207,7 +208,7 @@ export const ResizeAutoWidth: Story = {
         cell: () => "Test",
       },
       {
-        id: "headingIsWidest",
+        id: "headingIsWidestSortable",
         label: "Heading is widest + sortable",
         width: {
           default: 50,
@@ -218,14 +219,25 @@ export const ResizeAutoWidth: Story = {
       },
     ],
   },
+  render: (props) => {
+    const [showTable, setShowTable] = React.useState(false);
+    return showTable ? (
+      <DataTable {...props} />
+    ) : (
+      <button onClick={() => setShowTable(true)}>Show table</button>
+    );
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    await new Promise((r) => setTimeout(r, 200)); // Wait for font to load, so that correct widths are calculated.
+    const button = canvas.getByRole("button", { name: "Show table" });
+    await button.click();
     const headers = canvas.getAllByRole("columnheader");
     expect(headers.length).toBe(5);
-    expect(headers[0].getBoundingClientRect().width).toBe(80);
-    expect(headers[1].getBoundingClientRect().width).toBe(82);
-    expect(headers[2].getBoundingClientRect().width).toBe(102);
-    expect(headers[3].getBoundingClientRect().width).toBe(168);
-    expect(headers[4].getBoundingClientRect().width).toBe(248);
+    expect(headers[0]).toHaveStyle({ width: "80px" });
+    expect(headers[1]).toHaveStyle({ width: "82px" });
+    expect(headers[2]).toHaveStyle({ width: "102px" });
+    expect(headers[3]).toHaveStyle({ width: "168px" });
+    expect(headers[4]).toHaveStyle({ width: "248px" });
   },
 };
