@@ -231,7 +231,8 @@ export const ResizeAuto: Story = {
     const canvas = within(canvasElement);
     await new Promise((r) => setTimeout(r, 200)); // Wait for font to load, so that correct widths are calculated.
     const button = canvas.getByRole("button", { name: "Show table" });
-    await button.click();
+    button.click();
+    await new Promise((r) => setTimeout(r, 100)); // Make sure auto resize has happened
     const headers = canvas.getAllByRole("columnheader");
     expect(headers.length).toBe(5);
     expect(headers[0]).toHaveStyle({ width: "80px" });
