@@ -115,7 +115,7 @@
     "prettier": "3.8.1",
     "react": "19.2.5",
     "react-docgen-typescript": "2.2.2",
-    "react-dom": "19.2.5",
+    "react-dom": "19.2.6",
     "storybook": "^10.3.6",
     "storybook-addon-pseudo-states": "^10.3.6",
     "stylelint": "^17.2.0",
