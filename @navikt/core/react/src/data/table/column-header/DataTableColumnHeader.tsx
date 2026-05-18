@@ -28,11 +28,11 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * Makes the column sortable by clicking on the header.
    * The entire header cell content becomes a clickable button when true.
    */
-  sortable?: boolean; // TODO: Consider merging sortable, sortDirection and onSortClick into a single "sort" object prop
+  sortable?: boolean;
   /**
    * Called when the user clicks the header. Only relevant when `sortable` is true.
-   * The consumer is responsible for determining and setting the next sort state. // TODO: We don't use the term "consumer" in JSDoc anywhere else
-   */
+   * The consumer is responsible for determining and setting the next sort state.
+   */ // TODO: We don't use the term "consumer" in JSDoc anywhere else
   onSortClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO Not in use???
   /**
    * Object with props related to column width and resizing. Summary:

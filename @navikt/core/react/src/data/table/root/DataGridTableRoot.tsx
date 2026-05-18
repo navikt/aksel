@@ -41,7 +41,7 @@ import {
   useDataTableContext,
 } from "./DataTableRoot.context";
 
-/**
+/*
  * TODO: For consideration:
  * - Use namespacing for types. There will be a lot of standalone types connected to this component,
  * it could make sense to access them under DataTable.X instead of separate imports.
@@ -50,7 +50,7 @@ import {
  * This would make props more focused and discoverable since its not mixed with htmltable-props.
  */
 
-/**
+/*
  * TODO:
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
  */
