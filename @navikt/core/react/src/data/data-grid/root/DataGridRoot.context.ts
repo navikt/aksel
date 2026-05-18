@@ -10,7 +10,7 @@ type DataGridContextValue<RowDef = unknown> = {
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =
   createStrictContext<DataGridContextValue>({
     name: "DataGridContext",
-    errorMessage: "Data-grid hooks must be used within a <DataGrid />",
+    errorMessage: "DataGrid hooks must be used within a <DataGrid />",
   });
 
 export { DataGridContextProvider, useDataGridContext };
