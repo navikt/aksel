@@ -690,11 +690,11 @@ export const KitchenSinkAdvancedFilter: Story = {
             start: stickyColumns.first === "first" ? "1" : undefined,
             end: stickyColumns.last === "last" ? "1" : undefined,
           }}
-          detailsPanel={{
-            getContent: showDetailsPanel
-              ? (rowData) => <DetailsPanel row={rowData} />
-              : undefined,
-          }}
+          detailsPanel={
+            showDetailsPanel
+              ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }
+              : undefined
+          }
           subRows={{
             /* @ts-expect-error Test-data just hacked together now  */
             getRows: showNestedRows

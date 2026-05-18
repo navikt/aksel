@@ -6,10 +6,10 @@ import { useDataTableContext } from "../root/DataTableRoot.context";
 
 type DetailsPanelProps<T> = {
   /**
-   * Renders a details panel below the row when expanded.
+   * Function to get the content to show in the details panel for a given row.
    * When provided, an expand toggle column is added automatically.
    */
-  getContent?: (rowData: T) => React.ReactNode;
+  getContent: (rowData: T) => React.ReactNode;
   /**
    * Determines whether a row can be expanded to show details panel content.
    * @default () => true
@@ -65,7 +65,7 @@ const {
 
 function DataTableDetailsPanelProvider<T>({
   children,
-  detailsPanel = {},
+  detailsPanel,
 }: { detailsPanel?: DetailsPanelProps<T> } & { children: React.ReactNode }) {
   const {
     expandedRowIds,
@@ -75,7 +75,7 @@ function DataTableDetailsPanelProvider<T>({
     isRowExpandable,
     getHeight,
     showExpandAll = false,
-  } = detailsPanel;
+  } = detailsPanel || {};
 
   const [expandedIds, setExpandedIds] = useControllableState({
     value: expandedRowIds,

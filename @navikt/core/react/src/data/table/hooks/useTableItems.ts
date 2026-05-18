@@ -7,11 +7,28 @@ import {
 import type { TableRowEntryId } from "../root/DataTable.types";
 
 type SubRowsProps<T> = {
-  getRows?: (rowData: T) => T[];
+  /**
+   * Function to get sub-rows for a given row.
+   */
+  getRows: (rowData: T) => T[];
+  /**
+   * Controlled list of IDs of rows that should be expanded.
+   */
   expandedRowIds?: TableRowEntryId[];
+  /**
+   * IDs of rows that should be initially expanded.
+   * Only used when `expandedRowIds` is not provided, i.e. when the expanded state is uncontrolled.
+   */
   defaultExpandedRowIds?: TableRowEntryId[];
-  isRowExpandable?: (rowData: T) => boolean;
+  /**
+   * Called when the list of expanded row IDs changes.
+   */
   onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
+  /**
+   * Function to get whether a row should be expandable.
+   * By default, all rows are expandable when `getRows` is provided.
+   */
+  isRowExpandable?: (rowData: T) => boolean;
 };
 
 type UseTableItemsArgs<T> = {
@@ -32,7 +49,7 @@ type UseTableItemsReturn<T> = {
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
-  const { items, subRows = {}, getRowId } = args;
+  const { items, subRows, getRowId } = args;
 
   const {
     expandedRowIds,
@@ -40,7 +57,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     getRows,
     onExpandedRowIdsChange,
     isRowExpandable,
-  } = subRows;
+  } = subRows || {};
 
   const [nestedSubRowsExpandedIds, setNestedSubRowsExpandedIds] =
     useControllableState({
