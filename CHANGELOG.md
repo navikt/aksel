@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.10.6
+
+### @navikt/ds-css
+
+- 🎨 InfoCard: Added bigger padding for medium sized InfoCard.Message ([#4861](https://github.com/navikt/aksel/pull/4861))
+
 ## 8.10.5
 
 ### @navikt/ds-react

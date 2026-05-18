@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.10.6
+
+### Patch Changes
+
+- 🎨 InfoCard: Added bigger padding for medium sized InfoCard.Message ([#4861](https://github.com/navikt/aksel/pull/4861))
+
 ## 8.10.5
 
 ### Patch Changes
