@@ -313,21 +313,6 @@
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
       white-space: nowrap;
-
-      /* TODO: Too magical? Consider prop instead */
-      > :is(.aksel-tag, .aksel-button) {
-        vertical-align: top;
-
-        &:not(:last-child) {
-          margin-right: var(--ax-space-8);
-        }
-      }
-    }
-
-    .aksel-data-table[data-truncate-content="false"] &:has(.aksel-tag, .aksel-button) {
-      display: flex;
-      gap: var(--ax-space-8);
-      flex-wrap: wrap;
     }
   }
 }

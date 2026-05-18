@@ -1,6 +1,7 @@
 import React from "react";
 import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import { HStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
 import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 
@@ -97,34 +98,22 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     label: "Skills",
     id: "skills",
-    cell: (row) =>
-      row.skills.map((skill) => (
-        <Tag key={skill} size="small" variant="moderate">
-          {skill}
-        </Tag>
-      )),
-    /* cell: (row) => (
-      <Bleed marginBlock="space-4" marginInline="space-4">
+    cell: (row) => (
+      <HStack gap="space-8" wrap={false}>
         {row.skills.map((skill) => (
-          <Box
-            key={skill}
-            style={{ display: "inline-block" }}
-            padding="space-4"
-          >
-            <Tag size="small" variant="moderate">
-              {skill}
-            </Tag>
-          </Box>
+          <Tag key={skill} size="small" variant="moderate">
+            {skill}
+          </Tag>
         ))}
-      </Bleed>
-    ), */
+      </HStack>
+    ),
   },
   {
     label: "Actions",
     id: "actions",
     width: { autoResizeOnce: true },
     cell: (row) => (
-      <>
+      <HStack gap="space-8">
         <Button
           size="xsmall"
           variant="secondary"
@@ -139,7 +128,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
           data-color="neutral"
           icon={<MenuElipsisVerticalIcon title="Meny" />}
         />
-      </>
+      </HStack>
     ),
   },
 ];

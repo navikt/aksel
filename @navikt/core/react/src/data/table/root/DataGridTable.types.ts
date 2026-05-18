@@ -28,7 +28,7 @@ type ColumnDefinition<T> = {
   /**
    * Renders table-cell
    */
-  cell: (item: T) => React.ReactNode;
+  cell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
   /**
    * Label of header. Renders if header is not provided.
    * TODO: Pri zero consider renaming to header
