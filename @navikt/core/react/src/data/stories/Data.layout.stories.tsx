@@ -17,31 +17,31 @@ const meta: Meta<typeof DataGridTable> = {
 export default meta;
 
 const columnDefinitions: ColumnDefinitions<PersonInfo> = [
-  { id: "id", label: "Id", cell: (row) => row.name },
-  { id: "name", label: "Name", cell: (row) => row.name },
-  { id: "nationalId", label: "National id", cell: (row) => row.nationalId },
-  { id: "dayJob", label: "Day job", cell: (row) => row.dayJob },
-  { id: "supervisor", label: "Supervisor", cell: (row) => row.supervisor },
+  { id: "id", header: "Id", cell: (row) => row.name },
+  { id: "name", header: "Name", cell: (row) => row.name },
+  { id: "nationalId", header: "National id", cell: (row) => row.nationalId },
+  { id: "dayJob", header: "Day job", cell: (row) => row.dayJob },
+  { id: "supervisor", header: "Supervisor", cell: (row) => row.supervisor },
   {
     id: "dateReceived",
-    label: "Date received",
+    header: "Date received",
     cell: (row) => row.dateReceived,
   },
   {
     id: "message",
-    label: "Message",
+    header: "Message",
     cell: (row) => row.message,
   },
-  { id: "age", label: "Age", cell: (row) => row.age },
+  { id: "age", header: "Age", cell: (row) => row.age },
   {
     id: "forceSensitive",
-    label: "Force sensitive",
+    header: "Force sensitive",
     cell: (row) => (row.forceSensitive ? "Yes" : "No"),
   },
-  { id: "homeSystem", label: "Home system", cell: (row) => row.homeSystem },
+  { id: "homeSystem", header: "Home system", cell: (row) => row.homeSystem },
   {
     id: "skills",
-    label: "Skills",
+    header: "Skills",
     cell: (row) => row.skills.join(", "),
   },
 ];
@@ -57,9 +57,9 @@ const minimalData: MinimalRow[] = [
 ];
 
 const minimalColumns: ColumnDefinitions<MinimalRow> = [
-  { id: "col1", label: "Column 1", cell: (row) => row.col1 },
-  { id: "col2", label: "Column 2", cell: (row) => row.col2 },
-  { id: "col3", label: "Column 3", cell: (row) => row.col3 },
+  { id: "col1", header: "Column 1", cell: (row) => row.col1 },
+  { id: "col2", header: "Column 2", cell: (row) => row.col2 },
+  { id: "col3", header: "Column 3", cell: (row) => row.col3 },
 ];
 
 type SortableRow = {
@@ -168,19 +168,19 @@ export const AutoLayoutSortable: StoryObj<{
       columnDefinitions: [
         {
           id: "left",
-          label: "Left",
+          header: "Left",
           sortable: true,
           cell: (row) => row.left,
         },
         {
           id: "center",
-          label: "Center",
+          header: "Center",
           sortable: true,
           cell: (row) => row.center,
         },
         {
           id: "right",
-          label: "Right",
+          header: "Right",
           sortable: true,
           cell: (row) => row.right,
         },

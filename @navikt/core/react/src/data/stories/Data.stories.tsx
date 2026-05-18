@@ -658,7 +658,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                                   });
                                 }}
                               >
-                                {item.label}
+                                {item.header}
                               </Switch>
                             );
                           }}

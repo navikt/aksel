@@ -26,7 +26,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col1",
     header: "Col 1",
-    label: "Col 1",
     cell: ({ id }) =>
       id === 1 ? (
         <input type="checkbox" data-testid="checkbox-1" />
@@ -37,7 +36,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
     cell: ({ id }) => {
       if (id === 1)
         return (
@@ -58,7 +56,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) =>
       id === 2 ? (
         <select data-testid="select">
@@ -73,7 +70,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col4",
     header: "Col 4",
-    label: "Col 4",
     cell: () => "Col 4",
   },
 ];
@@ -160,7 +156,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col1",
     header: "Col 1",
-    label: "Col 1",
     cell: ({ id }) => {
       if (id === 2) return <button disabled>Disabled button</button>;
       if (id === 3)
@@ -171,7 +166,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -189,7 +183,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -204,7 +197,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col4",
     header: "Col 4",
-    label: "Col 4",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -280,15 +272,14 @@ export const DisabledCells: Story = {
 type CacheRow = { id: number; col1: string };
 
 const cacheColumnDef: ColumnDefinitions<CacheRow> = [
-  { id: "col1", header: "Col 1", label: "Col 1", cell: ({ col1 }) => col1 },
-  { id: "col2", header: "Col 2", label: "Col 2", cell: () => "Col 2" },
+  { id: "col1", header: "Col 1", cell: ({ col1 }) => col1 },
+  { id: "col2", header: "Col 2", cell: () => "Col 2" },
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) => (id === 1 ? <input type="checkbox" /> : "Col 3"),
   },
-  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+  { id: "col4", header: "Col 4", cell: () => "Col 4" },
 ];
 
 export const Cache: Story = {
@@ -352,22 +343,20 @@ type FocusRow = { id: string };
 const focusData: FocusRow[] = [{ id: "1" }, { id: "2" }];
 
 const focusColumnDef: ColumnDefinitions<FocusRow> = [
-  { id: "col1", header: "Col 1", label: "Col 1", cell: () => "Col 1" },
+  { id: "col1", header: "Col 1", cell: () => "Col 1" },
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
     cell: ({ id }) =>
       id === "1" ? <button>Focusable button</button> : "Col 2",
   },
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: () => "Col 3",
     isRowHeader: true,
   },
-  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+  { id: "col4", header: "Col 4", cell: () => "Col 4" },
 ];
 
 export const FocusElementInsideTable: Story = {

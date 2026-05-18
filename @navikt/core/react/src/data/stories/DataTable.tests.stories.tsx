@@ -60,7 +60,6 @@ const fallbackIdData: TestRow[] = [
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
-    label: "Name",
     header: "Name",
     cell: (row) => row.name,
   },

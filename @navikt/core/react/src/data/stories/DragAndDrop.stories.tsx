@@ -20,24 +20,24 @@ type Story = StoryObj<typeof DragAndDrop>;
 export const Default: Story = {
   render: () => {
     const [items, setItems] = React.useState<ColumnDefinition<string>[]>([
-      { id: "id", label: "Id", cell: (item) => item },
-      { id: "name", label: "Name", cell: (item) => item },
-      { id: "nationality", label: "Nationality", cell: (item) => item },
-      { id: "dayJob", label: "Day job", cell: (item) => item },
-      { id: "supervisor", label: "Supervisor", cell: (item) => item },
-      { id: "dateReceived", label: "Date received", cell: (item) => item },
-      { id: "message", label: "Message", cell: (item) => item },
-      { id: "age", label: "Age", cell: (item) => item },
-      { id: "forceSensitive", label: "Force sensitive", cell: (item) => item },
-      { id: "homeSystem", label: "Home system", cell: (item) => item },
-      { id: "skills", label: "Skills", cell: (item) => item },
+      { id: "id", header: "Id", cell: (item) => item },
+      { id: "name", header: "Name", cell: (item) => item },
+      { id: "nationality", header: "Nationality", cell: (item) => item },
+      { id: "dayJob", header: "Day job", cell: (item) => item },
+      { id: "supervisor", header: "Supervisor", cell: (item) => item },
+      { id: "dateReceived", header: "Date received", cell: (item) => item },
+      { id: "message", header: "Message", cell: (item) => item },
+      { id: "age", header: "Age", cell: (item) => item },
+      { id: "forceSensitive", header: "Force sensitive", cell: (item) => item },
+      { id: "homeSystem", header: "Home system", cell: (item) => item },
+      { id: "skills", header: "Skills", cell: (item) => item },
     ]);
 
     return (
       <DragAndDrop
         setItems={setItems}
         items={items}
-        renderItem={(item) => <Switch size="small">{item.label}</Switch>}
+        renderItem={(item) => <Switch size="small">{item.header}</Switch>}
       />
     );
   },

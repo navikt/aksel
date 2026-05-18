@@ -59,7 +59,6 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "id",
     header: "Id",
-    label: "Id",
     cell: ({ id }) => id,
     align: "right",
     width: { default: "100px" },
@@ -67,13 +66,11 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "foo",
     header: "Foo",
-    label: "Foo",
     cell: ({ foo }) => foo,
   },
   {
     id: "bar",
     header: "Bar",
-    label: "Bar",
     cell: ({ bar }) => (
       <Tag variant="strong" size="xsmall">
         {bar}
@@ -83,13 +80,11 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "on",
     header: "Boolean demo",
-    label: "Boolean demo",
     cell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
     id: "time",
     header: "Time",
-    label: "Time",
     cell: ({ time }) => time.toISOString(),
   },
 ];
@@ -706,23 +701,20 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
     cell: ({ id }) => id,
     align: "right",
     sortable: true,
-    label: "Id",
   },
   {
     id: "foo",
     header: "Foo",
     cell: ({ foo }) => foo,
     sortable: true,
-    label: "Foo",
   },
   {
     id: "name",
     header: "Name",
     cell: ({ name }) => name,
     sortable: true,
-    label: "Name",
   },
-  { id: "bar", header: "Bar", cell: ({ bar }) => bar, label: "Bar" },
+  { id: "bar", header: "Bar", cell: ({ bar }) => bar },
 ];
 
 function applySortEntries<T extends Record<string, unknown>>(
@@ -797,12 +789,11 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, align: "right", label: "Id" },
-  { id: "foo", header: "Foo", cell: ({ foo }) => foo, label: "Foo" },
+  { id: "id", header: "Id", cell: ({ id }) => id, align: "right" },
+  { id: "foo", header: "Foo", cell: ({ foo }) => foo },
   {
     id: "link",
     header: "Link",
-    label: "Link",
     cell: ({ foo }) => (
       <a href="/example" onClick={(e) => e.preventDefault()}>
         {foo} link
@@ -812,13 +803,11 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "button",
     header: "Button",
-    label: "Button",
     cell: ({ foo }) => <button type="button">{foo} action</button>,
   },
   {
     id: "text",
     header: "Text",
-    label: "Text",
     cell: () => <input type="text" />,
   },
 ];

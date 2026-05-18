@@ -54,19 +54,19 @@ export const Resize: Story = {
     columnDefinitions: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
         cell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
         cell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
         cell: (row) => row.right,
       },
@@ -80,7 +80,7 @@ export const ResizeMinMax: Story = {
     columnDefinitions: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
         width: {
           default: 250,
@@ -91,7 +91,7 @@ export const ResizeMinMax: Story = {
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
         width: {
           resizeMin: 50,
@@ -101,7 +101,7 @@ export const ResizeMinMax: Story = {
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
         width: {
           default: 150,
@@ -120,21 +120,21 @@ export const ResizeDefaultStaticWidth: Story = {
     columnDefinitions: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
         width: { default: "300px" },
         cell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
         width: { default: "300px" },
         cell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
         width: { default: "300px" },
         cell: (row) => row.right,
@@ -149,21 +149,21 @@ export const ResizeDefaultDynamicWidth: Story = {
     columnDefinitions: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
         width: { default: "100%" },
         cell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
         width: { default: "100%" },
         cell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
         width: { default: "100%" },
         cell: (row) => row.right,
@@ -178,7 +178,7 @@ export const ResizeAuto: Story = {
     columnDefinitions: [
       {
         id: "left",
-        label: "L",
+        header: "L",
         align: "left",
         width: {
           default: 200,
@@ -188,7 +188,7 @@ export const ResizeAuto: Story = {
       },
       {
         id: "center",
-        label: "C",
+        header: "C",
         align: "center",
         width: {
           default: 200,
@@ -198,7 +198,7 @@ export const ResizeAuto: Story = {
       },
       {
         id: "right",
-        label: "R",
+        header: "R",
         align: "right",
         width: {
           default: 200,
@@ -208,7 +208,7 @@ export const ResizeAuto: Story = {
       },
       {
         id: "headingIsWidest",
-        label: "Heading is widest",
+        header: "Heading is widest",
         width: {
           default: 50,
           autoResizeOnce: true,
@@ -217,7 +217,7 @@ export const ResizeAuto: Story = {
       },
       {
         id: "headingIsWidestSortable",
-        label: "Heading is widest + sortable",
+        header: "Heading is widest + sortable",
         width: {
           default: 50,
           autoResizeOnce: true,

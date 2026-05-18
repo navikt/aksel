@@ -247,7 +247,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
                           key={colDef.id}
                           isSticky={isSticky}
                           sortable={colDef.sortable}
-                          label={colDef.label}
+                          label={colDef.header}
                           style={
                             stickyLeftOffset
                               ? { left: stickyLeftOffset }
@@ -255,7 +255,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
                           }
                           data-sticky-last={isStickyLast || undefined}
                         >
-                          {colDef.header ?? colDef.label}
+                          {colDef.headerCell ?? colDef.header}
                         </DataTableColumnHeader>
                       );
                     },

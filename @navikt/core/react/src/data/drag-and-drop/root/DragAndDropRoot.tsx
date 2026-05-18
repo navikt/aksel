@@ -304,7 +304,7 @@ function DragAndDropInner<T>(
               key={item.id}
               id={item.id}
               index={index}
-              itemLabel={item.label}
+              itemLabel={item.header}
             >
               {renderItem(item, index)}
             </DragAndDropItem>
@@ -330,7 +330,7 @@ function DragAndDropInner<T>(
               id={activeItem.id}
               index={activeItem.index}
               isOverlay
-              itemLabel={activeData.label}
+              itemLabel={activeData.header}
             >
               {renderItem(activeData, activeItem.index)}
             </DragAndDropItem>
