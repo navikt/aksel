@@ -3,32 +3,32 @@ import { cl } from "../../../utils/helpers";
 import type { ColumnDefinitions } from "../../table/root/DataTable.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
-type RowDefId = string;
+type RowTId = string;
 
-export interface DataGridProps<RowDef> extends HTMLAttributes<HTMLDivElement> {
+export interface DataGridProps<RowT> extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Definitions of the columns to display in the data grid.
    *
    * Each column definition should have a unique `id` and a `cell`-renderer function that takes the row data as argument and returns a React node.
    */
-  columnDefinitions: ColumnDefinitions<RowDef>;
+  columnDefinitions: ColumnDefinitions<RowT>;
   /**
    * The data to display.
    *
    * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
    */
-  data: RowDef[];
+  data: RowT[];
   /**
    * Function to get unique row id from row data.
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
-  getRowId?: (rowData: RowDef) => RowDefId;
+  getRowId?: (rowData: RowT) => RowTId;
 }
 
-type DataGridRootComponent = <RowDef>(
-  props: DataGridProps<RowDef> & React.RefAttributes<HTMLDivElement>,
+type DataGridRootComponent = <RowT>(
+  props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
 ) => React.ReactElement | null;
 
 /**
@@ -37,6 +37,9 @@ type DataGridRootComponent = <RowDef>(
  *
  * @example
  * ```jsx
+ * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+ *   <DataTable />
+ * </DataGrid>
  * ```
  */
 export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(

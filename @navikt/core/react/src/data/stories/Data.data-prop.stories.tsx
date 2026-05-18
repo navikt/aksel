@@ -893,13 +893,6 @@ export const RowExpansion: Story = {
           selectionMode: args.selection?.selectionMode ?? "none",
         }}
         withKeyboardNav
-        detailsPanel={{
-          getContent: (rowData) => {
-            return (
-              <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>
-            );
-          },
-        }}
       />
     </DataGrid>
   ),
