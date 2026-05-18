@@ -185,7 +185,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead") {
     return (
       <DataTableColumnHeader
-        textAlign="center"
+        align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
@@ -312,7 +312,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
     return (
       <DataTableColumnHeader
-        textAlign="center"
+        align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
