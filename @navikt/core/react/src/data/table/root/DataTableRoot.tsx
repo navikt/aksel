@@ -502,10 +502,12 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
                       data-nested={renderNestedIndent || undefined}
                       data-sticky-last={isStickyLast || undefined}
                       style={style}
+                      beforeContent={
+                        renderNestedToggle ? (
+                          <DataTableSubRowToggle details={details} />
+                        ) : undefined
+                      }
                     >
-                      {renderNestedToggle && (
-                        <DataTableSubRowToggle details={details} />
-                      )}
                       {colDef.cell(rowData)}
                     </DataTableBaseCell>
                   );

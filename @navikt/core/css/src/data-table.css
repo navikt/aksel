@@ -191,7 +191,7 @@
   &[data-nested="true"] {
     position: relative;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       margin-inline-start: calc(32px + 8px + calc(var(--__axc-data-table-nested-depth) * var(--ax-space-16)));
     }
   }
@@ -297,7 +297,7 @@
   &[data-cell-type="action"] {
     padding: 0;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       display: grid;
       place-content: center;
     }
@@ -305,7 +305,7 @@
 
   --__axc-data-table-pi-cell: var(--ax-space-16);
 
-  &:not([data-cell-type="action"]) > div {
+  &:not([data-cell-type="action"]) > .aksel-data-table__cell-content {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
     overflow: hidden;
@@ -521,7 +521,7 @@
   &[data-cell-type="action"] {
     padding: 0;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       display: grid;
       place-content: center;
     }

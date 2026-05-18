@@ -44,6 +44,12 @@ const DataTableBaseCell = forwardRef<
      * Cell type
      */
     as: "th" | "td";
+    /**
+     * Content to render before the main cell content.
+     *
+     * **WARNING: Adding content here that takes up space will probably break auto-resizing!**
+     */
+    beforeContent?: React.ReactNode;
   }
 >(
   (
@@ -51,6 +57,7 @@ const DataTableBaseCell = forwardRef<
       className,
       children,
       as: Component,
+      beforeContent,
       textAlign = "left",
       cellType,
       preventRowClick,
@@ -79,7 +86,13 @@ const DataTableBaseCell = forwardRef<
         colSpan={colSpan}
         rowSpan={rowSpan}
       >
-        <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
+        {beforeContent}
+        <div
+          className="aksel-data-table__cell-content"
+          style={{ maxWidth: contentMaxWidth }}
+        >
+          {children}
+        </div>
       </Component>
     );
   },

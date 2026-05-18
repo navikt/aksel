@@ -299,7 +299,7 @@ function getAutoColumnWidth(
 ) {
   const th = thRef.current!;
   const thContent = th.querySelector(".aksel-data-table__th-content");
-  const thPaddingEl = th.querySelector("div");
+  const thPaddingEl = th.querySelector(".aksel-data-table__cell-content");
   const rows = th.closest("table")?.querySelectorAll("tbody tr, tfoot tr");
   if (!thContent || !thPaddingEl || !rows) {
     return;
@@ -342,15 +342,18 @@ function getAutoColumnWidth(
     skipRows = cell.rowSpan - 1;
 
     // Find needed width
-    const cellContent = cell.firstChild as HTMLElement;
+    const cellContent = cell.querySelector(
+      ".aksel-data-table__cell-content",
+    ) as HTMLElement;
     range.selectNodeContents(cellContent);
     const cellContentWidth = range.getBoundingClientRect().width;
     const contentElStyle = window.getComputedStyle(cellContent);
     const inlinePadding =
       parseInt(contentElStyle.paddingLeft, 10) +
       parseInt(contentElStyle.paddingRight, 10);
+    const marginLeft = parseInt(contentElStyle.marginLeft, 10); // We don't have right margin for now
     const widthNeededForThisCell =
-      (cellContentWidth + inlinePadding) / cell.colSpan;
+      (cellContentWidth + inlinePadding + marginLeft) / cell.colSpan;
     if (widthNeededForThisCell > newColumnWidth) {
       newColumnWidth = widthNeededForThisCell;
     }
