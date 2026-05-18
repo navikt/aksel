@@ -10,6 +10,7 @@ import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
@@ -32,7 +33,6 @@ import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type {
-  ColumnDefinitions,
   DataTableLoadingConfig,
   TableRowEntryId,
 } from "./DataTable.types";
@@ -94,24 +94,6 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
-  /**
-   * Defines the columns of the table and how to render them.
-   *
-   * Each column definition should have a unique `id` (or use the column index as fallback) and a `cell`-renderer function that takes the row data as argument and returns a React node.
-   */
-  columnDefinitions: ColumnDefinitions<T>;
-  /**
-   * The data to display in the table.
-   *
-   * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
-   */
-  data: T[];
-  /**
-   * Function to get unique row id from row data.
-   *
-   * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
-   */
-  getRowId?: (rowData: T) => TableRowEntryId;
   /**
    * Sticky columns that remain visible when horizontally scrolling the table.
    *
@@ -182,9 +164,6 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
       zebraStripes = false,
       truncateContent: truncateContentProp,
       layout = "fixed",
-      data,
-      columnDefinitions,
-      getRowId,
       stickyColumns,
       stickyHeader = true,
       onRowClick,
@@ -198,6 +177,8 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     }: DataTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
+    const { columnDefinitions, data, getRowId } = useDataGridContext();
+
     const sortingState = useTableSort(sorting);
 
     const tableItems = useTableItems({

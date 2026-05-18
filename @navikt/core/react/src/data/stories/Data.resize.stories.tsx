@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { DataTable, type DataTableProps } from "../table";
+import { DataGrid, type DataGridProps } from "../data-grid";
+import { DataTable } from "../table";
 
 const meta: Meta<typeof DataTable> = {
   title: "ds-react/Data/Resize",
@@ -14,7 +15,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<DataTableProps<Row>>;
+type Story = StoryObj<DataGridProps<Row>>;
 
 type Row = {
   left: string;
@@ -41,6 +42,13 @@ const testData = [
 ];
 
 export const Resize: Story = {
+  render: (args) => {
+    return (
+      <DataGrid {...args}>
+        <DataTable />
+      </DataGrid>
+    );
+  },
   args: {
     data: testData,
     columnDefinitions: [
@@ -222,7 +230,9 @@ export const ResizeAuto: Story = {
   render: (props) => {
     const [showTable, setShowTable] = React.useState(false);
     return showTable ? (
-      <DataTable {...props} />
+      <DataGrid {...props}>
+        <DataTable />
+      </DataGrid>
     ) : (
       <button onClick={() => setShowTable(true)}>Show table</button>
     );

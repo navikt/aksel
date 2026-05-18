@@ -4,6 +4,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
+import { DataGrid } from "../data-grid";
 import { DataTable } from "../table";
 import type {
   ColumnDefinitions,
@@ -113,22 +114,29 @@ const userData = generateUserData(4);
 
 export const ItemsAsData: Story = {
   render: () => {
-    return <DataTable columnDefinitions={userColumnDef} data={userData} />;
+    return (
+      <DataGrid columnDefinitions={userColumnDef} data={userData}>
+        <DataTable />
+      </DataGrid>
+    );
   },
 };
 
 export const ItemsAsDataWithCustomRowId: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-        }}
         getRowId={(row) => row.foo + row.bar}
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -136,16 +144,19 @@ export const ItemsAsDataWithCustomRowId: Story = {
 export const SelectionModeMultiple: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-        }}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+          }}
+          withKeyboardNav
+        />
+      </DataGrid>
     );
   },
 };
@@ -153,17 +164,20 @@ export const SelectionModeMultiple: Story = {
 export const SelectionModeOnControlsOnly: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-          selectionTrigger: "control",
-        }}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+            selectionTrigger: "control",
+          }}
+          withKeyboardNav
+        />
+      </DataGrid>
     );
   },
 };
@@ -171,16 +185,19 @@ export const SelectionModeOnControlsOnly: Story = {
 export const SelectionModeSingle: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "single",
-          onSelectionChange: console.info,
-        }}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "single",
+            onSelectionChange: console.info,
+          }}
+          withKeyboardNav
+        />
+      </DataGrid>
     );
   },
 };
@@ -188,16 +205,19 @@ export const SelectionModeSingle: Story = {
 export const SelectionModeSingleWithoutKeyboardNav: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "single",
-          onSelectionChange: console.info,
-        }}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav={false}
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "single",
+            onSelectionChange: console.info,
+          }}
+          withKeyboardNav={false}
+        />
+      </DataGrid>
     );
   },
 };
@@ -205,17 +225,19 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
 export const SelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-          enableRowSelection: ({ id }) => id !== "2" && id !== "1",
-        }}
         getRowId={(row) => row.id.toString()}
-        withKeyboardNav
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+            enableRowSelection: ({ id }) => id !== "2" && id !== "1",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -234,16 +256,19 @@ export const ControlledSelection: Story = {
             Clear selection
           </Button>
         </div>
-        <DataTable
+        <DataGrid
           columnDefinitions={userColumnDef}
           data={userData}
-          selection={{
-            selectionMode: "multiple",
-            onSelectionChange: setSelectedKeys,
-            selectedKeys,
-          }}
           getRowId={(row) => row.id.toString()}
-        />
+        >
+          <DataTable
+            selection={{
+              selectionMode: "multiple",
+              onSelectionChange: setSelectedKeys,
+              selectedKeys,
+            }}
+          />
+        </DataGrid>
       </div>
     );
   },
@@ -252,16 +277,19 @@ export const ControlledSelection: Story = {
 export const DefaultSelectedKeys: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-          defaultSelectedKeys: ["1", "3"],
-        }}
         getRowId={(row) => row.id.toString()}
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+            defaultSelectedKeys: ["1", "3"],
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -269,16 +297,19 @@ export const DefaultSelectedKeys: Story = {
 export const SingleSelectionWithDisabledRows: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-          enableRowSelection: ({ id }) => id !== "2",
-        }}
         getRowId={(row) => row.id.toString()}
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+            enableRowSelection: ({ id }) => id !== "2",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -286,13 +317,13 @@ export const SingleSelectionWithDisabledRows: Story = {
 export const EmptyData: Story = {
   render: () => {
     return (
-      <DataTable
-        columnDefinitions={userColumnDef}
-        data={[]}
-        selection={{
-          selectionMode: "multiple",
-        }}
-      />
+      <DataGrid columnDefinitions={userColumnDef} data={[]}>
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -300,11 +331,9 @@ export const EmptyData: Story = {
 export const EmptyDataWithEmptyState: Story = {
   render: () => {
     return (
-      <DataTable
-        columnDefinitions={userColumnDef}
-        data={[]}
-        emptyContent="Ingen data å vise"
-      />
+      <DataGrid columnDefinitions={userColumnDef} data={[]}>
+        <DataTable emptyContent="Ingen data å vise" />
+      </DataGrid>
     );
   },
 };
@@ -317,11 +346,9 @@ export const LoadingWithSkeletonRows: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTable
-          columnDefinitions={userColumnDef}
-          data={[]}
-          loading={{ isLoading, variant: "skeleton", rows: 4 }}
-        />
+        <DataGrid columnDefinitions={userColumnDef} data={[]}>
+          <DataTable loading={{ isLoading, variant: "skeleton", rows: 4 }} />
+        </DataGrid>
       </VStack>
     );
   },
@@ -335,11 +362,15 @@ export const LoadingWithLoadingState: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTable
-          columnDefinitions={userColumnDef}
-          data={[]}
-          loading={{ isLoading, variant: "content", content: "Laster data..." }}
-        />
+        <DataGrid columnDefinitions={userColumnDef} data={[]}>
+          <DataTable
+            loading={{
+              isLoading,
+              variant: "content",
+              content: "Laster data...",
+            }}
+          />
+        </DataGrid>
       </VStack>
     );
   },
@@ -353,11 +384,9 @@ export const LoadingWhileKeepingData: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTable
-          columnDefinitions={userColumnDef}
-          data={userData}
-          loading={{ isLoading, variant: "skeleton", rows: 4 }}
-        />
+        <DataGrid columnDefinitions={userColumnDef} data={userData}>
+          <DataTable loading={{ isLoading, variant: "skeleton", rows: 4 }} />
+        </DataGrid>
       </VStack>
     );
   },
@@ -371,15 +400,15 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataTable
-          columnDefinitions={userColumnDef}
-          data={userData}
-          loading={{
-            isLoading,
-            variant: "overlay",
-            label: "Laster innhold for tabell",
-          }}
-        />
+        <DataGrid columnDefinitions={userColumnDef} data={userData}>
+          <DataTable
+            loading={{
+              isLoading,
+              variant: "overlay",
+              label: "Laster innhold for tabell",
+            }}
+          />
+        </DataGrid>
       </VStack>
     );
   },
@@ -404,18 +433,21 @@ export const SelectionPagination: Story = {
       <div>
         <button onClick={() => setPage("0")}>Page 1</button>
         <button onClick={() => setPage("1")}>Page 2</button>
-        <DataTable
+        <DataGrid
           columnDefinitions={userColumnDef}
           data={dataToShow}
-          selection={{
-            selectionMode: "multiple",
-            onSelectionChange: (keys) => {
-              console.info({ keys });
-              selectionPaginationSpy(keys);
-            },
-          }}
           getRowId={(row) => row.foo + row.bar}
-        />
+        >
+          <DataTable
+            selection={{
+              selectionMode: "multiple",
+              onSelectionChange: (keys) => {
+                console.info({ keys });
+                selectionPaginationSpy(keys);
+              },
+            }}
+          />
+        </DataGrid>
       </div>
     );
   },
@@ -495,22 +527,25 @@ export const SelectionPagination: Story = {
 export const StickySelection: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
         }))}
         data={userData}
-        selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-        }}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-        stickyColumns={{
-          start: "1",
-        }}
-      />
+      >
+        <DataTable
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+          }}
+          withKeyboardNav
+          stickyColumns={{
+            start: "1",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -518,18 +553,21 @@ export const StickySelection: Story = {
 export const StickyLeftOne: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-        stickyColumns={{
-          start: "1",
-        }}
-      />
+      >
+        <DataTable
+          withKeyboardNav
+          stickyColumns={{
+            start: "1",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -537,18 +575,21 @@ export const StickyLeftOne: Story = {
 export const StickyRightOne: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "350px",
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-        stickyColumns={{
-          end: "1",
-        }}
-      />
+      >
+        <DataTable
+          withKeyboardNav
+          stickyColumns={{
+            end: "1",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -556,19 +597,22 @@ export const StickyRightOne: Story = {
 export const StickyBothOne: Story = {
   render: () => {
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={userColumnDef.map((col) => ({
           ...col,
           defaultWidth: "250px",
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        withKeyboardNav
-        stickyColumns={{
-          start: "1",
-          end: "1",
-        }}
-      />
+      >
+        <DataTable
+          withKeyboardNav
+          stickyColumns={{
+            start: "1",
+            end: "1",
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -577,13 +621,13 @@ export const StickyHeader: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTable
+        <DataGrid
           columnDefinitions={userColumnDef}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
-          withKeyboardNav
-          stickyHeader
-        />
+        >
+          <DataTable withKeyboardNav stickyHeader />
+        </DataGrid>
       </div>
     );
   },
@@ -593,20 +637,23 @@ export const StickyHeaderAndColumns: Story = {
   render: () => {
     return (
       <div style={{ height: "300px" }}>
-        <DataTable
+        <DataGrid
           columnDefinitions={userColumnDef.map((col) => ({
             ...col,
             defaultWidth: "250px",
           }))}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
-          withKeyboardNav
-          stickyHeader
-          stickyColumns={{
-            start: "1",
-            end: "1",
-          }}
-        />
+        >
+          <DataTable
+            withKeyboardNav
+            stickyHeader
+            stickyColumns={{
+              start: "1",
+              end: "1",
+            }}
+          />
+        </DataGrid>
       </div>
     );
   },
@@ -697,18 +744,21 @@ export const SortableColumns: Story = {
     const sortedData = applySortEntries(sortableUserData, sort);
 
     return (
-      <DataTable
+      <DataGrid
         columnDefinitions={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id.toString()}
-        sorting={{
-          sort,
-          onSortChange: (next, detail) => {
-            console.info("changed column:", detail);
-            setSort(next);
-          },
-        }}
-      />
+      >
+        <DataTable
+          sorting={{
+            sort,
+            onSortChange: (next, detail) => {
+              console.info("changed column:", detail);
+              setSort(next);
+            },
+          }}
+        />
+      </DataGrid>
     );
   },
 };
@@ -722,17 +772,20 @@ export const SortableColumnsUncontrolled: Story = {
         {loggedDetail && (
           <pre style={{ fontSize: "0.75rem" }}>{loggedDetail}</pre>
         )}
-        <DataTable
+        <DataGrid
           columnDefinitions={sortableColumnDef}
           data={sortableUserData}
           getRowId={(row) => row.id.toString()}
-          sorting={{
-            defaultSort: [{ columnId: "name", direction: "asc" }],
-            onSortChange: (_, detail) => {
-              setLoggedDetail(JSON.stringify(detail, null, 2));
-            },
-          }}
-        />
+        >
+          <DataTable
+            sorting={{
+              defaultSort: [{ columnId: "name", direction: "asc" }],
+              onSortChange: (_, detail) => {
+                setLoggedDetail(JSON.stringify(detail, null, 2));
+              },
+            }}
+          />
+        </DataGrid>
       </div>
     );
   },
@@ -769,30 +822,36 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
 
 export const RowClick: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id.toString()}
-      onRowClick={(rowId) => console.info("Row clicked!: ", rowId)}
-      selection={{
-        selectionMode: "multiple",
-      }}
-      withKeyboardNav
-    />
+    >
+      <DataTable
+        onRowClick={(rowId) => console.info("Row clicked!: ", rowId)}
+        selection={{
+          selectionMode: "multiple",
+        }}
+        withKeyboardNav
+      />
+    </DataGrid>
   ),
 };
 
 export const RowClickTest: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id.toString()}
-      onRowClick={rowClickSpy}
-      selection={{
-        selectionMode: "multiple",
-      }}
-    />
+    >
+      <DataTable
+        onRowClick={rowClickSpy}
+        selection={{
+          selectionMode: "multiple",
+        }}
+      />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     rowClickSpy.mockClear();
@@ -823,48 +882,62 @@ export const RowClickTest: Story = {
 
 export const RowExpansion: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id.toString()}
-      onRowClick={() => console.info("Row clicked!")}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-      }}
-      withKeyboardNav
-      detailsPanel={{
-        getContent: (rowData) => {
-          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
-        },
-      }}
-    />
+    >
+      <DataTable<UserDataTest>
+        onRowClick={() => console.info("Row clicked!")}
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+        }}
+        withKeyboardNav
+        detailsPanel={{
+          getContent: (rowData) => {
+            return (
+              <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>
+            );
+          },
+        }}
+      />
+    </DataGrid>
   ),
   ...selectionControls,
 };
 
 export const RowExpansionAll: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       columnDefinitions={rowClickColumnDef}
       data={userData}
       getRowId={(row) => row.id.toString()}
-      onRowClick={() => console.info("Row clicked!")}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-      }}
-      withKeyboardNav
-      detailsPanel={{
-        getContent: (rowData) => {
-          return <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>;
-        },
-        showExpandAll: true,
-      }}
-    />
+    >
+      <DataTable<UserDataTest>
+        onRowClick={() => console.info("Row clicked!")}
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+        }}
+        withKeyboardNav
+        detailsPanel={{
+          getContent: (rowData) => {
+            return (
+              <div>{`Details for ${rowData.foo} (id: ${rowData.id})`}</div>
+            );
+          },
+          showExpandAll: true,
+        }}
+      />
+    </DataGrid>
   ),
   ...selectionControls,
 };
 
-const nestedRowData = userData.map((user) => ({
+type NestedUserDataTest = UserDataTest & {
+  children: NestedUserDataTest[];
+};
+
+const nestedRowData: NestedUserDataTest[] = userData.map((user) => ({
   ...user,
   children: [...generateUserData(3, user.id * 100)].map((child) => ({
     ...child,
@@ -877,19 +950,22 @@ const nestedRowData = userData.map((user) => ({
 
 export const NestedRows: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       columnDefinitions={rowClickColumnDef}
       data={nestedRowData}
       getRowId={(row) => row.id.toString()}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-        onSelectionChange: console.info,
-      }}
-      withKeyboardNav
-      subRows={{
-        getRows: (row) => row.children,
-      }}
-    />
+    >
+      <DataTable<NestedUserDataTest>
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+          onSelectionChange: console.info,
+        }}
+        withKeyboardNav
+        subRows={{
+          getRows: (row) => row.children,
+        }}
+      />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -932,26 +1008,29 @@ export const NestedRows: Story = {
 
 export const NestedLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={nestedRowData}
       getRowId={(row) => row.id.toString()}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-      }}
-      withKeyboardNav
-      subRows={{
-        getRows: (row) => row.children,
-      }}
-    />
+    >
+      <DataTable<NestedUserDataTest>
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+        }}
+        withKeyboardNav
+        subRows={{
+          getRows: (row) => row.children,
+        }}
+      />
+    </DataGrid>
   ),
   ...selectionControls,
 };
 
 export const NestedOneLevelLeftAlignedContentRows: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
@@ -962,21 +1041,24 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
         })),
       }))}
       getRowId={(row) => row.id.toString()}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-      }}
-      withKeyboardNav
-      subRows={{
-        getRows: (row) => row.children,
-      }}
-    />
+    >
+      <DataTable<NestedUserDataTest>
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+        }}
+        withKeyboardNav
+        subRows={{
+          getRows: (row) => row.children,
+        }}
+      />
+    </DataGrid>
   ),
   ...selectionControls,
 };
 
 export const NestedRowsWithMasterDetail: Story = {
   render: (args) => (
-    <DataTable
+    <DataGrid
       /* Removes right aligned id column */
       columnDefinitions={rowClickColumnDef.slice(1)}
       data={userData.map((user) => ({
@@ -987,25 +1069,28 @@ export const NestedRowsWithMasterDetail: Story = {
         })),
       }))}
       getRowId={(row) => row.id.toString()}
-      selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-      }}
-      withKeyboardNav
-      subRows={{
-        defaultExpandedRowIds: ["3"],
-        getRows: (row) => row.children,
-      }}
-      detailsPanel={{
-        getContent: () => (
-          <div>
-            This is the details panel content. It should be possible to interact
-            with the content here without triggering row clicks or affecting row
-            selection.
-          </div>
-        ),
-        getHeight: () => 100,
-      }}
-    />
+    >
+      <DataTable<NestedUserDataTest>
+        selection={{
+          selectionMode: args.selection?.selectionMode ?? "none",
+        }}
+        withKeyboardNav
+        subRows={{
+          defaultExpandedRowIds: ["3"],
+          getRows: (row) => row.children,
+        }}
+        detailsPanel={{
+          getContent: () => (
+            <div>
+              This is the details panel content. It should be possible to
+              interact with the content here without triggering row clicks or
+              affecting row selection.
+            </div>
+          ),
+          getHeight: () => 100,
+        }}
+      />
+    </DataGrid>
   ),
   /* play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
