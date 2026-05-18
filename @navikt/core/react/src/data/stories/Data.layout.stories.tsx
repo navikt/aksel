@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { DataGrid, type DataGridProps } from "../data-grid";
 import { DataTable, type DataTableProps } from "../table";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import { type PersonInfo, sampleData } from "./dummy-data";
@@ -73,37 +74,68 @@ const sortableData: SortableRow[] = [
   { left: "Data 3", center: "Maybe", right: "1 000 200" },
 ];
 
-export const AutoLayoutMinimal: StoryObj<DataTableProps<MinimalRow>> = {
-  args: {
-    layout: "auto",
-    data: minimalData,
-    columnDefinitions: minimalColumns,
+export const AutoLayoutMinimal: StoryObj<{
+  table: DataTableProps<MinimalRow>;
+  grid: Omit<DataGridProps<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
   },
-};
-
-export const AutoLayoutOverflowX: StoryObj<DataTableProps<PersonInfo>> = {
   args: {
-    layout: "auto",
-    truncateContent: true,
-    data: sampleData.slice(0, 4),
-    columnDefinitions: columnDefinitions.map((col) =>
-      col.id === "message"
-        ? {
-            ...col,
-            cell: (row: PersonInfo) => (
-              <div style={{ maxWidth: 200 }}>{row.message}</div>
-            ),
-          }
-        : col,
-    ),
-  },
-};
-
-export const AutoLayoutNoCellTruncation: StoryObj<DataTableProps<PersonInfo>> =
-  {
-    args: {
+    table: {
       layout: "auto",
-      truncateContent: false,
+    },
+    grid: { data: minimalData, columnDefinitions: minimalColumns },
+  },
+};
+
+export const AutoLayoutOverflowX: StoryObj<{
+  table: DataTableProps<PersonInfo>;
+  grid: Omit<DataGridProps<PersonInfo>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
+  },
+  args: {
+    table: { layout: "auto", truncateContent: true },
+    grid: {
+      data: sampleData.slice(0, 4),
+      columnDefinitions: columnDefinitions.map((col) =>
+        col.id === "message"
+          ? {
+              ...col,
+              cell: (row: PersonInfo) => (
+                <div style={{ maxWidth: 200 }}>{row.message}</div>
+              ),
+            }
+          : col,
+      ),
+    },
+  },
+};
+
+export const AutoLayoutNoCellTruncation: StoryObj<{
+  table: DataTableProps<PersonInfo>;
+  grid: Omit<DataGridProps<PersonInfo>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
+  },
+  args: {
+    table: { layout: "auto", truncateContent: false },
+    grid: {
       data: sampleData.slice(0, 3),
       columnDefinitions: columnDefinitions.map((col) =>
         col.id === "message"
@@ -115,50 +147,84 @@ export const AutoLayoutNoCellTruncation: StoryObj<DataTableProps<PersonInfo>> =
           : col,
       ),
     },
-  };
-
-export const AutoLayoutSortable: StoryObj<DataTableProps<SortableRow>> = {
-  args: {
-    layout: "auto",
-    data: sortableData,
-    columnDefinitions: [
-      {
-        id: "left",
-        label: "Left",
-        sortable: true,
-        cell: (row) => row.left,
-      },
-      {
-        id: "center",
-        label: "Center",
-        sortable: true,
-        cell: (row) => row.center,
-      },
-      {
-        id: "right",
-        label: "Right",
-        sortable: true,
-        cell: (row) => row.right,
-      },
-    ],
   },
 };
 
-export const FixedLayoutMinimal: StoryObj<DataTableProps<MinimalRow>> = {
+export const AutoLayoutSortable: StoryObj<{
+  table: DataTableProps<SortableRow>;
+  grid: Omit<DataGridProps<SortableRow>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
+  },
   args: {
-    layout: "fixed",
-    data: minimalData,
-    columnDefinitions: minimalColumns,
+    table: { layout: "auto" },
+    grid: {
+      data: sortableData,
+      columnDefinitions: [
+        {
+          id: "left",
+          label: "Left",
+          sortable: true,
+          cell: (row) => row.left,
+        },
+        {
+          id: "center",
+          label: "Center",
+          sortable: true,
+          cell: (row) => row.center,
+        },
+        {
+          id: "right",
+          label: "Right",
+          sortable: true,
+          cell: (row) => row.right,
+        },
+      ],
+    },
   },
 };
 
-export const FixedLayoutDynamicWidth: StoryObj<DataTableProps<MinimalRow>> = {
+export const FixedLayoutMinimal: StoryObj<{
+  table: DataTableProps<MinimalRow>;
+  grid: Omit<DataGridProps<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
+  },
   args: {
-    layout: "fixed",
-    data: minimalData,
-    columnDefinitions: minimalColumns.map((col) => ({
-      ...col,
-      defaultWidth: "100%",
-    })),
+    table: { layout: "fixed" },
+    grid: { data: minimalData, columnDefinitions: minimalColumns },
+  },
+};
+
+export const FixedLayoutDynamicWidth: StoryObj<{
+  table: DataTableProps<MinimalRow>;
+  grid: Omit<DataGridProps<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataTable {...args.table} />
+      </DataGrid>
+    );
+  },
+  args: {
+    table: { layout: "fixed" },
+    grid: {
+      data: minimalData,
+      columnDefinitions: minimalColumns.map((col) => ({
+        ...col,
+        defaultWidth: "100%",
+      })),
+    },
   },
 };

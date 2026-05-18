@@ -13,6 +13,7 @@ import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
+import { DataGrid } from "../data-grid";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
 import { DataTable } from "../table/root/DataTableRoot";
@@ -671,37 +672,40 @@ export const KitchenSinkAdvancedFilter: Story = {
           }
         />
 
-        <DataTable
+        <DataGrid
           getRowId={(row) => row.name}
           columnDefinitions={columnView.filter((col) =>
             visibleColumns.find((c) => c === col.id),
           )}
           data={pagedData.paginatedData}
-          rowDensity={rowDensity}
-          zebraStripes={zebraStripes}
-          textSize={textSize}
-          truncateContent={truncateContent}
-          withKeyboardNav
-          selection={{
-            selectionMode,
-          }}
-          stickyHeader
-          stickyColumns={{
-            start: stickyColumns.first === "first" ? "1" : undefined,
-            end: stickyColumns.last === "last" ? "1" : undefined,
-          }}
-          detailsPanel={
-            showDetailsPanel
-              ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }
-              : undefined
-          }
-          subRows={{
-            /* @ts-expect-error Test-data just hacked together now  */
-            getRows: showNestedRows
-              ? (rowData) => rowData.nestedRows
-              : undefined,
-          }}
-        />
+        >
+          <DataTable<(typeof TEST_DATA)[number]>
+            rowDensity={rowDensity}
+            zebraStripes={zebraStripes}
+            textSize={textSize}
+            truncateContent={truncateContent}
+            withKeyboardNav
+            selection={{
+              selectionMode,
+            }}
+            stickyHeader
+            stickyColumns={{
+              start: stickyColumns.first === "first" ? "1" : undefined,
+              end: stickyColumns.last === "last" ? "1" : undefined,
+            }}
+            detailsPanel={
+              showDetailsPanel
+                ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }
+                : undefined
+            }
+            subRows={{
+              /* @ts-expect-error Test-data just hacked together now  */
+              getRows: showNestedRows
+                ? (rowData) => rowData.nestedRows
+                : undefined,
+            }}
+          />
+        </DataGrid>
       </VStack>
     );
   },

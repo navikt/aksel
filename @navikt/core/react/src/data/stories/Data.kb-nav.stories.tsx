@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
+import { DataGrid } from "../data-grid";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 
@@ -79,14 +80,13 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
 
 export const Inputs: Story = {
   render: () => (
-    <DataTable
-      style={{ width: "100%" }}
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={inputsColumnDef}
       data={inputsData}
       getRowId={(row) => row.id.toString()}
-    />
+    >
+      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -222,13 +222,13 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
 
 export const DisabledCells: Story = {
   render: () => (
-    <DataTable
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={disabledColumnDef}
       data={disabledData}
       getRowId={(row) => row.id.toString()}
-    />
+    >
+      <DataTable withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -306,13 +306,13 @@ export const Cache: Story = {
         <button onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
-        <DataTable
-          withKeyboardNav
-          layout="auto"
+        <DataGrid
           columnDefinitions={cacheColumnDef}
           data={data}
           getRowId={(row) => row.id.toString()}
-        />
+        >
+          <DataTable withKeyboardNav layout="auto" />
+        </DataGrid>
       </div>
     );
   },
@@ -372,13 +372,13 @@ const focusColumnDef: ColumnDefinitions<FocusRow> = [
 
 export const FocusElementInsideTable: Story = {
   render: () => (
-    <DataTable
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={focusColumnDef}
       data={focusData}
       getRowId={(row) => row.id}
-    />
+    >
+      <DataTable withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
