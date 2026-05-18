@@ -241,19 +241,19 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
         sortingState={sortingState}
       >
         <TableElementWrapper enabled={withKeyboardNav}>
-          <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-            <table
-              {...rest}
-              ref={forwardedRef}
-              className={cl("aksel-data-table", className)}
-              data-zebra-stripes={zebraStripes}
-              data-truncate-content={truncateContent}
-              data-density={rowDensity}
-              data-text-size={textSize}
-              data-layout={layout}
-              data-loading={loading?.isLoading || undefined}
-              aria-busy={loading?.isLoading || undefined}
-            >
+          <table
+            {...rest}
+            ref={forwardedRef}
+            className={cl("aksel-data-table", className)}
+            data-zebra-stripes={zebraStripes}
+            data-truncate-content={truncateContent}
+            data-density={rowDensity}
+            data-text-size={textSize}
+            data-layout={layout}
+            data-loading={loading?.isLoading || undefined}
+            aria-busy={loading?.isLoading || undefined}
+          >
+            <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
               <DataTableThead>
                 <DataTableTr>
                   {columns.map(
@@ -285,8 +285,8 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
               <DataTableTbody>
                 <DataTableTBodyContent emptyContent={emptyContent} />
               </DataTableTbody>
-            </table>
-          </DataTableDetailsPanelProvider>
+            </DataTableDetailsPanelProvider>
+          </table>
         </TableElementWrapper>
       </DataTableContextProvider>
     );
