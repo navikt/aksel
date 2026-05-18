@@ -42,7 +42,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    */
   onSortClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO Not in use???
   /**
-   * Props related to column width and resizing. Summary:
+   * Object with props related to column width and resizing. Summary:
    *
    * - `resizable?: boolean` - Whether the column should be resizable by the user.
    * - `autoResizeOnce?: boolean` - Whether the column should automatically resize to fit its content.

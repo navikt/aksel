@@ -153,14 +153,20 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   textSize?: "small" | "medium";
   /**
-   * Function to get sub-rows for a given row, used for nested rows.
-   * When provided, an expand toggle column is added automatically.
+   * Object with props related to row selection.
    */
-  selection?: SelectionProps<T>; // TODO: Table might need to be implemented with role="treegrid" for a11y when having nested rows.
-  subRows?: SubRowsProps<T>; // TODO description
-  detailsPanel?: DetailsPanelProps<T>; // TODO description
+  selection?: SelectionProps<T>;
   /**
-   * Sorting props.
+   * Object with props related to nested rows (sub-rows).
+   */
+  subRows?: SubRowsProps<T>; // TODO: Table might need to be implemented with role="treegrid" for a11y when having nested rows.
+  /**
+   * Object with props related to details panel.
+   * This is a panel that can be expanded below each row to show arbitrary content.
+   */
+  detailsPanel?: DetailsPanelProps<T>;
+  /**
+   * Object with props related to sorting.
    */
   sorting?: TableSortOptions;
 }
