@@ -13,7 +13,7 @@ export const StatusTag = ({
   switch (status) {
     case "preview":
       return (
-        <Tag size={size} data-color="aksel-brand-pink" {...rest}>
+        <Tag size={size} data-color="meta-purple" {...rest}>
           Preview
         </Tag>
       );
