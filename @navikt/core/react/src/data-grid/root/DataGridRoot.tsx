@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
 import { cl } from "../../utils/helpers";
@@ -6,8 +6,10 @@ import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type RowTId = string;
 
-export interface DataGridProps<RowT> extends HTMLAttributes<HTMLDivElement> {
+export interface DataGridProps<RowT> {
   children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
   /**
    * Definitions of the columns to display in the data grid.
    *
