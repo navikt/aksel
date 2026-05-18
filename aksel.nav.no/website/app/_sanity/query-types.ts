@@ -1403,7 +1403,7 @@ export type Komponent_artikkel = {
   sidebarindex?: number;
   slug?: Slug;
   status?: {
-    tag?: "beta" | "new" | "ready" | "deprecated";
+    tag?: "beta" | "preview" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
@@ -2059,7 +2059,7 @@ export type DESIGNSYSTEM_SIDEBAR_QUERY_RESULT = Array<
       heading: string | null;
       slug: string | null;
       kategori: "core" | "legacy" | "primitives" | "standalone" | null;
-      tag: "beta" | "deprecated" | "new" | "ready" | null;
+      tag: "beta" | "deprecated" | "new" | "preview" | "ready" | null;
       sidebarindex: number | null;
     }
   | {
@@ -3037,7 +3037,7 @@ export type GLOBAL_SEARCH_QUERY_ALL_RESULT = Array<
       tema: null;
       ingress: null;
       status: {
-        tag?: "beta" | "deprecated" | "new" | "ready";
+        tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
@@ -3093,7 +3093,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
   sidebarindex?: number;
   slug?: Slug;
   status?: {
-    tag?: "beta" | "deprecated" | "new" | "ready";
+    tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
@@ -4063,7 +4063,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT = Array<
       heading: string | null;
       slug: string | null;
       status: {
-        tag?: "beta" | "deprecated" | "new" | "ready";
+        tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
@@ -4148,7 +4148,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT = Array<
       heading: string | null;
       slug: string | null;
       status: {
-        tag?: "beta" | "deprecated" | "new" | "ready";
+        tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         internal?: boolean;
         bilde?: {
@@ -10262,7 +10262,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
         sidebarindex?: number;
         slug: string | null;
         status?: {
-          tag?: "beta" | "deprecated" | "new" | "ready";
+          tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
           unsafe?: boolean;
           internal?: boolean;
           bilde?: {
@@ -10383,7 +10383,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
           heading: string | null;
           slug: string | null;
           status: {
-            tag?: "beta" | "deprecated" | "new" | "ready";
+            tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
             unsafe?: boolean;
             internal?: boolean;
             bilde?: {
@@ -11995,7 +11995,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
   sidebarindex?: number;
   slug?: Slug;
   status?: {
-    tag?: "beta" | "deprecated" | "new" | "ready";
+    tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
@@ -14470,7 +14470,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
   sidebarindex?: number;
   slug?: Slug;
   status?: {
-    tag?: "beta" | "deprecated" | "new" | "ready";
+    tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
     internal?: boolean;
     bilde?: {
@@ -16954,7 +16954,7 @@ export type ALL_MARKDOWN_ARTICLES_INDEX_QUERY_RESULT = Array<
       heading: string | null;
       slug: string | null;
       kategori: "core" | "legacy" | "primitives" | "standalone" | null;
-      tag: "beta" | "deprecated" | "new" | "ready" | null;
+      tag: "beta" | "deprecated" | "new" | "preview" | "ready" | null;
       sidebarindex: number | null;
     }
   | {
