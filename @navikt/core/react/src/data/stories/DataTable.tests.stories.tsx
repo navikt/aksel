@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { DataGrid } from "../../../data-grid";
-import { DataGridTable } from "./DataGridTableRoot";
-import type { ColumnDefinitions } from "./DataTable.types";
+import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
+import type { ColumnDefinitions } from "../table/root/DataTable.types";
 
 type TestRow = {
   id: string;
