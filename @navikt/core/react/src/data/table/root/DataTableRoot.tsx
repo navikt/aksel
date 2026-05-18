@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/correctness/useHookAtTopLevel: False positive because of the way forwardRef() is added */
 import React, {
   forwardRef,
   useCallback,
@@ -98,20 +97,17 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   /**
    * Defines the columns of the table and how to render them.
    *
-   *
    * Each column definition should have a unique `id` (or use the column index as fallback) and a `cell`-renderer function that takes the row data as argument and returns a React node.
    */
   columnDefinitions: ColumnDefinitions<T>;
   /**
    * The data to display in the table.
    *
-   *
    * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
    */
   data: T[];
   /**
    * Function to get unique row id from row data.
-   *
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
@@ -156,140 +152,140 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * @default "medium"
    */
   textSize?: "small" | "medium";
-
   /**
    * Function to get sub-rows for a given row, used for nested rows.
    * When provided, an expand toggle column is added automatically.
-   *
-   *
-   * TODO:
-   * - Table might need to be implemented with role="treegrid" for a11y when having nested rows.
    */
-  selection?: SelectionProps<T>;
-  subRows?: SubRowsProps<T>;
-  detailsPanel?: DetailsPanelProps<T>;
+  selection?: SelectionProps<T>; // TODO: Table might need to be implemented with role="treegrid" for a11y when having nested rows.
+  subRows?: SubRowsProps<T>; // TODO description
+  detailsPanel?: DetailsPanelProps<T>; // TODO description
+  /**
+   * Sorting props.
+   */
   sorting?: TableSortOptions;
 }
 
-function DataTableInner<T>(
-  {
-    className,
-    id,
-    rowDensity = "normal",
-    textSize = "medium",
-    withKeyboardNav = true,
-    zebraStripes = false,
-    truncateContent: truncateContentProp,
-    layout = "fixed",
-    data,
-    columnDefinitions,
-    getRowId,
-    stickyColumns,
-    stickyHeader = true,
-    onRowClick,
-    emptyContent,
-    selection,
-    loading,
-    detailsPanel,
-    subRows,
-    sorting,
-    ...rest
-  }: DataTableProps<T>,
-  forwardedRef: React.ForwardedRef<HTMLTableElement>,
-) {
-  const sortingState = useTableSort(sorting);
-
-  const tableItems = useTableItems({
-    items: data,
-    getRowId,
-    subRows,
-  });
-
-  const tableSelectionState = useTableSelection({
-    selection,
-    tableItems,
-  });
-
-  const { columns, stickyStart, totalColSpan } = useColumnOptions(
-    columnDefinitions,
+const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
+  (
     {
+      className,
+      id,
+      rowDensity = "normal",
+      textSize = "medium",
+      withKeyboardNav = true,
+      zebraStripes = false,
+      truncateContent: truncateContentProp,
+      layout = "fixed",
+      data,
+      columnDefinitions,
+      getRowId,
       stickyColumns,
-      hasSelection: tableSelectionState.selection.selectionMode !== "none",
-      hasDetailsPanel: !!detailsPanel?.getContent,
-      layout,
-    },
-  );
+      stickyHeader = true,
+      onRowClick,
+      emptyContent,
+      selection,
+      loading,
+      detailsPanel,
+      subRows,
+      sorting,
+      ...rest
+    }: DataTableProps<any>, // Have to use <any> for docgen to work
+    forwardedRef,
+  ) => {
+    const sortingState = useTableSort(sorting);
 
-  const tableId = useId(id);
+    const tableItems = useTableItems({
+      items: data,
+      getRowId,
+      subRows,
+    });
 
-  const truncateContent = truncateContentProp ?? layout !== "auto";
+    const tableSelectionState = useTableSelection({
+      selection,
+      tableItems,
+    });
 
-  return (
-    <DataTableContextProvider
-      layout={layout}
-      withKeyboardNav={withKeyboardNav}
-      selectionState={tableSelectionState}
-      stickyStart={stickyStart}
-      stickyHeader={stickyHeader}
-      tableId={tableId}
-      loading={loading}
-      onRowClick={onRowClick}
-      columns={columns}
-      totalColSpan={totalColSpan}
-      tableItems={tableItems}
-      sortingState={sortingState}
-    >
-      <TableElementWrapper enabled={withKeyboardNav}>
-        <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-          <table
-            {...rest}
-            ref={forwardedRef}
-            className={cl("aksel-data-table", className)}
-            data-zebra-stripes={zebraStripes}
-            data-truncate-content={truncateContent}
-            data-density={rowDensity}
-            data-text-size={textSize}
-            data-layout={layout}
-            data-loading={loading?.isLoading || undefined}
-            aria-busy={loading?.isLoading || undefined}
-          >
-            <DataTableThead>
-              <DataTableTr>
-                {columns.map(
-                  ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
-                    return (
-                      <DataTableColumnHeader
-                        id={colDef.id}
-                        width={colDef.width}
-                        textAlign={colDef.align ?? "left"}
-                        key={colDef.id}
-                        isSticky={isSticky}
-                        sortable={colDef.sortable}
-                        label={colDef.label}
-                        style={
-                          stickyLeftOffset
-                            ? { left: stickyLeftOffset }
-                            : undefined
-                        }
-                        data-sticky-last={isStickyLast || undefined}
-                      >
-                        {colDef.header ?? colDef.label}
-                      </DataTableColumnHeader>
-                    );
-                  },
-                )}
-              </DataTableTr>
-            </DataTableThead>
+    const { columns, stickyStart, totalColSpan } = useColumnOptions(
+      columnDefinitions,
+      {
+        stickyColumns,
+        hasSelection: tableSelectionState.selection.selectionMode !== "none",
+        hasDetailsPanel: !!detailsPanel?.getContent,
+        layout,
+      },
+    );
 
-            <DataTableTbody>
-              <DataTableTBodyContent emptyContent={emptyContent} />
-            </DataTableTbody>
-          </table>
-        </DataTableDetailsPanelProvider>
-      </TableElementWrapper>
-    </DataTableContextProvider>
-  );
-}
+    const tableId = useId(id);
+
+    const truncateContent = truncateContentProp ?? layout !== "auto";
+
+    return (
+      <DataTableContextProvider
+        layout={layout}
+        withKeyboardNav={withKeyboardNav}
+        selectionState={tableSelectionState}
+        stickyStart={stickyStart}
+        stickyHeader={stickyHeader}
+        tableId={tableId}
+        loading={loading}
+        onRowClick={onRowClick}
+        columns={columns}
+        totalColSpan={totalColSpan}
+        tableItems={tableItems}
+        sortingState={sortingState}
+      >
+        <TableElementWrapper enabled={withKeyboardNav}>
+          <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
+            <table
+              {...rest}
+              ref={forwardedRef}
+              className={cl("aksel-data-table", className)}
+              data-zebra-stripes={zebraStripes}
+              data-truncate-content={truncateContent}
+              data-density={rowDensity}
+              data-text-size={textSize}
+              data-layout={layout}
+              data-loading={loading?.isLoading || undefined}
+              aria-busy={loading?.isLoading || undefined}
+            >
+              <DataTableThead>
+                <DataTableTr>
+                  {columns.map(
+                    ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
+                      return (
+                        <DataTableColumnHeader
+                          id={colDef.id}
+                          width={colDef.width}
+                          textAlign={colDef.align ?? "left"}
+                          key={colDef.id}
+                          isSticky={isSticky}
+                          sortable={colDef.sortable}
+                          label={colDef.label}
+                          style={
+                            stickyLeftOffset
+                              ? { left: stickyLeftOffset }
+                              : undefined
+                          }
+                          data-sticky-last={isStickyLast || undefined}
+                        >
+                          {colDef.header ?? colDef.label}
+                        </DataTableColumnHeader>
+                      );
+                    },
+                  )}
+                </DataTableTr>
+              </DataTableThead>
+
+              <DataTableTbody>
+                <DataTableTBodyContent emptyContent={emptyContent} />
+              </DataTableTbody>
+            </table>
+          </DataTableDetailsPanelProvider>
+        </TableElementWrapper>
+      </DataTableContextProvider>
+    );
+  },
+);
 
 /**
  * Temp optimization to avoid re-renders on every keyboard-move, selection change etc
@@ -518,10 +514,11 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   );
 }
 
-const DataTable = forwardRef(DataTableInner) as <T>(
+const DataTable = DataTableInternal as <T>(
   props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
-export { DataTable };
+// docgen doesn't work well with type params, so we let it use DataTableInternal instead
+export { DataTable, DataTableInternal };
 export type { DataTableProps };
 export default DataTable;
