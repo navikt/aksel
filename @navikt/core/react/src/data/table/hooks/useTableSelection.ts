@@ -8,7 +8,7 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
-import type { TableRowEntryId } from "../root/DataTable.types";
+import type { TableRowEntryId } from "../root/DataGridTable.types";
 import type { UseTableItemsReturn } from "./useTableItems";
 
 type UseTableSelectionArgs<T> = {

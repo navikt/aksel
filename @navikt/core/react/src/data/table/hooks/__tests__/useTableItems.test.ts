@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 import { useTableItems } from "../useTableItems";
 
 type TestRow = {

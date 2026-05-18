@@ -10,7 +10,7 @@ import { Floating } from "../../../utils/components/floating/Floating";
 import {
   ColumnDefinition,
   ColumnDefinitions,
-} from "../../table/root/DataTable.types";
+} from "../../table/root/DataGridTable.types";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";

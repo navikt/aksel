@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type {
   ColumnDefinition,
   ColumnDefinitions,
-} from "../root/DataTable.types";
+} from "../root/DataGridTable.types";
 import { ACTION_CELL_WIDTH } from "../tr/DataTableTr";
 
 type UseColumnOptions = {

@@ -9,7 +9,7 @@ import type { UseTableSortResults } from "../hooks/useTableSort";
 import type {
   DataTableLoadingConfig,
   TableRowEntryId,
-} from "./DataTable.types";
+} from "./DataGridTable.types";
 
 type DataTableContextProps<T> = {
   layout: "fixed" | "auto";

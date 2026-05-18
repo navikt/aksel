@@ -2,7 +2,7 @@ import React from "react";
 import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Tag } from "../../tag";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 
 type SWData = {
   id: number;

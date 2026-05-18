@@ -1,4 +1,4 @@
-import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 import type { ItemDetail } from "../collectTableRowEntries";
 import type { SelectionProps } from "./selection.types";
 

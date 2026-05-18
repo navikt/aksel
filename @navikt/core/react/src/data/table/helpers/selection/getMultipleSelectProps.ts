@@ -2,7 +2,7 @@ import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
-import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 import type { SelectedKeysT, SelectionProps } from "./selection.types";
 import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 

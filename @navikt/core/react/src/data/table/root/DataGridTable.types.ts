@@ -1,7 +1,5 @@
 import type { DataTableColumnHeaderProps } from "../column-header/DataTableColumnHeader";
 
-type SortDirection = "asc" | "desc" | "none";
-
 /**
  * TODO:
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
@@ -88,7 +86,6 @@ export type {
   ColumnDefinition,
   ColumnDefinitions,
   DataTableLoadingConfig,
-  SortDirection,
   SortEntry,
   SortChangeDetail,
   TableRowEntryId,

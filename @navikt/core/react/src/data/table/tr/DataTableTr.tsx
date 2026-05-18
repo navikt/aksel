@@ -19,7 +19,7 @@ import {
   getDataTableDetailsPanelId,
   useDataTableDetailsPanel,
 } from "../hooks/useTableDetailsPanel";
-import type { TableRowEntryId } from "../root/DataTable.types";
+import type { TableRowEntryId } from "../root/DataGridTable.types";
 import {
   useDataTableContext,
   useDataTableLocation,

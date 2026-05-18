@@ -1,4 +1,4 @@
-import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
+import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
 
 type DataGridContextValue<RowDef = unknown> = {

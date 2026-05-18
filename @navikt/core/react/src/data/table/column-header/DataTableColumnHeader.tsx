@@ -12,7 +12,6 @@ import {
   DataTableBaseCell,
   type DataTableBaseCellProps,
 } from "../base-cell/DataTableBaseCell";
-import type { SortDirection } from "../root/DataTable.types";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
@@ -30,12 +29,6 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * The entire header cell content becomes a clickable button when true.
    */
   sortable?: boolean; // TODO: Consider merging sortable, sortDirection and onSortClick into a single "sort" object prop
-  /**
-   * Current sort direction. Only relevant when `sortable` is true.
-   * Uses values matching the `aria-sort` attribute directly. // TODO: What does this mean? (Can we just remove it?)
-   * @default "none"
-   */
-  sortDirection?: SortDirection; // TODO Not in use???
   /**
    * Called when the user clicks the header. Only relevant when `sortable` is true.
    * The consumer is responsible for determining and setting the next sort state. // TODO: We don't use the term "consumer" in JSDoc anywhere else
@@ -57,7 +50,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
   width?: ResizeProps;
 }
 
-const SORT_ICON: Record<SortDirection, React.ElementType> = {
+const SORT_ICON: Record<"asc" | "desc" | "none", React.ElementType> = {
   asc: SortUpIcon,
   desc: SortDownIcon,
   none: ArrowsUpDownIcon,
@@ -185,7 +178,7 @@ const DataTableColumnHeader = forwardRef<
 );
 
 function getAriaSort(
-  sortDirection: SortDirection | undefined,
+  sortDirection: "asc" | "desc" | "none" | undefined,
 ): "ascending" | "descending" | "none" | undefined {
   if (sortDirection === "asc") return "ascending";
   if (sortDirection === "desc") return "descending";

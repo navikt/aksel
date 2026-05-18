@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { createStrictContext } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
-import type { TableRowEntryId } from "../root/DataTable.types";
+import type { TableRowEntryId } from "../root/DataGridTable.types";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
 type DetailsPanelProps<T> = {

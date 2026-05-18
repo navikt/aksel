@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useControllableState } from "../../../utils/hooks";
-import type { SortChangeDetail, SortEntry } from "../root/DataTable.types";
+import type { SortChangeDetail, SortEntry } from "../root/DataGridTable.types";
 
 type TableSortOptions = {
   /**

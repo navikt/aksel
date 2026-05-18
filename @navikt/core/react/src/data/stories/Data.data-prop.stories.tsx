@@ -8,7 +8,7 @@ import { Tag } from "../../tag";
 import type {
   ColumnDefinitions,
   SortEntry,
-} from "../table/root/DataTable.types";
+} from "../table/root/DataGridTable.types";
 
 const meta: Meta<typeof DataGrid.Table> = {
   title: "ds-react/Data/Data Prop",

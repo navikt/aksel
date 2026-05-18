@@ -4,7 +4,7 @@ import {
   type ItemDetail,
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
-import type { TableRowEntryId } from "../root/DataTable.types";
+import type { TableRowEntryId } from "../root/DataGridTable.types";
 
 type SubRowsProps<T> = {
   /**

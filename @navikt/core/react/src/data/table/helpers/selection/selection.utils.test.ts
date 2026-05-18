@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 import type { ItemDetail } from "../collectTableRowEntries";
 import { mutateRowSelection } from "./selection.utils";
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { DataGrid, type DataGridProps } from "../../data-grid";
 import { DataGridTable, type DataTableProps } from "../table";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 import { type PersonInfo, sampleData } from "./dummy-data";
 
 const meta: Meta<typeof DataGridTable> = {

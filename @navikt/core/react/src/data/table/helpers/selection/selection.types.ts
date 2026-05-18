@@ -1,6 +1,6 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
-import type { TableRowEntryId } from "../../root/DataTable.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 
 type SelectedKeysT = TableRowEntryId[];
 

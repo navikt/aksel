@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
+import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
-import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
 import { cl } from "../../utils/helpers";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 

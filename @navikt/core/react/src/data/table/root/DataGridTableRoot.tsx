@@ -35,7 +35,7 @@ import { DataTableTr } from "../tr/DataTableTr";
 import type {
   DataTableLoadingConfig,
   TableRowEntryId,
-} from "./DataTable.types";
+} from "./DataGridTable.types";
 import {
   DataTableContextProvider,
   useDataTableContext,
