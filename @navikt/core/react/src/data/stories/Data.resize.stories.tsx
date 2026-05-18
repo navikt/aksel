@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { DataGrid, type DataGridProps } from "../data-grid";
+import { DataGrid, type DataGridProps } from "../../data-grid";
 import { DataTable } from "../table";
 
 const meta: Meta<typeof DataTable> = {

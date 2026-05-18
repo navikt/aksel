@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { DataGrid } from "../data-grid";
+import { DataGrid } from "../../data-grid";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
 import { DataTable } from "../table/root/DataTableRoot";
 

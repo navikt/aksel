@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
+import { DataGrid } from "../../data-grid";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
-import { DataGrid } from "../data-grid";
 import type {
   ColumnDefinitions,
   SortEntry,

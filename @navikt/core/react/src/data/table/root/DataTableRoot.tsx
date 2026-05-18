@@ -5,12 +5,12 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
-import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";

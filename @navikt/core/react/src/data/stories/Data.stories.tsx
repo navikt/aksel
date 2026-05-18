@@ -6,6 +6,7 @@ import {
   CogIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import { DataGrid } from "../../data-grid";
 import { Dialog } from "../../dialog";
 import { Checkbox } from "../../form/checkbox";
 import { Radio, RadioGroup } from "../../form/radio";
@@ -13,7 +14,6 @@ import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
-import { DataGrid } from "../data-grid";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
 import { DataTable } from "../table/root/DataTableRoot";

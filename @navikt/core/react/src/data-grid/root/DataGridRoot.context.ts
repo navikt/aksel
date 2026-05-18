@@ -1,5 +1,5 @@
-import { createStrictContext } from "../../../utils/helpers";
-import type { ColumnDefinitions } from "../../table/root/DataTable.types";
+import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
+import { createStrictContext } from "../../utils/helpers";
 
 type DataGridContextValue<RowDef = unknown> = {
   data: RowDef[];

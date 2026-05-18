@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../../../utils/helpers";
-import type { ColumnDefinitions } from "../../table/root/DataTable.types";
-import { DataTable } from "../../table/root/DataTableRoot";
+import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
+import { DataTable } from "../../data/table/root/DataTableRoot";
+import { cl } from "../../utils/helpers";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type RowTId = string;
