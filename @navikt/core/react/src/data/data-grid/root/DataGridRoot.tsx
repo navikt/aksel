@@ -41,7 +41,14 @@ type DataGridRootComponent = <RowDef>(
  */
 export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
   (
-    { children, className, columnDefinitions, data, getRowId, ...rest },
+    {
+      children,
+      className,
+      columnDefinitions,
+      data,
+      getRowId,
+      ...rest
+    }: DataGridProps<unknown>,
     ref,
   ) => {
     return (
