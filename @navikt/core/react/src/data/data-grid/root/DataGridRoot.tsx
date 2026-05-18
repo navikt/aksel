@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import type { ColumnDefinitions } from "../../table/root/DataTable.types";
+import { DataTable } from "../../table/root/DataTableRoot";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type RowTId = string;
@@ -27,9 +28,12 @@ export interface DataGridProps<RowT> extends HTMLAttributes<HTMLDivElement> {
   getRowId?: (rowData: RowT) => RowTId;
 }
 
-type DataGridRootComponent = <RowT>(
-  props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
-) => React.ReactElement | null;
+interface DataGridComponent {
+  <RowT>(
+    props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
+  ): React.ReactElement | null;
+  Table: typeof DataTable;
+}
 
 /**
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/data-grid)
@@ -38,7 +42,7 @@ type DataGridRootComponent = <RowT>(
  * @example
  * ```jsx
  * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
- *   <DataTable />
+ *   <DataGrid.Table />
  * </DataGrid>
  * ```
  */
@@ -66,6 +70,8 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       </div>
     );
   },
-) as DataGridRootComponent;
+) as unknown as DataGridComponent;
+
+DataGridRoot.Table = DataTable;
 
 export default DataGridRoot;

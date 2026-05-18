@@ -45,7 +45,7 @@ export const Resize: Story = {
   render: (args) => {
     return (
       <DataGrid {...args}>
-        <DataTable />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -231,7 +231,7 @@ export const ResizeAuto: Story = {
     const [showTable, setShowTable] = React.useState(false);
     return showTable ? (
       <DataGrid {...props}>
-        <DataTable />
+        <DataGrid.Table />
       </DataGrid>
     ) : (
       <button onClick={() => setShowTable(true)}>Show table</button>

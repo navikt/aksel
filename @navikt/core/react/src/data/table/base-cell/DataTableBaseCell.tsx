@@ -28,7 +28,7 @@ interface DataTableBaseCellProps extends Omit<
   /**
    * Sets a max-width on the content wrapper div inside the cell.
    * This is only needed when using `layout="auto"` together with
-   * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
+   * `truncateContent` on `<DataGrid.Table>` and you want the cell to be truncated.
    */
   contentMaxWidth?: number | string;
   /**

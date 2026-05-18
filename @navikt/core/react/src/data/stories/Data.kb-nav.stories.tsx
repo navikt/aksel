@@ -85,7 +85,7 @@ export const Inputs: Story = {
       data={inputsData}
       getRowId={(row) => row.id.toString()}
     >
-      <DataTable style={{ width: "100%" }} withKeyboardNav layout="auto" />
+      <DataGrid.Table style={{ width: "100%" }} withKeyboardNav layout="auto" />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
@@ -227,7 +227,7 @@ export const DisabledCells: Story = {
       data={disabledData}
       getRowId={(row) => row.id.toString()}
     >
-      <DataTable withKeyboardNav layout="auto" />
+      <DataGrid.Table withKeyboardNav layout="auto" />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
@@ -311,7 +311,7 @@ export const Cache: Story = {
           data={data}
           getRowId={(row) => row.id.toString()}
         >
-          <DataTable withKeyboardNav layout="auto" />
+          <DataGrid.Table withKeyboardNav layout="auto" />
         </DataGrid>
       </div>
     );
@@ -377,7 +377,7 @@ export const FocusElementInsideTable: Story = {
       data={focusData}
       getRowId={(row) => row.id}
     >
-      <DataTable withKeyboardNav layout="auto" />
+      <DataGrid.Table withKeyboardNav layout="auto" />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {

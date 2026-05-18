@@ -81,7 +81,7 @@ export const AutoLayoutMinimal: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -100,7 +100,7 @@ export const AutoLayoutOverflowX: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -129,7 +129,7 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -157,7 +157,7 @@ export const AutoLayoutSortable: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -196,7 +196,7 @@ export const FixedLayoutMinimal: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -213,7 +213,7 @@ export const FixedLayoutDynamicWidth: StoryObj<{
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
