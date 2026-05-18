@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
+import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import type { ColumnDefinitions } from "../../data/table/root/DataTable.types";
-import { DataTable } from "../../data/table/root/DataTableRoot";
 import { cl } from "../../utils/helpers";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
@@ -32,7 +32,10 @@ interface DataGridComponent {
   <RowT>(
     props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
   ): React.ReactElement | null;
-  Table: typeof DataTable;
+  /**
+   * TODO: JS Doc for DataGrid.Table
+   */
+  Table: typeof DataGridTable;
 }
 
 /**
@@ -72,6 +75,6 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
   },
 ) as unknown as DataGridComponent;
 
-DataGridRoot.Table = DataTable;
+DataGridRoot.Table = DataGridTable;
 
 export default DataGridRoot;

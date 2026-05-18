@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../../../data-grid";
+import { DataGridTable } from "./DataGridTableRoot";
 import type { ColumnDefinitions } from "./DataTable.types";
-import { DataTable } from "./DataTableRoot";
 
 type TestRow = {
   id: string;
@@ -11,9 +11,9 @@ type TestRow = {
   subRows?: TestRow[];
 };
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/DataTable/Tests",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
   },
@@ -21,7 +21,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 const data: TestRow[] = [
   {

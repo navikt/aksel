@@ -503,11 +503,11 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   );
 }
 
-const DataTable = DataTableInternal as <T>(
+const DataGridTable = DataTableInternal as <T>(
   props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
 // docgen doesn't work well with type params, so we let it use DataTableInternal instead
-export { DataTable, DataTableInternal };
+export { DataGridTable, DataTableInternal };
 export type { DataTableProps };
-export default DataTable;
+export default DataGridTable;

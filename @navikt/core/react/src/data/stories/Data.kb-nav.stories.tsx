@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 import type { ColumnDefinitions } from "../table/root/DataTable.types";
-import { DataTable } from "../table/root/DataTableRoot";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/Keyboard Navigation",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -16,7 +16,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 type InputRow = { id: 1 | 2 | 3 };
 

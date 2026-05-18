@@ -16,7 +16,7 @@ import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { DataTable } from "../table/root/DataTableRoot";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
@@ -28,9 +28,9 @@ import {
 } from "./Data.test-data";
 import { PersonInfo, homeSystemOptions } from "./dummy-data";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -39,7 +39,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 /* export const KitchenSink: Story = {
   render: () => {
@@ -679,7 +679,7 @@ export const KitchenSinkAdvancedFilter: Story = {
           )}
           data={pagedData.paginatedData}
         >
-          <DataTable<(typeof TEST_DATA)[number]>
+          <DataGrid.Table<(typeof TEST_DATA)[number]>
             rowDensity={rowDensity}
             zebraStripes={zebraStripes}
             textSize={textSize}
