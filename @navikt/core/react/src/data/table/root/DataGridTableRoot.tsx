@@ -243,7 +243,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
                         <DataTableColumnHeader
                           id={colDef.id}
                           width={colDef.width}
-                          textAlign={colDef.align ?? "left"}
+                          align={colDef.align ?? "left"}
                           key={colDef.id}
                           isSticky={isSticky}
                           sortable={colDef.sortable}
@@ -401,7 +401,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
                 colDefIndex,
               ) => (
                 <DataTableBaseCell
-                  textAlign={colDef.align ?? "left"}
+                  align={colDef.align ?? "left"}
                   key={colDef.id || colDefIndex}
                   as={colDef.isRowHeader ? "th" : "td"}
                   isSticky={isSticky}
@@ -476,7 +476,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
                   return (
                     <DataTableBaseCell
-                      textAlign={colDef.align ?? "left"}
+                      align={colDef.align ?? "left"}
                       key={colDef.id || colDefIndex}
                       as={colDef.isRowHeader ? "th" : "td"}
                       isSticky={isSticky}

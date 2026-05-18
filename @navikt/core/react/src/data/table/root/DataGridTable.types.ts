@@ -7,12 +7,6 @@ import type { DataTableColumnHeaderProps } from "../column-header/DataTableColum
 type ColumnDefinition<T> = {
   id: string;
   /**
-   * Text alignment for cells in this column.
-   *
-   * @default "left"
-   */
-  align?: "left" | "right" | "center"; // TODO: Pri zero: Use same name as in DataTableColumnHeaderProps (DataTableBaseCellProps) so that we can just Pick<DataTableColumnHeaderProps, "textAlign">
-  /**
    * Assigned to the cell's `th` element instead of `td` if true.
    *
    * Should be used for cells that act as row headers. Each row should have one rowheader, and only have one cell with `isRowHeader: true`,
@@ -37,7 +31,7 @@ type ColumnDefinition<T> = {
    * Use `sort` and `onSortChange` on the root component to control sort state.
    */
   sortable?: boolean;
-} & Pick<DataTableColumnHeaderProps, "width">;
+} & Pick<DataTableColumnHeaderProps, "width" | "align">;
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];
 

@@ -12,7 +12,7 @@ interface DataTableBaseCellProps extends Omit<
    * Quantitative figures like amounts and percentages should be right‑aligned (but not phone numbers, postal codes etc.)
    * @default "left"
    */
-  textAlign?: "left" | "center" | "right";
+  align?: "left" | "center" | "right";
   /**
    * Internal cell type that controls padding, alignment, row-click prevention, and resize behavior.
    * - `"action"`: Centers content, removes cell padding, prevents row click, and disables column resize.
@@ -58,7 +58,7 @@ const DataTableBaseCell = forwardRef<
       children,
       as: Component,
       beforeContent,
-      textAlign = "left",
+      align = "left",
       cellType,
       preventRowClick,
       contentMaxWidth,
@@ -77,7 +77,7 @@ const DataTableBaseCell = forwardRef<
         ref={forwardedRef}
         className={cl("aksel-data-table__cell", className)}
         tabIndex={withKeyboardNav ? -1 : undefined}
-        data-align={textAlign}
+        data-align={align}
         data-cell-type={cellType || undefined}
         data-prevent-row-click={
           preventRowClick || cellType === "action" || undefined
