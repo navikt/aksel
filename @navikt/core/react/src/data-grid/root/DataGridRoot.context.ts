@@ -1,10 +1,10 @@
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
 
-type DataGridContextValue<RowDef = unknown> = {
-  data: RowDef[];
-  columnDefinitions: ColumnDefinitions<RowDef>;
-  getRowId?: (rowData: RowDef) => string;
+type DataGridContextValue<RowT = unknown> = {
+  data: RowT[];
+  columnDefinitions: ColumnDefinitions<RowT>;
+  getRowId?: (rowData: RowT) => string;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =
