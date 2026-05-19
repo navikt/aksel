@@ -8,13 +8,11 @@ import type {
 } from "../../data/table/root/DataGridTable.types";
 import {
   DataGridTable,
-  type DataTableProps,
+  type DataGridTableProps,
 } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
-
-type RowTId = string;
 
 interface DataGridProps<RowT> {
   children: React.ReactNode;
@@ -37,7 +35,7 @@ interface DataGridProps<RowT> {
    *
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
-  getRowId?: (rowData: RowT) => RowTId;
+  getRowId?: (rowData: RowT) => string;
   /**
    * Object with props related to row selection.
    */
@@ -133,7 +131,7 @@ export namespace DataGridRoot {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace Table {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    export type Props<T = any> = DataTableProps<T>;
+    export type Props<T = any> = DataGridTableProps<T>;
     export type Sort = SortEntry;
     export type SortDetail = SortChangeDetail;
   }

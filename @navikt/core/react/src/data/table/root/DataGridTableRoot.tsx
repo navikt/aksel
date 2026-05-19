@@ -55,7 +55,7 @@ import {
  * TODO:
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
  */
-interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
+interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
   /**
    * Enables keyboard navigation for table rows and cells.
@@ -123,7 +123,10 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   selectionTrigger?: "row" | "control";
 }
 
-const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
+const DataGridTableInternal = forwardRef<
+  HTMLTableElement,
+  DataGridTableProps<unknown>
+>(
   (
     {
       className,
@@ -139,7 +142,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
       sorting,
       selectionTrigger = "row",
       ...rest
-    }: DataTableProps<any>, // Have to use <any> for docgen to work
+    }: DataGridTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
     const {
@@ -511,19 +514,19 @@ const DataTableDataRow = memo(function DataTableDataRow({
   );
 });
 
-const DataGridTable = DataTableInternal as <T>(
-  props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
+const DataGridTable = DataGridTableInternal as <T>(
+  props: DataGridTableProps<T> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGridTable {
-  export type Props<T = any> = DataTableProps<T>;
+  export type Props<T = any> = DataGridTableProps<T>;
   export type Sort = SortEntry;
   export type SortDetail = SortChangeDetail;
 }
 
-// docgen doesn't work well with type params, so we let it use DataTableInternal instead
+// docgen doesn't work well with type params, so we let it use DataGridTableInternal instead
 // eslint-disable-next-line import/export
-export { DataGridTable, DataTableInternal };
-export type { DataTableProps };
+export { DataGridTable, DataGridTableInternal };
+export type { DataGridTableProps };
 export default DataGridTable;
