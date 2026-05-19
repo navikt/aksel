@@ -89,7 +89,13 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
         stickyColumns: settings?.stickyColumns ?? {},
         textSize: settings?.textSize ?? "medium",
       }),
-      [settings],
+      [
+        settings?.rowDensity,
+        settings?.zebraStripes,
+        settings?.truncateContent,
+        settings?.stickyColumns,
+        settings?.textSize,
+      ],
     );
 
     return (

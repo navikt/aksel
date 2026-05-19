@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  memo,
   useCallback,
   useEffect,
   useRef,
@@ -15,6 +16,7 @@ import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
 import { DataTableEmptyState } from "../empty-state/DataTableEmptyState";
+import type { ItemDetail } from "../helpers/collectTableRowEntries";
 import { useColumnOptions } from "../hooks/useColumnOptions";
 import {
   DataTableDetailsPanelProvider,
@@ -424,53 +426,74 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
           return null;
         }
 
-        const hasSubRows = details.children.length > 0;
-
         return (
-          <React.Fragment key={details.id}>
-            <DataTableTr rowId={details.id}>
-              {columns.map(
-                (
-                  { isSticky, isStickyLast, stickyLeftOffset, colDef },
-                  colDefIndex,
-                ) => {
-                  const renderNestedToggle = colDefIndex === 0 && hasSubRows;
-                  const renderNestedIndent =
-                    colDefIndex === 0 && (details.level > 0 || hasSubRows);
-
-                  const style: React.CSSProperties = {
-                    "--__axc-data-table-nested-depth": details.level,
-                    ...(stickyLeftOffset ? { left: stickyLeftOffset } : {}),
-                  };
-
-                  return (
-                    <DataTableBaseCell
-                      align={colDef.align ?? "left"}
-                      key={colDef.id || colDefIndex}
-                      as={colDef.isRowHeader ? "th" : "td"}
-                      isSticky={isSticky}
-                      data-nested={renderNestedIndent || undefined}
-                      data-sticky-last={isStickyLast || undefined}
-                      style={style}
-                      beforeContent={
-                        renderNestedToggle ? (
-                          <DataTableSubRowToggle details={details} />
-                        ) : undefined
-                      }
-                    >
-                      {colDef.cell(rowData)}
-                    </DataTableBaseCell>
-                  );
-                },
-              )}
-            </DataTableTr>
-            <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
-          </React.Fragment>
+          <DataTableDataRow
+            key={details.id}
+            rowData={rowData}
+            details={details}
+            columns={columns}
+          />
         );
       })}
     </>
   );
 }
+
+interface DataTableDataRowProps {
+  rowData: any;
+  details: ItemDetail<any>;
+  columns: ReturnType<typeof useColumnOptions>["columns"];
+}
+
+const DataTableDataRow = memo(function DataTableDataRow({
+  rowData,
+  details,
+  columns,
+}: DataTableDataRowProps) {
+  const hasSubRows = details.children.length > 0;
+
+  return (
+    <>
+      <DataTableTr rowId={details.id}>
+        {columns.map(
+          (
+            { isSticky, isStickyLast, stickyLeftOffset, colDef },
+            colDefIndex,
+          ) => {
+            const renderNestedToggle = colDefIndex === 0 && hasSubRows;
+            const renderNestedIndent =
+              colDefIndex === 0 && (details.level > 0 || hasSubRows);
+
+            const style: React.CSSProperties = {
+              "--__axc-data-table-nested-depth": details.level,
+              ...(stickyLeftOffset ? { left: stickyLeftOffset } : {}),
+            };
+
+            return (
+              <DataTableBaseCell
+                align={colDef.align ?? "left"}
+                key={colDef.id || colDefIndex}
+                as={colDef.isRowHeader ? "th" : "td"}
+                isSticky={isSticky}
+                data-nested={renderNestedIndent || undefined}
+                data-sticky-last={isStickyLast || undefined}
+                style={style}
+                beforeContent={
+                  renderNestedToggle ? (
+                    <DataTableSubRowToggle details={details} />
+                  ) : undefined
+                }
+              >
+                {colDef.cell(rowData)}
+              </DataTableBaseCell>
+            );
+          },
+        )}
+      </DataTableTr>
+      <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
+    </>
+  );
+});
 
 const DataGridTable = DataTableInternal as <T>(
   props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
