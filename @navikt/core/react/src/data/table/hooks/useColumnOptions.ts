@@ -7,8 +7,8 @@ import { ACTION_CELL_WIDTH } from "../tr/DataTableTr";
 
 type UseColumnOptions = {
   stickyColumns?: {
-    start?: "1";
-    end?: "1";
+    start?: 1;
+    end?: 1;
   };
   hasSelection: boolean;
   hasDetailsPanel: boolean;
@@ -39,7 +39,7 @@ function useColumnOptions<T>(
 ): UseColumnOptionsResult<T> {
   const { stickyColumns, hasSelection, hasDetailsPanel, layout } = options;
 
-  const hasStickyStart = stickyColumns?.start === "1";
+  const hasStickyStart = stickyColumns?.start === 1;
 
   const stickyExpansion = hasStickyStart && hasDetailsPanel;
   const stickySelection = hasStickyStart && hasSelection;
@@ -53,7 +53,7 @@ function useColumnOptions<T>(
     return columnDefinitions.map((colDef, index) => {
       const isFirstSticky = hasStickyStart && index === 0;
       const isLastSticky =
-        stickyColumns?.end === "1" && index === columnDefinitions.length - 1;
+        stickyColumns?.end === 1 && index === columnDefinitions.length - 1;
 
       return {
         isSticky: isFirstSticky

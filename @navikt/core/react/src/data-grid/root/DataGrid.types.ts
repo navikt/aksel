@@ -23,8 +23,8 @@ type DataGridSettings = {
    * You can specify 1 sticky column on the left and 1 on the right.
    */
   stickyColumns?: {
-    start?: "1";
-    end?: "1";
+    start?: 1;
+    end?: 1;
   };
   /**
    * Adjusts font-size

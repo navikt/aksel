@@ -690,8 +690,8 @@ export const KitchenSinkAdvancedFilter: Story = {
             }}
             stickyHeader
             stickyColumns={{
-              start: stickyColumns.first === "first" ? "1" : undefined,
-              end: stickyColumns.last === "last" ? "1" : undefined,
+              start: stickyColumns.first === "first" ? 1 : undefined,
+              end: stickyColumns.last === "last" ? 1 : undefined,
             }}
             detailsPanel={
               showDetailsPanel

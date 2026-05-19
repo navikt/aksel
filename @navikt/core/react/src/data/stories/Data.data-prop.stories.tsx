@@ -539,7 +539,7 @@ export const StickySelection: Story = {
         }}
         settings={{
           stickyColumns: {
-            start: "1",
+            start: 1,
           },
         }}
       >
@@ -561,7 +561,7 @@ export const StickyLeftOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         settings={{
           stickyColumns: {
-            start: "1",
+            start: 1,
           },
         }}
       >
@@ -583,7 +583,7 @@ export const StickyRightOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         settings={{
           stickyColumns: {
-            end: "1",
+            end: 1,
           },
         }}
       >
@@ -605,8 +605,8 @@ export const StickyBothOne: Story = {
         getRowId={(row) => row.foo + row.bar}
         settings={{
           stickyColumns: {
-            start: "1",
-            end: "1",
+            start: 1,
+            end: 1,
           },
         }}
       >
@@ -645,8 +645,8 @@ export const StickyHeaderAndColumns: Story = {
           getRowId={(row) => row.foo + row.bar}
           settings={{
             stickyColumns: {
-              start: "1",
-              end: "1",
+              start: 1,
+              end: 1,
             },
           }}
         >
