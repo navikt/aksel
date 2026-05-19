@@ -131,6 +131,8 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const { tableId, loading, stickyStart } = useDataTableContext();
   const stickyExpansion = stickyStart.expansion;
 
+  const expansionHeaderId = useId();
+
   const { location } = useDataTableLocation();
 
   const {
@@ -151,7 +153,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          id="expansion-header"
+          id={expansionHeaderId}
           width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           data-block-keyboard-nav
@@ -175,7 +177,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead" && !showExpandAll) {
     return (
       <DataTableColumnHeader
-        id="expansion-header"
+        id={expansionHeaderId}
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         data-block-keyboard-nav
@@ -189,7 +191,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead") {
     return (
       <DataTableColumnHeader
-        id="expansion-header"
+        id={expansionHeaderId}
         align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
@@ -275,6 +277,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   const { tableItems } = useDataTableContext();
 
   const inputId = useId();
+  const selectionHeaderId = useId();
 
   const { selection, renderSelection } = selectionState;
 
@@ -286,7 +289,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
-          id="selection-header"
+          id={selectionHeaderId}
           width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           label=""
@@ -319,7 +322,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
     return (
       <DataTableColumnHeader
-        id="selection-header"
+        id={selectionHeaderId}
         align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
@@ -338,7 +341,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (selection.selectionMode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
-        id="selection-header"
+        id={selectionHeaderId}
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""
