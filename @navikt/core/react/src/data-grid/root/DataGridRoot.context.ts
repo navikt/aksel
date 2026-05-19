@@ -1,3 +1,4 @@
+import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
 
@@ -5,6 +6,7 @@ type DataGridContextValue<RowT = unknown> = {
   data: RowT[];
   columnDefinitions: ColumnDefinitions<RowT>;
   getRowId?: (rowData: RowT) => string;
+  selection?: SelectionProps<RowT>;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =

@@ -22,10 +22,7 @@ import {
 } from "../hooks/useTableDetailsPanel";
 import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
-import {
-  type SelectionProps,
-  useTableSelection,
-} from "../hooks/useTableSelection";
+import { useTableSelection } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
 import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
@@ -135,10 +132,6 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   textSize?: "small" | "medium";
   /**
-   * Object with props related to row selection.
-   */
-  selection?: SelectionProps<T>;
-  /**
    * Object with props related to nested rows (sub-rows).
    */
   subRows?: SubRowsProps<T>; // TODO: Table might need to be implemented with role="treegrid" for a11y when having nested rows.
@@ -168,7 +161,6 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
       stickyHeader = true,
       onRowClick,
       emptyContent,
-      selection,
       loading,
       detailsPanel,
       subRows,
@@ -177,7 +169,8 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     }: DataTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
-    const { columnDefinitions, data, getRowId } = useDataGridContext();
+    const { columnDefinitions, data, getRowId, selection } =
+      useDataGridContext();
 
     const sortingState = useTableSort(sorting);
 

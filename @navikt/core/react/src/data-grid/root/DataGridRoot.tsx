@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
@@ -28,6 +29,10 @@ export interface DataGridProps<RowT> {
    * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
    */
   getRowId?: (rowData: RowT) => RowTId;
+  /**
+   * Object with props related to row selection.
+   */
+  selection?: SelectionProps<RowT>;
 }
 
 interface DataGridComponent {
@@ -59,6 +64,7 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       columnDefinitions,
       data,
       getRowId,
+      selection,
       ...rest
     }: DataGridProps<unknown>,
     ref,
@@ -69,6 +75,7 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
           columnDefinitions={columnDefinitions}
           data={data}
           getRowId={getRowId}
+          selection={selection}
         >
           {children}
         </DataGridContextProvider>
