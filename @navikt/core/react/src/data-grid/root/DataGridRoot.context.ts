@@ -1,6 +1,7 @@
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
+import type { DataGridTableSettings } from "./DataGrid.types";
 
 type DataGridContextValue<RowT = unknown> = {
   data: RowT[];
@@ -8,6 +9,7 @@ type DataGridContextValue<RowT = unknown> = {
   getRowId?: (rowData: RowT) => string;
   selection?: SelectionProps<RowT>;
   isLoading?: boolean;
+  tableSettings?: DataGridTableSettings;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =

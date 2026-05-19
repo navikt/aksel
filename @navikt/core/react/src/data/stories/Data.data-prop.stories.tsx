@@ -537,13 +537,17 @@ export const StickySelection: Story = {
           selectionMode: "multiple",
           onSelectionChange: console.info,
         }}
+        settings={{
+          defaultValue: {
+            table: {
+              stickyColumns: {
+                start: "1",
+              },
+            },
+          },
+        }}
       >
-        <DataGrid.Table
-          withKeyboardNav
-          stickyColumns={{
-            start: "1",
-          }}
-        />
+        <DataGrid.Table withKeyboardNav />
       </DataGrid>
     );
   },
@@ -559,13 +563,17 @@ export const StickyLeftOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
+        settings={{
+          defaultValue: {
+            table: {
+              stickyColumns: {
+                start: "1",
+              },
+            },
+          },
+        }}
       >
-        <DataGrid.Table
-          withKeyboardNav
-          stickyColumns={{
-            start: "1",
-          }}
-        />
+        <DataGrid.Table withKeyboardNav />
       </DataGrid>
     );
   },
@@ -581,13 +589,17 @@ export const StickyRightOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
+        settings={{
+          defaultValue: {
+            table: {
+              stickyColumns: {
+                end: "1",
+              },
+            },
+          },
+        }}
       >
-        <DataGrid.Table
-          withKeyboardNav
-          stickyColumns={{
-            end: "1",
-          }}
-        />
+        <DataGrid.Table withKeyboardNav />
       </DataGrid>
     );
   },
@@ -603,14 +615,18 @@ export const StickyBothOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
+        settings={{
+          defaultValue: {
+            table: {
+              stickyColumns: {
+                start: "1",
+                end: "1",
+              },
+            },
+          },
+        }}
       >
-        <DataGrid.Table
-          withKeyboardNav
-          stickyColumns={{
-            start: "1",
-            end: "1",
-          }}
-        />
+        <DataGrid.Table withKeyboardNav />
       </DataGrid>
     );
   },
@@ -643,15 +659,18 @@ export const StickyHeaderAndColumns: Story = {
           }))}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
+          settings={{
+            defaultValue: {
+              table: {
+                stickyColumns: {
+                  start: "1",
+                  end: "1",
+                },
+              },
+            },
+          }}
         >
-          <DataGrid.Table
-            withKeyboardNav
-            stickyHeader
-            stickyColumns={{
-              start: "1",
-              end: "1",
-            }}
-          />
+          <DataGrid.Table withKeyboardNav stickyHeader />
         </DataGrid>
       </div>
     );

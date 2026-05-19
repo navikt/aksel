@@ -105,8 +105,9 @@ export const AutoLayoutOverflowX: StoryObj<{
     );
   },
   args: {
-    table: { layout: "auto", truncateContent: true },
+    table: { layout: "auto" },
     grid: {
+      settings: { defaultValue: { table: { truncateContent: true } } },
       data: sampleData.slice(0, 4),
       columnDefinitions: columnDefinitions.map((col) =>
         col.id === "message"
@@ -134,8 +135,9 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
     );
   },
   args: {
-    table: { layout: "auto", truncateContent: false },
+    table: { layout: "auto" },
     grid: {
+      settings: { defaultValue: { table: { truncateContent: false } } },
       data: sampleData.slice(0, 3),
       columnDefinitions: columnDefinitions.map((col) =>
         col.id === "message"

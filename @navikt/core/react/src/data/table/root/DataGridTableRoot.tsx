@@ -54,24 +54,6 @@ import {
 interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
   /**
-   * Controls vertical cell padding.
-   * @default "normal"
-   */
-  rowDensity?: "condensed" | "normal" | "spacious";
-  /**
-   * Zebra striped table
-   * @default false
-   */
-  zebraStripes?: boolean;
-  /**
-   * Truncate content in cells and show ellipsis for overflowed text.
-   *
-   * **NB:** When using this together with `layout="auto"`,
-   * you have to manually set a `maxWidth` on columns that should be truncated.
-   * @default false if layout="auto", else true
-   */
-  truncateContent?: boolean;
-  /**
    * Enables keyboard navigation for table rows and cells.
    * @default true
    */
@@ -91,15 +73,6 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * @default "fixed"
    */
   layout?: "fixed" | "auto";
-  /**
-   * Sticky columns that remain visible when horizontally scrolling the table.
-   *
-   * You can specify 1 sticky column on the left and 1 on the right.
-   */
-  stickyColumns?: {
-    start?: "1";
-    end?: "1";
-  };
   /**
    * @default true
    */
@@ -127,11 +100,6 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   loadingContent?: DataTableLoadingConfig;
   /**
-   * Adjusts font-size
-   * @default "medium"
-   */
-  textSize?: "small" | "medium";
-  /**
    * Object with props related to nested rows (sub-rows).
    */
   subRows?: SubRowsProps<T>; // TODO: Table might need to be implemented with role="treegrid" for a11y when having nested rows.
@@ -156,13 +124,8 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     {
       className,
       id,
-      rowDensity = "normal",
-      textSize = "medium",
       withKeyboardNav = true,
-      zebraStripes = false,
-      truncateContent: truncateContentProp,
       layout = "fixed",
-      stickyColumns,
       stickyHeader = true,
       onRowClick,
       emptyContent,
@@ -175,8 +138,14 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     }: DataTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
-    const { columnDefinitions, data, getRowId, selection, isLoading } =
-      useDataGridContext();
+    const {
+      columnDefinitions,
+      data,
+      getRowId,
+      selection,
+      isLoading,
+      tableSettings,
+    } = useDataGridContext();
 
     const sortingState = useTableSort(sorting);
 
@@ -195,7 +164,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     const { columns, stickyStart, totalColSpan } = useColumnOptions(
       columnDefinitions,
       {
-        stickyColumns,
+        stickyColumns: tableSettings?.stickyColumns,
         hasSelection: tableSelectionState.selection.selectionMode !== "none",
         hasDetailsPanel: !!detailsPanel?.getContent,
         layout,
@@ -204,7 +173,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
 
     const tableId = useId(id);
 
-    const truncateContent = truncateContentProp ?? layout !== "auto";
+    const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
     return (
       <DataTableContextProvider
@@ -226,10 +195,10 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
             {...rest}
             ref={forwardedRef}
             className={cl("aksel-data-table", className)}
-            data-zebra-stripes={zebraStripes}
+            data-zebra-stripes={tableSettings?.zebraStripes}
             data-truncate-content={truncateContent}
-            data-density={rowDensity}
-            data-text-size={textSize}
+            data-density={tableSettings?.rowDensity}
+            data-text-size={tableSettings?.textSize}
             data-layout={layout}
             data-loading={isLoading || undefined}
             aria-busy={isLoading || undefined}

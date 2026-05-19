@@ -1,8 +1,10 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
+import type { DataGridSettings } from "./DataGrid.types";
+import { resolveDefaultSettings } from "./DataGrid.utils";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type RowTId = string;
@@ -35,8 +37,20 @@ export interface DataGridProps<RowT> {
   selection?: SelectionProps<RowT>;
   /**
    * Determines if the data grid is in a loading state.
+   * @default false
    */
   isLoading?: boolean;
+  /**
+   * Settings for the data grid, such as row density, zebra stripes, content truncation, sticky columns and text size.
+   *
+   * You can provide either a `value` prop to fully control the settings, or a `defaultValue` for uncontrolled usage. If you provide both, `value` will take precedence and the component will be controlled.
+   *
+   * When using controlled settings, you should also provide an `onChange` handler to update the settings in response to user interactions.
+   *
+   *
+   * **NB: onChange has no effect yet.**
+   */
+  settings?: DataGridSettings;
 }
 
 interface DataGridComponent {
@@ -69,11 +83,17 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       data,
       getRowId,
       selection,
-      isLoading,
+      isLoading = false,
+      settings,
       ...rest
     }: DataGridProps<unknown>,
     ref,
   ) => {
+    const resolvedSettings = useMemo(
+      () => resolveDefaultSettings(settings?.value ?? settings?.defaultValue),
+      [settings?.value, settings?.defaultValue],
+    );
+
     return (
       <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
         <DataGridContextProvider
@@ -82,6 +102,7 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
           getRowId={getRowId}
           selection={selection}
           isLoading={isLoading}
+          tableSettings={resolvedSettings.table}
         >
           {children}
         </DataGridContextProvider>
