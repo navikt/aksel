@@ -188,6 +188,10 @@
   padding: 0;
   font-size: var(--__axc-data-table-text-size);
 
+  &:not(.aksel-data-table__column-header) {
+    overflow: hidden; /* Needed for cases where left margin is added to cell-content (nested rows) */
+  }
+
   &[data-nested="true"] {
     position: relative;
 
