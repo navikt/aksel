@@ -46,7 +46,7 @@
         "default": "./cjs/index.js"
       }
     },
-    "./preview": {
+    "./PREVIEW": {
       "import": {
         "types": "./esm/preview.d.ts",
         "default": "./esm/preview.js"
@@ -56,7 +56,7 @@
         "default": "./cjs/preview.js"
       }
     },
-    "./preview/DataGrid": {
+    "./PREVIEW/DataGrid": {
       "import": {
         "types": "./esm/data-grid/index.d.ts",
         "default": "./esm/data-grid/index.js"
