@@ -1,5 +1,6 @@
 import React from "react";
 import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
 import { HStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
@@ -122,12 +123,23 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
         >
           Edit
         </Button>
-        <Button
-          size="xsmall"
-          variant="secondary"
-          data-color="neutral"
-          icon={<MenuElipsisVerticalIcon title="Meny" />}
-        />
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <Button
+              size="xsmall"
+              variant="secondary"
+              data-color="neutral"
+              icon={<MenuElipsisVerticalIcon title="Menu" />}
+            />
+          </ActionMenu.Trigger>
+          <ActionMenu.Content>
+            <ActionMenu.Group label="Actions">
+              <ActionMenu.Item>Delete</ActionMenu.Item>
+              <ActionMenu.Item>Assign</ActionMenu.Item>
+              <ActionMenu.Item>Change status</ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
       </HStack>
     ),
   },

@@ -7,7 +7,7 @@ interface DataTableBaseCellProps extends Omit<
   "width"
 > {
   /**
-   * Content alignment inside cell.
+   * Text alignment inside cell.
    *
    * Quantitative figures like amounts and percentages should be right‑aligned (but not phone numbers, postal codes etc.)
    * @default "left"
