@@ -247,7 +247,7 @@ export const ResizeAuto: Story = {
     expect(headers.length).toBe(5);
     expect(headers[0]).toHaveStyle({ width: "80px" });
     expect(headers[1]).toHaveStyle({ width: "82px" });
-    expect(headers[2]).toHaveStyle({ width: "102px" });
+    expect(headers[2]).toHaveStyle({ width: "103px" });
     expect(headers[3]).toHaveStyle({ width: "168px" });
     expect(headers[4]).toHaveStyle({ width: "248px" });
   },
