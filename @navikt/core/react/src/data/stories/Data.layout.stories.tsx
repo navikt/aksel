@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataGrid, type DataGridProps } from "../../data-grid";
-import { DataGridTable, type DataTableProps } from "../table";
+import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table";
 import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 import { type PersonInfo, sampleData } from "./dummy-data";
 
@@ -75,8 +75,8 @@ const sortableData: SortableRow[] = [
 ];
 
 export const AutoLayoutMinimal: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (
@@ -94,8 +94,8 @@ export const AutoLayoutMinimal: StoryObj<{
 };
 
 export const AutoLayoutOverflowX: StoryObj<{
-  table: DataTableProps<PersonInfo>;
-  grid: Omit<DataGridProps<PersonInfo>, "children">;
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
 }> = {
   render: (args) => {
     return (
@@ -124,8 +124,8 @@ export const AutoLayoutOverflowX: StoryObj<{
 };
 
 export const AutoLayoutNoCellTruncation: StoryObj<{
-  table: DataTableProps<PersonInfo>;
-  grid: Omit<DataGridProps<PersonInfo>, "children">;
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
 }> = {
   render: (args) => {
     return (
@@ -153,8 +153,8 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
 };
 
 export const AutoLayoutSortable: StoryObj<{
-  table: DataTableProps<SortableRow>;
-  grid: Omit<DataGridProps<SortableRow>, "children">;
+  table: DataGrid.Table.Props<SortableRow>;
+  grid: Omit<DataGrid.Props<SortableRow>, "children">;
 }> = {
   render: (args) => {
     return (
@@ -192,8 +192,8 @@ export const AutoLayoutSortable: StoryObj<{
 };
 
 export const FixedLayoutMinimal: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (
@@ -209,8 +209,8 @@ export const FixedLayoutMinimal: StoryObj<{
 };
 
 export const FixedLayoutDynamicWidth: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (

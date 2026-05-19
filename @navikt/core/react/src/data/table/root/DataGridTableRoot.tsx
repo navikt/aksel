@@ -33,6 +33,8 @@ import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
 import type {
   DataTableLoadingConfig,
+  SortChangeDetail,
+  SortEntry,
   TableRowEntryId,
 } from "./DataGridTable.types";
 import {
@@ -513,7 +515,15 @@ const DataGridTable = DataTableInternal as <T>(
   props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace DataGridTable {
+  export type Props<T = any> = DataTableProps<T>;
+  export type Sort = SortEntry;
+  export type SortDetail = SortChangeDetail;
+}
+
 // docgen doesn't work well with type params, so we let it use DataTableInternal instead
+// eslint-disable-next-line import/export
 export { DataGridTable, DataTableInternal };
 export type { DataTableProps };
 export default DataGridTable;

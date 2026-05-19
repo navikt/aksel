@@ -1,14 +1,22 @@
 import React, { forwardRef, useMemo } from "react";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
-import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
-import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
+import type {
+  ColumnDefinition,
+  ColumnDefinitions,
+  SortChangeDetail,
+  SortEntry,
+} from "../../data/table/root/DataGridTable.types";
+import {
+  DataGridTable,
+  type DataTableProps,
+} from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type RowTId = string;
 
-export interface DataGridProps<RowT> {
+interface DataGridProps<RowT> {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -66,7 +74,7 @@ interface DataGridComponent {
  * </DataGrid>
  * ```
  */
-export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
+const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
   (
     {
       children,
@@ -117,4 +125,20 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
 
 DataGridRoot.Table = DataGridTable;
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace DataGridRoot {
+  export type Props<T = any> = DataGridProps<T>;
+  export type Column<T = any> = ColumnDefinition<T>;
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Table {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    export type Props<T = any> = DataTableProps<T>;
+    export type Sort = SortEntry;
+    export type SortDetail = SortChangeDetail;
+  }
+}
+
+// eslint-disable-next-line import/export
+export { DataGridRoot };
 export default DataGridRoot;

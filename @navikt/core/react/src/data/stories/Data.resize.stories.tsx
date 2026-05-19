@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { DataGrid, type DataGridProps } from "../../data-grid";
+import { DataGrid } from "../../data-grid";
 import { DataGridTable } from "../table";
 
 const meta: Meta<typeof DataGridTable> = {
@@ -15,7 +15,7 @@ const meta: Meta<typeof DataGridTable> = {
 
 export default meta;
 
-type Story = StoryObj<DataGridProps<Row>>;
+type Story = StoryObj<DataGrid.Props<Row>>;
 
 type Row = {
   left: string;
