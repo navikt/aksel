@@ -1,4 +1,4 @@
-type DataGridTableSettings = {
+type DataGridSettings = {
   /**
    * Controls vertical cell padding.
    * @default "normal"
@@ -33,10 +33,4 @@ type DataGridTableSettings = {
   textSize?: "small" | "medium";
 };
 
-type DataGridSettings = {
-  defaultValue?: { table: DataGridTableSettings };
-  value?: { table: DataGridTableSettings };
-  onChange?: (settings: { table: DataGridTableSettings }) => void;
-};
-
-export type { DataGridSettings, DataGridTableSettings };
+export type { DataGridSettings };
