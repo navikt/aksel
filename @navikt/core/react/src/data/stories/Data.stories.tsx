@@ -678,21 +678,23 @@ export const KitchenSinkAdvancedFilter: Story = {
             visibleColumns.find((c) => c === col.id),
           )}
           data={pagedData.paginatedData}
-        >
-          <DataGrid.Table<(typeof TEST_DATA)[number]>
-            rowDensity={rowDensity}
-            zebraStripes={zebraStripes}
-            textSize={textSize}
-            truncateContent={truncateContent}
-            withKeyboardNav
-            selection={{
-              selectionMode,
-            }}
-            stickyHeader
-            stickyColumns={{
+          selection={{
+            selectionMode,
+          }}
+          settings={{
+            rowDensity,
+            zebraStripes,
+            textSize,
+            truncateContent,
+            stickyColumns: {
               start: stickyColumns.first === "first" ? 1 : undefined,
               end: stickyColumns.last === "last" ? 1 : undefined,
-            }}
+            },
+          }}
+        >
+          <DataGrid.Table<(typeof TEST_DATA)[number]>
+            withKeyboardNav
+            stickyHeader
             detailsPanel={
               showDetailsPanel
                 ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }

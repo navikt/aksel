@@ -121,7 +121,7 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   selectionTrigger?: "row" | "control";
 }
 
-const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
+const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
   (
     {
       className,
