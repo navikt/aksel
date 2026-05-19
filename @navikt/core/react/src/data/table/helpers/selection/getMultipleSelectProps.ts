@@ -40,7 +40,7 @@ function getMultipleSelectProps<T>({
   const handleToggleRow = (key: TableRowEntryId, row: T) => {
     if (!row) {
       consoleWarning(
-        `Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
+        `DataGrid.Table: Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
       );
     }
 

@@ -53,7 +53,7 @@ function useTableSort(options?: TableSortOptions): UseTableSortResults {
     (id: string, event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (id === undefined) {
         consoleWarning(
-          "DataTable: Column id is undefined for sort event on target",
+          "DataGrid.Table: Column id is undefined for sort event on target",
           event.target,
           "Make sure your column definitions include an 'id' property.",
         );

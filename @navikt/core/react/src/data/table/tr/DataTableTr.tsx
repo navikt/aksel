@@ -88,7 +88,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
               if (!rowData) {
                 consoleWarning(
-                  `No row data found for rowId ${rowId}. This may cause issues with selection if enableRowSelection is used.`,
+                  `DataGrid.Table: No row data found for rowId ${rowId}. This may cause issues with selection if enableRowSelection is used.`,
                 );
               }
               selectionState.selection.toggleSelection(rowId, rowData);
