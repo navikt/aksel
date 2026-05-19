@@ -31,6 +31,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     header: "Name",
     id: "name",
+    isRowHeader: true,
     cell: (row) =>
       `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
   },

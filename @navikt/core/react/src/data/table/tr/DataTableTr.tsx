@@ -34,7 +34,7 @@ const ACTION_CELL_CSS_WIDTH = `${ACTION_CELL_WIDTH}px`;
 type DataTableTrProps = React.HTMLAttributes<HTMLTableRowElement> & {
   selected?: boolean;
   /**
-   * Unique identifier for the row, used for selection..
+   * Unique identifier for the row, used for selection.
    */
   rowId?: TableRowEntryId;
 };
@@ -151,6 +151,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
+          id="expansion-header"
           width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           data-block-keyboard-nav
@@ -174,6 +175,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead" && !showExpandAll) {
     return (
       <DataTableColumnHeader
+        id="expansion-header"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         data-block-keyboard-nav
@@ -187,6 +189,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (location === "thead") {
     return (
       <DataTableColumnHeader
+        id="expansion-header"
         align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
@@ -283,6 +286,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
+          id="selection-header"
           width={{ value: ACTION_CELL_CSS_WIDTH }}
           cellType="action"
           label=""
@@ -315,6 +319,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
     return (
       <DataTableColumnHeader
+        id="selection-header"
         align="center"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
@@ -333,6 +338,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   if (selection.selectionMode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
+        id="selection-header"
         width={{ value: ACTION_CELL_CSS_WIDTH }}
         cellType="action"
         label=""

@@ -17,9 +17,9 @@ import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
   /**
-   * Unique identifier for the column. Required for sortable columns to identify which column is being sorted.
+   * Unique identifier for the column. Used when sorting to identify which column is being sorted.
    */
-  id?: string;
+  id: string;
   /**
    * Accessible name of the column.
    */
@@ -99,6 +99,8 @@ const DataTableColumnHeader = forwardRef<
 
     const SortIcon = canSort ? SORT_ICON[sortDirection] : null;
 
+    const contentId = `th-content-${id.replace(/\s/g, "-")}`;
+
     return (
       <DataTableBaseCell
         as="th"
@@ -109,6 +111,7 @@ const DataTableColumnHeader = forwardRef<
         style={{ ...style, width: resizeResult.width }}
         aria-sort={canSort ? getAriaSort(sortDirection) : undefined}
         cellType={cellType}
+        aria-labelledby={contentId} // Avoids VO announcing "Endre bredde" when navigating horizontally in tbody
       >
         {canSort ? (
           <button
@@ -116,7 +119,9 @@ const DataTableColumnHeader = forwardRef<
             className="aksel-data-table__th-sort-button"
             onClick={(event) => onSortClick(id, event)}
           >
-            <div className="aksel-data-table__th-content">{children}</div>
+            <div id={contentId} className="aksel-data-table__th-content">
+              {children}
+            </div>
             {SortIcon && (
               <SortIcon
                 aria-hidden
@@ -128,6 +133,7 @@ const DataTableColumnHeader = forwardRef<
           </button>
         ) : (
           <div
+            id={contentId}
             className={cl({
               "aksel-data-table__th-content": cellType !== "action",
             })}
@@ -157,7 +163,7 @@ const DataTableColumnHeader = forwardRef<
               typeof resizeResult.width === "number" &&
               resizeResult.isResizingWithKeyboard
                 ? resizeResult.width.toString()
-                : "" // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
+                : " " // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
             } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
