@@ -125,7 +125,7 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
    */
-  loading?: DataTableLoadingConfig;
+  loadingContent?: DataTableLoadingConfig;
   /**
    * Adjusts font-size
    * @default "medium"
@@ -166,7 +166,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
       stickyHeader = true,
       onRowClick,
       emptyContent,
-      loading,
+      loadingContent,
       detailsPanel,
       subRows,
       sorting,
@@ -175,7 +175,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
     }: DataTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
-    const { columnDefinitions, data, getRowId, selection } =
+    const { columnDefinitions, data, getRowId, selection, isLoading } =
       useDataGridContext();
 
     const sortingState = useTableSort(sorting);
@@ -214,7 +214,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
         stickyStart={stickyStart}
         stickyHeader={stickyHeader}
         tableId={tableId}
-        loading={loading}
+        loading={loadingContent}
         onRowClick={onRowClick}
         columns={columns}
         totalColSpan={totalColSpan}
@@ -231,8 +231,8 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
             data-density={rowDensity}
             data-text-size={textSize}
             data-layout={layout}
-            data-loading={loading?.isLoading || undefined}
-            aria-busy={loading?.isLoading || undefined}
+            data-loading={isLoading || undefined}
+            aria-busy={isLoading || undefined}
           >
             <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
               <DataTableThead>
@@ -374,8 +374,9 @@ interface DataTableTBodyContentProps {
 
 function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   const { columns, loading, totalColSpan, tableItems } = useDataTableContext();
+  const { isLoading } = useDataGridContext();
 
-  if (loading?.isLoading && loading?.variant === "content") {
+  if (isLoading && loading?.variant === "content") {
     return (
       <DataTableLoadingState colSpan={totalColSpan}>
         {loading.content}
@@ -383,7 +384,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
     );
   }
 
-  if (loading?.isLoading && loading?.variant === "skeleton") {
+  if (isLoading && loading?.variant === "skeleton") {
     const rows = loading.rows ?? 5;
     const label = loading.label ?? "Laster innhold";
     return (
@@ -428,8 +429,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
     );
   }
 
-  const renderLoadingAnnouncement =
-    loading?.isLoading && loading?.variant === "overlay";
+  const renderLoadingAnnouncement = isLoading && loading?.variant === "overlay";
 
   const overlayLabel =
     loading?.variant === "overlay"

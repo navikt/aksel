@@ -7,6 +7,7 @@ type DataGridContextValue<RowT = unknown> = {
   columnDefinitions: ColumnDefinitions<RowT>;
   getRowId?: (rowData: RowT) => string;
   selection?: SelectionProps<RowT>;
+  isLoading?: boolean;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =

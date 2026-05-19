@@ -6,6 +6,7 @@ import {
   PlusIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { CheckboxInput } from "../../../form/checkbox/checkbox-input/CheckboxInput";
 import { RadioInput } from "../../../form/radio/radio-input/RadioInput";
 import { Skeleton } from "../../../skeleton";
@@ -126,6 +127,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 );
 
 function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
+  const { isLoading } = useDataGridContext();
   const { tableId, loading, stickyStart } = useDataTableContext();
   const stickyExpansion = stickyStart.expansion;
 
@@ -145,7 +147,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return null;
   }
 
-  if (loading?.isLoading && loading?.variant === "skeleton") {
+  if (isLoading && loading?.variant === "skeleton") {
     if (location === "thead") {
       return (
         <DataTableColumnHeader
@@ -261,6 +263,7 @@ function RowExpansionCell({ rowId }: { rowId?: TableRowEntryId }) {
  * TODO: a11y for labels
  */
 function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
+  const { isLoading } = useDataGridContext();
   const { selectionState, stickyStart, loading } = useDataTableContext();
   const stickySelection = stickyStart.selection;
   const stickySelectionOffset = stickyStart.selectionOffset;
@@ -276,7 +279,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return null;
   }
 
-  if (loading?.isLoading && loading?.variant === "skeleton") {
+  if (isLoading && loading?.variant === "skeleton") {
     if (location === "thead") {
       return (
         <DataTableColumnHeader

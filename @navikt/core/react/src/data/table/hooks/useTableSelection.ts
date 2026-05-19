@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from "react";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { useId } from "../../../utils-external";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
@@ -30,6 +31,7 @@ function useTableSelection<T>({
   selectionTrigger = "row",
   tableItems,
 }: UseTableSelectionArgs<T>): UseTableSelectionReturn {
+  const { isLoading } = useDataGridContext();
   const {
     selectionMode,
     defaultSelectedKeys,
@@ -96,6 +98,7 @@ function useTableSelection<T>({
         setSelectedKeys,
         enableRowSelection,
         tableItems,
+        isLoading,
       }),
     },
     selectionTrigger,

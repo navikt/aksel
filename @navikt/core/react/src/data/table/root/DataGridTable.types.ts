@@ -54,9 +54,7 @@ type SortChangeDetail = {
   direction: "asc" | "desc" | "none";
 };
 
-type DataTableLoadingConfig = {
-  isLoading?: boolean;
-} & (
+type DataTableLoadingConfig =
   | {
       variant: "content";
       content: React.ReactNode;
@@ -69,8 +67,7 @@ type DataTableLoadingConfig = {
   | {
       variant: "overlay";
       label?: string;
-    }
-);
+    };
 
 type TableRowEntryId = string;
 

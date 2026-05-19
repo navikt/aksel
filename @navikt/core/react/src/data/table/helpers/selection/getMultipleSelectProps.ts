@@ -11,6 +11,7 @@ type GetMultipleSelectPropsArgs<T> = {
   selectedKeys: SelectedKeysT;
   setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
   tableItems: UseTableItemsReturn<T>;
+  isLoading?: boolean;
 } & Pick<SelectionProps<T>, "enableRowSelection">;
 
 function getMultipleSelectProps<T>({
@@ -19,6 +20,7 @@ function getMultipleSelectProps<T>({
   setSelectedKeys,
   enableRowSelection,
   tableItems,
+  isLoading,
 }: GetMultipleSelectPropsArgs<T>) {
   const selectableIdsSet: Set<TableRowEntryId> = new Set();
 
@@ -62,6 +64,9 @@ function getMultipleSelectProps<T>({
   const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
+    if (isLoading) {
+      return;
+    }
     if (event.target.checked) {
       const preserved = selectedKeys.filter((k) => !selectableIdsSet.has(k));
       setSelectedKeys([...preserved, ...selectableIdsSet]);
@@ -75,6 +80,7 @@ function getMultipleSelectProps<T>({
       checked: isAllSelected,
       indeterminate: !isAllSelected && someSelected,
       onChange: toggleAllRowSelected,
+      disabled: selectableIdsSet.size === 0 || isLoading,
     }),
     getRowCheckboxProps: (key: TableRowEntryId, row: T): CheckboxInputProps => {
       return {

@@ -328,10 +328,12 @@ export const LoadingWithSkeletonRows: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataGrid columnDefinitions={userColumnDef} data={[]}>
-          <DataGrid.Table
-            loading={{ isLoading, variant: "skeleton", rows: 4 }}
-          />
+        <DataGrid
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+        >
+          <DataGrid.Table loadingContent={{ variant: "skeleton", rows: 4 }} />
         </DataGrid>
       </VStack>
     );
@@ -346,10 +348,13 @@ export const LoadingWithLoadingState: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataGrid columnDefinitions={userColumnDef} data={[]}>
+        <DataGrid
+          columnDefinitions={userColumnDef}
+          data={[]}
+          isLoading={isLoading}
+        >
           <DataGrid.Table
-            loading={{
-              isLoading,
+            loadingContent={{
               variant: "content",
               content: "Laster data...",
             }}
@@ -368,10 +373,12 @@ export const LoadingWhileKeepingData: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataGrid columnDefinitions={userColumnDef} data={userData}>
-          <DataGrid.Table
-            loading={{ isLoading, variant: "skeleton", rows: 4 }}
-          />
+        <DataGrid
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
+        >
+          <DataGrid.Table loadingContent={{ variant: "skeleton", rows: 4 }} />
         </DataGrid>
       </VStack>
     );
@@ -386,10 +393,17 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>
-        <DataGrid columnDefinitions={userColumnDef} data={userData}>
+        <DataGrid
+          columnDefinitions={userColumnDef}
+          data={userData}
+          isLoading={isLoading}
+          selection={{
+            selectionMode: "multiple",
+            onSelectionChange: console.info,
+          }}
+        >
           <DataGrid.Table
-            loading={{
-              isLoading,
+            loadingContent={{
               variant: "overlay",
               label: "Laster innhold for tabell",
             }}

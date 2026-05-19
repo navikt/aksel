@@ -33,6 +33,10 @@ export interface DataGridProps<RowT> {
    * Object with props related to row selection.
    */
   selection?: SelectionProps<RowT>;
+  /**
+   * Determines if the data grid is in a loading state.
+   */
+  isLoading?: boolean;
 }
 
 interface DataGridComponent {
@@ -65,6 +69,7 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       data,
       getRowId,
       selection,
+      isLoading,
       ...rest
     }: DataGridProps<unknown>,
     ref,
@@ -76,6 +81,7 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
           data={data}
           getRowId={getRowId}
           selection={selection}
+          isLoading={isLoading}
         >
           {children}
         </DataGridContextProvider>
