@@ -1,6 +1,5 @@
-import { useCallback } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
-import { useControllableState } from "../../../utils/hooks";
+import { useControllableState, useEventCallback } from "../../../utils/hooks";
 import type { SortChangeDetail, SortEntry } from "../root/DataGridTable.types";
 
 type TableSortOptions = {
@@ -49,7 +48,7 @@ function useTableSort(options?: TableSortOptions): UseTableSortResults {
     defaultValue: defaultSort || [],
   });
 
-  const handleSortClick = useCallback(
+  const handleSortClick = useEventCallback(
     (id: string, event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (id === undefined) {
         consoleWarning(
@@ -66,7 +65,6 @@ function useTableSort(options?: TableSortOptions): UseTableSortResults {
       setSort(next);
       onSortChange?.(next, detail);
     },
-    [onSortChange, setSort, sort],
   );
 
   return {

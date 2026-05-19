@@ -192,7 +192,15 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
         tableItems={tableItems}
         sortingState={sortingState}
       >
-        <TableElementWrapper enabled={withKeyboardNav}>
+        <TableElementWrapper
+          enabled={withKeyboardNav}
+          hasStickyColumns={
+            !!(
+              tableSettings?.stickyColumns?.start ||
+              tableSettings?.stickyColumns?.end
+            )
+          }
+        >
           <table
             {...rest}
             ref={forwardedRef}
@@ -251,9 +259,11 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
 function TableElementWrapper({
   children,
   enabled,
+  hasStickyColumns,
 }: {
   children: React.ReactNode;
   enabled: boolean;
+  hasStickyColumns: boolean;
 }) {
   const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
 
@@ -290,6 +300,10 @@ function TableElementWrapper({
 
   useEffect(
     function observeAndUpdateStickyStyles() {
+      if (!hasStickyColumns) {
+        return;
+      }
+
       const tableWrapperElement = tableWrapperRef.current;
 
       if (!tableWrapperElement) {
@@ -320,7 +334,7 @@ function TableElementWrapper({
         }
       };
     },
-    [scheduleStickyStylesUpdate],
+    [scheduleStickyStylesUpdate, hasStickyColumns],
   );
 
   return (
