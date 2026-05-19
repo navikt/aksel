@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 8.10.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.6
+  - @navikt/aksel-icons@8.10.6
+
+## 8.10.5
+
+### Patch Changes
+
+- Dependencies: Bumped `@floating-ui/react` from v0.27.8 -> v0.27.19 ([#4851](https://github.com/navikt/aksel/pull/4851))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.5
+  - @navikt/aksel-icons@8.10.5
+
+## 8.10.4
+
+### Patch Changes
+
+- ActionMenu: Now locked to bottom/top side placement, left/right for sub-menus. ([#4843](https://github.com/navikt/aksel/pull/4843))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.4
+  - @navikt/aksel-icons@8.10.4
+
 ## 8.10.3
 
 ### Patch Changes

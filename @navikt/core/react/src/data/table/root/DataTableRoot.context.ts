@@ -1,27 +1,39 @@
 import { createStrictContext } from "../../../utils/helpers";
-import type { UseColumnOptionsResult } from "../hooks/useColumnOptions";
+import type {
+  StickyStartState,
+  UseColumnOptionsResult,
+} from "../hooks/useColumnOptions";
+import type { UseTableItemsReturn } from "../hooks/useTableItems";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
+import type { UseTableSortResults } from "../hooks/useTableSort";
+import type {
+  DataTableLoadingConfig,
+  TableRowEntryId,
+} from "./DataGridTable.types";
 
 type DataTableContextProps<T> = {
   layout: "fixed" | "auto";
   withKeyboardNav: boolean;
   selectionState: UseTableSelectionReturn;
-  stickySelection: boolean;
+  stickyStart: StickyStartState;
   stickyHeader: boolean;
   tableId: string;
-  showLoadingSkeletons: boolean;
+  loading: DataTableLoadingConfig | undefined;
   onRowClick?: (
-    rowId: string | number,
+    rowId: TableRowEntryId,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
-  isLoading?: boolean;
-  showLoadingOverlay: boolean;
   columns: UseColumnOptionsResult<T>["columns"];
   /**
    * Used to set exact colspan for detailsPanel, loadingState and emptyState.
    * This is necessary to ensure that these components span the entire width of the table.
    */
-  fullWidthColSpan: number;
+  totalColSpan: number;
+  /**
+   * The current items and related metadata.
+   */
+  tableItems: UseTableItemsReturn<T>;
+  sortingState: UseTableSortResults;
 };
 
 const { Provider: DataTableContextProvider, useContext: useDataTableContext } =

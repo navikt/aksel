@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from "react";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { useId } from "../../../utils-external";
 import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
@@ -8,34 +9,38 @@ import type {
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
+import type { TableRowEntryId } from "../root/DataGridTable.types";
+import type { UseTableItemsReturn } from "./useTableItems";
 
-type UseTableSelectionArgs = {
-  selection?: SelectionProps;
-  /* Visible rows manage the header checkbox state and render selection cells. */
-  visibleRowIds: (string | number)[];
-  /* Direct child ids let selection walk nested rows lazily. */
-  childRowIdsById?: Map<string | number, (string | number)[]>;
+type UseTableSelectionArgs<T> = {
+  selection?: SelectionProps<T>;
+  selectionTrigger: "row" | "control";
+  tableItems: UseTableItemsReturn<T>;
 };
 
 type UseTableSelectionReturn = {
   selection: TableSelection;
   renderSelection: boolean;
-  disableRowSelectionOnClick: boolean;
+  selectionTrigger: "row" | "control";
 };
 
-function useTableSelection({
-  selection = {},
-  visibleRowIds = [],
-  childRowIdsById,
-}: UseTableSelectionArgs): UseTableSelectionReturn {
+function useTableSelection<T>({
+  selection = {
+    selectionMode: "none",
+  },
+  selectionTrigger = "row",
+  tableItems,
+}: UseTableSelectionArgs<T>): UseTableSelectionReturn {
+  const { isLoading } = useDataGridContext();
   const {
-    selectionMode = "none",
+    selectionMode,
     defaultSelectedKeys,
     selectedKeys: selectedKeysProp,
     onSelectionChange,
-    disabledSelectionKeys = [],
-    disableRowSelectionOnClick = false,
+    enableRowSelection,
   } = selection;
+
+  const { visibleRowIds = [] } = tableItems;
 
   const radioGroupName = useId();
 
@@ -47,17 +52,12 @@ function useTableSelection({
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  const disabledKeysSet = useMemo(
-    () => new Set(disabledSelectionKeys),
-    [disabledSelectionKeys],
-  );
-
   const isRowSelected = useCallback(
-    (rowId: string | number) => selectedKeysSet.has(rowId),
+    (rowId: TableRowEntryId) => selectedKeysSet.has(rowId),
     [selectedKeysSet],
   );
 
-  const baseSelection = { selectedKeys, disabledSelectionKeys, isRowSelected };
+  const baseSelection = { selectedKeys, isRowSelected };
 
   if (selectionMode === "none") {
     return {
@@ -66,7 +66,7 @@ function useTableSelection({
         ...baseSelection,
         selectedKeys: [],
       },
-      disableRowSelectionOnClick,
+      selectionTrigger,
       renderSelection: false,
     };
   }
@@ -79,11 +79,11 @@ function useTableSelection({
         ...getSingleSelectProps({
           selectedKeysSet,
           setSelectedKeys,
-          disabledKeysSet,
           name: radioGroupName,
+          enableRowSelection,
         }),
       },
-      disableRowSelectionOnClick,
+      selectionTrigger,
       renderSelection: visibleRowIds.length !== 0,
     };
   }
@@ -96,12 +96,12 @@ function useTableSelection({
         selectedKeysSet,
         selectedKeys,
         setSelectedKeys,
-        disabledKeysSet,
-        visibleRowIds,
-        childRowIdsById,
+        enableRowSelection,
+        tableItems,
+        isLoading,
       }),
     },
-    disableRowSelectionOnClick,
+    selectionTrigger,
     renderSelection: visibleRowIds.length !== 0,
   };
 }
@@ -113,10 +113,9 @@ const noSelectionState: UseTableSelectionReturn = {
   selection: {
     selectionMode: "none",
     selectedKeys: [],
-    disabledSelectionKeys: [],
     isRowSelected: () => false,
   },
-  disableRowSelectionOnClick: false,
+  selectionTrigger: "row",
   renderSelection: false,
 };
 

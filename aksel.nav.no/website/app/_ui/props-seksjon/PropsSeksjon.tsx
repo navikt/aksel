@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -13,9 +14,9 @@ type PropsSeksjonComponentT = NonNullable<
 >[number];
 
 function PropsSeksjon(props: ExtractPortableComponentProps<"props_seksjon">) {
-  const { komponenter, title } = props.value;
+  const { komponenter } = props.value;
 
-  if (!komponenter || komponenter.length === 0 || !title) {
+  if (!komponenter || komponenter.length === 0) {
     return null;
   }
 
@@ -62,7 +63,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
     <div lang="en" data-block-margin="space-28" className={styles.propsSeksjon}>
       <Heading
         size="xsmall"
-        level="3"
+        level={stegaClean(component.heading_level) || "3"}
         className={styles.propsSeksjonHeader}
         id={component._key}
       >

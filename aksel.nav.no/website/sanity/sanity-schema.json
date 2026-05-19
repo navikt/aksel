@@ -387,13 +387,6 @@
             "value": "props_seksjon"
           }
         },
-        "title": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
         "komponenter": {
           "type": "objectAttribute",
           "value": {
@@ -405,6 +398,23 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
+                  },
+                  "optional": true
+                },
+                "heading_level": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "string",
+                        "value": "3"
+                      },
+                      {
+                        "type": "string",
+                        "value": "4"
+                      }
+                    ]
                   },
                   "optional": true
                 },
@@ -1073,6 +1083,21 @@
             "rest": {
               "type": "inline",
               "name": "language"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
             }
           },
           {
@@ -1884,6 +1909,21 @@
               "type": "inline",
               "name": "language"
             }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
+            }
           }
         ]
       }
@@ -2303,6 +2343,21 @@
             "rest": {
               "type": "inline",
               "name": "language"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
             }
           }
         ]
@@ -2724,6 +2779,21 @@
               "type": "inline",
               "name": "language"
             }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
+            }
           }
         ]
       }
@@ -3143,6 +3213,21 @@
             "rest": {
               "type": "inline",
               "name": "language"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
             }
           },
           {
@@ -3578,6 +3663,21 @@
             "rest": {
               "type": "inline",
               "name": "language"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
             }
           },
           {
@@ -4265,6 +4365,21 @@
             },
             "rest": {
               "type": "inline",
+              "name": "description_list"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
               "name": "props_seksjon"
             }
           },
@@ -4299,6 +4414,66 @@
             }
           }
         ]
+      }
+    }
+  },
+  {
+    "name": "description_list",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "description_list"
+          }
+        },
+        "items": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "label": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "value": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "item"
+                  }
+                }
+              },
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
+        }
       }
     }
   },
@@ -5169,6 +5344,37 @@
     }
   },
   {
+    "name": "code_block",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "code_block"
+          }
+        },
+        "code": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "code"
+          },
+          "optional": true
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "kode",
     "type": "type",
     "value": {
@@ -5193,6 +5399,28 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        },
+        "blokker": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rest": {
+                "type": "inline",
+                "name": "code_block"
+              }
+            }
           },
           "optional": true
         }
@@ -7922,6 +8150,10 @@
                   {
                     "type": "string",
                     "value": "beta"
+                  },
+                  {
+                    "type": "string",
+                    "value": "preview"
                   },
                   {
                     "type": "string",

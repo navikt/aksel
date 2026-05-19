@@ -26,5 +26,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Propen 'shadow' lar deg sette box-shadow basert på tokens.",
+  desc: "Propen `shadow` lar deg sette box-shadow basert på tokens.",
 };

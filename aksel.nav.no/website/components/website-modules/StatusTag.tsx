@@ -11,6 +11,12 @@ export const StatusTag = ({
   showStable?: boolean;
 }) => {
   switch (status) {
+    case "preview":
+      return (
+        <Tag size={size} data-color="meta-purple" {...rest}>
+          Preview
+        </Tag>
+      );
     case "beta":
       return (
         <Tag size={size} data-color="meta-purple" {...rest}>

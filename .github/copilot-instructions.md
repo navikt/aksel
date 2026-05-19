@@ -1,43 +1,27 @@
 # Aksel - Copilot Instructions
 
-## Use this file first
+## Approach
 
-- Trust these instructions to narrow the search space, but still read the target code and nearest related files before editing.
-- Optimize for local work. Prefer known paths, nearby patterns, and existing scripts over broad repo searches.
-- Ignore release, deploy, changelog, CMS sync, and other remote/ops scripts unless the user asks.
+- Use these instructions to narrow search space, not replace reading code.
+- Before editing, read the target file and nearest related files (`index.ts`, story, test, exports).
+- Prefer known paths and existing scripts over broad repo searches.
+- Ignore release/deploy/changelog/ops scripts unless asked.
 
-## How to use this file
+## Behavior
 
-- Use this file to narrow the search space, not to replace reading code.
-- Before editing, read the target file and the nearest related files in the same folder such as `index.ts`, story, test, and package/root export files.
-- Search wider only when nearby files do not answer the question.
-
-## Agent mode
-
-- No apologies, no “I think”, no change summaries.
-- Don’t ask to confirm info that’s already in context.
-- Favor performance and security; add robust error handling and safe logging.
-- Default tone: short and answer-first. Aim for max 0–2 concise sentences where needed.
-- Thinking and explanation process: Keep it short, omit whats not strictly necessary, and focus on the next edit.
-- Avoid long explanations or multiple steps at once.
-- Don't explain thinking process for each step, just do the next edit. Only add explanations when the user explicitly asks for it or when it's necessary to clarify a non-obvious change.
-
-## Inline chat and editor completions
-
-- Verify before you claim. Don’t speculate.
-- Keep functions small and focused; remove duplication (rule of three).
-- Show only what changes. Provide minimal diffs/snippets; don’t paste whole files or unrelated lines.
-- Keep edits scoped to a single file unless explicitly asked to touch more.
-- Extract requirements into a tiny checklist and proceed. Ask a question only when truly blocked.
-- Avoid heavy formatting: bullets are OK; skip tables; use code fences only for code.
-- For performance/security: avoid unnecessary re-renders, side effects at module top-level, unsafe HTML, and leaking env vars.
+- No apologies, no "I think", no change summaries.
+- Short and answer-first. Max 0-2 sentences where needed.
+- Don't explain thinking; just do the next edit. Explain only when asked or non-obvious.
+- Show only what changes. Minimal diffs; don't paste whole files.
+- Keep edits scoped to one file unless asked. Ask only when truly blocked.
+- Favor performance and security; avoid re-renders, top-level side effects, unsafe HTML, leaking env vars.
 
 ## Repo summary
 
-- Large Yarn 4 workspaces monorepo for NAV's design system: public React/CSS/tokens/icons/stylelint/CLI packages plus docs site and playroom.
+- Yarn 4 workspaces monorepo: public React/CSS/tokens/icons/stylelint/CLI packages + docs site + playroom.
 - Stack: TypeScript 6, React 19, Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2, Prettier 3.
-- Runtime: Node 22+ recommended, Yarn 4.12.0.
-- Important constraint: code under `@navikt/*` must stay React 17 API compatible. Do not use React 18/19-only APIs there.
+- Node 22+, Yarn 4.12.0.
+- Constraint: `@navikt/*` code must stay React 17 API compatible.
 
 ## Start and validate
 
@@ -48,98 +32,78 @@
 - Run `yarn boot` after first install and after `yarn clean`.
 - Full install may need `NPM_AUTH_TOKEN` for GitHub Packages.
 
-Public-package-only install:
-
-```bash
-yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint
-```
+Public-package-only: `yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
 
 ## Definition of done
 
-- Behavior or visual change: update the implementation, closest story, and closest test.
-- New public export: update the component `index.ts`, package `src/index.ts`, and `package.json` exports.
-- User-facing package change: add a changeset unless the task says otherwise.
-- Validate with the narrowest workspace command first; use root commands only for cross-workspace changes.
+- Behavior/visual change: update implementation, closest story, and closest test.
+- New public export: sync component `index.ts`, package `src/index.ts`, and `package.json` exports.
+- User-facing package change: add a changeset unless told otherwise.
+- Validate with narrowest workspace command first.
 
 ### Common local commands
 
-Always prefer using these commands that already exists in workspaces before running custom commands or doing manual steps. These are optimized for local development and validation. For example:
+Prefer existing workspace commands over custom commands:
 
-- `yarn boot` - build all workspaces
-- `yarn test` - run all workspace tests
-- `yarn lint` - eslint + stylelint + biome + cycle + version checks
+- `yarn boot` - build all
+- `yarn test` / `yarn lint` - all tests / all linting
 - `yarn lint:eslint` / `yarn lint:css` / `yarn lint:biome`
-- `yarn storybook` - root Storybook on `localhost:6006`
-- `yarn storybook:aksel` - website/example Storybook on `localhost:6007`
-- `yarn storybook:test` - Storybook browser tests, slow, uses Playwright/Firefox
-- `yarn dev` - website dev server on `localhost:3000`
+- `yarn storybook` - root on `:6006`
+- `yarn storybook:aksel` - website examples on `:6007`
+- `yarn storybook:test` - browser tests (Playwright/Firefox)
+- `yarn dev` - website on `:3000`
 - `yarn clean` - remove build artifacts
-- `yarn workspace @navikt/ds-react build`
-- `yarn workspace @navikt/ds-react test`
+- `yarn workspace @navikt/ds-react build|test`
 - `yarn workspace website test`
 - `yarn workspace playroom sync-imports`
 
-### Validated locally
-
-- Works: `yarn boot`, `yarn test`, `yarn storybook --ci --smoke-test`, `yarn storybook:aksel --ci --smoke-test`
-- Caveat: `yarn lint` and `yarn lint:eslint` can fail if playroom imports are stale. Fix with `yarn workspace playroom sync-imports`.
+Caveat: `yarn lint` can fail if playroom imports are stale. Fix: `yarn workspace playroom sync-imports`.
 
 ## Where to edit
 
-- `@navikt/core/react/` - `@navikt/ds-react`
-  - `src/<component>/<Component>.tsx`
-  - `src/<component>/index.ts`
-  - `src/<component>/*.stories.tsx`
-  - `src/index.ts`
-  - `package.json` exports map for new public components
+- `@navikt/core/react/src/<component>/` - component source, index, stories
+- `@navikt/core/react/src/index.ts` + `package.json` exports - public API surface
 - `@navikt/core/css/src/` - component CSS
-- `@navikt/core/tokens/src/` - design token source
+- `@navikt/core/tokens/src/` - design tokens
 - `@navikt/core/tailwind/` - Tailwind preset
-- `@navikt/aksel-icons/icons/` - source SVGs; `src/` is generated
-- `@navikt/aksel-stylelint/src/` - Stylelint rules/config
+- `@navikt/aksel-icons/icons/` - source SVGs (`src/` is generated)
+- `@navikt/aksel-stylelint/src/` - Stylelint rules
 - `@navikt/aksel/src/` - CLI and codemods
 - `aksel.nav.no/website/` - Next.js docs site
-- `aksel.nav.no/playroom/` - playroom and generated imports
-- `examples/` - example apps
-- `scripts/` - shared repo scripts
-- Root references: `README.md`, `CONTRIBUTING.md`, `aksel.nav.no/README.md`, `package.json`, `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `tsconfig.json`, `tsconfig.build.json`, `.storybook/`, `.github/workflows/build-validation.yml`
+- `aksel.nav.no/playroom/` - playroom
+- Root: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `tsconfig.json`, `.storybook/`
 
 ## Coding defaults
 
-- Keep diffs small. No drive-by refactors, formatting churn, or new dependencies unless asked.
-- Read the full file and copy the nearest existing pattern before changing code.
-- Keep public APIs stable. Prefer additive props and exports.
-- In `@navikt/*`, import React in TSX files; root JSX runtime is classic.
-- Use named exports with explicit type exports.
-- Keep `forwardRef`, `className`, `...rest`, and `as`/`OverridableComponent` patterns when the surrounding component uses them.
-- Reuse internal helpers instead of re-implementing them: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
-- Use `node:` imports for Node builtins.
-- Never import from `esm/` or `cjs/` build output.
-- Keep import order consistent: `@navikt/*`, `@/*`, then relative. Let Prettier handle sorting.
-- Preserve or add JSDoc for public props/components when changing public APIs.
+- Small diffs. No drive-by refactors or new deps unless asked.
+- Copy nearest existing pattern before writing new code.
+- Stable public APIs. Prefer additive props/exports.
+- Named exports; separate type exports.
+- `node:` imports for Node builtins. Never import from `esm/`/`cjs/` output.
+- Import order: `@navikt/*`, `@/*`, relative. Prettier handles sorting.
+- Preserve JSDoc on public props/components when changing public APIs.
+- Reuse helpers: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
 
-## React and ds-react specifics
+## React and ds-react
 
-- Component `index.ts` files in `@navikt/core/react/src/**` start with `"use client"`.
-- When adding or exposing a public component, keep these in sync:
-  - component `index.ts`
-  - `@navikt/core/react/src/index.ts`
-  - `@navikt/core/react/package.json` exports
-- Do not use React 18/19-only APIs under `@navikt/*`. Use internal helpers like `useId`.
+- `@navikt/*` TSX files import React explicitly (classic JSX runtime).
+- Component `index.ts` files start with `"use client"`.
+- Keep `forwardRef`, `className`, `...rest`, `as`/`OverridableComponent` patterns.
+- No React 18/19-only APIs in `@navikt/*`. Use internal `useId` etc.
+- New public component: sync component `index.ts` + `src/index.ts` + `package.json` exports.
 
 ## CSS and tokens
 
-- Never hardcode colors, spacing, radius, or shadows. Use tokens only.
-- Public tokens use `--ax-*`. Internal component variables use `--__axc-*`.
-- Follow existing CSS nesting, `data-*` selectors, `focus-visible`, `forced-colors`, and reduced-motion patterns.
-- Prettier formats; Biome is lint-only.
+- Tokens only: `--ax-*` (public), `--__axc-*` (internal component vars).
+- Follow existing CSS nesting, `data-*` selectors, `focus-visible`, `forced-colors`, reduced-motion.
+- Prettier formats CSS; Biome is lint-only.
 
 ## Stories, tests, website
 
-- Update the closest story and test whenever behavior or visuals change.
-- Use Testing Library queries by role and name.
-- Stories live next to components and use `@storybook/react-vite`.
-- For component work, prefer Storybook over `yarn dev`.
-- `aksel.nav.no/website/pages/eksempler/**` and `pages/templates/**` feed the website and Storybook. In these files, only import from `@navikt/*` and `react`.
-- The website uses both `app/` and `pages/`; stay inside the router already used nearby.
-- `yarn storybook:aksel` works for website examples/templates without Sanity secrets. `yarn dev` may need website env values such as `SANITY_READ_NO_DRAFTS`.
+- Update closest story + test when behavior/visuals change.
+- Testing Library: query by role and name.
+- Stories use `@storybook/react-vite`, live next to components.
+- Prefer `yarn storybook` for component work over `yarn dev`.
+- `pages/eksempler/**` and `pages/templates/**`: import only `@navikt/*` and `react`.
+- Website uses `app/` and `pages/`; stay in the router already used nearby.
+- `yarn storybook:aksel` needs no secrets. `yarn dev` may need `SANITY_READ_NO_DRAFTS`.

@@ -35,14 +35,23 @@
     min-width: 100%;
   }
 
-  --__axc-data-table-density: var(--ax-space-16);
+  /* Default font size is prop "medium", which is variable --ax-font-size-large */
+  --__axc-data-table-text-size: var(--ax-font-size-large);
+  --__axc-data-table-density-base: var(--ax-space-16);
+  --__axc-data-table-density-scale: 1;
+  --__axc-data-table-density: calc(var(--__axc-data-table-density-base) * var(--__axc-data-table-density-scale));
+
+  &[data-text-size="small"] {
+    --__axc-data-table-text-size: var(--ax-font-size-medium);
+    --__axc-data-table-density-scale: 0.8889; /* 16/18 */
+  }
 
   &[data-density="condensed"] {
-    --__axc-data-table-density: var(--ax-space-8);
+    --__axc-data-table-density-base: var(--ax-space-8);
   }
 
   &[data-density="spacious"] {
-    --__axc-data-table-density: var(--ax-space-32);
+    --__axc-data-table-density-base: var(--ax-space-32);
   }
 
   &[data-zebra-stripes="true"] {
@@ -177,11 +186,16 @@
   vertical-align: middle;
   scroll-margin: var(--ax-space-0);
   padding: 0;
+  font-size: var(--__axc-data-table-text-size);
+
+  &:not(.aksel-data-table__column-header) {
+    overflow: hidden; /* Needed for cases where left margin is added to cell-content (nested rows) */
+  }
 
   &[data-nested="true"] {
     position: relative;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       margin-inline-start: calc(32px + 8px + calc(var(--__axc-data-table-nested-depth) * var(--ax-space-16)));
     }
   }
@@ -219,7 +233,7 @@
     &[data-sticky="start"] {
       left: 0;
 
-      &::before {
+      &[data-sticky-last]::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -231,13 +245,13 @@
         opacity: 0;
       }
 
-      .aksel-data-table[data-scroll] &::before {
+      .aksel-data-table[data-scroll] &[data-sticky-last]::before {
         opacity: 1;
         animation: scroll-shadow-fade-start 1s linear;
         animation-timeline: --horizontal-table-scroll;
       }
 
-      &::after {
+      &[data-sticky-last]::after {
         inset-inline: 0 -1px;
         border-right-width: 1px;
       }
@@ -284,10 +298,10 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       display: grid;
       place-content: center;
     }
@@ -295,7 +309,7 @@
 
   --__axc-data-table-pi-cell: var(--ax-space-16);
 
-  &:not([data-selectable="true"]) > div {
+  &:not([data-cell-type="action"]) > .aksel-data-table__cell-content {
     padding-block: var(--__axc-data-table-density);
     padding-inline: var(--__axc-data-table-pi-cell);
     overflow: hidden;
@@ -441,11 +455,11 @@
       transform: translateY(-50%);
       height: 1.5rem;
 
-      &.aksel-data-table__th-resize-handle-indicator--start {
+      &:first-child {
         right: 12px;
       }
 
-      &.aksel-data-table__th-resize-handle-indicator--end {
+      &:last-child {
         left: 12px;
       }
     }
@@ -493,10 +507,10 @@
     outline-offset: -4px;
   }
 
-  &[data-selectable="true"] {
+  &[data-cell-type="action"] {
     padding: 0;
 
-    & > div {
+    & > .aksel-data-table__cell-content {
       display: grid;
       place-content: center;
     }
@@ -511,6 +525,11 @@
   display: table-cell;
   padding: 0;
   width: auto;
+}
+
+.aksel-data-table__drag-and-drop-root {
+  padding: 0;
+  margin: 0;
 }
 
 .aksel-data-drag-and-drop__drag-handler__button {
@@ -533,21 +552,11 @@
 }
 
 .aksel-data-table__drag-and-drop-item {
-  background-color: var(--ax-bg-default);
-
   &[data-overlay="true"] {
     width: 100%;
     opacity: 0.8;
     box-shadow: var(--ax-shadow-dialog);
-  }
-
-  /* TODO - might be removable */
-  &[data-keyboard-dragging="true"] {
-    .aksel-data-drag-and-drop__drag-handler__button {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: -1px;
-      border-radius: var(--ax-radius-8);
-    }
+    background-color: var(--ax-bg-default);
   }
 
   &[data-drop-target="true"]:not([data-overlay="true"]) {
@@ -555,7 +564,6 @@
   }
 }
 
-.aksel-data-drag-and-drop__drag-handler__alt,
 .aksel-data-drag-and-drop__drag-handler {
   position: relative;
   height: 1.5rem;
@@ -660,4 +668,11 @@ html[data-dragging-cursor="true"] *::after {
 
 .aksel-data-table__details-panel-row {
   box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+}
+
+.aksel-data-table__details-panel-row-cell {
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
 }

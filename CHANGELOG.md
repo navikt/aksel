@@ -1,5 +1,29 @@
 # Changelog
 
+## 8.10.6
+
+### @navikt/ds-css
+
+- 🎨 InfoCard: Added bigger padding for medium sized InfoCard.Message ([#4861](https://github.com/navikt/aksel/pull/4861))
+
+## 8.10.5
+
+### @navikt/ds-react
+
+- Dependencies: Bumped `@floating-ui/react` from v0.27.8 -> v0.27.19 ([#4851](https://github.com/navikt/aksel/pull/4851))
+
+### @navikt/ds-css
+
+- Pagination: Fix selected-styling in forced-colors mode ([#4858](https://github.com/navikt/aksel/pull/4858))
+
+- Button: Fix issue where secondary and tertiary variants did not have correct text color is certain cases ([#4857](https://github.com/navikt/aksel/pull/4857))
+
+## 8.10.4
+
+### @navikt/ds-react
+
+- ActionMenu: Now locked to bottom/top side placement, left/right for sub-menus. ([#4843](https://github.com/navikt/aksel/pull/4843))
+
 ## 8.10.3
 
 ### @navikt/ds-react

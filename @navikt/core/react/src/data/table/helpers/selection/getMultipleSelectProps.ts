@@ -1,107 +1,93 @@
+import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
-import { SelectionSubtreeHelper } from "./SelectionSubtreeHelper";
+import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
+import type { UseTableItemsReturn } from "../../hooks/useTableItems";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
+import type { SelectedKeysT, SelectionProps } from "./selection.types";
+import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
-type GetMultipleSelectPropsArgs = {
-  selectedKeysSet: Set<string | number>;
-  selectedKeys: (string | number)[];
-  setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeysSet: Set<string | number>;
-  visibleRowIds: (string | number)[];
-  childRowIdsById?: Map<string | number, (string | number)[]>;
-};
+type GetMultipleSelectPropsArgs<T> = {
+  selectedKeysSet: Set<TableRowEntryId>;
+  selectedKeys: SelectedKeysT;
+  setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
+  tableItems: UseTableItemsReturn<T>;
+  isLoading?: boolean;
+} & Pick<SelectionProps<T>, "enableRowSelection">;
 
-function getMultipleSelectProps({
+function getMultipleSelectProps<T>({
   selectedKeysSet,
   selectedKeys,
   setSelectedKeys,
-  disabledKeysSet,
-  visibleRowIds,
-  childRowIdsById,
-}: GetMultipleSelectPropsArgs) {
-  const subtreeHelper = new SelectionSubtreeHelper({
-    childRowIdsById,
-    disabledKeysSet,
-    selectedKeysSet,
-  });
+  enableRowSelection,
+  tableItems,
+  isLoading,
+}: GetMultipleSelectPropsArgs<T>) {
+  const selectableIdsSet: Set<TableRowEntryId> = new Set();
 
-  // Header selection traverses the visible roots and skips already visited
-  // descendants, so expanded trees stay linear in the number of rows.
-  const headerSelectableKeys = subtreeHelper.getSelectableKeys(visibleRowIds);
-  const headerSelectableKeysSet = new Set(headerSelectableKeys);
+  for (const [id, { rowData }] of tableItems.itemDetails) {
+    if (canSelectTableRow(enableRowSelection, { row: rowData, id })) {
+      selectableIdsSet.add(id);
+    }
+  }
 
-  const selectedSelectableCount = headerSelectableKeys.filter((k) =>
-    selectedKeysSet.has(k),
-  ).length;
+  let selectedOnPageCount = 0;
+  for (const id of selectableIdsSet) {
+    selectedKeysSet.has(id) && selectedOnPageCount++;
+  }
 
-  const allSelectableSelected =
-    headerSelectableKeys.length > 0 &&
-    selectedSelectableCount === headerSelectableKeys.length;
+  const isAllSelected =
+    selectableIdsSet.size > 0 && selectedOnPageCount === selectableIdsSet.size;
+  const someSelected = selectedOnPageCount > 0;
 
-  const indeterminate =
-    selectedSelectableCount > 0 &&
-    selectedSelectableCount < headerSelectableKeys.length;
+  const handleToggleRow = (key: TableRowEntryId, row: T) => {
+    if (!row) {
+      consoleWarning(
+        `DataGrid.Table: Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
+      );
+    }
 
-  const selectedKeysNotInView = selectedKeys.filter(
-    (k) => !headerSelectableKeysSet.has(k),
-  );
-  const disabledSelected = selectedKeys.filter((k) => disabledKeysSet.has(k));
-  const preservedKeys = [
-    ...new Set([...selectedKeysNotInView, ...disabledSelected]),
-  ];
-
-  const isGroupFullySelected = (key: string | number) => {
-    const groupStats = subtreeHelper.getSelectionStats(key);
-
-    return (
-      groupStats.selectableCount > 0 &&
-      groupStats.selectedCount === groupStats.selectableCount
-    );
-  };
-
-  const handleToggleAll = () => {
-    if (allSelectableSelected) {
-      setSelectedKeys(preservedKeys);
-    } else {
-      setSelectedKeys([
-        ...new Set([...preservedKeys, ...headerSelectableKeys]),
-      ]);
+    const checked = !selectedKeysSet.has(key);
+    const nextSet = new Set(selectedKeysSet);
+    const changed = mutateRowSelection({
+      selectedRowIds: nextSet,
+      rowId: key,
+      checked,
+      childRowIdsById: tableItems.childRowIdsById,
+      itemDetails: tableItems.itemDetails,
+      enableRowSelection,
+    });
+    if (changed) {
+      setSelectedKeys([...nextSet]);
     }
   };
 
-  const handleToggleRow = (key: string | number) => {
-    if (disabledKeysSet.has(key)) {
+  const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    if (isLoading) {
       return;
     }
-
-    const groupKeys = subtreeHelper.getSelectableKeys([key]);
-
-    if (isGroupFullySelected(key)) {
-      const groupKeysSet = new Set(groupKeys);
-      setSelectedKeys(
-        selectedKeys.filter((selectedKey) => !groupKeysSet.has(selectedKey)),
-      );
+    if (event.target.checked) {
+      const preserved = selectedKeys.filter((k) => !selectableIdsSet.has(k));
+      setSelectedKeys([...preserved, ...selectableIdsSet]);
     } else {
-      setSelectedKeys([...new Set([...selectedKeys, ...groupKeys])]);
+      setSelectedKeys(selectedKeys.filter((k) => !selectableIdsSet.has(k)));
     }
   };
 
   return {
     getTheadCheckboxProps: (): CheckboxInputProps => ({
-      onChange: handleToggleAll,
-      checked: allSelectableSelected,
-      indeterminate,
-      disabled: headerSelectableKeys.length === 0,
+      checked: isAllSelected,
+      indeterminate: !isAllSelected && someSelected,
+      onChange: toggleAllRowSelected,
+      disabled: selectableIdsSet.size === 0 || isLoading,
     }),
-    getRowCheckboxProps: (key: string | number): CheckboxInputProps => {
-      const groupStats = subtreeHelper.getSelectionStats(key);
-
+    getRowCheckboxProps: (key: TableRowEntryId, row: T): CheckboxInputProps => {
       return {
-        onChange: () => handleToggleRow(key),
-        checked: isGroupFullySelected(key),
-        indeterminate:
-          groupStats.selectedCount > 0 &&
-          groupStats.selectedCount < groupStats.selectableCount,
-        disabled: disabledKeysSet.has(key),
+        onChange: () => handleToggleRow(key, row),
+        checked: selectedKeysSet.has(key),
+        indeterminate: false,
+        disabled: !canSelectTableRow(enableRowSelection, { row, id: key }),
       };
     },
     toggleSelection: handleToggleRow,

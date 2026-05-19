@@ -2,21 +2,23 @@ import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
-interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellElement> {
+interface DataTableBaseCellProps extends Omit<
+  React.TdHTMLAttributes<HTMLTableCellElement>,
+  "width"
+> {
   /**
-   * Content alignment inside cell
+   * Text alignment inside cell.
+   *
+   * Quantitative figures like amounts and percentages should be right‑aligned (but not phone numbers, postal codes etc.)
    * @default "left"
    */
-  textAlign?: "left" | "center" | "right";
+  align?: "left" | "center" | "right";
   /**
-   * TODO: Shouldnt be needed to declare these here... But getting type-errors if not
+   * Internal cell type that controls padding, alignment, row-click prevention, and resize behavior.
+   * - `"action"`: Centers content, removes cell padding, prevents row click, and disables column resize.
+   *    Used for selection (checkbox/radio) and expansion (expand/collapse) cells.
    */
-  colSpan?: number;
-  rowSpan?: number;
-  /**
-   * Temp hack to solve overflow and alignment
-   */
-  UNSAFE_isSelection?: boolean;
+  cellType?: "action";
   /**
    * When true, clicking this cell will not trigger `onRowClick` on the row.
    * Useful for cells that contain their own interactive content or actions
@@ -26,20 +28,15 @@ interface DataTableBaseCellProps extends React.HTMLAttributes<HTMLTableCellEleme
   /**
    * Sets a max-width on the content wrapper div inside the cell.
    * This is only needed when using `layout="auto"` together with
-   * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
+   * `truncateContent` on `<DataGrid.Table>` and you want the cell to be truncated.
    */
-  contentMaxWidth?: number | `${number}${string}`;
+  contentMaxWidth?: number | string;
   /**
    * Makes the cell sticky.
    */
   isSticky?: "start" | "end" | false;
 }
 
-/**
- * TODO:
- * - Need a "type" or something that centers content instead of relying on isSelection prop.
- * - Need a separate prop do disabled resizing instead of relying on isSelection prop.
- */
 const DataTableBaseCell = forwardRef<
   HTMLTableCellElement,
   DataTableBaseCellProps & {
@@ -47,6 +44,12 @@ const DataTableBaseCell = forwardRef<
      * Cell type
      */
     as: "th" | "td";
+    /**
+     * Content to render before the main cell content.
+     *
+     * **WARNING: Adding content here that takes up space will probably break auto-resizing!**
+     */
+    beforeContent?: React.ReactNode;
   }
 >(
   (
@@ -54,13 +57,14 @@ const DataTableBaseCell = forwardRef<
       className,
       children,
       as: Component,
-      textAlign = "left",
-      colSpan,
-      UNSAFE_isSelection,
+      beforeContent,
+      align = "left",
+      cellType,
       preventRowClick,
       contentMaxWidth,
-      rowSpan,
       isSticky,
+      colSpan,
+      rowSpan,
       ...rest
     },
     forwardedRef,
@@ -73,16 +77,22 @@ const DataTableBaseCell = forwardRef<
         ref={forwardedRef}
         className={cl("aksel-data-table__cell", className)}
         tabIndex={withKeyboardNav ? -1 : undefined}
-        data-align={textAlign}
-        data-selectable={UNSAFE_isSelection}
+        data-align={align}
+        data-cell-type={cellType || undefined}
         data-prevent-row-click={
-          preventRowClick || UNSAFE_isSelection || undefined
+          preventRowClick || cellType === "action" || undefined
         }
         data-sticky={isSticky || undefined}
         colSpan={colSpan}
         rowSpan={rowSpan}
       >
-        <div style={{ maxWidth: contentMaxWidth }}>{children}</div>
+        {beforeContent}
+        <div
+          className="aksel-data-table__cell-content"
+          style={{ maxWidth: contentMaxWidth }}
+        >
+          {children}
+        </div>
       </Component>
     );
   },

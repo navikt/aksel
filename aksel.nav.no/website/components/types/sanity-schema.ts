@@ -136,7 +136,7 @@ export type SidebarInputNodeT = {
   heading: string;
   slug: string;
   kategori: string;
-  tag: "beta" | "new" | "ready" | "deprecated";
+  tag: "beta" | "new" | "ready" | "deprecated" | "preview";
   sidebarindex: number | null;
 };
 

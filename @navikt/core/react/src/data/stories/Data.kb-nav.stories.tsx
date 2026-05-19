@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
-import { DataTable } from "../table/root/DataTableRoot";
+import { DataGrid } from "../../data-grid";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/Keyboard Navigation",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -15,7 +16,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 type InputRow = { id: 1 | 2 | 3 };
 
@@ -25,7 +26,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col1",
     header: "Col 1",
-    label: "Col 1",
     cell: ({ id }) =>
       id === 1 ? (
         <input type="checkbox" data-testid="checkbox-1" />
@@ -36,7 +36,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
     cell: ({ id }) => {
       if (id === 1)
         return (
@@ -57,7 +56,6 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) =>
       id === 2 ? (
         <select data-testid="select">
@@ -72,21 +70,19 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
   {
     id: "col4",
     header: "Col 4",
-    label: "Col 4",
     cell: () => "Col 4",
   },
 ];
 
 export const Inputs: Story = {
   render: () => (
-    <DataTable
-      style={{ width: "100%" }}
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={inputsColumnDef}
       data={inputsData}
-      getRowId={(row) => row.id}
-    />
+      getRowId={(row) => row.id.toString()}
+    >
+      <DataGrid.Table style={{ width: "100%" }} withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -160,7 +156,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col1",
     header: "Col 1",
-    label: "Col 1",
     cell: ({ id }) => {
       if (id === 2) return <button disabled>Disabled button</button>;
       if (id === 3)
@@ -171,7 +166,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -189,7 +183,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -204,7 +197,6 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
   {
     id: "col4",
     header: "Col 4",
-    label: "Col 4",
     cell: ({ id }) => {
       if (id === 2)
         return (
@@ -222,13 +214,13 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
 
 export const DisabledCells: Story = {
   render: () => (
-    <DataTable
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={disabledColumnDef}
       data={disabledData}
-      getRowId={(row) => row.id}
-    />
+      getRowId={(row) => row.id.toString()}
+    >
+      <DataGrid.Table withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -280,15 +272,14 @@ export const DisabledCells: Story = {
 type CacheRow = { id: number; col1: string };
 
 const cacheColumnDef: ColumnDefinitions<CacheRow> = [
-  { id: "col1", header: "Col 1", label: "Col 1", cell: ({ col1 }) => col1 },
-  { id: "col2", header: "Col 2", label: "Col 2", cell: () => "Col 2" },
+  { id: "col1", header: "Col 1", cell: ({ col1 }) => col1 },
+  { id: "col2", header: "Col 2", cell: () => "Col 2" },
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: ({ id }) => (id === 1 ? <input type="checkbox" /> : "Col 3"),
   },
-  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+  { id: "col4", header: "Col 4", cell: () => "Col 4" },
 ];
 
 export const Cache: Story = {
@@ -306,20 +297,19 @@ export const Cache: Story = {
         <button onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
-        <DataTable
-          withKeyboardNav
-          layout="auto"
+        <DataGrid
           columnDefinitions={cacheColumnDef}
           data={data}
-          getRowId={(row) => row.id}
-        />
+          getRowId={(row) => row.id.toString()}
+        >
+          <DataGrid.Table withKeyboardNav layout="auto" />
+        </DataGrid>
       </div>
     );
   },
-  /* TODO: Does not work now, cache does not update correctly */
-  /* play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const { down, expectNodeFocus } = keyboardUtils();
+    const { down, up, expectNodeFocus } = keyboardUtils();
 
     const table = canvas.getByRole("table");
     const toggleButton = canvas.getByRole("button", {
@@ -332,7 +322,6 @@ export const Cache: Story = {
     await down();
     expectNodeFocus("Custom row");
 
-
     await userEvent.click(toggleButton);
     table.focus();
     await down();
@@ -340,47 +329,45 @@ export const Cache: Story = {
     await down();
     expectNodeFocus("Row 3");
 
-
     await userEvent.click(toggleButton);
     table.focus();
     await down();
-    expectNodeFocus("Row 1");
-    await down();
+    expectNodeFocus("Row 3");
+    await up();
     expectNodeFocus("Custom row");
-  }, */
+  },
 };
 
-type FocusRow = { id: number };
+type FocusRow = { id: string };
 
-const focusData: FocusRow[] = [{ id: 1 }, { id: 2 }];
+const focusData: FocusRow[] = [{ id: "1" }, { id: "2" }];
 
 const focusColumnDef: ColumnDefinitions<FocusRow> = [
-  { id: "col1", header: "Col 1", label: "Col 1", cell: () => "Col 1" },
+  { id: "col1", header: "Col 1", cell: () => "Col 1" },
   {
     id: "col2",
     header: "Col 2",
-    label: "Col 2",
-    cell: ({ id }) => (id === 1 ? <button>Focusable button</button> : "Col 2"),
+    cell: ({ id }) =>
+      id === "1" ? <button>Focusable button</button> : "Col 2",
   },
   {
     id: "col3",
     header: "Col 3",
-    label: "Col 3",
     cell: () => "Col 3",
     isRowHeader: true,
   },
-  { id: "col4", header: "Col 4", label: "Col 4", cell: () => "Col 4" },
+  { id: "col4", header: "Col 4", cell: () => "Col 4" },
 ];
 
 export const FocusElementInsideTable: Story = {
   render: () => (
-    <DataTable
-      withKeyboardNav
-      layout="auto"
+    <DataGrid
       columnDefinitions={focusColumnDef}
       data={focusData}
       getRowId={(row) => row.id}
-    />
+    >
+      <DataGrid.Table withKeyboardNav layout="auto" />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

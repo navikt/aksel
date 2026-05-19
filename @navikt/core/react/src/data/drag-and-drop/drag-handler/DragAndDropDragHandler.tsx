@@ -49,7 +49,7 @@ export const DragAndDropDragHandler = React.forwardRef<
         <button
           className="aksel-data-drag-and-drop__drag-handler__arrow"
           data-direction="up"
-          onClick={() => context?.onKeyboardDragEnd(-1)}
+          onClick={() => context?.onKeyboardDragEnd(-1, itemLabel)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={context?.dragHandlerActive?.index === 0}
           type="button"
@@ -58,13 +58,7 @@ export const DragAndDropDragHandler = React.forwardRef<
         </button>
       )}
       <button
-        // TODO - Bedre formulering av aria-label?
-        //aria-label={`Flytt element ${item.index + 1}. Trykk Enter eller Mellomrom for å aktivere, deretter piltastene for å flytte elementet.`}
-        aria-label={
-          active
-            ? `Flytt element ${itemLabel || item.index + 1}. Bruk piltastene for å flytte elementet.`
-            : `Flytt element ${itemLabel || item.index + 1}. Trykk Enter eller Mellomrom for å aktivere flytting.`
-        }
+        aria-label={`${itemLabel}. Plass ${item.index + 1}.`}
         aria-pressed={Boolean(active)}
         aria-roledescription="draggable"
         type="button"
@@ -77,18 +71,18 @@ export const DragAndDropDragHandler = React.forwardRef<
         }}
         onClick={(event) => {
           if (!active) {
-            context?.setDragHandlerActive(item);
+            context?.onKeyboardDragStart(item);
             event.currentTarget.focus();
           } else {
-            context?.setDragHandlerActive(null);
+            context?.onKeyboardDragStart(null);
           }
         }}
-        onBlur={() => context?.setDragHandlerActive(null)}
+        onBlur={() => context?.cancelDrag()}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             // Enter or space, currently active item - end keyboard dragging
             event.preventDefault();
-            context?.setDragHandlerActive(active ? null : item);
+            context?.onKeyboardDragStart(active ? null : item);
             return;
           }
 
@@ -96,19 +90,19 @@ export const DragAndDropDragHandler = React.forwardRef<
 
           if (event.key === "Escape") {
             // Cancel dragging
-            // TODO Handle reset
             event.preventDefault();
-            context?.setDragHandlerActive(null);
+            context?.setAnnouncer(`Flytting av ${itemLabel} avbrutt.`);
+            context?.cancelDrag(true);
             return;
           } else if (event.key === "ArrowUp") {
             // Move item up
             event.preventDefault();
-            context?.onKeyboardDragEnd(-1);
+            context?.onKeyboardDragEnd(-1, itemLabel);
             return;
           } else if (event.key === "ArrowDown") {
             // Move item down
             event.preventDefault();
-            context?.onKeyboardDragEnd(1);
+            context?.onKeyboardDragEnd(1, itemLabel);
             return;
           }
         }}
@@ -120,7 +114,7 @@ export const DragAndDropDragHandler = React.forwardRef<
           className="aksel-data-drag-and-drop__drag-handler__arrow"
           data-direction="down"
           type="button"
-          onClick={() => context?.onKeyboardDragEnd(1)}
+          onClick={() => context?.onKeyboardDragEnd(1, itemLabel)}
           onMouseDown={(e) => e.preventDefault()}
           disabled={
             context?.dragHandlerActive?.index === context?.itemAmount - 1

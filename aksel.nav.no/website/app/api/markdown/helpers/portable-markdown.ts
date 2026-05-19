@@ -5,6 +5,7 @@ import { AccordionMarkdown } from "@/app/api/markdown/blocks/Accordion.md";
 import { AlertMarkdown } from "@/app/api/markdown/blocks/Alert.md";
 import { AttachmentMarkdown } from "@/app/api/markdown/blocks/Attachment.md";
 import { BildeMarkdown } from "@/app/api/markdown/blocks/Bilde.md";
+import { DescriptionListMarkdown } from "@/app/api/markdown/blocks/DescriptionList.md";
 import { DoDontMarkdown } from "@/app/api/markdown/blocks/DoDont.md";
 import { ExampleTextMarkdown } from "@/app/api/markdown/blocks/ExampleText.md";
 import { ExpansionCardMarkdown } from "@/app/api/markdown/blocks/ExpansionCard.md";
@@ -62,7 +63,8 @@ function portableMarkdown(input?: any[]) {
       attachment: AttachmentMarkdown,
       compare_images: () => "",
       language: LanguageMarkdown,
-    } satisfies Record<PortableContentTypes, (props: any) => string | null>,
+      description_list: DescriptionListMarkdown,
+    } satisfies Record<PortableContentTypes, (props: any) => string>,
   });
 }
 

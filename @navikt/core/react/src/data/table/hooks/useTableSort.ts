@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import { useControllableState } from "../../../utils/hooks";
-import type { SortChangeDetail, SortEntry } from "../root/DataTable.types";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
+import { useControllableState, useEventCallback } from "../../../utils/hooks";
+import type { SortChangeDetail, SortEntry } from "../root/DataGridTable.types";
 
 type TableSortOptions = {
   /**
@@ -40,22 +40,22 @@ type UseTableSortResults = {
   sortState: SortEntry[];
 };
 
-function useTableSort(options: TableSortOptions): UseTableSortResults {
-  const { defaultSort = [], onSortChange, sort: sortOption } = options;
+function useTableSort(options?: TableSortOptions): UseTableSortResults {
+  const { defaultSort, onSortChange, sort: sortOption } = options || {};
 
   const [sort, setSort] = useControllableState({
     value: sortOption,
-    defaultValue: defaultSort,
+    defaultValue: defaultSort || [],
   });
 
-  const handleSortClick = useCallback(
+  const handleSortClick = useEventCallback(
     (id: string, event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (id === undefined) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn(
-            `Aksel: Column id is undefined for sort event on target ${event.target}. Make sure your column definitions include an 'id' property.`,
-          );
-        }
+        consoleWarning(
+          "DataGrid.Table: Column id is undefined for sort event on target",
+          event.target,
+          "Make sure your column definitions include an 'id' property.",
+        );
         return;
       }
 
@@ -65,7 +65,6 @@ function useTableSort(options: TableSortOptions): UseTableSortResults {
       setSort(next);
       onSortChange?.(next, detail);
     },
-    [onSortChange, setSort, sort],
   );
 
   return {
@@ -100,4 +99,4 @@ function nextSortEntries(
 }
 
 export { useTableSort };
-export type { TableSortOptions };
+export type { TableSortOptions, UseTableSortResults };

@@ -1,4 +1,4 @@
-name: Visual regression (Chromatic)
+name: Visual regression
 
 on:
   push:

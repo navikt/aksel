@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
-import type { ColumnDefinitions } from "./DataTable.types";
-import { DataTable } from "./DataTableRoot";
+import { DataGrid } from "../../data-grid";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 
 type TestRow = {
   id: string;
@@ -10,9 +11,9 @@ type TestRow = {
   subRows?: TestRow[];
 };
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/DataTable/Tests",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
   },
@@ -20,7 +21,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 const data: TestRow[] = [
   {
@@ -59,7 +60,6 @@ const fallbackIdData: TestRow[] = [
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
-    label: "Name",
     header: "Name",
     cell: (row) => row.name,
   },
@@ -72,13 +72,14 @@ const getCheckboxes = (canvasElement: HTMLElement) =>
 
 export const ExpandedChildRowsIncludedInSelectAll: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
-      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
-    />
+    >
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -104,16 +105,19 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
 
 export const FallbackIdsSelectAllVisibleRows: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={columns}
       data={fallbackIdData}
-      subRows={{
-        getRows: getSubRows,
-        defaultExpandedRowIds: [0],
-      }}
       getRowId={(row) => row.id}
       selection={{ selectionMode: "multiple" }}
-    />
+    >
+      <DataGrid.Table
+        subRows={{
+          getRows: getSubRows,
+          defaultExpandedRowIds: ["0"],
+        }}
+      />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -129,49 +133,16 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
   },
 };
 
-export const ParentSelectionFollowsVisibleNestedRows: Story = {
-  render: () => (
-    <DataTable
-      columnDefinitions={columns}
-      data={data}
-      getRowId={(row) => row.id}
-      subRows={{ getRows: getSubRows }}
-      selection={{ selectionMode: "multiple" }}
-    />
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Vis under-rader" }),
-    );
-
-    await userEvent.click(getCheckboxes(canvasElement)[2]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
-    expect(getCheckboxes(canvasElement)[1].indeterminate).toBe(true);
-
-    await userEvent.click(getCheckboxes(canvasElement)[1]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(true);
-    expect(getCheckboxes(canvasElement)[2].checked).toBe(true);
-
-    await userEvent.click(getCheckboxes(canvasElement)[1]);
-
-    expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
-    expect(getCheckboxes(canvasElement)[2].checked).toBe(false);
-  },
-};
-
 export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
-    />
+    >
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -208,13 +179,14 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
 
 export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
   render: () => (
-    <DataTable
+    <DataGrid
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      subRows={{ getRows: getSubRows }}
       selection={{ selectionMode: "multiple" }}
-    />
+    >
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
+    </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
