@@ -13,6 +13,7 @@ import type { UseTableItemsReturn } from "./useTableItems";
 
 type UseTableSelectionArgs<T> = {
   selection?: SelectionProps<T>;
+  selectionTrigger: "row" | "control";
   tableItems: UseTableItemsReturn<T>;
 };
 
@@ -26,6 +27,7 @@ function useTableSelection<T>({
   selection = {
     selectionMode: "none",
   },
+  selectionTrigger = "row",
   tableItems,
 }: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const {
@@ -34,7 +36,6 @@ function useTableSelection<T>({
     selectedKeys: selectedKeysProp,
     onSelectionChange,
     enableRowSelection,
-    selectionTrigger = "row",
   } = selection;
 
   const { visibleRowIds = [] } = tableItems;

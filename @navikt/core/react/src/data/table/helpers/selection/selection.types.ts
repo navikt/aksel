@@ -38,11 +38,6 @@ type SelectionProps<T = any> = {
   enableRowSelection?:
     | (({ row, id }: { row: T; id: TableRowEntryId }) => boolean)
     | boolean;
-  /**
-   * Determines if selection is triggered by clicking the row or the selection control (checkbox/radio).
-   * @default "row"
-   */
-  selectionTrigger?: "row" | "control";
 };
 
 type NoneSelection = {

@@ -144,6 +144,11 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * Object with props related to sorting.
    */
   sorting?: TableSortOptions;
+  /**
+   * Determines if selection is triggered by clicking the row or the selection control (checkbox/radio).
+   * @default "row"
+   */
+  selectionTrigger?: "row" | "control";
 }
 
 const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
@@ -165,6 +170,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
       detailsPanel,
       subRows,
       sorting,
+      selectionTrigger = "row",
       ...rest
     }: DataTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
@@ -182,6 +188,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<any>>(
 
     const tableSelectionState = useTableSelection({
       selection,
+      selectionTrigger,
       tableItems,
     });
 

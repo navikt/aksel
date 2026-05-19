@@ -162,10 +162,9 @@ export const SelectionModeOnControlsOnly: Story = {
         selection={{
           selectionMode: "multiple",
           onSelectionChange: console.info,
-          selectionTrigger: "control",
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table withKeyboardNav selectionTrigger="control" />
       </DataGrid>
     );
   },
