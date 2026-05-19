@@ -345,17 +345,12 @@ function getAutoColumnWidth(
     const cellContent = cell.querySelector(
       ".aksel-data-table__cell-content",
     ) as HTMLElement;
-    range.selectNodeContents(cellContent);
-    const cellContentWidth = range.getBoundingClientRect().width;
-    const contentElStyle = window.getComputedStyle(cellContent);
-    const inlinePadding =
-      parseInt(contentElStyle.paddingLeft, 10) +
-      parseInt(contentElStyle.paddingRight, 10);
-    const marginLeft = parseInt(contentElStyle.marginLeft, 10); // We don't have right margin for now
-    const widthNeededForThisCell =
-      (cellContentWidth + inlinePadding + marginLeft) / cell.colSpan;
+    cellContent.style.width = "fit-content";
+    const cellContentWidth = cellContent.scrollWidth;
+    cellContent.style.removeProperty("width");
+    const widthNeededForThisCell = (cellContentWidth + 1) / cell.colSpan;
     if (widthNeededForThisCell > newColumnWidth) {
-      newColumnWidth = widthNeededForThisCell;
+      newColumnWidth = Math.ceil(widthNeededForThisCell);
     }
   }
 
