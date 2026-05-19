@@ -537,7 +537,7 @@ export const StickySelection: Story = {
           selectionMode: "multiple",
           onSelectionChange: console.info,
         }}
-        defaultSettings={{
+        settings={{
           stickyColumns: {
             start: "1",
           },
@@ -559,7 +559,7 @@ export const StickyLeftOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        defaultSettings={{
+        settings={{
           stickyColumns: {
             start: "1",
           },
@@ -581,7 +581,7 @@ export const StickyRightOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        defaultSettings={{
+        settings={{
           stickyColumns: {
             end: "1",
           },
@@ -603,7 +603,7 @@ export const StickyBothOne: Story = {
         }))}
         data={userData}
         getRowId={(row) => row.foo + row.bar}
-        defaultSettings={{
+        settings={{
           stickyColumns: {
             start: "1",
             end: "1",
@@ -643,7 +643,7 @@ export const StickyHeaderAndColumns: Story = {
           }))}
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
-          defaultSettings={{
+          settings={{
             stickyColumns: {
               start: "1",
               end: "1",

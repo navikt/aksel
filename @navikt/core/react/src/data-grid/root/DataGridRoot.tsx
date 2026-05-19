@@ -42,7 +42,7 @@ export interface DataGridProps<RowT> {
   /**
    * Default settings for the data grid, used when the component is uncontrolled. Should not be used together with `settings`.
    */
-  defaultSettings?: DataGridSettings;
+  settings?: DataGridSettings;
 }
 
 interface DataGridComponent {
@@ -76,20 +76,20 @@ export const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       getRowId,
       selection,
       isLoading = false,
-      defaultSettings,
+      settings,
       ...rest
     }: DataGridProps<unknown>,
     ref,
   ) => {
     const resolvedSettings = useMemo(
       () => ({
-        rowDensity: defaultSettings?.rowDensity ?? "normal",
-        zebraStripes: defaultSettings?.zebraStripes ?? false,
-        truncateContent: defaultSettings?.truncateContent,
-        stickyColumns: defaultSettings?.stickyColumns ?? {},
-        textSize: defaultSettings?.textSize ?? "medium",
+        rowDensity: settings?.rowDensity ?? "normal",
+        zebraStripes: settings?.zebraStripes ?? false,
+        truncateContent: settings?.truncateContent,
+        stickyColumns: settings?.stickyColumns ?? {},
+        textSize: settings?.textSize ?? "medium",
       }),
-      [defaultSettings],
+      [settings],
     );
 
     return (
