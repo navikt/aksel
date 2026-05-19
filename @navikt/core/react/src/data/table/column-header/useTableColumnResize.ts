@@ -55,7 +55,7 @@ type ResizeProps = {
    * **NB:** Percentage as initial width does not work well with resizing.
    * @default 140px
    */
-  default?: number | string;
+  defaultValue?: number | string;
   /**
    * Called when the column width changes.
    * @param width New width in pixels.
@@ -98,7 +98,7 @@ function useTableColumnResize({
   resizeMin = 40,
   resizeMax = Infinity,
   value,
-  default: defaultProp,
+  defaultValue,
   onChange,
   thRef,
   colSpan,
@@ -110,7 +110,7 @@ function useTableColumnResize({
 
   const [width, setWidth] = useControllableState({
     value,
-    defaultValue: defaultProp ?? (colSpan ?? 1) * 140,
+    defaultValue: defaultValue ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.

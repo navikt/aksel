@@ -61,7 +61,7 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Id",
     cell: ({ id }) => id,
     align: "right",
-    width: { default: "100px" },
+    width: { defaultValue: "100px" },
   },
   {
     id: "foo",
