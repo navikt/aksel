@@ -78,6 +78,25 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   layout?: "fixed" | "auto";
   /**
+   * Whether the header should be sticky.
+   * For this to work, you have to put the component in a flex container with a height restriction.
+   *
+   * @example
+   * <VStack height="100vh">
+   *   <div>Content before DataGrid</div>
+   *   <DataGrid>
+   *     <DataGrid.Table />
+   *   </DataGrid>
+   *   <div>Content after DataGrid</div>
+   * </VStack>
+   *
+   * @example
+   * <div style={{ display: "flex", maxHeight: "500px" }}>
+   *   <DataGrid>
+   *     <DataGrid.Table />
+   *   </DataGrid>
+   * </div>
+   *
    * @default true
    */
   stickyHeader?: boolean;
