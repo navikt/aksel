@@ -46,6 +46,26 @@
         "default": "./cjs/index.js"
       }
     },
+    "./preview": {
+      "import": {
+        "types": "./esm/preview.d.ts",
+        "default": "./esm/preview.js"
+      },
+      "require": {
+        "types": "./cjs/preview.d.ts",
+        "default": "./cjs/preview.js"
+      }
+    },
+    "./preview/DataGrid": {
+      "import": {
+        "types": "./esm/data-grid/index.d.ts",
+        "default": "./esm/data-grid/index.js"
+      },
+      "require": {
+        "types": "./cjs/data-grid/index.d.ts",
+        "default": "./cjs/data-grid/index.js"
+      }
+    },
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
