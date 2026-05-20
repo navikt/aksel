@@ -1,5 +1,12 @@
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
+import { TestFlaskIcon } from "@navikt/aksel-icons";
+import {
+  InfoCard,
+  InfoCardContent,
+  InfoCardHeader,
+  InfoCardTitle,
+} from "@navikt/ds-react/InfoCard";
 import { DesignsystemetKomponentIntro } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.intro";
 import {
   DesignsystemetPageHeader,
@@ -30,6 +37,9 @@ async function KomponenterPage({ slug }: { slug: string }) {
     notFound();
   }
 
+  const renderPreviewNote =
+    pageData.status?.tag === "preview" && pageData.status?.preview_note;
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={pageData} />
@@ -46,6 +56,19 @@ async function KomponenterPage({ slug }: { slug: string }) {
             variant={pageData.status?.tag as "beta" | "new"}
             unsafeBeta={pageData.status?.unsafe}
           />
+        )}
+
+        {renderPreviewNote && (
+          <InfoCard data-block-margin="space-28" data-color="meta-purple">
+            <InfoCardHeader icon={<TestFlaskIcon aria-hidden />}>
+              <InfoCardTitle>Preview</InfoCardTitle>
+            </InfoCardHeader>
+            <InfoCardContent>
+              <CustomPortableText
+                value={pageData.status?.preview_note as PortableTextBlock[]}
+              />
+            </InfoCardContent>
+          </InfoCard>
         )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
