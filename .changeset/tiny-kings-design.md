@@ -2,4 +2,4 @@
 "@navikt/aksel-icons": minor
 ---
 
-Icons: New icon `NewsLetter` and `NewsLetterFill`
+Icons: New icon `Newsletter` and `NewsletterFill`
