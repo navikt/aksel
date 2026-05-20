@@ -95,10 +95,15 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    *
    * Call `event.preventDefault()` inside the callback to prevent the default row click behavior, such as selection.
    */
-  onRowAction?: (
-    rowId: string,
-    event: React.MouseEvent<HTMLTableRowElement>,
-  ) => void;
+  onRowAction?: ({
+    row,
+    id,
+    event,
+  }: {
+    row: T;
+    id: string;
+    event: React.MouseEvent<HTMLTableRowElement>;
+  }) => void;
   /**
    * Content to render when `data` is empty.
    * Rendered inside a row spanning all columns.
