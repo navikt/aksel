@@ -65,7 +65,7 @@ async function KomponenterPage({ slug }: { slug: string }) {
             </InfoCardHeader>
             <InfoCardContent>
               <CustomPortableText
-                value={pageData.status.preview_note as PortableTextBlock[]}
+                value={pageData.status?.preview_note as PortableTextBlock[]}
               />
             </InfoCardContent>
           </InfoCard>
