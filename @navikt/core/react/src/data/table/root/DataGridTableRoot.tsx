@@ -31,12 +31,7 @@ import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
-import type {
-  DataTableLoadingConfig,
-  SortChangeDetail,
-  SortEntry,
-  TableRowEntryId,
-} from "./DataGridTable.types";
+import type { DataTableLoadingConfig } from "./DataGridTable.types";
 import {
   DataTableContextProvider,
   useDataTableContext,
@@ -106,7 +101,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * Call `event.preventDefault()` inside the callback to prevent the default row click behavior, such as selection.
    */
   onRowAction?: (
-    rowId: TableRowEntryId,
+    rowId: string,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
   /**
@@ -540,9 +535,14 @@ const DataGridTable = DataGridTableInternal as <T>(
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGridTable {
-  export type Props<T = any> = DataGridTableProps<T>;
-  export type Sort = SortEntry;
-  export type SortDetail = SortChangeDetail;
+  export type Props<T = unknown> = DataGridTableProps<T>;
+  export type Sorting = TableSortOptions;
+  export type SortEntry = import("./DataGridTable.types").SortEntry;
+  export type SortChangeDetail =
+    import("./DataGridTable.types").SortChangeDetail;
+  export type LoadingConfig = DataTableLoadingConfig;
+  export type SubRows<T = unknown> = SubRowsProps<T>;
+  export type DetailsPanel<T = unknown> = DetailsPanelProps<T>;
 }
 
 // docgen doesn't work well with type params, so we let it use DataGridTableInternal instead

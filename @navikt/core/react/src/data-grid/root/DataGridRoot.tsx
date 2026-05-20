@@ -3,13 +3,8 @@ import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type {
   ColumnDefinition,
   ColumnDefinitions,
-  SortChangeDetail,
-  SortEntry,
 } from "../../data/table/root/DataGridTable.types";
-import {
-  DataGridTable,
-  type DataGridTableProps,
-} from "../../data/table/root/DataGridTableRoot";
+import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
@@ -136,15 +131,21 @@ DataGridRoot.Table = DataGridTable;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGridRoot {
-  export type Props<T = any> = DataGridProps<T>;
-  export type Column<T = any> = ColumnDefinition<T>;
+  export type Props<T = unknown> = DataGridProps<T>;
+  export type Column<T = unknown> = ColumnDefinition<T>;
+  export type Selection<T = unknown> = SelectionProps<T>;
+  export type Settings = DataGridSettings;
 
   // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace Table {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    export type Props<T = any> = DataGridTableProps<T>;
-    export type Sort = SortEntry;
-    export type SortDetail = SortChangeDetail;
+    export type Props<T = unknown> = DataGridTable.Props<T>;
+    export type Sorting = DataGridTable.Sorting;
+    export type SortEntry = DataGridTable.SortEntry;
+    export type SortChangeDetail = DataGridTable.SortChangeDetail;
+    export type LoadingConfig = DataGridTable.LoadingConfig;
+    export type SubRows<T = unknown> = DataGridTable.SubRows<T>;
+    export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
   }
 }
 

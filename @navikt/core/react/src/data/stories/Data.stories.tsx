@@ -15,7 +15,6 @@ import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
-import type { SelectionProps } from "../table/hooks/useTableSelection";
 import { DataGridTable } from "../table/root/DataGridTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
@@ -386,7 +385,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["mode"]>("none");
+      useState<DataGrid.Selection["mode"]>("none");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -590,7 +589,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                           value={selectionMode}
                           onChange={(e) =>
                             setSelectionMode(
-                              e.target.value as SelectionProps["mode"],
+                              e.target.value as DataGrid.Selection["mode"],
                             )
                           }
                         >

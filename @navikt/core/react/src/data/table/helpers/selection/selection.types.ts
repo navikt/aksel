@@ -1,6 +1,5 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
-import type { TableRowEntryId } from "../../root/DataGridTable.types";
 
 // TODO: Remove `any` if possible
 type SelectionProps<T = unknown> = {
@@ -33,7 +32,7 @@ type SelectionProps<T = unknown> = {
    * If set to a boolean, it will enable selection for all rows when true, and disable selection for all rows when false.
    */
   enableRowSelection?:
-    | (({ row, id }: { row: T; id: TableRowEntryId }) => boolean)
+    | (({ row, id }: { row: T; id: string }) => boolean)
     | boolean;
 };
 
@@ -45,20 +44,20 @@ type NoneSelection = {
 type SingleSelection = {
   mode: "single";
   selectedKeys: string[];
-  getRowRadioProps: (key: TableRowEntryId, row: any) => RadioInputProps;
-  toggleSelection: (key: TableRowEntryId, row: any) => void;
+  getRowRadioProps: (key: string, row: any) => RadioInputProps;
+  toggleSelection: (key: string, row: any) => void;
 };
 
 type MultipleSelection = {
   mode: "multiple";
   selectedKeys: string[];
   getTheadCheckboxProps: () => CheckboxInputProps;
-  getRowCheckboxProps: (key: TableRowEntryId, row: any) => CheckboxInputProps;
-  toggleSelection: (key: TableRowEntryId, row: any) => void;
+  getRowCheckboxProps: (key: string, row: any) => CheckboxInputProps;
+  toggleSelection: (key: string, row: any) => void;
 };
 
 type TableSelectionBase = {
-  isRowSelected: (rowId: TableRowEntryId) => boolean;
+  isRowSelected: (rowId: string) => boolean;
 };
 
 type TableSelection = TableSelectionBase &

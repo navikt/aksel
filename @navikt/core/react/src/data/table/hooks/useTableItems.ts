@@ -4,7 +4,6 @@ import {
   type ItemDetail,
   collectTableRowEntries,
 } from "../helpers/collectTableRowEntries";
-import type { TableRowEntryId } from "../root/DataGridTable.types";
 
 type SubRowsProps<T> = {
   /**
@@ -14,16 +13,16 @@ type SubRowsProps<T> = {
   /**
    * Controlled list of IDs of rows that should be expanded.
    */
-  expandedRowIds?: TableRowEntryId[];
+  expandedRowIds?: string[];
   /**
    * IDs of rows that should be initially expanded.
    * Only used when `expandedRowIds` is not provided, i.e. when the expanded state is uncontrolled.
    */
-  defaultExpandedRowIds?: TableRowEntryId[];
+  defaultExpandedRowIds?: string[];
   /**
    * Called when the list of expanded row IDs changes.
    */
-  onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
+  onExpandedRowIdsChange?: (ids: string[]) => void;
   /**
    * Determines whether a row should be expandable.
    * By default, all rows are expandable when `getRows` is provided.
@@ -33,19 +32,19 @@ type SubRowsProps<T> = {
 
 type UseTableItemsArgs<T> = {
   items: T[];
-  getRowId?: (rowData: T) => TableRowEntryId;
+  getRowId?: (rowData: T) => string;
   subRows?: SubRowsProps<T>;
 };
 
 type UseTableItemsReturn<T> = {
   items: T[];
-  itemDetails: Map<TableRowEntryId, ItemDetail<T>>;
+  itemDetails: Map<string, ItemDetail<T>>;
   /** Row ids for the rows currently rendered in the table body. */
-  visibleRowIds: TableRowEntryId[];
+  visibleRowIds: string[];
   /** Direct child ids for each row, used to traverse selection groups lazily. */
-  childRowIdsById: Map<TableRowEntryId, TableRowEntryId[]>;
-  onExpandedRowIdsChange: (id: TableRowEntryId) => void;
-  isSubRowExpanded: (id: TableRowEntryId) => boolean;
+  childRowIdsById: Map<string, string[]>;
+  onExpandedRowIdsChange: (id: string) => void;
+  isSubRowExpanded: (id: string) => boolean;
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
@@ -85,9 +84,9 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
       });
 
       const localVisibleItems: T[] = [];
-      const localVisibleRowIds: TableRowEntryId[] = [];
+      const localVisibleRowIds: string[] = [];
 
-      const addVisibleRows = (rowId: TableRowEntryId): TableRowEntryId[] => {
+      const addVisibleRows = (rowId: string): string[] => {
         const details = rowEntriesMap.get(rowId);
 
         if (!details) {
@@ -97,7 +96,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
         localVisibleItems.push(details.rowData);
         localVisibleRowIds.push(details.id);
 
-        const visibleDescendantRowIds: TableRowEntryId[] = [];
+        const visibleDescendantRowIds: string[] = [];
 
         if (expandedIdsSet.has(details.id)) {
           for (const childRowId of details.children) {
@@ -122,7 +121,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     }, [getRows, items, getRowId, isRowExpandable, expandedIdsSet]);
 
   const handleExpandedSubRowIdChange = useCallback(
-    (id: TableRowEntryId) => {
+    (id: string) => {
       setNestedSubRowsExpandedIds((prev) =>
         prev.includes(id)
           ? prev.filter((expandedId) => expandedId !== id)
@@ -138,7 +137,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     visibleRowIds,
     childRowIdsById,
     onExpandedRowIdsChange: handleExpandedSubRowIdChange,
-    isSubRowExpanded: (id: TableRowEntryId) => expandedIdsSet.has(id),
+    isSubRowExpanded: (id: string) => expandedIdsSet.has(id),
   };
 }
 
