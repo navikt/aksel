@@ -39,26 +39,20 @@ function generateDataGridDemo() {
       id: "caseId",
       header: "Id",
       bodyCell: ({ caseId }) => caseId.toString(),
-      width: {
-        autoResizeOnce: true,
-      },
+      width: { autoResizeOnce: true },
       isRowHeader: true,
     },
     {
       id: "type",
       header: "Sakstype",
       bodyCell: ({ caseType }) => caseType,
-      width: {
-        defaultValue: 190,
-      },
+      width: { defaultValue: 190 },
     },
     {
       id: "location",
       header: "Lokasjon",
       bodyCell: ({ location }) => location,
-      width: {
-        defaultValue: 130,
-      },
+      width: { defaultValue: 130 },
     },
     {
       id: "keywords",
@@ -69,18 +63,14 @@ function generateDataGridDemo() {
       id: "createdAt",
       header: "Opprettet",
       bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
-      width: {
-        defaultValue: 110,
-      },
+      width: { defaultValue: 110 },
     },
     {
       id: "priority",
       header: "Prioritet",
       bodyCell: PriorityTag,
       align: "center",
-      width: {
-        defaultValue: 100,
-      },
+      width: { defaultValue: 100 },
     },
     {
       id: "sender",
@@ -93,9 +83,7 @@ function generateDataGridDemo() {
       bodyCell: ({ age }) =>
         `${Math.floor((Date.now() - age.getTime()) / (1000 * 60 * 60 * 24))}d`,
       align: "right",
-      width: {
-        defaultValue: 110,
-      },
+      width: { defaultValue: 110 },
     },
     {
       id: "status",
@@ -107,9 +95,7 @@ function generateDataGridDemo() {
       header: "Frist",
       bodyCell: DeadLineCell,
       align: "right",
-      width: {
-        defaultValue: 130,
-      },
+      width: { defaultValue: 130 },
     },
     {
       id: "actions",
@@ -137,9 +123,7 @@ function generateDataGridDemo() {
         </HStack>
       ),
       align: "center",
-      width: {
-        autoResizeOnce: true,
-      },
+      width: { autoResizeOnce: true },
     },
   ];
 
