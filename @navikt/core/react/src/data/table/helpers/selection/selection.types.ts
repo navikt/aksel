@@ -2,10 +2,8 @@ import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-inpu
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 import type { TableRowEntryId } from "../../root/DataGridTable.types";
 
-type SelectedKeysT = TableRowEntryId[];
-
 // TODO: Remove `any` if possible
-type SelectionProps<T = any> = {
+type SelectionProps<T = unknown> = {
   /**
    * Enables selection of rows.
    *
@@ -16,19 +14,19 @@ type SelectionProps<T = any> = {
    *
    * @default "none"
    */
-  selectionMode: "none" | "single" | "multiple";
+  mode: "none" | "single" | "multiple";
   /**
-   * Controlled selected keys. Should be used in conjunction with `onSelectionChange`.
+   * Controlled selected keys. Should be used in conjunction with `onSelectedRowIdsChange`.
    */
-  selectedKeys?: SelectedKeysT;
+  selectedRowIds?: string[];
   /**
    * Default selected keys when using uncontrolled selection. Should not be used together with `selectedKeys`.
    */
-  defaultSelectedKeys?: SelectedKeysT;
+  defaultSelectedRowIds?: string[];
   /**
    * Callback with array of selected keys.
    */
-  onSelectionChange?: (keys: SelectedKeysT) => void;
+  onSelectedRowIdsChange?: (ids: string[]) => void;
   /**
    * Callback to determine if a row should be enabled for selection.
    *
@@ -40,20 +38,20 @@ type SelectionProps<T = any> = {
 };
 
 type NoneSelection = {
-  selectionMode: "none";
-  selectedKeys: SelectedKeysT;
+  mode: "none";
+  selectedKeys: string[];
 };
 
 type SingleSelection = {
-  selectionMode: "single";
-  selectedKeys: SelectedKeysT;
+  mode: "single";
+  selectedKeys: string[];
   getRowRadioProps: (key: TableRowEntryId, row: any) => RadioInputProps;
   toggleSelection: (key: TableRowEntryId, row: any) => void;
 };
 
 type MultipleSelection = {
-  selectionMode: "multiple";
-  selectedKeys: SelectedKeysT;
+  mode: "multiple";
+  selectedKeys: string[];
   getTheadCheckboxProps: () => CheckboxInputProps;
   getRowCheckboxProps: (key: TableRowEntryId, row: any) => CheckboxInputProps;
   toggleSelection: (key: TableRowEntryId, row: any) => void;
@@ -69,7 +67,6 @@ type TableSelection = TableSelectionBase &
 export type {
   MultipleSelection,
   NoneSelection,
-  SelectedKeysT,
   SelectionProps,
   SingleSelection,
   TableSelection,

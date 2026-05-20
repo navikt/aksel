@@ -67,7 +67,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
       location === "tbody" &&
       rowId !== undefined &&
       ((selectionState.selectionTrigger === "row" &&
-        selectionState.selection.selectionMode !== "none") ||
+        selectionState.selection.mode !== "none") ||
         onRowClick)
         ? (event: React.MouseEvent<HTMLTableRowElement>) => {
             if (
@@ -87,7 +87,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
             if (
               selectionState.selectionTrigger === "row" &&
-              selectionState.selection.selectionMode !== "none"
+              selectionState.selection.mode !== "none"
             ) {
               const rowData = tableItems.itemDetails.get(rowId)?.rowData;
 
@@ -285,7 +285,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
   const { selection, renderSelection } = selectionState;
 
-  if (selection.selectionMode === "none" || !renderSelection) {
+  if (selection.mode === "none" || !renderSelection) {
     return null;
   }
 
@@ -316,7 +316,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   }
 
   /* TODO: A11y support */
-  if (selection.selectionMode === "multiple" && location === "thead") {
+  if (selection.mode === "multiple" && location === "thead") {
     const theadCheckboxProps = selection.getTheadCheckboxProps();
 
     let labelText = "Velg alle synlige rader";
@@ -342,7 +342,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     );
   }
 
-  if (selection.selectionMode === "single" && location === "thead") {
+  if (selection.mode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
         id={selectionHeaderId}
@@ -360,7 +360,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return null;
   }
 
-  if (selection.selectionMode === "multiple" && location === "tbody") {
+  if (selection.mode === "multiple" && location === "tbody") {
     return (
       <DataTableTd
         cellType="action"
@@ -378,7 +378,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     );
   }
 
-  if (selection.selectionMode === "single" && location === "tbody") {
+  if (selection.mode === "single" && location === "tbody") {
     return (
       <DataTableTd
         cellType="action"

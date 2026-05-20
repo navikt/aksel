@@ -73,7 +73,7 @@ interface DataGridComponent {
  *
  * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/data-grid)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datagrid)
  * @see 🏷️ {@link DataGridProps}
  *
  * @example

@@ -76,7 +76,7 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
       columnDefinitions={columns}
       data={data}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
@@ -109,7 +109,7 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
       columnDefinitions={columns}
       data={fallbackIdData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table
         subRows={{
@@ -139,7 +139,7 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
@@ -183,7 +183,7 @@ export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
       columnDefinitions={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>

@@ -190,7 +190,7 @@ const DataGridTableInternal = forwardRef<
       columnDefinitions,
       {
         stickyColumns: tableSettings?.stickyColumns,
-        hasSelection: tableSelectionState.selection.selectionMode !== "none",
+        hasSelection: tableSelectionState.selection.mode !== "none",
         hasDetailsPanel: !!detailsPanel?.getContent,
         layout,
       },

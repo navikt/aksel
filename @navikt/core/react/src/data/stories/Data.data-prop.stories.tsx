@@ -29,7 +29,7 @@ type Story = StoryObj<typeof DataGrid>;
 const selectionControls = {
   args: {
     selection: {
-      selectionMode: "multiple",
+      mode: "multiple",
     },
   },
   parameters: {
@@ -39,7 +39,7 @@ const selectionControls = {
   },
   argTypes: {
     selection: {
-      selectionMode: {
+      mode: {
         control: { type: "select" },
         options: ["none", "single", "multiple"],
       },
@@ -124,8 +124,8 @@ export const ItemsAsDataWithCustomRowId: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
         }}
       >
         <DataGrid.Table />
@@ -142,8 +142,8 @@ export const SelectionModeMultiple: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
         }}
       >
         <DataGrid.Table withKeyboardNav />
@@ -160,8 +160,8 @@ export const SelectionModeOnControlsOnly: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
         }}
       >
         <DataGrid.Table withKeyboardNav selectionTrigger="control" />
@@ -178,8 +178,8 @@ export const SelectionModeSingle: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "single",
-          onSelectionChange: console.info,
+          mode: "single",
+          onSelectedRowIdsChange: console.info,
         }}
       >
         <DataGrid.Table withKeyboardNav />
@@ -196,8 +196,8 @@ export const SelectionModeSingleWithoutKeyboardNav: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "single",
-          onSelectionChange: console.info,
+          mode: "single",
+          onSelectedRowIdsChange: console.info,
         }}
       >
         <DataGrid.Table withKeyboardNav={false} />
@@ -214,8 +214,8 @@ export const SelectionWithDisabledRows: Story = {
         data={userData}
         getRowId={(row) => row.id.toString()}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
           enableRowSelection: ({ id }) => id !== "2" && id !== "1",
         }}
       >
@@ -244,9 +244,9 @@ export const ControlledSelection: Story = {
           data={userData}
           getRowId={(row) => row.id.toString()}
           selection={{
-            selectionMode: "multiple",
-            onSelectionChange: setSelectedKeys,
-            selectedKeys,
+            mode: "multiple",
+            onSelectedRowIdsChange: setSelectedKeys,
+            selectedRowIds: selectedKeys,
           }}
         >
           <DataGrid.Table />
@@ -264,9 +264,9 @@ export const DefaultSelectedKeys: Story = {
         data={userData}
         getRowId={(row) => row.id.toString()}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
-          defaultSelectedKeys: ["1", "3"],
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
+          defaultSelectedRowIds: ["1", "3"],
         }}
       >
         <DataGrid.Table />
@@ -283,8 +283,8 @@ export const SingleSelectionWithDisabledRows: Story = {
         data={userData}
         getRowId={(row) => row.id.toString()}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
           enableRowSelection: ({ id }) => id !== "2",
         }}
       >
@@ -301,7 +301,7 @@ export const EmptyData: Story = {
         columnDefinitions={userColumnDef}
         data={[]}
         selection={{
-          selectionMode: "multiple",
+          mode: "multiple",
         }}
       >
         <DataGrid.Table />
@@ -398,8 +398,8 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
           data={userData}
           isLoading={isLoading}
           selection={{
-            selectionMode: "multiple",
-            onSelectionChange: console.info,
+            mode: "multiple",
+            onSelectedRowIdsChange: console.info,
           }}
         >
           <DataGrid.Table
@@ -438,8 +438,8 @@ export const SelectionPagination: Story = {
           data={dataToShow}
           getRowId={(row) => row.foo + row.bar}
           selection={{
-            selectionMode: "multiple",
-            onSelectionChange: (keys) => {
+            mode: "multiple",
+            onSelectedRowIdsChange: (keys) => {
               console.info({ keys });
               selectionPaginationSpy(keys);
             },
@@ -534,8 +534,8 @@ export const StickySelection: Story = {
         data={userData}
         getRowId={(row) => row.foo + row.bar}
         selection={{
-          selectionMode: "multiple",
-          onSelectionChange: console.info,
+          mode: "multiple",
+          onSelectedRowIdsChange: console.info,
         }}
         settings={{
           stickyColumns: {
@@ -819,7 +819,7 @@ export const RowClick: Story = {
       data={userData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: "multiple",
+        mode: "multiple",
       }}
     >
       <DataGrid.Table
@@ -837,7 +837,7 @@ export const RowClickTest: Story = {
       data={userData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: "multiple",
+        mode: "multiple",
       }}
     >
       <DataGrid.Table onRowClick={rowClickSpy} />
@@ -877,7 +877,7 @@ export const RowExpansion: Story = {
       data={userData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
+        mode: args.selection?.mode ?? "none",
       }}
     >
       <DataGrid.Table<UserDataTest>
@@ -896,7 +896,7 @@ export const RowExpansionAll: Story = {
       data={userData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
+        mode: args.selection?.mode ?? "none",
       }}
     >
       <DataGrid.Table<UserDataTest>
@@ -938,8 +938,8 @@ export const NestedRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
-        onSelectionChange: console.info,
+        mode: args.selection?.mode ?? "none",
+        onSelectedRowIdsChange: console.info,
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
@@ -997,7 +997,7 @@ export const NestedLeftAlignedContentRows: Story = {
       data={nestedRowData}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
+        mode: args.selection?.mode ?? "none",
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
@@ -1025,7 +1025,7 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
       }))}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
+        mode: args.selection?.mode ?? "none",
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
@@ -1053,7 +1053,7 @@ export const NestedRowsWithMasterDetail: Story = {
       }))}
       getRowId={(row) => row.id.toString()}
       selection={{
-        selectionMode: args.selection?.selectionMode ?? "none",
+        mode: args.selection?.mode ?? "none",
       }}
     >
       <DataGrid.Table<NestedUserDataTest>

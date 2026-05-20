@@ -3,13 +3,13 @@ import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-inpu
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
 import type { TableRowEntryId } from "../../root/DataGridTable.types";
-import type { SelectedKeysT, SelectionProps } from "./selection.types";
+import type { SelectionProps } from "./selection.types";
 import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
 type GetMultipleSelectPropsArgs<T> = {
   selectedKeysSet: Set<TableRowEntryId>;
-  selectedKeys: SelectedKeysT;
-  setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
+  selectedKeys: string[];
+  setSelectedKeys: (next: SetStateAction<string[]>) => void;
   tableItems: UseTableItemsReturn<T>;
   isLoading?: boolean;
 } & Pick<SelectionProps<T>, "enableRowSelection">;

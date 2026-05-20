@@ -386,7 +386,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["selectionMode"]>("none");
+      useState<SelectionProps["mode"]>("none");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -590,7 +590,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                           value={selectionMode}
                           onChange={(e) =>
                             setSelectionMode(
-                              e.target.value as SelectionProps["selectionMode"],
+                              e.target.value as SelectionProps["mode"],
                             )
                           }
                         >
@@ -679,7 +679,7 @@ export const KitchenSinkAdvancedFilter: Story = {
           )}
           data={pagedData.paginatedData}
           selection={{
-            selectionMode,
+            mode: selectionMode,
           }}
           settings={{
             rowDensity,
