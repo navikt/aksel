@@ -383,7 +383,6 @@ function getKeywords() {
     "Smertelindring",
   ];
 
-  // Return 1 to 4 random keywords
   const count = random(4) + 1;
   const keywords = new Set<string>();
 
