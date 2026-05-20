@@ -11,6 +11,7 @@ const Example = () => {
       <DataGrid
         columns={columns}
         data={data}
+        getRowId={(row) => row.caseId}
         settings={{
           stickyColumns: {
             start: 1,

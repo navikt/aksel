@@ -9,20 +9,7 @@ const Example = () => {
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
       <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
-        <DataGrid.Table<(typeof data)[0]>
-          subRows={{
-            getRows: (rowData) => {
-              if (rowData.caseId.includes("-")) {
-                return [];
-              }
-
-              return data.slice(0, 3).map((d) => ({
-                ...d,
-                caseId: rowData.caseId + "-" + d.caseId,
-              }));
-            },
-          }}
-        />
+        <DataGrid.Table layout="auto" />
       </DataGrid>
     </Stack>
   );
@@ -39,5 +26,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 7,
+  index: 1,
 };

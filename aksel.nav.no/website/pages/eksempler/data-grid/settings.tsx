@@ -16,68 +16,14 @@ const Example = () => {
 
   return (
     <VStack height="100vh" padding="space-16" gap="space-24">
-      <HStack gap="space-16" align="center">
-        <Select
-          size="small"
-          label="Radtetthet"
-          value={userSettings.rowDensity}
-          onChange={(e) =>
-            setUserSettings((s) => ({
-              ...s,
-              rowDensity: e.target.value as DataGrid.Settings["rowDensity"],
-            }))
-          }
-        >
-          <option value="condensed">Condensed</option>
-          <option value="normal">Normal</option>
-          <option value="spacious">Spacious</option>
-        </Select>
-        <Select
-          size="small"
-          label="Tekststørrelse"
-          value={userSettings.textSize}
-          onChange={(e) =>
-            setUserSettings((s) => ({
-              ...s,
-              textSize: e.target.value as DataGrid.Settings["textSize"],
-            }))
-          }
-        >
-          <option value="medium">Medium</option>
-          <option value="small">Small</option>
-        </Select>
-        <Select
-          size="small"
-          label="Zebrastriper"
-          value={userSettings.zebraStripes ? "on" : "off"}
-          onChange={(e) =>
-            setUserSettings((s) => ({
-              ...s,
-              zebraStripes: e.target.value === "on",
-            }))
-          }
-        >
-          <option value="on">På</option>
-          <option value="off">Av</option>
-        </Select>
-        <Select
-          size="small"
-          label="Kutt innhold"
-          value={userSettings.truncateContent ? "on" : "off"}
-          onChange={(e) =>
-            setUserSettings((s) => ({
-              ...s,
-              truncateContent: e.target.value === "on",
-            }))
-          }
-        >
-          <option value="on">På</option>
-          <option value="off">Av</option>
-        </Select>
-      </HStack>
+      <SettingsBar
+        setUserSettings={setUserSettings}
+        userSettings={userSettings}
+      />
       <DataGrid
         columns={columns}
         data={data}
+        getRowId={(row) => row.caseId}
         settings={userSettings}
         selection={{
           mode: "multiple",
@@ -88,6 +34,76 @@ const Example = () => {
     </VStack>
   );
 };
+
+function SettingsBar({
+  setUserSettings,
+  userSettings,
+}: {
+  userSettings: DataGrid.Settings;
+  setUserSettings: React.Dispatch<React.SetStateAction<DataGrid.Settings>>;
+}) {
+  return (
+    <HStack gap="space-16" align="center">
+      <Select
+        size="small"
+        label="Radtetthet"
+        value={userSettings.rowDensity}
+        onChange={(e) =>
+          setUserSettings((s) => ({
+            ...s,
+            rowDensity: e.target.value as DataGrid.Settings["rowDensity"],
+          }))
+        }
+      >
+        <option value="condensed">Condensed</option>
+        <option value="normal">Normal</option>
+        <option value="spacious">Spacious</option>
+      </Select>
+      <Select
+        size="small"
+        label="Tekststørrelse"
+        value={userSettings.textSize}
+        onChange={(e) =>
+          setUserSettings((s) => ({
+            ...s,
+            textSize: e.target.value as DataGrid.Settings["textSize"],
+          }))
+        }
+      >
+        <option value="medium">Medium</option>
+        <option value="small">Small</option>
+      </Select>
+      <Select
+        size="small"
+        label="Zebrastriper"
+        value={userSettings.zebraStripes ? "on" : "off"}
+        onChange={(e) =>
+          setUserSettings((s) => ({
+            ...s,
+            zebraStripes: e.target.value === "on",
+          }))
+        }
+      >
+        <option value="on">På</option>
+        <option value="off">Av</option>
+      </Select>
+      <Select
+        size="small"
+        label="Kutt innhold"
+        value={userSettings.truncateContent ? "on" : "off"}
+        onChange={(e) =>
+          setUserSettings((s) => ({
+            ...s,
+            truncateContent: e.target.value === "on",
+          }))
+        }
+      >
+        <option value="on">På</option>
+        <option value="off">Av</option>
+      </Select>
+    </HStack>
+  );
+}
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {

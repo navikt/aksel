@@ -8,7 +8,7 @@ const { columns, data } = generateDataGridDemo();
 const Example = () => {
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={data}>
+      <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
         <DataGrid.Table />
       </DataGrid>
     </Stack>
@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "For å sikre statiske ['keys'](https://react.dev/learn/rendering-lists#why-does-react-need-keys) i DataGrid, må hver rad ha en unik identifikator. I dette eksemplet bruker vi 'caseId' som nøkkel for hver rad, og vi spesifiserer dette ved å bruke 'getRowId' prop på DataGrid-komponenten.",
 };

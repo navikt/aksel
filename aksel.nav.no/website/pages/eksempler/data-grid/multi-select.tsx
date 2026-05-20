@@ -11,6 +11,7 @@ const Example = () => {
       <DataGrid
         columns={columns}
         data={data}
+        getRowId={(row) => row.caseId}
         selection={{ mode: "multiple", defaultSelectedRowIds: ["3", "7"] }}
       >
         <DataGrid.Table />

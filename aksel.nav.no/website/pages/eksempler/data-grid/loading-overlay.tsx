@@ -8,7 +8,12 @@ const { columns, data } = generateDataGridDemo();
 const Example = () => {
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={data} isLoading>
+      <DataGrid
+        columns={columns}
+        data={data}
+        getRowId={(row) => row.caseId}
+        isLoading
+      >
         <DataGrid.Table
           layout="auto"
           loadingContent={{ variant: "overlay", label: "Laster data..." }}

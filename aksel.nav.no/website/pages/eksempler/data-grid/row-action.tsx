@@ -8,7 +8,7 @@ const { columns, data } = generateDataGridDemo();
 const Example = () => {
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={data}>
+      <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
         <DataGrid.Table onRowAction={(row) => alert(`Cliked row ${row.id}!`)} />
       </DataGrid>
     </Stack>
