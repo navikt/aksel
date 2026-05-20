@@ -61,7 +61,7 @@ const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
     header: "Name",
-    cell: (row) => row.name,
+    bodyCell: (row) => row.name,
   },
 ];
 

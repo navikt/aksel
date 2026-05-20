@@ -59,19 +59,19 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "id",
     header: "Id",
-    cell: ({ id }) => id,
+    bodyCell: ({ id }) => id,
     align: "right",
     width: { defaultValue: "100px" },
   },
   {
     id: "foo",
     header: "Foo",
-    cell: ({ foo }) => foo,
+    bodyCell: ({ foo }) => foo,
   },
   {
     id: "bar",
     header: "Bar",
-    cell: ({ bar }) => (
+    bodyCell: ({ bar }) => (
       <Tag variant="strong" size="xsmall">
         {bar}
       </Tag>
@@ -80,12 +80,12 @@ const userColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "on",
     header: "Boolean demo",
-    cell: ({ on }) => (on ? "Yes" : "No"),
+    bodyCell: ({ on }) => (on ? "Yes" : "No"),
   },
   {
     id: "time",
     header: "Time",
-    cell: ({ time }) => time.toISOString(),
+    bodyCell: ({ time }) => time.toISOString(),
   },
 ];
 
@@ -146,7 +146,7 @@ export const SelectionModeMultiple: Story = {
           onSelectedRowIdsChange: console.info,
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -164,7 +164,7 @@ export const SelectionModeOnControlsOnly: Story = {
           onSelectedRowIdsChange: console.info,
         }}
       >
-        <DataGrid.Table withKeyboardNav selectionTrigger="control" />
+        <DataGrid.Table selectionTrigger="control" />
       </DataGrid>
     );
   },
@@ -182,25 +182,7 @@ export const SelectionModeSingle: Story = {
           onSelectedRowIdsChange: console.info,
         }}
       >
-        <DataGrid.Table withKeyboardNav />
-      </DataGrid>
-    );
-  },
-};
-
-export const SelectionModeSingleWithoutKeyboardNav: Story = {
-  render: () => {
-    return (
-      <DataGrid
-        columns={userColumnDef}
-        data={userData}
-        getRowId={(row) => row.foo + row.bar}
-        selection={{
-          mode: "single",
-          onSelectedRowIdsChange: console.info,
-        }}
-      >
-        <DataGrid.Table withKeyboardNav={false} />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -531,7 +513,7 @@ export const StickySelection: Story = {
           },
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -553,7 +535,7 @@ export const StickyLeftOne: Story = {
           },
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -575,7 +557,7 @@ export const StickyRightOne: Story = {
           },
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -598,7 +580,7 @@ export const StickyBothOne: Story = {
           },
         }}
       >
-        <DataGrid.Table withKeyboardNav />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
@@ -613,7 +595,7 @@ export const StickyHeader: Story = {
           data={generateUserData(20)}
           getRowId={(row) => row.foo + row.bar}
         >
-          <DataGrid.Table withKeyboardNav stickyHeader />
+          <DataGrid.Table stickyHeader />
         </DataGrid>
       </div>
     );
@@ -638,7 +620,7 @@ export const StickyHeaderAndColumns: Story = {
             },
           }}
         >
-          <DataGrid.Table withKeyboardNav stickyHeader />
+          <DataGrid.Table stickyHeader />
         </DataGrid>
       </div>
     );
@@ -686,28 +668,28 @@ const sortableColumnDef: ColumnDefinitions<SortableUserDataTest> = [
   {
     id: "id",
     header: "Id",
-    cell: ({ id }) => id,
+    bodyCell: ({ id }) => id,
     align: "right",
-    sortable: true,
+    isSortable: true,
   },
   {
     id: "foo",
     header: "Foo",
-    cell: ({ foo }) => foo,
-    sortable: true,
+    bodyCell: ({ foo }) => foo,
+    isSortable: true,
   },
   {
     id: "name",
     header: "Name",
-    cell: ({ name }) => name,
-    sortable: true,
+    bodyCell: ({ name }) => name,
+    isSortable: true,
   },
-  { id: "bar", header: "Bar", cell: ({ bar }) => bar },
+  { id: "bar", header: "Bar", bodyCell: ({ bar }) => bar },
 ];
 
 function applySortEntries<T extends Record<string, unknown>>(
   data: T[],
-  sort: SortEntry[],
+  sort: DataGrid.Table.SortEntry[],
 ): T[] {
   if (sort.length === 0) return data;
   return [...data].sort((a, b) => {
@@ -777,12 +759,12 @@ export const SortableColumnsUncontrolled: Story = {
 const rowClickSpy = fn();
 
 const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
-  { id: "id", header: "Id", cell: ({ id }) => id, align: "right" },
-  { id: "foo", header: "Foo", cell: ({ foo }) => foo },
+  { id: "id", header: "Id", bodyCell: ({ id }) => id, align: "right" },
+  { id: "foo", header: "Foo", bodyCell: ({ foo }) => foo },
   {
     id: "link",
     header: "Link",
-    cell: ({ foo }) => (
+    bodyCell: ({ foo }) => (
       <a href="/example" onClick={(e) => e.preventDefault()}>
         {foo} link
       </a>
@@ -791,12 +773,12 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
   {
     id: "button",
     header: "Button",
-    cell: ({ foo }) => <button type="button">{foo} action</button>,
+    bodyCell: ({ foo }) => <button type="button">{foo} action</button>,
   },
   {
     id: "text",
     header: "Text",
-    cell: () => <input type="text" />,
+    bodyCell: () => <input type="text" />,
   },
 ];
 
@@ -812,7 +794,6 @@ export const RowClick: Story = {
     >
       <DataGrid.Table
         onRowAction={(rowId) => console.info("Row clicked!: ", rowId)}
-        withKeyboardNav
       />
     </DataGrid>
   ),
@@ -870,7 +851,6 @@ export const RowExpansion: Story = {
     >
       <DataGrid.Table<UserDataTest>
         onRowAction={() => console.info("Row clicked!")}
-        withKeyboardNav
       />
     </DataGrid>
   ),
@@ -889,7 +869,6 @@ export const RowExpansionAll: Story = {
     >
       <DataGrid.Table<UserDataTest>
         onRowAction={() => console.info("Row clicked!")}
-        withKeyboardNav
         detailsPanel={{
           getContent: (rowData) => {
             return (
@@ -931,7 +910,6 @@ export const NestedRows: Story = {
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
-        withKeyboardNav
         subRows={{
           getRows: (row) => row.children,
         }}
@@ -989,7 +967,6 @@ export const NestedLeftAlignedContentRows: Story = {
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
-        withKeyboardNav
         subRows={{
           getRows: (row) => row.children,
         }}
@@ -1017,7 +994,6 @@ export const NestedOneLevelLeftAlignedContentRows: Story = {
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
-        withKeyboardNav
         subRows={{
           getRows: (row) => row.children,
         }}
@@ -1045,7 +1021,6 @@ export const NestedRowsWithMasterDetail: Story = {
       }}
     >
       <DataGrid.Table<NestedUserDataTest>
-        withKeyboardNav
         subRows={{
           defaultExpandedRowIds: ["3"],
           getRows: (row) => row.children,

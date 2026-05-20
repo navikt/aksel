@@ -53,11 +53,6 @@ import {
 interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
   /**
-   * Enables keyboard navigation for table rows and cells.
-   * @default true
-   */
-  withKeyboardNav?: boolean;
-  /**
    * Controls table layout.
    *
    * ### fixed
@@ -146,7 +141,6 @@ const DataGridTableInternal = forwardRef<
     {
       className,
       id,
-      withKeyboardNav = true,
       layout = "fixed",
       stickyHeader = true,
       onRowAction,
@@ -200,7 +194,7 @@ const DataGridTableInternal = forwardRef<
     return (
       <DataTableContextProvider
         layout={layout}
-        withKeyboardNav={withKeyboardNav}
+        withKeyboardNav={true}
         selectionState={tableSelectionState}
         stickyStart={stickyStart}
         stickyHeader={stickyHeader}
@@ -213,7 +207,7 @@ const DataGridTableInternal = forwardRef<
         sortingState={sortingState}
       >
         <TableElementWrapper
-          enabled={withKeyboardNav}
+          enabled={true}
           hasStickyColumns={
             !!(
               tableSettings?.stickyColumns?.start ||
@@ -245,7 +239,7 @@ const DataGridTableInternal = forwardRef<
                           align={colDef.align ?? "left"}
                           key={colDef.id}
                           isSticky={isSticky}
-                          sortable={colDef.sortable}
+                          sortable={colDef.isSortable}
                           label={colDef.header}
                           style={
                             stickyLeftOffset
@@ -518,7 +512,7 @@ const DataTableDataRow = memo(function DataTableDataRow({
                   ) : undefined
                 }
               >
-                {colDef.cell(rowData)}
+                {colDef.bodyCell(rowData)}
               </DataTableBaseCell>
             );
           },

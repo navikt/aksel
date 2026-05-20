@@ -23,7 +23,10 @@ type TableSortOptions = {
    * - `sort` — the full updated sort array after cycling: unsorted → asc → desc → unsorted.
    * - `detail` — the specific column that changed, including its new direction (`"none"` means removed).
    */
-  onSortOrderChange?: (sort: SortEntry[], detail: SortChangeDetail) => void;
+  onSortOrderChange?: (
+    sortOrder: SortEntry[],
+    detail: SortChangeDetail,
+  ) => void;
   /**
    * When true, allows multiple columns to be sorted by holding Shift while clicking headers.
    *

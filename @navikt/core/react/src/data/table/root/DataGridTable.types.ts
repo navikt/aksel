@@ -26,12 +26,12 @@ type ColumnDefinition<T> = {
   /**
    * Renders table body cell content.
    */
-  cell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
+  bodyCell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
   /**
    * Makes the column sortable. Renders the header as a sort button.
-   * Use `sort` and `onSortChange` on the root component to control sort state.
+   * Use `sorting` prop on `DataGridTable.Table` to configure sorting behavior and state management.
    */
-  sortable?: boolean;
+  isSortable?: boolean;
 } & Pick<DataTableColumnHeaderProps, "width" | "align">;
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];

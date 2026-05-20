@@ -214,7 +214,7 @@ type Story = StoryObj<typeof DataGridTable>;
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
-          withKeyboardNav
+
         >
           <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
@@ -692,7 +692,6 @@ export const KitchenSinkAdvancedFilter: Story = {
           }}
         >
           <DataGrid.Table<(typeof TEST_DATA)[number]>
-            withKeyboardNav
             stickyHeader
             detailsPanel={
               showDetailsPanel
