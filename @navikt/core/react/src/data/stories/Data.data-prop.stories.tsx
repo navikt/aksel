@@ -705,7 +705,9 @@ function applySortEntries<T extends Record<string, unknown>>(
 
 export const SortableColumns: Story = {
   render: () => {
-    const [sort, setSort] = useState<SortEntry[]>([]);
+    const [sort, setSort] = useState<SortEntry[]>([
+      { columnId: "name", direction: "asc" },
+    ]);
     const sortedData = applySortEntries(sortableUserData, sort);
 
     return (
@@ -713,6 +715,7 @@ export const SortableColumns: Story = {
         columns={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id.toString()}
+        isLoading
       >
         <DataGrid.Table
           sorting={{

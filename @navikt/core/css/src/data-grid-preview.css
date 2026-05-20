@@ -338,11 +338,11 @@
   position: relative;
   font-weight: var(--ax-font-weight-bold);
 
-  &:has(.aksel-data-table__th-sort-button:hover) {
+  &:has(.aksel-data-table__th-sort-button:hover:not(:disabled)) {
     background-color: var(--ax-bg-neutral-moderate-hover);
   }
 
-  &:has(.aksel-data-table__th-sort-button:active) {
+  &:has(.aksel-data-table__th-sort-button:active:not(:disabled)) {
     background-color: var(--ax-bg-neutral-moderate-pressed);
   }
 
@@ -368,6 +368,11 @@
   &:focus-visible {
     outline: none;
   }
+
+  &:disabled {
+    color: inherit;
+    cursor: default;
+  }
 }
 
 .aksel-data-table__th-sort-icon {
@@ -378,7 +383,7 @@
     visibility: hidden;
   }
 
-  .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
+  .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within):not(:disabled) & {
     visibility: visible;
   }
 

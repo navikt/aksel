@@ -110,8 +110,7 @@ const DataTableColumnHeader = forwardRef<
         cellType={cellType}
         aria-labelledby={contentId} // Avoids VO announcing "Endre bredde" when navigating horizontally in tbody
       >
-        {/* TODO: Consider more gracefull disabling of button when loading */}
-        {canSort && !isLoading ? (
+        {canSort ? (
           <button
             type="button"
             className="aksel-data-table__th-sort-button"
