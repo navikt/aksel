@@ -8,7 +8,19 @@ const { columns, data } = generateDataGridDemo();
 const Example = () => {
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={data}>
+      <DataGrid
+        columns={columns}
+        data={data}
+        settings={{
+          stickyColumns: {
+            start: 1,
+            end: 1,
+          },
+        }}
+        selection={{
+          mode: "multiple",
+        }}
+      >
         <DataGrid.Table />
       </DataGrid>
     </Stack>
@@ -26,5 +38,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 4,
 };

@@ -13,16 +13,13 @@ import {
 import { DataGrid } from "@navikt/ds-react/PREVIEW";
 
 type CaseT = {
-  caseId: number;
+  caseId: string;
   caseType: "Vedtak" | "Journalføring" | "Behandling" | "Godkjent behandling";
   location: string;
   keywords: string[];
   createdAt: Date;
-  priority: "Kritisk" | "Høy" | "Normal" | "Lav";
-  sender: {
-    name: string;
-    id: string;
-  };
+  priority: 0 | 1 | 2 | 3;
+  sender: string;
   age: Date;
   status:
     | "Mottat"
@@ -33,7 +30,9 @@ type CaseT = {
   deadline: Date;
 };
 
-function generateDataGridDemo() {
+function generateDataGridDemo({
+  withSorting = false,
+}: { withSorting?: boolean } = {}) {
   const columns: DataGrid.Columns<CaseT> = [
     {
       id: "caseId",
@@ -47,18 +46,21 @@ function generateDataGridDemo() {
       header: "Opprettet",
       bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
       width: { defaultValue: 110 },
+      isSortable: withSorting,
     },
     {
-      id: "type",
+      id: "caseType",
       header: "Sakstype",
       bodyCell: ({ caseType }) => caseType,
       width: { defaultValue: 190 },
+      isSortable: withSorting,
     },
     {
       id: "location",
       header: "Lokasjon",
       bodyCell: ({ location }) => location,
       width: { defaultValue: 130 },
+      isSortable: withSorting,
     },
     {
       id: "keywords",
@@ -71,16 +73,19 @@ function generateDataGridDemo() {
       bodyCell: PriorityTag,
       align: "center",
       width: { defaultValue: 100 },
+      isSortable: withSorting,
     },
     {
       id: "sender",
       header: "Avsender",
-      bodyCell: ({ sender }) => sender.name,
+      bodyCell: ({ sender }) => sender,
+      isSortable: withSorting,
     },
     {
       id: "status",
       header: "Status",
       bodyCell: ({ status }) => status,
+      isSortable: withSorting,
     },
     {
       id: "age",
@@ -89,6 +94,7 @@ function generateDataGridDemo() {
         `${Math.floor((Date.now() - age.getTime()) / (1000 * 60 * 60 * 24))}d`,
       align: "right",
       width: { defaultValue: 110 },
+      isSortable: withSorting,
     },
     {
       id: "deadline",
@@ -96,6 +102,7 @@ function generateDataGridDemo() {
       bodyCell: DeadLineCell,
       align: "right",
       width: { defaultValue: 130 },
+      isSortable: withSorting,
     },
     {
       id: "actions",
@@ -128,18 +135,15 @@ function generateDataGridDemo() {
   ];
 
   const data: CaseT[] = new Array(100).fill(null).map((_, index) => ({
-    caseId: index + 1,
+    caseId: `${index + 1}`,
     caseType: (
       ["Vedtak", "Journalføring", "Behandling", "Godkjent behandling"] as const
     )[random(4)],
     location: getLocation(),
     keywords: getKeywords(),
     createdAt: new Date(Date.now() - index * 1000 * 60 * 60 * 24),
-    priority: (["Kritisk", "Høy", "Normal", "Lav"] as const)[random(4)],
-    sender: {
-      name: getName(),
-      id: `avsender-${index}`,
-    },
+    priority: ([0, 1, 2, 3] as const)[random(4)],
+    sender: getName(),
     age: new Date(Date.now() - index * 1000 * 60 * 60 * 24),
     status: (
       [
@@ -161,18 +165,25 @@ function generateDataGridDemo() {
   };
 }
 
+const PriorityNames = {
+  3: "Kritisk",
+  2: "Høy",
+  1: "Normal",
+  0: "Lav",
+};
+
 function PriorityTag({ priority }: { priority: CaseT["priority"] }) {
-  if (["Normal", "Lav"].includes(priority)) {
-    return priority;
+  if ([0, 1].includes(priority)) {
+    return PriorityNames[priority];
   }
 
   return (
     <Tag
-      data-color={priority === "Kritisk" ? "danger" : "warning"}
+      data-color={priority === 3 ? "danger" : "warning"}
       variant="outline"
       size="small"
     >
-      {priority}
+      {PriorityNames[priority]}
     </Tag>
   );
 }
