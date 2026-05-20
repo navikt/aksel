@@ -1,9 +1,6 @@
 import React, { forwardRef, useMemo } from "react";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
-import type {
-  ColumnDefinition,
-  ColumnDefinitions,
-} from "../../data/table/root/DataGridTable.types";
+import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import type { DataGridSettings } from "./DataGrid.types";
@@ -16,7 +13,7 @@ interface DataGridProps<RowT> {
   /**
    * Definitions of the columns to display.
    */
-  columnDefinitions: ColumnDefinitions<RowT>;
+  columns: ColumnDefinitions<RowT>;
   /**
    * The data to display.
    *
@@ -83,7 +80,7 @@ const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
     {
       children,
       className,
-      columnDefinitions,
+      columns,
       data,
       getRowId,
       selection,
@@ -113,7 +110,7 @@ const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
     return (
       <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
         <DataGridContextProvider
-          columnDefinitions={columnDefinitions}
+          columnDefinitions={columns}
           data={data}
           getRowId={getRowId}
           selection={selection}
@@ -132,7 +129,7 @@ DataGridRoot.Table = DataGridTable;
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGridRoot {
   export type Props<T = unknown> = DataGridProps<T>;
-  export type Column<T = unknown> = ColumnDefinition<T>;
+  export type Columns<T = unknown> = ColumnDefinitions<T>;
   export type Selection<T = unknown> = SelectionProps<T>;
   export type Settings = DataGridSettings;
 

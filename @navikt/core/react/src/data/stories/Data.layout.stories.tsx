@@ -16,7 +16,7 @@ const meta: Meta<typeof DataGridTable> = {
 
 export default meta;
 
-const columnDefinitions: ColumnDefinitions<PersonInfo> = [
+const columns: ColumnDefinitions<PersonInfo> = [
   { id: "id", header: "Id", cell: (row) => row.name },
   { id: "name", header: "Name", cell: (row) => row.name },
   { id: "nationalId", header: "National id", cell: (row) => row.nationalId },
@@ -89,7 +89,7 @@ export const AutoLayoutMinimal: StoryObj<{
     table: {
       layout: "auto",
     },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
@@ -109,7 +109,7 @@ export const AutoLayoutOverflowX: StoryObj<{
     grid: {
       settings: { truncateContent: true },
       data: sampleData.slice(0, 4),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
@@ -139,7 +139,7 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
     grid: {
       settings: { truncateContent: false },
       data: sampleData.slice(0, 3),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
@@ -167,7 +167,7 @@ export const AutoLayoutSortable: StoryObj<{
     table: { layout: "auto" },
     grid: {
       data: sortableData,
-      columnDefinitions: [
+      columns: [
         {
           id: "left",
           header: "Left",
@@ -204,7 +204,7 @@ export const FixedLayoutMinimal: StoryObj<{
   },
   args: {
     table: { layout: "fixed" },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
@@ -223,7 +223,7 @@ export const FixedLayoutDynamicWidth: StoryObj<{
     table: { layout: "fixed" },
     grid: {
       data: minimalData,
-      columnDefinitions: minimalColumns.map((col) => ({
+      columns: minimalColumns.map((col) => ({
         ...col,
         defaultWidth: "100%",
       })),

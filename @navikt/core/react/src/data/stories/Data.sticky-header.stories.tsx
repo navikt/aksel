@@ -42,10 +42,7 @@ export const Flex: Story = {
         </Box>
 
         <div style={{ overflow: "hidden", display: "flex" }}>
-          <DataGrid
-            columnDefinitions={getColDefs(overflow)}
-            data={getData(overflow)}
-          >
+          <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
             <div>Greier inni DataGrid før tabell</div>
             <DataGrid.Table />
             <div>Greier inni DataGrid etter tabell</div>
@@ -78,10 +75,7 @@ export const FlexNativeMinimal: Story = {
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >
         <div>Greier før tabell</div>
-        <DataGrid
-          columnDefinitions={getColDefs(overflow)}
-          data={getData(overflow)}
-        >
+        <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
           <DataGrid.Table />
         </DataGrid>
         <div>Greier etter tabell</div>
@@ -101,10 +95,7 @@ export const FlexMinimal: Story = {
     return (
       <VStack height="100vh">
         <div>Greier før tabell</div>
-        <DataGrid
-          columnDefinitions={getColDefs(overflow)}
-          data={getData(overflow)}
-        >
+        <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
           <DataGrid.Table />
         </DataGrid>
         <div>Greier etter tabell</div>
@@ -133,10 +124,7 @@ export const Maxheight: Story = {
         </Box>
 
         <div style={{ display: "flex", maxHeight: "500px" }}>
-          <DataGrid
-            columnDefinitions={getColDefs(overflow)}
-            data={getData(overflow)}
-          >
+          <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
             <div>Greier inni DataGrid før tabell</div>
             <DataGrid.Table />
             <div>Greier inni DataGrid etter tabell</div>
@@ -166,10 +154,7 @@ export const MaxheightMinimal: Story = {
   render: ({ overflow }) => {
     return (
       <div style={{ display: "flex", maxHeight: "500px" }}>
-        <DataGrid
-          columnDefinitions={getColDefs(overflow)}
-          data={getData(overflow)}
-        >
+        <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
           <DataGrid.Table />
         </DataGrid>
       </div>

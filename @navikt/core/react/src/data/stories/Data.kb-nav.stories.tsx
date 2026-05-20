@@ -77,7 +77,7 @@ const inputsColumnDef: ColumnDefinitions<InputRow> = [
 export const Inputs: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={inputsColumnDef}
+      columns={inputsColumnDef}
       data={inputsData}
       getRowId={(row) => row.id.toString()}
     >
@@ -215,7 +215,7 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
 export const DisabledCells: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={disabledColumnDef}
+      columns={disabledColumnDef}
       data={disabledData}
       getRowId={(row) => row.id.toString()}
     >
@@ -298,7 +298,7 @@ export const Cache: Story = {
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
         <DataGrid
-          columnDefinitions={cacheColumnDef}
+          columns={cacheColumnDef}
           data={data}
           getRowId={(row) => row.id.toString()}
         >
@@ -362,7 +362,7 @@ const focusColumnDef: ColumnDefinitions<FocusRow> = [
 export const FocusElementInsideTable: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={focusColumnDef}
+      columns={focusColumnDef}
       data={focusData}
       getRowId={(row) => row.id}
     >

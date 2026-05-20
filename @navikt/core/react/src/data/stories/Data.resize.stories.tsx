@@ -51,7 +51,7 @@ export const Resize: Story = {
   },
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
@@ -77,7 +77,7 @@ export const Resize: Story = {
 export const ResizeMinMax: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
@@ -117,7 +117,7 @@ export const ResizeMinMax: Story = {
 export const ResizeDefaultStaticWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
@@ -146,7 +146,7 @@ export const ResizeDefaultStaticWidth: Story = {
 export const ResizeDefaultDynamicWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
@@ -175,7 +175,7 @@ export const ResizeDefaultDynamicWidth: Story = {
 export const ResizeAuto: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "L",

@@ -673,7 +673,7 @@ export const KitchenSinkAdvancedFilter: Story = {
 
         <DataGrid
           getRowId={(row) => row.name}
-          columnDefinitions={columnView.filter((col) =>
+          columns={columnView.filter((col) =>
             visibleColumns.find((c) => c === col.id),
           )}
           data={pagedData.paginatedData}
