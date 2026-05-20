@@ -746,8 +746,8 @@ export const SortableColumns: Story = {
       >
         <DataGrid.Table
           sorting={{
-            sort,
-            onSortChange: (next, detail) => {
+            sortOrder: sort,
+            onSortOrderChange: (next, detail) => {
               console.info("changed column:", detail);
               setSort(next);
             },
@@ -774,8 +774,8 @@ export const SortableColumnsUncontrolled: Story = {
         >
           <DataGrid.Table
             sorting={{
-              defaultSort: [{ columnId: "name", direction: "asc" }],
-              onSortChange: (_, detail) => {
+              defaultSortOrder: [{ columnId: "name", direction: "asc" }],
+              onSortOrderChange: (_, detail) => {
                 setLoggedDetail(JSON.stringify(detail, null, 2));
               },
             }}

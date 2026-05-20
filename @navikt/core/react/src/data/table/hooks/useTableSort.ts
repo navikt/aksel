@@ -8,22 +8,28 @@ type TableSortOptions = {
    * Columns not present in the array are unsorted.
    * Supports multi-column sorting when multiple entries are provided.
    *
-   * When provided, the component is controlled — you must also handle `onSortChange`.
-   * For uncontrolled usage, use `defaultSort` instead.
+   * When provided, the component is controlled - you must also handle `onSortOrderChange`.
+   * For uncontrolled usage, use `defaultSortOrder` instead.
    */
-  sort?: SortEntry[];
+  sortOrder?: SortEntry[];
   /**
    * Initial sort state for uncontrolled usage.
-   * Use `sort` + `onSortChange` for controlled usage.
+   * Use `sortOrder` + `onSortOrderChange` for controlled usage.
    * @default []
    */
-  defaultSort?: SortEntry[];
+  defaultSortOrder?: SortEntry[];
   /**
    * Called when the user clicks a sortable column header.
    * - `sort` — the full updated sort array after cycling: unsorted → asc → desc → unsorted.
    * - `detail` — the specific column that changed, including its new direction (`"none"` means removed).
    */
-  onSortChange?: (sort: SortEntry[], detail: SortChangeDetail) => void;
+  onSortOrderChange?: (sort: SortEntry[], detail: SortChangeDetail) => void;
+  /**
+   * When true, allows multiple columns to be sorted by holding Shift while clicking headers.
+   *
+   * @default true
+   */
+  allowMultiSort?: boolean;
 };
 
 type UseTableSortResults = {
@@ -41,11 +47,16 @@ type UseTableSortResults = {
 };
 
 function useTableSort(options?: TableSortOptions): UseTableSortResults {
-  const { defaultSort, onSortChange, sort: sortOption } = options || {};
+  const {
+    defaultSortOrder,
+    onSortOrderChange,
+    sortOrder,
+    allowMultiSort = true,
+  } = options || {};
 
   const [sort, setSort] = useControllableState({
-    value: sortOption,
-    defaultValue: defaultSort || [],
+    value: sortOrder,
+    defaultValue: defaultSortOrder || [],
   });
 
   const handleSortClick = useEventCallback(
@@ -59,11 +70,11 @@ function useTableSort(options?: TableSortOptions): UseTableSortResults {
         return;
       }
 
-      const cumulative = event.shiftKey;
+      const cumulative = allowMultiSort && event.shiftKey;
       const base = cumulative ? sort : sort.filter((s) => s.columnId === id);
       const { next, detail } = nextSortEntries(base, id);
       setSort(next);
-      onSortChange?.(next, detail);
+      onSortOrderChange?.(next, detail);
     },
   );
 

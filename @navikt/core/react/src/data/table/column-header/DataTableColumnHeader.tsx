@@ -37,7 +37,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * - `resizeMin?: number` - Minimum width of the column when resizing.
    * - `resizeMax?: number` - Maximum width of the column when resizing.
    * - `value?: number | string` - Controlled width of the column.
-   * - `default?: number | string` - Initial width of the column.
+   * - `defaultValue?: number | string` - Initial width of the column.
    * - `onChange?: (width: number) => void` - Called when the column width changes.
    *
    * See individual props for details and defaults.
