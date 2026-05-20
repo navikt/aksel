@@ -715,7 +715,6 @@ export const SortableColumns: Story = {
         columns={sortableColumnDef}
         data={sortedData}
         getRowId={(row) => row.id.toString()}
-        isLoading
       >
         <DataGrid.Table
           sorting={{
