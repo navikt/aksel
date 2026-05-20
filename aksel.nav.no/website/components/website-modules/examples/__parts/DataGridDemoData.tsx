@@ -43,6 +43,12 @@ function generateDataGridDemo() {
       isRowHeader: true,
     },
     {
+      id: "createdAt",
+      header: "Opprettet",
+      bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
+      width: { defaultValue: 110 },
+    },
+    {
       id: "type",
       header: "Sakstype",
       bodyCell: ({ caseType }) => caseType,
@@ -60,12 +66,6 @@ function generateDataGridDemo() {
       bodyCell: ({ keywords }) => keywords.join(", "),
     },
     {
-      id: "createdAt",
-      header: "Opprettet",
-      bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
-      width: { defaultValue: 110 },
-    },
-    {
       id: "priority",
       header: "Prioritet",
       bodyCell: PriorityTag,
@@ -78,17 +78,17 @@ function generateDataGridDemo() {
       bodyCell: ({ sender }) => sender.name,
     },
     {
+      id: "status",
+      header: "Status",
+      bodyCell: ({ status }) => status,
+    },
+    {
       id: "age",
       header: "Saksalder",
       bodyCell: ({ age }) =>
         `${Math.floor((Date.now() - age.getTime()) / (1000 * 60 * 60 * 24))}d`,
       align: "right",
       width: { defaultValue: 110 },
-    },
-    {
-      id: "status",
-      header: "Status",
-      bodyCell: ({ status }) => status,
     },
     {
       id: "deadline",
