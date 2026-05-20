@@ -51,7 +51,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader, selectionState, onRowClick } =
+    const { layout, stickyHeader, selectionState, onRowAction } =
       useDataTableContext();
     const { location } = useDataTableLocation();
     const { tableItems } = useDataTableContext();
@@ -64,7 +64,11 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     const isSticky = location === "thead" && stickyHeader;
 
     const handleClick =
-      location === "tbody" && rowId !== undefined
+      location === "tbody" &&
+      rowId !== undefined &&
+      ((selectionState.selectionTrigger === "row" &&
+        selectionState.selection.mode !== "none") ||
+        onRowAction)
         ? (event: React.MouseEvent<HTMLTableRowElement>) => {
             if (
               rowId === undefined ||
@@ -76,6 +80,11 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               return;
             }
 
+            onRowAction?.(rowId, event);
+            if (event.defaultPrevented) {
+              return;
+            }
+
             const selection = window.getSelection();
             if (selection && selection.toString().length > 0) {
               return;
@@ -83,7 +92,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
             if (
               selectionState.selectionTrigger === "row" &&
-              selectionState.selection.selectionMode !== "none"
+              selectionState.selection.mode !== "none"
             ) {
               const rowData = tableItems.itemDetails.get(rowId)?.rowData;
 
@@ -94,7 +103,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               }
               selectionState.selection.toggleSelection(rowId, rowData);
             }
-            onRowClick?.(rowId, event);
           }
         : undefined;
 
@@ -281,7 +289,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
 
   const { selection, renderSelection } = selectionState;
 
-  if (selection.selectionMode === "none" || !renderSelection) {
+  if (selection.mode === "none" || !renderSelection) {
     return null;
   }
 
@@ -312,7 +320,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
   }
 
   /* TODO: A11y support */
-  if (selection.selectionMode === "multiple" && location === "thead") {
+  if (selection.mode === "multiple" && location === "thead") {
     const theadCheckboxProps = selection.getTheadCheckboxProps();
 
     let labelText = "Velg alle synlige rader";
@@ -338,7 +346,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     );
   }
 
-  if (selection.selectionMode === "single" && location === "thead") {
+  if (selection.mode === "single" && location === "thead") {
     return (
       <DataTableColumnHeader
         id={selectionHeaderId}
@@ -356,7 +364,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     return null;
   }
 
-  if (selection.selectionMode === "multiple" && location === "tbody") {
+  if (selection.mode === "multiple" && location === "tbody") {
     return (
       <DataTableTd
         cellType="action"
@@ -374,7 +382,7 @@ function RowSelectionCell({ rowId }: { rowId?: TableRowEntryId }) {
     );
   }
 
-  if (selection.selectionMode === "single" && location === "tbody") {
+  if (selection.mode === "single" && location === "tbody") {
     return (
       <DataTableTd
         cellType="action"

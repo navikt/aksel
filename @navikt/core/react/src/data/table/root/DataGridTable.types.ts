@@ -7,9 +7,10 @@ import type { DataTableColumnHeaderProps } from "../column-header/DataTableColum
 type ColumnDefinition<T> = {
   id: string;
   /**
-   * Assigned to the cell's `th` element instead of `td` if true.
+   * Uses `<th>` instead of `<td>` for the cell if true.
    *
-   * Should be used for cells that act as row headers. Each row should have one rowheader, and only have one cell with `isRowHeader: true`,
+   * Should be used on the column that acts as row header.
+   * There should be exactly one column with this set to true.
    */
   isRowHeader?: boolean; // TODO: Better documentation, consider warning if not one column has this set to true.
   /**
@@ -25,12 +26,12 @@ type ColumnDefinition<T> = {
   /**
    * Renders table body cell content.
    */
-  cell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
+  bodyCell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
   /**
    * Makes the column sortable. Renders the header as a sort button.
-   * Use `sort` and `onSortChange` on the root component to control sort state.
+   * Use `sorting` prop on `DataGrid.Table` to configure sorting behavior and state management.
    */
-  sortable?: boolean;
+  isSortable?: boolean;
 } & Pick<DataTableColumnHeaderProps, "width" | "align">;
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];

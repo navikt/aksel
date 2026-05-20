@@ -5,7 +5,6 @@ import { useControllableState } from "../../../utils/hooks";
 import { getMultipleSelectProps } from "../helpers/selection/getMultipleSelectProps";
 import { getSingleSelectProps } from "../helpers/selection/getSingleSelectProps";
 import type {
-  SelectedKeysT,
   SelectionProps,
   TableSelection,
 } from "../helpers/selection/selection.types";
@@ -26,17 +25,17 @@ type UseTableSelectionReturn = {
 
 function useTableSelection<T>({
   selection = {
-    selectionMode: "none",
+    mode: "none",
   },
   selectionTrigger = "row",
   tableItems,
 }: UseTableSelectionArgs<T>): UseTableSelectionReturn {
   const { isLoading } = useDataGridContext();
   const {
-    selectionMode,
-    defaultSelectedKeys,
-    selectedKeys: selectedKeysProp,
-    onSelectionChange,
+    mode,
+    defaultSelectedRowIds,
+    selectedRowIds: selectedRowIdsProp,
+    onSelectedRowIdsChange,
     enableRowSelection,
   } = selection;
 
@@ -44,10 +43,10 @@ function useTableSelection<T>({
 
   const radioGroupName = useId();
 
-  const [selectedKeys, setSelectedKeys] = useControllableState<SelectedKeysT>({
-    value: selectionMode !== "none" ? selectedKeysProp : undefined,
-    defaultValue: defaultSelectedKeys ?? [],
-    onChange: onSelectionChange,
+  const [selectedKeys, setSelectedKeys] = useControllableState<string[]>({
+    value: mode !== "none" ? selectedRowIdsProp : undefined,
+    defaultValue: defaultSelectedRowIds ?? [],
+    onChange: onSelectedRowIdsChange,
   });
 
   const selectedKeysSet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
@@ -59,10 +58,10 @@ function useTableSelection<T>({
 
   const baseSelection = { selectedKeys, isRowSelected };
 
-  if (selectionMode === "none") {
+  if (mode === "none") {
     return {
       selection: {
-        selectionMode,
+        mode,
         ...baseSelection,
         selectedKeys: [],
       },
@@ -71,10 +70,10 @@ function useTableSelection<T>({
     };
   }
 
-  if (selectionMode === "single") {
+  if (mode === "single") {
     return {
       selection: {
-        selectionMode,
+        mode,
         ...baseSelection,
         ...getSingleSelectProps({
           selectedKeysSet,
@@ -90,7 +89,7 @@ function useTableSelection<T>({
 
   return {
     selection: {
-      selectionMode,
+      mode,
       ...baseSelection,
       ...getMultipleSelectProps({
         selectedKeysSet,
@@ -111,7 +110,7 @@ function useTableSelection<T>({
  */
 const noSelectionState: UseTableSelectionReturn = {
   selection: {
-    selectionMode: "none",
+    mode: "none",
     selectedKeys: [],
     isRowSelected: () => false,
   },

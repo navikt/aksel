@@ -16,33 +16,41 @@ const meta: Meta<typeof DataGridTable> = {
 
 export default meta;
 
-const columnDefinitions: ColumnDefinitions<PersonInfo> = [
-  { id: "id", header: "Id", cell: (row) => row.name },
-  { id: "name", header: "Name", cell: (row) => row.name },
-  { id: "nationalId", header: "National id", cell: (row) => row.nationalId },
-  { id: "dayJob", header: "Day job", cell: (row) => row.dayJob },
-  { id: "supervisor", header: "Supervisor", cell: (row) => row.supervisor },
+const columns: ColumnDefinitions<PersonInfo> = [
+  { id: "id", header: "Id", bodyCell: (row) => row.name },
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+  {
+    id: "nationalId",
+    header: "National id",
+    bodyCell: (row) => row.nationalId,
+  },
+  { id: "dayJob", header: "Day job", bodyCell: (row) => row.dayJob },
+  { id: "supervisor", header: "Supervisor", bodyCell: (row) => row.supervisor },
   {
     id: "dateReceived",
     header: "Date received",
-    cell: (row) => row.dateReceived,
+    bodyCell: (row) => row.dateReceived,
   },
   {
     id: "message",
     header: "Message",
-    cell: (row) => row.message,
+    bodyCell: (row) => row.message,
   },
-  { id: "age", header: "Age", cell: (row) => row.age },
+  { id: "age", header: "Age", bodyCell: (row) => row.age },
   {
     id: "forceSensitive",
     header: "Force sensitive",
-    cell: (row) => (row.forceSensitive ? "Yes" : "No"),
+    bodyCell: (row) => (row.forceSensitive ? "Yes" : "No"),
   },
-  { id: "homeSystem", header: "Home system", cell: (row) => row.homeSystem },
+  {
+    id: "homeSystem",
+    header: "Home system",
+    bodyCell: (row) => row.homeSystem,
+  },
   {
     id: "skills",
     header: "Skills",
-    cell: (row) => row.skills.join(", "),
+    bodyCell: (row) => row.skills.join(", "),
   },
 ];
 
@@ -57,9 +65,9 @@ const minimalData: MinimalRow[] = [
 ];
 
 const minimalColumns: ColumnDefinitions<MinimalRow> = [
-  { id: "col1", header: "Column 1", cell: (row) => row.col1 },
-  { id: "col2", header: "Column 2", cell: (row) => row.col2 },
-  { id: "col3", header: "Column 3", cell: (row) => row.col3 },
+  { id: "col1", header: "Column 1", bodyCell: (row) => row.col1 },
+  { id: "col2", header: "Column 2", bodyCell: (row) => row.col2 },
+  { id: "col3", header: "Column 3", bodyCell: (row) => row.col3 },
 ];
 
 type SortableRow = {
@@ -89,7 +97,7 @@ export const AutoLayoutMinimal: StoryObj<{
     table: {
       layout: "auto",
     },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
@@ -109,11 +117,11 @@ export const AutoLayoutOverflowX: StoryObj<{
     grid: {
       settings: { truncateContent: true },
       data: sampleData.slice(0, 4),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
-              cell: (row: PersonInfo) => (
+              bodyCell: (row: PersonInfo) => (
                 <div style={{ maxWidth: 200 }}>{row.message}</div>
               ),
             }
@@ -139,11 +147,11 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
     grid: {
       settings: { truncateContent: false },
       data: sampleData.slice(0, 3),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
-              cell: (row: PersonInfo) =>
+              bodyCell: (row: PersonInfo) =>
                 row.message.split(" ").slice(0, 4).join(" ") + ".",
             }
           : col,
@@ -167,24 +175,24 @@ export const AutoLayoutSortable: StoryObj<{
     table: { layout: "auto" },
     grid: {
       data: sortableData,
-      columnDefinitions: [
+      columns: [
         {
           id: "left",
           header: "Left",
-          sortable: true,
-          cell: (row) => row.left,
+          isSortable: true,
+          bodyCell: (row) => row.left,
         },
         {
           id: "center",
           header: "Center",
-          sortable: true,
-          cell: (row) => row.center,
+          isSortable: true,
+          bodyCell: (row) => row.center,
         },
         {
           id: "right",
           header: "Right",
-          sortable: true,
-          cell: (row) => row.right,
+          isSortable: true,
+          bodyCell: (row) => row.right,
         },
       ],
     },
@@ -204,7 +212,7 @@ export const FixedLayoutMinimal: StoryObj<{
   },
   args: {
     table: { layout: "fixed" },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
@@ -223,7 +231,7 @@ export const FixedLayoutDynamicWidth: StoryObj<{
     table: { layout: "fixed" },
     grid: {
       data: minimalData,
-      columnDefinitions: minimalColumns.map((col) => ({
+      columns: minimalColumns.map((col) => ({
         ...col,
         defaultWidth: "100%",
       })),

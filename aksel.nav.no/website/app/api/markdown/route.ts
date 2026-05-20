@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { markdownForRoute } from "@/app/api/markdown/llm.config";
-import { isValidRoute } from "@/app/api/markdown/route.config";
+import { MarkdownRoutes } from "@/app/api/markdown/MarkdownRouteHandler";
 
 /**
  * Central markdown route handler
@@ -15,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   const basePath = request.nextUrl.pathname.slice(0, -3);
 
-  if (!isValidRoute(basePath)) {
+  if (!MarkdownRoutes.isValidMarkdownRoute(basePath)) {
     return new NextResponse(
       "ERROR: Markdown version not available for this route",
       {
@@ -25,7 +24,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const markdown = await markdownForRoute(basePath);
+    const markdown = await MarkdownRoutes.markdownForRoute(basePath);
 
     if (!markdown || markdown.length === 0) {
       return new NextResponse(

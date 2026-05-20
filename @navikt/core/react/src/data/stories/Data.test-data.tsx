@@ -25,47 +25,47 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     id: "id",
     header: "Id",
-    cell: (row) => row.id,
+    bodyCell: (row) => row.id,
     width: { autoResizeOnce: true },
   },
   {
     header: "Name",
     id: "name",
     isRowHeader: true,
-    cell: (row) =>
+    bodyCell: (row) =>
       `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
   },
   {
     header: "National id",
     id: "nationalId",
-    cell: (row) => row.nationalId,
+    bodyCell: (row) => row.nationalId,
     align: "right",
     width: { autoResizeOnce: true },
   },
   {
     header: "Day job",
     id: "dayJob",
-    cell: (row) => row.dayJob,
+    bodyCell: (row) => row.dayJob,
   },
   {
     header: "Supervisor",
     id: "supervisor",
-    cell: (row) => row.supervisor,
+    bodyCell: (row) => row.supervisor,
   },
   {
     header: "Date received",
     id: "dateReceived",
-    cell: (row) => row.dateReceived,
+    bodyCell: (row) => row.dateReceived,
   },
   {
     header: "Message",
     id: "message",
-    cell: (row) => row.message,
+    bodyCell: (row) => row.message,
   },
   {
     header: "Age",
     id: "age",
-    cell: (row) => row.age,
+    bodyCell: (row) => row.age,
     align: "right",
     width: { autoResizeOnce: true },
 
@@ -82,7 +82,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     header: "Force sensitive",
     id: "forceSensitive",
-    cell: (row) => (
+    bodyCell: (row) => (
       <Tag
         size="small"
         variant="moderate"
@@ -95,12 +95,12 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     header: "Home system",
     id: "homeSystem",
-    cell: (row) => row.homeSystem,
+    bodyCell: (row) => row.homeSystem,
   },
   {
     header: "Skills",
     id: "skills",
-    cell: (row) => (
+    bodyCell: (row) => (
       <HStack gap="space-8" wrap={false}>
         {row.skills.map((skill) => (
           <Tag key={skill} size="small" variant="moderate">
@@ -114,7 +114,7 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     header: "Actions",
     id: "actions",
     width: { autoResizeOnce: true },
-    cell: (row) => (
+    bodyCell: (row) => (
       <HStack gap="space-8">
         <Button
           size="xsmall"

@@ -61,7 +61,7 @@ const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
     header: "Name",
-    cell: (row) => row.name,
+    bodyCell: (row) => row.name,
   },
 ];
 
@@ -73,10 +73,10 @@ const getCheckboxes = (canvasElement: HTMLElement) =>
 export const ExpandedChildRowsIncludedInSelectAll: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={data}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
@@ -106,10 +106,10 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
 export const FallbackIdsSelectAllVisibleRows: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={fallbackIdData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table
         subRows={{
@@ -136,10 +136,10 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
 export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
@@ -180,10 +180,10 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
 export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
-      selection={{ selectionMode: "multiple" }}
+      selection={{ mode: "multiple" }}
     >
       <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>

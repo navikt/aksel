@@ -31,12 +31,7 @@ import { DataTableSubRowToggle } from "../sub-row-toggle/DataTableSubRowToggle";
 import { DataTableTbody } from "../tbody/DataTableTbody";
 import { DataTableThead } from "../thead/DataTableThead";
 import { DataTableTr } from "../tr/DataTableTr";
-import type {
-  DataTableLoadingConfig,
-  SortChangeDetail,
-  SortEntry,
-  TableRowEntryId,
-} from "./DataGridTable.types";
+import type { DataTableLoadingConfig } from "./DataGridTable.types";
 import {
   DataTableContextProvider,
   useDataTableContext,
@@ -55,13 +50,8 @@ import {
  * TODO:
  * - Test `onColumnDefinitionChange` callback that is called when resize, sort, order etc changes
  */
-interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
+interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   children?: never;
-  /**
-   * Enables keyboard navigation for table rows and cells.
-   * @default true
-   */
-  withKeyboardNav?: boolean;
   /**
    * Controls table layout.
    *
@@ -78,20 +68,40 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   layout?: "fixed" | "auto";
   /**
+   * Whether the header should be sticky.
+   * For this to work, you have to put the component in a flex container with a height restriction.
+   *
+   * @example
+   * <VStack height="100vh">
+   *   <div>Content before DataGrid</div>
+   *   <DataGrid>
+   *     <DataGrid.Table />
+   *   </DataGrid>
+   *   <div>Content after DataGrid</div>
+   * </VStack>
+   *
+   * @example
+   * <div style={{ display: "flex", maxHeight: "500px" }}>
+   *   <DataGrid>
+   *     <DataGrid.Table />
+   *   </DataGrid>
+   * </div>
+   *
    * @default true
    */
   stickyHeader?: boolean;
   /**
-   * Callback invoked when a data row is clicked.
-   * Not called when clicking header, loading, or empty-state rows.
+   * Callback invoked when a row in the table body is clicked.
+   *
+   * Call `event.preventDefault()` inside the callback to prevent the default row click behavior, such as selection.
    */
-  onRowClick?: (
-    rowId: TableRowEntryId,
+  onRowAction?: (
+    rowId: string,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
   /**
    * Content to render when `data` is empty.
-   * Rendered inside a `DataTable.EmptyState` row spanning all columns.
+   * Rendered inside a row spanning all columns.
    */
   emptyContent?: React.ReactNode;
   /**
@@ -123,15 +133,17 @@ interface DataTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   selectionTrigger?: "row" | "control";
 }
 
-const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
+const DataGridTableInternal = forwardRef<
+  HTMLTableElement,
+  DataGridTableProps<unknown>
+>(
   (
     {
       className,
       id,
-      withKeyboardNav = true,
       layout = "fixed",
       stickyHeader = true,
-      onRowClick,
+      onRowAction,
       emptyContent,
       loadingContent,
       detailsPanel,
@@ -139,7 +151,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
       sorting,
       selectionTrigger = "row",
       ...rest
-    }: DataTableProps<any>, // Have to use <any> for docgen to work
+    }: DataGridTableProps<any>, // Have to use <any> for docgen to work
     forwardedRef,
   ) => {
     const {
@@ -169,7 +181,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
       columnDefinitions,
       {
         stickyColumns: tableSettings?.stickyColumns,
-        hasSelection: tableSelectionState.selection.selectionMode !== "none",
+        hasSelection: tableSelectionState.selection.mode !== "none",
         hasDetailsPanel: !!detailsPanel?.getContent,
         layout,
       },
@@ -182,20 +194,20 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
     return (
       <DataTableContextProvider
         layout={layout}
-        withKeyboardNav={withKeyboardNav}
+        withKeyboardNav={true}
         selectionState={tableSelectionState}
         stickyStart={stickyStart}
         stickyHeader={stickyHeader}
         tableId={tableId}
         loading={loadingContent}
-        onRowClick={onRowClick}
+        onRowAction={onRowAction}
         columns={columns}
         totalColSpan={totalColSpan}
         tableItems={tableItems}
         sortingState={sortingState}
       >
         <TableElementWrapper
-          enabled={withKeyboardNav}
+          enabled={true}
           hasStickyColumns={
             !!(
               tableSettings?.stickyColumns?.start ||
@@ -227,7 +239,7 @@ const DataTableInternal = forwardRef<HTMLTableElement, DataTableProps<unknown>>(
                           align={colDef.align ?? "left"}
                           key={colDef.id}
                           isSticky={isSticky}
-                          sortable={colDef.sortable}
+                          sortable={colDef.isSortable}
                           label={colDef.header}
                           style={
                             stickyLeftOffset
@@ -500,7 +512,7 @@ const DataTableDataRow = memo(function DataTableDataRow({
                   ) : undefined
                 }
               >
-                {colDef.cell(rowData)}
+                {colDef.bodyCell(rowData)}
               </DataTableBaseCell>
             );
           },
@@ -511,19 +523,24 @@ const DataTableDataRow = memo(function DataTableDataRow({
   );
 });
 
-const DataGridTable = DataTableInternal as <T>(
-  props: DataTableProps<T> & React.RefAttributes<HTMLTableElement>,
+const DataGridTable = DataGridTableInternal as <T>(
+  props: DataGridTableProps<T> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGridTable {
-  export type Props<T = any> = DataTableProps<T>;
-  export type Sort = SortEntry;
-  export type SortDetail = SortChangeDetail;
+  export type Props<T = unknown> = DataGridTableProps<T>;
+  export type Sorting = TableSortOptions;
+  export type SortEntry = import("./DataGridTable.types").SortEntry;
+  export type SortChangeDetail =
+    import("./DataGridTable.types").SortChangeDetail;
+  export type LoadingContent = DataTableLoadingConfig;
+  export type SubRows<T = unknown> = SubRowsProps<T>;
+  export type DetailsPanel<T = unknown> = DetailsPanelProps<T>;
 }
 
-// docgen doesn't work well with type params, so we let it use DataTableInternal instead
+// docgen doesn't work well with type params, so we let it use DataGridTableInternal instead
 // eslint-disable-next-line import/export
-export { DataGridTable, DataTableInternal };
-export type { DataTableProps };
+export { DataGridTable, DataGridTableInternal };
+export type { DataGridTableProps };
 export default DataGridTable;

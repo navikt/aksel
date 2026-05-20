@@ -51,24 +51,24 @@ export const Resize: Story = {
   },
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
         align: "left",
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
         header: "Center",
         align: "center",
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
         header: "Right",
         align: "right",
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -77,7 +77,7 @@ export const Resize: Story = {
 export const ResizeMinMax: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
@@ -87,7 +87,7 @@ export const ResizeMinMax: Story = {
           resizeMin: 100,
           resizeMax: 200,
         },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
@@ -97,7 +97,7 @@ export const ResizeMinMax: Story = {
           resizeMin: 50,
           resizeMax: 400,
         },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
@@ -108,7 +108,7 @@ export const ResizeMinMax: Story = {
           resizeMin: 200,
           resizeMax: 400,
         },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -117,27 +117,27 @@ export const ResizeMinMax: Story = {
 export const ResizeDefaultStaticWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
         align: "left",
         width: { defaultValue: "300px" },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
         header: "Center",
         align: "center",
         width: { defaultValue: "300px" },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
         header: "Right",
         align: "right",
         width: { defaultValue: "300px" },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -146,27 +146,27 @@ export const ResizeDefaultStaticWidth: Story = {
 export const ResizeDefaultDynamicWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "Left",
         align: "left",
         width: { defaultValue: "100%" },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
         header: "Center",
         align: "center",
         width: { defaultValue: "100%" },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
         header: "Right",
         align: "right",
         width: { defaultValue: "100%" },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -175,7 +175,7 @@ export const ResizeDefaultDynamicWidth: Story = {
 export const ResizeAuto: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
         header: "L",
@@ -184,7 +184,7 @@ export const ResizeAuto: Story = {
           defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
@@ -194,7 +194,7 @@ export const ResizeAuto: Story = {
           defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
@@ -204,7 +204,7 @@ export const ResizeAuto: Story = {
           defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
       {
         id: "headingIsWidest",
@@ -213,7 +213,7 @@ export const ResizeAuto: Story = {
           defaultValue: 50,
           autoResizeOnce: true,
         },
-        cell: () => "Test",
+        bodyCell: () => "Test",
       },
       {
         id: "headingIsWidestSortable",
@@ -222,8 +222,8 @@ export const ResizeAuto: Story = {
           defaultValue: 50,
           autoResizeOnce: true,
         },
-        sortable: true,
-        cell: () => "Test",
+        isSortable: true,
+        bodyCell: () => "Test",
       },
     ],
   },

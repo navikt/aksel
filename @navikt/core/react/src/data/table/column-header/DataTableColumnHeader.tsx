@@ -30,11 +30,6 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    */
   sortable?: boolean;
   /**
-   * Called when the user clicks the header. Only relevant when `sortable` is true.
-   * The consumer is responsible for determining and setting the next sort state.
-   */ // TODO: We don't use the term "consumer" in JSDoc anywhere else
-  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO Not in use???
-  /**
    * Object with props related to column width and resizing. Summary:
    *
    * - `resizable?: boolean` - Whether the column should be resizable by the user.
@@ -42,7 +37,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * - `resizeMin?: number` - Minimum width of the column when resizing.
    * - `resizeMax?: number` - Maximum width of the column when resizing.
    * - `value?: number | string` - Controlled width of the column.
-   * - `default?: number | string` - Initial width of the column.
+   * - `defaultValue?: number | string` - Initial width of the column.
    * - `onChange?: (width: number) => void` - Called when the column width changes.
    *
    * See individual props for details and defaults.

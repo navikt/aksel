@@ -20,7 +20,7 @@ interface DataTableBaseCellProps extends Omit<
    */
   cellType?: "action";
   /**
-   * When true, clicking this cell will not trigger `onRowClick` on the row.
+   * When true, clicking this cell will not trigger `onRowAction` on the row.
    * Useful for cells that contain their own interactive content or actions
    * that should be independent of row-level click handling.
    */

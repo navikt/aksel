@@ -15,7 +15,6 @@ import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
-import type { SelectionProps } from "../table/hooks/useTableSelection";
 import { DataGridTable } from "../table/root/DataGridTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
@@ -215,7 +214,7 @@ type Story = StoryObj<typeof DataGridTable>;
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
-          withKeyboardNav
+
         >
           <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
@@ -386,7 +385,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["selectionMode"]>("none");
+      useState<DataGrid.Selection["mode"]>("none");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -590,7 +589,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                           value={selectionMode}
                           onChange={(e) =>
                             setSelectionMode(
-                              e.target.value as SelectionProps["selectionMode"],
+                              e.target.value as DataGrid.Selection["mode"],
                             )
                           }
                         >
@@ -674,12 +673,12 @@ export const KitchenSinkAdvancedFilter: Story = {
 
         <DataGrid
           getRowId={(row) => row.name}
-          columnDefinitions={columnView.filter((col) =>
+          columns={columnView.filter((col) =>
             visibleColumns.find((c) => c === col.id),
           )}
           data={pagedData.paginatedData}
           selection={{
-            selectionMode,
+            mode: selectionMode,
           }}
           settings={{
             rowDensity,
@@ -693,7 +692,6 @@ export const KitchenSinkAdvancedFilter: Story = {
           }}
         >
           <DataGrid.Table<(typeof TEST_DATA)[number]>
-            withKeyboardNav
             stickyHeader
             detailsPanel={
               showDetailsPanel

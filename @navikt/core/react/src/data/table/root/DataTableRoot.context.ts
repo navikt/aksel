@@ -19,7 +19,7 @@ type DataTableContextProps<T> = {
   stickyHeader: boolean;
   tableId: string;
   loading: DataTableLoadingConfig | undefined;
-  onRowClick?: (
+  onRowAction?: (
     rowId: TableRowEntryId,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;

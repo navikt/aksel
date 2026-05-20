@@ -115,6 +115,13 @@ const KOMPONENT_BY_SLUG_QUERY =
       ${destructureBlocks}
       }
     },
+    status{
+      ...,
+      preview_note[]{
+        ...,
+        ${destructureBlocks}
+      },
+    },
     content[]{
       ...,
       ${destructureBlocks}

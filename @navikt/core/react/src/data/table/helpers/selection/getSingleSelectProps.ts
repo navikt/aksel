@@ -1,12 +1,12 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { TableRowEntryId } from "../../root/DataGridTable.types";
-import type { SelectedKeysT, SelectionProps } from "./selection.types";
+import type { SelectionProps } from "./selection.types";
 import { canSelectTableRow } from "./selection.utils";
 
 type GetSingleSelectPropsArgs<T> = {
   selectedKeysSet: Set<TableRowEntryId>;
-  setSelectedKeys: (keys: SelectedKeysT) => void;
+  setSelectedKeys: (keys: string[]) => void;
   name: string;
 } & Pick<SelectionProps<T>, "enableRowSelection">;
 
