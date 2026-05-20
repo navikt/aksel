@@ -131,14 +131,29 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
     [setNestedSubRowsExpandedIds],
   );
 
-  return {
-    items: visibleItems,
-    itemDetails,
-    visibleRowIds,
-    childRowIdsById,
-    onExpandedRowIdsChange: handleExpandedSubRowIdChange,
-    isSubRowExpanded: (id: string) => expandedIdsSet.has(id),
-  };
+  const isSubRowExpanded = useCallback(
+    (id: string) => expandedIdsSet.has(id),
+    [expandedIdsSet],
+  );
+
+  return useMemo(
+    () => ({
+      items: visibleItems,
+      itemDetails,
+      visibleRowIds,
+      childRowIdsById,
+      onExpandedRowIdsChange: handleExpandedSubRowIdChange,
+      isSubRowExpanded,
+    }),
+    [
+      visibleItems,
+      itemDetails,
+      visibleRowIds,
+      childRowIdsById,
+      handleExpandedSubRowIdChange,
+      isSubRowExpanded,
+    ],
+  );
 }
 
 export { useTableItems };

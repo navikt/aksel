@@ -56,7 +56,11 @@ const Example = () => {
 
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={localData}>
+      <DataGrid
+        columns={columns}
+        data={localData}
+        getRowId={(row) => row.caseId}
+      >
         <DataGrid.Table
           sorting={{
             allowMultiSort: true,
@@ -81,4 +85,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "I tilfeller der data endres dynamiskt, bør du bruke 'getRowId' for å beholde ytelsen.",
 };
