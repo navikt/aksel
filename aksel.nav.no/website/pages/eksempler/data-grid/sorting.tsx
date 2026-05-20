@@ -56,7 +56,7 @@ const Example = () => {
 
   return (
     <Stack height="100vh" padding="space-16" wrap={false}>
-      <DataGrid columns={columns} data={localData}>
+      <DataGrid columns={columns} data={localData} isLoading>
         <DataGrid.Table
           sorting={{
             allowMultiSort: true,

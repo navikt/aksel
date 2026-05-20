@@ -111,6 +111,8 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"content"` — renders custom content inside a full-width row.
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
+   *
+   * @default { variant: "skeleton", rows: 5 }
    */
   loadingContent?: DataTableLoadingConfig;
   /**
@@ -145,7 +147,11 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent,
+      loadingContent = {
+        variant: "skeleton",
+        rows: 5,
+        label: "Laster innhold",
+      },
       detailsPanel,
       subRows,
       sorting,

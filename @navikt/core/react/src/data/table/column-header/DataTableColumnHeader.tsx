@@ -6,6 +6,7 @@ import {
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
@@ -74,6 +75,7 @@ const DataTableColumnHeader = forwardRef<
     },
     forwardedRef,
   ) => {
+    const { isLoading } = useDataGridContext();
     const thRef = useRef<HTMLTableCellElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, thRef);
     const { sortingState } = useDataTableContext();
@@ -108,11 +110,13 @@ const DataTableColumnHeader = forwardRef<
         cellType={cellType}
         aria-labelledby={contentId} // Avoids VO announcing "Endre bredde" when navigating horizontally in tbody
       >
-        {canSort ? (
+        {/* TODO: Consider more gracefull disabling of button when loading */}
+        {canSort && !isLoading ? (
           <button
             type="button"
             className="aksel-data-table__th-sort-button"
             onClick={(event) => onSortClick(id, event)}
+            disabled={isLoading}
           >
             <div id={contentId} className="aksel-data-table__th-content">
               {children}
