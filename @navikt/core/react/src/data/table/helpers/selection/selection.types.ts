@@ -32,7 +32,6 @@ type SelectionProps<T = any> = {
   /**
    * Callback to determine if a row should be enabled for selection.
    *
-   *
    * If set to a boolean, it will enable selection for all rows when true, and disable selection for all rows when false.
    */
   enableRowSelection?:

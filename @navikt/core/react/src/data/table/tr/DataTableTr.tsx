@@ -64,7 +64,11 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     const isSticky = location === "thead" && stickyHeader;
 
     const handleClick =
-      location === "tbody" && rowId !== undefined
+      location === "tbody" &&
+      rowId !== undefined &&
+      ((selectionState.selectionTrigger === "row" &&
+        selectionState.selection.selectionMode !== "none") ||
+        onRowClick)
         ? (event: React.MouseEvent<HTMLTableRowElement>) => {
             if (
               rowId === undefined ||
@@ -94,7 +98,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               }
               selectionState.selection.toggleSelection(rowId, rowData);
             }
-            onRowClick?.(rowId, event);
+            onRowClick?.(rowId, event); // TODO: Call this first, and respect if event.preventDefault() is called
           }
         : undefined;
 

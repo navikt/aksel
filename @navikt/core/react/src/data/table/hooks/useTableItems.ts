@@ -25,7 +25,7 @@ type SubRowsProps<T> = {
    */
   onExpandedRowIdsChange?: (ids: TableRowEntryId[]) => void;
   /**
-   * Function to get whether a row should be expandable.
+   * Determines whether a row should be expandable.
    * By default, all rows are expandable when `getRows` is provided.
    */
   isRowExpandable?: (rowData: T) => boolean;

@@ -19,21 +19,22 @@ interface DataGridProps<RowT> {
   className?: string;
   style?: React.CSSProperties;
   /**
-   * Definitions of the columns to display in the data grid.
-   *
-   * Each column definition should have a unique `id` and a `cell`-renderer function that takes the row data as argument and returns a React node.
+   * Definitions of the columns to display.
    */
   columnDefinitions: ColumnDefinitions<RowT>;
   /**
    * The data to display.
    *
-   * Each object in the array represents a row, and the properties of the object are used to render the cells based on the `columnDefinitions`.
+   * Each object in the array represents a row, and the properties of the
+   * object are used to render the cells based on `columnDefinitions`.
    */
   data: RowT[];
   /**
-   * Function to get unique row id from row data.
+   * Function to get unique row ID from row data.
    *
-   * If not provided, the row index will be used as id. This can cause issues if your data changes dynamically, so it's recommended to provide a stable id if possible.
+   * If not provided, the row index will be used as ID.
+   * This can cause issues if your data changes dynamically,
+   * so it's recommended to provide a stable ID if possible.
    */
   getRowId?: (rowData: RowT) => string;
   /**
@@ -42,11 +43,12 @@ interface DataGridProps<RowT> {
   selection?: SelectionProps<RowT>;
   /**
    * Determines if the data grid is in a loading state.
+   * See `loadingContent` prop on the `DataGrid.Table` component for display settings.
    * @default false
    */
   isLoading?: boolean;
   /**
-   * Default settings for the data grid, used when the component is uncontrolled. Should not be used together with `settings`.
+   * Settings for the data grid.
    */
   settings?: DataGridSettings;
 }
@@ -56,12 +58,21 @@ interface DataGridComponent {
     props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
   ): React.ReactElement | null;
   /**
-   * TODO: JS Doc for DataGrid.Table
+   * @see 🏷️ {@link DataGridTableProps}
+   *
+   * @example
+   * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+   *   <DataGrid.Table />
+   * </DataGrid>
    */
   Table: typeof DataGridTable;
 }
 
 /**
+ * Component for displaying tabular data.
+ *
+ * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
+ *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/data-grid)
  * @see 🏷️ {@link DataGridProps}
  *

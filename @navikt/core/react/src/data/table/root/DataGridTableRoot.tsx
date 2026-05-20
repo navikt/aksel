@@ -101,8 +101,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   stickyHeader?: boolean;
   /**
-   * Callback invoked when a data row is clicked.
-   * Not called when clicking header, loading, or empty-state rows.
+   * Callback invoked when a row in the table body is clicked.
    */
   onRowClick?: (
     rowId: TableRowEntryId,
@@ -110,7 +109,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   ) => void;
   /**
    * Content to render when `data` is empty.
-   * Rendered inside a `DataTable.EmptyState` row spanning all columns.
+   * Rendered inside a row spanning all columns.
    */
   emptyContent?: React.ReactNode;
   /**

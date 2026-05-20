@@ -17,7 +17,7 @@ type DetailsPanelProps<T> = {
   isRowExpandable?: (rowData: T) => boolean;
   /**
    * Controlled list of expanded row IDs.
-   * Use with `onDetailsPanelChange` for controlled usage, or `defaultDetailsPanelRowIds` for uncontrolled.
+   * Use with `onExpandedRowIdsChange` for controlled usage, or `defaultExpandedRowIds` for uncontrolled.
    */
   expandedRowIds?: TableRowEntryId[];
   /**
