@@ -51,7 +51,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader, selectionState, onRowClick } =
+    const { layout, stickyHeader, selectionState, onRowAction } =
       useDataTableContext();
     const { location } = useDataTableLocation();
     const { tableItems } = useDataTableContext();
@@ -68,7 +68,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
       rowId !== undefined &&
       ((selectionState.selectionTrigger === "row" &&
         selectionState.selection.mode !== "none") ||
-        onRowClick)
+        onRowAction)
         ? (event: React.MouseEvent<HTMLTableRowElement>) => {
             if (
               rowId === undefined ||
@@ -77,6 +77,11 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
                 "[data-prevent-row-click]",
               )
             ) {
+              return;
+            }
+
+            onRowAction?.(rowId, event);
+            if (event.defaultPrevented) {
               return;
             }
 
@@ -98,7 +103,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               }
               selectionState.selection.toggleSelection(rowId, rowData);
             }
-            onRowClick?.(rowId, event); // TODO: Call this first, and respect if event.preventDefault() is called
           }
         : undefined;
 

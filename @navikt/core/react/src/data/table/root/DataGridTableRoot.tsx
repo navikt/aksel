@@ -102,8 +102,10 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   stickyHeader?: boolean;
   /**
    * Callback invoked when a row in the table body is clicked.
+   *
+   * Call `event.preventDefault()` inside the callback to prevent the default row click behavior, such as selection.
    */
-  onRowClick?: (
+  onRowAction?: (
     rowId: TableRowEntryId,
     event: React.MouseEvent<HTMLTableRowElement>,
   ) => void;
@@ -152,7 +154,7 @@ const DataGridTableInternal = forwardRef<
       withKeyboardNav = true,
       layout = "fixed",
       stickyHeader = true,
-      onRowClick,
+      onRowAction,
       emptyContent,
       loadingContent,
       detailsPanel,
@@ -209,7 +211,7 @@ const DataGridTableInternal = forwardRef<
         stickyHeader={stickyHeader}
         tableId={tableId}
         loading={loadingContent}
-        onRowClick={onRowClick}
+        onRowAction={onRowAction}
         columns={columns}
         totalColSpan={totalColSpan}
         tableItems={tableItems}

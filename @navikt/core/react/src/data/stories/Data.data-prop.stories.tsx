@@ -823,7 +823,7 @@ export const RowClick: Story = {
       }}
     >
       <DataGrid.Table
-        onRowClick={(rowId) => console.info("Row clicked!: ", rowId)}
+        onRowAction={(rowId) => console.info("Row clicked!: ", rowId)}
         withKeyboardNav
       />
     </DataGrid>
@@ -840,30 +840,30 @@ export const RowClickTest: Story = {
         mode: "multiple",
       }}
     >
-      <DataGrid.Table onRowClick={rowClickSpy} />
+      <DataGrid.Table onRowAction={rowClickSpy} />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     rowClickSpy.mockClear();
     const canvas = within(canvasElement);
 
-    // Click a plain text cell — should fire onRowClick
+    // Click a plain text cell — should fire onRowAction
     const allCells = canvas.getAllByRole("cell");
     await userEvent.click(allCells[1]); // "foo" cell of first row
     expect(rowClickSpy).toHaveBeenCalledTimes(1);
     rowClickSpy.mockClear();
 
-    // Click a link — should NOT fire onRowClick
+    // Click a link — should NOT fire onRowAction
     const links = canvas.getAllByRole("link");
     await userEvent.click(links[0]);
     expect(rowClickSpy).not.toHaveBeenCalled();
 
-    // Click a button — should NOT fire onRowClick
+    // Click a button — should NOT fire onRowAction
     const buttons = canvas.getAllByRole("button");
     await userEvent.click(buttons[0]);
     expect(rowClickSpy).not.toHaveBeenCalled();
 
-    // Click a checkbox — should NOT fire onRowClick
+    // Click a checkbox — should NOT fire onRowAction
     const inputs = canvas.getAllByRole("textbox");
     await userEvent.click(inputs[0]);
     expect(rowClickSpy).not.toHaveBeenCalled();
@@ -881,7 +881,7 @@ export const RowExpansion: Story = {
       }}
     >
       <DataGrid.Table<UserDataTest>
-        onRowClick={() => console.info("Row clicked!")}
+        onRowAction={() => console.info("Row clicked!")}
         withKeyboardNav
       />
     </DataGrid>
@@ -900,7 +900,7 @@ export const RowExpansionAll: Story = {
       }}
     >
       <DataGrid.Table<UserDataTest>
-        onRowClick={() => console.info("Row clicked!")}
+        onRowAction={() => console.info("Row clicked!")}
         withKeyboardNav
         detailsPanel={{
           getContent: (rowData) => {
