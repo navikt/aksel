@@ -534,7 +534,7 @@ export namespace DataGridTable {
   export type SortEntry = import("./DataGridTable.types").SortEntry;
   export type SortChangeDetail =
     import("./DataGridTable.types").SortChangeDetail;
-  export type LoadingConfig = DataTableLoadingConfig;
+  export type LoadingContent = DataTableLoadingConfig;
   export type SubRows<T = unknown> = SubRowsProps<T>;
   export type DetailsPanel<T = unknown> = DetailsPanelProps<T>;
 }

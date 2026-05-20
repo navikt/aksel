@@ -140,7 +140,7 @@ export namespace DataGridRoot {
     export type Sorting = DataGridTable.Sorting;
     export type SortEntry = DataGridTable.SortEntry;
     export type SortChangeDetail = DataGridTable.SortChangeDetail;
-    export type LoadingConfig = DataGridTable.LoadingConfig;
+    export type LoadingContent = DataGridTable.LoadingContent;
     export type SubRows<T = unknown> = DataGridTable.SubRows<T>;
     export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
   }
