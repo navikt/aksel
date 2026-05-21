@@ -1,12 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
-import { TestFlaskIcon } from "@navikt/aksel-icons";
-import {
-  InfoCard,
-  InfoCardContent,
-  InfoCardHeader,
-  InfoCardTitle,
-} from "@navikt/ds-react/InfoCard";
 import { DesignsystemetKomponentIntro } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.intro";
 import {
   DesignsystemetPageHeader,
@@ -20,6 +13,7 @@ import {
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { PreviewNote } from "./PreviewNote";
 
 async function KomponenterPage({ slug }: { slug: string }) {
   const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
@@ -59,16 +53,9 @@ async function KomponenterPage({ slug }: { slug: string }) {
         )}
 
         {renderPreviewNote && (
-          <InfoCard data-block-margin="space-28" data-color="meta-purple">
-            <InfoCardHeader icon={<TestFlaskIcon aria-hidden />}>
-              <InfoCardTitle>Preview</InfoCardTitle>
-            </InfoCardHeader>
-            <InfoCardContent>
-              <CustomPortableText
-                value={pageData.status?.preview_note as PortableTextBlock[]}
-              />
-            </InfoCardContent>
-          </InfoCard>
+          <PreviewNote
+            content={pageData.status?.preview_note as PortableTextBlock[]}
+          />
         )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />

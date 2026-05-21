@@ -161,7 +161,7 @@ export default function LogEntry({
                 <ShowMore.Button>
                   <Button
                     size="small"
-                    variant="secondary-neutral"
+                    variant="secondary"
                     className={
                       fremhevet ? styles.showMoreButtonFremhevet : undefined
                     }
