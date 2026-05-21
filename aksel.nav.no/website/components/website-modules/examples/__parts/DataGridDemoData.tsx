@@ -67,13 +67,13 @@ function createDemoRows(count: number): CaseT[] {
 }
 
 /* prettier-ignore */
-function createDemoColumns({ withSorting = false, withNesting = false }: { withSorting?: boolean; withNesting?: boolean; } = {}): DataGrid.Columns<CaseT> {
+function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } = {}): DataGrid.Columns<CaseT> {
   return [
     {
       id: "caseId",
       header: "Id",
       bodyCell: ({ caseId }) => caseId.toString(),
-      width: withNesting ? { defaultValue: 130 } : { autoResizeOnce: true },
+      width: { autoResizeOnce: true },
       isRowHeader: true,
     },
     {
