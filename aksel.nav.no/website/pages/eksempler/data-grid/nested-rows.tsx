@@ -3,7 +3,7 @@ import { DataGrid } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 import { generateDataGridDemo } from "../../../components/website-modules/examples/__parts/DataGridDemoData";
 
-const { columns, data } = generateDataGridDemo();
+const { columns, data } = generateDataGridDemo({ withNesting: true });
 
 const Example = () => {
   return (

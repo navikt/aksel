@@ -32,13 +32,14 @@ type CaseT = {
 
 function generateDataGridDemo({
   withSorting = false,
-}: { withSorting?: boolean } = {}) {
+  withNesting = false,
+}: { withSorting?: boolean; withNesting?: boolean } = {}) {
   const columns: DataGrid.Columns<CaseT> = [
     {
       id: "caseId",
       header: "Id",
       bodyCell: ({ caseId }) => caseId.toString(),
-      width: { autoResizeOnce: true },
+      width: withNesting ? { defaultValue: 130 } : { autoResizeOnce: true },
       isRowHeader: true,
     },
     {
