@@ -22,7 +22,7 @@ type CaseT = {
   sender: string;
   age: Date;
   status:
-    | "Mottat"
+    | "Mottatt"
     | "Under behandling"
     | "Avventer opplysninger"
     | "Til godkjenning"
@@ -100,7 +100,7 @@ function generateDataGridDemo({
     {
       id: "deadline",
       header: "Frist",
-      bodyCell: DeadLineCell,
+      bodyCell: DeadlineCell,
       align: "right",
       width: { defaultValue: 130 },
       isSortable: withSorting,
@@ -119,6 +119,7 @@ function generateDataGridDemo({
                 variant="tertiary"
                 size="xsmall"
                 data-color="neutral"
+                title="Åpne handlingsmeny"
                 icon={<MenuElipsisVerticalIcon aria-hidden />}
               />
             </ActionMenu.Trigger>
@@ -148,7 +149,7 @@ function generateDataGridDemo({
     age: new Date(Date.now() - index * 1000 * 60 * 60 * 24),
     status: (
       [
-        "Mottat",
+        "Mottatt",
         "Under behandling",
         "Avventer opplysninger",
         "Til godkjenning",
@@ -191,7 +192,7 @@ function PriorityTag({ priority }: { priority: CaseT["priority"] }) {
 
 const now = Date.now();
 
-function DeadLineCell({ deadline }: { deadline: CaseT["deadline"] }) {
+function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
   const isOverdue = deadline.getTime() < now;
 
   return (
