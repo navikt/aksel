@@ -142,7 +142,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
 
 const DataGridTableInternal = forwardRef<
   HTMLTableElement,
-  DataGridTableProps<unknown>
+  DataGridTableProps<any>
 >(
   (
     {
@@ -155,14 +155,14 @@ const DataGridTableInternal = forwardRef<
       loadingContent = {
         variant: "skeleton",
         rows: 5,
-        label: "Laster innhold", // TODO translate
-      },
+        label: "Laster innhold",
+      }, // TODO translate label
       detailsPanel,
       subRows,
       sorting,
       selectionTrigger = "row",
       ...rest
-    }: DataGridTableProps<any>, // Have to use <any> for docgen to work
+    }: DataGridTableProps<unknown>,
     forwardedRef,
   ) => {
     const {
@@ -543,8 +543,8 @@ const DataTableDataRow = memo(
     prev.details.children.length === next.details.children.length,
 );
 
-const DataGridTable = DataGridTableInternal as <T>(
-  props: DataGridTableProps<T> & React.RefAttributes<HTMLTableElement>,
+const DataGridTable = DataGridTableInternal as <RowT>(
+  props: DataGridTableProps<RowT> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export

@@ -75,7 +75,7 @@ interface DataGridComponent {
  * </DataGrid>
  * ```
  */
-const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
+const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
   (
     {
       children,
@@ -122,12 +122,13 @@ const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
       </div>
     );
   },
-) as unknown as DataGridComponent;
+);
 
-DataGridRoot.Table = DataGridTable;
+const DataGrid = DataGridInternal as unknown as DataGridComponent;
+DataGrid.Table = DataGridTable;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
-export namespace DataGridRoot {
+export namespace DataGrid {
   export type Props<T = unknown> = DataGridProps<T>;
   export type Columns<T = unknown> = ColumnDefinitions<T>;
   export type Selection<T = unknown> = SelectionProps<T>;
@@ -147,5 +148,5 @@ export namespace DataGridRoot {
 }
 
 // eslint-disable-next-line import/export
-export { DataGridRoot };
-export default DataGridRoot;
+export { DataGrid, DataGridInternal }; // DataGridRoot needs to be exported b.c. of docgen
+export default DataGrid;
