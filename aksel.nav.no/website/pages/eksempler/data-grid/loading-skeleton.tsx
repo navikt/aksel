@@ -1,4 +1,4 @@
-import { Stack } from "@navikt/ds-react";
+import { VStack } from "@navikt/ds-react";
 import { DataGrid } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 import { generateDataGridDemo } from "../../../components/website-modules/examples/__parts/DataGridDemoData";
@@ -7,7 +7,7 @@ const { columns, data } = generateDataGridDemo();
 
 const Example = () => {
   return (
-    <Stack height="100vh" padding="space-16" wrap={false}>
+    <VStack height="100vh" padding="space-16">
       <DataGrid
         columns={columns}
         data={data}
@@ -19,7 +19,7 @@ const Example = () => {
           loadingContent={{ variant: "skeleton", rows: 6 }}
         />
       </DataGrid>
-    </Stack>
+    </VStack>
   );
 };
 
