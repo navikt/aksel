@@ -56,53 +56,67 @@ function useTableSelection<T>({
     [selectedKeysSet],
   );
 
-  const baseSelection = { selectedKeys, isRowSelected };
+  return useMemo(() => {
+    const baseSelection = { selectedKeys, isRowSelected };
 
-  if (mode === "none") {
+    if (mode === "none") {
+      return {
+        selection: {
+          mode,
+          ...baseSelection,
+          selectedKeys: [],
+        },
+        selectionTrigger,
+        renderSelection: false,
+      };
+    }
+
+    if (mode === "single") {
+      return {
+        selection: {
+          mode,
+          ...baseSelection,
+          ...getSingleSelectProps({
+            selectedKeysSet,
+            setSelectedKeys,
+            name: radioGroupName,
+            enableRowSelection,
+          }),
+        },
+        selectionTrigger,
+        renderSelection: visibleRowIds.length !== 0,
+      };
+    }
+
     return {
       selection: {
         mode,
         ...baseSelection,
-        selectedKeys: [],
-      },
-      selectionTrigger,
-      renderSelection: false,
-    };
-  }
-
-  if (mode === "single") {
-    return {
-      selection: {
-        mode,
-        ...baseSelection,
-        ...getSingleSelectProps({
+        ...getMultipleSelectProps({
           selectedKeysSet,
+          selectedKeys,
           setSelectedKeys,
-          name: radioGroupName,
           enableRowSelection,
+          tableItems,
+          isLoading,
         }),
       },
       selectionTrigger,
       renderSelection: visibleRowIds.length !== 0,
     };
-  }
-
-  return {
-    selection: {
-      mode,
-      ...baseSelection,
-      ...getMultipleSelectProps({
-        selectedKeysSet,
-        selectedKeys,
-        setSelectedKeys,
-        enableRowSelection,
-        tableItems,
-        isLoading,
-      }),
-    },
+  }, [
+    mode,
+    selectedKeys,
+    selectedKeysSet,
+    isRowSelected,
     selectionTrigger,
-    renderSelection: visibleRowIds.length !== 0,
-  };
+    visibleRowIds,
+    setSelectedKeys,
+    radioGroupName,
+    enableRowSelection,
+    tableItems,
+    isLoading,
+  ]);
 }
 
 /**

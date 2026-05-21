@@ -95,10 +95,15 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    *
    * Call `event.preventDefault()` inside the callback to prevent the default row click behavior, such as selection.
    */
-  onRowAction?: (
-    rowId: string,
-    event: React.MouseEvent<HTMLTableRowElement>,
-  ) => void;
+  onRowAction?: ({
+    row,
+    id,
+    event,
+  }: {
+    row: T;
+    id: string;
+    event: React.MouseEvent<HTMLTableRowElement>;
+  }) => void;
   /**
    * Content to render when `data` is empty.
    * Rendered inside a row spanning all columns.
@@ -111,6 +116,8 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"content"` — renders custom content inside a full-width row.
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
+   *
+   * @default { variant: "skeleton", rows: 5 }
    */
   loadingContent?: DataTableLoadingConfig;
   /**
@@ -145,7 +152,11 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent,
+      loadingContent = {
+        variant: "skeleton",
+        rows: 5,
+        label: "Laster innhold",
+      },
       detailsPanel,
       subRows,
       sorting,
@@ -473,55 +484,64 @@ interface DataTableDataRowProps {
   columns: ReturnType<typeof useColumnOptions>["columns"];
 }
 
-const DataTableDataRow = memo(function DataTableDataRow({
-  rowData,
-  details,
-  columns,
-}: DataTableDataRowProps) {
-  const hasSubRows = details.children.length > 0;
+const DataTableDataRow = memo(
+  function DataTableDataRow({
+    rowData,
+    details,
+    columns,
+  }: DataTableDataRowProps) {
+    const hasSubRows = details.children.length > 0;
 
-  return (
-    <>
-      <DataTableTr rowId={details.id}>
-        {columns.map(
-          (
-            { isSticky, isStickyLast, stickyLeftOffset, colDef },
-            colDefIndex,
-          ) => {
-            const renderNestedToggle = colDefIndex === 0 && hasSubRows;
-            const renderNestedIndent =
-              colDefIndex === 0 && (details.level > 0 || hasSubRows);
+    return (
+      <>
+        <DataTableTr rowId={details.id}>
+          {columns.map(
+            (
+              { isSticky, isStickyLast, stickyLeftOffset, colDef },
+              colDefIndex,
+            ) => {
+              const renderNestedToggle = colDefIndex === 0 && hasSubRows;
+              const renderNestedIndent =
+                colDefIndex === 0 && (details.level > 0 || hasSubRows);
 
-            const style: React.CSSProperties = {
-              "--__axc-data-table-nested-depth": details.level,
-              ...(stickyLeftOffset ? { left: stickyLeftOffset } : {}),
-            };
+              const style: React.CSSProperties = {
+                "--__axc-data-table-nested-depth": details.level,
+                ...(stickyLeftOffset ? { left: stickyLeftOffset } : {}),
+              };
 
-            return (
-              <DataTableBaseCell
-                align={colDef.align ?? "left"}
-                key={colDef.id || colDefIndex}
-                as={colDef.isRowHeader ? "th" : "td"}
-                isSticky={isSticky}
-                data-nested={renderNestedIndent || undefined}
-                data-sticky-last={isStickyLast || undefined}
-                style={style}
-                beforeContent={
-                  renderNestedToggle ? (
-                    <DataTableSubRowToggle details={details} />
-                  ) : undefined
-                }
-              >
-                {colDef.bodyCell(rowData)}
-              </DataTableBaseCell>
-            );
-          },
-        )}
-      </DataTableTr>
-      <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
-    </>
-  );
-});
+              return (
+                <DataTableBaseCell
+                  align={colDef.align ?? "left"}
+                  key={colDef.id || colDefIndex}
+                  as={colDef.isRowHeader ? "th" : "td"}
+                  isSticky={isSticky}
+                  data-nested={renderNestedIndent || undefined}
+                  data-sticky-last={isStickyLast || undefined}
+                  style={style}
+                  beforeContent={
+                    renderNestedToggle ? (
+                      <DataTableSubRowToggle details={details} />
+                    ) : undefined
+                  }
+                >
+                  {colDef.bodyCell(rowData)}
+                </DataTableBaseCell>
+              );
+            },
+          )}
+        </DataTableTr>
+        <DataTableDetailsPanelRow rowId={details.id} rowData={rowData} />
+      </>
+    );
+  },
+  /* TODO: Might be some better metrics we could use to optimize this */
+  (prev, next) =>
+    prev.rowData === next.rowData &&
+    prev.columns === next.columns &&
+    prev.details.id === next.details.id &&
+    prev.details.level === next.details.level &&
+    prev.details.children.length === next.details.children.length,
+);
 
 const DataGridTable = DataGridTableInternal as <T>(
   props: DataGridTableProps<T> & React.RefAttributes<HTMLTableElement>,

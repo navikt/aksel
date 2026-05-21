@@ -80,7 +80,22 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
               return;
             }
 
-            onRowAction?.(rowId, event);
+            if (onRowAction) {
+              const rowData = tableItems.itemDetails.get(rowId)?.rowData;
+
+              if (rowData) {
+                onRowAction({
+                  row: rowData,
+                  id: rowId,
+                  event,
+                });
+              } else {
+                consoleWarning(
+                  `DataGrid.Table: Unable to find row data for rowId ${rowId} when calling onRowAction.`,
+                );
+              }
+            }
+
             if (event.defaultPrevented) {
               return;
             }

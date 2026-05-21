@@ -6,10 +6,7 @@ import type {
 import type { UseTableItemsReturn } from "../hooks/useTableItems";
 import type { UseTableSelectionReturn } from "../hooks/useTableSelection";
 import type { UseTableSortResults } from "../hooks/useTableSort";
-import type {
-  DataTableLoadingConfig,
-  TableRowEntryId,
-} from "./DataGridTable.types";
+import type { DataTableLoadingConfig } from "./DataGridTable.types";
 
 type DataTableContextProps<T> = {
   layout: "fixed" | "auto";
@@ -19,10 +16,15 @@ type DataTableContextProps<T> = {
   stickyHeader: boolean;
   tableId: string;
   loading: DataTableLoadingConfig | undefined;
-  onRowAction?: (
-    rowId: TableRowEntryId,
-    event: React.MouseEvent<HTMLTableRowElement>,
-  ) => void;
+  onRowAction?: ({
+    row,
+    id,
+    event,
+  }: {
+    row: T;
+    id: string;
+    event: React.MouseEvent<HTMLTableRowElement>;
+  }) => void;
   columns: UseColumnOptionsResult<T>["columns"];
   /**
    * Used to set exact colspan for detailsPanel, loadingState and emptyState.

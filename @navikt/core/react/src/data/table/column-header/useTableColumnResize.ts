@@ -344,7 +344,12 @@ function getAutoColumnWidth(
     // Find needed width
     const cellContent = cell.querySelector(
       ".aksel-data-table__cell-content",
-    ) as HTMLElement;
+    ) as HTMLElement | null;
+
+    if (!cellContent) {
+      continue;
+    }
+
     cellContent.style.width = "fit-content";
     const cellContentWidth = cellContent.scrollWidth;
     cellContent.style.removeProperty("width");
