@@ -17,7 +17,6 @@ type CaseT = {
   caseType: "Vedtak" | "Journalføring" | "Behandling" | "Godkjent behandling";
   location: string;
   keywords: string[];
-  createdAt: Date;
   priority: 0 | 1 | 2 | 3;
   sender: string;
   age: Date;
@@ -41,13 +40,6 @@ function generateDataGridDemo({
       bodyCell: ({ caseId }) => caseId.toString(),
       width: withNesting ? { defaultValue: 130 } : { autoResizeOnce: true },
       isRowHeader: true,
-    },
-    {
-      id: "createdAt",
-      header: "Opprettet",
-      bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
-      width: { defaultValue: 110 },
-      isSortable: withSorting,
     },
     {
       id: "caseType",
