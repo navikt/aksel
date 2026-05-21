@@ -84,6 +84,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
   desc: "I tilfeller der data endres dynamisk, bør du bruke `getRowId` for å beholde ytelsen.",
 };

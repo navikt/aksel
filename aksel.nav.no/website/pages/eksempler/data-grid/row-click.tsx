@@ -9,7 +9,9 @@ const Example = () => {
   return (
     <VStack height="100vh" padding="space-16">
       <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
-        <DataGrid.Table onRowAction={(row) => alert(`Klikket på rad ${row.id}!`)} />
+        <DataGrid.Table
+          onRowAction={(row) => alert(`Klikket på rad ${row.id}!`)}
+        />
       </DataGrid>
     </VStack>
   );
@@ -26,6 +28,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 99,
+  index: 13,
   desc: "`onRowAction`-callbacken gir tilgang til raden som ble klikket på, og kan brukes til å utføre en handling basert på denne raden.",
 };
