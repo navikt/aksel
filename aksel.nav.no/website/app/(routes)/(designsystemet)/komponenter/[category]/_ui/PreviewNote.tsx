@@ -30,7 +30,7 @@ export const PreviewNote = ({ content }: { content: PortableTextBlock[] }) => {
         <InfoCardTitle>Preview</InfoCardTitle>
       </InfoCardHeader>
       <InfoCardContent>
-        <ShowMore as="div" scrollBackOnCollapse={true} scrollTargetRef={ref}>
+        <ShowMore as="div" scrollTargetRef={ref}>
           <ShowMore.Content collapsedHeight="16rem">
             <CustomPortableText value={content} />
           </ShowMore.Content>
