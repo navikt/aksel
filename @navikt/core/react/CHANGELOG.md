@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 8.11.0
+
+### Minor Changes
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+### Patch Changes
+
+- Updated dependencies [[`76e0410`](https://github.com/navikt/aksel/commit/76e04106f792516afc986a003dd6f451f8064f84)]:
+  - @navikt/aksel-icons@8.11.0
+  - @navikt/ds-tokens@8.11.0
+
 ## 8.10.6
 
 ### Patch Changes
