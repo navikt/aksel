@@ -45,21 +45,18 @@
 
   /* Default font size is prop "medium", which is variable --ax-font-size-large */
   --__axc-data-table-text-size: var(--ax-font-size-large);
-  --__axc-data-table-density-base: var(--ax-space-16);
-  --__axc-data-table-density-scale: 1;
-  --__axc-data-table-density: calc(var(--__axc-data-table-density-base) * var(--__axc-data-table-density-scale));
+  --__axc-data-table-density: var(--ax-space-12);
 
   &[data-text-size="small"] {
     --__axc-data-table-text-size: var(--ax-font-size-medium);
-    --__axc-data-table-density-scale: 0.8889; /* 16/18 */
   }
 
-  &[data-density="condensed"] {
-    --__axc-data-table-density-base: var(--ax-space-8);
+  &[data-density="tight"] {
+    --__axc-data-table-density: var(--ax-space-6);
   }
 
-  &[data-density="spacious"] {
-    --__axc-data-table-density-base: var(--ax-space-32);
+  &[data-density="loose"] {
+    --__axc-data-table-density: var(--ax-space-20);
   }
 
   &[data-zebra-stripes="true"] {

@@ -358,8 +358,8 @@ const allColumnIds = columnDef_TEST_DATA.map((col) => col.id);
 export const KitchenSinkAdvancedFilter: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
-      "normal" | "condensed" | "spacious"
-    >("normal");
+      "tight" | "standard" | "loose"
+    >("standard");
     const [textSize, setTextSize] = React.useState<"small" | "medium">(
       "medium",
     );
@@ -522,9 +522,9 @@ export const KitchenSinkAdvancedFilter: Story = {
                         size="small"
                         value={rowDensity}
                       >
-                        <Radio value="condensed">Tett</Radio>
-                        <Radio value="normal">Normal</Radio>
-                        <Radio value="spacious">Løs</Radio>
+                        <Radio value="tight">Tett</Radio>
+                        <Radio value="standard">Standard</Radio>
+                        <Radio value="loose">Løs</Radio>
                       </RadioGroup>
                       <RadioGroup
                         legend="Velg tekststørrelse"

@@ -1,9 +1,9 @@
 type DataGridSettings = {
   /**
    * Controls vertical cell padding.
-   * @default "normal"
+   * @default "standard"
    */
-  rowDensity?: "condensed" | "normal" | "spacious";
+  rowDensity?: "tight" | "standard" | "loose";
   /**
    * Zebra striped table
    * @default false

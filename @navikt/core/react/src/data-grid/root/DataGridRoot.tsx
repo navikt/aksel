@@ -92,7 +92,7 @@ const DataGridRoot = forwardRef<HTMLDivElement, DataGridProps<unknown>>(
   ) => {
     const resolvedSettings = useMemo(
       () => ({
-        rowDensity: settings?.rowDensity ?? "normal",
+        rowDensity: settings?.rowDensity ?? "standard",
         zebraStripes: settings?.zebraStripes ?? false,
         truncateContent: settings?.truncateContent,
         stickyColumns: settings?.stickyColumns ?? {},

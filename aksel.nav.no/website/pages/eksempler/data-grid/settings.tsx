@@ -8,7 +8,7 @@ const { columns, data } = generateDataGridDemo();
 
 const Example = () => {
   const [userSettings, setUserSettings] = useState<DataGrid.Settings>({
-    rowDensity: "normal",
+    rowDensity: "standard",
     textSize: "medium",
     truncateContent: true,
     zebraStripes: false,
@@ -55,9 +55,9 @@ function SettingsBar({
           }))
         }
       >
-        <option value="condensed">Condensed</option>
-        <option value="normal">Normal</option>
-        <option value="spacious">Spacious</option>
+        <option value="tight">Tight</option>
+        <option value="standard">Standard</option>
+        <option value="loose">Loose</option>
       </Select>
       <Select
         size="small"
