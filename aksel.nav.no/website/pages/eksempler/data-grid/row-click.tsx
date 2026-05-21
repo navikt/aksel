@@ -9,7 +9,7 @@ const Example = () => {
   return (
     <VStack height="100vh" padding="space-16">
       <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
-        <DataGrid.Table onRowAction={(row) => alert(`Cliked row ${row.id}!`)} />
+        <DataGrid.Table onRowAction={(row) => alert(`Klikket på rad ${row.id}!`)} />
       </DataGrid>
     </VStack>
   );
