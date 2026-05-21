@@ -155,7 +155,7 @@ const DataGridTableInternal = forwardRef<
       loadingContent = {
         variant: "skeleton",
         rows: 5,
-        label: "Laster innhold",
+        label: "Laster innhold", // TODO translate
       },
       detailsPanel,
       subRows,
@@ -396,7 +396,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   if (isLoading && loading?.variant === "skeleton") {
     const rows = loading.rows ?? 5;
-    const label = loading.label ?? "Laster innhold";
+    const label = loading.label ?? "Laster innhold"; // TODO translate
     return (
       <>
         <tr>
@@ -443,7 +443,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   const overlayLabel =
     loading?.variant === "overlay"
-      ? (loading.label ?? "Laster innhold")
+      ? (loading.label ?? "Laster innhold") // TODO translate
       : "Laster innhold";
 
   return (
