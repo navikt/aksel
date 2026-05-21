@@ -119,7 +119,7 @@ function generateDataGridDemo({
                 variant="tertiary"
                 size="xsmall"
                 data-color="neutral"
-                title="Åpne handlingsmeny"
+                title="Meny"
                 icon={<MenuElipsisVerticalIcon aria-hidden />}
               />
             </ActionMenu.Trigger>
