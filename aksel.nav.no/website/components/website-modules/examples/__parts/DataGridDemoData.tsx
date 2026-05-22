@@ -54,13 +54,13 @@ function createDemoRows(count: number): CaseT[] {
 
     return {
       caseId: `${index + 1}`,
-      caseType: caseTypes[rng(4)],
+      caseType: caseTypes[rng(caseTypes.length)],
       location: locations[rng(locations.length)],
       keywords: Array.from(keywords),
       priority: ([0, 1, 2, 3] as const)[rng(4)],
       sender: names[rng(names.length)],
       age: new Date(now - index * daysInMs(1)),
-      status: statuses[rng(5)],
+      status: statuses[rng(statuses.length)],
       deadline: new Date(now - daysInMs(8) + (index % 50) * daysInMs(1)),
     };
   });
