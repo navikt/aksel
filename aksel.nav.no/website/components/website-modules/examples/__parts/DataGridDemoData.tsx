@@ -44,7 +44,7 @@ function createDemoRows(count: number): CaseT[] {
   const statuses = ["Mottatt","Under behandling","Avventer opplysninger","Til godkjenning","Under kontroll"] as const;
 
   return Array.from({ length: count }, (_, index) => {
-    const rng = seededRng(index + 1);
+    const rng = seededRandomNumberGenerator(index + 1);
 
     const keywordCount = rng(4) + 1;
     const keywords = new Set<string>();
@@ -211,7 +211,7 @@ function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
 }
 
 /** Park-Miller MCG seeded per row. Deterministic */
-function seededRng(seed: number): (max: number) => number {
+function seededRandomNumberGenerator(seed: number): (max: number) => number {
   let s = seed | 0;
   return (max: number) => {
     s = Math.imul(48271, s) | 0;
