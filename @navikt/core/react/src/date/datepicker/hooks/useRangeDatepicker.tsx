@@ -67,7 +67,7 @@ interface UseRangeDatepickerValue {
    */
   fromInputProps: Pick<
     DateInputProps,
-    "onChange" | "onFocus" | "onBlur" | "value"
+    "onChange" | "onFocus" | "onBlur" | "value" | "inputType"
   > & {
     /**
      * @private
@@ -81,7 +81,7 @@ interface UseRangeDatepickerValue {
    */
   toInputProps: Pick<
     DateInputProps,
-    "onChange" | "onFocus" | "onBlur" | "value"
+    "onChange" | "onFocus" | "onBlur" | "value" | "inputType"
   > & {
     /**
      * @private
@@ -555,6 +555,7 @@ export const useRangeDatepicker = (
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
     setAnchorRef,
+    inputType: "from" as const,
   };
 
   const toInputProps = {
@@ -563,6 +564,7 @@ export const useRangeDatepicker = (
     onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
     setAnchorRef,
+    inputType: "to" as const,
   };
 
   return {
