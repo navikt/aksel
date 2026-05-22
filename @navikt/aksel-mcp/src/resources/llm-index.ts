@@ -27,31 +27,18 @@ const llmIndexResource: McpResource = {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        cachedContent = await response.json();
+        cachedContent = JSON.stringify(await response.json());
         cacheTimestamp = now;
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : String(error);
 
-        // If we have stale cached content, return it with a warning
-        if (cachedContent) {
-          return {
-            contents: [
-              {
-                uri: URI,
-                mimeType: MIME_TYPE,
-                text: `Warning: Failed to fetch fresh index (${errorMessage}). Returning cached content.\n\n${JSON.stringify(cachedContent)}`,
-              },
-            ],
-          };
-        }
-
         return {
           contents: [
             {
               uri: URI,
-              mimeType: MIME_TYPE,
-              text: `Error: Failed to fetch Aksel documentation index from aksel.nav.no/llm.md\n\nError: ${errorMessage}\n\nPlease check your internet connection or try again later.`,
+              mimeType: "text/plain",
+              text: `Error: Failed to fetch Aksel documentation index from aksel.nav.no/api/llm/docs\n\nError: ${errorMessage}\n\nPlease check your internet connection or try again later.`,
             },
           ],
         };
@@ -62,8 +49,8 @@ const llmIndexResource: McpResource = {
       contents: [
         {
           uri: URI,
-          mimeType: MIME_TYPE,
-          text: JSON.stringify(cachedContent),
+          mimeType: "application/json",
+          text: cachedContent,
         },
       ],
     };
