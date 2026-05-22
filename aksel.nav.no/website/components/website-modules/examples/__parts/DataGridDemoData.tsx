@@ -226,9 +226,7 @@ function daysInMs(days: number) {
 /** Pre-computed, deterministic demo rows. */
 const demoData = createDemoRows(100);
 
-function generateDataGridDemo(
-  options: { withSorting?: boolean; withNesting?: boolean } = {},
-) {
+function generateDataGridDemo(options: { withSorting?: boolean } = {}) {
   return { columns: createDemoColumns(options), data: demoData };
 }
 
