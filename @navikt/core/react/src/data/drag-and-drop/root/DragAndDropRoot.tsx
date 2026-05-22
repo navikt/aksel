@@ -284,8 +284,7 @@ function DragAndDropInner<T>(
     cancelDrag,
   ]);
 
-  const describedBy =
-    `${rest["aria-describedby"] ?? ""} ${instructionsId}`.trim();
+  const describedBy = cl(rest["aria-describedby"], instructionsId);
 
   const onKeyboardDragEnd = (diff: number, label: string) => {
     if (!dragHandlerActive) return;
@@ -314,12 +313,12 @@ function DragAndDropInner<T>(
       setAnnouncer={setAnnouncer}
       itemAmount={items.length}
     >
-      <span id={instructionsId} className="sr-only">
+      <span id={instructionsId} className="aksel-sr-only">
         Bruk Tab for å fokusere på en kolonne. Trykk mellomrom eller enter for å
         starte flytting, bruk piltastene for å flytte kolonnen, trykk mellomrom
         eller enter for å slippe, eller Escape for å avbryte.
       </span>
-      <div aria-live="assertive" className="sr-only" aria-atomic>
+      <div aria-live="assertive" className="aksel-sr-only" aria-atomic>
         {announcer}
       </div>
       <ul
