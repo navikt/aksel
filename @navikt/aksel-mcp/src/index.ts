@@ -1,6 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import type { ShapeOutput } from "@modelcontextprotocol/sdk/server/zod-compat";
 import pkg from "../package.json" with { type: "json" };
 import { prompts } from "./prompts/prompts.js";
 import { resources } from "./resources/resources.js";
@@ -34,7 +33,7 @@ for (const prompt of prompts) {
   server.registerPrompt(
     prompt.name,
     { description: prompt.description, argsSchema: prompt.argsSchema },
-    async (args: ShapeOutput<any>) => {
+    async (args: { [K in keyof typeof prompt.argsSchema]: any }) => {
       const result = await prompt.callback(args);
 
       return {
@@ -71,7 +70,7 @@ async function main() {
   function shutdown() {
     console.error("Server terminated");
 
-    process.exit(0);
+    server.close().finally(() => process.exit(0));
   }
 
   process.on("SIGINT", shutdown);

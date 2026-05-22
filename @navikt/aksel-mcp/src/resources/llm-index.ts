@@ -3,7 +3,7 @@ import type { McpResource } from "../types.js";
 const URI = "aksel-docs://llm-index";
 const MIME_TYPE = "text/markdown";
 
-/* TODO: Handle caching trough a fetch genetic of possible */
+/* TODO: Handle caching through a fetch generic if possible */
 // Cache the llm.txt content with a reasonable TTL (1 hour)
 let cachedContent: string | null = null;
 let cacheTimestamp: number = 0;

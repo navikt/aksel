@@ -9,9 +9,6 @@ const categories = Array.from(
 const subcategories = Array.from(
   new Set(icons.map((icon) => icon.sub_category)),
 ).sort();
-const keywords = Array.from(
-  new Set(icons.flatMap((icon) => icon.keywords)),
-).sort();
 const variants = Array.from(
   new Set([...icons.map((icon) => icon.variant), "both"]),
 ).sort();
@@ -29,8 +26,9 @@ const iconSearchInputSchema = {
     .describe(
       "Filter by subcategory (e.g., 'Communication', 'Arrow', 'Body parts')",
     ),
+  /* Since keywoards are quite verbose and plentyfull, we just return string here to avoid bloating schema */
   keyword: z
-    .enum(keywords as [string, ...string[]])
+    .string()
     .optional()
     .describe(
       "Search by keyword (e.g., 'chat', 'calendar', 'arrow'). Matches against icon keywords and names.",
