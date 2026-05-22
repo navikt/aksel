@@ -11,14 +11,55 @@ import type { DateRange } from "../Date.typeutils";
  * RDP returns undefined for newSelection. We need to manually handle these cases.
  */
 function pickRangeSelection({
+  newSelection,
   currentSelection: selected,
   newDate,
+  caller,
+  resetOnSelect = true,
 }: {
   newSelection: DateRange | undefined;
   currentSelection: DateRange | undefined;
   newDate: Date;
   caller?: "from" | "to" | null;
+  resetOnSelect?: boolean;
 }): DateRange | undefined {
+  const skip = !selected?.from || !selected?.to || resetOnSelect;
+
+  if (caller === "from" && !skip) {
+    const to = selected?.to;
+    if (!to) {
+      return { from: newDate, to: undefined };
+    }
+    if (isSameDay(newDate, to)) {
+      return { from: newDate, to: newDate };
+    }
+    if (isBefore(newDate, to)) {
+      return { from: newDate, to };
+    }
+    /* newDate is after to — invalid range, clear to */
+    return { from: newDate, to: undefined };
+  }
+
+  if (caller === "to" && !skip) {
+    const from = selected?.from;
+    if (!from) {
+      return { from: newDate, to: undefined };
+    }
+    if (isSameDay(newDate, from)) {
+      return { from: newDate, to: newDate };
+    }
+    if (isBefore(from, newDate)) {
+      return { from, to: newDate };
+    }
+    /* newDate is before from — start fresh with newDate as the new from */
+    return { from: newDate, to: undefined };
+  }
+
+  if (newSelection) {
+    return newSelection;
+  }
+
+  // No caller - original edge-case handling
   if (!selected?.to) {
     /**
      * If defaultSelected.from is defined, but not "to", and user selects the same date as "from",

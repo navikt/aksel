@@ -17,7 +17,12 @@ import { ReactDayPicker } from "./DatePicker.RDP";
 
 interface DatePickerStandaloneDefaultProps extends Omit<
   DatePickerDefaultProps,
-  "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
+  | "open"
+  | "onClose"
+  | "onOpenToggle"
+  | "wrapperClassName"
+  | "strategy"
+  | "resetOnSelect"
 > {
   /**
    * Datepicker classname

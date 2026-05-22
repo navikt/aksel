@@ -122,4 +122,12 @@ export interface DatePickerDefaultProps
    * @default See Popover
    */
   strategy?: "absolute" | "fixed";
+  /**
+   * Only relevant with `mode="range"`. Determines how new selections affect existing selection.
+   * If `false`, selecting a new date changes from/to field based on which input was used to open the datepicker.
+   *
+   * If `true`, selecting a new date always starts a new range selection (resets old selection).
+   * @default true
+   */
+  resetOnSelect?: boolean;
 }

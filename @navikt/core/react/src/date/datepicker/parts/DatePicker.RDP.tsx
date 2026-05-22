@@ -50,6 +50,7 @@ type ReactDayPickerProps = DatePickerDefaultProps &
      * Id for the label of the popup, used for aria-labelledby
      */
     popupLabelId?: string;
+    resetOnSelect?: boolean;
   };
 
 const ReactDayPicker = ({
@@ -68,6 +69,7 @@ const ReactDayPicker = ({
   handleSelect,
   locale: _locale,
   popupLabelId,
+  resetOnSelect = true,
   ...rest
 }: ReactDayPickerProps) => {
   const langProviderLocale = useDateLocale();
@@ -83,16 +85,17 @@ const ReactDayPicker = ({
       locale={locale}
       mode={mode as any}
       onSelect={(newSelection, newDate: Date) => {
-        if (mode !== "range" || newSelection || !isDateRange(selected)) {
+        if (mode !== "range" || !isDateRange(selected)) {
           handleSelect(newSelection);
           return;
         }
 
         const range = pickRangeSelection({
           caller: context?.caller,
-          newSelection,
           currentSelection: selected,
           newDate,
+          newSelection,
+          resetOnSelect,
         });
 
         handleSelect(range);
@@ -199,7 +202,8 @@ const ReactDayPicker = ({
       startMonth={fromDate}
       endMonth={toDate}
       month={clampDisplayMonth({ month, start: fromDate, end: toDate })}
-      resetOnSelect // Range mode: Starts a new range when selecting a day even when a range is already selected
+      /* We handle this logic manually in `onSelect` */
+      resetOnSelect
       {...omit(rest, ["onSelect", "role", "id", "defaultSelected"])}
     />
   );

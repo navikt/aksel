@@ -175,6 +175,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 selected={value as any}
                 mode={mode as any}
                 popupLabelId={popupLabelId}
+                resetOnSelect={
+                  mode === "range"
+                    ? ((rest as any).resetOnSelect ?? true)
+                    : undefined
+                }
               />
             </DateDialog>
           </div>
