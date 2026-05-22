@@ -4964,7 +4964,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.10.1, @navikt/aksel-icons@npm:^8.11.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^8.11.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -4996,9 +4996,9 @@ __metadata:
   dependencies:
     "@modelcontextprotocol/inspector": "npm:^0.21.1"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
-    "@navikt/aksel": "npm:^8.10.1"
-    "@navikt/aksel-icons": "npm:^8.10.1"
-    "@navikt/ds-tokens": "npm:^8.10.1"
+    "@navikt/aksel": "npm:^8.11.0"
+    "@navikt/aksel-icons": "npm:^8.11.0"
+    "@navikt/ds-tokens": "npm:^8.11.0"
     "@types/node": "npm:^24.10.9"
     typescript: "npm:6.0.2"
     vitest: "npm:4.1.4"
@@ -5024,7 +5024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/aksel@npm:^8.10.1, @navikt/aksel@npm:^8.11.0, @navikt/aksel@workspace:@navikt/aksel":
+"@navikt/aksel@npm:^8.11.0, @navikt/aksel@workspace:@navikt/aksel":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
@@ -5129,7 +5129,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^8.10.1, @navikt/ds-tokens@npm:^8.11.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^8.11.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
