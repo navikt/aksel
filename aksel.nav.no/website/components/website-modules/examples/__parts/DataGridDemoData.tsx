@@ -223,11 +223,8 @@ function daysInMs(days: number) {
   return days * 24 * 60 * 60 * 1000;
 }
 
-/** Pre-computed, deterministic demo rows. */
-const demoData = createDemoRows(100);
-
 function generateDataGridDemo(options: { withSorting?: boolean } = {}) {
-  return { columns: createDemoColumns(options), data: demoData };
+  return { columns: createDemoColumns(options), data: createDemoRows(100) };
 }
 
 export { generateDataGridDemo };
