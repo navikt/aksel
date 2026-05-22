@@ -51,10 +51,9 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader, selectionState, onRowAction } =
+    const { layout, stickyHeader, selectionState, onRowAction, tableItems } =
       useDataTableContext();
     const { location } = useDataTableLocation();
-    const { tableItems } = useDataTableContext();
 
     const renderFillerCell = layout === "fixed" && children;
 
