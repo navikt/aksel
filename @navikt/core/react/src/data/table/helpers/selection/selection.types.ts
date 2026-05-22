@@ -1,7 +1,6 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
 
-// TODO: Remove `= unknown` if possible
 type SelectionProps<T = unknown> = {
   /**
    * Enables selection of rows.
