@@ -32,5 +32,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Prop-en 'columns' styrer CSS-attributtet 'grid-template-columns'. Hvis du bruker tall blir det automatisk omgjort til 'repeat(<number>, minmax(0, 1fr))'.",
+  desc: "Prop-en `columns` styrer CSS-attributtet `grid-template-columns`. Hvis du bruker tall blir det automatisk omgjort til `repeat(<number>, minmax(0, 1fr))`.",
 };
