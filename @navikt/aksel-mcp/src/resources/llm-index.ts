@@ -10,10 +10,10 @@ let cacheTimestamp: number = 0;
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 const llmIndexResource: McpResource = {
-  name: "Aksel Documentation index (llm.md)",
+  name: "Aksel Documentation index",
   uri: URI,
   description:
-    "Complete Aksel documentation index from aksel.nav.no/llm.md. You MUST read this resource first to find the correct path, then call aksel_docs with that path.",
+    "Complete Aksel documentation index from aksel.nav.no/api/llm/docs. You MUST read this resource first to find the correct path, then call aksel_docs with that path.",
   mimeType: MIME_TYPE,
   async callback() {
     const now = Date.now();
@@ -21,13 +21,13 @@ const llmIndexResource: McpResource = {
     // Return cached content if still valid
     if (!(cachedContent && now - cacheTimestamp < CACHE_TTL_MS)) {
       try {
-        const response = await fetch("https://aksel.nav.no/llm.md");
+        const response = await fetch("https://aksel.nav.no/api/llm/docs");
 
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        cachedContent = await response.text();
+        cachedContent = await response.json();
         cacheTimestamp = now;
       } catch (error) {
         const errorMessage =
@@ -40,7 +40,7 @@ const llmIndexResource: McpResource = {
               {
                 uri: URI,
                 mimeType: MIME_TYPE,
-                text: `Warning: Failed to fetch fresh index (${errorMessage}). Returning cached content.\n\n${cachedContent}`,
+                text: `Warning: Failed to fetch fresh index (${errorMessage}). Returning cached content.\n\n${JSON.stringify(cachedContent)}`,
               },
             ],
           };
@@ -63,7 +63,7 @@ const llmIndexResource: McpResource = {
         {
           uri: URI,
           mimeType: MIME_TYPE,
-          text: cachedContent,
+          text: JSON.stringify(cachedContent),
         },
       ],
     };
