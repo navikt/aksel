@@ -9,7 +9,7 @@ import {
   useMergeRefs,
 } from "../../hooks";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
-import { Floating } from "../floating/Floating";
+import { Floating, MENU_COLLISION_AVOIDANCE } from "../floating/Floating";
 import { FocusBoundary } from "../focus-boundary/FocusBoundary";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
@@ -328,6 +328,9 @@ const MenuContentInternal = forwardRef<
               data-state={getOpenState(context.open)}
               data-aksel-menu-content=""
               dir="ltr"
+              fallbackAxisSideDirection={
+                MENU_COLLISION_AVOIDANCE.fallbackAxisSide
+              }
               {...rest}
               ref={composedRefs}
               style={{ outline: "none", ...rest.style }}

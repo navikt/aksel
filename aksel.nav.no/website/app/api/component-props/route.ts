@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
         defaultValue: string | null;
         deprecated: string | null;
         example: string | null;
-        params: string | null;
+        params: string[] | null;
         return: string | null;
       }[];
     }[] = [];

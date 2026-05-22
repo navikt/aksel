@@ -45,5 +45,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Både marginBlock og marginInline er reponsive, slik at du kan sette negativ margin dynamisk basert på brekkpunkter.",
+  desc: "Både `marginBlock` og `marginInline` er responsive, slik at du kan sette negativ margin dynamisk basert på brekkpunkter.",
 };

@@ -1,9 +1,11 @@
 import { portableTextToMarkdown } from "@portabletext/markdown";
 import type { PortableContentTypes } from "@/app/_sanity/types";
+import { MarkdownRoutes } from "@/app/api/markdown/MarkdownRouteHandler";
 import { AccordionMarkdown } from "@/app/api/markdown/blocks/Accordion.md";
 import { AlertMarkdown } from "@/app/api/markdown/blocks/Alert.md";
 import { AttachmentMarkdown } from "@/app/api/markdown/blocks/Attachment.md";
 import { BildeMarkdown } from "@/app/api/markdown/blocks/Bilde.md";
+import { DescriptionListMarkdown } from "@/app/api/markdown/blocks/DescriptionList.md";
 import { DoDontMarkdown } from "@/app/api/markdown/blocks/DoDont.md";
 import { ExampleTextMarkdown } from "@/app/api/markdown/blocks/ExampleText.md";
 import { ExpansionCardMarkdown } from "@/app/api/markdown/blocks/ExpansionCard.md";
@@ -15,7 +17,6 @@ import { RelatertInnholdMarkdown } from "@/app/api/markdown/blocks/RelatertInnho
 import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
-import { DYNAMIC_ROUTE_PREFIXES } from "@/app/api/markdown/route.config";
 
 const AKSEL_BASE_URL = "https://aksel.nav.no";
 
@@ -39,11 +40,7 @@ function portableMarkdown(input?: any[]) {
           return children;
         }
         const anchor = value?.anchor ? `#${value.anchor}` : "";
-        const suffix = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
-          `/${slug}`.startsWith(prefix),
-        )
-          ? ".md"
-          : "";
+        const suffix = MarkdownRoutes.isDynamicRoute(`/${slug}`) ? ".md" : "";
         return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
     },
@@ -66,7 +63,8 @@ function portableMarkdown(input?: any[]) {
       attachment: AttachmentMarkdown,
       compare_images: () => "",
       language: LanguageMarkdown,
-    } satisfies Record<PortableContentTypes, (props: any) => string | null>,
+      description_list: DescriptionListMarkdown,
+    } satisfies Record<PortableContentTypes, (props: any) => string>,
   });
 }
 
@@ -84,9 +82,7 @@ function toMarkdownUrl(href: string): string {
 
   // e.g. "/komponenter/core/button"
   const slug = parsed.pathname.replace(/^\//, ""); // strip leading slash
-  const hasMdEndpoint = DYNAMIC_ROUTE_PREFIXES.some((prefix) =>
-    `/${slug}`.startsWith(prefix),
-  );
+  const hasMdEndpoint = MarkdownRoutes.isDynamicRoute(`/${slug}`);
 
   if (!hasMdEndpoint) {
     return href;

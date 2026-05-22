@@ -37,6 +37,22 @@ import {
 } from "./Floating.utils";
 
 /**
+ * Used for menus that prefer top/bottom placements and
+ * use height-var to limit their height.
+ */
+const MENU_COLLISION_AVOIDANCE = {
+  fallbackAxisSide: "none",
+} as const;
+
+/**
+ * Used by regular popovers that usually aren't scrollable and are allowed to
+ * freely flip to any axis of placement.
+ */
+const POPOVER_COLLISION_AVOIDANCE = {
+  fallbackAxisSide: "end",
+} as const;
+
+/**
  * Floating Root
  */
 type FloatingContextValue = {
@@ -189,6 +205,7 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   hideWhenDetached?: boolean;
   updatePositionStrategy?: "optimized" | "always";
   fallbackPlacements?: FlipOptions["fallbackPlacements"];
+  fallbackAxisSideDirection?: FlipOptions["fallbackAxisSideDirection"];
   onPlaced?: () => void;
   /**
    * @default true
@@ -225,6 +242,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       fallbackPlacements,
       enabled = true,
       autoUpdateWhileMounted = true,
+      fallbackAxisSideDirection = POPOVER_COLLISION_AVOIDANCE.fallbackAxisSide,
       ...contentProps
     }: FloatingContentProps,
     forwardedRef,
@@ -245,10 +263,31 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const desiredPlacement = (side +
       (align !== "center" ? "-" + align : "")) as Placement;
 
+    /**
+     * Create a bias to the preferred side.
+     * On iOS, when the mobile software keyboard opens, the input is exactly centered
+     * in the viewport, but this can cause it to flip to the top undesirably.
+     */
+    const bias = 1;
+    const biasTop = side === "bottom" ? bias : 0;
+    const biasBottom = side === "top" ? bias : 0;
+    const biasLeft = side === "right" ? bias : 0;
+    const biasRight = side === "left" ? bias : 0;
+
     const collisionPadding =
       typeof collisionPaddingProp === "number"
-        ? collisionPaddingProp
-        : { top: 0, right: 0, bottom: 0, left: 0, ...collisionPaddingProp };
+        ? {
+            top: collisionPaddingProp + biasTop,
+            right: collisionPaddingProp + biasRight,
+            bottom: collisionPaddingProp + biasBottom,
+            left: collisionPaddingProp + biasLeft,
+          }
+        : {
+            top: (collisionPaddingProp.top || 0) + biasTop,
+            right: (collisionPaddingProp.right || 0) + biasRight,
+            bottom: (collisionPaddingProp.bottom || 0) + biasBottom,
+            left: (collisionPaddingProp.left || 0) + biasLeft,
+          };
 
     const boundary = Array.isArray(collisionBoundary)
       ? collisionBoundary
@@ -256,20 +295,13 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
 
     const hasExplicitBoundaries = boundary.length > 0;
 
-    /**
-     * .filter(x => x !== null) does not narrow the type of the array enough.
-     */
-    function isNotNull<T>(value: T | null): value is T {
-      return value !== null;
-    }
-
+    /* https://floating-ui.com/docs/detectOverflow#boundary */
     const detectOverflowOptions: FlipOptions = {
       padding: collisionPadding,
       boundary: boundary.filter(isNotNull),
       // with `strategy: 'fixed'`, this is the only way to get it to respect boundaries
       altBoundary: hasExplicitBoundaries,
-      /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
-      fallbackAxisSideDirection: "end",
+      fallbackAxisSideDirection,
       fallbackPlacements,
     };
 
@@ -308,7 +340,11 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             crossAxis: false,
             limiter: limitShift(),
           }),
-        avoidCollisions && flip({ ...detectOverflowOptions }),
+        avoidCollisions &&
+          flip({
+            ...detectOverflowOptions,
+            padding: collisionPadding,
+          }),
         size({
           ...detectOverflowOptions,
           apply: ({ elements, rects, availableWidth, availableHeight }) => {
@@ -437,7 +473,14 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   },
 );
 
+/**
+ * .filter(x => x !== null) does not narrow the type of the array enough.
+ */
+function isNotNull<T>(value: T | null): value is T {
+  return value !== null;
+}
+
 Floating.Anchor = FloatingAnchor;
 Floating.Content = FloatingContent;
 
-export { Floating };
+export { Floating, MENU_COLLISION_AVOIDANCE, POPOVER_COLLISION_AVOIDANCE };

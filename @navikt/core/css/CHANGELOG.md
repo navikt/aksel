@@ -1,5 +1,27 @@
 # @navikt/ds-css
 
+## 8.11.0
+
+### Minor Changes
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+## 8.10.6
+
+### Patch Changes
+
+- 🎨 InfoCard: Added bigger padding for medium sized InfoCard.Message ([#4861](https://github.com/navikt/aksel/pull/4861))
+
+## 8.10.5
+
+### Patch Changes
+
+- Pagination: Fix selected-styling in forced-colors mode ([#4858](https://github.com/navikt/aksel/pull/4858))
+
+- Button: Fix issue where secondary and tertiary variants did not have correct text color is certain cases ([#4857](https://github.com/navikt/aksel/pull/4857))
+
+## 8.10.4
+
 ## 8.10.3
 
 ### Patch Changes

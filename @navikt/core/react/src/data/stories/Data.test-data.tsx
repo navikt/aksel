@@ -1,6 +1,10 @@
 import React from "react";
+import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../action-menu";
+import { Button } from "../../button";
+import { HStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 
 type SWData = {
   id: number;
@@ -17,81 +21,54 @@ type SWData = {
   nestedRows: Omit<NestedSWData, "nestedRows">[];
 };
 
-type Details = {
-  visible: boolean;
-};
-
-const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
+const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     id: "id",
-    label: "Id",
-    cell: (row) => row.id,
-    align: "right",
-    autoWidth: true,
-    details: {
-      visible: true,
-    },
+    header: "Id",
+    bodyCell: (row) => row.id,
+    width: { autoResizeOnce: true },
   },
   {
-    label: "Name",
+    header: "Name",
     id: "name",
-    cell: (row) =>
+    isRowHeader: true,
+    bodyCell: (row) =>
       `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
-    details: {
-      visible: true,
-    },
   },
   {
-    label: "National id",
+    header: "National id",
     id: "nationalId",
-    cell: (row) => row.nationalId,
+    bodyCell: (row) => row.nationalId,
     align: "right",
-    autoWidth: true,
-    details: {
-      visible: true,
-    },
+    width: { autoResizeOnce: true },
   },
   {
-    label: "Day job",
+    header: "Day job",
     id: "dayJob",
-    cell: (row) => row.dayJob,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => row.dayJob,
   },
   {
-    label: "Supervisor",
+    header: "Supervisor",
     id: "supervisor",
-    cell: (row) => row.supervisor,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => row.supervisor,
   },
   {
-    label: "Date received",
+    header: "Date received",
     id: "dateReceived",
-    cell: (row) => row.dateReceived,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => row.dateReceived,
   },
   {
-    label: "Message",
+    header: "Message",
     id: "message",
-    cell: (row) => row.message,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => row.message,
   },
   {
-    label: "Age",
+    header: "Age",
     id: "age",
-    cell: (row) => row.age,
+    bodyCell: (row) => row.age,
     align: "right",
-    autoWidth: true,
-    details: {
-      visible: true,
-    },
+    width: { autoResizeOnce: true },
+
     /* TODO: NOt yet implemented */
     /* footer: ({ table }) => {
       const ages: number[] = [];
@@ -103,36 +80,69 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData, Details> = [
     }, */
   },
   {
-    label: "Force sensitive",
+    header: "Force sensitive",
     id: "forceSensitive",
-    cell: (row) => (
+    bodyCell: (row) => (
       <Tag
         size="small"
         variant="moderate"
         data-color={row.forceSensitive ? "accent" : "warning"}
       >{`${row.forceSensitive ? "Yes" : "No"}`}</Tag>
     ),
-    autoWidth: true,
+    width: { autoResizeOnce: true },
     align: "center",
-    details: {
-      visible: true,
-    },
   },
   {
-    label: "Home system",
+    header: "Home system",
     id: "homeSystem",
-    cell: (row) => row.homeSystem,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => row.homeSystem,
   },
   {
-    label: "Skills",
+    header: "Skills",
     id: "skills",
-    cell: (row) => row.skills,
-    details: {
-      visible: true,
-    },
+    bodyCell: (row) => (
+      <HStack gap="space-8" wrap={false}>
+        {row.skills.map((skill) => (
+          <Tag key={skill} size="small" variant="moderate">
+            {skill}
+          </Tag>
+        ))}
+      </HStack>
+    ),
+  },
+  {
+    header: "Actions",
+    id: "actions",
+    width: { autoResizeOnce: true },
+    bodyCell: (row) => (
+      <HStack gap="space-8">
+        <Button
+          size="xsmall"
+          variant="secondary"
+          data-color="neutral"
+          onClick={() => alert(`Edit ${row.name}`)}
+        >
+          Edit
+        </Button>
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <Button
+              size="xsmall"
+              variant="secondary"
+              data-color="neutral"
+              icon={<MenuElipsisVerticalIcon title="Menu" />}
+            />
+          </ActionMenu.Trigger>
+          <ActionMenu.Content>
+            <ActionMenu.Group label="Actions">
+              <ActionMenu.Item>Delete</ActionMenu.Item>
+              <ActionMenu.Item>Assign</ActionMenu.Item>
+              <ActionMenu.Item>Change status</ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
+      </HStack>
+    ),
   },
 ];
 

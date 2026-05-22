@@ -13,6 +13,7 @@ import {
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { PreviewNote } from "./PreviewNote";
 
 async function KomponenterPage({ slug }: { slug: string }) {
   const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
@@ -30,6 +31,9 @@ async function KomponenterPage({ slug }: { slug: string }) {
     notFound();
   }
 
+  const renderPreviewNote =
+    pageData.status?.tag === "preview" && pageData.status?.preview_note;
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={pageData} />
@@ -45,6 +49,12 @@ async function KomponenterPage({ slug }: { slug: string }) {
           <SystemPanel
             variant={pageData.status?.tag as "beta" | "new"}
             unsafeBeta={pageData.status?.unsafe}
+          />
+        )}
+
+        {renderPreviewNote && (
+          <PreviewNote
+            content={pageData.status?.preview_note as PortableTextBlock[]}
           />
         )}
         <DesignsystemetKomponentIntro data={pageData} />

@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
 import { useTableItems } from "../useTableItems";
 
 type TestRow = {
@@ -45,6 +46,12 @@ const fallbackRows: FallbackTestRow[] = [
   },
 ];
 
+const duplicatedRowObject: TestRow = {
+  id: "shared",
+  name: "Shared",
+  subRows: [{ id: "shared-child", name: "Child" }],
+};
+
 const getSubRows = (row: TestRow) => row.subRows ?? [];
 
 const getVisibleIds = (rows: TestRow[]) => rows.map((row) => row.id);
@@ -59,16 +66,18 @@ describe("useTableItems", () => {
     );
 
     expect(getVisibleIds(result.current.items)).toEqual(["a", "b"]);
-    expect(result.current.itemDetails.get(plainRows[0])).toMatchObject({
+    expect(result.current.itemDetails.get("a")).toMatchObject({
       id: "a",
+      rowData: plainRows[0],
       level: 0,
-      parent: null,
+      parentId: null,
       children: [],
     });
-    expect(result.current.itemDetails.get(plainRows[1])).toMatchObject({
+    expect(result.current.itemDetails.get("b")).toMatchObject({
       id: "b",
+      rowData: plainRows[1],
       level: 0,
-      parent: null,
+      parentId: null,
       children: [],
     });
   });
@@ -102,14 +111,13 @@ describe("useTableItems", () => {
     expect(result.current.childRowIdsById.get("b")).toEqual(["b1"]);
   });
 
-  test("uses the same fallback root id to reveal child rows when getRowId is omitted", () => {
+  test("uses unique fallback ids to reveal child rows when getRowId is omitted", () => {
     const { result } = renderHook(() =>
       useTableItems({
         items: fallbackRows,
-        getRowId: (_, index) => index,
         subRows: {
           getRows: (row: any) => row.subRows ?? [],
-          defaultExpandedRowIds: [0],
+          defaultExpandedRowIds: ["0"],
         },
       }),
     );
@@ -118,6 +126,7 @@ describe("useTableItems", () => {
       "Parent",
       "Child",
     ]);
+    expect(result.current.childRowIdsById.get("0")).toEqual(["0.0"]);
   });
 
   test("updates visible rows in depth-first order for controlled expanded ids", () => {
@@ -132,7 +141,7 @@ describe("useTableItems", () => {
           },
         }),
       {
-        initialProps: { expandedIds: [] as (string | number)[] },
+        initialProps: { expandedIds: [] as TableRowEntryId[] },
       },
     );
 
@@ -148,5 +157,36 @@ describe("useTableItems", () => {
       "b",
       "b1",
     ]);
+  });
+
+  test("tracks duplicated row objects by row id instead of object identity", () => {
+    const { result } = renderHook(() =>
+      useTableItems({
+        items: [duplicatedRowObject, duplicatedRowObject],
+        subRows: {
+          getRows: getSubRows,
+          defaultExpandedRowIds: ["0"],
+        },
+      }),
+    );
+
+    expect(result.current.visibleRowIds).toEqual(["0", "0.0", "1"]);
+    expect(getVisibleIds(result.current.items)).toEqual([
+      "shared",
+      "shared-child",
+      "shared",
+    ]);
+    expect(result.current.itemDetails.get("0")).toMatchObject({
+      id: "0",
+      rowData: duplicatedRowObject,
+      parentId: null,
+      children: ["0.0"],
+    });
+    expect(result.current.itemDetails.get("1")).toMatchObject({
+      id: "1",
+      rowData: duplicatedRowObject,
+      parentId: null,
+      children: ["1.0"],
+    });
   });
 });

@@ -61,6 +61,7 @@ export const KomponentArtikkel = defineType({
           options: {
             list: [
               { title: "Beta", value: "beta" },
+              { title: "Preview", value: "preview" },
               { title: "New", value: "new" },
               { title: "Stable", value: "ready" },
               { title: "Legacy", value: "deprecated" },
@@ -75,6 +76,12 @@ export const KomponentArtikkel = defineType({
           description: "Er komponenten Beta + UNSAFE-prefikset?",
           type: "boolean",
           hidden: ({ parent }) => !(parent?.tag === "beta"),
+        }),
+        defineField({
+          name: "preview_note",
+          title: "Preview-notat",
+          type: "riktekst_accordion",
+          hidden: ({ parent }) => !(parent?.tag === "preview"),
         }),
         defineField({
           name: "internal",

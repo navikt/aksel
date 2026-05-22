@@ -1,5 +1,17 @@
 # @navikt/aksel-icons
 
+## 8.11.0
+
+### Minor Changes
+
+- Icons: New icon `Newsletter` and `NewsletterFill` ([#4887](https://github.com/navikt/aksel/pull/4887))
+
+## 8.10.6
+
+## 8.10.5
+
+## 8.10.4
+
 ## 8.10.3
 
 ## 8.10.2

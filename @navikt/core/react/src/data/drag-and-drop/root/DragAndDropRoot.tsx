@@ -10,7 +10,7 @@ import { Floating } from "../../../utils/components/floating/Floating";
 import {
   ColumnDefinition,
   ColumnDefinitions,
-} from "../../table/root/DataTable.types";
+} from "../../table/root/DataGridTable.types";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
@@ -22,34 +22,16 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
 }
 
 /**
- * TODO
- * [x] setItems on root
- * [x] state : active element
- * [x] pointer over listener / state, onPointerEnter, onPointerLeave
- * [x] Overlay - Use floating component
- * [x] Keyboard navigation
- * [ ] UU - announce on drag start, item moved, drag end
- * [x] Make overlay same width as the OG item, currently jumps to content width
- * [x] Look into adding a cancel listener event
- * [x] Make onClick work on drag handler button, currently blocked by pointer down/up listeners
- * [x] Talk to design about what should happen on ESC key press, currently just cancels dragging, should it also reset position?
- * [x] Make arrow icons into buttons that react to keyboard events, currently just decorative
- * [x] Keep handler focus after clicking arrows for dragging
- * [x] Look into data-based API vs component-based API
- * [ ] Should we have hidden instructions for screen readers on how to use the drag and drop, and should we announce the position of the item while dragging?
- * [x] Discuss if this component should be generic for drag and drop, or if it should be specifically for tables - just for table for now
- * [x] Discuss items type
- * [ ] Discuss how to implement label best
- * [ ] Quick nav (< > samtidig) - få piltastene til å fungere
- * [x] Implement new type for items - ColumnDefinitions<T>
- * [ ] Remove announcer div and use a live region component instead
- * [ ] Make ESC reset position, not just cancel dragging
- * [ ] Make instructions for keyboard users (visible?)
- * [ ] Ask design about visible keyboard instructions
+ * TODO:
+ *
+ * Backlog:
+ * [ ] Quick nav (< > samtidig) - få piltastene til å fungere - ignore?
+ * [ ] Look at instructions text
  *
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
+const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
 function DragAndDropInner<T>(
   { items, setItems, renderItem }: DragAndDropProps<T>,
@@ -60,7 +42,8 @@ function DragAndDropInner<T>(
   const [dragHandlerActive, setDragHandlerActive] =
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
-  const [announcement, setAnnouncement] = useState("");
+  const [announcer, setAnnouncer] = useState("");
+  const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
   const activeData = items.find((item) => item.id === activeItem?.id);
 
   const activeItemRef = useRef<DragAndDropElement | null>(null);
@@ -78,6 +61,19 @@ function DragAndDropInner<T>(
     startX: number;
     startY: number;
   } | null>(null);
+
+  const saveInitialItems = useCallback(() => {
+    initialItemsRef.current = items;
+  }, [items]);
+
+  const keyboardDragStart = (item: DragAndDropElement | null) => {
+    if (item) {
+      saveInitialItems();
+    } else {
+      initialItemsRef.current = null;
+    }
+    setDragHandlerActive(item);
+  };
 
   const startPendingDrag = (
     event: React.PointerEvent,
@@ -121,9 +117,24 @@ function DragAndDropInner<T>(
     [setItems],
   );
 
+  const cancelDrag = useCallback(
+    (resetOrder = false) => {
+      if (resetOrder && initialItemsRef.current) {
+        setItems(initialItemsRef.current);
+      }
+      setOverlayWidth(null);
+      setDragHandlerActive(null);
+      setCombinedActiveItem(null);
+      setCombinedDropTarget(null);
+      pendingDragStartRef.current = null;
+      initialItemsRef.current = null;
+    },
+    [setItems, setCombinedActiveItem, setCombinedDropTarget],
+  );
+
   useEffect(() => {
-    /* This useEffect is used to toggle a class on the html element when dragging, 
-      to prevent cursor issues when dragging over interactive elements, 
+    /* This useEffect is used to toggle a class on the html element when dragging,
+      to prevent cursor issues when dragging over interactive elements,
       and to prevent text selection during dragging. */
 
     if (activeItem) {
@@ -156,6 +167,7 @@ function DragAndDropInner<T>(
           }
 
           setOverlayWidth(element?.getBoundingClientRect().width ?? null);
+          saveInitialItems();
           setCombinedActiveItem(pendingStart.item);
           setCombinedDropTarget(pendingStart.item);
           pendingDragStartRef.current = null;
@@ -221,25 +233,12 @@ function DragAndDropInner<T>(
 
       if (active && target && active.id !== target.id) {
         reorderItems(active.index, target.index);
-        setAnnouncement(
-          `Element flyttet til posisjon ${target?.index + 1} av ${items.length}`,
-        ); // TODO - Bedre formulering?
       }
 
-      setOverlayWidth(null);
-      setDragHandlerActive(null);
-      setCombinedActiveItem(null);
-      setCombinedDropTarget(null);
-      pendingDragStartRef.current = null;
+      cancelDrag();
     };
 
-    const handlePointerCancel = () => {
-      setOverlayWidth(null);
-      setDragHandlerActive(null);
-      setCombinedActiveItem(null);
-      setCombinedDropTarget(null);
-      pendingDragStartRef.current = null;
-    };
+    const handlePointerCancel = () => cancelDrag(true);
 
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerup", handlePointerUp);
@@ -254,10 +253,11 @@ function DragAndDropInner<T>(
     setCombinedDropTarget,
     setCombinedActiveItem,
     reorderItems,
-    items.length,
+    saveInitialItems,
+    cancelDrag,
   ]);
 
-  const onKeyboardDragEnd = (diff: number) => {
+  const onKeyboardDragEnd = (diff: number, label: string) => {
     if (!dragHandlerActive) return;
 
     const targetIndex = dragHandlerActive.index + diff;
@@ -265,11 +265,9 @@ function DragAndDropInner<T>(
       return;
     }
 
+    setAnnouncer(`${label}. Plass ${targetIndex + 1} av ${items.length}.`);
     reorderItems(dragHandlerActive.index, targetIndex);
     setDragHandlerActive({ ...dragHandlerActive, index: targetIndex });
-    setAnnouncement(
-      `Element flyttet til posisjon ${targetIndex + 1} av ${items.length}`,
-    ); // TODO - Bedre formulering?
   };
 
   return (
@@ -279,19 +277,34 @@ function DragAndDropInner<T>(
       dropTarget={dropTarget}
       setDropTarget={setCombinedDropTarget}
       dragHandlerActive={dragHandlerActive}
-      setDragHandlerActive={setDragHandlerActive}
+      onKeyboardDragStart={keyboardDragStart}
       onKeyboardDragEnd={onKeyboardDragEnd}
       startPendingDrag={startPendingDrag}
+      cancelDrag={cancelDrag}
+      setAnnouncer={setAnnouncer}
       itemAmount={items.length}
     >
-      <ul ref={forwardedRef} aria-label="Dra og slipp elementer">
+      <span id={SR_INSTRUCTIONS_ID} className="sr-only">
+        Bruk Tab for å fokusere på en kolonne. Trykk mellomrom eller enter for å
+        starte flytting, bruk piltastene for å flytte kolonnen, trykk mellomrom
+        eller enter for å slippe, eller Escape for å avbryte.
+      </span>
+      <div aria-live="assertive" className="sr-only" aria-atomic>
+        {announcer}
+      </div>
+      <ul
+        ref={forwardedRef}
+        aria-label="Kolonneinnstillinger"
+        aria-describedby={SR_INSTRUCTIONS_ID}
+        className="aksel-data-table__drag-and-drop-root"
+      >
         {items.map((item, index) => {
           return (
             <DragAndDropItem
               key={item.id}
               id={item.id}
               index={index}
-              itemLabel={item.label}
+              itemLabel={item.header}
             >
               {renderItem(item, index)}
             </DragAndDropItem>
@@ -306,6 +319,7 @@ function DragAndDropInner<T>(
           <Floating.Content
             align="start"
             updatePositionStrategy="always"
+            aria-hidden
             style={{
               pointerEvents: "none",
               boxSizing: "border-box",
@@ -316,16 +330,13 @@ function DragAndDropInner<T>(
               id={activeItem.id}
               index={activeItem.index}
               isOverlay
-              itemLabel={activeData.label}
+              itemLabel={activeData.header}
             >
               {renderItem(activeData, activeItem.index)}
             </DragAndDropItem>
           </Floating.Content>
         </Floating>
       )}
-      <div aria-live="assertive" className="sr-only" aria-atomic="true">
-        {announcement}
-      </div>
     </DragAndDropProvider>
   );
 }

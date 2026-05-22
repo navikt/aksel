@@ -35,6 +35,7 @@ async function fuseGlobalSearch(query: string) {
     includeMatches: true,
     threshold: 0.18,
     distance: 50,
+    useTokenSearch: true,
   });
 
   const fuseResults = fuse

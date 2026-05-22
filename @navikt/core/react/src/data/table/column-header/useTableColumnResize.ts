@@ -17,23 +17,6 @@ type ResizeProps = {
    * @default true
    */
   resizable?: boolean;
-  // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
-  /**
-   * Controlled width of the column. Does not respect `minWidth` and `maxWidth`.
-   *
-   * Should only be used to fully control column width state. Otherwise, use `defaultWidth` and let the component handle resizing.
-   *
-   * **NB:** Percentage as initial width does not work well with resizing.
-   */
-  width?: number | string;
-  /**
-   * Initial width of the column. Only used when `width` is not set and `resizable` is true.
-   * Does not respect `minWidth` and `maxWidth`.
-   *
-   * **NB:** Percentage as initial width does not work well with resizing.
-   * @default 140px
-   */
-  defaultWidth?: number | string;
   /**
    * Whether the column should automatically resize to fit its content. **Runs only once.**
    *
@@ -43,44 +26,51 @@ type ResizeProps = {
    * consider using `layout="auto"` on the root instead for better performance.
    *
    * **NB:** This can cause a layout shift. Set a good initial width with `width` or `defaultWidth` to mitigate this.
+   *
+   * **NB:** Does not work with block content.
    */
-  autoWidth?: boolean;
+  autoResizeOnce?: boolean;
   /**
-   * Minimum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
+   * Minimum width of the column when resizing. Only used when `resizable` or `autoResizeOnce` is enabled.
    * @default 40
    */
-  minWidth?: number;
+  resizeMin?: number;
   /**
-   * Maximum width of the column when resizing. Only used when `resizable` or `autoWidth` is enabled.
+   * Maximum width of the column when resizing. Only used when `resizable` or `autoResizeOnce` is enabled.
    */
-  maxWidth?: number;
+  resizeMax?: number;
+  // TODO: Consider "allowing" %-width on last column, if we find a solution to the overflow issue (width becomes 0px).
+  /**
+   * Controlled width of the column. (Does not respect `resizeMin` and `resizeMax`.)
+   *
+   * Should only be used to fully control column width state. Otherwise, use `default` and let the component handle resizing.
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
+   */
+  value?: number | string;
+  /**
+   * Initial width of the column. Only used when `value` is not set.
+   * (Does not respect `resizeMin` and `resizeMax`.)
+   *
+   * **NB:** Percentage as initial width does not work well with resizing.
+   * @default 140px
+   */
+  defaultValue?: number | string;
   /**
    * Called when the column width changes.
    * @param width New width in pixels.
    */
-  onWidthChange?: (width: number) => void;
-  /**
-   * Forwarded styles
-   */
-  style?: React.CSSProperties;
-  /**
-   * Forwarded colSpan
-   */
-  colSpan?: number;
+  onChange?: (width: number) => void;
 };
 
-type WithUndefined<T> = {
-  [K in keyof T]: T[K] | undefined;
-};
-type Unomittable<T> = WithUndefined<Required<T>>;
-
-type TableColumnResizeArgs = Unomittable<ResizeProps> & {
+type TableColumnResizeArgs = ResizeProps & {
   thRef: React.RefObject<HTMLTableCellElement | null>;
+  colSpan: number | undefined;
 };
 
 type TableColumnResizeResult =
   | {
-      style: React.CSSProperties;
+      width: number | string;
       resizeHandlerProps: {
         onMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"];
         onTouchStart: DOMAttributes<HTMLButtonElement>["onTouchStart"];
@@ -93,59 +83,53 @@ type TableColumnResizeResult =
       enabled: true;
     }
   | {
-      style?: React.CSSProperties;
+      width?: number | string;
       enabled: false;
     };
 
 /**
  * TODO:
- * - Do we allow % widths?
  * - Auto-width mode is hard now since that might cause layout-shifts on mount. But would be preferable to
  * be able to set "1fr" or similar and have it fill remaining space.
  */
-function useTableColumnResize(
-  args: TableColumnResizeArgs,
-): TableColumnResizeResult {
-  const {
-    resizable,
-    thRef,
-    width: userWidth,
-    defaultWidth,
-    autoWidth,
-    onWidthChange,
-    maxWidth = Infinity,
-    minWidth = 40,
-    style,
-    colSpan,
-  } = args;
-
+function useTableColumnResize({
+  resizable = true,
+  autoResizeOnce,
+  resizeMin = 40,
+  resizeMax = Infinity,
+  value,
+  defaultValue,
+  onChange,
+  thRef,
+  colSpan,
+}: TableColumnResizeArgs): TableColumnResizeResult {
   const tableContext = useDataTableContext();
 
   const [isResizingWithKeyboard, setIsResizingWithKeyboard] = useState(false);
   const ignoreNextOnClick = useRef(false);
 
   const [width, setWidth] = useControllableState({
-    value: userWidth,
-    defaultValue: defaultWidth ?? (colSpan ?? 1) * 140,
+    value,
+    defaultValue: defaultValue ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
      * Otherwise, this could cause excessive calls when resizing quickly.
      */
-    onChange: onWidthChange,
+    onChange,
   });
 
   const setClampedWidth = useCallback(
     (newWidth: number) => {
-      setWidth(Math.min(Math.max(newWidth, minWidth), maxWidth));
+      setWidth(Math.min(Math.max(newWidth, resizeMin), resizeMax));
     },
-    [minWidth, maxWidth, setWidth],
+    [resizeMin, resizeMax, setWidth],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoWidth changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoResizeOnce changes
   useEffect(
     function autoResizeColumn() {
-      if (!autoWidth) {
+      if (!autoResizeOnce) {
         return;
       }
 
@@ -154,20 +138,19 @@ function useTableColumnResize(
         setClampedWidth(newColumnWidth);
       }
     },
-    [autoWidth], // eslint-disable-line react-hooks/exhaustive-deps
+    [autoResizeOnce], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =
     useCallback(() => {
       // We need to use the onClick event in order to support screen readers properly,
-      // since some of them only send a mouse click when pressing enter/space.
+      // since some of them only send a mouse click (no kbd events) when pressing enter/space.
       // We detect a "screen reader click" by checking if we had a mouseUp event right before.
 
       if (ignoreNextOnClick.current) {
         ignoreNextOnClick.current = false;
         return;
       }
-
       setIsResizingWithKeyboard((prev) => !prev);
     }, []);
 
@@ -213,11 +196,11 @@ function useTableColumnResize(
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        if (newWidth > maxWidth) {
+        if (newWidth > resizeMax) {
           setWidth(newWidth < currentWidth ? newWidth : currentWidth);
           return;
         }
-        if (newWidth < minWidth) {
+        if (newWidth < resizeMin) {
           setWidth(newWidth > currentWidth ? newWidth : currentWidth);
           return;
         }
@@ -250,7 +233,7 @@ function useTableColumnResize(
       document.addEventListener("touchend", cleanup, { once: true });
       document.addEventListener("touchcancel", cleanup, { once: true });
     },
-    [maxWidth, minWidth, setWidth, setClampedWidth, thRef],
+    [resizeMax, resizeMin, setWidth, setClampedWidth, thRef],
   );
 
   const handleMouseDown: DOMAttributes<HTMLButtonElement>["onMouseDown"] =
@@ -269,7 +252,7 @@ function useTableColumnResize(
       [startResize],
     );
 
-  // Auto-size column to fit content on double click. NB: Doesn't work with block content!
+  // Auto-size column to fit content on double click
   const handleDoubleClick: DOMAttributes<HTMLButtonElement>["onDoubleClick"] =
     useCallback(() => {
       const newColumnWidth = getAutoColumnWidth(thRef);
@@ -280,26 +263,20 @@ function useTableColumnResize(
 
   if (tableContext.layout !== "fixed") {
     return {
-      style,
       enabled: false,
     };
   }
 
   if (!resizable) {
     return {
-      style: {
-        ...style,
-        width,
-      },
+      width,
+
       enabled: false,
     };
   }
 
   return {
-    style: {
-      ...style,
-      width,
-    },
+    width,
     resizeHandlerProps: {
       onMouseDown: handleMouseDown,
       onTouchStart: handleTouchStart,
@@ -313,12 +290,16 @@ function useTableColumnResize(
   };
 }
 
+/**
+ * Figures out how wide the column needs to be to fit all the content without truncation.
+ * NB: Does not work with block content!
+ */
 function getAutoColumnWidth(
   thRef: React.RefObject<HTMLTableCellElement | null>,
 ) {
   const th = thRef.current!;
   const thContent = th.querySelector(".aksel-data-table__th-content");
-  const thPaddingEl = th.querySelector("div");
+  const thPaddingEl = th.querySelector(".aksel-data-table__cell-content");
   const rows = th.closest("table")?.querySelectorAll("tbody tr, tfoot tr");
   if (!thContent || !thPaddingEl || !rows) {
     return;
@@ -361,17 +342,20 @@ function getAutoColumnWidth(
     skipRows = cell.rowSpan - 1;
 
     // Find needed width
-    const cellContent = cell.firstChild as HTMLElement;
-    range.selectNodeContents(cellContent);
-    const cellContentWidth = range.getBoundingClientRect().width;
-    const contentElStyle = window.getComputedStyle(cellContent);
-    const inlinePadding =
-      parseInt(contentElStyle.paddingLeft, 10) +
-      parseInt(contentElStyle.paddingRight, 10);
-    const widthNeededForThisCell =
-      (cellContentWidth + inlinePadding) / cell.colSpan;
+    const cellContent = cell.querySelector(
+      ".aksel-data-table__cell-content",
+    ) as HTMLElement | null;
+
+    if (!cellContent) {
+      continue;
+    }
+
+    cellContent.style.width = "fit-content";
+    const cellContentWidth = cellContent.scrollWidth;
+    cellContent.style.removeProperty("width");
+    const widthNeededForThisCell = (cellContentWidth + 1) / cell.colSpan;
     if (widthNeededForThisCell > newColumnWidth) {
-      newColumnWidth = widthNeededForThisCell;
+      newColumnWidth = Math.ceil(widthNeededForThisCell);
     }
   }
 

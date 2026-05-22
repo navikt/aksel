@@ -1,13 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Table,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import {
   ChevronLeftIcon,
@@ -15,21 +6,16 @@ import {
   CogIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import { DataGrid } from "../../data-grid";
 import { Dialog } from "../../dialog";
 import { Checkbox } from "../../form/checkbox";
-import { CheckboxInput } from "../../form/checkbox/checkbox-input/CheckboxInput";
 import { Radio, RadioGroup } from "../../form/radio";
-import { RadioInput } from "../../form/radio/radio-input/RadioInput";
-import { Search } from "../../form/search";
 import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
-import DataDragAndDrop from "../drag-and-drop-old/root/DataDragAndDropRoot";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
-import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { DataTable } from "../table/root/DataTableRoot";
-import { DataTable as DataTableLegacy } from "../table/root/DataTableRoot.legacy";
+import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
@@ -39,16 +25,11 @@ import {
   columnDef_TEST_DATA,
   columnDef_TEST_DATA_NESTED,
 } from "./Data.test-data";
-import {
-  PersonInfo,
-  columns,
-  homeSystemOptions,
-  sampleData,
-} from "./dummy-data";
+import { PersonInfo, homeSystemOptions } from "./dummy-data";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -57,17 +38,23 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
-export const KitchenSink: Story = {
+/* export const KitchenSink: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
       "normal" | "condensed" | "spacious"
     >("normal");
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
-    const [columnOrder, setColumnOrder] = React.useState<string[]>(
-      columns.map((col) => col.accessorKey!),
+    const [columnOrder, setColumnOrder] = React.useState<
+      ColumnDefinitions<any, any>
+    >(
+      columns.map((col) => ({
+        id: col.accessorKey!,
+        label: col.accessorKey!,
+        cell: () => <></>,
+      })),
     );
 
     const table = useReactTable({
@@ -85,10 +72,9 @@ export const KitchenSink: Story = {
         },
       },
       state: {
-        columnOrder,
+        columnOrder: columnOrder.map((col) => col.id),
       },
       enableRowSelection: false,
-      onColumnOrderChange: setColumnOrder,
       columnResizeMode: "onChange",
       debugTable: false,
       debugHeaders: false,
@@ -192,30 +178,29 @@ export const KitchenSink: Story = {
                         >
                           Velg alle
                         </Switch>
-                        <DataDragAndDrop setItems={setColumnOrder}>
-                          {table.getAllLeafColumns().map((column, index) => {
+                        <DragAndDrop
+                          items={columnOrder}
+                          setItems={setColumnOrder}
+                          renderItem={(item) => {
+                            const column = table
+                              .getAllLeafColumns()
+                              .find((col) => col.id === item.id);
                             return (
-                              <DataDragAndDrop.Item
-                                id={column.id}
-                                index={index}
-                                key={column.id}
+                              <Switch
+                                key={item.id}
+                                size="small"
+                                checked={column?.getIsVisible()}
+                                onChange={(event) => {
+                                  const handler =
+                                    column?.getToggleVisibilityHandler();
+                                  handler?.(event);
+                                }}
                               >
-                                <Switch
-                                  key={column.id}
-                                  size="small"
-                                  checked={column.getIsVisible()}
-                                  onChange={(event) => {
-                                    const handler =
-                                      column.getToggleVisibilityHandler();
-                                    handler(event);
-                                  }}
-                                >
-                                  {column.id}
-                                </Switch>
-                              </DataDragAndDrop.Item>
+                                {item.id}
+                              </Switch>
                             );
-                          })}
-                        </DataDragAndDrop>
+                          }}
+                        />
                       </VStack>
                     </VStack>
                   </HStack>
@@ -229,7 +214,7 @@ export const KitchenSink: Story = {
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
-          withKeyboardNav
+
         >
           <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
@@ -241,12 +226,6 @@ export const KitchenSink: Story = {
                         key={header.id}
                         style={{ width: `var(--header-${header.id}-size)` }}
                         defaultWidth={header.getSize()}
-                        /* pinningHandler={
-                          header.column.getIsPinned() === "left"
-                            ? () => header.column.pin(false)
-                            : () => header.column.pin("left")
-                        }
-                        isPinned={header.column.getIsPinned() === "left"} */
                         sortable
                         sortDirection={header.column.getIsSorted() || "none"}
                         onSortClick={(event) => {
@@ -254,6 +233,9 @@ export const KitchenSink: Story = {
                             header.column.getToggleSortingHandler();
                           handler?.(event);
                         }}
+                        label={(
+                          header.column.columnDef.header || ""
+                        ).toString()}
                       >
                         {header.isPlaceholder
                           ? null
@@ -298,7 +280,7 @@ export const KitchenSink: Story = {
     controls: { disable: true },
     docs: { disable: true },
   },
-};
+}; */
 
 const dayJobValues = [
   "Jedi Knight",
@@ -371,14 +353,22 @@ const filterOptions = [
   })),
 ];
 
+const allColumnIds = columnDef_TEST_DATA.map((col) => col.id);
+
 export const KitchenSinkAdvancedFilter: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
-      "normal" | "condensed" | "spacious"
-    >("normal");
+      "tight" | "standard" | "loose"
+    >("standard");
+    const [textSize, setTextSize] = React.useState<"small" | "medium">(
+      "medium",
+    );
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
     const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
+    const [visibleColumns, setVisibleColumns] =
+      useState<string[]>(allColumnIds);
+
     const [stickyColumns, setStickyColumns] = React.useState<{
       first: "none" | "first";
       last: "none" | "last";
@@ -395,7 +385,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["selectionMode"]>("none");
+      useState<DataGrid.Selection["mode"]>("none");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -532,9 +522,18 @@ export const KitchenSinkAdvancedFilter: Story = {
                         size="small"
                         value={rowDensity}
                       >
-                        <Radio value="condensed">Tett</Radio>
-                        <Radio value="normal">Normal</Radio>
-                        <Radio value="spacious">Løs</Radio>
+                        <Radio value="tight">Tett</Radio>
+                        <Radio value="standard">Standard</Radio>
+                        <Radio value="loose">Løs</Radio>
+                      </RadioGroup>
+                      <RadioGroup
+                        legend="Velg tekststørrelse"
+                        onChange={setTextSize}
+                        size="small"
+                        value={textSize}
+                      >
+                        <Radio value="small">Liten</Radio>
+                        <Radio value="medium">Medium</Radio>
                       </RadioGroup>
                       <Switch
                         size="small"
@@ -590,7 +589,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                           value={selectionMode}
                           onChange={(e) =>
                             setSelectionMode(
-                              e.target.value as SelectionProps["selectionMode"],
+                              e.target.value as DataGrid.Selection["mode"],
                             )
                           }
                         >
@@ -627,56 +626,42 @@ export const KitchenSinkAdvancedFilter: Story = {
                       <BodyShort weight="semibold">Vis kolonner</BodyShort>
                       <VStack gap="space-8">
                         <Switch
-                          checked={columnView.every(
-                            (col) => col.details?.visible,
-                          )}
+                          checked={
+                            visibleColumns.length === allColumnIds.length
+                          }
                           size="small"
                           onChange={() => {
-                            const allVisible = columnView.every(
-                              (col) => col.details?.visible,
-                            );
-                            const newColumnView = columnView.map((col) => ({
-                              ...col,
-                              details: {
-                                ...col.details,
-                                visible: !allVisible,
-                              },
-                            }));
-                            setColumnView(newColumnView);
+                            const allVisible =
+                              visibleColumns.length === allColumnIds.length;
+                            setVisibleColumns(allVisible ? [] : allColumnIds);
                           }}
                         >
                           Velg alle
                         </Switch>
-                        <DataDragAndDrop setItems={setColumnView}>
-                          {columnView.map((column, index) => {
+                        <DragAndDrop
+                          items={columnView}
+                          setItems={setColumnView}
+                          renderItem={(item) => {
                             return (
-                              <DataDragAndDrop.Item
-                                id={column.id}
-                                index={index}
-                                key={column.id}
+                              <Switch
+                                key={item.id}
+                                size="small"
+                                checked={visibleColumns.includes(item.id)}
+                                onChange={(event) => {
+                                  const isChecked = event.target.checked;
+                                  setVisibleColumns((prev) => {
+                                    if (isChecked) {
+                                      return [...prev, item.id];
+                                    }
+                                    return prev.filter((id) => id !== item.id);
+                                  });
+                                }}
                               >
-                                <Switch
-                                  key={column.id}
-                                  size="small"
-                                  checked={column.details?.visible}
-                                  onChange={(event) => {
-                                    const newColumnView = [...columnView];
-                                    newColumnView[index] = {
-                                      ...column,
-                                      details: {
-                                        ...column.details,
-                                        visible: event.target.checked,
-                                      },
-                                    };
-                                    setColumnView(newColumnView);
-                                  }}
-                                >
-                                  {column.id}
-                                </Switch>
-                              </DataDragAndDrop.Item>
+                                {item.header}
+                              </Switch>
                             );
-                          })}
-                        </DataDragAndDrop>
+                          }}
+                        />
                       </VStack>
                     </VStack>
                   </HStack>
@@ -686,34 +671,41 @@ export const KitchenSinkAdvancedFilter: Story = {
           }
         />
 
-        <DataTable
+        <DataGrid
           getRowId={(row) => row.name}
-          columnDefinitions={columnView.filter((col) => col.details?.visible)}
+          columns={columnView.filter((col) =>
+            visibleColumns.find((c) => c === col.id),
+          )}
           data={pagedData.paginatedData}
-          rowDensity={rowDensity}
-          zebraStripes={zebraStripes}
-          truncateContent={truncateContent}
-          withKeyboardNav
           selection={{
-            selectionMode,
+            mode: selectionMode,
           }}
-          stickyHeader
-          stickyColumns={{
-            first: stickyColumns.first === "first" ? "1" : undefined,
-            last: stickyColumns.last === "last" ? "1" : undefined,
+          settings={{
+            rowDensity,
+            zebraStripes,
+            textSize,
+            truncateContent,
+            stickyColumns: {
+              start: stickyColumns.first === "first" ? 1 : undefined,
+              end: stickyColumns.last === "last" ? 1 : undefined,
+            },
           }}
-          detailsPanel={{
-            getContent: showDetailsPanel
-              ? (rowData) => <DetailsPanel row={rowData} />
-              : undefined,
-          }}
-          subRows={{
-            /* @ts-expect-error Test-data just hacked together now  */
-            getRows: showNestedRows
-              ? (rowData) => rowData.nestedRows
-              : undefined,
-          }}
-        />
+        >
+          <DataGrid.Table<(typeof TEST_DATA)[number]>
+            stickyHeader
+            detailsPanel={
+              showDetailsPanel
+                ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }
+                : undefined
+            }
+            subRows={{
+              /* @ts-expect-error Test-data just hacked together now  */
+              getRows: showNestedRows
+                ? (rowData) => rowData.nestedRows
+                : undefined,
+            }}
+          />
+        </DataGrid>
       </VStack>
     );
   },
@@ -762,7 +754,7 @@ function usePaginatedData<T extends any[]>(data: T) {
   };
 }
 
-const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
+/* const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
   const hasRowSelection = table.options.enableRowSelection;
   const multiRowSelection = table.options.enableMultiRowSelection;
 
@@ -783,7 +775,7 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
         return (
           <DataTableLegacy.Tr key={row.id} selected={row.getIsSelected()}>
             {hasRowSelection && (
-              <DataTableLegacy.Td textAlign="center" UNSAFE_isSelection>
+              <DataTableLegacy.Td textAlign="center" cellType="action">
                 {multiRowSelection ? (
                   <CheckboxInput
                     compact
@@ -815,9 +807,9 @@ const TableBody = ({ table }: { table: Table<PersonInfo> }) => {
       })}
     </DataTableLegacy.Tbody>
   );
-};
-
+}; */
+/*
 const MemoizedTableBody = React.memo(
   TableBody,
   (_prev, next) => !!next.table.getState().columnSizingInfo.isResizingColumn,
-) as typeof TableBody;
+) as typeof TableBody; */
