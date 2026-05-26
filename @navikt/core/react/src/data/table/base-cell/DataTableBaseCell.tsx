@@ -7,12 +7,12 @@ interface DataTableBaseCellProps extends Omit<
   "width"
 > {
   /**
-   * Content alignment inside cell.
+   * Text alignment inside cell.
    *
    * Quantitative figures like amounts and percentages should be right‑aligned (but not phone numbers, postal codes etc.)
    * @default "left"
    */
-  textAlign?: "left" | "center" | "right";
+  align?: "left" | "center" | "right";
   /**
    * Internal cell type that controls padding, alignment, row-click prevention, and resize behavior.
    * - `"action"`: Centers content, removes cell padding, prevents row click, and disables column resize.
@@ -20,7 +20,7 @@ interface DataTableBaseCellProps extends Omit<
    */
   cellType?: "action";
   /**
-   * When true, clicking this cell will not trigger `onRowClick` on the row.
+   * When true, clicking this cell will not trigger `onRowAction` on the row.
    * Useful for cells that contain their own interactive content or actions
    * that should be independent of row-level click handling.
    */
@@ -28,7 +28,7 @@ interface DataTableBaseCellProps extends Omit<
   /**
    * Sets a max-width on the content wrapper div inside the cell.
    * This is only needed when using `layout="auto"` together with
-   * `truncateContent` on `<DataTable>` and you want the cell to be truncated.
+   * `truncateContent` on `<DataGrid.Table>` and you want the cell to be truncated.
    */
   contentMaxWidth?: number | string;
   /**
@@ -58,7 +58,7 @@ const DataTableBaseCell = forwardRef<
       children,
       as: Component,
       beforeContent,
-      textAlign = "left",
+      align = "left",
       cellType,
       preventRowClick,
       contentMaxWidth,
@@ -77,7 +77,7 @@ const DataTableBaseCell = forwardRef<
         ref={forwardedRef}
         className={cl("aksel-data-table__cell", className)}
         tabIndex={withKeyboardNav ? -1 : undefined}
-        data-align={textAlign}
+        data-align={align}
         data-cell-type={cellType || undefined}
         data-prevent-row-click={
           preventRowClick || cellType === "action" || undefined

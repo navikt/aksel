@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, within } from "storybook/test";
-import { DataGrid, type DataGridProps } from "../data-grid";
-import { DataTable } from "../table";
+import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/Resize",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -15,7 +15,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<DataGridProps<Row>>;
+type Story = StoryObj<DataGrid.Props<Row>>;
 
 type Row = {
   left: string;
@@ -45,30 +45,30 @@ export const Resize: Story = {
   render: (args) => {
     return (
       <DataGrid {...args}>
-        <DataTable />
+        <DataGrid.Table />
       </DataGrid>
     );
   },
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -77,38 +77,38 @@ export const Resize: Story = {
 export const ResizeMinMax: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
         width: {
-          default: 250,
+          defaultValue: 250,
           resizeMin: 100,
           resizeMax: 200,
         },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
         width: {
           resizeMin: 50,
           resizeMax: 400,
         },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
         width: {
-          default: 150,
+          defaultValue: 150,
           resizeMin: 200,
           resizeMax: 400,
         },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -117,27 +117,27 @@ export const ResizeMinMax: Story = {
 export const ResizeDefaultStaticWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
-        width: { default: "300px" },
-        cell: (row) => row.left,
+        width: { defaultValue: "300px" },
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
-        width: { default: "300px" },
-        cell: (row) => row.center,
+        width: { defaultValue: "300px" },
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
-        width: { default: "300px" },
-        cell: (row) => row.right,
+        width: { defaultValue: "300px" },
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -146,27 +146,27 @@ export const ResizeDefaultStaticWidth: Story = {
 export const ResizeDefaultDynamicWidth: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
-        label: "Left",
+        header: "Left",
         align: "left",
-        width: { default: "100%" },
-        cell: (row) => row.left,
+        width: { defaultValue: "100%" },
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
-        label: "Center",
+        header: "Center",
         align: "center",
-        width: { default: "100%" },
-        cell: (row) => row.center,
+        width: { defaultValue: "100%" },
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
-        label: "Right",
+        header: "Right",
         align: "right",
-        width: { default: "100%" },
-        cell: (row) => row.right,
+        width: { defaultValue: "100%" },
+        bodyCell: (row) => row.right,
       },
     ],
   },
@@ -175,55 +175,55 @@ export const ResizeDefaultDynamicWidth: Story = {
 export const ResizeAuto: Story = {
   args: {
     data: testData,
-    columnDefinitions: [
+    columns: [
       {
         id: "left",
-        label: "L",
+        header: "L",
         align: "left",
         width: {
-          default: 200,
+          defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.left,
+        bodyCell: (row) => row.left,
       },
       {
         id: "center",
-        label: "C",
+        header: "C",
         align: "center",
         width: {
-          default: 200,
+          defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.center,
+        bodyCell: (row) => row.center,
       },
       {
         id: "right",
-        label: "R",
+        header: "R",
         align: "right",
         width: {
-          default: 200,
+          defaultValue: 200,
           autoResizeOnce: true,
         },
-        cell: (row) => row.right,
+        bodyCell: (row) => row.right,
       },
       {
         id: "headingIsWidest",
-        label: "Heading is widest",
+        header: "Heading is widest",
         width: {
-          default: 50,
+          defaultValue: 50,
           autoResizeOnce: true,
         },
-        cell: () => "Test",
+        bodyCell: () => "Test",
       },
       {
         id: "headingIsWidestSortable",
-        label: "Heading is widest + sortable",
+        header: "Heading is widest + sortable",
         width: {
-          default: 50,
+          defaultValue: 50,
           autoResizeOnce: true,
         },
-        sortable: true,
-        cell: () => "Test",
+        isSortable: true,
+        bodyCell: () => "Test",
       },
     ],
   },
@@ -231,7 +231,7 @@ export const ResizeAuto: Story = {
     const [showTable, setShowTable] = React.useState(false);
     return showTable ? (
       <DataGrid {...props}>
-        <DataTable />
+        <DataGrid.Table />
       </DataGrid>
     ) : (
       <button onClick={() => setShowTable(true)}>Show table</button>
@@ -247,7 +247,7 @@ export const ResizeAuto: Story = {
     expect(headers.length).toBe(5);
     expect(headers[0]).toHaveStyle({ width: "80px" });
     expect(headers[1]).toHaveStyle({ width: "82px" });
-    expect(headers[2]).toHaveStyle({ width: "102px" });
+    expect(headers[2]).toHaveStyle({ width: "103px" });
     expect(headers[3]).toHaveStyle({ width: "168px" });
     expect(headers[4]).toHaveStyle({ width: "248px" });
   },

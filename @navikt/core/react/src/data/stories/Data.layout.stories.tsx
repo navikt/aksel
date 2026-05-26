@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataGrid, type DataGridProps } from "../data-grid";
-import { DataTable, type DataTableProps } from "../table";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 import { type PersonInfo, sampleData } from "./dummy-data";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/Layout",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -16,33 +16,41 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-const columnDefinitions: ColumnDefinitions<PersonInfo> = [
-  { id: "id", label: "Id", cell: (row) => row.name },
-  { id: "name", label: "Name", cell: (row) => row.name },
-  { id: "nationalId", label: "National id", cell: (row) => row.nationalId },
-  { id: "dayJob", label: "Day job", cell: (row) => row.dayJob },
-  { id: "supervisor", label: "Supervisor", cell: (row) => row.supervisor },
+const columns: ColumnDefinitions<PersonInfo> = [
+  { id: "id", header: "Id", bodyCell: (row) => row.name },
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+  {
+    id: "nationalId",
+    header: "National id",
+    bodyCell: (row) => row.nationalId,
+  },
+  { id: "dayJob", header: "Day job", bodyCell: (row) => row.dayJob },
+  { id: "supervisor", header: "Supervisor", bodyCell: (row) => row.supervisor },
   {
     id: "dateReceived",
-    label: "Date received",
-    cell: (row) => row.dateReceived,
+    header: "Date received",
+    bodyCell: (row) => row.dateReceived,
   },
   {
     id: "message",
-    label: "Message",
-    cell: (row) => row.message,
+    header: "Message",
+    bodyCell: (row) => row.message,
   },
-  { id: "age", label: "Age", cell: (row) => row.age },
+  { id: "age", header: "Age", bodyCell: (row) => row.age },
   {
     id: "forceSensitive",
-    label: "Force sensitive",
-    cell: (row) => (row.forceSensitive ? "Yes" : "No"),
+    header: "Force sensitive",
+    bodyCell: (row) => (row.forceSensitive ? "Yes" : "No"),
   },
-  { id: "homeSystem", label: "Home system", cell: (row) => row.homeSystem },
+  {
+    id: "homeSystem",
+    header: "Home system",
+    bodyCell: (row) => row.homeSystem,
+  },
   {
     id: "skills",
-    label: "Skills",
-    cell: (row) => row.skills.join(", "),
+    header: "Skills",
+    bodyCell: (row) => row.skills.join(", "),
   },
 ];
 
@@ -57,9 +65,9 @@ const minimalData: MinimalRow[] = [
 ];
 
 const minimalColumns: ColumnDefinitions<MinimalRow> = [
-  { id: "col1", label: "Column 1", cell: (row) => row.col1 },
-  { id: "col2", label: "Column 2", cell: (row) => row.col2 },
-  { id: "col3", label: "Column 3", cell: (row) => row.col3 },
+  { id: "col1", header: "Column 1", bodyCell: (row) => row.col1 },
+  { id: "col2", header: "Column 2", bodyCell: (row) => row.col2 },
+  { id: "col3", header: "Column 3", bodyCell: (row) => row.col3 },
 ];
 
 type SortableRow = {
@@ -75,13 +83,13 @@ const sortableData: SortableRow[] = [
 ];
 
 export const AutoLayoutMinimal: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -89,30 +97,31 @@ export const AutoLayoutMinimal: StoryObj<{
     table: {
       layout: "auto",
     },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
 export const AutoLayoutOverflowX: StoryObj<{
-  table: DataTableProps<PersonInfo>;
-  grid: Omit<DataGridProps<PersonInfo>, "children">;
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
   args: {
-    table: { layout: "auto", truncateContent: true },
+    table: { layout: "auto" },
     grid: {
+      settings: { truncateContent: true },
       data: sampleData.slice(0, 4),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
-              cell: (row: PersonInfo) => (
+              bodyCell: (row: PersonInfo) => (
                 <div style={{ maxWidth: 200 }}>{row.message}</div>
               ),
             }
@@ -123,25 +132,26 @@ export const AutoLayoutOverflowX: StoryObj<{
 };
 
 export const AutoLayoutNoCellTruncation: StoryObj<{
-  table: DataTableProps<PersonInfo>;
-  grid: Omit<DataGridProps<PersonInfo>, "children">;
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
   args: {
-    table: { layout: "auto", truncateContent: false },
+    table: { layout: "auto" },
     grid: {
+      settings: { truncateContent: false },
       data: sampleData.slice(0, 3),
-      columnDefinitions: columnDefinitions.map((col) =>
+      columns: columns.map((col) =>
         col.id === "message"
           ? {
               ...col,
-              cell: (row: PersonInfo) =>
+              bodyCell: (row: PersonInfo) =>
                 row.message.split(" ").slice(0, 4).join(" ") + ".",
             }
           : col,
@@ -151,13 +161,13 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
 };
 
 export const AutoLayoutSortable: StoryObj<{
-  table: DataTableProps<SortableRow>;
-  grid: Omit<DataGridProps<SortableRow>, "children">;
+  table: DataGrid.Table.Props<SortableRow>;
+  grid: Omit<DataGrid.Props<SortableRow>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -165,24 +175,24 @@ export const AutoLayoutSortable: StoryObj<{
     table: { layout: "auto" },
     grid: {
       data: sortableData,
-      columnDefinitions: [
+      columns: [
         {
           id: "left",
-          label: "Left",
-          sortable: true,
-          cell: (row) => row.left,
+          header: "Left",
+          isSortable: true,
+          bodyCell: (row) => row.left,
         },
         {
           id: "center",
-          label: "Center",
-          sortable: true,
-          cell: (row) => row.center,
+          header: "Center",
+          isSortable: true,
+          bodyCell: (row) => row.center,
         },
         {
           id: "right",
-          label: "Right",
-          sortable: true,
-          cell: (row) => row.right,
+          header: "Right",
+          isSortable: true,
+          bodyCell: (row) => row.right,
         },
       ],
     },
@@ -190,30 +200,30 @@ export const AutoLayoutSortable: StoryObj<{
 };
 
 export const FixedLayoutMinimal: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
   args: {
     table: { layout: "fixed" },
-    grid: { data: minimalData, columnDefinitions: minimalColumns },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
 export const FixedLayoutDynamicWidth: StoryObj<{
-  table: DataTableProps<MinimalRow>;
-  grid: Omit<DataGridProps<MinimalRow>, "children">;
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
 }> = {
   render: (args) => {
     return (
       <DataGrid {...args.grid}>
-        <DataTable {...args.table} />
+        <DataGrid.Table {...args.table} />
       </DataGrid>
     );
   },
@@ -221,7 +231,7 @@ export const FixedLayoutDynamicWidth: StoryObj<{
     table: { layout: "fixed" },
     grid: {
       data: minimalData,
-      columnDefinitions: minimalColumns.map((col) => ({
+      columns: minimalColumns.map((col) => ({
         ...col,
         defaultWidth: "100%",
       })),

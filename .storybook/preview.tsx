@@ -4,7 +4,6 @@ import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
 import addonVitest from "@storybook/addon-vitest";
 import { definePreview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
-import "../@navikt/core/css/src/data-table.css";
 import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";

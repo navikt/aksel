@@ -6,6 +6,7 @@ import {
   CogIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import { DataGrid } from "../../data-grid";
 import { Dialog } from "../../dialog";
 import { Checkbox } from "../../form/checkbox";
 import { Radio, RadioGroup } from "../../form/radio";
@@ -13,10 +14,8 @@ import { Select } from "../../form/select";
 import { Switch } from "../../form/switch";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
-import { DataGrid } from "../data-grid";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
-import type { SelectionProps } from "../table/hooks/useTableSelection";
-import { DataTable } from "../table/root/DataTableRoot";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 import { TokenFilter } from "../token-filter/TokenFilter";
 import type { ExternalQuery } from "../token-filter/TokenFilter.types";
 import { DataToolbar } from "../toolbar";
@@ -28,9 +27,9 @@ import {
 } from "./Data.test-data";
 import { PersonInfo, homeSystemOptions } from "./dummy-data";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -39,7 +38,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 /* export const KitchenSink: Story = {
   render: () => {
@@ -215,7 +214,7 @@ type Story = StoryObj<typeof DataTable>;
           rowDensity={rowDensity}
           zebraStripes={zebraStripes}
           truncateContent={truncateContent}
-          withKeyboardNav
+
         >
           <DataTableLegacy.Thead>
             {table.getHeaderGroups().map((headerGroup) => {
@@ -359,8 +358,8 @@ const allColumnIds = columnDef_TEST_DATA.map((col) => col.id);
 export const KitchenSinkAdvancedFilter: Story = {
   render: () => {
     const [rowDensity, setRowDensity] = React.useState<
-      "normal" | "condensed" | "spacious"
-    >("normal");
+      "tight" | "standard" | "loose"
+    >("standard");
     const [textSize, setTextSize] = React.useState<"small" | "medium">(
       "medium",
     );
@@ -386,7 +385,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     });
 
     const [selectionMode, setSelectionMode] =
-      useState<SelectionProps["selectionMode"]>("none");
+      useState<DataGrid.Selection["mode"]>("none");
 
     const filteredData = useMemo(() => {
       if (query.tokens.length === 0) {
@@ -523,9 +522,9 @@ export const KitchenSinkAdvancedFilter: Story = {
                         size="small"
                         value={rowDensity}
                       >
-                        <Radio value="condensed">Tett</Radio>
-                        <Radio value="normal">Normal</Radio>
-                        <Radio value="spacious">Løs</Radio>
+                        <Radio value="tight">Tett</Radio>
+                        <Radio value="standard">Standard</Radio>
+                        <Radio value="loose">Løs</Radio>
                       </RadioGroup>
                       <RadioGroup
                         legend="Velg tekststørrelse"
@@ -590,7 +589,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                           value={selectionMode}
                           onChange={(e) =>
                             setSelectionMode(
-                              e.target.value as SelectionProps["selectionMode"],
+                              e.target.value as DataGrid.Selection["mode"],
                             )
                           }
                         >
@@ -658,7 +657,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                                   });
                                 }}
                               >
-                                {item.label}
+                                {item.header}
                               </Switch>
                             );
                           }}
@@ -674,25 +673,26 @@ export const KitchenSinkAdvancedFilter: Story = {
 
         <DataGrid
           getRowId={(row) => row.name}
-          columnDefinitions={columnView.filter((col) =>
+          columns={columnView.filter((col) =>
             visibleColumns.find((c) => c === col.id),
           )}
           data={pagedData.paginatedData}
+          selection={{
+            mode: selectionMode,
+          }}
+          settings={{
+            rowDensity,
+            zebraStripes,
+            textSize,
+            truncateContent,
+            stickyColumns: {
+              start: stickyColumns.first === "first" ? 1 : undefined,
+              end: stickyColumns.last === "last" ? 1 : undefined,
+            },
+          }}
         >
-          <DataTable<(typeof TEST_DATA)[number]>
-            rowDensity={rowDensity}
-            zebraStripes={zebraStripes}
-            textSize={textSize}
-            truncateContent={truncateContent}
-            withKeyboardNav
-            selection={{
-              selectionMode,
-            }}
+          <DataGrid.Table<(typeof TEST_DATA)[number]>
             stickyHeader
-            stickyColumns={{
-              start: stickyColumns.first === "first" ? "1" : undefined,
-              end: stickyColumns.last === "last" ? "1" : undefined,
-            }}
             detailsPanel={
               showDetailsPanel
                 ? { getContent: (rowData) => <DetailsPanel row={rowData} /> }

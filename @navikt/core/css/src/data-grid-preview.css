@@ -1,6 +1,14 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable no-duplicate-selectors */
 
+.aksel-data-grid {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
 .aksel-data-table__border-wrapper {
   /* display:flex and max-height:100% is needed for a "no page scroll" layout */
   display: flex;
@@ -37,21 +45,18 @@
 
   /* Default font size is prop "medium", which is variable --ax-font-size-large */
   --__axc-data-table-text-size: var(--ax-font-size-large);
-  --__axc-data-table-density-base: var(--ax-space-16);
-  --__axc-data-table-density-scale: 1;
-  --__axc-data-table-density: calc(var(--__axc-data-table-density-base) * var(--__axc-data-table-density-scale));
+  --__axc-data-table-density: var(--ax-space-12);
 
   &[data-text-size="small"] {
     --__axc-data-table-text-size: var(--ax-font-size-medium);
-    --__axc-data-table-density-scale: 0.8889; /* 16/18 */
   }
 
-  &[data-density="condensed"] {
-    --__axc-data-table-density-base: var(--ax-space-8);
+  &[data-density="tight"] {
+    --__axc-data-table-density: var(--ax-space-6);
   }
 
-  &[data-density="spacious"] {
-    --__axc-data-table-density-base: var(--ax-space-32);
+  &[data-density="loose"] {
+    --__axc-data-table-density: var(--ax-space-20);
   }
 
   &[data-zebra-stripes="true"] {
@@ -188,6 +193,10 @@
   padding: 0;
   font-size: var(--__axc-data-table-text-size);
 
+  &:not(.aksel-data-table__column-header) {
+    overflow: hidden; /* Needed for cases where left margin is added to cell-content (nested rows) */
+  }
+
   &[data-nested="true"] {
     position: relative;
 
@@ -313,21 +322,6 @@
     .aksel-data-table[data-truncate-content="true"] & {
       text-overflow: ellipsis;
       white-space: nowrap;
-
-      /* TODO: Too magical? Consider prop instead */
-      > :is(.aksel-tag, .aksel-button) {
-        vertical-align: top;
-
-        &:not(:last-child) {
-          margin-right: var(--ax-space-8);
-        }
-      }
-    }
-
-    .aksel-data-table[data-truncate-content="false"] &:has(.aksel-tag, .aksel-button) {
-      display: flex;
-      gap: var(--ax-space-8);
-      flex-wrap: wrap;
     }
   }
 }
@@ -341,11 +335,11 @@
   position: relative;
   font-weight: var(--ax-font-weight-bold);
 
-  &:has(.aksel-data-table__th-sort-button:hover) {
+  &:has(.aksel-data-table__th-sort-button:hover:not(:disabled)) {
     background-color: var(--ax-bg-neutral-moderate-hover);
   }
 
-  &:has(.aksel-data-table__th-sort-button:active) {
+  &:has(.aksel-data-table__th-sort-button:active:not(:disabled)) {
     background-color: var(--ax-bg-neutral-moderate-pressed);
   }
 
@@ -371,6 +365,11 @@
   &:focus-visible {
     outline: none;
   }
+
+  &:disabled {
+    color: inherit;
+    cursor: default;
+  }
 }
 
 .aksel-data-table__th-sort-icon {
@@ -381,7 +380,7 @@
     visibility: hidden;
   }
 
-  .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within) & {
+  .aksel-data-table__th-sort-button:is(:hover, :focus-visible, :focus-within):not(:disabled) & {
     visibility: visible;
   }
 

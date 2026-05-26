@@ -1,47 +1,38 @@
 import type { DataTableColumnHeaderProps } from "../column-header/DataTableColumnHeader";
 
-type SortDirection = "asc" | "desc" | "none";
-
 /**
  * TODO:
  * - Consider "accessorKey" or similar to allow simple column definitions without a cell function.
- * - Add "align" property for better control over text alignment in cells.
  */
 type ColumnDefinition<T> = {
   id: string;
   /**
-   * Text alignment for cells in this column.
+   * Uses `<th>` instead of `<td>` for the cell if true.
    *
-   * @default "left"
+   * Should be used on the column that acts as row header.
+   * There should be exactly one column with this set to true.
    */
-  align?: "left" | "right" | "center"; // TODO: Pri zero: Use same name as in DataTableColumnHeaderProps (DataTableBaseCellProps) so that we can just Pick<DataTableColumnHeaderProps, "textAlign">
+  isRowHeader?: boolean; // TODO: Better documentation, consider warning if not one column has this set to true.
   /**
-   * Assigned to the cell's `th` element instead of `td` if true.
-   *
-   * Should be used for cells that act as row headers. Each row should have one rowheader, and only have one cell with `isRowHeader: true`,
-   * TODO: Better documentation, consider warning if not one column has this set to true.
+   * Name of the column.
+   * Used in the header cell unless `headerCell` is provided.
+   * Also used in the settings dialog.
    */
-  isRowHeader?: boolean;
+  header: string;
   /**
-   * Renders table header-cell
-   * TODO: Pri zero rename to headerCell
+   * Overrides header cell content. Should not differ too much from `header`.
    */
-  header?: React.ReactNode;
+  headerCell?: React.ReactNode;
   /**
-   * Renders table-cell
+   * Renders table body cell content.
    */
-  cell: (item: T) => React.ReactNode;
-  /**
-   * Label of header. Renders if header is not provided.
-   * TODO: Pri zero consider renaming to header
-   */
-  label: string;
+  bodyCell: (item: T) => React.ReactNode; // TODO: Consider including truncateContent (maybe all options) so that consumer can adjust how content is rendered based on this (e.g. toggle flex-wrap)
   /**
    * Makes the column sortable. Renders the header as a sort button.
-   * Use `sort` and `onSortChange` on the root component to control sort state.
+   * Use `sorting` prop on `DataGrid.Table` to configure sorting behavior and state management.
    */
-  sortable?: boolean;
-} & Pick<DataTableColumnHeaderProps, "width">;
+  isSortable?: boolean;
+} & Pick<DataTableColumnHeaderProps, "width" | "align">;
 
 type ColumnDefinitions<T> = ColumnDefinition<T>[];
 
@@ -64,9 +55,7 @@ type SortChangeDetail = {
   direction: "asc" | "desc" | "none";
 };
 
-type DataTableLoadingConfig = {
-  isLoading?: boolean;
-} & (
+type DataTableLoadingConfig =
   | {
       variant: "content";
       content: React.ReactNode;
@@ -79,8 +68,7 @@ type DataTableLoadingConfig = {
   | {
       variant: "overlay";
       label?: string;
-    }
-);
+    };
 
 type TableRowEntryId = string;
 
@@ -88,7 +76,6 @@ export type {
   ColumnDefinition,
   ColumnDefinitions,
   DataTableLoadingConfig,
-  SortDirection,
   SortEntry,
   SortChangeDetail,
   TableRowEntryId,

@@ -1,8 +1,10 @@
 import React from "react";
 import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
+import { HStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
-import type { ColumnDefinitions } from "../table/root/DataTable.types";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 
 type SWData = {
   id: number;
@@ -22,47 +24,48 @@ type SWData = {
 const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
   {
     id: "id",
-    label: "Id",
-    cell: (row) => row.id,
+    header: "Id",
+    bodyCell: (row) => row.id,
     width: { autoResizeOnce: true },
   },
   {
-    label: "Name",
+    header: "Name",
     id: "name",
-    cell: (row) =>
+    isRowHeader: true,
+    bodyCell: (row) =>
       `${row.name} ${row?.nestedRows?.length > 0 ? `(${row?.nestedRows?.length})` : ""}`,
   },
   {
-    label: "National id",
+    header: "National id",
     id: "nationalId",
-    cell: (row) => row.nationalId,
+    bodyCell: (row) => row.nationalId,
     align: "right",
     width: { autoResizeOnce: true },
   },
   {
-    label: "Day job",
+    header: "Day job",
     id: "dayJob",
-    cell: (row) => row.dayJob,
+    bodyCell: (row) => row.dayJob,
   },
   {
-    label: "Supervisor",
+    header: "Supervisor",
     id: "supervisor",
-    cell: (row) => row.supervisor,
+    bodyCell: (row) => row.supervisor,
   },
   {
-    label: "Date received",
+    header: "Date received",
     id: "dateReceived",
-    cell: (row) => row.dateReceived,
+    bodyCell: (row) => row.dateReceived,
   },
   {
-    label: "Message",
+    header: "Message",
     id: "message",
-    cell: (row) => row.message,
+    bodyCell: (row) => row.message,
   },
   {
-    label: "Age",
+    header: "Age",
     id: "age",
-    cell: (row) => row.age,
+    bodyCell: (row) => row.age,
     align: "right",
     width: { autoResizeOnce: true },
 
@@ -77,9 +80,9 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     }, */
   },
   {
-    label: "Force sensitive",
+    header: "Force sensitive",
     id: "forceSensitive",
-    cell: (row) => (
+    bodyCell: (row) => (
       <Tag
         size="small"
         variant="moderate"
@@ -90,41 +93,29 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
     align: "center",
   },
   {
-    label: "Home system",
+    header: "Home system",
     id: "homeSystem",
-    cell: (row) => row.homeSystem,
+    bodyCell: (row) => row.homeSystem,
   },
   {
-    label: "Skills",
+    header: "Skills",
     id: "skills",
-    cell: (row) =>
-      row.skills.map((skill) => (
-        <Tag key={skill} size="small" variant="moderate">
-          {skill}
-        </Tag>
-      )),
-    /* cell: (row) => (
-      <Bleed marginBlock="space-4" marginInline="space-4">
+    bodyCell: (row) => (
+      <HStack gap="space-8" wrap={false}>
         {row.skills.map((skill) => (
-          <Box
-            key={skill}
-            style={{ display: "inline-block" }}
-            padding="space-4"
-          >
-            <Tag size="small" variant="moderate">
-              {skill}
-            </Tag>
-          </Box>
+          <Tag key={skill} size="small" variant="moderate">
+            {skill}
+          </Tag>
         ))}
-      </Bleed>
-    ), */
+      </HStack>
+    ),
   },
   {
-    label: "Actions",
+    header: "Actions",
     id: "actions",
     width: { autoResizeOnce: true },
-    cell: (row) => (
-      <>
+    bodyCell: (row) => (
+      <HStack gap="space-8">
         <Button
           size="xsmall"
           variant="secondary"
@@ -133,13 +124,24 @@ const columnDef_TEST_DATA: ColumnDefinitions<SWData> = [
         >
           Edit
         </Button>
-        <Button
-          size="xsmall"
-          variant="secondary"
-          data-color="neutral"
-          icon={<MenuElipsisVerticalIcon title="Meny" />}
-        />
-      </>
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <Button
+              size="xsmall"
+              variant="secondary"
+              data-color="neutral"
+              icon={<MenuElipsisVerticalIcon title="Menu" />}
+            />
+          </ActionMenu.Trigger>
+          <ActionMenu.Content>
+            <ActionMenu.Group label="Actions">
+              <ActionMenu.Item>Delete</ActionMenu.Item>
+              <ActionMenu.Item>Assign</ActionMenu.Item>
+              <ActionMenu.Item>Change status</ActionMenu.Item>
+            </ActionMenu.Group>
+          </ActionMenu.Content>
+        </ActionMenu>
+      </HStack>
     ),
   },
 ];

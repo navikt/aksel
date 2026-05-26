@@ -45,6 +45,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
         }
         {...rest}
       >
+        {/* TODO: Padding on cell makes clickable area smaller than cell with button. Make cell clickable, have pointer etc */}
         {sortable ? (
           <button
             type="button"

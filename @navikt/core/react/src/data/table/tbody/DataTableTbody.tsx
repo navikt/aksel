@@ -1,4 +1,5 @@
 import React, { forwardRef, version } from "react";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { cl } from "../../../utils/helpers";
 import {
   DataTableLocationProvider,
@@ -11,6 +12,7 @@ const inertValue = parseInt(version.split(".")[0], 10) > 18 ? true : ""; // Supp
 
 const DataTableTbody = forwardRef<HTMLTableSectionElement, DataTableTbodyProps>(
   ({ className, ...rest }, forwardedRef) => {
+    const { isLoading } = useDataGridContext();
     const { loading } = useDataTableContext();
     return (
       <DataTableLocationProvider location="tbody">
@@ -20,9 +22,7 @@ const DataTableTbody = forwardRef<HTMLTableSectionElement, DataTableTbodyProps>(
           className={cl("aksel-data-table__tbody", className)}
           // @ts-expect-error - inert is not yet recognized by React's type definitions, but we want to use it for better accessibility when showing the loading overlay.
           inert={
-            loading?.isLoading && loading.variant === "overlay"
-              ? inertValue
-              : false
+            isLoading && loading?.variant === "overlay" ? inertValue : false
           }
         />
       </DataTableLocationProvider>

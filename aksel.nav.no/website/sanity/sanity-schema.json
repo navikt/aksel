@@ -8178,6 +8178,14 @@
               },
               "optional": true
             },
+            "preview_note": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "riktekst_accordion"
+              },
+              "optional": true
+            },
             "internal": {
               "type": "objectAttribute",
               "value": {

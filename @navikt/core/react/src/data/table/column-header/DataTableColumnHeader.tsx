@@ -6,21 +6,21 @@ import {
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import {
   DataTableBaseCell,
   type DataTableBaseCellProps,
 } from "../base-cell/DataTableBaseCell";
-import type { SortDirection } from "../root/DataTable.types";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 import { type ResizeProps, useTableColumnResize } from "./useTableColumnResize";
 
 interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
   /**
-   * Unique identifier for the column. Required for sortable columns to identify which column is being sorted.
+   * Unique identifier for the column. Used when sorting to identify which column is being sorted.
    */
-  id?: string;
+  id: string;
   /**
    * Accessible name of the column.
    */
@@ -29,18 +29,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * Makes the column sortable by clicking on the header.
    * The entire header cell content becomes a clickable button when true.
    */
-  sortable?: boolean; // TODO: Consider merging sortable, sortDirection and onSortClick into a single "sort" object prop
-  /**
-   * Current sort direction. Only relevant when `sortable` is true.
-   * Uses values matching the `aria-sort` attribute directly. // TODO: What does this mean? (Can we just remove it?)
-   * @default "none"
-   */
-  sortDirection?: SortDirection; // TODO Not in use???
-  /**
-   * Called when the user clicks the header. Only relevant when `sortable` is true.
-   * The consumer is responsible for determining and setting the next sort state. // TODO: We don't use the term "consumer" in JSDoc anywhere else
-   */
-  onSortClick?: (event: React.MouseEvent<HTMLElement>) => void; // TODO Not in use???
+  sortable?: boolean;
   /**
    * Object with props related to column width and resizing. Summary:
    *
@@ -49,7 +38,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
    * - `resizeMin?: number` - Minimum width of the column when resizing.
    * - `resizeMax?: number` - Maximum width of the column when resizing.
    * - `value?: number | string` - Controlled width of the column.
-   * - `default?: number | string` - Initial width of the column.
+   * - `defaultValue?: number | string` - Initial width of the column.
    * - `onChange?: (width: number) => void` - Called when the column width changes.
    *
    * See individual props for details and defaults.
@@ -57,7 +46,7 @@ interface DataTableColumnHeaderProps extends DataTableBaseCellProps {
   width?: ResizeProps;
 }
 
-const SORT_ICON: Record<SortDirection, React.ElementType> = {
+const SORT_ICON: Record<"asc" | "desc" | "none", React.ElementType> = {
   asc: SortUpIcon,
   desc: SortDownIcon,
   none: ArrowsUpDownIcon,
@@ -86,6 +75,7 @@ const DataTableColumnHeader = forwardRef<
     },
     forwardedRef,
   ) => {
+    const { isLoading } = useDataGridContext();
     const thRef = useRef<HTMLTableCellElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, thRef);
     const { sortingState } = useDataTableContext();
@@ -106,6 +96,8 @@ const DataTableColumnHeader = forwardRef<
 
     const SortIcon = canSort ? SORT_ICON[sortDirection] : null;
 
+    const contentId = `th-content-${id.replace(/\s/g, "-")}`;
+
     return (
       <DataTableBaseCell
         as="th"
@@ -116,14 +108,18 @@ const DataTableColumnHeader = forwardRef<
         style={{ ...style, width: resizeResult.width }}
         aria-sort={canSort ? getAriaSort(sortDirection) : undefined}
         cellType={cellType}
+        aria-labelledby={contentId} // Avoids VO announcing "Endre bredde" when navigating horizontally in tbody
       >
         {canSort ? (
           <button
             type="button"
             className="aksel-data-table__th-sort-button"
             onClick={(event) => onSortClick(id, event)}
+            disabled={isLoading}
           >
-            <div className="aksel-data-table__th-content">{children}</div>
+            <div id={contentId} className="aksel-data-table__th-content">
+              {children}
+            </div>
             {SortIcon && (
               <SortIcon
                 aria-hidden
@@ -135,6 +131,7 @@ const DataTableColumnHeader = forwardRef<
           </button>
         ) : (
           <div
+            id={contentId}
             className={cl({
               "aksel-data-table__th-content": cellType !== "action",
             })}
@@ -164,7 +161,7 @@ const DataTableColumnHeader = forwardRef<
               typeof resizeResult.width === "number" &&
               resizeResult.isResizingWithKeyboard
                 ? resizeResult.width.toString()
-                : "" // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
+                : " " // Needs to be blank when not in keyboard resizing mode to avoid NVDA announcing the value as part of the column heading
             } // Need either this or aria-valuemax to get SR (at least NVDA) to announce the value
           >
             {resizeResult.isResizingWithKeyboard && (
@@ -185,7 +182,7 @@ const DataTableColumnHeader = forwardRef<
 );
 
 function getAriaSort(
-  sortDirection: SortDirection | undefined,
+  sortDirection: "asc" | "desc" | "none" | undefined,
 ): "ascending" | "descending" | "none" | undefined {
   if (sortDirection === "asc") return "ascending";
   if (sortDirection === "desc") return "descending";

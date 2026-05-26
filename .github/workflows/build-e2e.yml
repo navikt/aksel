@@ -1,4 +1,4 @@
-name: E2E tests (Playwright)
+name: E2E tests
 on:
   push:
     branches: [main, next]

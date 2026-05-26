@@ -78,6 +78,12 @@ export const KomponentArtikkel = defineType({
           hidden: ({ parent }) => !(parent?.tag === "beta"),
         }),
         defineField({
+          name: "preview_note",
+          title: "Preview-notat",
+          type: "riktekst_accordion",
+          hidden: ({ parent }) => !(parent?.tag === "preview"),
+        }),
+        defineField({
           name: "internal",
           title: "Interne flater",
           description: "Er komponenten ment for bruk på interne flater?",

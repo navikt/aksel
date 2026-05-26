@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../../data-grid";
-import type { ColumnDefinitions } from "./DataTable.types";
-import { DataTable } from "./DataTableRoot";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
+import { DataGridTable } from "../table/root/DataGridTableRoot";
 
 type TestRow = {
   id: string;
@@ -11,9 +11,9 @@ type TestRow = {
   subRows?: TestRow[];
 };
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/DataTable/Tests",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
   },
@@ -21,7 +21,7 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
+type Story = StoryObj<typeof DataGridTable>;
 
 const data: TestRow[] = [
   {
@@ -60,9 +60,8 @@ const fallbackIdData: TestRow[] = [
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
-    label: "Name",
     header: "Name",
-    cell: (row) => row.name,
+    bodyCell: (row) => row.name,
   },
 ];
 
@@ -74,14 +73,12 @@ const getCheckboxes = (canvasElement: HTMLElement) =>
 export const ExpandedChildRowsIncludedInSelectAll: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={data}
       getRowId={(row) => row.id}
+      selection={{ mode: "multiple" }}
     >
-      <DataTable
-        subRows={{ getRows: getSubRows }}
-        selection={{ selectionMode: "multiple" }}
-      />
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
@@ -109,16 +106,16 @@ export const ExpandedChildRowsIncludedInSelectAll: Story = {
 export const FallbackIdsSelectAllVisibleRows: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={fallbackIdData}
       getRowId={(row) => row.id}
+      selection={{ mode: "multiple" }}
     >
-      <DataTable
+      <DataGrid.Table
         subRows={{
           getRows: getSubRows,
           defaultExpandedRowIds: ["0"],
         }}
-        selection={{ selectionMode: "multiple" }}
       />
     </DataGrid>
   ),
@@ -139,14 +136,12 @@ export const FallbackIdsSelectAllVisibleRows: Story = {
 export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
+      selection={{ mode: "multiple" }}
     >
-      <DataTable
-        subRows={{ getRows: getSubRows }}
-        selection={{ selectionMode: "multiple" }}
-      />
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
@@ -185,14 +180,12 @@ export const CollapsedParentSelectionIncludesHiddenDescendants: Story = {
 export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
   render: () => (
     <DataGrid
-      columnDefinitions={columns}
+      columns={columns}
       data={deepNestedData}
       getRowId={(row) => row.id}
+      selection={{ mode: "multiple" }}
     >
-      <DataTable
-        subRows={{ getRows: getSubRows }}
-        selection={{ selectionMode: "multiple" }}
-      />
+      <DataGrid.Table subRows={{ getRows: getSubRows }} />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {

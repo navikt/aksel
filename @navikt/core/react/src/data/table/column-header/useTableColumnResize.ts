@@ -55,7 +55,7 @@ type ResizeProps = {
    * **NB:** Percentage as initial width does not work well with resizing.
    * @default 140px
    */
-  default?: number | string;
+  defaultValue?: number | string;
   /**
    * Called when the column width changes.
    * @param width New width in pixels.
@@ -98,7 +98,7 @@ function useTableColumnResize({
   resizeMin = 40,
   resizeMax = Infinity,
   value,
-  default: defaultProp,
+  defaultValue,
   onChange,
   thRef,
   colSpan,
@@ -110,7 +110,7 @@ function useTableColumnResize({
 
   const [width, setWidth] = useControllableState({
     value,
-    defaultValue: defaultProp ?? (colSpan ?? 1) * 140,
+    defaultValue: defaultValue ?? (colSpan ?? 1) * 140,
     /**
      * TODO:
      * - Potential optimization: Only call when width as "stopped" changing, e.g. on mouse up or after a debounce when resizing with keyboard.
@@ -344,18 +344,18 @@ function getAutoColumnWidth(
     // Find needed width
     const cellContent = cell.querySelector(
       ".aksel-data-table__cell-content",
-    ) as HTMLElement;
-    range.selectNodeContents(cellContent);
-    const cellContentWidth = range.getBoundingClientRect().width;
-    const contentElStyle = window.getComputedStyle(cellContent);
-    const inlinePadding =
-      parseInt(contentElStyle.paddingLeft, 10) +
-      parseInt(contentElStyle.paddingRight, 10);
-    const marginLeft = parseInt(contentElStyle.marginLeft, 10); // We don't have right margin for now
-    const widthNeededForThisCell =
-      (cellContentWidth + inlinePadding + marginLeft) / cell.colSpan;
+    ) as HTMLElement | null;
+
+    if (!cellContent) {
+      continue;
+    }
+
+    cellContent.style.width = "fit-content";
+    const cellContentWidth = cellContent.scrollWidth;
+    cellContent.style.removeProperty("width");
+    const widthNeededForThisCell = (cellContentWidth + 1) / cell.colSpan;
     if (widthNeededForThisCell > newColumnWidth) {
-      newColumnWidth = widthNeededForThisCell;
+      newColumnWidth = Math.ceil(widthNeededForThisCell);
     }
   }
 

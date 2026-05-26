@@ -1,11 +1,7 @@
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
-import type { TableRowEntryId } from "../../root/DataTable.types";
 
-type SelectedKeysT = TableRowEntryId[];
-
-// TODO: Remove `any` if possible
-type SelectionProps<T = any> = {
+type SelectionProps<T = unknown> = {
   /**
    * Enables selection of rows.
    *
@@ -16,57 +12,51 @@ type SelectionProps<T = any> = {
    *
    * @default "none"
    */
-  selectionMode: "none" | "single" | "multiple";
+  mode: "none" | "single" | "multiple";
   /**
-   * Controlled selected keys. Should be used in conjunction with `onSelectionChange`.
+   * Controlled selected keys. Should be used in conjunction with `onSelectedRowIdsChange`.
    */
-  selectedKeys?: SelectedKeysT;
+  selectedRowIds?: string[];
   /**
    * Default selected keys when using uncontrolled selection. Should not be used together with `selectedKeys`.
    */
-  defaultSelectedKeys?: SelectedKeysT;
+  defaultSelectedRowIds?: string[];
   /**
    * Callback with array of selected keys.
    */
-  onSelectionChange?: (keys: SelectedKeysT) => void;
+  onSelectedRowIdsChange?: (ids: string[]) => void;
   /**
    * Callback to determine if a row should be enabled for selection.
-   *
    *
    * If set to a boolean, it will enable selection for all rows when true, and disable selection for all rows when false.
    */
   enableRowSelection?:
-    | (({ row, id }: { row: T; id: TableRowEntryId }) => boolean)
+    | (({ row, id }: { row: T; id: string }) => boolean)
     | boolean;
-  /**
-   * Determines if selection is triggered by clicking the row or the selection control (checkbox/radio).
-   * @default "row"
-   */
-  selectionTrigger?: "row" | "control";
 };
 
 type NoneSelection = {
-  selectionMode: "none";
-  selectedKeys: SelectedKeysT;
+  mode: "none";
+  selectedKeys: string[];
 };
 
 type SingleSelection = {
-  selectionMode: "single";
-  selectedKeys: SelectedKeysT;
-  getRowRadioProps: (key: TableRowEntryId, row: any) => RadioInputProps;
-  toggleSelection: (key: TableRowEntryId, row: any) => void;
+  mode: "single";
+  selectedKeys: string[];
+  getRowRadioProps: (key: string, row: any) => RadioInputProps;
+  toggleSelection: (key: string, row: any) => void;
 };
 
 type MultipleSelection = {
-  selectionMode: "multiple";
-  selectedKeys: SelectedKeysT;
+  mode: "multiple";
+  selectedKeys: string[];
   getTheadCheckboxProps: () => CheckboxInputProps;
-  getRowCheckboxProps: (key: TableRowEntryId, row: any) => CheckboxInputProps;
-  toggleSelection: (key: TableRowEntryId, row: any) => void;
+  getRowCheckboxProps: (key: string, row: any) => CheckboxInputProps;
+  toggleSelection: (key: string, row: any) => void;
 };
 
 type TableSelectionBase = {
-  isRowSelected: (rowId: TableRowEntryId) => boolean;
+  isRowSelected: (rowId: string) => boolean;
 };
 
 type TableSelection = TableSelectionBase &
@@ -75,7 +65,6 @@ type TableSelection = TableSelectionBase &
 export type {
   MultipleSelection,
   NoneSelection,
-  SelectedKeysT,
   SelectionProps,
   SingleSelection,
   TableSelection,

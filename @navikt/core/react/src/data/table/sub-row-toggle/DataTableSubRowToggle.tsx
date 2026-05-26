@@ -23,7 +23,7 @@ function DataTableSubRowToggle({ details }: { details: ItemDetail<any> }) {
             tableItems.onExpandedRowIdsChange(details.id);
           }}
           aria-expanded={isRowExpanded}
-          aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"}
+          aria-label={isRowExpanded ? "Skjul under-rader" : "Vis under-rader"} // TODO translate
           icon={
             isRowExpanded ? (
               <ChevronDownIcon aria-hidden />

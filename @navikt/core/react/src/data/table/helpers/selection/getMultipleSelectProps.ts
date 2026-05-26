@@ -2,15 +2,16 @@ import type { ChangeEventHandler, SetStateAction } from "react";
 import type { CheckboxInputProps } from "../../../../form/checkbox/checkbox-input/CheckboxInput";
 import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
 import type { UseTableItemsReturn } from "../../hooks/useTableItems";
-import type { TableRowEntryId } from "../../root/DataTable.types";
-import type { SelectedKeysT, SelectionProps } from "./selection.types";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
+import type { SelectionProps } from "./selection.types";
 import { canSelectTableRow, mutateRowSelection } from "./selection.utils";
 
 type GetMultipleSelectPropsArgs<T> = {
   selectedKeysSet: Set<TableRowEntryId>;
-  selectedKeys: SelectedKeysT;
-  setSelectedKeys: (next: SetStateAction<SelectedKeysT>) => void;
+  selectedKeys: string[];
+  setSelectedKeys: (next: SetStateAction<string[]>) => void;
   tableItems: UseTableItemsReturn<T>;
+  isLoading?: boolean;
 } & Pick<SelectionProps<T>, "enableRowSelection">;
 
 function getMultipleSelectProps<T>({
@@ -19,6 +20,7 @@ function getMultipleSelectProps<T>({
   setSelectedKeys,
   enableRowSelection,
   tableItems,
+  isLoading,
 }: GetMultipleSelectPropsArgs<T>) {
   const selectableIdsSet: Set<TableRowEntryId> = new Set();
 
@@ -40,7 +42,7 @@ function getMultipleSelectProps<T>({
   const handleToggleRow = (key: TableRowEntryId, row: T) => {
     if (!row) {
       consoleWarning(
-        `Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
+        `DataGrid.Table: Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
       );
     }
 
@@ -62,6 +64,9 @@ function getMultipleSelectProps<T>({
   const toggleAllRowSelected: ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
+    if (isLoading) {
+      return;
+    }
     if (event.target.checked) {
       const preserved = selectedKeys.filter((k) => !selectableIdsSet.has(k));
       setSelectedKeys([...preserved, ...selectableIdsSet]);
@@ -75,6 +80,7 @@ function getMultipleSelectProps<T>({
       checked: isAllSelected,
       indeterminate: !isAllSelected && someSelected,
       onChange: toggleAllRowSelected,
+      disabled: selectableIdsSet.size === 0 || isLoading,
     }),
     getRowCheckboxProps: (key: TableRowEntryId, row: T): CheckboxInputProps => {
       return {

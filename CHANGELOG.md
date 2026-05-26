@@ -1,5 +1,19 @@
 # Changelog
 
+## 8.11.0
+
+### @navikt/ds-react
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+### @navikt/ds-css
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+### @navikt/aksel-icons
+
+- Icons: New icon `Newsletter` and `NewsletterFill` ([#4887](https://github.com/navikt/aksel/pull/4887))
+
 ## 8.10.6
 
 ### @navikt/ds-css
