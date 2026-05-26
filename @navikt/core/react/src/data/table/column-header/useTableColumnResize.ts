@@ -26,8 +26,6 @@ type ResizeProps = {
    * consider using `layout="auto"` on the root instead for better performance.
    *
    * **NB:** This can cause a layout shift. Set a good initial width with `width` or `defaultWidth` to mitigate this.
-   *
-   * **NB:** Does not work with block content.
    */
   autoResizeOnce?: boolean;
   /**
@@ -292,7 +290,6 @@ function useTableColumnResize({
 
 /**
  * Figures out how wide the column needs to be to fit all the content without truncation.
- * NB: Does not work with block content!
  */
 function getAutoColumnWidth(
   thRef: React.RefObject<HTMLTableCellElement | null>,
@@ -353,7 +350,13 @@ function getAutoColumnWidth(
     cellContent.style.width = "fit-content";
     const cellContentWidth = cellContent.scrollWidth;
     cellContent.style.removeProperty("width");
-    const widthNeededForThisCell = (cellContentWidth + 1) / cell.colSpan;
+    let marginLeft = 0;
+    if (cell.dataset.nested === "true") {
+      const contentElStyle = window.getComputedStyle(cellContent);
+      marginLeft = parseInt(contentElStyle.marginLeft, 10);
+    }
+    const widthNeededForThisCell =
+      (cellContentWidth + marginLeft + 1) / cell.colSpan;
     if (widthNeededForThisCell > newColumnWidth) {
       newColumnWidth = Math.ceil(widthNeededForThisCell);
     }
