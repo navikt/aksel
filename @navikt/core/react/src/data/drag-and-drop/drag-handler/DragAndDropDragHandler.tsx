@@ -77,7 +77,11 @@ export const DragAndDropDragHandler = React.forwardRef<
             context?.onKeyboardDragStart(null);
           }
         }}
-        onBlur={() => context?.cancelDrag()}
+        onBlur={() => {
+          if (context?.activeItem) return;
+
+          context?.cancelDrag();
+        }}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             // Enter or space, currently active item - end keyboard dragging
