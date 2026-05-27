@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import type {
   ColumnDefinition,
   ColumnDefinitions,
@@ -112,6 +113,13 @@ function orderColumnsAndFilterByVisibility<T>(
 
   return columnDisplay.reduce<ColumnDefinition<T>[]>((acc, { id, visible }) => {
     const col = columnMap.get(id);
+
+    if (!col) {
+      consoleWarning(
+        `DataGrid: Column with id "${id}" not found in column definitions. Please check your columnDisplay configuration.`,
+      );
+    }
+
     if (col && visible) {
       acc.push(col);
     }
