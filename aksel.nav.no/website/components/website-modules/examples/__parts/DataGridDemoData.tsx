@@ -17,7 +17,6 @@ type CaseT = {
   caseType: "Vedtak" | "Journalføring" | "Behandling" | "Godkjent behandling";
   location: string;
   keywords: string[];
-  createdAt: Date;
   priority: 0 | 1 | 2 | 3;
   sender: string;
   age: Date;
@@ -30,24 +29,52 @@ type CaseT = {
   deadline: Date;
 };
 
-function generateDataGridDemo({
-  withSorting = false,
-  withNesting = false,
-}: { withSorting?: boolean; withNesting?: boolean } = {}) {
-  const columns: DataGrid.Columns<CaseT> = [
+const now = Date.now();
+
+function createDemoRows(count: number): CaseT[] {
+  /* prettier-ignore */
+  const names = ["Emma","Olivia","Nora","Sofie","Leah","Ella","Frida","Sofia","Ellinor","Astrid","Noah","Jakob","Lucas","Emil","Oskar","William","Elias","Isak","Oliver","Ludvig"];
+  /* prettier-ignore */
+  const locations = ["Oslo","Bergen","Trondheim","Stavanger","Bærum","Kristiansand","Drammen","Asker","Lillestrøm","Fredrikstad","Sandnes","Tromsø","Sandefjord","Nordre Follo","Sarpsborg","Tønsberg","Ålesund","Skien","Bodø","Moss","Lørenskog","Larvik","Indre Østfold","Arendal","Ullensaker","Karmøy","Øygarden","Haugesund","Porsgrunn","Ringsaker","Hamar","Molde","Halden","Ringerike","Gjøvik","Askøy","Alver","Sola","Kongsberg","Lillehammer","Lier","Eidsvoll","Horten","Færder","Holmestrand","Bjørnafjorden","Nittedal","Rana","Grimstad","Harstad","Stjørdal","Nes","Kristiansund","Steinkjer","Lindesnes","Sunnfjord","Ås","Elverum","Alta","Stange","Narvik","Klepp","Øvre Eiker","Levanger","Nesodden","Rælingen","Time","Hå","Vestby","Stord","Orkland","Aurskog","Kongsvinger","Melhus","Kinn","Nannestad","Voss","Frogn","Vennesla","Verdal","Eigersund","Namsos","Malvik","Senja","Østre Toten","Modum","Bamble","Strand","Gran","Vestre Toten","Vefsn","Hustadvika","Notodden","Kvinnherad","Gjesdal","Sogndal","Bømlo","Randaberg","Lillesand","Tysvær"];
+  /* prettier-ignore */
+  const keywordPool = ["Hørsel","Syn","Tale","Bevegelse","Kognisjon","Psykisk helse","Fysisk helse","Sosialt nettverk","Arbeid","Utdanning","Økonomi","Familie","Fritid","Transport","Tilgjengelighet","Teknologi","Kommunikasjon","Mat og ernæring","Søvn","Smertelindring"];
+  /* prettier-ignore */
+  const caseTypes = ["Vedtak","Journalføring","Behandling","Godkjent behandling"] as const;
+  /* prettier-ignore */
+  const statuses = ["Mottatt","Under behandling","Avventer opplysninger","Til godkjenning","Under kontroll"] as const;
+
+  return Array.from({ length: count }, (_, index) => {
+    const rng = seededRandomNumberGenerator(index + 1);
+
+    const keywordCount = rng(4) + 1;
+    const keywords = new Set<string>();
+    while (keywords.size < keywordCount) {
+      keywords.add(keywordPool[rng(keywordPool.length)]);
+    }
+
+    return {
+      caseId: `${index + 1}`,
+      caseType: caseTypes[rng(caseTypes.length)],
+      location: locations[rng(locations.length)],
+      keywords: Array.from(keywords),
+      priority: ([0, 1, 2, 3] as const)[rng(4)],
+      sender: names[rng(names.length)],
+      age: new Date(now - index * daysInMs(1)),
+      status: statuses[rng(statuses.length)],
+      deadline: new Date(now - daysInMs(8) + (index % 50) * daysInMs(1)),
+    };
+  });
+}
+
+/* prettier-ignore */
+function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } = {}): DataGrid.Columns<CaseT> {
+  return [
     {
       id: "caseId",
       header: "Id",
       bodyCell: ({ caseId }) => caseId.toString(),
-      width: withNesting ? { defaultValue: 130 } : { autoResizeOnce: true },
+      width: { autoResizeOnce: true },
       isRowHeader: true,
-    },
-    {
-      id: "createdAt",
-      header: "Opprettet",
-      bodyCell: ({ createdAt }) => createdAt.toLocaleDateString("no"),
-      width: { defaultValue: 110 },
-      isSortable: withSorting,
     },
     {
       id: "caseType",
@@ -92,7 +119,7 @@ function generateDataGridDemo({
       id: "age",
       header: "Saksalder",
       bodyCell: ({ age }) =>
-        `${Math.floor((Date.now() - age.getTime()) / (1000 * 60 * 60 * 24))}d`,
+        `${Math.floor((Date.now() - age.getTime()) / daysInMs(1))}d`,
       align: "right",
       width: { defaultValue: 110 },
       isSortable: withSorting,
@@ -135,36 +162,6 @@ function generateDataGridDemo({
       width: { autoResizeOnce: true },
     },
   ];
-
-  const data: CaseT[] = new Array(100).fill(null).map((_, index) => ({
-    caseId: `${index + 1}`,
-    caseType: (
-      ["Vedtak", "Journalføring", "Behandling", "Godkjent behandling"] as const
-    )[random(4)],
-    location: getLocation(),
-    keywords: getKeywords(),
-    createdAt: new Date(Date.now() - index * 1000 * 60 * 60 * 24),
-    priority: ([0, 1, 2, 3] as const)[random(4)],
-    sender: getName(),
-    age: new Date(Date.now() - index * 1000 * 60 * 60 * 24),
-    status: (
-      [
-        "Mottatt",
-        "Under behandling",
-        "Avventer opplysninger",
-        "Til godkjenning",
-        "Under kontroll",
-      ] as const
-    )[random(5)],
-    deadline: new Date(
-      Date.now() - daysInMs(8) + (index % 50) * 1000 * 60 * 60 * 24,
-    ),
-  }));
-
-  return {
-    columns,
-    data,
-  };
 }
 
 const PriorityNames = {
@@ -190,8 +187,6 @@ function PriorityTag({ priority }: { priority: CaseT["priority"] }) {
   );
 }
 
-const now = Date.now();
-
 function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
   const isOverdue = deadline.getTime() < now;
 
@@ -215,38 +210,21 @@ function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
   );
 }
 
-function random(max: number) {
-  return Math.floor(Math.random() * max);
+/** Park-Miller MCG seeded per row. Deterministic */
+function seededRandomNumberGenerator(seed: number): (max: number) => number {
+  let s = seed | 0;
+  return (max: number) => {
+    s = Math.imul(48271, s) | 0;
+    return Math.abs(s) % max;
+  };
 }
 
 function daysInMs(days: number) {
   return days * 24 * 60 * 60 * 1000;
 }
 
-function getName() {
-  /* prettier-ignore */
-  const names = ["Emma","Olivia","Nora","Sofie","Leah","Ella","Frida","Sofia","Ellinor","Astrid","Noah","Jakob","Lucas","Emil","Oskar","William","Elias","Isak","Oliver","Ludvi"];
-  return names[random(names.length)];
-}
-
-function getLocation() {
-  /* prettier-ignore */
-  const locations = ["Oslo","Bergen","Trondheim","Stavanger","Bærum","Kristiansand","Drammen","Asker","Lillestrøm","Fredrikstad","Sandnes","Tromsø","Sandefjord","Nordre Follo","Sarpsborg","Tønsberg","Ålesund","Skien","Bodø","Moss","Lørenskog","Larvik","Indre Østfold","Arendal","Ullensaker","Karmøy","Øygarden","Haugesund","Porsgrunn","Ringsaker","Hamar","Molde","Halden","Ringerike","Gjøvik","Askøy","Alver","Sola","Kongsberg","Lillehammer","Lier","Eidsvoll","Horten","Færder","Holmestrand","Bjørnafjorden","Nittedal","Rana","Grimstad","Harstad","Stjørdal","Nes","Kristiansund","Steinkjer","Lindesnes","Sunnfjord","Ås","Elverum","Alta","Stange","Narvik","Klepp","Øvre Eiker","Levanger","Nesodden","Rælingen","Time","Hå","Vestby","Stord","Orkland","Aurskog","Kongsvinger","Melhus","Kinn","Nannestad","Voss","Frogn","Vennesla","Verdal","Eigersund","Namsos","Malvik","Senja","Østre Toten","Modum","Bamble","Strand","Gran","Vestre Toten","Vefsn","Hustadvika","Notodden","Kvinnherad","Gjesdal","Sogndal","Bømlo","Randaberg","Lillesand","Tysvær"];
-  return locations[random(locations.length)];
-}
-
-function getKeywords() {
-  /* prettier-ignore */
-  const words = ["Hørsel","Syn","Tale","Bevegelse","Kognisjon","Psykisk helse","Fysisk helse","Sosialt nettverk","Arbeid","Utdanning","Økonomi","Familie","Fritid","Transport","Tilgjengelighet","Teknologi","Kommunikasjon","Mat og ernæring","Søvn","Smertelindring"];
-
-  const count = random(4) + 1;
-  const keywords = new Set<string>();
-
-  while (keywords.size < count) {
-    keywords.add(words[random(words.length)]);
-  }
-
-  return Array.from(keywords);
+function generateDataGridDemo(options: { withSorting?: boolean } = {}) {
+  return { columns: createDemoColumns(options), data: createDemoRows(100) };
 }
 
 export { generateDataGridDemo };
