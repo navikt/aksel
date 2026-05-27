@@ -3,10 +3,13 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
+import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
+import { cl } from "../../../utils/helpers";
 import {
   ColumnDefinition,
   ColumnDefinitions,
@@ -31,12 +34,12 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
  */
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
-const SR_INSTRUCTIONS_ID = "drag-and-drop-instructions-id";
 
 function DragAndDropInner<T>(
-  { items, setItems, renderItem }: DragAndDropProps<T>,
+  { items, setItems, renderItem, className, ...rest }: DragAndDropProps<T>,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ) {
+  const instructionsId = useId();
   const [activeItem, setActiveItem] = useState<DragAndDropElement | null>(null);
   const [dropTarget, setDropTarget] = useState<DragAndDropElement | null>(null);
   const [dragHandlerActive, setDragHandlerActive] =
@@ -44,15 +47,28 @@ function DragAndDropInner<T>(
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
   const [announcer, setAnnouncer] = useState("");
   const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
-  const activeData = items.find((item) => item.id === activeItem?.id);
+  const virtualPositionRef = useRef({ x: 0, y: 0 });
+  const itemsById = useMemo(
+    () => new Map(items.map((item) => [item.id, item] as const)),
+    [items],
+  );
+  const activeData = activeItem ? itemsById.get(activeItem.id) : undefined;
 
   const activeItemRef = useRef<DragAndDropElement | null>(null);
   const dropTargetRef = useRef<DragAndDropElement | null>(null);
 
-  const [virtualRef, setVirtualRef] = useState({
-    getBoundingClientRect: () =>
-      DOMRect.fromRect({ width: 0, height: 0, x: 0, y: 0 }),
-  });
+  const virtualRef = useMemo(
+    () => ({
+      getBoundingClientRect: () =>
+        DOMRect.fromRect({
+          width: 0,
+          height: 0,
+          x: virtualPositionRef.current.x,
+          y: virtualPositionRef.current.y,
+        }),
+    }),
+    [],
+  );
 
   const pendingDragStartRef = useRef<{
     item: DragAndDropElement;
@@ -99,6 +115,11 @@ function DragAndDropInner<T>(
 
   const setCombinedDropTarget = useCallback(
     (item: DragAndDropElement | null) => {
+      const previous = dropTargetRef.current;
+      if (previous?.id === item?.id && previous?.index === item?.index) {
+        return;
+      }
+
       dropTargetRef.current = item;
       setDropTarget(item);
     },
@@ -108,8 +129,22 @@ function DragAndDropInner<T>(
   const reorderItems = useCallback(
     (fromIndex: number, toIndex: number) => {
       setItems((currentItems) => {
+        if (
+          fromIndex === toIndex ||
+          fromIndex < 0 ||
+          toIndex < 0 ||
+          fromIndex >= currentItems.length ||
+          toIndex >= currentItems.length
+        ) {
+          return currentItems;
+        }
+
         const newItems = [...currentItems];
         const [movedItem] = newItems.splice(fromIndex, 1);
+        if (!movedItem) {
+          return currentItems;
+        }
+
         newItems.splice(toIndex, 0, movedItem);
         return newItems;
       });
@@ -161,7 +196,7 @@ function DragAndDropInner<T>(
         const deltaX = Math.abs(event.clientX - pendingStart.startX);
         const deltaY = Math.abs(event.clientY - pendingStart.startY);
 
-        if (deltaX > DRAG_THRESHOLD || deltaY > DRAG_THRESHOLD) {
+        if (deltaX >= DRAG_THRESHOLD || deltaY >= DRAG_THRESHOLD) {
           if (element) {
             element.setPointerCapture(pendingStart.pointerId);
           }
@@ -178,15 +213,7 @@ function DragAndDropInner<T>(
       const active = activeItemRef.current;
       if (!active) return;
 
-      setVirtualRef({
-        getBoundingClientRect: () =>
-          DOMRect.fromRect({
-            width: 0,
-            height: 0,
-            x: event.clientX,
-            y: event.clientY,
-          }),
-      });
+      virtualPositionRef.current = { x: event.clientX, y: event.clientY };
 
       const elements = document.elementsFromPoint(event.clientX, event.clientY);
 
@@ -257,6 +284,8 @@ function DragAndDropInner<T>(
     cancelDrag,
   ]);
 
+  const describedBy = cl(rest["aria-describedby"], instructionsId);
+
   const onKeyboardDragEnd = (diff: number, label: string) => {
     if (!dragHandlerActive) return;
 
@@ -284,19 +313,20 @@ function DragAndDropInner<T>(
       setAnnouncer={setAnnouncer}
       itemAmount={items.length}
     >
-      <span id={SR_INSTRUCTIONS_ID} className="sr-only">
+      <span id={instructionsId} className="aksel-sr-only">
         Bruk Tab for å fokusere på en kolonne. Trykk mellomrom eller enter for å
         starte flytting, bruk piltastene for å flytte kolonnen, trykk mellomrom
         eller enter for å slippe, eller Escape for å avbryte.
       </span>
-      <div aria-live="assertive" className="sr-only" aria-atomic>
+      <div aria-live="assertive" className="aksel-sr-only" aria-atomic>
         {announcer}
       </div>
       <ul
+        {...rest}
         ref={forwardedRef}
-        aria-label="Kolonneinnstillinger"
-        aria-describedby={SR_INSTRUCTIONS_ID}
-        className="aksel-data-table__drag-and-drop-root"
+        aria-label={rest["aria-label"] ?? "Kolonneinnstillinger"}
+        aria-describedby={describedBy}
+        className={cl("aksel-data-table__drag-and-drop-root", className)}
       >
         {items.map((item, index) => {
           return (
