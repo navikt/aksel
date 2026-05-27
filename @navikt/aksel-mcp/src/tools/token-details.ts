@@ -27,9 +27,10 @@ const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {
 
     /* Because of schema validation, this should in theory not be reachable without direct call */
     if (!token) {
-      // Provide helpful suggestions for similar token names
       const similarTokens = tokens
-        .filter((t: any) => t.name.includes(tokenName.toLowerCase()))
+        .filter((t: any) =>
+          t.name.toLowerCase().includes(tokenName.toLowerCase()),
+        )
         .slice(0, 5)
         .map((t: any) => t.name);
 
