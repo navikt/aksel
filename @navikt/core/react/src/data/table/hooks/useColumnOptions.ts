@@ -13,6 +13,10 @@ type UseColumnOptions = {
   hasSelection: boolean;
   hasDetailsPanel: boolean;
   layout: "fixed" | "auto";
+  columnDisplay?: {
+    id: string;
+    visible: boolean;
+  }[];
 };
 
 type StickyStartState = {
@@ -37,7 +41,13 @@ function useColumnOptions<T>(
   columnDefinitions: ColumnDefinitions<T>,
   options: UseColumnOptions,
 ): UseColumnOptionsResult<T> {
-  const { stickyColumns, hasSelection, hasDetailsPanel, layout } = options;
+  const {
+    stickyColumns,
+    hasSelection,
+    hasDetailsPanel,
+    layout,
+    columnDisplay,
+  } = options;
 
   const hasStickyStart = stickyColumns?.start === 1;
 
@@ -49,11 +59,15 @@ function useColumnOptions<T>(
     (stickyExpansion ? ACTION_CELL_WIDTH : 0) +
     (stickySelection ? ACTION_CELL_WIDTH : 0);
 
+  const visibleColumns = useMemo(() => {
+    return orderColumnsAndFilterByVisibility(columnDefinitions, columnDisplay);
+  }, [columnDefinitions, columnDisplay]);
+
   const columns = useMemo(() => {
-    return columnDefinitions.map((colDef, index) => {
+    return visibleColumns.map((colDef, index) => {
       const isFirstSticky = hasStickyStart && index === 0;
       const isLastSticky =
-        stickyColumns?.end === 1 && index === columnDefinitions.length - 1;
+        stickyColumns?.end === 1 && index === visibleColumns.length - 1;
 
       return {
         isSticky: isFirstSticky
@@ -66,12 +80,7 @@ function useColumnOptions<T>(
         colDef,
       };
     });
-  }, [
-    columnDefinitions,
-    hasStickyStart,
-    stickyColumns,
-    stickyFirstColumnOffset,
-  ]);
+  }, [visibleColumns, hasStickyStart, stickyColumns, stickyFirstColumnOffset]);
 
   const totalColSpan =
     columns.length +
@@ -91,6 +100,24 @@ function useColumnOptions<T>(
   };
 }
 
+function orderColumnsAndFilterByVisibility<T>(
+  columns: ColumnDefinition<T>[],
+  columnDisplay?: { id: string; visible: boolean }[],
+): ColumnDefinition<T>[] {
+  if (!columnDisplay) {
+    return columns;
+  }
+
+  const columnMap = new Map(columns.map((col) => [col.id, col]));
+
+  return columnDisplay.reduce<ColumnDefinition<T>[]>((acc, { id, visible }) => {
+    const col = columnMap.get(id);
+    if (col && visible) {
+      acc.push(col);
+    }
+    return acc;
+  }, []);
+}
+
 export { useColumnOptions };
-export type { StickyStartState };
-export type { UseColumnOptionsResult };
+export type { StickyStartState, UseColumnOptionsResult };

@@ -31,6 +31,13 @@ type DataGridSettings = {
    * @default "medium"
    */
   textSize?: "small" | "medium";
+  /**
+   * Optional configuration for column display settings.
+   * If provided:
+   * - Order of columns will be determined by the order of this array, not the `columns` prop.
+   * - Visible-boolean will determine if the column is rendered or not.
+   */
+  columnDisplay?: { id: string; visible: boolean }[];
 };
 
 export type { DataGridSettings };

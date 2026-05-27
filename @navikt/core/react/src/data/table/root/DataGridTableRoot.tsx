@@ -195,6 +195,7 @@ const DataGridTableInternal = forwardRef<
         hasSelection: tableSelectionState.selection.mode !== "none",
         hasDetailsPanel: !!detailsPanel?.getContent,
         layout,
+        columnDisplay: tableSettings?.columnDisplay,
       },
     );
 
