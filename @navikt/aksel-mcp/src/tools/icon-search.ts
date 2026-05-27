@@ -26,7 +26,7 @@ const iconSearchInputSchema = {
     .describe(
       "Filter by subcategory (e.g., 'Communication', 'Arrow', 'Body parts')",
     ),
-  /* Since keywoards are quite verbose and plentyfull, we just return string here to avoid bloating schema */
+  /* Since keywords are quite verbose and plentyfull, we just return string here to avoid bloating schema */
   keyword: z
     .string()
     .optional()

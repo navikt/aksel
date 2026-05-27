@@ -1,7 +1,7 @@
 import type { McpResource } from "../types.js";
 
 const URI = "aksel-docs://llm-index";
-const MIME_TYPE = "text/markdown";
+const MIME_TYPE = "application/json";
 
 /* TODO: Handle caching through a fetch generic if possible */
 // Cache the llm.txt content with a reasonable TTL (1 hour)
@@ -37,8 +37,10 @@ const llmIndexResource: McpResource = {
           contents: [
             {
               uri: URI,
-              mimeType: "text/plain",
-              text: `Error: Failed to fetch Aksel documentation index from aksel.nav.no/api/llm/docs\n\nError: ${errorMessage}\n\nPlease check your internet connection or try again later.`,
+              mimeType: MIME_TYPE,
+              text: JSON.stringify({
+                error: `Failed to fetch documentation index: ${errorMessage}`,
+              }),
             },
           ],
         };
@@ -49,7 +51,7 @@ const llmIndexResource: McpResource = {
       contents: [
         {
           uri: URI,
-          mimeType: "application/json",
+          mimeType: MIME_TYPE,
           text: cachedContent,
         },
       ],

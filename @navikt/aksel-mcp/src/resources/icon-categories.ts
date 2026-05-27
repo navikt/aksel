@@ -9,7 +9,7 @@ const categoriesMap = new Map<
   { category: string; subcategories: Set<string>; iconCount: number }
 >();
 
-/* TODO: Unsure why it cant resolve the types correctly here */
+/* TODO: Unsure why it can't resolve the types correctly here */
 const metadata = unParsedMetadata as unknown as Record<string, AkselIcon>;
 
 for (const icon of Object.values(metadata)) {
