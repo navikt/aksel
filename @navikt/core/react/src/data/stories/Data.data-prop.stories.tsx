@@ -1091,8 +1091,7 @@ export const ColumnDisplay: Story = {
             });
           }}
         >
-          Scrable order
-        </Button>
+          Scramble order
         <Button
           onClick={() => {
             setColumnDisplay((prev) => {
