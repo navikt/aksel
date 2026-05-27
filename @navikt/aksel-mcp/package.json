@@ -29,7 +29,7 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.21.1",
     "@types/node": "^24.10.9",
-    "typescript": "6.0.2",
-    "vitest": "4.1.4"
+    "typescript": "6.0.3",
+    "vitest": "4.1.5"
   }
 }
