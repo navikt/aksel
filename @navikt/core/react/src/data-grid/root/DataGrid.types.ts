@@ -32,10 +32,13 @@ type DataGridSettings = {
    */
   textSize?: "small" | "medium";
   /**
-   * Optional configuration for column display settings.
-   * If provided:
-   * - Order of columns will be determined by the order of this array, not the `columns` prop.
-   * - Visible-boolean will determine if the column is rendered or not.
+   * Optional configuration for column order and visibility.
+   *
+   * If provided, only columns listed here are rendered, and the array order
+   * determines the rendered column order.
+   *
+   * Set `visible: false` to hide a column without removing it from the list.
+   * Each `id` must be unique and match a column `id` in the `columns` prop.
    */
   columnDisplay?: { id: string; visible: boolean }[];
 };
