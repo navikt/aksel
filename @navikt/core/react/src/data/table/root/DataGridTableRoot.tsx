@@ -239,7 +239,7 @@ const DataGridTableInternal = forwardRef<
             aria-busy={isLoading || undefined}
           >
             <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-              <DataTableThead>
+              <DataTableThead data-sticky={stickyHeader || undefined}>
                 <DataTableTr>
                   {columns.map(
                     ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {

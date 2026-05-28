@@ -137,7 +137,7 @@ function getStickyOffsets(element: HTMLElement): {
   }
 
   const stickyHeader = table.querySelector<HTMLElement>(
-    `.aksel-data-table__tr[data-sticky="true"]`,
+    `.aksel-data-table__thead[data-sticky="true"]`,
   );
 
   const stickyNodesStart = table.querySelectorAll<HTMLElement>(
