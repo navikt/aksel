@@ -564,7 +564,7 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    * Disable indent for this item if other items in the same group have left-side markers, such as icons or checkbox/radio indicators.
    * @default false
    */
-  disableItemIndent?: boolean;
+  disableIndent?: boolean;
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -580,7 +580,7 @@ export const ActionMenuItem: OverridableComponent<
       shortcut,
       variant,
       iconPosition = "left",
-      disableItemIndent = false,
+      disableIndent = false,
       ...rest
     },
     ref,
@@ -592,7 +592,7 @@ export const ActionMenuItem: OverridableComponent<
           "aksel-action-menu__item--danger": variant === "danger",
         })}
         data-marker={icon ? iconPosition : undefined}
-        data-disable-item-indent={disableItemIndent}
+        data-indent={!disableIndent}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >

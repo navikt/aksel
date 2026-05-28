@@ -24,7 +24,7 @@ const Example = () => {
             >
               Personoversikt
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.info} disableItemIndent>
+            <ActionMenu.Item onSelect={console.info} disableIndent>
               Søk journalpost
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={console.info}>
@@ -47,5 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 13,
-  desc: "Alle ActionMenu.Item i en ActionMenu.Group får innrykk hvis minst én av dem har en venstrestilt markør (f.eks. ikon, radio eller checkbox). Dette kan overstyres for individuelle elementer ved å bruke `disableItemIndent`-prop på ActionMenu.Item.",
+  desc: "Alle ActionMenu.Item i en ActionMenu.Group får innrykk hvis minst én av dem har en venstrestilt markør (f.eks. ikon, radio eller checkbox). Dette kan overstyres for individuelle elementer ved å bruke `disableIndent`-prop på ActionMenu.Item.",
 };

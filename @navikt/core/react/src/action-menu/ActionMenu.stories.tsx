@@ -188,7 +188,7 @@ export const DisabledItemIndent: Story = {
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={() => console.log("Item 3 clicked")}
-              disableItemIndent
+              disableIndent
             >
               Item 3
             </ActionMenu.Item>
