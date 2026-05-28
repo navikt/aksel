@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
@@ -22,6 +22,8 @@ import {
   DataGridSettingsOptions,
 } from "../root/DataGrid.types";
 import { useDataGridContext } from "../root/DataGridRoot.context";
+
+type ColumnDisplayEntry = { id: string; label: string; visible: boolean };
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: never;
@@ -52,7 +54,7 @@ const DataGridPreferences = forwardRef<
   }
 
   const { tableSettings, updateTableSettings } = context;
-  const [open, setOpen] = useState(true /* TODO: true for testing only */);
+  const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DataGridSettings>({});
 
   function handleOpenChange(nextOpen: boolean) {
@@ -67,6 +69,12 @@ const DataGridPreferences = forwardRef<
     setOpen(false);
   }
 
+  function handleColumnDisplayChange(
+    columnDisplay: NonNullable<DataGridSettings["columnDisplay"]>,
+  ) {
+    setDraft((prev) => ({ ...prev, columnDisplay }));
+  }
+
   const rowPropertyValues = [
     ...(draft.truncateContent ? ["truncateContent"] : []),
     ...(draft.zebraStripes ? ["zebraStripes"] : []),
@@ -78,7 +86,7 @@ const DataGridPreferences = forwardRef<
   ];
 
   return (
-    <Dialog open={open} onOpenChange={(nextOpen) => handleOpenChange(nextOpen)}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger>
         <Button
           ref={forwardedRef}
@@ -150,14 +158,12 @@ const DataGridPreferences = forwardRef<
                 <Checkbox
                   value="truncateContent"
                   description="Kutter innhold som ikke får plass i cellen på en linje"
-                  defaultChecked={draft.truncateContent}
                 >
                   Kutt innhold
                 </Checkbox>
                 <Checkbox
                   value="zebraStripes"
                   description="Legger på en bakgrunnsfarge for annenhver rad"
-                  defaultChecked={draft.zebraStripes}
                 >
                   Zebra-striper
                 </Checkbox>
@@ -189,9 +195,9 @@ const DataGridPreferences = forwardRef<
                 <Checkbox value="sticky-end">Siste kolonne</Checkbox>
               </CheckboxGroup>
             </div>
-            <DragNDropSettingsBlock
+            <ColumnDisplayBlock
               columnDisplay={draft.columnDisplay}
-              setDraft={setDraft}
+              onColumnDisplayChange={handleColumnDisplayChange}
             />
           </div>
         </DialogBody>
@@ -207,24 +213,25 @@ const DataGridPreferences = forwardRef<
   );
 });
 
-function DragNDropSettingsBlock({
+function ColumnDisplayBlock({
   columnDisplay,
-  setDraft,
+  onColumnDisplayChange,
 }: {
   columnDisplay: DataGridSettings["columnDisplay"];
-  setDraft: React.Dispatch<React.SetStateAction<DataGridSettings>>;
+  onColumnDisplayChange: (
+    value: NonNullable<DataGridSettings["columnDisplay"]>,
+  ) => void;
 }) {
-  const context = useDataGridContext();
+  const { columnDefinitions } = useDataGridContext();
 
   /**
    * Single source of truth for the ordered+visible column list.
    * - No columnDisplay set → all columns visible in definition order.
    * - columnDisplay set → columns in display order with saved visibility.
    */
-  const mergedColumns = useMemo(() => {
-    const defs = context.columnDefinitions;
+  const mergedColumns = useMemo((): ColumnDisplayEntry[] => {
     if (!columnDisplay) {
-      return defs.map((col) => ({
+      return columnDefinitions.map((col) => ({
         id: col.id,
         label: col.header,
         visible: true,
@@ -232,59 +239,57 @@ function DragNDropSettingsBlock({
     }
     return columnDisplay
       .map((displayCol) => {
-        const def = defs.find((c) => c.id === displayCol.id);
+        const def = columnDefinitions.find((c) => c.id === displayCol.id);
         if (!def) return null;
         return { id: def.id, label: def.header, visible: displayCol.visible };
       })
-      .filter(
-        (c): c is { id: string; label: string; visible: boolean } => c !== null,
-      );
-  }, [columnDisplay, context.columnDefinitions]);
+      .filter((c): c is ColumnDisplayEntry => c !== null);
+  }, [columnDisplay, columnDefinitions]);
 
-  const isAllVisible =
-    mergedColumns.length > 0 && mergedColumns.every((col) => col.visible);
+  const visibleCount = mergedColumns.filter((c) => c.visible).length;
+  const isAllVisible = visibleCount === mergedColumns.length;
 
   const dndItems = useMemo(
     () => mergedColumns.map(({ id, label }) => ({ id, label })),
     [mergedColumns],
   );
 
-  function setDndItems(
-    action: React.SetStateAction<{ id: string; label: string }[]>,
-  ) {
-    const newItems = typeof action === "function" ? action(dndItems) : action;
-    const visibilityMap = new Map(mergedColumns.map((c) => [c.id, c.visible]));
-    setDraft((prev) => ({
-      ...prev,
-      columnDisplay: newItems.map((item) => ({
-        id: item.id,
-        visible: visibilityMap.get(item.id) ?? true,
-      })),
-    }));
-  }
+  const setDndItems = useCallback(
+    (action: React.SetStateAction<{ id: string; label: string }[]>) => {
+      const newItems = typeof action === "function" ? action(dndItems) : action;
+      const visibilityMap = new Map(
+        mergedColumns.map((c) => [c.id, c.visible]),
+      );
+      onColumnDisplayChange(
+        newItems.map((item) => ({
+          id: item.id,
+          visible: visibilityMap.get(item.id) ?? true,
+        })),
+      );
+    },
+    [dndItems, mergedColumns, onColumnDisplayChange],
+  );
 
-  function toggleAll() {
+  const toggleAll = useCallback(() => {
     const newVisible = !isAllVisible;
-    setDraft((prev) => ({
-      ...prev,
-      columnDisplay: mergedColumns.map(({ id }) => ({
-        id,
-        visible: newVisible,
-      })),
-    }));
-  }
+    onColumnDisplayChange(
+      mergedColumns.map(({ id }) => ({ id, visible: newVisible })),
+    );
+  }, [isAllVisible, mergedColumns, onColumnDisplayChange]);
 
-  function toggleColumn(id: string) {
-    const col = mergedColumns.find((c) => c.id === id);
-    const newVisible = !(col?.visible ?? true);
-    setDraft((prev) => ({
-      ...prev,
-      columnDisplay: mergedColumns.map((c) => ({
-        id: c.id,
-        visible: c.id === id ? newVisible : c.visible,
-      })),
-    }));
-  }
+  const toggleColumn = useCallback(
+    (id: string) => {
+      const col = mergedColumns.find((c) => c.id === id);
+      const newVisible = !(col?.visible ?? true);
+      onColumnDisplayChange(
+        mergedColumns.map((c) => ({
+          id: c.id,
+          visible: c.id === id ? newVisible : c.visible,
+        })),
+      );
+    },
+    [mergedColumns, onColumnDisplayChange],
+  );
 
   return (
     <div className="aksel-data-grid__preferences-block">
