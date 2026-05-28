@@ -28,7 +28,7 @@ export const Default: Story = {
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
           <DataGridPreferences />
         </div>
-        <DataGrid.Table />
+        <DataGrid.Table layout="auto" />
       </DataGrid>
     );
   },

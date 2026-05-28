@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import {
@@ -49,9 +49,33 @@ const DataGridPreferences = forwardRef<
   }
 
   const { tableSettings, updateTableSettings } = context;
+  const [open, setOpen] = useState(true /* TODO: true for testing only */);
+  const [draft, setDraft] = useState<DataGridSettings>({});
+
+  function handleOpenChange(nextOpen: boolean) {
+    if (nextOpen) {
+      setDraft(tableSettings ?? {});
+    }
+    setOpen(nextOpen);
+  }
+
+  function handleSave() {
+    updateTableSettings?.(draft);
+    setOpen(false);
+  }
+
+  const rowPropertyValues = [
+    ...(draft.truncateContent ? ["truncateContent"] : []),
+    ...(draft.zebraStripes ? ["zebraStripes"] : []),
+  ];
+
+  const stickyColumnValues = [
+    ...(draft.stickyColumns?.start ? ["sticky-start"] : []),
+    ...(draft.stickyColumns?.end ? ["sticky-end"] : []),
+  ];
 
   return (
-    <Dialog defaultOpen>
+    <Dialog open={open} onOpenChange={(nextOpen) => handleOpenChange(nextOpen)}>
       <DialogTrigger>
         <Button
           ref={forwardedRef}
@@ -74,11 +98,12 @@ const DataGridPreferences = forwardRef<
                 legend="Velg radtetthet"
                 size="small"
                 onChange={(value) => {
-                  updateTableSettings?.({
+                  setDraft((prev) => ({
+                    ...prev,
                     rowDensity: value as DataGridSettings["rowDensity"],
-                  });
+                  }));
                 }}
-                value={tableSettings?.rowDensity}
+                value={draft.rowDensity}
               >
                 {Object.entries(DataGridSettingsOptions.rowDensity).map(
                   ([key, value]) => (
@@ -88,7 +113,17 @@ const DataGridPreferences = forwardRef<
                   ),
                 )}
               </RadioGroup>
-              <RadioGroup legend="Tekststørrelse" size="small">
+              <RadioGroup
+                legend="Tekststørrelse"
+                size="small"
+                onChange={(value) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    textSize: value as DataGridSettings["textSize"],
+                  }));
+                }}
+                value={draft.textSize}
+              >
                 {Object.entries(DataGridSettingsOptions.textSize).map(
                   ([key, value]) => (
                     <Radio key={key} value={key}>
@@ -97,27 +132,56 @@ const DataGridPreferences = forwardRef<
                   ),
                 )}
               </RadioGroup>
-              <CheckboxGroup legend="Radegenskaper" size="small">
+              <CheckboxGroup
+                legend="Radegenskaper"
+                size="small"
+                value={rowPropertyValues}
+                onChange={(values: string[]) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    truncateContent: values.includes("truncateContent"),
+                    zebraStripes: values.includes("zebraStripes"),
+                  }));
+                }}
+              >
                 <Checkbox
                   value="truncateContent"
                   description="Kutter innhold som ikke får plass i cellen på en linje"
+                  defaultChecked={draft.truncateContent}
                 >
                   Kutt innhold
                 </Checkbox>
                 <Checkbox
                   value="zebraStripes"
                   description="Legger på en bakgrunnsfarge for annenhver rad"
+                  defaultChecked={draft.zebraStripes}
                 >
                   Zebra-striper
                 </Checkbox>
-                <Checkbox
+                {/* TODO: Setting not yet available */}
+                {/* <Checkbox
                   value="columnDividers"
                   description="Skiller kolonner fra hverandre med en strek"
+                  defaultChecked={draft.columnDisplay === "dividers"}
+
                 >
                   Kolonnestrek
-                </Checkbox>
+                </Checkbox> */}
               </CheckboxGroup>
-              <CheckboxGroup legend="Sticky kolonner" size="small">
+              <CheckboxGroup
+                legend="Sticky kolonner"
+                size="small"
+                value={stickyColumnValues}
+                onChange={(values: string[]) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    stickyColumns: {
+                      start: values.includes("sticky-start") ? 1 : undefined,
+                      end: values.includes("sticky-end") ? 1 : undefined,
+                    },
+                  }));
+                }}
+              >
                 <Checkbox value="sticky-start">Første kolonne</Checkbox>
                 <Checkbox value="sticky-end">Siste kolonne</Checkbox>
               </CheckboxGroup>
@@ -131,9 +195,7 @@ const DataGridPreferences = forwardRef<
           <DialogCloseTrigger>
             <Button variant="secondary">Avbryt</Button>
           </DialogCloseTrigger>
-          <DialogCloseTrigger>
-            <Button>Lagre</Button>
-          </DialogCloseTrigger>
+          <Button onClick={handleSave}>Lagre</Button>
         </DialogFooter>
       </DialogPopup>
     </Dialog>

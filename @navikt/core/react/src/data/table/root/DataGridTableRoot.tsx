@@ -201,6 +201,7 @@ const DataGridTableInternal = forwardRef<
 
     const tableId = useId(id);
 
+    /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
     return (

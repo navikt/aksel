@@ -24,7 +24,7 @@ function useDataGridSettings(args: UseDataGridSettingsArgs): {
     () => ({
       rowDensity: settings?.rowDensity ?? "standard",
       zebraStripes: settings?.zebraStripes ?? false,
-      truncateContent: settings?.truncateContent,
+      truncateContent: settings?.truncateContent ?? true,
       stickyColumns: settings?.stickyColumns ?? {},
       textSize: settings?.textSize ?? "medium",
       columnDisplay: settings?.columnDisplay,
