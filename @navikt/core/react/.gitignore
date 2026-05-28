@@ -1,3 +1,2 @@
 scripts/*.backup
-!**/types/theme.d.ts
 *tsbuildinfo
