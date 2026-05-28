@@ -1,6 +1,8 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: TODO: temp */
 import React, { forwardRef, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
 import {
   Dialog,
   DialogBody,
@@ -12,7 +14,9 @@ import {
   DialogTrigger,
 } from "../../dialog";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
+import { Fieldset } from "../../form/fieldset";
 import { Radio, RadioGroup } from "../../form/radio";
+import { Switch } from "../../form/switch";
 import { cl } from "../../utils/helpers";
 import {
   type DataGridSettings,
@@ -73,6 +77,22 @@ const DataGridPreferences = forwardRef<
     ...(draft.stickyColumns?.start ? ["sticky-start"] : []),
     ...(draft.stickyColumns?.end ? ["sticky-end"] : []),
   ];
+
+  const isAllColumnsVisible = draft.columnDisplay
+    ? draft.columnDisplay.every((col) => col.visible)
+    : true;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const columnsWithDisplay = draft.columnDisplay
+    ? draft.columnDisplay
+        .map((displayCol) => {
+          const col = context.columnDefinitions.find(
+            (c) => c.id === displayCol.id,
+          );
+          return col ? { id: col.id, visible: displayCol.visible } : null;
+        })
+        .filter((col) => col !== null)
+    : context.columnDefinitions.map((col) => ({ id: col.id, visible: false }));
 
   return (
     <Dialog open={open} onOpenChange={(nextOpen) => handleOpenChange(nextOpen)}>
@@ -187,7 +207,50 @@ const DataGridPreferences = forwardRef<
               </CheckboxGroup>
             </div>
 
-            <div className="aksel-data-grid__preferences-block">abc</div>
+            <div className="aksel-data-grid__preferences-block">
+              <Fieldset legend="Vis kolonner">
+                <Switch
+                  size="small"
+                  checked={isAllColumnsVisible}
+                  onChange={() => {
+                    setDraft((prev) => ({
+                      ...prev,
+                      columnDisplay: prev.columnDisplay?.map((col) => ({
+                        ...col,
+                        visible: !isAllColumnsVisible,
+                      })),
+                    }));
+                  }}
+                >
+                  Velg alle
+                </Switch>
+                <DragAndDrop
+                  setItems={() => null}
+                  items={context.columnDefinitions}
+                  renderItem={(item) => (
+                    <Switch
+                      size="small"
+                      checked={
+                        draft.columnDisplay?.find((col) => col.id === item.id)
+                          ?.visible ?? true
+                      }
+                      onChange={() => {
+                        setDraft((prev) => ({
+                          ...prev,
+                          columnDisplay: prev.columnDisplay?.map((col) =>
+                            col.id === item.id
+                              ? { ...col, visible: !col.visible }
+                              : col,
+                          ),
+                        }));
+                      }}
+                    >
+                      {item.header}
+                    </Switch>
+                  )}
+                />
+              </Fieldset>
+            </div>
           </div>
         </DialogBody>
 
