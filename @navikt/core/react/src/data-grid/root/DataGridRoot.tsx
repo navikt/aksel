@@ -97,6 +97,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
         truncateContent: settings?.truncateContent,
         stickyColumns: settings?.stickyColumns ?? {},
         textSize: settings?.textSize ?? "medium",
+        columnDisplay: settings?.columnDisplay,
       }),
       [
         settings?.rowDensity,
@@ -104,6 +105,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
         settings?.truncateContent,
         settings?.stickyColumns,
         settings?.textSize,
+        settings?.columnDisplay,
       ],
     );
 
