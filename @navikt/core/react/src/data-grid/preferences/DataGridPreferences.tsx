@@ -53,7 +53,7 @@ const DataGridPreferences = forwardRef<
     );
   }
 
-  const { tableSettings, updateTableSettings } = context;
+  const { tableSettings, updateTableSettings, columnDefinitions } = context;
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DataGridSettings>({});
 
@@ -69,10 +69,27 @@ const DataGridPreferences = forwardRef<
     setOpen(false);
   }
 
-  function handleColumnDisplayChange(
-    columnDisplay: NonNullable<DataGridSettings["columnDisplay"]>,
-  ) {
-    setDraft((prev) => ({ ...prev, columnDisplay }));
+  /**
+   * Merges draft.columnDisplay (order + visibility) with columnDefinitions (labels).
+   * Falls back to all columns visible in definition order when columnDisplay is unset.
+   */
+  const columnEntries = useMemo((): ColumnDisplayEntry[] => {
+    const display =
+      draft.columnDisplay ??
+      columnDefinitions.map((col) => ({ id: col.id, visible: true }));
+    return display
+      .map(({ id, visible }) => {
+        const def = columnDefinitions.find((c) => c.id === id);
+        return def ? { id, label: def.header, visible } : null;
+      })
+      .filter((c): c is ColumnDisplayEntry => c !== null);
+  }, [draft.columnDisplay, columnDefinitions]);
+
+  function handleColumnsChange(columns: ColumnDisplayEntry[]) {
+    setDraft((prev) => ({
+      ...prev,
+      columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
+    }));
   }
 
   const rowPropertyValues = [
@@ -196,8 +213,8 @@ const DataGridPreferences = forwardRef<
               </CheckboxGroup>
             </div>
             <ColumnDisplayBlock
-              columnDisplay={draft.columnDisplay}
-              onColumnDisplayChange={handleColumnDisplayChange}
+              columns={columnEntries}
+              onColumnsChange={handleColumnsChange}
             />
           </div>
         </DialogBody>
@@ -214,81 +231,50 @@ const DataGridPreferences = forwardRef<
 });
 
 function ColumnDisplayBlock({
-  columnDisplay,
-  onColumnDisplayChange,
+  columns,
+  onColumnsChange,
 }: {
-  columnDisplay: DataGridSettings["columnDisplay"];
-  onColumnDisplayChange: (
-    value: NonNullable<DataGridSettings["columnDisplay"]>,
-  ) => void;
+  columns: ColumnDisplayEntry[];
+  onColumnsChange: (columns: ColumnDisplayEntry[]) => void;
 }) {
-  const { columnDefinitions } = useDataGridContext();
-
-  /**
-   * Single source of truth for the ordered+visible column list.
-   * - No columnDisplay set → all columns visible in definition order.
-   * - columnDisplay set → columns in display order with saved visibility.
-   */
-  const mergedColumns = useMemo((): ColumnDisplayEntry[] => {
-    if (!columnDisplay) {
-      return columnDefinitions.map((col) => ({
-        id: col.id,
-        label: col.header,
-        visible: true,
-      }));
-    }
-    return columnDisplay
-      .map((displayCol) => {
-        const def = columnDefinitions.find((c) => c.id === displayCol.id);
-        if (!def) return null;
-        return { id: def.id, label: def.header, visible: displayCol.visible };
-      })
-      .filter((c): c is ColumnDisplayEntry => c !== null);
-  }, [columnDisplay, columnDefinitions]);
-
-  const visibleCount = mergedColumns.filter((c) => c.visible).length;
-  const isAllVisible = visibleCount === mergedColumns.length;
+  const visibleCount = columns.filter((c) => c.visible).length;
+  const isAllVisible = visibleCount === columns.length;
 
   const dndItems = useMemo(
-    () => mergedColumns.map(({ id, label }) => ({ id, label })),
-    [mergedColumns],
+    () => columns.map(({ id, label }) => ({ id, label })),
+    [columns],
+  );
+
+  const colMap = useMemo(
+    () => new Map(columns.map((c) => [c.id, c])),
+    [columns],
   );
 
   const setDndItems = useCallback(
     (action: React.SetStateAction<{ id: string; label: string }[]>) => {
       const newItems = typeof action === "function" ? action(dndItems) : action;
-      const visibilityMap = new Map(
-        mergedColumns.map((c) => [c.id, c.visible]),
-      );
-      onColumnDisplayChange(
-        newItems.map((item) => ({
-          id: item.id,
-          visible: visibilityMap.get(item.id) ?? true,
-        })),
+      onColumnsChange(
+        newItems.flatMap((item) => {
+          const col = colMap.get(item.id);
+          return col ? [col] : [];
+        }),
       );
     },
-    [dndItems, mergedColumns, onColumnDisplayChange],
+    [colMap, dndItems, onColumnsChange],
   );
 
   const toggleAll = useCallback(() => {
     const newVisible = !isAllVisible;
-    onColumnDisplayChange(
-      mergedColumns.map(({ id }) => ({ id, visible: newVisible })),
-    );
-  }, [isAllVisible, mergedColumns, onColumnDisplayChange]);
+    onColumnsChange(columns.map((c) => ({ ...c, visible: newVisible })));
+  }, [columns, isAllVisible, onColumnsChange]);
 
   const toggleColumn = useCallback(
     (id: string) => {
-      const col = mergedColumns.find((c) => c.id === id);
-      const newVisible = !(col?.visible ?? true);
-      onColumnDisplayChange(
-        mergedColumns.map((c) => ({
-          id: c.id,
-          visible: c.id === id ? newVisible : c.visible,
-        })),
+      onColumnsChange(
+        columns.map((c) => (c.id === id ? { ...c, visible: !c.visible } : c)),
       );
     },
-    [mergedColumns, onColumnDisplayChange],
+    [columns, onColumnsChange],
   );
 
   return (
@@ -303,9 +289,7 @@ function ColumnDisplayBlock({
           renderItem={(item) => (
             <Switch
               size="small"
-              checked={
-                mergedColumns.find((c) => c.id === item.id)?.visible ?? true
-              }
+              checked={colMap.get(item.id)?.visible ?? true}
               onChange={() => toggleColumn(item.id)}
             >
               {item.label}
