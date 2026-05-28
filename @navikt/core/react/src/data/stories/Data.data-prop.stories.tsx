@@ -1084,10 +1084,8 @@ export const ColumnDisplay: Story = {
         <Button
           onClick={() => {
             setColumnDisplay((prev) => {
-              const next = [...prev];
-              const moved = next.splice(0, 1)[0];
-              next.push(moved);
-              return next;
+              const [first, ...rest] = prev;
+              return [...rest, first];
             });
           }}
         >
