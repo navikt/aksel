@@ -356,6 +356,11 @@ interface ActionMenuContentProps extends Omit<
 > {
   children?: React.ReactNode;
   align?: "start" | "end";
+  /**
+   * Predefined sizes for the menu content. This will adjust padding, font-size and item height.
+   * @default "small"
+   */
+  size?: "small" | "medium";
 }
 
 export const ActionMenuContent = forwardRef<
@@ -368,6 +373,7 @@ export const ActionMenuContent = forwardRef<
       className,
       style,
       align = "start",
+      size = "small",
       ...rest
     }: ActionMenuContentProps,
     ref,
@@ -383,6 +389,7 @@ export const ActionMenuContent = forwardRef<
           className={cl("aksel-action-menu__content", className)}
           {...rest}
           align={align}
+          data-size={size}
           sideOffset={4}
           collisionPadding={5}
           returnFocus={context.triggerRef}
