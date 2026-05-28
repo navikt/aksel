@@ -11,7 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../dialog";
+import { Checkbox, CheckboxGroup } from "../../form/checkbox";
+import { Radio, RadioGroup } from "../../form/radio";
 import { cl } from "../../utils/helpers";
+import { DataGridSettingsOptions } from "../root/DataGrid.types";
 import { useDataGridContext } from "../root/DataGridRoot.context";
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -42,8 +45,12 @@ const DataGridPreferences = forwardRef<
     );
   }
 
+  /*   const { tableSettings } = context; */
+
+  /* tableSettings. */
+
   return (
-    <Dialog>
+    <Dialog defaultOpen>
       <DialogTrigger>
         <Button
           ref={forwardedRef}
@@ -55,12 +62,61 @@ const DataGridPreferences = forwardRef<
           className={cl("aksel-data-grid__preferences-button", className)}
         />
       </DialogTrigger>
-      <DialogPopup>
+      <DialogPopup width="large" position="right">
         <DialogHeader withClosebutton>
           <DialogTitle>Innstillinger</DialogTitle>
         </DialogHeader>
-        <DialogBody>Forms</DialogBody>
-        <DialogFooter>
+        <DialogBody className="aksel-data-grid__preferences-body">
+          <div className="aksel-data-grid__preferences-content">
+            <div className="aksel-data-grid__preferences-block">
+              <RadioGroup legend="Velg radtetthet" size="small">
+                {Object.entries(DataGridSettingsOptions.rowDensity).map(
+                  ([key, value]) => (
+                    <Radio key={key} value={key}>
+                      {value}
+                    </Radio>
+                  ),
+                )}
+              </RadioGroup>
+              <RadioGroup legend="Tekststørrelse" size="small">
+                {Object.entries(DataGridSettingsOptions.textSize).map(
+                  ([key, value]) => (
+                    <Radio key={key} value={key}>
+                      {value}
+                    </Radio>
+                  ),
+                )}
+              </RadioGroup>
+              <CheckboxGroup legend="Radegenskaper" size="small">
+                <Checkbox
+                  value="truncateContent"
+                  description="Kutter innhold som ikke får plass i cellen på en linje"
+                >
+                  Kutt innhold
+                </Checkbox>
+                <Checkbox
+                  value="zebraStripes"
+                  description="Legger på en bakgrunnsfarge for annenhver rad"
+                >
+                  Zebra-striper
+                </Checkbox>
+                <Checkbox
+                  value="columnDividers"
+                  description="Skiller kolonner fra hverandre med en strek"
+                >
+                  Kolonnestrek
+                </Checkbox>
+              </CheckboxGroup>
+              <CheckboxGroup legend="Sticky kolonner" size="small">
+                <Checkbox value="sticky-start">Første kolonne</Checkbox>
+                <Checkbox value="sticky-end">Siste kolonne</Checkbox>
+              </CheckboxGroup>
+            </div>
+            <div className="aksel-data-grid__preferences-block">abc</div>
+          </div>
+        </DialogBody>
+
+        <DialogFooter className="aksel-data-grid__preferences-footer">
           <DialogCloseTrigger>
             <Button variant="secondary">Avbryt</Button>
           </DialogCloseTrigger>

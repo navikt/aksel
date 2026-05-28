@@ -43,4 +43,17 @@ type DataGridSettings = {
   columnDisplay?: { id: string; visible: boolean }[];
 };
 
+const DataGridSettingsOptions = {
+  rowDensity: {
+    tight: "Tett",
+    standard: "Standard",
+    loose: "Løs",
+  },
+  textSize: {
+    small: "Liten",
+    medium: "Medium",
+  },
+};
+
 export type { DataGridSettings };
+export { DataGridSettingsOptions };
