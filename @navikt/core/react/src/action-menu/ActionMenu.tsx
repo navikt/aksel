@@ -561,7 +561,7 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    */
   iconPosition?: "left" | "right";
   /**
-   * Disable indent for this item if other items in the same group have icons.
+   * Disable indent for this item if other items in the same group have left-side markers, such as icons or checkbox/radio indicators.
    * @default false
    */
   disableItemIndent?: boolean;
