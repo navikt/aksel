@@ -1,39 +1,37 @@
 import { ChevronDownIcon, PersonIcon } from "@navikt/aksel-icons";
-import { ActionMenu, Button, HStack } from "@navikt/ds-react";
+import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="space-4">
-      <ActionMenu>
-        <ActionMenu.Trigger>
-          <Button
-            data-color="neutral"
-            variant="secondary"
-            icon={<ChevronDownIcon aria-hidden />}
-            iconPosition="right"
+    <ActionMenu>
+      <ActionMenu.Trigger>
+        <Button
+          data-color="neutral"
+          variant="secondary"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          Meny
+        </Button>
+      </ActionMenu.Trigger>
+      <ActionMenu.Content>
+        <ActionMenu.Group label="Handlinger">
+          <ActionMenu.Item
+            onSelect={console.info}
+            icon={<PersonIcon aria-hidden />}
           >
-            Meny
-          </Button>
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Group label="Handlinger">
-            <ActionMenu.Item
-              onSelect={console.info}
-              icon={<PersonIcon aria-hidden />}
-            >
-              Personoversikt
-            </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.info} disableIndent>
-              Søk journalpost
-            </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.info}>
-              Oppgavestatistikk
-            </ActionMenu.Item>
-          </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    </HStack>
+            Personoversikt
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info} disableIndent>
+            Søk journalpost
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>
+            Oppgavestatistikk
+          </ActionMenu.Item>
+        </ActionMenu.Group>
+      </ActionMenu.Content>
+    </ActionMenu>
   );
 };
 
