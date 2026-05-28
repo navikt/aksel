@@ -20,11 +20,6 @@
   width: 100%;
   position: relative;
   scroll-timeline: --horizontal-table-scroll inline;
-
-  /* Avoids overlay-bug in Safari when scrolling */
-  &:has([data-loading="true"]) {
-    overflow-y: hidden;
-  }
 }
 
 .aksel-data-table {

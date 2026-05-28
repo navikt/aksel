@@ -51,7 +51,7 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
     },
     forwardedRef,
   ) => {
-    const { layout, stickyHeader, selectionState, onRowAction, tableItems } =
+    const { layout, selectionState, onRowAction, tableItems } =
       useDataTableContext();
     const { location } = useDataTableLocation();
 
@@ -59,8 +59,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
 
     const selected =
       selectionState.selection.isRowSelected(rowId ?? "") ?? selectedProp;
-
-    const isSticky = location === "thead" && stickyHeader;
 
     const handleClick =
       location === "tbody" &&
@@ -130,7 +128,6 @@ const DataTableTr = forwardRef<HTMLTableRowElement, DataTableTrProps>(
         ref={forwardedRef}
         className={cl("aksel-data-table__tr", className)}
         data-selected={selected}
-        data-sticky={isSticky || undefined}
       >
         <RowExpansionCell rowId={rowId} />
         <RowSelectionCell rowId={rowId} />
