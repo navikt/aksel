@@ -659,3 +659,9 @@ html[data-dragging-cursor="true"] *::after {
     outline-offset: -4px;
   }
 }
+
+/* Preferences */
+
+.aksel-data-grid__preferences-button {
+  margin-left: auto;
+}
