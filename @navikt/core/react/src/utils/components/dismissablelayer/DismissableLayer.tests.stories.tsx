@@ -85,6 +85,37 @@ export const PointerDownOutside: Story = {
   },
 };
 
+/**
+ * Tabindex on parent element causes focusin-event to be triggered on the parent when clicking inside the child, which again causes `onFocusOutside` to be called.
+ * This test ensures that clicking inside the element does not trigger `onFocusOutside` or `onDismiss`, even with a tabindex on the parent.
+ */
+export const PointerDownInside: Story = {
+  render: (props) => {
+    return (
+      <div tabIndex={-1}>
+        <DismissableLayer asChild {...props} onDismiss={console.log}>
+          <div
+            data-testid="inside-element"
+            style={{ background: "red", padding: "2rem" }}
+          />
+        </DismissableLayer>
+      </div>
+    );
+  },
+  play: async ({ args }) => {
+    const canvas = within(document.body);
+    const insideElement = canvas.getByTestId("inside-element");
+    await userEvent.click(insideElement);
+
+    expect(args.onFocusOutside).not.toHaveBeenCalled();
+    expect(args.onDismiss).not.toHaveBeenCalled();
+  },
+  args: {
+    onDismiss: fn(),
+    onFocusOutside: fn(),
+  },
+};
+
 export const InteractOutside: Story = {
   render: (props) => {
     return (
