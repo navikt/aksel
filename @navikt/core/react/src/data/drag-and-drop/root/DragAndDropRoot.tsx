@@ -18,7 +18,7 @@ type ItemT = { label: string; id: string };
 
 interface DragAndDropProps extends React.HTMLAttributes<HTMLUListElement> {
   items: ItemT[];
-  setItems: React.Dispatch<React.SetStateAction<ItemT[]>>;
+  setItems: (newOrder: ItemT[]) => void;
   renderItem: (item: ItemT, index: number) => React.ReactNode;
 }
 
@@ -126,28 +126,27 @@ function DragAndDropInner(
 
   const reorderItems = useCallback(
     (fromIndex: number, toIndex: number) => {
-      setItems((currentItems) => {
-        if (
-          fromIndex === toIndex ||
-          fromIndex < 0 ||
-          toIndex < 0 ||
-          fromIndex >= currentItems.length ||
-          toIndex >= currentItems.length
-        ) {
-          return currentItems;
-        }
+      const currentItems = items;
+      if (
+        fromIndex === toIndex ||
+        fromIndex < 0 ||
+        toIndex < 0 ||
+        fromIndex >= currentItems.length ||
+        toIndex >= currentItems.length
+      ) {
+        return;
+      }
 
-        const newItems = [...currentItems];
-        const [movedItem] = newItems.splice(fromIndex, 1);
-        if (!movedItem) {
-          return currentItems;
-        }
+      const newItems = [...currentItems];
+      const [movedItem] = newItems.splice(fromIndex, 1);
+      if (!movedItem) {
+        return;
+      }
 
-        newItems.splice(toIndex, 0, movedItem);
-        return newItems;
-      });
+      newItems.splice(toIndex, 0, movedItem);
+      setItems(newItems);
     },
-    [setItems],
+    [items, setItems],
   );
 
   const cancelDrag = useCallback(

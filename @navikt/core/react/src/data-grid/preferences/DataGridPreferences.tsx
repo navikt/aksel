@@ -1,5 +1,4 @@
-/** biome-ignore-all lint/correctness/noUnusedVariables: TODO: temp */
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
@@ -217,64 +216,92 @@ function DragNDropSettingsBlock({
 }) {
   const context = useDataGridContext();
 
-  const isAllColumnsVisible = columnDisplay
-    ? columnDisplay.every((col) => col.visible)
-    : true;
+  /**
+   * Single source of truth for the ordered+visible column list.
+   * - No columnDisplay set → all columns visible in definition order.
+   * - columnDisplay set → columns in display order with saved visibility.
+   */
+  const mergedColumns = useMemo(() => {
+    const defs = context.columnDefinitions;
+    if (!columnDisplay) {
+      return defs.map((col) => ({
+        id: col.id,
+        label: col.header,
+        visible: true,
+      }));
+    }
+    return columnDisplay
+      .map((displayCol) => {
+        const def = defs.find((c) => c.id === displayCol.id);
+        if (!def) return null;
+        return { id: def.id, label: def.header, visible: displayCol.visible };
+      })
+      .filter(
+        (c): c is { id: string; label: string; visible: boolean } => c !== null,
+      );
+  }, [columnDisplay, context.columnDefinitions]);
 
-  const columnsWithDisplay = columnDisplay
-    ? columnDisplay
-        .map((displayCol) => {
-          const col = context.columnDefinitions.find(
-            (c) => c.id === displayCol.id,
-          );
-          return col ? { id: col.id, visible: displayCol.visible } : null;
-        })
-        .filter((col) => col !== null)
-    : context.columnDefinitions.map((col) => ({ id: col.id, visible: false }));
+  const isAllVisible =
+    mergedColumns.length > 0 && mergedColumns.every((col) => col.visible);
+
+  const dndItems = useMemo(
+    () => mergedColumns.map(({ id, label }) => ({ id, label })),
+    [mergedColumns],
+  );
+
+  function setDndItems(
+    action: React.SetStateAction<{ id: string; label: string }[]>,
+  ) {
+    const newItems = typeof action === "function" ? action(dndItems) : action;
+    const visibilityMap = new Map(mergedColumns.map((c) => [c.id, c.visible]));
+    setDraft((prev) => ({
+      ...prev,
+      columnDisplay: newItems.map((item) => ({
+        id: item.id,
+        visible: visibilityMap.get(item.id) ?? true,
+      })),
+    }));
+  }
+
+  function toggleAll() {
+    const newVisible = !isAllVisible;
+    setDraft((prev) => ({
+      ...prev,
+      columnDisplay: mergedColumns.map(({ id }) => ({
+        id,
+        visible: newVisible,
+      })),
+    }));
+  }
+
+  function toggleColumn(id: string) {
+    const col = mergedColumns.find((c) => c.id === id);
+    const newVisible = !(col?.visible ?? true);
+    setDraft((prev) => ({
+      ...prev,
+      columnDisplay: mergedColumns.map((c) => ({
+        id: c.id,
+        visible: c.id === id ? newVisible : c.visible,
+      })),
+    }));
+  }
 
   return (
     <div className="aksel-data-grid__preferences-block">
       <Fieldset legend="Vis kolonner">
-        <Switch
-          size="small"
-          checked={isAllColumnsVisible}
-          onChange={() => {
-            setDraft((prev) => ({
-              ...prev,
-              columnDisplay: prev.columnDisplay?.map((col) => ({
-                ...col,
-                visible: !isAllColumnsVisible,
-              })),
-            }));
-          }}
-        >
+        <Switch size="small" checked={isAllVisible} onChange={toggleAll}>
           Velg alle
         </Switch>
         <DragAndDrop
-          setItems={() => null}
-          items={columnsWithDisplay.map((col) => ({
-            id: col.id,
-            label:
-              context.columnDefinitions.find((c) => c.id === col.id)?.header ||
-              col.id,
-          }))}
+          items={dndItems}
+          setItems={setDndItems}
           renderItem={(item) => (
             <Switch
               size="small"
               checked={
-                columnDisplay?.find((col) => col.id === item.id)?.visible ??
-                true
+                mergedColumns.find((c) => c.id === item.id)?.visible ?? true
               }
-              onChange={() => {
-                setDraft((prev) => ({
-                  ...prev,
-                  columnDisplay: columnsWithDisplay.map((col) =>
-                    col.id === item.id
-                      ? { ...col, visible: !col.visible }
-                      : col,
-                  ),
-                }));
-              }}
+              onChange={() => toggleColumn(item.id)}
             >
               {item.label}
             </Switch>
