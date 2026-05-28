@@ -78,22 +78,6 @@ const DataGridPreferences = forwardRef<
     ...(draft.stickyColumns?.end ? ["sticky-end"] : []),
   ];
 
-  const isAllColumnsVisible = draft.columnDisplay
-    ? draft.columnDisplay.every((col) => col.visible)
-    : true;
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const columnsWithDisplay = draft.columnDisplay
-    ? draft.columnDisplay
-        .map((displayCol) => {
-          const col = context.columnDefinitions.find(
-            (c) => c.id === displayCol.id,
-          );
-          return col ? { id: col.id, visible: displayCol.visible } : null;
-        })
-        .filter((col) => col !== null)
-    : context.columnDefinitions.map((col) => ({ id: col.id, visible: false }));
-
   return (
     <Dialog open={open} onOpenChange={(nextOpen) => handleOpenChange(nextOpen)}>
       <DialogTrigger>
@@ -206,51 +190,10 @@ const DataGridPreferences = forwardRef<
                 <Checkbox value="sticky-end">Siste kolonne</Checkbox>
               </CheckboxGroup>
             </div>
-
-            <div className="aksel-data-grid__preferences-block">
-              <Fieldset legend="Vis kolonner">
-                <Switch
-                  size="small"
-                  checked={isAllColumnsVisible}
-                  onChange={() => {
-                    setDraft((prev) => ({
-                      ...prev,
-                      columnDisplay: prev.columnDisplay?.map((col) => ({
-                        ...col,
-                        visible: !isAllColumnsVisible,
-                      })),
-                    }));
-                  }}
-                >
-                  Velg alle
-                </Switch>
-                <DragAndDrop
-                  setItems={() => null}
-                  items={context.columnDefinitions}
-                  renderItem={(item) => (
-                    <Switch
-                      size="small"
-                      checked={
-                        draft.columnDisplay?.find((col) => col.id === item.id)
-                          ?.visible ?? true
-                      }
-                      onChange={() => {
-                        setDraft((prev) => ({
-                          ...prev,
-                          columnDisplay: prev.columnDisplay?.map((col) =>
-                            col.id === item.id
-                              ? { ...col, visible: !col.visible }
-                              : col,
-                          ),
-                        }));
-                      }}
-                    >
-                      {item.header}
-                    </Switch>
-                  )}
-                />
-              </Fieldset>
-            </div>
+            <DragNDropSettingsBlock
+              columnDisplay={draft.columnDisplay}
+              setDraft={setDraft}
+            />
           </div>
         </DialogBody>
 
@@ -264,6 +207,83 @@ const DataGridPreferences = forwardRef<
     </Dialog>
   );
 });
+
+function DragNDropSettingsBlock({
+  columnDisplay,
+  setDraft,
+}: {
+  columnDisplay: DataGridSettings["columnDisplay"];
+  setDraft: React.Dispatch<React.SetStateAction<DataGridSettings>>;
+}) {
+  const context = useDataGridContext();
+
+  const isAllColumnsVisible = columnDisplay
+    ? columnDisplay.every((col) => col.visible)
+    : true;
+
+  const columnsWithDisplay = columnDisplay
+    ? columnDisplay
+        .map((displayCol) => {
+          const col = context.columnDefinitions.find(
+            (c) => c.id === displayCol.id,
+          );
+          return col ? { id: col.id, visible: displayCol.visible } : null;
+        })
+        .filter((col) => col !== null)
+    : context.columnDefinitions.map((col) => ({ id: col.id, visible: false }));
+
+  return (
+    <div className="aksel-data-grid__preferences-block">
+      <Fieldset legend="Vis kolonner">
+        <Switch
+          size="small"
+          checked={isAllColumnsVisible}
+          onChange={() => {
+            setDraft((prev) => ({
+              ...prev,
+              columnDisplay: prev.columnDisplay?.map((col) => ({
+                ...col,
+                visible: !isAllColumnsVisible,
+              })),
+            }));
+          }}
+        >
+          Velg alle
+        </Switch>
+        <DragAndDrop
+          setItems={() => null}
+          items={columnsWithDisplay.map((col) => ({
+            id: col.id,
+            label:
+              context.columnDefinitions.find((c) => c.id === col.id)?.header ||
+              col.id,
+          }))}
+          renderItem={(item) => (
+            <Switch
+              size="small"
+              checked={
+                columnDisplay?.find((col) => col.id === item.id)?.visible ??
+                true
+              }
+              onChange={() => {
+                setDraft((prev) => ({
+                  ...prev,
+                  columnDisplay: columnsWithDisplay.map((col) =>
+                    col.id === item.id
+                      ? { ...col, visible: !col.visible }
+                      : col,
+                  ),
+                }));
+              }}
+            >
+              {item.label}
+            </Switch>
+          )}
+        />
+      </Fieldset>
+    </div>
+  );
+}
 
 export { DataGridPreferences }; // DataGridRoot needs to be exported b.c. of docgen
 export default DataGridPreferences;

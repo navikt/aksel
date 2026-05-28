@@ -10,18 +10,16 @@ import React, {
 import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl } from "../../../utils/helpers";
-import {
-  ColumnDefinition,
-  ColumnDefinitions,
-} from "../../table/root/DataGridTable.types";
 import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
 import { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
-interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
-  items: ColumnDefinitions<T>;
-  setItems: React.Dispatch<React.SetStateAction<ColumnDefinitions<T>>>;
-  renderItem: (item: ColumnDefinition<T>, index: number) => React.ReactNode;
+type ItemT = { label: string; id: string };
+
+interface DragAndDropProps extends React.HTMLAttributes<HTMLUListElement> {
+  items: ItemT[];
+  setItems: React.Dispatch<React.SetStateAction<ItemT[]>>;
+  renderItem: (item: ItemT, index: number) => React.ReactNode;
 }
 
 /**
@@ -35,8 +33,8 @@ interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {
 
 const DRAG_THRESHOLD = 4; // Minimum movement in pixels to start dragging
 
-function DragAndDropInner<T>(
-  { items, setItems, renderItem, className, ...rest }: DragAndDropProps<T>,
+function DragAndDropInner(
+  { items, setItems, renderItem, className, ...rest }: DragAndDropProps,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ) {
   const instructionsId = useId();
@@ -46,7 +44,7 @@ function DragAndDropInner<T>(
     useState<DragAndDropElement | null>(null);
   const [overlayWidth, setOverlayWidth] = useState<number | null>(null);
   const [announcer, setAnnouncer] = useState("");
-  const initialItemsRef = useRef<ColumnDefinitions<T> | null>(null);
+  const initialItemsRef = useRef<ItemT[] | null>(null);
   const virtualPositionRef = useRef({ x: 0, y: 0 });
   const itemsById = useMemo(
     () => new Map(items.map((item) => [item.id, item] as const)),
@@ -334,7 +332,7 @@ function DragAndDropInner<T>(
               key={item.id}
               id={item.id}
               index={index}
-              itemLabel={item.header}
+              itemLabel={item.label}
             >
               {renderItem(item, index)}
             </DragAndDropItem>
@@ -360,7 +358,7 @@ function DragAndDropInner<T>(
               id={activeItem.id}
               index={activeItem.index}
               isOverlay
-              itemLabel={activeData.header}
+              itemLabel={activeData.label}
             >
               {renderItem(activeData, activeItem.index)}
             </DragAndDropItem>
@@ -371,8 +369,8 @@ function DragAndDropInner<T>(
   );
 }
 
-const DragAndDrop = forwardRef(DragAndDropInner) as <T>(
-  props: DragAndDropProps<T> & React.RefAttributes<HTMLUListElement>,
+const DragAndDrop = forwardRef(DragAndDropInner) as (
+  props: DragAndDropProps & React.RefAttributes<HTMLUListElement>,
 ) => React.ReactElement | null;
 
 export { DragAndDrop, DragAndDropItem };
