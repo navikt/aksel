@@ -13,8 +13,8 @@
   "files": [
     "/dist",
     "types.ts",
-    "internal-types.ts",
-    "token_docs.js"
+    "token_docs.js",
+    "token_docs.d.ts"
   ],
   "scripts": {
     "build": "tsx ./src && yarn build:figma-config && yarn build:plugin && tsx ./config/version-tag.ts",
