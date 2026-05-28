@@ -1092,6 +1092,7 @@ export const ColumnDisplay: Story = {
           }}
         >
           Scramble order
+        </Button>
         <Button
           onClick={() => {
             setColumnDisplay((prev) => {
