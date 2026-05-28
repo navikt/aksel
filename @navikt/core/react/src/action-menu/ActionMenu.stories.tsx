@@ -108,6 +108,98 @@ export const GroupedItems: Story = {
   decorators: [DemoDecorator],
 };
 
+export const SizeMedium: Story = {
+  render: (props) => {
+    const [checkedItems, setCheckedItems] = useState({
+      checkbox1: false,
+      checkbox2: false,
+    });
+
+    const handleCheckboxChange = (checkboxId: string) => {
+      setCheckedItems((prevState) => ({
+        ...prevState,
+        [checkboxId]: !prevState[checkboxId],
+      }));
+    };
+
+    return (
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content size="medium">
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.CheckboxItem
+              checked={checkedItems.checkbox1}
+              onCheckedChange={() => handleCheckboxChange("checkbox1")}
+              shortcut="⌘+T"
+            >
+              Checkbox 1
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
+              checked={checkedItems.checkbox2}
+              onCheckedChange={() => handleCheckboxChange("checkbox2")}
+              shortcut="⇧+⌘+N"
+            >
+              Checkbox 2
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+          <ActionMenu.Divider />
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Item
+              shortcut="⌘+T"
+              onSelect={() => console.log("Item 1 clicked")}
+              icon={<StarIcon aria-hidden />}
+            >
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item
+              shortcut="⇧+⌘+N"
+              onSelect={() => console.log("Item 2 clicked")}
+              icon={<PencilIcon aria-hidden />}
+            >
+              Item 2
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+export const DisabledItemIndent: Story = {
+  render: (props) => {
+    return (
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 1 clicked")}
+              icon={<StarIcon aria-hidden />}
+            >
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+              Item 2
+            </ActionMenu.Item>
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 3 clicked")}
+              disableItemIndent
+            >
+              Item 3
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
 export const ShortcutsAndIcons: Story = {
   render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
