@@ -128,7 +128,7 @@ const formatModifier = (
   }
 };
 
-const formatRole = (group: TransformedToken["group"]): string => {
+const formatRole = (group: string | undefined) => {
   if (group?.indexOf(".") === -1) {
     if (["background", "text", "border"].includes(group)) {
       return "root";
@@ -150,13 +150,13 @@ export type TokenForDocumentationT = {
   cssValue: string;
   scssValue: string;
   lessValue: string;
-  comment: string | undefined;
+  comment?: string;
   type: string;
   rawType: string;
-  group: string | undefined;
+  group?: string;
   category: string;
   categoryTitle: string;
-  role: string;
+  role?: string;
   modifier: string;
 };
 
@@ -186,7 +186,7 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
         group: token.group as string | undefined,
         category: formatCategory(token),
         categoryTitle: formatCategoryTitle(token),
-        role: formatRole(token.group),
+        role: formatRole(token.group as string | undefined),
         modifier: formatModifier(name, token.type),
       };
     });
