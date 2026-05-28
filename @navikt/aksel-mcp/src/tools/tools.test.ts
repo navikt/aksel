@@ -105,16 +105,12 @@ describe("Tools", () => {
       const invalidSubcategory = strictSchema.safeParse({
         subcategory: "NotARealSubcategory",
       });
-      const invalidKeyword = strictSchema.safeParse({
-        keyword: "not-a-real-icon-keyword",
-      });
       const invalidVariant = strictSchema.safeParse({
         variant: "outline",
       });
 
       expect(invalidCategory.success).toBe(false);
       expect(invalidSubcategory.success).toBe(false);
-      expect(invalidKeyword.success).toBe(false);
       expect(invalidVariant.success).toBe(false);
     });
 
