@@ -177,6 +177,15 @@ export const ResizeAuto: Story = {
     data: testData,
     columns: [
       {
+        id: "nested",
+        header: "Nested",
+        width: {
+          defaultValue: 200,
+          autoResizeOnce: true,
+        },
+        bodyCell: () => "Nested",
+      },
+      {
         id: "left",
         header: "L",
         align: "left",
@@ -225,13 +234,36 @@ export const ResizeAuto: Story = {
         isSortable: true,
         bodyCell: () => "Test",
       },
+      {
+        id: "blockContent",
+        header: "Block content",
+        width: {
+          defaultValue: 300,
+          autoResizeOnce: true,
+        },
+        bodyCell: () => <div>This is inside a div</div>,
+      },
     ],
+    getRowId: (row) => row.left,
   },
   render: (props) => {
     const [showTable, setShowTable] = React.useState(false);
     return showTable ? (
       <DataGrid {...props}>
-        <DataGrid.Table />
+        <DataGrid.Table<Row>
+          subRows={{
+            getRows: (row) =>
+              row.left.includes(".")
+                ? []
+                : [
+                    {
+                      left: `${row.left}.1`,
+                      center: "Yes",
+                      right: "100",
+                    },
+                  ],
+          }}
+        />
       </DataGrid>
     ) : (
       <button onClick={() => setShowTable(true)}>Show table</button>
@@ -244,11 +276,13 @@ export const ResizeAuto: Story = {
     button.click();
     await new Promise((r) => setTimeout(r, 100)); // Make sure auto resize has happened
     const headers = canvas.getAllByRole("columnheader");
-    expect(headers.length).toBe(5);
-    expect(headers[0]).toHaveStyle({ width: "80px" });
-    expect(headers[1]).toHaveStyle({ width: "82px" });
-    expect(headers[2]).toHaveStyle({ width: "103px" });
-    expect(headers[3]).toHaveStyle({ width: "168px" });
-    expect(headers[4]).toHaveStyle({ width: "248px" });
+    expect(headers.length).toBe(7);
+    expect(headers[0]).toHaveStyle({ width: "126px" });
+    expect(headers[1]).toHaveStyle({ width: "80px" });
+    expect(headers[2]).toHaveStyle({ width: "82px" });
+    expect(headers[3]).toHaveStyle({ width: "103px" });
+    expect(headers[4]).toHaveStyle({ width: "168px" });
+    expect(headers[5]).toHaveStyle({ width: "248px" });
+    expect(headers[6]).toHaveStyle({ width: "168px" });
   },
 };
