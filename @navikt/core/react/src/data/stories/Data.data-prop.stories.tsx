@@ -1091,7 +1091,7 @@ export const ColumnDisplay: Story = {
             });
           }}
         >
-          Scramble order
+          Move first column to the end
         </Button>
         <Button
           onClick={() => {
