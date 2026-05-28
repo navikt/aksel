@@ -10,6 +10,7 @@ type DataGridContextValue<RowT = unknown> = {
   selection?: SelectionProps<RowT>;
   isLoading?: boolean;
   tableSettings?: DataGridSettings;
+  updateTableSettings?: (newSettings: Partial<DataGridSettings>) => void;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =

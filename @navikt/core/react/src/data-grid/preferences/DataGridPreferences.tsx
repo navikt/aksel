@@ -14,7 +14,10 @@ import {
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { Radio, RadioGroup } from "../../form/radio";
 import { cl } from "../../utils/helpers";
-import { DataGridSettingsOptions } from "../root/DataGrid.types";
+import {
+  type DataGridSettings,
+  DataGridSettingsOptions,
+} from "../root/DataGrid.types";
 import { useDataGridContext } from "../root/DataGridRoot.context";
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -45,9 +48,7 @@ const DataGridPreferences = forwardRef<
     );
   }
 
-  /*   const { tableSettings } = context; */
-
-  /* tableSettings. */
+  const { tableSettings, updateTableSettings } = context;
 
   return (
     <Dialog defaultOpen>
@@ -69,7 +70,16 @@ const DataGridPreferences = forwardRef<
         <DialogBody className="aksel-data-grid__preferences-body">
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
-              <RadioGroup legend="Velg radtetthet" size="small">
+              <RadioGroup
+                legend="Velg radtetthet"
+                size="small"
+                onChange={(value) => {
+                  updateTableSettings?.({
+                    rowDensity: value as DataGridSettings["rowDensity"],
+                  });
+                }}
+                value={tableSettings?.rowDensity}
+              >
                 {Object.entries(DataGridSettingsOptions.rowDensity).map(
                   ([key, value]) => (
                     <Radio key={key} value={key}>

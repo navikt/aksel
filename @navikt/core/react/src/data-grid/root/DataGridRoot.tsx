@@ -1,8 +1,9 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
+import { useDataGridSettings } from "../hooks/useDataGridSettings";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
@@ -43,6 +44,14 @@ interface DataGridProps<RowT> {
    * Settings for the data grid.
    */
   settings?: DataGridSettings;
+  /**
+   * Default settings for the data grid. These will be used if `settings` prop is not provided.
+   */
+  defaultSettings?: DataGridSettings;
+  /**
+   * Callback fired when settings are changed. The new settings will be passed as an argument.
+   */
+  onSettingsChange?: (newSettings: DataGridSettings) => void;
 }
 
 interface DataGridComponent {
@@ -86,28 +95,17 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       selection,
       isLoading = false,
       settings,
+      defaultSettings,
+      onSettingsChange,
       ...rest
     }: DataGridProps<unknown>,
     ref,
   ) => {
-    const resolvedSettings = useMemo(
-      () => ({
-        rowDensity: settings?.rowDensity ?? "standard",
-        zebraStripes: settings?.zebraStripes ?? false,
-        truncateContent: settings?.truncateContent,
-        stickyColumns: settings?.stickyColumns ?? {},
-        textSize: settings?.textSize ?? "medium",
-        columnDisplay: settings?.columnDisplay,
-      }),
-      [
-        settings?.rowDensity,
-        settings?.zebraStripes,
-        settings?.truncateContent,
-        settings?.stickyColumns,
-        settings?.textSize,
-        settings?.columnDisplay,
-      ],
-    );
+    const { settings: resolvedSettings, updateSettings } = useDataGridSettings({
+      settings,
+      defaultSettings,
+      onSettingsChange,
+    });
 
     return (
       <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
@@ -118,6 +116,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           selection={selection}
           isLoading={isLoading}
           tableSettings={resolvedSettings}
+          updateTableSettings={updateSettings}
         >
           {children}
         </DataGridContextProvider>
