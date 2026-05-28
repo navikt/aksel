@@ -560,6 +560,11 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Disable indent for this item if other items in the same group have icons.
+   * @default false
+   */
+  disableItemIndent?: boolean;
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -575,6 +580,7 @@ export const ActionMenuItem: OverridableComponent<
       shortcut,
       variant,
       iconPosition = "left",
+      disableItemIndent = false,
       ...rest
     },
     ref,
@@ -586,6 +592,7 @@ export const ActionMenuItem: OverridableComponent<
           "aksel-action-menu__item--danger": variant === "danger",
         })}
         data-marker={icon ? iconPosition : undefined}
+        data-disable-item-indent={disableItemIndent}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
