@@ -47,5 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Endrer 'align-items' (vertikal justering).",
+  desc: "Propen `align` endrer `align-items` (vertikal justering).",
 };

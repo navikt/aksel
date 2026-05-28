@@ -25,16 +25,18 @@ export function useControllableState<StateT, ChangeT extends StateT = StateT>({
   const controlled = valueProp !== undefined;
   const value = controlled ? valueProp : uncontrolledState;
 
-  const setValue = useEventCallback((next: React.SetStateAction<ChangeT>) => {
-    const setter = next as (prevState?: StateT) => ChangeT;
-    const nextValue = typeof next === "function" ? setter(value) : next;
+  const setValue = useEventCallback(
+    (next: ChangeT | ((prevState: StateT) => ChangeT)) => {
+      const setter = next as (prevState?: StateT) => ChangeT;
+      const nextValue = typeof next === "function" ? setter(value) : next;
 
-    if (!controlled) {
-      setUncontrolledState(nextValue);
-    }
+      if (!controlled) {
+        setUncontrolledState(nextValue);
+      }
 
-    onChangeProp(nextValue);
-  });
+      onChangeProp(nextValue);
+    },
+  );
 
   return [value, setValue] as const;
 }

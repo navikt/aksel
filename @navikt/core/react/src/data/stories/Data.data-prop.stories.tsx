@@ -359,7 +359,7 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
   render: () => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-      <VStack gap="space-12">
+      <VStack gap="space-12" maxHeight="220px">
         <Button onClick={() => setIsLoading((prev) => !prev)}>
           Toggle loading
         </Button>

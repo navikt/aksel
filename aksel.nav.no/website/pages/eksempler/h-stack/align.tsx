@@ -74,5 +74,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Endrer 'align-items'.",
+  desc: "Propen `align` endrer `align-items`.",
 };

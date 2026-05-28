@@ -31,5 +31,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "På noen props, feks. gap, kan du sette ulike verdier per brekkpunkt. Implementasjonen er mobile-first, slik at 'sm: 8' vil også gjelde for 'md', 'lg' og 'xl'.",
+  desc: "På noen props, f.eks. gap, kan du sette ulike verdier per brekkpunkt. Implementasjonen er mobile-first, slik at 'sm: 8' vil også gjelde for 'md', 'lg' og 'xl'.",
 };

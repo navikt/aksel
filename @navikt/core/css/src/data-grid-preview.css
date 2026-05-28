@@ -68,15 +68,22 @@
 
 .aksel-data-table__thead {
   background-color: var(--ax-bg-raised);
+  position: relative; /* Shadow ends up behind loading/empty-state without, consider after-element instead like with sticky */
+  box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 
   .aksel-data-table[data-loading="true"] &::after {
     content: "";
     position: absolute;
     block-size: 2px;
-    inset-block-end: -2px;
     background-color: var(--ax-bg-strong);
     animation: animateDataTableLoading 1s linear infinite;
     z-index: 11;
+  }
+
+  &[data-sticky="true"] {
+    position: sticky;
+    top: 0;
+    z-index: 3;
   }
 }
 
@@ -85,12 +92,7 @@
   position: relative;
 
   &[inert] {
-    transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: var(--ax-opacity-disabled);
-
-    @starting-style {
-      opacity: 0.001;
-    }
   }
 
   &[inert]::after {
@@ -98,38 +100,14 @@
     position: absolute;
     inset: 0;
     background-color: var(--ax-bg-overlay);
-    transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 10;
+    z-index: 2;
     opacity: 0.2;
-
-    /* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
-
-    @starting-style {
-      opacity: 0.001;
-    }
   }
 }
 
 .aksel-data-table__tr {
   &[data-selected="true"] {
     background-color: var(--ax-bg-softA);
-  }
-
-  .aksel-data-table__thead &[data-sticky="true"] {
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    box-shadow: 1px 1px 0 0 var(--ax-border-neutral-subtle);
-
-    /* This breaks filler-cells ⬇️. Trying box-shadow instead ⬆️ */
-    /* &::after {
-      content: "";
-      position: absolute;
-      inset-inline: 0;
-      bottom: -1px;
-      pointer-events: none;
-      border-bottom: 1px solid var(--ax-border-neutral-subtle);
-    } */
   }
 }
 
@@ -156,11 +134,6 @@
   border-spacing: 0;
   border-right: 1px solid var(--ax-border-neutral-subtle);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
-}
-
-.aksel-data-table__thead {
-  position: relative; /* Shadow ends up behind loading/empty-state without, consider after-element instead like with sticky */
-  box-shadow: 0 1px 0 0 var(--ax-border-neutral-subtle);
 }
 
 @keyframes scroll-shadow-fade-start {
