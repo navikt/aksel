@@ -112,6 +112,7 @@ const DataGridPreferences = forwardRef<
                 <Checkbox value="sticky-end">Siste kolonne</Checkbox>
               </CheckboxGroup>
             </div>
+
             <div className="aksel-data-grid__preferences-block">abc</div>
           </div>
         </DialogBody>
