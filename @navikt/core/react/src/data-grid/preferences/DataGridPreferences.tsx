@@ -54,7 +54,7 @@ const DataGridPreferences = forwardRef<
   }
 
   const { tableSettings, updateTableSettings, columnDefinitions } = context;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true /* TODO: Only for testing */);
   const [draft, setDraft] = useState<DataGridSettings>({});
 
   function handleOpenChange(nextOpen: boolean) {
@@ -115,7 +115,7 @@ const DataGridPreferences = forwardRef<
           className={cl("aksel-data-grid__preferences-button", className)}
         />
       </DialogTrigger>
-      <DialogPopup width="large" position="right">
+      <DialogPopup width="medium" position="right">
         <DialogHeader withClosebutton>
           <DialogTitle>Innstillinger</DialogTitle>
         </DialogHeader>
@@ -284,6 +284,7 @@ function ColumnDisplayBlock({
           Velg alle
         </Switch>
         <DragAndDrop
+          className="aksel-data-grid__preferences-dnd"
           items={dndItems}
           setItems={setDndItems}
           renderItem={(item) => (

@@ -675,18 +675,18 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-grid__preferences-content {
-  display: flex;
   height: 100%;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--ax-space-24);
 }
 
 .aksel-data-grid__preferences-block {
-  flex: 0 0 50%;
-  max-inline-size: 50%;
-  min-width: 280px;
-  padding-inline: var(--ax-space-20);
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-16);
+}
+
+.aksel-data-grid__preferences-dnd {
+  margin-block-end: var(--ax-space-24);
 }
