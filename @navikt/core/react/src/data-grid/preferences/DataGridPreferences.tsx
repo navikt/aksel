@@ -24,6 +24,8 @@ import {
 import { useDataGridContext } from "../root/DataGridRoot.context";
 
 type ColumnDisplayEntry = { id: string; label: string; visible: boolean };
+type RowDensityOption = keyof typeof DataGridSettingsOptions.rowDensity;
+type TextSizeOption = keyof typeof DataGridSettingsOptions.textSize;
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: never;
@@ -69,6 +71,19 @@ const DataGridPreferences = forwardRef<
     setOpen(false);
   }
 
+  function isRowDensityOption(value: string): value is RowDensityOption {
+    return value in DataGridSettingsOptions.rowDensity;
+  }
+
+  function isTextSizeOption(value: string): value is TextSizeOption {
+    return value in DataGridSettingsOptions.textSize;
+  }
+
+  const columnDefinitionMap = useMemo(
+    () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
+    [columnDefinitions],
+  );
+
   /**
    * Merges draft.columnDisplay (order + visibility) with columnDefinitions (labels).
    * Falls back to all columns visible in definition order when columnDisplay is unset.
@@ -77,13 +92,12 @@ const DataGridPreferences = forwardRef<
     const display =
       draft.columnDisplay ??
       columnDefinitions.map((col) => ({ id: col.id, visible: true }));
-    return display
-      .map(({ id, visible }) => {
-        const def = columnDefinitions.find((c) => c.id === id);
-        return def ? { id, label: def.header, visible } : null;
-      })
-      .filter((c): c is ColumnDisplayEntry => c !== null);
-  }, [draft.columnDisplay, columnDefinitions]);
+
+    return display.flatMap(({ id, visible }) => {
+      const label = columnDefinitionMap.get(id);
+      return label ? [{ id, label, visible }] : [];
+    });
+  }, [columnDefinitionMap, draft.columnDisplay, columnDefinitions]);
 
   function handleColumnsChange(columns: ColumnDisplayEntry[]) {
     setDraft((prev) => ({
@@ -128,9 +142,13 @@ const DataGridPreferences = forwardRef<
                 legend="Velg radtetthet"
                 size="small"
                 onChange={(value) => {
+                  if (!isRowDensityOption(value)) {
+                    return;
+                  }
+
                   setDraft((prev) => ({
                     ...prev,
-                    rowDensity: value as DataGridSettings["rowDensity"],
+                    rowDensity: value,
                   }));
                 }}
                 value={draft.rowDensity}
@@ -147,9 +165,13 @@ const DataGridPreferences = forwardRef<
                 legend="Tekststørrelse"
                 size="small"
                 onChange={(value) => {
+                  if (!isTextSizeOption(value)) {
+                    return;
+                  }
+
                   setDraft((prev) => ({
                     ...prev,
-                    textSize: value as DataGridSettings["textSize"],
+                    textSize: value,
                   }));
                 }}
                 value={draft.textSize}
