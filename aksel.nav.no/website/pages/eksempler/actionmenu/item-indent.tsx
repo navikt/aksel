@@ -16,18 +16,15 @@ const Example = () => {
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
-        <ActionMenu.Group label="Handlinger">
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<PersonIcon aria-hidden />}
-          >
+        <ActionMenu.Group label="Gosys">
+          <ActionMenu.Item onSelect={console.info} icon={<PersonIcon />}>
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info} disableIndent>
-            Søk journalpost
+          <ActionMenu.Item onSelect={console.info} indent>
+            Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info}>
-            Oppgavestatistikk
+          <ActionMenu.Item onSelect={console.info} indent>
+            Samhandlere
           </ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
@@ -45,5 +42,5 @@ export const Demo = {
 
 export const args = {
   index: 13,
-  desc: "Alle ActionMenu.Item i en ActionMenu.Group får innrykk hvis minst én av dem har en venstrestilt markør (f.eks. ikon, radio eller checkbox). Dette kan overstyres for individuelle elementer ved å bruke `disableIndent`-prop på ActionMenu.Item.",
+  desc: "Vi anbefaler å bruke innrykk på elementer uten markør som hører sammen eller til en gruppe hvor minst én av elementene har markør. Dette for å tydeliggjøre at elementet hører til gruppen, og for å skape en visuell sammenheng mellom elementene i gruppen.",
 };

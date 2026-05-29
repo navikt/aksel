@@ -62,7 +62,7 @@ const Example = () => {
           </ActionMenu.Group>
         </ActionMenu.Content>
       </ActionMenu>
-      <ActionMenu>
+      <ActionMenu size="medium">
         <ActionMenu.Trigger>
           <Button
             data-color="neutral"
@@ -73,7 +73,7 @@ const Example = () => {
             Medium size
           </Button>
         </ActionMenu.Trigger>
-        <ActionMenu.Content size="medium">
+        <ActionMenu.Content>
           <ActionMenu.Group label="Handlinger">
             <ActionMenu.Item
               onSelect={console.info}
