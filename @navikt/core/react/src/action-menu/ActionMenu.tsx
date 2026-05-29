@@ -23,6 +23,7 @@ type ActionMenuContextValue = {
   onOpenChange: (open: boolean) => void;
   onOpenToggle: () => void;
   rootElement: MenuPortalProps["rootElement"];
+  size: "small" | "medium";
 };
 
 const { Provider: ActionMenuProvider, useContext: useActionMenuContext } =
@@ -43,6 +44,11 @@ type ActionMenuProps = {
    * Callback for when the menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * The size of the menu.
+   * @default "small"
+   */
+  size?: "small" | "medium";
 } & Pick<MenuPortalProps, "rootElement">;
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
@@ -248,6 +254,7 @@ const ActionMenuRoot = ({
   open: openProp,
   onOpenChange,
   rootElement: rootElementProp,
+  size = "small", // TODO: Default to medium in next major release
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -271,6 +278,7 @@ const ActionMenuRoot = ({
       onOpenChange={setOpen}
       onOpenToggle={() => setOpen((prevOpen) => !prevOpen)}
       rootElement={rootElement}
+      size={size}
     >
       <Menu open={open} onOpenChange={setOpen} modal>
         {children}
@@ -356,11 +364,6 @@ interface ActionMenuContentProps extends Omit<
 > {
   children?: React.ReactNode;
   align?: "start" | "end";
-  /**
-   * Predefined sizes for the menu content. This will adjust padding, font-size and item height.
-   * @default "small"
-   */
-  size?: "small" | "medium";
 }
 
 export const ActionMenuContent = forwardRef<
@@ -373,7 +376,6 @@ export const ActionMenuContent = forwardRef<
       className,
       style,
       align = "start",
-      size = "small",
       ...rest
     }: ActionMenuContentProps,
     ref,
@@ -389,7 +391,7 @@ export const ActionMenuContent = forwardRef<
           className={cl("aksel-action-menu__content", className)}
           {...rest}
           align={align}
-          data-size={size}
+          data-size={context.size}
           sideOffset={4}
           collisionPadding={5}
           returnFocus={context.triggerRef}
@@ -983,6 +985,7 @@ export const ActionMenuSubContent = forwardRef<
         alignOffset={-4}
         sideOffset={1}
         collisionPadding={10}
+        data-size={context.size}
         {...rest}
         className={cl(
           "aksel-action-menu__content aksel-action-menu__sub-content",
