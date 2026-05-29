@@ -123,11 +123,11 @@ export const SizeMedium: Story = {
     };
 
     return (
-      <ActionMenu open={props.open}>
+      <ActionMenu open={props.open} size="medium">
         <ActionMenu.Trigger>
           <button>Open action</button>
         </ActionMenu.Trigger>
-        <ActionMenu.Content size="medium">
+        <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
             <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox1}
