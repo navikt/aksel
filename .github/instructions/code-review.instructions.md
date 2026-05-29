@@ -1,39 +1,42 @@
 ---
 description: "Code review instructions used when reviewing pull requests."
-applyTo: "**"
+applyTo: "@navikt/**"
 excludeAgent: ["coding-agent"]
 ---
 
-# Generic Code Review Instructions
+# Code review focus
 
-## Review checklist
+Review for issues that could block release, surprise users, or create maintenance risk. Prefer high-signal findings over style-only comments.
 
-### JSDoc and documentation
+## What to check
 
-Make sure public components have clear JSDoc comments, including examples and @default set where needed. Check for any relevant documentation or decision records that should be updated based on the changes.
+### 1. Public API and behavior
 
-### Storybook
+- New or changed APIs should match existing naming, params, defaults, and behavior patterns.
+- Watch for breaking changes, regressions, and accidental behavior changes in public components, hooks, CSS, tokens, and CLI output.
+- Avoid introducing new patterns unless the change clearly justifies them.
 
-When making API-changes, check if there are relevant Storybook stories that should be updated or added to demonstrate the new behavior. Ensure that examples are clear and cover edge cases.
+### 2. Documentation and examples
 
-### Website
+- Public components and exported APIs should have accurate JSDoc, including `@default` where it adds clarity.
+- Check whether Storybook stories, website examples, and decision records need updates to match the new behavior.
 
-When making API-changes, check if there are relevant website examples in `./aksel.nav.no/website/pages/eksempler/\*` that should be updated or added to demonstrate the new behavior.
+### 3. Tests
 
-### Tests
+- Flag missing or insufficient tests for changed behavior, edge cases, and regressions.
+- Prefer tests that prove the contract users rely on, not just implementation details.
 
-Check if there are relevant tests that should be updated or added to cover the new behavior.
+### 4. CSS and styling
 
-### CSS
+- If CSS class names are removed, verify deprecation handling in `@navikt/aksel-stylelint/src/deprecations.ts`.
+- If new CSS files or selectors are added, confirm they follow the repo's import and naming conventions.
 
-If some CSS class names are removed, check if they are listed in `@navikt/aksel-stylelint/src/deprecations.ts` for deprecation warnings. If new CSS classes are added, check if they follow the existing naming conventions.
+### 5. Exports and packaging
 
-If a new CSS-file is added, check if it is imported in the correct place (e.g. `@navikt/core/css/index.css` for component CSS).
+- New public exports must be wired through the correct `index.ts` files and `package.json` exports when relevant.
+- Check that release-facing entry points stay consistent across packages.
 
-### Exports
+### 6. Changesets and migrations
 
-When adding new public exports, check if they are added to the correct `index.ts` files and that they are included in the `package.json` exports field if needed. Make sure to follow the existing export patterns and conventions.
-
-### Changeset
-
-If the change includes user-facing changes, check if a changeset has been added with a clear description of the change and its impact. The changeset should follow the format `<Component>: <gitmoji?> <Text>` (e.g. "Button: :sparkles: Add feature xyz"). If the change includes a breaking change, check if the migration guide has been updated accordingly and if a codemod is provided if needed.
+- User-facing changes should include a changeset with a clear summary and impact.
+- Breaking changes should also update migration guidance and include a codemod when needed.
