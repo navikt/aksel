@@ -168,7 +168,7 @@ export const SizeMedium: Story = {
   decorators: [DemoDecorator],
 };
 
-export const DisabledItemIndent: Story = {
+export const EnableItemIndent: Story = {
   render: (props) => {
     return (
       <ActionMenu open={props.open}>
@@ -183,13 +183,30 @@ export const DisabledItemIndent: Story = {
             >
               Item 1
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 2 clicked")}
+              indent
+            >
               Item 2
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={() => console.log("Item 3 clicked")}
-              disableIndent
+              indent
             >
+              Item 3
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Item
+              onSelect={() => console.log("Item 1 clicked")}
+              icon={<StarIcon aria-hidden />}
+            >
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+              Item 2
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
               Item 3
             </ActionMenu.Item>
           </ActionMenu.Group>
