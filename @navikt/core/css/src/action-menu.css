@@ -80,15 +80,15 @@
     opacity: 0.5;
     pointer-events: none;
   }
-}
 
-/* Indent items with left marker, or all items if at least one has left marker, unless data-indent is true */
-.aksel-action-menu__group:has([data-marker="left"]) .aksel-action-menu__item[data-indent="true"],
-.aksel-action-menu__item[data-marker="left"] {
-  --__axc-action-menu-item-pl: 1.625rem; /* 26px */
+  /* Indent items with left marker or if data-indent is set to true */
+  &[data-indent="true"],
+  &[data-marker="left"] {
+    --__axc-action-menu-item-pl: var(--ax-space-28); /* 28px */
 
-  .aksel-action-menu__content[data-size="medium"] & {
-    --__axc-action-menu-item-pl: 1.875rem; /* 30px */
+    .aksel-action-menu__content[data-size="medium"] & {
+      --__axc-action-menu-item-pl: var(--ax-space-32); /* 32px */
+    }
   }
 }
 

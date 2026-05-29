@@ -563,10 +563,10 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    */
   iconPosition?: "left" | "right";
   /**
-   * Disable indent for this item if other items in the same group have left-side markers, such as icons or checkbox/radio indicators.
+   * Add indent for this item even if it doesn't have a left marker. This is useful for aligning items that don't have an icon with items that do have an icon.
    * @default false
    */
-  disableIndent?: boolean;
+  indent?: boolean;
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -582,7 +582,7 @@ export const ActionMenuItem: OverridableComponent<
       shortcut,
       variant,
       iconPosition = "left",
-      disableIndent = false,
+      indent = false,
       ...rest
     },
     ref,
@@ -594,7 +594,7 @@ export const ActionMenuItem: OverridableComponent<
           "aksel-action-menu__item--danger": variant === "danger",
         })}
         data-marker={icon ? iconPosition : undefined}
-        data-indent={!disableIndent}
+        data-indent={indent}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
@@ -920,10 +920,10 @@ interface ActionMenuSubTriggerProps extends Omit<
    */
   iconPosition?: "left" | "right";
   /**
-   * Disable indent for this item if other items in the same group have icons.
+   * Add indent for this item even if it doesn't have a left marker. This is useful for aligning items that don't have an icon with items that do have an icon.
    * @default false
    */
-  disableIndent?: boolean;
+  indent?: boolean;
 }
 
 export const ActionMenuSubTrigger = forwardRef<
@@ -936,7 +936,7 @@ export const ActionMenuSubTrigger = forwardRef<
       className,
       icon,
       iconPosition = "left",
-      disableIndent = false,
+      indent = false,
       ...rest
     }: ActionMenuSubTriggerProps,
     ref,
@@ -950,7 +950,7 @@ export const ActionMenuSubTrigger = forwardRef<
           "aksel-action-menu__item aksel-action-menu__sub-trigger",
           className,
         )}
-        data-indent={!disableIndent}
+        data-indent={indent}
         data-marker={icon ? iconPosition : undefined}
       >
         {children}
