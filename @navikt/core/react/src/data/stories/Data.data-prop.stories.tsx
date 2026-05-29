@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
+import { HGrid } from "../../primitives/grid";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
 import type {
@@ -1068,4 +1069,49 @@ export const NestedRowsWithMasterDetail: Story = {
     ).toBeInTheDocument();
   }, */
   ...selectionControls,
+};
+
+export const ColumnDisplay: Story = {
+  render: () => {
+    const [columnDisplay, setColumnDisplay] = useState(
+      userColumnDef.map((col) => ({
+        id: col.id,
+        visible: col.id !== "bar",
+      })),
+    );
+    return (
+      <HGrid gap="space-8 space-16" columns="1fr">
+        <Button
+          onClick={() => {
+            setColumnDisplay((prev) => {
+              const [first, ...rest] = prev;
+              return [...rest, first];
+            });
+          }}
+        >
+          Move first column to the end
+        </Button>
+        <Button
+          onClick={() => {
+            setColumnDisplay((prev) => {
+              return prev.map((col) =>
+                col.id === "bar" ? { ...col, visible: !col.visible } : col,
+              );
+            });
+          }}
+        >
+          Toggle Bar column
+        </Button>
+        <DataGrid
+          columns={userColumnDef}
+          data={userData}
+          settings={{
+            columnDisplay,
+          }}
+        >
+          <DataGrid.Table />
+        </DataGrid>
+      </HGrid>
+    );
+  },
 };

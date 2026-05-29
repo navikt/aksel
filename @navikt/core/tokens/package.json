@@ -13,8 +13,8 @@
   "files": [
     "/dist",
     "types.ts",
-    "internal-types.ts",
-    "token_docs.js"
+    "token_docs.js",
+    "token_docs.d.ts"
   ],
   "scripts": {
     "build": "tsx ./src && yarn build:figma-config && yarn build:plugin && tsx ./config/version-tag.ts",
@@ -52,7 +52,10 @@
   "exports": {
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
-    "./token_docs": "./token_docs.js",
+    "./token_docs": {
+      "types": "./token_docs.d.ts",
+      "default": "./token_docs.js"
+    },
     "./dist/*": {
       "types": "./dist/tokens.d.ts",
       "default": "./dist/*"

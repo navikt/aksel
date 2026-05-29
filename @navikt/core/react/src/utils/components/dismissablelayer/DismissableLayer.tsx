@@ -460,6 +460,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             () => {
               pointerDownOutside.onPointerDownCapture();
               pointerUpOutside.onPointerDownCapture();
+              focusOutside.onPointerDownCapture();
             },
           )}
           onPointerUpCapture={composeEventHandlers(
