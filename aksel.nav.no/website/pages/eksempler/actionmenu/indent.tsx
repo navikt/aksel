@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args = {
   index: 13,
-  desc: "Vi anbefaler å bruke innrykk på elementer uten markør som hører sammen eller til en gruppe hvor minst én av elementene har markør. Dette for å tydeliggjøre at elementet hører til gruppen, og for å skape en visuell sammenheng mellom elementene i gruppen.",
+  desc: "Vi anbefaler å bruke innrykk på elementer uten markør som hører sammen hvor minst én av de andre elementene har markør. Dette for å tydeliggjøre at elementet hører til gruppen, og for å skape en visuell sammenheng mellom elementene i gruppen.",
 };
