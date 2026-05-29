@@ -1,6 +1,6 @@
 ---
 description: "Code review instructions used when reviewing pull requests."
-applyTo: "@navikt/**"
+applyTo: "**"
 excludeAgent: ["coding-agent"]
 ---
 
