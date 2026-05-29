@@ -919,6 +919,11 @@ interface ActionMenuSubTriggerProps extends Omit<
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Disable indent for this item if other items in the same group have icons.
+   * @default false
+   */
+  disableIndent?: boolean;
 }
 
 export const ActionMenuSubTrigger = forwardRef<
@@ -931,6 +936,7 @@ export const ActionMenuSubTrigger = forwardRef<
       className,
       icon,
       iconPosition = "left",
+      disableIndent = false,
       ...rest
     }: ActionMenuSubTriggerProps,
     ref,
@@ -944,6 +950,7 @@ export const ActionMenuSubTrigger = forwardRef<
           "aksel-action-menu__item aksel-action-menu__sub-trigger",
           className,
         )}
+        data-indent={!disableIndent}
         data-marker={icon ? iconPosition : undefined}
       >
         {children}
