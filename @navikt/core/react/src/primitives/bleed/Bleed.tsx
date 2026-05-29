@@ -13,7 +13,6 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
-   * The `px` value is useful to nudge by just 1px.
    * The `full` value is used to extend the margin to the full width of the parent.
    *
    * @example
@@ -29,7 +28,6 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
-   * The `px` value is useful to nudge by just 1px.
    * This prop does **not** accept the `full` value.
    *
    * @example
