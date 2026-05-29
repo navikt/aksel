@@ -1,27 +1,35 @@
+import { useId } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, FileUpload, Label, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const labelId = useId();
+  const descId = useId();
+
   return (
     <VStack gap="space-8" align="start">
       <VStack gap="space-2" align="start">
-        <Label id="label-id" as="div">
+        <Label id={labelId} as="div">
           Last opp dokumentasjon
         </Label>
-        <BodyShort id="desc-id" textColor="subtle">
+        <BodyShort id={descId} textColor="subtle">
           Du kan laste opp Word- og PDF-filer. Maks 3 filer. Maks størrelse 1
           MB.
         </BodyShort>
       </VStack>
 
-      <FileUpload.Trigger multiple={false} onSelect={console.info}>
+      <FileUpload.Trigger
+        accept=".pdf,.doc,.docx"
+        maxSizeInBytes={1_000_000}
+        onSelect={console.info}
+      >
         <Button
-          aria-describedby="label-id desc-id"
+          aria-describedby={`${labelId} ${descId}`}
           variant="secondary"
           icon={<UploadIcon aria-hidden />}
         >
-          Last opp filer
+          Velg filer
         </Button>
       </FileUpload.Trigger>
     </VStack>
