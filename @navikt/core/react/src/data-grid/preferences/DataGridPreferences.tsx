@@ -54,7 +54,7 @@ const DataGridPreferences = forwardRef<
   }
 
   const { tableSettings, updateTableSettings, columnDefinitions } = context;
-  const [open, setOpen] = useState(true /* TODO: Only for testing */);
+  const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DataGridSettings>({});
 
   function handleOpenChange(nextOpen: boolean) {
@@ -107,12 +107,14 @@ const DataGridPreferences = forwardRef<
       <DialogTrigger>
         <Button
           ref={forwardedRef}
+          aria-label="Åpne innstillinger for tabell"
           {...rest}
           variant="tertiary"
           size="small"
           data-color="neutral"
           icon={<CogIcon />}
           className={cl("aksel-data-grid__preferences-button", className)}
+          /* TODO: i18n */
         />
       </DialogTrigger>
       <DialogPopup width="medium" position="right">
