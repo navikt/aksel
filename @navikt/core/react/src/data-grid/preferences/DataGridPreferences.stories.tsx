@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { userEvent, within } from "storybook/test";
 import { Tag } from "../../tag";
 import { DataGrid } from "../root/DataGridRoot";
 import { DataGridPreferences } from "./DataGridPreferences";
@@ -31,6 +32,23 @@ export const Default: Story = {
         <DataGrid.Table />
       </DataGrid>
     );
+  },
+};
+
+export const TestDraftState: Story = {
+  render: () => {
+    return (
+      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
+        <DataGridPreferences aria-label="Instillinger" />
+      </DataGrid>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.getByRole("button", {
+      name: "Instillinger",
+    });
+    await userEvent.click(button);
   },
 };
 
