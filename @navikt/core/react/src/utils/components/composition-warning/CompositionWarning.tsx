@@ -60,7 +60,7 @@ function CompositionWarningForbidden({
       return;
     }
 
-    consoleWarning(`[Aksel] ${message}\nElement: `, elementRef.current);
+    consoleWarning(`${message}\nElement: `, elementRef.current);
   }, [compositionName, name, message]);
 
   return <Slot ref={elementRef}>{children}</Slot>;
