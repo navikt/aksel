@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { omit } from "../../utils-external";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useFormField } from "../useFormField";
 import { RadioGroupContext } from "./RadioGroup.context";
 import { RadioProps } from "./types";
@@ -16,11 +17,11 @@ export const useRadio = (props: RadioProps) => {
   );
 
   if (!radioGroup) {
-    console.warn("<Radio> must be used inside <RadioGroup>.");
+    consoleWarning("<Radio> must be used inside <RadioGroup>.");
   }
 
   if (props?.required !== undefined) {
-    console.warn("required is only supported on <RadioGroup>.");
+    consoleWarning("required is only supported on <RadioGroup>.");
   }
 
   return {
