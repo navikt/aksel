@@ -23,7 +23,7 @@ type VirtualFocusProps = {
  * arrow keys as well as selection with 'Return'.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/virtualfocus)
- * @see 🏷️ {@link AccordionProps}
+ * @see 🏷️ {@link VirtualFocusProps}
  *
  * @example
  * ```jsx
