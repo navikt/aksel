@@ -42,7 +42,7 @@ fs.writeFileSync(
     id: string;
     name: string;
     category: string;
-    sub_category: "Time",
+    sub_category: string;
     keywords: string[];
     variant: "stroke" | "fill";
     created_at: Date;
