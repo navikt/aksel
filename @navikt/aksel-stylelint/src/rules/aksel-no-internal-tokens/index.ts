@@ -47,6 +47,7 @@ const ruleFunction: stylelint.Rule = () => {
           node,
           result: postcssResult,
           ruleName,
+          word: node.prop,
         });
       }
     });
