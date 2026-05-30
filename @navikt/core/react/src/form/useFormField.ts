@@ -83,7 +83,7 @@ export const useFormField = (
 
   if ((props as any)?.required) {
     consoleWarning(
-      "Use of 'required' in form-elements is heavily discuouraged. Docs about why here: \nhttps://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
+      "Use of 'required' in form elements is heavily discouraged. Docs about why here:\nhttps://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
     );
   }
 
