@@ -28,7 +28,7 @@ describe(`SVG should be correctly parsed`, () => {
   </svg>
   `;
 
-  test("a", () => {
+  test("should replace width and height with 1em, and fill with currentColor", () => {
     expect(parseIcon(simpleSvg)).toEqual(simpleSvgResult);
     expect(parseIcon(advancedSvg)).toEqual(advancedSvgResult);
   });
