@@ -1,7 +1,9 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../utils/helpers";
-import RemovableChips, { ChipsRemovableProps } from "./Removable";
-import ToggleChips, { ChipsToggleProps } from "./Toggle";
+import { cl } from "../../utils/helpers";
+import RemovableChips, {
+  ChipsRemovableProps,
+} from "../removable/ChipsRemovable";
+import ToggleChips, { ChipsToggleProps } from "../toggle/ChipsToggle";
 
 interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
