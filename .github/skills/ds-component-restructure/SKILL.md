@@ -146,7 +146,9 @@ Do NOT move existing test files unless their source file moves. When moving a so
 
 Leave flat components flat — do NOT introduce subdirs unless the component contains internal utility-components (files that render JSX but are not public sub-components). If such a utility-component exists, move it to its own subdir following the canonical naming.
 
-Example: `guide-panel/GuidePanelIllustration.tsx` (internal helper component) → `guide-panel/illustration/GuidePanelIllustration.tsx`.
+Example: `button/Button.tsx` has no other sub-components, so should stay in root.
+
+```
 
 ### `parts/` directory
 
@@ -157,18 +159,20 @@ If the component uses a `parts/` dir instead of `root/`, rename it to `root/` du
 Hooks that are part of the public API (e.g. `useTabs`, `useFormField`) live in `root/` alongside the root component:
 
 ```
+
 root/
 ├── <Component>Root.tsx
 ├── <Component>Root.context.ts
-└── use<Hook>.ts        # public hook
-```
+└── use<Hook>.ts # public hook
+
+````
 
 Export from `index.ts` the same way as components:
 
 ```ts
 export { use<Hook> } from "./root/use<Hook>";
 export type { Use<Hook>Return } from "./root/use<Hook>";
-```
+````
 
 ### Internal sub-components
 
