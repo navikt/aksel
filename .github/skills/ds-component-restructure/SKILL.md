@@ -53,6 +53,7 @@ Read every file in the component folder:
 - All `.tsx` / `.ts` source files
 - Stories and test stories
 - Note what is currently exported publicly
+- Note: Ignore inconsistensies in file naming and structure — the goal is to fix those, not preserve them. Focus on understanding the component's public API and internal structure.
 
 ### 2. Map Files to Target Structure
 
