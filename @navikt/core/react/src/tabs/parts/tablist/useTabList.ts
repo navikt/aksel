@@ -1,51 +1,35 @@
 import { useCallback } from "react";
-import { useTabsContext, useTabsDescendantsContext } from "../../Tabs.context";
+import { ownerDocument } from "../../../utils/helpers";
+import { focusIn } from "../../../utils/hooks/useFocusIn";
+import { useTabsContext } from "../../Tabs.context";
 
 /**
  * TabList hook to manage multiple tab buttons,
  * and ensures only one tab is selected at a time.
  */
 export function useTabList() {
-  const { focusedValue, loop, selectedValue, setFocusedValue } =
-    useTabsContext();
-
-  const descendants = useTabsDescendantsContext();
+  const { loop, selectedValue, setFocusedValue } = useTabsContext();
 
   /**
-   * Implements rowing-tabindex for horizontal tabs
+   * Implements roving-tabindex for horizontal tabs.
+   * Queries enabled tabs from the DOM at event time — no registration needed.
    */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
-      /**
-       * Tabs.Tab is registered with its prop 'value'.
-       * We can then use it to find the current focuses descendant
-       */
-      const idx = descendants
-        .values()
-        .findIndex((x) => x.value === focusedValue);
+      const container = event.currentTarget as HTMLElement;
+      const items = Array.from(
+        container.querySelectorAll<HTMLButtonElement>(
+          "[data-aksel-tab]:not([data-disabled])",
+        ),
+      );
+      const current = ownerDocument(container)
+        .activeElement as HTMLElement | null;
 
-      const nextTab = () => {
-        const next = descendants.nextEnabled(idx, loop);
-        next?.node?.focus();
-      };
-      const prevTab = () => {
-        const prev = descendants.prevEnabled(idx, loop);
-        prev?.node?.focus();
-      };
-      const firstTab = () => {
-        const first = descendants.firstEnabled();
-        first?.node?.focus();
-      };
-      const lastTab = () => {
-        const last = descendants.lastEnabled();
-        last?.node?.focus();
-      };
-
-      const keyMap: Record<string, React.KeyboardEventHandler> = {
-        ArrowLeft: prevTab,
-        ArrowRight: nextTab,
-        Home: firstTab,
-        End: lastTab,
+      const keyMap: Record<string, () => void> = {
+        ArrowLeft: () => focusIn(items, "prev", current, loop),
+        ArrowRight: () => focusIn(items, "next", current, loop),
+        Home: () => focusIn(items, "first"),
+        End: () => focusIn(items, "last"),
       };
 
       const hasModifiers =
@@ -55,7 +39,7 @@ export function useTabList() {
 
       if (action && !hasModifiers) {
         event.preventDefault();
-        action(event);
+        action();
       } else if (event.key === "Tab") {
         /**
          * Imperative focus during keydown is risky so we prevent React's batching updates
@@ -64,7 +48,7 @@ export function useTabList() {
         selectedValue && setTimeout(() => setFocusedValue(selectedValue));
       }
     },
-    [descendants, focusedValue, loop, selectedValue, setFocusedValue],
+    [loop, selectedValue, setFocusedValue],
   );
 
   return { onKeyDown };

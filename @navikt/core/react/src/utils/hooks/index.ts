@@ -17,5 +17,6 @@ export {
   useTransitionStatus,
 } from "./useTransitionStatus";
 export { useValueAsRef } from "./useValueAsRef";
+export { focusIn } from "./useFocusIn";
 export { createDescendantContext } from "./descendants/useDescendant";
 export { DescendantsManager } from "./descendants/descendant";

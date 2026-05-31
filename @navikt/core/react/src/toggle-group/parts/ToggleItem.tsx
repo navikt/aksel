@@ -62,16 +62,19 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
     },
     forwardedRef,
   ) => {
-    const itemCtx = useToggleItem(
-      { value, onClick, onFocus, disabled: false, onKeyDown },
-      forwardedRef,
-    );
+    const itemCtx = useToggleItem({
+      value,
+      onClick,
+      onFocus,
+      disabled: false,
+      onKeyDown,
+    });
     const ctx = useToggleGroupContext();
 
     return (
       <button
         {...rest}
-        ref={itemCtx.ref}
+        ref={forwardedRef}
         className={cl("aksel-toggle-group__button", className)}
         type="button"
         role="radio"

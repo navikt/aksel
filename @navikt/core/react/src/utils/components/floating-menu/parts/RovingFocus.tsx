@@ -1,15 +1,17 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { composeEventHandlers, ownerDocument } from "../../../helpers";
-import type { DescendantsManager } from "../../../hooks";
 import { useEventCallback, useMergeRefs } from "../../../hooks";
+import { focusIn } from "../../../hooks/useFocusIn";
 import { Slot } from "../../slot/Slot";
+
+const MENU_ITEM_SELECTOR =
+  '[role="menuitem"]:not([data-disabled]),[role="menuitemcheckbox"]:not([data-disabled]),[role="menuitemradio"]:not([data-disabled])';
 
 interface RovingFocusProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "tabIndex"
 > {
   asChild?: boolean;
-  descendants: DescendantsManager<HTMLDivElement, any>;
   onEntryFocus?: (event: Event) => void;
 }
 
@@ -21,7 +23,6 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
     {
       children,
       asChild,
-      descendants,
       onKeyDown,
       onEntryFocus,
       onMouseDown,
@@ -44,49 +45,30 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       }
     }, [handleEntryFocus]);
 
-    const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent) => {
-        const loop = false;
+    const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
+      const container = _ref.current;
+      if (!container) return;
 
-        const ownerDoc = ownerDocument(_ref?.current);
+      const items = Array.from(
+        container.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
+      );
+      const ownerDoc = ownerDocument(container);
+      const current = ownerDoc.activeElement as HTMLElement | null;
 
-        const idx = descendants
-          .values()
-          .findIndex((x) => x.node.isSameNode(ownerDoc.activeElement));
+      const keyMap: Record<string, () => void> = {
+        ArrowUp: () => focusIn(items, "prev", current, false),
+        ArrowDown: () => focusIn(items, "next", current, false),
+        Home: () => focusIn(items, "first"),
+        End: () => focusIn(items, "last"),
+      };
 
-        const nextItem = () => {
-          const next = descendants.nextEnabled(idx, loop);
-          next?.node?.focus();
-        };
-        const prevItem = () => {
-          const prev = descendants.prevEnabled(idx, loop);
-          prev?.node?.focus();
-        };
-        const firstItem = () => {
-          const first = descendants.firstEnabled();
-          first?.node?.focus();
-        };
-        const lastItem = () => {
-          const last = descendants.lastEnabled();
-          last?.node?.focus();
-        };
+      const action = keyMap[event.key];
 
-        const keyMap: Record<string, React.KeyboardEventHandler> = {
-          ArrowUp: prevItem,
-          ArrowDown: nextItem,
-          Home: firstItem,
-          End: lastItem,
-        };
-
-        const action = keyMap[event.key];
-
-        if (action) {
-          event.preventDefault();
-          action(event);
-        }
-      },
-      [descendants],
-    );
+      if (action) {
+        event.preventDefault();
+        action();
+      }
+    }, []);
 
     const Comp = asChild ? Slot : "div";
 
@@ -94,7 +76,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       <Comp
         ref={composedRefs}
         {...rest}
-        tabIndex={descendants.enabledCount() === 0 ? -1 : 0}
+        tabIndex={0}
         style={{ outline: "none", ...rest.style }}
         onKeyDown={composeEventHandlers(onKeyDown, handleKeyDown)}
         onMouseDown={composeEventHandlers(onMouseDown, () => {
@@ -106,7 +88,13 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
             event.currentTarget.dispatchEvent(entryFocusEvent);
 
             if (!entryFocusEvent.defaultPrevented) {
-              descendants.firstEnabled()?.node.focus({ preventScroll: true });
+              const container = _ref.current;
+              if (container) {
+                const items = Array.from(
+                  container.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
+                );
+                focusIn(items, "first");
+              }
             }
           }
 
