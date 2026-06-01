@@ -26,7 +26,7 @@ const iconSearchInputSchema = {
     .describe(
       "Filter by subcategory (e.g., 'Communication', 'Arrow', 'Body parts')",
     ),
-  /* Since keywords are quite verbose and plentyfull, we just return string here to avoid bloating schema */
+  /* Since keywords are quite verbose and plentyfull, we just return string-schema here instead of enum to avoid bloating schema (and llm context) */
   keyword: z
     .string()
     .optional()
@@ -51,7 +51,7 @@ const iconSearchInputSchema = {
 const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
   name: "aksel_icons_search",
   description:
-    "Search and filter Aksel icons by category, subcategory, keywords, or name. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
+    "Search and filter Aksel icons by category, subcategory, keyword (similar names), or name. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
   inputSchema: iconSearchInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
     const maxLimit = limit || 20;
@@ -111,7 +111,7 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
         category: icon.category,
         subcategory: icon.sub_category,
         variant: icon.variant,
-        keywords: icon.keywords.slice(0, 5), // Top 5 keywords
+        keywords: icon.keywords,
       })),
     };
 

@@ -7,7 +7,7 @@ const MIME_TYPE = "application/json";
 // Cache the llm.txt content with a reasonable TTL (1 hour)
 let cachedContent: string | null = null;
 let cacheTimestamp: number = 0;
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL_MS = 60 * 60 * 1000;
 
 const llmIndexResource: McpResource = {
   name: "Aksel Documentation index",

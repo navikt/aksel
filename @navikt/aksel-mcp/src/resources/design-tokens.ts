@@ -1,4 +1,3 @@
-//@ts-expect-error - No types available for (yet) this package, but it has the data we need
 import { tokens } from "@navikt/ds-tokens/token_docs";
 import type { McpResource } from "../types.js";
 
@@ -6,7 +5,7 @@ const URI = "aksel-tokens://list";
 const MIME_TYPE = "application/json";
 
 // Create lightweight summary for browsing (just name, comment, category, type)
-const tokenSummary = tokens.map((token: any) => ({
+const tokenSummary = tokens.map((token) => ({
   name: token.name,
   comment: token.comment,
   category: token.category,
