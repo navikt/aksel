@@ -1,4 +1,19 @@
-import type { TokenForDocumentationT } from "./src/style-dictionary.formats";
+export type TokenDocT = {
+  name: string;
+  value: string;
+  rawValue: string;
+  jsValue: string;
+  cssValue: string;
+  scssValue: string;
+  lessValue: string;
+  comment?: string;
+  type: string;
+  rawType: string;
+  group?: string;
+  category: string;
+  categoryTitle: string;
+  role?: string;
+  modifier: string;
+};
 
-const tokens: TokenForDocumentationT[];
-export { tokens };
+export declare const tokens: TokenDocT[];
