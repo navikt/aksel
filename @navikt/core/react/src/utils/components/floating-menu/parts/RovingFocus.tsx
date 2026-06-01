@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { composeEventHandlers, ownerDocument } from "../../../helpers";
+import { rowingFocus } from "../../../helpers/rowing-focus";
 import { useEventCallback, useMergeRefs } from "../../../hooks";
-import { focusIn } from "../../../hooks/useFocusIn";
 import { Slot } from "../../slot/Slot";
 
 const MENU_ITEM_SELECTOR = "[data-aksel-menu-item]:not([data-disabled])";
@@ -50,17 +50,16 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
         return;
       }
 
-      const items = Array.from(
-        container.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
-      );
       const ownerDoc = ownerDocument(container);
       const current = ownerDoc.activeElement as HTMLElement | null;
 
       const keyMap: Record<string, () => void> = {
-        ArrowUp: () => focusIn(items, "prev", current, false),
-        ArrowDown: () => focusIn(items, "next", current, false),
-        Home: () => focusIn(items, "first"),
-        End: () => focusIn(items, "last"),
+        ArrowUp: () =>
+          rowingFocus(MENU_ITEM_SELECTOR, container, "prev", current, false),
+        ArrowDown: () =>
+          rowingFocus(MENU_ITEM_SELECTOR, container, "next", current, false),
+        Home: () => rowingFocus(MENU_ITEM_SELECTOR, container, "first"),
+        End: () => rowingFocus(MENU_ITEM_SELECTOR, container, "last"),
       };
 
       const action = keyMap[event.key];
@@ -90,12 +89,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
 
             if (!entryFocusEvent.defaultPrevented) {
               const container = _ref.current;
-              if (container) {
-                const items = Array.from(
-                  container.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
-                );
-                focusIn(items, "first");
-              }
+              container && rowingFocus(MENU_ITEM_SELECTOR, container, "first");
             }
           }
 

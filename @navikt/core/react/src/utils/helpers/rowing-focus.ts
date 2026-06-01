@@ -5,12 +5,15 @@ type FocusDirection = "first" | "last" | "next" | "prev";
  * - first/last: focus first or last item
  * - next/prev: focus relative to `current`, with optional looping
  */
-export function focusIn(
-  items: HTMLElement[],
+function rowingFocus(
+  selector: string,
+  container: HTMLElement,
   direction: FocusDirection,
   current?: HTMLElement | null,
   loop = true,
-): void {
+) {
+  const items = Array.from(container.querySelectorAll<HTMLElement>(selector));
+
   if (items.length === 0) {
     return;
   }
@@ -39,3 +42,5 @@ export function focusIn(
     items[prevIndex]?.focus();
   }
 }
+
+export { rowingFocus };

@@ -1,7 +1,9 @@
 import { useCallback } from "react";
 import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
-import { focusIn } from "../../utils/hooks/useFocusIn";
+import { rowingFocus } from "../../utils/helpers/rowing-focus";
 import { useToggleGroupContext } from "../ToggleGroup.context";
+
+const TOGGLE_ITEM_SELECTOR = "[data-aksel-toggle-item]:not([data-disabled])";
 
 export interface UseToggleItemProps {
   /**
@@ -42,19 +44,16 @@ export function useToggleItem<P extends UseToggleItemProps>({
         return;
       }
 
-      const items = Array.from(
-        container.querySelectorAll<HTMLButtonElement>(
-          "[data-aksel-toggle-item]:not([data-disabled])",
-        ),
-      );
       const current = ownerDocument(container)
         .activeElement as HTMLElement | null;
 
       const keyMap: Record<string, () => void> = {
-        ArrowLeft: () => focusIn(items, "prev", current, false),
-        ArrowRight: () => focusIn(items, "next", current, false),
-        Home: () => focusIn(items, "first"),
-        End: () => focusIn(items, "last"),
+        ArrowLeft: () =>
+          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "prev", current, false),
+        ArrowRight: () =>
+          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "next", current, false),
+        Home: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "first"),
+        End: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "last"),
       };
 
       const hasModifiers =

@@ -1,7 +1,9 @@
 import { useCallback } from "react";
 import { ownerDocument } from "../../../utils/helpers";
-import { focusIn } from "../../../utils/hooks/useFocusIn";
+import { rowingFocus } from "../../../utils/helpers/rowing-focus";
 import { useTabsContext } from "../../Tabs.context";
+
+const TAB_SELECTOR = "[data-aksel-tab]:not([data-disabled])";
 
 /**
  * TabList hook to manage multiple tab buttons,
@@ -16,19 +18,16 @@ export function useTabList() {
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const container = event.currentTarget as HTMLElement;
-      const items = Array.from(
-        container.querySelectorAll<HTMLButtonElement>(
-          "[data-aksel-tab]:not([data-disabled])",
-        ),
-      );
       const current = ownerDocument(container)
         .activeElement as HTMLElement | null;
 
       const keyMap: Record<string, () => void> = {
-        ArrowLeft: () => focusIn(items, "prev", current, loop),
-        ArrowRight: () => focusIn(items, "next", current, loop),
-        Home: () => focusIn(items, "first"),
-        End: () => focusIn(items, "last"),
+        ArrowLeft: () =>
+          rowingFocus(TAB_SELECTOR, container, "prev", current, loop),
+        ArrowRight: () =>
+          rowingFocus(TAB_SELECTOR, container, "next", current, loop),
+        Home: () => rowingFocus(TAB_SELECTOR, container, "first"),
+        End: () => rowingFocus(TAB_SELECTOR, container, "last"),
       };
 
       const hasModifiers =
