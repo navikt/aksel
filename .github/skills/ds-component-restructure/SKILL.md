@@ -53,7 +53,7 @@ Read every file in the component folder:
 - All `.tsx` / `.ts` source files
 - Stories and test stories
 - Note what is currently exported publicly
-- Note: Ignore inconsistensies in file naming and structure — the goal is to fix those, not preserve them. Focus on understanding the component's public API and internal structure.
+- Note: Ignore inconsistencies in file naming and structure — the goal is to fix those, not preserve them. Focus on understanding the component's public API and internal structure.
 
 ### 2. Map Files to Target Structure
 
@@ -149,8 +149,6 @@ Leave flat components flat — do NOT introduce subdirs unless the component con
 
 Example: `button/Button.tsx` has no other sub-components, so should stay in root.
 
-```
-
 ### `parts/` directory
 
 If the component uses a `parts/` dir instead of `root/`, rename it to `root/` during restructure. Update all relative imports.
@@ -160,20 +158,18 @@ If the component uses a `parts/` dir instead of `root/`, rename it to `root/` du
 Hooks that are part of the public API (e.g. `useTabs`, `useFormField`) live in `root/` alongside the root component:
 
 ```
-
 root/
 ├── <Component>Root.tsx
 ├── <Component>Root.context.ts
 └── use<Hook>.ts # public hook
-
-````
+```
 
 Export from `index.ts` the same way as components:
 
 ```ts
 export { use<Hook> } from "./root/use<Hook>";
 export type { Use<Hook>Return } from "./root/use<Hook>";
-````
+```
 
 ### Internal sub-components
 
