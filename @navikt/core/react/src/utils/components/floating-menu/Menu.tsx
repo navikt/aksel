@@ -324,12 +324,18 @@ const MenuContentInternal = forwardRef<
 
                 // focus first/last item based on key pressed
                 const content = contentRef.current;
-                if (event.target !== content) return;
-                if (!FIRST_LAST_KEYS.includes(event.key)) return;
+                if (event.target !== content) {
+                  return;
+                }
+
+                if (!FIRST_LAST_KEYS.includes(event.key)) {
+                  return;
+                }
+
                 event.preventDefault();
 
                 const MENU_ITEM_SELECTOR =
-                  '[role="menuitem"]:not([data-disabled]),[role="menuitemcheckbox"]:not([data-disabled]),[role="menuitemradio"]:not([data-disabled])';
+                  "[data-aksel-menu-item]:not([data-disabled])";
                 const items = Array.from(
                   content.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
                 );
@@ -504,6 +510,7 @@ const MenuItemInternal = forwardRef<
         role="menuitem"
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
+        data-aksel-menu-item
         tabIndex={-1}
         {...rest}
         style={{ userSelect: "none", ...rest?.style }}
