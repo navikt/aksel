@@ -33,7 +33,7 @@ CLI flags: -e <ext> · -g <glob> · -d (dry-run) · -p (print output) · -f (for
                   entries.map((m) => ({
                     name: m.value,
                     description: m.description,
-                    ...(m.warning !== undefined ? { warning: m.warning } : {}),
+                    warning: m.warning,
                   })),
                 ]),
               ),
