@@ -33,7 +33,6 @@ export const Props = defineType({
           title: "Prop",
           name: "prop",
           type: "object",
-
           fields: [
             {
               title: "Name",
@@ -48,7 +47,7 @@ export const Props = defineType({
             {
               title: "Description",
               name: "description",
-              type: "string",
+              type: "text",
             },
             {
               title: "Required",
@@ -61,7 +60,7 @@ export const Props = defineType({
               type: "string",
             },
             {
-              title: "Unpacked Type",
+              title: "Unpacked type",
               name: "unpackedType",
               type: "string",
             },
@@ -71,14 +70,14 @@ export const Props = defineType({
               type: "boolean",
             },
             {
-              title: "return",
+              title: "Return",
               name: "return",
               type: "string",
             },
             {
               title: "Example",
               name: "example",
-              type: "string",
+              type: "text",
             },
             {
               title: "Params",
