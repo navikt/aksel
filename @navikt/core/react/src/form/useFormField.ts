@@ -82,7 +82,7 @@ export const useFormField = (
 
   if ((props as any)?.required && process.env.NODE_ENV !== "production") {
     console.warn(
-      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:",
+      "Aksel: Use of 'required' in form-elements is heavily discouraged. Docs about why here:",
     );
     console.warn(
       "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
