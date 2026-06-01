@@ -35,7 +35,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const {
     setIsMouseLastUsedInputDevice,
     toggleIsListOpen,
-    activeDecendantId,
+    activeDescendantId,
     virtualFocus,
   } = useFilteredOptionsContext();
   const { isMultiSelect, maxSelected, selectedOptions, toggleOption } =
@@ -46,7 +46,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
     maxSelected.isLimitReached && !isInList(_option.value, selectedOptions);
 
   const optionId = filteredOptionsUtil.getOptionId(id, option.value);
-  const isActive = activeDecendantId === optionId;
+  const isActive = activeDescendantId === optionId;
 
   return (
     <li

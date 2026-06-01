@@ -195,6 +195,7 @@ const DataGridTableInternal = forwardRef<
         hasSelection: tableSelectionState.selection.mode !== "none",
         hasDetailsPanel: !!detailsPanel?.getContent,
         layout,
+        columnDisplay: tableSettings?.columnDisplay,
       },
     );
 
@@ -239,7 +240,7 @@ const DataGridTableInternal = forwardRef<
             aria-busy={isLoading || undefined}
           >
             <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-              <DataTableThead>
+              <DataTableThead data-sticky={stickyHeader || undefined}>
                 <DataTableTr>
                   {columns.map(
                     ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {

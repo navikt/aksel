@@ -5,7 +5,7 @@ const Example = () => (
   <FileUpload
     translations={{
       dropzone: {
-        dragAndDropMultiple: "Dra og slipp bilder i format .png",
+        dragAndDropMultiple: "Dra og slipp bilder her",
         buttonMultiple: "Velg bilder",
       },
       item: {
@@ -47,5 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 99,
-  desc: "Med translations API-et kan du endre tekstene i komponentene.",
+  desc: "Med translations API-et kan du endre tekstene i komponentene. **OBS:** `dragAndDrop`, `dragAndDropMultiple` og `or` er usynlige for skjermlesere. Ikke legg viktig info her.",
 };

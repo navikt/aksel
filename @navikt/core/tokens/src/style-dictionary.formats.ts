@@ -7,6 +7,7 @@ import {
 } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCaseForAlpha } from "../config/kebabCase";
+import type { TokenDocT } from "../token_docs.d.ts";
 import { type TokenTypes } from "./tokens.util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
@@ -56,7 +57,7 @@ export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
   return `${header}${tokens}\n`;
 };
 
-const formatCategory = (token: TransformedToken): string | undefined => {
+const formatCategory = (token: TransformedTokenWithType) => {
   const colorTypes = {
     bg: "backgroundColor",
     border: "borderColor",
@@ -80,7 +81,7 @@ const formatCategory = (token: TransformedToken): string | undefined => {
   }
 };
 
-const formatCategoryTitle = (token: TransformedToken): string | undefined => {
+const formatCategoryTitle = (token: TransformedTokenWithType) => {
   const category = formatCategory(token);
   switch (category) {
     case "backgroundColor":
@@ -128,7 +129,7 @@ const formatModifier = (
   }
 };
 
-const formatRole = (group: TransformedToken["group"]): string => {
+const formatRole = (group: string | undefined) => {
   if (group?.indexOf(".") === -1) {
     if (["background", "text", "border"].includes(group)) {
       return "root";
@@ -138,40 +139,42 @@ const formatRole = (group: TransformedToken["group"]): string => {
   return group?.split(".")[1];
 };
 
+type TransformedTokenWithType = TransformedToken & {
+  type: Exclude<TransformedToken["type"], undefined>;
+};
+
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const ignoredTokenTypes = ["global-color", "opacity"];
 
-  const tokens = dictionary.allTokens
-    .filter((token) => token.type && !ignoredTokenTypes.includes(token.type))
+  const tokens: TokenDocT[] = dictionary.allTokens
+    .filter(
+      (token): token is TransformedTokenWithType =>
+        !!token.type && !ignoredTokenTypes.includes(token.type),
+    )
     .filter((token) => !token.docsIgnore)
-    .map((token, index) => {
+    .map((token) => {
       const tokenNameWithoutPrefix = token.name.slice(2);
       const name = kebabCaseForAlpha(tokenNameWithoutPrefix);
-      return (
-        JSON.stringify({
-          name,
-          value: createTokenValue(token),
-          rawValue: formatRawValue(token),
-          jsValue: tokenNameWithoutPrefix,
-          cssValue: createTokenValue(token),
-          scssValue: `$ax-${name}`,
-          lessValue: `@ax-${name}`,
-          comment: token.comment?.startsWith("TODO")
-            ? undefined // Filter out placeholder comments
-            : token.comment,
-          type: token.type,
-          rawType: token.attributes?.type,
-          group: token.group,
-          category: formatCategory(token),
-          categoryTitle: formatCategoryTitle(token),
-          role: formatRole(token.group),
-          modifier: formatModifier(name, token.type),
-        }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
-      );
-    })
-    .join("\n");
+      return {
+        name,
+        value: createTokenValue(token),
+        rawValue: formatRawValue(token),
+        jsValue: tokenNameWithoutPrefix,
+        cssValue: createTokenValue(token),
+        scssValue: `$ax-${name}`,
+        lessValue: `@ax-${name}`,
+        comment: token.comment,
+        type: token.type,
+        rawType: token.attributes?.type as string,
+        group: token.group as string | undefined,
+        category: formatCategory(token),
+        categoryTitle: formatCategoryTitle(token),
+        role: formatRole(token.group as string | undefined),
+        modifier: formatModifier(name, token.type),
+      };
+    });
 
-  return `export const tokens = [${tokens}];\n`;
+  return `export const tokens = ${JSON.stringify(tokens)};`;
 };
 
 export const formatLESS: FormatFn = async ({ dictionary, file }) => {
