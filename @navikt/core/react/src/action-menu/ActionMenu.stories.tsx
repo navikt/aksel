@@ -771,6 +771,14 @@ export const Chromatic: Story = {
             {Disabled.render?.(newArgs, context)}
           </div>
         </HStack>
+        <div>
+          <h2>Medium size</h2>
+          {SizeMedium.render?.(newArgs, context)}
+        </div>
+        <div>
+          <h2>Enable item indent</h2>
+          {EnableItemIndent.render?.(newArgs, context)}
+        </div>
         <div style={{ marginBottom: "10rem" }}>
           <h2>Align</h2>
           {Align.render?.(newArgs, context)}
