@@ -3,7 +3,6 @@ import { z } from "zod";
 import { metadata } from "../resources/icon-categories.js";
 import { getAkselDocs } from "./aksel-docs.js";
 import { iconSearchTool } from "./icon-search.js";
-import { akselMigrationsTool } from "./migrations.js";
 import { tokenDetailsTool } from "./token-details.js";
 
 describe("Tools", () => {
@@ -174,60 +173,6 @@ describe("Tools", () => {
       );
       expect(iconSearchTool.inputSchema).toHaveProperty("keyword");
       expect(iconSearchTool.inputSchema).toHaveProperty("category");
-    });
-  });
-
-  describe("akselMigrationsTool", () => {
-    test("should reject any arguments in strict mode", () => {
-      const strictSchema = z.object(akselMigrationsTool.inputSchema).strict();
-
-      const invalidParse = strictSchema.safeParse({ foo: "bar" });
-      const validParse = strictSchema.safeParse({});
-
-      expect(invalidParse.success).toBe(false);
-      expect(validParse.success).toBe(true);
-    });
-
-    test("should return all migrations", async () => {
-      const result = await akselMigrationsTool.callback({});
-      const response = JSON.parse(result);
-
-      expect(response).toHaveProperty("cliVersion");
-      expect(response).toHaveProperty("migrations");
-      expect(response).toHaveProperty("runCommand");
-      expect(response.migrations).toHaveProperty("v8");
-      expect(response.migrations.v8.length).toBeGreaterThan(0);
-      expect(response.migrations.v8[0]).toHaveProperty("name");
-      expect(response.migrations.v8[0]).toHaveProperty("description");
-    });
-
-    test("should include warnings when present", async () => {
-      const result = await akselMigrationsTool.callback({});
-      const response = JSON.parse(result);
-
-      const v8Box = response.migrations.v8.find(
-        (m: any) => m.name === "v8-box",
-      );
-      expect(v8Box).toBeDefined();
-      expect(v8Box).toHaveProperty("warning");
-    });
-
-    test("should omit warning field when not present", async () => {
-      const result = await akselMigrationsTool.callback({});
-      const response = JSON.parse(result);
-
-      const v8BoxNew = response.migrations.v8.find(
-        (m: any) => m.name === "v8-box-new",
-      );
-      expect(v8BoxNew).toBeDefined();
-      expect(v8BoxNew).not.toHaveProperty("warning");
-    });
-
-    test("should have proper metadata", () => {
-      expect(akselMigrationsTool.name).toBe("aksel_migrations");
-      expect(akselMigrationsTool.description).toContain(
-        "List all available Aksel codemods",
-      );
     });
   });
 });
