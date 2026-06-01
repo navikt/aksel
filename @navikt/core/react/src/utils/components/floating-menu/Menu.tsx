@@ -494,10 +494,12 @@ const MenuItemInternal = forwardRef<
     const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref);
 
-    // If this item is a submenu trigger, listen for the close event dispatched by siblings
+    /* If this item is a submenu trigger, listen for the close event dispatched by siblings */
     useEffect(() => {
       const node = ref.current;
-      if (!node || !rest["data-submenu-trigger"]) return;
+      if (!node || !rest["data-submenu-trigger"]) {
+        return;
+      }
       const handler = () => {
         context.open && context.onOpenChange(false);
       };
@@ -777,7 +779,10 @@ const MenuSub: React.FC<MenuSubProps> = ({
         onOpenChange={(_open) => {
           handleOpenChange(_open);
           if (_open) {
-            /* Makes sure to close all adjacent submenus if they are open */
+            /*
+             * Makes sure to close all adjacent submenus if they are open
+             * This makes sure only one submenu can be open at a time and prevents the edgecase of multiple open submenus when the user quickly moves through multiple submenu triggers.
+             */
             parentMenuContext.content
               ?.querySelectorAll("[data-submenu-trigger]")
               .forEach((node) => {
