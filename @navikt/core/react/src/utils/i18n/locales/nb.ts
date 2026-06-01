@@ -65,7 +65,6 @@ export default {
       dragAndDrop: "Dra og slipp filen her",
       /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       dragAndDropMultiple: "Dra og slipp filer her",
-      /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       drop: "Slipp",
       /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       or: "eller",
