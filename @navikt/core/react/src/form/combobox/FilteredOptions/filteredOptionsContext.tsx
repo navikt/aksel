@@ -19,7 +19,7 @@ type FilteredOptionsProps = {
 };
 
 type FilteredOptionsContextValue = {
-  activeDecendantId?: string;
+  activeDescendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
   setFilteredOptionsRef: React.Dispatch<
@@ -219,13 +219,13 @@ const FilteredOptionsProvider = ({
     [allOptionsMap, virtualFocus],
   );
 
-  const activeDecendantId = useMemo(
+  const activeDescendantId = useMemo(
     () => virtualFocus.activeElement?.getAttribute("id") || undefined,
     [virtualFocus.activeElement],
   );
 
   const filteredOptionsState = {
-    activeDecendantId,
+    activeDescendantId,
     allowNewValues,
     setFilteredOptionsRef,
     shouldAutocomplete,
