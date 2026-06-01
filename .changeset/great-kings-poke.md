@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-🎨 ActionMenu: New medium content size, styling changes to group label and automatic indent in groups if one item has marker
+🎨 ActionMenu: New medium content size and a prop to add indent to items withouth left marker to align items
