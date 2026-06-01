@@ -1,10 +1,9 @@
 import { useCallback } from "react";
-import { composeEventHandlers } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
-import {
-  useToggleGroupContext,
-  useToggleGroupDescendant,
-} from "../ToggleGroup.context";
+import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
+import { rowingFocus } from "../../utils/helpers/rowing-focus";
+import { useToggleGroupContext } from "../ToggleGroup.context";
+
+const TOGGLE_ITEM_SELECTOR = "[data-aksel-toggle-item]:not([data-disabled])";
 
 export interface UseToggleItemProps {
   /**
@@ -18,63 +17,52 @@ export interface UseToggleItemProps {
   value: string;
 }
 
-export function useToggleItem<P extends UseToggleItemProps>(
-  {
-    value,
-    disabled = false,
-    onFocus: _onFocus,
-    onClick,
-    onKeyDown: _onKeyDown,
-  }: P,
-  ref: React.ForwardedRef<HTMLButtonElement>,
-) {
+export function useToggleItem<P extends UseToggleItemProps>({
+  value,
+  disabled = false,
+  onFocus: _onFocus,
+  onClick,
+  onKeyDown: _onKeyDown,
+}: P) {
   const { setSelectedValue, setFocusedValue, selectedValue, focusedValue } =
     useToggleGroupContext();
-
-  const { register, descendants } = useToggleGroupDescendant({
-    disabled,
-    value,
-  });
 
   const isSelected = value === selectedValue;
 
   const onFocus = () => setFocusedValue(value);
 
   /**
-   * Implements roving-tabindex for horizontal tabs
+   * Implements roving-tabindex.
    */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
+      const container = (event.currentTarget as HTMLElement).closest(
+        "[data-aksel-toggle-group]",
+      ) as HTMLElement | null;
+
+      if (!container) {
+        return;
+      }
+
       /**
-       * ToggleGroup.Item is registered with its prop 'value'.
-       * We can then use it to find the current focuses descendant
+       * If fireEvent is used in tests, activeElement might be body.
+       * We prefer event.target (or its closest item) if it's part of the items list.
        */
-      const idx = descendants
-        .values()
-        .findIndex((x) => x.value === focusedValue);
+      const current =
+        ((event.target as HTMLElement).closest(
+          TOGGLE_ITEM_SELECTOR,
+        ) as HTMLElement) ||
+        ((ownerDocument(container).activeElement as HTMLElement).closest(
+          TOGGLE_ITEM_SELECTOR,
+        ) as HTMLElement);
 
-      const nextTab = () => {
-        const next = descendants.nextEnabled(idx, false);
-        next?.node?.focus();
-      };
-      const prevTab = () => {
-        const prev = descendants.prevEnabled(idx, false);
-        prev?.node?.focus();
-      };
-      const firstTab = () => {
-        const first = descendants.firstEnabled();
-        first?.node?.focus();
-      };
-      const lastTab = () => {
-        const last = descendants.lastEnabled();
-        last?.node?.focus();
-      };
-
-      const keyMap: Record<string, React.KeyboardEventHandler> = {
-        ArrowLeft: prevTab,
-        ArrowRight: nextTab,
-        Home: firstTab,
-        End: lastTab,
+      const keyMap: Record<string, () => void> = {
+        ArrowLeft: () =>
+          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "prev", current, false),
+        ArrowRight: () =>
+          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "next", current, false),
+        Home: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "first"),
+        End: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "last"),
       };
 
       const hasModifiers =
@@ -84,7 +72,7 @@ export function useToggleItem<P extends UseToggleItemProps>(
 
       if (action && !hasModifiers) {
         event.preventDefault();
-        action(event);
+        action();
       } else if (event.key === "Tab") {
         /**
          * Imperative focus during keydown is risky so we prevent React's batching updates
@@ -93,20 +81,22 @@ export function useToggleItem<P extends UseToggleItemProps>(
         selectedValue && setTimeout(() => setFocusedValue(selectedValue));
       }
     },
-    [descendants, focusedValue, selectedValue, setFocusedValue],
+    [selectedValue, setFocusedValue],
   );
 
-  const refs = useMergeRefs(register, ref);
-
   return {
-    ref: refs,
-    isSelected,
-    isFocused: focusedValue === value,
     onClick: composeEventHandlers(
       onClick,
-      () => selectedValue !== value && setSelectedValue(value),
+      () => !isSelected && setSelectedValue(value),
     ),
     onFocus: disabled ? undefined : composeEventHandlers(_onFocus, onFocus),
     onKeyDown: composeEventHandlers(_onKeyDown, onKeyDown),
+    tabIndex: focusedValue === value ? 0 : -1,
+    "aria-checked": isSelected,
+    "data-selected": isSelected,
+    "data-aksel-toggle-item": "",
+    role: "radio",
+    disabled,
+    "data-disabled": disabled ? "" : undefined,
   };
 }
