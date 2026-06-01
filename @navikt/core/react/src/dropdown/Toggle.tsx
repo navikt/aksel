@@ -1,5 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { cl, composeEventHandlers } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../utils/hooks";
 import { DropdownContext } from "./context";
 
@@ -19,7 +20,7 @@ export const DropdownToggle = forwardRef<
   const mergedRef = useMergeRefs(context?.setAnchorEl, ref);
 
   if (!context) {
-    console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
+    consoleWarning("<Dropdown.Toggle /> has to be wrapped inside <Dropdown />");
     return null;
   }
 

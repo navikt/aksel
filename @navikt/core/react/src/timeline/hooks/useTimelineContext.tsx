@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 
 interface TimelineContextProps {
   startDate: Date;
@@ -20,8 +21,8 @@ export const useTimelineContext = () => {
   const context = useContext(TimelineContext);
 
   if (!context) {
-    console.warn(
-      "useTimelineContext must be used with TimelineContext (<Timeline />)",
+    consoleWarning(
+      "<Timeline />: useTimelineContext must be used with TimelineContext",
     );
   }
 
