@@ -12,7 +12,6 @@ export function useTabList() {
 
   /**
    * Implements roving-tabindex for horizontal tabs.
-   * Queries enabled tabs from the DOM at event time — no registration needed.
    */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {

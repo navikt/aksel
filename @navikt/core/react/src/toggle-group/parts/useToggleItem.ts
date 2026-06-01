@@ -31,20 +31,20 @@ export function useToggleItem<P extends UseToggleItemProps>({
 
   /**
    * Implements roving-tabindex.
-   * Queries enabled items from the radiogroup container at event time — no registration needed.
    */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const container = (event.currentTarget as HTMLElement).closest(
-        '[role="radiogroup"]',
+        "[data-aksel-toggle-group]",
       ) as HTMLElement | null;
 
-      if (!container) return;
+      if (!container) {
+        return;
+      }
 
-      /* TODO: Refactor: Use data-attrb, props returns */
       const items = Array.from(
         container.querySelectorAll<HTMLButtonElement>(
-          '[role="radio"]:not([disabled])',
+          "[data-aksel-toggle-item]:not([data-disabled])",
         ),
       );
       const current = ownerDocument(container)
@@ -77,13 +77,18 @@ export function useToggleItem<P extends UseToggleItemProps>({
   );
 
   return {
-    isSelected,
-    isFocused: focusedValue === value,
     onClick: composeEventHandlers(
       onClick,
-      () => selectedValue !== value && setSelectedValue(value),
+      () => !isSelected && setSelectedValue(value),
     ),
     onFocus: disabled ? undefined : composeEventHandlers(_onFocus, onFocus),
     onKeyDown: composeEventHandlers(_onKeyDown, onKeyDown),
+    tabIndex: focusedValue === value ? 0 : -1,
+    "aria-checked": isSelected,
+    "data-selected": isSelected,
+    "data-aksel-toggle-item": "",
+    role: "radio",
+    disabled,
+    "data-disabled": disabled ? "" : undefined,
   };
 }

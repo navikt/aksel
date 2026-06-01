@@ -97,6 +97,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             ref={ref}
             className={cl("aksel-toggle-group", `aksel-toggle-group--${size}`)}
             role="radiogroup"
+            data-aksel-toggle-group
           >
             {children}
           </div>

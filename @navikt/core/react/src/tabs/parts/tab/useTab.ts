@@ -50,6 +50,7 @@ function useTab({
     "data-state": isSelected ? "active" : "inactive",
     role: "tab",
     "data-aksel-tab": "",
+    disabled,
     "data-disabled": disabled ? "" : undefined,
   };
 }
