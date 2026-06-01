@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../types";
-import type { OverridableComponent } from "../utils-external";
-import { cl } from "../utils/helpers";
+import { AkselColor } from "../../types";
+import type { OverridableComponent } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 
 export interface ChipsToggleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
@@ -26,7 +26,7 @@ export interface ChipsToggleProps extends React.ButtonHTMLAttributes<HTMLButtonE
   checkmark?: boolean;
 }
 
-export const ToggleChips: OverridableComponent<
+export const ChipsToggle: OverridableComponent<
   ChipsToggleProps,
   HTMLButtonElement
 > = forwardRef(
@@ -103,4 +103,4 @@ function variantToColor(
   }
 }
 
-export default ToggleChips;
+export default ChipsToggle;

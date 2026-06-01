@@ -1,7 +1,10 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { cl } from "../utils/helpers";
-import RemovableChips, { ChipsRemovableProps } from "./Removable";
-import ToggleChips, { ChipsToggleProps } from "./Toggle";
+import { cl } from "../../utils/helpers";
+import {
+  ChipsRemovable,
+  ChipsRemovableProps,
+} from "../removable/ChipsRemovable";
+import { ChipsToggle, ChipsToggleProps } from "../toggle/ChipsToggle";
 
 interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -20,13 +23,13 @@ interface ChipsComponent extends React.ForwardRefExoticComponent<
    * @see 🏷️ {@link ToggleChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Toggle: typeof ToggleChips;
+  Toggle: typeof ChipsToggle;
   /**
    * Remove filter or the likes on click.
    * @see 🏷️ {@link RemovableChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Removable: typeof RemovableChips;
+  Removable: typeof ChipsRemovable;
 }
 
 /**
@@ -56,7 +59,7 @@ interface ChipsComponent extends React.ForwardRefExoticComponent<
  *    </Chips>
  * ```
  */
-export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
+const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   ({ className, size = "medium", children, ...rest }, ref) => {
     return (
       <ul
@@ -75,9 +78,9 @@ export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   },
 ) as ChipsComponent;
 
-Chips.Toggle = ToggleChips;
-Chips.Removable = RemovableChips;
+Chips.Toggle = ChipsToggle;
+Chips.Removable = ChipsRemovable;
 
 export default Chips;
-export { ToggleChips as ChipsToggle, RemovableChips as ChipsRemovable };
+export { Chips, ChipsToggle, ChipsRemovable };
 export type { ChipsProps, ChipsToggleProps, ChipsRemovableProps };
