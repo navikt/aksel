@@ -15,7 +15,7 @@ export const usePeriodContext = () => {
 
   if (!context) {
     consoleWarning(
-      "`<Timeline />`: usePeriodContext must be used with PeriodContext",
+      "<Timeline />: usePeriodContext must be used with PeriodContext",
     );
   }
 

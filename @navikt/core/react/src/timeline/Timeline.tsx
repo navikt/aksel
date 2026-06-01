@@ -151,7 +151,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     const handleZoomChange = (zoomStart: Date) => {
       if (startDate || endDate) {
         consoleWarning(
-          "`<Timeline />`: Zooming is not supported when `startDate` or `endDate` is set",
+          "<Timeline />: Zooming is not supported when `startDate` or `endDate` is set",
         );
         return;
       }

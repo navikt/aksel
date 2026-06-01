@@ -128,7 +128,7 @@ export const Process: ProcessComponent = forwardRef<
 
       if (activeChildren.length > 1) {
         consoleWarning(
-          "Found multiple `<Process.Event />` elements with `status='active'`. Only one event should be active at a time.",
+          "Found multiple <Process.Event /> elements with `status='active'`. Only one event should be active at a time.",
           rootRef.current,
         );
         setActiveChildId(undefined);

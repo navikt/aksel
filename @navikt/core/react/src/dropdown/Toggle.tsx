@@ -20,9 +20,7 @@ export const DropdownToggle = forwardRef<
   const mergedRef = useMergeRefs(context?.setAnchorEl, ref);
 
   if (!context) {
-    consoleWarning(
-      "`<Dropdown.Toggle />` has to be wrapped inside `<Dropdown />`",
-    );
+    consoleWarning("<Dropdown.Toggle /> has to be wrapped inside <Dropdown />");
     return null;
   }
 

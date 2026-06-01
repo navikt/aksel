@@ -18,9 +18,7 @@ export const useRowContext = () => {
   const context = useContext(RowContext);
 
   if (!context) {
-    consoleWarning(
-      "`<Timeline />`: useRowContext must be used with RowContext",
-    );
+    consoleWarning("<Timeline />: useRowContext must be used with RowContext");
   }
 
   return context;

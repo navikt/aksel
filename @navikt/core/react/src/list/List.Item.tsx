@@ -14,7 +14,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
 
     if (listType === "ol" && icon) {
       consoleWarning(
-        "`<List />`: Icon prop is not supported for ordered lists. Remove icon prop.",
+        "<List />: Icon prop is not supported for ordered lists. Remove icon prop.",
       );
     }
 
