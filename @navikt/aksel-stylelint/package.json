@@ -30,7 +30,8 @@
     "./recommended": "./dist/recommended.js"
   },
   "files": [
-    "/dist"
+    "/dist",
+    "!**/*.test.js"
   ],
   "scripts": {
     "test": "yarn build && node --import tsx --test ./dist/**/*.test.js",
