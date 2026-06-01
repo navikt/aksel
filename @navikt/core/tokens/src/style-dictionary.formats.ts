@@ -7,6 +7,7 @@ import {
 } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCaseForAlpha } from "../config/kebabCase";
+import type { TokenDocT } from "../token_docs.d.ts";
 import { type TokenTypes } from "./tokens.util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
@@ -142,28 +143,10 @@ type TransformedTokenWithType = TransformedToken & {
   type: Exclude<TransformedToken["type"], undefined>;
 };
 
-export type TokenForDocumentationT = {
-  name: string;
-  value: string;
-  rawValue: string;
-  jsValue: string;
-  cssValue: string;
-  scssValue: string;
-  lessValue: string;
-  comment?: string;
-  type: string;
-  rawType: string;
-  group?: string;
-  category: string;
-  categoryTitle: string;
-  role?: string;
-  modifier: string;
-};
-
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const ignoredTokenTypes = ["global-color", "opacity"];
 
-  const tokens: TokenForDocumentationT[] = dictionary.allTokens
+  const tokens: TokenDocT[] = dictionary.allTokens
     .filter(
       (token): token is TransformedTokenWithType =>
         !!token.type && !ignoredTokenTypes.includes(token.type),
