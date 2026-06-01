@@ -24,11 +24,11 @@ for (const globPattern of globPatterns) {
     exclude: ["**/node_modules"],
   });
   dirsAndFiles
-    /* Longest folder-names first, so that nested dirs are removed bottom-up */
+    /* Longest names first, so that nested dirs are removed bottom-up */
     .toSorted((a, b) => b.length - a.length)
-    .forEach((folder) => {
-      console.info(`Deleting folder ${folder}`);
-      rmSync(folder, { recursive: true });
+    .forEach((name) => {
+      console.info(`Deleting ${name}`);
+      rmSync(name, { recursive: true });
     });
 }
 
