@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 8.11.1
+
+### Patch Changes
+
+- Add types for token_docs and remove internal-types from package ([#4912](https://github.com/navikt/aksel/pull/4912))
+
 ## 8.11.0
 
 ## 8.10.6
