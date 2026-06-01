@@ -123,7 +123,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 
     if (dropdownCaption && (!fromDate || !toDate)) {
       consoleWarning(
-        "Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
+        "MonthPicker: Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
       );
       return null;
     }

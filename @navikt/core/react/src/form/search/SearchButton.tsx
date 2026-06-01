@@ -26,7 +26,7 @@ const SearchButton: SearchButtonType = forwardRef(
     const context = useContext(SearchContext);
 
     if (context === null) {
-      consoleWarning("`<Search.Button>` has to be wrapped inside `<Search />`");
+      consoleWarning("<Search.Button> has to be wrapped inside <Search />");
       return null;
     }
 

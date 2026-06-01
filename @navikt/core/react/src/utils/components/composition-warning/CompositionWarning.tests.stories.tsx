@@ -21,7 +21,7 @@ function ConsoleWarnCapture({ children }: PropsWithChildren) {
     const override: typeof console.warn = (...args) => {
       setCount((c) => c + 1);
       if (args.length > 0) {
-        setLastMessage(String(args[0]));
+        setLastMessage(String(args.join("")));
       }
       return original.apply(console, args);
     };
@@ -66,7 +66,7 @@ export const WarnsOnMatch: Story = {
 
     expect(countEl.textContent).toBe("Console warnings: 1");
     expect(msgEl.textContent).toContain(
-      "[Aksel] This child is forbidden in FormSummary.Header",
+      "[Aksel]This child is forbidden in FormSummary.Header",
     );
   },
 };

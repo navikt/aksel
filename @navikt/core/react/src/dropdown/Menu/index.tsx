@@ -66,7 +66,7 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
     const context = useContext(DropdownContext);
 
     if (!context) {
-      consoleWarning("`<Dropdown.Menu />` has to be wrapped in `<Dropdown />`");
+      consoleWarning("<Dropdown.Menu /> has to be wrapped in <Dropdown />");
       return null;
     }
 

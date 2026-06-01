@@ -56,7 +56,7 @@ export const MonthPickerStandalone = forwardRef<
 
     if (dropdownCaption && (!fromDate || !toDate)) {
       consoleWarning(
-        "Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
+        "MonthPicker.Standalone: Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
       );
       return null;
     }
