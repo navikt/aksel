@@ -4,8 +4,7 @@ import { useEventCallback, useMergeRefs } from "../../../hooks";
 import { focusIn } from "../../../hooks/useFocusIn";
 import { Slot } from "../../slot/Slot";
 
-const MENU_ITEM_SELECTOR =
-  '[role="menuitem"]:not([data-disabled]),[role="menuitemcheckbox"]:not([data-disabled]),[role="menuitemradio"]:not([data-disabled])';
+const MENU_ITEM_SELECTOR = "[data-aksel-menu-item]:not([data-disabled])";
 
 interface RovingFocusProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -47,7 +46,9 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
 
     const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
       const container = _ref.current;
-      if (!container) return;
+      if (!container) {
+        return;
+      }
 
       const items = Array.from(
         container.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
