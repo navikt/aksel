@@ -2,7 +2,10 @@ import { z } from "zod";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
 
-const componentPropsCache = createNodeCache(oneHourSeconds);
+const { cacheGet, cacheSet } = createNodeCache(
+  "component_props",
+  oneHourSeconds,
+);
 
 const componentPropsInputSchema = {
   slug: z
@@ -34,7 +37,7 @@ Example:
   aksel_component_props({ slug: "komponenter/core/button" })`,
   inputSchema: componentPropsInputSchema,
   async callback({ slug }) {
-    const cachedContent = componentPropsCache.get<string>(slug);
+    const cachedContent = cacheGet(slug);
     if (cachedContent) {
       return cachedContent;
     }
@@ -56,7 +59,7 @@ Example:
     }
 
     const content = JSON.stringify(await response.json());
-    componentPropsCache.set(slug, content);
+    cacheSet(slug, content);
     return content;
   },
 };

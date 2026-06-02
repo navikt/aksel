@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
 
-const akselDocsCache = createNodeCache(oneHourSeconds);
+const { cacheGet, cacheSet } = createNodeCache("aksel_docs", oneHourSeconds);
 
 const getAkselDocs: McpTool<{ path: z.ZodString }> = {
   name: "aksel_docs",
@@ -21,7 +21,7 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
       ),
   },
   async callback({ path }) {
-    const cachedContent = akselDocsCache.get<string>(path);
+    const cachedContent = cacheGet(path);
     if (cachedContent) {
       return cachedContent;
     }
@@ -52,7 +52,7 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
       content: await response.text(),
     });
 
-    akselDocsCache.set(path, content);
+    cacheSet(path, content);
     return content;
   },
 };

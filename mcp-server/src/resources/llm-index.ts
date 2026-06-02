@@ -3,7 +3,7 @@ import type { McpResource } from "../types.js";
 
 const URI = "aksel-docs://llm-index";
 const MIME_TYPE = "application/json";
-const llmIndexCache = createNodeCache(oneHourSeconds);
+const { cacheGet, cacheSet } = createNodeCache("llm_index", oneHourSeconds);
 
 const llmIndexResource: McpResource = {
   name: "Aksel Documentation index",
@@ -13,7 +13,8 @@ const llmIndexResource: McpResource = {
   mimeType: MIME_TYPE,
   async callback() {
     try {
-      const cachedContent = llmIndexCache.get<string>("llm-index");
+      const cachedContent = cacheGet("llm-index");
+
       if (cachedContent) {
         return {
           contents: [
@@ -33,7 +34,7 @@ const llmIndexResource: McpResource = {
       }
 
       const content = JSON.stringify(await response.json());
-      llmIndexCache.set("llm-index", content);
+      cacheSet("llm-index", content);
 
       return {
         contents: [
