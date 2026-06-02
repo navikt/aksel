@@ -23,6 +23,7 @@ type ActionMenuContextValue = {
   onOpenChange: (open: boolean) => void;
   onOpenToggle: () => void;
   rootElement: MenuPortalProps["rootElement"];
+  size: "small" | "medium";
 };
 
 const { Provider: ActionMenuProvider, useContext: useActionMenuContext } =
@@ -43,6 +44,11 @@ type ActionMenuProps = {
    * Callback for when the menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * The size of the menu.
+   * @default "small"
+   */
+  size?: "small" | "medium";
 } & Pick<MenuPortalProps, "rootElement">;
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
@@ -248,6 +254,7 @@ const ActionMenuRoot = ({
   open: openProp,
   onOpenChange,
   rootElement: rootElementProp,
+  size = "small", // TODO: Default to medium in next major release
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -271,6 +278,7 @@ const ActionMenuRoot = ({
       onOpenChange={setOpen}
       onOpenToggle={() => setOpen((prevOpen) => !prevOpen)}
       rootElement={rootElement}
+      size={size}
     >
       <Menu open={open} onOpenChange={setOpen} modal>
         {children}
@@ -383,6 +391,7 @@ export const ActionMenuContent = forwardRef<
           className={cl("aksel-action-menu__content", className)}
           {...rest}
           align={align}
+          data-size={context.size}
           sideOffset={4}
           collisionPadding={5}
           returnFocus={context.triggerRef}
@@ -553,6 +562,11 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Add indent for this item even if it doesn't have a left marker. This is useful for aligning items that don't have an icon with items that do have an icon.
+   * @default false
+   */
+  indent?: boolean;
 }
 
 export const ActionMenuItem: OverridableComponent<
@@ -568,6 +582,7 @@ export const ActionMenuItem: OverridableComponent<
       shortcut,
       variant,
       iconPosition = "left",
+      indent = false,
       ...rest
     },
     ref,
@@ -579,6 +594,7 @@ export const ActionMenuItem: OverridableComponent<
           "aksel-action-menu__item--danger": variant === "danger",
         })}
         data-marker={icon ? iconPosition : undefined}
+        data-indent={indent}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
@@ -903,6 +919,11 @@ interface ActionMenuSubTriggerProps extends Omit<
    * @default "left"
    */
   iconPosition?: "left" | "right";
+  /**
+   * Add indent for this item even if it doesn't have a left marker. This is useful for aligning items that don't have an icon with items that do have an icon.
+   * @default false
+   */
+  indent?: boolean;
 }
 
 export const ActionMenuSubTrigger = forwardRef<
@@ -915,6 +936,7 @@ export const ActionMenuSubTrigger = forwardRef<
       className,
       icon,
       iconPosition = "left",
+      indent = false,
       ...rest
     }: ActionMenuSubTriggerProps,
     ref,
@@ -928,6 +950,7 @@ export const ActionMenuSubTrigger = forwardRef<
           "aksel-action-menu__item aksel-action-menu__sub-trigger",
           className,
         )}
+        data-indent={indent}
         data-marker={icon ? iconPosition : undefined}
       >
         {children}
@@ -969,6 +992,7 @@ export const ActionMenuSubContent = forwardRef<
         alignOffset={-4}
         sideOffset={1}
         collisionPadding={10}
+        data-size={context.size}
         {...rest}
         className={cl(
           "aksel-action-menu__content aksel-action-menu__sub-content",
