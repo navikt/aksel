@@ -68,6 +68,7 @@ Move `@navikt/aksel-mcp` from a package-installed stdio server to a hosted HTTPS
 - The current package is a stdio binary, so the hosted server should not depend on `bin` for runtime.
 - The tool surface is small enough that we should keep dedicated tools instead of switching to search/execute.
 - The rewrite should avoid changing the actual documentation/data returned unless the HTTP transport exposes a spec issue.
+- Keep code in a single dir. This includes `.nais` files etc.
 
 ## Open question
 
