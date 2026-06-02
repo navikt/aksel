@@ -23,8 +23,8 @@ import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
+import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 
-type RowDensityOption = keyof typeof DataGridSettingsOptions.rowDensity;
 type TextSizeOption = keyof typeof DataGridSettingsOptions.textSize;
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -69,10 +69,6 @@ const DataGridPreferencesRoot = forwardRef<
   function handleSave() {
     updateTableSettings?.(draft);
     setOpen(false);
-  }
-
-  function isRowDensityOption(value: string): value is RowDensityOption {
-    return value in DataGridSettingsOptions.rowDensity;
   }
 
   function isTextSizeOption(value: string): value is TextSizeOption {
@@ -138,29 +134,16 @@ const DataGridPreferencesRoot = forwardRef<
         <DialogBody className="aksel-data-grid__preferences-body">
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
-              <RadioGroup
-                legend="Velg radtetthet"
-                size="small"
+              <DataGridPreferencesRowDensitySettings
+                value={draft.rowDensity}
                 onChange={(value) => {
-                  if (!isRowDensityOption(value)) {
-                    return;
-                  }
-
                   setDraft((prev) => ({
                     ...prev,
                     rowDensity: value,
                   }));
                 }}
-                value={draft.rowDensity}
-              >
-                {Object.entries(DataGridSettingsOptions.rowDensity).map(
-                  ([key, value]) => (
-                    <Radio key={key} value={key}>
-                      {value}
-                    </Radio>
-                  ),
-                )}
-              </RadioGroup>
+              />
+
               <RadioGroup
                 legend="Tekststørrelse"
                 size="small"
