@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { userEvent, within } from "storybook/test";
-import { Tag } from "../../tag";
-import { DataGrid } from "../root/DataGridRoot";
-import { DataGridPreferences } from "./DataGridPreferences";
+import { DataGridPreferences } from ".";
+import { DataGrid } from "../data-grid";
+import { Tag } from "../tag";
 
 const meta: Meta<typeof DataGridPreferences> = {
   title: "ds-react/DataGrid/Preferences",

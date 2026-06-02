@@ -1,6 +1,11 @@
 import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import {
+  DataGridSettings,
+  DataGridSettingsOptions,
+} from "../../data-grid/root/DataGrid.types";
+import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
 import {
   Dialog,
@@ -17,11 +22,6 @@ import { Fieldset } from "../../form/fieldset";
 import { Radio, RadioGroup } from "../../form/radio";
 import { Switch } from "../../form/switch";
 import { cl } from "../../utils/helpers";
-import {
-  type DataGridSettings,
-  DataGridSettingsOptions,
-} from "../root/DataGrid.types";
-import { useDataGridContext } from "../root/DataGridRoot.context";
 
 type ColumnDisplayEntry = { id: string; label: string; visible: boolean };
 type RowDensityOption = keyof typeof DataGridSettingsOptions.rowDensity;
@@ -43,7 +43,7 @@ interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButton
  * ```jsx
  * ```
  */
-const DataGridPreferences = forwardRef<
+const DataGridPreferencesRoot = forwardRef<
   HTMLButtonElement,
   DataGridPreferencesProps
 >(({ className, ...rest }: DataGridPreferencesProps, forwardedRef) => {
@@ -326,5 +326,5 @@ function ColumnDisplayBlock({
   );
 }
 
-export { DataGridPreferences }; // DataGridRoot needs to be exported b.c. of docgen
-export default DataGridPreferences;
+export { DataGridPreferencesRoot };
+export default DataGridPreferencesRoot;
