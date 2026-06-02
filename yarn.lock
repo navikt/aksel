@@ -9275,7 +9275,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*":
+"@types/express@npm:*, @types/express@npm:^5.0.3":
   version: 5.0.6
   resolution: "@types/express@npm:5.0.6"
   dependencies:
@@ -10703,6 +10703,24 @@ __metadata:
     vite: "npm:^7.3.2"
     vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-svgr: "npm:^4.2.0"
+  languageName: unknown
+  linkType: soft
+
+"aksel-mcp-server@workspace:mcp-server":
+  version: 0.0.0-use.local
+  resolution: "aksel-mcp-server@workspace:mcp-server"
+  dependencies:
+    "@modelcontextprotocol/sdk": "npm:^1.29.0"
+    "@navikt/aksel": "npm:^8.11.1"
+    "@navikt/aksel-icons": "npm:^8.11.1"
+    "@navikt/ds-tokens": "npm:^8.11.1"
+    "@types/express": "npm:^5.0.3"
+    "@types/node": "npm:^24.10.9"
+    express: "npm:^5.1.0"
+    tsdown: "npm:^0.22.0"
+    typescript: "npm:6.0.3"
+    vitest: "npm:4.1.7"
+    zod: "npm:^3.25.76"
   languageName: unknown
   linkType: soft
 

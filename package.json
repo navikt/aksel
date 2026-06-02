@@ -36,6 +36,7 @@
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
     "@navikt/aksel-mcp",
+    "mcp-server",
     "aksel.nav.no",
     "scripts/eslint",
     "scripts/analyzer",

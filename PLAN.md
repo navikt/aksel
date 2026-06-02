@@ -20,6 +20,11 @@ Move `@navikt/aksel-mcp` from a package-installed stdio server to a hosted HTTPS
 
 ## Rewrite approach
 
+The end goal is to be able to delete the current aksel-mcp package that is a npm-package, and **ONLY** have a remote server.
+
+- Create a new dir `mcp-server` that will have all the code for the new implementation.
+- Dont change current aksel-mcp dir.
+
 1. **Split server creation from transport**
    - Extract the current tool/resource/prompt registration into a reusable server factory.
    - Keep the catalog of tools, resources, and prompts in one place.

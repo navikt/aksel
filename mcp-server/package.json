@@ -1,0 +1,33 @@
+{
+  "name": "aksel-mcp-server",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "start": "node dist/index.mjs",
+    "test": "yarn vitest run"
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@navikt/aksel": "^8.11.1",
+    "@navikt/aksel-icons": "^8.11.1",
+    "@navikt/ds-tokens": "^8.11.1",
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.10.9",
+    "tsdown": "^0.22.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.7"
+  }
+}
