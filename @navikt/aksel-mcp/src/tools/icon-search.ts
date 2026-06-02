@@ -51,7 +51,7 @@ const iconSearchInputSchema = {
 const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
   name: "aksel_icons_search",
   description:
-    "Search and filter Aksel icons by category, subcategory, keyword (similar names), or name. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
+    "Search and filter Aksel icons. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
   inputSchema: iconSearchInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
     const maxLimit = limit || 20;
