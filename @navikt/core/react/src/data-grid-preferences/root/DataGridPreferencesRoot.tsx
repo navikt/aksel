@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useState } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import {
@@ -6,7 +6,6 @@ import {
   DataGridSettingsOptions,
 } from "../../data-grid/root/DataGrid.types";
 import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
-import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
 import {
   Dialog,
   DialogBody,
@@ -18,12 +17,13 @@ import {
   DialogTrigger,
 } from "../../dialog";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
-import { Fieldset } from "../../form/fieldset";
 import { Radio, RadioGroup } from "../../form/radio";
-import { Switch } from "../../form/switch";
 import { cl } from "../../utils/helpers";
+import {
+  type DataGridPreferencesColumnDisplay,
+  DataGridPreferencesColumnSettings,
+} from "../column-settings/DataGridPreferencesColumnSettings";
 
-type ColumnDisplayEntry = { id: string; label: string; visible: boolean };
 type RowDensityOption = keyof typeof DataGridSettingsOptions.rowDensity;
 type TextSizeOption = keyof typeof DataGridSettingsOptions.textSize;
 
@@ -88,7 +88,7 @@ const DataGridPreferencesRoot = forwardRef<
    * Merges draft.columnDisplay (order + visibility) with columnDefinitions (labels).
    * Falls back to all columns visible in definition order when columnDisplay is unset.
    */
-  const columnEntries = useMemo((): ColumnDisplayEntry[] => {
+  const columnEntries = useMemo((): DataGridPreferencesColumnDisplay[] => {
     const display =
       draft.columnDisplay ??
       columnDefinitions.map((col) => ({ id: col.id, visible: true }));
@@ -99,7 +99,7 @@ const DataGridPreferencesRoot = forwardRef<
     });
   }, [columnDefinitionMap, draft.columnDisplay, columnDefinitions]);
 
-  function handleColumnsChange(columns: ColumnDisplayEntry[]) {
+  function handleColumnsChange(columns: DataGridPreferencesColumnDisplay[]) {
     setDraft((prev) => ({
       ...prev,
       columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
@@ -236,10 +236,12 @@ const DataGridPreferencesRoot = forwardRef<
                 <Checkbox value="sticky-end">Siste kolonne</Checkbox>
               </CheckboxGroup>
             </div>
-            <ColumnDisplayBlock
-              columns={columnEntries}
-              onColumnsChange={handleColumnsChange}
-            />
+            <div className="aksel-data-grid__preferences-block">
+              <DataGridPreferencesColumnSettings
+                columns={columnEntries}
+                onColumnsChange={handleColumnsChange}
+              />
+            </div>
           </div>
         </DialogBody>
 
@@ -253,78 +255,6 @@ const DataGridPreferencesRoot = forwardRef<
     </Dialog>
   );
 });
-
-function ColumnDisplayBlock({
-  columns,
-  onColumnsChange,
-}: {
-  columns: ColumnDisplayEntry[];
-  onColumnsChange: (columns: ColumnDisplayEntry[]) => void;
-}) {
-  const visibleCount = columns.filter((c) => c.visible).length;
-  const isAllVisible = visibleCount === columns.length;
-
-  const dndItems = useMemo(
-    () => columns.map(({ id, label }) => ({ id, label })),
-    [columns],
-  );
-
-  const colMap = useMemo(
-    () => new Map(columns.map((c) => [c.id, c])),
-    [columns],
-  );
-
-  const setDndItems = useCallback(
-    (action: React.SetStateAction<{ id: string; label: string }[]>) => {
-      const newItems = typeof action === "function" ? action(dndItems) : action;
-      onColumnsChange(
-        newItems.flatMap((item) => {
-          const col = colMap.get(item.id);
-          return col ? [col] : [];
-        }),
-      );
-    },
-    [colMap, dndItems, onColumnsChange],
-  );
-
-  const toggleAll = useCallback(() => {
-    const newVisible = !isAllVisible;
-    onColumnsChange(columns.map((c) => ({ ...c, visible: newVisible })));
-  }, [columns, isAllVisible, onColumnsChange]);
-
-  const toggleColumn = useCallback(
-    (id: string) => {
-      onColumnsChange(
-        columns.map((c) => (c.id === id ? { ...c, visible: !c.visible } : c)),
-      );
-    },
-    [columns, onColumnsChange],
-  );
-
-  return (
-    <div className="aksel-data-grid__preferences-block">
-      <Fieldset legend="Vis kolonner">
-        <Switch size="small" checked={isAllVisible} onChange={toggleAll}>
-          Velg alle
-        </Switch>
-        <DragAndDrop
-          className="aksel-data-grid__preferences-dnd"
-          items={dndItems}
-          setItems={setDndItems}
-          renderItem={(item) => (
-            <Switch
-              size="small"
-              checked={colMap.get(item.id)?.visible ?? true}
-              onChange={() => toggleColumn(item.id)}
-            >
-              {item.label}
-            </Switch>
-          )}
-        />
-      </Fieldset>
-    </div>
-  );
-}
 
 export { DataGridPreferencesRoot };
 export default DataGridPreferencesRoot;
