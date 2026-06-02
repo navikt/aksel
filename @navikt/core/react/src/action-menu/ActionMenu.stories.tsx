@@ -454,7 +454,7 @@ export const Submenus: Story = {
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2 with a little longer name
           </ActionMenu.Item>
           <ActionMenu.Sub open={props.open}>
