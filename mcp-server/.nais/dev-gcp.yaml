@@ -1,0 +1,9 @@
+namespace: designsystem
+team: designsystem
+image: "{{image}}"
+replicas_min: 1
+replicas_max: 1
+memory_limit: 256Mi
+cpu_request: 100m
+memory_request: 128Mi
+ingress: https://aksel-mcp.intern.dev.nav.no

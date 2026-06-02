@@ -1,4 +1,4 @@
-import { createNodeCache, oneHourSeconds } from "../lib/node-cache.js";
+import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpResource } from "../types.js";
 
 const URI = "aksel-docs://llm-index";

@@ -67,6 +67,7 @@ for (const resource of resources) {
 }
 
 const app = express();
+app.set("trust proxy", true);
 app.use(express.json());
 
 app.get("/isalive", (_req, res) => {
@@ -77,7 +78,28 @@ app.get("/isready", (_req, res) => {
   res.status(200).json({ ok: true });
 });
 
-app.post("/mcp", async (req, res) => {
+app.all("/mcp", async (req, res) => {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    res.sendStatus(405);
+    return;
+  }
+
+  const origin = req.headers.origin;
+  if (origin) {
+    const host = req.get("host");
+    if (!host) {
+      res.sendStatus(400);
+      return;
+    }
+
+    const serverOrigin = `${req.protocol}://${host}`;
+    if (origin !== serverOrigin) {
+      res.sendStatus(403);
+      return;
+    }
+  }
+
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
   });

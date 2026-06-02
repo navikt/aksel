@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createNodeCache, oneHourSeconds } from "../lib/node-cache.js";
+import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
 
 const akselDocsCache = createNodeCache(oneHourSeconds);
