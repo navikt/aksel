@@ -21,6 +21,7 @@
     "@navikt/aksel-icons": "^8.11.1",
     "@navikt/ds-tokens": "^8.11.1",
     "express": "^5.1.0",
+    "node-cache": "^5.1.2",
     "zod": "^3.25.76"
   },
   "devDependencies": {

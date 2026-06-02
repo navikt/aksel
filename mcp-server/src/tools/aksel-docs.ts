@@ -1,5 +1,8 @@
 import { z } from "zod";
+import { createNodeCache, oneHourSeconds } from "../lib/node-cache.js";
 import type { McpTool } from "../types.js";
+
+const akselDocsCache = createNodeCache(oneHourSeconds);
 
 const getAkselDocs: McpTool<{ path: z.ZodString }> = {
   name: "aksel_docs",
@@ -18,6 +21,11 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
       ),
   },
   async callback({ path }) {
+    const cachedContent = akselDocsCache.get<string>(path);
+    if (cachedContent) {
+      return cachedContent;
+    }
+
     const url = `https://aksel.nav.no${path}`;
     const response = await fetch(url, {
       headers: {
@@ -38,13 +46,14 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
       );
     }
 
-    const markdown = await response.text();
-
-    return JSON.stringify({
+    const content = JSON.stringify({
       path,
       url,
-      content: markdown,
+      content: await response.text(),
     });
+
+    akselDocsCache.set(path, content);
+    return content;
   },
 };
 

@@ -1,5 +1,8 @@
 import { z } from "zod";
+import { createNodeCache, oneHourSeconds } from "../lib/node-cache.js";
 import type { McpTool } from "../types.js";
+
+const componentPropsCache = createNodeCache(oneHourSeconds);
 
 const componentPropsInputSchema = {
   slug: z
@@ -31,6 +34,11 @@ Example:
   aksel_component_props({ slug: "komponenter/core/button" })`,
   inputSchema: componentPropsInputSchema,
   async callback({ slug }) {
+    const cachedContent = componentPropsCache.get<string>(slug);
+    if (cachedContent) {
+      return cachedContent;
+    }
+
     const url = `https://aksel.nav.no/api/component-props?slug=${encodeURIComponent(slug)}`;
     const response = await fetch(url);
 
@@ -47,7 +55,9 @@ Example:
       );
     }
 
-    return JSON.stringify(await response.json());
+    const content = JSON.stringify(await response.json());
+    componentPropsCache.set(slug, content);
+    return content;
   },
 };
 
