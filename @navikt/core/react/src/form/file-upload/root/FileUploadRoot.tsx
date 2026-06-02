@@ -18,7 +18,10 @@ import { FileUploadLocaleContextProvider } from "./FileUploadRoot.context";
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * i18n-API for customizing texts and labels
+   * i18n-API for customizing texts and labels.
+   *
+   * **NB:** `dragAndDrop`, `dragAndDropMultiple` and `or`
+   * will be wrapped in `aria-hidden`, hence **not visible to screen readers**.
    */
   translations?: ComponentTranslation<"FileUpload">;
 }

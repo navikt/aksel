@@ -17,7 +17,10 @@ export interface FileUploadDropzoneProps
    */
   icon?: React.ComponentType<any>;
   /**
-   * i18n-API for customizing texts and labels
+   * i18n-API for customizing texts and labels.
+   *
+   * **NB:** `dragAndDrop`, `dragAndDropMultiple` and `or`
+   * will be wrapped in `aria-hidden`, hence **not visible to screen readers**.
    */
   translations?: ComponentTranslation<"FileUpload">["dropzone"];
 }

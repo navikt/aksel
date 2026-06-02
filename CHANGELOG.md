@@ -1,5 +1,25 @@
 # Changelog
 
+## 8.11.1
+
+### @navikt/ds-react
+
+- DataGrid: Loading-bar now stays stuck to sticky-header. ([#4897](https://github.com/navikt/aksel/pull/4897))
+
+- Popover: Fixed issue where clicking inside container sometimes could lead to Popover closing ([#4909](https://github.com/navikt/aksel/pull/4909))
+
+- DataGrid: Added `columnDisplay` value to settings ([#4908](https://github.com/navikt/aksel/pull/4908))
+
+- DataGrid.Table: Fix auto-width for col with "show nested rows" button ([#4906](https://github.com/navikt/aksel/pull/4906))
+
+### @navikt/ds-css
+
+- DataGrid: Loading-bar now stays stuck to sticky-header. ([#4897](https://github.com/navikt/aksel/pull/4897))
+
+### @navikt/ds-tokens
+
+- Add types for token_docs and remove internal-types from package ([#4912](https://github.com/navikt/aksel/pull/4912))
+
 ## 8.11.0
 
 ### @navikt/ds-react

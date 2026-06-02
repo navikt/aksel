@@ -43,5 +43,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Noen ganger er det den ene pixelen som skal til for å optisk sentrere elementer.",
+  desc: "Noen ganger er det den ene pixelen som skal til for å optisk sentrere elementer. Les mer om [optiske effekter](https://medium.com/design-bridges/optical-effects-9fca82b4cd9a).",
 };

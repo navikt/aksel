@@ -7,17 +7,11 @@ import {
   HGrid,
   VStack,
 } from "@navikt/ds-react";
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
-import { TokenForDocumentationT } from "../../types";
 import TokenPreview from "./TokenPreview";
 
-const TokenEntry = ({
-  index,
-  token,
-}: {
-  index: number;
-  token: TokenForDocumentationT;
-}) => {
+const TokenEntry = ({ index, token }: { index: number; token: TokenDocT }) => {
   const searchParams = useSearchParams();
   const tokenValue = searchParams?.get("tokenFormat");
   const tokenText = tokenValue ? token[tokenValue] : `--ax-${token.name}`;

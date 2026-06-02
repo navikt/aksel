@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.11.1
+
+### Patch Changes
+
+- DataGrid: Loading-bar now stays stuck to sticky-header. ([#4897](https://github.com/navikt/aksel/pull/4897))
+
 ## 8.11.0
 
 ### Minor Changes

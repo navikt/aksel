@@ -1,5 +1,6 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { AxisLabels } from "./AxisLabels";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { TimelineKeyboardNavProvider } from "./hooks/TimelineKeyboardNavProvider";
@@ -149,11 +150,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const handleZoomChange = (zoomStart: Date) => {
       if (startDate || endDate) {
-        if (process.env.NODE_ENV !== "production") {
-          console.warn(
-            "Zooming is not supported when startDate or endDate is set",
-          );
-        }
+        consoleWarning(
+          "<Timeline />: Zooming is not supported when `startDate` or `endDate` is set",
+        );
         return;
       }
       if (direction === "left") {
