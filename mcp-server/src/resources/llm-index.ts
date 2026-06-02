@@ -1,3 +1,4 @@
+import { logError } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpResource } from "../types.js";
 
@@ -48,6 +49,10 @@ const llmIndexResource: McpResource = {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
+      logError("Failed to fetch documentation index", {
+        resource: URI,
+        error: errorMessage,
+      });
 
       return {
         contents: [

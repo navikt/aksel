@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { logError, logWarn } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
 
@@ -35,11 +36,23 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
 
     if (!response.ok) {
       if (response.status === 404) {
+        logWarn("Documentation path not found", {
+          tool: "aksel_docs",
+          path,
+        });
+
         return JSON.stringify({
           error: "NOT_FOUND",
           message: `Documentation not found at path: "${path}". This path may be outdated. Please read the \`aksel-docs://llm-index\` resource to find the current correct path.`,
         });
       }
+
+      logError("Failed to fetch documentation", {
+        tool: "aksel_docs",
+        path,
+        status: response.status,
+        statusText: response.statusText,
+      });
 
       throw new Error(
         `Failed to fetch documentation: ${response.status} ${response.statusText}`,

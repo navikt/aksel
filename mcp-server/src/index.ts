@@ -4,6 +4,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import express from "express";
 import { performance } from "node:perf_hooks";
 import pkg from "../package.json" with { type: "json" };
+import { logError, logWarn } from "./helpers/log.js";
 import {
   recordHttpRequest,
   recordToolCall,
@@ -47,6 +48,10 @@ for (const tool of tools) {
           "error",
           (performance.now() - started) / 1000,
         );
+        logError("Tool execution failed", {
+          tool: tool.name,
+          error: error instanceof Error ? error.message : String(error),
+        });
         throw error;
       }
     },
@@ -121,6 +126,10 @@ app.get("/metrics", async (_req, res) => {
 
 app.all("/mcp", async (req, res) => {
   if (req.method !== "POST") {
+    logWarn("Rejected MCP request with unsupported method", {
+      method: req.method,
+      path: req.path,
+    });
     res.setHeader("Allow", "POST");
     res.sendStatus(405);
     return;
@@ -130,27 +139,47 @@ app.all("/mcp", async (req, res) => {
   if (origin) {
     const host = req.get("host");
     if (!host) {
+      logWarn("Rejected MCP request without host header", {
+        origin,
+        path: req.path,
+      });
       res.sendStatus(400);
       return;
     }
 
     const serverOrigin = `${req.protocol}://${host}`;
     if (origin !== serverOrigin) {
+      logWarn("Rejected MCP request with mismatched origin", {
+        origin,
+        serverOrigin,
+        path: req.path,
+      });
       res.sendStatus(403);
       return;
     }
   }
 
-  const transport = new StreamableHTTPServerTransport({
-    sessionIdGenerator: undefined,
-  });
+  try {
+    const transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: undefined,
+    });
 
-  res.on("close", () => {
-    void transport.close();
-  });
+    res.on("close", () => {
+      void transport.close();
+    });
 
-  await server.connect(transport);
-  await transport.handleRequest(req, res, req.body);
+    await server.connect(transport);
+    await transport.handleRequest(req, res, req.body);
+  } catch (error) {
+    logError("MCP request failed", {
+      path: req.path,
+      method: req.method,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    if (!res.headersSent) {
+      res.sendStatus(500);
+    }
+  }
 });
 
 const port = Number(process.env.PORT ?? 8080);

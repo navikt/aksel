@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { logError, logWarn } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
 
@@ -47,11 +48,23 @@ Example:
 
     if (!response.ok) {
       if (response.status === 404) {
+        logWarn("Component props not found", {
+          tool: "aksel_component_props",
+          slug,
+        });
+
         return JSON.stringify({
           error: "NOT_FOUND",
           message: `No props documentation found for slug: "${slug}". Verify the slug using the aksel-docs://llm-index resource.`,
         });
       }
+
+      logError("Failed to fetch component props", {
+        tool: "aksel_component_props",
+        slug,
+        status: response.status,
+        statusText: response.statusText,
+      });
 
       throw new Error(
         `Failed to fetch component props: ${response.status} ${response.statusText}`,
