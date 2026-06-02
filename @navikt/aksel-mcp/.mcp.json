@@ -2,7 +2,7 @@
   "mcpServers": {
     "aksel-mcp": {
       "command": "node",
-      "args": ["./dist/index.js"]
+      "args": ["./dist/index.mjs"]
     }
   }
 }
