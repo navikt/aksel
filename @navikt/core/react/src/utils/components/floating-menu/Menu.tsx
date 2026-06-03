@@ -786,8 +786,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
           handleOpenChange(_open);
           if (_open) {
             /*
-             * Makes sure to close all adjacent submenus if they are open
-             * This makes sure only one submenu can be open at a time and prevents the edgecase of multiple open submenus when the user quickly moves through multiple submenu triggers.
+             * Close all adjacent submenus if they are open
              */
             parentMenuContext.content
               ?.querySelectorAll("[data-submenu-trigger]")
