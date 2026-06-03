@@ -6,4 +6,4 @@ replicas_max: 1
 memory_limit: 256Mi
 cpu_request: 50m
 memory_request: 128Mi
-ingress: https://aksel-mcp.intern.dev.nav.no
+ingress: https://aksel-mcp.intern.nav.no
