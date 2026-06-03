@@ -11,13 +11,12 @@ import { setupResources } from "./resources/resources.js";
 import { setupTools } from "./tools/tools.js";
 
 const app = express();
-
-/*
- * Tells Express to trust upstream proxy (Nais ingress).
- * Critical for Origin security check: req.headers.origin must match ${req.protocol}://${req.get('host')}.
- */
-app.set("trust proxy", true);
 app.use(express.json());
+
+const isProduction = process.env.NODE_ENV === "production";
+const allowedOrigins = isProduction
+  ? new Set(["https://aksel-mcp.intern.nav.no"])
+  : new Set(["https://aksel-mcp.intern.nav.no", "http://localhost:8080"]);
 
 /**
  * Middleware to record HTTP requests, excluding health and metrics endpoints.
@@ -73,27 +72,15 @@ app.all("/mcp", async (req, res) => {
    * https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#security-warning
    */
   const origin = req.headers.origin;
-  if (origin) {
-    const host = req.get("host");
-    if (!host) {
-      logWarn("Rejected MCP request without host header", {
-        origin,
-        path: req.path,
-      });
-      res.sendStatus(400);
-      return;
-    }
 
-    const serverOrigin = `${req.protocol}://${host}`;
-    if (origin !== serverOrigin) {
-      logWarn("Rejected MCP request with mismatched origin", {
-        origin,
-        serverOrigin,
-        path: req.path,
-      });
-      res.sendStatus(403);
-      return;
-    }
+  /* Non-browser MCP clients often omit Origin, so only reject explicit mismatches. */
+  if (origin && !allowedOrigins.has(origin)) {
+    logWarn("Rejected MCP request with disallowed origin", {
+      origin: origin ?? null,
+      path: req.path,
+    });
+    res.sendStatus(403);
+    return;
   }
 
   try {
