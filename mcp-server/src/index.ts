@@ -11,7 +11,7 @@ import { setupResources } from "./resources/resources.js";
 import { setupTools } from "./tools/tools.js";
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 
 const isProduction = process.env.NODE_ENV === "production";
 const allowedOrigins = isProduction
@@ -74,7 +74,7 @@ app.all("/mcp", async (req, res) => {
   const origin = req.headers.origin;
 
   /* Non-browser MCP clients often omit Origin, so only reject explicit mismatches. */
-  if (origin && !allowedOrigins.has(origin)) {
+  if (origin && !allowedOrigins.has(origin.toLowerCase())) {
     logWarn("Rejected MCP request with disallowed origin", {
       origin: origin ?? null,
       path: req.path,
