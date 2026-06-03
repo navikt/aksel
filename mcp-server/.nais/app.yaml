@@ -2,21 +2,21 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: aksel-mcp-server
-  namespace: { { namespace } }
+  namespace: {{namespace}}
   labels:
-    team: { { team } }
+    team: {{team}}
 spec:
-  image: { { image } }
+  image: {{image}}
   port: 8080
   replicas:
-    min: { { replicas_min } }
-    max: { { replicas_max } }
+    min: {{replicas_min}}
+    max: {{replicas_max}}
   resources:
     limits:
-      memory: { { memory_limit } }
+      memory: {{memory_limit}}
     requests:
-      cpu: { { cpu_request } }
-      memory: { { memory_request } }
+      cpu: {{cpu_request}}
+      memory: {{memory_request}}
   liveness:
     path: /isalive
     initialDelay: 5
@@ -33,7 +33,7 @@ spec:
     enabled: true
     path: /metrics
   ingresses:
-    - { { ingress } }
+    - {{ingress}}
   accessPolicy:
     outbound:
       external:
