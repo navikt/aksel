@@ -58,7 +58,7 @@ describe("rovingFocus", () => {
 
   test("focuses last item on 'prev' when current is missing", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "prev", null, true);
+    rovingFocus(".item", container, "prev", null, true);
     expect(document.activeElement).toBe(items[2]);
   });
 

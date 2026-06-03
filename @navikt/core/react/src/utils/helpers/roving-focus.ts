@@ -30,6 +30,13 @@ function rovingFocus(
 
   const currentIndex = current ? items.indexOf(current) : -1;
 
+  if (currentIndex === -1) {
+    const elementToFocus =
+      direction === "next" ? items[0] : items[items.length - 1];
+    elementToFocus.focus();
+    return;
+  }
+
   if (direction === "next") {
     const nextIndex = loop
       ? (currentIndex + 1) % items.length

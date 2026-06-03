@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { ownerDocument } from "../../../utils/helpers";
 import { rovingFocus } from "../../../utils/helpers/roving-focus";
 import { useTabsContext } from "../../Tabs.context";
 
@@ -18,15 +17,10 @@ export function useTabList() {
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const container = event.currentTarget as HTMLElement;
-      /**
-       * If fireEvent is used in tests, activeElement might be body.
-       * We prefer event.target (or its closest item) if it's part of the items list.
-       */
-      const current =
-        ((event.target as HTMLElement).closest(TAB_SELECTOR) as HTMLElement) ||
-        ((ownerDocument(container).activeElement as HTMLElement).closest(
-          TAB_SELECTOR,
-        ) as HTMLElement);
+
+      const current = (event.target as HTMLElement).closest(
+        TAB_SELECTOR,
+      ) as HTMLElement;
 
       const keyMap: Record<string, () => void> = {
         ArrowLeft: () =>
