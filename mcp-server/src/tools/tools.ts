@@ -24,9 +24,11 @@ function setupTools(server: McpServer) {
         annotations: { readOnlyHint: true },
       },
       async (args: { [K in keyof typeof tool.inputSchema]: any }) => {
+        const started = performance.now();
+
         try {
           const result = await tool.callback(args);
-          recordToolCall(tool.name, "ok");
+          recordToolCall(tool.name, "ok", (performance.now() - started) / 1000);
 
           return {
             content: [
@@ -37,7 +39,11 @@ function setupTools(server: McpServer) {
             ],
           };
         } catch (error) {
-          recordToolCall(tool.name, "error");
+          recordToolCall(
+            tool.name,
+            "error",
+            (performance.now() - started) / 1000,
+          );
           logError("Tool execution failed", {
             tool: tool.name,
             error: error instanceof Error ? error.message : String(error),

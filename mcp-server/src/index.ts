@@ -2,6 +2,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import express from "express";
+import { performance } from "node:perf_hooks";
 import pkg from "../package.json" with { type: "json" };
 import { logError, logWarn } from "./helpers/log.js";
 import { recordHttpRequest, register } from "./helpers/metrics.js";
@@ -36,8 +37,14 @@ app.use((req, res, next) => {
     return;
   }
 
+  const started = performance.now();
   res.once("finish", () => {
-    recordHttpRequest(req.path, req.method, res.statusCode);
+    recordHttpRequest(
+      req.path,
+      req.method,
+      res.statusCode,
+      (performance.now() - started) / 1000,
+    );
   });
 
   next();

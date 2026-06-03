@@ -1,6 +1,19 @@
-import { Counter, Gauge, collectDefaultMetrics, register } from "prom-client";
+import {
+  Counter,
+  Gauge,
+  Histogram,
+  collectDefaultMetrics,
+  register,
+} from "prom-client";
 
 collectDefaultMetrics({ register });
+
+const httpRequestDurationSeconds = new Histogram({
+  name: "aksel_mcp_requests_duration_seconds",
+  help: "Duration of HTTP requests handled by aksel-mcp-server.",
+  labelNames: ["route", "method", "status"] as const,
+  registers: [register],
+});
 
 const httpRequestsTotal = new Counter({
   name: "aksel_mcp_requests_total",
@@ -12,6 +25,13 @@ const httpRequestsTotal = new Counter({
 const toolCallsTotal = new Counter({
   name: "aksel_mcp_tool_calls_total",
   help: "Total MCP tool calls handled by aksel-mcp-server.",
+  labelNames: ["tool", "status"] as const,
+  registers: [register],
+});
+
+const toolDurationSeconds = new Histogram({
+  name: "aksel_mcp_tool_duration_seconds",
+  help: "Duration of MCP tool calls handled by aksel-mcp-server.",
   labelNames: ["tool", "status"] as const,
   registers: [register],
 });
@@ -45,12 +65,31 @@ const serverUp = new Gauge({
 
 serverUp.set(1);
 
-function recordHttpRequest(route: string, method: string, status: number) {
-  httpRequestsTotal.inc({ route, method, status: String(status) });
+function recordHttpRequest(
+  route: string,
+  method: string,
+  status: number,
+  durationSeconds: number,
+) {
+  const labels = {
+    route,
+    method,
+    status: String(status),
+  };
+
+  httpRequestsTotal.inc(labels);
+  httpRequestDurationSeconds.observe(labels, durationSeconds);
 }
 
-function recordToolCall(tool: string, status: "ok" | "error") {
-  toolCallsTotal.inc({ tool, status });
+function recordToolCall(
+  tool: string,
+  status: "ok" | "error",
+  durationSeconds: number,
+) {
+  const labels = { tool, status };
+
+  toolCallsTotal.inc(labels);
+  toolDurationSeconds.observe(labels, durationSeconds);
 
   if (status === "error") {
     toolErrorsTotal.inc({ tool });
@@ -68,6 +107,7 @@ function recordCacheMiss(cache: string) {
 export {
   cacheHitsTotal,
   cacheMissesTotal,
+  httpRequestDurationSeconds,
   httpRequestsTotal,
   recordCacheHit,
   recordCacheMiss,
@@ -76,5 +116,6 @@ export {
   register,
   serverUp,
   toolCallsTotal,
+  toolDurationSeconds,
   toolErrorsTotal,
 };
