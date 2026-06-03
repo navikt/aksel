@@ -56,6 +56,12 @@ describe("rowingFocus", () => {
     expect(document.activeElement).toBe(items[2]);
   });
 
+  test("focuses last item on 'prev' when current is missing", () => {
+    const { container, items } = setup();
+    rowingFocus(".item", container, "prev", null, true);
+    expect(document.activeElement).toBe(items[2]);
+  });
+
   test("stays at start on 'prev' when loop is false", () => {
     const { container, items } = setup();
     rowingFocus(".item", container, "prev", items[0], false);
