@@ -475,6 +475,7 @@ type MenuItemInternalElement = SlottedDivElementRef;
 
 interface MenuItemInternalProps extends SlottedDivProps {
   disabled?: boolean;
+  "data-submenu-trigger"?: boolean;
 }
 
 const MenuItemInternal = forwardRef<
@@ -486,26 +487,30 @@ const MenuItemInternal = forwardRef<
       disabled = false,
       onPointerMove,
       onPointerLeave,
+      "data-submenu-trigger": isSubmenuTrigger,
       ...rest
     }: MenuItemInternalProps,
     forwardedRef,
   ) => {
-    const context = useMenuContext();
+    const { content, onOpenChange, open } = useMenuContext();
     const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref);
+
+    const handleCloseSubmenu = useEventCallback(() => {
+      open && onOpenChange(false);
+    });
 
     /* If this item is a submenu trigger, listen for the close event dispatched by siblings */
     useEffect(() => {
       const node = ref.current;
-      if (!node || !rest["data-submenu-trigger"]) {
+      if (!node || !isSubmenuTrigger) {
         return;
       }
-      const handler = () => {
-        context.open && context.onOpenChange(false);
-      };
-      node.addEventListener(CLOSE_SUBMENU_EVENT, handler);
-      return () => node.removeEventListener(CLOSE_SUBMENU_EVENT, handler);
-    });
+
+      node.addEventListener(CLOSE_SUBMENU_EVENT, handleCloseSubmenu);
+      return () =>
+        node.removeEventListener(CLOSE_SUBMENU_EVENT, handleCloseSubmenu);
+    }, [isSubmenuTrigger, handleCloseSubmenu]);
 
     return (
       <SlottedDivElement
@@ -514,6 +519,7 @@ const MenuItemInternal = forwardRef<
         data-disabled={disabled ? "" : undefined}
         data-aksel-menu-item
         tabIndex={-1}
+        data-submenu-trigger={isSubmenuTrigger ? "" : undefined}
         {...rest}
         style={{ userSelect: "none", ...rest?.style }}
         ref={composedRefs}
@@ -530,7 +536,7 @@ const MenuItemInternal = forwardRef<
                * In the edgecase the focus is still stuck on a previous item, we make sure to reset it
                * even when the disabled item can't be focused itself to reset it.
                */
-              context.content?.focus();
+              content?.focus();
             } else {
               event.currentTarget.focus();
             }
@@ -538,7 +544,7 @@ const MenuItemInternal = forwardRef<
         )}
         onPointerLeave={composeEventHandlers(
           onPointerLeave,
-          whenMouse(() => context.content?.focus()),
+          whenMouse(() => content?.focus()),
         )}
       />
     );
@@ -847,7 +853,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
-          data-submenu-trigger
+          data-submenu-trigger={true}
           onClick={(event) => {
             if (props.disabled || event.defaultPrevented) {
               return;
