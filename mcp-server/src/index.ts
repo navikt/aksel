@@ -4,89 +4,34 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import express from "express";
 import pkg from "../package.json" with { type: "json" };
 import { logError, logWarn } from "./helpers/log.js";
-import {
-  recordHttpRequest,
-  recordToolCall,
-  register,
-} from "./helpers/metrics.js";
-import { prompts } from "./prompts/prompts.js";
-import { resources } from "./resources/resources.js";
-import { tools } from "./tools/tools.js";
+import { recordHttpRequest, register } from "./helpers/metrics.js";
+import { setupPrompts } from "./prompts/prompts.js";
+import { setupResources } from "./resources/resources.js";
+import { setupTools } from "./tools/tools.js";
 
 const server = new McpServer({
   name: "aksel-mcp-server",
   version: pkg.version,
 });
 
-for (const tool of tools) {
-  server.registerTool(
-    tool.name,
-    {
-      description: tool.description,
-      inputSchema: tool.inputSchema,
-      annotations: { readOnlyHint: true },
-    },
-    async (args: { [K in keyof typeof tool.inputSchema]: any }) => {
-      try {
-        const result = await tool.callback(args);
-        recordToolCall(tool.name, "ok");
-
-        return {
-          content: [
-            {
-              type: "text" as const,
-              text: result,
-            },
-          ],
-        };
-      } catch (error) {
-        recordToolCall(tool.name, "error");
-        logError("Tool execution failed", {
-          tool: tool.name,
-          error: error instanceof Error ? error.message : String(error),
-        });
-        throw error;
-      }
-    },
-  );
-}
-
-for (const prompt of prompts) {
-  server.registerPrompt(
-    prompt.name,
-    { description: prompt.description, argsSchema: prompt.argsSchema },
-    async (args: { [K in keyof typeof prompt.argsSchema]: any }) => {
-      const result = await prompt.callback(args);
-
-      return {
-        messages: [
-          {
-            role: "user" as const,
-            content: {
-              type: "text" as const,
-              text: result,
-            },
-          },
-        ],
-      };
-    },
-  );
-}
-
-for (const resource of resources) {
-  server.registerResource(
-    resource.name,
-    resource.uri,
-    { description: resource.description, mimeType: resource.mimeType },
-    resource.callback,
-  );
-}
+setupPrompts(server);
+setupResources(server);
+setupTools(server);
 
 const app = express();
+
+/*
+ * Tells Express to trust upstream proxy (Nais ingress).
+ * Critical for Origin security check: req.headers.origin must match ${req.protocol}://${req.get('host')}.
+ */
 app.set("trust proxy", true);
 app.use(express.json());
+
+/**
+ * Middleware to record HTTP requests, excluding health and metrics endpoints.
+ */
 app.use((req, res, next) => {
-  if (req.path === "/metrics") {
+  if (["/isalive", "/isready", "/metrics"].includes(req.path)) {
     next();
     return;
   }
@@ -98,14 +43,17 @@ app.use((req, res, next) => {
   next();
 });
 
+/* Nais liveness and readiness probes */
 app.get("/isalive", (_req, res) => {
   res.status(200).json({ ok: true });
 });
 
+/* Nais liveness and readiness probes */
 app.get("/isready", (_req, res) => {
   res.status(200).json({ ok: true });
 });
 
+/* Nais metrics endpoint */
 app.get("/metrics", async (_req, res) => {
   res.setHeader("Content-Type", register.contentType);
   res.status(200).send(await register.metrics());
@@ -148,7 +96,9 @@ app.all("/mcp", async (req, res) => {
 
   try {
     const transport = new StreamableHTTPServerTransport({
+      /* Server is stateless */
       sessionIdGenerator: undefined,
+      enableJsonResponse: true,
     });
 
     res.on("close", () => {
