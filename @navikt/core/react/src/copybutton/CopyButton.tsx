@@ -3,6 +3,7 @@ import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button, ButtonProps } from "../button";
 import type { AkselColor } from "../types/theme";
+import { BodyShort } from "../typography";
 import { cl, clipboardCopy, composeEventHandlers } from "../utils/helpers";
 import { useTimeout } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
@@ -60,7 +61,7 @@ export interface CopyButtonProps
    */
   activeDuration?: number;
   /**
-   * Accessible label for icon (ignored if text is set).
+   * Accessible label for icon (ignored if text or icon is set).
    * @default "Kopier"
    */
   title?: string;
@@ -115,38 +116,48 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const activeString = activeText || translate("activeText");
 
+    const iconTitle = React.isValidElement<{ title?: string }>(icon)
+      ? icon.props.title
+      : undefined;
+    const activeIconTitle = React.isValidElement<{ title?: string }>(activeIcon)
+      ? activeIcon.props.title
+      : undefined;
+
     return (
-      <Button
-        ref={ref}
-        type="button"
-        className={cl("aksel-copybutton", className)}
-        {...rest}
-        variant="tertiary"
-        data-color={variantToDataColor(variant) ?? dataColor}
-        onClick={composeEventHandlers(onClick, handleClick)}
-        iconPosition={iconPosition}
-        icon={
-          active
-            ? (activeIcon ?? (
-                <CheckmarkIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : activeString}
-                  className="aksel-copybutton__icon"
-                />
-              ))
-            : (icon ?? (
-                <FilesIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : title || translate("title")}
-                  className="aksel-copybutton__icon"
-                />
-              ))
-        }
-        data-active={active}
-        size={size}
-      >
-        {text ? (active ? activeString : text) : null}
-      </Button>
+      <>
+        <Button
+          ref={ref}
+          type="button"
+          className={cl("aksel-copybutton", className)}
+          {...rest}
+          variant="tertiary"
+          data-color={variantToDataColor(variant) ?? dataColor}
+          onClick={composeEventHandlers(onClick, handleClick)}
+          iconPosition={iconPosition}
+          title={text ? undefined : iconTitle || title || translate("title")}
+          icon={
+            active
+              ? (activeIcon ?? (
+                  <CheckmarkIcon
+                    aria-hidden
+                    className="aksel-copybutton__icon"
+                  />
+                ))
+              : (icon ?? (
+                  <FilesIcon aria-hidden className="aksel-copybutton__icon" />
+                ))
+          }
+          data-active={active}
+          size={size}
+        >
+          {text ? (active ? activeString : text) : null}
+        </Button>
+        {!text && (
+          <BodyShort visuallyHidden aria-live="polite">
+            {active ? (activeIconTitle ?? activeString) : ""}
+          </BodyShort>
+        )}
+      </>
     );
   },
 );
