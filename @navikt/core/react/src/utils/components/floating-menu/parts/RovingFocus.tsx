@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useEffect, useRef } from "react";
-import { composeEventHandlers, ownerDocument } from "../../../helpers";
-import { rowingFocus } from "../../../helpers/rowing-focus";
+import { composeEventHandlers } from "../../../helpers";
+import { rovingFocus } from "../../../helpers/roving-focus";
 import { useEventCallback, useMergeRefs } from "../../../hooks";
 import { Slot } from "../../slot/Slot";
 
@@ -50,25 +50,17 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
         return;
       }
 
-      /**
-       * If fireEvent is used in tests, activeElement might be body.
-       * We prefer event.target (or its closest item) if it's part of the items list.
-       */
-      const current =
-        ((event.target as HTMLElement).closest(
-          MENU_ITEM_SELECTOR,
-        ) as HTMLElement) ||
-        ((ownerDocument(container).activeElement as HTMLElement).closest(
-          MENU_ITEM_SELECTOR,
-        ) as HTMLElement);
+      const current = (event.target as HTMLElement).closest(
+        MENU_ITEM_SELECTOR,
+      ) as HTMLElement;
 
       const keyMap: Record<string, () => void> = {
         ArrowUp: () =>
-          rowingFocus(MENU_ITEM_SELECTOR, container, "prev", current, false),
+          rovingFocus(MENU_ITEM_SELECTOR, container, "prev", current, false),
         ArrowDown: () =>
-          rowingFocus(MENU_ITEM_SELECTOR, container, "next", current, false),
-        Home: () => rowingFocus(MENU_ITEM_SELECTOR, container, "first"),
-        End: () => rowingFocus(MENU_ITEM_SELECTOR, container, "last"),
+          rovingFocus(MENU_ITEM_SELECTOR, container, "next", current, false),
+        Home: () => rovingFocus(MENU_ITEM_SELECTOR, container, "first"),
+        End: () => rovingFocus(MENU_ITEM_SELECTOR, container, "last"),
       };
 
       const action = keyMap[event.key];
@@ -98,7 +90,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
 
             if (!entryFocusEvent.defaultPrevented) {
               const container = _ref.current;
-              container && rowingFocus(MENU_ITEM_SELECTOR, container, "first");
+              container && rovingFocus(MENU_ITEM_SELECTOR, container, "first");
             }
           }
 
