@@ -8,4 +8,4 @@ COPY mcp-server/dist ./
 
 
 EXPOSE 8080
-CMD ["node", "index.mjs"]
+CMD ["index.mjs"]

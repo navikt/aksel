@@ -3276,16 +3276,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/prometheus@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@hono/prometheus@npm:1.0.3"
-  peerDependencies:
-    hono: ">=3.0.0"
-    prom-client: ^15.0.0
-  checksum: 10/93b38e378c2aea43ca2cb0d4a5aed3d854bc6f7358f6ff4bbf486ccae487c8d369792ff8308a7328070e6d06e46be64d9f08fc8549783f0f9abd879e11bd70f6
-  languageName: node
-  linkType: hard
-
 "@hookform/resolvers@npm:^3.1.1":
   version: 3.10.0
   resolution: "@hookform/resolvers@npm:3.10.0"
@@ -10720,7 +10710,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-mcp-server@workspace:mcp-server"
   dependencies:
-    "@hono/prometheus": "npm:^1.0.3"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
     "@navikt/aksel": "npm:^8.11.1"
     "@navikt/aksel-icons": "npm:^8.11.1"
