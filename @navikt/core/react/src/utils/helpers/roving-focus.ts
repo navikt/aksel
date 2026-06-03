@@ -5,7 +5,7 @@ type FocusDirection = "first" | "last" | "next" | "prev";
  * - first/last: focus first or last item
  * - next/prev: focus relative to `current`, with optional looping
  */
-function rowingFocus(
+function rovingFocus(
   selector: string,
   container: HTMLElement,
   direction: FocusDirection,
@@ -43,4 +43,4 @@ function rowingFocus(
   }
 }
 
-export { rowingFocus };
+export { rovingFocus };

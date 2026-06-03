@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { rowingFocus } from "./rowing-focus";
+import { rovingFocus } from "./roving-focus";
 
-describe("rowingFocus", () => {
+describe("rovingFocus", () => {
   const setup = () => {
     const container = document.createElement("div");
     container.innerHTML = `
@@ -16,43 +16,43 @@ describe("rowingFocus", () => {
 
   test("focuses first item on 'first'", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "first");
+    rovingFocus(".item", container, "first");
     expect(document.activeElement).toBe(items[0]);
   });
 
   test("focuses last item on 'last'", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "last");
+    rovingFocus(".item", container, "last");
     expect(document.activeElement).toBe(items[2]);
   });
 
   test("focuses next item", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "next", items[0]);
+    rovingFocus(".item", container, "next", items[0]);
     expect(document.activeElement).toBe(items[1]);
   });
 
   test("loops to first on 'next' when at end", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "next", items[2], true);
+    rovingFocus(".item", container, "next", items[2], true);
     expect(document.activeElement).toBe(items[0]);
   });
 
   test("stays at end on 'next' when loop is false", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "next", items[2], false);
+    rovingFocus(".item", container, "next", items[2], false);
     expect(document.activeElement).toBe(items[2]);
   });
 
   test("focuses previous item", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "prev", items[1]);
+    rovingFocus(".item", container, "prev", items[1]);
     expect(document.activeElement).toBe(items[0]);
   });
 
   test("loops to last on 'prev' when at start", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "prev", items[0], true);
+    rovingFocus(".item", container, "prev", items[0], true);
     expect(document.activeElement).toBe(items[2]);
   });
 
@@ -64,14 +64,14 @@ describe("rowingFocus", () => {
 
   test("stays at start on 'prev' when loop is false", () => {
     const { container, items } = setup();
-    rowingFocus(".item", container, "prev", items[0], false);
+    rovingFocus(".item", container, "prev", items[0], false);
     expect(document.activeElement).toBe(items[0]);
   });
 
   test("does nothing if selector matches no items", () => {
     const container = document.createElement("div");
     const activeBefore = document.activeElement;
-    rowingFocus(".missing", container, "first");
+    rovingFocus(".missing", container, "first");
     expect(document.activeElement).toBe(activeBefore);
   });
 });

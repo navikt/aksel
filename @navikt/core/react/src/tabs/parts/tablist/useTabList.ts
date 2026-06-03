@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { ownerDocument } from "../../../utils/helpers";
-import { rowingFocus } from "../../../utils/helpers/rowing-focus";
+import { rovingFocus } from "../../../utils/helpers/roving-focus";
 import { useTabsContext } from "../../Tabs.context";
 
 const TAB_SELECTOR = "[data-aksel-tab]:not([data-disabled])";
@@ -30,11 +30,11 @@ export function useTabList() {
 
       const keyMap: Record<string, () => void> = {
         ArrowLeft: () =>
-          rowingFocus(TAB_SELECTOR, container, "prev", current, loop),
+          rovingFocus(TAB_SELECTOR, container, "prev", current, loop),
         ArrowRight: () =>
-          rowingFocus(TAB_SELECTOR, container, "next", current, loop),
-        Home: () => rowingFocus(TAB_SELECTOR, container, "first"),
-        End: () => rowingFocus(TAB_SELECTOR, container, "last"),
+          rovingFocus(TAB_SELECTOR, container, "next", current, loop),
+        Home: () => rovingFocus(TAB_SELECTOR, container, "first"),
+        End: () => rovingFocus(TAB_SELECTOR, container, "last"),
       };
 
       const hasModifiers =
