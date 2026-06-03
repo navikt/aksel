@@ -77,6 +77,10 @@ app.all("/mcp", async (req, res) => {
     return;
   }
 
+  /**
+   * Servers MUST validate the Origin header on all incoming connections to prevent DNS rebinding attacks
+   * https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#security-warning
+   */
   const origin = req.headers.origin;
   if (origin) {
     const host = req.get("host");
@@ -129,11 +133,12 @@ app.all("/mcp", async (req, res) => {
 const port = Number(process.env.PORT ?? 8080);
 
 const httpServer = app.listen(port, () => {
-  console.error(`Aksel MCP server listening on ${port}`);
+  console.info(`Aksel MCP server listening on ${port}`);
 });
 
 function shutdown() {
   httpServer.close(() => {
+    console.info("Aksel MCP server shutting down");
     process.exit(0);
   });
 }
