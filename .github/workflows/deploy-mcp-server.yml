@@ -32,6 +32,9 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
+      - name: Test mcp-server
+        run: cd mcp-server && yarn test
+
       - name: Build mcp-server
         run: cd mcp-server && yarn build
 
