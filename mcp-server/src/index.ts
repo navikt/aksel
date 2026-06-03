@@ -10,15 +10,6 @@ import { setupPrompts } from "./prompts/prompts.js";
 import { setupResources } from "./resources/resources.js";
 import { setupTools } from "./tools/tools.js";
 
-const server = new McpServer({
-  name: "aksel-mcp-server",
-  version: pkg.version,
-});
-
-setupPrompts(server);
-setupResources(server);
-setupTools(server);
-
 const app = express();
 
 /*
@@ -115,6 +106,15 @@ app.all("/mcp", async (req, res) => {
     res.on("close", () => {
       void transport.close();
     });
+
+    const server = new McpServer({
+      name: "aksel-mcp-server",
+      version: pkg.version,
+    });
+
+    setupPrompts(server);
+    setupResources(server);
+    setupTools(server);
 
     await server.connect(transport);
     await transport.handleRequest(req, res, req.body);
