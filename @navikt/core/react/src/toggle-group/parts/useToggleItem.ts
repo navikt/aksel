@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { composeEventHandlers, ownerDocument } from "../../utils/helpers";
-import { rowingFocus } from "../../utils/helpers/rowing-focus";
+import { composeEventHandlers } from "../../utils/helpers";
+import { rovingFocus } from "../../utils/helpers/roving-focus";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 
 const TOGGLE_ITEM_SELECTOR = "[data-aksel-toggle-item]:not([data-disabled])";
@@ -44,25 +44,17 @@ export function useToggleItem<P extends UseToggleItemProps>({
         return;
       }
 
-      /**
-       * If fireEvent is used in tests, activeElement might be body.
-       * We prefer event.target (or its closest item) if it's part of the items list.
-       */
-      const current =
-        ((event.target as HTMLElement).closest(
-          TOGGLE_ITEM_SELECTOR,
-        ) as HTMLElement) ||
-        ((ownerDocument(container).activeElement as HTMLElement).closest(
-          TOGGLE_ITEM_SELECTOR,
-        ) as HTMLElement);
+      const current = (event.target as HTMLElement).closest(
+        TOGGLE_ITEM_SELECTOR,
+      ) as HTMLElement;
 
       const keyMap: Record<string, () => void> = {
         ArrowLeft: () =>
-          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "prev", current, false),
+          rovingFocus(TOGGLE_ITEM_SELECTOR, container, "prev", current, false),
         ArrowRight: () =>
-          rowingFocus(TOGGLE_ITEM_SELECTOR, container, "next", current, false),
-        Home: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "first"),
-        End: () => rowingFocus(TOGGLE_ITEM_SELECTOR, container, "last"),
+          rovingFocus(TOGGLE_ITEM_SELECTOR, container, "next", current, false),
+        Home: () => rovingFocus(TOGGLE_ITEM_SELECTOR, container, "first"),
+        End: () => rovingFocus(TOGGLE_ITEM_SELECTOR, container, "last"),
       };
 
       const hasModifiers =
