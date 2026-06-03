@@ -11,8 +11,8 @@ const Example = () => (
     />
 
     <VStack gap="space-8">
-      <Heading level="3" size="xsmall">
-        Vedlegg (4 av maks 3)
+      <Heading level="3" size="xsmall" data-color="danger" textColor="subtle">
+        Vedlegg (1 for mange)
       </Heading>
       <InlineMessage status="error" role="alert">
         Du har lagt ved for mange filer. Maks antall er 3.
