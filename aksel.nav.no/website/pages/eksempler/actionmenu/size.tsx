@@ -126,5 +126,5 @@ export const Demo = {
 
 export const args = {
   index: 12,
-  desc: "Du kan endre størrelsen på ActionMenu ved å bruke `size`-prop på `ActionMenu.Content`. Standardstørrelsen er `small`",
+  desc: "Du kan endre størrelsen ved å bruke `size`-prop på `ActionMenu`. Standardstørrelsen er `small`",
 };
