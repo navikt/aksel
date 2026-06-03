@@ -32,6 +32,9 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
+      - name: Build mcp-server
+        run: cd mcp-server && yarn build
+
       - name: Build and push Docker image
         uses: nais/docker-build-push@v0
         id: docker-push
