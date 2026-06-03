@@ -2,7 +2,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import express from "express";
-import { performance } from "node:perf_hooks";
 import pkg from "../package.json" with { type: "json" };
 import { logError, logWarn } from "./helpers/log.js";
 import {
@@ -28,11 +27,9 @@ for (const tool of tools) {
       annotations: { readOnlyHint: true },
     },
     async (args: { [K in keyof typeof tool.inputSchema]: any }) => {
-      const started = performance.now();
-
       try {
         const result = await tool.callback(args);
-        recordToolCall(tool.name, "ok", (performance.now() - started) / 1000);
+        recordToolCall(tool.name, "ok");
 
         return {
           content: [
@@ -43,11 +40,7 @@ for (const tool of tools) {
           ],
         };
       } catch (error) {
-        recordToolCall(
-          tool.name,
-          "error",
-          (performance.now() - started) / 1000,
-        );
+        recordToolCall(tool.name, "error");
         logError("Tool execution failed", {
           tool: tool.name,
           error: error instanceof Error ? error.message : String(error),
@@ -98,14 +91,8 @@ app.use((req, res, next) => {
     return;
   }
 
-  const started = performance.now();
   res.once("finish", () => {
-    recordHttpRequest(
-      req.path,
-      req.method,
-      res.statusCode,
-      (performance.now() - started) / 1000,
-    );
+    recordHttpRequest(req.path, req.method, res.statusCode);
   });
 
   next();
