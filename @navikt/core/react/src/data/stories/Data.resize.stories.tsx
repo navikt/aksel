@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, waitFor, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import { DataGrid } from "../../data-grid";
 import { DataGridTable } from "../table";
 
@@ -272,19 +272,18 @@ export const ResizeAuto: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button", { name: "Show table" });
+    await canvasElement.ownerDocument.fonts.ready;
     await button.click();
 
     const headers = canvas.getAllByRole("columnheader");
 
-    await waitFor(() => {
-      expect(headers.length).toBe(7);
-      expect(headers[0]).toHaveStyle({ width: "126px" });
-      expect(headers[1]).toHaveStyle({ width: "80px" });
-      expect(headers[2]).toHaveStyle({ width: "82px" });
-      expect(headers[3]).toHaveStyle({ width: "103px" });
-      expect(headers[4]).toHaveStyle({ width: "168px" });
-      expect(headers[5]).toHaveStyle({ width: "248px" });
-      expect(headers[6]).toHaveStyle({ width: "168px" });
-    }, {});
+    expect(headers.length).toBe(7);
+    expect(headers[0]).toHaveStyle({ width: "126px" });
+    expect(headers[1]).toHaveStyle({ width: "80px" });
+    expect(headers[2]).toHaveStyle({ width: "82px" });
+    expect(headers[3]).toHaveStyle({ width: "103px" });
+    expect(headers[4]).toHaveStyle({ width: "168px" });
+    expect(headers[5]).toHaveStyle({ width: "248px" });
+    expect(headers[6]).toHaveStyle({ width: "168px" });
   },
 };
