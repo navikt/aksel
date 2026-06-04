@@ -10,13 +10,20 @@ function WebsiteTable({
   children,
   th,
   withCopy,
+  renderEmptyState,
+  blockMargin = true,
 }: {
   children: React.ReactNode;
   th: { text: string; hideOnSm?: boolean; sronly?: boolean }[];
   withCopy?: boolean;
+  renderEmptyState?: React.ReactNode;
+  blockMargin?: boolean;
 }) {
   return (
-    <table data-block-margin="space-28" className={styles.websiteTable}>
+    <table
+      data-block-margin={blockMargin ? "space-28" : undefined}
+      className={styles.websiteTable}
+    >
       <thead>
         <tr className={styles.websiteTableHeadTr}>
           {th.map((x) => (
@@ -44,9 +51,15 @@ function WebsiteTable({
         </tr>
       </thead>
       <tbody>
-        <TableContext.Provider value={withCopy ?? false}>
-          {children}
-        </TableContext.Provider>
+        {renderEmptyState ? (
+          <tr>
+            <td colSpan={th.length + (withCopy ? 1 : 0)}>{renderEmptyState}</td>
+          </tr>
+        ) : (
+          <TableContext.Provider value={withCopy ?? false}>
+            {children}
+          </TableContext.Provider>
+        )}
       </tbody>
     </table>
   );
