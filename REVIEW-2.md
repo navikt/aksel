@@ -7,20 +7,6 @@
 
 ## Bugs
 
-### 🟡 Medium — `maxLimit` redundancy masks a potential NaN bug
-
-**File:** `src/tools/icon-search.ts:33`
-
-```ts
-const maxLimit = limit || 20;
-```
-
-`limit` has a Zod default of `20` and a `min(1)` constraint, so it will never be `undefined`
-or `0` after parsing. The `|| 20` is misleading but also hides what would happen if Zod
-defaults are ever removed. Use `limit` directly.
-
----
-
 ### 🟢 Low — `prompts.test.ts` is a stub
 
 **File:** `src/prompts/prompts.test.ts`
@@ -274,21 +260,20 @@ The LLM already knows what it searched for — echoing it back wastes tokens.
 
 | #   | Area    | Severity | Finding                                                                 |
 | --- | ------- | -------- | ----------------------------------------------------------------------- |
-| 1   | Bug     | 🟡 Med   | `maxLimit = limit \|\| 20` is misleading / hides intent                 |
-| 2   | Bug     | 🟢 Low   | Stub test in `prompts.test.ts` gives false CI confidence                |
-| 3   | Feature | 🔴 High  | Two-step doc workflow is fragile — LLMs often skip resources            |
-| 4   | Feature | 🔴 High  | Prompts infrastructure unused — no workflow guidance for LLMs           |
-| 5   | Feature | 🟡 Med   | No lightweight component list resource                                  |
-| 6   | Feature | 🟡 Med   | No token search/filter tool                                             |
-| 7   | Feature | 🟡 Med   | No changelog / version awareness                                        |
-| 8   | Addon   | 🔴 High  | Missing `aksel_docs_search` tool                                        |
-| 9   | Addon   | 🟡 Med   | Missing `aksel_component_examples` tool                                 |
-| 10  | Addon   | 🟡 Med   | Missing `aksel_token_by_role` lookup                                    |
-| 11  | Addon   | 🟢 Low   | Missing a11y guidelines resource                                        |
-| 12  | QOL     | 🔴 High  | Inconsistent JSON serialization — pretty-print wastes 20–40% tokens     |
-| 13  | QOL     | 🟡 Med   | `aksel_docs` wraps response in JSON with redundant `url` field          |
-| 14  | QOL     | 🟡 Med   | Icon results include full `keywords[]` — redundant after keyword search |
-| 15  | QOL     | 🟡 Med   | Structured logger missing `info` level; startup uses raw `console.info` |
-| 16  | QOL     | 🟡 Med   | Design token/icon caches have TTL but data is static (bundled at build) |
-| 17  | QOL     | 🟢 Low   | `componentPropsTool.slug` has no `.describe()` hint                     |
-| 18  | QOL     | 🟢 Low   | `searchCriteria` echo in icon-search responses wastes tokens            |
+| 1   | Bug     | 🟢 Low   | Stub test in `prompts.test.ts` gives false CI confidence                |
+| 2   | Feature | 🔴 High  | Two-step doc workflow is fragile — LLMs often skip resources            |
+| 3   | Feature | 🔴 High  | Prompts infrastructure unused — no workflow guidance for LLMs           |
+| 4   | Feature | 🟡 Med   | No lightweight component list resource                                  |
+| 5   | Feature | 🟡 Med   | No token search/filter tool                                             |
+| 6   | Feature | 🟡 Med   | No changelog / version awareness                                        |
+| 7   | Addon   | 🔴 High  | Missing `aksel_docs_search` tool                                        |
+| 8   | Addon   | 🟡 Med   | Missing `aksel_component_examples` tool                                 |
+| 9   | Addon   | 🟡 Med   | Missing `aksel_token_by_role` lookup                                    |
+| 10  | Addon   | 🟢 Low   | Missing a11y guidelines resource                                        |
+| 11  | QOL     | 🔴 High  | Inconsistent JSON serialization — pretty-print wastes 20–40% tokens     |
+| 12  | QOL     | 🟡 Med   | `aksel_docs` wraps response in JSON with redundant `url` field          |
+| 13  | QOL     | 🟡 Med   | Icon results include full `keywords[]` — redundant after keyword search |
+| 14  | QOL     | 🟡 Med   | Structured logger missing `info` level; startup uses raw `console.info` |
+| 15  | QOL     | 🟡 Med   | Design token/icon caches have TTL but data is static (bundled at build) |
+| 16  | QOL     | 🟢 Low   | `componentPropsTool.slug` has no `.describe()` hint                     |
+| 17  | QOL     | 🟢 Low   | `searchCriteria` echo in icon-search responses wastes tokens            |

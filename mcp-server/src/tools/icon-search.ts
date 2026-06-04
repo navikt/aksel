@@ -30,7 +30,6 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
     "Search and filter Aksel icons. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
   inputSchema: iconSearchInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
-    const maxLimit = limit || 20;
     let filtered = icons;
 
     if (category) {
@@ -58,7 +57,7 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
       filtered = filtered.filter((icon) => icon.variant === variant);
     }
 
-    const results = filtered.slice(0, maxLimit);
+    const results = filtered.slice(0, limit);
 
     if (results.length === 0) {
       return JSON.stringify(
@@ -85,11 +84,11 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
       })),
     };
 
-    if (filtered.length > maxLimit) {
+    if (filtered.length > limit) {
       return JSON.stringify(
         {
           ...summary,
-          note: `Showing ${maxLimit} of ${filtered.length} matches. Refine your search criteria to see more specific results.`,
+          note: `Showing ${limit} of ${filtered.length} matches. Refine your search criteria to see more specific results.`,
         },
         null,
         2,
