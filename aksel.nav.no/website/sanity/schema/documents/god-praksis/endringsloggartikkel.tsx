@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
+import { sanitizeSlug } from "../../../util";
 import SanityTabGroups from "../presets/groups";
-import BaseSEOPreset from "../presets/seo";
 import { titleField } from "../presets/title-field";
 
 export const EndringsloggArtikkelGodPraksis = defineType({
@@ -16,11 +16,21 @@ export const EndringsloggArtikkelGodPraksis = defineType({
       name: "slug",
       type: "slug",
       description: "Inkluder gjerne dato eller versjon",
-      validation: (Rule) => Rule.required(),
-      group: "settings",
+      validation: (Rule) =>
+        Rule.custom((slug) => {
+          if (!slug?.current) {
+            return "URL er påkrevd";
+          }
+          if (sanitizeSlug(slug.current) !== slug.current) {
+            return `URL må være '${sanitizeSlug(slug.current)}'. Trykke 'generer' for å fikse dette automatisk.`;
+          }
+          return true;
+        }),
       options: {
+        slugify: sanitizeSlug,
         source: "heading",
       },
+      group: "innhold",
     }),
     defineField({
       title: "Endringsdato",
@@ -60,7 +70,6 @@ export const EndringsloggArtikkelGodPraksis = defineType({
       ],
       validation: (Rule) => Rule.required().min(1),
     }),
-    BaseSEOPreset,
   ],
 
   preview: {

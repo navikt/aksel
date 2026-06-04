@@ -136,11 +136,26 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
     return `${rootPath}${previewUrl}`;
   }
 
+  if ("gp_endringslogg_artikkel" === doc._type) {
+    const slug = (doc?.slug as any)?.current;
+    const previewUrl = `/god-praksis/endring/${slug}`;
+    if (!slug) {
+      return "";
+    }
+    return `${rootPath}${previewUrl}`;
+  }
+
   return rootPath;
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
-  if ([...previews, ...landingsider.map((x) => x.name)].includes(schemaType)) {
+  if (
+    [
+      ...previews,
+      ...landingsider.map((x) => x.name),
+      "gp_endringslogg_artikkel",
+    ].includes(schemaType)
+  ) {
     return S.document().views([
       S.view.form(),
 
