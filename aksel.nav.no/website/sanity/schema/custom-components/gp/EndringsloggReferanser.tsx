@@ -27,12 +27,12 @@ function EndringsloggReferanser() {
 }
 
 function EndringsloggReferanserList() {
-  const id = useFormValue(["_id"]) as string;
+  const id = (useFormValue(["_id"]) as string) ?? "";
 
   const documentStore = useDocumentStore();
   const changelogs: DocumentT[] = useMemoObservable(() => {
     return documentStore.listenQuery(
-      `*[_type == 'gp_endringslogg_artikkel']{heading, slug, _id, endringsdato}`,
+      `*[_type == 'gp_endringslogg_artikkel' && $id in artikler[]._ref]{heading, slug, _id, endringsdato}`,
       { id: id.replace("drafts.", "") },
       {},
     );

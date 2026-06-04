@@ -22,7 +22,7 @@ export const EndringsloggArtikkelGodPraksis = defineType({
             return "URL er påkrevd";
           }
           if (sanitizeSlug(slug.current) !== slug.current) {
-            return `URL må være '${sanitizeSlug(slug.current)}'. Trykke 'generer' for å fikse dette automatisk.`;
+            return `URL må være '${sanitizeSlug(slug.current)}'. Trykk 'generer' for å fikse dette automatisk.`;
           }
           return true;
         }),
