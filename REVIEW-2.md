@@ -7,37 +7,6 @@
 
 ## Bugs
 
-### 🔴 High — Dead code: fuzzy token matching is unreachable
-
-**File:** `src/tools/token-details.ts`
-
-`tokenDetailsTool.inputSchema` uses `z.enum([...allTokenNames])`. This means the MCP SDK
-rejects any unknown token name _before_ the callback runs. The `if (!token)` branch with
-its fuzzy-match suggestions in the callback can never be hit in production.
-
-**Fix:** Change the input schema to `z.string().min(1).describe(...)` and keep the fuzzy
-match in the callback. This also eliminates schema bloat (see DX section below).
-
----
-
-### 🟡 Medium — Fetch calls have no timeout
-
-**Files:** `src/tools/aksel-docs.ts`, `src/tools/component-props.ts`, `src/resources/llm-index.ts`
-
-`fetch(url)` has no `AbortController` timeout. A slow or unresponsive `aksel.nav.no` will
-hang the request indefinitely, blocking the MCP response.
-
-**Fix:** Wrap fetches with a timeout signal:
-
-```ts
-const controller = new AbortController();
-const timeout = setTimeout(() => controller.abort(), 10_000);
-const response = await fetch(url, { signal: controller.signal });
-clearTimeout(timeout);
-```
-
----
-
 ### 🟡 Medium — `maxLimit` redundancy masks a potential NaN bug
 
 **File:** `src/tools/icon-search.ts:33`
@@ -67,31 +36,6 @@ This is a placeholder that gives false confidence in CI. Remove it or replace it
 ---
 
 ## Features
-
-### 🔴 High — Token enum schema bloats every MCP handshake
-
-**File:** `src/tools/token-details.ts`
-
-Using `z.enum([...allTokenNames])` serializes every token name into the tool schema that is
-sent to the LLM on each session. With hundreds of tokens, this inflates the schema payload
-significantly, consuming context tokens before any actual work starts.
-
-Worse: it forces the LLM to pick from a pre-enumerated list, whereas a free-text input with
-a clear description and a similarity fallback is both cheaper and more resilient.
-
-**Fix:** Replace with:
-
-```ts
-tokenName: z.string()
-  .min(1)
-  .describe(
-    "The exact name of the token (e.g. 'bg-neutral-moderate'). Browse available tokens with the aksel-tokens://list resource.",
-  );
-```
-
-Keep the fuzzy-match fallback in the callback — it becomes actually reachable.
-
----
 
 ### 🔴 High — Two-step doc workflow is fragile for LLMs
 
@@ -330,24 +274,21 @@ The LLM already knows what it searched for — echoing it back wastes tokens.
 
 | #   | Area    | Severity | Finding                                                                 |
 | --- | ------- | -------- | ----------------------------------------------------------------------- |
-| 1   | Bug     | 🔴 High  | Dead code: fuzzy token matching unreachable due to enum schema          |
-| 2   | Bug     | 🟡 Med   | No fetch timeout — requests can hang indefinitely                       |
-| 3   | Bug     | 🟡 Med   | `maxLimit = limit \|\| 20` is misleading / hides intent                 |
-| 4   | Bug     | 🟢 Low   | Stub test in `prompts.test.ts` gives false CI confidence                |
-| 5   | Feature | 🔴 High  | Token enum schema bloats every MCP handshake                            |
-| 6   | Feature | 🔴 High  | Two-step doc workflow is fragile — LLMs often skip resources            |
-| 7   | Feature | 🔴 High  | Prompts infrastructure unused — no workflow guidance for LLMs           |
-| 8   | Feature | 🟡 Med   | No lightweight component list resource                                  |
-| 9   | Feature | 🟡 Med   | No token search/filter tool                                             |
-| 10  | Feature | 🟡 Med   | No changelog / version awareness                                        |
-| 11  | Addon   | 🔴 High  | Missing `aksel_docs_search` tool                                        |
-| 12  | Addon   | 🟡 Med   | Missing `aksel_component_examples` tool                                 |
-| 13  | Addon   | 🟡 Med   | Missing `aksel_token_by_role` lookup                                    |
-| 14  | Addon   | 🟢 Low   | Missing a11y guidelines resource                                        |
-| 15  | QOL     | 🔴 High  | Inconsistent JSON serialization — pretty-print wastes 20–40% tokens     |
-| 16  | QOL     | 🟡 Med   | `aksel_docs` wraps response in JSON with redundant `url` field          |
-| 17  | QOL     | 🟡 Med   | Icon results include full `keywords[]` — redundant after keyword search |
-| 18  | QOL     | 🟡 Med   | Structured logger missing `info` level; startup uses raw `console.info` |
-| 19  | QOL     | 🟡 Med   | Design token/icon caches have TTL but data is static (bundled at build) |
-| 20  | QOL     | 🟢 Low   | `componentPropsTool.slug` has no `.describe()` hint                     |
-| 21  | QOL     | 🟢 Low   | `searchCriteria` echo in icon-search responses wastes tokens            |
+| 1   | Bug     | 🟡 Med   | `maxLimit = limit \|\| 20` is misleading / hides intent                 |
+| 2   | Bug     | 🟢 Low   | Stub test in `prompts.test.ts` gives false CI confidence                |
+| 3   | Feature | 🔴 High  | Two-step doc workflow is fragile — LLMs often skip resources            |
+| 4   | Feature | 🔴 High  | Prompts infrastructure unused — no workflow guidance for LLMs           |
+| 5   | Feature | 🟡 Med   | No lightweight component list resource                                  |
+| 6   | Feature | 🟡 Med   | No token search/filter tool                                             |
+| 7   | Feature | 🟡 Med   | No changelog / version awareness                                        |
+| 8   | Addon   | 🔴 High  | Missing `aksel_docs_search` tool                                        |
+| 9   | Addon   | 🟡 Med   | Missing `aksel_component_examples` tool                                 |
+| 10  | Addon   | 🟡 Med   | Missing `aksel_token_by_role` lookup                                    |
+| 11  | Addon   | 🟢 Low   | Missing a11y guidelines resource                                        |
+| 12  | QOL     | 🔴 High  | Inconsistent JSON serialization — pretty-print wastes 20–40% tokens     |
+| 13  | QOL     | 🟡 Med   | `aksel_docs` wraps response in JSON with redundant `url` field          |
+| 14  | QOL     | 🟡 Med   | Icon results include full `keywords[]` — redundant after keyword search |
+| 15  | QOL     | 🟡 Med   | Structured logger missing `info` level; startup uses raw `console.info` |
+| 16  | QOL     | 🟡 Med   | Design token/icon caches have TTL but data is static (bundled at build) |
+| 17  | QOL     | 🟢 Low   | `componentPropsTool.slug` has no `.describe()` hint                     |
+| 18  | QOL     | 🟢 Low   | `searchCriteria` echo in icon-search responses wastes tokens            |

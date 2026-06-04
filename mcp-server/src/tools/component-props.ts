@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { fetchWithTimeout } from "../helpers/fetch.js";
 import { logError, logWarn } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
@@ -44,7 +45,7 @@ Example:
     }
 
     const url = `https://aksel.nav.no/api/component-props?slug=${encodeURIComponent(slug)}`;
-    const response = await fetch(url);
+    const response = await fetchWithTimeout(url);
 
     if (!response.ok) {
       if (response.status === 404) {

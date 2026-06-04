@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { fetchWithTimeout } from "../helpers/fetch.js";
 import { logError, logWarn } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpTool } from "../types.js";
@@ -28,7 +29,7 @@ IMPORTANT: You MUST first read the \`aksel-docs://llm-index\` MCP resource to ge
     }
 
     const url = `https://aksel.nav.no${path}`;
-    const response = await fetch(url, {
+    const response = await fetchWithTimeout(url, {
       headers: {
         Accept: "text/markdown",
       },

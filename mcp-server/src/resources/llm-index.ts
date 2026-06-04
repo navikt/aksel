@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from "../helpers/fetch.js";
 import { logError } from "../helpers/log.js";
 import { createNodeCache, oneHourSeconds } from "../helpers/node-cache.js";
 import type { McpResource } from "../types.js";
@@ -28,7 +29,9 @@ const llmIndexResource: McpResource = {
         };
       }
 
-      const response = await fetch("https://aksel.nav.no/api/llm/docs");
+      const response = await fetchWithTimeout(
+        "https://aksel.nav.no/api/llm/docs",
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
