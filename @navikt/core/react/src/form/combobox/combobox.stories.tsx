@@ -135,9 +135,13 @@ export const MultiSelect = () => {
 export const ManyItems: StoryFn<{ items: number }> = ({ items }) => {
   const [render, setRender] = useState(true);
 
-  const manyOptions = Array.from(
-    { length: items || 500 },
-    (_, i) => `Item ${String(i + 1).padStart(4, "0")}`,
+  const manyOptions = useMemo(
+    () =>
+      Array.from(
+        { length: items },
+        (_, i) => `Item ${String(i + 1).padStart(4, "0")}`,
+      ),
+    [items],
   );
 
   return (
@@ -157,6 +161,11 @@ export const ManyItems: StoryFn<{ items: number }> = ({ items }) => {
 };
 ManyItems.args = {
   items: 500,
+};
+ManyItems.argTypes = {
+  items: {
+    control: { type: "number", min: 0, step: 100 },
+  },
 };
 ManyItems.parameters = {
   a11y: { disable: true },
