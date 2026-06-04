@@ -1,3 +1,8 @@
 .aksel-lookup-trigger {
-  /* styling */
+  all: unset;
+  color: inherit;
+  text-decoration: underline dashed;
+  text-underline-offset: var(--ax-space-4);
+  text-decoration-thickness: var(--ax-space-2);
+  text-decoration-color: var(--ax-text-default);
 }
