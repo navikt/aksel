@@ -27,16 +27,18 @@ describe("Tools", () => {
   });
 
   describe("tokenDetailsTool", () => {
-    test("should reject unknown tokenName values in schema", () => {
+    test("should accept unknown tokenName values in schema", () => {
       const strictSchema = z.object(tokenDetailsTool.inputSchema).strict();
 
       const valid = strictSchema.safeParse({ tokenName: "shadow-dialog" });
-      const invalid = strictSchema.safeParse({
+      const unknown = strictSchema.safeParse({
         tokenName: "nonexistent-token-xyz",
       });
+      const empty = strictSchema.safeParse({ tokenName: "" });
 
       expect(valid.success).toBe(true);
-      expect(invalid.success).toBe(false);
+      expect(unknown.success).toBe(true);
+      expect(empty.success).toBe(false);
     });
 
     test("should reject unknown fields in strict mode", () => {

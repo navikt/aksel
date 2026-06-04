@@ -2,19 +2,17 @@ import { z } from "zod";
 import { tokens } from "../resources/design-tokens.js";
 import type { McpTool } from "../types.js";
 
-const tokenNames = Array.from(
-  new Set(tokens.map((token) => token.name)),
-).sort();
-
-const tokenNameSchema = z.enum(tokenNames as [string, ...string[]], {
-  invalid_type_error: "tokenName must be a string",
-  required_error: "tokenName is required",
-});
-
 const tokenDetailsInputSchema = {
-  tokenName: tokenNameSchema.describe(
-    "The exact name of the token to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog')",
-  ),
+  tokenName: z
+    .string({
+      invalid_type_error: "tokenName must be a string",
+      required_error: "tokenName is required",
+    })
+    .trim()
+    .min(1, "tokenName is required")
+    .describe(
+      "The token name to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog'). Use the aksel-tokens://list resource to browse available tokens.",
+    ),
 };
 
 const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {
