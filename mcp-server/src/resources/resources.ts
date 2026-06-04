@@ -1,15 +1,15 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import type { McpResource } from "../types.js";
-import { designTokensResource } from "./design-tokens.js";
-import { iconCategoriesResource } from "./icon-categories.js";
-import { llmIndexResource } from "./llm-index.js";
-import { migrationsResource } from "./migrations.js";
+import { docsIndexResource } from "./docs-index.js";
+import { iconsCatalogResource } from "./icons-catalog.js";
+import { migrationsCatalogResource } from "./migrations-catalog.js";
+import { tokensCatalogResource } from "./tokens-catalog.js";
 
 const resources: McpResource[] = [
-  llmIndexResource,
-  designTokensResource,
-  iconCategoriesResource,
-  migrationsResource,
+  docsIndexResource,
+  tokensCatalogResource,
+  iconsCatalogResource,
+  migrationsCatalogResource,
 ];
 
 function setupResources(server: McpServer) {

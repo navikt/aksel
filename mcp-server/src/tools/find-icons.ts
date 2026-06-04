@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { metadata } from "../resources/icon-categories.js";
+import { metadata } from "../resources/icons-catalog.js";
 import type { McpTool } from "../types.js";
 
 const icons = Object.values(metadata);
@@ -13,7 +13,7 @@ const variants = Array.from(
   new Set([...icons.map((icon) => icon.variant), "both"]),
 ).sort();
 
-const iconSearchInputSchema = {
+const findIconsInputSchema = {
   category: z.enum(categories as [string, ...string[]]).optional(),
   subcategory: z.enum(subcategories as [string, ...string[]]).optional(),
   keyword: z.string().optional(),
@@ -24,11 +24,11 @@ const iconSearchInputSchema = {
   limit: z.number().int().min(1).max(100).optional().default(20),
 };
 
-const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
-  name: "aksel_icons_search",
+const findIconsTool: McpTool<typeof findIconsInputSchema> = {
+  name: "aksel_find_icons",
   description:
-    "Search and filter Aksel icons. Returns icon names with metadata. Use this after checking aksel-icons://categories to scope your search.",
-  inputSchema: iconSearchInputSchema,
+    "Find and filter Aksel icons by category, subcategory, keyword, and variant. Use aksel-icons://catalog to discover available categories first.",
+  inputSchema: findIconsInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
     let filtered = icons;
 
@@ -63,7 +63,7 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
       return JSON.stringify(
         {
           message: "No icons found matching your criteria",
-          hint: "Try broadening your search or use aksel-icons://categories to see available categories",
+          hint: "Try broadening your search or use aksel-icons://catalog to see available categories",
           searchCriteria: { category, subcategory, keyword, variant },
         },
         null,
@@ -105,4 +105,4 @@ const iconSearchTool: McpTool<typeof iconSearchInputSchema> = {
   },
 };
 
-export { iconSearchTool };
+export { findIconsTool };

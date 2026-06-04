@@ -2,16 +2,18 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import { logError } from "../helpers/log.js";
 import { recordToolCall } from "../helpers/metrics.js";
 import type { McpTool } from "../types.js";
-import { getAkselDocs } from "./aksel-docs.js";
-import { componentPropsTool } from "./component-props.js";
-import { iconSearchTool } from "./icon-search.js";
-import { tokenDetailsTool } from "./token-details.js";
+import { findDocsTool } from "./find-docs.js";
+import { findIconsTool } from "./find-icons.js";
+import { getComponentPropsTool } from "./get-component-props.js";
+import { getDocTool } from "./get-doc.js";
+import { getTokenDetailsTool } from "./get-token-details.js";
 
 const tools: McpTool<any>[] = [
-  getAkselDocs,
-  tokenDetailsTool,
-  iconSearchTool,
-  componentPropsTool,
+  findDocsTool,
+  getDocTool,
+  getTokenDetailsTool,
+  findIconsTool,
+  getComponentPropsTool,
 ];
 
 function setupTools(server: McpServer) {

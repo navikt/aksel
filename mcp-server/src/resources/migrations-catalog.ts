@@ -2,14 +2,14 @@ import { migrations } from "@navikt/aksel/migrations";
 import pkg from "../../package.json" with { type: "json" };
 import type { McpResource } from "../types.js";
 
-const URI = "aksel-migrations://list";
+const URI = "aksel-migrations://catalog";
 const MIME_TYPE = "application/json";
 
-const migrationsResource: McpResource = {
-  name: "Aksel Migrations List",
+const migrationsCatalogResource: McpResource = {
+  name: "Aksel Migrations Catalog",
   uri: URI,
   description:
-    "List all available Aksel codemods for migrating between major versions.",
+    "Catalog of available Aksel codemods for migrating between major versions.",
   mimeType: MIME_TYPE,
   async callback() {
     return {
@@ -41,4 +41,4 @@ const migrationsResource: McpResource = {
   },
 };
 
-export { migrationsResource };
+export { migrationsCatalogResource };

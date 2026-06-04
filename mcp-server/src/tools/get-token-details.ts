@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { tokens } from "../resources/design-tokens.js";
+import { tokens } from "../resources/tokens-catalog.js";
 import type { McpTool } from "../types.js";
 
-const tokenDetailsInputSchema = {
+const getTokenDetailsInputSchema = {
   tokenName: z
     .string({
       invalid_type_error: "tokenName must be a string",
@@ -11,15 +11,15 @@ const tokenDetailsInputSchema = {
     .trim()
     .min(1, "tokenName is required")
     .describe(
-      "The token name to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog'). Use the aksel-tokens://list resource to browse available tokens.",
+      "The token name to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog'). Use the aksel-tokens://catalog resource to browse available tokens.",
     ),
 };
 
-const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {
-  name: "aksel_token_details",
+const getTokenDetailsTool: McpTool<typeof getTokenDetailsInputSchema> = {
+  name: "aksel_get_token_details",
   description:
     "Fetch complete details for a specific Aksel design token by name. Returns all metadata including value, rawValue, CSS/SCSS/LESS/JS accessors, semantic information, and usage guidelines.",
-  inputSchema: tokenDetailsInputSchema,
+  inputSchema: getTokenDetailsInputSchema,
   async callback({ tokenName }) {
     const token = tokens.find((t) => t.name === tokenName);
 
@@ -44,7 +44,7 @@ const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {
       return JSON.stringify(
         {
           error: `Token '${tokenName}' not found`,
-          hint: "Use the aksel-tokens://list resource to browse available tokens",
+          hint: "Use the aksel-tokens://catalog resource to browse available tokens",
         },
         null,
         2,
@@ -55,4 +55,4 @@ const tokenDetailsTool: McpTool<typeof tokenDetailsInputSchema> = {
   },
 };
 
-export { tokenDetailsTool };
+export { getTokenDetailsTool };
