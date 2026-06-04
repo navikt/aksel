@@ -4,7 +4,7 @@ import { recordToolCall } from "../helpers/metrics.js";
 import type { McpTool } from "../types.js";
 import { findDocsTool } from "./find-docs.js";
 import { findIconsTool } from "./find-icons.js";
-import { getComponentPropsTool } from "./get-component-props.js";
+import { getComponentInfoTool } from "./get-component-info.js";
 import { getDocTool } from "./get-doc.js";
 import { getTokenDetailsTool } from "./get-token-details.js";
 
@@ -13,7 +13,7 @@ const tools: McpTool<any>[] = [
   getDocTool,
   getTokenDetailsTool,
   findIconsTool,
-  getComponentPropsTool,
+  getComponentInfoTool,
 ];
 
 function setupTools(server: McpServer) {

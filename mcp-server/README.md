@@ -23,13 +23,13 @@ It gives coding agents and assistants direct access to:
 
 ### Tools
 
-| Tool                        | What it does                                                       |
-| --------------------------- | ------------------------------------------------------------------ |
-| `aksel_find_docs`           | Finds docs paths from the index based on query                     |
-| `aksel_get_doc`             | Fetches official Aksel markdown docs by path                       |
-| `aksel_get_token_details`   | Returns complete metadata for one design token                     |
-| `aksel_find_icons`          | Finds and filters icons by category, subcategory, keyword, variant |
-| `aksel_get_component_props` | Fetches structured component props by slug or docs path            |
+| Tool                       | What it does                                                           |
+| -------------------------- | ---------------------------------------------------------------------- |
+| `aksel_find_docs`          | Finds docs paths from the index based on query                         |
+| `aksel_get_doc`            | Fetches official Aksel markdown docs by path                           |
+| `aksel_get_token_details`  | Returns complete metadata for one design token                         |
+| `aksel_find_icons`         | Finds and filters icons by category, subcategory, keyword, variant     |
+| `aksel_get_component_info` | Fetches component info by slug/docs path (`props`, `examples`, `both`) |
 
 ### Resources
 
@@ -45,7 +45,7 @@ It gives coding agents and assistants direct access to:
 1. Call `aksel_find_docs({ query: "button" })` to find the right path quickly.
 2. Call `aksel_get_doc({ path: "/komponenter/core/button.md" })`.
 3. For implementation details, also call:
-   - `aksel_get_component_props` with either slug (`komponenter/core/button`) or path (`/komponenter/core/button.md`) for strict prop contracts
+   - `aksel_get_component_info` with either slug (`komponenter/core/button`) or path (`/komponenter/core/button.md`) and `include: "props" | "examples" | "both"`
    - `aksel_get_token_details` for token-level design decisions
    - `aksel_find_icons` for icon discovery
 

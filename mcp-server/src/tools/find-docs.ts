@@ -19,7 +19,7 @@ const findDocsInputSchema = {
 const findDocsTool: McpTool<typeof findDocsInputSchema> = {
   name: "aksel_find_docs",
   description:
-    "Find Aksel documentation pages by query and return matching docs paths. Use this before calling aksel_get_doc or aksel_get_component_props.",
+    "Find Aksel documentation pages by query and return matching docs paths. Use this before calling aksel_get_doc or aksel_get_component_info.",
   inputSchema: findDocsInputSchema,
   async callback({ query, limit }) {
     const index = await getDocsIndex();
