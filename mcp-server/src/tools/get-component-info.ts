@@ -18,10 +18,8 @@ function normalizeComponentSlug(input: string) {
  * - add support for fetching examples
  *
  *
- * Supports selective output via include:
- * - props: return component props
- * - examples: return examples only
- * - both: return props and examples
+ * Currently returns component props only.
+ * TODO: Add examples (and an `include` option) when API exists.
  */
 const getComponentInfoInputSchema = {
   component: z
