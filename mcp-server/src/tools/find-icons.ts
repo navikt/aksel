@@ -63,20 +63,17 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
       return JSON.stringify({
         message: "No icons found matching your criteria",
         hint: "Try broadening your search or use aksel-icons://catalog to see available categories",
-        searchCriteria: { category, subcategory, keyword, variant },
       });
     }
 
     const summary = {
       totalMatches: filtered.length,
       returned: results.length,
-      searchCriteria: { category, subcategory, keyword, variant },
       icons: results.map((icon) => ({
         name: icon.name,
         category: icon.category,
         subcategory: icon.sub_category,
         variant: icon.variant,
-        keywords: icon.keywords,
       })),
     };
 

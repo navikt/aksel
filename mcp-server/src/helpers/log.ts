@@ -1,4 +1,4 @@
-type LogLevel = "warn" | "error";
+type LogLevel = "info" | "warn" | "error";
 
 type LogDetails = Record<string, unknown>;
 
@@ -10,6 +10,11 @@ function log(level: LogLevel, message: string, details?: LogDetails) {
   };
 
   const line = JSON.stringify(payload);
+
+  if (level === "info") {
+    console.info(line);
+    return;
+  }
 
   if (level === "warn") {
     console.warn(line);
@@ -27,4 +32,8 @@ function logError(message: string, details?: LogDetails) {
   log("error", message, details);
 }
 
-export { logError, logWarn };
+function logInfo(message: string, details?: LogDetails) {
+  log("info", message, details);
+}
+
+export { logError, logInfo, logWarn };

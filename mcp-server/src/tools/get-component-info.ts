@@ -24,7 +24,13 @@ function normalizeComponentSlug(input: string) {
  * - both: return props and examples
  */
 const getComponentInfoInputSchema = {
-  component: z.string().trim().min(1, "Component is required"),
+  component: z
+    .string()
+    .trim()
+    .min(1, "Component is required")
+    .describe(
+      "Component slug or docs path (e.g. 'komponenter/core/button' or '/komponenter/core/button.md').",
+    ),
   /* include: z.enum(["props", "examples", "both"]).optional().default("props"), */
 };
 

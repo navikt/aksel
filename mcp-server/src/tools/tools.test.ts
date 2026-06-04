@@ -179,6 +179,8 @@ describe("Tools", () => {
       expect(response.icons[0]).toHaveProperty("name");
       expect(response.icons[0]).toHaveProperty("category");
       expect(response.icons[0]).toHaveProperty("variant");
+      expect(response.icons[0]).not.toHaveProperty("keywords");
+      expect(response).not.toHaveProperty("searchCriteria");
     });
 
     test("should filter icons by category", async () => {
@@ -210,6 +212,7 @@ describe("Tools", () => {
       const response = JSON.parse(result);
       expect(response).toHaveProperty("message");
       expect(response.message).toContain("No icons found");
+      expect(response).not.toHaveProperty("searchCriteria");
     });
 
     test("should have proper metadata", () => {
