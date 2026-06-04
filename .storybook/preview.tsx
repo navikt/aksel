@@ -1,3 +1,4 @@
+import addonPerformancePanel from "@github-ui/storybook-addon-performance-panel";
 import addonA11y from "@storybook/addon-a11y";
 import addonDocs from "@storybook/addon-docs";
 import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
@@ -58,7 +59,13 @@ const TypoDecorator = ({
 };
 
 export default definePreview({
-  addons: [addonA11y(), addonThemes(), addonDocs(), addonVitest()],
+  addons: [
+    addonA11y(),
+    addonThemes(),
+    addonDocs(),
+    addonVitest(),
+    addonPerformancePanel(),
+  ],
   parameters: {
     options: {
       storySort: {
