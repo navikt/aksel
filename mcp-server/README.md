@@ -45,7 +45,7 @@ It gives coding agents and assistants direct access to:
 1. Call `aksel_find_docs({ query: "button" })` to find the right path quickly.
 2. Call `aksel_get_doc({ path: "/komponenter/core/button.md" })`.
 3. For implementation details, also call:
-   - `aksel_get_component_info` with either slug (`komponenter/core/button`) or path (`/komponenter/core/button.md`) and `include: "props" | "examples" | "both"`
+   - `aksel_get_component_info` with either slug (`komponenter/core/button`) or path (`/komponenter/core/button.md`)`
    - `aksel_get_token_details` for token-level design decisions
    - `aksel_find_icons` for icon discovery
 
