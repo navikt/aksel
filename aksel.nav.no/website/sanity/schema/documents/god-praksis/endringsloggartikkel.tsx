@@ -1,0 +1,84 @@
+import { defineField, defineType } from "sanity";
+import SanityTabGroups from "../presets/groups";
+import BaseSEOPreset from "../presets/seo";
+import { titleField } from "../presets/title-field";
+
+export const EndringsloggArtikkelGodPraksis = defineType({
+  title: "Endringsloggartikkel God praksis",
+  name: "gp_endringslogg_artikkel",
+  type: "document",
+  groups: SanityTabGroups,
+  fields: [
+    titleField,
+
+    defineField({
+      title: "URL",
+      name: "slug",
+      type: "slug",
+      description: "Inkluder gjerne dato eller versjon",
+      validation: (Rule) => Rule.required(),
+      group: "settings",
+      options: {
+        source: "heading",
+      },
+    }),
+    defineField({
+      title: "Endringsdato",
+      name: "endringsdato",
+      description:
+        "Datoen styrer rekkefølgen på oppdateringene i endringsloggen.",
+      validation: (Rule) => Rule.required(),
+      type: "datetime",
+      initialValue: new Date().toISOString(),
+    }),
+    defineField({
+      title: "Innhold",
+      name: "content",
+      group: "innhold",
+      description:
+        'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
+      type: "riktekst_standard",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: "Artikler",
+      name: "artikler",
+      group: "innhold",
+      description: "Artikler denne oppdateringen gjelder.",
+      type: "array",
+      options: {
+        sortable: false,
+      },
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "aksel_artikkel" }],
+          options: {
+            disableNew: true,
+          },
+        },
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    BaseSEOPreset,
+  ],
+
+  preview: {
+    select: {
+      heading: "heading",
+      endringsdato: "endringsdato",
+    },
+    prepare(selection) {
+      const { heading, endringsdato } = selection;
+      if (!endringsdato) {
+        return {
+          title: heading,
+        };
+      }
+      return {
+        title: heading,
+        subtitle: `${endringsdato.split("T")[0]}`,
+      };
+    },
+  },
+});

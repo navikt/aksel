@@ -36,6 +36,7 @@ export const schema: SchemaPluginOptions = {
     document.Tema,
     document.Undertema,
     document.Innholdstype,
+    document.EndringsloggArtikkelGodPraksis,
 
     /* Blogg */
     document.Blogg,

@@ -48,6 +48,7 @@ const filtered = [
   "gp.tema.undertema",
   "gp.innholdstype",
   "cookie_tracker",
+  "gp_endringslogg_artikkel",
 ];
 
 export const structure: StructureResolver = async (S) => {
