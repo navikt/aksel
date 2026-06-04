@@ -12,7 +12,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
     },
     {
       route: "/god-praksis/endring/:slug",
-      filter: `_type == "gp_endringslogg_artikkel && slug.current == $slug`,
+      filter: `_type == "gp_endringslogg_artikkel" && slug.current == $slug`,
     },
     {
       route: "/komponenter/:category/:slug",
