@@ -28,8 +28,7 @@ IMPORTANT: Use \`aksel_find_docs\` (or \`aksel-docs://index\`) to get the correc
       return cachedContent;
     }
 
-    const url = `https://aksel.nav.no${path}`;
-    const response = await fetchWithTimeout(url, {
+    const response = await fetchWithTimeout(`https://aksel.nav.no${path}`, {
       headers: {
         Accept: "text/markdown",
       },
@@ -60,11 +59,7 @@ IMPORTANT: Use \`aksel_find_docs\` (or \`aksel-docs://index\`) to get the correc
       );
     }
 
-    const content = JSON.stringify({
-      path,
-      url,
-      content: await response.text(),
-    });
+    const content = await response.text();
 
     cacheSet(path, content);
     return content;
