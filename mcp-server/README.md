@@ -76,7 +76,7 @@ yarn workspace mcp-server test
 
 Automatic deployment via GitHub Actions on merge to main.
 
-Production: https://aksel-mcp.intern.nav.no
+Production: https://aksel-mcp.ansatt.nav.no
 
 ## Metrics
 
