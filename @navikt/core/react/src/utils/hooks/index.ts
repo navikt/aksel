@@ -17,5 +17,3 @@ export {
   useTransitionStatus,
 } from "./useTransitionStatus";
 export { useValueAsRef } from "./useValueAsRef";
-export { createDescendantContext } from "./descendants/useDescendant";
-export { DescendantsManager } from "./descendants/descendant";

@@ -3258,6 +3258,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@github-ui/storybook-addon-performance-panel@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@github-ui/storybook-addon-performance-panel@npm:1.1.4"
+  peerDependencies:
+    "@storybook/icons": ^2.0.0
+    "@storybook/react": ^10.0.0
+    react: ^19
+    storybook: ^10
+  peerDependenciesMeta:
+    "@storybook/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 10/cd0fc201fb83a3e2998dbd965912a477eeb2471aeda124b3751e668cf762729069423d947d325848d9d7d65b1514f6476646a9750a238eeed6dbbc6a69182475
+  languageName: node
+  linkType: hard
+
 "@hono/node-server@npm:^1.19.9":
   version: 1.19.14
   resolution: "@hono/node-server@npm:1.19.14"
@@ -5010,7 +5027,7 @@ __metadata:
     react: "npm:19.2.6"
     react-day-picker: "npm:9.14.0"
     react-dom: "npm:19.2.6"
-    react-router: "npm:^7.13.1"
+    react-router: "npm:^7.15.0"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.4.1"
     tsc-alias: "npm:1.8.16"
@@ -9805,6 +9822,7 @@ __metadata:
     "@biomejs/biome": "npm:2.4.15"
     "@changesets/cli": "npm:2.31.0"
     "@eslint/js": "npm:^10.0.1"
+    "@github-ui/storybook-addon-performance-panel": "npm:^1.1.4"
     "@storybook/addon-a11y": "npm:^10.4.1"
     "@storybook/addon-docs": "npm:^10.4.1"
     "@storybook/addon-themes": "npm:^10.4.1"
@@ -20897,9 +20915,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^7.13.1":
-  version: 7.14.2
-  resolution: "react-router@npm:7.14.2"
+"react-router@npm:^7.15.0":
+  version: 7.15.0
+  resolution: "react-router@npm:7.15.0"
   dependencies:
     cookie: "npm:^1.0.1"
     set-cookie-parser: "npm:^2.6.0"
@@ -20909,7 +20927,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/6a12db0f6c8fd9b08631da98ba5e8c63675f4830cb7dccf1d70f3da23acbbc39079f48479b7c2c94b4ecd138fb1e0d4d8efd60914c48b224bfd8f1fd87b3b8cd
+  checksum: 10/98681e75fab2eddc2b18bd478840341a85b5eab796ed29c638be986faab0c63ff16ad72c9889192a4f5c6f559f20aad3273fdffbeb1edf104d2cf2381373c9ca
   languageName: node
   linkType: hard
 
@@ -23958,9 +23976,9 @@ __metadata:
   linkType: hard
 
 "tmp@npm:^0.2.3, tmp@npm:^0.2.4":
-  version: 0.2.5
-  resolution: "tmp@npm:0.2.5"
-  checksum: 10/dd4b78b32385eab4899d3ae296007b34482b035b6d73e1201c4a9aede40860e90997a1452c65a2d21aee73d53e93cd167d741c3db4015d90e63b6d568a93d7ec
+  version: 0.2.7
+  resolution: "tmp@npm:0.2.7"
+  checksum: 10/0a3bc90beb0c6275273c3475fb57e466eaab1c9c4a101d029ff62b18146ce136e7f75d09de34863d9f2c2a492751402508f9e028bc98eb34a1416195d4b15619
   languageName: node
   linkType: hard
 

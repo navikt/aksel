@@ -1,8 +1,8 @@
 import { composeEventHandlers } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
-import { useTabsContext, useTabsDescendant } from "../../Tabs.context";
+import { useTabsContext } from "../../Tabs.context";
 
 export interface UseTabProps {
+  id?: string;
   /**
    * If `true`, the `Tab` won't be toggleable
    * @default false
@@ -11,14 +11,19 @@ export interface UseTabProps {
   onClick?: React.MouseEventHandler;
   onFocus?: React.FocusEventHandler;
   value: string;
+  ariaControls?: string;
 }
 
-export function useTab<P extends UseTabProps>(
-  { value, disabled = false, onFocus: _onFocus, onClick }: P,
-  ref: React.ForwardedRef<HTMLButtonElement>,
-) {
+function useTab({
+  id,
+  value,
+  disabled = false,
+  onFocus: _onFocus,
+  onClick,
+  ariaControls,
+}: UseTabProps) {
   const {
-    id,
+    id: contextId,
     setSelectedValue,
     selectionFollowsFocus,
     focusedValue,
@@ -28,11 +33,6 @@ export function useTab<P extends UseTabProps>(
     makeTabPanelId,
   } = useTabsContext();
 
-  const { register } = useTabsDescendant({
-    disabled,
-    value,
-  });
-
   const isSelected = value === selectedValue;
 
   const onFocus = () => {
@@ -40,15 +40,19 @@ export function useTab<P extends UseTabProps>(
     selectionFollowsFocus && setSelectedValue(value);
   };
 
-  const refs = useMergeRefs(register, ref);
-
   return {
-    ref: refs,
-    isSelected,
-    isFocused: focusedValue === value,
-    id: makeTabId(id, value),
-    controlsId: makeTabPanelId(id, value),
     onClick: composeEventHandlers(onClick, () => setSelectedValue(value)),
     onFocus: disabled ? undefined : composeEventHandlers(_onFocus, onFocus),
+    id: id ?? makeTabId(contextId, value),
+    "aria-controls": ariaControls ?? makeTabPanelId(contextId, value),
+    tabIndex: focusedValue === value ? 0 : -1,
+    "aria-selected": isSelected,
+    "data-state": isSelected ? "active" : "inactive",
+    role: "tab",
+    "data-aksel-tab": "",
+    disabled,
+    "data-disabled": disabled ? "" : undefined,
   };
 }
+
+export { useTab };

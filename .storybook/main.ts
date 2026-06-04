@@ -84,6 +84,7 @@ export default defineMain({
     getAbsolutePath("@storybook/addon-themes"),
     getAbsolutePath("@storybook/addon-docs"),
     getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@github-ui/storybook-addon-performance-panel"),
   ],
 
   framework: {
