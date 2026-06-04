@@ -17,24 +17,20 @@ const migrationsCatalogResource: McpResource = {
         {
           uri: URI,
           mimeType: MIME_TYPE,
-          text: JSON.stringify(
-            {
-              cliVersion: pkg.version,
-              runCommand: "npx @navikt/aksel codemod <name>",
-              migrations: Object.fromEntries(
-                Object.entries(migrations).map(([version, entries]) => [
-                  version,
-                  entries.map((m) => ({
-                    name: m.value,
-                    description: m.description,
-                    warning: m.warning,
-                  })),
-                ]),
-              ),
-            },
-            null,
-            2,
-          ),
+          text: JSON.stringify({
+            cliVersion: pkg.version,
+            runCommand: "npx @navikt/aksel codemod <name>",
+            migrations: Object.fromEntries(
+              Object.entries(migrations).map(([version, entries]) => [
+                version,
+                entries.map((m) => ({
+                  name: m.value,
+                  description: m.description,
+                  warning: m.warning,
+                })),
+              ]),
+            ),
+          }),
         },
       ],
     };

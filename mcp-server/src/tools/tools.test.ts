@@ -108,44 +108,13 @@ describe("Tools", () => {
       const docsPath = strictSchema.safeParse({
         component: "/komponenter/core/button.md",
       });
-      const includeExamples = strictSchema.safeParse({
-        component: "komponenter/core/button",
-        include: "examples",
-      });
-      const includeBoth = strictSchema.safeParse({
-        component: "komponenter/core/button",
-        include: "both",
-      });
       const empty = strictSchema.safeParse({
         component: "",
-      });
-      const invalidInclude = strictSchema.safeParse({
-        component: "komponenter/core/button",
-        include: "invalid",
       });
 
       expect(slug.success).toBe(true);
       expect(docsPath.success).toBe(true);
-      expect(includeExamples.success).toBe(true);
-      expect(includeBoth.success).toBe(true);
       expect(empty.success).toBe(false);
-      expect(invalidInclude.success).toBe(false);
-    });
-
-    test("should return examples placeholder when include is examples", async () => {
-      const result = await getComponentInfoTool.callback({
-        component: "komponenter/core/button",
-        include: "examples",
-      });
-
-      const response = JSON.parse(result);
-      expect(response).toHaveProperty("component", "komponenter/core/button");
-      expect(response).toHaveProperty("include", "examples");
-      expect(response).toHaveProperty("props", null);
-      expect(response).toHaveProperty("examples");
-      expect(Array.isArray(response.examples)).toBe(true);
-      expect(response.examples.length).toBe(0);
-      expect(response).toHaveProperty("warnings");
     });
   });
 

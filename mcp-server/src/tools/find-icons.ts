@@ -60,15 +60,11 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
     const results = filtered.slice(0, limit);
 
     if (results.length === 0) {
-      return JSON.stringify(
-        {
-          message: "No icons found matching your criteria",
-          hint: "Try broadening your search or use aksel-icons://catalog to see available categories",
-          searchCriteria: { category, subcategory, keyword, variant },
-        },
-        null,
-        2,
-      );
+      return JSON.stringify({
+        message: "No icons found matching your criteria",
+        hint: "Try broadening your search or use aksel-icons://catalog to see available categories",
+        searchCriteria: { category, subcategory, keyword, variant },
+      });
     }
 
     const summary = {
@@ -85,23 +81,15 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
     };
 
     if (filtered.length > limit) {
-      return JSON.stringify(
-        {
-          ...summary,
-          note: `Showing ${limit} of ${filtered.length} matches. Refine your search criteria to see more specific results.`,
-        },
-        null,
-        2,
-      );
+      return JSON.stringify({
+        ...summary,
+        note: `Showing ${limit} of ${filtered.length} matches. Refine your search criteria to see more specific results.`,
+      });
     }
 
-    return JSON.stringify(
-      {
-        ...summary,
-      },
-      null,
-      2,
-    );
+    return JSON.stringify({
+      ...summary,
+    });
   },
 };
 

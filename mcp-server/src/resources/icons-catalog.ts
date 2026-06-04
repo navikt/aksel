@@ -43,11 +43,10 @@ const iconsCatalogResource: McpResource = {
         {
           uri: URI,
           mimeType: MIME_TYPE,
-          text: JSON.stringify(
-            { categories, totalIcons: Object.keys(metadata).length },
-            null,
-            2,
-          ),
+          text: JSON.stringify({
+            categories,
+            totalIcons: Object.keys(metadata).length,
+          }),
         },
       ],
     };

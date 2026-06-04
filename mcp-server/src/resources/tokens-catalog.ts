@@ -23,7 +23,7 @@ const tokensCatalogResource: McpResource = {
         {
           uri: URI,
           mimeType: MIME_TYPE,
-          text: JSON.stringify(tokenSummary, null, 2),
+          text: JSON.stringify(tokenSummary),
         },
       ],
     };

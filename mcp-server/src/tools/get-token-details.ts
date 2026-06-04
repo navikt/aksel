@@ -30,28 +30,20 @@ const getTokenDetailsTool: McpTool<typeof getTokenDetailsInputSchema> = {
         .map((t) => t.name);
 
       if (similarTokens.length > 0) {
-        return JSON.stringify(
-          {
-            error: `Token '${tokenName}' not found`,
-            suggestion: "Did you mean one of these?",
-            similarTokens,
-          },
-          null,
-          2,
-        );
+        return JSON.stringify({
+          error: `Token '${tokenName}' not found`,
+          suggestion: "Did you mean one of these?",
+          similarTokens,
+        });
       }
 
-      return JSON.stringify(
-        {
-          error: `Token '${tokenName}' not found`,
-          hint: "Use the aksel-tokens://catalog resource to browse available tokens",
-        },
-        null,
-        2,
-      );
+      return JSON.stringify({
+        error: `Token '${tokenName}' not found`,
+        hint: "Use the aksel-tokens://catalog resource to browse available tokens",
+      });
     }
 
-    return JSON.stringify(token, null, 2);
+    return JSON.stringify(token);
   },
 };
 
