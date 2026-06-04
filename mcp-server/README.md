@@ -11,7 +11,7 @@ It gives coding agents and assistants direct access to:
 - Structured component props
 
 > [!TIP]
-> Best result pattern: read `aksel-docs://llm-index` first, then call `aksel_docs` with an exact path from the index.
+> Best result pattern: call `aksel_find_docs` first, then call `aksel_get_doc` with an exact returned path.
 
 ## Why use this server?
 
@@ -23,31 +23,31 @@ It gives coding agents and assistants direct access to:
 
 ### Tools
 
-| Tool                    | What it does                                                     |
-| ----------------------- | ---------------------------------------------------------------- |
-| `aksel_docs`            | Fetches official Aksel markdown docs by path                     |
-| `aksel_token_details`   | Returns complete metadata for one design token                   |
-| `aksel_icons_search`    | Searches/filter icons by category, subcategory, keyword, variant |
-| `aksel_component_props` | Fetches structured component props by documentation slug         |
+| Tool                       | What it does                                                           |
+| -------------------------- | ---------------------------------------------------------------------- |
+| `aksel_find_docs`          | Finds docs paths from the index based on query                         |
+| `aksel_get_doc`            | Fetches official Aksel markdown docs by path                           |
+| `aksel_get_token_details`  | Returns complete metadata for one design token                         |
+| `aksel_find_icons`         | Finds and filters icons by category, subcategory, keyword, variant     |
+| `aksel_get_component_info` | Fetches structured component props by slug/docs path               |
 
 ### Resources
 
-| Resource URI               | What it contains                                         |
-| -------------------------- | -------------------------------------------------------- |
-| `aksel-docs://llm-index`   | Full docs index from `https://aksel.nav.no/api/llm/docs` |
-| `aksel-tokens://list`      | Lightweight list of all Aksel design tokens              |
-| `aksel-icons://categories` | Icon categories + subcategories + counts                 |
-| `aksel-migrations://list`  | Available codemods for Aksel migrations                  |
+| Resource URI                 | What it contains                                         |
+| ---------------------------- | -------------------------------------------------------- |
+| `aksel-docs://index`         | Full docs index from `https://aksel.nav.no/api/llm/docs` |
+| `aksel-tokens://catalog`     | Lightweight catalog of all Aksel design tokens           |
+| `aksel-icons://catalog`      | Icon categories + subcategories + counts                 |
+| `aksel-migrations://catalog` | Available codemods for Aksel migrations                  |
 
 ## Recommended usage workflow
 
-1. Read `aksel-docs://llm-index`.
-2. Pick the exact docs path.
-3. Call `aksel_docs({ path: "/komponenter/core/button.md" })`.
-4. For implementation details, also call:
-   - `aksel_component_props` for strict prop contracts
-   - `aksel_token_details` for token-level design decisions
-   - `aksel_icons_search` for icon discovery
+1. Call `aksel_find_docs({ query: "button" })` to find the right path quickly.
+2. Call `aksel_get_doc({ path: "/komponenter/core/button.md" })`.
+3. For implementation details, also call:
+   - `aksel_get_component_info` with either slug (`komponenter/core/button`) or path (`/komponenter/core/button.md`)
+   - `aksel_get_token_details` for token-level design decisions
+   - `aksel_find_icons` for icon discovery
 
 ## Local development
 

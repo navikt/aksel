@@ -4,7 +4,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import express from "express";
 import { performance } from "node:perf_hooks";
 import pkg from "../package.json" with { type: "json" };
-import { logError, logWarn } from "./helpers/log.js";
+import { logError, logInfo, logWarn } from "./helpers/log.js";
 import { recordHttpRequest, register } from "./helpers/metrics.js";
 import { setupPrompts } from "./prompts/prompts.js";
 import { setupResources } from "./resources/resources.js";
@@ -120,12 +120,12 @@ app.all("/mcp", async (req, res) => {
 const port = Number(process.env.PORT ?? 8080);
 
 const httpServer = app.listen(port, () => {
-  console.info(`Aksel MCP server listening on ${port}`);
+  logInfo("Aksel MCP server listening", { port });
 });
 
 function shutdown() {
   httpServer.close(() => {
-    console.info("Aksel MCP server shutting down");
+    logInfo("Aksel MCP server shutting down");
     process.exit(0);
   });
 }

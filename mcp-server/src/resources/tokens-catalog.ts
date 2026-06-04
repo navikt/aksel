@@ -1,7 +1,7 @@
 import { tokens } from "@navikt/ds-tokens/token_docs";
 import type { McpResource } from "../types.js";
 
-const URI = "aksel-tokens://list";
+const URI = "aksel-tokens://catalog";
 const MIME_TYPE = "application/json";
 
 const tokenSummary = tokens.map((token) => ({
@@ -11,11 +11,11 @@ const tokenSummary = tokens.map((token) => ({
   type: token.type,
 }));
 
-const designTokensResource: McpResource = {
-  name: "Aksel Design Tokens List",
+const tokensCatalogResource: McpResource = {
+  name: "Aksel Tokens Catalog",
   uri: URI,
   description:
-    "Lightweight list of all Aksel design tokens with names, descriptions, and categories. Use this to browse available tokens, then use the aksel_token_details tool to fetch full details for specific tokens.",
+    "Lightweight catalog of Aksel design tokens with names, descriptions, categories, and types. Use this to browse tokens, then call aksel_get_token_details for full token metadata.",
   mimeType: MIME_TYPE,
   async callback() {
     return {
@@ -23,11 +23,11 @@ const designTokensResource: McpResource = {
         {
           uri: URI,
           mimeType: MIME_TYPE,
-          text: JSON.stringify(tokenSummary, null, 2),
+          text: JSON.stringify(tokenSummary),
         },
       ],
     };
   },
 };
 
-export { designTokensResource, tokens };
+export { tokensCatalogResource, tokens };
