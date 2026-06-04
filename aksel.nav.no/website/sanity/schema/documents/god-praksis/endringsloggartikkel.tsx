@@ -39,7 +39,7 @@ export const EndringsloggArtikkelGodPraksis = defineType({
         "Datoen styrer rekkefølgen på oppdateringene i endringsloggen.",
       validation: (Rule) => Rule.required(),
       type: "datetime",
-      initialValue: new Date().toISOString(),
+      initialValue: () => new Date().toISOString(),
     }),
     defineField({
       title: "Innhold",
