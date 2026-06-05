@@ -16,6 +16,7 @@ import { useMergeRefs } from "../utils/hooks";
  * [] Popover sizing?
  * [] Research hover effect
  * [] Discuss span role button vs button element
+ * [] Fix documentation
  */
 
 export interface LookupProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -24,13 +25,46 @@ export interface LookupProps extends React.HTMLAttributes<HTMLSpanElement> {
    */
   word: string;
   /**
-   * Children
+   * Default orientation of popover
+   *
+   * Try to keep general usage to "top", "bottom", "left", "right".
+   * @default "top"
+   */
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
+  /**
+   * Just for testing: hover effect on trigger element
+   */
+  hoverEffectTEST?: boolean;
+  /**
+   * Children, content of the popover
    */
   children: React.ReactNode;
 }
 
 export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
-  ({ word, children, className, ...rest }, ref) => {
+  (
+    {
+      word,
+      children,
+      className,
+      placement = "top",
+      hoverEffectTEST = false,
+      ...rest
+    },
+    ref,
+  ) => {
     const [openState, setOpenState] = useState(false);
     const anchorRef = useRef<HTMLSpanElement>(null);
     const mergedRef = useMergeRefs(ref, anchorRef);
@@ -44,6 +78,7 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
           onClick={() => setOpenState(!openState)}
           aria-label={`Explanation of ${word}`} // TODO: Fix
           aria-expanded={openState}
+          data-hover-effect={hoverEffectTEST}
         >
           {word}
         </button>
@@ -51,7 +86,7 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
           anchorEl={anchorRef.current}
           open={openState}
           onClose={() => setOpenState(false)}
-          placement="top"
+          placement={placement}
         >
           <Popover.Content>{children}</Popover.Content>
         </Popover>
