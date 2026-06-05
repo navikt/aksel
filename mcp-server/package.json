@@ -8,7 +8,8 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "start": "node dist/index.mjs",
-    "test": "yarn vitest run"
+    "test": "yarn vitest run",
+    "inspect": "yarn mcp-inspector"
   },
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -16,6 +17,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.21",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@navikt/aksel": "^8.11.1",
     "@navikt/aksel-icons": "^8.11.1",
