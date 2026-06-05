@@ -16,6 +16,7 @@ export const publicationFlow = definePlugin(() => {
         const shouldUseQualityControl = [
           "komponent_artikkel",
           "ds_artikkel",
+          "templates_artikkel",
           "aksel_artikkel",
         ].some((docType) => docType === context.schemaType);
 

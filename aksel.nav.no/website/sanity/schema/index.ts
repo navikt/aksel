@@ -128,5 +128,16 @@ export const schema: SchemaPluginOptions = {
         artikler: [{ _type: "reference", _ref: params.id }],
       }),
     },
+    {
+      id: "ds.changelog.with.reference",
+      title: "Endringsloggartikkel med referanse",
+      schemaType: "ds_endringslogg_artikkel",
+      parameters: [{ name: "id", type: "string" }],
+      value: (params) => ({
+        artikler: [{ _type: "reference", _ref: params.id }],
+        endringsdato: new Date().toISOString(),
+        endringstype: "dokumentasjon",
+      }),
+    },
   ],
 };

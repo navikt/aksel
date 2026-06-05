@@ -93,6 +93,7 @@ export function setLastVerified(
                 (props.published as any)?.updateInfo?.lastVerified
               }
               id={props.id}
+              docType={props.type}
             />
           ),
       },
@@ -150,6 +151,7 @@ type StepTwoProps = {
   onPublish: (options?: { withNewVerify?: boolean }) => void;
   lastVerified?: string;
   id: string;
+  docType: string;
 };
 
 function StepTwo(props: StepTwoProps) {
@@ -225,6 +227,7 @@ function StepTwo(props: StepTwoProps) {
         {publishWithChangelog ? (
           <PublishAndCreateChangelog
             id={props.id}
+            docType={props.docType}
             onClick={() =>
               onPublish({
                 withNewVerify: formState.updateDate,
@@ -247,16 +250,20 @@ function StepTwo(props: StepTwoProps) {
   );
 }
 
+type PublishAndCreateChangelogProps = {
+  id: string;
+  onClick?: () => void;
+  docType: string;
+};
+
 /**
  * Note that we need to open in new tab so that original document finishes publishing.
  */
 function PublishAndCreateChangelog({
   id,
   onClick: onClickProp,
-}: {
-  id: string;
-  onClick?: () => void;
-}) {
+  docType,
+}: PublishAndCreateChangelogProps) {
   const cleanedId = useMemo(() => {
     const split = id.split(".");
     return split[split.length - 1];
@@ -264,13 +271,7 @@ function PublishAndCreateChangelog({
 
   const { href, onClick } = useIntentLink({
     intent: "create",
-    params: [
-      {
-        type: "gp_endringslogg_artikkel",
-        template: "gp.changelog.with.reference",
-      },
-      { id: cleanedId },
-    ],
+    params: [getIntentFromDocType(docType), { id: cleanedId }],
     target: "_blank",
     onClick: onClickProp,
   });
@@ -286,4 +287,21 @@ function PublishAndCreateChangelog({
       Publiser
     </Button>
   );
+}
+
+function getIntentFromDocType(docType: string) {
+  switch (docType) {
+    case "ds_artikkel":
+    case "komponent_artikkel":
+    case "templates_artikkel":
+      return {
+        type: "ds_endringslogg_artikkel",
+        template: "ds.changelog.with.reference",
+      };
+    default:
+      return {
+        type: "gp_endringslogg_artikkel",
+        template: "gp.changelog.with.reference",
+      };
+  }
 }
