@@ -15,6 +15,7 @@ import { useMergeRefs } from "../utils/hooks";
  * [] Breakline on word
  * [] Popover sizing?
  * [] Research hover effect
+ * [] Discuss span role button vs button element
  */
 
 export interface LookupProps extends React.HTMLAttributes<HTMLSpanElement> {

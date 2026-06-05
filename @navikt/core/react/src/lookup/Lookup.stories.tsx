@@ -10,9 +10,5 @@ export default {
 };
 
 export const Default = () => {
-  return (
-    <Lookup word="Lookup">
-      A lookup component that shows a popover with an explanation when clicked.
-    </Lookup>
-  );
+  return <Lookup word="Lookup">Lookup component</Lookup>;
 };
