@@ -79,62 +79,74 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     const renders = useRef(0);
     const [state, setState] = useState<State>({ outerHeightStyle: 0 });
 
-    const getUpdatedState = React.useCallback(() => {
-      const input = inputRef.current!;
-      const containerWindow = ownerWindow(input);
-      const computedStyle = containerWindow.getComputedStyle(input);
+    const getUpdatedState = React.useCallback(
+      (input: HTMLTextAreaElement) => {
+        const containerWindow = ownerWindow(input);
+        const computedStyle = containerWindow.getComputedStyle(input);
 
-      // If input's width is shrunk and it's not visible, don't sync height.
-      if (computedStyle.width === "0px") {
-        return { outerHeightStyle: 0 };
-      }
+        // If input's width is shrunk and it's not visible, don't sync height.
+        if (computedStyle.width === "0px") {
+          return { outerHeightStyle: 0 };
+        }
 
-      const inputShallow = shadowRef.current!;
-      inputShallow.style.width = computedStyle.width;
-      inputShallow.value = input.value || other.placeholder || "x";
-      if (inputShallow.value.slice(-1) === "\n") {
-        // Certain fonts which overflow the line height will cause the textarea
-        // to report a different scrollHeight depending on whether the last line
-        // is empty. Make it non-empty to avoid this issue.
-        inputShallow.value += " ";
-      }
+        const inputShallow = shadowRef.current!;
+        inputShallow.style.width = computedStyle.width;
+        inputShallow.value = input.value || other.placeholder || "x";
+        if (inputShallow.value.slice(-1) === "\n") {
+          // Certain fonts which overflow the line height will cause the textarea
+          // to report a different scrollHeight depending on whether the last line
+          // is empty. Make it non-empty to avoid this issue.
+          inputShallow.value += " ";
+        }
 
-      const boxSizing = computedStyle.boxSizing;
-      const padding =
-        getStyleValue(computedStyle.paddingBottom) +
-        getStyleValue(computedStyle.paddingTop);
-      const border =
-        getStyleValue(computedStyle.borderBottomWidth) +
-        getStyleValue(computedStyle.borderTopWidth);
+        const boxSizing = computedStyle.boxSizing;
+        const padding =
+          getStyleValue(computedStyle.paddingBottom) +
+          getStyleValue(computedStyle.paddingTop);
+        const border =
+          getStyleValue(computedStyle.borderBottomWidth) +
+          getStyleValue(computedStyle.borderTopWidth);
 
-      // The height of the inner content
-      const innerHeight = inputShallow.scrollHeight - padding;
+        // The height of the inner content
+        const innerHeight = inputShallow.scrollHeight - padding;
 
-      // Measure height of a textarea with a single row
-      inputShallow.value = "x";
-      const singleRowHeight = inputShallow.scrollHeight - padding;
+        // Measure height of a textarea with a single row
+        inputShallow.value = "x";
+        const singleRowHeight = inputShallow.scrollHeight - padding;
 
-      // The height of the outer content
-      let outerHeight = innerHeight;
+        // The height of the outer content
+        let outerHeight = innerHeight;
 
-      if (minRows) {
-        outerHeight = Math.max(Number(minRows) * singleRowHeight, outerHeight);
-      }
-      if (maxRows) {
-        outerHeight = Math.min(Number(maxRows) * singleRowHeight, outerHeight);
-      }
-      outerHeight = Math.max(outerHeight, singleRowHeight);
+        if (minRows) {
+          outerHeight = Math.max(
+            Number(minRows) * singleRowHeight,
+            outerHeight,
+          );
+        }
+        if (maxRows) {
+          outerHeight = Math.min(
+            Number(maxRows) * singleRowHeight,
+            outerHeight,
+          );
+        }
+        outerHeight = Math.max(outerHeight, singleRowHeight);
 
-      // Take the box sizing into account for applying this value as a style.
-      const outerHeightStyle =
-        outerHeight + (boxSizing === "border-box" ? padding + border : 0);
-      const overflow = Math.abs(outerHeight - innerHeight) <= 1;
+        // Take the box sizing into account for applying this value as a style.
+        const outerHeightStyle =
+          outerHeight + (boxSizing === "border-box" ? padding + border : 0);
+        const overflow = Math.abs(outerHeight - innerHeight) <= 1;
 
-      return { outerHeightStyle, overflow };
-    }, [maxRows, minRows, other.placeholder]);
+        return { outerHeightStyle, overflow };
+      },
+      [maxRows, minRows, other.placeholder],
+    );
 
     const syncHeight = () => {
-      const newState = getUpdatedState();
+      const input = inputRef.current;
+      if (!input) {
+        return;
+      }
+      const newState = getUpdatedState(input);
       if (isEmpty(newState)) {
         return;
       }
@@ -143,7 +155,13 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
 
     useClientLayoutEffect(() => {
       const syncHeightWithFlushSync = () => {
-        const newState = getUpdatedState();
+        const inputElement = inputRef.current;
+
+        if (!inputElement) {
+          return;
+        }
+
+        const newState = getUpdatedState(inputElement);
         if (isEmpty(newState)) {
           return;
         }
