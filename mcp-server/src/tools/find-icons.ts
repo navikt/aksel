@@ -84,9 +84,7 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
       });
     }
 
-    return JSON.stringify({
-      ...summary,
-    });
+    return JSON.stringify(summary);
   },
 };
 
