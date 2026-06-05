@@ -55,8 +55,8 @@ export const EndringsloggArtikkel = defineType({
       initialValue: false,
       hidden: true,
       deprecated: {
-        reason: "Endringslogger skal ikke lengre kunne være fremhevet.",
-      },
+        reason: "Endringslogger skal ikke lenger kunne være fremhevet.",
+      }
     }),
     defineField({
       title: "Fremhevet herobilde",
