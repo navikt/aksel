@@ -1,4 +1,4 @@
-import { Box, VStack } from "@navikt/ds-react";
+import { BodyLong, Heading, List, VStack } from "@navikt/ds-react";
 import { DataGrid } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 import { generateDataGridDemo } from "../../../components/website-modules/examples/__parts/DataGridDemoData";
@@ -12,7 +12,21 @@ const Example = () => {
         <DataGrid.Table<(typeof data)[0]>
           detailsPanel={{
             getContent: (row) => (
-              <Box padding="space-24">{`Id: ${row.caseId}`}</Box>
+              <VStack padding="space-24" gap="space-6">
+                <Heading size="small" level="2">
+                  Detaljer for sak {row.caseId}
+                </Heading>
+                <List>
+                  <List.Item>Sakstype: {row.caseType}</List.Item>
+                  <List.Item>Status: {row.status}</List.Item>
+                </List>
+                <BodyLong>
+                  Her kan du legge til mer informasjon om saken, for eksempel en
+                  beskrivelse, kontaktinformasjon, eller andre relevante data.
+                  Detaljpanelet er fleksibelt og kan inneholde hvilken som helst
+                  React-komponent, så du kan tilpasse det etter behov.
+                </BodyLong>
+              </VStack>
             ),
           }}
         />
