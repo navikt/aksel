@@ -6,13 +6,16 @@ import { DocumentActionComponent, useDocumentOperation } from "sanity";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
+  Box,
   Button,
+  Checkbox,
   HGrid,
   HStack,
   Heading,
   List,
   VStack,
 } from "@navikt/ds-react";
+import { ListItem } from "@navikt/ds-react/List";
 
 type Steps = "1" | "2";
 
@@ -33,7 +36,11 @@ export function setLastVerified(
       setCurrentStep("1");
     };
 
-    const publishDocument = (withNewVerify: boolean = false) => {
+    const publishDocument = ({
+      withNewVerify = false,
+      createChangeLog = false,
+    }: { withNewVerify?: boolean; createChangeLog?: boolean } = {}) => {
+      console.info(createChangeLog);
       closeDialog();
       if (withNewVerify) {
         patch.execute([
@@ -52,7 +59,7 @@ export function setLastVerified(
         setCurrentStep("2");
       } else {
         /* Sanity functions handles initial lastVerified timestamp creation */
-        publishDocument(false);
+        publishDocument({ withNewVerify: false });
       }
     };
 
@@ -140,22 +147,35 @@ function StepOne(props: StepOneProps) {
 }
 
 type StepTwoProps = {
-  onPublish: (withNewVerify: boolean) => void;
+  onPublish: (options?: {
+    withNewVerify?: boolean;
+    createChangeLog?: boolean;
+  }) => void;
   lastVerified?: string;
 };
 
 function StepTwo(props: StepTwoProps) {
   const { onPublish, lastVerified } = props;
+  const [formState, setFormState] = useState({
+    updateDate: true,
+    newChangeLog: true,
+  });
 
   return (
     <div>
-      <VStack gap="space-8">
+      <VStack gap="space-16">
         <BodyLong>
-          Hvis innholdet fortsatt er relevant og oppdatert, kan du velge å
-          publisere med oppdatert godkjenningsdato. Hvis du derimot mener at
-          innholdet trenger en gjennomgang, kan du publisere uten å oppdatere
-          godkjenningsdatoen.
+          Dersom artikkelen inneholder betydelige endringer, bør du vurdere om
+          disse skal beskrives i endringsloggen. Det gjelder blant annet:
         </BodyLong>
+        <List>
+          <ListItem>
+            endringer i praksis / komponent som brukerne bør informeres om
+          </ListItem>
+          <ListItem>
+            endringer som er nyttige å loggføre for vår egen oversikt
+          </ListItem>
+        </List>
         {lastVerified && (
           <BodyLong>
             Nåværende godkjenningsdato:{" "}
@@ -165,12 +185,54 @@ function StepTwo(props: StepTwoProps) {
           </BodyLong>
         )}
       </VStack>
-      <HGrid gap="space-8" marginBlock="space-16 space-0">
-        <Button variant="secondary" onClick={() => onPublish(false)}>
-          Bruk eksisterende godkjenningsdato
-        </Button>
-        <Button onClick={() => onPublish(true)}>
-          Oppdater godkjenningsdato
+      <VStack marginBlock="space-16">
+        <Checkbox
+          value="update-date"
+          checked={formState.updateDate}
+          onChange={() => {
+            if (formState.updateDate) {
+              setFormState({
+                updateDate: false,
+                newChangeLog: false,
+              });
+            } else {
+              setFormState({
+                updateDate: true,
+                newChangeLog: true,
+              });
+            }
+          }}
+        >
+          Oppdatert godkjenningsdato
+        </Checkbox>
+        <Box marginInline="space-24 space-0">
+          <Checkbox
+            value="new-change-log"
+            checked={formState.newChangeLog}
+            disabled={!formState.updateDate}
+            onChange={() =>
+              setFormState({
+                ...formState,
+                newChangeLog: !formState.newChangeLog,
+              })
+            }
+          >
+            Lag nytt endringsinnlegg ved publisering
+          </Checkbox>
+        </Box>
+      </VStack>
+      <HGrid marginBlock="space-16 space-0">
+        <Button
+          onClick={() =>
+            onPublish({
+              withNewVerify: formState.updateDate,
+              createChangeLog: formState.updateDate
+                ? formState.newChangeLog
+                : false,
+            })
+          }
+        >
+          Publiser
         </Button>
       </HGrid>
     </div>
