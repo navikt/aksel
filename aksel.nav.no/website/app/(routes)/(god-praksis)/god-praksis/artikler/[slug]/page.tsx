@@ -1,4 +1,4 @@
-import { differenceInMonths } from "date-fns";
+import { differenceInMonths, isSameDay } from "date-fns";
 import { Metadata } from "next";
 import { PortableTextBlock, stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
@@ -93,6 +93,17 @@ export default async function Page(props: Props) {
   const undertema = getValidRenderArray(pageData.undertema);
   const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
 
+  function hasUpdated() {
+    if (!pageData?.updateInfo?.lastVerified || !pageData?.publishedAt) {
+      return false;
+    }
+
+    return !isSameDay(
+      new Date(pageData.updateInfo.lastVerified),
+      new Date(pageData.publishedAt),
+    );
+  }
+
   return (
     <article className={styles.pageArticle}>
       <div>
@@ -115,7 +126,7 @@ export default async function Page(props: Props) {
           </BodyLong>
         )}
         <BodyShort size="small" as="time" textColor="subtle">
-          {`Oppdatert ${formatDateString(verifiedDate)}`}
+          {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {undertema?.map(({ tema, title }) => {
