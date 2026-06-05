@@ -147,6 +147,7 @@ module.exports = defineConfig([
     files: ["aksel.nav.no/website/pages/eksempler/**"],
     rules: {
       "jsx-a11y/anchor-is-valid": "off",
+      "@next/next/no-img-element": "off",
     },
   },
   {

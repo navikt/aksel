@@ -39,5 +39,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "LinkCard er bygd for å være komposerbar, samtidig som den tilbyr en tilgjengelig implementasjon av komplekse kort.",
+  desc: "LinkCard er bygget for å kunne settes sammen på ulike måter.",
 };
