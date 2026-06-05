@@ -1,8 +1,9 @@
 "use client";
 
 import { format } from "date-fns";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { DocumentActionComponent, useDocumentOperation } from "sanity";
+import { useIntentLink } from "sanity/router";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -38,9 +39,7 @@ export function setLastVerified(
 
     const publishDocument = ({
       withNewVerify = false,
-      createChangeLog = false,
-    }: { withNewVerify?: boolean; createChangeLog?: boolean } = {}) => {
-      console.info(createChangeLog);
+    }: { withNewVerify?: boolean } = {}) => {
       closeDialog();
       if (withNewVerify) {
         patch.execute([
@@ -93,6 +92,7 @@ export function setLastVerified(
                 (props.draft as any)?.updateInfo?.lastVerified ??
                 (props.published as any)?.updateInfo?.lastVerified
               }
+              id={props.id}
             />
           ),
       },
@@ -147,11 +147,9 @@ function StepOne(props: StepOneProps) {
 }
 
 type StepTwoProps = {
-  onPublish: (options?: {
-    withNewVerify?: boolean;
-    createChangeLog?: boolean;
-  }) => void;
+  onPublish: (options?: { withNewVerify?: boolean }) => void;
   lastVerified?: string;
+  id: string;
 };
 
 function StepTwo(props: StepTwoProps) {
@@ -160,6 +158,8 @@ function StepTwo(props: StepTwoProps) {
     updateDate: true,
     newChangeLog: true,
   });
+
+  const publishWithChangelog = formState.updateDate && formState.newChangeLog;
 
   return (
     <div>
@@ -222,19 +222,68 @@ function StepTwo(props: StepTwoProps) {
         </Box>
       </VStack>
       <HGrid marginBlock="space-16 space-0">
-        <Button
-          onClick={() =>
-            onPublish({
-              withNewVerify: formState.updateDate,
-              createChangeLog: formState.updateDate
-                ? formState.newChangeLog
-                : false,
-            })
-          }
-        >
-          Publiser
-        </Button>
+        {publishWithChangelog ? (
+          <PublishAndCreateChangelog
+            id={props.id}
+            onClick={() =>
+              onPublish({
+                withNewVerify: formState.updateDate,
+              })
+            }
+          />
+        ) : (
+          <Button
+            onClick={() =>
+              onPublish({
+                withNewVerify: formState.updateDate,
+              })
+            }
+          >
+            Publiser
+          </Button>
+        )}
       </HGrid>
     </div>
+  );
+}
+
+/**
+ * Note that we need to open in new tab so that original document finishes publishing.
+ */
+function PublishAndCreateChangelog({
+  id,
+  onClick: onClickProp,
+}: {
+  id: string;
+  onClick?: () => void;
+}) {
+  const cleanedId = useMemo(() => {
+    const split = id.split(".");
+    return split[split.length - 1];
+  }, [id]);
+
+  const { href, onClick } = useIntentLink({
+    intent: "create",
+    params: [
+      {
+        type: "gp_endringslogg_artikkel",
+        template: "gp.changelog.with.reference",
+      },
+      { id: cleanedId },
+    ],
+    target: "_blank",
+    onClick: onClickProp,
+  });
+
+  return (
+    <Button
+      as="a"
+      href={href}
+      onClick={onClick}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Publiser
+    </Button>
   );
 }
