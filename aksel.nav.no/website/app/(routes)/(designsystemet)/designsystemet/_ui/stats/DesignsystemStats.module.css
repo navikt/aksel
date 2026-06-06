@@ -1,64 +1,51 @@
 .statsCard {
-  position: relative;
-  background-color: var(--ax-bg-soft);
-  overflow: hidden;
-  border: 1px solid var(--ax-border-default);
+  background-color: var(--ax-bg-raised);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-radius-12);
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-24, 24px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
+}
 
-  &::after,
-  &::before {
-    content: " " / "";
-    display: block;
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-  }
+.statContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-16, 16px);
+  margin: 0;
+}
 
-  &::before {
-    background-color: var(--ax-bg-soft);
-    z-index: 2;
-  }
+.trendRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8, 8px);
+}
 
-  &::after {
-    background-color: var(--ax-border-subtle);
-  }
+.trendBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  border-radius: var(--ax-radius-full);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1;
+}
 
-  &:nth-of-type(n) {
-    &::after {
-      clip-path: polygon(0% 28%, 15% 0%, 60% 0%, 85% 25%, 120% 25%, 77% 87%, 83% 100%, 0% 100%);
-    }
+.trendBadge svg {
+  font-size: 1rem;
+}
 
-    &::before {
-      clip-path: polygon(0% 31%, 17% -1%, 57.5% -1%, 84.5% 27%, 117% 27%, 75.5% 87%, 81.5% 100%, 0% 100%);
-    }
-  }
+.trendPositive {
+  background-color: #d1fae5; /* green-100 */
+  color: #065f46; /* green-800 */
+}
 
-  &:nth-of-type(2n) {
-    &::after {
-      clip-path: polygon(0% 19%, 37% 19%, 50% 0%, 100% 0%, 100% 43%, 92% 30.5%, 46% 102.5%, 2% 98%);
-    }
+.trendNegative {
+  background-color: #fee2e2; /* red-100 */
+  color: #991b1b; /* red-800 */
+}
 
-    &::before {
-      clip-path: polygon(0% 21%, 37.5% 21%, 53% -2%, 100% -2%, 100% 41%, 92% 28%, 46% 100%, 0% 100%);
-    }
-  }
-
-  &:nth-of-type(3n) {
-    &::after {
-      clip-path: polygon(5% 40%, 35% 0%, 100% 0%, 100% 90%, 85% 90%, 80% 100%, 45% 100%, 0% 35%, 0 33%);
-    }
-
-    &::before {
-      clip-path: polygon(6% 41%, 37% 0%, 100% 0%, 100% 88%, 84.5% 88%, 78.5% 100%, 46.5% 100%, 0% 33%, 0 31%);
-    }
-  }
-
-  & > * {
-    position: relative;
-    z-index: 2;
-  }
+.trendText {
+  white-space: nowrap;
 }
