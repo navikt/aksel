@@ -11,6 +11,8 @@ import {
   type datesQueryT,
   majorVersionQuery,
   type majorVersionQueryT,
+  templatesUsageQuery,
+  type templatesUsageQueryT,
   uniqueRepoQuery,
   type uniqueRepoQueryT,
 } from "./update-stats.query";
@@ -36,6 +38,11 @@ async function updateStats() {
     getComponentUsage(newDate),
   ]);
 
+  const [oldTemplateUsage, newTemplateUsage] = await Promise.all([
+    getTemplateUsage(oldDate),
+    getTemplateUsage(newDate),
+  ]);
+
   const [oldUniqueRepo, newUniqueRepo] = await Promise.all([
     getUniqueRepo(oldDate),
     getUniqueRepo(newDate),
@@ -52,20 +59,26 @@ async function updateStats() {
   );
 
   const transactionClient = noCdnClient(token).transaction();
-  transactionClient.createOrReplace({
+
+  const document: Defined<VersionDocument> = {
     _id: "designsystem_statistics",
     _type: "designsystemStatistics",
     componentUsage: {
       old: oldComponentUsage,
       new: newComponentUsage,
-    } satisfies DesignsystemStatistics["componentUsage"],
+    },
+    templateUsage: {
+      old: oldTemplateUsage,
+      new: newTemplateUsage,
+    },
     uniqueRepo: {
       old: oldUniqueRepo,
       new: newUniqueRepo,
-    } satisfies DesignsystemStatistics["uniqueRepo"],
-    versionStatistics:
-      versionStatistics satisfies DesignsystemStatistics["versionStatistics"],
-  });
+    },
+    versionStatistics,
+  };
+
+  transactionClient.createOrReplace(document);
 
   await transactionClient
     .commit()
@@ -75,13 +88,26 @@ async function updateStats() {
     });
 }
 
+type Defined<T> = {
+  [K in keyof T]-?: NonNullable<T[K]>;
+};
+
+type VersionDocument = {
+  _id: string;
+  _type: string;
+  componentUsage: DesignsystemStatistics["componentUsage"];
+  templateUsage: DesignsystemStatistics["templateUsage"];
+  uniqueRepo: DesignsystemStatistics["uniqueRepo"];
+  versionStatistics: DesignsystemStatistics["versionStatistics"];
+};
+
 function getVersionStatistics(
   oldData: majorVersionQueryT,
   newData: majorVersionQueryT,
 ): {
   currentMajor: number;
-  latestMajor: string;
-  latestMajorChange: string;
+  latestMajorPercentage: string;
+  latestMajorChangeCount: number;
 } {
   const currentMajor = major(pkg.version);
   const oldCurrentMajorData = oldData.find((d) => d.major === currentMajor);
@@ -90,8 +116,8 @@ function getVersionStatistics(
   if (!newCurrentMajorData) {
     return {
       currentMajor,
-      latestMajor: "0%",
-      latestMajorChange: "0",
+      latestMajorPercentage: "0",
+      latestMajorChangeCount: 0,
     };
   }
 
@@ -105,8 +131,8 @@ function getVersionStatistics(
   if (totalNew === 0) {
     return {
       currentMajor,
-      latestMajor: "0%",
-      latestMajorChange: "0",
+      latestMajorPercentage: "0",
+      latestMajorChangeCount: 0,
     };
   }
 
@@ -114,9 +140,8 @@ function getVersionStatistics(
 
   return {
     currentMajor,
-    latestMajor: `${totalNewPercentage.toFixed(0)}%`,
-    latestMajorChange:
-      updatedProjects > 0 ? `+${updatedProjects}` : `-${updatedProjects}`,
+    latestMajorPercentage: `${totalNewPercentage.toFixed(0)}`,
+    latestMajorChangeCount: updatedProjects,
   };
 }
 
@@ -149,6 +174,17 @@ async function getComponentUsage(targetDate: string) {
   });
 
   const total = (data as componentUsageQueryT)[0]?.total_components_used;
+  return typeof total === "number" ? total : 0;
+}
+
+async function getTemplateUsage(targetDate: string) {
+  const [data] = await bigQueryClient.query({
+    query: templatesUsageQuery,
+    params: { target_date: targetDate },
+    labels,
+  });
+
+  const total = (data as templatesUsageQueryT)[0]?.total_template_instances;
   return typeof total === "number" ? total : 0;
 }
 

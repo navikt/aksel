@@ -26,6 +26,26 @@ export const DesignsystemStatistics = defineType({
       ],
     }),
     defineField({
+      name: "templateUsage",
+      title: "Bruk av maler",
+      type: "object",
+      validation: (Rule) => Rule.required(),
+      fields: [
+        defineField({
+          name: "old",
+          title: "Gammel",
+          type: "number",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "new",
+          title: "Ny",
+          type: "number",
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+    }),
+    defineField({
       name: "uniqueRepo",
       title: "Unike repoer",
       type: "object",
@@ -58,15 +78,15 @@ export const DesignsystemStatistics = defineType({
           validation: (Rule) => Rule.required(),
         }),
         defineField({
-          name: "latestMajor",
-          title: "Siste major",
+          name: "latestMajorPercentage",
+          title: "Siste major prosent",
           type: "string",
           validation: (Rule) => Rule.required(),
         }),
         defineField({
-          name: "latestMajorChange",
+          name: "latestMajorChangeCount",
           title: "Endring i siste major",
-          type: "string",
+          type: "number",
           validation: (Rule) => Rule.required(),
         }),
       ],

@@ -1,3 +1,4 @@
+import { TrendDownIcon, TrendUpIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   BodyShort,
@@ -15,17 +16,19 @@ async function DesignsystemStats() {
     query: DESIGNSYSTEM_STATS_QUERY,
   });
 
-  const versionTrend = data?.versionStatistics?.latestMajorChange;
-
   if (
     !data?.componentUsage?.new ||
     !data?.uniqueRepo?.new ||
-    !data?.versionStatistics?.latestMajor ||
+    !data?.versionStatistics?.latestMajorPercentage ||
     !data?.uniqueRepo?.old ||
-    !data?.componentUsage?.old
+    !data?.componentUsage?.old ||
+    !data?.templateUsage?.new ||
+    !data?.templateUsage?.old
   ) {
     return null;
   }
+
+  const versionTrend = data?.versionStatistics?.latestMajorPercentage;
 
   const componentUsageTrend = formatNumber(
     data?.componentUsage?.new - data?.componentUsage?.old,
@@ -42,7 +45,7 @@ async function DesignsystemStats() {
           siste 3 månedene.
         </BodyLong>
       </VStack>
-      <HGrid gap="space-24" width="100%" columns={{ md: 3 }}>
+      <HGrid gap="space-24" width="100%" columns={{ xs: 1, sm: 2, xl: 4 }}>
         <StatsCard
           label="Komponenter i prod"
           stat={formatNumber(data.componentUsage.new).number}
@@ -51,9 +54,15 @@ async function DesignsystemStats() {
         />
         <StatsCard
           label={`Oppdatert til v${data?.versionStatistics?.currentMajor}`}
-          stat={data.versionStatistics.latestMajor.replace("%", "")}
-          trend={`${versionTrend?.replace("+", "").replace("-", "")} løsninger`}
+          stat={data.versionStatistics.latestMajorPercentage}
+          trend={`${versionTrend} løsninger`}
           modifier="%"
+        />
+        <StatsCard
+          label="Maler i bruk"
+          stat={data.templateUsage.new}
+          trend={`${formatNumber(data.templateUsage.new - data.templateUsage.old).number} maler`}
+          modifier={formatNumber(data.templateUsage.new).modifier}
         />
         <StatsCard
           label="Unike repo"
@@ -84,24 +93,29 @@ function StatsCard({
       <BodyShort as="dt" textColor="subtle" size="small">
         {label}
       </BodyShort>
-      <dd className={styles.statContent}>
-        <div>
-          <HStack align="baseline" gap="space-2">
-            <Heading size="xlarge" as="span">
-              {stat}
-            </Heading>
-            {modifier && (
-              <Heading size="medium" data-color="neutral" as="span">
-                {modifier}
-              </Heading>
+      <HStack align="baseline" gap="space-2" as="dd">
+        <Heading size="xlarge" as="span">
+          {stat}
+        </Heading>
+        {modifier && (
+          <Heading size="medium" data-color="neutral" as="span">
+            {modifier}
+          </Heading>
+        )}
+      </HStack>
+      {trend && (
+        <BodyShort size="small" data-color="success" textColor="subtle" as="dd">
+          <BodyShort visuallyHidden>Endring over tid: </BodyShort>
+          <HStack gap="space-2" align="center" as="span">
+            {isPositive ? trend : trend.replace("-", "")}
+            {isPositive ? (
+              <TrendUpIcon aria-hidden fontSize="1.5rem" />
+            ) : (
+              <TrendDownIcon aria-hidden fontSize="1.5rem" />
             )}
           </HStack>
-          <BodyShort size="small" data-color="success" textColor="subtle">
-            {isPositive ? "▲" : "▼"}
-            {trend && (isPositive ? trend : trend.replace("-", ""))}
-          </BodyShort>
-        </div>
-      </dd>
+        </BodyShort>
+      )}
     </dl>
   );
 }

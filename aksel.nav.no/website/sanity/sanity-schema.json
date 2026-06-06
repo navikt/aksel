@@ -6946,6 +6946,29 @@
         },
         "optional": true
       },
+      "templateUsage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "old": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "number"
+              },
+              "optional": true
+            },
+            "new": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "number"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
       "uniqueRepo": {
         "type": "objectAttribute",
         "value": {
@@ -6981,17 +7004,17 @@
               },
               "optional": true
             },
-            "latestMajor": {
+            "latestMajorPercentage": {
               "type": "objectAttribute",
               "value": {
                 "type": "string"
               },
               "optional": true
             },
-            "latestMajorChange": {
+            "latestMajorChangeCount": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
+                "type": "number"
               },
               "optional": true
             }

@@ -1227,14 +1227,18 @@ export type DesignsystemStatistics = {
     old?: number;
     new?: number;
   };
+  templateUsage?: {
+    old?: number;
+    new?: number;
+  };
   uniqueRepo?: {
     old?: number;
     new?: number;
   };
   versionStatistics?: {
     currentMajor?: number;
-    latestMajor?: string;
-    latestMajorChange?: string;
+    latestMajorPercentage?: string;
+    latestMajorChangeCount?: number;
   };
 };
 
@@ -12206,14 +12210,18 @@ export type DESIGNSYSTEM_STATS_QUERY_RESULT = {
     old?: number;
     new?: number;
   };
+  templateUsage?: {
+    old?: number;
+    new?: number;
+  };
   uniqueRepo?: {
     old?: number;
     new?: number;
   };
   versionStatistics?: {
     currentMajor?: number;
-    latestMajor?: string;
-    latestMajorChange?: string;
+    latestMajorPercentage?: string;
+    latestMajorChangeCount?: number;
   };
 } | null;
 

@@ -25,26 +25,37 @@ AND DATE(r.data_scraped_at) = @target_date;`;
 
 type uniqueRepoQueryT = { total_repositories: number }[];
 
-const majorVersionQuery = `SELECT
-  major,
-  COUNT(major) AS count
-FROM
-  designsystem-prod-d324.aksel_kr_2023_Q4.dependencies
-WHERE
-  package_name = "@navikt/ds-react" AND DATE(data_scraped_at) = @target_date
-GROUP BY
-  major,
-  data_scraped_at
-ORDER BY
-  data_scraped_at,
-  major`;
+const majorVersionQuery = `SELECT major, COUNT(major) AS count
+FROM designsystem-prod-d324.aksel_kr_2023_Q4.dependencies
+WHERE package_name = "@navikt/ds-react" AND DATE(data_scraped_at) = @target_date
+GROUP BY major, data_scraped_at
+ORDER BY data_scraped_at, major`;
 
 type majorVersionQueryT = { major: number; count: number }[];
 
-export { datesQuery, componentUsageQuery, uniqueRepoQuery, majorVersionQuery };
+const templatesUsageQuery = `SELECT
+DATE(tu.data_scraped_at) AS date,
+COUNT(*) AS total_template_instances
+FROM designsystem-prod-d324.aksel_kr_2023_Q4.template_usage AS tu
+WHERE DATE(tu.data_scraped_at) = @target_date
+GROUP BY date;`;
+
+type templatesUsageQueryT = {
+  date: string;
+  total_template_instances: number;
+}[];
+
+export {
+  datesQuery,
+  componentUsageQuery,
+  uniqueRepoQuery,
+  majorVersionQuery,
+  templatesUsageQuery,
+};
 export type {
   datesQueryT,
   componentUsageQueryT,
   uniqueRepoQueryT,
   majorVersionQueryT,
+  templatesUsageQueryT,
 };
