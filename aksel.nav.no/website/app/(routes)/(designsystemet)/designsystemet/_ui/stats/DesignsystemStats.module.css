@@ -1,8 +1,13 @@
-.akselByNumbers {
+.statsCard {
   position: relative;
-  background-color: var(--ax-bg-moderate);
-  border-color: var(--ax-border-subtle);
+  background-color: var(--ax-bg-soft);
   overflow: hidden;
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-radius-12);
+  padding: var(--ax-space-16) var(--ax-space-20);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   &::after,
   &::before {
@@ -14,12 +19,12 @@
   }
 
   &::before {
-    background-color: var(--ax-bg-moderate);
+    background-color: var(--ax-bg-soft);
     z-index: 2;
   }
 
   &::after {
-    background-color: var(--ax-bg-moderate-pressed);
+    background-color: var(--ax-border-subtle);
   }
 
   &:nth-of-type(n) {
@@ -56,11 +61,4 @@
     position: relative;
     z-index: 2;
   }
-}
-
-.akselByNumbers__number {
-  font-size: 56px;
-  display: flex;
-  gap: var(--ax-space-4);
-  align-items: baseline;
 }

@@ -9,16 +9,19 @@ export const DesignsystemStatistics = defineType({
       name: "componentUsage",
       title: "Komponentbruk",
       type: "object",
+      validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: "old",
           title: "Gammel",
           type: "number",
+          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: "new",
           title: "Ny",
           type: "number",
+          validation: (Rule) => Rule.required(),
         }),
       ],
     }),
@@ -26,16 +29,19 @@ export const DesignsystemStatistics = defineType({
       name: "uniqueRepo",
       title: "Unike repoer",
       type: "object",
+      validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: "old",
           title: "Gammel",
           type: "number",
+          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: "new",
           title: "Ny",
           type: "number",
+          validation: (Rule) => Rule.required(),
         }),
       ],
     }),
@@ -43,21 +49,25 @@ export const DesignsystemStatistics = defineType({
       name: "versionStatistics",
       title: "Versjonsstatistikk",
       type: "object",
+      validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: "currentMajor",
           title: "Nåværende major",
           type: "number",
+          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: "latestMajor",
           title: "Siste major",
           type: "string",
+          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: "latestMajorChange",
           title: "Endring i siste major",
           type: "string",
+          validation: (Rule) => Rule.required(),
         }),
       ],
     }),

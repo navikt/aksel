@@ -13,7 +13,6 @@ const DS_FRONT_PAGE_QUERY = defineQuery(`*[_type == "aksel_ds_forside"][0] {
     ds_getting_started[]{ description, icon, link, title },
     ds_layers_overview,
     ds_changelog { title, ingress },
-    ds_aksel_in_numbers { ingress, statistics[]{number, title, unit}, title},
     ds_support[]{description, link, title},
     seo { image, meta }
   }`);
@@ -414,6 +413,10 @@ const SITEMAP_ARTICLES_BY_TYPE_QUERY = defineQuery(`
   }
   `);
 
+const DESIGNSYSTEM_STATS_QUERY = defineQuery(
+  `*[_id == "designsystem_statistics" && _type == "designsystemStatistics"][0]`,
+);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   BLOGG_BY_SLUG_QUERY,
@@ -455,6 +458,7 @@ export {
   SLUG_BY_TYPE_QUERY,
   TOC_BY_SLUG_QUERY,
   DS_PROMO_QUERY,
+  DESIGNSYSTEM_STATS_QUERY,
 };
 
 /* MARKDOWN QUERIES */

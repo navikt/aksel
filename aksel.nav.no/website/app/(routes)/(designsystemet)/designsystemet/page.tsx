@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
+import { DesignsystemStats } from "@/app/(routes)/(designsystemet)/designsystemet/_ui/stats/DesignsystemStats";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
-import AkselByNumbers from "./_ui/aksel-by-numbers/AkselByNumbers";
 import { ChangeLogNews } from "./_ui/change-log/ChangeLogNews";
 import { DSLayersOverview } from "./_ui/ds-layers-overview/DSLayersOverview";
 import { GettingStartedSection } from "./_ui/getting-started/GettingStartedSection";
@@ -64,11 +64,7 @@ const DesignsystemetPage = async () => {
             title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
             description={dsFrontPageData.ds_changelog?.ingress}
           />
-          <AkselByNumbers
-            title={dsFrontPageData.ds_aksel_in_numbers?.title}
-            description={dsFrontPageData.ds_aksel_in_numbers?.ingress}
-            entries={dsFrontPageData.ds_aksel_in_numbers?.statistics}
-          />
+          <DesignsystemStats />
           <SupportSection
             entries={(dsFrontPageData.ds_support || []).map(
               ({ title, description, link }) => ({

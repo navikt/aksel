@@ -114,7 +114,7 @@ function getVersionStatistics(
 
   return {
     currentMajor,
-    latestMajor: `${totalNewPercentage.toFixed(2)}%`,
+    latestMajor: `${totalNewPercentage.toFixed(0)}%`,
     latestMajorChange:
       updatedProjects > 0 ? `+${updatedProjects}` : `-${updatedProjects}`,
   };
