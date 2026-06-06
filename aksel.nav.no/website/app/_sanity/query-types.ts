@@ -1217,6 +1217,27 @@ export type Kode_eksempler_fil = {
   };
 };
 
+export type DesignsystemStatistics = {
+  _id: string;
+  _type: "designsystemStatistics";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  componentUsage?: {
+    old?: number;
+    new?: number;
+  };
+  uniqueRepo?: {
+    old?: number;
+    new?: number;
+  };
+  versionStatistics?: {
+    currentMajor?: number;
+    latestMajor?: string;
+    latestMajorChange?: string;
+  };
+};
+
 export type Cookie_tracker = {
   _id: string;
   _type: "cookie_tracker";
@@ -1945,6 +1966,7 @@ export type AllSanitySchemaTypes =
   | Komponenter_landingsside
   | Token_kategori
   | Kode_eksempler_fil
+  | DesignsystemStatistics
   | Cookie_tracker
   | Article_views
   | Publication_flow

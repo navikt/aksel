@@ -2,6 +2,8 @@ import { BigQuery } from "@google-cloud/bigquery";
 import fs from "node:fs";
 import { major } from "semver";
 import pkg from "@navikt/ds-react/package.json";
+import type { DesignsystemStatistics } from "../../app/_sanity/query-types";
+import { noCdnClient } from "../../sanity/interface/client.server";
 import {
   componentUsageQuery,
   type componentUsageQueryT,
@@ -13,12 +15,20 @@ import {
   type uniqueRepoQueryT,
 } from "./update-stats.query";
 
+/* DesignsystemStatistics */
 const labels = { script: "update-stats", source: "aksel-stats-updater" };
 type BigQueryCredentials = { project_id: string } & Record<string, unknown>;
 
 const bigQueryClient = createBigQueryClient();
 
 async function updateStats() {
+  const token = process.env.SANITY_WRITE;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_WRITE' when updating designsystem statistics",
+    );
+  }
+
   const { oldDate, newDate } = await getTimeframe();
 
   const [oldComponentUsage, newComponentUsage] = await Promise.all([
@@ -41,13 +51,28 @@ async function updateStats() {
     newMajorVersions,
   );
 
-  console.info({
-    oldComponentUsage,
-    newComponentUsage,
-    oldUniqueRepo,
-    newUniqueRepo,
-    versionStatistics,
+  const transactionClient = noCdnClient(token).transaction();
+  transactionClient.createOrReplace({
+    _id: "designsystem_statistics",
+    _type: "designsystemStatistics",
+    componentUsage: {
+      old: oldComponentUsage,
+      new: newComponentUsage,
+    } satisfies DesignsystemStatistics["componentUsage"],
+    uniqueRepo: {
+      old: oldUniqueRepo,
+      new: newUniqueRepo,
+    } satisfies DesignsystemStatistics["uniqueRepo"],
+    versionStatistics:
+      versionStatistics satisfies DesignsystemStatistics["versionStatistics"],
   });
+
+  await transactionClient
+    .commit()
+    .then(() => console.info(`Successfully updated designsystem statistics`))
+    .catch((e) => {
+      throw new Error(e.message);
+    });
 }
 
 function getVersionStatistics(
