@@ -17,9 +17,7 @@ import {
   type uniqueRepoQueryT,
 } from "./update-stats.query";
 
-/* DesignsystemStatistics */
 const labels = { script: "update-stats", source: "aksel-stats-updater" };
-type BigQueryCredentials = { project_id: string } & Record<string, unknown>;
 
 const bigQueryClient = createBigQueryClient();
 
@@ -145,20 +143,20 @@ function getVersionStatistics(
   };
 }
 
-async function getMajorVersions(targetDate: string) {
+async function getMajorVersions(targetTimestamp: string) {
   const [data] = await bigQueryClient.query({
     query: majorVersionQuery,
-    params: { target_date: targetDate },
+    params: { target_timestamp: targetTimestamp },
     labels,
   });
 
   return data as majorVersionQueryT;
 }
 
-async function getUniqueRepo(targetDate: string) {
+async function getUniqueRepo(targetTimestamp: string) {
   const [data] = await bigQueryClient.query({
     query: uniqueRepoQuery,
-    params: { target_date: targetDate },
+    params: { target_timestamp: targetTimestamp },
     labels,
   });
 
@@ -166,10 +164,10 @@ async function getUniqueRepo(targetDate: string) {
   return typeof total === "number" ? total : 0;
 }
 
-async function getComponentUsage(targetDate: string) {
+async function getComponentUsage(targetTimestamp: string) {
   const [data] = await bigQueryClient.query({
     query: componentUsageQuery,
-    params: { target_date: targetDate },
+    params: { target_timestamp: targetTimestamp },
     labels,
   });
 
@@ -177,10 +175,10 @@ async function getComponentUsage(targetDate: string) {
   return typeof total === "number" ? total : 0;
 }
 
-async function getTemplateUsage(targetDate: string) {
+async function getTemplateUsage(targetTimestamp: string) {
   const [data] = await bigQueryClient.query({
     query: templatesUsageQuery,
-    params: { target_date: targetDate },
+    params: { target_timestamp: targetTimestamp },
     labels,
   });
 
@@ -200,8 +198,8 @@ async function getTimeframe() {
     throw new Error("Not enough data points to determine timeframe");
   }
 
-  const oldDate = rows[rows.length - 1]?.scrape_date?.value;
-  const newDate = rows[1]?.scrape_date?.value;
+  const oldDate = rows[rows.length - 1]?.scrape_timestamp?.value;
+  const newDate = rows[1]?.scrape_timestamp?.value;
 
   if (!oldDate || !newDate) {
     throw new Error("Invalid date data in BigQuery response");
@@ -214,7 +212,11 @@ async function getTimeframe() {
   };
 }
 
+type BigQueryCredentials = { project_id: string } & Record<string, unknown>;
+
 function createBigQueryClient() {
+  const GCP_DATASET = "aksel_kr_2023_Q4";
+
   let gcpCredentials: BigQueryCredentials;
 
   try {
@@ -238,7 +240,7 @@ function createBigQueryClient() {
   return new BigQuery({
     projectId: gcpCredentials.project_id,
     credentials: gcpCredentials,
-  });
+  }).dataset(GCP_DATASET);
 }
 
 void updateStats().catch((error) => {
