@@ -9,6 +9,7 @@ import {
 } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DESIGNSYSTEM_STATS_QUERY } from "@/app/_sanity/queries";
+import type { DESIGNSYSTEM_STATS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import styles from "./DesignsystemStats.module.css";
 
 async function DesignsystemStats() {
@@ -16,22 +17,14 @@ async function DesignsystemStats() {
     query: DESIGNSYSTEM_STATS_QUERY,
   });
 
-  if (
-    !data?.componentUsage?.new ||
-    !data?.uniqueRepo?.new ||
-    !data?.versionStatistics?.latestMajorPercentage ||
-    !data?.uniqueRepo?.old ||
-    !data?.componentUsage?.old ||
-    !data?.templateUsage?.new ||
-    !data?.templateUsage?.old
-  ) {
+  if (!hasRequiredStats(data)) {
     return null;
   }
 
-  const versionTrend = data?.versionStatistics?.latestMajorPercentage;
+  const versionTrend = data.versionStatistics.latestMajorChangeCount;
 
   const componentUsageTrend = formatNumber(
-    data?.componentUsage?.new - data?.componentUsage?.old,
+    data.componentUsage.new - data.componentUsage.old,
   );
 
   return (
@@ -53,7 +46,7 @@ async function DesignsystemStats() {
           modifier={formatNumber(data.componentUsage.new).modifier}
         />
         <StatsCard
-          label={`Oppdatert til v${data?.versionStatistics?.currentMajor}`}
+          label={`Oppdatert til v${data.versionStatistics.currentMajor}`}
           stat={data.versionStatistics.latestMajorPercentage}
           trend={`${versionTrend} løsninger`}
           modifier="%"
@@ -67,7 +60,7 @@ async function DesignsystemStats() {
         <StatsCard
           label="Unike repo"
           stat={data.uniqueRepo.new}
-          trend={`${formatNumber(data?.uniqueRepo?.new - data?.uniqueRepo?.old).number} repo`}
+          trend={`${formatNumber(data.uniqueRepo.new - data.uniqueRepo.old).number} repo`}
           modifier="+"
         />
       </HGrid>
@@ -104,7 +97,12 @@ function StatsCard({
         )}
       </HStack>
       {trend && (
-        <BodyShort size="small" data-color="success" textColor="subtle" as="dd">
+        <BodyShort
+          size="small"
+          data-color={isPositive ? "success" : "danger"}
+          textColor="subtle"
+          as="dd"
+        >
           <BodyShort visuallyHidden>Endring over tid: </BodyShort>
           <HStack gap="space-2" align="center" as="span">
             {isPositive ? trend : trend.replace("-", "")}
@@ -130,6 +128,42 @@ function formatNumber(num: number): {
     return { number: `${(num / 1_000).toFixed(1)}`, modifier: "K" };
   }
   return { number: num.toString(), modifier: "" };
+}
+
+type StatsData = NonNullable<Defined<DESIGNSYSTEM_STATS_QUERY_RESULT>>;
+
+type Defined<T> = {
+  [K in keyof T]-?: NonNullable<Defined<T[K]>>;
+};
+
+function hasRequiredStats(
+  data: DESIGNSYSTEM_STATS_QUERY_RESULT,
+): data is StatsData {
+  if (!data) {
+    return false;
+  }
+
+  const componentNew = data.componentUsage?.new;
+  const componentOld = data.componentUsage?.old;
+  const templateNew = data.templateUsage?.new;
+  const templateOld = data.templateUsage?.old;
+  const repoNew = data.uniqueRepo?.new;
+  const repoOld = data.uniqueRepo?.old;
+  const major = data.versionStatistics?.currentMajor;
+  const pct = data.versionStatistics?.latestMajorPercentage;
+  const change = data.versionStatistics?.latestMajorChangeCount;
+
+  return (
+    componentNew != null &&
+    componentOld != null &&
+    templateNew != null &&
+    templateOld != null &&
+    repoNew != null &&
+    repoOld != null &&
+    major != null &&
+    pct != null &&
+    change != null
+  );
 }
 
 export { DesignsystemStats };
