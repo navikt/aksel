@@ -10720,9 +10720,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel-mcp-server@workspace:mcp-server":
+"aksel-mcp@workspace:mcp-server":
   version: 0.0.0-use.local
-  resolution: "aksel-mcp-server@workspace:mcp-server"
+  resolution: "aksel-mcp@workspace:mcp-server"
   dependencies:
     "@modelcontextprotocol/inspector": "npm:^0.21"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
