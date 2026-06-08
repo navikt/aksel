@@ -1,4 +1,4 @@
-# aksel-mcp-server
+# aksel-mcp
 
 Model Context Protocol (MCP) server for Aksel design system.
 
@@ -54,16 +54,16 @@ It gives coding agents and assistants direct access to:
 ### Scripts
 
 ```bash
-yarn workspace aksel-mcp-server dev
-yarn workspace aksel-mcp-server build
-yarn workspace aksel-mcp-server test
+yarn workspace aksel-mcp dev
+yarn workspace aksel-mcp build
+yarn workspace aksel-mcp test
 
 ```
 
 ### Local testing
 
-- Start server `yarn workspace aksel-mcp-server start`
-- Start inspector `yarn workspace aksel-mcp-server inspect`
+- Start server `yarn workspace aksel-mcp start`
+- Start inspector `yarn workspace aksel-mcp inspect`
 
 ## Package internals
 
