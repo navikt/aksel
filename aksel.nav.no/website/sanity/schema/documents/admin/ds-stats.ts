@@ -97,6 +97,7 @@ export const DesignsystemStatistics = defineType({
       return { title: "Designsystem statistikk" };
     },
   },
-  readOnly: false,
+  readOnly: ({ currentUser }) =>
+    !currentUser?.roles.find((x) => x.name === "developer"),
   __experimental_omnisearch_visibility: false,
 });
