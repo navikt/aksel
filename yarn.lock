@@ -10146,9 +10146,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/eslint-plugin@npm:1.6.17":
-  version: 1.6.17
-  resolution: "@vitest/eslint-plugin@npm:1.6.17"
+"@vitest/eslint-plugin@npm:1.6.19":
+  version: 1.6.19
+  resolution: "@vitest/eslint-plugin@npm:1.6.19"
   dependencies:
     "@typescript-eslint/scope-manager": "npm:^8.58.0"
     "@typescript-eslint/utils": "npm:^8.58.0"
@@ -10164,7 +10164,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/3b30fd27321aa44ff64ff77f6b96a1a658844462f71739a0ae300f9657f3e6d39225a2aa27903ec69606bd824fa7a1ecdecacaae2e00453cfdca872439919d55
+  checksum: 10/7d34be943459c5833c83b1ab059c01ad3978ab51b86ff9c3bbe83f3e7789bc24b9af884b0d5b355ede21e0b1418014016d09af077f228b33ad338d2e877211c4
   languageName: node
   linkType: hard
 
@@ -10774,7 +10774,7 @@ __metadata:
     "@vitest/browser": "npm:4.1.7"
     "@vitest/browser-playwright": "npm:4.1.7"
     "@vitest/coverage-v8": "npm:4.1.7"
-    "@vitest/eslint-plugin": "npm:1.6.17"
+    "@vitest/eslint-plugin": "npm:1.6.19"
     chromatic: "npm:15.1.0"
     concurrently: "npm:9.2.1"
     cross-env: "npm:^10.1.0"
