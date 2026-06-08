@@ -56,7 +56,7 @@ function EndringsloggReferanserList() {
     if (parsedChangelogs.length === 0) {
       return (
         <HStack justify="center" padding="space-6">
-          Ingen endringslogger for denne artikkelen
+          Ingen endringslogg for denne artikkelen
         </HStack>
       );
     }
