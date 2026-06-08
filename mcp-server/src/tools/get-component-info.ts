@@ -40,8 +40,7 @@ Workflow:
 1. Find the component path using aksel_find_docs or aksel-docs://index
 2. Call this tool with either slug ('komponenter/core/button') or path ('/komponenter/core/button.md')
 
-Example:
-  aksel_get_component_info({ component: "/komponenter/core/button.md" })`,
+Example: aksel_get_component_info({ component: "/komponenter/core/button.md" })`,
   inputSchema: getComponentInfoInputSchema,
   async callback({ component }) {
     const normalizedComponent = normalizeComponentSlug(component);
