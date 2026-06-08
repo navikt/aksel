@@ -19,7 +19,7 @@ import {
 
 const labels = { script: "update-stats", source: "aksel-stats-updater" };
 
-const bigQueryClient = createBigQueryClient();
+let bigQueryClient: ReturnType<typeof createBigQueryClient>;
 
 async function updateStats() {
   const token = process.env.SANITY_WRITE;
@@ -29,8 +29,9 @@ async function updateStats() {
     );
   }
 
-  const { oldDate, newDate } = await getTimeframe();
+  bigQueryClient = createBigQueryClient();
 
+  const { oldDate, newDate } = await getTimeframe();
   const [oldComponentUsage, newComponentUsage] = await Promise.all([
     getComponentUsage(oldDate),
     getComponentUsage(newDate),
