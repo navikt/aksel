@@ -43,11 +43,11 @@ describe("Resources", () => {
   describe("iconsCatalogResource", () => {
     test("should return categories with subcategories", async () => {
       const result = await iconsCatalogResource.callback(
-        new URL("aksel-icons://catalog"),
+        new URL("aksel-icons://category-catalog"),
       );
 
       expect(result.contents).toHaveLength(1);
-      expect(result.contents[0].uri).toBe("aksel-icons://catalog");
+      expect(result.contents[0].uri).toBe("aksel-icons://category-catalog");
       expect(result.contents[0].mimeType).toBe("application/json");
 
       const data = JSON.parse(result.contents[0].text);
@@ -65,7 +65,7 @@ describe("Resources", () => {
 
     test("should have proper metadata", () => {
       expect(iconsCatalogResource.name).toBe("Aksel Icons Catalog");
-      expect(iconsCatalogResource.uri).toBe("aksel-icons://catalog");
+      expect(iconsCatalogResource.uri).toBe("aksel-icons://category-catalog");
       expect(iconsCatalogResource.mimeType).toBe("application/json");
       expect(iconsCatalogResource.description).toContain(
         "Catalog of Aksel icon categories",

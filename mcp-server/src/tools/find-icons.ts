@@ -27,7 +27,7 @@ const findIconsInputSchema = {
 const findIconsTool: McpTool<typeof findIconsInputSchema> = {
   name: "aksel_find_icons",
   description:
-    "Find and filter Aksel icons by category, subcategory, keyword, and variant. Use aksel-icons://catalog to discover available categories first.",
+    "Find and filter Aksel icons by category, subcategory, keyword, and variant. Use aksel-icons://category-catalog to discover available categories first.",
   inputSchema: findIconsInputSchema,
   async callback({ category, subcategory, keyword, variant, limit }) {
     let filtered = icons;
@@ -62,7 +62,7 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
     if (results.length === 0) {
       return JSON.stringify({
         message: "No icons found matching your criteria",
-        hint: "Try broadening your search or use aksel-icons://catalog to see available categories",
+        hint: "Try broadening your search or use aksel-icons://category-catalog to see available categories",
       });
     }
 

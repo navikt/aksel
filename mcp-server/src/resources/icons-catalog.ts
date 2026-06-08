@@ -1,7 +1,7 @@
 import unParsedMetadata, { AkselIcon } from "@navikt/aksel-icons/metadata";
 import type { McpResource } from "../types.js";
 
-const URI = "aksel-icons://catalog";
+const ICONS_CATALOG_URI = "aksel-icons://category-catalog";
 const MIME_TYPE = "application/json";
 
 const categoriesMap = new Map<
@@ -33,7 +33,7 @@ const categories = Array.from(categoriesMap.values()).map((entry) => ({
 
 const iconsCatalogResource: McpResource = {
   name: "Aksel Icons Catalog",
-  uri: URI,
+  uri: ICONS_CATALOG_URI,
   description:
     "Catalog of Aksel icon categories and subcategories with counts. Use this to discover the taxonomy, then call aksel_find_icons to search within it.",
   mimeType: MIME_TYPE,
@@ -41,7 +41,7 @@ const iconsCatalogResource: McpResource = {
     return {
       contents: [
         {
-          uri: URI,
+          uri: ICONS_CATALOG_URI,
           mimeType: MIME_TYPE,
           text: JSON.stringify({
             categories,

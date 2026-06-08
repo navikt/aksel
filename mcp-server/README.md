@@ -23,22 +23,22 @@ It gives coding agents and assistants direct access to:
 
 ### Tools
 
-| Tool                       | What it does                                                           |
-| -------------------------- | ---------------------------------------------------------------------- |
-| `aksel_find_docs`          | Finds docs paths from the index based on query                         |
-| `aksel_get_doc`            | Fetches official Aksel markdown docs by path                           |
-| `aksel_get_token_details`  | Returns complete metadata for one design token                         |
-| `aksel_find_icons`         | Finds and filters icons by category, subcategory, keyword, variant     |
+| Tool                       | What it does                                                       |
+| -------------------------- | ------------------------------------------------------------------ |
+| `aksel_find_docs`          | Finds docs paths from the index based on query                     |
+| `aksel_get_doc`            | Fetches official Aksel markdown docs by path                       |
+| `aksel_get_token_details`  | Returns complete metadata for one design token                     |
+| `aksel_find_icons`         | Finds and filters icons by category, subcategory, keyword, variant |
 | `aksel_get_component_info` | Fetches structured component props by slug/docs path               |
 
 ### Resources
 
-| Resource URI                 | What it contains                                         |
-| ---------------------------- | -------------------------------------------------------- |
-| `aksel-docs://index`         | Full docs index from `https://aksel.nav.no/api/llm/docs` |
-| `aksel-tokens://catalog`     | Lightweight catalog of all Aksel design tokens           |
-| `aksel-icons://catalog`      | Icon categories + subcategories + counts                 |
-| `aksel-migrations://catalog` | Available codemods for Aksel migrations                  |
+| Resource URI                     | What it contains                                         |
+| -------------------------------- | -------------------------------------------------------- |
+| `aksel-docs://index`             | Full docs index from `https://aksel.nav.no/api/llm/docs` |
+| `aksel-tokens://catalog`         | Lightweight catalog of all Aksel design tokens           |
+| `aksel-icons://category-catalog` | Icon categories + subcategories + counts                 |
+| `aksel-migrations://catalog`     | Available codemods for Aksel migrations                  |
 
 ## Recommended usage workflow
 
