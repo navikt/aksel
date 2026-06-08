@@ -54,16 +54,16 @@ It gives coding agents and assistants direct access to:
 ### Scripts
 
 ```bash
-yarn workspace mcp-server dev
-yarn workspace mcp-server build
-yarn workspace mcp-server test
+yarn workspace aksel-mcp-server dev
+yarn workspace aksel-mcp-server build
+yarn workspace aksel-mcp-server test
 
 ```
 
 ### Local testing
 
-- Start server `yarn workspace mcp-server start`
-- Start `npx @modelcontextprotocol/inspector`
+- Start server `yarn workspace aksel-mcp-server start`
+- Start inspector `yarn workspace aksel-mcp-server inspect`
 
 ## Package internals
 

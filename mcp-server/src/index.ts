@@ -69,7 +69,7 @@ app.all("/mcp", async (req, res) => {
 
   /**
    * Servers MUST validate the Origin header on all incoming connections to prevent DNS rebinding attacks
-   * https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#security-warning
+   * https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#security-warning
    */
   const origin = req.headers.origin;
 
