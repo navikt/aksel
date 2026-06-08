@@ -15,8 +15,8 @@ app.use(express.json({ limit: "5mb" }));
 
 const isProduction = process.env.NODE_ENV === "production";
 const allowedOrigins = isProduction
-  ? new Set(["https://aksel-mcp.ansatt.nav.no"])
-  : new Set(["https://aksel-mcp.ansatt.nav.no", "http://localhost:8080"]);
+  ? new Set(["https://aksel-mcp.nav.no"])
+  : new Set(["https://aksel-mcp.nav.no", "http://localhost:8080"]);
 
 /**
  * Middleware to record HTTP requests, excluding health and metrics endpoints.
