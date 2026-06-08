@@ -53,7 +53,7 @@ async function DesignsystemStats() {
         />
         <StatsCard
           label="Maler i bruk"
-          stat={data.templateUsage.new}
+          stat={formatNumber(data.templateUsage.new).number}
           trend={`${formatNumber(data.templateUsage.new - data.templateUsage.old).number} maler`}
           modifier={formatNumber(data.templateUsage.new).modifier}
         />
