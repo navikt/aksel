@@ -24,7 +24,7 @@ export const KomponentArtikkel = defineType({
       {
         key: "endringslogg",
         kind: "decoration",
-        component: () => <EndringsloggReferanser />,
+        component: () => <EndringsloggReferanser source="ds" />,
       },
     ];
   },

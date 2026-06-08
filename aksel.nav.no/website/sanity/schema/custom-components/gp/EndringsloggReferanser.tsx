@@ -18,22 +18,28 @@ type DocumentT = {
   endringsdato: string;
 };
 
-function EndringsloggReferanser() {
+function EndringsloggReferanser({ source }: { source: "gp" | "ds" }) {
   return (
     <Suspense>
-      <EndringsloggReferanserList />
+      <EndringsloggReferanserList source={source} />
     </Suspense>
   );
 }
 
-function EndringsloggReferanserList() {
+function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
   const id = (useFormValue(["_id"]) as string) ?? "";
 
   const documentStore = useDocumentStore();
   const changelogs: DocumentT[] = useMemoObservable(() => {
     return documentStore.listenQuery(
-      `*[_type == 'gp_endringslogg_artikkel' && $id in artikler[]._ref]{heading, slug, _id, endringsdato}`,
-      { id: id.replace("drafts.", "") },
+      `*[_type == $source && $id in artikler[]._ref]{heading, slug, _id, endringsdato}`,
+      {
+        id: id.replace("drafts.", ""),
+        source:
+          source === "gp"
+            ? "gp_endringslogg_artikkel"
+            : "ds_endringslogg_artikkel",
+      },
       {},
     );
   }, [documentStore, id]);

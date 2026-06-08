@@ -29,7 +29,7 @@ export const GodPraksisArtikkel = defineType({
       {
         key: "endringslogg",
         kind: "decoration",
-        component: () => <EndringsloggReferanser />,
+        component: () => <EndringsloggReferanser source="gp" />,
       },
       {
         key: "skrivehjelp",

@@ -23,7 +23,7 @@ export const TemplatesArtikkel = defineType({
       {
         key: "endringslogg",
         kind: "decoration",
-        component: () => <EndringsloggReferanser />,
+        component: () => <EndringsloggReferanser source="ds" />,
       },
     ];
   },
