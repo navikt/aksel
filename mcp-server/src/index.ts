@@ -95,7 +95,7 @@ app.all("/mcp", async (req, res) => {
     });
 
     const server = new McpServer({
-      name: "aksel-mcp-server",
+      name: "aksel-mcp",
       version: pkg.version,
     });
 
