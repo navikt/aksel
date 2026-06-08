@@ -22,7 +22,7 @@ export const EndringsloggArtikkelGodPraksis = defineType({
             return "URL er påkrevd";
           }
           if (sanitizeSlug(slug.current) !== slug.current) {
-            return `URL må være '${sanitizeSlug(slug.current)}'. Trykk 'generer' for å fikse dette automatisk.`;
+            return `URL kan kun bestå av bokstaver (a-z), tall, understrek og bindestrek. Trykk 'generer' for å fikse dette automatisk.`;
           }
           return true;
         }),
@@ -45,8 +45,6 @@ export const EndringsloggArtikkelGodPraksis = defineType({
       title: "Innhold",
       name: "content",
       group: "innhold",
-      description:
-        'Dette innholdet vises på innlegget i endringsloggen. Er det "mye" innhold vil en "Vis mer"-knapp dukke opp.',
       type: "riktekst_standard",
       validation: (Rule) => Rule.required(),
     }),
