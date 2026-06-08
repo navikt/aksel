@@ -198,7 +198,7 @@ function StepTwo(props: StepTwoProps) {
             });
           }}
         >
-          Oppdatert godkjenningsdato
+          Oppdater godkjenningsdato
         </Checkbox>
         <Box marginInline="space-24 space-0">
           <Checkbox
