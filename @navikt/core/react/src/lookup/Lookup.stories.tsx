@@ -60,7 +60,7 @@ export const HoverEffect = () => {
   return (
     <p>
       This is an example of a{" "}
-      <Lookup word="lookup word" hoverEffectTEST={true}>
+      <Lookup word="lookup word" UNSAFEhoverEffect={true}>
         Lookup component
       </Lookup>{" "}
       within a sentence.
