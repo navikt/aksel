@@ -6,7 +6,7 @@ metadata:
   labels:
     team: designsystem
 spec:
-  image: {{ image }}
+  image: { { image } }
   port: 8080
   replicas:
     min: 1
@@ -33,7 +33,7 @@ spec:
     enabled: true
     path: /metrics
   ingresses:
-    - https://aksel-mcp.ansatt.nav.no
+    - https://aksel-mcp.nav.no
   accessPolicy:
     outbound:
       external:
