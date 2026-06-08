@@ -33,6 +33,7 @@ jobs:
       - name: Update Sanity
         env:
           SANITY_WRITE: ${{ secrets.SANITY_WRITE }}
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS_BQ_READ }}
         run: yarn workspace aksel.nav.no sanity:update
 
   build_and_deploy:
