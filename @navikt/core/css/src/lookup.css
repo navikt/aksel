@@ -8,20 +8,25 @@
   text-decoration-color: var(--ax-border-default);
   background: transparent;
 
-  &:hover,
-  &:focus-visible {
-    background-color: var(--ax-bg-moderate-hover);
+  &:hover {
+    background: var(--ax-bg-moderate-hover);
   }
 
   &[data-hover-effect="true"] {
     background: linear-gradient(to right, var(--ax-bg-moderate-hover) 50%, transparent 50%);
     background-size: 200% 100%;
     background-position: right bottom;
-    transition: all 0.5s ease;
+    transition: all 150ms ease;
 
     &:hover {
       background-position: left bottom;
     }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--ax-radius-2);
   }
 
   &:active {
