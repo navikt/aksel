@@ -79,12 +79,14 @@ async function updateStats() {
 
   transactionClient.createOrReplace(document);
 
-  await transactionClient
-    .commit()
-    .then(() => console.info(`Successfully updated designsystem statistics`))
-    .catch((e) => {
-      throw new Error(e.message);
+  try {
+    await transactionClient.commit();
+    console.info("Successfully updated designsystem statistics");
+  } catch (e) {
+    throw new Error("Failed to commit designsystem statistics update", {
+      cause: e,
     });
+  }
 }
 
 type Defined<T> = {
