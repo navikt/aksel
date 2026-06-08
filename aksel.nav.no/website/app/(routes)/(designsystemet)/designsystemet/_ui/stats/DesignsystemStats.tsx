@@ -41,9 +41,8 @@ async function DesignsystemStats() {
       <HGrid gap="space-24" width="100%" columns={{ xs: 1, sm: 2, xl: 4 }}>
         <StatsCard
           label="Komponenter i prod"
-          stat={formatNumber(data.componentUsage.new).number}
+          stat={data.componentUsage.new.toLocaleString("no-NB")}
           trend={`${componentUsageTrend.number}${componentUsageTrend.modifier}`}
-          modifier={formatNumber(data.componentUsage.new).modifier}
         />
         <StatsCard
           label={`Oppdatert til v${data.versionStatistics.currentMajor}`}
