@@ -192,17 +192,10 @@ function StepTwo(props: StepTwoProps) {
           value="update-date"
           checked={formState.updateDate}
           onChange={() => {
-            if (formState.updateDate) {
-              setFormState({
-                updateDate: false,
-                newChangeLog: false,
-              });
-            } else {
-              setFormState({
-                updateDate: true,
-                newChangeLog: true,
-              });
-            }
+            setFormState({
+              updateDate: !formState.updateDate,
+              newChangeLog: !formState.updateDate,
+            });
           }}
         >
           Oppdatert godkjenningsdato
