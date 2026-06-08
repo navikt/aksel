@@ -12,7 +12,6 @@ describe("pickRangeSelection - caller: from", () => {
         currentSelection: { from: d(5) },
         newDate: d(10),
         caller: "from",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: undefined });
   });
@@ -24,7 +23,6 @@ describe("pickRangeSelection - caller: from", () => {
         currentSelection: { from: d(5), to: d(20) },
         newDate: d(10),
         caller: "from",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: d(20) });
   });
@@ -36,7 +34,6 @@ describe("pickRangeSelection - caller: from", () => {
         currentSelection: { from: d(5), to: d(20) },
         newDate: d(20),
         caller: "from",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(20), to: d(20) });
   });
@@ -48,7 +45,6 @@ describe("pickRangeSelection - caller: from", () => {
         currentSelection: { from: d(5), to: d(10) },
         newDate: d(15),
         caller: "from",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(15), to: undefined });
   });
@@ -62,7 +58,6 @@ describe("pickRangeSelection - caller: to", () => {
         currentSelection: { from: undefined },
         newDate: d(10),
         caller: "to",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: undefined });
   });
@@ -74,7 +69,6 @@ describe("pickRangeSelection - caller: to", () => {
         currentSelection: { from: d(5), to: d(10) },
         newDate: d(20),
         caller: "to",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(5), to: d(20) });
   });
@@ -86,7 +80,6 @@ describe("pickRangeSelection - caller: to", () => {
         currentSelection: { from: d(10), to: d(20) },
         newDate: d(10),
         caller: "to",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: d(10) });
   });
@@ -98,7 +91,6 @@ describe("pickRangeSelection - caller: to", () => {
         currentSelection: { from: d(15), to: d(20) },
         newDate: d(5),
         caller: "to",
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(5), to: undefined });
   });
@@ -111,7 +103,6 @@ describe("pickRangeSelection - no caller", () => {
         ...base,
         currentSelection: { from: d(5) },
         newDate: d(10),
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: undefined });
   });
@@ -122,7 +113,6 @@ describe("pickRangeSelection - no caller", () => {
         ...base,
         currentSelection: { from: d(10) },
         newDate: d(10),
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: d(10) });
   });
@@ -133,7 +123,6 @@ describe("pickRangeSelection - no caller", () => {
         ...base,
         currentSelection: { from: d(5), to: d(20) },
         newDate: d(20),
-        resetOnSelect: false,
       }),
     ).toBeUndefined();
   });
@@ -144,7 +133,6 @@ describe("pickRangeSelection - no caller", () => {
         ...base,
         currentSelection: { from: d(5), to: d(20) },
         newDate: d(10),
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: d(20) });
   });
@@ -155,7 +143,6 @@ describe("pickRangeSelection - no caller", () => {
         ...base,
         currentSelection: { from: d(5), to: d(10) },
         newDate: d(20),
-        resetOnSelect: false,
       }),
     ).toEqual({ from: d(10), to: d(20) });
   });

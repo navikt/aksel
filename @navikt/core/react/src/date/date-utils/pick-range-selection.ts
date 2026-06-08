@@ -15,15 +15,13 @@ function pickRangeSelection({
   currentSelection: selected,
   newDate,
   caller,
-  resetOnSelect = true,
 }: {
   newSelection: DateRange | undefined;
   currentSelection: DateRange | undefined;
   newDate: Date;
   caller?: "from" | "to" | null;
-  resetOnSelect?: boolean;
 }): DateRange | undefined {
-  const skip = !selected?.from || !selected?.to || resetOnSelect;
+  const skip = !selected?.from || !selected?.to || !caller;
 
   if (caller === "from" && !skip) {
     const to = selected?.to;
