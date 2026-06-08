@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { grunnleggendeKategorier } from "../../../config";
+import { EndringsloggReferanser } from "../../custom-components/gp/EndringsloggReferanser";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
@@ -16,6 +17,16 @@ export const GrunnleggendeArtikkel = defineType({
   type: "document",
   groups: SanityTabGroups,
   ...artikkelPreview("Grunnleggende", 6),
+  renderMembers: (members) => {
+    return [
+      ...members,
+      {
+        key: "endringslogg",
+        kind: "decoration",
+        component: () => <EndringsloggReferanser />,
+      },
+    ];
+  },
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,
