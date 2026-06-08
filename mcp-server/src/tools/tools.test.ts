@@ -1,14 +1,16 @@
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
-import { metadata } from "../resources/icon-categories.js";
-import { getAkselDocs } from "./aksel-docs.js";
-import { iconSearchTool } from "./icon-search.js";
-import { tokenDetailsTool } from "./token-details.js";
+import { metadata } from "../resources/icons-catalog.js";
+import { findDocsTool } from "./find-docs.js";
+import { findIconsTool } from "./find-icons.js";
+import { getComponentInfoTool } from "./get-component-info.js";
+import { getDocTool } from "./get-doc.js";
+import { getTokenDetailsTool } from "./get-token-details.js";
 
 describe("Tools", () => {
-  describe("getAkselDocs", () => {
+  describe("getDocTool", () => {
     test("should require path to end with .md", () => {
-      const strictSchema = z.object(getAkselDocs.inputSchema).strict();
+      const strictSchema = z.object(getDocTool.inputSchema).strict();
 
       const valid = strictSchema.safeParse({
         path: "/komponenter/core/button.md",
@@ -26,21 +28,23 @@ describe("Tools", () => {
     });
   });
 
-  describe("tokenDetailsTool", () => {
-    test("should reject unknown tokenName values in schema", () => {
-      const strictSchema = z.object(tokenDetailsTool.inputSchema).strict();
+  describe("getTokenDetailsTool", () => {
+    test("should accept unknown tokenName values in schema", () => {
+      const strictSchema = z.object(getTokenDetailsTool.inputSchema).strict();
 
       const valid = strictSchema.safeParse({ tokenName: "shadow-dialog" });
-      const invalid = strictSchema.safeParse({
+      const unknown = strictSchema.safeParse({
         tokenName: "nonexistent-token-xyz",
       });
+      const empty = strictSchema.safeParse({ tokenName: "" });
 
       expect(valid.success).toBe(true);
-      expect(invalid.success).toBe(false);
+      expect(unknown.success).toBe(true);
+      expect(empty.success).toBe(false);
     });
 
     test("should reject unknown fields in strict mode", () => {
-      const strictSchema = z.object(tokenDetailsTool.inputSchema).strict();
+      const strictSchema = z.object(getTokenDetailsTool.inputSchema).strict();
 
       const parseResult = strictSchema.safeParse({
         tokenName: "shadow-dialog",
@@ -51,7 +55,7 @@ describe("Tools", () => {
     });
 
     test("should fetch details for valid token", async () => {
-      const result = await tokenDetailsTool.callback({
+      const result = await getTokenDetailsTool.callback({
         tokenName: "shadow-dialog",
       });
 
@@ -65,7 +69,7 @@ describe("Tools", () => {
     });
 
     test("should return error with suggestions for similar tokens", async () => {
-      const result = await tokenDetailsTool.callback({
+      const result = await getTokenDetailsTool.callback({
         tokenName: "shadow",
       });
 
@@ -76,7 +80,7 @@ describe("Tools", () => {
     });
 
     test("should return error for non-existent token", async () => {
-      const result = await tokenDetailsTool.callback({
+      const result = await getTokenDetailsTool.callback({
         tokenName: "nonexistent-token-xyz",
       });
 
@@ -86,17 +90,59 @@ describe("Tools", () => {
     });
 
     test("should have proper metadata", () => {
-      expect(tokenDetailsTool.name).toBe("aksel_token_details");
-      expect(tokenDetailsTool.description).toContain(
+      expect(getTokenDetailsTool.name).toBe("aksel_get_token_details");
+      expect(getTokenDetailsTool.description).toContain(
         "Fetch complete details for a specific Aksel design token",
       );
-      expect(tokenDetailsTool.inputSchema).toHaveProperty("tokenName");
+      expect(getTokenDetailsTool.inputSchema).toHaveProperty("tokenName");
     });
   });
 
-  describe("iconSearchTool", () => {
+  describe("getComponentInfoTool", () => {
+    test("should accept slug/docs path and include options", () => {
+      const strictSchema = z.object(getComponentInfoTool.inputSchema).strict();
+
+      const slug = strictSchema.safeParse({
+        component: "komponenter/core/button",
+      });
+      const docsPath = strictSchema.safeParse({
+        component: "/komponenter/core/button.md",
+      });
+      const empty = strictSchema.safeParse({
+        component: "",
+      });
+
+      expect(slug.success).toBe(true);
+      expect(docsPath.success).toBe(true);
+      expect(empty.success).toBe(false);
+    });
+  });
+
+  describe("findDocsTool", () => {
+    test("should validate query and limit", () => {
+      const strictSchema = z.object(findDocsTool.inputSchema).strict();
+
+      const valid = strictSchema.safeParse({
+        query: "button",
+        limit: 5,
+      });
+      const missingQuery = strictSchema.safeParse({
+        query: "",
+      });
+      const invalidLimit = strictSchema.safeParse({
+        query: "button",
+        limit: 0,
+      });
+
+      expect(valid.success).toBe(true);
+      expect(missingQuery.success).toBe(false);
+      expect(invalidLimit.success).toBe(false);
+    });
+  });
+
+  describe("findIconsTool", () => {
     test("should reject invalid enum inputs", () => {
-      const strictSchema = z.object(iconSearchTool.inputSchema).strict();
+      const strictSchema = z.object(findIconsTool.inputSchema).strict();
 
       const invalidCategory = strictSchema.safeParse({
         category: "NotARealCategory",
@@ -118,7 +164,7 @@ describe("Tools", () => {
 
       expect(firstKeyword).toBeDefined();
 
-      const result = await iconSearchTool.callback({
+      const result = await findIconsTool.callback({
         keyword: firstKeyword,
         limit: 10,
         category: undefined,
@@ -133,10 +179,12 @@ describe("Tools", () => {
       expect(response.icons[0]).toHaveProperty("name");
       expect(response.icons[0]).toHaveProperty("category");
       expect(response.icons[0]).toHaveProperty("variant");
+      expect(response.icons[0]).not.toHaveProperty("keywords");
+      expect(response).not.toHaveProperty("searchCriteria");
     });
 
     test("should filter icons by category", async () => {
-      const result = await iconSearchTool.callback({
+      const result = await findIconsTool.callback({
         subcategory: undefined,
         variant: "both",
         keyword: undefined,
@@ -153,7 +201,7 @@ describe("Tools", () => {
     });
 
     test("should return helpful message when no results", async () => {
-      const result = await iconSearchTool.callback({
+      const result = await findIconsTool.callback({
         category: undefined,
         subcategory: undefined,
         variant: "both",
@@ -164,15 +212,16 @@ describe("Tools", () => {
       const response = JSON.parse(result);
       expect(response).toHaveProperty("message");
       expect(response.message).toContain("No icons found");
+      expect(response).not.toHaveProperty("searchCriteria");
     });
 
     test("should have proper metadata", () => {
-      expect(iconSearchTool.name).toBe("aksel_icons_search");
-      expect(iconSearchTool.description).toContain(
-        "Search and filter Aksel icons",
+      expect(findIconsTool.name).toBe("aksel_find_icons");
+      expect(findIconsTool.description).toContain(
+        "Find and filter Aksel icons",
       );
-      expect(iconSearchTool.inputSchema).toHaveProperty("keyword");
-      expect(iconSearchTool.inputSchema).toHaveProperty("category");
+      expect(findIconsTool.inputSchema).toHaveProperty("keyword");
+      expect(findIconsTool.inputSchema).toHaveProperty("category");
     });
   });
 });

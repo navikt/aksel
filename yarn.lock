@@ -4834,8 +4834,8 @@ __metadata:
   linkType: hard
 
 "@modelcontextprotocol/ext-apps@npm:^1.0.0, @modelcontextprotocol/ext-apps@npm:^1.2.0":
-  version: 1.7.1
-  resolution: "@modelcontextprotocol/ext-apps@npm:1.7.1"
+  version: 1.7.2
+  resolution: "@modelcontextprotocol/ext-apps@npm:1.7.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.1.0"
   peerDependencies:
@@ -4848,7 +4848,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/67d87cb065f737ef9843ad250358980a224e8b05cce96adf5c5ae114fd812f6a5886ae6b9a87ef4b599aa78113492e99e28ca6ced82470135aba4b0c26b39dc2
+  checksum: 10/0f023db67fec1b1dbd261d0ffc36f6bc561afbc375780221b1fa022a58b898ee314aebf1313b43afaea32d2aff33f58bf50584f588082768c3750e4bab0df04e
   languageName: node
   linkType: hard
 
@@ -4922,7 +4922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector@npm:^0.21.1":
+"@modelcontextprotocol/inspector@npm:^0.21":
   version: 0.21.2
   resolution: "@modelcontextprotocol/inspector@npm:0.21.2"
   dependencies:
@@ -5075,25 +5075,6 @@ __metadata:
     typescript: "npm:6.0.3"
     unified: "npm:11.0.5"
     vitest: "npm:4.1.7"
-  languageName: unknown
-  linkType: soft
-
-"@navikt/aksel-mcp@workspace:@navikt/aksel-mcp":
-  version: 0.0.0-use.local
-  resolution: "@navikt/aksel-mcp@workspace:@navikt/aksel-mcp"
-  dependencies:
-    "@modelcontextprotocol/inspector": "npm:^0.21.1"
-    "@modelcontextprotocol/sdk": "npm:^1.29.0"
-    "@navikt/aksel": "npm:^8.11.1"
-    "@navikt/aksel-icons": "npm:^8.11.1"
-    "@navikt/ds-tokens": "npm:^8.11.1"
-    "@types/node": "npm:^24.10.9"
-    tsdown: "npm:^0.22.0"
-    typescript: "npm:6.0.3"
-    vitest: "npm:4.1.7"
-    zod: "npm:^3.22.4"
-  bin:
-    aksel-mcp: ./dist/index.mjs
   languageName: unknown
   linkType: soft
 
@@ -9308,7 +9289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*":
+"@types/express@npm:*, @types/express@npm:^5.0.3":
   version: 5.0.6
   resolution: "@types/express@npm:5.0.6"
   dependencies:
@@ -10736,6 +10717,27 @@ __metadata:
     vite: "npm:^7.3.2"
     vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-svgr: "npm:^5.2.0"
+  languageName: unknown
+  linkType: soft
+
+"aksel-mcp-server@workspace:mcp-server":
+  version: 0.0.0-use.local
+  resolution: "aksel-mcp-server@workspace:mcp-server"
+  dependencies:
+    "@modelcontextprotocol/inspector": "npm:^0.21"
+    "@modelcontextprotocol/sdk": "npm:^1.29.0"
+    "@navikt/aksel": "npm:^8.11.1"
+    "@navikt/aksel-icons": "npm:^8.11.1"
+    "@navikt/ds-tokens": "npm:^8.11.1"
+    "@types/express": "npm:^5.0.3"
+    "@types/node": "npm:^24.10.9"
+    express: "npm:^5.1.0"
+    node-cache: "npm:^5.1.2"
+    prom-client: "npm:^15.1.3"
+    tsdown: "npm:^0.22.0"
+    typescript: "npm:6.0.3"
+    vitest: "npm:4.1.7"
+    zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
 
@@ -21494,7 +21496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prom-client@npm:^15.1.0":
+"prom-client@npm:^15.1.0, prom-client@npm:^15.1.3":
   version: 15.1.3
   resolution: "prom-client@npm:15.1.3"
   dependencies:

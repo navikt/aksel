@@ -1,7 +1,7 @@
 import unParsedMetadata, { AkselIcon } from "@navikt/aksel-icons/metadata";
 import type { McpResource } from "../types.js";
 
-const URI = "aksel-icons://categories";
+const ICONS_CATALOG_URI = "aksel-icons://category-catalog";
 const MIME_TYPE = "application/json";
 
 const categoriesMap = new Map<
@@ -9,7 +9,6 @@ const categoriesMap = new Map<
   { category: string; subcategories: Set<string>; iconCount: number }
 >();
 
-/* TODO: Unsure why it can't resolve the types correctly here */
 const metadata = unParsedMetadata as unknown as Record<string, AkselIcon>;
 
 for (const icon of Object.values(metadata)) {
@@ -20,6 +19,7 @@ for (const icon of Object.values(metadata)) {
       iconCount: 0,
     });
   }
+
   const entry = categoriesMap.get(icon.category)!;
   entry.subcategories.add(icon.sub_category);
   entry.iconCount++;
@@ -31,27 +31,26 @@ const categories = Array.from(categoriesMap.values()).map((entry) => ({
   iconCount: entry.iconCount,
 }));
 
-const iconCategoriesResource: McpResource = {
-  name: "Aksel Icon Categories",
-  uri: URI,
+const iconsCatalogResource: McpResource = {
+  name: "Aksel Icons Catalog",
+  uri: ICONS_CATALOG_URI,
   description:
-    "List of all icon categories and subcategories in the Aksel icon library. Use this to discover available categories, then use aksel_icons_search tool to find specific icons within a category.",
+    "Catalog of Aksel icon categories and subcategories with counts. Use this to discover the taxonomy, then call aksel_find_icons to search within it.",
   mimeType: MIME_TYPE,
   async callback() {
     return {
       contents: [
         {
-          uri: URI,
+          uri: ICONS_CATALOG_URI,
           mimeType: MIME_TYPE,
-          text: JSON.stringify(
-            { categories, totalIcons: Object.keys(metadata).length },
-            null,
-            2,
-          ),
+          text: JSON.stringify({
+            categories,
+            totalIcons: Object.keys(metadata).length,
+          }),
         },
       ],
     };
   },
 };
 
-export { iconCategoriesResource, metadata };
+export { iconsCatalogResource, metadata };

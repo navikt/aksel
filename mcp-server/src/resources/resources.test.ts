@@ -1,17 +1,17 @@
 import { describe, expect, test } from "vitest";
-import { designTokensResource } from "./design-tokens.js";
-import { iconCategoriesResource } from "./icon-categories.js";
-import { migrationsResource } from "./migrations.js";
+import { iconsCatalogResource } from "./icons-catalog.js";
+import { migrationsCatalogResource } from "./migrations-catalog.js";
+import { tokensCatalogResource } from "./tokens-catalog.js";
 
 describe("Resources", () => {
-  describe("designTokensResource", () => {
+  describe("tokensCatalogResource", () => {
     test("should return lightweight token list", async () => {
-      const result = await designTokensResource.callback(
-        new URL("aksel-tokens://list"),
+      const result = await tokensCatalogResource.callback(
+        new URL("aksel-tokens://catalog"),
       );
 
       expect(result.contents).toHaveLength(1);
-      expect(result.contents[0].uri).toBe("aksel-tokens://list");
+      expect(result.contents[0].uri).toBe("aksel-tokens://catalog");
       expect(result.contents[0].mimeType).toBe("application/json");
 
       const tokenList = JSON.parse(result.contents[0].text);
@@ -31,23 +31,23 @@ describe("Resources", () => {
     });
 
     test("should have proper metadata", () => {
-      expect(designTokensResource.name).toBe("Aksel Design Tokens List");
-      expect(designTokensResource.uri).toBe("aksel-tokens://list");
-      expect(designTokensResource.mimeType).toBe("application/json");
-      expect(designTokensResource.description).toContain(
-        "Lightweight list of all Aksel design tokens",
+      expect(tokensCatalogResource.name).toBe("Aksel Tokens Catalog");
+      expect(tokensCatalogResource.uri).toBe("aksel-tokens://catalog");
+      expect(tokensCatalogResource.mimeType).toBe("application/json");
+      expect(tokensCatalogResource.description).toContain(
+        "Lightweight catalog of Aksel design tokens",
       );
     });
   });
 
-  describe("iconCategoriesResource", () => {
+  describe("iconsCatalogResource", () => {
     test("should return categories with subcategories", async () => {
-      const result = await iconCategoriesResource.callback(
-        new URL("aksel-icons://categories"),
+      const result = await iconsCatalogResource.callback(
+        new URL("aksel-icons://category-catalog"),
       );
 
       expect(result.contents).toHaveLength(1);
-      expect(result.contents[0].uri).toBe("aksel-icons://categories");
+      expect(result.contents[0].uri).toBe("aksel-icons://category-catalog");
       expect(result.contents[0].mimeType).toBe("application/json");
 
       const data = JSON.parse(result.contents[0].text);
@@ -64,23 +64,23 @@ describe("Resources", () => {
     });
 
     test("should have proper metadata", () => {
-      expect(iconCategoriesResource.name).toBe("Aksel Icon Categories");
-      expect(iconCategoriesResource.uri).toBe("aksel-icons://categories");
-      expect(iconCategoriesResource.mimeType).toBe("application/json");
-      expect(iconCategoriesResource.description).toContain(
-        "List of all icon categories",
+      expect(iconsCatalogResource.name).toBe("Aksel Icons Catalog");
+      expect(iconsCatalogResource.uri).toBe("aksel-icons://category-catalog");
+      expect(iconsCatalogResource.mimeType).toBe("application/json");
+      expect(iconsCatalogResource.description).toContain(
+        "Catalog of Aksel icon categories",
       );
     });
   });
 
-  describe("migrationsResource", () => {
+  describe("migrationsCatalogResource", () => {
     test("should return all migrations", async () => {
-      const result = await migrationsResource.callback(
-        new URL("aksel-migrations://list"),
+      const result = await migrationsCatalogResource.callback(
+        new URL("aksel-migrations://catalog"),
       );
 
       expect(result.contents).toHaveLength(1);
-      expect(result.contents[0].uri).toBe("aksel-migrations://list");
+      expect(result.contents[0].uri).toBe("aksel-migrations://catalog");
       expect(result.contents[0].mimeType).toBe("application/json");
 
       const response = JSON.parse(result.contents[0].text);
@@ -94,8 +94,8 @@ describe("Resources", () => {
     });
 
     test("should include warnings when present", async () => {
-      const result = await migrationsResource.callback(
-        new URL("aksel-migrations://list"),
+      const result = await migrationsCatalogResource.callback(
+        new URL("aksel-migrations://catalog"),
       );
       const response = JSON.parse(result.contents[0].text);
 
@@ -107,8 +107,8 @@ describe("Resources", () => {
     });
 
     test("should omit warning field when not present", async () => {
-      const result = await migrationsResource.callback(
-        new URL("aksel-migrations://list"),
+      const result = await migrationsCatalogResource.callback(
+        new URL("aksel-migrations://catalog"),
       );
       const response = JSON.parse(result.contents[0].text);
 
@@ -120,11 +120,11 @@ describe("Resources", () => {
     });
 
     test("should have proper metadata", () => {
-      expect(migrationsResource.name).toBe("Aksel Migrations List");
-      expect(migrationsResource.uri).toBe("aksel-migrations://list");
-      expect(migrationsResource.mimeType).toBe("application/json");
-      expect(migrationsResource.description).toContain(
-        "List all available Aksel codemods",
+      expect(migrationsCatalogResource.name).toBe("Aksel Migrations Catalog");
+      expect(migrationsCatalogResource.uri).toBe("aksel-migrations://catalog");
+      expect(migrationsCatalogResource.mimeType).toBe("application/json");
+      expect(migrationsCatalogResource.description).toContain(
+        "Catalog of available Aksel codemods",
       );
     });
   });

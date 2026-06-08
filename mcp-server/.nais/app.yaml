@@ -1,0 +1,40 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: aksel-mcp-server
+  namespace: designsystem
+  labels:
+    team: designsystem
+spec:
+  image: {{ image }}
+  port: 8080
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  liveness:
+    path: /isalive
+    initialDelay: 5
+    timeout: 1
+    periodSeconds: 10
+    failureThreshold: 3
+  readiness:
+    path: /isready
+    initialDelay: 5
+    timeout: 1
+    periodSeconds: 10
+    failureThreshold: 3
+  prometheus:
+    enabled: true
+    path: /metrics
+  ingresses:
+    - https://aksel-mcp.ansatt.nav.no
+  accessPolicy:
+    outbound:
+      external:
+        - host: aksel.nav.no
