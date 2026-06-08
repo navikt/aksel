@@ -66,7 +66,7 @@ export interface DateInputProps
   /**
    * @private Used to differentiate between "from" and "to" input in range datepicker
    */
-  inputType?: "from" | "to";
+  callerName?: "from" | "to";
 }
 
 const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
@@ -78,7 +78,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     variant = "datepicker",
     setAnchorRef,
     "data-color": dataColor,
-    inputType,
+    callerName,
     ...rest
   } = props;
 
@@ -167,7 +167,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           disabled={inputProps.disabled || readOnly}
           tabIndex={readOnly ? -1 : undefined}
           onClick={() => {
-            context.onOpen(inputType);
+            context.onOpen(callerName);
           }}
           type="button"
           className="aksel-date__field-button"
