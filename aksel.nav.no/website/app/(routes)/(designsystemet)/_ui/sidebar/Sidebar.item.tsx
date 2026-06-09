@@ -26,17 +26,9 @@ function DesignsystemSidebarItem(props: {
   const statusTag = getStatusTag(page.tag, true);
 
   const isOverviewPage = page.heading.toLowerCase() === "oversikt";
-  const pathDepth = pathName?.split("/").length;
-
-  const isRootOverviewPage =
-    isOverviewPage && cleanedSlug.split("/").length === 2;
-
-  let active =
-    path === cleanedSlug || (path.startsWith(cleanedSlug) && !isIndented);
-
-  if (isRootOverviewPage && pathDepth !== 2) {
-    active = false;
-  }
+  const active =
+    path === cleanedSlug ||
+    (!isOverviewPage && path.startsWith(`${cleanedSlug}/`)); // Needed for Endringslogg
 
   return (
     <BodyShort

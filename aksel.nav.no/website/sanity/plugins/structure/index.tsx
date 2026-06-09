@@ -49,6 +49,7 @@ const filtered = [
   "gp.innholdstype",
   "cookie_tracker",
   "gp_endringslogg_artikkel",
+  "designsystemStatistics",
 ];
 
 export const structure: StructureResolver = async (S) => {

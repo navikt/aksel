@@ -90,6 +90,11 @@ export function adminStructure(S: StructureBuilder) {
             .schemaType(`publication_flow`)
             .icon(FileTextIcon)
             .id(`publication_flow`),
+          S.documentListItem()
+            .title(`Designsystem-statistikk`)
+            .schemaType(`designsystemStatistics`)
+            .icon(FileTextIcon)
+            .id(`designsystem_statistics`),
           S.listItem()
             .title("Artikkelvisninger")
             .icon(EyeIcon)

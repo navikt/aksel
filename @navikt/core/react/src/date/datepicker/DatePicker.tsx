@@ -1,5 +1,5 @@
 import { isSameDay } from "date-fns";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
@@ -102,6 +102,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       value: _open,
     });
 
+    const datePickerOpener = useRef<"from" | "to" | null>(null);
+
     /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const mergedRef = useMergeRefs(setWrapperRef, ref);
@@ -136,12 +138,14 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DateTranslationContextProvider translate={translate}>
         <DateInputContextProvider
           open={open}
-          onOpen={() => {
+          onOpen={(caller) => {
+            datePickerOpener.current = caller ?? null;
             setOpen((x) => !x);
             onOpenToggle?.();
           }}
           ariaId={ariaId}
           defined={true}
+          caller={datePickerOpener.current}
         >
           <div
             ref={mergedRef}
@@ -184,5 +188,5 @@ DatePicker.Standalone = DatePickerStandalone;
 DatePicker.Input = DatePickerInput;
 
 export default DatePicker;
-export { DatePickerStandalone, DatePickerInput };
-export type { DatePickerProps, DatePickerStandaloneProps, DateInputProps };
+export { DatePickerInput, DatePickerStandalone };
+export type { DateInputProps, DatePickerProps, DatePickerStandaloneProps };
