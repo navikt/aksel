@@ -1,4 +1,4 @@
-const datesQuery = `SELECT DISTINCT TIMESTAMP(data_scraped_at) AS scrape_timestamp FROM component_usage ORDER BY scrape_timestamp DESC LIMIT 90`;
+const datesQuery = `SELECT DISTINCT TIMESTAMP(data_scraped_at) AS scrape_timestamp FROM repository_usage ORDER BY scrape_timestamp DESC LIMIT 90`;
 type datesQueryT = { scrape_timestamp: { value: string } }[];
 
 const componentUsageQuery = `
