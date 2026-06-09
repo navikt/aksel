@@ -177,26 +177,7 @@ export const UseRangedDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps} resetOnSelect={false}>
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <DatePicker.Input {...fromInputProps} label="Fra" />
-          <DatePicker.Input {...toInputProps} label="Til" />
-        </div>
-      </DatePicker>
-    </div>
-  );
-};
-
-export const UseRangedDatepickerWithResetOnSelect = () => {
-  const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
-    fromDate: new Date("Aug 23 2019"),
-    onRangeChange: console.log,
-    onValidate: console.log,
-  });
-
-  return (
-    <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps} resetOnSelect>
+      <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
