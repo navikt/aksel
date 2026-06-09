@@ -84,7 +84,7 @@ export default async function (props: Props) {
         <BodyShort size="medium" textColor="subtle" data-color="brand-blue">
           {capitalizeText(endringstype || "")}
         </BodyShort>
-        <Heading size="xlarge" level="1" spacing data-color="brand-blue">
+        <Heading size="xlarge" level="1" data-color="brand-blue">
           {heading}
         </Heading>
         <HStack gap="space-16" marginBlock="space-0 space-28">
