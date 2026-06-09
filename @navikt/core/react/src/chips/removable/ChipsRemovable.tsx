@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { AkselColor } from "../types";
-import { cl, composeEventHandlers } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
+import { AkselColor } from "../../types";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 
 export interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
@@ -22,7 +22,7 @@ export interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButt
   "data-color"?: AkselColor;
 }
 
-export const RemovableChips = forwardRef<
+export const ChipsRemovable = forwardRef<
   HTMLButtonElement,
   ChipsRemovableProps
 >(
@@ -76,4 +76,4 @@ function variantToColor(
   }
 }
 
-export default RemovableChips;
+export default ChipsRemovable;

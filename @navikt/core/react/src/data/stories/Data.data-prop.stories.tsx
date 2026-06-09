@@ -1115,3 +1115,30 @@ export const ColumnDisplay: Story = {
     );
   },
 };
+
+export const ZebraStripes: Story = {
+  render: () => {
+    return (
+      <DataGrid
+        columns={userColumnDef.map((col) => ({
+          ...col,
+          defaultWidth: "250px",
+        }))}
+        data={userData}
+        getRowId={(row) => row.foo + row.bar}
+        selection={{
+          mode: "multiple",
+        }}
+        settings={{
+          stickyColumns: {
+            start: 1,
+            end: 1,
+          },
+          zebraStripes: true,
+        }}
+      >
+        <DataGrid.Table />
+      </DataGrid>
+    );
+  },
+};

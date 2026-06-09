@@ -1008,6 +1008,29 @@ export type Blogg_landingsside = {
   seo?: Seo;
 };
 
+export type Gp_endringslogg_artikkel = {
+  _id: string;
+  _type: "gp_endringslogg_artikkel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  slug?: Slug;
+  endringsdato?: string;
+  content?: Riktekst_standard;
+  artikler?: Array<
+    {
+      _key: string;
+    } & Aksel_artikkelReference
+  >;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type GpTemaReference = {
   _ref: string;
   _type: "reference";
@@ -1081,12 +1104,6 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type Godpraksis_landingsside = {
@@ -1945,13 +1962,14 @@ export type AllSanitySchemaTypes =
   | Relatert_innhold
   | Prinsipper_landingsside
   | Blogg_landingsside
+  | Gp_endringslogg_artikkel
+  | Slug
   | GpTemaReference
   | GpTemaUndertema
   | Editorial_staffReference
   | GpTema
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
   | Godpraksis_landingsside
   | Templates_landingsside
   | Ds_endringslogg_artikkel
@@ -9394,6 +9412,13 @@ export type ENDRINGSLOGG_METADATA_BY_SLUG_QUERY_RESULT =
       endringstype: null;
       herobilde: null;
       seo: Seo | null;
+    }
+  | {
+      heading: string | null;
+      endringsdato: string | null;
+      endringstype: null;
+      herobilde: null;
+      seo: null;
     }
   | {
       heading: string | null;

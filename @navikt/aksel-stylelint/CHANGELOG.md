@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 8.12.0
+
+### Patch Changes
+
+- Stylelint: Fixed bug in aksel-no-deprecated-classes rule skipping some classes ([#4920](https://github.com/navikt/aksel/pull/4920))
+
 ## 8.11.1
 
 ## 8.11.0

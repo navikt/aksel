@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { HouseIcon, PencilBoardIcon } from "@navikt/aksel-icons";
+import { HouseIcon, PencilBoardIcon, TasklistIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
 export function gpStructure(S: StructureBuilder) {
@@ -175,5 +175,12 @@ function godPraksisPanes(S: StructureBuilder) {
           })
           .initialValueTemplates([]),
     }),
+    S.divider(),
+    S.listItem()
+      .title("Endringslogg")
+      .icon(TasklistIcon)
+      .child(
+        S.documentTypeList("gp_endringslogg_artikkel").title("Endringslogg"),
+      ),
   ];
 }
