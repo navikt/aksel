@@ -37,7 +37,7 @@ Restructure a `ds-react` component folder to follow canonical conventions — wi
 | Root component file    | `<Component>Root.tsx`                   | `AccordionRoot.tsx`           |
 | Sub-component file     | `<Component><Subcomponent>.tsx`         | `AccordionItem.tsx`           |
 | Internal sub-component | `<Component><Subcomponent>Internal.tsx` | `DialogBackdropInternal.tsx`  |
-| Sub-component dir      | kebab-case sub-component name            | `item/`                       |
+| Sub-component dir      | kebab-case sub-component name           | `item/`                       |
 | Context file           | `<Component>Root.context.ts`            | `AccordionRoot.context.ts`    |
 | Shared types file      | `<Component>.types.ts`                  | `Accordion.types.ts`          |
 | Stories                | `<Component>.stories.tsx`               | `Accordion.stories.tsx`       |
@@ -83,7 +83,13 @@ For each row in the mapping table where the path changes:
 2. Update every file in the "Importers to update" column — use the mapping table, don't rely on memory
 3. Do NOT delete old files yet
 
-### 4. Update `index.ts`
+### 4. Update Stories
+
+Move stories to component root dir. If stories import from internal paths, update those paths.
+
+**Exception:** A `stories/` subdirectory is acceptable if it already exists — do not flatten it.
+
+### 5. Update `index.ts`
 
 The repo uses a mix of default and named exports because `react-docgen-typescript` (used by `scripts/docgen.ts`) has inconsistent pickup depending on export style. Follow the existing pattern in the component's original `index.ts` — do NOT change export style during restructure.
 
@@ -105,7 +111,7 @@ export type {
 
 Some components export everything as named (no `default`). If the original had no default export, keep it that way. If types are in `<Component>.types.ts`, re-export them from there directly or via the root.
 
-### 5. Validate No Breaking Changes
+### 6. Validate No Breaking Changes
 
 **Step 1 — Export diff.** Before deleting old files, extract all exported names from the original `index.ts` (recorded in step 1) and compare against the new `index.ts`. Every name must be present:
 
@@ -118,15 +124,9 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 
 **Step 3 — Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
 
-### 6. Remove Old Files
+### 7. Remove Old Files
 
 Only after verifying new files are correct and `index.ts` exports match the original, delete the old files.
-
-### 7. Update Stories
-
-Move stories to component root dir. If stories import from internal paths, update those paths.
-
-**Exception:** A `stories/` subdirectory is acceptable if it already exists — do not flatten it.
 
 ## Unit Tests
 
