@@ -90,7 +90,7 @@ export default function LogEntry({
             </HStack>
           </HStack>
           {/* Header and content */}
-          <VStack marginBlock="space-0 space-64" padding="space-0">
+          <VStack marginBlock="space-0 space-64">
             {visMer ? (
               <ShowMore as="div" scrollTargetRef={logEntryContainer}>
                 <ShowMore.Heading>
