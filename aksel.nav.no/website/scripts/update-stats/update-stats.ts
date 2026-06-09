@@ -15,7 +15,7 @@ import {
   type templatesUsageQueryT,
   uniqueRepoQuery,
   type uniqueRepoQueryT,
-} from "./update-stats.query";
+} from "./update-stats.queries";
 
 const labels = { script: "update-stats", source: "aksel-stats-updater" };
 
