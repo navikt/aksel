@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.12.1
+
+### Patch Changes
+
+- Timeline: Fix bug where axis-labels could overflow-x ([#4959](https://github.com/navikt/aksel/pull/4959))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.12.1
+  - @navikt/aksel-icons@8.12.1
+
 ## 8.12.0
 
 ### Minor Changes
