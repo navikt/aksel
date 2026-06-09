@@ -103,7 +103,7 @@ export const schema: SchemaPluginOptions = {
     },
     {
       id: "gp.artikkel.by.undertema",
-      title: "God praksis aritkkel med undertema",
+      title: "God praksis artikkel med undertema",
       schemaType: "aksel_artikkel",
       parameters: [{ name: "undertema_id", type: "string" }],
       value: (params) => ({
@@ -112,11 +112,31 @@ export const schema: SchemaPluginOptions = {
     },
     {
       id: "gp.artikkel.by.innholdstype",
-      title: "God praksis aritkkel med innholdstype",
+      title: "God praksis artikkel med innholdstype",
       schemaType: "aksel_artikkel",
       parameters: [{ name: "id", type: "string" }],
       value: (params) => ({
         innholdstype: { _type: "reference", _ref: params.id },
+      }),
+    },
+    {
+      id: "gp.changelog.with.reference",
+      title: "Endringsloggartikkel med referanse",
+      schemaType: "gp_endringslogg_artikkel",
+      parameters: [{ name: "id", type: "string" }],
+      value: (params) => ({
+        artikler: [{ _type: "reference", _ref: params.id }],
+      }),
+    },
+    {
+      id: "ds.changelog.with.reference",
+      title: "Endringsloggartikkel med referanse",
+      schemaType: "ds_endringslogg_artikkel",
+      parameters: [{ name: "id", type: "string" }],
+      value: (params) => ({
+        artikler: [{ _type: "reference", _ref: params.id }],
+        endringsdato: new Date().toISOString(),
+        endringstype: "dokumentasjon",
       }),
     },
   ],
