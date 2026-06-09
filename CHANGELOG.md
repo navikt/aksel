@@ -1,5 +1,17 @@
 # Changelog
 
+## 8.12.1
+
+### @navikt/ds-react
+
+- Timeline: Fix bug where axis-labels could overflow-x ([#4959](https://github.com/navikt/aksel/pull/4959))
+
+### @navikt/ds-css
+
+- DataGrid: Fixed sticky columns horizontal shadows ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+- DataGrid: Fixed zebra-stripes with sticky columns ([#4960](https://github.com/navikt/aksel/pull/4960))
+
 ## 8.12.0
 
 ### @navikt/ds-react
