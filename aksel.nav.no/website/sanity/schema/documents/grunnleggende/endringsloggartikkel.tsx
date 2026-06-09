@@ -53,21 +53,17 @@ export const EndringsloggArtikkel = defineType({
         "Dette valget legger på styling på oppdateringen som gjør at den tiltrekker seg mer oppmerksomhet.",
       type: "boolean",
       initialValue: false,
+      hidden: true,
+      deprecated: {
+        reason: "Endringslogger skal ikke lenger kunne være fremhevet.",
+      }
     }),
     defineField({
-      hidden: ({ document }) => !document?.fremhevet,
       title: "Fremhevet herobilde",
       name: "herobilde",
       description:
         "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
       type: "image",
-      validation: (Rule) =>
-        Rule.custom((value, { document }) => {
-          if (document?.fremhevet && !value?.asset?._ref) {
-            return "En fremhevet oppdatering må ha et herobilde";
-          }
-          return true;
-        }),
       fields: [
         defineField({
           name: "dekorativt",
@@ -96,6 +92,10 @@ export const EndringsloggArtikkel = defineType({
             }),
         }),
       ],
+      hidden: true,
+      deprecated: {
+        reason: "Endringslogger skal ikke lenger kunne være fremhevet.",
+      }
     }),
     defineField({
       title: "Innhold",
@@ -113,6 +113,29 @@ export const EndringsloggArtikkel = defineType({
         'Skjuler deler av innholdet bak en "Vis mer"-knapp. OBS: Dobbeltsjekk at det er nok innhold til at det gir mening å bruke denne.',
       type: "boolean",
       initialValue: false,
+    }),
+    defineField({
+      title: "Artikler",
+      name: "artikler",
+      group: "innhold",
+      description: "Artikler denne oppdateringen gjelder.",
+      type: "array",
+      options: {
+        sortable: false,
+      },
+      of: [
+        {
+          type: "reference",
+          to: [
+            { type: "ds_artikkel" },
+            { type: "komponent_artikkel" },
+            { type: "templates_artikkel" },
+          ],
+          options: {
+            disableNew: true,
+          },
+        },
+      ],
     }),
     BaseSEOPreset,
   ],
