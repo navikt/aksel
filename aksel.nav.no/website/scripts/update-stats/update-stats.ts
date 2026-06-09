@@ -202,6 +202,8 @@ async function getTimeframe() {
   }
 
   const oldDate = rows[rows.length - 1]?.scrape_timestamp?.value;
+
+  /* We avoid first one since it could be currently being updated */
   const newDate = rows[1]?.scrape_timestamp?.value;
 
   if (!oldDate || !newDate) {
@@ -210,7 +212,6 @@ async function getTimeframe() {
 
   return {
     oldDate,
-    /* We avoid first one since it could be currently being updated */
     newDate,
   };
 }
