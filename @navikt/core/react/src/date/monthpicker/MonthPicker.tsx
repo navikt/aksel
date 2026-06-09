@@ -135,6 +135,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           onOpen={() => setOpen((x) => !x)}
           ariaId={ariaId}
           defined={true}
+          caller={null}
         >
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}
