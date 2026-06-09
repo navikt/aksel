@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.12.0
+
+### Minor Changes
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
 ## 8.11.1
 
 ### Patch Changes
