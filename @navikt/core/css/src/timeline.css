@@ -34,6 +34,10 @@
   position: absolute;
   color: var(--ax-text-neutral-subtle);
   white-space: nowrap;
+
+  &:first-of-type {
+    overflow-x: clip;
+  }
 }
 
 .aksel-timeline__row {
