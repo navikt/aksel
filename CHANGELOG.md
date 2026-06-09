@@ -1,5 +1,33 @@
 # Changelog
 
+## 8.12.0
+
+### @navikt/ds-react
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+- DatePicker: Updated user-flow for ranged datepicker with inputs. Now changes from/to-date based on which input user opened DatePicker with. ([#4896](https://github.com/navikt/aksel/pull/4896))
+
+* Textarea: Better internal type-guarding ([#4950](https://github.com/navikt/aksel/pull/4950))
+
+* Logging: Improved console warnings ([#4922](https://github.com/navikt/aksel/pull/4922))
+
+* useEventListener-hook: Inline-handlers are now stable ([#4923](https://github.com/navikt/aksel/pull/4923))
+
+* ToggleGroup: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+* ActionMenu: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+* Tabs: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+### @navikt/ds-css
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+### @navikt/aksel-stylelint
+
+- Stylelint: Fixed bug in aksel-no-deprecated-classes rule skipping some classes ([#4920](https://github.com/navikt/aksel/pull/4920))
+
 ## 8.11.1
 
 ### @navikt/ds-react
