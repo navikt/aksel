@@ -121,6 +121,7 @@ const KOMPONENT_BY_SLUG_QUERY =
         ${destructureBlocks}
       },
     },
+    "changelog": *[_type == "ds_endringslogg_artikkel" && ^._id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato},
     content[]{
       ...,
       ${destructureBlocks}

@@ -6473,6 +6473,30 @@
         },
         "optional": true
       },
+      "artikler": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "inline",
+                "name": "ds_artikkel.reference"
+              },
+              {
+                "type": "inline",
+                "name": "komponent_artikkel.reference"
+              },
+              {
+                "type": "inline",
+                "name": "templates_artikkel.reference"
+              }
+            ]
+          }
+        },
+        "optional": true
+      },
       "seo": {
         "type": "objectAttribute",
         "value": {
@@ -9132,13 +9156,6 @@
         "value": {
           "type": "inline",
           "name": "seo"
-        },
-        "optional": true
-      },
-      "writeHelp": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       }

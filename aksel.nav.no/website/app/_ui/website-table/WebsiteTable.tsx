@@ -27,7 +27,9 @@ function WebsiteTable({
       <thead>
         <tr className={styles.websiteTableHeadTr}>
           {th.map((x) => (
-            <th
+            <BodyShort
+              as="th"
+              weight="semibold"
               key={x.text}
               className={styles.websiteTableTh}
               data-hide={x.hideOnSm ? "sm" : undefined}
@@ -39,7 +41,7 @@ function WebsiteTable({
               ) : (
                 x.text
               )}
-            </th>
+            </BodyShort>
           ))}
           {withCopy && (
             <th data-hide="sm" className={styles.websiteTableTh}>
@@ -77,13 +79,14 @@ function WebsiteTableRow({
   return (
     <tr className={styles.websiteTableTr}>
       {tr.map((x, xi) => (
-        <td
+        <BodyShort
+          as="td"
           key={xi}
           data-hide={x.hideOnSm ?? "false"}
           className={styles.websiteTableTd}
         >
           {x.text}
-        </td>
+        </BodyShort>
       ))}
       {useCopy && (
         <td data-hide="sm" data-align="end" className={styles.websiteTableTd}>
