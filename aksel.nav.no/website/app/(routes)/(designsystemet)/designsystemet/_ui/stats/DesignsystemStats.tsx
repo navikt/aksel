@@ -45,7 +45,7 @@ async function DesignsystemStats() {
           trend={`${componentUsageTrend.number}${componentUsageTrend.modifier}`}
         />
         <StatsCard
-          label={`Oppdatert til v${data.versionStatistics.currentMajor}`}
+          label={`Oppgradert til v${data.versionStatistics.currentMajor}`}
           stat={data.versionStatistics.latestMajorPercentage}
           trend={`${versionTrend} løsninger`}
           modifier="%"
