@@ -57,7 +57,7 @@ function pickRangeSelection({
     return newSelection;
   }
 
-  // No caller - original edge-case handling
+  // No caller - edge-case handling
   if (!selected?.to) {
     /**
      * If defaultSelected.from is defined, but not "to", and user selects the same date as "from",
