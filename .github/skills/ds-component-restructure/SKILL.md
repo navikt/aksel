@@ -35,7 +35,7 @@ Restructure a `ds-react` component folder to follow canonical conventions — wi
 | Root component file    | `<Component>Root.tsx`                   | `AccordionRoot.tsx`           |
 | Sub-component file     | `<Component><Subcomponent>.tsx`         | `AccordionItem.tsx`           |
 | Internal sub-component | `<Component><Subcomponent>Internal.tsx` | `DialogBackdropInternal.tsx`  |
-| Sub-component dir      | lowercase sub-component name            | `item/`                       |
+| Sub-component dir      | kebab-case sub-component name            | `item/`                       |
 | Context file           | `<Component>Root.context.ts`            | `AccordionRoot.context.ts`    |
 | Shared types file      | `<Component>.types.ts`                  | `Accordion.types.ts`          |
 | Stories                | `<Component>.stories.tsx`               | `Accordion.stories.tsx`       |
