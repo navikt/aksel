@@ -23,6 +23,8 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
@@ -78,7 +80,7 @@ export default async function Page(props: Props) {
     }),
   ]);
 
-  if (!pageData?.heading) {
+  if (!pageData?.heading || !pageData._id) {
     notFound();
   }
 
@@ -92,6 +94,8 @@ export default async function Page(props: Props) {
 
   const undertema = getValidRenderArray(pageData.undertema);
   const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
+
+  const changelogs = await fetchChangelogs(pageData._id, "gp");
 
   function hasUpdated() {
     if (!pageData?.updateInfo?.lastVerified || !pageData?.publishedAt) {
@@ -155,12 +159,13 @@ export default async function Page(props: Props) {
           })}
         </HStack>
       </div>
-      <TableOfContents toc={toc} />
+      <TableOfContents toc={toc} linkToChangelogs={changelogs.exists} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        <ChangelogTable changelogs={changelogs} />
 
         {writers && (
           <VStack gap="space-8" marginBlock="space-48">
