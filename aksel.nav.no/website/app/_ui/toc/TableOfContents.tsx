@@ -41,7 +41,7 @@ function TableOfContents({
     return tocProp;
   }, [tocProp, linkToChangelogs]);
 
-  const tocCtx = useTableOfContents(tocProp ?? []);
+  const tocCtx = useTableOfContents(toc ?? []);
 
   if (!toc || toc.length === 0) {
     return <div className={styles.tocAside} aria-hidden />;

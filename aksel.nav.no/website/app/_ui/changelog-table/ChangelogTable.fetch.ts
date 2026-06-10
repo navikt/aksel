@@ -4,10 +4,6 @@ import {
   GP_CHANGELOGS_FOR_ID_QUERY,
 } from "@/app/_sanity/queries";
 
-type Defined<T> = {
-  [K in keyof T]-?: NonNullable<T[K]>;
-};
-
 async function fetchChangelogs(id: string, type: "gp" | "ds") {
   const { data } = await sanityFetch({
     query:
@@ -15,7 +11,11 @@ async function fetchChangelogs(id: string, type: "gp" | "ds") {
     params: { id: id.replace("drafts.", "") },
   });
 
-  const validChangelogs: NonNullable<Defined<typeof data>> = [];
+  const validChangelogs: {
+    endringsdato: string;
+    heading: string;
+    slug: { current: string };
+  }[] = [];
 
   for (const changelog of data) {
     if (
