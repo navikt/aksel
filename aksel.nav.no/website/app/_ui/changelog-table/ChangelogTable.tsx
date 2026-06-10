@@ -1,17 +1,27 @@
 import { format } from "date-fns/format";
 import { nb } from "date-fns/locale";
-import { Heading, Link } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import type { FetchChangelogsResult } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import {
   WebsiteTable,
   WebsiteTableRow,
 } from "@/app/_ui/website-table/WebsiteTable";
 import styles from "../portable-text/CustomPortableText.module.css";
 
-function ChangelogTable({ changelogs }: { changelogs: FetchChangelogsResult }) {
+function ChangelogTable({
+  changelogs,
+  type = "ds",
+}: {
+  changelogs: FetchChangelogsResult;
+  type?: "ds" | "gp";
+}) {
   if (!changelogs.exists) {
     return null;
   }
+
+  const pathPrefix =
+    type === "ds" ? "/grunnleggende/endringslogg/" : "/god-praksis/endring/";
 
   return (
     <div data-block-margin="space-28">
@@ -41,9 +51,13 @@ function ChangelogTable({ changelogs }: { changelogs: FetchChangelogsResult }) {
                 },
                 {
                   text: (
-                    <Link href={changelog.slug?.current} data-color="neutral">
+                    <UmamiLink
+                      href={`${pathPrefix}${changelog.slug?.current}`}
+                      data-color="neutral"
+                      lenkegruppe="endringslogg-tabell"
+                    >
                       {changelog.heading}
-                    </Link>
+                    </UmamiLink>
                   ),
                 },
               ]}
