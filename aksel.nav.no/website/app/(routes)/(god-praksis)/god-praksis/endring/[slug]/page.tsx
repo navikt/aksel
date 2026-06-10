@@ -2,6 +2,7 @@ import { format } from "date-fns/format";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next/types";
 import {
   BodyShort,
   Box,
@@ -30,30 +31,25 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-/* export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const { data: seoData } = await sanityFetch({
-    query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
-    params: { slug: decodeURIComponent(`god-praksis/artikler/${slug}`) },
+  const { data: pageData } = await sanityFetch({
+    query: GP_CHANGELOGS_BY_SLUG_QUERY,
+    params: { slug },
     stega: false,
   });
 
-  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image);
-  const fallbackOgImage = urlForOpenGraphImage(
-    seoData?.undertema?.[0]?.tema?.image,
-  );
-
   return {
-    title: seoData?.heading,
-    description: seoData?.seo?.meta ?? seoData?.ingress,
+    title: `${pageData?.heading} - Endringslogg`,
+    keywords: "God praksis, endringslogg",
     openGraph: {
-      images: pageOgImage ?? fallbackOgImage,
-      publishedTime: seoData?.publishedAt ?? seoData?._updatedAt,
-      modifiedTime: seoData?.updateInfo?.lastVerified ?? seoData?._updatedAt,
+      type: "article",
+      publishedTime: pageData?.endringsdato || undefined,
+      images: "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
-} */
+}
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
