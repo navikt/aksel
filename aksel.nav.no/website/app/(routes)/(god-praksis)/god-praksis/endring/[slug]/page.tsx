@@ -1,32 +1,16 @@
-import { format } from "date-fns/format";
-import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
-import { FileIcon } from "@navikt/aksel-icons";
-import {
-  BodyShort,
-  Box,
-  HStack,
-  Heading,
-  InfoCard,
-  List,
-  VStack,
-} from "@navikt/ds-react";
-import {
-  InfoCardContent,
-  InfoCardHeader,
-  InfoCardTitle,
-} from "@navikt/ds-react/InfoCard";
-import { ListItem } from "@navikt/ds-react/List";
+import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GP_CHANGELOGS_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { ChangelogForList } from "@/app/_ui/changelog-page/ChangelogForList";
+import { ChangelogHeader } from "@/app/_ui/changelog-page/ChangelogHeader";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import styles from "../../artikler/[slug]/page.module.css";
 
 type Props = {
@@ -67,7 +51,7 @@ export default async function Page({ params }: Props) {
     }),
   ]);
 
-  if (!pageData?.heading || !pageData._id) {
+  if (!pageData?.heading || !pageData._id || !pageData.endringsdato) {
     notFound();
   }
 
@@ -78,54 +62,13 @@ export default async function Page({ params }: Props) {
 
   return (
     <article className={styles.pageArticle}>
-      <VStack gap="space-4">
-        <BodyShort textColor="subtle" data-color="brand-blue" size="small">
-          Endringslogg
-        </BodyShort>
-        <Heading level="1" size="xlarge" data-aksel-heading-color>
-          {pageData.heading}
-        </Heading>
-        <HStack gap="space-8" align="center">
-          <BodyShort size="small" data-color="neutral" textColor="subtle">
-            God praksis
-          </BodyShort>
-          <BodyShort
-            as="span"
-            aria-hidden
-            data-color="neutral"
-            textColor="subtle"
-          >
-            •
-          </BodyShort>
-          <BodyShort size="small" textColor="subtle" data-color="neutral">
-            {format(new Date(pageData.endringsdato || ""), "d. MMMM yyy", {
-              locale: nb,
-            })}
-          </BodyShort>
-        </HStack>
-
-        {changelogFor.length > 0 && (
-          <InfoCard data-color="brand-blue" data-block-margin="space-28">
-            <InfoCardHeader icon={<FileIcon aria-hidden />}>
-              <InfoCardTitle>{`${changelogFor.length > 1 ? "Sider" : "Side"} som er endret`}</InfoCardTitle>
-            </InfoCardHeader>
-            <InfoCardContent>
-              <List>
-                {changelogFor.map((artikkel) => (
-                  <ListItem key={artikkel.slug}>
-                    <UmamiLink
-                      href={`/${artikkel.slug!}`}
-                      lenkegruppe="endringslogg-backlink"
-                    >
-                      {artikkel.heading}
-                    </UmamiLink>
-                  </ListItem>
-                ))}
-              </List>
-            </InfoCardContent>
-          </InfoCard>
-        )}
-      </VStack>
+      <ChangelogHeader
+        heading={pageData.heading}
+        endringsdato={pageData.endringsdato}
+        type="God praksis"
+      >
+        <ChangelogForList changelogFor={changelogFor} />
+      </ChangelogHeader>
 
       <TableOfContents toc={toc || []} />
       <Box marginBlock="space-48">
