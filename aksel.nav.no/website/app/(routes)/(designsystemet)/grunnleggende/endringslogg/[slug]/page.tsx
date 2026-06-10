@@ -147,10 +147,13 @@ export default async function (props: Props) {
         columns={{ xs: 1, md: 2 }}
       >
         {logs.previous && (
-          <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />
+          <ChangelogLinkCard
+            logEntry={logs.previous}
+            label="Tidligere endring"
+          />
         )}
         {logs.next && (
-          <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
+          <ChangelogLinkCard logEntry={logs.next} label="Nyere endring" />
         )}
       </HGrid>
     </DesignsystemetPageLayout>
