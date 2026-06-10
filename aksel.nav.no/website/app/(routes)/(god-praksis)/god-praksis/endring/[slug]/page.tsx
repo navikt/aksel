@@ -3,9 +3,11 @@ import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
+import { FileIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
   Box,
+  HStack,
   Heading,
   InfoCard,
   List,
@@ -76,46 +78,36 @@ export default async function Page({ params }: Props) {
 
   return (
     <article className={styles.pageArticle}>
-      <Box marginBlock="space-0 space-28">
-        <VStack gap="space-4">
-          <BodyShort textColor="subtle" data-color="brand-blue" size="small">
+      <VStack gap="space-4">
+        <BodyShort textColor="subtle" data-color="brand-blue" size="small">
+          Endringslogg
+        </BodyShort>
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
+          {pageData.heading}
+        </Heading>
+        <HStack gap="space-8" align="center">
+          <BodyShort size="small" data-color="neutral" textColor="subtle">
             God praksis
           </BodyShort>
-          <Heading level="1" size="xlarge" data-aksel-heading-color spacing>
-            {pageData.heading}
-          </Heading>
-        </VStack>
-        <BodyShort size="small" textColor="subtle" data-color="neutral">
-          {format(new Date(pageData.endringsdato || ""), "d. MMMM yyy", {
-            locale: nb,
-          })}
-        </BodyShort>
-      </Box>
-      <TableOfContents toc={toc || []} />
-      <div>
-        {changelogFor.length && (
-          <div>
-            <Heading size="medium" level="2" data-aksel-heading-color spacing>
-              Endringslogg for artikkel
-            </Heading>
-            <List>
-              {changelogFor.map((artikkel) => (
-                <ListItem key={artikkel.slug}>
-                  <UmamiLink
-                    href={`/${artikkel.slug!}`}
-                    lenkegruppe="endringslogg-backlink"
-                  >
-                    {artikkel.heading}
-                  </UmamiLink>
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        )}
+          <BodyShort
+            as="span"
+            aria-hidden
+            data-color="neutral"
+            textColor="subtle"
+          >
+            •
+          </BodyShort>
+          <BodyShort size="small" textColor="subtle" data-color="neutral">
+            {format(new Date(pageData.endringsdato || ""), "d. MMMM yyy", {
+              locale: nb,
+            })}
+          </BodyShort>
+        </HStack>
+
         {changelogFor.length > 0 && (
-          <InfoCard data-block-margin="space-28" data-color="brand-blue">
-            <InfoCardHeader>
-              <InfoCardTitle>Endringslogg for artikkel</InfoCardTitle>
+          <InfoCard data-color="brand-blue" data-block-margin="space-28">
+            <InfoCardHeader icon={<FileIcon aria-hidden />}>
+              <InfoCardTitle>{`${changelogFor.length > 1 ? "Sider" : "Side"} som er endret`}</InfoCardTitle>
             </InfoCardHeader>
             <InfoCardContent>
               <List>
@@ -133,10 +125,14 @@ export default async function Page({ params }: Props) {
             </InfoCardContent>
           </InfoCard>
         )}
+      </VStack>
+
+      <TableOfContents toc={toc || []} />
+      <Box marginBlock="space-48">
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
-      </div>
+      </Box>
     </article>
   );
 }

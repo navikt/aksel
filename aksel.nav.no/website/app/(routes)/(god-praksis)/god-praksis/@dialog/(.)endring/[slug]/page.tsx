@@ -2,13 +2,15 @@ import { format } from "date-fns/format";
 import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
+import { FileIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
+  Box,
   Dialog,
+  HStack,
   Heading,
   InfoCard,
   List,
-  VStack,
 } from "@navikt/ds-react";
 import { DialogBody, DialogHeader, DialogPopup } from "@navikt/ds-react/Dialog";
 import {
@@ -54,35 +56,42 @@ export default async function Page({ params }: Props) {
 
   return (
     <Dialog defaultOpen>
-      <DialogPopup>
+      <DialogPopup width="large">
         <DialogHeader>
-          <VStack gap="space-4">
-            <BodyShort textColor="subtle" data-color="brand-blue" size="small">
+          <BodyShort textColor="subtle" data-color="brand-blue" size="small">
+            Endringslogg
+          </BodyShort>
+
+          <Heading level="1" size="xlarge" data-aksel-heading-color>
+            {pageData.heading}
+          </Heading>
+          <HStack gap="space-8" align="center">
+            <BodyShort size="small" data-color="neutral" textColor="subtle">
               God praksis
             </BodyShort>
-            <Heading level="1" size="xlarge" data-aksel-heading-color spacing>
-              {pageData.heading}
-            </Heading>
-          </VStack>
-          <BodyShort size="small" textColor="subtle" data-color="neutral">
-            {format(new Date(pageData.endringsdato || ""), "d. MMMM yyy", {
-              locale: nb,
-            })}
-          </BodyShort>
+            <BodyShort
+              as="span"
+              aria-hidden
+              data-color="neutral"
+              textColor="subtle"
+            >
+              •
+            </BodyShort>
+            <BodyShort size="small" textColor="subtle" data-color="neutral">
+              {format(new Date(pageData.endringsdato || ""), "d. MMMM yyy", {
+                locale: nb,
+              })}
+            </BodyShort>
+          </HStack>
         </DialogHeader>
         <DialogBody>
           <article>
-            <div>
-              {changelogFor.length && (
-                <div>
-                  <Heading
-                    size="medium"
-                    level="2"
-                    data-aksel-heading-color
-                    spacing
-                  >
-                    Endringslogg for artikkel
-                  </Heading>
+            {changelogFor.length > 0 && (
+              <InfoCard data-color="brand-blue">
+                <InfoCardHeader icon={<FileIcon aria-hidden />}>
+                  <InfoCardTitle>{`${changelogFor.length > 1 ? "Sider" : "Side"} som er endret`}</InfoCardTitle>
+                </InfoCardHeader>
+                <InfoCardContent>
                   <List>
                     {changelogFor.map((artikkel) => (
                       <ListItem key={artikkel.slug}>
@@ -95,33 +104,14 @@ export default async function Page({ params }: Props) {
                       </ListItem>
                     ))}
                   </List>
-                </div>
-              )}
-              {changelogFor.length > 0 && (
-                <InfoCard data-block-margin="space-28" data-color="brand-blue">
-                  <InfoCardHeader>
-                    <InfoCardTitle>Endringslogg for artikkel</InfoCardTitle>
-                  </InfoCardHeader>
-                  <InfoCardContent>
-                    <List>
-                      {changelogFor.map((artikkel) => (
-                        <ListItem key={artikkel.slug}>
-                          <UmamiLink
-                            href={`/${artikkel.slug!}`}
-                            lenkegruppe="endringslogg-backlink"
-                          >
-                            {artikkel.heading}
-                          </UmamiLink>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </InfoCardContent>
-                </InfoCard>
-              )}
+                </InfoCardContent>
+              </InfoCard>
+            )}
+            <Box marginBlock="space-48">
               <CustomPortableText
                 value={(pageData.content ?? []) as PortableTextBlock[]}
               />
-            </div>
+            </Box>
           </article>
         </DialogBody>
       </DialogPopup>

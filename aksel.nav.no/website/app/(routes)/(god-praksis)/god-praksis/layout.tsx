@@ -5,8 +5,10 @@ import { Header } from "@/app/_ui/header/Header";
 
 export default async function GodPraksisLayout({
   children,
+  dialog,
 }: {
   children: React.ReactNode;
+  dialog: React.ReactNode;
 }) {
   return (
     <AkselPage footer={<Footer />} footerPosition="belowFold">
@@ -16,6 +18,7 @@ export default async function GodPraksisLayout({
           {children}
         </PageBlock>
       </Box>
+      {dialog}
     </AkselPage>
   );
 }
