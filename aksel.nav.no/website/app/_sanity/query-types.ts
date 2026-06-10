@@ -12254,23 +12254,764 @@ export type DESIGNSYSTEM_STATS_QUERY_RESULT = {
 
 // Source: ../app/_sanity/queries.ts
 // Variable: DS_CHANGELOGS_FOR_ID_QUERY
-// Query: *[_type == "ds_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato, _type}
+// Query: *[_type == "ds_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}
 export type DS_CHANGELOGS_FOR_ID_QUERY_RESULT = Array<{
   heading: string | null;
   slug: Slug | null;
   endringsdato: string | null;
-  _type: "ds_endringslogg_artikkel";
 }>;
 
 // Source: ../app/_sanity/queries.ts
 // Variable: GP_CHANGELOGS_FOR_ID_QUERY
-// Query: *[_type == "gp_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato, _type}
+// Query: *[_type == "gp_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}
 export type GP_CHANGELOGS_FOR_ID_QUERY_RESULT = Array<{
   heading: string | null;
   slug: Slug | null;
   endringsdato: string | null;
-  _type: "gp_endringslogg_artikkel";
 }>;
+
+// Source: ../app/_sanity/queries.ts
+// Variable: GP_CHANGELOGS_BY_SLUG_QUERY
+// Query: *[_type == "gp_endringslogg_artikkel" && $slug == slug.current][0]{  ...,  content[]{    ...,    _type == "language" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "alert" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "attachment" =>{  ...,  "downloadLink": asset->url,  "size": asset->size,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "token_ref"=>@->,markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},_type == "intro_komponent" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }},_type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "live_demo" =>{  ...,  "sandbox_ref": sandbox_ref->{...},},_type == "installasjon_seksjon" =>{  ...,  "code_ref": code_ref->{...},},_type == "accordion"=>{  ...,  list[]{    ...,    content[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},       _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}    }  }},_type == "expansioncard"=>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },},     _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }}  }}, _type == "bilde" =>{    ...,    floating_text[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "video" =>{    ...,    "webm": {      "url": webm.asset->url,      "extension": webm.asset->extension    },    "fallback": {      "url": fallback.asset->url,      "extension": fallback.asset->extension    },    "track": track.asset->url }, _type == "alert" =>{    ...,    body[]{      ...,      markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}    } }, _type == "kode" =>{    ...,    "ref": ref->{...}, }, _type == "kode_eksempler" =>{    ...,    dir->, }, _type == "kode_ref" => @->, _type == "tips" =>{  ...,  body[]{    ...,    markDefs[]{  ...,  _type == 'internalLink' => {      "slug": @.reference->slug,      anchor,  },}  }}, _type == "relatert_innhold" =>{  title,  lenker[]{    ...,    "intern_lenke": intern_lenke->slug.current,  }},_type == "table" =>{  ...,  "_type": "tabell_v2"},_type == "props_seksjon" =>{  ...,  komponenter[]{    ...,    "propref": propref->{..., "proplist": proplist[]{      ...,      "unpackedType": null    }}  },},  },  artikler[]->{    heading,    "slug": slug.current,  }}
+export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
+  _id: string;
+  _type: "gp_endringslogg_artikkel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  slug?: Slug;
+  endringsdato?: string;
+  content: Array<
+    | {
+        _key: string;
+        _type: "accordion";
+        list: Array<{
+          title?: string;
+          content: Array<
+            | {
+                _key: string;
+                _type: "accordion";
+                list?: Array<{
+                  title?: string;
+                  content?: Riktekst_standard;
+                  _type: "element";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "alert";
+                variant?: "error" | "info" | "success" | "warning";
+                heading?: string;
+                heading_level?: "h2" | "h3" | "h4";
+                body: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        reference?:
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
+                        anchor: string | null;
+                        _type: "internalLink";
+                        _key: string;
+                        slug: Slug | null;
+                      }
+                    | {
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "bilde";
+                asset?: SanityImageAssetReference;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                alt?: string;
+                caption?: string;
+                small?: boolean;
+                kilde?: Kilde;
+                dekorativt?: boolean;
+                border?: boolean;
+                background?: Color;
+                markDefs: null;
+                floating_text: null;
+              }
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "description_list";
+                items?: Array<{
+                  label?: string;
+                  value?: string;
+                  _type: "item";
+                  _key: string;
+                }>;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "do_dont";
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Do_dont_block
+                >;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "exampletext_block";
+                title?: string;
+                text?: string;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "expansioncard";
+                heading?: string;
+                heading_level?: "h2" | "h3" | "h4";
+                description?: string;
+                body?: Riktekst_accordion;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "kode";
+                code?: Code;
+                title?: string;
+                blokker?: Array<
+                  {
+                    _key: string;
+                  } & Code_block
+                >;
+                markDefs: null;
+                ref: null;
+              }
+            | {
+                _key: string;
+                _type: "language";
+                body?: Riktekst_enkel;
+                language?: "en";
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "relatert_innhold";
+                title: string | null;
+                lenker: Array<{
+                  title?: string;
+                  intern?: boolean;
+                  intern_lenke: string | null;
+                  ekstern_link?: string;
+                  ekstern_domene?: boolean;
+                  _type: "lenke";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "table";
+                rows?: Array<
+                  {
+                    _key: string;
+                  } & TableRow
+                >;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "tips";
+                body: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        reference?:
+                          | Aksel_artikkelReference
+                          | Aksel_bloggReference
+                          | Aksel_prinsippReference
+                          | Aksel_standaloneReference
+                          | Ds_artikkelReference
+                          | Komponent_artikkelReference
+                          | Templates_artikkelReference;
+                        anchor: string | null;
+                        _type: "internalLink";
+                        _key: string;
+                        slug: Slug | null;
+                      }
+                    | {
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }> | null;
+                markDefs: null;
+              }
+            | {
+                _key: string;
+                _type: "video";
+                webm: {
+                  url: string | null;
+                  extension: string | null;
+                };
+                fallback: {
+                  url: string | null;
+                  extension: string | null;
+                };
+                track: string | null;
+                alt?: string;
+                caption?: string;
+                transkripsjon?: string;
+                markDefs: null;
+              }
+          > | null;
+          _type: "element";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "alert";
+        variant?: "error" | "info" | "success" | "warning";
+        heading?: string;
+        heading_level?: "h2" | "h3" | "h4";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "bilde";
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        caption?: string;
+        small?: boolean;
+        kilde?: Kilde;
+        dekorativt?: boolean;
+        border?: boolean;
+        background?: Color;
+        markDefs: null;
+        floating_text: null;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<
+          | {
+              reference?:
+                | Aksel_artikkelReference
+                | Aksel_bloggReference
+                | Aksel_prinsippReference
+                | Aksel_standaloneReference
+                | Ds_artikkelReference
+                | Komponent_artikkelReference
+                | Templates_artikkelReference;
+              anchor: string | null;
+              _type: "internalLink";
+              _key: string;
+              slug: Slug | null;
+            }
+          | {
+              href?: string;
+              _type: "link";
+              _key: string;
+            }
+        > | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: "description_list";
+        items?: Array<{
+          label?: string;
+          value?: string;
+          _type: "item";
+          _key: string;
+        }>;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "do_dont";
+        blokker?: Array<
+          {
+            _key: string;
+          } & Do_dont_block
+        >;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "exampletext_block";
+        title?: string;
+        text?: string;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "expansioncard";
+        heading?: string;
+        heading_level?: "h2" | "h3" | "h4";
+        description?: string;
+        body: Array<
+          | {
+              _key: string;
+              _type: "alert";
+              variant?: "error" | "info" | "success" | "warning";
+              heading?: string;
+              heading_level?: "h2" | "h3" | "h4";
+              body: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "bilde";
+              asset?: SanityImageAssetReference;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              caption?: string;
+              small?: boolean;
+              kilde?: Kilde;
+              dekorativt?: boolean;
+              border?: boolean;
+              background?: Color;
+              markDefs: null;
+              floating_text: null;
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    reference?:
+                      | Aksel_artikkelReference
+                      | Aksel_bloggReference
+                      | Aksel_prinsippReference
+                      | Aksel_standaloneReference
+                      | Ds_artikkelReference
+                      | Komponent_artikkelReference
+                      | Templates_artikkelReference;
+                    anchor: string | null;
+                    _type: "internalLink";
+                    _key: string;
+                    slug: Slug | null;
+                  }
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "do_dont";
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Do_dont_block
+              >;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "exampletext_block";
+              title?: string;
+              text?: string;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "kode";
+              code?: Code;
+              title?: string;
+              blokker?: Array<
+                {
+                  _key: string;
+                } & Code_block
+              >;
+              markDefs: null;
+              ref: null;
+            }
+          | {
+              _key: string;
+              _type: "relatert_innhold";
+              title: string | null;
+              lenker: Array<{
+                title?: string;
+                intern?: boolean;
+                intern_lenke: string | null;
+                ekstern_link?: string;
+                ekstern_domene?: boolean;
+                _type: "lenke";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "table";
+              rows?: Array<
+                {
+                  _key: string;
+                } & TableRow
+              >;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "tips";
+              body: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      reference?:
+                        | Aksel_artikkelReference
+                        | Aksel_bloggReference
+                        | Aksel_prinsippReference
+                        | Aksel_standaloneReference
+                        | Ds_artikkelReference
+                        | Komponent_artikkelReference
+                        | Templates_artikkelReference;
+                      anchor: string | null;
+                      _type: "internalLink";
+                      _key: string;
+                      slug: Slug | null;
+                    }
+                  | {
+                      href?: string;
+                      _type: "link";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }> | null;
+              markDefs: null;
+            }
+          | {
+              _key: string;
+              _type: "video";
+              webm: {
+                url: string | null;
+                extension: string | null;
+              };
+              fallback: {
+                url: string | null;
+                extension: string | null;
+              };
+              track: string | null;
+              alt?: string;
+              caption?: string;
+              transkripsjon?: string;
+              markDefs: null;
+            }
+        > | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "kode";
+        code?: Code;
+        title?: string;
+        blokker?: Array<
+          {
+            _key: string;
+          } & Code_block
+        >;
+        markDefs: null;
+        ref: null;
+      }
+    | {
+        _key: string;
+        _type: "language";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        language?: "en";
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "relatert_innhold";
+        title: string | null;
+        lenker: Array<{
+          title?: string;
+          intern?: boolean;
+          intern_lenke: string | null;
+          ekstern_link?: string;
+          ekstern_domene?: boolean;
+          _type: "lenke";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "tabell_v2";
+        rows?: Array<
+          {
+            _key: string;
+          } & TableRow
+        >;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "tips";
+        body: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<
+            | {
+                reference?:
+                  | Aksel_artikkelReference
+                  | Aksel_bloggReference
+                  | Aksel_prinsippReference
+                  | Aksel_standaloneReference
+                  | Ds_artikkelReference
+                  | Komponent_artikkelReference
+                  | Templates_artikkelReference;
+                anchor: string | null;
+                _type: "internalLink";
+                _key: string;
+                slug: Slug | null;
+              }
+            | {
+                href?: string;
+                _type: "link";
+                _key: string;
+              }
+          > | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        markDefs: null;
+      }
+    | {
+        _key: string;
+        _type: "video";
+        webm: {
+          url: string | null;
+          extension: string | null;
+        };
+        fallback: {
+          url: string | null;
+          extension: string | null;
+        };
+        track: string | null;
+        alt?: string;
+        caption?: string;
+        transkripsjon?: string;
+        markDefs: null;
+      }
+  > | null;
+  artikler: Array<{
+    heading: string | null;
+    slug: string | null;
+  }> | null;
+} | null;
 
 // Source: ../app/_sanity/queries.ts
 // Variable: ALL_KOMPONENTS_MARKDOWN_QUERY
@@ -17327,8 +18068,9 @@ declare module "@sanity/client" {
     '\n{\n      "frontpage": *[_type == "aksel_forside"][0]._updatedAt,\n      "godpraksis": *[_type == "godpraksis_landingsside"][0]._updatedAt,\n      "blogg": *[_type == "blogg_landingsside"][0]._updatedAt,\n}\n  ': SITEMAP_LANDINGPAGES_QUERY_RESULT;
     '\n  *[_type in $doctypes]{\n    "slug": slug.current,\n    _updatedAt\n  }\n  ': SITEMAP_ARTICLES_BY_TYPE_QUERY_RESULT;
     '*[_id == "designsystem_statistics" && _type == "designsystemStatistics"][0]': DESIGNSYSTEM_STATS_QUERY_RESULT;
-    '*[_type == "ds_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato, _type}': DS_CHANGELOGS_FOR_ID_QUERY_RESULT;
-    '*[_type == "gp_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato, _type}': GP_CHANGELOGS_FOR_ID_QUERY_RESULT;
+    '*[_type == "ds_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}': DS_CHANGELOGS_FOR_ID_QUERY_RESULT;
+    '*[_type == "gp_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}': GP_CHANGELOGS_FOR_ID_QUERY_RESULT;
+    '*[_type == "gp_endringslogg_artikkel" && $slug == slug.current][0]{\n  ...,\n  content[]{\n    ...,\n    \n\n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n}\n,\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{..., "proplist": proplist[]{\n      ...,\n      "unpackedType": null\n    }}\n  },\n},\n\n  },\n  artikler[]->{\n    heading,\n    "slug": slug.current,\n  }\n}': GP_CHANGELOGS_BY_SLUG_QUERY_RESULT;
     '*[_type == "komponent_artikkel" && defined(slug.current)]{\n    ...,\n    content[]{\n      ...,\n      \n\n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n}\n,\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{..., "proplist": proplist[]{\n      ...,\n      "type": coalesce(unpackedType, type),\n      "unpackedType": null\n    }}\n  },\n},\n\n    }\n  }': ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT;
     '*[_type == "ds_artikkel" && defined(slug.current)]{\n    ...,\n    content[]{\n      ...,\n      \n\n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n}\n,\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{..., "proplist": proplist[]{\n      ...,\n      "type": coalesce(unpackedType, type),\n      "unpackedType": null\n    }}\n  },\n},\n\n    }\n  }': ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT;
     '*[_type == "templates_artikkel" && defined(slug.current)]{\n    ...,\n    content[]{\n      ...,\n      \n\n_type == "language" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "alert" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "attachment" =>{\n  ...,\n  "downloadLink": asset->url,\n  "size": asset->size,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "token_ref"=>@->,\n\nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n_type == "intro_komponent" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n_type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n},\n_type == "live_demo" =>{\n  ...,\n  "sandbox_ref": sandbox_ref->{...},\n},\n_type == "installasjon_seksjon" =>{\n  ...,\n  "code_ref": code_ref->{...},\n},\n_type == "accordion"=>{\n  ...,\n  list[]{\n    ...,\n    content[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n      \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n    }\n  }\n}\n,\n_type == "expansioncard"=>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n},\n    \n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n\n  }\n},\n\n _type == "bilde" =>{\n    ...,\n    floating_text[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "video" =>{\n    ...,\n    "webm": {\n      "url": webm.asset->url,\n      "extension": webm.asset->extension\n    },\n    "fallback": {\n      "url": fallback.asset->url,\n      "extension": fallback.asset->extension\n    },\n    "track": track.asset->url\n },\n _type == "alert" =>{\n    ...,\n    body[]{\n      ...,\n      \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n    }\n },\n _type == "kode" =>{\n    ...,\n    "ref": ref->{...},\n },\n _type == "kode_eksempler" =>{\n    ...,\n    dir->,\n },\n _type == "kode_ref" => @->,\n _type == "tips" =>{\n  ...,\n  body[]{\n    ...,\n    \nmarkDefs[]{\n  ...,\n  _type == \'internalLink\' => {\n      "slug": @.reference->slug,\n      anchor,\n  },\n}\n  }\n},\n _type == "relatert_innhold" =>{\n  title,\n  lenker[]{\n    ...,\n    "intern_lenke": intern_lenke->slug.current,\n  }\n}\n,\n_type == "table" =>{\n  ...,\n  "_type": "tabell_v2"\n}\n,\n_type == "props_seksjon" =>{\n  ...,\n  komponenter[]{\n    ...,\n    "propref": propref->{..., "proplist": proplist[]{\n      ...,\n      "type": coalesce(unpackedType, type),\n      "unpackedType": null\n    }}\n  },\n},\n\n    }\n  }': ALL_TEMPLATES_MARKDOWN_QUERY_RESULT;
