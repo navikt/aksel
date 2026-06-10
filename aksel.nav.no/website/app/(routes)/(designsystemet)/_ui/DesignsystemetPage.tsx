@@ -1,5 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
-import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
+import { BodyShort, Box, HStack, Heading, Link, Tag } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
@@ -42,9 +42,13 @@ type DesignsystemetPageT = {
     | KOMPONENT_BY_SLUG_QUERY_RESULT
     | GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT
     | MONSTER_MALER_BY_SLUG_QUERY_RESULT;
+  linkToChangelogs?: boolean;
 };
 
-async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
+async function DesignsystemetPageHeader({
+  data,
+  linkToChangelogs = false,
+}: DesignsystemetPageT) {
   const updateDate = formatDateString(data?._updatedAt ?? data?._createdAt);
 
   const statusTag = getStatusTag(data?.status?.tag);
@@ -81,7 +85,12 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
             {statusTag.text}
           </Tag>
         )}
-        {updateDate && (
+        {linkToChangelogs ? (
+          <Link
+            href="#endringslogg-table"
+            data-color="neutral"
+          >{`Oppdatert ${updateDate}`}</Link>
+        ) : (
           <BodyShort size="small" as="span" textColor="subtle">
             {`Oppdatert ${updateDate}`}
           </BodyShort>

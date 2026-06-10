@@ -1,6 +1,7 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
+import { useMemo } from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
@@ -20,14 +21,27 @@ type TableOfContentsProps = {
     name?: string;
     text: string;
   };
+  linkToChangelogs?: boolean;
 };
 
 function TableOfContents({
-  toc,
+  toc: tocProp,
   variant = "default",
   feedback,
+  linkToChangelogs = false,
 }: TableOfContentsProps) {
-  const tocCtx = useTableOfContents(toc ?? []);
+  const toc = useMemo(() => {
+    if (!tocProp || tocProp.length === 0) {
+      return undefined;
+    }
+
+    if (linkToChangelogs) {
+      return [...tocProp, { id: "endringslogg-table", title: "Endringslogg" }];
+    }
+    return tocProp;
+  }, [tocProp, linkToChangelogs]);
+
+  const tocCtx = useTableOfContents(tocProp ?? []);
 
   if (!toc || toc.length === 0) {
     return <div className={styles.tocAside} aria-hidden />;
