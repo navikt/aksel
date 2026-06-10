@@ -1,5 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
-import { BodyShort, Box, HStack, Heading, Link, Tag } from "@navikt/ds-react";
+import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
@@ -9,6 +9,7 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { formatDateString } from "@/ui-utils/format-date";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
@@ -86,10 +87,11 @@ async function DesignsystemetPageHeader({
           </Tag>
         )}
         {linkToChangelogs ? (
-          <Link
+          <UmamiLink
             href="#endringslogg-table"
             data-color="neutral"
-          >{`Oppdatert ${updateDate}`}</Link>
+            lenkegruppe="endringslogg-tabell"
+          >{`Oppdatert ${updateDate}`}</UmamiLink>
         ) : (
           <BodyShort size="small" as="span" textColor="subtle">
             {`Oppdatert ${updateDate}`}
