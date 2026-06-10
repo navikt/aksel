@@ -12,7 +12,7 @@ async function fetchChangelogs(id: string, type: "gp" | "ds") {
   const { data } = await sanityFetch({
     query:
       type === "ds" ? DS_CHANGELOGS_FOR_ID_QUERY : GP_CHANGELOGS_FOR_ID_QUERY,
-    params: { id },
+    params: { id: id.replace("drafts.", "") },
   });
 
   const validChangelogs: NonNullable<Defined<typeof data>> = [];
