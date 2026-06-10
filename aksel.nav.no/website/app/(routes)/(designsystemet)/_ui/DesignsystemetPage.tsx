@@ -86,17 +86,18 @@ async function DesignsystemetPageHeader({
             {statusTag.text}
           </Tag>
         )}
-        {linkToChangelogs ? (
-          <UmamiLink
-            href="#endringslogg-table"
-            data-color="neutral"
-            lenkegruppe="endringslogg-tabell"
-          >{`Oppdatert ${updateDate}`}</UmamiLink>
-        ) : (
-          <BodyShort size="small" as="span" textColor="subtle">
-            {`Oppdatert ${updateDate}`}
-          </BodyShort>
-        )}
+        {updateDate &&
+          (linkToChangelogs ? (
+            <UmamiLink
+              href="#endringslogg-table"
+              data-color="neutral"
+              lenkegruppe="endringslogg-tabell"
+            >{`Oppdatert ${updateDate}`}</UmamiLink>
+          ) : (
+            <BodyShort size="small" as="span" textColor="subtle">
+              {`Oppdatert ${updateDate}`}
+            </BodyShort>
+          ))}
       </HStack>
       {isComponentPage && (
         <KomponentLinks data={data} heading={data?.heading} />
