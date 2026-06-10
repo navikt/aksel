@@ -165,7 +165,7 @@ export default async function Page(props: Props) {
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
-        <ChangelogTable changelogs={changelogs} />
+        <ChangelogTable changelogs={changelogs} type="gp" />
 
         {writers && (
           <VStack gap="space-8" marginBlock="space-48">
