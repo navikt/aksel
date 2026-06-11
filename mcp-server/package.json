@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "start": "node dist/index.mjs",
+    "start": "node --env-file-if-exists=.env dist/index.mjs",
     "test": "yarn vitest run",
     "inspect": "yarn mcp-inspector"
   },

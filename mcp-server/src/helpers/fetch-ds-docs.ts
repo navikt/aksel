@@ -6,23 +6,45 @@ const { cacheGet, cacheSet } = createNodeCache(
   oneHourSeconds * 4,
 );
 
+/**
+ * Bumped on every successful network refetch. Consumers (e.g. the Fuse index in
+ * fuse-search) use this to detect when the cached docs have been refreshed, so
+ * derived caches stay in sync with this single source of truth instead of
+ * keeping their own independent TTL.
+ */
+let docsGeneration = 0;
+
+function getDocsGeneration() {
+  return docsGeneration;
+}
+
 async function fetchDsDocs() {
   try {
     if (cacheGet("ds_docs")) {
       return JSON.parse(cacheGet("ds_docs")!);
     }
 
-    /* TODO: Add config and credidentials */
-    const client = createClient({});
+    /**
+     * TODO: Add env config to workflow
+     */
+    const client = createClient({
+      projectId: "hnbe3yhs",
+      dataset: "production",
+      apiVersion: "2025-08-10",
+      token: process.env.SANITY_READ_NO_DRAFTS,
+      useCdn: true,
+      perspective: "published",
+    });
 
     const allArticles = await client.fetch(
       `*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"]]{
-      heading,
       _type,
+      heading,
       "slug": slug.current,
       status,
       "intro": pt::text(intro.body),
       content,
+      kategori
   }`,
       {},
       { useCdn: true, perspective: "published" },
@@ -35,6 +57,7 @@ async function fetchDsDocs() {
     const sanitizedData = sanitizeSanityData(allArticles);
 
     cacheSet("ds_docs", JSON.stringify(sanitizedData));
+    docsGeneration += 1;
     return sanitizedData;
   } catch {
     return null;
@@ -51,6 +74,8 @@ type SearchPageT = {
   lvl3: string[];
   lvl4: string[];
   seo?: { meta?: string };
+  kategori: string;
+  _type: string;
 };
 
 function sanitizeSanityData(_data: SearchPageT[]): SearchPageT[] {
@@ -64,6 +89,8 @@ function sanitizeSanityData(_data: SearchPageT[]): SearchPageT[] {
     slug: `${x.slug}.md`,
     seo: x.seo,
     status: x.status,
+    kategori: x.kategori,
+    _type: x._type,
   }));
 }
 
@@ -90,4 +117,4 @@ function mapContent(blocks: any[]) {
   return contentBlocks;
 }
 
-export { fetchDsDocs };
+export { fetchDsDocs, getDocsGeneration };

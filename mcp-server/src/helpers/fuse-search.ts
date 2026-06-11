@@ -1,6 +1,5 @@
-import Fuse, { type FuseResult, type IFuseOptions } from "fuse.js";
-import { fetchDsDocs } from "./fetch-ds-docs.js";
-import { oneHourSeconds } from "./node-cache.js";
+import Fuse, { type IFuseOptions } from "fuse.js";
+import { fetchDsDocs, getDocsGeneration } from "./fetch-ds-docs.js";
 
 type SearchDoc = NonNullable<Awaited<ReturnType<typeof fetchDsDocs>>>[number];
 
@@ -10,6 +9,7 @@ const fuseKeys: NonNullable<IFuseOptions<SearchDoc>["keys"]> = [
   { name: "lvl3", weight: 30 },
   { name: "lvl4", weight: 20 },
   { name: "intro", weight: 20 },
+  { name: "kategori", weight: 15 },
   { name: "content", weight: 10 },
   { name: "status.tag", weight: 10 },
 ];
@@ -23,7 +23,7 @@ const fuseOptions: IFuseOptions<SearchDoc> = {
   minMatchCharLength,
   ignoreLocation: true,
   includeMatches: true,
-  threshold: 0.4,
+  threshold: 0.2,
   distance: 50,
   useTokenSearch: true,
   ignoreDiacritics: true,
@@ -36,11 +36,15 @@ const fuseOptions: IFuseOptions<SearchDoc> = {
  */
 const maxScore = 0.3;
 
-const fuseTtlMs = oneHourSeconds * 4;
-let cachedFuse: { fuse: Fuse<SearchDoc>; expiresAt: number } | null = null;
+/**
+ * The Fuse index is rebuilt only when fetchDsDocs reports a new generation,
+ * i.e. when its cache has actually refreshed. This keeps the index in sync with
+ * the docs cache (the single source of truth) instead of running a second TTL.
+ */
+let cachedFuse: { fuse: Fuse<SearchDoc>; generation: number } | null = null;
 
 async function getFuse(): Promise<Fuse<SearchDoc> | null> {
-  if (cachedFuse && cachedFuse.expiresAt > Date.now()) {
+  if (cachedFuse && cachedFuse.generation === getDocsGeneration()) {
     return cachedFuse.fuse;
   }
 
@@ -53,14 +57,21 @@ async function getFuse(): Promise<Fuse<SearchDoc> | null> {
   const index = Fuse.createIndex(fuseKeys, docs);
   const fuse = new Fuse(docs, fuseOptions, index);
 
-  cachedFuse = { fuse, expiresAt: Date.now() + fuseTtlMs };
+  cachedFuse = { fuse, generation: getDocsGeneration() };
   return fuse;
 }
 
 async function searchDocs(
   query: string,
   limit = 8,
-): Promise<FuseResult<SearchDoc>[]> {
+): Promise<
+  {
+    heading: string;
+    slug: string;
+    category: string;
+    subcategory: string;
+  }[]
+> {
   const trimmedQuery = query.trim();
 
   if (trimmedQuery.length < minMatchCharLength) {
@@ -73,9 +84,30 @@ async function searchDocs(
     return [];
   }
 
-  return fuse
+  const searchResults = fuse
     .search(trimmedQuery, { limit })
     .filter((result) => result.score !== undefined && result.score <= maxScore);
+
+  return searchResults.map(({ item }) => ({
+    heading: item.heading,
+    slug: `/${item.slug}`,
+    category: getCategory(item),
+    subcategory: item.kategori,
+  }));
+}
+
+function getCategory(doc: SearchDoc) {
+  if (doc._type === "komponent_artikkel") {
+    return "Component";
+  }
+  if (doc._type === "ds_artikkel") {
+    return "Foundations";
+  }
+  if (doc._type === "templates_artikkel") {
+    return "Templates and Patterns";
+  }
+
+  return "";
 }
 
 export { searchDocs };
