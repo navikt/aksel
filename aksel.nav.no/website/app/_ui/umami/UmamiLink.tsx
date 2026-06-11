@@ -9,12 +9,22 @@ import styles from "./UmamiLink.module.css";
 
 export const UmamiLink = ({
   lenkegruppe,
+  subtle = false,
   ...props
-}: LinkProps & { lenkegruppe: string }) => {
+}: LinkProps & { lenkegruppe: string; subtle?: boolean }) => {
+  function scrollToHash(href: string) {
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
+
   return (
     <Link
       {...props}
-      onClick={() =>
+      onClick={() => {
         umamiTrack(Events.NAVIGERE, {
           lenketekst:
             typeof props.children === "string"
@@ -22,9 +32,10 @@ export const UmamiLink = ({
               : stegaClean(props.href)!,
           destinasjon: stegaClean(props.href)!,
           lenkegruppe: stegaClean(lenkegruppe),
-        })
-      }
-      className={styles.umamiLink}
+        });
+        props.href && scrollToHash(props.href);
+      }}
+      className={`${styles.umamiLink} ${subtle ? styles.subtle : ""}`}
       as={NextLink}
     />
   );

@@ -30,6 +30,7 @@ import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { getValidRenderArray } from "@/ui-utils/valid-array";
@@ -129,9 +130,21 @@ export default async function Page(props: Props) {
             {pageData.ingress}
           </BodyLong>
         )}
-        <BodyShort size="small" as="time" textColor="subtle">
-          {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
-        </BodyShort>
+
+        {changelogs.exists ? (
+          <BodyShort size="small" as="time">
+            <UmamiLink
+              href="#endringslogg-table"
+              data-color="neutral"
+              subtle
+              lenkegruppe="endringslogg-tabell"
+            >{`Oppdatert ${formatDateString(verifiedDate)}`}</UmamiLink>
+          </BodyShort>
+        ) : (
+          <BodyShort size="small" as="time" textColor="subtle">
+            {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
+          </BodyShort>
+        )}
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {undertema?.map(({ tema, title }) => {
             const cleanTitle = stegaClean(title ?? "");

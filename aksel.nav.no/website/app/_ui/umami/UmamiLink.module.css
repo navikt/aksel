@@ -1,3 +1,7 @@
 .umamiLink {
   color: var(--ax-text-default);
 }
+
+.subtle {
+  color: var(--ax-text-subtle);
+}
