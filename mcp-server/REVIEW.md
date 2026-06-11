@@ -1,6 +1,6 @@
 # Aksel MCP Server — Incremental Improvement Review
 
-Derived from the 13 manual testing sessions in [`mcp-server/references/`](./references). Findings are taken at face value: every session pain point is treated as a real signal, and the fix is framed as one of three levers we control:
+Derived from the 13 manual testing sessions. Findings are taken at face value: every session pain point is treated as a real signal, and the fix is framed as one of three levers we control:
 
 | Tag          | Owner        | Meaning                                                                                              |
 | ------------ | ------------ | ---------------------------------------------------------------------------------------------------- |
