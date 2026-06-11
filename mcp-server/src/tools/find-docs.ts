@@ -8,7 +8,7 @@ const findDocsInputSchema = {
     .trim()
     .min(1, "query is required")
     .describe(
-      "Search query for documentation pages (e.g. 'button', 'form', 'tabs').",
+      "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences.",
     ),
   limit: z.number().int().min(1).max(20).optional().default(8),
 };
