@@ -109,11 +109,11 @@ export default async function Page() {
             Innblikk
           </Heading>
           <BodyLong spacing>
-            Innblikk er NAVs eget interne analyseverktøy, bygget og driftet av
+            Innblikk er Navs eget interne analyseverktøy, bygget og driftet av
             Nav. Det brukes til statistikk og analyse av hvordan aksel.nav.no
             brukes. Innblikk bruker ikke informasjonskapsler. Data om
             sidebesøk sendes via en proxy som bruker IP-adressen til å fastslå
-            besøkerens land, men selve IP-adressen lagres ikke.
+            hvilket land besøkeren befinner seg i, men selve IP-adressen lagres ikke.
           </BodyLong>
           <Heading size="large" level="2" spacing data-aksel-heading-color>
             Mine valg
