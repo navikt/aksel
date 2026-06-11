@@ -1,10 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../utils/helpers";
-import {
-  ChipsRemovable,
-  ChipsRemovableProps,
-} from "../removable/ChipsRemovable";
-import { ChipsToggle, ChipsToggleProps } from "../toggle/ChipsToggle";
+import { ChipsRemovable } from "../removable/ChipsRemovable";
+import { ChipsToggle } from "../toggle/ChipsToggle";
 
 interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -59,7 +56,7 @@ interface ChipsComponent extends React.ForwardRefExoticComponent<
  *    </Chips>
  * ```
  */
-const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
+export const Chips = forwardRef<HTMLUListElement, ChipsProps>(
   ({ className, size = "medium", children, ...rest }, ref) => {
     return (
       <ul
@@ -82,5 +79,4 @@ Chips.Toggle = ChipsToggle;
 Chips.Removable = ChipsRemovable;
 
 export default Chips;
-export { Chips, ChipsToggle, ChipsRemovable };
-export type { ChipsProps, ChipsToggleProps, ChipsRemovableProps };
+export type { ChipsProps };

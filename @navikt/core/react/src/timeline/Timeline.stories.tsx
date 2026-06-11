@@ -597,6 +597,44 @@ export const CustomLabel: StoryFn = () => {
   );
 };
 
+export const OverflowingAxisLabels: StoryFn = () => {
+  return (
+    <div style={{ width: "800px" }}>
+      <Timeline
+        startDate={new Date("2025-06-08")}
+        endDate={new Date("2026-04-08")}
+      >
+        <Timeline.Row label="Row">
+          {row1.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Row">
+          {row2.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   English,
@@ -606,4 +644,5 @@ export const Chromatic = renderStoriesForChromatic({
   WithDayLabels,
   WithYearLabels,
   CustomLabel,
+  OverflowingAxisLabels,
 });
