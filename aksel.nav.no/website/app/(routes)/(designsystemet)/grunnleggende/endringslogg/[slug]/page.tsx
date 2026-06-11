@@ -3,7 +3,7 @@ import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import { BodyShort, Box, HGrid, HStack, Heading } from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -84,16 +84,16 @@ export default async function (props: Props) {
         <BodyShort size="medium" textColor="subtle" data-color="brand-blue">
           {capitalizeText(endringstype || "")}
         </BodyShort>
-        <Heading size="xlarge" level="1" data-color="brand-blue">
+        <Heading size="xlarge" level="1" data-color="brand-blue" spacing>
           {heading}
         </Heading>
-        <HStack gap="space-16" marginBlock="space-0 space-28">
+        <Box marginBlock="space-0 space-28">
           <BodyShort size="small" textColor="subtle" data-color="brand-blue">
             {format(new Date(endringsdato || ""), "d. MMMM yyy", {
               locale: nb,
             })}
           </BodyShort>
-        </HStack>
+        </Box>
       </div>
       <TableOfContents
         feedback={{
