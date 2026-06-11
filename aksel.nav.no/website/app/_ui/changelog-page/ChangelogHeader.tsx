@@ -5,7 +5,7 @@ import { BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";
 type ChangelogHeaderProps = {
   heading: string;
   endringsdato: string;
-  type: "God praksis";
+  type: string;
   children?: React.ReactNode;
 };
 

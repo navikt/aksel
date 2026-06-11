@@ -202,6 +202,10 @@ const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
     },
     "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{
       ${ENDRINGSLOGG_FIELDS}
+    },
+    artikler[]->{
+      heading,
+      "slug": slug.current,
     }
   }
 `);

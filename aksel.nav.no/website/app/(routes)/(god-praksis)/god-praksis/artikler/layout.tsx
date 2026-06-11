@@ -1,14 +1,14 @@
 export default async function GodPraksisLayout({
   children,
-  dialog,
+  endringslogg,
 }: {
   children: React.ReactNode;
-  dialog: React.ReactNode;
+  endringslogg: React.ReactNode;
 }) {
   return (
     <>
       {children}
-      {dialog}
+      {endringslogg}
     </>
   );
 }

@@ -21,7 +21,11 @@ function ChangelogForList({ changelogFor }: ChangelogForProps) {
   }
 
   return (
-    <InfoCard data-color="brand-blue" data-block-margin="space-28">
+    <InfoCard
+      data-color="brand-blue"
+      data-block-margin="space-28"
+      data-text-prose
+    >
       <InfoCardHeader icon={<FileIcon aria-hidden />}>
         <InfoCardTitle>{`${changelogFor.length > 1 ? "Sider" : "Side"} som er endret`}</InfoCardTitle>
       </InfoCardHeader>

@@ -1,9 +1,7 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import { BodyShort, Box, HGrid, Heading } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -12,10 +10,11 @@ import {
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { ChangelogForList } from "@/app/_ui/changelog-page/ChangelogForList";
+import { ChangelogHeader } from "@/app/_ui/changelog-page/ChangelogHeader";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
-import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -66,6 +65,10 @@ export default async function (props: Props) {
     notFound();
   }
 
+  if (!logs.primary.heading || !logs.primary.endringsdato) {
+    notFound();
+  }
+
   const toc: { id: string; title: string }[] = [];
   logs.primary.content?.forEach((block) => {
     if (block._type === "block" && block.style === "h2") {
@@ -78,23 +81,19 @@ export default async function (props: Props) {
 
   const { endringstype, heading, endringsdato, content } = logs.primary;
 
+  const changelogFor =
+    logs.artikler?.filter((article) => !!article.slug && !!article.heading) ??
+    [];
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <div>
-        <BodyShort size="medium" textColor="subtle" data-color="brand-blue">
-          {capitalizeText(endringstype || "")}
-        </BodyShort>
-        <Heading size="xlarge" level="1" data-color="brand-blue" spacing>
-          {heading}
-        </Heading>
-        <Box marginBlock="space-0 space-28">
-          <BodyShort size="small" textColor="subtle" data-color="brand-blue">
-            {format(new Date(endringsdato || ""), "d. MMMM yyy", {
-              locale: nb,
-            })}
-          </BodyShort>
-        </Box>
-      </div>
+      <ChangelogHeader
+        heading={heading}
+        endringsdato={endringsdato}
+        type={capitalizeText(endringstype || "")}
+      >
+        <ChangelogForList changelogFor={changelogFor} />
+      </ChangelogHeader>
       <TableOfContents
         feedback={{
           name: "Endringslogg",
@@ -102,27 +101,12 @@ export default async function (props: Props) {
         }}
         toc={toc || []}
       />
-      <Box marginBlock="space-0 space-24">
+      <Box marginBlock="space-48">
         <CustomPortableText
           value={content as PortableTextBlock[]}
           data-color="brand-blue"
         />
       </Box>
-      <HGrid
-        marginBlock="space-28 space-0"
-        gap="space-48 space-24"
-        columns={{ xs: 1, md: 2 }}
-      >
-        {logs.previous && (
-          <ChangelogLinkCard
-            logEntry={logs.previous}
-            label="Tidligere endring"
-          />
-        )}
-        {logs.next && (
-          <ChangelogLinkCard logEntry={logs.next} label="Nyere endring" />
-        )}
-      </HGrid>
     </DesignsystemetPageLayout>
   );
 }
