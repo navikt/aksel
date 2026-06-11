@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 8.12.1
+
+### Patch Changes
+
+- DataGrid: Fixed sticky columns horizontal shadows ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+- DataGrid: Fixed zebra-stripes with sticky columns ([#4960](https://github.com/navikt/aksel/pull/4960))
+
 ## 8.12.0
 
 ### Minor Changes

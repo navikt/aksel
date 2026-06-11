@@ -1,5 +1,7 @@
 # @navikt/aksel-stylelint
 
+## 8.12.1
+
 ## 8.12.0
 
 ### Patch Changes
