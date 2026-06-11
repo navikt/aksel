@@ -17,9 +17,9 @@ export default async function DesignsystemLayout({
       <div className={styles.pageLayout}>
         <DesignsystemSidebar />
         {children}
+        {endringslogg}
       </div>
       <Footer />
-      {endringslogg}
     </div>
   );
 }
