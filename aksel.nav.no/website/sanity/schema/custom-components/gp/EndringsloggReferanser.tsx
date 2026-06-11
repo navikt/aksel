@@ -45,9 +45,13 @@ function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
   }, [documentStore, id]);
 
   const parsedChangelogs: DocumentT[] | undefined = useMemo(() => {
-    return changelogs?.filter(
-      (log) => log._id && log.endringsdato && log.heading && log.slug?.current,
-    );
+    return changelogs?.filter((log) => {
+      if (log._id.includes("drafts.")) {
+        return false;
+      }
+
+      return log._id && log.endringsdato && log.heading && log.slug?.current;
+    });
   }, [changelogs]);
 
   const getEmptyState = () => {
