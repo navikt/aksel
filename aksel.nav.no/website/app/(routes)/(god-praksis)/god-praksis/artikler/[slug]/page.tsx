@@ -194,7 +194,7 @@ export default async function Page(props: Props) {
                 {relevanteArtikler.map((item) => (
                   <WebsiteListItem key={item.heading} icon>
                     <Link
-                      variant="neutral"
+                      data-color="neutral"
                       href={`/${item.slug?.current}`}
                       data-umami-event="navigere"
                       data-umami-event-kilde="les ogsaa"
