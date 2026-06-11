@@ -66,7 +66,7 @@ The second theme is **routing**: token and migration questions get sent to `akse
 
 **Why it fails (sessions 1–5, 8, 9, 13):**
 
-- Multi-word queries (`"getting started setup installation"`, `"tailwind css configuration setup"`, `"textfield error label form"`) score 0 because the full string never appears as a substring of any single name/path. (S1, S2, S5)
+- ~~Multi-word queries (`"getting started setup installation"`, `"tailwind css configuration setup"`, `"textfield error label form"`) score 0 because the full string never appears as a substring of any single name/path. (S1, S2, S5)~~Fixed with fuse-search
 - English queries fail where Norwegian succeeds (`"button"` vs `"knapp"`, English vs `"feilmelding"`). (S1, S3, S4, S5)
 - Conceptual / process queries (`"migration upgrade v8"`, `"breaking changes"`, `"codemod"`) have no matching page name, so they dead-end with no next step. (S8, S9, S13)
 - Net effect: ~57% call success in S13; reliable only for exact component names.
@@ -99,11 +99,10 @@ Make the hint actionable and route to the right tool/resource:
 
 `[MCP-DESC]` **Rewrite the description** to set expectations about scope and the fallback path. Proposed:
 
-> "Search Aksel documentation pages (components, patterns, guides) and return matching paths. Accepts multi-word and Norwegian/English queries. Call this before `aksel_get_doc` / `aksel_get_component_info`. NOTE: this searches pages — for design tokens use `aksel_get_token_details`/`aksel-tokens://catalog`, and for version migrations use `aksel_find_migrations`/`aksel-migrations://catalog`. If a query returns no results, retry with a single keyword (e.g. a component name) before falling back."
+~~> "Search Aksel documentation pages (components, patterns, guides) and return matching paths. Accepts multi-word and Norwegian/English queries. Call this before `aksel_get_doc` / `aksel_get_component_info`. NOTE: this searches pages — for design tokens use `aksel_get_token_details`/`aksel-tokens://catalog`, and for version migrations use `aksel_find_migrations`/`aksel-migrations://catalog`. If a query returns no results, retry with a single keyword (e.g. a component name) before falling back."~~ Fixed
 
-`[MCP-DESC]` **Rewrite the `query` param** to nudge good inputs:
-
-> "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences."
+~~`[MCP-DESC]` **Rewrite the `query` param** to nudge good inputs:~~
+~~> "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences."~~Fixed
 
 ---
 
@@ -300,7 +299,7 @@ These need changes to the underlying docs/index, beyond MCP wiring.
 
 ## 9. Suggested implementation order
 
-1. **`aksel_find_docs` recall** (T1, T2): tokenized per-term scoring + EN↔NO synonym/alias map + actionable zero-result routing. _(Unblocks the most sessions.)_
+1. **`aksel_find_docs` recall** (T1, T2): EN↔NO synonym/alias map + actionable zero-result routing. _(Unblocks the most sessions.)_
 2. **Expose migrations & token catalogs as tools** (T4, T5): `aksel_find_migrations`, `aksel_find_tokens`. _(Low effort, converts "missing" → discoverable.)_
 3. **Description rewrites** (T3, T6, T7 wording; token/component/icon tools): cheap, high routing impact.
 4. **Closest-alternative on `get_component_info` 404** (T6) and **icon aliases** (T7): reuse the token tool's did-you-mean pattern.
