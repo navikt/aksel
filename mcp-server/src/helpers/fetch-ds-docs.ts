@@ -1,4 +1,5 @@
 import { createClient } from "@sanity/client";
+import { logError } from "./log.js";
 import { createNodeCache, oneHourSeconds } from "./node-cache.js";
 
 const { cacheGet, cacheSet } = createNodeCache(
@@ -59,7 +60,8 @@ async function fetchDsDocs() {
     cacheSet("ds_docs", JSON.stringify(sanitizedData));
     docsGeneration += 1;
     return sanitizedData;
-  } catch {
+  } catch (error) {
+    logError("Error fetching DS docs:", { error });
     return null;
   }
 }

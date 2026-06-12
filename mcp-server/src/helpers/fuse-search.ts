@@ -60,24 +60,14 @@ async function getFuse(): Promise<Fuse<SearchDoc> | null> {
   cachedFuse = { fuse, generation: getDocsGeneration() };
   return fuse;
 }
-  if (!docs || docs.length === 0) {
-    return null;
-  }
-
-  const index = Fuse.createIndex(fuseKeys, docs);
-  const fuse = new Fuse(docs, fuseOptions, index);
-
-  cachedFuse = { fuse, generation: getDocsGeneration() };
-  return fuse;
-}
 
 async function searchDocs(
   query: string,
   limit = 8,
 ): Promise<
   {
-    heading: string;
-    slug: string;
+    name: string;
+    path: string;
     category: string;
     subcategory: string;
   }[]
@@ -99,8 +89,8 @@ async function searchDocs(
     .filter((result) => result.score !== undefined && result.score <= maxScore);
 
   return searchResults.map(({ item }) => ({
-    heading: item.heading,
-    slug: `/${item.slug}`,
+    name: item.heading,
+    path: `/${item.slug}`,
     category: getCategory(item),
     subcategory: item.kategori,
   }));

@@ -28,7 +28,10 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
       });
     }
 
-    return JSON.stringify(searchResults);
+    return JSON.stringify({
+      query,
+      results: searchResults,
+    });
   },
 };
 
