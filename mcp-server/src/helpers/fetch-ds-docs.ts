@@ -101,7 +101,10 @@ function getHeadings(blocks: any[], block: "h2" | "h3" | "h4") {
   if (!blocks || blocks.length === 0) {
     return [];
   }
-  return blocks.filter((x) => x.style === block).map((x) => x.children[0].text);
+  return blocks
+    .filter((x) => x.style === block)
+    .map((x) => x.children?.[0]?.text)
+    .filter((text) => text !== undefined);
 }
 
 function mapContent(blocks: any[]) {
@@ -113,7 +116,8 @@ function mapContent(blocks: any[]) {
 
   for (const x of blocks) {
     if (x.style === "normal") {
-      contentBlocks.push(x.children[0].text.replace(/\n|\r/g, " "));
+      const text = x.children[0]?.text;
+      text && contentBlocks.push(text.replace(/\n|\r/g, " "));
     }
   }
 
