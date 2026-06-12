@@ -22,7 +22,6 @@ const fuseOptions: IFuseOptions<SearchDoc> = {
   shouldSort: true,
   minMatchCharLength,
   ignoreLocation: true,
-  includeMatches: true,
   threshold: 0.2,
   distance: 50,
   useTokenSearch: true,
