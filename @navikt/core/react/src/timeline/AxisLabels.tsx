@@ -14,7 +14,7 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { Detail } from "../typography/Detail";
 import { useDateLocale, useI18n } from "../utils/i18n/i18n.hooks";
 import { TFunction } from "../utils/i18n/i18n.types";
@@ -33,26 +33,23 @@ export const dayLabels = (
 ): AxisLabel[] => {
   const increment = Math.ceil(totalDays / 10);
   const lastDay = startOfDay(end);
-  return new Array(totalDays)
-    .fill(lastDay)
-    .map((thisDay, i) => {
-      if (i % increment !== 0) return null;
-      const day: Date = subDays(thisDay, i);
-      const { horizontalPosition, width } = horizontalPositionAndWidth(
-        day,
-        addDays(day, 1),
-        start,
-        end,
-      );
-      return {
-        direction,
-        horizontalPosition,
-        label: format(day, template, { locale }),
-        date: day,
-        width,
-      };
-    })
-    .filter((label) => label !== null) as AxisLabel[];
+  const count = Math.ceil(totalDays / increment);
+  return Array.from({ length: count }, (_, i) => {
+    const day: Date = subDays(lastDay, i * increment);
+    const { horizontalPosition, width } = horizontalPositionAndWidth(
+      day,
+      addDays(day, 1),
+      start,
+      end,
+    );
+    return {
+      direction,
+      horizontalPosition,
+      label: format(day, template, { locale }),
+      date: day,
+      width,
+    };
+  });
 };
 
 export const monthLabels = (
@@ -65,8 +62,8 @@ export const monthLabels = (
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
   const numberOfMonths = differenceInMonths(endMonth, startMonth) + 1;
-  return new Array(numberOfMonths).fill(startMonth).map((thisMonth, i) => {
-    const month: Date = addMonths(thisMonth, i);
+  return Array.from({ length: numberOfMonths }, (_, i) => {
+    const month: Date = addMonths(startMonth, i);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       month,
       addMonths(month, 1),
@@ -93,8 +90,8 @@ export const yearLabels = (
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
   const yearCount = differenceInYears(lastYear, start) + 1;
-  return new Array(yearCount).fill(firstYear).map((thisYear, i) => {
-    const year: Date = addYears(thisYear, i);
+  return Array.from({ length: yearCount }, (_, i) => {
+    const year: Date = addYears(firstYear, i);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       year,
       addYears(year, 1),
@@ -119,6 +116,12 @@ const getLabels = (
   translate: TFunction<"Timeline">,
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
+
+  /* Zero or negative total days can break further calculations */
+  if (totalDays <= 0) {
+    return [];
+  }
+
   if (totalDays < 40) {
     const dayTemplate = translate("dayFormat");
     return dayLabels(start, end, totalDays, direction, dayTemplate, locale);
@@ -147,19 +150,36 @@ export const AxisLabels = ({
   });
   const locale = useDateLocale();
 
-  const labels = getLabels(startDate, endDate, direction, locale, translate);
+  const labels = useMemo(
+    () =>
+      getLabels(startDate, endDate, direction, locale, translate)
+        .filter(isVisible)
+        .sort((a, b) => a.horizontalPosition - b.horizontalPosition),
+    [startDate, endDate, direction, locale, translate],
+  );
+
+  const getLabelWidth = useCallback(
+    (index: number): string => {
+      const next = labels[index + 1];
+      const bound = next ? next.horizontalPosition : 100;
+      return `${(bound - labels[index].horizontalPosition).toFixed(3)}%`;
+    },
+    [labels],
+  );
+
+  const justifyContent = direction === "left" ? "flex-start" : "flex-end";
 
   return (
     <div className="aksel-timeline__axislabels" aria-hidden="true">
-      {labels.filter(isVisible).map((etikett) => (
+      {labels.map((etikett, index) => (
         <Detail
           className="aksel-timeline__axislabels-label"
           as="div"
           key={etikett.label}
           style={{
-            justifyContent: direction === "left" ? "flex-start" : "flex-end",
-            [direction]: `${etikett.horizontalPosition}%`,
-            width: `${etikett.width}%`,
+            justifyContent,
+            [direction]: `${etikett.horizontalPosition.toFixed(3)}%`,
+            width: getLabelWidth(index),
           }}
         >
           {etikett.label}
