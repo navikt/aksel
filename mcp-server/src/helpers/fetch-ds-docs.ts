@@ -69,7 +69,7 @@ type SearchPageT = {
   intro: string;
   slug: string;
   status: { bilde: any; tag: string } | null;
-  content: string[];
+  content: any[];
   lvl2: string[];
   lvl3: string[];
   lvl4: string[];
