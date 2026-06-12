@@ -6,6 +6,8 @@ metadata:
   labels:
     team: designsystem
 spec:
+  envFrom:
+    - secret: aksel-mcp-secrets
   image: {{ image }}
   port: 8080
   replicas:
