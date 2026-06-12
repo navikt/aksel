@@ -90,7 +90,7 @@ const ClickablePeriod = React.memo(
       return null;
     }
 
-    if (left === 0 || !Number.isFinite(left)) {
+    if (!Number.isFinite(left)) {
       return null;
     }
 
