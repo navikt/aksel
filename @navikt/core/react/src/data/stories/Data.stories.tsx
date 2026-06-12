@@ -365,6 +365,7 @@ export const KitchenSinkAdvancedFilter: Story = {
     );
     const [zebraStripes, setZebraStripes] = React.useState(false);
     const [truncateContent, setTruncateContent] = React.useState(true);
+    const [columnDividers, setColumnDividers] = React.useState(true);
     const [columnView, setColumnView] = React.useState(columnDef_TEST_DATA);
     const [visibleColumns, setVisibleColumns] =
       useState<string[]>(allColumnIds);
@@ -551,6 +552,14 @@ export const KitchenSinkAdvancedFilter: Story = {
                       >
                         Stripede rader
                       </Switch>
+                      <Switch
+                        size="small"
+                        checked={columnDividers}
+                        onChange={(e) => setColumnDividers(e.target.checked)}
+                        description="Velg denne for å få kolonne separatorer."
+                      >
+                        Kolonne separatorer
+                      </Switch>
                       <RadioGroup
                         legend="Sticky første kolonne"
                         onChange={(value) =>
@@ -689,6 +698,7 @@ export const KitchenSinkAdvancedFilter: Story = {
               start: stickyColumns.first === "first" ? 1 : undefined,
               end: stickyColumns.last === "last" ? 1 : undefined,
             },
+            columnDividers,
           }}
         >
           <DataGrid.Table<(typeof TEST_DATA)[number]>
