@@ -33,26 +33,23 @@ export const dayLabels = (
 ): AxisLabel[] => {
   const increment = Math.ceil(totalDays / 10);
   const lastDay = startOfDay(end);
-  return new Array(totalDays)
-    .fill(lastDay)
-    .map((thisDay, i) => {
-      if (i % increment !== 0) return null;
-      const day: Date = subDays(thisDay, i);
-      const { horizontalPosition, width } = horizontalPositionAndWidth(
-        day,
-        addDays(day, 1),
-        start,
-        end,
-      );
-      return {
-        direction,
-        horizontalPosition,
-        label: format(day, template, { locale }),
-        date: day,
-        width,
-      };
-    })
-    .filter((label) => label !== null) as AxisLabel[];
+  const count = Math.ceil(totalDays / increment);
+  return Array.from({ length: count }, (_, i) => {
+    const day: Date = subDays(lastDay, i * increment);
+    const { horizontalPosition, width } = horizontalPositionAndWidth(
+      day,
+      addDays(day, 1),
+      start,
+      end,
+    );
+    return {
+      direction,
+      horizontalPosition,
+      label: format(day, template, { locale }),
+      date: day,
+      width,
+    };
+  });
 };
 
 export const monthLabels = (
@@ -65,8 +62,8 @@ export const monthLabels = (
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
   const numberOfMonths = differenceInMonths(endMonth, startMonth) + 1;
-  return new Array(numberOfMonths).fill(startMonth).map((thisMonth, i) => {
-    const month: Date = addMonths(thisMonth, i);
+  return Array.from({ length: numberOfMonths }, (_, i) => {
+    const month: Date = addMonths(startMonth, i);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       month,
       addMonths(month, 1),
@@ -93,8 +90,8 @@ export const yearLabels = (
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
   const yearCount = differenceInYears(lastYear, start) + 1;
-  return new Array(yearCount).fill(firstYear).map((thisYear, i) => {
-    const year: Date = addYears(thisYear, i);
+  return Array.from({ length: yearCount }, (_, i) => {
+    const year: Date = addYears(firstYear, i);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       year,
       addYears(year, 1),
@@ -166,6 +163,8 @@ export const AxisLabels = ({
     [direction, labels.length],
   );
 
+  const justifyContent = direction === "left" ? "flex-start" : "flex-end";
+
   return (
     <div
       className="aksel-timeline__axislabels"
@@ -178,7 +177,7 @@ export const AxisLabels = ({
           as="div"
           key={etikett.label}
           style={{
-            justifyContent: direction === "left" ? "flex-start" : "flex-end",
+            justifyContent,
             [direction]: `${etikett.horizontalPosition.toFixed(3)}%`,
             width: getLabelWidth(etikett.width, index),
           }}
