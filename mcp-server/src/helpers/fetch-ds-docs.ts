@@ -21,8 +21,9 @@ function getDocsGeneration() {
 
 async function fetchDsDocs() {
   try {
-    if (cacheGet("ds_docs")) {
-      return JSON.parse(cacheGet("ds_docs")!);
+    const cached = cacheGet("ds_docs");
+    if (cached) {
+      return JSON.parse(cached);
     }
 
     /**
