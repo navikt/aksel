@@ -14,7 +14,7 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { Detail } from "../typography/Detail";
 import { useDateLocale, useI18n } from "../utils/i18n/i18n.hooks";
 import { TFunction } from "../utils/i18n/i18n.types";
@@ -147,26 +147,24 @@ export const AxisLabels = ({
   });
   const locale = useDateLocale();
 
-  const labels = getLabels(
-    startDate,
-    endDate,
-    direction,
-    locale,
-    translate,
-  ).filter(isVisible);
+  const labels = useMemo(
+    () =>
+      getLabels(startDate, endDate, direction, locale, translate).filter(
+        isVisible,
+      ),
+    [startDate, endDate, direction, locale, translate],
+  );
 
-  const getLabelWidth = (calculatedWidth: number, index: number) => {
-    let comparator = 0;
-    if (direction === "right") {
-      comparator = labels.length - 1;
-    }
-
-    if (index === comparator) {
-      return undefined;
-    }
-
-    return `${calculatedWidth.toFixed(3)}%`;
-  };
+  const getLabelWidth = useCallback(
+    (calculatedWidth: number, index: number) => {
+      const comparator = direction === "right" ? labels.length - 1 : 0;
+      if (index === comparator) {
+        return undefined;
+      }
+      return `${calculatedWidth.toFixed(3)}%`;
+    },
+    [direction, labels.length],
+  );
 
   return (
     <div
