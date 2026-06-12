@@ -98,6 +98,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
         stickyColumns: settings?.stickyColumns ?? {},
         textSize: settings?.textSize ?? "medium",
         columnDisplay: settings?.columnDisplay,
+        columnDividers: settings?.columnDividers ?? true,
       }),
       [
         settings?.rowDensity,
@@ -106,6 +107,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
         settings?.stickyColumns,
         settings?.textSize,
         settings?.columnDisplay,
+        settings?.columnDividers,
       ],
     );
 

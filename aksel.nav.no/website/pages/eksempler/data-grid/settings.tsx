@@ -12,6 +12,7 @@ const Example = () => {
     textSize: "medium",
     truncateContent: true,
     zebraStripes: false,
+    columnDividers: true,
   });
 
   return (
@@ -95,6 +96,20 @@ function SettingsBar({
           setUserSettings((s) => ({
             ...s,
             truncateContent: e.target.value === "on",
+          }))
+        }
+      >
+        <option value="on">På</option>
+        <option value="off">Av</option>
+      </Select>
+      <Select
+        size="small"
+        label="Kolonne-separator"
+        value={userSettings.columnDividers ? "on" : "off"}
+        onChange={(e) =>
+          setUserSettings((s) => ({
+            ...s,
+            columnDividers: e.target.value === "on",
           }))
         }
       >
