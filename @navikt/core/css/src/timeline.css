@@ -34,11 +34,7 @@
   position: absolute;
   color: var(--ax-text-neutral-subtle);
   white-space: nowrap;
-
-  .aksel-timeline__axislabels[data-direction="left"] > &:first-of-type,
-  .aksel-timeline__axislabels[data-direction="right"] > &:last-of-type {
-    overflow-x: clip;
-  }
+  overflow-x: clip;
 }
 
 .aksel-timeline__row {

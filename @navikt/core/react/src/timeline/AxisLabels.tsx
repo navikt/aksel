@@ -146,31 +146,25 @@ export const AxisLabels = ({
 
   const labels = useMemo(
     () =>
-      getLabels(startDate, endDate, direction, locale, translate).filter(
-        isVisible,
-      ),
+      getLabels(startDate, endDate, direction, locale, translate)
+        .filter(isVisible)
+        .sort((a, b) => a.horizontalPosition - b.horizontalPosition),
     [startDate, endDate, direction, locale, translate],
   );
 
   const getLabelWidth = useCallback(
-    (calculatedWidth: number, index: number) => {
-      const comparator = direction === "right" ? labels.length - 1 : 0;
-      if (index === comparator) {
-        return undefined;
-      }
-      return `${calculatedWidth.toFixed(3)}%`;
+    (index: number): string => {
+      const next = labels[index + 1];
+      const bound = next ? next.horizontalPosition : 100;
+      return `${(bound - labels[index].horizontalPosition).toFixed(3)}%`;
     },
-    [direction, labels.length],
+    [labels],
   );
 
   const justifyContent = direction === "left" ? "flex-start" : "flex-end";
 
   return (
-    <div
-      className="aksel-timeline__axislabels"
-      aria-hidden="true"
-      data-direction={direction}
-    >
+    <div className="aksel-timeline__axislabels" aria-hidden="true">
       {labels.map((etikett, index) => (
         <Detail
           className="aksel-timeline__axislabels-label"
@@ -179,7 +173,7 @@ export const AxisLabels = ({
           style={{
             justifyContent,
             [direction]: `${etikett.horizontalPosition.toFixed(3)}%`,
-            width: getLabelWidth(etikett.width, index),
+            width: getLabelWidth(index),
           }}
         >
           {etikett.label}
