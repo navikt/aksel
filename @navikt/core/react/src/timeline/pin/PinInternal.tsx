@@ -13,7 +13,7 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import { format } from "date-fns";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useTimelineKeyboardContext } from "../hooks/TimelineKeyboardNavProvider";
@@ -74,13 +74,16 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
       date: format(date, translate("dateFormat")),
     });
 
+    const pinPositionStyle = useMemo(() => {
+      const pinPosition = position(date, startDate, endDate);
+      return Number.isFinite(pinPosition) ? `${pinPosition.toFixed(3)}%` : "0%";
+    }, [date, endDate, startDate]);
+
     return (
       <>
         <div
           className="aksel-timeline__pin-wrapper"
-          style={{
-            [direction]: `${position(date, startDate, endDate).toFixed(3)}%`,
-          }}
+          style={{ [direction]: pinPositionStyle }}
         >
           <button
             data-timeline-pin

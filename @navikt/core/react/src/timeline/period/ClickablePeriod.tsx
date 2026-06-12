@@ -86,6 +86,14 @@ const ClickablePeriod = React.memo(
 
     const label = ariaLabel(start, end, status, statusLabel, translate);
 
+    if (width === 0 || !Number.isFinite(width)) {
+      return null;
+    }
+
+    if (left === 0 || !Number.isFinite(left)) {
+      return null;
+    }
+
     return (
       <>
         <button

@@ -116,6 +116,12 @@ const getLabels = (
   translate: TFunction<"Timeline">,
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
+
+  /* Zero or negative total days can break further calculations */
+  if (totalDays <= 0) {
+    return [];
+  }
+
   if (totalDays < 40) {
     const dayTemplate = translate("dayFormat");
     return dayLabels(start, end, totalDays, direction, dayTemplate, locale);

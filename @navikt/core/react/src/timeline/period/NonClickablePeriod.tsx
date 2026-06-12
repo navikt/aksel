@@ -23,6 +23,14 @@ const NonClickablePeriod = ({
 }: TimelineNonClickablePeriodProps) => {
   const translate = useI18n("Timeline");
 
+  if (width === 0 || !Number.isFinite(width)) {
+    return null;
+  }
+
+  if (left === 0 || !Number.isFinite(left)) {
+    return null;
+  }
+
   return (
     <div
       data-timeline-period
