@@ -6,7 +6,7 @@ const findDocsInputSchema = {
   query: z
     .string()
     .trim()
-    .min(1, "query is required")
+.min(3, "query must be at least 3 characters")
     .describe(
       "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences.",
     ),
