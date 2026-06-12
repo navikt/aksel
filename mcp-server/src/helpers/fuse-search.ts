@@ -44,12 +44,22 @@ const maxScore = 0.3;
 let cachedFuse: { fuse: Fuse<SearchDoc>; generation: number } | null = null;
 
 async function getFuse(): Promise<Fuse<SearchDoc> | null> {
+  const docs = (await fetchDsDocs()) as SearchDoc[] | null;
+
+  if (!docs || docs.length === 0) {
+    return null;
+  }
+
   if (cachedFuse && cachedFuse.generation === getDocsGeneration()) {
     return cachedFuse.fuse;
   }
 
-  const docs = (await fetchDsDocs()) as SearchDoc[] | null;
+  const index = Fuse.createIndex(fuseKeys, docs);
+  const fuse = new Fuse(docs, fuseOptions, index);
 
+  cachedFuse = { fuse, generation: getDocsGeneration() };
+  return fuse;
+}
   if (!docs || docs.length === 0) {
     return null;
   }
