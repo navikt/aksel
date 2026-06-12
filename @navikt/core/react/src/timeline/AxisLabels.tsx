@@ -147,19 +147,42 @@ export const AxisLabels = ({
   });
   const locale = useDateLocale();
 
-  const labels = getLabels(startDate, endDate, direction, locale, translate);
+  const labels = getLabels(
+    startDate,
+    endDate,
+    direction,
+    locale,
+    translate,
+  ).filter(isVisible);
+
+  const getLabelWidth = (calculatedWidth: number, index: number) => {
+    let comparator = 0;
+    if (direction === "right") {
+      comparator = labels.length - 1;
+    }
+
+    if (index === comparator) {
+      return undefined;
+    }
+
+    return `${calculatedWidth.toFixed(3)}%`;
+  };
 
   return (
-    <div className="aksel-timeline__axislabels" aria-hidden="true">
-      {labels.filter(isVisible).map((etikett) => (
+    <div
+      className="aksel-timeline__axislabels"
+      aria-hidden="true"
+      data-direction={direction}
+    >
+      {labels.map((etikett, index) => (
         <Detail
           className="aksel-timeline__axislabels-label"
           as="div"
           key={etikett.label}
           style={{
             justifyContent: direction === "left" ? "flex-start" : "flex-end",
-            [direction]: `${etikett.horizontalPosition}%`,
-            width: `${etikett.width}%`,
+            [direction]: `${etikett.horizontalPosition.toFixed(3)}%`,
+            width: getLabelWidth(etikett.width, index),
           }}
         >
           {etikett.label}

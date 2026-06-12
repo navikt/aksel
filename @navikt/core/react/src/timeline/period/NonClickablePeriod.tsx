@@ -35,8 +35,8 @@ const NonClickablePeriod = ({
         restProps?.className,
       )}
       style={{
-        width: `${width}%`,
-        [direction]: `${left}%`,
+        width: `${width.toFixed(3)}%`,
+        [direction]: `${left.toFixed(3)}%`,
       }}
     >
       <span className="aksel-timeline__period--inner">

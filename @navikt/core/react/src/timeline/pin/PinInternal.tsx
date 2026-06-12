@@ -78,7 +78,9 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
       <>
         <div
           className="aksel-timeline__pin-wrapper"
-          style={{ [direction]: `${position(date, startDate, endDate)}%` }}
+          style={{
+            [direction]: `${position(date, startDate, endDate).toFixed(3)}%`,
+          }}
         >
           <button
             data-timeline-pin

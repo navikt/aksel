@@ -113,8 +113,8 @@ const ClickablePeriod = React.memo(
               }
             },
             style: {
-              width: `${width}%`,
-              [direction]: `${left}%`,
+              width: `${width.toFixed(3)}%`,
+              [direction]: `${left.toFixed(3)}%`,
             },
             onClick: (e) => {
               restProps?.onClick?.(e);
