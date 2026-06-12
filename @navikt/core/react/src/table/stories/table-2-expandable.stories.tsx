@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { expect, within } from "storybook/test";
 import { Button } from "../../button";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { Radio, RadioGroup } from "../../form/radio";
 import { Link } from "../../link";
+import { VStack } from "../../primitives/stack";
 import Table from "../Table";
 
 export default {
@@ -401,4 +403,69 @@ export const ClickableRow = () => {
       </Table.Body>
     </Table>
   );
+};
+
+export const ExpandableWithActivity = {
+  render: () => {
+    const [open, setOpen] = useState(true);
+
+    return (
+      <VStack gap="space-48" padding="space-20">
+        <Button variant="primary" onClick={() => setOpen((prev) => !prev)}>
+          ToggleButton
+        </Button>
+
+        <React.Activity mode={open ? "visible" : "hidden"} name="table-test">
+          <Table zebraStripes>
+            <Table.Header>
+              <Table.Row>
+                {columns.map(({ key, name }) => (
+                  <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+                ))}
+                <Table.HeaderCell />
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {data.map((row, index) => (
+                <Table.ExpandableRow
+                  content={`nested-row-${index}`}
+                  key={row.name}
+                  data-testid={`row-${index}`}
+                >
+                  {columns.map(({ key }) => (
+                    <Table.DataCell key={key}>{row[key]}</Table.DataCell>
+                  ))}
+                </Table.ExpandableRow>
+              ))}
+            </Table.Body>
+          </Table>
+        </React.Activity>
+      </VStack>
+    );
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByText("ToggleButton");
+    const parentRow = canvas.getByTestId("row-0");
+    const nestedRow = canvas.getByText("nested-row-0");
+
+    expect(parentRow).toBeInTheDocument();
+    expect(parentRow).toBeVisible();
+    expect(nestedRow).toBeInTheDocument();
+    expect(nestedRow).not.toBeVisible();
+
+    const expandButton = within(parentRow).getByRole("button", {
+      name: "Vis mer",
+    });
+
+    await expandButton.click();
+    expect(nestedRow).toBeVisible();
+
+    await button.click();
+    await button.click();
+
+    expect(nestedRow).toBeVisible();
+  },
 };
