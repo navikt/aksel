@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Table: ExpandableRows not works with React.Activity
+Table: ExpandableRows now works with React.Activity
