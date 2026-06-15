@@ -1,7 +1,6 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import { useMemo } from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
@@ -30,16 +29,7 @@ function TableOfContents({
   feedback,
   linkToChangelogs = false,
 }: TableOfContentsProps) {
-  const toc = useMemo(() => {
-    if (!tocProp || tocProp.length === 0) {
-      return undefined;
-    }
-
-    if (linkToChangelogs) {
-      return [...tocProp, { id: "endringslogg-table", title: "Endringslogg" }];
-    }
-    return tocProp;
-  }, [tocProp, linkToChangelogs]);
+  const toc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
 
   const tocCtx = useTableOfContents(toc ?? []);
 
@@ -113,6 +103,14 @@ function TableOfContents({
       <TableOfContentsLinks feedback={stegaClean(feedback)} />
     </aside>
   );
+}
+
+function tocWithChangelogs(toc: TOC_BY_SLUG_QUERY_RESULT) {
+  if (!toc || toc.length === 0) {
+    return undefined;
+  }
+
+  return [...toc, { id: "endringslogg-table", title: "Endringslogg" }];
 }
 
 function TableOfContentsLinks({
