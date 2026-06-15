@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useClientLayoutEffect } from "../../../utils-external";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../../utils/components/floating/Floating";
@@ -29,6 +29,7 @@ const FilteredOptions = () => {
     isValueNew,
     toggleIsListOpen,
   } = useFilteredOptionsContext();
+
   const [localOpen, setLocalOpen] = useState(isListOpen);
 
   const floatingRef = useRef<HTMLDivElement | null>(null);
@@ -42,7 +43,8 @@ const FilteredOptions = () => {
     queueMicrotask(() => setLocalOpen(isListOpen));
   }, [isListOpen]);
 
-  const { maxSelected, isMultiSelect } = useSelectedOptionsContext();
+  const { maxSelected, isMultiSelect, selectedOptions } =
+    useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
     (isMultiSelect && maxSelected.limit) || // Render maxSelected message
@@ -52,6 +54,23 @@ const FilteredOptions = () => {
   const shouldRenderFilteredOptionsList =
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
+
+  const singleSelectedOption = useMemo(() => {
+    if (
+      isMultiSelect ||
+      selectedOptions.length === 0 ||
+      selectedOptions.length > 1
+    ) {
+      return null;
+    }
+
+    const option = selectedOptions[0];
+
+    if (!option) {
+      return null;
+    }
+    return option;
+  }, [isMultiSelect, selectedOptions]);
 
   return (
     <DismissableLayer
@@ -104,14 +123,26 @@ const FilteredOptions = () => {
             {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
               <AddNewOption />
             )}
-            {filteredOptions.map((option) => (
-              <FilteredOptionsItem key={option.value} option={option} />
-            ))}
+            {singleSelectedOption && (
+              <FilteredOptionsItem
+                key={singleSelectedOption.value}
+                option={singleSelectedOption}
+              />
+            )}
+            {filteredOptions.map((option) => {
+              if (
+                singleSelectedOption &&
+                option.value === singleSelectedOption.value
+              ) {
+                return null;
+              }
+
+              return <FilteredOptionsItem key={option.value} option={option} />;
+            })}
           </ul>
         )}
       </Floating.Content>
     </DismissableLayer>
   );
 };
-
 export default FilteredOptions;
