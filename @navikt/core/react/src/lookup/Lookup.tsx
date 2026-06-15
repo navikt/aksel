@@ -2,6 +2,8 @@ import React, { forwardRef, useRef, useState } from "react";
 import { Popover } from "../popover";
 import { Portal } from "../portal";
 import { useId } from "../utils-external";
+import { FocusBoundary } from "../utils/components/focus-boundary/FocusBoundary";
+import { FocusGuards } from "../utils/components/focus-guards/FocusGuards";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
 
@@ -51,21 +53,11 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
     | "left-start"
     | "left-end";
   /**
-   * Distance from lookup word to explanation popover
-   * @default 8
-   */
-  offset?: number;
-  /**
    * Changes what CSS position property to use
    * You want to use "fixed" if reference element is inside a fixed container, but explanation popover is not
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
-  /**
-   * Changes placement of the floating element in order to keep it in view.
-   * @default true
-   */
-  flip?: boolean;
   /**
    * Just for testing: hover effect on trigger element. TODO: Talk to design about hover effect.
    */
@@ -92,8 +84,6 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       children,
       className,
       placement,
-      flip,
-      offset,
       strategy,
       onClick,
       UNSAFEhoverEffect = false,
@@ -103,39 +93,61 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
   ) => {
     const [openState, setOpenState] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
-    const mergedRef = useMergeRefs(ref, anchorRef);
-    const popoverId = useId();
+    const mergedRef = useMergeRefs(anchorRef, ref);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const triggerId = useId();
+    const popoverContentId = `${triggerId}-content`;
 
     return (
       <>
         <button
           {...rest}
           type="button"
+          id={triggerId}
           ref={mergedRef}
           className={cl("aksel-lookup-trigger", className)}
           onClick={composeEventHandlers(onClick, () =>
             setOpenState((old) => !old),
           )}
+          aria-haspopup="dialog"
           aria-expanded={openState}
-          aria-controls={popoverId}
+          aria-controls={popoverContentId}
           data-hover-effect={UNSAFEhoverEffect}
         >
           {word}
         </button>
-        <Portal>
-          <Popover
-            id={popoverId}
-            anchorEl={anchorRef.current}
-            open={openState}
-            onClose={() => setOpenState(false)}
-            placement={placement}
-            flip={flip}
-            offset={offset}
-            strategy={strategy}
-          >
-            <Popover.Content>{children}</Popover.Content>
-          </Popover>
-        </Portal>
+        {openState && (
+          <FocusGuards>
+            <FocusBoundary
+              loop
+              trapped={openState}
+              initialFocus={contentRef}
+              returnFocus={anchorRef}
+            >
+              <Portal>
+                <Popover
+                  anchorEl={anchorRef.current}
+                  open={openState}
+                  onClose={() => {
+                    setOpenState(false);
+                  }}
+                  placement={placement}
+                  strategy={strategy}
+                >
+                  <Popover.Content
+                    ref={contentRef}
+                    id={popoverContentId}
+                    role="dialog"
+                    aria-labelledby={triggerId}
+                    tabIndex={-1}
+                  >
+                    {children}
+                  </Popover.Content>
+                </Popover>
+              </Portal>
+            </FocusBoundary>
+          </FocusGuards>
+        )}
       </>
     );
   },
