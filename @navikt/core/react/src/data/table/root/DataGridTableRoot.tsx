@@ -232,6 +232,7 @@ const DataGridTableInternal = forwardRef<
             ref={forwardedRef}
             className={cl("aksel-data-table", className)}
             data-zebra-stripes={tableSettings?.zebraStripes}
+            data-column-dividers={tableSettings?.columnDividers}
             data-truncate-content={truncateContent}
             data-density={tableSettings?.rowDensity}
             data-text-size={tableSettings?.textSize}

@@ -4,6 +4,7 @@ import addonDocs from "@storybook/addon-docs";
 import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
 import addonVitest from "@storybook/addon-vitest";
 import { definePreview } from "@storybook/react-vite";
+import isChromatic from "chromatic/isChromatic";
 import React, { useEffect } from "react";
 import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
@@ -58,14 +59,17 @@ const TypoDecorator = ({
   return <>{children}</>;
 };
 
+const addons = [addonA11y(), addonThemes(), addonDocs(), addonVitest()];
+
+/**
+ * Fixes flaky interaction tests
+ */
+if (!isChromatic()) {
+  addons.push(addonPerformancePanel());
+}
+
 export default definePreview({
-  addons: [
-    addonA11y(),
-    addonThemes(),
-    addonDocs(),
-    addonVitest(),
-    addonPerformancePanel(),
-  ],
+  addons,
   parameters: {
     options: {
       storySort: {
