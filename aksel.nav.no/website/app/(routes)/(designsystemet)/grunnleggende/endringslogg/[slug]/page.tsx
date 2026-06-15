@@ -67,8 +67,6 @@ export default async function (props: Props) {
 
   if (!logs.primary.heading || !logs.primary.endringsdato) {
     notFound();
-  if (!logs?.primary.heading || !logs.primary.endringsdato) {
-    notFound();
   }
 
   const toc: { id: string; title: string }[] = [];
