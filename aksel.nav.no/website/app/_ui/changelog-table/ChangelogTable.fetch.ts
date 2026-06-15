@@ -25,7 +25,14 @@ async function fetchChangelogs(id: string, type: "gp" | "ds") {
     ) {
       continue;
     }
-    validChangelogs.push(changelog);
+
+    validChangelogs.push({
+      endringsdato: changelog.endringsdato,
+      heading: changelog.heading,
+      slug: {
+        current: changelog.slug.current,
+      },
+    });
   }
 
   if (validChangelogs.length === 0) {
