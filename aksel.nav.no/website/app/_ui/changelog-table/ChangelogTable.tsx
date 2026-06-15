@@ -36,7 +36,9 @@ function ChangelogTable({
       >
         Endringslogg
       </Heading>
-      <WebsiteTable th={[{ text: "Dato" }, { text: "Endringer" }]}>
+      <WebsiteTable
+        th={[{ text: "Dato", width: "10rem" }, { text: "Endringer" }]}
+      >
         {changelogs.list.map((changelog) => {
           return (
             <WebsiteTableRow

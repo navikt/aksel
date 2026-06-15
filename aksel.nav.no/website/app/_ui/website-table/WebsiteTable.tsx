@@ -14,7 +14,7 @@ function WebsiteTable({
   blockMargin = true,
 }: {
   children: React.ReactNode;
-  th: { text: string; hideOnSm?: boolean; sronly?: boolean }[];
+  th: { text: string; hideOnSm?: boolean; sronly?: boolean; width?: string }[];
   withCopy?: boolean;
   renderEmptyState?: React.ReactNode;
   blockMargin?: boolean;
@@ -33,6 +33,7 @@ function WebsiteTable({
               key={x.text}
               className={styles.websiteTableTh}
               data-hide={x.hideOnSm ? "sm" : undefined}
+              style={x.width ? { width: x.width } : undefined}
             >
               {x?.sronly ? (
                 <BodyShort as="span" visuallyHidden>
