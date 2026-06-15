@@ -2,18 +2,19 @@
   appearance: none;
   all: unset;
   color: inherit;
-  text-decoration: underline dashed;
-  text-underline-offset: var(--ax-space-4);
-  text-decoration-thickness: var(--ax-space-2);
+  text-decoration: underline dotted;
+  text-underline-offset: 10%;
+  text-decoration-thickness: 10%;
   text-decoration-color: var(--ax-border-default);
-  background: transparent;
+  background: var(--ax-bg-info-softA);
+  border-radius: var(--ax-radius-4);
 
   &:hover {
-    background: var(--ax-bg-moderate-hover);
+    background: var(--ax-bg-info-moderate-hoverA);
   }
 
   &[data-hover-effect="true"] {
-    background: linear-gradient(to right, var(--ax-bg-moderate-hover) 50%, transparent 50%);
+    background: linear-gradient(to right, var(--ax-bg-info-moderate-hoverA) 50%, transparent 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     transition: all 150ms ease;
@@ -22,14 +23,9 @@
       background-position: left bottom;
     }
   }
-
-  &:focus-visible {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 2px;
-    border-radius: var(--ax-radius-2);
-  }
-
+  /* TODO: ASK DESIGN
   &:active {
-    background: var(--ax-bg-moderate-pressed);
+    background: var(--ax-bg-info-moderate-pressedA);
   }
+    */
 }
