@@ -460,12 +460,11 @@ export const ExpandableWithActivity = {
       name: "Vis mer",
     });
 
-    await expandButton.click();
-    expect(nestedRow).toBeVisible();
+    await userEvent.click(expandButton);
+    await waitFor(() => expect(nestedRow).toBeVisible());
 
-    await button.click();
-    await button.click();
+    await userEvent.click(button);
+    await userEvent.click(button);
 
-    expect(nestedRow).toBeVisible();
-  },
+    await waitFor(() => expect(nestedRow).toBeVisible());
 };
