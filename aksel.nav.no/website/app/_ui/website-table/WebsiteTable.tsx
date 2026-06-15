@@ -14,7 +14,7 @@ function WebsiteTable({
   blockMargin = true,
 }: {
   children: React.ReactNode;
-  th: { text: string; hideOnSm?: boolean; sronly?: boolean }[];
+  th: { text: string; hideOnSm?: boolean; sronly?: boolean; width?: string }[];
   withCopy?: boolean;
   renderEmptyState?: React.ReactNode;
   blockMargin?: boolean;
@@ -27,10 +27,13 @@ function WebsiteTable({
       <thead>
         <tr className={styles.websiteTableHeadTr}>
           {th.map((x) => (
-            <th
+            <BodyShort
+              as="th"
+              weight="semibold"
               key={x.text}
               className={styles.websiteTableTh}
               data-hide={x.hideOnSm ? "sm" : undefined}
+              style={x.width ? { width: x.width } : undefined}
             >
               {x?.sronly ? (
                 <BodyShort as="span" visuallyHidden>
@@ -39,7 +42,7 @@ function WebsiteTable({
               ) : (
                 x.text
               )}
-            </th>
+            </BodyShort>
           ))}
           {withCopy && (
             <th data-hide="sm" className={styles.websiteTableTh}>
@@ -77,13 +80,14 @@ function WebsiteTableRow({
   return (
     <tr className={styles.websiteTableTr}>
       {tr.map((x, xi) => (
-        <td
+        <BodyShort
+          as="td"
           key={xi}
           data-hide={x.hideOnSm ?? "false"}
           className={styles.websiteTableTd}
         >
           {x.text}
-        </td>
+        </BodyShort>
       ))}
       {useCopy && (
         <td data-hide="sm" data-align="end" className={styles.websiteTableTd}>
