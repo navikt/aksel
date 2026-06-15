@@ -22,11 +22,7 @@ export default async function Page({ params }: Props) {
     params: { slug },
   });
 
-  if (!logs?.primary) {
-    notFound();
-  }
-
-  if (!logs.primary.heading || !logs.primary.endringsdato) {
+  if (!logs?.primary.heading || !logs.primary.endringsdato) {
     notFound();
   }
 
