@@ -1,33 +1,13 @@
 import React from "react";
+import { Button } from "../button";
+import { BodyLong } from "../typography";
 import Lookup from "./Lookup";
-
-const placements = [
-  "top",
-  "bottom",
-  "right",
-  "left",
-  "top-start",
-  "top-end",
-  "bottom-start",
-  "bottom-end",
-  "right-start",
-  "right-end",
-  "left-start",
-  "left-end",
-];
 
 export default {
   title: "ds-react/Lookup",
   component: Lookup,
   parameters: {
     chromatic: { disable: true },
-  },
-  argTypes: {
-    placement: {
-      defaultValue: "right",
-      options: placements,
-      control: { type: "radio" },
-    },
   },
 };
 
@@ -37,33 +17,67 @@ export const Default = () => {
 
 export const WithinASentence = () => {
   return (
-    <p>
+    <BodyLong>
       This is an example of a <Lookup word="lookup">Lookup component</Lookup>{" "}
       within a sentence.
-    </p>
+    </BodyLong>
   );
 };
 
 export const VeryLongWord = () => {
   return (
-    <p style={{ maxWidth: "300px" }}>
-      This is an example of a{" "}
-      <Lookup word="very very long lookup word that never stops">
-        Lookup component
-      </Lookup>{" "}
-      within a sentence.
-    </p>
+    <div>
+      <p>tekst tekst</p>
+      <Button>test</Button>
+      <BodyLong style={{ maxWidth: "300px" }}>
+        This is an example of a{" "}
+        <Lookup word="very very long lookup word that never stops">
+          Lookup component
+          <button>test</button>
+        </Lookup>{" "}
+        within a sentence.
+      </BodyLong>
+      <Button>test</Button>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+      <p>tekst tekst</p>
+    </div>
   );
 };
 
 export const HoverEffect = () => {
   return (
-    <p>
+    <BodyLong>
       This is an example of a{" "}
       <Lookup word="lookup word" UNSAFEhoverEffect={true}>
         Lookup component
       </Lookup>{" "}
       within a sentence.
-    </p>
+    </BodyLong>
   );
 };
