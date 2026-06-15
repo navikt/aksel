@@ -601,8 +601,8 @@ export const OverflowingAxisLabels: StoryFn = () => {
   return (
     <div style={{ width: "800px" }}>
       <Timeline
-        startDate={new Date("2025-06-08")}
-        endDate={new Date("2026-04-08")}
+        startDate={new Date("2026-05-04")}
+        endDate={new Date("2026-05-31")}
       >
         <Timeline.Row label="Row">
           {row1.map((p) => {

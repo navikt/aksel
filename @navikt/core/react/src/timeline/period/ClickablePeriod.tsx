@@ -86,6 +86,14 @@ const ClickablePeriod = React.memo(
 
     const label = ariaLabel(start, end, status, statusLabel, translate);
 
+    if (width === 0 || !Number.isFinite(width)) {
+      return null;
+    }
+
+    if (!Number.isFinite(left)) {
+      return null;
+    }
+
     return (
       <>
         <button
@@ -113,8 +121,8 @@ const ClickablePeriod = React.memo(
               }
             },
             style: {
-              width: `${width}%`,
-              [direction]: `${left}%`,
+              width: `${width.toFixed(3)}%`,
+              [direction]: `${left.toFixed(3)}%`,
             },
             onClick: (e) => {
               restProps?.onClick?.(e);
