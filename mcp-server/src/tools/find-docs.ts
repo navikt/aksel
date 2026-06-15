@@ -1,17 +1,14 @@
 import { z } from "zod";
-import {
-  type DocsIndexEntry,
-  getDocsIndex,
-} from "../helpers/docs-index-client.js";
+import { searchDocs } from "../helpers/fuse-search.js";
 import type { McpTool } from "../types.js";
 
 const findDocsInputSchema = {
   query: z
     .string()
     .trim()
-    .min(1, "query is required")
+.min(3, "query must be at least 3 characters")
     .describe(
-      "Search query for documentation pages (e.g. 'button', 'form', 'tabs').",
+      "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences.",
     ),
   limit: z.number().int().min(1).max(20).optional().default(8),
 };
@@ -19,21 +16,12 @@ const findDocsInputSchema = {
 const findDocsTool: McpTool<typeof findDocsInputSchema> = {
   name: "aksel_find_docs",
   description:
-    "Find Aksel documentation pages by query and return matching docs paths. Use this before calling aksel_get_doc or aksel_get_component_info.",
+    "Search Aksel documentation pages (components, patterns, guides) and return matching paths. Accepts multi-word and Norwegian/English queries. Call this before aksel_get_doc / aksel_get_component_info. NOTE: this searches pages — for design tokens use aksel_get_token_details/aksel-tokens://catalog, and for version migrations use aksel_find_migrations/aksel-migrations://catalog. If a query returns no results, retry with a single keyword (e.g. a component name) before falling back.",
   inputSchema: findDocsInputSchema,
   async callback({ query, limit }) {
-    const index = await getDocsIndex();
-    const normalizedQuery = query.toLowerCase();
+    const searchResults = await searchDocs(query, limit);
 
-    const matches = index.entries
-      .map((entry) => ({
-        ...entry,
-        score: scoreEntry(entry, normalizedQuery),
-      }))
-      .filter((entry) => entry.score > 0)
-      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
-
-    if (matches.length === 0) {
+    if (searchResults.length === 0) {
       return JSON.stringify({
         message: `No documentation pages found for query: "${query}"`,
         hint: "Try a broader keyword such as a component name or category.",
@@ -42,48 +30,9 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
 
     return JSON.stringify({
       query,
-      totalMatches: matches.length,
-      returned: Math.min(matches.length, limit),
-      results: matches.slice(0, limit).map((entry) => ({
-        name: entry.name,
-        path: entry.path,
-        category: entry.category,
-        subcategory: entry.subcategory,
-      })),
+      results: searchResults,
     });
   },
 };
-
-function scoreEntry(entry: DocsIndexEntry, normalizedQuery: string) {
-  const name = entry.name.toLowerCase();
-  const path = entry.path.toLowerCase();
-  const category = entry.category.toLowerCase();
-  const subcategory = entry.subcategory.toLowerCase();
-
-  if (name === normalizedQuery || path === normalizedQuery) {
-    return 100;
-  }
-
-  if (name.startsWith(normalizedQuery)) {
-    return 90;
-  }
-
-  if (name.includes(normalizedQuery)) {
-    return 80;
-  }
-
-  if (path.includes(normalizedQuery)) {
-    return 70;
-  }
-
-  if (
-    category.includes(normalizedQuery) ||
-    subcategory.includes(normalizedQuery)
-  ) {
-    return 40;
-  }
-
-  return 0;
-}
 
 export { findDocsTool };

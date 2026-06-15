@@ -6,7 +6,9 @@ metadata:
   labels:
     team: designsystem
 spec:
-  image: {{ image }}
+  envFrom:
+    - secret: aksel-mcp-secrets
+  image: { { image } }
   port: 8080
   replicas:
     min: 1
@@ -38,3 +40,5 @@ spec:
     outbound:
       external:
         - host: aksel.nav.no
+        - host: hnbe3yhs.api.sanity.io
+        - host: hnbe3yhs.apicdn.sanity.io
