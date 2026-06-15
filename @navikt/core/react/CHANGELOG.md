@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+- Updated dependencies [[`f3b7857`](https://github.com/navikt/aksel/commit/f3b7857df4f4bb20b8117174eb981cff5e35159a)]:
+  - @navikt/aksel-icons@8.13.0
+  - @navikt/ds-tokens@8.13.0
+
 ## 8.12.1
 
 ### Patch Changes
