@@ -8,14 +8,14 @@ import {
 import { ListItem } from "@navikt/ds-react/List";
 import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 
-type ChangelogForProps = {
+type ChangelogForListProps = {
   changelogFor: {
     heading: string | null;
     slug: string | null;
   }[];
 };
 
-function ChangelogForList({ changelogFor }: ChangelogForProps) {
+function ChangelogForList({ changelogFor }: ChangelogForListProps) {
   if (changelogFor.length === 0) {
     return null;
   }
