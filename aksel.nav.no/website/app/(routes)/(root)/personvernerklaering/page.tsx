@@ -60,7 +60,7 @@ export default async function Page() {
           <BodyLong spacing>
             Opplysningene brukes til å kartlegge hvordan og hvor mye
             aksel.nav.no brukes, uten å identifisere IP-adresser. Vi bruker
-            verktøyet Umami i analysearbeidet.
+            verktøyet Innblikk i analysearbeidet.
           </BodyLong>
 
           <Heading size="medium" level="3" spacing data-aksel-heading-color>
@@ -102,19 +102,18 @@ export default async function Page() {
 
           <BodyLong spacing>
             Ved å trykke &quot;godkjenn alle&quot; skrur vi på analyseverktøyet
-            Umami.
+            Innblikk.
           </BodyLong>
 
           <Heading size="small" level="4" spacing data-aksel-heading-color>
-            Umami
+            Innblikk
           </Heading>
           <BodyLong spacing>
-            Umami brukes til statistikk og analyse av hvordan nav.no brukes.
-            Umami bruker ikke informasjonskapsler, men henter inn opplysninger
-            om nettleseren din for å lage en unik ID. Denne ID-en brukes for å
-            skille deg fra andre brukere. For å hindre identifisering, bruker vi
-            en egenutviklet proxy som vasker bort deler av IP-adressen din før
-            dataene sendes til verktøyet.
+            Innblikk er Navs eget interne analyseverktøy, bygget og driftet av
+            Nav. Det brukes til statistikk og analyse av hvordan aksel.nav.no
+            brukes. Innblikk bruker ikke informasjonskapsler. Data om
+            sidebesøk sendes via en proxy som bruker IP-adressen til å fastslå
+            hvilket land besøkeren befinner seg i, men selve IP-adressen lagres ikke.
           </BodyLong>
           <Heading size="large" level="2" spacing data-aksel-heading-color>
             Mine valg
