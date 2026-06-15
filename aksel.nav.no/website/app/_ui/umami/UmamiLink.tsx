@@ -10,8 +10,13 @@ import styles from "./UmamiLink.module.css";
 export const UmamiLink = ({
   lenkegruppe,
   subtle = false,
+  nativeLink = false,
   ...props
-}: LinkProps & { lenkegruppe: string; subtle?: boolean }) => {
+}: LinkProps & {
+  lenkegruppe: string;
+  subtle?: boolean;
+  nativeLink?: boolean;
+}) => {
   function scrollToHash(href: string) {
     if (href.startsWith("#")) {
       const element = document.querySelector(href);
@@ -36,7 +41,7 @@ export const UmamiLink = ({
         props.href && scrollToHash(props.href);
       }}
       className={`${styles.umamiLink} ${subtle ? styles.subtle : ""}`}
-      as={NextLink}
+      as={nativeLink ? "a" : NextLink}
     />
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { Dialog, DialogPopup } from "@navikt/ds-react/Dialog";
 
 type ChangelogDialogProps = {
@@ -13,6 +13,7 @@ function ChangelogDialog(props: ChangelogDialogProps) {
   const router = useRouter();
 
   const [openState, setOpenState] = useState(false);
+  const skipRoutingBack = useRef(false);
 
   useEffect(function delayOpenToShowOpeningAnimation() {
     /**
@@ -26,6 +27,22 @@ function ChangelogDialog(props: ChangelogDialogProps) {
     });
   }, []);
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const firstRenderRef = useRef(true);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to trigger this effect on URL change, not on initial render, and router object is stable
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      return;
+    }
+
+    /* URL changed -> close dialog */
+    setOpenState(false);
+    skipRoutingBack.current = true;
+  }, [pathname, searchParams]);
+
   return (
     <Dialog
       open={openState}
@@ -33,6 +50,10 @@ function ChangelogDialog(props: ChangelogDialogProps) {
         !newOpenState && setOpenState(false);
       }}
       onOpenChangeComplete={(newOpenState) => {
+        if (skipRoutingBack.current) {
+          skipRoutingBack.current = false;
+          return;
+        }
         !newOpenState && router.back();
       }}
     >
