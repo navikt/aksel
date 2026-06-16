@@ -1,7 +1,6 @@
 import { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
 import { findUnequalDocuments } from "../helpers/find-unequal-documents";
-import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { validateExamples } from "./parts/validate-examples";
@@ -34,7 +33,6 @@ export async function updateSanity(directory: RootDirectoriesT) {
       title: folder.path,
       variant: directory,
       filer: await parseCodeFiles(folder.path, directory),
-      metadata: extractMetadata(folder.path, directory),
     };
 
     exampleData.push(data);
@@ -54,7 +52,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
   const unequalDocuments = findUnequalDocuments({
     newDocuments: exampleData,
     oldDocuments: oldSanityDocuments,
-    keysToCompare: ["_id", "_type", "title", "variant", "filer", "metadata"],
+    keysToCompare: ["_id", "_type", "title", "variant", "filer"],
   });
 
   for (const doc of unequalDocuments) {
