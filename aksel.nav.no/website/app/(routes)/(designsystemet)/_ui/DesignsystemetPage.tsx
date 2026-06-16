@@ -9,6 +9,7 @@ import {
 import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { formatDateString } from "@/ui-utils/format-date";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
@@ -42,9 +43,13 @@ type DesignsystemetPageT = {
     | KOMPONENT_BY_SLUG_QUERY_RESULT
     | GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT
     | MONSTER_MALER_BY_SLUG_QUERY_RESULT;
+  linkToChangelogs?: boolean;
 };
 
-async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
+async function DesignsystemetPageHeader({
+  data,
+  linkToChangelogs = false,
+}: DesignsystemetPageT) {
   const updateDate = formatDateString(data?._updatedAt ?? data?._createdAt);
 
   const statusTag = getStatusTag(data?.status?.tag);
@@ -81,11 +86,18 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
             {statusTag.text}
           </Tag>
         )}
-        {updateDate && (
-          <BodyShort size="small" as="span" textColor="subtle">
-            {`Oppdatert ${updateDate}`}
-          </BodyShort>
-        )}
+        {updateDate &&
+          (linkToChangelogs ? (
+            <UmamiLink
+              href="#endringslogg-table"
+              data-color="neutral"
+              lenkegruppe="endringslogg-tabell"
+            >{`Oppdatert ${updateDate}`}</UmamiLink>
+          ) : (
+            <BodyShort size="small" as="span" textColor="subtle">
+              {`Oppdatert ${updateDate}`}
+            </BodyShort>
+          ))}
       </HStack>
       {isComponentPage && (
         <KomponentLinks data={data} heading={data?.heading} />
