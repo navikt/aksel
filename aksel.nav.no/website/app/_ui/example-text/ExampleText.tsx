@@ -18,7 +18,12 @@ function ExampleText(
   }
 
   return (
-    <InfoCard data-color="neutral" aria-label={title} as="section">
+    <InfoCard
+      data-color="neutral"
+      aria-label={title}
+      as="section"
+      data-sibling-margin="space-28"
+    >
       <InfoCardHeader icon={<FileTextIcon aria-hidden fontSize="1.5rem" />}>
         <InfoCardTitle as="div">{title}</InfoCardTitle>
         <Spacer />
