@@ -1,5 +1,25 @@
 # Changelog
 
+## 8.13.0
+
+### @navikt/ds-react
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+* Table: ExpandableRows now works with React.Activity ([#4972](https://github.com/navikt/aksel/pull/4972))
+
+* Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+### @navikt/ds-css
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+* Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+### @navikt/aksel-icons
+
+- Icons: New icons Armchair, FocusRoom, PhoneRoom and Sleep ([#4979](https://github.com/navikt/aksel/pull/4979))
+
 ## 8.12.1
 
 ### @navikt/ds-react

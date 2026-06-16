@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
 ## 8.12.1
 
 ### Patch Changes
