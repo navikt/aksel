@@ -19,16 +19,13 @@ function getDocsGeneration() {
   return docsGeneration;
 }
 
-async function fetchDsDocs() {
+async function fetchDsDocs(): Promise<SearchPageT[] | null> {
   try {
     const cached = cacheGet("ds_docs");
     if (cached) {
       return JSON.parse(cached);
     }
 
-    /**
-     * TODO: Add env config to workflow
-     */
     const client = createClient({
       projectId: "hnbe3yhs",
       dataset: "production",
@@ -61,8 +58,8 @@ async function fetchDsDocs() {
     cacheSet("ds_docs", JSON.stringify(sanitizedData));
     docsGeneration += 1;
     return sanitizedData;
-  } catch (error) {
-    logError("Error fetching DS docs:", { error });
+  } catch {
+    logError("Could not fetch DS docs (fetchDsDocs)");
     return null;
   }
 }
