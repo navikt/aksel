@@ -5,8 +5,10 @@ import { DesignsystemSidebar } from "./_ui/sidebar/Sidebar";
 
 export default async function DesignsystemLayout({
   children,
+  endringslogg,
 }: {
   children: React.ReactNode;
+  endringslogg: React.ReactNode;
 }) {
   return (
     <div className={styles.websitePage}>
@@ -15,6 +17,7 @@ export default async function DesignsystemLayout({
       <div className={styles.pageLayout}>
         <DesignsystemSidebar />
         {children}
+        {endringslogg}
       </div>
       <Footer />
     </div>
