@@ -64,12 +64,13 @@ async function searchDocs(
   query: string,
   limit = 8,
 ): Promise<
-  {
-    name: string;
-    path: string;
-    category: string;
-    subcategory: string;
-  }[]
+  | {
+      name: string;
+      path: string;
+      category: string;
+      subcategory: string;
+    }[]
+  | null
 > {
   const trimmedQuery = query.trim();
 
@@ -80,7 +81,7 @@ async function searchDocs(
   const fuse = await getFuse();
 
   if (!fuse) {
-    return [];
+    return null;
   }
 
   const searchResults = fuse

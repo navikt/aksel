@@ -6,7 +6,7 @@ const findDocsInputSchema = {
   query: z
     .string()
     .trim()
-.min(3, "query must be at least 3 characters")
+    .min(3, "query must be at least 3 characters")
     .describe(
       "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences.",
     ),
@@ -20,6 +20,13 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
   inputSchema: findDocsInputSchema,
   async callback({ query, limit }) {
     const searchResults = await searchDocs(query, limit);
+
+    if (!searchResults) {
+      return JSON.stringify({
+        message: `Failed to search docs for query: "${query}"`,
+        hint: "Try again later.",
+      });
+    }
 
     if (searchResults.length === 0) {
       return JSON.stringify({
