@@ -52,7 +52,7 @@ async function fetchDsDocs() {
       { useCdn: true, perspective: "published" },
     );
 
-    if (!allArticles) {
+    if (!allArticles || allArticles.length === 0) {
       throw new Error("Failed to fetch DS docs");
     }
 
