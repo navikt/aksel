@@ -13,7 +13,7 @@
   "dependencies": {
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
-    "fuse.js": "^7.3.0",
+    "fuse.js": "^7.4.0",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
