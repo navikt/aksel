@@ -13,6 +13,11 @@
     background: var(--ax-bg-info-moderate-hoverA);
   }
 
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
   &[data-hover-effect="true"] {
     background: linear-gradient(to right, var(--ax-bg-info-moderate-hoverA) 50%, transparent 50%);
     background-size: 200% 100%;
