@@ -23,11 +23,14 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { getValidRenderArray } from "@/ui-utils/valid-array";
@@ -78,7 +81,7 @@ export default async function Page(props: Props) {
     }),
   ]);
 
-  if (!pageData?.heading) {
+  if (!pageData?.heading || !pageData._id) {
     notFound();
   }
 
@@ -92,6 +95,8 @@ export default async function Page(props: Props) {
 
   const undertema = getValidRenderArray(pageData.undertema);
   const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
+
+  const changelogs = await fetchChangelogs(pageData._id, "gp");
 
   function hasUpdated() {
     if (!pageData?.updateInfo?.lastVerified || !pageData?.publishedAt) {
@@ -125,9 +130,21 @@ export default async function Page(props: Props) {
             {pageData.ingress}
           </BodyLong>
         )}
-        <BodyShort size="small" as="time" textColor="subtle">
-          {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
-        </BodyShort>
+
+        {changelogs.exists ? (
+          <BodyShort size="small" as="time">
+            <UmamiLink
+              href="#endringslogg-table"
+              data-color="neutral"
+              subtle
+              lenkegruppe="endringslogg-tabell"
+            >{`Oppdatert ${formatDateString(verifiedDate)}`}</UmamiLink>
+          </BodyShort>
+        ) : (
+          <BodyShort size="small" as="time" textColor="subtle">
+            {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
+          </BodyShort>
+        )}
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {undertema?.map(({ tema, title }) => {
             const cleanTitle = stegaClean(title ?? "");
@@ -155,12 +172,13 @@ export default async function Page(props: Props) {
           })}
         </HStack>
       </div>
-      <TableOfContents toc={toc} />
+      <TableOfContents toc={toc} linkToChangelogs={changelogs.exists} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        <ChangelogTable changelogs={changelogs} type="gp" />
 
         {writers && (
           <VStack gap="space-8" marginBlock="space-48">
@@ -189,7 +207,7 @@ export default async function Page(props: Props) {
                 {relevanteArtikler.map((item) => (
                   <WebsiteListItem key={item.heading} icon>
                     <Link
-                      variant="neutral"
+                      data-color="neutral"
                       href={`/${item.slug?.current}`}
                       data-umami-event="navigere"
                       data-umami-event-kilde="les ogsaa"
