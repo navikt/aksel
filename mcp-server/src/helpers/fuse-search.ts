@@ -98,13 +98,13 @@ async function searchDocs(
 
 function getCategory(doc: SearchDoc) {
   if (doc._type === "komponent_artikkel") {
-    return "Component";
+    return "Komponenter";
   }
   if (doc._type === "ds_artikkel") {
-    return "Foundations";
+    return "Grunnleggende";
   }
   if (doc._type === "templates_artikkel") {
-    return "Templates and Patterns";
+    return "Maler og mønstre";
   }
 
   return "";
