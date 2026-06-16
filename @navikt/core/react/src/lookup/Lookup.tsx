@@ -1,6 +1,4 @@
 import React, { forwardRef, useRef, useState } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
-import { Button } from "../button";
 import { Popover } from "../popover";
 import { Portal } from "../portal";
 import { useId } from "../utils-external";
@@ -125,6 +123,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
               trapped={openState}
               initialFocus={contentRef}
               returnFocus={anchorRef}
+              modal
             >
               <Portal>
                 <Popover
@@ -144,13 +143,10 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     tabIndex={-1}
                     className="aksel-lookup__popover-content"
                   >
-                    <span>{children}</span>
-                    <Button
-                      icon={<XMarkIcon title="Lukk " />}
-                      onClick={() => setOpenState(false)}
-                      variant="tertiary"
-                      size="xsmall"
-                    />
+                    {children}
+                    <span className="aksel-sr-only">
+                      Trykk Escape for å lukke oppslaget
+                    </span>
                   </Popover.Content>
                 </Popover>
               </Portal>
