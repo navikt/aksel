@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "8.12.1",
+  "version": "8.13.0",
   "description": "Design-tokens for Nav designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -34,7 +34,7 @@
   },
   "homepage": "https://aksel.nav.no/grunnleggende/styling/design-tokens/",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.100.2",
+    "@figma/plugin-typings": "^1.128.0",
     "colorjs.io": "^0.6.0",
     "esbuild": "^0.28.0",
     "lightningcss": "^1.30.1",
@@ -42,7 +42,7 @@
     "style-dictionary": "^4.1.1",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.7"
+    "vitest": "4.1.8"
   },
   "publishConfig": {
     "access": "public",

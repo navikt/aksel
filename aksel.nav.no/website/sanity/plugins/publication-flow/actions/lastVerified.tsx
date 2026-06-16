@@ -157,8 +157,8 @@ type StepTwoProps = {
 function StepTwo(props: StepTwoProps) {
   const { onPublish, lastVerified } = props;
   const [formState, setFormState] = useState({
-    updateDate: props.docType === "aksel-artikkel",
-    newChangeLog: props.docType === "aksel-artikkel",
+    updateDate: props.docType === "aksel_artikkel",
+    newChangeLog: props.docType === "aksel_artikkel",
   });
 
   const publishWithChangelog = formState.updateDate && formState.newChangeLog;
