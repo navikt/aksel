@@ -17,7 +17,6 @@ import {
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
-import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { capitalizeText } from "@/ui-utils/format-text";
 import styles from "./Changelog.module.css";
 import ShowMore from "./ShowMore";
@@ -95,11 +94,7 @@ export default function LogEntry({
               <ShowMore as="div" scrollTargetRef={logEntryContainer}>
                 <ShowMore.Heading>
                   <Heading size="large" level="2" spacing>
-                    <Link
-                      as={NextLink}
-                      href={`./endringslogg/${slug}`}
-                      data-color="neutral"
-                    >
+                    <Link href={`./endringslogg/${slug}`} data-color="neutral">
                       {heading}
                     </Link>
                   </Heading>
@@ -122,11 +117,7 @@ export default function LogEntry({
             ) : (
               <>
                 <Heading size="large" level="2" spacing>
-                  <Link
-                    as={NextLink}
-                    href={`./endringslogg/${slug}`}
-                    data-color="neutral"
-                  >
+                  <Link href={`./endringslogg/${slug}`} data-color="neutral">
                     {heading}
                   </Link>
                 </Heading>
