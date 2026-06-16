@@ -1,4 +1,6 @@
 import React, { forwardRef, useRef, useState } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
 import { Popover } from "../popover";
 import { Portal } from "../portal";
 import { useId } from "../utils-external";
@@ -140,8 +142,15 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     role="dialog"
                     aria-labelledby={triggerId}
                     tabIndex={-1}
+                    className="aksel-lookup__popover-content"
                   >
-                    {children}
+                    <span>{children}</span>
+                    <Button
+                      icon={<XMarkIcon title="Lukk " />}
+                      onClick={() => setOpenState(false)}
+                      variant="tertiary"
+                      size="xsmall"
+                    />
                   </Popover.Content>
                 </Popover>
               </Portal>

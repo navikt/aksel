@@ -34,3 +34,12 @@
   }
     */
 }
+
+.aksel-lookup__popover-content {
+  display: flex;
+  gap: var(--ax-space-12);
+
+  &:focus {
+    outline: none;
+  }
+}
