@@ -148,13 +148,15 @@ export const Lazy: StoryFn<typeof Collapsible> = () => (
 );
 
 export const AsChild: StoryFn<typeof Collapsible> = () => (
-  <Collapsible>
-    <Collapsible.Trigger asChild>
-      <Button>Button</Button>
-    </Collapsible.Trigger>
-    <Collapsible.Content asChild>
-      <DemoContent />
-    </Collapsible.Content>
+  <Collapsible hidingMethod="unmount" asChild>
+    <div style={{ minHeight: "110px", minWidth: "130px" }}>
+      <Collapsible.Trigger asChild>
+        <Button>Button</Button>
+      </Collapsible.Trigger>
+      <Collapsible.Content asChild>
+        <DemoContent />
+      </Collapsible.Content>
+    </div>
   </Collapsible>
 );
 
@@ -185,7 +187,7 @@ export const Disabled = ({ open = false }) => (
     <Collapsible.Trigger asChild disabled>
       <Button>Button</Button>
     </Collapsible.Trigger>
-    <Collapsible.Content asChild>
+    <Collapsible.Content>
       <DemoContent />
     </Collapsible.Content>
   </Collapsible>
