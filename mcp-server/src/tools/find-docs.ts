@@ -1,12 +1,15 @@
 import { z } from "zod";
-import { searchDocs } from "../helpers/fuse-search.js";
+import { minMatchCharLength, searchDocs } from "../helpers/fuse-search.js";
 import type { McpTool } from "../types.js";
 
 const findDocsInputSchema = {
   query: z
     .string()
     .trim()
-    .min(3, "query must be at least 3 characters")
+    .min(
+      minMatchCharLength,
+      `query must be at least ${minMatchCharLength} characters`,
+    )
     .describe(
       "Keywords describing the page you want. Prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind'). Avoid long sentences.",
     ),

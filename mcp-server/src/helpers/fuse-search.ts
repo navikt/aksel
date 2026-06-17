@@ -29,13 +29,6 @@ const fuseOptions: IFuseOptions<SearchDoc> = {
 };
 
 /**
- * Fuse scores range from 0 (perfect match) to 1 (no match). `threshold` is used
- * for candidate generation; this stricter cutoff drops weak matches from the
- * returned set.
- */
-const maxScore = 0.3;
-
-/**
  * The Fuse index is rebuilt only when fetchDsDocs reports a new generation,
  * i.e. when its cache has actually refreshed. This keeps the index in sync with
  * the docs cache (the single source of truth) instead of running a second TTL.
@@ -84,9 +77,8 @@ async function searchDocs(
     return null;
   }
 
-  const searchResults = fuse
-    .search(trimmedQuery, { limit })
-    .filter((result) => result.score !== undefined && result.score <= maxScore);
+  /* remove filter since treshold fixes it */
+  const searchResults = fuse.search(trimmedQuery, { limit });
 
   return searchResults.map(({ item }) => ({
     name: item.heading,
@@ -110,4 +102,4 @@ function getCategory(doc: SearchDoc) {
   return "";
 }
 
-export { searchDocs };
+export { searchDocs, minMatchCharLength };
