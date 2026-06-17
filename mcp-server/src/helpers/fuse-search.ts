@@ -77,7 +77,6 @@ async function searchDocs(
     return null;
   }
 
-  /* remove filter since treshold fixes it */
   const searchResults = fuse.search(trimmedQuery, { limit });
 
   return searchResults.map(({ item }) => ({
