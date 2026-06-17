@@ -1,4 +1,5 @@
 import { createStrictContext } from "../../utils/helpers";
+import type { CollapsibleProps } from "./CollapsibleRoot";
 
 export type CollapsibleContextProps = {
   /**
@@ -18,14 +19,10 @@ export type CollapsibleContextProps = {
    */
   onOpenToggle: () => void;
   /**
-   * Allows always rendering children in content when closed
-   */
-  lazy: boolean;
-  /**
    * Utility for getting state as string. Usefull for data-attributes.
    */
   state: "open" | "closed";
-};
+} & Required<Pick<CollapsibleProps, "hidingMethod">>;
 
 export const {
   Provider: CollapsibleContextProvider,

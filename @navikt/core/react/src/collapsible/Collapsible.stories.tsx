@@ -1,5 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Box } from "../primitives/box";
@@ -19,21 +19,39 @@ export default meta;
 
 type Story = StoryObj<typeof Collapsible>;
 
+function DemoContent(props: React.HTMLAttributes<HTMLDivElement>) {
+  useEffect(() => {
+    console.log("Content mounted");
+    return () => console.log("Content unmounted");
+  }, []);
+
+  return (
+    <Box {...props} padding="space-16" background="info-soft">
+      <div>lorem ipsum</div>
+    </Box>
+  );
+}
+
 export const Default: Story = {
-  render: (...props) => (
+  render: (props) => (
     <Collapsible {...props}>
       <Collapsible.Trigger>Trigger</Collapsible.Trigger>
       <Collapsible.Content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-        corporis maxime aliquam, voluptates nobis numquam, non odit optio
-        architecto iure laborum possimus! Quibusdam sit ullam, consequatur sunt
-        tempore optio aliquid!
+        <DemoContent />
       </Collapsible.Content>
     </Collapsible>
   ),
   args: {
-    open: false,
     defaultOpen: false,
+  },
+  argTypes: {
+    open: {
+      control: "boolean",
+    },
+    hidingMethod: {
+      control: "select",
+      options: ["unmount", "hidden", "hiddenUntilFound"],
+    },
   },
 };
 
@@ -67,11 +85,11 @@ export const InContext: StoryFn<typeof Collapsible> = () => {
   );
 };
 
-export const Animated: StoryFn<typeof Collapsible> = () => (
-  <Collapsible lazy>
+export const Animated: StoryFn<typeof Collapsible> = (props) => (
+  <Collapsible {...props}>
     <Collapsible.Trigger asChild>
       <Button size="small" variant="secondary">
-        Animer open/lukk
+        Animer åpne/lukk
       </Button>
     </Collapsible.Trigger>
     <Collapsible.Content className="collapsible">
@@ -83,7 +101,12 @@ export const Animated: StoryFn<typeof Collapsible> = () => (
     </Collapsible.Content>
   </Collapsible>
 );
-
+Animated.argTypes = {
+  hidingMethod: {
+    control: "radio",
+    options: ["hidden", "hiddenUntilFound"],
+  },
+};
 Animated.decorators = [
   (Story) => (
     <div style={{ height: 300 }}>
@@ -93,10 +116,7 @@ Animated.decorators = [
         grid-template-rows: 0fr;
         overflow: hidden;
         transition: grid-template-rows 1s ease-in-out;
-      }
-
-      .collapsible[data-state="closed"] {
-        width: 0;
+        content-visibility: visible;
       }
 
       .collapsible[data-state="open"] {
@@ -112,7 +132,6 @@ Animated.decorators = [
       .collapsible[data-state="open"] .collapsibleContent {
         visibility: visible;
       }
-
   `}</style>
       {Story()}
     </div>
@@ -120,13 +139,10 @@ Animated.decorators = [
 ];
 
 export const Lazy: StoryFn<typeof Collapsible> = () => (
-  <Collapsible lazy>
+  <Collapsible hidingMethod="unmount">
     <Collapsible.Trigger>Trigger</Collapsible.Trigger>
     <Collapsible.Content>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-      corporis maxime aliquam, voluptates nobis numquam, non odit optio
-      architecto iure laborum possimus! Quibusdam sit ullam, consequatur sunt
-      tempore optio aliquid!
+      <DemoContent />
     </Collapsible.Content>
   </Collapsible>
 );
@@ -137,9 +153,7 @@ export const AsChild: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="space-16" background="info-soft">
-        <div>lorem ipsum</div>
-      </Box>
+      <DemoContent />
     </Collapsible.Content>
   </Collapsible>
 );
@@ -150,9 +164,7 @@ export const DefaultOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="space-16" background="info-soft">
-        <div>lorem ipsum</div>
-      </Box>
+      <DemoContent />
     </Collapsible.Content>
   </Collapsible>
 );
@@ -163,9 +175,7 @@ export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="space-16" background="info-soft">
-        <div>lorem ipsum</div>
-      </Box>
+      <DemoContent />
     </Collapsible.Content>
   </Collapsible>
 );
@@ -176,9 +186,7 @@ export const Disabled = ({ open = false }) => (
       <Button>Button</Button>
     </Collapsible.Trigger>
     <Collapsible.Content asChild>
-      <Box padding="space-16" background="info-soft">
-        <div>lorem ipsum</div>
-      </Box>
+      <DemoContent />
     </Collapsible.Content>
   </Collapsible>
 );
