@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { searchTokens } from "../helpers/search-tokens.js";
 import { tokens } from "../resources/tokens-catalog.js";
 import type { McpTool } from "../types.js";
 
@@ -24,10 +25,7 @@ const getTokenDetailsTool: McpTool<typeof getTokenDetailsInputSchema> = {
     const token = tokens.find((t) => t.name === tokenName);
 
     if (!token) {
-      const similarTokens = tokens
-        .filter((t) => t.name.toLowerCase().includes(tokenName.toLowerCase()))
-        .slice(0, 5)
-        .map((t) => t.name);
+      const similarTokens = searchTokens(tokenName, 5).map((t) => t.name);
 
       if (similarTokens.length > 0) {
         return JSON.stringify({
