@@ -11,7 +11,7 @@ import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
-export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface LookupProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Children, explanation popover to lookup word
    */
@@ -23,7 +23,7 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Title for the lookup element. Usually the same as `word`.
    */
-  title: string;
+  heading: string;
   /**
    * Default orientation of the explanation popover
    *
@@ -59,14 +59,24 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
  *
  * @example
  * ```jsx
- * <Lookup word="Lookup">
+ * <Lookup word="Lookup" heading="«Lookup»">
  *   Lookup component
  * </Lookup>
  * ```
  */
+
 export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
   (
-    { word, children, className, placement, strategy, onClick, title, ...rest },
+    {
+      word,
+      children,
+      className,
+      placement,
+      strategy,
+      onClick,
+      heading,
+      ...rest
+    },
     ref,
   ) => {
     const [openState, setOpenState] = useState(false);
@@ -75,6 +85,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
     const contentRef = useRef<HTMLDivElement>(null);
     const triggerId = useId();
     const popoverContentId = `${triggerId}-content`;
+    const popoverTitleId = `${triggerId}-title`;
     const translate = useI18n("global");
 
     return (
@@ -117,15 +128,17 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     ref={contentRef}
                     id={popoverContentId}
                     role="dialog"
-                    aria-labelledby={triggerId}
+                    aria-modal="true"
+                    aria-labelledby={popoverTitleId}
                     aria-keyshortcuts="Escape"
                     tabIndex={-1}
                   >
                     <BodyShort
                       weight="semibold"
                       className="aksel-lookup__title"
+                      id={popoverTitleId}
                     >
-                      {title}
+                      {heading}
                     </BodyShort>
                     {children}
                     <Button

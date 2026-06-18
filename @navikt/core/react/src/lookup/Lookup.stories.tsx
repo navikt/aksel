@@ -15,7 +15,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Lookup word="Lookup" title="«Lookup»">
+    <Lookup word="Lookup" heading="«Lookup»">
       A text explanation of the lookup word. This is an example of a lookup
       component.
     </Lookup>
@@ -29,7 +29,7 @@ export const Open = () => {
   }, []);
 
   return (
-    <Lookup word="Lookup" title="«Lookup»" ref={ref}>
+    <Lookup word="Lookup" heading="«Lookup»" ref={ref}>
       A text explanation of the lookup word. This is an example of a lookup
       component.
     </Lookup>
@@ -40,7 +40,7 @@ export const WithinASentence = () => {
   return (
     <BodyLong>
       This is an example of a{" "}
-      <Lookup word="lookup" title="Lookup word">
+      <Lookup word="lookup" heading="Lookup word">
         A text explanation of the lookup word.
       </Lookup>{" "}
       within a sentence.
@@ -52,7 +52,7 @@ export const WithLink = () => {
   return (
     <BodyLong>
       This is an example of a{" "}
-      <Lookup word="lookup word" title="Lookup word">
+      <Lookup word="lookup word" heading="Lookup word">
         <BodyLong>A longer text that explains the lookup word.</BodyLong>
         <Link href="https://www.nav.no" target="_blank">
           See further details <ExternalLinkIcon />
@@ -69,7 +69,7 @@ export const VeryLongWord = () => {
       This is an example of a{" "}
       <Lookup
         word="lookup word that is very very long and it never stops and keeps going"
-        title="Lookup word"
+        heading="Lookup word"
       >
         <BodyLong>A longer text that explains the lookup word.</BodyLong>
       </Lookup>{" "}
@@ -84,7 +84,7 @@ export const ButtonsBeforeAndAfter = () => {
       <button>Before button</button>
       <BodyLong>
         This is an example of a{" "}
-        <Lookup word="lookup word" title="Lookup word">
+        <Lookup word="lookup word" heading="Lookup word">
           <BodyLong>A longer text that explains the lookup word.</BodyLong>
         </Lookup>{" "}
         within a sentence.
