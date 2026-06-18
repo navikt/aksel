@@ -75,6 +75,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       strategy,
       onClick,
       heading,
+      id: idProp,
       ...rest
     },
     ref,
@@ -83,7 +84,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
     const anchorRef = useRef<HTMLButtonElement>(null);
     const mergedRef = useMergeRefs(anchorRef, ref);
     const contentRef = useRef<HTMLDivElement>(null);
-    const triggerId = useId();
+    const triggerId = useId(idProp);
     const popoverContentId = `${triggerId}-content`;
     const popoverTitleId = `${triggerId}-title`;
     const translate = useI18n("global");
