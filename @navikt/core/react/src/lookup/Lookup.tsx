@@ -1,28 +1,15 @@
 import React, { forwardRef, useRef, useState } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
 import { Popover } from "../popover";
 import { Portal } from "../portal";
+import { BodyShort } from "../typography";
 import { useId } from "../utils-external";
 import { FocusBoundary } from "../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../utils/components/focus-guards/FocusGuards";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
-
-/**
- * TODO:
- * [x] Dotted underline on trigger element
- * [x] Trigger styling
- * [x] Popover styling
- * [] Make word inline with text
- * [] Accessibility
- * [x] Popover placement
- * [x] Click outside to close
- * [] Breakline on word
- * [x] Popover sizing?
- * [x] Research hover effect
- * [x] Discuss span role button vs button element
- * [x] Fix documentation
- * [] Open on hover?
- */
+import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -33,6 +20,10 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Lookup word
    */
   word: string;
+  /**
+   * Title for the lookup element. Usually the same as `word`.
+   */
+  title: string;
   /**
    * Default orientation of the explanation popover
    *
@@ -75,7 +66,7 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
  */
 export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
   (
-    { word, children, className, placement, strategy, onClick, ...rest },
+    { word, children, className, placement, strategy, onClick, title, ...rest },
     ref,
   ) => {
     const [openState, setOpenState] = useState(false);
@@ -84,6 +75,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
     const contentRef = useRef<HTMLDivElement>(null);
     const triggerId = useId();
     const popoverContentId = `${triggerId}-content`;
+    const translate = useI18n("global");
 
     return (
       <>
@@ -126,13 +118,24 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     id={popoverContentId}
                     role="dialog"
                     aria-labelledby={triggerId}
+                    aria-keyshortcuts="Escape"
                     tabIndex={-1}
-                    className="aksel-lookup__popover-content"
                   >
+                    <BodyShort
+                      weight="semibold"
+                      className="aksel-lookup__title"
+                    >
+                      {title}
+                    </BodyShort>
                     {children}
-                    <span className="aksel-sr-only">
-                      Trykk Escape for å lukke oppslaget
-                    </span>
+                    <Button
+                      type="button"
+                      className="aksel-lookup__close-button"
+                      size="xsmall"
+                      variant="tertiary-neutral"
+                      icon={<XMarkIcon title={translate("close")} />}
+                      onClick={() => setOpenState(false)}
+                    />
                   </Popover.Content>
                 </Popover>
               </Portal>

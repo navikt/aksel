@@ -18,3 +18,14 @@
     outline-offset: 2px;
   }
 }
+
+.aksel-lookup__title {
+  margin-block-end: var(--ax-space-8);
+  margin-inline-end: var(--ax-space-28);
+}
+
+.aksel-lookup__close-button {
+  position: absolute;
+  top: var(--ax-space-16);
+  right: var(--ax-space-16);
+}
