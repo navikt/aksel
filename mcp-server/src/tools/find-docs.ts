@@ -50,7 +50,7 @@ function looksLikeMigration(query: string) {
 const findDocsTool: McpTool<typeof findDocsInputSchema> = {
   name: "aksel_find_docs",
   description:
-    "Search Aksel documentation pages and return matching paths. Accepts multi-word and Norwegian/English queries. Call this before aksel_get_doc / aksel_get_component_info. Use the 'kind' param to switch what you search: kind='migrations' lists codemods for version upgrades (v6→v7, v7→v8, etc.), and kind='tokens' browses design tokens (then call aksel_get_token_details for full metadata). If a docs query returns no results, retry with a single keyword (e.g. a component name) before falling back.",
+    "Search Aksel documentation pages, design tokens, or version migrations. Accepts multi-word and Norwegian/English queries. Call this before aksel_get_doc / aksel_get_component_info. Use the 'kind' param to switch what you search: kind='migrations' lists codemods for version upgrades (v6→v7, v7→v8, etc.), and kind='tokens' browses design tokens (then call aksel_get_token_details for full metadata). If a docs query returns no results, retry with a single keyword (e.g. a component name) before falling back.",
   inputSchema: findDocsInputSchema,
   async callback({ kind, query, limit }) {
     if (kind === "migrations") {
@@ -94,6 +94,22 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
     }
 
     if (!query || query.length < minMatchCharLength) {
+      if (query && looksLikeMigration(query)) {
+        return JSON.stringify({
+          kind: "docs",
+          message: `query must be at least ${minMatchCharLength} characters for kind='docs'.`,
+          hint: "This looks like a version migration. Retry with kind='migrations'.",
+        });
+      }
+
+      if (query && looksLikeToken(query)) {
+        return JSON.stringify({
+          kind: "docs",
+          message: `query must be at least ${minMatchCharLength} characters for kind='docs'.`,
+          hint: "This looks like a design token. Retry with kind='tokens', or call aksel_get_token_details for a specific token.",
+        });
+      }
+
       return JSON.stringify({
         kind: "docs",
         message: `query must be at least ${minMatchCharLength} characters for kind='docs'.`,

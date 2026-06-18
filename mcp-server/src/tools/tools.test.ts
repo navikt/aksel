@@ -163,6 +163,18 @@ describe("Tools", () => {
       expect(response.message).toContain("at least");
     });
 
+    test("should route short version-like docs query to migrations", async () => {
+      const result = await findDocsTool.callback({
+        kind: "docs",
+        query: "v8",
+        limit: 8,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.kind).toBe("docs");
+      expect(response.hint).toContain("kind='migrations'");
+    });
+
     test("should list migrations with run command", async () => {
       const result = await findDocsTool.callback({
         kind: "migrations",

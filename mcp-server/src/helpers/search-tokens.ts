@@ -1,19 +1,8 @@
 import Fuse, { type IFuseOptions } from "fuse.js";
-import { tokens } from "../resources/tokens-catalog.js";
-
-type TokenSummary = {
-  name: string;
-  comment?: string;
-  category: string;
-  type: string;
-};
-
-const tokenSummaries: TokenSummary[] = tokens.map((token) => ({
-  name: token.name,
-  comment: token.comment,
-  category: token.category,
-  type: token.type,
-}));
+import {
+  type TokenSummary,
+  tokenSummary as tokenSummaries,
+} from "../resources/tokens-catalog.js";
 
 const fuseKeys: NonNullable<IFuseOptions<TokenSummary>["keys"]> = [
   { name: "name", weight: 100 },
@@ -51,4 +40,3 @@ function searchTokens(
 }
 
 export { searchTokens };
-export type { TokenSummary };
