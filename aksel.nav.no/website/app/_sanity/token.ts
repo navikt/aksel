@@ -5,11 +5,11 @@ export const readWithDraftToken = process.env.SANITY_READ;
 export const readToken = process.env.SANITY_READ_NO_DRAFTS;
 
 if (!readToken) {
-  throw new Error("Missing SANITY_READ token");
+  throw new Error("Missing SANITY_READ_NO_DRAFTS token");
 }
 
 if (!readWithDraftToken) {
-  throw new Error("Missing SANITY_READ_NO_DRAFTS token");
+  throw new Error("Missing SANITY_READ token");
 }
 
 if (!writeToken) {

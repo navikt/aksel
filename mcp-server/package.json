@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "start": "node dist/index.mjs",
+    "start": "node --env-file-if-exists=.env dist/index.mjs",
     "test": "yarn vitest run",
     "inspect": "yarn mcp-inspector"
   },
@@ -19,17 +19,19 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.21",
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "@navikt/aksel": "^8.12.1",
-    "@navikt/aksel-icons": "^8.12.1",
-    "@navikt/ds-tokens": "^8.12.1",
+    "@navikt/aksel": "^8.13.0",
+    "@navikt/aksel-icons": "^8.13.0",
+    "@navikt/ds-tokens": "^8.13.0",
+    "@sanity/client": "7.21.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.10.9",
     "express": "^5.1.0",
+    "fuse.js": "^7.4.0",
     "node-cache": "^5.1.2",
     "prom-client": "^15.1.3",
     "tsdown": "^0.22.0",
     "typescript": "6.0.3",
-    "vitest": "4.1.7",
+    "vitest": "4.1.8",
     "zod": "^3.22.4"
   }
 }

@@ -197,11 +197,9 @@ const ENDRINGSLOGG_WITH_NEIGHBORS_QUERY = defineQuery(`
     "primary": {
       ${ENDRINGSLOGG_FIELDS}
     },
-    "previous": *[_type == "ds_endringslogg_artikkel" && endringsdato < ^.endringsdato] | order(endringsdato desc)[0]{
-      ${ENDRINGSLOGG_FIELDS}
-    },
-    "next": *[_type == "ds_endringslogg_artikkel" && endringsdato > ^.endringsdato] | order(endringsdato asc)[0]{
-      ${ENDRINGSLOGG_FIELDS}
+    artikler[]->{
+      heading,
+      "slug": slug.current,
     }
   }
 `);
@@ -416,6 +414,28 @@ const DESIGNSYSTEM_STATS_QUERY = defineQuery(
   `*[_id == "designsystem_statistics" && _type == "designsystemStatistics"][0]`,
 );
 
+const DS_CHANGELOGS_FOR_ID_QUERY = defineQuery(
+  `*[_type == "ds_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}`,
+);
+
+const GP_CHANGELOGS_FOR_ID_QUERY = defineQuery(
+  `*[_type == "gp_endringslogg_artikkel" && $id in artikler[]._ref] | order(endringsdato desc){heading, slug, endringsdato}`,
+);
+
+const GP_CHANGELOGS_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "gp_endringslogg_artikkel" && $slug == slug.current][0]{
+  ...,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  artikler[]->{
+    heading,
+    "slug": slug.current,
+  }
+}`,
+);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   BLOGG_BY_SLUG_QUERY,
@@ -458,6 +478,9 @@ export {
   TOC_BY_SLUG_QUERY,
   DS_PROMO_QUERY,
   DESIGNSYSTEM_STATS_QUERY,
+  DS_CHANGELOGS_FOR_ID_QUERY,
+  GP_CHANGELOGS_FOR_ID_QUERY,
+  GP_CHANGELOGS_BY_SLUG_QUERY,
 };
 
 /* MARKDOWN QUERIES */

@@ -47,7 +47,7 @@
     "@slack/web-api": "^7.8.0",
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
-    "fuse.js": "^7.3.0",
+    "fuse.js": "^7.4.0",
     "isomorphic-dompurify": "2.26.0",
     "jscodeshift": "17.3.0",
     "lodash": "4.18.1",
@@ -116,6 +116,6 @@
     "showdown": "^2.1.0",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.7"
+    "vitest": "4.1.8"
   }
 }
