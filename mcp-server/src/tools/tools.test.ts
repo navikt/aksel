@@ -92,7 +92,7 @@ describe("Tools", () => {
     test("should have proper metadata", () => {
       expect(getTokenDetailsTool.name).toBe("aksel_get_token_details");
       expect(getTokenDetailsTool.description).toContain(
-        "Fetch complete details for a specific Aksel design token",
+        "Look up an Aksel design token by name",
       );
       expect(getTokenDetailsTool.inputSchema).toHaveProperty("tokenName");
     });
@@ -119,15 +119,18 @@ describe("Tools", () => {
   });
 
   describe("findDocsTool", () => {
-    test("should validate query and limit", () => {
+    test("should validate kind and limit", () => {
       const strictSchema = z.object(findDocsTool.inputSchema).strict();
 
       const valid = strictSchema.safeParse({
         query: "button",
         limit: 5,
       });
-      const missingQuery = strictSchema.safeParse({
-        query: "",
+      const validMigrations = strictSchema.safeParse({
+        kind: "migrations",
+      });
+      const invalidKind = strictSchema.safeParse({
+        kind: "everything",
       });
       const invalidLimit = strictSchema.safeParse({
         query: "button",
@@ -135,8 +138,88 @@ describe("Tools", () => {
       });
 
       expect(valid.success).toBe(true);
-      expect(missingQuery.success).toBe(false);
+      expect(validMigrations.success).toBe(true);
+      expect(invalidKind.success).toBe(false);
       expect(invalidLimit.success).toBe(false);
+    });
+
+    test("should default kind to docs", () => {
+      const parsed = z.object(findDocsTool.inputSchema).parse({
+        query: "button",
+      });
+
+      expect(parsed.kind).toBe("docs");
+    });
+
+    test("should reject too-short docs query in callback", async () => {
+      const result = await findDocsTool.callback({
+        kind: "docs",
+        query: "ab",
+        limit: 8,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.kind).toBe("docs");
+      expect(response.message).toContain("at least");
+    });
+
+    test("should list migrations with run command", async () => {
+      const result = await findDocsTool.callback({
+        kind: "migrations",
+        query: undefined,
+        limit: 8,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.kind).toBe("migrations");
+      expect(response).toHaveProperty("cliVersion");
+      expect(response.runCommand).toContain("@navikt/aksel codemod");
+      expect(Array.isArray(response.results)).toBe(true);
+      expect(response.results.length).toBeGreaterThan(0);
+      expect(response.results[0]).toHaveProperty("name");
+      expect(response.results[0]).toHaveProperty("description");
+      expect(response.results[0]).toHaveProperty("version");
+    });
+
+    test("should filter migrations by version", async () => {
+      const result = await findDocsTool.callback({
+        kind: "migrations",
+        query: "v8",
+        limit: 8,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.results.length).toBeGreaterThan(0);
+      expect(response.results.every((m: any) => m.version === "v8")).toBe(true);
+    });
+
+    test("should report available versions for unknown migration query", async () => {
+      const result = await findDocsTool.callback({
+        kind: "migrations",
+        query: "v99",
+        limit: 8,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.kind).toBe("migrations");
+      expect(response).toHaveProperty("message");
+      expect(Array.isArray(response.availableVersions)).toBe(true);
+    });
+
+    test("should browse tokens", async () => {
+      const result = await findDocsTool.callback({
+        kind: "tokens",
+        query: undefined,
+        limit: 5,
+      });
+
+      const response = JSON.parse(result);
+      expect(response.kind).toBe("tokens");
+      expect(Array.isArray(response.results)).toBe(true);
+      expect(response.results.length).toBe(5);
+      expect(response.results[0]).toHaveProperty("name");
+      expect(response.results[0]).toHaveProperty("category");
+      expect(response.results[0]).not.toHaveProperty("rawValue");
     });
   });
 
