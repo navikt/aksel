@@ -82,7 +82,7 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
         return JSON.stringify({
           kind,
           message: `No tokens found for query: "${query}"`,
-          hint: "Try a broader keyword (e.g. 'danger', 'neutral', 'shadow'), or omit query to browse. Call aksel_get_token_details for a specific token.",
+          hint: "Try a broader keyword (e.g. 'danger', 'neutral', 'shadow', 'space'), or omit query to browse. Call aksel_get_token_details for a specific token.",
         });
       }
 
