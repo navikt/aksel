@@ -20,13 +20,17 @@ type TableOfContentsProps = {
     name?: string;
     text: string;
   };
+  linkToChangelogs?: boolean;
 };
 
 function TableOfContents({
-  toc,
+  toc: tocProp,
   variant = "default",
   feedback,
+  linkToChangelogs = false,
 }: TableOfContentsProps) {
+  const toc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
+
   const tocCtx = useTableOfContents(toc ?? []);
 
   if (!toc || toc.length === 0) {
@@ -99,6 +103,14 @@ function TableOfContents({
       <TableOfContentsLinks feedback={stegaClean(feedback)} />
     </aside>
   );
+}
+
+function tocWithChangelogs(toc: TOC_BY_SLUG_QUERY_RESULT) {
+  if (!toc || toc.length === 0) {
+    return undefined;
+  }
+
+  return [...toc, { id: "endringslogg-table", title: "Endringslogg" }];
 }
 
 function TableOfContentsLinks({

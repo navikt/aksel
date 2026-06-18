@@ -38,6 +38,12 @@ body {
   }
 }
 
+[data-sibling-margin] {
+  & + [data-sibling-margin="space-28"] {
+    margin-block-start: var(--ax-space-28);
+  }
+}
+
 [data-scroll-margin] {
   scroll-margin: 5rem;
 }

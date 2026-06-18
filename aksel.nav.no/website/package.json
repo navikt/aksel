@@ -15,7 +15,8 @@
     "update:eksempler": "yarn tsx --env-file-if-exists=.env ./scripts/update-examples/update-sanity",
     "validate:eksempler": "yarn tsx ./scripts/update-examples/validate",
     "update:changelog": "yarn tsx --env-file-if-exists=.env ./scripts/changelog",
-    "update:sanity": "yarn update:props && yarn update:eksempler && yarn update:changelog",
+    "update:stats": "yarn tsx --env-file-if-exists=.env ./scripts/update-stats/update-stats",
+    "update:sanity": "yarn update:props && yarn update:eksempler && yarn update:changelog && yarn update:stats",
     "analyze": "cross-env ANALYZE=true yarn build",
     "test": "vitest run -c config/vitest.config.ts",
     "test:watch": "vitest watch -c config/vitest.config.ts",
@@ -46,7 +47,7 @@
     "@slack/web-api": "^7.8.0",
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
-    "fuse.js": "^7.3.0",
+    "fuse.js": "^7.4.0",
     "isomorphic-dompurify": "2.26.0",
     "jscodeshift": "17.3.0",
     "lodash": "4.18.1",
@@ -85,6 +86,7 @@
     "@babel/core": "^7.19.0",
     "@babel/parser": "^7.27.5",
     "@babel/traverse": "^7.27.4",
+    "@google-cloud/bigquery": "^8.3.1",
     "@next/bundle-analyzer": "16.2.6",
     "@next/eslint-plugin-next": "16.2.6",
     "@playwright/test": "1.60.0",
@@ -99,6 +101,7 @@
     "@types/lodash": "4.17.20",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@types/semver": "^7.7.1",
     "@types/showdown": "^2.0.6",
     "@types/umami": "^2.10.0",
     "babel-loader": "^9.1.3",
@@ -113,6 +116,6 @@
     "showdown": "^2.1.0",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.7"
+    "vitest": "4.1.8"
   }
 }

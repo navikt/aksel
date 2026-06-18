@@ -1,5 +1,29 @@
 # @navikt/ds-css
 
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+## 8.12.1
+
+### Patch Changes
+
+- DataGrid: Fixed sticky columns horizontal shadows ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+- DataGrid: Fixed zebra-stripes with sticky columns ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+## 8.12.0
+
+### Minor Changes
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
 ## 8.11.1
 
 ### Patch Changes

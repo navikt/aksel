@@ -4,7 +4,10 @@ import { cl } from "../../utils/helpers";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 
-type BaseProps = Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> & {
+type BaseProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "children"
+> & {
   /**
    * Value for state-handling.
    */
@@ -58,29 +61,27 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       onClick,
       onFocus,
       onKeyDown,
+      disabled,
       ...rest
     },
     forwardedRef,
   ) => {
-    const itemCtx = useToggleItem(
-      { value, onClick, onFocus, disabled: false, onKeyDown },
-      forwardedRef,
-    );
+    const toggleItemProps = useToggleItem({
+      value,
+      onClick,
+      onFocus,
+      disabled,
+      onKeyDown,
+    });
     const ctx = useToggleGroupContext();
 
     return (
       <button
         {...rest}
-        ref={itemCtx.ref}
+        ref={forwardedRef}
         className={cl("aksel-toggle-group__button", className)}
         type="button"
-        role="radio"
-        aria-checked={itemCtx.isSelected}
-        data-selected={itemCtx.isSelected}
-        tabIndex={itemCtx.isFocused ? 0 : -1}
-        onClick={itemCtx.onClick}
-        onFocus={itemCtx.onFocus}
-        onKeyDown={itemCtx.onKeyDown}
+        {...toggleItemProps}
       >
         <BodyShort
           as="span"

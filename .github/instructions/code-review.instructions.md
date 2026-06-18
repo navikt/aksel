@@ -39,4 +39,4 @@ Review for issues that could block release, surprise users, or create maintenanc
 ### 6. Changesets and migrations
 
 - User-facing changes should include a changeset with a clear summary and impact.
-- Breaking changes should also update migration guidance and include a codemod when needed.
+- Breaking changes should also include a codemod when needed.

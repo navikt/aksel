@@ -13,20 +13,20 @@
   "dependencies": {
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
-    "fuse.js": "^7.3.0",
+    "fuse.js": "^7.4.0",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.100.2",
+    "@figma/plugin-typings": "^1.128.0",
     "@svgr/core": "^8.1.0",
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "typescript": "6.0.3",
-    "vite": "^7.3.2",
+    "vite": "^7.3.5",
     "vite-plugin-singlefile": "^2.3.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "vite-plugin-svgr": "^5.2.0"
   }
 }

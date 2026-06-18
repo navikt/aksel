@@ -17,6 +17,17 @@ const includeWebsiteStories = process.env.WITH_WEBSITE === "true";
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
+const addons = [
+  getAbsolutePath("@storybook/addon-a11y"),
+  getAbsolutePath("@storybook/addon-themes"),
+  getAbsolutePath("@storybook/addon-docs"),
+  getAbsolutePath("@storybook/addon-vitest"),
+];
+
+if (process.env.NODE_ENV === "development") {
+  addons.push(getAbsolutePath("@github-ui/storybook-addon-performance-panel"));
+}
+
 export default defineMain({
   experimental_indexers: (indexers) => {
     // Changes here might need to be reflected in aksel.nav.no/website/.storybook/main.ts
@@ -79,12 +90,7 @@ export default defineMain({
 
   stories: resolveStoriesPaths(),
 
-  addons: [
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-themes"),
-    getAbsolutePath("@storybook/addon-docs"),
-    getAbsolutePath("@storybook/addon-vitest"),
-  ],
+  addons,
 
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),

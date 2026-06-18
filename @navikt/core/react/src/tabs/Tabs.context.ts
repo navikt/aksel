@@ -1,14 +1,6 @@
 import { createStrictContext } from "../utils/helpers";
-import { createDescendantContext } from "../utils/hooks";
 import { TabsProps } from "./Tabs.types";
 import { useTabs } from "./useTabs";
-
-export const [
-  TabsDescendantsProvider,
-  useTabsDescendantsContext,
-  useTabsDescendants,
-  useTabsDescendant,
-] = createDescendantContext<HTMLButtonElement, { value: string }>();
 
 type TabsProviderProps = ReturnType<typeof useTabs> &
   Pick<

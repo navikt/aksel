@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 8.13.0
+
+### Minor Changes
+
+- Icons: New icons Armchair, FocusRoom, PhoneRoom and Sleep ([#4979](https://github.com/navikt/aksel/pull/4979))
+
+## 8.12.1
+
+## 8.12.0
+
 ## 8.11.1
 
 ## 8.11.0
