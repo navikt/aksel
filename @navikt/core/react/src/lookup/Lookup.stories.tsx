@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "../button";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
+import { Link } from "../link";
 import { BodyLong } from "../typography";
 import Lookup from "./Lookup";
 
@@ -12,13 +13,36 @@ export default {
 };
 
 export const Default = () => {
-  return <Lookup word="Lookup">Lookup component</Lookup>;
+  return (
+    <Lookup word="Lookup" title="«Lookup»">
+      A text explanation of the lookup word. This is an example of a lookup
+      component.
+    </Lookup>
+  );
 };
 
 export const WithinASentence = () => {
   return (
     <BodyLong>
-      This is an example of a <Lookup word="lookup">Lookup component</Lookup>{" "}
+      This is an example of a{" "}
+      <Lookup word="lookup" title="Lookup word">
+        A text explanation of the lookup word.
+      </Lookup>{" "}
+      within a sentence.
+    </BodyLong>
+  );
+};
+
+export const WithLink = () => {
+  return (
+    <BodyLong>
+      This is an example of a{" "}
+      <Lookup word="lookup word" title="Lookup word">
+        <BodyLong>A longer text that explains the lookup word.</BodyLong>
+        <Link href="https://www.nav.no" target="_blank">
+          See further details <ExternalLinkIcon />
+        </Link>
+      </Lookup>{" "}
       within a sentence.
     </BodyLong>
   );
@@ -26,58 +50,31 @@ export const WithinASentence = () => {
 
 export const VeryLongWord = () => {
   return (
-    <div>
-      <p>tekst tekst</p>
-      <Button>test</Button>
-      <BodyLong style={{ maxWidth: "300px" }}>
-        This is an example of a{" "}
-        <Lookup word="very very long lookup word that never stops">
-          Lookup component
-          <button>test</button>
-        </Lookup>{" "}
-        within a sentence.
-      </BodyLong>
-      <Button>test</Button>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-      <p>tekst tekst</p>
-    </div>
-  );
-};
-
-export const HoverEffect = () => {
-  return (
-    <BodyLong>
+    <BodyLong style={{ maxWidth: "400px" }}>
       This is an example of a{" "}
-      <Lookup word="lookup word" UNSAFEhoverEffect={true}>
-        Lookup component
+      <Lookup
+        word="lookup word that is very very long and it never stops and keeps going"
+        title="Lookup word"
+      >
+        <BodyLong>A longer text that explains the lookup word.</BodyLong>
       </Lookup>{" "}
       within a sentence.
     </BodyLong>
+  );
+};
+
+export const ButtonsBeforeAndAfter = () => {
+  return (
+    <div>
+      <button>Before button</button>
+      <BodyLong>
+        This is an example of a{" "}
+        <Lookup word="lookup word" title="Lookup word">
+          <BodyLong>A longer text that explains the lookup word.</BodyLong>
+        </Lookup>{" "}
+        within a sentence.
+      </BodyLong>
+      <button>After button</button>
+    </div>
   );
 };
