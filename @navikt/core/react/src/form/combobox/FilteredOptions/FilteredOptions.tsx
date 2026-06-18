@@ -51,10 +51,6 @@ const FilteredOptions = () => {
     isLoading || // Render loading message
     (!isLoading && filteredOptions.length === 0 && !allowNewValues); // Render no hits message
 
-  const shouldRenderFilteredOptionsList =
-    (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
-    filteredOptions.length > 0; // Render filtered options
-
   const singleSelectedOption = useMemo(() => {
     if (
       isMultiSelect ||
@@ -71,6 +67,11 @@ const FilteredOptions = () => {
     }
     return option;
   }, [isMultiSelect, selectedOptions]);
+
+  const shouldRenderFilteredOptionsList =
+    (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
+    filteredOptions.length > 0 || // Render filtered options
+    !!singleSelectedOption;
 
   return (
     <DismissableLayer
