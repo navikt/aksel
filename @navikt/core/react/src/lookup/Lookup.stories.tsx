@@ -54,7 +54,7 @@ export const WithLink = () => {
       This is an example of a{" "}
       <Lookup word="lookup word" heading="Lookup word">
         <BodyLong>A longer text that explains the lookup word.</BodyLong>
-        <Link href="https://www.nav.no" target="_blank">
+        <Link href="https://www.nav.no" target="_blank" rel="noreferrer noopener">
           See further details <ExternalLinkIcon />
         </Link>
       </Lookup>{" "}
