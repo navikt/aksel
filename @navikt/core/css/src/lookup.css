@@ -1,6 +1,7 @@
 .aksel-lookup-trigger {
   appearance: none;
   all: unset;
+  cursor: pointer;
   color: inherit;
   text-decoration: underline dotted;
   text-underline-offset: 10%;
