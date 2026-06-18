@@ -58,10 +58,6 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
    * @default "absolute"
    */
   strategy?: "absolute" | "fixed";
-  /**
-   * Just for testing: hover effect on trigger element. TODO: Talk to design about hover effect.
-   */
-  UNSAFEhoverEffect?: boolean;
 }
 
 /**
@@ -79,16 +75,7 @@ export interface LookupProps extends React.HTMLAttributes<HTMLButtonElement> {
  */
 export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
   (
-    {
-      word,
-      children,
-      className,
-      placement,
-      strategy,
-      onClick,
-      UNSAFEhoverEffect = false,
-      ...rest
-    },
+    { word, children, className, placement, strategy, onClick, ...rest },
     ref,
   ) => {
     const [openState, setOpenState] = useState(false);
@@ -112,7 +99,6 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
           aria-haspopup="dialog"
           aria-expanded={openState}
           aria-controls={popoverContentId}
-          data-hover-effect={UNSAFEhoverEffect}
         >
           {word}
         </button>
