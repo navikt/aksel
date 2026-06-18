@@ -101,7 +101,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
         />
 
         <Collapsible
-          hidingMethod="hidden"
+          closedBehavior="hidden"
           open={open}
           onOpenChange={onOpenChange}
         >

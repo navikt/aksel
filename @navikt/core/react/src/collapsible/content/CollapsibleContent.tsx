@@ -19,7 +19,7 @@ export const CollapsibleContent = forwardRef<
   CollapsibleContentProps
 >(({ children, asChild, ...rest }, forwardedRef) => {
   const ctx = useCollapsibleContext();
-  const { hidingMethod, open, onOpenToggle } = ctx;
+  const { closedBehavior, open, onOpenToggle } = ctx;
   const localRef = useRef<HTMLDivElement>(null);
   const ref = useMergeRefs(forwardedRef, localRef);
   const Comp = asChild ? Slot : "div";
@@ -34,8 +34,8 @@ export const CollapsibleContent = forwardRef<
     }
     const element = localRef.current;
 
-    if (hidingMethod !== "hiddenUntilFound") {
-      // Just in case hidingMethod changes from "hiddenUntilFound" to something else while closed
+    if (closedBehavior !== "hiddenUntilFound") {
+      // Just in case closedBehavior changes from "hiddenUntilFound" to something else while closed
       if (element.hidden === "until-found") {
         element.hidden = true;
       }
@@ -45,7 +45,7 @@ export const CollapsibleContent = forwardRef<
     element.hidden = "until-found";
     element.addEventListener("beforematch", onOpenToggle);
     return () => element.removeEventListener("beforematch", onOpenToggle);
-  }, [hidingMethod, open, onOpenToggle]);
+  }, [closedBehavior, open, onOpenToggle]);
 
   return (
     <Comp
@@ -56,7 +56,7 @@ export const CollapsibleContent = forwardRef<
       aria-controls={ctx.open ? ctx.triggerId : undefined}
       id={ctx.contentId}
     >
-      {ctx.hidingMethod === "unmount" && !ctx.open ? null : children}
+      {ctx.closedBehavior === "unmount" && !ctx.open ? null : children}
     </Comp>
   );
 });

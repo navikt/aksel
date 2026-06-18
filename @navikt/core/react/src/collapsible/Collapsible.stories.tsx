@@ -48,7 +48,7 @@ export const Default: Story = {
     open: {
       control: "boolean",
     },
-    hidingMethod: {
+    closedBehavior: {
       control: "select",
       options: ["unmount", "hidden", "hiddenUntilFound"],
     },
@@ -102,10 +102,13 @@ export const Animated: StoryFn<typeof Collapsible> = (props) => (
   </Collapsible>
 );
 Animated.argTypes = {
-  hidingMethod: {
+  closedBehavior: {
     control: "radio",
     options: ["hidden", "hiddenUntilFound"],
   },
+};
+Animated.args = {
+  closedBehavior: "hiddenUntilFound",
 };
 Animated.decorators = [
   (Story) => (
@@ -115,22 +118,22 @@ Animated.decorators = [
         display: grid;
         grid-template-rows: 0fr;
         overflow: hidden;
-        transition: grid-template-rows 1s ease-in-out;
-        content-visibility: visible;
-      }
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+        transition-property: visibility, content-visibility, grid-template-rows;
 
-      .collapsible[data-state="open"] {
-        grid-template-rows: 1fr;
+        &[hidden]:not([hidden="until-found"]) {
+          visibility: hidden; /* hidden=until-found uses content-visibility (we break the "until-found" part if we override it) */
+        }
+
+        &[data-state="open"] {
+          grid-template-rows: 1fr;
+          visibility: visible;
+        }
       }
 
       .collapsibleContent {
         min-height: 0;
-        transition: visibility 1s;
-        visibility: hidden;
-      }
-
-      .collapsible[data-state="open"] .collapsibleContent {
-        visibility: visible;
       }
   `}</style>
       {Story()}
@@ -138,17 +141,8 @@ Animated.decorators = [
   ),
 ];
 
-export const Lazy: StoryFn<typeof Collapsible> = () => (
-  <Collapsible hidingMethod="unmount">
-    <Collapsible.Trigger>Trigger</Collapsible.Trigger>
-    <Collapsible.Content>
-      <DemoContent />
-    </Collapsible.Content>
-  </Collapsible>
-);
-
 export const AsChild: StoryFn<typeof Collapsible> = () => (
-  <Collapsible hidingMethod="unmount" asChild>
+  <Collapsible closedBehavior="unmount" asChild>
     <div style={{ minHeight: "110px", minWidth: "130px" }}>
       <Collapsible.Trigger asChild>
         <Button>Button</Button>
@@ -196,7 +190,6 @@ export const Disabled = ({ open = false }) => (
 export const Chromatic = renderStoriesForChromatic({
   InContext,
   Animated,
-  Lazy,
   AsChild,
   DefaultOpen,
   ControlledOpen,

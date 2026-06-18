@@ -36,11 +36,16 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    * The content will expand if a `beforematch` event is triggered, which happens when
    * fragment navigation or the browser's "Find in page" feature causes a scroll to the content.
    *
+   * **NB:** Since React currently doesn't support setting `hidden="until-found"`, we have to set it
+   * manually in a `useEffect`. This means that fragment navigation will not work on the first render.
+   * (I.e. `<a href="/different-page#elm-inside-closed-collapsible">` won't work, but
+   * `<a href="#elm-inside-closed-collapsible">` should work.)
+   *
    * @see [MDN docs about the `hidden` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/hidden#the_hidden_until_found_state)
    *
-   * @default "hiddenUntilFound"
+   * @default "unmount"
    */
-  hidingMethod?: "unmount" | "hidden" | "hiddenUntilFound";
+  closedBehavior?: "unmount" | "hidden" | "hiddenUntilFound";
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false
@@ -98,7 +103,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       open,
       defaultOpen = false,
       onOpenChange,
-      hidingMethod = "hiddenUntilFound",
+      closedBehavior = "unmount",
       asChild,
       ...rest
     },
@@ -123,7 +128,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
         )}
         contentId={`collapsible-content-${internalId}`}
         triggerId={`collapsible-trigger-${internalId}`}
-        hidingMethod={hidingMethod}
+        closedBehavior={closedBehavior}
         state={state}
       >
         <Comp ref={ref} data-state={state} {...rest}>

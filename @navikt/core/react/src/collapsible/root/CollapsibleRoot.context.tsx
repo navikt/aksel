@@ -22,7 +22,7 @@ export type CollapsibleContextProps = {
    * Utility for getting state as string. Usefull for data-attributes.
    */
   state: "open" | "closed";
-} & Required<Pick<CollapsibleProps, "hidingMethod">>;
+} & Required<Pick<CollapsibleProps, "closedBehavior">>;
 
 export const {
   Provider: CollapsibleContextProvider,
