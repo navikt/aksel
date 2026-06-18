@@ -39,6 +39,7 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
       const ranking = new Map(
         searchIcons(keyword).map((icon, index) => [icon.id, index]),
       );
+
       filtered = filtered
         .filter((icon) => ranking.has(icon.id))
         .sort((a, b) => ranking.get(a.id)! - ranking.get(b.id)!);

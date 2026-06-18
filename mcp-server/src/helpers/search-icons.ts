@@ -12,11 +12,11 @@ const fuseKeys: NonNullable<IFuseOptions<AkselIcon>["keys"]> = [
 
 const fuseOptions: IFuseOptions<AkselIcon> = {
   keys: fuseKeys,
-  includeScore: true,
+  includeScore: false,
   shouldSort: true,
-  minMatchCharLength: 2,
-  ignoreLocation: true,
-  threshold: 0.3,
+  minMatchCharLength: 3,
+  ignoreLocation: false,
+  threshold: 0.2,
   distance: 50,
   useTokenSearch: true,
   ignoreDiacritics: true,

@@ -242,15 +242,11 @@ describe("Tools", () => {
       const invalidCategory = strictSchema.safeParse({
         category: "NotARealCategory",
       });
-      const invalidSubcategory = strictSchema.safeParse({
-        subcategory: "NotARealSubcategory",
-      });
       const invalidVariant = strictSchema.safeParse({
         variant: "outline",
       });
 
       expect(invalidCategory.success).toBe(false);
-      expect(invalidSubcategory.success).toBe(false);
       expect(invalidVariant.success).toBe(false);
     });
 
@@ -263,7 +259,6 @@ describe("Tools", () => {
         keyword: firstKeyword,
         limit: 10,
         category: undefined,
-        subcategory: undefined,
         variant: "both",
       });
 
@@ -280,7 +275,6 @@ describe("Tools", () => {
 
     test("should filter icons by category", async () => {
       const result = await findIconsTool.callback({
-        subcategory: undefined,
         variant: "both",
         keyword: undefined,
         category: "Interface",
@@ -298,7 +292,6 @@ describe("Tools", () => {
     test("should return helpful message when no results", async () => {
       const result = await findIconsTool.callback({
         category: undefined,
-        subcategory: undefined,
         variant: "both",
         limit: 20,
         keyword: "nonexistent-icon-xyz-123",
