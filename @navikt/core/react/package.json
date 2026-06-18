@@ -689,6 +689,16 @@
         "default": "./cjs/alert/local-alert/index.js"
       }
     },
+    "./Lookup": {
+      "import": {
+        "types": "./esm/lookup/index.d.ts",
+        "default": "./esm/lookup/index.js"
+      },
+      "require": {
+        "types": "./cjs/lookup/index.d.ts",
+        "default": "./cjs/lookup/index.js"
+      }
+    },
     "./Dialog": {
       "import": {
         "types": "./esm/dialog/index.d.ts",
