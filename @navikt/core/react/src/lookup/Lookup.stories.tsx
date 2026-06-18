@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { Link } from "../link";
 import { BodyLong } from "../typography";
+import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Lookup from "./Lookup";
 
 export default {
@@ -15,6 +16,20 @@ export default {
 export const Default = () => {
   return (
     <Lookup word="Lookup" title="«Lookup»">
+      A text explanation of the lookup word. This is an example of a lookup
+      component.
+    </Lookup>
+  );
+};
+
+export const Open = () => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    ref.current?.click();
+  }, []);
+
+  return (
+    <Lookup word="Lookup" title="«Lookup»" ref={ref}>
       A text explanation of the lookup word. This is an example of a lookup
       component.
     </Lookup>
@@ -78,3 +93,12 @@ export const ButtonsBeforeAndAfter = () => {
     </div>
   );
 };
+
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Open,
+  WithinASentence,
+  WithLink,
+  VeryLongWord,
+  ButtonsBeforeAndAfter,
+});
