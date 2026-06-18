@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { Popover } from "../popover";
+import { Popover, PopoverProps } from "../popover";
 import { Portal } from "../portal";
 import { BodyShort } from "../typography";
 import { useId } from "../utils-external";
@@ -11,7 +11,10 @@ import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
-export interface LookupProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface LookupProps
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Pick<PopoverProps, "placement" | "strategy"> {
   /**
    * Children, explanation popover to lookup word
    */
@@ -24,31 +27,6 @@ export interface LookupProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Title for the lookup element. Usually the same as `word`.
    */
   heading: string;
-  /**
-   * Default orientation of the explanation popover
-   *
-   * Try to keep general usage to "top", "bottom", "left", "right".
-   * @default "top"
-   */
-  placement?:
-    | "top"
-    | "bottom"
-    | "right"
-    | "left"
-    | "top-start"
-    | "top-end"
-    | "bottom-start"
-    | "bottom-end"
-    | "right-start"
-    | "right-end"
-    | "left-start"
-    | "left-end";
-  /**
-   * Changes what CSS position property to use
-   * You want to use "fixed" if reference element is inside a fixed container, but explanation popover is not
-   * @default "absolute"
-   */
-  strategy?: "absolute" | "fixed";
 }
 
 /**
