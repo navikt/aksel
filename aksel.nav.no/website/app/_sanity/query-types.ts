@@ -1183,6 +1183,7 @@ export type Komponenter_landingsside = {
   overview_pages?: Array<string>;
   ingress_primitives?: string;
   ingress_core?: string;
+  ingress_dekoratoren?: string;
   ingress_legacy?: string;
   seo?: Seo;
 };
@@ -1436,7 +1437,7 @@ export type Komponent_artikkel = {
   updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
-  kategori?: "primitives" | "core" | "legacy" | "standalone";
+  kategori?: "primitives" | "core" | "dekoratoren" | "legacy" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   status?: {
@@ -2077,7 +2078,13 @@ export type DESIGNSYSTEM_SIDEBAR_QUERY_RESULT = Array<
       _type: "komponent_artikkel";
       heading: string | null;
       slug: string | null;
-      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
+      kategori:
+        | "core"
+        | "dekoratoren"
+        | "legacy"
+        | "primitives"
+        | "standalone"
+        | null;
       tag: "beta" | "deprecated" | "new" | "preview" | "ready" | null;
       sidebarindex: number | null;
     }
@@ -2930,6 +2937,7 @@ export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY_RESULT = {
   overview_pages?: Array<string>;
   ingress_primitives?: string;
   ingress_core?: string;
+  ingress_dekoratoren?: string;
   ingress_legacy?: string;
   seo?: Seo;
 } | null;
@@ -3109,7 +3117,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
   updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
-  kategori?: "core" | "legacy" | "primitives" | "standalone";
+  kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   status: {
@@ -4301,7 +4309,13 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT = Array<
           _type: "image";
         };
       } | null;
-      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
+      kategori:
+        | "core"
+        | "dekoratoren"
+        | "legacy"
+        | "primitives"
+        | "standalone"
+        | null;
       sidebarindex: number | null;
       description: string | null;
     }
@@ -4387,7 +4401,13 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT = Array<
           _type: "image";
         };
       } | null;
-      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
+      kategori:
+        | "core"
+        | "dekoratoren"
+        | "legacy"
+        | "primitives"
+        | "standalone"
+        | null;
       sidebarindex: number | null;
     }
   | {
@@ -8813,7 +8833,12 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
         updateInfo?: UpdateInfo;
         publishedAt?: string;
         heading?: string;
-        kategori?: "core" | "legacy" | "primitives" | "standalone";
+        kategori?:
+          | "core"
+          | "dekoratoren"
+          | "legacy"
+          | "primitives"
+          | "standalone";
         sidebarindex?: number;
         slug: string | null;
         status?: {
@@ -8951,7 +8976,13 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
               _type: "image";
             };
           } | null;
-          kategori: "core" | "legacy" | "primitives" | "standalone" | null;
+          kategori:
+            | "core"
+            | "dekoratoren"
+            | "legacy"
+            | "primitives"
+            | "standalone"
+            | null;
           _createdAt: string;
           _updatedAt: string;
           publishedAt: string | null;
@@ -11337,7 +11368,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
   updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
-  kategori?: "core" | "legacy" | "primitives" | "standalone";
+  kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   status?: {
@@ -13813,7 +13844,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
   updateInfo?: UpdateInfo;
   publishedAt?: string;
   heading?: string;
-  kategori?: "core" | "legacy" | "primitives" | "standalone";
+  kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
   status?: {
@@ -16301,7 +16332,13 @@ export type ALL_MARKDOWN_ARTICLES_INDEX_QUERY_RESULT = Array<
       _type: "komponent_artikkel";
       heading: string | null;
       slug: string | null;
-      kategori: "core" | "legacy" | "primitives" | "standalone" | null;
+      kategori:
+        | "core"
+        | "dekoratoren"
+        | "legacy"
+        | "primitives"
+        | "standalone"
+        | null;
       tag: "beta" | "deprecated" | "new" | "preview" | "ready" | null;
       sidebarindex: number | null;
     }
