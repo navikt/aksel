@@ -47,7 +47,7 @@ function getAvailableVersions(): string[] {
  * keys (e.g. "v8", "8", "7->8") only exact version matches are returned;
  * otherwise the query is fuzzy-matched against name/description/version.
  */
-function searchMigrations(query?: string): MigrationResult[] {
+function searchMigrations(query?: string, limit?: number): MigrationResult[] {
   if (!query) {
     return allMigrations;
   }
@@ -69,7 +69,7 @@ function searchMigrations(query?: string): MigrationResult[] {
     return allMigrations.filter((m) => requestedVersions.has(m.version));
   }
 
-  return fuse.search(normalized).map(({ item }) => item);
+  return fuse.search(normalized, { limit }).map(({ item }) => item);
 }
 
 export { searchMigrations, getAvailableVersions };

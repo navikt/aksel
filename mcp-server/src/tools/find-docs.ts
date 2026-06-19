@@ -54,7 +54,7 @@ const findDocsTool: McpTool<typeof findDocsInputSchema> = {
   inputSchema: findDocsInputSchema,
   async callback({ kind, query, limit }) {
     if (kind === "migrations") {
-      const results = searchMigrations(query);
+      const results = searchMigrations(query, limit);
 
       if (results.length === 0) {
         return JSON.stringify({
