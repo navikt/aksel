@@ -80,7 +80,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
           )}
           aria-haspopup="dialog"
           aria-expanded={openState}
-          aria-controls={popoverContentId}
+          aria-controls={openState ? popoverContentId : undefined}
         >
           {word}
         </button>
