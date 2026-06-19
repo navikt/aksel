@@ -6651,6 +6651,13 @@
         },
         "optional": true
       },
+      "ingress_dekoratoren": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "ingress_legacy": {
         "type": "objectAttribute",
         "value": {
@@ -8290,6 +8297,10 @@
             {
               "type": "string",
               "value": "core"
+            },
+            {
+              "type": "string",
+              "value": "dekoratoren"
             },
             {
               "type": "string",
