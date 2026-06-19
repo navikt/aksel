@@ -20,6 +20,10 @@
   }
 }
 
+.aksel-lookup__content {
+  position: relative;
+}
+
 .aksel-lookup__title {
   margin-block-end: var(--ax-space-8);
   margin-inline-end: var(--ax-space-28);

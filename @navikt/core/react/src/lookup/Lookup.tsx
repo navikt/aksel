@@ -111,6 +111,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     aria-labelledby={popoverTitleId}
                     aria-keyshortcuts="Escape"
                     tabIndex={-1}
+                    className="aksel-lookup__content"
                   >
                     <BodyShort
                       weight="semibold"
