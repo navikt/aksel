@@ -22,6 +22,7 @@
 
 .aksel-lookup__content {
   position: relative;
+  max-width: min(65ch, calc(100vw - var(--ax-space-24)));
 }
 
 .aksel-lookup__title {
