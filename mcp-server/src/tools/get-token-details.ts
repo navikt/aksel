@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { searchTokens } from "../helpers/search-tokens.js";
 import { tokens } from "../resources/tokens-catalog.js";
 import type { McpTool } from "../types.js";
 
@@ -11,23 +12,20 @@ const getTokenDetailsInputSchema = {
     .trim()
     .min(1, "tokenName is required")
     .describe(
-      "The token name to fetch details for (e.g., 'bg-neutral-moderate', 'shadow-dialog'). Use the aksel-tokens://catalog resource to browse available tokens.",
+      "Token name, e.g. 'bg-neutral-moderate', 'text-danger', 'shadow-dialog'. Tokens follow '<role>-<tone>-<emphasis>' patterns. To discover names, browse with aksel_find_docs using kind='tokens'.",
     ),
 };
 
 const getTokenDetailsTool: McpTool<typeof getTokenDetailsInputSchema> = {
   name: "aksel_get_token_details",
   description:
-    "Fetch complete details for a specific Aksel design token by name. Returns all metadata including value, rawValue, CSS/SCSS/LESS/JS accessors, semantic information, and usage guidelines.",
+    "Look up an Aksel design token by name and get its value, accessors (CSS/SCSS/LESS/JS), semantics, and usage. THIS is the right tool for any token/color question — do not use aksel_find_docs (kind='docs') for tokens. Unknown or outdated names (e.g. v7 'text-action') return the closest existing tokens. To browse all tokens, call aksel_find_docs with kind='tokens'.",
   inputSchema: getTokenDetailsInputSchema,
   async callback({ tokenName }) {
     const token = tokens.find((t) => t.name === tokenName);
 
     if (!token) {
-      const similarTokens = tokens
-        .filter((t) => t.name.toLowerCase().includes(tokenName.toLowerCase()))
-        .slice(0, 5)
-        .map((t) => t.name);
+      const similarTokens = searchTokens(tokenName, 5).map((t) => t.name);
 
       if (similarTokens.length > 0) {
         return JSON.stringify({
@@ -39,7 +37,7 @@ const getTokenDetailsTool: McpTool<typeof getTokenDetailsInputSchema> = {
 
       return JSON.stringify({
         error: `Token '${tokenName}' not found`,
-        hint: "Use the aksel-tokens://catalog resource to browse available tokens",
+        hint: "Browse available tokens with aksel_find_docs using kind='tokens'.",
       });
     }
 
