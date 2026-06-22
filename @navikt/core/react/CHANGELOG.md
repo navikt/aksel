@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.13.1
+
+### Patch Changes
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.13.1
+  - @navikt/aksel-icons@8.13.1
+
 ## 8.13.0
 
 ### Minor Changes
