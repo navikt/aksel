@@ -120,7 +120,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                     >
                       {heading}
                     </BodyShort>
-                    {children}
+                    <div>{children}</div>
                     <Button
                       type="button"
                       className="aksel-lookup__close-button"
