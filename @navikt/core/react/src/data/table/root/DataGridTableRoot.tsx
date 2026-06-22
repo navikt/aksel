@@ -487,6 +487,7 @@ interface DataTableDataRowProps {
 }
 
 const DataTableDataRow = memo(
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   function DataTableDataRow({
     rowData,
     details,
