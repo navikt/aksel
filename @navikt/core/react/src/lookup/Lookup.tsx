@@ -30,7 +30,7 @@ export interface LookupProps
 }
 
 /**
- * A component that displays a popover with an explanation when clicked. Used for looking up words or concepts within a text.
+ * Displays a popup with a word explanation when clicked. Used for looking up words or concepts within text.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/lookup)
  * @see 🏷️ {@link LookupProps}
