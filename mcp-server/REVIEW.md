@@ -11,6 +11,8 @@ Derived from the 13 manual testing sessions. Findings are taken at face value: e
 
 > Several capabilities that sessions reported as "missing" already exist **as MCP resources** (`aksel-migrations://catalog`, `aksel-tokens://catalog`) and `aksel_get_token_details` already returns "did you mean" suggestions. MCP clients rarely auto-invoke resources — agents reliably call **tools**, not resources. So most of this review is about **findability and descriptions**, not net-new capability.
 
+> **Update (revised approach for T3/T4/T5):** Instead of adding separate `aksel_find_migrations` / `aksel_find_tokens` tools, the migration and token catalogs are now exposed through a `kind` selector on the existing `aksel_find_docs` tool: `kind: 'docs' | 'migrations' | 'tokens'` (default `'docs'`). This keeps a single discoverable entry point and lets the planned Aksel **skill** drive routing by instructing the LLM to call `aksel_find_docs` with `kind:'migrations'` or `kind:'tokens'`. **Skill TODO:** teach this routing (migrations → `kind:'migrations'`; token browse → `kind:'tokens'`; token details → `aksel_get_token_details`).
+
 ---
 
 ## 1. Executive summary
@@ -21,23 +23,23 @@ The second theme is **routing**: token and migration questions get sent to `akse
 
 ### Scored backlog (overview)
 
-| #   | Theme                                                           | Sessions         | Impact | Effort | Primary owner               |
-| --- | --------------------------------------------------------------- | ---------------- | ------ | ------ | --------------------------- |
-| T1  | `find_docs` low recall (multi-word / conceptual / migration)    | 1,2,3,4,5,8,9,13 | High   | Med    | `[MCP-TOOL]`                |
-| T2  | English vs Norwegian query mismatch                             | 1,3,4,5          | High   | Med    | `[MCP-TOOL]`                |
-| T3  | Token questions mis-routed to docs search                       | 10,11,12,13      | High   | Low    | `[MCP-DESC]` + `[MCP-TOOL]` |
-| T4  | Migration/codemod discovery (catalog is a resource, not a tool) | 7,8,9,13         | High   | Low    | `[MCP-TOOL]`                |
-| T5  | No token browse/list tool (catalog is a resource)               | 13               | Med    | Low    | `[MCP-TOOL]`                |
-| T6  | Component existence / closest-alternative signaling             | 1                | Med    | Med    | `[MCP-TOOL]`                |
-| T7  | Icon name aliases / "did you mean"                              | 1                | Med    | Low    | `[MCP-TOOL]`                |
-| T8  | 0-result fallback strategy not documented                       | 4,5,13           | High   | Low    | `[SKILL]`                   |
-| T9  | Tool-selection routing heuristics (token vs docs vs component)  | 4,5,10,11        | Med    | Low    | `[SKILL]`                   |
-| T10 | Detect library context early / auto-validate after install      | 4                | Med    | —      | `[SKILL]`                   |
-| T11 | Breaking-change vs deprecation not distinguished                | 9                | Med    | Low    | `[DOCS]` + `[SKILL]`        |
-| T12 | Version-specific setup (Tailwind v3 vs v4)                      | 2                | Med    | —      | `[SKILL]` + `[DOCS]`        |
-| T13 | Large doc payload `%20` path failure                            | 2                | Low    | —      | Client-side (not MCP)       |
-| T14 | Speculative / unnecessary tool calls                            | 5                | Low    | —      | `[SKILL]`                   |
-| T15 | Migration docs not indexed/sectioned on site                    | 8,13             | Med    | Med    | `[DOCS]`                    |
+| #   | Theme                                                           | Sessions         | Impact | Effort | Primary owner                                        |
+| --- | --------------------------------------------------------------- | ---------------- | ------ | ------ | ---------------------------------------------------- |
+| T1  | `find_docs` low recall (multi-word / conceptual / migration)    | 1,2,3,4,5,8,9,13 | High   | Med    | `[MCP-TOOL]`                                         |
+| T2  | English vs Norwegian query mismatch                             | 1,3,4,5          | High   | Med    | `[MCP-TOOL]`                                         |
+| T3  | Token questions mis-routed to docs search                       | 10,11,12,13      | High   | Low    | `[MCP-DESC]` + `[MCP-TOOL]` ✅ done                  |
+| T4  | Migration/codemod discovery (catalog is a resource, not a tool) | 7,8,9,13         | High   | Low    | `[MCP-TOOL]` ✅ done (`find_docs kind:'migrations'`) |
+| T5  | No token browse/list tool (catalog is a resource)               | 13               | Med    | Low    | `[MCP-TOOL]` ✅ done (`find_docs kind:'tokens'`)     |
+| T6  | Component existence / closest-alternative signaling             | 1                | Med    | Med    | `[MCP-TOOL]`                                         |
+| T7  | Icon name aliases / "did you mean"                              | 1                | Med    | Low    | `[MCP-TOOL]`                                         |
+| T8  | 0-result fallback strategy not documented                       | 4,5,13           | High   | Low    | `[SKILL]`                                            |
+| T9  | Tool-selection routing heuristics (token vs docs vs component)  | 4,5,10,11        | Med    | Low    | `[SKILL]`                                            |
+| T10 | Detect library context early / auto-validate after install      | 4                | Med    | —      | `[SKILL]`                                            |
+| T11 | Breaking-change vs deprecation not distinguished                | 9                | Med    | Low    | `[DOCS]` + `[SKILL]`                                 |
+| T12 | Version-specific setup (Tailwind v3 vs v4)                      | 2                | Med    | —      | `[SKILL]` + `[DOCS]`                                 |
+| T13 | Large doc payload `%20` path failure                            | 2                | Low    | —      | Client-side (not MCP)                                |
+| T14 | Speculative / unnecessary tool calls                            | 5                | Low    | —      | `[SKILL]`                                            |
+| T15 | Migration docs not indexed/sectioned on site                    | 8,13             | Med    | Med    | `[DOCS]`                                             |
 
 ---
 
@@ -174,49 +176,43 @@ Make the hint actionable and route to the right tool/resource:
 
 **Recommendations:**
 
-`[MCP-DESC]` **Make this the obvious entry point for token questions** (it currently reads as "details for a token you already know"):
+`[MCP-DESC]` **Make this the obvious entry point for token questions** (it currently reads as "details for a token you already know"). ✅ **Done** — shipped description:
 
-> "Look up an Aksel design token by name and get its value, accessors (CSS/SCSS/LESS/JS), semantics, and usage. THIS is the right tool for any token/color question — do not use `aksel_find_docs` for tokens. Unknown or outdated names (e.g. v7 `text-action`) return the closest existing tokens. To browse all tokens use `aksel_find_tokens` / `aksel-tokens://catalog`."
+> "Look up an Aksel design token by name and get its value, accessors (CSS/SCSS/LESS/JS), semantics, and usage. THIS is the right tool for any token/color question — do not use `aksel_find_docs` (kind='docs') for tokens. Unknown or outdated names (e.g. v7 `text-action`) return the closest existing tokens. To browse all tokens, call `aksel_find_docs` with kind='tokens'."
 
-`[MCP-DESC]` Add a token-name pattern hint to the param so agents can construct names:
+`[MCP-DESC]` Add a token-name pattern hint to the param so agents can construct names. ✅ **Done** — shipped param:
 
-> "Token name, e.g. 'bg-neutral-moderate', 'text-danger', 'shadow-dialog'. Tokens follow `<role>-<tone>-<emphasis>` patterns. To discover names use `aksel_find_tokens` or the catalog."
+> "Token name, e.g. 'bg-neutral-moderate', 'text-danger', 'shadow-dialog'. Tokens follow `<role>-<tone>-<emphasis>` patterns. To discover names, browse with `aksel_find_docs` using kind='tokens'."
 
-See §4.2 for the new browse tool that closes the discovery gap (T5).
+See §4.2 for how the discovery gap (T5) is closed via `aksel_find_docs` kind='tokens'.
 
 ---
 
 ## 4. Findability gaps — convert resources to tools
 
-MCP clients reliably call **tools** but rarely auto-load **resources**. Two high-value capabilities are currently locked inside resources, which is exactly why sessions reported them as "missing."
+MCP clients reliably call **tools** but rarely auto-load **resources**. Two high-value capabilities were locked inside resources, which is why sessions reported them as "missing."
 
-### 4.1 `aksel_find_migrations` (new tool wrapping `aksel-migrations://catalog`) — T4
+> **Revised & shipped:** rather than two new tools, both capabilities are exposed via a `kind` selector on `aksel_find_docs` (`kind: 'docs' | 'migrations' | 'tokens'`, default `'docs'`). The catalogs/resources remain unchanged; the tool reads the same data sources. A single, already-discoverable tool now covers all three. The planned skill teaches when to pass each `kind`.
+
+### 4.1 ~~`aksel_find_migrations` (new tool)~~ → `aksel_find_docs` kind='migrations' — T4 ✅ done
 
 **Sessions:** S7 (couldn't find any codemods at all), S8 (couldn't find the v6 codemod command), S9 (didn't use MCP for breaking changes), S13 (no direct path to migration info → fell back to Explore).
 
-`[MCP-TOOL]` Add a tool that surfaces the already-existing migrations catalog so agents discover it without knowing the resource URI. Proposed shape:
+`[MCP-TOOL]` ✅ **Done** — `aksel_find_docs` with `kind:'migrations'` surfaces the migrations catalog without needing the resource URI.
 
-- Input: optional `version` (e.g. `"v8"`, `"7"`, or `"7->8"`).
-- Output: matching codemods with `name`, `description`, `warning`, plus the `runCommand` (`npx @navikt/aksel codemod <name>`) and `cliVersion` already in the catalog.
-
-**Proposed description:**
-
-> "List Aksel codemods/migrations for upgrading between major versions. Use for any 'how do I migrate / upgrade / codemod / breaking changes' question (e.g. v6→v7, v7→v8). Returns codemod names, descriptions, warnings, and the exact `npx @navikt/aksel codemod <name>` command."
+- Input: optional `query` matching a version (`"v8"`, `"8"`, `"7->8"`) or a codemod keyword; omit to list all.
+- Output: matching codemods with `name`, `description`, `version`, optional `warning`, plus `runCommand` (`npx @navikt/aksel codemod <name>`) and `cliVersion`. Unknown query → `message` + `availableVersions`.
 
 This directly closes S7/S8/S13's dead ends and gives S9 a structured source for "what changed."
 
-### 4.2 `aksel_find_tokens` (new tool wrapping `aksel-tokens://catalog`) — T5
+### 4.2 ~~`aksel_find_tokens` (new tool)~~ → `aksel_find_docs` kind='tokens' — T5 ✅ done
 
 **Sessions:** S13 — "Unable to systematically browse token catalog (only works with exact names)"; trial-and-error via build errors.
 
-`[MCP-TOOL]` Add a browse/filter tool over the existing tokens catalog:
+`[MCP-TOOL]` ✅ **Done** — `aksel_find_docs` with `kind:'tokens'` browses/filters the tokens catalog:
 
-- Input: optional `query`/`keyword`, `category`, `type`, `role` (e.g. `neutral`, `danger`), `limit`.
-- Output: lightweight `{ name, comment, category, type }` rows (same shape as the catalog), so agents can discover names then drill in with `aksel_get_token_details`.
-
-**Proposed description:**
-
-> "Browse and filter Aksel design tokens by keyword, category, type, or semantic role (e.g. 'danger', 'neutral'). Use this to discover token names, then call `aksel_get_token_details` for full metadata. Prefer this over `aksel_find_docs` for any token question."
+- Input: optional `query` (keyword matched against name/category/comment), `limit`; omit `query` to browse.
+- Output: lightweight `{ name, comment, category, type }` rows (same shape as the catalog), so agents discover names then drill in with `aksel_get_token_details`.
 
 ### 4.3 Reference resources from tool descriptions
 
@@ -236,8 +232,8 @@ This directly closes S7/S8/S13's dead ends and gives S9 a structured source for 
 
 These cannot be fixed by the MCP server alone and belong in the dedicated "how to use Aksel" skill. Flagged per the brief — not drafted here.
 
-- `[SKILL]` **T8 — 0-result fallback strategy.** What to do when `aksel_find_docs` returns nothing (retry with a single keyword/component name; for tokens go to token tools; for migrations go to migrations tool). (S4, S5, S13)
-- `[SKILL]` **T9 — tool-selection routing.** When to use docs search vs `aksel_get_component_info` vs `aksel_get_token_details` vs `aksel_find_migrations`. Token/color → token tool; version/upgrade → migrations tool; component API/props → component info; concepts/guides → docs search. (S10, S11, S12, S13)
+- `[SKILL]` **T8 — 0-result fallback strategy.** What to do when `aksel_find_docs` returns nothing (retry with a single keyword/component name; for tokens retry with `kind:'tokens'` or call `aksel_get_token_details`; for migrations retry with `kind:'migrations'`). (S4, S5, S13)
+- `[SKILL]` **T9 — tool-selection routing.** When to use `aksel_find_docs` (with the right `kind`) vs `aksel_get_component_info` vs `aksel_get_token_details`. Token/color → `aksel_get_token_details` (browse via `aksel_find_docs kind:'tokens'`); version/upgrade/codemod → `aksel_find_docs kind:'migrations'`; component API/props → component info; concepts/guides → `aksel_find_docs kind:'docs'`. **NEW: the skill must teach the `kind` selector explicitly.** (S10, S11, S12, S13)
 - `[SKILL]` **T10 — detect Aksel context early & auto-validate after install.** Anchor answers to the Aksel library when the workspace uses it, and run a quick post-install check (versions, imports, basic API) against component info without waiting to be asked. (S4)
 - `[SKILL]` **T11 — breaking vs deprecation discipline.** When enumerating changes, separate strict breaking changes from deprecations/future removals. (S9)
 - `[SKILL]` **T12 — version-aware setup.** Detect Tailwind v3 vs v4 (and Aksel major) and apply the version-specific template rather than generic directives. (S2)
@@ -300,8 +296,8 @@ These need changes to the underlying docs/index, beyond MCP wiring.
 ## 9. Suggested implementation order
 
 1. **`aksel_find_docs` recall** (T1, T2): EN↔NO synonym/alias map + actionable zero-result routing. _(Unblocks the most sessions.)_
-2. **Expose migrations & token catalogs as tools** (T4, T5): `aksel_find_migrations`, `aksel_find_tokens`. _(Low effort, converts "missing" → discoverable.)_
-3. **Description rewrites** (T3, T6, T7 wording; token/component/icon tools): cheap, high routing impact.
+2. ✅ **Done — expose migrations & token catalogs via `aksel_find_docs` `kind` selector** (T4, T5): `kind:'migrations'` and `kind:'tokens'` instead of separate tools. _(Low effort, converts "missing" → discoverable.)_
+3. ✅ **Done (token) — description rewrites** (T3 token tool + param; docs zero-result routing to `kind:'tokens'` / `kind:'migrations'`). Remaining: T6, T7 wording.
 4. **Closest-alternative on `get_component_info` 404** (T6) and **icon aliases** (T7): reuse the token tool's did-you-mean pattern.
 5. **Shared search/normalization helper + consistent zero-result contract** (§5): consolidate behavior.
 6. Hand off `[SKILL]` and `[DOCS]` items (§6, §7) to the Aksel skill and docs owners.

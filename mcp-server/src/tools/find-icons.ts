@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { searchIcons } from "../helpers/search-icons.js";
 import { metadata } from "../resources/icons-catalog.js";
 import type { McpTool } from "../types.js";
 
@@ -6,16 +7,12 @@ const icons = Object.values(metadata);
 const categories = Array.from(
   new Set(icons.map((icon) => icon.category)),
 ).sort();
-const subcategories = Array.from(
-  new Set(icons.map((icon) => icon.sub_category)),
-).sort();
 const variants = Array.from(
   new Set([...icons.map((icon) => icon.variant), "both"]),
 ).sort();
 
 const findIconsInputSchema = {
   category: z.enum(categories as [string, ...string[]]).optional(),
-  subcategory: z.enum(subcategories as [string, ...string[]]).optional(),
   keyword: z.string().optional(),
   variant: z
     .enum(variants as [string, ...string[]])
@@ -27,9 +24,9 @@ const findIconsInputSchema = {
 const findIconsTool: McpTool<typeof findIconsInputSchema> = {
   name: "aksel_find_icons",
   description:
-    "Find and filter Aksel icons by category, subcategory, keyword, and variant. Use aksel-icons://category-catalog to discover available categories first.",
+    "Find and filter Aksel icons by category, keyword, and variant. Keyword matching is fuzzy (handles typos and synonyms) across icon names and keywords. Use aksel-icons://category-catalog to discover available categories first.",
   inputSchema: findIconsInputSchema,
-  async callback({ category, subcategory, keyword, variant, limit }) {
+  async callback({ category, keyword, variant, limit }) {
     let filtered = icons;
 
     if (category) {
@@ -38,19 +35,14 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
       );
     }
 
-    if (subcategory) {
-      filtered = filtered.filter(
-        (icon) => icon.sub_category.toLowerCase() === subcategory.toLowerCase(),
-      );
-    }
-
     if (keyword) {
-      const searchTerm = keyword.toLowerCase();
-      filtered = filtered.filter(
-        (icon) =>
-          icon.name.toLowerCase().includes(searchTerm) ||
-          icon.keywords.some((kw) => kw.toLowerCase().includes(searchTerm)),
+      const ranking = new Map(
+        searchIcons(keyword).map((icon, index) => [icon.id, index]),
       );
+
+      filtered = filtered
+        .filter((icon) => ranking.has(icon.id))
+        .sort((a, b) => ranking.get(a.id)! - ranking.get(b.id)!);
     }
 
     if (variant && variant !== "both") {
@@ -72,7 +64,6 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
       icons: results.map((icon) => ({
         name: icon.name,
         category: icon.category,
-        subcategory: icon.sub_category,
         variant: icon.variant,
       })),
     };
