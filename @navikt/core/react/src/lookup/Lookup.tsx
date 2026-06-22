@@ -125,7 +125,8 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                       type="button"
                       className="aksel-lookup__close-button"
                       size="xsmall"
-                      variant="tertiary-neutral"
+                      variant="tertiary"
+                      data-color="neutral"
                       icon={<XMarkIcon title={translate("close")} />}
                       onClick={() => setOpenState(false)}
                     />
