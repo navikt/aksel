@@ -88,7 +88,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
           <FocusGuards>
             <FocusBoundary
               loop
-              trapped={openState}
+              trapped
               initialFocus={contentRef}
               returnFocus={anchorRef}
               modal
