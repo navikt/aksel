@@ -60,12 +60,7 @@ const FilteredOptions = () => {
       return null;
     }
 
-    const option = selectedOptions[0];
-
-    if (!option) {
-      return null;
-    }
-    return option;
+    return selectedOptions[0];
   }, [isMultiSelect, selectedOptions]);
 
   const shouldRenderFilteredOptionsList =
