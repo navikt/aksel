@@ -11,6 +11,8 @@ const testingLibrary = require("eslint-plugin-testing-library");
 const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
 /* sadas */
+/* sadas */
+/* sadas */
 const tseslint = require("typescript-eslint");
 
 /**
