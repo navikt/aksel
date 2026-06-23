@@ -33,7 +33,7 @@ export const OpenOnClick: Story = {
     const dialog = page.getByRole("dialog");
     await waitFor(() => expect(dialog).toBeVisible());
 
-    expect(page.getByText("«Lookup»")).toBeInTheDocument();
+    expect(page.getByText("lookup")).toBeInTheDocument();
     expect(
       page.getByText("A text explanation of the lookup word."),
     ).toBeInTheDocument();
