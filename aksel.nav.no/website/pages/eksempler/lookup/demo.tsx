@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <BodyLong>
       For at vi skal vurdere om du har rett til{" "}
-      <Lookup word="APP" heading="Arbeidsavklarings­penger (AAP)">
+      <Lookup word="APP">
         <BodyLong>
           Arbeidsavklaringspenger (AAP) er en midlertidig ytelse for personer
           som har nedsatt arbeidsevne på grunn av sykdom eller skade, og som

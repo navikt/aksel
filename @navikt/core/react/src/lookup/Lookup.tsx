@@ -14,7 +14,7 @@ import { useI18n } from "../utils/i18n/i18n.hooks";
 export interface LookupProps
   extends
     React.ButtonHTMLAttributes<HTMLButtonElement>,
-    Pick<PopoverProps, "placement" | "strategy"> {
+    Pick<PopoverProps, "strategy"> {
   /**
    * Children, explanation popover to lookup word
    */
@@ -60,7 +60,6 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       word,
       children,
       className,
-      placement,
       strategy,
       onClick,
       id: idProp,
@@ -116,7 +115,6 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                   onClose={() => {
                     _setOpen(false);
                   }}
-                  placement={placement}
                   strategy={strategy}
                 >
                   <Popover.Content
