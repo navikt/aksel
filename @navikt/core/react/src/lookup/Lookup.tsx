@@ -24,10 +24,6 @@ export interface LookupProps
    */
   word: string;
   /**
-   * Title for the lookup element. Usually the same as `word`.
-   */
-  heading: string;
-  /**
    * Controlled open-state.
    *
    * Using this removes automatic control of open-state.
@@ -52,7 +48,7 @@ export interface LookupProps
  *
  * @example
  * ```jsx
- * <Lookup word="Lookup" heading="«Lookup»">
+ * <Lookup word="Lookup">
  *   Lookup component
  * </Lookup>
  * ```
@@ -67,7 +63,6 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       placement,
       strategy,
       onClick,
-      heading,
       id: idProp,
       open,
       defaultOpen = false,
@@ -139,7 +134,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
                       className="aksel-lookup__title"
                       id={popoverTitleId}
                     >
-                      {heading}
+                      {word}
                     </BodyShort>
                     <div>{children}</div>
                     <Button

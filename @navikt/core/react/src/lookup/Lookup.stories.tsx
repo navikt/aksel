@@ -15,7 +15,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Lookup word="Lookup" heading="«Lookup»">
+    <Lookup word="Lookup">
       A text explanation of the lookup word. This is an example of a lookup
       component.
     </Lookup>
@@ -29,7 +29,7 @@ export const Open = () => {
   }, []);
 
   return (
-    <Lookup word="Lookup" heading="«Lookup»" ref={ref}>
+    <Lookup word="Lookup" ref={ref}>
       A text explanation of the lookup word. This is an example of a lookup
       component.
     </Lookup>
@@ -40,9 +40,7 @@ export const WithinASentence = () => {
   return (
     <BodyLong>
       This is an example of a{" "}
-      <Lookup word="lookup" heading="Lookup word">
-        A text explanation of the lookup word.
-      </Lookup>{" "}
+      <Lookup word="lookup">A text explanation of the lookup word.</Lookup>{" "}
       within a sentence.
     </BodyLong>
   );
@@ -52,9 +50,13 @@ export const WithLink = () => {
   return (
     <BodyLong>
       This is an example of a{" "}
-      <Lookup word="lookup word" heading="Lookup word">
+      <Lookup word="lookup word">
         <BodyLong>A longer text that explains the lookup word.</BodyLong>
-        <Link href="https://www.nav.no" target="_blank" rel="noreferrer noopener">
+        <Link
+          href="https://www.nav.no"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           See further details <ExternalLinkIcon />
         </Link>
       </Lookup>{" "}
@@ -67,10 +69,7 @@ export const VeryLongWord = () => {
   return (
     <BodyLong style={{ maxWidth: "400px" }}>
       This is an example of a{" "}
-      <Lookup
-        word="lookup word that is very very long and it never stops and keeps going"
-        heading="Lookup word"
-      >
+      <Lookup word="lookup word that is very very long and it never stops and keeps going">
         <BodyLong>A longer text that explains the lookup word.</BodyLong>
       </Lookup>{" "}
       within a sentence.
@@ -84,7 +83,7 @@ export const ButtonsBeforeAndAfter = () => {
       <button>Before button</button>
       <BodyLong>
         This is an example of a{" "}
-        <Lookup word="lookup word" heading="Lookup word">
+        <Lookup word="lookup word">
           <BodyLong>A longer text that explains the lookup word.</BodyLong>
         </Lookup>{" "}
         within a sentence.
