@@ -19,6 +19,13 @@
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 2px;
   }
+
+  @media (forced-colors: active) {
+    &:hover {
+      background-color: highlighttext;
+      color: highlight;
+    }
+  }
 }
 
 .aksel-lookup__content {
