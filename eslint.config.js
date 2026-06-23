@@ -10,6 +10,7 @@ const storybook = require("eslint-plugin-storybook");
 const testingLibrary = require("eslint-plugin-testing-library");
 const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
+/* sadas */
 const tseslint = require("typescript-eslint");
 
 /**
