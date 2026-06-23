@@ -7,12 +7,12 @@
   text-underline-offset: 10%;
   text-decoration-thickness: 10%;
   text-decoration-color: var(--ax-border-default);
-  background: var(--ax-bg-info-softA);
+  background: var(--ax-bg-softA);
   border-radius: var(--ax-radius-4);
   padding-inline: var(--ax-space-1);
 
   &:hover {
-    background: var(--ax-bg-info-moderate-hoverA);
+    background: var(--ax-bg-moderate-hoverA);
   }
 
   &:focus-visible {
