@@ -5,9 +5,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadCsf } from "storybook/internal/csf-tools";
-import { InlineConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
-import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -105,21 +103,20 @@ export default defineMain({
   async viteFinal(config, { configType }) {
     const { mergeConfig } = await import("vite");
 
-    // The TsconfigPathsPlugin is only used to silence errors when importing nextjs components, but the imports does not acutally work.
-    const tsConfigPathsPluginOpts = { root: "aksel.nav.no/website/" };
-
     return mergeConfig(config, {
       build: { cssMinify: "lightningcss" },
+      resolve: {
+        tsconfigPaths: true,
+      },
       plugins:
         configType === "PRODUCTION"
           ? [
-              TsconfigPathsPlugin(tsConfigPathsPluginOpts),
               turbosnap({
                 rootDir: config.root ?? process.cwd(),
               }),
             ]
-          : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
-    } satisfies InlineConfig);
+          : [],
+    } satisfies typeof config);
   },
 
   /* Lets us preview Roboto-flex font in storybook. */
