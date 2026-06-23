@@ -9,6 +9,7 @@
   text-decoration-color: var(--ax-border-default);
   background: var(--ax-bg-info-softA);
   border-radius: var(--ax-radius-4);
+  padding-inline: var(--ax-space-1);
 
   &:hover {
     background: var(--ax-bg-info-moderate-hoverA);
