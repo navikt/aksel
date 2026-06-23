@@ -1230,7 +1230,7 @@ const colors = {
 
 type ColorObjWithTwType = ColorObjType & {
   twOld: string;
-  twNew: string;
+  twNew?: string;
 };
 
 const colorWithTailwindConversion = Object.entries(colors).reduce<

@@ -117,7 +117,7 @@ export const Prinsipp = defineType({
                   apiVersion: SANITY_API_VERSION,
                 }).fetch(query, params);
 
-                if (parent?.hovedside && !!res?._id) {
+                if (parent?.hovedside && res?._id) {
                   return `Kan bare ha 1 hovedside for hvert prinsipp. Hovedsiden er nå: ${
                     res?.heading ?? "Siden har ikke en heading"
                   }`;

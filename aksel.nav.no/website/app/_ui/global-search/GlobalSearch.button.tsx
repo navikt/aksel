@@ -2,8 +2,10 @@
 
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { Bleed, Button, Detail, Dialog, HStack, Show } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./GlobalSearch.module.css";
 
 /**
@@ -30,13 +32,17 @@ function GlobalSearchButton({
 const SearchButton = forwardRef<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement> & { isMac: boolean }
->(({ isMac, ...rest }, forwardedRef) => {
+>(({ isMac, onClick, ...rest }, forwardedRef) => {
   return (
     <Button
       {...rest}
       ref={forwardedRef}
       variant="secondary-neutral"
       aria-keyshortcuts={isMac ? "Meta+k" : "Control+k"}
+      onClick={(e) => {
+        umamiTrack(Events.MODAL_APNET, { tittel: "Søk" });
+        onClick?.(e);
+      }}
     >
       <Bleed asChild marginInline={{ xs: "space-8", md: "space-8 space-0" }}>
         <HStack gap="space-6" align="center" as="span">

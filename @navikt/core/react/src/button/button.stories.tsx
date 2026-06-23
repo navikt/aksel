@@ -184,126 +184,66 @@ export const ColorRole = () => (
     </HStack>
     <h3>data-color=neutral on wrapper and danger on button</h3>
     <HStack gap="space-8" data-color="neutral">
-      <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
+      <Button data-color="danger" variant="secondary">
         Button
       </Button>
-      <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
+      <Button data-color="danger" variant="tertiary">
         Button
       </Button>
-      <Button
-        data-color="danger"
-        variant="secondary"
-        icon={<StarIcon />}
-        disabled
-      >
+      <Button data-color="danger" variant="tertiary" data-pressed>
+        Pressed
+      </Button>
+      <Button data-color="danger" variant="secondary" disabled>
         Button
       </Button>
-      <Button
-        data-color="danger"
-        variant="tertiary"
-        icon={<StarIcon />}
-        disabled
-      >
+      <Button data-color="danger" variant="tertiary" disabled>
         Button
       </Button>
     </HStack>
-    <h3>data-color=neutral on parent wrapper and danger on button</h3>
-    <div data-color="neutral">
-      <HStack gap="space-8">
-        <Button data-color="danger" variant="secondary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button data-color="danger" variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button
-          data-color="danger"
-          variant="secondary"
-          icon={<StarIcon />}
-          disabled
-        >
-          Button
-        </Button>
-        <Button
-          data-color="danger"
-          variant="tertiary"
-          icon={<StarIcon />}
-          disabled
-        >
-          Button
-        </Button>
-      </HStack>
-    </div>
     <h3>data-color=neutral on button</h3>
     <HStack gap="space-8">
-      <Button data-color="neutral" variant="secondary" icon={<StarIcon />}>
+      <Button data-color="neutral" variant="secondary">
         Button
       </Button>
-      <Button data-color="neutral" variant="tertiary" icon={<StarIcon />}>
+      <Button data-color="neutral" variant="tertiary">
         Button
       </Button>
-      <Button
-        data-color="neutral"
-        variant="secondary"
-        icon={<StarIcon />}
-        disabled
-      >
+      <Button data-color="neutral" variant="tertiary" data-pressed>
+        Pressed
+      </Button>
+      <Button data-color="neutral" variant="secondary" disabled>
         Button
       </Button>
-      <Button
-        data-color="neutral"
-        variant="tertiary"
-        icon={<StarIcon />}
-        disabled
-      >
+      <Button data-color="neutral" variant="tertiary" disabled>
         Button
       </Button>
     </HStack>
     <h3>data-color=neutral on wrapper</h3>
     <HStack gap="space-8" data-color="neutral">
-      <Button variant="secondary" icon={<StarIcon />}>
+      <Button variant="secondary">Button</Button>
+      <Button variant="tertiary">Button</Button>
+      <Button variant="tertiary" data-pressed>
+        Pressed
+      </Button>
+      <Button variant="secondary" disabled>
         Button
       </Button>
-      <Button variant="tertiary" icon={<StarIcon />}>
-        Button
-      </Button>
-      <Button variant="secondary" icon={<StarIcon />} disabled>
-        Button
-      </Button>
-      <Button variant="tertiary" icon={<StarIcon />} disabled>
+      <Button variant="tertiary" disabled>
         Button
       </Button>
     </HStack>
-    <h3>data-color=neutral on parent wrapper</h3>
-    <div data-color="neutral">
-      <HStack gap="space-8">
-        <Button variant="secondary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="secondary" icon={<StarIcon />} disabled>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />} disabled>
-          Button
-        </Button>
-      </HStack>
-    </div>
     <h3>data-color=neutral on parent wrapper and danger on wrapper</h3>
     <div data-color="neutral">
       <HStack gap="space-8" data-color="danger">
-        <Button variant="secondary" icon={<StarIcon />}>
+        <Button variant="secondary">Button</Button>
+        <Button variant="tertiary">Button</Button>
+        <Button variant="tertiary" data-pressed>
+          Pressed
+        </Button>
+        <Button variant="secondary" disabled>
           Button
         </Button>
-        <Button variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="secondary" icon={<StarIcon />} disabled>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />} disabled>
+        <Button variant="tertiary" disabled>
           Button
         </Button>
       </HStack>
@@ -311,16 +251,15 @@ export const ColorRole = () => (
     <h3>data-color=neutral on both wrappers</h3>
     <div data-color="neutral">
       <HStack gap="space-8" data-color="neutral">
-        <Button variant="secondary" icon={<StarIcon />}>
+        <Button variant="secondary">Button</Button>
+        <Button variant="tertiary">Button</Button>
+        <Button variant="tertiary" data-pressed>
+          Pressed
+        </Button>
+        <Button variant="secondary" disabled>
           Button
         </Button>
-        <Button variant="tertiary" icon={<StarIcon />}>
-          Button
-        </Button>
-        <Button variant="secondary" icon={<StarIcon />} disabled>
-          Button
-        </Button>
-        <Button variant="tertiary" icon={<StarIcon />} disabled>
+        <Button variant="tertiary" disabled>
           Button
         </Button>
       </HStack>

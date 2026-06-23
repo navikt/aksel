@@ -1,16 +1,19 @@
-type UmamiNavigationProps = {
-  kilde: string;
-  url: string;
-};
+import {
+  type EventName,
+  type EventPropertiesMap,
+} from "@navikt/analytics-types";
 
-type UmamiTrackDefaultProps = Record<string, string | undefined> | undefined;
-
-function umamiTrack<T extends `navigere` | string>(
+// Overload 1: taxonomy event — fully typed
+function umamiTrack<T extends EventName>(
   event: T,
-  data: T extends "navigere" ? UmamiNavigationProps : UmamiTrackDefaultProps,
-): void {
+  properties: EventPropertiesMap[T],
+): void;
+// Overload 2: custom/non-taxonomy event — loose typing
+function umamiTrack(event: string, properties?: Record<string, unknown>): void;
+
+function umamiTrack(event: string, properties?: Record<string, unknown>): void {
   if (typeof window !== "undefined" && window.umami) {
-    window.umami.track(event, data);
+    window.umami.track(event, properties);
   }
 }
 

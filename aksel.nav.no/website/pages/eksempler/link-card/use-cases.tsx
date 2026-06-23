@@ -280,5 +280,5 @@ export const Demo = {
 
 export const args = {
   index: 15,
-  desc: "Eksemplene er replikasjoner fra eksempler funnet i Navs løsninger. Merk at 'data-color' bare fungerer ved bruk av 'darkside' css og tokens.",
+  desc: "Dette er replikasjoner av eksempler funnet i Navs løsninger.",
 };

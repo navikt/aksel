@@ -1,12 +1,12 @@
 import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import TokenRolesChips from "./TokenRolesChips";
 import TokensList from "./TokensList";
 import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
 import { sortTokens } from "./token-utils";
-import { TokenForDocumentationT } from "./types";
 
 const TokenCategory = ({
   id: categoryId,
@@ -19,7 +19,7 @@ const TokenCategory = ({
   title: string;
   description: string;
   roles?: ColorRoleT[] | FontRoleT[] | BreakpointRoleT[];
-  tokens: TokenForDocumentationT[];
+  tokens: TokenDocT[];
 }) => {
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   const searchParams = useSearchParams();

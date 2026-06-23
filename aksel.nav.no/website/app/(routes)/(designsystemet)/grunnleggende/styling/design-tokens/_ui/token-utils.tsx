@@ -1,6 +1,6 @@
-import { TokenForDocumentationT } from "./types";
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 
-const sortTokens = (a: TokenForDocumentationT, b: TokenForDocumentationT) => {
+const sortTokens = (a: TokenDocT, b: TokenDocT) => {
   switch (a.category) {
     case "backgroundColor":
     case "borderColor":

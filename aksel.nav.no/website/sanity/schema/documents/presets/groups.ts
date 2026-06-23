@@ -1,9 +1,5 @@
 const SanityTabGroups = [
   {
-    name: "skrivehjelp",
-    title: "Skrivehjelp",
-  },
-  {
     name: "innhold",
     title: "Innhold",
   },

@@ -3,6 +3,7 @@
 import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { SquareGridFillIcon, SquareGridIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { BodyShort, HStack, Tag } from "@navikt/ds-react";
 import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
@@ -25,17 +26,9 @@ function DesignsystemSidebarItem(props: {
   const statusTag = getStatusTag(page.tag, true);
 
   const isOverviewPage = page.heading.toLowerCase() === "oversikt";
-  const pathDepth = pathName?.split("/").length;
-
-  const isRootOverviewPage =
-    isOverviewPage && cleanedSlug.split("/").length === 2;
-
-  let active =
-    path === cleanedSlug || (path.startsWith(cleanedSlug) && !isIndented);
-
-  if (isRootOverviewPage && pathDepth !== 2) {
-    active = false;
-  }
+  const active =
+    path === cleanedSlug ||
+    (!isOverviewPage && path.startsWith(`${cleanedSlug}/`)); // Needed for Endringslogg
 
   return (
     <BodyShort
@@ -53,9 +46,10 @@ function DesignsystemSidebarItem(props: {
         data-current={active}
         aria-current={active ? "page" : undefined}
         onClick={() =>
-          umamiTrack("navigere", {
-            kilde: "sidebar",
-            url: `/${page.slug}`,
+          umamiTrack(Events.NAVIGERE, {
+            lenketekst: page.heading,
+            destinasjon: `/${page.slug}`,
+            lenkegruppe: "sidebar",
           })
         }
       >

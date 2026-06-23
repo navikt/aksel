@@ -49,4 +49,5 @@ export const Demo = {
 
 export const args = {
   index: 11,
+  desc: "Vi anbefaler å samle kortene i en liste (`<ul>`), med mindre du rendrer titlene som overskrifter.",
 };

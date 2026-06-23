@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useEventCallback } from "../../../hooks";
+import { useEventCallback, useTimeout } from "../../../hooks";
 import {
   CUSTOM_EVENTS,
   CustomFocusEvent,
@@ -16,6 +16,8 @@ export function useFocusOutside(
 ) {
   const handleFocusOutside = useEventCallback(callback) as EventListener;
   const isFocusInsideReactTreeRef = useRef(false);
+  const skipFocusCheckRef = useRef(false);
+  const timeout = useTimeout();
 
   useEffect(() => {
     if (!enabled) {
@@ -23,7 +25,11 @@ export function useFocusOutside(
     }
 
     const handleFocus = (event: FocusEvent) => {
-      if (event.target && !isFocusInsideReactTreeRef.current) {
+      if (
+        event.target &&
+        !isFocusInsideReactTreeRef.current &&
+        !skipFocusCheckRef.current
+      ) {
         const eventDetail = { originalEvent: event };
 
         /**
@@ -58,6 +64,12 @@ export function useFocusOutside(
     },
     onBlurCapture: () => {
       isFocusInsideReactTreeRef.current = false;
+    },
+    onPointerDownCapture: () => {
+      skipFocusCheckRef.current = true;
+      timeout.start(0, () => {
+        skipFocusCheckRef.current = false;
+      });
     },
   };
 }

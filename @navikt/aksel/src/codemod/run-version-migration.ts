@@ -50,7 +50,9 @@ async function runVersionMigration(
     chalk.greenBright.bold(`\nAvailable migrations for ${version}:\n`),
   );
 
-  const overrideValues = new Set(overrideMigrations.map((m) => m.value));
+  const overrideValues = new Set<string>(
+    overrideMigrations.map((m) => m.value),
+  );
 
   const choices = [
     ...overrideMigrations.map((migration) => ({

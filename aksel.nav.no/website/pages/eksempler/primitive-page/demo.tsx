@@ -31,6 +31,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */

@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { ListContext } from "./List.context";
 import type { ListItemProps } from "./List.types";
 
@@ -12,8 +13,8 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
     const { listType, size } = useContext(ListContext);
 
     if (listType === "ol" && icon) {
-      console.warn(
-        "<List />: Icon prop is not supported for ordered lists. Please remove the icon prop.",
+      consoleWarning(
+        "<List />: Icon prop is not supported for ordered lists. Remove icon prop.",
       );
     }
 

@@ -19,7 +19,7 @@ const AddNewOption = () => {
   const {
     setIsMouseLastUsedInputDevice,
     toggleIsListOpen,
-    activeDecendantId,
+    activeDescendantId,
     virtualFocus,
   } = useFilteredOptionsContext();
 
@@ -32,7 +32,7 @@ const AddNewOption = () => {
     <li
       tabIndex={-1}
       onMouseMove={() => {
-        if (activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)) {
+        if (activeDescendantId !== filteredOptionsUtil.getAddNewOptionId(id)) {
           virtualFocus.moveFocusToElement(
             filteredOptionsUtil.getAddNewOptionId(id),
           );
@@ -49,7 +49,7 @@ const AddNewOption = () => {
         "aksel-combobox__list-item aksel-combobox__list-item--new-option",
         {
           "aksel-combobox__list-item--new-option--focus":
-            activeDecendantId === filteredOptionsUtil.getAddNewOptionId(id),
+            activeDescendantId === filteredOptionsUtil.getAddNewOptionId(id),
         },
       )}
       role="option"

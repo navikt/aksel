@@ -87,7 +87,7 @@ const COLOR_ROLES: ColorRoleT[] = [
     id: "info",
     title: "Info",
     description:
-      "Info brukes på elementer som har informerer eller gir opplysning.",
+      "Info brukes på elementer som informerer eller gir opplysning.",
   },
   {
     id: "brand-magenta",

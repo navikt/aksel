@@ -116,6 +116,18 @@ export const ColorRole: StoryFn = () => {
   );
 };
 
+export const InsideFocusableContainer: StoryFn<typeof HelpText> = (props) => {
+  return (
+    <div tabIndex={-1}>
+      <HelpText {...props}>
+        Id ullamco excepteur elit fugiat labore. Incididunt laborum eiusmod
+        ullamco id aliquip officia ex irure aliqua laboris id ea do nisi. Ex
+        esse ad duis culpa non aliquip exercitation eu culpa cupidatat nisi.
+      </HelpText>
+    </div>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   Open,

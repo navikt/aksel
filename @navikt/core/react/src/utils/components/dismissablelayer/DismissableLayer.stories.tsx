@@ -215,39 +215,39 @@ export const DisableOutsidePointerEventsWhileHidden = () => {
   );
 };
 
+const Layer = ({
+  disableOutsidePointerEvents,
+  children,
+}: {
+  disableOutsidePointerEvents?: boolean;
+  children?: React.ReactNode;
+}) => {
+  const [open, setOpen] = useState(true);
+
+  if (!open) return null;
+
+  const style = {
+    width: 100,
+    height: 100,
+    backgroundColor: "red",
+  };
+
+  return (
+    <DismissableLayer
+      disableOutsidePointerEvents={disableOutsidePointerEvents}
+      style={style}
+    >
+      <button onClick={() => setOpen(false)}>Close me</button>
+      {children}
+    </DismissableLayer>
+  );
+};
+
 export const ParallelDismissableLayer = () => {
   const [single, setSingle] = useState(false);
   const [double, setDouble] = useState(false);
   const [nestedSingle, setNestedSingle] = useState(false);
   const [nestedDouble, setNestedDouble] = useState(false);
-
-  const Layer = ({
-    disableOutsidePointerEvents,
-    children,
-  }: {
-    disableOutsidePointerEvents?: boolean;
-    children?: React.ReactNode;
-  }) => {
-    const [open, setOpen] = useState(true);
-
-    if (!open) return null;
-
-    const style = {
-      width: 100,
-      height: 100,
-      backgroundColor: "red",
-    };
-
-    return (
-      <DismissableLayer
-        disableOutsidePointerEvents={disableOutsidePointerEvents}
-        style={style}
-      >
-        <button onClick={() => setOpen(false)}>Close me</button>
-        {children}
-      </DismissableLayer>
-    );
-  };
 
   const state = (_state: boolean) => (_state ? "open" : "closed");
 

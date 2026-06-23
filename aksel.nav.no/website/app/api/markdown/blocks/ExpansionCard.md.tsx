@@ -16,7 +16,7 @@ function ExpansionCardMarkdown(
     return "";
   }
 
-  const summary = description ? `${heading} — ${description}` : heading;
+  const summary = description ? `${heading} - ${description}` : heading;
 
   return `<details>\n<summary>${summary}</summary>\n\n${content}\n</details>`;
 }

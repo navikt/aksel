@@ -23,5 +23,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "VStack er en enkel layout-komponent for flexbox med flex-direction: column.",
+  desc: "VStack er en enkel layout-komponent for flexbox med `flex-direction: column`.",
 };

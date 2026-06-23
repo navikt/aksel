@@ -109,6 +109,8 @@ async function updateProps() {
     });
 }
 
+type EnumValues = { value: string }[];
+
 function propList() {
   const CoreDocs: ComponentDoc[] = JSON.parse(
     fs.readFileSync(
@@ -139,9 +141,17 @@ function propList() {
           params: val.params,
           return: val.return,
           required: val.required,
-          type: val.type.name,
           ref: val.name === "ref",
           deprecated: val.deprecated,
+          /**
+           * If type is an enum, type will be
+           * { name: "enum", raw: "value1 | ... 50 more ... | value3", value: [{value: "value1"}, {value: "value2"}] }
+           */
+          type: val.type.raw ?? val.type.name,
+          unpackedType:
+            val.type.name === "enum" && Array.isArray(val.type.value)
+              ? (val.type.value as EnumValues).map((x) => x.value).join(" | ")
+              : null,
         };
       }),
     };

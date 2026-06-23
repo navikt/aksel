@@ -1,7 +1,9 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
-import React, { forwardRef, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { AxisLabels } from "./AxisLabels";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
+import { TimelineKeyboardNavProvider } from "./hooks/TimelineKeyboardNavProvider";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import {
@@ -92,43 +94,48 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       axisLabelTemplates,
       ...rest
     },
-    ref,
+    forwardedRef,
   ) => {
-    const isMultipleRows = Array.isArray(children);
-
-    const firstFocusabled = useRef<
-      { ref: HTMLButtonElement | null; id: number }[]
-    >([]);
-
-    if (!isMultipleRows) {
-      children = [children];
-    }
-    const rowChildren = React.Children.toArray(children).filter(
-      (c: any) => c?.type?.componentType === "row",
+    const childArray = useMemo(
+      () =>
+        React.Children.toArray(Array.isArray(children) ? children : [children]),
+      [children],
     );
 
-    const pins = React.Children.toArray(children)
-      .filter((c: any) => c?.type?.componentType === "pin")
-      .map((x) => () => x);
+    const rowChildren = useMemo(() => {
+      return childArray.filter((c: any) => c?.type?.componentType === "row");
+    }, [childArray]);
 
-    const zoomComponent = React.Children.toArray(children).find(
-      (c: any) => c?.type?.componentType === "zoom",
+    const pins = useMemo(
+      () =>
+        childArray
+          .filter((c: any) => c?.type?.componentType === "pin")
+          .map((x) => () => x),
+      [childArray],
+    );
+
+    const zoomComponent = useMemo(
+      () => childArray.find((c: any) => c?.type?.componentType === "zoom"),
+      [childArray],
     );
 
     const rowsRaw = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
 
-    const rows = rowsRaw.map((r) => {
-      if (r?.periods) {
-        return r.periods;
-      }
-      return [];
-    });
+    const rows = useMemo(
+      () =>
+        rowsRaw.map((r) => {
+          if (r?.periods) {
+            return r.periods;
+          }
+          return [];
+        }),
+      [rowsRaw],
+    );
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
     const [start, setStart] = useState(initialStartDate);
-    const [activeRow, setActiveRow] = useState<number | null>(null);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows })),
     );
@@ -143,11 +150,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const handleZoomChange = (zoomStart: Date) => {
       if (startDate || endDate) {
-        if (process.env.NODE_ENV !== "production") {
-          console.warn(
-            "Zooming is not supported when startDate or endDate is set",
-          );
-        }
+        consoleWarning(
+          "<Timeline />: Zooming is not supported when `startDate` or `endDate` is set",
+        );
         return;
       }
       if (direction === "left") {
@@ -165,38 +170,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
     };
 
-    const handleActiveRowChange = (key: string) => {
-      if (activeRow !== null && key === "ArrowDown") {
-        for (let i = activeRow + 1; i < processedRows.length; i++) {
-          const row = processedRows[i];
-          if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
-            setActiveRow(i);
-            firstFocusabled.current.find((x) => x.id === i)?.ref?.focus();
-            break;
-          }
-        }
-        return;
-      }
-      if (activeRow !== null && key === "ArrowUp") {
-        for (let i = activeRow - 1; i >= 0; i--) {
-          const row = processedRows[i];
-          if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
-            setActiveRow(i);
-            firstFocusabled.current.find((x) => x.id === i)?.ref?.focus();
-            break;
-          }
-        }
-        return;
-      }
-    };
-
-    const addFocusable = (btnRef: HTMLButtonElement | null, id: number) => {
-      let items = firstFocusabled.current;
-      items = items.filter((x) => x.id !== id);
-      items.push({ ref: btnRef, id });
-      firstFocusabled.current = items;
-    };
-
     return (
       <TimelineContext.Provider
         value={{
@@ -205,44 +178,41 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
-          activeRow,
-          setActiveRow: (key) => handleActiveRowChange(key),
-          initiate: (i) => setActiveRow(i),
-          addFocusable,
         }}
       >
-        <div {...rest} ref={ref}>
-          <div className="aksel-timeline">
-            <AxisLabels templates={axisLabelTemplates} />
+        <TimelineKeyboardNavProvider>
+          <div {...rest} ref={forwardedRef}>
+            <div className="aksel-timeline">
+              <AxisLabels templates={axisLabelTemplates} />
 
-            {pins.map((PinChild, i) => (
-              <PinChild key={`pin-${i}`} />
-            ))}
+              {pins.map((PinChild, i) => (
+                <PinChild key={`pin-${i}`} />
+              ))}
 
-            {processedRows.map((row, i) => {
-              return (
-                <RowContext.Provider
-                  key={`row-${row.id}`}
-                  value={{
-                    periods: row.periods,
-                    id: row.id,
-                    active: activeRow === i,
-                    index: i,
-                  }}
-                >
-                  <TimelineRow
-                    {...row?.restProps}
-                    ref={row?.ref}
-                    label={row.label}
-                    icon={row.icon}
-                    headingTag={row.headingTag}
-                  />
-                </RowContext.Provider>
-              );
-            })}
+              {processedRows.map((row, i) => {
+                return (
+                  <RowContext.Provider
+                    key={`row-${row.id}`}
+                    value={{
+                      periods: row.periods,
+                      id: row.id,
+                      index: i,
+                    }}
+                  >
+                    <TimelineRow
+                      {...row?.restProps}
+                      ref={row?.ref}
+                      label={row.label}
+                      icon={row.icon}
+                      headingTag={row.headingTag}
+                    />
+                  </RowContext.Provider>
+                );
+              })}
+            </div>
+            {zoomComponent}
           </div>
-          {zoomComponent}
-        </div>
+        </TimelineKeyboardNavProvider>
       </TimelineContext.Provider>
     );
   },

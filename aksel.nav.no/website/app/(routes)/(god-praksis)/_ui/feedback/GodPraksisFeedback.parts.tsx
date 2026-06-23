@@ -3,6 +3,7 @@
 import { usePathname } from "next/dist/client/components/navigation";
 import { useState, useTransition } from "react";
 import { PersonIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import {
   BodyLong,
   BodyShort,
@@ -92,9 +93,8 @@ function GodPraksisFeedbackForm({
           error: "Noe gikk galt ved innsending, ta kontakt med team Aksel",
         });
 
-        umamiTrack("skjema validering feilet", {
+        umamiTrack(Events.SKJEMA_VALIDERING_FEILET, {
           skjemanavn: "slack-feedback",
-          skjemaId: docId,
         });
 
         return;
@@ -120,9 +120,8 @@ function GodPraksisFeedbackForm({
           error: result.error,
         });
 
-        umamiTrack("skjema validering feilet", {
+        umamiTrack(Events.SKJEMA_VALIDERING_FEILET, {
           skjemanavn: "slack-feedback",
-          skjemaId: docId,
         });
         return;
       }
@@ -132,9 +131,8 @@ function GodPraksisFeedbackForm({
         error: null,
       });
 
-      umamiTrack("skjema fullfort", {
+      umamiTrack(Events.SKJEMA_FULLFORT, {
         skjemanavn: "slack-feedback",
-        skjemaId: docId,
       });
     });
   };

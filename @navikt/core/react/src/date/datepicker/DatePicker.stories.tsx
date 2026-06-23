@@ -20,7 +20,7 @@ const disabledDays = [
 ];
 
 export default {
-  title: "ds-react/Datepicker",
+  title: "ds-react/DatePicker",
   component: DatePicker,
   parameters: {
     chromatic: { disable: true },
@@ -215,6 +215,7 @@ export const StandaloneRange = () => (
       from: new Date("2006-07-03"),
       to: new Date("2006-07-07"),
     }}
+    disabled={[new Date("2006-07-5")]}
   />
 );
 

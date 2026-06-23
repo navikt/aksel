@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { omit } from "../../utils-external";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup.context";
 import { CheckboxProps } from "./types";
@@ -17,12 +18,12 @@ const useCheckbox = (props: CheckboxProps) => {
 
   if (checkboxGroup) {
     if (props.checked) {
-      console.warn(
+      consoleWarning(
         "`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead.",
       );
     }
     if (props.value === undefined) {
-      console.warn(
+      consoleWarning(
         "A <Checkbox> element within a <CheckboxGroup> requires a `value` property.",
       );
     }

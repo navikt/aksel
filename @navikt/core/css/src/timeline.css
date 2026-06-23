@@ -34,6 +34,7 @@
   position: absolute;
   color: var(--ax-text-neutral-subtle);
   white-space: nowrap;
+  overflow-x: clip;
 }
 
 .aksel-timeline__row {
@@ -41,6 +42,17 @@
   background: var(--ax-bg-neutral-softA);
   margin: var(--ax-space-16) 0;
   grid-column: 2;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (forced-colors: active) {
+    &:focus {
+      outline: 1px solid highlight;
+      outline-offset: -1px;
+    }
+  }
 }
 
 .aksel-timeline__row--active {
@@ -73,6 +85,7 @@
 }
 
 .aksel-timeline__period {
+  container-type: inline-size;
   height: 100%;
   border-radius: var(--ax-radius-full);
   position: absolute;
@@ -98,7 +111,7 @@
 }
 
 .aksel-timeline__period--inner {
-  margin: 0 var(--ax-space-8);
+  margin: 0 clamp(var(--ax-space-4), 17cqi, var(--ax-space-8));
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;
@@ -108,7 +121,13 @@
 }
 
 .aksel-timeline__period--inner svg {
-  flex-shrink: 0;
+  flex-shrink: 1;
+}
+
+@container (inline-size < 1.4rem) {
+  .aksel-timeline__period--inner {
+    margin: 0 10cqi;
+  }
 }
 
 .aksel-timeline__period--clickable {

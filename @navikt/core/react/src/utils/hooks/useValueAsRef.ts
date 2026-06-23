@@ -6,7 +6,7 @@ import { useRefWithInit } from "./useRefWithInit";
 function useValueAsRef<T>(value: T) {
   const latest = useRefWithInit(createLatestRef, value).current!;
 
-  latest.next = value;
+  latest.next = value; // eslint-disable-line react-hooks/immutability
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useClientLayoutEffect(latest.effect);

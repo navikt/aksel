@@ -1,4 +1,4 @@
-import { Box, HStack } from "@navikt/ds-react";
+import { BodyShort, Box, HStack } from "@navikt/ds-react";
 import { GOD_PRAKSIS_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
@@ -43,9 +43,20 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
           </svg>
         )}
       </Box>
-      <UmamiLink href={href} umamiKilde="God Praksis Forside">
-        {children}
-      </UmamiLink>
+      <BodyShort
+        size="large"
+        weight="semibold"
+        as="span"
+        data-color="brand-blue"
+      >
+        <UmamiLink
+          href={href}
+          lenkegruppe="God Praksis Forside"
+          data-color="brand-blue"
+        >
+          {children}
+        </UmamiLink>
+      </BodyShort>
     </HStack>
   );
 };

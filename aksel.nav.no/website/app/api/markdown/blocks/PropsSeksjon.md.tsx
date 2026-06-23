@@ -4,9 +4,9 @@ import { buildMarkdown } from "@/app/api/markdown/helpers/build-markdown";
 function PropsSeksjonMarkdown(
   data: ExtractPortableMarkdownComponentProps<"props_seksjon">,
 ) {
-  const { komponenter, title } = data.value;
+  const { komponenter } = data.value;
 
-  if (!komponenter || komponenter.length === 0 || !title) {
+  if (!komponenter || komponenter.length === 0) {
     return "";
   }
 
@@ -25,6 +25,7 @@ function PropsSeksjonMarkdown(
           type: "React.ElementType",
           _type: "prop" as const,
           _key: "overridable",
+          unpackedType: null,
         });
       }
 

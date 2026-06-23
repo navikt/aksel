@@ -63,6 +63,7 @@ function fuseSearch(icons: AkselIcon[]) {
       { name: "variant", weight: 1 },
     ],
     shouldSort: false,
+    useTokenSearch: true,
   });
 }
 

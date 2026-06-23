@@ -3,10 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Select
-      label="Velg bostedsland"
-      error="Adressen matcher ikke landet du har satt som bosted."
-    >
+    <Select label="Velg bostedsland" error="Du må velge bostedsland.">
       <option value="">- Velg land -</option>
       <option value="norge">Norge</option>
       <option value="sverige">Sverige</option>

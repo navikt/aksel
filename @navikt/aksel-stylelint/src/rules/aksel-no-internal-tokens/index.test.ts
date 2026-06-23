@@ -25,7 +25,7 @@ testRule({
       line: 1,
       endLine: 1,
       column: 8,
-      endColumn: 25,
+      endColumn: 19,
     },
     {
       code: ".foo { color: var(--__axc-bar) }",

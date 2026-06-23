@@ -38,5 +38,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Ønsker du å endre fra 'row' til 'column' ved et brekkpunkt kan du bruke 'Stack'-komponenten. Husk også å oppdatere 'align' og 'justify' samtidig.",
+  desc: "Ønsker du å endre fra 'row' til 'column' ved et brekkpunkt kan du bruke Stack-komponenten. Husk også å oppdatere `align` og `justify` samtidig.",
 };

@@ -39,7 +39,7 @@ export default function transformer(file: FileInfo, api: API) {
         oldJsVar,
         "@navikt/ds-tokens/dist/tokens",
       ).forEach((x) => {
-        foundName = x.node.imported.name;
+        foundName = x.node.imported.name as string;
       });
 
       if (!foundName) {

@@ -98,7 +98,6 @@ examples/webpack/out
 .iml
 .DS_Store
 
-*.d.ts
 *-exports.less
 */figma-api/icons
 */ds-icons/png
@@ -136,7 +135,6 @@ _docs.json
 .next
 !*/website/lib/
 !*/website/public/
-!aksel.nav.no/**/*.d.ts
 !*/sanity/lib/
 !*/sanity/static/
 out

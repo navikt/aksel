@@ -29,7 +29,7 @@ function getStatus(
     progressBar.start(files.length, 0);
   }
 
-  StatusStore.initStatus();
+  StatusStore.resetStatus();
 
   /**
    * Prepare search terms for legacy and v8 tokens.

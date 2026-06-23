@@ -23,7 +23,6 @@ export const workspaceConfig = defineConfig([
   {
     projectId: SANITY_PROJECT_ID,
     title: "Aksel",
-    description: "Production environment for Aksel",
     name: "default",
     dataset: "production",
     basePath: "/admin",
@@ -36,13 +35,6 @@ export const workspaceConfig = defineConfig([
     },
     scheduledDrafts: {
       enabled: false,
-    },
-    beta: {
-      form: {
-        enhancedObjectDialog: {
-          enabled: true,
-        },
-      },
     },
     plugins: [
       structureTool({
@@ -77,7 +69,6 @@ export const workspaceConfig = defineConfig([
   {
     projectId: SANITY_PROJECT_ID,
     title: "Aksel Development",
-    description: "Development environment for Aksel",
     name: "dev",
     dataset: "development",
     basePath: "/admin-dev",
@@ -90,13 +81,6 @@ export const workspaceConfig = defineConfig([
     },
     scheduledDrafts: {
       enabled: false,
-    },
-    beta: {
-      form: {
-        enhancedObjectDialog: {
-          enabled: true,
-        },
-      },
     },
     plugins: [
       structureTool({
@@ -126,13 +110,21 @@ export const workspaceConfig = defineConfig([
     releases: {
       enabled: false,
     },
+    /* Dev-workspace is only visible for admins or devs */
+    hidden: ({ currentUser }) => {
+      if (currentUser === null) {
+        return false;
+      }
+      return !currentUser.roles.some((role) => {
+        return role.name === "administrator" || role.name === "developer";
+      });
+    },
   },
 ]);
 
 function authStore(): AuthConfig {
   return {
     redirectOnSingle: false,
-    mode: "replace",
     providers: [
       {
         name: "saml",

@@ -5,6 +5,7 @@ const allPublishedAtDocuments = `[${allArticleDocuments.map((t) => `"${t}"`).joi
 const allVerifiedDocuments = `[${[
   "komponent_artikkel",
   "ds_artikkel",
+  "templates_artikkel",
   "aksel_artikkel",
 ]
   .map((t) => `"${t}"`)

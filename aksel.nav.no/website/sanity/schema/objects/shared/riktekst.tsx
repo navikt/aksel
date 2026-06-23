@@ -104,13 +104,13 @@ export const block = {
       {
         title: "Quote",
         value: "quote",
-        icon: () => <span>Q</span>,
+        icon: () => <span style={{ fontSize: "1rem", lineHeight: 1 }}>Q</span>,
         component: ({ children }) => <q>{children}</q>,
       },
       {
         title: "Keyboard",
         value: "kbd",
-        icon: () => <kbd>KBD</kbd>,
+        icon: () => <kbd style={{ fontSize: "1rem", lineHeight: 1 }}>KBD</kbd>,
         component: ({ children }) => <Kbd>{children}</Kbd>,
       },
     ],
@@ -235,6 +235,7 @@ const Riktekst = (
     "video",
     "exampletext_block",
     "language",
+    "description_list",
   ];
 
   const accordion = [

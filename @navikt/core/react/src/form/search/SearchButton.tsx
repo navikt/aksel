@@ -2,6 +2,7 @@ import React, { forwardRef, useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../../button";
 import { cl, composeEventHandlers } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { SearchContext } from "./context";
 
@@ -25,7 +26,7 @@ const SearchButton: SearchButtonType = forwardRef(
     const context = useContext(SearchContext);
 
     if (context === null) {
-      console.warn("<Search.Button> has to be wrapped in <Search />");
+      consoleWarning("<Search.Button> has to be wrapped inside <Search />");
       return null;
     }
 

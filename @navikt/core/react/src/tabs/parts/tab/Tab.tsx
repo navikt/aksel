@@ -43,11 +43,20 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         onFocus,
         disabled,
         id,
+        "aria-controls": ariaControls,
         ...rest
       },
-      ref: React.ForwardedRef<HTMLButtonElement>,
+      forwardedRef: React.ForwardedRef<HTMLButtonElement>,
     ) => {
-      const tabCtx = useTab({ value, onClick, onFocus, disabled }, ref);
+      const tabProps = useTab({
+        id,
+        value,
+        onClick,
+        onFocus,
+        disabled,
+        ariaControls,
+      });
+
       const ctx = useTabsContext();
 
       if (!label && !icon) {
@@ -57,7 +66,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
 
       return (
         <Component
-          ref={tabCtx.ref}
+          ref={forwardedRef}
           {...rest}
           className={cl(
             "aksel-tabs__tab",
@@ -69,15 +78,8 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
               "aksel-tabs__tab--fill": ctx.fill,
             },
           )}
-          role="tab"
           type="button"
-          aria-selected={tabCtx.isSelected}
-          data-state={tabCtx.isSelected ? "active" : "inactive"}
-          tabIndex={tabCtx.isFocused ? 0 : -1}
-          aria-controls={rest["aria-controls"] ?? tabCtx.controlsId}
-          id={id ?? tabCtx.id}
-          onFocus={tabCtx.onFocus}
-          onClick={tabCtx.onClick}
+          {...tabProps}
         >
           <BodyShort
             as="span"

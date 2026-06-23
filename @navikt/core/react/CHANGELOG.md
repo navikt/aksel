@@ -1,5 +1,181 @@
 # @navikt/ds-react
 
+## 8.13.1
+
+### Patch Changes
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.13.1
+  - @navikt/aksel-icons@8.13.1
+
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Table: ExpandableRows now works with React.Activity ([#4972](https://github.com/navikt/aksel/pull/4972))
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+- Updated dependencies [[`f3b7857`](https://github.com/navikt/aksel/commit/f3b7857df4f4bb20b8117174eb981cff5e35159a)]:
+  - @navikt/aksel-icons@8.13.0
+  - @navikt/ds-tokens@8.13.0
+
+## 8.12.1
+
+### Patch Changes
+
+- Timeline: Fix bug where axis-labels could overflow-x ([#4959](https://github.com/navikt/aksel/pull/4959))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.12.1
+  - @navikt/aksel-icons@8.12.1
+
+## 8.12.0
+
+### Minor Changes
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+- DatePicker: Updated user-flow for ranged datepicker with inputs. Now changes from/to-date based on which input user opened DatePicker with. ([#4896](https://github.com/navikt/aksel/pull/4896))
+
+### Patch Changes
+
+- Textarea: Better internal type-guarding ([#4950](https://github.com/navikt/aksel/pull/4950))
+
+- Logging: Improved console warnings ([#4922](https://github.com/navikt/aksel/pull/4922))
+
+- useEventListener-hook: Inline-handlers are now stable ([#4923](https://github.com/navikt/aksel/pull/4923))
+
+- ToggleGroup: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- ActionMenu: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- Tabs: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.12.0
+  - @navikt/aksel-icons@8.12.0
+
+## 8.11.1
+
+### Patch Changes
+
+- DataGrid: Loading-bar now stays stuck to sticky-header. ([#4897](https://github.com/navikt/aksel/pull/4897))
+
+- Popover: Fixed issue where clicking inside container sometimes could lead to Popover closing ([#4909](https://github.com/navikt/aksel/pull/4909))
+
+- DataGrid: Added `columnDisplay` value to settings ([#4908](https://github.com/navikt/aksel/pull/4908))
+
+- DataGrid.Table: Fix auto-width for col with "show nested rows" button ([#4906](https://github.com/navikt/aksel/pull/4906))
+
+- Updated dependencies [[`54634ff`](https://github.com/navikt/aksel/commit/54634ffed97000a96b375820a4693413ddb78066)]:
+  - @navikt/ds-tokens@8.11.1
+  - @navikt/aksel-icons@8.11.1
+
+## 8.11.0
+
+### Minor Changes
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+### Patch Changes
+
+- Updated dependencies [[`76e0410`](https://github.com/navikt/aksel/commit/76e04106f792516afc986a003dd6f451f8064f84)]:
+  - @navikt/aksel-icons@8.11.0
+  - @navikt/ds-tokens@8.11.0
+
+## 8.10.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.6
+  - @navikt/aksel-icons@8.10.6
+
+## 8.10.5
+
+### Patch Changes
+
+- Dependencies: Bumped `@floating-ui/react` from v0.27.8 -> v0.27.19 ([#4851](https://github.com/navikt/aksel/pull/4851))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.5
+  - @navikt/aksel-icons@8.10.5
+
+## 8.10.4
+
+### Patch Changes
+
+- ActionMenu: Now locked to bottom/top side placement, left/right for sub-menus. ([#4843](https://github.com/navikt/aksel/pull/4843))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.4
+  - @navikt/aksel-icons@8.10.4
+
+## 8.10.3
+
+### Patch Changes
+
+- Radio, Checkbox: Fix regression where `className` was mistakenly passed to `input`-element ([#4837](https://github.com/navikt/aksel/pull/4837))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.3
+  - @navikt/aksel-icons@8.10.3
+
+## 8.10.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.2
+  - @navikt/aksel-icons@8.10.2
+
+## 8.10.1
+
+### Patch Changes
+
+- Modal: Changing `size` had no effect before ([#4823](https://github.com/navikt/aksel/pull/4823))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.1
+  - @navikt/aksel-icons@8.10.1
+
+## 8.10.0
+
+### Minor Changes
+
+- Timeline: Added keyboard-navigation support between rows and periods ([#4809](https://github.com/navikt/aksel/pull/4809))
+
+- DatePicker: Highlight days between start and hovered day ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+- DatePicker: Reset range when selecting a new day ([#4799](https://github.com/navikt/aksel/pull/4799))
+
+- DatePicker, MonthPicker: ⬆️ Upgrade dependency react-day-picker `9.7.0` -> `9.14.0` ([#4799](https://github.com/navikt/aksel/pull/4799))
+
+### Patch Changes
+
+- CheckboxGroup: Set `aria-invalid` on error ([#4790](https://github.com/navikt/aksel/pull/4790))
+
+- RadioGroup: Set `role="radiogroup"`, and set `aria-invalid` on error. ([#4773](https://github.com/navikt/aksel/pull/4773))
+
+- Timeline: Improved support for JAWS, popups now open on click. ([#4793](https://github.com/navikt/aksel/pull/4793))
+
+- InlineMessage: Improve screen reader experience ([#4792](https://github.com/navikt/aksel/pull/4792))
+
+- InfoCard: Align header with content when no icon is present for small version. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- InfoCard, LocalAlert, GlobalAlert: Update content typography use and sizing. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.10.0
+  - @navikt/aksel-icons@8.10.0
+
 ## 8.9.1
 
 ### Patch Changes

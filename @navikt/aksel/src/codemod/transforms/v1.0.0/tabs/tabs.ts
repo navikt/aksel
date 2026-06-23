@@ -1,14 +1,11 @@
+import type { API, FileInfo, JSXAttribute } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import renameProps from "../../../utils/rename-props";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   let localName = "Tabs";
-  let iconPositionProp = null;
+  let iconPositionProp: JSXAttribute | null = null;
 
   const root = j(file.source);
 
@@ -17,9 +14,14 @@ export default function transformer(file, api) {
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === "@navikt/ds-react")
     .forEach((imp) => {
-      imp.value.specifiers.forEach((x) => {
-        if (x.imported.name === "Tabs" && x.local.name !== x.imported.name) {
-          localName = x.local.name;
+      imp.value.specifiers?.forEach((x) => {
+        if (
+          x.type === "ImportSpecifier" &&
+          x.imported.name === "Tabs" &&
+          x.local &&
+          x.local.name !== x.imported.name
+        ) {
+          localName = String(x.local.name);
         }
       });
     });
@@ -34,48 +36,52 @@ export default function transformer(file, api) {
     });
 
     root.findJSXElements(`${localName}`).forEach((parent) => {
-      parent.value.children.forEach((el) => {
+      parent.value.children?.forEach((el) => {
+        if (el.type !== "JSXElement") return;
         const openingEl = el.openingElement;
-        if (openingEl?.name && openingEl.name.type === "JSXMemberExpression") {
+        if (openingEl.name.type === "JSXMemberExpression") {
           if (
+            openingEl.name.object.type === "JSXIdentifier" &&
             openingEl.name.object.name === localName &&
             openingEl.name.property.name === "List"
           ) {
             /* Move loop-prop */
-            el.openingElement.attributes.forEach((x, index) => {
-              if (x.name?.name === "loop" && x.type === "JSXAttribute") {
-                parent.value.openingElement.attributes.push(x);
-                delete el.openingElement.attributes[index];
+            openingEl.attributes?.forEach((x, index) => {
+              if (x.type === "JSXAttribute" && x.name.name === "loop") {
+                parent.value.openingElement.attributes?.push(x);
+                openingEl.attributes?.splice(index, 1);
               }
             });
 
             /* Find and move iconPosition-prop to <Tabs/> */
-            el.children.forEach((tab) => {
+            el.children?.forEach((tab) => {
+              if (tab.type !== "JSXElement") return;
               const tabEl = tab.openingElement;
-              if (tabEl?.name && tabEl.name.type === "JSXMemberExpression") {
-                if (
-                  tabEl.name.object.name === localName &&
-                  tabEl.name.property.name === "Tab"
-                ) {
-                  tabEl?.attributes.forEach((x, index) => {
-                    if (
-                      x.name?.name === "iconPosition" &&
-                      x.type === "JSXAttribute"
-                    ) {
-                      if (!iconPositionProp) {
-                        iconPositionProp = x;
-                      }
-                      delete tabEl.attributes[index];
+              if (
+                tabEl.name.type === "JSXMemberExpression" &&
+                tabEl.name.object.type === "JSXIdentifier" &&
+                tabEl.name.object.name === localName &&
+                tabEl.name.property.name === "Tab"
+              ) {
+                tabEl.attributes?.forEach((x, index) => {
+                  if (
+                    x.type === "JSXAttribute" &&
+                    x.name.name === "iconPosition"
+                  ) {
+                    if (!iconPositionProp) {
+                      iconPositionProp = x;
                     }
-                  });
-                }
+                    tabEl.attributes?.splice(index, 1);
+                  }
+                });
               }
             });
           }
         }
       });
-      iconPositionProp &&
-        parent.value.openingElement.attributes.push(iconPositionProp);
+      if (iconPositionProp) {
+        parent.value.openingElement.attributes?.push(iconPositionProp);
+      }
       iconPositionProp = null;
     });
   }

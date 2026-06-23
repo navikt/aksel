@@ -24,5 +24,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Propen 'borderWidth' gir deg kontroll over border.",
+  desc: "Propen `borderWidth` lar deg kontrollere tykkelsen på border.",
 };

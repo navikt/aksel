@@ -1,8 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { VStack } from "../../primitives/stack";
-import { DataTable } from "../table";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
 import { TokenFilter } from "./TokenFilter";
 import type {
   ExternalPropertyDefinition,
@@ -404,31 +402,8 @@ export const WithDataTable: Story = {
           options={tableOptions}
           propertyDefinitions={tablePropertyDefs}
         />
-        <DataTable zebraStripes layout="auto">
-          <DataTable.Thead>
-            <DataTable.Tr>
-              <DataTableColumnHeader>Name</DataTableColumnHeader>
-              <DataTableColumnHeader>Status</DataTableColumnHeader>
-              <DataTableColumnHeader>Region</DataTableColumnHeader>
-              <DataTableColumnHeader>CPU</DataTableColumnHeader>
-            </DataTable.Tr>
-          </DataTable.Thead>
-          <DataTable.Tbody>
-            {filtered.map((s) => (
-              <DataTable.Tr key={s.name}>
-                <DataTable.Td>{s.name}</DataTable.Td>
-                <DataTable.Td>{s.status}</DataTable.Td>
-                <DataTable.Td>{s.region}</DataTable.Td>
-                <DataTable.Td>{s.cpu}</DataTable.Td>
-              </DataTable.Tr>
-            ))}
-            {filtered.length === 0 && (
-              <DataTable.Tr>
-                <DataTable.Td colSpan={4}>No results</DataTable.Td>
-              </DataTable.Tr>
-            )}
-          </DataTable.Tbody>
-        </DataTable>
+        <div>TOOD: Add table here</div>
+        <pre>{JSON.stringify(filtered, null, 2)}</pre>
       </VStack>
     );
   },

@@ -7,9 +7,11 @@ import styles from "./PropsSeksjon.module.css";
 function PropsSeksjonDescription({
   description,
   params,
+  returnVal,
 }: {
-  description?: string;
-  params?: string[];
+  description: string | undefined;
+  params: string[] | undefined;
+  returnVal: string | undefined;
 }) {
   if (!description) {
     return null;
@@ -30,20 +32,26 @@ function PropsSeksjonDescription({
           >
             {description}
           </Markdown>
+          {params && (
+            <ul>
+              {params.map((param) => {
+                const [name, ...desc] = param.split(" ");
+                return (
+                  <li key={param}>
+                    <strong>{name}: </strong>
+                    {desc.join(" ")}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {returnVal && (
+            <div>
+              <strong>Return: </strong>
+              {returnVal}
+            </div>
+          )}
         </VStack>
-        {params && (
-          <ul>
-            {params.map((param) => {
-              const [name, ...desc] = param.split(" ");
-              return (
-                <li key={param}>
-                  <strong>{name}: </strong>
-                  {desc.join(" ")}
-                </li>
-              );
-            })}
-          </ul>
-        )}
       </div>
     </li>
   );

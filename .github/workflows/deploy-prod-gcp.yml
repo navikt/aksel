@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup project
         uses: ./.github/actions/setup
@@ -33,6 +33,7 @@ jobs:
       - name: Update Sanity
         env:
           SANITY_WRITE: ${{ secrets.SANITY_WRITE }}
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS_BQ_READ }}
         run: yarn workspace aksel.nav.no sanity:update
 
   build_and_deploy:
@@ -45,7 +46,7 @@ jobs:
       deployments: "write"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 

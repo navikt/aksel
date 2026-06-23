@@ -26,7 +26,7 @@ const ruleFunction: stylelint.Rule = () => {
               deprecation.deprecatePrefix &&
               !deprecation.classes.some((x) => className.value.startsWith(x))
             ) {
-              return;
+              continue;
             }
             stylelint.utils.report({
               message: messages.unexpected(

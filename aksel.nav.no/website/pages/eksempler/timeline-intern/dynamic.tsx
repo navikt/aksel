@@ -276,5 +276,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Vi anbefaler å la bruker velge tidsperioder som er relevante for dem, og ikke vise alle perioder samtidig. Man kan også løse dette med horisontal scroll, men det kan bli vanskelig å navigere konsistent og ytelsen kan reduseres kraftig hvis for mange noder rendres samtidig.",
+  desc: "Vi anbefaler å la bruker velge tidsperioder som er relevante for dem, og ikke vise alle perioder samtidig.",
 };

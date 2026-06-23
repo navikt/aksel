@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import WriteHelp from "../../custom-components/WriteHelp";
+import { EndringsloggReferanser } from "../../custom-components/gp/EndringsloggReferanser";
 import { InnholdstypeHighlight } from "../../custom-components/gp/InnholdstypeHighlight";
 import { UndertemaHighlight } from "../../custom-components/gp/UndertemaHighlight";
 import { artikkelPreview } from "../presets/artikkel-preview";
@@ -10,7 +12,6 @@ import { ingressField } from "../presets/ingress";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import BaseSEOPreset from "../presets/seo";
-import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
 
@@ -22,6 +23,21 @@ export const GodPraksisArtikkel = defineType({
   type: "document",
   groups: SanityTabGroups,
   ...artikkelPreview("God praksis"),
+  renderMembers: (members) => {
+    return [
+      ...members,
+      {
+        key: "endringslogg",
+        kind: "decoration",
+        component: () => <EndringsloggReferanser source="gp" />,
+      },
+      {
+        key: "skrivehjelp",
+        kind: "decoration",
+        component: () => <WriteHelp />,
+      },
+    ];
+  },
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,
@@ -93,6 +109,5 @@ export const GodPraksisArtikkel = defineType({
     }),
     relevanteArtiklerField,
     BaseSEOPreset,
-    skrivehjelp,
   ],
 });

@@ -49,7 +49,7 @@ export const InputController = forwardRef<
     setAnchorRef,
   } = useInputContext();
 
-  const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
+  const { activeDescendantId, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
   const mergedInputRef = useMergeRefs(inputRef, ref);
@@ -60,7 +60,7 @@ export const InputController = forwardRef<
       <div
         className={cl("aksel-combobox__wrapper-inner aksel-text-field__input", {
           "aksel-combobox__wrapper-inner--virtually-unfocused":
-            activeDecendantId !== undefined,
+            activeDescendantId !== undefined,
         })}
         onClick={() => {
           if (inputProps.disabled || readOnly) {

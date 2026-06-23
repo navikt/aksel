@@ -1,6 +1,7 @@
 interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
    * Affects internal padding
+   * @default "medium"
    */
   size?: "small" | "medium";
   /**
@@ -38,7 +39,8 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
    * Called when the user tries to close the modal by one of the built-in methods.
    * Used if you want to ask the user for confirmation before closing.
-   * @warning Will not always be called when pressing Esc. See `onCancel` for more info.
+   *
+   * **NB:** Will not always be called when pressing Esc. See `onCancel` for more info.
    * @returns Whether to close the modal or not
    */
   onBeforeClose?: () => boolean;
@@ -51,7 +53,8 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   /**
    * Whether to close when clicking on the backdrop.
-   * @warning Users may click outside by accident. Don't use if closing can cause data loss, or the modal contains important info.
+   *
+   * **NB:** Users may click outside by accident. Don't use if closing can cause data loss, or the modal contains important info.
    * @default false
    */
   closeOnBackdropClick?: boolean;
@@ -76,13 +79,15 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
    * ID of the element that labels the modal.
    * No need to set this manually if the `header` prop is used. A reference to `header.heading` will be created automatically.
-   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
+   *
+   * **NB:** If not using `header`, you should set either `aria-labelledby` or `aria-label`.
    */
   "aria-labelledby"?: string;
   /**
    * String value that labels the modal.
    * No need to set this if the `header` prop is used.
-   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
+   *
+   * **NB:** If not using `header`, you should set either `aria-labelledby` or `aria-label`.
    */
   "aria-label"?: string;
 }

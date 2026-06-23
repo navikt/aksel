@@ -65,7 +65,7 @@ function createStrictContext<T>(options: {
 
   function Provider({ children, ...context }: ProviderProps<T>) {
     // biome-ignore lint/correctness/useExhaustiveDependencies: Object.values(context) includes all dependencies.
-    const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps, react-hooks/use-memo
+    const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
   }

@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  startTransition,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 // https://github.com/FormidableLabs/prism-react-renderer/blob/e1c83a468b05df7f452b3ad7e4ae5ab874574d4e/packages/generate-prism-languages/index.ts#L9-L23
 export const languages = [
@@ -73,6 +79,17 @@ function CodeBlockProvider({
       setCurrentCodeSnippet(code);
     }
   };
+
+  useEffect(
+    function syncGivenTabsWithCurrentCodeSnippet() {
+      if (!tabs || tabs.length === 0) {
+        return;
+      }
+
+      startTransition(() => setCurrentCodeSnippet(tabs?.[0]?.code ?? null));
+    },
+    [tabs],
+  );
 
   return (
     <CodeBlockContext.Provider

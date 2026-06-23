@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Propen 'borderColor' lar deg endre border-color basert på tokens.",
+  desc: "Propen `borderColor` lar deg endre border-color basert på tokens.",
 };

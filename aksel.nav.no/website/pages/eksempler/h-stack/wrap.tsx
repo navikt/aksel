@@ -48,5 +48,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Som standard er 'wrap' satt til 'true'.",
+  desc: "Som standard er `wrap` satt til `true`.",
 };

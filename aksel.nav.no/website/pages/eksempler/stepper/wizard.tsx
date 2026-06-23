@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { Heading, Stepper } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const [activeStep, setActiveStep] = useState(3);
+
   return (
     <>
       <Heading size="medium" spacing level="2" id="stepper-heading">
         Steg
       </Heading>
-      <Stepper aria-labelledby="stepper-heading" activeStep={3}>
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={activeStep}
+        onStepChange={setActiveStep}
+      >
         <Stepper.Step href="#" completed>
           Innledning
         </Stepper.Step>
@@ -36,5 +43,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Ved hjelp av propene 'interactive' og 'completed' kan man bygge opp wizard-lignende løsninger, der fullførte steg er merket med checkmark og fremtidige steg er låst.",
+  desc: "Ved hjelp av propene `interactive` og `completed` kan man bygge opp wizard-lignende løsninger, der fullførte steg er merket med checkmark og fremtidige steg er låst.",
 };

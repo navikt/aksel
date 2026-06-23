@@ -27,9 +27,7 @@
 
 .aksel-skeleton--text {
   height: auto;
-  transform-origin: 0 55%;
-  transform: scale(1, 0.6);
-  border-radius: var(--ax-radius-8);
+  clip-path: inset(20% 0 round var(--ax-radius-4));
 
   &:empty::before {
     content: "\00a0";

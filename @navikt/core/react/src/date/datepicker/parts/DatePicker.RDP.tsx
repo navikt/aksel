@@ -1,14 +1,16 @@
-import { isBefore, isSameDay, isWeekend } from "date-fns";
-import React, { useCallback } from "react";
+import { isWeekend } from "date-fns";
+import React, { useCallback, useState } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../primitives/responsive";
 import { omit } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
+import { useDateInputContext } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
-import { DateRange, isDateRange } from "../../Date.typeutils";
+import { isDateRange } from "../../Date.typeutils";
 import { clampDisplayMonth, isDateOutsideRange } from "../../date-utils";
-import {
+import { pickRangeSelection } from "../../date-utils/pick-range-selection";
+import type {
   ConditionalModeProps,
   DatePickerDefaultProps,
 } from "../DatePicker.types";
@@ -70,8 +72,9 @@ const ReactDayPicker = ({
 }: ReactDayPickerProps) => {
   const langProviderLocale = useDateLocale();
   const locale = _locale ? getLocaleFromString(_locale) : langProviderLocale;
-
   const mode = _mode ?? ("single" as any);
+  const [dayHovering, setDayHovering] = useState<Date>();
+  const context = useDateInputContext(false);
 
   return (
     <DayPicker
@@ -80,42 +83,17 @@ const ReactDayPicker = ({
       locale={locale}
       mode={mode as any}
       onSelect={(newSelection, newDate: Date) => {
-        /**
-         * In the case where we have:
-         * - Mode: "range"
-         * - selected: { from: undefined, to: Date } or
-         * - selected: { from: Date, to: undefined }
-         *
-         *
-         * RDP returns undefined for newSelection. We need to manually handle these cases.
-         */
-        if (mode !== "range" || newSelection || !isDateRange(selected)) {
+        if (mode !== "range" || !isDateRange(selected)) {
           handleSelect(newSelection);
           return;
         }
 
-        if (!selected.to) {
-          /**
-           * If defaultSelected.from is defined, but not "to", and user selects the same date as "from",
-           * we interpret this as user wanting to select a single date range (from === to).
-           */
-          if (selected.from && isSameDay(selected.from, newDate)) {
-            handleSelect({ from: newDate, to: newDate });
-            return;
-          }
-          handleSelect({ from: newDate, to: undefined });
-          return;
-        }
-
-        let range: DateRange | undefined;
-
-        if (isSameDay(selected.to, newDate)) {
-          range = undefined;
-        } else if (isBefore(newDate, selected.to)) {
-          range = { from: newDate, to: selected.to };
-        } else {
-          range = { from: selected.to, to: newDate };
-        }
+        const range = pickRangeSelection({
+          caller: context?.caller,
+          currentSelection: selected,
+          newDate,
+          newSelection,
+        });
 
         handleSelect(range);
       }}
@@ -173,28 +151,46 @@ const ReactDayPicker = ({
         ),
         Weekdays: useCallback(
           (props) => (
-            <thead {...props} className="rdp-head" aria-hidden>
-              <tr className="rdp-head_row">{props.children}</tr>
+            <thead className="rdp-head" aria-hidden>
+              <tr {...props} />
             </thead>
           ),
           [],
         ),
       }}
       className={cl("aksel-date", className)}
-      disabled={(day) => {
-        return (
-          (disableWeekends && isWeekend(day)) ||
-          dateMatchModifiers(day, disabled) ||
-          isDateOutsideRange({ day, fromDate, toDate })
-        );
-      }}
+      disabled={(day) =>
+        (disableWeekends && isWeekend(day)) ||
+        dateMatchModifiers(day, disabled) ||
+        isDateOutsideRange({ day, fromDate, toDate })
+      }
       weekStartsOn={1}
       modifiers={{
         weekend: (day) => disableWeekends && isWeekend(day),
+        hoverRange: (day: Date) => {
+          if (
+            !isDateRange(selected) ||
+            !selected.from ||
+            (selected.from && selected.to) ||
+            !dayHovering
+          ) {
+            return false;
+          }
+
+          const dayTime = day.getTime();
+          const fromTime = selected.from.getTime();
+          const hoverTime = dayHovering.getTime();
+
+          // Hovering after the start date
+          if (hoverTime > fromTime) {
+            return dayTime > fromTime && dayTime < hoverTime;
+          }
+          // Hovering before the start date
+          return dayTime < fromTime && dayTime > hoverTime;
+        },
       }}
-      modifiersClassNames={{
-        weekend: "rdp-day__weekend",
-      }}
+      onDayMouseEnter={setDayHovering}
+      onDayMouseLeave={() => setDayHovering(undefined)}
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus={false}
       showWeekNumber={showWeekNumber}
@@ -203,7 +199,8 @@ const ReactDayPicker = ({
       startMonth={fromDate}
       endMonth={toDate}
       month={clampDisplayMonth({ month, start: fromDate, end: toDate })}
-      resetOnSelect // Range mode: Starts a new range when selecting a day even when a range is already selected
+      /* We handle this logic manually in `onSelect` */
+      resetOnSelect
       {...omit(rest, ["onSelect", "role", "id", "defaultSelected"])}
     />
   );

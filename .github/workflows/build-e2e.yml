@@ -1,4 +1,4 @@
-name: E2E tests (Playwright)
+name: E2E tests
 on:
   push:
     branches: [main, next]
@@ -28,7 +28,7 @@ jobs:
       REGISTRY: ghcr.io
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -62,7 +62,7 @@ jobs:
     name: Playwright shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.58.1-noble
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
     services:
       testapp:
         image: ${{ needs.prebuild-app-for-playwright.outputs.image }}
@@ -78,7 +78,7 @@ jobs:
         shardTotal: [5]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 

@@ -16,9 +16,6 @@ import React, { useState } from "react";
 import { cl } from "../../utils/helpers";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { usePeriodContext } from "../hooks/usePeriodContext";
-import { useRowContext } from "../hooks/useRowContext";
-import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import type { PeriodProps } from "./types";
 
@@ -53,9 +50,6 @@ const ClickablePeriod = React.memo(
     periodRef,
   }: TimelineClickablePeriodProps) => {
     const [open, setOpen] = useState(false);
-    const { index } = useRowContext();
-    const { firstFocus } = usePeriodContext();
-    const { initiate, addFocusable } = useTimelineContext();
 
     const translate = useI18n("Timeline");
 
@@ -92,16 +86,22 @@ const ClickablePeriod = React.memo(
 
     const label = ariaLabel(start, end, status, statusLabel, translate);
 
+    if (width === 0 || !Number.isFinite(width)) {
+      return null;
+    }
+
+    if (!Number.isFinite(left)) {
+      return null;
+    }
+
     return (
       <>
         <button
+          data-timeline-period
           {...restProps}
           data-color={restProps?.["data-color"] ?? status}
           type="button"
-          ref={(r) => {
-            firstFocus && addFocusable(r, index);
-            mergedRef?.(r);
-          }}
+          ref={mergedRef}
           aria-label={label}
           className={cl(
             "aksel-timeline__period--clickable",
@@ -114,18 +114,15 @@ const ClickablePeriod = React.memo(
           aria-expanded={children ? open : undefined}
           aria-current={isActive || undefined}
           {...getReferenceProps({
-            onFocus: () => {
-              initiate(index);
-            },
             onKeyDown: (e) => {
-              restProps?.onKeydown?.(e);
+              restProps?.onKeyDown?.(e);
               if (e.key === " ") {
                 onSelectPeriod?.(e);
               }
             },
             style: {
-              width: `${width}%`,
-              [direction]: `${left}%`,
+              width: `${width.toFixed(3)}%`,
+              [direction]: `${left.toFixed(3)}%`,
             },
             onClick: (e) => {
               restProps?.onClick?.(e);
@@ -143,10 +140,11 @@ const ClickablePeriod = React.memo(
             context={context}
             modal={false}
             initialFocus={-1}
-            returnFocus={false}
+            returnFocus
           >
             <div
               className="aksel-timeline__popover"
+              data-timeline-popover
               data-placement={placement}
               ref={refs.setFloating}
               role="dialog"

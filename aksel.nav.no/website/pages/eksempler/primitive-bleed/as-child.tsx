@@ -33,5 +33,5 @@ export const Demo = {
 
 export const args = {
   index: 5,
-  desc: "Vi anbefaler å bruke 'asChild'-prop der mulig. Dette reduserer antall DOM-noder og forenkler output. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/layout-primitives#613715c234c8).",
+  desc: "Vi anbefaler å bruke `asChild`-propen der mulig. Dette reduserer antall DOM-noder og forenkler output. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/komponent-api#613715c234c8).",
 };

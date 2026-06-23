@@ -35,6 +35,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "indeterminate",
             "errorId",
             "readOnly",
+            "className",
           ])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           aria-describedby={

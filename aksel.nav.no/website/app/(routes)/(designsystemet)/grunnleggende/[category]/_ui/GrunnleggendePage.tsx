@@ -9,6 +9,8 @@ import {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 
@@ -28,20 +30,27 @@ async function GrunnleggendePage({ slug }: { slug: string }) {
     notFound();
   }
 
+  const changelogs = await fetchChangelogs(pageData._id, "ds");
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <DesignsystemetPageHeader data={pageData} />
+      <DesignsystemetPageHeader
+        data={pageData}
+        linkToChangelogs={changelogs.exists}
+      />
       <TableOfContents
         feedback={{
           name: pageData.heading,
           text: "Send innspill",
         }}
         toc={toc}
+        linkToChangelogs={changelogs.exists}
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"
       />
+      <ChangelogTable changelogs={changelogs} />
     </DesignsystemetPageLayout>
   );
 }

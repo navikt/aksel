@@ -6,7 +6,7 @@ import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provide
 import { IS_NEXT_SERVERSIDE } from "@/ui-utils/is-server";
 
 const trackingId = process.env.UMAMI_TRACKING_ID;
-const hostUrl = process.env.UMAMI_HOST_URL;
+const isProduction = process.env.PRODUCTION === "true";
 
 type UmamiTag = "organic" | "polluted";
 
@@ -33,11 +33,14 @@ function Umami({ isDraftMode = false }: { isDraftMode?: boolean }) {
     return null;
   }
 
+  const sporingScript = isProduction
+    ? "https://cdn.nav.no/team-researchops/sporing/sporing.js"
+    : "https://cdn.nav.no/team-researchops/sporing/sporing-dev.js";
+
   return (
     <Script
       defer
-      src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
-      data-host-url={hostUrl}
+      src={sporingScript}
       data-website-id={trackingId}
       data-tag={umamiTag}
       data-exclude-search="true"

@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import { Popover } from "../../popover";
 import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { DropdownContext } from "../context";
 import Divider from "./Divider";
 import GroupedList, { GroupedListType } from "./GroupedList";
@@ -65,7 +66,7 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
     const context = useContext(DropdownContext);
 
     if (!context) {
-      console.warn("Dropdown.Menu has to be wrapped in <Dropdown />");
+      consoleWarning("<Dropdown.Menu /> has to be wrapped in <Dropdown />");
       return null;
     }
 

@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useDateLocale, useI18n } from "../../../utils/i18n/i18n.hooks";
 import {
   DateTranslationContextProvider,
@@ -16,7 +17,7 @@ export interface MonthPickerStandaloneProps extends Omit<
   "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
 > {
   /**
-   * Monthpicker classname
+   * MonthPicker class name
    */
   className?: string;
 }
@@ -54,7 +55,9 @@ export const MonthPickerStandalone = forwardRef<
     const langProviderLocale = useDateLocale();
 
     if (dropdownCaption && (!fromDate || !toDate)) {
-      console.warn("Using dropdownCaption required fromDate and toDate");
+      consoleWarning(
+        "MonthPicker.Standalone: Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
+      );
       return null;
     }
 

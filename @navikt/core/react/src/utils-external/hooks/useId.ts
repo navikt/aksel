@@ -19,7 +19,7 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`aksel-id-${globalId}`);
+      setDefaultId(`aksel-id-${globalId}`); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [defaultId]);
   return id;

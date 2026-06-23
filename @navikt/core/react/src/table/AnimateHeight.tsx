@@ -97,9 +97,13 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const [overflow, setOverflow] = useState<Overflow>(initialOverflow.current);
   const [useTransitions, setUseTransitions] = useState<boolean>(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Only run this on mount
   useEffect(() => {
     // Hide content if height is 0 (to prevent tabbing into it)
-    hideContent(contentElement.current, initialHeight.current);
+    hideContent(contentElement.current, currentHeight);
+
+    /* Only run on mount.  We use currentHeight since it might have changed and using React.Activity will re-mount the component */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ------------------ Height update

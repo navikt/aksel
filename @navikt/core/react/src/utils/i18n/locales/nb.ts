@@ -61,9 +61,12 @@ export default {
     dropzone: {
       button: "Velg fil",
       buttonMultiple: "Velg filer",
+      /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       dragAndDrop: "Dra og slipp filen her",
+      /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       dragAndDropMultiple: "Dra og slipp filer her",
       drop: "Slipp",
+      /** This text will be wrapped in aria-hidden, hence **not visible to screen readers**. Do not put important info here. */
       or: "eller",
       disabled: "Filopplasting er deaktivert",
       disabledFilelimit: "Du kan ikke laste opp flere filer",

@@ -19,6 +19,7 @@ import { Detail } from "../typography";
 import { useId } from "../utils-external";
 import { Slot } from "../utils/components/slot/Slot";
 import { cl } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { useControllableState, useMergeRefs } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
@@ -188,10 +189,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     if (content?.length > maxChar) {
-      _open &&
-        console.warn(
-          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`,
-        );
+      consoleWarning(
+        `<Tooltip />: Because of strict a11y concerns we encourage all tooltips to have less than 80 characters. Can be overridden with the maxChar prop\n\nLength:${content.length}\nTooltip content: ${content}`,
+      );
     }
 
     const labelProps = describesChild

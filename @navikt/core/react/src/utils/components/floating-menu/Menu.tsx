@@ -3,13 +3,9 @@ import ReactDOM from "react-dom";
 import { Portal } from "../../../portal";
 import { useId } from "../../../utils-external";
 import { composeEventHandlers, createStrictContext } from "../../helpers";
-import {
-  createDescendantContext,
-  useEventCallback,
-  useMergeRefs,
-} from "../../hooks";
+import { useEventCallback, useMergeRefs } from "../../hooks";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
-import { Floating } from "../floating/Floating";
+import { Floating, MENU_COLLISION_AVOIDANCE } from "../floating/Floating";
 import { FocusBoundary } from "../focus-boundary/FocusBoundary";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
@@ -24,6 +20,7 @@ import {
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
+const CLOSE_SUBMENU_EVENT = "menu.closeSubmenu";
 
 type CheckedState = boolean | "indeterminate";
 
@@ -52,18 +49,6 @@ interface MenuComponent extends React.FC<MenuProps> {
   SubContent: typeof MenuSubContent;
   ItemIndicator: typeof MenuItemIndicator;
 }
-
-const [
-  MenuDescendantsProvider,
-  useMenuDescendantsContext,
-  useMenuDescendants,
-  useMenuDescendant,
-] = createDescendantContext<
-  SlottedDivElementRef,
-  {
-    closeMenu: () => void;
-  }
->();
 
 type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
 
@@ -181,17 +166,12 @@ const MenuContent = React.forwardRef<
   MenuContentInternalElement,
   MenuContentProps
 >((props: MenuContentProps, ref) => {
-  const descendants = useMenuDescendants();
   const rootContext = useMenuRootContext();
 
-  return (
-    <MenuDescendantsProvider value={descendants}>
-      {rootContext.modal ? (
-        <MenuRootContentModal {...props} ref={ref} />
-      ) : (
-        <MenuRootContentNonModal {...props} ref={ref} />
-      )}
-    </MenuDescendantsProvider>
+  return rootContext.modal ? (
+    <MenuRootContentModal {...props} ref={ref} />
+  ) : (
+    <MenuRootContentNonModal {...props} ref={ref} />
   );
 });
 
@@ -286,8 +266,6 @@ const MenuContentInternal = forwardRef<
     }: MenuContentInternalProps,
     forwardedRef,
   ) => {
-    const descendants = useMenuDescendantsContext();
-
     const context = useMenuContext();
 
     const contentRef = useRef<HTMLDivElement>(null);
@@ -317,7 +295,6 @@ const MenuContentInternal = forwardRef<
         >
           <RovingFocus
             asChild
-            descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
               event.preventDefault();
             })}
@@ -328,6 +305,9 @@ const MenuContentInternal = forwardRef<
               data-state={getOpenState(context.open)}
               data-aksel-menu-content=""
               dir="ltr"
+              fallbackAxisSideDirection={
+                MENU_COLLISION_AVOIDANCE.fallbackAxisSide
+              }
               {...rest}
               ref={composedRefs}
               style={{ outline: "none", ...rest.style }}
@@ -344,15 +324,27 @@ const MenuContentInternal = forwardRef<
 
                 // focus first/last item based on key pressed
                 const content = contentRef.current;
-                if (event.target !== content) return;
-                if (!FIRST_LAST_KEYS.includes(event.key)) return;
-                event.preventDefault();
-
-                if (LAST_KEYS.includes(event.key)) {
-                  descendants.lastEnabled()?.node?.focus();
+                if (event.target !== content) {
                   return;
                 }
-                descendants.firstEnabled()?.node?.focus();
+
+                if (!FIRST_LAST_KEYS.includes(event.key)) {
+                  return;
+                }
+
+                event.preventDefault();
+
+                const MENU_ITEM_SELECTOR =
+                  "[data-aksel-menu-item]:not([data-disabled])";
+                const items = Array.from(
+                  content.querySelectorAll<HTMLElement>(MENU_ITEM_SELECTOR),
+                );
+
+                if (LAST_KEYS.includes(event.key)) {
+                  items[items.length - 1]?.focus();
+                  return;
+                }
+                items[0]?.focus();
               })}
             />
           </RovingFocus>
@@ -483,6 +475,7 @@ type MenuItemInternalElement = SlottedDivElementRef;
 
 interface MenuItemInternalProps extends SlottedDivProps {
   disabled?: boolean;
+  "data-submenu-trigger"?: boolean;
 }
 
 const MenuItemInternal = forwardRef<
@@ -494,29 +487,39 @@ const MenuItemInternal = forwardRef<
       disabled = false,
       onPointerMove,
       onPointerLeave,
+      "data-submenu-trigger": isSubmenuTrigger,
       ...rest
     }: MenuItemInternalProps,
     forwardedRef,
   ) => {
-    const context = useMenuContext();
-    const { register } = useMenuDescendant({
-      disabled,
-      closeMenu: () => {
-        rest["data-submenu-trigger"] &&
-          context.open &&
-          context.onOpenChange(false);
-      },
+    const { content, onOpenChange, open } = useMenuContext();
+    const ref = useRef<HTMLDivElement>(null);
+    const composedRefs = useMergeRefs(forwardedRef, ref);
+
+    const handleCloseSubmenu = useEventCallback(() => {
+      open && onOpenChange(false);
     });
 
-    const ref = useRef<HTMLDivElement>(null);
-    const composedRefs = useMergeRefs(forwardedRef, ref, register);
+    /* If this item is a submenu trigger, listen for the close event dispatched by siblings */
+    useEffect(() => {
+      const node = ref.current;
+      if (!node || !isSubmenuTrigger) {
+        return;
+      }
+
+      node.addEventListener(CLOSE_SUBMENU_EVENT, handleCloseSubmenu);
+      return () =>
+        node.removeEventListener(CLOSE_SUBMENU_EVENT, handleCloseSubmenu);
+    }, [isSubmenuTrigger, handleCloseSubmenu]);
 
     return (
       <SlottedDivElement
         role="menuitem"
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
+        data-aksel-menu-item
         tabIndex={-1}
+        data-submenu-trigger={isSubmenuTrigger ? "" : undefined}
         {...rest}
         style={{ userSelect: "none", ...rest?.style }}
         ref={composedRefs}
@@ -533,7 +536,7 @@ const MenuItemInternal = forwardRef<
                * In the edgecase the focus is still stuck on a previous item, we make sure to reset it
                * even when the disabled item can't be focused itself to reset it.
                */
-              context.content?.focus();
+              content?.focus();
             } else {
               event.currentTarget.focus();
             }
@@ -541,7 +544,7 @@ const MenuItemInternal = forwardRef<
         )}
         onPointerLeave={composeEventHandlers(
           onPointerLeave,
-          whenMouse(() => context.content?.focus()),
+          whenMouse(() => content?.focus()),
         )}
       />
     );
@@ -761,8 +764,6 @@ const MenuSub: React.FC<MenuSubProps> = ({
 }: MenuSubProps) => {
   const parentMenuContext = useMenuContext();
 
-  const { values } = useMenuDescendantsContext();
-
   const [trigger, setTrigger] = useState<MenuItemElement | null>(null);
   const [content, setContent] = useState<MenuContentInternalElement | null>(
     null,
@@ -784,12 +785,16 @@ const MenuSub: React.FC<MenuSubProps> = ({
         onOpenChange={(_open) => {
           handleOpenChange(_open);
           if (_open) {
-            /* Makes sure to close all adjacent submenus if they are open */
-            values().forEach((descendant) => {
-              if (descendant.node !== trigger) {
-                descendant.closeMenu();
-              }
-            });
+            /*
+             * Close all adjacent submenus if they are open
+             */
+            parentMenuContext.content
+              ?.querySelectorAll("[data-submenu-trigger]")
+              .forEach((node) => {
+                if (node !== trigger) {
+                  node.dispatchEvent(new Event(CLOSE_SUBMENU_EVENT));
+                }
+              });
           }
         }}
         content={content}
@@ -847,7 +852,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
-          data-submenu-trigger
+          data-submenu-trigger={true}
           onClick={(event) => {
             if (props.disabled || event.defaultPrevented) {
               return;
@@ -888,8 +893,6 @@ const MenuSubContent = forwardRef<
   MenuContentInternalElement,
   MenuSubContentProps
 >((props: MenuSubContentProps, forwardedRef) => {
-  const descendants = useMenuDescendants();
-
   const context = useMenuContext();
   const rootContext = useMenuRootContext();
   const subContext = useMenuSubContext();
@@ -897,53 +900,48 @@ const MenuSubContent = forwardRef<
   const composedRefs = useMergeRefs(forwardedRef, ref);
 
   return (
-    <MenuDescendantsProvider value={descendants}>
-      <MenuContentInternal
-        id={subContext.contentId}
-        aria-labelledby={subContext.triggerId}
-        {...props}
-        ref={composedRefs}
-        align="start"
-        side="right"
-        disableOutsidePointerEvents={false}
-        initialFocus={() => {
-          if (rootContext.isUsingKeyboardRef.current) {
-            return ref.current;
-          }
-          return false;
-        }}
-        /* Since we manually focus Subtrigger, we prevent use of auto-focus */
-        returnFocus={false}
-        onEscapeKeyDown={composeEventHandlers(
-          props.onEscapeKeyDown,
-          (event) => {
-            rootContext.onClose();
-            // Ensure pressing escape in submenu doesn't escape full screen mode
-            event.preventDefault();
-          },
-        )}
-        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-          // Submenu key events bubble through portals. We only care about keys in this menu.
-          const isKeyDownInside = event.currentTarget.contains(
-            event.target as HTMLElement,
-          );
-          let isCloseKey = event.key === "ArrowLeft";
+    <MenuContentInternal
+      id={subContext.contentId}
+      aria-labelledby={subContext.triggerId}
+      {...props}
+      ref={composedRefs}
+      align="start"
+      side="right"
+      disableOutsidePointerEvents={false}
+      initialFocus={() => {
+        if (rootContext.isUsingKeyboardRef.current) {
+          return ref.current;
+        }
+        return false;
+      }}
+      /* Since we manually focus Subtrigger, we prevent use of auto-focus */
+      returnFocus={false}
+      onEscapeKeyDown={composeEventHandlers(props.onEscapeKeyDown, (event) => {
+        rootContext.onClose();
+        // Ensure pressing escape in submenu doesn't escape full screen mode
+        event.preventDefault();
+      })}
+      onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+        // Submenu key events bubble through portals. We only care about keys in this menu.
+        const isKeyDownInside = event.currentTarget.contains(
+          event.target as HTMLElement,
+        );
+        let isCloseKey = event.key === "ArrowLeft";
 
-          /* When submenu opens to the left, we allow closing it with ArrowRight */
-          if (context.content?.dataset.side === "left") {
-            isCloseKey = isCloseKey || event.key === "ArrowRight";
-          }
+        /* When submenu opens to the left, we allow closing it with ArrowRight */
+        if (context.content?.dataset.side === "left") {
+          isCloseKey = isCloseKey || event.key === "ArrowRight";
+        }
 
-          if (isKeyDownInside && isCloseKey) {
-            context.onOpenChange(false);
-            // We focus manually because we prevented it in `onCloseAutoFocus`
-            subContext.trigger?.focus();
-            // Prevent window from scrolling
-            event.preventDefault();
-          }
-        })}
-      />
-    </MenuDescendantsProvider>
+        if (isKeyDownInside && isCloseKey) {
+          context.onOpenChange(false);
+          // We focus manually because we prevented it in `onCloseAutoFocus`
+          subContext.trigger?.focus();
+          // Prevent window from scrolling
+          event.preventDefault();
+        }
+      })}
+    />
   );
 });
 

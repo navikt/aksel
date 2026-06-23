@@ -11,6 +11,14 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       filter: `_id == "aksel_forside_dokument"`,
     },
     {
+      route: "/god-praksis/endring/:slug",
+      filter: `_type == "gp_endringslogg_artikkel" && slug.current == $slug`,
+    },
+    {
+      route: "/grunnleggende/endringslogg/:slug",
+      filter: `_type == "ds_endringslogg_artikkel" && slug.current == $slug`,
+    },
+    {
       route: "/komponenter/:category/:slug",
       resolve(ctx) {
         const { params } = ctx;

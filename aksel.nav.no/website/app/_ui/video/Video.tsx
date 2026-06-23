@@ -2,6 +2,7 @@ import { useId } from "react";
 import { BodyLong, Box, ReadMore, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import styles from "./Video.module.css";
+import { VideoPlayer } from "./VideoPlayer";
 
 function Video(props: ExtractPortableComponentProps<"video">) {
   const { webm, fallback, alt, caption, transkripsjon, track } = props.value;
@@ -15,8 +16,8 @@ function Video(props: ExtractPortableComponentProps<"video">) {
   /* https://www.w3.org/WAI/PF/HTML/wiki/Media_Alt_Technologies#1:_Use_.40aria-label_for_the_text_description_of_player */
   return (
     <VStack gap="space-8" data-block-margin="space-28">
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
+      <VideoPlayer
+        alt={alt}
         className={styles.video}
         title={alt}
         playsInline
@@ -33,7 +34,7 @@ function Video(props: ExtractPortableComponentProps<"video">) {
           <source src={fallback.url} type={`video/${fallback.extension}`} />
         )}
         {track && <track kind="captions" srcLang="no" src={track} />}
-      </video>
+      </VideoPlayer>
       {caption && (
         <Box asChild paddingInline="space-16">
           <BodyLong as="figcaption">{caption}</BodyLong>

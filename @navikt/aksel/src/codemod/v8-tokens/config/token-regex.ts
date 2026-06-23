@@ -9,7 +9,7 @@ function getFrameworkRegexes({
   legacy = false,
 }: {
   token: string;
-  twString: string | null;
+  twString?: string | null;
   legacy: boolean;
 }): Record<"css" | "scss" | "less" | "js" | "tailwind", RegExp | null> {
   const regexes: ReturnType<typeof getFrameworkRegexes> = {

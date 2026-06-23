@@ -6,7 +6,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import MonthPicker from "./MonthPicker";
 
 export default {
-  title: "ds-react/Monthpicker/Tests",
+  title: "ds-react/MonthPicker/Tests",
   component: MonthPicker,
   parameters: {
     chromatic: { disable: true },

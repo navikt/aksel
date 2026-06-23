@@ -42,12 +42,20 @@
     --__axc-button-border-color: var(--ax-border-default);
 
     background-color: transparent;
-    color: var(--ax-text-subtle);
 
+    /* secondary + neutral should use "default" text color.
+       Check for data-color=neutral on both the button itself and the parents. */
     &[data-color="neutral"],
-    [data-color="neutral"] > &:not([data-color]),
-    [data-color="neutral"] :not([data-color]) &:not([data-color]) {
+    [data-color="neutral"] &:not([data-color]) {
       color: var(--ax-text-default);
+    }
+
+    /* secondary + NOT neutral should use "subtle" text color.
+       We need to explicitly target cases where a parent has data-color=neutral but
+       a closer parent has a different data-color (overriding the selector above). */
+    &,
+    [data-color="neutral"] [data-color]:not([data-color="neutral"]) & {
+      color: var(--ax-text-subtle);
     }
 
     &:hover {
@@ -73,12 +81,20 @@
 
   &[data-variant="tertiary"] {
     background-color: transparent;
-    color: var(--ax-text-subtle);
 
+    /* tertiary + neutral should use "default" text color.
+       Check for data-color=neutral on both the button itself and the parents. */
     &[data-color="neutral"],
-    [data-color="neutral"] > &:not([data-color], [data-pressed="true"]),
-    [data-color="neutral"] :not([data-color]) &:not([data-color], [data-pressed="true"]) {
+    [data-color="neutral"] &:not([data-color], [data-pressed="true"]) {
       color: var(--ax-text-default);
+    }
+
+    /* tertiary + NOT neutral should use "subtle" text color.
+       We need to explicitly target cases where a parent has data-color=neutral but
+       a closer parent has a different data-color (overriding the selector above). */
+    &,
+    [data-color="neutral"] [data-color]:not([data-color="neutral"]) &:not([data-pressed="true"]) {
+      color: var(--ax-text-subtle);
     }
 
     &:hover {
@@ -230,6 +246,15 @@
       border-color: highlight;
       color: highlight;
       box-shadow: none;
+    }
+
+    &[data-variant="tertiary"][data-pressed="true"] {
+      background-color: selecteditem;
+      color: selecteditemtext;
+
+      & span {
+        forced-color-adjust: none;
+      }
     }
   }
 

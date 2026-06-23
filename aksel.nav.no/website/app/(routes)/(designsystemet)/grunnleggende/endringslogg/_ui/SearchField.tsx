@@ -1,6 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction } from "react";
+import { Events } from "@navikt/analytics-types";
 import {
   BodyLong,
   Checkbox,
@@ -11,6 +12,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { Code } from "@/app/_ui/typography/Code";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./SearchField.module.css";
 
 export default function SearchField({
@@ -29,6 +31,10 @@ export default function SearchField({
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearch();
+    umamiTrack(Events.SOK, {
+      tekst: "endringslogg søk",
+      seksjon: "endringslogg",
+    });
   }
 
   return (

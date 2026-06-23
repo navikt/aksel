@@ -47,57 +47,6 @@ export const EndringsloggArtikkel = defineType({
       },
     }),
     defineField({
-      title: "Fremhevet",
-      name: "fremhevet",
-      description:
-        "Dette valget legger på styling på oppdateringen som gjør at den tiltrekker seg mer oppmerksomhet.",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
-      hidden: ({ document }) => !document?.fremhevet,
-      title: "Fremhevet herobilde",
-      name: "herobilde",
-      description:
-        "Bildet vises øverst på kortet/siden og blir brukt som OG-bilde. Anbefalt størrelse er 1200x630px.",
-      type: "image",
-      validation: (Rule) =>
-        Rule.custom((value, { document }) => {
-          if (document?.fremhevet && !value?.asset?._ref) {
-            return "En fremhevet oppdatering må ha et herobilde";
-          }
-          return true;
-        }),
-      fields: [
-        defineField({
-          name: "dekorativt",
-          title: "Bildet er bare dekorativt",
-          description: "Gjemmer bildet fra skjermlesere for å minske støy",
-          type: "boolean",
-          initialValue: false,
-        }),
-        defineField({
-          name: "alt",
-          type: "string",
-          title: "Alternativ tekst",
-          description: "Beskriv bildet for skjermlesere",
-          hidden: ({ document }) => (document?.herobilde as any).dekorativt,
-          validation: (Rule) =>
-            Rule.custom((value, { document }) => {
-              if (
-                document?.fremhevet &&
-                (document?.herobilde as any)?.asset &&
-                !(document?.herobilde as any)?.dekorativt &&
-                !value
-              ) {
-                return "Bildet må ha en alternativ tekst hvis det ikke skal være dekorativt";
-              }
-              return true;
-            }),
-        }),
-      ],
-    }),
-    defineField({
       title: "Innhold",
       name: "content",
       group: "innhold",
@@ -114,6 +63,29 @@ export const EndringsloggArtikkel = defineType({
       type: "boolean",
       initialValue: false,
     }),
+    defineField({
+      title: "Artikler",
+      name: "artikler",
+      group: "innhold",
+      description: "Artikler denne oppdateringen gjelder.",
+      type: "array",
+      options: {
+        sortable: false,
+      },
+      of: [
+        {
+          type: "reference",
+          to: [
+            { type: "ds_artikkel" },
+            { type: "komponent_artikkel" },
+            { type: "templates_artikkel" },
+          ],
+          options: {
+            disableNew: true,
+          },
+        },
+      ],
+    }),
     BaseSEOPreset,
   ],
 
@@ -122,10 +94,9 @@ export const EndringsloggArtikkel = defineType({
       heading: "heading",
       endringsdato: "endringsdato",
       endringstype: "endringstype",
-      fremhevet: "fremhevet",
     },
     prepare(selection) {
-      const { heading, endringsdato, endringstype, fremhevet } = selection;
+      const { heading, endringsdato, endringstype } = selection;
       if (!endringsdato || !endringstype) {
         return {
           title: heading,
@@ -135,7 +106,7 @@ export const EndringsloggArtikkel = defineType({
         title: heading,
         subtitle: `${endringsdato.split("T")[0]} | ${capitalizeText(
           endringstype,
-        )}${fremhevet ? " ⭐" : ""}`,
+        )}`,
         media: typeToIcon[endringstype],
       };
     },

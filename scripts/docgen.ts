@@ -17,6 +17,7 @@ export interface ComponentDoc extends docgen.ComponentDoc {
 const options: docgen.ParserOptions = {
   savePropValueAsString: true,
   shouldRemoveUndefinedFromOptional: true,
+  shouldExtractLiteralValuesFromEnum: true,
 
   propFilter: (prop) => {
     if (prop.name === "as" && prop.type.name === "undefined") {

@@ -1,7 +1,10 @@
-import { withThemeByClassName } from "@storybook/addon-themes";
-import { Preview } from "@storybook/react-vite";
+import addonPerformancePanel from "@github-ui/storybook-addon-performance-panel";
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
+import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
+import addonVitest from "@storybook/addon-vitest";
+import { definePreview } from "@storybook/react-vite";
 import React, { useEffect } from "react";
-import "../@navikt/core/css/src/data-table.css";
 import "../@navikt/core/css/src/data-token-filter.css";
 import "../@navikt/core/css/src/data-toolbar.css";
 import "../@navikt/core/css/src/index.css";
@@ -55,7 +58,17 @@ const TypoDecorator = ({
   return <>{children}</>;
 };
 
-export default {
+const addons = [addonA11y(), addonThemes(), addonDocs(), addonVitest()];
+
+/**
+ * Fixes flaky interaction tests
+ */
+if (process.env.NODE_ENV === "development") {
+  addons.push(addonPerformancePanel());
+}
+
+export default definePreview({
+  addons,
   parameters: {
     options: {
       storySort: {
@@ -132,4 +145,4 @@ export default {
       defaultTheme: "light",
     }),
   ],
-} satisfies Preview;
+});

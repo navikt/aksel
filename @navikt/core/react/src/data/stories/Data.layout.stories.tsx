@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { DataTable } from "../table";
-import { DataTableColumnHeader } from "../table/column-header/DataTableColumnHeader";
-import { sampleData } from "./dummy-data";
+import { DataGrid } from "../../data-grid";
+import { DataGridTable } from "../table";
+import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
+import { type PersonInfo, sampleData } from "./dummy-data";
 
-const meta: Meta<typeof DataTable> = {
+const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data/Layout",
-  component: DataTable,
+  component: DataGridTable,
   parameters: {
     chromatic: { disable: true },
     layout: "padded",
@@ -15,233 +16,225 @@ const meta: Meta<typeof DataTable> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataTable>;
-
-const columns = [
+const columns: ColumnDefinitions<PersonInfo> = [
+  { id: "id", header: "Id", bodyCell: (row) => row.name },
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
   {
-    header: "Id",
-    accessorKey: "id",
-  },
-  {
-    header: "Name",
-    accessorKey: "name",
-  },
-  {
+    id: "nationalId",
     header: "National id",
-    accessorKey: "nationalId",
+    bodyCell: (row) => row.nationalId,
   },
+  { id: "dayJob", header: "Day job", bodyCell: (row) => row.dayJob },
+  { id: "supervisor", header: "Supervisor", bodyCell: (row) => row.supervisor },
   {
-    header: "Day job",
-    accessorKey: "dayJob",
-  },
-  {
-    header: "Supervisor",
-    accessorKey: "supervisor",
-  },
-  {
+    id: "dateReceived",
     header: "Date received",
-    accessorKey: "dateReceived",
+    bodyCell: (row) => row.dateReceived,
   },
   {
+    id: "message",
     header: "Message",
-    accessorKey: "message",
-    contentMaxWidth: 200,
+    bodyCell: (row) => row.message,
   },
+  { id: "age", header: "Age", bodyCell: (row) => row.age },
   {
-    header: "Age",
-    accessorKey: "age",
-  },
-  {
+    id: "forceSensitive",
     header: "Force sensitive",
-    accessorKey: "forceSensitive",
+    bodyCell: (row) => (row.forceSensitive ? "Yes" : "No"),
   },
   {
+    id: "homeSystem",
     header: "Home system",
-    accessorKey: "homeSystem",
+    bodyCell: (row) => row.homeSystem,
   },
   {
+    id: "skills",
     header: "Skills",
-    accessorKey: "skills",
+    bodyCell: (row) => row.skills.join(", "),
   },
 ];
 
-export const AutoLayoutMinimal: Story = {
-  render: () => {
+type MinimalRow = {
+  col1: string;
+  col2: string;
+  col3: string;
+};
+
+const minimalData: MinimalRow[] = [
+  { col1: "Test", col2: "Example", col3: "Demo of small table" },
+];
+
+const minimalColumns: ColumnDefinitions<MinimalRow> = [
+  { id: "col1", header: "Column 1", bodyCell: (row) => row.col1 },
+  { id: "col2", header: "Column 2", bodyCell: (row) => row.col2 },
+  { id: "col3", header: "Column 3", bodyCell: (row) => row.col3 },
+];
+
+type SortableRow = {
+  left: string;
+  center: string;
+  right: string;
+};
+
+const sortableData: SortableRow[] = [
+  { left: "Data 1", center: "Yes", right: "100 500" },
+  { left: "Data 2", center: "No", right: "2 000 200" },
+  { left: "Data 3", center: "Maybe", right: "1 000 200" },
+];
+
+export const AutoLayoutMinimal: StoryObj<{
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
     return (
-      <DataTable layout="auto">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>Test</DataTable.Td>
-            <DataTable.Td>Example</DataTable.Td>
-            <DataTable.Td>Demo of small table</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
     );
   },
-  parameters: {
-    a11y: { disable: true },
-    controls: { disable: true },
-    docs: { disable: true },
+  args: {
+    table: {
+      layout: "auto",
+    },
+    grid: { data: minimalData, columns: minimalColumns },
   },
 };
 
-export const AutoLayoutOverflowX: Story = {
-  render: () => {
+export const AutoLayoutOverflowX: StoryObj<{
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
+}> = {
+  render: (args) => {
     return (
-      <DataTable layout="auto">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            {columns.map((column) => {
-              return (
-                <DataTableColumnHeader key={column.header}>
-                  {column.header}
-                </DataTableColumnHeader>
-              );
-            })}
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          {sampleData.slice(0, 4).map((row) => (
-            <DataTable.Tr key={row.name}>
-              {columns.map((column) => (
-                <DataTable.Td
-                  key={column.accessorKey}
-                  contentMaxWidth={column.contentMaxWidth}
-                >
-                  {row[column.accessorKey]}
-                </DataTable.Td>
-              ))}
-            </DataTable.Tr>
-          ))}
-        </DataTable.Tbody>
-      </DataTable>
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
     );
+  },
+  args: {
+    table: { layout: "auto" },
+    grid: {
+      settings: { truncateContent: true },
+      data: sampleData.slice(0, 4),
+      columns: columns.map((col) =>
+        col.id === "message"
+          ? {
+              ...col,
+              bodyCell: (row: PersonInfo) => (
+                <div style={{ maxWidth: 200 }}>{row.message}</div>
+              ),
+            }
+          : col,
+      ),
+    },
   },
 };
 
-export const AutoLayoutNoCellTruncation: Story = {
-  render: () => {
+export const AutoLayoutNoCellTruncation: StoryObj<{
+  table: DataGrid.Table.Props<PersonInfo>;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
+}> = {
+  render: (args) => {
     return (
-      <DataTable layout="auto" truncateContent={false}>
-        <DataTable.Thead>
-          <DataTable.Tr>
-            {columns.map((column) => (
-              <DataTableColumnHeader key={column.header}>
-                {column.header}
-              </DataTableColumnHeader>
-            ))}
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          {sampleData.slice(0, 3).map((row) => (
-            <DataTable.Tr key={row.name}>
-              {columns.map((column) => (
-                <DataTable.Td key={column.accessorKey}>
-                  {column.accessorKey === "message"
-                    ? row[column.accessorKey].split(" ").slice(0, 4).join(" ") +
-                      "."
-                    : row[column.accessorKey]}
-                </DataTable.Td>
-              ))}
-            </DataTable.Tr>
-          ))}
-        </DataTable.Tbody>
-      </DataTable>
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
     );
+  },
+  args: {
+    table: { layout: "auto" },
+    grid: {
+      settings: { truncateContent: false },
+      data: sampleData.slice(0, 3),
+      columns: columns.map((col) =>
+        col.id === "message"
+          ? {
+              ...col,
+              bodyCell: (row: PersonInfo) =>
+                row.message.split(" ").slice(0, 4).join(" ") + ".",
+            }
+          : col,
+      ),
+    },
   },
 };
 
-export const AutoLayoutSortable: Story = {
-  render: () => (
-    <DataTable layout="auto">
-      <DataTable.Thead>
-        <DataTable.Tr>
-          <DataTableColumnHeader sortable>Left</DataTableColumnHeader>
-          <DataTableColumnHeader sortable>Center</DataTableColumnHeader>
-          <DataTableColumnHeader sortable>Right</DataTableColumnHeader>
-        </DataTable.Tr>
-      </DataTable.Thead>
-      <DataTable.Tbody>
-        <DataTable.Tr>
-          <DataTable.Td>Data 1</DataTable.Td>
-          <DataTable.Td>Yes</DataTable.Td>
-          <DataTable.Td>100 500</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 2</DataTable.Td>
-          <DataTable.Td>No</DataTable.Td>
-          <DataTable.Td>2 000 200</DataTable.Td>
-        </DataTable.Tr>
-        <DataTable.Tr>
-          <DataTable.Td>Data 3</DataTable.Td>
-          <DataTable.Td>Maybe</DataTable.Td>
-          <DataTable.Td>1 000 200</DataTable.Td>
-        </DataTable.Tr>
-      </DataTable.Tbody>
-    </DataTable>
-  ),
-};
-
-export const FixedLayoutMinimal: Story = {
-  render: () => {
+export const AutoLayoutSortable: StoryObj<{
+  table: DataGrid.Table.Props<SortableRow>;
+  grid: Omit<DataGrid.Props<SortableRow>, "children">;
+}> = {
+  render: (args) => {
     return (
-      <DataTable layout="fixed">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader>Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader>Column 3</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>Test</DataTable.Td>
-            <DataTable.Td>Example</DataTable.Td>
-            <DataTable.Td>Demo of small table</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
     );
   },
-  parameters: {
-    a11y: { disable: true },
-    controls: { disable: true },
-    docs: { disable: true },
+  args: {
+    table: { layout: "auto" },
+    grid: {
+      data: sortableData,
+      columns: [
+        {
+          id: "left",
+          header: "Left",
+          isSortable: true,
+          bodyCell: (row) => row.left,
+        },
+        {
+          id: "center",
+          header: "Center",
+          isSortable: true,
+          bodyCell: (row) => row.center,
+        },
+        {
+          id: "right",
+          header: "Right",
+          isSortable: true,
+          bodyCell: (row) => row.right,
+        },
+      ],
+    },
   },
 };
 
-export const FixedLayoutDynamicWidth: Story = {
-  render: () => {
+export const FixedLayoutMinimal: StoryObj<{
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
     return (
-      <DataTable layout="fixed">
-        <DataTable.Thead>
-          <DataTable.Tr>
-            <DataTableColumnHeader width="100%">Column 1</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 2</DataTableColumnHeader>
-            <DataTableColumnHeader width="100%">Column 3</DataTableColumnHeader>
-          </DataTable.Tr>
-        </DataTable.Thead>
-        <DataTable.Tbody>
-          <DataTable.Tr>
-            <DataTable.Td>Test</DataTable.Td>
-            <DataTable.Td>Example</DataTable.Td>
-            <DataTable.Td>Demo of small table</DataTable.Td>
-          </DataTable.Tr>
-        </DataTable.Tbody>
-      </DataTable>
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
     );
   },
-  parameters: {
-    a11y: { disable: true },
-    controls: { disable: true },
-    docs: { disable: true },
+  args: {
+    table: { layout: "fixed" },
+    grid: { data: minimalData, columns: minimalColumns },
+  },
+};
+
+export const FixedLayoutDynamicWidth: StoryObj<{
+  table: DataGrid.Table.Props<MinimalRow>;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+}> = {
+  render: (args) => {
+    return (
+      <DataGrid {...args.grid}>
+        <DataGrid.Table {...args.table} />
+      </DataGrid>
+    );
+  },
+  args: {
+    table: { layout: "fixed" },
+    grid: {
+      data: minimalData,
+      columns: minimalColumns.map((col) => ({
+        ...col,
+        defaultWidth: "100%",
+      })),
+    },
   },
 };

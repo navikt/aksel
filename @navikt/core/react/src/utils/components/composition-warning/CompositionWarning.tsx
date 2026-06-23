@@ -13,6 +13,7 @@
  */
 import React, { useEffect, useRef } from "react";
 import { createStrictContext } from "../../helpers";
+import { consoleWarning } from "../../helpers/consoleWarning";
 import { Slot } from "../slot/Slot";
 
 type CompositionName = string;
@@ -59,7 +60,7 @@ function CompositionWarningForbidden({
       return;
     }
 
-    console.warn(`[Aksel] ${message}\nElement: `, elementRef.current);
+    consoleWarning(`${message}\nElement: `, elementRef.current);
   }, [compositionName, name, message]);
 
   return <Slot ref={elementRef}>{children}</Slot>;

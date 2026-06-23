@@ -1,11 +1,8 @@
+import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import renameProps from "../../../utils/rename-props";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   let localName = "SpeechBubble";
 
@@ -16,14 +13,17 @@ export default function transformer(file, api) {
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === "@navikt/ds-react")
     .forEach((imp) => {
-      imp.value.specifiers.forEach((x) => {
+      imp.value.specifiers?.forEach((x) => {
+        if (x.type !== "ImportSpecifier") return;
         if (x.imported.name === "SpeechBubble") {
-          if (x.local.name !== x.imported.name) {
-            localName = x.local.name;
+          if (x.local && x.local.name !== x.imported.name) {
+            localName = String(x.local.name);
             x.imported.name = "Chat";
           } else {
             x.imported.name = "Chat";
-            x.local.name = "Chat";
+            if (x.local) {
+              x.local.name = "Chat";
+            }
           }
         }
       });
@@ -47,20 +47,34 @@ export default function transformer(file, api) {
 
     compRoot.forEach((x) => {
       if (localName !== "SpeechBubble") return;
-      x.node.openingElement.name.name = "Chat";
-      x.node.closingElement.name.name = "Chat";
+      const opening = x.node.openingElement.name;
+      if (opening.type === "JSXIdentifier") {
+        opening.name = "Chat";
+      }
+      const closing = x.node.closingElement?.name;
+      if (closing?.type === "JSXIdentifier") {
+        closing.name = "Chat";
+      }
     });
 
     /* Need to handle dot-notations differently */
     const child = root.find(j.JSXElement);
 
     child.forEach((x) => {
+      const openingName = x.value.openingElement.name;
       if (
-        x.value.openingElement.name.type === "JSXMemberExpression" &&
-        x.value.openingElement.name.object.name === "SpeechBubble"
+        openingName.type === "JSXMemberExpression" &&
+        openingName.object.type === "JSXIdentifier" &&
+        openingName.object.name === "SpeechBubble"
       ) {
-        x.value.openingElement.name.object.name = "Chat";
-        x.value.closingElement.name.object.name = "Chat";
+        openingName.object.name = "Chat";
+        const closingName = x.value.closingElement?.name;
+        if (
+          closingName?.type === "JSXMemberExpression" &&
+          closingName.object.type === "JSXIdentifier"
+        ) {
+          closingName.object.name = "Chat";
+        }
       }
     });
   }

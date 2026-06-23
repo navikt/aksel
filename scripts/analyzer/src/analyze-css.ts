@@ -10,9 +10,11 @@ function analyzeCss(tarLocation: string): number {
   const cssPackageDir = unpackTar(tarLocation);
   const cssPackageExports = getPackageExports(cssPackageDir);
 
-  const exportPath = cssPackageExports["."];
+  const exportEntry = cssPackageExports["."];
+  const exportPath =
+    typeof exportEntry === "string" ? exportEntry : exportEntry?.default;
 
-  /* We assume key-value to be string for css-package */
+  /* We assume max one level of nesting for css-package exports */
   assert(
     exportPath && typeof exportPath === "string",
     "Package export '.' not found for css-package",

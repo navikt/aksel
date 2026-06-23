@@ -1,6 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useControllableState, useMergeRefs } from "../../utils/hooks";
 import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
@@ -121,7 +122,9 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     };
 
     if (dropdownCaption && (!fromDate || !toDate)) {
-      console.warn("Using dropdownCaption required fromDate and toDate");
+      consoleWarning(
+        "MonthPicker: Using dropdownCaption requires `fromDate` and `toDate` props to be defined.",
+      );
       return null;
     }
 
@@ -132,6 +135,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           onOpen={() => setOpen((x) => !x)}
           ariaId={ariaId}
           defined={true}
+          caller={null}
         >
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}

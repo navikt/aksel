@@ -1,4 +1,4 @@
-import type { JSCodeshift } from "jscodeshift";
+import type { API, JSCodeshift } from "jscodeshift";
 import { tokens } from "../../../tokens-map.js";
 import {
   getImportSpecifier,
@@ -12,7 +12,7 @@ import { translateToken } from "../../../utils/translate-token";
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
-export default function transformer(file: JSCodeshift, api) {
+export default function transformer(file: JSCodeshift, api: API) {
   const src = file.source;
 
   const j = api.jscodeshift as JSCodeshift;
@@ -37,7 +37,7 @@ export default function transformer(file: JSCodeshift, api) {
 
     getImportSpecifier(j, root, name, "@navikt/ds-tokens/dist/tokens").forEach(
       (x) => {
-        foundName = x.node.imported.name;
+        foundName = String(x.node.imported.name);
       },
     );
 

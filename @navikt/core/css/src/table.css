@@ -278,6 +278,12 @@
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }
 
+.aksel-table__expandable-row {
+  &:has(+ .aksel-table__expanded-row[data-state="closed"] + .aksel-table__row--selected) > :is(th, td) {
+    border-color: var(--ax-border-default);
+  }
+}
+
 .aksel-table__expanded-row {
   &:has(+ .aksel-table__row--selected) {
     & .aksel-table__expanded-row-collapse {

@@ -8,6 +8,7 @@ import { rmSync } from "node:fs";
  */
 const globPatterns = [
   "**/dist",
+  "**/*.tsbuildinfo",
   "./@navikt/**/lib",
   "./@navikt/**/esm",
   "./@navikt/**/cjs",
@@ -19,15 +20,15 @@ const globPatterns = [
 console.group("Cleaning up build artifacts");
 
 for (const globPattern of globPatterns) {
-  const folders = globSync(globPattern, {
+  const dirsAndFiles = globSync(globPattern, {
     exclude: ["**/node_modules"],
   });
-  folders
-    /* Longest folder-names first, so that nested dirs are removed bottom-up */
+  dirsAndFiles
+    /* Longest names first, so that nested dirs are removed bottom-up */
     .toSorted((a, b) => b.length - a.length)
-    .forEach((folder) => {
-      console.info(`Deleting folder ${folder}`);
-      rmSync(folder, { recursive: true });
+    .forEach((name) => {
+      console.info(`Deleting ${name}`);
+      rmSync(name, { recursive: true });
     });
 }
 

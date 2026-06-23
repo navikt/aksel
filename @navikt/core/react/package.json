@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "8.9.1",
+  "version": "8.13.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -44,6 +44,26 @@
       "require": {
         "types": "./cjs/index.d.ts",
         "default": "./cjs/index.js"
+      }
+    },
+    "./PREVIEW": {
+      "import": {
+        "types": "./esm/preview.d.ts",
+        "default": "./esm/preview.js"
+      },
+      "require": {
+        "types": "./cjs/preview.d.ts",
+        "default": "./cjs/preview.js"
+      }
+    },
+    "./PREVIEW/DataGrid": {
+      "import": {
+        "types": "./esm/data-grid/index.d.ts",
+        "default": "./esm/data-grid/index.js"
+      },
+      "require": {
+        "types": "./cjs/data-grid/index.d.ts",
+        "default": "./cjs/data-grid/index.js"
       }
     },
     "./types/theme": {
@@ -698,16 +718,16 @@
     "clean": "rimraf cjs esm",
     "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "concurrently \"TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
+    "test": "concurrently \"cross-env TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
     "test-sb-build": "tsc -p tsconfig.sb.json",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.8",
+    "@floating-ui/react": "0.27.19",
     "@floating-ui/react-dom": "^2.1.8",
-    "@navikt/aksel-icons": "^8.9.1",
-    "@navikt/ds-tokens": "^8.9.1",
+    "@navikt/aksel-icons": "^8.13.1",
+    "@navikt/ds-tokens": "^8.13.1",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.14.0"
   },
@@ -716,24 +736,26 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jscodeshift": "^0.11.11",
+    "@types/jscodeshift": "17.3.0",
+    "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "aksel": "workspace:^",
     "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",
+    "cross-env": "^10.1.0",
     "fast-glob": "3.3.3",
     "jscodeshift": "17.3.0",
-    "jsdom": "27.1.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-router": "^7.13.1",
+    "jsdom": "29.1.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-router": "^7.15.1",
     "rimraf": "6.1.3",
-    "swr": "^2.3.6",
+    "swr": "^2.4.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",
-    "typescript": "5.9.3",
-    "vitest": "4.1.0"
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",

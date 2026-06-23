@@ -80,6 +80,11 @@ export async function runCodeshift(
 
     warning && console.info(`\n${chalk.yellow(warning)}\n`);
   } catch (error) {
-    program.error(chalk.red("Error:", error.message));
+    program.error(
+      chalk.red(
+        "Error:",
+        error instanceof Error ? error.message : String(error),
+      ),
+    );
   }
 }

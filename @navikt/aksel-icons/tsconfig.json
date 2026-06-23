@@ -1,6 +1,8 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "rootDir": "./src",
     "outDir": "./dist/react/cjs",
     "moduleResolution": "node",
     "module": "commonjs",

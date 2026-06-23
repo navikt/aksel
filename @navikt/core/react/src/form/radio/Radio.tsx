@@ -24,7 +24,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       >
         <RadioInput
           ref={forwardedRef}
-          {...omit(props, ["children", "size", "description", "readOnly"])}
+          {...omit(props, [
+            "children",
+            "size",
+            "description",
+            "readOnly",
+            "className",
+          ])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           aria-describedby={
             cl(inputProps["aria-describedby"], {

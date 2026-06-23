@@ -64,7 +64,7 @@ interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement>
    */
   onDismiss?: (event: Event) => void;
   /**
-   * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
+   * Stops `onDismiss` from being called when interacting with the `safeZone` elements.
    * - anchor: The element that should be considered safe to interact with.
    */
   safeZone?: {
@@ -342,7 +342,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
           originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
-          ownerDoc.body.style.pointerEvents = "none"; // eslint-disable-line react-hooks/immutability
+          ownerDoc.body.style.pointerEvents = "none";
         }
         context.layersWithOutsidePointerEventsDisabled.add(node);
       }
@@ -460,6 +460,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             () => {
               pointerDownOutside.onPointerDownCapture();
               pointerUpOutside.onPointerDownCapture();
+              focusOutside.onPointerDownCapture();
             },
           )}
           onPointerUpCapture={composeEventHandlers(

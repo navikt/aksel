@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -13,9 +14,9 @@ type PropsSeksjonComponentT = NonNullable<
 >[number];
 
 function PropsSeksjon(props: ExtractPortableComponentProps<"props_seksjon">) {
-  const { komponenter, title } = props.value;
+  const { komponenter } = props.value;
 
-  if (!komponenter || komponenter.length === 0 || !title) {
+  if (!komponenter || komponenter.length === 0) {
     return null;
   }
 
@@ -50,6 +51,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
       type: "React.ElementType",
       _type: "prop",
       _key: "overridable",
+      unpackedType: null,
     });
   }
 
@@ -61,7 +63,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
     <div lang="en" data-block-margin="space-28" className={styles.propsSeksjon}>
       <Heading
         size="xsmall"
-        level="3"
+        level={stegaClean(component.heading_level) || "3"}
         className={styles.propsSeksjonHeader}
         id={component._key}
       >
@@ -85,55 +87,22 @@ const PropEntry = ({
     NonNullable<PropsSeksjonComponentT["propref"]>["proplist"]
   >[0];
 }) => {
-  if (prop.deprecated) {
-    return (
-      <>
-        <Box
-          as="dt"
-          paddingBlock="space-8 space-0"
-          paddingInline="space-8"
-          className="inline-block"
-        >
-          <Code as="h4" className="mr-2" strikethrough highlighted>{`${
-            prop.name
-          }${prop?.required ? "" : "?"}`}</Code>
-        </Box>
-        <BodyShort as="dd">
-          <Box as="ul" overflowX="auto">
-            <PropsSeksjonDeprecation text={prop.deprecated} />
-            <PropsSeksjonCode code={prop.type} title="Type" wrap />
-            <PropsSeksjonCode
-              /* We assume that if type starts with ", its an union-type */
-              code={prop.defaultValue}
-              title="Default"
-              wrap
-            />
-            <PropsSeksjonDescription
-              description={prop.description}
-              params={prop.params}
-            />
-            <PropsSeksjonCode code={prop.example} title="Example" />
-          </Box>
-        </BodyShort>
-      </>
-    );
-  }
-
-  let type = prop.type;
-
-  if (prop.type === "AkselColor") {
-    type = unpackAkselColorType();
-  }
+  const type = prop.type === "AkselColor" ? unpackedAkselColorType : prop.type;
 
   return (
     <>
       <Box as="dt" paddingBlock="space-8 space-0" paddingInline="space-8">
-        <Code as="h4" highlighted>{`${prop.name}${
-          prop?.required ? "" : "?"
-        }`}</Code>
+        <Code
+          as="h4"
+          highlighted
+          strikethrough={!!prop.deprecated}
+        >{`${prop.name}${prop?.required ? "" : "?"}`}</Code>
       </Box>
       <BodyShort as="dd">
         <Box as="ul" overflowX="auto">
+          {prop.deprecated && (
+            <PropsSeksjonDeprecation text={prop.deprecated} />
+          )}
           <PropsSeksjonCode code={type} title="Type" wrap />
           <PropsSeksjonCode
             /* We assume that if type starts with ", its an union-type */
@@ -144,6 +113,7 @@ const PropEntry = ({
           <PropsSeksjonDescription
             description={prop.description}
             params={prop.params}
+            returnVal={prop.return}
           />
           <PropsSeksjonCode code={prop.example} title="Example" />
         </Box>
@@ -166,10 +136,8 @@ const colors: Record<AkselColorRole, boolean> = {
   "brand-magenta": true,
 };
 
-function unpackAkselColorType() {
-  return Object.keys(colors)
-    .map((key) => `"${key}"`)
-    .join(" | ");
-}
+const unpackedAkselColorType = Object.keys(colors)
+  .map((key) => `"${key}"`)
+  .join(" | ");
 
 export { PropsSeksjon };

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Events } from "@navikt/analytics-types";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./Header.module.css";
@@ -36,7 +37,13 @@ function HeaderLink({ name, href }: HeaderLinkProps) {
       data-current={active}
       aria-current={active ? true : undefined}
       className={styles.headerLink}
-      onClick={() => umamiTrack("navigere", { kilde: "header", url: href })}
+      onClick={() =>
+        umamiTrack(Events.NAVIGERE, {
+          lenketekst: name,
+          destinasjon: href,
+          lenkegruppe: "header",
+        })
+      }
     >
       {name}
     </NextLink>

@@ -1,6 +1,8 @@
 import { defineField, defineType } from "sanity";
+import { BodyLong, ReadMore, VStack } from "@navikt/ds-react";
 import { komponentKategorier } from "../../../config";
 import { showForDevsOnly } from "../../../util";
+import { EndringsloggReferanser } from "../../custom-components/gp/EndringsloggReferanser";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
@@ -17,6 +19,16 @@ export const KomponentArtikkel = defineType({
   type: "document",
   groups: SanityTabGroups,
   ...artikkelPreview("Komponenter", 6),
+  renderMembers: (members) => {
+    return [
+      ...members,
+      {
+        key: "endringslogg",
+        kind: "decoration",
+        component: () => <EndringsloggReferanser source="ds" />,
+      },
+    ];
+  },
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,
@@ -53,7 +65,7 @@ export const KomponentArtikkel = defineType({
       group: "innhold",
       type: "object",
       fields: [
-        {
+        defineField({
           title: "Status",
           name: "tag",
           type: "string",
@@ -61,20 +73,61 @@ export const KomponentArtikkel = defineType({
           options: {
             list: [
               { title: "Beta", value: "beta" },
+              { title: "Preview", value: "preview" },
               { title: "New", value: "new" },
               { title: "Stable", value: "ready" },
               { title: "Legacy", value: "deprecated" },
             ],
             layout: "radio",
           },
+          components: {
+            field: (props) => (
+              <VStack gap="space-4">
+                {props.renderDefault(props)}
+                {props.value === "preview" && (
+                  <ReadMore size="small" header="Hva 'Preview' innebærer">
+                    <BodyLong spacing>
+                      Preview betyr at vi ikke er 100% sikre på at komponenten
+                      er riktig utformet. Statusen kan brukes på både ferdige
+                      komponenter som vi bare vil gi en &quot;soft launch&quot;,
+                      og på uferdige/eksperimentelle komponenter som er under
+                      aktiv utvikling.
+                    </BodyLong>
+
+                    <BodyLong spacing>
+                      Preview-komponenter skal bare kunne importeres fra{" "}
+                      <code>@navikt/ds-react/PREVIEW</code>.
+                    </BodyLong>
+
+                    <BodyLong>
+                      Komponenten skal ut av Preview når vi har blitt trygge på
+                      at den er riktig utformet, og det ikke er planlagt
+                      større/brekkende endringer i nærmeste fremtid. Husk å
+                      gjøre en vurdering av dette minst én gang i tertialet.
+                    </BodyLong>
+                  </ReadMore>
+                )}
+              </VStack>
+            ),
+          },
           validation: (Rule) => Rule.required(),
-        },
+        }),
         defineField({
           name: "unsafe",
           title: "Unsafe",
           description: "Er komponenten Beta + UNSAFE-prefikset?",
           type: "boolean",
           hidden: ({ parent }) => !(parent?.tag === "beta"),
+        }),
+        defineField({
+          name: "preview_note",
+          title: "Preview-notat",
+          type: "riktekst_accordion",
+          description: `Skal gi et tydelig signal om hvor stabil komponenten er.
+            Bør inneholde kjente feil/mangler og hva vi er usikre på.
+            Hvis vi vil åpne for brekkende endringer utenom major, må dette også
+            nevnes her, samt i JSDoc.`,
+          hidden: ({ parent }) => !(parent?.tag === "preview"),
         }),
         defineField({
           name: "internal",

@@ -1,5 +1,97 @@
 # @navikt/ds-css
 
+## 8.13.1
+
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+## 8.12.1
+
+### Patch Changes
+
+- DataGrid: Fixed sticky columns horizontal shadows ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+- DataGrid: Fixed zebra-stripes with sticky columns ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+## 8.12.0
+
+### Minor Changes
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+## 8.11.1
+
+### Patch Changes
+
+- DataGrid: Loading-bar now stays stuck to sticky-header. ([#4897](https://github.com/navikt/aksel/pull/4897))
+
+## 8.11.0
+
+### Minor Changes
+
+- DataGrid: New `preview` of DataGrid and DataGrid.Table-components ([#4885](https://github.com/navikt/aksel/pull/4885))
+
+## 8.10.6
+
+### Patch Changes
+
+- 🎨 InfoCard: Added bigger padding for medium sized InfoCard.Message ([#4861](https://github.com/navikt/aksel/pull/4861))
+
+## 8.10.5
+
+### Patch Changes
+
+- Pagination: Fix selected-styling in forced-colors mode ([#4858](https://github.com/navikt/aksel/pull/4858))
+
+- Button: Fix issue where secondary and tertiary variants did not have correct text color is certain cases ([#4857](https://github.com/navikt/aksel/pull/4857))
+
+## 8.10.4
+
+## 8.10.3
+
+### Patch Changes
+
+- Add module declaration to avoid TypeScript error when importing ([`92f6d9e`](https://github.com/navikt/aksel/commit/92f6d9e93b879962df8415f7fad22203174dd3a8))
+
+## 8.10.2
+
+### Patch Changes
+
+- Dialog: Now aligns to bottom when centered at 480px instead of 768px screen width ([#4831](https://github.com/navikt/aksel/pull/4831))
+
+## 8.10.1
+
+### Patch Changes
+
+- Modal: Changing `size` had no effect before ([#4823](https://github.com/navikt/aksel/pull/4823))
+
+## 8.10.0
+
+### Minor Changes
+
+- DatePicker: Highlight days between start and hovered day ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+### Patch Changes
+
+- Skeleton: Text-variant now has properly rounded edges ([#4808](https://github.com/navikt/aksel/pull/4808))
+
+- ExpandableRow: Fix selected row top border not showing when row above was collapsed ([#4810](https://github.com/navikt/aksel/pull/4810))
+
+- Timeline: Icons in periods now scale based on avaliable space. No longer clips on smaller periods ([#4809](https://github.com/navikt/aksel/pull/4809))
+
+- DatePicker, MonthPicker: Change styling on disabled days/months ([#4801](https://github.com/navikt/aksel/pull/4801))
+
+- InfoCard: Align header with content when no icon is present for small version. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
+- InfoCard, LocalAlert, GlobalAlert: Update content typography use and sizing. ([#4815](https://github.com/navikt/aksel/pull/4815))
+
 ## 8.9.1
 
 ### Patch Changes

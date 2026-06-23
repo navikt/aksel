@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useEventCallback } from "../../utils/hooks/useEventCallback";
 
 interface ListenerT {
   addEventListener(
@@ -22,15 +23,18 @@ const useEventListener = <T extends ListenerT>(
   handler: Parameters<ListenerT["addEventListener"]>[1],
   target: null | T | Window = typeof window !== "undefined" ? window : null,
 ): void => {
+  /* Keep listener identity stable so inline handlers do not re-register every render. */
+  const stableHandler = useEventCallback(handler);
+
   useEffect(() => {
     if (!target) {
       return;
     }
-    target?.addEventListener(name, handler);
+    target?.addEventListener(name, stableHandler);
     return () => {
-      target?.removeEventListener(name, handler);
+      target?.removeEventListener(name, stableHandler);
     };
-  }, [name, handler, target]);
+  }, [name, stableHandler, target]);
 };
 
 export { useEventListener };
