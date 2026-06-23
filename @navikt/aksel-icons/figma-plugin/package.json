@@ -14,7 +14,7 @@
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
     "fuse.js": "^7.4.0",
-    "react": "19.2.6",
+    "react": "19.2.7",
     "react-dom": "19.2.7"
   },
   "devDependencies": {
