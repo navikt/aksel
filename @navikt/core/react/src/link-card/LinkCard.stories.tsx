@@ -29,7 +29,7 @@ export const Title: Story = {
   render: () => (
     <LinkCard>
       <LinkCardTitle>
-        <LinkCardAnchor href="/#">Title</LinkCardAnchor>
+        <LinkCardAnchor href="/#">Title1</LinkCardAnchor>
       </LinkCardTitle>
     </LinkCard>
   ),
