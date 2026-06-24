@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGridSettingsOptions } from "../../data-grid/root/DataGrid.types";
-import { Radio, RadioGroup } from "../../form/radio";
+import { Select } from "../../form/select";
 
 type DataGridPreferencesRowDensitySettingsProps = {
   value?: keyof typeof DataGridSettingsOptions.rowDensity;
@@ -12,10 +12,11 @@ function DataGridPreferencesRowDensitySettings({
   onChange,
 }: DataGridPreferencesRowDensitySettingsProps) {
   return (
-    <RadioGroup
-      legend="Velg radtetthet"
+    <Select
+      label="Velg radtetthet"
       size="small"
-      onChange={(newValue) => {
+      onChange={(event) => {
+        const newValue = event.target.value;
         if (isRowDensityOption(newValue)) {
           onChange(newValue);
         }
@@ -24,12 +25,12 @@ function DataGridPreferencesRowDensitySettings({
     >
       {Object.entries(DataGridSettingsOptions.rowDensity).map(
         ([key, radioValue]) => (
-          <Radio key={key} value={key}>
+          <option key={key} value={key}>
             {radioValue}
-          </Radio>
+          </option>
         ),
       )}
-    </RadioGroup>
+    </Select>
   );
 }
 

@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from "../../dialog";
 import { cl } from "../../utils/helpers";
-import { DataGridPreferencesColumnDividerSettings } from "../column-divider-settings/DataGridPreferencesColumnDividerSettings";
+import { DataGridPreferencesColumnLayoutSettings } from "../column-layout-settings/DataGridPreferencesColumnLayoutSettings";
 import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
@@ -25,7 +25,6 @@ import {
 } from "../helpers/data-grid-settings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
-import { DataGridPreferencesStickyColumnSettings } from "../sticky-column-settings/DataGridPreferencesStickyColumnSettings";
 import { DataGridPreferencesTextSizeSettings } from "../text-size-settings/DataGridPreferencesTextSizeSettings";
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -119,32 +118,27 @@ const DataGridPreferencesRoot = forwardRef<
           /* TODO: i18n */
         />
       </DialogTrigger>
-      <DialogPopup width="medium" position="right">
+      <DialogPopup width="large" position="center">
         <DialogHeader withClosebutton>
           <DialogTitle>Innstillinger</DialogTitle>
         </DialogHeader>
         <DialogBody className="aksel-data-grid__preferences-body">
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
-              <DataGridPreferencesRowDensitySettings
-                value={resolvedDraft.rowDensity}
+              <DataGridPreferencesColumnLayoutSettings
+                value={{
+                  columnDividers: resolvedDraft.columnDividers,
+                  stickyColumns: resolvedDraft.stickyColumns,
+                }}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
-                    rowDensity: value,
+                    columnDividers: value.columnDividers,
+                    stickyColumns: value.stickyColumns,
                   }));
                 }}
               />
 
-              <DataGridPreferencesTextSizeSettings
-                value={resolvedDraft.textSize}
-                onChange={(value) => {
-                  setDraft((prev) => ({
-                    ...prev,
-                    textSize: value,
-                  }));
-                }}
-              />
               <DataGridPreferencesRowPropertiesSettings
                 value={{
                   truncateContent: resolvedDraft.truncateContent,
@@ -157,21 +151,21 @@ const DataGridPreferencesRoot = forwardRef<
                   }));
                 }}
               />
-              <DataGridPreferencesColumnDividerSettings
-                value={resolvedDraft.columnDividers}
+              <DataGridPreferencesRowDensitySettings
+                value={resolvedDraft.rowDensity}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
-                    columnDividers: value,
+                    rowDensity: value,
                   }));
                 }}
               />
-              <DataGridPreferencesStickyColumnSettings
-                value={resolvedDraft.stickyColumns}
+              <DataGridPreferencesTextSizeSettings
+                value={resolvedDraft.textSize}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
-                    stickyColumns: value,
+                    textSize: value,
                   }));
                 }}
               />

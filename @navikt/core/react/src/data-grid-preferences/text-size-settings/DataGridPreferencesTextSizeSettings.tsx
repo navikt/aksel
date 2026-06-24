@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGridSettingsOptions } from "../../data-grid/root/DataGrid.types";
-import { Radio, RadioGroup } from "../../form/radio";
+import { Select } from "../../form/select";
 
 type DataGridPreferencesTextSizeSettingsProps = {
   value?: keyof typeof DataGridSettingsOptions.textSize;
@@ -12,10 +12,11 @@ function DataGridPreferencesTextSizeSettings({
   onChange,
 }: DataGridPreferencesTextSizeSettingsProps) {
   return (
-    <RadioGroup
-      legend="Tekststørrelse"
+    <Select
+      label="Tekststørrelse"
       size="small"
-      onChange={(newValue) => {
+      onChange={(event) => {
+        const newValue = event.target.value;
         if (isTextSizeOption(newValue)) {
           onChange(newValue);
         }
@@ -24,12 +25,12 @@ function DataGridPreferencesTextSizeSettings({
     >
       {Object.entries(DataGridSettingsOptions.textSize).map(
         ([key, radioValue]) => (
-          <Radio key={key} value={key}>
+          <option key={key} value={key}>
             {radioValue}
-          </Radio>
+          </option>
         ),
       )}
-    </RadioGroup>
+    </Select>
   );
 }
 

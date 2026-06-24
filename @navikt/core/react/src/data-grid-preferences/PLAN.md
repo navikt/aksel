@@ -45,9 +45,10 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 ### 6. Reconsider `columnDividers` placement
 
-- [x] Moved out of "Radegenskaper" (row properties) into its own `column-divider-settings` group with legend "Kolonner", placed next to "Sticky kolonner".
+- [x] Moved out of "Radegenskaper" (row properties).
+- [x] Merged `columnDividers` + sticky columns into one `column-layout-settings` group (legend "Kolonner"). Sticky checkboxes relabeled "Fest første/siste kolonne" since the "Sticky kolonner" heading is gone.
 - [x] "Radegenskaper" now only holds true row props (truncate, zebra).
-- Note: kept as a separate group rather than merging into the sticky component to avoid a file/component rename (no terminal/delete tool available). Could later merge dividers + sticky under one "Kolonner" group.
+- [ ] **Manual cleanup**: delete the now-orphaned dirs `column-divider-settings/` and `sticky-column-settings/` (no terminal/delete tool available to me).
 
 ---
 
