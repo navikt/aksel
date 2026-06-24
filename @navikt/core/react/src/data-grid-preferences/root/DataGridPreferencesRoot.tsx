@@ -1,10 +1,7 @@
 import React, { forwardRef, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import {
-  DataGridSettings,
-  DataGridSettingsOptions,
-} from "../../data-grid/root/DataGrid.types";
+import { DataGridSettings } from "../../data-grid/root/DataGrid.types";
 import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import {
   Dialog,
@@ -16,16 +13,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../dialog";
-import { Checkbox, CheckboxGroup } from "../../form/checkbox";
-import { Radio, RadioGroup } from "../../form/radio";
 import { cl } from "../../utils/helpers";
 import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
-
-type TextSizeOption = keyof typeof DataGridSettingsOptions.textSize;
+import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
+import { DataGridPreferencesStickyColumnSettings } from "../sticky-column-settings/DataGridPreferencesStickyColumnSettings";
+import { DataGridPreferencesTextSizeSettings } from "../text-size-settings/DataGridPreferencesTextSizeSettings";
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: never;
@@ -71,10 +67,6 @@ const DataGridPreferencesRoot = forwardRef<
     setOpen(false);
   }
 
-  function isTextSizeOption(value: string): value is TextSizeOption {
-    return value in DataGridSettingsOptions.textSize;
-  }
-
   const columnDefinitionMap = useMemo(
     () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
     [columnDefinitions],
@@ -101,16 +93,6 @@ const DataGridPreferencesRoot = forwardRef<
       columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
     }));
   }
-
-  const rowPropertyValues = [
-    ...(draft.truncateContent ? ["truncateContent"] : []),
-    ...(draft.zebraStripes ? ["zebraStripes"] : []),
-  ];
-
-  const stickyColumnValues = [
-    ...(draft.stickyColumns?.start ? ["sticky-start"] : []),
-    ...(draft.stickyColumns?.end ? ["sticky-end"] : []),
-  ];
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -144,80 +126,37 @@ const DataGridPreferencesRoot = forwardRef<
                 }}
               />
 
-              <RadioGroup
-                legend="Tekststørrelse"
-                size="small"
+              <DataGridPreferencesTextSizeSettings
+                value={draft.textSize}
                 onChange={(value) => {
-                  if (!isTextSizeOption(value)) {
-                    return;
-                  }
-
                   setDraft((prev) => ({
                     ...prev,
                     textSize: value,
                   }));
                 }}
-                value={draft.textSize}
-              >
-                {Object.entries(DataGridSettingsOptions.textSize).map(
-                  ([key, value]) => (
-                    <Radio key={key} value={key}>
-                      {value}
-                    </Radio>
-                  ),
-                )}
-              </RadioGroup>
-              <CheckboxGroup
-                legend="Radegenskaper"
-                size="small"
-                value={rowPropertyValues}
-                onChange={(values: string[]) => {
+              />
+              <DataGridPreferencesRowPropertiesSettings
+                value={{
+                  truncateContent: draft.truncateContent ?? false,
+                  zebraStripes: draft.zebraStripes ?? false,
+                  columnDividers: draft.columnDividers ?? true,
+                }}
+                onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
-                    truncateContent: values.includes("truncateContent"),
-                    zebraStripes: values.includes("zebraStripes"),
+                    ...value,
                   }));
                 }}
-              >
-                <Checkbox
-                  value="truncateContent"
-                  description="Kutter innhold som ikke får plass i cellen på en linje"
-                >
-                  Kutt innhold
-                </Checkbox>
-                <Checkbox
-                  value="zebraStripes"
-                  description="Legger på en bakgrunnsfarge for annenhver rad"
-                >
-                  Zebra-striper
-                </Checkbox>
-                {/* TODO: Setting not yet available */}
-                {/* <Checkbox
-                  value="columnDividers"
-                  description="Skiller kolonner fra hverandre med en strek"
-                  defaultChecked={draft.columnDisplay === "dividers"}
-
-                >
-                  Kolonnestrek
-                </Checkbox> */}
-              </CheckboxGroup>
-              <CheckboxGroup
-                legend="Sticky kolonner"
-                size="small"
-                value={stickyColumnValues}
-                onChange={(values: string[]) => {
+              />
+              <DataGridPreferencesStickyColumnSettings
+                value={draft.stickyColumns}
+                onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
-                    stickyColumns: {
-                      start: values.includes("sticky-start") ? 1 : undefined,
-                      end: values.includes("sticky-end") ? 1 : undefined,
-                    },
+                    stickyColumns: value,
                   }));
                 }}
-              >
-                <Checkbox value="sticky-start">Første kolonne</Checkbox>
-                <Checkbox value="sticky-end">Siste kolonne</Checkbox>
-              </CheckboxGroup>
+              />
             </div>
             <div className="aksel-data-grid__preferences-block">
               <DataGridPreferencesColumnSettings
