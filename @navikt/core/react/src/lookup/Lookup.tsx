@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Popover, PopoverProps } from "../popover";
@@ -86,7 +86,8 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
     });
 
     const anchorRef = useRef<HTMLSpanElement>(null);
-    const mergedRef = useMergeRefs(anchorRef, ref);
+    const [anchorEl, setAnchorEl] = useState<HTMLSpanElement | null>(null);
+    const mergedRef = useMergeRefs(anchorRef, ref, setAnchorEl);
     const contentRef = useRef<HTMLDivElement>(null);
     const triggerId = useId(idProp);
     const popoverContentId = `${triggerId}-content`;
@@ -150,7 +151,7 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
             >
               <Portal>
                 <Popover
-                  anchorEl={anchorRef.current}
+                  anchorEl={anchorEl}
                   open={_open}
                   onClose={() => {
                     _setOpen(false);
