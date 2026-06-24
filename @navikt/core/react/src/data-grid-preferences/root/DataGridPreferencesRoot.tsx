@@ -104,7 +104,7 @@ const DataGridPreferencesRoot = forwardRef<
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange} size="small">
       <DialogTrigger>
         <Button
           ref={forwardedRef}
@@ -181,9 +181,13 @@ const DataGridPreferencesRoot = forwardRef<
 
         <DialogFooter className="aksel-data-grid__preferences-footer">
           <DialogCloseTrigger>
-            <Button variant="secondary">Avbryt</Button>
+            <Button size="small" variant="secondary">
+              Avbryt
+            </Button>
           </DialogCloseTrigger>
-          <Button onClick={handleSave}>Lagre</Button>
+          <Button size="small" onClick={handleSave}>
+            Lagre
+          </Button>
         </DialogFooter>
       </DialogPopup>
     </Dialog>
