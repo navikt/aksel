@@ -13,7 +13,7 @@ import { useI18n } from "../utils/i18n/i18n.hooks";
 
 export interface LookupProps
   extends
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    React.HTMLAttributes<HTMLSpanElement>,
     Pick<PopoverProps, "strategy"> {
   /**
    * Children, explanation popover to lookup word
@@ -38,6 +38,11 @@ export interface LookupProps
    * Callback for current open-state.
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Disables trigger interaction.
+   * @default false
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -54,7 +59,7 @@ export interface LookupProps
  * ```
  */
 
-export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
+export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
   (
     {
       word,
@@ -66,6 +71,10 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       open,
       defaultOpen = false,
       onOpenChange,
+      onKeyDown,
+      onKeyUp,
+      disabled = false,
+      tabIndex,
       ...rest
     },
     ref,
@@ -76,7 +85,7 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
       onChange: onOpenChange,
     });
 
-    const anchorRef = useRef<HTMLButtonElement>(null);
+    const anchorRef = useRef<HTMLSpanElement>(null);
     const mergedRef = useMergeRefs(anchorRef, ref);
     const contentRef = useRef<HTMLDivElement>(null);
     const triggerId = useId(idProp);
@@ -86,19 +95,50 @@ export const Lookup = forwardRef<HTMLButtonElement, LookupProps>(
 
     return (
       <>
-        <button
+        <span
           {...rest}
-          type="button"
+          role="button"
           id={triggerId}
           ref={mergedRef}
           className={cl("aksel-lookup-trigger", className)}
-          onClick={composeEventHandlers(onClick, () => _setOpen((old) => !old))}
+          onClick={
+            disabled
+              ? undefined
+              : composeEventHandlers(onClick, () => _setOpen((old) => !old))
+          }
           aria-haspopup="dialog"
           aria-expanded={_open}
           aria-controls={_open ? popoverContentId : undefined}
+          aria-disabled={disabled ? true : undefined}
+          tabIndex={disabled ? -1 : (tabIndex ?? 0)}
+          onKeyDown={
+            disabled
+              ? undefined
+              : composeEventHandlers(onKeyDown, (e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                    return;
+                  }
+
+                  if (e.key === "Enter" && !e.repeat) {
+                    e.preventDefault();
+                    _setOpen((old) => !old);
+                  }
+                })
+          }
+          onKeyUp={
+            disabled
+              ? undefined
+              : composeEventHandlers(onKeyUp, (e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                    _setOpen((old) => !old);
+                  }
+                })
+          }
         >
           {word}
-        </button>
+        </span>
         {_open && (
           <FocusGuards>
             <FocusBoundary
