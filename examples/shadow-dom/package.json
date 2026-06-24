@@ -12,8 +12,8 @@
   "dependencies": {
     "@navikt/ds-css": "file:./../../@navikt/core/css",
     "@navikt/ds-react": "file:./../../@navikt/core/react",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.13.1
+
+### @navikt/ds-react
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
 ## 8.13.0
 
 ### @navikt/ds-react
