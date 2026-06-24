@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
+import { resolveDataGridSettings } from "../../data-grid-preferences/helpers/data-grid-settings";
 import { useControllableState } from "../../utils/hooks";
-import type { DataGridSettings } from "../root/DataGrid.types";
+import { type DataGridSettings } from "../root/DataGrid.types";
 
 type UseDataGridSettingsArgs = {
   settings?: DataGridSettings;
@@ -21,24 +22,8 @@ function useDataGridSettings(args: UseDataGridSettingsArgs): {
   });
 
   const resolvedSettings = useMemo(
-    () => ({
-      rowDensity: settings?.rowDensity ?? "standard",
-      zebraStripes: settings?.zebraStripes ?? false,
-      truncateContent: settings?.truncateContent ?? true,
-      stickyColumns: settings?.stickyColumns ?? {},
-      textSize: settings?.textSize ?? "medium",
-      columnDisplay: settings?.columnDisplay,
-      columnDividers: settings?.columnDividers ?? true,
-    }),
-    [
-      settings?.rowDensity,
-      settings?.zebraStripes,
-      settings?.truncateContent,
-      settings?.stickyColumns,
-      settings?.textSize,
-      settings?.columnDisplay,
-      settings?.columnDividers,
-    ],
+    () => resolveDataGridSettings(settings),
+    [settings],
   );
 
   const updateSettings = useCallback(

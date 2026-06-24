@@ -18,6 +18,7 @@ import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
+import { resolveDataGridSettings } from "../helpers/data-grid-settings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
 import { DataGridPreferencesStickyColumnSettings } from "../sticky-column-settings/DataGridPreferencesStickyColumnSettings";
@@ -54,6 +55,8 @@ const DataGridPreferencesRoot = forwardRef<
   const { tableSettings, updateTableSettings, columnDefinitions } = context;
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DataGridSettings>({});
+
+  const resolvedDraft = resolveDataGridSettings(draft);
 
   function handleOpenChange(nextOpen: boolean) {
     if (nextOpen) {
@@ -117,7 +120,7 @@ const DataGridPreferencesRoot = forwardRef<
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
               <DataGridPreferencesRowDensitySettings
-                value={draft.rowDensity}
+                value={resolvedDraft.rowDensity}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
@@ -127,7 +130,7 @@ const DataGridPreferencesRoot = forwardRef<
               />
 
               <DataGridPreferencesTextSizeSettings
-                value={draft.textSize}
+                value={resolvedDraft.textSize}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
@@ -137,9 +140,9 @@ const DataGridPreferencesRoot = forwardRef<
               />
               <DataGridPreferencesRowPropertiesSettings
                 value={{
-                  truncateContent: draft.truncateContent ?? false,
-                  zebraStripes: draft.zebraStripes ?? false,
-                  columnDividers: draft.columnDividers ?? true,
+                  truncateContent: resolvedDraft.truncateContent,
+                  zebraStripes: resolvedDraft.zebraStripes,
+                  columnDividers: resolvedDraft.columnDividers,
                 }}
                 onChange={(value) => {
                   setDraft((prev) => ({
@@ -149,7 +152,7 @@ const DataGridPreferencesRoot = forwardRef<
                 }}
               />
               <DataGridPreferencesStickyColumnSettings
-                value={draft.stickyColumns}
+                value={resolvedDraft.stickyColumns}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,

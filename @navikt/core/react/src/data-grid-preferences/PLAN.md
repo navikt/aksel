@@ -19,14 +19,15 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 ### 2. Fix `truncateContent` default mismatch (bug)
 
-- [ ] Panel shows `truncateContent ?? false`, but grid default is `true` (when `layout !== "auto"`). Opening the panel shows it unchecked while the table actually truncates → out of sync.
-- [ ] Resolve from the same canonical defaults the table uses, not raw `draft`.
+- [x] Panel showed `truncateContent ?? false`, but grid default is `true` (when `layout !== "auto"`). Opening the panel showed it unchecked while the table actually truncated → out of sync.
+- [x] Resolved by #3: panel now reads canonical defaults via `resolveDataGridSettings`, not raw `draft`.
 
 ### 3. Centralize setting defaults (single source of truth)
 
-- [ ] Remove scattered `?? false` / `?? true` magic in `DataGridPreferencesRoot` JSX.
-- [ ] Reuse canonical defaults from `src/data-grid/hooks/useDataGridSettings.ts` so panel + table can't drift.
-- [ ] Ties into #2 (same root cause).
+- [x] Removed scattered `?? false` / `?? true` magic in `DataGridPreferencesRoot` JSX.
+- [x] Added `DataGridSettingsDefaults` + `resolveDataGridSettings()` (+ `ResolvedDataGridSettings` type) in `src/data-grid/root/DataGrid.types.ts`.
+- [x] `useDataGridSettings` now uses `resolveDataGridSettings(settings)`.
+- [x] Prefs panel uses a single `resolvedDraft = resolveDataGridSettings(draft)` for all setting values, so panel + table can't drift. Also pre-selects defaults (e.g. rowDensity, textSize) in the UI.
 
 ### 4. Add tests
 
@@ -64,7 +65,7 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 ## Suggested order
 
-1. #1 i18n + #2/#3 defaults bug (related — do together)
+1. ~~#1 i18n + #2/#3 defaults bug (related — do together)~~ → #2/#3 done; #1 i18n still todo
 2. #4 tests
 3. #5, #6 (cleanup / UX)
 4. #7, #8 (nice-to-have)
