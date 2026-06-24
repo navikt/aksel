@@ -132,6 +132,46 @@ export const MultiSelect = () => {
   );
 };
 
+export const ManyItems: StoryFn<{ items: number }> = ({ items }) => {
+  const [render, setRender] = useState(true);
+
+  const manyOptions = useMemo(
+    () =>
+      Array.from(
+        { length: items },
+        (_, i) => `Item ${String(i + 1).padStart(4, "0")}`,
+      ),
+    [items],
+  );
+
+  return (
+    <VStack gap="space-16" align="start">
+      {render && (
+        <UNSAFE_Combobox
+          id="combobox-with-many-items"
+          label="Komboboks - mange alternativer"
+          options={manyOptions}
+          isMultiSelect
+        />
+      )}
+
+      <button onClick={() => setRender(!render)}>Toggle render</button>
+    </VStack>
+  );
+};
+ManyItems.args = {
+  items: 500,
+};
+ManyItems.argTypes = {
+  items: {
+    control: { type: "number", min: 0, step: 100 },
+  },
+};
+ManyItems.parameters = {
+  a11y: { disable: true },
+  docs: { disable: true },
+};
+
 export const MultiSelectWithComplexOptions = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([
     "HJE",

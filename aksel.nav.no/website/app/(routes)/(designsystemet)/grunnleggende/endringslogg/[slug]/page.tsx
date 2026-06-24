@@ -1,10 +1,7 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { PortableTextBlock } from "next-sanity";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import { BodyShort, Box, HGrid, HStack, Heading, Tag } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -12,12 +9,12 @@ import {
   ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
-import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { ChangelogForList } from "@/app/_ui/changelog-page/ChangelogForList";
+import { ChangelogHeader } from "@/app/_ui/changelog-page/ChangelogHeader";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
-import styles from "../_ui/Changelog.module.css";
-import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -37,7 +34,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: pageData?.endringsdato || undefined,
       images:
         urlForOpenGraphImage(pageData?.seo?.image) ||
-        urlForOpenGraphImage(pageData?.herobilde) ||
         "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
@@ -69,6 +65,10 @@ export default async function (props: Props) {
     notFound();
   }
 
+  if (!logs.primary.heading || !logs.primary.endringsdato) {
+    notFound();
+  }
+
   const toc: { id: string; title: string }[] = [];
   logs.primary.content?.forEach((block) => {
     if (block._type === "block" && block.style === "h2") {
@@ -79,44 +79,21 @@ export default async function (props: Props) {
     }
   });
 
-  const { fremhevet, endringstype, heading, endringsdato, herobilde, content } =
-    logs.primary;
+  const { endringstype, heading, endringsdato, content } = logs.primary;
+
+  const changelogFor =
+    logs.artikler?.filter((article) => !!article.slug && !!article.heading) ??
+    [];
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <div>
-        <BodyShort
-          size="medium"
-          textColor="subtle"
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-        >
-          {capitalizeText(endringstype || "")}
-        </BodyShort>
-        <Heading
-          size="xlarge"
-          level="1"
-          spacing
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-        >
-          {heading}
-        </Heading>
-        <HStack gap="space-16" marginBlock="space-0 space-28">
-          <BodyShort
-            size="small"
-            textColor="subtle"
-            data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-          >
-            {format(new Date(endringsdato || ""), "d. MMMM yyy", {
-              locale: nb,
-            })}
-          </BodyShort>
-          {fremhevet && (
-            <Tag size="xsmall" variant="strong" data-color="aksel-brand-pink">
-              Fremhevet
-            </Tag>
-          )}
-        </HStack>
-      </div>
+      <ChangelogHeader
+        heading={heading}
+        endringsdato={endringsdato}
+        type={capitalizeText(endringstype || "")}
+      >
+        <ChangelogForList changelogFor={changelogFor} />
+      </ChangelogHeader>
       <TableOfContents
         feedback={{
           name: "Endringslogg",
@@ -124,35 +101,12 @@ export default async function (props: Props) {
         }}
         toc={toc || []}
       />
-      <Box marginBlock="space-0 space-24">
-        {fremhevet && herobilde?.asset && (
-          <Image
-            className={styles.herobilde}
-            alt={herobilde.alt ? herobilde.alt : ""}
-            loading="lazy"
-            decoding="async"
-            src={urlForImage(herobilde)?.auto("format").url() || ""}
-            width={1200}
-            height={630}
-          />
-        )}
+      <Box marginBlock="space-48">
         <CustomPortableText
           value={content as PortableTextBlock[]}
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
+          data-color="brand-blue"
         />
       </Box>
-      <HGrid
-        marginBlock="space-28 space-0"
-        gap="space-48 space-24"
-        columns={{ xs: 1, md: 2 }}
-      >
-        {logs.previous && (
-          <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />
-        )}
-        {logs.next && (
-          <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
-        )}
-      </HGrid>
     </DesignsystemetPageLayout>
   );
 }

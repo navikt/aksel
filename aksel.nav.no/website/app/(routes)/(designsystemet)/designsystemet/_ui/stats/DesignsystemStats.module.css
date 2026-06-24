@@ -1,0 +1,9 @@
+.statsCard {
+  background-color: var(--ax-bg-raised);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  padding: var(--ax-space-24, 24px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

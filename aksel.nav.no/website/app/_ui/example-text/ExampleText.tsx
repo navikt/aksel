@@ -1,5 +1,5 @@
 import { FileTextIcon } from "@navikt/aksel-icons";
-import { BodyLong, CopyButton, Spacer, VStack } from "@navikt/ds-react";
+import { BodyLong, Box, CopyButton, Spacer, VStack } from "@navikt/ds-react";
 import {
   InfoCard,
   InfoCardContent,
@@ -18,11 +18,18 @@ function ExampleText(
   }
 
   return (
-    <InfoCard data-color="neutral" aria-label={title} as="section">
+    <InfoCard
+      data-color="neutral"
+      aria-label={title}
+      as="section"
+      data-sibling-margin="space-28"
+    >
       <InfoCardHeader icon={<FileTextIcon aria-hidden fontSize="1.5rem" />}>
         <InfoCardTitle as="div">{title}</InfoCardTitle>
         <Spacer />
-        <CopyButton size="small" copyText={text} />
+        <Box asChild marginBlock="space-4 space-0">
+          <CopyButton size="small" copyText={text} />
+        </Box>
       </InfoCardHeader>
       <InfoCardContent>
         <VStack gap="space-24">{formatText(text)}</VStack>

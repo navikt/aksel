@@ -1,5 +1,67 @@
 # @navikt/ds-react
 
+## 8.13.1
+
+### Patch Changes
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.13.1
+  - @navikt/aksel-icons@8.13.1
+
+## 8.13.0
+
+### Minor Changes
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+### Patch Changes
+
+- Table: ExpandableRows now works with React.Activity ([#4972](https://github.com/navikt/aksel/pull/4972))
+
+- Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+- Updated dependencies [[`f3b7857`](https://github.com/navikt/aksel/commit/f3b7857df4f4bb20b8117174eb981cff5e35159a)]:
+  - @navikt/aksel-icons@8.13.0
+  - @navikt/ds-tokens@8.13.0
+
+## 8.12.1
+
+### Patch Changes
+
+- Timeline: Fix bug where axis-labels could overflow-x ([#4959](https://github.com/navikt/aksel/pull/4959))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.12.1
+  - @navikt/aksel-icons@8.12.1
+
+## 8.12.0
+
+### Minor Changes
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+- DatePicker: Updated user-flow for ranged datepicker with inputs. Now changes from/to-date based on which input user opened DatePicker with. ([#4896](https://github.com/navikt/aksel/pull/4896))
+
+### Patch Changes
+
+- Textarea: Better internal type-guarding ([#4950](https://github.com/navikt/aksel/pull/4950))
+
+- Logging: Improved console warnings ([#4922](https://github.com/navikt/aksel/pull/4922))
+
+- useEventListener-hook: Inline-handlers are now stable ([#4923](https://github.com/navikt/aksel/pull/4923))
+
+- ToggleGroup: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- ActionMenu: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- Tabs: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.12.0
+  - @navikt/aksel-icons@8.12.0
+
 ## 8.11.1
 
 ### Patch Changes

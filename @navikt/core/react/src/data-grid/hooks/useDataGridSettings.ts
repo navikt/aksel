@@ -28,6 +28,7 @@ function useDataGridSettings(args: UseDataGridSettingsArgs): {
       stickyColumns: settings?.stickyColumns ?? {},
       textSize: settings?.textSize ?? "medium",
       columnDisplay: settings?.columnDisplay,
+      columnDividers: settings?.columnDividers ?? true,
     }),
     [
       settings?.rowDensity,
@@ -36,6 +37,7 @@ function useDataGridSettings(args: UseDataGridSettingsArgs): {
       settings?.stickyColumns,
       settings?.textSize,
       settings?.columnDisplay,
+      settings?.columnDividers,
     ],
   );
 

@@ -1,5 +1,71 @@
 # Changelog
 
+## 8.13.1
+
+### @navikt/ds-react
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+## 8.13.0
+
+### @navikt/ds-react
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+* Table: ExpandableRows now works with React.Activity ([#4972](https://github.com/navikt/aksel/pull/4972))
+
+* Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+### @navikt/ds-css
+
+- DataGrid: Added `columnDividers`-setting to DataGrid.Settings ([#4963](https://github.com/navikt/aksel/pull/4963))
+
+* Timeline: Update AxisLabel width calculation ([#4968](https://github.com/navikt/aksel/pull/4968))
+
+### @navikt/aksel-icons
+
+- Icons: New icons Armchair, FocusRoom, PhoneRoom and Sleep ([#4979](https://github.com/navikt/aksel/pull/4979))
+
+## 8.12.1
+
+### @navikt/ds-react
+
+- Timeline: Fix bug where axis-labels could overflow-x ([#4959](https://github.com/navikt/aksel/pull/4959))
+
+### @navikt/ds-css
+
+- DataGrid: Fixed sticky columns horizontal shadows ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+- DataGrid: Fixed zebra-stripes with sticky columns ([#4960](https://github.com/navikt/aksel/pull/4960))
+
+## 8.12.0
+
+### @navikt/ds-react
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+- DatePicker: Updated user-flow for ranged datepicker with inputs. Now changes from/to-date based on which input user opened DatePicker with. ([#4896](https://github.com/navikt/aksel/pull/4896))
+
+* Textarea: Better internal type-guarding ([#4950](https://github.com/navikt/aksel/pull/4950))
+
+* Logging: Improved console warnings ([#4922](https://github.com/navikt/aksel/pull/4922))
+
+* useEventListener-hook: Inline-handlers are now stable ([#4923](https://github.com/navikt/aksel/pull/4923))
+
+* ToggleGroup: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+* ActionMenu: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+* Tabs: No longer uses `descendant`-API internally ([#4931](https://github.com/navikt/aksel/pull/4931))
+
+### @navikt/ds-css
+
+- 🎨 ActionMenu: New medium content size and a prop to add indent to items without left marker to align items ([#4911](https://github.com/navikt/aksel/pull/4911))
+
+### @navikt/aksel-stylelint
+
+- Stylelint: Fixed bug in aksel-no-deprecated-classes rule skipping some classes ([#4920](https://github.com/navikt/aksel/pull/4920))
+
 ## 8.11.1
 
 ### @navikt/ds-react

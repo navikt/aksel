@@ -30,7 +30,7 @@ jobs:
     if: ${{ needs.check-title.outputs.should-run == 'true' }}
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           ref: main
@@ -58,7 +58,7 @@ jobs:
     if: ${{ needs.check-title.outputs.should-run == 'true' }}
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -84,7 +84,7 @@ jobs:
     needs: [analyze-trunk, analyze-local]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 

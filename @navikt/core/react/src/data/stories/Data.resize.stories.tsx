@@ -271,11 +271,12 @@ export const ResizeAuto: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await new Promise((r) => setTimeout(r, 200)); // Wait for font to load, so that correct widths are calculated.
     const button = canvas.getByRole("button", { name: "Show table" });
-    button.click();
-    await new Promise((r) => setTimeout(r, 100)); // Make sure auto resize has happened
+    await canvasElement.ownerDocument.fonts.ready;
+    await button.click();
+
     const headers = canvas.getAllByRole("columnheader");
+
     expect(headers.length).toBe(7);
     expect(headers[0]).toHaveStyle({ width: "126px" });
     expect(headers[1]).toHaveStyle({ width: "80px" });

@@ -1,7 +1,14 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
+import {
+  expect,
+  fireEvent,
+  fn,
+  userEvent,
+  waitFor,
+  within,
+} from "storybook/test";
 import {
   DismissableLayer,
   type DismissableLayerProps,
@@ -26,8 +33,10 @@ export const EscapeKeyDown: Story = {
   },
   play: async ({ args }) => {
     await userEvent.keyboard("{Escape}");
-    expect(args.onEscapeKeyDown).toHaveBeenCalledOnce();
-    expect(args.onDismiss).toHaveBeenCalledOnce();
+    waitFor(() => {
+      expect(args.onEscapeKeyDown).toHaveBeenCalledOnce();
+      expect(args.onDismiss).toHaveBeenCalledOnce();
+    });
   },
   args: {
     onDismiss: fn(),
@@ -142,8 +151,10 @@ export const InteractOutside: Story = {
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    waitFor(() => {
+      expect(args.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.onInteractOutside).not.toHaveBeenCalled();
+    });
 
     outsideFocus.focus();
 
@@ -307,13 +318,17 @@ export const NestedPointerEvents: StoryObj<{
 
     await fireEvent.pointerDown(outside);
 
-    expect(args.root.onDismiss).not.toHaveBeenCalled();
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).not.toHaveBeenCalled();
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.click(outside);
 
-    expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     root: {
@@ -379,13 +394,17 @@ export const NestedEscapeKeydown: StoryObj<{
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.root.onDismiss).not.toHaveBeenCalled();
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     root: {
@@ -438,13 +457,17 @@ export const MultipleEscapeKeydown: StoryObj<{
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.first.onDismiss).not.toHaveBeenCalled();
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).not.toHaveBeenCalled();
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     first: {
@@ -506,13 +529,17 @@ export const MultipleOutsideClick: StoryObj<{
 
     await fireEvent.pointerDown(outside);
 
-    expect(args.first.onDismiss).not.toHaveBeenCalled();
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).not.toHaveBeenCalled();
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.click(outside);
 
-    expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     first: {

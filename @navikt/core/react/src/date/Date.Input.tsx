@@ -16,7 +16,7 @@ interface DateInputContextProps {
   /**
    * Callback for onOpen toggle
    */
-  onOpen: () => void;
+  onOpen: (caller?: "from" | "to") => void;
   /**
    * Aria-connected ID
    */
@@ -25,6 +25,10 @@ interface DateInputContextProps {
    * Flag for enabled-check
    */
   defined: boolean;
+  /**
+   * Caller for range datepicker, to differentiate between "from" and "to" input
+   */
+  caller: "from" | "to" | null;
 }
 
 export const {
@@ -59,6 +63,10 @@ export interface DateInputProps
    * @private
    */
   setAnchorRef?: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>;
+  /**
+   * @private Used to differentiate between "from" and "to" input in range datepicker
+   */
+  callerName?: "from" | "to";
 }
 
 const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
@@ -70,6 +78,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
     variant = "datepicker",
     setAnchorRef,
     "data-color": dataColor,
+    callerName,
     ...rest
   } = props;
 
@@ -157,7 +166,9 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         <Button
           disabled={inputProps.disabled || readOnly}
           tabIndex={readOnly ? -1 : undefined}
-          onClick={context.onOpen}
+          onClick={() => {
+            context.onOpen(callerName);
+          }}
           type="button"
           className="aksel-date__field-button"
           ref={setAnchorRef}

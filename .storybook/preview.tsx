@@ -1,3 +1,4 @@
+import addonPerformancePanel from "@github-ui/storybook-addon-performance-panel";
 import addonA11y from "@storybook/addon-a11y";
 import addonDocs from "@storybook/addon-docs";
 import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
@@ -57,8 +58,17 @@ const TypoDecorator = ({
   return <>{children}</>;
 };
 
+const addons = [addonA11y(), addonThemes(), addonDocs(), addonVitest()];
+
+/**
+ * Fixes flaky interaction tests
+ */
+if (process.env.NODE_ENV === "development") {
+  addons.push(addonPerformancePanel());
+}
+
 export default definePreview({
-  addons: [addonA11y(), addonThemes(), addonDocs(), addonVitest()],
+  addons,
   parameters: {
     options: {
       storySort: {

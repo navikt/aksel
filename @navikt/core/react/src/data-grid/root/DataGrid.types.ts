@@ -10,6 +10,11 @@ type DataGridSettings = {
    */
   zebraStripes?: boolean;
   /**
+   * Adds vertical borders between columns.
+   * @default true
+   */
+  columnDividers?: boolean;
+  /**
    * Truncate content in cells and show ellipsis for overflowed text.
    *
    * **NB:** When using this together with `layout="auto"`,
