@@ -45,8 +45,9 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 ### 6. Reconsider `columnDividers` placement
 
-- [ ] Currently under "Radegenskaper" (row properties) though it's a column property; sits oddly next to "Sticky kolonner".
-- [ ] Decide: own group, or merge into a dedicated columns group. (UX decision needed.)
+- [x] Moved out of "Radegenskaper" (row properties) into its own `column-divider-settings` group with legend "Kolonner", placed next to "Sticky kolonner".
+- [x] "Radegenskaper" now only holds true row props (truncate, zebra).
+- Note: kept as a separate group rather than merging into the sticky component to avoid a file/component rename (no terminal/delete tool available). Could later merge dividers + sticky under one "Kolonner" group.
 
 ---
 
@@ -66,5 +67,5 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 1. ~~#1 i18n + #2/#3 defaults bug (related — do together)~~ → #2/#3 done; #1 i18n still todo
 2. #4 tests
-3. #5, #6 (cleanup / UX)
+3. ~~#5, #6 (cleanup / UX)~~ → #6 done; #5 still todo
 4. ~~#7, #8 (nice-to-have)~~ → done

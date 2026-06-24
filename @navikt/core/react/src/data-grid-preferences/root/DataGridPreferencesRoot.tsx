@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "../../dialog";
 import { cl } from "../../utils/helpers";
+import { DataGridPreferencesColumnDividerSettings } from "../column-divider-settings/DataGridPreferencesColumnDividerSettings";
 import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
@@ -148,12 +149,20 @@ const DataGridPreferencesRoot = forwardRef<
                 value={{
                   truncateContent: resolvedDraft.truncateContent,
                   zebraStripes: resolvedDraft.zebraStripes,
-                  columnDividers: resolvedDraft.columnDividers,
                 }}
                 onChange={(value) => {
                   setDraft((prev) => ({
                     ...prev,
                     ...value,
+                  }));
+                }}
+              />
+              <DataGridPreferencesColumnDividerSettings
+                value={resolvedDraft.columnDividers}
+                onChange={(value) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    columnDividers: value,
                   }));
                 }}
               />

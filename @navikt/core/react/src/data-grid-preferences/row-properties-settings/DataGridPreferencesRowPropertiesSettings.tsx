@@ -4,7 +4,6 @@ import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 type DataGridPreferencesRowProperties = {
   truncateContent: boolean;
   zebraStripes: boolean;
-  columnDividers: boolean;
 };
 
 type DataGridPreferencesRowPropertiesSettingsProps = {
@@ -19,7 +18,6 @@ function DataGridPreferencesRowPropertiesSettings({
   const checkboxValues = [
     ...(value.truncateContent ? ["truncateContent"] : []),
     ...(value.zebraStripes ? ["zebraStripes"] : []),
-    ...(value.columnDividers ? ["columnDividers"] : []),
   ];
 
   return (
@@ -31,7 +29,6 @@ function DataGridPreferencesRowPropertiesSettings({
         onChange({
           truncateContent: values.includes("truncateContent"),
           zebraStripes: values.includes("zebraStripes"),
-          columnDividers: values.includes("columnDividers"),
         });
       }}
     >
@@ -46,12 +43,6 @@ function DataGridPreferencesRowPropertiesSettings({
         description="Legger på en bakgrunnsfarge for annenhver rad"
       >
         Zebra-striper
-      </Checkbox>
-      <Checkbox
-        value="columnDividers"
-        description="Skiller kolonner fra hverandre med en strek"
-      >
-        Kolonnestrek
       </Checkbox>
     </CheckboxGroup>
   );
