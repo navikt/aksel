@@ -62,7 +62,7 @@ function DataGridPreferencesColumnSettings({
   return (
     <Fieldset legend="Vis kolonner">
       <Switch size="small" checked={isAllVisible} onChange={toggleAll}>
-        Velg alle
+        {`Velg alle (${visibleCount}/${columns.length})`}
       </Switch>
       <DragAndDrop
         className="aksel-data-grid__preferences-dnd"

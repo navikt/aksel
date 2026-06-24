@@ -13,7 +13,7 @@ function DataGridPreferencesRowDensitySettings({
 }: DataGridPreferencesRowDensitySettingsProps) {
   return (
     <Select
-      label="Velg radtetthet"
+      label="Radtetthet"
       size="small"
       onChange={(event) => {
         const newValue = event.target.value;

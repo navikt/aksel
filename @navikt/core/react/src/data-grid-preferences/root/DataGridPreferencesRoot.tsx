@@ -125,32 +125,6 @@ const DataGridPreferencesRoot = forwardRef<
         <DialogBody className="aksel-data-grid__preferences-body">
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
-              <DataGridPreferencesColumnLayoutSettings
-                value={{
-                  columnDividers: resolvedDraft.columnDividers,
-                  stickyColumns: resolvedDraft.stickyColumns,
-                }}
-                onChange={(value) => {
-                  setDraft((prev) => ({
-                    ...prev,
-                    columnDividers: value.columnDividers,
-                    stickyColumns: value.stickyColumns,
-                  }));
-                }}
-              />
-
-              <DataGridPreferencesRowPropertiesSettings
-                value={{
-                  truncateContent: resolvedDraft.truncateContent,
-                  zebraStripes: resolvedDraft.zebraStripes,
-                }}
-                onChange={(value) => {
-                  setDraft((prev) => ({
-                    ...prev,
-                    ...value,
-                  }));
-                }}
-              />
               <DataGridPreferencesRowDensitySettings
                 value={resolvedDraft.rowDensity}
                 onChange={(value) => {
@@ -166,6 +140,31 @@ const DataGridPreferencesRoot = forwardRef<
                   setDraft((prev) => ({
                     ...prev,
                     textSize: value,
+                  }));
+                }}
+              />
+              <DataGridPreferencesRowPropertiesSettings
+                value={{
+                  truncateContent: resolvedDraft.truncateContent,
+                  zebraStripes: resolvedDraft.zebraStripes,
+                }}
+                onChange={(value) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    ...value,
+                  }));
+                }}
+              />
+              <DataGridPreferencesColumnLayoutSettings
+                value={{
+                  columnDividers: resolvedDraft.columnDividers,
+                  stickyColumns: resolvedDraft.stickyColumns,
+                }}
+                onChange={(value) => {
+                  setDraft((prev) => ({
+                    ...prev,
+                    columnDividers: value.columnDividers,
+                    stickyColumns: value.stickyColumns,
                   }));
                 }}
               />
