@@ -3,7 +3,7 @@ import { cl } from "../../../helpers";
 
 export type ListboxOptionProps<T> = Omit<
   React.HTMLAttributes<HTMLDivElement>,
-  "role" | "tabIndex" | "onClick"
+  "role" | "tabIndex" | "onSelect"
 > & {
   /**
    * Unique ID used for tracking which option has virtual focus.
@@ -28,23 +28,23 @@ export type ListboxOptionProps<T> = Omit<
         /**
          * Callback when option is selected. Use a stable reference for better performance.
          */
-        onClick: (event: MouseEvent<HTMLDivElement>) => void;
+        onSelect: (event: MouseEvent<HTMLDivElement>) => void;
         /**
-         * Optional parameter to pass to the onClick callback.
+         * Optional parameter to pass to the onSelect callback.
          * Use a stable reference for better performance.
          */
-        onClickParam?: undefined;
+        onSelectParam?: undefined;
       }
     : {
         /**
          * Callback when option is selected. Use a stable reference for better performance.
          */
-        onClick: (event: MouseEvent<HTMLDivElement>, param: T) => void;
+        onSelect: (event: MouseEvent<HTMLDivElement>, param: T) => void;
         /**
-         * Optional parameter to pass to the onClick callback.
+         * Optional parameter to pass to the onSelect callback.
          * Use a stable reference for better performance.
          */
-        onClickParam: T;
+        onSelectParam: T;
       });
 
 function ListboxOptionComponent<T = undefined>({
@@ -52,9 +52,9 @@ function ListboxOptionComponent<T = undefined>({
   hasVirtualFocus,
   listboxId,
   children,
+  onSelect,
+  onSelectParam,
   className,
-  onClick,
-  onClickParam,
   ...rest
 }: ListboxOptionProps<T>) {
   //console.log(Date.now(), "Rendering option", id); // eslint-disable-line react-hooks/purity
@@ -63,12 +63,12 @@ function ListboxOptionComponent<T = undefined>({
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       aria-selected={false}
-      {...rest}
       onClick={
-        onClickParam === undefined
-          ? (onClick as (event: MouseEvent<HTMLDivElement>) => void)
-          : (event) => onClick(event, onClickParam)
+        onSelectParam === undefined
+          ? (onSelect as (event: MouseEvent<HTMLDivElement>) => void)
+          : (event) => onSelect(event, onSelectParam)
       }
+      {...rest}
       className={cl("aksel-listbox__option", className)}
       role="option"
       tabIndex={-1}

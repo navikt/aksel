@@ -81,8 +81,8 @@ const MyOption = React.memo(
       key={item.value}
       id={item.value}
       listboxId={listboxId}
-      onClick={onSelect}
-      onClickParam={item}
+      onSelect={onSelect}
+      onSelectParam={item}
       aria-selected={isSelected}
       hasVirtualFocus={hasVirtualFocus}
       style={style}
@@ -137,6 +137,53 @@ const RenderItems = ({
   );
 
 export const Default = () => {
+  const [filterString, setFilterString] = useState("");
+  const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
+    null,
+  );
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
+
+  const filteredItems = filterString
+    ? filterItems(groupedItems, filterString)
+    : groupedItems;
+
+  const onSelect = useCallback((_e, item: MyItem) => {
+    setSelectedItem(item.value);
+    console.log(item);
+  }, []);
+
+  return (
+    <>
+      <div>Selected: {selectedItem}</div>
+
+      <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+        <Listbox.InputSlot listboxId={listboxId}>
+          <Search
+            label="Velg noe"
+            hideLabel={false}
+            variant="simple"
+            value={filterString}
+            onChange={setFilterString}
+          />
+        </Listbox.InputSlot>
+
+        <Listbox.Options
+          setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
+        >
+          <RenderItems
+            items={filteredItems}
+            selectedItems={selectedItem ? [selectedItem] : []}
+            filterString={filterString}
+            virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+            onSelect={onSelect}
+          />
+        </Listbox.Options>
+      </Listbox>
+    </>
+  );
+};
+
+export const WithFloating = () => {
   const [filterString, setFilterString] = useState("");
   const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
     null,
@@ -258,14 +305,14 @@ export const WithPopover = () => {
               selectedItems={selectedItems}
               filterString={filterString}
               virtuallyFocusedOptionId={virtuallyFocusedOptionId}
-              onSelect={(_e, item) => {
+              onSelect={useCallback((_e, item) => {
                 setSelectedItems((prev) =>
                   prev.includes(item.value)
                     ? prev.filter((v) => v !== item.value)
                     : [...prev, item.value],
                 );
                 //setOpen(false);
-              }}
+              }, [])}
             />
           </Listbox.Options>
         </Popover.Content>

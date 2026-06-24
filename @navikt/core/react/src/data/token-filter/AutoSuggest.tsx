@@ -180,8 +180,8 @@ const AutoSuggestOption = React.memo(
   }: AutoSuggestOptionProps) => (
     <Listbox.Option
       id={item.value}
-      onClick={onSelect}
-      onClickParam={item}
+      onSelect={onSelect}
+      onSelectParam={item}
       hasVirtualFocus={hasVirtualFocus}
       listboxId={listboxId}
     >
