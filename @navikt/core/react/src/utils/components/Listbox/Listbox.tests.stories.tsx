@@ -32,9 +32,9 @@ const items = [
 ];
 
 function ListboxStory({
-  onClick = () => {},
+  onSelect = () => {},
 }: {
-  onClick?: ListboxOptionProps["onClick"];
+  onSelect?: ListboxOptionProps<undefined>["onSelect"];
 }) {
   const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
 
@@ -50,7 +50,8 @@ function ListboxStory({
                 <Listbox.Option
                   key={item.value}
                   id={item.value}
-                  onClick={onClick}
+                  listboxId="test"
+                  onSelect={onSelect}
                   hasVirtualFocus={virtuallyFocusedOptionId === item.value}
                 >
                   {item.label}
@@ -61,7 +62,8 @@ function ListboxStory({
             <Listbox.Option
               key={itemOrGroup.value}
               id={itemOrGroup.value}
-              onClick={onClick}
+              listboxId="test"
+              onSelect={onSelect}
               hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
             >
               {itemOrGroup.label}
@@ -147,7 +149,7 @@ export const EnterKey: StoryObj<{
 }> = {
   render: ({ onClick }) => (
     <ListboxStory
-      onClick={(event) => onClick(event.currentTarget.dataset.id)}
+      onSelect={(event) => onClick(event.currentTarget.dataset.id)}
     />
   ),
   play: async ({ canvasElement, args }) => {
