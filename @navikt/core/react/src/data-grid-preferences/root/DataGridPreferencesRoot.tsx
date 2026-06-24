@@ -18,7 +18,10 @@ import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
-import { resolveDataGridSettings } from "../helpers/data-grid-settings";
+import {
+  diffDataGridSettings,
+  resolveDataGridSettings,
+} from "../helpers/data-grid-settings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
 import { DataGridPreferencesStickyColumnSettings } from "../sticky-column-settings/DataGridPreferencesStickyColumnSettings";
@@ -66,7 +69,10 @@ const DataGridPreferencesRoot = forwardRef<
   }
 
   function handleSave() {
-    updateTableSettings?.(draft);
+    const changes = diffDataGridSettings(tableSettings ?? {}, draft);
+    if (Object.keys(changes).length > 0) {
+      updateTableSettings?.(changes);
+    }
     setOpen(false);
   }
 

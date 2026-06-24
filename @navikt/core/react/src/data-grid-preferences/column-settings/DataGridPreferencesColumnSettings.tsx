@@ -1,12 +1,13 @@
 import React, { useCallback, useMemo } from "react";
+import type { DataGridSettings } from "../../data-grid/root/DataGrid.types";
 import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
 import { Fieldset } from "../../form/fieldset";
 import { Switch } from "../../form/switch";
 
-type DataGridPreferencesColumnDisplay = {
-  id: string;
+type DataGridPreferencesColumnDisplay = NonNullable<
+  DataGridSettings["columnDisplay"]
+>[number] & {
   label: string;
-  visible: boolean;
 };
 
 type DataGridPreferencesColumnSettingsProps = {

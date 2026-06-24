@@ -54,12 +54,11 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 
 ### 7. Reduce type duplication
 
-- [ ] `DataGridPreferencesColumnDisplay = { id, label, visible }` vs `DataGridSettings["columnDisplay"][number]` (`{ id, visible }`).
-- [ ] Derive the label-extended type from the source type to avoid drift.
+- [x] `DataGridPreferencesColumnDisplay` now derived from the source: `NonNullable<DataGridSettings["columnDisplay"]>[number] & { label: string }`. No drift if source shape changes.
 
 ### 8. Diff-only settings update
 
-- [ ] `updateTableSettings?.(draft)` sends the whole draft incl. untouched keys (harmless, merges). Optionally send only changed keys.
+- [x] Added `diffDataGridSettings(base, next)` helper (`helpers/data-grid-settings.ts`). `handleSave` now emits only changed keys, and skips `updateTableSettings` entirely when nothing changed.
 
 ---
 
@@ -68,4 +67,4 @@ Reference: `src/utils/i18n/i18n.hooks.ts`, usage in `src/process/Process.tsx`.
 1. ~~#1 i18n + #2/#3 defaults bug (related — do together)~~ → #2/#3 done; #1 i18n still todo
 2. #4 tests
 3. #5, #6 (cleanup / UX)
-4. #7, #8 (nice-to-have)
+4. ~~#7, #8 (nice-to-have)~~ → done
