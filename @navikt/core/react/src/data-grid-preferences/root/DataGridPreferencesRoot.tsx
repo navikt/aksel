@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { DataGridSettings } from "../../data-grid/root/DataGrid.types";
@@ -59,22 +59,25 @@ const DataGridPreferencesRoot = forwardRef<
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DataGridSettings>({});
 
-  const resolvedDraft = resolveDataGridSettings(draft);
+  const resolvedDraft = useMemo(() => resolveDataGridSettings(draft), [draft]);
 
-  function handleOpenChange(nextOpen: boolean) {
-    if (nextOpen) {
-      setDraft(tableSettings ?? {});
-    }
-    setOpen(nextOpen);
-  }
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      if (nextOpen) {
+        setDraft(tableSettings ?? {});
+      }
+      setOpen(nextOpen);
+    },
+    [tableSettings],
+  );
 
-  function handleSave() {
+  const handleSave = useCallback(() => {
     const changes = diffDataGridSettings(tableSettings ?? {}, draft);
     if (Object.keys(changes).length > 0) {
       updateTableSettings?.(changes);
     }
     setOpen(false);
-  }
+  }, [tableSettings, draft, updateTableSettings]);
 
   const columnDefinitionMap = useMemo(
     () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
@@ -96,12 +99,15 @@ const DataGridPreferencesRoot = forwardRef<
     });
   }, [columnDefinitionMap, draft.columnDisplay, columnDefinitions]);
 
-  function handleColumnsChange(columns: DataGridPreferencesColumnDisplay[]) {
-    setDraft((prev) => ({
-      ...prev,
-      columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
-    }));
-  }
+  const handleColumnsChange = useCallback(
+    (columns: DataGridPreferencesColumnDisplay[]) => {
+      setDraft((prev) => ({
+        ...prev,
+        columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
+      }));
+    },
+    [],
+  );
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange} size="small">

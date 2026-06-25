@@ -18,29 +18,12 @@ export default meta;
 
 type Story = StoryObj<typeof DataGridPreferences>;
 
-export const TestDraftState: Story = {
-  render: () => {
-    return (
-      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
-        <DataGridPreferences aria-label="Instillinger" />
-      </DataGrid>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = await canvas.getByRole("button", {
-      name: "Instillinger",
-    });
-    await userEvent.click(button);
-  },
-};
-
 /**
  * Saving emits only the changed settings (diff) through `onSettingsChange`,
  * and the dialog closes afterwards.
  */
 export const TestSaveAppliesChanges: Story = {
-  render: () => <PreferencesHarness />,
+  render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
     const canvas = within(canvasElement);
@@ -71,7 +54,7 @@ export const TestSaveAppliesChanges: Story = {
  * controls to the saved table settings.
  */
 export const TestCancelDiscardsChanges: Story = {
-  render: () => <PreferencesHarness />,
+  render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
     const canvas = within(canvasElement);
@@ -97,7 +80,7 @@ export const TestCancelDiscardsChanges: Story = {
 
 /** Saving without any changes should not invoke `onSettingsChange`. */
 export const TestNoChangeNoCallback: Story = {
-  render: () => <PreferencesHarness />,
+  render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
     const canvas = within(canvasElement);
@@ -111,7 +94,7 @@ export const TestNoChangeNoCallback: Story = {
 
 /** The controls reflect the resolved default settings when first opened. */
 export const TestDefaultsReflected: Story = {
-  render: () => <PreferencesHarness />,
+  render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const dialog = await openPreferences(canvas);
@@ -132,7 +115,7 @@ export const TestDefaultsReflected: Story = {
 
 /** Toggling a column updates the visible count and emits `columnDisplay`. */
 export const TestColumnVisibility: Story = {
-  render: () => <PreferencesHarness />,
+  render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
     const canvas = within(canvasElement);
@@ -219,7 +202,7 @@ const settingsSpy = fn();
  * Renders the preferences inside a `Provider` whose portal target lives within
  * the story canvas, so the dialog content is queryable via `within(canvasElement)`.
  */
-function PreferencesHarness() {
+function PreferencesDemo() {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   return (
