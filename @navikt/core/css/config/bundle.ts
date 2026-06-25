@@ -45,7 +45,7 @@ async function bundle() {
       minify: false,
       include:
         Features.Nesting | Features.MediaRangeSyntax | Features.HexAlphaColors,
-
+      exclude: Features.LightDark,
       drafts: {
         customMedia: false,
       },
@@ -64,19 +64,7 @@ async function bundle() {
       },
     });
 
-    let codeString = code.toString();
-
-    /**
-     * LightningCSS adds these tokens to the bundle that we want removed:
-     * --lightningcss-light: initial;
-     * --lightningcss-dark: ;
-     */
-    codeString = codeString
-      .split("\n")
-      .filter((line) => !line.includes("--lightningcss-"))
-      .join("\n");
-
-    return codeString;
+    return code.toString();
   }
 
   /**
