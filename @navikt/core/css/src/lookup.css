@@ -1,8 +1,5 @@
 .aksel-lookup-trigger {
-  all: unset;
-  appearance: none;
   cursor: pointer;
-  color: inherit;
   text-decoration: underline dotted;
   text-underline-offset: 10%;
   text-decoration-thickness: 10%;
@@ -31,6 +28,12 @@
 .aksel-lookup__content {
   position: relative;
   max-width: min(65ch, calc(100vw - var(--ax-space-24)));
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--ax-radius-4);
+  }
 }
 
 .aksel-lookup__title {
