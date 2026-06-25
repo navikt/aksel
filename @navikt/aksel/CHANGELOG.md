@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 8.13.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@8.13.1
+  - @navikt/ds-tokens@8.13.1
+
 ## 8.13.0
 
 ### Patch Changes

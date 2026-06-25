@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "8.13.0",
+  "version": "8.13.1",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -83,7 +83,7 @@
     "js-yaml": "^4.1.1",
     "lodash": "4.18.1",
     "prettier": "3.8.3",
-    "react": "19.2.6",
+    "react": "19.2.7",
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.16",
     "tsx": "^4.20.6",

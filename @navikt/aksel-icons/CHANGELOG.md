@@ -1,5 +1,7 @@
 # @navikt/aksel-icons
 
+## 8.13.1
+
 ## 8.13.0
 
 ### Minor Changes

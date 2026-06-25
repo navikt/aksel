@@ -23,13 +23,14 @@ type RouteConfig<T extends RouteItemBase> = {
 function createRoute<T extends RouteItemBase>(config: RouteConfig<T>) {
   return {
     markdown: async () => {
-      const { data } = await sanityMarkdownFetch({ query: config.query });
+      const result = await sanityMarkdownFetch({ query: config.query });
+      const data = result.data as T[];
 
       if (!data || data.length === 0) {
         throw new Error("No data returned from Sanity");
       }
 
-      const sortedData = (data as T[]).sort((a, b) => {
+      const sortedData = data.sort((a, b) => {
         const sidebarSort = (a.sidebarindex ?? 0) - (b.sidebarindex ?? 0);
         if (sidebarSort !== 0) {
           return sidebarSort;

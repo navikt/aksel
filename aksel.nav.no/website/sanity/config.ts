@@ -51,6 +51,7 @@ export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 export const komponentKategorier = [
   { title: "Primitives", value: "primitives" },
   { title: "Komponenter", value: "core" },
+  { title: "Dekoratøren", value: "dekoratoren" },
   { title: "Avviklet", value: "legacy" },
 ] as const;
 

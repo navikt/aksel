@@ -4,7 +4,14 @@ import type { McpResource } from "../types.js";
 const URI = "aksel-tokens://catalog";
 const MIME_TYPE = "application/json";
 
-const tokenSummary = tokens.map((token) => ({
+type TokenSummary = {
+  name: string;
+  comment?: string;
+  category: string;
+  type: string;
+};
+
+const tokenSummary: TokenSummary[] = tokens.map((token) => ({
   name: token.name,
   comment: token.comment,
   category: token.category,
@@ -30,4 +37,5 @@ const tokensCatalogResource: McpResource = {
   },
 };
 
-export { tokensCatalogResource, tokens };
+export { tokensCatalogResource, tokens, tokenSummary };
+export type { TokenSummary };
