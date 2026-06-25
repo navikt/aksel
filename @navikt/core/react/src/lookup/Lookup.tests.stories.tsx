@@ -81,21 +81,6 @@ export const KeyboardActivationMatchesButton: Story = {
   },
 };
 
-export const DisabledDoesNotOpen: Story = {
-  render: () => <Lookup {...defaultProps} disabled />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const page = within(document.body);
-
-    const trigger = canvas.getByRole("button", { name: "Lookup" });
-    expect(trigger).toHaveAttribute("aria-disabled", "true");
-    expect(trigger).toHaveAttribute("tabindex", "-1");
-
-    await userEvent.click(trigger);
-    expect(page.queryByRole("dialog")).not.toBeInTheDocument();
-  },
-};
-
 export const HideOnEscape: Story = {
   render: () => <Lookup {...defaultProps} />,
   play: async ({ canvasElement }) => {

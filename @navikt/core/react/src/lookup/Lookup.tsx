@@ -38,11 +38,6 @@ export interface LookupProps
    * Callback for current open-state.
    */
   onOpenChange?: (open: boolean) => void;
-  /**
-   * Disables trigger interaction.
-   * @default false
-   */
-  disabled?: boolean;
 }
 
 /**
@@ -73,7 +68,6 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
       onOpenChange,
       onKeyDown,
       onKeyUp,
-      disabled = false,
       tabIndex,
       ...rest
     },
@@ -102,41 +96,23 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
           id={triggerId}
           ref={mergedRef}
           className={cl("aksel-lookup-trigger", className)}
-          onClick={
-            disabled
-              ? undefined
-              : composeEventHandlers(onClick, () => _setOpen((old) => !old))
-          }
+          onClick={composeEventHandlers(onClick, () => _setOpen((old) => !old))}
           aria-haspopup="dialog"
           aria-expanded={_open}
           aria-controls={_open ? popoverContentId : undefined}
-          aria-disabled={disabled ? true : undefined}
-          tabIndex={disabled ? -1 : (tabIndex ?? 0)}
-          onKeyDown={
-            disabled
-              ? undefined
-              : composeEventHandlers(onKeyDown, (e) => {
-                  if (e.key === " ") {
-                    e.preventDefault();
-                    return;
-                  }
-
-                  if (e.key === "Enter" && !e.repeat) {
-                    e.preventDefault();
-                    _setOpen((old) => !old);
-                  }
-                })
-          }
-          onKeyUp={
-            disabled
-              ? undefined
-              : composeEventHandlers(onKeyUp, (e) => {
-                  if (e.key === " ") {
-                    e.preventDefault();
-                    _setOpen((old) => !old);
-                  }
-                })
-          }
+          tabIndex={tabIndex ?? 0}
+          onKeyDown={composeEventHandlers(onKeyDown, (e) => {
+            if (e.key === "Enter" && !e.repeat) {
+              e.preventDefault();
+              _setOpen((old) => !old);
+            }
+          })}
+          onKeyUp={composeEventHandlers(onKeyUp, (e) => {
+            if (e.key === " ") {
+              e.preventDefault();
+              _setOpen((old) => !old);
+            }
+          })}
         >
           {word}
         </span>
