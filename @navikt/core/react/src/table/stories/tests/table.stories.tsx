@@ -230,39 +230,50 @@ const data = [
 export const ExpandableWithActivity = {
   render: () => {
     const [open, setOpen] = useState(true);
+    const [openExpandables, setOpenExpandables] = useState(false);
 
     return (
-      <VStack gap="space-48" padding="space-20">
-        <Button variant="primary" onClick={() => setOpen((prev) => !prev)}>
-          ToggleButton
-        </Button>
+      <React.StrictMode>
+        <VStack gap="space-48" padding="space-20">
+          <Button variant="primary" onClick={() => setOpen((prev) => !prev)}>
+            ToggleButton
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => setOpenExpandables((prev) => !prev)}
+          >
+            ToggleExpandables
+          </Button>
 
-        <React.Activity mode={open ? "visible" : "hidden"} name="table-test">
-          <Table zebraStripes>
-            <Table.Header>
-              <Table.Row>
-                {columns.map(({ key, name }) => (
-                  <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
-                ))}
-                <Table.HeaderCell />
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {data.map((row, index) => (
-                <Table.ExpandableRow
-                  content={`nested-row-${index}`}
-                  key={row.name}
-                  data-testid={`row-${index}`}
-                >
-                  {columns.map(({ key }) => (
-                    <Table.DataCell key={key}>{row[key]}</Table.DataCell>
+          <React.Activity mode={open ? "visible" : "hidden"} name="table-test">
+            <Table zebraStripes>
+              <Table.Header>
+                <Table.Row>
+                  {columns.map(({ key, name }) => (
+                    <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
                   ))}
-                </Table.ExpandableRow>
-              ))}
-            </Table.Body>
-          </Table>
-        </React.Activity>
-      </VStack>
+                  <Table.HeaderCell />
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {data.map((row, index) => (
+                  <Table.ExpandableRow
+                    content={`nested-row-${index}`}
+                    key={row.name}
+                    data-testid={`row-${index}`}
+                    open={openExpandables}
+                    onOpenChange={() => setOpenExpandables((prev) => !prev)}
+                  >
+                    {columns.map(({ key }) => (
+                      <Table.DataCell key={key}>{row[key]}</Table.DataCell>
+                    ))}
+                  </Table.ExpandableRow>
+                ))}
+              </Table.Body>
+            </Table>
+          </React.Activity>
+        </VStack>
+      </React.StrictMode>
     );
   },
 
@@ -270,6 +281,7 @@ export const ExpandableWithActivity = {
     const canvas = within(canvasElement);
 
     const button = canvas.getByText("ToggleButton");
+
     const parentRow = canvas.getByTestId("row-0");
     const nestedRow = canvas.getByText("nested-row-0");
 
@@ -288,6 +300,16 @@ export const ExpandableWithActivity = {
     await userEvent.click(button);
     await userEvent.click(button);
 
+    await waitFor(() => expect(nestedRow).toBeVisible());
+
+    const expandAllButton = canvas.getByText("ToggleExpandables");
+
+    await userEvent.click(expandAllButton);
+    await waitFor(() => expect(nestedRow).not.toBeVisible());
+    await userEvent.click(button);
+
+    await userEvent.click(expandAllButton);
+    await userEvent.click(button);
     await waitFor(() => expect(nestedRow).toBeVisible());
   },
 };
