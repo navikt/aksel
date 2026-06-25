@@ -110,13 +110,6 @@ function Example() {
                   </i>
                 </List.Item>
                 <List.Item>
-                  Automatisk lagring.{" "}
-                  <i>
-                    Vi lagrer svarene dine (xx timer) mens du fyller ut, så du
-                    kan ta pauser underveis.
-                  </i>
-                </List.Item>
-                <List.Item>
                   Antall steg og estimert tidsbruk.{" "}
                   <i>
                     Det er XX steg i søknaden, og du kan regne med å bruke ca.
@@ -245,5 +238,5 @@ export const Demo = {
 export const args = {
   index: 1,
   title: "Med InfoCard",
-  desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. InfoCard skal være informativ og kortfattet.",
+  desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. [InfoCard](https://aksel.nav.no/komponenter/core/infocard) skal være informativ og kortfattet.",
 };

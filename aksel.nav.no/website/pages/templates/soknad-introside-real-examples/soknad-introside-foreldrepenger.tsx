@@ -10,8 +10,6 @@ import {
   Heading,
   Link,
   Page,
-  Radio,
-  RadioGroup,
   VStack,
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -70,13 +68,6 @@ function Example() {
               </Link>
             </BodyLong>
           </GuidePanel>
-          <RadioGroup legend="Hvilket barn gjelder søknaden din?">
-            <Radio value="luke">Luke født 19 BBY</Radio>
-            <Radio value="leia">Leia født 19 BBY</Radio>
-            <Radio value="other" description="Det vil opprettes en ny sak">
-              Et annet barn
-            </Radio>
-          </RadioGroup>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
