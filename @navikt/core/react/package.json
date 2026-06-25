@@ -66,6 +66,16 @@
         "default": "./cjs/data-grid/index.js"
       }
     },
+    "./PREVIEW/Lookup": {
+      "import": {
+        "types": "./esm/lookup/index.d.ts",
+        "default": "./esm/lookup/index.js"
+      },
+      "require": {
+        "types": "./cjs/lookup/index.d.ts",
+        "default": "./cjs/lookup/index.js"
+      }
+    },
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
@@ -327,16 +337,6 @@
       "require": {
         "types": "./cjs/loader/index.d.ts",
         "default": "./cjs/loader/index.js"
-      }
-    },
-    "./Lookup": {
-      "import": {
-        "types": "./esm/lookup/index.d.ts",
-        "default": "./esm/lookup/index.js"
-      },
-      "require": {
-        "types": "./cjs/lookup/index.d.ts",
-        "default": "./cjs/lookup/index.js"
       }
     },
     "./Modal": {
