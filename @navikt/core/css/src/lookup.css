@@ -2,9 +2,8 @@
   cursor: pointer;
   text-decoration: underline dotted;
   text-underline-offset: 10%;
-  text-decoration-thickness: 10%;
+  text-decoration-thickness: round(0.1em, 1px);
   text-decoration-color: var(--ax-border-default);
-  background: var(--ax-bg-softA);
   border-radius: var(--ax-radius-4);
   padding-inline: var(--ax-space-1);
 
