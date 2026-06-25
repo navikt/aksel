@@ -42,6 +42,12 @@ const main = async () => {
 
     // Run 12 concurrent asset downloads
     assetConcurrency: 12,
+
+    /**
+     * Whether or not to verify that assets are valid and match their checksums
+     * Current production dataset has some SVGs that are not valid, so we need to disable this for now.
+     */
+    strictAssetVerification: false,
   });
 };
 

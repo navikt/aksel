@@ -99,13 +99,6 @@ function Example() {
                   </i>
                 </List.Item>
                 <List.Item>
-                  Automatisk lagring.{" "}
-                  <i>
-                    Vi lagrer svarene dine (xx timer) mens du fyller ut, så du
-                    kan ta pauser underveis.
-                  </i>
-                </List.Item>
-                <List.Item>
                   Antall steg og estimert tidsbruk.{" "}
                   <i>
                     Det er XX steg i søknaden, og du kan regne med å bruke ca.
@@ -255,5 +248,4 @@ export const Demo = {
 export const args = {
   index: 0,
   title: "Standard",
-  desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
 };
