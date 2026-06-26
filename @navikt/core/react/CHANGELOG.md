@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 8.14.0
+
+### Minor Changes
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
+### Patch Changes
+
+- Table: Fixed content not showing when using ExpandableRows with React.Activity + React.StrictMode ([#5018](https://github.com/navikt/aksel/pull/5018))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.14.0
+  - @navikt/aksel-icons@8.14.0
+
 ## 8.13.1
 
 ### Patch Changes
