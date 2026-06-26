@@ -13,7 +13,7 @@ interface ListboxInputSlotProps {
 const ListboxInputSlot = ({ children, listboxId }: ListboxInputSlotProps) => {
   return (
     <Slot
-      aria-activedescendant={`aksel-listbox-${listboxId}-active`}
+      aria-activedescendant={`aksel-listbox-${listboxId}-active`} // TODO: Check if it's a problem that this is set even when no option has virtual focus
       // @ts-expect-error - You are meant to use an <input>, but Slot doesn't know that.
       autoComplete="off"
       role="combobox"

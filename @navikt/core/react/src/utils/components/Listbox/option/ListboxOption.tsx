@@ -47,7 +47,7 @@ function ListboxOption({
       {...rest}
       className={cl("aksel-listbox__option", className)}
       role="option"
-      aria-selected={ariaSelected} // Added explictly to satisfy eslint rule
+      aria-selected={ariaSelected} // Added explicitly to satisfy eslint rule
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
