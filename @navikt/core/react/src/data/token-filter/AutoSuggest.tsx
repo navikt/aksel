@@ -40,7 +40,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
     };
 
     const handleSelectOption = useCallback(
-      (_e, option: AutoCompleteOption) => {
+      (option: AutoCompleteOption) => {
         const createdNewToken = onSelect(option);
 
         if (createdNewToken) {
@@ -99,10 +99,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 type AutoSuggestPopupProps = {
   listboxId: string;
   options: OptionGroup<AutoCompleteOption>[];
-  onSelect: (
-    event: React.MouseEvent<HTMLDivElement>,
-    option: AutoCompleteOption,
-  ) => void;
+  onSelect: (option: AutoCompleteOption) => void;
   focusedValue: string;
   setFocusedValue: (value: string) => void;
   onClose: () => void;
@@ -180,8 +177,7 @@ const AutoSuggestOption = React.memo(
   }: AutoSuggestOptionProps) => (
     <Listbox.Option
       id={item.value}
-      onSelect={onSelect}
-      onSelectParam={item}
+      onClick={() => onSelect(item)}
       hasVirtualFocus={hasVirtualFocus}
       listboxId={listboxId}
     >
