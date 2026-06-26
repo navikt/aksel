@@ -240,19 +240,22 @@ const MyMemoizedOption = React.memo(
     isSelected,
     hasVirtualFocus,
     onSelect,
-  }: MyMemoizedOptionProps) => (
-    <Listbox.Option
-      key={value}
-      id={value}
-      listboxId={listboxId}
-      onClick={useCallback(() => onSelect(value), [onSelect, value])}
-      aria-selected={isSelected}
-      hasVirtualFocus={hasVirtualFocus}
-    >
-      <HighlightText text={filterString}>{value}</HighlightText>
-      {isSelected && <Checkmark />}
-    </Listbox.Option>
-  ),
+  }: MyMemoizedOptionProps) => {
+    //console.log(Date.now(), "Rendering option", value); // eslint-disable-line react-hooks/purity
+    return (
+      <Listbox.Option
+        key={value}
+        id={value}
+        listboxId={listboxId}
+        onClick={useCallback(() => onSelect(value), [onSelect, value])}
+        aria-selected={isSelected}
+        hasVirtualFocus={hasVirtualFocus}
+      >
+        <HighlightText text={filterString}>{value}</HighlightText>
+        {isSelected && <Checkmark />}
+      </Listbox.Option>
+    );
+  },
 );
 
 export const WithFloating = () => {

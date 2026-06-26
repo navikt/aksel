@@ -40,8 +40,6 @@ function ListboxOption({
   className,
   ...rest
 }: ListboxOptionProps) {
-  //console.log(Date.now(), "Rendering option", id); // eslint-disable-line react-hooks/purity
-
   return (
     <div
       {...rest}
