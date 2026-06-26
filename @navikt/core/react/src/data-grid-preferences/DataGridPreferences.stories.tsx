@@ -19,11 +19,7 @@ type Story = StoryObj<typeof DataGridPreferences>;
 export const Default: Story = {
   render: () => {
     return (
-      <DataGrid
-        columns={userColumnDef}
-        data={generateUserData(5)}
-        defaultSettings={{ columnDisplay: [{ id: "id", visible: true }] }}
-      >
+      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
         {/* Div should be a separate "header" or "toolbar" component */}
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
           <DataGridPreferences defaultOpen />

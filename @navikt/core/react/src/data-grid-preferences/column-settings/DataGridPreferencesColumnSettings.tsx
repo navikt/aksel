@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from "react";
 import type { DataGridSettings } from "../../data-grid/root/DataGrid.types";
 import DragAndDrop from "../../data/drag-and-drop/root/DragAndDropRoot";
+import { Checkbox } from "../../form/checkbox";
 import { Fieldset } from "../../form/fieldset";
-import { Switch } from "../../form/switch";
 
 type DataGridPreferencesColumnDisplay = NonNullable<
   DataGridSettings["columnDisplay"]
@@ -69,9 +69,14 @@ function DataGridPreferencesColumnSettings({
 
   return (
     <Fieldset legend="Vis kolonner">
-      <Switch size="small" checked={isAllVisible} onChange={toggleAll}>
+      <Checkbox
+        size="small"
+        checked={isAllVisible}
+        indeterminate={visibleCount > 0 && !isAllVisible}
+        onChange={toggleAll}
+      >
         {`Velg alle (${visibleCount}/${columns.length})`}
-      </Switch>
+      </Checkbox>
       <DragAndDrop
         className="aksel-data-grid__preferences-dnd"
         items={dndItems}
@@ -81,14 +86,14 @@ function DataGridPreferencesColumnSettings({
           const alwaysVisible = visibleState === "always";
 
           return (
-            <Switch
+            <Checkbox
               size="small"
               checked={visibleState !== false}
               onChange={() => toggleColumn(item.id)}
               disabled={alwaysVisible}
             >
               {item.label}
-            </Switch>
+            </Checkbox>
           );
         }}
       />
