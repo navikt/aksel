@@ -180,6 +180,7 @@ const AutoSuggestOption = React.memo(
       onClick={() => onSelect(item)}
       hasVirtualFocus={hasVirtualFocus}
       listboxId={listboxId}
+      aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
     >
       <VStack gap="space-0">
         <BodyShort as="div" size="small">

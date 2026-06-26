@@ -23,6 +23,11 @@ export interface ListboxOptionProps extends Omit<
    * Triggered when option is selected.
    */
   onClick: React.MouseEventHandler<HTMLDivElement>;
+  /**
+   * TODO: There might be cases where we don't want to set this,
+   * but then we should probably use a different role.
+   */
+  "aria-selected": boolean;
   children: React.ReactNode;
 }
 
@@ -30,6 +35,7 @@ function ListboxOption({
   id,
   hasVirtualFocus,
   listboxId,
+  "aria-selected": ariaSelected,
   children,
   className,
   ...rest
@@ -38,10 +44,10 @@ function ListboxOption({
 
   return (
     <div
-      aria-selected={false}
       {...rest}
       className={cl("aksel-listbox__option", className)}
       role="option"
+      aria-selected={ariaSelected} // Added explictly to satisfy eslint rule
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
