@@ -185,6 +185,11 @@ const StyleMappings = {
       dependencies: [typoCss, "button.css"],
     },
     {
+      component: "Lookup",
+      main: "lookup.css",
+      dependencies: [typoCss, "button.css", "popover.css"],
+    },
+    {
       component: "Modal",
       main: "modal.css",
       dependencies: [typoCss, "button.css"],
