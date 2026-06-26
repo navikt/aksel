@@ -28,6 +28,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  description:
-    "Lookup kan brukes inne i løpende tekst for å forklare et enkelt ord eller begrep.",
+  desc: "Lookup kan brukes inne i løpende tekst for å forklare et enkelt ord eller begrep.",
 };
