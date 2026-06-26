@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <BodyLong>
       For at vi skal vurdere om du har rett til{" "}
-      <Lookup word="APP">
+      <Lookup word="AAP">
         <BodyShort>
           Som hovedregel kan du ha rett til AAP hvis alt dette gjelder deg:
         </BodyShort>
@@ -50,5 +50,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Popoveren som åpnes kan inneholde rikt innhold, for eksempel flere avsnitt, lenker eller en liste",
+  desc: "Popoveren som åpnes kan inneholde rikt innhold, for eksempel flere avsnitt, lenker eller en liste.",
 };
