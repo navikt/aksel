@@ -3,7 +3,7 @@ import { cl } from "../../../helpers";
 
 export interface ListboxOptionProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
-  "role" | "tabIndex" | "onSelect"
+  "role" | "tabIndex"
 > {
   /**
    * Unique ID used for tracking which option has virtual focus.
@@ -12,9 +12,6 @@ export interface ListboxOptionProps extends Omit<
   /**
    * Whether the option currently has virtual focus. Based on the value from
    * `setVirtuallyFocusedOptionId`, usually `virtuallyFocusedOptionId === id`.
-   *
-   * (This check has to be done outside the component to avoid unnecessary
-   * re-renders each time `virtuallyFocusedOptionId` changes.)
    */
   hasVirtualFocus: boolean;
   /**
@@ -23,7 +20,7 @@ export interface ListboxOptionProps extends Omit<
    */
   listboxId: string;
   /**
-   * Callback when option is selected. Use a stable reference for better performance.
+   * Triggered when option is selected.
    */
   onClick: React.MouseEventHandler<HTMLDivElement>;
   children: React.ReactNode;
