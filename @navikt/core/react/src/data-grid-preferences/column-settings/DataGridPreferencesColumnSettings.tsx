@@ -19,7 +19,7 @@ function DataGridPreferencesColumnSettings({
   columns,
   onColumnsChange,
 }: DataGridPreferencesColumnSettingsProps) {
-  const visibleCount = columns.filter((c) => c.visible).length;
+  const visibleCount = columns.filter((c) => !!c.visible).length;
   const isAllVisible = visibleCount === columns.length;
 
   const dndItems = useMemo(
@@ -47,16 +47,24 @@ function DataGridPreferencesColumnSettings({
 
   const toggleAll = useCallback(() => {
     const newVisible = !isAllVisible;
-    onColumnsChange(columns.map((c) => ({ ...c, visible: newVisible })));
+
+    onColumnsChange(
+      columns.map((c) => ({
+        ...c,
+        visible: c.visible === "always" ? "always" : newVisible,
+      })),
+    );
   }, [columns, isAllVisible, onColumnsChange]);
 
   const toggleColumn = useCallback(
     (id: string) => {
+      const col = colMap.get(id);
+      if (col?.visible === "always") return;
       onColumnsChange(
         columns.map((c) => (c.id === id ? { ...c, visible: !c.visible } : c)),
       );
     },
-    [columns, onColumnsChange],
+    [colMap, columns, onColumnsChange],
   );
 
   return (
@@ -68,15 +76,21 @@ function DataGridPreferencesColumnSettings({
         className="aksel-data-grid__preferences-dnd"
         items={dndItems}
         setItems={setDndItems}
-        renderItem={(item) => (
-          <Switch
-            size="small"
-            checked={colMap.get(item.id)?.visible ?? true}
-            onChange={() => toggleColumn(item.id)}
-          >
-            {item.label}
-          </Switch>
-        )}
+        renderItem={(item) => {
+          const visibleState = colMap.get(item.id)?.visible ?? true;
+          const alwaysVisible = visibleState === "always";
+
+          return (
+            <Switch
+              size="small"
+              checked={visibleState !== false}
+              onChange={() => toggleColumn(item.id)}
+              disabled={alwaysVisible}
+            >
+              {item.label}
+            </Switch>
+          );
+        }}
       />
     </Fieldset>
   );

@@ -19,10 +19,14 @@ type Story = StoryObj<typeof DataGridPreferences>;
 export const Default: Story = {
   render: () => {
     return (
-      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
+      <DataGrid
+        columns={userColumnDef}
+        data={generateUserData(5)}
+        defaultSettings={{ columnDisplay: [{ id: "id", visible: true }] }}
+      >
         {/* Div should be a separate "header" or "toolbar" component */}
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
-          <DataGridPreferences />
+          <DataGridPreferences defaultOpen />
         </div>
         <DataGrid.Table />
       </DataGrid>
@@ -37,11 +41,56 @@ export const HiddenFields: Story = {
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
           <DataGridPreferences
             fields={{ textSize: false, zebraStripes: false }}
+            defaultOpen
           />
         </div>
         <DataGrid.Table />
       </DataGrid>
     );
+  },
+};
+
+export const AlwaysVisibleColumn: Story = {
+  render: () => {
+    return (
+      <DataGrid
+        columns={userColumnDef}
+        data={generateUserData(5)}
+        defaultSettings={{
+          columnDisplay: userColumnDef.map((col) => ({
+            id: col.id,
+            visible: col.id === "id" ? "always" : true,
+          })),
+        }}
+      >
+        <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
+          <DataGridPreferences defaultOpen />
+        </div>
+        <DataGrid.Table />
+      </DataGrid>
+    );
+  },
+};
+
+export const Controlled: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <DataGrid
+        columns={userColumnDef}
+        data={generateUserData(5)}
+        defaultSettings={{ zebraStripes: true }}
+      >
+        <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
+          <DataGridPreferences open={open} onOpenChange={setOpen} />
+        </div>
+        <DataGrid.Table />
+      </DataGrid>
+    );
+  },
+  parameters: {
+    chromatic: { disable: true },
   },
 };
 

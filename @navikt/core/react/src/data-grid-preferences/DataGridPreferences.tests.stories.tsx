@@ -165,6 +165,35 @@ export const TestColumnVisibility: Story = {
   },
 };
 
+/**
+ * Opening through the controlled `open` prop (not the Dialog trigger) still
+ * seeds the draft from the current table settings, so the controls reflect
+ * `tableSettings` instead of the resolved defaults.
+ */
+export const TestControlledOpenSeedsDraft: Story = {
+  render: () => <ControlledPreferencesDemo />,
+  play: async ({ canvasElement }) => {
+    settingsSpy.mockClear();
+    const canvas = within(canvasElement);
+
+    /* Open via the controlled prop, bypassing the Dialog trigger */
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Åpne eksternt" }),
+    );
+
+    const dialog = within(await canvas.findByRole("dialog"));
+
+    /* Seeded from defaultSettings (zebraStripes: true), not the default false */
+    expect(
+      dialog.getByRole("checkbox", { name: "Zebra-striper" }),
+    ).toBeChecked();
+
+    /* No edits → saving emits nothing */
+    await userEvent.click(dialog.getByRole("button", { name: "Lagre" }));
+    expect(settingsSpy).not.toHaveBeenCalled();
+  },
+};
+
 type UserDataTest = {
   id: number;
   foo: string;
@@ -243,6 +272,38 @@ function PreferencesDemo({
         onSettingsChange={settingsSpy}
       >
         <DataGridPreferences aria-label="Innstillinger" fields={fields} />
+        <DataGrid.Table />
+      </DataGrid>
+      <div ref={setContainer} />
+    </Provider>
+  );
+}
+
+/**
+ * Renders the preferences as a controlled dialog whose `open` state is toggled
+ * by an external button, so opening never goes through the Dialog trigger.
+ * Uses a non-default `defaultSettings` to verify draft seeding.
+ */
+function ControlledPreferencesDemo() {
+  const [container, setContainer] = React.useState<HTMLElement | null>(null);
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Provider rootElement={container ?? undefined}>
+      <DataGrid
+        columns={userColumnDef}
+        data={generateUserData(5)}
+        defaultSettings={{ zebraStripes: true }}
+        onSettingsChange={settingsSpy}
+      >
+        <button type="button" onClick={() => setOpen(true)}>
+          Åpne eksternt
+        </button>
+        <DataGridPreferences
+          aria-label="Innstillinger"
+          open={open}
+          onOpenChange={setOpen}
+        />
         <DataGrid.Table />
       </DataGrid>
       <div ref={setContainer} />

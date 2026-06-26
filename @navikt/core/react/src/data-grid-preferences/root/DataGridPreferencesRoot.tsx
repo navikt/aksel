@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../dialog";
+import { useClientLayoutEffect } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
 import { DataGridPreferencesColumnLayoutSettings } from "../column-layout-settings/DataGridPreferencesColumnLayoutSettings";
@@ -76,6 +77,10 @@ interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButton
  *
  * @example
  * ```jsx
+ * <DataGrid columns={columns} data={data}>
+ *   <DataGrid.Preferences />
+ *   <DataGrid.Table />
+ * </DataGrid>
  * ```
  */
 const DataGridPreferencesRoot = forwardRef<
@@ -118,14 +123,24 @@ const DataGridPreferencesRoot = forwardRef<
       [draft],
     );
 
+    /**
+     * Seed the draft from the current table settings whenever the dialog opens,
+     * including when opened via the `open`/`defaultOpen` props. `tableSettings`
+     * is intentionally excluded so external updates don't reset an in-progress
+     * draft.
+     */
+    useClientLayoutEffect(() => {
+      if (open) {
+        setDraft(tableSettings ?? {});
+      }
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    }, [open]);
+
     const handleOpenChange = useCallback(
       (nextOpen: boolean) => {
-        if (nextOpen) {
-          setDraft(tableSettings ?? {});
-        }
         setOpenStateInternal(nextOpen);
       },
-      [tableSettings, setOpenStateInternal],
+      [setOpenStateInternal],
     );
 
     const handleSave = useCallback(() => {

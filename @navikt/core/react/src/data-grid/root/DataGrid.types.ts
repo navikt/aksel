@@ -45,7 +45,7 @@ type DataGridSettings = {
    * Set `visible: false` to hide a column without removing it from the list.
    * Each `id` must be unique and match a column `id` in the `columns` prop.
    */
-  columnDisplay?: { id: string; visible: boolean }[];
+  columnDisplay?: { id: string; visible: boolean | "always" }[];
 };
 
 const DataGridSettingsOptions = {
