@@ -30,6 +30,21 @@ export const Default: Story = {
   },
 };
 
+export const HiddenFields: Story = {
+  render: () => {
+    return (
+      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
+        <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
+          <DataGridPreferences
+            fields={{ textSize: false, zebraStripes: false }}
+          />
+        </div>
+        <DataGrid.Table />
+      </DataGrid>
+    );
+  },
+};
+
 type UserDataTest = {
   id: number;
   foo: string;

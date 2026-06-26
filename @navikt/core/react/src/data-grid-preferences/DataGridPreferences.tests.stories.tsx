@@ -113,6 +113,32 @@ export const TestDefaultsReflected: Story = {
   },
 };
 
+/**
+ * Fields set to `false` in the `fields` prop are not rendered; omitted fields
+ * stay visible (removal is opt-in). Hiding is granular per setting, so a single
+ * checkbox inside a group can be hidden while its sibling stays.
+ */
+export const TestHiddenFields: Story = {
+  render: () => (
+    <PreferencesDemo fields={{ textSize: false, zebraStripes: false }} />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const dialog = await openPreferences(canvas);
+
+    expect(dialog.queryByLabelText("Tekststørrelse")).not.toBeInTheDocument();
+    expect(
+      dialog.queryByRole("checkbox", { name: "Zebra-striper" }),
+    ).not.toBeInTheDocument();
+
+    /* Sibling in the same group stays visible */
+    expect(
+      dialog.getByRole("checkbox", { name: "Kutt innhold" }),
+    ).toBeInTheDocument();
+    expect(dialog.getByLabelText("Radtetthet")).toBeInTheDocument();
+  },
+};
+
 /** Toggling a column updates the visible count and emits `columnDisplay`. */
 export const TestColumnVisibility: Story = {
   render: () => <PreferencesDemo />,
@@ -202,7 +228,11 @@ const settingsSpy = fn();
  * Renders the preferences inside a `Provider` whose portal target lives within
  * the story canvas, so the dialog content is queryable via `within(canvasElement)`.
  */
-function PreferencesDemo() {
+function PreferencesDemo({
+  fields,
+}: {
+  fields?: React.ComponentProps<typeof DataGridPreferences>["fields"];
+}) {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   return (
@@ -212,7 +242,7 @@ function PreferencesDemo() {
         data={generateUserData(5)}
         onSettingsChange={settingsSpy}
       >
-        <DataGridPreferences aria-label="Innstillinger" />
+        <DataGridPreferences aria-label="Innstillinger" fields={fields} />
         <DataGrid.Table />
       </DataGrid>
       <div ref={setContainer} />

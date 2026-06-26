@@ -29,6 +29,17 @@ import { DataGridPreferencesTextSizeSettings } from "../text-size-settings/DataG
 
 interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: never;
+  /**
+   * Controls which preference fields are shown.
+   *
+   * All fields are visible by default. Set a field to `false` to hide it.
+   * Fields left out of the object stay visible.
+   *
+   * @example
+   * // Hide the text size field
+   * fields={{ textSize: false }}
+   */
+  fields?: Partial<Record<keyof DataGridSettings, boolean>>;
 }
 
 /**
@@ -46,7 +57,7 @@ interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButton
 const DataGridPreferencesRoot = forwardRef<
   HTMLButtonElement,
   DataGridPreferencesProps
->(({ className, ...rest }: DataGridPreferencesProps, forwardedRef) => {
+>(({ className, fields, ...rest }: DataGridPreferencesProps, forwardedRef) => {
   const context = useDataGridContext(false);
 
   if (!context) {
@@ -131,25 +142,34 @@ const DataGridPreferencesRoot = forwardRef<
         <DialogBody className="aksel-data-grid__preferences-body">
           <div className="aksel-data-grid__preferences-content">
             <div className="aksel-data-grid__preferences-block">
-              <DataGridPreferencesRowDensitySettings
-                value={resolvedDraft.rowDensity}
-                onChange={(value) => {
-                  setDraft((prev) => ({
-                    ...prev,
-                    rowDensity: value,
-                  }));
-                }}
-              />
-              <DataGridPreferencesTextSizeSettings
-                value={resolvedDraft.textSize}
-                onChange={(value) => {
-                  setDraft((prev) => ({
-                    ...prev,
-                    textSize: value,
-                  }));
-                }}
-              />
+              {isFieldVisible("rowDensity", fields) && (
+                <DataGridPreferencesRowDensitySettings
+                  value={resolvedDraft.rowDensity}
+                  onChange={(value) => {
+                    setDraft((prev) => ({
+                      ...prev,
+                      rowDensity: value,
+                    }));
+                  }}
+                />
+              )}
+              {isFieldVisible("textSize", fields) && (
+                <DataGridPreferencesTextSizeSettings
+                  value={resolvedDraft.textSize}
+                  onChange={(value) => {
+                    setDraft((prev) => ({
+                      ...prev,
+                      textSize: value,
+                    }));
+                  }}
+                />
+              )}
+
               <DataGridPreferencesRowPropertiesSettings
+                fields={{
+                  truncateContent: isFieldVisible("truncateContent", fields),
+                  zebraStripes: isFieldVisible("zebraStripes", fields),
+                }}
                 value={{
                   truncateContent: resolvedDraft.truncateContent,
                   zebraStripes: resolvedDraft.zebraStripes,
@@ -161,7 +181,12 @@ const DataGridPreferencesRoot = forwardRef<
                   }));
                 }}
               />
+
               <DataGridPreferencesColumnLayoutSettings
+                fields={{
+                  columnDividers: isFieldVisible("columnDividers", fields),
+                  stickyColumns: isFieldVisible("stickyColumns", fields),
+                }}
                 value={{
                   columnDividers: resolvedDraft.columnDividers,
                   stickyColumns: resolvedDraft.stickyColumns,
@@ -176,10 +201,12 @@ const DataGridPreferencesRoot = forwardRef<
               />
             </div>
             <div className="aksel-data-grid__preferences-block">
-              <DataGridPreferencesColumnSettings
-                columns={columnEntries}
-                onColumnsChange={handleColumnsChange}
-              />
+              {isFieldVisible("columnDisplay", fields) && (
+                <DataGridPreferencesColumnSettings
+                  columns={columnEntries}
+                  onColumnsChange={handleColumnsChange}
+                />
+              )}
             </div>
           </div>
         </DialogBody>
@@ -199,5 +226,13 @@ const DataGridPreferencesRoot = forwardRef<
   );
 });
 
+function isFieldVisible(
+  key: keyof DataGridSettings,
+  fields?: Partial<Record<keyof DataGridSettings, boolean>>,
+) {
+  return fields?.[key] !== false;
+}
+
 export { DataGridPreferencesRoot };
+export type { DataGridPreferencesProps };
 export default DataGridPreferencesRoot;
