@@ -57,10 +57,6 @@ const groupedItems: (MyGroup | MyItem)[] = [
   { label: "Single item last", value: "item-02" },
 ];
 
-const listboxId = "test";
-
-const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
-
 interface RenderItemsProps {
   items: (MyGroup | MyItem)[];
   selectedItems: MyItem["value"][];
@@ -110,6 +106,8 @@ const RenderItems = ({
       </Listbox.Option>
     ),
   );
+const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
+const listboxId = "test";
 
 export const Default = () => {
   const [filterString, setFilterString] = useState("");
