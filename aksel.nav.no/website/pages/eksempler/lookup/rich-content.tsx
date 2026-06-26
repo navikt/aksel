@@ -38,7 +38,10 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, {
+  variant: "static",
+  minHeight: "13rem",
+});
 
 /* Storybook story */
 export const Demo = {
