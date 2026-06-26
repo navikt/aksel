@@ -47,6 +47,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  description:
-    "Popoveren som åpnes kan inneholde rikt innhold, for eksempel flere avsnitt, lenker eller en liste",
+  desc: "Popoveren som åpnes kan inneholde rikt innhold, for eksempel flere avsnitt, lenker eller en liste",
 };
