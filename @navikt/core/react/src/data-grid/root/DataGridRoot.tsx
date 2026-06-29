@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
@@ -67,6 +68,15 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Table: typeof DataGridTable;
+  /**
+   * @see 🏷️ {@link DataGridTableProps}
+   *
+   * @example
+   * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+   *   <DataGrid.Table />
+   * </DataGrid>
+   */
+  Preferences: typeof DataGridPreferences;
 }
 
 /**
@@ -127,6 +137,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
 
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
+DataGrid.Preferences = DataGridPreferences;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGrid {
