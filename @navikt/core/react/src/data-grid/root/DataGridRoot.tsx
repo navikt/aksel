@@ -157,6 +157,12 @@ export namespace DataGrid {
     export type SubRows<T = unknown> = DataGridTable.SubRows<T>;
     export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Preferences {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    export type Props = DataGridPreferences.Props;
+  }
 }
 
 // eslint-disable-next-line import/export

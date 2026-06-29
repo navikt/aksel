@@ -98,7 +98,7 @@ const DataGridPreferencesRoot = forwardRef<
 
     if (!context) {
       throw new Error(
-        "[Aksel] DataGrid.Preferences must be used within a DataGrid",
+        "[Aksel] DataGrid.Preferences must be used within DataGrid",
       );
     }
 
@@ -128,7 +128,7 @@ const DataGridPreferencesRoot = forwardRef<
     );
 
     /**
-     * Merges draft.columnDisplay (order + visibility) with columnDefinitions (labels).
+     * Merges order + visibility with columnDefinitions (labels).
      * Falls back to all columns visible in definition order when columnDisplay is unset.
      */
     const columnEntries = useMemo((): DataGridPreferencesColumnDisplay[] => {
@@ -247,6 +247,12 @@ function isFieldVisible(
   return fields?.[key] !== false;
 }
 
-export { DataGridPreferencesRoot };
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace DataGridPreferencesRoot {
+  export type Props = DataGridPreferencesProps;
+}
+
 export type { DataGridPreferencesProps };
+// eslint-disable-next-line import/export
+export { DataGridPreferencesRoot };
 export default DataGridPreferencesRoot;
