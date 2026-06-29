@@ -31,7 +31,9 @@
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 2px;
-    border-radius: var(--ax-radius-4);
+
+    /* Popover radius - border-width */
+    border-radius: calc(var(--ax-radius-12) - 1px);
   }
 }
 
