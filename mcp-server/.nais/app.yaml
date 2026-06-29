@@ -8,7 +8,7 @@ metadata:
 spec:
   envFrom:
     - secret: aksel-mcp-secrets
-  image: { { image } }
+  image: {{ image }}
   port: 8080
   replicas:
     min: 1
