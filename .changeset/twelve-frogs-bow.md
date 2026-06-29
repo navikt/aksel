@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-DataGrid: New component DataGrid.Preferences
+DataGrid: New component `DataGrid.Preferences`
