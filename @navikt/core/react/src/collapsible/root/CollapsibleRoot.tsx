@@ -1,5 +1,6 @@
 import React, { forwardRef, useCallback } from "react";
 import { useId } from "../../utils-external";
+import { Slot } from "../../utils/components/slot/Slot";
 import { useControllableState } from "../../utils/hooks";
 import CollapsibleContent, {
   CollapsibleContentProps,
@@ -23,10 +24,33 @@ interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Render the collapsible content lazily. This means that the content will not be rendered until the collapsible is open.
+   * ### unmount
+   * The content will not be rendered until the collapsible is opened.
+   *
+   * ### hidden
+   * The content will be rendered but hidden with the `hidden` attribute (`display: none`).
+   *
+   * ### hiddenUntilFound
+   * Same as `hidden`, except that `hidden="until-found"` will be used if the browser supports it.
+   *
+   * The content will expand if a `beforematch` event is triggered, which happens when
+   * fragment navigation or the browser's "Find in page" feature causes a scroll to the content.
+   *
+   * **NB:** Since React currently doesn't support setting `hidden="until-found"`, we have to set it
+   * manually in a `useEffect`. This means that fragment navigation will not work on the first render.
+   * (I.e. `<a href="/different-page#elm-inside-closed-collapsible">` won't work, but
+   * `<a href="#elm-inside-closed-collapsible">` should work.)
+   *
+   * @see [MDN docs about the `hidden` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/hidden#the_hidden_until_found_state)
+   *
+   * @default "unmount"
+   */
+  closedBehavior?: "unmount" | "hidden" | "hiddenUntilFound";
+  /**
+   * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false
    */
-  lazy?: boolean;
+  asChild?: boolean;
 }
 
 interface CollapsibleComponent extends React.ForwardRefExoticComponent<
@@ -79,7 +103,8 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       open,
       defaultOpen = false,
       onOpenChange,
-      lazy = false,
+      closedBehavior = "unmount",
+      asChild,
       ...rest
     },
     ref,
@@ -92,6 +117,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
 
     const internalId = useId();
     const state = _open ? "open" : "closed";
+    const Comp = asChild ? Slot : "div";
 
     return (
       <CollapsibleContextProvider
@@ -102,12 +128,12 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
         )}
         contentId={`collapsible-content-${internalId}`}
         triggerId={`collapsible-trigger-${internalId}`}
-        lazy={lazy}
+        closedBehavior={closedBehavior}
         state={state}
       >
-        <div ref={ref} data-state={state} {...rest}>
+        <Comp ref={ref} data-state={state} {...rest}>
           {children}
-        </div>
+        </Comp>
       </CollapsibleContextProvider>
     );
   },
