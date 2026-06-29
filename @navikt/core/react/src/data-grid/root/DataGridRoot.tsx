@@ -72,7 +72,8 @@ interface DataGridComponent {
    * @see 🏷️ {@link DataGridTableProps}
    *
    * @example
-   * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+   * <DataGrid columns={columns} data={data} onSettingsChange={handleSettingsChange}>
+   *   <DataGrid.Preferences />
    *   <DataGrid.Table />
    * </DataGrid>
    */
