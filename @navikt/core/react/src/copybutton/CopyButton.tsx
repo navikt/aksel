@@ -128,20 +128,20 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         icon={
           active
             ? (activeIcon ?? (
-                <CheckmarkIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : activeString}
-                  className="aksel-copybutton__icon"
-                />
+                <CheckmarkIcon aria-hidden className="aksel-copybutton__icon" />
               ))
             : (icon ?? (
-                <FilesIcon
-                  aria-hidden={!!text}
-                  title={text ? undefined : title || translate("title")}
-                  className="aksel-copybutton__icon"
-                />
+                <FilesIcon aria-hidden className="aksel-copybutton__icon" />
               ))
         }
+        title={getTitle(
+          active,
+          activeString,
+          title || translate("title"),
+          text,
+          icon,
+          activeIcon,
+        )}
         data-active={active}
         size={size}
       >
@@ -150,6 +150,29 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     );
   },
 );
+
+function getTitle(
+  active: boolean,
+  activeString: string,
+  title: string,
+  text: CopyButtonProps["text"],
+  icon: CopyButtonProps["icon"],
+  activeIcon: CopyButtonProps["activeIcon"],
+) {
+  if (text) {
+    return undefined;
+  }
+  const currentIcon = active ? activeIcon : icon;
+  if (
+    currentIcon &&
+    React.isValidElement<{ title?: string }>(currentIcon) &&
+    currentIcon.props.title
+  ) {
+    return currentIcon.props.title;
+  }
+  // If title is not found on provided icon, we assume it doesn't have an accessible label.
+  return active ? activeString : title;
+}
 
 function variantToDataColor(
   variant: CopyButtonProps["variant"],
