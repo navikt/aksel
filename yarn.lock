@@ -7896,6 +7896,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/client@npm:7.23.0":
+  version: 7.23.0
+  resolution: "@sanity/client@npm:7.23.0"
+  dependencies:
+    "@sanity/eventsource": "npm:^5.0.2"
+    get-it: "npm:^8.8.0"
+    nanoid: "npm:^3.3.11"
+    rxjs: "npm:^7.0.0"
+  checksum: 10/a039cba3a80a2a9e3a68ae1be7a25478ea7eb0ecf0921588e4b9a755cc9ffb899cd74ec80e6b6f60cd2b55b9aba0dfe392751e857fd1da542f921865459a90e9
+  languageName: node
+  linkType: hard
+
 "@sanity/client@npm:^7.13.2, @sanity/client@npm:^7.21.0":
   version: 7.21.0
   resolution: "@sanity/client@npm:7.21.0"
@@ -11134,7 +11146,7 @@ __metadata:
     "@navikt/aksel": "npm:^8.14.0"
     "@navikt/aksel-icons": "npm:^8.14.0"
     "@navikt/ds-tokens": "npm:^8.14.0"
-    "@sanity/client": "npm:7.22.1"
+    "@sanity/client": "npm:7.23.0"
     "@types/express": "npm:^5.0.3"
     "@types/node": "npm:^24.10.9"
     express: "npm:^5.1.0"
@@ -16101,6 +16113,18 @@ __metadata:
     through2: "npm:^4.0.2"
     tunnel-agent: "npm:^0.6.0"
   checksum: 10/1a68b9a02b54b2b482702a1a94daa4ec291622b7ff68e669e9d6798eb80ff7fb1d74bcca0ae969c8c8547a29fa4826c94d1fd6f81958c1d93024a10fe820fa33
+  languageName: node
+  linkType: hard
+
+"get-it@npm:^8.8.0":
+  version: 8.8.0
+  resolution: "get-it@npm:8.8.0"
+  dependencies:
+    decompress-response: "npm:^7.0.0"
+    is-retry-allowed: "npm:^2.2.0"
+    through2: "npm:^4.0.2"
+    tunnel-agent: "npm:^0.6.0"
+  checksum: 10/c85366831688a648d030ffaf0df9490e0f5390209524ef9facdfc234673f38adf2e420c92b7fd4b89d4a358a0e0e0ad6732404a35233b662b5c6ffc27f359dd4
   languageName: node
   linkType: hard
 
