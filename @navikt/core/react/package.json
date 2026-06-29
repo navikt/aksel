@@ -739,7 +739,7 @@
     "@navikt/aksel-icons": "^8.14.0",
     "@navikt/ds-tokens": "^8.14.0",
     "date-fns": "^4.0.0",
-    "react-day-picker": "9.14.0"
+    "react-day-picker": "10.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.1",
