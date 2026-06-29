@@ -71,7 +71,7 @@ interface DataGridPreferencesProps extends React.ButtonHTMLAttributes<HTMLButton
  *
  * @example
  * ```jsx
- * <DataGrid columns={columns} data={data}>
+ * <DataGrid columns={columns} data={data} onSettingsChange={handleSettingsChange}>
  *   <DataGrid.Preferences />
  *   <DataGrid.Table />
  * </DataGrid>
