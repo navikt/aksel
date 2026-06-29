@@ -3,6 +3,7 @@ import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { DataGridPreferences } from ".";
 import { DataGrid } from "../data-grid";
+import { HStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import { Tag } from "../tag";
 
@@ -19,41 +20,41 @@ export default meta;
 type Story = StoryObj<typeof DataGridPreferences>;
 
 /**
- * Saving emits only the changed settings (diff) through `onSettingsChange`,
- * and the dialog closes afterwards.
+ * Changes apply instantly: each control emits through `onSettingsChange` as
+ * soon as it changes, with no save step, and the dialog stays open.
  */
-export const TestSaveAppliesChanges: Story = {
+export const TestInstantApply: Story = {
   render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
     const canvas = within(canvasElement);
     const dialog = await openPreferences(canvas);
 
+    /* Opening alone emits nothing */
+    expect(settingsSpy).not.toHaveBeenCalled();
+
     await userEvent.click(
       dialog.getByRole("checkbox", { name: "Zebra-striper" }),
     );
+    expect(settingsSpy).toHaveBeenLastCalledWith(
+      expect.objectContaining({ zebraStripes: true }),
+    );
+
     await userEvent.selectOptions(
       dialog.getByLabelText("Tekststørrelse"),
       "small",
     );
-
-    await userEvent.click(dialog.getByRole("button", { name: "Lagre" }));
-
-    expect(settingsSpy).toHaveBeenCalledTimes(1);
     expect(settingsSpy).toHaveBeenLastCalledWith(
-      expect.objectContaining({ zebraStripes: true, textSize: "small" }),
+      expect.objectContaining({ textSize: "small" }),
     );
-    await waitFor(() =>
-      expect(canvas.queryByRole("dialog")).not.toBeInTheDocument(),
-    );
+
+    /* No save step → the dialog stays open */
+    expect(canvas.getByRole("dialog")).toBeInTheDocument();
   },
 };
 
-/**
- * Cancelling discards the draft: no callback fires, and reopening resets the
- * controls to the saved table settings.
- */
-export const TestCancelDiscardsChanges: Story = {
+/** Applied changes persist when the dialog is closed and reopened. */
+export const TestChangesPersist: Story = {
   render: () => <PreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
@@ -63,32 +64,16 @@ export const TestCancelDiscardsChanges: Story = {
     await userEvent.click(
       dialog.getByRole("checkbox", { name: "Zebra-striper" }),
     );
-    await userEvent.click(dialog.getByRole("button", { name: "Avbryt" }));
 
-    expect(settingsSpy).not.toHaveBeenCalled();
+    await userEvent.keyboard("{Escape}");
     await waitFor(() =>
       expect(canvas.queryByRole("dialog")).not.toBeInTheDocument(),
     );
 
-    /* Draft should be reset on reopen */
     const reopened = await openPreferences(canvas);
     expect(
       reopened.getByRole("checkbox", { name: "Zebra-striper" }),
-    ).not.toBeChecked();
-  },
-};
-
-/** Saving without any changes should not invoke `onSettingsChange`. */
-export const TestNoChangeNoCallback: Story = {
-  render: () => <PreferencesDemo />,
-  play: async ({ canvasElement }) => {
-    settingsSpy.mockClear();
-    const canvas = within(canvasElement);
-
-    const dialog = await openPreferences(canvas);
-    await userEvent.click(dialog.getByRole("button", { name: "Lagre" }));
-
-    expect(settingsSpy).not.toHaveBeenCalled();
+    ).toBeChecked();
   },
 };
 
@@ -152,9 +137,7 @@ export const TestColumnVisibility: Story = {
     await userEvent.click(dialog.getByLabelText("Foo"));
     expect(dialog.getByText("Velg alle (4/5)")).toBeInTheDocument();
 
-    await userEvent.click(dialog.getByRole("button", { name: "Lagre" }));
-
-    expect(settingsSpy).toHaveBeenCalledTimes(1);
+    /* Emitted immediately, no save step */
     expect(settingsSpy).toHaveBeenLastCalledWith(
       expect.objectContaining({
         columnDisplay: expect.arrayContaining([
@@ -166,11 +149,10 @@ export const TestColumnVisibility: Story = {
 };
 
 /**
- * Opening through the controlled `open` prop (not the Dialog trigger) still
- * seeds the draft from the current table settings, so the controls reflect
- * `tableSettings` instead of the resolved defaults.
+ * Opening through the controlled `open` prop (not the Dialog trigger) renders
+ * the controls from the current table settings.
  */
-export const TestControlledOpenSeedsDraft: Story = {
+export const TestControlledOpenReflectsSettings: Story = {
   render: () => <ControlledPreferencesDemo />,
   play: async ({ canvasElement }) => {
     settingsSpy.mockClear();
@@ -183,14 +165,10 @@ export const TestControlledOpenSeedsDraft: Story = {
 
     const dialog = within(await canvas.findByRole("dialog"));
 
-    /* Seeded from defaultSettings (zebraStripes: true), not the default false */
+    /* Reflects defaultSettings (zebraStripes: true), not the default false */
     expect(
       dialog.getByRole("checkbox", { name: "Zebra-striper" }),
     ).toBeChecked();
-
-    /* No edits → saving emits nothing */
-    await userEvent.click(dialog.getByRole("button", { name: "Lagre" }));
-    expect(settingsSpy).not.toHaveBeenCalled();
   },
 };
 
@@ -271,7 +249,9 @@ function PreferencesDemo({
         data={generateUserData(5)}
         onSettingsChange={settingsSpy}
       >
-        <DataGridPreferences aria-label="Innstillinger" fields={fields} />
+        <HStack>
+          <DataGridPreferences aria-label="Innstillinger" fields={fields} />
+        </HStack>
         <DataGrid.Table />
       </DataGrid>
       <div ref={setContainer} />
@@ -282,7 +262,8 @@ function PreferencesDemo({
 /**
  * Renders the preferences as a controlled dialog whose `open` state is toggled
  * by an external button, so opening never goes through the Dialog trigger.
- * Uses a non-default `defaultSettings` to verify draft seeding.
+ * Uses a non-default `defaultSettings` to verify the controls reflect the
+ * current table settings.
  */
 function ControlledPreferencesDemo() {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
@@ -296,14 +277,17 @@ function ControlledPreferencesDemo() {
         defaultSettings={{ zebraStripes: true }}
         onSettingsChange={settingsSpy}
       >
-        <button type="button" onClick={() => setOpen(true)}>
-          Åpne eksternt
-        </button>
-        <DataGridPreferences
-          aria-label="Innstillinger"
-          open={open}
-          onOpenChange={setOpen}
-        />
+        <HStack gap="space-8">
+          <button type="button" onClick={() => setOpen(true)}>
+            Åpne eksternt
+          </button>
+
+          <DataGridPreferences
+            aria-label="Innstillinger"
+            open={open}
+            onOpenChange={setOpen}
+          />
+        </HStack>
         <DataGrid.Table />
       </DataGrid>
       <div ref={setContainer} />

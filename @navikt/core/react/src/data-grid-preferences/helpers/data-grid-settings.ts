@@ -48,31 +48,5 @@ function resolveDataGridSettings(
   };
 }
 
-/**
- * Returns a partial settings object containing only the keys whose value in
- * `next` differs from `base` (compared by reference).
- *
- * Used when saving the preferences draft so we only emit the settings the user
- * actually changed, instead of the whole draft.
- */
-function diffDataGridSettings(
-  base: DataGridSettings,
-  next: DataGridSettings,
-): Partial<DataGridSettings> {
-  const diff: Partial<DataGridSettings> = {};
-
-  for (const key of Object.keys(next) as (keyof DataGridSettings)[]) {
-    if (!Object.is(next[key], base[key])) {
-      Object.assign(diff, { [key]: next[key] });
-    }
-  }
-
-  return diff;
-}
-
 export type { ResolvedDataGridSettings };
-export {
-  DataGridSettingsDefaults,
-  diffDataGridSettings,
-  resolveDataGridSettings,
-};
+export { DataGridSettingsDefaults, resolveDataGridSettings };

@@ -104,7 +104,7 @@ const DataGridPreferencesRoot = forwardRef<
 
     const { tableSettings, updateTableSettings, columnDefinitions } = context;
 
-    const [open, setOpenStateInternal] = useControllableState({
+    const [open, setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: openParam,
       onChange: onOpenChange,
@@ -115,21 +115,15 @@ const DataGridPreferencesRoot = forwardRef<
       [tableSettings],
     );
 
-    const handleOpenChange = useCallback(
-      (nextOpen: boolean) => {
-        setOpenStateInternal(nextOpen);
-      },
-      [setOpenStateInternal],
-    );
-
     const columnDefinitionMap = useMemo(
       () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
       [columnDefinitions],
     );
 
     /**
-     * Merges order + visibility with columnDefinitions (labels).
-     * Falls back to all columns visible in definition order when columnDisplay is unset.
+     * Combines the saved column order/visibility (`tableSettings.columnDisplay`)
+     * with column labels from `columnDefinitions`. Falls back to all columns
+     * visible in definition order when `columnDisplay` is unset.
      */
     const columnEntries = useMemo((): DataGridPreferencesColumnDisplay[] => {
       const display =
@@ -154,7 +148,7 @@ const DataGridPreferencesRoot = forwardRef<
     return (
       <Dialog
         open={open}
-        onOpenChange={handleOpenChange}
+        onOpenChange={setOpen}
         onOpenChangeComplete={onOpenChangeComplete}
         size="small"
       >
@@ -216,12 +210,7 @@ const DataGridPreferencesRoot = forwardRef<
                     columnDividers: resolved.columnDividers,
                     stickyColumns: resolved.stickyColumns,
                   }}
-                  onChange={(value) =>
-                    updateTableSettings?.({
-                      columnDividers: value.columnDividers,
-                      stickyColumns: value.stickyColumns,
-                    })
-                  }
+                  onChange={(value) => updateTableSettings?.(value)}
                 />
               </div>
               <div className="aksel-data-grid__preferences-block">

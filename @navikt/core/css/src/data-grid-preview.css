@@ -690,16 +690,8 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ----------------------- DataGrid.Preferences Start ----------------------- */
-.aksel-data-grid__preferences-button {
-  margin-left: auto;
-}
-
 .aksel-data-grid__preferences-body {
   flex-grow: 1;
-}
-
-.aksel-data-grid__preferences-footer {
-  border-block-start: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .aksel-data-grid__preferences-content {
