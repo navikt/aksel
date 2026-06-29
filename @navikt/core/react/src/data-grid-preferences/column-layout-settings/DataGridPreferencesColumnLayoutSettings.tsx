@@ -43,7 +43,7 @@ function DataGridPreferencesColumnLayoutSettings({
 
   return (
     <CheckboxGroup
-      legend="Kolonner"
+      legend="Kolonneegenskaper"
       size="small"
       value={checkboxValues}
       onChange={(values: string[]) => {

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useState } from "react";
+import React, { forwardRef, useCallback, useMemo } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { DataGridSettings } from "../../data-grid/root/DataGrid.types";
@@ -6,14 +6,11 @@ import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import {
   Dialog,
   DialogBody,
-  DialogCloseTrigger,
-  DialogFooter,
   DialogHeader,
   DialogPopup,
   DialogTitle,
   DialogTrigger,
 } from "../../dialog";
-import { useClientLayoutEffect } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
 import { DataGridPreferencesColumnLayoutSettings } from "../column-layout-settings/DataGridPreferencesColumnLayoutSettings";
@@ -21,10 +18,7 @@ import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
-import {
-  diffDataGridSettings,
-  resolveDataGridSettings,
-} from "../helpers/data-grid-settings";
+import { resolveDataGridSettings } from "../helpers/data-grid-settings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
 import { DataGridPreferencesTextSizeSettings } from "../text-size-settings/DataGridPreferencesTextSizeSettings";
@@ -116,25 +110,10 @@ const DataGridPreferencesRoot = forwardRef<
       onChange: onOpenChange,
     });
 
-    const [draft, setDraft] = useState<DataGridSettings>({});
-
-    const resolvedDraft = useMemo(
-      () => resolveDataGridSettings(draft),
-      [draft],
+    const resolved = useMemo(
+      () => resolveDataGridSettings(tableSettings ?? {}),
+      [tableSettings],
     );
-
-    /**
-     * Seed the draft from the current table settings whenever the dialog opens,
-     * including when opened via the `open`/`defaultOpen` props. `tableSettings`
-     * is intentionally excluded so external updates don't reset an in-progress
-     * draft.
-     */
-    useClientLayoutEffect(() => {
-      if (open) {
-        setDraft(tableSettings ?? {});
-      }
-      /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    }, [open]);
 
     const handleOpenChange = useCallback(
       (nextOpen: boolean) => {
@@ -142,14 +121,6 @@ const DataGridPreferencesRoot = forwardRef<
       },
       [setOpenStateInternal],
     );
-
-    const handleSave = useCallback(() => {
-      const changes = diffDataGridSettings(tableSettings ?? {}, draft);
-      if (Object.keys(changes).length > 0) {
-        updateTableSettings?.(changes);
-      }
-      handleOpenChange(false);
-    }, [tableSettings, draft, handleOpenChange, updateTableSettings]);
 
     const columnDefinitionMap = useMemo(
       () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
@@ -162,23 +133,22 @@ const DataGridPreferencesRoot = forwardRef<
      */
     const columnEntries = useMemo((): DataGridPreferencesColumnDisplay[] => {
       const display =
-        draft.columnDisplay ??
+        tableSettings?.columnDisplay ??
         columnDefinitions.map((col) => ({ id: col.id, visible: true }));
 
       return display.flatMap(({ id, visible }) => {
         const label = columnDefinitionMap.get(id);
         return label ? [{ id, label, visible }] : [];
       });
-    }, [columnDefinitionMap, draft.columnDisplay, columnDefinitions]);
+    }, [columnDefinitionMap, tableSettings?.columnDisplay, columnDefinitions]);
 
     const handleColumnsChange = useCallback(
       (columns: DataGridPreferencesColumnDisplay[]) => {
-        setDraft((prev) => ({
-          ...prev,
+        updateTableSettings?.({
           columnDisplay: columns.map(({ id, visible }) => ({ id, visible })),
-        }));
+        });
       },
-      [],
+      [updateTableSettings],
     );
 
     return (
@@ -201,7 +171,7 @@ const DataGridPreferencesRoot = forwardRef<
             /* TODO: i18n */
           />
         </DialogTrigger>
-        <DialogPopup width="large" position="center" rootElement={rootElement}>
+        <DialogPopup width="large" position="right" rootElement={rootElement}>
           <DialogHeader withClosebutton>
             <DialogTitle>Innstillinger</DialogTitle>
           </DialogHeader>
@@ -210,24 +180,18 @@ const DataGridPreferencesRoot = forwardRef<
               <div className="aksel-data-grid__preferences-block">
                 {isFieldVisible("rowDensity", fields) && (
                   <DataGridPreferencesRowDensitySettings
-                    value={resolvedDraft.rowDensity}
-                    onChange={(value) => {
-                      setDraft((prev) => ({
-                        ...prev,
-                        rowDensity: value,
-                      }));
-                    }}
+                    value={resolved.rowDensity}
+                    onChange={(value) =>
+                      updateTableSettings?.({ rowDensity: value })
+                    }
                   />
                 )}
                 {isFieldVisible("textSize", fields) && (
                   <DataGridPreferencesTextSizeSettings
-                    value={resolvedDraft.textSize}
-                    onChange={(value) => {
-                      setDraft((prev) => ({
-                        ...prev,
-                        textSize: value,
-                      }));
-                    }}
+                    value={resolved.textSize}
+                    onChange={(value) =>
+                      updateTableSettings?.({ textSize: value })
+                    }
                   />
                 )}
 
@@ -237,15 +201,10 @@ const DataGridPreferencesRoot = forwardRef<
                     zebraStripes: isFieldVisible("zebraStripes", fields),
                   }}
                   value={{
-                    truncateContent: resolvedDraft.truncateContent,
-                    zebraStripes: resolvedDraft.zebraStripes,
+                    truncateContent: resolved.truncateContent,
+                    zebraStripes: resolved.zebraStripes,
                   }}
-                  onChange={(value) => {
-                    setDraft((prev) => ({
-                      ...prev,
-                      ...value,
-                    }));
-                  }}
+                  onChange={(value) => updateTableSettings?.(value)}
                 />
 
                 <DataGridPreferencesColumnLayoutSettings
@@ -254,16 +213,15 @@ const DataGridPreferencesRoot = forwardRef<
                     stickyColumns: isFieldVisible("stickyColumns", fields),
                   }}
                   value={{
-                    columnDividers: resolvedDraft.columnDividers,
-                    stickyColumns: resolvedDraft.stickyColumns,
+                    columnDividers: resolved.columnDividers,
+                    stickyColumns: resolved.stickyColumns,
                   }}
-                  onChange={(value) => {
-                    setDraft((prev) => ({
-                      ...prev,
+                  onChange={(value) =>
+                    updateTableSettings?.({
                       columnDividers: value.columnDividers,
                       stickyColumns: value.stickyColumns,
-                    }));
-                  }}
+                    })
+                  }
                 />
               </div>
               <div className="aksel-data-grid__preferences-block">
@@ -276,17 +234,6 @@ const DataGridPreferencesRoot = forwardRef<
               </div>
             </div>
           </DialogBody>
-
-          <DialogFooter className="aksel-data-grid__preferences-footer">
-            <DialogCloseTrigger>
-              <Button size="small" variant="secondary">
-                Avbryt
-              </Button>
-            </DialogCloseTrigger>
-            <Button size="small" onClick={handleSave}>
-              Lagre
-            </Button>
-          </DialogFooter>
         </DialogPopup>
       </Dialog>
     );

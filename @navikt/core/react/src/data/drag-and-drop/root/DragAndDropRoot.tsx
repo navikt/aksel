@@ -94,6 +94,7 @@ function DragAndDropInner(
     item: DragAndDropElement,
     element?: HTMLElement | null,
   ) => {
+    console.info("Starting-drag");
     pendingDragStartRef.current = {
       item,
       element: element || null,
@@ -189,11 +190,22 @@ function DragAndDropInner(
       const activeRef = activeItemRef.current;
       const element = pendingStart?.element;
 
+      if (activeRef !== null && pendingStart !== null) {
+        console.info({ activeRef, pendingStart });
+      }
+
       if (!activeRef && pendingStart) {
         const deltaX = Math.abs(event.clientX - pendingStart.startX);
         const deltaY = Math.abs(event.clientY - pendingStart.startY);
 
+        console.info({
+          deltaX,
+          deltaY,
+          threshold: DRAG_THRESHOLD,
+        });
+
         if (deltaX >= DRAG_THRESHOLD || deltaY >= DRAG_THRESHOLD) {
+          console.info("within treshhold");
           if (element) {
             element.setPointerCapture(pendingStart.pointerId);
           }
