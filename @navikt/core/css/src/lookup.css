@@ -1,6 +1,6 @@
 .aksel-lookup-trigger {
   cursor: pointer;
-  text-decoration: underline dotted;
+  text-decoration: underline dashed;
   text-underline-offset: round(0.1em, 1px);
   text-decoration-thickness: round(0.1em, 1px);
   text-decoration-color: var(--ax-border-default);
