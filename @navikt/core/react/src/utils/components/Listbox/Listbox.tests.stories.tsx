@@ -40,9 +40,7 @@ function ListboxStory({
 
   return (
     <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-      <Listbox.Options
-        setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-      >
+      <Listbox.Options>
         {items.map((itemOrGroup) =>
           "items" in itemOrGroup && itemOrGroup.items ? (
             <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
@@ -50,7 +48,6 @@ function ListboxStory({
                 <Listbox.Option
                   key={item.value}
                   id={item.value}
-                  listboxId="test"
                   onClick={onClick}
                   hasVirtualFocus={virtuallyFocusedOptionId === item.value}
                   aria-selected={false}
@@ -63,7 +60,6 @@ function ListboxStory({
             <Listbox.Option
               key={itemOrGroup.value}
               id={itemOrGroup.value}
-              listboxId="test"
               onClick={onClick}
               hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
               aria-selected={false}

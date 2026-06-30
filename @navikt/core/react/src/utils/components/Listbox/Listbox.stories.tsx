@@ -81,7 +81,6 @@ const RenderItems = ({
           <Listbox.Option
             key={item.value}
             id={item.value}
-            listboxId={listboxId}
             onClick={() => onSelect(item)}
             aria-selected={selectedItems.includes(item.value)}
             hasVirtualFocus={virtuallyFocusedOptionId === item.value}
@@ -96,7 +95,6 @@ const RenderItems = ({
       <Listbox.Option
         key={itemOrGroup.value}
         id={itemOrGroup.value}
-        listboxId={listboxId}
         onClick={() => onSelect(itemOrGroup)}
         aria-selected={selectedItems.includes(itemOrGroup.value)}
         hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
@@ -107,7 +105,6 @@ const RenderItems = ({
     ),
   );
 const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
-const listboxId = "test";
 
 export const Default = () => {
   const [filterString, setFilterString] = useState("");
@@ -130,7 +127,7 @@ export const Default = () => {
       <div>Selected: {selectedItem}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-        <Listbox.InputSlot listboxId={listboxId}>
+        <Listbox.InputSlot>
           <Search
             label="Velg noe"
             hideLabel={false}
@@ -140,9 +137,7 @@ export const Default = () => {
           />
         </Listbox.InputSlot>
 
-        <Listbox.Options
-          setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-        >
+        <Listbox.Options>
           <RenderItems
             items={filteredItems}
             selectedItems={selectedItem ? [selectedItem] : []}
@@ -188,7 +183,7 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
       <div>Selected: {selectedItem}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-        <Listbox.InputSlot listboxId={listboxId}>
+        <Listbox.InputSlot>
           <Search
             label="Velg noe"
             hideLabel={false}
@@ -199,9 +194,7 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
         </Listbox.InputSlot>
 
         <Box borderWidth="1" overflow="auto" maxHeight="300px">
-          <Listbox.Options
-            setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-          >
+          <Listbox.Options>
             {filteredOptions.map((option) => (
               <MyMemoizedOption
                 key={option}
@@ -246,7 +239,6 @@ const MyMemoizedOption = React.memo(
       <Listbox.Option
         key={value}
         id={value}
-        listboxId={listboxId}
         onClick={useCallback(() => onSelect(value), [onSelect, value])}
         aria-selected={isSelected}
         hasVirtualFocus={hasVirtualFocus}
@@ -283,7 +275,7 @@ export const WithFloating = () => {
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Floating.Anchor>
-          <Listbox.InputSlot listboxId={listboxId}>
+          <Listbox.InputSlot>
             <Search
               label="Velg noe"
               hideLabel={false}
@@ -315,9 +307,7 @@ export const WithFloating = () => {
                 maxHeight="calc(var(--__axc-floating-available-height) - 4px)"
                 width="var(--__axc-floating-anchor-width)"
               >
-                <Listbox.Options
-                  setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-                >
+                <Listbox.Options>
                   <RenderItems
                     items={filteredItems}
                     selectedItems={selectedItem ? [selectedItem] : []}
@@ -348,7 +338,7 @@ export const WithPopover = () => {
 
   return (
     <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-      <Listbox.InputSlot listboxId={listboxId}>
+      <Listbox.InputSlot>
         <TextField
           label="Test"
           value={filterString}
@@ -369,9 +359,7 @@ export const WithPopover = () => {
         placement="bottom"
       >
         <Popover.Content>
-          <Listbox.Options
-            setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-          >
+          <Listbox.Options>
             <RenderItems
               items={filteredItems}
               selectedItems={selectedItems}

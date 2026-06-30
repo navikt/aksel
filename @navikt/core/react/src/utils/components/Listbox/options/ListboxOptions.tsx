@@ -2,20 +2,17 @@
 /** biome-ignore-all lint/a11y/useKeyWithMouseEvents: We know what we are doing */
 import React from "react";
 import { cl } from "../../../helpers";
+import { useListboxContext } from "../root/Listbox.context";
 
 export interface ListboxOptionsProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "role" | "tabIndex" | "onMouseOver"
 > {
   children: React.ReactNode;
-  setVirtuallyFocusedOptionId: (value: string) => void;
 }
 
-function ListboxOptions({
-  children,
-  setVirtuallyFocusedOptionId,
-  ...rest
-}: ListboxOptionsProps) {
+function ListboxOptions({ children, ...rest }: ListboxOptionsProps) {
+  const { setVirtuallyFocusedOptionId } = useListboxContext();
   return (
     <div
       {...rest}
