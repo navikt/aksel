@@ -2,7 +2,6 @@ import React, { type JSX, forwardRef, useCallback, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
-import { useId } from "../../utils-external";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
@@ -25,7 +24,6 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       useState("");
 
     const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
-    const listboxId = useId();
 
     /* Unsure why N version works, but not regular here */
     const mergedRef = useMergeRefsN([setInputRef, ref]);
@@ -55,7 +53,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       <Floating>
         <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
           <Floating.Anchor>
-            <Listbox.InputSlot listboxId={listboxId}>
+            <Listbox.InputSlot>
               <Search
                 label="Tabellsøk"
                 variant="simple"
@@ -80,11 +78,9 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
           </Floating.Anchor>
           {open && (
             <AutoSuggestPopup
-              listboxId={listboxId}
               options={options}
               onSelect={handleSelectOption}
               focusedValue={virtuallyFocusedOptionId}
-              setFocusedValue={setVirtuallyFocusedOptionId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
               autoSuggestValue={value}
@@ -97,11 +93,9 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 );
 
 type AutoSuggestPopupProps = {
-  listboxId: string;
   options: OptionGroup<AutoCompleteOption>[];
   onSelect: (option: AutoCompleteOption) => void;
   focusedValue: string;
-  setFocusedValue: (value: string) => void;
   onClose: () => void;
   safeZoneAnchor: HTMLInputElement | null;
   autoSuggestValue: string;
@@ -110,11 +104,9 @@ type AutoSuggestPopupProps = {
 const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
   (
     {
-      listboxId,
       options,
       onSelect,
       focusedValue,
-      setFocusedValue,
       onClose,
       safeZoneAnchor,
       autoSuggestValue,
@@ -136,14 +128,13 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           className="aksel-property-filter__popup"
         >
           <div className="aksel-property-filter__popup-inner">
-            <Listbox.Options setVirtuallyFocusedOptionId={setFocusedValue}>
+            <Listbox.Options>
               {options.map((group) => (
                 <Listbox.Group key={group.label} label={group.label}>
                   {group.options.map((item) => (
                     <AutoSuggestOption
                       key={item.value}
                       item={item}
-                      listboxId={listboxId}
                       onSelect={onSelect}
                       hasVirtualFocus={focusedValue === item.value}
                       autoSuggestValue={autoSuggestValue}
@@ -161,7 +152,6 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
 
 type AutoSuggestOptionProps = {
   item: AutoCompleteOption;
-  listboxId: string;
   onSelect: AutoSuggestPopupProps["onSelect"];
   hasVirtualFocus: boolean;
   autoSuggestValue: string;
@@ -170,7 +160,6 @@ type AutoSuggestOptionProps = {
 const AutoSuggestOption = React.memo(
   ({
     item,
-    listboxId,
     onSelect,
     hasVirtualFocus,
     autoSuggestValue,
@@ -179,7 +168,6 @@ const AutoSuggestOption = React.memo(
       id={item.value}
       onClick={() => onSelect(item)}
       hasVirtualFocus={hasVirtualFocus}
-      listboxId={listboxId}
       aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
     >
       <VStack gap="space-0">

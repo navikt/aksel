@@ -1,5 +1,6 @@
 import React from "react";
 import { cl } from "../../../helpers";
+import { useListboxContext } from "../root/ListboxRoot";
 
 export interface ListboxOptionProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -15,11 +16,6 @@ export interface ListboxOptionProps extends Omit<
    */
   hasVirtualFocus: boolean;
   /**
-   * Unique ID of the Listbox instance.
-   * Used to generate an ID for the option that currently has virtual focus.
-   */
-  listboxId: string;
-  /**
    * Triggered when option is selected.
    */
   onClick: React.MouseEventHandler<HTMLDivElement>;
@@ -34,12 +30,12 @@ export interface ListboxOptionProps extends Omit<
 function ListboxOption({
   id,
   hasVirtualFocus,
-  listboxId,
   "aria-selected": ariaSelected,
   children,
   className,
   ...rest
 }: ListboxOptionProps) {
+  const { activeId } = useListboxContext();
   return (
     <div
       {...rest}
@@ -49,7 +45,7 @@ function ListboxOption({
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
-      id={hasVirtualFocus ? `aksel-listbox-${listboxId}-active` : undefined}
+      id={hasVirtualFocus ? activeId : undefined}
     >
       {children}
     </div>
