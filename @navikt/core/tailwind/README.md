@@ -9,7 +9,7 @@ Custom tailwind-preset based on `@navikt/ds-tokens`.
   npm install @navikt/ds-tailwind
 ```
 
-## Usage
+## Use with tailwind v3
 
 ```javascript
 // tailwind.config.js
@@ -19,10 +19,16 @@ module.exports = {
 };
 ```
 
+## Use with tailwind v4
+
+```javascript
+@import "tailwindcss";
+@import "@navikt/ds-tailwind/v4";
+```
+
 ## Learn more
 
-- [Docs](https://aksel.nav.no/komponenter)
-- [Storybook](https://aksel.nav.no/storybook/)
+- [Docs](https://aksel.nav.no/grunnleggende/kode/tailwind)
 
 ## License
 
