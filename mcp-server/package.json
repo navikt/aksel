@@ -22,7 +22,7 @@
     "@navikt/aksel": "^8.14.0",
     "@navikt/aksel-icons": "^8.14.0",
     "@navikt/ds-tokens": "^8.14.0",
-    "@sanity/client": "7.22.1",
+    "@sanity/client": "7.23.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.10.9",
     "express": "^5.1.0",
