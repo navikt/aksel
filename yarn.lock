@@ -7884,18 +7884,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:7.22.1, @sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1":
-  version: 7.22.1
-  resolution: "@sanity/client@npm:7.22.1"
-  dependencies:
-    "@sanity/eventsource": "npm:^5.0.2"
-    get-it: "npm:^8.7.2"
-    nanoid: "npm:^3.3.11"
-    rxjs: "npm:^7.0.0"
-  checksum: 10/fae6027726568f8bb38b4c59f5f60e71743a4c772b6d7f1b40a4a9cbc8b45256807bfc74a2b6d052c500da29d314bf61315b7c79ef0938b3bafd54bb078b0dce
-  languageName: node
-  linkType: hard
-
 "@sanity/client@npm:7.23.0":
   version: 7.23.0
   resolution: "@sanity/client@npm:7.23.0"
@@ -7917,6 +7905,18 @@ __metadata:
     nanoid: "npm:^3.3.11"
     rxjs: "npm:^7.0.0"
   checksum: 10/74ad231ffa1190c076b6b3bfa6d7a670ac9c4326bc6c8eb73ac21f01acab50a83c22f70cbb2cf22d1400991d80bf18f116bcc713f836192f8ed228fc957265f9
+  languageName: node
+  linkType: hard
+
+"@sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1":
+  version: 7.22.1
+  resolution: "@sanity/client@npm:7.22.1"
+  dependencies:
+    "@sanity/eventsource": "npm:^5.0.2"
+    get-it: "npm:^8.7.2"
+    nanoid: "npm:^3.3.11"
+    rxjs: "npm:^7.0.0"
+  checksum: 10/fae6027726568f8bb38b4c59f5f60e71743a4c772b6d7f1b40a4a9cbc8b45256807bfc74a2b6d052c500da29d314bf61315b7c79ef0938b3bafd54bb078b0dce
   languageName: node
   linkType: hard
 
@@ -27651,7 +27651,7 @@ __metadata:
     "@portabletext/markdown": "npm:^1.2.0"
     "@portabletext/react": "npm:^6.0.3"
     "@sanity/blueprints": "npm:0.20.1"
-    "@sanity/client": "npm:7.22.1"
+    "@sanity/client": "npm:7.23.0"
     "@sanity/code-input": "npm:7.1.2"
     "@sanity/color-input": "npm:6.0.6"
     "@sanity/export": "npm:6.2.0"
