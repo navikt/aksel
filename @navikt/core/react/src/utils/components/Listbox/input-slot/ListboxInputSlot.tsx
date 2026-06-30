@@ -1,6 +1,6 @@
 import React from "react";
 import { Slot } from "../../slot/Slot";
-import { useListboxContext } from "../root/ListboxContext";
+import { useListboxContext } from "../root/Listbox.context";
 
 interface ListboxInputSlotProps {
   children: React.ReactElement;

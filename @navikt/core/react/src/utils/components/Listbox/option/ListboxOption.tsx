@@ -1,6 +1,6 @@
 import React from "react";
 import { cl } from "../../../helpers";
-import { useListboxContext } from "../root/ListboxContext";
+import { useListboxContext } from "../root/Listbox.context";
 
 export interface ListboxOptionProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,

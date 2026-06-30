@@ -2,7 +2,7 @@
 /** biome-ignore-all lint/a11y/useKeyWithMouseEvents: We know what we are doing */
 import React from "react";
 import { cl } from "../../../helpers";
-import { useListboxContext } from "../root/ListboxContext";
+import { useListboxContext } from "../root/Listbox.context";
 
 export interface ListboxOptionsProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,

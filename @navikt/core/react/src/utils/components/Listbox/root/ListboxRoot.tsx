@@ -6,7 +6,7 @@ import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
 import { ListboxOption } from "../option/ListboxOption";
 import { ListboxOptions } from "../options/ListboxOptions";
-import { ListboxProvider } from "./ListboxContext";
+import { ListboxProvider } from "./Listbox.context";
 import { findNextOption, findPrevOption } from "./domHelpers";
 
 export interface ListboxProps {
