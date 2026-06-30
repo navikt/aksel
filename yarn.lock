@@ -5486,6 +5486,7 @@ __metadata:
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
     "@navikt/ds-tokens": "npm:^8.14.0"
+    "@types/node": "npm:^24.10.9"
     tailwindcss: "npm:^3.3.3"
     tsx: "npm:^4.20.6"
     typescript: "npm:6.0.3"
