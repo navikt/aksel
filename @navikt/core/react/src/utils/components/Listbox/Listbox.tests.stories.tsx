@@ -50,8 +50,10 @@ function ListboxStory({
                 <Listbox.Option
                   key={item.value}
                   id={item.value}
+                  listboxId="test"
                   onClick={onClick}
                   hasVirtualFocus={virtuallyFocusedOptionId === item.value}
+                  aria-selected={false}
                 >
                   {item.label}
                 </Listbox.Option>
@@ -61,8 +63,10 @@ function ListboxStory({
             <Listbox.Option
               key={itemOrGroup.value}
               id={itemOrGroup.value}
+              listboxId="test"
               onClick={onClick}
               hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
+              aria-selected={false}
             >
               {itemOrGroup.label}
             </Listbox.Option>

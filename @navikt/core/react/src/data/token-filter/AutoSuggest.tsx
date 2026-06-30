@@ -1,7 +1,8 @@
-import React, { type JSX, forwardRef, useState } from "react";
+import React, { type JSX, forwardRef, useCallback, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
+import { useId } from "../../utils-external";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
@@ -24,6 +25,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       useState("");
 
     const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
+    const listboxId = useId();
 
     /* Unsure why N version works, but not regular here */
     const mergedRef = useMergeRefsN([setInputRef, ref]);
@@ -37,20 +39,23 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       setOpen(true);
     };
 
-    const handleSelectOption = (option: AutoCompleteOption) => {
-      const createdNewToken = onSelect(option);
+    const handleSelectOption = useCallback(
+      (option: AutoCompleteOption) => {
+        const createdNewToken = onSelect(option);
 
-      if (createdNewToken) {
-        inputRef?.focus();
-        setOpen(false);
-      }
-    };
+        if (createdNewToken) {
+          inputRef?.focus();
+          setOpen(false);
+        }
+      },
+      [onSelect, inputRef, setOpen],
+    );
 
     return (
       <Floating>
         <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
           <Floating.Anchor>
-            <Listbox.InputSlot>
+            <Listbox.InputSlot listboxId={listboxId}>
               <Search
                 label="Tabellsøk"
                 variant="simple"
@@ -75,6 +80,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
           </Floating.Anchor>
           {open && (
             <AutoSuggestPopup
+              listboxId={listboxId}
               options={options}
               onSelect={handleSelectOption}
               focusedValue={virtuallyFocusedOptionId}
@@ -91,6 +97,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 );
 
 type AutoSuggestPopupProps = {
+  listboxId: string;
   options: OptionGroup<AutoCompleteOption>[];
   onSelect: (option: AutoCompleteOption) => void;
   focusedValue: string;
@@ -103,6 +110,7 @@ type AutoSuggestPopupProps = {
 const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
   (
     {
+      listboxId,
       options,
       onSelect,
       focusedValue,
@@ -132,31 +140,14 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
               {options.map((group) => (
                 <Listbox.Group key={group.label} label={group.label}>
                   {group.options.map((item) => (
-                    <Listbox.Option
+                    <AutoSuggestOption
                       key={item.value}
-                      id={item.value}
-                      onClick={() => onSelect(item)}
+                      item={item}
+                      listboxId={listboxId}
+                      onSelect={onSelect}
                       hasVirtualFocus={focusedValue === item.value}
-                    >
-                      <VStack gap="space-0">
-                        <BodyShort as="div" size="small">
-                          <HighlightText
-                            text={item.label}
-                            highlightText={autoSuggestValue}
-                          />
-                        </BodyShort>
-                        {item.description && (
-                          <Detail as="div">{item.description}</Detail>
-                        )}
-                      </VStack>
-                      {/* {item.tags && item.tags.length > 0 && (
-                        <div>
-                          {item.tags.map((tag) => (
-                            <span key={tag}>{tag}</span>
-                          ))}
-                        </div>
-                      )} */}
-                    </Listbox.Option>
+                      autoSuggestValue={autoSuggestValue}
+                    />
                   ))}
                 </Listbox.Group>
               ))}
@@ -166,6 +157,46 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
       </DismissableLayer>
     );
   },
+);
+
+type AutoSuggestOptionProps = {
+  item: AutoCompleteOption;
+  listboxId: string;
+  onSelect: AutoSuggestPopupProps["onSelect"];
+  hasVirtualFocus: boolean;
+  autoSuggestValue: string;
+};
+
+const AutoSuggestOption = React.memo(
+  ({
+    item,
+    listboxId,
+    onSelect,
+    hasVirtualFocus,
+    autoSuggestValue,
+  }: AutoSuggestOptionProps) => (
+    <Listbox.Option
+      id={item.value}
+      onClick={() => onSelect(item)}
+      hasVirtualFocus={hasVirtualFocus}
+      listboxId={listboxId}
+      aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
+    >
+      <VStack gap="space-0">
+        <BodyShort as="div" size="small">
+          <HighlightText text={item.label} highlightText={autoSuggestValue} />
+        </BodyShort>
+        {item.description && <Detail as="div">{item.description}</Detail>}
+      </VStack>
+      {/* {item.tags && item.tags.length > 0 && (
+        <div>
+          {item.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      )} */}
+    </Listbox.Option>
+  ),
 );
 
 function HighlightText({
