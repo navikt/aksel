@@ -1,4 +1,4 @@
-import { BodyLong, BodyShort, Link, Lookup } from "@navikt/ds-react";
+import { BodyLong, Link, Lookup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -6,28 +6,11 @@ const Example = () => {
     <BodyLong>
       For at vi skal vurdere om du har rett til{" "}
       <Lookup word="AAP">
-        <BodyShort>
-          Som hovedregel kan du ha rett til AAP hvis alt dette gjelder deg:
-        </BodyShort>
-        <ul>
-          <li>
-            Arbeidsevnen din er nedsatt med minst 50 prosent på grunn av sykdom
-            eller skade.
-          </li>
-          <li>
-            Arbeidsevnen din er nedsatt til alle typer arbeid du er kvalifisert
-            for.
-          </li>
-          <li>
-            Du trenger behandling for å bedre arbeidsevnen din, eller hjelp fra
-            Nav for å beholde eller skaffe arbeid.
-          </li>
-          <li>
-            Du har vært medlem i folketrygden sammenhengende i minst 5 år når du
-            søker om AAP.
-          </li>
-          <li>Du er mellom 18 og 67 år.</li>
-        </ul>
+        <BodyLong spacing>
+          Arbeidsavklaringspenger (AAP) er en midlertidig ytelse for personer
+          som har nedsatt arbeidsevne på grunn av sykdom eller skade, og som
+          trenger hjelp til å komme tilbake i arbeid.{" "}
+        </BodyLong>
         <Link href="https://www.nav.no/aap">
           Du kan lese mer om AAP på nav.no.
         </Link>

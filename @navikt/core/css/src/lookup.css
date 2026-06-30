@@ -1,6 +1,6 @@
 .aksel-lookup-trigger {
   cursor: pointer;
-  text-decoration: underline dotted;
+  text-decoration: underline dashed;
   text-underline-offset: round(0.1em, 1px);
   text-decoration-thickness: round(0.1em, 1px);
   text-decoration-color: var(--ax-border-default);
@@ -31,7 +31,9 @@
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 2px;
-    border-radius: var(--ax-radius-4);
+
+    /* Popover radius - border-width */
+    border-radius: calc(var(--ax-radius-12) - 1px);
   }
 }
 
