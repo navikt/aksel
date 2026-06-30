@@ -2,27 +2,12 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React from "react";
 import { useId } from "../../../../utils-external";
-import { createStrictContext } from "../../../helpers";
 import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
 import { ListboxOption } from "../option/ListboxOption";
 import { ListboxOptions } from "../options/ListboxOptions";
+import { ListboxProvider } from "./ListboxContext";
 import { findNextOption, findPrevOption } from "./domHelpers";
-
-export const { Provider: ListboxProvider, useContext: useListboxContext } =
-  createStrictContext<{
-    /**
-     * ID for the option that currently has virtual focus.
-     * Set on the active option and referenced by the combobox's `aria-activedescendant`.
-     */
-    activeId: string;
-    /**
-     * Updates which option currently has virtual focus.
-     */
-    setVirtuallyFocusedOptionId: (value: string) => void;
-  }>({
-    name: "Listbox",
-  });
 
 export interface ListboxProps {
   children: React.ReactNode;
