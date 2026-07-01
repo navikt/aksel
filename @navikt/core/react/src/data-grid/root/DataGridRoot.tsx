@@ -60,7 +60,7 @@ interface DataGridComponent {
     props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
   ): React.ReactElement | null;
   /**
-   * @see 🏷️ {@link DataGridTableProps}
+   * @see 🏷️ {@link DataGridTable.Props}
    *
    * @example
    * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
@@ -69,12 +69,11 @@ interface DataGridComponent {
    */
   Table: typeof DataGridTable;
   /**
-   * @see 🏷️ {@link DataGridTableProps}
+   * @see 🏷️ {@link DataGridPreferences.Props}
    *
    * @example
    * <DataGrid columns={columns} data={data} onSettingsChange={handleSettingsChange}>
    *   <DataGrid.Preferences />
-   *   <DataGrid.Table />
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
@@ -91,6 +90,7 @@ interface DataGridComponent {
  * @example
  * ```jsx
  * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+ *   <DataGrid.Preferences />
  *   <DataGrid.Table />
  * </DataGrid>
  * ```
