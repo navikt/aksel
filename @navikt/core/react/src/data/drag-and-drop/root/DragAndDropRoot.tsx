@@ -189,9 +189,6 @@ function DragAndDropInner(
       const activeRef = activeItemRef.current;
       const element = pendingStart?.element;
 
-      if (activeRef !== null && pendingStart !== null) {
-        console.info({ activeRef, pendingStart });
-      }
 
       if (!activeRef && pendingStart) {
         const deltaX = Math.abs(event.clientX - pendingStart.startX);
