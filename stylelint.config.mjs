@@ -85,6 +85,6 @@ export default {
     "**/@navikt/aksel/**",
     "**/examples/**",
     "plugin.js",
-    "tailwind4.css",
+    "**/tailwind4.css",
   ],
 };

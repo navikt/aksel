@@ -30,7 +30,8 @@
       "!**/modal/dialog-polyfill.ts",
       "!**/_sanity/query-types.ts",
       "!**/transforms/**/*.input.*",
-      "!**/transforms/**/*.output.*"
+      "!**/transforms/**/*.output.*",
+      "!**/tailwind4.css"
     ]
   },
   "linter": {
