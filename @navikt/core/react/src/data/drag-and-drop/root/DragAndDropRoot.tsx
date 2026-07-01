@@ -194,11 +194,6 @@ function DragAndDropInner(
         const deltaX = Math.abs(event.clientX - pendingStart.startX);
         const deltaY = Math.abs(event.clientY - pendingStart.startY);
 
-        console.info({
-          deltaX,
-          deltaY,
-          threshold: DRAG_THRESHOLD,
-        });
 
         if (deltaX >= DRAG_THRESHOLD || deltaY >= DRAG_THRESHOLD) {
           if (element) {
