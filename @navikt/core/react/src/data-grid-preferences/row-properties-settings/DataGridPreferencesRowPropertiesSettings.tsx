@@ -13,7 +13,7 @@ type DataGridPreferencesRowPropertiesFields = {
 
 type DataGridPreferencesRowPropertiesSettingsProps = {
   value: DataGridPreferencesRowProperties;
-  onChange: (value: DataGridPreferencesRowProperties) => void;
+  onChange?: (value: DataGridPreferencesRowProperties) => void;
   /**
    * Controls which checkboxes are shown. Defaults to all visible.
    */
@@ -22,7 +22,7 @@ type DataGridPreferencesRowPropertiesSettingsProps = {
 
 function DataGridPreferencesRowPropertiesSettings({
   value,
-  onChange,
+  onChange = () => null,
   fields,
 }: DataGridPreferencesRowPropertiesSettingsProps) {
   const showTruncateContent = fields?.truncateContent !== false;

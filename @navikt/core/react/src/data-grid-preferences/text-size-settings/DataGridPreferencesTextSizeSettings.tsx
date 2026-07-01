@@ -1,10 +1,14 @@
 import React from "react";
-import { DataGridSettingsOptions } from "../../data-grid/root/DataGrid.types";
 import { Select } from "../../form/select";
 
+const TEXT_SIZE_OPTIONS = {
+  small: "Liten",
+  medium: "Medium",
+} as const;
+
 type DataGridPreferencesTextSizeSettingsProps = {
-  value?: keyof typeof DataGridSettingsOptions.textSize;
-  onChange: (value: keyof typeof DataGridSettingsOptions.textSize) => void;
+  value?: keyof typeof TEXT_SIZE_OPTIONS;
+  onChange: (value: keyof typeof TEXT_SIZE_OPTIONS) => void;
 };
 
 function DataGridPreferencesTextSizeSettings({
@@ -23,21 +27,19 @@ function DataGridPreferencesTextSizeSettings({
       }}
       value={value}
     >
-      {Object.entries(DataGridSettingsOptions.textSize).map(
-        ([key, label]) => (
-          <option key={key} value={key}>
-            {label}
-          </option>
-        ),
-      )}
+      {Object.entries(TEXT_SIZE_OPTIONS).map(([key, label]) => (
+        <option key={key} value={key}>
+          {label}
+        </option>
+      ))}
     </Select>
   );
 }
 
 function isTextSizeOption(
   value: string,
-): value is keyof typeof DataGridSettingsOptions.textSize {
-  return value in DataGridSettingsOptions.textSize;
+): value is keyof typeof TEXT_SIZE_OPTIONS {
+  return value in TEXT_SIZE_OPTIONS;
 }
 
 export { DataGridPreferencesTextSizeSettings };

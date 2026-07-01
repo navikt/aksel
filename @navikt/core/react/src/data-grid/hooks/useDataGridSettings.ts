@@ -10,7 +10,7 @@ type UseDataGridSettingsArgs = {
 };
 
 function useDataGridSettings(args: UseDataGridSettingsArgs): {
-  settings: ResolvedDataGridSettings;
+  settings: ReturnType<typeof resolveDataGridSettings>;
   updateSettings: (newSettings: Partial<DataGridSettings>) => void;
 } {
   const { settings: userSettings, defaultSettings, onSettingsChange } = args;

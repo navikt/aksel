@@ -14,7 +14,7 @@ type DataGridPreferencesColumnLayoutFields = {
 
 type DataGridPreferencesColumnLayoutSettingsProps = {
   value: DataGridPreferencesColumnLayout;
-  onChange: (value: DataGridPreferencesColumnLayout) => void;
+  onChange?: (value: DataGridPreferencesColumnLayout) => void;
   /**
    * Controls which checkboxes are shown. Defaults to all visible.
    */
@@ -23,7 +23,7 @@ type DataGridPreferencesColumnLayoutSettingsProps = {
 
 function DataGridPreferencesColumnLayoutSettings({
   value,
-  onChange,
+  onChange = () => null,
   fields,
 }: DataGridPreferencesColumnLayoutSettingsProps) {
   const { columnDividers, stickyColumns } = value;
@@ -61,12 +61,7 @@ function DataGridPreferencesColumnLayoutSettings({
       }}
     >
       {showColumnDividers && (
-        <Checkbox
-          value="columnDividers"
-          description="Skiller kolonner fra hverandre med en strek"
-        >
-          Kolonnestrek
-        </Checkbox>
+        <Checkbox value="columnDividers">Skillelinje mellom kolonner</Checkbox>
       )}
       {showStickyColumns && (
         <Checkbox value="sticky-start">Fest første kolonne</Checkbox>

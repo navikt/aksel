@@ -12,13 +12,11 @@ import {
   DialogTrigger,
 } from "../../dialog";
 import { cl } from "../../utils/helpers";
-import { useControllableState } from "../../utils/hooks";
 import { DataGridPreferencesColumnLayoutSettings } from "../column-layout-settings/DataGridPreferencesColumnLayoutSettings";
 import {
   type DataGridPreferencesColumnDisplay,
   DataGridPreferencesColumnSettings,
 } from "../column-settings/DataGridPreferencesColumnSettings";
-import { resolveDataGridSettings } from "../helpers/data-grid-settings";
 import { DataGridPreferencesRowDensitySettings } from "../row-density-settings/DataGridPreferencesRowDensitySettings";
 import { DataGridPreferencesRowPropertiesSettings } from "../row-properties-settings/DataGridPreferencesRowPropertiesSettings";
 import { DataGridPreferencesTextSizeSettings } from "../text-size-settings/DataGridPreferencesTextSizeSettings";
@@ -86,7 +84,7 @@ const DataGridPreferencesRoot = forwardRef<
       className,
       fields,
       rootElement,
-      open: openParam,
+      open,
       defaultOpen,
       onOpenChange,
       onOpenChangeComplete,
@@ -103,17 +101,6 @@ const DataGridPreferencesRoot = forwardRef<
     }
 
     const { tableSettings, updateTableSettings, columnDefinitions } = context;
-
-    const [open, setOpen] = useControllableState({
-      defaultValue: defaultOpen,
-      value: openParam,
-      onChange: onOpenChange,
-    });
-
-    const resolved = useMemo(
-      () => resolveDataGridSettings(tableSettings ?? {}),
-      [tableSettings],
-    );
 
     const columnDefinitionMap = useMemo(
       () => new Map(columnDefinitions.map((col) => [col.id, col.header])),
@@ -148,7 +135,8 @@ const DataGridPreferencesRoot = forwardRef<
     return (
       <Dialog
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={onOpenChange}
+        defaultOpen={defaultOpen}
         onOpenChangeComplete={onOpenChangeComplete}
         size="small"
       >
@@ -174,7 +162,7 @@ const DataGridPreferencesRoot = forwardRef<
               <div className="aksel-data-grid__preferences-block">
                 {isFieldVisible("rowDensity", fields) && (
                   <DataGridPreferencesRowDensitySettings
-                    value={resolved.rowDensity}
+                    value={tableSettings?.rowDensity}
                     onChange={(value) =>
                       updateTableSettings?.({ rowDensity: value })
                     }
@@ -182,7 +170,7 @@ const DataGridPreferencesRoot = forwardRef<
                 )}
                 {isFieldVisible("textSize", fields) && (
                   <DataGridPreferencesTextSizeSettings
-                    value={resolved.textSize}
+                    value={tableSettings.textSize}
                     onChange={(value) =>
                       updateTableSettings?.({ textSize: value })
                     }
@@ -195,8 +183,8 @@ const DataGridPreferencesRoot = forwardRef<
                     zebraStripes: isFieldVisible("zebraStripes", fields),
                   }}
                   value={{
-                    truncateContent: resolved.truncateContent,
-                    zebraStripes: resolved.zebraStripes,
+                    truncateContent: tableSettings.truncateContent,
+                    zebraStripes: tableSettings.zebraStripes,
                   }}
                   onChange={updateTableSettings}
                 />
@@ -207,8 +195,8 @@ const DataGridPreferencesRoot = forwardRef<
                     stickyColumns: isFieldVisible("stickyColumns", fields),
                   }}
                   value={{
-                    columnDividers: resolved.columnDividers,
-                    stickyColumns: resolved.stickyColumns,
+                    columnDividers: tableSettings.columnDividers,
+                    stickyColumns: tableSettings.stickyColumns,
                   }}
                   onChange={updateTableSettings}
                 />

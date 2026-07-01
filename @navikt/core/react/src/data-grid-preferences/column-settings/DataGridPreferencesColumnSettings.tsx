@@ -33,8 +33,8 @@ function DataGridPreferencesColumnSettings({
   );
 
   const setDndItems = useCallback(
-    (action: React.SetStateAction<{ id: string; label: string }[]>) => {
-      const newItems = typeof action === "function" ? action(dndItems) : action;
+    (items: { id: string; label: string }[]) => {
+      const newItems = items;
       onColumnsChange(
         newItems.flatMap((item) => {
           const col = colMap.get(item.id);
@@ -42,7 +42,7 @@ function DataGridPreferencesColumnSettings({
         }),
       );
     },
-    [colMap, dndItems, onColumnsChange],
+    [colMap, onColumnsChange],
   );
 
   const toggleAll = useCallback(() => {

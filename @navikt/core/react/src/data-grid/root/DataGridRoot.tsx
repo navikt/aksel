@@ -63,7 +63,7 @@ interface DataGridComponent {
    * @see 🏷️ {@link DataGridTable.Props}
    *
    * @example
-   * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+   * <DataGrid columns={columnDefs} data={rowData} getRowId={(row) => row.id}>
    *   <DataGrid.Table />
    * </DataGrid>
    */
@@ -89,7 +89,7 @@ interface DataGridComponent {
  *
  * @example
  * ```jsx
- * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+ * <DataGrid columns={columnDefs} data={rowData} getRowId={(row) => row.id}>
  *   <DataGrid.Preferences />
  *   <DataGrid.Table />
  * </DataGrid>

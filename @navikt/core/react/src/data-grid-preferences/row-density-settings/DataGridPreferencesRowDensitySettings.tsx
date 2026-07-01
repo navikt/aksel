@@ -1,10 +1,15 @@
 import React from "react";
-import { DataGridSettingsOptions } from "../../data-grid/root/DataGrid.types";
 import { Select } from "../../form/select";
 
+const ROW_DENSITY_OPTIONS = {
+  tight: "Tett",
+  standard: "Standard",
+  loose: "Løs",
+} as const;
+
 type DataGridPreferencesRowDensitySettingsProps = {
-  value?: keyof typeof DataGridSettingsOptions.rowDensity;
-  onChange: (value: keyof typeof DataGridSettingsOptions.rowDensity) => void;
+  value?: keyof typeof ROW_DENSITY_OPTIONS;
+  onChange: (value: keyof typeof ROW_DENSITY_OPTIONS) => void;
 };
 
 function DataGridPreferencesRowDensitySettings({
@@ -23,21 +28,19 @@ function DataGridPreferencesRowDensitySettings({
       }}
       value={value}
     >
-      {Object.entries(DataGridSettingsOptions.rowDensity).map(
-        ([key, label]) => (
-          <option key={key} value={key}>
-            {label}
-          </option>
-        ),
-      )}
+      {Object.entries(ROW_DENSITY_OPTIONS).map(([key, label]) => (
+        <option key={key} value={key}>
+          {label}
+        </option>
+      ))}
     </Select>
   );
 }
 
 function isRowDensityOption(
   value: string,
-): value is keyof typeof DataGridSettingsOptions.rowDensity {
-  return value in DataGridSettingsOptions.rowDensity;
+): value is keyof typeof ROW_DENSITY_OPTIONS {
+  return value in ROW_DENSITY_OPTIONS;
 }
 
 export { DataGridPreferencesRowDensitySettings };
