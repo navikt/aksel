@@ -36,10 +36,10 @@ export function get(
   );
 }
 
-const keypathCache: Record<string, string[]> = {};
+const keypathCache = new Map<string, string[]>();
 
 function getKeypath(str: string) {
-  const cached = keypathCache[str];
+  const cached = keypathCache.get(str);
   if (cached) {
     return cached;
   }
@@ -53,6 +53,6 @@ function getKeypath(str: string) {
     result = OBJECT_NOTATION_MATCHER.exec(str);
   }
 
-  keypathCache[str] = path;
+  keypathCache.set(str, path);
   return path;
 }
