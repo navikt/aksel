@@ -1,5 +1,19 @@
 # Changelog
 
+## 8.15.0
+
+### @navikt/ds-css
+
+- Lookup: Changed text-decoration from dotted to dashed ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+- InlineMessage: Adjusted gap between icon and text to `4px` for size small ([#5031](https://github.com/navikt/aksel/pull/5031))
+
+- Lookup: updated focus-outline ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+### @navikt/ds-tailwind
+
+- Tailwind v4 config now available at `@navikt/ds-tailwind/v4` ([#5036](https://github.com/navikt/aksel/pull/5036))
+
 ## 8.14.0
 
 ### @navikt/ds-react
