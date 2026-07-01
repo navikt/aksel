@@ -36,7 +36,14 @@ export function get(
   );
 }
 
+const keypathCache: Record<string, string[]> = {};
+
 function getKeypath(str: string) {
+  const cached = keypathCache[str];
+  if (cached) {
+    return cached;
+  }
+
   const path: string[] = [];
   let result = OBJECT_NOTATION_MATCHER.exec(str);
 
@@ -46,5 +53,6 @@ function getKeypath(str: string) {
     result = OBJECT_NOTATION_MATCHER.exec(str);
   }
 
+  keypathCache[str] = path;
   return path;
 }

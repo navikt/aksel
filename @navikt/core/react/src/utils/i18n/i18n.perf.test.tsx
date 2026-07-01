@@ -7,47 +7,32 @@ import { useI18n } from "./i18n.hooks";
 import nb from "./locales/nb";
 
 describe("useI18n referential stability", () => {
-  /**
-   * These tests document the DESIRED behavior after optimization.
-   * They will FAIL until useI18n memoizes the translate function.
-   */
-  test.fails(
-    "translate fn should be stable across re-renders when inputs unchanged",
-    () => {
-      const { result, rerender } = renderHook(() => useI18n("FileUpload"));
-      const first = result.current;
-      rerender();
-      expect(result.current).toBe(first);
-    },
-  );
+  test("translate fn should be stable across re-renders when inputs unchanged", () => {
+    const { result, rerender } = renderHook(() => useI18n("FileUpload"));
+    const first = result.current;
+    rerender();
+    expect(result.current).toBe(first);
+  });
 
-  test.fails(
-    "translate fn should be stable when provider value unchanged",
-    () => {
-      const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <Provider>{children}</Provider>
-      );
-      const { result, rerender } = renderHook(() => useI18n("FileUpload"), {
-        wrapper,
-      });
-      const first = result.current;
-      rerender();
-      expect(result.current).toBe(first);
-    },
-  );
+  test("translate fn should be stable when provider value unchanged", () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <Provider>{children}</Provider>
+    );
+    const { result, rerender } = renderHook(() => useI18n("FileUpload"), {
+      wrapper,
+    });
+    const first = result.current;
+    rerender();
+    expect(result.current).toBe(first);
+  });
 
-  test.fails(
-    "translate fn should be stable with local translations across re-renders",
-    () => {
-      const local = { item: { uploading: "Custom" } };
-      const { result, rerender } = renderHook(() =>
-        useI18n("FileUpload", local),
-      );
-      const first = result.current;
-      rerender();
-      expect(result.current).toBe(first);
-    },
-  );
+  test("translate fn should be stable with local translations across re-renders", () => {
+    const local = { item: { uploading: "Custom" } };
+    const { result, rerender } = renderHook(() => useI18n("FileUpload", local));
+    const first = result.current;
+    rerender();
+    expect(result.current).toBe(first);
+  });
 
   test("translate fn should update when translations change", async () => {
     function Consumer() {
@@ -78,43 +63,36 @@ describe("useI18n referential stability", () => {
 });
 
 describe("useI18n consumer re-renders", () => {
-  /**
-   * Documents that memo'd consumers still re-render because translate fn
-   * identity changes. Will PASS once translate is memoized.
-   */
-  test.fails(
-    "consumer should not re-render when parent re-renders with same provider value",
-    async () => {
-      let consumerRenderCount = 0;
+  test("consumer should not re-render when parent re-renders with same provider value", async () => {
+    let consumerRenderCount = 0;
 
-      const Consumer = memo(function Consumer({
-        translate,
-      }: {
-        translate: ReturnType<typeof useI18n<"FileUpload">>;
-      }) {
-        consumerRenderCount++;
-        return <span>{translate("item.uploading")}</span>;
-      });
+    const Consumer = memo(function Consumer({
+      translate,
+    }: {
+      translate: ReturnType<typeof useI18n<"FileUpload">>;
+    }) {
+      consumerRenderCount++;
+      return <span>{translate("item.uploading")}</span>;
+    });
 
-      function Outer() {
-        const [, setCount] = useState(0);
-        const t = useI18n("FileUpload");
-        return (
-          <Provider>
-            <button onClick={() => setCount((c) => c + 1)}>increment</button>
-            <Consumer translate={t} />
-          </Provider>
-        );
-      }
+    function Outer() {
+      const [, setCount] = useState(0);
+      const t = useI18n("FileUpload");
+      return (
+        <Provider>
+          <button onClick={() => setCount((c) => c + 1)}>increment</button>
+          <Consumer translate={t} />
+        </Provider>
+      );
+    }
 
-      render(<Outer />);
-      expect(consumerRenderCount).toBe(1);
+    render(<Outer />);
+    expect(consumerRenderCount).toBe(1);
 
-      await userEvent.click(screen.getByText("increment"));
+    await userEvent.click(screen.getByText("increment"));
 
-      expect(consumerRenderCount).toBe(1);
-    },
-  );
+    expect(consumerRenderCount).toBe(1);
+  });
 
   test("translate fn should produce correct results after provider value changes", async () => {
     function Consumer() {
