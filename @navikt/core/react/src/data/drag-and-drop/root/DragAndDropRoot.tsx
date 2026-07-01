@@ -94,7 +94,6 @@ function DragAndDropInner(
     item: DragAndDropElement,
     element?: HTMLElement | null,
   ) => {
-    console.info("Starting-drag");
     pendingDragStartRef.current = {
       item,
       element: element || null,
