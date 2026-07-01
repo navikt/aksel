@@ -1,4 +1,4 @@
-import { SlugIsUniqueValidator, SlugRule, defineField } from "sanity";
+import { type SlugIsUniqueValidator, type SlugRule, defineField } from "sanity";
 import {
   SANITY_API_VERSION,
   grunnleggendeKategorier,

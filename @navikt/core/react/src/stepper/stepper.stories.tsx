@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { BodyLong } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";

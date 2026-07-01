@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../../../types";
+import type { AkselColor } from "../../../types";
 import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";

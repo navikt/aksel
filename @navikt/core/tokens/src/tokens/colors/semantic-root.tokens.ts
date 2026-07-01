@@ -1,10 +1,10 @@
-import {
-  type AkselColorTheme,
-  type AkselRootBackgroundToken,
-  type AkselRootBorderToken,
-  type AkselRootTextToken,
+import type {
+  AkselColorTheme,
+  AkselRootBackgroundToken,
+  AkselRootBorderToken,
+  AkselRootTextToken,
 } from "../../../types";
-import { type StyleDictionaryToken } from "../../tokens.util";
+import type { StyleDictionaryToken } from "../../tokens.util";
 
 /**
  * Static root-layer for semantic tokens.

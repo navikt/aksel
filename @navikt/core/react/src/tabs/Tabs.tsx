@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import { cl } from "../utils/helpers";
 import { TabsProvider } from "./Tabs.context";
-import { TabsProps } from "./Tabs.types";
-import Tab, { TabProps } from "./parts/tab/Tab";
-import TabList, { TabListProps } from "./parts/tablist/TabList";
-import TabPanel, { TabPanelProps } from "./parts/tabpanel/TabPanel";
+import type { TabsProps } from "./Tabs.types";
+import Tab, { type TabProps } from "./parts/tab/Tab";
+import TabList, { type TabListProps } from "./parts/tablist/TabList";
+import TabPanel, { type TabPanelProps } from "./parts/tabpanel/TabPanel";
 import { useTabs } from "./useTabs";
 
 interface TabsComponent extends React.ForwardRefExoticComponent<

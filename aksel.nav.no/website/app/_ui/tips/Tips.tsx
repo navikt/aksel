@@ -1,6 +1,6 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
 function Tips(props: ExtractPortableComponentProps<"tips">) {

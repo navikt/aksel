@@ -6,7 +6,7 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
-import {
+import type {
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT,
   DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT,
 } from "@/app/_sanity/query-types";

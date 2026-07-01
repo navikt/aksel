@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { Box } from "@navikt/ds-react";
 import { DialogBody, DialogHeader } from "@navikt/ds-react/Dialog";

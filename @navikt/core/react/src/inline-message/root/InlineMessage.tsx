@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { useThemeInternal } from "../../theme/Theme";
 import { BodyLong } from "../../typography";
-import { type OverridableComponent } from "../../utils-external";
+import type { OverridableComponent } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { InlineMessageIcon } from "../icon/InlineMessageIcon";

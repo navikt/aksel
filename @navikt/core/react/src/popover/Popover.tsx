@@ -1,20 +1,20 @@
 import {
-  Alignment,
-  Placement,
-  Side,
+  type Alignment,
+  type Placement,
+  type Side,
   autoUpdate,
   offset as flOffset,
   flip,
   shift,
   useFloating,
 } from "@floating-ui/react";
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { omit, useClientLayoutEffect } from "../utils-external";
 import { DismissableLayer } from "../utils/components/dismissablelayer/DismissableLayer";
 import { cl } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";
-import PopoverContent, { PopoverContentType } from "./PopoverContent";
+import PopoverContent, { type PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**

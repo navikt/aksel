@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { PencilIcon, PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";

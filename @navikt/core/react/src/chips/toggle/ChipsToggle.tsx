@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../../types";
+import type { AkselColor } from "../../types";
 import type { OverridableComponent } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 

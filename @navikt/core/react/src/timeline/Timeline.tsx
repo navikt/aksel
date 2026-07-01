@@ -2,7 +2,7 @@ import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
 import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { AxisLabels } from "./AxisLabels";
-import TimelineRow, { TimelineRowType } from "./TimelineRow";
+import TimelineRow, { type TimelineRowType } from "./TimelineRow";
 import { TimelineKeyboardNavProvider } from "./hooks/TimelineKeyboardNavProvider";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
@@ -11,11 +11,11 @@ import {
   useLatestDate,
   useTimelineRows,
 } from "./hooks/useTimelineRows";
-import Period, { PeriodType } from "./period";
-import Pin, { PinType } from "./pin/Pin";
+import Period, { type PeriodType } from "./period";
+import Pin, { type PinType } from "./pin/Pin";
 import { parseRows } from "./utils/timeline";
-import { AxisLabelTemplates } from "./utils/types.external";
-import Zoom, { ZoomType } from "./zoom";
+import type { AxisLabelTemplates } from "./utils/types.external";
+import Zoom, { type ZoomType } from "./zoom";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

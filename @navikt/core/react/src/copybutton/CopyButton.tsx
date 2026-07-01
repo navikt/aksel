@@ -1,7 +1,7 @@
-import React, { ButtonHTMLAttributes, forwardRef, useState } from "react";
+import React, { type ButtonHTMLAttributes, forwardRef, useState } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { Button, ButtonProps } from "../button";
+import { Button, type ButtonProps } from "../button";
 import type { AkselColor } from "../types/theme";
 import { cl, clipboardCopy, composeEventHandlers } from "../utils/helpers";
 import { useTimeout } from "../utils/hooks";

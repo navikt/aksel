@@ -1,4 +1,4 @@
-import { ClientConfig } from "@sanity/client";
+import type { ClientConfig } from "@sanity/client";
 
 export const SANITY_PROJECT_ID = "hnbe3yhs";
 export const SANITY_API_VERSION = "2025-08-10";

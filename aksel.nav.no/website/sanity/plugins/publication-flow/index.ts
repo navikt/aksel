@@ -1,4 +1,4 @@
-import { DocumentActionComponent, definePlugin } from "sanity";
+import { type DocumentActionComponent, definePlugin } from "sanity";
 import { setLastVerified } from "./actions/lastVerified";
 
 /**

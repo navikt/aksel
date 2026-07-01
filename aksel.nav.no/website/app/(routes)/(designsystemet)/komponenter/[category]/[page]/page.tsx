@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
 import { sanityFetch } from "@/app/_sanity/live";
 import { METADATA_BY_SLUG_QUERY } from "@/app/_sanity/queries";

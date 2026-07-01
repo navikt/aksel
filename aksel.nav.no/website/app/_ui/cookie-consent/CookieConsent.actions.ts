@@ -2,7 +2,7 @@
 
 /* import { client } from "@/app/_sanity/client";
 import { writeToken } from "@/app/_sanity/token"; */
-import { CONSENT_TRACKER_STATE } from "@/app/_ui/cookie-consent/CookieConsent.config";
+import type { CONSENT_TRACKER_STATE } from "@/app/_ui/cookie-consent/CookieConsent.config";
 
 /* const stateToSanityKey = {
   accepted: "accept",

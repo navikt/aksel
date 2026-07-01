@@ -1,6 +1,6 @@
 import { differenceInMonths, isSameDay } from "date-fns";
-import { Metadata } from "next";
-import { PortableTextBlock, stegaClean } from "next-sanity";
+import type { Metadata } from "next";
+import { type PortableTextBlock, stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {

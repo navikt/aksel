@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
-import { AutoCompleteOption } from "./AutoSuggest.types";
+import type { AutoCompleteOption } from "./AutoSuggest.types";
 import { TokenFilterChips } from "./FilterChip";
 import type {
   ExternalOptions,

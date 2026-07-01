@@ -1,5 +1,5 @@
 import { Chips } from "@navikt/ds-react";
-import { BreakpointRoleT, ColorRoleT, FontRoleT, RoleT } from "./config";
+import type { BreakpointRoleT, ColorRoleT, FontRoleT, RoleT } from "./config";
 
 const TokenRolesChips = ({
   category,

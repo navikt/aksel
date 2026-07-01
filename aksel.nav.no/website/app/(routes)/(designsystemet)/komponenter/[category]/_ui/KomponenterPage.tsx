@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { DesignsystemetKomponentIntro } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.intro";
 import {

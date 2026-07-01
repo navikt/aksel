@@ -7,11 +7,11 @@ import { useEventCallback, useMergeRefs } from "../../hooks";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating, MENU_COLLISION_AVOIDANCE } from "../floating/Floating";
 import { FocusBoundary } from "../focus-boundary/FocusBoundary";
-import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
+import { RovingFocus, type RovingFocusProps } from "./parts/RovingFocus";
 import {
   SlottedDivElement,
-  SlottedDivElementRef,
-  SlottedDivProps,
+  type SlottedDivElementRef,
+  type SlottedDivProps,
 } from "./parts/SlottedDivElement";
 
 /* -------------------------------------------------------------------------- */

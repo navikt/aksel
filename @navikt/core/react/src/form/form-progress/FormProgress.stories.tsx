@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Provider } from "../../provider";
 import en from "../../utils/i18n/locales/en";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import FormProgress, { FormProgressProps } from "./FormProgress";
+import FormProgress, { type FormProgressProps } from "./FormProgress";
 
 export default {
   title: "ds-react/FormProgress",

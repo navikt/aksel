@@ -3,7 +3,7 @@
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { HStack, Link } from "@navikt/ds-react";
-import { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import { removeEmojiesFromText } from "@/ui-utils/format-text";

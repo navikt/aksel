@@ -1,4 +1,4 @@
-import { allArticleDocuments } from "@/sanity/config";
+import type { allArticleDocuments } from "@/sanity/config";
 
 const globalSearchConfig: {
   [K in (typeof allArticleDocuments)[number]]: {

@@ -1,10 +1,10 @@
-import React, { InputHTMLAttributes, forwardRef, useState } from "react";
+import React, { type InputHTMLAttributes, forwardRef, useState } from "react";
 import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 export interface SwitchProps
   extends

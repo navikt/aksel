@@ -7,7 +7,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@navikt/ds-react/Table";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 function TableV2(props: ExtractPortableComponentProps<"tabell_v2">) {
   const { rows } = props.value;

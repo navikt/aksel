@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { Accordion, AccordionProps } from ".";
+import { Accordion, type AccordionProps } from ".";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
 export default {

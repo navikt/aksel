@@ -1,4 +1,4 @@
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";

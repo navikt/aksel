@@ -1,17 +1,20 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
 import {
   coerce as semverCoerce,
   satisfies as semverSatisfies,
   validRange as semverValidRange,
 } from "semver";
 import { Heading, VStack } from "@navikt/ds-react";
-import { PageProps } from "@/app/(routes)/next-types";
+import type { PageProps } from "@/app/(routes)/next-types";
 import { sanityFetch } from "@/app/_sanity/live";
-import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
-import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import {
+  ENDRINGSLOGG_FIELDS,
+  type ENDRINGSLOGG_QUERY,
+} from "@/app/_sanity/queries";
+import type { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";

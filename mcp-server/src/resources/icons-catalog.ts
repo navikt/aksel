@@ -1,4 +1,4 @@
-import unParsedMetadata, { AkselIcon } from "@navikt/aksel-icons/metadata";
+import unParsedMetadata, { type AkselIcon } from "@navikt/aksel-icons/metadata";
 import type { McpResource } from "../types.js";
 
 const ICONS_CATALOG_URI = "aksel-icons://category-catalog";

@@ -3,7 +3,7 @@
 import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
 import { Box, HStack, Skeleton, VStack } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import styles from "./KodeEksempler.module.css";
 import { useKodeEksempler } from "./KodeEksempler.provider";

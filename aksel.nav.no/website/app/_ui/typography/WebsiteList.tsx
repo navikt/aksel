@@ -1,7 +1,7 @@
 import {
   List as AkselList,
   ListItem as AkselListItem,
-  ListProps as AkselListProps,
+  type ListProps as AkselListProps,
 } from "@navikt/ds-react/List";
 import styles from "./Typography.module.css";
 

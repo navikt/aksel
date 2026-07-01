@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { Chat2Icon } from "@navikt/aksel-icons";
-import { ExpansionCardT } from "../shared/expansion-card";
+import type { ExpansionCardT } from "../shared/expansion-card";
 
 type ExampletextBlockT = {
   _key: string;
