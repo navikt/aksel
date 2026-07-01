@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useMemo } from "react";
 import { CogIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { DataGridSettings } from "../../data-grid/root/DataGrid.types";
+import type { DataGridSettings } from "../../data-grid/root/DataGrid.types";
 import { useDataGridContext } from "../../data-grid/root/DataGridRoot.context";
 import {
   Dialog,
