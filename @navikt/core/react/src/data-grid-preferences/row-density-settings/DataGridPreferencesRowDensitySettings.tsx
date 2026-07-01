@@ -27,6 +27,7 @@ function DataGridPreferencesRowDensitySettings({
         }
       }}
       value={value}
+      style={{ width: "auto" }}
     >
       {Object.entries(ROW_DENSITY_OPTIONS).map(([key, label]) => (
         <option key={key} value={key}>

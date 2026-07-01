@@ -26,6 +26,7 @@ function DataGridPreferencesTextSizeSettings({
         }
       }}
       value={value}
+      style={{ width: "auto" }}
     >
       {Object.entries(TEXT_SIZE_OPTIONS).map(([key, label]) => (
         <option key={key} value={key}>

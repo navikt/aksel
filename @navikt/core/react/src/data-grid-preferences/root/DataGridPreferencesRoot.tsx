@@ -92,13 +92,10 @@ const DataGridPreferencesRoot = forwardRef<
     }: DataGridPreferencesProps,
     forwardedRef,
   ) => {
-    const context = useDataGridContext(false);
-
-    if (!context) {
-      throw new Error(
-        "[Aksel] DataGrid.Preferences must be used within DataGrid",
-      );
-    }
+    const context = useDataGridContext(
+      true,
+      "[Aksel] DataGrid.Preferences must be used within DataGrid",
+    );
 
     const { tableSettings, updateTableSettings, columnDefinitions } = context;
 

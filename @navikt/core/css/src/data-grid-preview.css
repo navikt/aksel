@@ -695,34 +695,18 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-grid__preferences-content {
-  height: 100%;
+  min-height: 100%;
   display: grid;
+  align-content: flex-start;
   container-type: inline-size;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: var(--ax-space-24);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--ax-space-48);
 }
 
 .aksel-data-grid__preferences-block {
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-16);
-}
-
-/* Show divider only while the two preference blocks are side-by-side. */
-.aksel-data-grid__preferences-content > .aksel-data-grid__preferences-block:first-child {
-  border-inline-end: 1px solid var(--ax-border-neutral-subtleA);
-  padding-inline-end: var(--ax-space-24);
-}
-
-@container (max-width: 583px) {
-  .aksel-data-grid__preferences-content > .aksel-data-grid__preferences-block:first-child {
-    border-inline-end: 0;
-    padding-inline-end: 0;
-  }
-}
-
-.aksel-data-grid__preferences-dnd {
-  margin-block-end: var(--ax-space-24);
 }
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
