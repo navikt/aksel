@@ -201,7 +201,6 @@ function DragAndDropInner(
         });
 
         if (deltaX >= DRAG_THRESHOLD || deltaY >= DRAG_THRESHOLD) {
-          console.info("within treshhold");
           if (element) {
             element.setPointerCapture(pendingStart.pointerId);
           }
