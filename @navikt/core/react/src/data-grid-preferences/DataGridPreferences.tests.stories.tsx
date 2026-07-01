@@ -86,7 +86,7 @@ export const TestDefaultsReflected: Story = {
 
     /* columnDividers + truncateContent default to true, zebraStripes to false */
     expect(
-      dialog.getByRole("checkbox", { name: "Kolonnestrek" }),
+      dialog.getByRole("checkbox", { name: "Skillelinje mellom kolonner" }),
     ).toBeChecked();
     expect(
       dialog.getByRole("checkbox", { name: "Kutt innhold" }),
