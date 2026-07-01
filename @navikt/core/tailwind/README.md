@@ -21,7 +21,7 @@ module.exports = {
 
 ## Use with tailwind v4
 
-```javascript
+```css
 @import "tailwindcss";
 @import "@navikt/ds-tailwind/v4";
 ```
