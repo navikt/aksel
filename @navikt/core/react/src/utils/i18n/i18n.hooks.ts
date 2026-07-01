@@ -12,7 +12,7 @@ import {
 /* https://regex101.com/r/LYKWi3/1 */
 const REPLACE_REGEX = /{[^}]*}/g;
 
-export function useI18n<T extends Component>(
+function useI18n<T extends Component>(
   componentName: T,
   ...localTranslations: (ComponentTranslation<T> | undefined)[]
 ) {
@@ -45,7 +45,7 @@ export function useI18n<T extends Component>(
             );
           }
 
-          return replacements[replacement] as string;
+          return String(replacements[replacement]);
         });
       }
 
@@ -57,7 +57,7 @@ export function useI18n<T extends Component>(
   return translate;
 }
 
-export function useDateLocale() {
+function useDateLocale() {
   const context = useProvider();
   const contextTranslations = context.translations || [];
   const i18nObjects = Array.isArray(contextTranslations)
@@ -72,3 +72,5 @@ export function useDateLocale() {
   }
   throw new Error("dateLocale not found.");
 }
+
+export { useI18n, useDateLocale };
