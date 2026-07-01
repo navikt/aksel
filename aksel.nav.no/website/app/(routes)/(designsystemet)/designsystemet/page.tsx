@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";

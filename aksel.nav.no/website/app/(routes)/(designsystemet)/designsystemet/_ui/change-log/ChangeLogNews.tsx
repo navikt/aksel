@@ -14,7 +14,7 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { sanityFetch } from "@/app/_sanity/live";
 import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
-import { N_LATEST_CHANGE_LOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { N_LATEST_CHANGE_LOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";

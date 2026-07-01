@@ -11,7 +11,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Tag } from "@/app/(routes)/(root)/_ui/FrontpageTag";
-import { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { NextLink } from "@/app/_ui/next-link/NextLink";

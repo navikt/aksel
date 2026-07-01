@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
 import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
-import { DateInputProps } from "../../Date.Input";
+import type { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
-import { DateRange } from "../../Date.typeutils";
+import type { DateRange } from "../../Date.typeutils";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
-import { DatePickerProps } from "../DatePicker";
-import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
+import type { DatePickerProps } from "../DatePicker";
+import type { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
 
 export type RangeValidationT = {
   from: DateValidationT;

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Box, HGrid, Heading } from "@navikt/ds-react";
-import Card, { ArticleT } from "./FrontpageMasonryCard";
+import Card, { type ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
 

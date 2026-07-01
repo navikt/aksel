@@ -7,7 +7,7 @@ import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useInputContext } from "./Input/Input.context";
 import { InputController } from "./Input/InputController";
-import { ComboboxProps } from "./types";
+import type { ComboboxProps } from "./types";
 
 export const Combobox = forwardRef<
   HTMLInputElement,

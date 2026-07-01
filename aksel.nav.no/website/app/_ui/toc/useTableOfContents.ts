@@ -2,7 +2,7 @@
 
 import throttle from "lodash/throttle";
 import { useEffect, useRef, useState } from "react";
-import { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 function useTableOfContents(toc: NonNullable<TOC_BY_SLUG_QUERY_RESULT>) {
   const [activeId, setActiveId] = useState<string | null>(null);

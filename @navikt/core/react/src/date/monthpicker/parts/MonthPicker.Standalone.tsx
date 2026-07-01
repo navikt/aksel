@@ -8,7 +8,7 @@ import {
   getTranslations,
 } from "../../Date.locale";
 import { MonthPickerProvider } from "../MonthPicker.context";
-import { MonthPickerProps } from "../MonthPicker.types";
+import type { MonthPickerProps } from "../MonthPicker.types";
 import { MonthPickerCaption } from "./MonthPicker.Caption";
 import { MonthPickerTable } from "./MonthPicker.Table";
 

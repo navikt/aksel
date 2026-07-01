@@ -4,7 +4,7 @@ import { Link } from "../link";
 import { VStack } from "../primitives/stack";
 import { BodyLong, Heading } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import Alert, { AlertProps } from "./Alert";
+import Alert, { type AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert/Legacy",

@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { BodyLong, Box, ReadMore, VStack } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import styles from "./Video.module.css";
 import { VideoPlayer } from "./VideoPlayer";
 

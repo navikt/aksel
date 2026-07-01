@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { BodyShort } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { CompareImagesContainer } from "./CompareImages.container";
 import { CompareImagesHandle } from "./CompareImages.handle";

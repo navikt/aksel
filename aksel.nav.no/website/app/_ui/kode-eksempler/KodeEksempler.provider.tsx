@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 type FileT = NonNullable<
   NonNullable<

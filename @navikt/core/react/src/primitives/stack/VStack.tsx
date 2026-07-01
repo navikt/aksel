@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { type OverridableComponent } from "../../utils-external";
-import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
-import { Stack, StackProps } from "./Stack";
+import type { OverridableComponent } from "../../utils-external";
+import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
+import { Stack, type StackProps } from "./Stack";
 
 export type VStackProps = PrimitiveAsChildProps &
   Omit<StackProps, "direction" | "wrap">;

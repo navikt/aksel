@@ -5,7 +5,7 @@ import {
   DragVerticalIcon,
 } from "@navikt/aksel-icons";
 import { useDragAndDropContext } from "../root/DragAndDrop.context";
-import { DragAndDropElement } from "../types";
+import type { DragAndDropElement } from "../types";
 
 export interface DragAndDropDragHandlerProps {
   item: DragAndDropElement;

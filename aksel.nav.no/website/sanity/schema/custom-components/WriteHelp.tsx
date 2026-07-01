@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { useClient } from "sanity";
 import useSWR from "swr";
 import { CustomPortableText } from "@/app/CustomPortableText";

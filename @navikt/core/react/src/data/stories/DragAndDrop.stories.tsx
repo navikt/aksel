@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Switch } from "../../form/switch";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
-import { ColumnDefinition } from "../table/root/DataGridTable.types";
+import type { ColumnDefinition } from "../table/root/DataGridTable.types";
 
 const meta: Meta<typeof DragAndDrop> = {
   title: "ds-react/Data/DragAndDrop",

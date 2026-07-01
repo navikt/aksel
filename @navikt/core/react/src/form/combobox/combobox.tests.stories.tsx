@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { UNSAFE_Combobox } from "./index";

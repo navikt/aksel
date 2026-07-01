@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
 import {
@@ -24,7 +24,7 @@ import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { formatDateString } from "@/ui-utils/format-date";

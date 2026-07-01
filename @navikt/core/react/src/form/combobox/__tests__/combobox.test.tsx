@@ -4,7 +4,7 @@ import React from "react";
 import { describe, expect, test, vi } from "vitest";
 import { useId } from "../../../utils-external";
 import nb from "../../../utils/i18n/locales/nb";
-import { ComboboxProps, UNSAFE_Combobox } from "../index";
+import { type ComboboxProps, UNSAFE_Combobox } from "../index";
 
 const options = [
   "apple",

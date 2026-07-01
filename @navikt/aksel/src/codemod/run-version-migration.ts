@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Command } from "commander";
+import type { Command } from "commander";
 import Enquirer from "enquirer";
 import {
   getMigrationsForVersion,

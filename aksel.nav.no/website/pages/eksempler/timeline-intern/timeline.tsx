@@ -6,7 +6,7 @@ import {
   PiggybankIcon,
   VirusIcon,
 } from "@navikt/aksel-icons";
-import { Box, Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { Box, Timeline, type TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {

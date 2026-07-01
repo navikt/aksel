@@ -9,7 +9,7 @@ import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { SidebarPageT } from "@/types";
+import type { SidebarPageT } from "@/types";
 import styles from "./Sidebar.module.css";
 
 function DesignsystemSidebarItem(props: {

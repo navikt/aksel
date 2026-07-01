@@ -5,10 +5,12 @@ import { omit } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../utils/hooks";
-import AccordionContent, { AccordionContentProps } from "./AccordionContent";
+import AccordionContent, {
+  type AccordionContentProps,
+} from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
-import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
-import AccordionItem, { AccordionItemProps } from "./AccordionItem";
+import AccordionHeader, { type AccordionHeaderProps } from "./AccordionHeader";
+import AccordionItem, { type AccordionItemProps } from "./AccordionItem";
 
 interface AccordionComponent extends React.ForwardRefExoticComponent<
   AccordionProps & React.RefAttributes<HTMLDivElement>

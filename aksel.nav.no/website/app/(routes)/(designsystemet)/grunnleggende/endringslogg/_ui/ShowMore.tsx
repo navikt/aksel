@@ -1,9 +1,9 @@
 "use client";
 
 import React, {
-  HTMLAttributes,
-  ReactElement,
-  ReactNode,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
   useEffect,
   useRef,
   useState,

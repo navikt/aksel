@@ -1,6 +1,6 @@
 "use client";
 
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { useRef } from "react";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";

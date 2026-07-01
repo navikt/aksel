@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
 import { Box } from "@navikt/ds-react";

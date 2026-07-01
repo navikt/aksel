@@ -7,7 +7,7 @@ import {
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { BodyLong } from "../typography";
 import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";

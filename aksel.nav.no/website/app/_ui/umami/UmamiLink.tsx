@@ -2,7 +2,7 @@
 
 import { stegaClean } from "next-sanity";
 import { Events } from "@navikt/analytics-types";
-import { Link, LinkProps } from "@navikt/ds-react";
+import { Link, type LinkProps } from "@navikt/ds-react";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./UmamiLink.module.css";

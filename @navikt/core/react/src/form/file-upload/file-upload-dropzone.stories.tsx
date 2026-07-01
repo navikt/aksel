@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { fireEvent, within } from "storybook/test";
 import { ImageIcon } from "@navikt/aksel-icons";

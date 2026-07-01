@@ -1,5 +1,5 @@
 import React, { forwardRef, useRef, useState } from "react";
-import { Popover, PopoverProps } from "../popover";
+import { Popover, type PopoverProps } from "../popover";
 import type { AkselColor } from "../types";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs } from "../utils/hooks";

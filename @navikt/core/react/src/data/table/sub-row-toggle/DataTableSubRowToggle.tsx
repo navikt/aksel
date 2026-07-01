@@ -1,7 +1,7 @@
 import React from "react";
 import { ChevronDownIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
-import { type ItemDetail } from "../hooks/useTableItems";
+import type { ItemDetail } from "../hooks/useTableItems";
 import { useDataTableContext } from "../root/DataTableRoot.context";
 
 function DataTableSubRowToggle({ details }: { details: ItemDetail<any> }) {

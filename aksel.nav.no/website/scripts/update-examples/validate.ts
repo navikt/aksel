@@ -1,7 +1,7 @@
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { validateExamples } from "./parts/validate-examples";
-import { RootDirectoriesT, rootDirectories } from "./types";
+import { type RootDirectoriesT, rootDirectories } from "./types";
 
 (async function () {
   let error = false;

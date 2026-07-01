@@ -1,4 +1,4 @@
-import { SchemaPluginOptions } from "sanity";
+import type { SchemaPluginOptions } from "sanity";
 import * as document from "./documents";
 import * as object from "./objects";
 

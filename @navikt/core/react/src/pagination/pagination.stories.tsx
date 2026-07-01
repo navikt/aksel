@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Link, HashRouter as Router } from "react-router";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
-import { AirplaneIcon } from "@navikt/aksel-icons";
+import type { AirplaneIcon } from "@navikt/aksel-icons";
 import type { AkselIcon } from "@navikt/aksel-icons/metadata";
 import {
   BodyShort,
@@ -13,7 +13,7 @@ import {
   Tag,
 } from "@navikt/ds-react";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
-import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
+import type { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
 

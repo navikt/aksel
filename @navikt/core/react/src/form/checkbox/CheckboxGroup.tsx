@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, useState } from "react";
 import { cl } from "../../utils/helpers";
-import { Fieldset, FieldsetProps } from "../fieldset";
+import { Fieldset, type FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
 import { CheckboxGroupContext } from "./CheckboxGroup.context";
 

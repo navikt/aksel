@@ -1,4 +1,4 @@
-import { ComboboxOption } from "./types";
+import type { ComboboxOption } from "./types";
 
 /**
  *

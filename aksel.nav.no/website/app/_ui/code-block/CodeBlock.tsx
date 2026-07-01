@@ -10,7 +10,7 @@ import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./CodeBlock.module.css";
 import {
   CodeBlockProvider,
-  CodeBlockTabsT,
+  type CodeBlockTabsT,
   useCodeBlock,
 } from "./CodeBlock.provider";
 import { AkselPrismTheme } from "./CodePrismTheme";

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { KodeEksemplerIFrame } from "./KodeEksempler.iframe";
 import { KodeEksemplerNavigation } from "./KodeEksempler.navigation";
 import { KodeEksemplerProvider } from "./KodeEksempler.provider";

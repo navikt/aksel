@@ -1,4 +1,4 @@
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 /**
  * Capitalize the first letter of a string.

@@ -3,7 +3,7 @@ import { omit } from "../../utils-external";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup.context";
-import { CheckboxProps } from "./types";
+import type { CheckboxProps } from "./types";
 
 /**
  * Handles props for Checkboxes in context with Fieldset and CheckboxGroup

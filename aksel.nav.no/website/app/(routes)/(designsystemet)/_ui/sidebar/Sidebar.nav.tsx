@@ -2,7 +2,7 @@
 
 import React, { useId, useMemo, useState } from "react";
 import { BodyShort, Detail, Search, VStack } from "@navikt/ds-react";
-import {
+import type {
   DesignsystemSidebarSectionT,
   SidebarGroupedPagesT,
   SidebarPageT,
@@ -10,7 +10,7 @@ import {
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 import { DesignsystemSidebarSubNav } from "./Sidebar.subnav";
-import { type DesignsystemSidebarDataT } from "./Sidebar.util";
+import type { DesignsystemSidebarDataT } from "./Sidebar.util";
 
 type SidebarNavProps = {
   layout?: "sidebar" | "mobile";

@@ -1,4 +1,4 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { Button, UNSAFE_Combobox, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { ComponentIcon, TokenIcon } from "@navikt/aksel-icons";
 import {
   Bleed,
@@ -36,7 +36,7 @@ import { Header } from "../../_ui/header/Header";
 import "../../globals.css";
 import { PauseAnimationProvider } from "./_ui/AnimationStopContext";
 import { Hero } from "./_ui/FrontpageHero";
-import { FrontpageLatest, LatestT } from "./_ui/FrontpageLatest";
+import { FrontpageLatest, type LatestT } from "./_ui/FrontpageLatest";
 import { GpFrontpageCard } from "./_ui/GpFrontpageCard";
 import { MainWrapper } from "./_ui/MainWrapper";
 import styles from "./_ui/frontpage.module.css";

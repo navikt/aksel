@@ -4,7 +4,7 @@ import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
-import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
+import type { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
 import { IconPageIconDetails } from "./IconPage.icondetails";
 import styles from "./IconPage.module.css";
 
