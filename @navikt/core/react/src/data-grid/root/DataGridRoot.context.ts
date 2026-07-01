@@ -1,3 +1,4 @@
+import type { resolveDataGridSettings } from "../../data-grid-preferences/helpers/data-grid-settings";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
@@ -9,7 +10,8 @@ type DataGridContextValue<RowT = unknown> = {
   getRowId?: (rowData: RowT) => string;
   selection?: SelectionProps<RowT>;
   isLoading?: boolean;
-  tableSettings?: DataGridSettings;
+  tableSettings: ReturnType<typeof resolveDataGridSettings>;
+  updateTableSettings: (newSettings: Partial<DataGridSettings>) => void;
 };
 
 const { Provider: DataGridContextProvider, useContext: useDataGridContext } =

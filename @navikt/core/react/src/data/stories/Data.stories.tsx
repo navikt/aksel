@@ -648,8 +648,12 @@ export const KitchenSinkAdvancedFilter: Story = {
                           Velg alle
                         </Switch>
                         <DragAndDrop
-                          items={columnView}
-                          setItems={setColumnView}
+                          items={columnView.map((col) => ({
+                            id: col.id,
+                            label: col.header,
+                          }))}
+                          /* TODO: Temp out of commision */
+                          setItems={() => null}
                           renderItem={(item) => {
                             return (
                               <Switch
@@ -666,7 +670,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                                   });
                                 }}
                               >
-                                {item.header}
+                                {item.label}
                               </Switch>
                             );
                           }}

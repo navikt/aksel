@@ -552,15 +552,26 @@
 }
 
 .aksel-data-table__drag-and-drop-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+  flex-wrap: nowrap;
+  padding-block: var(--ax-space-4);
+
+  /* Optical alignment */
+  margin-inline-start: calc(-1 * var(--ax-space-2));
+
   &[data-overlay="true"] {
     width: 100%;
     opacity: 0.8;
     box-shadow: var(--ax-shadow-dialog);
     background-color: var(--ax-bg-default);
+    border-radius: var(--ax-radius-12);
   }
 
   &[data-drop-target="true"]:not([data-overlay="true"]) {
     background: var(--ax-bg-neutral-moderate);
+    box-shadow: 0 -1px 0 0 var(--ax-border-neutral-strong);
   }
 }
 
@@ -579,6 +590,7 @@
     padding: 0;
     border-radius: 50%;
     z-index: 1;
+    color: var(--ax-text-neutral);
 
     &[data-direction="up"] {
       top: -18px;
@@ -676,3 +688,25 @@ html[data-dragging-cursor="true"] *::after {
     outline-offset: -4px;
   }
 }
+
+/* ----------------------- DataGrid.Preferences Start ----------------------- */
+.aksel-data-grid__preferences-body {
+  flex-grow: 1;
+}
+
+.aksel-data-grid__preferences-content {
+  min-height: 100%;
+  display: grid;
+  align-content: flex-start;
+  container-type: inline-size;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--ax-space-48);
+}
+
+.aksel-data-grid__preferences-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-16);
+}
+
+/* ------------------------ DataGrid.Preferences End ------------------------ */
