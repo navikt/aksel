@@ -50,7 +50,6 @@
         "useSemanticElements": "off"
       },
       "style": {
-        "noDescendingSpecificity": "off",
         "useTemplate": "off",
         "useNodejsImportProtocol": "off",
         "useConst": "off",
