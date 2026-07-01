@@ -9,12 +9,6 @@ type ResolvedDataGridSettings = Required<
 > &
   Pick<DataGridSettings, "columnDisplay">;
 
-/**
- * Canonical default values for all settings.
- *
- * Single source of truth — consumed both by the grid (`useDataGridSettings`)
- * and the preferences panel, so the two can never drift apart.
- */
 const DataGridSettingsDefaults: ResolvedDataGridSettings = {
   rowDensity: "standard",
   zebraStripes: false,
@@ -30,23 +24,22 @@ const DataGridSettingsDefaults: ResolvedDataGridSettings = {
  * returning a fully resolved settings object.
  */
 function resolveDataGridSettings(
-  settings?: DataGridSettings,
+  settings: DataGridSettings,
 ): ResolvedDataGridSettings {
   return {
-    rowDensity: settings?.rowDensity ?? DataGridSettingsDefaults.rowDensity,
+    rowDensity: settings.rowDensity ?? DataGridSettingsDefaults.rowDensity,
     zebraStripes:
-      settings?.zebraStripes ?? DataGridSettingsDefaults.zebraStripes,
+      settings.zebraStripes ?? DataGridSettingsDefaults.zebraStripes,
     truncateContent:
-      settings?.truncateContent ?? DataGridSettingsDefaults.truncateContent,
+      settings.truncateContent ?? DataGridSettingsDefaults.truncateContent,
     stickyColumns:
-      settings?.stickyColumns ?? DataGridSettingsDefaults.stickyColumns,
-    textSize: settings?.textSize ?? DataGridSettingsDefaults.textSize,
+      settings.stickyColumns ?? DataGridSettingsDefaults.stickyColumns,
+    textSize: settings.textSize ?? DataGridSettingsDefaults.textSize,
     columnDividers:
-      settings?.columnDividers ?? DataGridSettingsDefaults.columnDividers,
+      settings.columnDividers ?? DataGridSettingsDefaults.columnDividers,
     columnDisplay:
-      settings?.columnDisplay ?? DataGridSettingsDefaults.columnDisplay,
+      settings.columnDisplay ?? DataGridSettingsDefaults.columnDisplay,
   };
 }
 
-export type { ResolvedDataGridSettings };
-export { DataGridSettingsDefaults, resolveDataGridSettings };
+export { resolveDataGridSettings };

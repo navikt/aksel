@@ -24,9 +24,9 @@ function DataGridPreferencesRowDensitySettings({
       value={value}
     >
       {Object.entries(DataGridSettingsOptions.rowDensity).map(
-        ([key, radioValue]) => (
+        ([key, label]) => (
           <option key={key} value={key}>
-            {radioValue}
+            {label}
           </option>
         ),
       )}

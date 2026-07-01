@@ -24,9 +24,9 @@ function DataGridPreferencesTextSizeSettings({
       value={value}
     >
       {Object.entries(DataGridSettingsOptions.textSize).map(
-        ([key, radioValue]) => (
+        ([key, label]) => (
           <option key={key} value={key}>
-            {radioValue}
+            {label}
           </option>
         ),
       )}

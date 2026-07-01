@@ -56,7 +56,7 @@ function DataGridPreferencesRowPropertiesSettings({
       {showTruncateContent && (
         <Checkbox
           value="truncateContent"
-          description="Kutter innhold som ikke får plass i cellen på en linje"
+          description="Kutter innhold som ikke får plass i cellen på én linje"
         >
           Kutt innhold
         </Checkbox>

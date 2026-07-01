@@ -68,7 +68,7 @@ export const AlwaysVisibleColumn: Story = {
   },
 };
 
-export const Controlled: Story = {
+export const ControlledOpenState: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
 
@@ -90,7 +90,7 @@ export const Controlled: Story = {
   },
 };
 
-type UserDataTest = {
+type DemoRow = {
   id: number;
   foo: string;
   bar: string;
@@ -98,7 +98,7 @@ type UserDataTest = {
   time: Date;
 };
 
-const userColumnDef: DataGrid.Columns<UserDataTest> = [
+const demoColumnDef: DataGrid.Columns<DemoRow> = [
   {
     id: "id",
     header: "Id",
@@ -132,7 +132,7 @@ const userColumnDef: DataGrid.Columns<UserDataTest> = [
   },
 ];
 
-function generateUserData(
+function generateDemoData(
   count: number,
   countFrom: number = 0,
 ): UserDataTest[] {

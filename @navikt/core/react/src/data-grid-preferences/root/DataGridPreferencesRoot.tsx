@@ -198,7 +198,7 @@ const DataGridPreferencesRoot = forwardRef<
                     truncateContent: resolved.truncateContent,
                     zebraStripes: resolved.zebraStripes,
                   }}
-                  onChange={(value) => updateTableSettings?.(value)}
+                  onChange={updateTableSettings}
                 />
 
                 <DataGridPreferencesColumnLayoutSettings
@@ -210,7 +210,7 @@ const DataGridPreferencesRoot = forwardRef<
                     columnDividers: resolved.columnDividers,
                     stickyColumns: resolved.stickyColumns,
                   }}
-                  onChange={(value) => updateTableSettings?.(value)}
+                  onChange={updateTableSettings}
                 />
               </div>
               <div className="aksel-data-grid__preferences-block">
