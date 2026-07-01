@@ -19,7 +19,7 @@ type Story = StoryObj<typeof DataGridPreferences>;
 export const Default: Story = {
   render: () => {
     return (
-      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
+      <DataGrid columns={demoColumnDef} data={generateDemoData(5)}>
         {/* Div should be a separate "header" or "toolbar" component */}
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
           <DataGridPreferences defaultOpen />
@@ -33,7 +33,7 @@ export const Default: Story = {
 export const HiddenFields: Story = {
   render: () => {
     return (
-      <DataGrid columns={userColumnDef} data={generateUserData(5)}>
+      <DataGrid columns={demoColumnDef} data={generateDemoData(5)}>
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
           <DataGridPreferences
             fields={{ textSize: false, zebraStripes: false }}
@@ -50,10 +50,10 @@ export const AlwaysVisibleColumn: Story = {
   render: () => {
     return (
       <DataGrid
-        columns={userColumnDef}
-        data={generateUserData(5)}
+        columns={demoColumnDef}
+        data={generateDemoData(5)}
         defaultSettings={{
-          columnDisplay: userColumnDef.map((col) => ({
+          columnDisplay: demoColumnDef.map((col) => ({
             id: col.id,
             visible: col.id === "id" ? "always" : true,
           })),
@@ -74,8 +74,8 @@ export const ControlledOpenState: Story = {
 
     return (
       <DataGrid
-        columns={userColumnDef}
-        data={generateUserData(5)}
+        columns={demoColumnDef}
+        data={generateDemoData(5)}
         defaultSettings={{ zebraStripes: true }}
       >
         <div style={{ display: "flex", padding: "0.75rem 0.5rem" }}>
@@ -132,10 +132,7 @@ const demoColumnDef: DataGrid.Columns<DemoRow> = [
   },
 ];
 
-function generateDemoData(
-  count: number,
-  countFrom: number = 0,
-): UserDataTest[] {
+function generateDemoData(count: number, countFrom: number = 0): DemoRow[] {
   const num = (index: number) => (countFrom ? index + countFrom : index + 1);
 
   return Array.from({ length: count }, (_, i) => ({
