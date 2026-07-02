@@ -33,7 +33,6 @@ module.exports = defineConfig([
     "**/tokens/**/plugin.js",
     "**/.next",
     "**/query-types.ts",
-    "examples/astro/.astro",
     ".yarn",
     "**/next-env.d.ts",
     "stylelint.config.mjs",
@@ -181,12 +180,6 @@ module.exports = defineConfig([
       "arrow-body-style": ["error", "never"],
       "func-style": ["error", "expression"],
       "import/no-named-export": "error",
-    },
-  },
-  {
-    files: ["examples/**"],
-    rules: {
-      "react/react-in-jsx-scope": "off",
     },
   },
   {
