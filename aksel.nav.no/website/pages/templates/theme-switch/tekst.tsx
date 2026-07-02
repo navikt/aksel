@@ -84,5 +84,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  sandboxEnabled: false,
+  sandbox: false,
 };
