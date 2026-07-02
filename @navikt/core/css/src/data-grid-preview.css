@@ -700,7 +700,7 @@ html[data-dragging-cursor="true"] *::after {
   align-content: flex-start;
   container-type: inline-size;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--ax-space-48);
+  gap: var(--ax-space-16) var(--ax-space-48);
 }
 
 .aksel-data-grid__preferences-block {
