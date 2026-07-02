@@ -68,7 +68,7 @@ function DataGridPreferencesColumnSettings({
   );
 
   return (
-    <Fieldset legend="Vis kolonner" size="small">
+    <Fieldset legend="Kolonner" size="small">
       <Checkbox
         size="small"
         checked={isAllVisible}
