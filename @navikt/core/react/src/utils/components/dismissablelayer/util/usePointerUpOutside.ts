@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useEventCallback } from "../../../hooks";
 import {
   CUSTOM_EVENTS,
-  CustomPointerEvent,
+  type CustomPointerEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 

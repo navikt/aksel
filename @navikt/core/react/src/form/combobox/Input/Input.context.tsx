@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useClientLayoutEffect } from "../../../utils-external";
 import { createStrictContext } from "../../../utils/helpers";
-import { FormFieldType, useFormField } from "../../useFormField";
-import { ComboboxProps } from "../types";
+import { type FormFieldType, useFormField } from "../../useFormField";
+import type { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;

@@ -3,7 +3,7 @@ import { JSON_SCHEMA, load } from "js-yaml";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
-import { IconYml } from "../config/figma/make-configs";
+import type { IconYml } from "../config/figma/make-configs";
 
 const basePath = path.resolve(__dirname, "../icons");
 

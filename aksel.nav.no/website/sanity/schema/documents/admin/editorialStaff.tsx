@@ -1,6 +1,6 @@
 import { parseInt as lodashParseInt } from "lodash";
 import Image from "next/image";
-import { SlugValue, defineField, defineType } from "sanity";
+import { type SlugValue, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
 import { showForDevsOnly } from "../../../util";
 

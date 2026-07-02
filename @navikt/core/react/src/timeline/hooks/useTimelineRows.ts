@@ -3,8 +3,8 @@ import { useMemo } from "react";
 import { horizontalPositionAndWidth } from "../utils/calc";
 import { invisiblePeriods, withinADay } from "../utils/filter";
 import { lastPeriod } from "../utils/sort";
-import { Period } from "../utils/types.external";
-import {
+import type { Period } from "../utils/types.external";
+import type {
   InternalSimpleTimeline,
   PositionedPeriod,
 } from "../utils/types.internal";

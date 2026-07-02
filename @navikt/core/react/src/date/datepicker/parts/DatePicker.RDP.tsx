@@ -1,6 +1,10 @@
 import { isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
-import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
+import {
+  type ClassNames,
+  DayPicker,
+  dateMatchModifiers,
+} from "react-day-picker";
 import { Show } from "../../../primitives/responsive";
 import { omit } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";

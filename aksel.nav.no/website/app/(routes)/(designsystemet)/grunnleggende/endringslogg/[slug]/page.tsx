@@ -1,6 +1,6 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
 import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";

@@ -2,7 +2,7 @@
 
 import { BodyLong } from "@navikt/ds-react";
 import { Chips, ChipsToggle } from "@navikt/ds-react/Chips";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import styles from "./KodeEksempler.module.css";
 import { useKodeEksempler } from "./KodeEksempler.provider";

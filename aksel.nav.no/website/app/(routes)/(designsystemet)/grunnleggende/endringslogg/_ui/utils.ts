@@ -1,4 +1,4 @@
-import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 export const bumpHeadingLevels = (
   content: ENDRINGSLOGG_QUERY_RESULT[number]["content"],

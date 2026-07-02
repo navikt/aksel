@@ -1,4 +1,4 @@
-import { type StyleDictionaryToken, type TokenTypes } from "../tokens.util";
+import type { StyleDictionaryToken, TokenTypes } from "../tokens.util";
 
 export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   name: string;

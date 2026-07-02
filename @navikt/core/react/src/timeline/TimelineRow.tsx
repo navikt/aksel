@@ -11,7 +11,7 @@ import {
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import Period from "./period";
-import {
+import type {
   PositionedPeriod,
   TimelineComponentTypes,
 } from "./utils/types.internal";

@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { ComponentDoc } from "../../../scripts/docgen";
+import type { ComponentDoc } from "../../../scripts/docgen";
 import { noCdnClient } from "../sanity/interface/client.server";
 import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 

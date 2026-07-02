@@ -6,7 +6,7 @@ import {
   InfoCardHeader,
   InfoCardTitle,
 } from "@navikt/ds-react/InfoCard";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 function ExampleText(
   props: ExtractPortableComponentProps<"exampletext_block">,

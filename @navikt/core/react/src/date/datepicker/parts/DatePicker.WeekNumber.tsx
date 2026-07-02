@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
-import { CalendarWeek, useDayPicker } from "react-day-picker";
+import { type CalendarWeek, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
 import { Hide, Show } from "../../../primitives/responsive";
 import { Detail } from "../../../typography";
 import { cl } from "../../../utils/helpers";
 import { useDateTranslationContext } from "../../Date.locale";
-import { MultipleMode } from "../DatePicker.types";
+import type { MultipleMode } from "../DatePicker.types";
 
 const DatePickerWeekNumber = ({
   week: { weekNumber, days },

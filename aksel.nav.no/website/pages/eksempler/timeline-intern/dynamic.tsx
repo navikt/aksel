@@ -14,7 +14,7 @@ import {
   HStack,
   Spacer,
   Timeline,
-  TimelinePeriodProps,
+  type TimelinePeriodProps,
   ToggleGroup,
   VStack,
 } from "@navikt/ds-react";

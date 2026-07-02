@@ -1,6 +1,10 @@
-import { Iframe, IframeOptions, UrlResolver } from "sanity-plugin-iframe-pane";
+import {
+  Iframe,
+  type IframeOptions,
+  type UrlResolver,
+} from "sanity-plugin-iframe-pane";
 import { referencesView } from "sanity-plugin-references";
-import { StructureResolver } from "sanity/structure";
+import type { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,

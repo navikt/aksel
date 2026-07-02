@@ -1,4 +1,4 @@
-import { AkselColorRole, AkselSpaceToken } from "./types";
+import type { AkselColorRole, AkselSpaceToken } from "./types";
 
 type GlobalColorScale =
   | "100"

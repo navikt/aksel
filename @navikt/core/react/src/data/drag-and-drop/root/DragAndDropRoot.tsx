@@ -10,12 +10,14 @@ import React, {
 import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl } from "../../../utils/helpers";
-import {
+import type {
   ColumnDefinition,
   ColumnDefinitions,
 } from "../../table/root/DataGridTable.types";
-import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
-import { DragAndDropElement } from "../types";
+import DragAndDropItem, {
+  type DragAndDropItemProps,
+} from "../item/DragAndDropItem";
+import type { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
 interface DragAndDropProps<T> extends React.HTMLAttributes<HTMLUListElement> {

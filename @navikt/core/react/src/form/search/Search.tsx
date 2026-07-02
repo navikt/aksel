@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
-  InputHTMLAttributes,
+  type InputHTMLAttributes,
   forwardRef,
   useRef,
   useState,
@@ -8,14 +8,14 @@ import React, {
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import { Button } from "../../button";
-import { AkselColor } from "../../types";
+import type { AkselColor } from "../../types";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { FormFieldProps, useFormField } from "../useFormField";
-import SearchButton, { SearchButtonType } from "./SearchButton";
+import { type FormFieldProps, useFormField } from "../useFormField";
+import SearchButton, { type SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
 
 export type SearchNativeProps = Omit<

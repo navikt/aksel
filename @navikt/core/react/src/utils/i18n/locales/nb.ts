@@ -1,4 +1,4 @@
-import { Locale, nb } from "date-fns/locale";
+import { type Locale, nb } from "date-fns/locale";
 
 interface TranslationMap {
   [component: string]: Record<string, string | Record<string, string> | Locale>;

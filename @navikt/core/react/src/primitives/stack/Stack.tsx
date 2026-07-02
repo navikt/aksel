@@ -1,15 +1,15 @@
-import React, { HTMLAttributes, forwardRef } from "react";
-import { type OverridableComponent } from "../../utils-external";
+import React, { type HTMLAttributes, forwardRef } from "react";
+import type { OverridableComponent } from "../../utils-external";
 import { omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
-  PrimitiveProps,
+  type PrimitiveProps,
 } from "../base/BasePrimitive";
-import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
+import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
-import { ResponsiveProp, SpacingScale } from "../utilities/types";
+import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
   /**

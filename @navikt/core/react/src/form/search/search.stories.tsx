@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Search from "./Search";

@@ -1,7 +1,7 @@
 import { isBefore } from "date-fns";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "../hooks/useTimelineContext";
-import { TimelineComponentTypes } from "../utils/types.internal";
+import type { TimelineComponentTypes } from "../utils/types.internal";
 import PinInternal, { type TimelinePinProps } from "./PinInternal";
 
 export interface PinType extends React.ForwardRefExoticComponent<

@@ -2,7 +2,10 @@ import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../modal/Modal.context";
 import { type OverridableComponent, useId } from "../utils-external";
-import { Menu, MenuPortalProps } from "../utils/components/floating-menu/Menu";
+import {
+  Menu,
+  type MenuPortalProps,
+} from "../utils/components/floating-menu/Menu";
 import { Slot } from "../utils/components/slot/Slot";
 import {
   cl,

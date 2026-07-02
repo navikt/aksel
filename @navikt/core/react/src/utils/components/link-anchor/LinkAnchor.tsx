@@ -1,7 +1,7 @@
 import React, {
-  AnchorHTMLAttributes,
+  type AnchorHTMLAttributes,
   type ComponentProps,
-  HTMLAttributes,
+  type HTMLAttributes,
   forwardRef,
   useRef,
 } from "react";

@@ -5,9 +5,9 @@ import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 import {
   LinkPanelDescription,
-  LinkPanelDescriptionProps,
+  type LinkPanelDescriptionProps,
 } from "./LinkPanelDescription";
-import { LinkPanelTitle, LinkPanelTitleProps } from "./LinkPanelTitle";
+import { LinkPanelTitle, type LinkPanelTitleProps } from "./LinkPanelTitle";
 
 export interface LinkPanelProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**

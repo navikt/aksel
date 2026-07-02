@@ -1,5 +1,5 @@
-import { Metadata, ResolvingMetadata } from "next";
-import { PortableTextBlock } from "next-sanity";
+import type { Metadata, ResolvingMetadata } from "next";
+import type { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { BodyLong, BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";

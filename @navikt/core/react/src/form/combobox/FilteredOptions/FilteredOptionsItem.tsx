@@ -5,7 +5,7 @@ import { cl } from "../../../utils/helpers";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList } from "../combobox-utils";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 

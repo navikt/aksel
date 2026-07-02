@@ -1,4 +1,4 @@
-import { FileItem } from "../item/FileUploadItem.types";
+import type { FileItem } from "../item/FileUploadItem.types";
 
 export const isNativeFile = (fileItem: FileItem): fileItem is File =>
   "lastModified" in fileItem;

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { BloggArticleBlock } from "@/app/(routes)/(produktbloggen)/produktbloggen/_ui/BloggArticleBlogg";

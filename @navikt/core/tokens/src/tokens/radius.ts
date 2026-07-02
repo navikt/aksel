@@ -1,5 +1,5 @@
-import { AkselBorderRadiusToken } from "../../types";
-import { type StyleDictionaryToken } from "../tokens.util";
+import type { AkselBorderRadiusToken } from "../../types";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 export const radiusTokenConfig = {
   radius: {

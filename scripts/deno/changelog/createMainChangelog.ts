@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import {
+import type {
   List,
   ListItem,
   Paragraph,
@@ -7,7 +7,7 @@ import {
   Root,
   Text,
 } from "npm:@types/mdast";
-import { Node } from "npm:@types/unist";
+import type { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";

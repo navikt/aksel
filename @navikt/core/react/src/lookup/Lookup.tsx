@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { Popover, PopoverProps } from "../popover";
+import { Popover, type PopoverProps } from "../popover";
 import { Portal } from "../portal";
 import { BodyShort } from "../typography";
 import { useId } from "../utils-external";

@@ -1,13 +1,13 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { FileUpload, FileUploadItemProps } from ".";
+import { FileUpload, type FileUploadItemProps } from ".";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../primitives/stack";
 import { Heading } from "../../typography";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import {
+import type {
   FileObject,
   FileRejected,
   FileRejectionReason,

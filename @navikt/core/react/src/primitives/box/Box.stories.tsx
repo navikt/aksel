@@ -4,7 +4,7 @@ import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { HGrid } from "../grid";
 import { HStack, VStack } from "../stack";
-import { Box, BoxProps } from "./Box";
+import { Box, type BoxProps } from "./Box";
 
 const meta: Meta<typeof Box> = {
   title: "ds-react/Primitives/Box",
