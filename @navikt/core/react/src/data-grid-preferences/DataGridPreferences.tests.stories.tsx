@@ -12,6 +12,7 @@ const meta: Meta<typeof DataGridPreferences> = {
   component: DataGridPreferences,
   parameters: {
     layout: "padded",
+    chromatic: { disable: true },
   },
 };
 
