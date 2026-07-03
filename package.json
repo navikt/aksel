@@ -27,7 +27,8 @@
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
     "release": "yarn boot && yarn docgen && changeset publish && yarn script:git-release",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "knip": "knip"
   },
   "workspaces": [
     "@navikt/core/*",
@@ -92,6 +93,7 @@
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@tanstack/react-table": "8.21.3",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "26.0.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitest/browser": "4.1.9",
@@ -112,6 +114,7 @@
     "fast-glob": "3.3.3",
     "globals": "^17.6.0",
     "husky": "^8.0.0",
+    "knip": "6.20.0",
     "lint-staged": "16.4.0",
     "playwright": "1.60.0",
     "prettier": "3.8.3",
