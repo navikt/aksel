@@ -39,7 +39,7 @@ module.exports = {
               context.report({
                 node: declaration,
                 message:
-                  "'args' must be exported as an object with shape { index: number, desc?: string, sandbox?: boolean, title?: string  }.",
+                  "'args' must be exported as an object with shape { index: number, desc?: string, sandbox?: boolean, title?: string }.",
               });
               continue;
             }
