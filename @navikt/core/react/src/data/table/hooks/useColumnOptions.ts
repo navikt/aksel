@@ -16,7 +16,7 @@ type UseColumnOptions = {
   layout: "fixed" | "auto";
   columnDisplay?: {
     id: string;
-    visible: boolean;
+    visible: boolean | "always";
   }[];
 };
 
@@ -103,7 +103,7 @@ function useColumnOptions<T>(
 
 function orderColumnsAndFilterByVisibility<T>(
   columns: ColumnDefinition<T>[],
-  columnDisplay?: { id: string; visible: boolean }[],
+  columnDisplay?: { id: string; visible: boolean | "always" }[],
 ): ColumnDefinition<T>[] {
   if (!columnDisplay) {
     return columns;
