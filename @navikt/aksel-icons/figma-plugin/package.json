@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.128.0",
+    "@rollup/pluginutils": "^5.4.0",
     "@svgr/core": "^8.1.0",
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
