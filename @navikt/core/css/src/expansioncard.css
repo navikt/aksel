@@ -194,8 +194,3 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
     }
   }
 }
-
-/*
-TODO: Test nettlesere som ikke støtter content-visibility
-TODO: Endre duration til 250ms etter testing
-*/

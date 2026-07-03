@@ -71,11 +71,6 @@ interface ExpansionCardProps extends React.DetailsHTMLAttributes<HTMLDetailsElem
   "data-color"?: AkselColor;
 }
 
-// TODO: Test i Safari < 18
-// TODO: Refactor to util-component or hook
-// TODO: Vurder enklere animasjon (opacity+transform som vi brukte før)
-// TODO: Vurder om man må kunne slå av "until-found" (usikker hvordan, kanskje display:none på content elns.)
-
 /**
  * A component that displays an expandable card.
  *
