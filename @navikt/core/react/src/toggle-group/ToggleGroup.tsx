@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { Label } from "../typography";
 import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { ToggleGroupProvider } from "./ToggleGroup.context";
-import { ToggleGroupProps } from "./ToggleGroup.types";
-import ToggleItem, { ToggleGroupItemProps } from "./parts/ToggleItem";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
+import ToggleItem, { type ToggleGroupItemProps } from "./parts/ToggleItem";
 import { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleGroupComponent extends React.ForwardRefExoticComponent<

@@ -4,7 +4,7 @@ import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
-import { SearchPageT } from "./GlobalSearch.config";
+import type { SearchPageT } from "./GlobalSearch.config";
 
 /**
  * We use node-cache here since nextjs built in

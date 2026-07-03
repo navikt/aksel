@@ -1,5 +1,5 @@
-import { type AkselBreakpointToken } from "../../types";
-import { type StyleDictionaryToken } from "../tokens.util";
+import type { AkselBreakpointToken } from "../../types";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 export const breakpointTokenConfig = {
   breakpoint: {

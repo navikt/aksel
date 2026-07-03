@@ -15,8 +15,8 @@ import {
   GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
   GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
 } from "@/app/_sanity/queries";
-import {
-  type GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT,
+import type {
+  GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";

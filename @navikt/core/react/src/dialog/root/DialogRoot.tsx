@@ -5,20 +5,23 @@ import {
   useEventCallback,
   useTransitionStatus,
 } from "../../utils/hooks";
-import { DialogBody, DialogBodyProps } from "../body/DialogBody";
+import { DialogBody, type DialogBodyProps } from "../body/DialogBody";
 import {
   DialogCloseTrigger,
-  DialogCloseTriggerProps,
+  type DialogCloseTriggerProps,
 } from "../close-trigger/DialogCloseTrigger";
 import {
   DialogDescription,
-  DialogDescriptionProps,
+  type DialogDescriptionProps,
 } from "../description/DialogDescription";
-import { DialogFooter, DialogFooterProps } from "../footer/DialogFooter";
-import { DialogHeader, DialogHeaderProps } from "../header/DialogHeader";
-import { DialogPopup, DialogPopupProps } from "../popup/DialogPopup";
-import { DialogTitle, DialogTitleProps } from "../title/DialogTitle";
-import { DialogTrigger, DialogTriggerProps } from "../trigger/DialogTrigger";
+import { DialogFooter, type DialogFooterProps } from "../footer/DialogFooter";
+import { DialogHeader, type DialogHeaderProps } from "../header/DialogHeader";
+import { DialogPopup, type DialogPopupProps } from "../popup/DialogPopup";
+import { DialogTitle, type DialogTitleProps } from "../title/DialogTitle";
+import {
+  DialogTrigger,
+  type DialogTriggerProps,
+} from "../trigger/DialogTrigger";
 import { DialogContextProvider, useDialogContext } from "./DialogRoot.context";
 
 interface DialogProps {

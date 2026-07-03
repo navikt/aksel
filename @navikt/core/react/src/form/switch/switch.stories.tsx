@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Switch from "./Switch";

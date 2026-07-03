@@ -7,9 +7,6 @@ registries:
 updates:
   - package-ecosystem: npm
     directory: /
-    exclude-paths:
-      - "examples/astro/package.json"
-      - "examples/shadow-dom/package.json"
     schedule:
       interval: weekly
       day: monday

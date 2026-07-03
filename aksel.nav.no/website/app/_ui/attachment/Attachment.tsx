@@ -1,8 +1,8 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { DownloadIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 
 function Attachment(props: ExtractPortableComponentProps<"attachment">) {

@@ -1,10 +1,10 @@
-import { CodeExampleSchemaT } from "../../components/types";
+import type { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
 import { findUnequalDocuments } from "../helpers/find-unequal-documents";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { validateExamples } from "./parts/validate-examples";
-import { RootDirectoriesT, rootDirectories } from "./types";
+import { type RootDirectoriesT, rootDirectories } from "./types";
 
 const isDryRun = process.argv.includes("--dry-run");
 

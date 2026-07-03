@@ -1,4 +1,4 @@
-import { type ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types";
 
 function TabellMarkdown(
   data: ExtractPortableMarkdownComponentProps<"tabell_v2">,

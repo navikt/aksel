@@ -16,7 +16,7 @@ import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import {
-  ArticleT,
+  type ArticleT,
   isArticle,
   isBlogg,
   isKomponent,

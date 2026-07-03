@@ -9,7 +9,7 @@ import { composeEventHandlers, ownerDocument } from "../../helpers";
 import { useMergeRefs, useTimeout } from "../../hooks";
 import type { AsChild } from "../../types/AsChild";
 import { Slot } from "../slot/Slot";
-import {
+import type {
   CustomFocusEvent,
   CustomPointerEvent,
 } from "./util/dispatchCustomEvent";

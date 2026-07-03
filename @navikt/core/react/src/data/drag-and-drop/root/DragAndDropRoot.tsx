@@ -10,8 +10,10 @@ import React, {
 import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl } from "../../../utils/helpers";
-import DragAndDropItem, { DragAndDropItemProps } from "../item/DragAndDropItem";
-import { DragAndDropElement } from "../types";
+import DragAndDropItem, {
+  type DragAndDropItemProps,
+} from "../item/DragAndDropItem";
+import type { DragAndDropElement } from "../types";
 import { DragAndDropProvider } from "./DragAndDrop.context";
 
 type ItemT = { label: string; id: string };
@@ -189,11 +191,9 @@ function DragAndDropInner(
       const activeRef = activeItemRef.current;
       const element = pendingStart?.element;
 
-
       if (!activeRef && pendingStart) {
         const deltaX = Math.abs(event.clientX - pendingStart.startX);
         const deltaY = Math.abs(event.clientY - pendingStart.startY);
-
 
         if (deltaX >= DRAG_THRESHOLD || deltaY >= DRAG_THRESHOLD) {
           if (element) {

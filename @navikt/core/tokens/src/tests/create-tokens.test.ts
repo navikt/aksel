@@ -1,4 +1,4 @@
-import { TransformedToken } from "style-dictionary/types";
+import type { TransformedToken } from "style-dictionary/types";
 import { describe, expect, test } from "vitest";
 import { createTokenName, figmaValue } from "../figma/create-tokens";
 

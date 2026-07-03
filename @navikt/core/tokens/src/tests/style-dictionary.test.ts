@@ -1,4 +1,4 @@
-import { TransformedToken } from "style-dictionary/types";
+import type { TransformedToken } from "style-dictionary/types";
 import { describe, expect, test } from "vitest";
 import { generateTokenString } from "../style-dictionary.formats";
 

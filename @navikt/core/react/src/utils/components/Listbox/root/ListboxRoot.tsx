@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React from "react";
+import { useId } from "../../../../utils-external";
 import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
 import { ListboxOption } from "../option/ListboxOption";
 import { ListboxOptions } from "../options/ListboxOptions";
+import { ListboxProvider } from "./Listbox.context";
 import { findNextOption, findPrevOption } from "./domHelpers";
 
 export interface ListboxProps {
@@ -17,6 +19,9 @@ export interface ListboxProps {
  * Keyboard navigation is implemented with virtual focus so that real focus can remain on an input field.
  */
 function Listbox({ children, setVirtuallyFocusedOptionId }: ListboxProps) {
+  const id = useId();
+  const activeId = `aksel-listbox-${id}-active`;
+
   const virtuallyFocusOption = (element: HTMLElement | null) => {
     setVirtuallyFocusedOptionId(element?.dataset.id || "");
     element?.scrollIntoView({ block: "nearest" });
@@ -91,7 +96,12 @@ function Listbox({ children, setVirtuallyFocusedOptionId }: ListboxProps) {
         }
       }}
     >
-      {children}
+      <ListboxProvider
+        activeId={activeId}
+        setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
+      >
+        {children}
+      </ListboxProvider>
     </div>
   );
 }

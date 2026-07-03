@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../utils/helpers";
-import Step, { StepperStepProps } from "./Step";
+import Step, { type StepperStepProps } from "./Step";
 import { StepperContextProvider } from "./context";
 
 interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {

@@ -1,5 +1,5 @@
 import { spaceInPixels } from "../../internal-types";
-import { type StyleDictionaryToken } from "../tokens.util";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 function pxToRem(px: number) {
   return `${px / 16}rem`;

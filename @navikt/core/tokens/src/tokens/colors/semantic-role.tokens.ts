@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { AkselColorRole } from "../../../types";
-import { type StyleDictionaryTokenConfig } from "../../tokens.util";
+import type { AkselColorRole } from "../../../types";
+import type { StyleDictionaryTokenConfig } from "../../tokens.util";
 import { accentSemanticTokenConfig } from "./semantic-roles/accent.tokens";
 import { brandBeigeSemanticTokenConfig } from "./semantic-roles/brand-beige.tokens";
 import { brandBlueSemanticTokenConfig } from "./semantic-roles/brand-blue.tokens";

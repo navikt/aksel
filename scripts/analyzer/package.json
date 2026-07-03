@@ -15,7 +15,7 @@
     "mlly": "1.8.2",
     "rimraf": "6.1.3",
     "tar": "^7.5.16",
-    "vitest": "4.1.8"
+    "vitest": "4.1.9"
   },
   "scripts": {
     "run:analyze-npm-action": "yarn clean && concurrently \"yarn pack-remote && tsx ./src/runners/analyze-package.ts --remote --out trunk-results.json\" \"yarn pack-local && tsx ./src/runners/analyze-package.ts --out branch-results.json\"",

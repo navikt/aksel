@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
 

@@ -54,6 +54,7 @@ export {
 export { Link, type LinkProps } from "./link";
 export { List, type ListProps, type ListItemProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
+export { Lookup, type LookupProps } from "./lookup";
 export { Modal, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
 export { Popover, type PopoverProps } from "./popover";

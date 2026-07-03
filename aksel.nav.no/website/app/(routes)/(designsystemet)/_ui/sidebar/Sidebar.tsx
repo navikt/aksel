@@ -3,7 +3,7 @@ import {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
   DESIGNSYSTEM_SIDEBAR_QUERY,
 } from "@/app/_sanity/queries";
-import { DesignsystemSidebarNav, SidebarNavProps } from "./Sidebar.nav";
+import { DesignsystemSidebarNav, type SidebarNavProps } from "./Sidebar.nav";
 import { generateSidebar } from "./Sidebar.util";
 
 type SidebarProps = Omit<SidebarNavProps, "sidebarData">;

@@ -1,4 +1,4 @@
-import { AkselColor } from "../../../types";
+import type { AkselColor } from "../../../types";
 import { createStrictContext } from "../../../utils/helpers";
 
 type BaseAlertContextProps = {

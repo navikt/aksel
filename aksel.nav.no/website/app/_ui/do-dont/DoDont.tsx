@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { HandKnotIcon, ThumbDownIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, HGrid } from "@navikt/ds-react";
-import { AkselColor } from "@navikt/ds-react/types/theme";
-import { Do_dont_block } from "@/app/_sanity/query-types";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { AkselColor } from "@navikt/ds-react/types/theme";
+import type { Do_dont_block } from "@/app/_sanity/query-types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";
 import styles from "./DoDont.module.css";
 

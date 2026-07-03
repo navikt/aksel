@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fireEvent, fn } from "storybook/test";
-import { ListboxOptionProps } from "./option/ListboxOption";
+import type { ListboxOptionProps } from "./option/ListboxOption";
 import Listbox from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
@@ -40,9 +40,7 @@ function ListboxStory({
 
   return (
     <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-      <Listbox.Options
-        setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-      >
+      <Listbox.Options>
         {items.map((itemOrGroup) =>
           "items" in itemOrGroup && itemOrGroup.items ? (
             <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
@@ -52,6 +50,7 @@ function ListboxStory({
                   id={item.value}
                   onClick={onClick}
                   hasVirtualFocus={virtuallyFocusedOptionId === item.value}
+                  aria-selected={false}
                 >
                   {item.label}
                 </Listbox.Option>
@@ -63,6 +62,7 @@ function ListboxStory({
               id={itemOrGroup.value}
               onClick={onClick}
               hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
+              aria-selected={false}
             >
               {itemOrGroup.label}
             </Listbox.Option>

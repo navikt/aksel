@@ -1,12 +1,12 @@
 import { stegaClean } from "next-sanity";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
-import {
+import type {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT,
   DESIGNSYSTEM_SIDEBAR_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
 import { sanityCategoryLookup } from "@/sanity/config";
-import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
+import type { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
 type DesignsystemSidebarDataT = {
   label: string;

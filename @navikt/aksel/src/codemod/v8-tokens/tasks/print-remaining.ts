@@ -2,7 +2,7 @@ import chalk, { type ForegroundColorName } from "chalk";
 import clipboardy from "clipboardy";
 import Enquirer from "enquirer";
 import path from "node:path";
-import { TokenStatus } from "../config/TokenStatus";
+import type { TokenStatus } from "../config/TokenStatus";
 import { getStatus } from "./status";
 
 async function printRemaining(files: string[], status?: TokenStatus["status"]) {

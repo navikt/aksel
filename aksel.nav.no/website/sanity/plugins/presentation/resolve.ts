@@ -1,5 +1,5 @@
 import {
-  PresentationPluginOptions,
+  type PresentationPluginOptions,
   defineDocuments,
 } from "sanity/presentation";
 import { locations } from "./locations";

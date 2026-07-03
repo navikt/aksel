@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
-import GroupedHeading, { GroupedHeadingProps } from "./GroupedHeading";
-import GroupedItem, { GroupedItemProps } from "./GroupedItem";
+import GroupedHeading, { type GroupedHeadingProps } from "./GroupedHeading";
+import GroupedItem, { type GroupedItemProps } from "./GroupedItem";
 
 export interface GroupedListProps extends React.HTMLAttributes<HTMLDListElement> {
   /**

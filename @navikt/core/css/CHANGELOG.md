@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.14.0
+
+### Minor Changes
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
 ## 8.13.1
 
 ## 8.13.0

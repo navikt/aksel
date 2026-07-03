@@ -1,4 +1,4 @@
-import { AkselColorRole } from "@navikt/ds-tokens/types";
+import type { AkselColorRole } from "@navikt/ds-tokens/types";
 
 export type RoleT<T> = {
   id: T;

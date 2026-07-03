@@ -7,7 +7,7 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { SidebarGroupedPagesT } from "@/types";
+import type { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 

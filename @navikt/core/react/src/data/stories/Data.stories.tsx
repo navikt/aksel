@@ -25,7 +25,7 @@ import {
   columnDef_TEST_DATA,
   columnDef_TEST_DATA_NESTED,
 } from "./Data.test-data";
-import { PersonInfo, homeSystemOptions } from "./dummy-data";
+import { type PersonInfo, homeSystemOptions } from "./dummy-data";
 
 const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data",

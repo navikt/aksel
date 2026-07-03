@@ -10,7 +10,7 @@ import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useFormField } from "../../useFormField";
 import { useFileUpload } from "../hooks/useFileUpload";
 import { useFileUploadTranslation } from "../root/FileUploadRoot.context";
-import { FileUploadDropzoneProps } from "./dropzone.types";
+import type { FileUploadDropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
 const FileUploadDropzone = forwardRef<

@@ -1,5 +1,5 @@
 import { isEqual } from "lodash";
-import { SanityDocumentStub } from "next-sanity";
+import type { SanityDocumentStub } from "next-sanity";
 import { sanityClient } from "../../sanity/interface/client.server";
 
 /**

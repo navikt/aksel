@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "8.13.1",
+  "version": "8.14.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -10,10 +10,11 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts"
+    "tailwind.config.d.ts",
+    "tailwind4.css"
   ],
   "scripts": {
-    "build": "yarn tsx ./src/build.ts",
+    "build": "yarn tsx ./src/build-v3.ts && yarn tsx ./src/build-v4.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -27,11 +28,12 @@
   },
   "homepage": "https://aksel.nav.no/grunnleggende/kode/tailwind/",
   "devDependencies": {
-    "@navikt/ds-tokens": "^8.13.1",
+    "@navikt/ds-tokens": "^8.14.0",
+    "@types/node": "^24.10.9",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.9"
   },
   "publishConfig": {
     "access": "public",
@@ -50,6 +52,7 @@
         "default": "./tailwind.config.js"
       }
     },
+    "./v4": "./tailwind4.css",
     "./package.json": "./package.json"
   }
 }

@@ -7,7 +7,7 @@ import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
 import {
   DateInputContextProvider,
-  DateInputProps,
+  type DateInputProps,
   MonthPickerInput,
 } from "../Date.Input";
 import {
@@ -16,11 +16,11 @@ import {
   getTranslations,
 } from "../Date.locale";
 import { MonthPickerProvider } from "./MonthPicker.context";
-import { MonthPickerProps } from "./MonthPicker.types";
+import type { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
 import {
   MonthPickerStandalone,
-  MonthPickerStandaloneProps,
+  type MonthPickerStandaloneProps,
 } from "./parts/MonthPicker.Standalone";
 import { MonthPickerTable } from "./parts/MonthPicker.Table";
 

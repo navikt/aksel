@@ -4,7 +4,7 @@ import { stegaClean } from "next-sanity";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
-import { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { cl } from "@/ui-utils/className";

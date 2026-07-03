@@ -3,7 +3,7 @@
  * hardcoded in the codebase. We still need a way to reference them in the sidebar and sitemap.
  * This file contains the routes for those pages.
  */
-import {
+import type {
   grunnleggendeKategorier,
   komponentKategorier,
   templatesKategorier,

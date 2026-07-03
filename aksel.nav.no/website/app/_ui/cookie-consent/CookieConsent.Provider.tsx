@@ -12,9 +12,9 @@ import { getCookie, setCookie } from "typescript-cookie";
 import { trackCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.actions";
 import {
   CONSENT_TRACKER_ID,
-  CONSENT_TRACKER_STATE,
+  type CONSENT_TRACKER_STATE,
   CURRENT_VERSION,
-  CookieData,
+  type CookieData,
 } from "@/app/_ui/cookie-consent/CookieConsent.config";
 
 type CookieConsentContextType = {

@@ -1,5 +1,5 @@
-import { Observable, map } from "rxjs";
-import {
+import { type Observable, map } from "rxjs";
+import type {
   DocumentLocationResolver,
   DocumentLocationsState,
 } from "sanity/presentation";

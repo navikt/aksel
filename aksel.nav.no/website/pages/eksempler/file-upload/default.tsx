@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
-  FileObject,
-  FileRejected,
-  FileRejectionReason,
+  type FileObject,
+  type FileRejected,
+  type FileRejectionReason,
   FileUpload,
   Heading,
   VStack,

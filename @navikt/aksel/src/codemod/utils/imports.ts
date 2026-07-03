@@ -1,4 +1,5 @@
-import core, { Collection } from "jscodeshift";
+import type core from "jscodeshift";
+import type { Collection } from "jscodeshift";
 
 export function getImportSpecifier(
   j: core.JSCodeshift,

@@ -36,7 +36,7 @@
     "@navikt/oasis": "3.2.1",
     "@neshca/cache-handler": "1.9.0",
     "@portabletext/react": "^6.0.3",
-    "@sanity/client": "7.22.1",
+    "@sanity/client": "7.23.0",
     "@sanity/code-input": "7.1.2",
     "@sanity/color-input": "6.0.6",
     "@sanity/image-url": "2.1.1",
@@ -116,6 +116,6 @@
     "showdown": "^2.1.0",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.9"
   }
 }

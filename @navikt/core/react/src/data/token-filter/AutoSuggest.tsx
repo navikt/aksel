@@ -1,4 +1,4 @@
-import React, { type JSX, forwardRef, useState } from "react";
+import React, { type JSX, forwardRef, useCallback, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
@@ -37,14 +37,17 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       setOpen(true);
     };
 
-    const handleSelectOption = (option: AutoCompleteOption) => {
-      const createdNewToken = onSelect(option);
+    const handleSelectOption = useCallback(
+      (option: AutoCompleteOption) => {
+        const createdNewToken = onSelect(option);
 
-      if (createdNewToken) {
-        inputRef?.focus();
-        setOpen(false);
-      }
-    };
+        if (createdNewToken) {
+          inputRef?.focus();
+          setOpen(false);
+        }
+      },
+      [onSelect, inputRef, setOpen],
+    );
 
     return (
       <Floating>
@@ -78,7 +81,6 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
               options={options}
               onSelect={handleSelectOption}
               focusedValue={virtuallyFocusedOptionId}
-              setFocusedValue={setVirtuallyFocusedOptionId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
               autoSuggestValue={value}
@@ -94,7 +96,6 @@ type AutoSuggestPopupProps = {
   options: OptionGroup<AutoCompleteOption>[];
   onSelect: (option: AutoCompleteOption) => void;
   focusedValue: string;
-  setFocusedValue: (value: string) => void;
   onClose: () => void;
   safeZoneAnchor: HTMLInputElement | null;
   autoSuggestValue: string;
@@ -106,7 +107,6 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
       options,
       onSelect,
       focusedValue,
-      setFocusedValue,
       onClose,
       safeZoneAnchor,
       autoSuggestValue,
@@ -128,35 +128,17 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           className="aksel-property-filter__popup"
         >
           <div className="aksel-property-filter__popup-inner">
-            <Listbox.Options setVirtuallyFocusedOptionId={setFocusedValue}>
+            <Listbox.Options>
               {options.map((group) => (
                 <Listbox.Group key={group.label} label={group.label}>
                   {group.options.map((item) => (
-                    <Listbox.Option
+                    <AutoSuggestOption
                       key={item.value}
-                      id={item.value}
-                      onClick={() => onSelect(item)}
+                      item={item}
+                      onSelect={onSelect}
                       hasVirtualFocus={focusedValue === item.value}
-                    >
-                      <VStack gap="space-0">
-                        <BodyShort as="div" size="small">
-                          <HighlightText
-                            text={item.label}
-                            highlightText={autoSuggestValue}
-                          />
-                        </BodyShort>
-                        {item.description && (
-                          <Detail as="div">{item.description}</Detail>
-                        )}
-                      </VStack>
-                      {/* {item.tags && item.tags.length > 0 && (
-                        <div>
-                          {item.tags.map((tag) => (
-                            <span key={tag}>{tag}</span>
-                          ))}
-                        </div>
-                      )} */}
-                    </Listbox.Option>
+                      autoSuggestValue={autoSuggestValue}
+                    />
                   ))}
                 </Listbox.Group>
               ))}
@@ -166,6 +148,43 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
       </DismissableLayer>
     );
   },
+);
+
+type AutoSuggestOptionProps = {
+  item: AutoCompleteOption;
+  onSelect: AutoSuggestPopupProps["onSelect"];
+  hasVirtualFocus: boolean;
+  autoSuggestValue: string;
+};
+
+const AutoSuggestOption = React.memo(
+  ({
+    item,
+    onSelect,
+    hasVirtualFocus,
+    autoSuggestValue,
+  }: AutoSuggestOptionProps) => (
+    <Listbox.Option
+      id={item.value}
+      onClick={() => onSelect(item)}
+      hasVirtualFocus={hasVirtualFocus}
+      aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
+    >
+      <VStack gap="space-0">
+        <BodyShort as="div" size="small">
+          <HighlightText text={item.label} highlightText={autoSuggestValue} />
+        </BodyShort>
+        {item.description && <Detail as="div">{item.description}</Detail>}
+      </VStack>
+      {/* {item.tags && item.tags.length > 0 && (
+        <div>
+          {item.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      )} */}
+    </Listbox.Option>
+  ),
 );
 
 function HighlightText({

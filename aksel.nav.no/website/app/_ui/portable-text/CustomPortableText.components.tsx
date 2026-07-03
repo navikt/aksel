@@ -1,12 +1,12 @@
 import {
   PortableText,
-  PortableTextBlockComponent,
+  type PortableTextBlockComponent,
   type PortableTextComponents,
-  PortableTextMarkComponent,
+  type PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import {
+import type {
   ExtractPortableComponentProps,
   PortableContentTypes,
 } from "@/app/_sanity/types";

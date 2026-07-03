@@ -1,8 +1,8 @@
 import { createClient, groq } from "next-sanity";
 import { useEffect, useState } from "react";
 import {
-  StringInputProps,
-  TitledListValue,
+  type StringInputProps,
+  type TitledListValue,
   defineField,
   useFormValue,
 } from "sanity";

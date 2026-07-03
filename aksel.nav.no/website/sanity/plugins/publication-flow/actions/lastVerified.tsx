@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
-import { DocumentActionComponent, useDocumentOperation } from "sanity";
+import { type DocumentActionComponent, useDocumentOperation } from "sanity";
 import { useIntentLink } from "sanity/router";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
