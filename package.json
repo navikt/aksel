@@ -27,8 +27,7 @@
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
     "release": "yarn boot && yarn docgen && changeset publish && yarn script:git-release",
-    "postinstall": "husky install",
-    "knip": "knip"
+    "postinstall": "husky install"
   },
   "workspaces": [
     "@navikt/core/*",
@@ -113,7 +112,6 @@
     "fast-glob": "3.3.3",
     "globals": "^17.6.0",
     "husky": "^8.0.0",
-    "knip": "6.20.0",
     "lint-staged": "16.4.0",
     "playwright": "1.60.0",
     "prettier": "3.8.3",
