@@ -2,6 +2,29 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "tags": ["-lintignore"],
   "workspaces": {
-    ".": {}
-  }
+    ".": {},
+    "aksel.nav.no": {
+      "ignoreDependencies": [
+        "@navikt/aksel",
+        "@navikt/aksel-icons",
+        "@navikt/ds-css",
+        "@navikt/ds-tailwind",
+        "@navikt/ds-tokens"
+      ]
+    },
+    "@navikt/aksel": {},
+    "@navikt/aksel-icons": {},
+    "@navikt/aksel-icons/figma-plugin": {
+      "ignoreDependencies": ["@navikt/ds-css"]
+    },
+    "@navikt/aksel-stylelint": {
+      "ignoreDependencies": ["@navikt/ds-css", "@navikt/ds-tokens"]
+    },
+    "@navikt/core/css": {},
+    "@navikt/core/react": {
+      "ignoreDependencies": ["aksel"]
+    },
+    "scripts": {}
+  },
+  "ignore": ["**/transforms/**"]
 }
