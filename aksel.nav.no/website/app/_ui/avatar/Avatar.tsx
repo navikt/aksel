@@ -109,9 +109,15 @@ export const AvatarStack = ({
   if (avatars.length === 0) {
     return null;
   }
-  const firstAvatar =
-    avatars && isValidElement<AvatarProps>(avatars[0]) && avatars[0];
-  if (!firstAvatar) {
+
+  const lastAvatarElement = avatars[avatars.length - 1];
+
+  const lastAvatar =
+    avatars &&
+    isValidElement<AvatarProps>(lastAvatarElement) &&
+    lastAvatarElement;
+
+  if (!lastAvatar) {
     return null;
   }
 
@@ -137,7 +143,7 @@ export const AvatarStack = ({
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
           >
-            <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
+            <Detail textColor="subtle">{lastAvatar.props.type}</Detail>
           </Box>
           <Box
             asChild
@@ -145,7 +151,7 @@ export const AvatarStack = ({
             marginInline="space-2 space-0"
           >
             <BodyShort className={styles.avatarName}>
-              {`${firstAvatar.props.name}`}
+              {`${lastAvatar.props.name}`}
               {suffix && (
                 <span className={styles.avatarNameSuffix}>{suffix}</span>
               )}
