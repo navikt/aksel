@@ -15,3 +15,12 @@ declare module "react" {
     [key: `--${string}`]: string | number | undefined;
   }
 }
+
+declare global {
+  type ExampleArgsT = {
+    index: number;
+    desc?: string;
+    sandbox?: boolean;
+    title?: string;
+  };
+}
