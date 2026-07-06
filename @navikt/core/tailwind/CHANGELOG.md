@@ -1,5 +1,11 @@
 # @navikt/ds-tailwind
 
+## 8.15.0
+
+### Minor Changes
+
+- Tailwind v4 config now available at `@navikt/ds-tailwind/v4` ([#5036](https://github.com/navikt/aksel/pull/5036))
+
 ## 8.14.0
 
 ## 8.13.1
