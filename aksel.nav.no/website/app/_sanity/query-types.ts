@@ -1440,6 +1440,7 @@ export type Komponent_artikkel = {
   kategori?: "primitives" | "core" | "dekoratoren" | "legacy" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "preview" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
@@ -1480,6 +1481,7 @@ export type Ds_artikkel = {
     | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     bilde?: {
@@ -1640,6 +1642,7 @@ export type Templates_artikkel = {
   kategori?: "brev" | "stotte" | "soknadsdialog" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "new" | "ready" | "deprecated";
     bilde?: {
@@ -3120,6 +3123,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
   kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status: {
     tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
@@ -4442,6 +4446,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
     | "styling";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
@@ -5277,6 +5282,7 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
   kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
@@ -8810,6 +8816,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
           | "styling";
         sidebarindex?: number;
         slug: string | null;
+        contact?: Editorial_staffReference;
         status?: {
           tag?: "beta" | "deprecated" | "new" | "ready";
           bilde?: {
@@ -8841,6 +8848,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
           | "standalone";
         sidebarindex?: number;
         slug: string | null;
+        contact?: Editorial_staffReference;
         status?: {
           tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
           unsafe?: boolean;
@@ -8874,6 +8882,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
         kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
         sidebarindex?: number;
         slug: string | null;
+        contact?: Editorial_staffReference;
         status?: {
           tag?: "beta" | "deprecated" | "new" | "ready";
           bilde?: {
@@ -11371,6 +11380,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
   kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
@@ -12220,6 +12230,7 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
     | "styling";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
@@ -13055,6 +13066,7 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
   kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
@@ -13847,6 +13859,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
   kategori?: "core" | "dekoratoren" | "legacy" | "primitives" | "standalone";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
@@ -14696,6 +14709,7 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
     | "styling";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {
@@ -15531,6 +15545,7 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
   kategori?: "brev" | "soknadsdialog" | "standalone" | "stotte";
   sidebarindex?: number;
   slug?: Slug;
+  contact?: Editorial_staffReference;
   status?: {
     tag?: "beta" | "deprecated" | "new" | "ready";
     bilde?: {

@@ -8329,6 +8329,14 @@
         },
         "optional": true
       },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
+        },
+        "optional": true
+      },
       "status": {
         "type": "objectAttribute",
         "value": {
@@ -8592,6 +8600,14 @@
         "value": {
           "type": "inline",
           "name": "slug"
+        },
+        "optional": true
+      },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
         },
         "optional": true
       },
@@ -9555,6 +9571,14 @@
         "value": {
           "type": "inline",
           "name": "slug"
+        },
+        "optional": true
+      },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
         },
         "optional": true
       },

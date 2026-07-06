@@ -58,6 +58,13 @@ export const TemplatesArtikkel = defineType({
     }),
     kategoriSlug(prefix),
     defineField({
+      title: "Forvalter",
+      name: "contact",
+      type: "reference",
+      to: [{ type: "editorial_staff" }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       title: "Metadata",
       name: "status",
       group: "innhold",
