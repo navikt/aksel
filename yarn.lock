@@ -5425,7 +5425,7 @@ __metadata:
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
     "@navikt/ds-tokens": "npm:^8.14.0"
-    browserslist: "npm:^4.25.0"
+    browserslist: "npm:^4.28.4"
     esbuild: "npm:^0.28.0"
     fast-glob: "npm:3.3.3"
     lightningcss: "npm:^1.30.1"
@@ -12114,6 +12114,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"baseline-browser-mapping@npm:^2.10.38":
+  version: 2.10.40
+  resolution: "baseline-browser-mapping@npm:2.10.40"
+  bin:
+    baseline-browser-mapping: dist/cli.cjs
+  checksum: 10/6b947f3295c9e900d22ba53c01c0acd38e3574280dcdf51ff7f1847086caf6d4c354a8779a9920f8892aa3d2c939a48e3094ea0a725a221b0f832352db93e9fe
+  languageName: node
+  linkType: hard
+
 "batch@npm:0.6.1":
   version: 0.6.1
   resolution: "batch@npm:0.6.1"
@@ -12318,7 +12327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.24.0, browserslist@npm:^4.25.0, browserslist@npm:^4.28.1":
+"browserslist@npm:^4.24.0, browserslist@npm:^4.28.1":
   version: 4.28.2
   resolution: "browserslist@npm:4.28.2"
   dependencies:
@@ -12330,6 +12339,21 @@ __metadata:
   bin:
     browserslist: cli.js
   checksum: 10/cff88386e5b5ba5614c9063bd32ef94865bba22b6a381844c7d09ea1eea62a2247e7106e516abdbfda6b75b9986044c991dfe45f92f10add5ad63dccc07589ec
+  languageName: node
+  linkType: hard
+
+"browserslist@npm:^4.28.4":
+  version: 4.28.4
+  resolution: "browserslist@npm:4.28.4"
+  dependencies:
+    baseline-browser-mapping: "npm:^2.10.38"
+    caniuse-lite: "npm:^1.0.30001799"
+    electron-to-chromium: "npm:^1.5.376"
+    node-releases: "npm:^2.0.48"
+    update-browserslist-db: "npm:^1.2.3"
+  bin:
+    browserslist: cli.js
+  checksum: 10/beb030f5b301b6af3fc7df3291d56f9edb34b7e4bd3cdc50d379c84c3410ad1ba013602952bcec1d98af940cf6596609fc81ef09d200f7f2e25e9f84d9d38201
   languageName: node
   linkType: hard
 
@@ -12488,6 +12512,13 @@ __metadata:
   version: 1.0.30001790
   resolution: "caniuse-lite@npm:1.0.30001790"
   checksum: 10/2625ba0b9c2648d14b4b02daf2fe7013d4efe087a45b034f40849c97077d435dbc610b47a34d3d6360cd62b7972864ae16978955205b7b8f7397303ba793e0ed
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001799":
+  version: 1.0.30001799
+  resolution: "caniuse-lite@npm:1.0.30001799"
+  checksum: 10/eb90443f1e4e4ac7cfe3686d43f0d132c0b552d0d896c0520e7306f2ddf743b4dd5380a7b8adc5ca8d250247966a6cf32cb042930dbc1df452e8623ad92c57e2
   languageName: node
   linkType: hard
 
@@ -14332,6 +14363,13 @@ __metadata:
   version: 1.5.344
   resolution: "electron-to-chromium@npm:1.5.344"
   checksum: 10/0c75ba1c7f95a226c4a8422e79c1ffe25a0b173c3f478b0a883f25e284cdbcb1b7ca897621048c8a4ff76b120ff3bb443728187558099aaa35e8a43e10a6a1c1
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.5.376":
+  version: 1.5.380
+  resolution: "electron-to-chromium@npm:1.5.380"
+  checksum: 10/525920d87249f80c439f55541844558cd9a36c40f07545a778c60e1db30bc554de9cd1f410d1cdf0ae9756844c3f26f86c1ec1e03fd50fdfc84f018edd78eb98
   languageName: node
   linkType: hard
 
@@ -20634,6 +20672,13 @@ __metadata:
   version: 2.0.38
   resolution: "node-releases@npm:2.0.38"
   checksum: 10/0e6bba9d7e75dddf7d45c099f202ac7cb0eaeb363c36a34880c219e1697cf7369b6548e48f538490b706501ff9aa017e102adf3362184b9b64786de8377e0501
+  languageName: node
+  linkType: hard
+
+"node-releases@npm:^2.0.48":
+  version: 2.0.50
+  resolution: "node-releases@npm:2.0.50"
+  checksum: 10/c40306176fc9d43d27b919034fab57ab0753448dfcabeb1ae669128d28f595fba4c329a269b2d7fa9bb7d5a6d2bda8b2bd8fe5e8446226bb809f448fec2e80fb
   languageName: node
   linkType: hard
 
