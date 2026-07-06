@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Propen `paddingInline` gir deg kontroll over horisontal padding.",
 };

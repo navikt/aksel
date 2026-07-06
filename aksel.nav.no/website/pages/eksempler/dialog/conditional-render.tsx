@@ -68,7 +68,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 15,
   desc: "Vi anbefaler å alltid rendre dialog-elementet, siden Dialog.Popup returnerer null så lenge dialogen er lukket. Dette sikrer at animasjoner for åpning og lukking av dialogen fungerer som forventet.",
 };

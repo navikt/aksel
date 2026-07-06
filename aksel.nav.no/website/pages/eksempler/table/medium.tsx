@@ -69,7 +69,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Medium er standardstørrelsen på både eksterne og interne flater.",
 };

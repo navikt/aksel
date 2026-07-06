@@ -39,7 +39,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   title: "Standard",
   desc: "`Page.Block` kan også brukes i header og footer for å sikre at innholdet er sentrert og har samme maksbredde som resten av innholdet.",

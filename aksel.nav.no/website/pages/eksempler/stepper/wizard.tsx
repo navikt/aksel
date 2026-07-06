@@ -41,7 +41,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Ved hjelp av propene `interactive` og `completed` kan man bygge opp wizard-lignende løsninger, der fullførte steg er merket med checkmark og fremtidige steg er låst.",
 };

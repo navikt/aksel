@@ -28,7 +28,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 10,
   desc: "For viktige lenker kan det gi mening å bruker heading-elementer for å fremheve dem for skjermlesere og andre hjelpemidler. I dette eksempelet er tittelen på LinkCard satt til et h2-element.",
 };

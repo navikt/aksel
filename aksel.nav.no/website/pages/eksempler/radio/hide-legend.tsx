@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Legend må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };

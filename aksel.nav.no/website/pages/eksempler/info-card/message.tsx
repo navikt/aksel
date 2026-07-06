@@ -21,7 +21,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "For korte meldinger kan man velge å bruke InfoCard.Message. Dette er en enklere variant av InfoCard som kun inneholder en melding og et ikon. Denne skal ikke inneholde tittel eller knapper, men lenker er ok.",
 };

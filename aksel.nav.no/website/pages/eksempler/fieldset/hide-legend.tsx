@@ -29,7 +29,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "En annen variant av 'Heading as legend'-eksempelet der overskriften er utenfor og vi i stedet skjuler legend visuelt med `hideLegend` for å unngå duplisert tekst for seende.",
 };

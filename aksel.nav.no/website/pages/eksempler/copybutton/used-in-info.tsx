@@ -30,7 +30,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 10,
   desc: "Ved utlisting av mye relevant innhold, kan CopyButton brukes for å enklere kopiere informasjonen.",
 };

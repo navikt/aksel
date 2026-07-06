@@ -27,7 +27,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Med responsiv gap kan du dynamisk tilpasse spacing basert på brekkpunktene våre.",
 };

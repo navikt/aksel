@@ -80,7 +80,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   title: "App-meny",
   desc: "App-menyen inneholder lenker til andre interne systemer.",

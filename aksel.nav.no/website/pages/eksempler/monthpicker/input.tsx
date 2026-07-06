@@ -31,7 +31,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Vi anbefaler å bruke `useMonthpicker`-hooken hvis du har et input-felt.",
 };

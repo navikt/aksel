@@ -13,7 +13,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Prop-en `transparent` skjuler bakgrunnselementet på Loader.",
 };

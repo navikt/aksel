@@ -40,7 +40,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   title: "Maksbredde",
   desc: "Propen `width` på `Page.Block` sentrerer innhold og legger på maksbredde.",

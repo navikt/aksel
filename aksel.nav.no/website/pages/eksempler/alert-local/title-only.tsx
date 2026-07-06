@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
   desc: "For korte meldinger kan man velge å kun vise tittel i alerten. Title er en `h2`-tagg som standard, husk å justere semantikken etter behov.",
 };

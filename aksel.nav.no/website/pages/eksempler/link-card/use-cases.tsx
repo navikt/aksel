@@ -278,7 +278,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 15,
   desc: "Dette er replikasjoner av eksempler funnet i Navs løsninger.",
 };

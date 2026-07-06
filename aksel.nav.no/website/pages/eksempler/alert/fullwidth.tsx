@@ -26,7 +26,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "'fullWidth' fjerner 'border-radius' slik at alerten blir bedre egnet for å vises i full bredde på toppen av en ramme, som et banner.",
 };

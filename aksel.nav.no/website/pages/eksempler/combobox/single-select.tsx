@@ -34,7 +34,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Ved Single Select velger brukeren kun ett valg fra nedtrekkslisten.",
 };

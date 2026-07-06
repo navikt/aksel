@@ -48,7 +48,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Hvis du ønsker å ha en hake på fullførte steg så kan du bruke `<CheckmarkHeavyIcon />`.",
 };

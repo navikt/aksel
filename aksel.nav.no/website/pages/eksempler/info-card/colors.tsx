@@ -46,7 +46,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "InfoCard støtter flere fargevalg for ulike kontekster.",
 };

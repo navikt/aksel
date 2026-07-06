@@ -45,7 +45,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Hvis hvert steg har sin egen URL, kan du bruke href på FormProgress.Step i stedet for onStepChange.",
 };

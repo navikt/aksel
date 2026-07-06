@@ -13,7 +13,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Small bør brukes sparsomt på sider som brukes fra mobil, da det er viktig at touch-flaten er stor nok.",
 };

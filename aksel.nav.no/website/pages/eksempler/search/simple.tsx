@@ -17,7 +17,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Simple er en forenklet variant av søkefeltet uten søkeknapp. Den brukes særlig på input-felter der innholdet blir oppdatert fortløpende eller ved autocomplete med dropdown.",
 };

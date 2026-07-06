@@ -43,7 +43,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Både `marginBlock` og `marginInline` er responsive, slik at du kan sette negativ margin dynamisk basert på brekkpunkter.",
 };

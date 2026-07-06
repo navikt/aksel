@@ -46,7 +46,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Moderate er en mer fremhevet variant av ReadMore, som bør brukes når innholdet en en viktig del av siden og ofte står for seg selv.",
 };

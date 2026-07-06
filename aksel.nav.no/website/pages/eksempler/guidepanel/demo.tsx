@@ -19,7 +19,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "På mobil (brekkpunkt sm) blir komponenten mer kompakt og avataren flyttes til toppen. Avatar-plasseringen kan låses med propen 'poster'.",
 };

@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Vi har valgt å skjule label som standard. Dette kan lett endres på med prop `hideLabel`.",
 };

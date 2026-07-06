@@ -71,7 +71,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Ved å gruppere elementer i ActionMenu vil menyen bli mer oversiktlig og lettere å navigere. Dette vil være ekstra viktig for komplese menyer som inneholder ulike kontekster og funksjonalitet.",
 };

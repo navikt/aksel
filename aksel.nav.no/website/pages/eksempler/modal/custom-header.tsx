@@ -42,7 +42,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Headeren tilbys som en egen komponent for de tilfellene du trenger mer fleksiblitet enn header-propen gir deg. Begge varianter har mulighet for å skjule lukkeknappen.",
 };

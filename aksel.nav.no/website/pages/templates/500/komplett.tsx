@@ -118,7 +118,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   title: "Komplett",
   desc: "I sin fullstendige form kan en 500-side inneholde tittel, feilmelding, løsningsforslag, tilbakemeldingsfunksjon, feil-id, CTA og flere språk.",

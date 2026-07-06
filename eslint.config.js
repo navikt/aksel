@@ -158,6 +158,7 @@ module.exports = defineConfig([
       "aksel-local": akselLocal,
     },
     rules: {
+      "aksel-local/args-check": ["error"],
       "aksel-local/comment-check": ["error"],
     },
   },

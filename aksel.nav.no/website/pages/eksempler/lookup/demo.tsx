@@ -26,7 +26,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Lookup kan brukes inne i løpende tekst for å forklare et enkelt ord eller begrep.",
 };
