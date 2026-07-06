@@ -1,13 +1,13 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import { setYear } from "date-fns";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { useId } from "../../utils-external";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import { DateInputProps } from "../Date.Input";
+import type { DateInputProps } from "../Date.Input";
 import MonthPicker from "./MonthPicker";
-import { MonthPickerProps } from "./MonthPicker.types";
+import type { MonthPickerProps } from "./MonthPicker.types";
 import { useMonthpicker } from "./hooks/useMonthPicker";
 
 const year = new Date().getFullYear();

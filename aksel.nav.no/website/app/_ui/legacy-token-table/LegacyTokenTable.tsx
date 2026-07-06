@@ -1,11 +1,11 @@
-import { PortableTextComponentProps } from "next-sanity";
+import type { PortableTextComponentProps } from "next-sanity";
 import { InfoCard, Link } from "@navikt/ds-react";
 import {
   InfoCardContent,
   InfoCardHeader,
   InfoCardTitle,
 } from "@navikt/ds-react/InfoCard";
-import { Token_kategori } from "@/app/_sanity/query-types";
+import type { Token_kategori } from "@/app/_sanity/query-types";
 
 /**
  * Lists out the "component"-level tokens.

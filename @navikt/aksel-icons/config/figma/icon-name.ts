@@ -1,4 +1,4 @@
-import { PublishedComponent } from "@figma/rest-api-spec";
+import type { PublishedComponent } from "@figma/rest-api-spec";
 import { camelCase, startCase } from "lodash";
 
 export const resolveName = (icon: PublishedComponent) => {

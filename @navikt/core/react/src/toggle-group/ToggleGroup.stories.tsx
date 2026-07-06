@@ -1,4 +1,4 @@
-import { Meta, StoryFn, type StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import {
@@ -10,7 +10,7 @@ import {
 import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import ToggleGroup from "./ToggleGroup";
-import { ToggleGroupProps } from "./ToggleGroup.types";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
 
 const meta: Meta<typeof ToggleGroup> = {
   title: "ds-react/ToggleGroup",

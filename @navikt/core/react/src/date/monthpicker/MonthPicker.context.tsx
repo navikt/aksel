@@ -1,9 +1,9 @@
-import { Locale, isSameYear } from "date-fns";
+import { type Locale, isSameYear } from "date-fns";
 import React from "react";
 import { createStrictContext } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
 import { clampDisplayYear } from "../date-utils";
-import { MonthPickerProps } from "./MonthPicker.types";
+import type { MonthPickerProps } from "./MonthPicker.types";
 
 type MonthPickerProviderProps = Pick<
   MonthPickerProps,

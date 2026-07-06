@@ -1,6 +1,6 @@
 import {
-  FlipOptions,
-  Placement,
+  type FlipOptions,
+  type Placement,
   autoUpdate,
   flip,
   arrow as floatingArrow,
@@ -12,7 +12,7 @@ import {
   useFloating,
 } from "@floating-ui/react-dom";
 import React, {
-  HTMLAttributes,
+  type HTMLAttributes,
   forwardRef,
   useEffect,
   useRef,

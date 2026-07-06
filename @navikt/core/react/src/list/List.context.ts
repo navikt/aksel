@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ListProps } from "./List.types";
+import type { ListProps } from "./List.types";
 
 interface ListContextProps {
   listType: Exclude<ListProps["as"], undefined>;

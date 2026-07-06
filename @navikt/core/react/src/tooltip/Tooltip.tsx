@@ -11,7 +11,12 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import React, { Fragment, HTMLAttributes, forwardRef, useRef } from "react";
+import React, {
+  Fragment,
+  type HTMLAttributes,
+  forwardRef,
+  useRef,
+} from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { HStack } from "../primitives/stack";

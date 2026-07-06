@@ -1,4 +1,4 @@
-import { ResponsiveProp } from "./types";
+import type { ResponsiveProp } from "./types";
 
 const TOKEN_PREFIX = "ax";
 

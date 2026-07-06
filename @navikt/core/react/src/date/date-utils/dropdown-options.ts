@@ -1,5 +1,5 @@
 import {
-  Locale,
+  type Locale,
   addYears,
   eachMonthOfInterval,
   endOfYear,

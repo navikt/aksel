@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React from "react";
 import { MenuElipsisVerticalCircleIcon } from "@navikt/aksel-icons";
-import { FileItem, FileUpload } from ".";
+import { type FileItem, FileUpload } from ".";
 import { ActionMenu } from "../../action-menu";
 import { Button } from "../../button";
 import { VStack } from "../../primitives/stack";

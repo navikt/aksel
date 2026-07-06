@@ -1,10 +1,10 @@
-import {
-  type FontFamilyKeys,
-  type FontLineHeightKeys,
-  type FontSizeKeys,
-  type FontWeightKeys,
+import type {
+  FontFamilyKeys,
+  FontLineHeightKeys,
+  FontSizeKeys,
+  FontWeightKeys,
 } from "../../internal-types";
-import { type StyleDictionaryToken } from "../tokens.util";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 const baseFontSize = 16;
 const getFontSize = (size: number) => `${size / baseFontSize}rem`;

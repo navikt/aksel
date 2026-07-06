@@ -17,15 +17,13 @@ type ExportConfigDiff = {
   };
 };
 
-type ReactConfigDiff = {
-  exportsAdded: string[];
-  exportsRemoved: string[];
-  paths: Record<string, ExportConfigDiff>;
-};
-
 type CompareResults = {
   cssSizeDiff: number;
-  reactConfigDiff: ReactConfigDiff;
+  reactConfigDiff: {
+    exportsAdded: string[];
+    exportsRemoved: string[];
+    paths: Record<string, ExportConfigDiff>;
+  };
 };
 
 function compareArrays({
@@ -130,4 +128,4 @@ function compareResults({
 }
 
 export { compareResults };
-export type { CompareResults, ReactConfigDiff, ExportConfigDiff };
+export type { CompareResults };

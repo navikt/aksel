@@ -6,7 +6,7 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 type GettingStartedSectionProps = {
   cards: NonNullable<DS_FRONT_PAGE_QUERY_RESULT>["ds_getting_started"];

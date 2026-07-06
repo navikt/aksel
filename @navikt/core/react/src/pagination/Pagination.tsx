@@ -1,14 +1,14 @@
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import PaginationItem, {
-  PaginationItemProps,
-  PaginationItemType,
+  type PaginationItemProps,
+  type PaginationItemType,
 } from "./PaginationItem";
 
 interface RenderItemProps extends Pick<

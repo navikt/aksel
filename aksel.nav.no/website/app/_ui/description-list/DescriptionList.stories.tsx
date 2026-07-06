@@ -1,4 +1,4 @@
-import { type Meta, type StoryFn } from "@storybook/nextjs-vite";
+import type { Meta, StoryFn } from "@storybook/nextjs-vite";
 import { AkselDescriptionList } from "./DescriptionList";
 
 // Temporary stories until we extract the component to @navikt/ds-react

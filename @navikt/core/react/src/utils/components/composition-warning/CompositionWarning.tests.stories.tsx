@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { PropsWithChildren, useLayoutEffect, useState } from "react";
+import React, {
+  type PropsWithChildren,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { expect, within } from "storybook/test";
 import { CompositionWarning } from ".";
 

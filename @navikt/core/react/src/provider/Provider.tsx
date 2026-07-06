@@ -1,5 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { PartialTranslations, Translations } from "../utils/i18n/i18n.types";
+import type {
+  PartialTranslations,
+  Translations,
+} from "../utils/i18n/i18n.types";
 import nb from "../utils/i18n/locales/nb";
 
 type ProviderContextType = {

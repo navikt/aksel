@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import React, { type HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 import { useMergeRefs } from "../../utils/hooks";

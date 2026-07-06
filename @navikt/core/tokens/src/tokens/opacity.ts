@@ -1,4 +1,4 @@
-import { StyleDictionaryToken } from "../tokens.util";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 export function opacityTokenConfig() {
   return {

@@ -1,4 +1,4 @@
-import { ConditionalProperty, NewDocumentOptionsResolver } from "sanity";
+import type { ConditionalProperty, NewDocumentOptionsResolver } from "sanity";
 
 export function showForDevsOnly(): ConditionalProperty {
   return ({ currentUser }) =>

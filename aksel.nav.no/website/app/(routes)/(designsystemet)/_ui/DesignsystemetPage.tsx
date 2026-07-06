@@ -1,7 +1,7 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
-import {
+import type {
   GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
   KOMPONENT_BY_SLUG_QUERY_RESULT,
   MONSTER_MALER_BY_SLUG_QUERY_RESULT,

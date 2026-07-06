@@ -1,4 +1,4 @@
-import React, { ErrorInfo } from "react";
+import React, { type ErrorInfo } from "react";
 
 interface Props {
   boundaryName?: string;

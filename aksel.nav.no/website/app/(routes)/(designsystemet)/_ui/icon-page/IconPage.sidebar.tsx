@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import meta from "@navikt/aksel-icons/metadata";
+import type meta from "@navikt/aksel-icons/metadata";
 import { Dialog } from "@navikt/ds-react";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";

@@ -1557,7 +1557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.27.4, @babel/traverse@npm:^7.28.0, @babel/traverse@npm:^7.29.7, @babel/traverse@npm:^7.4.5":
+"@babel/traverse@npm:^7.27.4, @babel/traverse@npm:^7.28.0, @babel/traverse@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/traverse@npm:7.29.7"
   dependencies:
@@ -5392,8 +5392,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:^8.14.0"
-    "@navikt/ds-tokens": "npm:^8.14.0"
     "@types/cli-progress": "npm:3.11.6"
     "@types/is-git-clean": "npm:1.1.2"
     "@types/jscodeshift": "npm:17.3.0"
@@ -5406,7 +5404,6 @@ __metadata:
     figlet: "npm:1.11.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:17.3.0"
-    jscodeshift-add-imports: "npm:1.0.11"
     lodash: "npm:4.18.1"
     rimraf: "npm:6.1.3"
     typescript: "npm:6.0.3"
@@ -5432,7 +5429,6 @@ __metadata:
     esbuild: "npm:^0.28.0"
     fast-glob: "npm:3.3.3"
     lightningcss: "npm:^1.30.1"
-    normalize.css: "npm:^8.0.1"
     tsx: "npm:^4.20.6"
   languageName: unknown
   linkType: soft
@@ -5458,7 +5454,6 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.1.0"
     date-fns: "npm:^4.0.0"
-    fast-glob: "npm:3.3.3"
     jscodeshift: "npm:17.3.0"
     jsdom: "npm:29.1.1"
     react: "npm:19.2.7"
@@ -5486,6 +5481,7 @@ __metadata:
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
     "@navikt/ds-tokens": "npm:^8.14.0"
+    "@types/node": "npm:^24.10.9"
     tailwindcss: "npm:^3.3.3"
     tsx: "npm:^4.20.6"
     typescript: "npm:6.0.3"
@@ -7816,7 +7812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^5.3.0":
+"@rollup/pluginutils@npm:^5.4.0":
   version: 5.4.0
   resolution: "@rollup/pluginutils@npm:5.4.0"
   dependencies:
@@ -9371,7 +9367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/plugin-jsx@npm:8.1.0, @svgr/plugin-jsx@npm:^8.1.0":
+"@svgr/plugin-jsx@npm:8.1.0":
   version: 8.1.0
   resolution: "@svgr/plugin-jsx@npm:8.1.0"
   dependencies:
@@ -11253,7 +11249,6 @@ __metadata:
     concurrently: "npm:9.2.1"
     flat: "npm:6.0.1"
     mlly: "npm:1.8.2"
-    rimraf: "npm:6.1.3"
     rolldown: "npm:^1.0.1"
     tar: "npm:^7.5.16"
     ts-morph: "npm:^28.0.0"
@@ -11269,6 +11264,7 @@ __metadata:
     "@figma/plugin-typings": "npm:^1.128.0"
     "@navikt/ds-css": "npm:*"
     "@navikt/ds-react": "npm:*"
+    "@rollup/pluginutils": "npm:^5.4.0"
     "@svgr/core": "npm:^8.1.0"
     "@types/node": "npm:^24.10.9"
     "@types/react": "npm:19.2.14"
@@ -11280,7 +11276,6 @@ __metadata:
     typescript: "npm:6.0.3"
     vite: "npm:^8.0.16"
     vite-plugin-singlefile: "npm:^2.3.0"
-    vite-plugin-svgr: "npm:^5.2.0"
   languageName: unknown
   linkType: soft
 
@@ -11337,6 +11332,7 @@ __metadata:
     "@svitejs/changesets-changelog-github-compact": "npm:^1.1.0"
     "@tanstack/react-table": "npm:8.21.3"
     "@trivago/prettier-plugin-sort-imports": "npm:^6.0.2"
+    "@types/node": "npm:^24.10.9"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@vitest/browser": "npm:4.1.9"
@@ -11344,7 +11340,6 @@ __metadata:
     "@vitest/coverage-v8": "npm:4.1.9"
     "@vitest/eslint-plugin": "npm:1.6.20"
     chromatic: "npm:15.1.0"
-    concurrently: "npm:9.2.1"
     cross-env: "npm:^10.1.0"
     eslint: "npm:^9.39.2"
     eslint-plugin-aksel-local: "npm:*"
@@ -11364,7 +11359,6 @@ __metadata:
     react-docgen-typescript: "npm:2.2.2"
     react-dom: "npm:19.2.7"
     storybook: "npm:^10.4.6"
-    storybook-addon-pseudo-states: "npm:^10.4.6"
     stylelint: "npm:^17.2.0"
     stylelint-config-standard: "npm:^40.0.0"
     stylelint-declaration-block-no-ignored-properties: "npm:^3.0.0"
@@ -13858,10 +13852,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deeks@npm:3.1.0":
-  version: 3.1.0
-  resolution: "deeks@npm:3.1.0"
-  checksum: 10/4297893cb792bc207b1fdac6090094c8c666669227b385bc69d98ea751294614948288a39a38faa0a44d7045d1bf05eacd188eea7516a1a7d0fee9a7faa34e7d
+"deeks@npm:3.2.1":
+  version: 3.2.1
+  resolution: "deeks@npm:3.2.1"
+  checksum: 10/919ec51a4743710d1a1dd0ec7ed3738b24888c9285b69519740e780cb6593a2591a7f748faf38e081fe0b29004374a44e7791913a27e94843140e6b4b23d00ea
   languageName: node
   linkType: hard
 
@@ -14073,10 +14067,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"doc-path@npm:4.1.1":
-  version: 4.1.1
-  resolution: "doc-path@npm:4.1.1"
-  checksum: 10/455dd7458d4fa9ec0662fc307c4c3a7112bd0d554b8a6e0e86a6c6554f125727b4f80af430c1038f5d471ed5586c95354260928a31b80e632519480d745af713
+"doc-path@npm:4.1.4":
+  version: 4.1.4
+  resolution: "doc-path@npm:4.1.4"
+  checksum: 10/665dff8b742c25cb60cf957ad604cced4670daa247e0b710f777847c3c77ebbba00b38ad7e9f34cdc8aa1cda0ddf1fdfea4a8c2531274da7b7ff7acbc8f106f3
   languageName: node
   linkType: hard
 
@@ -18296,27 +18290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jscodeshift-add-imports@npm:1.0.11":
-  version: 1.0.11
-  resolution: "jscodeshift-add-imports@npm:1.0.11"
-  dependencies:
-    "@babel/traverse": "npm:^7.4.5"
-    jscodeshift-find-imports: "npm:^2.0.2"
-  peerDependencies:
-    jscodeshift: ">=0.7 <1"
-  checksum: 10/c50ce72c722b24fa4535ed7bca6f2b17b5ecaa4fa579f1411bdf6cf05b6d2f2c1f1de3d7e35bc1d4d03ae09228afc3dac64fac87b39044c814c6438513d00123
-  languageName: node
-  linkType: hard
-
-"jscodeshift-find-imports@npm:^2.0.2":
-  version: 2.0.5
-  resolution: "jscodeshift-find-imports@npm:2.0.5"
-  peerDependencies:
-    jscodeshift: ">=0.7 <1"
-  checksum: 10/591c8f967327f7765e4b2c6ce8359c7aaf21d151ec71244d6339b5e01d7b49cbcd4ea8ae1cd9551a0c1173d37912da8bb9cddec8cd1a01cc4ccc0c8b4cc6a051
-  languageName: node
-  linkType: hard
-
 "jscodeshift@npm:17.3.0":
   version: 17.3.0
   resolution: "jscodeshift@npm:17.3.0"
@@ -18461,12 +18434,12 @@ __metadata:
   linkType: hard
 
 "json-2-csv@npm:^5.5.9":
-  version: 5.5.10
-  resolution: "json-2-csv@npm:5.5.10"
+  version: 5.5.11
+  resolution: "json-2-csv@npm:5.5.11"
   dependencies:
-    deeks: "npm:3.1.0"
-    doc-path: "npm:4.1.1"
-  checksum: 10/6f9a874212a9862407bdc6ce137202ef7c3612e4151fcfa52bc249bf2f8e19d95bb89d3ac8158c1bc31c8f3d795b5c5dab702bfb05eabb790ef9bbaeda6fc171
+    deeks: "npm:3.2.1"
+    doc-path: "npm:4.1.4"
+  checksum: 10/a81c8eeceb5d2099a327e3650cbee1c2ba0e9e23420d15c257782b39a808cbcc268fd349c2aa4cd16327d71da620d74eac276f11aee760b3e5d78991684c632e
   languageName: node
   linkType: hard
 
@@ -20723,13 +20696,6 @@ __metadata:
   version: 3.0.0
   resolution: "normalize-path@npm:3.0.0"
   checksum: 10/88eeb4da891e10b1318c4b2476b6e2ecbeb5ff97d946815ffea7794c31a89017c70d7f34b3c2ebf23ef4e9fc9fb99f7dffe36da22011b5b5c6ffa34f4873ec20
-  languageName: node
-  linkType: hard
-
-"normalize.css@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "normalize.css@npm:8.0.1"
-  checksum: 10/c3af2145c21d57b94fe9f1abe7bac82ec91f8088810ada6ee3385f29a2d51af441a469b3c680d25b27bfab5291908a3ef3ed7012955036e8967f0b18fe39f38a
   languageName: node
   linkType: hard
 
@@ -25241,15 +25207,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-pseudo-states@npm:^10.4.6":
-  version: 10.4.6
-  resolution: "storybook-addon-pseudo-states@npm:10.4.6"
-  peerDependencies:
-    storybook: ^10.4.6
-  checksum: 10/974184f80230f8c1cb140cf30a92650bc1621784322a76278215d9ee266d98f8f7b303e45d908773c3697ca6e4830c9f63a05842bab0eb83de7f6c98623a79e1
-  languageName: node
-  linkType: hard
-
 "storybook@npm:^10.4.6":
   version: 10.4.6
   resolution: "storybook@npm:10.4.6"
@@ -27462,19 +27419,6 @@ __metadata:
     storybook: ^0.0.0-0 || ^9.0.0 || ^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0 || ^10.5.0-0 || ^10.6.0-0
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
   checksum: 10/06010c7b41eb76c9300c2410cd3ed398a4f6908b4c30a4d6dd6a6feaab0eb625078f0552e167e297f26cfaa4c948b9829a8505581115dd5cbf04aaf3a3c1dbbf
-  languageName: node
-  linkType: hard
-
-"vite-plugin-svgr@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "vite-plugin-svgr@npm:5.2.0"
-  dependencies:
-    "@rollup/pluginutils": "npm:^5.3.0"
-    "@svgr/core": "npm:^8.1.0"
-    "@svgr/plugin-jsx": "npm:^8.1.0"
-  peerDependencies:
-    vite: ">=3.0.0"
-  checksum: 10/5fdaa33a4cc756030f36571bf24816f4c3ff298278045449accb6aa1f206f1ac42cf61ce7daedf89905607b16d0fde01ad0f1efad399671de1433371e027be45
   languageName: node
   linkType: hard
 

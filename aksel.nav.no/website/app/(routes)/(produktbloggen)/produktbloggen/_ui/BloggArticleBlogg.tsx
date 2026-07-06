@@ -1,5 +1,5 @@
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { Avatar, AvatarStack } from "@/app/_ui/avatar/Avatar";
 import { queryToAvatars } from "@/app/_ui/avatar/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";

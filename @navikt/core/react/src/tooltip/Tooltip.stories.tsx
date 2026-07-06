@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../button";
 import { VStack } from "../primitives/stack";

@@ -1,4 +1,4 @@
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
 import { BodyLong, Box, HGrid, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";

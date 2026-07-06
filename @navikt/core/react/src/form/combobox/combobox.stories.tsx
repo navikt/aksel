@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
@@ -7,7 +7,7 @@ import { Modal } from "../../modal";
 import { VStack } from "../../primitives/stack";
 import { BodyLong } from "../../typography";
 import { TextField } from "../textfield";
-import { ComboboxProps, UNSAFE_Combobox } from "./index";
+import { type ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",

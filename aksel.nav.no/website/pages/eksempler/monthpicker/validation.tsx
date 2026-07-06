@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Box,
   MonthPicker,
-  MonthValidationT,
+  type MonthValidationT,
   useMonthpicker,
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";

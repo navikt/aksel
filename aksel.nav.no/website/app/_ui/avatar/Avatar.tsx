@@ -1,6 +1,6 @@
 import { stegaClean } from "next-sanity";
 import Image from "next/image";
-import { Children, ReactNode, isValidElement } from "react";
+import { Children, type ReactNode, isValidElement } from "react";
 import { BodyShort, Box, Detail, HStack, VStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 

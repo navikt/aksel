@@ -1,5 +1,5 @@
 import _config from "../../../figma-config.json";
-import { FigmaConfigEntry, FigmaTokenConfig } from "../figma-config.types";
+import type { FigmaConfigEntry, FigmaTokenConfig } from "../figma-config.types";
 import { FigmaPluginInterface } from "./FigmaPluginInterface";
 
 type ScopedFigmaTokenConfig = Omit<FigmaTokenConfig, "version" | "timestamp">;

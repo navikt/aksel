@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { Accordion } from "../../accordion";
 import AccordionContent from "../../accordion/AccordionContent";
@@ -7,7 +7,7 @@ import AccordionItem from "../../accordion/AccordionItem";
 import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Radio from "./Radio";
-import RadioGroup, { RadioGroupProps } from "./RadioGroup";
+import RadioGroup, { type RadioGroupProps } from "./RadioGroup";
 import { RadioInput } from "./radio-input/RadioInput";
 
 const meta: Meta<typeof RadioGroup> = {

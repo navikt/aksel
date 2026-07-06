@@ -4,13 +4,19 @@ import fastglob from "fast-glob";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
 import fs from "node:fs";
 import path from "node:path";
-import {
-  StyleMappings,
-  componentsCss,
-  formCss,
-  primitivesCss,
-} from "../config/_mappings";
 import packageJSON from "../package.json";
+
+const BASELINE_CSS_LIST = [
+  "fonts.css",
+  "tokens.css",
+  "reset.css",
+  "baseline.css",
+  "print.css",
+];
+
+const FORM_CSS = "form.css";
+const PRIMITIVES_CSS = "primitives.css";
+const COMPONENTS_CSS = "components.css";
 
 bundle();
 
@@ -128,17 +134,17 @@ async function bundle() {
   await bundleCSS(rootComponentsParser).then((file) => {
     writeFile({
       file,
-      filePath: componentsCss,
+      filePath: COMPONENTS_CSS,
     });
   });
 
   /* ------------------------------ /global build ----------------------------- */
-  for (const style of StyleMappings.baseline) {
+  for (const style of BASELINE_CSS_LIST) {
     function parser(input: string) {
       const parsed = input
         .split("\n")
         .filter((line) => line.startsWith("@import"))
-        .filter((line) => line.includes(style.main))
+        .filter((line) => line.includes(style))
         .join("\n");
       return layerDefinition + "\n" + parsed;
     }
@@ -146,7 +152,7 @@ async function bundle() {
     await bundleCSS(parser).then((file) => {
       writeFile({
         file,
-        filePath: `global/${style.main}`,
+        filePath: `global/${style}`,
       });
     });
   }
@@ -164,7 +170,7 @@ async function bundle() {
   await bundleCSS(rootFormParser).then((file) => {
     writeFile({
       file,
-      filePath: `component/${formCss}`,
+      filePath: `component/${FORM_CSS}`,
     });
   });
 
@@ -181,7 +187,7 @@ async function bundle() {
   await bundleCSS(rootPrimitivesParser).then((file) => {
     writeFile({
       file,
-      filePath: `component/${primitivesCss}`,
+      filePath: `component/${PRIMITIVES_CSS}`,
     });
   });
 

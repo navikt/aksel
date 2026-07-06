@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Checkbox from "./Checkbox";
-import CheckboxGroup, { CheckboxGroupProps } from "./CheckboxGroup";
+import CheckboxGroup, { type CheckboxGroupProps } from "./CheckboxGroup";
 import { CheckboxInput } from "./checkbox-input/CheckboxInput";
 
 const meta: Meta<typeof CheckboxGroup> = {

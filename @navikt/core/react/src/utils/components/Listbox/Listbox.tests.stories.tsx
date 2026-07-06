@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, fireEvent, fn } from "storybook/test";
-import { ListboxOptionProps } from "./option/ListboxOption";
+import type { ListboxOptionProps } from "./option/ListboxOption";
 import Listbox from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {

@@ -1,7 +1,7 @@
 import { stegaClean } from "next-sanity";
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { Code } from "../typography/Code";
 import { PropsSeksjonCode } from "./PropsSeksjon.code";
 import { PropsSeksjonDescription } from "./PropsSeksjon.decription";

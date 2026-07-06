@@ -1,14 +1,14 @@
 "use client";
 
 import React, {
-  CSSProperties,
+  type CSSProperties,
   createContext,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { Color } from "@/app/_sanity/query-types";
+import type { Color } from "@/app/_sanity/query-types";
 
 type CompareImagesContextT = {
   registerContainer: (element: HTMLDivElement | null) => void;

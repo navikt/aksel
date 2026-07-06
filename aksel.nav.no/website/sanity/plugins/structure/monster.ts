@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/structure";
+import type { StructureBuilder } from "sanity/structure";
 import { HouseIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { templatesKategorier } from "@/sanity/config";
 import { Panes } from "./panes";

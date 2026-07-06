@@ -1,8 +1,10 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
+import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
+import { useDataGridSettings } from "../hooks/useDataGridSettings";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
@@ -43,6 +45,14 @@ interface DataGridProps<RowT> {
    * Settings for the data grid.
    */
   settings?: DataGridSettings;
+  /**
+   * Default settings for the data grid. These will be used if `settings` prop is not provided.
+   */
+  defaultSettings?: DataGridSettings;
+  /**
+   * Callback fired when settings are changed. The new settings will be passed as an argument.
+   */
+  onSettingsChange?: (newSettings: DataGridSettings) => void;
 }
 
 interface DataGridComponent {
@@ -50,14 +60,23 @@ interface DataGridComponent {
     props: DataGridProps<RowT> & React.RefAttributes<HTMLDivElement>,
   ): React.ReactElement | null;
   /**
-   * @see 🏷️ {@link DataGridTableProps}
+   * @see 🏷️ {@link DataGridTable.Props}
    *
    * @example
-   * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+   * <DataGrid columns={columnDefs} data={rowData} getRowId={(row) => row.id}>
    *   <DataGrid.Table />
    * </DataGrid>
    */
   Table: typeof DataGridTable;
+  /**
+   * @see 🏷️ {@link DataGridPreferences.Props}
+   *
+   * @example
+   * <DataGrid columns={columns} data={data} onSettingsChange={handleSettingsChange}>
+   *   <DataGrid.Preferences />
+   * </DataGrid>
+   */
+  Preferences: typeof DataGridPreferences;
 }
 
 /**
@@ -70,7 +89,8 @@ interface DataGridComponent {
  *
  * @example
  * ```jsx
- * <DataGrid columnDefinitions={columnDefs} data={rowData} getRowId={(row) => row.id}>
+ * <DataGrid columns={columnDefs} data={rowData} getRowId={(row) => row.id}>
+ *   <DataGrid.Preferences />
  *   <DataGrid.Table />
  * </DataGrid>
  * ```
@@ -86,30 +106,17 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       selection,
       isLoading = false,
       settings,
+      defaultSettings,
+      onSettingsChange,
       ...rest
     }: DataGridProps<unknown>,
     ref,
   ) => {
-    const resolvedSettings = useMemo(
-      () => ({
-        rowDensity: settings?.rowDensity ?? "standard",
-        zebraStripes: settings?.zebraStripes ?? false,
-        truncateContent: settings?.truncateContent,
-        stickyColumns: settings?.stickyColumns ?? {},
-        textSize: settings?.textSize ?? "medium",
-        columnDisplay: settings?.columnDisplay,
-        columnDividers: settings?.columnDividers ?? true,
-      }),
-      [
-        settings?.rowDensity,
-        settings?.zebraStripes,
-        settings?.truncateContent,
-        settings?.stickyColumns,
-        settings?.textSize,
-        settings?.columnDisplay,
-        settings?.columnDividers,
-      ],
-    );
+    const { settings: resolvedSettings, updateSettings } = useDataGridSettings({
+      settings,
+      defaultSettings,
+      onSettingsChange,
+    });
 
     return (
       <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
@@ -120,6 +127,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           selection={selection}
           isLoading={isLoading}
           tableSettings={resolvedSettings}
+          updateTableSettings={updateSettings}
         >
           {children}
         </DataGridContextProvider>
@@ -130,6 +138,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
 
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
+DataGrid.Preferences = DataGridPreferences;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace DataGrid {
@@ -148,6 +157,12 @@ export namespace DataGrid {
     export type LoadingContent = DataGridTable.LoadingContent;
     export type SubRows<T = unknown> = DataGridTable.SubRows<T>;
     export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Preferences {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    export type Props = DataGridPreferences.Props;
   }
 }
 

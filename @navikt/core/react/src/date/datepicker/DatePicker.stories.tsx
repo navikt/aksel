@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../../button";
@@ -10,7 +10,7 @@ import { HStack, Spacer, VStack } from "../../primitives/stack";
 import { BodyLong, ErrorMessage } from "../../typography";
 import { useId } from "../../utils-external";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import DatePicker, { DatePickerProps } from "./DatePicker";
+import DatePicker, { type DatePickerProps } from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
 import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
 

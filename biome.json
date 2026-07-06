@@ -25,7 +25,6 @@
     "includes": [
       "**",
       "!**/public",
-      "!**/examples",
       "!**/codemod/**/*.js",
       "!**/modal/dialog-polyfill.ts",
       "!**/_sanity/query-types.ts",
@@ -50,7 +49,6 @@
         "useSemanticElements": "off"
       },
       "style": {
-        "useImportType": "off",
         "useTemplate": "off",
         "useNodejsImportProtocol": "off",
         "useConst": "off",

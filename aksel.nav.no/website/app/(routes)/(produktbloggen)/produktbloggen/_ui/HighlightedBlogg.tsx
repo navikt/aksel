@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import { BodyLong, Heading, Hide, Link, Show } from "@navikt/ds-react";
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack } from "@/app/_ui/avatar/Avatar";
 import { queryToAvatars } from "@/app/_ui/avatar/utils";

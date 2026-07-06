@@ -38,4 +38,3 @@ async function getDocsIndex(): Promise<DocsIndex> {
 }
 
 export { getDocsIndex };
-export type { DocsIndex, DocsIndexEntry };

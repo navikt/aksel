@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonProps } from "../../../button";
+import { Button, type ButtonProps } from "../../../button";
 import { Tooltip } from "../../../tooltip";
 
 type DataToolbarButtonProps = Omit<

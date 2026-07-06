@@ -1,8 +1,8 @@
-import { Locale } from "date-fns";
+import type { Locale } from "date-fns";
 import { useCallback, useRef } from "react";
 import { useProvider } from "../../provider/Provider";
 import { get } from "./get";
-import {
+import type {
   Component,
   ComponentTranslation,
   PartialTranslations,

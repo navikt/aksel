@@ -1,5 +1,5 @@
-import { Metadata } from "next";
-import { PortableTextBlock } from "next-sanity";
+import type { Metadata } from "next";
+import type { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";

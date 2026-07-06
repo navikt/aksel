@@ -1,7 +1,7 @@
 import "server-only";
 import { sanityFetch } from "@/app/_sanity/live";
 import { SLUG_BY_TYPE_QUERY } from "@/app/_sanity/queries";
-import { AllArticleDocumentsT } from "@/sanity/config";
+import type { AllArticleDocumentsT } from "@/sanity/config";
 
 const SanityDoctypeSlugPrefixConfig = {
   komponent_artikkel: "komponenter",
