@@ -35,7 +35,7 @@ function EmptyStateCard({
           </Heading>
           <BodyShort size="small" spacing>
             Prøv å justere filteret ditt. Om du fortsatt sitter igjen tomhendt
-            kan du opprette et issue på Github, eller kontakte oss på Slack så
+            kan du opprette et issue på GitHub, eller kontakte oss på Slack så
             ser vi på det sammen.
           </BodyShort>
           {actionComponent && (

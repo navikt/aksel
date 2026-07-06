@@ -8329,6 +8329,14 @@
         },
         "optional": true
       },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
+        },
+        "optional": true
+      },
       "status": {
         "type": "objectAttribute",
         "value": {
@@ -8592,6 +8600,14 @@
         "value": {
           "type": "inline",
           "name": "slug"
+        },
+        "optional": true
+      },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
         },
         "optional": true
       },
@@ -9558,6 +9574,14 @@
         },
         "optional": true
       },
+      "contact": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "editorial_staff.reference"
+        },
+        "optional": true
+      },
       "status": {
         "type": "objectAttribute",
         "value": {
@@ -10314,6 +10338,20 @@
               "value": "miljoe"
             }
           ]
+        },
+        "optional": true
+      },
+      "github_issues_link": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "slack_link": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       }

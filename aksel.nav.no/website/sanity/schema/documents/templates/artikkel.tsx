@@ -58,6 +58,13 @@ export const TemplatesArtikkel = defineType({
     }),
     kategoriSlug(prefix),
     defineField({
+      title: "Forvalter",
+      name: "contact",
+      type: "reference",
+      to: [{ type: "editorial_staff" }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       title: "Metadata",
       name: "status",
       group: "innhold",
@@ -90,7 +97,7 @@ export const TemplatesArtikkel = defineType({
       },
     }),
     defineField({
-      title: "Github discussions link",
+      title: "GitHub discussions link",
       name: "gh_discussions",
       type: "url",
       group: "settings",

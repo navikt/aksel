@@ -4,13 +4,12 @@ import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
 } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
+import { DesignsystemetPageFooter } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPageFooter";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
-import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 
@@ -30,27 +29,26 @@ async function GrunnleggendePage({ slug }: { slug: string }) {
     notFound();
   }
 
-  const changelogs = await fetchChangelogs(pageData._id, "ds");
-
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <DesignsystemetPageHeader
-        data={pageData}
-        linkToChangelogs={changelogs.exists}
-      />
+      <DesignsystemetPageHeader data={pageData} />
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "Send innspill",
+          text: "GitHub issues",
+          href: pageData.contact?.github_issues_link,
         }}
         toc={toc}
-        linkToChangelogs={changelogs.exists}
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"
       />
-      <ChangelogTable changelogs={changelogs} />
+      <DesignsystemetPageFooter
+        pageId={pageData._id}
+        updateDateString={pageData._updatedAt ?? pageData._createdAt}
+        contact={pageData.contact}
+      />
     </DesignsystemetPageLayout>
   );
 }

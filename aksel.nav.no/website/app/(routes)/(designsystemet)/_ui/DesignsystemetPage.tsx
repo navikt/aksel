@@ -1,19 +1,14 @@
 import type { PortableTextBlock } from "next-sanity";
-import { BodyShort, Box, HStack, Heading, Tag } from "@navikt/ds-react";
+import { Box, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import type {
   GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
   KOMPONENT_BY_SLUG_QUERY_RESULT,
   MONSTER_MALER_BY_SLUG_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
-import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
-import { formatDateString } from "@/ui-utils/format-date";
 import styles from "./Designsystemet.module.css";
-import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
-import { KomponentLinks } from "./DesignsystemetPage.parts";
 
 type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
@@ -43,20 +38,12 @@ type DesignsystemetPageT = {
     | KOMPONENT_BY_SLUG_QUERY_RESULT
     | GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT
     | MONSTER_MALER_BY_SLUG_QUERY_RESULT;
-  linkToChangelogs?: boolean;
 };
 
-async function DesignsystemetPageHeader({
-  data,
-  linkToChangelogs = false,
-}: DesignsystemetPageT) {
-  const updateDate = formatDateString(data?._updatedAt ?? data?._createdAt);
-
+async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const statusTag = getStatusTag(data?.status?.tag);
 
   const isComponentPage = data?._type === "komponent_artikkel";
-
-  const imageUrl = urlForImage(data?.status?.bilde)?.url();
 
   return (
     <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>
@@ -80,29 +67,6 @@ async function DesignsystemetPageHeader({
           }}
         />
       )}
-      <HStack gap="space-16" align="center" marginBlock="space-24 space-0">
-        {statusTag && (
-          <Tag size="xsmall" data-color={statusTag.colorRole}>
-            {statusTag.text}
-          </Tag>
-        )}
-        {updateDate &&
-          (linkToChangelogs ? (
-            <UmamiLink
-              href="#endringslogg-table"
-              data-color="neutral"
-              lenkegruppe="endringslogg-tabell"
-            >{`Oppdatert ${updateDate}`}</UmamiLink>
-          ) : (
-            <BodyShort size="small" as="span" textColor="subtle">
-              {`Oppdatert ${updateDate}`}
-            </BodyShort>
-          ))}
-      </HStack>
-      {isComponentPage && (
-        <KomponentLinks data={data} heading={data?.heading} />
-      )}
-      <DesignsystemetThumbnail thumbnailUrl={imageUrl} />
     </Box>
   );
 }

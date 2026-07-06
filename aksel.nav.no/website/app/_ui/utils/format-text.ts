@@ -7,9 +7,11 @@ function capitalizeText(inputString: string): string {
   return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
-type RedaksjonTypeValue = NonNullable<
-  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number]["writers"]
->[number]["type"];
+type RedaksjonTypeValue =
+  | NonNullable<
+      NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number]["writers"]
+    >[number]["type"]
+  | undefined;
 
 export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
   switch (type) {
