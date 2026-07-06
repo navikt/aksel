@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.128.0",
+    "@rollup/pluginutils": "^5.4.0",
     "@svgr/core": "^8.1.0",
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
@@ -26,7 +27,6 @@
     "@vitejs/plugin-react": "^6.0.1",
     "typescript": "6.0.3",
     "vite": "^8.0.16",
-    "vite-plugin-singlefile": "^2.3.0",
-    "vite-plugin-svgr": "^5.2.0"
+    "vite-plugin-singlefile": "^2.3.0"
   }
 }

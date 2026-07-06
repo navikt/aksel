@@ -32,12 +32,4 @@ type McpResource = {
   callback: (uri: URL) => Promise<ResourceResult>;
 };
 
-export type {
-  McpPrompt,
-  McpResource,
-  McpTool,
-  PromptResult,
-  ResourceResult,
-  ToolResult,
-  ZodInputSchema,
-};
+export type { McpPrompt, McpResource, McpTool };

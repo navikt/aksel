@@ -140,4 +140,4 @@ function groupLlmDocumentation(items: MarkdownArticle[]): GroupedLlmSection[] {
 }
 
 export { groupLlmDocumentation, llmSectionConfig, MARKDOWN_PAGE_PATHS };
-export type { GroupedLlmSection, MarkdownArticle, SectionEntry };
+export type { MarkdownArticle };

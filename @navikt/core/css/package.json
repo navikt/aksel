@@ -37,7 +37,6 @@
     "esbuild": "^0.28.0",
     "fast-glob": "3.3.3",
     "lightningcss": "^1.30.1",
-    "normalize.css": "^8.0.1",
     "tsx": "^4.20.6"
   },
   "browserslist": [

@@ -40,8 +40,6 @@
     "url": "https://github.com/navikt/aksel/issues"
   },
   "dependencies": {
-    "@navikt/ds-css": "^8.14.0",
-    "@navikt/ds-tokens": "^8.14.0",
     "chalk": "5.6.2",
     "cli-progress": "3.12.0",
     "clipboardy": "5.3.1",
@@ -51,7 +49,6 @@
     "figlet": "1.11.0",
     "is-git-clean": "1.1.0",
     "jscodeshift": "17.3.0",
-    "jscodeshift-add-imports": "1.0.11",
     "lodash": "4.18.1"
   },
   "devDependencies": {
