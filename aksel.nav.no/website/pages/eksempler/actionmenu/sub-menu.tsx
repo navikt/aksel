@@ -137,7 +137,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Undermenyer lar deg forenkle komplekse grensesnitt og filter ved å flytte innholdet til en godt strukturert meny. Vi anbefaler maks to nivåer med undermenyer.",
 };

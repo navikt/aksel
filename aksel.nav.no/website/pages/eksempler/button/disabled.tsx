@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 20,
   desc: "Vi fraråder bruk av disabled state da elementet blir gjemt fra hjelpeteknologier og vil ofte være vanskelig å oppfatte visuelt.",
 };

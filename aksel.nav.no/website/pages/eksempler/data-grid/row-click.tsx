@@ -27,7 +27,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 13,
   desc: "`onRowAction`-callbacken gir tilgang til raden som ble klikket på, og kan brukes til å utføre en handling basert på denne raden.",
 };

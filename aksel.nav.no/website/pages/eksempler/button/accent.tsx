@@ -19,7 +19,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Accent-fargen (standard) brukes på handlinger som skal ha oppmerksomhet og er en del av den planlagte flyten.",
 };

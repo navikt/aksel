@@ -141,6 +141,6 @@ export const Demo = {
   desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
 };

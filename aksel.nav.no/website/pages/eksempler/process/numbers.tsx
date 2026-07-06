@@ -31,7 +31,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Du kan bruke `bullet` for å vise et nummer i hver 'event'. Dette kan være nyttig for å vise rekkefølgen på stegene i en allerede kjent prosess.",
 };

@@ -29,7 +29,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = { render: Example };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Du kan enten wrappe elementet som skal emuleres, eller sette størrelsen manuelt med prop-ene `width` og `height`. Width og height settes rett på style, slik at px, rem eller f.eks. '100%' fungerer.",
 };

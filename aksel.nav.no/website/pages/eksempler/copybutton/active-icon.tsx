@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "`activeIcon`-propen lar deg endre ikon i aktivert tilstand.",
 };

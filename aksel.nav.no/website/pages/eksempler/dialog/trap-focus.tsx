@@ -220,7 +220,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 12,
   desc: '`modal="trap-focus"` lar brukeren interagere med innholdet utenfor dialogen med pointer/touch, mens fokus forblir innenfor dialogen. Tastatur og skjermlesere vil ikke ha tilgang til innholdet bak dialogen, slik at dette bør bare implementeres i ekspertsystemer!',
 };

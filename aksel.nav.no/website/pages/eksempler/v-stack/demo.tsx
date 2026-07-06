@@ -21,7 +21,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "VStack er en enkel layout-komponent for flexbox med `flex-direction: column`.",
 };

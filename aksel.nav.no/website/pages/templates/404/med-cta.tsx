@@ -66,7 +66,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   title: "Med CTA til side",
   desc: "En 404-side kan inneholde en CTA som leder til et relevant område eller side, avhengig av konteksten.",

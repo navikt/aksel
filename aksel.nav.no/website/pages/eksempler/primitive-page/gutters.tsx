@@ -47,7 +47,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   title: "Gutters",
   desc: "Propen `gutters` på Page.Block setter responsive gutters (padding-inline).",

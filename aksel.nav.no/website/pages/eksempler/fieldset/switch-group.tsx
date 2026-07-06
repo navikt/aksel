@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "OBS 1: Switch skal ikke brukes i skjemaer ([se dokumentasjon](/komponenter/core/switch)). OBS 2: Ved bruk av `error`-propen på Fieldset må feilmeldingen knyttes til Switch-ene manuelt med `aria-describedby`.",
 };

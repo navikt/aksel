@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 10,
   desc: "[OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) lar deg endre hvilken HTML-tag komponenten rendres med. For vanlige lenker kan dette være en `<a>`-tag, men for f.eks. React Router eller Remix kan det være en `<Link>`-komponent.",
   sandbox: false,

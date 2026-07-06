@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Propen `borderWidth` lar deg kontrollere tykkelsen på border.",
 };

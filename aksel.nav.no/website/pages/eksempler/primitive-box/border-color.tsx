@@ -40,7 +40,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Propen `borderColor` lar deg endre border-color basert på tokens.",
 };

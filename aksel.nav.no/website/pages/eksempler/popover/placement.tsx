@@ -67,7 +67,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Her kan du teste ulike 'placement'-verdier. Popover styrer selv plassering hvis det ikke er plass i valgt retning.",
 };

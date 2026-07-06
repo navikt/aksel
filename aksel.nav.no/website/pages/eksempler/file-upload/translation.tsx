@@ -45,7 +45,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 99,
   desc: "Med translations API-et kan du endre tekstene i komponentene. **OBS:** `dragAndDrop`, `dragAndDropMultiple` og `or` er usynlige for skjermlesere. Ikke legg viktig info her.",
 };

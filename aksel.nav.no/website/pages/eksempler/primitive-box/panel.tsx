@@ -37,7 +37,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 9,
   desc: "Box erstatter den avviklede komponenten Panel.",
 };

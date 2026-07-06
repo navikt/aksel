@@ -21,7 +21,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Endre størrelsen på eksempelvinduet for å se komponenten i aksjon. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/komponent-api#613715c234c8).",
 };

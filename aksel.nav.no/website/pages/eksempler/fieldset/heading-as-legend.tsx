@@ -26,7 +26,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Selv om du har en overskrift som fungerer som ledetekst, kan det likevel være nyttig å bruke fieldset mht. skjermleser-brukere. For å unngå duplisert tekst kan du putte overskriften rett i legend.",
 };

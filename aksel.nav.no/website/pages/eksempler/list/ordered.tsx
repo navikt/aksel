@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: 'Du kan sette `as="ol"` for å få en nummerert liste.',
 };

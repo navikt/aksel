@@ -151,7 +151,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Vi anbefaler å bruke `aria-controls` begge veier mellom aktive perioder og panelet det refererer til. Dette gir brukere av enkelte skjermlesere hurtigtaster for å hoppe mellom perioder og panelet.",
 };

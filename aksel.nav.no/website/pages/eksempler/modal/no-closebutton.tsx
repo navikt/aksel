@@ -55,7 +55,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Lukkeknappen i headeren kan skjules, men da må du ha en annen knapp som lukker modalen.",
 };

@@ -21,7 +21,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Propen 'spacing' legger til mellomrom under avsnittet. Avstanden varierer avhengig av 'size'.",
 };

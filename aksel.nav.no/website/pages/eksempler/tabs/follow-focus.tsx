@@ -53,7 +53,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "'selectionFollowsFocus' gjør at valgt tab følger fokus ved bruk av piltaster.",
 };

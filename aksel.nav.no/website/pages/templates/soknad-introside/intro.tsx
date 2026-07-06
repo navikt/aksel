@@ -245,7 +245,7 @@ export const Demo = {
   },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   title: "Standard",
 };

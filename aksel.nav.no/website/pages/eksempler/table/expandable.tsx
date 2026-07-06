@@ -73,7 +73,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Rader kan utvides for å vise ekstra informasjon. Man kan velge om knappen for å utvide/lukke vises i starten eller enden av raden.",
 };

@@ -28,7 +28,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "<List> rendrer en <ul> og <List.Item> rendrer en <li>.",
 };

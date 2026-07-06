@@ -29,7 +29,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "For å gjøre det lettere for skjermlesere å navigere til Pagination, anbefaler vi å bruke `srHeading`-prop for å legge til en skjult heading. Husk å bruke riktig h-tag.",
 };

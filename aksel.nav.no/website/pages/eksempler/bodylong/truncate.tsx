@@ -19,7 +19,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "'truncate' gjør at teksten kuttes ved enden av første linje. Pass på så du ikke gjemmer viktig informasjon som man ikke kan finne andre steder.",
 };

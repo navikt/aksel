@@ -101,7 +101,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Med CheckboxItem og RadioItem i ActionMenu er det enkelt å lage et filter for tabeller eller andre komplekse grensesnitt.",
 };

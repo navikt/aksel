@@ -75,7 +75,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Du kan overstyre blant annet value, selectedOptions og filteredOptions.",
 };

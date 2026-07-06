@@ -32,7 +32,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Bruk av Fieldset her gjør at man unngår å gjenta konteksten i hver Select. (Her har vi justert ned font-vekten på labelen til hvert felt for å skape et tydeligere hierarki.)",
 };

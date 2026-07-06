@@ -29,7 +29,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "På noen props, f.eks. gap, kan du sette ulike verdier per brekkpunkt. Implementasjonen er mobile-first, slik at 'sm: 8' vil også gjelde for 'md', 'lg' og 'xl'.",
 };

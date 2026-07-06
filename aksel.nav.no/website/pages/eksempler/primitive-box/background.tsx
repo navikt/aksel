@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Propen `background` lar deg sette bakgrunnsfarge basert på tokens.",
 };

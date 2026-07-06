@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Med `shouldAutocomplete` foreslås et valg fra listen som matcher det brukeren skriver.",
 };

@@ -1,9 +1,10 @@
 module.exports = {
   meta: {
     type: "problem",
+    fixable: "code",
     docs: {
       description:
-        "Checks that each example exports const args with shape { index: number, desc?: string, sandbox?: boolean, title?: string }",
+        "Checks that each example exports const args with type ExampleArgsT",
     },
     schema: [],
   },
@@ -34,100 +35,40 @@ module.exports = {
 
             hasArgsExport = true;
 
-            const init = declaration.init;
-            if (!init || init.type !== "ObjectExpression") {
+            let typeAnnotation = null;
+            let typeName = null;
+
+            if (declaration.id.typeAnnotation) {
+              typeAnnotation = declaration.id.typeAnnotation.typeAnnotation;
+            }
+
+            if (typeAnnotation) {
+              typeName = typeAnnotation.typeName;
+            }
+
+            if (
+              !typeAnnotation ||
+              typeAnnotation.type !== "TSTypeReference" ||
+              !typeName ||
+              typeName.type !== "Identifier" ||
+              typeName.name !== "ExampleArgsT"
+            ) {
               context.report({
                 node: declaration,
-                message:
-                  "'args' must be exported as an object with shape { index: number, desc?: string, sandbox?: boolean, title?: string }.",
-              });
-              continue;
-            }
+                message: "'args' must have type 'ExampleArgsT'.",
+                fix(fixer) {
+                  if (declaration.id.typeAnnotation) {
+                    return fixer.replaceText(
+                      declaration.id.typeAnnotation,
+                      ": ExampleArgsT",
+                    );
+                  }
 
-            const allowedKeys = new Set(["index", "desc", "sandbox", "title"]);
-            let hasIndex = false;
-
-            for (const property of init.properties) {
-              if (property.type !== "Property" || property.computed) {
-                context.report({
-                  node: property,
-                  message:
-                    "'args' can only contain static properties 'index', optional 'desc', optional 'sandbox', and optional 'title'.",
-                });
-                continue;
-              }
-
-              const key =
-                property.key.type === "Identifier"
-                  ? property.key.name
-                  : property.key.type === "Literal"
-                    ? property.key.value
-                    : null;
-
-              if (typeof key !== "string" || !allowedKeys.has(key)) {
-                context.report({
-                  node: property,
-                  message:
-                    "'args' only supports keys 'index', optional 'desc', optional 'sandbox', and optional 'title'.",
-                });
-                continue;
-              }
-
-              if (key === "index") {
-                hasIndex = true;
-                if (
-                  property.value.type !== "Literal" ||
-                  typeof property.value.value !== "number"
-                ) {
-                  context.report({
-                    node: property,
-                    message: "'args.index' must be a number.",
-                  });
-                }
-              }
-
-              if (key === "desc") {
-                if (
-                  property.value.type !== "Literal" ||
-                  typeof property.value.value !== "string"
-                ) {
-                  context.report({
-                    node: property,
-                    message: "'args.desc' must be a string when provided.",
-                  });
-                }
-              }
-
-              if (key === "sandbox") {
-                if (
-                  property.value.type !== "Literal" ||
-                  typeof property.value.value !== "boolean"
-                ) {
-                  context.report({
-                    node: property,
-                    message: "'args.sandbox' must be a boolean when provided.",
-                  });
-                }
-              }
-
-              if (key === "title") {
-                if (
-                  property.value.type !== "Literal" ||
-                  typeof property.value.value !== "string"
-                ) {
-                  context.report({
-                    node: property,
-                    message: "'args.title' must be a string when provided.",
-                  });
-                }
-              }
-            }
-
-            if (!hasIndex) {
-              context.report({
-                node: init,
-                message:
-                  "'args' must include required key 'index' as a number.",
+                  return fixer.insertTextAfter(
+                    declaration.id,
+                    ": ExampleArgsT",
+                  );
+                },
               });
             }
           }
@@ -137,7 +78,7 @@ module.exports = {
           context.report({
             node: programNode,
             message:
-              "Each example must export 'const args = { index: number, desc?: string, sandbox?: boolean, title?: string }'.",
+              "Each example must export 'const args: ExampleArgsT = ...'.",
           });
         }
       },
