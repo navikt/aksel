@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmit": true,
-    "types": ["./src/react.d.ts"]
+    "types": ["./src/react-css.d.ts"]
   },
   "include": [
     "./src/react-css.d.ts",
