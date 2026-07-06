@@ -72,7 +72,7 @@ async function DesignsystemetPageFooter({
           {contact?.slack_link && (
             <ContactCard
               title="Slack"
-              description="For lavterskel deling og hjelp kan du bruke slack-kanalen for å stille spørsmål og diskutere løsninger."
+              description="For lavterskel deling og hjelp kan du bruke Slack-kanalen for å stille spørsmål og diskutere løsninger."
               type="Slack"
               href={contact.slack_link}
             />
