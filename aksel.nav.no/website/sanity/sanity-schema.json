@@ -10340,6 +10340,20 @@
           ]
         },
         "optional": true
+      },
+      "github_issues_link": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "slack_link": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

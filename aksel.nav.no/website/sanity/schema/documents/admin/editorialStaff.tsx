@@ -65,6 +65,16 @@ export const EditorialStaff = defineType({
       },
       validation: (Rule) => Rule.required().error("Må velge type"),
     }),
+    defineField({
+      title: "Github issues lenke",
+      name: "github_issues_link",
+      type: "url",
+    }),
+    defineField({
+      title: "Slack lenke",
+      name: "slack_link",
+      type: "url",
+    }),
   ],
   preview: {
     select: {

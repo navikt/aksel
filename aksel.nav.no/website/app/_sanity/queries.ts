@@ -125,6 +125,7 @@ const KOMPONENT_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...}
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
@@ -158,6 +159,7 @@ const GRUNNLEGGENDE_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...}
 }`);
 
 const MONSTER_MALER_BY_SLUG_QUERY =
@@ -168,6 +170,7 @@ const MONSTER_MALER_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...}
 }`);
 
 const TOC_BY_SLUG_QUERY =

@@ -6,12 +6,9 @@ import type {
   KOMPONENT_BY_SLUG_QUERY_RESULT,
   MONSTER_MALER_BY_SLUG_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
-import { urlForImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import styles from "./Designsystemet.module.css";
-import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
-import { KomponentLinks } from "./DesignsystemetPage.parts";
 
 type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
@@ -48,8 +45,6 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
 
   const isComponentPage = data?._type === "komponent_artikkel";
 
-  const imageUrl = urlForImage(data?.status?.bilde)?.url();
-
   return (
     <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>
       <DesignsystemetEyebrow type={data?._type} />
@@ -72,10 +67,6 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
           }}
         />
       )}
-      {isComponentPage && (
-        <KomponentLinks data={data} heading={data?.heading} />
-      )}
-      <DesignsystemetThumbnail thumbnailUrl={imageUrl} />
     </Box>
   );
 }

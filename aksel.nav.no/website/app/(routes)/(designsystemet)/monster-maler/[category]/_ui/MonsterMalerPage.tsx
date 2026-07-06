@@ -35,7 +35,8 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "Send innspill",
+          text: "Github issues",
+          href: pageData.contact?.github_issues_link,
         }}
         toc={toc}
       />
@@ -47,6 +48,7 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
       <DesignsystemetPageFooter
         pageId={pageData._id}
         updateDateString={pageData._updatedAt ?? pageData._createdAt}
+        contact={pageData.contact}
       />
     </DesignsystemetPageLayout>
   );
