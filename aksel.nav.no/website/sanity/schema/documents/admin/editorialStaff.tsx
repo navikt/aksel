@@ -66,7 +66,7 @@ export const EditorialStaff = defineType({
       validation: (Rule) => Rule.required().error("Må velge type"),
     }),
     defineField({
-      title: "Github issues lenke",
+      title: "GitHub issues lenke",
       name: "github_issues_link",
       type: "url",
     }),

@@ -41,7 +41,7 @@ async function KomponenterPage({ slug }: { slug: string }) {
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "Github issues",
+          text: "GitHub issues",
           href: pageData.contact?.github_issues_link,
         }}
         toc={toc}

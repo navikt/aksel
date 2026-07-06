@@ -175,7 +175,7 @@ export default async function Page({ searchParams }: PageProps) {
       <TableOfContents
         feedback={{
           name: "Endringslogg",
-          text: "Github issues",
+          text: "GitHub issues",
         }}
         toc={toc}
       />

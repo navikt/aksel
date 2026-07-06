@@ -97,7 +97,7 @@ export const TemplatesArtikkel = defineType({
       },
     }),
     defineField({
-      title: "Github discussions link",
+      title: "GitHub discussions link",
       name: "gh_discussions",
       type: "url",
       group: "settings",
