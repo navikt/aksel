@@ -14,7 +14,7 @@ async function DesignsystemetPageFooter({
   const changelogs = await fetchChangelogs(pageId, "ds");
 
   return (
-    <div>
+    <div data-block-margin="space-28">
       <ChangelogTable changelogs={changelogs} />
       {updateDate && (
         <BodyShort size="small" as="span" textColor="subtle">
