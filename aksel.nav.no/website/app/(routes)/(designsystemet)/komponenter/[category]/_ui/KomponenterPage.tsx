@@ -5,13 +5,12 @@ import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
 } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
+import { DesignsystemetPageFooter } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPageFooter";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
-import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -33,24 +32,18 @@ async function KomponenterPage({ slug }: { slug: string }) {
     notFound();
   }
 
-  const changelogs = await fetchChangelogs(pageData._id, "ds");
-
   const renderPreviewNote =
     pageData.status?.tag === "preview" && pageData.status?.preview_note;
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <DesignsystemetPageHeader
-        data={pageData}
-        linkToChangelogs={changelogs.exists}
-      />
+      <DesignsystemetPageHeader data={pageData} />
       <TableOfContents
         feedback={{
           name: pageData.heading,
           text: "Send innspill",
         }}
         toc={toc}
-        linkToChangelogs={changelogs.exists}
       />
       <div>
         {["beta", "new"].includes(pageData.status?.tag ?? "") && (
@@ -67,7 +60,10 @@ async function KomponenterPage({ slug }: { slug: string }) {
         )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
-        <ChangelogTable changelogs={changelogs} />
+        <DesignsystemetPageFooter
+          pageId={pageData._id}
+          updateDateString={pageData._updatedAt ?? pageData._createdAt}
+        />
       </div>
     </DesignsystemetPageLayout>
   );
