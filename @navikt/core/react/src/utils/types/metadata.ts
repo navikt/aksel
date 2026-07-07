@@ -18,16 +18,13 @@ type MetaEntry = React.ElementType | ((...args: any[]) => any);
  * grouped `_metadata.json` consumed downstream (doc pages + MCP server).
  *
  * Authoring conventions:
- * - `name` is a unique, PascalCase family id. It is also used verbatim as the
+ * - `name` is a unique, PascalCase family id. It is also used as the
  *   Sanity document `_id`, so it must be unique across all meta files and only
  *   contain characters valid in a Sanity id (letters, numbers, `.`, `-`, `_`).
  * - The insertion order of `components` (then `utils`) is the render order in
  *   the docs. Author them in the order they should appear.
  * - Each map key is the display label shown above its table. Use dot-notation
  *   for compound parts, e.g. `"Accordion.Item"`.
- * - Do not encode `overridable` or heading levels here: whether a component
- *   supports the `as`/`OverridableComponent` API is inferred from its type, and
- *   heading levels are a rendering concern.
  * - `utils` are hooks/functions (e.g. `useDatepicker`); they are documented from
  *   their argument object, grouped separately from `components`.
  * - `keywords` power search/MCP and must be non-empty.

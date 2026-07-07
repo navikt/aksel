@@ -724,6 +724,7 @@
   "scripts": {
     "docgen": "tsx ../../../scripts/docgen.ts && tsx ./scripts/extract-metadata.ts",
     "docgen:meta": "tsx ./scripts/extract-metadata.ts",
+    "metadata:generate-names": "tsx ./scripts/metadata/generate-component-names.ts",
     "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
