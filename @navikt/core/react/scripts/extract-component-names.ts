@@ -1,5 +1,7 @@
 import { writeComponentNames } from "./metadata/component-names";
 
-writeComponentNames();
+const changed = writeComponentNames();
 
-console.info(`Updated ComponentName union`);
+console.info(
+  changed ? "Updated ComponentName union" : "ComponentName union up to date",
+);

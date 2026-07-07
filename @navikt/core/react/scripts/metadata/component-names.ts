@@ -8,7 +8,7 @@ const NAME_PATTERN = /\bname\s*:\s*["'`]([^"'`]+)["'`]/;
 /**
  * Reads the `name` of every meta file via a lightweight regex. Intentionally
  * avoids building a TypeScript program so it stays fast and resilient to
- * in-progress type errors (used from lint-staged).
+ * in-progress type errors (it runs before type-checking/building).
  */
 function readMetaNames(): string[] {
   const files = fg.sync(META_GLOB, { cwd: packageRoot, absolute: true });
@@ -39,9 +39,9 @@ ${body};
 
 /**
  * Writes the generated `ComponentName` union, only touching the file when its
- * contents change. Returns the path and whether it was rewritten.
+ * contents change. Returns `true` when the file was rewritten.
  */
-function writeComponentNames(names: string[] = readMetaNames()) {
+function writeComponentNames(names: string[] = readMetaNames()): boolean {
   const content = buildComponentNamesModule(names);
 
   let existing: string | undefined;
@@ -55,6 +55,7 @@ function writeComponentNames(names: string[] = readMetaNames()) {
   if (changed) {
     writeFileSync(generatedComponentNamesPath, content);
   }
+  return changed;
 }
 
 export { readMetaNames, buildComponentNamesModule, writeComponentNames };
