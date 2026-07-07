@@ -7,37 +7,14 @@ export function listPublishedArticles(
 ) {
   return S.listItem({
     id: `my_${type}_published`,
-    title: "Mine publiserte artikler",
+    title: "Publiserte artikler",
     schemaType: type,
-    child: (_, { structureContext }) => {
-      const mail = structureContext.currentUser?.email;
-
+    child: () => {
       return S.documentTypeList(type)
         .title("Artikler")
         .filter(`_type == $type && !(_id in path("drafts.**"))`)
         .apiVersion(SANITY_API_VERSION)
-        .params({ type, mail })
-        .initialValueTemplates([]);
-    },
-  });
-}
-
-export function listMyDraftArticles(
-  S: StructureBuilder,
-  type: (typeof allArticleDocuments)[number],
-) {
-  return S.listItem({
-    id: `my_${type}_drafts`,
-    title: "Mine utkast",
-    schemaType: type,
-    child: (_, { structureContext }) => {
-      const mail = structureContext.currentUser?.email;
-
-      return S.documentTypeList(type)
-        .title("Artikler")
-        .filter(`_type == $type && _id in path("drafts.**")`)
-        .apiVersion(SANITY_API_VERSION)
-        .params({ type, mail })
+        .params({ type })
         .initialValueTemplates([]);
     },
   });
