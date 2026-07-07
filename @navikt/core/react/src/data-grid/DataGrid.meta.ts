@@ -1,14 +1,15 @@
 import type { ComponentMetadata } from "../utils/types/metadata";
-import { DataGrid, DataGridTable } from "./index";
+import { DataGrid, DataGridPreferences, DataGridTable } from "./index";
 
 const metadata: ComponentMetadata = {
   name: "DataGrid",
   components: {
     DataGrid,
-    DataGridTable,
+    "DataGrid.Table": DataGridTable,
+    "DataGrid.Preferences": DataGridPreferences,
   },
   keywords: ["data grid", "datagrid", "table", "tabell", "grid"],
-  related: ["Table", "DataGridPreferences"],
+  related: ["Table"],
 };
 
 export { metadata };

@@ -6,6 +6,7 @@ import {
   TimelineRow,
   TimelineZoomButton,
 } from "./index";
+import { Zoom } from "./zoom";
 
 const metadata: ComponentMetadata = {
   name: "Timeline",
@@ -14,6 +15,7 @@ const metadata: ComponentMetadata = {
     "Timeline.Row": TimelineRow,
     "Timeline.Period": TimelinePeriod,
     "Timeline.Pin": TimelinePin,
+    "Timeline.Zoom": Zoom,
     "Timeline.ZoomButton": TimelineZoomButton,
   },
   keywords: ["timeline", "tidslinje", "gantt", "schedule", "periods"],
