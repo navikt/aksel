@@ -4,6 +4,11 @@ import { fileURLToPath } from "node:url";
 import * as docgen from "react-docgen-typescript";
 import ts from "typescript";
 
+/**
+ * Improvements:
+ * - Should return the docs as is now, but also include the directory for where it was found. We only need to know what dir the metadata file was in so can be a simple {dir: string, metadata: ...}
+ */
+
 /* @ts-expect-error improver module handling */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

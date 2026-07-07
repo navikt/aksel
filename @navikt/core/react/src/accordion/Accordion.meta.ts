@@ -6,10 +6,6 @@ import {
   AccordionItem,
 } from "./index";
 
-/**
- * TODO: extract filename so we can link to dir
- * autocomplete for related components. Autogen with script like sanity schemas
- */
 const metadata: ComponentMetadata = {
   name: "Accordion",
   components: {
@@ -22,3 +18,9 @@ const metadata: ComponentMetadata = {
 };
 
 export { metadata };
+
+/**
+ * Improvements:
+ * - Autocomplete for "related"-key. Might need to generate a list of all components based on existing metadata files. Could be a script that runs on build and generates a json file with all components and their metadata.
+ * -
+ */
