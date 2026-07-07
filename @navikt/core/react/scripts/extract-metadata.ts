@@ -1,4 +1,3 @@
-import fg from "fast-glob";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { createPropsDocumenter } from "./metadata/extract-props";
@@ -46,23 +45,9 @@ const output = metas
 
 writeFileSync(metadataOutputPath, JSON.stringify(output, null, 2));
 
-const metaDirs = new Set(metas.map((meta) => meta.dir));
-const componentDirs = fg
-  .sync("src/*/", { cwd: packageRoot, onlyDirectories: true })
-  .map((dir) => dir.replace(/\/$/, ""));
-const missing = componentDirs.filter((dir) => !metaDirs.has(dir));
-
 console.info({
   families: output.length,
   components: output.reduce((sum, meta) => sum + meta.components.length, 0),
   utils: output.reduce((sum, meta) => sum + meta.utils.length, 0),
   output: path.relative(packageRoot, metadataOutputPath),
 });
-
-if (missing.length > 0) {
-  console.info(
-    `\n${missing.length} component dir(s) still missing a *.meta.ts file:\n${missing
-      .map((dir) => `  - ${dir}`)
-      .join("\n")}`,
-  );
-}
