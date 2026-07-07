@@ -1,12 +1,12 @@
 import type { ComponentMetadata } from "../../utils/types/metadata";
-import { Show } from "./index";
+import { Hide } from "./index";
 
 const metadata: ComponentMetadata = {
-  name: "Show",
+  name: "Hide",
   components: {
-    Show,
+    Hide,
   },
-  keywords: ["responsive", "show", "layout", "breakpoint"],
+  keywords: ["responsive", "hide", "layout", "breakpoint"],
   related: ["Box"],
 };
 
