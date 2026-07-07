@@ -114,6 +114,7 @@ esm
 @navikt/community/navno/css
 .vercel
 _docs.json
+_metadata.json
 
 .yarn/*
 .yarn/cache

@@ -18,9 +18,3 @@ const metadata: ComponentMetadata = {
 };
 
 export { metadata };
-
-/**
- * Improvements:
- * - Autocomplete for "related"-key. Might need to generate a list of all components based on existing metadata files. Could be a script that runs on build and generates a json file with all components and their metadata.
- * -
- */
