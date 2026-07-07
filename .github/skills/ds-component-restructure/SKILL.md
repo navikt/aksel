@@ -1,6 +1,6 @@
 ---
 name: ds-component-restructure
-description: "Restructure a ds-react component to follow canonical folder/file conventions. Use when: restructuring a component, reorganizing component files, migrating component structure, refactoring component layout, splitting monolithic component files, renaming component files to match domain."
+description: "Restructure a ds-react component's files into canonical folder/naming conventions. Use when reorganizing a component's file layout, splitting a monolithic component file, or renaming files to match domain conventions."
 argument-hint: "Path to component folder, e.g. @navikt/core/react/src/accordion"
 ---
 
@@ -49,13 +49,9 @@ Restructure a `ds-react` component folder to follow canonical conventions — wi
 
 ### 1. Read the Component
 
-Read every file in the component folder:
+Read every file in the component folder — `index.ts`, all `.tsx`/`.ts` source files, stories, and test stories. Ignore inconsistencies in file naming and structure; the goal is to fix those, not preserve them.
 
-- `index.ts` — current exports
-- All `.tsx` / `.ts` source files
-- Stories and test stories
-- Note what is currently exported publicly
-- Note: Ignore inconsistencies in file naming and structure — the goal is to fix those, not preserve them. Focus on understanding the component's public API and internal structure.
+**Done when:** every file's role (component, hook, type, context, test) is known, and every symbol currently exported from `index.ts` is recorded.
 
 ### 2. Map Files to Target Structure
 
@@ -74,6 +70,8 @@ For each file:
 - Flag circular dep risks: context importing sub-components, helpers importing component files, types importing non-types
 
 Resolve circular deps before proceeding: move shared pieces to a lower-level file (types → `.types.ts`, utilities → `helpers/`).
+
+**Done when:** every file in the component folder has a row in the table, and every circular-dependency risk is resolved or explicitly noted.
 
 ### 3. Create New Files
 
@@ -113,16 +111,18 @@ Some components export everything as named (no `default`). If the original had n
 
 ### 6. Validate No Breaking Changes
 
-**Step 1 — Export diff.** Before deleting old files, extract all exported names from the original `index.ts` (recorded in step 1) and compare against the new `index.ts`. Every name must be present:
+**Export diff.** Before deleting old files, compare the exported names recorded during Step 1 against the new `index.ts`. Every name must be present:
 
 - Exports in new index.ts that are missing from original → regression
 - Exports in original that are missing from new index.ts → missing export (breaking change)
 
 Concretely: grep for `export` lines in both versions and diff them. All component names and type names must match exactly.
 
-**Step 2 — Build.** Run `yarn workspace @navikt/ds-react build` — must succeed with no TypeScript errors.
+**Build.** Run `yarn workspace @navikt/ds-react build` — must succeed with no TypeScript errors.
 
-**Step 3 — Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
+**Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
+
+**Done when:** the export diff is empty, the build succeeds, and the package-root re-export is verified.
 
 ### 7. Remove Old Files
 
@@ -155,16 +155,12 @@ If the component uses a `parts/` dir, break it up into separate sub-component di
 
 ### Internal sub-components
 
-Sub-components that are implementation details (not exported publicly) follow the same dir convention as public ones, but the filename gets an `Internal` suffix:
+Sub-components that are implementation details (not exported publicly) use the same dir/file naming as public ones (see Naming Rules) with an `Internal` suffix, but must NOT be exported from `index.ts`:
 
 ```
 backdrop/
 └── DialogBackdropInternal.tsx   ← internal, NOT exported from index.ts
 ```
-
-- **Dir name**: same pattern as public sub-components
-- **File name**: `<Component><Subcomponent>Internal.tsx`
-- **`index.ts`**: do NOT export it
 
 ### Nested subcomponents
 
