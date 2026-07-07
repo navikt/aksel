@@ -122,7 +122,18 @@ function createPropsDocumenter() {
     entry: ResolvedEntry,
     metaFile: string,
   ): DocumentedEntry {
-    const doc = getDocsForFile(entry.fileName).get(entry.realName);
+    const docs = getDocsForFile(entry.fileName);
+    /**
+     * docgen keys components by their runtime `displayName`, which usually
+     * equals the resolved symbol name but can be overridden (e.g. the dot-path
+     * `"Dropdown.Menu.List"`) or hidden behind a cast (only the pre-cast
+     * `*Internal` is visible). Match on the symbol name, then the authored
+     * label, then fall back to the sole doc when the file exports just one.
+     */
+    const doc =
+      docs.get(entry.realName) ??
+      docs.get(entry.label) ??
+      (docs.size === 1 ? [...docs.values()][0] : undefined);
     if (!doc) {
       throw new Error(
         `[${metaFile}] Could not extract props for "${entry.label}" (${entry.realName}) in ${path.relative(packageRoot, entry.fileName)}.`,
