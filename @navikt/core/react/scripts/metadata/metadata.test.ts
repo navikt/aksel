@@ -1,8 +1,6 @@
-import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { buildComponentNamesModule, readMetaNames } from "./component-names";
+import { readMetaNames } from "./component-names";
 import { type ParsedMeta, parseMetaFiles } from "./parse-meta";
-import { generatedComponentNamesPath } from "./paths";
 import { validateMetas } from "./validate-meta";
 
 describe("component metadata files", () => {
@@ -11,10 +9,12 @@ describe("component metadata files", () => {
     expect(validateMetas(metas)).toEqual([]);
   });
 
-  it("generated ComponentName union is in sync with the meta files", () => {
-    const expected = buildComponentNamesModule(readMetaNames());
-    const actual = readFileSync(generatedComponentNamesPath, "utf-8");
-    expect(actual).toBe(expected);
+  it("readMetaNames (regex) agrees with the full TS parse", () => {
+    const sort = (names: string[]) =>
+      [...names].sort((a, b) => a.localeCompare(b));
+    const regexNames = sort(readMetaNames());
+    const parsedNames = sort(parseMetaFiles().map((meta) => meta.name));
+    expect(regexNames).toEqual(parsedNames);
   });
 });
 

@@ -4,7 +4,7 @@ import ts from "typescript";
 import { META_GLOB, packageRoot, tsconfigPath } from "./paths";
 
 /** A single component/util entry resolved from a meta file's map. */
-export interface ResolvedEntry {
+interface ResolvedEntry {
   /** Display label from the meta map key, e.g. `"Accordion.Item"`. */
   label: string;
   /** Resolved declaration name used to match docgen output, e.g. `AccordionItem`. */
@@ -15,7 +15,7 @@ export interface ResolvedEntry {
 }
 
 /** The structured contents of one `*.meta.ts` file. */
-export interface ParsedMeta {
+interface ParsedMeta {
   name: string;
   /** Directory of the meta file, relative to the package root, e.g. `src/accordion`. */
   dir: string;
@@ -144,7 +144,7 @@ const createProgram = (metaFiles: string[]) => {
  * fields, an identifier that cannot be resolved). Semantic rules (unique names,
  * non-empty keywords, known `related`, …) are checked by `validateMetas`.
  */
-export function parseMetaFiles(): ParsedMeta[] {
+function parseMetaFiles(): ParsedMeta[] {
   const metaFiles = fg
     .sync(META_GLOB, { cwd: packageRoot, absolute: true })
     .sort();
@@ -272,3 +272,6 @@ export function parseMetaFiles(): ParsedMeta[] {
 
   return metaFiles.map(parseMetaFile);
 }
+
+export { parseMetaFiles };
+export type { ResolvedEntry, ParsedMeta };

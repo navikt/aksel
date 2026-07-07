@@ -115,6 +115,7 @@ esm
 .vercel
 _docs.json
 _metadata.json
+**/component-names.generated.ts
 
 .yarn/*
 .yarn/cache

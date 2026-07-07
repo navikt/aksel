@@ -69,7 +69,6 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "@navikt/core/react/src/**/*.meta.ts": "tsx @navikt/core/react/scripts/metadata/generate-component-names.ts && git add @navikt/core/react/src/utils/types/component-names.generated.ts",
     "*.{ts,tsx,js,jsx}": "eslint --max-warnings=0 --no-warn-ignored",
     "*.css": "stylelint",
     "*.{ts,tsx,js,jsx,css,json}": "biome lint --no-errors-on-unmatched",

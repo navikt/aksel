@@ -2,7 +2,6 @@ import fg from "fast-glob";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 import * as docgen from "react-docgen-typescript";
-import { writeComponentNames } from "./metadata/component-names";
 import { type ResolvedEntry, parseMetaFiles } from "./metadata/parse-meta";
 import {
   metadataOutputPath,
@@ -43,8 +42,6 @@ const errors = validateMetas(metas);
 if (errors.length > 0) {
   throw new Error(`Invalid component metadata:\n${errors.join("\n")}`);
 }
-
-writeComponentNames(metas.map((meta) => meta.name));
 
 const enrichExtraPropFields = (doc: ComponentDoc) => {
   for (const prop of Object.values(doc.props)) {

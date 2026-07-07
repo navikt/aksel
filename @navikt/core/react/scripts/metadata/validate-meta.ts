@@ -1,7 +1,7 @@
 import type { ParsedMeta } from "./parse-meta";
 
 /** Characters allowed in a Sanity document `_id`. */
-export const SANITY_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
+const SANITY_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
 
 /**
  * Validates the semantic rules of the metadata spec across all meta files and
@@ -9,7 +9,7 @@ export const SANITY_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
  * valid). Kept pure so it can be exercised both by the extractor (which throws
  * on any error) and by the test-suite.
  */
-export function validateMetas(metas: ParsedMeta[]): string[] {
+function validateMetas(metas: ParsedMeta[]): string[] {
   const errors: string[] = [];
   const nameToMeta = new Map<string, string>();
 
@@ -50,3 +50,5 @@ export function validateMetas(metas: ParsedMeta[]): string[] {
 
   return errors;
 }
+
+export { validateMetas };
