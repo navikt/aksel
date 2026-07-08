@@ -11,6 +11,8 @@ import { validateMetas } from "./metadata/validate-meta";
  * Orchestrates the metadata utils: parse -> validate -> run
  * `react-docgen-typescript` on the referenced components/utils -> emit a
  * grouped record per family to `_metadata.json`.
+ *
+ * Runs alongside `scripts/docgen.ts` during the migration; see
  */
 
 const metas = parseMetaFiles();
@@ -27,7 +29,6 @@ if (errors.length > 0) {
 const documentEntry = createPropsDocumenter();
 
 const output = metas
-  .slice()
   .sort((a, b) => a.name.localeCompare(b.name))
   .map((meta) => ({
     name: meta.name,

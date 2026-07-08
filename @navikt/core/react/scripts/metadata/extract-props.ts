@@ -28,7 +28,7 @@ interface DocumentedEntry {
  * `@see`) out of each prop description and onto dedicated fields. Mirrors the
  * enrichment in the legacy `scripts/docgen.ts`.
  */
-const enrichExtraPropFields = (doc: ComponentDoc) => {
+function enrichExtraPropFields(doc: ComponentDoc) {
   for (const prop of Object.values(doc.props)) {
     if (!prop.description) {
       continue;
@@ -70,7 +70,7 @@ const enrichExtraPropFields = (doc: ComponentDoc) => {
       prop.deprecated = deprecation[2].replace(/@deprecated?/, "").trim();
     }
   }
-};
+}
 
 const parser = docgen.withCustomConfig(tsconfigPath, {
   savePropValueAsString: true,
