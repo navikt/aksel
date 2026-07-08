@@ -27,6 +27,9 @@ interface ParsedMeta {
   utils: ResolvedEntry[];
 }
 
+/**
+ * Extracts exported "metadata" object trough AST
+ */
 function findMetadataObject(sourceFile: ts.SourceFile) {
   let found: ts.ObjectLiteralExpression | undefined;
   const visit = (node: ts.Node) => {
@@ -92,8 +95,7 @@ function readStringArrayProperty(
 }
 
 /**
- * Detects whether a declared value is (or extends) `OverridableComponent`,
- * i.e. exposes the `as` polymorphic API.
+ * Detects whether a declared value is (or extends) `OverridableComponent`
  */
 function isOverridableComponent(type: ts.Type): boolean {
   if (type.aliasSymbol?.getName() === "OverridableComponent") {
@@ -140,10 +142,6 @@ function createProgram(metaFiles: string[]): ts.Program {
 /**
  * Reads every `*.meta.ts` file under the package and resolves its
  * `components`/`utils` identifiers to their declarations.
- *
- * Throws only on structural problems (missing `metadata` object, malformed
- * fields, an identifier that cannot be resolved). Semantic rules (unique names,
- * non-empty keywords, known `related`, …) are checked by `validateMetas`.
  */
 function parseMetaFiles(): ParsedMeta[] {
   const metaFiles = fg
