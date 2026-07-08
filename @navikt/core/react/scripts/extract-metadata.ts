@@ -11,8 +11,7 @@ import { validateMetas } from "./metadata/validate-meta";
  * Orchestrates the metadata utils: parse -> validate -> run
  * `react-docgen-typescript` on the referenced components/utils -> emit a
  * grouped record per family to `_metadata.json`.
- *
- * Runs alongside `scripts/docgen.ts` during the migration; see
+ * Runs alongside `scripts/docgen.ts` during the migration.
  */
 
 const metas = parseMetaFiles();
