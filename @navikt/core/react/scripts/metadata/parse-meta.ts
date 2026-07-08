@@ -27,7 +27,7 @@ interface ParsedMeta {
   utils: ResolvedEntry[];
 }
 
-const findMetadataObject = (sourceFile: ts.SourceFile) => {
+function findMetadataObject(sourceFile: ts.SourceFile) {
   let found: ts.ObjectLiteralExpression | undefined;
   const visit = (node: ts.Node) => {
     if (found) {
@@ -47,21 +47,22 @@ const findMetadataObject = (sourceFile: ts.SourceFile) => {
   };
   visit(sourceFile);
   return found;
-};
+}
 
-const getObjectProperty = (node: ts.ObjectLiteralExpression, name: string) =>
-  node.properties.find(
+function getObjectProperty(node: ts.ObjectLiteralExpression, name: string) {
+  return node.properties.find(
     (prop): prop is ts.PropertyAssignment | ts.ShorthandPropertyAssignment =>
       (ts.isPropertyAssignment(prop) ||
         ts.isShorthandPropertyAssignment(prop)) &&
       ((ts.isIdentifier(prop.name) && prop.name.text === name) ||
         (ts.isStringLiteral(prop.name) && prop.name.text === name)),
   );
+}
 
-const readStringLiteralProperty = (
+function readStringLiteralProperty(
   node: ts.ObjectLiteralExpression,
   name: string,
-) => {
+) {
   const prop = getObjectProperty(node, name);
   if (
     prop &&
@@ -71,12 +72,12 @@ const readStringLiteralProperty = (
     return prop.initializer.text;
   }
   return undefined;
-};
+}
 
-const readStringArrayProperty = (
+function readStringArrayProperty(
   node: ts.ObjectLiteralExpression,
   name: string,
-) => {
+) {
   const prop = getObjectProperty(node, name);
   if (
     prop &&
@@ -88,13 +89,13 @@ const readStringArrayProperty = (
       .map((element) => element.text);
   }
   return [];
-};
+}
 
 /**
  * Detects whether a declared value is (or extends) `OverridableComponent`,
  * i.e. exposes the `as` polymorphic API.
  */
-const isOverridableComponent = (type: ts.Type): boolean => {
+function isOverridableComponent(type: ts.Type): boolean {
   if (type.aliasSymbol?.getName() === "OverridableComponent") {
     return true;
   }
@@ -116,9 +117,9 @@ const isOverridableComponent = (type: ts.Type): boolean => {
     }
   }
   return false;
-};
+}
 
-const createProgram = (metaFiles: string[]) => {
+function createProgram(metaFiles: string[]): ts.Program {
   const readConfig = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
   if (readConfig.error) {
     throw new Error(
@@ -134,7 +135,7 @@ const createProgram = (metaFiles: string[]) => {
     rootNames: metaFiles,
     options: parsedConfig.options,
   });
-};
+}
 
 /**
  * Reads every `*.meta.ts` file under the package and resolves its
@@ -164,10 +165,10 @@ function parseMetaFiles(): ParsedMeta[] {
     return current;
   };
 
-  const resolveEntries = (
+  function resolveEntries(
     mapExpression: ts.ObjectLiteralExpression,
     metaFile: string,
-  ): ResolvedEntry[] => {
+  ): ResolvedEntry[] {
     const entries: ResolvedEntry[] = [];
 
     for (const entry of mapExpression.properties) {
@@ -213,20 +214,20 @@ function parseMetaFiles(): ParsedMeta[] {
     }
 
     return entries;
-  };
+  }
 
   /**
    * Reads a `components`/`utils` map from the metadata object and resolves its
    * entries. Throws when a required map is missing or either map is not an
    * object literal.
    */
-  const resolveEntryMap = (
+  function resolveEntryMap(
     metadataNode: ts.ObjectLiteralExpression,
     key: "components" | "utils",
     metaFile: string,
     relMeta: string,
     required: boolean,
-  ): ResolvedEntry[] => {
+  ): ResolvedEntry[] {
     const prop = getObjectProperty(metadataNode, key);
     if (!prop) {
       if (required) {
@@ -245,9 +246,9 @@ function parseMetaFiles(): ParsedMeta[] {
       );
     }
     return resolveEntries(prop.initializer, metaFile);
-  };
+  }
 
-  const parseMetaFile = (metaFile: string): ParsedMeta => {
+  function parseMetaFile(metaFile: string): ParsedMeta {
     const relMeta = path.relative(packageRoot, metaFile);
     const sourceFile = program.getSourceFile(metaFile);
     if (!sourceFile) {
@@ -279,7 +280,7 @@ function parseMetaFiles(): ParsedMeta[] {
       ),
       utils: resolveEntryMap(metadataNode, "utils", metaFile, relMeta, false),
     };
-  };
+  }
 
   return metaFiles.map(parseMetaFile);
 }
