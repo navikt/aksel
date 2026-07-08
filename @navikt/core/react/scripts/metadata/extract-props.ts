@@ -1,27 +1,8 @@
 import path from "node:path";
 import * as docgen from "react-docgen-typescript";
+import type { ComponentDoc, DocumentedEntry } from "./metadata.types";
 import type { ResolvedEntry } from "./parse-meta";
 import { packageRoot, tsconfigPath } from "./paths";
-
-/** A `react-docgen-typescript` component doc enriched with parsed JSDoc tags. */
-interface ComponentDoc extends docgen.ComponentDoc {
-  props: {
-    [key: string]: docgen.PropItem & {
-      example?: string;
-      params?: string[];
-      return?: string;
-      deprecated?: string;
-    };
-  };
-}
-
-/** A single documented component/util as emitted to `_metadata.json`. */
-interface DocumentedEntry {
-  displayName: string;
-  filePath: string;
-  overridable: boolean;
-  props: ComponentDoc["props"];
-}
 
 /**
  * Pulls structured tags (`@example`, `@param`, `@returns`, `@deprecated`,
