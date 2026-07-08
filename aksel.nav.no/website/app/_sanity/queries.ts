@@ -125,7 +125,7 @@ const KOMPONENT_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
-    "contact": contact->{...}
+    "contact": contact->{...},
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
