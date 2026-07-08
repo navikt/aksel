@@ -1428,6 +1428,13 @@ export type Skrivehjelp = {
   }>;
 };
 
+export type Ds_component_metadataReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ds_component_metadata";
+};
+
 export type Komponent_artikkel = {
   _id: string;
   _type: "komponent_artikkel";
@@ -1457,9 +1464,66 @@ export type Komponent_artikkel = {
   hide_feedback?: boolean;
   intro?: Intro_komponent;
   content?: Riktekst_komponent;
+  component_metadata?: Ds_component_metadataReference;
   kodepakker?: Array<string>;
   figma_link?: string;
   seo?: Seo;
+};
+
+export type Ds_component_metadata = {
+  _id: string;
+  _type: "ds_component_metadata";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  dir?: string;
+  keywords?: Array<string>;
+  related?: Array<string>;
+  components?: Array<{
+    displayname?: string;
+    filepath?: string;
+    overridable?: boolean;
+    props?: Array<{
+      name?: string;
+      defaultValue?: string;
+      description?: string;
+      required?: boolean;
+      type?: string;
+      unpackedType?: string;
+      ref?: boolean;
+      return?: string;
+      example?: string;
+      params?: Array<string>;
+      deprecated?: string;
+      _type: "prop";
+      _key: string;
+    }>;
+    _type: "component";
+    _key: string;
+  }>;
+  utils?: Array<{
+    displayname?: string;
+    filepath?: string;
+    overridable?: boolean;
+    props?: Array<{
+      name?: string;
+      defaultValue?: string;
+      description?: string;
+      required?: boolean;
+      type?: string;
+      unpackedType?: string;
+      ref?: boolean;
+      return?: string;
+      example?: string;
+      params?: Array<string>;
+      deprecated?: string;
+      _type: "prop";
+      _key: string;
+    }>;
+    _type: "util";
+    _key: string;
+  }>;
 };
 
 export type Ds_artikkel = {
@@ -1982,7 +2046,9 @@ export type AllSanitySchemaTypes =
   | Article_views
   | Publication_flow
   | Skrivehjelp
+  | Ds_component_metadataReference
   | Komponent_artikkel
+  | Ds_component_metadata
   | Ds_artikkel
   | Ds_props
   | GpInnholdstypeReference
@@ -4203,6 +4269,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
         markDefs: null;
       }
   > | null;
+  component_metadata?: Ds_component_metadataReference;
   kodepakker?: Array<string>;
   figma_link?: string;
   seo?: Seo;
@@ -8903,6 +8970,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
         hide_feedback?: boolean;
         intro?: Intro_komponent;
         content: null;
+        component_metadata?: Ds_component_metadataReference;
         kodepakker?: Array<string>;
         figma_link?: string;
         seo?: Seo;
@@ -12241,6 +12309,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
         markDefs: null;
       }
   > | null;
+  component_metadata?: Ds_component_metadataReference;
   kodepakker?: Array<string>;
   figma_link?: string;
   seo?: Seo;
@@ -14720,6 +14789,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
         markDefs: null;
       }
   > | null;
+  component_metadata?: Ds_component_metadataReference;
   kodepakker?: Array<string>;
   figma_link?: string;
   seo?: Seo;

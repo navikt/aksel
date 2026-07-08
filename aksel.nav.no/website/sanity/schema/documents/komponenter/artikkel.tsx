@@ -131,9 +131,9 @@ export const KomponentArtikkel = defineType({
           title: "Preview-notat",
           type: "riktekst_accordion",
           description: `Skal gi et tydelig signal om hvor stabil komponenten er.
-            Bør inneholde kjente feil/mangler og hva vi er usikre på.
-            Hvis vi vil åpne for brekkende endringer utenom major, må dette også
-            nevnes her, samt i JSDoc.`,
+          Bør inneholde kjente feil/mangler og hva vi er usikre på.
+          Hvis vi vil åpne for brekkende endringer utenom major, må dette også
+          nevnes her, samt i JSDoc.`,
           hidden: ({ parent }) => !(parent?.tag === "preview"),
         }),
         defineField({
@@ -171,6 +171,17 @@ export const KomponentArtikkel = defineType({
       name: "content",
       group: "innhold",
       type: "riktekst_komponent",
+    }),
+    defineField({
+      title: "Komponent metadata",
+      description:
+        "Referanse til metadata for komponenten. Brukes for å generere props-tabeller og koble artikkelen til riktig komponent.",
+      name: "component_metadata",
+      type: "reference",
+      options: {
+        disableNew: true,
+      },
+      to: [{ type: "ds_component_metadata" }],
     }),
     defineField({
       title: "Kodepakker",
