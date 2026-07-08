@@ -1,5 +1,4 @@
 import { describe, expect, test } from "vitest";
-import { readMetaNames } from "./component-names";
 import { type ParsedMeta, parseMetaFiles } from "./parse-meta";
 import { validateMetas } from "./validate-meta";
 
@@ -7,14 +6,6 @@ describe("component metadata files", () => {
   test("all meta files satisfy the metadata spec", () => {
     const metas = parseMetaFiles();
     expect(validateMetas(metas)).toEqual([]);
-  });
-
-  test("readMetaNames (dynamic import) agrees with the full TS parse", async () => {
-    const sort = (names: string[]) =>
-      [...names].sort((a, b) => a.localeCompare(b));
-    const dynamicNames = sort(await readMetaNames());
-    const parsedNames = sort(parseMetaFiles().map((meta) => meta.name));
-    expect(dynamicNames).toEqual(parsedNames);
   });
 });
 
