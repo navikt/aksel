@@ -28,7 +28,7 @@ interface ParsedMeta {
 }
 
 /**
- * Extracts exported "metadata" object trough AST
+ * Extracts exported "metadata" object through AST
  */
 function findMetadataObject(sourceFile: ts.SourceFile) {
   let found: ts.ObjectLiteralExpression | undefined;
