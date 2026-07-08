@@ -7,7 +7,7 @@ const metadata: ComponentMetadata = {
     HGrid,
   },
   keywords: ["hgrid", "grid", "layout", "primitive", "columns"],
-  related: ["Stack", "Box"],
+  related: ["HStack", "VStack", "Box"],
 };
 
 export { metadata };

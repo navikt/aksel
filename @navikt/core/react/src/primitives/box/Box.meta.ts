@@ -8,7 +8,7 @@ const metadata: ComponentMetadata = {
     BoxNew,
   },
   keywords: ["box", "layout", "container", "primitive", "surface"],
-  related: ["Stack", "HGrid", "Page"],
+  related: ["HStack", "VStack", "HGrid", "Page"],
 };
 
 export { metadata };

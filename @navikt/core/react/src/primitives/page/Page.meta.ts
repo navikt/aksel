@@ -8,7 +8,7 @@ const metadata: ComponentMetadata = {
     "Page.Block": PageBlock,
   },
   keywords: ["page", "layout", "primitive", "template", "side"],
-  related: ["Box", "Stack"],
+  related: ["Box", "HStack", "VStack"],
 };
 
 export { metadata };
