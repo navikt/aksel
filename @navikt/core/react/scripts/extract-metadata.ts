@@ -6,14 +6,11 @@ import { metadataOutputPath, packageRoot } from "./metadata/paths";
 import { validateMetas } from "./metadata/validate-meta";
 
 /**
- * Extracts curated component documentation from every `*.meta.ts` file.
+ * Extracts component documentation from every `*.meta.ts` file.
  *
  * Orchestrates the metadata utils: parse -> validate -> run
  * `react-docgen-typescript` on the referenced components/utils -> emit a
  * grouped record per family to `_metadata.json`.
- *
- * Runs alongside `scripts/docgen.ts` during the migration; see
- * `src/utils/types/metadata.ts` for the authoring spec.
  */
 
 const metas = parseMetaFiles();

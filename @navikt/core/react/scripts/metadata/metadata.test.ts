@@ -1,20 +1,20 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, test } from "vitest";
 import { readMetaNames } from "./component-names";
 import { type ParsedMeta, parseMetaFiles } from "./parse-meta";
 import { validateMetas } from "./validate-meta";
 
 describe("component metadata files", () => {
-  it("all meta files satisfy the metadata spec", () => {
+  test("all meta files satisfy the metadata spec", () => {
     const metas = parseMetaFiles();
     expect(validateMetas(metas)).toEqual([]);
   });
 
-  it("readMetaNames (regex) agrees with the full TS parse", () => {
+  test("readMetaNames (dynamic import) agrees with the full TS parse", async () => {
     const sort = (names: string[]) =>
       [...names].sort((a, b) => a.localeCompare(b));
-    const regexNames = sort(readMetaNames());
+    const dynamicNames = sort(await readMetaNames());
     const parsedNames = sort(parseMetaFiles().map((meta) => meta.name));
-    expect(regexNames).toEqual(parsedNames);
+    expect(dynamicNames).toEqual(parsedNames);
   });
 });
 
@@ -37,18 +37,18 @@ describe("validateMetas", () => {
     ...overrides,
   });
 
-  it("accepts a valid meta file", () => {
+  test("accepts a valid meta file", () => {
     expect(validateMetas([meta()])).toEqual([]);
   });
 
-  it("flags a non Sanity-id-safe name", () => {
+  test("flags a non Sanity-id-safe name", () => {
     const errors = validateMetas([meta({ name: "Has Space" })]);
     expect(errors.some((error) => error.includes("valid Sanity id"))).toBe(
       true,
     );
   });
 
-  it("flags duplicate names", () => {
+  test("flags duplicate names", () => {
     const errors = validateMetas([
       meta(),
       meta({ metaFile: "src/other/Example.meta.ts" }),
@@ -56,22 +56,22 @@ describe("validateMetas", () => {
     expect(errors.some((error) => error.includes("Duplicate"))).toBe(true);
   });
 
-  it("flags empty keywords", () => {
+  test("flags empty keywords", () => {
     const errors = validateMetas([meta({ keywords: [] })]);
     expect(errors.some((error) => error.includes("keywords"))).toBe(true);
   });
 
-  it("flags empty components", () => {
+  test("flags empty components", () => {
     const errors = validateMetas([meta({ components: [] })]);
     expect(errors.some((error) => error.includes("components"))).toBe(true);
   });
 
-  it("flags related referencing an unknown component", () => {
+  test("flags related referencing an unknown component", () => {
     const errors = validateMetas([meta({ related: ["DoesNotExist"] })]);
     expect(errors.some((error) => error.includes("DoesNotExist"))).toBe(true);
   });
 
-  it("accepts related referencing a known component", () => {
+  test("accepts related referencing a known component", () => {
     const errors = validateMetas([
       meta({ related: ["Other"] }),
       meta({ name: "Other", metaFile: "src/other/Other.meta.ts" }),
