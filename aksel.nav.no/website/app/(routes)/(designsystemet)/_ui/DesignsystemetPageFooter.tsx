@@ -1,22 +1,9 @@
-import {
-  BodyShort,
-  Box,
-  HGrid,
-  HStack,
-  LinkCard,
-  VStack,
-} from "@navikt/ds-react";
-import {
-  LinkCardAnchor,
-  LinkCardDescription,
-  LinkCardFooter,
-  LinkCardTitle,
-} from "@navikt/ds-react/LinkCard";
+import { BodyShort, Box, HGrid, VStack } from "@navikt/ds-react";
+import { ContactCard } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetContactCard";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
 import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
-import { GithubIcon, SlackIcon } from "@/assets/Icons";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 
@@ -79,51 +66,6 @@ async function DesignsystemetPageFooter({
           )}
         </HGrid>
       </VStack>
-    </Box>
-  );
-}
-
-type ContactCardT = {
-  title: string;
-  description: string;
-  type: "Github" | "Slack";
-  href: string;
-};
-
-const Icon = ({ icon }: { icon: ContactCardT["type"] }) => {
-  if (icon === "Github") {
-    return <GithubIcon width="24" height="24" aria-hidden="true" />;
-  }
-  if (icon === "Slack") {
-    return <SlackIcon width="24" height="24" aria-hidden="true" />;
-  }
-  return null;
-};
-
-function ContactCard(props: ContactCardT) {
-  const { title, description, type, href } = props;
-  return (
-    <Box
-      background="brand-blue-soft"
-      borderWidth="1"
-      borderRadius="12"
-      paddingBlock="space-16"
-      paddingInline="space-24"
-      data-color="brand-blue"
-      asChild
-    >
-      <LinkCard arrow={false}>
-        <LinkCardTitle data-color="neutral">{title}</LinkCardTitle>
-        <LinkCardDescription>{description}</LinkCardDescription>
-        <LinkCardFooter>
-          <LinkCardAnchor href={href}>
-            <HStack gap="space-8" as="span" align="center">
-              <Icon icon={type} />
-              {title}
-            </HStack>
-          </LinkCardAnchor>
-        </LinkCardFooter>
-      </LinkCard>
     </Box>
   );
 }
