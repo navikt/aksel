@@ -108,11 +108,7 @@ async function updateMetadata() {
 }
 
 function idCreator(name: string) {
-  const cleaned = name
-    .toLowerCase()
-    .replace(/\s/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
-  return `doc_metadata_${cleaned}`;
+  return `doc_metadata_${name}`;
 }
 
 type ComponentMetadata = Omit<
