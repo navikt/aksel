@@ -109,7 +109,7 @@ async function updateMetadata() {
 }
 
 function idCreator(name: string) {
-  return `doc_metadata_${name}`;
+  return `doc_metadata_${name.toLocaleLowerCase()}`;
 }
 
 type ComponentMetadata = Omit<
