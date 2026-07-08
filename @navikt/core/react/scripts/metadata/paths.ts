@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-/* @ts-expect-error improver module handling */
+/* @ts-expect-error improve module handling */
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 /** Absolute path to the `@navikt/core/react` package root. */
