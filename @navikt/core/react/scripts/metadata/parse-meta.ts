@@ -215,6 +215,38 @@ function parseMetaFiles(): ParsedMeta[] {
     return entries;
   };
 
+  /**
+   * Reads a `components`/`utils` map from the metadata object and resolves its
+   * entries. Throws when a required map is missing or either map is not an
+   * object literal.
+   */
+  const resolveEntryMap = (
+    metadataNode: ts.ObjectLiteralExpression,
+    key: "components" | "utils",
+    metaFile: string,
+    relMeta: string,
+    required: boolean,
+  ): ResolvedEntry[] => {
+    const prop = getObjectProperty(metadataNode, key);
+    if (!prop) {
+      if (required) {
+        throw new Error(
+          `[${relMeta}] metadata.${key} must be an object literal.`,
+        );
+      }
+      return [];
+    }
+    if (
+      !ts.isPropertyAssignment(prop) ||
+      !ts.isObjectLiteralExpression(prop.initializer)
+    ) {
+      throw new Error(
+        `[${relMeta}] metadata.${key} must be an object literal.`,
+      );
+    }
+    return resolveEntries(prop.initializer, metaFile);
+  };
+
   const parseMetaFile = (metaFile: string): ParsedMeta => {
     const relMeta = path.relative(packageRoot, metaFile);
     const sourceFile = program.getSourceFile(metaFile);
@@ -232,41 +264,20 @@ function parseMetaFiles(): ParsedMeta[] {
       throw new Error(`[${relMeta}] metadata.name must be a string literal.`);
     }
 
-    const componentsProp = getObjectProperty(metadataNode, "components");
-    if (
-      !componentsProp ||
-      !ts.isPropertyAssignment(componentsProp) ||
-      !ts.isObjectLiteralExpression(componentsProp.initializer)
-    ) {
-      throw new Error(
-        `[${relMeta}] metadata.components must be an object literal.`,
-      );
-    }
-
-    const utilsProp = getObjectProperty(metadataNode, "utils");
-    if (
-      utilsProp &&
-      (!ts.isPropertyAssignment(utilsProp) ||
-        !ts.isObjectLiteralExpression(utilsProp.initializer))
-    ) {
-      throw new Error(`[${relMeta}] metadata.utils must be an object literal.`);
-    }
-
-    const utils =
-      utilsProp &&
-      ts.isPropertyAssignment(utilsProp) &&
-      ts.isObjectLiteralExpression(utilsProp.initializer)
-        ? resolveEntries(utilsProp.initializer, metaFile)
-        : [];
-
     return {
       name,
       dir: path.relative(packageRoot, path.dirname(metaFile)),
       metaFile: relMeta,
       keywords: readStringArrayProperty(metadataNode, "keywords"),
       related: readStringArrayProperty(metadataNode, "related"),
-      components: resolveEntries(componentsProp.initializer, metaFile),
-      utils,
+      components: resolveEntryMap(
+        metadataNode,
+        "components",
+        metaFile,
+        relMeta,
+        true,
+      ),
+      utils: resolveEntryMap(metadataNode, "utils", metaFile, relMeta, false),
     };
   };
 
