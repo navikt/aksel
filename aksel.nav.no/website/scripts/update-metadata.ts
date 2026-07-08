@@ -33,6 +33,7 @@ async function updateMetadata() {
       "_id",
       "_type",
       "dir",
+      "name",
       "keywords",
       "related",
       "components",
