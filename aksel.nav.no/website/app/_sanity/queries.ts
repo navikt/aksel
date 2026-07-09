@@ -134,6 +134,13 @@ const KOMPONENT_BY_SLUG_QUERY =
         ...,
           "unpackedType": null
         }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+        ...,
+          "unpackedType": null
+        }
       }
     },
 }`);
@@ -504,7 +511,26 @@ const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
     content[]{
       ...,
       ${destructureBlocksForMarkdown}
-    }
+    },
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      }
+    },
   }`,
 );
 
@@ -534,7 +560,26 @@ const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
     content[]{
       ...,
       ${destructureBlocksForMarkdown}
-    }
+    },
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      }
+    },
   }`,
 );
 

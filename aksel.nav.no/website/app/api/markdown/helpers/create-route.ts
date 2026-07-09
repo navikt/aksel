@@ -1,4 +1,6 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
+import type { KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { MetadataSeksjonMarkdown } from "@/app/api/markdown/blocks/MetadataSeksjon.md";
 import { buildMarkdown } from "./build-markdown";
 import { buildXMLTag } from "./metadata-header";
 import { portableMarkdown } from "./portable-markdown";
@@ -8,6 +10,7 @@ type RouteItemBase = {
   heading?: string | null;
   content: any[] | null;
   sidebarindex?: number;
+  component_metadata?: NonNullable<KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT>["component_metadata"];
 };
 
 type RouteConfig<T extends RouteItemBase> = {
@@ -95,6 +98,7 @@ function buildItemMarkdown<T extends RouteItemBase>(
     { heading: item.heading! },
     portableMarkdown(config.getIntro?.(item)),
     portableMarkdown(item.content ?? undefined),
+    MetadataSeksjonMarkdown(item.component_metadata),
     close,
   );
 }
