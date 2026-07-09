@@ -126,6 +126,16 @@ const KOMPONENT_BY_SLUG_QUERY =
       ${destructureBlocks}
     },
     "contact": contact->{...},
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+        ...,
+          "unpackedType": null
+        }
+      }
+    },
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =

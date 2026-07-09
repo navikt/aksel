@@ -11,6 +11,7 @@ import {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { MetadataSeksjon } from "@/app/_ui/metadata-seksjon/MetadataSeksjon";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -30,6 +31,13 @@ async function KomponenterPage({ slug }: { slug: string }) {
 
   if (!pageData?._id) {
     notFound();
+  }
+
+  if (pageData.component_metadata) {
+    toc?.push({
+      id: "metadata-props",
+      title: "Props",
+    });
   }
 
   const renderPreviewNote =
@@ -61,6 +69,7 @@ async function KomponenterPage({ slug }: { slug: string }) {
         )}
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
+        <MetadataSeksjon metadata={pageData.component_metadata} />
         <DesignsystemetPageFooter
           pageId={pageData._id}
           updateDateString={pageData._updatedAt ?? pageData._createdAt}
