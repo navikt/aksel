@@ -17,7 +17,10 @@ type ComponentMetadataEnties =
 type ComponentMetadataEntry = NonNullable<ComponentMetadataEnties>[number];
 
 function MetadataSeksjon({ metadata }: { metadata: ComponentMetadata }) {
-  if (!metadata) {
+  if (
+    !metadata ||
+    ((metadata.components?.length ?? 0) === 0 && (metadata.utils?.length ?? 0) === 0)
+  ) {
     return null;
   }
 
