@@ -33,7 +33,10 @@ async function KomponenterPage({ slug }: { slug: string }) {
     notFound();
   }
 
-  if (pageData.component_metadata) {
+  if (
+    (pageData.component_metadata?.components?.length ?? 0) > 0 ||
+    (pageData.component_metadata?.utils?.length ?? 0) > 0
+  ) {
     toc?.push({
       id: "metadata-props",
       title: "Props",
