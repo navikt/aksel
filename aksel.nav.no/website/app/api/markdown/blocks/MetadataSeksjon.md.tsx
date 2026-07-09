@@ -8,7 +8,10 @@ type MetadataSeksjonEntries =
   | NonNullable<MetadataSeksjon>["utils"];
 
 function MetadataSeksjonMarkdown(data?: MetadataSeksjon) {
-  if (!data?.components || data.components.length === 0) {
+  if (
+    !data ||
+    ((data.components?.length ?? 0) === 0 && (data.utils?.length ?? 0) === 0)
+  ) {
     return "";
   }
 
