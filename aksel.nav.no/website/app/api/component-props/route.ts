@@ -84,7 +84,8 @@ export async function GET(request: NextRequest) {
 
     if (
       !data?.component_metadata ||
-      data.component_metadata.components?.length === 0
+      ((data.component_metadata.components?.length ?? 0) === 0 &&
+        (data.component_metadata.utils?.length ?? 0) === 0)
     ) {
       return NextResponse.json(
         { error: "Component not found or has no props documentation", slug },
