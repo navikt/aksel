@@ -56,7 +56,7 @@ type ResizeProps = {
   defaultValue?: number | string;
   /**
    * Called when the column width changes.
-   * @param width New width in pixels.
+   * @param width New width as a root-relative value, equal to pixels at a 16px root font-size (i.e. `rem * 16`).
    */
   onChange?: (width: number) => void;
 };
@@ -84,6 +84,18 @@ type TableColumnResizeResult =
       width?: number | string;
       enabled: false;
     };
+
+/**
+ * Converts a raw pixel measurement (e.g. from `offsetWidth` or `getBoundingClientRect`)
+ * into the root-relative width unit stored in state. The stored value equals the pixel
+ * width at a 16px root font-size (i.e. `rem * 16`), so widths scale with the user's font-size.
+ */
+function pxToRelativeWidth(px: number) {
+  const rootSize = parseFloat(
+    getComputedStyle(document.documentElement).fontSize,
+  );
+  return (px / rootSize) * 16;
+}
 
 /**
  * TODO:
@@ -133,7 +145,7 @@ function useTableColumnResize({
 
       const newColumnWidth = getAutoColumnWidth(thRef);
       if (newColumnWidth) {
-        setClampedWidth(newColumnWidth);
+        setClampedWidth(pxToRelativeWidth(newColumnWidth));
       }
     },
     [autoResizeOnce], // eslint-disable-line react-hooks/exhaustive-deps
@@ -160,10 +172,12 @@ function useTableColumnResize({
         }
         const currentWidth = thRef.current?.offsetWidth ?? 0;
 
+        const convertedWidth = pxToRelativeWidth(currentWidth);
+
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
           const delta = event.key === "ArrowRight" ? 20 : -20;
-          setClampedWidth(currentWidth + delta);
+          setClampedWidth(convertedWidth + delta);
           return;
         }
         if (event.key === "Home") {
@@ -174,8 +188,11 @@ function useTableColumnResize({
         if (event.key === "End") {
           event.preventDefault();
           const newWidth = getAutoColumnWidth(thRef);
-          if (newWidth && newWidth > currentWidth) {
-            setClampedWidth(newWidth);
+          if (newWidth) {
+            const convertedNewWidth = pxToRelativeWidth(newWidth);
+            if (convertedNewWidth > convertedWidth) {
+              setClampedWidth(convertedNewWidth);
+            }
           }
           return;
         }
@@ -194,16 +211,27 @@ function useTableColumnResize({
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        if (newWidth > resizeMax) {
-          setWidth(newWidth < currentWidth ? newWidth : currentWidth);
+        const convertedWidth = pxToRelativeWidth(newWidth);
+        const convertedCurrentWidth = pxToRelativeWidth(currentWidth);
+
+        if (convertedWidth > resizeMax) {
+          setWidth(
+            convertedWidth < convertedCurrentWidth
+              ? convertedWidth
+              : convertedCurrentWidth,
+          );
           return;
         }
-        if (newWidth < resizeMin) {
-          setWidth(newWidth > currentWidth ? newWidth : currentWidth);
+        if (convertedWidth < resizeMin) {
+          setWidth(
+            convertedWidth > convertedCurrentWidth
+              ? convertedWidth
+              : convertedCurrentWidth,
+          );
           return;
         }
 
-        setClampedWidth(newWidth);
+        setClampedWidth(convertedWidth);
       }
 
       function onMouseMove(e: MouseEvent) {
@@ -255,7 +283,7 @@ function useTableColumnResize({
     useCallback(() => {
       const newColumnWidth = getAutoColumnWidth(thRef);
       if (newColumnWidth) {
-        setClampedWidth(newColumnWidth);
+        setClampedWidth(pxToRelativeWidth(newColumnWidth));
       }
     }, [setClampedWidth, thRef]);
 
