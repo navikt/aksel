@@ -30,6 +30,9 @@ jobs:
       - name: Run ts-docgen
         run: yarn docgen
 
+      - name: Run metadata generation
+        run: yarn docgen:meta
+
       - name: Update Sanity
         env:
           SANITY_WRITE: ${{ secrets.SANITY_WRITE }}

@@ -75,6 +75,14 @@ export function adminStructure(S: StructureBuilder) {
                 .filter(`_type == 'ds_props'`)
                 .apiVersion(SANITY_API_VERSION),
             ),
+          S.listItem()
+            .title("Component Metadata Aksel")
+            .child(
+              S.documentList()
+                .title("Component Metadata")
+                .filter(`_type == 'ds_component_metadata'`)
+                .apiVersion(SANITY_API_VERSION),
+            ),
           S.documentListItem()
             .title(`Skrivehjelp`)
             .schemaType(`skrivehjelp`)

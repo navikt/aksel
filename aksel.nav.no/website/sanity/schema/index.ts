@@ -19,6 +19,7 @@ export const schema: SchemaPluginOptions = {
     document.KodeEksempelDoc,
     document.Tokens,
     document.Props,
+    document.ComponentMetadata,
     document.KomponentArtikkel,
     document.KomponentLandingSide,
 

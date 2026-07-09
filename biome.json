@@ -28,6 +28,7 @@
       "!**/codemod/**/*.js",
       "!**/modal/dialog-polyfill.ts",
       "!**/_sanity/query-types.ts",
+      "!**/component-names.generated.ts",
       "!**/transforms/**/*.input.*",
       "!**/transforms/**/*.output.*"
     ]
