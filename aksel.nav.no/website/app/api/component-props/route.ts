@@ -7,21 +7,8 @@ export const revalidate = 7200;
 const COMPONENT_PROPS_QUERY = defineQuery(
   `*[_type == "komponent_artikkel" && slug.current == $slug][0] {
     "title": heading,
-    "propSections": content[_type == "props_seksjon"][].komponenter[] {
-      title,
-      overridable,
-      "props": propref->proplist[] {
-        name,
-        type,
-        unpackedType,
-        required,
-        description,
-        defaultValue,
-        deprecated,
-        example,
-        params,
-        return
-      }
+    "component_metadata": component_metadata->{
+      ...
     }
   }`,
 );
@@ -58,7 +45,10 @@ export async function GET(request: NextRequest) {
       params: { slug },
     });
 
-    if (!data?.propSections || data.propSections.length === 0) {
+    if (
+      !data?.component_metadata ||
+      data.component_metadata.components?.length === 0
+    ) {
       return NextResponse.json(
         { error: "Component not found or has no props documentation", slug },
         { status: 404 },
@@ -80,8 +70,18 @@ export async function GET(request: NextRequest) {
       }[];
     }[] = [];
 
-    for (const section of data.propSections) {
-      if (!section?.title) {
+    const sections: typeof data.component_metadata.components = [];
+
+    if (data.component_metadata.components) {
+      sections.push(...data.component_metadata.components);
+    }
+
+    /* if(data.component_metadata.utils){
+      sections.push(...data.component_metadata.utils)
+    } */
+
+    for (const section of sections) {
+      if (!section.displayname) {
         continue;
       }
 
@@ -93,12 +93,21 @@ export async function GET(request: NextRequest) {
           return 0;
         })
         .map(({ unpackedType, type, ...rest }) => ({
-          ...rest,
-          type: unpackedType ?? type,
+          name: rest.name ?? null,
+          type: unpackedType ?? type ?? null,
+          required: rest.required ?? null,
+          description: rest.description ?? null,
+          defaultValue: rest.defaultValue ?? null,
+          deprecated: rest.deprecated ?? null,
+          example: rest.example ?? null,
+          params: rest.params ?? null,
+          return: rest.return ?? null,
         }));
 
+      let overridable: (typeof parts)[0]["props"][0] | null = null;
+
       if (section.overridable) {
-        props.push({
+        overridable = {
           name: "as",
           type: "React.ElementType",
           required: false,
@@ -108,10 +117,13 @@ export async function GET(request: NextRequest) {
           example: null,
           params: null,
           return: null,
-        });
+        };
       }
 
-      parts.push({ title: section.title, props });
+      parts.push({
+        title: section.displayname,
+        props: [...props, ...(overridable ? [overridable] : [])],
+      });
     }
 
     return NextResponse.json(
