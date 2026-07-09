@@ -1,5 +1,19 @@
 # @navikt/ds-css
 
+## 8.15.0
+
+### Minor Changes
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+### Patch Changes
+
+- Lookup: Changed text-decoration from dotted to dashed ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+- InlineMessage: Adjusted gap between icon and text to `4px` for size small ([#5031](https://github.com/navikt/aksel/pull/5031))
+
+- Lookup: updated focus-outline ([#5032](https://github.com/navikt/aksel/pull/5032))
+
 ## 8.14.0
 
 ### Minor Changes
