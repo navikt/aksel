@@ -1,16 +1,20 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import type { AkselColor } from "../types";
-import { omit } from "../utils-external";
-import { cl } from "../utils/helpers";
-import { consoleWarning } from "../utils/helpers/consoleWarning";
-import { useMergeRefs } from "../utils/hooks";
-import AccordionContent, {
+import type { AkselColor } from "../../types";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { useMergeRefs } from "../../utils/hooks";
+import {
+  AccordionContent,
   type AccordionContentProps,
-} from "./AccordionContent";
-import { AccordionContext } from "./AccordionContext";
-import AccordionHeader, { type AccordionHeaderProps } from "./AccordionHeader";
-import AccordionItem, { type AccordionItemProps } from "./AccordionItem";
+} from "../content/AccordionContent";
+import {
+  AccordionHeader,
+  type AccordionHeaderProps,
+} from "../header/AccordionHeader";
+import { AccordionItem, type AccordionItemProps } from "../item/AccordionItem";
+import { AccordionContext } from "./AccordionRoot.context";
 
 interface AccordionComponent extends React.ForwardRefExoticComponent<
   AccordionProps & React.RefAttributes<HTMLDivElement>

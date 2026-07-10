@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext } from "react";
-import { useThemeInternal } from "../theme/Theme";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { AccordionItemContext } from "./AccordionItem";
+import { useThemeInternal } from "../../theme/Theme";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { AccordionItemContext } from "../item/AccordionItem.context";
 
 export interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -46,4 +46,4 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   },
 );
 
-export default AccordionContent;
+export { AccordionContent };

@@ -1,9 +1,9 @@
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { Heading } from "../typography";
-import { cl, composeEventHandlers } from "../utils/helpers";
-import { AccordionContext } from "./AccordionContext";
-import { AccordionItemContext } from "./AccordionItem";
+import { Heading } from "../../typography";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { AccordionItemContext } from "../item/AccordionItem.context";
+import { AccordionContext } from "../root/AccordionRoot.context";
 
 export interface AccordionHeaderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -53,4 +53,4 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
   },
 );
 
-export default AccordionHeader;
+export { AccordionHeader };

@@ -17,7 +17,7 @@ const generatedComponentNamesPath = path.resolve(
 );
 
 /** Glob (relative to {@link packageRoot}) matching every component meta file. */
-const META_GLOB = "src/**/*.meta.ts";
+const META_GLOB = "src/**/Accordion.meta.ts";
 
 export {
   packageRoot,

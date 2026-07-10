@@ -1,8 +1,9 @@
-import React, { createContext, forwardRef, useContext } from "react";
-import { omit } from "../utils-external";
-import { cl } from "../utils/helpers";
-import { useControllableState } from "../utils/hooks";
-import { AccordionContext } from "./AccordionContext";
+import React, { forwardRef, useContext } from "react";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useControllableState } from "../../utils/hooks";
+import { AccordionContext } from "../root/AccordionRoot.context";
+import { AccordionItemContext } from "./AccordionItem.context";
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -27,14 +28,6 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    */
   onOpenChange?: (open: boolean) => void;
 }
-
-export interface AccordionItemContextProps {
-  open: boolean;
-  toggleOpen: () => void;
-}
-
-export const AccordionItemContext =
-  createContext<AccordionItemContextProps | null>(null);
 
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   (
@@ -75,4 +68,4 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   },
 );
 
-export default AccordionItem;
+export { AccordionItem };
