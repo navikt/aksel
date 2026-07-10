@@ -15,6 +15,7 @@ Restructure a `ds-react` component folder to follow canonical conventions — wi
 ├── index.ts                          # "use client" + re-exports from root
 ├── <Component>.stories.tsx           # Storybook stories
 ├── <Component>.tests.stories.tsx     # Storybook play-tests (only if play tests exist)
+├── <Component>.meta.ts               # Meta info for component. Used for documentation generation.
 ├── root/
 │   ├── <Component>Root.tsx           # Main compound component + sub-component namespace
 │   ├── <Component>Root.context.ts    # Context (if shared across sub-components)
@@ -43,15 +44,16 @@ Restructure a `ds-react` component folder to follow canonical conventions — wi
 | Stories                | `<Component>.stories.tsx`               | `Accordion.stories.tsx`       |
 | Play-test stories      | `<Component>.tests.stories.tsx`         | `Accordion.tests.stories.tsx` |
 | Unit test file         | `<filename>.test.ts(x)`                 | `useAccordion.test.ts`        |
+| Meta file              | `<Component>.meta.ts`                   | `Accordion.meta.ts`           |
 | `index.ts`             | always `index.ts`                       | `index.ts`                    |
 
 ## Procedure
 
 ### 1. Read the Component
 
-Read every file in the component folder — `index.ts`, all `.tsx`/`.ts` source files, stories, and test stories. Ignore inconsistencies in file naming and structure; the goal is to fix those, not preserve them.
+Read every file in the component folder — `index.ts`, all `.tsx`/`.ts` source files, meta file, stories, and test stories. Ignore inconsistencies in file naming and structure; the goal is to fix those, not preserve them. Use the `component`-field in the meta file to determine the proper naming if unsure.
 
-**Done when:** every file's role (component, hook, type, context, test) is known, and every symbol currently exported from `index.ts` is recorded.
+**Done when:** every file's role (component, hook, type, context, test, metadata) is known, and every symbol currently exported from `index.ts` is recorded.
 
 ### 2. Map Files to Target Structure
 
@@ -109,7 +111,16 @@ export type {
 
 Some components export everything as named (no `default`). If the original had no default export, keep it that way. If types are in `<Component>.types.ts`, re-export them from there directly or via the root.
 
-### 6. Validate No Breaking Changes
+### 6. Update Meta File
+
+Update imports in `<Component>.meta.ts` to reflect new paths. If the meta file imports from the component's `index.ts`, no changes are needed.
+
+If component has no meta file, create one in the component root with the following content based on existing patterns.
+Note that each standalone component should have a meta file. But a "sub-component" (like `AccordionItem`) does not need a meta file.
+
+```ts
+
+### 7. Validate No Breaking Changes
 
 **Export diff.** Before deleting old files, compare the exported names recorded during Step 1 against the new `index.ts`. Every name must be present:
 
@@ -124,11 +135,11 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 
 **Done when:** the export diff is empty, the build succeeds, and the package-root re-export is verified.
 
-### 7. Remove Old Files
+### 8. Remove Old Files
 
 Only after verifying new files are correct and `index.ts` exports match the original, delete the old files.
 
-## Unit Tests
+### 9. Unit Tests
 
 Unit tests live next to the file they test — same directory, same base name with `.test.ts` / `.test.tsx` suffix.
 
@@ -158,8 +169,10 @@ If the component uses a `parts/` dir, break it up into separate sub-component di
 Sub-components that are implementation details (not exported publicly) use the same dir/file naming as public ones (see Naming Rules) with an `Internal` suffix, but must NOT be exported from `index.ts`:
 
 ```
+
 backdrop/
-└── DialogBackdropInternal.tsx   ← internal, NOT exported from index.ts
+└── DialogBackdropInternal.tsx ← internal, NOT exported from index.ts
+
 ```
 
 ### Nested subcomponents
@@ -167,19 +180,23 @@ backdrop/
 Do NOT nest subcomponent dirs inside other subcomponent dirs. All sub-component dirs must be direct children of the component root:
 
 ```
+
 # Wrong
+
 dialog/
 └── header/
-    ├── DialogHeader.tsx
-    └── title/
-        └── DialogTitle.tsx
+├── DialogHeader.tsx
+└── title/
+└── DialogTitle.tsx
 
 # Correct
+
 dialog/
 ├── header/
-│   └── DialogHeader.tsx
+│ └── DialogHeader.tsx
 └── title/
-    └── DialogTitle.tsx
+└── DialogTitle.tsx
+
 ```
 
 ## Constraints
@@ -197,3 +214,5 @@ dialog/
 - Package public API: `@navikt/core/react/src/index.ts`
 - Component `index.ts` pattern: `@navikt/core/react/src/dialog/index.ts`
 - Context pattern: `@navikt/core/react/src/dialog/root/DialogRoot.context.ts`
+- Meta: `@navikt/core/react/src/accordion/Accordion.meta.ts`
+```
