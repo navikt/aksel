@@ -4,7 +4,7 @@ import { BodyLong } from "../../typography";
 import { cl } from "../../utils/helpers";
 import { AccordionItemContext } from "../item/AccordionItem.context";
 
-export interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Content inside Accordion.Content
    */
@@ -47,3 +47,4 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 );
 
 export { AccordionContent };
+export type { AccordionContentProps };

@@ -5,7 +5,7 @@ import { useControllableState } from "../../utils/hooks";
 import { AccordionContext } from "../root/AccordionRoot.context";
 import { AccordionItemContext } from "./AccordionItem.context";
 
-export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Content in Accordion.Item.
    *
@@ -69,3 +69,4 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 );
 
 export { AccordionItem };
+export type { AccordionItemProps };

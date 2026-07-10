@@ -5,7 +5,7 @@ import { cl, composeEventHandlers } from "../../utils/helpers";
 import { AccordionItemContext } from "../item/AccordionItem.context";
 import { AccordionContext } from "../root/AccordionRoot.context";
 
-export interface AccordionHeaderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AccordionHeaderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Text inside Accordion.Header
    */
@@ -54,3 +54,4 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
 );
 
 export { AccordionHeader };
+export type { AccordionHeaderProps };

@@ -91,15 +91,13 @@ Move stories to component root dir. If stories import from internal paths, updat
 
 ### 5. Update `index.ts`
 
-The repo uses a mix of default and named export. Follow the existing pattern in the component's original `index.ts` — do NOT change export style during restructure.
-
-Typical pattern (main component as default re-export, sub-components as named):
+All exports are **named** — no `default` exports anywhere. The component `index.ts` re-exports the compound component, its sub-components, and their types from the root file:
 
 ```ts
 "use client";
 export {
-  default as <Component>,       // main component — default export from Root file
-  <Component>Trigger,           // sub-components — named exports
+  <Component>,                   // compound root (named)
+  <Component>Trigger,            // sub-components (named)
   // ...
 } from "./root/<Component>Root";
 export type {
@@ -109,7 +107,47 @@ export type {
 } from "./root/<Component>Root";
 ```
 
-Some components export everything as named (no `default`). If the original had no default export, keep it that way. If types are in `<Component>.types.ts`, re-export them from there directly or via the root.
+Group values first, then types. If types live in `<Component>.types.ts`, re-export them from there.
+
+#### Compound root file export pattern
+
+In `<Component>Root.tsx`, assemble the compound component with `Object.assign` — **do not** use an `as <Component>Component` cast or a dedicated `<Component>Component` interface:
+
+```tsx
+const <Component>Root = forwardRef<HTMLDivElement, <Component>Props>((props, ref) => {
+  // ...
+});
+
+/**
+ * Component-level JSDoc (description, `@see`, `@example`) goes directly
+ * above the `Object.assign` — this is the exported `<Component>` value.
+ */
+const <Component> = Object.assign(<Component>Root, {
+  /**
+   * @see 🏷️ {@link <Component>TriggerProps}
+   */
+  Trigger: <Component>Trigger,
+  // ...
+});
+
+export { <Component>, <Component>Trigger };
+export type { <Component>Props, <Component>TriggerProps };
+```
+
+Why `Object.assign` instead of `as`: the cast types the const as an interface that has no runtime `valueDeclaration`, so `react-docgen-typescript` (used by `yarn docgen:meta`) fails to extract props and can't document the component when it is exported via a grouped `export { }` statement. `Object.assign` lets TypeScript infer the intersection type from the value, so metadata generation works with named, bottom-of-file exports.
+
+Sub-component files follow the same rule — named value export plus named type export at the bottom, no inline `export interface` and no default:
+
+```tsx
+interface <Component>TriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+  // ...
+}
+
+const <Component>Trigger = forwardRef<HTMLDivElement, <Component>TriggerProps>(/* ... */);
+
+export { <Component>Trigger };
+export type { <Component>TriggerProps };
+```
 
 ### 6. Update Meta File
 
@@ -202,11 +240,13 @@ dialog/
 ## Constraints
 
 - **No breaking changes.** Public export names and prop shapes must be identical after restructuring.
+- **Named exports only.** No `default` exports; group named exports at the bottom of each file (values first, then types).
+- **Compound roots use `Object.assign`.** No `as <Component>Component` cast or `<Component>Component` interface — it breaks `yarn docgen:meta` prop extraction.
 - **React 17 compatible.** No React 18/19-only APIs. Import React explicitly in `.tsx` files.
 - `index.ts` must start with `"use client"`.
 - Use tokens, not hardcoded values.
 - Preserve `forwardRef`, `className`, `...rest`, `as`/`OverridableComponent` patterns.
-- Keep JSDoc on public props and components.
+- Keep JSDoc on public props and components. The component-level JSDoc block sits directly above the `Object.assign` call; sub-component `@see` tags go on the keys inside the `Object.assign` object literal.
 
 ## Reference Files
 
