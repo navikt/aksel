@@ -1,9 +1,9 @@
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
-import { MetadataSeksjonCode } from "../metadata-seksjon/MetadataSeksjon.code";
-import { MetadataSeksjonDescription } from "../metadata-seksjon/MetadataSeksjon.decription";
-import { MetadataSeksjonDeprecation } from "../metadata-seksjon/MetadataSeksjon.deprecation";
+import { MetadataSeksjonCode } from "./MetadataSeksjon.code";
+import { MetadataSeksjonDescription } from "./MetadataSeksjon.decription";
+import { MetadataSeksjonDeprecation } from "./MetadataSeksjon.deprecation";
 import headingStyles from "../portable-text/CustomPortableText.module.css";
 import { Code } from "../typography/Code";
 import styles from "./MetadataSeksjon.module.css";
