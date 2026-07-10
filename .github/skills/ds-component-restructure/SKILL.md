@@ -83,11 +83,15 @@ For each row in the mapping table where the path changes:
 2. Update every file in the "Importers to update" column — use the mapping table, don't rely on memory
 3. Do NOT delete old files yet
 
+> **Case-only renames** (path differs only in letter casing, e.g. `heading.stories.tsx` → `Heading.stories.tsx`) must NOT use the create-new + delete-old flow. On case-insensitive filesystems (macOS and Windows default) the two paths resolve to the **same file**, so creating the new file overwrites the old and the later "delete old" step destroys your content — and git records no rename. Handle these with the two-step `git mv` in the [Case-only renames](#case-only-renames) edge case instead.
+
 ### 4. Update Stories
 
 Move stories to component root dir. If stories import from internal paths, update those paths.
 
 **Exception:** A `stories/` subdirectory is acceptable if it already exists — do not flatten it.
+
+**Casing:** Story filenames follow `<Component>.stories.tsx` (PascalCase). When the existing file is lowercase (e.g. `heading.stories.tsx`), this is a **case-only rename** — follow the [Case-only renames](#case-only-renames) procedure, do not create + delete.
 
 ### 5. Update `index.ts`
 
@@ -156,7 +160,7 @@ Update imports in `<Component>.meta.ts` to reflect new paths. If the meta file i
 If component has no meta file, create one in the component root with the following content based on existing patterns.
 Note that each standalone component should have a meta file. But a "sub-component" (like `AccordionItem`) does not need a meta file.
 
-```ts
+````ts
 
 ### 7. Validate No Breaking Changes
 
@@ -177,6 +181,8 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 
 Only after verifying new files are correct and `index.ts` exports match the original, delete the old files.
 
+Skip any rows already moved with `git mv` (case-only renames and other `git mv` moves) — there is no separate old file to delete for those.
+
 ### 9. Unit Tests
 
 Unit tests live next to the file they test — same directory, same base name with `.test.ts` / `.test.tsx` suffix.
@@ -191,6 +197,28 @@ Unit tests live next to the file they test — same directory, same base name wi
 Do NOT move existing test files unless their source file moves. When moving a source file, move its test file with it and update import paths.
 
 ## Edge Cases
+
+### Case-only renames
+
+A rename that changes **only letter casing** (e.g. `heading.stories.tsx` → `Heading.stories.tsx`, or `accordion.tsx` → `Accordion.tsx`) is a trap on case-insensitive filesystems (macOS and Windows defaults):
+
+- Both paths point to the **same** file, so `create_file` at the new path overwrites the old content, and the Step 8 "delete old" then removes it entirely.
+- git does not see a rename (`core.ignorecase=true`), so history is lost and other machines get checkout/case-collision conflicts.
+
+Do the rename in **two `git mv` steps through a temporary distinct name** so git records it and it works on every filesystem:
+
+```sh
+git mv heading.stories.tsx heading.stories.tmp.tsx
+git mv heading.stories.tmp.tsx Heading.stories.tsx
+````
+
+Then edit the file's contents/imports in place. Skip the create-new + delete-old flow for these rows entirely.
+
+Guidelines:
+
+- Prefer `git mv` for **all** moves/renames (not just case-only) so history is preserved; only fall back to create + delete when the file content is being split or substantially rewritten.
+- Detect case-only renames while building the Step 2 mapping table: compare old vs new path lowercased — if they're equal but the raw paths differ, mark the row as case-only.
+- The temporary name must differ by more than case (add `.tmp`), otherwise the same collision reoccurs.
 
 ### Flat components without sub-components
 
@@ -255,4 +283,7 @@ dialog/
 - Component `index.ts` pattern: `@navikt/core/react/src/dialog/index.ts`
 - Context pattern: `@navikt/core/react/src/dialog/root/DialogRoot.context.ts`
 - Meta: `@navikt/core/react/src/accordion/Accordion.meta.ts`
+
+```
+
 ```
