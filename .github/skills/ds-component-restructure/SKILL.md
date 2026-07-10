@@ -175,7 +175,21 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 
 **Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
 
-**Done when:** the export diff is empty, the build succeeds, and the package-root re-export is verified.
+**No case-duplicate tracked paths.** This is the most common restructure bug. On case-insensitive filesystems (macOS, Windows) git can end up tracking **two** entries that differ only in casing (e.g. `accordion.stories.tsx` **and** `Accordion.stories.tsx`) while the working tree shows only one file. The stale entry then breaks tests and checkout on other machines. `ls` / file search will NOT reveal it — you must ask git. Run:
+
+```sh
+git ls-files | awk '{l=tolower($0); if(seen[l]++) print "CASE-DUP:", $0}'
+```
+
+Any output is a leftover. Remove the stale entry from the index by its **exact old path** (this does not touch the correctly-cased file on disk):
+
+```sh
+git rm --cached '<exact old lowercase path>'
+```
+
+Then confirm only the intended casing remains, e.g. `git ls-files '*<component>*stories*'`.
+
+**Done when:** the export diff is empty, the build succeeds, the package-root re-export is verified, and `git ls-files` reports no case-duplicate paths.
 
 ### 8. Remove Old Files
 
