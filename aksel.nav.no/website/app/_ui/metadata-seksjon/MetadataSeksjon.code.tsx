@@ -3,9 +3,9 @@
 import { Highlight } from "prism-react-renderer";
 import { Box } from "@navikt/ds-react";
 import { AkselPrismTheme } from "@/app/_ui/code-block/CodePrismTheme";
-import styles from "./PropsSeksjon.module.css";
+import styles from "./MetadataSeksjon.module.css";
 
-function PropsSeksjonCode({
+function MetadataSeksjonCode({
   code,
   title,
   wrap = false,
@@ -53,4 +53,4 @@ function PropsSeksjonCode({
   );
 }
 
-export { PropsSeksjonCode };
+export { MetadataSeksjonCode };

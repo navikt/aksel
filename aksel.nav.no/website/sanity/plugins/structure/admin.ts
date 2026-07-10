@@ -68,14 +68,6 @@ export function adminStructure(S: StructureBuilder) {
                 .apiVersion(SANITY_API_VERSION),
             ),
           S.listItem()
-            .title("Props Designsystemet")
-            .child(
-              S.documentList()
-                .title("Props")
-                .filter(`_type == 'ds_props'`)
-                .apiVersion(SANITY_API_VERSION),
-            ),
-          S.listItem()
             .title("Component Metadata Aksel")
             .child(
               S.documentList()

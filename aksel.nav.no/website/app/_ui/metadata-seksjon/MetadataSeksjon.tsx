@@ -2,11 +2,11 @@ import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import headingStyles from "../portable-text/CustomPortableText.module.css";
-import { PropsSeksjonCode } from "../props-seksjon/PropsSeksjon.code";
-import { PropsSeksjonDescription } from "../props-seksjon/PropsSeksjon.decription";
-import { PropsSeksjonDeprecation } from "../props-seksjon/PropsSeksjon.deprecation";
-import styles from "../props-seksjon/PropsSeksjon.module.css";
 import { Code } from "../typography/Code";
+import { MetadataSeksjonCode } from "./MetadataSeksjon.code";
+import { MetadataSeksjonDeprecation } from "./MetadataSeksjon.deprecation";
+import { MetadataSeksjonDescription } from "./MetadataSeksjon.description";
+import styles from "./MetadataSeksjon.module.css";
 
 type ComponentMetadata =
   NonNullable<KOMPONENT_BY_SLUG_QUERY_RESULT>["component_metadata"];
@@ -19,7 +19,8 @@ type ComponentMetadataEntry = NonNullable<ComponentMetadataEnties>[number];
 function MetadataSeksjon({ metadata }: { metadata: ComponentMetadata }) {
   if (
     !metadata ||
-    ((metadata.components?.length ?? 0) === 0 && (metadata.utils?.length ?? 0) === 0)
+    ((metadata.components?.length ?? 0) === 0 &&
+      (metadata.utils?.length ?? 0) === 0)
   ) {
     return null;
   }
@@ -126,21 +127,21 @@ const PropEntry = ({
       <BodyShort as="dd">
         <Box as="ul" overflowX="auto">
           {prop.deprecated && (
-            <PropsSeksjonDeprecation text={prop.deprecated} />
+            <MetadataSeksjonDeprecation text={prop.deprecated} />
           )}
-          <PropsSeksjonCode code={type} title="Type" wrap />
-          <PropsSeksjonCode
+          <MetadataSeksjonCode code={type} title="Type" wrap />
+          <MetadataSeksjonCode
             /* We assume that if type starts with ", its an union-type */
             code={prop.defaultValue}
             title="Default"
             wrap
           />
-          <PropsSeksjonDescription
+          <MetadataSeksjonDescription
             description={prop.description}
             params={prop.params}
             returnVal={prop.return}
           />
-          <PropsSeksjonCode code={prop.example} title="Example" />
+          <MetadataSeksjonCode code={prop.example} title="Example" />
         </Box>
       </BodyShort>
     </>
