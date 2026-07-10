@@ -20,7 +20,6 @@ import { Bilde } from "../bilde/Bilde";
 import { DescriptionList } from "../description-list/DescriptionList";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
-import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
 import { Tips } from "../tips/Tips";
@@ -55,7 +54,6 @@ function customPortableTextComponents({
       expansioncard: WebsiteExpansionCard,
       tabell_v2: TableV2,
       accordion: WebsiteAccordion,
-      props_seksjon: PropsSeksjon,
       video: Video,
       tips: Tips,
       kode: SingleCodeBlock,

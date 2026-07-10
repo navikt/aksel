@@ -2,9 +2,9 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link, VStack } from "@navikt/ds-react";
 import { Code } from "../typography/Code";
-import styles from "./PropsSeksjon.module.css";
+import styles from "./MetadataSeksjon.module.css";
 
-function PropsSeksjonDescription({
+function MetadataSeksjonDescription({
   description,
   params,
   returnVal,
@@ -67,4 +67,4 @@ function LinkWrapper({
   return <Link href={href}>{children}</Link>;
 }
 
-export { PropsSeksjonDescription };
+export { MetadataSeksjonDescription };

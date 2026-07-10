@@ -14,7 +14,6 @@ export * from "./grunnleggende/landingsside";
 export * from "./komponenter/artikkel";
 export * from "./komponenter/kode-eksempler";
 export * from "./komponenter/landingsside";
-export * from "./komponenter/props";
 export * from "./komponenter/tokens";
 export * from "./komponenter/component-metadata";
 export * from "./prinsipper/artikkel";

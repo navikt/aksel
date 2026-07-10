@@ -18,7 +18,6 @@ export const schema: SchemaPluginOptions = {
     /* Komponentsider */
     document.KodeEksempelDoc,
     document.Tokens,
-    document.Props,
     document.ComponentMetadata,
     document.KomponentArtikkel,
     document.KomponentLandingSide,
@@ -83,7 +82,6 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstBlogg,
 
     /* Komponentsider */
-    object.PropsSeksjon,
     object.KodeEksempler,
     object.TokenTabell,
     object.KomponentIntro,

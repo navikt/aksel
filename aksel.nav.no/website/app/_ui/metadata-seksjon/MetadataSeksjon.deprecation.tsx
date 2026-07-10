@@ -1,9 +1,9 @@
 "use client";
 
 import { BodyShort, Box } from "@navikt/ds-react";
-import styles from "./PropsSeksjon.module.css";
+import styles from "./MetadataSeksjon.module.css";
 
-function PropsSeksjonDeprecation({ text }: { text?: string }) {
+function MetadataSeksjonDeprecation({ text }: { text?: string }) {
   if (!text) {
     return null;
   }
@@ -21,4 +21,4 @@ function PropsSeksjonDeprecation({ text }: { text?: string }) {
   );
 }
 
-export { PropsSeksjonDeprecation };
+export { MetadataSeksjonDeprecation };

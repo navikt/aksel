@@ -37,7 +37,6 @@ const filtered = [
   "redirect",
   "token_kategori",
   "kode_eksempler_fil",
-  "ds_props",
   "ds_component_metadata",
   "aksel_standalone",
   "aksel_blogg",
