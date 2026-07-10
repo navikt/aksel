@@ -89,7 +89,7 @@ Move stories to component root dir. If stories import from internal paths, updat
 
 ### 5. Update `index.ts`
 
-The repo uses a mix of default and named exports because `react-docgen-typescript` (used by `scripts/docgen.ts`) has inconsistent pickup depending on export style. Follow the existing pattern in the component's original `index.ts` — do NOT change export style during restructure.
+The repo uses a mix of default and named export. Follow the existing pattern in the component's original `index.ts` — do NOT change export style during restructure.
 
 Typical pattern (main component as default re-export, sub-components as named):
 

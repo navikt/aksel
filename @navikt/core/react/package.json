@@ -722,7 +722,6 @@
     }
   },
   "scripts": {
-    "docgen": "tsx ../../../scripts/docgen.ts && yarn docgen:meta",
     "docgen:meta": "yarn metadata:generate-names && tsx ./scripts/extract-metadata.ts",
     "metadata:generate-names": "tsx ./scripts/extract-component-names.ts",
     "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",

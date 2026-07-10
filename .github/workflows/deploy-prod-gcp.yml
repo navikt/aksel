@@ -27,9 +27,6 @@ jobs:
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Run ts-docgen
-        run: yarn docgen
-
       - name: Run metadata generation
         run: yarn docgen:meta
 
