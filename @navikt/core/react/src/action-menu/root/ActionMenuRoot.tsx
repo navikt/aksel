@@ -160,7 +160,7 @@ const ActionMenu = Object.assign(ActionMenuRoot, {
   Content: ActionMenuContent,
   /**
    * Semantically and visually groups items together with a label.
-   * This is the prefered way to group items, as it provides better accessibility
+   * This is the preferred way to group items, as it provides better accessibility
    * rather than using a standalone `ActionMenu.Label`.
    *
    * It is required to use either `label` or `aria-label` to provide an accessible name for the group.
@@ -199,7 +199,7 @@ const ActionMenu = Object.assign(ActionMenuRoot, {
    *     Label
    *   </ActionMenu.Label>
    *   <ActionMenu.Divider />
-   * </ActionMenu.Content
+   * </ActionMenu.Content>
    * ```
    */
   Label: ActionMenuLabel,

@@ -4,7 +4,7 @@ import { cl } from "../../utils/helpers";
 import { actionMenuContentCssVars } from "../helpers/actionMenuContentCssVars";
 import { useActionMenuContext } from "../root/ActionMenuRoot.context";
 
-type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
+type ActionMenuSubContentElement = React.ElementRef<typeof Menu.SubContent>;
 
 interface ActionMenuSubContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
