@@ -1,9 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { Accordion } from "../../accordion";
-import AccordionContent from "../../accordion/AccordionContent";
-import AccordionHeader from "../../accordion/AccordionHeader";
-import AccordionItem from "../../accordion/AccordionItem";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionItem,
+} from "../../accordion";
 import VStack from "../../primitives/stack/VStack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Radio from "./Radio";
