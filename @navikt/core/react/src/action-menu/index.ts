@@ -26,4 +26,4 @@ export {
   type ActionMenuSubProps,
   type ActionMenuSubTriggerProps,
   type ActionMenuTriggerProps,
-} from "./ActionMenu";
+} from "./root/ActionMenuRoot";

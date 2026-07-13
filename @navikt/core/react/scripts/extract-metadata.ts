@@ -24,7 +24,22 @@ if (errors.length > 0) {
   throw new Error(`Invalid component metadata:\n${errors.join("\n")}`);
 }
 
-const documentEntry = createPropsDocumenter();
+/**
+ * Interface names (e.g. `OverridableComponent`, compound `*Component`) so docgen
+ * can document values re-exported via a bottom-of-file `export { }`. See
+ * `createPropsDocumenter`.
+ */
+const customComponentTypes = [
+  ...new Set(
+    metas.flatMap((meta) =>
+      [...meta.components, ...meta.utils]
+        .map((entry) => entry.typeName)
+        .filter((name): name is string => Boolean(name)),
+    ),
+  ),
+];
+
+const documentEntry = createPropsDocumenter(customComponentTypes);
 
 const output = metas
   .sort((a, b) => a.name.localeCompare(b.name))
