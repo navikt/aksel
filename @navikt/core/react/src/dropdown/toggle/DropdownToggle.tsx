@@ -32,6 +32,7 @@ const DropdownToggle = forwardRef<HTMLButtonElement, DropdownToggleProps>(
 
     return (
       <button
+        type="button"
         {...rest}
         ref={mergedRef}
         onClick={composeEventHandlers(onClick, handleClick)}
