@@ -1,35 +1,63 @@
-import { stegaClean } from "next-sanity";
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
-import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import headingStyles from "../portable-text/CustomPortableText.module.css";
 import { Code } from "../typography/Code";
-import { PropsSeksjonCode } from "./PropsSeksjon.code";
-import { PropsSeksjonDescription } from "./PropsSeksjon.decription";
-import { PropsSeksjonDeprecation } from "./PropsSeksjon.deprecation";
-import styles from "./PropsSeksjon.module.css";
+import { MetadataSeksjonCode } from "./MetadataSeksjon.code";
+import { MetadataSeksjonDeprecation } from "./MetadataSeksjon.deprecation";
+import { MetadataSeksjonDescription } from "./MetadataSeksjon.description";
+import styles from "./MetadataSeksjon.module.css";
 
-type PropsSeksjonT = ExtractPortableComponentProps<"props_seksjon">;
-type PropsSeksjonComponentT = NonNullable<
-  PropsSeksjonT["value"]["komponenter"]
->[number];
+type ComponentMetadata =
+  NonNullable<KOMPONENT_BY_SLUG_QUERY_RESULT>["component_metadata"];
 
-function PropsSeksjon(props: ExtractPortableComponentProps<"props_seksjon">) {
-  const { komponenter } = props.value;
+type ComponentMetadataEnties =
+  | NonNullable<ComponentMetadata>["components"]
+  | NonNullable<ComponentMetadata>["utils"];
+type ComponentMetadataEntry = NonNullable<ComponentMetadataEnties>[number];
 
-  if (!komponenter || komponenter.length === 0) {
+function MetadataSeksjon({ metadata }: { metadata: ComponentMetadata }) {
+  if (
+    !metadata ||
+    ((metadata.components?.length ?? 0) === 0 &&
+      (metadata.utils?.length ?? 0) === 0)
+  ) {
     return null;
   }
 
-  return komponenter.map((prop) => (
-    <PropTable component={prop} key={prop?._key} />
-  ));
+  return (
+    <div data-block-margin="space-28">
+      <Heading
+        className={headingStyles.headingElement}
+        tabIndex={-1}
+        level="2"
+        size="large"
+        data-level="2"
+        data-text-prose
+        data-outside-block
+        id="metadata-props"
+      >
+        Props
+      </Heading>
+      <PropsSeksjon entries={metadata.components} />
+      <PropsSeksjon entries={metadata.utils} />
+    </div>
+  );
 }
 
-function PropTable({ component }: { component: PropsSeksjonComponentT }) {
-  const { propref, title, overridable } = component;
+function PropsSeksjon({ entries }: { entries: ComponentMetadataEnties }) {
+  if (!entries || entries.length === 0) {
+    return null;
+  }
+
+  return entries.map((entry) => <PropTable entry={entry} key={entry?._key} />);
+}
+
+function PropTable({ entry }: { entry: ComponentMetadataEntry }) {
+  const { overridable, displayname, props } = entry;
 
   const propList =
-    propref?.proplist
+    props
       ?.filter((prop) => !prop.description?.includes("@private"))
       .sort((prop_a, prop_b) => {
         let comparator_value = 0;
@@ -63,11 +91,11 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
     <div lang="en" data-block-margin="space-28" className={styles.propsSeksjon}>
       <Heading
         size="xsmall"
-        level={stegaClean(component.heading_level) || "3"}
+        level="3"
         className={styles.propsSeksjonHeader}
-        id={component._key}
+        id={entry._key}
       >
-        {title ?? "Props"}
+        {displayname}
       </Heading>
       <dl>
         {propList.map((prop) => (
@@ -83,9 +111,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
 const PropEntry = ({
   prop,
 }: {
-  prop: NonNullable<
-    NonNullable<PropsSeksjonComponentT["propref"]>["proplist"]
-  >[0];
+  prop: NonNullable<NonNullable<ComponentMetadataEntry["props"]>>[0];
 }) => {
   const type = prop.type === "AkselColor" ? unpackedAkselColorType : prop.type;
 
@@ -101,21 +127,21 @@ const PropEntry = ({
       <BodyShort as="dd">
         <Box as="ul" overflowX="auto">
           {prop.deprecated && (
-            <PropsSeksjonDeprecation text={prop.deprecated} />
+            <MetadataSeksjonDeprecation text={prop.deprecated} />
           )}
-          <PropsSeksjonCode code={type} title="Type" wrap />
-          <PropsSeksjonCode
+          <MetadataSeksjonCode code={type} title="Type" wrap />
+          <MetadataSeksjonCode
             /* We assume that if type starts with ", its an union-type */
             code={prop.defaultValue}
             title="Default"
             wrap
           />
-          <PropsSeksjonDescription
+          <MetadataSeksjonDescription
             description={prop.description}
             params={prop.params}
             returnVal={prop.return}
           />
-          <PropsSeksjonCode code={prop.example} title="Example" />
+          <MetadataSeksjonCode code={prop.example} title="Example" />
         </Box>
       </BodyShort>
     </>
@@ -140,4 +166,4 @@ const unpackedAkselColorType = Object.keys(colors)
   .map((key) => `"${key}"`)
   .join(" | ");
 
-export { PropsSeksjon };
+export { MetadataSeksjon };

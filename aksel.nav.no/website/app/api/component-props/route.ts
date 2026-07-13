@@ -4,27 +4,51 @@ import { sanityMarkdownFetch } from "@/app/_sanity/live";
 
 export const revalidate = 7200;
 
+const COMPONENT_SLUG_PATTERN = /^komponenter(?:\/[a-z0-9-]+){2}$/;
+
 const COMPONENT_PROPS_QUERY = defineQuery(
   `*[_type == "komponent_artikkel" && slug.current == $slug][0] {
     "title": heading,
-    "propSections": content[_type == "props_seksjon"][].komponenter[] {
-      title,
-      overridable,
-      "props": propref->proplist[] {
-        name,
-        type,
-        unpackedType,
-        required,
-        description,
-        defaultValue,
-        deprecated,
-        example,
-        params,
-        return
-      }
+    "component_metadata": component_metadata->{
+      ...
     }
   }`,
 );
+
+type ComponentProp = {
+  type: string | null;
+  name: string | null;
+  required: boolean | null;
+  description: string | null;
+  defaultValue: string | null;
+  deprecated: string | null;
+  example: string | null;
+  params: string[] | null;
+  return: string | null;
+};
+
+type ComponentPart = {
+  title: string | null;
+  props: ComponentProp[];
+};
+
+const OVERRIDABLE_PROP: ComponentProp = {
+  name: "as",
+  type: "React.ElementType",
+  required: false,
+  description: "Override the root element (OverridableComponent API).",
+  defaultValue: null,
+  deprecated: null,
+  example: null,
+  params: null,
+  return: null,
+};
+
+function normalizeComponentSlug(rawSlug: string) {
+  const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
+
+  return COMPONENT_SLUG_PATTERN.test(normalizedSlug) ? normalizedSlug : null;
+}
 
 /**
  * Route allows external tools (Aksel-mcp) to fetch props related to a specific component:
@@ -58,34 +82,30 @@ export async function GET(request: NextRequest) {
       params: { slug },
     });
 
-    if (!data?.propSections || data.propSections.length === 0) {
+    if (
+      !data?.component_metadata ||
+      ((data.component_metadata.components?.length ?? 0) === 0 &&
+        (data.component_metadata.utils?.length ?? 0) === 0)
+    ) {
       return NextResponse.json(
         { error: "Component not found or has no props documentation", slug },
         { status: 404 },
       );
     }
 
-    const parts: {
-      title: string | null;
-      props: {
-        type: string | null;
-        name: string | null;
-        required: boolean | null;
-        description: string | null;
-        defaultValue: string | null;
-        deprecated: string | null;
-        example: string | null;
-        params: string[] | null;
-        return: string | null;
-      }[];
-    }[] = [];
+    const sections = [
+      ...(data.component_metadata.components ?? []),
+      ...(data.component_metadata.utils ?? []),
+    ];
 
-    for (const section of data.propSections) {
-      if (!section?.title) {
+    const parts: ComponentPart[] = [];
+
+    for (const section of sections) {
+      if (!section.displayname) {
         continue;
       }
 
-      const props = (section?.props ?? [])
+      const props: ComponentProp[] = (section.props ?? [])
         .filter((prop) => !prop.description?.includes("@private"))
         .sort((a, b) => {
           if (a.deprecated && !b.deprecated) return 1;
@@ -93,25 +113,22 @@ export async function GET(request: NextRequest) {
           return 0;
         })
         .map(({ unpackedType, type, ...rest }) => ({
-          ...rest,
-          type: unpackedType ?? type,
+          name: rest.name ?? null,
+          type: unpackedType ?? type ?? null,
+          required: rest.required ?? null,
+          description: rest.description ?? null,
+          defaultValue: rest.defaultValue ?? null,
+          deprecated: rest.deprecated ?? null,
+          example: rest.example ?? null,
+          params: rest.params ?? null,
+          return: rest.return ?? null,
         }));
 
       if (section.overridable) {
-        props.push({
-          name: "as",
-          type: "React.ElementType",
-          required: false,
-          description: "Override the root element (OverridableComponent API).",
-          defaultValue: null,
-          deprecated: null,
-          example: null,
-          params: null,
-          return: null,
-        });
+        props.push(OVERRIDABLE_PROP);
       }
 
-      parts.push({ title: section.title, props });
+      parts.push({ title: section.displayname, props });
     }
 
     return NextResponse.json(
@@ -130,15 +147,4 @@ export async function GET(request: NextRequest) {
       { status: 500 },
     );
   }
-}
-
-const COMPONENT_SLUG_PATTERN = /^komponenter(?:\/[a-z0-9-]+){2}$/;
-
-function normalizeComponentSlug(rawSlug: string) {
-  const normalizedSlug = rawSlug.trim().replace(/^\/+|\/+$/g, "");
-
-  if (!COMPONENT_SLUG_PATTERN.test(normalizedSlug)) {
-    return null;
-  }
-  return normalizedSlug;
 }
