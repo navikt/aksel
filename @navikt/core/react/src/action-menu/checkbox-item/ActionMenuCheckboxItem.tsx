@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Menu } from "../../utils/components/floating-menu/Menu";
 import { cl, composeEventHandlers } from "../../utils/helpers";
+import type { ActionMenuShortcutProp } from "../ActionMenu.types";
 import { ActionMenuMarker } from "../marker/ActionMenuMarkerInternal";
 import { ActionMenuShortcut } from "../shortcut/ActionMenuShortcutInternal";
 
@@ -9,16 +10,9 @@ type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof Menu.CheckboxItem
 >;
 
-interface ActionMenuCheckboxItemProps extends Omit<
-  MenuCheckboxItemProps,
-  "asChild"
-> {
+interface ActionMenuCheckboxItemProps
+  extends Omit<MenuCheckboxItemProps, "asChild">, ActionMenuShortcutProp {
   children: React.ReactNode;
-  /**
-   * Shows connected shortcut-keys for the item.
-   * This is only a visual representation, you will have to implement the actual shortcut yourself.
-   */
-  shortcut?: string;
 }
 
 const ActionMenuCheckboxItem = forwardRef<
@@ -39,12 +33,9 @@ const ActionMenuCheckboxItem = forwardRef<
       <Menu.CheckboxItem
         ref={ref}
         {...rest}
-        onSelect={composeEventHandlers(onSelect, (event) => {
-          /**
-           * Prevent default to avoid the menu from closing when clicking the checkbox
-           */
-          event.preventDefault();
-        })}
+        onSelect={composeEventHandlers(onSelect, (event) =>
+          event.preventDefault(),
+        )}
         asChild={false}
         className={cl("aksel-action-menu__item", className)}
         data-marker="left"

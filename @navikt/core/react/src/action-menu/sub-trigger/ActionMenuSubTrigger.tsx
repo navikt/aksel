@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Menu } from "../../utils/components/floating-menu/Menu";
 import { cl } from "../../utils/helpers";
-import { ActionMenuMarker } from "../marker/ActionMenuMarkerInternal";
+import { ActionMenuItemIcon } from "../marker/ActionMenuItemIconInternal";
 
 type ActionMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
 type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
@@ -53,14 +53,7 @@ const ActionMenuSubTrigger = forwardRef<
         data-marker={icon ? iconPosition : undefined}
       >
         {children}
-        {icon && (
-          <ActionMenuMarker
-            placement={iconPosition}
-            className="aksel-action-menu__marker-icon"
-          >
-            {icon}
-          </ActionMenuMarker>
-        )}
+        <ActionMenuItemIcon icon={icon} iconPosition={iconPosition} />
         <div className="aksel-action-menu__sub-icon">
           <ChevronRightIcon aria-hidden />
         </div>

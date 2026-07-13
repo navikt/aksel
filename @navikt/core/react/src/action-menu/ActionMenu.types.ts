@@ -20,4 +20,13 @@ type ActionMenuGroupLabelingProps =
       label?: never;
     };
 
+type ActionMenuShortcutProp = {
+  /**
+   * Shows connected shortcut-keys for the item.
+   * This is only a visual representation, you will have to implement the actual shortcut yourself.
+   */
+  shortcut?: string;
+};
+
 export type { ActionMenuGroupLabelingProps };
+export type { ActionMenuShortcutProp };

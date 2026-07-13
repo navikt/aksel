@@ -21,12 +21,9 @@ const ActionMenuRadioItem = forwardRef<
       <Menu.RadioItem
         ref={ref}
         {...rest}
-        onSelect={composeEventHandlers(onSelect, (event) => {
-          /**
-           * Prevent default to avoid the menu from closing when clicking the radio
-           */
-          event.preventDefault();
-        })}
+        onSelect={composeEventHandlers(onSelect, (event) =>
+          event.preventDefault(),
+        )}
         asChild={false}
         className={cl("aksel-action-menu__item", className)}
         data-marker="left"

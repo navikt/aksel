@@ -2,18 +2,15 @@ import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../../utils-external";
 import { Menu } from "../../utils/components/floating-menu/Menu";
 import { cl } from "../../utils/helpers";
-import { ActionMenuMarker } from "../marker/ActionMenuMarkerInternal";
+import type { ActionMenuShortcutProp } from "../ActionMenu.types";
+import { ActionMenuItemIcon } from "../marker/ActionMenuItemIconInternal";
 import { ActionMenuShortcut } from "../shortcut/ActionMenuShortcutInternal";
 
 type ActionMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
-interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
-  /**
-   * Shows connected shortcut-keys for the item.
-   * This is only a visual representation, you will have to implement the actual shortcut yourself.
-   */
-  shortcut?: string;
+interface ActionMenuItemProps
+  extends Omit<MenuItemProps, "asChild">, ActionMenuShortcutProp {
   /**
    * Styles the item as a destructive action.
    */
@@ -60,19 +57,12 @@ const ActionMenuItem: OverridableComponent<
         })}
         data-marker={icon ? iconPosition : undefined}
         data-indent={indent}
-        aria-keyshortcuts={shortcut ?? undefined}
+        aria-keyshortcuts={shortcut}
         asChild
       >
         <Component ref={ref}>
           {children}
-          {icon && (
-            <ActionMenuMarker
-              placement={iconPosition}
-              className="aksel-action-menu__marker-icon"
-            >
-              {icon}
-            </ActionMenuMarker>
-          )}
+          <ActionMenuItemIcon icon={icon} iconPosition={iconPosition} />
           {shortcut && <ActionMenuShortcut>{shortcut}</ActionMenuShortcut>}
         </Component>
       </Menu.Item>
