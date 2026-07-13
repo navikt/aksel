@@ -172,7 +172,7 @@ export {
   type GlobalAlertTitleProps,
   type GlobalAlertContentProps,
   type GlobalAlertCloseButtonProps,
-} from "./alert/global-alert";
+} from "./global-alert";
 export {
   InfoCard,
   type InfoCardProps,
@@ -180,7 +180,7 @@ export {
   type InfoCardTitleProps,
   type InfoCardContentProps,
   type InfoCardMessageProps,
-} from "./alert/info-card";
+} from "./info-card";
 export {
   LocalAlert,
   type LocalAlertProps,
@@ -188,7 +188,7 @@ export {
   type LocalAlertTitleProps,
   type LocalAlertContentProps,
   type LocalAlertCloseButtonProps,
-} from "./alert/local-alert";
+} from "./local-alert";
 export {
   Dialog,
   type DialogProps,
