@@ -1,13 +1,13 @@
 "use client";
 export {
-  default as Accordion,
+  Accordion,
   AccordionHeader,
   AccordionContent,
   AccordionItem,
-} from "./Accordion";
+} from "./root/AccordionRoot";
 export type {
   AccordionProps,
   AccordionHeaderProps,
   AccordionContentProps,
   AccordionItemProps,
-} from "./Accordion";
+} from "./root/AccordionRoot";

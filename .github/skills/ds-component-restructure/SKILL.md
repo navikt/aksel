@@ -83,23 +83,25 @@ For each row in the mapping table where the path changes:
 2. Update every file in the "Importers to update" column — use the mapping table, don't rely on memory
 3. Do NOT delete old files yet
 
+> **Case-only renames** (path differs only in letter casing, e.g. `heading.stories.tsx` → `Heading.stories.tsx`) must NOT use the create-new + delete-old flow. On case-insensitive filesystems (macOS and Windows default) the two paths resolve to the **same file**, so creating the new file overwrites the old and the later "delete old" step destroys your content — and git records no rename. Handle these with the two-step `git mv` in the [Case-only renames](#case-only-renames) edge case instead.
+
 ### 4. Update Stories
 
 Move stories to component root dir. If stories import from internal paths, update those paths.
 
 **Exception:** A `stories/` subdirectory is acceptable if it already exists — do not flatten it.
 
+**Casing:** Story filenames follow `<Component>.stories.tsx` (PascalCase). When the existing file is lowercase (e.g. `heading.stories.tsx`), this is a **case-only rename** — follow the [Case-only renames](#case-only-renames) procedure, do not create + delete.
+
 ### 5. Update `index.ts`
 
-The repo uses a mix of default and named export. Follow the existing pattern in the component's original `index.ts` — do NOT change export style during restructure.
-
-Typical pattern (main component as default re-export, sub-components as named):
+All exports are **named** — no `default` exports anywhere. The component `index.ts` re-exports the compound component, its sub-components, and their types from the root file:
 
 ```ts
 "use client";
 export {
-  default as <Component>,       // main component — default export from Root file
-  <Component>Trigger,           // sub-components — named exports
+  <Component>,                   // compound root (named)
+  <Component>Trigger,            // sub-components (named)
   // ...
 } from "./root/<Component>Root";
 export type {
@@ -109,7 +111,47 @@ export type {
 } from "./root/<Component>Root";
 ```
 
-Some components export everything as named (no `default`). If the original had no default export, keep it that way. If types are in `<Component>.types.ts`, re-export them from there directly or via the root.
+Group values first, then types. If types live in `<Component>.types.ts`, re-export them from there.
+
+#### Compound root file export pattern
+
+In `<Component>Root.tsx`, assemble the compound component with `Object.assign` — **do not** use an `as <Component>Component` cast or a dedicated `<Component>Component` interface:
+
+```tsx
+const <Component>Root = forwardRef<HTMLDivElement, <Component>Props>((props, ref) => {
+  // ...
+});
+
+/**
+ * Component-level JSDoc (description, `@see`, `@example`) goes directly
+ * above the `Object.assign` — this is the exported `<Component>` value.
+ */
+const <Component> = Object.assign(<Component>Root, {
+  /**
+   * @see 🏷️ {@link <Component>TriggerProps}
+   */
+  Trigger: <Component>Trigger,
+  // ...
+});
+
+export { <Component>, <Component>Trigger };
+export type { <Component>Props, <Component>TriggerProps };
+```
+
+Why `Object.assign` instead of `as`: the cast types the const as an interface that has no runtime `valueDeclaration`, so `react-docgen-typescript` (used by `yarn docgen:meta`) fails to extract props and can't document the component when it is exported via a grouped `export { }` statement. `Object.assign` lets TypeScript infer the intersection type from the value, so metadata generation works with named, bottom-of-file exports.
+
+Sub-component files follow the same rule — named value export plus named type export at the bottom, no inline `export interface` and no default:
+
+```tsx
+interface <Component>TriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+  // ...
+}
+
+const <Component>Trigger = forwardRef<HTMLDivElement, <Component>TriggerProps>(/* ... */);
+
+export { <Component>Trigger };
+export type { <Component>TriggerProps };
+```
 
 ### 6. Update Meta File
 
@@ -118,7 +160,7 @@ Update imports in `<Component>.meta.ts` to reflect new paths. If the meta file i
 If component has no meta file, create one in the component root with the following content based on existing patterns.
 Note that each standalone component should have a meta file. But a "sub-component" (like `AccordionItem`) does not need a meta file.
 
-```ts
+````ts
 
 ### 7. Validate No Breaking Changes
 
@@ -133,11 +175,27 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 
 **Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
 
-**Done when:** the export diff is empty, the build succeeds, and the package-root re-export is verified.
+**No case-duplicate tracked paths.** This is the most common restructure bug. On case-insensitive filesystems (macOS, Windows) git can end up tracking **two** entries that differ only in casing (e.g. `accordion.stories.tsx` **and** `Accordion.stories.tsx`) while the working tree shows only one file. The stale entry then breaks tests and checkout on other machines. `ls` / file search will NOT reveal it — you must ask git. Run:
+
+```sh
+git ls-files | awk '{l=tolower($0); if(seen[l]++) print "CASE-DUP:", $0}'
+```
+
+Any output is a leftover. Remove the stale entry from the index by its **exact old path** (this does not touch the correctly-cased file on disk):
+
+```sh
+git rm --cached '<exact old lowercase path>'
+```
+
+Then confirm only the intended casing remains, e.g. `git ls-files '*<component>*stories*'`.
+
+**Done when:** the export diff is empty, the build succeeds, the package-root re-export is verified, and `git ls-files` reports no case-duplicate paths.
 
 ### 8. Remove Old Files
 
 Only after verifying new files are correct and `index.ts` exports match the original, delete the old files.
+
+Skip any rows already moved with `git mv` (case-only renames and other `git mv` moves) — there is no separate old file to delete for those.
 
 ### 9. Unit Tests
 
@@ -153,6 +211,28 @@ Unit tests live next to the file they test — same directory, same base name wi
 Do NOT move existing test files unless their source file moves. When moving a source file, move its test file with it and update import paths.
 
 ## Edge Cases
+
+### Case-only renames
+
+A rename that changes **only letter casing** (e.g. `heading.stories.tsx` → `Heading.stories.tsx`, or `accordion.tsx` → `Accordion.tsx`) is a trap on case-insensitive filesystems (macOS and Windows defaults):
+
+- Both paths point to the **same** file, so `create_file` at the new path overwrites the old content, and the Step 8 "delete old" then removes it entirely.
+- git does not see a rename (`core.ignorecase=true`), so history is lost and other machines get checkout/case-collision conflicts.
+
+Do the rename in **two `git mv` steps through a temporary distinct name** so git records it and it works on every filesystem:
+
+```sh
+git mv heading.stories.tsx heading.stories.tmp.tsx
+git mv heading.stories.tmp.tsx Heading.stories.tsx
+````
+
+Then edit the file's contents/imports in place. Skip the create-new + delete-old flow for these rows entirely.
+
+Guidelines:
+
+- Prefer `git mv` for **all** moves/renames (not just case-only) so history is preserved; only fall back to create + delete when the file content is being split or substantially rewritten.
+- Detect case-only renames while building the Step 2 mapping table: compare old vs new path lowercased — if they're equal but the raw paths differ, mark the row as case-only.
+- The temporary name must differ by more than case (add `.tmp`), otherwise the same collision reoccurs.
 
 ### Flat components without sub-components
 
@@ -202,11 +282,13 @@ dialog/
 ## Constraints
 
 - **No breaking changes.** Public export names and prop shapes must be identical after restructuring.
+- **Named exports only.** No `default` exports; group named exports at the bottom of each file (values first, then types).
+- **Compound roots use `Object.assign`.** No `as <Component>Component` cast or `<Component>Component` interface — it breaks `yarn docgen:meta` prop extraction.
 - **React 17 compatible.** No React 18/19-only APIs. Import React explicitly in `.tsx` files.
 - `index.ts` must start with `"use client"`.
 - Use tokens, not hardcoded values.
 - Preserve `forwardRef`, `className`, `...rest`, `as`/`OverridableComponent` patterns.
-- Keep JSDoc on public props and components.
+- Keep JSDoc on public props and components. The component-level JSDoc block sits directly above the `Object.assign` call; sub-component `@see` tags go on the keys inside the `Object.assign` object literal.
 
 ## Reference Files
 
@@ -215,4 +297,7 @@ dialog/
 - Component `index.ts` pattern: `@navikt/core/react/src/dialog/index.ts`
 - Context pattern: `@navikt/core/react/src/dialog/root/DialogRoot.context.ts`
 - Meta: `@navikt/core/react/src/accordion/Accordion.meta.ts`
+
+```
+
 ```
