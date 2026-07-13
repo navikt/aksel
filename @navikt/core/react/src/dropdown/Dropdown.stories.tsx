@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { Dropdown } from ".";
 import { Button } from "../button";
-import Dropdown from "./Dropdown";
 
 export default {
   title: "ds-react/Dropdown",

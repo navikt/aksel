@@ -1,17 +1,17 @@
 import React, { forwardRef, useContext } from "react";
-import type { OverridableComponent } from "../../../utils-external";
-import { cl, composeEventHandlers } from "../../../utils/helpers";
-import { DropdownContext } from "../../context";
+import type { OverridableComponent } from "../../utils-external";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { DropdownContext } from "../root/DropdownRoot.context";
 
-export interface GroupedItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
+interface DropdownMenuGroupedListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
   /**
    * Menu item content
    */
   children: React.ReactNode;
 }
 
-export const GroupedItem: OverridableComponent<
-  GroupedItemProps,
+const DropdownMenuGroupedListItem: OverridableComponent<
+  DropdownMenuGroupedListItemProps,
   HTMLButtonElement
 > = forwardRef(
   ({ as: Component = "button", className, onClick, ...rest }, ref) => {
@@ -36,4 +36,5 @@ export const GroupedItem: OverridableComponent<
   },
 );
 
-export default GroupedItem;
+export { DropdownMenuGroupedListItem };
+export type { DropdownMenuGroupedListItemProps };
