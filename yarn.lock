@@ -16227,13 +16227,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^7.4.0":
-  version: 7.4.1
-  resolution: "fuse.js@npm:7.4.1"
-  checksum: 10/581941d5015968ee624feb10a56d9b49d5d954672b2c9ec189d4ca513da6f8a3dea2d5f6637386d8298ffc5846f6d83435210d40a47c58e14d11dc5707544c75
-  languageName: node
-  linkType: hard
-
 "fuse.js@npm:^7.4.2":
   version: 7.4.2
   resolution: "fuse.js@npm:7.4.2"
@@ -27948,7 +27941,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.1.0"
     date-fns: "npm:^4.0.0"
-    fuse.js: "npm:^7.4.0"
+    fuse.js: "npm:^7.4.2"
     isomorphic-dompurify: "npm:2.26.0"
     jscodeshift: "npm:17.3.0"
     jsdom: "npm:29.1.1"
