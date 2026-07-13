@@ -16,7 +16,7 @@ import { Table } from "../table";
 import { Theme } from "../theme";
 import { Tooltip } from "../tooltip";
 import { BodyShort, Detail } from "../typography";
-import { ActionMenu } from "./ActionMenu";
+import { ActionMenu } from "./index";
 
 export default {
   title: "ds-react/ActionMenu",

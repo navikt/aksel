@@ -12,6 +12,13 @@ interface ResolvedEntry {
   /** Absolute path of the file declaring the component/util. */
   fileName: string;
   overridable: boolean;
+  /**
+   * Name of the entry's type symbol, e.g. `OverridableComponent` or a compound
+   * `*Component` interface. Fed to `react-docgen-typescript` as a
+   * `customComponentType` so it documents such components even when the value
+   * is re-exported via a bottom-of-file `export { }` (see `extract-props.ts`).
+   */
+  typeName?: string;
 }
 
 /** The structured contents of one `*.meta.ts` file. */
@@ -208,6 +215,7 @@ function parseMetaFiles(): ParsedMeta[] {
         realName: symbol.getName(),
         fileName: declaration.getSourceFile().fileName,
         overridable: isOverridableComponent(type),
+        typeName: (type.aliasSymbol ?? type.getSymbol())?.getName(),
       });
     }
 

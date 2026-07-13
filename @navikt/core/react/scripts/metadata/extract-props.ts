@@ -53,37 +53,52 @@ function enrichExtraPropFields(doc: ComponentDoc) {
   }
 }
 
-const parser = docgen.withCustomConfig(tsconfigPath, {
-  savePropValueAsString: true,
-  shouldRemoveUndefinedFromOptional: true,
-  shouldExtractLiteralValuesFromEnum: true,
-  propFilter: (prop) => {
-    if (prop.name === "as" && prop.type.name === "undefined") {
-      return false;
-    }
-    if (prop.name === "className" || prop.parent?.name === "RefAttributes") {
-      return true;
-    }
-    if (prop.parent?.fileName.includes("/node_modules/@types/react/")) {
-      return false;
-    }
+const createParser = (customComponentTypes: string[]) =>
+  docgen.withCustomConfig(tsconfigPath, {
+    savePropValueAsString: true,
+    shouldRemoveUndefinedFromOptional: true,
+    shouldExtractLiteralValuesFromEnum: true,
     /**
-     * Filter out all HTML attributes inherited from React.HTMLAttributes.
-     * className is handled separately above.
+     * Teaches docgen that these types are components (e.g. `OverridableComponent`
+     * or a compound `*Component` interface). Without this, docgen bails on a
+     * re-exported value whose declared type is one of these interfaces
+     * (`const X: OverridableComponent<…> = forwardRef(…); export { X }`) because
+     * it resolves `commentSource` to the interface symbol, which has no runtime
+     * `valueDeclaration`. Collected from the meta files, see `createPropsDocumenter`.
      */
-    if (prop.parent?.name === "HTMLAttributes") {
-      return false;
-    }
-    return true;
-  },
-});
+    customComponentTypes,
+    propFilter: (prop) => {
+      if (prop.name === "as" && prop.type.name === "undefined") {
+        return false;
+      }
+      if (prop.name === "className" || prop.parent?.name === "RefAttributes") {
+        return true;
+      }
+      if (prop.parent?.fileName.includes("/node_modules/@types/react/")) {
+        return false;
+      }
+      /**
+       * Filter out all HTML attributes inherited from React.HTMLAttributes.
+       * className is handled separately above.
+       */
+      if (prop.parent?.name === "HTMLAttributes") {
+        return false;
+      }
+      return true;
+    },
+  });
 
 /**
  * Creates a documenter that turns resolved meta entries into their documented
  * props via `react-docgen-typescript`, caching parse results per file (a file
  * may back several entries, e.g. compound components).
+ *
+ * `customComponentTypes` lists the interface names (e.g. `OverridableComponent`)
+ * collected from the meta files so docgen documents values re-exported via a
+ * bottom-of-file `export { }` whose declared type is one of those interfaces.
  */
-function createPropsDocumenter() {
+function createPropsDocumenter(customComponentTypes: string[] = []) {
+  const parser = createParser(customComponentTypes);
   const docsByFile = new Map<string, Map<string, ComponentDoc>>();
 
   const getDocsForFile = (fileName: string) => {
