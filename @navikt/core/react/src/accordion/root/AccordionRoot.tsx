@@ -1,33 +1,20 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import type { AkselColor } from "../types";
-import { omit } from "../utils-external";
-import { cl } from "../utils/helpers";
-import { consoleWarning } from "../utils/helpers/consoleWarning";
-import { useMergeRefs } from "../utils/hooks";
-import AccordionContent, {
+import type { AkselColor } from "../../types";
+import { omit } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { useMergeRefs } from "../../utils/hooks";
+import {
+  AccordionContent,
   type AccordionContentProps,
-} from "./AccordionContent";
-import { AccordionContext } from "./AccordionContext";
-import AccordionHeader, { type AccordionHeaderProps } from "./AccordionHeader";
-import AccordionItem, { type AccordionItemProps } from "./AccordionItem";
-
-interface AccordionComponent extends React.ForwardRefExoticComponent<
-  AccordionProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link AccordionItemProps}
-   */
-  Item: typeof AccordionItem;
-  /**
-   * @see 🏷️ {@link AccordionHeaderProps}
-   */
-  Header: typeof AccordionHeader;
-  /**
-   * @see 🏷️ {@link AccordionContentProps}
-   */
-  Content: typeof AccordionContent;
-}
+} from "../content/AccordionContent";
+import {
+  AccordionHeader,
+  type AccordionHeaderProps,
+} from "../header/AccordionHeader";
+import { AccordionItem, type AccordionItemProps } from "../item/AccordionItem";
+import { AccordionContext } from "./AccordionRoot.context";
 
 interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -71,27 +58,7 @@ interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: "div" | "section";
 }
 
-/**
- * A component that displays collapsible content sections.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/accordion)
- * @see 🏷️ {@link AccordionProps}
- *
- * @example
- * ```jsx
- * <Accordion>
- *   <Accordion.Item>
- *     <Accordion.Header>Section 1</Accordion.Header>
- *     <Accordion.Content>Content 1</Accordion.Content>
- *   </Accordion.Item>
- *   <Accordion.Item>
- *     <Accordion.Header>Section 2</Accordion.Header>
- *     <Accordion.Content>Content 2</Accordion.Content>
- *   </Accordion.Item>
- * </Accordion>
- * ```
- */
-export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+const AccordionRoot = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       className,
@@ -149,14 +116,44 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       </AccordionContext.Provider>
     );
   },
-) as AccordionComponent;
+);
 
-Accordion.Header = AccordionHeader;
-Accordion.Content = AccordionContent;
-Accordion.Item = AccordionItem;
+/**
+ * A component that displays collapsible content sections.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/accordion)
+ * @see 🏷️ {@link AccordionProps}
+ *
+ * @example
+ * ```jsx
+ * <Accordion>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 1</Accordion.Header>
+ *     <Accordion.Content>Content 1</Accordion.Content>
+ *   </Accordion.Item>
+ *   <Accordion.Item>
+ *     <Accordion.Header>Section 2</Accordion.Header>
+ *     <Accordion.Content>Content 2</Accordion.Content>
+ *   </Accordion.Item>
+ * </Accordion>
+ * ```
+ */
+const Accordion = Object.assign(AccordionRoot, {
+  /**
+   * @see 🏷️ {@link AccordionItemProps}
+   */
+  Item: AccordionItem,
+  /**
+   * @see 🏷️ {@link AccordionHeaderProps}
+   */
+  Header: AccordionHeader,
+  /**
+   * @see 🏷️ {@link AccordionContentProps}
+   */
+  Content: AccordionContent,
+});
 
-export default Accordion;
-export { AccordionItem, AccordionHeader, AccordionContent };
+export { Accordion, AccordionItem, AccordionHeader, AccordionContent };
 export type {
   AccordionProps,
   AccordionItemProps,
