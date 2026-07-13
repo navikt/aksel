@@ -209,12 +209,12 @@ function useTableColumnResize({
   const startResize = useCallback(
     (startX: number) => {
       const startWidth = thRef.current?.offsetWidth ?? 0;
+      const rootSize = getRootSize();
 
       function onPointerMove(clientX: number) {
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        const rootSize = getRootSize();
         const convertedWidth = pxToRelativeWidth(newWidth, rootSize);
         const convertedCurrentWidth = pxToRelativeWidth(currentWidth, rootSize);
 
