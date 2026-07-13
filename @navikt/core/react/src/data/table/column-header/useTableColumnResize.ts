@@ -51,7 +51,7 @@ type ResizeProps = {
    * (Does not respect `resizeMin` and `resizeMax`.)
    *
    * **NB:** Percentage as initial width does not work well with resizing.
-   * @default 140px
+   * @default 140px (when root font-size is 16px)
    */
   defaultValue?: number | string;
   /**
@@ -90,11 +90,14 @@ type TableColumnResizeResult =
  * into the root-relative width unit stored in state. The stored value equals the pixel
  * width at a 16px root font-size (i.e. `rem * 16`), so widths scale with the user's font-size.
  */
-function pxToRelativeWidth(px: number) {
-  const rootSize = parseFloat(
-    getComputedStyle(document.documentElement).fontSize,
-  );
-  return (px / rootSize) * 16;
+function pxToRelativeWidth(px: number, rootSize?: number) {
+  const actualRoot = rootSize ?? getRootSize();
+
+  return (px / actualRoot) * 16;
+}
+
+function getRootSize() {
+  return parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
 }
 
 /**
@@ -211,8 +214,9 @@ function useTableColumnResize({
         const currentWidth = thRef.current?.offsetWidth ?? 0;
         const newWidth = startWidth + (clientX - startX);
 
-        const convertedWidth = pxToRelativeWidth(newWidth);
-        const convertedCurrentWidth = pxToRelativeWidth(currentWidth);
+        const rootSize = getRootSize();
+        const convertedWidth = pxToRelativeWidth(newWidth, rootSize);
+        const convertedCurrentWidth = pxToRelativeWidth(currentWidth, rootSize);
 
         if (convertedWidth > resizeMax) {
           setWidth(
