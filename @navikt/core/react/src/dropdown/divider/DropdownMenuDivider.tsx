@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../utils/helpers";
 
-export const Divider = forwardRef<
+const DropdownMenuDivider = forwardRef<
   HTMLHRElement,
   React.HTMLAttributes<HTMLHRElement>
 >(({ className, ...rest }, ref) => {
@@ -14,4 +14,4 @@ export const Divider = forwardRef<
   );
 });
 
-export default Divider;
+export { DropdownMenuDivider };

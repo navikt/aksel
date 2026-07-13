@@ -1,2 +1,2 @@
 "use client";
-export { default as CopyButton, type CopyButtonProps } from "./CopyButton";
+export { CopyButton, type CopyButtonProps } from "./CopyButton";

@@ -2,10 +2,10 @@ import React, { forwardRef, useContext } from "react";
 import { Popover } from "../../popover";
 import { cl } from "../../utils/helpers";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
-import { DropdownContext } from "../context";
-import Divider from "./Divider";
-import GroupedList, { type GroupedListType } from "./GroupedList";
-import List, { type ListType } from "./List";
+import { DropdownMenuDivider } from "../divider/DropdownMenuDivider";
+import { DropdownMenuGroupedList } from "../grouped-list/DropdownMenuGroupedList";
+import { DropdownMenuList } from "../list/DropdownMenuList";
+import { DropdownContext } from "../root/DropdownRoot.context";
 
 interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -40,28 +40,7 @@ interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
     | "left-end";
 }
 
-export interface MenuType<
-  Props = DropdownMenuProps,
-> extends React.ForwardRefExoticComponent<
-  Props & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link ListType}
-   */
-  List: ListType;
-  /**
-   * @see 🏷️ {@link GroupedListType}
-   */
-  GroupedList: GroupedListType;
-  /**
-   * @see 🏷️ {@link React.HTMLAttributes<HTMLHRElement>}
-   */
-  Divider: React.ForwardRefExoticComponent<
-    React.HTMLAttributes<HTMLHRElement> & React.RefAttributes<HTMLHRElement>
-  >;
-}
-
-export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
+const DropdownMenuRoot = forwardRef<HTMLDivElement, DropdownMenuProps>(
   ({ className, onClose, placement = "bottom-end", ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
@@ -88,10 +67,22 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
       />
     );
   },
-) as MenuType;
+);
 
-Menu.List = List;
-Menu.GroupedList = GroupedList;
-Menu.Divider = Divider;
+const DropdownMenu = Object.assign(DropdownMenuRoot, {
+  /**
+   * @see 🏷️ {@link DropdownMenuListProps}
+   */
+  List: DropdownMenuList,
+  /**
+   * @see 🏷️ {@link DropdownMenuGroupedListProps}
+   */
+  GroupedList: DropdownMenuGroupedList,
+  /**
+   * @see 🏷️ {@link React.HTMLAttributes<HTMLHRElement>}
+   */
+  Divider: DropdownMenuDivider,
+});
 
-export default Menu;
+export { DropdownMenu };
+export type { DropdownMenuProps };

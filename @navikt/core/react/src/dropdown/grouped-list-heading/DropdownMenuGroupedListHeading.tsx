@@ -1,16 +1,16 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-export interface GroupedHeadingProps extends React.HTMLAttributes<HTMLDetailsElement> {
+interface DropdownMenuGroupedListHeadingProps extends React.HTMLAttributes<HTMLDetailsElement> {
   /**
    * Heading
    */
   children: React.ReactNode;
 }
 
-export const GroupedHeading = forwardRef<
+const DropdownMenuGroupedListHeading = forwardRef<
   HTMLDetailsElement,
-  GroupedHeadingProps
+  DropdownMenuGroupedListHeadingProps
 >(({ className, ...rest }, ref) => {
   return (
     <dt
@@ -26,4 +26,5 @@ export const GroupedHeading = forwardRef<
   );
 });
 
-export default GroupedHeading;
+export { DropdownMenuGroupedListHeading };
+export type { DropdownMenuGroupedListHeadingProps };
