@@ -28,7 +28,7 @@ const InfoCardMessage = forwardRef<HTMLDivElement, InfoCardMessageProps>(
     { children, className, icon, ...restProps }: InfoCardMessageProps,
     forwardedRef,
   ) => {
-    const context = useBaseAlert();
+    const { size } = useBaseAlert();
     return (
       <div
         ref={forwardedRef}
@@ -36,7 +36,7 @@ const InfoCardMessage = forwardRef<HTMLDivElement, InfoCardMessageProps>(
         {...restProps}
       >
         <div className="aksel-base-alert__icon">{icon}</div>
-        <BodyLong size={context.size} as="div" textColor="default">
+        <BodyLong size={size} as="div" textColor="default">
           {children}
         </BodyLong>
       </div>

@@ -140,19 +140,13 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-function variantToRole(variant: AlertProps["variant"]): AkselColor {
-  switch (variant) {
-    case "warning":
-      return "warning";
-    case "error":
-      return "danger";
-    case "info":
-      return "info";
-    case "success":
-      return "success";
-    default:
-      return "info";
-  }
-}
+const VariantToRoleMap: Record<AlertProps["variant"], AkselColor> = {
+  error: "danger",
+  warning: "warning",
+  info: "info",
+  success: "success",
+};
 
-export default Alert;
+function variantToRole(variant: AlertProps["variant"]): AkselColor {
+  return VariantToRoleMap[variant] ?? "info";
+}
