@@ -1,10 +1,41 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
 import { Box } from "../box";
 import { HGrid } from "../grid";
 import { Hide, Show } from "../responsive";
 import { HStack, VStack } from "../stack";
-import { BasePrimitive } from "./BasePrimitive";
+import { type PrimitiveProps, useBasePrimitiveProps } from "./BasePrimitive";
+
+interface BasePrimitiveProps extends PrimitiveProps {
+  children: React.ReactElement;
+  /**
+   * @private Hides prop from documentation
+   */
+  className?: string;
+}
+
+/**
+ * Standalone wrapper-component version of `useBasePrimitiveProps`. Merges
+ * `PrimitiveProps` (padding, margin, width, position, etc) onto its child via
+ * `Slot`. Prefer `useBasePrimitiveProps` directly when building a component
+ * that already renders its own element — it avoids this extra `Slot` clone.
+ */
+const BasePrimitive = ({
+  children,
+  className,
+  ...primitiveProps
+}: BasePrimitiveProps) => {
+  const { style, className: primitiveClassName } =
+    useBasePrimitiveProps(primitiveProps);
+
+  return (
+    <Slot className={cl(primitiveClassName, className)} style={style}>
+      {children}
+    </Slot>
+  );
+};
 
 const meta: Meta<typeof BasePrimitive> = {
   title: "ds-react/Primitives/BasePrimitive",

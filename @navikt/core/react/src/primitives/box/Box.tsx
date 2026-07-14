@@ -10,9 +10,10 @@ import type {
 import { type OverridableComponent, omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import BasePrimitive, {
+import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
+  useBasePrimitiveProps,
 } from "../base/BasePrimitive";
 import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
@@ -97,7 +98,11 @@ const BoxRoot: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     }: BoxProps & { as?: React.ElementType },
     ref,
   ) => {
+    const { style: primitiveStyle, className: primitiveClassName } =
+      useBasePrimitiveProps(rest);
+
     const style: React.CSSProperties = {
+      ...primitiveStyle,
       ..._style,
       "--__axc-box-background": background
         ? `var(--ax-bg-${background})`
@@ -120,22 +125,20 @@ const BoxRoot: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     const Comp = asChild ? Slot : Component;
 
     return (
-      <BasePrimitive {...rest}>
-        <Comp
-          {...omit(rest, PRIMITIVE_PROPS)}
-          ref={ref}
-          style={style}
-          className={cl("aksel-box", className, {
-            "aksel-box-bg": background,
-            "aksel-box-border-color": borderColor,
-            "aksel-box-border-width": borderWidth,
-            "aksel-box-radius": borderRadius,
-            "aksel-box-shadow": shadow,
-          })}
-        >
-          {children}
-        </Comp>
-      </BasePrimitive>
+      <Comp
+        {...omit(rest, PRIMITIVE_PROPS)}
+        ref={ref}
+        style={style}
+        className={cl(primitiveClassName, "aksel-box", className, {
+          "aksel-box-bg": background,
+          "aksel-box-border-color": borderColor,
+          "aksel-box-border-width": borderWidth,
+          "aksel-box-radius": borderRadius,
+          "aksel-box-shadow": shadow,
+        })}
+      >
+        {children}
+      </Comp>
     );
   },
 );

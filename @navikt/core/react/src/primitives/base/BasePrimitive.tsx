@@ -1,10 +1,9 @@
 import React from "react";
-import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type PrimitiveProps = {
+type PrimitiveProps = {
   /**
    * Padding around children.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
@@ -185,71 +184,111 @@ export type PrimitiveProps = {
   gridColumn?: ResponsiveProp<string>;
 };
 
-export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
-  "padding",
-  "paddingInline",
-  "paddingBlock",
-  "margin",
-  "marginInline",
-  "marginBlock",
-  "width",
-  "minWidth",
-  "maxWidth",
-  "height",
-  "minHeight",
-  "maxHeight",
-  "position",
-  "inset",
-  "top",
-  "right",
-  "bottom",
-  "left",
-  "overflow",
-  "overflowX",
-  "overflowY",
-  "flexBasis",
-  "flexGrow",
-  "flexShrink",
-  "gridColumn",
-];
+/**
+ * `Record<keyof PrimitiveProps, true>` forces this object to be updated
+ * whenever a key is added to or removed from `PrimitiveProps` — TypeScript
+ * errors on a missing or unknown property, unlike a plain
+ * `(keyof PrimitiveProps)[]` literal, which happily compiles even if it
+ * omits or misspells a key.
+ */
+const PRIMITIVE_PROPS_MAP: Record<keyof PrimitiveProps, true> = {
+  padding: true,
+  paddingInline: true,
+  paddingBlock: true,
+  margin: true,
+  marginInline: true,
+  marginBlock: true,
+  width: true,
+  minWidth: true,
+  maxWidth: true,
+  height: true,
+  minHeight: true,
+  maxHeight: true,
+  position: true,
+  inset: true,
+  top: true,
+  right: true,
+  bottom: true,
+  left: true,
+  overflow: true,
+  overflowX: true,
+  overflowY: true,
+  flexBasis: true,
+  flexShrink: true,
+  flexGrow: true,
+  gridColumn: true,
+};
 
-interface BasePrimitiveProps extends PrimitiveProps {
-  children: React.ReactElement;
-  /**
-   * @private Hides prop from documentation
-   */
-  className?: string;
-}
+export const PRIMITIVE_PROPS = Object.keys(
+  PRIMITIVE_PROPS_MAP,
+) as (keyof PrimitiveProps)[];
 
-export const BasePrimitive = ({
-  children,
-  className,
-  padding,
-  paddingInline,
-  paddingBlock,
-  margin,
-  marginInline,
-  marginBlock,
-  width,
-  minWidth,
-  maxWidth,
-  height,
-  minHeight,
-  maxHeight,
-  position,
-  inset,
-  top,
-  right,
-  left,
-  bottom,
-  overflow,
-  overflowX,
-  overflowY,
-  flexBasis,
-  flexGrow,
-  flexShrink,
-  gridColumn,
-}: BasePrimitiveProps) => {
+/**
+ * Result of `useBasePrimitiveProps` when none of the `PrimitiveProps` are set.
+ * Kept as a stable module-level reference so unrelated Box/Stack/HGrid renders
+ * don't allocate a new `style`/`className` pair on every render.
+ */
+const EMPTY_BASE_PRIMITIVE_PROPS: {
+  style: React.CSSProperties;
+  className: string;
+} = { style: {}, className: "" };
+
+/**
+ * Computes the `style` and `className` contributed by `PrimitiveProps`
+ * (padding, margin, width, position, overflow, flex, grid-column, etc).
+ *
+ * Returns plain data instead of wrapping/cloning the rendered element, so
+ * callers can merge it directly into their own `style`/`className` without
+ * paying for an extra forced `Slot` clone on every render — which previously
+ * happened unconditionally, even when no `PrimitiveProps` were set.
+ *
+ * @example
+ * const { style: primitiveStyle, className: primitiveClassName } =
+ *   useBasePrimitiveProps(rest);
+ *
+ * return (
+ *   <Comp
+ *     style={{ ...primitiveStyle, ...ownStyle }}
+ *     className={cl(primitiveClassName, "aksel-box", ownClassName)}
+ *   />
+ * );
+ */
+function useBasePrimitiveProps(props: PrimitiveProps): {
+  style: React.CSSProperties;
+  className: string;
+} {
+  if (PRIMITIVE_PROPS.every((key) => props[key] === undefined)) {
+    return EMPTY_BASE_PRIMITIVE_PROPS;
+  }
+
+  const {
+    padding,
+    paddingInline,
+    paddingBlock,
+    margin,
+    marginInline,
+    marginBlock,
+    width,
+    minWidth,
+    maxWidth,
+    height,
+    minHeight,
+    maxHeight,
+    position,
+    inset,
+    top,
+    right,
+    left,
+    bottom,
+    overflow,
+    overflowX,
+    overflowY,
+    flexBasis,
+    flexGrow,
+    flexShrink,
+    gridColumn,
+  } = props;
+
   const style: React.CSSProperties = {
     /* Padding */
     ...getResponsiveProps("r", "p", "space", padding),
@@ -285,41 +324,36 @@ export const BasePrimitive = ({
     ...getResponsiveValue("r", "grid-column", gridColumn),
   };
 
-  return (
-    <Slot
-      className={cl({
-        className,
-        "aksel-r-p": padding,
-        "aksel-r-pi": paddingInline,
-        "aksel-r-pb": paddingBlock,
-        "aksel-r-m": margin,
-        "aksel-r-mi": marginInline,
-        "aksel-r-mb": marginBlock,
-        "aksel-r-w": width,
-        "aksel-r-minw": minWidth,
-        "aksel-r-maxw": maxWidth,
-        "aksel-r-h": height,
-        "aksel-r-minh": minHeight,
-        "aksel-r-maxh": maxHeight,
-        "aksel-r-position": position,
-        "aksel-r-inset": inset,
-        "aksel-r-top": top,
-        "aksel-r-right": right,
-        "aksel-r-bottom": bottom,
-        "aksel-r-left": left,
-        "aksel-r-overflow": overflow,
-        "aksel-r-overflowx": overflowX,
-        "aksel-r-overflowy": overflowY,
-        "aksel-r-flex-basis": flexBasis,
-        "aksel-r-flex-grow": flexGrow,
-        "aksel-r-flex-shrink": flexShrink,
-        "aksel-r-grid-column": gridColumn,
-      })}
-      style={style}
-    >
-      {children}
-    </Slot>
-  );
-};
+  const className = cl({
+    "aksel-r-p": padding,
+    "aksel-r-pi": paddingInline,
+    "aksel-r-pb": paddingBlock,
+    "aksel-r-m": margin,
+    "aksel-r-mi": marginInline,
+    "aksel-r-mb": marginBlock,
+    "aksel-r-w": width,
+    "aksel-r-minw": minWidth,
+    "aksel-r-maxw": maxWidth,
+    "aksel-r-h": height,
+    "aksel-r-minh": minHeight,
+    "aksel-r-maxh": maxHeight,
+    "aksel-r-position": position,
+    "aksel-r-inset": inset,
+    "aksel-r-top": top,
+    "aksel-r-right": right,
+    "aksel-r-bottom": bottom,
+    "aksel-r-left": left,
+    "aksel-r-overflow": overflow,
+    "aksel-r-overflowx": overflowX,
+    "aksel-r-overflowy": overflowY,
+    "aksel-r-flex-basis": flexBasis,
+    "aksel-r-flex-grow": flexGrow,
+    "aksel-r-flex-shrink": flexShrink,
+    "aksel-r-grid-column": gridColumn,
+  });
 
-export default BasePrimitive;
+  return { style, className };
+}
+
+export { useBasePrimitiveProps };
+export type { PrimitiveProps };

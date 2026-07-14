@@ -3,9 +3,10 @@ import type { OverridableComponent } from "../../utils-external";
 import { omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import BasePrimitive, {
+import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
+  useBasePrimitiveProps,
 } from "../base/BasePrimitive";
 import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
@@ -83,7 +84,11 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const { style: primitiveStyle, className: primitiveClassName } =
+        useBasePrimitiveProps(rest);
+
       const style: React.CSSProperties = {
+        ...primitiveStyle,
         ..._style,
         ...getResponsiveProps(`stack`, "gap", "space", gap),
         ...getResponsiveValue(`stack`, "direction", direction),
@@ -94,24 +99,22 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       const Comp = asChild ? Slot : Component;
 
       return (
-        <BasePrimitive {...rest}>
-          <Comp
-            {...omit(rest, PRIMITIVE_PROPS)}
-            ref={ref}
-            style={style}
-            className={cl("aksel-stack", className, {
-              "aksel-vstack": direction === "column",
-              "aksel-hstack": direction === "row",
-              "aksel-stack-gap": gap,
-              "aksel-stack-align": align,
-              "aksel-stack-justify": justify,
-              "aksel-stack-direction": direction,
-              "aksel-stack-wrap": wrap,
-            })}
-          >
-            {children}
-          </Comp>
-        </BasePrimitive>
+        <Comp
+          {...omit(rest, PRIMITIVE_PROPS)}
+          ref={ref}
+          style={style}
+          className={cl(primitiveClassName, "aksel-stack", className, {
+            "aksel-vstack": direction === "column",
+            "aksel-hstack": direction === "row",
+            "aksel-stack-gap": gap,
+            "aksel-stack-align": align,
+            "aksel-stack-justify": justify,
+            "aksel-stack-direction": direction,
+            "aksel-stack-wrap": wrap,
+          })}
+        >
+          {children}
+        </Comp>
       );
     },
   );

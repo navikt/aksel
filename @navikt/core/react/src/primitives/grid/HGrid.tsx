@@ -2,9 +2,10 @@ import React, { forwardRef } from "react";
 import { type OverridableComponent, omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import BasePrimitive, {
+import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
+  useBasePrimitiveProps,
 } from "../base/BasePrimitive";
 import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
@@ -77,7 +78,11 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const { style: primitiveStyle, className: primitiveClassName } =
+        useBasePrimitiveProps(rest);
+
       const styles: React.CSSProperties = {
+        ...primitiveStyle,
         ...style,
         "--__axc-hgrid-align": align,
         ...getResponsiveProps(`hgrid`, "gap", "space", gap),
@@ -87,19 +92,17 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       const Comp = asChild ? Slot : Component;
 
       return (
-        <BasePrimitive {...rest}>
-          <Comp
-            {...omit(rest, PRIMITIVE_PROPS)}
-            ref={ref}
-            className={cl("aksel-hgrid", className, {
-              "aksel-hgrid-gap": gap,
-              "aksel-hgrid-align": align,
-            })}
-            style={styles}
-          >
-            {children}
-          </Comp>
-        </BasePrimitive>
+        <Comp
+          {...omit(rest, PRIMITIVE_PROPS)}
+          ref={ref}
+          className={cl(primitiveClassName, "aksel-hgrid", className, {
+            "aksel-hgrid-gap": gap,
+            "aksel-hgrid-align": align,
+          })}
+          style={styles}
+        >
+          {children}
+        </Comp>
       );
     },
   );
