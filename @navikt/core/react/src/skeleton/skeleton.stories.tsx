@@ -1,8 +1,8 @@
 import React from "react";
 import { Skeleton } from ".";
-import { Alert } from "../alert";
 import { Button } from "../button";
 import { Checkbox } from "../form/checkbox";
+import { Alert } from "../legacy/alert";
 import { BodyLong, Heading } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 

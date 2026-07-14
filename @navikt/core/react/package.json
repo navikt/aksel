@@ -111,12 +111,12 @@
     },
     "./Alert": {
       "import": {
-        "types": "./esm/alert/index.d.ts",
-        "default": "./esm/alert/index.js"
+        "types": "./esm/legacy/alert/index.d.ts",
+        "default": "./esm/legacy/alert/index.js"
       },
       "require": {
-        "types": "./cjs/alert/index.d.ts",
-        "default": "./cjs/alert/index.js"
+        "types": "./cjs/legacy/alert/index.d.ts",
+        "default": "./cjs/legacy/alert/index.js"
       }
     },
     "./Button": {
@@ -311,12 +311,12 @@
     },
     "./LinkPanel": {
       "import": {
-        "types": "./esm/link-panel/index.d.ts",
-        "default": "./esm/link-panel/index.js"
+        "types": "./esm/legacy/link-panel/index.d.ts",
+        "default": "./esm/legacy/link-panel/index.js"
       },
       "require": {
-        "types": "./cjs/link-panel/index.d.ts",
-        "default": "./cjs/link-panel/index.js"
+        "types": "./cjs/legacy/link-panel/index.d.ts",
+        "default": "./cjs/legacy/link-panel/index.js"
       }
     },
     "./List": {
@@ -431,12 +431,12 @@
     },
     "./Stepper": {
       "import": {
-        "types": "./esm/stepper/index.d.ts",
-        "default": "./esm/stepper/index.js"
+        "types": "./esm/legacy/stepper/index.d.ts",
+        "default": "./esm/legacy/stepper/index.js"
       },
       "require": {
-        "types": "./cjs/stepper/index.d.ts",
-        "default": "./cjs/stepper/index.js"
+        "types": "./cjs/legacy/stepper/index.d.ts",
+        "default": "./cjs/legacy/stepper/index.js"
       }
     },
     "./Table": {
@@ -551,12 +551,12 @@
     },
     "./ConfirmationPanel": {
       "import": {
-        "types": "./esm/form/confirmation-panel/index.d.ts",
-        "default": "./esm/form/confirmation-panel/index.js"
+        "types": "./esm/legacy/confirmation-panel/index.d.ts",
+        "default": "./esm/legacy/confirmation-panel/index.js"
       },
       "require": {
-        "types": "./cjs/form/confirmation-panel/index.d.ts",
-        "default": "./cjs/form/confirmation-panel/index.js"
+        "types": "./cjs/legacy/confirmation-panel/index.d.ts",
+        "default": "./cjs/legacy/confirmation-panel/index.js"
       }
     },
     "./ErrorSummary": {

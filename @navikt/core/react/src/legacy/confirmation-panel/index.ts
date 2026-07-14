@@ -1,5 +1,5 @@
 "use client";
 export {
-  default as ConfirmationPanel,
+  ConfirmationPanel,
   type ConfirmationPanelProps,
 } from "./ConfirmationPanel";

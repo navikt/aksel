@@ -1,4 +1,4 @@
-import type { ComponentMetadata } from "../utils/types/metadata";
+import type { ComponentMetadata } from "../../utils/types/metadata";
 import { Stepper, StepperStep } from "./index";
 
 const metadata: ComponentMetadata = {

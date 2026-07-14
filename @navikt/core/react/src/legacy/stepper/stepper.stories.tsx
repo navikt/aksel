@@ -1,11 +1,11 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { BodyLong } from "../typography";
-import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
+import { BodyLong } from "../../typography";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import Stepper from "./Stepper";
 
 const meta: Meta<typeof Stepper> = {
-  title: "ds-react/Stepper",
+  title: "ds-react/Legacy/Stepper",
   component: Stepper,
   parameters: {
     chromatic: { disable: true },

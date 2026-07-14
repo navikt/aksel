@@ -1,7 +1,7 @@
 "use client";
 export { Accordion, type AccordionProps } from "./accordion";
 export { ActionMenu, type ActionMenuProps } from "./action-menu";
-export { Alert, type AlertProps } from "./alert";
+export { Alert, type AlertProps } from "./legacy/alert";
 export { Button, type ButtonProps } from "./button";
 export { Chat, type ChatProps } from "./chat";
 export { Chips, type ChipsProps } from "./chips";
@@ -64,7 +64,7 @@ export { ProgressBar, type ProgressBarProps } from "./progress-bar";
 export { Provider, type ProviderProps } from "./provider";
 export { ReadMore, type ReadMoreProps } from "./read-more";
 export { Skeleton, type SkeletonProps } from "./skeleton";
-export { Stepper, type StepperProps } from "./stepper";
+export { Stepper, type StepperProps } from "./legacy/stepper";
 export {
   Table,
   type BodyProps,
@@ -124,7 +124,7 @@ export { UNSAFE_Combobox, type ComboboxProps } from "./form/combobox";
 export {
   ConfirmationPanel,
   type ConfirmationPanelProps,
-} from "./form/confirmation-panel";
+} from "./legacy/confirmation-panel";
 export { ErrorSummary, type ErrorSummaryProps } from "./form/error-summary";
 export { Fieldset, type FieldsetProps } from "./form/fieldset";
 export {
@@ -210,5 +210,5 @@ export { Theme, type ThemeProps } from "./theme";
 /**
  * @deprecated
  */
-export { LinkPanel, type LinkPanelProps } from "./link-panel";
+export { LinkPanel, type LinkPanelProps } from "./legacy/link-panel";
 export { Panel, type PanelProps } from "./panel";

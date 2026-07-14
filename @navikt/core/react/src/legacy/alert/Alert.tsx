@@ -6,11 +6,11 @@ import {
   XMarkIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
-import { Button } from "../button";
-import type { AkselColor } from "../types";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
+import { Button } from "../../button";
+import type { AkselColor } from "../../types";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

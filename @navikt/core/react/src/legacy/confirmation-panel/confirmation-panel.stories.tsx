@@ -5,7 +5,7 @@ import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic
 import { ConfirmationPanel } from "./index";
 
 export default {
-  title: "ds-react/ConfirmationPanel",
+  title: "ds-react/Legacy/ConfirmationPanel",
   component: ConfirmationPanel,
   argTypes: {
     size: {

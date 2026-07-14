@@ -1,10 +1,10 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
-import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import LinkPanel from "./LinkPanel";
 
 export default {
-  title: "ds-react/LinkPanel",
+  title: "ds-react/Legacy/LinkPanel",
   component: LinkPanel,
   parameters: { chromatic: { disable: true } },
 } satisfies Meta<typeof LinkPanel>;

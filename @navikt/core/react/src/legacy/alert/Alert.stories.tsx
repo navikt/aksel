@@ -1,13 +1,13 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Link } from "../link";
-import { VStack } from "../primitives/stack";
-import { BodyLong, Heading } from "../typography";
-import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import Alert, { type AlertProps } from "./Alert";
+import { Alert, type AlertProps } from ".";
+import { Link } from "../../link";
+import { VStack } from "../../primitives/stack";
+import { BodyLong, Heading } from "../../typography";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 
 const meta: Meta<typeof Alert> = {
-  title: "ds-react/Alert/Legacy",
+  title: "ds-react/Legacy/Alert",
   component: Alert,
   parameters: {
     chromatic: { disable: true },
