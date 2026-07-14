@@ -184,13 +184,6 @@ type PrimitiveProps = {
   gridColumn?: ResponsiveProp<string>;
 };
 
-/**
- * `Record<keyof PrimitiveProps, true>` forces this object to be updated
- * whenever a key is added to or removed from `PrimitiveProps` — TypeScript
- * errors on a missing or unknown property, unlike a plain
- * `(keyof PrimitiveProps)[]` literal, which happily compiles even if it
- * omits or misspells a key.
- */
 const PRIMITIVE_PROPS_MAP: Record<keyof PrimitiveProps, true> = {
   padding: true,
   paddingInline: true,
@@ -236,11 +229,6 @@ const EMPTY_BASE_PRIMITIVE_PROPS: {
 /**
  * Computes the `style` and `className` contributed by `PrimitiveProps`
  * (padding, margin, width, position, overflow, flex, grid-column, etc).
- *
- * Returns plain data instead of wrapping/cloning the rendered element, so
- * callers can merge it directly into their own `style`/`className` without
- * paying for an extra forced `Slot` clone on every render — which previously
- * happened unconditionally, even when no `PrimitiveProps` were set.
  *
  * @example
  * const { style: primitiveStyle, className: primitiveClassName } =
