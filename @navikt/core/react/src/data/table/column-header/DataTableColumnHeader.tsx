@@ -105,7 +105,14 @@ const DataTableColumnHeader = forwardRef<
         ref={mergedRef}
         className={cl("aksel-data-table__column-header", className)}
         data-sortable={canSort}
-        style={{ ...style, width: resizeResult.width }}
+        style={{
+          ...style,
+          // Numeric widths are root-relative (see useTableColumnResize). String widths (e.g. "300px", "100%") are passed through as-is.
+          width:
+            typeof resizeResult.width === "number"
+              ? `${resizeResult.width / 16}rem`
+              : resizeResult.width,
+        }}
         aria-sort={canSort ? getAriaSort(sortDirection) : undefined}
         cellType={cellType}
         aria-labelledby={contentId} // Avoids VO announcing "Endre bredde" when navigating horizontally in tbody
