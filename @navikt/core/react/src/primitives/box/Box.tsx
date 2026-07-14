@@ -69,6 +69,17 @@ type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
+/* const Primitive = new Proxy({}, {
+  get: (_, tag: string) => forwardRef((props: any, ref) => {
+    const { asChild, ...rest } = props;
+    const Comp = asChild ? Slot : tag;
+    return <Comp {...rest} ref={ref} />;
+  }),
+}) as { [K in keyof JSX.IntrinsicElements]: React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<JSX.IntrinsicElements[K] & { asChild?: boolean }> &
+    React.RefAttributes<HTMLElement>
+>; }; */
+
 const BoxRoot: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
   (
     {
@@ -184,4 +195,4 @@ const BoxNew = BoxRoot;
 type BoxNewProps = BoxProps;
 
 export { Box, BoxNew };
-export type { BoxProps, BoxNewProps };
+export type { BoxNewProps, BoxProps };
