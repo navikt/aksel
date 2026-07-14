@@ -3,12 +3,12 @@ import type { OverridableComponent } from "../../utils-external";
 import { omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
   useBasePrimitiveProps,
 } from "../base/BasePrimitive";
-import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -64,7 +64,7 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
     "row" | "column" | "row-reverse" | "column-reverse"
   >;
 } & PrimitiveProps &
-  PrimitiveAsChildProps;
+  AsChildProps;
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
   forwardRef(

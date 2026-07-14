@@ -14,10 +14,15 @@ export type AsChildProps =
        * <MergedComponent data-prop data-child />
        */
       asChild: true;
+      /**
+       * Implements [OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent)
+       *
+       * When using asChild, the `as` prop is not allowed as it would have no effect.
+       */
       as?: never;
     }
   | {
-      children: React.ReactNode;
+      children?: React.ReactNode;
       /**
        * Renders the component and its child as a single element,
        * merging the props of the component with the props of the child.
