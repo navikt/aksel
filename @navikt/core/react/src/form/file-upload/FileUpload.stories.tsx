@@ -15,13 +15,13 @@ import type {
 import {
   States as DropzoneStates,
   Translation as DropzoneTranslation,
-} from "./file-upload-dropzone.stories";
+} from "./FileUploadDropzone.stories";
 import {
   Description as ItemDescription,
   Download as ItemDownload,
   Icons as ItemIcons,
   States as ItemStates,
-} from "./file-upload-item.stories";
+} from "./FileUploadItem.stories";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
