@@ -3,6 +3,8 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "types": ["vitest/globals"]
-  }
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["vitest/globals", "@types/node"]
+  },
+  "include": ["./src"]
 }

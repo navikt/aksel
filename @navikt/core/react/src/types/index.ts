@@ -1,1 +1,1 @@
-export { AkselColor, CustomAkselColor } from "./theme";
+export type { AkselColor, CustomAkselColor } from "./theme";
