@@ -10,12 +10,12 @@ import type {
 import { type OverridableComponent, omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
   useBasePrimitiveProps,
 } from "../base/BasePrimitive";
-import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import type {
   BorderRadiusScale,
@@ -68,7 +68,7 @@ type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    */
   shadow?: AkselShadowToken;
 } & PrimitiveProps &
-  PrimitiveAsChildProps;
+  AsChildProps;
 
 /* const Primitive = new Proxy({}, {
   get: (_, tag: string) => forwardRef((props: any, ref) => {

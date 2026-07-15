@@ -2,12 +2,12 @@ import React, { forwardRef } from "react";
 import { type OverridableComponent, omit } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
   useBasePrimitiveProps,
 } from "../base/BasePrimitive";
-import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -36,7 +36,7 @@ export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
    */
   align?: "start" | "center" | "end";
 } & PrimitiveProps &
-  PrimitiveAsChildProps;
+  AsChildProps;
 /**
  * Horizontal Grid Primitive with dynamic columns and gap based on breakpoints.
  *
