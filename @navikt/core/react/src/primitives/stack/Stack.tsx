@@ -1,15 +1,22 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import type { OverridableComponent } from "../../utils-external";
 import { omit } from "../../utils-external";
-import { Slot } from "../../utils/components/slot/Slot";
-import { cl } from "../../utils/helpers";
-import BasePrimitive, {
+import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
-} from "../base/BasePrimitive";
-import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
-import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
-import type { ResponsiveProp, SpacingScale } from "../utilities/types";
+  useBasePrimitiveProps,
+} from "../../utils/components/base-primitive/BasePrimitive";
+import {
+  getResponsiveProps,
+  getResponsiveValue,
+} from "../../utils/components/base-primitive/helpers/css";
+import type {
+  ResponsiveProp,
+  SpacingScale,
+} from "../../utils/components/base-primitive/helpers/types";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
   /**
@@ -63,7 +70,7 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
     "row" | "column" | "row-reverse" | "column-reverse"
   >;
 } & PrimitiveProps &
-  PrimitiveAsChildProps;
+  AsChildProps;
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
   forwardRef(
@@ -83,7 +90,11 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const { style: primitiveStyle, className: primitiveClassName } =
+        useBasePrimitiveProps(rest);
+
       const style: React.CSSProperties = {
+        ...primitiveStyle,
         ..._style,
         ...getResponsiveProps(`stack`, "gap", "space", gap),
         ...getResponsiveValue(`stack`, "direction", direction),
@@ -94,24 +105,22 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       const Comp = asChild ? Slot : Component;
 
       return (
-        <BasePrimitive {...rest}>
-          <Comp
-            {...omit(rest, PRIMITIVE_PROPS)}
-            ref={ref}
-            style={style}
-            className={cl("aksel-stack", className, {
-              "aksel-vstack": direction === "column",
-              "aksel-hstack": direction === "row",
-              "aksel-stack-gap": gap,
-              "aksel-stack-align": align,
-              "aksel-stack-justify": justify,
-              "aksel-stack-direction": direction,
-              "aksel-stack-wrap": wrap,
-            })}
-          >
-            {children}
-          </Comp>
-        </BasePrimitive>
+        <Comp
+          {...omit(rest, PRIMITIVE_PROPS)}
+          ref={ref}
+          style={style}
+          className={cl(primitiveClassName, "aksel-stack", className, {
+            "aksel-vstack": direction === "column",
+            "aksel-hstack": direction === "row",
+            "aksel-stack-gap": gap,
+            "aksel-stack-align": align,
+            "aksel-stack-justify": justify,
+            "aksel-stack-direction": direction,
+            "aksel-stack-wrap": wrap,
+          })}
+        >
+          {children}
+        </Comp>
       );
     },
   );
