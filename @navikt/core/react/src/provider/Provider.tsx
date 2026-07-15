@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import type {
   PartialTranslations,
   Translations,
@@ -66,14 +66,23 @@ export const Provider = ({
   translations,
 }: ProviderProps) => {
   const parentContext = useProvider();
+  const value = useMemo(
+    () => ({
+      rootElement: rootElement || parentContext.rootElement,
+      locale: locale || parentContext.locale || nb,
+      translations: translations || parentContext.translations,
+    }),
+    [
+      rootElement,
+      locale,
+      translations,
+      parentContext.rootElement,
+      parentContext.locale,
+      parentContext.translations,
+    ],
+  );
   return (
-    <ProviderContext.Provider
-      value={{
-        rootElement: rootElement || parentContext.rootElement,
-        locale: locale || parentContext.locale || nb,
-        translations: translations || parentContext.translations,
-      }}
-    >
+    <ProviderContext.Provider value={value}>
       {children}
     </ProviderContext.Provider>
   );
