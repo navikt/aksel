@@ -3,10 +3,8 @@
   "compilerOptions": {
     "ignoreDeprecations": "6.0",
     "rootDir": "./src",
-    "outDir": "./cjs",
     "lib": ["es2020", "dom", "dom.iterable"],
     "moduleResolution": "node",
-    "module": "commonjs",
     "noImplicitAny": false,
     "declaration": true,
     "sourceMap": true,
@@ -15,6 +13,7 @@
   "include": ["./src"],
   "exclude": [
     "./src/**/*.test.ts",
+    "./src/**/*.bench.ts",
     "./src/**/*.test.tsx",
     "./src/**/*.test-d.ts",
     "./src/**/*.stories.tsx",
