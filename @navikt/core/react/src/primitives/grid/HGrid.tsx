@@ -1,15 +1,21 @@
 import React, { forwardRef } from "react";
 import { type OverridableComponent, omit } from "../../utils-external";
-import { Slot } from "../../utils/components/slot/Slot";
-import { cl } from "../../utils/helpers";
-import type { AsChildProps } from "../../utils/types";
 import {
   PRIMITIVE_PROPS,
   type PrimitiveProps,
   useBasePrimitiveProps,
-} from "../base/BasePrimitive";
-import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
-import type { ResponsiveProp, SpacingScale } from "../utilities/types";
+} from "../../utils/components/base-primitive/BasePrimitive";
+import {
+  getResponsiveProps,
+  getResponsiveValue,
+} from "../../utils/components/base-primitive/helpers/css";
+import type {
+  ResponsiveProp,
+  SpacingScale,
+} from "../../utils/components/base-primitive/helpers/types";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 
 export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
   /**

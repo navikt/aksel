@@ -1,8 +1,11 @@
 import React, { forwardRef } from "react";
+import { getResponsiveProps } from "../../utils/components/base-primitive/helpers/css";
+import type {
+  ResponsiveProp,
+  SpacingScale,
+} from "../../utils/components/base-primitive/helpers/types";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import { getResponsiveProps } from "../utilities/css";
-import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type BleedSpacingInline = "full" | SpacingScale;
 export type BleedSpacingBlock = SpacingScale;

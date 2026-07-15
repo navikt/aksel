@@ -1,7 +1,7 @@
 import React from "react";
-import { cl } from "../../utils/helpers";
-import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
-import type { ResponsiveProp, SpacingScale } from "../utilities/types";
+import { cl } from "../../helpers";
+import { getResponsiveProps, getResponsiveValue } from "./helpers/css";
+import type { ResponsiveProp, SpacingScale } from "./helpers/types";
 
 type PrimitiveProps = {
   /**
