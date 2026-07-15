@@ -7,7 +7,7 @@ const currentDir = path.dirname(fileURLToPath(import.meta.url));
 /** Absolute path to the `@navikt/core/react` package root. */
 const packageRoot = path.resolve(currentDir, "../..");
 
-const tsconfigPath = path.resolve(packageRoot, "tsconfig.esm.json");
+const tsconfigPath = path.resolve(packageRoot, "tsconfig.json");
 
 const metadataOutputPath = path.resolve(packageRoot, "_metadata.json");
 
