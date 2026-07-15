@@ -7,7 +7,7 @@ import {
   Expandable,
   ExpandableLarge,
   ExpandableSmall,
-} from "./table-2-expandable.stories";
+} from "./Table2Expandable.stories";
 
 export default {
   title: "ds-react/Table",
