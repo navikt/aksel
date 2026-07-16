@@ -110,7 +110,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       () =>
         childArray
           .filter((c: any) => c?.type?.componentType === "pin")
-          .map((x) => () => x),
+          .map((pinChild: any) => ({
+            key: String(pinChild.key ?? pinChild.props.date?.toISOString?.()),
+            PinChild: () => pinChild,
+          })),
       [childArray],
     );
 
@@ -185,8 +188,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             <div className="aksel-timeline">
               <AxisLabels templates={axisLabelTemplates} />
 
-              {pins.map((PinChild, i) => (
-                <PinChild key={`pin-${i}`} />
+              {pins.map(({ key, PinChild }) => (
+                <PinChild key={key} />
               ))}
 
               {processedRows.map((row, i) => {

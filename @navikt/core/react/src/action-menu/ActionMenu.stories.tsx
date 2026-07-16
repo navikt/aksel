@@ -931,9 +931,9 @@ export const InTableDemo = () => (
           id: "24082",
           status: "Mottatt",
         },
-      ].map(({ id, status }, i) => {
+      ].map(({ id, status }) => {
         return (
-          <Table.Row key={i + status} shadeOnHover={false}>
+          <Table.Row key={id} shadeOnHover={false}>
             <Table.HeaderCell scope="row">{id}</Table.HeaderCell>
             <Table.DataCell>{status}</Table.DataCell>
             <Table.DataCell align="right">

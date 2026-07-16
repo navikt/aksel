@@ -102,6 +102,7 @@ export const Stepper: StepperComponent = forwardRef<
               className="aksel-stepper__item"
               data-interactive={isInteractive}
               data-color={isInteractive ? undefined : "neutral"}
+              // biome-ignore lint/suspicious/noArrayIndexKey: Unsure how to fix gracefully
               key={index + (children?.toString?.() ?? "")}
             >
               <span className="aksel-stepper__line aksel-stepper__line--1" />

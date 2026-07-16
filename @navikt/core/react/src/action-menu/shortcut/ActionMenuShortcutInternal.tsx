@@ -14,8 +14,11 @@ const ActionMenuShortcut = ({ children }: ShortcutProps) => {
 
   return (
     <ActionMenuMarker placement="right">
-      {parsed.map((char, index) => (
-        <span key={char + index} className="aksel-action-menu__shortcut">
+      {parsed.map((char) => (
+        <span
+          key={`${children}-${char}`}
+          className="aksel-action-menu__shortcut"
+        >
           {char}
         </span>
       ))}

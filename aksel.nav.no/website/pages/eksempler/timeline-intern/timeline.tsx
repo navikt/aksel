@@ -14,9 +14,9 @@ const Example = () => {
     <Box marginInline="auto" maxWidth="800px">
       <Timeline>
         <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
-          {person.map((p, i) => (
+          {person.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -28,9 +28,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -42,9 +42,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus B" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}

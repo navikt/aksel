@@ -20,9 +20,9 @@ const Example = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {sortData.map(({ name, fnr, start }, i) => {
+          {sortData.map(({ name, fnr, start }) => {
             return (
-              <Table.Row key={i + fnr}>
+              <Table.Row key={fnr}>
                 <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
                 <Table.DataCell>{fnr}</Table.DataCell>
                 <Table.DataCell>{format(new Date(start))}</Table.DataCell>

@@ -39,9 +39,9 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ name, fnr, start }, i) => {
+        {data.map(({ name, fnr, start }) => {
           return (
-            <Table.Row key={i + fnr} selected={selectedRows.includes(fnr)}>
+            <Table.Row key={fnr} selected={selectedRows.includes(fnr)}>
               <Table.DataCell>
                 <Checkbox
                   hideLabel

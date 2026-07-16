@@ -179,18 +179,20 @@ function Placeholders({
 }) {
   return (
     <>
-      {Array.from({ length: count }, (_, i) => (
-        <div
-          key={i}
-          style={{
-            backgroundColor: color ?? "var(--ax-bg-brand-blue-strong)",
-            height: children ? "" : "3rem",
-            width: children ? "" : "3rem",
-          }}
-        >
-          {children}
-        </div>
-      ))}
+      {Array.from({ length: count }, (_, itemNumber) => itemNumber + 1).map(
+        (itemNumber) => (
+          <div
+            key={itemNumber}
+            style={{
+              backgroundColor: color ?? "var(--ax-bg-brand-blue-strong)",
+              height: children ? "" : "3rem",
+              width: children ? "" : "3rem",
+            }}
+          >
+            {children}
+          </div>
+        ),
+      )}
     </>
   );
 }

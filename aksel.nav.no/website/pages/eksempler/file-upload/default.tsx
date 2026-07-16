@@ -35,10 +35,10 @@ const Example = () => {
             {`Vedlegg (${acceptedFiles.length})`}
           </Heading>
           <VStack as="ul" gap="space-12">
-            {acceptedFiles.map((file, index) => (
+            {acceptedFiles.map((file) => (
               <FileUpload.Item
                 as="li"
-                key={index}
+                key={`${file.file.name}-${file.file.size}-${file.file.lastModified}`}
                 file={file.file}
                 button={{
                   action: "delete",
@@ -55,10 +55,10 @@ const Example = () => {
             Vedlegg med feil
           </Heading>
           <VStack as="ul" gap="space-12">
-            {rejectedFiles.map((rejected, index) => (
+            {rejectedFiles.map((rejected) => (
               <FileUpload.Item
                 as="li"
-                key={index}
+                key={`${rejected.file.name}-${rejected.file.size}-${rejected.file.lastModified}`}
                 file={rejected.file}
                 error={errors[rejected.reasons[0]]}
                 button={{

@@ -99,6 +99,7 @@ function AsciiTree({ right = false }: { right?: boolean }) {
     >
       <pre style={{ lineHeight: "8px", fontSize: "8px" }}>
         {lines.map((line, idx) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
           <span key={idx}>
             {"    "}
             {line}

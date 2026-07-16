@@ -163,7 +163,11 @@ const foodGroups: {
 export const WithLabels = () => (
   <MenuWithAnchor>
     {foodGroups.map((foodGroup, index) => (
-      <Menu.Group key={index}>
+      <Menu.Group
+        key={
+          foodGroup.label ?? foodGroup.foods.map((food) => food.value).join("-")
+        }
+      >
         {foodGroup.label && (
           <div className="label" key={foodGroup.label}>
             {foodGroup.label}

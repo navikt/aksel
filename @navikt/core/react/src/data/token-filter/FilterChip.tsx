@@ -22,7 +22,7 @@ function TokenFilterChips(props: TokenFilterChipsProps) {
     <ul className="aksel-property-filter__chips">
       {tokens.map((token, index) => (
         <TokenFilterChip
-          key={index}
+          key={`${token.propertyKey}-${token.operator}-${token.value}`}
           onRemove={() => removeToken(index)}
           token={token}
           showOperation={index > 0}

@@ -35,11 +35,13 @@ function MetadataSeksjonCode({
               <code>
                 {tokens.map((line, i) => (
                   <div
+                    // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                     key={i}
                     {...getLineProps({ line })}
                     className={styles.propsSeksjonCode}
                   >
                     {line.map((token, key) => (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                       <span key={key} {...getTokenProps({ token })} />
                     ))}
                   </div>

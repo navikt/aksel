@@ -20,9 +20,9 @@ const Example = () => {
           <p>Utbetalt: 12 345 kr</p>
         </Timeline.Pin>
         <Timeline.Row label="Person" icon={<PersonGroupIcon aria-hidden />}>
-          {person.map((p, i) => (
+          {person.map((p) => (
             <Timeline.Period
-              key={i}
+              key={p.id}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -38,9 +38,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={p.id}
               start={p.start}
               end={p.end}
               status={p.status}
