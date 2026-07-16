@@ -125,9 +125,8 @@ const ReactDayPicker = ({
         Day: useCallback(
           (props) => (
             <td
-              {...omit(props, ["day", "modifiers"])}
+              {...omit(props, ["day", "modifiers", "role"])}
               className="rdp-cell"
-              role={undefined}
             />
           ),
           [],
