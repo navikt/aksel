@@ -212,7 +212,7 @@ export const SafeZone: Story = {
     return (
       <div>
         <div
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
           ref={setSafeAnchor}
           data-testid="safe-anchor"
