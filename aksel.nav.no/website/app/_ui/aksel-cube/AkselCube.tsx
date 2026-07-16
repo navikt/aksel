@@ -9,6 +9,7 @@ const Rect = ({ ...props }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
+    role="presentation"
     focusable="false"
     {...props}
   >
@@ -29,6 +30,7 @@ const Skewed = ({ ...props }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
+    role="presentation"
     focusable="false"
     {...props}
   >

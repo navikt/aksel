@@ -38,7 +38,6 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "noSvgWithoutTitle": "off",
         "noNoninteractiveElementToInteractiveRole": "off",
         "useValidAnchor": "off",
         "useButtonType": "off",

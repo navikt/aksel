@@ -10,11 +10,11 @@ export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       focusable={false}
-      role="img"
       className={cl("aksel-help-text__icon", {
         "aksel-help-text__icon--filled": filled,
       })}
       aria-hidden
+      role="presentation"
     >
       <circle
         cx="12"

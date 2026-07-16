@@ -602,6 +602,8 @@ const TickIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="3"
+    aria-hidden
+    role="presentation"
   >
     <path d="M2 20 L12 28 30 4" />
   </svg>
@@ -618,6 +620,8 @@ const CircleIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="6"
+    aria-hidden
+    role="presentation"
   >
     <circle cx="16" cy="16" r="4" />
   </svg>
