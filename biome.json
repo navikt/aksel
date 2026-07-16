@@ -62,7 +62,8 @@
         "useDefaultParameterLast": "off",
         "noUselessElse": "error",
         "useConsistentObjectDefinitions": "error",
-        "useConsistentArrayType": "error"
+        "useConsistentArrayType": "error",
+        "noDescendingSpecificity": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",

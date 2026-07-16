@@ -62,7 +62,7 @@ function validateVersions() {
   }
 
   if (depsOutOfSync.length > 0) {
-    console.log("");
+    console.info("");
 
     if (process.env.CI) {
       const joinedDependencies = depsOutOfSync

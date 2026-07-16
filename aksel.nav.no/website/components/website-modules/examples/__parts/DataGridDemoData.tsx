@@ -10,7 +10,7 @@ import {
   Tag,
   Tooltip,
 } from "@navikt/ds-react";
-import { DataGrid } from "@navikt/ds-react/PREVIEW";
+import type { DataGrid } from "@navikt/ds-react/PREVIEW";
 
 type CaseT = {
   caseId: string;
