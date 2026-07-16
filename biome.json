@@ -46,7 +46,7 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noVar": "off",
+
         "noConsole": {
           "level": "warn",
           "options": {
