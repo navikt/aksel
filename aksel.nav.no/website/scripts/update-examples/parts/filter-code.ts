@@ -109,7 +109,7 @@ async function injectImportedCode(code: string, filePath: string) {
     const regex = new RegExp(`<${identifier} [^/]*/>`, "g");
     code = code.replace(regex, arrowFunctionCode);
   });
-  code += "\n\n" + codeToInject.join("\n\n");
+  code += `\n\n${codeToInject.join("\n\n")}`;
 
   code = code.replace(/\n\nimport /g, "\nimport "); // prune() adds empty line between imports
 

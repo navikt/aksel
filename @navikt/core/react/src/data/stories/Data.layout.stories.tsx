@@ -152,7 +152,7 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
           ? {
               ...col,
               bodyCell: (row: PersonInfo) =>
-                row.message.split(" ").slice(0, 4).join(" ") + ".",
+                `${row.message.split(" ").slice(0, 4).join(" ")}.`,
             }
           : col,
       ),

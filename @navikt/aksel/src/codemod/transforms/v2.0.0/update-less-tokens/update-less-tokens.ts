@@ -8,7 +8,7 @@ export default function transformer(file: FileInfo) {
   tokens.forEach((tok) => {
     const lessToken = translateToken(tok[0], "less");
 
-    const rgx = new RegExp("(\\" + lessToken + ")", "gm");
+    const rgx = new RegExp(`(\\${lessToken})`, "gm");
     src = src.replace(rgx, translateToken(tok[1], "less"));
   });
 

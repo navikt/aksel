@@ -14,4 +14,4 @@ const lines = componentExports.map((key) => {
   return `export * from "${importPath}";`;
 });
 
-fs.writeFileSync("./src/auto-generated-imports.ts", lines.join("\n") + "\n");
+fs.writeFileSync("./src/auto-generated-imports.ts", `${lines.join("\n")}\n`);

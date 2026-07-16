@@ -185,11 +185,11 @@ export function createTokenName(token: TransformedToken) {
    * For pure value tokens, we want to add a prefix to the name to make it more readable in Figma.
    */
   if (isRadiusToken(token)) {
-    return "Radius " + name;
+    return `Radius ${name}`;
   }
 
   if (isSpaceToken(token)) {
-    return "Space " + name;
+    return `Space ${name}`;
   }
 
   return name;
@@ -202,12 +202,10 @@ export function createTokenName(token: TransformedToken) {
  * @see https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes#h_01H9V3QSVH2T1EYNXP7RNXZ8MV
  */
 function createGroupName(group: string): string {
-  return (
-    group
-      .split(".")
-      .map((g) => lodash.startCase(g))
-      .join("/") + "/"
-  );
+  return `${group
+    .split(".")
+    .map((g) => lodash.startCase(g))
+    .join("/")}/`;
 }
 
 function isTokenOfSemanticColorGroup(

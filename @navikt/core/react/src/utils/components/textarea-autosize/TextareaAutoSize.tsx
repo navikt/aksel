@@ -236,7 +236,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
 
     const mainStyle: React.CSSProperties = {
       "--__axc-textarea-height": state.outerHeightStyle
-        ? state.outerHeightStyle + "px"
+        ? `${state.outerHeightStyle}px`
         : "auto",
       // Need a large enough difference to allow scrolling.
       // This prevents infinite rendering loop.
