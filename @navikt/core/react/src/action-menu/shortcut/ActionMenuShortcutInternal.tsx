@@ -16,7 +16,10 @@ const ActionMenuShortcut = ({ children }: ShortcutProps) => {
     <ActionMenuMarker placement="right">
       {parsed.map((char, index) => (
         <span
-          key={`${children}-${index}-${char}`}
+          key={`${children}-${
+            // biome-ignore lint/suspicious/noArrayIndexKey: This is a static list of characters, so using the index as a key is acceptable in this case
+            index
+          }-${char}`}
           className="aksel-action-menu__shortcut"
         >
           {char}
