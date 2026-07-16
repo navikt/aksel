@@ -1,4 +1,4 @@
-import type { ComponentMetadata } from "../utils/types/metadata";
+import type { ComponentMetadata } from "../../utils/types/metadata";
 import { Panel } from "./index";
 
 const metadata: ComponentMetadata = {

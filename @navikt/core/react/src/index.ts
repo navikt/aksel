@@ -211,4 +211,4 @@ export { Theme, type ThemeProps } from "./theme";
  * @deprecated
  */
 export { LinkPanel, type LinkPanelProps } from "./legacy/link-panel";
-export { Panel, type PanelProps } from "./panel";
+export { Panel, type PanelProps } from "./legacy/panel";

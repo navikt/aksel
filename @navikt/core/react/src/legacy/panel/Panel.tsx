@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import type { OverridableComponent } from "../utils-external";
-import { cl } from "../utils/helpers";
+import type { OverridableComponent } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 
 /**
  * @deprecated Use Box with padding and border instead
