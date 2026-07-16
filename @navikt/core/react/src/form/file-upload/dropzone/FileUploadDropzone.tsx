@@ -91,6 +91,7 @@ const FileUploadDropzone = forwardRef<
         </BodyShort>
       )}
       {/** biome-ignore lint/a11y/noStaticElementInteractions: Assistive technologies will use the input within.  */}
+      {/** biome-ignore lint/a11y/useKeyWithClickEvents: Keyboard will access input/button within */}
       <div
         className="aksel-dropzone__area"
         onDragEnter={dropzoneCtx.onDragEnter}

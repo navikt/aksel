@@ -55,6 +55,7 @@ export const InputController = forwardRef<
   return (
     <Floating.Anchor asChild ref={setAnchorRef}>
       {/** biome-ignore lint/a11y/noStaticElementInteractions: Acts as wrapper list-toggle and input */}
+      {/** biome-ignore lint/a11y/useKeyWithClickEvents: key-events are handled by input itself */}
       <div
         className={cl("aksel-combobox__wrapper-inner aksel-text-field__input", {
           "aksel-combobox__wrapper-inner--virtually-unfocused":
