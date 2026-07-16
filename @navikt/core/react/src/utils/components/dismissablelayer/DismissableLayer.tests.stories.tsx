@@ -568,7 +568,7 @@ export const PreventEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>
