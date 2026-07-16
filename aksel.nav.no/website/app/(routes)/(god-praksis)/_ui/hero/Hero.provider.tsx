@@ -117,8 +117,8 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
   }
 
   const customStyles: React.CSSProperties = {
-    "--website-hero-selector-x": animationRef.x + "px",
-    "--website-hero-selector-y": animationRef.y + "px",
+    "--website-hero-selector-x": `${animationRef.x}px`,
+    "--website-hero-selector-y": `${animationRef.y}px`,
     marginBottom: getMargin(),
     transitionTimingFunction: openDialog
       ? "cubic-bezier(0.3, 1, 0.15, 1)"

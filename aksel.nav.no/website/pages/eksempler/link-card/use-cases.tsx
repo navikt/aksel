@@ -79,6 +79,8 @@ function DemoPictogramOne() {
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      role="presentation"
     >
       <g clipPath="url(#clip0_6081_198)">
         <rect
@@ -190,6 +192,8 @@ function DemoPictogramOne() {
 function DemoPictogramTwo() {
   return (
     <svg
+      aria-hidden
+      role="presentation"
       width="96"
       height="96"
       viewBox="0 0 96 96"

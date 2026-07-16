@@ -435,7 +435,9 @@ export const PaddingDemo = () => (
 export const AsChild = () => (
   <VStack gap="space-16">
     <Box borderRadius="8" padding="space-16" asChild>
-      <button onClick={() => alert("clicked")}>Box is now a button</button>
+      <button type="button" onClick={() => alert("clicked")}>
+        Box is now a button
+      </button>
     </Box>
   </VStack>
 );

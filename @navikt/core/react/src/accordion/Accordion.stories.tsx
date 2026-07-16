@@ -56,8 +56,8 @@ export const Controls: Story = {
   render: (props) => {
     return (
       <Accordion {...props}>
-        {[...Array(4)].map((_, y) => (
-          <Item key={y} />
+        {["item-1", "item-2", "item-3", "item-4"].map((itemId) => (
+          <Item key={itemId} />
         ))}
       </Accordion>
     );
@@ -79,8 +79,8 @@ export const DefaultOpen: Story = {
   render: () => {
     return (
       <Accordion>
-        {[...Array(4)].map((_, y) => (
-          <Item key={y} defaultOpen={y === 2} />
+        {["item-1", "item-2", "item-3", "item-4"].map((itemId) => (
+          <Item key={itemId} defaultOpen={itemId === "item-3"} />
         ))}
       </Accordion>
     );
@@ -148,14 +148,14 @@ export const Indent: Story = {
       <div className="colgap">
         <h3>Indent</h3>
         <Accordion indent>
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} defaultOpen />
+          {["indented-1", "indented-2"].map((itemId) => (
+            <Item key={itemId} defaultOpen />
           ))}
         </Accordion>
         <h3>No indent</h3>
         <Accordion indent={false}>
-          {[...Array(2)].map((_, y) => (
-            <Item key={y} defaultOpen />
+          {["no-indent-1", "no-indent-2"].map((itemId) => (
+            <Item key={itemId} defaultOpen />
           ))}
         </Accordion>
       </div>
@@ -165,7 +165,9 @@ export const Indent: Story = {
 
 export const ColorRole: Story = {
   render: () => {
-    const items = [...Array(2)].map((_, i) => <Item key={i} />);
+    const items = ["default-1", "default-2"].map((itemId) => (
+      <Item key={itemId} />
+    ));
     return (
       <div className="colgap">
         <h3>Default</h3>
@@ -173,10 +175,18 @@ export const ColorRole: Story = {
         <h3>Magenta</h3>
         <h4>Magenta top level</h4>
         <div data-color="brand-magenta">
-          <Accordion>{items}</Accordion>
+          <Accordion>
+            {["magenta-top-1", "magenta-top-2"].map((itemId) => (
+              <Item key={itemId} />
+            ))}
+          </Accordion>
         </div>
         <h4>Magenta component level</h4>
-        <Accordion data-color="brand-magenta">{items}</Accordion>
+        <Accordion data-color="brand-magenta">
+          {["magenta-component-1", "magenta-component-2"].map((itemId) => (
+            <Item key={itemId} />
+          ))}
+        </Accordion>
       </div>
     );
   },

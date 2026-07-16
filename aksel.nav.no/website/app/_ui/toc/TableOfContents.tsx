@@ -51,7 +51,6 @@ function TableOfContents({
       <div className={styles.tocAsideContent}>
         <TableOfContentsScroll tocLength={toc.length} />
 
-        {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
           className={`${styles.tocMenuUl} ${styles.hideScrollbar}`}
           id="toc-scroll-wrapper"

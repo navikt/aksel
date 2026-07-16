@@ -224,7 +224,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}

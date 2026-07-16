@@ -52,6 +52,7 @@ const ActionMenuCheckboxItem = forwardRef<
               xmlns="http://www.w3.org/2000/svg"
               className="aksel-action-menu__indicator-icon"
               aria-hidden
+              role="presentation"
             >
               <g className="aksel-action-menu__indicator-icon--unchecked">
                 <rect

@@ -12,15 +12,16 @@ const categoriesMap = new Map<
 const metadata = unParsedMetadata as unknown as Record<string, AkselIcon>;
 
 for (const icon of Object.values(metadata)) {
-  if (!categoriesMap.has(icon.category)) {
-    categoriesMap.set(icon.category, {
+  let entry = categoriesMap.get(icon.category);
+  if (!entry) {
+    entry = {
       category: icon.category,
       subcategories: new Set(),
       iconCount: 0,
-    });
+    };
+    categoriesMap.set(icon.category, entry);
   }
 
-  const entry = categoriesMap.get(icon.category)!;
   entry.subcategories.add(icon.sub_category);
   entry.iconCount++;
 }

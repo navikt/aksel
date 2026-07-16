@@ -64,7 +64,7 @@ export const ChipsToggle: OverridableComponent<
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             focusable={false}
-            role="img"
+            role="presentation"
           >
             {selected ? (
               <path

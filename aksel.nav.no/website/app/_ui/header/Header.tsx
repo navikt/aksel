@@ -45,6 +45,7 @@ async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
               xmlns="http://www.w3.org/2000/svg"
               className={styles.headerLogo}
               aria-hidden
+              role="presentation"
               focusable="false"
             >
               <path

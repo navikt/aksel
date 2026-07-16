@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { usePathname } from "next/navigation";
 import {
-  ComponentType,
+  type ComponentType,
   useEffect,
   useState,
   useSyncExternalStore,

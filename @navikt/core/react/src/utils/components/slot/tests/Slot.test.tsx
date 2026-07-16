@@ -68,7 +68,9 @@ describe("Slot", () => {
     test("Should merge className correctly when Child and Slot has className", async () => {
       render(
         <Slot className="class1">
-          <button className="class2 class2--inline">Button</button>
+          <button type="button" className="class2 class2--inline">
+            Button
+          </button>
         </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual(
@@ -79,7 +81,9 @@ describe("Slot", () => {
     test("Should merge className correctly when Child has className and Slot has undefined className", async () => {
       render(
         <Slot className={undefined}>
-          <button className="class2 class2--inline">Button</button>
+          <button type="button" className="class2 class2--inline">
+            Button
+          </button>
         </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual(
@@ -90,7 +94,9 @@ describe("Slot", () => {
     test("Should merge className correctly when Slot has className and Child has undefined className", async () => {
       render(
         <Slot className="class1">
-          <button className={undefined}>Button</button>
+          <button type="button" className={undefined}>
+            Button
+          </button>
         </Slot>,
       );
       expect(screen.getByRole("button").className).toEqual("class1");

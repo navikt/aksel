@@ -269,6 +269,7 @@ export const Icons: Story = {
               xmlns="http://www.w3.org/2000/svg"
               style={{ transform: "rotate(45deg)" }}
               aria-hidden
+              role="presentation"
             >
               <rect
                 width="24"

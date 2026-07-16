@@ -83,7 +83,7 @@ export const Toggle = () => {
                 : [...selected, y],
             )
           }
-          key={y}
+          key={c}
         >
           {c}
         </Chips.Toggle>
@@ -101,7 +101,7 @@ export const ToggleNoCheckmark = () => {
           selected={selected === y}
           checkmark={false}
           onClick={() => setSelected(y)}
-          key={y}
+          key={c}
         >
           {c}
         </Chips.Toggle>
@@ -113,8 +113,8 @@ export const ToggleNoCheckmark = () => {
 export const Removable = () => {
   return (
     <Chips>
-      {options.map((c, y) => (
-        <Chips.Removable key={y}>{c}</Chips.Removable>
+      {options.map((c) => (
+        <Chips.Removable key={c}>{c}</Chips.Removable>
       ))}
     </Chips>
   );
@@ -125,8 +125,8 @@ export const Medium = (props: any) => {
   return (
     <VStack gap="space-16">
       <Chips>
-        {options.map((c, y) => (
-          <Chips.Removable key={y} {...props}>
+        {options.map((c) => (
+          <Chips.Removable key={c} {...props}>
             {c}
           </Chips.Removable>
         ))}
@@ -143,7 +143,7 @@ export const Medium = (props: any) => {
                   : [...selected, y],
               )
             }
-            key={y}
+            key={c}
           >
             {c}
           </Chips.Toggle>
@@ -158,8 +158,8 @@ export const Small = () => {
   return (
     <div className="colgap">
       <Chips size="small">
-        {options.map((c, y) => (
-          <Chips.Removable key={y}>{c}</Chips.Removable>
+        {options.map((c) => (
+          <Chips.Removable key={c}>{c}</Chips.Removable>
         ))}
       </Chips>
       <Chips size="small">
@@ -173,7 +173,7 @@ export const Small = () => {
                   : [...selected, y],
               )
             }
-            key={y}
+            key={c}
           >
             {c}
           </Chips.Toggle>

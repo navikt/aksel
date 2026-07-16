@@ -250,7 +250,12 @@ export const ColorRole: Story = {
 
 function Illustration() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 54 93"
+      aria-hidden
+      role="presentation"
+    >
       <path
         fill="#e7e5e2"
         d="M14 50.7C15 52.3 17.9 81 26.5 81S39 51.8 39 50.3c-13.2-7.6-25 .4-25 .4z"

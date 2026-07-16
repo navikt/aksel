@@ -43,8 +43,12 @@ function GlobalSearchHitCollection({
         {heading}
       </Heading>
       <ul>
-        {searchHits.map((x, xi) => (
-          <GlobalSearchLink key={xi} hit={x} tag={tag} />
+        {searchHits.map((x) => (
+          <GlobalSearchLink
+            key={`/${x.item.slug}${x.anchor ? `#${x.anchor}` : ""}`}
+            hit={x}
+            tag={tag}
+          />
         ))}
       </ul>
     </div>
@@ -106,7 +110,7 @@ function GlobalSearchLink(props: {
             decoding="sync"
             width="96"
             height="96"
-            alt={hit.item?.heading + " thumbnail"}
+            alt={`${hit.item?.heading} thumbnail`}
             aria-hidden
           />
         )}

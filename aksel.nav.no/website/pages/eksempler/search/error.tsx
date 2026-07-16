@@ -3,13 +3,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form role="search">
+    <search>
       <Search
         label="Søk i alle Nav sine sider"
         variant="secondary"
         error="Søket må starte med xyz"
       />
-    </form>
+    </search>
   );
 };
 

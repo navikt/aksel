@@ -34,7 +34,7 @@ function ChangelogForList({ changelogFor }: ChangelogForListProps) {
           {changelogFor.map((artikkel) => (
             <ListItem key={artikkel.slug}>
               <UmamiLink
-                href={`/${artikkel.slug!}`}
+                href={`/${artikkel.slug ?? ""}`}
                 lenkegruppe="endringslogg-backlink"
                 nativeLink
               >

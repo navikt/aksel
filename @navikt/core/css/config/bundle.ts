@@ -126,7 +126,7 @@ async function bundle() {
       })
       .join("\n");
 
-    parsed = layerDefinition + "\n" + parsed;
+    parsed = `${layerDefinition}\n${parsed}`;
 
     return parsed;
   }
@@ -146,7 +146,7 @@ async function bundle() {
         .filter((line) => line.startsWith("@import"))
         .filter((line) => line.includes(style))
         .join("\n");
-      return layerDefinition + "\n" + parsed;
+      return `${layerDefinition}\n${parsed}`;
     }
 
     await bundleCSS(parser).then((file) => {
@@ -164,7 +164,7 @@ async function bundle() {
       .filter((line) => line.startsWith("@import"))
       .filter((line) => line.includes("form/index.css"))
       .join("\n");
-    return layerDefinition + "\n" + parsed;
+    return `${layerDefinition}\n${parsed}`;
   }
 
   await bundleCSS(rootFormParser).then((file) => {
@@ -181,7 +181,7 @@ async function bundle() {
       .filter((line) => line.startsWith("@import"))
       .filter((line) => line.includes("primitives/index.css"))
       .join("\n");
-    return layerDefinition + "\n" + parsed;
+    return `${layerDefinition}\n${parsed}`;
   }
 
   await bundleCSS(rootPrimitivesParser).then((file) => {
@@ -214,7 +214,7 @@ async function bundle() {
         .split("\n")
         .filter((line) => line === componentLine)
         .join("\n");
-      return layerDefinition + "\n" + parsed;
+      return `${layerDefinition}\n${parsed}`;
     }
 
     await bundleCSS(parser).then((file) => {

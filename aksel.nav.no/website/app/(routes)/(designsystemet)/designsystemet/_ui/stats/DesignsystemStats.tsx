@@ -123,7 +123,8 @@ function formatNumber(num: number): {
 } {
   if (num >= 1_000_000) {
     return { number: `${(num / 1_000_000).toFixed(1)}`, modifier: "M" };
-  } else if (num >= 1_000) {
+  }
+  if (num >= 1_000) {
     return { number: `${(num / 1_000).toFixed(1)}`, modifier: "K" };
   }
   return { number: num.toString(), modifier: "" };

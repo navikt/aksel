@@ -19,7 +19,7 @@ const rowsPerPage = 10;
 const queryString = (obj: Record<string, number | string | undefined>) =>
   Object.keys(obj)
     .filter((key) => obj[key] !== undefined)
-    .map((key) => key + "=" + obj[key])
+    .map((key) => `${key}=${obj[key]}`)
     .join("&");
 
 const updateData = async (url: string) => {

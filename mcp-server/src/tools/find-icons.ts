@@ -42,7 +42,7 @@ const findIconsTool: McpTool<typeof findIconsInputSchema> = {
 
       filtered = filtered
         .filter((icon) => ranking.has(icon.id))
-        .sort((a, b) => ranking.get(a.id)! - ranking.get(b.id)!);
+        .sort((a, b) => (ranking.get(a.id) ?? 0) - (ranking.get(b.id) ?? 0));
     }
 
     if (variant && variant !== "both") {

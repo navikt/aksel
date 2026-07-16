@@ -479,7 +479,7 @@ export const ContentDemo: StoryFn = () => {
       <Timeline>
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>
-          Pin 2 <button>test</button>
+          Pin 2 <button type="button">test</button>
           <a href="/123">test123123</a>
         </Timeline.Pin>
         <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>

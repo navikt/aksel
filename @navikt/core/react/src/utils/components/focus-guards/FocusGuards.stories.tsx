@@ -32,7 +32,9 @@ export const FocusGuard: StoryObj = {
           and re-focus button before we end up leaving the DOM. Both tab and
           shift+tab should therefore stay on button,.
         </p>
-        <button ref={ref}>MainFocusButton</button>
+        <button type="button" ref={ref}>
+          MainFocusButton
+        </button>
       </FocusGuards>
     );
   },
@@ -61,7 +63,9 @@ export const FocusGuardDisabled: StoryObj = {
           Tab and shift+tab will move focus outside the current document (most
           likely to the browser, or Iframe parent).
         </p>
-        <button ref={ref}>MainFocusButton</button>
+        <button type="button" ref={ref}>
+          MainFocusButton
+        </button>
       </div>
     );
   },

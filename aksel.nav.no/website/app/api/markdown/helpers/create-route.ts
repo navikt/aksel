@@ -95,7 +95,7 @@ function buildItemMarkdown<T extends RouteItemBase>(
 
   return buildMarkdown(
     open,
-    { heading: item.heading! },
+    { heading: item.heading ?? "" },
     portableMarkdown(config.getIntro?.(item)),
     portableMarkdown(item.content ?? undefined),
     MetadataSeksjonMarkdown(item.component_metadata),

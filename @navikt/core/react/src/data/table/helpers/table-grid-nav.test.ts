@@ -20,7 +20,22 @@ function createTable(html: string): HTMLTableElement {
   container = document.createElement("div");
   container.innerHTML = html;
   document.body.appendChild(container);
-  return container.querySelector("table")!;
+  const table = container.querySelector("table");
+  if (!table) {
+    throw new Error("Table not found");
+  }
+  return table;
+}
+
+function getPosition(
+  positions: Map<Element, { x: number; y: number }>,
+  cell: Element,
+) {
+  const position = positions.get(cell);
+  if (!position) {
+    throw new Error("Position not found for cell");
+  }
+  return position;
 }
 
 describe("buildTableGridMap", () => {
@@ -441,7 +456,7 @@ describe("findNextFocusableCell", () => {
     const { grid, positions } = buildTableGridMap(table);
     const cells = Array.from(table.querySelectorAll("td"));
 
-    const currentPos = positions.get(cells[0])!;
+    const currentPos = getPosition(positions, cells[0]);
     const result = findNextFocusableCell(
       grid,
       currentPos,
@@ -466,7 +481,7 @@ describe("findNextFocusableCell", () => {
     const { grid, positions } = buildTableGridMap(table);
     const cells = Array.from(table.querySelectorAll("td"));
 
-    const currentPos = positions.get(cells[0])!;
+    const currentPos = getPosition(positions, cells[0]);
     const result = findNextFocusableCell(
       grid,
       currentPos,
@@ -490,7 +505,7 @@ describe("findNextFocusableCell", () => {
     const { grid, positions } = buildTableGridMap(table);
     const cells = Array.from(table.querySelectorAll("td"));
 
-    const currentPos = positions.get(cells[1])!;
+    const currentPos = getPosition(positions, cells[1]);
     const result = findNextFocusableCell(
       grid,
       currentPos,
@@ -512,7 +527,7 @@ describe("findNextFocusableCell", () => {
     const { grid, positions } = buildTableGridMap(table);
     const cells = Array.from(table.querySelectorAll("td"));
 
-    const currentPos = positions.get(cells[0])!;
+    const currentPos = getPosition(positions, cells[0]);
     const result = findNextFocusableCell(
       grid,
       currentPos,

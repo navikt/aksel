@@ -15,7 +15,7 @@ const Example = () => {
   });
 
   const onValidSubmit: SubmitHandler<Inputs> = (data) => {
-    alert("Du valgte: " + data.transportmiddel.join(", "));
+    alert(`Du valgte: ${data.transportmiddel.join(", ")}`);
   };
 
   return (

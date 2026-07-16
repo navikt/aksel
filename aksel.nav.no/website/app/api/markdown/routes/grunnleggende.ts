@@ -14,7 +14,7 @@ export default createRoute<GrunnleggendeItem>({
   heading: "Grunnleggende designsystem-oppsett for Aksel",
   description: "Oversikt over grunnleggende oppsett for designsystemet i Aksel",
   buildAttributes: (item) => ({
-    name: item.heading!,
+    name: item.heading ?? "",
     status: item.status?.tag ?? "stable",
     category: item.kategori ?? "Ukjent",
   }),

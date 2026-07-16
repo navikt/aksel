@@ -3,7 +3,6 @@ const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const akselLocal = require("eslint-plugin-aksel-local");
 const importPlugin = require("eslint-plugin-import");
-const jsxA11y = require("eslint-plugin-jsx-a11y");
 const reactPlugin = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
@@ -41,7 +40,6 @@ module.exports = defineConfig([
   reactPlugin.configs.flat.recommended,
   //reactPlugin.configs.flat["jsx-runtime"], // Not sure if this will cause problems for projects not using the new JSX transform
   reactHooks.configs.flat["recommended-latest"],
-  jsxA11y.flatConfigs.recommended,
   storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
@@ -77,32 +75,7 @@ module.exports = defineConfig([
       reportUnusedDisableDirectives: true,
     },
     rules: {
-      "array-callback-return": "error",
-      "object-shorthand": "error",
-      "no-else-return": "error",
-      "no-console": [
-        "warn",
-        {
-          allow: [
-            "info",
-            "warn",
-            "error",
-            "group",
-            "groupEnd",
-            "table",
-            "assert",
-            "countReset",
-            "count",
-            "dir",
-            "time",
-            "timeEnd",
-            "timeStamp",
-          ],
-        },
-      ],
-      "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
       "@typescript-eslint/no-explicit-any": "off", // Temporary
-      "@typescript-eslint/array-type": "error",
       "@typescript-eslint/no-unused-expressions": [
         "error",
         /* https://eslint.org/docs/latest/rules/no-unused-expressions#allowshortcircuit-and-allowternary */
@@ -111,18 +84,6 @@ module.exports = defineConfig([
     },
   },
 
-  {
-    files: ["**/*.stories.ts?(x)", "scripts/*.ts"],
-    rules: {
-      "no-console": "off",
-    },
-  },
-  {
-    files: ["aksel.nav.no/website/app/_sanity/query-types.ts"],
-    rules: {
-      "@typescript-eslint/array-type": "off",
-    },
-  },
   {
     files: ["**/*.test.*", "**/__tests__/*"],
     extends: [testingLibrary.configs["flat/react"], vitest.configs.recommended],
@@ -145,7 +106,6 @@ module.exports = defineConfig([
   {
     files: ["aksel.nav.no/website/pages/eksempler/**"],
     rules: {
-      "jsx-a11y/anchor-is-valid": "off",
       "@next/next/no-img-element": "off",
     },
   },

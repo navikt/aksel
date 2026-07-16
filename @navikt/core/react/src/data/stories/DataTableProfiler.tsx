@@ -148,18 +148,16 @@ function ProfilerDisplay({
                   Mount:
                 </Heading>
                 <ul style={{ margin: 0, paddingLeft: "1rem" }}>
-                  {lastProfilerState.mount.actualDuration.map(
-                    (entry, index) => (
-                      <li
-                        style={{
-                          listStyle: "none",
-                          opacity: getOpacity(entry.timestamp),
-                          transition: "opacity 0.5s",
-                        }}
-                        key={index}
-                      >{`${entry.duration} ms`}</li>
-                    ),
-                  )}
+                  {lastProfilerState.mount.actualDuration.map((entry) => (
+                    <li
+                      style={{
+                        listStyle: "none",
+                        opacity: getOpacity(entry.timestamp),
+                        transition: "opacity 0.5s",
+                      }}
+                      key={`${entry.timestamp}-${entry.duration}`}
+                    >{`${entry.duration} ms`}</li>
+                  ))}
                 </ul>
               </div>
             )}
@@ -169,18 +167,16 @@ function ProfilerDisplay({
                   Update:
                 </Heading>
                 <ul style={{ margin: 0, paddingLeft: "1rem" }}>
-                  {lastProfilerState.update.actualDuration.map(
-                    (entry, index) => (
-                      <li
-                        style={{
-                          listStyle: "none",
-                          opacity: getOpacity(entry.timestamp),
-                          transition: "opacity 0.5s",
-                        }}
-                        key={index}
-                      >{`${entry.duration} ms`}</li>
-                    ),
-                  )}
+                  {lastProfilerState.update.actualDuration.map((entry) => (
+                    <li
+                      style={{
+                        listStyle: "none",
+                        opacity: getOpacity(entry.timestamp),
+                        transition: "opacity 0.5s",
+                      }}
+                      key={`${entry.timestamp}-${entry.duration}`}
+                    >{`${entry.duration} ms`}</li>
+                  ))}
                 </ul>
               </div>
             )}
@@ -191,14 +187,14 @@ function ProfilerDisplay({
                 </Heading>
                 <ul style={{ margin: 0, paddingLeft: "1rem" }}>
                   {lastProfilerState["nested-update"].actualDuration.map(
-                    (entry, index) => (
+                    (entry) => (
                       <li
                         style={{
                           listStyle: "none",
                           opacity: getOpacity(entry.timestamp),
                           transition: "opacity 0.5s",
                         }}
-                        key={index}
+                        key={`${entry.timestamp}-${entry.duration}`}
                       >{`${entry.duration} ms`}</li>
                     ),
                   )}

@@ -211,14 +211,16 @@ export const ColorRole = () => (
 );
 
 export const StickyHeader = () => {
-  const rows = Array.from({ length: 100 }, (_, i) => (
-    <Table.Row key={i}>
-      <Table.HeaderCell>{i + 1}</Table.HeaderCell>
-      <Table.DataCell>Row {i + 1}</Table.DataCell>
-      <Table.DataCell>Row {i + 1}</Table.DataCell>
-      <Table.DataCell>Row {i + 1}</Table.DataCell>
-    </Table.Row>
-  ));
+  const rows = Array.from({ length: 100 }, (_, rowNumber) => rowNumber + 1).map(
+    (rowNumber) => (
+      <Table.Row key={rowNumber}>
+        <Table.HeaderCell>{rowNumber}</Table.HeaderCell>
+        <Table.DataCell>Row {rowNumber}</Table.DataCell>
+        <Table.DataCell>Row {rowNumber}</Table.DataCell>
+        <Table.DataCell>Row {rowNumber}</Table.DataCell>
+      </Table.Row>
+    ),
+  );
   return (
     <div style={{ maxHeight: 200, overflowY: "auto" }}>
       <Table stickyHeader>

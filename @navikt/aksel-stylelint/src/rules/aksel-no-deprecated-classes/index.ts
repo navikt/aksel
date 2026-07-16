@@ -6,7 +6,7 @@ const ruleName = "aksel/no-deprecated-classes";
 
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   unexpected: (value, secondaryOption) =>
-    `Class "${value}" is deprecated. ` + secondaryOption,
+    `Class "${value}" is deprecated. ${secondaryOption}`,
 });
 
 const ruleFunction: stylelint.Rule = () => {

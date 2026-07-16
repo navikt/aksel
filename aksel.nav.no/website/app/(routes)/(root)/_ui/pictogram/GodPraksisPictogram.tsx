@@ -85,6 +85,7 @@ function FallbackImage() {
   return (
     <svg
       aria-hidden
+      role="presentation"
       width={48}
       height={48}
       viewBox="0 0 64 64"

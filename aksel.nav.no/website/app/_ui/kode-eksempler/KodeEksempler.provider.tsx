@@ -95,7 +95,7 @@ function KodeEksemplerProvider(props: {
     }
 
     setLoaded(false);
-    router.push(pathname + "?" + newQueryString, { scroll: false });
+    router.push(`${pathname}?${newQueryString}`, { scroll: false });
     iframeRef.current?.focus({ preventScroll: true });
   };
 

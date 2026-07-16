@@ -35,7 +35,7 @@ function abbrName(name: string): string {
     .split(" ")
     .filter((val) => val.trim() !== "") // Remove any empty strings caused by extra spaces
     .map((val, index, arr) =>
-      index !== 0 && index !== arr.length - 1 ? val.charAt(0) + "." : val,
+      index !== 0 && index !== arr.length - 1 ? `${val.charAt(0)}.` : val,
     )
     .join(" ");
 }

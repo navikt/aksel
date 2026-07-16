@@ -16,8 +16,8 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ name, amount, percent }, i) => (
-          <Table.Row key={i + name}>
+        {data.map(({ name, amount, percent }) => (
+          <Table.Row key={name}>
             <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
             <Table.DataCell align="right">
               {formatter.format(amount)}

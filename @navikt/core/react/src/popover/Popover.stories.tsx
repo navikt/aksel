@@ -53,7 +53,7 @@ export const Default = () => {
       </Button>
       <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
         <Popover.Content>
-          Velit in consequat <button>testknapp</button>
+          Velit in consequat <button type="button">testknapp</button>
         </Popover.Content>
       </Popover>
       &nbsp;

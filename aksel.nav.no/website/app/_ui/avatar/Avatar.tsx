@@ -129,6 +129,7 @@ export const AvatarStack = ({
       <HStack as="ul" aria-hidden={showNames}>
         {avatars.map((avatar, idx) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: Fix gracefully in the future
             <li key={idx} className={styles.avatarItem}>
               {avatar}
             </li>

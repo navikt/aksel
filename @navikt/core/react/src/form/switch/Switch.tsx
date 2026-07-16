@@ -185,8 +185,8 @@ const SwitchIcon = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         focusable={false}
-        role="img"
         aria-hidden
+        role="presentation"
       >
         <path
           fillRule="evenodd"
@@ -206,8 +206,8 @@ const SwitchIcon = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       focusable={false}
-      role="img"
       aria-hidden
+      role="presentation"
     >
       <path
         fillRule="evenodd"

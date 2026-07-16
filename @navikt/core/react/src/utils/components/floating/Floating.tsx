@@ -161,6 +161,8 @@ const FloatingArrow = ({ width, height, className }: FloatingArrowProps) => {
       aria-hidden
     >
       <svg
+        aria-hidden
+        role="presentation"
         className={className}
         width={width}
         height={height}
@@ -261,7 +263,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const arrowHeight = arrowDefaults.height;
 
     const desiredPlacement = (side +
-      (align !== "center" ? "-" + align : "")) as Placement;
+      (align !== "center" ? `-${align}` : "")) as Placement;
 
     /**
      * Create a bias to the preferred side.

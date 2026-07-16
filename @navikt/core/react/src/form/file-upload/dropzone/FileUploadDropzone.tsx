@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { forwardRef } from "react";
 import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
@@ -93,6 +91,7 @@ const FileUploadDropzone = forwardRef<
         </BodyShort>
       )}
       {/** biome-ignore lint/a11y/noStaticElementInteractions: Assistive technologies will use the input within.  */}
+      {/** biome-ignore lint/a11y/useKeyWithClickEvents: Keyboard will access input/button within */}
       <div
         className="aksel-dropzone__area"
         onDragEnter={dropzoneCtx.onDragEnter}

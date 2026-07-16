@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
   type InputHTMLAttributes,
   forwardRef,

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { resolveDataGridSettings } from "../../data-grid-preferences/helpers/data-grid-settings";
 import { useControllableState } from "../../utils/hooks";
-import { type DataGridSettings } from "../root/DataGrid.types";
+import type { DataGridSettings } from "../root/DataGrid.types";
 
 type UseDataGridSettingsArgs = {
   settings?: DataGridSettings;

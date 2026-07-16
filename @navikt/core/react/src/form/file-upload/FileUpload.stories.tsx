@@ -104,7 +104,7 @@ export const Default = () => {
             <VStack as="ul" gap="space-12">
               {acceptedFiles.map((file, index) => (
                 <CustomItem
-                  key={index}
+                  key={`${file.file.name}-${file.file.size}-${file.file.lastModified}`}
                   index={index}
                   file={file.file}
                   onDelete={() => removeFile(file)}
@@ -121,7 +121,7 @@ export const Default = () => {
             <VStack as="ul" gap="space-12">
               {rejectedFiles.map((rejected, index) => (
                 <CustomItem
-                  key={index}
+                  key={`${rejected.file.name}-${rejected.file.size}-${rejected.file.lastModified}`}
                   index={index}
                   file={rejected.file}
                   error={errors[rejected.reasons[0]]}

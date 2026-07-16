@@ -43,12 +43,14 @@ export const ClickableRowTest = {
             </Table.DataCell>
 
             <Table.DataCell>
-              <button data-testid="cell3">Should not be clickable</button>
+              <button type="button" data-testid="cell3">
+                Should not be clickable
+              </button>
             </Table.DataCell>
             <Table.DataCell>
               <div>
                 <div>
-                  <button data-testid="cell4">
+                  <button type="button" data-testid="cell4">
                     Nested should not be clickable
                   </button>
                 </div>
@@ -57,7 +59,7 @@ export const ClickableRowTest = {
             <Table.DataCell>
               <div>
                 <div>
-                  <button data-testid="cell4">
+                  <button type="button" data-testid="cell4">
                     <span>2x nested should not be clickable</span>
                   </button>
                 </div>

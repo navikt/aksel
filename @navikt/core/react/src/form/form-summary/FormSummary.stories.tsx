@@ -241,14 +241,16 @@ export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
     </FormSummary.Header>
 
     <FormSummary.Answers>
-      {answers.map((answer, index) => (
-        <FormSummary.Answer key={index}>
+      {answers.map((answer) => (
+        <FormSummary.Answer key={answer.label}>
           <FormSummary.Label>{answer.label}</FormSummary.Label>
           <FormSummary.Value>
             {Array.isArray(answer.value) ? (
               <FormSummary.Answers>
-                {answer.value.map((subAnswer, subIndex) => (
-                  <FormSummary.Answer key={subIndex}>
+                {answer.value.map((subAnswer) => (
+                  <FormSummary.Answer
+                    key={`${subAnswer.label}-${subAnswer.value}`}
+                  >
                     <FormSummary.Label>{subAnswer.label}</FormSummary.Label>
                     <FormSummary.Value>{subAnswer.value}</FormSummary.Value>
                   </FormSummary.Answer>
@@ -371,14 +373,16 @@ export const ColorRole: StoryFn<typeof FormSummary> = () => (
     </FormSummary.Header>
 
     <FormSummary.Answers>
-      {answers.map((answer, index) => (
-        <FormSummary.Answer key={index}>
+      {answers.map((answer) => (
+        <FormSummary.Answer key={answer.label}>
           <FormSummary.Label>{answer.label}</FormSummary.Label>
           <FormSummary.Value>
             {Array.isArray(answer.value) ? (
               <FormSummary.Answers data-color="warning">
-                {answer.value.map((subAnswer, subIndex) => (
-                  <FormSummary.Answer key={subIndex}>
+                {answer.value.map((subAnswer) => (
+                  <FormSummary.Answer
+                    key={`${subAnswer.label}-${subAnswer.value}`}
+                  >
                     <FormSummary.Label>{subAnswer.label}</FormSummary.Label>
                     <FormSummary.Value>{subAnswer.value}</FormSummary.Value>
                   </FormSummary.Answer>

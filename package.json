@@ -103,7 +103,6 @@
     "eslint": "^9.39.2",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-storybook": "^10.4.6",

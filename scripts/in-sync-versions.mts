@@ -1,5 +1,5 @@
 import { error as actionsError } from "@actions/core";
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -62,7 +62,7 @@ function validateVersions() {
   }
 
   if (depsOutOfSync.length > 0) {
-    console.log("");
+    console.info("");
 
     if (process.env.CI) {
       const joinedDependencies = depsOutOfSync

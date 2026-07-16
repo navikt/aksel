@@ -5,8 +5,8 @@ const {
   mkdirSync,
   rmSync,
   copyFileSync,
-} = require("fs");
-const path = require("path");
+} = require("node:fs");
+const path = require("node:path");
 const fastGlob = require("fast-glob");
 const { load, JSON_SCHEMA } = require("js-yaml");
 

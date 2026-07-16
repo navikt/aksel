@@ -34,6 +34,7 @@ function AkselDescriptionList({
       {...rest}
     >
       {items.map((item, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
         <ItemWrapper key={index}>
           <BodyLong
             as="dt"

@@ -43,7 +43,7 @@ export async function proxy(req: NextRequest) {
     !url.pathname.includes("index.html") &&
     !url.pathname.match(/(\..*)$/)
   ) {
-    url.pathname = url.pathname + "/index.html";
+    url.pathname = `${url.pathname}/index.html`;
     return NextResponse.redirect(url);
   }
 

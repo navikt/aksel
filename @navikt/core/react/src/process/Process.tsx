@@ -146,7 +146,6 @@ export const Process: ProcessComponent = forwardRef<
     return (
       // `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
       // To resolve this, we add `role="list"` to the `<ol />` element.
-      // eslint-disable-next-line jsx-a11y/no-redundant-roles
       <ol
         ref={mergedRef}
         data-color="info"
