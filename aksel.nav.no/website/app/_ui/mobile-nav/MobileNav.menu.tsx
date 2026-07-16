@@ -31,6 +31,7 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
           className={styles.mobileNavItem}
           onClick={toggleOpen}
           aria-expanded="false"
+          type="button"
         >
           <ChevronDownIcon title="Åpne designsystem-meny" fontSize="1.5rem" />
         </button>
@@ -63,6 +64,7 @@ function DesignsystemView({
         className={styles.mobileNavGroupSticky}
       >
         <button
+          type="button"
           className={styles.mobileNavItem}
           onClick={toggleClose}
           aria-expanded="true"

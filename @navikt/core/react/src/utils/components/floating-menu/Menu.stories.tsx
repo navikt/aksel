@@ -478,7 +478,7 @@ export const TestMenu = () => {
   return (
     <Menu open onOpenChange={() => {}} modal={true}>
       <Menu.Anchor asChild>
-        <button>Menu</button>
+        <button type="button">Menu</button>
       </Menu.Anchor>
       <Menu.Portal>
         <Menu.Content className="content" returnFocus={false} align="start">

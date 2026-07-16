@@ -227,7 +227,7 @@ export const SafeZone: Story = {
           }}
         >
           <div data-testid="safe-container" ref={setSafeContainer}>
-            <button>test</button>
+            <button type="button">test</button>
           </div>
         </DismissableLayer>
       </div>
@@ -377,10 +377,13 @@ export const NestedEscapeKeydown: StoryObj<{
                 enabled={enabledNested}
               >
                 <input type="text" data-testId="nested" />
-                <button onClick={() => setEnabled((x) => !x)}>
+                <button type="button" onClick={() => setEnabled((x) => !x)}>
                   toggle root {enabled}
                 </button>
-                <button onClick={() => setEnabledNested((x) => !x)}>
+                <button
+                  type="button"
+                  onClick={() => setEnabledNested((x) => !x)}
+                >
                   toggle nested {enabledNested}
                 </button>
               </DismissableLayer>

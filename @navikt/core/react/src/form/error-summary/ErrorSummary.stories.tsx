@@ -61,6 +61,7 @@ export const A11yDemo: Story = {
     return (
       <div>
         <button
+          type="button"
           onClick={() => {
             ref.current?.focus();
           }}
@@ -83,7 +84,9 @@ export const FocusDemo: Story = {
     const ref = useRef<HTMLHeadingElement>(null);
     return (
       <div>
-        <button onClick={() => ref.current?.focus()}>Focus summary</button>
+        <button type="button" onClick={() => ref.current?.focus()}>
+          Focus summary
+        </button>
         <ErrorSummary heading="Feiloppsummering tittel" ref={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">

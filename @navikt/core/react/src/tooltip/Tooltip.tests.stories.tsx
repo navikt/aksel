@@ -29,7 +29,7 @@ type Story = StoryObj<typeof Tooltip>;
 export const OpenOnFocus: Story = {
   render: () => (
     <Tooltip content="Hello World">
-      <button>Hello World</button>
+      <button type="button">Hello World</button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {
@@ -47,9 +47,9 @@ export const CloseOnFocusLoss: Story = {
   render: () => (
     <div>
       <Tooltip content="Hello World">
-        <button>Hello World</button>
+        <button type="button">Hello World</button>
       </Tooltip>
-      <button>Outside button</button>
+      <button type="button">Outside button</button>
     </div>
   ),
   play: async ({ canvasElement }) => {
@@ -69,7 +69,7 @@ export const CloseOnFocusLoss: Story = {
 export const HideOnOutsideClick: Story = {
   render: () => (
     <Tooltip content="Hello World" defaultOpen>
-      <button>Hello World</button>
+      <button type="button">Hello World</button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {
@@ -86,7 +86,7 @@ export const HideOnOutsideClick: Story = {
 export const HideOnEscape: Story = {
   render: () => (
     <Tooltip content="Hello World" defaultOpen>
-      <button>Hello World</button>
+      <button type="button">Hello World</button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {
@@ -103,7 +103,7 @@ export const HideOnEscape: Story = {
 export const KeepOpenOnTooltipClick: Story = {
   render: () => (
     <Tooltip content="Hello World" defaultOpen>
-      <button>Hello World</button>
+      <button type="button">Hello World</button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {
@@ -120,7 +120,7 @@ export const KeepOpenOnTooltipClick: Story = {
 export const OpenDelay: Story = {
   render: () => (
     <Tooltip content="Hello World" delay={300}>
-      <button>Hello World</button>
+      <button type="button">Hello World</button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {

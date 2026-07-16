@@ -155,7 +155,9 @@ export const ManyItems: StoryFn<{ items: number }> = ({ items }) => {
         />
       )}
 
-      <button onClick={() => setRender(!render)}>Toggle render</button>
+      <button type="button" onClick={() => setRender(!render)}>
+        Toggle render
+      </button>
     </VStack>
   );
 };

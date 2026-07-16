@@ -38,7 +38,6 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "useButtonType": "off",
         "useValidAriaRole": "off",
         "useValidAriaValues": "off",
         "useKeyWithClickEvents": "off",

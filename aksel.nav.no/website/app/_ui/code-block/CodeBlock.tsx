@@ -187,6 +187,7 @@ function CodeBlockEditor(props: {
       </Highlight>
       {showExpander && (
         <button
+          type="button"
           className={styles.codeBlockExpander}
           onClick={handleExpandUpdate}
         >

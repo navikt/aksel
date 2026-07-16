@@ -81,7 +81,7 @@ export const VeryLongWord = () => {
 export const ButtonsBeforeAndAfter = () => {
   return (
     <div>
-      <button>Before button</button>
+      <button type="button">Before button</button>
       <BodyLong>
         This is an example of a{" "}
         <Lookup word="lookup word">
@@ -89,7 +89,7 @@ export const ButtonsBeforeAndAfter = () => {
         </Lookup>{" "}
         within a sentence.
       </BodyLong>
-      <button>After button</button>
+      <button type="button">After button</button>
     </div>
   );
 };

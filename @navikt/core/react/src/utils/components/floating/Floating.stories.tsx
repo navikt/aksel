@@ -24,7 +24,9 @@ export const StyledFloatingElement = () => {
             sideOffset={5}
             arrow={{ height: 10, width: 10, className: "arrow" }}
           >
-            <button onClick={() => setOpen(false)}>close</button>
+            <button type="button" onClick={() => setOpen(false)}>
+              close
+            </button>
           </Floating.Content>
         )}
       </Floating>
@@ -48,7 +50,9 @@ export const WithPortal = () => {
               sideOffset={5}
               arrow={{ height: 10, width: 10, className: "arrow" }}
             >
-              <button onClick={() => setOpen(false)}>close</button>
+              <button type="button" onClick={() => setOpen(false)}>
+                close
+              </button>
             </Floating.Content>
           </Portal>
         )}
@@ -84,7 +88,9 @@ export const WithUpdatePositionStrategyAlways = () => {
             updatePositionStrategy="always"
             arrow={{ height: 20, width: 10, className: "arrow" }}
           >
-            <button onClick={() => setOpen(false)}>close</button>
+            <button type="button" onClick={() => setOpen(false)}>
+              close
+            </button>
           </Floating.Content>
         )}
       </Floating>

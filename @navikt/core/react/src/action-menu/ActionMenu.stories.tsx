@@ -33,9 +33,9 @@ const DemoDecorator: Story["decorators"] = (Story, { name }) => {
     <VStack gap="space-16" align="start">
       <h2>{name}</h2>
       <p>Placeholder before button</p>
-      <button>Focusable item before action</button>
+      <button type="button">Focusable item before action</button>
       <Story />
-      <button>Focusable item after action</button>
+      <button type="button">Focusable item after action</button>
       <p>Placeholder after button</p>
     </VStack>
   );
@@ -46,7 +46,7 @@ export const OnlyItems: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
@@ -76,7 +76,7 @@ export const GroupedItems: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
@@ -125,7 +125,7 @@ export const SizeMedium: Story = {
     return (
       <ActionMenu open={props.open} size="medium">
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
@@ -173,7 +173,7 @@ export const EnableItemIndent: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
@@ -234,7 +234,7 @@ export const ShortcutsAndIcons: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <VStack asChild align="start" gap="space-4" paddingBlock="space-8">
@@ -305,7 +305,7 @@ export const Checkboxes: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.CheckboxItem
@@ -383,7 +383,7 @@ export const RadioGroups: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.RadioGroup
@@ -414,7 +414,7 @@ export const Dividers: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
@@ -448,7 +448,7 @@ export const Submenus: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
@@ -503,7 +503,7 @@ export const Disabled: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Item disabled shortcut="T+W">
@@ -546,7 +546,7 @@ export const TriggerWithTooltip: Story = {
       <ActionMenu>
         <Tooltip content="Tooltip!">
           <ActionMenu.Trigger>
-            <button>Open action</button>
+            <button type="button">Open action</button>
           </ActionMenu.Trigger>
         </Tooltip>
         <ActionMenu.Content>
@@ -574,7 +574,7 @@ export const ModalTrigger: Story = {
       <div>
         <ActionMenu>
           <ActionMenu.Trigger>
-            <button>Open action</button>
+            <button type="button">Open action</button>
           </ActionMenu.Trigger>
 
           <ActionMenu.Content>
@@ -612,13 +612,15 @@ export const OpenInsideModal: Story = {
 
     return (
       <div>
-        <button onClick={() => ref.current?.showModal()}>Open modal</button>
+        <button type="button" onClick={() => ref.current?.showModal()}>
+          Open modal
+        </button>
         <Modal ref={ref} header={{ heading: "Heading" }}>
           <Modal.Body>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
             <ActionMenu>
               <ActionMenu.Trigger>
-                <button>Open action</button>
+                <button type="button">Open action</button>
               </ActionMenu.Trigger>
               <ActionMenu.Content>
                 <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
@@ -663,7 +665,7 @@ export const Links: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Item as="a" href="#1">
@@ -688,7 +690,7 @@ export const Align: Story = {
       <HStack gap="space-96">
         <ActionMenu open={props.open}>
           <ActionMenu.Trigger>
-            <button>Start</button>
+            <button type="button">Start</button>
           </ActionMenu.Trigger>
           <ActionMenu.Content align="start">
             <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
@@ -704,7 +706,7 @@ export const Align: Story = {
         </ActionMenu>
         <ActionMenu open={props.open}>
           <ActionMenu.Trigger>
-            <button>End</button>
+            <button type="button">End</button>
           </ActionMenu.Trigger>
           <ActionMenu.Content align="end">
             <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
@@ -847,7 +849,7 @@ export const IconPosition: Story = {
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
-          <button>Open action</button>
+          <button type="button">Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
