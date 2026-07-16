@@ -58,7 +58,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       if (!byFile.has(token.fileName)) {
         byFile.set(token.fileName, []);
       }
-      byFile.get(token.fileName)!.push(token);
+      byFile.get(token.fileName)?.push(token);
     });
 
     /* Sort files by number of tokens (descending) */
@@ -122,7 +122,7 @@ async function printRemaining(files: string[], status?: TokenStatus["status"]) {
       if (!byToken.has(token.name)) {
         byToken.set(token.name, []);
       }
-      byToken.get(token.name)!.push(token);
+      byToken.get(token.name)?.push(token);
     });
 
     /* Sort tokens by frequency (descending) */

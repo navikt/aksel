@@ -39,12 +39,6 @@
       "recommended": true,
 
       "style": {
-        "useConst": "off",
-        "noUnusedTemplateLiteral": "off",
-        "noInferrableTypes": "off",
-        "noParameterAssign": "off",
-        "useNumberNamespace": "off",
-        "noNonNullAssertion": "off",
         "useSelfClosingElements": "off",
         "useDefaultParameterLast": "off",
         "noUselessElse": "error",

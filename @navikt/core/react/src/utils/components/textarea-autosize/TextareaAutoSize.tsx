@@ -89,7 +89,10 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           return { outerHeightStyle: 0 };
         }
 
-        const inputShallow = shadowRef.current!;
+        const inputShallow = shadowRef.current;
+        if (!inputShallow) {
+          return { outerHeightStyle: 0 };
+        }
         inputShallow.style.width = computedStyle.width;
         inputShallow.value = input.value || other.placeholder || "x";
         if (inputShallow.value.slice(-1) === "\n") {
@@ -193,7 +196,10 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         true,
       );
 
-      const input = inputRef.current!;
+      const input = inputRef.current;
+      if (!input) {
+        return;
+      }
       const containerWindow = ownerWindow(input);
 
       containerWindow.addEventListener("resize", handleResize);

@@ -326,7 +326,10 @@ function useTableColumnResize({
 function getAutoColumnWidth(
   thRef: React.RefObject<HTMLTableCellElement | null>,
 ) {
-  const th = thRef.current!;
+  const th = thRef.current;
+  if (!th) {
+    return;
+  }
   const thContent = th.querySelector(".aksel-data-table__th-content");
   const thPaddingEl = th.querySelector(".aksel-data-table__cell-content");
   const rows = th.closest("table")?.querySelectorAll("tbody tr, tfoot tr");

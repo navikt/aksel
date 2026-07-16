@@ -14,7 +14,7 @@ export default createRoute<MalerItem>({
   heading: "Mønster og maler satt opp med Aksel",
   description: "Oversikt over mønster og maler satt opp med Aksel-systemet",
   buildAttributes: (item) => ({
-    name: item.heading!,
+    name: item.heading ?? "",
     status: item.status?.tag ?? "stable",
     category: item.kategori ?? "Ukjent",
   }),
