@@ -3,7 +3,6 @@ const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const akselLocal = require("eslint-plugin-aksel-local");
 const importPlugin = require("eslint-plugin-import");
-const jsxA11y = require("eslint-plugin-jsx-a11y");
 const reactPlugin = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
@@ -41,7 +40,6 @@ module.exports = defineConfig([
   reactPlugin.configs.flat.recommended,
   //reactPlugin.configs.flat["jsx-runtime"], // Not sure if this will cause problems for projects not using the new JSX transform
   reactHooks.configs.flat["recommended-latest"],
-  jsxA11y.flatConfigs.recommended,
   storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
@@ -108,7 +106,6 @@ module.exports = defineConfig([
   {
     files: ["aksel.nav.no/website/pages/eksempler/**"],
     rules: {
-      "jsx-a11y/anchor-is-valid": "off",
       "@next/next/no-img-element": "off",
     },
   },

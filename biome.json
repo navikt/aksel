@@ -38,14 +38,10 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "noNoninteractiveElementToInteractiveRole": "off",
-        "useValidAnchor": "off",
         "useButtonType": "off",
         "useValidAriaRole": "off",
         "useValidAriaValues": "off",
-        "useMediaCaption": "off",
         "useKeyWithClickEvents": "off",
-        "noNoninteractiveTabindex": "off",
         "useSemanticElements": "off"
       },
       "style": {

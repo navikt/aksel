@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import {
@@ -136,6 +135,7 @@ export const InteractOutside: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
           tabIndex={0}
         />
       </div>
@@ -182,6 +182,7 @@ export const DisableOutsidePointerEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
           tabIndex={0}
         />
       </div>
@@ -211,6 +212,7 @@ export const SafeZone: Story = {
     return (
       <div>
         <div
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
           tabIndex={0}
           ref={setSafeAnchor}
           data-testid="safe-anchor"
@@ -563,6 +565,7 @@ export const PreventEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing inly
           tabIndex={0}
         />
       </div>

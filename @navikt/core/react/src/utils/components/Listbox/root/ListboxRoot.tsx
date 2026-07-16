@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React from "react";
 import { useId } from "../../../../utils-external";

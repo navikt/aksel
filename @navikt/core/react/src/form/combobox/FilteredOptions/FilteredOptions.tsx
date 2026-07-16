@@ -113,6 +113,7 @@ const FilteredOptions = () => {
         {shouldRenderFilteredOptionsList && (
           <ul
             ref={setFilteredOptionsRef}
+            // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: The <ul> element acts as a listbox in the combobox.
             role="listbox"
             className="aksel-combobox__list-options"
           >
