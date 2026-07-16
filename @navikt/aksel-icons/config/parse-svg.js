@@ -1,12 +1,12 @@
 const fastglob = require("fast-glob");
-const path = require("path");
+const path = require("node:path");
 const {
   existsSync,
   readFileSync,
   mkdirSync,
   rmSync,
   writeFileSync,
-} = require("fs");
+} = require("node:fs");
 
 function main() {
   const basePath = path.resolve(__dirname, "../icons");

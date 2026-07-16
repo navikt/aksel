@@ -39,7 +39,6 @@
       "recommended": true,
 
       "style": {
-        "useNodejsImportProtocol": "off",
         "useConst": "off",
         "noUnusedTemplateLiteral": "off",
         "noInferrableTypes": "off",

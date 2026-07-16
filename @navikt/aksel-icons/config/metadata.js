@@ -1,7 +1,7 @@
 const fastglob = require("fast-glob");
-const path = require("path");
+const path = require("node:path");
 const { load, JSON_SCHEMA } = require("js-yaml");
-const fs = require("fs");
+const fs = require("node:fs");
 
 const basePath = path.resolve(__dirname, "../icons");
 

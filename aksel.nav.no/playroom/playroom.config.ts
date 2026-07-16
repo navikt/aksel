@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import type { PlayroomConfig } from "playroom";
 
 // Note: Hot module reloading for dev has been turned off for this environment
