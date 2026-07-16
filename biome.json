@@ -39,12 +39,10 @@
       "recommended": true,
 
       "style": {
-        "useSelfClosingElements": "off",
-        "useDefaultParameterLast": "off",
+        "noDescendingSpecificity": "off",
         "noUselessElse": "error",
         "useConsistentObjectDefinitions": "error",
-        "useConsistentArrayType": "error",
-        "noDescendingSpecificity": "off"
+        "useConsistentArrayType": "error"
       },
       "suspicious": {
         "noExplicitAny": "off",
