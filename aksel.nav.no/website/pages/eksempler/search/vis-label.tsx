@@ -3,14 +3,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form role="search">
+    <search>
       <Search
         label="Søk i alle Nav sine sider"
         description="Her kan du søke på forskjellige ting, f.eks. søknadsskjemaer."
         variant="secondary"
         hideLabel={false}
       />
-    </form>
+    </search>
   );
 };
 

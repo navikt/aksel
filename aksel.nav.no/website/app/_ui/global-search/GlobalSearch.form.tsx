@@ -16,32 +16,34 @@ const GlobalSearchForm = () => {
 
   return (
     <div className={styles.searchForm}>
-      <form role="search" onSubmit={(e) => e.preventDefault()}>
-        <Search
-          ref={inputRef}
-          label="Globalt søk"
-          aria-autocomplete="both"
-          variant="simple"
-          defaultValue={paramValue}
-          onChange={updateQuery}
-          onClear={resetSearch}
-          onKeyDown={(e) => {
-            /* Avoids sideeffects when clearing Search */
-            if (e.key === "Escape") {
-              if (e.currentTarget.value) {
-                e.stopPropagation();
+      <search>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Search
+            ref={inputRef}
+            label="Globalt søk"
+            aria-autocomplete="both"
+            variant="simple"
+            defaultValue={paramValue}
+            onChange={updateQuery}
+            onClear={resetSearch}
+            onKeyDown={(e) => {
+              /* Avoids sideeffects when clearing Search */
+              if (e.key === "Escape") {
+                if (e.currentTarget.value) {
+                  e.stopPropagation();
+                }
               }
-            }
-          }}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="none"
-          spellCheck={false}
-          id="aksel-search-input"
-          clearButton={false}
-          placeholder="Søk gjennom hele Aksel..."
-        />
-      </form>
+            }}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            id="aksel-search-input"
+            clearButton={false}
+            placeholder="Søk gjennom hele Aksel..."
+          />
+        </form>
+      </search>
       <Dialog.CloseTrigger>
         <Button variant="tertiary-neutral" icon={<XMarkIcon title="Lukk" />} />
       </Dialog.CloseTrigger>

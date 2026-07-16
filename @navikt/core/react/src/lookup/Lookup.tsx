@@ -90,6 +90,7 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
 
     return (
       <>
+        {/** biome-ignore lint/a11y/useSemanticElements: Using span as a button for lookup trigger */}
         <span
           {...rest}
           role="button"

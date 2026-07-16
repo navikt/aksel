@@ -13,7 +13,7 @@
     padding: var(--ax-space-16);
   }
 
-  & > form {
+  & > search {
     width: 100%;
   }
 }

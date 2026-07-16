@@ -37,9 +37,7 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "a11y": {
-        "useSemanticElements": "off"
-      },
+
       "style": {
         "useTemplate": "off",
         "useNodejsImportProtocol": "off",

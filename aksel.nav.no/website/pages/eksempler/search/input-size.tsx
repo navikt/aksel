@@ -3,13 +3,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form role="search">
+    <search>
       <Search
         label="Hva er artikkelnummeret til denne varen?"
         hideLabel={false}
         htmlSize="12"
       />
-    </form>
+    </search>
   );
 };
 
