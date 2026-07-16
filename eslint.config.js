@@ -77,31 +77,7 @@ module.exports = defineConfig([
       reportUnusedDisableDirectives: true,
     },
     rules: {
-      "array-callback-return": "error",
-      "object-shorthand": "error",
-      "no-else-return": "error",
-      "no-console": [
-        "warn",
-        {
-          allow: [
-            "info",
-            "warn",
-            "error",
-            "group",
-            "groupEnd",
-            "table",
-            "assert",
-            "countReset",
-            "count",
-            "dir",
-            "time",
-            "timeEnd",
-            "timeStamp",
-          ],
-        },
-      ],
       "@typescript-eslint/no-explicit-any": "off", // Temporary
-      "@typescript-eslint/array-type": "error",
       "@typescript-eslint/no-unused-expressions": [
         "error",
         /* https://eslint.org/docs/latest/rules/no-unused-expressions#allowshortcircuit-and-allowternary */
@@ -110,18 +86,6 @@ module.exports = defineConfig([
     },
   },
 
-  {
-    files: ["**/*.stories.ts?(x)", "scripts/*.ts"],
-    rules: {
-      "no-console": "off",
-    },
-  },
-  {
-    files: ["aksel.nav.no/website/app/_sanity/query-types.ts"],
-    rules: {
-      "@typescript-eslint/array-type": "off",
-    },
-  },
   {
     files: ["**/*.test.*", "**/__tests__/*"],
     extends: [testingLibrary.configs["flat/react"], vitest.configs.recommended],

@@ -109,6 +109,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/*.stories.ts", "**/*.stories.tsx", "scripts/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
     }
   ]
 }
