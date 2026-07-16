@@ -100,7 +100,6 @@ module.exports = defineConfig([
           ],
         },
       ],
-      "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
       "@typescript-eslint/no-explicit-any": "off", // Temporary
       "@typescript-eslint/array-type": "error",
       "@typescript-eslint/no-unused-expressions": [

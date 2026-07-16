@@ -488,7 +488,7 @@ interface DataTableDataRowProps {
 }
 
 const DataTableDataRow = memo(
-  function DataTableDataRow({
+  function DataTableDataRowMemo({
     rowData,
     details,
     columns,

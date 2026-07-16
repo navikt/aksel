@@ -59,12 +59,38 @@
         "useNumberNamespace": "off",
         "noNonNullAssertion": "off",
         "useSelfClosingElements": "off",
-        "useDefaultParameterLast": "off"
+        "useDefaultParameterLast": "off",
+        "noUselessElse": "error",
+        "useConsistentObjectDefinitions": "error",
+        "useConsistentArrayType": "error"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
-        "noVar": "off"
+        "noVar": "off",
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": [
+              "info",
+              "warn",
+              "error",
+              "group",
+              "groupEnd",
+              "table",
+              "assert",
+              "countReset",
+              "count",
+              "dir",
+              "time",
+              "timeEnd",
+              "timeStamp"
+            ]
+          }
+        }
+      },
+      "nursery": {
+        "noShadow": "error"
       },
       "complexity": {
         "noForEach": "off",

@@ -149,7 +149,7 @@ export namespace DataGrid {
 
   // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace Table {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+    // biome-ignore lint/nursery/noShadow: intentional namespace re-export
     export type Props<T = unknown> = DataGridTable.Props<T>;
     export type Sorting = DataGridTable.Sorting;
     export type SortEntry = DataGridTable.SortEntry;
@@ -161,7 +161,7 @@ export namespace DataGrid {
 
   // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace Preferences {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+    // biome-ignore lint/nursery/noShadow: intentional namespace re-export
     export type Props = DataGridPreferences.Props;
   }
 }
