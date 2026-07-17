@@ -7,12 +7,10 @@ import {
   PieChartIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { isAdminOrDev } from "./access";
 
 export function adminStructure(S: StructureBuilder) {
-  const adminOrDev = S.context.currentUser?.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name),
-  );
-  if (!adminOrDev) {
+  if (!isAdminOrDev(S)) {
     return S.divider();
   }
 

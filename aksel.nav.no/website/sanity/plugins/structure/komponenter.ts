@@ -1,8 +1,12 @@
 import type { StructureBuilder } from "sanity/structure";
-import { ComponentIcon, HouseIcon } from "@navikt/aksel-icons";
+import { ComponentIcon } from "@navikt/aksel-icons";
 import { komponentKategorier } from "@/sanity/config";
-import { Panes } from "./panes";
-import { listDraftArticles, listOutdatedArticles } from "./structure.util";
+import {
+  categoryPanes,
+  landingssideItem,
+  listDraftArticles,
+  listOutdatedArticles,
+} from "./article-lists";
 
 export function komponenterStructure(S: StructureBuilder) {
   return S.listItem()
@@ -12,17 +16,13 @@ export function komponenterStructure(S: StructureBuilder) {
       S.list()
         .title("Komponenter")
         .items([
-          S.documentListItem()
-            .title(`Landingsside`)
-            .icon(HouseIcon)
-            .schemaType(`komponenter_landingsside`)
-            .id(`komponenter_landingsside_id1`),
+          landingssideItem(S, "komponenter_landingsside"),
           S.divider(),
           listDraftArticles(S, "komponent_artikkel"),
           listOutdatedArticles(S, "komponent_artikkel", 180),
 
           S.divider(),
-          ...Panes("komponent_artikkel", [...komponentKategorier], S),
+          ...categoryPanes(S, "komponent_artikkel", komponentKategorier),
         ]),
     );
 }
