@@ -1,7 +1,3 @@
-import { createColumnHelper } from "@tanstack/react-table";
-import React from "react";
-import { Tag } from "../../tag";
-
 // Helper function to get random integer between min and max (inclusive)
 const getRandomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -30,85 +26,6 @@ export interface PersonInfo {
   homeSystem: string;
   skills: string[];
 }
-
-const columnHelper = createColumnHelper<PersonInfo>();
-
-export const columns = [
-  {
-    header: "Id",
-    accessorKey: "id",
-  },
-  {
-    header: "Name",
-    accessorKey: "name",
-  },
-  {
-    header: "National id",
-    accessorKey: "nationalId",
-  },
-  {
-    header: "Day job",
-    accessorKey: "dayJob",
-  },
-  {
-    header: "Supervisor",
-    accessorKey: "supervisor",
-  },
-  {
-    header: "Date received",
-    accessorKey: "dateReceived",
-  },
-  {
-    header: "Message",
-    accessorKey: "message",
-  },
-  {
-    header: "Age",
-    accessorKey: "age",
-    footer: ({ table }) => {
-      const ages: number[] = [];
-      table.getFilteredRowModel().rows.forEach((row) => {
-        const value = row.getValue("age");
-        value && ages.push(value);
-      });
-      return `Avg: ${(ages.reduce((a, b) => a + b, 0) / ages.length).toFixed(2)}`;
-    },
-  },
-
-  columnHelper.accessor("forceSensitive", {
-    cell: (info) => {
-      const value = info.getValue();
-      return (
-        <Tag
-          size="small"
-          variant="moderate"
-          data-color={value ? "accent" : "warning"}
-        >{`${value ? "Yes" : "No"}`}</Tag>
-      );
-    },
-    footer: ({ table }) => {
-      const totals = new Map();
-      totals.set("Yes", 0);
-      totals.set("No", 0);
-      table.getFilteredRowModel().rows.forEach((row) => {
-        const value = row.getValue("forceSensitive");
-        totals.set(
-          value ? "Yes" : "No",
-          (totals.get(value ? "Yes" : "No") ?? 0) + 1,
-        );
-      });
-      return `Yes: ${totals.get("Yes")}, No: ${totals.get("No")}`;
-    },
-  }),
-  {
-    header: "Home system",
-    accessorKey: "homeSystem",
-  },
-  {
-    header: "Skills",
-    accessorKey: "skills",
-  },
-];
 
 export const homeSystemOptions = [
   "Tatooine",
