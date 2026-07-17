@@ -15,4 +15,9 @@ export default defineCliConfig({
     projectId: SANITY_PROJECT_ID,
     dataset: SANITY_DATASET,
   },
+  typegen: {
+    path: "../app/**/*.{ts,tsx,js,jsx}",
+    schema: "sanity-schema.json",
+    generates: "../app/_sanity/query-types.ts",
+  },
 });

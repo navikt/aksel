@@ -19,6 +19,26 @@ import { defaultDocumentNode, structure } from "./plugins/structure";
 import { schema } from "./schema";
 import { newDocumentsCreator } from "./util";
 
+/**
+ * Auth is project-scoped: all workspaces for the same project share cookies and
+ * tokens, so both workspaces must reference this single shared config.
+ */
+const auth: AuthConfig = {
+  redirectOnSingle: false,
+  providers: [
+    {
+      name: "saml",
+      title: "Nav SSO",
+      url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
+    },
+    {
+      name: "github",
+      title: "GitHub",
+      url: "https://api.sanity.io/v1/auth/login/github",
+    },
+  ],
+};
+
 export const workspaceConfig = defineConfig([
   {
     projectId: SANITY_PROJECT_ID,
@@ -27,7 +47,7 @@ export const workspaceConfig = defineConfig([
     dataset: "production",
     basePath: "/admin",
     icon: AkselLogo,
-    auth: authStore(),
+    auth,
     scheduledPublishing: { enabled: false },
     schema,
     document: {
@@ -73,7 +93,7 @@ export const workspaceConfig = defineConfig([
     dataset: "development",
     basePath: "/admin-dev",
     icon: TestFlaskIcon,
-    auth: authStore(),
+    auth,
     scheduledPublishing: { enabled: false },
     schema,
     document: {
@@ -121,23 +141,5 @@ export const workspaceConfig = defineConfig([
     },
   },
 ]);
-
-function authStore(): AuthConfig {
-  return {
-    redirectOnSingle: false,
-    providers: [
-      {
-        name: "saml",
-        title: "Nav SSO",
-        url: "https://api.sanity.io/v2021-10-01/auth/saml/login/f3270b37",
-      },
-      {
-        name: "github",
-        title: "GitHub",
-        url: "https://api.sanity.io/v1/auth/login/github",
-      },
-    ],
-  };
-}
 
 export default workspaceConfig;
