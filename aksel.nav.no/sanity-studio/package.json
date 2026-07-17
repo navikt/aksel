@@ -1,0 +1,46 @@
+{
+  "name": "aksel-sanity-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aksel.nav.no sanity studio",
+  "author": "Aksel | Nav designsystem team",
+  "scripts": {
+    "build": "",
+    "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
+    "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default --path ./sanity-schema.json && yarn sanity typegen generate",
+    "update:sanity-manifest": "cd ./sanity && yarn sanity schema deploy --workspace default --manifest-dir ../public/studio/static",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@portabletext/react": "^6.0.3",
+    "@sanity/client": "7.23.0",
+    "@sanity/code-input": "7.1.2",
+    "@sanity/color-input": "6.0.6",
+    "@sanity/image-url": "2.1.1",
+    "@sanity/locale-nb-no": "1.1.34",
+    "@sanity/preview-url-secret": "4.0.7",
+    "@sanity/table": "2.0.1",
+    "@sanity/vision": "6.0.0",
+    "date-fns": "^4.0.0",
+    "lodash": "4.18.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-rx": "^2.1.3",
+    "rxjs": "^7.8.2",
+    "sanity": "6.0.0",
+    "sanity-plugin-iframe-pane": "5.0.13",
+    "sanity-plugin-media": "4.3.1",
+    "sanity-plugin-references": "1.1.0",
+    "styled-components": "^6.0.0",
+    "swr": "^2.4.1"
+  },
+  "devDependencies": {
+    "@sanity/blueprints": "0.20.1",
+    "@sanity/export": "6.2.0",
+    "@sanity/functions": "1.3.1",
+    "@sanity/schema": "6.0.0",
+    "@types/lodash": "4.17.20",
+    "@types/react": "19.2.14",
+    "typescript": "6.0.3"
+  }
+}

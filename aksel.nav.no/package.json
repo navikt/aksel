@@ -12,7 +12,8 @@
   },
   "workspaces": [
     "website",
-    "playroom"
+    "playroom",
+    "sanity-studio"
   ],
   "dependencies": {
     "@navikt/aksel": "^8.15.0",
