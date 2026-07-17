@@ -1,8 +1,9 @@
 import type { StructureBuilder } from "sanity/structure";
-import { HouseIcon, PencilBoardIcon, TasklistIcon } from "@navikt/aksel-icons";
+import { PencilBoardIcon, TasklistIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { landingssideItem } from "./article-lists";
 
-export function gpStructure(S: StructureBuilder) {
+export function godPraksisStructure(S: StructureBuilder) {
   return S.listItem()
     .title("God praksis")
     .icon(PencilBoardIcon)
@@ -12,11 +13,7 @@ export function gpStructure(S: StructureBuilder) {
         .items([
           ...godPraksisPanes(S),
           S.divider(),
-          S.documentListItem()
-            .title(`Landingsside`)
-            .icon(HouseIcon)
-            .schemaType(`godpraksis_landingsside`)
-            .id(`godpraksis_landingsside_id1`),
+          landingssideItem(S, "godpraksis_landingsside"),
         ]),
     );
 }

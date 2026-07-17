@@ -1,8 +1,12 @@
 import type { StructureBuilder } from "sanity/structure";
-import { HouseIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
+import { RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { templatesKategorier } from "@/sanity/config";
-import { Panes } from "./panes";
-import { listDraftArticles, listOutdatedArticles } from "./structure.util";
+import {
+  categoryPanes,
+  landingssideItem,
+  listDraftArticles,
+  listOutdatedArticles,
+} from "./article-lists";
 
 export function monsterStructure(S: StructureBuilder) {
   return S.listItem()
@@ -12,17 +16,13 @@ export function monsterStructure(S: StructureBuilder) {
       S.list()
         .title("Mønster og Maler")
         .items([
-          S.documentListItem()
-            .title(`Landingsside`)
-            .icon(HouseIcon)
-            .schemaType(`templates_landingsside`)
-            .id(`templates_landingsside_id1`),
+          landingssideItem(S, "templates_landingsside"),
           S.divider(),
           listDraftArticles(S, "templates_artikkel"),
           listOutdatedArticles(S, "templates_artikkel", 180),
 
           S.divider(),
-          ...Panes("templates_artikkel", [...templatesKategorier], S),
+          ...categoryPanes(S, "templates_artikkel", templatesKategorier),
         ]),
     );
 }

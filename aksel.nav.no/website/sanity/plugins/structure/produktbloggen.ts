@@ -1,8 +1,12 @@
 import type { StructureBuilder } from "sanity/structure";
-import { HouseIcon, NewspaperIcon } from "@navikt/aksel-icons";
+import { NewspaperIcon } from "@navikt/aksel-icons";
 import { bloggKategorier } from "@/sanity/config";
-import { Panes } from "./panes";
-import { listDraftArticles, listPublishedArticles } from "./structure.util";
+import {
+  categoryPanes,
+  landingssideItem,
+  listDraftArticles,
+  listPublishedArticles,
+} from "./article-lists";
 
 export function produktBloggenStructure(S: StructureBuilder) {
   return S.listItem()
@@ -12,16 +16,12 @@ export function produktBloggenStructure(S: StructureBuilder) {
       S.list()
         .title("Produktbloggen")
         .items([
-          S.documentListItem()
-            .title(`Landingsside`)
-            .icon(HouseIcon)
-            .schemaType(`blogg_landingsside`)
-            .id(`blogg_landingsside_id1`),
+          landingssideItem(S, "blogg_landingsside"),
           S.divider(),
           listPublishedArticles(S, "aksel_blogg"),
           listDraftArticles(S, "aksel_blogg"),
           S.divider(),
-          ...Panes("aksel_blogg", [...bloggKategorier], S),
+          ...categoryPanes(S, "aksel_blogg", bloggKategorier),
         ]),
     );
 }

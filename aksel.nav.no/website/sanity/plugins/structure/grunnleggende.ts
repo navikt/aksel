@@ -1,8 +1,12 @@
 import type { StructureBuilder } from "sanity/structure";
-import { HouseIcon, TasklistIcon, TokenIcon } from "@navikt/aksel-icons";
+import { TasklistIcon, TokenIcon } from "@navikt/aksel-icons";
 import { grunnleggendeKategorier } from "@/sanity/config";
-import { Panes } from "./panes";
-import { listDraftArticles, listOutdatedArticles } from "./structure.util";
+import {
+  categoryPanes,
+  landingssideItem,
+  listDraftArticles,
+  listOutdatedArticles,
+} from "./article-lists";
 
 export function grunnleggendeStructure(S: StructureBuilder) {
   return S.listItem()
@@ -12,17 +16,13 @@ export function grunnleggendeStructure(S: StructureBuilder) {
       S.list()
         .title("Grunnleggende")
         .items([
-          S.documentListItem()
-            .title("Landingsside")
-            .icon(HouseIcon)
-            .schemaType("grunnleggende_landingsside")
-            .id("grunnleggende_landingsside_id1"),
+          landingssideItem(S, "grunnleggende_landingsside"),
           S.divider(),
           listDraftArticles(S, "ds_artikkel"),
           listOutdatedArticles(S, "ds_artikkel", 180),
 
           S.divider(),
-          ...Panes("ds_artikkel", [...grunnleggendeKategorier], S),
+          ...categoryPanes(S, "ds_artikkel", grunnleggendeKategorier),
 
           S.divider(),
           S.listItem()
