@@ -38,7 +38,11 @@ module.exports = defineConfig([
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
-  //reactPlugin.configs.flat["jsx-runtime"], // Not sure if this will cause problems for projects not using the new JSX transform
+  {
+    // Uses the new JSX transform, so React does not need to be in scope
+    files: ["aksel.nav.no/sanity-studio/**"],
+    ...reactPlugin.configs.flat["jsx-runtime"],
+  },
   reactHooks.configs.flat["recommended-latest"],
   storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
