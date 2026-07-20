@@ -1,7 +1,8 @@
+import { createClient } from "next-sanity";
 import fs from "node:fs";
 import path from "node:path";
 import RSS from "rss";
-import { noCdnClient } from "../sanity/interface/client.server";
+import { SANITY_BASE_CONFIG } from "../_sanity/sanity.config";
 
 generateRssFeed();
 
@@ -24,7 +25,12 @@ async function generateRssFeed() {
       "Missing token 'SANITY_READ_NO_DRAFTS' when updating RSS-feed",
     );
   }
-  const bloggposts = await noCdnClient(token).fetch(query);
+
+  const client = createClient({
+    ...SANITY_BASE_CONFIG,
+    token,
+  });
+  const bloggposts = await client.fetch(query);
 
   const feedOptions = {
     title: "Produktbloggen - aksel.nav.no",

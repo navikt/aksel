@@ -1,20 +1,21 @@
 import { isEqual } from "lodash";
-import type { SanityDocumentStub } from "next-sanity";
-import { sanityClient } from "../../sanity/interface/client.server";
+import type { SanityClient, SanityDocumentStub } from "next-sanity";
 
 /**
  * Deep compare two sets of documents and return those that are unequal based on specified keys.
  */
 function findUnequalDocuments<T extends SanityDocumentStub>({
+  client,
   newDocuments,
   oldDocuments,
   keysToCompare,
 }: {
+  client: SanityClient;
   newDocuments: T[];
   oldDocuments: T[];
   keysToCompare: (keyof T)[];
 }) {
-  const transactionClient = sanityClient.transaction();
+  const transactionClient = client.transaction();
   const unequalDocuments: T[] = [];
 
   for (const newDocument of newDocuments) {

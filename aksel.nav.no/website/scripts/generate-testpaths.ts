@@ -1,24 +1,19 @@
 import fs from "node:fs";
-import { sitemapPages } from "../sanity/interface/interface";
+import Sitemapper from "sitemapper";
 
-const token = process.env.SANITY_READ_NO_DRAFTS;
+const sitemap = new Sitemapper({
+  timeout: 5000,
+});
 
-if (!token) {
-  console.error("Missing SANITY_READ_NO_DRAFTS");
-  process.exit(1);
-}
-
-/**
- * Generate a list of urls for e2e tests
- */
-sitemapPages(token)
-  .then((pages) =>
+sitemap
+  .fetch("https://aksel.nav.no/sitemap.xml")
+  .then(({ sites }) => {
     fs.writeFileSync(
       "./e2e/sitemap-urls.json",
-      JSON.stringify(pages.map(({ path }) => `/${path}`)),
-    ),
-  )
-  .catch((e) => {
+      JSON.stringify(sites.map((url) => new URL(url).pathname)),
+    );
+  })
+  .catch((error) => {
+    console.error(error);
     console.error("Failed generating urls for e2e tests");
-    console.error(e);
   });

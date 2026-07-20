@@ -1,6 +1,7 @@
+import { createClient } from "next-sanity";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { sanityClient } from "@/sanity/client.server";
+import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
 const ignoredStaticPaths = [
@@ -10,6 +11,13 @@ const ignoredStaticPaths = [
   "/grunnleggende",
   "/produktbloggen",
 ];
+
+const client = createClient({
+  ...SANITY_BASE_CONFIG,
+  token: process.env.SANITY_READ_NO_DRAFTS,
+  ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
+  useCdn: true,
+});
 
 export async function proxy(req: NextRequest) {
   /*
@@ -51,7 +59,7 @@ export async function proxy(req: NextRequest) {
     /**
      * TODO: Look into updating this using tag-based revalidation
      */
-    const redirect = await sanityClient.fetch(
+    const redirect = await client.fetch(
       `
   *[_type == 'redirect' && source == $source][0] {
     _id,
@@ -69,7 +77,7 @@ export async function proxy(req: NextRequest) {
        */
       /* const token = process.env.SANITY_WRITE;
       if (token) {
-        noCdnClient(token)
+        client
           .patch(redirect._id)
           .set({ redirects: 1 + (redirect.redirects ?? 0) })
           .commit();

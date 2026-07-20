@@ -1,9 +1,10 @@
 import { BigQuery } from "@google-cloud/bigquery";
+import { createClient } from "next-sanity";
 import fs from "node:fs";
 import { major } from "semver";
 import pkg from "@navikt/ds-react/package.json";
+import { SANITY_BASE_CONFIG } from "../../_sanity/sanity.config";
 import type { DesignsystemStatistics } from "../../app/_sanity/query-types";
-import { noCdnClient } from "../../sanity/interface/client.server";
 import {
   componentUsageQuery,
   type componentUsageQueryT,
@@ -57,7 +58,12 @@ async function updateStats() {
     newMajorVersions,
   );
 
-  const transactionClient = noCdnClient(token).transaction();
+  const client = createClient({
+    ...SANITY_BASE_CONFIG,
+    token,
+  });
+
+  const transactionClient = client.transaction();
 
   const document: Defined<VersionDocument> = {
     _id: "designsystem_statistics",
