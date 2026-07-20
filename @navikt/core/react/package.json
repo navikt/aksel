@@ -736,7 +736,7 @@
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.19",
+    "@floating-ui/react": "0.27.20",
     "@floating-ui/react-dom": "^2.1.8",
     "@navikt/aksel-icons": "^8.15.0",
     "@navikt/ds-tokens": "^8.15.0",
