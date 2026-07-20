@@ -1,19 +1,5 @@
-import type { ClientConfig } from "@sanity/client";
-import {
-  SANITY_API_VERSION,
-  SANITY_DATASET,
-  SANITY_PROJECT_ID,
-} from "../sanity.env";
-
 // biome-ignore lint/complexity/noStaticOnlyClass: single config namespace accessed via SchemaConfig.*
 class SchemaConfig {
-  static readonly baseConfig: ClientConfig = {
-    projectId: SANITY_PROJECT_ID,
-    dataset: SANITY_DATASET,
-    useCdn: false,
-    apiVersion: SANITY_API_VERSION,
-  };
-
   static readonly allArticleDocuments = [
     "komponent_artikkel",
     "ds_artikkel",

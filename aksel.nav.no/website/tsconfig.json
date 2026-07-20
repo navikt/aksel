@@ -36,6 +36,7 @@
       "@/cms/*": ["./components/sanity-modules/*"],
       "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],
       "@/sanity/config": ["./sanity/config.ts"],
+      "@/sanity/config-2": ["./_sanity/sanity.config.ts"],
       "@/sanity/client.server": ["./sanity/interface/client.server.ts"],
       "@/sanity/interface": ["./sanity/interface/interface.ts"],
       "@/app/CustomPortableText": [

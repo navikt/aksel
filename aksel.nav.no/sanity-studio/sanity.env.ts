@@ -6,4 +6,4 @@ if (process.env.LOCAL_DATASET_OVERRIDE === "development") {
   SANITY_DATASET = "development";
 }
 
-export { SANITY_PROJECT_ID, SANITY_API_VERSION, SANITY_DATASET };
+export { SANITY_API_VERSION, SANITY_DATASET, SANITY_PROJECT_ID };

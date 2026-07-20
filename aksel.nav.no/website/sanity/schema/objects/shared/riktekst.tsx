@@ -15,13 +15,13 @@ import {
 } from "@navikt/aksel-icons";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { Code } from "@/app/_ui/typography/Code";
-import { clientConfig } from "@/sanity/config";
+import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
 import { allArticleDocsRef } from "../../../config";
 import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
 
 const sanityClient = createClient({
-  ...clientConfig,
+  ...SANITY_BASE_CONFIG,
   withCredentials: true,
 });
 const headingsQuery = groq`*[_id == $id][0].content[style match 'h*']{_key, style, "text": pt::text(@)}`;

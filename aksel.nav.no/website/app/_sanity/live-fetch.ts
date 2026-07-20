@@ -1,3 +1,4 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -11,7 +12,6 @@ import {
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
-import { allArticleDocuments } from "@/sanity/config";
 
 async function fetchAllSanityPages(): Promise<
   {
@@ -35,7 +35,7 @@ async function fetchAllSanityPages(): Promise<
     sanityFetch({
       query: SITEMAP_ARTICLES_BY_TYPE_QUERY,
       params: {
-        doctypes: allArticleDocuments,
+        doctypes: SchemaConfig.allArticleDocuments,
       },
       stega: false,
       perspective: "published",

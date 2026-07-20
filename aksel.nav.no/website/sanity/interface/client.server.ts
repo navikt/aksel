@@ -1,9 +1,9 @@
 import { createClient } from "next-sanity";
-import { clientConfig } from "../config";
+import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
 
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient({
-  ...clientConfig,
+  ...SANITY_BASE_CONFIG,
   token: process.env.SANITY_READ_NO_DRAFTS,
   ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
   useCdn: true,
@@ -14,7 +14,7 @@ export const sanityClient = createClient({
 
 export const noCdnClient = (token: string) =>
   createClient({
-    ...clientConfig,
+    ...SANITY_BASE_CONFIG,
     token,
   });
 

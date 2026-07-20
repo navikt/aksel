@@ -1,8 +1,8 @@
+import type { SchemaConfig } from "aksel-sanity-studio/schema";
 import type { FuseResultMatch } from "fuse.js";
-import type { allArticleDocuments } from "@/sanity/config";
 
 export const searchOptions: {
-  [K in (typeof allArticleDocuments)[number]]: {
+  [K in (typeof SchemaConfig.allArticleDocuments)[number]]: {
     display: string;
     index: number;
     hidden?: boolean;

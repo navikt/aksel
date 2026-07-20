@@ -1,11 +1,11 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import { type Observable, map } from "rxjs";
 import type {
   DocumentLocationResolver,
   DocumentLocationsState,
 } from "sanity/presentation";
-import { allArticleDocuments } from "@/sanity/config";
 
-const validTypes: string[] = [...allArticleDocuments];
+const validTypes: string[] = [...SchemaConfig.allArticleDocuments];
 
 export const locations: DocumentLocationResolver = (params, context) => {
   const doc$ = context.documentStore.listenQuery(

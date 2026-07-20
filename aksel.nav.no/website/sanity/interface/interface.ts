@@ -1,5 +1,5 @@
 import imageUrlBuilder from "@sanity/image-url";
-import { allArticleDocuments } from "../config";
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import { getClient, noCdnClient, sanityClient } from "./client.server";
 
 export function urlFor(source: any) {
@@ -72,14 +72,14 @@ export async function getGpTema(
 }
 
 export async function getDocuments(
-  source: (typeof allArticleDocuments)[number] | "all",
+  source: (typeof SchemaConfig.allArticleDocuments)[number] | "all",
   token?: string,
 ): Promise<{ slug: string; lastmod: string }[]> {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug.current, _updatedAt }`,
     {
-      types: source === "all" ? allArticleDocuments : [source],
+      types: source === "all" ? SchemaConfig.allArticleDocuments : [source],
     },
   );
   const paths: { slug: string; lastmod: string }[] = [];

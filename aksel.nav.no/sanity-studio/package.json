@@ -6,6 +6,7 @@
   "author": "Aksel | Nav designsystem team",
   "scripts": {
     "build": "yarn type-check",
+    "test": "yarn type-check",
     "sanity:backup": "yarn tsx --env-file-if-exists=.env sanity.backup.ts",
     "update:sanity-schema": "yarn sanity schema extract --workspace default --path ./.sanity/sanity-schema.json && yarn update:sanity-typegen",
     "update:sanity-typegen": "yarn sanity typegen generate",
@@ -47,8 +48,14 @@
   },
   "exports": {
     "./schema": {
+      "types": "./schema/schema.config.ts",
       "import": "./schema/schema.config.ts",
-      "types": "./schema/schema.config.ts"
+      "default": "./schema/schema.config.ts"
+    },
+    "./env": {
+      "types": "./sanity.env.ts",
+      "import": "./sanity.env.ts",
+      "default": "./sanity.env.ts"
     }
   }
 }
