@@ -11348,6 +11348,7 @@ __metadata:
     sanity-plugin-references: "npm:1.1.0"
     styled-components: "npm:^6.0.0"
     swr: "npm:^2.4.1"
+    tsx: "npm:^4.20.6"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft

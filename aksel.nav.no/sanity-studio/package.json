@@ -5,10 +5,11 @@
   "description": "Aksel.nav.no sanity studio",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
-    "build": "",
-    "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
-    "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default --path ./sanity-schema.json && yarn sanity typegen generate",
-    "update:sanity-manifest": "cd ./sanity && yarn sanity schema deploy --workspace default --manifest-dir ../public/studio/static",
+    "build": "yarn type-check",
+    "sanity:backup": "yarn tsx --env-file-if-exists=.env sanity.backup.ts",
+    "update:sanity-schema": "yarn sanity schema extract --workspace default --path ./.sanity/sanity-schema.json && yarn update:sanity-typegen",
+    "update:sanity-typegen": "yarn sanity typegen generate",
+    "update:sanity-manifest": "yarn sanity schema deploy --workspace default --manifest-dir ../website/public/studio/static",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "@sanity/schema": "6.0.0",
     "@types/lodash": "4.17.20",
     "@types/react": "19.2.14",
+    "tsx": "^4.20.6",
     "typescript": "6.0.3"
   }
 }
