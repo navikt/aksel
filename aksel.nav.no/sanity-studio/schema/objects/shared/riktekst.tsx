@@ -16,12 +16,13 @@ import {
 } from "@navikt/aksel-icons";
 import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
-import { allArticleDocsRef, clientConfig } from "../../schema.config";
+import { allArticleDocsRef, getSanityBaseConfig } from "../../schema.config";
 
 const sanityClient = createClient({
-  ...clientConfig,
+  ...getSanityBaseConfig(),
   withCredentials: true,
 });
+
 const headingsQuery = groq`*[_id == $id][0].content[style match 'h*']{_key, style, "text": pt::text(@)}`;
 
 function HeadingInput(props: StringInputProps) {

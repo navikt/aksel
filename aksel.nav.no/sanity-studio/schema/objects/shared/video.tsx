@@ -1,21 +1,26 @@
-import { createClient, groq } from "next-sanity";
-import { type FileValue, defineField, defineType } from "sanity";
+import { groq } from "next-sanity";
+import {
+  type FileValue,
+  type ValidationContext,
+  defineField,
+  defineType,
+} from "sanity";
 import { VideoplayerIcon } from "@navikt/aksel-icons";
-import { clientConfig } from "../../schema.config";
-
-const sanityClient = createClient({
-  ...clientConfig,
-  withCredentials: true,
-});
+import { SANITY_API_VERSION } from "../../../sanity.env";
 
 const query = groq`*[_id == $id][0]{size}`;
 
-const validateFileSize = (maxSizeInMb: number, file?: FileValue) => {
+const validateFileSize = (
+  maxSizeInMb: number,
+  ctx: ValidationContext,
+  file?: FileValue,
+) => {
   if (!file?.asset?._ref) {
     return true;
   }
 
-  return sanityClient
+  return ctx
+    .getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(query, { id: file.asset._ref })
     .then((res) =>
       res.size > 1024 * 1024 * maxSizeInMb
@@ -41,7 +46,7 @@ export const Video = defineType({
         accept: "video/webm",
       },
       validation: (Rule) =>
-        Rule.required().custom((file) => validateFileSize(30, file)),
+        Rule.required().custom((file, ctx) => validateFileSize(30, ctx, file)),
     }),
     defineField({
       name: "fallback",
@@ -51,7 +56,8 @@ export const Video = defineType({
       options: {
         accept: "video/mp4",
       },
-      validation: (Rule) => Rule.custom((file) => validateFileSize(60, file)),
+      validation: (Rule) =>
+        Rule.custom((file, ctx) => validateFileSize(60, ctx, file)),
     }),
     defineField({
       name: "track",

@@ -1,6 +1,6 @@
 import { createClient } from "@sanity/client";
 import { exportDataset } from "@sanity/export";
-import { clientConfig } from "./schema/schema.config";
+import { getSanityBaseConfig } from "./schema/schema.config";
 
 const sanityToken = process.env.SANITY_READ;
 
@@ -9,8 +9,7 @@ if (!sanityToken) {
 }
 
 const client = createClient({
-  ...clientConfig,
-  dataset: "production",
+  ...getSanityBaseConfig(),
   token: sanityToken,
 });
 

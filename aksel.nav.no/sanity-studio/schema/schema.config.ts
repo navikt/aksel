@@ -5,12 +5,18 @@ import {
   SANITY_PROJECT_ID,
 } from "../sanity.env";
 
-export const clientConfig: ClientConfig = {
-  projectId: SANITY_PROJECT_ID,
-  dataset: SANITY_DATASET,
-  useCdn: false,
-  apiVersion: SANITY_API_VERSION,
-};
+export function getSanityBaseConfig({
+  useCDN = false,
+}: {
+  useCDN?: boolean;
+} = {}): ClientConfig {
+  return {
+    projectId: SANITY_PROJECT_ID,
+    dataset: SANITY_DATASET,
+    useCdn: useCDN,
+    apiVersion: SANITY_API_VERSION,
+  };
+}
 
 export const allArticleDocuments = [
   "komponent_artikkel",
