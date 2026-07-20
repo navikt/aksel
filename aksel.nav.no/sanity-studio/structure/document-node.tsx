@@ -1,12 +1,12 @@
 import { Iframe, type IframeOptions } from "sanity-plugin-iframe-pane";
 import { referencesView } from "sanity-plugin-references";
 import type { DefaultDocumentNodeResolver } from "sanity/structure";
-import { landingsider, previews } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import { resolveProductionUrlAppdir } from "./resolve-production-url";
 
 const previewSchemaTypes = [
-  ...previews,
-  ...landingsider.map((x) => x.name),
+  ...SchemaConfig.previews,
+  ...SchemaConfig.landingsider.map((x) => x.name),
   "gp_endringslogg_artikkel",
 ];
 

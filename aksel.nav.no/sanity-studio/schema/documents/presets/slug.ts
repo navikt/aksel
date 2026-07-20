@@ -6,11 +6,7 @@ import {
   defineField,
 } from "sanity";
 import { SANITY_API_VERSION } from "../../../sanity.env";
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  templatesKategorier,
-} from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import { sanitizeSlug } from "../../schema.utils";
 
 export const validateSlug = (Rule: SlugRule, prefix: string, nesting: number) =>
@@ -76,9 +72,9 @@ export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
       }
 
       for (const section of [
-        ...komponentKategorier,
-        ...grunnleggendeKategorier,
-        ...templatesKategorier,
+        ...SchemaConfig.komponentKategorier,
+        ...SchemaConfig.grunnleggendeKategorier,
+        ...SchemaConfig.templatesKategorier,
       ]) {
         if (slug?.current === `${prefix}${section.value}`) {
           return `Slug kan ikke være lik kategori: ${section.value}`;

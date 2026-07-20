@@ -1,6 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
 import { TasklistIcon, TokenIcon } from "@navikt/aksel-icons";
-import { grunnleggendeKategorier } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import {
   categoryPanes,
   landingssideItem,
@@ -22,7 +22,11 @@ export function grunnleggendeStructure(S: StructureBuilder) {
           listOutdatedArticles(S, "ds_artikkel", 180),
 
           S.divider(),
-          ...categoryPanes(S, "ds_artikkel", grunnleggendeKategorier),
+          ...categoryPanes(
+            S,
+            "ds_artikkel",
+            SchemaConfig.grunnleggendeKategorier,
+          ),
 
           S.divider(),
           S.listItem()

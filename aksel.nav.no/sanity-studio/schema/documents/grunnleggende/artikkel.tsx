@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { EndringsloggReferanser } from "../../custom-components/gp/EndringsloggReferanser";
-import { grunnleggendeKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
@@ -39,7 +39,7 @@ export const GrunnleggendeArtikkel = defineType({
       validation: (Rule) => Rule.required(),
       options: {
         list: [
-          ...grunnleggendeKategorier.map((x) => ({
+          ...SchemaConfig.grunnleggendeKategorier.map((x) => ({
             title: x.title,
             value: x.value,
           })),

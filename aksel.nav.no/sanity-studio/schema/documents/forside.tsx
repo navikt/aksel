@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { allArticleDocsRef } from "../schema.config";
+import { SchemaConfig } from "../schema.config";
 import SanityTabGroups from "./presets/groups";
 import BaseSEOPreset from "./presets/seo";
 
@@ -37,7 +37,7 @@ export const Forside = defineType({
                   name: "highlight",
                   type: "reference",
                   hidden: ({ value }) => !value,
-                  to: allArticleDocsRef,
+                  to: SchemaConfig.allArticleDocsRef,
                   validation: (Rule) => Rule.required(),
                 }),
               ],

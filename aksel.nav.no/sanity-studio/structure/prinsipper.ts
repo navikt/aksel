@@ -1,7 +1,7 @@
 import type { StructureBuilder } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "../sanity.env";
-import { prinsippKategorier } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import { landingssideItem } from "./article-lists";
 
 export function prinsipperStructure(S: StructureBuilder) {
@@ -14,7 +14,7 @@ export function prinsipperStructure(S: StructureBuilder) {
         .items([
           landingssideItem(S, "prinsipper_landingsside"),
           S.divider(),
-          ...prinsippKategorier.map(({ value, title }) =>
+          ...SchemaConfig.prinsippKategorier.map(({ value, title }) =>
             S.listItem()
               .title(title)
               .child(

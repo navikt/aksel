@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { bloggKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { writersField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
@@ -28,7 +28,10 @@ export const Blogg = defineType({
       validation: (Rule) => Rule.required(),
       group: "innhold",
       options: {
-        list: bloggKategorier.map((x) => ({ title: x.title, value: x.value })),
+        list: SchemaConfig.bloggKategorier.map((x) => ({
+          title: x.title,
+          value: x.value,
+        })),
         layout: "radio",
       },
     }),

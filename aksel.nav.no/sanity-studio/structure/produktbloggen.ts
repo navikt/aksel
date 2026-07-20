@@ -1,6 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
 import { NewspaperIcon } from "@navikt/aksel-icons";
-import { bloggKategorier } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import {
   categoryPanes,
   landingssideItem,
@@ -21,7 +21,7 @@ export function produktBloggenStructure(S: StructureBuilder) {
           listPublishedArticles(S, "aksel_blogg"),
           listDraftArticles(S, "aksel_blogg"),
           S.divider(),
-          ...categoryPanes(S, "aksel_blogg", bloggKategorier),
+          ...categoryPanes(S, "aksel_blogg", SchemaConfig.bloggKategorier),
         ]),
     );
 }

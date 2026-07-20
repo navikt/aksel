@@ -44,5 +44,11 @@
     "@types/react": "19.2.14",
     "tsx": "^4.20.6",
     "typescript": "6.0.3"
+  },
+  "exports": {
+    "./schema": {
+      "import": "./schema/schema.config.ts",
+      "types": "./schema/schema.config.ts"
+    }
   }
 }

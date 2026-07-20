@@ -1,7 +1,7 @@
 import { defineBlueprint, defineDocumentFunction } from "@sanity/blueprints";
-import { allArticleDocuments } from "./schema/schema.config";
+import { SchemaConfig } from "./schema/schema.config";
 
-const allPublishedAtDocuments = `[${allArticleDocuments.map((t) => `"${t}"`).join(", ")}]`;
+const allPublishedAtDocuments = `[${SchemaConfig.allArticleDocuments.map((t) => `"${t}"`).join(", ")}]`;
 const allVerifiedDocuments = `[${[
   "komponent_artikkel",
   "ds_artikkel",

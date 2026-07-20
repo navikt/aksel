@@ -1,12 +1,12 @@
 import { defineField, defineType } from "sanity";
 import { HouseIcon } from "@navikt/aksel-icons";
-import { komponentKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
 const views = () => {
   const list: ReturnType<typeof defineField>[] = [];
-  komponentKategorier.forEach((kat) => {
+  SchemaConfig.komponentKategorier.forEach((kat) => {
     list.push(
       defineField({
         title: `Ingress ${kat.title}`,
@@ -40,7 +40,7 @@ export const KomponentLandingSide = defineType({
       type: "array",
       of: [{ type: "string" }],
       options: {
-        list: komponentKategorier.map((kat) => ({
+        list: SchemaConfig.komponentKategorier.map((kat) => ({
           title: kat.title,
           value: kat.value,
         })),

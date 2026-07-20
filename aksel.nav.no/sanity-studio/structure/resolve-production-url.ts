@@ -1,5 +1,5 @@
 import type { UrlResolver } from "sanity-plugin-iframe-pane";
-import { landingsider, previews } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 
 type SlugDocument = {
   _type?: string;
@@ -20,11 +20,11 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   const slug = typedDoc?.slug?.current;
 
-  if (previews.includes(type)) {
+  if (SchemaConfig.previews.includes(type)) {
     return toUrl(slug);
   }
 
-  const landingsside = landingsider.find((x) => x.name === type);
+  const landingsside = SchemaConfig.landingsider.find((x) => x.name === type);
   if (landingsside) {
     return toUrl(landingsside.url);
   }

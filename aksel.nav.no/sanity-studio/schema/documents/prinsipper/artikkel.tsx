@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "../../../sanity.env";
-import { prinsippKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import SanityTabGroups from "../presets/groups";
 import { hiddenFields } from "../presets/hidden-fields";
 import { ingressField } from "../presets/ingress";
@@ -93,7 +93,7 @@ export const Prinsipp = defineType({
           name: "prinsippvalg",
           type: "string",
           options: {
-            list: prinsippKategorier,
+            list: SchemaConfig.prinsippKategorier,
             layout: "radio",
           },
         }),

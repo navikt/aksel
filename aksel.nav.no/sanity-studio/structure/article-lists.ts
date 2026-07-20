@@ -2,9 +2,9 @@ import type { ComponentType } from "react";
 import type { StructureBuilder } from "sanity/structure";
 import { FileXMarkIcon, HouseIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "../sanity.env";
-import type { allArticleDocuments } from "../schema/schema.config";
+import type { AllArticleDocumentsT } from "../schema/schema.config";
 
-type ArticleDocumentType = (typeof allArticleDocuments)[number];
+type ArticleDocumentType = AllArticleDocumentsT;
 
 type Category = { title: string; value: string };
 

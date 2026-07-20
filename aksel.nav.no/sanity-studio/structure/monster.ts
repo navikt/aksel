@@ -1,6 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
 import { RectangleSectionsIcon } from "@navikt/aksel-icons";
-import { templatesKategorier } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import {
   categoryPanes,
   landingssideItem,
@@ -22,7 +22,11 @@ export function monsterStructure(S: StructureBuilder) {
           listOutdatedArticles(S, "templates_artikkel", 180),
 
           S.divider(),
-          ...categoryPanes(S, "templates_artikkel", templatesKategorier),
+          ...categoryPanes(
+            S,
+            "templates_artikkel",
+            SchemaConfig.templatesKategorier,
+          ),
         ]),
     );
 }

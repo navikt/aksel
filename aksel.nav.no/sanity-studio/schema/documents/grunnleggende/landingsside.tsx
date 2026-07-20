@@ -1,12 +1,12 @@
 import { defineField, defineType } from "sanity";
 import { HouseIcon } from "@navikt/aksel-icons";
-import { grunnleggendeKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
 const views = () => {
   const list: ReturnType<typeof defineField>[] = [];
-  grunnleggendeKategorier.forEach((kat) => {
+  SchemaConfig.grunnleggendeKategorier.forEach((kat) => {
     list.push(
       defineField({
         title: `Ingress ${kat.title}`,
@@ -48,7 +48,7 @@ export const GrunnleggendeLandingSide = defineType({
       type: "array",
       of: [{ type: "string" }],
       options: {
-        list: grunnleggendeKategorier.map((kat) => ({
+        list: SchemaConfig.grunnleggendeKategorier.map((kat) => ({
           title: kat.title,
           value: kat.value,
         })),

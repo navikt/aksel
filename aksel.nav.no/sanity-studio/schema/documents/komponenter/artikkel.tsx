@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { BodyLong, ReadMore, VStack } from "@navikt/ds-react";
 import { EndringsloggReferanser } from "../../custom-components/gp/EndringsloggReferanser";
-import { komponentKategorier } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 import { showForDevsOnly } from "../../schema.utils";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import SanityTabGroups from "../presets/groups";
@@ -41,7 +41,7 @@ export const KomponentArtikkel = defineType({
       validation: (Rule) => Rule.required(),
       options: {
         list: [
-          ...komponentKategorier.map((x) => ({
+          ...SchemaConfig.komponentKategorier.map((x) => ({
             title: x.title,
             value: x.value,
           })),

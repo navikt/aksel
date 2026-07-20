@@ -1,5 +1,5 @@
 import { defineField } from "sanity";
-import { allArticleDocsRef } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 
 export const relevanteArtiklerField = defineField({
   title: "Relaterte artikler",
@@ -13,7 +13,7 @@ export const relevanteArtiklerField = defineField({
     {
       type: "reference",
       weak: true,
-      to: allArticleDocsRef,
+      to: SchemaConfig.allArticleDocsRef,
     },
   ],
 });

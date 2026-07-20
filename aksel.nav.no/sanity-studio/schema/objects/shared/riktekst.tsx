@@ -1,10 +1,12 @@
-import { createClient, groq } from "next-sanity";
+import { groq } from "next-sanity";
 import { useEffect, useState } from "react";
 import {
+  type SanityClient,
   type Rule as SanityRule,
   type StringInputProps,
   type TitledListValue,
   defineField,
+  useClient,
   useFormValue,
 } from "sanity";
 import {
@@ -14,25 +16,22 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
+import { SANITY_API_VERSION } from "../../../sanity.env";
 import { ExternalLinkRenderer } from "../../custom-components/LinkRenderer";
 import { validateHeadingLevels } from "../../documents/presets/validate-heading-levels";
-import { allArticleDocsRef, getSanityBaseConfig } from "../../schema.config";
-
-const sanityClient = createClient({
-  ...getSanityBaseConfig(),
-  withCredentials: true,
-});
+import { SchemaConfig } from "../../schema.config";
 
 const headingsQuery = groq`*[_id == $id][0].content[style match 'h*']{_key, style, "text": pt::text(@)}`;
 
 function HeadingInput(props: StringInputProps) {
   const path = props.path.slice(0, -1).concat("reference");
   const reference = useFormValue(path) as { _ref: string };
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
   const [headings, setHeadings] = useState<TitledListValue<string>[]>([]);
 
   useEffect(() => {
-    getHeadingsFromDocument(reference._ref).then(setHeadings);
-  }, [reference._ref]);
+    getHeadingsFromDocument(client, reference._ref).then(setHeadings);
+  }, [client, reference._ref]);
 
   if (!props.schemaType.options) {
     // eslint-disable-next-line react-hooks/immutability
@@ -47,8 +46,8 @@ function HeadingInput(props: StringInputProps) {
   return props.renderDefault(props);
 }
 
-async function getHeadingsFromDocument(ref: string) {
-  const headings = await sanityClient.fetch(headingsQuery, { id: ref });
+async function getHeadingsFromDocument(client: SanityClient, ref: string) {
+  const headings = await client.fetch(headingsQuery, { id: ref });
   if (!headings) {
     return [];
   }
@@ -141,7 +140,7 @@ export const block = {
             title: "Artikkel",
             name: "reference",
             type: "reference",
-            to: allArticleDocsRef,
+            to: SchemaConfig.allArticleDocsRef,
           }),
           defineField({
             title: "Anker til overskrift (valgfritt)",
@@ -158,7 +157,10 @@ export const block = {
                 };
                 if (!parent.reference) return true;
                 const ref = parent.reference._ref;
-                const headings = await getHeadingsFromDocument(ref);
+                const client = context.getClient({
+                  apiVersion: SANITY_API_VERSION,
+                });
+                const headings = await getHeadingsFromDocument(client, ref);
                 if (!headings.find((h: any) => h.value === value)) {
                   return "Dette ankeret finnes ikke i artikkelen";
                 }

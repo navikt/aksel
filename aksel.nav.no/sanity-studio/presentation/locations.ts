@@ -3,9 +3,9 @@ import type {
   DocumentLocationResolver,
   DocumentLocationsState,
 } from "sanity/presentation";
-import { allArticleDocuments } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 
-const validTypes: string[] = [...allArticleDocuments];
+const validTypes: string[] = [...SchemaConfig.allArticleDocuments];
 
 export const locations: DocumentLocationResolver = (params, context) => {
   const doc$ = context.documentStore.listenQuery(

@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { LinkIcon } from "@navikt/aksel-icons";
-import { allArticleDocsRef } from "../../schema.config";
+import { SchemaConfig } from "../../schema.config";
 
 export const RelatertInnhold = defineType({
   name: "relatert_innhold",
@@ -47,7 +47,7 @@ export const RelatertInnhold = defineType({
               title: "Lenke til Intern sanity-side",
               name: "intern_lenke",
               type: "reference",
-              to: [...allArticleDocsRef],
+              to: [...SchemaConfig.allArticleDocsRef],
               hidden: ({ parent }) => !parent?.intern,
             }),
             defineField({

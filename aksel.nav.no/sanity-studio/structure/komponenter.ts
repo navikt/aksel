@@ -1,6 +1,6 @@
 import type { StructureBuilder } from "sanity/structure";
 import { ComponentIcon } from "@navikt/aksel-icons";
-import { komponentKategorier } from "../schema/schema.config";
+import { SchemaConfig } from "../schema/schema.config";
 import {
   categoryPanes,
   landingssideItem,
@@ -22,7 +22,11 @@ export function komponenterStructure(S: StructureBuilder) {
           listOutdatedArticles(S, "komponent_artikkel", 180),
 
           S.divider(),
-          ...categoryPanes(S, "komponent_artikkel", komponentKategorier),
+          ...categoryPanes(
+            S,
+            "komponent_artikkel",
+            SchemaConfig.komponentKategorier,
+          ),
         ]),
     );
 }
