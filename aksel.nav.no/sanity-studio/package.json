@@ -45,7 +45,7 @@
     "@types/react": "19.2.14",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "4.1.9"
+    "vitest": "4.1.10"
   },
   "exports": {
     "./schema": {

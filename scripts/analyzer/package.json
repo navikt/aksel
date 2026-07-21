@@ -14,7 +14,7 @@
     "flat": "6.0.1",
     "mlly": "1.8.2",
     "tar": "^7.5.16",
-    "vitest": "4.1.9"
+    "vitest": "4.1.10"
   },
   "scripts": {
     "run:analyze-npm-action": "yarn clean && concurrently \"yarn pack-remote && tsx ./src/runners/analyze-package.ts --remote --out trunk-results.json\" \"yarn pack-local && tsx ./src/runners/analyze-package.ts --out branch-results.json\"",
