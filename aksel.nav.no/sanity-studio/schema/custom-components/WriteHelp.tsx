@@ -38,7 +38,7 @@ const WriteHelp = () => {
           om teksten er forståelig og svarer på brukeroppgavene.
         </ListItem>
         <ListItem>
-          Gi lesereren relevante veier videre. Når du lenker til andre sider, må
+          Gi leseren relevante veier videre. Når du lenker til andre sider, må
           du skrive en lenketekst som er beskrivende for lenkens mål.
         </ListItem>
         <ListItem>

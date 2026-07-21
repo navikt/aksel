@@ -1,3 +1,4 @@
+import "server-only";
 import { SchemaConfig } from "aksel-sanity-studio/schema";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { sanityFetch } from "@/app/_sanity/live";
