@@ -75,7 +75,7 @@
     "@svgr/cli": "8.1.0",
     "@types/js-yaml": "^4.0.9",
     "@types/react": "19.2.14",
-    "adm-zip": "^0.5.10",
+    "adm-zip": "^0.6.0",
     "concurrently": "9.2.1",
     "copyfiles": "^2.4.1",
     "fast-glob": "3.3.3",
