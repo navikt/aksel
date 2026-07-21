@@ -31,7 +31,6 @@
       "@/utils": ["./components/utils/index.ts"],
       "@/slack": ["./components/utils/slack/index.ts"],
       "@/layout/*": ["./components/layout/*"],
-      "@/assets/*": ["./components/assets/*"],
       "@/web/*": ["./components/website-modules/*"],
       "@/cms/*": ["./components/sanity-modules/*"],
       "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],

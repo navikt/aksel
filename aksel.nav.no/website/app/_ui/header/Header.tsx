@@ -1,12 +1,12 @@
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
+import { AkselLogo } from "@/app/_ui/assets/Logo";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
-import AkselLogo from "@/assets/Logo";
 import { cl } from "@/ui-utils/className";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";

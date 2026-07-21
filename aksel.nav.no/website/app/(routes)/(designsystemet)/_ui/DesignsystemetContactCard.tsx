@@ -8,8 +8,8 @@ import {
   LinkCardFooter,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
+import { GithubIcon, SlackIcon } from "@/app/_ui/assets/Icons";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { GithubIcon, SlackIcon } from "@/assets/Icons";
 
 type ContactCardT = {
   title: string;
