@@ -11420,7 +11420,7 @@ __metadata:
     "@vitest/browser-playwright": "npm:4.1.10"
     "@vitest/coverage-v8": "npm:4.1.10"
     "@vitest/eslint-plugin": "npm:1.6.23"
-    chromatic: "npm:15.1.0"
+    chromatic: "npm:18.0.1"
     cross-env: "npm:^10.1.0"
     eslint: "npm:^9.39.2"
     eslint-plugin-aksel-local: "npm:*"
@@ -12796,22 +12796,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:15.1.0":
-  version: 15.1.0
-  resolution: "chromatic@npm:15.1.0"
+"chromatic@npm:18.0.1":
+  version: 18.0.1
+  resolution: "chromatic@npm:18.0.1"
+  dependencies:
+    semver: "npm:^7.3.5"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+    "@chromatic-com/vitest": ^0.*.* || ^1.0.0
   peerDependenciesMeta:
     "@chromatic-com/cypress":
       optional: true
     "@chromatic-com/playwright":
       optional: true
+    "@chromatic-com/vitest":
+      optional: true
   bin:
-    chroma: dist/bin.js
-    chromatic: dist/bin.js
-    chromatic-cli: dist/bin.js
-  checksum: 10/a82d4a3458f99560cf003e2d5d3a5c652026d3bc55e00766a3d47df4fc8ad5a4279bce467d09c3adb0c44621318b8237fa53ad0d966cd2b63d178b47bfa7c8fd
+    chroma: dist/bin.cjs
+    chromatic: dist/bin.cjs
+    chromatic-cli: dist/bin.cjs
+  checksum: 10/9002459279f13c431a0fa0b12dd2a02e799730ebcd9fcf263189482e0265bad1bb5142f12ac83d9b8996c000158a2e25b473912fbc32c11bf0042c91fe16efb3
   languageName: node
   linkType: hard
 
