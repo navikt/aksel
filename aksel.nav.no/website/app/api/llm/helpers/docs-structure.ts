@@ -1,8 +1,4 @@
-import {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  templatesKategorier,
-} from "../../../../sanity/config";
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 
 type KategoriValue = {
   title: string;
@@ -50,16 +46,16 @@ const llmSectionConfig = {
     title: "Components",
     prefix: "komponenter",
     order: 0,
-    kategorier: komponentKategorier,
+    kategorier: SchemaConfig.komponentKategorier,
     staticPages: [
       { title: "Ikoner", slug: MARKDOWN_PAGE_PATHS.ICONS, category: "core" },
     ],
-  } satisfies SectionEntry<typeof komponentKategorier>,
+  } satisfies SectionEntry<typeof SchemaConfig.komponentKategorier>,
   ds_artikkel: {
     title: "Foundations",
     prefix: "grunnleggende",
     order: 1,
-    kategorier: grunnleggendeKategorier,
+    kategorier: SchemaConfig.grunnleggendeKategorier,
     staticPages: [
       {
         title: "Design tokens",
@@ -77,14 +73,14 @@ const llmSectionConfig = {
         category: "kode",
       },
     ],
-  } satisfies SectionEntry<typeof grunnleggendeKategorier>,
+  } satisfies SectionEntry<typeof SchemaConfig.grunnleggendeKategorier>,
   templates_artikkel: {
     title: "Templates and Patterns",
     prefix: "monster-maler",
     order: 2,
-    kategorier: templatesKategorier,
+    kategorier: SchemaConfig.templatesKategorier,
     staticPages: [],
-  } satisfies SectionEntry<typeof templatesKategorier>,
+  } satisfies SectionEntry<typeof SchemaConfig.templatesKategorier>,
 };
 
 function groupLlmDocumentation(items: MarkdownArticle[]): GroupedLlmSection[] {

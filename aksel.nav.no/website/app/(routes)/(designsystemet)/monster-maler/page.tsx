@@ -1,3 +1,4 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import type { Metadata } from "next/types";
 import { BodyLong, Box, HGrid, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
@@ -9,7 +10,6 @@ import {
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { templatesKategorier } from "@/sanity/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data: page } = await sanityFetch({
@@ -48,7 +48,7 @@ export default async function Page() {
       </div>
 
       <div>
-        {templatesKategorier
+        {SchemaConfig.templatesKategorier
           .filter((kat) => links?.some((x) => x.kategori === kat.value))
           .map((kat) => {
             return (

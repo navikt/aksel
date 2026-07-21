@@ -3,7 +3,7 @@ import {
   destructureBlocks,
   destructureBlocksForMarkdown,
   writersAll,
-} from "@/sanity/queries";
+} from "./query-utils";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 

@@ -26,7 +26,8 @@
     "eslint-plugin-aksel-local",
     "scripts",
     "aksel-analyzer",
-    "aksel-mcp"
+    "aksel-mcp",
+    "aksel-sanity-studio"
   ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {

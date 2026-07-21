@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Events } from "@navikt/analytics-types";
 import { Heading } from "@navikt/ds-react";
+import { urlForImage } from "@/app/_sanity/utils";
 import {
   useGlobalSearch,
   useGlobalSearchResults,
@@ -15,7 +16,6 @@ import type {
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
 import styles from "./GlobalSearch.module.css";
 
@@ -68,7 +68,7 @@ function GlobalSearchLink(props: {
       ? `/${hit.item.slug}#${hit.anchor}`
       : `/${hit.item.slug}`;
 
-  const imageUrl = urlFor(hit.item.status?.bilde)?.auto("format").url();
+  const imageUrl = urlForImage(hit.item.status?.bilde)?.auto("format").url();
 
   return (
     <li className={styles.searchLinkLi}>

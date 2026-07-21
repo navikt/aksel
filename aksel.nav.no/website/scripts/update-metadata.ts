@@ -1,11 +1,12 @@
+import { createClient } from "next-sanity";
 import fs from "node:fs";
 import path from "node:path";
 import type {
   DocumentedEntry,
   Metadata,
 } from "../../../@navikt/core/react/scripts/metadata/metadata.types";
+import { SANITY_BASE_CONFIG } from "../_sanity/sanity.config";
 import type { Ds_component_metadata } from "../app/_sanity/query-types";
-import { noCdnClient } from "../sanity/interface/client.server";
 import { findUnequalDocuments } from "./helpers/find-unequal-documents";
 
 updateMetadata();
@@ -18,15 +19,21 @@ async function updateMetadata() {
   console.info("Updating metadata...");
 
   const newMetadataDocuments = metadataDocuments();
-  const oldMetadataDocuments = await noCdnClient(token).fetch(
+
+  const client = createClient({
+    ...SANITY_BASE_CONFIG,
+    token,
+  });
+  const oldMetadataDocuments = await client.fetch(
     `*[_type == "ds_component_metadata"]`,
   );
 
-  const transactionClient = noCdnClient(token).transaction();
+  const transactionClient = client.transaction();
 
   let updatedCount = 0;
 
   const unequalDocuments = findUnequalDocuments({
+    client,
     newDocuments: newMetadataDocuments,
     oldDocuments: oldMetadataDocuments,
     keysToCompare: [

@@ -1,3 +1,4 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import type { Metadata } from "next";
 import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
@@ -10,19 +11,18 @@ import {
   METADATA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { sanityCategoryLookup, templatesKategorier } from "@/sanity/config";
 import { MonsterMalerPage } from "./_ui/MonsterMalerPage";
 
 type Props = {
   params: Promise<{ category: string }>;
 };
 
-const categoryConfig = sanityCategoryLookup("templates");
+const categoryConfig = SchemaConfig.categoryLookup("templates");
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
 
-  if (!templatesKategorier.find((cat) => cat.value === category)) {
+  if (!SchemaConfig.templatesKategorier.find((cat) => cat.value === category)) {
     const { data: pageData } = await sanityFetch({
       query: METADATA_BY_SLUG_QUERY,
       params: { slug: `monster-maler/${category}` },
@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
    * Overview-pages can only match the categories in config. If we get a category outside of the config,
    * we can assume its a "top-level" page, and we should not show the overview page.
    */
-  if (!templatesKategorier.find((cat) => cat.value === category)) {
+  if (!SchemaConfig.templatesKategorier.find((cat) => cat.value === category)) {
     return <MonsterMalerPage slug={`monster-maler/${category}`} />;
   }
 
