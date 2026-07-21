@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 8.15.1
+
+### Patch Changes
+
+- Internal: Optimized rendering of `asChild`-components ([`efa4f05`](https://github.com/navikt/aksel/commit/efa4f05c56e557e316cacbf1e955dbb825c93cc9))
+
+- Provider: memorized internal context ([`c961c2d`](https://github.com/navikt/aksel/commit/c961c2dcc1a827952991c972371afa93f577422d))
+
+- Dependencies: updated floating-ui to latest 0.27.20 ([`8cc7a18`](https://github.com/navikt/aksel/commit/8cc7a185eef675cd7cce56ec912842cb8390f4a5))
+
+- DataGrid: Auto-scale column-width based on document font-size ([#5054](https://github.com/navikt/aksel/pull/5054))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.15.1
+  - @navikt/aksel-icons@8.15.1
+
 ## 8.15.0
 
 ### Minor Changes
