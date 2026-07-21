@@ -1,7 +1,7 @@
 import type { Metadata } from "next/types";
 import { ClockDashedIcon } from "@navikt/aksel-icons";
 import { BodyLong, HStack, Heading, Link, VStack } from "@navikt/ds-react";
-import { FigmaIcon, GithubIcon } from "@/assets/Icons";
+import { FigmaIcon, GithubIcon } from "@/app/_ui/assets/Icons";
 import { DesignsystemetEyebrow } from "../../../_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 import TokenTableOfContents from "./_ui/TokenTableOfContents";

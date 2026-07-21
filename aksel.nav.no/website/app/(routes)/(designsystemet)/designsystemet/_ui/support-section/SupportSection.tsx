@@ -13,7 +13,7 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import type { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
-import { GithubIcon, SlackIcon } from "@/assets/Icons";
+import { GithubIcon, SlackIcon } from "@/app/_ui/assets/Icons";
 
 type SupportData = NonNullable<
   NonNullable<DS_FRONT_PAGE_QUERY_RESULT>["ds_support"]

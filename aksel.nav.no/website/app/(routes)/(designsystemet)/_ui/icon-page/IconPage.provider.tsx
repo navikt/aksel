@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { useMedia } from "@/hooks/useMedia";
+import { useMedia } from "@/ui-utils/hooks/useMedia";
 
 type IconPageContextT = {
   activeIconButton: HTMLButtonElement | null;
