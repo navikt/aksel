@@ -22,15 +22,7 @@
       "./app/theme.d.ts"
     ],
     "paths": {
-      "@/sb-util": ["./.storybook/utils.tsx"],
-      "@/auth/*": ["./components/auth/*"],
-      "@/hooks/*": ["./components/hooks/*"],
-      "@/logging": ["./components/logging/index.ts"],
-      "@/utils": ["./components/utils/index.ts"],
-      "@/slack": ["./components/utils/slack/index.ts"],
-      "@/layout/*": ["./components/layout/*"],
       "@/web/*": ["./components/website-modules/*"],
-      "@/cms/*": ["./components/sanity-modules/*"],
       "@/sanity/config": ["./_sanity/sanity.config.ts"],
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
