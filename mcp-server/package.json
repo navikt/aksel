@@ -19,9 +19,9 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.21",
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "@navikt/aksel": "^8.15.0",
-    "@navikt/aksel-icons": "^8.15.0",
-    "@navikt/ds-tokens": "^8.15.0",
+    "@navikt/aksel": "^8.15.1",
+    "@navikt/aksel-icons": "^8.15.1",
+    "@navikt/ds-tokens": "^8.15.1",
     "@sanity/client": "7.23.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.10.9",
