@@ -1,9 +1,9 @@
+import { SANITY_DATASET } from "aksel-sanity-studio/env";
 import { HGrid, Heading } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
-import { SANITY_DATASET } from "@/sanity/config";
 import { FooterEdit } from "./Footer.edit";
 import styles from "./Footer.module.css";
 

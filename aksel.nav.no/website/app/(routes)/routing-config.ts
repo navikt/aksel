@@ -3,11 +3,7 @@
  * hardcoded in the codebase. We still need a way to reference them in the sidebar and sitemap.
  * This file contains the routes for those pages.
  */
-import type {
-  grunnleggendeKategorier,
-  komponentKategorier,
-  templatesKategorier,
-} from "@/sanity/config";
+import type { SchemaConfig } from "aksel-sanity-studio/schema";
 import { metadata as tokenMetadata } from "./(designsystemet)/grunnleggende/styling/design-tokens/page";
 import { metadata as iconsMetadata } from "./(designsystemet)/komponenter/ikoner/page";
 
@@ -30,7 +26,10 @@ type Routes = {
     _type: "komponent_artikkel";
     root: PageRoute[];
     nested?: Partial<
-      Record<(typeof komponentKategorier)[number]["value"], PageRoute[]>
+      Record<
+        (typeof SchemaConfig.komponentKategorier)[number]["value"],
+        PageRoute[]
+      >
     >;
   };
   grunnleggende: {
@@ -38,7 +37,10 @@ type Routes = {
     _type: "ds_artikkel";
     root: PageRoute[];
     nested?: Partial<
-      Record<(typeof grunnleggendeKategorier)[number]["value"], PageRoute[]>
+      Record<
+        (typeof SchemaConfig.grunnleggendeKategorier)[number]["value"],
+        PageRoute[]
+      >
     >;
   };
   templates: {
@@ -46,7 +48,10 @@ type Routes = {
     _type: "templates_artikkel";
     root: PageRoute[];
     nested?: Partial<
-      Record<(typeof templatesKategorier)[number]["value"], PageRoute[]>
+      Record<
+        (typeof SchemaConfig.templatesKategorier)[number]["value"],
+        PageRoute[]
+      >
     >;
   };
 };

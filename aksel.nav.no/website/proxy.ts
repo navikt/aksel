@@ -1,7 +1,7 @@
 import { createClient } from "next-sanity";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
 const ignoredStaticPaths = [

@@ -1,6 +1,6 @@
 import { createClient } from "next-sanity";
 import { readWithDraftToken } from "@/app/_sanity/token";
-import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 export const client = createClient({
   ...SANITY_BASE_CONFIG,

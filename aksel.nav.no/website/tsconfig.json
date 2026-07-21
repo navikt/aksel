@@ -35,8 +35,7 @@
       "@/web/*": ["./components/website-modules/*"],
       "@/cms/*": ["./components/sanity-modules/*"],
       "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],
-      "@/sanity/config": ["./sanity/config.ts"],
-      "@/sanity/config-2": ["./_sanity/sanity.config.ts"],
+      "@/sanity/config": ["./_sanity/sanity.config.ts"],
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
       ],

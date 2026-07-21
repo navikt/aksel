@@ -7,9 +7,9 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import type { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
+import type { SidebarGroupedPagesT } from "./Sidebar.types";
 
 function DesignsystemSidebarSubNav(
   props: SidebarGroupedPagesT & { layout: "sidebar" | "mobile" },

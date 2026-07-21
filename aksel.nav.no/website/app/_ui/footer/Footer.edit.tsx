@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
-import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 import styles from "./Footer.module.css";
 
 function FooterEdit() {

@@ -4,7 +4,7 @@ import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
 import { BodyLong, Box, Button, Link, VStack } from "@navikt/ds-react";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
-import { SANITY_BASE_CONFIG } from "@/sanity/config-2";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 function SystemPanelAction() {
   return (

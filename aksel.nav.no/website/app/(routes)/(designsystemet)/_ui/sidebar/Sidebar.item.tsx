@@ -9,8 +9,8 @@ import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import type { SidebarPageT } from "@/types";
 import styles from "./Sidebar.module.css";
+import type { SidebarPageT } from "./Sidebar.types";
 
 function DesignsystemSidebarItem(props: {
   page: SidebarPageT;
