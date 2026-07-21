@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { ErrorInfo } from "react";
+import React, { type ErrorInfo } from "react";
 import { Events } from "@navikt/analytics-types";
 import { Tag as DsTag, HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
