@@ -10,7 +10,7 @@ import React, {
 import { Events } from "@navikt/analytics-types";
 import { Box } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
+import { useEscapeKeydown } from "@/ui-utils/hooks/useEscapeKeydown";
 import styles from "./Hero.module.css";
 
 type GodPraksisHeroContextType = {

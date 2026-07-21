@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { Events } from "@navikt/analytics-types";
-import { Heading } from "@navikt/ds-react";
+import { Heading, Tag } from "@navikt/ds-react";
 import { urlForImage } from "@/app/_sanity/utils";
 import {
   useGlobalSearch,
@@ -16,7 +16,6 @@ import type {
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { StatusTag } from "@/web/StatusTag";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchHitCollection({
@@ -95,9 +94,7 @@ function GlobalSearchLink(props: {
             {hit.item.heading}
           </Heading>
 
-          {hit.item?.status?.tag && (
-            <StatusTag status={hit.item.status.tag} aria-hidden />
-          )}
+          {hit.item?.status?.tag && <StatusTag status={hit.item.status.tag} />}
         </span>
 
         <p className={styles.searchLinkDescription}>{hit.description}</p>
@@ -118,5 +115,36 @@ function GlobalSearchLink(props: {
     </li>
   );
 }
+
+const StatusTag = ({ status }: { status: string }) => {
+  switch (status) {
+    case "preview":
+      return (
+        <Tag size="small" data-color="meta-purple" aria-hidden>
+          Preview
+        </Tag>
+      );
+    case "beta":
+      return (
+        <Tag size="small" data-color="meta-purple" aria-hidden>
+          Beta
+        </Tag>
+      );
+    case "new":
+      return (
+        <Tag data-color="info" size="small" aria-hidden>
+          Ny
+        </Tag>
+      );
+    case "deprecated":
+      return (
+        <Tag data-color="neutral" size="small" aria-hidden>
+          Avviklet
+        </Tag>
+      );
+    default:
+      return null;
+  }
+};
 
 export { GlobalSearchHitCollection };

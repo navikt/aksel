@@ -1,6 +1,6 @@
 import React from "react";
 
-const AkselLogo = (props) => (
+const AkselLogo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="119"
     height="26"
@@ -44,4 +44,4 @@ const AkselLogo = (props) => (
   </svg>
 );
 
-export default AkselLogo;
+export { AkselLogo };

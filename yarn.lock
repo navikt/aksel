@@ -22224,9 +22224,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playroom@npm:^1.2.1":
-  version: 1.2.2
-  resolution: "playroom@npm:1.2.2"
+"playroom@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "playroom@npm:1.3.0"
   dependencies:
     "@babel/core": "npm:^7.20.5"
     "@babel/parser": "npm:^7.23.4"
@@ -22284,7 +22284,7 @@ __metadata:
     react-dom: ^18 || ^19
   bin:
     playroom: bin/cli.cjs
-  checksum: 10/9c2fea186354da6310d308ac77047af8a751fae8013034852d6f28a330367aa765cc7373bb887984d79172924c624a56a00b60dc80248d1b9fd73d80c9f51157
+  checksum: 10/a1906cc06cb89e49b449d0594bc9cbf001426f8d1ef6f7b951c1ab0a823bbfdeee6022168f2f064d2a8ade15b3890685014521e787324b71daede171eb5c3bd1
   languageName: node
   linkType: hard
 
@@ -22298,7 +22298,7 @@ __metadata:
     "@types/node": "npm:^24.10.9"
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
-    playroom: "npm:^1.2.1"
+    playroom: "npm:^1.3.0"
     react: "npm:19.2.7"
     style-loader: "npm:^4.0.0"
     tsx: "npm:^4.20.6"
