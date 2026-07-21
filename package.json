@@ -98,7 +98,7 @@
     "@vitest/eslint-plugin": "1.6.23",
     "chromatic": "15.1.0",
     "cross-env": "^10.1.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.7.0",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",
