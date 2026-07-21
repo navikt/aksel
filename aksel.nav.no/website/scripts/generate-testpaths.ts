@@ -8,9 +8,11 @@ const sitemap = new Sitemapper({
 sitemap
   .fetch("https://aksel.nav.no/sitemap.xml")
   .then(({ sites }) => {
+    const uniqueUrls = Array.from(new Set(sites));
+
     fs.writeFileSync(
       "./e2e/sitemap-urls.json",
-      JSON.stringify(sites.map((url) => new URL(url).pathname)),
+      JSON.stringify(uniqueUrls.map((url) => new URL(url).pathname)),
     );
   })
   .catch((error) => {
