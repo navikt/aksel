@@ -23,7 +23,6 @@
     ],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
-      "@/sanity-block": ["./components/website-modules/SanityBlockContent.tsx"],
       "@/auth/*": ["./components/auth/*"],
       "@/hooks/*": ["./components/hooks/*"],
       "@/logging": ["./components/logging/index.ts"],
@@ -32,7 +31,6 @@
       "@/layout/*": ["./components/layout/*"],
       "@/web/*": ["./components/website-modules/*"],
       "@/cms/*": ["./components/sanity-modules/*"],
-      "@/error-boundary": ["./components/website-modules/ErrorBoundary.tsx"],
       "@/sanity/config": ["./_sanity/sanity.config.ts"],
       "@/app/CustomPortableText": [
         "./app/_ui/portable-text/CustomPortableText.tsx"
