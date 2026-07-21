@@ -1,3 +1,4 @@
+"use client";
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
 import { type DocumentActionComponent, useDocumentOperation } from "sanity";
