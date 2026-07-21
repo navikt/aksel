@@ -96,7 +96,7 @@
     "@vitest/browser-playwright": "4.1.10",
     "@vitest/coverage-v8": "4.1.10",
     "@vitest/eslint-plugin": "1.6.23",
-    "chromatic": "15.1.0",
+    "chromatic": "18.0.1",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
     "eslint-plugin-aksel-local": "*",
