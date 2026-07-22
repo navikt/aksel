@@ -1,4 +1,5 @@
 import type { Metadata } from "next/types";
+import { Suspense } from "react";
 import { z } from "zod";
 import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/(routes)/(designsystemet)/_ui/icon-page/IconPage";
@@ -24,7 +25,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page({ searchParams }: Props) {
+export default function Page({ searchParams }: Props) {
+  return (
+    <Suspense fallback={null}>
+      <DynamicIconPage searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+async function DynamicIconPage({ searchParams }: Pick<Props, "searchParams">) {
   const _searchParams = await searchParams;
 
   const { iconName, iconQuery, iconToggle } =
