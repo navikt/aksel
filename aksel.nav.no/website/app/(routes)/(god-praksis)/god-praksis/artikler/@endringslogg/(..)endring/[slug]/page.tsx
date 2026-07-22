@@ -1,9 +1,15 @@
 import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Box } from "@navikt/ds-react";
 import { DialogBody, DialogHeader } from "@navikt/ds-react/Dialog";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+} from "@/app/_sanity/live";
 import {
   GP_CHANGELOGS_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
@@ -16,17 +22,53 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// Intercepting route: renders as a dialog during client navigation and has no
+// stable pathname of its own, so the shared Header/Footer `usePathname()` can't
+// be prerendered. Opt out of prerender validation; it renders dynamically.
+export const unstable_instant = false;
+
 export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
   const { slug } = await params;
+  return <CachedPage slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <CachedPage slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const [{ data: pageData }] = await Promise.all([
     sanityFetch({
       query: GP_CHANGELOGS_BY_SLUG_QUERY,
       params: { slug },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug },
+      perspective,
+      stega,
     }),
   ]);
 
