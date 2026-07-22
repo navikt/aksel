@@ -15,7 +15,19 @@ import {
   GlobalSearchResultsView,
 } from "./GlobalSearch.results";
 
-function GlobalSearch({ isMac }: { isMac: boolean }) {
+function useIsMac() {
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent));
+  }, []);
+
+  return isMac;
+}
+
+function GlobalSearch() {
+  const isMac = useIsMac();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { clearParam, paramValue } = useParamState("query");
   const [open, setOpen] = useState<boolean>(!!paramValue);

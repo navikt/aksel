@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
 import { AkselLogo } from "@/app/_ui/assets/Logo";
@@ -16,12 +15,6 @@ const LINKS = [
   { name: "Designsystemet", href: "/designsystemet" },
   { name: "Bloggen", href: "/produktbloggen" },
 ];
-
-async function GlobalSearchArea() {
-  const data = await headers();
-  const isMacOrIOS = /Mac|iPhone|iPad|iPod/i.test(data.get("user-agent") || "");
-  return <GlobalSearch isMac={isMacOrIOS} />;
-}
 
 function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
   variant = variant ? variant : "default";
@@ -85,7 +78,7 @@ function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
           <Suspense
             fallback={<GlobalSearchButton trigger={false} isMac={false} />}
           >
-            <GlobalSearchArea />
+            <GlobalSearch />
           </Suspense>
 
           <Show below="lg">

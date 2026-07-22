@@ -10,10 +10,16 @@ type DocEntry = {
   subcategory: string;
 };
 
-// TODO: Cache Components adoption. Was `export const revalidate = 7200`. Move caching into a `'use cache'` + `cacheLife` boundary around the fetch when adopting this route.
-
 const addMarkdownExtension = (slug: string) =>
   slug.endsWith(".md") ? slug : `${slug}.md`;
+
+async function fetchDocsIndex() {
+  "use cache";
+  const { data = [] } = await sanityMarkdownFetch({
+    query: ALL_MARKDOWN_ARTICLES_INDEX_QUERY,
+  });
+  return data;
+}
 
 /**
  * Creates a structured response with all documentation available
@@ -40,9 +46,7 @@ const addMarkdownExtension = (slug: string) =>
  */
 export async function GET() {
   try {
-    const { data: items = [] } = await sanityMarkdownFetch({
-      query: ALL_MARKDOWN_ARTICLES_INDEX_QUERY,
-    });
+    const items = await fetchDocsIndex();
 
     const entries: DocEntry[] = [];
 

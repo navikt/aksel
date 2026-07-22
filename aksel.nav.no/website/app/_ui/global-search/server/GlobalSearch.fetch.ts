@@ -1,28 +1,14 @@
 import groupBy from "lodash/groupBy";
-import NodeCache from "node-cache";
+import { cacheLife } from "next/cache";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
 import type { SearchPageT } from "./GlobalSearch.config";
 
-/**
- * We use node-cache here since nextjs built in
- */
-const searchCache = new NodeCache();
-const CACHE_KEY = "globalSearchArticles";
-
-/**
- * When stable, use `use cache` with cache-life
- * https://nextjs.org/docs/app/api-reference/directives/use-cache#revalidating
- */
 async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
-  const cachedData =
-    searchCache.get<ReturnType<typeof sanitizeSanityData>>(CACHE_KEY);
-
-  if (cachedData) {
-    return cachedData;
-  }
+  "use cache";
+  cacheLife("hours");
 
   const allArticles = await client.fetch<SearchPageT[]>(
     GLOBAL_SEARCH_QUERY_ALL,
@@ -76,9 +62,6 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
       });
     }
   });
-
-  // Cache the data for 1 hour
-  searchCache.set(CACHE_KEY, sanitizedData, 60 * 60);
 
   return sanitizedData;
 }

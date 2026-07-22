@@ -47,14 +47,11 @@
 
 .footerEdit {
   position: absolute;
-  top: calc(var(--ax-space-40) * -1);
+  top: 0;
   right: 0;
   padding: var(--ax-space-8) var(--ax-space-16);
   background: var(--ax-bg-brand-blue-moderate);
-  border-radius: var(--ax-radius-8) 0 0 0;
-
-  /* Avoids px-gap between bg */
-  box-shadow: 0 0 0 1px var(--ax-bg-brand-blue-moderate);
+  border-radius: 0 0 0 var(--ax-radius-8);
 
   &:hover {
     background: var(--ax-bg-brand-blue-moderate-hover);
