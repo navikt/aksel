@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import { type NextRequest, NextResponse } from "next/server";
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 
-export const revalidate = 7200;
+// TODO: Cache Components adoption. Was `export const revalidate = 7200`. Move caching into a `'use cache'` + `cacheLife` boundary around the fetch when adopting this route.
 
 const COMPONENT_SLUG_PATTERN = /^komponenter(?:\/[a-z0-9-]+){2}$/;
 
@@ -135,7 +135,7 @@ export async function GET(request: NextRequest) {
       { title: data.title, slug, parts },
       {
         headers: {
-          "Cache-Control": `public, max-age=${revalidate}`,
+          "Cache-Control": `public, max-age=7200`,
         },
       },
     );

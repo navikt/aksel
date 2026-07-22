@@ -10,7 +10,7 @@ type DocEntry = {
   subcategory: string;
 };
 
-export const revalidate = 7200;
+// TODO: Cache Components adoption. Was `export const revalidate = 7200`. Move caching into a `'use cache'` + `cacheLife` boundary around the fetch when adopting this route.
 
 const addMarkdownExtension = (slug: string) =>
   slug.endsWith(".md") ? slug : `${slug}.md`;
@@ -80,7 +80,7 @@ export async function GET() {
       },
       {
         headers: {
-          "Cache-Control": `public, max-age=${revalidate}`,
+          "Cache-Control": `public, max-age=7200`,
         },
       },
     );
