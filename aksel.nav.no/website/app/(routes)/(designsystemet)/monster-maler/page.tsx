@@ -1,10 +1,17 @@
 import { SchemaConfig } from "aksel-sanity-studio/schema";
+import { draftMode } from "next/headers";
 import type { Metadata } from "next/types";
+import { Suspense } from "react";
 import { BodyLong, Box, HGrid, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import { DesignsystemetPageLayout } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
 import { DesignsystemetOverviewCard } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+} from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
@@ -12,9 +19,10 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: page } = await sanityFetch({
+  const { perspective } = await getDynamicFetchOptions();
+  const { data: page } = await sanityFetchMetadata({
     query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
-    stega: false,
+    perspective,
   });
 
   return {
@@ -27,9 +35,32 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return <CachedPage perspective="published" stega={false} />;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicPage />
+    </Suspense>
+  );
+}
+
+async function DynamicPage() {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return <CachedPage perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({ perspective, stega }: DynamicFetchOptions) {
+  "use cache";
+
   const { data: links } = await sanityFetch({
     query: DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY,
     params: { docType: "templates_artikkel" },
+    perspective,
+    stega,
   });
 
   return (

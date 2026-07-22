@@ -1,10 +1,18 @@
 import { SchemaConfig } from "aksel-sanity-studio/schema";
 import type { Metadata } from "next";
 import { stegaClean } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { DesignsystemetOverviewPage } from "@/app/(routes)/(designsystemet)/_ui/overview/DesignsystemetOverview";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
   DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
@@ -20,13 +28,16 @@ type Props = {
 const categoryConfig = SchemaConfig.categoryLookup("templates");
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category } = await params;
+  const [{ category }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
   if (!SchemaConfig.templatesKategorier.find((cat) => cat.value === category)) {
-    const { data: pageData } = await sanityFetch({
+    const { data: pageData } = await sanityFetchMetadata({
       query: METADATA_BY_SLUG_QUERY,
       params: { slug: `monster-maler/${category}` },
-      stega: false,
+      perspective,
     });
 
     return {
@@ -38,9 +49,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const { data: page } = await sanityFetch({
+  const { data: page } = await sanityFetchMetadata({
     query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
-    stega: false,
+    perspective,
   });
 
   const currentCategory = categoryConfig.find((cat) => cat.value === category);
@@ -56,10 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const [{ data: page }, topLevelPages] = await Promise.all([
-    sanityFetch({
+    sanityFetchStaticParams({
       query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
-      stega: false,
-      perspective: "published",
     }),
     getStaticParamsSlugs({
       type: "templates_artikkel",
@@ -86,13 +95,58 @@ export default async function Page({ params }: Props) {
     return <MonsterMalerPage slug={`monster-maler/${category}`} />;
   }
 
+  return <CategoryOverview category={category} />;
+}
+
+async function CategoryOverview({ category }: { category: string }) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return (
+      <CachedCategoryOverview
+        category={category}
+        perspective="published"
+        stega={false}
+      />
+    );
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicCategoryOverview category={category} />
+    </Suspense>
+  );
+}
+
+async function DynamicCategoryOverview({ category }: { category: string }) {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return (
+    <CachedCategoryOverview
+      category={category}
+      perspective={perspective}
+      stega={stega}
+    />
+  );
+}
+
+async function CachedCategoryOverview({
+  category,
+  perspective,
+  stega,
+}: { category: string } & DynamicFetchOptions) {
+  "use cache";
+
   const [{ data: categoryPages }, { data: landingPage }] = await Promise.all([
     sanityFetch({
       query: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
       params: { category, docType: "templates_artikkel" },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
+      perspective,
+      stega,
     }),
   ]);
 
