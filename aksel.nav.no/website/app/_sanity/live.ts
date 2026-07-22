@@ -88,4 +88,22 @@ export async function sanityFetchMetadata<const QueryString extends string>({
   return { data };
 }
 
+/**
+ * For fetching route params inside `generateStaticParams` only. `stega` is never
+ * wanted (data feeds route params) and `perspective` cookies aren't available at
+ * build time, so both are hardcoded.
+ */
+export async function sanityFetchStaticParams<
+  const QueryString extends string,
+>({ query, params = {} }: { query: QueryString; params?: QueryParams }) {
+  "use cache";
+  const { data } = await sanityFetch({
+    query,
+    params,
+    perspective: "published",
+    stega: false,
+  });
+  return { data };
+}
+
 export { sanityFetch, sanityMarkdownFetch, SanityLive };
