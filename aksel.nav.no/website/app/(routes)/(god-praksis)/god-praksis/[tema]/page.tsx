@@ -29,8 +29,7 @@ import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { formatDateString } from "@/ui-utils/format-date";
 
-/* We rely on seachparams for initial render, so need to force-dynamic */
-export const dynamic = "force-dynamic";
+// TODO: Cache Components adoption. Was `export const dynamic = "force-dynamic"` (page relies on searchParams). Adopt by wrapping the searchParams-dependent UI in <Suspense>.
 
 type Props = {
   params: Promise<{ tema: string }>;

@@ -1,5 +1,6 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
+import { sanity } from "next-sanity/live/cache-life";
 import { createRequire } from "node:module";
 import path from "node:path";
 
@@ -58,6 +59,8 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  cacheComponents: true,
+  cacheLife: { default: sanity },
   transpilePackages: ["@navikt/ds-tokens"],
   /**
    * @important: These are always included in JS-bundle!

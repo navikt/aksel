@@ -8,8 +8,7 @@ import TokenTableOfContents from "./_ui/TokenTableOfContents";
 import TokensPage from "./_ui/TokensPage";
 import Toolbar from "./_ui/toolbar/Toolbar";
 
-/* Since page relies on searchparams for general navigation, we avoid Suspense by force-dynamic */
-export const dynamic = "force-dynamic";
+// TODO: Cache Components adoption. Was `export const dynamic = "force-dynamic"` (page relies on searchParams). Adopt by wrapping the searchParams-dependent UI in <Suspense>.
 
 export const metadata: Metadata = {
   title: "Design tokens",

@@ -17,10 +17,14 @@ const LINKS = [
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
-async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
-  variant = variant ? variant : "default";
+async function GlobalSearchArea() {
   const data = await headers();
   const isMacOrIOS = /Mac|iPhone|iPad|iPod/i.test(data.get("user-agent") || "");
+  return <GlobalSearch isMac={isMacOrIOS} />;
+}
+
+function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
+  variant = variant ? variant : "default";
 
   return (
     <header
@@ -79,9 +83,9 @@ async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         </Show>
         <HStack align="center" gap="space-8">
           <Suspense
-            fallback={<GlobalSearchButton trigger={false} isMac={isMacOrIOS} />}
+            fallback={<GlobalSearchButton trigger={false} isMac={false} />}
           >
-            <GlobalSearch isMac={isMacOrIOS} />
+            <GlobalSearchArea />
           </Suspense>
 
           <Show below="lg">
