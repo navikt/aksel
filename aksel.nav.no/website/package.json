@@ -34,7 +34,7 @@
     "@navikt/oasis": "3.2.1",
     "@neshca/cache-handler": "1.9.0",
     "@portabletext/react": "^6.0.3",
-    "@sanity/client": "7.23.0",
+    "@sanity/client": "7.23.2",
     "@sanity/image-url": "2.1.1",
     "@slack/web-api": "^7.8.0",
     "aksel-sanity-studio": "workspace:*",

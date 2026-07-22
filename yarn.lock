@@ -8078,51 +8078,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:7.23.0":
-  version: 7.23.0
-  resolution: "@sanity/client@npm:7.23.0"
+"@sanity/client@npm:7.23.2, @sanity/client@npm:^7.13.2, @sanity/client@npm:^7.21.0, @sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1, @sanity/client@npm:^7.23.0, @sanity/client@npm:^7.23.1":
+  version: 7.23.2
+  resolution: "@sanity/client@npm:7.23.2"
   dependencies:
-    "@sanity/eventsource": "npm:^5.0.2"
+    "@sanity/eventsource": "npm:^5.0.4"
     get-it: "npm:^8.8.0"
     nanoid: "npm:^3.3.11"
     rxjs: "npm:^7.0.0"
-  checksum: 10/a039cba3a80a2a9e3a68ae1be7a25478ea7eb0ecf0921588e4b9a755cc9ffb899cd74ec80e6b6f60cd2b55b9aba0dfe392751e857fd1da542f921865459a90e9
-  languageName: node
-  linkType: hard
-
-"@sanity/client@npm:^7.13.2, @sanity/client@npm:^7.21.0":
-  version: 7.21.0
-  resolution: "@sanity/client@npm:7.21.0"
-  dependencies:
-    "@sanity/eventsource": "npm:^5.0.2"
-    get-it: "npm:^8.7.2"
-    nanoid: "npm:^3.3.11"
-    rxjs: "npm:^7.0.0"
-  checksum: 10/74ad231ffa1190c076b6b3bfa6d7a670ac9c4326bc6c8eb73ac21f01acab50a83c22f70cbb2cf22d1400991d80bf18f116bcc713f836192f8ed228fc957265f9
-  languageName: node
-  linkType: hard
-
-"@sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1":
-  version: 7.22.1
-  resolution: "@sanity/client@npm:7.22.1"
-  dependencies:
-    "@sanity/eventsource": "npm:^5.0.2"
-    get-it: "npm:^8.7.2"
-    nanoid: "npm:^3.3.11"
-    rxjs: "npm:^7.0.0"
-  checksum: 10/fae6027726568f8bb38b4c59f5f60e71743a4c772b6d7f1b40a4a9cbc8b45256807bfc74a2b6d052c500da29d314bf61315b7c79ef0938b3bafd54bb078b0dce
-  languageName: node
-  linkType: hard
-
-"@sanity/client@npm:^7.23.0, @sanity/client@npm:^7.23.1":
-  version: 7.23.1
-  resolution: "@sanity/client@npm:7.23.1"
-  dependencies:
-    "@sanity/eventsource": "npm:^5.0.2"
-    get-it: "npm:^8.8.0"
-    nanoid: "npm:^3.3.11"
-    rxjs: "npm:^7.0.0"
-  checksum: 10/da54c97764865b02d9df1232843d8b19b1e829f61a6b2f9398b0c6c99f5f1c81e5053846dc4fadaf9b7f55e0af9ea536c9fbafe7707dae33c87c879f0526d249
+  checksum: 10/081f5a89678d7c4d8934149de30876472b8d93cfdc1965e40f1834ae34036068eb21af091d0ff7398f7472b1416fb6983ed6228a12a61eee7788ed96903e8bd3
   languageName: node
   linkType: hard
 
@@ -8277,6 +8241,18 @@ __metadata:
     event-source-polyfill: "npm:1.0.31"
     eventsource: "npm:2.0.2"
   checksum: 10/a877f6175f2134e3f12119ec11b4f919ca03b7bd01dd7e400c88704f8de8085bfbe09216f225fc54344bcacba2f230642a3ea4a5f08e861652d742b3a1c4fa60
+  languageName: node
+  linkType: hard
+
+"@sanity/eventsource@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "@sanity/eventsource@npm:5.0.4"
+  dependencies:
+    "@types/event-source-polyfill": "npm:1.0.5"
+    "@types/eventsource": "npm:1.1.15"
+    event-source-polyfill: "npm:1.0.31"
+    eventsource: "npm:2.0.2"
+  checksum: 10/f2de26c02c455e50b0b7c1b560b830369cb713d72dfb11ee469551f5b3c3d95ca4e427908c7a88d0e5d95f46e3fdb7a6163b4dded11f71f1fec6d6dd5ea12cbe
   languageName: node
   linkType: hard
 
@@ -11421,7 +11397,7 @@ __metadata:
     "@navikt/aksel": "npm:^8.15.0"
     "@navikt/aksel-icons": "npm:^8.15.0"
     "@navikt/ds-tokens": "npm:^8.15.0"
-    "@sanity/client": "npm:7.23.0"
+    "@sanity/client": "npm:7.23.2"
     "@types/express": "npm:^5.0.3"
     "@types/node": "npm:^24.10.9"
     express: "npm:^5.1.0"
@@ -11441,7 +11417,7 @@ __metadata:
   dependencies:
     "@portabletext/react": "npm:^6.0.3"
     "@sanity/blueprints": "npm:0.20.1"
-    "@sanity/client": "npm:7.23.0"
+    "@sanity/client": "npm:7.23.2"
     "@sanity/code-input": "npm:7.1.2"
     "@sanity/color-input": "npm:6.0.6"
     "@sanity/export": "npm:6.2.0"
@@ -28212,7 +28188,7 @@ __metadata:
     "@portabletext/block-tools": "npm:^5.1.1"
     "@portabletext/markdown": "npm:^1.2.0"
     "@portabletext/react": "npm:^6.0.3"
-    "@sanity/client": "npm:7.23.0"
+    "@sanity/client": "npm:7.23.2"
     "@sanity/image-url": "npm:2.1.1"
     "@sanity/schema": "npm:6.0.0"
     "@slack/web-api": "npm:^7.8.0"
