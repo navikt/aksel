@@ -48,6 +48,7 @@
 @import "./pagination.css" layer(aksel.components.modules);
 @import "./popover.css" layer(aksel.components.modules);
 @import "./lookup.css" layer(aksel.components.modules);
+@import "./status-badge.css" layer(aksel.components.modules);
 @import "./tag.css" layer(aksel.components.modules);
 @import "./timeline.css" layer(aksel.components.modules);
 @import "./tooltip.css" layer(aksel.components.modules);
