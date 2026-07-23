@@ -3,16 +3,25 @@ import type { AkselColor } from "../types";
 import { BodyShort } from "../typography";
 import { cl } from "../utils/helpers";
 
-export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
+export interface StatusBadgeProps extends Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  "content"
+> {
+  /**
+   * The element the badge is anchored to. When provided, the badge is
+   * positioned in a corner of this element (see `placement`).
+   * Leave empty to render the badge standalone/inline.
+   */
+  children?: React.ReactNode;
   /**
    * Badge content. Leave empty to render a status dot.
    * Numbers should be pre-formatted by the consumer (e.g. `"42+"`).
    */
-  children?: React.ReactNode;
+  content?: React.ReactNode;
   /**
-   * Anchors the badge to a corner of the nearest positioned ancestor.
-   * When set, the consumer must provide a `position: relative` container.
-   * Leave undefined to render inline/standalone.
+   * Anchors the badge to a corner of `children`.
+   * Only applies when `children` is provided.
+   * @default "top-right"
    */
   placement?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   /**
@@ -30,32 +39,51 @@ export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * @example
  * ```jsx
+ * // Standalone
  * <StatusBadge data-color="success" aria-label="Aktiv" />
- * <StatusBadge data-color="danger">42+</StatusBadge>
+ * <StatusBadge content="42+" data-color="danger" />
+ *
+ * // Anchored to an element
+ * <StatusBadge content="42" placement="top-right">
+ *   <Button icon={<InboxIcon />} />
+ * </StatusBadge>
  * ```
  */
 export const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
   (
-    { children, className, placement, "data-color": color = "danger", ...rest },
+    {
+      children,
+      content,
+      className,
+      placement = "top-right",
+      "data-color": color = "danger",
+      ...rest
+    },
     ref,
   ) => {
-    const isDot = children == null || children === "";
+    const isDot = content == null || content === "";
+    const isAnchored = children != null;
 
     return (
-      <BodyShort
+      <span
         {...rest}
         ref={ref}
-        as="span"
-        size="small"
-        data-color={color}
-        data-placement={placement}
-        className={cl("aksel-status-badge", className, {
-          "aksel-status-badge--dot": isDot,
-          "aksel-status-badge--floating": placement != null,
-        })}
+        className={cl("aksel-status-badge__root", className)}
       >
-        {!isDot && children}
-      </BodyShort>
+        {children}
+        <BodyShort
+          as="span"
+          size="small"
+          data-color={color}
+          data-placement={isAnchored ? placement : undefined}
+          className={cl("aksel-status-badge", {
+            "aksel-status-badge--dot": isDot,
+            "aksel-status-badge--floating": isAnchored,
+          })}
+        >
+          {!isDot && content}
+        </BodyShort>
+      </span>
     );
   },
 );
