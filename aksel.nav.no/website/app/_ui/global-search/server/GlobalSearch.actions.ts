@@ -123,8 +123,4 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-async function preloadSearchIndex() {
-  void fetchArticles();
-}
-
-export { fuseGlobalSearch, preloadSearchIndex };
+export { fuseGlobalSearch };

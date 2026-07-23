@@ -83,7 +83,7 @@ function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {parsedChangelogs.map((doc) => {
+          {parsedChangelogs?.map((doc) => {
             return (
               <Table.Row key={doc._id}>
                 <Table.HeaderCell scope="row">
@@ -95,7 +95,7 @@ function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
               </Table.Row>
             );
           })}
-          {parsedChangelogs.length === 0 && (
+          {(!parsedChangelogs || parsedChangelogs.length === 0) && (
             <Table.Row>
               <Table.DataCell colSpan={2}>{getEmptyState()}</Table.DataCell>
             </Table.Row>

@@ -1,5 +1,6 @@
-import "server-only";
 import { SchemaConfig } from "aksel-sanity-studio/schema";
+import { cacheLife } from "next/cache";
+import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
@@ -13,13 +14,16 @@ import {
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
 
-async function fetchAllSanityPages(fetchOverride?: typeof sanityFetch): Promise<
+async function fetchAllSanityPages(): Promise<
   {
     slug: string;
     lastMod: string | null;
   }[]
 > {
-  const fetch = fetchOverride ?? sanityFetch;
+  "use cache";
+  cacheLife("hours");
+
+  const fetch = sanityFetch;
 
   const [
     { data: landingPageData },

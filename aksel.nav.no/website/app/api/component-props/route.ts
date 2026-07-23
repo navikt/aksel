@@ -2,8 +2,6 @@ import { defineQuery } from "next-sanity";
 import { type NextRequest, NextResponse } from "next/server";
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
 
-export const revalidate = 7200;
-
 const COMPONENT_SLUG_PATTERN = /^komponenter(?:\/[a-z0-9-]+){2}$/;
 
 const COMPONENT_PROPS_QUERY = defineQuery(
@@ -14,6 +12,15 @@ const COMPONENT_PROPS_QUERY = defineQuery(
     }
   }`,
 );
+
+async function fetchComponentProps(slug: string) {
+  "use cache";
+  const { data } = await sanityMarkdownFetch({
+    query: COMPONENT_PROPS_QUERY,
+    params: { slug },
+  });
+  return data;
+}
 
 type ComponentProp = {
   type: string | null;
@@ -77,10 +84,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const { data } = await sanityMarkdownFetch({
-      query: COMPONENT_PROPS_QUERY,
-      params: { slug },
-    });
+    const data = await fetchComponentProps(slug);
 
     if (
       !data?.component_metadata ||
@@ -135,7 +139,7 @@ export async function GET(request: NextRequest) {
       { title: data.title, slug, parts },
       {
         headers: {
-          "Cache-Control": `public, max-age=${revalidate}`,
+          "Cache-Control": `public, max-age=7200`,
         },
       },
     );

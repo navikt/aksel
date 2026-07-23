@@ -1,10 +1,18 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { BodyLong, BodyShort, HStack, Heading, VStack } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   BLOGG_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
@@ -21,37 +29,32 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-async function getStaticParamsSlugs() {
-  const { data } = await sanityFetch({
+export async function generateStaticParams() {
+  const { data } = await sanityFetchStaticParams({
     query: SLUG_BY_TYPE_QUERY,
     params: { type: "aksel_blogg" },
-    stega: false,
-    perspective: "published",
   });
 
   return data
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
-    .map((slug) => {
-      return {
-        slug: slug.replace("produktbloggen/", ""),
-      };
-    });
+    .map((slug) => ({
+      slug: slug.replace("produktbloggen/", ""),
+    }));
 }
-
-export const generateStaticParams = async () => {
-  return await getStaticParamsSlugs();
-};
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const [{ slug }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityFetchMetadata({
     query: METADATA_BY_SLUG_QUERY,
     params: { slug: `produktbloggen/${slug}` },
-    stega: false,
+    perspective,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
@@ -70,13 +73,42 @@ export async function generateMetadata(
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
   const { slug } = await params;
+  return <CachedPage slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <CachedPage slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const parsedSlug = `produktbloggen/${slug}`;
 
   const { data: pageData } = await sanityFetch({
     query: BLOGG_BY_SLUG_QUERY,
     params: { slug: parsedSlug },
+    perspective,
+    stega,
   });
 
   if (!pageData?._id) {

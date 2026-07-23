@@ -9,7 +9,7 @@ import { GodPraksisHeroButton } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero
 import { GodPraksisHeroDialog } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.dialog";
 import { GodPraksisHeroProvider } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero.provider";
 import { GodPraksisPictogram } from "@/app/(routes)/(root)/_ui/pictogram/GodPraksisPictogram";
-import { sanityFetch } from "@/app/_sanity/live";
+import { type DynamicFetchOptions, sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
@@ -28,13 +28,15 @@ type GpIntroHeroProps = {
   description?: string;
   image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT>["pictogram"];
   isCollapsible?: boolean;
-};
+} & DynamicFetchOptions;
 
 async function GodPraksisIntroHero({
   title,
   description,
   image,
   isCollapsible = false,
+  perspective,
+  stega,
 }: GpIntroHeroProps) {
   const imageUrl = urlForImage(image)?.url();
 
@@ -77,18 +79,21 @@ async function GodPraksisIntroHero({
       )}
       {isCollapsible ? (
         <GodPraksisHeroDialog>
-          <GodPraksisTemaList />
+          <GodPraksisTemaList perspective={perspective} stega={stega} />
         </GodPraksisHeroDialog>
       ) : (
-        <GodPraksisTemaList />
+        <GodPraksisTemaList perspective={perspective} stega={stega} />
       )}
     </GodPraksisHeroProvider>
   );
 }
 
-async function GodPraksisTemaList() {
+async function GodPraksisTemaList({ perspective, stega }: DynamicFetchOptions) {
+  "use cache";
   const { data: temaList } = await sanityFetch({
     query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+    perspective,
+    stega,
   });
 
   return (
@@ -100,7 +105,14 @@ async function GodPraksisTemaList() {
         as="ul"
       >
         {temaList.map((tema) => {
-          return <HeroTag key={tema._id} tema={tema} />;
+          return (
+            <HeroTag
+              key={tema._id}
+              tema={tema}
+              perspective={perspective}
+              stega={stega}
+            />
+          );
         })}
       </Stack>
     </nav>
@@ -109,17 +121,24 @@ async function GodPraksisTemaList() {
 
 async function HeroTag({
   tema,
+  perspective,
+  stega,
 }: {
   tema: GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT[number];
-}) {
+} & DynamicFetchOptions) {
+  "use cache";
   const { data: undertema } = await sanityFetch({
     query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
     params: { temaId: tema._id },
+    perspective,
+    stega,
   });
 
   const { data: articleCount } = await sanityFetch({
     query: GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
     params: { undertemaIds: undertema },
+    perspective,
+    stega,
   });
 
   if (articleCount === 0) {

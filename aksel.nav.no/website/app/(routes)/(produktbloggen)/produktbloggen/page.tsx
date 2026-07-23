@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { BodyLong, Heading, Show, VStack } from "@navikt/ds-react";
 import { BloggArticleBlock } from "@/app/(routes)/(produktbloggen)/produktbloggen/_ui/BloggArticleBlogg";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+} from "@/app/_sanity/live";
 import {
   BLOGG_LANDINGSSIDE_BLOGS_QUERY,
   BLOGG_LANDINGSSIDE_PAGE_QUERY,
@@ -13,8 +20,10 @@ import { HighlightedBlogg } from "./_ui/HighlightedBlogg";
 import styles from "./_ui/Produktbloggen.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: pageData } = await sanityFetch({
+  const { perspective } = await getDynamicFetchOptions();
+  const { data: pageData } = await sanityFetchMetadata({
     query: BLOGG_LANDINGSSIDE_PAGE_QUERY,
+    perspective,
   });
 
   const pageOgImage = urlForOpenGraphImage(pageData?.page.seo?.image);
@@ -30,8 +39,34 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page() {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return <CachedProduktbloggen perspective="published" stega={false} />;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicProduktbloggen />
+    </Suspense>
+  );
+}
+
+async function DynamicProduktbloggen() {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return <CachedProduktbloggen perspective={perspective} stega={stega} />;
+}
+
+async function CachedProduktbloggen({
+  perspective,
+  stega,
+}: DynamicFetchOptions) {
+  "use cache";
+
   const { data: pageData } = await sanityFetch({
     query: BLOGG_LANDINGSSIDE_BLOGS_QUERY,
+    perspective,
+    stega,
   });
 
   if (!pageData?.bloggposts) {

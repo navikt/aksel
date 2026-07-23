@@ -2,6 +2,15 @@ import { type NextRequest, NextResponse } from "next/server";
 import { MarkdownRoutes } from "@/app/api/markdown/MarkdownRouteHandler";
 
 /**
+ * Resolves the markdown for a route inside a `'use cache'` boundary so the
+ * `sanityFetch` calls in the route handlers can call `cacheTag()`.
+ */
+async function getMarkdownForRoute(basePath: string): Promise<string> {
+  "use cache";
+  return MarkdownRoutes.markdownForRoute(basePath);
+}
+
+/**
  * Central markdown route handler
  * Handles all .md requests by determining the route type and converting to markdown
  */
@@ -24,7 +33,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const markdown = await MarkdownRoutes.markdownForRoute(basePath);
+    const markdown = await getMarkdownForRoute(basePath);
 
     if (!markdown || markdown.length === 0) {
       return new NextResponse(
