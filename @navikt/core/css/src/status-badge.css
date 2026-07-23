@@ -1,4 +1,4 @@
-.aksel-status-badge__root {
+.aksel-status-badge__anchor {
   position: relative;
   display: inline-flex;
   width: fit-content;
@@ -36,7 +36,7 @@
   padding-inline: 0;
 }
 
-.aksel-status-badge--floating {
+.aksel-status-badge__anchor > .aksel-status-badge {
   --__axc-status-badge-size: 1rem;
 
   position: absolute;
@@ -46,29 +46,31 @@
 
   &.aksel-status-badge--dot {
     --__axc-status-badge-size: var(--ax-space-12);
-  }
 
-  &[data-placement="top-right"] {
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    transform: translate(40%, -40%);
+    padding-inline: 0;
   }
+}
 
-  &[data-placement="top-left"] {
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    transform: translate(-40%, -40%);
-  }
+.aksel-status-badge__anchor[data-placement="top-right"] > .aksel-status-badge {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(40%, -40%);
+}
 
-  &[data-placement="bottom-right"] {
-    inset-block-end: 0;
-    inset-inline-end: 0;
-    transform: translate(40%, 40%);
-  }
+.aksel-status-badge__anchor[data-placement="top-left"] > .aksel-status-badge {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  transform: translate(-40%, -40%);
+}
 
-  &[data-placement="bottom-left"] {
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    transform: translate(-40%, 40%);
-  }
+.aksel-status-badge__anchor[data-placement="bottom-right"] > .aksel-status-badge {
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  transform: translate(40%, 40%);
+}
+
+.aksel-status-badge__anchor[data-placement="bottom-left"] > .aksel-status-badge {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  transform: translate(-40%, 40%);
 }

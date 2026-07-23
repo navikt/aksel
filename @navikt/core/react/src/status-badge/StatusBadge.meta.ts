@@ -1,10 +1,11 @@
 import type { ComponentMetadata } from "../utils/types/metadata";
-import { StatusBadge } from "./index";
+import { StatusBadge, StatusBadgeAnchor } from "./index";
 
 const metadata: ComponentMetadata = {
   name: "StatusBadge",
   components: {
     StatusBadge,
+    StatusBadgeAnchor,
   },
   keywords: [
     "status",

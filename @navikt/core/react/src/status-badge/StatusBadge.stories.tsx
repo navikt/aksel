@@ -28,7 +28,7 @@ const colors: AkselColor[] = [
 
 export const Default: Story = {
   args: {
-    content: "42",
+    children: "42",
     "data-color": "danger",
   },
 };
@@ -46,10 +46,10 @@ export const Dot: Story = {
 export const Count: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
-      <StatusBadge data-color="danger" content="1" />
-      <StatusBadge data-color="danger" content="42" />
-      <StatusBadge data-color="danger" content="42+" />
-      <StatusBadge data-color="info" content="99+" />
+      <StatusBadge data-color="danger">1</StatusBadge>
+      <StatusBadge data-color="danger">42</StatusBadge>
+      <StatusBadge data-color="danger">42+</StatusBadge>
+      <StatusBadge data-color="info">99+</StatusBadge>
     </HStack>
   ),
 };
@@ -57,15 +57,17 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <StatusBadge content="42" placement="top-right">
+      <StatusBadge.Anchor placement="top-right">
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
         />
-      </StatusBadge>
-      <StatusBadge placement="top-right" aria-label="Nytt varsel">
+        <StatusBadge data-color="danger">42</StatusBadge>
+      </StatusBadge.Anchor>
+      <StatusBadge.Anchor placement="top-right">
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
-      </StatusBadge>
+        <StatusBadge data-color="danger" aria-label="Nytt varsel" />
+      </StatusBadge.Anchor>
     </HStack>
   ),
 };

@@ -77,7 +77,12 @@ export {
   type SortState,
   type TableProps,
 } from "./table";
-export { StatusBadge, type StatusBadgeProps } from "./status-badge";
+export {
+  StatusBadge,
+  StatusBadgeAnchor,
+  type StatusBadgeAnchorProps,
+  type StatusBadgeProps,
+} from "./status-badge";
 export { Tabs, type TabsProps } from "./tabs";
 export { Tag, type TagProps } from "./tag";
 export {
