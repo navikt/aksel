@@ -8,6 +8,8 @@
   --__axc-status-badge-size: 1.25rem;
 
   box-sizing: border-box;
+  position: relative;
+  z-index: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
