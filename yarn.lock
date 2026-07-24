@@ -3456,10 +3456,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/plugin-typings@npm:^1.130.0":
-  version: 1.130.0
-  resolution: "@figma/plugin-typings@npm:1.130.0"
-  checksum: 10/91f70ac734400abf5cd7170895fbe0b5a37b622494237d946b23d23af6c0adb3800bc1f4cbfb3a340050392bc4a13afd8fb45af00d8b38a84d30194a11cc1821
+"@figma/plugin-typings@npm:^1.131.0":
+  version: 1.131.0
+  resolution: "@figma/plugin-typings@npm:1.131.0"
+  checksum: 10/28d36c2afe683054dd7537a0264dc3c74689f7cd68ccbf7088f95989d6bebec309a9a14589e5e8ffaad18f572e61f290952457783597c7c1b1cb163d78294767
   languageName: node
   linkType: hard
 
@@ -5584,7 +5584,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
-    "@figma/plugin-typings": "npm:^1.130.0"
+    "@figma/plugin-typings": "npm:^1.131.0"
     colorjs.io: "npm:^0.6.0"
     esbuild: "npm:^0.28.0"
     lightningcss: "npm:^1.30.1"
@@ -11410,7 +11410,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
   dependencies:
-    "@figma/plugin-typings": "npm:^1.130.0"
+    "@figma/plugin-typings": "npm:^1.131.0"
     "@navikt/ds-css": "npm:*"
     "@navikt/ds-react": "npm:*"
     "@rollup/pluginutils": "npm:^5.4.0"
