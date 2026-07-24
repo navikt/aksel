@@ -4986,7 +4986,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdit/plugin-alert@npm:^0.23.1, @mdit/plugin-alert@npm:^0.23.2":
+"@mdit/plugin-alert@npm:^0.23.2":
   version: 0.23.2
   resolution: "@mdit/plugin-alert@npm:0.23.2"
   dependencies:
@@ -6366,18 +6366,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/markdown@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@portabletext/markdown@npm:1.2.0"
-  dependencies:
-    "@mdit/plugin-alert": "npm:^0.23.1"
-    "@portabletext/schema": "npm:^2.1.1"
-    "@portabletext/toolkit": "npm:^5.0.2"
-    markdown-it: "npm:^14.1.1"
-  checksum: 10/622812bbf6b74826a6187af6fcb8f475f423dfb0ce95df2f1948ad323113af5240d6626ab546350baa9a30ba686dfcf812c24ff4690666410bfde1281e2a2aeb
-  languageName: node
-  linkType: hard
-
 "@portabletext/markdown@npm:^1.4.0":
   version: 1.4.0
   resolution: "@portabletext/markdown@npm:1.4.0"
@@ -6387,6 +6375,18 @@ __metadata:
     "@portabletext/toolkit": "npm:^5.0.2"
     markdown-it: "npm:^14.2.0"
   checksum: 10/3a76924a13afbd1bd80ca50ddbb5505e1a37e2887b33c33aa30cfdfc2cb17abde667bd3c9313a1fba687365be5fa281e5bb4f4299677933df84a2ba44080f55a
+  languageName: node
+  linkType: hard
+
+"@portabletext/markdown@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "@portabletext/markdown@npm:1.4.4"
+  dependencies:
+    "@mdit/plugin-alert": "npm:^0.23.2"
+    "@portabletext/schema": "npm:^2.2.3"
+    "@portabletext/toolkit": "npm:^5.0.2"
+    markdown-it: "npm:^14.2.0"
+  checksum: 10/cd782a409c90a8a9a98f07f785dc8f54dacfba9b6b07a4bef477cb17f7f6dbfdb5832aab3578666c41d63a6a3cd467469298e66e651e1c7b9afe82d563e54c8e
   languageName: node
   linkType: hard
 
@@ -6528,6 +6528,13 @@ __metadata:
   version: 2.2.0
   resolution: "@portabletext/schema@npm:2.2.0"
   checksum: 10/6258b8b6c0793eaafd93d0e0f911c7bb15b75f5c8c7761d87285d3803d009a0cfe73fa6889a961d5d6116c59197833158a95d9d116704a46c4801b41e2016ae2
+  languageName: node
+  linkType: hard
+
+"@portabletext/schema@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "@portabletext/schema@npm:2.2.3"
+  checksum: 10/370efaf19bcb1d05c26dedff737a8ea662b9226190c84d122be765b16d36327850384d83739810393cff717702ff4d27ca8e982d6ec8b4e87c06cf6bd60ca8e7
   languageName: node
   linkType: hard
 
@@ -8121,10 +8128,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/functions@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@sanity/functions@npm:1.3.1"
-  checksum: 10/e997f381689f7f2adf0caef191dcfa5b2ca3250626a6b403770610ecf44bc55200e7799df9ee47cceb6ef524f47fbc20b1653dea688014a74b860e011145724d
+"@sanity/functions@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@sanity/functions@npm:1.4.0"
+  peerDependencies:
+    "@aws-lite/client": ^0.23.6
+    "@aws-lite/dynamodb": ^0.3.9
+    "@aws-lite/lambda": ^0.1.5
+    "@aws-lite/sns": ^0.0.8
+    "@aws-lite/sqs": ^0.2.4
+  checksum: 10/98ed5776e4accbc4594a2a1bd83118a070b6003d42d69ff5134ce9414854a927f43d4ff0b2485c76a3b432afea96b6d0bef269ab5a1fdedf6873468aa0e7cd34
   languageName: node
   linkType: hard
 
@@ -8248,12 +8261,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/locale-nb-no@npm:1.1.34":
-  version: 1.1.34
-  resolution: "@sanity/locale-nb-no@npm:1.1.34"
+"@sanity/locale-nb-no@npm:1.1.36":
+  version: 1.1.36
+  resolution: "@sanity/locale-nb-no@npm:1.1.36"
   peerDependencies:
     sanity: ^3.22.0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0-0
-  checksum: 10/b946413b28a329d5e3f60d4601017a7310c5be4202fbd7933ddb33abf2c465798e02332d90741806af45d3f6a09df37a50be010b29167492ffa6e6bdd37912a9
+  checksum: 10/93fe66e8f2eb25361046dc7c030c9b4ec79e4ccaff943f7d3de9c207e702992d0630ebfb95393939c3bdbd6a0a45e372527be49cf3bfc6c6531a2516837ce648
   languageName: node
   linkType: hard
 
@@ -11279,9 +11292,9 @@ __metadata:
     "@sanity/code-input": "npm:7.1.2"
     "@sanity/color-input": "npm:6.0.6"
     "@sanity/export": "npm:6.2.0"
-    "@sanity/functions": "npm:1.3.1"
+    "@sanity/functions": "npm:1.4.0"
     "@sanity/image-url": "npm:2.1.1"
-    "@sanity/locale-nb-no": "npm:1.1.34"
+    "@sanity/locale-nb-no": "npm:1.1.36"
     "@sanity/preview-url-secret": "npm:4.0.7"
     "@sanity/schema": "npm:6.0.0"
     "@sanity/table": "npm:2.0.1"
@@ -19272,7 +19285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it@npm:^14.1.1, markdown-it@npm:^14.2.0":
+"markdown-it@npm:^14.2.0":
   version: 14.2.0
   resolution: "markdown-it@npm:14.2.0"
   dependencies:
@@ -28006,7 +28019,7 @@ __metadata:
     "@next/eslint-plugin-next": "npm:16.2.6"
     "@playwright/test": "npm:1.60.0"
     "@portabletext/block-tools": "npm:^5.1.1"
-    "@portabletext/markdown": "npm:^1.2.0"
+    "@portabletext/markdown": "npm:^1.4.4"
     "@portabletext/react": "npm:^6.0.3"
     "@sanity/client": "npm:7.23.2"
     "@sanity/image-url": "npm:2.1.1"
