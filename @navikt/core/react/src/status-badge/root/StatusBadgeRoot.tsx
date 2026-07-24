@@ -16,7 +16,7 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   "data-color"?: AkselColor;
   /**
    * Adds a pulsing animation to the badge.
-   * @default "false"
+   * @default false
    */
   pulse?: boolean;
 }
