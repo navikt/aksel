@@ -77,7 +77,6 @@ export {
   type SortState,
   type TableProps,
 } from "./table";
-
 export { Tabs, type TabsProps } from "./tabs";
 export { Tag, type TagProps } from "./tag";
 export {
