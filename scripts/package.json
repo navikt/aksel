@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "simple-git": "^3.32.3",
-    "tsx": "^4.20.6"
+    "tsx": "^4.23.1"
   }
 }

@@ -86,7 +86,7 @@
     "react": "19.2.7",
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.8.16",
-    "tsx": "^4.20.6",
+    "tsx": "^4.23.1",
     "typescript": "6.0.3",
     "unified": "11.0.5",
     "vitest": "4.1.10"
