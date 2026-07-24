@@ -49,3 +49,4 @@ export namespace StatusBadgeAnchor {
 
 // eslint-disable-next-line import/export
 export { StatusBadgeAnchor };
+export type { StatusBadgeAnchorProps };
