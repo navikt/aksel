@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
-    "@changesets/cli": "2.31.0",
+    "@changesets/cli": "2.31.1",
     "@eslint/js": "^10.0.1",
     "@github-ui/storybook-addon-performance-panel": "^1.1.4",
     "@storybook/addon-a11y": "^10.4.6",
