@@ -5,7 +5,7 @@ const metadata: ComponentMetadata = {
   name: "StatusBadge",
   components: {
     StatusBadge,
-    StatusBadgeAnchor,
+    "StatusBadge.Anchor": StatusBadgeAnchor,
   },
   keywords: [
     "status",
