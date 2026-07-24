@@ -5473,7 +5473,7 @@ __metadata:
     postcss-selector-parser: "npm:^7.1.0"
     postcss-value-parser: "npm:^4.2.0"
     stylelint: "npm:^17.14.0"
-    stylelint-test-rule-node: "npm:^1.0.0"
+    stylelint-test-rule-node: "npm:^1.2.0"
     tsx: "npm:^4.20.6"
     typescript: "npm:6.0.3"
   languageName: unknown
@@ -26068,15 +26068,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-test-rule-node@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "stylelint-test-rule-node@npm:1.1.0"
+"stylelint-test-rule-node@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "stylelint-test-rule-node@npm:1.2.0"
   peerDependencies:
     stylelint: ^17.0.0
   peerDependenciesMeta:
     stylelint:
       optional: true
-  checksum: 10/009af7a2a0efcbe300fe3b2ff4592a62e2f3768b30fedb911cff4d3b976745b1cc05997bd17356b7d8aa524e7b9bf949772a4d0f1b51d32abca1736d79c42f6b
+  checksum: 10/83881f1b545ad726b5278faab64b440d7f386649639158b5af5a3e1fefeaae65543426df44128a5d7c404aabbdcf7b522e41485bdf77a01db03542a9600473af
   languageName: node
   linkType: hard
 
