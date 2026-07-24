@@ -7,10 +7,7 @@ registries:
     token: ${{ secrets.READER_TOKEN }}
 updates:
   - package-ecosystem: npm
-    directories:
-      - /
-      - /aksel.nav.no
-      - /aksel.nav.no/*
+    directory: /
     schedule:
       interval: weekly
       day: monday
@@ -19,7 +16,6 @@ updates:
       - npm-github
     groups:
       sanity:
-        group-by: dependency-name
         patterns:
           - "sanity"
           - "sanity-*"
@@ -27,28 +23,20 @@ updates:
           - "next-sanity"
           - "@portabletext/*"
       eslint:
-        group-by: dependency-name
         patterns:
           - "eslint"
           - "@eslint/*"
       react:
-        group-by: dependency-name
         patterns:
           - "react"
           - "react-dom"
       storybook:
-        group-by: dependency-name
         patterns:
           - "*storybook*"
       vitest:
-        group-by: dependency-name
         patterns:
           - "vitest"
           - "@vitest/*"
-      workspace:
-        group-by: dependency-name
-        patterns:
-          - "*"
 
   - package-ecosystem: github-actions
     directory: "/"

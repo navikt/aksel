@@ -10,11 +10,6 @@
     "serve:next": "yarn workspace website start",
     "sanity:update": "yarn workspace website update:sanity"
   },
-  "workspaces": [
-    "website",
-    "playroom",
-    "sanity-studio"
-  ],
   "dependencies": {
     "@navikt/aksel": "^8.15.0",
     "@navikt/aksel-icons": "^8.15.0",
