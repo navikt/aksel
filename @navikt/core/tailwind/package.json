@@ -31,7 +31,7 @@
     "@navikt/ds-tokens": "^8.15.0",
     "@types/node": "^24.10.9",
     "tailwindcss": "^3.3.3",
-    "tsx": "^4.20.6",
+    "tsx": "^4.23.1",
     "typescript": "6.0.3",
     "vitest": "4.1.10"
   },
