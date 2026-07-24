@@ -1,7 +1,7 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
-import { cl } from "../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-export interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> {
+interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * The anchored element followed by a `StatusBadge`.
    * The `StatusBadge` is positioned in the corner given by `placement`.
@@ -16,7 +16,6 @@ export interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> 
 
 /**
  * Positions a `StatusBadge` in a corner of another element.
- * Provides the `position: relative` container, so consumers don't have to.
  *
  * @see 🏷️ {@link StatusBadgeAnchorProps}
  *
@@ -28,20 +27,25 @@ export interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> 
  * </StatusBadge.Anchor>
  * ```
  */
-export const StatusBadgeAnchor = forwardRef<
-  HTMLSpanElement,
-  StatusBadgeAnchorProps
->(({ children, className, placement = "top-right", ...rest }, ref) => {
-  return (
-    <span
-      {...rest}
-      ref={ref}
-      data-placement={placement}
-      className={cl("aksel-status-badge__anchor", className)}
-    >
-      {children}
-    </span>
-  );
-});
+const StatusBadgeAnchor = forwardRef<HTMLSpanElement, StatusBadgeAnchorProps>(
+  ({ children, className, placement = "top-right", ...rest }, ref) => {
+    return (
+      <span
+        {...rest}
+        ref={ref}
+        data-placement={placement}
+        className={cl("aksel-status-badge__anchor", className)}
+      >
+        {children}
+      </span>
+    );
+  },
+);
 
-export default StatusBadgeAnchor;
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace StatusBadgeAnchor {
+  export type Props = StatusBadgeAnchorProps;
+}
+
+// eslint-disable-next-line import/export
+export { StatusBadgeAnchor };

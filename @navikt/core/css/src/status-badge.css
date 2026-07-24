@@ -1,8 +1,7 @@
 .aksel-status-badge__anchor {
   position: relative;
   display: inline-flex;
-  width: fit-content;
-  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .aksel-status-badge {
@@ -13,19 +12,40 @@
   align-items: center;
   justify-content: center;
   min-width: var(--__axc-status-badge-size);
-  min-height: var(--__axc-status-badge-size);
   height: var(--__axc-status-badge-size);
   padding-inline: var(--ax-space-6);
-  border-radius: var(--ax-radius-full);
+  border-radius: var(--ax-radius-16);
   background: var(--ax-bg-strong);
   color: var(--ax-text-contrast);
-  line-height: 1;
-  text-align: center;
 
   @media (forced-colors: active) {
     forced-color-adjust: none;
     background: canvastext;
     color: canvas;
+  }
+
+  &[data-pulse="true"]::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--ax-bg-strong);
+    opacity: 0.6;
+    animation: status-badge-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+@keyframes status-badge-ping {
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  90%,
+  100% {
+    opacity: 0;
+    transform: scale(2);
   }
 }
 
@@ -42,7 +62,7 @@
   position: absolute;
   z-index: 1;
   padding-inline: var(--ax-space-4);
-  box-shadow: 0 0 0 1px var(--ax-bg-default);
+  outline: 1px solid var(--ax-bg-default);
 
   &.aksel-status-badge--dot {
     --__axc-status-badge-size: var(--ax-space-12);
