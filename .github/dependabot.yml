@@ -51,7 +51,9 @@ updates:
           - "*"
 
   - package-ecosystem: docker
-    directory: "/"
+    directories:
+      - "/aksel.nav.no"
+      - "/mcp-server"
     schedule:
       interval: weekly
       day: monday
