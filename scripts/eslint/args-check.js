@@ -76,7 +76,7 @@ module.exports = {
 
         if (!hasArgsExport) {
           context.report({
-            node: programNode,
+            node: programNode.body[0] || programNode,
             message:
               "Each example must export 'const args: ExampleArgsT = ...'.",
           });
