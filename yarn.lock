@@ -5519,7 +5519,7 @@ __metadata:
     react: "npm:19.2.7"
     react-day-picker: "npm:9.14.0"
     react-dom: "npm:19.2.7"
-    react-router: "npm:^7.15.1"
+    react-router: "npm:^7.18.0"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.4.1"
     tsc-alias: "npm:1.8.16"
@@ -23274,9 +23274,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^7.15.1":
-  version: 7.15.1
-  resolution: "react-router@npm:7.15.1"
+"react-router@npm:^7.18.0":
+  version: 7.18.0
+  resolution: "react-router@npm:7.18.0"
   dependencies:
     cookie: "npm:^1.0.1"
     set-cookie-parser: "npm:^2.6.0"
@@ -23286,7 +23286,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/0d9f352839708f13586e41bc21d4e74d1ef94ac747d8ba99a424734d17c7f9512926b16ac28a7659cc44ee4dd60b64f63ed58c704deb1cc68800056b377d3b40
+  checksum: 10/a69b5502a3549de56adce7ba87ae02ac5b052da49eae261124824dd963d047218795706c780e019f366961a7a1e073417a96b295b743f6f57d2a30c68fd78d61
   languageName: node
   linkType: hard
 
