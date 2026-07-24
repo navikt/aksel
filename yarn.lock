@@ -5322,10 +5322,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/analytics-types@npm:0.0.7":
-  version: 0.0.7
-  resolution: "@navikt/analytics-types@npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fanalytics-types%2F0.0.7%2F5fc7a2c116b8ce4cd8ae8e9cea57788399824c25"
-  checksum: 10/47d228e8dca960bd3fd802fbf39990120b5665240bd3bbaa332702dd384a2e01b495269ff66e8ac9076306fb210ffbf674b542a60bbc57775584a7ae73fa50fd
+"@navikt/analytics-types@npm:0.0.9":
+  version: 0.0.9
+  resolution: "@navikt/analytics-types@npm:0.0.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fanalytics-types%2F0.0.9%2F5919241a6dbb782eb101fff3234ce5c36d16e942"
+  checksum: 10/1a29959131750c9667fb6b6d9a7b811f88acc399d5612aed7748f76d1d1677b564d7f3c44ed50ab099d72644a250caf835c1b7f0032a50156145135eff7fe933
   languageName: node
   linkType: hard
 
@@ -28011,7 +28011,7 @@ __metadata:
     "@babel/parser": "npm:^7.27.5"
     "@babel/traverse": "npm:^7.27.4"
     "@google-cloud/bigquery": "npm:^8.3.1"
-    "@navikt/analytics-types": "npm:0.0.7"
+    "@navikt/analytics-types": "npm:0.0.9"
     "@navikt/next-logger": "npm:4.4.1"
     "@navikt/oasis": "npm:3.2.1"
     "@neshca/cache-handler": "npm:1.9.0"
