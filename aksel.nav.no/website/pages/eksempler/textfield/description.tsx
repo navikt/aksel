@@ -13,7 +13,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Bruk `description` i tillegg til `label` når det er behov for mer utfyllende forklaring.",
 };

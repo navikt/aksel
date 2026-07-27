@@ -26,7 +26,7 @@ function PopoverTestRender({
   return (
     <div>
       {extraElements}
-      <button ref={setAnchorEl} onClick={() => setOpen(true)}>
+      <button type="button" ref={setAnchorEl} onClick={() => setOpen(true)}>
         open
       </button>
       <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
@@ -58,7 +58,7 @@ export const HideOnOutsideClick: Story = {
   render: () => (
     <PopoverTestRender
       initialOpen={true}
-      extraElements={<button>Outside-element</button>}
+      extraElements={<button type="button">Outside-element</button>}
     />
   ),
   play: async ({ canvasElement }) => {

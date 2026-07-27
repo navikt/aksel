@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useEventCallback, useTimeout } from "../../../hooks";
 import {
   CUSTOM_EVENTS,
-  CustomFocusEvent,
+  type CustomFocusEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 

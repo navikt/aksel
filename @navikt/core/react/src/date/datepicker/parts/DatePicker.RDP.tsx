@@ -1,6 +1,10 @@
 import { isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
-import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
+import {
+  type ClassNames,
+  DayPicker,
+  dateMatchModifiers,
+} from "react-day-picker";
 import { Show } from "../../../primitives/responsive";
 import { omit } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
@@ -121,9 +125,8 @@ const ReactDayPicker = ({
         Day: useCallback(
           (props) => (
             <td
-              {...omit(props, ["day", "modifiers"])}
+              {...omit(props, ["day", "modifiers", "role"])}
               className="rdp-cell"
-              role={undefined}
             />
           ),
           [],
@@ -191,7 +194,6 @@ const ReactDayPicker = ({
       }}
       onDayMouseEnter={setDayHovering}
       onDayMouseLeave={() => setDayHovering(undefined)}
-      // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus={false}
       showWeekNumber={showWeekNumber}
       fixedWeeks={fixedWeeks}

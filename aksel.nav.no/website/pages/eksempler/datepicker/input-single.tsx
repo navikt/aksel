@@ -29,7 +29,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Vi anbefaler å bruke `useDatepicker`-hooken hvis du har et input-felt.",
 };

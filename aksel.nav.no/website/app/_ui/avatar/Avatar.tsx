@@ -1,6 +1,6 @@
 import { stegaClean } from "next-sanity";
 import Image from "next/image";
-import { Children, ReactNode, isValidElement } from "react";
+import { Children, type ReactNode, isValidElement } from "react";
 import { BodyShort, Box, Detail, HStack, VStack } from "@navikt/ds-react";
 import styles from "./Avatar.module.css";
 
@@ -109,9 +109,15 @@ export const AvatarStack = ({
   if (avatars.length === 0) {
     return null;
   }
-  const firstAvatar =
-    avatars && isValidElement<AvatarProps>(avatars[0]) && avatars[0];
-  if (!firstAvatar) {
+
+  const lastAvatarElement = avatars[avatars.length - 1];
+
+  const lastAvatar =
+    avatars &&
+    isValidElement<AvatarProps>(lastAvatarElement) &&
+    lastAvatarElement;
+
+  if (!lastAvatar) {
     return null;
   }
 
@@ -123,6 +129,7 @@ export const AvatarStack = ({
       <HStack as="ul" aria-hidden={showNames}>
         {avatars.map((avatar, idx) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: Fix gracefully in the future
             <li key={idx} className={styles.avatarItem}>
               {avatar}
             </li>
@@ -137,7 +144,7 @@ export const AvatarStack = ({
             marginBlock="space-1 space-0"
             marginInline="space-2 space-0"
           >
-            <Detail textColor="subtle">{firstAvatar.props.type}</Detail>
+            <Detail textColor="subtle">{lastAvatar.props.type}</Detail>
           </Box>
           <Box
             asChild
@@ -145,7 +152,7 @@ export const AvatarStack = ({
             marginInline="space-2 space-0"
           >
             <BodyShort className={styles.avatarName}>
-              {`${firstAvatar.props.name}`}
+              {`${lastAvatar.props.name}`}
               {suffix && (
                 <span className={styles.avatarNameSuffix}>{suffix}</span>
               )}

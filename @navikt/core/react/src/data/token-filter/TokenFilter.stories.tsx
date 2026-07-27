@@ -1,4 +1,4 @@
-import { StoryObj } from "@storybook/react-vite";
+import type { StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { VStack } from "../../primitives/stack";
 import { TokenFilter } from "./TokenFilter";

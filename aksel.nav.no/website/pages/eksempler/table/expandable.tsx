@@ -13,12 +13,9 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ name, fnr, start }, i) => {
+        {data.map(({ name, fnr, start }) => {
           return (
-            <Table.ExpandableRow
-              key={i + fnr}
-              content="Innhold i ekspanderbar rad"
-            >
+            <Table.ExpandableRow key={fnr} content="Innhold i ekspanderbar rad">
               <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
               <Table.DataCell>{fnr}</Table.DataCell>
               <Table.DataCell>{format(new Date(start))}</Table.DataCell>
@@ -73,7 +70,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Rader kan utvides for å vise ekstra informasjon. Man kan velge om knappen for å utvide/lukke vises i starten eller enden av raden.",
 };

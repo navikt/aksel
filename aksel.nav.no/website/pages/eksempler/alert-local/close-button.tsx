@@ -27,7 +27,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Bruk `LocalAlert.CloseButton` for å legge til en lukkeknapp i alerten. Du må selv håndtere lukke-logikken.",
 };

@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "For å sikre statiske ['keys'](https://react.dev/learn/rendering-lists#why-does-react-need-keys) i DataGrid, må hver rad ha en unik identifikator. I dette eksemplet bruker vi 'caseId' som nøkkel for hver rad, og vi spesifiserer dette ved å bruke 'getRowId' prop på DataGrid-komponenten.",
 };

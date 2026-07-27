@@ -1,6 +1,6 @@
 import {
-  FlipOptions,
-  Placement,
+  type FlipOptions,
+  type Placement,
   autoUpdate,
   flip,
   arrow as floatingArrow,
@@ -12,7 +12,7 @@ import {
   useFloating,
 } from "@floating-ui/react-dom";
 import React, {
-  HTMLAttributes,
+  type HTMLAttributes,
   forwardRef,
   useEffect,
   useRef,
@@ -161,6 +161,8 @@ const FloatingArrow = ({ width, height, className }: FloatingArrowProps) => {
       aria-hidden
     >
       <svg
+        aria-hidden
+        role="presentation"
         className={className}
         width={width}
         height={height}
@@ -261,7 +263,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const arrowHeight = arrowDefaults.height;
 
     const desiredPlacement = (side +
-      (align !== "center" ? "-" + align : "")) as Placement;
+      (align !== "center" ? `-${align}` : "")) as Placement;
 
     /**
      * Create a bias to the preferred side.

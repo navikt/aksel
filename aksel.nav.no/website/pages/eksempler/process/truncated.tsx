@@ -31,7 +31,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "`isTruncated` legger til en linje før første og/eller etter siste hendelse. Dette brukes for å illustrere at prosessen har flere hendelser før/etter enn det som vises.",
 };

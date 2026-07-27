@@ -1,16 +1,16 @@
 import chalk from "chalk";
-import { Command } from "commander";
+import type { Command } from "commander";
 import Enquirer from "enquirer";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "node:path";
 import {
   GLOB_IGNORE_PATTERNS,
-  SupportedCodemodExtensions,
+  type SupportedCodemodExtensions,
   getDefaultGlob,
 } from "../codeshift.utils";
 import { validateGit } from "../validation";
-import { TokenStatus } from "./config/TokenStatus";
+import type { TokenStatus } from "./config/TokenStatus";
 import { printRemaining } from "./tasks/print-remaining";
 import { getStatus } from "./tasks/status";
 

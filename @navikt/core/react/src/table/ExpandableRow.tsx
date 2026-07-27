@@ -6,7 +6,7 @@ import { useControllableState } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
-import Row, { RowProps } from "./Row";
+import Row, { type RowProps } from "./Row";
 import { isElementInteractiveTarget } from "./Table.utils";
 
 export interface ExpandableRowProps extends Omit<

@@ -17,7 +17,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Label må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };

@@ -50,6 +50,7 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
 
   return (
     <button
+      type="button"
       className={styles.chipsButton}
       disabled={count === 0 && !isActive}
       data-active={isActive}

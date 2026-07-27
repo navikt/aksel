@@ -1,6 +1,6 @@
-import { Locale, format } from "date-fns";
+import { type Locale, format } from "date-fns";
 import React, { useEffect, useRef } from "react";
-import { CalendarDay, Modifiers } from "react-day-picker";
+import type { CalendarDay, Modifiers } from "react-day-picker";
 import { cl } from "../../../utils/helpers";
 
 const DatePickerDayButton = ({

@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "./CodeBlock";
 import type { CodeBlockTabsT } from "./CodeBlock.provider";
 

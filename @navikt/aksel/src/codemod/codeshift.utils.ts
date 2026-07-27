@@ -45,6 +45,6 @@ function cleanExtensions(ext: string): string[] {
     .map((e) => e.replace(".", ""));
 }
 
-export { GLOB_IGNORE_PATTERNS, getDefaultGlob, cleanExtensions };
+export { GLOB_IGNORE_PATTERNS, getDefaultGlob };
 
 export type { SupportedCodemodExtensions };

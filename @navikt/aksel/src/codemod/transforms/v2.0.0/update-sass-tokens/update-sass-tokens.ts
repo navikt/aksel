@@ -8,7 +8,7 @@ export default function transformer(file: FileInfo) {
   tokens.forEach((tok) => {
     const scssToken = translateToken(tok[0], "scss");
 
-    const rgx = new RegExp("(\\" + scssToken + ")", "gm");
+    const rgx = new RegExp(`(\\${scssToken})`, "gm");
     src = src.replace(rgx, translateToken(tok[1], "scss"));
   });
 

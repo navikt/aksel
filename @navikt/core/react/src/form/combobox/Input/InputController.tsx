@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { forwardRef } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl } from "../../../utils/helpers";
@@ -7,7 +5,7 @@ import { useMergeRefs } from "../../../utils/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { ComboboxProps } from "../types";
+import type { ComboboxProps } from "../types";
 import Input from "./Input";
 import { useInputContext } from "./Input.context";
 import ToggleListButton from "./ToggleListButton";
@@ -57,6 +55,7 @@ export const InputController = forwardRef<
   return (
     <Floating.Anchor asChild ref={setAnchorRef}>
       {/** biome-ignore lint/a11y/noStaticElementInteractions: Acts as wrapper list-toggle and input */}
+      {/** biome-ignore lint/a11y/useKeyWithClickEvents: key-events are handled by input itself */}
       <div
         className={cl("aksel-combobox__wrapper-inner aksel-text-field__input", {
           "aksel-combobox__wrapper-inner--virtually-unfocused":

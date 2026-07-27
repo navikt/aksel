@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "8.13.1",
+  "version": "8.15.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -66,6 +66,16 @@
         "default": "./cjs/data-grid/index.js"
       }
     },
+    "./PREVIEW/Lookup": {
+      "import": {
+        "types": "./esm/lookup/index.d.ts",
+        "default": "./esm/lookup/index.js"
+      },
+      "require": {
+        "types": "./cjs/lookup/index.d.ts",
+        "default": "./cjs/lookup/index.js"
+      }
+    },
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
@@ -101,12 +111,12 @@
     },
     "./Alert": {
       "import": {
-        "types": "./esm/alert/index.d.ts",
-        "default": "./esm/alert/index.js"
+        "types": "./esm/legacy/alert/index.d.ts",
+        "default": "./esm/legacy/alert/index.js"
       },
       "require": {
-        "types": "./cjs/alert/index.d.ts",
-        "default": "./cjs/alert/index.js"
+        "types": "./cjs/legacy/alert/index.d.ts",
+        "default": "./cjs/legacy/alert/index.js"
       }
     },
     "./Button": {
@@ -301,12 +311,12 @@
     },
     "./LinkPanel": {
       "import": {
-        "types": "./esm/link-panel/index.d.ts",
-        "default": "./esm/link-panel/index.js"
+        "types": "./esm/legacy/link-panel/index.d.ts",
+        "default": "./esm/legacy/link-panel/index.js"
       },
       "require": {
-        "types": "./cjs/link-panel/index.d.ts",
-        "default": "./cjs/link-panel/index.js"
+        "types": "./cjs/legacy/link-panel/index.d.ts",
+        "default": "./cjs/legacy/link-panel/index.js"
       }
     },
     "./List": {
@@ -421,12 +431,12 @@
     },
     "./Stepper": {
       "import": {
-        "types": "./esm/stepper/index.d.ts",
-        "default": "./esm/stepper/index.js"
+        "types": "./esm/legacy/stepper/index.d.ts",
+        "default": "./esm/legacy/stepper/index.js"
       },
       "require": {
-        "types": "./cjs/stepper/index.d.ts",
-        "default": "./cjs/stepper/index.js"
+        "types": "./cjs/legacy/stepper/index.d.ts",
+        "default": "./cjs/legacy/stepper/index.js"
       }
     },
     "./Table": {
@@ -541,12 +551,12 @@
     },
     "./ConfirmationPanel": {
       "import": {
-        "types": "./esm/form/confirmation-panel/index.d.ts",
-        "default": "./esm/form/confirmation-panel/index.js"
+        "types": "./esm/legacy/confirmation-panel/index.d.ts",
+        "default": "./esm/legacy/confirmation-panel/index.js"
       },
       "require": {
-        "types": "./cjs/form/confirmation-panel/index.d.ts",
-        "default": "./cjs/form/confirmation-panel/index.js"
+        "types": "./cjs/legacy/confirmation-panel/index.d.ts",
+        "default": "./cjs/legacy/confirmation-panel/index.js"
       }
     },
     "./ErrorSummary": {
@@ -661,32 +671,32 @@
     },
     "./GlobalAlert": {
       "import": {
-        "types": "./esm/alert/global-alert/index.d.ts",
-        "default": "./esm/alert/global-alert/index.js"
+        "types": "./esm/global-alert/index.d.ts",
+        "default": "./esm/global-alert/index.js"
       },
       "require": {
-        "types": "./cjs/alert/global-alert/index.d.ts",
-        "default": "./cjs/alert/global-alert/index.js"
+        "types": "./cjs/global-alert/index.d.ts",
+        "default": "./cjs/global-alert/index.js"
       }
     },
     "./InfoCard": {
       "import": {
-        "types": "./esm/alert/info-card/index.d.ts",
-        "default": "./esm/alert/info-card/index.js"
+        "types": "./esm/info-card/index.d.ts",
+        "default": "./esm/info-card/index.js"
       },
       "require": {
-        "types": "./cjs/alert/info-card/index.d.ts",
-        "default": "./cjs/alert/info-card/index.js"
+        "types": "./cjs/info-card/index.d.ts",
+        "default": "./cjs/info-card/index.js"
       }
     },
     "./LocalAlert": {
       "import": {
-        "types": "./esm/alert/local-alert/index.d.ts",
-        "default": "./esm/alert/local-alert/index.js"
+        "types": "./esm/local-alert/index.d.ts",
+        "default": "./esm/local-alert/index.js"
       },
       "require": {
-        "types": "./cjs/alert/local-alert/index.d.ts",
-        "default": "./cjs/alert/local-alert/index.js"
+        "types": "./cjs/local-alert/index.d.ts",
+        "default": "./cjs/local-alert/index.js"
       }
     },
     "./Dialog": {
@@ -712,22 +722,24 @@
     }
   },
   "scripts": {
-    "docgen": "tsx ../../../scripts/docgen.ts",
+    "docgen:meta": "yarn metadata:generate-names && tsx ./scripts/extract-metadata.ts",
+    "metadata:generate-names": "tsx ./scripts/extract-component-names.ts",
     "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
-    "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "concurrently \"cross-env TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
-    "test-sb-build": "tsc -p tsconfig.sb.json",
+    "build": "yarn i18n-jsdoc && yarn metadata:generate-names && concurrently \"tsc -p tsconfig.build.json --module commonjs --outDir cjs --tsBuildInfoFile cjs/.tsbuildinfo\" \"tsc -p tsconfig.build.json --module esnext --outDir esm --tsBuildInfoFile esm/.tsbuildinfo && tsc-alias -p tsconfig.build.json --dir esm -f && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup && yarn copy-types",
+    "watch": "tsc --watch -p tsconfig.build.json --module esnext --outDir esm --tsBuildInfoFile esm/.tsbuildinfo",
+    "test": "yarn metadata:generate-names && concurrently \"cross-env TZ=UTC vitest run -c tests/vitest.config.ts\" \"yarn test-sb-build\"",
+    "test:bench": "cross-env TZ=UTC vitest bench -c tests/vitest.config.ts",
+    "test-sb-build": "tsc -p tsconfig.json",
     "test:watch": "TZ=UTC vitest watch -c tests/vitest.config.ts",
     "copy-types": "copyfiles -f ./src/types/theme.d.ts ./esm/types"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.19",
-    "@floating-ui/react-dom": "^2.1.8",
-    "@navikt/aksel-icons": "^8.13.1",
-    "@navikt/ds-tokens": "^8.13.1",
+    "@floating-ui/react": "0.27.20",
+    "@floating-ui/react-dom": "^2.1.9",
+    "@navikt/aksel-icons": "^8.15.0",
+    "@navikt/ds-tokens": "^8.15.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "9.14.0"
   },
@@ -741,21 +753,19 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "aksel": "workspace:^",
-    "concurrently": "9.2.1",
+    "concurrently": "10.0.3",
     "copyfiles": "^2.4.1",
     "cross-env": "^10.1.0",
-    "fast-glob": "3.3.3",
-    "jscodeshift": "17.3.0",
+    "jscodeshift": "17.4.0",
     "jsdom": "29.1.1",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "react-router": "^7.15.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "rimraf": "6.1.3",
     "swr": "^2.4.1",
     "tsc-alias": "1.8.16",
-    "tsx": "^4.20.6",
+    "tsx": "^4.23.1",
     "typescript": "6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.10"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",

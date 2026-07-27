@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { BodyLong, Box, ReadMore, VStack } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import styles from "./Video.module.css";
 import { VideoPlayer } from "./VideoPlayer";
 
@@ -45,7 +45,7 @@ function Video(props: ExtractPortableComponentProps<"video">) {
           <ReadMore header="Transkripsjon">
             <div id={transcriptId}>
               {transkripsjon.split("\n\n").map((paragraph, i, array) => (
-                <BodyLong key={i} spacing={i < array.length - 1}>
+                <BodyLong key={paragraph} spacing={i < array.length - 1}>
                   {paragraph}
                 </BodyLong>
               ))}

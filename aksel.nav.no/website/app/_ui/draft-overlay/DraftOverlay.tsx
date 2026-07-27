@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  useDraftModeEnvironment,
-  useIsPresentationTool,
-} from "next-sanity/hooks";
+import { useVisualEditingEnvironment } from "next-sanity/hooks";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
@@ -14,9 +11,8 @@ import { disableDraftModeAction } from "./actions";
 function DraftOverlay() {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const environment = useDraftModeEnvironment();
+  const environment = useVisualEditingEnvironment();
   const pathname = usePathname();
-  const isPresentation = useIsPresentationTool();
   const isIFrame = typeof window !== "undefined" && window.self !== window.top;
 
   const [enableVisualEditing, setEnableVisualEditing] = useState(false);
@@ -38,22 +34,18 @@ function DraftOverlay() {
     };
   }, [router]);
 
-  if (isPresentation) {
-    return <VisualEditing />;
-  }
-
   /**
-   * Only show the disable draft mode panel when outside of Presentation Tool
-   * - If in Iframe (e.g. embedded preview in Sanity Studio) we hide it
+   * Only show the disable draft mode panel on the website
+   * - If in Presentation tool we hide it
    * - If in /admin path (e.g. Sanity Studio) we hide it
-   * - If not in live environment, something is loading or an error occurred, so we hide it
+   * - If in Iframe (e.g. embedded preview in Sanity Studio) we hide it
    */
   if (
-    (environment !== "live" && environment !== "unknown") ||
+    environment?.startsWith("presentation") ||
     pathname?.startsWith("/admin") ||
     isIFrame
   ) {
-    return null;
+    return <VisualEditing />;
   }
 
   const disable = () =>

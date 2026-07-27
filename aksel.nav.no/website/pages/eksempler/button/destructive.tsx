@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "For handlinger som kan føre til tap av data eller andre negative konsekvenser for brukeren, bør du bruke en 'destruktiv' knapp.",
 };

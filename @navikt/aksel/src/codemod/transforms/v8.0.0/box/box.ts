@@ -123,7 +123,7 @@ export default function transformer(file: FileInfo, api: API) {
   const blockComment = createFileComments({ tokenComments });
 
   if (blockComment) {
-    return `${blockComment ? blockComment + "\n\n" : ""}${root.toSource(
+    return `${blockComment ? `${blockComment}\n\n` : ""}${root.toSource(
       toSourceOptions,
     )}`;
   }

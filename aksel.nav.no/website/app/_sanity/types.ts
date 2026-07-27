@@ -1,6 +1,6 @@
 import type { PortableTextRendererOptions } from "@portabletext/markdown";
-import { PortableTextComponentProps } from "next-sanity";
-import {
+import type { PortableTextComponentProps } from "next-sanity";
+import type {
   BLOGG_BY_SLUG_QUERY_RESULT,
   GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT,
   KOMPONENT_BY_SLUG_QUERY_RESULT,

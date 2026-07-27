@@ -7,14 +7,17 @@ import {
   Heading,
   VStack,
 } from "@navikt/ds-react";
-import { sanityFetch } from "@/app/_sanity/live";
+import { type DynamicFetchOptions, sanityFetch } from "@/app/_sanity/live";
 import { DESIGNSYSTEM_STATS_QUERY } from "@/app/_sanity/queries";
 import type { DESIGNSYSTEM_STATS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import styles from "./DesignsystemStats.module.css";
 
-async function DesignsystemStats() {
+async function DesignsystemStats({ perspective, stega }: DynamicFetchOptions) {
+  "use cache";
   const { data } = await sanityFetch({
     query: DESIGNSYSTEM_STATS_QUERY,
+    perspective,
+    stega,
   });
 
   if (!hasRequiredStats(data)) {
@@ -123,7 +126,8 @@ function formatNumber(num: number): {
 } {
   if (num >= 1_000_000) {
     return { number: `${(num / 1_000_000).toFixed(1)}`, modifier: "M" };
-  } else if (num >= 1_000) {
+  }
+  if (num >= 1_000) {
     return { number: `${(num / 1_000).toFixed(1)}`, modifier: "K" };
   }
   return { number: num.toString(), modifier: "" };

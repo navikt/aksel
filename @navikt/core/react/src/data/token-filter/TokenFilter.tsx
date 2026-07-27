@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
-import { AutoCompleteOption } from "./AutoSuggest.types";
+import type { AutoCompleteOption } from "./AutoSuggest.types";
 import { TokenFilterChips } from "./FilterChip";
 import type {
   ExternalOptions,
@@ -102,6 +102,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
     };
 
     return (
+      // biome-ignore lint/a11y/useSemanticElements: search-tag is too new (baseline 2023)
       <div
         ref={ref}
         className={cl("aksel-property-filter", className)}

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { format, setYear } from "date-fns";
 import { nb } from "date-fns/locale";
 import React from "react";

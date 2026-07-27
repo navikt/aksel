@@ -1,5 +1,5 @@
 import {
-  Locale,
+  type Locale,
   format,
   getMonth,
   getYear,
@@ -7,8 +7,8 @@ import {
   setYear,
   startOfMonth,
 } from "date-fns";
-import React, { ChangeEvent, useCallback } from "react";
-import { CalendarMonth, useDayPicker } from "react-day-picker";
+import React, { type ChangeEvent, useCallback } from "react";
+import { type CalendarMonth, useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
@@ -20,7 +20,7 @@ import {
   getMonthOptions,
   getYearOptions,
 } from "../../date-utils";
-import { MultipleMode } from "../DatePicker.types";
+import type { MultipleMode } from "../DatePicker.types";
 import { DatePickerWeekRow } from "./DatePicker.WeekRow";
 
 const DatePickerMonths = ({

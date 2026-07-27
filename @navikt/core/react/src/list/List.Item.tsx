@@ -35,8 +35,8 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden
+                role="presentation"
                 focusable={false}
-                role="img"
               >
                 <rect width="6" height="6" rx="3" fill="currentColor" />
               </svg>

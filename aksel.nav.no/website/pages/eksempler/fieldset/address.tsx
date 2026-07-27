@@ -41,7 +41,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Fieldset kan brukes for å legge til ledetekst på felter som opptrer flere ganger. (Her har vi justert opp størrelsen på legend-teksten for å skape et tydeligere hierarki.)",
 };

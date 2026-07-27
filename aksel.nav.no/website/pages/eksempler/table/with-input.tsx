@@ -12,11 +12,11 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ name, fnr, start }, i) => {
+        {data.map(({ name, fnr, start }) => {
           const hasError = fnr.startsWith("18") ? "Error message" : false;
           const cellStyle = hasError ? { verticalAlign: "baseline" } : {};
           return (
-            <Table.Row key={i + fnr}>
+            <Table.Row key={fnr}>
               <Table.HeaderCell scope="row" style={cellStyle}>
                 {name}
               </Table.HeaderCell>
@@ -84,6 +84,6 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
 };

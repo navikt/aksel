@@ -37,7 +37,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
   desc: "Bruk `asChild`-propen hvis du bruker et rammeverk som har sin egen link-komponent. Du legger da komponenten du ønsker å bruke som child i `LinkCard.Anchor`.",
   sandbox: false,

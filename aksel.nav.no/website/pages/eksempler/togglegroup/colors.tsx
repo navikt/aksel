@@ -40,7 +40,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Bruk `data-color`-attributtet for å endre farge på ToggleGroup.",
 };

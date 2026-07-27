@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
-import { TypoProps } from "./types";
+import type { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface ErrorMessageProps
@@ -77,6 +77,7 @@ export const ErrorMessage: OverridableComponent<
             xmlns="http://www.w3.org/2000/svg"
             focusable={false}
             aria-hidden
+            role="presentation"
           >
             <path
               fillRule="evenodd"

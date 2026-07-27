@@ -266,7 +266,9 @@ export const ResizeAuto: Story = {
         />
       </DataGrid>
     ) : (
-      <button onClick={() => setShowTable(true)}>Show table</button>
+      <button type="button" onClick={() => setShowTable(true)}>
+        Show table
+      </button>
     );
   },
   play: async ({ canvasElement }) => {

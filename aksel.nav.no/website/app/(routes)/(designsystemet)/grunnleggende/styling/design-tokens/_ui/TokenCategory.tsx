@@ -5,7 +5,7 @@ import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import TokenRolesChips from "./TokenRolesChips";
 import TokensList from "./TokensList";
-import { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
+import type { BreakpointRoleT, ColorRoleT, FontRoleT } from "./config";
 import { sortTokens } from "./token-utils";
 
 const TokenCategory = ({

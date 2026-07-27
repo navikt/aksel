@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import DataToolbarButton, {
-  DataToolbarButtonProps,
+  type DataToolbarButtonProps,
 } from "../button/DataToolbarButton";
 import {
   DataToolbarSearchField,

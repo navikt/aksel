@@ -40,7 +40,7 @@ export function useMergeRefs<I>(
   c?: InputRef<I>,
   d?: InputRef<I>,
 ): Result<I> {
-  const forkRef = useRefWithInit(createForkRef<I>).current!;
+  const forkRef = useRefWithInit(createForkRef<I>).current;
   if (didChange(forkRef, a, b, c, d)) {
     update(forkRef, [a, b, c, d]);
   }
@@ -53,7 +53,7 @@ export function useMergeRefs<I>(
  * If you need to merge a fixed number (up to four) of refs, use `useMergeRefs` instead for better performance.
  */
 export function useMergeRefsN<I>(refs: InputRef<I>[]): Result<I> {
-  const forkRef = useRefWithInit(createForkRef<I>).current!;
+  const forkRef = useRefWithInit(createForkRef<I>).current;
   if (didChangeN(forkRef, refs)) {
     update(forkRef, refs);
   }

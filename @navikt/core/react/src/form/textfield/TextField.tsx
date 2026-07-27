@@ -1,9 +1,9 @@
-import React, { InputHTMLAttributes, forwardRef } from "react";
+import React, { type InputHTMLAttributes, forwardRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 export interface TextFieldProps
   extends FormFieldProps, Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {

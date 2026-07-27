@@ -1,11 +1,11 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import type { AkselColor } from "../types";
 import { BodyLong, Heading } from "../typography";
 import {
   LinkAnchor,
   LinkAnchorArrow,
   LinkAnchorOverlay,
-  LinkAnchorProps,
+  type LinkAnchorProps,
 } from "../utils/components/link-anchor";
 import { cl, createStrictContext } from "../utils/helpers";
 

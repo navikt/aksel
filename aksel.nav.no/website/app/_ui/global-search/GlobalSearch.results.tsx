@@ -66,6 +66,7 @@ function GlobalSearchEmptySearchState() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden
+        role="presentation"
       >
         <path
           d="M34.7626 108.638L31.4932 114.171C30.9625 115.069 30.9625 116.185 31.4932 117.083L34.7626 122.616C35.2776 123.488 36.2146 124.022 37.2269 124.022H44.1088C45.1323 124.022 46.078 123.476 46.5889 122.589L49.7766 117.056C50.2861 116.172 50.2861 115.083 49.7766 114.198L46.5889 108.665C46.078 107.778 45.1323 107.232 44.1088 107.232H37.2269C36.2146 107.232 35.2776 107.767 34.7626 108.638Z"
@@ -161,6 +162,7 @@ function GlobalSearchEmptyState() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden
+        role="presentation"
       >
         <circle
           cx="92.0352"

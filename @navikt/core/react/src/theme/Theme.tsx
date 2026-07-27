@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { Slot } from "../utils/components/slot/Slot";
 import { cl, createStrictContext } from "../utils/helpers";
 import type { AsChildProps } from "../utils/types";

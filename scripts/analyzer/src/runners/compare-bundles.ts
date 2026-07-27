@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { type BundleAnalysisResult } from "../analyze.js";
+import type { BundleAnalysisResult } from "../analyze.js";
 import { compareResults } from "../helpers/compare.js";
 import { markdownMessage } from "../md-message.js";
 

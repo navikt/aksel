@@ -37,8 +37,8 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Undermeny trengs ikke hvis man bare skal kunne bytte mellom lyst og mørkt tema.",
-  sandboxEnabled: false,
+  sandbox: false,
 };

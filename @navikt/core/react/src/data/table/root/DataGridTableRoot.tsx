@@ -201,6 +201,7 @@ const DataGridTableInternal = forwardRef<
 
     const tableId = useId(id);
 
+    /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
     return (
@@ -406,8 +407,11 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
             {label}
           </td>
         </tr>
-        {Array.from({ length: rows }, (_, rowIndex) => (
-          <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
+        {Array.from(
+          { length: rows },
+          (_, rowNumber) => `skeleton-row-${rowNumber + 1}`,
+        ).map((rowId) => (
+          <DataTableTr key={rowId} aria-hidden>
             {columns.map(
               (
                 { isSticky, isStickyLast, stickyLeftOffset, colDef },
@@ -487,7 +491,7 @@ interface DataTableDataRowProps {
 }
 
 const DataTableDataRow = memo(
-  function DataTableDataRow({
+  function DataTableDataRowMemo({
     rowData,
     details,
     columns,

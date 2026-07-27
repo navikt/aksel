@@ -3,9 +3,9 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form role="search">
+    <search>
       <Search label="Søk i alle Nav sine sider" variant="primary" />
-    </form>
+    </search>
   );
 };
 
@@ -17,7 +17,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Primary brukes der søk er hovedfunksjon, f.eks. ved globalt søk. Merk at det som regel bare skal finnes ett primary søk på en og samme side.",
 };

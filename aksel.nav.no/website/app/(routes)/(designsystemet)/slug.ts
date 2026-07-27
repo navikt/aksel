@@ -1,7 +1,7 @@
+import type { AllArticleDocumentsT } from "aksel-sanity-studio/schema";
 import "server-only";
-import { sanityFetch } from "@/app/_sanity/live";
+import { sanityFetchStaticParams } from "@/app/_sanity/live";
 import { SLUG_BY_TYPE_QUERY } from "@/app/_sanity/queries";
-import { AllArticleDocumentsT } from "@/sanity/config";
 
 const SanityDoctypeSlugPrefixConfig = {
   komponent_artikkel: "komponenter",
@@ -27,11 +27,9 @@ async function getStaticParamsSlugs({
   type: keyof typeof SanityDoctypeSlugPrefixConfig;
   onlyTopLevelPages: boolean;
 }) {
-  const { data } = await sanityFetch({
+  const { data } = await sanityFetchStaticParams({
     query: SLUG_BY_TYPE_QUERY,
     params: { type },
-    stega: false,
-    perspective: "published",
   });
 
   return data

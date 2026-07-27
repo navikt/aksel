@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
-import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import styles from "./Changelog.module.css";
 import LogEntry from "./LogEntry";
 import MonthHeader from "./MonthHeader";
@@ -28,7 +28,10 @@ export default function LogEntryList({ list }: Props) {
               >
                 {monthGroup.map((logEntry, logIndex) => (
                   <LogEntry
-                    key={`log-entry-${monthIndex}-${logIndex}`}
+                    key={
+                      logEntry.slug ??
+                      `${logEntry.heading}-${logEntry.endringsdato}`
+                    }
                     logEntry={logEntry}
                     isLastEntry={
                       monthIndex === list.length - 1 &&

@@ -26,6 +26,7 @@ function GodPraksisHeroButton({ inDialog }: { inDialog?: boolean }) {
       }
       aria-hidden={hidden}
       inert={hidden}
+      type="button"
     >
       Tema
       {dialogState.open ? (

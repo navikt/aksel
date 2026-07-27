@@ -1,4 +1,4 @@
-import { type ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import styles from "./AnimatedArrow.module.css";
 

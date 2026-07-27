@@ -1,0 +1,49 @@
+.aksel-lookup-trigger {
+  cursor: pointer;
+  text-decoration: underline dashed;
+  text-underline-offset: round(0.1em, 1px);
+  text-decoration-thickness: round(0.1em, 1px);
+  text-decoration-color: var(--ax-border-default);
+  border-radius: var(--ax-radius-4);
+  padding-inline: var(--ax-space-1);
+
+  &:hover {
+    background: var(--ax-bg-moderate-hoverA);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  @media (forced-colors: active) {
+    &:hover {
+      background-color: highlighttext;
+      color: highlight;
+    }
+  }
+}
+
+.aksel-lookup__content {
+  position: relative;
+  max-width: min(65ch, calc(100vw - var(--ax-space-24)));
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 2px;
+
+    /* Popover radius - border-width */
+    border-radius: calc(var(--ax-radius-12) - 1px);
+  }
+}
+
+.aksel-lookup__title {
+  margin-block-end: var(--ax-space-8);
+  margin-inline-end: var(--ax-space-28);
+}
+
+.aksel-lookup__close-button {
+  position: absolute;
+  top: var(--ax-space-16);
+  right: var(--ax-space-16);
+}

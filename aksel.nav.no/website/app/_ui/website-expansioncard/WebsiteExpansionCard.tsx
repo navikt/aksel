@@ -1,4 +1,4 @@
-import { PortableTextBlock, stegaClean } from "next-sanity";
+import { type PortableTextBlock, stegaClean } from "next-sanity";
 import {
   ExpansionCardContent,
   ExpansionCardDescription,
@@ -6,7 +6,7 @@ import {
   ExpansionCardTitle,
 } from "@navikt/ds-react/ExpansionCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { WebsiteExpansionCardTracked } from "./WebsiteExpansionCardTracked";
 
 const cardSize = {

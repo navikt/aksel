@@ -4,8 +4,8 @@ import type { FuseResult, FuseResultMatch } from "fuse.js";
 import Fuse from "fuse.js";
 import omit from "lodash/omit";
 import {
-  SearchHitT,
-  SearchPageT,
+  type SearchHitT,
+  type SearchPageT,
   globalSearchConfig,
 } from "./GlobalSearch.config";
 import { fetchArticles } from "./GlobalSearch.fetch";
@@ -123,8 +123,4 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-async function preloadSearchIndex() {
-  void fetchArticles();
-}
-
-export { fuseGlobalSearch, preloadSearchIndex };
+export { fuseGlobalSearch };

@@ -1,4 +1,4 @@
-import { type StyleDictionaryTokenConfig } from "../../../tokens.util";
+import type { StyleDictionaryTokenConfig } from "../../../tokens.util";
 
 export const brandBeigeSemanticTokenConfig = {
   bg: {

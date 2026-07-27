@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Unngå lik bakgrunnsfarge i komponenten som på flaten bak.",
 };

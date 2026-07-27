@@ -69,7 +69,9 @@ export const AllowContainerChange: Story = {
 
     return (
       <div>
-        <button onClick={() => setActivated(!activated)}>Change root</button>
+        <button type="button" onClick={() => setActivated(!activated)}>
+          Change root
+        </button>
         <div data-testid="custom-root-one" ref={setCustomRootOne} />
         <div data-testid="custom-root-two" ref={setCustomRootTwo} />
         <PortalComponent

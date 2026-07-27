@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 type FileT = NonNullable<
   NonNullable<
@@ -95,7 +95,7 @@ function KodeEksemplerProvider(props: {
     }
 
     setLoaded(false);
-    router.push(pathname + "?" + newQueryString, { scroll: false });
+    router.push(`${pathname}?${newQueryString}`, { scroll: false });
     iframeRef.current?.focus({ preventScroll: true });
   };
 

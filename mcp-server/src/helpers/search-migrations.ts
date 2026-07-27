@@ -73,4 +73,3 @@ function searchMigrations(query?: string, limit?: number): MigrationResult[] {
 }
 
 export { searchMigrations, getAvailableVersions };
-export type { MigrationResult };

@@ -4,7 +4,7 @@ import { omit, useId } from "../../utils-external";
 import TextareaAutosize from "../../utils/components/textarea-autosize/TextareaAutoSize";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "./../useFormField";
+import { type FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
 export interface TextareaProps

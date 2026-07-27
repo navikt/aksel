@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
-import { ComponentTranslation } from "../../../utils/i18n/i18n.types";
+import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
 import {
   FileUploadDropzone,
   type FileUploadDropzoneProps,

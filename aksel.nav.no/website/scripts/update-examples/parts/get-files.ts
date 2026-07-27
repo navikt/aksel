@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { RootDirectoriesT } from "../types";
+import type { RootDirectoriesT } from "../types";
 
 export function getFiles(dirName: string, rootDir: RootDirectoriesT) {
   const codeDirPath = path.resolve(

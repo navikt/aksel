@@ -1,6 +1,6 @@
-import { Args, StoryObj } from "@storybook/react-vite";
+import type { Args, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Renderer, StoryContext } from "storybook/internal/types";
+import type { Renderer, StoryContext } from "storybook/internal/types";
 
 type StoryFnOrObj =
   | { render?: (...args: any[]) => React.ReactNode; args?: Args }

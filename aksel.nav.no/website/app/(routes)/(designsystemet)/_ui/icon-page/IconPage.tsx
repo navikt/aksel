@@ -15,10 +15,10 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
+import { FigmaIcon } from "@/app/_ui/assets/Icons";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
 import { IconDetails, IntroInformation } from "./IconPage.details";

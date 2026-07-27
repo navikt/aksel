@@ -38,7 +38,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Med `allowNewValues` kan brukeren legge til egne verdier som ikke finnes i listen.",
 };
