@@ -7,7 +7,7 @@
     "sync-imports": "tsx --tsconfig ./scripts/tsconfig.json ./scripts/generate-imports.ts"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@types/node": "^24.10.9",
