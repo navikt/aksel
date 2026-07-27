@@ -15,7 +15,11 @@ type OperatorT =
 type OperationT = "and" | "or";
 
 type ExternalToken = {
-  propertyKey: string;
+  /**
+   * Key of the property being filtered on.
+   * Omitted for free-text tokens, where the value applies to all properties.
+   */
+  propertyKey?: string;
   operator: OperatorT;
   value: string;
 };

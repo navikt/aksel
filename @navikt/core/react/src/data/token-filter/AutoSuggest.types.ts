@@ -8,6 +8,11 @@ interface AutoCompleteOption {
   label: string;
   tags?: string[];
   description?: string;
+  /**
+   * Marks a suggestion that turns `value` into a free-text token.
+   * Selecting it skips property/operator parsing of `value`.
+   */
+  freeText?: boolean;
 }
 
 export type { AutoCompleteOption, OptionGroup };

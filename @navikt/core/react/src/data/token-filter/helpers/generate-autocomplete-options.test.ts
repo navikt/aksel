@@ -77,7 +77,162 @@ const parsedOptions: InternalPropertyOption[] = allOptions.map((option) => {
   };
 });
 
+function getGroup(
+  result: ReturnType<typeof generateAutoCompleteOptions>,
+  label: string,
+) {
+  const group = result.options.find((item) => item.label === label);
+  if (!group) {
+    throw new Error(`No group with label "${label}"`);
+  }
+  return group;
+}
+
 describe("generateAutoCompleteOptions v2", () => {
+  describe("custom value suggestion", () => {
+    test("property step: should suggest the typed query as the first option", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: parsedProperties[0],
+        operator: "=",
+        value: "testvalue",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].label).toBe("");
+      expect(result.options[0].options[0]).toEqual({
+        value: "Status = testvalue",
+        label: "Status = testvalue",
+      });
+    });
+
+    test("property step: should not suggest the typed query when it matches an existing option", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: parsedProperties[0],
+        operator: "=",
+        value: "active",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].label).toBe("Status values");
+      const allValues = result.options.flatMap((group) =>
+        group.options.map((option) => option.value),
+      );
+      expect(
+        allValues.filter((value) => value === "Status = active"),
+      ).toHaveLength(1);
+    });
+
+    test("property step: should not suggest anything custom without a value", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: parsedProperties[0],
+        operator: "=",
+        value: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options.every((group) => group.label !== "")).toBe(true);
+    });
+
+    test("free-text step: should suggest using the typed text as the first option", () => {
+      const queryState: InternalParsedTextState = {
+        step: "free-text",
+        value: "customtext",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].label).toBe("");
+      expect(result.options[0].options[0]).toEqual({
+        value: "customtext",
+        label: 'use "customtext"',
+        freeText: true,
+      });
+    });
+
+    test("free-text step: should keep the typed operator in the suggested value", () => {
+      const queryState: InternalParsedTextState = {
+        step: "free-text",
+        value: "customtext",
+        operator: "!=",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].options[0]).toEqual({
+        value: "!= customtext",
+        label: 'use "customtext"',
+        freeText: true,
+      });
+    });
+
+    test("operator step: should suggest the typed text as free-text", () => {
+      const queryState: InternalParsedTextState = {
+        step: "operator",
+        property: parsedProperties[0],
+        operatorPrefix: "",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].label).toBe("");
+      expect(result.options[0].options[0]).toEqual({
+        value: "Status",
+        label: 'use "Status"',
+        freeText: true,
+      });
+    });
+
+    test("operator step: should include an incomplete operator in the free-text suggestion", () => {
+      const queryState: InternalParsedTextState = {
+        step: "operator",
+        property: parsedProperties[0],
+        operatorPrefix: "!",
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        parsedProperties,
+        parsedOptions,
+      );
+
+      expect(result.options[0].options[0]).toEqual({
+        value: "Status !",
+        label: 'use "Status !"',
+        freeText: true,
+      });
+    });
+  });
+
   describe("free-text step", () => {
     test("empty value: should return all properties", () => {
       const queryState: InternalParsedTextState = {
@@ -251,9 +406,12 @@ describe("generateAutoCompleteOptions v2", () => {
       );
 
       expect(result.value).toBe("act");
-      expect(result.options).toHaveLength(1);
-      expect(result.options[0].options).toHaveLength(2);
-      const labels = result.options[0].options.map((o) => o.label);
+
+      const valueGroup = result.options.find(
+        (g) => g.label === "Status values",
+      );
+      expect(valueGroup?.options).toHaveLength(2);
+      const labels = valueGroup?.options.map((o) => o.label);
       expect(labels).toContain("Status = active");
       expect(labels).toContain("Status = inactive");
     });
@@ -294,9 +452,7 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options).toHaveLength(1);
-      expect(result.options[0].label).toBe("Operators");
-      expect(result.options[0].options.length).toBe(10);
+      expect(getGroup(result, "Operators").options.length).toBe(10);
     });
 
     test("operator prefix '!': should filter operators starting with '!'", () => {
@@ -312,12 +468,9 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options).toHaveLength(1);
-      expect(result.options[0].label).toBe("Operators");
-      expect(result.options[0].options).toHaveLength(3);
-      const operators = result.options[0].options.map(
-        (o) => o.value.split(" ")[1],
-      );
+      const operatorGroup = getGroup(result, "Operators");
+      expect(operatorGroup.options).toHaveLength(3);
+      const operators = operatorGroup.options.map((o) => o.value.split(" ")[1]);
       expect(operators).toEqual(["!=", "!:", "!^"]);
     });
 
@@ -334,14 +487,14 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options).toHaveLength(1);
-      expect(result.options[0].options).toHaveLength(1);
-      expect(
-        (result.options[0].options[0] as AutoCompleteOption).description,
-      ).toBe("is greater than or equal to");
+      const operatorGroup = getGroup(result, "Operators");
+      expect(operatorGroup.options).toHaveLength(1);
+      expect((operatorGroup.options[0] as AutoCompleteOption).description).toBe(
+        "is greater than or equal to",
+      );
     });
 
-    test("invalid prefix: should return empty suggestions", () => {
+    test("invalid prefix: should only suggest free-text", () => {
       const queryState: InternalParsedTextState = {
         step: "operator",
         property: statusProperty,
@@ -355,7 +508,18 @@ describe("generateAutoCompleteOptions v2", () => {
       );
 
       expect(result.value).toBe("Status invalid");
-      expect(result.options).toEqual([]);
+      expect(result.options).toEqual([
+        {
+          label: "",
+          options: [
+            {
+              value: "Status invalid",
+              label: 'use "Status invalid"',
+              freeText: true,
+            },
+          ],
+        },
+      ]);
     });
   });
 
@@ -373,7 +537,7 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      const containsOp = result.options[0].options.find(
+      const containsOp = getGroup(result, "Operators").options.find(
         (o) => (o as AutoCompleteOption).description === "contains",
       );
       expect(containsOp).toBeDefined();
@@ -468,8 +632,9 @@ describe("generateAutoCompleteOptions v2", () => {
         [],
       );
 
-      expect(result.options[0].options).toHaveLength(2);
-      const operatorSymbols = result.options[0].options.map(
+      const operatorGroup = getGroup(result, "Operators");
+      expect(operatorGroup.options).toHaveLength(2);
+      const operatorSymbols = operatorGroup.options.map(
         (o) => (o as AutoCompleteOption).value.split(" ")[1],
       );
       expect(operatorSymbols).toEqual(["=", "!="]);
@@ -507,8 +672,9 @@ describe("generateAutoCompleteOptions v2", () => {
         [],
       );
 
-      expect(result.options[0].options).toHaveLength(2);
-      const operatorSymbols = result.options[0].options.map(
+      const operatorGroup = getGroup(result, "Operators");
+      expect(operatorGroup.options).toHaveLength(2);
+      const operatorSymbols = operatorGroup.options.map(
         (o) => (o as AutoCompleteOption).value.split(" ")[1],
       );
       expect(operatorSymbols).toEqual([":", "!:"]);
@@ -548,8 +714,9 @@ describe("generateAutoCompleteOptions v2", () => {
         [],
       );
 
-      expect(result.options[0].options).toHaveLength(2);
-      const operatorSymbols = result.options[0].options.map(
+      const operatorGroup = getGroup(result, "Operators");
+      expect(operatorGroup.options).toHaveLength(2);
+      const operatorSymbols = operatorGroup.options.map(
         (o) => (o as AutoCompleteOption).value.split(" ")[1],
       );
       expect(operatorSymbols).toEqual(["=", "!="]);
@@ -651,7 +818,10 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options).toHaveLength(0);
+      /* Only the custom suggestion for the typed text is left */
+      expect(result.options).toHaveLength(1);
+      expect(result.options[0].label).toBe("");
+      expect(result.options[0].options[0].value).toBe("Status = region");
     });
 
     test("non-scoped search should include property labels in search", () => {
@@ -768,8 +938,7 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options[0].options.length).toBeGreaterThan(0);
-      const operators = result.options[0].options.map(
+      const operators = getGroup(result, "Operators").options.map(
         (o) => (o as AutoCompleteOption).value.split(" ")[1],
       );
       expect(operators).toContain(":");
@@ -788,8 +957,7 @@ describe("generateAutoCompleteOptions v2", () => {
         parsedOptions,
       );
 
-      expect(result.options[0].options.length).toBeGreaterThan(0);
-      const operators = result.options[0].options.map(
+      const operators = getGroup(result, "Operators").options.map(
         (o) => (o as AutoCompleteOption).value.split(" ")[1],
       );
       expect(operators).toContain(">");

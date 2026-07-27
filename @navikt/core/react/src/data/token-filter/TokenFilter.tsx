@@ -71,21 +71,30 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
     );
 
     const createToken = useCallback(
-      (newText: string): boolean => {
+      (newText: string, freeText = false): boolean => {
         const newQueryState = parseQueryText(
           newText,
-          parsedPropertyDefinitions,
+          /* Free-text input must not be re-interpreted as a property query */
+          freeText ? [] : parsedPropertyDefinitions,
         );
 
-        if (newQueryState.step !== "property" || newQueryState.value === "") {
+        if (newQueryState.step === "operator" || newQueryState.value === "") {
           return false;
         }
 
-        addToken({
-          propertyKey: newQueryState.property.key,
-          operator: newQueryState.operator,
-          value: newQueryState.value,
-        });
+        addToken(
+          newQueryState.step === "property"
+            ? {
+                propertyKey: newQueryState.property.key,
+                operator: newQueryState.operator,
+                value: newQueryState.value,
+              }
+            : {
+                /* Free-text tokens apply to all properties */
+                operator: newQueryState.operator ?? ":",
+                value: newQueryState.value,
+              },
+        );
         setFilterText("");
         return true;
       },
@@ -94,6 +103,10 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
     const handleSelectOption = useCallback(
       (option: AutoCompleteOption) => {
+        if (option.freeText) {
+          return createToken(option.value, true);
+        }
+
         const newQueryState = parseQueryText(
           option.value,
           parsedPropertyDefinitions,
@@ -126,6 +139,10 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
     const formatToken = useCallback(
       (token: ExternalToken) => {
+        if (!token.propertyKey) {
+          return token.value;
+        }
+
         const propertyLabel =
           propertyMap.get(token.propertyKey)?.label || token.propertyKey;
 

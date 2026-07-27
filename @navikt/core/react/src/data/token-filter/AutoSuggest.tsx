@@ -167,23 +167,35 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
               /* Options are only virtually focused, so real focus must stay on the input */
               onMouseDown={(event) => event.preventDefault()}
             >
-              {options.map((group) => (
-                <Listbox.Group
-                  /* Property- and value-groups can share a label, so include an option to keep keys unique */
-                  key={`${group.label}-${group.options[0]?.value ?? ""}`}
-                  label={group.label}
-                >
-                  {group.options.map((item) => (
-                    <AutoSuggestOption
-                      key={item.value}
-                      item={item}
-                      onSelect={onSelect}
-                      hasVirtualFocus={focusedValue === item.value}
-                      autoSuggestValue={autoSuggestValue}
-                    />
-                  ))}
-                </Listbox.Group>
-              ))}
+              {options.map((group) => {
+                /* Property- and value-groups can share a label, so include an option to keep keys unique */
+                const groupKey = `${group.label}-${group.options[0]?.value ?? ""}`;
+
+                const groupOptions = group.options.map((item) => (
+                  <AutoSuggestOption
+                    key={item.value}
+                    item={item}
+                    onSelect={onSelect}
+                    hasVirtualFocus={focusedValue === item.value}
+                    autoSuggestValue={autoSuggestValue}
+                  />
+                ));
+
+                /* Groups without a label are rendered as plain options */
+                if (!group.label) {
+                  return (
+                    <React.Fragment key={groupKey}>
+                      {groupOptions}
+                    </React.Fragment>
+                  );
+                }
+
+                return (
+                  <Listbox.Group key={groupKey} label={group.label}>
+                    {groupOptions}
+                  </Listbox.Group>
+                );
+              })}
             </Listbox.Options>
           </div>
         </Floating.Content>
@@ -205,28 +217,38 @@ const AutoSuggestOption = React.memo(
     onSelect,
     hasVirtualFocus,
     autoSuggestValue,
-  }: AutoSuggestOptionProps) => (
-    <Listbox.Option
-      id={item.value}
-      onClick={() => onSelect(item)}
-      hasVirtualFocus={hasVirtualFocus}
-      aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
-    >
-      <VStack gap="space-0">
-        <BodyShort as="div" size="small">
-          <HighlightText text={item.label} highlightText={autoSuggestValue} />
-        </BodyShort>
-        {item.description && <Detail as="div">{item.description}</Detail>}
-      </VStack>
-      {/* {item.tags && item.tags.length > 0 && (
+  }: AutoSuggestOptionProps) => {
+    return (
+      <Listbox.Option
+        id={item.value}
+        onClick={() => onSelect(item)}
+        hasVirtualFocus={hasVirtualFocus}
+        aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
+      >
+        <VStack gap="space-0">
+          <BodyShort as="div" size="small">
+            {item.freeText ? (
+              /* TODO: i18n */
+              `Use: "${item.label}"`
+            ) : (
+              <HighlightText
+                text={item.label}
+                highlightText={autoSuggestValue}
+              />
+            )}
+          </BodyShort>
+          {item.description && <Detail as="div">{item.description}</Detail>}
+        </VStack>
+        {/* {item.tags && item.tags.length > 0 && (
         <div>
           {item.tags.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </div>
       )} */}
-    </Listbox.Option>
-  ),
+      </Listbox.Option>
+    );
+  },
 );
 
 function HighlightText({

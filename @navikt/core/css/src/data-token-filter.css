@@ -33,6 +33,11 @@
   overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
+
+  /* Ungrouped options (free-text suggestions) align with the options inside groups */
+  & .aksel-listbox__options > .aksel-listbox__option {
+    padding-inline: var(--ax-space-24);
+  }
 }
 
 .aksel-property-filter__input {

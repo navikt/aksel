@@ -37,13 +37,24 @@ function generateAutoCompleteOptions(
   if (queryState.step === "property") {
     const filterText = queryState.value || "";
 
+    const valueSuggestions = createValueSuggestions(
+      filteringOptions,
+      queryState.operator,
+      filterText,
+      queryState.property,
+    );
+
+    const customQuery = buildQueryString(
+      queryState.property.label,
+      queryState.operator,
+      filterText,
+    );
+
     return {
       value: queryState.value,
-      options: createValueSuggestions(
-        filteringOptions,
-        queryState.operator,
-        filterText,
-        queryState.property,
+      options: withCustomSuggestion(
+        valueSuggestions,
+        filterText ? { value: customQuery, label: customQuery } : null,
       ),
     };
   }
@@ -59,13 +70,16 @@ function generateAutoCompleteOptions(
     /**
      * Edge case: User typed an invalid operator prefix that doesn't match any operators.
      * This can happen when typing characters that don't start any valid operator.
-     * `generateOperatorSuggestions` returns an empty list, and the UI will show "no results".
+     * `generateOperatorSuggestions` returns an empty list, and only the free-text suggestion is shown.
      */
     return {
       value: partialQuery,
-      options: generateOperatorSuggestions(
-        queryState.property,
-        queryState.operatorPrefix,
+      options: withCustomSuggestion(
+        generateOperatorSuggestions(
+          queryState.property,
+          queryState.operatorPrefix,
+        ),
+        createFreeTextSuggestion(partialQuery),
       ),
     };
   }
@@ -95,15 +109,63 @@ function generateAutoCompleteOptions(
    */
   return {
     value: queryState.value,
-    options: [
-      ...generatePropertySuggestions(filteringProperties, queryState.value),
-      ...createValueSuggestions(
-        filteringOptions,
-        queryState.operator ?? "=",
+    options: withCustomSuggestion(
+      [
+        ...generatePropertySuggestions(filteringProperties, queryState.value),
+        ...createValueSuggestions(
+          filteringOptions,
+          queryState.operator ?? "=",
+          queryState.value,
+        ),
+      ],
+      createFreeTextSuggestion(
+        buildQueryString("", queryState.operator ?? "", queryState.value),
         queryState.value,
       ),
-    ],
+    ),
   };
+}
+
+/**
+ * Suggestion that turns the typed text into a free-text token.
+ * Shown while the input hasn't matched both a property and an operator.
+ */
+function createFreeTextSuggestion(
+  value: string,
+  label: string = value,
+): AutoCompleteOption {
+  return {
+    value,
+    /* TODO: Support i18n */
+    label,
+    freeText: true,
+  };
+}
+
+/**
+ * Prepends a suggestion for the text the user typed, so any value can be used
+ * even when it doesn't match a predefined option.
+ *
+ * The suggestion is rendered without a group label, and is skipped when an
+ * existing suggestion already produces the exact same query string.
+ */
+function withCustomSuggestion(
+  groups: OptionGroup<AutoCompleteOption>[],
+  customOption: AutoCompleteOption | null,
+): OptionGroup<AutoCompleteOption>[] {
+  if (!customOption) {
+    return groups;
+  }
+
+  const isDuplicate = groups.some((group) =>
+    group.options.some((option) => option.value === customOption.value),
+  );
+
+  if (isDuplicate) {
+    return groups;
+  }
+
+  return [{ label: "", options: [customOption] }, ...groups];
 }
 
 /**
