@@ -6,7 +6,7 @@ import type {
   OperatorT,
 } from "../TokenFilter.types";
 import { createGroups } from "./grouping";
-import { getValidOperatorsForProperty } from "./operators";
+import { getOperatorType, getValidOperatorsForProperty } from "./operators";
 import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
 
@@ -36,13 +36,24 @@ function generateAutoCompleteOptions(
   /* State: Property and operator are matched, suggest values */
   if (queryState.step === "property") {
     const filterText = queryState.value || "";
+    const isMultiSelect =
+      getOperatorType(queryState.property, queryState.operator) === "multiple";
 
     const valueSuggestions = createValueSuggestions(
       filteringOptions,
       queryState.operator,
       filterText,
       queryState.property,
+      isMultiSelect ? (queryState.selectedValues ?? []) : null,
     );
+
+    /* Operators of type "multiple" only accept known values, so no free-form suggestion */
+    if (isMultiSelect) {
+      return {
+        value: filterText,
+        options: valueSuggestions,
+      };
+    }
 
     const customQuery = buildQueryString(
       queryState.property.label,
@@ -248,6 +259,7 @@ function generateOperatorSuggestions(
  * Creates value suggestions for autocomplete.
  * When scopedProperty is provided, only shows values for that property (single group).
  * When scopedProperty is omitted, searches across all properties (multiple groups).
+ * When multiSelectValues is provided, options are rendered as toggleable checkboxes.
  * TODO: This could potentially contain an unlimited number of options if there are many values across properties.
  * May need virtualization/async or other filtering mechanism.
  */
@@ -257,6 +269,7 @@ function createValueSuggestions(
   operator: OperatorT,
   filterText = "",
   scopedProperty?: InternalPropertyDefinition,
+  multiSelectValues: string[] | null = null,
 ): OptionGroup<AutoCompleteOption>[] {
   const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
 
@@ -297,10 +310,23 @@ function createValueSuggestions(
       };
     }
 
+    const query = buildQueryString(
+      option.property.label,
+      operator,
+      option.value,
+    );
+
     groups[groupLabel].options.push({
-      value: buildQueryString(option.property.label, operator, option.value),
-      label: buildQueryString(option.property.label, operator, option.value),
+      /* Stays stable while toggling, so virtual focus survives a multi-select */
+      value: query,
+      label: multiSelectValues ? option.label : query,
       tags: option.tags,
+      ...(multiSelectValues && {
+        multiSelect: {
+          value: option.value,
+          selected: multiSelectValues.includes(option.value),
+        },
+      }),
     });
   }
 

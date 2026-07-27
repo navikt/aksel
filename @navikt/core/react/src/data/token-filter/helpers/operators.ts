@@ -1,6 +1,7 @@
 import type {
   InternalPropertyDefinition,
   OperatorT,
+  OperatorTypeT,
 } from "../TokenFilter.types";
 
 /**
@@ -74,8 +75,6 @@ function matchFilteringProperty(
  * `ExternalPropertyOperator` can be a simple string (e.g., "=")
  * or an object with operator and type (e.g., { operator: ":", type: "single" }).
  * This function normalizes both formats, drops unknown operators and removes duplicates.
- *
- * TODO: We omit passing the `type` for now since it's not currently used in the UI. But will be needed for single/multi-selection.
  */
 function getValidOperatorsForProperty(
   property: InternalPropertyDefinition,
@@ -108,6 +107,26 @@ function getValidOperatorsForProperty(
 }
 
 /**
+ * Returns how many values the property accepts for the given operator.
+ * Operators configured as a plain string, or not configured at all, are "single".
+ */
+function getOperatorType(
+  property: InternalPropertyDefinition,
+  operator: OperatorT,
+): OperatorTypeT {
+  for (const configuredOperator of property.operators ?? []) {
+    if (
+      typeof configuredOperator !== "string" &&
+      configuredOperator.operator === operator
+    ) {
+      return configuredOperator.type === "multiple" ? "multiple" : "single";
+    }
+  }
+
+  return "single";
+}
+
+/**
  * Sorts operators so the most specific (longest) is matched first.
  * Prevents "<" from matching before "<=" when a property configures both.
  */
@@ -137,6 +156,7 @@ function matchOperatorPrefix(
 }
 
 export {
+  getOperatorType,
   getValidOperatorsForProperty,
   matchFilteringProperty,
   matchOperator,

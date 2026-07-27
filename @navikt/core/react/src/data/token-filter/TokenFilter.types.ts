@@ -21,7 +21,10 @@ type ExternalToken = {
    */
   propertyKey?: string;
   operator: OperatorT;
-  value: string;
+  /**
+   * A list of values when the operator is configured as `multiple`, a single value otherwise.
+   */
+  value: string | string[];
 };
 
 type ExternalQuery = {
@@ -54,11 +57,20 @@ type ExternalPropertyDefinition = {
 
 type ExternalPropertyDefinitions = ExternalPropertyDefinition[];
 
+/**
+ * - `single`: the operator matches a single value, either free-text or one of the predefined options.
+ * - `multiple`: the operator only matches predefined options, and several can be selected at once.
+ *
+ * @default "single"
+ */
+type OperatorTypeT = "single" | "multiple";
+
 type ExternalPropertyOperator =
   | string
-  | { operator: string; type: "single" | "multiple" };
+  | { operator: string; type: OperatorTypeT };
 
 export type {
+  ExternalPropertyOperator,
   ExternalPropertyOption,
   ExternalPropertyOptions,
   ExternalPropertyDefinition,
@@ -68,6 +80,7 @@ export type {
   ExternalToken,
   OperationT,
   OperatorT,
+  OperatorTypeT,
 };
 
 /* Internal API */
@@ -94,6 +107,11 @@ type InternalParsedTextState =
       property: InternalPropertyDefinition;
       operator: OperatorT;
       value: string;
+      /**
+       * Values already committed for a `multiple` operator (e.g., "Status = active, pending, ").
+       * Only set when the operator is configured as `multiple`.
+       */
+      selectedValues?: string[];
     }
   | {
       /** User is typing the operator after property (e.g., "Status !") */

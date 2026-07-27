@@ -13,6 +13,14 @@ interface AutoCompleteOption {
    * Selecting it skips property/operator parsing of `value`.
    */
   freeText?: boolean;
+  /**
+   * Set for operators of type "multiple". Rendered with a checkbox, and
+   * selecting it toggles the value in the query instead of creating a token.
+   */
+  multiSelect?: {
+    value: string;
+    selected: boolean;
+  };
 }
 
 export type { AutoCompleteOption, OptionGroup };

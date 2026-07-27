@@ -3,6 +3,7 @@ import { XMarkIcon } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../action-menu";
 import { Popover } from "../../popover";
 import type { ExternalToken, OperationT } from "./TokenFilter.types";
+import { getTokenId } from "./helpers/query-builder";
 
 type TokenFilterChipsProps = {
   tokens: ExternalToken[];
@@ -24,7 +25,7 @@ function TokenFilterChips(props: TokenFilterChipsProps) {
     <ul className="aksel-property-filter__chips">
       {tokens.map((token, index) => (
         <TokenFilterChip
-          key={`${token.propertyKey ?? ""}-${token.operator}-${token.value}`}
+          key={getTokenId(token)}
           onRemove={() => removeToken(index)}
           token={token}
           label={formatToken(token)}

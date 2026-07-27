@@ -4,6 +4,7 @@ import type {
 } from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
+  getOperatorType,
   getValidOperatorsForProperty,
   matchFilteringProperty,
   matchOperator,
@@ -48,11 +49,28 @@ function parseQueryText(
   const operator = matchOperator(allowedOperators, textWithoutProperty);
 
   if (operator) {
+    const value = textWithoutProperty.substring(operator.length).trimStart();
+
+    if (getOperatorType(property, operator) === "multiple") {
+      const segments = value.split(",");
+
+      return {
+        step: "property",
+        property,
+        operator,
+        /* Only the segment being typed filters the suggestions */
+        value: (segments[segments.length - 1] ?? "").trim(),
+        selectedValues: segments
+          .map((segment) => segment.trim())
+          .filter(Boolean),
+      };
+    }
+
     return {
       step: "property",
       property,
       operator,
-      value: textWithoutProperty.substring(operator.length).trimStart(),
+      value,
     };
   }
 

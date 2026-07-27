@@ -17,9 +17,12 @@ import type {
   InternalPropertyDefinition,
   InternalPropertyOption,
   OperationT,
+  OperatorT,
 } from "./TokenFilter.types";
 import { generateAutoCompleteOptions } from "./helpers/generate-autocomplete-options";
+import { getOperatorType } from "./helpers/operators";
 import { parseQueryText } from "./helpers/parse-query-text";
+import { buildMultiSelectQuery, getTokenId } from "./helpers/query-builder";
 
 type TokenFilterProps = {
   query: ExternalQuery;
@@ -78,7 +81,36 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           freeText ? [] : parsedPropertyDefinitions,
         );
 
-        if (newQueryState.step === "operator" || newQueryState.value === "") {
+        if (newQueryState.step === "operator") {
+          return false;
+        }
+
+        if (
+          newQueryState.step === "property" &&
+          getOperatorType(newQueryState.property, newQueryState.operator) ===
+            "multiple"
+        ) {
+          /* A "multiple" operator only accepts values that exist as options */
+          const values = getKnownValues(
+            parsedPropertyOptions,
+            newQueryState.property.key,
+            newQueryState.selectedValues ?? [],
+          );
+
+          if (values.length === 0) {
+            return false;
+          }
+
+          addToken({
+            propertyKey: newQueryState.property.key,
+            operator: newQueryState.operator,
+            value: values,
+          });
+          setFilterText("");
+          return true;
+        }
+
+        if (newQueryState.value === "") {
           return false;
         }
 
@@ -98,7 +130,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
         setFilterText("");
         return true;
       },
-      [addToken, parsedPropertyDefinitions],
+      [addToken, parsedPropertyDefinitions, parsedPropertyOptions],
     );
 
     const handleSelectOption = useCallback(
@@ -108,13 +140,33 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
         }
 
         const newQueryState = parseQueryText(
+          filterText,
+          parsedPropertyDefinitions,
+        );
+
+        if (option.multiSelect && newQueryState.step === "property") {
+          /* Toggling keeps the popup open so several values can be picked */
+          setFilterText(
+            toggleMultiSelectValue(
+              parsedPropertyOptions,
+              newQueryState.property,
+              newQueryState.operator,
+              newQueryState.selectedValues ?? [],
+              option.multiSelect.value,
+            ),
+          );
+          return false;
+        }
+
+        const optionQueryState = parseQueryText(
           option.value,
           parsedPropertyDefinitions,
         );
 
         if (
-          (newQueryState.step === "property" && newQueryState.value === "") ||
-          newQueryState.step === "operator"
+          (optionQueryState.step === "property" &&
+            optionQueryState.value === "") ||
+          optionQueryState.step === "operator"
         ) {
           /* Add space after for better formatting */
           /* TODO: Handle this scenario better */
@@ -124,7 +176,12 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
         return createToken(option.value);
       },
-      [createToken, parsedPropertyDefinitions],
+      [
+        createToken,
+        filterText,
+        parsedPropertyDefinitions,
+        parsedPropertyOptions,
+      ],
     );
 
     const handleRemoveToken = useCallback(
@@ -139,21 +196,25 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
     const formatToken = useCallback(
       (token: ExternalToken) => {
+        const values = Array.isArray(token.value) ? token.value : [token.value];
+
         if (!token.propertyKey) {
-          return token.value;
+          return values.join(", ");
         }
 
         const propertyLabel =
           propertyMap.get(token.propertyKey)?.label || token.propertyKey;
 
-        const valueLabel =
-          parsedPropertyOptions.find(
-            (option) =>
-              option.property?.key === token.propertyKey &&
-              option.value === token.value,
-          )?.label || token.value;
+        const valueLabels = values.map(
+          (value) =>
+            parsedPropertyOptions.find(
+              (option) =>
+                option.property?.key === token.propertyKey &&
+                option.value === value,
+            )?.label || value,
+        );
 
-        return `${propertyLabel} ${token.operator} ${valueLabel}`;
+        return `${propertyLabel} ${token.operator} ${valueLabels.join(", ")}`;
       },
       [propertyMap, parsedPropertyOptions],
     );
@@ -171,6 +232,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
           options={autoCompleteOptions.options}
           value={filterText}
           onChange={setFilterText}
+          highlightText={autoCompleteOptions.value}
           onSubmit={createToken}
           open={open}
           setOpen={setOpen}
@@ -226,6 +288,45 @@ function deriveFilterState(
   };
 }
 
+/**
+ * Keeps only the values that exist as options for the property, in the order they were typed.
+ * Used to discard partially typed values for operators of type "multiple".
+ */
+function getKnownValues(
+  propertyOptions: InternalPropertyOption[],
+  propertyKey: string,
+  values: string[],
+): string[] {
+  const knownValues = new Set(
+    propertyOptions
+      .filter((option) => option.property?.key === propertyKey)
+      .map((option) => option.value),
+  );
+
+  return values.filter((value) => knownValues.has(value));
+}
+
+/**
+ * Adds or removes a value from a "multiple" operator query, and returns the new query text.
+ */
+function toggleMultiSelectValue(
+  propertyOptions: InternalPropertyOption[],
+  property: InternalPropertyDefinition,
+  operator: OperatorT,
+  selectedValues: string[],
+  toggledValue: string,
+): string {
+  const values = getKnownValues(propertyOptions, property.key, selectedValues);
+
+  return buildMultiSelectQuery(
+    property.label,
+    operator,
+    values.includes(toggledValue)
+      ? values.filter((value) => value !== toggledValue)
+      : [...values, toggledValue],
+  );
+}
+
 function createActionHandlers({
   query,
   onChange,
@@ -238,11 +339,9 @@ function createActionHandlers({
   };
 
   const addToken = (token: ExternalToken) => {
+    const tokenId = getTokenId(token);
     const alreadyExists = query.tokens.some(
-      (existing) =>
-        existing.propertyKey === token.propertyKey &&
-        existing.operator === token.operator &&
-        existing.value === token.value,
+      (existing) => getTokenId(existing) === tokenId,
     );
 
     if (alreadyExists) {

@@ -89,6 +89,108 @@ function getGroup(
 }
 
 describe("generateAutoCompleteOptions v2", () => {
+  describe("multiple operators", () => {
+    const multiProperty: InternalPropertyDefinition = {
+      key: "status",
+      label: "Status",
+      groupLabel: "Status values",
+      group: "Metadata",
+      operators: [{ operator: "=", type: "multiple" }],
+      externalProperty: {
+        key: "status",
+        label: "Status",
+        operators: [{ operator: "=", type: "multiple" }],
+      },
+    };
+
+    const multiOptions: InternalPropertyOption[] = statusOptions.map(
+      (option) => ({
+        property: multiProperty,
+        value: option.value,
+        label: option.label ?? option.value,
+        tags: [],
+      }),
+    );
+
+    test("should render values as toggleable options", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: multiProperty,
+        operator: "=",
+        value: "",
+        selectedValues: ["active"],
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [multiProperty],
+        multiOptions,
+      );
+
+      expect(result.options).toHaveLength(1);
+      expect(result.options[0].options).toEqual([
+        {
+          value: "Status = active",
+          label: "Active",
+          tags: [],
+          multiSelect: { value: "active", selected: true },
+        },
+        {
+          value: "Status = pending",
+          label: "Pending",
+          tags: [],
+          multiSelect: { value: "pending", selected: false },
+        },
+        {
+          value: "Status = inactive",
+          label: "Inactive",
+          tags: [],
+          multiSelect: { value: "inactive", selected: false },
+        },
+      ]);
+    });
+
+    test("should not suggest free-form values", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: multiProperty,
+        operator: "=",
+        value: "testvalue",
+        selectedValues: ["testvalue"],
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [multiProperty],
+        multiOptions,
+      );
+
+      expect(result.options).toEqual([]);
+    });
+
+    test("should filter by the value being typed", () => {
+      const queryState: InternalParsedTextState = {
+        step: "property",
+        property: multiProperty,
+        operator: "=",
+        value: "act",
+        selectedValues: ["pending", "act"],
+      };
+
+      const result = generateAutoCompleteOptions(
+        queryState,
+        [multiProperty],
+        multiOptions,
+      );
+
+      expect(result.value).toBe("act");
+      expect(result.options[0].options.map((option) => option.label)).toEqual([
+        "Active",
+        "Inactive",
+      ]);
+    });
+  });
+
   describe("custom value suggestion", () => {
     test("property step: should suggest the typed query as the first option", () => {
       const queryState: InternalParsedTextState = {
@@ -166,7 +268,7 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(result.options[0].label).toBe("");
       expect(result.options[0].options[0]).toEqual({
         value: "customtext",
-        label: 'use "customtext"',
+        label: "customtext",
         freeText: true,
       });
     });
@@ -186,7 +288,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
       expect(result.options[0].options[0]).toEqual({
         value: "!= customtext",
-        label: 'use "customtext"',
+        label: "customtext",
         freeText: true,
       });
     });
@@ -207,7 +309,7 @@ describe("generateAutoCompleteOptions v2", () => {
       expect(result.options[0].label).toBe("");
       expect(result.options[0].options[0]).toEqual({
         value: "Status",
-        label: 'use "Status"',
+        label: "Status",
         freeText: true,
       });
     });
@@ -227,7 +329,7 @@ describe("generateAutoCompleteOptions v2", () => {
 
       expect(result.options[0].options[0]).toEqual({
         value: "Status !",
-        label: 'use "Status !"',
+        label: "Status !",
         freeText: true,
       });
     });
@@ -514,7 +616,7 @@ describe("generateAutoCompleteOptions v2", () => {
           options: [
             {
               value: "Status invalid",
-              label: 'use "Status invalid"',
+              label: "Status invalid",
               freeText: true,
             },
           ],

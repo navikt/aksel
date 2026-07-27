@@ -1,6 +1,7 @@
 import React, { type JSX, forwardRef, useCallback, useState } from "react";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { Search } from "../../form/search";
-import { VStack } from "../../primitives/stack";
+import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
 import { useId } from "../../utils-external";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
@@ -15,6 +16,10 @@ interface AutoSuggestProps {
   value: string;
   onChange: (newValue: string) => void;
   /**
+   * The part of `value` the options were filtered by, highlighted in each option.
+   */
+  highlightText: string;
+  /**
    * Called when the user submits the raw input text (Enter without an active option).
    */
   onSubmit: (value: string) => void;
@@ -23,7 +28,19 @@ interface AutoSuggestProps {
 }
 
 const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
-  ({ options, onSelect, value, onChange, onSubmit, open, setOpen }, ref) => {
+  (
+    {
+      options,
+      onSelect,
+      value,
+      onChange,
+      highlightText,
+      onSubmit,
+      open,
+      setOpen,
+    },
+    ref,
+  ) => {
     const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] =
       useState("");
 
@@ -52,7 +69,11 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 
         /* Keep real focus on the input, the listbox only ever has virtual focus */
         inputRef?.focus();
-        setVirtuallyFocusedOptionId("");
+
+        /* Multi-select options keep their id while toggling, so virtual focus can stay */
+        if (!option.multiSelect) {
+          setVirtuallyFocusedOptionId("");
+        }
 
         if (createdNewToken) {
           setOpen(false);
@@ -115,7 +136,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
               focusedValue={virtuallyFocusedOptionId}
               onClose={handleClose}
               safeZoneAnchor={inputRef}
-              autoSuggestValue={value}
+              autoSuggestValue={highlightText}
             />
           )}
         </Listbox>
@@ -164,6 +185,9 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           <div className="aksel-property-filter__popup-inner">
             <Listbox.Options
               id={id}
+              aria-multiselectable={options.some((group) =>
+                group.options.some((item) => item.multiSelect),
+              )}
               /* Options are only virtually focused, so real focus must stay on the input */
               onMouseDown={(event) => event.preventDefault()}
             >
@@ -223,29 +247,47 @@ const AutoSuggestOption = React.memo(
         id={item.value}
         onClick={() => onSelect(item)}
         hasVirtualFocus={hasVirtualFocus}
-        aria-selected={false} // TODO: Consider different role that doesn't require aria-selected
+        aria-selected={item.multiSelect?.selected ?? false} // TODO: Consider different role that doesn't require aria-selected
       >
-        <VStack gap="space-0">
-          <BodyShort as="div" size="small">
-            {item.freeText ? (
-              /* TODO: i18n */
-              `Use: "${item.label}"`
-            ) : (
-              <HighlightText
-                text={item.label}
-                highlightText={autoSuggestValue}
-              />
+        <HStack align="center" gap="space-8" wrap={false}>
+          {item.multiSelect && (
+            <span className="aksel-property-filter__checkbox" aria-hidden>
+              {item.multiSelect.selected && (
+                <CheckmarkIcon fontSize="0.875rem" />
+              )}
+            </span>
+          )}
+          <VStack gap="space-4" className="aksel-property-filter__option">
+            <HStack
+              align="center"
+              justify="space-between"
+              gap="space-8"
+              wrap={false}
+            >
+              <BodyShort as="div" size="small">
+                {item.freeText ? (
+                  /* TODO: i18n */
+                  `Use: "${item.label}"`
+                ) : (
+                  <HighlightText
+                    text={item.label}
+                    highlightText={autoSuggestValue}
+                  />
+                )}
+              </BodyShort>
+              {item.description && <Detail as="div">{item.description}</Detail>}
+            </HStack>
+            {item.tags && item.tags.length > 0 && (
+              <HStack gap="space-4">
+                {item.tags.map((tag, index, tags) => (
+                  <Detail key={tag} as="div" textColor="subtle">
+                    {`${tag}${index < tags.length - 1 ? "," : ""}`}
+                  </Detail>
+                ))}
+              </HStack>
             )}
-          </BodyShort>
-          {item.description && <Detail as="div">{item.description}</Detail>}
-        </VStack>
-        {/* {item.tags && item.tags.length > 0 && (
-        <div>
-          {item.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
-      )} */}
+          </VStack>
+        </HStack>
       </Listbox.Option>
     );
   },
