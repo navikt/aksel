@@ -1,7 +1,9 @@
 import { differenceInMonths, isSameDay } from "date-fns";
 import type { Metadata } from "next";
 import { type PortableTextBlock, stegaClean } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -15,9 +17,16 @@ import {
 } from "@navikt/ds-react";
 import { GodPraksisFeedback } from "@/app/(routes)/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
+  SLUG_BY_TYPE_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
@@ -40,13 +49,27 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateStaticParams() {
+  const { data } = await sanityFetchStaticParams({
+    query: SLUG_BY_TYPE_QUERY,
+    params: { type: "aksel_artikkel" },
+  });
 
-  const { data: seoData } = await sanityFetch({
+  return data
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((slug) => ({ slug: slug.replace("god-praksis/artikler/", "") }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const [{ slug }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+
+  const { data: seoData } = await sanityFetchMetadata({
     query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
     params: { slug: decodeURIComponent(`god-praksis/artikler/${slug}`) },
-    stega: false,
+    perspective,
   });
 
   const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image);
@@ -65,8 +88,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page(props: Props) {
-  const { slug } = await props.params;
+export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
+  const { slug } = await params;
+  return <ArticleView slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <ArticleView slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function getArticleData({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const parsedSlug = decodeURIComponent(`god-praksis/artikler/${slug}`);
 
@@ -74,12 +124,50 @@ export default async function Page(props: Props) {
     sanityFetch({
       query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
+      perspective,
+      stega,
     }),
   ]);
+
+  return { pageData, toc };
+}
+
+async function ArticleView({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  const { pageData } = await getArticleData({ slug, perspective, stega });
+
+  if (!pageData?.heading || !pageData._id) {
+    notFound();
+  }
+
+  return (
+    <>
+      <CachedArticle slug={slug} perspective={perspective} stega={stega} />
+      {/* Per-user auth (reads request headers) — must live outside `'use cache'`. */}
+      <Suspense fallback={null}>
+        <GodPraksisFeedback docId={pageData._id} />
+      </Suspense>
+    </>
+  );
+}
+
+async function CachedArticle({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
+
+  const { pageData, toc } = await getArticleData({ slug, perspective, stega });
 
   if (!pageData?.heading || !pageData._id) {
     notFound();
@@ -221,8 +309,6 @@ export default async function Page(props: Props) {
             </EditorPanel>
           </Box>
         )}
-
-        <GodPraksisFeedback docId={pageData._id} />
       </div>
     </article>
   );

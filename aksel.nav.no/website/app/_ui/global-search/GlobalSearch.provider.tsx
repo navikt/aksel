@@ -14,10 +14,7 @@ import {
   GlobalSearchResultContext,
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
-import {
-  fuseGlobalSearch,
-  preloadSearchIndex,
-} from "@/app/_ui/global-search/server/GlobalSearch.actions";
+import { fuseGlobalSearch } from "@/app/_ui/global-search/server/GlobalSearch.actions";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
@@ -77,11 +74,6 @@ function GlobalSearchResultProvider({
       setSearchResults(newResults);
     });
   }, [paramValue]);
-
-  /* Preload the searchindex cache, so that the first search is faster. */
-  useEffect(() => {
-    void preloadSearchIndex();
-  }, []);
 
   const contextValue = useMemo(
     () => ({

@@ -98,12 +98,14 @@ export const DragAndDropDragHandler = React.forwardRef<
             context?.setAnnouncer(`Flytting av ${itemLabel} avbrutt.`);
             context?.cancelDrag(true);
             return;
-          } else if (event.key === "ArrowUp") {
+          }
+          if (event.key === "ArrowUp") {
             // Move item up
             event.preventDefault();
             context?.onKeyboardDragEnd(-1, itemLabel);
             return;
-          } else if (event.key === "ArrowDown") {
+          }
+          if (event.key === "ArrowDown") {
             // Move item down
             event.preventDefault();
             context?.onKeyboardDragEnd(1, itemLabel);

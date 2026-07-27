@@ -22,7 +22,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Husk riktig h-tag ved bruk av heading i Alert.",
 };

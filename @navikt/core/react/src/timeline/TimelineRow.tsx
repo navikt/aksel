@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../typography/BodyShort";

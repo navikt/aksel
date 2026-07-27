@@ -51,8 +51,8 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
           viewBox="0 0 13 10"
           fill="none"
           focusable={false}
-          role="img"
           aria-hidden
+          role="presentation"
           className="aksel-checkbox__icon"
         >
           <path

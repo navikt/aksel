@@ -230,6 +230,7 @@ export const TrapFocusWithOutsideClick: Story = {
     return (
       <div>
         <button
+          type="button"
           data-testid="counter"
           onClick={() => setCounter((x) => x + 1)}
         >{`Counter ${counter}`}</button>
@@ -347,7 +348,11 @@ export const FocusLock: Story = {
       onOpenChange: fn(),
     },
     popupProps: {
-      children: <button data-testid="next-button">Focus test</button>,
+      children: (
+        <button type="button" data-testid="next-button">
+          Focus test
+        </button>
+      ),
     },
   },
 };
@@ -421,7 +426,11 @@ export const FocusPreviousFocusedItemIfNoTrigger: Story = {
     const [open, setOpen] = React.useState(false);
     return (
       <div>
-        <button data-testid="custom-trigger" onClick={() => setOpen((x) => !x)}>
+        <button
+          type="button"
+          data-testid="custom-trigger"
+          onClick={() => setOpen((x) => !x)}
+        >
           Toggle open
         </button>
         <BaseDialogComponent
@@ -468,7 +477,11 @@ export const FocusAutoOnOpen: Story = {
   },
   args: {
     popupProps: {
-      children: <button data-testid="autofocus-anchor">Autofocus</button>,
+      children: (
+        <button type="button" data-testid="autofocus-anchor">
+          Autofocus
+        </button>
+      ),
       initialFocusTo: () => {
         return document.querySelector(
           '[data-testid="autofocus-anchor"]',
@@ -482,7 +495,9 @@ export const FocusAutoOnClose: Story = {
   render: (props) => {
     return (
       <div>
-        <button data-testid="autofocus-anchor">Autofocus</button>
+        <button type="button" data-testid="autofocus-anchor">
+          Autofocus
+        </button>
         <BaseDialogComponent {...props} />
       </div>
     );
@@ -502,7 +517,11 @@ export const FocusAutoOnClose: Story = {
   args: {
     rootProps: { defaultOpen: true },
     popupProps: {
-      children: <button data-testid="autofocus-anchor">Autofocus</button>,
+      children: (
+        <button type="button" data-testid="autofocus-anchor">
+          Autofocus
+        </button>
+      ),
       returnFocusTo: () => {
         return document.querySelector(
           '[data-testid="autofocus-anchor"]',

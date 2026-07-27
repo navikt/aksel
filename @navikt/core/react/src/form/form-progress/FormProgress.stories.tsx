@@ -133,7 +133,9 @@ export const Controlled: StoryFn = () => {
   const [open, setOpen] = useState(true);
   return (
     <>
-      <button onClick={() => setOpen(!open)}>State: {open.toString()}</button>
+      <button type="button" onClick={() => setOpen(!open)}>
+        State: {open.toString()}
+      </button>
       <FormProgress
         totalSteps={5}
         activeStep={3}

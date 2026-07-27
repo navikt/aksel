@@ -45,7 +45,7 @@ function Video(props: ExtractPortableComponentProps<"video">) {
           <ReadMore header="Transkripsjon">
             <div id={transcriptId}>
               {transkripsjon.split("\n\n").map((paragraph, i, array) => (
-                <BodyLong key={i} spacing={i < array.length - 1}>
+                <BodyLong key={paragraph} spacing={i < array.length - 1}>
                   {paragraph}
                 </BodyLong>
               ))}

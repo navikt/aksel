@@ -43,7 +43,7 @@ class Timeout {
  * A `setTimeout` with automatic cleanup and guard.
  */
 function useTimeout() {
-  const timeout = useRefWithInit(Timeout.create).current!;
+  const timeout = useRefWithInit(Timeout.create).current;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(timeout.disposeEffect, []);

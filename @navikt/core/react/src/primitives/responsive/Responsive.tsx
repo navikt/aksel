@@ -1,7 +1,7 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
+import type { BreakpointsAlias } from "../../utils/components/base-primitive/helpers/types";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import type { BreakpointsAlias } from "../utilities/types";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

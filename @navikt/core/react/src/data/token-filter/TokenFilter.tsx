@@ -102,6 +102,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
     };
 
     return (
+      // biome-ignore lint/a11y/useSemanticElements: search-tag is too new (baseline 2023)
       <div
         ref={ref}
         className={cl("aksel-property-filter", className)}

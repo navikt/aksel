@@ -27,7 +27,9 @@ function getChildRef(children: React.ReactNode): React.Ref<HTMLElement> | null {
 const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
 
-  const resolvedChildren = unwrapLazy(children);
+  const resolvedChildren = React.isValidElement(children)
+    ? children
+    : unwrapLazy(children);
 
   const childRef = getChildRef(resolvedChildren);
   const mergedRef = useMergeRefs(forwardedRef, childRef);

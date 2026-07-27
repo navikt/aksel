@@ -47,7 +47,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 9,
   desc: "Bruk `onValidate`-callback for å håndtere validering. Se også [Mønster for skjemavalidering](/monster-maler/soknadsdialog/monster-for-skjemavalidering).",
 };

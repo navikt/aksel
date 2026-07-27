@@ -1,3 +1,4 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
 import { stegaClean } from "next-sanity";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
@@ -5,8 +6,10 @@ import type {
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY_RESULT,
   DESIGNSYSTEM_SIDEBAR_QUERY_RESULT,
 } from "@/app/_sanity/query-types";
-import { sanityCategoryLookup } from "@/sanity/config";
-import type { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
+import type {
+  DesignsystemSidebarSectionT,
+  SidebarPageT,
+} from "./Sidebar.types";
 
 type DesignsystemSidebarDataT = {
   label: string;
@@ -26,7 +29,7 @@ function generateSidebar(
       stegaClean(page._type).includes(type),
     )?.overview_pages;
 
-    const categories = sanityCategoryLookup(type);
+    const categories = SchemaConfig.categoryLookup(type);
 
     const filteredInput = input.filter(
       (doc) => stegaClean(doc._type) === PAGE_ROUTES[type]._type,

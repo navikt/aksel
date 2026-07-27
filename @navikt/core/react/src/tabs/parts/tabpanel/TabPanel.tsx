@@ -35,6 +35,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         {...rest}
         className={cl("aksel-tabs__tabpanel", className)}
         role="tabpanel"
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: TabPanel is a non-interactive element that requires a tabindex for keyboard navigation.
         tabIndex={0}
         aria-labelledby={rest["aria-labelledby"] ?? ctx.labelledbyId}
         id={id ?? ctx.id}

@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { VStack } from "@navikt/ds-react";
 import { PageBlock } from "@navikt/ds-react/Page";
 import { DesignsystemStats } from "@/app/(routes)/(designsystemet)/designsystemet/_ui/stats/DesignsystemStats";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+} from "@/app/_sanity/live";
 import { DS_FRONT_PAGE_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
@@ -14,8 +21,10 @@ import DSLandingPageHeading from "./_ui/page-heading/DSLandingPageHeading";
 import SupportSection from "./_ui/support-section/SupportSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: pageData } = await sanityFetch({
+  const { perspective } = await getDynamicFetchOptions();
+  const { data: pageData } = await sanityFetchMetadata({
     query: DS_FRONT_PAGE_QUERY,
+    perspective,
   });
 
   const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image);
@@ -29,9 +38,35 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const DesignsystemetPage = async () => {
+export default async function DesignsystemetPage() {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return <CachedDesignsystemetPage perspective="published" stega={false} />;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicDesignsystemetPage />
+    </Suspense>
+  );
+}
+
+async function DynamicDesignsystemetPage() {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return <CachedDesignsystemetPage perspective={perspective} stega={stega} />;
+}
+
+async function CachedDesignsystemetPage({
+  perspective,
+  stega,
+}: DynamicFetchOptions) {
+  "use cache";
+
   const { data: dsFrontPageData } = await sanityFetch({
     query: DS_FRONT_PAGE_QUERY,
+    perspective,
+    stega,
   });
 
   if (dsFrontPageData === null) {
@@ -63,8 +98,10 @@ const DesignsystemetPage = async () => {
           <ChangeLogNews
             title={dsFrontPageData.ds_changelog?.title ?? "Endringslogg"}
             description={dsFrontPageData.ds_changelog?.ingress}
+            perspective={perspective}
+            stega={stega}
           />
-          <DesignsystemStats />
+          <DesignsystemStats perspective={perspective} stega={stega} />
           <SupportSection
             entries={(dsFrontPageData.ds_support || []).map(
               ({ title, description, link }) => ({
@@ -82,6 +119,4 @@ const DesignsystemetPage = async () => {
       </VStack>
     </DesignsystemetPageLayout>
   );
-};
-
-export default DesignsystemetPage;
+}

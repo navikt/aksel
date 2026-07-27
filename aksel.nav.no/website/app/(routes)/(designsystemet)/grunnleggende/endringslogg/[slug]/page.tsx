@@ -1,9 +1,17 @@
 import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next/types";
+import { Suspense } from "react";
 import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
   ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
@@ -17,12 +25,15 @@ import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const [{ slug }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityFetchMetadata({
     query: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
     params: { slug },
-    stega: false,
+    perspective,
   });
 
   return {
@@ -40,11 +51,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const { data: slugs } = await sanityFetch({
+  const { data: slugs } = await sanityFetchStaticParams({
     query: SLUG_BY_TYPE_QUERY,
     params: { type: "ds_endringslogg_artikkel" },
-    stega: false,
-    perspective: "published",
   });
   return slugs.filter((slug) => slug !== null).map((slug) => ({ slug }));
 }
@@ -53,12 +62,41 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function (props: Props) {
-  const { slug } = await props.params;
+export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
+  const { slug } = await params;
+  return <CachedPage slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <CachedPage slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const { data: logs } = await sanityFetch({
     query: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
     params: { slug },
+    perspective,
+    stega,
   });
 
   if (!logs?.primary) {

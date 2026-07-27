@@ -99,6 +99,7 @@ function AsciiTree({ right = false }: { right?: boolean }) {
     >
       <pre style={{ lineHeight: "8px", fontSize: "8px" }}>
         {lines.map((line, idx) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
           <span key={idx}>
             {"    "}
             {line}
@@ -132,7 +133,7 @@ function makeTreeLine(
   hasColor: boolean,
   eyes: string,
 ) {
-  const topPatterns: Record<number, { pattern: string; color?: ColorName }> = {
+  const topPatterns: Record<number, { pattern: string; color: ColorName }> = {
     0: { pattern: "*", color: "yellow" },
     1: { pattern: "_/ \\_", color: "yellow" },
     2: { pattern: "\\     /", color: "yellow" },
@@ -142,7 +143,7 @@ function makeTreeLine(
   const top = topPatterns[index];
   if (top) {
     const line = centerText(top.pattern, size);
-    return hasColor ? applyColor(line, top.color!) : line;
+    return hasColor ? applyColor(line, top.color) : line;
   }
 
   return makeBodyLine(index, size, hasColor);

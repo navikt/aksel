@@ -1,9 +1,8 @@
 "use client";
 
+import { workspaceConfig } from "aksel-sanity-studio/studio-config";
 import { NextStudio } from "next-sanity/studio";
 import { useTheme } from "next-themes";
-import type { StudioThemeColorSchemeKey } from "sanity";
-import workspaceConfig from "../../sanity/sanity.config";
 
 function AdminStudio() {
   const { theme, setTheme } = useTheme();
@@ -11,7 +10,7 @@ function AdminStudio() {
   return (
     <NextStudio
       config={workspaceConfig}
-      scheme={(theme ?? "light") as StudioThemeColorSchemeKey}
+      scheme={theme ?? "light"}
       onSchemeChange={(nextScheme) => {
         if (nextScheme === "system") {
           const prefersDark = window.matchMedia(

@@ -7,7 +7,7 @@ import { cl, clipboardCopy, composeEventHandlers } from "../utils/helpers";
 import { useTimeout } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
-export interface CopyButtonProps
+interface CopyButtonProps
   extends
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
     Pick<ButtonProps, "iconPosition" | "size"> {
@@ -77,7 +77,7 @@ export interface CopyButtonProps
       <CopyButton copyText="3.14" />
  * ```
  */
-export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
+const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   (
     {
       className,
@@ -163,4 +163,5 @@ function variantToDataColor(
   return undefined;
 }
 
-export default CopyButton;
+export { CopyButton };
+export type { CopyButtonProps };

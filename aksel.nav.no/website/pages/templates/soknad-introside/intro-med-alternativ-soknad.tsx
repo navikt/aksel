@@ -242,7 +242,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   title: "Alternativ søknad",
   desc: "For å redusere sjansen for at brukere søker på feil ytelse, kan du inkludere en seksjon som sier hva du kan søke på i denne søknaden, og eventuelt hva du må bruke en annen søknad for.",

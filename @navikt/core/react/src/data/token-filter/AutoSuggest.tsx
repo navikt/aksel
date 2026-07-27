@@ -205,12 +205,17 @@ function HighlightText({
   const { noMatches, matches } = highlightSplit(text, highlightText);
 
   const highlighted: (string | JSX.Element)[] = [];
+  let matchOffset = 0;
 
   noMatches.forEach((noMatch, idx) => {
-    highlighted.push(<span key={`noMatch-${idx}`}>{noMatch}</span>);
+    highlighted.push(<span key={`noMatch-${matchOffset}`}>{noMatch}</span>);
+    matchOffset += noMatch.length;
 
     if (matches && idx < matches.length) {
-      highlighted.push(<Highlight key={`match-${idx}`} text={matches[idx]} />);
+      highlighted.push(
+        <Highlight key={`match-${matchOffset}`} text={matches[idx]} />,
+      );
+      matchOffset += matches[idx].length;
     }
   });
 

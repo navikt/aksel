@@ -13,9 +13,9 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ id, status }, i) => {
+        {data.map(({ id, status }) => {
           return (
-            <Table.Row key={i + status} shadeOnHover={false}>
+            <Table.Row key={id} shadeOnHover={false}>
               <Table.HeaderCell scope="row">{id}</Table.HeaderCell>
               <Table.DataCell>{status}</Table.DataCell>
               <Table.DataCell align="right">
@@ -137,7 +137,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Undermenyer lar deg forenkle komplekse grensesnitt og filter ved å flytte innholdet til en godt strukturert meny. Vi anbefaler maks to nivåer med undermenyer.",
 };

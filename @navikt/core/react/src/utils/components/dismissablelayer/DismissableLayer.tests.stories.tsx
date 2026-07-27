@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import {
@@ -136,6 +135,7 @@ export const InteractOutside: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>
@@ -182,6 +182,7 @@ export const DisableOutsidePointerEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>
@@ -211,6 +212,7 @@ export const SafeZone: Story = {
     return (
       <div>
         <div
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
           ref={setSafeAnchor}
           data-testid="safe-anchor"
@@ -225,7 +227,7 @@ export const SafeZone: Story = {
           }}
         >
           <div data-testid="safe-container" ref={setSafeContainer}>
-            <button>test</button>
+            <button type="button">test</button>
           </div>
         </DismissableLayer>
       </div>
@@ -375,10 +377,13 @@ export const NestedEscapeKeydown: StoryObj<{
                 enabled={enabledNested}
               >
                 <input type="text" data-testId="nested" />
-                <button onClick={() => setEnabled((x) => !x)}>
+                <button type="button" onClick={() => setEnabled((x) => !x)}>
                   toggle root {enabled}
                 </button>
-                <button onClick={() => setEnabledNested((x) => !x)}>
+                <button
+                  type="button"
+                  onClick={() => setEnabledNested((x) => !x)}
+                >
                   toggle nested {enabledNested}
                 </button>
               </DismissableLayer>
@@ -563,6 +568,7 @@ export const PreventEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>

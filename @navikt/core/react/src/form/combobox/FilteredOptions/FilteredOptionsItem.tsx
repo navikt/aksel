@@ -76,6 +76,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
           toggleIsListOpen(false);
         }
       }}
+      // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: List item acts as an option in the combobox.
       role="option"
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}

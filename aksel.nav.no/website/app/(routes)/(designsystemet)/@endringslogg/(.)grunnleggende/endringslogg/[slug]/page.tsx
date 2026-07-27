@@ -1,9 +1,15 @@
 import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Box } from "@navikt/ds-react";
 import { DialogBody, DialogHeader } from "@navikt/ds-react/Dialog";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+} from "@/app/_sanity/live";
 import { ENDRINGSLOGG_WITH_NEIGHBORS_QUERY } from "@/app/_sanity/queries";
 import { ChangelogDialog } from "@/app/_ui/changelog-page/ChangelogDialog";
 import { ChangelogForList } from "@/app/_ui/changelog-page/ChangelogForList";
@@ -14,12 +20,46 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// Intercepting route: renders as a dialog during client navigation and has no
+// stable pathname of its own, so the shared layout `usePathname()` can't be
+// prerendered. Opt out of prerender validation; it renders dynamically.
+export const unstable_instant = false;
+
 export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
   const { slug } = await params;
+  return <CachedPage slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <CachedPage slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const { data: logs } = await sanityFetch({
     query: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
     params: { slug },
+    perspective,
+    stega,
   });
 
   if (!logs?.primary.heading || !logs.primary.endringsdato) {

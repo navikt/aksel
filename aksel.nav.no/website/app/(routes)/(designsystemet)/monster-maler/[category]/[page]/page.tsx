@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { getStaticParamsSlugs } from "@/app/(routes)/(designsystemet)/slug";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  getDynamicFetchOptions,
+  sanityFetchMetadata,
+} from "@/app/_sanity/live";
 import { METADATA_BY_SLUG_QUERY } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { MonsterMalerPage } from "../_ui/MonsterMalerPage";
@@ -10,12 +13,15 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, page } = await params;
+  const [{ category, page }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityFetchMetadata({
     query: METADATA_BY_SLUG_QUERY,
     params: { slug: `monster-maler/${category}/${page}` },
-    stega: false,
+    perspective,
   });
 
   return {

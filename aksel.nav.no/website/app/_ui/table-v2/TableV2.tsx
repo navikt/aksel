@@ -29,6 +29,7 @@ function TableV2(props: ExtractPortableComponentProps<"tabell_v2">) {
         <TableHeader>
           <TableRow>
             {header?.map((cell, y) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
               <TableHeaderCell key={y} scope="col">
                 {cell}
               </TableHeaderCell>
@@ -39,6 +40,7 @@ function TableV2(props: ExtractPortableComponentProps<"tabell_v2">) {
           {content?.map((row) => (
             <TableRow key={row?._key}>
               {row?.cells?.map((cell, y) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                 <TableDataCell key={y}>{cell}</TableDataCell>
               ))}
             </TableRow>

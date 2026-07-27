@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { composeEventHandlers, ownerDocument } from "../../helpers";
 import { useMergeRefs, useTimeout } from "../../hooks";
-import type { AsChild } from "../../types/AsChild";
+import type { AsChildProps } from "../../types";
 import { Slot } from "../slot/Slot";
 import type {
   CustomFocusEvent,
@@ -76,7 +76,7 @@ interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement>
   enabled?: boolean;
 }
 
-type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
+type DismissableLayerProps = DismissableLayerBaseProps & AsChildProps;
 
 type DismissableLayerElement = React.ComponentRef<typeof DismissableLayer>;
 
@@ -400,11 +400,12 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         return;
       }
 
-      if (!context.branchedLayers.has(parentBranchedLayer)) {
-        context.branchedLayers.set(parentBranchedLayer, new Set());
+      let branchedChildren = context.branchedLayers.get(parentBranchedLayer);
+      if (!branchedChildren) {
+        branchedChildren = new Set();
+        context.branchedLayers.set(parentBranchedLayer, branchedChildren);
       }
 
-      const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
       branchedChildren.add(node);
       dispatchUpdate();
 

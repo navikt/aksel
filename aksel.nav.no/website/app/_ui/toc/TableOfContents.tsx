@@ -1,10 +1,10 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import { SparklesIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import type { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { GithubIcon } from "@/app/_ui/assets/Icons";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { cl } from "@/ui-utils/className";
@@ -19,6 +19,7 @@ type TableOfContentsProps = {
   feedback?: {
     name?: string;
     text: string;
+    href?: string;
   };
   linkToChangelogs?: boolean;
 };
@@ -50,7 +51,6 @@ function TableOfContents({
       <div className={styles.tocAsideContent}>
         <TableOfContentsScroll tocLength={toc.length} />
 
-        {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
           className={`${styles.tocMenuUl} ${styles.hideScrollbar}`}
           id="toc-scroll-wrapper"
@@ -126,8 +126,11 @@ function TableOfContentsLinks({
         as="a"
         variant="secondary-neutral"
         size="small"
-        icon={<SparklesIcon aria-hidden />}
-        href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
+        icon={<GithubIcon aria-hidden />}
+        href={
+          feedback.href ??
+          `https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`
+        }
         onClick={() =>
           umamiTrack(Events.KNAPP_KLIKKET, {
             tekst: feedback.text,

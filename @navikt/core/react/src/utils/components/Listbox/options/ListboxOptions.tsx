@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /** biome-ignore-all lint/a11y/useKeyWithMouseEvents: We know what we are doing */
 import React from "react";
 import { cl } from "../../../helpers";

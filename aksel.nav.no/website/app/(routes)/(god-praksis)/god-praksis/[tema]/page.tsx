@@ -1,6 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { stegaClean } from "next-sanity";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import {
   BodyLong,
   Box,
@@ -19,8 +20,15 @@ import {
 import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPrakisChipsNavigation } from "@/app/(routes)/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
-import { sanityFetch } from "@/app/_sanity/live";
 import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
+import {
+  GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
@@ -29,24 +37,34 @@ import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { formatDateString } from "@/ui-utils/format-date";
 
-/* We rely on seachparams for initial render, so need to force-dynamic */
-export const dynamic = "force-dynamic";
-
 type Props = {
   params: Promise<{ tema: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
+export async function generateStaticParams() {
+  const { data } = await sanityFetchStaticParams({
+    query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+  });
+
+  return (data ?? [])
+    .filter((tema): tema is NonNullable<typeof tema> => Boolean(tema?.slug))
+    .map((tema) => ({ tema: tema.slug as string }));
+}
+
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { tema } = await params;
+  const [{ tema }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
-  const { data: seoData } = await sanityFetch({
+  const { data: seoData } = await sanityFetchMetadata({
     query: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
     params: { slug: tema },
-    stega: false,
+    perspective,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
@@ -82,20 +100,54 @@ const innholdstypeTitleMap: Record<string, string> = {
 
 type ValidArticlesT = ArticleT[];
 
-export default async function Page(props: Props) {
-  const { tema } = await props.params;
-  const searchParams = await props.searchParams;
+export default function Page(props: Props) {
+  return (
+    <Suspense fallback={null}>
+      <DynamicTemaPage
+        params={props.params}
+        searchParams={props.searchParams}
+      />
+    </Suspense>
+  );
+}
+
+async function getTemaData({
+  tema,
+  perspective,
+  stega,
+}: { tema: string } & DynamicFetchOptions) {
+  "use cache";
 
   const [{ data: temaPage }, { data: articleList }] = await Promise.all([
     sanityFetch({
       query: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
       params: { slug: tema },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
       params: { slug: tema },
+      perspective,
+      stega,
     }),
   ]);
+
+  return { temaPage, articleList };
+}
+
+async function DynamicTemaPage(props: Props) {
+  const [{ tema }, searchParams, { perspective, stega }] = await Promise.all([
+    props.params,
+    props.searchParams,
+    getDynamicFetchOptions(),
+  ]);
+
+  const { temaPage, articleList } = await getTemaData({
+    tema,
+    perspective,
+    stega,
+  });
 
   if (!temaPage || !articleList || articleList.length === 0) {
     notFound();
@@ -227,6 +279,8 @@ export default async function Page(props: Props) {
         description={temaPage.description}
         image={temaPage.pictogram}
         isCollapsible
+        perspective={perspective}
+        stega={stega}
       />
       <VStack
         gap="space-48"

@@ -31,7 +31,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Popoveren som åpnes kan inneholde rikt innhold, for eksempel flere avsnitt, lenker eller en liste.",
 };

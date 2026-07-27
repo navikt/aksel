@@ -34,8 +34,8 @@ export const UmamiLink = ({
           lenketekst:
             typeof props.children === "string"
               ? stegaClean(props.children)
-              : stegaClean(props.href)!,
-          destinasjon: stegaClean(props.href)!,
+              : (stegaClean(props.href) ?? ""),
+          destinasjon: stegaClean(props.href) ?? "",
           lenkegruppe: stegaClean(lenkegruppe),
         });
         props.href && scrollToHash(props.href);

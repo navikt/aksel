@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/suspicious/noFocusedTests: False positive */
 import { createImageUrlBuilder } from "@sanity/image-url";
-import { SANITY_DATASET, SANITY_PROJECT_ID } from "@/sanity/config";
+import { SANITY_DATASET, SANITY_PROJECT_ID } from "aksel-sanity-studio/env";
 
 const imageBuilder = createImageUrlBuilder({
   projectId: SANITY_PROJECT_ID || "",

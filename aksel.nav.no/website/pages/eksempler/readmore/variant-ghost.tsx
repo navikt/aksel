@@ -43,7 +43,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Ghost er en nedtonet variant av ReadMore som skal brukes når innholdet er koblet til en annen kontekst, for eksempel et skjema.",
 };

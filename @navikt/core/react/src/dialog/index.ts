@@ -1,6 +1,6 @@
 "use client";
 export {
-  default as Dialog,
+  Dialog,
   DialogTrigger,
   DialogPopup,
   DialogCloseTrigger,

@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { PencilIcon, PlusCircleFillIcon } from "@navikt/aksel-icons";
-import { Alert } from "../../alert";
-import { ConfirmationPanel } from "../../form/confirmation-panel";
+import { Alert } from "../../legacy/alert";
+import { ConfirmationPanel } from "../../legacy/confirmation-panel";
 import { Box } from "../../primitives/box";
 import { VStack } from "../../primitives/stack";
 import { BodyLong } from "../../typography";

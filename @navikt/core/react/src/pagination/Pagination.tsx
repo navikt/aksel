@@ -228,7 +228,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             (step, i) => {
               const n = Number(step);
               return Number.isNaN(n) ? (
-                <li className="aksel-pagination__ellipsis" key={`${step}${i}`}>
+                <li
+                  className="aksel-pagination__ellipsis"
+                  // biome-ignore lint/suspicious/noArrayIndexKey: Using index as key for ellipsis items
+                  key={`${step}-${i}`}
+                >
                   <BodyShort
                     size={size === "xsmall" ? "small" : size}
                     as="span"

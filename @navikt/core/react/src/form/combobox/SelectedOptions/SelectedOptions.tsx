@@ -57,8 +57,8 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
       data-type={isMultiSelect ? "multiple" : "single"}
     >
       {value.length === 0 || (isMultiSelect && selectedOptions.length)
-        ? selectedOptions.map((option, i) => (
-            <Option key={option.label + i} option={option} />
+        ? selectedOptions.map((option) => (
+            <Option key={option.value} option={option} />
           ))
         : []}
       {children}

@@ -20,7 +20,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
   desc: "Den ekspermentelle prop-en `UNSAFE_autoScrollbar` gjør at tekstfeltet får en scrollbar når det ikke er mer plass i høyden. Krever `display:flex` på parent.",
 };

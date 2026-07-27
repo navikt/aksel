@@ -68,6 +68,8 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="aksel-guide-panel__tail"
+            aria-hidden
+            role="presentation"
           >
             <path
               d="M8.74229e-08 22L0 20L33 20V22L8.74229e-08 22Z"

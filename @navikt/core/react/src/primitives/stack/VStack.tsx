@@ -1,10 +1,9 @@
 import React, { forwardRef } from "react";
 import type { OverridableComponent } from "../../utils-external";
-import type { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
+import type { AsChildProps } from "../../utils/types";
 import { Stack, type StackProps } from "./Stack";
 
-export type VStackProps = PrimitiveAsChildProps &
-  Omit<StackProps, "direction" | "wrap">;
+export type VStackProps = AsChildProps & Omit<StackProps, "direction" | "wrap">;
 
 /**
  * Layout-primitive for vetical flexbox

@@ -163,7 +163,11 @@ const foodGroups: {
 export const WithLabels = () => (
   <MenuWithAnchor>
     {foodGroups.map((foodGroup, index) => (
-      <Menu.Group key={index}>
+      <Menu.Group
+        key={
+          foodGroup.label ?? foodGroup.foods.map((food) => food.value).join("-")
+        }
+      >
         {foodGroup.label && (
           <div className="label" key={foodGroup.label}>
             {foodGroup.label}
@@ -478,7 +482,7 @@ export const TestMenu = () => {
   return (
     <Menu open onOpenChange={() => {}} modal={true}>
       <Menu.Anchor asChild>
-        <button>Menu</button>
+        <button type="button">Menu</button>
       </Menu.Anchor>
       <Menu.Portal>
         <Menu.Content className="content" returnFocus={false} align="start">
@@ -602,6 +606,8 @@ const TickIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="3"
+    aria-hidden
+    role="presentation"
   >
     <path d="M2 20 L12 28 30 4" />
   </svg>
@@ -618,6 +624,8 @@ const CircleIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="6"
+    aria-hidden
+    role="presentation"
   >
     <circle cx="16" cy="16" r="4" />
   </svg>

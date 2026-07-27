@@ -49,7 +49,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
   desc: "Ved å sette en grense for maks antall valg vil brukeren få opp en beskjed om at hen ikke kan velge flere når grensen er nådd. Resterende alternativer blir inaktive.",
 };

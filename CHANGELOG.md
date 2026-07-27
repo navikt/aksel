@@ -1,5 +1,31 @@
 # Changelog
 
+## 8.15.0
+
+### @navikt/ds-react
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+* Performance: Optimized internal i18n hook ([#5037](https://github.com/navikt/aksel/pull/5037))
+
+### @navikt/ds-css
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+* Lookup: Changed text-decoration from dotted to dashed ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+* InlineMessage: Adjusted gap between icon and text to `4px` for size small ([#5031](https://github.com/navikt/aksel/pull/5031))
+
+* Lookup: updated focus-outline ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+### @navikt/aksel-icons
+
+- New icons: Timeline and TimelineFill ([#5050](https://github.com/navikt/aksel/pull/5050))
+
+### @navikt/ds-tailwind
+
+- Tailwind v4 config now available at `@navikt/ds-tailwind/v4` ([#5036](https://github.com/navikt/aksel/pull/5036))
+
 ## 8.14.0
 
 ### @navikt/ds-react

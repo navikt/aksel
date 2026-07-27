@@ -43,7 +43,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Eksempel på hvordan du kan sette fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en `id` og referere til den i URLens hash. Se [Mønster for skjemavalidering](/monster-maler/soknadsdialog/monster-for-skjemavalidering) for et mer fullstendig eksempel.",
 };

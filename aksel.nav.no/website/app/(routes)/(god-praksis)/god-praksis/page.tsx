@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import {
   BodyLong,
   BodyShort,
@@ -17,7 +19,12 @@ import {
 } from "@navikt/ds-react/LinkCard";
 import { GodPraksisTaxonomyTag } from "@/app/(routes)/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/(routes)/(god-praksis)/_ui/hero/Hero";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+} from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY,
@@ -30,9 +37,10 @@ import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data: seo } = await sanityFetch({
+  const { perspective } = await getDynamicFetchOptions();
+  const { data: seo } = await sanityFetchMetadata({
     query: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
-    stega: false,
+    perspective,
   });
 
   return {
@@ -47,8 +55,31 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return <CachedGodPraksis perspective="published" stega={false} />;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicGodPraksis />
+    </Suspense>
+  );
+}
+
+async function DynamicGodPraksis() {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return <CachedGodPraksis perspective={perspective} stega={stega} />;
+}
+
+async function CachedGodPraksis({ perspective, stega }: DynamicFetchOptions) {
+  "use cache";
+
   const { data: temaList } = await sanityFetch({
     query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+    perspective,
+    stega,
   });
 
   if (!temaList || temaList.length === 0) {
@@ -62,6 +93,8 @@ export default async function Page() {
         description="Mange som jobber med produktutvikling i Nav sitter på kunnskap og
           erfaring som er nyttig for oss alle. Det er god praksis som vi deler
           her."
+        perspective={perspective}
+        stega={stega}
       />
       <VStack
         gap="space-48"
@@ -69,7 +102,14 @@ export default async function Page() {
         paddingBlock="space-48"
       >
         {temaList.map((tema) => {
-          return <TemaSection key={tema.slug} tema={tema} />;
+          return (
+            <TemaSection
+              key={tema.slug}
+              tema={tema}
+              perspective={perspective}
+              stega={stega}
+            />
+          );
         })}
       </VStack>
     </div>
@@ -78,17 +118,25 @@ export default async function Page() {
 
 async function TemaSection({
   tema,
+  perspective,
+  stega,
 }: {
   tema: GOD_PRAKSIS_ALL_TEMA_QUERY_RESULT[number];
-}) {
+} & DynamicFetchOptions) {
+  "use cache";
+
   const { data: undertema } = await sanityFetch({
     query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
     params: { temaId: tema._id },
+    perspective,
+    stega,
   });
 
   const { data: articles } = await sanityFetch({
     query: GOD_PRAKSIS_ARTICLES_BY_UNDERTEMA_ID_QUERY,
     params: { undertemaIds: undertema },
+    perspective,
+    stega,
   });
 
   if (articles?.length === 0) {

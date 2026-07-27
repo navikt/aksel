@@ -1,7 +1,7 @@
+import type { AllArticleDocumentsT } from "aksel-sanity-studio/schema";
 import { stegaClean } from "next-sanity";
 import type { AkselColor } from "@navikt/ds-react/types/theme";
 import type { Komponent_artikkel } from "@/app/_sanity/query-types";
-import type { AllArticleDocumentsT } from "@/sanity/config";
 
 const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColor> = {
   ds_artikkel: "brand-blue",

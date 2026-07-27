@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Propen `paddingBlock` gir deg kontroll over vertikal padding.",
 };

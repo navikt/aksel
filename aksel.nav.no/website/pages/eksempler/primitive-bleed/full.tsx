@@ -37,7 +37,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: 'Med `marginInline="full"` kan du få enkeltelementer til å dekke hele skjermbredden mens resten av innholdet følger bredden satt av parent-container som vanlig. OBS: Du må kanskje sette `overflow-x: hidden` på body for å unngå horisontal scrollbar.',
 };

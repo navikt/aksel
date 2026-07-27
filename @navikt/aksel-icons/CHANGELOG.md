@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 8.15.0
+
+### Minor Changes
+
+- New icons: Timeline and TimelineFill ([#5050](https://github.com/navikt/aksel/pull/5050))
+
 ## 8.14.0
 
 ## 8.13.1

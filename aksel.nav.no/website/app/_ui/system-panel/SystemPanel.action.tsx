@@ -4,7 +4,7 @@ import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
 import { BodyLong, Box, Button, Link, VStack } from "@navikt/ds-react";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
-import { clientConfig } from "@/sanity/config";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 function SystemPanelAction() {
   return (
@@ -27,7 +27,7 @@ function SystemPanelOutdatedAction({ docId }: { docId?: string }) {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
-        `https://${clientConfig.projectId}.api.sanity.io/v1/users/me`,
+        `https://${SANITY_BASE_CONFIG.projectId}.api.sanity.io/v1/users/me`,
         {
           credentials: "include",
         },

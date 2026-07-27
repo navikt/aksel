@@ -2,14 +2,14 @@
 
 import React, { useId, useMemo, useState } from "react";
 import { BodyShort, Detail, Search, VStack } from "@navikt/ds-react";
+import { DesignsystemSidebarItem } from "./Sidebar.item";
+import styles from "./Sidebar.module.css";
+import { DesignsystemSidebarSubNav } from "./Sidebar.subnav";
 import type {
   DesignsystemSidebarSectionT,
   SidebarGroupedPagesT,
   SidebarPageT,
-} from "@/types";
-import { DesignsystemSidebarItem } from "./Sidebar.item";
-import styles from "./Sidebar.module.css";
-import { DesignsystemSidebarSubNav } from "./Sidebar.subnav";
+} from "./Sidebar.types";
 import type { DesignsystemSidebarDataT } from "./Sidebar.util";
 
 type SidebarNavProps = {

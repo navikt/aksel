@@ -40,7 +40,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 10,
   desc: "Ved å bruke `initialFocusTo` kan du angi hvilket element som skal få fokus når dialogen åpnes. Dette er nyttig for skjemaer der du vil at brukeren skal kunne begynne å skrive med en gang.",
 };

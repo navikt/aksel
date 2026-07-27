@@ -1,7 +1,7 @@
-import type { allArticleDocuments } from "@/sanity/config";
+import type { SchemaConfig } from "aksel-sanity-studio/schema";
 
 const globalSearchConfig: {
-  [K in (typeof allArticleDocuments)[number]]: {
+  [K in (typeof SchemaConfig.allArticleDocuments)[number]]: {
     display: string;
     index: number;
     hidden?: boolean;

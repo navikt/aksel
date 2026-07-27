@@ -407,8 +407,11 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
             {label}
           </td>
         </tr>
-        {Array.from({ length: rows }, (_, rowIndex) => (
-          <DataTableTr key={`skeleton-row-${rowIndex}`} aria-hidden>
+        {Array.from(
+          { length: rows },
+          (_, rowNumber) => `skeleton-row-${rowNumber + 1}`,
+        ).map((rowId) => (
+          <DataTableTr key={rowId} aria-hidden>
             {columns.map(
               (
                 { isSticky, isStickyLast, stickyLeftOffset, colDef },
@@ -488,7 +491,7 @@ interface DataTableDataRowProps {
 }
 
 const DataTableDataRow = memo(
-  function DataTableDataRow({
+  function DataTableDataRowMemo({
     rowData,
     details,
     columns,

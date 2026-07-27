@@ -15,7 +15,7 @@ const Example = () => {
   });
 
   const onValidSubmit: SubmitHandler<Inputs> = (data) => {
-    alert("Du valgte: " + data.transportmiddel.join(", "));
+    alert(`Du valgte: ${data.transportmiddel.join(", ")}`);
   };
 
   return (
@@ -77,7 +77,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 9,
   desc: "Eksempel på bruk med react-hook-form.",
   sandbox: false,

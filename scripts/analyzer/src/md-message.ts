@@ -135,7 +135,7 @@ function markdownMessage(compareResults: CompareResults): string {
     return header + message;
   }
 
-  return header + "No changes detected to bundle 🎉";
+  return `${header}No changes detected to bundle 🎉`;
 }
 
 function formatPercentage(percent: number): string {

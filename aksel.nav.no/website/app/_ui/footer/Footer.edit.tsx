@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
-import { clientConfig } from "@/sanity/config";
+import { SANITY_BASE_CONFIG } from "@/sanity/config";
 import styles from "./Footer.module.css";
 
 function FooterEdit() {
@@ -13,7 +13,7 @@ function FooterEdit() {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
-        `https://${clientConfig.projectId}.api.sanity.io/v1/users/me`,
+        `https://${SANITY_BASE_CONFIG.projectId}.api.sanity.io/v1/users/me`,
         {
           credentials: "include",
         },

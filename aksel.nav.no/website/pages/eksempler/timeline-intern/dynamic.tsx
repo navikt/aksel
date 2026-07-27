@@ -274,7 +274,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Vi anbefaler å la bruker velge tidsperioder som er relevante for dem, og ikke vise alle perioder samtidig.",
 };

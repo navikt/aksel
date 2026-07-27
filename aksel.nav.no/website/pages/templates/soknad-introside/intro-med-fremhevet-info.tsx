@@ -235,7 +235,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   title: "Med InfoCard",
   desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. [InfoCard](https://aksel.nav.no/komponenter/core/infocard) skal være informativ og kortfattet.",
