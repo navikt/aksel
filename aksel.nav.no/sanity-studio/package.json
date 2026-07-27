@@ -23,7 +23,7 @@
     "@sanity/preview-url-secret": "4.0.7",
     "@sanity/table": "2.0.1",
     "@sanity/vision": "6.0.0",
-    "date-fns": "^4.0.0",
+    "date-fns": "^4.4.0",
     "lodash": "4.18.1",
     "react": "19.2.7",
     "react-dom": "19.2.7",
