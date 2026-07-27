@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { PropsWithChildren, useLayoutEffect, useState } from "react";
+import React, {
+  type PropsWithChildren,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { expect, within } from "storybook/test";
 import { CompositionWarning } from ".";
 
@@ -21,7 +25,7 @@ function ConsoleWarnCapture({ children }: PropsWithChildren) {
     const override: typeof console.warn = (...args) => {
       setCount((c) => c + 1);
       if (args.length > 0) {
-        setLastMessage(String(args[0]));
+        setLastMessage(String(args.join("")));
       }
       return original.apply(console, args);
     };
@@ -66,7 +70,7 @@ export const WarnsOnMatch: Story = {
 
     expect(countEl.textContent).toBe("Console warnings: 1");
     expect(msgEl.textContent).toContain(
-      "[Aksel] This child is forbidden in FormSummary.Header",
+      "[Aksel]This child is forbidden in FormSummary.Header",
     );
   },
 };

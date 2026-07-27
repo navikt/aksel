@@ -18,8 +18,14 @@ async function getBundleSize(
       input: inputFile,
       external: commonExternals,
       platform: "browser",
-      treeshake: true,
+      treeshake: {
+        moduleSideEffects: "no-external",
+        propertyReadSideEffects: false,
+      },
       logLevel: "silent",
+      experimental: {
+        lazyBarrel: true,
+      },
       resolve: {
         conditionNames: ["import", "module", "browser", "default"],
       },

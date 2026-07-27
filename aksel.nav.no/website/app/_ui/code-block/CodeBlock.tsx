@@ -3,12 +3,14 @@
 import { Highlight } from "prism-react-renderer";
 import { useId, useRef } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { Button, CopyButton, HStack, Spacer, Tabs } from "@navikt/ds-react";
 import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./CodeBlock.module.css";
 import {
   CodeBlockProvider,
-  CodeBlockTabsT,
+  type CodeBlockTabsT,
   useCodeBlock,
 } from "./CodeBlock.provider";
 import { AkselPrismTheme } from "./CodePrismTheme";
@@ -45,7 +47,17 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
         className={styles.codeBlock}
         {...props}
       >
-        <Tabs defaultValue={tabs[0].value ?? ""} onChange={codeSnippet.update}>
+        <Tabs
+          defaultValue={tabs[0].value ?? ""}
+          onChange={(value) => {
+            codeSnippet.update(value);
+            const tab = tabs.find((t) => t.value === value);
+            umamiTrack(Events.FANE_BYTTET, {
+              tilFane: value,
+              tilFaneTekst: tab?.text ?? value,
+            });
+          }}
+        >
           <CodeBlockHeader />
           {tabs?.map((tab) => (
             <CodeBlockEditor
@@ -136,6 +148,7 @@ function CodeBlockEditor(props: {
 
                 return (
                   <div
+                    // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                     key={i}
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
@@ -150,6 +163,7 @@ function CodeBlockEditor(props: {
                       const tokenProps = { ...getTokenProps({ token }) };
                       return (
                         <span
+                          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                           key={key}
                           {...tokenProps}
                           style={{
@@ -175,6 +189,7 @@ function CodeBlockEditor(props: {
       </Highlight>
       {showExpander && (
         <button
+          type="button"
           className={styles.codeBlockExpander}
           onClick={handleExpandUpdate}
         >
@@ -228,6 +243,7 @@ function ActionButtons() {
   const { codeSnippet, wrapCode } = useCodeBlock();
 
   const titleId = useId();
+  const codeSnippetValue = codeSnippet.current;
 
   return (
     <HStack gap="space-4" align="center" wrap={false}>
@@ -256,8 +272,14 @@ function ActionButtons() {
           </svg>
         }
       />
-      {codeSnippet.current && (
-        <CopyButton copyText={codeSnippet.current} size="small" />
+      {codeSnippetValue && (
+        <CopyButton
+          copyText={codeSnippetValue}
+          size="small"
+          onClick={() =>
+            umamiTrack(Events.TEKST_KOPIERT, { tekst: "kodeblokk" })
+          }
+        />
       )}
     </HStack>
   );

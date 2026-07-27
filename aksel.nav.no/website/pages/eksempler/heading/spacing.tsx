@@ -20,7 +20,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Propen 'spacing' legger til mellomrom under overskriften. Avstanden varierer avhengig av 'size'.",
 };

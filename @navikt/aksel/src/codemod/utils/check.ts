@@ -1,3 +1,4 @@
+/* @ts-expect-error No avaliable types for testUtils */
 import { applyTransform } from "jscodeshift/dist/testUtils";
 import fs from "node:fs";
 import path from "node:path";
@@ -53,7 +54,7 @@ export function check(
   });
 }
 
-export function checkScenarios(
+function checkScenarios(
   dirName: string,
   { migration, scenarios, extension = "js", options = {} }: ScenarioT,
 ) {

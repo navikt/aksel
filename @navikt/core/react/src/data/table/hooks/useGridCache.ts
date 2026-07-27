@@ -14,7 +14,7 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
   });
 
   const [activeCell, setActiveCell] = useState<Element | null>(null);
-  const activeCellRef = useValueAsRef(activeCell).current;
+  const activeCellRef = useValueAsRef(activeCell);
   const observerRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
@@ -24,7 +24,8 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
 
     observerRef.current = new MutationObserver(() => {
       gridCacheRef.current.dirty = true;
-      if (activeCellRef && !activeCellRef.isConnected) {
+
+      if (activeCellRef.current && !activeCellRef.current.isConnected) {
         setActiveCell(null);
       }
     });

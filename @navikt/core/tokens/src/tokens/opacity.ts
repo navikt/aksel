@@ -1,4 +1,4 @@
-import { StyleDictionaryToken } from "../tokens.util";
+import type { StyleDictionaryToken } from "../tokens.util";
 
 export function opacityTokenConfig() {
   return {
@@ -6,7 +6,7 @@ export function opacityTokenConfig() {
       disabled: {
         value: "0.45",
         type: "opacity",
-        comment: "Used for setting opacity on disabled elements.",
+        comment: "Brukes for å sette opacity på deaktiverte elementer.",
         figmaIgnore: true,
         docsIgnore: true,
       },

@@ -1,15 +1,11 @@
 import React, { forwardRef } from "react";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { Label } from "../typography";
 import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
-import {
-  ToggleGroupDescendantsProvider,
-  ToggleGroupProvider,
-  useToggleGroupDescendants,
-} from "./ToggleGroup.context";
-import { ToggleGroupProps } from "./ToggleGroup.types";
-import ToggleItem, { ToggleGroupItemProps } from "./parts/ToggleItem";
+import { ToggleGroupProvider } from "./ToggleGroup.context";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
+import ToggleItem, { type ToggleGroupItemProps } from "./parts/ToggleItem";
 import { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleGroupComponent extends React.ForwardRefExoticComponent<
@@ -53,8 +49,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     },
     ref,
   ) => {
-    const descendants = useToggleGroupDescendants();
-
     const toggleGroupContext = useToggleGroup({
       defaultValue,
       value,
@@ -80,39 +74,35 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     }
 
     return (
-      <ToggleGroupDescendantsProvider value={descendants}>
-        <ToggleGroupProvider {...context}>
-          <div
-            className={cl("aksel-toggle-group__wrapper", className, {
-              "aksel-toggle-group__wrapper--fill": fill,
-            })}
-            data-color={color ?? variantToColor(variant)}
-          >
-            {label && (
-              <Label
-                as="div"
-                size={size}
-                className="aksel-toggle-group__label"
-                id={labelId}
-              >
-                {label}
-              </Label>
-            )}
-            <div
-              aria-labelledby={label ? labelId : undefined}
-              {...rest}
-              ref={ref}
-              className={cl(
-                "aksel-toggle-group",
-                `aksel-toggle-group--${size}`,
-              )}
-              role="radiogroup"
+      <ToggleGroupProvider {...context}>
+        <div
+          className={cl("aksel-toggle-group__wrapper", className, {
+            "aksel-toggle-group__wrapper--fill": fill,
+          })}
+          data-color={color ?? variantToColor(variant)}
+        >
+          {label && (
+            <Label
+              as="div"
+              size={size}
+              className="aksel-toggle-group__label"
+              id={labelId}
             >
-              {children}
-            </div>
+              {label}
+            </Label>
+          )}
+          <div
+            aria-labelledby={label ? labelId : undefined}
+            {...rest}
+            ref={ref}
+            className={cl("aksel-toggle-group", `aksel-toggle-group--${size}`)}
+            role="radiogroup"
+            data-aksel-toggle-group
+          >
+            {children}
           </div>
-        </ToggleGroupProvider>
-      </ToggleGroupDescendantsProvider>
+        </div>
+      </ToggleGroupProvider>
     );
   },
 ) as ToggleGroupComponent;

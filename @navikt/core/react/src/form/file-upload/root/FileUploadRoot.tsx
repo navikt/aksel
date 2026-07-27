@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
-import { ComponentTranslation } from "../../../utils/i18n/i18n.types";
+import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
 import {
   FileUploadDropzone,
   type FileUploadDropzoneProps,
@@ -18,7 +18,10 @@ import { FileUploadLocaleContextProvider } from "./FileUploadRoot.context";
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * i18n-API for customizing texts and labels
+   * i18n-API for customizing texts and labels.
+   *
+   * **NB:** `dragAndDrop`, `dragAndDropMultiple` and `or`
+   * will be wrapped in `aria-hidden`, hence **not visible to screen readers**.
    */
   translations?: ComponentTranslation<"FileUpload">;
 }

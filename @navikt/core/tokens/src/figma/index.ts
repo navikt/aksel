@@ -7,7 +7,7 @@ import {
   isSemanticColor,
   isSpaceToken,
 } from "./create-tokens";
-import { FigmaTokenConfig } from "./figma-config.types";
+import type { FigmaTokenConfig } from "./figma-config.types";
 
 buildFigmaConfig();
 

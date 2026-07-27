@@ -32,6 +32,10 @@ declare module "@navikt/ds-react/types/theme" {
 declare module "react" {
   interface HTMLAttributes {
     /**
+     * Adds margin between sibling elements.
+     */
+    "data-sibling-margin"?: "space-28";
+    /**
      * Standarized margin for PortableText blocks.
      */
     "data-block-margin"?: "space-28" | "space-0";

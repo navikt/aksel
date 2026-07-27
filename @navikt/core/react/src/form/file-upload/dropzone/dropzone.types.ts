@@ -1,6 +1,6 @@
 import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
-import { FormFieldProps } from "../../useFormField";
-import { FileUploadBaseProps } from "../FileUpload.types";
+import type { FormFieldProps } from "../../useFormField";
+import type { FileUploadBaseProps } from "../FileUpload.types";
 
 export interface FileUploadDropzoneProps
   extends
@@ -17,7 +17,10 @@ export interface FileUploadDropzoneProps
    */
   icon?: React.ComponentType<any>;
   /**
-   * i18n-API for customizing texts and labels
+   * i18n-API for customizing texts and labels.
+   *
+   * **NB:** `dragAndDrop`, `dragAndDropMultiple` and `or`
+   * will be wrapped in `aria-hidden`, hence **not visible to screen readers**.
    */
   translations?: ComponentTranslation<"FileUpload">["dropzone"];
 }

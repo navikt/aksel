@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
@@ -111,6 +111,18 @@ export const ColorRole: StoryFn = () => {
         Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
         laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
         culpa cupidatat nisi.
+      </HelpText>
+    </div>
+  );
+};
+
+export const InsideFocusableContainer: StoryFn<typeof HelpText> = (props) => {
+  return (
+    <div tabIndex={-1}>
+      <HelpText {...props}>
+        Id ullamco excepteur elit fugiat labore. Incididunt laborum eiusmod
+        ullamco id aliquip officia ex irure aliqua laboris id ea do nisi. Ex
+        esse ad duis culpa non aliquip exercitation eu culpa cupidatat nisi.
       </HelpText>
     </div>
   );

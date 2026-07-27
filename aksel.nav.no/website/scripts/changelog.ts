@@ -1,9 +1,10 @@
 import { htmlToBlocks } from "@portabletext/block-tools";
 import { Schema } from "@sanity/schema";
 import { JSDOM } from "jsdom";
+import { createClient } from "next-sanity";
 import fs from "node:fs";
 import showdown from "showdown";
-import { noCdnClient } from "../sanity/interface/client.server";
+import { SANITY_BASE_CONFIG } from "../_sanity/sanity.config";
 
 main();
 
@@ -12,7 +13,11 @@ async function main() {
   if (!token) {
     throw new Error("Missing token 'SANITY_WRITE' for updating changelog");
   }
-  const client = noCdnClient(token);
+  const client = createClient({
+    ...SANITY_BASE_CONFIG,
+    token,
+  });
+
   const changelog = fs
     .readFileSync("../../CHANGELOG.md", "utf-8")
     .split("\n## ");

@@ -3,6 +3,7 @@
 import * as Icons from "@navikt/aksel-icons";
 import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
+import { Events } from "@navikt/analytics-types";
 import {
   BodyLong,
   Box,
@@ -14,10 +15,10 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
+import { FigmaIcon } from "@/app/_ui/assets/Icons";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { FigmaIcon } from "@/assets/Icons";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
 import { IconDetails, IntroInformation } from "./IconPage.details";
@@ -62,9 +63,11 @@ function IconPage({
               href="https://www.figma.com/community/file/1214869602572392330"
               data-color="neutral"
               onClick={() =>
-                umamiTrack("navigere", {
-                  kilde: "ikonside",
-                  url: "https://www.figma.com/community/file/1214869602572392330",
+                umamiTrack(Events.NAVIGERE, {
+                  lenketekst: "Figma",
+                  destinasjon:
+                    "https://www.figma.com/community/file/1214869602572392330",
+                  lenkegruppe: "ikonside",
                 })
               }
             >
@@ -78,9 +81,10 @@ function IconPage({
               href="/god-praksis/artikler/tilgjengelig-ikonbruk"
               data-color="neutral"
               onClick={() =>
-                umamiTrack("navigere", {
-                  kilde: "ikonside",
-                  url: "/god-praksis/artikler/tilgjengelig-ikonbruk",
+                umamiTrack(Events.NAVIGERE, {
+                  lenketekst: "Tilgjengelighet",
+                  destinasjon: "/god-praksis/artikler/tilgjengelig-ikonbruk",
+                  lenkegruppe: "ikonside",
                 })
               }
             >
@@ -94,7 +98,7 @@ function IconPage({
               href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
               download="Ikonpakke"
               onClick={() =>
-                umamiTrack("last ned", {
+                umamiTrack(Events.LAST_NED, {
                   tema: "ikon",
                   type: "zip",
                   tittel: "ikonpakke",

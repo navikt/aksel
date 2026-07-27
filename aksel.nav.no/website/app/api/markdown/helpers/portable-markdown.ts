@@ -1,20 +1,23 @@
 import { portableTextToMarkdown } from "@portabletext/markdown";
 import type { PortableContentTypes } from "@/app/_sanity/types";
+import { MarkdownRoutes } from "@/app/api/markdown/MarkdownRouteHandler";
 import { AccordionMarkdown } from "@/app/api/markdown/blocks/Accordion.md";
 import { AlertMarkdown } from "@/app/api/markdown/blocks/Alert.md";
 import { AttachmentMarkdown } from "@/app/api/markdown/blocks/Attachment.md";
 import { BildeMarkdown } from "@/app/api/markdown/blocks/Bilde.md";
+import { DescriptionListMarkdown } from "@/app/api/markdown/blocks/DescriptionList.md";
 import { DoDontMarkdown } from "@/app/api/markdown/blocks/DoDont.md";
 import { ExampleTextMarkdown } from "@/app/api/markdown/blocks/ExampleText.md";
 import { ExpansionCardMarkdown } from "@/app/api/markdown/blocks/ExpansionCard.md";
 import { KodeMarkdown } from "@/app/api/markdown/blocks/Kode.md";
 import { KodeEksemplerMarkdown } from "@/app/api/markdown/blocks/KodeEksempler.md";
 import { LanguageMarkdown } from "@/app/api/markdown/blocks/Language.md";
-import { PropsSeksjonMarkdown } from "@/app/api/markdown/blocks/PropsSeksjon.md";
 import { RelatertInnholdMarkdown } from "@/app/api/markdown/blocks/RelatertInnhold.md";
 import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
 import { VideoMarkdown } from "@/app/api/markdown/blocks/Video.md";
+
+const AKSEL_BASE_URL = "https://aksel.nav.no";
 
 function portableMarkdown(input?: any[]) {
   if (!input || !Array.isArray(input)) {
@@ -25,13 +28,19 @@ function portableMarkdown(input?: any[]) {
     marks: {
       kbd: ({ children }) => `<kbd>${children}</kbd>`,
       quote: ({ children }) => `"${children}"`,
+      link: ({ children, value }) => {
+        const href = value?.href;
+        if (!href) return children;
+        return `[${children}](${toMarkdownUrl(href)})`;
+      },
       internalLink: ({ children, value }) => {
         const slug = value?.slug?.current;
         if (!slug) {
           return children;
         }
         const anchor = value?.anchor ? `#${value.anchor}` : "";
-        return `[${children}](https://aksel.nav.no/${slug}${anchor})`;
+        const suffix = MarkdownRoutes.isDynamicRoute(`/${slug}`) ? ".md" : "";
+        return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
     },
     types: {
@@ -42,7 +51,6 @@ function portableMarkdown(input?: any[]) {
       expansioncard: ExpansionCardMarkdown,
       tabell_v2: TabellMarkdown,
       accordion: AccordionMarkdown,
-      props_seksjon: PropsSeksjonMarkdown,
       video: VideoMarkdown,
       tips: TipsMarkdown,
       kode: KodeMarkdown,
@@ -53,8 +61,33 @@ function portableMarkdown(input?: any[]) {
       attachment: AttachmentMarkdown,
       compare_images: () => "",
       language: LanguageMarkdown,
-    } satisfies Record<PortableContentTypes, (props: any) => string | null>,
+      description_list: DescriptionListMarkdown,
+    } satisfies Record<PortableContentTypes, (props: any) => string>,
   });
+}
+
+/** Returns the URL rewritten to point to the .md endpoint if applicable, otherwise unchanged. */
+function toMarkdownUrl(href: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(href);
+  } catch {
+    return href;
+  }
+  if (parsed.hostname !== "aksel.nav.no") {
+    return href;
+  }
+
+  // e.g. "/komponenter/core/button"
+  const slug = parsed.pathname.replace(/^\//, ""); // strip leading slash
+  const hasMdEndpoint = MarkdownRoutes.isDynamicRoute(`/${slug}`);
+
+  if (!hasMdEndpoint) {
+    return href;
+  }
+  const query = parsed.search ? parsed.search.slice(1) : "";
+  const anchor = parsed.hash ? parsed.hash.slice(1) : "";
+  return `${AKSEL_BASE_URL}/${slug}.md${query ? `?${query}` : ""}${anchor ? `#${anchor}` : ""}`;
 }
 
 export { portableMarkdown };

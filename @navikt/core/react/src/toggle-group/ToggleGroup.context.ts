@@ -1,8 +1,7 @@
 import { createContext as ReactCreateContext } from "react";
 import { createStrictContext } from "../utils/helpers";
-import { createDescendantContext } from "../utils/hooks";
-import { ToggleGroupProps } from "./ToggleGroup.types";
-import { useToggleGroup } from "./useToggleGroup";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
+import type { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleContextProps {
   size: "medium" | "small";
@@ -11,14 +10,6 @@ interface ToggleContextProps {
 export const ToggleGroupContext = ReactCreateContext<ToggleContextProps | null>(
   null,
 );
-
-export const [
-  ToggleGroupDescendantsProvider,
-  useToggleGroupDescendantsContext,
-  useToggleGroupDescendants,
-  useToggleGroupDescendant,
-] = createDescendantContext<HTMLButtonElement, { value: string }>();
-
 type ToggleGroupProviderProps = ReturnType<typeof useToggleGroup> &
   Pick<ToggleGroupProps, "size">;
 

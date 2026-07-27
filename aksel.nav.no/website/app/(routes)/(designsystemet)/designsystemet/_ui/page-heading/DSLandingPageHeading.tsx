@@ -1,5 +1,5 @@
 import { BodyLong, Box, Heading, VStack } from "@navikt/ds-react";
-import { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { DS_FRONT_PAGE_QUERY_RESULT } from "@/app/_sanity/query-types";
 import PromoTag from "@/app/_ui/promo-tag/PromoTag";
 import styles from "./DSLandingPageHeading.module.css";
 

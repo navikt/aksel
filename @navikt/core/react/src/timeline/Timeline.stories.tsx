@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import {
   CheckmarkCircleFillIcon,
@@ -479,7 +479,7 @@ export const ContentDemo: StoryFn = () => {
       <Timeline>
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>
-          Pin 2 <button>test</button>
+          Pin 2 <button type="button">test</button>
           <a href="/123">test123123</a>
         </Timeline.Pin>
         <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
@@ -597,6 +597,44 @@ export const CustomLabel: StoryFn = () => {
   );
 };
 
+export const OverflowingAxisLabels: StoryFn = () => {
+  return (
+    <div style={{ width: "800px" }}>
+      <Timeline
+        startDate={new Date("2026-05-04")}
+        endDate={new Date("2026-05-31")}
+      >
+        <Timeline.Row label="Row">
+          {row1.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Row">
+          {row2.map((p) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
 export const Chromatic = renderStoriesForChromatic({
   Default,
   English,
@@ -606,4 +644,5 @@ export const Chromatic = renderStoriesForChromatic({
   WithDayLabels,
   WithYearLabels,
   CustomLabel,
+  OverflowingAxisLabels,
 });

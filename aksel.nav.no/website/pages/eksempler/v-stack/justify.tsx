@@ -74,7 +74,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
-  desc: "Endrer 'justify-content'.",
+  desc: "Propen `justify` endrer `justify-content`.",
 };

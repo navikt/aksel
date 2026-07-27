@@ -1,15 +1,17 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 
-type DataTableLoadingStateProps = React.HTMLAttributes<HTMLDivElement>;
+type DataTableLoadingStateProps = React.HTMLAttributes<HTMLDivElement> & {
+  colSpan?: number;
+};
 
 const DataTableLoadingState = forwardRef<
   HTMLDivElement,
   DataTableLoadingStateProps
->(({ className, children, ...rest }, forwardedRef) => {
+>(({ className, children, colSpan = 999, ...rest }, forwardedRef) => {
   return (
     <tr>
-      <td colSpan={999}>
+      <td colSpan={colSpan}>
         <div
           {...rest}
           ref={forwardedRef}

@@ -2,7 +2,9 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { Events } from "@navikt/analytics-types";
 import { HGrid, Search, ToggleGroup, debounce } from "@navikt/ds-react";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
 function IconPageForm({
   iconToggle,
@@ -21,6 +23,10 @@ function IconPageForm({
         const params = new URLSearchParams(searchParams?.toString());
         if (query && query.length > 2) {
           params.set("iconQuery", query);
+          umamiTrack(Events.SOK, {
+            tekst: "ikonsøk",
+            seksjon: "ikonside",
+          });
         } else {
           params.delete("iconQuery");
         }
@@ -33,6 +39,11 @@ function IconPageForm({
     const params = new URLSearchParams(searchParams?.toString());
     if (query) {
       params.set("iconToggle", query);
+      umamiTrack(Events.FILTERVALG, {
+        kategori: "ikonvariant",
+        filternavn: query,
+        seksjon: "ikonside",
+      });
     } else {
       params.delete("iconToggle");
     }

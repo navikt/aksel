@@ -1,10 +1,7 @@
+import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file, api) {
+export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   let localName = "Chat";
 
@@ -15,9 +12,14 @@ export default function transformer(file, api) {
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === "@navikt/ds-react")
     .forEach((imp) => {
-      imp.value.specifiers.forEach((x) => {
-        if (x.imported.name === "Chat" && x.local.name !== x.imported.name) {
-          localName = x.local.name;
+      imp.value.specifiers?.forEach((x) => {
+        if (x.type !== "ImportSpecifier") return;
+        if (
+          x.imported.name === "Chat" &&
+          x.local &&
+          x.local.name !== x.imported.name
+        ) {
+          localName = String(x.local.name);
         }
       });
     });

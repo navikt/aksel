@@ -1,17 +1,17 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { Theme } from "../theme/Theme";
 import { cl } from "../utils/helpers";
 import InternalHeaderButton, {
-  InternalHeaderButtonProps,
+  type InternalHeaderButtonProps,
 } from "./InternalHeaderButton";
 import InternalHeaderTitle, {
-  InternalHeaderTitleProps,
+  type InternalHeaderTitleProps,
 } from "./InternalHeaderTitle";
 import InternalHeaderUser, {
-  InternalHeaderUserProps,
+  type InternalHeaderUserProps,
 } from "./InternalHeaderUser";
 import InternalHeaderUserButton, {
-  InternalHeaderUserButtonProps,
+  type InternalHeaderUserButtonProps,
 } from "./InternalHeaderUserButton";
 
 interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {

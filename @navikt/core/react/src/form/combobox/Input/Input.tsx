@@ -1,5 +1,5 @@
 import React, {
-  InputHTMLAttributes,
+  type InputHTMLAttributes,
   forwardRef,
   useCallback,
   useRef,
@@ -10,7 +10,7 @@ import { useMergeRefs } from "../../../utils/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
 interface InputProps extends Omit<
@@ -58,7 +58,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       maxSelected,
     } = useSelectedOptionsContext();
     const {
-      activeDecendantId,
+      activeDescendantId,
       allowNewValues,
       currentOption,
       filteredOptions,
@@ -170,7 +170,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
           }
         } else if (e.key === "Enter" || e.key === "Accept") {
-          if (activeDecendantId || value) {
+          if (activeDescendantId || value) {
             e.preventDefault();
           }
         } else if (e.key === "Escape") {
@@ -205,7 +205,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
-          if (isListOpen && activeDecendantId) {
+          if (isListOpen && activeDescendantId) {
             e.preventDefault();
             if (virtualFocus.isFocusOnTheTop()) {
               toggleIsListOpen(false);
@@ -241,7 +241,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         selectedOptions,
         removeSelectedOption,
         isListOpen,
-        activeDecendantId,
+        activeDescendantId,
         setIsMouseLastUsedInputDevice,
         clearInput,
         toggleIsListOpen,
@@ -295,7 +295,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}
         aria-autocomplete={shouldAutocomplete ? "both" : "list"}
-        aria-activedescendant={activeDecendantId}
+        aria-activedescendant={activeDescendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
         readOnly={readOnly}

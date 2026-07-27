@@ -1,14 +1,10 @@
 import React, { forwardRef } from "react";
 import { cl } from "../utils/helpers";
-import {
-  TabsDescendantsProvider,
-  TabsProvider,
-  useTabsDescendants,
-} from "./Tabs.context";
-import { TabsProps } from "./Tabs.types";
-import Tab, { TabProps } from "./parts/tab/Tab";
-import TabList, { TabListProps } from "./parts/tablist/TabList";
-import TabPanel, { TabPanelProps } from "./parts/tabpanel/TabPanel";
+import { TabsProvider } from "./Tabs.context";
+import type { TabsProps } from "./Tabs.types";
+import Tab, { type TabProps } from "./parts/tab/Tab";
+import TabList, { type TabListProps } from "./parts/tablist/TabList";
+import TabPanel, { type TabPanelProps } from "./parts/tabpanel/TabPanel";
 import { useTabs } from "./useTabs";
 
 interface TabsComponent extends React.ForwardRefExoticComponent<
@@ -73,8 +69,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     },
     ref,
   ) => {
-    const descendants = useTabsDescendants();
-
     const tabsContext = useTabs({ defaultValue, value, onChange, id });
 
     /**
@@ -90,18 +84,16 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     };
 
     return (
-      <TabsDescendantsProvider value={descendants}>
-        <TabsProvider {...context}>
-          <div
-            ref={ref}
-            {...rest}
-            id={id}
-            className={cl("aksel-tabs", className, `aksel-tabs--${size}`)}
-          >
-            {children}
-          </div>
-        </TabsProvider>
-      </TabsDescendantsProvider>
+      <TabsProvider {...context}>
+        <div
+          ref={ref}
+          {...rest}
+          id={id}
+          className={cl("aksel-tabs", className, `aksel-tabs--${size}`)}
+        >
+          {children}
+        </div>
+      </TabsProvider>
     );
   },
 ) as TabsComponent;

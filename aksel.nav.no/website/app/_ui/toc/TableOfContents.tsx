@@ -1,9 +1,10 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
-import { SparklesIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
-import { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { GithubIcon } from "@/app/_ui/assets/Icons";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { cl } from "@/ui-utils/className";
@@ -18,14 +19,19 @@ type TableOfContentsProps = {
   feedback?: {
     name?: string;
     text: string;
+    href?: string;
   };
+  linkToChangelogs?: boolean;
 };
 
 function TableOfContents({
-  toc,
+  toc: tocProp,
   variant = "default",
   feedback,
+  linkToChangelogs = false,
 }: TableOfContentsProps) {
+  const toc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
+
   const tocCtx = useTableOfContents(toc ?? []);
 
   if (!toc || toc.length === 0) {
@@ -45,7 +51,6 @@ function TableOfContents({
       <div className={styles.tocAsideContent}>
         <TableOfContentsScroll tocLength={toc.length} />
 
-        {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
           className={`${styles.tocMenuUl} ${styles.hideScrollbar}`}
           id="toc-scroll-wrapper"
@@ -74,9 +79,12 @@ function TableOfContents({
                   href={`#${node.id}`}
                   onClick={() => {
                     tocCtx.setActiveId(node.id);
-                    umamiTrack("navigere", {
-                      kilde: "toc",
-                      url: `#${node.id}`,
+                    umamiTrack(Events.NAVIGERE, {
+                      lenketekst: removeEmojiesFromText(
+                        stegaClean(node.title),
+                      ).trim(),
+                      destinasjon: `#${node.id}`,
+                      lenkegruppe: "innholdsfortegnelse",
                     });
                   }}
                   className={cl(styles.tocNavListItemLink, {
@@ -97,6 +105,14 @@ function TableOfContents({
   );
 }
 
+function tocWithChangelogs(toc: TOC_BY_SLUG_QUERY_RESULT) {
+  if (!toc || toc.length === 0) {
+    return undefined;
+  }
+
+  return [...toc, { id: "endringslogg-table", title: "Endringslogg" }];
+}
+
 function TableOfContentsLinks({
   feedback,
 }: Pick<TableOfContentsProps, "feedback">) {
@@ -110,9 +126,17 @@ function TableOfContentsLinks({
         as="a"
         variant="secondary-neutral"
         size="small"
-        icon={<SparklesIcon aria-hidden />}
-        href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`}
-        onClick={() => umamiTrack("feedback-designsystem", { kilde: "toc" })}
+        icon={<GithubIcon aria-hidden />}
+        href={
+          feedback.href ??
+          `https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`
+        }
+        onClick={() =>
+          umamiTrack(Events.KNAPP_KLIKKET, {
+            tekst: feedback.text,
+            seksjon: "innholdsfortegnelse",
+          })
+        }
         target="_blank"
         rel="noreferrer"
       >

@@ -1,4 +1,4 @@
-import { PublishedComponent } from "@figma/rest-api-spec";
+import type { PublishedComponent } from "@figma/rest-api-spec";
 import { dump } from "js-yaml";
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";

@@ -2,10 +2,10 @@ import React, { forwardRef, useCallback } from "react";
 import { useId } from "../../utils-external";
 import { useControllableState } from "../../utils/hooks";
 import CollapsibleContent, {
-  CollapsibleContentProps,
+  type CollapsibleContentProps,
 } from "../content/CollapsibleContent";
 import CollapsibleTrigger, {
-  CollapsibleTriggerProps,
+  type CollapsibleTriggerProps,
 } from "../trigger/CollapsibleTrigger";
 import { CollapsibleContextProvider } from "./CollapsibleRoot.context";
 

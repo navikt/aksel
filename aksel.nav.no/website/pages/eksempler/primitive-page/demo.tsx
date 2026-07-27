@@ -31,6 +31,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */
@@ -38,7 +39,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   title: "Standard",
   desc: "`Page.Block` kan også brukes i header og footer for å sikre at innholdet er sentrert og har samme maksbredde som resten av innholdet.",

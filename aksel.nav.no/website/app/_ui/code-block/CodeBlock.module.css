@@ -12,11 +12,15 @@
 
   border-top: 1px solid var(--ax-border-neutral-subtleA);
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
-  padding: var(--codeblock-padding);
+  padding: var(--ax-space-12) var(--codeblock-padding);
   font-size: var(--ax-font-size-medium);
-  font-family: var(--aksel-font-mono);
+  font-family: var(--website-font-mono);
   overflow-x: auto;
   overscroll-behavior-x: contain;
+
+  :global(.dark) & {
+    background-color: var(--ax-bg-sunken);
+  }
 
   &:last-child {
     border-bottom: none;
@@ -46,7 +50,7 @@
         text-align: right;
         user-select: none;
         color: var(--ax-text-neutral-subtle);
-        font-family: var(--aksel-font-mono);
+        font-family: var(--website-font-mono);
         font-size: var(--ax-font-size-small);
         display: inline-block;
         position: absolute;
@@ -59,7 +63,7 @@
 }
 
 .codeBlockLine {
-  margin-left: var(--ax-space-20);
+  margin-left: var(--ax-space-12);
 }
 
 .codeBlockHeader {
@@ -75,7 +79,7 @@
 
 .codeBlockHeaderItem {
   min-height: 2rem;
-  padding: var(--ax-space-8) var(--ax-space-16);
+  padding: var(--ax-space-8) var(--ax-space-12);
   color: var(--ax-text-neutral);
 
   /* Optical centering */
@@ -117,7 +121,7 @@
     text-align: left;
     user-select: none;
     color: var(--ax-text-neutral-subtle);
-    font-family: var(--aksel-font-mono);
+    font-family: var(--website-font-mono);
     font-size: var(--ax-font-size-small);
     display: inline-block;
     position: absolute;

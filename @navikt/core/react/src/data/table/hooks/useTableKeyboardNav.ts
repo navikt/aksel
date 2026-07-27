@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useEventCallback } from "../../../utils/hooks";
 import { focusInitialTableTarget } from "../helpers/table-cell";
-import { focusCellAndUpdateTabIndex } from "../helpers/table-focus";
+import { focusCell, focusCellAndUpdateTabIndex } from "../helpers/table-focus";
 import {
   findFirstCell,
   findFirstCellInRow,
@@ -18,17 +18,9 @@ import { useGridCache } from "./useGridCache";
 
 type UseTableKeyboardNavOptions = {
   enabled: boolean;
-  /**
-   * Custom callback to determine if navigation should be blocked.
-   * Called before default blocking logic.
-   */
-  shouldBlockNavigation?: (event: KeyboardEvent) => boolean;
 };
 
-function useTableKeyboardNav({
-  enabled,
-  shouldBlockNavigation: customBlockFn,
-}: UseTableKeyboardNavOptions) {
+function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
   const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
   const { getTableGrid, activeCell, setActiveCell } = useGridCache(
     tableRef,
@@ -110,16 +102,12 @@ function useTableKeyboardNav({
    * Checks if navigation should be blocked based on current focus context.
    */
   const handleTableKeyDown = useEventCallback((event: KeyboardEvent): void => {
-    if (customBlockFn?.(event)) {
+    const action = getNavigationAction(event);
+    if (!action) {
       return;
     }
 
     if (shouldBlockNavigation(event)) {
-      return;
-    }
-
-    const action = getNavigationAction(event);
-    if (!action) {
       return;
     }
 
@@ -137,6 +125,10 @@ function useTableKeyboardNav({
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
+      if (activeCell) {
+        focusCell(activeCell);
+        return;
+      }
       focusInitialTableTarget(tableRef);
       return;
     }
@@ -173,7 +165,7 @@ function useTableKeyboardNav({
 
   return {
     /* Table should only have tabIndex until the focus is moved inside and is enabled */
-    tabIndex: enabled ? (activeCell ? undefined : 0) : undefined,
+    tabIndex: enabled ? 0 : undefined,
     setTableRef,
   };
 }

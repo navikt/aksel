@@ -1,8 +1,11 @@
 import React, { forwardRef } from "react";
+import { getResponsiveProps } from "../../utils/components/base-primitive/helpers/css";
+import type {
+  ResponsiveProp,
+  SpacingScale,
+} from "../../utils/components/base-primitive/helpers/types";
 import { Slot } from "../../utils/components/slot/Slot";
 import { cl } from "../../utils/helpers";
-import { getResponsiveProps } from "../utilities/css";
-import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type BleedSpacingInline = "full" | SpacingScale;
 export type BleedSpacingBlock = SpacingScale;
@@ -13,7 +16,6 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
-   * The `px` value is useful to nudge by just 1px.
    * The `full` value is used to extend the margin to the full width of the parent.
    *
    * @example
@@ -29,7 +31,6 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#space)
    * or an object of spacing tokens for different breakpoints.
    *
-   * The `px` value is useful to nudge by just 1px.
    * This prop does **not** accept the `full` value.
    *
    * @example

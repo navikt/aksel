@@ -7,9 +7,9 @@ import React, {
 } from "react";
 import { composeEventHandlers, ownerDocument } from "../../helpers";
 import { useMergeRefs, useTimeout } from "../../hooks";
-import type { AsChild } from "../../types/AsChild";
+import type { AsChildProps } from "../../types";
 import { Slot } from "../slot/Slot";
-import {
+import type {
   CustomFocusEvent,
   CustomPointerEvent,
 } from "./util/dispatchCustomEvent";
@@ -64,7 +64,7 @@ interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement>
    */
   onDismiss?: (event: Event) => void;
   /**
-   * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
+   * Stops `onDismiss` from being called when interacting with the `safeZone` elements.
    * - anchor: The element that should be considered safe to interact with.
    */
   safeZone?: {
@@ -76,7 +76,7 @@ interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement>
   enabled?: boolean;
 }
 
-type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
+type DismissableLayerProps = DismissableLayerBaseProps & AsChildProps;
 
 type DismissableLayerElement = React.ComponentRef<typeof DismissableLayer>;
 
@@ -342,7 +342,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
           originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
-          ownerDoc.body.style.pointerEvents = "none"; // eslint-disable-line react-hooks/immutability
+          ownerDoc.body.style.pointerEvents = "none";
         }
         context.layersWithOutsidePointerEventsDisabled.add(node);
       }
@@ -400,11 +400,12 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         return;
       }
 
-      if (!context.branchedLayers.has(parentBranchedLayer)) {
-        context.branchedLayers.set(parentBranchedLayer, new Set());
+      let branchedChildren = context.branchedLayers.get(parentBranchedLayer);
+      if (!branchedChildren) {
+        branchedChildren = new Set();
+        context.branchedLayers.set(parentBranchedLayer, branchedChildren);
       }
 
-      const branchedChildren = context.branchedLayers.get(parentBranchedLayer)!;
       branchedChildren.add(node);
       dispatchUpdate();
 
@@ -460,6 +461,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             () => {
               pointerDownOutside.onPointerDownCapture();
               pointerUpOutside.onPointerDownCapture();
+              focusOutside.onPointerDownCapture();
             },
           )}
           onPointerUpCapture={composeEventHandlers(

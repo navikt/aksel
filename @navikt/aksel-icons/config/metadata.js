@@ -1,7 +1,7 @@
 const fastglob = require("fast-glob");
-const path = require("path");
-const jsYaml = require("js-yaml");
-const fs = require("fs");
+const path = require("node:path");
+const { load, JSON_SCHEMA } = require("js-yaml");
+const fs = require("node:fs");
 
 const basePath = path.resolve(__dirname, "../icons");
 
@@ -12,8 +12,8 @@ const ymlList = fastglob
 const metadata = {};
 
 ymlList.forEach((file) => {
-  const ymlData = jsYaml.load(fs.readFileSync(`${basePath}/${file}`), {
-    schema: jsYaml.JSON_SCHEMA,
+  const ymlData = load(fs.readFileSync(`${basePath}/${file}`), {
+    schema: JSON_SCHEMA,
   });
   // biome-ignore lint/complexity/useOptionalChain: optional chain not supported in enviroment. Consider revriting to Typescript
   if (ymlData.keywords && ymlData.keywords.includes("[ignore-docs]")) {
@@ -42,7 +42,7 @@ fs.writeFileSync(
     id: string;
     name: string;
     category: string;
-    sub_category: "Time",
+    sub_category: string;
     keywords: string[];
     variant: "stroke" | "fill";
     created_at: Date;

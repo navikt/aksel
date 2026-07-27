@@ -1,7 +1,13 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, userEvent, within } from "storybook/test";
+import {
+  expect,
+  fireEvent,
+  fn,
+  userEvent,
+  waitFor,
+  within,
+} from "storybook/test";
 import {
   DismissableLayer,
   type DismissableLayerProps,
@@ -26,8 +32,10 @@ export const EscapeKeyDown: Story = {
   },
   play: async ({ args }) => {
     await userEvent.keyboard("{Escape}");
-    expect(args.onEscapeKeyDown).toHaveBeenCalledOnce();
-    expect(args.onDismiss).toHaveBeenCalledOnce();
+    waitFor(() => {
+      expect(args.onEscapeKeyDown).toHaveBeenCalledOnce();
+      expect(args.onDismiss).toHaveBeenCalledOnce();
+    });
   },
   args: {
     onDismiss: fn(),
@@ -85,6 +93,37 @@ export const PointerDownOutside: Story = {
   },
 };
 
+/**
+ * Tabindex on parent element causes focusin-event to be triggered on the parent when clicking inside the child, which again causes `onFocusOutside` to be called.
+ * This test ensures that clicking inside the element does not trigger `onFocusOutside` or `onDismiss`, even with a tabindex on the parent.
+ */
+export const PointerDownInside: Story = {
+  render: (props) => {
+    return (
+      <div tabIndex={-1}>
+        <DismissableLayer asChild {...props} onDismiss={console.log}>
+          <div
+            data-testid="inside-element"
+            style={{ background: "red", padding: "2rem" }}
+          />
+        </DismissableLayer>
+      </div>
+    );
+  },
+  play: async ({ args }) => {
+    const canvas = within(document.body);
+    const insideElement = canvas.getByTestId("inside-element");
+    await userEvent.click(insideElement);
+
+    expect(args.onFocusOutside).not.toHaveBeenCalled();
+    expect(args.onDismiss).not.toHaveBeenCalled();
+  },
+  args: {
+    onDismiss: fn(),
+    onFocusOutside: fn(),
+  },
+};
+
 export const InteractOutside: Story = {
   render: (props) => {
     return (
@@ -96,6 +135,7 @@ export const InteractOutside: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>
@@ -111,8 +151,10 @@ export const InteractOutside: Story = {
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.onInteractOutside).not.toHaveBeenCalled();
+    waitFor(() => {
+      expect(args.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.onInteractOutside).not.toHaveBeenCalled();
+    });
 
     outsideFocus.focus();
 
@@ -140,6 +182,7 @@ export const DisableOutsidePointerEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>
@@ -169,6 +212,7 @@ export const SafeZone: Story = {
     return (
       <div>
         <div
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
           ref={setSafeAnchor}
           data-testid="safe-anchor"
@@ -183,7 +227,7 @@ export const SafeZone: Story = {
           }}
         >
           <div data-testid="safe-container" ref={setSafeContainer}>
-            <button>test</button>
+            <button type="button">test</button>
           </div>
         </DismissableLayer>
       </div>
@@ -276,13 +320,17 @@ export const NestedPointerEvents: StoryObj<{
 
     await fireEvent.pointerDown(outside);
 
-    expect(args.root.onDismiss).not.toHaveBeenCalled();
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).not.toHaveBeenCalled();
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.click(outside);
 
-    expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     root: {
@@ -329,10 +377,13 @@ export const NestedEscapeKeydown: StoryObj<{
                 enabled={enabledNested}
               >
                 <input type="text" data-testId="nested" />
-                <button onClick={() => setEnabled((x) => !x)}>
+                <button type="button" onClick={() => setEnabled((x) => !x)}>
                   toggle root {enabled}
                 </button>
-                <button onClick={() => setEnabledNested((x) => !x)}>
+                <button
+                  type="button"
+                  onClick={() => setEnabledNested((x) => !x)}
+                >
                   toggle nested {enabledNested}
                 </button>
               </DismissableLayer>
@@ -348,13 +399,17 @@ export const NestedEscapeKeydown: StoryObj<{
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.root.onDismiss).not.toHaveBeenCalled();
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     root: {
@@ -407,13 +462,17 @@ export const MultipleEscapeKeydown: StoryObj<{
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.first.onDismiss).not.toHaveBeenCalled();
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).not.toHaveBeenCalled();
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.keyboard("{Escape}");
 
-    expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     first: {
@@ -475,13 +534,17 @@ export const MultipleOutsideClick: StoryObj<{
 
     await fireEvent.pointerDown(outside);
 
-    expect(args.first.onDismiss).not.toHaveBeenCalled();
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).not.toHaveBeenCalled();
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
 
     await userEvent.click(outside);
 
-    expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
-    expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
+      expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+    });
   },
   args: {
     first: {
@@ -505,6 +568,7 @@ export const PreventEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
           tabIndex={0}
         />
       </div>

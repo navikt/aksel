@@ -1,10 +1,10 @@
 import React from "react";
-import { CalendarWeek } from "react-day-picker";
+import type { CalendarWeek } from "react-day-picker";
 import { Show } from "../../../primitives/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { useDateTranslationContext } from "../../Date.locale";
-import { MultipleMode } from "../DatePicker.types";
+import type { MultipleMode } from "../DatePicker.types";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
 
 const DatePickerWeekRow = ({
@@ -23,6 +23,7 @@ const DatePickerWeekRow = ({
 
   return (
     <Show below="sm" asChild>
+      {/** biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: role="grid" improves a11y reading */}
       <table className="rdp-table" role="grid">
         <tbody className="rdp-tbody">
           <tr className="rdp-row aksel-date__week-row">

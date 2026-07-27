@@ -1,4 +1,5 @@
-import core, { Collection } from "jscodeshift";
+import type core from "jscodeshift";
+import type { Collection } from "jscodeshift";
 
 export default function removePropsFromComponent(
   _: core.JSCodeshift,
@@ -10,6 +11,10 @@ export default function removePropsFromComponent(
 
   component.forEach((node) => {
     const attributes = node.node.openingElement.attributes;
+
+    if (!attributes) {
+      return;
+    }
 
     for (let i = attributes.length - 1; i >= 0; i--) {
       const attribute = attributes[i];

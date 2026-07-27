@@ -1,4 +1,4 @@
-import { GlobalConfigWithoutAlpha } from "./colors.types";
+import type { GlobalConfigWithoutAlpha } from "./colors.types";
 import { globalConfigWithAlphaTokens } from "./create-alpha";
 
 /**

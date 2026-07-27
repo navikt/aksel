@@ -1,14 +1,15 @@
 import { differenceInDays } from "date-fns";
-import { PeriodProps } from "../period/types";
-import { Spatial } from "./types.internal";
+import type { PeriodProps } from "../period/types";
+import type { Spatial } from "./types.internal";
 
 export interface Positioned {
   horizontalPosition: number;
   direction: "left" | "right";
 }
 
-export const isVisible = ({ horizontalPosition }: Positioned): boolean =>
-  horizontalPosition <= 98 && horizontalPosition >= 0;
+export const isVisible = ({ horizontalPosition }: Positioned): boolean => {
+  return horizontalPosition <= 96 && horizontalPosition >= 0;
+};
 
 export const getFirstDate = (periods: any) => {
   return periods.sort(

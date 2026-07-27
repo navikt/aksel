@@ -109,7 +109,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   title: "Flerspråk",
   desc: "Ved å legge til flere språk kan man være sikrere på at flere forstår hva som gikk feil.",

@@ -30,6 +30,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */
@@ -37,8 +38,8 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   title: "Footer belowFold",
-  desc: "`footerPosition=belowFold` sikrer at footer aldri vil vises før man begynner å scrolle. Dette hjelper med å redusere layout-shifts ved navigering mellom sider.",
+  desc: '`footerPosition="belowFold"` sikrer at footer aldri vil vises før man begynner å scrolle. Dette hjelper med å redusere layout-shifts ved navigering mellom sider.',
 };

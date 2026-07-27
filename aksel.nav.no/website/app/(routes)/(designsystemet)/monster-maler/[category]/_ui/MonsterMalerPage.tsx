@@ -1,42 +1,80 @@
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { Heading } from "@navikt/ds-react";
+import { Suspense } from "react";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
 } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPage";
-import { sanityFetch } from "@/app/_sanity/live";
+import { DesignsystemetPageFooter } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetPageFooter";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+} from "@/app/_sanity/live";
 import {
   MONSTER_MALER_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
-import styles from "@/app/_ui/portable-text/CustomPortableText.module.css";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
-import {
-  WebsiteTable,
-  WebsiteTableRow,
-} from "@/app/_ui/website-table/WebsiteTable";
 
 async function MonsterMalerPage({ slug }: { slug: string }) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (!isDraftMode) {
+    return (
+      <CachedMonsterMalerPage
+        slug={slug}
+        perspective="published"
+        stega={false}
+      />
+    );
+  }
+
+  return (
+    <Suspense fallback={null}>
+      <DynamicMonsterMalerPage slug={slug} />
+    </Suspense>
+  );
+}
+
+async function DynamicMonsterMalerPage({ slug }: { slug: string }) {
+  const { perspective, stega } = await getDynamicFetchOptions();
+  return (
+    <CachedMonsterMalerPage
+      slug={slug}
+      perspective={perspective}
+      stega={stega}
+    />
+  );
+}
+
+async function CachedMonsterMalerPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
+
   const [{ data: pageData }, toc] = await Promise.all([
     sanityFetch({
       query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug },
+      perspective,
+      stega,
     }).then((res) => res.data || []),
   ]);
 
-  if (!pageData) {
+  if (!pageData?._id) {
     notFound();
   }
-
-  const metadata = pageData.content?.find((x) => x._type === "kode_eksempler")
-    ?.dir?.metadata;
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
@@ -44,52 +82,21 @@ async function MonsterMalerPage({ slug }: { slug: string }) {
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "Send innspill",
+          text: "GitHub issues",
+          href: pageData.contact?.github_issues_link,
         }}
-        toc={
-          metadata?.changelog
-            ? [...toc, { id: "changelog", title: "Endringslogg" }]
-            : toc
-        }
+        toc={toc}
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"
       />
-      {metadata?.changelog && (
-        <div>
-          <Heading
-            className={styles.headingElement}
-            tabIndex={-1}
-            id="changelog"
-            level="2"
-            size="large"
-            data-level="2"
-          >
-            Endringslogg
-          </Heading>
-          <WebsiteTable
-            th={[{ text: "Dato" }, { text: "Versjon" }, { text: "Endringer" }]}
-          >
-            {metadata.changelog
-              .sort((a, b) => (a.version ?? 0) - (b.version ?? 0))
-              .map((log) => (
-                <WebsiteTableRow
-                  key={log.version}
-                  tr={[
-                    { text: log.date },
-                    { text: log.version },
-                    {
-                      text: (
-                        <MarkdownText>{log.description ?? ""}</MarkdownText>
-                      ),
-                    },
-                  ]}
-                />
-              ))}
-          </WebsiteTable>
-        </div>
-      )}
+
+      <DesignsystemetPageFooter
+        pageId={pageData._id}
+        updateDateString={pageData._updatedAt ?? pageData._createdAt}
+        contact={pageData.contact}
+      />
     </DesignsystemetPageLayout>
   );
 }

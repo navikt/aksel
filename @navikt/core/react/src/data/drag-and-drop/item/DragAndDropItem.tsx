@@ -1,5 +1,4 @@
 import React from "react";
-import { HStack } from "../../../primitives/stack";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DragAndDropDragHandler } from "../drag-handler/DragAndDropDragHandler";
@@ -19,6 +18,7 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLLIElement> {
    * Indicates if the item is an overlay
    */
   isOverlay?: boolean;
+  itemLabel: string;
 }
 
 /**
@@ -34,7 +34,7 @@ interface DragAndDropItemProps extends React.HTMLAttributes<HTMLLIElement> {
  */
 const DragAndDropItem = React.forwardRef<HTMLLIElement, DragAndDropItemProps>(
   (
-    { children, id, index, className, isOverlay = false, ...rest },
+    { children, id, index, className, isOverlay = false, itemLabel, ...rest },
     forwardedRef,
   ) => {
     const ref = React.useRef<HTMLLIElement>(null);
@@ -44,32 +44,24 @@ const DragAndDropItem = React.forwardRef<HTMLLIElement, DragAndDropItemProps>(
     const isDropTarget = context?.dropTarget?.id === id;
 
     return (
-      <HStack
-        gap="space-8"
-        align="center"
-        wrap={false}
-        asChild
-        padding="space-4"
+      <li
+        id={isOverlay ? undefined : id}
+        {...rest}
+        ref={mergedRef}
+        data-dnd-id={isOverlay ? undefined : id}
+        data-dnd-index={isOverlay ? undefined : index}
+        className={cl("aksel-data-table__drag-and-drop-item", className)}
+        data-drop-target={isOverlay ? undefined : isDropTarget}
+        data-overlay={isOverlay}
       >
-        {/* TODO Should this be a <li>? */}
-        <li
-          id={isOverlay ? undefined : id}
-          {...rest}
-          ref={mergedRef}
-          data-dnd-id={isOverlay ? undefined : id}
-          data-dnd-index={isOverlay ? undefined : index}
-          className={cl("aksel-data-table__drag-and-drop-item", className)}
-          data-drop-target={isOverlay ? undefined : isDropTarget}
-          data-overlay={isOverlay}
-        >
-          <DragAndDropDragHandler
-            item={item}
-            itemRef={ref}
-            isOverlay={isOverlay}
-          />
-          <div>{children}</div>
-        </li>
-      </HStack>
+        <DragAndDropDragHandler
+          item={item}
+          itemRef={ref}
+          isOverlay={isOverlay}
+          itemLabel={itemLabel}
+        />
+        <div>{children}</div>
+      </li>
     );
   },
 );

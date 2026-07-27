@@ -3,7 +3,7 @@
 import { stegaClean } from "next-sanity";
 import { useEffect, useState } from "react";
 import { Box, HStack, Skeleton, VStack } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import styles from "./KodeEksempler.module.css";
 import { useKodeEksempler } from "./KodeEksempler.provider";
@@ -61,8 +61,12 @@ function KodeEksemplerIFrame(props: {
 
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
-    setHasMounted(true);
+    setHasMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
+
+  const getCurrentCode = () => {
+    return (hasJSXSnippet ? current?.kompaktInnhold : current?.innhold) ?? "";
+  };
 
   return (
     <div>
@@ -111,12 +115,10 @@ function KodeEksemplerIFrame(props: {
           aria-label={`Kode for ${current?.title}`}
           tabs={[
             {
-              text: "TSX",
+              text: "App.tsx",
               value: "example",
               lang: "tsx",
-              code:
-                (hasJSXSnippet ? current?.kompaktInnhold : current?.innhold) ??
-                "",
+              code: getCurrentCode(),
               extraCode: hasJSXSnippet ? current?.innhold : undefined,
             },
           ]}

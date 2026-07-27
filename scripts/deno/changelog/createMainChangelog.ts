@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import {
+import type {
   List,
   ListItem,
   Paragraph,
@@ -7,7 +7,7 @@ import {
   Root,
   Text,
 } from "npm:@types/mdast";
-import { Node } from "npm:@types/unist";
+import type { Node } from "npm:@types/unist";
 import { heading, root, text } from "npm:mdast-builder";
 import remarkParse from "npm:remark-parse";
 import remarkStringify from "npm:remark-stringify";
@@ -229,8 +229,8 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
 };
 
 const changelogFiles = getChangelogs("./@navikt");
-console.info("processing the following markdown files:", changelogFiles);
+console.info("Processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
 const changelogStr = await createMainChangelog(changelogJSON);
 writeFileSync("CHANGELOG.md", changelogStr);
-console.info("wrote to CHANGELOG.md");
+console.info("Wrote to CHANGELOG.md");

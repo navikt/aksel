@@ -32,6 +32,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */
@@ -39,8 +40,8 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   title: "Maksbredde",
-  desc: "Propen `width` på Page.Block sentrerer innhold og legger på maksbredde.",
+  desc: "Propen `width` på `Page.Block` sentrerer innhold og legger på maksbredde.",
 };

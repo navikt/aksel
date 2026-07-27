@@ -12,21 +12,30 @@ import {
   LinkCardIcon,
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
-import { sanityFetch } from "@/app/_sanity/live";
+import { type DynamicFetchOptions, sanityFetch } from "@/app/_sanity/live";
 import { N_LATEST_CHANGE_LOGS_QUERY } from "@/app/_sanity/queries";
-import { N_LATEST_CHANGE_LOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { N_LATEST_CHANGE_LOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { FigmaIcon, GithubIcon } from "@/app/_ui/assets/Icons";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
-import { FigmaIcon, GithubIcon } from "@/assets/Icons";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 
 type ChangeLogNewsProps = {
   title: string;
   description?: string | null;
-};
+} & DynamicFetchOptions;
 
-async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
+async function ChangeLogNews({
+  title,
+  description,
+  perspective,
+  stega,
+}: ChangeLogNewsProps) {
+  "use cache";
   const { data: changeLogEntries } = await sanityFetch({
     query: N_LATEST_CHANGE_LOGS_QUERY,
     params: { count: 3 },
+    perspective,
+    stega,
   });
 
   if (changeLogEntries.length === 0) {
@@ -52,10 +61,13 @@ async function ChangeLogNews({ title, description }: ChangeLogNewsProps) {
           <LinkCard key={heading}>
             <ChangelogIcon endringstype={endringstype} />
             <LinkCardTitle as="span">
-              <LinkCardAnchor
-                href={`/grunnleggende/endringslogg/${slug?.current}`}
-              >
-                {heading}
+              <LinkCardAnchor asChild>
+                <UmamiLink
+                  lenkegruppe="endringslogg-ds-frontpage"
+                  href={`/grunnleggende/endringslogg/${slug?.current}`}
+                >
+                  {heading}
+                </UmamiLink>
               </LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>

@@ -1,12 +1,12 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
-import { DayEventHandler, dateMatchModifiers } from "react-day-picker";
+import { type DayEventHandler, dateMatchModifiers } from "react-day-picker";
 import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
-import { DateInputProps } from "../../Date.Input";
+import type { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
-import { DatePickerProps } from "../DatePicker";
+import type { DatePickerProps } from "../DatePicker";
 
 export interface UseDatepickerOptions extends Pick<
   DatePickerProps,

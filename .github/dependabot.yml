@@ -3,13 +3,11 @@ registries:
   npm-github:
     type: npm-registry
     url: https://npm.pkg.github.com
+    scope: "@navikt"
     token: ${{ secrets.READER_TOKEN }}
 updates:
   - package-ecosystem: npm
     directory: /
-    exclude-paths:
-      - "examples/astro/package.json"
-      - "examples/shadow-dom/package.json"
     schedule:
       interval: weekly
       day: monday
@@ -54,7 +52,9 @@ updates:
           - "*"
 
   - package-ecosystem: docker
-    directory: "/"
+    directories:
+      - "/aksel.nav.no"
+      - "/mcp-server"
     schedule:
       interval: weekly
       day: monday

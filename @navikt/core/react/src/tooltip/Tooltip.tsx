@@ -11,7 +11,12 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import React, { Fragment, HTMLAttributes, forwardRef, useRef } from "react";
+import React, {
+  Fragment,
+  type HTMLAttributes,
+  forwardRef,
+  useRef,
+} from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { HStack } from "../primitives/stack";
@@ -19,6 +24,7 @@ import { Detail } from "../typography";
 import { useId } from "../utils-external";
 import { Slot } from "../utils/components/slot/Slot";
 import { cl } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { useControllableState, useMergeRefs } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
@@ -188,10 +194,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }
 
     if (content?.length > maxChar) {
-      _open &&
-        console.warn(
-          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`,
-        );
+      consoleWarning(
+        `<Tooltip />: Because of strict a11y concerns we encourage all tooltips to have less than 80 characters. Can be overridden with the maxChar prop\n\nLength:${content.length}\nTooltip content: ${content}`,
+      );
     }
 
     const labelProps = describesChild
@@ -296,8 +301,8 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
         {shortcuts.map((key, index) => (
           <Fragment key={key.join("+")}>
             <HStack gap="space-4">
-              {key.map((k, i) => (
-                <Detail as="kbd" key={i} className="aksel-tooltip__key">
+              {key.map((k) => (
+                <Detail as="kbd" key={k} className="aksel-tooltip__key">
                   {k}
                 </Detail>
               ))}
@@ -313,8 +318,8 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
 
   return (
     <span className="aksel-tooltip__keys" aria-hidden>
-      {shortcuts.map((k, i) => (
-        <Detail as="kbd" key={i} className="aksel-tooltip__key">
+      {shortcuts.map((k) => (
+        <Detail as="kbd" key={k} className="aksel-tooltip__key">
           {k}
         </Detail>
       ))}

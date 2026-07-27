@@ -51,5 +51,17 @@ testRule({
       column: 3,
       endColumn: 38,
     },
+    {
+      code: ".foo .aksel-read-more__content--closed {}",
+      description: "selector with deprecated read-more closed class",
+      message: messages.unexpected(
+        "aksel-read-more__content--closed",
+        deprecations[2].message,
+      ),
+      line: 1,
+      endLine: 1,
+      column: 7,
+      endColumn: 39,
+    },
   ],
 });

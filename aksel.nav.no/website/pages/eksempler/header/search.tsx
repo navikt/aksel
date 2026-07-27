@@ -5,6 +5,7 @@ const Example = () => {
   return (
     <InternalHeader>
       <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+      <Spacer />
       <HStack
         as="form"
         paddingInline="space-20"
@@ -21,7 +22,6 @@ const Example = () => {
           placeholder="Søk"
         />
       </HStack>
-      <Spacer />
       <InternalHeader.User name="Ola Normann" />
     </InternalHeader>
   );
@@ -35,7 +35,8 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   title: "Søk",
+  desc: "Husk å ta høyde for mobilvisning.",
 };

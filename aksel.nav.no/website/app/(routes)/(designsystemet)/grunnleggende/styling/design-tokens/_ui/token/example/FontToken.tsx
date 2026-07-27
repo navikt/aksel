@@ -1,8 +1,8 @@
 import { LineHeightIcon } from "@navikt/aksel-icons";
 import { Heading, VStack } from "@navikt/ds-react";
-import { TokenForDocumentationT } from "../../types";
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 
-const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
+const FontToken = ({ token }: { token: TokenDocT }) => {
   let fontStyling = {
     fontSize: "var(--ax-font-size-heading-medium)",
     fontFamily: "var(--ax-font-family)",

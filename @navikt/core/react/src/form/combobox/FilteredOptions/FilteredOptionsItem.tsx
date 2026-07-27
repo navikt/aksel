@@ -5,7 +5,7 @@ import { cl } from "../../../utils/helpers";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList } from "../combobox-utils";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -35,7 +35,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const {
     setIsMouseLastUsedInputDevice,
     toggleIsListOpen,
-    activeDecendantId,
+    activeDescendantId,
     virtualFocus,
   } = useFilteredOptionsContext();
   const { isMultiSelect, maxSelected, selectedOptions, toggleOption } =
@@ -46,7 +46,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
     maxSelected.isLimitReached && !isInList(_option.value, selectedOptions);
 
   const optionId = filteredOptionsUtil.getOptionId(id, option.value);
-  const isActive = activeDecendantId === optionId;
+  const isActive = activeDescendantId === optionId;
 
   return (
     <li
@@ -76,6 +76,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
           toggleIsListOpen(false);
         }
       }}
+      // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: List item acts as an option in the combobox.
       role="option"
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}

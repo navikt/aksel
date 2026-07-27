@@ -1,8 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
-import {
-  AVALIABLE_MARKDOWN_ROUTES,
-  markdownForRoute,
-} from "@/app/api/markdown/llm.config";
+import { type NextRequest, NextResponse } from "next/server";
+import { MarkdownRoutes } from "@/app/api/markdown/MarkdownRouteHandler";
+
+/**
+ * Resolves the markdown for a route inside a `'use cache'` boundary so the
+ * `sanityFetch` calls in the route handlers can call `cacheTag()`.
+ */
+async function getMarkdownForRoute(basePath: string): Promise<string> {
+  "use cache";
+  return MarkdownRoutes.markdownForRoute(basePath);
+}
 
 /**
  * Central markdown route handler
@@ -17,10 +23,7 @@ export async function GET(request: NextRequest) {
 
   const basePath = request.nextUrl.pathname.slice(0, -3);
 
-  /**
-   * TODO: Need to fetch available markdown routes from Sanity to avoid hardcoding them in the llm.config file.
-   */
-  if (!AVALIABLE_MARKDOWN_ROUTES.includes(basePath)) {
+  if (!MarkdownRoutes.isValidMarkdownRoute(basePath)) {
     return new NextResponse(
       "ERROR: Markdown version not available for this route",
       {
@@ -30,7 +33,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const markdown = await markdownForRoute(basePath);
+    const markdown = await getMarkdownForRoute(basePath);
 
     if (!markdown || markdown.length === 0) {
       return new NextResponse(

@@ -28,7 +28,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Bruk InlineMessage for å gi brukeren viktig informasjon i en tekstflyt uten at det tar for mye plass visuelt.",
 };

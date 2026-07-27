@@ -7,16 +7,14 @@ import {
   useState,
   useTransition,
 } from "react";
+import { Events } from "@navikt/analytics-types";
 import { debounce } from "@navikt/ds-react";
 import {
   type GlobalSearchActionReturnT,
   GlobalSearchResultContext,
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
-import {
-  fuseGlobalSearch,
-  preloadSearchIndex,
-} from "@/app/_ui/global-search/server/GlobalSearch.actions";
+import { fuseGlobalSearch } from "@/app/_ui/global-search/server/GlobalSearch.actions";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
@@ -38,7 +36,7 @@ function GlobalSearchResultProvider({
       debounce((query: string) => {
         maybeEnableComicSans(query);
 
-        umamiTrack("sok", {});
+        umamiTrack(Events.SOK, { tekst: "global søk" });
         setParam(query);
       }, 200),
     [setParam],
@@ -76,11 +74,6 @@ function GlobalSearchResultProvider({
       setSearchResults(newResults);
     });
   }, [paramValue]);
-
-  /* Preload the searchindex cache, so that the first search is faster. */
-  useEffect(() => {
-    void preloadSearchIndex();
-  }, []);
 
   const contextValue = useMemo(
     () => ({

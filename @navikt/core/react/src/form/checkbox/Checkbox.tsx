@@ -4,7 +4,7 @@ import { omit, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { CheckboxInput } from "./checkbox-input/CheckboxInput";
-import { CheckboxProps } from "./types";
+import type { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -35,6 +35,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "indeterminate",
             "errorId",
             "readOnly",
+            "className",
           ])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           aria-describedby={

@@ -1,9 +1,9 @@
 "use client";
 
 import React, {
-  HTMLAttributes,
-  ReactElement,
-  ReactNode,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
   useEffect,
   useRef,
   useState,
@@ -152,7 +152,6 @@ export const ShowMore = ({
           behavior: "instant",
           block: "start",
         });
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShouldScroll(false);
       }
     }

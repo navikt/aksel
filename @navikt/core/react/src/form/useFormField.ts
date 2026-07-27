@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ReadMore } from "../read-more/ReadMore";
 import { useId } from "../utils-external";
 import { cl } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { FieldsetContext } from "./fieldset/context";
 
 export interface FormFieldProps {
@@ -80,12 +81,9 @@ export const useFormField = (
 
   const ariaInvalid = { ...(hasError ? { "aria-invalid": true } : {}) };
 
-  if ((props as any)?.required && process.env.NODE_ENV !== "production") {
-    console.warn(
-      "Aksel: Use of 'required' in form-elements is heavily discuouraged. Docs about why here:",
-    );
-    console.warn(
-      "https://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
+  if ((props as any)?.required) {
+    consoleWarning(
+      "Use of 'required' in form elements is heavily discouraged. Docs about why here:\nhttps://aksel.nav.no/god-praksis/artikler/obligatoriske-og-valgfrie-skjemafelter#dc7a536235fa",
     );
   }
 

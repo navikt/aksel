@@ -2,7 +2,7 @@
  * Fikser https://github.com/navikt/aksel/issues/1758
  */
 
-const fs = require("fs");
+const fs = require("node:fs");
 
 const basePath = "./dist/react/esm";
 

@@ -1,8 +1,7 @@
 import Fuse from "fuse.js";
-import { tokens } from "@navikt/ds-tokens/token_docs";
-import { TokenForDocumentationT } from "../types";
+import { type TokenDocT, tokens } from "@navikt/ds-tokens/token_docs";
 
-function tokenIndex(_tokens: TokenForDocumentationT[]) {
+function tokenIndex(_tokens: TokenDocT[]) {
   return new Fuse(_tokens, {
     threshold: 0.25,
     keys: [
@@ -20,7 +19,7 @@ function tokenIndex(_tokens: TokenForDocumentationT[]) {
   });
 }
 
-function searchTokens(query: string): TokenForDocumentationT[] {
+function searchTokens(query: string): TokenDocT[] {
   return query
     ? tokenIndex(tokens)
         .search(query)

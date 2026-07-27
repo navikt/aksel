@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { Switch } from "../../form/switch";
 import DragAndDrop from "../drag-and-drop/root/DragAndDropRoot";
 
 const meta: Meta<typeof DragAndDrop> = {
@@ -26,7 +27,10 @@ export const Default: Story = {
       { id: "dateReceived", label: "Date received" },
       { id: "message", label: "Message" },
       { id: "age", label: "Age" },
-      { id: "forceSensitive", label: "Force sensitive" },
+      {
+        id: "forceSensitive",
+        label: "Force sensitive",
+      },
       { id: "homeSystem", label: "Home system" },
       { id: "skills", label: "Skills" },
     ]);
@@ -35,7 +39,7 @@ export const Default: Story = {
       <DragAndDrop
         setItems={setItems}
         items={items}
-        renderItem={(item) => item.label}
+        renderItem={(item) => <Switch size="small">{item.label}</Switch>}
       />
     );
   },

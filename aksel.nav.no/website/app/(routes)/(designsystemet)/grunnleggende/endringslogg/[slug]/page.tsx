@@ -1,31 +1,39 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
-import { PortableTextBlock } from "next-sanity";
-import Image from "next/image";
+import type { PortableTextBlock } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { Metadata } from "next/types";
-import { BodyShort, Box, HGrid, HStack, Heading, Tag } from "@navikt/ds-react";
+import type { Metadata } from "next/types";
+import { Suspense } from "react";
+import { Box } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
   ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
   SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
-import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { ChangelogForList } from "@/app/_ui/changelog-page/ChangelogForList";
+import { ChangelogHeader } from "@/app/_ui/changelog-page/ChangelogHeader";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
 import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
-import styles from "../_ui/Changelog.module.css";
-import ChangelogLinkCard from "../_ui/ChangelogLinkCard";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const [{ slug }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
 
-  const { data: pageData } = await sanityFetch({
+  const { data: pageData } = await sanityFetchMetadata({
     query: ENDRINGSLOGG_METADATA_BY_SLUG_QUERY,
     params: { slug },
-    stega: false,
+    perspective,
   });
 
   return {
@@ -37,18 +45,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: pageData?.endringsdato || undefined,
       images:
         urlForOpenGraphImage(pageData?.seo?.image) ||
-        urlForOpenGraphImage(pageData?.herobilde) ||
         "/images/og/endringslogg/OG-endringslogg.png",
     },
   };
 }
 
 export async function generateStaticParams() {
-  const { data: slugs } = await sanityFetch({
+  const { data: slugs } = await sanityFetchStaticParams({
     query: SLUG_BY_TYPE_QUERY,
     params: { type: "ds_endringslogg_artikkel" },
-    stega: false,
-    perspective: "published",
   });
   return slugs.filter((slug) => slug !== null).map((slug) => ({ slug }));
 }
@@ -57,15 +62,48 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function (props: Props) {
-  const { slug } = await props.params;
+export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
+  const { slug } = await params;
+  return <CachedPage slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <CachedPage slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function CachedPage({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const { data: logs } = await sanityFetch({
     query: ENDRINGSLOGG_WITH_NEIGHBORS_QUERY,
     params: { slug },
+    perspective,
+    stega,
   });
 
   if (!logs?.primary) {
+    notFound();
+  }
+
+  if (!logs.primary.heading || !logs.primary.endringsdato) {
     notFound();
   }
 
@@ -79,44 +117,21 @@ export default async function (props: Props) {
     }
   });
 
-  const { fremhevet, endringstype, heading, endringsdato, herobilde, content } =
-    logs.primary;
+  const { endringstype, heading, endringsdato, content } = logs.primary;
+
+  const changelogFor =
+    logs.artikler?.filter((article) => !!article.slug && !!article.heading) ??
+    [];
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <div>
-        <BodyShort
-          size="medium"
-          textColor="subtle"
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-        >
-          {capitalizeText(endringstype || "")}
-        </BodyShort>
-        <Heading
-          size="xlarge"
-          level="1"
-          spacing
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-        >
-          {heading}
-        </Heading>
-        <HStack gap="space-16" marginBlock="space-0 space-28">
-          <BodyShort
-            size="small"
-            textColor="subtle"
-            data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
-          >
-            {format(new Date(endringsdato || ""), "d. MMMM yyy", {
-              locale: nb,
-            })}
-          </BodyShort>
-          {fremhevet && (
-            <Tag size="xsmall" variant="strong" data-color="aksel-brand-pink">
-              Fremhevet
-            </Tag>
-          )}
-        </HStack>
-      </div>
+      <ChangelogHeader
+        heading={heading}
+        endringsdato={endringsdato}
+        type={capitalizeText(endringstype || "")}
+      >
+        <ChangelogForList changelogFor={changelogFor} />
+      </ChangelogHeader>
       <TableOfContents
         feedback={{
           name: "Endringslogg",
@@ -124,35 +139,12 @@ export default async function (props: Props) {
         }}
         toc={toc || []}
       />
-      <Box marginBlock="space-0 space-24">
-        {fremhevet && herobilde?.asset && (
-          <Image
-            className={styles.herobilde}
-            alt={herobilde.alt ? herobilde.alt : ""}
-            loading="lazy"
-            decoding="async"
-            src={urlForImage(herobilde)?.auto("format").url() || ""}
-            width={1200}
-            height={630}
-          />
-        )}
+      <Box marginBlock="space-48">
         <CustomPortableText
           value={content as PortableTextBlock[]}
-          data-color={fremhevet ? "aksel-brand-pink" : "brand-blue"}
+          data-color="brand-blue"
         />
       </Box>
-      <HGrid
-        marginBlock="space-28 space-0"
-        gap="space-48 space-24"
-        columns={{ xs: 1, md: 2 }}
-      >
-        {logs.previous && (
-          <ChangelogLinkCard logEntry={logs.previous} label="Forrige endring" />
-        )}
-        {logs.next && (
-          <ChangelogLinkCard logEntry={logs.next} label="Neste endring" />
-        )}
-      </HGrid>
     </DesignsystemetPageLayout>
   );
 }

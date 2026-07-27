@@ -3,7 +3,7 @@ import { BodyShort } from "../../typography";
 import { omit, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { RadioInput } from "./radio-input/RadioInput";
-import { RadioProps } from "./types";
+import type { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
@@ -24,7 +24,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       >
         <RadioInput
           ref={forwardedRef}
-          {...omit(props, ["children", "size", "description", "readOnly"])}
+          {...omit(props, [
+            "children",
+            "size",
+            "description",
+            "readOnly",
+            "className",
+          ])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
           aria-describedby={
             cl(inputProps["aria-describedby"], {

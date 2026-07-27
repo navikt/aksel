@@ -1,30 +1,52 @@
 import type { RadioInputProps } from "../../../../form/radio/radio-input/RadioInput";
+import { consoleWarning } from "../../../../utils/helpers/consoleWarning";
+import type { TableRowEntryId } from "../../root/DataGridTable.types";
+import type { SelectionProps } from "./selection.types";
+import { canSelectTableRow } from "./selection.utils";
 
-type GetSingleSelectPropsArgs = {
-  selectedKeysSet: Set<string | number>;
-  setSelectedKeys: (keys: (string | number)[]) => void;
-  disabledKeysSet: Set<string | number>;
+type GetSingleSelectPropsArgs<T> = {
+  selectedKeysSet: Set<TableRowEntryId>;
+  setSelectedKeys: (keys: string[]) => void;
   name: string;
-};
+} & Pick<SelectionProps<T>, "enableRowSelection">;
 
-function getSingleSelectProps({
+function getSingleSelectProps<T>({
   selectedKeysSet,
   setSelectedKeys,
-  disabledKeysSet,
   name,
-}: GetSingleSelectPropsArgs) {
-  const handleSelectionChange = (key: string | number) => {
+  enableRowSelection,
+}: GetSingleSelectPropsArgs<T>) {
+  const handleSelectionChange = (key: TableRowEntryId, row: T) => {
+    if (!row) {
+      consoleWarning(
+        `DataGrid.Table: Row data is undefined for key ${key}. This may cause issues with selection if enableRowSelection is used.`,
+      );
+    }
+    if (!canSelectTableRow(enableRowSelection, { row, id: key })) {
+      return;
+    }
+
     setSelectedKeys([key]);
   };
 
   return {
-    getRowRadioProps: (key: string | number): RadioInputProps => ({
-      checked: selectedKeysSet.has(key),
-      onChange: () => handleSelectionChange(key),
-      disabled: disabledKeysSet.has(key),
-      value: key,
-      name,
-    }),
+    getRowRadioProps: (key: TableRowEntryId, row: T): RadioInputProps => {
+      const isSelectionDisabled = !canSelectTableRow(enableRowSelection, {
+        row,
+        id: key,
+      });
+
+      return {
+        checked: selectedKeysSet.has(key),
+        onChange: isSelectionDisabled
+          ? () => null
+          : () => handleSelectionChange(key, row),
+        disabled: isSelectionDisabled,
+        value: key,
+        name,
+      };
+    },
+    toggleSelection: handleSelectionChange,
   };
 }
 

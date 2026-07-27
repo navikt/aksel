@@ -1,4 +1,4 @@
-import { AkselColorRole } from "@navikt/ds-tokens/types";
+import type { AkselColorRole } from "@navikt/ds-tokens/types";
 
 export type RoleT<T> = {
   id: T;
@@ -87,7 +87,7 @@ const COLOR_ROLES: ColorRoleT[] = [
     id: "info",
     title: "Info",
     description:
-      "Info brukes på elementer som har informerer eller gir opplysning.",
+      "Info brukes på elementer som informerer eller gir opplysning.",
   },
   {
     id: "brand-magenta",

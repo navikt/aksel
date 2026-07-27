@@ -1,5 +1,6 @@
 import React from "react";
 import { cl } from "../../../helpers";
+import { useListboxContext } from "../root/Listbox.context";
 
 export interface ListboxOptionProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -9,49 +10,46 @@ export interface ListboxOptionProps extends Omit<
    * Unique ID used for tracking which option has virtual focus.
    */
   id: string;
-  hasVirtualFocus: boolean;
-  children: React.ReactNode;
   /**
-   * Callback when option is selected.
-   * To improve performance when you have many options,
-   * memoize the prop with e.g. useEventCallback.
+   * Whether the option currently has virtual focus. Based on the value from
+   * `setVirtuallyFocusedOptionId`, usually `virtuallyFocusedOptionId === id`.
+   */
+  hasVirtualFocus: boolean;
+  /**
+   * Triggered when option is selected.
    */
   onClick: React.MouseEventHandler<HTMLDivElement>;
+  /**
+   * TODO: There might be cases where we don't want to set this,
+   * but then we should probably use a different role.
+   */
+  "aria-selected": boolean;
+  children: React.ReactNode;
 }
 
-function ListboxOptionComponent({
+function ListboxOption({
   id,
   hasVirtualFocus,
+  "aria-selected": ariaSelected,
   children,
   className,
   ...rest
 }: ListboxOptionProps) {
-  //console.log("Rendering option", id);
-
-  // TODO: Slot?
-
+  const { activeId } = useListboxContext();
   return (
     <div
-      aria-selected={false}
       {...rest}
       className={cl("aksel-listbox__option", className)}
       role="option"
+      aria-selected={ariaSelected} // Added explicitly to satisfy eslint rule
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
-      id={hasVirtualFocus ? "aksel-listbox__option-active" : undefined}
+      id={hasVirtualFocus ? activeId : undefined}
     >
       {children}
     </div>
   );
 }
 
-/**
- * This component is memoized. To improve performance when you have many options,
- * make sure all object props have stable references (i.e. memoize the event handlers with e.g. useEventCallback).
- *
- * NB: Remember to set `aria-selected` on selected options!
- */
-export const ListboxOption = React.memo(
-  ListboxOptionComponent,
-) as typeof ListboxOptionComponent;
+export { ListboxOption };

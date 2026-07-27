@@ -23,9 +23,19 @@ const NonClickablePeriod = ({
 }: TimelineNonClickablePeriodProps) => {
   const translate = useI18n("Timeline");
 
+  if (width === 0 || !Number.isFinite(width)) {
+    return null;
+  }
+
+  if (!Number.isFinite(left)) {
+    return null;
+  }
+
   return (
     <div
+      data-timeline-period
       ref={periodRef}
+      tabIndex={-1}
       {...restProps}
       data-color={restProps?.["data-color"] ?? status}
       className={cl(
@@ -33,8 +43,8 @@ const NonClickablePeriod = ({
         restProps?.className,
       )}
       style={{
-        width: `${width}%`,
-        [direction]: `${left}%`,
+        width: `${width.toFixed(3)}%`,
+        [direction]: `${left.toFixed(3)}%`,
       }}
     >
       <span className="aksel-timeline__period--inner">

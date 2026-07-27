@@ -56,17 +56,17 @@ export default function transformer(file: FileInfo, api: API) {
         findProps({ j, path, name: prop }).forEach((attr) => {
           const attrValue = attr.value.value;
 
-          if (attrValue.type === "StringLiteral") {
+          if (attrValue?.type === "StringLiteral") {
             /* padding="32" */
             attrValue.value = convertSpacingToSpace(attrValue.value);
           } else if (
-            attrValue.type === "JSXExpressionContainer" &&
+            attrValue?.type === "JSXExpressionContainer" &&
             attrValue.expression.type === "StringLiteral"
           ) {
             attrValue.expression.value = convertSpacingToSpace(
               attrValue.expression.value,
             );
-          } else if (attrValue.type === "JSXExpressionContainer") {
+          } else if (attrValue?.type === "JSXExpressionContainer") {
             /* padding={{xs: "16", sm: "32"}} */
             const expression = attrValue.expression;
             if (expression.type === "ObjectExpression") {

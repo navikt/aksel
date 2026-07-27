@@ -1,6 +1,6 @@
-import { Locale, format } from "date-fns";
+import { type Locale, format } from "date-fns";
 import React, { useEffect, useRef } from "react";
-import { CalendarDay, Modifiers } from "react-day-picker";
+import type { CalendarDay, Modifiers } from "react-day-picker";
 import { cl } from "../../../utils/helpers";
 
 const DatePickerDayButton = ({
@@ -43,12 +43,13 @@ const DatePickerDayButton = ({
         "rdp-day_range_start": modifiers.range_start,
         "rdp-day_range_middle": modifiers.range_middle,
         "rdp-day_range_end": modifiers.range_end,
+        "rdp-day__range-hover-middle": modifiers.hoverRange,
         "rdp-day_today": modifiers.today,
         "rdp-day_outside": modifiers.outside,
         "rdp-day__weekend": modifiers.weekend,
       })}
     >
-      {children}
+      <div className="rdp-day__inner">{children}</div>
     </button>
   );
 };

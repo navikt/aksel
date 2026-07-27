@@ -122,8 +122,19 @@
   margin-block-start: var(--ax-space-16);
   padding-block-start: var(--ax-space-16);
   padding-inline: var(--ax-space-8);
-  border-top: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-8);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: var(--ax-border-neutral-subtleA);
+    width: 90%;
+    height: 1px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

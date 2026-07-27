@@ -2,6 +2,7 @@
 
 import { stegaClean } from "next-sanity";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Events } from "@navikt/analytics-types";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./ChipsNavigation.module.css";
 
@@ -38,10 +39,10 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
       params.set(type, title);
     }
 
-    umamiTrack("god-praksis-chip", {
-      kilde: "sidebar",
-      type: props.type,
-      url: pathname ?? undefined,
+    umamiTrack(Events.FILTERVALG, {
+      kategori: props.type,
+      filternavn: title,
+      seksjon: "god praksis",
     });
 
     push(getHref(), { scroll: false });
@@ -49,6 +50,7 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
 
   return (
     <button
+      type="button"
       className={styles.chipsButton}
       disabled={count === 0 && !isActive}
       data-active={isActive}

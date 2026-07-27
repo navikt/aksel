@@ -1,16 +1,19 @@
 {
   "extends": "../../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./cjs",
+    "ignoreDeprecations": "6.0",
+    "rootDir": "./src",
+    "lib": ["es2020", "dom", "dom.iterable"],
     "moduleResolution": "node",
-    "module": "commonjs",
     "noImplicitAny": false,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["@types/node"]
   },
   "include": ["./src"],
   "exclude": [
     "./src/**/*.test.ts",
+    "./src/**/*.bench.ts",
     "./src/**/*.test.tsx",
     "./src/**/*.test-d.ts",
     "./src/**/*.stories.tsx",

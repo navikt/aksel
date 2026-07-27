@@ -4,7 +4,7 @@ import { usePrevious } from "../../../utils/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
 import { useComboboxCustomOptions } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps } from "../types";
+import type { ComboboxOption, ComboboxProps } from "../types";
 
 type SelectedOptionsContextValue = {
   addSelectedOption: (option: ComboboxOption) => void;

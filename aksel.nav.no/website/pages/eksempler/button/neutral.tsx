@@ -25,7 +25,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "For handlinger som ikke trenger så mye oppmerksomhet, kan du bruke en 'nøytral' knapp.",
 };

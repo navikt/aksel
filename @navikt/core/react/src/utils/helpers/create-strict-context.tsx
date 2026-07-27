@@ -45,6 +45,7 @@ function createStrictContext<T>(options: {
   Provider: React.FC<ProviderProps<T>>;
   useContext: <S extends boolean = true>(
     strict?: S,
+    errorMessageOverride?: string,
   ) => S extends true ? T : T | undefined;
 };
 
@@ -65,18 +66,20 @@ function createStrictContext<T>(options: {
 
   function Provider({ children, ...context }: ProviderProps<T>) {
     // biome-ignore lint/correctness/useExhaustiveDependencies: Object.values(context) includes all dependencies.
-    const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps, react-hooks/use-memo
+    const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
   }
 
   Provider.displayName = `${name}Provider`;
 
-  function useContext(strict = true) {
+  function useContext(strict = true, errorMessageOverride?: string) {
     const context = useReactContext(Context);
 
     if (!hasDefault && !context && strict) {
-      const error = new Error(errorMessage ?? getErrorMessage(name));
+      const error = new Error(
+        errorMessageOverride ?? errorMessage ?? getErrorMessage(name),
+      );
       error.name = "ContextError";
       Error.captureStackTrace?.(error, useContext);
       throw error;

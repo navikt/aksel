@@ -26,8 +26,7 @@
 
 .websiteTableTh {
   background-color: var(--ax-bg-neutral-moderate);
-  padding: var(--ax-space-8);
-  font-size: var(--ax-font-size-medium);
+  padding: var(--ax-space-8) var(--ax-space-12);
 
   &:first-of-type {
     border-top-left-radius: var(--ax-radius-8);
@@ -41,7 +40,6 @@
 .websiteTableTr {
   border-top: 1px solid var(--ax-border-neutral-subtle);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
-  font-size: var(--ax-font-size-medium);
 
   &:last-of-type {
     border-radius: 0 0 var(--ax-radius-8) var(--ax-radius-8);
@@ -50,6 +48,5 @@
 
 .websiteTableTd {
   border-top: 1px solid var(--ax-border-neutral-subtle);
-  padding-inline: var(--ax-space-8);
-  padding-block: var(--ax-space-4);
+  padding: var(--ax-space-12);
 }

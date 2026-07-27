@@ -1,36 +1,98 @@
-import { withThemeByClassName } from "@storybook/addon-themes";
-import { Preview } from "@storybook/react-vite";
-import React, { useEffect } from "react";
-import "../@navikt/core/css/src/data-table.css";
+import addonPerformancePanel from "@github-ui/storybook-addon-performance-panel";
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
+import addonThemes, { withThemeByClassName } from "@storybook/addon-themes";
+import addonVitest from "@storybook/addon-vitest";
+import { definePreview } from "@storybook/react-vite";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "../@navikt/core/css/src/data-token-filter.css";
+import dataTokenFilterStyles from "../@navikt/core/css/src/data-token-filter.css?inline";
 import "../@navikt/core/css/src/data-toolbar.css";
+import dataToolbarStyles from "../@navikt/core/css/src/data-toolbar.css?inline";
 import "../@navikt/core/css/src/index.css";
+import dsStyles from "../@navikt/core/css/src/index.css?inline";
 import "../@navikt/core/css/src/listbox.css";
+import listboxStyles from "../@navikt/core/css/src/listbox.css?inline";
 import { Provider } from "../@navikt/core/react/src/provider";
-import { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
+import type { Translations } from "../@navikt/core/react/src/utils/i18n/i18n.types";
 import { en, nb, nn } from "../@navikt/core/react/src/utils/i18n/locales";
 import "./layout.css";
 
 type Language = "nb" | "nn" | "en";
+type WebComponentMode = "off" | "open" | "closed";
+
 const locales: Record<Language, Translations> = {
   nb,
   nn,
   en,
 };
 
-const LanguageDecorator = ({
+const StoryProviderDecorator = ({
   children,
   lang,
+  rootElement,
 }: {
   children: React.ReactNode;
   lang: Language | undefined;
+  rootElement?: HTMLElement;
 }) => {
   useEffect(() => {
     document.documentElement.lang = lang || "nb";
   }, [lang]);
 
   return (
-    <Provider locale={lang ? locales[lang] : undefined}>{children}</Provider>
+    <Provider
+      rootElement={rootElement}
+      locale={lang ? locales[lang] : undefined}
+    >
+      {children}
+    </Provider>
+  );
+};
+
+const webComponentStyles = [
+  dataTokenFilterStyles,
+  dataToolbarStyles,
+  dsStyles,
+  listboxStyles,
+].join("\n");
+
+const WebComponentDecorator = ({
+  children,
+  mode,
+}: {
+  children: (rootElement: HTMLDivElement) => React.ReactNode;
+  mode: Exclude<WebComponentMode, "off">;
+}) => {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const host = hostRef.current;
+    if (!host) {
+      return;
+    }
+
+    const shadowRoot = host.attachShadow({ mode });
+    const style = document.createElement("style");
+    style.textContent = webComponentStyles;
+    shadowRoot.appendChild(style);
+
+    const mount = document.createElement("div");
+    shadowRoot.appendChild(mount);
+    setRootElement(mount);
+
+    return () => {
+      setRootElement(null);
+    };
+  }, [mode]);
+
+  return (
+    <>
+      <div ref={hostRef} key={mode} />
+      {rootElement ? createPortal(children(rootElement), rootElement) : null}
+    </>
   );
 };
 
@@ -55,7 +117,17 @@ const TypoDecorator = ({
   return <>{children}</>;
 };
 
-export default {
+const addons = [addonA11y(), addonThemes(), addonDocs(), addonVitest()];
+
+/**
+ * Fixes flaky interaction tests
+ */
+if (process.env.NODE_ENV === "development") {
+  addons.push(addonPerformancePanel());
+}
+
+export default definePreview({
+  addons,
   parameters: {
     options: {
       storySort: {
@@ -106,11 +178,23 @@ export default {
         dynamicTitle: true,
       },
     },
+    webComponentWrapper: {
+      toolbar: {
+        icon: "component",
+        items: [
+          { value: "off", title: "DOM: Default" },
+          { value: "open", title: "Web component: Open shadow root" },
+          { value: "closed", title: "Web component: Closed shadow root" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
 
   initialGlobals: {
     mode: "default",
     font: "Source Sans 3",
+    webComponentWrapper: "off",
   },
 
   decorators: [
@@ -119,11 +203,23 @@ export default {
         <StoryFn />
       </TypoDecorator>
     ),
-    (StoryFn, context) => (
-      <LanguageDecorator lang={context.globals.language}>
-        <StoryFn />
-      </LanguageDecorator>
-    ),
+    (StoryFn, context) =>
+      context.globals.webComponentWrapper === "off" ? (
+        <StoryProviderDecorator lang={context.globals.language}>
+          <StoryFn />
+        </StoryProviderDecorator>
+      ) : (
+        <WebComponentDecorator mode={context.globals.webComponentWrapper}>
+          {(rootElement) => (
+            <StoryProviderDecorator
+              lang={context.globals.language}
+              rootElement={rootElement}
+            >
+              <StoryFn />
+            </StoryProviderDecorator>
+          )}
+        </WebComponentDecorator>
+      ),
     withThemeByClassName({
       themes: {
         light: "light",
@@ -132,4 +228,4 @@ export default {
       defaultTheme: "light",
     }),
   ],
-} satisfies Preview;
+});

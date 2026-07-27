@@ -21,6 +21,7 @@ function CompareImagesHandle() {
       aria-valuetext={`${position}%`}
       data-rcs="handle-container"
       role="slider"
+      type="button"
     >
       <span className={styles.compareImagesHandleLine} />
       <span className={styles.compareImagesHandleNotch}>

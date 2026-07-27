@@ -6,7 +6,7 @@ import {
   PiggybankIcon,
   VirusIcon,
 } from "@navikt/aksel-icons";
-import { Box, Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { Box, Timeline, type TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -29,9 +29,9 @@ const Example = () => {
           <p style={{ color: "red" }}>Dager igjen: 1</p>
         </Timeline.Pin>
         <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
-          {person.map((p, i) => (
+          {person.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -41,9 +41,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -53,9 +53,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus B" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={`${p.start.toISOString()}-${p.end.toISOString()}`}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -139,6 +139,6 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
 };

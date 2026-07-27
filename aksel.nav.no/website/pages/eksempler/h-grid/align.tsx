@@ -45,7 +45,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
-  desc: "Endrer 'align-items' (vertikal justering).",
+  desc: "Propen `align` endrer `align-items` (vertikal justering).",
 };

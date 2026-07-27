@@ -24,7 +24,9 @@ export const StyledFloatingElement = () => {
             sideOffset={5}
             arrow={{ height: 10, width: 10, className: "arrow" }}
           >
-            <button onClick={() => setOpen(false)}>close</button>
+            <button type="button" onClick={() => setOpen(false)}>
+              close
+            </button>
           </Floating.Content>
         )}
       </Floating>
@@ -48,7 +50,9 @@ export const WithPortal = () => {
               sideOffset={5}
               arrow={{ height: 10, width: 10, className: "arrow" }}
             >
-              <button onClick={() => setOpen(false)}>close</button>
+              <button type="button" onClick={() => setOpen(false)}>
+                close
+              </button>
             </Floating.Content>
           </Portal>
         )}
@@ -84,7 +88,9 @@ export const WithUpdatePositionStrategyAlways = () => {
             updatePositionStrategy="always"
             arrow={{ height: 20, width: 10, className: "arrow" }}
           >
-            <button onClick={() => setOpen(false)}>close</button>
+            <button type="button" onClick={() => setOpen(false)}>
+              close
+            </button>
           </Floating.Content>
         )}
       </Floating>
@@ -287,37 +293,22 @@ export const PropsCheck = () => {
             }}
           >
             <div style={{ height: 2000 }}>
-              {Array.from({ length: 10 }, (_, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 150,
-                    paddingBottom: 100,
-                  }}
-                >
-                  <Floating>
-                    <Floating.Anchor className="anchor-small">
-                      9.{i + 1}
-                    </Floating.Anchor>
-                    <Floating.Content
-                      className="content-small"
-                      sideOffset={5}
-                      hideWhenDetached
-                      collisionBoundary={scrollContainer1}
-                      arrow={{ height: 5, width: 10, className: "arrow" }}
-                    >
-                      9.{i + 1}
-                    </Floating.Content>
-                  </Floating>
-
-                  <Floating>
-                    <Floating.Anchor className="anchor-small">
-                      10.{i + 1}
-                    </Floating.Anchor>
-                    <Portal>
+              {Array.from({ length: 10 }, (_, rowNumber) => rowNumber + 1).map(
+                (rowNumber) => (
+                  <div
+                    key={`scroll-container-1-${rowNumber}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 150,
+                      paddingBottom: 100,
+                    }}
+                  >
+                    <Floating>
+                      <Floating.Anchor className="anchor-small">
+                        9.{rowNumber}
+                      </Floating.Anchor>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
@@ -325,12 +316,29 @@ export const PropsCheck = () => {
                         collisionBoundary={scrollContainer1}
                         arrow={{ height: 5, width: 10, className: "arrow" }}
                       >
-                        10.{i + 1} (portalled)
+                        9.{rowNumber}
                       </Floating.Content>
-                    </Portal>
-                  </Floating>
-                </div>
-              ))}
+                    </Floating>
+
+                    <Floating>
+                      <Floating.Anchor className="anchor-small">
+                        10.{rowNumber}
+                      </Floating.Anchor>
+                      <Portal>
+                        <Floating.Content
+                          className="content-small"
+                          sideOffset={5}
+                          hideWhenDetached
+                          collisionBoundary={scrollContainer1}
+                          arrow={{ height: 5, width: 10, className: "arrow" }}
+                        >
+                          10.{rowNumber} (portalled)
+                        </Floating.Content>
+                      </Portal>
+                    </Floating>
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -347,39 +355,24 @@ export const PropsCheck = () => {
             }}
           >
             <div style={{ height: 2000 }}>
-              {Array.from({ length: 10 }, (_, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 150,
-                    paddingBottom: 100,
-                    position: "sticky",
-                    top: 0,
-                  }}
-                >
-                  <Floating>
-                    <Floating.Anchor className="anchor-small">
-                      9.{i + 1}
-                    </Floating.Anchor>
-                    <Floating.Content
-                      className="content-small"
-                      sideOffset={5}
-                      hideWhenDetached
-                      collisionBoundary={scrollContainer2}
-                      arrow={{ height: 5, width: 10, className: "arrow" }}
-                    >
-                      9.{i + 1}
-                    </Floating.Content>
-                  </Floating>
-
-                  <Floating>
-                    <Floating.Anchor className="anchor-small">
-                      10.{i + 1}
-                    </Floating.Anchor>
-                    <Portal>
+              {Array.from({ length: 10 }, (_, rowNumber) => rowNumber + 1).map(
+                (rowNumber) => (
+                  <div
+                    key={`scroll-container-2-${rowNumber}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 150,
+                      paddingBottom: 100,
+                      position: "sticky",
+                      top: 0,
+                    }}
+                  >
+                    <Floating>
+                      <Floating.Anchor className="anchor-small">
+                        9.{rowNumber}
+                      </Floating.Anchor>
                       <Floating.Content
                         className="content-small"
                         sideOffset={5}
@@ -387,12 +380,29 @@ export const PropsCheck = () => {
                         collisionBoundary={scrollContainer2}
                         arrow={{ height: 5, width: 10, className: "arrow" }}
                       >
-                        10.{i + 1} (portalled)
+                        9.{rowNumber}
                       </Floating.Content>
-                    </Portal>
-                  </Floating>
-                </div>
-              ))}
+                    </Floating>
+
+                    <Floating>
+                      <Floating.Anchor className="anchor-small">
+                        10.{rowNumber}
+                      </Floating.Anchor>
+                      <Portal>
+                        <Floating.Content
+                          className="content-small"
+                          sideOffset={5}
+                          hideWhenDetached
+                          collisionBoundary={scrollContainer2}
+                          arrow={{ height: 5, width: 10, className: "arrow" }}
+                        >
+                          10.{rowNumber} (portalled)
+                        </Floating.Content>
+                      </Portal>
+                    </Floating>
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </div>

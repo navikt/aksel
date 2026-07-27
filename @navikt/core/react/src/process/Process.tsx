@@ -8,6 +8,7 @@ import React, {
 import { BodyLong, BodyShort, Heading } from "../typography";
 import { useId } from "../utils-external";
 import { cl, createStrictContext } from "../utils/helpers";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../utils/hooks";
 import { useI18n } from "../utils/i18n/i18n.hooks";
 
@@ -126,12 +127,10 @@ export const Process: ProcessComponent = forwardRef<
       }
 
       if (activeChildren.length > 1) {
-        if (process.env.NODE_ENV !== "production") {
-          console.warn(
-            "Aksel: Found multiple `<Process.Event />` elements with `status='active'`. Only one event should be active at a time.",
-            rootRef.current,
-          );
-        }
+        consoleWarning(
+          "Found multiple <Process.Event /> elements with `status='active'`. Only one event should be active at a time.",
+          rootRef.current,
+        );
         setActiveChildId(undefined);
         return;
       }
@@ -147,7 +146,6 @@ export const Process: ProcessComponent = forwardRef<
     return (
       // `<ol />` elements with `list-style: none;` tends to be ignored by voiceover on Safari.
       // To resolve this, we add `role="list"` to the `<ol />` element.
-      // eslint-disable-next-line jsx-a11y/no-redundant-roles
       <ol
         ref={mergedRef}
         data-color="info"

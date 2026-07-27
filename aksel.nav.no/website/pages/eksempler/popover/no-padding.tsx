@@ -38,7 +38,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "`Popover.Content` legger bare på litt padding, så den kan utelates.",
 };

@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Command } from "commander";
+import type { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "node:path";
@@ -80,6 +80,11 @@ export async function runCodeshift(
 
     warning && console.info(`\n${chalk.yellow(warning)}\n`);
   } catch (error) {
-    program.error(chalk.red("Error:", error.message));
+    program.error(
+      chalk.red(
+        "Error:",
+        error instanceof Error ? error.message : String(error),
+      ),
+    );
   }
 }

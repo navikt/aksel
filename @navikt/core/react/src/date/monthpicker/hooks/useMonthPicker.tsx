@@ -2,10 +2,10 @@ import React, { useCallback, useMemo, useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
 import { focusElement } from "../../../utils/helpers/focus";
 import { useDateLocale } from "../../../utils/i18n/i18n.hooks";
-import { DateInputProps } from "../../Date.Input";
+import type { DateInputProps } from "../../Date.Input";
 import { getLocaleFromString } from "../../Date.locale";
 import { formatDateForInput, isValidDate, parseDate } from "../../date-utils";
-import { MonthPickerProps } from "../MonthPicker.types";
+import type { MonthPickerProps } from "../MonthPicker.types";
 
 export interface UseMonthPickerOptions extends Pick<
   MonthPickerProps,

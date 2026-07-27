@@ -1,0 +1,9 @@
+.description-list--with-divider > dt:not(:first-child)::after,
+.description-list--with-divider > div:not(:first-child) dt::after {
+  content: "";
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-top: -4px;
+}

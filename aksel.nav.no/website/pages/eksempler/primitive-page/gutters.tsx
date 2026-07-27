@@ -39,6 +39,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */
@@ -46,7 +47,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   title: "Gutters",
   desc: "Propen `gutters` på Page.Block setter responsive gutters (padding-inline).",

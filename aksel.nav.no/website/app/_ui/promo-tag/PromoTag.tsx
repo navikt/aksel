@@ -10,6 +10,7 @@ type PromoTagProps = {
 };
 
 async function PromoTag({ animated = false }: PromoTagProps) {
+  "use cache";
   const { data: promoData } = await sanityFetch({
     query: DS_PROMO_QUERY,
   });

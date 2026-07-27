@@ -1,3 +1,5 @@
+import type { FileInfo } from "jscodeshift";
+
 const cssConversions = {
   ".navdsi-dropdown": ".navds-dropdown",
   ".navdsi-header": ".navds-internalheader",
@@ -8,11 +10,8 @@ const cssConversions = {
   "--ac-header-hover-bg": "--ac-internalheader-hover-bg",
   "--ac-header-active-bg": "--ac-internalheader-active-bg",
 };
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file) {
+
+export default function transformer(file: FileInfo) {
   let src = file.source;
 
   Object.entries(cssConversions).forEach(([key, value]) => {

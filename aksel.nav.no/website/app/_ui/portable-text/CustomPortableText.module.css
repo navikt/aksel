@@ -12,6 +12,10 @@
     &:first-child {
       margin-top: 0;
     }
+
+    &[data-outside-block] {
+      margin-block-start: var(--ax-space-48);
+    }
   }
 
   &[data-level="3"] {

@@ -1,7 +1,7 @@
+import type { AllArticleDocumentsT } from "aksel-sanity-studio/schema";
 import { stegaClean } from "next-sanity";
-import { AkselColor } from "@navikt/ds-react/types/theme";
-import { Komponent_artikkel } from "@/app/_sanity/query-types";
-import { AllArticleDocumentsT } from "@/sanity/config";
+import type { AkselColor } from "@navikt/ds-react/types/theme";
+import type { Komponent_artikkel } from "@/app/_sanity/query-types";
 
 const doctypeToColorRole: Record<AllArticleDocumentsT, AkselColor> = {
   ds_artikkel: "brand-blue",
@@ -20,6 +20,7 @@ const statusToColorRole: Record<NonNullable<StatusTagT>, AkselColor> = {
   deprecated: "neutral",
   new: "success",
   ready: "info",
+  preview: "meta-purple",
 } as const;
 
 const statusToText: Record<NonNullable<StatusTagT>, string> = {
@@ -27,6 +28,7 @@ const statusToText: Record<NonNullable<StatusTagT>, string> = {
   deprecated: "Avviklet",
   new: "Ny",
   ready: "Stabil",
+  preview: "Preview",
 } as const;
 
 /**

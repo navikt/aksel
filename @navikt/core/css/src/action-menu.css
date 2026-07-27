@@ -1,5 +1,19 @@
 /* --------------------------- ActionMenu content --------------------------- */
 .aksel-action-menu__content {
+  --__axc-action-menu-content-p-block: var(--ax-space-6);
+  --__axc-action-menu-content-p-inline: var(--ax-space-8);
+  --__axc-action-menu-item-height: 2rem;
+  --__axc-action-menu-item-font-size: var(--ax-font-size-medium);
+  --__axc-action-menu-content-group-label-pt: var(--ax-space-2);
+
+  &[data-size="medium"] {
+    --__axc-action-menu-content-p-block: var(--ax-space-8);
+    --__axc-action-menu-content-p-inline: var(--ax-space-12);
+    --__axc-action-menu-item-height: var(--ax-space-40);
+    --__axc-action-menu-item-font-size: var(--ax-font-size-large);
+    --__axc-action-menu-content-group-label-pt: var(--ax-space-4);
+  }
+
   overflow: hidden;
   border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-neutral-subtleA);
@@ -19,10 +33,8 @@
 }
 
 .aksel-action-menu__content > .aksel-action-menu__content-inner {
-  --__axc-action-menu-content-p: var(--ax-space-8);
   --__axc-action-menu-item-pr: var(--ax-space-8);
   --__axc-action-menu-item-pl: var(--ax-space-8);
-  --__axc-action-menu-item-height: 2rem;
 
   border-radius: var(--ax-radius-12);
   background-color: var(--ax-bg-raised);
@@ -30,7 +42,8 @@
   max-width: min(95vw, 640px);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  padding: var(--__axc-action-menu-content-p);
+  padding-block: var(--__axc-action-menu-content-p-block);
+  padding-inline: var(--__axc-action-menu-content-p-inline);
   overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: var(--__axc-action-menu-content-available-height);
@@ -47,8 +60,8 @@
   position: relative;
   padding-left: var(--__axc-action-menu-item-pl);
   padding-right: var(--__axc-action-menu-item-pr);
-  font-size: var(--ax-font-size-medium);
-  scroll-margin-block: var(--__axc-action-menu-content-p);
+  font-size: var(--__axc-action-menu-item-font-size);
+  scroll-margin-block: var(--__axc-action-menu-content-p-block);
   line-height: 1.5;
   color: var(--ax-text-neutral);
   text-decoration: none;
@@ -68,8 +81,14 @@
     pointer-events: none;
   }
 
+  /* Indent items with left marker or if data-indent is set to true */
+  &[data-indent="true"],
   &[data-marker="left"] {
-    --__axc-action-menu-item-pl: var(--ax-space-24);
+    --__axc-action-menu-item-pl: var(--ax-space-28); /* 28px */
+
+    .aksel-action-menu__content[data-size="medium"] & {
+      --__axc-action-menu-item-pl: var(--ax-space-32); /* 32px */
+    }
   }
 }
 
@@ -152,19 +171,23 @@
 .aksel-action-menu__label {
   display: flex;
   align-items: center;
-  min-height: calc(var(--__axc-action-menu-item-height) - 6px);
+  min-height: var(--__axc-action-menu-item-height);
   padding-right: var(--__axc-action-menu-item-pr);
   padding-left: var(--__axc-action-menu-item-pl);
-  color: var(--ax-text-neutral-subtle);
   border-radius: var(--ax-radius-4);
   user-select: none;
   cursor: default;
-  font-size: var(--ax-font-size-small);
+  font-size: var(--ax-font-size-medium);
+  font-weight: var(--ax-font-weight-bold);
+}
+
+.aksel-action-menu__group:not(:first-child) .aksel-action-menu__label {
+  padding-top: var(--__axc-action-menu-content-group-label-pt);
 }
 
 .aksel-action-menu__divider {
   height: 1px;
-  margin-block: var(--ax-space-8);
+  margin-block: var(--ax-space-4);
   background-color: var(--ax-border-neutral-subtleA);
 }
 

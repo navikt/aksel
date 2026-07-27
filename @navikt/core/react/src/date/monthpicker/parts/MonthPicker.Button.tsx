@@ -111,14 +111,16 @@ export const MonthButton = ({
         setTabRoot(focus);
       }}
     >
-      <span aria-hidden="true">
-        {format(new Date(month), "LLL", { locale })
-          .replace(".", "")
-          .substring(0, 3)}
-      </span>
-      <span className="aksel-sr-only">
-        {format(new Date(month), "LLLL", { locale })}
-      </span>
+      <div className="rdp-day__inner">
+        <span aria-hidden="true">
+          {format(new Date(month), "LLL", { locale })
+            .replace(".", "")
+            .substring(0, 3)}
+        </span>
+        <span className="aksel-sr-only">
+          {format(new Date(month), "LLLL", { locale })}
+        </span>
+      </div>
     </button>
   );
 };

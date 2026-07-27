@@ -1,7 +1,7 @@
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 import TokenEntry from "./token/example/TokenEntry";
-import { TokenForDocumentationT } from "./types";
 
-const TokensList = ({ tokens }: { tokens: TokenForDocumentationT[] }) => {
+const TokensList = ({ tokens }: { tokens: TokenDocT[] }) => {
   return (
     <ul>
       {tokens.map((token, index) => (

@@ -7,8 +7,10 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Events } from "@navikt/analytics-types";
 import { Box } from "@navikt/ds-react";
-import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { useEscapeKeydown } from "@/ui-utils/hooks/useEscapeKeydown";
 import styles from "./Hero.module.css";
 
 type GodPraksisHeroContextType = {
@@ -60,6 +62,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
         y: e.currentTarget.offsetTop + rect.height / 2,
       });
       setOpenDialog(true);
+      umamiTrack(Events.MODAL_APNET, { tittel: "Tema" });
 
       // Since we cant focus elements inside `display: none` elements, we need to
       // wait for the dialog to be open before we focus the close button
@@ -73,6 +76,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
 
   const handleClose = useCallback(() => {
     setOpenDialog(false);
+    umamiTrack(Events.MODAL_LUKKET, { tittel: "Tema" });
     setTimeout(() => openDialogButton?.focus());
   }, [openDialogButton]);
 
@@ -113,8 +117,8 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
   }
 
   const customStyles: React.CSSProperties = {
-    "--website-hero-selector-x": animationRef.x + "px",
-    "--website-hero-selector-y": animationRef.y + "px",
+    "--website-hero-selector-x": `${animationRef.x}px`,
+    "--website-hero-selector-y": `${animationRef.y}px`,
     marginBottom: getMargin(),
     transitionTimingFunction: openDialog
       ? "cubic-bezier(0.3, 1, 0.15, 1)"

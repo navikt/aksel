@@ -17,7 +17,7 @@ function supportsStableScrollbarGutter(referenceElement: Element | null) {
   }
 
   /*
-   * We need to do aditional checks since the scenario:
+   * We need to do additional checks since the scenario:
    * - Scrollbar is edited with `::-webkit-scrollbar`
    * - MacOS setting: Show scroll bars -> Automatically based on mouse or tracked
    * Causes the calculation of scrollbar width to be incorrect, and thus the scrollbar gutter to not work as intended.
@@ -254,7 +254,7 @@ class ScrollLocker {
   timeoutUnlock = Timeout.create();
 
   /**
-   * Aquires a new lock
+   * Acquires a new lock
    * - If first lock, lock document-scroll.
    * - If not first lock, do nothing.
    */

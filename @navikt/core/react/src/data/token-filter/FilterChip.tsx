@@ -22,7 +22,7 @@ function TokenFilterChips(props: TokenFilterChipsProps) {
     <ul className="aksel-property-filter__chips">
       {tokens.map((token, index) => (
         <TokenFilterChip
-          key={index}
+          key={`${token.propertyKey}-${token.operator}-${token.value}`}
           onRemove={() => removeToken(index)}
           token={token}
           showOperation={index > 0}
@@ -55,6 +55,7 @@ function TokenFilterChip(props: TokenFilterChipProps) {
         <ActionMenu>
           <ActionMenu.Trigger>
             <button
+              type="button"
               className="aksel-property-filter__chip-button"
               data-type="operation"
               /* onClick={onRemove} */
@@ -73,6 +74,7 @@ function TokenFilterChip(props: TokenFilterChipProps) {
         </ActionMenu>
       )}
       <button
+        type="button"
         data-type="value"
         className="aksel-property-filter__chip-button"
         ref={setPopupAnchor}
@@ -87,6 +89,7 @@ function TokenFilterChip(props: TokenFilterChipProps) {
         <Popover.Content>Edit filter</Popover.Content>
       </Popover>
       <button
+        type="button"
         data-type="remove"
         className="aksel-property-filter__chip-button"
         onClick={onRemove}

@@ -4,7 +4,8 @@ import {
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
-import HeaderCell, { HeaderCellProps } from "./HeaderCell";
+import { consoleWarning } from "../utils/helpers/consoleWarning";
+import HeaderCell, { type HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
 
 export interface ColumnHeaderProps extends HeaderCellProps {
@@ -28,7 +29,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
     const context = useContext(TableContext);
 
     if (sortable && !sortKey) {
-      console.warn("ColumnHeader with `sortable=true` must have a sortKey.");
+      consoleWarning("ColumnHeader with `sortable=true` must have a sortKey.");
     }
 
     return (
@@ -44,6 +45,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
         }
         {...rest}
       >
+        {/* TODO: Padding on cell makes clickable area smaller than cell with button. Make cell clickable, have pointer etc */}
         {sortable ? (
           <button
             type="button"

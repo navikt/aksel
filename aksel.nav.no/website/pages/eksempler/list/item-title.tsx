@@ -32,7 +32,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Du kan sette en tittel på hvert element i listen. Dette er kun visuelt og får ingen semantisk betydning.",
 };

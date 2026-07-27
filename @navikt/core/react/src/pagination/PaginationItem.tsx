@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Button, ButtonProps } from "../button";
+import { Button, type ButtonProps } from "../button";
 import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 

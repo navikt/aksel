@@ -121,16 +121,70 @@ function prepareCellFocus(cell: Element): HTMLElement | null {
 /**
  * Applies focus and scroll to an element.
  */
-function applyFocusAndScroll(element: HTMLElement): void {
-  element.focus({
-    preventScroll: true,
-  });
+function getStickyOffsets(element: HTMLElement): {
+  stickyOffsetStart: number;
+  stickyOffsetEnd: number;
+  stickyHeaderHeight: number;
+} {
+  const table = element.closest(".aksel-data-table");
 
-  element.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest",
-    inline: "nearest",
-  });
+  if (!table) {
+    return {
+      stickyOffsetStart: 0,
+      stickyOffsetEnd: 0,
+      stickyHeaderHeight: 0,
+    };
+  }
+
+  const stickyHeader = table.querySelector<HTMLElement>(
+    `.aksel-data-table__thead[data-sticky="true"]`,
+  );
+
+  const stickyNodesStart = table.querySelectorAll<HTMLElement>(
+    `.aksel-data-table__column-header[data-sticky="start"]`,
+  );
+
+  const stickyNodesEnd = table.querySelectorAll<HTMLElement>(
+    `.aksel-data-table__column-header[data-sticky="end"]`,
+  );
+
+  return {
+    stickyOffsetStart: Array.from(stickyNodesStart).reduce(
+      (offset, node) => offset + node.getBoundingClientRect().width,
+      0,
+    ),
+    stickyOffsetEnd: Array.from(stickyNodesEnd).reduce(
+      (offset, node) => offset + node.getBoundingClientRect().width,
+      0,
+    ),
+    stickyHeaderHeight: stickyHeader?.getBoundingClientRect().height ?? 0,
+  };
+}
+
+function applyFocusAndScroll(element: HTMLElement): void {
+  const { stickyOffsetStart, stickyOffsetEnd, stickyHeaderHeight } =
+    getStickyOffsets(element);
+
+  const originalScrollMarginInline = element.style.scrollMarginInline;
+  const originalScrollMarginBlockStart = element.style.scrollMarginBlockStart;
+
+  element.style.scrollMarginInline = `${stickyOffsetStart}px ${stickyOffsetEnd}px`;
+  element.style.scrollMarginBlockStart = `${stickyHeaderHeight}px`;
+
+  try {
+    element.focus({
+      preventScroll: true,
+    });
+
+    element.scrollIntoView({
+      behavior: "auto",
+      block: "nearest",
+      inline: "nearest",
+    });
+  } finally {
+    element.style.scrollMarginBlockStart = originalScrollMarginBlockStart;
+    element.style.scrollMarginInline = originalScrollMarginInline;
+  }
 }
 
 /**

@@ -30,6 +30,7 @@ const Example = () => {
 export default withDsExample(Example, {
   showBreakpoints: true,
   variant: "fullscreen",
+  theme: { forcedTheme: "light" }, // Decorator doesn't support dark mode yet
 });
 
 /* Storybook story */
@@ -37,7 +38,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   title: "Content Padding",
   desc: "Propen `contentBlockPadding` på Page sikrer at det alltid vil være en minimumspadding mellom innhold og footer. Dette vil være en god fallback, men mange layouts vil trenge ekstra padding top/bottom.",

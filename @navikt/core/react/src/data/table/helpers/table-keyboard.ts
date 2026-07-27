@@ -16,8 +16,7 @@ type NavigationAction =
 
 /**
  * Maps keyboard events to navigation actions.
- * Supports arrow keys, Home/End (row navigation), Ctrl/Cmd+Home/End (table navigation),
- * and PageUp/PageDown (multi-row navigation).
+ * Supports arrow keys, Home/End (row navigation), Ctrl/Cmd+Home/End (table navigation).
  */
 function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
   const key = event.key;
@@ -55,13 +54,13 @@ function getNavigationAction(event: KeyboardEvent): NavigationAction | null {
  */
 function shouldBlockNavigation(event: KeyboardEvent): boolean {
   const key = event.key;
-  if (!(key in keyToCoord)) {
-    return false;
-  }
-
   const el = event.target as HTMLElement | null;
   if (!el) {
     return false;
+  }
+
+  if (el.dataset.disableKeyboardNav === "true") {
+    return true;
   }
 
   if (el.isContentEditable) {

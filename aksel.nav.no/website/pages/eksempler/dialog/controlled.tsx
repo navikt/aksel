@@ -51,7 +51,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Du kan kontrollere åpen-tilstanden ved å bruke `open`- og `onOpenChange`-props på Dialog-komponenten. Dette er nyttig når du må åpne dialogen programmatisk eller reagere på tilstandsendringer.",
 };

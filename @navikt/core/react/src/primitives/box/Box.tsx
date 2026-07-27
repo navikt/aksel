@@ -8,22 +8,22 @@ import type {
   AkselShadowToken,
 } from "@navikt/ds-tokens/types";
 import { type OverridableComponent, omit } from "../../utils-external";
-import { Slot } from "../../utils/components/slot/Slot";
-import { cl } from "../../utils/helpers";
-import BasePrimitive, {
-  PRIMITIVE_PROPS,
-  PrimitiveProps,
-} from "../base/BasePrimitive";
-import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
-import { getResponsiveProps } from "../utilities/css";
 import {
+  PRIMITIVE_PROPS,
+  type PrimitiveProps,
+  useBasePrimitiveProps,
+} from "../../utils/components/base-primitive/BasePrimitive";
+import { getResponsiveProps } from "../../utils/components/base-primitive/helpers/css";
+import type {
   BorderRadiusScale,
   ResponsiveProp,
   SpaceDelimitedAttribute,
-} from "../utilities/types";
-import BoxNew from "./Box.darkside";
+} from "../../utils/components/base-primitive/helpers/types";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
+import type { AsChildProps } from "../../utils/types";
 
-export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
+type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#backgroundColor).
@@ -68,19 +68,80 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    */
   shadow?: AkselShadowToken;
 } & PrimitiveProps &
-  PrimitiveAsChildProps;
+  AsChildProps;
 
-interface BoxComponentType extends OverridableComponent<
-  BoxProps,
-  HTMLDivElement
-> {
-  /**
-   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
-   *
-   * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
-   */
-  New: typeof BoxNew;
-}
+/* const Primitive = new Proxy({}, {
+  get: (_, tag: string) => forwardRef((props: any, ref) => {
+    const { asChild, ...rest } = props;
+    const Comp = asChild ? Slot : tag;
+    return <Comp {...rest} ref={ref} />;
+  }),
+}) as { [K in keyof JSX.IntrinsicElements]: React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<JSX.IntrinsicElements[K] & { asChild?: boolean }> &
+    React.RefAttributes<HTMLElement>
+>; }; */
+
+const BoxRoot: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
+  (
+    {
+      children,
+      className,
+      as: Component = "div",
+      background,
+      borderColor,
+      borderWidth,
+      borderRadius,
+      shadow,
+      style: _style,
+      asChild,
+      ...rest
+    }: BoxProps & { as?: React.ElementType },
+    ref,
+  ) => {
+    const { style: primitiveStyle, className: primitiveClassName } =
+      useBasePrimitiveProps(rest);
+
+    const style: React.CSSProperties = {
+      ...primitiveStyle,
+      ..._style,
+      "--__axc-box-background": background
+        ? `var(--ax-bg-${background})`
+        : undefined,
+      "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+      "--__axc-box-border-color": borderColor
+        ? `var(--ax-border-${borderColor})`
+        : undefined,
+      "--__axc-box-border-width": borderWidth
+        ? borderWidth
+            .split(" ")
+            .map((x) => `${x}px`)
+            .join(" ")
+        : undefined,
+      ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
+        "0",
+      ]),
+    };
+
+    const Comp = asChild ? Slot : Component;
+
+    return (
+      <Comp
+        {...omit(rest, PRIMITIVE_PROPS)}
+        ref={ref}
+        style={style}
+        className={cl(primitiveClassName, "aksel-box", className, {
+          "aksel-box-bg": background,
+          "aksel-box-border-color": borderColor,
+          "aksel-box-border-width": borderWidth,
+          "aksel-box-radius": borderRadius,
+          "aksel-box-shadow": shadow,
+        })}
+      >
+        {children}
+      </Comp>
+    );
+  },
+);
 
 /**
  * Foundational Layout-primitive for generic encapsulation & styling.
@@ -109,69 +170,32 @@ interface BoxComponentType extends OverridableComponent<
  *  </Box>
  * </VStack>
  */
-export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
-  forwardRef(
-    (
-      {
-        children,
-        className,
-        as: Component = "div",
-        background,
-        borderColor,
-        borderWidth,
-        borderRadius,
-        shadow,
-        style: _style,
-        asChild,
-        ...rest
-      }: BoxProps & { as?: React.ElementType },
-      ref,
-    ) => {
-      const style: React.CSSProperties = {
-        ..._style,
-        "--__axc-box-background": background
-          ? `var(--ax-bg-${background})`
-          : undefined,
-        "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
-        "--__axc-box-border-color": borderColor
-          ? `var(--ax-border-${borderColor})`
-          : undefined,
-        "--__axc-box-border-width": borderWidth
-          ? borderWidth
-              .split(" ")
-              .map((x) => `${x}px`)
-              .join(" ")
-          : undefined,
-        ...getResponsiveProps("box", "radius", "radius", borderRadius, false, [
-          "0",
-        ]),
-      };
+const Box = Object.assign(BoxRoot, {
+  /**
+   * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+   *
+   * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
+   */
+  New: BoxRoot,
+});
 
-      const Comp = asChild ? Slot : Component;
+/**
+ * Foundational Layout-primitive for generic encapsulation & styling.
+ * @deprecated Deprecated in v8. Use `Box` from '@navikt/ds-react/Box' instead (with same props).
+ *
+ * **Run `npx @navikt/aksel@latest codemod v8-box-new` to migrate.**
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
+ * @see 🏷️ {@link BoxNewProps}
+ * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+ *
+ * @example
+ * <BoxNew padding="space-16">
+ *   <BodyShort>Hei</BodyShort>
+ * </BoxNew>
+ */
+const BoxNew = BoxRoot;
+type BoxNewProps = BoxProps;
 
-      return (
-        <BasePrimitive {...rest}>
-          <Comp
-            {...omit(rest, PRIMITIVE_PROPS)}
-            ref={ref}
-            style={style}
-            className={cl("aksel-box", className, {
-              "aksel-box-bg": background,
-              "aksel-box-border-color": borderColor,
-              "aksel-box-border-width": borderWidth,
-              "aksel-box-radius": borderRadius,
-              "aksel-box-shadow": shadow,
-            })}
-          >
-            {children}
-          </Comp>
-        </BasePrimitive>
-      );
-    },
-  );
-
-export const Box = BoxComponent as BoxComponentType;
-
-Box.New = BoxNew;
-
-export default Box;
+export { Box, BoxNew };
+export type { BoxNewProps, BoxProps };

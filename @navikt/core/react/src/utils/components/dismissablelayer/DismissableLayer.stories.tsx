@@ -210,8 +210,40 @@ export const DisableOutsidePointerEventsWhileHidden = () => {
           </DismissableLayer>
         </div>
       </DismissableLayer>
-      <button onClick={() => setEnabled((x) => !x)}>Should be clickable</button>
+      <button type="button" onClick={() => setEnabled((x) => !x)}>
+        Should be clickable
+      </button>
     </div>
+  );
+};
+
+const Layer = ({
+  disableOutsidePointerEvents,
+  children,
+}: {
+  disableOutsidePointerEvents?: boolean;
+  children?: React.ReactNode;
+}) => {
+  const [open, setOpen] = useState(true);
+
+  if (!open) return null;
+
+  const style = {
+    width: 100,
+    height: 100,
+    backgroundColor: "red",
+  };
+
+  return (
+    <DismissableLayer
+      disableOutsidePointerEvents={disableOutsidePointerEvents}
+      style={style}
+    >
+      <button type="button" onClick={() => setOpen(false)}>
+        Close me
+      </button>
+      {children}
+    </DismissableLayer>
   );
 };
 
@@ -221,50 +253,22 @@ export const ParallelDismissableLayer = () => {
   const [nestedSingle, setNestedSingle] = useState(false);
   const [nestedDouble, setNestedDouble] = useState(false);
 
-  const Layer = ({
-    disableOutsidePointerEvents,
-    children,
-  }: {
-    disableOutsidePointerEvents?: boolean;
-    children?: React.ReactNode;
-  }) => {
-    const [open, setOpen] = useState(true);
-
-    if (!open) return null;
-
-    const style = {
-      width: 100,
-      height: 100,
-      backgroundColor: "red",
-    };
-
-    return (
-      <DismissableLayer
-        disableOutsidePointerEvents={disableOutsidePointerEvents}
-        style={style}
-      >
-        <button onClick={() => setOpen(false)}>Close me</button>
-        {children}
-      </DismissableLayer>
-    );
-  };
-
   const state = (_state: boolean) => (_state ? "open" : "closed");
 
   return (
     <StrictMode>
       <VStack gap="space-16">
         <HStack gap="space-8">
-          <button onClick={() => setSingle((x) => !x)}>
+          <button type="button" onClick={() => setSingle((x) => !x)}>
             Single {state(single)}
           </button>
-          <button onClick={() => setDouble((x) => !x)}>
+          <button type="button" onClick={() => setDouble((x) => !x)}>
             Double {state(double)}
           </button>
-          <button onClick={() => setNestedSingle((x) => !x)}>
+          <button type="button" onClick={() => setNestedSingle((x) => !x)}>
             Nested Single {state(nestedSingle)}
           </button>
-          <button onClick={() => setNestedDouble((x) => !x)}>
+          <button type="button" onClick={() => setNestedDouble((x) => !x)}>
             Nested Double {state(nestedDouble)}
           </button>
         </HStack>
@@ -292,8 +296,9 @@ export const ParallelDismissableLayer = () => {
           </div>
         )}
 
-        <button>Focustrap (does nothing)</button>
+        <button type="button">Focustrap (does nothing)</button>
         <button
+          type="button"
           onClick={() => {
             setSingle(false);
             setDouble(false);

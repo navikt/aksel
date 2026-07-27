@@ -1,6 +1,6 @@
 import type { GlobalColorScale } from "../../../internal-types";
 import type { AkselColorRole } from "../../../types";
-import { GlobalColorEntry } from "../../tokens.util";
+import type { GlobalColorEntry } from "../../tokens.util";
 
 export type GlobalConfigWithAlpha = Record<
   Extract<AkselColorRole, "neutral">,

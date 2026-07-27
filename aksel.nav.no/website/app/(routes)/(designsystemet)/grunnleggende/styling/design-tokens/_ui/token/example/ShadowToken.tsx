@@ -1,7 +1,7 @@
 import { Box, VStack } from "@navikt/ds-react";
-import { TokenForDocumentationT } from "../../types";
+import type { TokenDocT } from "@navikt/ds-tokens/token_docs";
 
-const ShadowToken = ({ token }: { token: TokenForDocumentationT }) => (
+const ShadowToken = ({ token }: { token: TokenDocT }) => (
   <VStack as="div" align="center" justify="center" height="100%">
     <Box
       borderRadius="4"

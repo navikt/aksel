@@ -25,7 +25,6 @@ export default defineConfig({
             provider: playwright(),
             instances: [{ browser: "firefox" }],
           },
-          setupFiles: [".storybook/vitest.setup.ts"],
         },
       },
     ],

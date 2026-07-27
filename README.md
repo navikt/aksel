@@ -48,7 +48,7 @@ For å komme i gang, se [Aksel dokumentasjonen](https://aksel.nav.no/grunnleggen
 
 aksel.nav.no/
 ├── website         # Next.js-app (dokumentasjonsside)
-├── website/sanity  # Sanity CMS
+├── sanity-studio   # Sanity CMS
 └── playroom        # aksel.nav.no/sandbox
 ```
 

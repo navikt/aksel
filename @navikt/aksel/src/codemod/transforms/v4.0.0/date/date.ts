@@ -1,8 +1,6 @@
-/**
- * @param {import('jscodeshift').FileInfo} file
- * @param {import('jscodeshift').API} api
- */
-export default function transformer(file) {
+import type { FileInfo } from "jscodeshift";
+
+export default function transformer(file: FileInfo) {
   const names = [
     "UNSAFE_useDatepicker",
     "UNSAFE_DatePicker",

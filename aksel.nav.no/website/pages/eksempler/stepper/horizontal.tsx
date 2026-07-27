@@ -34,7 +34,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Vi anbefaler å ikke bruke horisontal stepper, da den fungerer dårlig på mindre skjermer.",
 };

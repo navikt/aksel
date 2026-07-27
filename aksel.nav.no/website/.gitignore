@@ -9,3 +9,4 @@ next-env.d.ts
 sanity/functions/**/.env*
 sanity/functions/**/.build/
 sanity/functions/**/node_modules/
+*/service-account.json

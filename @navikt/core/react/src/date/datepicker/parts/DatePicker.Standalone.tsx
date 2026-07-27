@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import { cl } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -7,7 +7,7 @@ import {
   DateTranslationContextProvider,
   getTranslations,
 } from "../../Date.locale";
-import {
+import type {
   DatePickerDefaultProps,
   MultipleMode,
   RangeMode,

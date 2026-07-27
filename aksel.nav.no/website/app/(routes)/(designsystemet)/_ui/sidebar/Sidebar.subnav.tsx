@@ -4,11 +4,12 @@ import { stegaClean } from "next-sanity";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { Events } from "@navikt/analytics-types";
 import { HStack } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
+import type { SidebarGroupedPagesT } from "./Sidebar.types";
 
 function DesignsystemSidebarSubNav(
   props: SidebarGroupedPagesT & { layout: "sidebar" | "mobile" },
@@ -32,8 +33,9 @@ function DesignsystemSidebarSubNav(
         type="button"
         onClick={() => {
           setOpen(!open);
-          umamiTrack("sidebar-subnav", {
-            kategori: title,
+          umamiTrack(Events.FILTERVALG, {
+            kategori: "sidebar",
+            filternavn: title,
           });
         }}
         className={`${styles.navListSubButton} ${styles.navListNotch}`}

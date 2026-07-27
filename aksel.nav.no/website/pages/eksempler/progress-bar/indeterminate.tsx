@@ -30,7 +30,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Med simulated-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
 };

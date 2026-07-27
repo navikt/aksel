@@ -72,7 +72,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
-  desc: "Endrer 'align-items'.",
+  desc: "Propen `align` endrer `align-items`.",
 };

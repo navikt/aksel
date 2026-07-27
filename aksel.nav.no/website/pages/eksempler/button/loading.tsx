@@ -13,7 +13,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "[Les mer om loading states i retningslinjene til Loader-komponenten](/komponenter/core/loader#f92383e7d117)",
 };

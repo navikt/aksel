@@ -1,7 +1,9 @@
-import { differenceInMonths } from "date-fns";
-import { Metadata } from "next";
-import { PortableTextBlock, stegaClean } from "next-sanity";
+import { differenceInMonths, isSameDay } from "date-fns";
+import type { Metadata } from "next";
+import { type PortableTextBlock, stegaClean } from "next-sanity";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -15,19 +17,29 @@ import {
 } from "@navikt/ds-react";
 import { GodPraksisFeedback } from "@/app/(routes)/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { sanityFetch } from "@/app/_sanity/live";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+  sanityFetchMetadata,
+  sanityFetchStaticParams,
+} from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
+  SLUG_BY_TYPE_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { EditorPanel } from "@/app/_ui/editor-panel/EditorPanel";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { formatDateString } from "@/ui-utils/format-date";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
 import { getValidRenderArray } from "@/ui-utils/valid-array";
@@ -37,13 +49,27 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateStaticParams() {
+  const { data } = await sanityFetchStaticParams({
+    query: SLUG_BY_TYPE_QUERY,
+    params: { type: "aksel_artikkel" },
+  });
 
-  const { data: seoData } = await sanityFetch({
+  return data
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((slug) => ({ slug: slug.replace("god-praksis/artikler/", "") }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const [{ slug }, { perspective }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+
+  const { data: seoData } = await sanityFetchMetadata({
     query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
     params: { slug: decodeURIComponent(`god-praksis/artikler/${slug}`) },
-    stega: false,
+    perspective,
   });
 
   const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image);
@@ -62,8 +88,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page(props: Props) {
-  const { slug } = await props.params;
+export default async function Page({ params }: Props) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  if (isDraftMode) {
+    return (
+      <Suspense fallback={null}>
+        <DynamicPage params={params} />
+      </Suspense>
+    );
+  }
+
+  const { slug } = await params;
+  return <ArticleView slug={slug} perspective="published" stega={false} />;
+}
+
+async function DynamicPage({ params }: Props) {
+  const [{ slug }, { perspective, stega }] = await Promise.all([
+    params,
+    getDynamicFetchOptions(),
+  ]);
+  return <ArticleView slug={slug} perspective={perspective} stega={stega} />;
+}
+
+async function getArticleData({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
 
   const parsedSlug = decodeURIComponent(`god-praksis/artikler/${slug}`);
 
@@ -71,14 +124,52 @@ export default async function Page(props: Props) {
     sanityFetch({
       query: GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
+      perspective,
+      stega,
     }),
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
+      perspective,
+      stega,
     }),
   ]);
 
-  if (!pageData?.heading) {
+  return { pageData, toc };
+}
+
+async function ArticleView({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  const { pageData } = await getArticleData({ slug, perspective, stega });
+
+  if (!pageData?.heading || !pageData._id) {
+    notFound();
+  }
+
+  return (
+    <>
+      <CachedArticle slug={slug} perspective={perspective} stega={stega} />
+      {/* Per-user auth (reads request headers) — must live outside `'use cache'`. */}
+      <Suspense fallback={null}>
+        <GodPraksisFeedback docId={pageData._id} />
+      </Suspense>
+    </>
+  );
+}
+
+async function CachedArticle({
+  slug,
+  perspective,
+  stega,
+}: { slug: string } & DynamicFetchOptions) {
+  "use cache";
+
+  const { pageData, toc } = await getArticleData({ slug, perspective, stega });
+
+  if (!pageData?.heading || !pageData._id) {
     notFound();
   }
 
@@ -92,6 +183,19 @@ export default async function Page(props: Props) {
 
   const undertema = getValidRenderArray(pageData.undertema);
   const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
+
+  const changelogs = await fetchChangelogs(pageData._id, "gp");
+
+  function hasUpdated() {
+    if (!pageData?.updateInfo?.lastVerified || !pageData?.publishedAt) {
+      return false;
+    }
+
+    return !isSameDay(
+      new Date(pageData.updateInfo.lastVerified),
+      new Date(pageData.publishedAt),
+    );
+  }
 
   return (
     <article className={styles.pageArticle}>
@@ -114,9 +218,21 @@ export default async function Page(props: Props) {
             {pageData.ingress}
           </BodyLong>
         )}
-        <BodyShort size="small" as="time" textColor="subtle">
-          {`Oppdatert ${formatDateString(verifiedDate)}`}
-        </BodyShort>
+
+        {changelogs.exists ? (
+          <BodyShort size="small" as="time">
+            <UmamiLink
+              href="#endringslogg-table"
+              data-color="neutral"
+              subtle
+              lenkegruppe="endringslogg-tabell"
+            >{`Oppdatert ${formatDateString(verifiedDate)}`}</UmamiLink>
+          </BodyShort>
+        ) : (
+          <BodyShort size="small" as="time" textColor="subtle">
+            {`${hasUpdated() ? "Oppdatert" : "Publisert"} ${formatDateString(verifiedDate)}`}
+          </BodyShort>
+        )}
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {undertema?.map(({ tema, title }) => {
             const cleanTitle = stegaClean(title ?? "");
@@ -144,12 +260,13 @@ export default async function Page(props: Props) {
           })}
         </HStack>
       </div>
-      <TableOfContents toc={toc} />
+      <TableOfContents toc={toc} linkToChangelogs={changelogs.exists} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
+        <ChangelogTable changelogs={changelogs} type="gp" />
 
         {writers && (
           <VStack gap="space-8" marginBlock="space-48">
@@ -178,7 +295,7 @@ export default async function Page(props: Props) {
                 {relevanteArtikler.map((item) => (
                   <WebsiteListItem key={item.heading} icon>
                     <Link
-                      variant="neutral"
+                      data-color="neutral"
                       href={`/${item.slug?.current}`}
                       data-umami-event="navigere"
                       data-umami-event-kilde="les ogsaa"
@@ -192,8 +309,6 @@ export default async function Page(props: Props) {
             </EditorPanel>
           </Box>
         )}
-
-        <GodPraksisFeedback docId={pageData._id} />
       </div>
     </article>
   );
