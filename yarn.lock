@@ -11434,7 +11434,7 @@ __metadata:
     playwright: "npm:1.61.1"
     prettier: "npm:3.8.3"
     react: "npm:19.2.7"
-    react-docgen-typescript: "npm:2.2.2"
+    react-docgen-typescript: "npm:2.4.0"
     react-dom: "npm:19.2.7"
     storybook: "npm:^10.4.6"
     stylelint: "npm:^17.14.0"
@@ -22889,16 +22889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:2.2.2":
-  version: 2.2.2
-  resolution: "react-docgen-typescript@npm:2.2.2"
-  peerDependencies:
-    typescript: ">= 4.3.x"
-  checksum: 10/081fc3a876f53b9eeffcff357e5b6c190db799d50edcf11b187857d8cb8cce28000ed777ed16dd52a1c955f332612ef6b1f02cf8adcbcb084b8da9ff1ae5fd13
-  languageName: node
-  linkType: hard
-
-"react-docgen-typescript@npm:^2.2.2":
+"react-docgen-typescript@npm:2.4.0, react-docgen-typescript@npm:^2.2.2":
   version: 2.4.0
   resolution: "react-docgen-typescript@npm:2.4.0"
   peerDependencies:
