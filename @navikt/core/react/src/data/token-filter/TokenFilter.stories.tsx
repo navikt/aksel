@@ -127,8 +127,6 @@ export const MultipleTokens: Story = {
       operation: "and",
     });
 
-    console.log(query);
-
     return (
       <div>
         <h2>TokenFilter without groups</h2>

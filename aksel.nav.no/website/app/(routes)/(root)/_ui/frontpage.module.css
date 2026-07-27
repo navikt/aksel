@@ -197,6 +197,7 @@
 
 .card {
   height: fit-content;
+  width: 100%;
 
   &[data-visible="false"] {
     opacity: 0;

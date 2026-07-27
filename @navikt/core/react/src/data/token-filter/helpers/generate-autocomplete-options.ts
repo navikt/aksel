@@ -6,12 +6,12 @@ import type {
   OperatorT,
 } from "../TokenFilter.types";
 import { createGroups } from "./grouping";
-import { QUERY_OPERATORS } from "./operators";
+import { getValidOperatorsForProperty } from "./operators";
 import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
 
 /**
- * Generates "options" to be used as autosuggest-ottion based on the current query state.
+ * Generates "options" to be used as autosuggest-options based on the current query state.
  *
  * The query parser recognizes three states:
  * - "property": User has selected/matched a property and operator ("Status = active")
@@ -50,11 +50,6 @@ function generateAutoCompleteOptions(
 
   /* State: Property matched, but operator is incomplete */
   if (queryState.step === "operator") {
-    const operators = filterOperatorsByPrefix(
-      getValidOperatorsForProperty(queryState.property),
-      queryState.operatorPrefix,
-    );
-
     const partialQuery = buildQueryString(
       queryState.property.label,
       queryState.operatorPrefix,
@@ -64,15 +59,8 @@ function generateAutoCompleteOptions(
     /**
      * Edge case: User typed an invalid operator prefix that doesn't match any operators.
      * This can happen when typing characters that don't start any valid operator.
-     * Return empty suggestions gracefully - the UI will show "no results".
+     * `generateOperatorSuggestions` returns an empty list, and the UI will show "no results".
      */
-    if (operators.length === 0) {
-      return {
-        value: partialQuery,
-        options: [],
-      };
-    }
-
     return {
       value: partialQuery,
       options: generateOperatorSuggestions(
@@ -116,43 +104,6 @@ function generateAutoCompleteOptions(
       ),
     ],
   };
-}
-
-/**
- * Returns the valid operators for a given property.
- * Extracts operators from the property's custom operator configuration.
- * If none are configured, falls back to all available operators.
- *
- * The QueryFilteringScopedOperator can be a simple string (e.g., "=")
- * or an object with operator and tokenType (e.g., { operator: ":", tokenType: "single" }).
- * This function normalizes both formats and returns just the operator strings.
- *
- * @returns Array of valid operators for the property
- *
- * TODO: We omit passing the tokenType for now since it's not currently used in the UI. But will be needed for single/multi-selection.
- */
-function getValidOperatorsForProperty(
-  property: InternalPropertyDefinition,
-): OperatorT[] {
-  const { operators } = property;
-
-  /* If no operators configured, return all available operators */
-  if (!operators || operators.length === 0) {
-    return QUERY_OPERATORS;
-  }
-
-  /*
-   * Extract operator strings from QueryFilteringScopedOperator format
-   * Handle both simple strings and objects with operator property
-   */
-  const operatorStrings = operators.map((op) =>
-    typeof op === "string" ? op : op.operator,
-  );
-
-  /* Filter to only valid QUERY_OPERATORS to ensure type safety */
-  return operatorStrings.filter((op) =>
-    QUERY_OPERATORS.includes(op as OperatorT),
-  ) as OperatorT[];
 }
 
 /**
@@ -253,7 +204,12 @@ function createValueSuggestions(
     }
 
     /* If scoped to a property, filter to only that property's options */
-    if (scopedProperty && option.property !== scopedProperty) {
+    if (scopedProperty && option.property.key !== scopedProperty.key) {
+      continue;
+    }
+
+    /* Don't suggest values with an operator the property doesn't support */
+    if (!getValidOperatorsForProperty(option.property).includes(operator)) {
       continue;
     }
 

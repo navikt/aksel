@@ -2,6 +2,7 @@ import React, { type JSX, forwardRef, useCallback, useState } from "react";
 import { Search } from "../../form/search";
 import { VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
+import { useId } from "../../utils-external";
 import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
@@ -11,29 +12,37 @@ import type { AutoCompleteOption, OptionGroup } from "./AutoSuggest.types";
 interface AutoSuggestProps {
   options: OptionGroup<AutoCompleteOption>[];
   onSelect: (option: AutoCompleteOption) => boolean;
-  className?: string;
   value: string;
   onChange: (newValue: string) => void;
+  /**
+   * Called when the user submits the raw input text (Enter without an active option).
+   */
+  onSubmit: (value: string) => void;
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
 const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
-  ({ options, onSelect, value, onChange, open, setOpen }, ref) => {
+  ({ options, onSelect, value, onChange, onSubmit, open, setOpen }, ref) => {
     const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] =
       useState("");
 
     const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null);
 
+    const listboxId = `aksel-token-filter-listbox-${useId()}`;
+
     /* Unsure why N version works, but not regular here */
     const mergedRef = useMergeRefsN([setInputRef, ref]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
       setOpen(false);
-    };
+      setVirtuallyFocusedOptionId("");
+    }, [setOpen]);
 
     const handleChange = (newValue: string) => {
       onChange(newValue);
+      /* Options are regenerated on every keystroke, so the previous option no longer exists */
+      setVirtuallyFocusedOptionId("");
       setOpen(true);
     };
 
@@ -41,8 +50,11 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       (option: AutoCompleteOption) => {
         const createdNewToken = onSelect(option);
 
+        /* Keep real focus on the input, the listbox only ever has virtual focus */
+        inputRef?.focus();
+        setVirtuallyFocusedOptionId("");
+
         if (createdNewToken) {
-          inputRef?.focus();
           setOpen(false);
         }
       },
@@ -66,18 +78,38 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
                   setOpen(true);
                 }}
                 onFocus={() => setOpen(true)}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape" && open) {
+                    /*
+                     * Search clears the input on Escape. When the popup is open,
+                     * Escape should only close the popup.
+                     */
+                    event.stopPropagation();
+                    handleClose();
+                    return;
+                  }
+
+                  if (event.key === "Enter") {
+                    /* Never submit a surrounding form */
+                    event.preventDefault();
+
+                    /* Listbox handles Enter when an option has virtual focus */
+                    if (!virtuallyFocusedOptionId) {
+                      onSubmit(value);
+                    }
+                  }
+                }}
                 size="small"
                 autoComplete="off"
-                /* onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                createToken(filterText);
-              }
-            }} */
+                aria-expanded={open}
+                aria-controls={listboxId}
+                aria-autocomplete="list"
               />
             </Listbox.InputSlot>
           </Floating.Anchor>
           {open && (
             <AutoSuggestPopup
+              id={listboxId}
               options={options}
               onSelect={handleSelectOption}
               focusedValue={virtuallyFocusedOptionId}
@@ -93,6 +125,7 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
 );
 
 type AutoSuggestPopupProps = {
+  id: string;
   options: OptionGroup<AutoCompleteOption>[];
   onSelect: (option: AutoCompleteOption) => void;
   focusedValue: string;
@@ -104,6 +137,7 @@ type AutoSuggestPopupProps = {
 const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
   (
     {
+      id,
       options,
       onSelect,
       focusedValue,
@@ -128,9 +162,17 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           className="aksel-property-filter__popup"
         >
           <div className="aksel-property-filter__popup-inner">
-            <Listbox.Options>
+            <Listbox.Options
+              id={id}
+              /* Options are only virtually focused, so real focus must stay on the input */
+              onMouseDown={(event) => event.preventDefault()}
+            >
               {options.map((group) => (
-                <Listbox.Group key={group.label} label={group.label}>
+                <Listbox.Group
+                  /* Property- and value-groups can share a label, so include an option to keep keys unique */
+                  key={`${group.label}-${group.options[0]?.value ?? ""}`}
+                  label={group.label}
+                >
                   {group.options.map((item) => (
                     <AutoSuggestOption
                       key={item.value}

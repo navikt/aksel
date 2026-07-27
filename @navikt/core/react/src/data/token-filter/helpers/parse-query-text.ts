@@ -4,9 +4,11 @@ import type {
 } from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
+  getValidOperatorsForProperty,
   matchFilteringProperty,
   matchOperator,
   matchOperatorPrefix,
+  sortOperatorsBySpecificity,
 } from "./operators";
 
 /**
@@ -38,7 +40,12 @@ function parseQueryText(
     .substring(property.label.length)
     .trimStart();
 
-  const operator = matchOperator(QUERY_OPERATORS, textWithoutProperty);
+  /* Only operators the property allows should be parsed as operators */
+  const allowedOperators = sortOperatorsBySpecificity(
+    getValidOperatorsForProperty(property),
+  );
+
+  const operator = matchOperator(allowedOperators, textWithoutProperty);
 
   if (operator) {
     return {
@@ -50,7 +57,7 @@ function parseQueryText(
   }
 
   const operatorPrefix = matchOperatorPrefix(
-    QUERY_OPERATORS,
+    allowedOperators,
     textWithoutProperty,
   );
 

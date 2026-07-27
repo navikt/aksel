@@ -1,4 +1,10 @@
-import React, { forwardRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { cl } from "../../utils/helpers";
 import { AutoSuggest } from "./AutoSuggest";
 import type { AutoCompleteOption } from "./AutoSuggest.types";
@@ -25,81 +31,106 @@ type TokenFilterProps = {
 
 /*
  * TODO:
- * - Implement onChange handler to update query state when user selects an autocomplete option.
- * - Handle token rendering and editing (e.g., show tokens for matched properties/operators/values, allow deleting tokens).
- * - Writing "stance" still shows status and hostname options
+ * - Handle token editing (e.g. change operator/value on an existing token).
+ * - Support free-text tokens.
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
   ({ query, className, propertyDefinitions, options, onChange }, ref) => {
     const [filterText, setFilterText] = useState<string>("");
     const [open, setOpen] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const { parsedPropertyDefinitions, parsedPropertyOptions } =
-      derrivedFilterState(propertyDefinitions, options);
-
-    const queryState = parseQueryText(filterText, parsedPropertyDefinitions);
-
-    const autoCompleteOptions = generateAutoCompleteOptions(
-      queryState,
-      parsedPropertyDefinitions,
-      parsedPropertyOptions,
-    );
-
-    const { addToken, removeToken, updateOperation } = createActionHandlers({
-      query,
-      onChange,
-    });
-
-    const createToken = (newText: string): boolean => {
-      const newQueryState = parseQueryText(newText, parsedPropertyDefinitions);
-
-      let newToken: ExternalToken | null = null;
-
-      switch (newQueryState.step) {
-        case "property": {
-          if (newQueryState.value === "") {
-            return false;
-          }
-          newToken = {
-            propertyKey: newQueryState.property.key,
-            operator: newQueryState.operator,
-            value: newQueryState.value,
-          };
-          break;
-        }
-        case "free-text": {
-          break;
-        }
-        case "operator": {
-          break;
-        }
-      }
-      if (newToken) {
-        addToken(newToken);
-        setFilterText("");
-        return true;
-      }
-      return false;
-    };
-
-    const handleSelectOption = (option: AutoCompleteOption) => {
-      const newQueryState = parseQueryText(
-        option.value,
-        parsedPropertyDefinitions,
+    const { propertyMap, parsedPropertyDefinitions, parsedPropertyOptions } =
+      useMemo(
+        () => deriveFilterState(propertyDefinitions, options),
+        [propertyDefinitions, options],
       );
 
-      if (
-        (newQueryState.step === "property" && newQueryState.value === "") ||
-        newQueryState.step === "operator"
-      ) {
-        /* Add space after for better formatting */
-        /* TODO: Handle this scenario better */
-        setFilterText(`${option.value} `);
-        return false;
-      }
-      setFilterText(option.value);
-      return createToken(option.value);
-    };
+    const autoCompleteOptions = useMemo(
+      () =>
+        generateAutoCompleteOptions(
+          parseQueryText(filterText, parsedPropertyDefinitions),
+          parsedPropertyDefinitions,
+          parsedPropertyOptions,
+        ),
+      [filterText, parsedPropertyDefinitions, parsedPropertyOptions],
+    );
+
+    const { addToken, removeToken, updateOperation } = useMemo(
+      () => createActionHandlers({ query, onChange }),
+      [query, onChange],
+    );
+
+    const createToken = useCallback(
+      (newText: string): boolean => {
+        const newQueryState = parseQueryText(
+          newText,
+          parsedPropertyDefinitions,
+        );
+
+        if (newQueryState.step !== "property" || newQueryState.value === "") {
+          return false;
+        }
+
+        addToken({
+          propertyKey: newQueryState.property.key,
+          operator: newQueryState.operator,
+          value: newQueryState.value,
+        });
+        setFilterText("");
+        return true;
+      },
+      [addToken, parsedPropertyDefinitions],
+    );
+
+    const handleSelectOption = useCallback(
+      (option: AutoCompleteOption) => {
+        const newQueryState = parseQueryText(
+          option.value,
+          parsedPropertyDefinitions,
+        );
+
+        if (
+          (newQueryState.step === "property" && newQueryState.value === "") ||
+          newQueryState.step === "operator"
+        ) {
+          /* Add space after for better formatting */
+          /* TODO: Handle this scenario better */
+          setFilterText(`${option.value} `);
+          return false;
+        }
+
+        return createToken(option.value);
+      },
+      [createToken, parsedPropertyDefinitions],
+    );
+
+    const handleRemoveToken = useCallback(
+      (index: number) => {
+        removeToken(index);
+        /* The removed chip owned focus, so move it somewhere predictable */
+        /* TODO: Should we stop popup from showing in this case? */
+        inputRef.current?.focus();
+      },
+      [removeToken],
+    );
+
+    const formatToken = useCallback(
+      (token: ExternalToken) => {
+        const propertyLabel =
+          propertyMap.get(token.propertyKey)?.label || token.propertyKey;
+
+        const valueLabel =
+          parsedPropertyOptions.find(
+            (option) =>
+              option.property?.key === token.propertyKey &&
+              option.value === token.value,
+          )?.label || token.value;
+
+        return `${propertyLabel} ${token.operator} ${valueLabel}`;
+      },
+      [propertyMap, parsedPropertyOptions],
+    );
 
     return (
       // biome-ignore lint/a11y/useSemanticElements: search-tag is too new (baseline 2023)
@@ -109,28 +140,32 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
         role="search"
       >
         <AutoSuggest
+          ref={inputRef}
           onSelect={handleSelectOption}
           options={autoCompleteOptions.options}
           value={filterText}
           onChange={setFilterText}
+          onSubmit={createToken}
           open={open}
           setOpen={setOpen}
         />
         <TokenFilterChips
           tokens={query.tokens}
-          removeToken={removeToken}
+          removeToken={handleRemoveToken}
           updateOperation={updateOperation}
           operation={query.operation}
+          formatToken={formatToken}
         />
       </div>
     );
   },
 );
 
-function derrivedFilterState(
+function deriveFilterState(
   propertyDefinitions: ExternalPropertyDefinitions,
-  propteryOptions: ExternalOptions,
+  propertyOptions: ExternalOptions,
 ): {
+  propertyMap: Map<string, InternalPropertyDefinition>;
   parsedPropertyDefinitions: InternalPropertyDefinition[];
   parsedPropertyOptions: InternalPropertyOption[];
 } {
@@ -149,7 +184,7 @@ function derrivedFilterState(
 
   const internalOptions: InternalPropertyOption[] = [];
 
-  for (const option of propteryOptions) {
+  for (const option of propertyOptions) {
     internalOptions.push({
       property: propertyMap.get(option.propertyKey) ?? null,
       value: option.value,
@@ -159,6 +194,7 @@ function derrivedFilterState(
   }
 
   return {
+    propertyMap,
     parsedPropertyDefinitions: [...propertyMap.values()],
     parsedPropertyOptions: internalOptions,
   };
@@ -176,6 +212,17 @@ function createActionHandlers({
   };
 
   const addToken = (token: ExternalToken) => {
+    const alreadyExists = query.tokens.some(
+      (existing) =>
+        existing.propertyKey === token.propertyKey &&
+        existing.operator === token.operator &&
+        existing.value === token.value,
+    );
+
+    if (alreadyExists) {
+      return;
+    }
+
     handleChange({ ...query, tokens: [...query.tokens, token] });
   };
 
