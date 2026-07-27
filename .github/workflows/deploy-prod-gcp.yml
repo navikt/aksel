@@ -20,15 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup project
         uses: ./.github/actions/setup
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Run ts-docgen
-        run: yarn docgen
+      - name: Run metadata generation
+        run: yarn docgen:meta
 
       - name: Update Sanity
         env:
@@ -46,7 +46,7 @@ jobs:
       deployments: "write"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 

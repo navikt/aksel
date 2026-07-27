@@ -1,5 +1,5 @@
 import { BodyShort, Box, HStack } from "@navikt/ds-react";
-import { GOD_PRAKSIS_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { GOD_PRAKSIS_TEMA_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import { GodPraksisPictogram } from "./pictogram/GodPraksisPictogram";
@@ -26,6 +26,7 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
         ) : (
           <svg
             aria-hidden
+            role="presentation"
             viewBox="0 0 64 64"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

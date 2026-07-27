@@ -82,6 +82,7 @@ function WebsiteTableRow({
       {tr.map((x, xi) => (
         <BodyShort
           as="td"
+          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
           key={xi}
           data-hide={x.hideOnSm ?? "false"}
           className={styles.websiteTableTd}

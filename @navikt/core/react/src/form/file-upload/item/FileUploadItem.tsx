@@ -1,4 +1,4 @@
-import React, { MouseEvent, forwardRef } from "react";
+import React, { type MouseEvent, forwardRef } from "react";
 import { BodyLong, BodyShort, ErrorMessage } from "../../../typography";
 import type { OverridableComponent } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
@@ -8,7 +8,7 @@ import { formatFileSize } from "../helpers/format-file-size";
 import { ItemActionField } from "../item-action-field/ItemActionField";
 import { ItemHeader } from "../item-header/ItemHeader";
 import { useFileUploadTranslation } from "../root/FileUploadRoot.context";
-import { FileItem } from "./FileUploadItem.types";
+import type { FileItem } from "./FileUploadItem.types";
 
 interface FileUploadItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

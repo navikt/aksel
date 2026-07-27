@@ -52,6 +52,7 @@ const AddNewOption = () => {
             activeDescendantId === filteredOptionsUtil.getAddNewOptionId(id),
         },
       )}
+      // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: List item acts as an option in the combobox.
       role="option"
       aria-selected={false}
     >

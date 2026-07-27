@@ -1,10 +1,11 @@
-import { CodeExampleSchemaT } from "../../components/types";
-import { noCdnClient } from "../../sanity/interface/client.server";
+import { createClient } from "next-sanity";
+import { SANITY_BASE_CONFIG } from "../../_sanity/sanity.config";
+import type { CodeExampleSchemaT } from "../../components/types";
 import { findUnequalDocuments } from "../helpers/find-unequal-documents";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { validateExamples } from "./parts/validate-examples";
-import { RootDirectoriesT, rootDirectories } from "./types";
+import { type RootDirectoriesT, rootDirectories } from "./types";
 
 const isDryRun = process.argv.includes("--dry-run");
 
@@ -42,14 +43,20 @@ export async function updateSanity(directory: RootDirectoriesT) {
     throw new Error("TypeScript errors found in generated code, see above.");
   }
 
-  const oldSanityDocuments = await noCdnClient(token).fetch(
+  const client = createClient({
+    ...SANITY_BASE_CONFIG,
+    token,
+  });
+
+  const oldSanityDocuments = await client.fetch(
     `*[_type == "kode_eksempler_fil" && variant == "${directory}"]`,
   );
 
-  const transactionClient = noCdnClient(token).transaction();
+  const transactionClient = client.transaction();
   let updatedCount = 0;
 
   const unequalDocuments = findUnequalDocuments({
+    client,
     newDocuments: exampleData,
     oldDocuments: oldSanityDocuments,
     keysToCompare: ["_id", "_type", "title", "variant", "filer"],

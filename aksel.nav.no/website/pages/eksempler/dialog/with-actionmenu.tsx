@@ -60,7 +60,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 16,
   desc: "Merk at fokus returneres til menyknappen når dialogen lukkes, selv om dialogen ble åpnet fra en ActionMenu.",
 };

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Box, HGrid, Heading } from "@navikt/ds-react";
-import Card, { ArticleT } from "./FrontpageMasonryCard";
+import Card, { type ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
 
@@ -74,8 +74,8 @@ const Latest = ({ block }: LatestArticlesProps) => {
 function Highlights({ highlights }: { highlights: ArticleT[] }) {
   return (
     <HGrid gap="space-32" columns={{ xs: 1, md: 2 }}>
-      {highlights.map((x, idx) => (
-        <Highlight article={x} key={idx} compact={highlights.length === 1} />
+      {highlights.map((x) => (
+        <Highlight article={x} key={x._id} compact={highlights.length === 1} />
       ))}
     </HGrid>
   );

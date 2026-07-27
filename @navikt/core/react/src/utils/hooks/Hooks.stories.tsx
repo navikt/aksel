@@ -57,8 +57,12 @@ export const UseScrollLockResizeTest: StoryObj = {
           }}
         >
           <div>{story()}</div>
-          <button onClick={() => setWidth(() => 80)}>Scroll</button>
-          <button onClick={() => setWidth(() => 400)}>No scroll</button>
+          <button type="button" onClick={() => setWidth(() => 80)}>
+            Scroll
+          </button>
+          <button type="button" onClick={() => setWidth(() => 400)}>
+            No scroll
+          </button>
           <div style={{ width }}>
             lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -139,8 +143,12 @@ function ScrollLockComponent() {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
-        <button onClick={() => setEnabled(true)}>Enable</button>
-        <button onClick={() => setEnabled(false)}>Disable</button>
+        <button type="button" onClick={() => setEnabled(true)}>
+          Enable
+        </button>
+        <button type="button" onClick={() => setEnabled(false)}>
+          Disable
+        </button>
       </div>
     </div>
   );

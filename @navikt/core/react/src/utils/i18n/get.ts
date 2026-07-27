@@ -1,4 +1,4 @@
-import { PartialTranslations } from "./i18n.types";
+import type { PartialTranslations } from "./i18n.types";
 
 /**
  * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3
@@ -36,7 +36,14 @@ export function get(
   );
 }
 
+const keypathCache = new Map<string, string[]>();
+
 function getKeypath(str: string) {
+  const cached = keypathCache.get(str);
+  if (cached) {
+    return cached;
+  }
+
   const path: string[] = [];
   let result = OBJECT_NOTATION_MATCHER.exec(str);
 
@@ -46,5 +53,6 @@ function getKeypath(str: string) {
     result = OBJECT_NOTATION_MATCHER.exec(str);
   }
 
+  keypathCache.set(str, path);
   return path;
 }

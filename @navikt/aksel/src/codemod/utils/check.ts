@@ -54,7 +54,7 @@ export function check(
   });
 }
 
-export function checkScenarios(
+function checkScenarios(
   dirName: string,
   { migration, scenarios, extension = "js", options = {} }: ScenarioT,
 ) {

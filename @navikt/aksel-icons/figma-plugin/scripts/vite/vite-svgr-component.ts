@@ -1,4 +1,4 @@
-import { FilterPattern, createFilter } from "@rollup/pluginutils";
+import { type FilterPattern, createFilter } from "@rollup/pluginutils";
 import type { Config } from "@svgr/core";
 import fs from "node:fs";
 import type { Plugin } from "vite";

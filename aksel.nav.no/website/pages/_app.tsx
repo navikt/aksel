@@ -1,4 +1,4 @@
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ExampleTheming } from "@/web/examples/withDsExample.theme";
 import "./global.css";

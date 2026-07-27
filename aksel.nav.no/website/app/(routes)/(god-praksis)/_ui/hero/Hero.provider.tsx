@@ -10,7 +10,7 @@ import React, {
 import { Events } from "@navikt/analytics-types";
 import { Box } from "@navikt/ds-react";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
+import { useEscapeKeydown } from "@/ui-utils/hooks/useEscapeKeydown";
 import styles from "./Hero.module.css";
 
 type GodPraksisHeroContextType = {
@@ -117,8 +117,8 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
   }
 
   const customStyles: React.CSSProperties = {
-    "--website-hero-selector-x": animationRef.x + "px",
-    "--website-hero-selector-y": animationRef.y + "px",
+    "--website-hero-selector-x": `${animationRef.x}px`,
+    "--website-hero-selector-y": `${animationRef.y}px`,
     marginBottom: getMargin(),
     transitionTimingFunction: openDialog
       ? "cubic-bezier(0.3, 1, 0.15, 1)"

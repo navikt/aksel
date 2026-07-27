@@ -59,24 +59,26 @@ const MonthPickerTable = () => {
   return (
     <BodyShort as="table" className="rdp-table">
       <tbody className="rdp-tbody">
-        {tableMonths.map((tableRow, i) => (
-          <tr className="rdp-row" key={i}>
-            {tableRow.map((month: Date) => {
-              return (
-                <td key={month.toDateString()} className="rdp-cell">
-                  <MonthButton
-                    month={setYear(month, year.getFullYear())}
-                    months={months}
-                    focus={focus}
-                    setFocus={setFocus}
-                    tabRoot={tabRoot}
-                    setTabRoot={setTabRoot}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+        {tableMonths.map((tableRow, idx) => {
+          return (
+            <tr className="rdp-row" key={tableRow[0]?.toDateString() ?? idx}>
+              {tableRow.map((month: Date) => {
+                return (
+                  <td key={month.toDateString()} className="rdp-cell">
+                    <MonthButton
+                      month={setYear(month, year.getFullYear())}
+                      months={months}
+                      focus={focus}
+                      setFocus={setFocus}
+                      tabRoot={tabRoot}
+                      setTabRoot={setTabRoot}
+                    />
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
       </tbody>
     </BodyShort>
   );

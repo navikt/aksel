@@ -23,17 +23,19 @@ const SearchField = () => {
   }
 
   return (
-    <form role="search" onSubmit={onSubmit}>
-      <Search
-        label="Søk etter token"
-        defaultValue={searchParams?.get("tokenQuery") || ""}
-        onChange={handleSearch}
-        name="tokenSearch"
-        hideLabel
-        variant="simple"
-        autoComplete="off"
-      />
-    </form>
+    <search>
+      <form onSubmit={onSubmit}>
+        <Search
+          label="Søk etter token"
+          defaultValue={searchParams?.get("tokenQuery") || ""}
+          onChange={handleSearch}
+          name="tokenSearch"
+          hideLabel
+          variant="simple"
+          autoComplete="off"
+        />
+      </form>
+    </search>
   );
 };
 

@@ -1,4 +1,4 @@
-import {
+import type {
   File,
   FormatFn,
   PlatformConfig,
@@ -8,7 +8,7 @@ import {
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCaseForAlpha } from "../config/kebabCase";
 import type { TokenDocT } from "../token_docs.d.ts";
-import { type TokenTypes } from "./tokens.util";
+import type { TokenTypes } from "./tokens.util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
   const header = await generateHeader(file);

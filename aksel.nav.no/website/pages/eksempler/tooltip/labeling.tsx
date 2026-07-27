@@ -23,7 +23,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Hvis elementet allerede har en tilgjengelig tekst, kan du sette `describesChild` til `true`. Tooltipen blir da satt som `title` når lukket og `aria-describedby` når åpen, slik at skjermleser får med seg begge tekstene.",
 };

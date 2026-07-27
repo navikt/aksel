@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileObject, FileUpload, VStack } from "@navikt/ds-react";
+import { type FileObject, FileUpload, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -35,6 +35,6 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
 };

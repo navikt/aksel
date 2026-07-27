@@ -30,7 +30,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Bruk inline om varselet er en del av annet innhold eller når panelet og bakgrunnsfarge blir støy for brukeren.",
 };

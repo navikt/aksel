@@ -3,10 +3,10 @@ import { useId } from "../../utils-external";
 import { Slot } from "../../utils/components/slot/Slot";
 import { useControllableState } from "../../utils/hooks";
 import CollapsibleContent, {
-  CollapsibleContentProps,
+  type CollapsibleContentProps,
 } from "../content/CollapsibleContent";
 import CollapsibleTrigger, {
-  CollapsibleTriggerProps,
+  type CollapsibleTriggerProps,
 } from "../trigger/CollapsibleTrigger";
 import { CollapsibleContextProvider } from "./CollapsibleRoot.context";
 

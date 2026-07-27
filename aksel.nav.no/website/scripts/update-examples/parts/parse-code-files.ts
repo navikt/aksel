@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { FileArrayT, RootDirectoriesT } from "../types";
+import type { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { extractJsx } from "./extract-jsx";
 import { filterCode } from "./filter-code";

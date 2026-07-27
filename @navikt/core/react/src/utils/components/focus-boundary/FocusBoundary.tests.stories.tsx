@@ -301,7 +301,9 @@ export const TrackPrevFocused: Story = {
         <div ref={setAnchorEl}>
           <ActionMenu>
             <ActionMenu.Trigger>
-              <button data-testid="trigger">Open action menu</button>
+              <button type="button" data-testid="trigger">
+                Open action menu
+              </button>
             </ActionMenu.Trigger>
             <ActionMenu.Content>
               <ActionMenu.Item onSelect={() => setOpen(true)}>
@@ -352,8 +354,10 @@ function BaseFocusBoundaryComponent({
         {`.sb-focus-scope-tests :where(:focus, :focus-visible) { outline: 4px solid black; outline-offset: 2px; z-index: 2; }`}
       </style>
       <div>
-        <button onClick={() => setShow(true)}>show</button>
-        <button>outside-button-start</button>
+        <button type="button" onClick={() => setShow(true)}>
+          show
+        </button>
+        <button type="button">outside-button-start</button>
       </div>
       {show && (
         <FocusBoundary {...props} data-testid="focus-scope">
@@ -367,14 +371,18 @@ function BaseFocusBoundaryComponent({
             {firstChild}
             <TestField label={Field_ONE} />
             <TestField label={Field_TWO} />
-            <button>{BUTTON_THREE}</button>
+            <button type="button">{BUTTON_THREE}</button>
           </VStack>
         </FocusBoundary>
       )}
       <TestField label="outside" />
       <div>
-        <button>outside-button-end</button>
-        {show && <button onClick={() => setShow(false)}>hide</button>}
+        <button type="button">outside-button-end</button>
+        {show && (
+          <button type="button" onClick={() => setShow(false)}>
+            hide
+          </button>
+        )}
       </div>
     </VStack>
   );

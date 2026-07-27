@@ -1,5 +1,5 @@
 import React, {
-  InputHTMLAttributes,
+  type InputHTMLAttributes,
   forwardRef,
   useCallback,
   useRef,
@@ -10,7 +10,7 @@ import { useMergeRefs } from "../../../utils/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
 interface InputProps extends Omit<

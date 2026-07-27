@@ -1,5 +1,6 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
+import { sanity } from "next-sanity/live/cache-life";
 import { createRequire } from "node:module";
 import path from "node:path";
 
@@ -25,7 +26,7 @@ const cspHeader = `
     frame-src 'self' localhost:3000 http://localhost:3000 https://localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
-    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io https://sanity-cdn.com *.api.sanity.io https://reops-event-proxy.ekstern.dev.nav.no https://reops-event-proxy.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
+    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io https://sanity-cdn.com *.api.sanity.io https://reops-event-proxy.ekstern.dev.nav.no https://reops-event-proxy.nav.no https://login.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
     ${isProduction ? "upgrade-insecure-requests;" : ""}
 `;
 
@@ -58,6 +59,8 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  cacheComponents: true,
+  cacheLife: { default: sanity },
   transpilePackages: ["@navikt/ds-tokens"],
   /**
    * @important: These are always included in JS-bundle!

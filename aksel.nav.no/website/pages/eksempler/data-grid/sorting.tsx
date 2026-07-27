@@ -83,7 +83,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "I tilfeller der data endres dynamisk, bør du bruke `getRowId` for å beholde ytelsen.",
 };

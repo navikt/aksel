@@ -45,7 +45,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Propen `borderRadius` lar deg sette border-radius basert på tokens. Du kan også enkelt endre border-radius basert på brekkpunkt.",
 };

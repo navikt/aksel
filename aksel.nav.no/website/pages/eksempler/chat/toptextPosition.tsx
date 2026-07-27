@@ -32,7 +32,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Noen ganger ønsker man mer fleksibilitet for plassering av navn + tid i chatboblen.",
 };

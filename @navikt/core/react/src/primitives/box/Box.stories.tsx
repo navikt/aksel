@@ -4,7 +4,7 @@ import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { HGrid } from "../grid";
 import { HStack, VStack } from "../stack";
-import { Box, BoxProps } from "./Box";
+import { Box, type BoxProps } from "./Box";
 
 const meta: Meta<typeof Box> = {
   title: "ds-react/Primitives/Box",
@@ -435,7 +435,9 @@ export const PaddingDemo = () => (
 export const AsChild = () => (
   <VStack gap="space-16">
     <Box borderRadius="8" padding="space-16" asChild>
-      <button onClick={() => alert("clicked")}>Box is now a button</button>
+      <button type="button" onClick={() => alert("clicked")}>
+        Box is now a button
+      </button>
     </Box>
   </VStack>
 );

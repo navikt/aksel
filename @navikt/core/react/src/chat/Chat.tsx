@@ -1,7 +1,7 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import { AkselColor } from "../types";
-import { BodyLong, HeadingProps } from "../typography";
+import type { AkselColor } from "../types";
+import { BodyLong, type HeadingProps } from "../typography";
 import { cl } from "../utils/helpers";
 import Bubble, { type ChatBubbleProps } from "./Bubble";
 

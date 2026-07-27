@@ -1,4 +1,6 @@
 import { sanityMarkdownFetch } from "@/app/_sanity/live";
+import type { KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { MetadataSeksjonMarkdown } from "@/app/api/markdown/blocks/MetadataSeksjon.md";
 import { buildMarkdown } from "./build-markdown";
 import { buildXMLTag } from "./metadata-header";
 import { portableMarkdown } from "./portable-markdown";
@@ -8,6 +10,7 @@ type RouteItemBase = {
   heading?: string | null;
   content: any[] | null;
   sidebarindex?: number;
+  component_metadata?: NonNullable<KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT>["component_metadata"];
 };
 
 type RouteConfig<T extends RouteItemBase> = {
@@ -23,13 +26,14 @@ type RouteConfig<T extends RouteItemBase> = {
 function createRoute<T extends RouteItemBase>(config: RouteConfig<T>) {
   return {
     markdown: async () => {
-      const { data } = await sanityMarkdownFetch({ query: config.query });
+      const result = await sanityMarkdownFetch({ query: config.query });
+      const data = result.data as T[];
 
       if (!data || data.length === 0) {
         throw new Error("No data returned from Sanity");
       }
 
-      const sortedData = (data as T[]).sort((a, b) => {
+      const sortedData = data.sort((a, b) => {
         const sidebarSort = (a.sidebarindex ?? 0) - (b.sidebarindex ?? 0);
         if (sidebarSort !== 0) {
           return sidebarSort;
@@ -91,9 +95,10 @@ function buildItemMarkdown<T extends RouteItemBase>(
 
   return buildMarkdown(
     open,
-    { heading: item.heading! },
+    { heading: item.heading ?? "" },
     portableMarkdown(config.getIntro?.(item)),
     portableMarkdown(item.content ?? undefined),
+    MetadataSeksjonMarkdown(item.component_metadata),
     close,
   );
 }

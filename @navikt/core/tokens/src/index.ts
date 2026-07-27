@@ -1,8 +1,8 @@
 import { bundle } from "lightningcss";
 import fs from "node:fs";
 import StyleDictionary from "style-dictionary";
-import { DesignTokens, Filter } from "style-dictionary/types";
-import { AkselColorRole } from "../types";
+import type { DesignTokens, Filter } from "style-dictionary/types";
+import type { AkselColorRole } from "../types";
 import {
   formatCJS,
   formatDOCS,

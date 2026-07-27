@@ -44,7 +44,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 6,
   desc: "Enkel knapp uten dropzone. Label og ev. beskrivelse kobles opp med `aria-describedby`.",
 };

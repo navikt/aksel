@@ -30,7 +30,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Husk å legge til 'aria-hidden' hvis ikonet bare er illustrativt.",
 };

@@ -1,8 +1,8 @@
 import Color, { type Coords } from "colorjs.io";
 import type { GlobalColorScale } from "../../../internal-types";
-import { AkselColorRole, AkselColorTheme } from "../../../types";
-import { GlobalColorEntry } from "../../tokens.util";
-import { GlobalConfigWithoutAlpha } from "./colors.types";
+import type { AkselColorRole, AkselColorTheme } from "../../../types";
+import type { GlobalColorEntry } from "../../tokens.util";
+import type { GlobalConfigWithoutAlpha } from "./colors.types";
 import { semanticRootTokens } from "./semantic-root.tokens";
 
 type GlobalConfigWithAlpha = Record<

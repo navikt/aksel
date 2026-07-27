@@ -22,7 +22,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = { render: Example };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
   desc: "Med `variant='text'` følger høyden skriftstørrelsen.",
 };

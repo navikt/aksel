@@ -1,4 +1,4 @@
-import type { SanityClient as SanityClientType } from "@sanity/client";
+import type { SanityClient as SanityClientType } from "next-sanity";
 import { parseBody } from "next-sanity/webhook";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";

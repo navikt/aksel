@@ -1,5 +1,5 @@
 import React, {
-  HTMLAttributes,
+  type HTMLAttributes,
   createContext,
   forwardRef,
   useContext,

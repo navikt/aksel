@@ -1,5 +1,5 @@
 import JSON5 from "json5";
-import { ArgsT } from "../types";
+import type { ArgsT } from "../types";
 
 export function extractArgs(
   code: string,

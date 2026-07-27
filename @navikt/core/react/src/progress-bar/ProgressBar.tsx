@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, forwardRef, useEffect } from "react";
+import React, { type HTMLAttributes, forwardRef, useEffect } from "react";
 import type { AkselColor } from "../types";
 import { cl } from "../utils/helpers";
 import { useTimeout, useValueAsRef } from "../utils/hooks";

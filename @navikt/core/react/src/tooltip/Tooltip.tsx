@@ -11,7 +11,12 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import React, { Fragment, HTMLAttributes, forwardRef, useRef } from "react";
+import React, {
+  Fragment,
+  type HTMLAttributes,
+  forwardRef,
+  useRef,
+} from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { HStack } from "../primitives/stack";
@@ -296,8 +301,8 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
         {shortcuts.map((key, index) => (
           <Fragment key={key.join("+")}>
             <HStack gap="space-4">
-              {key.map((k, i) => (
-                <Detail as="kbd" key={i} className="aksel-tooltip__key">
+              {key.map((k) => (
+                <Detail as="kbd" key={k} className="aksel-tooltip__key">
                   {k}
                 </Detail>
               ))}
@@ -313,8 +318,8 @@ function TooltipShortcuts({ shortcuts }: { shortcuts: TooltipProps["keys"] }) {
 
   return (
     <span className="aksel-tooltip__keys" aria-hidden>
-      {shortcuts.map((k, i) => (
-        <Detail as="kbd" key={i} className="aksel-tooltip__key">
+      {shortcuts.map((k) => (
+        <Detail as="kbd" key={k} className="aksel-tooltip__key">
           {k}
         </Detail>
       ))}

@@ -37,7 +37,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Med `isMultiSelect` kan brukeren velge flere alternativer fra nedtrekkslisten.",
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, useEffect } from "react";
+import { type ReactElement, useEffect } from "react";
 import { Page } from "@navikt/ds-react/Page";
 import { logger } from "@navikt/next-logger";
 import GenericErrorPage from "@/app/_ui/generic-error-page";

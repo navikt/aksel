@@ -47,7 +47,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 12,
   desc: "Vi anbefaler å samle kortene i en liste (`<ul>`), med mindre du rendrer titlene som overskrifter.",
 };

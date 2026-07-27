@@ -157,9 +157,18 @@ const disabledColumnDef: ColumnDefinitions<DisabledRow> = [
     id: "col1",
     header: "Col 1",
     bodyCell: ({ id }) => {
-      if (id === 2) return <button disabled>Disabled button</button>;
+      if (id === 2)
+        return (
+          <button type="button" disabled>
+            Disabled button
+          </button>
+        );
       if (id === 3)
-        return <button aria-disabled="true">Aria-Disabled button</button>;
+        return (
+          <button type="button" aria-disabled="true">
+            Aria-Disabled button
+          </button>
+        );
       return "Row 1 Col 1";
     },
   },
@@ -294,7 +303,7 @@ export const Cache: Story = {
 
     return (
       <div style={{ padding: "4rem", display: "grid", gap: "2rem" }}>
-        <button onClick={() => setShowThatSingleRow((s) => !s)}>
+        <button type="button" onClick={() => setShowThatSingleRow((s) => !s)}>
           Toggle single row: {showThatSingleRow ? "ON" : "OFF"}
         </button>
         <DataGrid
@@ -348,7 +357,7 @@ const focusColumnDef: ColumnDefinitions<FocusRow> = [
     id: "col2",
     header: "Col 2",
     bodyCell: ({ id }) =>
-      id === "1" ? <button>Focusable button</button> : "Col 2",
+      id === "1" ? <button type="button">Focusable button</button> : "Col 2",
   },
   {
     id: "col3",

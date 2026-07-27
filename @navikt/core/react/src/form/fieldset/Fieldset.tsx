@@ -1,9 +1,13 @@
-import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
+import React, {
+  type FieldsetHTMLAttributes,
+  forwardRef,
+  useContext,
+} from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit, useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { ReadOnlyIcon, ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
-import { FormFieldProps } from "../useFormField";
+import type { FormFieldProps } from "../useFormField";
 import { FieldsetContext } from "./context";
 import { useFieldset } from "./useFieldset";
 

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Loader } from "../loader";
-import { AkselColor } from "../types";
+import type { AkselColor } from "../types";
 import { Label } from "../typography";
 import type { OverridableComponent } from "../utils-external";
 import { omit } from "../utils-external";

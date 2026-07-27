@@ -30,7 +30,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 10,
   desc: "Propen `allowTwoDigitYear` gjør det mulig å skrive årstallet på 'yy'-format. Mulige årstall vil være 80 år bakover og 19 år framover. I 2025 tilsvarer det 1945-2044.",
 };

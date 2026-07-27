@@ -37,6 +37,8 @@ async function GodPraksisFeedback({ docId }: { docId: string }) {
               viewBox="0 0 81 81"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden
+              role="presentation"
             >
               <rect
                 x="56.6904"

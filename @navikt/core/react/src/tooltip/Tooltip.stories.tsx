@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../button";
 import { VStack } from "../primitives/stack";
@@ -80,7 +80,7 @@ export const Keys = () => {
         keys={["CMD", "I"]}
         open={true}
       >
-        <button>Element</button>
+        <button type="button">Element</button>
       </Tooltip>
       <Tooltip
         content="Tooltip example with multiple keys"
@@ -88,7 +88,7 @@ export const Keys = () => {
         open={true}
         placement="bottom"
       >
-        <button>Element</button>
+        <button type="button">Element</button>
       </Tooltip>
     </div>
   );

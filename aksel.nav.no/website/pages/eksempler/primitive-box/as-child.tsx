@@ -20,7 +20,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 8,
   desc: "Vi anbefaler å bruke `asChild`-propen der mulig. Dette reduserer antall DOM-noder og forenkler output. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/komponent-api#613715c234c8).",
 };

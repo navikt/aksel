@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
-import { ExpansionCard, ExpansionCardProps } from ".";
+import { ExpansionCard, type ExpansionCardProps } from ".";
 import { Checkbox } from "../form/checkbox";
 import { Link } from "../link";
 import { VStack } from "../primitives/stack";

@@ -38,7 +38,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: 'Det er ikke støtte for å ha <form> som direkte barn av <Modal>. Legg <form> enten rundt hele modalen eller inni <Modal.Body>. Sistnevnte gjør det mulig å sette method="dialog", som gjør at modalen lukkes ved submit.',
 };

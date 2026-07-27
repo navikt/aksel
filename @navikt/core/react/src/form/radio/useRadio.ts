@@ -3,7 +3,7 @@ import { omit } from "../../utils-external";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useFormField } from "../useFormField";
 import { RadioGroupContext } from "./RadioGroup.context";
-import { RadioProps } from "./types";
+import type { RadioProps } from "./types";
 
 /**
  * Handles props for Radios in context with Fieldset and RadioGroup

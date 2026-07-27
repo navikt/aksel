@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import type { TimelinePeriod, TimelineRow, TimelineRowProps } from "..";
 import { omit } from "../../utils-external";
-import { Period } from "./types.external";
+import type { Period } from "./types.external";
 
 type TimelineRowPropsWithRef = React.ComponentProps<typeof TimelineRow>;
 type TimelinePeriodPropsWithRef = React.ComponentProps<typeof TimelinePeriod>;

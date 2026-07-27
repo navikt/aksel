@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { userEvent, within } from "storybook/test";
 import { LinkIcon, ThumbUpIcon } from "@navikt/aksel-icons";

@@ -2,12 +2,12 @@ import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Collapsible } from "../../collapsible";
+import { Stepper, type StepperStepProps } from "../../legacy/stepper";
 import { HStack } from "../../primitives/stack";
 import { ProgressBar } from "../../progress-bar";
-import { Stepper, StepperStepProps } from "../../stepper";
 import { BodyShort } from "../../typography";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { ComponentTranslation } from "../../utils/i18n/i18n.types";
+import type { ComponentTranslation } from "../../utils/i18n/i18n.types";
 
 export interface FormProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

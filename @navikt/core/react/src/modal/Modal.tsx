@@ -12,13 +12,13 @@ import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import {
-  MouseCoordinates,
+  type MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
   useIsModalOpen,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { ModalProps } from "./types";
+import type { ModalProps } from "./types";
 
 const polyfillClassName = "aksel-modal--polyfilled";
 
@@ -224,7 +224,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}

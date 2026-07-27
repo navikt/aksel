@@ -1,5 +1,43 @@
 # @navikt/ds-react
 
+## 8.15.0
+
+### Minor Changes
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+### Patch Changes
+
+- Performance: Optimized internal i18n hook ([#5037](https://github.com/navikt/aksel/pull/5037))
+
+- Updated dependencies [[`662e4fe`](https://github.com/navikt/aksel/commit/662e4fef66c42c46ee57d36c188f191278f4d383)]:
+  - @navikt/aksel-icons@8.15.0
+  - @navikt/ds-tokens@8.15.0
+
+## 8.14.0
+
+### Minor Changes
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
+### Patch Changes
+
+- Table: Fixed content not showing when using ExpandableRows with React.Activity + React.StrictMode ([#5018](https://github.com/navikt/aksel/pull/5018))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.14.0
+  - @navikt/aksel-icons@8.14.0
+
+## 8.13.1
+
+### Patch Changes
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.13.1
+  - @navikt/aksel-icons@8.13.1
+
 ## 8.13.0
 
 ### Minor Changes

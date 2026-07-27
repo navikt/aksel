@@ -1,4 +1,5 @@
-import core, { Collection, JSCodeshift } from "jscodeshift";
+import type core from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 // add import declaration after first existing import declaration, or
 // at the beginning of the file

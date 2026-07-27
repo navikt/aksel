@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonProps } from "../../../button";
+import { Button, type ButtonProps } from "../../../button";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { useControllableState } from "../../../utils/hooks";
 

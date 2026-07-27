@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import React, { type ErrorInfo } from "react";
 import { Events } from "@navikt/analytics-types";
 import { Tag as DsTag, HStack, LinkCard, VStack } from "@navikt/ds-react";
 import {
@@ -11,12 +12,11 @@ import {
   LinkCardTitle,
 } from "@navikt/ds-react/LinkCard";
 import { Tag } from "@/app/(routes)/(root)/_ui/FrontpageTag";
-import { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { LANDINGSSIDE_LATEST_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { Avatar, AvatarStack, avatarUrl } from "@/app/_ui/avatar/Avatar";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
-import ErrorBoundary from "@/error-boundary";
 import { cl } from "@/ui-utils/className";
 import { fallbackImageUrl } from "@/ui-utils/fallback-image-url";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
@@ -83,7 +83,7 @@ const Card = ({ article, visible }: CardProps) => {
               fallbackImageUrl(article?.heading ?? "", "thumbnail") ||
               ""
             }
-            alt={article.heading + " thumbnail"}
+            alt={`${article.heading} thumbnail`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className={cl({
@@ -165,6 +165,40 @@ const Card = ({ article, visible }: CardProps) => {
     </LinkCard>
   );
 };
+
+interface Props {
+  boundaryName?: string;
+  children: React.ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+  error?: Error;
+  errorInfo?: ErrorInfo;
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    this.setState({ hasError: true, error, errorInfo });
+    console.error(error);
+  }
+
+  render(): React.ReactNode {
+    if (this.state.hasError) {
+      return <div className="vk-error" />;
+    }
+    return this.props.children;
+  }
+}
 
 export default function Component(props: CardProps) {
   return (
