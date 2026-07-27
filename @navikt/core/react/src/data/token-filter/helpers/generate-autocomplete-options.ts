@@ -6,12 +6,12 @@ import type {
   OperatorT,
 } from "../TokenFilter.types";
 import { createGroups } from "./grouping";
-import { QUERY_OPERATORS } from "./operators";
+import { getOperatorType, getValidOperatorsForProperty } from "./operators";
 import { OPERATOR_LABELS, buildQueryString } from "./query-builder";
 import { matchesFilterText } from "./text-matching";
 
 /**
- * Generates "options" to be used as autosuggest-ottion based on the current query state.
+ * Generates "options" to be used as autosuggest-options based on the current query state.
  *
  * The query parser recognizes three states:
  * - "property": User has selected/matched a property and operator ("Status = active")
@@ -36,25 +36,42 @@ function generateAutoCompleteOptions(
   /* State: Property and operator are matched, suggest values */
   if (queryState.step === "property") {
     const filterText = queryState.value || "";
+    const isMultiSelect =
+      getOperatorType(queryState.property, queryState.operator) === "multiple";
+
+    const valueSuggestions = createValueSuggestions(
+      filteringOptions,
+      queryState.operator,
+      filterText,
+      queryState.property,
+      isMultiSelect ? (queryState.selectedValues ?? []) : null,
+    );
+
+    /* Operators of type "multiple" only accept known values, so no free-form suggestion */
+    if (isMultiSelect) {
+      return {
+        value: filterText,
+        options: valueSuggestions,
+      };
+    }
+
+    const customQuery = buildQueryString(
+      queryState.property.label,
+      queryState.operator,
+      filterText,
+    );
 
     return {
       value: queryState.value,
-      options: createValueSuggestions(
-        filteringOptions,
-        queryState.operator,
-        filterText,
-        queryState.property,
+      options: withCustomSuggestion(
+        valueSuggestions,
+        filterText ? { value: customQuery, label: customQuery } : null,
       ),
     };
   }
 
   /* State: Property matched, but operator is incomplete */
   if (queryState.step === "operator") {
-    const operators = filterOperatorsByPrefix(
-      getValidOperatorsForProperty(queryState.property),
-      queryState.operatorPrefix,
-    );
-
     const partialQuery = buildQueryString(
       queryState.property.label,
       queryState.operatorPrefix,
@@ -64,20 +81,16 @@ function generateAutoCompleteOptions(
     /**
      * Edge case: User typed an invalid operator prefix that doesn't match any operators.
      * This can happen when typing characters that don't start any valid operator.
-     * Return empty suggestions gracefully - the UI will show "no results".
+     * `generateOperatorSuggestions` returns an empty list, and only the free-text suggestion is shown.
      */
-    if (operators.length === 0) {
-      return {
-        value: partialQuery,
-        options: [],
-      };
-    }
-
     return {
       value: partialQuery,
-      options: generateOperatorSuggestions(
-        queryState.property,
-        queryState.operatorPrefix,
+      options: withCustomSuggestion(
+        generateOperatorSuggestions(
+          queryState.property,
+          queryState.operatorPrefix,
+        ),
+        createFreeTextSuggestion(partialQuery),
       ),
     };
   }
@@ -107,52 +120,63 @@ function generateAutoCompleteOptions(
    */
   return {
     value: queryState.value,
-    options: [
-      ...generatePropertySuggestions(filteringProperties, queryState.value),
-      ...createValueSuggestions(
-        filteringOptions,
-        queryState.operator ?? "=",
+    options: withCustomSuggestion(
+      [
+        ...generatePropertySuggestions(filteringProperties, queryState.value),
+        ...createValueSuggestions(
+          filteringOptions,
+          queryState.operator ?? "=",
+          queryState.value,
+        ),
+      ],
+      createFreeTextSuggestion(
+        buildQueryString("", queryState.operator ?? "", queryState.value),
         queryState.value,
       ),
-    ],
+    ),
   };
 }
 
 /**
- * Returns the valid operators for a given property.
- * Extracts operators from the property's custom operator configuration.
- * If none are configured, falls back to all available operators.
- *
- * The QueryFilteringScopedOperator can be a simple string (e.g., "=")
- * or an object with operator and tokenType (e.g., { operator: ":", tokenType: "single" }).
- * This function normalizes both formats and returns just the operator strings.
- *
- * @returns Array of valid operators for the property
- *
- * TODO: We omit passing the tokenType for now since it's not currently used in the UI. But will be needed for single/multi-selection.
+ * Suggestion that turns the typed text into a free-text token.
+ * Shown while the input hasn't matched both a property and an operator.
  */
-function getValidOperatorsForProperty(
-  property: InternalPropertyDefinition,
-): OperatorT[] {
-  const { operators } = property;
+function createFreeTextSuggestion(
+  value: string,
+  label: string = value,
+): AutoCompleteOption {
+  return {
+    value,
+    /* TODO: Support i18n */
+    label,
+    freeText: true,
+  };
+}
 
-  /* If no operators configured, return all available operators */
-  if (!operators || operators.length === 0) {
-    return QUERY_OPERATORS;
+/**
+ * Prepends a suggestion for the text the user typed, so any value can be used
+ * even when it doesn't match a predefined option.
+ *
+ * The suggestion is rendered without a group label, and is skipped when an
+ * existing suggestion already produces the exact same query string.
+ */
+function withCustomSuggestion(
+  groups: OptionGroup<AutoCompleteOption>[],
+  customOption: AutoCompleteOption | null,
+): OptionGroup<AutoCompleteOption>[] {
+  if (!customOption) {
+    return groups;
   }
 
-  /*
-   * Extract operator strings from QueryFilteringScopedOperator format
-   * Handle both simple strings and objects with operator property
-   */
-  const operatorStrings = operators.map((op) =>
-    typeof op === "string" ? op : op.operator,
+  const isDuplicate = groups.some((group) =>
+    group.options.some((option) => option.value === customOption.value),
   );
 
-  /* Filter to only valid QUERY_OPERATORS to ensure type safety */
-  return operatorStrings.filter((op) =>
-    QUERY_OPERATORS.includes(op as OperatorT),
-  ) as OperatorT[];
+  if (isDuplicate) {
+    return groups;
+  }
+
+  return [{ label: "", options: [customOption] }, ...groups];
 }
 
 /**
@@ -235,6 +259,7 @@ function generateOperatorSuggestions(
  * Creates value suggestions for autocomplete.
  * When scopedProperty is provided, only shows values for that property (single group).
  * When scopedProperty is omitted, searches across all properties (multiple groups).
+ * When multiSelectValues is provided, options are rendered as toggleable checkboxes.
  * TODO: This could potentially contain an unlimited number of options if there are many values across properties.
  * May need virtualization/async or other filtering mechanism.
  */
@@ -244,6 +269,7 @@ function createValueSuggestions(
   operator: OperatorT,
   filterText = "",
   scopedProperty?: InternalPropertyDefinition,
+  multiSelectValues: string[] | null = null,
 ): OptionGroup<AutoCompleteOption>[] {
   const groups: Record<string, OptionGroup<AutoCompleteOption>> = {};
 
@@ -253,7 +279,12 @@ function createValueSuggestions(
     }
 
     /* If scoped to a property, filter to only that property's options */
-    if (scopedProperty && option.property !== scopedProperty) {
+    if (scopedProperty && option.property.key !== scopedProperty.key) {
+      continue;
+    }
+
+    /* Don't suggest values with an operator the property doesn't support */
+    if (!getValidOperatorsForProperty(option.property).includes(operator)) {
       continue;
     }
 
@@ -279,10 +310,23 @@ function createValueSuggestions(
       };
     }
 
+    const query = buildQueryString(
+      option.property.label,
+      operator,
+      option.value,
+    );
+
     groups[groupLabel].options.push({
-      value: buildQueryString(option.property.label, operator, option.value),
-      label: buildQueryString(option.property.label, operator, option.value),
+      /* Stays stable while toggling, so virtual focus survives a multi-select */
+      value: query,
+      label: multiSelectValues ? option.label : query,
       tags: option.tags,
+      ...(multiSelectValues && {
+        multiSelect: {
+          value: option.value,
+          selected: multiSelectValues.includes(option.value),
+        },
+      }),
     });
   }
 
