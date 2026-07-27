@@ -6,8 +6,10 @@ import type { McpTool } from "../types.js";
 const getTokenDetailsInputSchema = {
   tokenName: z
     .string({
-      invalid_type_error: "tokenName must be a string",
-      required_error: "tokenName is required",
+      error: (issue) =>
+        issue.input === undefined
+          ? "tokenName is required"
+          : "tokenName must be a string",
     })
     .trim()
     .min(1, "tokenName is required")
