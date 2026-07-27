@@ -25,7 +25,7 @@ type ExternalQuery = {
   operation: OperationT;
 };
 
-type ExternalOption = {
+type ExternalPropertyOption = {
   propertyKey: string;
   value: string;
   label?: string;
@@ -33,11 +33,11 @@ type ExternalOption = {
   disabled?: boolean;
 };
 
-type ExternalOptions = ExternalOption[];
+type ExternalPropertyOptions = ExternalPropertyOption[];
 
 type ExternalPropertyGroup = {
   label: string;
-  options: ExternalOptions;
+  options: ExternalPropertyOptions;
 };
 
 type ExternalPropertyDefinition = {
@@ -55,8 +55,8 @@ type ExternalPropertyOperator =
   | { operator: string; type: "single" | "multiple" };
 
 export type {
-  ExternalOption,
-  ExternalOptions,
+  ExternalPropertyOption,
+  ExternalPropertyOptions,
   ExternalPropertyDefinition,
   ExternalPropertyDefinitions,
   ExternalPropertyGroup,

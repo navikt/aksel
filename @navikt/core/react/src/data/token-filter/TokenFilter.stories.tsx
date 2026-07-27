@@ -91,7 +91,7 @@ export const WithGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={properties}
         />
       </div>
@@ -112,7 +112,7 @@ export const WithOutGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
@@ -133,7 +133,7 @@ export const MultipleTokens: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
@@ -206,7 +206,7 @@ export const CustomOperators: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithOperators}
         />
       </div>
@@ -243,7 +243,7 @@ export const OperatorFiltering: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={properties}
         />
         <div style={{ marginTop: "20px" }}>
@@ -320,7 +320,7 @@ export const MixedGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={[...statusOptions, ...regionOptions]}
+          propertyOptions={[...statusOptions, ...regionOptions]}
           propertyDefinitions={mixProperties}
         />
       </div>
@@ -397,7 +397,7 @@ export const WithDataTable: Story = {
         <TokenFilter
           query={query}
           onChange={setQuery}
-          options={tableOptions}
+          propertyOptions={tableOptions}
           propertyDefinitions={tablePropertyDefs}
         />
         <div>TOOD: Add table here</div>

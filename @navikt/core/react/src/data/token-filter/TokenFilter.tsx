@@ -10,8 +10,8 @@ import { AutoSuggest } from "./AutoSuggest";
 import type { AutoCompleteOption } from "./AutoSuggest.types";
 import { TokenFilterChips } from "./FilterChip";
 import type {
-  ExternalOptions,
   ExternalPropertyDefinitions,
+  ExternalPropertyOptions,
   ExternalQuery,
   ExternalToken,
   InternalPropertyDefinition,
@@ -25,8 +25,14 @@ type TokenFilterProps = {
   query: ExternalQuery;
   onChange: (newQuery: ExternalQuery) => void;
   className?: string;
+  /**
+   * The properties users can filter on, e.g. "Status" or "Region".
+   */
   propertyDefinitions: ExternalPropertyDefinitions;
-  options: ExternalOptions;
+  /**
+   * The selectable values for each property, linked through `propertyKey`.
+   */
+  propertyOptions: ExternalPropertyOptions;
 };
 
 /*
@@ -35,15 +41,18 @@ type TokenFilterProps = {
  * - Support free-text tokens.
  */
 export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
-  ({ query, className, propertyDefinitions, options, onChange }, ref) => {
+  (
+    { query, className, propertyDefinitions, propertyOptions, onChange },
+    ref,
+  ) => {
     const [filterText, setFilterText] = useState<string>("");
     const [open, setOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const { propertyMap, parsedPropertyDefinitions, parsedPropertyOptions } =
       useMemo(
-        () => deriveFilterState(propertyDefinitions, options),
-        [propertyDefinitions, options],
+        () => deriveFilterState(propertyDefinitions, propertyOptions),
+        [propertyDefinitions, propertyOptions],
       );
 
     const autoCompleteOptions = useMemo(
@@ -163,7 +172,7 @@ export const TokenFilter = forwardRef<HTMLDivElement, TokenFilterProps>(
 
 function deriveFilterState(
   propertyDefinitions: ExternalPropertyDefinitions,
-  propertyOptions: ExternalOptions,
+  propertyOptions: ExternalPropertyOptions,
 ): {
   propertyMap: Map<string, InternalPropertyDefinition>;
   parsedPropertyDefinitions: InternalPropertyDefinition[];
