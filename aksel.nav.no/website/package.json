@@ -31,7 +31,7 @@
   "dependencies": {
     "@navikt/analytics-types": "0.0.9",
     "@navikt/next-logger": "4.4.1",
-    "@navikt/oasis": "3.2.1",
+    "@navikt/oasis": "4.1.4",
     "@neshca/cache-handler": "1.9.0",
     "@portabletext/react": "^6.0.3",
     "@sanity/client": "7.23.2",
