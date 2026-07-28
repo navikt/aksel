@@ -773,7 +773,7 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Link",
     bodyCell: ({ foo }) => (
       <a href="/example" onClick={(e) => e.preventDefault()}>
-        {foo} link
+        {foo} link demo
       </a>
     ),
   },

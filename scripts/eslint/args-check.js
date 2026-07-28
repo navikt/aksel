@@ -26,7 +26,6 @@ module.exports = {
 
           for (const declaration of node.declaration.declarations) {
             if (
-              !declaration.id ||
               declaration.id.type !== "Identifier" ||
               declaration.id.name !== "args"
             ) {
@@ -47,7 +46,6 @@ module.exports = {
             }
 
             if (
-              !typeAnnotation ||
               typeAnnotation.type !== "TSTypeReference" ||
               !typeName ||
               typeName.type !== "Identifier" ||
