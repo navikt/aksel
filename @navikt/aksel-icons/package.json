@@ -71,7 +71,7 @@
     "test:watch": "vitest watch"
   },
   "devDependencies": {
-    "@figma/rest-api-spec": "^0.35.0",
+    "@figma/rest-api-spec": "^0.41.0",
     "@svgr/cli": "8.1.0",
     "@types/js-yaml": "^4.0.9",
     "@types/react": "19.2.14",
