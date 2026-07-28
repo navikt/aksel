@@ -1,10 +1,7 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
-import { createRequire } from "node:module";
 import path from "node:path";
-
-const require = createRequire(import.meta.url);
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
@@ -72,9 +69,6 @@ const nextConfig: NextConfig = {
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
     PRODUCTION: isProduction ? "true" : "false",
   },
-  cacheHandler: require.resolve("./cache-handler.mjs"),
-  cacheMaxMemorySize: 0,
-
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {
     return [
