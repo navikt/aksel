@@ -25,7 +25,7 @@
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
     "release": "yarn boot && yarn docgen:meta && changeset publish && yarn script:git-release",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "workspaces": [
     "@navikt/core/*",
