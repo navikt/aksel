@@ -78,7 +78,7 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.5.5",
     "@changesets/cli": "2.31.1",
     "@eslint/js": "^10.0.1",
     "@github-ui/storybook-addon-performance-panel": "^1.1.4",

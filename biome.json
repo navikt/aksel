@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
   "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "javascript": {
     "jsxRuntime": "reactClassic"
@@ -30,13 +30,15 @@
       "!**/_sanity/query-types.ts",
       "!**/component-names.generated.ts",
       "!**/transforms/**/*.input.*",
-      "!**/transforms/**/*.output.*"
+      "!**/transforms/**/*.output.*",
+      "!**/@navikt/aksel-icons/icons/*.svg",
+      "!**/@navikt/aksel-icons/template/*.svg"
     ]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
 
       "style": {
         "noDescendingSpecificity": "off",
@@ -65,9 +67,7 @@
               "timeStamp"
             ]
           }
-        }
-      },
-      "nursery": {
+        },
         "noShadow": "error"
       },
       "complexity": {
