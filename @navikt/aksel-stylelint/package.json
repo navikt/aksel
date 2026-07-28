@@ -48,7 +48,7 @@
     "concurrently": "10.0.3",
     "postcss-selector-parser": "^7.1.4",
     "postcss-value-parser": "^4.2.0",
-    "stylelint": "^17.14.0",
+    "stylelint": "^17.14.1",
     "stylelint-test-rule-node": "^1.2.0",
     "tsx": "^4.23.1",
     "typescript": "6.0.3"
