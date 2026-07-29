@@ -1,10 +1,10 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
 import React, { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useDateInputContext } from "../date/Date.Input";
 import { useProvider } from "../provider/Provider";
 import { Detail, Heading } from "../typography";
 import { useId } from "../utils-external";
+import { useDateInputContext } from "../utils/date/Date.Input";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs, useScrollLock } from "../utils/hooks";
 import { ModalContextProvider, useModalContext } from "./Modal.context";

@@ -161,22 +161,22 @@
     },
     "./DatePicker": {
       "import": {
-        "types": "./esm/date/datepicker/index.d.ts",
-        "default": "./esm/date/datepicker/index.js"
+        "types": "./esm/datepicker/index.d.ts",
+        "default": "./esm/datepicker/index.js"
       },
       "require": {
-        "types": "./cjs/date/datepicker/index.d.ts",
-        "default": "./cjs/date/datepicker/index.js"
+        "types": "./cjs/datepicker/index.d.ts",
+        "default": "./cjs/datepicker/index.js"
       }
     },
     "./MonthPicker": {
       "import": {
-        "types": "./esm/date/monthpicker/index.d.ts",
-        "default": "./esm/date/monthpicker/index.js"
+        "types": "./esm/monthpicker/index.d.ts",
+        "default": "./esm/monthpicker/index.js"
       },
       "require": {
-        "types": "./cjs/date/monthpicker/index.d.ts",
-        "default": "./cjs/date/monthpicker/index.js"
+        "types": "./cjs/monthpicker/index.d.ts",
+        "default": "./cjs/monthpicker/index.js"
       }
     },
     "./Dropdown": {

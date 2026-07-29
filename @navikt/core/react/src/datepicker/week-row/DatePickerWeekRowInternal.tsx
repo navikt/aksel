@@ -1,0 +1,56 @@
+import React from "react";
+import type { CalendarWeek } from "react-day-picker";
+import { Show } from "../../primitives/responsive";
+import { Detail } from "../../typography";
+import { useId } from "../../utils-external";
+import { useDateTranslationContext } from "../../utils/date/Date.locale";
+import type { MultipleMode } from "../DatePicker.types";
+import { DatePickerWeekNumber } from "../week-number/DatePickerWeekNumberInternal";
+
+const DatePickerWeekRow = ({
+  onWeekNumberClick,
+  weeks,
+}: {
+  onWeekNumberClick: MultipleMode["onWeekNumberClick"];
+  weeks?: CalendarWeek[];
+}) => {
+  const translate = useDateTranslationContext().translate;
+  const labelId = useId();
+
+  if (!onWeekNumberClick) {
+    return null;
+  }
+
+  return (
+    <Show below="sm" asChild>
+      {/** biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: role="grid" improves a11y reading */}
+      <table className="rdp-table" role="grid">
+        <tbody className="rdp-tbody">
+          <tr className="rdp-row aksel-date__week-row">
+            <Detail
+              as="th"
+              weight="semibold"
+              className="rdp-cell aksel-date__week-cell"
+            >
+              <span className="aksel-date__week-wrapper" id={labelId}>
+                {translate("week")}
+              </span>
+            </Detail>
+
+            {weeks?.map((week) => (
+              <DatePickerWeekNumber
+                key={week.weekNumber}
+                week={week}
+                onWeekNumberClick={onWeekNumberClick}
+                showOnDesktop={false}
+                className="aksel-date__week-wrapper"
+              />
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </Show>
+  );
+};
+
+export { DatePickerWeekRow };

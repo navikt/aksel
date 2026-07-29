@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { DatePicker, useDatepicker } from "../date/datepicker";
+import { DatePicker, useDatepicker } from "../datepicker";
 import { Select } from "../form/select";
 import { Modal } from "../modal";
 import { VStack } from "../primitives/stack";
