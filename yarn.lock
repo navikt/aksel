@@ -11446,9 +11446,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel-mcp@workspace:mcp-server":
+"aksel-mcp@workspace:apps/mcp-server":
   version: 0.0.0-use.local
-  resolution: "aksel-mcp@workspace:mcp-server"
+  resolution: "aksel-mcp@workspace:apps/mcp-server"
   dependencies:
     "@modelcontextprotocol/inspector": "npm:^0.21"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"

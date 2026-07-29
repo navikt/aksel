@@ -4,7 +4,7 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY mcp-server/dist ./
+COPY apps/mcp-server/dist ./
 
 
 EXPOSE 8080

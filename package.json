@@ -32,7 +32,6 @@
     "@navikt/aksel-icons",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
-    "mcp-server",
     "aksel.nav.no",
     "aksel.nav.no/*",
     "scripts/eslint",
