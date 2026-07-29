@@ -1,5 +1,7 @@
 {
   "name": "playroom",
+  "private": true,
+  "version": "0.1.0",
   "scripts": {
     "start": "yarn build:config && yarn sync-imports && playroom start",
     "build:playroom": "yarn build:config && yarn sync-imports && playroom build",
