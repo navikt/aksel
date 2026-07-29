@@ -1,5 +1,7 @@
 # @navikt/ds-tailwind
 
+## 8.16.0
+
 ## 8.15.0
 
 ### Minor Changes
