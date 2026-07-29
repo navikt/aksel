@@ -2,7 +2,7 @@ figma.showUI(__html__, { width: 480, height: 600 });
 
 figma.ui.onmessage = (msg) => {
   if (msg.type === "create-icon") {
-    const nodes = [];
+    const nodes: FrameNode[] = [];
 
     const icon = figma.createNodeFromSvg(msg.svg);
     icon.name = msg.name;
@@ -43,4 +43,6 @@ figma.on("drop", (event) => {
 
     return false;
   }
+
+  return false;
 });
