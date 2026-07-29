@@ -3,7 +3,7 @@ import {
   DateTranslationContextProvider,
   getLocaleFromString,
   getTranslations,
-} from "../../utils/date/Date.locale";
+} from "../../utils/components/date/Date.locale";
 import { cl } from "../../utils/helpers";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";

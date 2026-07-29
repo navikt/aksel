@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { Button } from "../../button";
-import { useDialogContext } from "../../dialog/root/DialogRoot.context";
-import { Modal } from "../../modal";
-import { useModalContext } from "../../modal/Modal.context";
-import { Popover } from "../../popover";
-import { cl } from "../helpers";
-import { focusElement } from "../helpers/focus";
-import { useMedia } from "../hooks";
-import { useI18n } from "../i18n/i18n.hooks";
-import type { TFunction } from "../i18n/i18n.types";
-import { getGlobalTranslations } from "./Date.locale";
+import { Button } from "../../../../button";
+import { useDialogContext } from "../../../../dialog/root/DialogRoot.context";
+import { Modal } from "../../../../modal";
+import { useModalContext } from "../../../../modal/Modal.context";
+import { Popover } from "../../../../popover";
+import { cl } from "../../../helpers";
+import { focusElement } from "../../../helpers/focus";
+import { useMedia } from "../../../hooks";
+import { useI18n } from "../../../i18n/i18n.hooks";
+import type { TFunction } from "../../../i18n/i18n.types";
+import { getGlobalTranslations } from "../Date.locale";
 
 const variantToLabel = {
   single: "chooseDate",

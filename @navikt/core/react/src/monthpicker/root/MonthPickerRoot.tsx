@@ -1,16 +1,16 @@
 import React, { forwardRef, useState } from "react";
 import { useId } from "../../utils-external";
-import { DateDialog } from "../../utils/date/Date.Dialog";
-import {
-  DateInputContextProvider,
-  type DateInputProps,
-  MonthPickerInput,
-} from "../../utils/date/Date.Input";
 import {
   DateTranslationContextProvider,
   getLocaleFromString,
   getTranslations,
-} from "../../utils/date/Date.locale";
+} from "../../utils/components/date/Date.locale";
+import { DateDialog } from "../../utils/components/date/dialog/DateDialog";
+import {
+  DateInputContextProvider,
+  type DateInputProps,
+  MonthPickerInput,
+} from "../../utils/components/date/input/DateInput";
 import { cl } from "../../utils/helpers";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useControllableState, useMergeRefs } from "../../utils/hooks";

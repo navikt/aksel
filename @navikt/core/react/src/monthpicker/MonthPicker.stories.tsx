@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { Button } from "../button";
 import { useId } from "../utils-external";
-import type { DateInputProps } from "../utils/date/Date.Input";
+import type { DateInputProps } from "../utils/components/date/input/DateInput";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import type { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPicker } from "./root/MonthPickerRoot";

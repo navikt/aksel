@@ -4,7 +4,7 @@ import { nb } from "date-fns/locale";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { HStack } from "../primitives/stack";
-import type { DateRange } from "../utils/date/Date.typeutils";
+import type { DateRange } from "../utils/components/date/Date.typeutils";
 import { DatePicker } from "./root/DatePickerRoot";
 import { useDatepicker } from "./root/useDatepicker";
 import { useRangeDatepicker } from "./root/useRangeDatepicker";

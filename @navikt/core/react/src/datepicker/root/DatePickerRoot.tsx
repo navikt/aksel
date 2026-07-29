@@ -2,17 +2,17 @@ import { isSameDay } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { useId } from "../../utils-external";
-import { DateDialog } from "../../utils/date/Date.Dialog";
+import {
+  DateTranslationContextProvider,
+  getTranslations,
+} from "../../utils/components/date/Date.locale";
+import { isDateRange } from "../../utils/components/date/Date.typeutils";
+import { DateDialog } from "../../utils/components/date/dialog/DateDialog";
 import {
   DateInputContextProvider,
   type DateInputProps,
   DatePickerInput,
-} from "../../utils/date/Date.Input";
-import {
-  DateTranslationContextProvider,
-  getTranslations,
-} from "../../utils/date/Date.locale";
-import { isDateRange } from "../../utils/date/Date.typeutils";
+} from "../../utils/components/date/input/DateInput";
 import { cl } from "../../utils/helpers";
 import { useControllableState, useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";

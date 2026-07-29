@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
+import { getLocaleFromString } from "../../utils/components/date/Date.locale";
+import type { DateInputProps } from "../../utils/components/date/input/DateInput";
 import { formatDateForInput, isValidDate, parseDate } from "../../utils/date";
-import type { DateInputProps } from "../../utils/date/Date.Input";
-import { getLocaleFromString } from "../../utils/date/Date.locale";
 import { focusElement } from "../../utils/helpers/focus";
 import { useDateLocale } from "../../utils/i18n/i18n.hooks";
 import type { MonthPickerProps } from "../MonthPicker.types";

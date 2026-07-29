@@ -14,12 +14,12 @@ import { Button } from "../../button";
 import { Select } from "../../form/select";
 import { BodyShort } from "../../typography";
 import { omit } from "../../utils-external";
+import { useDateTranslationContext } from "../../utils/components/date/Date.locale";
 import {
   calendarRange,
   getMonthOptions,
   getYearOptions,
 } from "../../utils/date";
-import { useDateTranslationContext } from "../../utils/date/Date.locale";
 import type { MultipleMode } from "../DatePicker.types";
 import { DatePickerWeekRow } from "../week-row/DatePickerWeekRowInternal";
 

@@ -3,7 +3,7 @@ import type { DateRange } from "react-day-picker";
 import {
   DateTranslationContextProvider,
   getTranslations,
-} from "../../utils/date/Date.locale";
+} from "../../utils/components/date/Date.locale";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";

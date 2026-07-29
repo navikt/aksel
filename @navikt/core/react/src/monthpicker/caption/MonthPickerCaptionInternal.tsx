@@ -10,7 +10,7 @@ import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
-import { useDateTranslationContext } from "../../utils/date/Date.locale";
+import { useDateTranslationContext } from "../../utils/components/date/Date.locale";
 import { useMonthPickerContext } from "../root/MonthPicker.context";
 
 type MonthPickerCaptionProps = {

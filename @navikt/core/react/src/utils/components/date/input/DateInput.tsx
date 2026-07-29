@@ -1,12 +1,15 @@
 import React, { type InputHTMLAttributes, forwardRef } from "react";
 import { CalendarIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
-import { type FormFieldProps, useFormField } from "../../form/useFormField";
-import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../utils-external";
-import { cl, createStrictContext } from "../helpers";
-import { useDateTranslationContext } from "./Date.locale";
+import { Button } from "../../../../button";
+import { ReadOnlyIcon } from "../../../../form/ReadOnlyIcon";
+import {
+  type FormFieldProps,
+  useFormField,
+} from "../../../../form/useFormField";
+import { BodyShort, ErrorMessage, Label } from "../../../../typography";
+import { omit } from "../../../../utils-external";
+import { cl, createStrictContext } from "../../../helpers";
+import { useDateTranslationContext } from "../Date.locale";
 
 interface DateInputContextProps {
   /**
