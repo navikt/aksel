@@ -1,4 +1,3 @@
-import { readFileSync, writeFileSync } from "node:fs";
 import type {
   List,
   ListItem,
@@ -6,35 +5,25 @@ import type {
   PhrasingContent,
   Root,
   Text,
-} from "npm:@types/mdast";
-import type { Node } from "npm:@types/unist";
-import { heading, root, text } from "npm:mdast-builder";
-import remarkParse from "npm:remark-parse";
-import remarkStringify from "npm:remark-stringify";
-import { unified } from "npm:unified";
-import { CONTINUE, EXIT, SKIP, visit } from "npm:unist-util-visit";
-import { visitParents } from "npm:unist-util-visit-parents";
-import { getChangelogs } from "./utils.ts";
-
-/**
- * Small diagram of the process:
-
-           original
-        markdown files
-               |
-               V
-          custom JSON
-        representation
-         of changelog
-               |
-               V
-        final markdown
- */
+} from "mdast";
+import { heading, root, text } from "mdast-builder";
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import remarkParse from "remark-parse";
+import remarkStringify from "remark-stringify";
+import { unified } from "unified";
+import type { Node } from "unist";
+import { CONTINUE, EXIT, SKIP, visit } from "unist-util-visit";
+import { visitParents } from "unist-util-visit-parents";
+import { getChangelogs } from "./utils.js";
 
 type PackageName = string;
 type Version = string;
 type VersionEntry = Record<PackageName, Node[]>;
 type Changelog = Record<Version, VersionEntry>;
+
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 
 const upsertEntry = (
   changelog: Changelog,
@@ -70,7 +59,7 @@ const processNode = (node: Root) => {
           node2.type === "link" ||
           (node2.type === "text" && node2.value === " Thanks ")
         ) {
-          if (parent2 && index !== null) {
+          if (parent2 && index !== undefined) {
             parent2.children.splice(index, 1);
             return [CONTINUE, index];
           }
@@ -135,7 +124,7 @@ const parseMarkdownFiles = async (filePaths: string[]): Promise<Changelog> => {
     // filter all empty list nodes
     visit(fileAST, (node, index, parent) => {
       if (node.type === "list" && node.children.length === 0) {
-        if (parent && index !== null) {
+        if (parent && index !== undefined) {
           parent.children.splice(index, 1);
           return [SKIP, index];
         }
@@ -228,9 +217,9 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
   return processed;
 };
 
-const changelogFiles = getChangelogs("./@navikt");
+const changelogFiles = getChangelogs(resolve(repoRoot, "@navikt"));
 console.info("Processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
 const changelogStr = await createMainChangelog(changelogJSON);
-writeFileSync("CHANGELOG.md", changelogStr);
+writeFileSync(resolve(repoRoot, "CHANGELOG.md"), changelogStr);
 console.info("Wrote to CHANGELOG.md");

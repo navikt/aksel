@@ -1,0 +1,25 @@
+{
+  "name": "aksel-changelog",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "update:repo-changelog": "tsx ./createMainChangelog.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mdast-builder": "^1.1.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
+    "unist-util-visit-parents": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^24.10.9",
+    "@types/unist": "^3.0.3",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3"
+  }
+}
