@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.16.1
+
+### @navikt/aksel
+
+- Internal infra update ([`a322476`](https://github.com/navikt/aksel/commit/a322476d33c8644da3400b4c29934535412ef8c7))
+
 ## 8.16.0
 
 ### @navikt/ds-react

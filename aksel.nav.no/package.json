@@ -11,11 +11,11 @@
     "sanity:update": "yarn workspace website update:sanity"
   },
   "dependencies": {
-    "@navikt/aksel": "^8.16.0",
-    "@navikt/aksel-icons": "^8.16.0",
-    "@navikt/ds-css": "^8.16.0",
-    "@navikt/ds-react": "^8.16.0",
-    "@navikt/ds-tailwind": "^8.16.0",
-    "@navikt/ds-tokens": "^8.16.0"
+    "@navikt/aksel": "^8.16.1",
+    "@navikt/aksel-icons": "^8.16.1",
+    "@navikt/ds-css": "^8.16.1",
+    "@navikt/ds-react": "^8.16.1",
+    "@navikt/ds-tailwind": "^8.16.1",
+    "@navikt/ds-tokens": "^8.16.1"
   }
 }
