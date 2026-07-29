@@ -1,4 +1,4 @@
-import { AkselIcon } from "@navikt/aksel-icons/metadata";
+import type { AkselIcon } from "@navikt/aksel-icons/metadata";
 
 const subCategorizeIcons = (
   icons: AkselIcon[],

@@ -30,7 +30,6 @@
   "workspaces": [
     "@navikt/core/*",
     "@navikt/aksel-icons",
-    "@navikt/aksel-icons/figma-plugin",
     "@navikt/aksel-stylelint",
     "@navikt/aksel",
     "mcp-server",
@@ -38,7 +37,8 @@
     "aksel.nav.no/*",
     "scripts/eslint",
     "scripts/analyzer",
-    "scripts"
+    "scripts",
+    "apps/*"
   ],
   "prettier": {
     "plugins": [

@@ -5401,7 +5401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^8.16.1, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:^8.16.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
@@ -5414,7 +5414,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^8.16.1, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:^8.16.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
@@ -11423,13 +11423,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin":
+"aksel-icons-figma-plugin@workspace:apps/figma-icon-plugin":
   version: 0.0.0-use.local
-  resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
+  resolution: "aksel-icons-figma-plugin@workspace:apps/figma-icon-plugin"
   dependencies:
     "@figma/plugin-typings": "npm:^1.131.0"
-    "@navikt/ds-css": "npm:*"
-    "@navikt/ds-react": "npm:*"
+    "@navikt/aksel-icons": "npm:^8.16.1"
+    "@navikt/ds-css": "npm:^8.16.1"
+    "@navikt/ds-react": "npm:^8.16.1"
     "@rollup/pluginutils": "npm:^5.4.0"
     "@svgr/core": "npm:^8.1.0"
     "@types/node": "npm:^24.10.9"

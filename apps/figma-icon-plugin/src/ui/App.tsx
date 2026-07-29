@@ -1,9 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope */
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useState } from "react";
+import * as Icons from "@navikt/aksel-icons";
+import meta from "@navikt/aksel-icons/metadata";
 import { Heading, Search, ToggleGroup } from "@navikt/ds-react";
-import * as Icons from "../../../";
-import meta from "../../../dist/metadata";
 import "./app.css";
 import { categorizeIcons, getFillIcon } from "./utils";
 
@@ -168,6 +168,7 @@ const App = () => {
                               }}
                               draggable="true"
                               className="icon-classname icon-button"
+                              type="button"
                             >
                               <T
                                 fontSize="2rem"

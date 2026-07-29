@@ -16,7 +16,8 @@
     "outDir": "dist/",
     "sourceMap": false,
     "noImplicitAny": false,
-    "types": ["@figma/plugin-typings"]
+    "types": ["@figma/plugin-typings"],
+    "ignoreDeprecations": "6.0"
   },
   "include": [
     "src/**/*.d.ts",

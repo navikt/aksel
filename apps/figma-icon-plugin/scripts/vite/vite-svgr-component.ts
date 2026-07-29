@@ -1,5 +1,6 @@
 import { type FilterPattern, createFilter } from "@rollup/pluginutils";
 import type { Config } from "@svgr/core";
+import { transform } from "@svgr/core";
 import fs from "node:fs";
 import type { Plugin } from "vite";
 import { transformWithEsbuild } from "vite";
@@ -24,7 +25,6 @@ export default function viteSvgr({
 
     async transform(_, id) {
       if (filter(id)) {
-        const { transform } = await import("@svgr/core");
         const svgCode = await fs.promises.readFile(
           id.replace(/\?.*$/, ""),
           "utf8",
