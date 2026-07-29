@@ -77,7 +77,7 @@
     "@next/bundle-analyzer": "16.2.6",
     "@next/eslint-plugin-next": "16.2.6",
     "@playwright/test": "1.61.1",
-    "@portabletext/block-tools": "^5.1.1",
+    "@portabletext/block-tools": "^5.1.12",
     "@portabletext/markdown": "^1.4.4",
     "@sanity/schema": "6.0.0",
     "@types/jscodeshift": "17.3.0",
