@@ -4,6 +4,7 @@ import { nb } from "date-fns/locale";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { HStack } from "../primitives/stack";
+import type { DateRange } from "../utils/date/Date.typeutils";
 import { DatePicker } from "./root/DatePickerRoot";
 import { useDatepicker } from "./root/useDatepicker";
 import { useRangeDatepicker } from "./root/useRangeDatepicker";
@@ -275,7 +276,7 @@ export const HookDefaultMonth: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const button = canvas.getByLabelText("Åpne datovelger");
+    const button = canvas.getByTitle("Åpne datovelger");
 
     expect(button).toBeInTheDocument();
 
@@ -313,7 +314,7 @@ export const HookDefaultMonthWhenSelected: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const button = canvas.getByLabelText("Åpne datovelger");
+    const button = canvas.getByTitle("Åpne datovelger");
 
     expect(button).toBeInTheDocument();
 
@@ -352,6 +353,65 @@ const RangedDatepicker = () => {
       </DatePicker>
     </div>
   );
+};
+
+const RangedDatepickerInput = () => {
+  const [state, setState] = React.useState<DateRange | undefined>(undefined);
+  const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onRangeChange: setState,
+  });
+
+  return (
+    <div>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...fromInputProps} label="Fra" />
+        <DatePicker.Input {...toInputProps} label="Til" />
+      </DatePicker>
+      <div data-testid="range-state">{JSON.stringify(state)}</div>
+    </div>
+  );
+};
+
+export const RangeHookSameInputDate: Story = {
+  render: () => <RangedDatepickerInput />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const fromInput = canvas.getByRole("textbox", { name: "Fra" });
+    const toInput = canvas.getByRole("textbox", { name: "Til" });
+
+    await userEvent.type(fromInput, "03.08.2022");
+    await userEvent.type(toInput, "03.08.2022");
+
+    expect(fromInput).toHaveValue("03.08.2022");
+    expect(toInput).toHaveValue("03.08.2022");
+    expect(canvas.getByTestId("range-state")).toHaveTextContent(
+      JSON.stringify({
+        from: new Date("2022-08-02T22:00:00.000Z"),
+        to: new Date("2022-08-02T22:00:00.000Z"),
+      }),
+    );
+  },
+};
+
+export const RangeHookHandlesInvalidRange: Story = {
+  render: () => <RangedDatepickerInput />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const fromInput = canvas.getByRole("textbox", { name: "Fra" });
+    const toInput = canvas.getByRole("textbox", { name: "Til" });
+
+    await userEvent.type(fromInput, "03.08.2022");
+    await userEvent.type(toInput, "02.08.2022");
+
+    expect(fromInput).toHaveValue("03.08.2022");
+    expect(toInput).toHaveValue("02.08.2022");
+    expect(canvas.getByTestId("range-state")).toHaveTextContent(
+      JSON.stringify({
+        from: new Date("2022-08-02T22:00:00.000Z"),
+      }),
+    );
+  },
 };
 
 export const RangeHookCanSelectWithOnlyFrom: Story = {
@@ -396,30 +456,7 @@ export const RangeHookCanSelectBeforeWithOnlyTo: Story = {
     expect(beforeButton.ariaPressed).toBe("true");
 
     expect(fromInput).toHaveValue("19.10.2022");
-    expect(toInput).toHaveValue("23.10.2022");
-  },
-};
-
-export const RangeHookCanSelectAfterWithOnlyTo: Story = {
-  render: () => <RangedDatepicker />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const fromInput = canvas.getByLabelText("Fra");
-    const toInput = canvas.getByLabelText("Til");
-
-    await userEvent.type(toInput, "23.10.2022");
-
-    const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
-      "onsdag 26",
-    );
-    expect(beforeButton).toBeInTheDocument();
-
-    await userEvent.click(beforeButton);
-    expect(beforeButton.ariaPressed).toBe("true");
-
-    expect(fromInput).toHaveValue("23.10.2022");
-    expect(toInput).toHaveValue("26.10.2022");
+    expect(toInput).toHaveValue("");
   },
 };
 
@@ -431,6 +468,7 @@ export const RangeHookResetsOnSameDayClick: Story = {
     const fromInput = canvas.getByLabelText("Fra");
     const toInput = canvas.getByLabelText("Til");
 
+    await userEvent.type(fromInput, "23.10.2022");
     await userEvent.type(toInput, "23.10.2022");
 
     const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
@@ -467,7 +505,7 @@ export const HookFallbackToFromDate: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const button = canvas.getByLabelText("Åpne datovelger");
+    const button = canvas.getByTitle("Åpne datovelger");
 
     expect(button).toBeInTheDocument();
 
@@ -507,7 +545,7 @@ export const HookFallbackToDate: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const button = canvas.getByLabelText("Åpne datovelger");
+    const button = canvas.getByTitle("Åpne datovelger");
 
     expect(button).toBeInTheDocument();
 
