@@ -23,7 +23,7 @@
     "playwright": "playwright test",
     "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
-    "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
+    "cp:playroom": "copyfiles -E -u 5 '../../apps/playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
     "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
