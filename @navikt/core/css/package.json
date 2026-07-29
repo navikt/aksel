@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^8.16.1",
-    "browserslist": "^4.28.4",
+    "browserslist": "^4.28.7",
     "esbuild": "^0.28.0",
     "fast-glob": "3.3.3",
     "lightningcss": "^1.33.0",
