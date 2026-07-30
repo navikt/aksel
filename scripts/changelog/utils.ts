@@ -1,4 +1,5 @@
 import { readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 
 export const getChangelogs = (path: string) => {
   const changelogs: string[] = [];
@@ -6,16 +7,14 @@ export const getChangelogs = (path: string) => {
   const walkFiles = (dirPath: string) => {
     const files = readdirSync(dirPath);
     files.forEach((file) => {
-      const filePath = `${dirPath}/${file}`;
+      const filePath = join(dirPath, file);
       if (
         statSync(filePath).isDirectory() &&
         !file.startsWith("node_modules")
       ) {
         walkFiles(filePath);
-      } else {
-        if (file.match(/^CHANGELOG\.md$/)) {
-          changelogs.push(filePath);
-        }
+      } else if (file.match(/^CHANGELOG\.md$/)) {
+        changelogs.push(filePath);
       }
     });
   };

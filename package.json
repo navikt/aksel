@@ -21,7 +21,7 @@
     "build:storybook": "storybook build",
     "chromatic": "npx chromatic --only-changed --build-script-name build:storybook-chromatic",
     "build:storybook-chromatic": "cross-env CHROMATIC=true WITH_WEBSITE=true storybook build",
-    "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/changelog/createMainChangelog.ts",
+    "changelog": "yarn update:repo-changelog",
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
     "release": "yarn boot && yarn docgen:meta && changeset publish && yarn script:git-release",
@@ -36,6 +36,7 @@
     "aksel.nav.no/*",
     "scripts/eslint",
     "scripts/analyzer",
+    "scripts/changelog",
     "scripts",
     "apps/*"
   ],
