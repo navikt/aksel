@@ -11407,9 +11407,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aksel-analyzer@workspace:scripts/analyzer":
+"aksel-analyzer@workspace:tooling/analyzer":
   version: 0.0.0-use.local
-  resolution: "aksel-analyzer@workspace:scripts/analyzer"
+  resolution: "aksel-analyzer@workspace:tooling/analyzer"
   dependencies:
     "@types/node": "npm:^24.10.9"
     concurrently: "npm:10.0.3"
@@ -11423,9 +11423,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel-changelog@workspace:scripts/changelog":
+"aksel-changelog@workspace:tooling/changelog":
   version: 0.0.0-use.local
-  resolution: "aksel-changelog@workspace:scripts/changelog"
+  resolution: "aksel-changelog@workspace:tooling/changelog"
   dependencies:
     "@types/mdast": "npm:^4.0.4"
     "@types/node": "npm:^24.10.9"
@@ -11521,6 +11521,16 @@ __metadata:
     tsx: "npm:^4.23.1"
     typescript: "npm:6.0.3"
     vitest: "npm:4.1.10"
+  languageName: unknown
+  linkType: soft
+
+"aksel-workspace-scripts@workspace:tooling/scripts":
+  version: 0.0.0-use.local
+  resolution: "aksel-workspace-scripts@workspace:tooling/scripts"
+  dependencies:
+    "@types/node": "npm:^24.10.9"
+    simple-git: "npm:^3.32.3"
+    tsx: "npm:^4.23.1"
   languageName: unknown
   linkType: soft
 
@@ -15145,9 +15155,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-aksel-local@npm:*, eslint-plugin-aksel-local@workspace:scripts/eslint":
+"eslint-plugin-aksel-local@npm:*, eslint-plugin-aksel-local@workspace:tooling/eslint":
   version: 0.0.0-use.local
-  resolution: "eslint-plugin-aksel-local@workspace:scripts/eslint"
+  resolution: "eslint-plugin-aksel-local@workspace:tooling/eslint"
   languageName: unknown
   linkType: soft
 
@@ -24739,15 +24749,6 @@ __metadata:
   checksum: 10/7b439e1b1faa43b0d4d685946d15156c7b247c976de7abcf3fb53d4e4d3e8f86c36b6521355dd58bae52a3bea91924537d0aea4fe7cf1ec80550126a0bdfd9fe
   languageName: node
   linkType: hard
-
-"scripts@workspace:scripts":
-  version: 0.0.0-use.local
-  resolution: "scripts@workspace:scripts"
-  dependencies:
-    simple-git: "npm:^3.32.3"
-    tsx: "npm:^4.23.1"
-  languageName: unknown
-  linkType: soft
 
 "scroll-into-view-if-needed@npm:^3.1.0":
   version: 3.1.0
