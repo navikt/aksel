@@ -25,6 +25,7 @@
     "aksel-icons-figma-plugin",
     "eslint-plugin-aksel-local",
     "aksel-changelog",
+    "scripts",
     "aksel-analyzer",
     "aksel-mcp",
     "website",
