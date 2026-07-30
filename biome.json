@@ -32,7 +32,8 @@
       "!**/transforms/**/*.input.*",
       "!**/transforms/**/*.output.*",
       "!**/@navikt/aksel-icons/icons/*.svg",
-      "!**/@navikt/aksel-icons/template/*.svg"
+      "!**/@navikt/aksel-icons/template/*.svg",
+      "!**/.sanity/runtime/*"
     ]
   },
   "linter": {

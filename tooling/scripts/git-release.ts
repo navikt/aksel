@@ -17,7 +17,7 @@ async function main() {
   releaseLines.splice(0, 2);
   const releaseNotes = releaseLines.join("\n").trim();
 
-  console.log(`Creating release for version: ${version}`);
+  console.info(`Creating release for version: ${version}`);
 
   const tagName = `v${version}`;
 
@@ -25,7 +25,7 @@ async function main() {
   const tagExists = await gitTagExists(tagName);
 
   if (tagExists) {
-    console.log(`Tag ${tagName} already exists. Skipping release creation.`);
+    console.info(`Tag ${tagName} already exists. Skipping release creation.`);
     return;
   }
 
