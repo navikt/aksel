@@ -100,7 +100,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 99,
   desc: "Dette er en ny versjon av ExpansionCard som bruker HTML-elementene `details` og `summary`.",
 };
