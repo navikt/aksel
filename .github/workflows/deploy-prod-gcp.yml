@@ -18,6 +18,8 @@ jobs:
   sync_data_with_sanity:
     name: Sync data to Sanity
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v7

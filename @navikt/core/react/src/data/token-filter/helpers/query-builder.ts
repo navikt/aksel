@@ -1,4 +1,4 @@
-import type { OperatorT } from "../TokenFilter.types";
+import type { ExternalToken, OperatorT } from "../TokenFilter.types";
 
 /**
  * Human-readable labels for query filter operators.
@@ -38,4 +38,29 @@ function buildQueryString(
   return parts.join(" ");
 }
 
-export { buildQueryString, OPERATOR_LABELS };
+/**
+ * Builds the query string for an operator of type `multiple`.
+ * Values are comma-separated and always end with a separator so the user can keep typing.
+ *
+ * @example
+ * buildMultiSelectQuery("Status", "=", ["active"]) // "Status = active, "
+ * buildMultiSelectQuery("Status", "=", []) // "Status = "
+ */
+function buildMultiSelectQuery(
+  propertyLabel: string,
+  operator: string,
+  values: string[],
+): string {
+  const query = buildQueryString(propertyLabel, operator, values.join(", "));
+  return values.length > 0 ? `${query}, ` : `${query} `;
+}
+
+/**
+ * Stable identity for a token, used for de-duplication and as a React key.
+ */
+function getTokenId(token: ExternalToken): string {
+  const values = Array.isArray(token.value) ? token.value : [token.value];
+  return `${token.propertyKey ?? ""}|${token.operator}|${values.join(",")}`;
+}
+
+export { buildMultiSelectQuery, buildQueryString, getTokenId, OPERATOR_LABELS };
