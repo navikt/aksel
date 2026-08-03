@@ -1,0 +1,13 @@
+{
+  "name": "aksel-workspace-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "script:git-release": "tsx ./git-release"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.9",
+    "simple-git": "^3.32.3",
+    "tsx": "^4.23.1"
+  }
+}

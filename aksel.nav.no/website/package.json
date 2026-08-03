@@ -23,7 +23,7 @@
     "playwright": "playwright test",
     "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
-    "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
+    "cp:playroom": "copyfiles -E -u 5 '../../apps/playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
     "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
@@ -31,8 +31,8 @@
   "dependencies": {
     "@navikt/analytics-types": "0.0.9",
     "@navikt/next-logger": "4.4.1",
-    "@navikt/oasis": "3.2.1",
-    "@neshca/cache-handler": "1.9.0",
+    "@navikt/oasis": "4.1.4",
+    "@neshca/cache-handler": "^1.9.0",
     "@portabletext/react": "^6.0.3",
     "@sanity/client": "7.23.2",
     "@sanity/image-url": "2.1.1",
@@ -66,7 +66,7 @@
     "swr": "^2.4.2",
     "tinycolor2": "^1.6.0",
     "typescript-cookie": "^1.0.6",
-    "zod": "^3.22.4"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.0",
@@ -76,8 +76,8 @@
     "@google-cloud/bigquery": "^8.3.1",
     "@next/bundle-analyzer": "16.2.6",
     "@next/eslint-plugin-next": "16.2.6",
-    "@playwright/test": "1.60.0",
-    "@portabletext/block-tools": "^5.1.1",
+    "@playwright/test": "1.61.1",
+    "@portabletext/block-tools": "^5.1.12",
     "@portabletext/markdown": "^1.4.4",
     "@sanity/schema": "6.0.0",
     "@types/jscodeshift": "17.3.0",

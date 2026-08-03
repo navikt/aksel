@@ -442,9 +442,10 @@ describe("generateAutoCompleteOptions v2", () => {
       );
       expect(valueGroup).toBeDefined();
       expect(valueGroup?.options).toHaveLength(1);
-      expect((valueGroup?.options[0] as AutoCompleteOption).label).toBe(
-        "Region = eu-west-1",
-      );
+      expect(
+        valueGroup?.options[0] &&
+          (valueGroup.options[0] as AutoCompleteOption).label,
+      ).toBe("Region = eu-west-1");
     });
 
     test("non-empty value: whitespace-aware matching", () => {
@@ -464,9 +465,10 @@ describe("generateAutoCompleteOptions v2", () => {
       );
       expect(valueGroup).toBeDefined();
       expect(valueGroup?.options).toHaveLength(1);
-      expect((valueGroup?.options[0] as AutoCompleteOption).label).toBe(
-        "Region = us-east-1",
-      );
+      expect(
+        valueGroup?.options[0] &&
+          (valueGroup.options[0] as AutoCompleteOption).label,
+      ).toBe("Region = us-east-1");
     });
   });
 
@@ -682,9 +684,9 @@ describe("generateAutoCompleteOptions v2", () => {
         (g) => g.label === "Status values",
       );
       expect(valueGroup).toBeDefined();
-      expect((valueGroup?.options[0] as AutoCompleteOption).value).toContain(
-        " = ",
-      );
+      expect(
+        valueGroup && (valueGroup.options[0] as AutoCompleteOption).value,
+      ).toContain(" = ");
     });
 
     test("property step uses selected operator", () => {

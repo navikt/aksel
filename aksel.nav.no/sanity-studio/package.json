@@ -5,6 +5,7 @@
   "description": "Aksel.nav.no sanity studio",
   "author": "Aksel | Nav designsystem team",
   "scripts": {
+    "dev": "yarn sanity dev",
     "build": "yarn type-check",
     "test": "yarn vitest run && yarn type-check",
     "sanity:backup": "yarn tsx --env-file-if-exists=.env sanity.backup.ts",

@@ -13,6 +13,7 @@ import {
   Hide,
   Link,
   Show,
+  Tag,
   VStack,
 } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
@@ -28,11 +29,21 @@ interface Props {
 }
 
 export default function LogEntry({
-  logEntry: { heading, slug, endringsdato, endringstype, content, visMer },
+  logEntry: {
+    heading,
+    slug,
+    endringsdato,
+    endringstype,
+    content,
+    visMer,
+    links,
+  },
   isLastOfMonth = false,
   isLastEntry = false,
 }: Props) {
   const logEntryContainer = useRef<HTMLDivElement>(null);
+
+  const hasRefs = links && links.length > 0;
 
   return (
     <li>
@@ -90,6 +101,20 @@ export default function LogEntry({
           </HStack>
           {/* Header and content */}
           <VStack marginBlock="space-0 space-64">
+            {hasRefs && (
+              <HStack gap="space-8" marginBlock="space-0 space-12">
+                {links?.map((link) => (
+                  <Tag
+                    key={link.slug?.current}
+                    size="small"
+                    variant="moderate"
+                    data-color="accent"
+                  >
+                    {link.heading}
+                  </Tag>
+                ))}
+              </HStack>
+            )}
             {visMer ? (
               <ShowMore as="div" scrollTargetRef={logEntryContainer}>
                 <ShowMore.Heading>

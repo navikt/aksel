@@ -17,14 +17,14 @@ export {
   type RangeValidationT,
   type UseDatepickerOptions,
   type UseRangeDatepickerOptions,
-} from "./date/datepicker";
+} from "./datepicker";
 export {
   MonthPicker,
   useMonthpicker,
   type MonthPickerProps,
   type MonthPickerStandaloneProps,
   type MonthValidationT,
-} from "./date/monthpicker";
+} from "./monthpicker";
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export { GuidePanel, type GuidePanelProps } from "./guide-panel";
