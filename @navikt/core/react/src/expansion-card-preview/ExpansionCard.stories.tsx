@@ -100,7 +100,6 @@ export const Default: DefaultStory = ({
       </ExpansionCard.Header>
       <Content />
     </ExpansionCard>
-    etter
   </>
 );
 Default.args = {
@@ -203,7 +202,9 @@ export const ControlledState = () => {
   return (
     <>
       <a href="#test">Link to content</a>
-      <button onClick={() => setOpen(!open)}>Toggle local state</button>
+      <button type="button" onClick={() => setOpen(!open)}>
+        Toggle local state
+      </button>
       <ExpansionCard
         open={open}
         onOpenChange={(newOpen) => {
