@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, connection } from "next/server";
 
-export function GET(): NextResponse {
+export async function GET(): Promise<NextResponse> {
+  await connection();
   return NextResponse.json({ message: "It's Alive!!!" });
 }

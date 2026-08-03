@@ -35,6 +35,7 @@ module.exports = defineConfig([
     ".yarn",
     "**/next-env.d.ts",
     "stylelint.config.mjs",
+    "apps/playroom/src/components.ts",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,

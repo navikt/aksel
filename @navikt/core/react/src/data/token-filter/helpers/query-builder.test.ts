@@ -1,5 +1,53 @@
 import { describe, expect, test } from "vitest";
-import { buildQueryString } from "./query-builder";
+import {
+  buildMultiSelectQuery,
+  buildQueryString,
+  getTokenId,
+} from "./query-builder";
+
+describe("buildMultiSelectQuery", () => {
+  test("appends a separator so the user can keep typing", () => {
+    expect(buildMultiSelectQuery("Status", "=", ["active"])).toBe(
+      "Status = active, ",
+    );
+  });
+
+  test("joins several values", () => {
+    expect(buildMultiSelectQuery("Status", "=", ["active", "pending"])).toBe(
+      "Status = active, pending, ",
+    );
+  });
+
+  test("keeps property and operator when there are no values", () => {
+    expect(buildMultiSelectQuery("Status", "=", [])).toBe("Status = ");
+  });
+});
+
+describe("getTokenId", () => {
+  test("is stable for equal tokens", () => {
+    expect(
+      getTokenId({ propertyKey: "status", operator: "=", value: "active" }),
+    ).toBe(
+      getTokenId({ propertyKey: "status", operator: "=", value: "active" }),
+    );
+  });
+
+  test("separates tokens with different values", () => {
+    expect(
+      getTokenId({ propertyKey: "status", operator: "=", value: ["active"] }),
+    ).not.toBe(
+      getTokenId({
+        propertyKey: "status",
+        operator: "=",
+        value: ["active", "pending"],
+      }),
+    );
+  });
+
+  test("handles free-text tokens", () => {
+    expect(getTokenId({ operator: ":", value: "test" })).toBe("|:|test");
+  });
+});
 
 describe("buildQueryString", () => {
   describe("basic query building", () => {

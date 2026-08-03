@@ -68,7 +68,9 @@ Public-package-only: `yarn workspaces focus @navikt/aksel-icons @navikt/ds-token
 - `@navikt/aksel-stylelint/src/` - Stylelint rules
 - `@navikt/aksel/src/` - CLI and codemods
 - `aksel.nav.no/website/` - Next.js docs site
-- `aksel.nav.no/playroom/` - playroom
+- `apps/playroom/` - playroom
+- `apps/mcp-server/` - MCP server
+- `apps/figma-icon-plugin/` - Figma plugin
 - Root: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `tsconfig.json`, `.storybook/`
 
 ## Coding defaults

@@ -205,7 +205,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
 
-export const ENDRINGSLOGG_FIELDS = `heading, "slug": slug.current, endringsdato, endringstype, content[]{ ..., ${destructureBlocks} }, visMer`;
+export const ENDRINGSLOGG_FIELDS = `heading, "slug": slug.current, endringsdato, endringstype, content[]{ ..., ${destructureBlocks} }, visMer, "links": artikler[]->{heading, slug}`;
 
 const ENDRINGSLOGG_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel"]{
