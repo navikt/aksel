@@ -468,7 +468,7 @@ export const KitchenSinkAdvancedFilter: Story = {
             <TokenFilter
               query={query}
               onChange={setQuery}
-              options={filterOptions}
+              propertyOptions={filterOptions}
               propertyDefinitions={filterPropertyDefs}
             />
           }

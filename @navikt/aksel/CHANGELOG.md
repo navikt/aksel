@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 8.16.1
+
+### Patch Changes
+
+- Internal infra update ([`a322476`](https://github.com/navikt/aksel/commit/a322476d33c8644da3400b4c29934535412ef8c7))
+
+## 8.16.0
+
 ## 8.15.0
 
 ## 8.14.0

@@ -4,9 +4,12 @@ import type {
 } from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
+  getOperatorType,
+  getValidOperatorsForProperty,
   matchFilteringProperty,
   matchOperator,
   matchOperatorPrefix,
+  sortOperatorsBySpecificity,
 } from "./operators";
 
 /**
@@ -38,19 +41,41 @@ function parseQueryText(
     .substring(property.label.length)
     .trimStart();
 
-  const operator = matchOperator(QUERY_OPERATORS, textWithoutProperty);
+  /* Only operators the property allows should be parsed as operators */
+  const allowedOperators = sortOperatorsBySpecificity(
+    getValidOperatorsForProperty(property),
+  );
+
+  const operator = matchOperator(allowedOperators, textWithoutProperty);
 
   if (operator) {
+    const value = textWithoutProperty.substring(operator.length).trimStart();
+
+    if (getOperatorType(property, operator) === "multiple") {
+      const segments = value.split(",");
+
+      return {
+        step: "property",
+        property,
+        operator,
+        /* Only the segment being typed filters the suggestions */
+        value: (segments[segments.length - 1] ?? "").trim(),
+        selectedValues: segments
+          .map((segment) => segment.trim())
+          .filter(Boolean),
+      };
+    }
+
     return {
       step: "property",
       property,
       operator,
-      value: textWithoutProperty.substring(operator.length).trimStart(),
+      value,
     };
   }
 
   const operatorPrefix = matchOperatorPrefix(
-    QUERY_OPERATORS,
+    allowedOperators,
     textWithoutProperty,
   );
 
