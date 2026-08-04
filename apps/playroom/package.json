@@ -21,6 +21,9 @@
     "typescript": "6.0.3"
   },
   "dependencies": {
+    "@navikt/aksel-icons": "^8.16.1",
+    "@navikt/ds-css": "^8.16.1",
+    "@navikt/ds-react": "^8.16.1",
     "react": "19.2.7"
   }
 }

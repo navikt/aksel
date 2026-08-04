@@ -2,7 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "module": "nodenext",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
   "include": ["./clean.mts"]
 }

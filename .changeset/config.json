@@ -21,14 +21,15 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "aksel.nav.no",
-    "aksel-icons-figma-plugin",
     "eslint-plugin-aksel-local",
-    "scripts",
+    "aksel-changelog",
     "aksel-analyzer",
-    "aksel-mcp",
+    "aksel-workspace-scripts",
+    "aksel.nav.no",
     "website",
     "aksel-sanity-studio",
+    "aksel-icons-figma-plugin",
+    "aksel-mcp",
     "playroom"
   ],
 
