@@ -11581,7 +11581,7 @@ __metadata:
     sanity-plugin-iframe-pane: "npm:5.0.13"
     sanity-plugin-media: "npm:4.3.1"
     sanity-plugin-references: "npm:1.1.0"
-    styled-components: "npm:^6.0.0"
+    styled-components: "npm:6.4.4"
     swr: "npm:^2.4.2"
     tsx: "npm:^4.23.1"
     typescript: "npm:6.0.3"
@@ -26130,9 +26130,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.0.0":
-  version: 6.4.1
-  resolution: "styled-components@npm:6.4.1"
+"styled-components@npm:6.4.4":
+  version: 6.4.4
+  resolution: "styled-components@npm:6.4.4"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
     css-to-react-native: "npm:3.2.0"
@@ -26150,7 +26150,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10/616311c4f0617711a8959400e15460b43efa11fbca09574d749f77ff102ac3ff7a4c27b1be19ba95809bf28f883fed6479429a4d4c2e2a2826b6b676e59d1624
+  checksum: 10/3188c2946740a025dc202d560ec1112318c3be9b14480f4de0832961c556468504677a4dfc458813e234d58a41efab8f209f75bea62a4dd55e5a66ced5dbc1fa
   languageName: node
   linkType: hard
 
@@ -28491,7 +28491,7 @@ __metadata:
     sharp: "npm:0.35.3"
     showdown: "npm:^2.1.0"
     sitemapper: "npm:^4.1.6"
-    styled-components: "npm:^6.0.0"
+    styled-components: "npm:6.4.4"
     swr: "npm:^2.4.2"
     tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.23.1"
