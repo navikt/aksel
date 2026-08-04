@@ -10,6 +10,7 @@ const testingLibrary = require("eslint-plugin-testing-library");
 const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
 const tseslint = require("typescript-eslint");
+const babelParser = require("@babel/eslint-parser");
 
 /**
  * TODO:
@@ -54,6 +55,10 @@ module.exports = defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
+      },
+      parser: babelParser, // Required for using modern JS features in .js files
+      parserOptions: {
+        requireConfigFile: false,
       },
     },
     rules: {
