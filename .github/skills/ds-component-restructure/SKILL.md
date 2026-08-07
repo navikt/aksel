@@ -262,10 +262,10 @@ Do NOT nest subcomponent dirs inside other subcomponent dirs. All sub-component 
 # Wrong
 
 dialog/
-├── header/
-│   └── DialogHeader.tsx
-└── title/
-    └── DialogTitle.tsx
+└── header/
+    ├── DialogHeader.tsx
+    └── title/
+        └── DialogTitle.tsx
 
 # Correct
 
