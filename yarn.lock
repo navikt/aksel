@@ -5343,7 +5343,7 @@ __metadata:
     js-yaml: "npm:^5.2.3"
     lodash: "npm:4.18.1"
     prettier: "npm:3.8.3"
-    react: "npm:19.2.7"
+    react: "npm:19.2.8"
     rehype-parse: "npm:9.0.1"
     tsc-alias: "npm:1.9.1"
     tsx: "npm:^4.23.1"
@@ -5437,9 +5437,9 @@ __metadata:
     date-fns: "npm:^4.0.0"
     jscodeshift: "npm:17.4.0"
     jsdom: "npm:29.1.1"
-    react: "npm:19.2.7"
+    react: "npm:19.2.8"
     react-day-picker: "npm:10.0.1"
-    react-dom: "npm:19.2.7"
+    react-dom: "npm:19.2.8"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.4.2"
     tsc-alias: "npm:1.9.1"
@@ -11521,8 +11521,8 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@vitejs/plugin-react": "npm:^6.0.3"
     fuse.js: "npm:^7.4.2"
-    react: "npm:19.2.7"
-    react-dom: "npm:19.2.7"
+    react: "npm:19.2.8"
+    react-dom: "npm:19.2.8"
     typescript: "npm:6.0.3"
     vite: "npm:^8.1.5"
     vite-plugin-singlefile: "npm:^2.3.0"
@@ -11573,8 +11573,8 @@ __metadata:
     "@types/react": "npm:19.2.14"
     date-fns: "npm:^4.0.0"
     lodash: "npm:4.18.1"
-    react: "npm:19.2.7"
-    react-dom: "npm:19.2.7"
+    react: "npm:19.2.8"
+    react-dom: "npm:19.2.8"
     react-rx: "npm:^4.2.3"
     rxjs: "npm:^7.8.2"
     sanity: "npm:6.0.0"
@@ -11650,9 +11650,9 @@ __metadata:
     lint-staged: "npm:17.0.8"
     playwright: "npm:1.61.1"
     prettier: "npm:3.8.3"
-    react: "npm:19.2.7"
+    react: "npm:19.2.8"
     react-docgen-typescript: "npm:2.4.0"
-    react-dom: "npm:19.2.7"
+    react-dom: "npm:19.2.8"
     storybook: "npm:^10.4.6"
     stylelint: "npm:^17.14.1"
     stylelint-config-standard: "npm:^40.0.0"
@@ -22423,7 +22423,7 @@ __metadata:
     babel-loader: "npm:^9.1.3"
     babel-plugin-preval: "npm:^5.1.0"
     playroom: "npm:^1.3.0"
-    react: "npm:19.2.7"
+    react: "npm:19.2.8"
     style-loader: "npm:^4.0.0"
     tsx: "npm:^4.23.1"
     typescript: "npm:6.0.3"
@@ -23183,7 +23183,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.2.7, react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.7":
+"react-dom@npm:19.2.8":
+  version: 19.2.8
+  resolution: "react-dom@npm:19.2.8"
+  dependencies:
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.8
+  checksum: 10/fb45d500a8615a36d71a821213a3d4bfe32a70aa1d04ce17d8791dd10c4ef0281e7fdd46694e1112f0f2dcf58df89d12043a13228be9788458aa82f4885a9cdc
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.7":
   version: 19.2.7
   resolution: "react-dom@npm:19.2.7"
   dependencies:
@@ -23540,7 +23551,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.7, react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.7":
+"react@npm:19.2.8":
+  version: 19.2.8
+  resolution: "react@npm:19.2.8"
+  checksum: 10/a3c697798035e295ca9e51591d3a8700824535cb8c070fac1f8abbe69717ceb99108cbc4ba7b31a606806f336b1eba705705f63b9d39ace198fe51e8990ac843
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.7":
   version: 19.2.7
   resolution: "react@npm:19.2.7"
   checksum: 10/2939997e87d7f0ee0d9d2bb556866b616b999dfb7916283647034eda867a045a39c4f7a736c8ea6beffffcd78397fc30f63a7a3aaf8425b683c3060670859560
@@ -28464,8 +28482,8 @@ __metadata:
     pino: "npm:^10.3.1"
     pino-pretty: "npm:^13.1.3"
     prism-react-renderer: "npm:^2.0.0"
-    react: "npm:19.2.7"
-    react-dom: "npm:19.2.7"
+    react: "npm:19.2.8"
+    react-dom: "npm:19.2.8"
     react-hook-form: "npm:^7.53.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.7.2"
