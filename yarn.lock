@@ -298,6 +298,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/eslint-parser@npm:8.0.1":
+  version: 8.0.1
+  resolution: "@babel/eslint-parser@npm:8.0.1"
+  dependencies:
+    eslint-scope: "npm:^9.1.0"
+    eslint-visitor-keys: "npm:^5.0.0"
+    semver: "npm:^7.7.3"
+  peerDependencies:
+    "@babel/core": ^8.0.0
+    eslint: ^9.0.0 || ^10.0.0
+  checksum: 10/f12cd202a41ea8a671a85a6ff7e96b6291033085af7cb5e60979429d3d845bda6f4bcfdc3449f5204fff5429772e72c9458b548b5698bac46b50b28700b85fa2
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.28.0, @babel/generator@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/generator@npm:7.29.7"
@@ -9930,6 +9944,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/esrecurse@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@types/esrecurse@npm:4.3.1"
+  checksum: 10/ada5798554b76ac466e90fff26a769b65f905666f32988dcd1b6cf8288896e0fb53080843fd644bf731d16719a6e09b155d623ce36545b75abdd99bb6dcec114
+  languageName: node
+  linkType: hard
+
 "@types/estree-jsx@npm:^1.0.0":
   version: 1.0.5
   resolution: "@types/estree-jsx@npm:1.0.5"
@@ -11616,6 +11637,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel@workspace:."
   dependencies:
+    "@babel/eslint-parser": "npm:8.0.1"
     "@biomejs/biome": "npm:2.5.5"
     "@changesets/cli": "npm:2.31.1"
     "@eslint/js": "npm:^10.0.1"
@@ -15339,6 +15361,18 @@ __metadata:
     esrecurse: "npm:^4.3.0"
     estraverse: "npm:^5.2.0"
   checksum: 10/e8e611701f65375e034c62123946e628894f0b54aa8cb11abe224816389abe5cd74cf16b62b72baa36504f22d1a958b9b8b0169b82397fe2e7997674c0d09b06
+  languageName: node
+  linkType: hard
+
+"eslint-scope@npm:^9.1.0":
+  version: 9.1.2
+  resolution: "eslint-scope@npm:9.1.2"
+  dependencies:
+    "@types/esrecurse": "npm:^4.3.1"
+    "@types/estree": "npm:^1.0.8"
+    esrecurse: "npm:^4.3.0"
+    estraverse: "npm:^5.2.0"
+  checksum: 10/d102a22525020be99a6897c0d5570b16a387b251e661ba70cedb4f983536d5acd45b9ea2ee05b63ab04f6c35e4f2ed00a113d1c6fb5f61ff879d92e46d0c2f15
   languageName: node
   linkType: hard
 
