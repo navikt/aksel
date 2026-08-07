@@ -160,8 +160,6 @@ Update imports in `<Component>.meta.ts` to reflect new paths. If the meta file i
 If component has no meta file, create one in the component root with the following content based on existing patterns.
 Note that each standalone component should have a meta file. But a "sub-component" (like `AccordionItem`) does not need a meta file.
 
-````ts
-
 ### 7. Validate No Breaking Changes
 
 **Export diff.** Before deleting old files, compare the exported names recorded during Step 1 against the new `index.ts`. Every name must be present:
@@ -224,7 +222,7 @@ Do the rename in **two `git mv` steps through a temporary distinct name** so git
 ```sh
 git mv heading.stories.tsx heading.stories.tmp.tsx
 git mv heading.stories.tmp.tsx Heading.stories.tsx
-````
+```
 
 Then edit the file's contents/imports in place. Skip the create-new + delete-old flow for these rows entirely.
 
@@ -264,18 +262,18 @@ Do NOT nest subcomponent dirs inside other subcomponent dirs. All sub-component 
 # Wrong
 
 dialog/
-└── header/
-├── DialogHeader.tsx
+├── header/
+│   └── DialogHeader.tsx
 └── title/
-└── DialogTitle.tsx
+    └── DialogTitle.tsx
 
 # Correct
 
 dialog/
 ├── header/
-│ └── DialogHeader.tsx
+│   └── DialogHeader.tsx
 └── title/
-└── DialogTitle.tsx
+    └── DialogTitle.tsx
 
 ```
 
@@ -297,7 +295,3 @@ dialog/
 - Component `index.ts` pattern: `@navikt/core/react/src/dialog/index.ts`
 - Context pattern: `@navikt/core/react/src/dialog/root/DialogRoot.context.ts`
 - Meta: `@navikt/core/react/src/accordion/Accordion.meta.ts`
-
-```
-
-```
