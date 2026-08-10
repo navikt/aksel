@@ -36,7 +36,6 @@ module.exports = defineConfig([
     ".yarn",
     "**/next-env.d.ts",
     "stylelint.config.mjs",
-    "apps/playroom/src/components.ts",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
@@ -56,10 +55,6 @@ module.exports = defineConfig([
         ...globals.browser,
         ...globals.node,
       },
-      parser: babelParser, // Required for using modern JS features in .js files
-      parserOptions: {
-        requireConfigFile: false,
-      },
     },
     rules: {
       "react/jsx-curly-brace-presence": [
@@ -76,6 +71,15 @@ module.exports = defineConfig([
         "warn",
         { additionalHooks: "(useClientLayoutEffect)" },
       ],
+    },
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      parser: babelParser, // Required for using modern JS features in .js files
+      parserOptions: {
+        requireConfigFile: false,
+      },
     },
   },
   {
