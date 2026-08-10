@@ -20773,25 +20773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.11, nanoid@npm:^3.3.6, nanoid@npm:^3.3.8":
-  version: 3.3.11
-  resolution: "nanoid@npm:3.3.11"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 10/73b5afe5975a307aaa3c95dfe3334c52cdf9ae71518176895229b8d65ab0d1c0417dd081426134eb7571c055720428ea5d57c645138161e7d10df80815527c48
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.3.12":
-  version: 3.3.12
-  resolution: "nanoid@npm:3.3.12"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 10/6eec280694e2088d18fb802b1e3bfc4578e27b665b7ecfbe36c7356612fea2f814277056e671e2a1529dff551588a652efdc0bfa39f8a3185bc2247be311872e
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.3.16":
+"nanoid@npm:^3.3.11, nanoid@npm:^3.3.12, nanoid@npm:^3.3.16, nanoid@npm:^3.3.6, nanoid@npm:^3.3.8":
   version: 3.3.16
   resolution: "nanoid@npm:3.3.16"
   bin:
@@ -20800,21 +20782,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^5.1.11":
+"nanoid@npm:^5.1.11, nanoid@npm:^5.1.6":
   version: 5.1.11
   resolution: "nanoid@npm:5.1.11"
   bin:
     nanoid: bin/nanoid.js
   checksum: 10/d5971a1d39f68bd9845565c70a27733c832ba1bd73caad3c7b999a366c0355b6fcc65064f3b0179bca6cd36b50cacd5747d4482c303f026b58d62ebe31df9868
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^5.1.6":
-  version: 5.1.9
-  resolution: "nanoid@npm:5.1.9"
-  bin:
-    nanoid: bin/nanoid.js
-  checksum: 10/a8cc355ed2176165a0fb5e0dbbac0b72f05d9ac08af50bf652ace22252d7a1455ef307b54681e39baf609a4da84600cad843bf01d9bd1cc1440f6fd166e19589
   languageName: node
   linkType: hard
 
