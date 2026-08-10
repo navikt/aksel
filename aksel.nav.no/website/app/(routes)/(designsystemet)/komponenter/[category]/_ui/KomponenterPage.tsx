@@ -115,6 +115,7 @@ async function CachedKomponenterPage({
         {renderPreviewNote && (
           <PreviewNote
             content={pageData.status?.preview_note as PortableTextBlock[]}
+            toggleShowMore={pageData.status?.toggle_show_more ?? true}
           />
         )}
         <DesignsystemetKomponentIntro data={pageData} />

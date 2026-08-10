@@ -8010,6 +8010,13 @@
               },
               "optional": true
             },
+            "toggle_show_more": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            },
             "internal": {
               "type": "objectAttribute",
               "value": {
