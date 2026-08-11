@@ -138,7 +138,7 @@ export const KomponentArtikkel = defineType({
         }),
         defineField({
           name: "toggle_show_more",
-          title: "Sjul lengre tekst i Preview",
+          title: "Skjul lengre tekst i Preview",
           description:
             "Gjør Preview ekspanderbar med en Les mer-knapp. Hvis ikke, vises all tekst i Preview.",
           type: "boolean",
