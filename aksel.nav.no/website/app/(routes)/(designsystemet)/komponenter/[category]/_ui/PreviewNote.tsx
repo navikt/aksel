@@ -36,9 +36,7 @@ export const PreviewNote = ({
         <InfoCardTitle>Preview</InfoCardTitle>
       </InfoCardHeader>
       <InfoCardContent>
-        {toggleShowMore === false ? (
-          <CustomPortableText value={content} />
-        ) : (
+        {toggleShowMore ? (
           <ShowMore as="div" scrollTargetRef={ref}>
             <ShowMore.Content collapsedHeight="16rem">
               <CustomPortableText value={content} />
@@ -52,6 +50,8 @@ export const PreviewNote = ({
               />
             </ShowMore.Button>
           </ShowMore>
+        ) : (
+          <CustomPortableText value={content} />
         )}
       </InfoCardContent>
     </InfoCard>
