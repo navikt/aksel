@@ -8010,7 +8010,7 @@
               },
               "optional": true
             },
-            "toggle_show_more": {
+            "preview_note_show_more": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"

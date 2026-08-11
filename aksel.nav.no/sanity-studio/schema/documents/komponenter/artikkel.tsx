@@ -137,7 +137,7 @@ export const KomponentArtikkel = defineType({
           hidden: ({ parent }) => !(parent?.tag === "preview"),
         }),
         defineField({
-          name: "toggle_show_more",
+          name: "preview_note_show_more",
           title: "Skjul lengre tekst i Preview-notat",
           description:
             "Gjør Preview ekspanderbar med en Les mer-knapp. Hvis ikke, vises all tekst i Preview.",
