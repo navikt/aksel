@@ -9,7 +9,7 @@
     "dev": "tsdown --watch",
     "start": "node --env-file-if-exists=.env dist/index.mjs",
     "test": "yarn vitest run",
-    "inspect": "yarn mcp-inspector"
+    "inspect": "yarn mcp-inspector --server-url http://localhost:8080/mcp --transport http"
   },
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -17,7 +17,7 @@
     "dist"
   ],
   "devDependencies": {
-    "@modelcontextprotocol/inspector": "^1.0.0",
+    "@modelcontextprotocol/inspector": "^2.0.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@navikt/aksel": "^8.16.1",
     "@navikt/aksel-icons": "^8.16.1",
