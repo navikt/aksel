@@ -17,7 +17,7 @@ module.exports = {
           });
         }
 
-        const sourceCode = context.getSourceCode();
+        const sourceCode = context.sourceCode;
         const fileContent = sourceCode.getText();
         const hasSandbox = !fileContent.includes("sandbox: false");
 

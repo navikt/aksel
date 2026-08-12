@@ -1,16 +1,16 @@
-const js = require("@eslint/js");
-const nextPlugin = require("@next/eslint-plugin-next");
-const vitest = require("@vitest/eslint-plugin");
-const akselLocal = require("eslint-plugin-aksel-local");
-const importPlugin = require("eslint-plugin-import");
-const reactPlugin = require("eslint-plugin-react");
-const reactHooks = require("eslint-plugin-react-hooks");
-const storybook = require("eslint-plugin-storybook");
-const testingLibrary = require("eslint-plugin-testing-library");
-const { globalIgnores, defineConfig } = require("eslint/config");
-const globals = require("globals");
-const tseslint = require("typescript-eslint");
-const babelParser = require("@babel/eslint-parser");
+import eslintReact from "@eslint-react/eslint-plugin";
+import js from "@eslint/js";
+import nextPlugin from "@next/eslint-plugin-next";
+import vitest from "@vitest/eslint-plugin";
+import akselLocal from "eslint-plugin-aksel-local";
+import { importX } from "eslint-plugin-import-x";
+import reactHooks from "eslint-plugin-react-hooks";
+import storybook from "eslint-plugin-storybook";
+import testingLibrary from "eslint-plugin-testing-library";
+import { defineConfig, globalIgnores } from "eslint/config";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import babelParser from "@babel/eslint-parser";
 
 /**
  * TODO:
@@ -38,16 +38,11 @@ module.exports = defineConfig([
     "stylelint.config.mjs",
   ]),
   js.configs.recommended,
-  reactPlugin.configs.flat.recommended,
-  {
-    // Uses the new JSX transform, so React does not need to be in scope
-    files: ["aksel.nav.no/sanity-studio/**"],
-    ...reactPlugin.configs.flat["jsx-runtime"],
-  },
+  eslintReact.configs["recommended-typescript"],
   reactHooks.configs.flat["recommended-latest"],
   storybook.configs["flat/recommended"],
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
+  importX.flatConfigs.recommended,
+  importX.flatConfigs.typescript,
   {
     settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
     languageOptions: {
@@ -57,20 +52,20 @@ module.exports = defineConfig([
       },
     },
     rules: {
-      "react/jsx-curly-brace-presence": [
+      /* "react/jsx-curly-brace-presence": [
         "error",
         { propElementValues: "always" },
       ],
       "react/prop-types": "off", // Temporary
       "react/display-name": "off", // Temporary
-      "import/no-unresolved": "off",
-      "import/namespace": "off", // Biome has equivalent
-      "import/no-named-as-default": "off", // Temporary
       "react-hooks/refs": "off", // Too many false positives
       "react-hooks/exhaustive-deps": [
         "warn",
         { additionalHooks: "(useClientLayoutEffect)" },
-      ],
+      ], */
+      "import-x/no-unresolved": "off",
+      "import-x/namespace": "off", // Biome has equivalent
+      "import-x/no-named-as-default": "off", // Temporary
     },
   },
   {
@@ -109,8 +104,8 @@ module.exports = defineConfig([
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
-      "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
-      "react/react-in-jsx-scope": "off",
+      /* "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }], */
+      /* "react/react-in-jsx-scope": "off", */
       "@next/next/no-html-link-for-pages": [
         "error",
         "aksel.nav.no/website/pages/",
@@ -154,7 +149,7 @@ module.exports = defineConfig([
     rules: {
       "arrow-body-style": ["error", "never"],
       "func-style": ["error", "expression"],
-      "import/no-named-export": "error",
+      "import-x/no-named-export": "error",
     },
   },
   {
