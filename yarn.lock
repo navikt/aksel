@@ -5127,9 +5127,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@modelcontextprotocol/inspector@npm:2.0.0"
+"@modelcontextprotocol/inspector@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@modelcontextprotocol/inspector@npm:2.1.0"
   dependencies:
     "@hono/node-server": "npm:^2.0.12"
     "@modelcontextprotocol/client": "npm:2.0.0-beta.5"
@@ -5156,7 +5156,7 @@ __metadata:
     zod: "npm:^4.3.6"
   bin:
     mcp-inspector: clients/launcher/build/index.js
-  checksum: 10/eb437ee223a273729f571577c3bf63893e5ae2e76ef13dfdb46373bb8ff584935e911e4d70257f42fdb325830ff670728ecbc5cdc8bb966a3870ed2063b4e061
+  checksum: 10/f5899b885f32549b2774cad54ff064e30e013c94ebbf2fa1a1f48beb562a087de2ce5389adfc64e1ee00c261f3590426a8953e0a450483c2002054b4d200305f
   languageName: node
   linkType: hard
 
@@ -10870,7 +10870,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-mcp@workspace:apps/mcp-server"
   dependencies:
-    "@modelcontextprotocol/inspector": "npm:^2.0.0"
+    "@modelcontextprotocol/inspector": "npm:^2.1.0"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
     "@navikt/aksel": "npm:^8.16.1"
     "@navikt/aksel-icons": "npm:^8.16.1"
