@@ -76,8 +76,8 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.29.7",
-    "@biomejs/biome": "2.4.15",
-    "@changesets/cli": "2.31.0",
+    "@biomejs/biome": "2.5.5",
+    "@changesets/cli": "2.31.1",
     "@eslint-react/eslint-plugin": "^5.16",
     "@eslint/js": "^10.0.1",
     "@github-ui/storybook-addon-performance-panel": "^1.1.4",
