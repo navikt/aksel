@@ -1,12 +1,34 @@
 import fg from "fast-glob";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, statSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import type { ComponentMetadata } from "../../src/utils/types/metadata";
 import { META_GLOB, generatedComponentNamesPath, packageRoot } from "./paths";
 
+/** True when meta files changed/were deleted after componentNames was written */
+function metaFilesChanged(files: string[]): boolean {
+  let componentNames: string;
+  let componentNamesMtime: number;
+  try {
+    const stat = statSync(generatedComponentNamesPath);
+    componentNamesMtime = stat.mtimeMs;
+    componentNames = readFileSync(generatedComponentNamesPath, "utf-8");
+  } catch {
+    return true;
+  }
+
+  // A deletion leaves no newer mtime, so compare counts to catch it.
+  const generatedCount = (componentNames.match(/^\s*\| "/gm) ?? []).length;
+  if (generatedCount !== files.length) {
+    return true;
+  }
+
+  return files.some((file) => statSync(file).mtimeMs > componentNamesMtime);
+}
+
 /** Extracts "name"-key from metadata export in each *.meta.ts file */
-async function readMetaNames(): Promise<string[]> {
-  const files = fg.sync(META_GLOB, { cwd: packageRoot, absolute: true });
+async function readMetaNames(files: string[]): Promise<string[]> {
+  console.time("Import files");
+
   const names = await Promise.all(
     files.map(async (file) => {
       // @ts-expect-error Benchmark helper: dynamic import in this script target.
@@ -17,6 +39,8 @@ async function readMetaNames(): Promise<string[]> {
     }),
   );
 
+  console.timeEnd("Import files");
+
   return names.filter((name): name is string => typeof name === "string");
 }
 
@@ -26,7 +50,11 @@ async function readMetaNames(): Promise<string[]> {
  */
 async function writeComponentNames(names?: string[]): Promise<boolean> {
   if (!names) {
-    names = await readMetaNames();
+    const files = fg.sync(META_GLOB, { cwd: packageRoot, absolute: true });
+    if (!metaFilesChanged(files)) {
+      return false;
+    }
+    names = await readMetaNames(files);
   }
 
   /** Builds the contents of the generated `ComponentName` union module. */
@@ -49,10 +77,8 @@ ${body};
     existing = undefined;
   }
 
+  writeFileSync(generatedComponentNamesPath, content);
   const changed = existing !== content;
-  if (changed) {
-    writeFileSync(generatedComponentNamesPath, content);
-  }
   return changed;
 }
 
