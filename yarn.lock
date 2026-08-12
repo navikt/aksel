@@ -5117,9 +5117,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-cli@npm:^0.21.2":
-  version: 0.21.2
-  resolution: "@modelcontextprotocol/inspector-cli@npm:0.21.2"
+"@modelcontextprotocol/inspector-cli@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@modelcontextprotocol/inspector-cli@npm:1.0.1"
   dependencies:
     "@modelcontextprotocol/sdk": "npm:^1.25.2"
     commander: "npm:^13.1.0"
@@ -5127,13 +5127,13 @@ __metadata:
     spawn-rx: "npm:^5.1.2"
   bin:
     mcp-inspector-cli: build/cli.js
-  checksum: 10/3fd63f075e114f482bd0a18d46792925ea351769b4b5ccb15a9f5f1b87e4da2b90bb0e4d0c85928ee2533f3c77b476f975fd830799324a8701524daba322e36e
+  checksum: 10/bec8c468bcf6bec0ac7d6ad6f139d1c93b091d4e6804e1cf5fef1b0567df62ff4effe84a62e01ffb43bd0fc1cc15efb70d60824f4c0e320b0bfb42d1283da785
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-client@npm:^0.21.2":
-  version: 0.21.2
-  resolution: "@modelcontextprotocol/inspector-client@npm:0.21.2"
+"@modelcontextprotocol/inspector-client@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@modelcontextprotocol/inspector-client@npm:1.0.1"
   dependencies:
     "@mcp-ui/client": "npm:^6.0.0"
     "@modelcontextprotocol/ext-apps": "npm:^1.0.0"
@@ -5164,47 +5164,47 @@ __metadata:
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector-client: bin/start.js
-  checksum: 10/31291b5594ef72e34ef87eac39543413987f0f8aac2edd862a5138946190253357011e0ec39edb3a7890921ba5d23c4b0d7e77dd37906b53ff0cc396b8658932
+  checksum: 10/a3db2c05c4da3e23f2c62153db417024b59884acc10936a652b167009cde2c79a6a2bf59030126388f4d7685bc31a30cb40439ceca16b1fb0463cd4362043991
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector-server@npm:^0.21.2":
-  version: 0.21.2
-  resolution: "@modelcontextprotocol/inspector-server@npm:0.21.2"
+"@modelcontextprotocol/inspector-server@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@modelcontextprotocol/inspector-server@npm:1.0.1"
   dependencies:
     "@modelcontextprotocol/sdk": "npm:^1.25.2"
     cors: "npm:^2.8.5"
     express: "npm:^5.1.0"
     express-rate-limit: "npm:^8.2.1"
-    shell-quote: "npm:^1.8.3"
+    shell-quote: "npm:^1.8.4"
     shx: "npm:^0.3.4"
     spawn-rx: "npm:^5.1.2"
     ws: "npm:^8.18.0"
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector-server: build/index.js
-  checksum: 10/eae41ff8005736e6f781cb64069b40278c5482af33a9ff037102e97c2eef548817a6b5da8e64d067a09ff86c67cbbb7cbe1cb4945dbe5d3b9c617de29b89d186
+  checksum: 10/f67650d61537a542903dc442e42736ab3d75d7089481ff0746bc099060a52fdcfcfa6bfff61b7cb73ea93aede5023b42491cfec206e70c66cdadcb73e55c247c
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector@npm:^0.21":
-  version: 0.21.2
-  resolution: "@modelcontextprotocol/inspector@npm:0.21.2"
+"@modelcontextprotocol/inspector@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@modelcontextprotocol/inspector@npm:1.0.1"
   dependencies:
-    "@modelcontextprotocol/inspector-cli": "npm:^0.21.2"
-    "@modelcontextprotocol/inspector-client": "npm:^0.21.2"
-    "@modelcontextprotocol/inspector-server": "npm:^0.21.2"
+    "@modelcontextprotocol/inspector-cli": "npm:^1.0.1"
+    "@modelcontextprotocol/inspector-client": "npm:^1.0.1"
+    "@modelcontextprotocol/inspector-server": "npm:^1.0.1"
     "@modelcontextprotocol/sdk": "npm:^1.25.2"
     concurrently: "npm:^9.2.0"
     node-fetch: "npm:^3.3.2"
     open: "npm:^10.2.0"
-    shell-quote: "npm:^1.8.3"
+    shell-quote: "npm:^1.8.4"
     spawn-rx: "npm:^5.1.2"
     ts-node: "npm:^10.9.2"
     zod: "npm:^3.25.76"
   bin:
     mcp-inspector: cli/build/cli.js
-  checksum: 10/7ae9259167e60df2562d4f69b59869b2590013ce5878842d68a3ff720ad463439bcc1b88f06f3bc4403c0927457b7ffa7c29c4c8cedcdba42ae295ac83733d96
+  checksum: 10/81e480eba8acd13e65a603d924eff937dcc963d20ea0045401e323f04be77501ca46c23cd9037739506ac3aaf1d8bcc5bd31700a664b93b74f3d6a43d5d475cf
   languageName: node
   linkType: hard
 
@@ -11556,7 +11556,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-mcp@workspace:apps/mcp-server"
   dependencies:
-    "@modelcontextprotocol/inspector": "npm:^0.21"
+    "@modelcontextprotocol/inspector": "npm:^1.0.0"
     "@modelcontextprotocol/sdk": "npm:^1.29.0"
     "@navikt/aksel": "npm:^8.16.1"
     "@navikt/aksel-icons": "npm:^8.16.1"
@@ -25269,7 +25269,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:1.8.3, shell-quote@npm:^1.8.3":
+"shell-quote@npm:1.8.3":
   version: 1.8.3
   resolution: "shell-quote@npm:1.8.3"
   checksum: 10/5473e354637c2bd698911224129c9a8961697486cff1fb221f234d71c153fc377674029b0223d1d3c953a68d451d79366abfe53d1a0b46ee1f28eb9ade928f4c
