@@ -1,6 +1,6 @@
 import { format } from "date-fns/format";
 import { Suspense, useMemo } from "react";
-import { useMemoObservable } from "react-rx";
+import { useObservable } from "react-rx";
 import { useDocumentStore, useFormValue } from "sanity";
 import { useIntentLink } from "sanity/router";
 import { HStack, Heading, Link, Table } from "@navikt/ds-react";
@@ -22,11 +22,14 @@ function EndringsloggReferanser({ source }: { source: "gp" | "ds" }) {
   );
 }
 
+const INITIAL_STATE: DocumentT[] = [];
+
 function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
   const id = (useFormValue(["_id"]) as string) ?? "";
 
   const documentStore = useDocumentStore();
-  const changelogs: DocumentT[] = useMemoObservable(() => {
+
+  const observable = useMemo(() => {
     return documentStore.listenQuery(
       `*[_type == $source && $id in artikler[]._ref]{heading, slug, _id, endringsdato}`,
       {
@@ -38,7 +41,9 @@ function EndringsloggReferanserList({ source }: { source: "gp" | "ds" }) {
       },
       {},
     );
-  }, [documentStore, id]);
+  }, [documentStore, id, source]);
+
+  const changelogs: DocumentT[] = useObservable(observable, INITIAL_STATE);
 
   const parsedChangelogs: DocumentT[] | undefined = useMemo(() => {
     return changelogs?.filter((log) => {

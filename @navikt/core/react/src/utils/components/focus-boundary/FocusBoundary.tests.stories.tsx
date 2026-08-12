@@ -197,7 +197,7 @@ export const MountAutofocusAvoidLink: Story = {
   play: MountAutofocus.play,
   args: {
     showByDefault: false,
-    firstChild: <a href="/">link</a>,
+    firstChild: <a href="/">link demo</a>,
   },
 };
 

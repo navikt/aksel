@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { Link, HashRouter as Router } from "react-router";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 import Pagination from "./Pagination";
 
@@ -126,6 +125,19 @@ export const Heading: Story = {
 export const AsLink: Story = {
   render: (props) => {
     const [page, setPage] = useState(2);
+
+    const Link = (
+      _props: React.ComponentProps<"a"> & {
+        to: string;
+      },
+    ) => {
+      return (
+        <a {..._props} href={`${_props.to}`}>
+          {_props.children}
+        </a>
+      );
+    };
+
     return (
       <Pagination
         {...props}
@@ -142,13 +154,6 @@ export const AsLink: Story = {
     siblingCount: 1,
     boundaryCount: 1,
   },
-  decorators: [
-    (Story) => (
-      <Router>
-        <Story />
-      </Router>
-    ),
-  ],
 };
 
 export const ColorRole = () => {
@@ -175,10 +180,3 @@ export const Chromatic = renderStoriesForChromatic({
   ColorRole,
 });
 Chromatic.args = { count: 8, siblingCount: 1, boundaryCount: 1 };
-Chromatic.decorators = [
-  (Story) => (
-    <Router>
-      <Story />
-    </Router>
-  ),
-];

@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 CHANGED=`git diff $1 $2 --stat -- yarn.lock | wc -l`
 if [ $CHANGED -gt 0 ];
 then

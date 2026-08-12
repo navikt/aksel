@@ -10,6 +10,7 @@ import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import babelParser from "@babel/eslint-parser";
 
 /**
  * TODO:
@@ -65,6 +66,15 @@ module.exports = defineConfig([
       "import-x/no-unresolved": "off",
       "import-x/namespace": "off", // Biome has equivalent
       "import-x/no-named-as-default": "off", // Temporary
+    },
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      parser: babelParser, // Required for using modern JS features in .js files
+      parserOptions: {
+        requireConfigFile: false,
+      },
     },
   },
   {

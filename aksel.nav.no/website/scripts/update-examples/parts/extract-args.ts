@@ -6,7 +6,7 @@ export function extractArgs(
   fileName: string,
   env?: "test",
 ): ArgsT {
-  const args = code.match(/export const args = {([^}]+)}/)?.[1];
+  const args = code.match(/export const args: ExampleArgsT = {([^}]+)}/)?.[1];
 
   if (!args) {
     env !== "test" &&

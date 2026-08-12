@@ -1,4 +1,5 @@
-import { useMemoObservable } from "react-rx";
+import { useMemo } from "react";
+import { useObservable } from "react-rx";
 import {
   type FieldProps,
   type SanityDocument,
@@ -24,18 +25,21 @@ type MetadataT = {
 type UnderTemaT = SanityDocument &
   MetadataT & { tema: SanityDocument & MetadataT };
 
+const INITIAL_STATE: UnderTemaT[] = [];
 export function UndertemaHighlight(props: FieldProps) {
   const underTemas = useFormValue(["undertema"]) as { _ref: string }[];
 
   const documentStore = useDocumentStore();
 
-  const results: UnderTemaT[] = useMemoObservable(() => {
+  const observable = useMemo(() => {
     return documentStore.listenQuery(
       `*[_type == 'gp.tema.undertema' && _id in $refs && !(_id in path("drafts.**"))]{..., tema->}`,
       { refs: underTemas?.map((x) => x._ref) ?? [] },
       {},
     );
   }, [documentStore, underTemas]);
+
+  const results: UnderTemaT[] = useObservable(observable, INITIAL_STATE);
 
   if (!results) {
     return props.renderDefault(props);

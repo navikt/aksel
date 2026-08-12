@@ -1,9 +1,19 @@
-import { LinkCard, Tag, VStack } from "@navikt/ds-react";
+import { Detail, LinkCard, Tag, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <VStack gap="space-16" maxWidth="600px" paddingBlock="space-24">
+      <LinkCard data-color="accent" arrowPosition="center">
+        <LinkCard.Title>
+          <LinkCard.Anchor href="/eksempel">
+            Er helt eller delvis alene med barn
+          </LinkCard.Anchor>
+        </LinkCard.Title>
+        <LinkCard.Description>
+          <Detail textColor="subtle">Dette kan du ha rett til</Detail>
+        </LinkCard.Description>
+      </LinkCard>
       <LinkCard data-color="accent">
         <LinkCard.Title>
           <LinkCard.Anchor href="/eksempel">Skatteetaten</LinkCard.Anchor>
@@ -18,19 +28,7 @@ const Example = () => {
           </Tag>
         </LinkCard.Footer>
       </LinkCard>
-      <LinkCard data-color="accent">
-        <LinkCard.Title>
-          <LinkCard.Anchor href="/eksempel">
-            Er helt eller delvis alene med barn
-          </LinkCard.Anchor>
-        </LinkCard.Title>
-        <LinkCard.Footer>
-          <Tag size="small" variant="moderate">
-            Dette kan du ha rett til
-          </Tag>
-        </LinkCard.Footer>
-      </LinkCard>
-      <LinkCard data-color="accent">
+      <LinkCard data-color="accent" arrow={false}>
         <LinkCard.Icon>
           <DemoPictogramOne />
         </LinkCard.Icon>
@@ -41,30 +39,7 @@ const Example = () => {
           Honnørkort gir redusert billettpris på kollektive transportmidler.
         </LinkCard.Description>
         <LinkCard.Footer>
-          <Tag size="small" variant="moderate">
-            Slik gjør du det
-          </Tag>
-        </LinkCard.Footer>
-      </LinkCard>
-      <LinkCard>
-        <VStack justify="center" height="100%" asChild>
-          <LinkCard.Icon>
-            <DemoPictogramTwo />
-          </LinkCard.Icon>
-        </VStack>
-        <LinkCard.Title>
-          <LinkCard.Anchor href="/eksempel">
-            Trenger tilrettelegging på jobb eller i utdanning{" "}
-          </LinkCard.Anchor>
-        </LinkCard.Title>
-        <LinkCard.Description>
-          Om hjelpemidler, tilskuddsordninger og tilrettelegging på
-          arbeidsplassen eller studiestedet når du har nedsatt funksjonsevne.
-        </LinkCard.Description>
-        <LinkCard.Footer>
-          <Tag size="small" variant="moderate">
-            Dette kan du ha rett til
-          </Tag>
+          <Detail textColor="subtle">PENGESTØTTE</Detail>
         </LinkCard.Footer>
       </LinkCard>
     </VStack>
@@ -183,91 +158,6 @@ function DemoPictogramOne() {
       <defs>
         <clipPath id="clip0_6081_198">
           <rect width="64" height="64" fill="white" />
-        </clipPath>
-      </defs>
-    </svg>
-  );
-}
-
-function DemoPictogramTwo() {
-  return (
-    <svg
-      aria-hidden
-      role="presentation"
-      width="96"
-      height="96"
-      viewBox="0 0 96 96"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g clipPath="url(#clip0_6081_316)">
-        <path
-          d="M26 48C26 60.1503 35.8497 70 48 70V63L70 76L48 89V82C29.2223 82 14 66.7777 14 48H26ZM49 14C67.7777 14 83 29.2223 83 48H71C71 35.8497 61.1503 26 49 26V33L27 20L49 7V14Z"
-          fill="#FFECCC"
-        />
-        <path
-          d="M14.8695 1.5L2.47788 1.5C1.93778 1.50021 1.50034 1.93836 1.50034 2.47852L1.50034 32.2178C1.50055 32.7577 1.9379 33.1951 2.47788 33.1953L32.2171 33.1953C32.7573 33.1953 33.1954 32.7579 33.1957 32.2178L33.1957 19.8262C33.1957 9.70495 24.9907 1.5 14.8695 1.5Z"
-          stroke="#23262A"
-          strokeWidth="3"
-        />
-        <path
-          d="M57 19.826L57 27.2608C57 28.6295 55.8904 29.739 54.5217 29.739L37.1739 29.739"
-          stroke="#23262A"
-          strokeWidth="3"
-        />
-        <circle
-          cx="8.67391"
-          cy="8.67391"
-          r="7.17391"
-          transform="matrix(-1 0 0 1 24.7826 9.91309)"
-          stroke="#23262A"
-          strokeWidth="3"
-        />
-        <line
-          x1="58"
-          y1="59.5"
-          x2="96"
-          y2="59.5"
-          stroke="#23262A"
-          strokeWidth="3"
-        />
-        <path
-          d="M63 64L63 94"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M91 64L91 94"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M37.5 77.5V93"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M54 78L54 92"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M33 56V70C33 74.4183 36.5817 78 41 78H55"
-          stroke="#23262A"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="37.6428" cy="93.262" r="2.7381" fill="#23262A" />
-        <circle cx="54.2143" cy="93.262" r="2.7381" fill="#23262A" />
-      </g>
-      <defs>
-        <clipPath id="clip0_6081_316">
-          <rect width="96" height="96" fill="white" />
         </clipPath>
       </defs>
     </svg>
