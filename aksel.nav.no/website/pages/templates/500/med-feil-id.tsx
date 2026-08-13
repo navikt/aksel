@@ -99,5 +99,5 @@ export const Demo = {
 export const args: ExampleArgsT = {
   index: 4,
   title: "Med feil-id",
-  desc: "Ved å legge til en feil-id kan man enklere feilsøke mot logger hvis man får skjermbilde av feilmelding fra bruker.",
+  desc: "Ved å legge til en feil-id kan man enklere feilsøke mot logger hvis man får skjermbilde av feilmeldingen fra brukeren.",
 };
