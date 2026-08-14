@@ -1393,6 +1393,7 @@ export type Komponent_artikkel = {
     tag?: "beta" | "preview" | "new" | "ready" | "deprecated";
     unsafe?: boolean;
     preview_note?: Riktekst_accordion;
+    preview_note_show_more?: boolean;
     internal?: boolean;
     bilde?: {
       asset?: SanityImageAssetReference;
@@ -3051,6 +3052,7 @@ export type GLOBAL_SEARCH_QUERY_ALL_RESULT = Array<
         tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         preview_note?: Riktekst_accordion;
+        preview_note_show_more?: boolean;
         internal?: boolean;
         bilde?: {
           asset?: SanityImageAssetReference;
@@ -3332,6 +3334,7 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
           markDefs: null;
         }
     > | null;
+    preview_note_show_more?: boolean;
     internal?: boolean;
     bilde?: {
       asset?: SanityImageAssetReference;
@@ -4321,6 +4324,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY_RESULT = Array<
         tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         preview_note?: Riktekst_accordion;
+        preview_note_show_more?: boolean;
         internal?: boolean;
         bilde?: {
           asset?: SanityImageAssetReference;
@@ -4414,6 +4418,7 @@ export type DESIGNSYSTEM_OVERVIEW_BY_TYPE_QUERY_RESULT = Array<
         tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
         unsafe?: boolean;
         preview_note?: Riktekst_accordion;
+        preview_note_show_more?: boolean;
         internal?: boolean;
         bilde?: {
           asset?: SanityImageAssetReference;
@@ -8794,6 +8799,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
           tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
           unsafe?: boolean;
           preview_note?: Riktekst_accordion;
+          preview_note_show_more?: boolean;
           internal?: boolean;
           bilde?: {
             asset?: SanityImageAssetReference;
@@ -8918,6 +8924,7 @@ export type LANDINGSSIDE_LATEST_QUERY_RESULT = Array<{
             tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
             unsafe?: boolean;
             preview_note?: Riktekst_accordion;
+            preview_note_show_more?: boolean;
             internal?: boolean;
             bilde?: {
               asset?: SanityImageAssetReference;
@@ -11334,6 +11341,7 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
     tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
     preview_note?: Riktekst_accordion;
+    preview_note_show_more?: boolean;
     internal?: boolean;
     bilde?: {
       asset?: SanityImageAssetReference;
@@ -13800,6 +13808,7 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
     tag?: "beta" | "deprecated" | "new" | "preview" | "ready";
     unsafe?: boolean;
     preview_note?: Riktekst_accordion;
+    preview_note_show_more?: boolean;
     internal?: boolean;
     bilde?: {
       asset?: SanityImageAssetReference;
