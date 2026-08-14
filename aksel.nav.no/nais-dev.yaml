@@ -8,7 +8,7 @@ metadata:
 spec:
   envFrom:
     - secret: aksel-website-secrets-dev
-  image: {{ image }}
+  image: "{{ image }}"
   port: 3000
   ingresses:
     - "https://aksel.ansatt.dev.nav.no"
