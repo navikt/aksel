@@ -82,7 +82,7 @@
     "hast-util-select": "6.0.4",
     "js-yaml": "^5.2.3",
     "lodash": "4.18.1",
-    "prettier": "3.8.3",
+    "prettier": "3.9.6",
     "react": "19.2.8",
     "rehype-parse": "9.0.1",
     "tsc-alias": "1.9.1",
