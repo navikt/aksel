@@ -5,7 +5,7 @@ import {
   type PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading, Lookup } from "@navikt/ds-react";
 import type {
   ExtractPortableComponentProps,
   PortableContentTypes,
@@ -108,6 +108,17 @@ function marksComponents() {
         <WebsiteLink href={`/${slug.current}${anchor ? `#${anchor}` : ""}`}>
           {text}
         </WebsiteLink>
+      );
+    },
+    lookup: ({ text, value }) => {
+      const explanation = value?.explanation;
+      if (!explanation) {
+        return <span>{text}</span>;
+      }
+      return (
+        <Lookup word={text}>
+          <PortableText value={explanation} />
+        </Lookup>
       );
     },
   } satisfies Record<string, PortableTextMarkComponent>;

@@ -42,6 +42,13 @@ function portableMarkdown(input?: any[]) {
         const suffix = MarkdownRoutes.isDynamicRoute(`/${slug}`) ? ".md" : "";
         return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
+      lookup: ({ children, value }) => {
+        const explanation = value?.explanation;
+        if (!explanation) {
+          return children;
+        }
+        return `[${children}](#${explanation?._key})`;
+      },
     },
     types: {
       relatert_innhold: RelatertInnholdMarkdown,

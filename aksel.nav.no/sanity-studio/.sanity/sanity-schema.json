@@ -757,6 +757,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -1207,6 +1238,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -1568,6 +1630,37 @@
                             "value": {
                               "type": "string",
                               "value": "link"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
                             }
                           }
                         },
@@ -2017,6 +2110,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -2452,6 +2576,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -2873,6 +3028,37 @@
                             "value": {
                               "type": "string",
                               "value": "link"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
                             }
                           }
                         },
@@ -3337,6 +3523,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -3772,6 +3989,37 @@
                         }
                       }
                     }
+                  },
+                  {
+                    "type": "object",
+                    "attributes": {
+                      "explanation": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "inline",
+                          "name": "riktekst_standard"
+                        },
+                        "optional": true
+                      },
+                      "_type": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string",
+                          "value": "lookup"
+                        }
+                      }
+                    },
+                    "rest": {
+                      "type": "object",
+                      "attributes": {
+                        "_key": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
                   }
                 ]
               }
@@ -3996,6 +4244,37 @@
                             "value": {
                               "type": "string",
                               "value": "link"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
                             }
                           }
                         },
@@ -7310,6 +7589,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -7545,6 +7855,37 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -7766,6 +8107,37 @@
                             "value": {
                               "type": "string",
                               "value": "link"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_standard"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
                             }
                           }
                         },
