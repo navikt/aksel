@@ -47,7 +47,13 @@ function portableMarkdown(input?: any[]) {
         if (!explanation) {
           return children;
         }
-        return `[${children}](#${explanation?._key})`;
+        const explanationMarkdown = portableTextToMarkdown(explanation)
+          .replace(/\n+/g, " ")
+          .trim();
+
+        return explanationMarkdown
+          ? `${children} (${explanationMarkdown})`
+          : children;
       },
     },
     types: {

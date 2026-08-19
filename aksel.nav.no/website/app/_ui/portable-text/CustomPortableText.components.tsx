@@ -1,5 +1,6 @@
 import {
   PortableText,
+  PortableTextBlock,
   type PortableTextBlockComponent,
   type PortableTextComponents,
   type PortableTextMarkComponent,
@@ -30,6 +31,7 @@ import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
 import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
+import { CustomPortableText } from "./CustomPortableText";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -117,7 +119,10 @@ function marksComponents() {
       }
       return (
         <Lookup word={text}>
-          <PortableText value={explanation} />
+          <CustomPortableText
+            value={explanation as PortableTextBlock[]}
+            typoConfig={{ type: "long", size: "small" }}
+          />
         </Lookup>
       );
     },
