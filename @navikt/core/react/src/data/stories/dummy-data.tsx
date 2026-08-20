@@ -133,7 +133,6 @@ export const skillOptions = [
   "Cryptography",
 ];
 
-// Prettier-ignore
 const baseData = [
   {
     id: 1,
