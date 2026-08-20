@@ -59,7 +59,8 @@
     "!**/*.tsbuildinfo"
   ],
   "scripts": {
-    "create-icons": "svgr --no-prettier --silent --index-template config/index-template.js --out-dir src icons && yarn prettier --write ./src",
+    "create-icons": "svgr --no-prettier --silent --index-template config/index-template.js --out-dir src icons && yarn prettify-icons",
+    "prettify-icons": "yarn prettier ./src --write --ignore-path nonexisting-path --log-level silent --no-config",
     "parse-svg": "node -e 'require(\"./config/parse-svg.js\").main()'",
     "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
