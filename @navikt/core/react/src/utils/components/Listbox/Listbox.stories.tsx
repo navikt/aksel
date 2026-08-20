@@ -8,7 +8,7 @@ import { useDeferredValue } from "../../hooks/useDeferredValue";
 import { HighlightText } from "../HighlightText/HighlightText";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
-import Listbox from "./root/ListboxRoot";
+import { Listbox } from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
   title: "utilities/Listbox",

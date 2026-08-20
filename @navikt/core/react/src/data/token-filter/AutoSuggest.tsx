@@ -4,7 +4,7 @@ import { Search } from "../../form/search";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Detail } from "../../typography";
 import { useId } from "../../utils-external";
-import Listbox from "../../utils/components/Listbox/root/ListboxRoot";
+import { Listbox } from "../../utils/components/Listbox/root/ListboxRoot";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { Floating } from "../../utils/components/floating/Floating";
 import { useMergeRefsN } from "../../utils/hooks";
