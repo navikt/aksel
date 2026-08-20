@@ -31,18 +31,10 @@ export type {
 
 /* --------------------------- Backgrounds tokens --------------------------- */
 type AkselRootBackgroundToken =
-  | "default"
-  | "input"
-  | "raised"
-  | "sunken"
-  | "overlay";
+  "default" | "input" | "raised" | "sunken" | "overlay";
 
 type AkselDynamicStatelessBackgroundToken =
-  | "soft"
-  | "softA"
-  | "moderate"
-  | "moderateA"
-  | "strong";
+  "soft" | "softA" | "moderate" | "moderateA" | "strong";
 
 type AkselDynamicStatefulBackgroundToken =
   | "moderate-hover"

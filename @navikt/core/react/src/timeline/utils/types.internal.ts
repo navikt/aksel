@@ -3,11 +3,7 @@ import React from "react";
 export type TimelineComponentTypes = "row" | "pin" | "period";
 
 export type PeriodStatus =
-  | "success"
-  | "warning"
-  | "danger"
-  | "info"
-  | "neutral";
+  "success" | "warning" | "danger" | "info" | "neutral";
 
 export type Percentage = number;
 

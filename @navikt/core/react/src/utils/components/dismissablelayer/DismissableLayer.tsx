@@ -152,9 +152,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       }
 
       const eventType = event.detail.originalEvent.type as
-        | "pointerup"
-        | "pointerdown"
-        | "focusin";
+        "pointerup" | "pointerdown" | "focusin";
 
       const target = event.target as HTMLElement;
 
