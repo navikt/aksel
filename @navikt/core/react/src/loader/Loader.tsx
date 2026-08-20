@@ -11,13 +11,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "medium"
    */
   size?:
-    | "3xlarge"
-    | "2xlarge"
-    | "xlarge"
-    | "large"
-    | "medium"
-    | "small"
-    | "xsmall";
+    "3xlarge" | "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
   /**
    * Title prop on svg
    * @default "Venter…"
