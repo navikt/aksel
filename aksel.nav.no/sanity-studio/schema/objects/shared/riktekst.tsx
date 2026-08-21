@@ -14,6 +14,7 @@ import {
   ExternalLinkIcon,
   FileTextIcon,
   LinkIcon,
+  MagnifyingGlassIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "../../../sanity.env";
@@ -201,6 +202,26 @@ export const block = {
         components: {
           annotation: ExternalLinkRenderer,
         },
+      },
+      {
+        title: "Lookup",
+        name: "lookup",
+        type: "object",
+        icon: () => <MagnifyingGlassIcon title="Legg til Lookup" />,
+        options: {
+          modal: {
+            type: "dialog",
+            width: "medium",
+          },
+        },
+        fields: [
+          defineField({
+            title: "Forklaring",
+            name: "explanation",
+            type: "riktekst_standard",
+            validation: (Rule) => Rule.required(),
+          }),
+        ],
       },
     ],
   },

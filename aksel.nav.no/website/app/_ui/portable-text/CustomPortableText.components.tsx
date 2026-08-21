@@ -1,11 +1,12 @@
 import {
   PortableText,
+  PortableTextBlock,
   type PortableTextBlockComponent,
   type PortableTextComponents,
   type PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading, Lookup } from "@navikt/ds-react";
 import type {
   ExtractPortableComponentProps,
   PortableContentTypes,
@@ -30,6 +31,7 @@ import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
 import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
+import { CustomPortableText } from "./CustomPortableText";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -108,6 +110,20 @@ function marksComponents() {
         <WebsiteLink href={`/${slug.current}${anchor ? `#${anchor}` : ""}`}>
           {text}
         </WebsiteLink>
+      );
+    },
+    lookup: ({ text, value }) => {
+      const explanation = value?.explanation;
+      if (!explanation) {
+        return <span>{text}</span>;
+      }
+      return (
+        <Lookup word={text}>
+          <CustomPortableText
+            value={explanation as PortableTextBlock[]}
+            typoConfig={{ type: "long", size: "small" }}
+          />
+        </Lookup>
       );
     },
   } satisfies Record<string, PortableTextMarkComponent>;

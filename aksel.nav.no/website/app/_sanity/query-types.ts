@@ -169,6 +169,11 @@ export type Riktekst_blogg = Array<
             _type: "link";
             _key: string;
           }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
+            _key: string;
+          }
       >;
       level?: number;
       _type: "block";
@@ -247,6 +252,11 @@ export type Riktekst_accordion = Array<
             _type: "link";
             _key: string;
           }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
+            _key: string;
+          }
       >;
       level?: number;
       _type: "block";
@@ -308,6 +318,11 @@ export type Riktekst_standalone = Array<
         | {
             href?: string;
             _type: "link";
+            _key: string;
+          }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
             _key: string;
           }
       >;
@@ -385,6 +400,11 @@ export type Riktekst_prinsipp = Array<
             _type: "link";
             _key: string;
           }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
+            _key: string;
+          }
       >;
       level?: number;
       _type: "block";
@@ -460,6 +480,11 @@ export type Riktekst_standard = Array<
             _type: "link";
             _key: string;
           }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
+            _key: string;
+          }
       >;
       level?: number;
       _type: "block";
@@ -533,6 +558,11 @@ export type Riktekst_templates = Array<
         | {
             href?: string;
             _type: "link";
+            _key: string;
+          }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
             _key: string;
           }
       >;
@@ -613,6 +643,11 @@ export type Riktekst_grunnleggende = Array<
             _type: "link";
             _key: string;
           }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
+            _key: string;
+          }
       >;
       level?: number;
       _type: "block";
@@ -690,6 +725,11 @@ export type Riktekst_enkel = Array<{
         _type: "link";
         _key: string;
       }
+    | {
+        explanation?: Riktekst_standard;
+        _type: "lookup";
+        _key: string;
+      }
   >;
   level?: number;
   _type: "block";
@@ -723,6 +763,11 @@ export type Riktekst_komponent = Array<
         | {
             href?: string;
             _type: "link";
+            _key: string;
+          }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
             _key: string;
           }
       >;
@@ -1290,6 +1335,11 @@ export type Publication_flow = {
           _type: "link";
           _key: string;
         }
+      | {
+          explanation?: Riktekst_standard;
+          _type: "lookup";
+          _key: string;
+        }
     >;
     level?: number;
     _type: "block";
@@ -1323,6 +1373,11 @@ export type Publication_flow = {
           _type: "link";
           _key: string;
         }
+      | {
+          explanation?: Riktekst_standard;
+          _type: "lookup";
+          _key: string;
+        }
     >;
     level?: number;
     _type: "block";
@@ -1354,6 +1409,11 @@ export type Publication_flow = {
       | {
           href?: string;
           _type: "link";
+          _key: string;
+        }
+      | {
+          explanation?: Riktekst_standard;
+          _type: "lookup";
           _key: string;
         }
     >;
@@ -2173,6 +2233,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -2224,6 +2289,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -2345,6 +2415,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -2410,6 +2485,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -2461,6 +2541,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -2562,6 +2647,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -2613,6 +2703,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -2707,6 +2802,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -2779,6 +2879,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -2842,6 +2947,11 @@ export type BLOGG_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -3164,6 +3274,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                   _type: "link";
                   _key: string;
                 }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
+                  _key: string;
+                }
             > | null;
             level?: number;
             _type: "block";
@@ -3215,6 +3330,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -3309,6 +3429,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                   _type: "link";
                   _key: string;
                 }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
+                  _key: string;
+                }
             > | null;
             level?: number;
             _type: "block";
@@ -3374,6 +3499,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
         | {
             href?: string;
             _type: "link";
+            _key: string;
+          }
+        | {
+            explanation?: Riktekst_standard;
+            _type: "lookup";
             _key: string;
           }
       > | null;
@@ -3444,6 +3574,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -3495,6 +3630,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -3616,6 +3756,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -3681,6 +3826,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -3732,6 +3882,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -3809,6 +3964,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -3860,6 +4020,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -3952,6 +4117,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -4064,6 +4234,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -4127,6 +4302,11 @@ export type KOMPONENT_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -4546,6 +4726,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -4597,6 +4782,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -4718,6 +4908,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -4783,6 +4978,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -4824,6 +5024,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -4879,6 +5084,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -4956,6 +5166,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -5007,6 +5222,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -5101,6 +5321,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -5173,6 +5398,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -5236,6 +5466,11 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -5358,6 +5593,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -5409,6 +5649,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -5530,6 +5775,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -5595,6 +5845,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -5646,6 +5901,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -5723,6 +5983,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -5774,6 +6039,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -5866,6 +6136,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -5978,6 +6253,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -6041,6 +6321,11 @@ export type MONSTER_MALER_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -6167,6 +6452,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -6218,6 +6508,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -6339,6 +6634,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -6404,6 +6704,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -6445,6 +6750,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -6500,6 +6810,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -6577,6 +6892,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -6628,6 +6948,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -6722,6 +7047,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -6794,6 +7124,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -6857,6 +7192,11 @@ export type ENDRINGSLOGG_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -6953,6 +7293,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                           _type: "link";
                           _key: string;
                         }
+                      | {
+                          explanation?: Riktekst_standard;
+                          _type: "lookup";
+                          _key: string;
+                        }
                     > | null;
                     level?: number;
                     _type: "block";
@@ -7004,6 +7349,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                     | {
                         href?: string;
                         _type: "link";
+                        _key: string;
+                      }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
                         _key: string;
                       }
                   > | null;
@@ -7125,6 +7475,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                           _type: "link";
                           _key: string;
                         }
+                      | {
+                          explanation?: Riktekst_standard;
+                          _type: "lookup";
+                          _key: string;
+                        }
                     > | null;
                     level?: number;
                     _type: "block";
@@ -7190,6 +7545,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   _type: "link";
                   _key: string;
                 }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
+                  _key: string;
+                }
             > | null;
             level?: number;
             _type: "block";
@@ -7231,6 +7591,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
               | {
                   href?: string;
                   _type: "link";
+                  _key: string;
+                }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
                   _key: string;
                 }
             > | null;
@@ -7286,6 +7651,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -7363,6 +7733,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -7414,6 +7789,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -7508,6 +7888,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -7580,6 +7965,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
                   _type: "link";
                   _key: string;
                 }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
+                  _key: string;
+                }
             > | null;
             level?: number;
             _type: "block";
@@ -7643,6 +8033,11 @@ export type ENDRINGSLOGG_WITH_NEIGHBORS_QUERY_RESULT = {
               | {
                   href?: string;
                   _type: "link";
+                  _key: string;
+                }
+              | {
+                  explanation?: Riktekst_standard;
+                  _type: "lookup";
                   _key: string;
                 }
             > | null;
@@ -7920,6 +8315,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -7971,6 +8371,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -8092,6 +8497,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -8157,6 +8567,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -8208,6 +8623,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -8285,6 +8705,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -8336,6 +8761,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -8430,6 +8860,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -8502,6 +8937,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -8565,6 +9005,11 @@ export type GOD_PRAKSIS_ARTICLE_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -9063,6 +9508,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -9114,6 +9564,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -9235,6 +9690,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -9300,6 +9760,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -9351,6 +9816,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -9428,6 +9898,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -9479,6 +9954,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -9573,6 +10053,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -9645,6 +10130,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -9708,6 +10198,11 @@ export type SIDE_ARTICLE_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -9807,6 +10302,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -9858,6 +10358,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -9979,6 +10484,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -10044,6 +10554,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -10095,6 +10610,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -10172,6 +10692,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -10223,6 +10748,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -10317,6 +10847,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -10389,6 +10924,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -10452,6 +10992,11 @@ export type PRINSIPPER_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -10637,6 +11182,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -10688,6 +11238,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -10809,6 +11364,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -10874,6 +11434,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -10925,6 +11490,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -11002,6 +11572,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -11053,6 +11628,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -11147,6 +11727,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -11219,6 +11804,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -11282,6 +11872,11 @@ export type GP_CHANGELOGS_BY_SLUG_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -11413,6 +12008,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -11464,6 +12064,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -11585,6 +12190,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -11650,6 +12260,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -11701,6 +12316,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -11778,6 +12398,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -11829,6 +12454,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -11921,6 +12551,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -12033,6 +12668,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -12096,6 +12736,11 @@ export type ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -12269,6 +12914,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -12320,6 +12970,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -12441,6 +13096,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -12506,6 +13166,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -12547,6 +13212,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -12602,6 +13272,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -12679,6 +13354,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -12730,6 +13410,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -12824,6 +13509,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -12896,6 +13586,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -12959,6 +13654,11 @@ export type ALL_GRUNNLEGGENDE_MARKDOWN_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -13069,6 +13769,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -13120,6 +13825,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -13241,6 +13951,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -13306,6 +14021,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -13357,6 +14077,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -13434,6 +14159,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -13485,6 +14215,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -13577,6 +14312,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -13689,6 +14429,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -13752,6 +14497,11 @@ export type ALL_TEMPLATES_MARKDOWN_QUERY_RESULT = Array<{
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -13880,6 +14630,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -13931,6 +14686,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -14052,6 +14812,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -14117,6 +14882,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -14168,6 +14938,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -14245,6 +15020,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -14296,6 +15076,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -14388,6 +15173,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -14500,6 +15290,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -14563,6 +15358,11 @@ export type KOMPONENT_BY_SLUG_MARKDOWN_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -14736,6 +15536,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -14787,6 +15592,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -14908,6 +15718,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -14973,6 +15788,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -15014,6 +15834,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -15069,6 +15894,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -15146,6 +15976,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -15197,6 +16032,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -15291,6 +16131,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -15363,6 +16208,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -15426,6 +16276,11 @@ export type GRUNNLEGGENDE_BY_SLUG_MARKDOWN_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
@@ -15536,6 +16391,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -15587,6 +16447,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -15708,6 +16573,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                         _type: "link";
                         _key: string;
                       }
+                    | {
+                        explanation?: Riktekst_standard;
+                        _type: "lookup";
+                        _key: string;
+                      }
                   > | null;
                   level?: number;
                   _type: "block";
@@ -15773,6 +16643,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -15824,6 +16699,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
           | {
               href?: string;
               _type: "link";
+              _key: string;
+            }
+          | {
+              explanation?: Riktekst_standard;
+              _type: "lookup";
               _key: string;
             }
         > | null;
@@ -15901,6 +16781,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                       _type: "link";
                       _key: string;
                     }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
+                      _key: string;
+                    }
                 > | null;
                 level?: number;
                 _type: "block";
@@ -15952,6 +16837,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 | {
                     href?: string;
                     _type: "link";
+                    _key: string;
+                  }
+                | {
+                    explanation?: Riktekst_standard;
+                    _type: "lookup";
                     _key: string;
                   }
               > | null;
@@ -16044,6 +16934,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                   | {
                       href?: string;
                       _type: "link";
+                      _key: string;
+                    }
+                  | {
+                      explanation?: Riktekst_standard;
+                      _type: "lookup";
                       _key: string;
                     }
                 > | null;
@@ -16156,6 +17051,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
                 _type: "link";
                 _key: string;
               }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
+                _key: string;
+              }
           > | null;
           level?: number;
           _type: "block";
@@ -16219,6 +17119,11 @@ export type TEMPLATES_BY_SLUG_MARKDOWN_QUERY_RESULT = {
             | {
                 href?: string;
                 _type: "link";
+                _key: string;
+              }
+            | {
+                explanation?: Riktekst_standard;
+                _type: "lookup";
                 _key: string;
               }
           > | null;
