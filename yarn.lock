@@ -10910,7 +10910,7 @@ __metadata:
     lodash: "npm:4.18.1"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-rx: "npm:^4.2.3"
+    react-rx: "npm:^5.1.1"
     rxjs: "npm:^7.8.2"
     sanity: "npm:6.0.0"
     sanity-plugin-iframe-pane: "npm:5.0.13"
@@ -22711,17 +22711,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-rx@npm:^4.2.3":
-  version: 4.2.3
-  resolution: "react-rx@npm:4.2.3"
+"react-rx@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "react-rx@npm:5.1.1"
   dependencies:
-    observable-callback: "npm:^1.0.3"
-    react-compiler-runtime: "npm:1.0.0"
     use-effect-event: "npm:^2.0.3"
   peerDependencies:
-    react: ^18.3 || >=19.0.0-0
-    rxjs: ^7
-  checksum: 10/67182e776f552723264a89cb233954f68aab25c095574e76f6ade1a9997a9fb3ac139a14136f81e7fe1fd195a3e89af72dc29e10514e89f131b73b0158cdb0a9
+    react: ^19.2
+    rxjs: ^7.2
+  checksum: 10/e6ac5f11672b57f1d50d3dd061cf05ef2ede345da95a0d3c89fe7d8f5121d8b576d6fe522231daaaf53ecd1ca9c9a26e0a42c0b2ae2f3e81d65c538174398b94
   languageName: node
   linkType: hard
 
