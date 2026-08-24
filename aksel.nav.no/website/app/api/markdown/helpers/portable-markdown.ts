@@ -47,7 +47,7 @@ function portableMarkdown(input?: any[]) {
         if (!explanation) {
           return children;
         }
-        const explanationMarkdown = portableTextToMarkdown(explanation)
+        const explanationMarkdown = portableMarkdown(explanation)
           .replace(/\n+/g, " ")
           .trim();
 
