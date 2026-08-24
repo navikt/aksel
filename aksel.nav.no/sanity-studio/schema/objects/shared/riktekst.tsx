@@ -218,7 +218,7 @@ export const block = {
           defineField({
             title: "Forklaring",
             name: "explanation",
-            type: "riktekst_standard",
+            type: "riktekst_lookup",
             validation: (Rule) => Rule.required(),
           }),
         ],
@@ -253,6 +253,7 @@ const Riktekst = (
     | "standard"
     | "standalone"
     | "accordion",
+  allowLookup = true,
 ) => {
   let fields: string[] = [];
   const standard = [
@@ -312,10 +313,21 @@ const Riktekst = (
   }
 
   const uniq = fields.filter((item, pos, self) => self.indexOf(item) === pos);
+  const textBlock = allowLookup
+    ? block
+    : {
+        ...block,
+        marks: {
+          ...block.marks,
+          annotations: block.marks.annotations.filter(
+            (annotation) => annotation.name !== "lookup",
+          ),
+        },
+      };
 
   return [
     {
-      ...block,
+      ...textBlock,
       styles: [...headingStyles],
     },
     ...uniq.map((x) => ({ type: x })),
@@ -327,6 +339,17 @@ export const RiktekstStandard = {
   name: "riktekst_standard",
   type: "array",
   of: Riktekst("standard"),
+  icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule: SanityRule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
+};
+
+export const RiktekstLookup = {
+  title: "Riktekst Lookup",
+  name: "riktekst_lookup",
+  type: "array",
+  of: Riktekst("standard", false),
   icon: () => <FileTextIcon aria-hidden />,
   validation: (Rule: SanityRule) => {
     return Rule.custom(validateHeadingLevels);

@@ -765,7 +765,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -1246,7 +1246,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -1652,7 +1652,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -2118,7 +2118,473 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "lookup"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "optional": true
+              },
+              "level": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "number"
+                },
+                "optional": true
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "block"
+                }
+              }
+            },
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "relatert_innhold"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "bilde"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "kode"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "tips"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "do_dont"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "alert"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "accordion"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "expansioncard"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "tabell_v2"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "video"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "exampletext_block"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "language"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "description_list"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "riktekst_lookup",
+    "type": "type",
+    "value": {
+      "type": "array",
+      "of": {
+        "type": "union",
+        "of": [
+          {
+            "type": "object",
+            "attributes": {
+              "children": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "array",
+                  "of": {
+                    "type": "object",
+                    "attributes": {
+                      "marks": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "array",
+                          "of": {
+                            "type": "string"
+                          }
+                        },
+                        "optional": true
+                      },
+                      "text": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string"
+                        },
+                        "optional": true
+                      },
+                      "_type": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string",
+                          "value": "span"
+                        }
+                      }
+                    },
+                    "rest": {
+                      "type": "object",
+                      "attributes": {
+                        "_key": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "optional": true
+              },
+              "style": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "normal"
+                    },
+                    {
+                      "type": "string",
+                      "value": "h2"
+                    },
+                    {
+                      "type": "string",
+                      "value": "h3"
+                    },
+                    {
+                      "type": "string",
+                      "value": "h4"
+                    }
+                  ]
+                },
+                "optional": true
+              },
+              "listItem": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "bullet"
+                    },
+                    {
+                      "type": "string",
+                      "value": "number"
+                    }
+                  ]
+                },
+                "optional": true
+              },
+              "markDefs": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "array",
+                  "of": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "reference": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "union",
+                              "of": [
+                                {
+                                  "type": "inline",
+                                  "name": "komponent_artikkel.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "ds_artikkel.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "aksel_artikkel.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "aksel_blogg.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "aksel_prinsipp.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "aksel_standalone.reference"
+                                },
+                                {
+                                  "type": "inline",
+                                  "name": "templates_artikkel.reference"
+                                }
+                              ]
+                            },
+                            "optional": true
+                          },
+                          "anchor": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "internalLink"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "href": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            },
+                            "optional": true
+                          },
+                          "_type": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string",
+                              "value": "link"
+                            }
+                          }
+                        },
+                        "rest": {
+                          "type": "object",
+                          "attributes": {
+                            "_key": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "attributes": {
+                          "explanation": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -2584,7 +3050,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -3050,7 +3516,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -3531,7 +3997,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -3997,7 +4463,7 @@
                         "type": "objectAttribute",
                         "value": {
                           "type": "inline",
-                          "name": "riktekst_standard"
+                          "name": "riktekst_lookup"
                         },
                         "optional": true
                       },
@@ -4266,7 +4732,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -7597,7 +8063,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -7863,7 +8329,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
@@ -8129,7 +8595,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "inline",
-                              "name": "riktekst_standard"
+                              "name": "riktekst_lookup"
                             },
                             "optional": true
                           },
