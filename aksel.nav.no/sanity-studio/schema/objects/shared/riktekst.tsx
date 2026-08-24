@@ -253,7 +253,6 @@ const Riktekst = (
     | "standard"
     | "standalone"
     | "accordion",
-  allowLookup = true,
 ) => {
   let fields: string[] = [];
   const standard = [
@@ -313,21 +312,10 @@ const Riktekst = (
   }
 
   const uniq = fields.filter((item, pos, self) => self.indexOf(item) === pos);
-  const textBlock = allowLookup
-    ? block
-    : {
-        ...block,
-        marks: {
-          ...block.marks,
-          annotations: block.marks.annotations.filter(
-            (annotation) => annotation.name !== "lookup",
-          ),
-        },
-      };
 
   return [
     {
-      ...textBlock,
+      ...block,
       styles: [...headingStyles],
     },
     ...uniq.map((x) => ({ type: x })),
@@ -349,7 +337,17 @@ export const RiktekstLookup = {
   title: "Riktekst Lookup",
   name: "riktekst_lookup",
   type: "array",
-  of: Riktekst("standard", false),
+  of: [
+    {
+      ...block,
+      marks: {
+        ...block.marks,
+        annotations: block.marks.annotations.filter(
+          (annotation) => annotation.name !== "lookup",
+        ),
+      },
+    },
+  ],
   icon: () => <FileTextIcon aria-hidden />,
   validation: (Rule: SanityRule) => {
     return Rule.custom(validateHeadingLevels);
