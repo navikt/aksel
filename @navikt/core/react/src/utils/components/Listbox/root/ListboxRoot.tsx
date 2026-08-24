@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React, { forwardRef } from "react";
 import { useId } from "../../../../utils-external";
+import { cl } from "../../../helpers";
 import { ListboxGroup } from "../group/ListboxGroup";
 import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
 import { ListboxOption } from "../option/ListboxOption";
@@ -11,10 +12,23 @@ import { findNextOption, findPrevOption } from "./domHelpers";
 interface ListboxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   setVirtuallyFocusedOptionId: (value: string) => void;
+  /**
+   * @default "medium"
+   */
+  size?: "small" | "medium";
 }
 
 const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
-  ({ children, setVirtuallyFocusedOptionId, ...rest }: ListboxProps, ref) => {
+  (
+    {
+      children,
+      setVirtuallyFocusedOptionId,
+      size = "medium",
+      className,
+      ...rest
+    }: ListboxProps,
+    ref,
+  ) => {
     const id = useId();
     const activeId = `aksel-listbox-${id}-active`;
 
@@ -26,6 +40,8 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
     return (
       <div
         ref={ref}
+        className={cl("aksel-listbox", className)}
+        data-size={size}
         onKeyDown={(event) => {
           const listbox =
             event.currentTarget.querySelector<HTMLElement>('[role="listbox"]');
@@ -102,6 +118,7 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
         <ListboxProvider
           activeId={activeId}
           setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
+          size={size}
         >
           {children}
         </ListboxProvider>

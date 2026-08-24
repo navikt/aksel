@@ -11,6 +11,10 @@ export const { Provider: ListboxProvider, useContext: useListboxContext } =
      * Updates which option currently has virtual focus.
      */
     setVirtuallyFocusedOptionId: (value: string) => void;
+    /**
+     * @default "medium"
+     */
+    size: "small" | "medium";
   }>({
     name: "Listbox",
   });

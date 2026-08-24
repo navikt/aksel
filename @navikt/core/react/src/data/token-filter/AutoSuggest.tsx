@@ -329,7 +329,7 @@ function HighlightText({
 }
 
 function Highlight({ text }: { text: string }) {
-  return <mark className="aksel-listbox__highlight">{text}</mark>;
+  return <mark className="aksel-property-filter__highlight">{text}</mark>;
 }
 
 function highlightSplit(text: string, highlightText: string) {
