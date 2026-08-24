@@ -11505,14 +11505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:^4.2.0":
-  version: 4.11.3
-  resolution: "axe-core@npm:4.11.3"
-  checksum: 10/4ef64672117df20f040b245d78b5b38552497bd6a1a84222f8c6a07304e0a374a290504ccd76efc3d1ee3a17c8731a65b625a49bf6701c7bd16093a54fcd5b8d
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:~4.13.0":
+"axe-core@npm:^4.2.0, axe-core@npm:~4.13.0":
   version: 4.13.0
   resolution: "axe-core@npm:4.13.0"
   checksum: 10/b9319bedc705fde00e4abd981d8724202cc20102e4ae6d8edfde33cb5265e0fb8f67f32adcb4ad33fbd4a2c8d7ad7ef5af1d933d9ad859bed90e3eae0ee8c52f
