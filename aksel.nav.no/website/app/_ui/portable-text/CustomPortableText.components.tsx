@@ -119,10 +119,7 @@ function marksComponents() {
       }
       return (
         <Lookup word={text}>
-          <CustomPortableText
-            value={explanation as PortableTextBlock[]}
-            typoConfig={{ type: "long", size: "small" }}
-          />
+          <CustomPortableText value={explanation as PortableTextBlock[]} />
         </Lookup>
       );
     },

@@ -1,9 +1,21 @@
+const internalLinkMarkDef = `_type == 'internalLink' => {
+  "slug": @.reference->slug,
+  anchor,
+},`;
+
 const markDef = `
 markDefs[]{
   ...,
-  _type == 'internalLink' => {
-      "slug": @.reference->slug,
-      anchor,
+  ${internalLinkMarkDef}
+  _type == 'lookup' => {
+    ...,
+    explanation[]{
+      ...,
+      markDefs[]{
+        ...,
+        ${internalLinkMarkDef}
+      }
+    }
   },
 }`;
 
