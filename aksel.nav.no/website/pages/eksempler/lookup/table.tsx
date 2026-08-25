@@ -7,19 +7,21 @@ const Example = () => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell scope="col">100% alderspensjon</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Kr per år</Table.HeaderCell>
+          <Table.HeaderCell scope="col" align="right">
+            Kr per år
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Table.Row key="Grunnpensjon">
+        <Table.Row>
           <Table.HeaderCell scope="row">Grunnpensjon</Table.HeaderCell>
-          <Table.DataCell>168 788</Table.DataCell>
+          <Table.DataCell align="right">168 788</Table.DataCell>
         </Table.Row>
-        <Table.Row key="Tilleggspensjon">
+        <Table.Row>
           <Table.HeaderCell scope="row">Tilleggspensjon</Table.HeaderCell>
-          <Table.DataCell>34 490</Table.DataCell>
+          <Table.DataCell align="right">34 490</Table.DataCell>
         </Table.Row>
-        <Table.Row key="Inntektspensjon">
+        <Table.Row>
           <Table.HeaderCell scope="row">
             <Lookup word="Inntektspensjon">
               Inntektspensjon er den delen av alderspensjonen i folketrygden som
@@ -28,11 +30,11 @@ const Example = () => {
               grunnbeløp (G) inn i en individuell pensjonsbeholdning{" "}
             </Lookup>
           </Table.HeaderCell>
-          <Table.DataCell>13 452</Table.DataCell>
+          <Table.DataCell align="right">13 452</Table.DataCell>
         </Table.Row>
-        <Table.Row key="Garantitillegg">
+        <Table.Row>
           <Table.HeaderCell scope="row">Garantitillegg</Table.HeaderCell>
-          <Table.DataCell>28 234</Table.DataCell>
+          <Table.DataCell align="right">28 234</Table.DataCell>
         </Table.Row>
       </Table.Body>
     </Table>
