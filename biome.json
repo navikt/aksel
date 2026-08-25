@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
   "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "javascript": {
     "jsxRuntime": "reactClassic"
@@ -25,47 +25,51 @@
     "includes": [
       "**",
       "!**/public",
-      "!**/examples",
       "!**/codemod/**/*.js",
       "!**/modal/dialog-polyfill.ts",
       "!**/_sanity/query-types.ts",
+      "!**/component-names.generated.ts",
       "!**/transforms/**/*.input.*",
-      "!**/transforms/**/*.output.*"
+      "!**/transforms/**/*.output.*",
+      "!**/@navikt/aksel-icons/icons/*.svg",
+      "!**/@navikt/aksel-icons/template/*.svg",
+      "!**/.sanity/runtime/*"
     ]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "a11y": {
-        "noSvgWithoutTitle": "off",
-        "noNoninteractiveElementToInteractiveRole": "off",
-        "useValidAnchor": "off",
-        "useButtonType": "off",
-        "useValidAriaRole": "off",
-        "useValidAriaValues": "off",
-        "useMediaCaption": "off",
-        "useKeyWithClickEvents": "off",
-        "noNoninteractiveTabindex": "off",
-        "useSemanticElements": "off"
-      },
+      "preset": "recommended",
+
       "style": {
-        "useImportType": "off",
-        "useTemplate": "off",
-        "useNodejsImportProtocol": "off",
-        "useConst": "off",
-        "noUnusedTemplateLiteral": "off",
-        "noInferrableTypes": "off",
-        "noParameterAssign": "off",
-        "useNumberNamespace": "off",
-        "noNonNullAssertion": "off",
-        "useSelfClosingElements": "off",
-        "useDefaultParameterLast": "off"
+        "noDescendingSpecificity": "off",
+        "noUselessElse": "error",
+        "useConsistentObjectDefinitions": "error",
+        "useConsistentArrayType": "error"
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
-        "noVar": "off"
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": [
+              "info",
+              "warn",
+              "error",
+              "group",
+              "groupEnd",
+              "table",
+              "assert",
+              "countReset",
+              "count",
+              "dir",
+              "time",
+              "timeEnd",
+              "timeStamp"
+            ]
+          }
+        },
+        "noShadow": "error"
       },
       "complexity": {
         "noForEach": "off",
@@ -81,6 +85,16 @@
         "rules": {
           "performance": {
             "noImgElement": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.stories.ts", "**/*.stories.tsx", "scripts/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
           }
         }
       }

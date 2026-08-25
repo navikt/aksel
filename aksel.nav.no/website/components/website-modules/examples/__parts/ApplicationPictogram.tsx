@@ -8,6 +8,7 @@ const ApplicationPictogram = (props: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 72 72"
     fill="none"
     aria-hidden
+    role="presentation"
     {...props}
   >
     <rect x="23.25" y="22.5" width="26.25" height="9" fill="#CCE2F0" />

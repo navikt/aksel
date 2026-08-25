@@ -7,7 +7,7 @@ import {
   PiggybankIcon,
   VirusIcon,
 } from "@navikt/aksel-icons";
-import { Box, Timeline, TimelinePeriodProps } from "@navikt/ds-react";
+import { Box, Timeline, type TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -17,9 +17,9 @@ const Example = () => {
     <Box marginInline="auto" maxWidth="800px">
       <Timeline>
         <Timeline.Row label="Person" icon={<PersonIcon aria-hidden />}>
-          {person.map((p, i) => (
+          {person.map((p) => (
             <Timeline.Period
-              key={i}
+              key={p.id}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -33,9 +33,9 @@ const Example = () => {
           ))}
         </Timeline.Row>
         <Timeline.Row label="Sykehus A" icon={<HospitalIcon aria-hidden />}>
-          {jobb.map((p, i) => (
+          {jobb.map((p) => (
             <Timeline.Period
-              key={i}
+              key={p.id}
               start={p.start}
               end={p.end}
               status={p.status}
@@ -141,6 +141,6 @@ export const Demo = {
   desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 2,
 };

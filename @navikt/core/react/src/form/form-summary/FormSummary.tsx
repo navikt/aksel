@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../utils/helpers";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";

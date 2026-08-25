@@ -10,7 +10,7 @@ import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./CodeBlock.module.css";
 import {
   CodeBlockProvider,
-  CodeBlockTabsT,
+  type CodeBlockTabsT,
   useCodeBlock,
 } from "./CodeBlock.provider";
 import { AkselPrismTheme } from "./CodePrismTheme";
@@ -148,6 +148,7 @@ function CodeBlockEditor(props: {
 
                 return (
                   <div
+                    // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                     key={i}
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
@@ -162,6 +163,7 @@ function CodeBlockEditor(props: {
                       const tokenProps = { ...getTokenProps({ token }) };
                       return (
                         <span
+                          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
                           key={key}
                           {...tokenProps}
                           style={{
@@ -187,6 +189,7 @@ function CodeBlockEditor(props: {
       </Highlight>
       {showExpander && (
         <button
+          type="button"
           className={styles.codeBlockExpander}
           onClick={handleExpandUpdate}
         >

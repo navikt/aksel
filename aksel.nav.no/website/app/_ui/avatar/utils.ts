@@ -1,6 +1,6 @@
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { humanizeRedaksjonType } from "@/ui-utils/format-text";
-import { Avatar, avatarUrl } from "./Avatar";
+import { type Avatar, avatarUrl } from "./Avatar";
 
 type Blogg =
   NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number];

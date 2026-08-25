@@ -30,7 +30,7 @@ jobs:
     if: ${{ needs.check-title.outputs.should-run == 'true' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: compare-markdown.md
-          path: scripts/analyzer
+          path: tooling/analyzer
           retention-days: 1
 
   update-comment:
@@ -64,7 +64,7 @@ jobs:
       - name: Download comparison markdown to GitHub Actions Artifacts
         uses: actions/download-artifact@v8
         with:
-          path: scripts/analyzer
+          path: tooling/analyzer
           name: compare-markdown.md
 
       - name: Find Comment
@@ -80,5 +80,5 @@ jobs:
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body-path: scripts/analyzer/compare-markdown.md
+          body-path: tooling/analyzer/compare-markdown.md
           edit-mode: replace

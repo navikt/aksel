@@ -17,8 +17,8 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ name, percent }, i) => (
-          <Table.Row key={i + name}>
+        {data.map(({ name, percent }) => (
+          <Table.Row key={name}>
             <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
             <Table.DataCell align="right">{percent}&nbsp;%</Table.DataCell>
             <Table.DataCell align="right">
@@ -80,6 +80,6 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
 };

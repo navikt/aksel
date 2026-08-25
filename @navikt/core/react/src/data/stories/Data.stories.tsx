@@ -25,7 +25,7 @@ import {
   columnDef_TEST_DATA,
   columnDef_TEST_DATA_NESTED,
 } from "./Data.test-data";
-import { PersonInfo, homeSystemOptions } from "./dummy-data";
+import { type PersonInfo, homeSystemOptions } from "./dummy-data";
 
 const meta: Meta<typeof DataGridTable> = {
   title: "ds-react/Data",
@@ -468,7 +468,7 @@ export const KitchenSinkAdvancedFilter: Story = {
             <TokenFilter
               query={query}
               onChange={setQuery}
-              options={filterOptions}
+              propertyOptions={filterOptions}
               propertyDefinitions={filterPropertyDefs}
             />
           }
@@ -648,8 +648,12 @@ export const KitchenSinkAdvancedFilter: Story = {
                           Velg alle
                         </Switch>
                         <DragAndDrop
-                          items={columnView}
-                          setItems={setColumnView}
+                          items={columnView.map((col) => ({
+                            id: col.id,
+                            label: col.header,
+                          }))}
+                          /* TODO: Temp out of commision */
+                          setItems={() => null}
                           renderItem={(item) => {
                             return (
                               <Switch
@@ -666,7 +670,7 @@ export const KitchenSinkAdvancedFilter: Story = {
                                   });
                                 }}
                               >
-                                {item.header}
+                                {item.label}
                               </Switch>
                             );
                           }}

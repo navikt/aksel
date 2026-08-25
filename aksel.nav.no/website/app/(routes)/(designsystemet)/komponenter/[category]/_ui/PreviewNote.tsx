@@ -1,6 +1,6 @@
 "use client";
 
-import { PortableTextBlock } from "next-sanity";
+import type { PortableTextBlock } from "next-sanity";
 import { useRef } from "react";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
@@ -13,7 +13,13 @@ import {
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import ShowMore from "../../../grunnleggende/endringslogg/_ui/ShowMore";
 
-export const PreviewNote = ({ content }: { content: PortableTextBlock[] }) => {
+export const PreviewNote = ({
+  content,
+  toggleShowMore,
+}: {
+  content: PortableTextBlock[];
+  toggleShowMore: boolean;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -30,19 +36,23 @@ export const PreviewNote = ({ content }: { content: PortableTextBlock[] }) => {
         <InfoCardTitle>Preview</InfoCardTitle>
       </InfoCardHeader>
       <InfoCardContent>
-        <ShowMore as="div" scrollTargetRef={ref}>
-          <ShowMore.Content collapsedHeight="16rem">
-            <CustomPortableText value={content} />
-          </ShowMore.Content>
-          <ShowMore.Button>
-            <Button
-              size="small"
-              variant="secondary"
-              data-color="neutral"
-              style={{ bottom: "var(--ax-space-20)" }}
-            />
-          </ShowMore.Button>
-        </ShowMore>
+        {toggleShowMore ? (
+          <ShowMore as="div" scrollTargetRef={ref}>
+            <ShowMore.Content collapsedHeight="16rem">
+              <CustomPortableText value={content} />
+            </ShowMore.Content>
+            <ShowMore.Button>
+              <Button
+                size="small"
+                variant="secondary"
+                data-color="neutral"
+                style={{ bottom: "var(--ax-space-20)" }}
+              />
+            </ShowMore.Button>
+          </ShowMore>
+        ) : (
+          <CustomPortableText value={content} />
+        )}
       </InfoCardContent>
     </InfoCard>
   );

@@ -1,5 +1,31 @@
 # @navikt/aksel
 
+## 8.16.1
+
+### Patch Changes
+
+- Internal infra update ([`a322476`](https://github.com/navikt/aksel/commit/a322476d33c8644da3400b4c29934535412ef8c7))
+
+## 8.16.0
+
+## 8.15.0
+
+## 8.14.0
+
+### Patch Changes
+
+- Updated dependencies [[`3997c04`](https://github.com/navikt/aksel/commit/3997c043a4603df5ebb04f4f75049b6cfbda7004)]:
+  - @navikt/ds-css@8.14.0
+  - @navikt/ds-tokens@8.14.0
+
+## 8.13.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@8.13.1
+  - @navikt/ds-tokens@8.13.1
+
 ## 8.13.0
 
 ### Patch Changes

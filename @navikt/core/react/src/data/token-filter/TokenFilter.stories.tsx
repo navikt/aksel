@@ -1,4 +1,4 @@
-import { StoryObj } from "@storybook/react-vite";
+import type { StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { VStack } from "../../primitives/stack";
 import { TokenFilter } from "./TokenFilter";
@@ -91,7 +91,7 @@ export const WithGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={properties}
         />
       </div>
@@ -112,7 +112,7 @@ export const WithOutGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
@@ -127,15 +127,13 @@ export const MultipleTokens: Story = {
       operation: "and",
     });
 
-    console.log(query);
-
     return (
       <div>
         <h2>TokenFilter without groups</h2>
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithoutGroups}
         />
       </div>
@@ -208,7 +206,7 @@ export const CustomOperators: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={propertiesWithOperators}
         />
       </div>
@@ -245,7 +243,7 @@ export const OperatorFiltering: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={propertyOptions}
+          propertyOptions={propertyOptions}
           propertyDefinitions={properties}
         />
         <div style={{ marginTop: "20px" }}>
@@ -299,12 +297,14 @@ const regionOptions = [
     propertyKey: "region",
     value: "us-east-1",
     label: "US East",
+    description: "US East (N. Virginia)",
     tags: ["north america", "usa"],
   },
   {
     propertyKey: "region",
     value: "eu-west-1",
     label: "EU West",
+    description: "EU West (Ireland)",
     tags: ["europe"],
   },
 ];
@@ -322,7 +322,7 @@ export const MixedGroups: Story = {
         <TokenFilter
           query={query}
           onChange={(newQuery) => setQuery(newQuery)}
-          options={[...statusOptions, ...regionOptions]}
+          propertyOptions={[...statusOptions, ...regionOptions]}
           propertyDefinitions={mixProperties}
         />
       </div>
@@ -345,12 +345,15 @@ const servers = [
   { name: "web-dev-1", status: "running", region: "eu-west-1", cpu: "22%" },
 ];
 
-const tablePropertyDefs = [
+const tablePropertyDefs: ExternalPropertyDefinition[] = [
   {
     key: "status",
     label: "Status",
     groupLabel: "Status",
-    operators: ["=", "!="],
+    operators: [
+      { operator: "=", type: "multiple" },
+      { operator: "!=", type: "multiple" },
+    ],
   },
   {
     key: "region",
@@ -383,8 +386,12 @@ export const WithDataTable: Story = {
       return servers.filter((server) => {
         const results = query.tokens.map((token) => {
           const value = server[token.propertyKey as keyof typeof server];
-          if (token.operator === "=") return value === token.value;
-          if (token.operator === "!=") return value !== token.value;
+          const tokenValues = Array.isArray(token.value)
+            ? token.value
+            : [token.value];
+
+          if (token.operator === "=") return tokenValues.includes(value);
+          if (token.operator === "!=") return !tokenValues.includes(value);
           return true;
         });
 
@@ -399,7 +406,7 @@ export const WithDataTable: Story = {
         <TokenFilter
           query={query}
           onChange={setQuery}
-          options={tableOptions}
+          propertyOptions={tableOptions}
           propertyDefinitions={tablePropertyDefs}
         />
         <div>TOOD: Add table here</div>

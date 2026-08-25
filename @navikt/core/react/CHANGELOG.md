@@ -1,5 +1,71 @@
 # @navikt/ds-react
 
+## 8.16.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.16.1
+  - @navikt/aksel-icons@8.16.1
+
+## 8.16.0
+
+### Minor Changes
+
+- Dependencies: Updated `react-day-picker` from v9.14 to v10.0.1 ([#5143](https://github.com/navikt/aksel/pull/5143))
+
+### Patch Changes
+
+- Internal: Optimized rendering of `asChild`-components ([`efa4f05`](https://github.com/navikt/aksel/commit/efa4f05c56e557e316cacbf1e955dbb825c93cc9))
+
+- Provider: memorized internal context ([`c961c2d`](https://github.com/navikt/aksel/commit/c961c2dcc1a827952991c972371afa93f577422d))
+
+- Dependencies: updated floating-ui to latest 0.27.20 ([`8cc7a18`](https://github.com/navikt/aksel/commit/8cc7a185eef675cd7cce56ec912842cb8390f4a5))
+
+- DataGrid: Auto-scale column-width based on document font-size ([#5054](https://github.com/navikt/aksel/pull/5054))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.16.0
+  - @navikt/aksel-icons@8.16.0
+
+## 8.15.0
+
+### Minor Changes
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+### Patch Changes
+
+- Performance: Optimized internal i18n hook ([#5037](https://github.com/navikt/aksel/pull/5037))
+
+- Updated dependencies [[`662e4fe`](https://github.com/navikt/aksel/commit/662e4fef66c42c46ee57d36c188f191278f4d383)]:
+  - @navikt/aksel-icons@8.15.0
+  - @navikt/ds-tokens@8.15.0
+
+## 8.14.0
+
+### Minor Changes
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
+### Patch Changes
+
+- Table: Fixed content not showing when using ExpandableRows with React.Activity + React.StrictMode ([#5018](https://github.com/navikt/aksel/pull/5018))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.14.0
+  - @navikt/aksel-icons@8.14.0
+
+## 8.13.1
+
+### Patch Changes
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.13.1
+  - @navikt/aksel-icons@8.13.1
+
 ## 8.13.0
 
 ### Minor Changes

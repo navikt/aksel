@@ -28,7 +28,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 4,
   desc: "Bruk `as='section'` + aria-label/aria-labelledby for å gjøre InfoCard til en semantisk seksjon på siden. Dette 'rammer inn' InfoCard for skjermlesere og gjør det lettere å forstå hvor den starter og slutter.",
 };

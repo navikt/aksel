@@ -33,7 +33,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 99,
   desc: "Spacer lar deg lett legge inn automatisk stretch mellom elementer. Dette kan være nyttig når man f.eks. skal plassere knapper i 'InternalHeader'.",
 };

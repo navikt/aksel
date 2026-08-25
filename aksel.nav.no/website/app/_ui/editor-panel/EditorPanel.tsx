@@ -13,7 +13,7 @@ import {
   InfoCardHeader,
   InfoCardTitle,
 } from "@navikt/ds-react/InfoCard";
-import { AkselColor } from "@navikt/ds-react/types/theme";
+import type { AkselColor } from "@navikt/ds-react/types/theme";
 
 type EditorPanelProps = {
   children: React.ReactNode;

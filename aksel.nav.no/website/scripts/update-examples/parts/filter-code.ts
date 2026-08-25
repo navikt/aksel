@@ -1,5 +1,5 @@
-import { namedTypes } from "ast-types";
-import jscodeshift, { ASTPath, Collection } from "jscodeshift";
+import type { namedTypes } from "ast-types";
+import jscodeshift, { type ASTPath, type Collection } from "jscodeshift";
 import fs from "node:fs";
 import path from "node:path";
 // eslint-disable-next-line import/default
@@ -109,7 +109,7 @@ async function injectImportedCode(code: string, filePath: string) {
     const regex = new RegExp(`<${identifier} [^/]*/>`, "g");
     code = code.replace(regex, arrowFunctionCode);
   });
-  code += "\n\n" + codeToInject.join("\n\n");
+  code += `\n\n${codeToInject.join("\n\n")}`;
 
   code = code.replace(/\n\nimport /g, "\nimport "); // prune() adds empty line between imports
 

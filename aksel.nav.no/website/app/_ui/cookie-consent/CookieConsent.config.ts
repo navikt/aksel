@@ -2,10 +2,7 @@ const CURRENT_VERSION = 1;
 const CONSENT_TRACKER_ID = "aksel-consent";
 
 type CONSENT_TRACKER_STATE =
-  | "undecided"
-  | "accepted"
-  | "rejected"
-  | "no_action";
+  "undecided" | "accepted" | "rejected" | "no_action";
 
 type CookieData = {
   createdAt: string;

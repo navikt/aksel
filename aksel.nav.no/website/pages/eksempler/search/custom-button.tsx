@@ -3,11 +3,11 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form role="search">
+    <search>
       <Search label="Søk i alle Nav sine sider" variant="secondary">
         <Search.Button type="button" />
       </Search>
-    </form>
+    </search>
   );
 };
 
@@ -19,7 +19,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 8,
   desc: "Children kan erstatte knapp hvis man f.eks. trenger eget ikon eller 'type'-prop.",
 };

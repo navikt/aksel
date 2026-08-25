@@ -1,3 +1,5 @@
+import { SchemaConfig } from "aksel-sanity-studio/schema";
+import { cacheLife } from "next/cache";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -11,7 +13,6 @@ import {
   SITEMAP_ARTICLES_BY_TYPE_QUERY,
   SITEMAP_LANDINGPAGES_QUERY,
 } from "@/app/_sanity/queries";
-import { allArticleDocuments } from "@/sanity/config";
 
 async function fetchAllSanityPages(): Promise<
   {
@@ -19,6 +20,11 @@ async function fetchAllSanityPages(): Promise<
     lastMod: string | null;
   }[]
 > {
+  "use cache";
+  cacheLife("hours");
+
+  const fetch = sanityFetch;
+
   const [
     { data: landingPageData },
     { data: articleListData },
@@ -27,35 +33,35 @@ async function fetchAllSanityPages(): Promise<
     { data: dsGrunnleggendeData },
     { data: dsTemplatesData },
   ] = await Promise.all([
-    sanityFetch({
+    fetch({
       query: SITEMAP_LANDINGPAGES_QUERY,
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
+    fetch({
       query: SITEMAP_ARTICLES_BY_TYPE_QUERY,
       params: {
-        doctypes: allArticleDocuments,
+        doctypes: SchemaConfig.allArticleDocuments,
       },
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
+    fetch({
       query: GOD_PRAKSIS_ALL_TEMA_QUERY,
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
+    fetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
+    fetch({
       query: DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
       stega: false,
       perspective: "published",
     }),
-    sanityFetch({
+    fetch({
       query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
       stega: false,
       perspective: "published",
@@ -65,7 +71,7 @@ async function fetchAllSanityPages(): Promise<
   const filteredTema: typeof temaListData = [];
 
   for (const tema of temaListData) {
-    const { data: undertema } = await sanityFetch({
+    const { data: undertema } = await fetch({
       query: GOD_PRAKSIS_TEMA_UNDERTEMA_QUERY,
       params: { temaId: tema._id },
     });
@@ -74,7 +80,7 @@ async function fetchAllSanityPages(): Promise<
       continue;
     }
 
-    const { data: articleCount } = await sanityFetch({
+    const { data: articleCount } = await fetch({
       query: GOD_PRAKSIS_ARTICLES_COUNT_BY_UNDERTEMA_ID_QUERY,
       params: { undertemaIds: undertema },
     });
@@ -110,8 +116,6 @@ async function fetchAllSanityPages(): Promise<
   dsTemplatesData?.overview_pages?.forEach((overviewPage) => {
     paths.push({ slug: `/monster-maler/${overviewPage}`, lastMod: null });
   });
-
-  paths.push({ slug: `/monster-maler`, lastMod: null });
 
   Object.values(PAGE_ROUTES).forEach((category) => {
     category.root.forEach((page) => {

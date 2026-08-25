@@ -23,21 +23,16 @@ jobs:
       pull-requests: "write"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: lts/*
           cache: yarn
           cache-dependency-path: "yarn.lock"
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v1.x
 
       - name: Install dependencies
         run: yarn

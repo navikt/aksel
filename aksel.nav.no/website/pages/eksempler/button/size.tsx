@@ -26,7 +26,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   desc: "Knappene kommer i tre størrelser: medium, small og xsmall. xsmall brukes kun i spesielle tilfeller der det er begrenset plass, for eksempel i tabeller.",
 };

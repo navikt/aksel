@@ -1,12 +1,12 @@
 import JSON5 from "json5";
-import { ArgsT } from "../types";
+import type { ArgsT } from "../types";
 
 export function extractArgs(
   code: string,
   fileName: string,
   env?: "test",
 ): ArgsT {
-  const args = code.match(/export const args = {([^}]+)}/)?.[1];
+  const args = code.match(/export const args: ExampleArgsT = {([^}]+)}/)?.[1];
 
   if (!args) {
     env !== "test" &&

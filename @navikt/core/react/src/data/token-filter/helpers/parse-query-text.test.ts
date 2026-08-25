@@ -51,6 +51,65 @@ const parsedProperties: InternalPropertyDefinition[] = properties.map(
 );
 
 describe("parseQueryText", () => {
+  describe("multiple operators", () => {
+    const multiProperty: InternalPropertyDefinition = {
+      key: "status",
+      label: "Status",
+      groupLabel: "",
+      group: "testgroup",
+      operators: [{ operator: "=", type: "multiple" }],
+      externalProperty: {
+        key: "status",
+        label: "Status",
+        operators: [{ operator: "=", type: "multiple" }],
+      },
+    };
+
+    const parseMulti = (text: string) =>
+      parseQueryText(text, [multiProperty]) as Extract<
+        InternalParsedTextState,
+        { step: "property" }
+      >;
+
+    test("should treat a single value as both selected and filter text", () => {
+      const result = parseMulti("Status = active");
+
+      expect(result.value).toBe("active");
+      expect(result.selectedValues).toEqual(["active"]);
+    });
+
+    test("should split comma separated values", () => {
+      const result = parseMulti("Status = active, pending");
+
+      expect(result.value).toBe("pending");
+      expect(result.selectedValues).toEqual(["active", "pending"]);
+    });
+
+    test("should clear the filter text after a trailing separator", () => {
+      const result = parseMulti("Status = active, ");
+
+      expect(result.value).toBe("");
+      expect(result.selectedValues).toEqual(["active"]);
+    });
+
+    test("should handle an empty value", () => {
+      const result = parseMulti("Status = ");
+
+      expect(result.value).toBe("");
+      expect(result.selectedValues).toEqual([]);
+    });
+
+    test("should not split values for operators of type single", () => {
+      const result = parseQueryText(
+        "Status = active, pending",
+        parsedProperties,
+      ) as Extract<InternalParsedTextState, { step: "property" }>;
+
+      expect(result.value).toBe("active, pending");
+      expect(result.selectedValues).toBeUndefined();
+    });
+  });
+
   describe("value extraction", () => {
     test("should extract value after operator", () => {
       const result = parseQueryText("Status=active", parsedProperties);

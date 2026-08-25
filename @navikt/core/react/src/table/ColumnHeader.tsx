@@ -5,7 +5,7 @@ import {
   SortUpIcon,
 } from "@navikt/aksel-icons";
 import { consoleWarning } from "../utils/helpers/consoleWarning";
-import HeaderCell, { HeaderCellProps } from "./HeaderCell";
+import HeaderCell, { type HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
 
 export interface ColumnHeaderProps extends HeaderCellProps {

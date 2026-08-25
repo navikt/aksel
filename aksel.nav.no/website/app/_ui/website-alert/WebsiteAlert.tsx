@@ -1,4 +1,4 @@
-import { PortableTextBlock, stegaClean } from "next-sanity";
+import { type PortableTextBlock, stegaClean } from "next-sanity";
 import {
   CheckmarkCircleIcon,
   ExclamationmarkTriangleIcon,
@@ -13,7 +13,7 @@ import {
   InfoCardTitle,
 } from "@navikt/ds-react/InfoCard";
 import { CustomPortableText } from "@/app/CustomPortableText";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 function WebsiteAlert(props: ExtractPortableComponentProps<"alert">) {
   const { body, variant, heading, heading_level } = props.value;

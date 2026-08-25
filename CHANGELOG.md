@@ -1,5 +1,69 @@
 # Changelog
 
+## 8.16.1
+
+### @navikt/aksel
+
+- Internal infra update ([`a322476`](https://github.com/navikt/aksel/commit/a322476d33c8644da3400b4c29934535412ef8c7))
+
+## 8.16.0
+
+### @navikt/ds-react
+
+- Dependencies: Updated `react-day-picker` from v9.14 to v10.0.1 ([#5143](https://github.com/navikt/aksel/pull/5143))
+
+* Internal: Optimized rendering of `asChild`-components ([`efa4f05`](https://github.com/navikt/aksel/commit/efa4f05c56e557e316cacbf1e955dbb825c93cc9))
+
+* Provider: memorized internal context ([`c961c2d`](https://github.com/navikt/aksel/commit/c961c2dcc1a827952991c972371afa93f577422d))
+
+* Dependencies: updated floating-ui to latest 0.27.20 ([`8cc7a18`](https://github.com/navikt/aksel/commit/8cc7a185eef675cd7cce56ec912842cb8390f4a5))
+
+* DataGrid: Auto-scale column-width based on document font-size ([#5054](https://github.com/navikt/aksel/pull/5054))
+
+## 8.15.0
+
+### @navikt/ds-react
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+* Performance: Optimized internal i18n hook ([#5037](https://github.com/navikt/aksel/pull/5037))
+
+### @navikt/ds-css
+
+- DataGrid: New component `DataGrid.Preferences` ([#5030](https://github.com/navikt/aksel/pull/5030))
+
+* Lookup: Changed text-decoration from dotted to dashed ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+* InlineMessage: Adjusted gap between icon and text to `4px` for size small ([#5031](https://github.com/navikt/aksel/pull/5031))
+
+* Lookup: updated focus-outline ([#5032](https://github.com/navikt/aksel/pull/5032))
+
+### @navikt/aksel-icons
+
+- New icons: Timeline and TimelineFill ([#5050](https://github.com/navikt/aksel/pull/5050))
+
+### @navikt/ds-tailwind
+
+- Tailwind v4 config now available at `@navikt/ds-tailwind/v4` ([#5036](https://github.com/navikt/aksel/pull/5036))
+
+## 8.14.0
+
+### @navikt/ds-react
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
+* Table: Fixed content not showing when using ExpandableRows with React.Activity + React.StrictMode ([#5018](https://github.com/navikt/aksel/pull/5018))
+
+### @navikt/ds-css
+
+- Lookup: :tada: New component `Lookup`. ([#4998](https://github.com/navikt/aksel/pull/4998))
+
+## 8.13.1
+
+### @navikt/ds-react
+
+- Combobox: Selected options are now persistent in dropdown-menu for single-select ([#4970](https://github.com/navikt/aksel/pull/4970))
+
 ## 8.13.0
 
 ### @navikt/ds-react

@@ -1,4 +1,4 @@
-import {
+import type {
   BadRequestErrorResponseWithErrMessage,
   ErrorResponsePayloadWithErrMessage,
   GetFileComponentsResponse,
@@ -12,20 +12,17 @@ const FIGMA_FILE_KEY = "wEdyFjCQSBR3U7FvrMbPXa";
 export const fetchIcons = async (): Promise<PublishedComponent[]> => {
   console.group("Fetching list of published icons from Figma...");
   const data:
-    | GetFileComponentsResponse
-    | BadRequestErrorResponseWithErrMessage = await fetch(
-    `https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/components`,
-    {
+    GetFileComponentsResponse | BadRequestErrorResponseWithErrMessage =
+    await fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/components`, {
       headers: {
         "Content-type": "application/json",
         "X-FIGMA-TOKEN": process.env.FIGMA_TOKEN ?? "",
       },
-    },
-  )
-    .then((x) => x.json())
-    .catch((e) => {
-      throw e.message;
-    });
+    })
+      .then((x) => x.json())
+      .catch((e) => {
+        throw e.message;
+      });
 
   if (data.status !== 200) {
     throw new Error(data.err);

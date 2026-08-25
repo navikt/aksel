@@ -5,10 +5,10 @@ const {
   mkdirSync,
   rmSync,
   copyFileSync,
-} = require("fs");
-const path = require("path");
+} = require("node:fs");
+const path = require("node:path");
 const fastGlob = require("fast-glob");
-const jsYaml = require("js-yaml");
+const { load, JSON_SCHEMA } = require("js-yaml");
 
 const iconFolder = "./core-icons";
 
@@ -26,8 +26,8 @@ async function generateFile() {
   const categories = new Map();
 
   ymlList.forEach((file) => {
-    const ymlData = jsYaml.load(readFileSync(`${basePath}/${file}`), {
-      schema: jsYaml.JSON_SCHEMA,
+    const ymlData = load(readFileSync(`${basePath}/${file}`), {
+      schema: JSON_SCHEMA,
     });
     categories.set(
       ymlData.category,

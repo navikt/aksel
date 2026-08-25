@@ -2,14 +2,14 @@ CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ```sh
 ├── /website        # Next.js-app
-└── /website/sanity # Sanity CMS-app
+└── /sanity-studio  # Sanity CMS-app
 ```
 
 ### /website
 
 [Next.js](https://nextjs.org/)-applikasjon som henter data fra et [Sanity](https://www.sanity.io/)-datasett.
 
-### /website/sanity
+### /sanity-studio
 
 Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin) (krever Nav SSO for innlogging).
 

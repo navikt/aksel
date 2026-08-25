@@ -12,7 +12,6 @@ import { ExpansionCardMarkdown } from "@/app/api/markdown/blocks/ExpansionCard.m
 import { KodeMarkdown } from "@/app/api/markdown/blocks/Kode.md";
 import { KodeEksemplerMarkdown } from "@/app/api/markdown/blocks/KodeEksempler.md";
 import { LanguageMarkdown } from "@/app/api/markdown/blocks/Language.md";
-import { PropsSeksjonMarkdown } from "@/app/api/markdown/blocks/PropsSeksjon.md";
 import { RelatertInnholdMarkdown } from "@/app/api/markdown/blocks/RelatertInnhold.md";
 import { TabellMarkdown } from "@/app/api/markdown/blocks/Tabell.md";
 import { TipsMarkdown } from "@/app/api/markdown/blocks/Tips.md";
@@ -43,6 +42,19 @@ function portableMarkdown(input?: any[]) {
         const suffix = MarkdownRoutes.isDynamicRoute(`/${slug}`) ? ".md" : "";
         return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
+      lookup: ({ children, value }) => {
+        const explanation = value?.explanation;
+        if (!explanation) {
+          return children;
+        }
+        const explanationMarkdown = portableMarkdown(explanation)
+          .replace(/\n+/g, " ")
+          .trim();
+
+        return explanationMarkdown
+          ? `${children} (${explanationMarkdown})`
+          : children;
+      },
     },
     types: {
       relatert_innhold: RelatertInnholdMarkdown,
@@ -52,7 +64,6 @@ function portableMarkdown(input?: any[]) {
       expansioncard: ExpansionCardMarkdown,
       tabell_v2: TabellMarkdown,
       accordion: AccordionMarkdown,
-      props_seksjon: PropsSeksjonMarkdown,
       video: VideoMarkdown,
       tips: TipsMarkdown,
       kode: KodeMarkdown,

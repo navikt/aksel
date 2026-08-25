@@ -8,7 +8,6 @@
 - [ ] Examples
 - [ ] Documentation / Decision Records
 - [ ] Storybook
-- [ ] Style mappings (`@navikt/core/css/config/_mappings.js`)
 - [ ] CSS class deprecations (`@navikt/aksel-stylelint/src/deprecations.ts`)
 - [ ] Exports (`@navikt/core/react/src/index.ts` and `@navikt/core/react/package.json`)
 - [ ] New component? CSS import (`@navikt/core/css/index.css`)

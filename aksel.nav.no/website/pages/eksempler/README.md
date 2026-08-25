@@ -33,7 +33,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   desc: "Primærknapp brukes til xyz",
 };

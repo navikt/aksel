@@ -402,8 +402,12 @@ export const SelectionPagination: Story = {
 
     return (
       <div>
-        <button onClick={() => setPage("0")}>Page 1</button>
-        <button onClick={() => setPage("1")}>Page 2</button>
+        <button type="button" onClick={() => setPage("0")}>
+          Page 1
+        </button>
+        <button type="button" onClick={() => setPage("1")}>
+          Page 2
+        </button>
         <DataGrid
           columns={userColumnDef}
           data={dataToShow}
@@ -769,7 +773,7 @@ const rowClickColumnDef: ColumnDefinitions<UserDataTest> = [
     header: "Link",
     bodyCell: ({ foo }) => (
       <a href="/example" onClick={(e) => e.preventDefault()}>
-        {foo} link
+        {foo} link demo
       </a>
     ),
   },

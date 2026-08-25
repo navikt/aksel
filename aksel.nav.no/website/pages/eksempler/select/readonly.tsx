@@ -20,7 +20,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 98,
   desc: "Readonly-attributtet gjør at verdien ikke kan endres. Til forskjell fra disabled-felter vil brukere fortsatt kunne tabbe til det, og feltet vil inkluderes når skjemaet sendes inn.",
 };

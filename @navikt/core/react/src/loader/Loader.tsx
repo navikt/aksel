@@ -1,5 +1,5 @@
-import React, { SVGProps, forwardRef } from "react";
-import { AkselColor } from "../types";
+import React, { type SVGProps, forwardRef } from "react";
+import type { AkselColor } from "../types";
 import { omit, useId } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { useI18n } from "../utils/i18n/i18n.hooks";
@@ -11,13 +11,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
    * @default "medium"
    */
   size?:
-    | "3xlarge"
-    | "2xlarge"
-    | "xlarge"
-    | "large"
-    | "medium"
-    | "small"
-    | "xsmall";
+    "3xlarge" | "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
   /**
    * Title prop on svg
    * @default "Venter…"

@@ -57,7 +57,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 11,
   desc: "Eksempel på hvordan du legger inn feilmelding som gjelder for begge feltene.",
 };

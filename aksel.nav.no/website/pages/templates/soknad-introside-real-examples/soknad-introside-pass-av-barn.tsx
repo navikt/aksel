@@ -194,7 +194,7 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
   title: "Pass av barn",
 };

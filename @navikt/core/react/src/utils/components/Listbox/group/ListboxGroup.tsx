@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "../../../../typography";
+import { Detail } from "../../../../typography";
 import { useId } from "../../../../utils-external";
 
 interface ListboxGroupProps {
@@ -11,20 +11,20 @@ function ListboxGroup({ label, children }: ListboxGroupProps) {
   const labelId = useId();
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: Fieldset is not generic enough
     <div
       role="group"
       className="aksel-listbox__group"
       aria-labelledby={labelId}
     >
-      <Label
+      <Detail
         as="div"
-        size="small"
         id={labelId}
         aria-hidden
         className="aksel-listbox__group-label"
       >
         {label}
-      </Label>
+      </Detail>
       {children}
     </div>
   );

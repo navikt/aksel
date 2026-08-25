@@ -21,7 +21,7 @@ jobs:
       deployments: "write"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -46,9 +46,8 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Deploy to dev-gcp
-        uses: nais/deploy/actions/deploy@master
+        uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: aksel.nav.no/nais-dev.yaml
           CLUSTER: dev-gcp
           IMAGE: ${{ steps.docker-push.outputs.image }}

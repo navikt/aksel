@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { DatePicker, useDatepicker } from "../date/datepicker";
+import { DatePicker, useDatepicker } from "../datepicker";
 import { Select } from "../form/select";
 import { Modal } from "../modal";
 import { VStack } from "../primitives/stack";
@@ -36,7 +36,9 @@ type Story = StoryObj<typeof Dialog>;
 export const Default = {
   render: (args) => (
     <div>
-      <button onClick={() => alert("before")}>Before dialog</button>
+      <button type="button" onClick={() => alert("before")}>
+        Before dialog
+      </button>
       <Dialog defaultOpen={args.defaultOpen} size={args.size}>
         <DialogTrigger>
           <Button>Open Dialog</Button>
@@ -66,7 +68,9 @@ export const Default = {
           </DialogFooter>
         </DialogPopup>
       </Dialog>
-      <button onClick={() => alert("after")}>after dialog</button>
+      <button type="button" onClick={() => alert("after")}>
+        after dialog
+      </button>
     </div>
   ),
   argTypes: {
@@ -735,7 +739,7 @@ function ScrollContent({ defaultOpen = false }: { defaultOpen?: boolean }) {
   const [showScroll, setShowScroll] = useState(defaultOpen);
   return (
     <div>
-      <button onClick={() => setShowScroll((x) => !x)}>
+      <button type="button" onClick={() => setShowScroll((x) => !x)}>
         Show more content
       </button>
       {content}

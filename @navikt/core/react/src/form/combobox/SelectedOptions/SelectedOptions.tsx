@@ -1,7 +1,7 @@
 import React from "react";
 import { Chips } from "../../../chips";
 import { useInputContext } from "../Input/Input.context";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
 
 interface SelectedOptionsProps {
@@ -57,8 +57,8 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
       data-type={isMultiSelect ? "multiple" : "single"}
     >
       {value.length === 0 || (isMultiSelect && selectedOptions.length)
-        ? selectedOptions.map((option, i) => (
-            <Option key={option.label + i} option={option} />
+        ? selectedOptions.map((option) => (
+            <Option key={option.value} option={option} />
           ))
         : []}
       {children}

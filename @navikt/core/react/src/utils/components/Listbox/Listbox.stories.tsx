@@ -1,13 +1,14 @@
-import type { Meta } from "@storybook/react-vite";
-import React, { useState } from "react";
+import type { Meta, StoryFn } from "@storybook/react-vite";
+import React, { useCallback, useMemo, useState } from "react";
 import { Search } from "../../../form/search";
 import { TextField } from "../../../form/textfield";
 import { Popover } from "../../../popover";
 import { Box } from "../../../primitives/box";
+import { useDeferredValue } from "../../hooks/useDeferredValue";
 import { HighlightText } from "../HighlightText/HighlightText";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
-import Listbox from "./root/ListboxRoot";
+import { Listbox } from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
   title: "utilities/Listbox",
@@ -23,7 +24,6 @@ type MyItem = {
   value: `item-${number}`;
   metadata?: string;
 };
-
 const myItems: MyItem[] = [
   { label: "Norway", value: "item-1", metadata: "foo1" },
   { label: "Finland", value: "item-2" },
@@ -42,7 +42,6 @@ type MyGroup = {
   id: `group-${number}`;
   items: MyItem[];
 };
-
 const groupedItems: (MyGroup | MyItem)[] = [
   { label: "Single item first", value: "item-01" },
   {
@@ -74,10 +73,7 @@ const RenderItems = ({
 }: RenderItemsProps) =>
   items.map((itemOrGroup) =>
     "items" in itemOrGroup ? (
-      <Listbox.Group
-        key={itemOrGroup.label}
-        label={<em>{itemOrGroup.label}</em>}
-      >
+      <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
         {itemOrGroup.items.map((item) => (
           <Listbox.Option
             key={item.value}
@@ -85,7 +81,6 @@ const RenderItems = ({
             onClick={() => onSelect(item)}
             aria-selected={selectedItems.includes(item.value)}
             hasVirtualFocus={virtuallyFocusedOptionId === item.value}
-            style={{ paddingLeft: "1em" }}
           >
             <HighlightText text={filterString}>{item.label}</HighlightText>
             {selectedItems.includes(item.value) && <Checkmark />}
@@ -108,6 +103,150 @@ const RenderItems = ({
 const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
 
 export const Default = () => {
+  const [filterString, setFilterString] = useState("");
+  const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
+    null,
+  );
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
+
+  const filteredItems = filterString
+    ? filterItems(groupedItems, filterString)
+    : groupedItems;
+
+  const onSelect = (item: MyItem) => {
+    setSelectedItem(item.value);
+    console.log(item);
+  };
+
+  return (
+    <>
+      <div>Selected: {selectedItem}</div>
+
+      <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+        <Listbox.InputSlot>
+          <Search
+            label="Velg noe"
+            hideLabel={false}
+            variant="simple"
+            value={filterString}
+            onChange={setFilterString}
+          />
+        </Listbox.InputSlot>
+
+        <Listbox.Options>
+          <RenderItems
+            items={filteredItems}
+            selectedItems={selectedItem ? [selectedItem] : []}
+            filterString={filterString}
+            virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+            onSelect={onSelect}
+          />
+        </Listbox.Options>
+      </Listbox>
+    </>
+  );
+};
+
+interface OptimizedProps {
+  count: number;
+  highlight: boolean;
+}
+export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
+  const [filterString, setFilterString] = useState("");
+  const deferredFilterString = useDeferredValue(filterString);
+  const [selectedItem, setSelectedItem] = useState<string>("");
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
+
+  const allOptions = useMemo(
+    () =>
+      Array.from(
+        { length: count },
+        (_, i) => `Item ${String(i + 1).padStart(4, "0")}`,
+      ),
+    [count],
+  );
+
+  const filterStringLowerCase = deferredFilterString.toLocaleLowerCase();
+
+  const filteredOptions = deferredFilterString
+    ? allOptions.filter((option) =>
+        option.toLocaleLowerCase().includes(filterStringLowerCase),
+      )
+    : allOptions;
+
+  return (
+    <>
+      <div>Selected: {selectedItem}</div>
+
+      <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+        <Listbox.InputSlot>
+          <Search
+            label="Velg noe"
+            hideLabel={false}
+            variant="simple"
+            value={filterString}
+            onChange={setFilterString}
+          />
+        </Listbox.InputSlot>
+
+        <Box borderWidth="1" overflow="auto" maxHeight="300px">
+          <Listbox.Options>
+            {filteredOptions.map((option) => (
+              <MyMemoizedOption
+                key={option}
+                value={option}
+                filterString={highlight ? deferredFilterString : ""}
+                isSelected={selectedItem === option}
+                hasVirtualFocus={virtuallyFocusedOptionId === option}
+                onSelect={setSelectedItem}
+              />
+            ))}
+          </Listbox.Options>
+        </Box>
+      </Listbox>
+    </>
+  );
+};
+Optimized.args = {
+  count: 1000,
+  highlight: false,
+};
+Optimized.parameters = {
+  a11y: { disable: true },
+  docs: { disable: true },
+};
+interface MyMemoizedOptionProps {
+  value: string;
+  filterString: string;
+  isSelected: boolean;
+  hasVirtualFocus: boolean;
+  onSelect: (value: string) => void;
+}
+const MyMemoizedOption = React.memo(
+  ({
+    value,
+    filterString,
+    isSelected,
+    hasVirtualFocus,
+    onSelect,
+  }: MyMemoizedOptionProps) => {
+    //console.log(Date.now(), "Rendering option", value); // eslint-disable-line react-hooks/purity
+    return (
+      <Listbox.Option
+        key={value}
+        id={value}
+        onClick={useCallback(() => onSelect(value), [onSelect, value])}
+        aria-selected={isSelected}
+        hasVirtualFocus={hasVirtualFocus}
+      >
+        <HighlightText text={filterString}>{value}</HighlightText>
+        {isSelected && <Checkmark />}
+      </Listbox.Option>
+    );
+  },
+);
+
+export const WithFloating = () => {
   const [filterString, setFilterString] = useState("");
   const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
     null,
@@ -161,15 +300,10 @@ export const Default = () => {
                 background="default"
                 borderWidth="1"
                 overflow="auto"
-                style={{
-                  maxHeight:
-                    "calc(var(--__axc-floating-available-height) - 4px)",
-                  width: "var(--__axc-floating-anchor-width)",
-                }}
+                maxHeight="calc(var(--__axc-floating-available-height) - 4px)"
+                width="var(--__axc-floating-anchor-width)"
               >
-                <Listbox.Options
-                  setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-                >
+                <Listbox.Options>
                   <RenderItems
                     items={filteredItems}
                     selectedItems={selectedItem ? [selectedItem] : []}
@@ -221,9 +355,7 @@ export const WithPopover = () => {
         placement="bottom"
       >
         <Popover.Content>
-          <Listbox.Options
-            setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
-          >
+          <Listbox.Options>
             <RenderItems
               items={filteredItems}
               selectedItems={selectedItems}

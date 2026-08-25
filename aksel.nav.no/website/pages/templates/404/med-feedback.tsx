@@ -67,8 +67,8 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 3,
   title: "Med tilbakemeldingsfunksjon",
-  desc: "Hvis løsningen din støtter det, kan du vurdere å gi brukerne muligheten til å rapportere avvik.",
+  desc: "Hvis løsningen din støtter det, kan du gi brukerne muligheten til å rapportere inn feilen.",
 };

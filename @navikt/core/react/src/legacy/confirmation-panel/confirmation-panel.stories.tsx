@@ -1,0 +1,117 @@
+import type { Meta } from "@storybook/react-vite";
+import React, { useState } from "react";
+import { Link } from "../../link";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
+import { ConfirmationPanel } from "./index";
+
+export default {
+  title: "ds-react/Legacy/ConfirmationPanel",
+  component: ConfirmationPanel,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+      },
+      options: ["medium", "small"],
+    },
+    error: {
+      type: "string",
+    },
+  },
+  parameters: {
+    chromatic: { disable: true },
+  },
+} satisfies Meta<typeof ConfirmationPanel>;
+
+const content = (
+  <>
+    Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
+    minim ut mollit voluptate exercitation nulla mollit.
+  </>
+);
+
+export const Default = {
+  render: (props) => {
+    return (
+      <ConfirmationPanel
+        error={props?.error}
+        size={props?.size}
+        checked={props?.checked ?? undefined}
+        label={props?.label ?? "Checkbox label text"}
+      >
+        {content}
+      </ConfirmationPanel>
+    );
+  },
+
+  args: {
+    label: "Checkbox label text",
+    checked: false,
+  },
+};
+
+export const Small = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ConfirmationPanel
+      checked={checked}
+      onChange={() => setChecked(!checked)}
+      label="Checkbox label text"
+      size="small"
+    >
+      {content}
+    </ConfirmationPanel>
+  );
+};
+
+export const Checked = () => {
+  return (
+    <ConfirmationPanel checked label="Checkbox label text">
+      {content}
+    </ConfirmationPanel>
+  );
+};
+
+export const NoContent = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ConfirmationPanel
+      checked={checked}
+      onChange={() => setChecked(!checked)}
+      label="Checkbox label text"
+    />
+  );
+};
+
+export const WithError = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="colgap">
+      <ConfirmationPanel
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+        label="Checkbox label text"
+        error="Adipisicing sint aute quis veniam incididunt duis est sint aute cillum."
+      >
+        {content}
+      </ConfirmationPanel>
+      <ConfirmationPanel
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+        label="Checkbox label text"
+        error="Adipisicing sint aute quis veniam incididunt duis est sint aute cillum."
+        size="small"
+      >
+        {content}
+      </ConfirmationPanel>
+    </div>
+  );
+};
+
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  Checked,
+  NoContent,
+  WithError,
+});

@@ -5,7 +5,7 @@ import { cl } from "../../../utils/helpers";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList } from "../combobox-utils";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -76,6 +76,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
           toggleIsListOpen(false);
         }
       }}
+      // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: List item acts as an option in the combobox.
       role="option"
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}

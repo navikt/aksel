@@ -1,7 +1,7 @@
 import { createContext as ReactCreateContext } from "react";
 import { createStrictContext } from "../utils/helpers";
-import { ToggleGroupProps } from "./ToggleGroup.types";
-import { useToggleGroup } from "./useToggleGroup";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
+import type { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleContextProps {
   size: "medium" | "small";

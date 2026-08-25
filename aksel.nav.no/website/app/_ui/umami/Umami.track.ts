@@ -1,7 +1,4 @@
-import {
-  type EventName,
-  type EventPropertiesMap,
-} from "@navikt/analytics-types";
+import type { EventName, EventPropertiesMap } from "@navikt/analytics-types";
 
 // Overload 1: taxonomy event — fully typed
 function umamiTrack<T extends EventName>(

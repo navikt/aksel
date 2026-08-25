@@ -3,7 +3,7 @@ import {
   destructureBlocks,
   destructureBlocksForMarkdown,
   writersAll,
-} from "@/sanity/queries";
+} from "./query-utils";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -125,6 +125,24 @@ const KOMPONENT_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...},
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+        ...,
+          "unpackedType": null
+        }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+        ...,
+          "unpackedType": null
+        }
+      }
+    },
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
@@ -158,6 +176,7 @@ const GRUNNLEGGENDE_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...}
 }`);
 
 const MONSTER_MALER_BY_SLUG_QUERY =
@@ -168,6 +187,7 @@ const MONSTER_MALER_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+    "contact": contact->{...}
 }`);
 
 const TOC_BY_SLUG_QUERY =
@@ -185,7 +205,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
 
-export const ENDRINGSLOGG_FIELDS = `heading, "slug": slug.current, endringsdato, endringstype, content[]{ ..., ${destructureBlocks} }, visMer`;
+export const ENDRINGSLOGG_FIELDS = `heading, "slug": slug.current, endringsdato, endringstype, content[]{ ..., ${destructureBlocks} }, visMer, "links": artikler[]->{heading, slug}`;
 
 const ENDRINGSLOGG_QUERY = defineQuery(`
   *[_type == "ds_endringslogg_artikkel"]{
@@ -491,7 +511,26 @@ const ALL_KOMPONENTS_MARKDOWN_QUERY = defineQuery(
     content[]{
       ...,
       ${destructureBlocksForMarkdown}
-    }
+    },
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      }
+    },
   }`,
 );
 
@@ -521,7 +560,26 @@ const KOMPONENT_BY_SLUG_MARKDOWN_QUERY = defineQuery(
     content[]{
       ...,
       ${destructureBlocksForMarkdown}
-    }
+    },
+    "component_metadata": component_metadata->{
+      ...,
+      "components": components[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      },
+      "utils": utils[]{
+        ...,
+        "props": props[]{
+          ...,
+          "type": coalesce(unpackedType, type),
+          "unpackedType": null
+        }
+      }
+    },
   }`,
 );
 

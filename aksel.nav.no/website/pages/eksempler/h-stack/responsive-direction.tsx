@@ -36,7 +36,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 7,
   desc: "Ønsker du å endre fra 'row' til 'column' ved et brekkpunkt kan du bruke Stack-komponenten. Husk også å oppdatere `align` og `justify` samtidig.",
 };

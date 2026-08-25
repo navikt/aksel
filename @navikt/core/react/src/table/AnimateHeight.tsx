@@ -1,5 +1,5 @@
 /* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { type CSSProperties, useEffect, useRef, useState } from "react";
 import { useTimeout } from "../utils/hooks";
 
 // ------------------ Types
@@ -96,9 +96,20 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   );
   const [overflow, setOverflow] = useState<Overflow>(initialOverflow.current);
   const [useTransitions, setUseTransitions] = useState<boolean>(false);
+  const didHideOnMount = useRef(false);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Only run this on mount
   useEffect(() => {
+    /**
+     * We check for multiple runs caused by React.StrictMode.
+     * With strict mode, flow is now
+     * hideContent -> showContent -> hideContent, which causes the content to be hidden on mount.
+     */
+    if (didHideOnMount.current) {
+      return;
+    }
+    didHideOnMount.current = true;
+
     // Hide content if height is 0 (to prevent tabbing into it)
     hideContent(contentElement.current, currentHeight);
 

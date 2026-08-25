@@ -1,12 +1,13 @@
 import {
   PortableText,
-  PortableTextBlockComponent,
+  PortableTextBlock,
+  type PortableTextBlockComponent,
   type PortableTextComponents,
-  PortableTextMarkComponent,
+  type PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import {
+import { BodyLong, BodyShort, Detail, Heading, Lookup } from "@navikt/ds-react";
+import type {
   ExtractPortableComponentProps,
   PortableContentTypes,
 } from "@/app/_sanity/types";
@@ -20,7 +21,6 @@ import { Bilde } from "../bilde/Bilde";
 import { DescriptionList } from "../description-list/DescriptionList";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
-import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
 import { Tips } from "../tips/Tips";
@@ -31,6 +31,7 @@ import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
 import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
+import { CustomPortableText } from "./CustomPortableText";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -55,7 +56,6 @@ function customPortableTextComponents({
       expansioncard: WebsiteExpansionCard,
       tabell_v2: TableV2,
       accordion: WebsiteAccordion,
-      props_seksjon: PropsSeksjon,
       video: Video,
       tips: Tips,
       kode: SingleCodeBlock,
@@ -110,6 +110,17 @@ function marksComponents() {
         <WebsiteLink href={`/${slug.current}${anchor ? `#${anchor}` : ""}`}>
           {text}
         </WebsiteLink>
+      );
+    },
+    lookup: ({ text, value }) => {
+      const explanation = value?.explanation;
+      if (!explanation) {
+        return <span>{text}</span>;
+      }
+      return (
+        <Lookup word={text}>
+          <CustomPortableText value={explanation as PortableTextBlock[]} />
+        </Lookup>
       );
     },
   } satisfies Record<string, PortableTextMarkComponent>;

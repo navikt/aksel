@@ -1,4 +1,4 @@
-import { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT } from "@/app/_sanity/query-types";
 
 /**
  * Capitalize the first letter of a string.
@@ -7,9 +7,11 @@ function capitalizeText(inputString: string): string {
   return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
-type RedaksjonTypeValue = NonNullable<
-  NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number]["writers"]
->[number]["type"];
+type RedaksjonTypeValue =
+  | NonNullable<
+      NonNullable<BLOGG_LANDINGSSIDE_BLOGS_QUERY_RESULT>["bloggposts"][number]["writers"]
+    >[number]["type"]
+  | undefined;
 
 export const humanizeRedaksjonType = (type: RedaksjonTypeValue) => {
   switch (type) {
@@ -33,7 +35,7 @@ function abbrName(name: string): string {
     .split(" ")
     .filter((val) => val.trim() !== "") // Remove any empty strings caused by extra spaces
     .map((val, index, arr) =>
-      index !== 0 && index !== arr.length - 1 ? val.charAt(0) + "." : val,
+      index !== 0 && index !== arr.length - 1 ? `${val.charAt(0)}.` : val,
     )
     .join(" ");
 }

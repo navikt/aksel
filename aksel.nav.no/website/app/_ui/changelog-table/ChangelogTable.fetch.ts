@@ -5,6 +5,7 @@ import {
 } from "@/app/_sanity/queries";
 
 async function fetchChangelogs(id: string, type: "gp" | "ds") {
+  "use cache";
   const { data } = await sanityFetch({
     query:
       type === "ds" ? DS_CHANGELOGS_FOR_ID_QUERY : GP_CHANGELOGS_FOR_ID_QUERY,

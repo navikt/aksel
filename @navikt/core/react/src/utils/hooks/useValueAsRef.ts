@@ -4,7 +4,7 @@ import { useClientLayoutEffect } from "../../utils-external";
 import { useRefWithInit } from "./useRefWithInit";
 
 function useValueAsRef<T>(value: T) {
-  const latest = useRefWithInit(createLatestRef, value).current!;
+  const latest = useRefWithInit(createLatestRef, value).current;
 
   latest.next = value; // eslint-disable-line react-hooks/immutability
 

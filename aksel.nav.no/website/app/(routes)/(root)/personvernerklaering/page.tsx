@@ -1,13 +1,14 @@
+import type { Metadata } from "next/types";
 import { BodyLong, Box, Heading, Link } from "@navikt/ds-react";
 import { Page as DsPage, PageBlock } from "@navikt/ds-react/Page";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { ConsentForm } from "./_ui/ConsentForm";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Personvern og sikkerhet",
   description:
-    "Informasjon om hvordan Aksel behandler dine personopplysninger på aksel.nav.no.",
+    "Informasjon om hvordan aksel.nav.no behandler dine personopplysninger.",
 };
 
 export default async function Page() {
@@ -20,7 +21,7 @@ export default async function Page() {
             Personvern og sikkerhet på aksel.nav.no
           </Heading>
           <BodyLong spacing>
-            Aksel er en nettside Nav Arbeids- og velferdsdirektoratet har
+            Aksel er en nettside Nav (Arbeids- og velferdsdirektoratet) har
             behandlingsansvaret for.
           </BodyLong>
           <BodyLong spacing>
@@ -60,7 +61,7 @@ export default async function Page() {
           <BodyLong spacing>
             Opplysningene brukes til å kartlegge hvordan og hvor mye
             aksel.nav.no brukes, uten å identifisere IP-adresser. Vi bruker
-            verktøyet Umami i analysearbeidet.
+            verktøyet Innblikk i analysearbeidet.
           </BodyLong>
 
           <Heading size="medium" level="3" spacing data-aksel-heading-color>
@@ -102,19 +103,20 @@ export default async function Page() {
 
           <BodyLong spacing>
             Ved å trykke &quot;godkjenn alle&quot; skrur vi på analyseverktøyet
-            Umami.
+            Innblikk.
           </BodyLong>
 
           <Heading size="small" level="4" spacing data-aksel-heading-color>
-            Umami
+            Innblikk
           </Heading>
           <BodyLong spacing>
-            Umami brukes til statistikk og analyse av hvordan nav.no brukes.
-            Umami bruker ikke informasjonskapsler, men henter inn opplysninger
-            om nettleseren din for å lage en unik ID. Denne ID-en brukes for å
-            skille deg fra andre brukere. For å hindre identifisering, bruker vi
-            en egenutviklet proxy som vasker bort deler av IP-adressen din før
-            dataene sendes til verktøyet.
+            {`Innblikk er Navs eget interne analyseverktøy, bygget og driftet av
+            Nav. Det brukes til statistikk og analyse av hvordan aksel.nav.no
+            brukes. Innblikk bruker ikke informasjonskapsler. For å skille deg
+            fra andre besøkende, genereres en unik sesjons-ID basert på
+            IP-adresse og "User-Agent", som nullstilles ved hvert månedsskifte.
+            IP-adressen brukes også til å fastslå hvilket land du befinner deg
+            i. Hverken IP-adresse eller User-Agent lagres.`}
           </BodyLong>
           <Heading size="large" level="2" spacing data-aksel-heading-color>
             Mine valg

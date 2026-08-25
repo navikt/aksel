@@ -15,7 +15,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
 };
 `;
@@ -34,7 +34,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 0,
 };
 `;
@@ -100,7 +100,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   desc: "Man kan manuelt legge til ikoner eller illustrasjoner med egen styling.",
 };

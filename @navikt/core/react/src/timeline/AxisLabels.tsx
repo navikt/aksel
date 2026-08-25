@@ -1,5 +1,5 @@
 import {
-  Locale,
+  type Locale,
   addDays,
   addMonths,
   addYears,
@@ -17,11 +17,11 @@ import {
 import React, { useCallback, useMemo } from "react";
 import { Detail } from "../typography/Detail";
 import { useDateLocale, useI18n } from "../utils/i18n/i18n.hooks";
-import { TFunction } from "../utils/i18n/i18n.types";
+import type { TFunction } from "../utils/i18n/i18n.types";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
-import { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
+import type { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
 
 export const dayLabels = (
   start: Date,

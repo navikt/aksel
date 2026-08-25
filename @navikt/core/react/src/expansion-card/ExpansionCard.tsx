@@ -4,18 +4,18 @@ import type { OverridableComponent } from "../utils-external";
 import { cl } from "../utils/helpers";
 import { useControllableState } from "../utils/hooks";
 import ExpansionCardContent, {
-  ExpansionCardContentProps,
+  type ExpansionCardContentProps,
 } from "./ExpansionCardContent";
 import {
   ExpansionCardDescription,
-  ExpansionCardDescriptionProps,
+  type ExpansionCardDescriptionProps,
 } from "./ExpansionCardDescription";
 import ExpansionCardHeader, {
-  ExpansionCardHeaderProps,
+  type ExpansionCardHeaderProps,
 } from "./ExpansionCardHeader";
 import {
   ExpansionCardTitle,
-  ExpansionCardTitleProps,
+  type ExpansionCardTitleProps,
 } from "./ExpansionCardTitle";
 import { ExpansionCardContext } from "./context";
 

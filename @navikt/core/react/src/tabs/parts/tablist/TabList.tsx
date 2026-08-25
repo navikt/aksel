@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { forwardRef, useRef } from "react";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";

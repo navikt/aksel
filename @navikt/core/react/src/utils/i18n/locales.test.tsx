@@ -1,6 +1,6 @@
 /* eslint-disable vitest/expect-expect */
 import { describe, expect, test } from "vitest";
-import { Translations } from "./i18n.types";
+import type { Translations } from "./i18n.types";
 import en from "./locales/en";
 import nb from "./locales/nb";
 import nn from "./locales/nn";

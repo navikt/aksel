@@ -1,0 +1,189 @@
+import { isSameDay } from "date-fns";
+import React, { forwardRef, useRef, useState } from "react";
+import type { DateRange } from "react-day-picker";
+import { useId } from "../../utils-external";
+import {
+  DateTranslationContextProvider,
+  getTranslations,
+} from "../../utils/components/date/Date.locale";
+import { isDateRange } from "../../utils/components/date/Date.typeutils";
+import { DateDialog } from "../../utils/components/date/dialog/DateDialog";
+import {
+  DateInputContextProvider,
+  type DateInputProps,
+  DatePickerInput,
+} from "../../utils/components/date/input/DateInput";
+import { cl } from "../../utils/helpers";
+import { useControllableState, useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import type {
+  ConditionalModeProps,
+  DatePickerDefaultProps,
+} from "../DatePicker.types";
+import { ReactDayPicker } from "../rdp/DatePickerRDPInternal";
+import {
+  DatePickerStandalone,
+  type DatePickerStandaloneProps,
+} from "../standalone/DatePickerStandalone";
+
+type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
+
+/**
+ * A component that allows users to select a date from a calendar.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datepicker)
+ * @see 🏷️ {@link DatePickerProps}
+ *
+ * @example
+ * ```jsx
+ *  const { inputProps, datepickerProps } = useMonthpicker({
+ *    onMonthChange: console.log,
+ *  });
+ *
+ *  return (
+ *     <DatePicker {...datepickerProps} dropdownCaption>
+ *       <DatePicker.Input
+ *         {...inputProps}
+ *         label="Velg dato"
+ *       />
+ *     </DatePicker>
+ *  );
+ * ```
+ */
+const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerProps>(
+  (
+    {
+      children,
+      locale,
+      translations,
+      selected,
+      id,
+      defaultSelected,
+      wrapperClassName,
+      open: _open,
+      onClose,
+      onOpenToggle,
+      strategy,
+      mode,
+      ...rest
+    },
+    ref,
+  ) => {
+    const translate = useI18n(
+      "DatePicker",
+      translations,
+      getTranslations(locale),
+    );
+
+    const ariaId = useId(id);
+    const popupLabelId = useId();
+
+    const [open, setOpen] = useControllableState({
+      defaultValue: false,
+      value: _open,
+    });
+
+    const datePickerOpener = useRef<"from" | "to" | null>(null);
+
+    /* We use state here to insure that anchor is defined if open is true on initial render */
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const mergedRef = useMergeRefs(setWrapperRef, ref);
+
+    const [value, setValue] = useControllableState<
+      Date | Date[] | DateRange | undefined
+    >({
+      defaultValue: defaultSelected,
+      value: selected,
+      onChange: (newValue) => {
+        let closeDialog = false;
+        if (mode === "single" && newValue) {
+          closeDialog = true;
+        } else if (isDateRange(newValue) && newValue.from && newValue.to) {
+          closeDialog = true;
+
+          if (isSameDay(newValue.from, newValue.to)) {
+            closeDialog = false;
+          }
+        }
+
+        if (closeDialog) {
+          onClose?.();
+          setOpen(false);
+        }
+
+        rest?.onSelect?.(newValue as any);
+      },
+    });
+
+    return (
+      <DateTranslationContextProvider translate={translate}>
+        <DateInputContextProvider
+          open={open}
+          onOpen={(caller) => {
+            datePickerOpener.current = caller ?? null;
+            setOpen((x) => !x);
+            onOpenToggle?.();
+          }}
+          ariaId={ariaId}
+          defined={true}
+          caller={datePickerOpener.current}
+        >
+          <div
+            ref={mergedRef}
+            className={cl("aksel-date__wrapper", wrapperClassName)}
+          >
+            {children}
+            <DateDialog
+              open={open}
+              anchor={wrapperRef}
+              onClose={() => {
+                onClose?.();
+                open && setOpen(false);
+              }}
+              locale={locale}
+              translate={translate}
+              variant={mode ?? "single"}
+              popoverProps={{
+                id: ariaId,
+                strategy,
+              }}
+              popupLabelId={popupLabelId}
+            >
+              <ReactDayPicker
+                {...rest}
+                locale={locale}
+                handleSelect={setValue}
+                selected={value as any}
+                mode={mode as any}
+                popupLabelId={popupLabelId}
+              />
+            </DateDialog>
+          </div>
+        </DateInputContextProvider>
+      </DateTranslationContextProvider>
+    );
+  },
+);
+
+const DatePicker = Object.assign(DatePickerRoot, {
+  /**
+   * @see 🏷️ {@link DatePickerStandaloneProps}
+   * @example
+   * ```jsx
+   * <DatePicker.Standalone
+   *   dropdownCaption
+   *   fromDate={new Date("2022-10-01")}
+   *   toDate={new Date("2026-10-01")}
+   * />
+   * ```
+   */
+  Standalone: DatePickerStandalone,
+  /**
+   * @see 🏷️ {@link DateInputProps}
+   */
+  Input: DatePickerInput,
+});
+
+export { DatePicker };
+export { DatePickerInput, DatePickerStandalone };
+export type { DateInputProps, DatePickerProps, DatePickerStandaloneProps };

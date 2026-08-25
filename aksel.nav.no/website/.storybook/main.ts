@@ -1,13 +1,8 @@
 import { defineMain } from "@storybook/nextjs-vite/node";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import { loadCsf } from "storybook/internal/csf-tools";
-import TsconfigPathsPlugin from "vite-tsconfig-paths";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const require = createRequire(import.meta.url);
 
@@ -78,13 +73,10 @@ export default defineMain({
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
     return mergeConfig(config, {
-      plugins: [
-        TsconfigPathsPlugin({
-          projects: [resolve(__dirname, "../tsconfig.json")],
-          ignoreConfigErrors: true,
-        }),
-      ],
-    });
+      resolve: {
+        tsconfigPaths: true,
+      },
+    } satisfies typeof config);
   },
 });
 

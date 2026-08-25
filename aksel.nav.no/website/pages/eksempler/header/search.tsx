@@ -35,7 +35,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
   title: "Søk",
   desc: "Husk å ta høyde for mobilvisning.",

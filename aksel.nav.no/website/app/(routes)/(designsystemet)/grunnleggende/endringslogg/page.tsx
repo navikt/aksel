@@ -1,17 +1,25 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 import { defineQuery } from "next-sanity";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
+import { Suspense } from "react";
 import {
   coerce as semverCoerce,
   satisfies as semverSatisfies,
   validRange as semverValidRange,
 } from "semver";
 import { Heading, VStack } from "@navikt/ds-react";
-import { PageProps } from "@/app/(routes)/next-types";
-import { sanityFetch } from "@/app/_sanity/live";
-import { ENDRINGSLOGG_FIELDS, ENDRINGSLOGG_QUERY } from "@/app/_sanity/queries";
-import { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
+import type { PageProps } from "@/app/(routes)/next-types";
+import {
+  type DynamicFetchOptions,
+  getDynamicFetchOptions,
+  sanityFetch,
+} from "@/app/_sanity/live";
+import {
+  ENDRINGSLOGG_FIELDS,
+  type ENDRINGSLOGG_QUERY,
+} from "@/app/_sanity/queries";
+import type { ENDRINGSLOGG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { capitalizeText } from "@/ui-utils/format-text";
@@ -42,13 +50,38 @@ const getMonthAndYear = (dateStr: string | null) => {
   return format(new Date(dateStr || 0), "MMMM yyy", { locale: nb });
 };
 
-export default async function Page({ searchParams }: PageProps) {
-  const {
-    periode: paramYear = "",
-    kategori: paramCategory = "",
-    fritekst: paramTextFilter = "",
-    semver: paramSemver = false,
-  } = await searchParams;
+export default function Page({ searchParams }: PageProps) {
+  return (
+    <Suspense fallback={null}>
+      <DynamicEndringslogg searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+async function fetchEndringslogg(
+  sanityObject: {
+    query: typeof ENDRINGSLOGG_QUERY;
+    params?: Record<string, string>;
+  },
+  { perspective, stega }: DynamicFetchOptions,
+): Promise<ENDRINGSLOGG_QUERY_RESULT> {
+  "use cache";
+  const { data } = await sanityFetch({ ...sanityObject, perspective, stega });
+  return data;
+}
+
+async function DynamicEndringslogg({
+  searchParams,
+}: Pick<PageProps, "searchParams">) {
+  const [
+    {
+      periode: paramYear = "",
+      kategori: paramCategory = "",
+      fritekst: paramTextFilter = "",
+      semver: paramSemver = false,
+    },
+    { perspective, stega },
+  ] = await Promise.all([searchParams, getDynamicFetchOptions()]);
   const yearFilter = years.includes(paramYear.toString())
     ? paramYear.toString()
     : paramYear === "alle"
@@ -77,7 +110,7 @@ export default async function Page({ searchParams }: PageProps) {
       ) as typeof ENDRINGSLOGG_QUERY,
     };
 
-    logEntries = (await sanityFetch(sanityObject)).data;
+    logEntries = await fetchEndringslogg(sanityObject, { perspective, stega });
     logEntries = logEntries.filter((entry) => {
       return semverSatisfies(
         semverCoerce(entry.heading) || "",
@@ -119,7 +152,7 @@ export default async function Page({ searchParams }: PageProps) {
       },
     };
 
-    logEntries = (await sanityFetch(sanityObject)).data;
+    logEntries = await fetchEndringslogg(sanityObject, { perspective, stega });
   }
 
   logEntries.forEach((logEntry) => {
@@ -172,7 +205,7 @@ export default async function Page({ searchParams }: PageProps) {
       <TableOfContents
         feedback={{
           name: "Endringslogg",
-          text: "Send innspill",
+          text: "GitHub issues",
         }}
         toc={toc}
       />

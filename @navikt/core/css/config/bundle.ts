@@ -4,13 +4,19 @@ import fastglob from "fast-glob";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
 import fs from "node:fs";
 import path from "node:path";
-import {
-  StyleMappings,
-  componentsCss,
-  formCss,
-  primitivesCss,
-} from "../config/_mappings";
 import packageJSON from "../package.json";
+
+const BASELINE_CSS_LIST = [
+  "fonts.css",
+  "tokens.css",
+  "reset.css",
+  "baseline.css",
+  "print.css",
+];
+
+const FORM_CSS = "form.css";
+const PRIMITIVES_CSS = "primitives.css";
+const COMPONENTS_CSS = "components.css";
 
 bundle();
 
@@ -45,7 +51,7 @@ async function bundle() {
       minify: false,
       include:
         Features.Nesting | Features.MediaRangeSyntax | Features.HexAlphaColors,
-
+      exclude: Features.LightDark,
       drafts: {
         customMedia: false,
       },
@@ -64,19 +70,7 @@ async function bundle() {
       },
     });
 
-    let codeString = code.toString();
-
-    /**
-     * LightningCSS adds these tokens to the bundle that we want removed:
-     * --lightningcss-light: initial;
-     * --lightningcss-dark: ;
-     */
-    codeString = codeString
-      .split("\n")
-      .filter((line) => !line.includes("--lightningcss-"))
-      .join("\n");
-
-    return codeString;
+    return code.toString();
   }
 
   /**
@@ -132,7 +126,7 @@ async function bundle() {
       })
       .join("\n");
 
-    parsed = layerDefinition + "\n" + parsed;
+    parsed = `${layerDefinition}\n${parsed}`;
 
     return parsed;
   }
@@ -140,25 +134,25 @@ async function bundle() {
   await bundleCSS(rootComponentsParser).then((file) => {
     writeFile({
       file,
-      filePath: componentsCss,
+      filePath: COMPONENTS_CSS,
     });
   });
 
   /* ------------------------------ /global build ----------------------------- */
-  for (const style of StyleMappings.baseline) {
+  for (const style of BASELINE_CSS_LIST) {
     function parser(input: string) {
       const parsed = input
         .split("\n")
         .filter((line) => line.startsWith("@import"))
-        .filter((line) => line.includes(style.main))
+        .filter((line) => line.includes(style))
         .join("\n");
-      return layerDefinition + "\n" + parsed;
+      return `${layerDefinition}\n${parsed}`;
     }
 
     await bundleCSS(parser).then((file) => {
       writeFile({
         file,
-        filePath: `global/${style.main}`,
+        filePath: `global/${style}`,
       });
     });
   }
@@ -170,13 +164,13 @@ async function bundle() {
       .filter((line) => line.startsWith("@import"))
       .filter((line) => line.includes("form/index.css"))
       .join("\n");
-    return layerDefinition + "\n" + parsed;
+    return `${layerDefinition}\n${parsed}`;
   }
 
   await bundleCSS(rootFormParser).then((file) => {
     writeFile({
       file,
-      filePath: `component/${formCss}`,
+      filePath: `component/${FORM_CSS}`,
     });
   });
 
@@ -187,13 +181,13 @@ async function bundle() {
       .filter((line) => line.startsWith("@import"))
       .filter((line) => line.includes("primitives/index.css"))
       .join("\n");
-    return layerDefinition + "\n" + parsed;
+    return `${layerDefinition}\n${parsed}`;
   }
 
   await bundleCSS(rootPrimitivesParser).then((file) => {
     writeFile({
       file,
-      filePath: `component/${primitivesCss}`,
+      filePath: `component/${PRIMITIVES_CSS}`,
     });
   });
 
@@ -220,7 +214,7 @@ async function bundle() {
         .split("\n")
         .filter((line) => line === componentLine)
         .join("\n");
-      return layerDefinition + "\n" + parsed;
+      return `${layerDefinition}\n${parsed}`;
     }
 
     await bundleCSS(parser).then((file) => {

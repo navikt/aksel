@@ -1,6 +1,6 @@
 import { PortableText, type PortableTextBlock } from "next-sanity";
 import {
-  CustomPortableTextComponentsProps,
+  type CustomPortableTextComponentsProps,
   customPortableTextComponents,
 } from "./CustomPortableText.components";
 

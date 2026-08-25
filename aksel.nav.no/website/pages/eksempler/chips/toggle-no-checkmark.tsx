@@ -40,7 +40,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   desc: "Hvis du slår av checkmark må det være minst 3 chips, slik at det er mulig å se hvilken som er valgt.",
 };

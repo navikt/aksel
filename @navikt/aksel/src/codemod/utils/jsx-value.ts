@@ -1,8 +1,7 @@
 import type { JSXAttribute, JSXExpressionContainer } from "jscodeshift";
 
 type AttributeValue =
-  | JSXAttribute["value"]
-  | JSXExpressionContainer["expression"];
+  JSXAttribute["value"] | JSXExpressionContainer["expression"];
 
 type LiteralValue = string | number | boolean;
 

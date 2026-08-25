@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 type FileT = NonNullable<
   NonNullable<
@@ -95,7 +95,7 @@ function KodeEksemplerProvider(props: {
     }
 
     setLoaded(false);
-    router.push(pathname + "?" + newQueryString, { scroll: false });
+    router.push(`${pathname}?${newQueryString}`, { scroll: false });
     iframeRef.current?.focus({ preventScroll: true });
   };
 
@@ -105,6 +105,20 @@ function KodeEksemplerProvider(props: {
     }
 
     queueMicrotask(() => {
+      if (iframeRef.current) {
+        const rect = iframeRef.current.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const vw = window.innerWidth;
+
+        const isPartiallyInView =
+          rect.bottom > 0 && rect.right > 0 && rect.top < vh && rect.left < vw;
+
+        /* Avoids scrolling when navigating through chips */
+        if (isPartiallyInView) {
+          return;
+        }
+      }
+
       iframeRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",

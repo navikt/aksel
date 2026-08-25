@@ -1,5 +1,5 @@
-import React, { HTMLAttributes, forwardRef } from "react";
-import { AkselColor } from "../types";
+import React, { type HTMLAttributes, forwardRef } from "react";
+import type { AkselColor } from "../types";
 import { BodyShort } from "../typography";
 import { cl } from "../utils/helpers";
 

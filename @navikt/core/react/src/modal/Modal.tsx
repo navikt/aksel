@@ -1,10 +1,10 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
 import React, { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useDateInputContext } from "../date/Date.Input";
 import { useProvider } from "../provider/Provider";
 import { Detail, Heading } from "../typography";
 import { useId } from "../utils-external";
+import { useDateInputContext } from "../utils/components/date/input/DateInput";
 import { cl, composeEventHandlers } from "../utils/helpers";
 import { useMergeRefs, useScrollLock } from "../utils/hooks";
 import { ModalContextProvider, useModalContext } from "./Modal.context";
@@ -12,13 +12,13 @@ import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import {
-  MouseCoordinates,
+  type MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
   useIsModalOpen,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { ModalProps } from "./types";
+import type { ModalProps } from "./types";
 
 const polyfillClassName = "aksel-modal--polyfilled";
 
@@ -224,7 +224,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
         ref={mergedRef}

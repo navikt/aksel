@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { DirectoryDataT, RootDirectoriesT } from "../types";
+import type { DirectoryDataT, RootDirectoriesT } from "../types";
 
 /**
  * Returns metadata for each 'page' found in directory

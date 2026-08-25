@@ -1,4 +1,4 @@
-import { type ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types";
+import type { ExtractPortableMarkdownComponentProps } from "@/app/_sanity/types";
 import { buildMarkdown } from "@/app/api/markdown/helpers/build-markdown";
 
 const VARIANT_LABELS: Record<string, string> = {

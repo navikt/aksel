@@ -38,7 +38,7 @@ export default createRoute<KomponentItem>({
   heading: "Alle komponenter i Aksel",
   description,
   buildAttributes: (item) => ({
-    name: item.heading!,
+    name: item.heading ?? "",
     status: item.status?.tag ?? "stable",
     category: item.kategori ?? "Ukjent",
     packages: (item.kodepakker ?? []).join(", ") || "Ukjent",

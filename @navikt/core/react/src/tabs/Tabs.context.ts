@@ -1,6 +1,6 @@
 import { createStrictContext } from "../utils/helpers";
-import { TabsProps } from "./Tabs.types";
-import { useTabs } from "./useTabs";
+import type { TabsProps } from "./Tabs.types";
+import type { useTabs } from "./useTabs";
 
 type TabsProviderProps = ReturnType<typeof useTabs> &
   Pick<

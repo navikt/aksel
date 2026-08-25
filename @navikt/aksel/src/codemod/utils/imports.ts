@@ -1,4 +1,5 @@
-import core, { Collection } from "jscodeshift";
+import type core from "jscodeshift";
+import type { Collection } from "jscodeshift";
 
 export function getImportSpecifier(
   j: core.JSCodeshift,
@@ -33,5 +34,9 @@ export function getImportSpecifierName(
 ) {
   const specifiers = getImportSpecifier(j, source, specifier, sourcePath);
 
-  return specifiers.length > 0 ? specifiers.nodes()[0]!.local!.name : null;
+  if (specifiers.size() === 0) {
+    return null;
+  }
+
+  return specifiers.nodes()[0]?.local?.name ?? null;
 }

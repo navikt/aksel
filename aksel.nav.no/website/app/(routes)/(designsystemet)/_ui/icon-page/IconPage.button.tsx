@@ -39,6 +39,7 @@ function IconPageButton({
   return (
     <>
       <button
+        type="button"
         ref={(el) => {
           if (isActive) {
             context.setActiveIconButton(el);

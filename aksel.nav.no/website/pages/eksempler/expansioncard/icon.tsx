@@ -111,7 +111,7 @@ export const Demo = {
   render: Example,
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 5,
-  desc: "Man kan manuelt legge til ikoner eller illustrasjoner vha. HStack.",
+  desc: "Man kan legge til ikon eller illustrasjon vha. HStack.",
 };

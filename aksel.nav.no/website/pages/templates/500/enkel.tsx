@@ -89,8 +89,8 @@ export const Demo = {
   parameters: { layout: "fullscreen" },
 };
 
-export const args = {
+export const args: ExampleArgsT = {
   index: 1,
   title: "Enkel",
-  desc: "I sin enkleste form skal 500-side inneholde en tittel, feilmelding, tilbakemeldingsfunksjon og løsningsforslag",
+  desc: "I sin enkleste form skal en 500-side inneholde feilkode, en tittel, feilmelding, tilbakemeldingsfunksjon og løsningsforslag.",
 };

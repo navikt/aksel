@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import meta, { AkselIcon } from "@navikt/aksel-icons/metadata";
+import meta, { type AkselIcon } from "@navikt/aksel-icons/metadata";
 
 const strokeIcons = Object.values(meta).filter(
   (x) => x.variant.toLowerCase() === "stroke",

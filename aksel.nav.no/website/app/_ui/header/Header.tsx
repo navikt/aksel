@@ -1,12 +1,11 @@
-import { headers } from "next/headers";
 import { Suspense } from "react";
 import { BodyShort, Box, HStack, Hide, Show, Spacer } from "@navikt/ds-react";
+import { AkselLogo } from "@/app/_ui/assets/Logo";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { GlobalSearchButton } from "@/app/_ui/global-search/GlobalSearch.button";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import { ThemeButton } from "@/app/_ui/theming/Theme.button";
-import AkselLogo from "@/assets/Logo";
 import { cl } from "@/ui-utils/className";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
@@ -17,10 +16,8 @@ const LINKS = [
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
-async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
+function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
   variant = variant ? variant : "default";
-  const data = await headers();
-  const isMacOrIOS = /Mac|iPhone|iPad|iPod/i.test(data.get("user-agent") || "");
 
   return (
     <header
@@ -45,6 +42,7 @@ async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
               xmlns="http://www.w3.org/2000/svg"
               className={styles.headerLogo}
               aria-hidden
+              role="presentation"
               focusable="false"
             >
               <path
@@ -78,9 +76,9 @@ async function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
         </Show>
         <HStack align="center" gap="space-8">
           <Suspense
-            fallback={<GlobalSearchButton trigger={false} isMac={isMacOrIOS} />}
+            fallback={<GlobalSearchButton trigger={false} isMac={false} />}
           >
-            <GlobalSearch isMac={isMacOrIOS} />
+            <GlobalSearch />
           </Suspense>
 
           <Show below="lg">
