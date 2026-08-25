@@ -10,6 +10,8 @@ import "../@navikt/core/css/src/data-token-filter.css";
 import dataTokenFilterStyles from "../@navikt/core/css/src/data-token-filter.css?inline";
 import "../@navikt/core/css/src/data-toolbar.css";
 import dataToolbarStyles from "../@navikt/core/css/src/data-toolbar.css?inline";
+import "../@navikt/core/css/src/form/combobox2.css";
+import combobox2Styles from "../@navikt/core/css/src/form/combobox2.css?inline";
 import "../@navikt/core/css/src/index.css";
 import dsStyles from "../@navikt/core/css/src/index.css?inline";
 import "../@navikt/core/css/src/listbox.css";
@@ -54,8 +56,9 @@ const StoryProviderDecorator = ({
 const webComponentStyles = [
   dataTokenFilterStyles,
   dataToolbarStyles,
-  dsStyles,
   listboxStyles,
+  combobox2Styles,
+  dsStyles,
 ].join("\n");
 
 const WebComponentDecorator = ({
