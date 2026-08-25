@@ -32,5 +32,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 4,
-  desc: "Husk å legge til 'aria-hidden' hvis ikonet bare er illustrativt.",
+  desc: "Husk å legge til `aria-hidden` hvis ikonet bare er illustrativt.",
 };
