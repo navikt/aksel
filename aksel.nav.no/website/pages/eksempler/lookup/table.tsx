@@ -1,4 +1,4 @@
-import { Lookup, Table, VStack } from "@navikt/ds-react";
+import { Lookup, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -11,47 +11,33 @@ const Example = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map(({ pension, amount, lookup }) => {
-          return (
-            <Table.Row key={pension}>
-              <Table.HeaderCell scope="row">
-                {lookup ? <Lookup word={pension}>{lookup}</Lookup> : pension}
-              </Table.HeaderCell>
-              <Table.DataCell>{amount}</Table.DataCell>
-            </Table.Row>
-          );
-        })}
+        <Table.Row key="Grunnpensjon">
+          <Table.HeaderCell scope="row">Grunnpensjon</Table.HeaderCell>
+          <Table.DataCell>168 788</Table.DataCell>
+        </Table.Row>
+        <Table.Row key="Tilleggspensjon">
+          <Table.HeaderCell scope="row">Tilleggspensjon</Table.HeaderCell>
+          <Table.DataCell>34 490</Table.DataCell>
+        </Table.Row>
+        <Table.Row key="Inntektspensjon">
+          <Table.HeaderCell scope="row">
+            <Lookup word="Inntektspensjon">
+              Inntektspensjon er den delen av alderspensjonen i folketrygden som
+              du tjener opp basert på din egen arbeidsinntekt. Hvert år settes
+              18,1 prosent av inntekten din opp til 7,1 ganger folketrygdens
+              grunnbeløp (G) inn i en individuell pensjonsbeholdning{" "}
+            </Lookup>
+          </Table.HeaderCell>
+          <Table.DataCell>13 452</Table.DataCell>
+        </Table.Row>
+        <Table.Row key="Garantitillegg">
+          <Table.HeaderCell scope="row">Garantitillegg</Table.HeaderCell>
+          <Table.DataCell>28 234</Table.DataCell>
+        </Table.Row>
       </Table.Body>
     </Table>
   );
 };
-
-const data = [
-  {
-    pension: "Grunnpensjon",
-    amount: "168 788",
-  },
-  {
-    pension: "Tilleggspensjon",
-    amount: "28 680",
-  },
-  {
-    pension: "Inntektspensjon",
-    amount: "40 680",
-    lookup: (
-      <VStack align="center">
-        Pensjonsbeholdning x Uttaksgrad x Andel dagens regler
-        <hr style={{ height: "1px", width: "100%" }} />
-        Delingstall
-      </VStack>
-    ),
-  },
-  {
-    pension: "Garantitillegg",
-    amount: "28 234",
-  },
-];
-
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
