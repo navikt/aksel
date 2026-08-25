@@ -2,43 +2,43 @@ import React, { useRef, useState } from "react";
 import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { createStrictContext } from "../../../utils/helpers";
-import type { ComboboxItemProps } from "../option/ComboboxOption";
+import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
-/** Resolves the item type based on whether the parameter is a group or a single item */
-export type ResolveItem<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
-> = T extends ComboboxItemData
+/** Resolves the option type based on whether the parameter is a group or a single option */
+export type ResolveOption<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+> = T extends ComboboxOptionData
   ? T
   : T extends ComboboxGroupData<infer U>
     ? U
     : never;
 
-export type ComboboxItemData = {
+export type ComboboxOptionData = {
   label: string;
   value: string;
 };
 
-export type ComboboxGroupData<T extends ComboboxItemData> = {
+export type ComboboxGroupData<T extends ComboboxOptionData> = {
   label: string;
   id: string;
-  items: T[];
+  options: T[];
 };
 
 export interface ComboboxRootProps<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData> =
-    ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
+    ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 > {
   children: React.ReactNode;
   /**
-   * Can be either an array of items ({@link ComboboxItemData})
-   * or an array of groups ({@link ComboboxGroupData}) containing items.
+   * Can be either an array of options ({@link ComboboxOptionData})
+   * or an array of groups ({@link ComboboxGroupData}) containing options.
    *
-   * NB: It is not recommended to mix single items and groups, but if you do,
-   * put the single items first.
+   * NB: It is not recommended to mix single options and groups, but if you do,
+   * put the single options first.
    */
-  items: T[];
-  selectedItems: ResolveItem<T>["value"][];
-  onToggleItem: ComboboxItemProps<ResolveItem<T>>["onToggleItem"]; // TODO: Vurder å tilby onChange som returnerer valgte verdier
+  options: T[];
+  selectedOptions: ResolveOption<T>["value"][];
+  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"]; // TODO: Vurder å tilby onChange som returnerer valgte verdier
   defaultOpen?: boolean;
   multiselect?: boolean; // TODO: Vurder annet navn
   triggerId?: string;
@@ -49,18 +49,18 @@ export interface ComboboxRootProps<
 }
 
 /* Alternativt:
-  items: (T | ComboboxGroupData<T>)[];
-  selectedItems: T["value"][];
-  onToggleItem: ComboboxItemProps<T>["onToggleItem"];
+  options: (T | ComboboxGroupData<T>)[];
+  selectedOptions: T["value"][];
+  onToggleOption: ComboboxOptionProps<T>["onToggleOption"];
 */
 
 export interface ComboboxRootContextProps {
   open: boolean;
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
-  items: (ComboboxItemData | ComboboxGroupData<ComboboxItemData>)[]; // Can't use generics in contexts
-  selectedItems: ComboboxItemData["value"][];
-  onToggleItem: ComboboxItemProps<ComboboxItemData>["onToggleItem"]; // Can't use generics in contexts
+  options: (ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>)[]; // Can't use generics in contexts
+  selectedOptions: ComboboxOptionData["value"][];
+  onToggleOption: ComboboxOptionProps<ComboboxOptionData>["onToggleOption"]; // Can't use generics in contexts
   multiselect: boolean;
   triggerId: string;
   size: "small" | "medium";
@@ -75,12 +75,12 @@ export const {
 });
 
 export function ComboboxRoot<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({
   children,
-  items,
-  selectedItems,
-  onToggleItem,
+  options,
+  selectedOptions,
+  onToggleOption,
   defaultOpen = false,
   multiselect = true,
   triggerId: triggerIdProp,
@@ -96,9 +96,11 @@ export function ComboboxRoot<
         open={open}
         setOpen={setOpen}
         triggerRef={triggerRef}
-        items={items}
-        selectedItems={selectedItems}
-        onToggleItem={onToggleItem as ComboboxRootContextProps["onToggleItem"]}
+        options={options}
+        selectedOptions={selectedOptions}
+        onToggleOption={
+          onToggleOption as ComboboxRootContextProps["onToggleOption"]
+        }
         multiselect={multiselect}
         triggerId={triggerId}
         size={size}

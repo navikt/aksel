@@ -15,78 +15,81 @@ const meta: Meta<typeof ComboboxRoot> = {
 };
 export default meta;
 
-const items = [
-  { label: "Norway", value: "item-1" },
-  { label: "Finland", value: "item-2" },
-  { label: "Sweden", value: "item-3" },
-  { label: "Denmark", value: "item-4" },
-  { label: "Iceland", value: "item-5" },
-  { label: "Faroe Islands", value: "item-6" },
-  { label: "Åland Islands", value: "item-7" },
-  { label: "Estonia", value: "item-8" },
-  { label: "Latvia", value: "item-9" },
-  { label: "Lithuania", value: "item-10" },
+const options = [
+  { label: "Norway", value: "option-1" },
+  { label: "Finland", value: "option-2" },
+  { label: "Sweden", value: "option-3" },
+  { label: "Denmark", value: "option-4" },
+  { label: "Iceland", value: "option-5" },
+  { label: "Faroe Islands", value: "option-6" },
+  { label: "Åland Islands", value: "option-7" },
+  { label: "Estonia", value: "option-8" },
+  { label: "Latvia", value: "option-9" },
+  { label: "Lithuania", value: "option-10" },
 ];
 
-const groupedItems = [
+const groupedOptions = [
   {
     label: "Nordic countries",
     id: "group-1",
-    items: items.slice(0, 6),
+    options: options.slice(0, 6),
   },
   {
     label: "Baltic countries",
     id: "group-2",
-    items: items.slice(6),
+    options: options.slice(6),
   },
-  { label: "Singel item", value: "item-01" },
+  { label: "Singel option", value: "option-01" },
 ];
 
-let itemMemoTestRenderCnt = 0;
-const itemMemoTestRenderFn = (itemOrGroup: (typeof groupedItems)[number]) => {
-  if ("items" in itemOrGroup) return itemOrGroup.label;
-  itemMemoTestRenderCnt++;
+let optionMemoTestRenderCnt = 0;
+const optionMemoTestRenderFn = (
+  optOrGroup: (typeof groupedOptions)[number],
+) => {
+  if ("options" in optOrGroup) return optOrGroup.label;
+  optionMemoTestRenderCnt++;
   const renderCountEl = document.getElementById("render-count");
-  if (renderCountEl) renderCountEl.textContent = String(itemMemoTestRenderCnt);
-  return itemOrGroup.label;
+  if (renderCountEl)
+    renderCountEl.textContent = String(optionMemoTestRenderCnt);
+  return optOrGroup.label;
 };
-export const ItemMemoization = () => {
-  const [selectedItems, setSelectedItems] = useState(["item-1"]);
+export const OptionMemoization = () => {
+  const [selectedOptions, setSelectedOptions] = useState(["option-1"]);
 
   return (
     <div style={{ minHeight: "450px" }}>
       <div>
-        Item render count:{" "}
+        Option render count:{" "}
         <span id="render-count" data-testid="count">
           0
         </span>
       </div>
       <ComboboxRoot
         defaultOpen
-        items={groupedItems}
-        selectedItems={selectedItems}
-        onToggleItem={(item) => {
-          setSelectedItems((prev) =>
-            prev.includes(item.value)
-              ? prev.filter((v) => v !== item.value)
-              : [...prev, item.value],
+        options={groupedOptions}
+        selectedOptions={selectedOptions}
+        onToggleOption={(option) => {
+          setSelectedOptions((prev) =>
+            prev.includes(option.value)
+              ? prev.filter((v) => v !== option.value)
+              : [...prev, option.value],
           );
         }}
       >
         <ComboboxPopup>
           <ComboboxFilter />
-          <ComboboxList>{itemMemoTestRenderFn}</ComboboxList>
+          <ComboboxList>{optionMemoTestRenderFn}</ComboboxList>
         </ComboboxPopup>
       </ComboboxRoot>
     </div>
   );
 };
-ItemMemoization.play = async ({ canvasElement }) => {
+OptionMemoization.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const combobox = canvas.getByRole("combobox");
-  const countElm = canvas.getByTestId("count"); // Number of times an item has been rendered
+  const countElm = canvas.getByTestId("count"); // Number of times an option has been rendered
   const startCount = Number(countElm.textContent);
-  expect(startCount).toBeGreaterThan(3); // Minimum items needed for the test to be meaningful
+  expect(startCount).toBeGreaterThan(3); // Minimum options needed for the test to be meaningful
 
   // Moving virtual focus should re-render old and new option
   await userEvent.click(combobox);
@@ -99,8 +102,8 @@ ItemMemoization.play = async ({ canvasElement }) => {
   expectedCount++;
   expect(Number(countElm.textContent)).toBe(expectedCount);
 
-  // Filtering should not re-render any items
-  // TODO: For this to work we must omit the filterString prop on ComboboxItem
+  // Filtering should not re-render any options
+  // TODO: For this to work we must omit the filterString prop on ComboboxOption
   /*await userEvent.type(combobox, "nor", { delay: 200 });
   expect(Number(countElm.textContent)).toBe(expectedCount);
   expect(canvas.getAllByRole("option").length).toBe(1);*/

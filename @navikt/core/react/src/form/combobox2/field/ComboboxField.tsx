@@ -11,9 +11,9 @@ interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
   ({ children, ...rest }, ref) => {
-    const { items, selectedItems } = useComboboxRootContext();
+    const { options, selectedOptions } = useComboboxRootContext();
 
-    const labels = getLabels(selectedItems, items);
+    const labels = getLabels(selectedOptions, options);
 
     return (
       <div className="aksel-combobox2__field-container">
@@ -36,23 +36,23 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
 );
 
 const getLabels = (
-  selectedItems: ComboboxRootProps["selectedItems"],
-  items: ComboboxRootProps["items"],
+  selectedOptions: ComboboxRootProps["selectedOptions"],
+  options: ComboboxRootProps["options"],
 ) => {
   const labels: string[] = [];
 
-  for (const itemOrGroup of items) {
-    if ("items" in itemOrGroup) {
+  for (const optOrGroup of options) {
+    if ("options" in optOrGroup) {
       // It's a group
-      for (const item of itemOrGroup.items) {
-        if (selectedItems.includes(item.value)) {
-          labels.push(item.label);
+      for (const option of optOrGroup.options) {
+        if (selectedOptions.includes(option.value)) {
+          labels.push(option.label);
         }
       }
     } else {
-      // It's a single item
-      if (selectedItems.includes(itemOrGroup.value)) {
-        labels.push(itemOrGroup.label);
+      // It's a single option
+      if (selectedOptions.includes(optOrGroup.value)) {
+        labels.push(optOrGroup.label);
       }
     }
   }
