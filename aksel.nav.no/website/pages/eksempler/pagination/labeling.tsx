@@ -31,5 +31,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "For å gjøre det lettere for skjermlesere å navigere til Pagination, anbefaler vi å bruke `srHeading`-prop for å legge til en skjult heading. Husk å bruke riktig h-tag.",
+  desc: "For å gjøre det lettere for skjermlesere å navigere til Pagination, anbefaler vi å bruke propen `srHeading` for å legge til en skjult heading. Husk å bruke riktig h-tag.",
 };
