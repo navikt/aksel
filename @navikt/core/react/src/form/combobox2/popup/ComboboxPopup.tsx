@@ -4,7 +4,7 @@ import { createStrictContext } from "../../../utils/helpers";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
 
 interface ComboboxPopupContextProps {
-  virtuallyFocusedItemValue: string;
+  virtuallyFocusedOptionValue: string;
   filterString: string;
   setFilterString: (value: string) => void;
 }
@@ -22,7 +22,7 @@ export interface ComboboxPopupProps {
 }
 
 export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
-  const [virtuallyFocusedItemValue, setVirtuallyFocusedItemValue] =
+  const [virtuallyFocusedOptionValue, setVirtuallyFocusedOptionValue] =
     useState("");
   const [filterString, setFilterString] = useState("");
 
@@ -32,21 +32,21 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
 
   useEffect(
     function onOpen() {
-      // Virtually focus and scroll to first (selected) item
-      const selectedItemElm = ref.current?.querySelector<HTMLElement>(
+      // Virtually focus and scroll to first (selected) option
+      const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
         '[aria-selected="true"]',
       );
-      if (selectedItemElm) {
-        setVirtuallyFocusedItemValue(selectedItemElm.dataset.id || "");
+      if (selectedOptionElm) {
+        setVirtuallyFocusedOptionValue(selectedOptionElm.dataset.id || "");
         setTimeout(
-          () => selectedItemElm.scrollIntoView({ block: "nearest" }),
+          () => selectedOptionElm.scrollIntoView({ block: "nearest" }),
           0,
         );
       } else {
-        const firstItemElm =
+        const firstOptionElm =
           ref.current?.querySelector<HTMLElement>('[role="option"]');
-        if (firstItemElm) {
-          setVirtuallyFocusedItemValue(firstItemElm.dataset.id || "");
+        if (firstOptionElm) {
+          setVirtuallyFocusedOptionValue(firstOptionElm.dataset.id || "");
         }
       }
 
@@ -73,11 +73,11 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
     <Listbox
       ref={ref}
       className="aksel-combobox2__popup"
-      setVirtuallyFocusedOptionId={setVirtuallyFocusedItemValue}
+      setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionValue}
       size={rootContext.size}
     >
       <ComboboxPopupContextProvider
-        virtuallyFocusedItemValue={virtuallyFocusedItemValue}
+        virtuallyFocusedOptionValue={virtuallyFocusedOptionValue}
         filterString={filterString}
         setFilterString={setFilterString}
       >

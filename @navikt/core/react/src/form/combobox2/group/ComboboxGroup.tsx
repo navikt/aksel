@@ -1,18 +1,21 @@
 import React from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import type { ComboboxListProps } from "../list/ComboboxList";
-import type { ComboboxGroupData, ComboboxItemData } from "../root/ComboboxRoot";
+import type {
+  ComboboxGroupData,
+  ComboboxOptionData,
+} from "../root/ComboboxRoot";
 
 interface ComboboxGroupProps<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 > {
-  group: ComboboxGroupData<ComboboxItemData>;
+  group: ComboboxGroupData<ComboboxOptionData>;
   childrenProp: ComboboxListProps<T>["children"];
   children: React.ReactNode;
 }
 
 function ComboboxGroup<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ group, childrenProp, children }: ComboboxGroupProps<T>) {
   return (
     <Listbox.Group

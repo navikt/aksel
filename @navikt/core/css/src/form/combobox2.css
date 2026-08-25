@@ -138,10 +138,10 @@
 }
 
 /************************************************
- * Item                                         *
+ * Option                                       *
  ************************************************/
 
-.aksel-combobox2__item {
+.aksel-combobox2__option {
   & > div {
     display: flex;
     gap: var(--ax-space-2);
@@ -156,18 +156,18 @@
   }
 }
 
-.aksel-combobox2__item-checkmark {
-  --__axc-combobox2-item-checkmark-size: 1.25rem;
+.aksel-combobox2__option-checkmark {
+  --__axc-combobox2-option-checkmark-size: 1.25rem;
 
-  width: var(--__axc-combobox2-item-checkmark-size);
-  height: var(--__axc-combobox2-item-checkmark-size);
+  width: var(--__axc-combobox2-option-checkmark-size);
+  height: var(--__axc-combobox2-option-checkmark-size);
   margin-top: 0.1875rem;
 
   .aksel-combobox2[data-size="small"] & {
-    --__axc-combobox2-item-checkmark-size: 1rem;
+    --__axc-combobox2-option-checkmark-size: 1rem;
   }
 
   & svg {
-    font-size: var(--__axc-combobox2-item-checkmark-size);
+    font-size: var(--__axc-combobox2-option-checkmark-size);
   }
 }

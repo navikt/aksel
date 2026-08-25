@@ -10,14 +10,14 @@ import { ComboboxOverlay } from "./overlay/ComboboxOverlay";
 import { ComboboxPopup } from "./popup/ComboboxPopup";
 import type {
   ComboboxGroupData,
-  ComboboxItemData,
+  ComboboxOptionData,
   ComboboxRootProps,
 } from "./root/ComboboxRoot";
 import { ComboboxRoot } from "./root/ComboboxRoot";
 import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 
 interface ComboboxProps<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 > extends Omit<ComboboxRootProps<T>, "children"> {
   label: string;
   hideLabel?: boolean;
@@ -26,7 +26,7 @@ interface ComboboxProps<
 }
 
 function Combobox<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ label, hideLabel, description, ...rest }: ComboboxProps<T>) {
   const {
     //inputProps,

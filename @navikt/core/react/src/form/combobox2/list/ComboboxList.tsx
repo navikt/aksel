@@ -2,33 +2,33 @@ import React, { useCallback } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
-import { ComboboxItem } from "../option/ComboboxOption";
+import { ComboboxOption } from "../option/ComboboxOption";
 import { useComboboxPopupContext } from "../popup/ComboboxPopup";
 import {
   type ComboboxGroupData,
-  type ComboboxItemData,
-  type ResolveItem,
+  type ComboboxOptionData,
+  type ResolveOption,
   useComboboxRootContext,
 } from "../root/ComboboxRoot";
 
 interface ComboboxListProps<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 > {
   children?:
-    React.ReactNode | ((itemOrGroup: ResolveItem<T> | T) => React.ReactNode); // TODO: Blir litt rart at children-funksjonen må håndtere både items og grupper. (Usikker på om typen for itemOrGroup er riktig også.)
+    React.ReactNode | ((optOrGroup: ResolveOption<T> | T) => React.ReactNode); // TODO: Blir litt rart at children-funksjonen må håndtere både options og grupper. (Usikker på om typen for optOrGroup er riktig også.)
 }
 
 function ComboboxList<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
   /*const [isPending, startTransition] = useTransition();
-  const [renderItems, setRenderItems] = useState(true); // TODO: Prop for å aktivere "async rendering", ev. basert på antall options.
+  const [renderOptions, setRenderOptions] = useState(true); // TODO: Prop for å aktivere "async rendering", ev. basert på antall options.
   useEffect(() => {
-    if (renderItems) {
+    if (renderOptions) {
       return;
     }
     startTransition(() => {
-      setRenderItems(true);
+      setRenderOptions(true);
     });
   }, []);*/
 
@@ -45,40 +45,41 @@ function ComboboxList<
 }
 
 function ComboboxListContent<
-  T extends ComboboxItemData | ComboboxGroupData<ComboboxItemData>,
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
-  const { virtuallyFocusedItemValue, filterString } = useComboboxPopupContext();
+  const { virtuallyFocusedOptionValue, filterString } =
+    useComboboxPopupContext();
   const {
     setOpen,
-    items,
-    selectedItems,
-    onToggleItem,
+    options,
+    selectedOptions,
+    onToggleOption,
     multiselect,
     triggerRef,
   } = useComboboxRootContext();
-  const memoizedOnToggleItem = useEventCallback(onToggleItem);
+  const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
 
-  const localOnToggleItem = useCallback(
-    (item: ComboboxItemData, isSelected: boolean) => {
-      memoizedOnToggleItem(item, isSelected);
+  const localOnToggleOption = useCallback(
+    (option: ComboboxOptionData, isSelected: boolean) => {
+      memoizedOnToggleOption(option, isSelected);
       if (!multiselect) {
         setOpen(false);
         triggerRef.current?.focus();
       }
     },
-    [memoizedOnToggleItem, multiselect, triggerRef, setOpen],
+    [memoizedOnToggleOption, multiselect, triggerRef, setOpen],
   );
 
   if (children && typeof children !== "function") {
     return children;
   }
 
-  const filteredItems = deferredFilterString
-    ? filterItems(items, deferredFilterString)
-    : items;
+  const filteredOptions = deferredFilterString
+    ? filterOptions(options, deferredFilterString)
+    : options;
 
-  if (filteredItems.length === 0) {
+  if (filteredOptions.length === 0) {
     return (
       <div className="aksel-combobox2__no-results" role="status">
         Ingen treff
@@ -86,66 +87,66 @@ function ComboboxListContent<
     );
   }
 
-  return filteredItems.map((itemOrGroup) =>
-    "items" in itemOrGroup ? (
+  return filteredOptions.map((optOrGroup) =>
+    "options" in optOrGroup ? (
       <ComboboxGroup
-        key={itemOrGroup.id}
-        group={itemOrGroup}
+        key={optOrGroup.id}
+        group={optOrGroup}
         childrenProp={children}
       >
-        {itemOrGroup.items.map((item) => (
-          <ComboboxItem
-            key={item.value}
-            item={item}
-            onToggleItem={localOnToggleItem}
-            isSelected={selectedItems.includes(item.value)}
-            hasVirtualFocus={virtuallyFocusedItemValue === item.value}
+        {optOrGroup.options.map((option) => (
+          <ComboboxOption
+            key={option.value}
+            option={option}
+            onToggleOption={localOnToggleOption}
+            isSelected={selectedOptions.includes(option.value)}
+            hasVirtualFocus={virtuallyFocusedOptionValue === option.value}
             filterString={deferredFilterString}
           >
-            {children as ComboboxListProps<typeof item>["children"]}
-          </ComboboxItem>
+            {children as ComboboxListProps<typeof option>["children"]}
+          </ComboboxOption>
         ))}
       </ComboboxGroup>
     ) : (
-      <ComboboxItem
-        key={itemOrGroup.value}
-        item={itemOrGroup}
-        onToggleItem={localOnToggleItem}
-        isSelected={selectedItems.includes(itemOrGroup.value)}
-        hasVirtualFocus={virtuallyFocusedItemValue === itemOrGroup.value}
+      <ComboboxOption
+        key={optOrGroup.value}
+        option={optOrGroup}
+        onToggleOption={localOnToggleOption}
+        isSelected={selectedOptions.includes(optOrGroup.value)}
+        hasVirtualFocus={virtuallyFocusedOptionValue === optOrGroup.value}
         filterString={deferredFilterString} // TODO: Vurder å kunne slå av dette for bedre ytelse
       >
-        {children as ComboboxListProps<typeof itemOrGroup>["children"]}
-      </ComboboxItem>
+        {children as ComboboxListProps<typeof optOrGroup>["children"]}
+      </ComboboxOption>
     ),
   );
 }
 
-function filterItems<T extends ComboboxItemData>(
-  items: (T | ComboboxGroupData<T>)[],
+function filterOptions<T extends ComboboxOptionData>(
+  options: (T | ComboboxGroupData<T>)[],
   filterString: string,
 ): (T | ComboboxGroupData<T>)[] {
   const filterStringLowerCase = filterString.toLocaleLowerCase();
 
-  return items
-    .map((itemOrGroup) => {
-      if ("items" in itemOrGroup) {
-        const matchingItems = itemOrGroup.items.filter((item) =>
-          item.label.toLocaleLowerCase().includes(filterStringLowerCase),
+  return options
+    .map((optOrGroup) => {
+      if ("options" in optOrGroup) {
+        const matchingOptions = optOrGroup.options.filter((option) =>
+          option.label.toLocaleLowerCase().includes(filterStringLowerCase),
         );
-        if (matchingItems.length > 0) {
-          return { ...itemOrGroup, items: matchingItems };
+        if (matchingOptions.length > 0) {
+          return { ...optOrGroup, options: matchingOptions };
         }
         return null;
       }
       if (
-        itemOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
+        optOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
       ) {
-        return itemOrGroup;
+        return optOrGroup;
       }
       return null;
     })
-    .filter((item): item is T | ComboboxGroupData<T> => item !== null);
+    .filter((option): option is T | ComboboxGroupData<T> => option !== null);
 }
 
 export type { ComboboxListProps };

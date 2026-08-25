@@ -23,60 +23,60 @@ const meta: Meta<typeof ComboboxRoot> = {
 };
 export default meta;
 
-type MyItem = {
+type MyOption = {
   label: string;
-  value: `item-${number}`;
+  value: `opt-${number}`;
   metadata?: string;
 };
 
-const items: MyItem[] = [
-  { label: "Norway", value: "item-1", metadata: "foo1" },
-  { label: "Finland", value: "item-2" },
-  { label: "Sweden", value: "item-3", metadata: "foo3" },
-  { label: "Denmark", value: "item-4" },
-  { label: "Iceland", value: "item-5" },
-  { label: "Faroe Islands", value: "item-6" },
-  { label: "Åland Islands", value: "item-7" },
-  { label: "Estonia", value: "item-8" },
-  { label: "Latvia", value: "item-9" },
-  { label: "Lithuania", value: "item-10" },
+const options: MyOption[] = [
+  { label: "Norway", value: "opt-1", metadata: "foo1" },
+  { label: "Finland", value: "opt-2" },
+  { label: "Sweden", value: "opt-3", metadata: "foo3" },
+  { label: "Denmark", value: "opt-4" },
+  { label: "Iceland", value: "opt-5" },
+  { label: "Faroe Islands", value: "opt-6" },
+  { label: "Åland Islands", value: "opt-7" },
+  { label: "Estonia", value: "opt-8" },
+  { label: "Latvia", value: "opt-9" },
+  { label: "Lithuania", value: "opt-10" },
 ];
 
 type MyGroup = {
   label: string;
   id: `group-${number}`;
-  items: MyItem[];
+  options: MyOption[];
 };
 
-const groupedItems: (MyGroup | MyItem)[] = [
+const groupedOptions: (MyGroup | MyOption)[] = [
   {
     label: "Nordic countries",
     id: "group-1",
-    items: items.slice(0, 6),
+    options: options.slice(0, 6),
   },
   {
     label: "Baltic countries",
     id: "group-2",
-    items: items.slice(6),
+    options: options.slice(6),
   },
-  { label: "Singel item", value: "item-01" } satisfies MyItem,
+  { label: "Singel option", value: "opt-01" } satisfies MyOption,
 ];
 
 export const Default = () => {
-  const [selectedItems, setSelectedItems] = React.useState<MyItem["value"][]>([
-    "item-1",
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
   ]);
 
   return (
     <ComboboxRoot
       defaultOpen
-      items={items}
-      selectedItems={selectedItems}
-      onToggleItem={(item, newSelected) => {
-        setSelectedItems((prev) =>
+      options={options}
+      selectedOptions={selectedOptions}
+      onToggleOption={(option, newSelected) => {
+        setSelectedOptions((prev) =>
           newSelected
-            ? [...prev, item.value]
-            : prev.filter((v) => v !== item.value),
+            ? [...prev, option.value]
+            : prev.filter((v) => v !== option.value),
         );
       }}
     >
@@ -89,14 +89,14 @@ export const Default = () => {
 };
 
 export const SingleSelect = () => {
-  const [selectedItem, setSelectedItem] = React.useState<MyItem>(items[0]);
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
 
   return (
     <ComboboxRoot
       defaultOpen
-      items={items}
-      selectedItems={[selectedItem.value]}
-      onToggleItem={setSelectedItem}
+      options={options}
+      selectedOptions={[selectedOption.value]}
+      onToggleOption={setSelectedOption}
     >
       <ComboboxPopup>
         <ComboboxFilter />
@@ -107,15 +107,15 @@ export const SingleSelect = () => {
 };
 
 export const Groups = () => {
-  const [selectedItem, setSelectedItem] = React.useState<MyItem>(items[0]);
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
 
   return (
     <HStack gap="space-12">
       <ComboboxRoot
         defaultOpen
-        items={groupedItems}
-        selectedItems={[selectedItem.value]}
-        onToggleItem={setSelectedItem}
+        options={groupedOptions}
+        selectedOptions={[selectedOption.value]}
+        onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
           <ComboboxFilter />
@@ -126,9 +126,9 @@ export const Groups = () => {
       <ComboboxRoot
         size="small"
         defaultOpen
-        items={groupedItems}
-        selectedItems={[selectedItem.value]}
-        onToggleItem={setSelectedItem}
+        options={groupedOptions}
+        selectedOptions={[selectedOption.value]}
+        onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
           <ComboboxFilter />
@@ -139,33 +139,33 @@ export const Groups = () => {
   );
 };
 
-export const CustomItemRendering = () => {
-  const [selectedItems, setSelectedItems] = useState<MyItem["value"][]>([
-    "item-1",
+export const CustomOptionRendering = () => {
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
   ]);
 
   return (
     <ComboboxRoot
       defaultOpen
-      items={items}
-      selectedItems={selectedItems}
-      onToggleItem={(item, isSelected) => {
-        setSelectedItems(
+      options={options}
+      selectedOptions={selectedOptions}
+      onToggleOption={(option, isSelected) => {
+        setSelectedOptions(
           isSelected
-            ? [...selectedItems, item.value]
-            : selectedItems.filter((v) => v !== item.value),
+            ? [...selectedOptions, option.value]
+            : selectedOptions.filter((v) => v !== option.value),
         );
       }}
     >
       <ComboboxPopup>
         <ComboboxFilter />
-        <ComboboxList<MyItem>>
-          {(item) => (
+        <ComboboxList<MyOption>>
+          {(option) => (
             <HStack justify="space-between" align="center">
-              <span>{item.label}</span>
+              <span>{option.label}</span>
               <BodyShort textColor="subtle" size="small">
-                {"metadata" in item ? item.metadata : null}{" "}
-                {item.label.substring(0, 2).toUpperCase()}
+                {"metadata" in option ? option.metadata : null}{" "}
+                {option.label.substring(0, 2).toUpperCase()}
               </BodyShort>
             </HStack>
           )}
@@ -175,28 +175,28 @@ export const CustomItemRendering = () => {
   );
 };
 
-export const CustomItemRenderingGroups = () => {
-  const [selectedItem, setSelectedItem] = React.useState<MyItem>(items[0]);
+export const CustomOptionRenderingGroups = () => {
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
 
   return (
     <ComboboxRoot
       defaultOpen
-      items={groupedItems}
-      selectedItems={[selectedItem.value]}
-      onToggleItem={setSelectedItem}
+      options={groupedOptions}
+      selectedOptions={[selectedOption.value]}
+      onToggleOption={setSelectedOption}
     >
       <ComboboxPopup>
         <ComboboxFilter />
-        <ComboboxList<MyItem | MyGroup>>
-          {(itemOrGroup) =>
-            "items" in itemOrGroup ? (
-              <em>{itemOrGroup.label}</em>
+        <ComboboxList<MyOption | MyGroup>>
+          {(optOrGroup) =>
+            "options" in optOrGroup ? (
+              <em>{optOrGroup.label}</em>
             ) : (
               <HStack justify="space-between" align="center">
-                <span>{itemOrGroup.label}</span>
+                <span>{optOrGroup.label}</span>
                 <BodyShort textColor="subtle" size="small">
-                  {itemOrGroup.metadata}{" "}
-                  {itemOrGroup.label.substring(0, 2).toUpperCase()}
+                  {optOrGroup.metadata}{" "}
+                  {optOrGroup.label.substring(0, 2).toUpperCase()}
                 </BodyShort>
               </HStack>
             )
@@ -206,19 +206,19 @@ export const CustomItemRenderingGroups = () => {
     </ComboboxRoot>
   );
 };
-// Alternativer: Kun støtte item, måtte iterere selv, renderItem/group-props på root, flytte props ned (hvordan få tak i valgte i Input?) 🤔
+// Alternativer: Kun støtte option, måtte iterere selv, renderOption/group-props på root, flytte props ned (hvordan få tak i valgte i Input?) 🤔
 
 export const ControlledInput = () => {
-  const [selectedItems, setSelectedItems] = useState<MyItem["value"][]>([
-    "item-1",
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
   ]);
   const [filterString, setFilterString] = useState("");
   const filterStringLowerCase = filterString.toLocaleLowerCase();
 
-  const filteredItems = filterString
-    ? items
-        .filter((item) =>
-          item.label.toLocaleLowerCase().includes(filterStringLowerCase),
+  const filteredOptions = filterString
+    ? options
+        .filter((option) =>
+          option.label.toLocaleLowerCase().includes(filterStringLowerCase),
         )
         .sort((a, b) => {
           const labelA = a.label.toLocaleLowerCase();
@@ -230,18 +230,18 @@ export const ControlledInput = () => {
               ? -1
               : 1;
         })
-    : items;
+    : options;
 
   return (
     <ComboboxRoot
       defaultOpen
-      items={filteredItems}
-      selectedItems={selectedItems}
-      onToggleItem={(item) => {
-        setSelectedItems((prev) =>
-          prev.includes(item.value)
-            ? prev.filter((v) => v !== item.value)
-            : [...prev, item.value],
+      options={filteredOptions}
+      selectedOptions={selectedOptions}
+      onToggleOption={(option) => {
+        setSelectedOptions((prev) =>
+          prev.includes(option.value)
+            ? prev.filter((v) => v !== option.value)
+            : [...prev, option.value],
         );
       }}
     >
@@ -253,24 +253,24 @@ export const ControlledInput = () => {
   );
 };
 
-const manyItems = Array.from({ length: 10_000 }, (_, i) => ({
-  label: `Item ${String(i + 1).padStart(4, "0")}`,
-  value: `item-${i + 1}`,
+const manyOptions = Array.from({ length: 10_000 }, (_, i) => ({
+  label: `Option ${String(i + 1).padStart(4, "0")}`,
+  value: `opt-${i + 1}`,
 }));
 
-export const ManyItems = () => {
-  const [selectedItems, setSelectedItems] = React.useState(["item-1"]);
+export const ManyOptions = () => {
+  const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
 
   return (
     <div style={{ minHeight: "400px", width: "250px" }}>
       <Combobox
-        items={manyItems}
-        selectedItems={selectedItems}
-        onToggleItem={(item) => {
-          setSelectedItems((prev) =>
-            prev.includes(item.value)
-              ? prev.filter((v) => v !== item.value)
-              : [...prev, item.value],
+        options={manyOptions}
+        selectedOptions={selectedOptions}
+        onToggleOption={(option) => {
+          setSelectedOptions((prev) =>
+            prev.includes(option.value)
+              ? prev.filter((v) => v !== option.value)
+              : [...prev, option.value],
           );
         }}
         label="Test"
@@ -278,27 +278,27 @@ export const ManyItems = () => {
     </div>
   );
 };
-ManyItems.parameters = {
+ManyOptions.parameters = {
   a11y: { disable: true },
   controls: { disable: true },
   docs: { disable: true },
 };
 
 export const Trigger = () => {
-  const [selectedItems, setSelectedItems] = useState<MyItem["value"][]>([
-    "item-1",
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
   ]);
 
-  const [selectedItem, setSelectedItem] = React.useState<MyItem>(items[0]);
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
 
   const rootProps = {
-    items,
-    selectedItems,
-    onToggleItem: (item) => {
-      setSelectedItems((prev) =>
-        prev.includes(item.value)
-          ? prev.filter((v) => v !== item.value)
-          : [...prev, item.value],
+    options,
+    selectedOptions,
+    onToggleOption: (option) => {
+      setSelectedOptions((prev) =>
+        prev.includes(option.value)
+          ? prev.filter((v) => v !== option.value)
+          : [...prev, option.value],
       );
     },
   };
@@ -329,9 +329,9 @@ export const Trigger = () => {
       </ComboboxRoot>
 
       <ComboboxRoot
-        items={items}
-        selectedItems={[selectedItem.value]}
-        onToggleItem={setSelectedItem}
+        options={options}
+        selectedOptions={[selectedOption.value]}
+        onToggleOption={setSelectedOption}
         multiselect={false}
       >
         <ComboboxTrigger>
@@ -368,9 +368,9 @@ export const Trigger = () => {
 
       <div style={{ width: "300px" }}>
         <ComboboxRoot
-          items={items}
-          selectedItems={[selectedItem.value]}
-          onToggleItem={setSelectedItem}
+          options={options}
+          selectedOptions={[selectedOption.value]}
+          onToggleOption={setSelectedOption}
           multiselect={false}
         >
           <ComboboxLabel>Velg land</ComboboxLabel>
@@ -404,7 +404,7 @@ export const Trigger = () => {
 Trigger.parameters = { layout: "padded" };
 
 export const TriggerSingleSelect = () => {
-  const [selectedItem, setSelectedItem] = React.useState<MyItem>();
+  const [selectedOption, setSelectedOption] = useState<MyOption>();
 
   return (
     <VStack gap="space-32" width="300px">
@@ -413,9 +413,9 @@ export const TriggerSingleSelect = () => {
       </button>
 
       <ComboboxRoot
-        items={items}
-        selectedItems={selectedItem ? [selectedItem.value] : []}
-        onToggleItem={setSelectedItem}
+        options={options}
+        selectedOptions={selectedOption ? [selectedOption.value] : []}
+        onToggleOption={setSelectedOption}
         multiselect={false}
       >
         <ComboboxLabel>Velg land (Combobox root)</ComboboxLabel>
@@ -431,9 +431,9 @@ export const TriggerSingleSelect = () => {
       </ComboboxRoot>
 
       <Combobox
-        items={items}
-        selectedItems={selectedItem ? [selectedItem.value] : []}
-        onToggleItem={setSelectedItem}
+        options={options}
+        selectedOptions={selectedOption ? [selectedOption.value] : []}
+        onToggleOption={setSelectedOption}
         multiselect={false}
         label="Velg land (Combobox)"
         description="Beskrivelse"

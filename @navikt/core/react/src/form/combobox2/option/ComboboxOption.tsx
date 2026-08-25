@@ -2,45 +2,45 @@ import React from "react";
 import { CheckmarkHeavyIcon } from "@navikt/aksel-icons";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import type { ComboboxListProps } from "../list/ComboboxList";
-import type { ComboboxItemData } from "../root/ComboboxRoot";
+import type { ComboboxOptionData } from "../root/ComboboxRoot";
 
-export interface ComboboxItemProps<T extends ComboboxItemData> {
-  item: T;
-  onToggleItem: (item: T, isSelected: boolean) => void;
+export interface ComboboxOptionProps<T extends ComboboxOptionData> {
+  option: T;
+  onToggleOption: (option: T, isSelected: boolean) => void;
   isSelected: boolean;
   hasVirtualFocus: boolean;
   filterString: string;
   children?: React.ReactNode | ComboboxListProps<T>["children"];
 }
 
-function ComboboxItemComponent<T extends ComboboxItemData>({
-  item,
-  onToggleItem,
+function ComboboxOptionComponent<T extends ComboboxOptionData>({
+  option,
+  onToggleOption,
   isSelected,
   hasVirtualFocus,
   filterString,
   children,
-}: ComboboxItemProps<T>) {
-  //console.log("Rendering item", item.value);
+}: ComboboxOptionProps<T>) {
+  //console.log("Rendering option", option.value);
 
   return (
     <Listbox.Option
-      className="aksel-combobox2__item"
-      id={item.value}
-      onClick={() => onToggleItem(item, !isSelected)}
+      className="aksel-combobox2__option"
+      id={option.value}
+      onClick={() => onToggleOption(option, !isSelected)}
       aria-selected={isSelected}
       hasVirtualFocus={hasVirtualFocus}
     >
-      <div className="aksel-combobox2__item-checkmark" aria-hidden>
+      <div className="aksel-combobox2__option-checkmark" aria-hidden>
         {isSelected && <CheckmarkHeavyIcon aria-hidden />}
       </div>
       <div>
         {typeof children === "function"
-          ? children(item)
+          ? children(option)
           : (children ??
             (filterString
-              ? highlightSubstring(item.label, filterString)
-              : item.label))}
+              ? highlightSubstring(option.label, filterString)
+              : option.label))}
       </div>
     </Listbox.Option>
   );
@@ -71,6 +71,6 @@ const highlightSubstring = (text: string, substring: string) => {
   );
 };
 
-export const ComboboxItem = React.memo(
-  ComboboxItemComponent,
-) as typeof ComboboxItemComponent;
+export const ComboboxOption = React.memo(
+  ComboboxOptionComponent,
+) as typeof ComboboxOptionComponent;
