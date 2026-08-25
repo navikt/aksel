@@ -73,7 +73,7 @@
     "@babel/core": "^7.19.0",
     "@babel/parser": "^7.27.5",
     "@babel/traverse": "^7.27.4",
-    "@google-cloud/bigquery": "^8.3.1",
+    "@google-cloud/bigquery": "^9.0.2",
     "@next/bundle-analyzer": "16.2.6",
     "@next/eslint-plugin-next": "16.2.6",
     "@playwright/test": "1.61.1",
