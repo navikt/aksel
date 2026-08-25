@@ -47,7 +47,7 @@ const data = [
     ),
   },
   {
-    pension: "Garantiillegg",
+    pension: "Garantitillegg",
     amount: "28 234",
   },
 ];
