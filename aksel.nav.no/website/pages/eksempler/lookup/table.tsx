@@ -6,7 +6,7 @@ const Example = () => {
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">100% aldersperson</Table.HeaderCell>
+          <Table.HeaderCell scope="col">100% alderspensjon</Table.HeaderCell>
           <Table.HeaderCell scope="col">Kr per år</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -14,9 +14,9 @@ const Example = () => {
         {data.map(({ pension, amount, lookup }) => {
           return (
             <Table.Row key={pension}>
-              <Table.DataCell>
+              <Table.HeaderCell scope="row">
                 {lookup ? <Lookup word={pension}>{lookup}</Lookup> : pension}
-              </Table.DataCell>
+              </Table.HeaderCell>
               <Table.DataCell>{amount}</Table.DataCell>
             </Table.Row>
           );
