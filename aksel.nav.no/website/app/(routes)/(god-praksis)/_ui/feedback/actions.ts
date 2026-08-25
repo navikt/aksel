@@ -62,7 +62,7 @@ async function sendFeedbackAction(
   await slackClient.chat
     .postMessage({
       /* ChannelId for #aksel-feedback-bot */
-      channel: "C06PY34NNJH",
+      channel: "C0BSL6RD086",
       text: `Tilbakemelding: ${validatedFormData.data.feedback}`,
       blocks: [
         ...slackBlock({
