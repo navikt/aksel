@@ -57,4 +57,73 @@ function findPrevOption(currentOption: HTMLElement) {
   return null;
 }
 
-export { findNextOption, findPrevOption };
+function getPreviousPage(
+  listbox: HTMLElement,
+  currentOption: HTMLElement | null,
+) {
+  const listboxRect = listbox.getBoundingClientRect();
+
+  if (currentOption) {
+    // Scroll down so that the currently focused option is on the bottom
+    currentOption.scrollIntoView({ block: "end" });
+
+    // Return the first option that is now fully visible
+    let prevOption = findPrevOption(currentOption);
+    let optionToFocus: HTMLElement | null = prevOption;
+    while (prevOption) {
+      const prevOptionRect = prevOption.getBoundingClientRect();
+      if (prevOptionRect.top < listboxRect.top) {
+        return optionToFocus;
+      }
+      optionToFocus = prevOption;
+      prevOption = findPrevOption(prevOption);
+    }
+    return optionToFocus;
+  }
+
+  // No currently focused option: Return the first option that is fully visible
+  // (Often more expensive than above case since we might have to check more options.)
+  const allOptions = listbox.querySelectorAll<HTMLElement>('[role="option"]');
+  for (let i = 0; i < allOptions.length; i++) {
+    const optionRect = allOptions[i].getBoundingClientRect();
+    if (optionRect.top >= listboxRect.top) {
+      return allOptions[i];
+    }
+  }
+  return null; // Should never get here
+}
+
+function getNextPage(listbox: HTMLElement, currentOption: HTMLElement | null) {
+  const listboxRect = listbox.getBoundingClientRect();
+
+  if (currentOption) {
+    // Scroll down so that the currently focused option is on the top
+    currentOption.scrollIntoView({ block: "start" });
+
+    // Return the last option that is now fully visible
+    let nextOption = findNextOption(currentOption);
+    let optionToFocus: HTMLElement = nextOption || currentOption;
+    while (nextOption) {
+      const nextOptionRect = nextOption.getBoundingClientRect();
+      if (nextOptionRect.bottom > listboxRect.bottom) {
+        return optionToFocus;
+      }
+      optionToFocus = nextOption;
+      nextOption = findNextOption(nextOption);
+    }
+    return optionToFocus;
+  }
+
+  // No currently focused option: Return the last option that is fully visible
+  // (Often more expensive than above case since we might have to check more options.)
+  const allOptions = listbox.querySelectorAll<HTMLElement>('[role="option"]');
+  for (let i = allOptions.length - 1; i >= 0; i--) {
+    const optionRect = allOptions[i].getBoundingClientRect();
+    if (optionRect.bottom <= listboxRect.bottom) {
+      return allOptions[i];
+    }
+  }
+  return null; // Should never get here
+}
+
+export { findNextOption, findPrevOption, getPreviousPage, getNextPage };

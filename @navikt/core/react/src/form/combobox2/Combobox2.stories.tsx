@@ -1,5 +1,5 @@
-import type { Meta } from "@storybook/react-vite";
-import React, { useState } from "react";
+import type { Meta, StoryFn } from "@storybook/react-vite";
+import React, { useMemo, useState } from "react";
 import { Button } from "../../button";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort } from "../../typography";
@@ -253,13 +253,20 @@ export const ControlledInput = () => {
   );
 };
 
-const manyOptions = Array.from({ length: 10_000 }, (_, i) => ({
-  label: `Option ${String(i + 1).padStart(4, "0")}`,
-  value: `opt-${i + 1}`,
-}));
-
-export const ManyOptions = () => {
+type ManyOptionsProps = {
+  count: number;
+};
+export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
   const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
+
+  const manyOptions = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        label: `Option ${String(i + 1).padStart(4, "0")}`,
+        value: `opt-${i + 1}`,
+      })),
+    [count],
+  );
 
   return (
     <div style={{ minHeight: "400px", width: "250px" }}>
@@ -278,9 +285,11 @@ export const ManyOptions = () => {
     </div>
   );
 };
+ManyOptions.args = {
+  count: 5000,
+};
 ManyOptions.parameters = {
   a11y: { disable: true },
-  controls: { disable: true },
   docs: { disable: true },
 };
 
@@ -467,13 +476,14 @@ export const TriggerSingleSelect = () => {
     Ikke loop
 - Skal den hete noe annet enn Combobox? Er jo på en måte ikke det...
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
-- Åpne på pil ned?
+- Åpne på pil ned (og ev. opp)?
 - PageUp/Down
 - Error, disabled (?), readonly osv.
 - Vurder hvilke funksjoner i gamle CB vi skal ta med (maks valg, legg til osv.)
 - Tester
 - A11y-sjekk
 - Beslutningsloggen?
+- Ikke wrappe options
 
 
 Utfordringer med komposisjon:
