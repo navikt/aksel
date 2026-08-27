@@ -1,9 +1,13 @@
 /************************************************
- * Label & description                          *
+ * Label & description & error                  *
  ************************************************/
 
 .aksel-combobox2__label {
   display: flex;
+  margin-bottom: var(--ax-space-8);
+}
+
+.aksel-combobox2__description {
   margin-bottom: var(--ax-space-8);
 }
 

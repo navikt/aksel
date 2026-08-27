@@ -57,9 +57,10 @@ function Combobox<
       <ComboboxLabel>{label}</ComboboxLabel>
       {!!description && (
         <BodyShort
-          className={cl("aksel-form-field__description", {
-            "aksel-sr-only": hideLabel,
-          })}
+          className={cl(
+            "aksel-form-field__description aksel-combobox2__description",
+            { "aksel-sr-only": hideLabel },
+          )}
           id={inputDescriptionId}
           //size={size}
           as="div"
@@ -81,3 +82,4 @@ function Combobox<
 }
 
 export { Combobox };
+export type { ComboboxProps };
