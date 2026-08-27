@@ -40,10 +40,10 @@
     "tsx": "^4.23.1"
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    ">= 0.2% in NO",
+    "not safari < 15.4",
+    "not ios_saf < 15.4",
+    "not dead"
   ],
   "main": "./dist/index.css",
   "exports": {
