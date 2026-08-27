@@ -131,6 +131,54 @@ export const ArrowUp: StoryObj = {
   },
 };
 
+export const PageUpAndPageDownKeys: StoryObj = {
+  render: () => {
+    const [focusedOption, setFocusedOption] = useState("");
+    return (
+      <Listbox setVirtuallyFocusedOptionId={setFocusedOption}>
+        <Listbox.Options style={{ maxHeight: "300px", overflowY: "auto" }}>
+          {Array.from({ length: 15 }, (_, i) => (
+            <Listbox.Option
+              key={i.toString()}
+              id={i.toString()}
+              onClick={() => {}}
+              hasVirtualFocus={focusedOption === i.toString()}
+              aria-selected={false}
+            >
+              {i.toString()}
+            </Listbox.Option>
+          ))}
+        </Listbox.Options>
+      </Listbox>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    pressKey(canvasElement, "PageDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("5");
+
+    pressKey(canvasElement, "PageDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("10");
+
+    pressKey(canvasElement, "PageDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("14"); // Last
+
+    pressKey(canvasElement, "PageDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("14"); // No looping for PageUp/Down
+
+    pressKey(canvasElement, "PageUp");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("9");
+
+    pressKey(canvasElement, "PageUp");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("4");
+
+    pressKey(canvasElement, "PageUp");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("0");
+
+    pressKey(canvasElement, "PageUp");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("0"); // No looping for PageUp/Down
+  },
+};
+
 export const HomeAndEndKeys: StoryObj = {
   render: () => <ListboxStory />,
   play: async ({ canvasElement }) => {

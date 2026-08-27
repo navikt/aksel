@@ -69,7 +69,7 @@ function getPreviousPage(
 
     // Return the first option that is now fully visible
     let prevOption = findPrevOption(currentOption);
-    let optionToFocus: HTMLElement | null = prevOption;
+    let optionToFocus = prevOption || currentOption;
     while (prevOption) {
       const prevOptionRect = prevOption.getBoundingClientRect();
       if (prevOptionRect.top < listboxRect.top) {
@@ -102,7 +102,7 @@ function getNextPage(listbox: HTMLElement, currentOption: HTMLElement | null) {
 
     // Return the last option that is now fully visible
     let nextOption = findNextOption(currentOption);
-    let optionToFocus: HTMLElement = nextOption || currentOption;
+    let optionToFocus = nextOption || currentOption;
     while (nextOption) {
       const nextOptionRect = nextOption.getBoundingClientRect();
       if (nextOptionRect.bottom > listboxRect.bottom) {

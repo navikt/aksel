@@ -84,9 +84,10 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
             }
             const nextOption = getNextElement(focusedOptionElm);
             if (!nextOption) {
-              // Looping turned off for now, but decision pending.
-              // If we turn it on, consider if PageUp/PageDown should loop too.
-              //virtuallyFocusOption(getFallback());
+              // TODO: Consider whether we want looping.
+              // If yes, consider if PageUp/PageDown should loop too.
+              // If no, remember to update tests.
+              virtuallyFocusOption(getFallback());
               return;
             }
             virtuallyFocusOption(nextOption);
