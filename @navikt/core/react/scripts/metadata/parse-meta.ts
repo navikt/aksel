@@ -128,7 +128,7 @@ function isOverridableComponent(type: ts.Type): boolean {
   return false;
 }
 
-function createProgram(metaFiles: string[]): ts.Program {
+function createTsProgram(metaFiles: string[]): ts.Program {
   const readConfig = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
   if (readConfig.error) {
     throw new Error(
@@ -159,13 +159,13 @@ function parseMetaFiles(): ParsedMeta[] {
     return [];
   }
 
-  const program = createProgram(metaFiles);
-  const checker = program.getTypeChecker();
+  const tsProgram = createTsProgram(metaFiles);
+  const typeChecker = tsProgram.getTypeChecker();
 
   const resolveAliasedSymbol = (symbol: ts.Symbol | undefined) => {
     let current = symbol;
     while (current && current.flags & ts.SymbolFlags.Alias) {
-      current = checker.getAliasedSymbol(current);
+      current = typeChecker.getAliasedSymbol(current);
     }
     return current;
   };
@@ -183,7 +183,7 @@ function parseMetaFiles(): ParsedMeta[] {
       if (ts.isShorthandPropertyAssignment(entry)) {
         label = entry.name.text;
         symbol = resolveAliasedSymbol(
-          checker.getShorthandAssignmentValueSymbol(entry),
+          typeChecker.getShorthandAssignmentValueSymbol(entry),
         );
       } else if (
         ts.isPropertyAssignment(entry) &&
@@ -193,7 +193,7 @@ function parseMetaFiles(): ParsedMeta[] {
           ? entry.name.text
           : entry.name.getText();
         symbol = resolveAliasedSymbol(
-          checker.getSymbolAtLocation(entry.initializer),
+          typeChecker.getSymbolAtLocation(entry.initializer),
         );
       }
 
@@ -208,7 +208,7 @@ function parseMetaFiles(): ParsedMeta[] {
         );
       }
 
-      const type = checker.getTypeOfSymbolAtLocation(symbol, declaration);
+      const type = typeChecker.getTypeOfSymbolAtLocation(symbol, declaration);
 
       entries.push({
         label,
@@ -256,7 +256,7 @@ function parseMetaFiles(): ParsedMeta[] {
 
   function parseMetaFile(metaFile: string): ParsedMeta {
     const relMeta = path.relative(packageRoot, metaFile);
-    const sourceFile = program.getSourceFile(metaFile);
+    const sourceFile = tsProgram.getSourceFile(metaFile);
     if (!sourceFile) {
       throw new Error(`Could not load meta file: ${relMeta}`);
     }

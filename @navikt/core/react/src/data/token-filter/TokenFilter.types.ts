@@ -66,8 +66,7 @@ type ExternalPropertyDefinitions = ExternalPropertyDefinition[];
 type OperatorTypeT = "single" | "multiple";
 
 type ExternalPropertyOperator =
-  | string
-  | { operator: string; type: OperatorTypeT };
+  string | { operator: string; type: OperatorTypeT };
 
 export type {
   ExternalPropertyOperator,

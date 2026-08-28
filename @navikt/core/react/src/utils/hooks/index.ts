@@ -17,3 +17,4 @@ export {
   useTransitionStatus,
 } from "./useTransitionStatus";
 export { useValueAsRef } from "./useValueAsRef";
+export { useDeferredValue } from "./useDeferredValue";

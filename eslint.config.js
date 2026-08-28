@@ -10,6 +10,7 @@ const testingLibrary = require("eslint-plugin-testing-library");
 const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
 const tseslint = require("typescript-eslint");
+const babelParser = require("@babel/eslint-parser");
 
 /**
  * TODO:
@@ -35,7 +36,6 @@ module.exports = defineConfig([
     ".yarn",
     "**/next-env.d.ts",
     "stylelint.config.mjs",
-    "apps/playroom/src/components.ts",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
@@ -71,6 +71,15 @@ module.exports = defineConfig([
         "warn",
         { additionalHooks: "(useClientLayoutEffect)" },
       ],
+    },
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      parser: babelParser, // Required for using modern JS features in .js files
+      parserOptions: {
+        requireConfigFile: false,
+      },
     },
   },
   {
