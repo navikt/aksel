@@ -12,8 +12,7 @@ function getNavigatorData(): { platform: string; maxTouchPoints: number } {
   }
 
   const uaData = (navigator as any).userAgentData as
-    | NavigatorUAData
-    | undefined;
+    NavigatorUAData | undefined;
 
   if (uaData?.platform) {
     return {

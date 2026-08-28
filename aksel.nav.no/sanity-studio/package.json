@@ -26,15 +26,15 @@
     "@sanity/vision": "6.0.0",
     "date-fns": "^4.0.0",
     "lodash": "4.18.1",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-rx": "^4.2.3",
     "rxjs": "^7.8.2",
     "sanity": "6.0.0",
     "sanity-plugin-iframe-pane": "5.0.13",
     "sanity-plugin-media": "4.3.1",
     "sanity-plugin-references": "1.1.0",
-    "styled-components": "^6.0.0",
+    "styled-components": "6.4.4",
     "swr": "^2.4.2"
   },
   "devDependencies": {
