@@ -13,10 +13,7 @@ export type SpacingScale = AkselSpaceToken;
 export type BorderRadiusScale = AkselBorderRadiusToken;
 
 export type SpaceDelimitedAttribute<T extends string> =
-  | T
-  | `${T} ${T}`
-  | `${T} ${T} ${T}`
-  | `${T} ${T} ${T} ${T}`;
+  T | `${T} ${T}` | `${T} ${T} ${T}` | `${T} ${T} ${T} ${T}`;
 type FixedResponsiveT<T> = {
   [Breakpoint in BreakpointsAlias]?: T;
 };

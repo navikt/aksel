@@ -89,5 +89,5 @@ export const Demo = {
 export const args: ExampleArgsT = {
   index: 0,
   title: "Komplett",
-  desc: "I sin fullstendige form kan en 404-side inneholde tittel, feilmelding, løsningsforslag, CTA, tilbakemeldingsfunksjon, flere språk og illustrasjon.",
+  desc: "I sin fullstendige form kan en 404-side inneholde tittel, feilmelding, løsningsforslag, CTA, tilbakemeldingsfunksjon og flere språk.",
 };

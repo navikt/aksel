@@ -1,7 +1,5 @@
 type MarkdownPart =
-  | string
-  | { heading: string; level?: 1 | 2 | 3 | 4 | 5 | 6 }
-  | null;
+  string | { heading: string; level?: 1 | 2 | 3 | 4 | 5 | 6 } | null;
 
 function renderPart(part: MarkdownPart): string | null {
   if (!part) {

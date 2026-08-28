@@ -51,7 +51,7 @@ async function DesignsystemetPageFooter({
           {contact?.github_issues_link && (
             <ContactCard
               title="Rapporter en bug"
-              description="Om du har funnet en bug eller noe som ikke henger på greip kan du gi beskjed på Github."
+              description="Om du har funnet en bug eller noe som ikke henger på greip kan du gi beskjed på GitHub."
               type="Github"
               href={contact.github_issues_link}
             />

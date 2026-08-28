@@ -42,6 +42,19 @@ function portableMarkdown(input?: any[]) {
         const suffix = MarkdownRoutes.isDynamicRoute(`/${slug}`) ? ".md" : "";
         return `[${children}](${AKSEL_BASE_URL}/${slug}${suffix}${anchor})`;
       },
+      lookup: ({ children, value }) => {
+        const explanation = value?.explanation;
+        if (!explanation) {
+          return children;
+        }
+        const explanationMarkdown = portableMarkdown(explanation)
+          .replace(/\n+/g, " ")
+          .trim();
+
+        return explanationMarkdown
+          ? `${children} (${explanationMarkdown})`
+          : children;
+      },
     },
     types: {
       relatert_innhold: RelatertInnholdMarkdown,
