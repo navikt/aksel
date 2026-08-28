@@ -7,6 +7,10 @@
   margin-bottom: var(--ax-space-8);
 }
 
+.aksel-combobox2__description {
+  margin-bottom: var(--ax-space-8);
+}
+
 /************************************************
  * Field                                        *
  ************************************************/
@@ -45,6 +49,17 @@
     border-color: ButtonText;
     color: ButtonText;
   }
+
+  .aksel-combobox2[data-size="small"] & {
+    min-height: 2rem;
+    padding-block: 0;
+  }
+
+  &[data-readonly="true"] {
+    background-color: var(--ax-bg-neutral-moderate);
+    border-color: var(--ax-border-neutral-subtleA);
+    cursor: default;
+  }
 }
 
 .aksel-combobox2__field-chevron {
@@ -57,6 +72,10 @@
 
   @media (forced-colors: active) {
     color: ButtonText;
+  }
+
+  .aksel-combobox2[data-size="small"] & {
+    margin-top: 4px;
   }
 }
 

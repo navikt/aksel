@@ -1,10 +1,15 @@
 import type { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
+import { Combobox, type ComboboxProps } from "./Combobox";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
 import { ComboboxList } from "./list/ComboboxList";
 import { ComboboxPopup } from "./popup/ComboboxPopup";
-import { ComboboxRoot } from "./root/ComboboxRoot";
+import {
+  type ComboboxGroupData,
+  type ComboboxOptionData,
+  ComboboxRoot,
+} from "./root/ComboboxRoot";
 
 const meta: Meta<typeof ComboboxRoot> = {
   title: "ds-react/Combobox2/Tests",
@@ -15,32 +20,62 @@ const meta: Meta<typeof ComboboxRoot> = {
 };
 export default meta;
 
-const options = [
-  { label: "Norway", value: "option-1" },
+const countries = [
+  { label: "Norge", value: "option-1" },
   { label: "Finland", value: "option-2" },
-  { label: "Sweden", value: "option-3" },
-  { label: "Denmark", value: "option-4" },
-  { label: "Iceland", value: "option-5" },
-  { label: "Faroe Islands", value: "option-6" },
-  { label: "Åland Islands", value: "option-7" },
-  { label: "Estonia", value: "option-8" },
+  { label: "Sverige", value: "option-3" },
+  { label: "Danmark", value: "option-4" },
+  { label: "Island", value: "option-5" },
+  { label: "Færøyene", value: "option-6" },
+  { label: "Åland", value: "option-7" },
+  { label: "Estland", value: "option-8" },
   { label: "Latvia", value: "option-9" },
-  { label: "Lithuania", value: "option-10" },
+  { label: "Litauenm", value: "option-10" },
 ];
 
 const groupedOptions = [
   {
-    label: "Nordic countries",
+    label: "Nordiske land",
     id: "group-1",
-    options: options.slice(0, 6),
+    options: countries.slice(0, 6),
   },
   {
-    label: "Baltic countries",
+    label: "Baltiske land",
     id: "group-2",
-    options: options.slice(6),
+    options: countries.slice(6),
   },
-  { label: "Singel option", value: "option-01" },
+  { label: "Ikke gruppert", value: "option-01" },
 ];
+
+function BaseCombobox<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>(props: Partial<ComboboxProps<T>>) {
+  const [selectedOptions, setSelectedOptions] = useState(["option-1"]);
+
+  return (
+    <Combobox
+      options={countries as T[]}
+      selectedOptions={selectedOptions}
+      onToggleOption={(option, newSelected) => {
+        setSelectedOptions((prev) =>
+          newSelected
+            ? [...prev, option.value]
+            : prev.filter((v) => v !== option.value),
+        );
+      }}
+      label="Velg land"
+      description="Landet hvor du er født."
+      {...props}
+    />
+  );
+}
+
+export const AccessibleNameAndDesc = () => <BaseCombobox />;
+AccessibleNameAndDesc.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const trigger = await canvas.findByRole("combobox", { name: "Velg land" });
+  await expect(trigger).toHaveAccessibleDescription("Landet hvor du er født.");
+};
 
 let optionMemoTestRenderCnt = 0;
 const optionMemoTestRenderFn = (

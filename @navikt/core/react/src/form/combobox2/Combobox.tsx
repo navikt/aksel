@@ -1,5 +1,6 @@
 import React from "react";
 import { BodyShort } from "../../typography";
+import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useFormField } from "../useFormField";
 import { ComboboxField } from "./field/ComboboxField";
@@ -20,22 +21,31 @@ interface ComboboxProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 > extends Omit<ComboboxRootProps<T>, "children"> {
   label: string;
-  hideLabel?: boolean;
   description?: string;
+  hideLabel?: boolean;
+  readOnly?: boolean;
   //name?: string; // TODO: rendre hidden input med valgt(e) verdi(er) hvis satt.
-}
+} // TODO: trolig extend FormFieldProps
+// TODO: extend React.HTMLAttributes<HTMLDivElement>
 
 function Combobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->({ label, hideLabel, description, ...rest }: ComboboxProps<T>) {
+>({
+  label,
+  hideLabel,
+  description,
+  size: sizeProp,
+  readOnly: readOnlyProp,
+  ...rest
+}: ComboboxProps<T>) {
   const {
-    //inputProps,
+    inputProps,
     //errorId,
     //showErrorMsg,
     //hasError,
-    //size,
+    size,
     inputDescriptionId,
-    //readOnly,
+    readOnly,
   } = useFormField(
     {
       description,
@@ -43,32 +53,35 @@ function Combobox<
       //error,
       //errorId,
       //id: rest.triggerId,
-      //readOnly,
-      //size,
+      readOnly: readOnlyProp,
+      size: sizeProp,
     },
     "combobox",
   );
 
-  // TODO: hideLabel
   // TODO: Kunne være ukontrollert?
+  // TODO: Vurder å koble opp label her, slik at vi slipper å ha triggerId prop i ComboboxRoot.
 
   return (
-    <ComboboxRoot {...rest}>
-      <ComboboxLabel>{label}</ComboboxLabel>
+    <ComboboxRoot size={size} triggerId={inputProps.id} {...rest}>
+      <ComboboxLabel hide={hideLabel} readOnly={readOnly}>
+        {label}
+      </ComboboxLabel>
       {!!description && (
         <BodyShort
-          className={cl("aksel-form-field__description", {
-            "aksel-sr-only": hideLabel,
-          })}
+          className={cl(
+            "aksel-form-field__description aksel-combobox2__description",
+            { "aksel-sr-only": hideLabel },
+          )}
           id={inputDescriptionId}
-          //size={size}
+          size={size}
           as="div"
         >
           {description}
         </BodyShort>
       )}
-      <ComboboxTrigger>
-        <ComboboxField aria-describedby={inputDescriptionId} />
+      <ComboboxTrigger readOnly={readOnly} {...omit(inputProps, ["id"])}>
+        <ComboboxField />
       </ComboboxTrigger>
       <ComboboxOverlay>
         <ComboboxPopup>
@@ -81,3 +94,4 @@ function Combobox<
 }
 
 export { Combobox };
+export type { ComboboxProps };

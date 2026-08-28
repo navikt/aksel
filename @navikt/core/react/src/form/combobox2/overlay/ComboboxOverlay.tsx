@@ -40,7 +40,7 @@ const ComboboxOverlay = ({ children }: ComboboxOverlayProps) => {
       <Floating.Content
         sideOffset={4}
         side="bottom"
-        fallbackPlacements={["top"]}
+        fallbackPlacements={["top-start"]}
         fallbackAxisSideDirection={MENU_COLLISION_AVOIDANCE.fallbackAxisSide}
         align="start"
         enabled={rootContext.open}
