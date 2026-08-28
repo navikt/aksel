@@ -9,13 +9,7 @@ const GLOB_IGNORE_PATTERNS = [
 ];
 
 type SupportedCodemodExtensions =
-  | "js"
-  | "ts"
-  | "jsx"
-  | "tsx"
-  | "css"
-  | "scss"
-  | "less";
+  "js" | "ts" | "jsx" | "tsx" | "css" | "scss" | "less";
 
 /**
  * Utility function to generate the default glob pattern

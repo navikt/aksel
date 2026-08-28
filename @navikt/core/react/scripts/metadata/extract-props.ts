@@ -6,8 +6,7 @@ import { packageRoot, tsconfigPath } from "./paths";
 
 /**
  * Pulls structured tags (`@example`, `@param`, `@returns`, `@deprecated`,
- * `@see`) out of each prop description and onto dedicated fields. Mirrors the
- * enrichment in the legacy `scripts/docgen.ts`.
+ * `@see`) out of each prop description and onto dedicated fields.
  */
 function enrichExtraPropFields(doc: ComponentDoc) {
   for (const prop of Object.values(doc.props)) {

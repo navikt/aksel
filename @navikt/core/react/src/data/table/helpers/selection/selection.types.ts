@@ -31,8 +31,7 @@ type SelectionProps<T = unknown> = {
    * If set to a boolean, it will enable selection for all rows when true, and disable selection for all rows when false.
    */
   enableRowSelection?:
-    | (({ row, id }: { row: T; id: string }) => boolean)
-    | boolean;
+    (({ row, id }: { row: T; id: string }) => boolean) | boolean;
 };
 
 type NoneSelection = {

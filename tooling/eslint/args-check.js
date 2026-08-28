@@ -46,7 +46,7 @@ module.exports = {
             }
 
             if (
-              typeAnnotation.type !== "TSTypeReference" ||
+              typeAnnotation?.type !== "TSTypeReference" ||
               !typeName ||
               typeName.type !== "Identifier" ||
               typeName.name !== "ExampleArgsT"

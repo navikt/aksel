@@ -15,8 +15,8 @@
     "@navikt/ds-css": "^8.16.1",
     "@navikt/ds-react": "^8.16.1",
     "fuse.js": "^7.4.2",
-    "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.131.0",
@@ -25,7 +25,7 @@
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.0.5",
     "typescript": "6.0.3",
     "vite": "^8.1.5",
     "vite-plugin-singlefile": "^2.3.0"

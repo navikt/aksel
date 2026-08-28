@@ -69,7 +69,7 @@ const IconMap = {
 
 /**
  * A component for displaying alerts
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/alert)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/legacy/alert)
  * @see 🏷️ {@link AlertProps}
  * @example
  * ```jsx
