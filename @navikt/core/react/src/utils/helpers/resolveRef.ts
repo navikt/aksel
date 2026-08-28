@@ -6,9 +6,7 @@
  */
 function resolveRef(
   maybeRef:
-    | HTMLElement
-    | React.RefObject<HTMLElement | null | undefined>
-    | null,
+    HTMLElement | React.RefObject<HTMLElement | null | undefined> | null,
 ): HTMLElement | null | undefined {
   if (maybeRef === null) {
     return maybeRef;

@@ -38,12 +38,7 @@ function unpackTar(tarballGlob: string): string {
 }
 
 type PackageJsonExportKey =
-  | "."
-  | "import"
-  | "require"
-  | "types"
-  | "default"
-  | (string & {});
+  "." | "import" | "require" | "types" | "default" | (string & {});
 
 type PackageJsonExportsObject = {
   [P in PackageJsonExportKey]?: string | PackageJsonExportsObject;

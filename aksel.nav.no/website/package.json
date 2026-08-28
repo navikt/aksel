@@ -36,7 +36,7 @@
     "@portabletext/react": "^6.0.3",
     "@sanity/client": "7.23.2",
     "@sanity/image-url": "2.1.1",
-    "@slack/web-api": "^7.8.0",
+    "@slack/web-api": "^8.0.0",
     "aksel-sanity-studio": "workspace:*",
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
@@ -69,11 +69,11 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.11.0",
+    "@axe-core/playwright": "4.13.0",
     "@babel/core": "^7.19.0",
     "@babel/parser": "^7.27.5",
     "@babel/traverse": "^7.27.4",
-    "@google-cloud/bigquery": "^8.3.1",
+    "@google-cloud/bigquery": "^9.0.2",
     "@next/bundle-analyzer": "16.2.6",
     "@next/eslint-plugin-next": "16.2.6",
     "@playwright/test": "1.61.1",

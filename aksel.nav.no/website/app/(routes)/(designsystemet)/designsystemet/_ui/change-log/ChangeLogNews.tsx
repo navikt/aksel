@@ -105,8 +105,7 @@ function ChangelogIcon({
   endringstype,
 }: {
   endringstype:
-    | N_LATEST_CHANGE_LOGS_QUERY_RESULT[number]["endringstype"]
-    | "sparkles";
+    N_LATEST_CHANGE_LOGS_QUERY_RESULT[number]["endringstype"] | "sparkles";
 }) {
   if (!endringstype) {
     return null;

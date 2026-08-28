@@ -97,8 +97,7 @@ export class AkselVariablesInterface {
 
   private updateScaleCollection(
     globalScale:
-      | ScopedFigmaTokenConfig["radius"]
-      | ScopedFigmaTokenConfig["space"],
+      ScopedFigmaTokenConfig["radius"] | ScopedFigmaTokenConfig["space"],
   ): void {
     const collection =
       this.Figma.getCollection(globalScale.name) ??

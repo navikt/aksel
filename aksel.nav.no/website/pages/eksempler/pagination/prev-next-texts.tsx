@@ -26,5 +26,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 1,
-  desc: "Ved å skru på propen 'prevNextTexts' får forrige- og neste-knappene synlig tekst i tillegg til chevron.",
+  desc: "Ved å skru på propen `prevNextTexts` får forrige- og neste-knappene synlig tekst i tillegg til chevron.",
 };

@@ -14,6 +14,7 @@ import {
   ExternalLinkIcon,
   FileTextIcon,
   LinkIcon,
+  MagnifyingGlassIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "../../../sanity.env";
@@ -202,6 +203,26 @@ export const block = {
           annotation: ExternalLinkRenderer,
         },
       },
+      {
+        title: "Lookup",
+        name: "lookup",
+        type: "object",
+        icon: () => <MagnifyingGlassIcon title="Legg til Lookup" />,
+        options: {
+          modal: {
+            type: "dialog",
+            width: "medium",
+          },
+        },
+        fields: [
+          defineField({
+            title: "Forklaring",
+            name: "explanation",
+            type: "riktekst_lookup",
+            validation: (Rule) => Rule.required(),
+          }),
+        ],
+      },
     ],
   },
 };
@@ -306,6 +327,27 @@ export const RiktekstStandard = {
   name: "riktekst_standard",
   type: "array",
   of: Riktekst("standard"),
+  icon: () => <FileTextIcon aria-hidden />,
+  validation: (Rule: SanityRule) => {
+    return Rule.custom(validateHeadingLevels);
+  },
+};
+
+export const RiktekstLookup = {
+  title: "Riktekst Lookup",
+  name: "riktekst_lookup",
+  type: "array",
+  of: [
+    {
+      ...block,
+      marks: {
+        ...block.marks,
+        annotations: block.marks.annotations.filter(
+          (annotation) => annotation.name !== "lookup",
+        ),
+      },
+    },
+  ],
   icon: () => <FileTextIcon aria-hidden />,
   validation: (Rule: SanityRule) => {
     return Rule.custom(validateHeadingLevels);
