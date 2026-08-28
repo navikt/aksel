@@ -18,7 +18,10 @@ const globPatterns = [
   "./aksel.nav.no/website/.next",
 ];
 
-const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const repositoryRoot = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
 const isReset = process.argv.includes("--reset");
 const isDryRun = process.argv.includes("--dry-run");
 

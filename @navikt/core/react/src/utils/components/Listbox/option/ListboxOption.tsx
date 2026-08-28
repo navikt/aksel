@@ -1,4 +1,5 @@
 import React from "react";
+import { BodyShort } from "../../../../typography";
 import { cl } from "../../../helpers";
 import { useListboxContext } from "../root/Listbox.context";
 
@@ -35,9 +36,11 @@ function ListboxOption({
   className,
   ...rest
 }: ListboxOptionProps) {
-  const { activeId } = useListboxContext();
+  const { activeId, size } = useListboxContext();
   return (
-    <div
+    <BodyShort
+      as="div"
+      size={size}
       {...rest}
       className={cl("aksel-listbox__option", className)}
       role="option"
@@ -47,8 +50,8 @@ function ListboxOption({
       data-id={id}
       id={hasVirtualFocus ? activeId : undefined}
     >
-      {children}
-    </div>
+      <div className="aksel-listbox__option-inner">{children}</div>
+    </BodyShort>
   );
 }
 

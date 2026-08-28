@@ -108,5 +108,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 4,
-  desc: "Obs! Dette fungerer bare med nytt 'darkside' tema.",
+  desc: "Du kan endre farge med `data-color`.",
 };

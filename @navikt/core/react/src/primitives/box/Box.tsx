@@ -39,8 +39,7 @@ type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * @see {@link AkselColoredBorderToken}
    */
   borderColor?:
-    | Exclude<AkselRootBorderToken, "focus">
-    | AkselColoredBorderToken;
+    Exclude<AkselRootBorderToken, "focus"> | AkselColoredBorderToken;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#radius)
