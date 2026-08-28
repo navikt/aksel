@@ -3,11 +3,21 @@ import { Floating } from "../../../utils/components/floating/Floating";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
 
-interface ComboboxTriggerProps {
+interface ComboboxTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Should be a <button> element.
+   */
   children: React.ReactNode;
+  readOnly?: boolean;
+  disabled?: boolean;
 }
 
-const ComboboxTrigger = ({ children }: ComboboxTriggerProps) => {
+const ComboboxTrigger = ({
+  children,
+  readOnly,
+  disabled,
+  ...rest
+}: ComboboxTriggerProps) => {
   const rootContext = useComboboxRootContext();
 
   return (
@@ -15,12 +25,12 @@ const ComboboxTrigger = ({ children }: ComboboxTriggerProps) => {
       <Slot
         role="combobox"
         //aria-haspopup="listbox" // Dette er implicit med role combobox. TODO: Vurder om hele popupen bør ha role listbox, ev. dialog.
-        aria-expanded={rootContext.open}
+        aria-expanded={readOnly ? undefined : rootContext.open} // TODO: Can consider to always set this, but might be confusing.
         //aria-controls={context.open ? context.contentId : undefined} // Del av Combobox Pattern, men vet ikke om det er hensiktsmessig.
-        onClick={() => rootContext.setOpen(!rootContext.open)}
+        onClick={() => !readOnly && rootContext.setOpen(!rootContext.open)}
         onMouseDown={(event) => {
           // Prevents "flash of focus" on trigger before focus is moved to input
-          if (!rootContext.open) event.preventDefault();
+          if (!readOnly && !rootContext.open) event.preventDefault();
         }}
         /*onKeyDown={composeEventHandlers(onKeyDown, (event) => {
           if (event.key === "ArrowDown") {
@@ -30,6 +40,11 @@ const ComboboxTrigger = ({ children }: ComboboxTriggerProps) => {
           }
         })}*/
         id={rootContext.triggerId}
+        data-readonly={readOnly}
+        aria-readonly={readOnly} // TODO: Vurder
+        // @ts-expect-error Slot only accepts generic HTML attributes
+        disabled={disabled}
+        {...rest}
       >
         {children}
       </Slot>
