@@ -41,7 +41,7 @@ jobs:
 
       - name: Create release Pull Request or publish to NPM
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           version: yarn create-version
           publish: yarn release
@@ -65,7 +65,7 @@ jobs:
       - name: Publish to GPR
         if: steps.changesets.outputs.published == 'true'
         id: changesets-gpr
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           publish: yarn changeset publish
           createGithubReleases: false
