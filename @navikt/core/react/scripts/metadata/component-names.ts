@@ -27,8 +27,6 @@ function metaFilesChanged(files: string[]): boolean {
 
 /** Extracts "name"-key from metadata export in each *.meta.ts file */
 async function readMetaNames(files: string[]): Promise<string[]> {
-  console.time("Import files");
-
   const names = await Promise.all(
     files.map(async (file) => {
       // @ts-expect-error Benchmark helper: dynamic import in this script target.
@@ -38,8 +36,6 @@ async function readMetaNames(files: string[]): Promise<string[]> {
       return metadata?.name;
     }),
   );
-
-  console.timeEnd("Import files");
 
   return names.filter((name): name is string => typeof name === "string");
 }
