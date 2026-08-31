@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { cl } from "../../../utils/helpers";
 import {
   type ComboboxRootProps,
   useComboboxRootContext,
@@ -11,7 +12,7 @@ interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
   ({ children, ...rest }, ref) => {
-    const { options, selectedOptions } = useComboboxRootContext();
+    const { options, selectedOptions, size } = useComboboxRootContext();
 
     const labels = getLabels(selectedOptions, options);
 
@@ -20,7 +21,11 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
         <button
           type="button"
           ref={ref}
-          className="aksel-combobox2__field-btn"
+          className={cl(
+            "aksel-combobox2__field-btn",
+            "aksel-body-short",
+            `aksel-body-short--${size ?? "medium"}`,
+          )}
           {...rest}
         >
           {children ||
