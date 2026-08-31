@@ -41,8 +41,8 @@ async function readMetaNames(files: string[]): Promise<string[]> {
 }
 
 /**
- * Writes the generated `ComponentName` union, only touching the file when its
- * contents change. Returns `true` when the file was rewritten.
+ * Writes the generated `ComponentName` union.
+ * @returns whether the file was changed.
  */
 async function writeComponentNames(names?: string[]): Promise<boolean> {
   if (!names) {
