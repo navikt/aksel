@@ -16,6 +16,8 @@ import {
   MONSTER_MALER_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 
@@ -76,6 +78,8 @@ async function CachedMonsterMalerPage({
     notFound();
   }
 
+  const changelogs = await fetchChangelogs(pageData._id, "ds");
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={pageData} />
@@ -86,17 +90,21 @@ async function CachedMonsterMalerPage({
           href: pageData.contact?.github_issues_link,
         }}
         toc={toc}
+        hasChangelogs={changelogs.exists}
       />
       <CustomPortableText
         value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"
       />
 
-      <DesignsystemetPageFooter
-        pageId={pageData._id}
-        updateDateString={pageData._updatedAt ?? pageData._createdAt}
-        contact={pageData.contact}
-      />
+      <div>
+        <ChangelogTable changelogs={changelogs} />
+
+        <DesignsystemetPageFooter
+          updateDateString={pageData._updatedAt ?? pageData._createdAt}
+          contact={pageData.contact}
+        />
+      </div>
     </DesignsystemetPageLayout>
   );
 }

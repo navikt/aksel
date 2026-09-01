@@ -14,7 +14,7 @@ function WebsiteList({ children, as = "ul", ...restProps }: ListProps) {
       {...restProps}
       className={styles.typoList}
       as={as}
-      data-color="neutral"
+      data-color="accent"
     >
       {children}
     </AkselList>
