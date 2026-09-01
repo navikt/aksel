@@ -27702,7 +27702,6 @@ __metadata:
     sharp: "npm:0.35.3"
     showdown: "npm:^2.1.0"
     sitemapper: "npm:^4.1.6"
-    styled-components: "npm:6.4.4"
     swr: "npm:^2.4.2"
     tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.23.1"
