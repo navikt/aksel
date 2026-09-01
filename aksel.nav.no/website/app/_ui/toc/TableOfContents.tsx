@@ -1,6 +1,7 @@
 "use client";
 
 import { stegaClean } from "next-sanity";
+import { useMemo } from "react";
 import { Events } from "@navikt/analytics-types";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import type { TOC_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
@@ -22,6 +23,7 @@ type TableOfContentsProps = {
     href?: string;
   };
   linkToChangelogs?: boolean;
+  hasChangelogs?: boolean;
 };
 
 function TableOfContents({
@@ -29,8 +31,20 @@ function TableOfContents({
   variant = "default",
   feedback,
   linkToChangelogs = false,
+  hasChangelogs,
 }: TableOfContentsProps) {
-  const toc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
+  const toc = useMemo(() => {
+    const newToc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
+
+    if (hasChangelogs && newToc && newToc.length > 0) {
+      newToc.push({
+        id: "endringslogg-table",
+        title: "Endringslogg",
+      });
+    }
+
+    return newToc;
+  }, [hasChangelogs, linkToChangelogs, tocProp]);
 
   const tocCtx = useTableOfContents(toc ?? []);
 
