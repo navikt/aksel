@@ -5609,7 +5609,7 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@figma/plugin-typings": "npm:^1.131.0"
-    colorjs.io: "npm:^0.7.0"
+    colorjs.io: "npm:^0.7.1"
     esbuild: "npm:^0.28.0"
     lightningcss: "npm:^1.33.0"
     lodash: "npm:4.18.1"
@@ -12771,10 +12771,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorjs.io@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "colorjs.io@npm:0.7.0"
-  checksum: 10/ac990649d5755875ba1e46e6e59575d21a2d87230d660719245e06044ec8cb0fa97d5fd683476abb60a34ea833831008a687c4a94beeaab4802c083397b1b1cb
+"colorjs.io@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "colorjs.io@npm:0.7.1"
+  checksum: 10/6a2beec20fbce9f4b7c4f1915e7444eb90a3957b735f1d56feab0bac2d16d8be03d3eee19487d9461e1d2db060c2e64f47c3d7029d203b11818a36758842b386
   languageName: node
   linkType: hard
 
