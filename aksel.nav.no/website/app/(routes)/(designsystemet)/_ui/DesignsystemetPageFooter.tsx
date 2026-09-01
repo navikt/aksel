@@ -1,4 +1,4 @@
-import { BodyShort, Box, HGrid, VStack } from "@navikt/ds-react";
+import { BodyShort, HGrid, VStack } from "@navikt/ds-react";
 import { ContactCard } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetContactCard";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
@@ -25,7 +25,7 @@ async function DesignsystemetPageFooter({
   const changelogs = await fetchChangelogs(pageId, "ds");
 
   return (
-    <Box marginBlock="space-48">
+    <div>
       <ChangelogTable changelogs={changelogs} />
 
       <VStack gap="space-8">
@@ -66,7 +66,7 @@ async function DesignsystemetPageFooter({
           )}
         </HGrid>
       </VStack>
-    </Box>
+    </div>
   );
 }
 
