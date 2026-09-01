@@ -1,4 +1,4 @@
-import { BodyShort, HGrid, VStack } from "@navikt/ds-react";
+import { BodyShort, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { ContactCard } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetContactCard";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
@@ -23,7 +23,9 @@ async function DesignsystemetPageFooter({
     <VStack gap="space-8">
       {contact && (
         <>
-          <BodyShort weight="semibold">Forvalter</BodyShort>
+          <Heading level="2" size="small">
+            Forvalter
+          </Heading>
           <Avatar
             type={humanizeRedaksjonType(contact.type)}
             name={contact.title ?? ""}
