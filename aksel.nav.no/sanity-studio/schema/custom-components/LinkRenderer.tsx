@@ -9,13 +9,14 @@ export const ExternalLinkRenderer = (props: FieldProps) => {
     return props.renderDefault(props);
   }
 
+  const content =
+    (props.value as { href: string })?.href || "Ingen lenke definert";
+
   return (
     <Tooltip
-      content={
-        (props.value as { href: string })?.href || "Ingen lenke definert"
-      }
+      content={content.length > 145 ? `${content.substring(0, 140)}…` : content}
       placement="bottom"
-      maxChar={999}
+      maxChar={145}
     >
       {props.renderDefault(props)}
     </Tooltip>
