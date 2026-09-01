@@ -13,11 +13,19 @@ type ContactT = Exclude<
 async function DesignsystemetPageFooter({
   updateDateString,
   contact,
+  pageTitle,
 }: {
   updateDateString: string;
   contact: ContactT;
+  pageTitle?: string;
 }) {
   const updateDate = formatDateString(updateDateString);
+
+  const suffix = `title=%5BInnspill%5D%20Aksel-artikkel%3A%20${pageTitle}`;
+
+  const href = contact?.github_issues_link?.endsWith("/issues/new")
+    ? `${contact.github_issues_link}?${suffix}`
+    : contact?.github_issues_link;
 
   return (
     <VStack gap="space-8">
@@ -42,12 +50,12 @@ async function DesignsystemetPageFooter({
       )}
 
       <HGrid gap="space-24" columns={{ md: 2 }} data-block-margin="space-28">
-        {contact?.github_issues_link && (
+        {href && (
           <ContactCard
-            title="Rapporter en bug"
-            description="Om du har funnet en bug eller noe som ikke henger på greip kan du gi beskjed på GitHub."
+            title="Send innspill"
+            description="Om du har noen innspill eller tilbakemeldinger kan du sende dem inn på GitHub."
             type="Github"
-            href={contact.github_issues_link}
+            href={href}
           />
         )}
         {contact?.slack_link && (

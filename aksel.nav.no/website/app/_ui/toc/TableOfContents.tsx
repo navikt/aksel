@@ -134,6 +134,12 @@ function TableOfContentsLinks({
     return null;
   }
 
+  const suffix = `title=%5BRapporter%20en%20bug%5D%20Aksel-artikkel%3A%20${feedback.name}`;
+
+  const href = feedback.href?.endsWith("/issues/new")
+    ? `${feedback.href}?${suffix}`
+    : feedback.href;
+
   return (
     <div className={styles.tocAsideLinks}>
       <Button
@@ -142,8 +148,8 @@ function TableOfContentsLinks({
         size="small"
         icon={<GithubIcon aria-hidden />}
         href={
-          feedback.href ??
-          `https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill%5D%20${feedback.name}`
+          href ??
+          `https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&${suffix}`
         }
         onClick={() =>
           umamiTrack(Events.KNAPP_KLIKKET, {
