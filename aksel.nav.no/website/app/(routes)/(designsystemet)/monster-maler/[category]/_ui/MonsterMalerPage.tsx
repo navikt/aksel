@@ -86,7 +86,7 @@ async function CachedMonsterMalerPage({
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "GitHub issues",
+          text: "Rapporter bug",
           href: pageData.contact?.github_issues_link,
         }}
         toc={toc}
@@ -101,6 +101,7 @@ async function CachedMonsterMalerPage({
         <ChangelogTable changelogs={changelogs} />
 
         <DesignsystemetPageFooter
+          pageTitle={pageData.heading}
           updateDateString={pageData._updatedAt ?? pageData._createdAt}
           contact={pageData.contact}
         />
