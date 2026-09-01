@@ -12786,6 +12786,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dompurify@npm:^3.4.12":
+  version: 3.4.14
+  resolution: "dompurify@npm:3.4.14"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 10/e1948f825c9ea5dfc2d2adfdab60d230ccd593091cdf8ac30676b86df6bd1f97ab49e95678a164cbf3aa48d40304ad6dd58a35799261205142d9231aad357dae
+  languageName: node
+  linkType: hard
+
 "domutils@npm:^3.0.1":
   version: 3.2.2
   resolution: "domutils@npm:3.2.2"
@@ -16350,6 +16362,16 @@ __metadata:
     dompurify: "npm:^3.2.6"
     jsdom: "npm:^26.1.0"
   checksum: 10/7a925dbcfdc0b3151f003d93c7e62d2b54c4fa6678420a211aba6eea377fa04e4daa94e340fd2a0534921d1165bbd06a3f21c6ccf3b76e7f5b0de40a4a604dc1
+  languageName: node
+  linkType: hard
+
+"isomorphic-dompurify@npm:3.19.0":
+  version: 3.19.0
+  resolution: "isomorphic-dompurify@npm:3.19.0"
+  dependencies:
+    dompurify: "npm:^3.4.12"
+    jsdom: "npm:^29.1.1"
+  checksum: 10/d7ecf0b59240a728602174b38bac625e9bb7b451d7a2d5fb380e814ff2a6e1a3e84a204d8b37cbf58851556f1574e1a69548edb210681d4f38267e7d8b3fa812
   languageName: node
   linkType: hard
 
@@ -25266,7 +25288,7 @@ __metadata:
     cross-env: "npm:^10.1.0"
     date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.4.2"
-    isomorphic-dompurify: "npm:2.26.0"
+    isomorphic-dompurify: "npm:3.19.0"
     jscodeshift: "npm:17.4.0"
     jsdom: "npm:29.1.1"
     json5: "npm:2.2.1"
