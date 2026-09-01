@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.16.2
+
+### Patch Changes
+
+- Browserlist: Updated browser-support. ([#5213](https://github.com/navikt/aksel/pull/5213))
+
 ## 8.16.1
 
 ## 8.16.0
