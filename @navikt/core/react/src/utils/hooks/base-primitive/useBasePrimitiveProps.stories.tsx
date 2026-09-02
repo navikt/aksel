@@ -4,9 +4,12 @@ import { Box } from "../../../primitives/box";
 import { HGrid } from "../../../primitives/grid";
 import { Hide, Show } from "../../../primitives/responsive";
 import { HStack, VStack } from "../../../primitives/stack";
+import { Slot } from "../../components/slot/Slot";
 import { cl } from "../../helpers";
-import { Slot } from "../slot/Slot";
-import { type PrimitiveProps, useBasePrimitiveProps } from "./BasePrimitive";
+import {
+  type PrimitiveProps,
+  useBasePrimitiveProps,
+} from "./useBasePrimitiveProps";
 
 interface BasePrimitiveProps extends PrimitiveProps {
   children: React.ReactElement;

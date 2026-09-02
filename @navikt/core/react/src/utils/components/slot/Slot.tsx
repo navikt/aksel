@@ -27,6 +27,9 @@ function getChildRef(children: React.ReactNode): React.Ref<HTMLElement> | null {
 const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   const { children, ...slotProps } = props;
 
+  /**
+   * Lazy-loaded childrens are not currently valid React elements. They need to be unwrapped before being used.
+   */
   const resolvedChildren = React.isValidElement(children)
     ? children
     : unwrapLazy(children);

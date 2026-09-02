@@ -205,7 +205,7 @@ async function DynamicEndringslogg({
       <TableOfContents
         feedback={{
           name: "Endringslogg",
-          text: "GitHub issues",
+          text: "Rapporter bug",
         }}
         toc={toc}
       />
