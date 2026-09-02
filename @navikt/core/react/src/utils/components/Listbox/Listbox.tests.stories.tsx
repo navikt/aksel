@@ -136,7 +136,7 @@ export const PageUpAndPageDownKeys: StoryObj = {
     const [focusedOption, setFocusedOption] = useState("");
     return (
       <Listbox setVirtuallyFocusedOptionId={setFocusedOption}>
-        <Listbox.Options style={{ maxHeight: "300px", overflowY: "auto" }}>
+        <Listbox.Options style={{ maxHeight: "300px" }}>
           {Array.from({ length: 15 }, (_, i) => (
             <Listbox.Option
               key={i.toString()}
