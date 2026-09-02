@@ -43,9 +43,9 @@ jobs:
         id: changesets
         uses: changesets/action@v2
         with:
-          version: yarn create-version
-          publish: yarn release
-          createGithubReleases: false
+          version-script: yarn create-version
+          publish-script: yarn release
+          create-github-releases: false
         env:
           # Use OIDC for npm authentication instead of NPM_TOKEN
           # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
@@ -67,8 +67,8 @@ jobs:
         id: changesets-gpr
         uses: changesets/action@v2
         with:
-          publish: yarn changeset publish
-          createGithubReleases: false
+          publish-script: yarn changeset publish
+          create-github-releases: false
         env:
           NPM_TOKEN: ""
           # Needed for push to main

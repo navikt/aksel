@@ -53,9 +53,9 @@ Public-package-only: `yarn workspaces focus @navikt/aksel-icons @navikt/ds-token
 - `yarn clean` - remove build artifacts
 - `yarn workspace @navikt/ds-react build|test`
 - `yarn workspace website test`
-- `yarn workspace playroom sync-imports`
+- `yarn workspace aksel-playroom sync-imports`
 
-`yarn lint` fails if playroom imports stale → `yarn workspace playroom sync-imports`.
+`yarn lint` fails if playroom imports stale → `yarn workspace aksel-playroom sync-imports`.
 
 ## Where to edit
 
