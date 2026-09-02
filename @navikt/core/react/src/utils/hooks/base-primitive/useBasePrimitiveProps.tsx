@@ -220,6 +220,7 @@ export const PRIMITIVE_PROPS = Object.keys(
  * Result of `useBasePrimitiveProps` when none of the `PrimitiveProps` are set.
  * Kept as a stable module-level reference so unrelated Box/Stack/HGrid renders
  * don't allocate a new `style`/`className` pair on every render.
+ * While this optimization works in isolation, the current use of the hook means that it still allocates new `style`/`className` pairs when any `PrimitiveProps` are set.
  */
 const EMPTY_BASE_PRIMITIVE_PROPS: {
   style: React.CSSProperties;
