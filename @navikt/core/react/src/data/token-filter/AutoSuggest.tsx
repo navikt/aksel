@@ -182,46 +182,43 @@ const AutoSuggestPopup = forwardRef<HTMLDivElement, AutoSuggestPopupProps>(
           sideOffset={8}
           className="aksel-property-filter__popup"
         >
-          <div className="aksel-property-filter__popup-inner">
-            <Listbox.Options
-              id={id}
-              aria-multiselectable={options.some((group) =>
-                group.options.some((item) => item.multiSelect),
-              )}
-              /* Options are only virtually focused, so real focus must stay on the input */
-              onMouseDown={(event) => event.preventDefault()}
-            >
-              {options.map((group) => {
-                /* Property- and value-groups can share a label, so include an option to keep keys unique */
-                const groupKey = `${group.label}-${group.options[0]?.value ?? ""}`;
+          <Listbox.Options
+            id={id}
+            className="aksel-property-filter__popup-inner"
+            aria-multiselectable={options.some((group) =>
+              group.options.some((item) => item.multiSelect),
+            )}
+            /* Options are only virtually focused, so real focus must stay on the input */
+            onMouseDown={(event) => event.preventDefault()}
+          >
+            {options.map((group) => {
+              /* Property- and value-groups can share a label, so include an option to keep keys unique */
+              const groupKey = `${group.label}-${group.options[0]?.value ?? ""}`;
 
-                const groupOptions = group.options.map((item) => (
-                  <AutoSuggestOption
-                    key={item.value}
-                    item={item}
-                    onSelect={onSelect}
-                    hasVirtualFocus={focusedValue === item.value}
-                    autoSuggestValue={autoSuggestValue}
-                  />
-                ));
+              const groupOptions = group.options.map((item) => (
+                <AutoSuggestOption
+                  key={item.value}
+                  item={item}
+                  onSelect={onSelect}
+                  hasVirtualFocus={focusedValue === item.value}
+                  autoSuggestValue={autoSuggestValue}
+                />
+              ));
 
-                /* Groups without a label are rendered as plain options */
-                if (!group.label) {
-                  return (
-                    <React.Fragment key={groupKey}>
-                      {groupOptions}
-                    </React.Fragment>
-                  );
-                }
-
+              /* Groups without a label are rendered as plain options */
+              if (!group.label) {
                 return (
-                  <Listbox.Group key={groupKey} label={group.label}>
-                    {groupOptions}
-                  </Listbox.Group>
+                  <React.Fragment key={groupKey}>{groupOptions}</React.Fragment>
                 );
-              })}
-            </Listbox.Options>
-          </div>
+              }
+
+              return (
+                <Listbox.Group key={groupKey} label={group.label}>
+                  {groupOptions}
+                </Listbox.Group>
+              );
+            })}
+          </Listbox.Options>
         </Floating.Content>
       </DismissableLayer>
     );
