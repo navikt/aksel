@@ -8,19 +8,19 @@ import type {
   AkselShadowToken,
 } from "@navikt/ds-tokens/types";
 import { type OverridableComponent, omit } from "../../utils-external";
-import {
-  PRIMITIVE_PROPS,
-  type PrimitiveProps,
-  useBasePrimitiveProps,
-} from "../../utils/components/base-primitive/BasePrimitive";
-import { getResponsiveProps } from "../../utils/components/base-primitive/helpers/css";
+import { Slot } from "../../utils/components/slot/Slot";
+import { cl } from "../../utils/helpers";
+import { getResponsiveProps } from "../../utils/hooks/base-primitive/helpers/css";
 import type {
   BorderRadiusScale,
   ResponsiveProp,
   SpaceDelimitedAttribute,
-} from "../../utils/components/base-primitive/helpers/types";
-import { Slot } from "../../utils/components/slot/Slot";
-import { cl } from "../../utils/helpers";
+} from "../../utils/hooks/base-primitive/helpers/types";
+import {
+  PRIMITIVE_PROPS,
+  type PrimitiveProps,
+  useBasePrimitiveProps,
+} from "../../utils/hooks/base-primitive/useBasePrimitiveProps";
 import type { AsChildProps } from "../../utils/types";
 
 type BoxProps = React.HTMLAttributes<HTMLDivElement> & {

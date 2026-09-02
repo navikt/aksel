@@ -15,7 +15,7 @@ const TokenTableOfContents = () => {
     <TableOfContents
       feedback={{
         name: "Tokens",
-        text: "GitHub issues",
+        text: "Rapporter bug",
       }}
       toc={toc}
     />
