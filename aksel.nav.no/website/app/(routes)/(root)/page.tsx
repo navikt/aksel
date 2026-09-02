@@ -152,7 +152,6 @@ async function CachedFrontpageContent({
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                               aria-hidden
-                              role="presentation"
                               focusable="false"
                             >
                               <path

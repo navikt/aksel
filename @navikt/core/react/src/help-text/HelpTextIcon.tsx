@@ -14,7 +14,6 @@ export const HelpTextIcon = ({ filled = false }: { filled?: boolean }) => {
         "aksel-help-text__icon--filled": filled,
       })}
       aria-hidden
-      role="presentation"
     >
       <circle
         cx="12"

@@ -162,7 +162,6 @@ const FloatingArrow = ({ width, height, className }: FloatingArrowProps) => {
     >
       <svg
         aria-hidden
-        role="presentation"
         className={className}
         width={width}
         height={height}
