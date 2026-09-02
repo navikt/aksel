@@ -55,7 +55,6 @@ function DemoPictogramOne() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      role="presentation"
     >
       <g clipPath="url(#clip0_6081_198)">
         <rect
