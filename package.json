@@ -124,5 +124,9 @@
     "vite-plugin-turbosnap": "^1.0.3",
     "vitest": "4.1.10"
   },
-  "packageManager": "yarn@4.12.0"
+  "resolutions": {
+    "typescript": "6.0.3"
+  },
+  "_note": "Typescript må tvinges til v6 for at Playroom skal fungere (både dev og build)",
+  "packageManager": "yarn@4.18.0"
 }
