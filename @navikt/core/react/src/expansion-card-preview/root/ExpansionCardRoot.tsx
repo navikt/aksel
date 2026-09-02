@@ -107,6 +107,11 @@ export const ExpansionCard = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
   ) => {
     const ref = useRef<HTMLDetailsElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, ref);
+    const [isMounted, setIsMounted] = React.useState(false);
+
+    React.useEffect(() => {
+      setIsMounted(true);
+    }, []);
 
     return (
       <ExpansionCardProvider size={size}>
@@ -118,6 +123,7 @@ export const ExpansionCard = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
             `aksel-expansioncard--${size}`,
           )}
           data-color={color}
+          data-loaded={isMounted}
           open={open ?? defaultOpen}
           onToggle={composeEventHandlers(onToggle, (event) => {
             const detailsElm = ref.current;

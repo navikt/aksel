@@ -7,6 +7,7 @@
   background-color: var(--ax-bg-softA);
   height: fit-content;
   border: 1px solid var(--ax-border-default);
+  overflow: clip;
 
   &[data-color="neutral"] {
     background-color: var(--ax-bg-raised);
@@ -148,9 +149,13 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
 
 /* -------------------------- ExpansionCard Content ------------------------- */
 
-.aksel-expansioncard::details-content {
-  content-visibility: visible; /* Needed for close transition is Safari, and first open transition in Chrome (not reproducable in SB) */
-  transition: content-visibility allow-discrete 1000ms /* "allow-discrete" needed in Chrome */;
+/**
+ * This is needed for correct width calculation, and for animations to work properly.
+ * We need to wait after the first render to set it, or else text fragments will not work in Chrome.
+ * TODO PROBLEM: Causes layout shift if content is wider than the header and the header is narrower than avail. width.
+*/
+.aksel-expansioncard[data-loaded="true"]::details-content {
+  content-visibility: visible;
 }
 
 .aksel-expansioncard__content {
@@ -163,7 +168,6 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
   transition-duration: 1000ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
   transition-property: visibility, padding, grid-template-rows;
-  overflow: hidden;
 
   .aksel-expansioncard[open] > &,
   &[data-open="true"] {
