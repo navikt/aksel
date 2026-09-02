@@ -124,5 +124,5 @@
     "vite-plugin-turbosnap": "^1.0.3",
     "vitest": "4.1.10"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.18.0"
 }
