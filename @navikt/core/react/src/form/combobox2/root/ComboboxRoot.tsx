@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { createStrictContext } from "../../../utils/helpers";
+import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
 /** Resolves the option type based on whether the parameter is a group or a single option */
@@ -27,7 +28,7 @@ export type ComboboxGroupData<T extends ComboboxOptionData> = {
 export interface ComboboxRootProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
-> {
+> extends Pick<FormFieldProps, "disabled"> {
   children: React.ReactNode;
   /**
    * Can be either an array of options ({@link ComboboxOptionData})
@@ -58,12 +59,13 @@ export interface ComboboxRootContextProps {
   open: boolean;
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
-  options: (ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>)[]; // Can't use generics in contexts
-  selectedOptions: ComboboxOptionData["value"][];
-  onToggleOption: ComboboxOptionProps<ComboboxOptionData>["onToggleOption"]; // Can't use generics in contexts
+  options: ComboboxRootProps["options"];
+  selectedOptions: ComboboxRootProps["selectedOptions"];
+  onToggleOption: ComboboxRootProps["onToggleOption"];
   multiselect: boolean;
   triggerId: string;
-  size: "small" | "medium";
+  size: Exclude<ComboboxRootProps["size"], undefined>;
+  disabled: ComboboxRootProps["disabled"];
 }
 
 export const {
@@ -85,13 +87,14 @@ export function ComboboxRoot<
   multiselect = true,
   triggerId: triggerIdProp,
   size = "medium",
+  disabled,
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(defaultOpen);
   const triggerId = useId(triggerIdProp);
 
   return (
-    <div className="aksel-combobox2" data-size={size}>
+    <div className="aksel-combobox2" data-size={size} data-disabled={disabled}>
       <ComboboxRootContextProvider
         open={open}
         setOpen={setOpen}
@@ -104,6 +107,7 @@ export function ComboboxRoot<
         multiselect={multiselect}
         triggerId={triggerId}
         size={size}
+        disabled={disabled}
       >
         <Floating>{children}</Floating>
       </ComboboxRootContextProvider>

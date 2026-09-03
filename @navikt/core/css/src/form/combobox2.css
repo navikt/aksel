@@ -1,5 +1,10 @@
+.aksel-combobox2[data-disabled="true"] {
+  opacity: var(--ax-opacity-disabled);
+  pointer-events: none;
+}
+
 /************************************************
- * Label & description                          *
+ * Label & description & error                  *
  ************************************************/
 
 .aksel-combobox2__label {
@@ -9,6 +14,10 @@
 
 .aksel-combobox2__description {
   margin-bottom: var(--ax-space-8);
+}
+
+.aksel-combobox2__error {
+  margin-top: var(--ax-space-8);
 }
 
 /************************************************
@@ -59,6 +68,11 @@
     background-color: var(--ax-bg-neutral-moderate);
     border-color: var(--ax-border-neutral-subtleA);
     cursor: default;
+  }
+
+  &[data-error="true"] {
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+    border-color: var(--ax-border-danger-strong);
   }
 }
 

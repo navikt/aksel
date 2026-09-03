@@ -1,8 +1,8 @@
 import React from "react";
-import { BodyShort } from "../../typography";
+import { BodyShort, ErrorMessage } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
-import { useFormField } from "../useFormField";
+import { type FormFieldProps, useFormField } from "../useFormField";
 import { ComboboxField } from "./field/ComboboxField";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
 import { ComboboxLabel } from "./label/ComboboxLabel";
@@ -19,13 +19,12 @@ import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 
 interface ComboboxProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
-> extends Omit<ComboboxRootProps<T>, "children"> {
+>
+  extends Omit<ComboboxRootProps<T>, "children">, Omit<FormFieldProps, "size"> {
   label: string;
-  description?: string;
   hideLabel?: boolean;
-  readOnly?: boolean;
   //name?: string; // TODO: rendre hidden input med valgt(e) verdi(er) hvis satt.
-} // TODO: trolig extend FormFieldProps
+}
 // TODO: extend React.HTMLAttributes<HTMLDivElement>
 
 function Combobox<
@@ -33,25 +32,29 @@ function Combobox<
 >({
   label,
   hideLabel,
-  description,
   size: sizeProp,
+  error,
+  errorId: errorIdProp,
+  disabled: disabledProp,
+  description,
+  //id,
   readOnly: readOnlyProp,
   ...rest
 }: ComboboxProps<T>) {
   const {
     inputProps,
-    //errorId,
-    //showErrorMsg,
-    //hasError,
+    errorId,
+    showErrorMsg,
+    hasError,
     size,
     inputDescriptionId,
     readOnly,
   } = useFormField(
     {
       description,
-      //disabled,
-      //error,
-      //errorId,
+      disabled: disabledProp,
+      error,
+      errorId: errorIdProp,
       //id: rest.triggerId,
       readOnly: readOnlyProp,
       size: sizeProp,
@@ -63,7 +66,12 @@ function Combobox<
   // TODO: Vurder å koble opp label her, slik at vi slipper å ha triggerId prop i ComboboxRoot.
 
   return (
-    <ComboboxRoot size={size} triggerId={inputProps.id} {...rest}>
+    <ComboboxRoot
+      size={size}
+      triggerId={inputProps.id}
+      disabled={inputProps.disabled}
+      {...rest}
+    >
       <ComboboxLabel hide={hideLabel} readOnly={readOnly}>
         {label}
       </ComboboxLabel>
@@ -80,9 +88,25 @@ function Combobox<
           {description}
         </BodyShort>
       )}
-      <ComboboxTrigger readOnly={readOnly} {...omit(inputProps, ["id"])}>
-        <ComboboxField />
+      <ComboboxTrigger
+        readOnly={readOnly}
+        {...omit(inputProps, ["id", "disabled"])}
+      >
+        <ComboboxField hasError={hasError} />
       </ComboboxTrigger>
+      <div
+        className="aksel-form-field__error aksel-combobox2__error"
+        id={errorId}
+        aria-relevant="additions removals"
+        aria-live="polite"
+      >
+        {showErrorMsg && (
+          <ErrorMessage size={size} showIcon>
+            {error}
+          </ErrorMessage>
+        )}
+      </div>
+
       <ComboboxOverlay>
         <ComboboxPopup>
           <ComboboxFilter />

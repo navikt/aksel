@@ -75,12 +75,14 @@ type DefaultProps = Pick<
   | "multiselect"
   | "triggerId"
   | "readOnly"
+  | "disabled"
+  | "error"
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>(
+    [],
+  );
 
   return (
     <Combobox
@@ -105,6 +107,8 @@ Default.args = {
   defaultOpen: false,
   //multiselect: true,
   readOnly: false,
+  disabled: false,
+  error: "",
 };
 Default.argTypes = {
   size: {
@@ -143,6 +147,10 @@ function BaseCombobox<
 export const HideLabel = () => <BaseCombobox hideLabel />;
 
 export const ReadOnly = () => <BaseCombobox readOnly />;
+
+export const Disabled = () => <BaseCombobox disabled />;
+
+export const WithError = () => <BaseCombobox error="Du må velge et land." />;
 
 export const SingleSelect = () => {
   const [selectedOption, setSelectedOption] = useState<MyOption>(countries[0]);
