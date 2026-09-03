@@ -8,7 +8,6 @@ const AkselLogo = (props: React.SVGProps<SVGSVGElement>) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
-    role="presentation"
     {...props}
   >
     <path
