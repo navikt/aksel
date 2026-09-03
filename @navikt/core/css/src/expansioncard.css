@@ -7,6 +7,7 @@
   background-color: var(--ax-bg-softA);
   height: fit-content;
   border: 1px solid var(--ax-border-default);
+  overflow: clip;
 
   &[data-color="neutral"] {
     background-color: var(--ax-bg-raised);
@@ -47,12 +48,19 @@
   background-color: transparent;
   position: relative;
   justify-content: space-between;
+  cursor: pointer;
+
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
 
   &:hover {
     background-color: var(--ax-bg-moderate-hoverA);
   }
 
-  &[data-open="true"] {
+  &[data-open="true"],
+  .aksel-expansioncard[open] > & {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
@@ -106,7 +114,7 @@
   }
 
   /* Makes the whole header clickable */
-  &::after {
+  .aksel-expansioncard__header:not(summary) > &::after {
     inset: 0;
     z-index: 1;
     position: absolute;
@@ -128,16 +136,28 @@
   transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.aksel-expansioncard__header[data-open="true"] .aksel-expansioncard__header-chevron {
+.aksel-expansioncard__header[data-open="true"] .aksel-expansioncard__header-chevron,
+.aksel-expansioncard[open] > .aksel-expansioncard__header .aksel-expansioncard__header-chevron {
   transform: rotateX(-180deg);
 }
 
 /* Even if animation always takes 250ms, the perceived effect of current timing function makes the 'closing'-animation take longer */
-.aksel-expansioncard__header[data-open="false"] .aksel-expansioncard__header-chevron {
+.aksel-expansioncard__header[data-open="false"] .aksel-expansioncard__header-chevron,
+details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-expansioncard__header-chevron {
   transition-duration: 400ms;
 }
 
 /* -------------------------- ExpansionCard Content ------------------------- */
+
+/**
+ * This is needed for correct width calculation, and for animations to work properly.
+ * We need to wait after the first render to set it, or else text fragments will not work in Chrome.
+ * TODO PROBLEM: Causes layout shift if content is wider than the header and the header is narrower than avail. width.
+*/
+.aksel-expansioncard[data-loaded="true"]::details-content {
+  content-visibility: visible;
+}
+
 .aksel-expansioncard__content {
   border-end-end-radius: var(--__axc-expansioncard-border-radius);
   border-end-start-radius: var(--__axc-expansioncard-border-radius);
@@ -145,25 +165,36 @@
   padding-block: 0;
   display: grid;
   grid-template-rows: 0fr;
-  visibility: hidden;
-  transition-duration: 250ms;
+  transition-duration: 1000ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-property: visibility, padding-block, grid-template-rows;
-  overflow: hidden;
+  transition-property: visibility, padding, grid-template-rows;
 
+  .aksel-expansioncard[open] > &,
   &[data-open="true"] {
     grid-template-rows: 1fr;
-    visibility: visible;
     padding-block: var(--__axc-expansioncard-padding-block);
-
-    & .aksel-expansioncard__content-inner {
-      opacity: 1;
-    }
   }
 }
 
 .aksel-expansioncard__content-inner {
   min-height: 0;
   opacity: 0;
-  transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 1000ms cubic-bezier(0.2, 0, 0, 1);
+
+  .aksel-expansioncard[open] &,
+  .aksel-expansioncard__content[data-open="true"] & {
+    opacity: 1;
+  }
+}
+
+.aksel-expansioncard:not(details) {
+  .aksel-expansioncard__content {
+    &[data-open="false"] {
+      visibility: hidden;
+    }
+
+    &[data-open="true"] {
+      visibility: visible;
+    }
+  }
 }
