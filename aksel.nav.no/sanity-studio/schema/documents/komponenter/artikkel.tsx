@@ -137,6 +137,15 @@ export const KomponentArtikkel = defineType({
           hidden: ({ parent }) => !(parent?.tag === "preview"),
         }),
         defineField({
+          name: "preview_note_show_more",
+          title: "Skjul lengre tekst i Preview-notat",
+          description:
+            "Gjør Preview ekspanderbar med en Les mer-knapp. Hvis ikke, vises all tekst i Preview.",
+          type: "boolean",
+          initialValue: true,
+          hidden: ({ parent }) => !(parent?.tag === "preview"),
+        }),
+        defineField({
           name: "internal",
           title: "Interne flater",
           description: "Er komponenten ment for bruk på interne flater?",

@@ -1,4 +1,5 @@
-import { useMemoObservable } from "react-rx";
+import { useMemo } from "react";
+import { useObservable } from "react-rx";
 import {
   type FieldProps,
   type SanityDocument,
@@ -19,13 +20,16 @@ export function InnholdstypeHighlight(props: FieldProps) {
   const innholdstype = useFormValue(["innholdstype"]) as { _ref: string };
 
   const documentStore = useDocumentStore();
-  const result: InnholdstypeT = useMemoObservable(() => {
+
+  const observable = useMemo(() => {
     return documentStore.listenQuery(
       `*[_type == 'gp.innholdstype' && _id == $ref && !(_id in path("drafts.**"))][0]{...}`,
       { ref: innholdstype?._ref ?? "" },
       {},
     );
-  }, [documentStore, innholdstype]);
+  }, [documentStore, innholdstype?._ref]);
+
+  const result: InnholdstypeT = useObservable(observable, null);
 
   if (!result) {
     return props.renderDefault(props);

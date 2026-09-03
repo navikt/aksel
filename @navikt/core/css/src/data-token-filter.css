@@ -35,6 +35,40 @@
   max-height: calc(var(--__axc-floating-available-height) - 4px);
 }
 
+.aksel-property-filter__tag {
+  white-space: nowrap;
+}
+
+.aksel-property-filter__option {
+  flex: 1;
+  min-width: 0;
+}
+
+.aksel-property-filter__highlight {
+  /* background-color: var(--ax-bg-sunken); */
+  background: transparent;
+  color: var(--ax-text-accent-subtle);
+  font-weight: 700;
+}
+
+.aksel-property-filter__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: var(--ax-radius-2);
+  background-color: var(--ax-bg-input);
+  box-shadow: inset 0 0 0 1px var(--ax-border-strong);
+  color: var(--ax-text-contrast);
+
+  [aria-selected="true"] > * > & {
+    background-color: var(--ax-bg-strong-pressed);
+    box-shadow: none;
+  }
+}
+
 .aksel-property-filter__input {
   max-inline-size: 640px;
 }

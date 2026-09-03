@@ -86,9 +86,11 @@ export interface ShowMoreProps extends Omit<
    * ShowMore.Button, ShowMore.Heading and/or ShowMore.Content components.
    * ShowMore.Content is required.
    */
-  children: ReactElement<
-    typeof ShowMoreHeading | typeof ShowMoreContent | typeof ShowMoreButton
-  >[];
+  children:
+    | ReactElement<
+        typeof ShowMoreHeading | typeof ShowMoreContent | typeof ShowMoreButton
+      >[]
+    | React.ReactNode;
   /**
    * Hide the collapse button after expanding to show the full content.
    * @default false

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "mcp-server/**"
+      - "apps/mcp-server/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,24 +33,23 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test mcp-server
-        run: cd mcp-server && yarn test
+        run: cd apps/mcp-server && yarn test
 
       - name: Build mcp-server
-        run: cd mcp-server && yarn build
+        run: cd apps/mcp-server && yarn build
 
       - name: Build and push Docker image
         uses: nais/docker-build-push@v0
         id: docker-push
         with:
           team: designsystem
-          dockerfile: mcp-server/Dockerfile
+          dockerfile: apps/mcp-server/Dockerfile
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Deploy to prod-gcp
-        uses: nais/deploy/actions/deploy@master
+        uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: mcp-server/.nais/app.yaml
+          RESOURCE: apps/mcp-server/.nais/app.yaml
           CLUSTER: prod-gcp
           IMAGE: ${{ steps.docker-push.outputs.image }}

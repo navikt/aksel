@@ -162,7 +162,6 @@ const FloatingArrow = ({ width, height, className }: FloatingArrowProps) => {
     >
       <svg
         aria-hidden
-        role="presentation"
         className={className}
         width={width}
         height={height}
@@ -197,17 +196,61 @@ const {
 type Boundary = Element | null;
 
 interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * The preferred side of the floating content relative to its reference element.
+   * @default "bottom"
+   */
   side?: Side;
+  /**
+   * The offset distance from the preferred side of the floating content.
+   * @default 0
+   */
   sideOffset?: number;
+  /**
+   * The alignment of the floating content relative to its reference element.
+   * @default "center"
+   */
   align?: Align;
+  /**
+   * The offset distance from the aligned position of the floating content.
+   * @default 0
+   */
   alignOffset?: number;
+  /**
+   * Whether to avoid collisions with the viewport or other boundaries.
+   * @default true
+   */
   avoidCollisions?: boolean;
+  /**
+   * The boundary element(s) used for collision detection.
+   */
   collisionBoundary?: Boundary | Boundary[];
+  /**
+   * The padding to apply around the collision boundary(s) for collision detection.
+   * @default 0
+   */
   collisionPadding?: number | Partial<Record<Side, number>>;
+  /**
+   * Whether to hide the floating content when it is detached from its reference element. Often when reference element is scrolled outside the viewport.
+   * @default false
+   */
   hideWhenDetached?: boolean;
+  /**
+   * The strategy to use for updating the position of the floating content.
+   * "optimized" will update the position only when necessary, while "always" will update it on every frame.
+   */
   updatePositionStrategy?: "optimized" | "always";
+  /**
+   * The fallback placements to use when the preferred placement is not available.
+   */
   fallbackPlacements?: FlipOptions["fallbackPlacements"];
+  /**
+   * The fallback axis side direction to use when the preferred placement is not available.
+   */
   fallbackAxisSideDirection?: FlipOptions["fallbackAxisSideDirection"];
+  /**
+   * Callback function that is called when the floating content has been placed.
+   */
   onPlaced?: () => void;
   /**
    * @default true

@@ -15,7 +15,7 @@ describe("Testing extractArgs function", () => {
   });
 
   test("extractArgs should parse args from codesnippet", () => {
-    const code = `export const args = {
+    const code = `export const args: ExampleArgsT = {
         title: "Tittel",
         desc: "Description",
         index: 2
@@ -31,7 +31,7 @@ describe("Testing extractArgs function", () => {
   });
 
   test("extractArgs should parse args with markdown links", () => {
-    const code = `export const args = {
+    const code = `export const args: ExampleArgsT = {
       index: 10,
       desc: "[OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent)... '<a>'-tag, ... '<Link>'-komponent.",
     };`;

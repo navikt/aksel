@@ -8,7 +8,7 @@ import { useDeferredValue } from "../../hooks/useDeferredValue";
 import { HighlightText } from "../HighlightText/HighlightText";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
 import { Floating } from "../floating/Floating";
-import Listbox from "./root/ListboxRoot";
+import { Listbox } from "./root/ListboxRoot";
 
 const meta: Meta<typeof Listbox> = {
   title: "utilities/Listbox",
@@ -73,10 +73,7 @@ const RenderItems = ({
 }: RenderItemsProps) =>
   items.map((itemOrGroup) =>
     "items" in itemOrGroup ? (
-      <Listbox.Group
-        key={itemOrGroup.label}
-        label={<em>{itemOrGroup.label}</em>}
-      >
+      <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
         {itemOrGroup.items.map((item) => (
           <Listbox.Option
             key={item.value}
@@ -84,7 +81,6 @@ const RenderItems = ({
             onClick={() => onSelect(item)}
             aria-selected={selectedItems.includes(item.value)}
             hasVirtualFocus={virtuallyFocusedOptionId === item.value}
-            style={{ paddingLeft: "1em" }}
           >
             <HighlightText text={filterString}>{item.label}</HighlightText>
             {selectedItems.includes(item.value) && <Checkmark />}

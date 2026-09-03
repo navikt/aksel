@@ -16,6 +16,5 @@ export type SidebarGroupedPagesT = {
 };
 
 export type DesignsystemSidebarSectionT = (
-  | SidebarPageT
-  | SidebarGroupedPagesT
+  SidebarPageT | SidebarGroupedPagesT
 )[];

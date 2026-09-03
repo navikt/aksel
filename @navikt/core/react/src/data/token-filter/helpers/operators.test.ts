@@ -1,11 +1,52 @@
 import { describe, expect, test } from "vitest";
-import type { InternalPropertyDefinition } from "../TokenFilter.types";
+import type {
+  ExternalPropertyOperator,
+  InternalPropertyDefinition,
+} from "../TokenFilter.types";
 import {
   QUERY_OPERATORS,
+  getOperatorType,
   matchFilteringProperty,
   matchOperator,
   matchOperatorPrefix,
 } from "./operators";
+
+describe("getOperatorType", () => {
+  const createProperty = (
+    operators: ExternalPropertyOperator[],
+  ): InternalPropertyDefinition => ({
+    key: "status",
+    label: "Status",
+    groupLabel: "",
+    group: "",
+    operators,
+    externalProperty: { key: "status", label: "Status", operators },
+  });
+
+  test("should return the configured type", () => {
+    const property = createProperty([
+      { operator: "=", type: "multiple" },
+      { operator: "!=", type: "single" },
+    ]);
+
+    expect(getOperatorType(property, "=")).toBe("multiple");
+    expect(getOperatorType(property, "!=")).toBe("single");
+  });
+
+  test("should default to single for string operators", () => {
+    expect(getOperatorType(createProperty(["="]), "=")).toBe("single");
+  });
+
+  test("should default to single when the operator is not configured", () => {
+    expect(getOperatorType(createProperty([]), "=")).toBe("single");
+    expect(
+      getOperatorType(
+        createProperty([{ operator: "=", type: "multiple" }]),
+        ":",
+      ),
+    ).toBe("single");
+  });
+});
 
 describe("QUERY_OPERATORS", () => {
   test("should return QUERY_OPERATORS in specificity order", () => {

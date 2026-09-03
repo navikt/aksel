@@ -46,9 +46,15 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const isComponentPage = data?._type === "komponent_artikkel";
 
   return (
-    <Box marginBlock="space-0 space-28" data-color={statusTag?.colorRole}>
+    <Box
+      marginBlock={`space-0 ${isComponentPage ? "space-28" : "space-0"}`}
+      data-color={statusTag?.colorRole}
+    >
       <DesignsystemetEyebrow type={data?._type} />
-      <Box marginBlock="space-0 space-8" asChild>
+      <Box
+        marginBlock={`space-0 ${isComponentPage ? "space-8" : "space-0"}`}
+        asChild
+      >
         <Heading
           level="1"
           size="xlarge"

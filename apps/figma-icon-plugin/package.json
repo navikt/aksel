@@ -1,0 +1,33 @@
+{
+  "name": "aksel-icons-figma-plugin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite -c ./vite.config.ui.ts",
+    "build:icon-plugin": "tsc && npm run build:ui && npm run build:plugin",
+    "build:ui": "vite build -c ./vite.config.ui.ts --emptyOutDir",
+    "build:plugin": "vite build -c ./vite.config.plugin.ts",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@navikt/aksel-icons": "^8.16.2",
+    "@navikt/ds-css": "^8.16.2",
+    "@navikt/ds-react": "^8.16.2",
+    "fuse.js": "^7.4.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.131.0",
+    "@rollup/pluginutils": "^5.4.0",
+    "@svgr/core": "^8.1.0",
+    "@types/node": "^24.10.9",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "^6.0.5",
+    "typescript": "6.0.3",
+    "vite": "^8.1.5",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}

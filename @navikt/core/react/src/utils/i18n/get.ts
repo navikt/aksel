@@ -1,15 +1,12 @@
 import type { PartialTranslations } from "./i18n.types";
 
-/**
- * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3
- */
-const OBJECT_NOTATION_MATCHER = /(\w+)/g;
+// Based on https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts
 
 export function get(
-  keypath: string | string[],
+  keypath: string,
   objs: (PartialTranslations | undefined)[],
 ) {
-  const keys = Array.isArray(keypath) ? keypath : getKeypath(keypath);
+  const keys = keypath.split(".");
 
   for (const obj of objs) {
     if (!obj) {
@@ -34,25 +31,4 @@ export function get(
   throw new Error(
     `Error translating key. Keypath '${keypath}' does not resolve to a string.`,
   );
-}
-
-const keypathCache = new Map<string, string[]>();
-
-function getKeypath(str: string) {
-  const cached = keypathCache.get(str);
-  if (cached) {
-    return cached;
-  }
-
-  const path: string[] = [];
-  let result = OBJECT_NOTATION_MATCHER.exec(str);
-
-  while (result) {
-    const [, first, second] = result;
-    path.push(first || second);
-    result = OBJECT_NOTATION_MATCHER.exec(str);
-  }
-
-  keypathCache.set(str, path);
-  return path;
 }

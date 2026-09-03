@@ -72,8 +72,8 @@ const nextConfig: NextConfig = {
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
     PRODUCTION: isProduction ? "true" : "false",
   },
+
   cacheHandler: require.resolve("./cache-handler.mjs"),
-  cacheMaxMemorySize: 0,
 
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {

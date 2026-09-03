@@ -52,7 +52,6 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
           fill="none"
           focusable={false}
           aria-hidden
-          role="presentation"
           className="aksel-checkbox__icon"
         >
           <path
