@@ -1,9 +1,9 @@
 ---
-description: "Website and playroom."
-applyTo: "aksel.nav.no/website/**, aksel.nav.no/playroom/**"
+description: "Website."
+applyTo: "aksel.nav.no/website/**"
 ---
 
-# Website and playroom instructions
+# Website
 
 - Stay in router already used nearby; don't mix `app/`/`pages/`.
 - `pages/eksempler/**` and `pages/templates/**`: only import from `@navikt/*` and `react`.
