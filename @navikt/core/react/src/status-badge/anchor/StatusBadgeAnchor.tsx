@@ -23,7 +23,7 @@ interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> {
  * ```jsx
  * <StatusBadge.Anchor placement="top-right">
  *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
- *   <StatusBadge data-color="danger">42</StatusBadge>
+ *   <StatusBadge data-color="danger" aria-hidden>42</StatusBadge>
  * </StatusBadge.Anchor>
  * ```
  */

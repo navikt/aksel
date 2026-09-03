@@ -29,7 +29,6 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
       "data-color": color = "danger",
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
-      title,
       role,
       pulse = false,
       "aria-hidden": ariaHidden,
@@ -37,9 +36,8 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     },
     ref,
   ) => {
-    const isDot = children == null || children === "";
-    const hasLabel =
-      ariaLabel != null || ariaLabelledby != null || title != null;
+    const isDot = React.Children.toArray(children).length === 0;
+    const hasLabel = ariaLabel != null || ariaLabelledby != null;
     const isDecorative = isDot && !hasLabel;
 
     return (
@@ -50,14 +48,12 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         size="small"
         data-color={color}
         data-pulse={pulse || undefined}
+        data-dot={isDot || undefined}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
-        title={title}
         role={role ?? (hasLabel ? "img" : undefined)}
         aria-hidden={ariaHidden ?? (isDecorative || undefined)}
-        className={cl("aksel-status-badge", className, {
-          "aksel-status-badge--dot": isDot,
-        })}
+        className={cl("aksel-status-badge", className)}
       >
         {children}
       </BodyShort>
@@ -96,9 +92,15 @@ const StatusBadge = Object.assign(StatusBadgeRoot, {
   /**
    * Positions a `StatusBadge` in a corner of another element.
    *
-   * @see 🏷️ {@link StatusBadgeAnchorProps}
+   * @see 🏷️ {@link StatusBadgeAnchor.Props}
    *
    * @example
+   * ```
+   * <StatusBadge.Anchor placement="top-right">
+   *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
+   *   <StatusBadge data-color="danger" aria-hidden>42</StatusBadge>
+   * </StatusBadge.Anchor>
+   * ```
    */
   Anchor: StatusBadgeAnchor,
 });

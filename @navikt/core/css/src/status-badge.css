@@ -19,6 +19,7 @@
   border-radius: var(--ax-radius-16);
   background: var(--ax-bg-strong);
   color: var(--ax-text-contrast);
+  white-space: nowrap;
 
   @media (forced-colors: active) {
     forced-color-adjust: none;
@@ -35,6 +36,11 @@
     background-color: var(--ax-bg-strong);
     opacity: 0.6;
     animation: status-badge-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+      background-color: canvastext;
+    }
   }
 }
 
@@ -51,13 +57,6 @@
   }
 }
 
-.aksel-status-badge--dot {
-  --__axc-status-badge-size: var(--ax-space-12);
-
-  min-width: var(--__axc-status-badge-size);
-  padding-inline: 0;
-}
-
 .aksel-status-badge__anchor > .aksel-status-badge {
   --__axc-status-badge-size: 1rem;
 
@@ -65,12 +64,13 @@
   z-index: 1;
   padding-inline: var(--ax-space-4);
   outline: 1px solid var(--ax-bg-default);
+  line-height: 1;
+}
 
-  &.aksel-status-badge--dot {
-    --__axc-status-badge-size: var(--ax-space-12);
+.aksel-status-badge[data-dot] {
+  --__axc-status-badge-size: 0.75rem;
 
-    padding-inline: 0;
-  }
+  padding-inline: 0;
 }
 
 .aksel-status-badge__anchor[data-placement="top-right"] > .aksel-status-badge {
