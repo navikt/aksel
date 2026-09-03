@@ -3,7 +3,7 @@ import { cl } from "../../utils/helpers";
 
 interface StatusBadgeAnchorProps extends HTMLAttributes<HTMLSpanElement> {
   /**
-   * The anchored element followed by a `StatusBadge`.
+   * The anchor element followed by a `StatusBadge`.
    * The `StatusBadge` is positioned in the corner given by `placement`.
    */
   children: React.ReactNode;

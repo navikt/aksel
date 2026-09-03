@@ -94,8 +94,12 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
  */
 const StatusBadge = Object.assign(StatusBadgeRoot, {
   /**
+   * Positions a `StatusBadge` in a corner of another element.
+   *
    * @see 🏷️ {@link StatusBadgeAnchorProps}
-   */
+   *
+   * @example
+   * 
   Anchor: StatusBadgeAnchor,
 });
 

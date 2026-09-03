@@ -102,7 +102,6 @@ export const Pulse: Story = {
 };
 
 export const Chromatic = renderStoriesForChromatic({
-  Default,
   Count,
   Dot,
   Anchored,
