@@ -9,13 +9,11 @@ interface ComboboxTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElem
    */
   children: React.ReactNode;
   readOnly?: boolean;
-  disabled?: boolean;
 }
 
 const ComboboxTrigger = ({
   children,
   readOnly,
-  disabled,
   ...rest
 }: ComboboxTriggerProps) => {
   const rootContext = useComboboxRootContext();
@@ -42,8 +40,7 @@ const ComboboxTrigger = ({
         id={rootContext.triggerId}
         data-readonly={readOnly}
         aria-readonly={readOnly} // TODO: Vurder
-        // @ts-expect-error Slot only accepts generic HTML attributes
-        disabled={disabled}
+        disabled={rootContext.disabled}
         {...rest}
       >
         {children}
