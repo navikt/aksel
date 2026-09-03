@@ -32,6 +32,7 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
       title,
       role,
       pulse = false,
+      "aria-hidden": ariaHidden,
       ...rest
     },
     ref,
@@ -53,7 +54,7 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         aria-labelledby={ariaLabelledby}
         title={title}
         role={role ?? (hasLabel ? "img" : undefined)}
-        aria-hidden={isDecorative || undefined}
+        aria-hidden={ariaHidden ?? (isDecorative || undefined)}
         className={cl("aksel-status-badge", className, {
           "aksel-status-badge--dot": isDot,
         })}
@@ -70,9 +71,8 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
  * Use standalone for inline status/counts, or place it inside
  * `StatusBadge.Anchor` to pin it to a corner of another element.
  *
- * Accessibility: labelling props (`aria-label`, `aria-labelledby`, `role`,
- * `title`) are applied to the badge element. A dot with no label is treated
- * as decorative and hidden from assistive technology. When anchoring to an
+ * Accessibility: A dot with no label is treated as decorative and
+ * hidden from assistive technology. When anchoring to an
  * interactive element, prefer folding the status into that element's
  * accessible name (e.g. `aria-label="Innboks, 42 nye meldinger"`).
  *
@@ -88,7 +88,7 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
  * // Anchored to an element
  * <StatusBadge.Anchor placement="top-right">
  *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
- *   <StatusBadge data-color="danger">42</StatusBadge>
+ *   <StatusBadge data-color="danger" aria-hidden>42</StatusBadge>
  * </StatusBadge.Anchor>
  * ```
  */
@@ -99,7 +99,7 @@ const StatusBadge = Object.assign(StatusBadgeRoot, {
    * @see 🏷️ {@link StatusBadgeAnchorProps}
    *
    * @example
-   * 
+   */
   Anchor: StatusBadgeAnchor,
 });
 
@@ -109,7 +109,7 @@ export namespace StatusBadge {
 
   // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace Anchor {
-    // biome-ignore lint/nursery/noShadow: intentional namespace re-export
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = StatusBadgeAnchor.Props;
   }
 }
