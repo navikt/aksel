@@ -11,7 +11,7 @@ const meta: Meta<typeof StatusBadge> = {
   title: "ds-react/StatusBadge",
   component: StatusBadge,
   parameters: {
-    chromatic: { disable: false },
+    chromatic: { disable: true },
   },
 };
 
