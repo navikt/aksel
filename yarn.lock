@@ -5403,19 +5403,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/next-logger@npm:4.4.1":
-  version: 4.4.1
-  resolution: "@navikt/next-logger@npm:4.4.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F4.4.1%2Fad036ed76a3c856de885e680e243a8c847787706"
+"@navikt/next-logger@npm:5.0.1":
+  version: 5.0.1
+  resolution: "@navikt/next-logger@npm:5.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F5.0.1%2F9b62906c0f9db26caae24c314197f3e33f016474"
   dependencies:
-    "@navikt/pino-logger": "npm:^4.4.1"
-    pino-roll: "npm:3"
+    "@navikt/pino-logger": "npm:^5.0.1"
   peerDependencies:
     next: 14 || 15 || 16
     pino: 8 || 9 || 10
-  dependenciesMeta:
-    pino-roll:
-      optional: true
-  checksum: 10/7ff09d6cd7bf67c9b61ca4a3b336984b63659816de3be8840c3c445d5408a2ab999bb815fbdc5cb63cf59db76bf33c40b68c4edb3686f9a8fa377de1b4257e8c
+  checksum: 10/dc71498215610598c9f0ac2df73fe4dc013b9571ae90695d3968614c5a2d4e7bdd083f35d80ad7abf4f69490808ec39d47d1bc96d1e8cee8ca56c9a47cdee35e
   languageName: node
   linkType: hard
 
@@ -5431,18 +5427,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/pino-logger@npm:^4.4.1":
-  version: 4.5.1
-  resolution: "@navikt/pino-logger@npm:4.5.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F4.5.1%2F761f1f0fdc9c5274960c259c0a3213b3989b5927"
+"@navikt/pino-logger@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@navikt/pino-logger@npm:5.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F5.0.1%2F819f7f398e4378c014dd39f704c26f691a0915a1"
   dependencies:
-    "@opentelemetry/api": "npm:^1.9.0"
-    pino-socket: "npm:7.4.0"
+    "@opentelemetry/api": "npm:^1.9.1"
+    pino-socket: "npm:8.0.0"
   peerDependencies:
     pino: 8 || 9 || 10
   dependenciesMeta:
     pino-socket:
       optional: true
-  checksum: 10/32093fd4b7703c9deede10b9730603ad19d02643a26bc628b884d9f7594786938754b80823eca12fa50506d58fa6058962f21d352fac69f1f672442917c01c1c
+  checksum: 10/6350de289e59e1a89e4b2d41e93ae31ae8a901cd5eb77d7d9e8899fd8ac497529abc4cbad50a6c2984c61cc94a16cafa89d7cbf9b0d3f2d63978151b4c45621e
   languageName: node
   linkType: hard
 
@@ -5772,7 +5768,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0":
+"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0, @opentelemetry/api@npm:^1.9.1":
   version: 1.9.1
   resolution: "@opentelemetry/api@npm:1.9.1"
   checksum: 10/b26032739d3c54ca99b5a2920844a1fbd4c3ee383cacbb0915e8c706a2626fe91e96feaa6e893397abe0545dc8d0a765b220aa18a31b1773176eeaf3a225e10e
@@ -6446,6 +6442,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@portabletext/react@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@portabletext/react@npm:7.0.1"
+  dependencies:
+    "@portabletext/toolkit": "npm:^5.0.2"
+    "@portabletext/types": "npm:^4.0.2"
+  peerDependencies:
+    react: ^19
+  checksum: 10/c5b5817332a759ccb6808b410f2a33998a0daf56f1882fa5552433fbf5b1637b22283307361def4c6924febe77a98aadb7a51ff9d0895d5132c27c17eeebc247
+  languageName: node
+  linkType: hard
+
 "@portabletext/sanity-bridge@npm:^3.1.1, @portabletext/sanity-bridge@npm:^3.2.5":
   version: 3.2.5
   resolution: "@portabletext/sanity-bridge@npm:3.2.5"
@@ -6965,7 +6973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:^7.13.2, @sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1, @sanity/client@npm:^7.23.0, @sanity/client@npm:^7.23.1, @sanity/client@npm:^7.25.0, @sanity/client@npm:^7.26.2":
+"@sanity/client@npm:^7.13.2, @sanity/client@npm:^7.22.0, @sanity/client@npm:^7.22.1, @sanity/client@npm:^7.23.0, @sanity/client@npm:^7.25.0, @sanity/client@npm:^7.26.2":
   version: 7.26.2
   resolution: "@sanity/client@npm:7.26.2"
   dependencies:
@@ -7451,7 +7459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/preview-url-secret@npm:^4.0.4, @sanity/preview-url-secret@npm:^4.0.7, @sanity/preview-url-secret@npm:^4.0.8, @sanity/preview-url-secret@npm:^4.1.2":
+"@sanity/preview-url-secret@npm:^4.0.4, @sanity/preview-url-secret@npm:^4.0.7, @sanity/preview-url-secret@npm:^4.1.2":
   version: 4.1.5
   resolution: "@sanity/preview-url-secret@npm:4.1.5"
   dependencies:
@@ -7778,7 +7786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/visual-editing@npm:^5.5.0":
+"@sanity/visual-editing@npm:^5.7.3":
   version: 5.7.3
   resolution: "@sanity/visual-editing@npm:5.7.3"
   dependencies:
@@ -10189,10 +10197,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abbrev@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "abbrev@npm:2.0.0"
-  checksum: 10/ca0a54e35bea4ece0ecb68a47b312e1a9a6f772408d5bcb9051230aaa94b0460671c5b5c9cb3240eb5b7bc94c52476550eb221f65a0bbd0145bdc9f3113a6707
+"abbrev@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "abbrev@npm:4.0.0"
+  checksum: 10/e2f0c6a6708ad738b3e8f50233f4800de31ad41a6cdc50e0cbe51b76fed69fd0213516d92c15ce1a9985fca71a14606a9be22bf00f8475a58987b9bfb671c582
   languageName: node
   linkType: hard
 
@@ -15553,7 +15561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groq@npm:^6.0.0, groq@npm:^6.5.0":
+"groq@npm:^6.0.0, groq@npm:^6.7.0":
   version: 6.11.0
   resolution: "groq@npm:6.11.0"
   checksum: 10/0b03d2a7f240961e0efbfeca6f6c7b04861ad260308fbfc51601317aeeceab86f408c83ce33f051231e38892922ff56ba361f1dc728a115da5117bf23eda9cbb
@@ -19348,26 +19356,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:13.1.3":
-  version: 13.1.3
-  resolution: "next-sanity@npm:13.1.3"
+"next-sanity@npm:13.2.3":
+  version: 13.2.3
+  resolution: "next-sanity@npm:13.2.3"
   dependencies:
-    "@portabletext/react": "npm:^6.2.0"
-    "@sanity/client": "npm:^7.23.1"
+    "@portabletext/react": "npm:^7.0.1"
+    "@sanity/client": "npm:^7.25.0"
     "@sanity/generate-help-url": "npm:^4.0.0"
-    "@sanity/preview-url-secret": "npm:^4.0.8"
-    "@sanity/visual-editing": "npm:^5.5.0"
+    "@sanity/preview-url-secret": "npm:^4.1.2"
+    "@sanity/visual-editing": "npm:^5.7.3"
     "@sanity/webhook": "npm:^4.0.4"
-    groq: "npm:^6.5.0"
+    groq: "npm:^6.7.0"
     history: "npm:^5.3.0"
   peerDependencies:
-    "@sanity/client": ^7.23.1
+    "@sanity/client": ^7.25.0
     next: ^16.0.0-0
     react: ^19.2.3
     react-dom: ^19.2.3
     sanity: ^5.29.0 || ^6.0.0
     styled-components: ^6.1
-  checksum: 10/7135219416849d253a10b462bfb6a161a7e7267949e74e37f5121ceafedcf2d17049a57ec347e057e4c3e0642c273dde9418a48be51e98d65a67073922a38928
+  checksum: 10/5f5273d24949622d637f66e8c1e1819bf0dd298bf4ee2a25893de5aaf19c9750d923c2c38dac418a496939af2510a40f1bbd187dffb24bff73bf43f620366caf
   languageName: node
   linkType: hard
 
@@ -19562,14 +19570,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nopt@npm:^7.0.0":
-  version: 7.2.1
-  resolution: "nopt@npm:7.2.1"
+"nopt@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "nopt@npm:9.0.0"
   dependencies:
-    abbrev: "npm:^2.0.0"
+    abbrev: "npm:^4.0.0"
   bin:
     nopt: bin/nopt.js
-  checksum: 10/95a1f6dec8a81cd18cdc2fed93e6f0b4e02cf6bdb4501c848752c6e34f9883d9942f036a5e3b21a699047d8a448562d891e67492df68ec9c373e6198133337ae
+  checksum: 10/56a1ccd2ad711fb5115918e2c96828703cddbe12ba2c3bd00591758f6fa30e6f47dd905c59dbfcf9b773f3a293b45996609fb6789ae29d6bfcc3cf3a6f7d9fda
   languageName: node
   linkType: hard
 
@@ -20621,28 +20629,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-roll@npm:3":
-  version: 3.1.0
-  resolution: "pino-roll@npm:3.1.0"
-  dependencies:
-    date-fns: "npm:^4.1.0"
-    sonic-boom: "npm:^4.0.1"
-  checksum: 10/e194cd896f6e0d53c44e0a669afd516d9a0fc082eab4be005bf611a8265e5da75c2fa6373f89844f7ca6521b8b8d0533326147c88d380df92604b153991915df
-  languageName: node
-  linkType: hard
-
-"pino-socket@npm:7.4.0":
-  version: 7.4.0
-  resolution: "pino-socket@npm:7.4.0"
+"pino-socket@npm:8.0.0":
+  version: 8.0.0
+  resolution: "pino-socket@npm:8.0.0"
   dependencies:
     backoff: "npm:^2.5.0"
-    nopt: "npm:^7.0.0"
+    nopt: "npm:^9.0.0"
     pump: "npm:^3.0.0"
     split2: "npm:^4.0.0"
     through2: "npm:^4.0.2"
   bin:
     pino-socket: psock.js
-  checksum: 10/e26144400b2d75f5547f10898102aecbcc52355b5069587bea5bb5e1e431c2a8b0dd24cd6d623a21e34c62e0ff12883f4ebf185ad151cd6e9e2c7862cf9cece7
+  checksum: 10/4651c3109f4365ba3659bb50d89b8506840b28c57a5a720db8e0ddc0a610e2de86317bdd0a37f3353445e1c075f3ef0742ad20fd5f69a4d8b19071768599e00c
   languageName: node
   linkType: hard
 
@@ -26216,7 +26214,7 @@ __metadata:
     "@fortedigital/nextjs-cache-handler": "npm:^3.3.0"
     "@google-cloud/bigquery": "npm:^9.0.2"
     "@navikt/analytics-types": "npm:0.0.9"
-    "@navikt/next-logger": "npm:4.4.1"
+    "@navikt/next-logger": "npm:5.0.1"
     "@navikt/oasis": "npm:4.1.4"
     "@next/bundle-analyzer": "npm:16.2.6"
     "@next/eslint-plugin-next": "npm:16.2.6"
@@ -26253,7 +26251,7 @@ __metadata:
     lz-string: "npm:^1.5.0"
     next: "npm:16.2.11"
     next-logger: "npm:^5.0.2"
-    next-sanity: "npm:13.1.3"
+    next-sanity: "npm:13.2.3"
     next-themes: "npm:^0.4.6"
     pino: "npm:^10.3.1"
     pino-pretty: "npm:^13.1.3"
