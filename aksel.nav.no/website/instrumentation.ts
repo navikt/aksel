@@ -11,5 +11,10 @@ export async function register(): Promise<void> {
      * and needs to be initialized as early as possible. We use next's instrumentation hooks for this.
      */
     await require("next-logger");
+
+    const { registerInitialCache } =
+      await import("@fortedigital/nextjs-cache-handler/instrumentation");
+    const CacheHandler = (await import("./cache-handler.mjs")).default;
+    await registerInitialCache(CacheHandler);
   }
 }

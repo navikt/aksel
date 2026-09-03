@@ -1,5 +1,5 @@
-import { CacheHandler } from "@neshca/cache-handler";
-import createLruHandler from "@neshca/cache-handler/local-lru";
+import { CacheHandler } from "@fortedigital/nextjs-cache-handler";
+import createLruHandler from "@fortedigital/nextjs-cache-handler/local-lru";
 
 CacheHandler.onCreation(async () => {
   const handler = createLruHandler();
