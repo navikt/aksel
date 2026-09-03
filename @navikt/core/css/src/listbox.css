@@ -17,8 +17,15 @@
   }
 
   .aksel-listbox__options > &:last-child,
-  .aksel-listbox__group:last-child > &:last-child {
+  .aksel-listbox__group:last-child &:last-child {
     margin-bottom: var(--ax-space-2);
+  }
+
+  .aksel-listbox__group:first-child &:nth-child(1 of &) {
+    /* Scroll to the very top when we scrollIntoView() the first option
+    if it's in a group, so that you can see the group label.
+    We exaggerate the value to take into account custom content. */
+    scroll-margin-top: 60px;
   }
 }
 
