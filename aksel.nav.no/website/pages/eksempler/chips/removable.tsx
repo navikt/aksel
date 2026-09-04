@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "Removable-varianten viser valgte verdier som brukeren kan fjerne, for eksempel valgte filter eller verdier som brukeren har skrevet i et tekstfelt.",
+  desc: "Removable-varianten viser valgte verdier som brukeren kan fjerne, for eksempel valgte filtre eller verdier som brukeren har skrevet i et tekstfelt.",
 };
