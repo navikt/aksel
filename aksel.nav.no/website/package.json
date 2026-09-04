@@ -40,7 +40,7 @@
     "aksel-sanity-studio": "workspace:*",
     "codesandbox-import-utils": "^2.2.3",
     "date-fns": "^4.0.0",
-    "fuse.js": "^7.4.2",
+    "fuse.js": "7.4.2",
     "isomorphic-dompurify": "2.26.0",
     "jscodeshift": "17.4.0",
     "lodash": "4.18.1",
