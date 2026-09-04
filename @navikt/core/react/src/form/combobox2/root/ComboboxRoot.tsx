@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { createStrictContext } from "../../../utils/helpers";
 import type { FormFieldProps } from "../../useFormField";
@@ -42,7 +41,6 @@ export interface ComboboxRootProps<
   onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"]; // TODO: Vurder å tilby onChange som returnerer valgte verdier
   defaultOpen?: boolean;
   multiselect?: boolean; // TODO: Vurder annet navn
-  triggerId?: string;
   /**
    * @default "medium"
    */
@@ -63,7 +61,6 @@ export interface ComboboxRootContextProps {
   selectedOptions: ComboboxRootProps["selectedOptions"];
   onToggleOption: ComboboxRootProps["onToggleOption"];
   multiselect: boolean;
-  triggerId: string;
   size: Exclude<ComboboxRootProps["size"], undefined>;
   disabled: ComboboxRootProps["disabled"];
 }
@@ -85,13 +82,11 @@ export function ComboboxRoot<
   onToggleOption,
   defaultOpen = false,
   multiselect = true,
-  triggerId: triggerIdProp,
   size = "medium",
   disabled,
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(defaultOpen);
-  const triggerId = useId(triggerIdProp);
 
   return (
     <div className="aksel-combobox2" data-size={size} data-disabled={disabled}>
@@ -105,7 +100,6 @@ export function ComboboxRoot<
           onToggleOption as ComboboxRootContextProps["onToggleOption"]
         }
         multiselect={multiselect}
-        triggerId={triggerId}
         size={size}
         disabled={disabled}
       >

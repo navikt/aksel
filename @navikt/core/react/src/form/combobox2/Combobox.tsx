@@ -1,6 +1,5 @@
 import React from "react";
 import { BodyShort, ErrorMessage } from "../../typography";
-import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { type FormFieldProps, useFormField } from "../useFormField";
 import { ComboboxField } from "./field/ComboboxField";
@@ -37,7 +36,7 @@ function Combobox<
   errorId: errorIdProp,
   disabled: disabledProp,
   description,
-  //id,
+  id,
   readOnly: readOnlyProp,
   ...rest
 }: ComboboxProps<T>) {
@@ -55,7 +54,7 @@ function Combobox<
       disabled: disabledProp,
       error,
       errorId: errorIdProp,
-      //id: rest.triggerId,
+      id,
       readOnly: readOnlyProp,
       size: sizeProp,
     },
@@ -63,16 +62,15 @@ function Combobox<
   );
 
   // TODO: Kunne være ukontrollert?
-  // TODO: Vurder å koble opp label her, slik at vi slipper å ha triggerId prop i ComboboxRoot.
+  // TODO: Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
 
   return (
-    <ComboboxRoot
-      size={size}
-      triggerId={inputProps.id}
-      disabled={inputProps.disabled}
-      {...rest}
-    >
-      <ComboboxLabel hide={hideLabel} readOnly={readOnly}>
+    <ComboboxRoot size={size} disabled={inputProps.disabled} {...rest}>
+      <ComboboxLabel
+        htmlFor={inputProps.id}
+        hide={hideLabel}
+        readOnly={readOnly}
+      >
         {label}
       </ComboboxLabel>
       {!!description && (
@@ -88,10 +86,7 @@ function Combobox<
           {description}
         </BodyShort>
       )}
-      <ComboboxTrigger
-        readOnly={readOnly}
-        {...omit(inputProps, ["id", "disabled"])}
-      >
+      <ComboboxTrigger readOnly={readOnly} {...inputProps}>
         <ComboboxField hasError={hasError} />
       </ComboboxTrigger>
       <div

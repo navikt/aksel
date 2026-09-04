@@ -4,8 +4,9 @@ import { cl } from "../../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../../ReadOnlyIcon";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
 
-interface ComboboxLabelProps extends React.HTMLAttributes<HTMLLabelElement> {
+interface ComboboxLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children: string;
+  htmlFor: string;
   hide?: boolean;
   readOnly?: boolean;
 }
@@ -17,11 +18,10 @@ const ComboboxLabel = ({
   readOnly,
   ...rest
 }: ComboboxLabelProps) => {
-  const { triggerId, size } = useComboboxRootContext();
+  const { size } = useComboboxRootContext();
 
   return (
     <Label
-      htmlFor={triggerId}
       className={cl(
         "aksel-form-field__label aksel-combobox2__label",
         className,
