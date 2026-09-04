@@ -1,3 +1,7 @@
+.aksel-listbox__options {
+  overflow: auto;
+}
+
 .aksel-listbox__group-label {
   background: var(--ax-bg-neutral-softA);
   padding: var(--ax-space-2) var(--ax-space-8);

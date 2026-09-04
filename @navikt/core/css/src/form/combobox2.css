@@ -161,10 +161,6 @@
  * List                                         *
  ************************************************/
 
-.aksel-combobox2__list {
-  overflow: auto;
-}
-
 .aksel-combobox2__no-results {
   padding: var(--ax-space-12) var(--ax-space-8);
   text-align: center;

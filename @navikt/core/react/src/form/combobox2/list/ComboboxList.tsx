@@ -33,7 +33,7 @@ function ComboboxList<
   }, []);*/
 
   return (
-    <Listbox.Options className="aksel-combobox2__list">
+    <Listbox.Options>
       {/*isPending && (
         <div className="aksel-combobox2__loading" role="status">
           Laster...

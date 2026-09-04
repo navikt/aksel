@@ -1,8 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useCallback, useMemo, useState } from "react";
 import { Search } from "../../../form/search";
-import { TextField } from "../../../form/textfield";
-import { Popover } from "../../../popover";
 import { Box } from "../../../primitives/box";
 import { useDeferredValue } from "../../hooks/useDeferredValue";
 import { HighlightText } from "../HighlightText/HighlightText";
@@ -189,7 +187,7 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
           />
         </Listbox.InputSlot>
 
-        <Box borderWidth="1" overflow="auto" maxHeight="300px">
+        <Box asChild borderWidth="1" maxHeight="300px">
           <Listbox.Options>
             {filteredOptions.map((option) => (
               <MyMemoizedOption
@@ -297,9 +295,9 @@ export const WithFloating = () => {
               sideOffset={4}
             >
               <Box
+                asChild
                 background="default"
                 borderWidth="1"
-                overflow="auto"
                 maxHeight="calc(var(--__axc-floating-available-height) - 4px)"
                 width="var(--__axc-floating-anchor-width)"
               >
@@ -318,62 +316,6 @@ export const WithFloating = () => {
         )}
       </Listbox>
     </Floating>
-  );
-};
-
-export const WithPopover = () => {
-  const [filterString, setFilterString] = useState("");
-  const [selectedItems, setSelectedItems] = useState<MyItem["value"][]>([]);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
-  const [open, setOpen] = useState(false);
-
-  const filteredItems = filterString
-    ? filterItems(groupedItems, filterString)
-    : groupedItems;
-
-  return (
-    <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-      <Listbox.InputSlot>
-        <TextField
-          label="Test"
-          value={filterString}
-          onChange={(event) => {
-            setFilterString(event.currentTarget.value);
-            setOpen(true);
-          }}
-          onFocus={() => setOpen(true)}
-          //onBlur={() => setOpen(false)}
-          ref={inputRef}
-        />
-      </Listbox.InputSlot>
-
-      <Popover
-        open={open}
-        onClose={() => setOpen(false)}
-        anchorEl={inputRef.current}
-        placement="bottom"
-      >
-        <Popover.Content>
-          <Listbox.Options>
-            <RenderItems
-              items={filteredItems}
-              selectedItems={selectedItems}
-              filterString={filterString}
-              virtuallyFocusedOptionId={virtuallyFocusedOptionId}
-              onSelect={(item) => {
-                setSelectedItems((prev) =>
-                  prev.includes(item.value)
-                    ? prev.filter((v) => v !== item.value)
-                    : [...prev, item.value],
-                );
-                //setOpen(false);
-              }}
-            />
-          </Listbox.Options>
-        </Popover.Content>
-      </Popover>
-    </Listbox>
   );
 };
 
