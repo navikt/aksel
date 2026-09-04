@@ -73,7 +73,7 @@ type DefaultProps = Pick<
   | "size"
   | "defaultOpen"
   | "multiselect"
-  | "triggerId"
+  | "id"
   | "readOnly"
   | "disabled"
   | "error"
@@ -115,7 +115,7 @@ Default.argTypes = {
     control: { type: "select" },
     options: ["small", "medium"],
   },
-  triggerId: {
+  id: {
     control: { type: "text" },
   },
 };
@@ -220,6 +220,42 @@ ManyOptions.parameters = {
   docs: { disable: true },
 };
 
+export const LongLabels = () => {
+  return (
+    <div style={{ maxWidth: "300px" }}>
+      <ComboboxRoot
+        defaultOpen
+        options={[
+          {
+            id: "group-1",
+            label:
+              "Dette er en veldig lang label for å teste hvordan lange labels håndteres",
+            options: [
+              {
+                label:
+                  "Dette er en veldig lang label for å teste hvordan dette håndteres",
+                value: "opt-1",
+              },
+              {
+                label:
+                  "Dette er en veldig lang label for å teste hvordan dette håndteres",
+                value: "opt-2",
+              },
+            ],
+          },
+        ]}
+        selectedOptions={["opt-1"]}
+        onToggleOption={() => {}}
+      >
+        <ComboboxField />
+        <ComboboxPopup>
+          <ComboboxList />
+        </ComboboxPopup>
+      </ComboboxRoot>
+    </div>
+  );
+};
+
 export const Composition = () => {
   const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
     "opt-1",
@@ -282,8 +318,8 @@ export const Composition = () => {
 
       <VStack>
         <ComboboxRoot {...rootProps}>
-          <ComboboxLabel>Velg land</ComboboxLabel>
-          <ComboboxTrigger>
+          <ComboboxLabel htmlFor="demo">Velg land</ComboboxLabel>
+          <ComboboxTrigger id="demo">
             <Button>Med input og label</Button>
           </ComboboxTrigger>
           <ComboboxOverlay>
@@ -301,8 +337,8 @@ export const Composition = () => {
         onToggleOption={setSelectedOption}
         multiselect={false}
       >
-        <ComboboxLabel>Velg land (single select)</ComboboxLabel>
-        <ComboboxTrigger>
+        <ComboboxLabel htmlFor="demo2">Velg land (single select)</ComboboxLabel>
+        <ComboboxTrigger id="demo2">
           <ComboboxField />
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -314,8 +350,8 @@ export const Composition = () => {
       </ComboboxRoot>
 
       <ComboboxRoot {...rootProps}>
-        <ComboboxLabel>Velg land (multiselect)</ComboboxLabel>
-        <ComboboxTrigger>
+        <ComboboxLabel htmlFor="demo3">Velg land (multiselect)</ComboboxLabel>
+        <ComboboxTrigger id="demo3">
           <ComboboxField />
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -377,11 +413,12 @@ export const Testing = () => {
 - Skal den hete noe annet enn Combobox? Er jo på en måte ikke det...
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
 - Åpne på pil ned (og ev. opp)?
-- PageUp/Down
-- Error, disabled (?), readonly osv.
-- Vurder hvilke funksjoner i gamle CB vi skal ta med (maks valg, legg til osv.)
+- Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
+  - allowNewValues
+  - isLoading
+  - maxSelected
 - Tester
-- A11y-sjekk
+- A11y-sjekk (skjermleser, zoom, høykontrast...)
 - Beslutningsloggen?
 - Ikke wrappe options
 

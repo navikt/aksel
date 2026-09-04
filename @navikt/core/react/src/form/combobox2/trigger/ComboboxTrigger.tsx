@@ -37,7 +37,6 @@ const ComboboxTrigger = ({
             event.preventDefault();
           }
         })}*/
-        id={rootContext.triggerId}
         data-readonly={readOnly}
         aria-readonly={readOnly} // TODO: Vurder
         disabled={rootContext.disabled}

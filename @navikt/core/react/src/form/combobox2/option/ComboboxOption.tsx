@@ -34,7 +34,10 @@ function ComboboxOptionComponent<T extends ComboboxOptionData>({
       <div className="aksel-combobox2__option-checkmark" aria-hidden>
         {isSelected && <CheckmarkHeavyIcon aria-hidden />}
       </div>
-      <div>
+      <div
+        className="aksel-combobox2__option-label"
+        //data-nowrap={!children || typeof children === "string"}
+      >
         {typeof children === "function"
           ? children(option)
           : (children ??

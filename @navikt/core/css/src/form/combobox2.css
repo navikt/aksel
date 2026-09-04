@@ -41,6 +41,9 @@
   padding-right: var(--ax-space-40);
   scroll-margin-block-start: 4rem;
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   &:hover {
     border-color: var(--ax-border-strong);
@@ -99,7 +102,7 @@
 
 .aksel-combobox2__popup {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  width: max(280px, var(--__axc-floating-anchor-width));
+  min-width: var(--__axc-floating-anchor-width);
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
   background-color: var(--ax-bg-raised);
@@ -167,22 +170,21 @@
 }
 
 /************************************************
+ * Group                                        *
+ ************************************************/
+
+.aksel-combobox2__group-label {
+  padding: var(--ax-space-8) var(--ax-space-8);
+  font-weight: bold;
+}
+
+/************************************************
  * Option                                       *
  ************************************************/
 
-.aksel-combobox2__option {
-  & > div {
-    display: flex;
-    gap: var(--ax-space-2);
-
-    & > div:last-child {
-      flex-grow: 1;
-    }
-  }
-
-  &:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"]) > div {
-    background-color: var(--ax-bg-moderate-pressedA);
-  }
+.aksel-combobox2__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
+  .aksel-listbox__option-inner {
+  background-color: var(--ax-bg-moderate-pressedA);
 }
 
 .aksel-combobox2__option-checkmark {
@@ -190,7 +192,8 @@
 
   width: var(--__axc-combobox2-option-checkmark-size);
   height: var(--__axc-combobox2-option-checkmark-size);
-  margin-top: 0.1875rem;
+  margin-top: var(--ax-space-2);
+  float: left;
 
   .aksel-combobox2[data-size="small"] & {
     --__axc-combobox2-option-checkmark-size: 1rem;
@@ -199,4 +202,15 @@
   & svg {
     font-size: var(--__axc-combobox2-option-checkmark-size);
   }
+}
+
+.aksel-combobox2__option-label {
+  padding-left: var(--ax-space-24);
+
+  /* &[data-nowrap="true"] {
+    padding-left: var(--ax-space-2);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  } */
 }
