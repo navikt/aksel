@@ -7,7 +7,12 @@ import { ListboxInputSlot } from "../input-slot/ListboxInputSlot";
 import { ListboxOption } from "../option/ListboxOption";
 import { ListboxOptions } from "../options/ListboxOptions";
 import { ListboxProvider } from "./Listbox.context";
-import { findNextOption, findPrevOption } from "./domHelpers";
+import {
+  findNextOption,
+  findPrevOption,
+  getNextPage,
+  getPreviousPage,
+} from "./domHelpers";
 
 interface ListboxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -49,7 +54,6 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
             return;
           }
 
-          // Helper functions
           const getFirstOption = (suffix: string = "") =>
             listbox.querySelector<HTMLElement>(`[role="option"]${suffix}`);
           const getLastOption = () => {
@@ -80,6 +84,9 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
             }
             const nextOption = getNextElement(focusedOptionElm);
             if (!nextOption) {
+              // TODO: Consider whether we want looping.
+              // If yes, consider if PageUp/PageDown should loop too.
+              // If no, remember to update tests.
               virtuallyFocusOption(getFallback());
               return;
             }
@@ -87,11 +94,19 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
           };
 
           switch (event.key) {
+            case "ArrowUp":
+              virtuallyFocusWithFallback(findPrevOption, getLastOption);
+              break;
             case "ArrowDown":
               virtuallyFocusWithFallback(findNextOption, getFirstOption);
               break;
-            case "ArrowUp":
-              virtuallyFocusWithFallback(findPrevOption, getLastOption);
+            case "PageUp":
+              event.preventDefault();
+              virtuallyFocusOption(getPreviousPage(listbox, focusedOptionElm));
+              break;
+            case "PageDown":
+              event.preventDefault();
+              virtuallyFocusOption(getNextPage(listbox, focusedOptionElm));
               break;
             case "Home":
               event.preventDefault();
@@ -110,7 +125,6 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
                 focusedOptionElm.click();
               }
               break;
-            // TODO: Consider implementing PageUp/PageDown too
           }
         }}
         {...rest}

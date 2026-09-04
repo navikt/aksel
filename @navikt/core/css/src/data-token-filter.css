@@ -30,7 +30,6 @@
   max-width: min(95vw, 640px);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
 }
