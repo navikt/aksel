@@ -45,5 +45,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 0,
-  desc: "Toggle chip brukes til filtrering av innhold. Du velger selv om brukeren skal kunne velge én eller flere alternativer om gangen.",
+  desc: "Toggle-varianten brukes til filtrering av innhold. Du velger selv om brukeren skal kunne velge ett eller flere alternativer om gangen.",
 };

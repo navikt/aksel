@@ -42,5 +42,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "Removable chips viser valgte verdier som brukeren kan fjerne, for eksempel valgte filter eller verdier som brukeren har skrevet i tekstfelt.",
+  desc: "Removable-varianten viser valgte verdier som brukeren kan fjerne, for eksempel valgte filter eller verdier som brukeren har skrevet i et tekstfelt.",
 };
