@@ -6,7 +6,7 @@ import { loadCsf } from "storybook/internal/csf-tools";
 
 const require = createRequire(import.meta.url);
 
-const indexRegex = /export const args = {\s+index: (\d+),/;
+const indexRegex = /export const args: ExampleArgsT = {\s+index: (\d+),/;
 
 export default defineMain({
   experimental_indexers: (indexers) => {
