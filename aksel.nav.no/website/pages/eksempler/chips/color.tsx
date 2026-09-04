@@ -1,25 +1,42 @@
 import { useState } from "react";
-import { Chips } from "@navikt/ds-react";
+import { Chips, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <Chips data-color="neutral">
-      {filter.map((c) => (
-        <Chips.Removable
-          key={c}
-          onClick={() =>
-            setFilter((x) =>
-              x.length === 1 ? options : x.filter((y) => y !== c),
-            )
-          }
-        >
-          {c}
-        </Chips.Removable>
-      ))}
-    </Chips>
+    <VStack gap="space-20">
+      <Chips data-color="neutral">
+        {filter.map((c) => (
+          <Chips.Removable
+            key={c}
+            onClick={() =>
+              setFilter((x) =>
+                x.length === 1 ? options : x.filter((y) => y !== c),
+              )
+            }
+          >
+            {c}
+          </Chips.Removable>
+        ))}
+      </Chips>
+
+      <Chips data-color="brand-magenta">
+        {filter.map((c) => (
+          <Chips.Removable
+            key={c}
+            onClick={() =>
+              setFilter((x) =>
+                x.length === 1 ? options : x.filter((y) => y !== c),
+              )
+            }
+          >
+            {c}
+          </Chips.Removable>
+        ))}
+      </Chips>
+    </VStack>
   );
 };
 
@@ -41,6 +58,6 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 2,
+  index: 4,
   desc: "`data-color` kan brukes for å endre farge på chipsene.",
 };
