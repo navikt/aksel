@@ -10516,7 +10516,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     globals: "npm:^17.7.0"
     husky: "npm:^9.1.7"
-    lint-staged: "npm:17.0.8"
+    lint-staged: "npm:17.4.1"
     playwright: "npm:1.61.1"
     prettier: "npm:3.9.6"
     react: "npm:19.2.8"
@@ -10560,7 +10560,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-escapes@npm:^7.0.0, ansi-escapes@npm:^7.3.0":
+"ansi-escapes@npm:^7.3.0":
   version: 7.3.0
   resolution: "ansi-escapes@npm:7.3.0"
   dependencies:
@@ -11911,7 +11911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-truncate@npm:^5.1.1, cli-truncate@npm:^5.2.0":
+"cli-truncate@npm:^5.1.1":
   version: 5.2.0
   resolution: "cli-truncate@npm:5.2.0"
   dependencies:
@@ -17780,34 +17780,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:17.0.8":
-  version: 17.0.8
-  resolution: "lint-staged@npm:17.0.8"
+"lint-staged@npm:17.4.1":
+  version: 17.4.1
+  resolution: "lint-staged@npm:17.4.1"
   dependencies:
-    listr2: "npm:^10.2.1"
-    picomatch: "npm:^4.0.4"
+    picomatch: "npm:^4.0.7"
     string-argv: "npm:^0.3.2"
-    tinyexec: "npm:^1.2.4"
+    tinyexec: "npm:^1.3.0"
     yaml: "npm:^2.9.0"
   dependenciesMeta:
     yaml:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/2b574a3107c030e27ff1c34166ef49f2189c256bb423b0deabef0becdf13ed4cfdcc6fb6815a1285ce0daa92fc6c545d8d0245c9d47a8eb3fbccbc4cf3754587
-  languageName: node
-  linkType: hard
-
-"listr2@npm:^10.2.1":
-  version: 10.2.2
-  resolution: "listr2@npm:10.2.2"
-  dependencies:
-    cli-truncate: "npm:^5.2.0"
-    eventemitter3: "npm:^5.0.4"
-    log-update: "npm:^6.1.0"
-    rfdc: "npm:^1.4.1"
-    wrap-ansi: "npm:^10.0.0"
-  checksum: 10/e9589e1cc8b2158d54dab1afe43f014fab443400a02096ee6914f83f64ca5aea56b72dd39582916c06e4b50351587964ff20a428994f61cec1b9160b92c70093
+  checksum: 10/94805d91e22af890a471fb9ca4cf9c4d9c507b26915deeefb0be2d93bcfbe465228d00dedc7240d12552013744928880f9361a84cf0c5c8a2480b6cefb9c8010
   languageName: node
   linkType: hard
 
@@ -17924,19 +17910,6 @@ __metadata:
     is-unicode-supported: "npm:^2.0.0"
     yoctocolors: "npm:^2.1.1"
   checksum: 10/0862313d84826b551582e39659b8586c56b65130c5f4f976420e2c23985228334f2a26fc4251ac22bf0a5b415d9430e86bf332557d934c10b036f9a549d63a09
-  languageName: node
-  linkType: hard
-
-"log-update@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "log-update@npm:6.1.0"
-  dependencies:
-    ansi-escapes: "npm:^7.0.0"
-    cli-cursor: "npm:^5.0.0"
-    slice-ansi: "npm:^7.1.0"
-    strip-ansi: "npm:^7.1.0"
-    wrap-ansi: "npm:^9.0.0"
-  checksum: 10/5abb4131e33b1e7f8416bb194fe17a3603d83e4657c5bf5bb81ce4187f3b00ea481643b85c3d5cefe6037a452cdcf7f1391ab8ea0d9c23e75d19589830ec4f11
   languageName: node
   linkType: hard
 
@@ -20541,7 +20514,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4, picomatch@npm:^4.0.5":
+"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4, picomatch@npm:^4.0.5, picomatch@npm:^4.0.7":
   version: 4.0.7
   resolution: "picomatch@npm:4.0.7"
   checksum: 10/66e1df34bc39c72fa3756be4069f7887ea3e35e94bba1c3f6167763007698cb04b8a0a365161d186fda6e9571a2d3efb606b2966eb6a7dea6252911224dc2f48
@@ -22327,13 +22300,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rfdc@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "rfdc@npm:1.4.1"
-  checksum: 10/2f3d11d3d8929b4bfeefc9acb03aae90f971401de0add5ae6c5e38fec14f0405e6a4aad8fdb76344bfdd20c5193110e3750cbbd28ba86d73729d222b6cf4a729
-  languageName: node
-  linkType: hard
-
 "rimraf@npm:6.1.3":
   version: 6.1.3
   resolution: "rimraf@npm:6.1.3"
@@ -23420,16 +23386,6 @@ __metadata:
     astral-regex: "npm:^2.0.0"
     is-fullwidth-code-point: "npm:^3.0.0"
   checksum: 10/4a82d7f085b0e1b070e004941ada3c40d3818563ac44766cca4ceadd2080427d337554f9f99a13aaeb3b4a94d9964d9466c807b3d7b7541d1ec37ee32d308756
-  languageName: node
-  linkType: hard
-
-"slice-ansi@npm:^7.1.0":
-  version: 7.1.2
-  resolution: "slice-ansi@npm:7.1.2"
-  dependencies:
-    ansi-styles: "npm:^6.2.1"
-    is-fullwidth-code-point: "npm:^5.0.0"
-  checksum: 10/75f61e1285c294b18c88521a0cdb22cdcbe9b0fd5e8e26f649be804cc43122aa7751bd960a968e3ed7f5aa7f3c67ac605c939019eae916870ec288e878b6fafb
   languageName: node
   linkType: hard
 
@@ -26519,16 +26475,6 @@ __metadata:
     string-width: "npm:^4.1.0"
     strip-ansi: "npm:^6.0.0"
   checksum: 10/cebdaeca3a6880da410f75209e68cd05428580de5ad24535f22696d7d9cab134d1f8498599f344c3cf0fb37c1715807a183778d8c648d6cc0cb5ff2bb4236540
-  languageName: node
-  linkType: hard
-
-"wrap-ansi@npm:^10.0.0":
-  version: 10.0.1
-  resolution: "wrap-ansi@npm:10.0.1"
-  dependencies:
-    ansi-styles: "npm:^6.2.3"
-    string-width: "npm:^8.2.0"
-  checksum: 10/34d8e9f8177b8df303153a01ecb90cc8762b2a18f694cbe4c0c5c6b386f625e2d9f2432d0a656a2b19841e5927e0d818456b6a4d8a295cb70e413a78fae71d3e
   languageName: node
   linkType: hard
 
