@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
-import { createStrictContext } from "../../../utils/helpers";
+import { cl, createStrictContext } from "../../../utils/helpers";
 import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
@@ -27,7 +27,10 @@ export type ComboboxGroupData<T extends ComboboxOptionData> = {
 export interface ComboboxRootProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
-> extends Pick<FormFieldProps, "disabled"> {
+>
+  extends
+    Pick<FormFieldProps, "disabled">,
+    React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Can be either an array of options ({@link ComboboxOptionData})
@@ -37,21 +40,15 @@ export interface ComboboxRootProps<
    * put the single options first.
    */
   options: T[];
-  selectedOptions: ResolveOption<T>["value"][];
-  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"]; // TODO: Vurder å tilby onChange som returnerer valgte verdier
+  selectedOptions: ResolveOption<T>["value"][]; // TODO: Vurder navn: value(s)
+  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"];
   defaultOpen?: boolean;
-  multiselect?: boolean; // TODO: Vurder annet navn
+  multiselect?: boolean; // TODO: Hva skal være default? Vurder navn
   /**
    * @default "medium"
    */
   size?: "small" | "medium";
 }
-
-/* Alternativt:
-  options: (T | ComboboxGroupData<T>)[];
-  selectedOptions: T["value"][];
-  onToggleOption: ComboboxOptionProps<T>["onToggleOption"];
-*/
 
 export interface ComboboxRootContextProps {
   open: boolean;
@@ -84,12 +81,19 @@ export function ComboboxRoot<
   multiselect = true,
   size = "medium",
   disabled,
+  className,
+  ...rest
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="aksel-combobox2" data-size={size} data-disabled={disabled}>
+    <div
+      {...rest}
+      className={cl("aksel-combobox2", className)}
+      data-size={size}
+      data-disabled={disabled}
+    >
       <ComboboxRootContextProvider
         open={open}
         setOpen={setOpen}

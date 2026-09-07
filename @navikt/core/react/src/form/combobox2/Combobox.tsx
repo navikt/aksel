@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyShort, ErrorMessage } from "../../typography";
 import { cl } from "../../utils/helpers";
+import { useControllableState } from "../../utils/hooks";
 import { type FormFieldProps, useFormField } from "../useFormField";
 import { ComboboxField } from "./field/ComboboxField";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
@@ -19,18 +20,30 @@ import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 interface ComboboxProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >
-  extends Omit<ComboboxRootProps<T>, "children">, Omit<FormFieldProps, "size"> {
+  extends
+    Omit<
+      ComboboxRootProps<T>,
+      "children" | "selectedOptions" | "onToggleOption"
+    >,
+    Partial<Pick<ComboboxRootProps<T>, "selectedOptions" | "onToggleOption">>,
+    Omit<FormFieldProps, "size"> {
   label: string;
   hideLabel?: boolean;
-  //name?: string; // TODO: rendre hidden input med valgt(e) verdi(er) hvis satt.
+  name?: string;
+  defaultSelectedOptions?: ComboboxRootProps<T>["selectedOptions"];
+  onSelectedOptionsChange?: (
+    newSelectedOptions: ComboboxRootProps<T>["selectedOptions"],
+  ) => void;
 }
-// TODO: extend React.HTMLAttributes<HTMLDivElement>
 
 function Combobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({
   label,
   hideLabel,
+  name,
+  defaultSelectedOptions,
+  onSelectedOptionsChange,
   size: sizeProp,
   error,
   errorId: errorIdProp,
@@ -38,6 +51,9 @@ function Combobox<
   description,
   id,
   readOnly: readOnlyProp,
+  multiselect = false, // Default value should be synced with ComboboxRoot
+  selectedOptions: selectedOptionsProp,
+  onToggleOption: onToggleOptionProp,
   ...rest
 }: ComboboxProps<T>) {
   const {
@@ -61,11 +77,37 @@ function Combobox<
     "combobox",
   );
 
-  // TODO: Kunne være ukontrollert?
-  // TODO: Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
+  const [selectedOptions, setSelectedOptions] = useControllableState({
+    defaultValue: defaultSelectedOptions || [],
+    value: selectedOptionsProp,
+    onChange: onSelectedOptionsChange,
+  });
+
+  const onToggleOption: ComboboxRootProps<T>["onToggleOption"] = (
+    option,
+    isSelected,
+  ) => {
+    onToggleOptionProp?.(option, isSelected);
+    setSelectedOptions((prevSelectedOptions) => {
+      if (!multiselect) {
+        return [option.value];
+      }
+      if (isSelected) {
+        return [...prevSelectedOptions, option.value];
+      }
+      return prevSelectedOptions.filter((value) => value !== option.value);
+    });
+  };
 
   return (
-    <ComboboxRoot size={size} disabled={inputProps.disabled} {...rest}>
+    <ComboboxRoot
+      size={size}
+      disabled={inputProps.disabled}
+      multiselect={multiselect}
+      selectedOptions={selectedOptions}
+      onToggleOption={onToggleOption}
+      {...rest}
+    >
       <ComboboxLabel
         htmlFor={inputProps.id}
         hide={hideLabel}
@@ -101,6 +143,11 @@ function Combobox<
           </ErrorMessage>
         )}
       </div>
+
+      {name &&
+        selectedOptions.map((value) => (
+          <input key={value} type="hidden" name={name} value={value} />
+        ))}
 
       <ComboboxOverlay>
         <ComboboxPopup>

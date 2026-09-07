@@ -80,32 +80,14 @@ type DefaultProps = Pick<
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>(
-    [],
-  );
-
-  return (
-    <Combobox
-      defaultOpen
-      options={countries}
-      selectedOptions={selectedOptions}
-      onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
-          newSelected
-            ? [...prev, option.value]
-            : prev.filter((v) => v !== option.value),
-        );
-      }}
-      {...props}
-    />
-  );
+  return <Combobox defaultOpen options={countries} {...props} />;
 };
 Default.args = {
   label: "Velg land",
   description: "Landet hvor du er født.",
   hideLabel: false,
   defaultOpen: false,
-  //multiselect: true,
+  multiselect: false,
   readOnly: false,
   disabled: false,
   error: "",
@@ -120,42 +102,60 @@ Default.argTypes = {
   },
 };
 
-function BaseCombobox<
+function BasicCombobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     MyOption,
 >(props: Partial<ComboboxProps<T>>) {
-  const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
-
   return (
     <Combobox
       options={countries as T[]}
-      selectedOptions={selectedOptions}
-      onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
-          newSelected
-            ? [...prev, option.value]
-            : prev.filter((v) => v !== option.value),
-        );
-      }}
+      defaultSelectedOptions={["opt-1"]}
       label="Velg land"
       description="Landet hvor du er født."
+      multiselect={false}
       {...props}
     />
   );
 }
 
-export const HideLabel = () => <BaseCombobox hideLabel />;
+export const Small = () => <BasicCombobox size="small" error="Error" />;
 
-export const ReadOnly = () => <BaseCombobox readOnly />;
+export const Hidelabel = () => <BasicCombobox hideLabel />;
 
-export const Disabled = () => <BaseCombobox disabled />;
+export const Readonly = () => <BasicCombobox readOnly />;
 
-export const WithError = () => <BaseCombobox error="Du må velge et land." />;
+export const Disabled = () => <BasicCombobox disabled />;
+
+export const ErrorStory = () => <BasicCombobox error="Du må velge et land." />;
+ErrorStory.storyName = "Error";
+
+export const DefaultOpen = () => <BasicCombobox defaultOpen />;
+DefaultOpen.storyName = "DefaultOpen";
+
+export const DefaultSelectedOptions = () => (
+  <BasicCombobox defaultSelectedOptions={["opt-1"]} />
+);
+DefaultSelectedOptions.storyName = "DefaultSelectedOptions";
+
+export const Name = () => (
+  <form
+    onSubmit={(event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const land = formData.getAll("land");
+      console.log(land);
+    }}
+  >
+    <BasicCombobox name="land" />
+    <br />
+    <button type="submit">Submit</button>
+  </form>
+);
 
 export const SingleSelect = () => {
   const [selectedOption, setSelectedOption] = useState<MyOption>(countries[0]);
   return (
-    <BaseCombobox
+    <BasicCombobox
       selectedOptions={[selectedOption.value]}
       onToggleOption={(option) => setSelectedOption(option)}
       multiselect={false}
@@ -163,19 +163,64 @@ export const SingleSelect = () => {
   );
 };
 
+export const Controlled = () => {
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
+  ]);
+
+  return (
+    <VStack gap="space-8" minWidth="250px">
+      <Combobox
+        options={countries}
+        selectedOptions={selectedOptions}
+        onToggleOption={(option, newSelected) => {
+          setSelectedOptions((prev) =>
+            newSelected
+              ? [...prev, option.value]
+              : prev.filter((v) => v !== option.value),
+          );
+        }}
+        label="Velg land"
+      />
+      Selected: {selectedOptions.join(", ")}
+      <div>
+        <button type="button" onClick={() => setSelectedOptions([])}>
+          Clear
+        </button>
+      </div>
+    </VStack>
+  );
+};
+
+export const Controlled2 = () => {
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
+  ]);
+
+  return (
+    <VStack gap="space-8" minWidth="250px">
+      <Combobox
+        options={countries}
+        selectedOptions={selectedOptions}
+        onSelectedOptionsChange={setSelectedOptions}
+        label="Velg land"
+      />
+      Selected: {selectedOptions.join(", ")}
+      <div>
+        <button type="button" onClick={() => setSelectedOptions([])}>
+          Clear
+        </button>
+      </div>
+    </VStack>
+  );
+};
+
 export const Groups = () => {
   return (
     <HStack gap="space-56" minHeight="300px">
-      <BaseCombobox
-        options={groupedCountries}
-        description="Landene du har statsborgerskap."
-      />
+      <BasicCombobox options={groupedCountries} />
 
-      <BaseCombobox
-        options={groupedCountries}
-        description="Landene du har statsborgerskap."
-        size="small"
-      />
+      <BasicCombobox options={groupedCountries} size="small" />
     </HStack>
   );
 };
@@ -184,8 +229,6 @@ type ManyOptionsProps = {
   count: number;
 };
 export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
-  const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
-
   const manyOptions = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
@@ -197,21 +240,10 @@ export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
 
   return (
     <div style={{ minHeight: "400px", width: "250px" }}>
-      <Combobox
-        options={manyOptions}
-        selectedOptions={selectedOptions}
-        onToggleOption={(option) => {
-          setSelectedOptions((prev) =>
-            prev.includes(option.value)
-              ? prev.filter((v) => v !== option.value)
-              : [...prev, option.value],
-          );
-        }}
-        label="Test"
-      />
+      <Combobox options={manyOptions} label="Test" />
     </div>
   );
-};
+}; // TODO: See if we can make a bench test for this to catch performance regressions
 ManyOptions.args = {
   count: 5000,
 };
@@ -367,8 +399,6 @@ export const Composition = () => {
 Composition.parameters = { layout: "padded" };
 
 export const Testing = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>();
-
   return (
     <VStack gap="space-32" width="300px">
       <button type="button" onClick={() => console.log("Knapp før")}>
@@ -377,8 +407,6 @@ export const Testing = () => {
 
       <Combobox
         options={countries}
-        selectedOptions={selectedOption ? [selectedOption.value] : []}
-        onToggleOption={setSelectedOption}
         multiselect={false}
         label="Velg land (Combobox)"
         description="Beskrivelse"
@@ -401,26 +429,34 @@ export const Testing = () => {
         <option value="latvia">Latvia</option>
         <option value="lithuania">Lithuania</option>
       </Select>
+
+      <Select label="Mange alternativer (vanlig select)">
+        {Array.from({ length: 100 }, (_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Don't care
+          <option key={i} value={`opt-${i + 1}`}>
+            {`Option ${String(i + 1).padStart(4, "0")}`}
+          </option>
+        ))}
+      </Select>
     </VStack>
   );
 };
 
 /* TODO:
 - Fullskjerm på mobil
-- Følge Combobox-pattern (mer)? Kan ikke følge det slavisk uansett.
-    Pil opp og ned velger
-    Ikke loop
-- Skal den hete noe annet enn Combobox? Er jo på en måte ikke det...
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
 - Åpne på pil ned (og ev. opp)?
 - Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
   - allowNewValues
   - isLoading
   - maxSelected
-- Tester
+- Skal den hete noe annet enn Combobox?
+- Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
+- Følge Combobox-pattern (mer)? Kan ikke følge det slavisk uansett.
+    Pil opp og ned velger
+    Ikke loop
 - A11y-sjekk (skjermleser, zoom, høykontrast...)
 - Beslutningsloggen?
-- Ikke wrappe options
 
 
 Utfordringer med komposisjon:
