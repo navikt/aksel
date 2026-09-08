@@ -1,17 +1,45 @@
 import React from "react";
+import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
   Floating,
   MENU_COLLISION_AVOIDANCE,
 } from "../../../utils/components/floating/Floating";
+import { useMedia } from "../../../utils/hooks";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
 
 interface ComboboxOverlayProps {
   children: React.ReactNode;
+  mobileHeader?: React.ReactNode;
 }
 
-const ComboboxOverlay = ({ children }: ComboboxOverlayProps) => {
+const ComboboxOverlay = ({ children, mobileHeader }: ComboboxOverlayProps) => {
   const rootContext = useComboboxRootContext();
+  const isMobile = useMedia("(max-width: 479px)");
+
+  if (isMobile) {
+    return (
+      <Dialog
+        size="small"
+        open={rootContext.open}
+        onOpenChange={(open) => {
+          rootContext.setOpen(open);
+          !open && rootContext.triggerRef.current?.focus(); // This does not work when closing with button
+        }}
+        onOpenChangeComplete={(open) =>
+          !open && rootContext.triggerRef.current?.focus()
+        }
+      >
+        <Dialog.Popup
+          className="aksel-combobox2__overlay--mobile"
+          position="fullscreen"
+        >
+          {mobileHeader}
+          {children}
+        </Dialog.Popup>
+      </Dialog>
+    );
+  }
 
   if (!rootContext.open) {
     return null;

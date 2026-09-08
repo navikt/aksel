@@ -1,4 +1,5 @@
 import React from "react";
+import { Dialog } from "../../dialog";
 import { BodyShort, ErrorMessage } from "../../typography";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
@@ -149,7 +150,16 @@ function Combobox<
           <input key={value} type="hidden" name={name} value={value} />
         ))}
 
-      <ComboboxOverlay>
+      <ComboboxOverlay
+        mobileHeader={
+          <Dialog.Header>
+            <Dialog.Title>{label}</Dialog.Title>
+            {!!description && (
+              <Dialog.Description>{description}</Dialog.Description>
+            )}
+          </Dialog.Header>
+        }
+      >
         <ComboboxPopup>
           <ComboboxFilter />
           <ComboboxList />
