@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { Button } from "../../button";
+import { Dialog } from "../../dialog";
 import { HStack, VStack } from "../../primitives/stack";
 import { Select } from "../select";
 import { Combobox, type ComboboxProps } from "./Combobox";
@@ -152,17 +153,6 @@ export const Name = () => (
   </form>
 );
 
-export const SingleSelect = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>(countries[0]);
-  return (
-    <BasicCombobox
-      selectedOptions={[selectedOption.value]}
-      onToggleOption={(option) => setSelectedOption(option)}
-      multiselect={false}
-    />
-  );
-};
-
 export const Controlled = () => {
   const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
     "opt-1",
@@ -215,15 +205,13 @@ export const Controlled2 = () => {
   );
 };
 
-export const Groups = () => {
-  return (
-    <HStack gap="space-56" minHeight="300px">
-      <BasicCombobox options={groupedCountries} />
+export const Groups = () => (
+  <HStack gap="space-56" minHeight="300px">
+    <BasicCombobox options={groupedCountries} />
 
-      <BasicCombobox options={groupedCountries} size="small" />
-    </HStack>
-  );
-};
+    <BasicCombobox options={groupedCountries} size="small" />
+  </HStack>
+);
 
 type ManyOptionsProps = {
   count: number;
@@ -243,7 +231,7 @@ export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
       <Combobox options={manyOptions} label="Test" />
     </div>
   );
-}; // TODO: See if we can make a bench test for this to catch performance regressions
+};
 ManyOptions.args = {
   count: 5000,
 };
@@ -252,41 +240,39 @@ ManyOptions.parameters = {
   docs: { disable: true },
 };
 
-export const LongLabels = () => {
-  return (
-    <div style={{ maxWidth: "300px" }}>
-      <ComboboxRoot
-        defaultOpen
-        options={[
-          {
-            id: "group-1",
-            label:
-              "Dette er en veldig lang label for å teste hvordan lange labels håndteres",
-            options: [
-              {
-                label:
-                  "Dette er en veldig lang label for å teste hvordan dette håndteres",
-                value: "opt-1",
-              },
-              {
-                label:
-                  "Dette er en veldig lang label for å teste hvordan dette håndteres",
-                value: "opt-2",
-              },
-            ],
-          },
-        ]}
-        selectedOptions={["opt-1"]}
-        onToggleOption={() => {}}
-      >
-        <ComboboxField />
-        <ComboboxPopup>
-          <ComboboxList />
-        </ComboboxPopup>
-      </ComboboxRoot>
-    </div>
-  );
-};
+export const LongLabels = () => (
+  <div style={{ maxWidth: "300px" }}>
+    <ComboboxRoot
+      defaultOpen
+      options={[
+        {
+          id: "group-1",
+          label:
+            "Dette er en veldig lang label for å teste hvordan lange labels håndteres",
+          options: [
+            {
+              label:
+                "Dette er en veldig lang label for å teste hvordan dette håndteres",
+              value: "opt-1",
+            },
+            {
+              label:
+                "Dette er en veldig lang label for å teste hvordan dette håndteres",
+              value: "opt-2",
+            },
+          ],
+        },
+      ]}
+      selectedOptions={["opt-1"]}
+      onToggleOption={() => {}}
+    >
+      <ComboboxField />
+      <ComboboxPopup>
+        <ComboboxList />
+      </ComboboxPopup>
+    </ComboboxRoot>
+  </div>
+);
 
 export const Composition = () => {
   const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
@@ -398,6 +384,30 @@ export const Composition = () => {
 };
 Composition.parameters = { layout: "padded" };
 
+export const InDialog = () => {
+  return (
+    <Dialog defaultOpen>
+      <Dialog.Trigger>
+        <Button>Open dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup width="small">
+        <Dialog.Header>
+          <Dialog.Title>Dialog title</Dialog.Title>
+          <Dialog.Description>Dialog description</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BasicCombobox />
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button>Close dialog</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
+  );
+};
+
 export const Testing = () => {
   return (
     <VStack gap="space-32" width="300px">
@@ -443,11 +453,10 @@ export const Testing = () => {
 };
 
 /* TODO:
-- Fullskjerm på mobil
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
 - Åpne på pil ned (og ev. opp)?
 - Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
-  - allowNewValues
+  - allowNewValues (er dette ofte egentlig Autocomplete?)
   - isLoading
   - maxSelected
 - Skal den hete noe annet enn Combobox?
@@ -468,9 +477,4 @@ Forslag: Tilby enkeltkomponent for de vanligste tilfellene, men også subkompone
   Kan ev. ha slot/render-props for enkelte ting.
   Kan ev. bruke children for å kunne bytte ut/skreddersy innholdet i popup.
 
-
-Ressurser:
-- https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/combobox_role
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/listbox_role
 */
