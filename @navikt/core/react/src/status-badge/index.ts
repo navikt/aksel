@@ -1,2 +1,2 @@
 "use client";
-export { StatusBadge, StatusBadgeAnchor } from "./root/StatusBadgeRoot";
+export { StatusBadge } from "./root/StatusBadgeRoot";

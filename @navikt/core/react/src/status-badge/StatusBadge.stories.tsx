@@ -65,18 +65,15 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <StatusBadge.Anchor placement="top-right">
+      <StatusBadge data-color="danger" aria-hidden count={42}>
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
         />
-        {/* Count is already part of the button's accessible name. */}
-        <StatusBadge data-color="danger" aria-hidden count={42} />
-      </StatusBadge.Anchor>
-      <StatusBadge.Anchor placement="top-right">
+      </StatusBadge>
+      <StatusBadge data-color="danger" aria-label="Nytt varsel">
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
-        <StatusBadge data-color="danger" aria-label="Nytt varsel" />
-      </StatusBadge.Anchor>
+      </StatusBadge>
     </HStack>
   ),
 };
@@ -85,13 +82,18 @@ export const Placements: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
       {placements.map((placement) => (
-        <StatusBadge.Anchor key={placement} placement={placement}>
+        <StatusBadge
+          key={placement}
+          placement={placement}
+          data-color="danger"
+          aria-hidden
+          count={3}
+        >
           <Button
             icon={<InboxIcon aria-hidden />}
             aria-label={`Innboks, 3 nye meldinger (${placement})`}
           />
-          <StatusBadge data-color="danger" aria-hidden count={3} />
-        </StatusBadge.Anchor>
+        </StatusBadge>
       ))}
     </HStack>
   ),
@@ -103,13 +105,12 @@ export const DynamicCount: Story = {
 
     return (
       <HStack gap="space-16" align="center">
-        <StatusBadge.Anchor>
+        <StatusBadge data-color="danger" aria-hidden count={count}>
           <Button
             icon={<InboxIcon aria-hidden />}
             aria-label={`Innboks, ${count} nye meldinger`}
           />
-          <StatusBadge data-color="danger" aria-hidden count={count} />
-        </StatusBadge.Anchor>
+        </StatusBadge>
         <Button
           size="small"
           variant="secondary"
