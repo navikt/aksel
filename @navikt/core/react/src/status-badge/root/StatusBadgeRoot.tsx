@@ -14,11 +14,6 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
    * @default "danger"
    */
   "data-color"?: AkselColor;
-  /**
-   * Adds a pulsing animation to the badge.
-   * @default false
-   */
-  pulse?: boolean;
 }
 
 const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
@@ -30,7 +25,6 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
       role,
-      pulse = false,
       "aria-hidden": ariaHidden,
       ...rest
     },
@@ -47,7 +41,6 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         as="span"
         size="small"
         data-color={color}
-        data-pulse={pulse || undefined}
         data-dot={isDot || undefined}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}

@@ -131,34 +131,6 @@ export const DynamicCount: Story = {
   },
 };
 
-export const Pulse: Story = {
-  render: (args) => (
-    <HStack gap="space-32" align="center">
-      <StatusBadge.Anchor placement="top-right">
-        <Button
-          icon={<InboxIcon aria-hidden />}
-          aria-label="Innboks, 42 nye meldinger"
-        />
-        <StatusBadge pulse data-color="danger" aria-hidden {...args}>
-          42
-        </StatusBadge>
-      </StatusBadge.Anchor>
-      <StatusBadge.Anchor placement="top-right">
-        <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
-        <StatusBadge
-          pulse
-          data-color="danger"
-          aria-label="Nytt varsel"
-          {...args}
-        />
-      </StatusBadge.Anchor>
-    </HStack>
-  ),
-  args: {
-    "data-color": "danger",
-  },
-};
-
 export const Chromatic = renderStoriesForChromatic({
   Count,
   Dot,

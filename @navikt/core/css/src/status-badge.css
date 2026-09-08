@@ -26,22 +26,6 @@
     background: canvastext;
     color: canvas;
   }
-
-  &[data-pulse="true"]::before {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background-color: var(--ax-bg-strong);
-    opacity: 0.6;
-    animation: status-badge-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-
-    @media (forced-colors: active) {
-      forced-color-adjust: none;
-      background-color: canvastext;
-    }
-  }
 }
 
 @keyframes status-badge-ping {
