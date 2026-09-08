@@ -8,29 +8,41 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Badge content. Leave empty to render a status dot.
    */
-  children?: React.ReactNode;
+  /* children?: React.ReactNode; */
   /**
    * Badge color.
    * @default "danger"
    */
   "data-color"?: AkselColor;
+  /**
+   * The count to display inside the badge.
+   * Leave empty to render a status dot.
+   */
+  count?: number;
+  /**
+   * The maximum count to display inside the badge. Numbers above is displayed as `maxCount+`.
+   * @default 99
+   */
+  maxCount?: number;
 }
 
 const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
   (
     {
-      children,
+      /* children, */
       className,
       "data-color": color = "danger",
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
       role,
       "aria-hidden": ariaHidden,
+      count,
+      maxCount = 99,
       ...rest
     },
     ref,
   ) => {
-    const isDot = React.Children.toArray(children).length === 0;
+    const isDot = count == null;
     const hasLabel = ariaLabel != null || ariaLabelledby != null;
     const isDecorative = isDot && !hasLabel;
 
@@ -48,7 +60,7 @@ const StatusBadgeRoot = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         aria-hidden={ariaHidden ?? (isDecorative || undefined)}
         className={cl("aksel-status-badge", className)}
       >
-        {children}
+        {isDot ? null : count > maxCount ? `${maxCount}+` : count}
       </BodyShort>
     );
   },
