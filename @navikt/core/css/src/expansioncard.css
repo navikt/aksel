@@ -12,6 +12,10 @@
     background-color: var(--ax-bg-raised);
   }
 
+  transition-property: border-color, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
+
   &:has(.aksel-expansioncard__header:hover) {
     box-shadow: 0 0 0 1px var(--ax-border-strong);
     border-color: var(--ax-border-strong);
@@ -47,6 +51,9 @@
   background-color: transparent;
   position: relative;
   justify-content: space-between;
+  transition-property: background-color;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
 
   &:hover {
     background-color: var(--ax-bg-moderate-hoverA);
@@ -66,6 +73,9 @@
       width: calc(100% - 2 * var(--__axc-expansioncard-padding-inline));
       position: absolute;
       opacity: 1;
+      transition-property: opacity;
+      transition-duration: 300ms;
+      transition-timing-function: cubic-bezier(0, 0, 0, 1);
     }
 
     &:hover::after {
@@ -100,6 +110,9 @@
   min-width: 3rem;
   font-size: 1.5rem;
   align-self: flex-start;
+  transition-property: background-color;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
 
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
