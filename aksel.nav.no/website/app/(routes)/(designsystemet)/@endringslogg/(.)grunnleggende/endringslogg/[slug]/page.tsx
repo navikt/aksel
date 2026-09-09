@@ -21,14 +21,14 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// instant = false: intercepting dialog route (no stable pathname), so shared layout `usePathname()` can’t be prerendered.
+export const instant = false;
+
 /* https://nextjs.org/docs/messages/blocking-prerender-metadata-runtime */
 async function DynamicMarker() {
   await connection();
   return null;
 }
-
-export const instant = false;
-
 export default async function Page({ params }: Props) {
   const { isEnabled: isDraftMode } = await draftMode();
 
