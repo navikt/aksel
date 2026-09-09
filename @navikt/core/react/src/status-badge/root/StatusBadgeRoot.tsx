@@ -81,7 +81,8 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     const isDot = normalizedCount == null;
     const hasLabel =
       Boolean(ariaLabel?.trim()) || Boolean(ariaLabelledby?.trim());
-    const isDecorative = !hasLabel && (isDot || children != null);
+    const isDecorative =
+      role == null && !hasLabel && (isDot || children != null);
 
     const badge = (
       <BodyShort
