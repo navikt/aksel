@@ -23,6 +23,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// instant = false: intercepting dialog route (no stable pathname), so shared Header/Footer `usePathname()` can’t be prerendered.
 export const instant = false;
 
 /* https://nextjs.org/docs/messages/blocking-prerender-metadata-runtime */
