@@ -15,12 +15,13 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
    */
   "data-color"?: AkselColor;
   /**
-   * The count to display inside the badge.
+   * The count to display inside the badge, normalized to a non-negative integer.
    * Leave empty to render a status dot.
    */
   count?: number;
   /**
-   * The maximum count to display inside the badge. Numbers above is displayed as `maxCount+`.
+   * The maximum count to display inside the badge, normalized to a non-negative integer.
+   * Numbers above are displayed as `maxCount+`.
    * @default 99
    */
   maxCount?: number;
@@ -37,10 +38,10 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * Use standalone for inline status/counts, or pass the element you want to
  * anchor to as `children` to pin the badge to one of its corners.
  *
- * Accessibility: A dot with no label is treated as decorative and
- * hidden from assistive technology. When anchoring to an
- * interactive element, prefer folding the status into that element's
- * accessible name (e.g. `aria-label="Innboks, 42 nye meldinger"`).
+ * Accessibility: A badge with no label is treated as decorative when it is a
+ * dot or anchored to another element. When anchoring to an interactive element,
+ * fold the status into that element's accessible name
+ * (e.g. `aria-label="Innboks, 42 nye meldinger"`).
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/status-badge)
  * @see 🏷️ {@link StatusBadgeProps}
@@ -52,7 +53,7 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * <StatusBadge data-color="danger" count={42} />
  *
  * // Anchored to an element
- * <StatusBadge data-color="danger" aria-hidden count={42}>
+ * <StatusBadge data-color="danger" count={42}>
  *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
  * </StatusBadge>
  * ```
@@ -74,9 +75,13 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     },
     ref,
   ) => {
-    const isDot = count == null;
-    const hasLabel = ariaLabel != null || ariaLabelledby != null;
-    const isDecorative = isDot && !hasLabel;
+    const normalizedCount =
+      count == null ? undefined : normalizeCount(count, 0);
+    const normalizedMaxCount = normalizeCount(maxCount, 99);
+    const isDot = normalizedCount == null;
+    const hasLabel =
+      Boolean(ariaLabel?.trim()) || Boolean(ariaLabelledby?.trim());
+    const isDecorative = !hasLabel && (isDot || children != null);
 
     const badge = (
       <BodyShort
@@ -92,7 +97,11 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         aria-hidden={ariaHidden ?? (isDecorative || undefined)}
         className={cl("aksel-status-badge", className)}
       >
-        {isDot ? null : count > maxCount ? `${maxCount}+` : count}
+        {isDot
+          ? null
+          : normalizedCount > normalizedMaxCount
+            ? `${normalizedMaxCount}+`
+            : normalizedCount}
       </BodyShort>
     );
 
@@ -108,6 +117,10 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     );
   },
 );
+
+function normalizeCount(value: number, fallback: number) {
+  return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : fallback;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
 export namespace StatusBadge {

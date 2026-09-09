@@ -28,24 +28,12 @@
   }
 }
 
-@keyframes status-badge-ping {
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  90%,
-  100% {
-    opacity: 0;
-    transform: scale(2);
-  }
-}
-
 .aksel-status-badge__anchor > .aksel-status-badge {
   --__axc-status-badge-size: 1rem;
 
   position: absolute;
   z-index: 1;
+  pointer-events: none;
   padding-inline: var(--ax-space-4);
   outline: 1px solid var(--ax-bg-default);
   line-height: 1;
