@@ -67,22 +67,22 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     } = props;
 
     const readOnlyEventHandlers = {
-      onMouseDown: (evt) => {
+      onMouseDown: (event: React.MouseEvent<HTMLSelectElement>) => {
         // NOTE: does not prevent click
-        if (readOnly) {
-          evt.preventDefault();
-          // focus on the element as per readonly input behavior
-          evt.target.focus();
-        }
+        event.preventDefault();
+        // Focus on the element as per readonly input behavior
+        event.currentTarget.focus();
       },
-      onKeyDown: (evt) => {
-        if (
-          readOnly &&
-          ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "].includes(
-            evt.key,
-          )
-        ) {
-          evt.preventDefault();
+      onKeyDown: (event: React.KeyboardEvent<HTMLSelectElement>) => {
+        const isCharacterKey =
+          event.code.startsWith("Key") ||
+          event.code.startsWith("Digit") ||
+          event.code.startsWith("Numpad");
+        const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+        const isArrowKey = event.key.startsWith("Arrow");
+        const isOpenKey = [" ", "Enter"].includes(event.key);
+        if ((isCharacterKey && !isModifierKey) || isArrowKey || isOpenKey) {
+          event.preventDefault();
         }
       },
     };
@@ -127,7 +127,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <select
             {...omit(rest, ["error", "errorId", "size", "readOnly"])}
             {...inputProps}
-            {...readOnlyEventHandlers}
+            {...(readOnly ? readOnlyEventHandlers : {})}
             ref={ref}
             className={cl(
               "aksel-select__input",
