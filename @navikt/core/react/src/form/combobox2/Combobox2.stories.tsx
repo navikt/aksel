@@ -464,7 +464,9 @@ export const Testing = () => {
 
 /* TODO:
 - Mobil: Vurder å ikke fokusere søkefelt automatisk.
-- Mobil: Vurder å ikke ha virtuelt fokus i det hele tatt. (Hvordan være sikker på at er på mobil?)
+- Mobil: Vurder å ikke ha virtuelt fokus i det hele tatt hvis man ikke har tastatur
+    Kan kanskje bruke media query, ev. ikke gi noe fokus før man begynner å trykke (som dagens CB. Sjekk hvordan SR takler at ingenting har virtuelt fokus.)
+    Sjekk om det er mulig å flytte virtuelt fokus uten tastatur (typ med skjermleser).
 - Bør kanskje ha type=text på søkefelt, ref. gamle CB.
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
 - Åpne på pil ned (og ev. opp)?
