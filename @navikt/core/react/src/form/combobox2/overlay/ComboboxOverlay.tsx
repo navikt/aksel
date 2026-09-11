@@ -107,16 +107,17 @@ function ComboboxModal({
       onOpenChange={onOpenChange}
       onOpenChangeComplete={onOpenChangeComplete}
     >
-      <Dialog.Popup
-        className="aksel-combobox2__overlay--mobile"
-        position="fullscreen"
-        style={
-          visualViewportHeight
-            ? { height: `${visualViewportHeight}px` }
-            : undefined
-        }
-      >
-        {children}
+      <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
+        <div
+          className="aksel-combobox2__modal-inner"
+          style={
+            visualViewportHeight
+              ? { maxHeight: `${visualViewportHeight}px` }
+              : undefined
+          }
+        >
+          {children}
+        </div>
       </Dialog.Popup>
     </Dialog>
   );

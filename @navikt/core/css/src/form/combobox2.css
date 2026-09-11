@@ -97,6 +97,16 @@
 }
 
 /************************************************
+ * Overlay                                      *
+ ************************************************/
+
+.aksel-combobox2__modal-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/************************************************
  * Popup                                        *
  ************************************************/
 
@@ -113,7 +123,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) & {
+  .aksel-combobox2:has(:not(.aksel-combobox2__modal)) & {
     outline: 1px solid var(--ax-border-neutral-subtleA);
     outline-offset: -1px;
     border-radius: var(--ax-radius-8);
@@ -145,7 +155,7 @@
       border: 2px solid var(--ax-border-focus);
     }
 
-    .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) &::after {
+    .aksel-combobox2:has(:not(.aksel-combobox2__modal)) &::after {
       border-top-left-radius: var(--ax-radius-8);
       border-top-right-radius: var(--ax-radius-8);
     }
@@ -164,7 +174,7 @@
     min-height: 0;
   }
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     border-radius: 0;
   }
 }
@@ -176,7 +186,7 @@
 .aksel-combobox2__list {
   padding-block: var(--ax-space-12);
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
   }
 }
