@@ -29,6 +29,7 @@ const Example = () => {
             id="transportmiddel"
             label="Hva er de kuleste transportmidlene?"
             options={options}
+            selectedOptions={field.value}
             isMultiSelect
             error={errors.transportmiddel?.message}
             ref={field.ref}
