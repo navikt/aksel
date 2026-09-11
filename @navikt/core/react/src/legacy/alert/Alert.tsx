@@ -97,7 +97,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         {...rest}
-        data-color={variantToRole(variant)}
+        data-color={variantToRoleMap[variant] ?? "info"}
         data-variant={variant}
         ref={ref}
         className={cl(
@@ -140,13 +140,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-const VariantToRoleMap: Record<AlertProps["variant"], AkselColor> = {
+const variantToRoleMap: Record<AlertProps["variant"], AkselColor> = {
   error: "danger",
   warning: "warning",
   info: "info",
   success: "success",
 };
-
-function variantToRole(variant: AlertProps["variant"]): AkselColor {
-  return VariantToRoleMap[variant] ?? "info";
-}
