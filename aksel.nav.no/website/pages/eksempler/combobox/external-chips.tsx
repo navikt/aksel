@@ -68,5 +68,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 9,
-  desc: "Ved å sette `shouldShowSelectedOptions={false}` kan du vise valgte alternativer et annet sted. Dette gjøres ofte i løsninger med flere filtre. Dette er også en mulig løsning når alternativene har mye tekst eller du ønsker å vise ekstra informasjon tilknyttet alternativene.",
+  desc: "Ved å sette `shouldShowSelectedOptions=false` kan du vise valgte alternativer et annet sted. Dette gjøres ofte i løsninger med flere filtre. Dette er også en mulig løsning når alternativene har mye tekst eller du ønsker å vise ekstra informasjon tilknyttet alternativene.",
 };
