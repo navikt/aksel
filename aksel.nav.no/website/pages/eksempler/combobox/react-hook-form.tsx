@@ -52,18 +52,18 @@ const Example = () => {
 };
 
 const options = [
-  "bil",
-  "buss",
-  "tog",
-  "skateboard",
-  "sykkel",
-  "motorsykkel",
-  "båt",
-  "fly",
-  "helikopter",
-  "lastebil",
-  "van",
-  "scooter",
+  "Bil",
+  "Buss",
+  "Tog",
+  "Skateboard",
+  "Sykkel",
+  "Motorsykkel",
+  "Båt",
+  "Fly",
+  "Helikopter",
+  "Lastebil",
+  "Van",
+  "Scooter",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -78,7 +78,7 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 9,
+  index: 10,
   desc: "Eksempel på bruk med react-hook-form.",
   sandbox: false,
 };

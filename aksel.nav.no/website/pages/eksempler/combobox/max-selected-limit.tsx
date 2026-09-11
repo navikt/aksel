@@ -24,18 +24,18 @@ const Example = () => {
 };
 
 const options = [
-  "bil",
-  "buss",
-  "tog",
-  "skateboard",
-  "sykkel",
-  "motorsykkel",
-  "båt",
-  "fly",
-  "helikopter",
-  "lastebil",
-  "van",
-  "scooter",
+  "Bil",
+  "Buss",
+  "Tog",
+  "Skateboard",
+  "Sykkel",
+  "Motorsykkel",
+  "Båt",
+  "Fly",
+  "Helikopter",
+  "Lastebil",
+  "Van",
+  "Scooter",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -51,5 +51,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 7,
-  desc: "Ved å sette en grense for maks antall valg vil brukeren få opp en beskjed om at hen ikke kan velge flere når grensen er nådd. Resterende alternativer blir inaktive.",
+  desc: "`maxSelected` lar deg sette en grense for antall alternativer brukeren kan velge.",
 };
