@@ -79,9 +79,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           event.code.startsWith("Digit") ||
           event.code.startsWith("Numpad");
         const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
-        const isArrowKey = event.key.startsWith("Arrow");
+        const isSelectionKey =
+          event.key.startsWith("Arrow") ||
+          ["Home", "End", "PageUp", "PageDown"].includes(event.key);
         const isOpenKey = [" ", "Enter"].includes(event.key);
-        if ((isCharacterKey && !isModifierKey) || isArrowKey || isOpenKey) {
+        if ((isCharacterKey && !isModifierKey) || isSelectionKey || isOpenKey) {
           event.preventDefault();
         }
       },
