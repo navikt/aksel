@@ -3,10 +3,7 @@ import { Chips, UNSAFE_Combobox, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([
-    "bil",
-    "tog",
-  ]);
+  const [selectedOptions, setSelectedOptions] = useState(["Bil", "Tog"]);
 
   const toggleSelected = (option: string) =>
     selectedOptions.includes(option)
