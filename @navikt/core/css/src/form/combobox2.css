@@ -188,6 +188,7 @@
 
   .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
+    overscroll-behavior-y: contain;
   }
 }
 
