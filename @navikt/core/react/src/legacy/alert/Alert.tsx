@@ -12,6 +12,10 @@ import { BodyLong } from "../../typography";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 
+/**
+ * @deprecated
+ * Use GlobalAlert, LocalAlert, InfoCard, or InlineMessage instead.
+ */
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Alert content.
@@ -68,13 +72,17 @@ const IconMap = {
 };
 
 /**
- * A component for displaying alerts
+ * @deprecated
+ * Use GlobalAlert, LocalAlert, InfoCard, or InlineMessage instead.
+ * Component will be removed in future versions when the usage of this component is phased enough out.
+ *
+ * @see [📝 Global documentation](https://aksel.nav.no/komponenter/core/globalalert)
+ * @see [📝 Local documentation](https://aksel.nav.no/komponenter/core/localalert)
+ * @see [📝 InfoCard documentation](https://aksel.nav.no/komponenter/core/infocard)
+ * @see [📝 InlineMessage documentation](https://aksel.nav.no/komponenter/core/inlinemessage)
+ *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/legacy/alert)
  * @see 🏷️ {@link AlertProps}
- * @example
- * ```jsx
- * <Alert variant="error">Dette er en feilmelding</Alert>
- * ```
  */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
