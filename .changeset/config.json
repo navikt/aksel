@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
   "changelog": [
     "@svitejs/changesets-changelog-github-compact",
     { "repo": "navikt/aksel" }
@@ -30,7 +30,7 @@
     "aksel-sanity-studio",
     "aksel-icons-figma-plugin",
     "aksel-mcp",
-    "playroom"
+    "aksel-playroom"
   ],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {

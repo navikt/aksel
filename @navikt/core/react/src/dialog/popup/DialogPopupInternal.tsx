@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { BoxNew, type BoxNewProps } from "../../primitives/box";
+import { Box, type BoxProps } from "../../primitives/box";
 import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
@@ -203,7 +203,7 @@ const DialogPopupInternal = forwardRef<
               !closeOnOutsideClick && event.preventDefault();
             }}
           >
-            <BoxNew
+            <Box
               aria-labelledby={ariaLabelledbyProp ?? titleId}
               id={id ?? popupId}
               {...restProps}
@@ -233,7 +233,7 @@ const DialogPopupInternal = forwardRef<
 function translateWidth(
   width: DialogPopupInternalProps["width"],
   position: DialogPosition,
-): BoxNewProps["width"] {
+): BoxProps["width"] {
   if (position === "fullscreen") {
     return undefined;
   }
@@ -253,7 +253,7 @@ function translateWidth(
 function translateHeight(
   height: DialogPopupInternalProps["height"],
   position: DialogPosition,
-): BoxNewProps["height"] {
+): BoxProps["height"] {
   if (
     position === "fullscreen" ||
     position === "left" ||

@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
 import { Button } from "../../button";
+import { Dialog } from "../../dialog";
 import { HStack, VStack } from "../../primitives/stack";
 import { Select } from "../select";
 import { Combobox, type ComboboxProps } from "./Combobox";
@@ -73,111 +74,149 @@ type DefaultProps = Pick<
   | "size"
   | "defaultOpen"
   | "multiselect"
-  | "triggerId"
+  | "id"
   | "readOnly"
+  | "disabled"
+  | "error"
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
-
-  return (
-    <Combobox
-      defaultOpen
-      options={countries}
-      selectedOptions={selectedOptions}
-      onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
-          newSelected
-            ? [...prev, option.value]
-            : prev.filter((v) => v !== option.value),
-        );
-      }}
-      {...props}
-    />
-  );
+  return <Combobox defaultOpen options={countries} {...props} />;
 };
 Default.args = {
   label: "Velg land",
   description: "Landet hvor du er født.",
   hideLabel: false,
   defaultOpen: false,
-  //multiselect: true,
+  multiselect: false,
   readOnly: false,
+  disabled: false,
+  error: "",
 };
 Default.argTypes = {
   size: {
     control: { type: "select" },
     options: ["small", "medium"],
   },
-  triggerId: {
+  id: {
     control: { type: "text" },
   },
 };
 
-function BaseCombobox<
+function BasicCombobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     MyOption,
 >(props: Partial<ComboboxProps<T>>) {
-  const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
-
   return (
     <Combobox
       options={countries as T[]}
-      selectedOptions={selectedOptions}
-      onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
-          newSelected
-            ? [...prev, option.value]
-            : prev.filter((v) => v !== option.value),
-        );
-      }}
+      defaultSelectedOptions={["opt-1"]}
       label="Velg land"
       description="Landet hvor du er født."
+      multiselect={false}
       {...props}
     />
   );
 }
 
-export const HideLabel = () => <BaseCombobox hideLabel />;
+export const Small = () => <BasicCombobox size="small" error="Error" />;
 
-export const ReadOnly = () => <BaseCombobox readOnly />;
+export const Hidelabel = () => <BasicCombobox hideLabel />;
 
-export const SingleSelect = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>(countries[0]);
+export const Readonly = () => <BasicCombobox readOnly />;
+
+export const Disabled = () => <BasicCombobox disabled />;
+
+export const ErrorStory = () => <BasicCombobox error="Du må velge et land." />;
+ErrorStory.storyName = "Error";
+
+export const DefaultOpen = () => <BasicCombobox defaultOpen />;
+DefaultOpen.storyName = "DefaultOpen";
+
+export const DefaultSelectedOptions = () => (
+  <BasicCombobox defaultSelectedOptions={["opt-1"]} />
+);
+DefaultSelectedOptions.storyName = "DefaultSelectedOptions";
+
+export const Name = () => (
+  <form
+    onSubmit={(event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const land = formData.getAll("land");
+      console.log(land);
+    }}
+  >
+    <BasicCombobox name="land" />
+    <br />
+    <button type="submit">Submit</button>
+  </form>
+);
+
+export const Controlled = () => {
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
+  ]);
+
   return (
-    <BaseCombobox
-      selectedOptions={[selectedOption.value]}
-      onToggleOption={(option) => setSelectedOption(option)}
-      multiselect={false}
-    />
+    <VStack gap="space-8" minWidth="250px">
+      <Combobox
+        options={countries}
+        selectedOptions={selectedOptions}
+        onToggleOption={(option, newSelected) => {
+          setSelectedOptions((prev) =>
+            newSelected
+              ? [...prev, option.value]
+              : prev.filter((v) => v !== option.value),
+          );
+        }}
+        label="Velg land"
+      />
+      Selected: {selectedOptions.join(", ")}
+      <div>
+        <button type="button" onClick={() => setSelectedOptions([])}>
+          Clear
+        </button>
+      </div>
+    </VStack>
   );
 };
 
-export const Groups = () => {
-  return (
-    <HStack gap="space-56" minHeight="300px">
-      <BaseCombobox
-        options={groupedCountries}
-        description="Landene du har statsborgerskap."
-      />
+export const Controlled2 = () => {
+  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
+    "opt-1",
+  ]);
 
-      <BaseCombobox
-        options={groupedCountries}
-        description="Landene du har statsborgerskap."
-        size="small"
+  return (
+    <VStack gap="space-8" minWidth="250px">
+      <Combobox
+        options={countries}
+        selectedOptions={selectedOptions}
+        onSelectedOptionsChange={setSelectedOptions}
+        label="Velg land"
       />
-    </HStack>
+      Selected: {selectedOptions.join(", ")}
+      <div>
+        <button type="button" onClick={() => setSelectedOptions([])}>
+          Clear
+        </button>
+      </div>
+    </VStack>
   );
 };
+
+export const Groups = () => (
+  <HStack gap="space-56" minHeight="300px">
+    <BasicCombobox options={groupedCountries} />
+
+    <BasicCombobox options={groupedCountries} size="small" />
+  </HStack>
+);
 
 type ManyOptionsProps = {
   count: number;
 };
 export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
-  const [selectedOptions, setSelectedOptions] = useState(["opt-1"]);
-
   const manyOptions = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
@@ -189,18 +228,7 @@ export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
 
   return (
     <div style={{ minHeight: "400px", width: "250px" }}>
-      <Combobox
-        options={manyOptions}
-        selectedOptions={selectedOptions}
-        onToggleOption={(option) => {
-          setSelectedOptions((prev) =>
-            prev.includes(option.value)
-              ? prev.filter((v) => v !== option.value)
-              : [...prev, option.value],
-          );
-        }}
-        label="Test"
-      />
+      <Combobox options={manyOptions} label="Test" />
     </div>
   );
 };
@@ -211,6 +239,40 @@ ManyOptions.parameters = {
   a11y: { disable: true },
   docs: { disable: true },
 };
+
+export const LongLabels = () => (
+  <div style={{ maxWidth: "300px" }}>
+    <ComboboxRoot
+      defaultOpen
+      options={[
+        {
+          id: "group-1",
+          label:
+            "Dette er en veldig lang label for å teste hvordan lange labels håndteres",
+          options: [
+            {
+              label:
+                "Dette er en veldig lang label for å teste hvordan dette håndteres",
+              value: "opt-1",
+            },
+            {
+              label:
+                "Dette er en veldig lang label for å teste hvordan dette håndteres",
+              value: "opt-2",
+            },
+          ],
+        },
+      ]}
+      selectedOptions={["opt-1"]}
+      onToggleOption={() => {}}
+    >
+      <ComboboxField />
+      <ComboboxPopup>
+        <ComboboxList />
+      </ComboboxPopup>
+    </ComboboxRoot>
+  </div>
+);
 
 export const Composition = () => {
   const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
@@ -274,8 +336,8 @@ export const Composition = () => {
 
       <VStack>
         <ComboboxRoot {...rootProps}>
-          <ComboboxLabel>Velg land</ComboboxLabel>
-          <ComboboxTrigger>
+          <ComboboxLabel htmlFor="demo">Velg land</ComboboxLabel>
+          <ComboboxTrigger id="demo">
             <Button>Med input og label</Button>
           </ComboboxTrigger>
           <ComboboxOverlay>
@@ -293,8 +355,8 @@ export const Composition = () => {
         onToggleOption={setSelectedOption}
         multiselect={false}
       >
-        <ComboboxLabel>Velg land (single select)</ComboboxLabel>
-        <ComboboxTrigger>
+        <ComboboxLabel htmlFor="demo2">Velg land (single select)</ComboboxLabel>
+        <ComboboxTrigger id="demo2">
           <ComboboxField />
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -306,8 +368,8 @@ export const Composition = () => {
       </ComboboxRoot>
 
       <ComboboxRoot {...rootProps}>
-        <ComboboxLabel>Velg land (multiselect)</ComboboxLabel>
-        <ComboboxTrigger>
+        <ComboboxLabel htmlFor="demo3">Velg land (multiselect)</ComboboxLabel>
+        <ComboboxTrigger id="demo3">
           <ComboboxField />
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -322,9 +384,31 @@ export const Composition = () => {
 };
 Composition.parameters = { layout: "padded" };
 
-export const Testing = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>();
+export const InDialog = () => {
+  return (
+    <Dialog defaultOpen>
+      <Dialog.Trigger>
+        <Button>Open dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Popup width="small">
+        <Dialog.Header>
+          <Dialog.Title>Dialog title</Dialog.Title>
+          <Dialog.Description>Dialog description</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BasicCombobox />
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button>Close dialog</Button>
+          </Dialog.CloseTrigger>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
+  );
+};
 
+export const Testing = () => {
   return (
     <VStack gap="space-32" width="300px">
       <button type="button" onClick={() => console.log("Knapp før")}>
@@ -333,8 +417,6 @@ export const Testing = () => {
 
       <Combobox
         options={countries}
-        selectedOptions={selectedOption ? [selectedOption.value] : []}
-        onToggleOption={setSelectedOption}
         multiselect={false}
         label="Velg land (Combobox)"
         description="Beskrivelse"
@@ -357,25 +439,33 @@ export const Testing = () => {
         <option value="latvia">Latvia</option>
         <option value="lithuania">Lithuania</option>
       </Select>
+
+      <Select label="Mange alternativer (vanlig select)">
+        {Array.from({ length: 100 }, (_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Don't care
+          <option key={i} value={`opt-${i + 1}`}>
+            {`Option ${String(i + 1).padStart(4, "0")}`}
+          </option>
+        ))}
+      </Select>
     </VStack>
   );
 };
 
 /* TODO:
-- Fullskjerm på mobil
+- Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
+- Åpne på pil ned (og ev. opp)?
+- Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
+  - allowNewValues (er dette ofte egentlig Autocomplete?)
+  - isLoading
+  - maxSelected
+- Skal den hete noe annet enn Combobox?
+- Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
 - Følge Combobox-pattern (mer)? Kan ikke følge det slavisk uansett.
     Pil opp og ned velger
     Ikke loop
-- Skal den hete noe annet enn Combobox? Er jo på en måte ikke det...
-- Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
-- Åpne på pil ned (og ev. opp)?
-- PageUp/Down
-- Error, disabled (?), readonly osv.
-- Vurder hvilke funksjoner i gamle CB vi skal ta med (maks valg, legg til osv.)
-- Tester
-- A11y-sjekk
+- A11y-sjekk (skjermleser, zoom, høykontrast...)
 - Beslutningsloggen?
-- Ikke wrappe options
 
 
 Utfordringer med komposisjon:
@@ -387,9 +477,4 @@ Forslag: Tilby enkeltkomponent for de vanligste tilfellene, men også subkompone
   Kan ev. ha slot/render-props for enkelte ting.
   Kan ev. bruke children for å kunne bytte ut/skreddersy innholdet i popup.
 
-
-Ressurser:
-- https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/combobox_role
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/listbox_role
 */

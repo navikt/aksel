@@ -1,5 +1,11 @@
 import React from "react";
 
+type WithoutAsChild<Component> = Component extends {
+  asChild: true;
+}
+  ? never
+  : Component;
+
 /**
  * This interface represents a component that can be overridden with different props and elements.
  * @template Component The type of the props for the component.
@@ -23,8 +29,11 @@ interface OverridableComponent<Component, Element extends HTMLElement> {
   <As extends React.ElementType>(
     props: {
       as: As;
-    } & Component &
-      Omit<React.ComponentPropsWithRef<As>, keyof Component | "as">,
+    } & WithoutAsChild<Component> &
+      Omit<
+        React.ComponentPropsWithRef<As>,
+        keyof WithoutAsChild<Component> | "as"
+      >,
   ): ReturnType<React.FC>;
 }
 
