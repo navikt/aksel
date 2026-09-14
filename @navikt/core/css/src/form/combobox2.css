@@ -3,6 +3,10 @@
   pointer-events: none;
 }
 
+:has(.aksel-combobox2__modal) * {
+  overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+}
+
 /************************************************
  * Label & description & error                  *
  ************************************************/
