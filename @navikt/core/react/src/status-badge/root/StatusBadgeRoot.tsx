@@ -84,6 +84,7 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         ref={ref}
         as="span"
         size="small"
+        weight="semibold"
         data-color={color}
         data-dot={isDot || undefined}
         aria-label={ariaLabel}

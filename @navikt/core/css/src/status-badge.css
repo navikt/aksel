@@ -15,11 +15,12 @@
   justify-content: center;
   min-width: var(--__axc-status-badge-size);
   height: var(--__axc-status-badge-size);
-  padding-inline: var(--ax-space-6);
+  padding: var(--ax-space-4);
   border-radius: var(--ax-radius-16);
   background: var(--ax-bg-strong);
   color: var(--ax-text-contrast);
   white-space: nowrap;
+  line-height: 1;
 
   @media (forced-colors: active) {
     forced-color-adjust: none;
@@ -29,17 +30,14 @@
 }
 
 .aksel-status-badge__anchor > .aksel-status-badge {
-  --__axc-status-badge-size: 1rem;
-
   position: absolute;
   z-index: 1;
   pointer-events: none;
-  padding-inline: var(--ax-space-4);
-  outline: 1px solid var(--ax-bg-default);
-  line-height: 1;
   inset-block-start: 0;
   inset-inline-end: 0;
-  transform: translate(40%, -40%);
+
+  /* 3px offset */
+  transform: translate(0.1865rem, -0.1865rem);
 }
 
 .aksel-status-badge[data-dot] {
