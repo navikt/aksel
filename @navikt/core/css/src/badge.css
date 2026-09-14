@@ -36,8 +36,8 @@
   inset-block-start: 0;
   inset-inline-end: 0;
 
-  /* 3px offset */
-  transform: translate(0.1865rem, -0.1865rem);
+  /* 5px offset */
+  transform: translate(0.3125rem, -0.3125rem);
 }
 
 .aksel-badge[data-dot] {
