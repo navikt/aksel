@@ -76,14 +76,14 @@
         "default": "./cjs/lookup/index.js"
       }
     },
-    "./PREVIEW/StatusBadge": {
+    "./PREVIEW/Badge": {
       "import": {
-        "types": "./esm/status-badge/index.d.ts",
-        "default": "./esm/status-badge/index.js"
+        "types": "./esm/badge/index.d.ts",
+        "default": "./esm/badge/index.js"
       },
       "require": {
-        "types": "./cjs/status-badge/index.d.ts",
-        "default": "./cjs/status-badge/index.js"
+        "types": "./cjs/badge/index.d.ts",
+        "default": "./cjs/badge/index.js"
       }
     },
     "./types/theme": {

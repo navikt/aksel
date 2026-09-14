@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { InboxIcon } from "@navikt/aksel-icons";
-import { StatusBadge } from ".";
+import { Badge } from ".";
 import { Button } from "../button";
 import { HStack } from "../primitives/stack";
 import type { AkselColor } from "../types/theme";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
 
-const meta: Meta<typeof StatusBadge> = {
-  title: "ds-react/StatusBadge",
-  component: StatusBadge,
+const meta: Meta<typeof Badge> = {
+  title: "ds-react/Badge",
+  component: Badge,
   parameters: {
     chromatic: { disable: true },
   },
@@ -17,7 +17,7 @@ const meta: Meta<typeof StatusBadge> = {
 
 export default meta;
 
-type Story = StoryObj<typeof StatusBadge>;
+type Story = StoryObj<typeof Badge>;
 
 const statuses: { color: AkselColor; label: string }[] = [
   { color: "danger", label: "Avslått" },
@@ -26,13 +26,6 @@ const statuses: { color: AkselColor; label: string }[] = [
   { color: "warning", label: "Mangler dokumentasjon" },
   { color: "neutral", label: "Ikke startet" },
 ];
-
-const placements = [
-  "top-left",
-  "top-right",
-  "bottom-left",
-  "bottom-right",
-] as const;
 
 export const Default: Story = {
   args: {
@@ -45,7 +38,7 @@ export const Dot: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
       {statuses.map(({ color, label }) => (
-        <StatusBadge key={color} data-color={color} aria-label={label} />
+        <Badge key={color} data-color={color} aria-label={label} />
       ))}
     </HStack>
   ),
@@ -54,10 +47,10 @@ export const Dot: Story = {
 export const Count: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
-      <StatusBadge data-color="danger" count={1} />
-      <StatusBadge data-color="danger" count={42} />
-      <StatusBadge data-color="danger" count={42} maxCount={42} />
-      <StatusBadge data-color="accent" count={199} />
+      <Badge data-color="danger" count={1} />
+      <Badge data-color="danger" count={42} />
+      <Badge data-color="danger" count={42} maxCount={42} />
+      <Badge data-color="accent" count={199} />
     </HStack>
   ),
 };
@@ -65,36 +58,15 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <StatusBadge data-color="danger" aria-hidden count={42}>
+      <Badge data-color="danger" aria-hidden count={42}>
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
         />
-      </StatusBadge>
-      <StatusBadge data-color="danger" aria-label="Nytt varsel">
+      </Badge>
+      <Badge data-color="danger" aria-label="Nytt varsel">
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
-      </StatusBadge>
-    </HStack>
-  ),
-};
-
-export const Placements: Story = {
-  render: () => (
-    <HStack gap="space-32" align="center">
-      {placements.map((placement) => (
-        <StatusBadge
-          key={placement}
-          placement={placement}
-          data-color="danger"
-          aria-hidden
-          count={3}
-        >
-          <Button
-            icon={<InboxIcon aria-hidden />}
-            aria-label={`Innboks, 3 nye meldinger (${placement})`}
-          />
-        </StatusBadge>
-      ))}
+      </Badge>
     </HStack>
   ),
 };
@@ -105,12 +77,12 @@ export const DynamicCount: Story = {
 
     return (
       <HStack gap="space-16" align="center">
-        <StatusBadge data-color="danger" aria-hidden count={count}>
+        <Badge data-color="danger" aria-hidden count={count}>
           <Button
             icon={<InboxIcon aria-hidden />}
             aria-label={`Innboks, ${count} nye meldinger`}
           />
-        </StatusBadge>
+        </Badge>
         <Button
           size="small"
           variant="secondary"
@@ -130,5 +102,4 @@ export const Chromatic = renderStoriesForChromatic({
   Count,
   Dot,
   Anchored,
-  Placements,
 });

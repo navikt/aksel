@@ -3,7 +3,7 @@ import type { AkselColor } from "../../types";
 import { BodyShort } from "../../typography";
 import { cl } from "../../utils/helpers";
 
-interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Element the badge is anchored to, positioned in the corner given by `placement`.
    * Leave empty to render the badge standalone.
@@ -16,7 +16,7 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   "data-color"?: AkselColor;
   /**
    * The count to display inside the badge, normalized to a non-negative integer.
-   * Leave empty to render a status dot.
+   * Leave empty to render a dot.
    */
   count?: number;
   /**
@@ -28,32 +28,32 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 /**
- * A small badge that communicates status or count.
+ * A small badge that communicates updates or count.
  *
- * Use standalone for inline status/counts, or pass the element you want to
+ * Use standalone for inline indicators/counts, or pass the element you want to
  * anchor to as `children` to pin the badge to one of its corners.
  *
  * Accessibility: A badge with no label is treated as decorative when it is a
  * dot or anchored to another element. When anchoring to an interactive element,
- * fold the status into that element's accessible name
+ * fold the state into that element's accessible name
  * (e.g. `aria-label="Innboks, 42 nye meldinger"`).
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/status-badge)
- * @see 🏷️ {@link StatusBadgeProps}
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/badge)
+ * @see 🏷️ {@link BadgeProps}
  *
  * @example
  * ```jsx
  * // Standalone
- * <StatusBadge data-color="success" aria-label="Aktiv" />
- * <StatusBadge data-color="danger" count={42} />
+ * <Badge data-color="success" aria-label="Aktiv" />
+ * <Badge data-color="danger" count={42} />
  *
  * // Anchored to an element
- * <StatusBadge data-color="danger" count={42}>
+ * <Badge data-color="danger" count={42}>
  *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
- * </StatusBadge>
+ * </Badge>
  * ```
  */
-const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
+const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
       children,
@@ -91,7 +91,7 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
         aria-labelledby={ariaLabelledby}
         role={role ?? (hasLabel ? "img" : undefined)}
         aria-hidden={ariaHidden ?? (isDecorative || undefined)}
-        className={cl("aksel-status-badge", className)}
+        className={cl("aksel-badge", className)}
       >
         {isDot
           ? null
@@ -106,7 +106,7 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     }
 
     return (
-      <span className="aksel-status-badge__anchor">
+      <span className="aksel-badge__anchor">
         {children}
         {badge}
       </span>
@@ -119,9 +119,9 @@ function normalizeCount(value: number, fallback: number) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-namespace, import/export
-export namespace StatusBadge {
-  export type Props = StatusBadgeProps;
+export namespace Badge {
+  export type Props = BadgeProps;
 }
 
 // eslint-disable-next-line import/export
-export { StatusBadge };
+export { Badge };
