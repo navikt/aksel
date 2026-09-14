@@ -37,34 +37,13 @@
   padding-inline: var(--ax-space-4);
   outline: 1px solid var(--ax-bg-default);
   line-height: 1;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(40%, -40%);
 }
 
 .aksel-status-badge[data-dot] {
   --__axc-status-badge-size: 0.75rem;
 
   padding-inline: 0;
-}
-
-.aksel-status-badge__anchor[data-placement="top-right"] > .aksel-status-badge {
-  inset-block-start: 0;
-  inset-inline-end: 0;
-  transform: translate(40%, -40%);
-}
-
-.aksel-status-badge__anchor[data-placement="top-left"] > .aksel-status-badge {
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  transform: translate(-40%, -40%);
-}
-
-.aksel-status-badge__anchor[data-placement="bottom-right"] > .aksel-status-badge {
-  inset-block-end: 0;
-  inset-inline-end: 0;
-  transform: translate(40%, 40%);
-}
-
-.aksel-status-badge__anchor[data-placement="bottom-left"] > .aksel-status-badge {
-  inset-block-end: 0;
-  inset-inline-start: 0;
-  transform: translate(-40%, 40%);
 }

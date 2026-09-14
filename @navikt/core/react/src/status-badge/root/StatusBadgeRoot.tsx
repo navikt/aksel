@@ -25,11 +25,6 @@ interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
    * @default 99
    */
   maxCount?: number;
-  /**
-   * Corner the badge is positioned in. Only applies when `children` is set.
-   * @default "top-right"
-   */
-  placement?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 }
 
 /**
@@ -70,7 +65,6 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
       "aria-hidden": ariaHidden,
       count,
       maxCount = 99,
-      placement = "top-right",
       ...rest
     },
     ref,
@@ -111,7 +105,7 @@ const StatusBadge = forwardRef<HTMLSpanElement, StatusBadgeProps>(
     }
 
     return (
-      <span className="aksel-status-badge__anchor" data-placement={placement}>
+      <span className="aksel-status-badge__anchor">
         {children}
         {badge}
       </span>
