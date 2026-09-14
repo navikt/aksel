@@ -1,7 +1,6 @@
 import type { PortableTextBlock } from "next-sanity";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { connection } from "next/server";
 import { Suspense } from "react";
 import { Box } from "@navikt/ds-react";
 import { DialogBody, DialogHeader } from "@navikt/ds-react/Dialog";
@@ -24,11 +23,6 @@ type Props = {
 // instant = false: intercepting dialog route (no stable pathname), so shared layout `usePathname()` can’t be prerendered.
 export const instant = false;
 
-/* https://nextjs.org/docs/messages/blocking-prerender-metadata-runtime */
-async function DynamicMarker() {
-  await connection();
-  return null;
-}
 export default async function Page({ params }: Props) {
   const { isEnabled: isDraftMode } = await draftMode();
 
@@ -102,9 +96,6 @@ async function CachedPage({
             <CustomPortableText value={content as PortableTextBlock[]} />
           </Box>
         </article>
-        <Suspense>
-          <DynamicMarker />
-        </Suspense>
       </DialogBody>
     </ChangelogDialog>
   );

@@ -37,10 +37,7 @@ function TableOfContents({
     const newToc = linkToChangelogs ? tocWithChangelogs(tocProp) : tocProp;
 
     if (hasChangelogs && newToc && newToc.length > 0) {
-      newToc.push({
-        id: "endringslogg-table",
-        title: "Endringslogg",
-      });
+      return [...newToc, { id: "endringslogg-table", title: "Endringslogg" }];
     }
 
     return newToc;
