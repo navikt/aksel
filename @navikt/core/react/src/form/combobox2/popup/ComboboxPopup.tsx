@@ -21,6 +21,7 @@ export interface ComboboxPopupProps {
   children: React.ReactNode;
 }
 
+// TODO: Bør den hete Dropdown eller Menu? (Og Overlay -> Popup?)
 export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const [virtuallyFocusedOptionValue, setVirtuallyFocusedOptionValue] =
     useState("");

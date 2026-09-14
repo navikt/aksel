@@ -33,7 +33,7 @@ function ComboboxList<
   }, []);*/
 
   return (
-    <Listbox.Options>
+    <Listbox.Options className="aksel-combobox2__list">
       {/*isPending && (
         <div className="aksel-combobox2__loading" role="status">
           Laster...
@@ -101,7 +101,7 @@ function ComboboxListContent<
             onToggleOption={localOnToggleOption}
             isSelected={selectedOptions.includes(option.value)}
             hasVirtualFocus={virtuallyFocusedOptionValue === option.value}
-            filterString={deferredFilterString}
+            highlightText={deferredFilterString}
           >
             {children as ComboboxListProps<typeof option>["children"]}
           </ComboboxOption>
@@ -114,7 +114,7 @@ function ComboboxListContent<
         onToggleOption={localOnToggleOption}
         isSelected={selectedOptions.includes(optOrGroup.value)}
         hasVirtualFocus={virtuallyFocusedOptionValue === optOrGroup.value}
-        filterString={deferredFilterString} // TODO: Vurder å kunne slå av dette for bedre ytelse
+        highlightText={deferredFilterString} // TODO: Vurder å kunne slå av dette for bedre ytelse
       >
         {children as ComboboxListProps<typeof optOrGroup>["children"]}
       </ComboboxOption>

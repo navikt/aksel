@@ -30,6 +30,7 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
             }
           }}
           aria-autocomplete="list"
+          inputMode="text"
         />
       </Listbox.InputSlot>
     </div>

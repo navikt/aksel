@@ -138,7 +138,7 @@ OptionMemoization.play = async ({ canvasElement }) => {
   expect(Number(countElm.textContent)).toBe(expectedCount);
 
   // Filtering should not re-render any options
-  // TODO: For this to work we must omit the filterString prop on ComboboxOption
+  // TODO: For this to work we must omit the highlightText prop on ComboboxOption
   /*await userEvent.type(combobox, "nor", { delay: 200 });
   expect(Number(countElm.textContent)).toBe(expectedCount);
   expect(canvas.getAllByRole("option").length).toBe(1);*/

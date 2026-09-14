@@ -106,16 +106,19 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
   background-color: var(--ax-bg-raised);
-  outline: 1px solid var(--ax-border-neutral-subtleA);
-  outline-offset: -1px;
   padding: 1px;
-  border-radius: var(--ax-radius-8);
-  box-shadow: var(--ax-shadow-dialog);
 
   /* This is needed to get overflow:auto to work on child */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) & {
+    outline: 1px solid var(--ax-border-neutral-subtleA);
+    outline-offset: -1px;
+    border-radius: var(--ax-radius-8);
+    box-shadow: var(--ax-shadow-dialog);
+  }
 }
 
 /************************************************
@@ -124,45 +127,59 @@
 
 .aksel-combobox2__filter {
   margin: -1px;
-  margin-bottom: var(--ax-space-12);
+}
 
-  & .aksel-search__wrapper {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.aksel-combobox2__filter .aksel-search__wrapper {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
-    &:has(.aksel-search__input:focus-visible) {
-      outline: none;
-      position: relative;
+  &:has(.aksel-search__input:focus-visible) {
+    outline: none;
+    position: relative;
 
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        border: 2px solid var(--ax-border-focus);
-        border-top-left-radius: var(--ax-radius-8);
-        border-top-right-radius: var(--ax-radius-8);
-      }
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border: 2px solid var(--ax-border-focus);
+    }
+
+    .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) &::after {
+      border-top-left-radius: var(--ax-radius-8);
+      border-top-right-radius: var(--ax-radius-8);
     }
   }
+}
 
-  & .aksel-search__input {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.aksel-combobox2__filter .aksel-search__input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
-    .aksel-listbox[data-size="medium"] & {
-      min-height: 0;
-    }
+  &:not(:hover) {
+    border-color: var(--ax-border-neutral-subtleA);
+  }
 
-    &:not(:hover) {
-      border-color: var(--ax-border-neutral-subtleA);
-    }
+  .aksel-combobox2[data-size="medium"] & {
+    min-height: 0;
+  }
+
+  .aksel-combobox2__overlay--mobile & {
+    border-radius: 0;
   }
 }
 
 /************************************************
  * List                                         *
  ************************************************/
+
+.aksel-combobox2__list {
+  padding-block: var(--ax-space-12);
+
+  .aksel-combobox2__overlay--mobile & {
+    padding-inline: var(--ax-space-16);
+  }
+}
 
 .aksel-combobox2__no-results {
   padding: var(--ax-space-12) var(--ax-space-8);
