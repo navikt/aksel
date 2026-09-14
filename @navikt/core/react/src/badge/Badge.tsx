@@ -5,18 +5,20 @@ import { cl } from "../utils/helpers";
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
-   * Element the badge is anchored to, positioned in the corner given by `placement`.
+   * Element the badge is anchored to.
    * Leave empty to render the badge standalone.
    */
   children?: React.ReactNode;
   /**
    * Badge color.
    * @default "danger"
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
   /**
-   * The count to display inside the badge, normalized to a non-negative integer.
-   * Leave empty to render a dot.
+   * Optional count to display inside the badge, normalized to a non-negative integer.
+   * Omit to render a dot.
    */
   count?: number;
   /**
@@ -31,12 +33,12 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * A small badge that communicates updates or count.
  *
  * Use standalone for inline indicators/counts, or pass the element you want to
- * anchor to as `children` to pin the badge to one of its corners.
+ * anchor it to as `children` to pin the badge to one of its corners.
  *
  * Accessibility: A badge with no label is treated as decorative when it is a
  * dot or anchored to another element. When anchoring to an interactive element,
  * fold the state into that element's accessible name
- * (e.g. `aria-label="Innboks, 42 nye meldinger"`).
+ * (e.g. `aria-label="Inbox, 42 new messages"`).
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/badge)
  * @see 🏷️ {@link BadgeProps}
@@ -44,12 +46,12 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * @example
  * ```jsx
  * // Standalone
- * <Badge data-color="success" aria-label="Aktiv" />
+ * <Badge data-color="success" aria-label="Active" />
  * <Badge data-color="danger" count={42} />
  *
  * // Anchored to an element
  * <Badge data-color="danger" count={42}>
- *   <Button icon={<InboxIcon />} aria-label="Innboks, 42 nye meldinger" />
+ *   <Button icon={<InboxIcon />} aria-label="Inbox, 42 new messages" />
  * </Badge>
  * ```
  */

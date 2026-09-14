@@ -58,7 +58,7 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <Badge data-color="danger" aria-hidden count={42}>
+      <Badge data-color="danger" count={42}>
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
@@ -77,7 +77,7 @@ export const DynamicCount: Story = {
 
     return (
       <HStack gap="space-16" align="center">
-        <Badge data-color="danger" aria-hidden count={count}>
+        <Badge data-color="danger" count={count}>
           <Button
             icon={<InboxIcon aria-hidden />}
             aria-label={`Innboks, ${count} nye meldinger`}
