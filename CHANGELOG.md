@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.16.3
+
+### @navikt/ds-react
+
+- Combobox: Fix issue deselecting options when uncontrolled ([#5259](https://github.com/navikt/aksel/pull/5259))
+
+- Select: Prevent from being changed with keyboard when readOnly ([#5257](https://github.com/navikt/aksel/pull/5257))
+
+- OverridableComponent: Add built-in guard against using `as` and `asChild` at the same time ([#5238](https://github.com/navikt/aksel/pull/5238))
+
 ## 8.16.2
 
 ### @navikt/ds-css
@@ -3034,7 +3044,7 @@
 
 - - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
 
-* - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+* * Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
 
 ### @navikt/ds-react
 
