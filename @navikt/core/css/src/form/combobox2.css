@@ -189,7 +189,7 @@
 
   .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
-    /* overscroll-behavior-y: contain; */
+    overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 
