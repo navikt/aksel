@@ -1,7 +1,7 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
-import type { AkselColor } from "../../types";
-import { BodyShort } from "../../typography";
-import { cl } from "../../utils/helpers";
+import type { AkselColor } from "../types";
+import { BodyShort } from "../typography";
+import { cl } from "../utils/helpers";
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /**
