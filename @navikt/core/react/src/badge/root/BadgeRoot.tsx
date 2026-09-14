@@ -89,7 +89,7 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         data-dot={isDot || undefined}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
-        role={role ?? (hasLabel ? "img" : undefined)}
+        role={role}
         aria-hidden={ariaHidden ?? (isDecorative || undefined)}
         className={cl("aksel-badge", className)}
       >
