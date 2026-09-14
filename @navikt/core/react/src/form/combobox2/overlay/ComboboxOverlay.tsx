@@ -99,6 +99,7 @@ function ComboboxModal({
     subscribeToResize,
     getVisualViewportHeight,
   );
+  console.info(visualViewportHeight);
 
   return (
     <Dialog
@@ -108,19 +109,7 @@ function ComboboxModal({
       onOpenChangeComplete={onOpenChangeComplete}
     >
       <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
-        <div
-          className="aksel-combobox2__modal-inner"
-          // The reported height is sometimes a bit too small,
-          // so we let the dialog fill the entire normal viewport,
-          // and only limit the inner content's height.
-          style={
-            visualViewportHeight
-              ? { maxHeight: `${visualViewportHeight}px` }
-              : undefined
-          }
-        >
-          {children}
-        </div>
+        {children}
       </Dialog.Popup>
     </Dialog>
   );

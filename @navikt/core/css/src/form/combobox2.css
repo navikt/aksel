@@ -104,10 +104,36 @@
  * Overlay                                      *
  ************************************************/
 
-.aksel-combobox2__modal-inner {
+/* .aksel-combobox2__modal-inner {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+} */
+
+/* STICKYTEST */
+
+.aksel-dialog__header {
+  position: sticky;
+  top: 0;
+  background: var(--ax-bg-default);
+}
+
+.aksel-combobox2__modal .aksel-combobox2__filter {
+  position: sticky;
+  top: 76px;
+  background: var(--ax-bg-default);
+}
+
+.aksel-dialog__popup {
+  overflow: auto;
+}
+
+.aksel-combobox2__modal .aksel-combobox2__popup {
+  overflow: visible;
+}
+
+.aksel-combobox2__modal .aksel-combobox2__list {
+  overflow: visible;
 }
 
 /************************************************
@@ -180,7 +206,7 @@
 
   .aksel-combobox2__modal & {
     border-radius: 0;
-    overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+    /* overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 
@@ -191,9 +217,10 @@
 .aksel-combobox2__list {
   padding-block: var(--ax-space-12);
 
+  /* stylelint-disable-next-line no-duplicate-selectors */
   .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
-    overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+    /* overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 
