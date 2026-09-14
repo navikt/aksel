@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
@@ -100,6 +100,22 @@ function ComboboxModal({
     getVisualViewportHeight,
   );
   console.info(visualViewportHeight);
+
+  useEffect(() => {
+    const metaTag = document.head.querySelector('meta[name="viewport"]');
+    if (metaTag && open) {
+      metaTag.setAttribute(
+        "content",
+        "width=device-width, initial-scale=1.0, interactive-widget=resizes-content",
+      );
+      return () => {
+        metaTag.setAttribute(
+          "content",
+          "width=device-width, initial-scale=1.0",
+        );
+      };
+    }
+  }, [open]);
 
   return (
     <Dialog

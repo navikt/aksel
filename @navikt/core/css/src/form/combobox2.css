@@ -112,7 +112,7 @@
 
 /* STICKYTEST */
 
-.aksel-dialog__header {
+/* .aksel-dialog__header {
   position: sticky;
   top: 0;
   background: var(--ax-bg-default);
@@ -134,7 +134,7 @@
 
 .aksel-combobox2__modal .aksel-combobox2__list {
   overflow: visible;
-}
+} */
 
 /************************************************
  * Popup                                        *
