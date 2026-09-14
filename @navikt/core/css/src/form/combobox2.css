@@ -104,6 +104,10 @@
  * Overlay                                      *
  ************************************************/
 
+/* .aksel-combobox2__modal {
+  overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+/* } */
+
 /* .aksel-combobox2__modal-inner {
   display: flex;
   flex-direction: column;
@@ -206,7 +210,6 @@
 
   .aksel-combobox2__modal & {
     border-radius: 0;
-    /* overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 
@@ -217,10 +220,9 @@
 .aksel-combobox2__list {
   padding-block: var(--ax-space-12);
 
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
-    /* overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+    /* overscroll-behavior-y: contain; /* TODO: Sjekk om trengs når har på modal (trengs kanskje på Safari).  Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 

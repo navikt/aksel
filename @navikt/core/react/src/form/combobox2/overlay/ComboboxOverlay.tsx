@@ -102,19 +102,27 @@ function ComboboxModal({
   console.info(visualViewportHeight);
 
   useEffect(() => {
-    const metaTag = document.head.querySelector('meta[name="viewport"]');
-    if (metaTag && open) {
-      metaTag.setAttribute(
-        "content",
-        "width=device-width, initial-scale=1.0, interactive-widget=resizes-content",
-      );
-      return () => {
-        metaTag.setAttribute(
-          "content",
-          "width=device-width, initial-scale=1.0",
-        );
-      };
+    if (!open) {
+      return;
     }
+    const metaTag = document.head.querySelector('meta[name="viewport"]');
+    if (!metaTag) {
+      // If there's no meta tag, the modal won't be used anyways, since the media query won't match.
+      return;
+    }
+    const oldContent = metaTag.getAttribute("content") || "";
+    if (oldContent.includes("interactive-widget")) {
+      return;
+    }
+    const newContent = `${oldContent ? `${oldContent}, ` : ""}interactive-widget=resizes-content`;
+    metaTag.setAttribute("content", newContent);
+    return () => metaTag.setAttribute("content", oldContent);
+
+    /* const newMetaTag = document.createElement("meta");
+    newMetaTag.setAttribute("name", "viewport");
+    newMetaTag.setAttribute("content", "interactive-widget=resizes-content");
+    document.head.appendChild(newMetaTag);
+    return () => document.head.removeChild(newMetaTag);*/
   }, [open]);
 
   return (
