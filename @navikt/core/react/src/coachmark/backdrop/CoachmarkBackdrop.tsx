@@ -28,7 +28,7 @@ const CoachmarkBackdrop = ({ anchorEl }: CoachmarkBackdropProps) => {
     return null;
   }
 
-  const padding = 12;
+  const padding = 10;
   const radius = 12;
   const left = rect.left - padding;
   const top = rect.top - padding;
