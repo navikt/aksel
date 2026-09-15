@@ -63,7 +63,7 @@ async function CachedKomponenterPage({
 }: { slug: string } & DynamicFetchOptions) {
   "use cache";
 
-  const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
+  const [{ data: pageData, tags }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
       query: KOMPONENT_BY_SLUG_QUERY,
       params: { slug },
@@ -77,6 +77,11 @@ async function CachedKomponenterPage({
       stega,
     }),
   ]);
+
+  console.info({
+    page: "Komponent page DS",
+    tags,
+  });
 
   if (!pageData?._id) {
     notFound();
