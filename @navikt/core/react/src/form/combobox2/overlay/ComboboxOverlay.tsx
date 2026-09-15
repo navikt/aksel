@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
@@ -99,9 +99,8 @@ function ComboboxModal({
     subscribeToResize,
     getVisualViewportHeight,
   );
-  console.info(visualViewportHeight);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!open) {
       return;
     }
@@ -118,12 +117,12 @@ function ComboboxModal({
     metaTag.setAttribute("content", newContent);
     return () => metaTag.setAttribute("content", oldContent);
 
-    /* const newMetaTag = document.createElement("meta");
-    newMetaTag.setAttribute("name", "viewport");
-    newMetaTag.setAttribute("content", "interactive-widget=resizes-content");
-    document.head.appendChild(newMetaTag);
-    return () => document.head.removeChild(newMetaTag);*/
-  }, [open]);
+    //const newMetaTag = document.createElement("meta");
+    //newMetaTag.setAttribute("name", "viewport");
+    //newMetaTag.setAttribute("content", "interactive-widget=resizes-content");
+    //document.head.appendChild(newMetaTag);
+    //return () => document.head.removeChild(newMetaTag);
+  }, [open]);*/
 
   return (
     <Dialog
@@ -133,7 +132,19 @@ function ComboboxModal({
       onOpenChangeComplete={onOpenChangeComplete}
     >
       <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
-        {children}
+        <div
+          className="aksel-combobox2__modal-inner"
+          // The reported height is sometimes a bit too small,
+          // so we let the dialog fill the entire normal viewport,
+          // and only limit the inner content's height.
+          style={
+            visualViewportHeight
+              ? { maxHeight: `${visualViewportHeight}px` }
+              : undefined
+          }
+        >
+          {children}
+        </div>
       </Dialog.Popup>
     </Dialog>
   );
