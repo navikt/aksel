@@ -80,6 +80,7 @@ async function CachedKomponenterPage({
 
   console.info({
     page: "Komponent page DS",
+    slug,
     tags,
   });
 
