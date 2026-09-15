@@ -1,18 +1,228 @@
-import { Meta, StoryFn } from "@storybook/react-vite";
-import React from "react";
-import Coachmark from "./Coachmark";
+import type { Meta, StoryFn } from "@storybook/react-vite";
+import React, { useRef, useState } from "react";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
+import { Button } from "../button";
+import { Link } from "../link";
+import { HStack, VStack } from "../primitives/stack";
+import { BodyShort, Heading } from "../typography";
+import { Coachmark } from "./root/CoachmarkRoot";
 
-const meta: Meta<typeof Coachmark> = {
+export default {
   title: "ds-react/Coachmark",
   component: Coachmark,
   parameters: {
     chromatic: { disable: true },
   },
-};
-export default meta;
+  decorators: [
+    (Story) => (
+      <div style={{ width: "500px", minHeight: "100vh" }}>
+        <Story />
+      </div>
+    ),
+  ],
+} satisfies Meta<typeof Coachmark>;
 
-export const Default: StoryFn<typeof Coachmark> = (props) => {
+export const CoachmarkAnchor: StoryFn<typeof Coachmark> = () => {
+  const createRef = useRef<HTMLButtonElement>(null);
+  const reviewRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+
   return (
-    <Coachmark {...props}>Id ullamco excepteur elit fugiat labore.</Coachmark>
+    <HStack gap="space-16">
+      <Button onClick={() => setOpen(true)}>Start tour</Button>
+      <Button ref={createRef}>Create</Button>
+      <Button ref={reviewRef}>Review</Button>
+      <Coachmark
+        tourStarted={open}
+        endTour={() => setOpen(false)}
+        steps={[
+          {
+            id: "step-1",
+            type: "anchor",
+            anchorRef: createRef,
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Title>Create</Coachmark.Title>
+                <Coachmark.Progress />
+                <Coachmark.Description>
+                  Start by creating a new item.
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.NextTrigger>
+                    <Button size="small">Next</Button>
+                  </Coachmark.NextTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+          {
+            id: "step-2",
+            type: "anchor",
+            anchorRef: reviewRef,
+            placement: "bottom-start",
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Title>Review</Coachmark.Title>
+                <Coachmark.Progress />
+                <Coachmark.Description>
+                  Review your item before submitting it.
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.CloseTrigger>
+                    <Button size="small">Close</Button>
+                  </Coachmark.CloseTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+        ]}
+      />
+    </HStack>
+  );
+};
+
+export const CoachmarkDialog: StoryFn<typeof Coachmark> = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Start tour</Button>
+      <Coachmark
+        tourStarted={open}
+        endTour={() => setOpen(false)}
+        steps={[
+          {
+            id: "step-1",
+            type: "dialog",
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Title>Welcome</Coachmark.Title>
+                <Coachmark.Progress />
+                <Coachmark.Description>
+                  Welcome to the new experience.
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.NextTrigger>
+                    <Button size="small">Next</Button>
+                  </Coachmark.NextTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+          {
+            id: "step-2",
+            type: "dialog",
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Title>Changes</Coachmark.Title>
+                <Coachmark.Progress />
+                <Coachmark.Description>
+                  Here is what changed since last time.
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.CloseTrigger>
+                    <Button size="small">Close</Button>
+                  </Coachmark.CloseTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+        ]}
+      />
+    </>
+  );
+};
+
+export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
+  const dashboardRef = useRef<HTMLButtonElement>(null);
+  const settingsRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <VStack gap="space-16" align="start">
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        Start tour
+      </Button>
+      <HStack gap="space-16">
+        <Button ref={dashboardRef}>Dashboard</Button>
+        <Button ref={settingsRef}>Settings</Button>
+      </HStack>
+      <Coachmark
+        tourStarted={open}
+        endTour={() => {
+          setOpen(false);
+        }}
+        steps={[
+          {
+            id: "step-1",
+            type: "dialog",
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Image>
+                  <img
+                    src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
+                    alt="Dashboard overview"
+                  />
+                </Coachmark.Image>
+                <Coachmark.Progress />
+                <Coachmark.Title>
+                  <Heading size="small">Dashboard</Heading>
+                </Coachmark.Title>
+                <Coachmark.Description>
+                  This tour takes 30 seconds.
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.NextTrigger>
+                    <Button size="small">Next</Button>
+                  </Coachmark.NextTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+          {
+            id: "step-2",
+            type: "anchor",
+            anchorRef: dashboardRef,
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Image>
+                  <img
+                    src="https://ragdollinfo.com/wp-content/uploads/2025/08/a-blue-bicolor-ragdoll-cat-sitting-1536x864.jpg"
+                    alt="Dashboard overview"
+                  />
+                </Coachmark.Image>
+                <Coachmark.Progress />
+                <Coachmark.Title>
+                  <Heading size="small">Dashboard</Heading>
+                </Coachmark.Title>
+                <Coachmark.Description>
+                  <HStack gap="space-4">
+                    <BodyShort>This is your dashboard overview.</BodyShort>
+                    <Link href="#">
+                      Learn more
+                      <ExternalLinkIcon title="External link" />
+                    </Link>
+                  </HStack>
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.PreviousTrigger>
+                    <Button size="small" variant="secondary">
+                      Back
+                    </Button>
+                  </Coachmark.PreviousTrigger>
+                  <Coachmark.CloseTrigger>
+                    <Button size="small">Close</Button>
+                  </Coachmark.CloseTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+        ]}
+      />
+    </VStack>
   );
 };
