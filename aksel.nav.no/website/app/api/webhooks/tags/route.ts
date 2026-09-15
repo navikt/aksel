@@ -37,10 +37,17 @@ export async function POST(req: NextRequest) {
 
     try {
       const tags = await fetchSyncTagsForDocument(SanityClient, body);
-      const message = `Revalidated tags: ${tags.join(", ")} from document ${JSON.stringify(body)}`;
-      console.info(message);
+      const { _id, _type } = webhookPayloadSchema.parse(body);
+      console.info(
+        JSON.stringify({
+          event: "sanity-webhook",
+          documentId: _id,
+          documentType: _type,
+          syncTags: tags,
+        }),
+      );
 
-      return NextResponse.json({ message, body });
+      return NextResponse.json({ revalidated: false, syncTags: tags, body });
     } catch (err) {
       console.error(err);
       return new Response((err as Error).message, { status: 500 });

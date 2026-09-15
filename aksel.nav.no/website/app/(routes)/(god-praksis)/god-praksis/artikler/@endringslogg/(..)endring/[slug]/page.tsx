@@ -22,10 +22,8 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-// Intercepting route: renders as a dialog during client navigation and has no
-// stable pathname of its own, so the shared Header/Footer `usePathname()` can't
-// be prerendered. Opt out of prerender validation; it renders dynamically.
-export const unstable_instant = false;
+// instant = false: intercepting dialog route (no stable pathname), so shared Header/Footer `usePathname()` can’t be prerendered.
+export const instant = false;
 
 export default async function Page({ params }: Props) {
   const { isEnabled: isDraftMode } = await draftMode();

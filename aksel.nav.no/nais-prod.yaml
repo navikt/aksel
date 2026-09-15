@@ -15,7 +15,8 @@ spec:
     - "https://design.nav.no"
   observability:
     autoInstrumentation:
-      enabled: true
+      # Disabled for testing: Date.now() aborts Next cache revalidation, potentially causing page-wide website error.
+      enabled: false
       runtime: nodejs
   replicas:
     disableAutoScaling: true
