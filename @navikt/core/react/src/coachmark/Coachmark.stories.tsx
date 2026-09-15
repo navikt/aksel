@@ -139,7 +139,12 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <VStack gap="space-16" align="start">
+    <VStack
+      gap="space-16"
+      align="start"
+      justify="space-between"
+      height="1000px"
+    >
       <Button
         onClick={() => {
           setOpen(true);
@@ -147,8 +152,8 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
       >
         Start tour
       </Button>
-      <HStack gap="space-16">
-        <Button ref={dashboardRef}>Dashboard</Button>
+      <Button ref={dashboardRef}>Dashboard</Button>
+      <HStack justify="end" width="100%">
         <Button ref={settingsRef}>Settings</Button>
       </HStack>
       <Coachmark
@@ -160,6 +165,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
           {
             id: "step-1",
             type: "dialog",
+            allowToEndTour: true,
             content: (
               <Coachmark.Content>
                 <Coachmark.Image>
@@ -207,6 +213,40 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
                       <ExternalLinkIcon title="External link" />
                     </Link>
                   </HStack>
+                </Coachmark.Description>
+                <Coachmark.Footer>
+                  <Coachmark.PreviousTrigger>
+                    <Button size="small" variant="secondary">
+                      Back
+                    </Button>
+                  </Coachmark.PreviousTrigger>
+                  <Coachmark.NextTrigger id="step-2-next">
+                    <Button size="small">Next</Button>
+                  </Coachmark.NextTrigger>
+                </Coachmark.Footer>
+              </Coachmark.Content>
+            ),
+          },
+          {
+            id: "step-3",
+            type: "anchor",
+            anchorRef: settingsRef,
+            placement: "left",
+            allowToEndTour: true,
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Image>
+                  <img
+                    src="https://i.pinimg.com/originals/b3/ee/c0/b3eec03459b57860fe1f898b7584683b.jpg"
+                    alt="Settings overview"
+                  />
+                </Coachmark.Image>
+                <Coachmark.Progress />
+                <Coachmark.Title>
+                  <Heading size="small">Settings</Heading>
+                </Coachmark.Title>
+                <Coachmark.Description>
+                  <BodyShort>This is your settings overview.</BodyShort>
                 </Coachmark.Description>
                 <Coachmark.Footer>
                   <Coachmark.PreviousTrigger>

@@ -21,6 +21,7 @@ const CoachmarkFooter = forwardRef<HTMLDivElement, CoachmarkFooterProps>(
         {...restProps}
         ref={forwardedRef}
         className={cl("aksel-coachmark__footer", className)}
+        data-coachmark-footer
       >
         {children}
       </div>

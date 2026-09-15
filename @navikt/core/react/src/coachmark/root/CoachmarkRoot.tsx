@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { Popover } from "../../popover";
 import { Portal } from "../../portal";
+import { HStack } from "../../primitives/stack";
 import { useClientLayoutEffect } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
-import { CoachmarkBackdrop } from "../backdrop/CoachmarkBachdrop";
+import { CoachmarkBackdrop } from "../backdrop/CoachmarkBackdrop";
 import {
   CoachmarkContent,
   type CoachmarkContentProps,
@@ -99,6 +102,15 @@ interface CoachmarkProps {
    */
   tourStarted: boolean;
   /**
+   * Active step index when controlled.
+   */
+  currentStep?: number;
+  /**
+   * Initial active step index when uncontrolled.
+   * @default 0
+   */
+  defaultStep?: number;
+  /**
    * Called when the active step changes.
    */
   onStepChange?: (step: number) => void;
@@ -106,6 +118,17 @@ interface CoachmarkProps {
    * Called when the tour is dismissed or finished.
    */
   endTour: () => void;
+  /**
+   * Size of the coachmark.
+   * @default "medium"
+   */
+  /**
+   * TODO:
+   * - Set size here or on each individual step if needed?
+   * - What should be default behavior if size is not specified?
+   * - For Figma sizes looks like different content the dev/ux puts in
+   */
+  size?: "small" | "medium";
 }
 
 /**
@@ -124,68 +147,169 @@ interface CoachmarkProps {
 const CoachmarkRoot = ({
   steps,
   tourStarted,
+  currentStep: currentStepProp,
+  defaultStep = 0,
   onStepChange,
   endTour,
 }: CoachmarkProps) => {
-  const [uncontrolledStep, setUncontrolledStep] = useState(0);
+  const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
-  const activeStep = uncontrolledStep;
+  const activeStep = currentStepProp ?? uncontrolledStep;
   const currentStep = steps[activeStep];
   const anchorRef =
     currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
 
   useClientLayoutEffect(() => {
-    setAnchorEl(anchorRef?.current ?? null);
+    const nextAnchorEl = anchorRef?.current ?? null;
+
+    if (nextAnchorEl) {
+      const { bottom, left, right, top } = nextAnchorEl.getBoundingClientRect();
+      const isOutsideViewport =
+        top < 0 ||
+        left < 0 ||
+        bottom > window.innerHeight ||
+        right > window.innerWidth;
+
+      if (isOutsideViewport) {
+        nextAnchorEl.scrollIntoView({
+          block: "center",
+          inline: "center",
+          behavior: "smooth",
+        });
+      }
+    }
+
+    setAnchorEl(nextAnchorEl);
   }, [anchorRef, tourStarted, activeStep]);
 
   useClientLayoutEffect(() => {
     if (!tourStarted) {
-      setUncontrolledStep(0);
+      setUncontrolledStep(defaultStep);
     }
-  }, [tourStarted]);
+  }, [defaultStep, tourStarted]);
 
-  const setStep = (nextStep: number) => {
-    setUncontrolledStep(nextStep);
-    onStepChange?.(nextStep);
-  };
+  const setStep = useCallback(
+    (nextStep: number) => {
+      if (currentStepProp === undefined) {
+        setUncontrolledStep(nextStep);
+      }
+      onStepChange?.(nextStep);
+    },
+    [currentStepProp, onStepChange],
+  );
 
-  const goToNextStep = () => {
+  const goToNextStep = useCallback(() => {
     if (activeStep === steps.length - 1) {
       endTour();
       return;
     }
     setStep(activeStep + 1);
+  }, [activeStep, endTour, setStep, steps.length]);
+
+  const goToPreviousStep = useCallback(() => {
+    if (activeStep > 0) {
+      setStep(activeStep - 1);
+    }
+  }, [activeStep, setStep]);
+
+  useEffect(() => {
+    if (!tourStarted) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToNextStep();
+      }
+
+      if (event.key === "ArrowLeft" && activeStep > 0) {
+        event.preventDefault();
+        goToPreviousStep();
+      }
+
+      if (event.key === "Escape" && currentStep?.allowToEndTour) {
+        event.preventDefault();
+        event.stopPropagation();
+        endTour();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown, true);
+    return () => document.removeEventListener("keydown", handleKeyDown, true);
+  }, [
+    activeStep,
+    currentStep?.allowToEndTour,
+    endTour,
+    goToNextStep,
+    goToPreviousStep,
+    tourStarted,
+  ]);
+
+  const getInitialFocus = () => {
+    // TODO: What should have focus if no next or close triggers are found?
+    const nextTriggers = document.querySelectorAll<HTMLElement>(
+      "[data-coachmark-next-trigger]",
+    );
+    const closeTriggers = document.querySelectorAll<HTMLElement>(
+      "[data-coachmark-close-trigger]",
+    );
+
+    return (
+      nextTriggers[nextTriggers.length - 1] ??
+      closeTriggers[closeTriggers.length - 1]
+    );
   };
+
+  const TopCloseButton = (
+    <HStack width="full" justify="end" marginBlock="space-0 space-2">
+      <CoachmarkCloseTrigger data-coachmark-top-close-trigger>
+        {/* TODO: What to call coachmark in Norwegian? */}
+        <Button
+          size="small"
+          icon={<XMarkIcon title="Avslutt opplæring" />}
+          variant="tertiary"
+          data-color="neutral"
+        />
+      </CoachmarkCloseTrigger>
+    </HStack>
+  );
 
   const renderCurrentStep = () => {
     if (currentStep?.type === "dialog") {
       return (
         <Dialog open={true}>
-          <Dialog.Popup>
-            <Dialog.Body>{currentStep.content}</Dialog.Body>
+          <Dialog.Popup initialFocusTo={getInitialFocus}>
+            <Dialog.Body>
+              {currentStep.allowToEndTour && TopCloseButton}
+              {currentStep.content}
+            </Dialog.Body>
           </Dialog.Popup>
         </Dialog>
       );
     }
 
     if (currentStep?.type === "anchor" && anchorEl) {
-      console.info(anchorEl.getBoundingClientRect());
       return (
-        <Portal>
+        <Portal key={currentStep.id}>
           <CoachmarkBackdrop anchorEl={anchorEl} />
           <FocusGuards>
-            <FocusBoundary loop trapped modal>
+            <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
               <Popover
                 anchorEl={anchorEl}
                 open
                 onClose={() => {}}
                 placement={currentStep.placement}
-                offset={currentStep.offset}
+                offset={currentStep.offset ?? 12}
                 role="dialog"
                 className="aksel-coachmark__popover"
               >
-                <Popover.Content className="aksel-coachmark__popover_content">
+                <Popover.Content
+                  className="aksel-coachmark__popover_content"
+                  data-top-close-button={currentStep.allowToEndTour ?? false}
+                >
+                  {currentStep.allowToEndTour && TopCloseButton}
                   {currentStep.content}
                 </Popover.Content>
               </Popover>
@@ -208,7 +332,7 @@ const CoachmarkRoot = ({
       currentStepIndex={activeStep}
       totalSteps={steps.length}
       goToNextStep={goToNextStep}
-      goToPreviousStep={() => setStep(activeStep - 1)}
+      goToPreviousStep={goToPreviousStep}
     >
       {renderCurrentStep()}
     </CoachmarkContextProvider>

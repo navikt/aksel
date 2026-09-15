@@ -35,6 +35,7 @@ const CoachmarkCloseTrigger = forwardRef<
       type="button"
       {...restProps}
       ref={forwardedRef}
+      data-coachmark-close-trigger
       onClick={composeEventHandlers(onClick, handleClick)}
     >
       {children}

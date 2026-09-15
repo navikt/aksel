@@ -27,6 +27,7 @@ const CoachmarkNextTrigger = forwardRef<
       type="button"
       {...restProps}
       ref={forwardedRef}
+      data-coachmark-next-trigger
       onClick={composeEventHandlers(onClick, goToNextStep)}
     >
       {children}
