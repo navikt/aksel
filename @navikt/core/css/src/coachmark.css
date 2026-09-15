@@ -4,10 +4,15 @@
 
 .aksel-coachmark__popover_content {
   --__axc-coachmark__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-32));
+  --__axc-coachmark__content-padding-block: var(--ax-space-24);
 
   max-width: var(--__axc-coachmark__content-width);
-  padding-block: var(--ax-space-24);
+  padding-block: var(--__axc-coachmark__content-padding-block);
   padding-inline: var(--ax-space-16);
+
+  &[data-top-close-button="true"] {
+    --__axc-coachmark__content-padding-block: var(--ax-space-2) var(--ax-space-24);
+  }
 }
 
 .aksel-coachmark__footer {
