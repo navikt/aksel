@@ -29,6 +29,7 @@
   width: var(--__axc-coachmark__content-width);
   margin-bottom: var(--ax-space-8);
 
+  /* TODO: Who handles this? */
   > * {
     object-fit: cover;
     width: 100%;
@@ -49,10 +50,6 @@
 
 .aksel-coachmark__backdrop {
   position: fixed;
-  /* top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh; */
   pointer-events: none;
   min-height: 100dvh;
   inset: 0;
