@@ -97,6 +97,46 @@
 }
 
 /************************************************
+ * Overlay                                      *
+ ************************************************/
+
+.aksel-combobox2__modal {
+  overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+}
+
+.aksel-combobox2__modal-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* STICKYTEST */
+
+/* .aksel-dialog__header {
+  position: sticky;
+  top: 0;
+  background: var(--ax-bg-default);
+}
+
+.aksel-combobox2__modal .aksel-combobox2__filter {
+  position: sticky;
+  top: 76px;
+  background: var(--ax-bg-default);
+}
+
+.aksel-dialog__popup {
+  overflow: auto;
+}
+
+.aksel-combobox2__modal .aksel-combobox2__popup {
+  overflow: visible;
+}
+
+.aksel-combobox2__modal .aksel-combobox2__list {
+  overflow: visible;
+} */
+
+/************************************************
  * Popup                                        *
  ************************************************/
 
@@ -113,7 +153,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) & {
+  .aksel-combobox2:has(:not(.aksel-combobox2__modal)) & {
     outline: 1px solid var(--ax-border-neutral-subtleA);
     outline-offset: -1px;
     border-radius: var(--ax-radius-8);
@@ -145,7 +185,7 @@
       border: 2px solid var(--ax-border-focus);
     }
 
-    .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) &::after {
+    .aksel-combobox2:has(:not(.aksel-combobox2__modal)) &::after {
       border-top-left-radius: var(--ax-radius-8);
       border-top-right-radius: var(--ax-radius-8);
     }
@@ -164,7 +204,7 @@
     min-height: 0;
   }
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     border-radius: 0;
   }
 }
@@ -176,8 +216,9 @@
 .aksel-combobox2__list {
   padding-block: var(--ax-space-12);
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
+    overscroll-behavior-y: contain; /* TODO: Sjekk om trengs når har på modal (trengs kanskje på Safari).  Prevents being able to scroll to area taken up by virtual keyboard */
   }
 }
 
