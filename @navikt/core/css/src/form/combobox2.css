@@ -101,7 +101,21 @@
  ************************************************/
 
 .aksel-combobox2__modal {
-  overscroll-behavior-y: contain; /* Prevents being able to scroll to area taken up by virtual keyboard */
+  /**
+   * We set the height of the content to the visible viewport, but the virtual
+   * keyboard will still compensate for it's precence by adding some empty space
+   * at the bottom. We use overscroll-behavior and touch-action to prevent scrolling
+   * to this area. They overlap some, but both are needed to make it work everywhere.
+   * See also "List" section below and ComboboxOverlay.tsx.
+   *
+   * On iOS, overscroll-behavior has no effect on scroll containers that have
+   * no scrollable overflow, but it works well in Chrome on Android.
+   *
+   * touch-action works on iOS, but (on Chrome on Android at least) it's still
+   * possible to scroll by dragging from just bellow the list.
+   */
+  overscroll-behavior-y: contain;
+  touch-action: pinch-zoom pan-x;
 }
 
 .aksel-combobox2__modal-inner {
@@ -109,32 +123,6 @@
   flex-direction: column;
   overflow: hidden;
 }
-
-/* STICKYTEST */
-
-/* .aksel-dialog__header {
-  position: sticky;
-  top: 0;
-  background: var(--ax-bg-default);
-}
-
-.aksel-combobox2__modal .aksel-combobox2__filter {
-  position: sticky;
-  top: 76px;
-  background: var(--ax-bg-default);
-}
-
-.aksel-dialog__popup {
-  overflow: auto;
-}
-
-.aksel-combobox2__modal .aksel-combobox2__popup {
-  overflow: visible;
-}
-
-.aksel-combobox2__modal .aksel-combobox2__list {
-  overflow: visible;
-} */
 
 /************************************************
  * Popup                                        *
@@ -218,7 +206,12 @@
 
   .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
-    overscroll-behavior-y: contain; /* TODO: Sjekk om trengs når har på modal (trengs kanskje på Safari).  Prevents being able to scroll to area taken up by virtual keyboard */
+
+    /* Prevents scrolling to area taken up by virtual keyboard.
+       Needed for iOS since it doesn't work to set it on the entire modal.
+       NB: Doesn't work if the list doesn't overflow.
+       See also "Overlay" section above and ComboboxOverlay.tsx. */
+    overscroll-behavior-y: contain;
   }
 }
 

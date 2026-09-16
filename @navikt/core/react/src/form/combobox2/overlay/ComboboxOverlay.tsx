@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
@@ -100,29 +100,15 @@ function ComboboxModal({
     getVisualViewportHeight,
   );
 
-  /*useEffect(() => {
-    if (!open) {
-      return;
-    }
-    const metaTag = document.head.querySelector('meta[name="viewport"]');
-    if (!metaTag) {
-      // If there's no meta tag, the modal won't be used anyways, since the media query won't match.
-      return;
-    }
-    const oldContent = metaTag.getAttribute("content") || "";
-    if (oldContent.includes("interactive-widget")) {
-      return;
-    }
-    const newContent = `${oldContent ? `${oldContent}, ` : ""}interactive-widget=resizes-content`;
-    metaTag.setAttribute("content", newContent);
-    return () => metaTag.setAttribute("content", oldContent);
-
-    //const newMetaTag = document.createElement("meta");
-    //newMetaTag.setAttribute("name", "viewport");
-    //newMetaTag.setAttribute("content", "interactive-widget=resizes-content");
-    //document.head.appendChild(newMetaTag);
-    //return () => document.head.removeChild(newMetaTag);
-  }, [open]);*/
+  useEffect(() => {
+    /**
+     * See "Overlay" section in CSS file for context. This handles the case when
+     * the list doesn't overflow and overscroll-behavior doesn't work on iOS.
+     */
+    const scrollToTop = () => (document.documentElement.scrollTop = 0);
+    visualViewport?.addEventListener("scroll", scrollToTop);
+    return () => visualViewport?.removeEventListener("scroll", scrollToTop);
+  }, []);
 
   return (
     <Dialog
