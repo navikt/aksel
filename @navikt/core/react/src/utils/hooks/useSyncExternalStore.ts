@@ -10,6 +10,9 @@ const maybeReactUseSyncExternalStore: UseSyncExternalStore | undefined = (
   React as any
 )["useSyncExternalStore" + ""]; // Workaround for https://github.com/webpack/webpack/issues/14814
 
+/**
+ * We don't use getServerSnapshot because React<18 does not have a way to check if we're hydrating.
+ */
 const useSyncExternalStoreShim: UseSyncExternalStore = (
   subscribe,
   getSnapshot,
