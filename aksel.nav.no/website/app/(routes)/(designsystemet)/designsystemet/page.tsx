@@ -63,15 +63,10 @@ async function CachedDesignsystemetPage({
 }: DynamicFetchOptions) {
   "use cache";
 
-  const { data: dsFrontPageData, tags } = await sanityFetch({
+  const { data: dsFrontPageData } = await sanityFetch({
     query: DS_FRONT_PAGE_QUERY,
     perspective,
     stega,
-  });
-
-  console.info({
-    page: "Frontpage DS",
-    tags,
   });
 
   if (dsFrontPageData === null) {
