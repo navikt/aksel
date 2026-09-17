@@ -25,5 +25,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 1,
-  desc: "Badge kan brukes som en enkel prikk for å indikere uleste meldinger eller ny hendelse. Husk å fjerne prikken når bruker har lest meldingene eller håndtert hendelsen.",
+  desc: "Badge kan brukes som en enkel prikk for å indikere uleste meldinger eller en ny hendelse. Husk å fjerne prikken når brukeren har lest meldingene eller håndtert hendelsen.",
 };
