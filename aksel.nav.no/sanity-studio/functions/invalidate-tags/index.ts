@@ -43,7 +43,9 @@ const handler = syncTagInvalidateEventHandler(
         );
       } else {
         await revalidate(url, secret, syncTags);
-        console.info(`Revalidated ${syncTags.length} sync tags on ${url}`);
+        console.info(
+          `Revalidated ${syncTags.length} sync tags: ${syncTags.join(", ")}`,
+        );
       }
     } catch (error) {
       console.error("Failed to revalidate sync tags:", error);
