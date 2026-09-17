@@ -1,5 +1,22 @@
 # @navikt/ds-react
 
+## 8.17.0
+
+### Minor Changes
+
+- New component: Badge, a small badge that communicates updates, presence or a count. ([#5096](https://github.com/navikt/aksel/pull/5096))
+
+### Patch Changes
+
+- Combobox: Fix issue deselecting options when uncontrolled ([#5259](https://github.com/navikt/aksel/pull/5259))
+
+- Select: Prevent from being changed with keyboard when readOnly ([#5257](https://github.com/navikt/aksel/pull/5257))
+
+- OverridableComponent: Add built-in guard against using `as` and `asChild` at the same time ([#5238](https://github.com/navikt/aksel/pull/5238))
+- Updated dependencies []:
+  - @navikt/aksel-icons@8.17.0
+  - @navikt/ds-tokens@8.17.0
+
 ## 8.16.2
 
 ### Patch Changes
