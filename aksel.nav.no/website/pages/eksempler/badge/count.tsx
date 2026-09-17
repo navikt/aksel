@@ -31,5 +31,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 0,
-  desc: "Badge kan settes brukes på linje med tekst for å f.eks indikere antall uleste meldinger. Husk å alltid inkludere en hjelpetekst for å forklare hva tallet representerer.",
+  desc: "Badge kan brukes på linje med tekst for å f.eks. indikere antall uleste meldinger. Husk å alltid inkludere en hjelpetekst for å forklare hva tallet representerer.",
 };
