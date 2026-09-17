@@ -1,4 +1,5 @@
 import { parseTags } from "next-sanity/live";
+import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { z } from "zod";
@@ -55,16 +56,9 @@ export async function POST(req: NextRequest) {
     return new NextResponse("Invalid sync tags", { status: 400 });
   }
 
-  /* TODO: Uncomment to enable revalidation of tags */
-  //for (const tag of tags) {
-  //  /*
-  //   * "max" marks the entry stale and lets the next request kick off a
-  //   * background revalidation while still being served stale content, so the
-  //   * first visitor after a publish sees the old page and the next sees the new
-  //   * one. Switch to `{ expire: 0 }` to make that first request block instead.
-  //   */
-  //  revalidateTag(tag, "max");
-  //}
+  for (const tag of tags) {
+    revalidateTag(tag, "max");
+  }
 
   console.info(
     JSON.stringify({
