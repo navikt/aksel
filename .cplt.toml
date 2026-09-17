@@ -1,0 +1,7 @@
+# https://min-copilot.ansatt.nav.no/cplt
+[propose]
+allow_docker = true
+allow_localhost_any = true
+
+[propose.allow]
+localhost = [3000, 6006, 6007]
