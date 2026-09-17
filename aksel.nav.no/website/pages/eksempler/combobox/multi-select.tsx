@@ -12,18 +12,18 @@ const Example = () => {
 };
 
 const options = [
-  "bil",
-  "buss",
-  "tog",
-  "skateboard",
-  "sykkel",
-  "motorsykkel",
-  "båt",
-  "fly",
-  "helikopter",
-  "lastebil",
-  "van",
-  "scooter",
+  "Bil",
+  "Buss",
+  "Tog",
+  "Skateboard",
+  "Sykkel",
+  "Motorsykkel",
+  "Båt",
+  "Fly",
+  "Helikopter",
+  "Lastebil",
+  "Van",
+  "Scooter",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
