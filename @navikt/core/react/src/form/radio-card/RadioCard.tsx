@@ -8,6 +8,19 @@ type RadioCardProps = RadioProps;
 /**
  * Radio option styled as a card.
  * @see 🏷️ {@link RadioCardProps}
+ * @example
+ * ```tsx
+ * <RadioCard value="1" label="Option 1" />
+ * <RadioCard value="2" label="Option 2" />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <RadioCardGroup>
+ *   <RadioCard value="1" label="Option 1" />
+ *   <RadioCard value="2" label="Option 2" />
+ * </RadioCardGroup>
+ * ```
  */
 const RadioCard = forwardRef<HTMLInputElement, RadioCardProps>(
   ({ className, ...rest }, ref) => {

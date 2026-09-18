@@ -11,8 +11,15 @@ export interface RadioCardGroupProps extends RadioGroupProps {
 }
 
 /**
- * Form radio group for `<RadioCard />` elements.
+ * RadioGroup for `<RadioCard />` elements. Should include max 2 radio cards if horizontal.
  * @see 🏷️ {@link RadioCardGroupProps}
+ * @example
+ * ```tsx
+ * <RadioCardGroup orientation="horizontal">
+ *   <RadioCard value="1" label="Option 1" />
+ *   <RadioCard value="2" label="Option 2" />
+ * </RadioCardGroup>
+ * ```
  */
 const RadioCardGroup = forwardRef<HTMLFieldSetElement, RadioCardGroupProps>(
   ({ className, orientation = "vertical", ...rest }, ref) => (
