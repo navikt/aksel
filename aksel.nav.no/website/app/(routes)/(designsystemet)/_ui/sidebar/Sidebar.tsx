@@ -45,7 +45,7 @@ async function CachedSidebar({
 }: SidebarProps & DynamicFetchOptions) {
   "use cache";
 
-  const [{ data: sidebar, tags }, { data: oversikt }] = await Promise.all([
+  const [{ data: sidebar }, { data: oversikt }] = await Promise.all([
     sanityFetch({
       query: DESIGNSYSTEM_SIDEBAR_QUERY,
       perspective,
@@ -57,11 +57,6 @@ async function CachedSidebar({
       stega,
     }),
   ]);
-
-  console.info({
-    page: "Sidebar",
-    tags,
-  });
 
   const sidebarData = generateSidebar(sidebar, oversikt);
 

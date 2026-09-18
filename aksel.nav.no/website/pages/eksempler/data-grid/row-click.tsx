@@ -8,7 +8,12 @@ const { columns, data } = generateDataGridDemo();
 const Example = () => {
   return (
     <VStack height="100vh" padding="space-16">
-      <DataGrid columns={columns} data={data} getRowId={(row) => row.caseId}>
+      <DataGrid
+        columns={columns}
+        data={data}
+        getRowId={(row) => row.caseId}
+        selection={{ mode: "multiple", defaultSelectedRowIds: ["3", "7"] }}
+      >
         <DataGrid.Table
           onRowAction={(row) => alert(`Klikket på rad ${row.id}!`)}
         />
