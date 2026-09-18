@@ -325,17 +325,17 @@
   }
 
   50% {
-    transform: scale(2);
+    transform: scale(1.6);
     opacity: 0.5;
   }
 
   75% {
-    transform: scale(2);
+    transform: scale(1.6);
     opacity: 0.5;
   }
 
   100% {
-    transform: scale(2.8);
+    transform: scale(2);
     opacity: 0;
   }
 }
@@ -347,17 +347,17 @@
   }
 
   50% {
-    transform: scale(2.8);
+    transform: scale(2);
     opacity: 0.5;
   }
 
   75% {
-    transform: scale(3);
+    transform: scale(2.4);
     opacity: 0;
   }
 
   100% {
-    transform: scale(3);
+    transform: scale(2.4);
     opacity: 0;
   }
 }
