@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
   Floating,
   MENU_COLLISION_AVOIDANCE,
 } from "../../../utils/components/floating/Floating";
-import { useMedia } from "../../../utils/hooks";
+import { useMedia, useSyncExternalStore } from "../../../utils/hooks";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
 
 interface ComboboxOverlayProps {
@@ -13,14 +13,13 @@ interface ComboboxOverlayProps {
   mobileHeader?: React.ReactNode;
 }
 
-const ComboboxOverlay = ({ children, mobileHeader }: ComboboxOverlayProps) => {
+function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
   const rootContext = useComboboxRootContext();
   const isMobile = useMedia("(max-width: 479px)");
 
   if (isMobile) {
     return (
-      <Dialog
-        size="small"
+      <ComboboxModal
         open={rootContext.open}
         onOpenChange={(open) => {
           rootContext.setOpen(open);
@@ -30,14 +29,9 @@ const ComboboxOverlay = ({ children, mobileHeader }: ComboboxOverlayProps) => {
           !open && rootContext.triggerRef.current?.focus()
         }
       >
-        <Dialog.Popup
-          className="aksel-combobox2__overlay--mobile"
-          position="fullscreen"
-        >
-          {mobileHeader}
-          {children}
-        </Dialog.Popup>
-      </Dialog>
+        {mobileHeader}
+        {children}
+      </ComboboxModal>
     );
   }
 
@@ -77,6 +71,69 @@ const ComboboxOverlay = ({ children, mobileHeader }: ComboboxOverlayProps) => {
       </Floating.Content>
     </DismissableLayer>
   );
+}
+
+type ComboboxModalProps = {
+  children: React.ReactNode;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onOpenChangeComplete: (open: boolean) => void;
 };
+
+function subscribeToResize(callback: () => void) {
+  visualViewport?.addEventListener("resize", callback);
+  return () => visualViewport?.removeEventListener("resize", callback);
+}
+
+function getVisualViewportHeight() {
+  return visualViewport?.height; // Takes into account virtual keyboard etc.
+}
+
+function ComboboxModal({
+  children,
+  open,
+  onOpenChange,
+  onOpenChangeComplete,
+}: ComboboxModalProps) {
+  const visualViewportHeight = useSyncExternalStore(
+    subscribeToResize,
+    getVisualViewportHeight,
+  );
+
+  useEffect(() => {
+    /**
+     * See "Overlay" section in CSS file for context. This handles the case when
+     * the list doesn't overflow and overscroll-behavior doesn't work on iOS.
+     */
+    const scrollToTop = () => (document.documentElement.scrollTop = 0);
+    visualViewport?.addEventListener("scroll", scrollToTop);
+    return () => visualViewport?.removeEventListener("scroll", scrollToTop);
+  }, []);
+
+  return (
+    <Dialog
+      size="small"
+      open={open}
+      onOpenChange={onOpenChange}
+      onOpenChangeComplete={onOpenChangeComplete}
+    >
+      <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
+        <div
+          className="aksel-combobox2__modal-inner"
+          // The reported height is sometimes a bit too small,
+          // so we let the dialog fill the entire normal viewport,
+          // and only limit the inner content's height.
+          style={
+            visualViewportHeight
+              ? { maxHeight: `${visualViewportHeight}px` }
+              : undefined
+          }
+        >
+          {children}
+        </div>
+      </Dialog.Popup>
+    </Dialog>
+  );
+}
 
 export { ComboboxOverlay };

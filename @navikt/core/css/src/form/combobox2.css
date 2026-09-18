@@ -97,6 +97,34 @@
 }
 
 /************************************************
+ * Overlay                                      *
+ ************************************************/
+
+.aksel-combobox2__modal {
+  /**
+   * We set the height of the content to the visible viewport, but the virtual
+   * keyboard will still compensate for it's precence by adding some empty space
+   * at the bottom. We use overscroll-behavior and touch-action to prevent scrolling
+   * to this area. They overlap some, but both are needed to make it work everywhere.
+   * See also "List" section below and ComboboxOverlay.tsx.
+   *
+   * On iOS, overscroll-behavior has no effect on scroll containers that have
+   * no scrollable overflow, but it works well in Chrome on Android.
+   *
+   * touch-action works on iOS, but (on Chrome on Android at least) it's still
+   * possible to scroll by dragging from just bellow the list.
+   */
+  overscroll-behavior-y: contain;
+  touch-action: pinch-zoom pan-x;
+}
+
+.aksel-combobox2__modal-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/************************************************
  * Popup                                        *
  ************************************************/
 
@@ -113,7 +141,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) & {
+  .aksel-combobox2:has(:not(.aksel-combobox2__modal)) & {
     outline: 1px solid var(--ax-border-neutral-subtleA);
     outline-offset: -1px;
     border-radius: var(--ax-radius-8);
@@ -145,7 +173,7 @@
       border: 2px solid var(--ax-border-focus);
     }
 
-    .aksel-combobox2:has(:not(.aksel-combobox2__overlay--mobile)) &::after {
+    .aksel-combobox2:has(:not(.aksel-combobox2__modal)) &::after {
       border-top-left-radius: var(--ax-radius-8);
       border-top-right-radius: var(--ax-radius-8);
     }
@@ -164,7 +192,7 @@
     min-height: 0;
   }
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     border-radius: 0;
   }
 }
@@ -176,8 +204,14 @@
 .aksel-combobox2__list {
   padding-block: var(--ax-space-12);
 
-  .aksel-combobox2__overlay--mobile & {
+  .aksel-combobox2__modal & {
     padding-inline: var(--ax-space-16);
+
+    /* Prevents scrolling to area taken up by virtual keyboard.
+       Needed for iOS since it doesn't work to set it on the entire modal.
+       NB: Doesn't work if the list doesn't overflow.
+       See also "Overlay" section above and ComboboxOverlay.tsx. */
+    overscroll-behavior-y: contain;
   }
 }
 
