@@ -20,10 +20,10 @@ spec:
     max: 1
   resources:
     limits:
-      memory: 2048Mi
+      memory: 4048Mi
     requests:
-      cpu: 172m
-      memory: 850Mi
+      cpu: 200m
+      memory: 1850Mi
   liveness:
     path: /api/isAlive
     initialDelay: 20
