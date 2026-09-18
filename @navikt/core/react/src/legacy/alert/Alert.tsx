@@ -73,13 +73,11 @@ const IconMap = {
 
 /**
  * @deprecated
- * Use GlobalAlert, LocalAlert, InfoCard, or InlineMessage instead.
+ * Use [GlobalAlert](https://aksel.nav.no/komponenter/core/globalalert),
+ * [LocalAlert](https://aksel.nav.no/komponenter/core/localalert),
+ * [InfoCard](https://aksel.nav.no/komponenter/core/infocard), or
+ * [InlineMessage](https://aksel.nav.no/komponenter/core/inlinemessage) instead.
  * Component will be removed in future versions when the usage of this component is phased enough out.
- *
- * @see [📝 Global documentation](https://aksel.nav.no/komponenter/core/globalalert)
- * @see [📝 Local documentation](https://aksel.nav.no/komponenter/core/localalert)
- * @see [📝 InfoCard documentation](https://aksel.nav.no/komponenter/core/infocard)
- * @see [📝 InlineMessage documentation](https://aksel.nav.no/komponenter/core/inlinemessage)
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/legacy/alert)
  * @see 🏷️ {@link AlertProps}
