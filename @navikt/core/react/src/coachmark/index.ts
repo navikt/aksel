@@ -9,6 +9,7 @@ export {
   CoachmarkProgress,
   CoachmarkCloseTrigger,
   CoachmarkNextTrigger,
+  CoachmarkDot,
 } from "./root/CoachmarkRoot";
 export type {
   CoachmarkStepType,
@@ -21,4 +22,5 @@ export type {
   CoachmarkProgressProps,
   CoachmarkCloseTriggerProps,
   CoachmarkNextTriggerProps,
+  CoachmarkDotProps,
 } from "./root/CoachmarkRoot";

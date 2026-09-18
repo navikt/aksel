@@ -18,6 +18,7 @@ import {
   CoachmarkDescription,
   type CoachmarkDescriptionProps,
 } from "../description/CoachmarkDescription";
+import { CoachmarkDot, type CoachmarkDotProps } from "../dot/CoachmarkDot";
 import {
   CoachmarkFooter,
   type CoachmarkFooterProps,
@@ -219,7 +220,7 @@ const CoachmarkRoot = ({
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight") {
+      if (event.key === "ArrowRight" && activeStep < steps.length - 1) {
         event.preventDefault();
         goToNextStep();
       }
@@ -245,6 +246,7 @@ const CoachmarkRoot = ({
     goToNextStep,
     goToPreviousStep,
     tourStarted,
+    steps.length,
   ]);
 
   const getInitialFocus = () => {
@@ -280,8 +282,8 @@ const CoachmarkRoot = ({
     if (currentStep?.type === "dialog") {
       return (
         <Dialog open={true}>
-          <Dialog.Popup initialFocusTo={getInitialFocus}>
-            <Dialog.Body>
+          <Dialog.Popup initialFocusTo={getInitialFocus} width="small">
+            <Dialog.Body className="aksel-coachmark__dialog-body">
               {currentStep.allowToEndTour && TopCloseButton}
               {currentStep.content}
             </Dialog.Body>
@@ -349,6 +351,7 @@ const Coachmark = Object.assign(CoachmarkRoot, {
   PreviousTrigger: CoachmarkPreviousTrigger,
   Footer: CoachmarkFooter,
   Image: CoachmarkImage,
+  Dot: CoachmarkDot,
 });
 
 export {
@@ -362,6 +365,7 @@ export {
   CoachmarkPreviousTrigger,
   CoachmarkFooter,
   CoachmarkImage,
+  CoachmarkDot,
 };
 
 export type {
@@ -376,4 +380,5 @@ export type {
   CoachmarkPreviousTriggerProps,
   CoachmarkFooterProps,
   CoachmarkImageProps,
+  CoachmarkDotProps,
 };
