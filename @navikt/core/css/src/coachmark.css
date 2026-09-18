@@ -385,7 +385,7 @@
   }
 
   100% {
-    transform: scale(2.4);
+    transform: scale(1.9);
     opacity: 0;
   }
 }
@@ -401,7 +401,7 @@
   }
 
   100% {
-    transform: scale(3.2);
+    transform: scale(2.6);
     opacity: 0;
   }
 }
