@@ -267,7 +267,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
 };
 
 export const CoachmarkDot: StoryFn<typeof Coachmark> = () => {
-  const animations = ["ONE", "TWO", "THREE", "FOUR"];
+  const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE"];
   /* TODO:
    * - Set data-color only for dot?
    */

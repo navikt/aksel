@@ -109,6 +109,10 @@
   &[data-animation="FOUR"] {
     animation: pulse-inner-FOUR var(--__axc-coachmark__dot-animation-duration) infinite;
   }
+
+  &[data-animation="FIVE"] {
+    animation: pulse-inner-FIVE var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
 }
 
 .aksel-coachmark__dot-pulse-outer {
@@ -133,6 +137,10 @@
 
   &[data-animation="FOUR"] {
     animation: pulse-outer-FOUR var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+
+  &[data-animation="FIVE"] {
+    animation: pulse-outer-FIVE var(--__axc-coachmark__dot-animation-duration) infinite;
   }
 }
 
@@ -306,6 +314,50 @@
 
   100% {
     transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-inner-FIVE {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+
+  75% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-FIVE {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(2.8);
+    opacity: 0.5;
+  }
+
+  75% {
+    transform: scale(3);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(3);
     opacity: 0;
   }
 }
