@@ -77,7 +77,7 @@ const IconMap = {
  * [LocalAlert](https://aksel.nav.no/komponenter/core/localalert),
  * [InfoCard](https://aksel.nav.no/komponenter/core/infocard), or
  * [InlineMessage](https://aksel.nav.no/komponenter/core/inlinemessage) instead.
- * Component will be removed in future versions when the usage of this component is phased enough out.
+ * Component will be removed in future version.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/legacy/alert)
  * @see 🏷️ {@link AlertProps}
