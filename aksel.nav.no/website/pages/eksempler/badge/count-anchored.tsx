@@ -4,17 +4,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-8">
-      <HStack align="center" gap="space-6">
+    <VStack gap="space-12">
+      <HStack align="center" gap="space-8">
         <Badge count={5}>
-          <Button variant="secondary" aria-label="5 uleste meldinger">
+          <Button variant="secondary" aria-label="Meldinger, 5 uleste">
             Meldinger
           </Button>
         </Badge>
       </HStack>
-      <HStack align="center" gap="space-6">
+      <HStack align="center" gap="space-8">
         <Badge count={120}>
-          <Button variant="secondary" aria-label="120 uleste meldinger">
+          <Button variant="secondary" aria-label="Meldinger, 120 uleste">
             Meldinger
           </Button>
         </Badge>

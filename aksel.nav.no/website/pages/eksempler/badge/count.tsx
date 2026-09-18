@@ -4,14 +4,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="space-8">
-      <HStack align="center" gap="space-6">
+    <VStack gap="space-12">
+      <HStack align="center" gap="space-8">
         <BodyShort as="span" weight="semibold">
           Inbox
         </BodyShort>
         <Badge count={5} data-color="neutral" aria-label="5 ulest" />
       </HStack>
-      <HStack align="center" gap="space-6">
+      <HStack align="center" gap="space-8">
         <BodyShort as="span" weight="semibold">
           Inbox
         </BodyShort>

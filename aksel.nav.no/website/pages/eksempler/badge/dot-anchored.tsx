@@ -1,19 +1,17 @@
 import { BellIcon } from "@navikt/aksel-icons";
-import { Button, HStack } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import { Badge } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack align="center" gap="space-6">
-      <Badge>
-        <Button
-          variant="secondary"
-          aria-label="Uleste meldinger"
-          icon={<BellIcon aria-hidden />}
-        />
-      </Badge>
-    </HStack>
+    <Badge>
+      <Button
+        variant="secondary"
+        title="Uleste meldinger"
+        icon={<BellIcon aria-hidden />}
+      />
+    </Badge>
   );
 };
 
