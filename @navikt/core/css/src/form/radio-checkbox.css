@@ -19,6 +19,62 @@
   }
 }
 
+/* Radio card */
+.aksel-radio-card {
+  width: 100%;
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  padding: var(--ax-space-16) var(--ax-space-20);
+  border-radius: var(--ax-radius-8);
+  background-color: var(--ax-bg-default);
+  cursor: pointer;
+  align-content: flex-start;
+
+  &.aksel-radio--small {
+    padding: var(--ax-space-12) var(--ax-space-16);
+  }
+
+  &:not(.aksel-radio--disabled, .aksel-radio--readonly, .aksel-radio--error):hover {
+    box-shadow: 0 0 0 1px var(--ax-border-default);
+    border-color: var(--ax-border-default);
+  }
+
+  &:focus-within::after,
+  &.aksel-radio--small:focus-within::after {
+    inset: 0;
+    border-radius: calc(var(--ax-radius-8) - 1px);
+    outline-offset: 4px;
+  }
+
+  &:has(.aksel-radio__input:checked):not(.aksel-radio--disabled, .aksel-radio--readonly) {
+    box-shadow: 0 0 0 1px var(--ax-border-default);
+    border-color: var(--ax-border-default);
+
+    &:not(.aksel-radio--error) {
+      background-color: var(--ax-bg-accent-moderateA);
+    }
+  }
+
+  &:is(.aksel-radio--disabled, .aksel-radio--readonly) {
+    background-color: var(--ax-bg-neutral-moderate);
+  }
+}
+
+.aksel-radio-card-group {
+  & > .aksel-radio-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ax-space-12);
+  }
+
+  &.aksel-radio-group--small > .aksel-radio-buttons {
+    gap: var(--ax-space-8);
+  }
+
+  &[data-orientation="horizontal"] > .aksel-radio-buttons {
+    flex-direction: row;
+  }
+}
+
 /* Small */
 .aksel-checkbox--small,
 .aksel-radio--small {
@@ -205,14 +261,20 @@
 
 /* Marker colors in unchecked hover state (unless disabled) */
 .aksel-checkbox__input:hover:not(:disabled, :checked, :indeterminate),
-.aksel-radio__input:hover:not(:disabled, :checked) {
+.aksel-radio__input:hover:not(:disabled, :checked),
+.aksel-radio-card:hover:not(.aksel-radio--disabled, .aksel-radio--readonly) > .aksel-radio__input:not(:disabled, :checked) {
   border-color: var(--ax-border-strong);
   background-color: var(--ax-bg-moderate-hoverA);
 }
 
+.aksel-radio-card.aksel-radio--disabled > .aksel-radio__input:checked {
+  border-color: var(--ax-border-neutral-strong);
+}
+
 /* Marker colors in unchecked error state (unless disabled) */
 .aksel-checkbox--error .aksel-checkbox__input:not(:disabled, :checked, :indeterminate),
-.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked) {
+.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked),
+.aksel-radio-card.aksel-radio--error > .aksel-radio__input:not(:disabled, :checked) {
   border-color: var(--ax-border-danger-strong);
 }
 
@@ -224,7 +286,8 @@
 
 /* Cursor in disabled state on otherwise clickable elements */
 .aksel-checkbox--disabled :where(.aksel-checkbox__input, .aksel-checkbox__label),
-.aksel-radio--disabled > :where(.aksel-radio__input, .aksel-radio__label) {
+.aksel-radio--disabled > :where(.aksel-radio__input, .aksel-radio__label),
+.aksel-radio-card.aksel-radio--disabled {
   cursor: not-allowed;
 }
 
