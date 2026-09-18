@@ -105,6 +105,10 @@
   &[data-animation="TWO"] {
     animation: pulse-inner-TWO var(--__axc-coachmark__dot-animation-duration) infinite;
   }
+
+  &[data-animation="FOUR"] {
+    animation: pulse-inner-FOUR var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
 }
 
 .aksel-coachmark__dot-pulse-outer {
@@ -125,6 +129,10 @@
 
   &[data-animation="THREE"] {
     animation: pulse-outer-THREE 2s infinite;
+  }
+
+  &[data-animation="FOUR"] {
+    animation: pulse-outer-FOUR var(--__axc-coachmark__dot-animation-duration) infinite;
   }
 }
 
@@ -172,7 +180,6 @@
   }
 }
 
-/* -------------------------- TWO ---------------------------- */
 @keyframes pulse-inner-TWO {
   0% {
     transform: scale(0);
@@ -235,6 +242,70 @@
 
   100% {
     transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-inner-FOUR {
+  0% {
+    transform: scale(0);
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  20% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  40% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  60% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  80% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-FOUR {
+  0% {
+    transform: scale(0);
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  20% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  40% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  60% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.5);
     opacity: 0;
   }
 }
