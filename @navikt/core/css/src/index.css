@@ -62,6 +62,7 @@
 @import "./table.css" layer(aksel.components.modules);
 @import "./tabs.css" layer(aksel.components.modules);
 @import "./list.css" layer(aksel.components.modules);
+@import "./coachmark.css" layer(aksel.components.modules);
 
 /* --------------------------------- Layout --------------------------------- */
 @import "./primitives/index.css" layer(aksel.layout);

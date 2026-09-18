@@ -149,6 +149,16 @@
         "default": "./cjs/chat/index.js"
       }
     },
+    "./Coachmark": {
+      "import": {
+        "types": "./esm/coachmark/index.d.ts",
+        "default": "./esm/coachmark/index.js"
+      },
+      "require": {
+        "types": "./cjs/coachmark/index.d.ts",
+        "default": "./cjs/coachmark/index.js"
+      }
+    },
     "./Chips": {
       "import": {
         "types": "./esm/chips/index.d.ts",
