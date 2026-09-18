@@ -1,73 +1,72 @@
-import type { SanityClient as SanityClientType } from "next-sanity";
-import { parseBody } from "next-sanity/webhook";
+import { parseTags } from "next-sanity/live";
+import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "node:crypto";
 import { z } from "zod";
-import { client as SanityClient } from "@/app/_sanity/client";
 
-const webhookPayloadSchema = z.object({ _id: z.string(), _type: z.string() });
+const payloadSchema = z.object({ syncTags: z.array(z.string()).nonempty() });
 
-export async function POST(req: NextRequest) {
-  try {
-    if (!process.env.SANITY_REVALIDATE_SECRET) {
-      console.error("Missing environment variable SANITY_REVALIDATE_SECRET");
-      return new Response(
-        "Missing environment variable SANITY_REVALIDATE_SECRET",
-        { status: 500 },
-      );
-    }
+function isAuthorized(req: NextRequest, secret: string): boolean {
+  const provided = req.headers.get("authorization")?.replace(/^Bearer /, "");
 
-    const { isValidSignature, body } = await parseBody<unknown>(
-      req,
-      process.env.SANITY_REVALIDATE_SECRET,
-    );
-
-    if (!isValidSignature) {
-      console.error("Invalid sanity webhook signature");
-      return new Response(
-        JSON.stringify({
-          message: "Invalid signature",
-          isValidSignature,
-          body,
-        }),
-        {
-          status: 401,
-        },
-      );
-    }
-
-    try {
-      const tags = await fetchSyncTagsForDocument(SanityClient, body);
-      const message = `Revalidated tags: ${tags.join(", ")} from document ${JSON.stringify(body)}`;
-      console.info(message);
-
-      return NextResponse.json({ message, body });
-    } catch (err) {
-      console.error(err);
-      return new Response((err as Error).message, { status: 500 });
-    }
-  } catch (err) {
-    console.error(err);
-    return new Response((err as Error).message, { status: 500 });
+  if (!provided) {
+    return false;
   }
+
+  const a = Buffer.from(provided);
+  const b = Buffer.from(secret);
+
+  return a.length === b.length && timingSafeEqual(a, b);
 }
 
-async function fetchSyncTagsForDocument(
-  client: SanityClientType,
-  body: unknown,
-) {
-  const { _id: id, _type: type } = webhookPayloadSchema.parse(body);
+/**
+ * Called by the `invalidate-tags` Sanity Function whenever Content Lake
+ * invalidates sync tags. Sanity sends raw `s1:*` tags, while `sanityFetch`
+ * tags its cache entries with the `sanity:` prefix that `parseTags` enforces.
+ */
+export async function POST(req: NextRequest) {
+  const secret = process.env.SANITY_REVALIDATE_SECRET;
 
-  const { syncTags = [] } = await client.fetch(
-    `*[_id == $id || _type == $type][0] { _type, _id}`,
-    { id, type },
-    {
-      filterResponse: false,
-      perspective: "published",
-      returnQuery: false,
-      resultSourceMap: false,
-      stega: false,
-      useCdn: true,
-    },
+  if (!secret) {
+    console.error("Missing environment variable SANITY_REVALIDATE_SECRET");
+    return new NextResponse("Server misconfigured", { status: 500 });
+  }
+
+  if (!isAuthorized(req, secret)) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  const body = payloadSchema.safeParse(await req.json().catch(() => null));
+
+  if (!body.success) {
+    return new NextResponse("Expected a non-empty `syncTags` array", {
+      status: 400,
+    });
+  }
+
+  let tags: string[];
+  try {
+    ({ tags } = parseTags(
+      body.data.syncTags.map((tag) =>
+        tag.startsWith("sanity:") ? tag : `sanity:${tag}`,
+      ),
+    ));
+  } catch (error) {
+    console.error("Received invalid sync tags", error);
+    return new NextResponse("Invalid sync tags", { status: 400 });
+  }
+
+  for (const tag of tags) {
+    revalidateTag(tag, "max");
+  }
+
+  console.info(
+    JSON.stringify({
+      event: "sanity-revalidate-tags",
+      count: tags.length,
+      tags,
+    }),
   );
-  return syncTags;
+
+  return NextResponse.json({ revalidated: true, count: tags.length });
 }

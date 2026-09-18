@@ -14,13 +14,10 @@ spec:
     - "https://aksel.nav.no"
     - "https://design.nav.no"
   observability:
-    autoInstrumentation:
-      enabled: true
-      runtime: nodejs
   replicas:
     disableAutoScaling: true
-    min: 2
-    max: 2
+    min: 1
+    max: 1
   resources:
     limits:
       memory: 2048Mi

@@ -60,6 +60,7 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   cacheComponents: true,
+
   cacheLife: { default: sanity },
   transpilePackages: ["@navikt/ds-tokens"],
   /**
@@ -156,6 +157,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../../"),
   experimental: {
+    turbopackRustReactCompiler: true,
     optimizePackageImports: [
       "@navikt/ds-react",
       "@navikt/aksel-icons",

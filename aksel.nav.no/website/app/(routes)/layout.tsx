@@ -20,7 +20,7 @@ export default async function IndexLayout({
         {children}
         {isDraftMode && <DraftOverlay />}
       </CookieConsentProvider>
-      <SanityLive includeDrafts={isDraftMode} onWelcome={false} />
+      {isDraftMode && <SanityLive includeDrafts onWelcome={false} />}
     </>
   );
 }
