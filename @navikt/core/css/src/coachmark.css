@@ -1,12 +1,19 @@
 .aksel-coachmark__popover {
   z-index: 2000;
+  overflow: hidden;
 }
 
 .aksel-coachmark__popover_content {
   --__axc-coachmark__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-32));
-  --__axc-coachmark__content-padding-block: var(--ax-space-24);
 
   max-width: var(--__axc-coachmark__content-width);
+  overflow: auto;
+}
+
+.aksel-coachmark__dialog-body,
+.aksel-coachmark__popover_content {
+  --__axc-coachmark__content-padding-block: var(--ax-space-0) var(--ax-space-24);
+
   padding-block: var(--__axc-coachmark__content-padding-block);
   padding-inline: var(--ax-space-16);
 
@@ -27,7 +34,6 @@
 
 .aksel-coachmark__image {
   width: var(--__axc-coachmark__content-width);
-  margin-bottom: var(--ax-space-8);
 
   /* TODO: Who handles this? */
   > * {
@@ -36,14 +42,205 @@
   }
 }
 
-.aksel-coachmark__title {
-  margin-bottom: var(--ax-space-8);
+.aksel-coachmark__dot-anchor {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: fit-content;
+  align-items: flex-start;
 }
 
-.aksel-coachmark__description {
-  margin-bottom: var(--ax-space-8);
+.aksel-coachmark__dot-anchor > .aksel-coachmark__dot-container {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(1rem, -1rem);
 }
 
+.aksel-coachmark__dot-container {
+  --__axc-coachmark__dot-size: var(--ax-space-16);
+  --__axc-coachmark__dot-opacity-inner: 0.5;
+  --__axc-coachmark__dot-opacity-outer: 0.4;
+  --__axc-coachmark__dot-animation-duration: 4s;
+  --__axc-coachmark__dot-color: var(--ax-bg-strong);
+  --__axc-coachmark__dot-scale-inner: 1.4;
+  --__axc-coachmark__dot-scale-outer: 2;
+
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  width: calc(var(--__axc-coachmark__dot-size) * var(--__axc-coachmark__dot-scale-outer));
+  height: calc(var(--__axc-coachmark__dot-size) * var(--__axc-coachmark__dot-scale-outer));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ax-radius-full);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.aksel-coachmark__dot {
+  position: absolute;
+  width: var(--__axc-coachmark__dot-size);
+  height: var(--__axc-coachmark__dot-size);
+  background-color: var(--__axc-coachmark__dot-color);
+  border-radius: var(--ax-radius-full);
+}
+
+.aksel-coachmark__dot-pulse-inner {
+  position: absolute;
+  width: var(--__axc-coachmark__dot-size);
+  height: var(--__axc-coachmark__dot-size);
+  background-color: var(--__axc-coachmark__dot-color);
+  border-radius: var(--ax-radius-full);
+  opacity: var(--__axc-coachmark__dot-opacity-inner);
+
+  &[data-animation="ONE"] {
+    animation: pulse-inner-ONE var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+
+  &[data-animation="TWO"] {
+    animation: pulse-inner-TWO var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+}
+
+.aksel-coachmark__dot-pulse-outer {
+  position: absolute;
+  width: var(--__axc-coachmark__dot-size);
+  height: var(--__axc-coachmark__dot-size);
+  background-color: var(--__axc-coachmark__dot-color);
+  border-radius: var(--ax-radius-full);
+  opacity: var(--__axc-coachmark__dot-opacity-outer);
+
+  &[data-animation="ONE"] {
+    animation: pulse-outer-ONE var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+
+  &[data-animation="TWO"] {
+    animation: pulse-outer-TWO var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+
+  &[data-animation="THREE"] {
+    animation: pulse-outer-THREE 2s infinite;
+  }
+}
+
+@keyframes pulse-inner-ONE {
+  0% {
+    transform: scale(0);
+  }
+
+  25% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+  }
+
+  50% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+  }
+
+  75% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes pulse-outer-ONE {
+  0% {
+    transform: scale(0);
+  }
+
+  25% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+  }
+
+  50% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+  }
+
+  75% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+/* -------------------------- TWO ---------------------------- */
+@keyframes pulse-inner-TWO {
+  0% {
+    transform: scale(0);
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  25% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  50% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  75% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-inner);
+  }
+
+  100% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-TWO {
+  0% {
+    transform: scale(0);
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  25% {
+    transform: scale(var(--__axc-coachmark__dot-scale-inner));
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  50% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: var(--__axc-coachmark__dot-opacity-outer);
+  }
+
+  75% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-THREE {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(var(--__axc-coachmark__dot-scale-outer));
+    opacity: 0;
+  }
+}
+
+.aksel-coachmark__title,
+.aksel-coachmark__description,
 .aksel-coachmark__progress {
   margin-bottom: var(--ax-space-8);
 }

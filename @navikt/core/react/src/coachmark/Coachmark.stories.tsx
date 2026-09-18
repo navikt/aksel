@@ -165,7 +165,6 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
           {
             id: "step-1",
             type: "dialog",
-            allowToEndTour: true,
             content: (
               <Coachmark.Content>
                 <Coachmark.Image>
@@ -176,7 +175,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
                 </Coachmark.Image>
                 <Coachmark.Progress />
                 <Coachmark.Title>
-                  <Heading size="small">Dashboard</Heading>
+                  <Heading size="large">Dashboard</Heading>
                 </Coachmark.Title>
                 <Coachmark.Description>
                   This tour takes 30 seconds.
@@ -197,7 +196,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
               <Coachmark.Content>
                 <Coachmark.Image>
                   <img
-                    src="https://ragdollinfo.com/wp-content/uploads/2025/08/a-blue-bicolor-ragdoll-cat-sitting-1536x864.jpg"
+                    src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
                     alt="Dashboard overview"
                   />
                 </Coachmark.Image>
@@ -263,6 +262,42 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
           },
         ]}
       />
+    </VStack>
+  );
+};
+
+export const CoachmarkDot: StoryFn<typeof Coachmark> = () => {
+  const animations = ["ONE", "TWO", "THREE"];
+  /* TODO:
+   * - Set data-color only for dot?
+   */
+  return (
+    <VStack padding="space-40" gap="space-64">
+      {animations.map((animation) => (
+        <Coachmark.Dot
+          key={animation}
+          animation={animation}
+          data-color="danger"
+          onClick={() => console.log("Coachmark dot clicked")}
+        >
+          <Button
+            data-color="accent"
+            onClick={() => console.log("Button clicked")}
+          >
+            {`Animation ${animation.toLocaleLowerCase()}`}
+          </Button>
+        </Coachmark.Dot>
+      ))}
+      {animations.map((animation) => (
+        <HStack gap="space-16" key={animation} align="center">
+          <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
+          <Coachmark.Dot
+            animation={animation}
+            data-color="success"
+            onClick={() => console.log("Coachmark dot clicked")}
+          />
+        </HStack>
+      ))}
     </VStack>
   );
 };
