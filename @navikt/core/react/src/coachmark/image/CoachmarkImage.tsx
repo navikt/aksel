@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Bleed } from "../../primitives/bleed";
 import { cl } from "../../utils/helpers";
-import { useCoachmarkContext } from "../context/Coachmark.context";
+import { useCoachmarkContext } from "../root/Coachmark.context";
 
 /* TODO:
     - No padding or bleed?

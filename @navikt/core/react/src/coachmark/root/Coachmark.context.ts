@@ -1,5 +1,5 @@
 import { createStrictContext } from "../../utils/helpers";
-import { CoachmarkStepType } from "../root/CoachmarkRoot";
+import type { CoachmarkStepType } from "./CoachmarkRoot";
 
 interface CoachmarkContextProps {
   /**

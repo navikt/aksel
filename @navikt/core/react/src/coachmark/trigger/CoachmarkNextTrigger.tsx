@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
 import { composeEventHandlers } from "../../utils/helpers";
-import { useCoachmarkContext } from "../context/Coachmark.context";
+import { useCoachmarkContext } from "../root/Coachmark.context";
 
 interface CoachmarkNextTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;

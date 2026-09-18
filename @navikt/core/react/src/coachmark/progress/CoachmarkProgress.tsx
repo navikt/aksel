@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { cl } from "../../utils/helpers";
-import { useCoachmarkContext } from "../context/Coachmark.context";
+import { useCoachmarkContext } from "../root/Coachmark.context";
 
 interface CoachmarkProgressProps extends Omit<
   React.HTMLAttributes<HTMLParagraphElement>,

@@ -13,7 +13,6 @@ import {
   CoachmarkContent,
   type CoachmarkContentProps,
 } from "../content/CoachmarkContent";
-import { CoachmarkContextProvider } from "../context/Coachmark.context";
 import {
   CoachmarkDescription,
   type CoachmarkDescriptionProps,
@@ -47,6 +46,7 @@ import {
   CoachmarkPreviousTrigger,
   type CoachmarkPreviousTriggerProps,
 } from "../trigger/CoachmarkPreviousTrigger";
+import { CoachmarkContextProvider } from "./Coachmark.context";
 
 interface CoachmarkStepTypeBase {
   /**
