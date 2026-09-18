@@ -3,7 +3,10 @@ import { cl } from "../../utils/helpers";
 
 /* TODO:
   - Title or header?
-  - React.Node or string?
+  - React.Node or string? 
+
+  - Heading
+  - React.Node
  */
 
 type CoachmarkTitleProps = React.HTMLAttributes<HTMLHeadingElement>;

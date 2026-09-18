@@ -36,6 +36,10 @@
   width: var(--__axc-coachmark__content-width);
 
   /* TODO: Who handles this? */
+  /* 
+  * Look how linkCard handles
+  * Test with several types on content
+  */
   > * {
     object-fit: cover;
     width: 100%;
@@ -113,6 +117,10 @@
   &[data-animation="FIVE"] {
     animation: pulse-inner-FIVE var(--__axc-coachmark__dot-animation-duration) infinite;
   }
+
+  &[data-animation="SIX"] {
+    animation: pulse-inner-SIX 3s infinite;
+  }
 }
 
 .aksel-coachmark__dot-pulse-outer {
@@ -141,6 +149,10 @@
 
   &[data-animation="FIVE"] {
     animation: pulse-outer-FIVE var(--__axc-coachmark__dot-animation-duration) infinite;
+  }
+
+  &[data-animation="SIX"] {
+    animation: pulse-outer-SIX 3s infinite;
   }
 }
 
@@ -358,6 +370,38 @@
 
   100% {
     transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-inner-SIX {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-SIX {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(3.2);
     opacity: 0;
   }
 }

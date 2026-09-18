@@ -161,6 +161,18 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
         endTour={() => {
           setOpen(false);
         }}
+        /*
+        title: "Welcome",
+        ! nextButton: <Button>Next</Button>,
+        renderStep: (step) => <div>{step.content}</div>, 
+
+        skipTourButton: boolean
+        We render buttons for navigation and closing the tour.
+
+        Discuss with design closing behavior for the tour - allow not closing or not?
+        Coachmark - best word?
+        Add support for one step "tour"
+        */
         steps={[
           {
             id: "step-1",
@@ -267,7 +279,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
 };
 
 export const CoachmarkDot: StoryFn<typeof Coachmark> = () => {
-  const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE"];
+  const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"];
   /* TODO:
    * - Set data-color only for dot?
    */

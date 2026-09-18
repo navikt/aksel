@@ -17,6 +17,10 @@ interface CoachmarkProgressProps extends Omit<
    */
   alternativeText?: (currentStep: number, totalSteps: number) => string;
   // TODO: Which prop is best? Better prop name?
+  /*
+   * - Add support for translation, look at Textarea
+   * - Remove props
+   */
 }
 
 /**

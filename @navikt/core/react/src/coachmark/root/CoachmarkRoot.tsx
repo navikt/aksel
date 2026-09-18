@@ -128,6 +128,14 @@ interface CoachmarkProps {
    * - Set size here or on each individual step if needed?
    * - What should be default behavior if size is not specified?
    * - For Figma sizes looks like different content the dev/ux puts in
+   *
+   *
+   * - Scroll smoother: focus might run before scrollIntoView
+   * - Ask Linda again about padding for different sizes
+   * - Tell Linda dialog sizes
+   * - Dialog width can be set to px
+   * - Add set sizes for anchor popover, like dialog, talk to design about not allowing big content, set sizes are smaller
+   * -
    */
   size?: "small" | "medium";
 }
@@ -155,6 +163,11 @@ const CoachmarkRoot = ({
 }: CoachmarkProps) => {
   const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+
+  /** TODO:
+   * Change tourStarted to tourShow
+   * Drop hook
+   */
 
   const activeStep = currentStepProp ?? uncontrolledStep;
   const currentStep = steps[activeStep];
@@ -251,6 +264,9 @@ const CoachmarkRoot = ({
 
   const getInitialFocus = () => {
     // TODO: What should have focus if no next or close triggers are found?
+    /*
+     * - Add console.warn if no button
+     */
     const nextTriggers = document.querySelectorAll<HTMLElement>(
       "[data-coachmark-next-trigger]",
     );
@@ -267,10 +283,11 @@ const CoachmarkRoot = ({
   const TopCloseButton = (
     <HStack width="full" justify="end" marginBlock="space-0 space-2">
       <CoachmarkCloseTrigger data-coachmark-top-close-trigger>
-        {/* TODO: What to call coachmark in Norwegian? */}
+        {/* TODO: What to call coachmark in Norwegian? Remove it */}
+
         <Button
           size="small"
-          icon={<XMarkIcon title="Avslutt opplæring" />}
+          icon={<XMarkIcon title="Avslutt" />}
           variant="tertiary"
           data-color="neutral"
         />
