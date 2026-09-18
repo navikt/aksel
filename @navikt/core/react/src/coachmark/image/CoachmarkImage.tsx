@@ -25,7 +25,7 @@ const CoachmarkImage = forwardRef<HTMLDivElement, CoachmarkImageProps>(
     const isAnchor = currentStep?.type === "anchor";
 
     return (
-      <Bleed asChild marginInline={isAnchor ? "space-16" : "space-0"}>
+      <Bleed asChild marginInline={isAnchor ? "space-16" : "space-20"}>
         <div
           {...restProps}
           ref={forwardedRef}
