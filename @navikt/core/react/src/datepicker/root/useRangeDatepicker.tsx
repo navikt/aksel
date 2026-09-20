@@ -117,15 +117,16 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
     opt?.fromDate && day && differenceInCalendarDays(opt?.fromDate, day) > 0;
   const isAfter =
     opt?.toDate && day && differenceInCalendarDays(day, opt?.toDate) > 0;
+  const isDayValidDate = isValidDate(day)
 
   if (
-    isValidDate(day) &&
+    isDayValidDate &&
     !(opt?.disableWeekends && isWeekend(day)) &&
     !(opt?.disabled && dateMatchModifiers(day, opt.disabled))
   ) {
     return {
-      isValidDate: false,
-      isInvalid: !isValidDate(day),
+      isValidDate: isDayValidDate,
+      isInvalid: !isDayValidDate,
       isWeekend: opt?.disableWeekends && isWeekend(day),
       isDisabled: opt?.disabled && dateMatchModifiers(day, opt.disabled),
       isBefore,
@@ -134,7 +135,7 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
   }
   if (isBefore || isAfter) {
     return {
-      isValidDate: false,
+      isValidDate: isDayValidDate,
       isBefore,
       isAfter,
     };
@@ -153,15 +154,16 @@ const toValidation = (
 
   const isBeforeFrom =
     (from && differenceInCalendarDays(from, day) > 0) ?? false;
+  const isDayValidDate = isValidDate(day)
 
   if (
-    isValidDate(day) &&
+    isDayValidDate &&
     !(opt?.disableWeekends && isWeekend(day)) &&
     !(opt?.disabled && dateMatchModifiers(day, opt.disabled))
   ) {
     return {
-      isValidDate: false,
-      isInvalid: !isValidDate(day),
+      isValidDate: isDayValidDate,
+      isInvalid: !isDayValidDate,
       isWeekend: opt?.disableWeekends && isWeekend(day),
       isDisabled: opt?.disabled && dateMatchModifiers(day, opt.disabled),
       isBefore,
@@ -171,7 +173,7 @@ const toValidation = (
   }
   if (isBefore || isAfter || isBeforeFrom) {
     return {
-      isValidDate: false,
+      isValidDate: isDayValidDate,
       isBefore,
       isAfter,
       isBeforeFrom,
