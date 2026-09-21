@@ -22,8 +22,6 @@ export default {
   ],
 } satisfies Meta<typeof Coachmark>;
 
-type CoachmarkDotStory = StoryObj<typeof CoachmarkDot>;
-
 export const CoachmarkAnchor: StoryFn<typeof Coachmark> = () => {
   const createRef = useRef<HTMLButtonElement>(null);
   const reviewRef = useRef<HTMLButtonElement>(null);
@@ -280,7 +278,7 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
   );
 };
 
-export const Dot: CoachmarkDotStory = {
+export const Dot: StoryObj<typeof CoachmarkDot> = {
   render: (props) => {
     const { durationInMs } = props;
     const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"];
