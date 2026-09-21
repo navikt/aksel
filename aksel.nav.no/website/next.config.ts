@@ -162,6 +162,13 @@ const nextConfig: NextConfig = {
     ],
     largePageDataBytes: 128 * 2000,
     turbopackFileSystemCacheForDev: true,
+    /*
+     * Next writes the prerender cache to `.next/server/app`, which lives in the image
+     * and is read-only in nais. Only `.next/cache` is mounted writable, so on-demand
+     * renders fail with ENOENT on mkdir. Disabling this keeps them in memory instead.
+     * Prerendered pages are still read from disk.
+     */
+    isrFlushToDisk: false,
   },
   reactCompiler: true,
 
