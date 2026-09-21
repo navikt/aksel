@@ -71,8 +71,6 @@ const nextConfig: NextConfig = {
     PRODUCTION: isProduction ? "true" : "false",
   },
 
-  /* cacheHandler: require.resolve("./cache-handler.mjs"), */
-
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {
     return [
