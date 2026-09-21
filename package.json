@@ -76,7 +76,7 @@
   },
   "devDependencies": {
     "@actions/core": "^3.0.1",
-    "@babel/eslint-parser": "^7.29.7",
+    "@babel/eslint-parser": "^8.0.5",
     "@biomejs/biome": "2.5.9",
     "@changesets/cli": "3.0.1",
     "@eslint/js": "^10.0.1",
