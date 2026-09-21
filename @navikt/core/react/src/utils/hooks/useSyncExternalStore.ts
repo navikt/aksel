@@ -1,32 +1,12 @@
-import React, { useEffect, useState } from "react";
-
-type UseSyncExternalStore = <T>(
-  subscribe: (onStoreChange: () => void) => () => void,
-  getSnapshot: () => T,
-  getServerSnapshot?: () => T,
-) => T;
+import React from "react";
+import {
+  type UseSyncExternalStore,
+  useSyncExternalStoreShim,
+} from "./useSyncExternalStoreShim";
 
 const maybeReactUseSyncExternalStore: UseSyncExternalStore | undefined = (
   React as any
 )["useSyncExternalStore" + ""]; // Workaround for https://github.com/webpack/webpack/issues/14814
-
-/**
- * We don't use getServerSnapshot because React<18 does not have a way to check if we're hydrating.
- */
-const useSyncExternalStoreShim: UseSyncExternalStore = (
-  subscribe,
-  getSnapshot,
-) => {
-  const [snapshot, setSnapshot] = useState(getSnapshot);
-
-  useEffect(() => {
-    const handleStoreChange = () => setSnapshot(getSnapshot);
-    handleStoreChange();
-    return subscribe(handleStoreChange);
-  }, [subscribe, getSnapshot]);
-
-  return snapshot;
-};
 
 const useSyncExternalStore: UseSyncExternalStore =
   maybeReactUseSyncExternalStore ?? useSyncExternalStoreShim;
