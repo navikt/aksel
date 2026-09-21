@@ -12,9 +12,9 @@ export async function register(): Promise<void> {
      */
     await require("next-logger");
 
-    const { registerInitialCache } =
+    /* const { registerInitialCache } =
       await import("@fortedigital/nextjs-cache-handler/instrumentation");
     const CacheHandler = (await import("./cache-handler.mjs")).default;
-    await registerInitialCache(CacheHandler);
+    await registerInitialCache(CacheHandler); */
   }
 }
