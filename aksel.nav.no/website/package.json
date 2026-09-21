@@ -47,7 +47,7 @@
     "lz-string": "^1.5.0",
     "next": "16.3.4",
     "next-logger": "^5.0.2",
-    "next-sanity": "13.2.3",
+    "next-sanity": "13.3.4",
     "next-themes": "^0.4.6",
     "pino": "^10.3.1",
     "prism-react-renderer": "^2.0.0",
