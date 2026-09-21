@@ -76,6 +76,16 @@
         "default": "./cjs/lookup/index.js"
       }
     },
+    "./PREVIEW/Badge": {
+      "import": {
+        "types": "./esm/badge/index.d.ts",
+        "default": "./esm/badge/index.js"
+      },
+      "require": {
+        "types": "./cjs/badge/index.d.ts",
+        "default": "./cjs/badge/index.js"
+      }
+    },
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
@@ -765,7 +775,7 @@
     "tsc-alias": "1.9.1",
     "tsx": "^4.23.1",
     "typescript": "6.0.3",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",
