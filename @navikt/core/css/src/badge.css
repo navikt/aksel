@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
+  width: fit-content;
 }
 
 .aksel-badge {

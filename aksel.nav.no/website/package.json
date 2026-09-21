@@ -29,7 +29,6 @@
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
   },
   "dependencies": {
-    "@fortedigital/nextjs-cache-handler": "^3.3.0",
     "@navikt/analytics-types": "0.0.9",
     "@navikt/next-logger": "5.0.1",
     "@navikt/oasis": "4.1.4",
