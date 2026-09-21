@@ -9,6 +9,8 @@ interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   children?: React.ReactElement;
   // TODO: Remove - test
   animation: string;
+  // TODO: Test
+  durationInMs: number;
 }
 
 /**
@@ -21,7 +23,10 @@ interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement
  * ```
  */
 const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
-  ({ children, onClick, className, animation, ...restProps }, forwardedRef) => {
+  (
+    { children, onClick, className, animation, durationInMs, ...restProps },
+    forwardedRef,
+  ) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
     };
@@ -36,10 +41,12 @@ const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
         <div
           className="aksel-coachmark__dot-pulse-outer"
           data-animation={animation}
+          style={{ animationDuration: `${durationInMs}ms` }}
         />
         <div
           className="aksel-coachmark__dot-pulse-inner"
           data-animation={animation}
+          style={{ animationDuration: `${durationInMs}ms` }}
         />
         <div className="aksel-coachmark__dot" />
       </button>

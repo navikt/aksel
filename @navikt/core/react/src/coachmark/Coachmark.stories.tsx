@@ -1,11 +1,11 @@
-import type { Meta, StoryFn } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Link } from "../link";
 import { HStack, VStack } from "../primitives/stack";
 import { BodyShort, Heading } from "../typography";
-import { Coachmark } from "./root/CoachmarkRoot";
+import { Coachmark, type CoachmarkDot } from "./root/CoachmarkRoot";
 
 export default {
   title: "ds-react/Coachmark",
@@ -21,6 +21,8 @@ export default {
     ),
   ],
 } satisfies Meta<typeof Coachmark>;
+
+type CoachmarkDotStory = StoryObj<typeof CoachmarkDot>;
 
 export const CoachmarkAnchor: StoryFn<typeof Coachmark> = () => {
   const createRef = useRef<HTMLButtonElement>(null);
@@ -278,38 +280,51 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
   );
 };
 
-export const CoachmarkDot: StoryFn<typeof Coachmark> = () => {
-  const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"];
-  /* TODO:
-   * - Set data-color only for dot?
-   */
-  return (
-    <VStack padding="space-40" gap="space-64">
-      {animations.map((animation) => (
-        <Coachmark.Dot
-          key={animation}
-          animation={animation}
-          data-color="danger"
-          onClick={() => console.log("Coachmark dot clicked")}
-        >
-          <Button
-            data-color="accent"
-            onClick={() => console.log("Button clicked")}
-          >
-            {`Animation ${animation.toLocaleLowerCase()}`}
-          </Button>
-        </Coachmark.Dot>
-      ))}
-      {animations.map((animation) => (
-        <HStack gap="space-16" key={animation} align="center">
-          <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
+export const Dot: CoachmarkDotStory = {
+  render: (props) => {
+    const { durationInMs } = props;
+    const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"];
+    /* TODO:
+     * - Set data-color only for dot?
+     */
+    return (
+      <VStack padding="space-40" gap="space-64">
+        {animations.map((animation) => (
           <Coachmark.Dot
+            key={animation}
             animation={animation}
-            data-color="success"
+            durationInMs={durationInMs}
+            data-color="danger"
             onClick={() => console.log("Coachmark dot clicked")}
-          />
-        </HStack>
-      ))}
-    </VStack>
-  );
+          >
+            <Button
+              data-color="accent"
+              onClick={() => console.log("Button clicked")}
+            >
+              {`Animation ${animation.toLocaleLowerCase()}`}
+            </Button>
+          </Coachmark.Dot>
+        ))}
+        {animations.map((animation) => (
+          <HStack gap="space-16" key={animation} align="center">
+            <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
+            <Coachmark.Dot
+              animation={animation}
+              durationInMs={durationInMs}
+              data-color="success"
+              onClick={() => console.log("Coachmark dot clicked")}
+            />
+          </HStack>
+        ))}
+      </VStack>
+    );
+  },
+  args: {
+    durationInMs: 4000,
+  },
+  argTypes: {
+    durationInMs: {
+      control: { type: "number" },
+    },
+  },
 };
