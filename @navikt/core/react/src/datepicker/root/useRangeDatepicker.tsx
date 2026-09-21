@@ -154,7 +154,7 @@ const toValidation = (
 
   const isBeforeFrom =
     (from && differenceInCalendarDays(from, day) > 0) ?? false;
-  const isDayValidDate = isValidDate(day)
+  const isDayValidDate = isValidDate(day);
 
   if (
     isDayValidDate &&
