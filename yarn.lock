@@ -4542,13 +4542,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juggle/resize-observer@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@juggle/resize-observer@npm:3.4.0"
-  checksum: 10/73d1d00ee9132fb6f0aea0531940a6b93603e935590bd450fc6285a328d906102eeeb95dea77b2edac0e779031a9708aa8c82502bd298ee4dd26e7dff48f397a
-  languageName: node
-  linkType: hard
-
 "@keyv/bigmap@npm:^1.3.1":
   version: 1.3.1
   resolution: "@keyv/bigmap@npm:1.3.1"
@@ -7265,21 +7258,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/icons@npm:^3.7.4":
-  version: 3.8.0
-  resolution: "@sanity/icons@npm:3.8.0"
-  peerDependencies:
-    react: ^18.3 || ^19.0.0-0
-  checksum: 10/f2a592e3adf7094335d46abcd9fab75e8d13834986dd1decc78152d8b00bfb0b3f396dc8767e8357311ac0eb73eebc6138da48be3b44a23f7392a120b65b3961
-  languageName: node
-  linkType: hard
-
 "@sanity/icons@npm:^5.2.1":
   version: 5.2.1
   resolution: "@sanity/icons@npm:5.2.1"
   peerDependencies:
     react: ^18 || ^19
   checksum: 10/cdd2df377993cc72134e4bcf60d98ea42e9bea1e6903790653205231d93d826bd72535bdcfac132a4f3f5b04edc9f4d5f355eaa328000cce711fc3c9983832f1
+  languageName: node
+  linkType: hard
+
+"@sanity/icons@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "@sanity/icons@npm:5.2.2"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10/72fadd5e7585336e9e9e3d1e8fae81c1566e58fe7a897a67e3f29cd621192f68554ed0f1c1f5014087af9a9edfdbcedd8d7608935d79cf2706f534661505ae56
   languageName: node
   linkType: hard
 
@@ -7327,16 +7320,6 @@ __metadata:
   peerDependencies:
     "@sanity/client": ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
   checksum: 10/0d6fcfb07528038f5a1ec25d4c38e20ccd541badf142b58b0433d1b21645a205d0e6501e2ae36ad45ea30b3e274e7ef4948d8e8f289cf622d8000e8eccb8eb83
-  languageName: node
-  linkType: hard
-
-"@sanity/incompatible-plugin@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@sanity/incompatible-plugin@npm:1.0.5"
-  peerDependencies:
-    react: ^16.9 || ^17 || ^18 || ^19
-    react-dom: ^16.9 || ^17 || ^18 || ^19
-  checksum: 10/a4bf1ab238a68589838d122ff830c678be562e974b6979ac7c9b4ee19a8e3881e17ef40899d0f1c0dc78264d49bb27529e3d91e36526c8a9274795b1496d70af
   languageName: node
   linkType: hard
 
@@ -7448,7 +7431,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/presentation-comlink@npm:^2.2.0, @sanity/presentation-comlink@npm:^2.2.3":
+"@sanity/presentation-comlink@npm:^2.2.3":
   version: 2.2.3
   resolution: "@sanity/presentation-comlink@npm:2.2.3"
   dependencies:
@@ -7460,7 +7443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/preview-url-secret@npm:4.1.5, @sanity/preview-url-secret@npm:^4.1.2, @sanity/preview-url-secret@npm:^4.1.4, @sanity/preview-url-secret@npm:^4.1.5":
+"@sanity/preview-url-secret@npm:4.1.5, @sanity/preview-url-secret@npm:^4.1.4, @sanity/preview-url-secret@npm:^4.1.5":
   version: 4.1.5
   resolution: "@sanity/preview-url-secret@npm:4.1.5"
   dependencies:
@@ -7667,7 +7650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/types@npm:6.13.1, @sanity/types@npm:^6.12.0, @sanity/types@npm:^6.6.0":
+"@sanity/types@npm:6.13.1, @sanity/types@npm:^6.12.0":
   version: 6.13.1
   resolution: "@sanity/types@npm:6.13.1"
   dependencies:
@@ -7691,47 +7674,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^3.1.11":
-  version: 3.5.3
-  resolution: "@sanity/ui@npm:3.5.3"
+"@sanity/types@npm:^6.11.0":
+  version: 6.13.2
+  resolution: "@sanity/types@npm:6.13.2"
   dependencies:
-    "@floating-ui/react-dom": "npm:^2.1.9"
-    "@juggle/resize-observer": "npm:^3.4.0"
-    "@sanity/color": "npm:^3.0.8"
-    "@sanity/icons": "npm:^5.2.1"
-    csstype: "npm:^3.2.3"
-    motion: "npm:^13.1.0"
-    react-compiler-runtime: "npm:1.0.0"
-    react-is: "npm:^19.2.8"
-    react-refractor: "npm:^4.0.0"
-    use-effect-event: "npm:^2.0.3"
+    "@sanity/client": "npm:^8.6.1"
+    "@sanity/media-library-types": "npm:^1.6.0"
   peerDependencies:
-    react: ^18 || >=19.0.0-0
-    react-dom: ^18 || >=19.0.0-0
-    styled-components: ^5.2 || ^6
-  checksum: 10/f7199db27a59d55b795b9b621137a6ef933480e76a887dae254c013552c221e92a4b0c04d550d57b4faa827de6777f6c4133b0cab3277e462a1cf4ae045271e5
-  languageName: node
-  linkType: hard
-
-"@sanity/ui@npm:^3.4.3":
-  version: 3.5.5
-  resolution: "@sanity/ui@npm:3.5.5"
-  dependencies:
-    "@floating-ui/react-dom": "npm:^2.1.9"
-    "@juggle/resize-observer": "npm:^3.4.0"
-    "@sanity/color": "npm:^3.0.8"
-    "@sanity/icons": "npm:^5.2.1"
-    csstype: "npm:^3.2.3"
-    motion: "npm:^13.2.0"
-    react-compiler-runtime: "npm:1.0.0"
-    react-is: "npm:^19.2.8"
-    react-refractor: "npm:^4.0.0"
-    use-effect-event: "npm:^2.0.4"
-  peerDependencies:
-    react: ^18 || >=19.0.0-0
-    react-dom: ^18 || >=19.0.0-0
-    styled-components: ^5.2 || ^6
-  checksum: 10/df7122db7efc9955680e8ac8a92d0b1c91b42dc594cdfd3360fbd309390c23edf08390c76a6b5f8fc56210567d63f51f3def51a824b560e1b3e71e79636ca2c8
+    "@types/react": "*"
+  checksum: 10/64d7abcf1ca6e400b3bd96c0b0e8430676de0ffe65fc517b50cd308b98e37782b8b68b3918710dfb28bf504b0659cf6b28c16d14750670510a6ef4b776c78021
   languageName: node
   linkType: hard
 
@@ -7774,6 +7725,28 @@ __metadata:
     react-dom: ^19.2
     styled-components: ^6.1
   checksum: 10/4f88d3be7a167e102af3bc344845414d4df1bc97a412cda06cbaea4e290243f72a0f19f816dad6b569b63f0568d724857544bbd2f2562ca590baf8c9d05335be
+  languageName: node
+  linkType: hard
+
+"@sanity/ui@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "@sanity/ui@npm:4.2.1"
+  dependencies:
+    "@floating-ui/react-dom": "npm:^2.1.9"
+    "@sanity/color": "npm:^3.0.8"
+    "@sanity/icons": "npm:^5.2.2"
+    "@vanilla-extract/dynamic": "npm:^2.1.5"
+    clsx: "npm:^2.1.1"
+    csstype: "npm:^3.2.3"
+    motion: "npm:^13.2.0"
+    react-is: "npm:^19.3.0"
+    react-refractor: "npm:^4.0.0"
+    use-effect-event: "npm:^2.0.4"
+  peerDependencies:
+    react: ^19.2
+    react-dom: ^19.2
+    styled-components: ^6.1
+  checksum: 10/be59e8bf5c01049cc32f0c1178c75def0735d6d7f1560ced78f7f383db2f8ab8704be6dcd679299c8fccf48c448be21d877ebf2d009ae6a1af0ea32d74e1f756
   languageName: node
   linkType: hard
 
@@ -7871,7 +7844,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/visual-editing-csm@npm:^3.0.13":
+"@sanity/visual-editing-csm@npm:^3.0.18":
   version: 3.0.18
   resolution: "@sanity/visual-editing-csm@npm:3.0.18"
   dependencies:
@@ -7896,27 +7869,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/visual-editing@npm:^5.7.3":
-  version: 5.7.3
-  resolution: "@sanity/visual-editing@npm:5.7.3"
+"@sanity/visual-editing@npm:^6.0.4":
+  version: 6.1.2
+  resolution: "@sanity/visual-editing@npm:6.1.2"
   dependencies:
-    "@sanity/comlink": "npm:^4.0.1"
+    "@sanity/comlink": "npm:^4.0.3"
     "@sanity/icons": "npm:^5.2.1"
     "@sanity/mutate": "npm:^0.18.1"
-    "@sanity/presentation-comlink": "npm:^2.2.0"
-    "@sanity/preview-url-secret": "npm:^4.1.2"
-    "@sanity/types": "npm:^6.6.0"
-    "@sanity/ui": "npm:^3.4.3"
-    "@sanity/visual-editing-csm": "npm:^3.0.13"
+    "@sanity/presentation-comlink": "npm:^2.2.3"
+    "@sanity/preview-url-secret": "npm:^4.1.5"
+    "@sanity/types": "npm:^6.11.0"
+    "@sanity/ui": "npm:^4.0.7"
+    "@sanity/visual-editing-csm": "npm:^3.0.18"
+    "@sanity/visual-editing-types": "npm:^2.1.1"
     "@vercel/stega": "npm:^1.1.0"
     dequal: "npm:^2.0.3"
     lodash-es: "npm:^4.18.1"
     react-is: "npm:^19.2.8"
     rxjs: "npm:^7.8.2"
     scroll-into-view-if-needed: "npm:^3.1.0"
-    xstate: "npm:^5.32.5"
+    xstate: "npm:^5.32.6"
   peerDependencies:
-    "@sanity/client": ^7.24.0
+    "@sanity/client": ^7.26.2 || ^8.0.0
     "@sveltejs/kit": ">= 2"
     next: ">=16.0.0-0"
     react: ^19.2
@@ -7935,7 +7909,7 @@ __metadata:
       optional: true
     svelte:
       optional: true
-  checksum: 10/703c8b01f50200f9ed29f9bb8d71e8b68850a8c7437b59adcfcda2d2c87faf4164ead7043e38a1b0ef60b75d54bf46de10ea55608f84c167424c407517e712cb
+  checksum: 10/cf9761843b0053dc24f45e4c1335295344fd18b56ca41b544bf0b7cd3e540251fe380bf1b07b47a71c1c1080e329995d89a6c61cdabdbc7c6db83f2085853693
   languageName: node
   linkType: hard
 
@@ -9224,7 +9198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0 || ^19.0.0, @types/react-dom@npm:^19.2.3":
+"@types/react-dom@npm:^18.0.0 || ^19.0.0":
   version: 19.2.5
   resolution: "@types/react-dom@npm:19.2.5"
   peerDependencies:
@@ -10691,7 +10665,7 @@ __metadata:
     sanity: "npm:6.13.1"
     sanity-plugin-iframe-pane: "npm:5.0.35"
     sanity-plugin-media: "npm:6.1.8"
-    sanity-plugin-references: "npm:1.1.0"
+    sanity-plugin-references: "npm:1.2.0"
     styled-components: "npm:6.4.4"
     swr: "npm:^2.4.2"
     tsx: "npm:^4.23.1"
@@ -15853,13 +15827,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groq@npm:^6.7.0":
-  version: 6.13.1
-  resolution: "groq@npm:6.13.1"
-  checksum: 10/a3c8b9b7e3f3d2ba3b9d0559c254f438c824063b1924165f70e3c9d8369949584702005290c34375c806b267563e4c8cb9aa53df8e45bc6782ff2825537c43e5
-  languageName: node
-  linkType: hard
-
 "gunzip-maybe@npm:^1.4.2":
   version: 1.4.2
   resolution: "gunzip-maybe@npm:1.4.2"
@@ -19587,26 +19554,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:13.2.3":
-  version: 13.2.3
-  resolution: "next-sanity@npm:13.2.3"
+"next-sanity@npm:13.3.4":
+  version: 13.3.4
+  resolution: "next-sanity@npm:13.3.4"
   dependencies:
     "@portabletext/react": "npm:^7.0.1"
-    "@sanity/client": "npm:^7.25.0"
+    "@sanity/client": "npm:^7.26.2"
     "@sanity/generate-help-url": "npm:^4.0.0"
-    "@sanity/preview-url-secret": "npm:^4.1.2"
-    "@sanity/visual-editing": "npm:^5.7.3"
+    "@sanity/preview-url-secret": "npm:^4.1.4"
+    "@sanity/visual-editing": "npm:^6.0.4"
     "@sanity/webhook": "npm:^4.0.4"
-    groq: "npm:^6.7.0"
+    groq: "npm:^6.11.0"
     history: "npm:^5.3.0"
   peerDependencies:
-    "@sanity/client": ^7.25.0
+    "@sanity/client": ^7.26.2 || ^8.0.0
     next: ^16.0.0-0
     react: ^19.2.3
     react-dom: ^19.2.3
     sanity: ^5.29.0 || ^6.0.0
     styled-components: ^6.1
-  checksum: 10/5f5273d24949622d637f66e8c1e1819bf0dd298bf4ee2a25893de5aaf19c9750d923c2c38dac418a496939af2510a40f1bbd187dffb24bff73bf43f620366caf
+  checksum: 10/c14048a420d7d8f86d56cb0d5a1aef861af26acc630fd461004a2bef7f6dedb1607339c5a87a282d54fb2f5c1f357c9947cf3423ead6f7c5781fef37fd2c68da
   languageName: node
   linkType: hard
 
@@ -21649,7 +21616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-compiler-runtime@npm:1.0.0, react-compiler-runtime@npm:^1.0.0":
+"react-compiler-runtime@npm:^1.0.0":
   version: 1.0.0
   resolution: "react-compiler-runtime@npm:1.0.0"
   peerDependencies:
@@ -21829,15 +21796,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-icons@npm:^5.5.0":
-  version: 5.7.0
-  resolution: "react-icons@npm:5.7.0"
-  peerDependencies:
-    react: "*"
-  checksum: 10/db064cfe8e6456ba315d960debc50d3535ec794376c059bcdd79e20985d3c77d58a24c8cc567608695b10accd62b6c3c422821569b9c3c94d0811fe952c31e8c
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -21856,6 +21814,13 @@ __metadata:
   version: 19.2.8
   resolution: "react-is@npm:19.2.8"
   checksum: 10/09d053ff36e0ba4d47164baf9eab1c7772791f0371aa92281f0e547e0f6a5a5c8a1eb939aadd1a08b3c565958dd63ee59c746b6ac0d5ccb14ad742ac0314ab15
+  languageName: node
+  linkType: hard
+
+"react-is@npm:^19.3.0":
+  version: 19.3.0
+  resolution: "react-is@npm:19.3.0"
+  checksum: 10/69cfafcab48caac03da35fb17e640a2a2de8299a3cd699da720e671a22231fc7179c77c82e379826728857f9cc45cb56ff1e7f5d607acdd48fe151417a2a388f
   languageName: node
   linkType: hard
 
@@ -22860,20 +22825,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-references@npm:1.1.0":
-  version: 1.1.0
-  resolution: "sanity-plugin-references@npm:1.1.0"
+"sanity-plugin-references@npm:1.2.0":
+  version: 1.2.0
+  resolution: "sanity-plugin-references@npm:1.2.0"
   dependencies:
-    "@sanity/icons": "npm:^3.7.4"
-    "@sanity/incompatible-plugin": "npm:^1.0.5"
-    "@sanity/ui": "npm:^3.1.11"
-    "@types/react-dom": "npm:^19.2.3"
-    react-icons: "npm:^5.5.0"
+    "@sanity/icons": "npm:^5.2.2"
+    "@sanity/ui": "npm:^4.2.1"
   peerDependencies:
-    react: ^18 || ^19
-    react-dom: ^18 || ^19
-    sanity: ^3 || ^4 || ^5 || ^6
-  checksum: 10/1b43d1d58a4ba66bb8699a4d858459d96477333fbe8b3cc44896f3ba134d579ae2063b8c9ef0bc67f95fd215532ee56f47d69c4d25fb22949abe72655b6203fe
+    react: ^19
+    sanity: ^5 || ^6
+  checksum: 10/6273e33f8608f96587f19ab44f9f07e27c9408890bae25582cd9d3a5e3fbf2e647d966d203e0e5ac19c928a1c807caf082a8b41b93a5d56020c845276e063a27
   languageName: node
   linkType: hard
 
@@ -26398,7 +26359,7 @@ __metadata:
     lz-string: "npm:^1.5.0"
     next: "npm:16.3.4"
     next-logger: "npm:^5.0.2"
-    next-sanity: "npm:13.2.3"
+    next-sanity: "npm:13.3.4"
     next-themes: "npm:^0.4.6"
     pino: "npm:^10.3.1"
     pino-pretty: "npm:^13.1.3"
