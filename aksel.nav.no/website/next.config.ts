@@ -166,8 +166,6 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
-  /* Temp https://github.com/vercel/next.js/issues/97757 fix attempt */
-  compress: false,
 };
 
 module.exports =
