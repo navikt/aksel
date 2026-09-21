@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import RadioCard from "./RadioCard";
+import { RadioCard } from "./RadioCard";
 import { RadioCardGroup } from "./RadioCardGroup";
 
 const meta: Meta<typeof RadioCardGroup> = {
