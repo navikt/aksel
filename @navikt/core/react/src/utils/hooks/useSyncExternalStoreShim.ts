@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/exhaustive-deps */
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: Explained bellow */
 /* eslint-disable react-hooks/immutability */
 /* eslint-disable react-hooks/globals */
 /** biome-ignore-all lint/complexity/useLiteralKeys: Explained bellow */
@@ -8,12 +10,12 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// eslint-disable-next-line no-restricted-imports
-import * as React from "react";
-
-// Intentionally not using named imports because Rollup uses dynamic
-// dispatch for CommonJS interop named imports.
-const { useState, useEffect, useLayoutEffect, useDebugValue } = React;
+import React, {
+  useDebugValue,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 let didWarnOld18Alpha = false;
 let didWarnUncachedGetSnapshot = false;
