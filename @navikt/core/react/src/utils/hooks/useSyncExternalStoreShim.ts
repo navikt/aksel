@@ -7,8 +7,8 @@
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * This source code is licensed under the MIT license found here:
+ * https://github.com/react/react/blob/59aff3e18cb5b3a336c280bbfa57ec37999511b9/LICENSE
  */
 import React, {
   useDebugValue,
