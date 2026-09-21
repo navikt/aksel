@@ -50,10 +50,9 @@ export const useSyncExternalStoreShim: UseSyncExternalStore = (
         // to access React internals, which exist under different paths depending on the
         // React version.
         console["error"](
-          "You are using an outdated, pre-release alpha of React 18 that " +
-            "does not support useSyncExternalStore. The " +
-            "use-sync-external-store shim will not work correctly. Upgrade " +
-            "to a newer pre-release.",
+          "[Aksel] You are using an outdated, pre-release alpha of React 18 that " +
+            "does not support useSyncExternalStore. Some components might not " +
+            "work correctly. Upgrade to a newer version of React.",
         );
       }
     }
@@ -72,7 +71,7 @@ export const useSyncExternalStoreShim: UseSyncExternalStore = (
         // to access React internals, which exist under different paths depending on the
         // React version.
         console["error"](
-          "The result of getSnapshot should be cached to avoid an infinite loop",
+          "[Aksel] Internal error: The result of getSnapshot should be cached to avoid an infinite loop",
         );
         didWarnUncachedGetSnapshot = true;
       }
