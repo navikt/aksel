@@ -117,7 +117,7 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
     opt?.fromDate && day && differenceInCalendarDays(opt?.fromDate, day) > 0;
   const isAfter =
     opt?.toDate && day && differenceInCalendarDays(day, opt?.toDate) > 0;
-  const isDayValidDate = isValidDate(day)
+  const isDayValidDate = isValidDate(day);
 
   if (
     isDayValidDate &&
