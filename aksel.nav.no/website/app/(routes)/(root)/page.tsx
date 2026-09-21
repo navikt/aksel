@@ -99,7 +99,7 @@ async function CachedFrontpageContent({
 }: DynamicFetchOptions) {
   "use cache";
 
-  const [{ data: tema }, { data: latest, tags }] = await Promise.all([
+  const [{ data: tema }, { data: latest }] = await Promise.all([
     sanityFetch({
       query: GOD_PRAKSIS_TEMA_QUERY,
       perspective,
@@ -111,11 +111,6 @@ async function CachedFrontpageContent({
       stega,
     }),
   ]);
-
-  console.info({
-    page: "Landing page latest",
-    tags,
-  });
 
   return (
     <PauseAnimationProvider>
