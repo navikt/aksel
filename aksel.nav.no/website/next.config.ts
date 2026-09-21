@@ -1,10 +1,7 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
-import { createRequire } from "node:module";
 import path from "node:path";
-
-const require = createRequire(import.meta.url);
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
@@ -74,7 +71,7 @@ const nextConfig: NextConfig = {
     PRODUCTION: isProduction ? "true" : "false",
   },
 
-  cacheHandler: require.resolve("./cache-handler.mjs"),
+  /* cacheHandler: require.resolve("./cache-handler.mjs"), */
 
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {
@@ -169,6 +166,8 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
+  /* Temp https://github.com/vercel/next.js/issues/97757 fix attempt */
+  compress: false,
 };
 
 module.exports =
