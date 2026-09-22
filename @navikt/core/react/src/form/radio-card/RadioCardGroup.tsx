@@ -5,7 +5,7 @@ import RadioGroup, { type RadioGroupProps } from "../radio/RadioGroup";
 export type RadioCardGroupProps = RadioGroupProps;
 
 /**
- * RadioGroup for `<RadioCard />` elements. Should include max 2 radio cards if horizontal.
+ * RadioGroup for `<RadioCard />` elements. Horizontal layout is best suited for a small number of radio cards.
  * @see 🏷️ {@link RadioCardGroupProps}
  * @example
  * ```tsx
