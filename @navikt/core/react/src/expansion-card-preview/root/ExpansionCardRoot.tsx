@@ -55,7 +55,6 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
       defaultOpen = false,
       size = "medium",
       "data-color": color = "neutral",
-      onToggle, // TODO: Consider omitting this prop so that consumers don't use it by mistake when migrating
       ...rest
     },
     forwardedRef,
