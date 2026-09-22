@@ -43,3 +43,4 @@ export namespace ExpansionCardTitle {
 
 // eslint-disable-next-line import/export
 export { ExpansionCardTitle };
+export type { ExpansionCardTitleProps };

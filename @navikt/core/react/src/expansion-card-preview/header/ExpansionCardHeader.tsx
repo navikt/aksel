@@ -40,3 +40,4 @@ export namespace ExpansionCardHeader {
 
 // eslint-disable-next-line import/export
 export { ExpansionCardHeader };
+export type { ExpansionCardHeaderProps };
