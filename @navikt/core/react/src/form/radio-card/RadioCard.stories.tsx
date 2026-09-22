@@ -1,5 +1,6 @@
 import type { Meta } from "@storybook/react-vite";
 import React from "react";
+import { HGrid } from "../../primitives/grid";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { RadioCard } from "./RadioCard";
 import { RadioCardGroup } from "./RadioCardGroup";
@@ -28,19 +29,24 @@ export const Default = () => (
   </RadioCardGroup>
 );
 
-export const Horizontal = () => (
+export const HorizontalLayout = () => (
   <RadioCardGroup
     legend="Velg leveringsmåte"
     description="Du kan velge ett alternativ."
-    orientation="horizontal"
     defaultValue="digital"
+    size="small"
   >
-    <RadioCard value="digital" description="Sendes til innboksen din.">
-      Digital levering
-    </RadioCard>
-    <RadioCard value="post" description="Sendes til folkeregistrert adresse.">
-      Post
-    </RadioCard>
+    <HGrid columns={{ xs: 1, md: 3 }}>
+      <RadioCard value="digital" description="Sendes til innboksen din.">
+        Digital levering
+      </RadioCard>
+      <RadioCard value="post" description="Sendes til folkeregistrert adresse.">
+        Post
+      </RadioCard>
+      <RadioCard value="seng" description="Blir servert på sengen.">
+        Servert på sengen
+      </RadioCard>
+    </HGrid>
   </RadioCardGroup>
 );
 
@@ -94,7 +100,7 @@ export const Disabled = () => (
 
 export const Chromatic = renderStoriesForChromatic({
   Default,
-  Horizontal,
+  HorizontalLayout,
   Small,
   ErrorProp,
   Readonly,
@@ -103,7 +109,7 @@ export const Chromatic = renderStoriesForChromatic({
 
 export const ChromaticDark = renderStoriesForChromatic({
   Default,
-  Horizontal,
+  HorizontalLayout,
   Small,
   ErrorProp,
   Readonly,

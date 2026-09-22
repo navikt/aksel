@@ -43,15 +43,14 @@
     display: flex;
     flex-direction: column;
     gap: var(--ax-space-12);
+
+    > .aksel-hgrid:not(.aksel-hgrid-gap) {
+      gap: var(--ax-space-12);
+    }
   }
 
-  &[data-orientation="horizontal"] > .aksel-radio-buttons {
-    flex-direction: row;
-
-    & > .aksel-radio-card {
-      flex: 1 1 0;
-      min-width: 0;
-    }
+  &.aksel-radio-group--small > .aksel-radio-buttons > .aksel-hgrid:not(.aksel-hgrid-gap) {
+    gap: var(--ax-space-8);
   }
 }
 

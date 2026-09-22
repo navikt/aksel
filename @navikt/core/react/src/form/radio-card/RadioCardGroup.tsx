@@ -2,32 +2,25 @@ import React, { forwardRef } from "react";
 import { cl } from "../../utils/helpers";
 import RadioGroup, { type RadioGroupProps } from "../radio/RadioGroup";
 
-export interface RadioCardGroupProps extends RadioGroupProps {
-  /**
-   * Layout direction for the radio cards.
-   * @default "vertical"
-   */
-  orientation?: "horizontal" | "vertical";
-}
+export type RadioCardGroupProps = RadioGroupProps;
 
 /**
  * RadioGroup for `<RadioCard />` elements. Should include max 2 radio cards if horizontal.
  * @see 🏷️ {@link RadioCardGroupProps}
  * @example
  * ```tsx
- * <RadioCardGroup orientation="horizontal">
+ * <RadioCardGroup >
  *   <RadioCard value="1" label="Option 1" />
  *   <RadioCard value="2" label="Option 2" />
  * </RadioCardGroup>
  * ```
  */
 const RadioCardGroup = forwardRef<HTMLFieldSetElement, RadioCardGroupProps>(
-  ({ className, orientation = "vertical", ...rest }, ref) => (
+  ({ className, ...rest }, ref) => (
     <RadioGroup
       {...rest}
       ref={ref}
       className={cl(className, "aksel-radio-card-group")}
-      data-orientation={orientation}
     />
   ),
 );
