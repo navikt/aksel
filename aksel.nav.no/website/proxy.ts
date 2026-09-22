@@ -1,6 +1,8 @@
-import { createClient } from "next-sanity";
+import { createClient, defineQuery } from "next-sanity";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { sanityFetch } from "@/app/_sanity/live";
+import type { Redirect } from "@/app/_sanity/query-types";
 import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
@@ -56,36 +58,39 @@ export async function proxy(req: NextRequest) {
   }
 
   try {
-    /**
-     * TODO: Look into updating this using tag-based revalidation
-     */
-    const redirect = await client.fetch(
-      `
+    const { data: _redirect } = await sanityFetch({
+      query: defineQuery(`
   *[_type == 'redirect' && source == $source][0] {
     _id,
     destination,
     redirects
   }
-`,
-      { source: decodeURIComponent(req.nextUrl.pathname) },
-      { cache: "force-cache", next: { revalidate: 3600 } },
-    );
+`),
+      params: { source: decodeURIComponent(req.nextUrl.pathname) },
+      perspective: "published",
+    });
 
-    if (redirect) {
-      /**
-       * TODO: Temp disabled due to revalidation issues causing excessive re-validations
-       */
-      /* const token = process.env.SANITY_WRITE;
+    const redirect = _redirect as Redirect;
+
+    if (redirect.destination) {
+      const token = process.env.SANITY_WRITE;
       if (token) {
         client
           .patch(redirect._id)
           .set({ redirects: 1 + (redirect.redirects ?? 0) })
-          .commit();
-      } */
+          .commit()
+          .catch((error) => {
+            console.error(
+              "Failed to commit redirect count update:",
+              error.message,
+            );
+          });
+      }
 
       if (redirect.destination.startsWith("http")) {
         return NextResponse.redirect(new URL(redirect.destination));
       }
+
       return NextResponse.redirect(new URL(redirect.destination, req.url));
     }
 
