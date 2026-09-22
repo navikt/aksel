@@ -16,7 +16,7 @@ interface ExpansionCardProps extends Omit<
   /**
    * Callback for when card is opened/closed.
    */
-  onOpenChange?: (open: boolean) => void; // TODO: Skal den bare kalles når konsument må oppdatere local state?
+  onOpenChange?: (open: boolean) => void;
   /**
    * Controlled open-state.
    *
@@ -32,6 +32,12 @@ interface ExpansionCardProps extends Omit<
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Automatically open when fragment navigation or the browser's
+   * "Find in page" feature causes a scroll to the content.
+   * @default true
+   */
+  openWhenFound?: boolean; // TODO
   /**
    * Overrides inherited color.
    * @see 🏷️ {@link AkselColor}
@@ -74,7 +80,7 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
           data-color={color}
           data-loaded={isMounted}
           open={open ?? defaultOpen}
-          onToggle={composeEventHandlers(onToggle, (event) => {
+          onToggle={(event) => {
             const detailsElm = ref.current;
 
             // Avoid running if event comes from a nested element (e.g. nested <details>).
@@ -91,9 +97,9 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
 
             // Make sure state is in sync when controlled
             if (open !== undefined && detailsElm.open !== open) {
-              detailsElm.open = open; // TODO: Vurder om trenger controlled state. Konsument kan åpne med ref.open = true
+              detailsElm.open = open;
             }
-          })}
+          }}
           {...rest}
         />
       </ExpansionCardProvider>
