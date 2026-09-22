@@ -31,10 +31,19 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           "aksel-radio--readonly": readOnly,
         })}
         data-color={hasError ? "danger" : props["data-color"]}
-        onClick={() => {
+        onClick={(event) => {
           if (inputProps.disabled || readOnly || cardContext === null) {
             return;
           }
+
+          /* Let input and label handle their own click events */
+          if (
+            event.target instanceof HTMLInputElement ||
+            event.target instanceof HTMLLabelElement
+          ) {
+            return;
+          }
+
           radioRef.current?.click();
         }}
       >
