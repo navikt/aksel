@@ -1,15 +1,6 @@
 "use client";
-export {
-  default as ExpansionCard,
-  ExpansionCardHeader,
-  ExpansionCardContent,
-  ExpansionCardTitle,
-  ExpansionCardDescription,
-} from "./root/ExpansionCardRoot";
-export type {
-  ExpansionCardProps,
-  ExpansionCardHeaderProps,
-  ExpansionCardContentProps,
-  ExpansionCardTitleProps,
-  ExpansionCardDescriptionProps,
-} from "./root/ExpansionCardRoot";
+export { ExpansionCard } from "./root/ExpansionCardRoot";
+export { ExpansionCardHeader } from "./header/ExpansionCardHeader";
+export { ExpansionCardTitle } from "./title/ExpansionCardTitle";
+export { ExpansionCardDescription } from "./description/ExpansionCardDescription";
+export { ExpansionCardContent } from "./content/ExpansionCardContent";

@@ -1,48 +1,17 @@
 import React, { forwardRef, useRef } from "react";
 import type { AkselColor } from "../../types";
-import { cl, composeEventHandlers } from "../../utils/helpers";
+import { cl } from "../../utils/helpers";
 import { useMergeRefs } from "../../utils/hooks";
-import {
-  ExpansionCardContent,
-  type ExpansionCardContentProps,
-} from "../content/ExpansionCardContent";
-import {
-  ExpansionCardDescription,
-  type ExpansionCardDescriptionProps,
-} from "../description/ExpansionCardDescription";
-import {
-  ExpansionCardHeader,
-  type ExpansionCardHeaderProps,
-} from "../header/ExpansionCardHeader";
-import {
-  ExpansionCardTitle,
-  type ExpansionCardTitleProps,
-} from "../title/ExpansionCardTitle";
+import { ExpansionCardContent } from "../content/ExpansionCardContent";
+import { ExpansionCardDescription } from "../description/ExpansionCardDescription";
+import { ExpansionCardHeader } from "../header/ExpansionCardHeader";
+import { ExpansionCardTitle } from "../title/ExpansionCardTitle";
 import { ExpansionCardProvider } from "./ExpansionCardRoot.context";
 
-interface ExpansionCardComponent extends React.ForwardRefExoticComponent<
-  ExpansionCardProps & React.RefAttributes<HTMLDivElement>
+interface ExpansionCardProps extends Omit<
+  React.DetailsHTMLAttributes<HTMLDetailsElement>,
+  "onToggle" // Omitted to avoid confusion since old ExpansionCard also has an onToggle prop
 > {
-  /**
-   * @see 🏷️ {@link ExpansionCardHeaderProps}
-   */
-  Header: typeof ExpansionCardHeader;
-  /**
-   * @see 🏷️ {@link ExpansionCardTitleProps}
-   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
-   */
-  Title: typeof ExpansionCardTitle;
-  /**
-   * @see 🏷️ {@link ExpansionCardDescriptionProps}
-   */
-  Description: typeof ExpansionCardDescription;
-  /**
-   * @see 🏷️ {@link ExpansionCardContentProps}
-   */
-  Content: typeof ExpansionCardContent;
-}
-
-interface ExpansionCardProps extends React.DetailsHTMLAttributes<HTMLDetailsElement> {
   children: React.ReactNode;
   /**
    * Callback for when card is opened/closed.
@@ -71,27 +40,7 @@ interface ExpansionCardProps extends React.DetailsHTMLAttributes<HTMLDetailsElem
   "data-color"?: AkselColor;
 }
 
-/**
- * A component that displays an expandable card.
- *
- * PREVIEW: This version of ExpansionCard uses the `details` and `summary` HTML elements.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/expansioncard)
- * @see 🏷️ {@link ExpansionCardProps}
- *
- * @example
- * ```jsx
- * <ExpansionCard>
- *   <ExpansionCard.Header>
- *     <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
- *   </ExpansionCard.Header>
- *   <ExpansionCard.Content>
- *     <Innhold />
- *   </ExpansionCard.Content>
- * </ExpansionCard>
- * ```
- */
-export const ExpansionCard = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
+const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
   (
     {
       className,
@@ -150,25 +99,72 @@ export const ExpansionCard = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
       </ExpansionCardProvider>
     );
   },
-) as ExpansionCardComponent;
+);
 
-ExpansionCard.Header = ExpansionCardHeader;
-ExpansionCard.Content = ExpansionCardContent;
-ExpansionCard.Title = ExpansionCardTitle;
-ExpansionCard.Description = ExpansionCardDescription;
+/**
+ * A component that displays an expandable card.
+ *
+ * PREVIEW: This version of ExpansionCard uses the `details` and `summary` HTML elements.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/expansioncard)
+ * @see 🏷️ {@link ExpansionCardProps}
+ *
+ * @example
+ * ```jsx
+ * <ExpansionCard>
+ *   <ExpansionCard.Header>
+ *     <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
+ *   </ExpansionCard.Header>
+ *   <ExpansionCard.Content>
+ *     <Innhold />
+ *   </ExpansionCard.Content>
+ * </ExpansionCard>
+ * ```
+ */
+const ExpansionCard = Object.assign(ExpansionCardRoot, {
+  /**
+   * @see 🏷️ {@link ExpansionCardHeaderProps}
+   */
+  Header: ExpansionCardHeader,
+  /**
+   * @see 🏷️ {@link ExpansionCardTitleProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Title: ExpansionCardTitle,
+  /**
+   * @see 🏷️ {@link ExpansionCardDescriptionProps}
+   */
+  Description: ExpansionCardDescription,
+  /*
+   * @see 🏷️ {@link ExpansionCardContentProps}
+   */
+  Content: ExpansionCardContent,
+});
 
-export default ExpansionCard; // TODO: Should we use namespace?
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace ExpansionCard {
+  export type Props = ExpansionCardProps;
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Header {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = ExpansionCardHeader.Props;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Title {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = ExpansionCardTitle.Props;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Description {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = ExpansionCardDescription.Props;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Content {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = ExpansionCardContent.Props;
+  }
+}
 
-export {
-  ExpansionCardHeader,
-  ExpansionCardContent,
-  ExpansionCardTitle,
-  ExpansionCardDescription,
-};
-export type {
-  ExpansionCardProps,
-  ExpansionCardHeaderProps,
-  ExpansionCardContentProps,
-  ExpansionCardTitleProps,
-  ExpansionCardDescriptionProps,
-};
+// eslint-disable-next-line import/export
+export { ExpansionCard };

@@ -33,5 +33,10 @@ const ExpansionCardHeader = forwardRef<HTMLElement, ExpansionCardHeaderProps>(
   },
 );
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace ExpansionCardHeader {
+  export type Props = ExpansionCardHeaderProps;
+}
+
+// eslint-disable-next-line import/export
 export { ExpansionCardHeader };
-export type { ExpansionCardHeaderProps };

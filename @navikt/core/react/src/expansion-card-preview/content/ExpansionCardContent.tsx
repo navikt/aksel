@@ -36,5 +36,10 @@ const ExpansionCardContent = forwardRef<
   );
 });
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace ExpansionCardContent {
+  export type Props = ExpansionCardContentProps;
+}
+
+// eslint-disable-next-line import/export
 export { ExpansionCardContent };
-export type { ExpansionCardContentProps };

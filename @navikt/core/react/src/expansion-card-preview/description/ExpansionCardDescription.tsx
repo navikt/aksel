@@ -27,5 +27,10 @@ const ExpansionCardDescription = forwardRef<
   );
 });
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace ExpansionCardDescription {
+  export type Props = ExpansionCardDescriptionProps;
+}
+
+// eslint-disable-next-line import/export
 export { ExpansionCardDescription };
-export type { ExpansionCardDescriptionProps };

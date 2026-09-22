@@ -36,5 +36,10 @@ const ExpansionCardTitle: OverridableComponent<
   },
 );
 
+// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+export namespace ExpansionCardTitle {
+  export type Props = ExpansionCardTitleProps;
+}
+
+// eslint-disable-next-line import/export
 export { ExpansionCardTitle };
-export type { ExpansionCardTitleProps };

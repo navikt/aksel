@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
-import { ExpansionCard, type ExpansionCardProps } from ".";
+import { ExpansionCard } from ".";
 import { Checkbox } from "../form/checkbox";
 import { Link } from "../link";
 import { VStack } from "../primitives/stack";
@@ -81,7 +81,7 @@ const SmallContent = () => (
   </ExpansionCard.Content>
 );
 
-type DefaultStoryProps = ExpansionCardProps & { description: boolean };
+type DefaultStoryProps = ExpansionCard.Props & { description: boolean };
 type DefaultStory = StoryFn<DefaultStoryProps>;
 export const Default: DefaultStory = ({
   description,
