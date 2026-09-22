@@ -280,49 +280,48 @@ export const CoachmarkMixed: StoryFn<typeof Coachmark> = () => {
 
 export const Dot: StoryObj<typeof CoachmarkDot> = {
   render: (props) => {
-    const { durationInMs } = props;
-    const animations = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX"];
+    const { durationInMs, animation } = props;
     /* TODO:
      * - Set data-color only for dot?
      */
     return (
       <VStack padding="space-40" gap="space-64">
-        {animations.map((animation) => (
+        <Coachmark.Dot
+          animation={animation}
+          durationInMs={durationInMs}
+          data-color="danger"
+          onClick={() => console.log("Coachmark dot clicked")}
+        >
+          <Button
+            data-color="accent"
+            onClick={() => console.log("Button clicked")}
+          >
+            {`Animation ${animation.toLocaleLowerCase()}`}
+          </Button>
+        </Coachmark.Dot>
+        <HStack gap="space-16" align="center">
+          <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
           <Coachmark.Dot
-            key={animation}
             animation={animation}
             durationInMs={durationInMs}
-            data-color="danger"
+            data-color="success"
             onClick={() => console.log("Coachmark dot clicked")}
-          >
-            <Button
-              data-color="accent"
-              onClick={() => console.log("Button clicked")}
-            >
-              {`Animation ${animation.toLocaleLowerCase()}`}
-            </Button>
-          </Coachmark.Dot>
-        ))}
-        {animations.map((animation) => (
-          <HStack gap="space-16" key={animation} align="center">
-            <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
-            <Coachmark.Dot
-              animation={animation}
-              durationInMs={durationInMs}
-              data-color="success"
-              onClick={() => console.log("Coachmark dot clicked")}
-            />
-          </HStack>
-        ))}
+          />
+        </HStack>
       </VStack>
     );
   },
   args: {
     durationInMs: 4000,
+    animation: "ONE",
   },
   argTypes: {
     durationInMs: {
       control: { type: "number" },
+    },
+    animation: {
+      control: { type: "select" },
+      options: ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT"],
     },
   },
 };

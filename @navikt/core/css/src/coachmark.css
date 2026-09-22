@@ -125,6 +125,11 @@
     animation-name: pulse-inner-SIX;
     animation-iteration-count: infinite;
   }
+
+  &[data-animation="SEVEN"] {
+    animation-name: pulse-inner-SEVEN;
+    animation-iteration-count: infinite;
+  }
 }
 
 .aksel-coachmark__dot-pulse-outer {
@@ -162,6 +167,16 @@
 
   &[data-animation="SIX"] {
     animation-name: pulse-outer-SIX;
+    animation-iteration-count: infinite;
+  }
+
+  &[data-animation="SEVEN"] {
+    animation-name: pulse-outer-SEVEN;
+    animation-iteration-count: infinite;
+  }
+
+  &[data-animation="EIGHT"] {
+    animation-name: pulse-outer-EIGHT;
     animation-iteration-count: infinite;
   }
 }
@@ -412,6 +427,50 @@
 
   100% {
     transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-inner-SEVEN {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-SEVEN {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-outer-EIGHT {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
     opacity: 0;
   }
 }
