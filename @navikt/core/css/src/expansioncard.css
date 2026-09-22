@@ -22,6 +22,13 @@
   }
 }
 
+details.aksel-expansioncard {
+  /* This is needed to avoid layout shift when we toggle content-visibility.
+     (Would happen if the component isn't stretched (e.g. flex with align:start)
+     + content is wider than header + header is narrower than avail. width.) */
+  width: 100%;
+}
+
 /* ------------------------ ExpansionCard Small-size ------------------------ */
 .aksel-expansioncard--small {
   --__axc-expansioncard-padding-inline: var(--ax-space-16);
@@ -156,9 +163,9 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
 /* -------------------------- ExpansionCard Content ------------------------- */
 
 /**
- * This is needed for correct width calculation, and for animations to work properly.
- * We need to wait after the first render to set it, or else text fragments will not work in Chrome.
- * TODO PROBLEM: Causes layout shift if content is wider than the header and the header is narrower than avail. width.
+ * This is needed for animations to work properly.
+ * We need to wait until after the first render to set it, or else text fragments will not work in Chrome.
+ * TODO: Vurder å heller toggle det idet man åpner.
 */
 .aksel-expansioncard[data-loaded="true"]::details-content {
   content-visibility: visible;
@@ -191,6 +198,22 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
   .aksel-expansioncard__content[data-open="true"] & {
     opacity: 1;
   }
+}
+
+details.aksel-expansioncard .aksel-expansioncard__content-inner {
+  /* When using a fragment link to content within the card when the card is closed, the browser will
+     scroll past the visible part of the component, and the card will expand above the viewport (out of view).
+     Adding a scroll-margin helps, but only if the target is quite high up. */
+  scroll-margin-top: 1rem;
+  /*
+  TODO: PROBLEM: Når man har ankerlenke til inni kortet, vill ikke innholdet ende opp der nettleseren scroller, pga. animasjonen.
+  Siden scrollen havner nedenfor kortet siden det ikke har åpnet seg ennå, vil kortet ekspandere oppover i stedet for nedover.
+  Dette er jo vanligvis bra for å hindre at innholdet hopper rundt når ting ovenfor viewport endrer høyde, men gir problemer her.
+  Mulige løsninger:
+  - Animasjon kun når kortet åpnes med open-prop eller av brukeren.
+      Usikker på hvor lett det er å vite om det er brukeren som åpner, men bør holde å lytte på click- og keyboard-events.
+      Vi _kan_ lytte på navigate-event og sjekke om det er hashChange, men det blir jo veldig styrete.
+  */
 }
 
 .aksel-expansioncard:not(details) {
