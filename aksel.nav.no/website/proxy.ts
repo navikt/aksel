@@ -78,7 +78,7 @@ export async function proxy(req: NextRequest) {
         client
           .patch(redirect._id)
           .set({ redirects: 1 + (redirect.redirects ?? 0) })
-          .commit()
+          .commit({ token })
           .catch((error) => {
             console.error(
               "Failed to commit redirect count update:",
