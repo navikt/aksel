@@ -128,20 +128,20 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
  */
 const ExpansionCard = Object.assign(ExpansionCardRoot, {
   /**
-   * @see 🏷️ {@link ExpansionCardHeaderProps}
+   * @see 🏷️ {@link ExpansionCardHeader.Props}
    */
   Header: ExpansionCardHeader,
   /**
-   * @see 🏷️ {@link ExpansionCardTitleProps}
+   * @see 🏷️ {@link ExpansionCardTitle.Props}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
   Title: ExpansionCardTitle,
   /**
-   * @see 🏷️ {@link ExpansionCardDescriptionProps}
+   * @see 🏷️ {@link ExpansionCardDescription.Props}
    */
   Description: ExpansionCardDescription,
-  /*
-   * @see 🏷️ {@link ExpansionCardContentProps}
+  /**
+   * @see 🏷️ {@link ExpansionCardContent.Props}
    */
   Content: ExpansionCardContent,
 });
