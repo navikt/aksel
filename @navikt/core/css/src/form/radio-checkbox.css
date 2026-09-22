@@ -284,7 +284,7 @@
 }
 
 /* Radio card background in disabled and readonly states */
-.aksel-radio-card:where(.aksel-radio--disabled, .aksel-radio--readonly) {
+.aksel-radio-card:where(.aksel-radio--readonly) {
   background-color: var(--ax-bg-neutral-moderate);
 }
 
