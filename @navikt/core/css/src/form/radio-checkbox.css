@@ -29,7 +29,8 @@
   border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-radius-8);
 
-  &:focus-within::after {
+  &:focus-within::after,
+  &.aksel-radio--small:focus-within::after {
     inset: 0;
     border-radius: calc(var(--ax-radius-8) - 1px);
     outline-offset: 4px;
