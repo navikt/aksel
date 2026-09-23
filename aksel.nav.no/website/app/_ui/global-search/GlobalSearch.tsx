@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Events } from "@navikt/analytics-types";
 import { Dialog, debounce } from "@navikt/ds-react";
 import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { GlobalSearchButton } from "./GlobalSearch.button";
-import { GlobalSearchContext } from "./GlobalSearch.context";
+import {
+  type GlobalSearchActiveSourceT,
+  GlobalSearchContext,
+  flattenHits,
+} from "./GlobalSearch.context";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
 import styles from "./GlobalSearch.module.css";
@@ -14,9 +18,17 @@ import {
   GlobalSearchEmptySearchState,
   GlobalSearchEmptyState,
   GlobalSearchResultsView,
+  GlobalSearchStatus,
 } from "./GlobalSearch.results";
 import { readQueryParam, writeQueryParam } from "./GlobalSearch.url";
 import { preloadSearchIndex } from "./server/GlobalSearch.actions";
+
+type ActiveStateT = {
+  index: number;
+  source: GlobalSearchActiveSourceT;
+  /* Results the index belongs to. New results reset virtual focus to the first hit. */
+  results: GlobalSearchResultT | null;
+};
 
 function GlobalSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -25,7 +37,26 @@ function GlobalSearch() {
   const [queryResults, setQueryResults] = useState<GlobalSearchResultT | null>(
     null,
   );
+  const [activeState, setActiveState] = useState<ActiveStateT>({
+    index: 0,
+    source: "keyboard",
+    results: null,
+  });
   const [, startTransition] = useTransition();
+
+  const flatHits = useMemo(() => flattenHits(queryResults), [queryResults]);
+  const isCurrentActiveState = activeState.results === queryResults;
+  const activeIndex =
+    flatHits.length === 0
+      ? -1
+      : isCurrentActiveState
+        ? Math.min(activeState.index, flatHits.length - 1)
+        : 0;
+  const activeSource = isCurrentActiveState ? activeState.source : "keyboard";
+
+  const setActiveIndex = (index: number, source: GlobalSearchActiveSourceT) => {
+    setActiveState({ index, source, results: queryResults });
+  };
 
   /* Lazy state keeps one debounce instance for the component lifetime. */
   const [debouncedUpdateQuery] = useState(() =>
@@ -56,12 +87,11 @@ function GlobalSearch() {
 
     startTransition(async () => {
       try {
-
         if (!query) {
           setQueryResults(null);
           return;
         }
-        
+
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
           signal: controller.signal,
         });
@@ -142,11 +172,16 @@ function GlobalSearch() {
           updateQuery: debouncedUpdateQuery,
           resetSearch,
           inputRef,
+          flatHits,
+          activeIndex,
+          activeSource,
+          setActiveIndex,
         }}
       >
         <GlobalSearchButton />
         <GlobalSearchDialog>
           <GlobalSearchForm />
+          <GlobalSearchStatus />
           <div className={styles.searchResults}>
             <GlobalSearchEmptyState />
             <GlobalSearchEmptySearchState />

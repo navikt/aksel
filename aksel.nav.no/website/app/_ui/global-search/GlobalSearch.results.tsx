@@ -1,7 +1,10 @@
 "use client";
 
 import { BodyShort, Heading } from "@navikt/ds-react";
-import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
+import {
+  GLOBAL_SEARCH_LISTBOX_ID,
+  useGlobalSearch,
+} from "@/app/_ui/global-search/GlobalSearch.context";
 import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
@@ -13,33 +16,62 @@ function GlobalSearchResultsView() {
     return null;
   }
 
-  return (
-    <section aria-label="Søkeresultater">
-      <BodyShort aria-live="polite" visuallyHidden>
-        {`${queryResults?.result?.totalHits} treff på "${queryResults?.query}"`}
-      </BodyShort>
-      <div>
-        <GlobalSearchHitCollection
-          heading={`Beste treff på "${queryResults?.query}"`}
-          searchHits={queryResults?.result.topResults ?? []}
-        />
-        {queryResults?.result.groupedHits.map((group) => {
-          const count =
-            group.total > group.hits.length
-              ? `${group.hits.length} av ${group.total}`
-              : group.hits.length;
+  const { topResults, groupedHits } = queryResults.result;
 
-          return (
-            <GlobalSearchHitCollection
-              key={group.type}
-              heading={`${globalSearchConfig[group.type].display} (${count})`}
-              tag={group.type}
-              searchHits={group.hits}
-            />
-          );
-        })}
-      </div>
-    </section>
+  /* Offsets must match the order in `flattenHits`. */
+  const groupStartIndexes: number[] = [];
+  let offset = topResults.length;
+  for (const group of groupedHits) {
+    groupStartIndexes.push(offset);
+    offset += group.hits.length;
+  }
+
+  return (
+    <div
+      role="listbox"
+      id={GLOBAL_SEARCH_LISTBOX_ID}
+      aria-label="Søkeresultater"
+    >
+      <GlobalSearchHitCollection
+        heading={`Beste treff på "${queryResults.query}"`}
+        searchHits={topResults}
+        startIndex={0}
+      />
+      {groupedHits.map((group, i) => {
+        const count =
+          group.total > group.hits.length
+            ? `${group.hits.length} av ${group.total}`
+            : group.hits.length;
+
+        return (
+          <GlobalSearchHitCollection
+            key={group.type}
+            heading={`${globalSearchConfig[group.type].display} (${count})`}
+            tag={group.type}
+            searchHits={group.hits}
+            startIndex={groupStartIndexes[i]}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/* Always mounted, so screen readers reliably announce changes. */
+function GlobalSearchStatus() {
+  const { queryResults } = useGlobalSearch();
+
+  let message = "";
+  if (queryResults?.result) {
+    message = queryResults.result.totalHits
+      ? `${queryResults.result.totalHits} treff på "${queryResults.query}"`
+      : `Ingen resultater for "${queryResults.query}"`;
+  }
+
+  return (
+    <BodyShort as="div" role="status" visuallyHidden>
+      {message}
+    </BodyShort>
   );
 }
 
@@ -55,13 +87,7 @@ function GlobalSearchEmptySearchState() {
 
   return (
     <div className={styles.searchEmptyState}>
-      <Heading
-        size="medium"
-        as="p"
-        aria-live="polite"
-        aria-atomic
-        textColor="subtle"
-      >
+      <Heading size="medium" as="p" textColor="subtle">
         Ingen resultater
       </Heading>
       <svg
@@ -271,4 +297,5 @@ export {
   GlobalSearchEmptySearchState,
   GlobalSearchEmptyState,
   GlobalSearchResultsView,
+  GlobalSearchStatus,
 };

@@ -29,8 +29,16 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
           </Box>
           <Kbd>K</Kbd> for å søke
         </span>
-        <span>
-          <Kbd>Esc</Kbd> for å lukke
+        <span className={styles.searchDialogShortcutsGroup}>
+          <span>
+            <Kbd>↑</Kbd> <Kbd>↓</Kbd> for å navigere
+          </span>
+          <span>
+            <Kbd>↵</Kbd> for å åpne
+          </span>
+          <span>
+            <Kbd>Esc</Kbd> for å lukke
+          </span>
         </span>
       </BodyShort>
     </Dialog.Popup>

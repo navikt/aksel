@@ -13,9 +13,9 @@ function getSearch(page: Page) {
   return {
     trigger: page.getByRole("button", { name: "Åpne søk" }),
     dialog,
-    input: dialog.getByRole("searchbox", { name: "Globalt søk" }),
+    input: dialog.getByRole("combobox", { name: "Globalt søk" }),
     closeButton: dialog.getByRole("button", { name: "Lukk" }),
-    results: dialog.getByRole("region", { name: "Søkeresultater" }),
+    results: dialog.getByRole("listbox", { name: "Søkeresultater" }),
   };
 }
 
@@ -258,7 +258,9 @@ test.describe("Global search: searching", () => {
     await page.waitForTimeout(500);
 
     await expect(results).toHaveCount(0);
-    await expect(dialog.getByText("Ingen resultater")).toBeHidden();
+    await expect(
+      dialog.getByText("Ingen resultater", { exact: true }),
+    ).toBeHidden();
   });
 
   test("shows empty state when nothing matches", async ({ page }) => {
@@ -268,7 +270,9 @@ test.describe("Global search: searching", () => {
     await openSearch(page);
     await input.fill("finnesikke");
 
-    await expect(dialog.getByText("Ingen resultater")).toBeVisible();
+    await expect(
+      dialog.getByText("Ingen resultater", { exact: true }),
+    ).toBeVisible();
     await expect(results).toHaveCount(0);
   });
 
@@ -369,7 +373,7 @@ test.describe("Global search: result links", () => {
 
     await openSearch(page);
     await input.fill("button");
-    await dialog.getByRole("link", { name: "Button", exact: true }).click();
+    await dialog.getByRole("option", { name: "Button", exact: true }).click();
 
     await expect(page).toHaveURL(/\/komponenter\/core\/button$/);
     await expect(dialog).toBeHidden();
@@ -381,7 +385,10 @@ test.describe("Global search: result links", () => {
 
     await openSearch(page);
     await input.fill("tekstfelt");
-    const link = dialog.getByRole("link", { name: "TextField", exact: true });
+    const link = dialog.getByRole("option", {
+      name: "TextField Bredde Beta",
+      exact: true,
+    });
 
     await expect(link).toHaveAttribute(
       "href",
@@ -409,11 +416,140 @@ test.describe("Global search: result links", () => {
 
     const newPage = context.waitForEvent("page");
     await dialog
-      .getByRole("link", { name: "Button", exact: true })
+      .getByRole("option", { name: "Button", exact: true })
       .click({ modifiers: ["ControlOrMeta"] });
 
     await expect(await newPage).toHaveURL(/\/komponenter\/core\/button$/);
     await expect(dialog).toBeVisible();
+  });
+});
+
+test.describe("Global search: virtual focus", () => {
+  test.skip(({ isMobile }) => isMobile, "No hardware keyboard on mobile");
+
+  async function expectActiveOption(page: Page, name: string) {
+    const { dialog, input } = getSearch(page);
+    const option = dialog.getByRole("option", { name, exact: true });
+
+    await expect(option).toHaveAttribute("aria-selected", "true");
+    await expect(input).toHaveAttribute(
+      "aria-activedescendant",
+      (await option.getAttribute("id")) ?? "",
+    );
+    await expect(dialog.getByRole("option", { selected: true })).toHaveCount(1);
+  }
+
+  test("highlights the first result when results load", async ({ page }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { input, results } = getSearch(page);
+
+    await openSearch(page);
+    await expect(input).toHaveAttribute("aria-expanded", "false");
+    await expect(input).not.toHaveAttribute("aria-activedescendant");
+
+    await input.fill("button");
+    await expect(results).toBeVisible();
+
+    await expect(input).toHaveAttribute("aria-expanded", "true");
+    await expect(input).toHaveAttribute(
+      "aria-controls",
+      "aksel-search-listbox",
+    );
+    await expectActiveOption(page, "Button");
+  });
+
+  test("arrow keys move virtual focus and wrap around", async ({ page }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { input, results } = getSearch(page);
+
+    await openSearch(page);
+    await input.fill("button");
+    await expect(results).toBeVisible();
+
+    await input.press("ArrowDown");
+    await expectActiveOption(page, "TextField Bredde Beta");
+    await input.press("ArrowDown");
+    await expectActiveOption(page, "Knapper i skjema");
+    await input.press("ArrowDown");
+    await expectActiveOption(page, "Button");
+    await input.press("ArrowUp");
+    await expectActiveOption(page, "Knapper i skjema");
+
+    await expect(input).toBeFocused();
+    await expect(input).toHaveValue("button");
+  });
+
+  test("typing keeps focus in the input and new results reset to the first hit", async ({
+    page,
+  }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { dialog, input, results } = getSearch(page);
+
+    await openSearch(page);
+    await input.fill("button");
+    await expect(results).toBeVisible();
+    await input.press("ArrowDown");
+    await expectActiveOption(page, "TextField Bredde Beta");
+
+    await input.press("End");
+    await input.pressSequentially("s");
+    await expect(dialog.getByText('3 treff på "buttons"')).toBeAttached();
+
+    await expect(input).toBeFocused();
+    await expect(input).toHaveValue("buttons");
+    await expectActiveOption(page, "Button");
+  });
+
+  test("Enter opens the active result and closes search", async ({ page }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { dialog, input, results } = getSearch(page);
+
+    await openSearch(page);
+    await input.fill("button");
+    await expect(results).toBeVisible();
+    await input.press("ArrowDown");
+    await expectActiveOption(page, "TextField Bredde Beta");
+    await input.press("Enter");
+
+    await expect(page).toHaveURL(
+      /\/komponenter\/core\/textfield#fixture-anchor$/,
+    );
+    await expect(dialog).toBeHidden();
+  });
+
+  test("Cmd/Ctrl+Enter opens the active result in a new tab and keeps search open", async ({
+    page,
+    context,
+  }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { dialog, input, results } = getSearch(page);
+
+    await openSearch(page);
+    await input.fill("button");
+    await expect(results).toBeVisible();
+
+    const newPage = context.waitForEvent("page");
+    await input.press("ControlOrMeta+Enter");
+
+    await expect(await newPage).toHaveURL(/\/komponenter\/core\/button$/);
+    await expect(dialog).toBeVisible();
+  });
+
+  test("hovering a result makes it active without moving focus", async ({
+    page,
+  }) => {
+    await mockSearchApi(page, (q) => ({ body: searchResult(q) }));
+    const { dialog, input, results } = getSearch(page);
+
+    await openSearch(page);
+    await input.fill("button");
+    await expect(results).toBeVisible();
+    await dialog
+      .getByRole("option", { name: "Knapper i skjema", exact: true })
+      .hover();
+
+    await expectActiveOption(page, "Knapper i skjema");
+    await expect(input).toBeFocused();
   });
 });
 
@@ -455,6 +591,23 @@ test.describe("Global search: accessibility", () => {
 
     expect(scan.violations).toEqual([]);
   });
+
+  test("announces result counts in a status region", async ({ page }) => {
+    await mockSearchApi(page, (q) => ({
+      body: q === "finnesikke" ? emptyResult(q) : searchResult(q),
+    }));
+    const { dialog, input } = getSearch(page);
+    const status = dialog.getByRole("status");
+
+    await openSearch(page);
+    await expect(status).toHaveText("");
+
+    await input.fill("button");
+    await expect(status).toHaveText('3 treff på "button"');
+
+    await input.fill("finnesikke");
+    await expect(status).toHaveText('Ingen resultater for "finnesikke"');
+  });
 });
 
 test.describe("Global search: end-to-end with real index", () => {
@@ -465,7 +618,7 @@ test.describe("Global search: end-to-end with real index", () => {
     await input.fill("button");
 
     /* First query may build the index on a cold server. */
-    const link = dialog.getByRole("link", { name: "Button", exact: true });
+    const link = dialog.getByRole("option", { name: /^Button(\s|$)/ });
     await expect(link.first()).toBeVisible({ timeout: 30_000 });
     await link.first().click();
 
