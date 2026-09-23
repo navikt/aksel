@@ -12,6 +12,10 @@ import { BodyLong } from "../../typography";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 
+/**
+ * @deprecated
+ * Use GlobalAlert, LocalAlert, InfoCard, or InlineMessage instead.
+ */
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Alert content.
@@ -68,13 +72,15 @@ const IconMap = {
 };
 
 /**
- * A component for displaying alerts
+ * @deprecated
+ * Use [GlobalAlert](https://aksel.nav.no/komponenter/core/globalalert),
+ * [LocalAlert](https://aksel.nav.no/komponenter/core/localalert),
+ * [InfoCard](https://aksel.nav.no/komponenter/core/infocard), or
+ * [InlineMessage](https://aksel.nav.no/komponenter/core/inlinemessage) instead.
+ * Component will be removed in a future major version.
+ *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/legacy/alert)
  * @see 🏷️ {@link AlertProps}
- * @example
- * ```jsx
- * <Alert variant="error">Dette er en feilmelding</Alert>
- * ```
  */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
@@ -97,7 +103,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         {...rest}
-        data-color={variantToRole(variant)}
+        data-color={variantToRoleMap[variant] ?? "info"}
         data-variant={variant}
         ref={ref}
         className={cl(
@@ -140,13 +146,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-const VariantToRoleMap: Record<AlertProps["variant"], AkselColor> = {
+const variantToRoleMap: Record<AlertProps["variant"], AkselColor> = {
   error: "danger",
   warning: "warning",
   info: "info",
   success: "success",
 };
-
-function variantToRole(variant: AlertProps["variant"]): AkselColor {
-  return VariantToRoleMap[variant] ?? "info";
-}

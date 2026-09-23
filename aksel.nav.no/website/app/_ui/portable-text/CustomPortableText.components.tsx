@@ -1,6 +1,6 @@
 import {
   PortableText,
-  PortableTextBlock,
+  type PortableTextBlock,
   type PortableTextBlockComponent,
   type PortableTextComponents,
   type PortableTextMarkComponent,

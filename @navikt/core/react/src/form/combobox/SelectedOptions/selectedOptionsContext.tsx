@@ -96,7 +96,7 @@ const SelectedOptionsProvider = ({
       } else {
         setSelectedOptions((oldSelectedOptions) =>
           oldSelectedOptions.filter(
-            (selectedOption) => selectedOption !== option,
+            (selectedOption) => selectedOption.value !== option.value,
           ),
         );
       }

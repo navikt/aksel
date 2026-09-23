@@ -19,7 +19,8 @@
       "node",
       "umami",
       "@navikt/ds-react/types/theme",
-      "./app/theme.d.ts"
+      "./app/theme.d.ts",
+      "./website.d.ts"
     ],
     "paths": {
       "@/web/*": ["./components/website-modules/*"],

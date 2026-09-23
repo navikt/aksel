@@ -158,7 +158,7 @@ Remember to remove `@navikt/ds-css-internal` as a dependency after migration + r
 + .navds-timeline
 ```
 
-Note: This is a "dumb" codemod that uses a simple regex to find and replace. This can lead to unknown sideeffects, so its reccomended to scope the codemod to spesific files.
+Note: This is a "dumb" codemod that uses a simple regex to find and replace. This can lead to unknown sideeffects, so its recommended to scope the codemod to spesific files.
 
 ```bash
 `npx @navikt/aksel codemod v4-internal-css **/*.css`

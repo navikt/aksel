@@ -9,13 +9,11 @@ interface ComboboxTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElem
    */
   children: React.ReactNode;
   readOnly?: boolean;
-  disabled?: boolean;
 }
 
 const ComboboxTrigger = ({
   children,
   readOnly,
-  disabled,
   ...rest
 }: ComboboxTriggerProps) => {
   const rootContext = useComboboxRootContext();
@@ -24,9 +22,7 @@ const ComboboxTrigger = ({
     <Floating.Anchor asChild ref={rootContext.triggerRef}>
       <Slot
         role="combobox"
-        //aria-haspopup="listbox" // Dette er implicit med role combobox. TODO: Vurder om hele popupen bør ha role listbox, ev. dialog.
-        aria-expanded={readOnly ? undefined : rootContext.open} // TODO: Can consider to always set this, but might be confusing.
-        //aria-controls={context.open ? context.contentId : undefined} // Del av Combobox Pattern, men vet ikke om det er hensiktsmessig.
+        aria-expanded={readOnly ? undefined : rootContext.open}
         onClick={() => !readOnly && rootContext.setOpen(!rootContext.open)}
         onMouseDown={(event) => {
           // Prevents "flash of focus" on trigger before focus is moved to input
@@ -39,11 +35,9 @@ const ComboboxTrigger = ({
             event.preventDefault();
           }
         })}*/
-        id={rootContext.triggerId}
         data-readonly={readOnly}
         aria-readonly={readOnly} // TODO: Vurder
-        // @ts-expect-error Slot only accepts generic HTML attributes
-        disabled={disabled}
+        disabled={rootContext.disabled}
         {...rest}
       >
         {children}

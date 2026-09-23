@@ -9,7 +9,7 @@ export interface ComboboxOptionProps<T extends ComboboxOptionData> {
   onToggleOption: (option: T, isSelected: boolean) => void;
   isSelected: boolean;
   hasVirtualFocus: boolean;
-  filterString: string;
+  highlightText: string;
   children?: React.ReactNode | ComboboxListProps<T>["children"];
 }
 
@@ -18,7 +18,7 @@ function ComboboxOptionComponent<T extends ComboboxOptionData>({
   onToggleOption,
   isSelected,
   hasVirtualFocus,
-  filterString,
+  highlightText,
   children,
 }: ComboboxOptionProps<T>) {
   //console.log("Rendering option", option.value);
@@ -34,12 +34,15 @@ function ComboboxOptionComponent<T extends ComboboxOptionData>({
       <div className="aksel-combobox2__option-checkmark" aria-hidden>
         {isSelected && <CheckmarkHeavyIcon aria-hidden />}
       </div>
-      <div>
+      <div
+        className="aksel-combobox2__option-label"
+        //data-nowrap={!children || typeof children === "string"}
+      >
         {typeof children === "function"
           ? children(option)
           : (children ??
-            (filterString
-              ? highlightSubstring(option.label, filterString)
+            (highlightText
+              ? highlightSubstring(option.label, highlightText)
               : option.label))}
       </div>
     </Listbox.Option>

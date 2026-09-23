@@ -20,31 +20,41 @@ const meta: Meta<typeof ComboboxRoot> = {
 };
 export default meta;
 
-const countries = [
-  { label: "Norge", value: "option-1" },
-  { label: "Finland", value: "option-2" },
-  { label: "Sverige", value: "option-3" },
-  { label: "Danmark", value: "option-4" },
-  { label: "Island", value: "option-5" },
-  { label: "Færøyene", value: "option-6" },
-  { label: "Åland", value: "option-7" },
-  { label: "Estland", value: "option-8" },
-  { label: "Latvia", value: "option-9" },
-  { label: "Litauenm", value: "option-10" },
+const nordicCountries = [
+  { label: "Norge", value: "opt-1" },
+  { label: "Finland", value: "opt-2" },
+  { label: "Sverige", value: "opt-3" },
+  { label: "Danmark", value: "opt-4" },
+  { label: "Island", value: "opt-5" },
+  { label: "Grønland", value: "opt-6" },
+  { label: "Færøyene", value: "opt-7" },
+  { label: "Åland", value: "opt-8" },
 ];
+const centralEuropeanCountries = [
+  { label: "Tyskland", value: "opt-9" },
+  { label: "Østerrike", value: "opt-10" },
+  { label: "Sveits", value: "opt-11" },
+  { label: "Liechtenstein", value: "opt-12" },
+  { label: "Polen", value: "opt-13" },
+  { label: "Tsjekkia", value: "opt-14" },
+  { label: "Slovakia", value: "opt-15" },
+  { label: "Ungarn", value: "opt-16" },
+  { label: "Slovenia", value: "opt-17" },
+];
+const countries = [...nordicCountries, ...centralEuropeanCountries];
 
 const groupedOptions = [
   {
-    label: "Nordiske land",
+    label: "Norden",
     id: "group-1",
-    options: countries.slice(0, 6),
+    options: nordicCountries,
   },
   {
-    label: "Baltiske land",
+    label: "Sentral-Europa",
     id: "group-2",
-    options: countries.slice(6),
+    options: centralEuropeanCountries,
   },
-  { label: "Ikke gruppert", value: "option-01" },
+  { label: "Annet (ikke gruppert)", value: "opt-01" },
 ];
 
 function BaseCombobox<
@@ -138,7 +148,7 @@ OptionMemoization.play = async ({ canvasElement }) => {
   expect(Number(countElm.textContent)).toBe(expectedCount);
 
   // Filtering should not re-render any options
-  // TODO: For this to work we must omit the filterString prop on ComboboxOption
+  // TODO: For this to work we must omit the highlightText prop on ComboboxOption
   /*await userEvent.type(combobox, "nor", { delay: 200 });
   expect(Number(countElm.textContent)).toBe(expectedCount);
   expect(canvas.getAllByRole("option").length).toBe(1);*/

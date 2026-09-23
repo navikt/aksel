@@ -1,3 +1,7 @@
+.aksel-listbox__options {
+  overflow: auto;
+}
+
 .aksel-listbox__group-label {
   background: var(--ax-bg-neutral-softA);
   padding: var(--ax-space-2) var(--ax-space-8);
@@ -17,8 +21,15 @@
   }
 
   .aksel-listbox__options > &:last-child,
-  .aksel-listbox__group:last-child > &:last-child {
+  .aksel-listbox__group:last-child &:last-child {
     margin-bottom: var(--ax-space-2);
+  }
+
+  .aksel-listbox__group:first-child &:nth-child(1 of &) {
+    /* When we scroll to the first option, and that option is in a group,
+       scroll to the very top so that the group label is visible as well.
+       We exaggerate the value to take into account custom content. */
+    scroll-margin-top: 60px;
   }
 }
 

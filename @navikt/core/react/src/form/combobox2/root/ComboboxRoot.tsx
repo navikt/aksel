@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useId } from "../../../utils-external";
 import { Floating } from "../../../utils/components/floating/Floating";
-import { createStrictContext } from "../../../utils/helpers";
+import { cl, createStrictContext } from "../../../utils/helpers";
+import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
 /** Resolves the option type based on whether the parameter is a group or a single option */
@@ -27,7 +27,10 @@ export type ComboboxGroupData<T extends ComboboxOptionData> = {
 export interface ComboboxRootProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
-> {
+>
+  extends
+    Pick<FormFieldProps, "disabled">,
+    React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Can be either an array of options ({@link ComboboxOptionData})
@@ -37,33 +40,26 @@ export interface ComboboxRootProps<
    * put the single options first.
    */
   options: T[];
-  selectedOptions: ResolveOption<T>["value"][];
-  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"]; // TODO: Vurder å tilby onChange som returnerer valgte verdier
+  selectedOptions: ResolveOption<T>["value"][]; // TODO: Vurder navn: value(s)
+  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"];
   defaultOpen?: boolean;
-  multiselect?: boolean; // TODO: Vurder annet navn
-  triggerId?: string;
+  multiselect?: boolean; // TODO: Hva skal være default? Vurder navn
   /**
    * @default "medium"
    */
   size?: "small" | "medium";
 }
 
-/* Alternativt:
-  options: (T | ComboboxGroupData<T>)[];
-  selectedOptions: T["value"][];
-  onToggleOption: ComboboxOptionProps<T>["onToggleOption"];
-*/
-
 export interface ComboboxRootContextProps {
   open: boolean;
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
-  options: (ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>)[]; // Can't use generics in contexts
-  selectedOptions: ComboboxOptionData["value"][];
-  onToggleOption: ComboboxOptionProps<ComboboxOptionData>["onToggleOption"]; // Can't use generics in contexts
+  options: ComboboxRootProps["options"];
+  selectedOptions: ComboboxRootProps["selectedOptions"];
+  onToggleOption: ComboboxRootProps["onToggleOption"];
   multiselect: boolean;
-  triggerId: string;
-  size: "small" | "medium";
+  size: Exclude<ComboboxRootProps["size"], undefined>;
+  disabled: ComboboxRootProps["disabled"];
 }
 
 export const {
@@ -83,15 +79,21 @@ export function ComboboxRoot<
   onToggleOption,
   defaultOpen = false,
   multiselect = true,
-  triggerId: triggerIdProp,
   size = "medium",
+  disabled,
+  className,
+  ...rest
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(defaultOpen);
-  const triggerId = useId(triggerIdProp);
 
   return (
-    <div className="aksel-combobox2" data-size={size}>
+    <div
+      {...rest}
+      className={cl("aksel-combobox2", className)}
+      data-size={size}
+      data-disabled={disabled}
+    >
       <ComboboxRootContextProvider
         open={open}
         setOpen={setOpen}
@@ -102,8 +104,8 @@ export function ComboboxRoot<
           onToggleOption as ComboboxRootContextProps["onToggleOption"]
         }
         multiselect={multiselect}
-        triggerId={triggerId}
         size={size}
+        disabled={disabled}
       >
         <Floating>{children}</Floating>
       </ComboboxRootContextProvider>

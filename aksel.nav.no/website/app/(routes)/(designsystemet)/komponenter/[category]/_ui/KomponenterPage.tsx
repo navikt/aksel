@@ -17,6 +17,8 @@ import {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { ChangelogTable } from "@/app/_ui/changelog-table/ChangelogTable";
+import { fetchChangelogs } from "@/app/_ui/changelog-table/ChangelogTable.fetch";
 import { MetadataSeksjon } from "@/app/_ui/metadata-seksjon/MetadataSeksjon";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
@@ -80,6 +82,8 @@ async function CachedKomponenterPage({
     notFound();
   }
 
+  const changelogs = await fetchChangelogs(pageData._id, "ds");
+
   if (
     (pageData.component_metadata?.components?.length ?? 0) > 0 ||
     (pageData.component_metadata?.utils?.length ?? 0) > 0
@@ -99,10 +103,11 @@ async function CachedKomponenterPage({
       <TableOfContents
         feedback={{
           name: pageData.heading,
-          text: "GitHub issues",
+          text: "Rapporter bug",
           href: pageData.contact?.github_issues_link,
         }}
         toc={toc}
+        hasChangelogs={changelogs.exists}
       />
       <div>
         {["beta", "new"].includes(pageData.status?.tag ?? "") && (
@@ -121,8 +126,9 @@ async function CachedKomponenterPage({
         <DesignsystemetKomponentIntro data={pageData} />
         <CustomPortableText value={pageData.content as PortableTextBlock[]} />
         <MetadataSeksjon metadata={pageData.component_metadata} />
+        <ChangelogTable changelogs={changelogs} />
         <DesignsystemetPageFooter
-          pageId={pageData._id}
+          pageTitle={pageData.heading}
           updateDateString={pageData._updatedAt ?? pageData._createdAt}
           contact={pageData.contact}
         />

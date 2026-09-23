@@ -1,13 +1,13 @@
 import {
-  DownloadIcon,
   ExclamationmarkTriangleIcon,
   InformationSquareIcon,
   LightBulbIcon,
   LinkIcon,
+  PaperclipIcon,
   ThumbDownIcon,
   ThumbUpIcon,
 } from "@navikt/aksel-icons";
-import { InfoCard, Spacer } from "@navikt/ds-react";
+import { Box, InfoCard, Spacer } from "@navikt/ds-react";
 import {
   InfoCardContent,
   InfoCardHeader,
@@ -73,7 +73,7 @@ const VariantConfig: Record<
   },
   attachment: {
     heading: "Vedlegg",
-    icon: <DownloadIcon aria-hidden fontSize="1.5rem" />,
+    icon: <PaperclipIcon aria-hidden fontSize="1.5rem" />,
     color: "neutral",
   },
 } as const;
@@ -121,7 +121,7 @@ function EditorPanelHeader(
       {actionComponent && (
         <>
           <Spacer />
-          {actionComponent}
+          <Box marginBlock="space-4 space-0">{actionComponent}</Box>
         </>
       )}
     </InfoCardHeader>

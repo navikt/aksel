@@ -1,5 +1,6 @@
-import type { Meta } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useState } from "react";
+import { fireEvent } from "storybook/test";
 import { HStack } from "../../../primitives/stack";
 import { BodyShort } from "../../../typography";
 import { ComboboxFilter } from "../filter/ComboboxFilter";
@@ -57,7 +58,7 @@ const groupedOptions: (MyGroup | MyOption)[] = [
 
 export const Default = () => {
   const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
+    "opt-3",
   ]);
 
   return (
@@ -82,7 +83,7 @@ export const Default = () => {
 };
 
 export const SingleSelect = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[2]);
 
   return (
     <ComboboxRoot
@@ -100,7 +101,7 @@ export const SingleSelect = () => {
 };
 
 export const Groups = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[2]);
 
   return (
     <HStack gap="space-56">
@@ -125,6 +126,42 @@ export const Groups = () => {
       >
         <ComboboxPopup>
           <ComboboxFilter />
+          <ComboboxList />
+        </ComboboxPopup>
+      </ComboboxRoot>
+    </HStack>
+  );
+};
+
+export const WithoutFilter = () => {
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
+
+  return (
+    <HStack gap="space-56">
+      <ComboboxRoot
+        defaultOpen
+        options={[
+          {
+            label: "Nordiske land",
+            id: "group-1",
+            options: options.slice(0, 3),
+          },
+        ]}
+        selectedOptions={[selectedOption.value]}
+        onToggleOption={setSelectedOption}
+      >
+        <ComboboxPopup>
+          <ComboboxList />
+        </ComboboxPopup>
+      </ComboboxRoot>
+
+      <ComboboxRoot
+        defaultOpen
+        options={options.slice(0, 3)}
+        selectedOptions={[selectedOption.value]}
+        onToggleOption={setSelectedOption}
+      >
+        <ComboboxPopup>
           <ComboboxList />
         </ComboboxPopup>
       </ComboboxRoot>
@@ -245,3 +282,32 @@ export const ControlledInput = () => {
     </ComboboxRoot>
   );
 };
+
+export const States: StoryFn = () => {
+  const [selectedOption, setSelectedOption] = useState<MyOption>(options[0]);
+
+  return (
+    <ComboboxRoot
+      defaultOpen
+      options={options.slice(0, 3)}
+      selectedOptions={[selectedOption.value]}
+      onToggleOption={setSelectedOption}
+    >
+      <ComboboxPopup>
+        <ComboboxList />
+      </ComboboxPopup>
+    </ComboboxRoot>
+  );
+};
+States.play = async ({ canvasElement }) => {
+  // Selected option will get focus by default.
+  // Move focus down so that we can see the states
+  // "selected but not focused" and "focused but not selected".
+  const listbox = canvasElement.querySelector(
+    "[role='listbox']",
+  ) as HTMLElement;
+  console.log(listbox);
+  fireEvent.keyDown(listbox, { key: "ArrowDown" });
+};
+
+//export const Chromatic = renderStoriesForChromatic();

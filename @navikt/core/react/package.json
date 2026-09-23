@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "8.16.1",
+  "version": "8.16.2",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -74,6 +74,16 @@
       "require": {
         "types": "./cjs/lookup/index.d.ts",
         "default": "./cjs/lookup/index.js"
+      }
+    },
+    "./PREVIEW/Badge": {
+      "import": {
+        "types": "./esm/badge/index.d.ts",
+        "default": "./esm/badge/index.js"
+      },
+      "require": {
+        "types": "./cjs/badge/index.d.ts",
+        "default": "./cjs/badge/index.js"
       }
     },
     "./types/theme": {
@@ -738,15 +748,15 @@
   "dependencies": {
     "@floating-ui/react": "0.27.20",
     "@floating-ui/react-dom": "^2.1.9",
-    "@navikt/aksel-icons": "^8.16.1",
-    "@navikt/ds-tokens": "^8.16.1",
+    "@navikt/aksel-icons": "^8.16.2",
+    "@navikt/ds-tokens": "^8.16.2",
     "date-fns": "^4.0.0",
     "react-day-picker": "10.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
+    "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "17.3.0",
     "@types/node": "^24.10.9",
@@ -765,7 +775,7 @@
     "tsc-alias": "1.9.1",
     "tsx": "^4.23.1",
     "typescript": "6.0.3",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",

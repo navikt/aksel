@@ -10,7 +10,7 @@ function AdminStudio() {
   return (
     <NextStudio
       config={workspaceConfig}
-      scheme={theme ?? "light"}
+      scheme={(theme as "dark" | "light") ?? "light"}
       onSchemeChange={(nextScheme) => {
         if (nextScheme === "system") {
           const prefersDark = window.matchMedia(

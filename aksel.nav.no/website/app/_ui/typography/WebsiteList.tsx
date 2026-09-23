@@ -10,12 +10,7 @@ type ListProps = Pick<AkselListProps, "as" | "children"> &
 
 function WebsiteList({ children, as = "ul", ...restProps }: ListProps) {
   return (
-    <AkselList
-      {...restProps}
-      className={styles.typoList}
-      as={as}
-      data-color="neutral"
-    >
+    <AkselList {...restProps} className={styles.typoList} as={as}>
       {children}
     </AkselList>
   );
@@ -38,7 +33,6 @@ function WebsiteListItem({ children, icon = false }: ListItemProps) {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
-            role="presentation"
             className={styles.typoListIcon}
             data-color="brand-blue"
           >

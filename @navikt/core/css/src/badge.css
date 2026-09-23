@@ -1,0 +1,48 @@
+.aksel-badge__anchor {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: fit-content;
+}
+
+.aksel-badge {
+  --__axc-badge-size: 1.25rem;
+
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--__axc-badge-size);
+  height: var(--__axc-badge-size);
+  padding: var(--ax-space-4);
+  border-radius: var(--ax-radius-16);
+  background: var(--ax-bg-strong);
+  color: var(--ax-text-contrast);
+  white-space: nowrap;
+  line-height: 1;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
+}
+
+.aksel-badge__anchor > .aksel-badge {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  /* 5px offset */
+  transform: translate(0.3125rem, -0.3125rem);
+}
+
+.aksel-badge[data-dot] {
+  --__axc-badge-size: 0.75rem;
+
+  padding-inline: 0;
+}

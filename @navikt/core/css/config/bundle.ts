@@ -55,9 +55,8 @@ async function bundle() {
       drafts: {
         customMedia: false,
       },
-      targets: browserslistToTargets(
-        browserslist(">= 0.5% in NO, safari >= 15.4, iOS >= 15.4, not dead"),
-      ),
+      /* Uses the "browserslist" field in package.json as the single source of truth. */
+      targets: browserslistToTargets(browserslist(packageJSON.browserslist)),
       resolver: {
         read(filePath) {
           const file = fs.readFileSync(filePath, "utf8");

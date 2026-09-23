@@ -1,6 +1,7 @@
 import { htmlToBlocks } from "@portabletext/block-tools";
 import { Schema } from "@sanity/schema";
 import { JSDOM } from "jsdom";
+import { isEqualWith } from "lodash";
 import { createClient } from "next-sanity";
 import fs from "node:fs";
 import showdown from "showdown";
@@ -98,6 +99,8 @@ async function main() {
         .catch((err) => {
           console.error("Oh no, the changelog-update failed: ", err.message);
         });
+    } else if (contentEquals(blocks, existingDoc[0].content)) {
+      console.info("Changelog doc is already up to date for version", version);
     } else {
       // Update existing document
       await client
@@ -112,4 +115,18 @@ async function main() {
         });
     }
   }
+}
+
+function contentEquals(left: unknown, right: unknown): boolean {
+  return isEqualWith(left, right, (_, __, key) => {
+    if (key === "_key") {
+      return true;
+    }
+
+    if (key === "marks") {
+      return true;
+    }
+
+    return undefined;
+  });
 }
