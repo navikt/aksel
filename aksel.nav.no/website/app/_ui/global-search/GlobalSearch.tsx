@@ -16,6 +16,7 @@ import {
   GlobalSearchResultsView,
 } from "./GlobalSearch.results";
 import { readQueryParam, writeQueryParam } from "./GlobalSearch.url";
+import { preloadSearchIndex } from "./server/GlobalSearch.actions";
 
 function GlobalSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -91,6 +92,7 @@ function GlobalSearch() {
         if (open) {
           inputRef.current?.select();
         } else {
+          void preloadSearchIndex();
           setOpen(true);
         }
       }

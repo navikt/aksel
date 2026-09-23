@@ -7,6 +7,7 @@ import { Bleed, Button, Detail, Dialog, HStack, Show } from "@navikt/ds-react";
 import { Kbd, ModKbd } from "@/app/_ui/kbd/Kbd";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./GlobalSearch.module.css";
+import { preloadSearchIndex } from "./server/GlobalSearch.actions";
 
 function GlobalSearchButton() {
   return (
@@ -28,6 +29,7 @@ const SearchButton = forwardRef<
       aria-keyshortcuts="Meta+K Control+K"
       onClick={(e) => {
         umamiTrack(Events.MODAL_APNET, { tittel: "Søk" });
+        void preloadSearchIndex();
         onClick?.(e);
       }}
     >
