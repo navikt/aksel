@@ -1,8 +1,21 @@
 import React, { forwardRef } from "react";
+import type { AkselColor } from "../../types";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 
 interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Element the coachmark dot is anchored to.
+   * Leave empty to render the dot standalone.
+   */
   children?: React.ReactElement;
+  /**
+   * Badge color.
+   * @default "danger"
+   * @see 🏷️ {@link AkselColor}
+   * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
+   */
+  "data-color"?: AkselColor;
+
   // TODO:C Remove - test
   animation: string;
   // TODO:C Test
@@ -20,7 +33,18 @@ interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement
  */
 const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
   (
-    { children, onClick, className, animation, durationInMs, ...restProps },
+    {
+      children,
+      onClick,
+      className,
+      animation,
+      durationInMs,
+      "data-color": color = "danger",
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
+      "aria-hidden": ariaHidden,
+      ...restProps
+    },
     forwardedRef,
   ) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,6 +55,10 @@ const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
       <button
         {...restProps}
         ref={forwardedRef}
+        data-color={color}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledby}
+        aria-hidden={ariaHidden}
         className={cl("aksel-coachmark__dot-container", className)}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
