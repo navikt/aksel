@@ -66,7 +66,6 @@ function GlobalSearch() {
           signal: controller.signal,
         });
         if (!res.ok) {
-          setQueryResults(null);
           return;
         }
 
