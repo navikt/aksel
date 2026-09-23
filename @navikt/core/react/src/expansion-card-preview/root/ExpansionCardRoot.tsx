@@ -61,14 +61,16 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
   ) => {
     const ref = useRef<HTMLDetailsElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, ref);
-    const [isMounted, setIsMounted] = React.useState(false);
 
-    React.useEffect(() => {
-      setIsMounted(true);
-    }, []);
+    function summaryClicked() {
+      const detailsElm = ref.current;
+      if (!detailsElm) return;
+      detailsElm.setAttribute("data-animate", "true");
+      setTimeout(() => detailsElm.setAttribute("data-animate", "false"), 0);
+    }
 
     return (
-      <ExpansionCardProvider size={size}>
+      <ExpansionCardProvider size={size} summaryClicked={summaryClicked}>
         <details
           ref={mergedRef}
           className={cl(
@@ -77,7 +79,7 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
             `aksel-expansioncard--${size}`,
           )}
           data-color={color}
-          data-loaded={isMounted}
+          data-animate="false"
           open={open ?? defaultOpen}
           onToggle={(event) => {
             const detailsElm = ref.current;

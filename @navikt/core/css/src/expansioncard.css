@@ -163,12 +163,11 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
 /* -------------------------- ExpansionCard Content ------------------------- */
 
 /**
- * This is needed for animations to work properly.
- * We need to wait until after the first render to set it, or else text fragments will not work in Chrome.
- * TODO: Vurder å heller toggle det idet man åpner.
+ * TODO: TEST I SAFARI
 */
-.aksel-expansioncard[data-loaded="true"]::details-content {
-  content-visibility: visible;
+.aksel-expansioncard[data-animate="true"]::details-content {
+  /* content-visibility: visible; */
+  transition: content-visibility allow-discrete 1000ms /* "allow-discrete" needed in Chrome */;
 }
 
 .aksel-expansioncard__content {
@@ -178,9 +177,12 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
   padding-block: 0;
   display: grid;
   grid-template-rows: 0fr;
-  transition-duration: 1000ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-property: visibility, padding, grid-template-rows;
+
+  .aksel-expansioncard[data-animate="true"] & {
+    transition-duration: 1000ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    transition-property: visibility, padding, grid-template-rows;
+  }
 
   .aksel-expansioncard[open] > &,
   &[data-open="true"] {

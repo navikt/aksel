@@ -2,6 +2,7 @@ import { createStrictContext } from "../../utils/helpers";
 
 export type ExpansionCardContextProps = {
   size: "medium" | "small";
+  summaryClicked: () => void;
 };
 
 const { Provider: ExpansionCardProvider, useContext: useExpansionCardContext } =

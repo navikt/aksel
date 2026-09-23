@@ -110,6 +110,27 @@ Default.argTypes = {
   open: { control: "boolean" },
 };
 
+export const Testing = () => (
+  <div style={{ minHeight: "200vh" }}>
+    <p>
+      <a href="#innhold1">Lenke til innhold 1</a>{" "}
+      <a href="#innhold2">Lenke til innhold 2</a>
+    </p>
+    <ExpansionCard>
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <p id="innhold1">Dette er en ExpansionCard. Bla bla bla.</p>
+        På ditt faste arbeidssted vil du ha yrkesskadedekning også i
+        hvilepauser, lunsjpauser, trimaktiviteter og lignende i arbeidstiden.
+        <div style={{ height: "300px" }} />
+        <p id="innhold2">Dette er innhold 2.</p>
+      </ExpansionCard.Content>
+    </ExpansionCard>
+  </div>
+);
+
 export const Description = () => (
   <ExpansionCard>
     <ExpansionCard.Header>
