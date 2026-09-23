@@ -9,6 +9,7 @@
 
 ## Behavior
 
+- Only respond in same language as the input. Prefer english always.
 - No apologies, no "I think", no change summaries.
 - Answer-first. 0-2 sentences max.
 - No thinking aloud; do next edit. Explain only when asked or non-obvious.
@@ -20,42 +21,52 @@
 
 - Yarn 4 workspaces monorepo: public React/CSS/tokens/icons/stylelint/CLI packages + docs site + playroom.
 - Stack: TypeScript 6, React 19, Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2, Prettier 3.
-- Node 22+, Yarn 4.12.0.
+- Node 22+, Yarn 4.18.0.
 - `@navikt/*` must stay React 17 compatible.
 
 ## Start and validate
 
 1. `corepack enable`
-2. `yarn install`
-3. `yarn boot`
+2. `corepack yarn install`
+3. `corepack yarn boot`
 
-- `yarn boot` after first install + after `yarn clean`.
+- For agent-run commands, use `corepack yarn`; scripts may call `yarn` internally.
+- Command order: existing root/workspace script → Yarn-local binary → add a pinned dependency only when new tooling is required.
+- Never use `npx`, `pnpx`, `pnpm dlx`, `yarn dlx`, global binaries, or curl-piped installers for repository development or validation.
+- Public consumer docs may intentionally use commands such as `npx @navikt/aksel`; preserve them unless the task targets consumer setup.
+- If Corepack/Yarn fails because of user-level configuration, report the exact error. Never edit user-home config.
+- `corepack yarn boot` after first install + after `corepack yarn clean`.
 - Full install needs `NPM_AUTH_TOKEN` for GitHub Packages.
 
-Public-package-only: `yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
+Public-package-only: `corepack yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
 
 ## Definition of done
 
 - Behavior/visual change: update impl + closest story + test.
 - New public export: sync component `index.ts`, `src/index.ts`, `package.json` exports.
 - User-facing change: add changeset unless told otherwise.
-- Validate with narrowest workspace command first.
+- Validate changed files first, then affected workspace, then root/full suites only when needed.
 
 ### Commands
 
-- `yarn boot` - build all
-- `yarn test` / `yarn lint` - all tests / all linting
-- `yarn lint:eslint` / `yarn lint:css` / `yarn lint:biome`
-- `yarn storybook` - root `:6006`
-- `yarn storybook:aksel` - website examples `:6007`
-- `yarn storybook:test` - browser tests (Playwright/Firefox)
-- `yarn dev` - website `:3000`
-- `yarn clean` - remove build artifacts
-- `yarn workspace @navikt/ds-react build|test`
-- `yarn workspace website test`
-- `yarn workspace aksel-playroom sync-imports`
+- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` - targeted JS/TS lint
+- `corepack yarn stylelint <files...>` - targeted CSS lint
+- `corepack yarn biome lint --no-errors-on-unmatched <files...>` - targeted Biome lint
+- `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted TypeScript check
+- `corepack yarn workspace <name> <script>` - affected workspace script
+- `corepack yarn boot` - build all
+- `corepack yarn test` / `corepack yarn lint` - all tests / all linting
+- `corepack yarn storybook` - root `:6006`
+- `corepack yarn storybook:aksel` - website examples `:6007`
+- `corepack yarn storybook:test` - browser tests (Playwright/Firefox)
+- `corepack yarn dev` - website `:3000`
+- `corepack yarn clean` - remove build artifacts
+- `corepack yarn workspace @navikt/ds-react build`
+- `corepack yarn workspace @navikt/ds-react test`
+- `corepack yarn workspace website test`
+- `corepack yarn workspace aksel-playroom sync-imports`
 
-`yarn lint` fails if playroom imports stale → `yarn workspace aksel-playroom sync-imports`.
+`corepack yarn lint` fails if playroom imports stale → `corepack yarn workspace aksel-playroom sync-imports`.
 
 ## Where to edit
 

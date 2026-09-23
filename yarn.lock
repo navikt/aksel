@@ -10786,6 +10786,7 @@ __metadata:
     stylelint-value-no-unknown-custom-properties: "npm:^6.1.1"
     typescript: "npm:6.0.3"
     typescript-eslint: "npm:^8.70.0"
+    typescript-language-server: "npm:6.0.0"
     vite: "npm:^8.1.5"
     vite-plugin-turbosnap: "npm:^1.0.3"
     vitest: "npm:4.1.11"
@@ -25360,6 +25361,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript-language-server@npm:6.0.0":
+  version: 6.0.0
+  resolution: "typescript-language-server@npm:6.0.0"
+  bin:
+    typescript-language-server: lib/cli.mjs
+  checksum: 10/1ca63b957745a84699412a7e2e4478109dab4046021cf256b5715af2d4d4f4206348f0c8b621fe469fe9f6a68c1e56aad538d66e5a0545d2a0bd534dcf8a911d
+  languageName: node
+  linkType: hard
+
 "typescript@npm:6.0.3":
   version: 6.0.3
   resolution: "typescript@npm:6.0.3"
@@ -26159,6 +26169,37 @@ __metadata:
   bin:
     vitest: ./vitest.mjs
   checksum: 10/054f1e25d90d911693b0b93c5b85a7c3105775aa3e39c3279c7d3e7af719e2d94070a898d6d74292445366c1215bb91d07063989ac0965973f0c5ae22ad3b06b
+  languageName: node
+  linkType: hard
+
+"vscode-jsonrpc@npm:9.0.2":
+  version: 9.0.2
+  resolution: "vscode-jsonrpc@npm:9.0.2"
+  checksum: 10/415c6ca0d908766e265467b34c61ba26a6db56fec5f50bfb97717b9363cbf636d480773466998759893303152b9441891ebde547b9866ad3ccbd93a27ddd6279
+  languageName: node
+  linkType: hard
+
+"vscode-jsonrpc@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "vscode-jsonrpc@npm:5.0.1"
+  checksum: 10/d2dbc3084371ff64efdb46a6a56ca85e09583aac0affc4cd0bb521d6a2083a153d61c981d1e8e2f48245f568c4a327f2cac25a91d6f7d3b41d00dfae2688d118
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-protocol@npm:^3.15.0":
+  version: 3.18.3
+  resolution: "vscode-languageserver-protocol@npm:3.18.3"
+  dependencies:
+    vscode-jsonrpc: "npm:9.0.2"
+    vscode-languageserver-types: "npm:3.18.3"
+  checksum: 10/a49f3d553b35a13623b6d7f2eed814c578181345c94d260d8a9a727c2bc7ee6a966979df9544188beb89e12c30a6cfb5f43073ae24ff313194e07b35fa36bab9
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-types@npm:3.18.3":
+  version: 3.18.3
+  resolution: "vscode-languageserver-types@npm:3.18.3"
+  checksum: 10/fe497715ebdd5ca9a7063732f6cff52808b6d6d27e28c78ca3deff2baca4f1da3849f75bba6539621451f7838d878ba36ee51fa21ae08ca90d9f2f97306bfb2d
   languageName: node
   linkType: hard
 
