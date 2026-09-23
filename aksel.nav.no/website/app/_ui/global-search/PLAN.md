@@ -91,7 +91,7 @@ Done when: golden + unit tests are green and results are unchanged except for th
 
 Scope: server-side speed and a lean API.
 
-- [ ] Q24 / F1: module-level Fuse instance, rebuilt only when the `fetchArticles` version stamp changes.
+- [x] Q24 / F1: module-level Fuse instance, rebuilt only when the `fetchArticles` version stamp changes.
 - [ ] Q23 / F2: add GET `app/api/search/route.ts` (`?q=`). zod-validate, max length ~100 (Q27). Response header `Cache-Control: max-age=60`.
 - [ ] F3: trimmed response shape: `heading`, `slug`, `_type`, `status`, `description`, `anchor`, section heading for anchor hits (Q22), per-type totals.
 - [ ] Remove the `fuseGlobalSearch` Server Action.

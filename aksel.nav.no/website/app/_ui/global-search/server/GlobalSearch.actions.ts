@@ -1,42 +1,19 @@
 "use server";
 
 import type { FuseResult, FuseResultMatch } from "fuse.js";
-import Fuse from "fuse.js";
 import omit from "lodash/omit";
 import {
   type SearchHitT,
   type SearchPageT,
   globalSearchConfig,
 } from "./GlobalSearch.config";
-import { fetchArticles } from "./GlobalSearch.fetch";
+import { getSearchIndex } from "./GlobalSearch.index";
 
 async function fuseGlobalSearch(query: string) {
-  const localData = await fetchArticles();
+  const fuse = await getSearchIndex();
   if (!query || query.length < 2) {
     return null;
   }
-
-  const fuse = new Fuse(localData, {
-    keys: [
-      { name: "heading", weight: 100 },
-      { name: "lvl2.text", weight: 50 },
-      { name: "lvl3.text", weight: 30 },
-      { name: "lvl4.text", weight: 20 },
-      { name: "ingress", weight: 20 },
-      { name: "intro", weight: 20 },
-      { name: "tema", weight: 60 },
-      { name: "content.text", weight: 10 },
-      { name: "overrideString", weight: 999 },
-    ],
-    includeScore: true,
-    shouldSort: true,
-    minMatchCharLength: 3,
-    ignoreLocation: true,
-    includeMatches: true,
-    threshold: 0.18,
-    distance: 50,
-    useTokenSearch: true,
-  });
 
   const fuseResults = fuse
     .search(query)
