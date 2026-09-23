@@ -1,15 +1,11 @@
 import React, { forwardRef } from "react";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 
-/* TODO:
- * - Better naming?
- */
-
 interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactElement;
-  // TODO: Remove - test
+  // TODO:C Remove - test
   animation: string;
-  // TODO: Test
+  // TODO:C Test
   durationInMs: number;
 }
 

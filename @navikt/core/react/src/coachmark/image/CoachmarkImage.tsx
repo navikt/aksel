@@ -3,11 +3,6 @@ import { Bleed } from "../../primitives/bleed";
 import { cl } from "../../utils/helpers";
 import { useCoachmarkContext } from "../root/Coachmark.context";
 
-/* TODO:
-    - No padding or bleed?
-    - Who controls image? Do we set width or do they have to set it themselves?
-*/
-
 type CoachmarkImageProps = React.HTMLAttributes<HTMLDivElement>;
 
 /**

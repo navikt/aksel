@@ -35,11 +35,6 @@
 .aksel-coachmark__image {
   width: var(--__axc-coachmark__content-width);
 
-  /* TODO: Who handles this? */
-  /* 
-  * Look how linkCard handles
-  * Test with several types on content
-  */
   > * {
     object-fit: cover;
     width: 100%;

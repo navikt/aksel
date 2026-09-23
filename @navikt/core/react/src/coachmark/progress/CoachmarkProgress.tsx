@@ -3,25 +3,10 @@ import { BodyShort } from "../../typography";
 import { cl } from "../../utils/helpers";
 import { useCoachmarkContext } from "../root/Coachmark.context";
 
-interface CoachmarkProgressProps extends Omit<
+type CoachmarkProgressProps = Omit<
   React.HTMLAttributes<HTMLParagraphElement>,
   "children"
-> {
-  /**
-   * Text to display for the progress, e.g., "1 av 3".
-   * @default "av"
-   */
-  ofText?: string;
-  /**
-   * Alternative text for the progress, e.g., "1 / 3".
-   */
-  alternativeText?: (currentStep: number, totalSteps: number) => string;
-  // TODO: Which prop is best? Better prop name?
-  /*
-   * - Add support for translation, look at Textarea
-   * - Remove props
-   */
-}
+>;
 
 /**
  * @see 🏷️ {@link CoachmarkProgressProps}
@@ -37,29 +22,24 @@ interface CoachmarkProgressProps extends Omit<
 const CoachmarkProgress = forwardRef<
   HTMLParagraphElement,
   CoachmarkProgressProps
->(
-  (
-    { className, ofText = "av", alternativeText, ...restProps },
-    forwardedRef,
-  ) => {
-    const { currentStepIndex, totalSteps } = useCoachmarkContext();
-    const readableCurrentStep = currentStepIndex + 1;
+>(({ className, ...restProps }, forwardedRef) => {
+  const { currentStepIndex, totalSteps } = useCoachmarkContext();
+  const readableCurrentStep = currentStepIndex + 1;
 
-    return (
-      <BodyShort
-        {...restProps}
-        ref={forwardedRef}
-        className={cl("aksel-coachmark__progress", className)}
-        data-color="neutral"
-        textColor="subtle"
-      >
-        {alternativeText
-          ? alternativeText(readableCurrentStep, totalSteps)
-          : `${readableCurrentStep} ${ofText} ${totalSteps}`}
-      </BodyShort>
-    );
-  },
-);
+  // TODO:C Add support for translation
+
+  return (
+    <BodyShort
+      {...restProps}
+      ref={forwardedRef}
+      className={cl("aksel-coachmark__progress", className)}
+      data-color="neutral"
+      textColor="subtle"
+    >
+      {`${readableCurrentStep} av ${totalSteps}`}
+    </BodyShort>
+  );
+});
 
 export { CoachmarkProgress };
 export type { CoachmarkProgressProps };
