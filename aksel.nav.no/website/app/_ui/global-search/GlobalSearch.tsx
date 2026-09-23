@@ -56,6 +56,12 @@ function GlobalSearch() {
 
     startTransition(async () => {
       try {
+
+        if (!query) {
+          setQueryResults(null);
+          return;
+        }
+        
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
           signal: controller.signal,
         });
