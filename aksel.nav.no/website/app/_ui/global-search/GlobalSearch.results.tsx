@@ -1,13 +1,13 @@
 "use client";
 
 import { BodyShort, Heading } from "@navikt/ds-react";
-import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.context";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchResultsView() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   if (!queryResults?.result || queryResults?.result?.totalHits === 0) {
     return null;
@@ -23,13 +23,18 @@ function GlobalSearchResultsView() {
           heading={`Beste treff på "${queryResults?.query}"`}
           searchHits={queryResults?.result.topResults ?? []}
         />
-        {queryResults?.result.groupedHits.map(([key, val]) => {
+        {queryResults?.result.groupedHits.map((group) => {
+          const count =
+            group.total > group.hits.length
+              ? `${group.hits.length} av ${group.total}`
+              : group.hits.length;
+
           return (
             <GlobalSearchHitCollection
-              key={key}
-              heading={`${globalSearchConfig[key].display} (${val.length})`}
-              tag={key as keyof typeof globalSearchConfig}
-              searchHits={val}
+              key={group.type}
+              heading={`${globalSearchConfig[group.type].display} (${count})`}
+              tag={group.type}
+              searchHits={group.hits}
             />
           );
         })}
@@ -39,7 +44,7 @@ function GlobalSearchResultsView() {
 }
 
 function GlobalSearchEmptySearchState() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   const showEmptySearchState =
     !queryResults?.result?.totalHits && queryResults?.query;
@@ -143,7 +148,7 @@ function GlobalSearchEmptySearchState() {
 }
 
 function GlobalSearchEmptyState() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   if (queryResults?.result) {
     return null;
