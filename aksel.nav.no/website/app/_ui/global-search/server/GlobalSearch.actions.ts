@@ -65,7 +65,7 @@ async function fuseGlobalSearch(query: string) {
     }
 
     // Limit the number of hits per type to 20
-    if (prev[type].length >= 20) {
+    if (prev[type].length >= 10) {
       return prev;
     }
 
