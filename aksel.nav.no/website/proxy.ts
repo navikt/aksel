@@ -79,8 +79,8 @@ async function getRedirect(source: string) {
 }
 
 /**
- * Destinations come from Sanity, so treat them as untrusted input. Relative
- * values must stay on our origin, since "//example.com" resolves off-origin.
+ * Destinations come from Sanity, so treat them as untrusted input. Ensure
+ * relative values stay on our origin, since "//example.com" resolves off-origin.
  */
 function resolveDestination(destination: string, origin: string) {
   if (destination.startsWith("http://") || destination.startsWith("https://")) {
