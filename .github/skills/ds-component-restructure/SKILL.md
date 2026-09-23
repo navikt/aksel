@@ -157,7 +157,7 @@ export type { <Component>TriggerProps };
 
 Update imports in `<Component>.meta.ts` to reflect new paths. If the meta file imports from the component's `index.ts`, no changes are needed.
 
-If component has no meta file, create one in the component root with the following content based on existing patterns.
+If component has no meta file, create `<Component>.meta.ts` in the component root. Copy the shape of `@navikt/core/react/src/accordion/Accordion.meta.ts`: import from `./index`, `name`, a `components` map using dotted keys for sub-components (`"Accordion.Item": AccordionItem`), and `keywords`, then `export { metadata }`.
 Note that each standalone component should have a meta file. But a "sub-component" (like `AccordionItem`) does not need a meta file.
 
 ### 7. Validate No Breaking Changes
@@ -169,7 +169,7 @@ Note that each standalone component should have a meta file. But a "sub-componen
 
 Concretely: grep for `export` lines in both versions and diff them. All component names and type names must match exactly.
 
-**Build.** Run `yarn workspace @navikt/ds-react build` — must succeed with no TypeScript errors.
+**Build.** Run `corepack yarn workspace @navikt/ds-react build` — must succeed with no TypeScript errors.
 
 **Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
 
@@ -282,10 +282,7 @@ dialog/
 - **No breaking changes.** Public export names and prop shapes must be identical after restructuring.
 - **Named exports only.** No `default` exports; group named exports at the bottom of each file (values first, then types).
 - **Compound roots use `Object.assign`.** No `as <Component>Component` cast or `<Component>Component` interface — it breaks `yarn docgen:meta` prop extraction.
-- **React 17 compatible.** No React 18/19-only APIs. Import React explicitly in `.tsx` files.
-- `index.ts` must start with `"use client"`.
-- Use tokens, not hardcoded values.
-- Preserve `forwardRef`, `className`, `...rest`, `as`/`OverridableComponent` patterns.
+- Component rules (React 17 compatibility, `"use client"`, `forwardRef`/`className`/`...rest`/`as`, tokens) live in `.github/instructions/ds-react-component.instructions.md`. They still apply.
 - Keep JSDoc on public props and components. The component-level JSDoc block sits directly above the `Object.assign` call; sub-component `@see` tags go on the keys inside the `Object.assign` object literal.
 
 ## Reference Files

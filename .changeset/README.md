@@ -34,8 +34,9 @@ Alle base-pakkene våre har `fixed versjonering`. Dette betyr at en bump på en 
 ```sh
   "@navikt/ds-react",
   "@navikt/ds-css",
-  "@navikt/aksel-icons",
   "@navikt/ds-tokens",
   "@navikt/ds-tailwind",
-  "@navikt/ds-codemod"
+  "@navikt/aksel-icons",
+  "@navikt/aksel",
+  "@navikt/aksel-stylelint"
 ```

@@ -33,22 +33,22 @@ git ls-files --others --exclude-standard
 
 For each file, read its nearest `package.json`, `tsconfig.json`, test, story, and export surface before choosing commands.
 
-| Path                            | Workspace                  | Preferred package checks                                          |
-| ------------------------------- | -------------------------- | ----------------------------------------------------------------- |
-| `@navikt/core/react/**`         | `@navikt/ds-react`         | `test`, then `build` for public API/type changes                  |
-| `@navikt/core/css/**`           | `@navikt/ds-css`           | targeted CSS lint, then `build` when bundling can change          |
-| `@navikt/core/tokens/**`        | `@navikt/ds-tokens`        | `test`, then `build` for generated output                         |
-| `@navikt/core/tailwind/**`      | `@navikt/ds-tailwind`      | `test`, then `build`                                              |
-| `@navikt/aksel-icons/**`        | `@navikt/aksel-icons`      | `test`; `build` for generation/export changes                     |
-| `@navikt/aksel-stylelint/**`    | `@navikt/aksel-stylelint`  | `test`                                                            |
-| `@navikt/aksel/**`              | `@navikt/aksel`            | `test`; `build` for CLI/type changes                              |
-| `aksel.nav.no/website/**`       | `website`                  | targeted test; `build` only for framework/build behavior          |
-| `aksel.nav.no/sanity-studio/**` | `aksel-sanity-studio`      | `type-check`, then `test` when behavior changes                   |
-| `apps/playroom/**`              | `aksel-playroom`           | nearest build/test script; run `sync-imports` when exports change |
-| `apps/mcp-server/**`            | `aksel-mcp`                | `test`, then `build`                                              |
-| `apps/figma-icon-plugin/**`     | `aksel-icons-figma-plugin` | nearest package build/test script                                 |
-| `tooling/changelog/**`          | `aksel-changelog`          | `typecheck`                                                       |
-| `tooling/analyzer/**`           | `aksel-analyzer`           | `test`                                                            |
+| Path                            | Workspace                  | Preferred package checks                                                           |
+| ------------------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| `@navikt/core/react/**`         | `@navikt/ds-react`         | `test` (Vitest + `tsc` type-check); `build` for export/type changes                |
+| `@navikt/core/css/**`           | `@navikt/ds-css`           | no `test` script: targeted `stylelint`, then `build` for imports/layers            |
+| `@navikt/core/tokens/**`        | `@navikt/ds-tokens`        | `test`, then `build` for generated output                                          |
+| `@navikt/core/tailwind/**`      | `@navikt/ds-tailwind`      | build `@navikt/ds-tokens` first, then `test` and `build`                           |
+| `@navikt/aksel-icons/**`        | `@navikt/aksel-icons`      | `test`; `build` for generation/export changes                                      |
+| `@navikt/aksel-stylelint/**`    | `@navikt/aksel-stylelint`  | `test`                                                                             |
+| `@navikt/aksel/**`              | `@navikt/aksel`            | `build` **before** `test` (`migrations.test.ts` reads `dist/`)                     |
+| `aksel.nav.no/website/**`       | `website`                  | `test`; `validate:eksempler` for examples/templates; avoid `build` (needs secrets) |
+| `aksel.nav.no/sanity-studio/**` | `aksel-sanity-studio`      | `type-check`, then `test` when behavior changes                                    |
+| `apps/playroom/**`              | `aksel-playroom`           | no `test` script: `sync-imports` when ds-react exports change                      |
+| `apps/mcp-server/**`            | `aksel-mcp`                | `test`, then `build`                                                               |
+| `apps/figma-icon-plugin/**`     | `aksel-icons-figma-plugin` | no `test` script: `build:plugin`                                                   |
+| `tooling/changelog/**`          | `aksel-changelog`          | `typecheck`                                                                        |
+| `tooling/analyzer/**`           | `aksel-analyzer`           | `test`                                                                             |
 
 Read the current manifest before running a table command. A manifest is source of truth if scripts change.
 

@@ -55,16 +55,20 @@ LOCAL_DATASET_OVERRIDE=development
 
 ## Utvikling av nye komponenter
 
-Det er ikke satt opp noen template for nye komponenter, men vi følger en mal.
+Det er ikke satt opp noen generator for nye komponenter, men vi følger en fast struktur. Se [ds-component-restructure](./.github/skills/ds-component-restructure/SKILL.md) for full mappestruktur og navngivning.
 
 ```sh
-@navikt/pakkenavn
-└─ src                  # Komponenter
-   ├─ index.ts          # Alle exports
-   └─ komponent
-      ├─ index.ts       # Alle exports fra komponent
-      ├─ komponent.tsx  # Komponentkode
-      └─ komponent.stories.tsx # Stories
+@navikt/core/react/src
+├─ index.ts                          # Alle stabile exports (preview.ts for preview-komponenter)
+└─ komponent/
+   ├─ index.ts                       # "use client" + exports fra komponent
+   ├─ Komponent.tsx                  # Komponentkode (root/ + undermapper for sammensatte komponenter)
+   ├─ Komponent.meta.ts              # Metadata for dokumentasjon
+   ├─ Komponent.stories.tsx          # Stories
+   └─ Komponent.tests.stories.tsx    # Interaksjonstester (play-funksjoner)
+
+@navikt/core/css/src
+└─ komponent.css                     # Importeres i index.css med riktig layer
 ```
 
 ## Dokumentasjon

@@ -10,6 +10,7 @@
 ## Behavior
 
 - Only respond in same language as the input. Prefer english always.
+- Use caveman-skill unless asked not to
 - No apologies, no "I think", no change summaries.
 - Answer-first. 0-2 sentences max.
 - No thinking aloud; do next edit. Explain only when asked or non-obvious.
@@ -19,70 +20,62 @@
 
 ## Repo summary
 
-- Yarn 4 workspaces monorepo: public React/CSS/tokens/icons/stylelint/CLI packages + docs site + playroom.
-- Stack: TypeScript 6, React 19, Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2, Prettier 3.
-- Node 22+, Yarn 4.18.0.
-- `@navikt/*` must stay React 17 compatible.
+- Nav's design system. Yarn 4 workspaces monorepo: published packages under `@navikt/` + docs site `aksel.nav.no/` + `apps/` + `tooling/`.
+- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2 (lint only), Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
+- Published `@navikt/*` packages must stay React 17 compatible (peer `react ^17 || ^18 || ^19`).
 
 ## Start and validate
 
 1. `corepack enable`
-2. `corepack yarn install`
-3. `corepack yarn boot`
+2. `corepack yarn install` (needs `NPM_AUTH_TOKEN` with `read:packages`). Without a token: `corepack yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
+3. `corepack yarn boot` (builds all public packages; rerun after `corepack yarn clean`)
 
-- For agent-run commands, use `corepack yarn`; scripts may call `yarn` internally.
-- Command order: existing root/workspace script → Yarn-local binary → add a pinned dependency only when new tooling is required.
-- Never use `npx`, `pnpx`, `pnpm dlx`, `yarn dlx`, global binaries, or curl-piped installers for repository development or validation.
-- Public consumer docs may intentionally use commands such as `npx @navikt/aksel`; preserve them unless the task targets consumer setup.
+- Run agent commands through `corepack yarn`. Order: existing root/workspace script → Yarn-local binary → add a pinned dependency only when new tooling is required.
+- Never use `npx`, `pnpx`, `pnpm dlx`, `yarn dlx`, global binaries or curl-piped installers. Public consumer docs (`npx @navikt/aksel`) are intentional; keep them.
 - If Corepack/Yarn fails because of user-level configuration, report the exact error. Never edit user-home config.
-- `corepack yarn boot` after first install + after `corepack yarn clean`.
-- Full install needs `NPM_AUTH_TOKEN` for GitHub Packages.
-
-Public-package-only: `corepack yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
+- Choosing checks: use the `aksel-local-validation` skill. Changed-file lint first, then the affected workspace, then root suites only when needed.
 
 ## Definition of done
 
 - Behavior/visual change: update impl + closest story + test.
-- New public export: sync component `index.ts`, `src/index.ts`, `package.json` exports.
-- User-facing change: add changeset unless told otherwise.
-- Validate changed files first, then affected workspace, then root/full suites only when needed.
+- New public export: sync component `index.ts`, `src/index.ts` (or `src/preview.ts`) and `package.json` exports, then `corepack yarn workspace aksel-playroom sync-imports` (root `lint` fails on stale playroom imports).
+- User-facing change to a published package: add a changeset (`add-changeset` skill) unless told otherwise.
 
-### Commands
+## Commands
 
-- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` - targeted JS/TS lint
-- `corepack yarn stylelint <files...>` - targeted CSS lint
-- `corepack yarn biome lint --no-errors-on-unmatched <files...>` - targeted Biome lint
-- `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted TypeScript check
-- `corepack yarn workspace <name> <script>` - affected workspace script
-- `corepack yarn boot` - build all
-- `corepack yarn test` / `corepack yarn lint` - all tests / all linting
-- `corepack yarn storybook` - root `:6006`
-- `corepack yarn storybook:aksel` - website examples `:6007`
-- `corepack yarn storybook:test` - browser tests (Playwright/Firefox)
-- `corepack yarn dev` - website `:3000`
-- `corepack yarn clean` - remove build artifacts
-- `corepack yarn workspace @navikt/ds-react build`
-- `corepack yarn workspace @navikt/ds-react test`
-- `corepack yarn workspace website test`
-- `corepack yarn workspace aksel-playroom sync-imports`
-
-`corepack yarn lint` fails if playroom imports stale → `corepack yarn workspace aksel-playroom sync-imports`.
+- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` / `corepack yarn stylelint <files...>` / `corepack yarn biome lint --no-errors-on-unmatched <files...>`
+- `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted type-check
+- `corepack yarn workspace <name> <script>` - e.g. `@navikt/ds-react test` (Vitest + tsc), `website test`
+- `corepack yarn lint` / `corepack yarn test` / `corepack yarn boot` - root suites (slow; cross-workspace changes only)
+- `corepack yarn storybook` (:6006) / `corepack yarn storybook:aksel` (website examples, :6007, no secrets) / `corepack yarn storybook:test` (play tests, Playwright Firefox) / `corepack yarn dev` (website, :3000, needs Sanity token)
 
 ## Where to edit
 
-- `@navikt/core/react/src/<component>/` - component source, index, stories
-- `@navikt/core/react/src/index.ts` + `package.json` exports - public API surface
-- `@navikt/core/css/src/` - component CSS
-- `@navikt/core/tokens/src/` - design tokens
-- `@navikt/core/tailwind/` - Tailwind preset
-- `@navikt/aksel-icons/icons/` - source SVGs (`src/` generated)
-- `@navikt/aksel-stylelint/src/` - Stylelint rules
+Path-specific rules load automatically from `.github/instructions/` (see each `applyTo`).
+
+- `@navikt/core/react/src/<component>/` - components (`src/index.ts`, `src/preview.ts` + `package.json` exports = public API)
+- `@navikt/core/css/src/` - component CSS (`index.css` imports + layers)
+- `@navikt/core/tokens/src/` - design tokens · `@navikt/core/tailwind/` - Tailwind preset (generated from tokens)
+- `@navikt/aksel-icons/icons/` - source SVG + YML (`src/` generated)
+- `@navikt/aksel-stylelint/src/` - Stylelint rules + CSS class deprecations
 - `@navikt/aksel/src/` - CLI and codemods
-- `aksel.nav.no/website/` - Next.js docs site
-- `apps/playroom/` - playroom
-- `apps/mcp-server/` - MCP server
-- `apps/figma-icon-plugin/` - Figma plugin
-- Root: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `tsconfig.json`, `.storybook/`
+- `aksel.nav.no/website/` - Next.js docs site · `aksel.nav.no/sanity-studio/` - CMS schema
+- `apps/playroom/`, `apps/mcp-server/`, `apps/figma-icon-plugin/` - apps · `tooling/` - ESLint plugin, scripts, changelog, analyzer
+- `.changeset/` - release notes · Root config: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `vitest.config.ts`, `.storybook/`
+
+## Skills and agents
+
+- `aksel-local-validation` - pick and run the right lint/type/test commands
+- `code-review` - review a branch, diff or PR for consumer-facing risk
+- `add-changeset` - write `.changeset/*.md` (never run interactive `yarn changeset`)
+- `ds-component-restructure` - move/rename component files to canonical layout
+- `website-example` - add aksel.nav.no examples/templates
+
+## Gotchas
+
+- `.yarnrc.yml`: `enableScripts: false` (dependency install scripts don't run, e.g. Playwright browsers), `npmMinimalAgeGate: 7d` (new package versions under 7 days old are rejected), `defaultSemverRangePrefix: ""` (exact versions).
+- Never hand-edit generated output: `esm/`, `cjs/`, `dist/`, `@navikt/aksel-icons/src/`, `@navikt/aksel/src/version.ts`, tokens `token_docs.js`, tailwind `tailwind.config.js`.
+- Don't run scripts that write to Sanity/Figma/releases (`update:*`, `backup`, `fetch-new:icons`, `release`, `create-version`) unless asked.
 
 ## Coding defaults
 
@@ -90,6 +83,5 @@ Public-package-only: `corepack yarn workspaces focus @navikt/aksel-icons @navikt
 - Copy nearest existing pattern before writing new code.
 - Stable public APIs. Prefer additive props/exports.
 - `node:` imports for Node builtins. Never import from `esm/`/`cjs/` output.
-- Import order: `@navikt/*`, `@/*`, relative. (Prettier sorts)
 - Preserve JSDoc on public props/components when changing public APIs.
 - Reuse helpers: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
