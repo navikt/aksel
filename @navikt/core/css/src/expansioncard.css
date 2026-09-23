@@ -163,11 +163,13 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
 /* -------------------------- ExpansionCard Content ------------------------- */
 
 /**
- * TODO: TEST I SAFARI
+ * "Animating" content-visibility does not work in Safari. We can't leave it to the
+ * browser to toggle it, because we need it to be `visible` for the duration of
+ * the close animation. We also can't set it to `visible` all the time, because
+ * that breaks text fragments in Chrome.
 */
 .aksel-expansioncard[data-animate="true"]::details-content {
-  /* content-visibility: visible; */
-  transition: content-visibility allow-discrete 1000ms /* "allow-discrete" needed in Chrome */;
+  content-visibility: visible;
 }
 
 .aksel-expansioncard__content {
@@ -179,7 +181,7 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
   grid-template-rows: 0fr;
 
   .aksel-expansioncard[data-animate="true"] & {
-    transition-duration: 1000ms;
+    transition-duration: 1000ms; /* Must be synced with `setTimeout` in ExpansionCardRoot! */
     transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
     transition-property: visibility, padding, grid-template-rows;
   }

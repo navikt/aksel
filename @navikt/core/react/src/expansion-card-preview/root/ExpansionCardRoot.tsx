@@ -66,7 +66,7 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
       const detailsElm = ref.current;
       if (!detailsElm) return;
       detailsElm.setAttribute("data-animate", "true");
-      setTimeout(() => detailsElm.setAttribute("data-animate", "false"), 0);
+      setTimeout(() => detailsElm.setAttribute("data-animate", "false"), 1000); // Close animation duration
     }
 
     return (
