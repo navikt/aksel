@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Dialog } from "@navikt/ds-react";
-import { GlobalSearchResultProvider } from "@/app/_ui/global-search/GlobalSearch.provider";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { Events } from "@navikt/analytics-types";
+import { Dialog, debounce } from "@navikt/ds-react";
+import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
+import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchContext } from "./GlobalSearch.context";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
@@ -15,22 +17,26 @@ import {
 } from "./GlobalSearch.results";
 import { readQueryParam, writeQueryParam } from "./GlobalSearch.url";
 
-function useIsMac() {
-  const [isMac, setIsMac] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent));
-  }, []);
-
-  return isMac;
-}
-
 function GlobalSearch() {
-  const isMac = useIsMac();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [queryResults, setQueryResults] = useState<GlobalSearchResultT | null>(
+    null,
+  );
+  const [, startTransition] = useTransition();
+
+  /* Lazy state keeps one debounce instance for the component lifetime. */
+  const [debouncedUpdateQuery] = useState(() =>
+    debounce((value: string) => {
+      maybeEnableComicSans(value);
+
+      umamiTrack(Events.SOK, { tekst: "global søk" });
+      const normalized = value.trim();
+      setQuery(normalized);
+      writeQueryParam(normalized);
+    }, 200),
+  );
 
   /* Deep links: read `?query=` once on load, then local state owns the query. */
   useEffect(() => {
@@ -41,6 +47,38 @@ function GlobalSearch() {
       setOpen(true);
     }
   }, []);
+
+  useEffect(() => () => debouncedUpdateQuery.clear(), [debouncedUpdateQuery]);
+
+  useEffect(() => {
+    if (!query) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setQueryResults(null);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    startTransition(async () => {
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          return;
+        }
+
+        const newResults: GlobalSearchResultT | null = await res.json();
+        setQueryResults(newResults);
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("Global search failed", error);
+        }
+      }
+    });
+
+    return () => controller.abort();
+  }, [query]);
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -63,26 +101,28 @@ function GlobalSearch() {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const contextValue = useMemo(
-    () => ({
-      open,
-      closeSearch: () => setOpen(false),
-      query,
-      setQuery,
-      inputRef,
-    }),
-    [open, query],
-  );
+  const closeSearch = () => {
+    debouncedUpdateQuery.clear();
+    setOpen(false);
+  };
+
+  const resetSearch = () => {
+    debouncedUpdateQuery.clear();
+    setQuery("");
+    writeQueryParam("");
+  };
 
   return (
     <Dialog
       open={open}
       onOpenChange={(nextOpen) => {
-        setOpen(nextOpen);
-        /* Only on user close. On link navigation, a replaceState here would cancel the navigation. */
         if (!nextOpen) {
+          closeSearch();
+          /* Only on user close. On link navigation, a replaceState here would cancel the navigation. */
           writeQueryParam("");
+          return;
         }
+        setOpen(true);
       }}
       /* Avoids flashing empty-state when closing-animation runs */
       onOpenChangeComplete={(isOpen) => {
@@ -92,21 +132,35 @@ function GlobalSearch() {
       }}
       aria-labelledby="aksel-search-heading"
     >
-      <GlobalSearchContext.Provider value={contextValue}>
-        <GlobalSearchButton isMac={isMac} />
-        <GlobalSearchResultProvider>
-          <GlobalSearchDialog isMac={isMac}>
-            <GlobalSearchForm />
-            <div className={styles.searchResults}>
-              <GlobalSearchEmptyState />
-              <GlobalSearchEmptySearchState />
-              <GlobalSearchResultsView />
-            </div>
-          </GlobalSearchDialog>
-        </GlobalSearchResultProvider>
+      <GlobalSearchContext.Provider
+        value={{
+          open,
+          closeSearch,
+          query,
+          queryResults,
+          updateQuery: debouncedUpdateQuery,
+          resetSearch,
+          inputRef,
+        }}
+      >
+        <GlobalSearchButton />
+        <GlobalSearchDialog>
+          <GlobalSearchForm />
+          <div className={styles.searchResults}>
+            <GlobalSearchEmptyState />
+            <GlobalSearchEmptySearchState />
+            <GlobalSearchResultsView />
+          </div>
+        </GlobalSearchDialog>
       </GlobalSearchContext.Provider>
     </Dialog>
   );
+}
+
+function maybeEnableComicSans(query: string) {
+  if (query.includes("comic")) {
+    document.body.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+  }
 }
 
 export { GlobalSearch };

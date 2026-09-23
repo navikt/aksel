@@ -2,15 +2,11 @@
 
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Dialog, Search } from "@navikt/ds-react";
-import {
-  useGlobalSearch,
-  useGlobalSearchResults,
-} from "@/app/_ui/global-search/GlobalSearch.context";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import styles from "./GlobalSearch.module.css";
 
 const GlobalSearchForm = () => {
-  const { inputRef, query } = useGlobalSearch();
-  const { updateQuery, resetSearch } = useGlobalSearchResults();
+  const { inputRef, query, updateQuery, resetSearch } = useGlobalSearch();
 
   return (
     <div className={styles.searchForm}>

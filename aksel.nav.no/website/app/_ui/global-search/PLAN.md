@@ -108,7 +108,7 @@ Scope: Next.js client/server best practices, state simplification, perceived spe
 - [ ] Q23: fetch with `AbortController` (abort superseded requests) + client in-memory query→results cache.
 - [ ] Q25: debounce 100–120ms.
 - [ ] Q15 / F13: spinner in input while pending, keep previous results, inline error state.
-- [ ] F12: merge into one context. Remove manual memoization (React Compiler). Replace `useIsMac` effect with `useSyncExternalStore` or equivalent.
+- [x] F12: merge into one context. Remove manual memoization (React Compiler). Replace `useIsMac` effect with `useSyncExternalStore` or equivalent.
 - [ ] Q17 / F6: trigger button eager. Dialog content via `next/dynamic`, preloaded on hover/focus/shortcut. Keep illustrations out of the eager bundle.
 - [ ] Q19: restructure files (`server/` server-only, shared config/types, client split by responsibility).
 - [ ] Q7: keep Cmd/Ctrl+K and Cmd/Ctrl+B. Q10: isolate the Comic Sans easter egg, reset on close.

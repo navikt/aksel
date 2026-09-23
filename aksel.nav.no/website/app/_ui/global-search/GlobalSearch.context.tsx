@@ -7,8 +7,10 @@ type GlobalSearchContextType = {
   open: boolean;
   closeSearch: () => void;
   query: string;
-  setQuery: (query: string) => void;
-  inputRef: React.MutableRefObject<HTMLInputElement | null>;
+  queryResults: GlobalSearchResultT | null;
+  updateQuery: (query: string) => void;
+  resetSearch: () => void;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
 const GlobalSearchContext = createContext<GlobalSearchContextType | null>(null);
@@ -16,39 +18,10 @@ const GlobalSearchContext = createContext<GlobalSearchContextType | null>(null);
 function useGlobalSearch() {
   const context = useContext(GlobalSearchContext);
   if (!context) {
-    throw new Error(
-      "useGlobalSearch must be used within a GlobalSearchProvider",
-    );
+    throw new Error("useGlobalSearch must be used within GlobalSearch");
   }
 
   return context;
 }
 
-type SearchResultContextType = {
-  queryResults: GlobalSearchResultT | null;
-  updateQuery: (query: string) => void;
-  resetSearch: () => void;
-  clearDebounce: () => void;
-};
-
-const GlobalSearchResultContext = createContext<SearchResultContextType | null>(
-  null,
-);
-
-function useGlobalSearchResults() {
-  const context = useContext(GlobalSearchResultContext);
-  if (!context) {
-    throw new Error(
-      "useGlobalSearchResults must be used within a GlobalSearchResultsProvider",
-    );
-  }
-
-  return context;
-}
-
-export {
-  GlobalSearchContext,
-  useGlobalSearch,
-  GlobalSearchResultContext,
-  useGlobalSearchResults,
-};
+export { GlobalSearchContext, useGlobalSearch };

@@ -4,10 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Events } from "@navikt/analytics-types";
 import { Heading, Tag } from "@navikt/ds-react";
-import {
-  useGlobalSearch,
-  useGlobalSearchResults,
-} from "@/app/_ui/global-search/GlobalSearch.context";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import type {
   SearchHitT,
   SearchResultPageTypesT,
@@ -57,8 +54,7 @@ function GlobalSearchLink(props: {
   hit: SearchHitT;
   tag?: Partial<SearchResultPageTypesT>;
 }) {
-  const context = useGlobalSearch();
-  const { clearDebounce } = useGlobalSearchResults();
+  const { closeSearch } = useGlobalSearch();
   const { hit } = props;
 
   const href = hit.anchor ? `/${hit.slug}#${hit.anchor}` : `/${hit.slug}`;
@@ -78,10 +74,7 @@ function GlobalSearchLink(props: {
                 lenkegruppe: "globalt søk",
               })
             }
-            onNavigate={() => {
-              context.closeSearch();
-              clearDebounce();
-            }}
+            onNavigate={closeSearch}
             className={styles.searchLink}
             prefetch={false}
           >

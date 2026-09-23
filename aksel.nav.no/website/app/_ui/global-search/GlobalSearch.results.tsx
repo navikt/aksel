@@ -1,13 +1,13 @@
 "use client";
 
 import { BodyShort, Heading } from "@navikt/ds-react";
-import { useGlobalSearchResults } from "@/app/_ui/global-search/GlobalSearch.context";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import { globalSearchConfig } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchResultsView() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   if (!queryResults?.result || queryResults?.result?.totalHits === 0) {
     return null;
@@ -44,7 +44,7 @@ function GlobalSearchResultsView() {
 }
 
 function GlobalSearchEmptySearchState() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   const showEmptySearchState =
     !queryResults?.result?.totalHits && queryResults?.query;
@@ -148,7 +148,7 @@ function GlobalSearchEmptySearchState() {
 }
 
 function GlobalSearchEmptyState() {
-  const { queryResults } = useGlobalSearchResults();
+  const { queryResults } = useGlobalSearch();
 
   if (queryResults?.result) {
     return null;

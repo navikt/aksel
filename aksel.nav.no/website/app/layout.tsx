@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { PLATFORM_SCRIPT } from "@/app/_ui/kbd/Kbd";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 
@@ -31,6 +32,8 @@ export default async function RootLayout({
   return (
     <html lang="no" suppressHydrationWarning>
       <head>
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Static inline script, no user input. */}
+        <script dangerouslySetInnerHTML={{ __html: PLATFORM_SCRIPT }} />
         <link
           rel="preload"
           href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
