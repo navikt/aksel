@@ -52,12 +52,6 @@ function GlobalSearch() {
   useEffect(() => () => debouncedUpdateQuery.clear(), [debouncedUpdateQuery]);
 
   useEffect(() => {
-    if (!query) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setQueryResults(null);
-      return;
-    }
-
     const controller = new AbortController();
 
     startTransition(async () => {
@@ -66,6 +60,7 @@ function GlobalSearch() {
           signal: controller.signal,
         });
         if (!res.ok) {
+          setQueryResults(null);
           return;
         }
 
