@@ -23,6 +23,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  CoachmarkProgress: {
+    currentStep: "{current} av {total}",
+  },
   Combobox: {
     /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
     addOption: "Legg til",

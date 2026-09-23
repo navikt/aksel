@@ -19,6 +19,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  CoachmarkProgress: {
+    currentStep: "{current} av {total}",
+  },
   Combobox: {
     addOption: "Legg til",
     noMatches: "Ingen søketreff",

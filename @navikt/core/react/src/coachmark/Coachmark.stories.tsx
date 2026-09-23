@@ -4,7 +4,9 @@ import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Link } from "../link";
 import { HStack, VStack } from "../primitives/stack";
+import { Provider } from "../provider";
 import { BodyShort, Heading } from "../typography";
+import { en } from "../utils/i18n/locales";
 import { Coachmark, type CoachmarkDot } from "./root/CoachmarkRoot";
 
 export default {
@@ -274,13 +276,9 @@ export const Dot: StoryObj<typeof CoachmarkDot> = {
         <Coachmark.Dot
           animation={animation}
           durationInMs={durationInMs}
-          data-color="danger"
           onClick={() => console.log("Coachmark dot clicked")}
         >
-          <Button
-            data-color="accent"
-            onClick={() => console.log("Button clicked")}
-          >
+          <Button onClick={() => console.log("Button clicked")}>
             {`Animation ${animation.toLocaleLowerCase()}`}
           </Button>
         </Coachmark.Dot>
@@ -309,4 +307,35 @@ export const Dot: StoryObj<typeof CoachmarkDot> = {
       options: ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT"],
     },
   },
+};
+
+export const ProgressTranslations: StoryFn<typeof Coachmark> = () => {
+  const translations = {
+    CoachmarkProgress: {
+      currentStep: "{current}/{total}",
+    },
+  };
+  return (
+    <Provider locale={en} translations={translations}>
+      <Coachmark
+        tourStarted={true}
+        endTour={() => {}}
+        steps={[
+          {
+            id: "progress_translation",
+            type: "dialog",
+            content: (
+              <Coachmark.Content>
+                <Coachmark.Progress />
+                <Coachmark.Title>Coachmark title</Coachmark.Title>
+                <Coachmark.Description>
+                  Coachmark description
+                </Coachmark.Description>
+              </Coachmark.Content>
+            ),
+          },
+        ]}
+      />
+    </Provider>
+  );
 };

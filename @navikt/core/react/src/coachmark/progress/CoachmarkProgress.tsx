@@ -1,12 +1,16 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import type { ComponentTranslation } from "../../utils/i18n/i18n.types";
 import { useCoachmarkContext } from "../root/Coachmark.context";
 
-type CoachmarkProgressProps = Omit<
+interface CoachmarkProgressProps extends Omit<
   React.HTMLAttributes<HTMLParagraphElement>,
   "children"
->;
+> {
+  translations?: ComponentTranslation<"CoachmarkProgress">;
+}
 
 /**
  * @see 🏷️ {@link CoachmarkProgressProps}
@@ -22,11 +26,11 @@ type CoachmarkProgressProps = Omit<
 const CoachmarkProgress = forwardRef<
   HTMLParagraphElement,
   CoachmarkProgressProps
->(({ className, ...restProps }, forwardedRef) => {
+>(({ className, translations, ...restProps }, forwardedRef) => {
   const { currentStepIndex, totalSteps } = useCoachmarkContext();
   const readableCurrentStep = currentStepIndex + 1;
 
-  // TODO:C Add support for translation
+  const translate = useI18n("CoachmarkProgress", translations);
 
   return (
     <BodyShort
@@ -36,7 +40,10 @@ const CoachmarkProgress = forwardRef<
       data-color="neutral"
       textColor="subtle"
     >
-      {`${readableCurrentStep} av ${totalSteps}`}
+      {translate("currentStep", {
+        current: readableCurrentStep,
+        total: totalSteps,
+      })}
     </BodyShort>
   );
 });
