@@ -24,10 +24,15 @@ function GlobalSearchResultsView() {
           searchHits={queryResults?.result.topResults ?? []}
         />
         {queryResults?.result.groupedHits.map((group) => {
+          const count =
+            group.total > group.hits.length
+              ? `${group.hits.length} av ${group.total}`
+              : group.hits.length;
+
           return (
             <GlobalSearchHitCollection
               key={group.type}
-              heading={`${globalSearchConfig[group.type].display} (${group.hits.length})`}
+              heading={`${globalSearchConfig[group.type].display} (${count})`}
               tag={group.type}
               searchHits={group.hits}
             />

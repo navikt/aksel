@@ -78,10 +78,10 @@ Scope: correctness and a11y fixes on the current architecture. No transport chan
 
 - [ ] Extract pure search logic (Fuse options, format, group, sort) so it can be unit tested without Next/Sanity.
 - [ ] Add golden-query tests (~20 queries: component names, Norwegian/English synonyms e.g. knapp/button, typos, deep headings). Snapshot current behaviour first, then review expected hits with the team. **Must land before the ranking changes below.**
-- [ ] F7: fix sort comparator (return `0` when neither is an override).
-- [ ] F10: resolve anchor from the best match (prefer heading matches, then content), not `matches[0]`.
-- [ ] Q5 / F8: remove top hits from type groups.
-- [ ] Q20 / F9: track the real total per type. Render "Type (shown av total)". Fix the stale "20" comment.
+- [x] F7: fix sort comparator (return `0` when neither is an override).
+- [x] F10: resolve anchor from the best match (prefer heading matches, then content), not `matches[0]`.
+- [x] Q5 / F8: remove top hits from type groups.
+- [x] Q20 / F9: track the real total per type. Render "Type (shown av total)". Fix the stale "20" comment.
 - [x] Q26 / F4: align min length to 2 (guard + `minMatchCharLength`). Move the guard before `fetchArticles()`.
 - [ ] F16: make the status tag readable by screen readers (no `aria-hidden`, or visually hidden text). Fix the thumbnail (`alt=""` + no `aria-hidden` conflict).
 
@@ -104,7 +104,7 @@ Done when: the client calls the GET endpoint, the Server Action is gone, and pay
 
 Scope: Next.js client/server best practices, state simplification, perceived speed.
 
-- [ ] Q1 / Q12 / F11: local query state as the source of truth. Read `?query=` once on mount (open + prefill). Debounced write-only `replaceState` mirror, cleared on close. Drop `useSearchParams` and the extra Suspense boundary if no longer needed.
+- [x] Q1 / Q12 / F11: local query state as the source of truth. Read `?query=` once on mount (open + prefill). Debounced write-only `replaceState` mirror, cleared on close. Drop `useSearchParams` and the extra Suspense boundary if no longer needed.
 - [ ] Q23: fetch with `AbortController` (abort superseded requests) + client in-memory query→results cache.
 - [ ] Q25: debounce 100–120ms.
 - [ ] Q15 / F13: spinner in input while pending, keep previous results, inline error state.

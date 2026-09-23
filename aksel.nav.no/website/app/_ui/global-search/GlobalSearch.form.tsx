@@ -6,12 +6,10 @@ import {
   useGlobalSearch,
   useGlobalSearchResults,
 } from "@/app/_ui/global-search/GlobalSearch.context";
-import { useParamState } from "@/app/_ui/global-search/useParamState";
 import styles from "./GlobalSearch.module.css";
 
 const GlobalSearchForm = () => {
-  const { paramValue } = useParamState("query");
-  const { inputRef } = useGlobalSearch();
+  const { inputRef, query } = useGlobalSearch();
   const { updateQuery, resetSearch } = useGlobalSearchResults();
 
   return (
@@ -23,7 +21,7 @@ const GlobalSearchForm = () => {
             label="Globalt søk"
             aria-autocomplete="both"
             variant="simple"
-            defaultValue={paramValue}
+            defaultValue={query}
             onChange={updateQuery}
             onClear={resetSearch}
             onKeyDown={(e) => {

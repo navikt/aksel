@@ -12,6 +12,22 @@ import {
 } from "./GlobalSearch.config";
 import { getSearchIndex } from "./GlobalSearch.index";
 
+const MAX_HITS_PER_TYPE = 10;
+const MAX_TOP_RESULTS = 4;
+
+/* Tie-breaker when two matches are equally strong. */
+const MATCH_KEY_PRIORITY = [
+  "overrideString",
+  "heading",
+  "lvl2.text",
+  "lvl3.text",
+  "lvl4.text",
+  "intro",
+  "ingress",
+  "tema",
+  "content.text",
+];
+
 async function globalSearch(
   query: string,
 ): Promise<GlobalSearchResultT | null> {
@@ -23,28 +39,28 @@ async function globalSearch(
   const fuseResults = fuse
     .search(query)
     .filter((x) => x.score !== undefined && x.score < 0.3)
-    .sort((a, b) => {
-      const aOverride = a.score === 0 && !!a.item.overrideString;
-      const bOverride = b.score === 0 && !!b.item.overrideString;
+    .sort((a, b) => Number(isOverrideHit(b)) - Number(isOverrideHit(a)));
 
-      if (aOverride && bOverride) {
-        return 0;
-      }
-      if (aOverride && !bOverride) {
-        return -1;
-      }
-
-      return 1;
-    });
+  const topResults =
+    fuseResults.length > MAX_TOP_RESULTS
+      ? fuseResults
+          .filter((x) => x.score !== undefined && x.score < 0.1)
+          .slice(0, MAX_TOP_RESULTS)
+      : [];
+  const topResultSet = new Set(topResults);
 
   const groups = new Map<SearchResultPageTypesT, SearchHitGroupT>();
   for (const result of fuseResults) {
+    if (topResultSet.has(result)) {
+      continue;
+    }
+
     const type = result.item._type;
     const group = groups.get(type) ?? { type, total: 0, hits: [] };
     groups.set(type, group);
 
     group.total++;
-    if (group.hits.length < 10) {
+    if (group.hits.length < MAX_HITS_PER_TYPE) {
       group.hits.push(toSearchHit(result));
     }
   }
@@ -54,29 +70,24 @@ async function globalSearch(
       globalSearchConfig[a.type].index - globalSearchConfig[b.type].index,
   );
 
-  const topResults =
-    fuseResults.length > 4
-      ? fuseResults
-          .filter((x) => x.score !== undefined && x.score < 0.1)
-          .slice(0, 4)
-          .map(toSearchHit)
-      : [];
-
   return {
     result: {
-      totalHits: groupedHits.reduce((acc, group) => acc + group.hits.length, 0),
-      topResults,
+      totalHits: fuseResults.length,
+      topResults: topResults.map(toSearchHit),
       groupedHits,
     },
     query,
   };
 }
 
+function isOverrideHit(result: FuseResult<SearchPageT>) {
+  return result.score === 0 && !!result.item.overrideString;
+}
+
 function toSearchHit(result: FuseResult<SearchPageT>): SearchHitT {
   const { item } = result;
-  const section = result.matches?.[0]
-    ? resolveSection(result.matches[0], item)
-    : undefined;
+  const bestMatch = findBestMatch(result.matches);
+  const section = bestMatch ? resolveSection(bestMatch, item) : undefined;
 
   return {
     heading: item.heading,
@@ -88,6 +99,40 @@ function toSearchHit(result: FuseResult<SearchPageT>): SearchHitT {
     statusTag: item.status?.tag || undefined,
     thumbnail: urlForImage(item.status?.bilde)?.url(),
   };
+}
+
+/* Strongest match = longest contiguous matched run. Page-level winners resolve to no anchor. */
+function findBestMatch(
+  matches: readonly FuseResultMatch[] | undefined,
+): FuseResultMatch | undefined {
+  let best: FuseResultMatch | undefined;
+  let bestRun = 0;
+
+  for (const match of matches ?? []) {
+    const run = longestRun(match);
+    if (
+      run > bestRun ||
+      (run === bestRun && best && keyPriority(match) < keyPriority(best))
+    ) {
+      best = match;
+      bestRun = run;
+    }
+  }
+
+  return best;
+}
+
+function longestRun(match: FuseResultMatch) {
+  let run = 0;
+  for (const [start, end] of match.indices) {
+    run = Math.max(run, end - start + 1);
+  }
+  return run;
+}
+
+function keyPriority(match: FuseResultMatch) {
+  const index = MATCH_KEY_PRIORITY.indexOf(match.key ?? "");
+  return index === -1 ? MATCH_KEY_PRIORITY.length : index;
 }
 
 function resolveSection(

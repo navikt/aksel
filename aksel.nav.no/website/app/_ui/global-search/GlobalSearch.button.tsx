@@ -8,25 +8,12 @@ import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./GlobalSearch.module.css";
 
-/**
- * Trigger is optional to allow for use in Suspense fallback
- */
-function GlobalSearchButton({
-  trigger = true,
-  isMac,
-}: {
-  trigger?: boolean;
-  isMac: boolean;
-}) {
-  if (trigger) {
-    return (
-      <Dialog.Trigger>
-        <SearchButton isMac={isMac} />
-      </Dialog.Trigger>
-    );
-  }
-
-  return <SearchButton isMac={isMac} />;
+function GlobalSearchButton({ isMac }: { isMac: boolean }) {
+  return (
+    <Dialog.Trigger>
+      <SearchButton isMac={isMac} />
+    </Dialog.Trigger>
+  );
 }
 
 const SearchButton = forwardRef<

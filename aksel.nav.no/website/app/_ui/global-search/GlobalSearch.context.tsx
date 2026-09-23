@@ -6,6 +6,8 @@ import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalS
 type GlobalSearchContextType = {
   open: boolean;
   closeSearch: () => void;
+  query: string;
+  setQuery: (query: string) => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
 };
 

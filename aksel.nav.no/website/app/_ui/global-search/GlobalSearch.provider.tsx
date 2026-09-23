@@ -14,38 +14,40 @@ import {
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
 import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
-import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { writeQueryParam } from "./GlobalSearch.url";
 
 function GlobalSearchResultProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { open } = useGlobalSearch();
+  const { open, query, setQuery } = useGlobalSearch();
 
   const [searchResult, setSearchResults] = useState<GlobalSearchResultT | null>(
     null,
   );
 
   const [, startTransition] = useTransition();
-  const { setParam, clearParam, paramValue } = useParamState("query");
 
   const debouncedSearch = useMemo(
     () =>
-      debounce((query: string) => {
-        maybeEnableComicSans(query);
+      debounce((value: string) => {
+        maybeEnableComicSans(value);
 
         umamiTrack(Events.SOK, { tekst: "global søk" });
-        setParam(query);
+        const normalized = value.trim();
+        setQuery(normalized);
+        writeQueryParam(normalized);
       }, 200),
-    [setParam],
+    [setQuery],
   );
 
   const resetSearch = useCallback(() => {
     debouncedSearch.clear();
-    clearParam();
-  }, [clearParam, debouncedSearch]);
+    setQuery("");
+    writeQueryParam("");
+  }, [setQuery, debouncedSearch]);
 
   const clearDebounce = useCallback(() => {
     debouncedSearch.clear();
@@ -62,7 +64,7 @@ function GlobalSearchResultProvider({
   }, [debouncedSearch]);
 
   useEffect(() => {
-    if (!paramValue) {
+    if (!query) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchResults(null);
       return;
@@ -72,10 +74,9 @@ function GlobalSearchResultProvider({
 
     startTransition(async () => {
       try {
-        const res = await fetch(
-          `/api/search?q=${encodeURIComponent(paramValue)}`,
-          { signal: controller.signal },
-        );
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+          signal: controller.signal,
+        });
         if (!res.ok) {
           return;
         }
@@ -90,7 +91,7 @@ function GlobalSearchResultProvider({
     });
 
     return () => controller.abort();
-  }, [paramValue]);
+  }, [query]);
 
   const contextValue = useMemo(
     () => ({
