@@ -22,5 +22,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 4,
-  desc: "Prop `maxCount` lar deg sette en maksimal verdi som vises i badgen. Hvis `count` overstiger denne verdien, vises det som `maxCount+`.",
+  desc: "Prop `maxCount` endrer maksimal verdi som vises i badgen (standard er 99). Hvis `count` overstiger `maxCount`, vises det som `maxCount+`.",
 };
