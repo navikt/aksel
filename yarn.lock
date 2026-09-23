@@ -5450,13 +5450,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:16.3.4":
-  version: 16.3.4
-  resolution: "@next/eslint-plugin-next@npm:16.3.4"
+"@next/eslint-plugin-next@npm:16.3.5":
+  version: 16.3.5
+  resolution: "@next/eslint-plugin-next@npm:16.3.5"
   dependencies:
     "@eslint-community/eslint-utils": "npm:4.9.1"
     fast-glob: "npm:3.3.1"
-  checksum: 10/09f7b428f9dde0bf671480a152109ad32758bd67e0098b0821df48936114625510f30f4ea3c14bb9f25a0cb5441f51d8c396b1ae41c94cbf9a1dbb39375144d4
+  checksum: 10/3a1078a214a168e46004ca95a2b1ee8899f886bf4e46220df59385e55e0211ba99ec598ba47899d5a0b14945ad33a236c4dfe2603a68e32ece7caa3f12a03731
   languageName: node
   linkType: hard
 
@@ -26313,7 +26313,7 @@ __metadata:
     "@navikt/next-logger": "npm:5.0.1"
     "@navikt/oasis": "npm:4.1.4"
     "@next/bundle-analyzer": "npm:16.3.4"
-    "@next/eslint-plugin-next": "npm:16.3.4"
+    "@next/eslint-plugin-next": "npm:16.3.5"
     "@playwright/test": "npm:1.61.1"
     "@portabletext/block-tools": "npm:^6.0.0"
     "@portabletext/markdown": "npm:^1.4.4"
