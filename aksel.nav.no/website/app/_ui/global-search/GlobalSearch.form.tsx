@@ -20,14 +20,6 @@ const GlobalSearchForm = () => {
             defaultValue={query}
             onChange={updateQuery}
             onClear={resetSearch}
-            onKeyDown={(e) => {
-              /* Avoids sideeffects when clearing Search */
-              if (e.key === "Escape") {
-                if (e.currentTarget.value) {
-                  e.stopPropagation();
-                }
-              }
-            }}
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="none"

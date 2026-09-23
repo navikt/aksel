@@ -132,7 +132,6 @@ function GlobalSearch() {
           setQuery("");
         }
       }}
-      aria-labelledby="aksel-search-heading"
     >
       <GlobalSearchContext.Provider
         value={{
