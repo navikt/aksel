@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import type { globalSearch } from "@/app/_ui/global-search/server/GlobalSearch.search";
+import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
 
 type GlobalSearchContextType = {
   open: boolean;
@@ -22,10 +22,8 @@ function useGlobalSearch() {
   return context;
 }
 
-type GlobalSearchActionReturnT = Awaited<ReturnType<typeof globalSearch>>;
-
 type SearchResultContextType = {
-  queryResults: GlobalSearchActionReturnT | null;
+  queryResults: GlobalSearchResultT | null;
   updateQuery: (query: string) => void;
   resetSearch: () => void;
   clearDebounce: () => void;
@@ -52,4 +50,3 @@ export {
   GlobalSearchResultContext,
   useGlobalSearchResults,
 };
-export type { GlobalSearchActionReturnT };

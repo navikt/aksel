@@ -10,10 +10,10 @@ import {
 import { Events } from "@navikt/analytics-types";
 import { debounce } from "@navikt/ds-react";
 import {
-  type GlobalSearchActionReturnT,
   GlobalSearchResultContext,
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
+import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
@@ -24,8 +24,9 @@ function GlobalSearchResultProvider({
 }) {
   const { open } = useGlobalSearch();
 
-  const [searchResult, setSearchResults] =
-    useState<GlobalSearchActionReturnT | null>(null);
+  const [searchResult, setSearchResults] = useState<GlobalSearchResultT | null>(
+    null,
+  );
 
   const [, startTransition] = useTransition();
   const { setParam, clearParam, paramValue } = useParamState("query");
@@ -79,7 +80,7 @@ function GlobalSearchResultProvider({
           return;
         }
 
-        const newResults: GlobalSearchActionReturnT = await res.json();
+        const newResults: GlobalSearchResultT | null = await res.json();
         setSearchResults(newResults);
       } catch (error) {
         if (!controller.signal.aborted) {

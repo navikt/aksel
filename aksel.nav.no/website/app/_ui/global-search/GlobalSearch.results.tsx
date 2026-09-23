@@ -23,13 +23,13 @@ function GlobalSearchResultsView() {
           heading={`Beste treff på "${queryResults?.query}"`}
           searchHits={queryResults?.result.topResults ?? []}
         />
-        {queryResults?.result.groupedHits.map(([key, val]) => {
+        {queryResults?.result.groupedHits.map((group) => {
           return (
             <GlobalSearchHitCollection
-              key={key}
-              heading={`${globalSearchConfig[key].display} (${val.length})`}
-              tag={key as keyof typeof globalSearchConfig}
-              searchHits={val}
+              key={group.type}
+              heading={`${globalSearchConfig[group.type].display} (${group.hits.length})`}
+              tag={group.type}
+              searchHits={group.hits}
             />
           );
         })}

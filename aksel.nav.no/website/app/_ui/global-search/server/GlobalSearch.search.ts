@@ -1,14 +1,19 @@
 import type { FuseResult, FuseResultMatch } from "fuse.js";
-import omit from "lodash/omit";
 import "server-only";
+import { urlForImage } from "@/app/_sanity/utils";
 import {
+  type GlobalSearchResultT,
+  type SearchHitGroupT,
   type SearchHitT,
   type SearchPageT,
+  type SearchResultPageTypesT,
   globalSearchConfig,
 } from "./GlobalSearch.config";
 import { getSearchIndex } from "./GlobalSearch.index";
 
-async function globalSearch(query: string) {
+async function globalSearch(
+  query: string,
+): Promise<GlobalSearchResultT | null> {
   const fuse = await getSearchIndex();
   if (!query || query.length < 2) {
     return null;
@@ -16,87 +21,103 @@ async function globalSearch(query: string) {
 
   const fuseResults = fuse
     .search(query)
-    .filter((x) => x.score !== undefined && x.score < 0.3);
+    .filter((x) => x.score !== undefined && x.score < 0.3)
+    .sort((a, b) => {
+      const aOverride = a.score === 0 && !!a.item.overrideString;
+      const bOverride = b.score === 0 && !!b.item.overrideString;
 
-  const formatedResults = formatFuseResults(fuseResults).sort((a, b) => {
-    const aOverride = a.score === 0 && !!a.item.overrideString;
-    const bOverride = b.score === 0 && !!b.item.overrideString;
+      if (aOverride && bOverride) {
+        return 0;
+      }
+      if (aOverride && !bOverride) {
+        return -1;
+      }
 
-    if (aOverride && bOverride) {
-      return 0;
+      return 1;
+    });
+
+  const groups = new Map<SearchResultPageTypesT, SearchHitGroupT>();
+  for (const result of fuseResults) {
+    const type = result.item._type;
+    const group = groups.get(type) ?? { type, total: 0, hits: [] };
+    groups.set(type, group);
+
+    group.total++;
+    if (group.hits.length < 10) {
+      group.hits.push(toSearchHit(result));
     }
-    if (aOverride && !bOverride) {
-      return -1;
-    }
+  }
 
-    return 1;
-  });
-
-  const groupedHits: Partial<
-    Record<keyof typeof globalSearchConfig, SearchHitT[]>
-  > = formatedResults?.reduce((prev, cur) => {
-    const type = cur.item._type;
-    if (!prev[type]) {
-      prev[type] = [];
-    }
-
-    // Limit the number of hits per type to 20
-    if (prev[type].length >= 10) {
-      return prev;
-    }
-
-    prev[type].push(cur);
-    return prev;
-  }, {});
+  const groupedHits = [...groups.values()].sort(
+    (a, b) =>
+      globalSearchConfig[a.type].index - globalSearchConfig[b.type].index,
+  );
 
   const topResults =
-    formatedResults?.length > 4
-      ? formatedResults
+    fuseResults.length > 4
+      ? fuseResults
           .filter((x) => x.score !== undefined && x.score < 0.1)
           .slice(0, 4)
+          .map(toSearchHit)
       : [];
 
   return {
     result: {
-      totalHits: Object.values(groupedHits).reduce(
-        (acc, val) => acc + val.length,
-        0,
-      ),
+      totalHits: groupedHits.reduce((acc, group) => acc + group.hits.length, 0),
       topResults,
-      groupedHits: Object.entries(groupedHits).sort(
-        (a, b) =>
-          globalSearchConfig[a[0]].index - globalSearchConfig[b[0]].index,
-      ),
+      groupedHits,
     },
     query,
   };
 }
 
-function formatFuseResults(
-  rawResults: FuseResult<SearchPageT>[],
-): SearchHitT[] {
-  return rawResults.map((result) => {
-    const item = result.item;
+function toSearchHit(result: FuseResult<SearchPageT>): SearchHitT {
+  const { item } = result;
+  const section = result.matches?.[0]
+    ? resolveSection(result.matches[0], item)
+    : undefined;
 
-    return {
-      ...result,
-      item: omit(item, ["intro", "ingress"]),
-      anchor: result.matches?.[0]
-        ? resolveAnchor(result.matches[0], item)
-        : undefined,
-      description: item?.intro || item?.ingress || "",
-    };
-  });
+  return {
+    heading: item.heading,
+    slug: item.slug,
+    type: item._type,
+    description: item.intro || item.ingress || "",
+    anchor: section?.id || undefined,
+    sectionHeading: section?.text || undefined,
+    statusTag: item.status?.tag || undefined,
+    thumbnail: urlForImage(item.status?.bilde)?.url(),
+  };
 }
 
-function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
-  if (match.key?.includes("lvl")) {
-    return item[match.key.split(".")[0]][match.refIndex].id;
+function resolveSection(
+  match: FuseResultMatch,
+  item: SearchPageT,
+): { id: string; text?: string } | undefined {
+  if (match.refIndex === undefined) {
+    return undefined;
   }
-  if (match.key === "content.text") {
-    return item[match.key.split(".")[0]][match.refIndex].id;
+
+  switch (match.key) {
+    case "lvl2.text":
+      return item.lvl2[match.refIndex];
+    case "lvl3.text":
+      return item.lvl3[match.refIndex];
+    case "lvl4.text":
+      return item.lvl4[match.refIndex];
+    case "content.text": {
+      const block = item.content[match.refIndex];
+      const id = typeof block === "string" ? undefined : block?.id;
+      if (!id) {
+        return undefined;
+      }
+      const heading = [...item.lvl2, ...item.lvl3, ...item.lvl4].find(
+        (x) => x.id === id,
+      );
+      return { id, text: heading?.text };
+    }
+    default:
+      return undefined;
   }
-  return null;
 }
 
 export { globalSearch };

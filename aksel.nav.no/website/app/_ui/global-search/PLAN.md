@@ -93,7 +93,7 @@ Scope: server-side speed and a lean API.
 
 - [x] Q24 / F1: module-level Fuse instance, rebuilt only when the `fetchArticles` version stamp changes.
 - [x] Q23 / F2: add GET `app/api/search/route.ts` (`?q=`). zod-validate, max length ~100 (Q27). Response header `Cache-Control: max-age=60`.
-- [ ] F3: trimmed response shape: `heading`, `slug`, `_type`, `status`, `description`, `anchor`, section heading for anchor hits (Q22), per-type totals.
+- [x] F3: trimmed response shape: `heading`, `slug`, `_type`, `status`, `description`, `anchor`, section heading for anchor hits (Q22), per-type totals.
 - [x] Remove the `fuseGlobalSearch` Server Action.
 - [ ] Unit tests for the route (validation, empty/short query, shape).
 - [ ] Measure before/after (server search time + response size) and note it in the PR.
