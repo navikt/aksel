@@ -4,27 +4,27 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <UNSAFE_Combobox
-      allowNewValues
-      label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
-      options={initialOptions}
-      isMultiSelect
+      label="Hva er din favorittfrukt?"
+      options={options}
+      error="Du må velge en favorittfrukt."
     />
   );
 };
 
-const initialOptions = [
-  "te",
-  "kaffe",
-  "varm sjokolade",
-  "lemonade",
-  "appelsinjuice",
-  "eplejuice",
-  "smoothie",
-  "melk",
-  "vann",
-  "brus",
-  "øl",
-  "vin",
+const options = [
+  "Ananas",
+  "Banan",
+  "Bringebær",
+  "Drue",
+  "Eple",
+  "Grapefrukt",
+  "Jordbær",
+  "Kiwi",
+  "Mandarin",
+  "Mango",
+  "Pære",
+  "Pasjonsfrukt",
+  "Vannmelon",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -39,6 +39,5 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 6,
-  desc: "Med `allowNewValues` kan brukeren legge til egne verdier som ikke finnes i listen.",
+  index: 3,
 };
