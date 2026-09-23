@@ -3030,20 +3030,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@github-ui/storybook-addon-performance-panel@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@github-ui/storybook-addon-performance-panel@npm:1.2.0"
+"@github-ui/storybook-addon-performance-panel@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@github-ui/storybook-addon-performance-panel@npm:1.3.0"
   peerDependencies:
     "@storybook/icons": ^2.0.0
-    "@storybook/react": ^10.0.0
+    "@storybook/react": ^10.0.0 || >=11.0.0-0 <12.0.0-0
     react: ^19
-    storybook: ^10.0.0
+    storybook: ^10.0.0 || >=11.0.0-0 <12.0.0-0
   peerDependenciesMeta:
     "@storybook/react":
       optional: true
     react:
       optional: true
-  checksum: 10/23c20a134d8646f7ae117ac639eb85b9f6bd4a0a3052809f32b75a353c572966678f7adafd8dadbfa34cc9823af657fad92d15cdf6249a16c9b68a0a1d0e229c
+  checksum: 10/25c956d23a99ea49f11b5dc7dadcaf7084bc7df0ce4644c97db66d13f10a5c76d777f1ae1259cb1a5d6cf60afcb180413429e9c56638281b6e28521db53f750a
   languageName: node
   linkType: hard
 
@@ -10662,7 +10662,7 @@ __metadata:
     "@biomejs/biome": "npm:2.5.9"
     "@changesets/cli": "npm:3.0.1"
     "@eslint/js": "npm:^10.0.1"
-    "@github-ui/storybook-addon-performance-panel": "npm:^1.2.0"
+    "@github-ui/storybook-addon-performance-panel": "npm:^1.3.0"
     "@storybook/addon-a11y": "npm:^10.6.0"
     "@storybook/addon-docs": "npm:^10.6.0"
     "@storybook/addon-themes": "npm:^10.6.0"
