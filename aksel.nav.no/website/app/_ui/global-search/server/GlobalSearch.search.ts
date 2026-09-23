@@ -2,6 +2,7 @@ import type { FuseResult, FuseResultMatch } from "fuse.js";
 import "server-only";
 import { urlForImage } from "@/app/_sanity/utils";
 import {
+  GLOBAL_SEARCH_MIN_QUERY_LENGTH,
   type GlobalSearchResultT,
   type SearchHitGroupT,
   type SearchHitT,
@@ -14,11 +15,11 @@ import { getSearchIndex } from "./GlobalSearch.index";
 async function globalSearch(
   query: string,
 ): Promise<GlobalSearchResultT | null> {
-  const fuse = await getSearchIndex();
-  if (!query || query.length < 2) {
+  if (query.length < GLOBAL_SEARCH_MIN_QUERY_LENGTH) {
     return null;
   }
 
+  const fuse = await getSearchIndex();
   const fuseResults = fuse
     .search(query)
     .filter((x) => x.score !== undefined && x.score < 0.3)

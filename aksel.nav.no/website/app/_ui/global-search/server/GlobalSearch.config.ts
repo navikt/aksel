@@ -62,9 +62,14 @@ type GlobalSearchResultT = {
   };
 };
 
+const GLOBAL_SEARCH_MIN_QUERY_LENGTH = 2;
 const GLOBAL_SEARCH_MAX_QUERY_LENGTH = 100;
 
-export { GLOBAL_SEARCH_MAX_QUERY_LENGTH, globalSearchConfig };
+export {
+  GLOBAL_SEARCH_MAX_QUERY_LENGTH,
+  GLOBAL_SEARCH_MIN_QUERY_LENGTH,
+  globalSearchConfig,
+};
 export type {
   GlobalSearchResultT,
   SearchHitGroupT,

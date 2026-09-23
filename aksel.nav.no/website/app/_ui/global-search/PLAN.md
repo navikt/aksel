@@ -82,7 +82,7 @@ Scope: correctness and a11y fixes on the current architecture. No transport chan
 - [ ] F10: resolve anchor from the best match (prefer heading matches, then content), not `matches[0]`.
 - [ ] Q5 / F8: remove top hits from type groups.
 - [ ] Q20 / F9: track the real total per type. Render "Type (shown av total)". Fix the stale "20" comment.
-- [ ] Q26 / F4: align min length to 2 (guard + `minMatchCharLength`). Move the guard before `fetchArticles()`.
+- [x] Q26 / F4: align min length to 2 (guard + `minMatchCharLength`). Move the guard before `fetchArticles()`.
 - [ ] F16: make the status tag readable by screen readers (no `aria-hidden`, or visually hidden text). Fix the thumbnail (`alt=""` + no `aria-hidden` conflict).
 
 Done when: golden + unit tests are green and results are unchanged except for the intended fixes.

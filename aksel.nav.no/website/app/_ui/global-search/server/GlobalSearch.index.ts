@@ -1,6 +1,9 @@
 import Fuse, { type IFuseOptions } from "fuse.js";
 import "server-only";
-import type { SearchPageT } from "./GlobalSearch.config";
+import {
+  GLOBAL_SEARCH_MIN_QUERY_LENGTH,
+  type SearchPageT,
+} from "./GlobalSearch.config";
 import { fetchArticles } from "./GlobalSearch.fetch";
 
 const fuseOptions: IFuseOptions<SearchPageT> = {
@@ -17,7 +20,7 @@ const fuseOptions: IFuseOptions<SearchPageT> = {
   ],
   includeScore: true,
   shouldSort: true,
-  minMatchCharLength: 3,
+  minMatchCharLength: GLOBAL_SEARCH_MIN_QUERY_LENGTH,
   ignoreLocation: true,
   includeMatches: true,
   threshold: 0.18,
