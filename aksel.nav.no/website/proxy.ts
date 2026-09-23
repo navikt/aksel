@@ -68,7 +68,7 @@ async function getRedirect(source: string) {
   }
 
   if (Date.now() > redirectCacheExpiresAt) {
-    after(
+    after(async () =>
       refreshRedirects().catch((error) => {
         console.error("[proxy] Failed to refresh redirects:", error.message);
       }),
