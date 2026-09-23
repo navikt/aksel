@@ -41,5 +41,7 @@ type SearchHitT = {
 
 type SearchResultPageTypesT = keyof typeof globalSearchConfig;
 
-export { globalSearchConfig };
+const GLOBAL_SEARCH_MAX_QUERY_LENGTH = 100;
+
+export { GLOBAL_SEARCH_MAX_QUERY_LENGTH, globalSearchConfig };
 export type { SearchHitT, SearchPageT, SearchResultPageTypesT };

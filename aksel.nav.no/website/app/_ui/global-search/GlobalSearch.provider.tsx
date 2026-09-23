@@ -14,7 +14,6 @@ import {
   GlobalSearchResultContext,
   useGlobalSearch,
 } from "@/app/_ui/global-search/GlobalSearch.context";
-import { fuseGlobalSearch } from "@/app/_ui/global-search/server/GlobalSearch.actions";
 import { useParamState } from "@/app/_ui/global-search/useParamState";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 
@@ -68,11 +67,28 @@ function GlobalSearchResultProvider({
       return;
     }
 
-    startTransition(async () => {
-      const newResults = await fuseGlobalSearch(paramValue);
+    const controller = new AbortController();
 
-      setSearchResults(newResults);
+    startTransition(async () => {
+      try {
+        const res = await fetch(
+          `/api/search?q=${encodeURIComponent(paramValue)}`,
+          { signal: controller.signal },
+        );
+        if (!res.ok) {
+          return;
+        }
+
+        const newResults: GlobalSearchActionReturnT = await res.json();
+        setSearchResults(newResults);
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("Global search failed", error);
+        }
+      }
     });
+
+    return () => controller.abort();
   }, [paramValue]);
 
   const contextValue = useMemo(

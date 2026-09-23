@@ -1,7 +1,6 @@
-"use server";
-
 import type { FuseResult, FuseResultMatch } from "fuse.js";
 import omit from "lodash/omit";
+import "server-only";
 import {
   type SearchHitT,
   type SearchPageT,
@@ -9,7 +8,7 @@ import {
 } from "./GlobalSearch.config";
 import { getSearchIndex } from "./GlobalSearch.index";
 
-async function fuseGlobalSearch(query: string) {
+async function globalSearch(query: string) {
   const fuse = await getSearchIndex();
   if (!query || query.length < 2) {
     return null;
@@ -100,4 +99,4 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-export { fuseGlobalSearch };
+export { globalSearch };
