@@ -15,8 +15,8 @@
     "@navikt/ds-css": "^8.16.2",
     "@navikt/ds-react": "^8.16.2",
     "fuse.js": "7.4.2",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.131.0",
