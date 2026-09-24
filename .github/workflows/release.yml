@@ -51,7 +51,7 @@ jobs:
           # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
           NPM_TOKEN: ""
           # Needed for push to main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create .npmrc for GPR
         run: |
@@ -72,7 +72,7 @@ jobs:
         env:
           NPM_TOKEN: ""
           # Needed for push to main
-          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          github-token: ${{ secrets.GIT_REPO }}
 
       - name: Generate icon.zip
         if: steps.changesets.outputs.published == 'true'
