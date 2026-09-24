@@ -7557,25 +7557,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/schema@npm:6.13.1, @sanity/schema@npm:^6.12.0":
-  version: 6.13.1
-  resolution: "@sanity/schema@npm:6.13.1"
-  dependencies:
-    "@sanity/descriptors": "npm:^1.3.0"
-    "@sanity/generate-help-url": "npm:^4.0.0"
-    "@sanity/types": "npm:6.13.1"
-    arrify: "npm:^3.0.0"
-    dequal: "npm:^2.0.3"
-    get-it: "npm:^9.5.4"
-    groq-js: "npm:^2.0.0"
-    humanize-list: "npm:^1.0.1"
-    leven: "npm:^4.1.0"
-    lodash-es: "npm:^4.18.1"
-    object-inspect: "npm:^1.13.4"
-  checksum: 10/98996c93d1cd3160abe7d142f5670a24a21c917ce71d5147f0930a2748b2473a398742bd2f7eac79b85028a3604cacf1c8cb2e1060c011cd9972f1f87ed62e3d
-  languageName: node
-  linkType: hard
-
 "@sanity/schema@npm:6.14.1":
   version: 6.14.1
   resolution: "@sanity/schema@npm:6.14.1"
@@ -7592,6 +7573,25 @@ __metadata:
     lodash-es: "npm:^4.18.1"
     object-inspect: "npm:^1.13.4"
   checksum: 10/c5413e2f3cac799264ca4bd8320bef48147c227d79b21c7ae88d2a6549cbec322e6f75e5d43d63adb6e28d8740d102a50c1d4f4635323ce3c290ac8f5b72fa89
+  languageName: node
+  linkType: hard
+
+"@sanity/schema@npm:^6.12.0":
+  version: 6.13.1
+  resolution: "@sanity/schema@npm:6.13.1"
+  dependencies:
+    "@sanity/descriptors": "npm:^1.3.0"
+    "@sanity/generate-help-url": "npm:^4.0.0"
+    "@sanity/types": "npm:6.13.1"
+    arrify: "npm:^3.0.0"
+    dequal: "npm:^2.0.3"
+    get-it: "npm:^9.5.4"
+    groq-js: "npm:^2.0.0"
+    humanize-list: "npm:^1.0.1"
+    leven: "npm:^4.1.0"
+    lodash-es: "npm:^4.18.1"
+    object-inspect: "npm:^1.13.4"
+  checksum: 10/98996c93d1cd3160abe7d142f5670a24a21c917ce71d5147f0930a2748b2473a398742bd2f7eac79b85028a3604cacf1c8cb2e1060c011cd9972f1f87ed62e3d
   languageName: node
   linkType: hard
 
@@ -26599,7 +26599,7 @@ __metadata:
     "@portabletext/react": "npm:^8.0.1"
     "@sanity/client": "npm:7.27.0"
     "@sanity/image-url": "npm:2.1.1"
-    "@sanity/schema": "npm:6.13.1"
+    "@sanity/schema": "npm:6.14.1"
     "@slack/web-api": "npm:^8.0.0"
     "@types/jscodeshift": "npm:17.3.0"
     "@types/jsdom": "npm:^27.0.0"
