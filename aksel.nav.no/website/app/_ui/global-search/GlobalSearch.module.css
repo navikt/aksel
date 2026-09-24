@@ -45,22 +45,16 @@
 
 .searchDialogShortcuts {
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   background-color: var(--ax-bg-neutral-soft);
   border-top: 1px solid var(--ax-border-neutral-subtle);
   padding: var(--ax-space-16);
   display: none;
+  gap: var(--ax-space-16);
 
   @media (width > 768px) {
     display: flex;
   }
-}
-
-.searchDialogShortcutsGroup {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--ax-space-16);
 }
 
 .searchSectionHeading {
@@ -124,8 +118,8 @@
 
 .searchOptionHeading {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  gap: var(--ax-space-12);
 }
 
 .searchOptionTitle {
@@ -137,13 +131,6 @@
   .searchOption:hover & {
     text-decoration-thickness: 0.111em;
   }
-}
-
-.searchOptionSection {
-  color: var(--ax-text-neutral-subtle);
-  display: flex;
-  align-items: center;
-  gap: var(--ax-space-4);
 }
 
 .searchOptionDescription {

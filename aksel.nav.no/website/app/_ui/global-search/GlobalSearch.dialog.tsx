@@ -1,7 +1,7 @@
 "use client";
 
-import { BodyShort, Box, Dialog, Heading } from "@navikt/ds-react";
-import { Kbd, ModKbd } from "@/app/_ui/kbd/Kbd";
+import { BodyShort, Dialog, Heading } from "@navikt/ds-react";
+import { Kbd } from "@/app/_ui/kbd/Kbd";
 import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
@@ -23,22 +23,10 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
         as="span"
       >
         <span>
-          <ModKbd />
-          <Box as="span" marginInline="space-2">
-            +
-          </Box>
-          <Kbd>K</Kbd> for å søke
+          <Kbd>Enter</Kbd> gå til side
         </span>
-        <span className={styles.searchDialogShortcutsGroup}>
-          <span>
-            <Kbd>↑</Kbd> <Kbd>↓</Kbd> for å navigere
-          </span>
-          <span>
-            <Kbd>↵</Kbd> for å åpne
-          </span>
-          <span>
-            <Kbd>Esc</Kbd> for å lukke
-          </span>
+        <span>
+          <Kbd>Esc</Kbd> for å lukke
         </span>
       </BodyShort>
     </Dialog.Popup>

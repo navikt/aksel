@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React, { useEffect, useId, useRef } from "react";
-import { ArrowDownRightIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { Heading, Tag } from "@navikt/ds-react";
 import {
@@ -108,14 +107,6 @@ function GlobalSearchOption({
           <Heading size="small" as="span" className={styles.searchOptionTitle}>
             {hit.heading}
           </Heading>{" "}
-          {hit.sectionHeading && (
-            <>
-              <span className={styles.searchOptionSection}>
-                <ArrowDownRightIcon aria-hidden />
-                {`# ${hit.sectionHeading}`}
-              </span>{" "}
-            </>
-          )}
           {hit.statusTag && <StatusTag status={hit.statusTag} />}
         </span>
 
