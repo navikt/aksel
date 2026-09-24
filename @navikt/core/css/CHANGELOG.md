@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 8.17.0
+
+### Minor Changes
+
+- New component: Badge, a small badge that communicates updates, presence or a count. ([#5096](https://github.com/navikt/aksel/pull/5096))
+
+### Patch Changes
+
+- ExpansionCard: Updated borders and transitions ([#5277](https://github.com/navikt/aksel/pull/5277))
+
 ## 8.16.2
 
 ### Patch Changes
