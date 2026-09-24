@@ -166,7 +166,7 @@ details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-ex
  * "Animating" content-visibility does not work in Safari. We can't leave it to the
  * browser to toggle it, because we need it to be `visible` for the duration of
  * the close animation. We also can't set it to `visible` all the time, because
- * that breaks text fragments in Chrome.
+ * that breaks text fragments in Chrome and makes content available to text selection.
 */
 .aksel-expansioncard[data-animate="true"]::details-content {
   content-visibility: visible;

@@ -22,7 +22,10 @@ const ExpansionCardHeader = forwardRef<HTMLElement, ExpansionCardHeaderProps>(
         ref={ref}
         {...rest}
         className={cl("aksel-expansioncard__header", className)}
-        onClick={summaryClicked}
+        onClick={(e) => {
+          e.preventDefault();
+          summaryClicked();
+        }}
       >
         <div>{children}</div>
 

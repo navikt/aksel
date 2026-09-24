@@ -112,8 +112,10 @@ Default.argTypes = {
 
 export const Testing = () => (
   <div style={{ minHeight: "200vh" }}>
+    <button type="button">Død knapp</button>
     <p>
-      <a href="#innhold1">Lenke til innhold 1</a>{" "}
+      <a href="#innhold1">Lenke til innhold 1</a>
+      {" - "}
       <a href="#innhold2">Lenke til innhold 2</a>
     </p>
     <ExpansionCard>
@@ -128,6 +130,7 @@ export const Testing = () => (
         <p id="innhold2">Dette er innhold 2.</p>
       </ExpansionCard.Content>
     </ExpansionCard>
+    <p>Innhold etter</p>
   </div>
 );
 

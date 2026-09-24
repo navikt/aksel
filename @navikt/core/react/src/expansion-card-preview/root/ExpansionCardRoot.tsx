@@ -62,11 +62,15 @@ const ExpansionCardRoot = forwardRef<HTMLDetailsElement, ExpansionCardProps>(
     const ref = useRef<HTMLDetailsElement>(null);
     const mergedRef = useMergeRefs(forwardedRef, ref);
 
+    // Ulempe: Animerer ikke hvis toggles med prop
+    // TODO: Avbryt forrige timeout
     function summaryClicked() {
       const detailsElm = ref.current;
       if (!detailsElm) return;
       detailsElm.setAttribute("data-animate", "true");
       setTimeout(() => detailsElm.setAttribute("data-animate", "false"), 1000); // Close animation duration
+      // Need to delay opening a bit for first open animation to work in Chrome (not reproducable in SB).
+      setTimeout(() => (detailsElm.open = !detailsElm.open), 0);
     }
 
     return (
