@@ -45,6 +45,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           }
 
           radioRef.current?.click();
+          radioRef.current?.focus({ preventScroll: true });
         }}
       >
         <RadioInput
