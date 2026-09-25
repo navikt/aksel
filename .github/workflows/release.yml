@@ -12,15 +12,15 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
-    name: Release packages
+  version:
+    name: Create release Pull Request
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
     runs-on: ubuntu-latest
     permissions:
-      id-token: "write"
       contents: "write"
-      packages: "write"
       pull-requests: "write"
+    outputs:
+      has-changesets: ${{ steps.changesets.outputs.has-changesets }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -39,33 +39,60 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-      - name: Create release Pull Request or publish to NPM
+      # Without `publish-script` the action only creates/updates the release PR
+      - name: Create or update release Pull Request
         id: changesets
         uses: changesets/action@v2
         with:
           version-script: yarn create-version
+        env:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # Both publish jobs are idempotent: `changeset publish` only publishes versions missing from the target registry.
+  # Re-run a failed job to retry that registry without affecting the other.
+  publish-npm:
+    name: Publish to npm
+    needs: version
+    if: ${{ needs.version.outputs.has-changesets == 'false' }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: "write"
+      contents: "write"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: yarn
+          cache-dependency-path: "yarn.lock"
+
+      - name: Install dependencies
+        run: yarn
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      # changeset v3 uses `yarn npm info`, which reads the @navikt scope registry (GPR) from .yarnrc.yml.
+      # Only changes this job's checkout, after install.
+      - name: Point @navikt scope to npm
+        run: yarn config set npmScopes.navikt.npmRegistryServer "https://registry.npmjs.org"
+
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v2
+        with:
           publish-script: yarn release
           create-github-releases: false
         env:
-          # Use OIDC for npm authentication instead of NPM_TOKEN
-          # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+          # No token: `yarn npm publish` falls back to npm OIDC (trusted publishing)
           NPM_TOKEN: ""
-          # Needed for push to main
+          # `yarn npm publish` ignores the scope's npmRegistryServer and defaults to registry.yarnpkg.com
+          YARN_NPM_PUBLISH_REGISTRY: https://registry.npmjs.org
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to GPR
-        if: steps.changesets.outputs.published == 'true'
-        id: changesets-gpr
-        uses: changesets/action@v2
-        with:
-          publish-script: yarn changeset publish
-          create-github-releases: false
-        env:
-          NPM_TOKEN: ""
-          # changeset v3 publishes with `yarn npm publish`, which reads the @navikt scope (GPR) from .yarnrc.yml
-          NPM_AUTH_TOKEN: ${{ secrets.GIT_REPO }}
-          # Needed for push to main
-          github-token: ${{ secrets.GIT_REPO }}
 
       - name: Generate icon.zip
         if: steps.changesets.outputs.published == 'true'
@@ -82,10 +109,11 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Get @navikt/ds-css version
+        if: steps.changesets.outputs.published == 'true'
         run: |
           VERSION=$(yarn css:get-version)
           echo "version=$VERSION" >> $GITHUB_ENV
-          echo "Version of @navikt/ds-css: ${{ env.version }}"
+          echo "Version of @navikt/ds-css: $VERSION"
 
       - name: Upload CSS to Nav CDN
         if: steps.changesets.outputs.published == 'true'
@@ -96,3 +124,40 @@ jobs:
           destination: "@navikt/ds-css"
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
+  publish-gpr:
+    name: Publish to GitHub Packages
+    needs: version
+    if: ${{ needs.version.outputs.has-changesets == 'false' }}
+    runs-on: ubuntu-latest
+    permissions:
+      # Needed for `publishConfig.provenance`
+      id-token: "write"
+      contents: "read"
+      packages: "write"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: yarn
+          cache-dependency-path: "yarn.lock"
+
+      - name: Install dependencies
+        run: yarn
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Build packages
+        run: yarn build:release
+
+      # Git tags and GitHub releases are handled by the npm job
+      - name: Publish to GitHub Packages
+        run: yarn changeset publish --no-git-tag
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GIT_REPO }}
+          # `yarn npm publish` ignores the scope's npmRegistryServer and defaults to registry.yarnpkg.com
+          YARN_NPM_PUBLISH_REGISTRY: https://npm.pkg.github.com
