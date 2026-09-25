@@ -14,16 +14,19 @@ spec:
     - "https://aksel.nav.no"
     - "https://design.nav.no"
   observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
   replicas:
     disableAutoScaling: true
     min: 1
     max: 1
   resources:
     limits:
-      memory: 2048Mi
+      memory: 4048Mi
     requests:
-      cpu: 172m
-      memory: 850Mi
+      cpu: 200m
+      memory: 1850Mi
   liveness:
     path: /api/isAlive
     initialDelay: 20

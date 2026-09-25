@@ -1,5 +1,35 @@
 # @navikt/ds-react
 
+## 8.17.1
+
+### Patch Changes
+
+- Popover: Keep `bottom` placement when there is not enough space above or below the anchor, so the content stays reachable by scrolling. Fixes DatePicker being cut off above the viewport. ([#5297](https://github.com/navikt/aksel/pull/5297))
+- Updated dependencies []:
+  - @navikt/aksel-icons@8.17.1
+  - @navikt/ds-tokens@8.17.1
+
+## 8.17.0
+
+### Minor Changes
+
+- New component: Badge, a small badge that communicates updates, presence or a count. ([#5096](https://github.com/navikt/aksel/pull/5096))
+
+### Patch Changes
+
+- Alert: Component is now marked as deprecated. Use GlobalAlert, LocalAlert, InfoCard or InlineMessage instead. ([#5256](https://github.com/navikt/aksel/pull/5256))
+
+- Combobox: Fix issue deselecting options when uncontrolled ([#5259](https://github.com/navikt/aksel/pull/5259))
+
+- Select: Prevent from being changed with keyboard when readOnly ([#5257](https://github.com/navikt/aksel/pull/5257))
+
+- DatePicker: Fix validation-bug in `useRangeDatePicker` where initial validation could incorrectly assume `isValidDate` to be false ([#5278](https://github.com/navikt/aksel/pull/5278))
+
+- OverridableComponent: Add built-in guard against using `as` and `asChild` at the same time ([#5238](https://github.com/navikt/aksel/pull/5238))
+- Updated dependencies []:
+  - @navikt/aksel-icons@8.17.0
+  - @navikt/ds-tokens@8.17.0
+
 ## 8.16.2
 
 ### Patch Changes

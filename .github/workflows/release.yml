@@ -51,16 +51,7 @@ jobs:
           # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
           NPM_TOKEN: ""
           # Needed for push to main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create .npmrc for GPR
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            @navikt:registry=https://npm.pkg.github.com
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.GIT_REPO }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to GPR
         if: steps.changesets.outputs.published == 'true'
@@ -71,8 +62,10 @@ jobs:
           create-github-releases: false
         env:
           NPM_TOKEN: ""
+          # changeset v3 publishes with `yarn npm publish`, which reads the @navikt scope (GPR) from .yarnrc.yml
+          NPM_AUTH_TOKEN: ${{ secrets.GIT_REPO }}
           # Needed for push to main
-          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          github-token: ${{ secrets.GIT_REPO }}
 
       - name: Generate icon.zip
         if: steps.changesets.outputs.published == 'true'

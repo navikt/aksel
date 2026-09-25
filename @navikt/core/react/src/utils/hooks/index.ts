@@ -18,3 +18,4 @@ export {
 } from "./useTransitionStatus";
 export { useValueAsRef } from "./useValueAsRef";
 export { useDeferredValue } from "./useDeferredValue";
+export { useSyncExternalStore } from "./useSyncExternalStore";

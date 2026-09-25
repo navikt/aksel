@@ -1,10 +1,7 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
-import { createRequire } from "node:module";
 import path from "node:path";
-
-const require = createRequire(import.meta.url);
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
@@ -73,8 +70,6 @@ const nextConfig: NextConfig = {
       : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
     PRODUCTION: isProduction ? "true" : "false",
   },
-
-  cacheHandler: require.resolve("./cache-handler.mjs"),
 
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   headers: async () => {
@@ -165,6 +160,13 @@ const nextConfig: NextConfig = {
     ],
     largePageDataBytes: 128 * 2000,
     turbopackFileSystemCacheForDev: true,
+    /*
+     * Next writes the prerender cache to `.next/server/app`, which lives in the image
+     * and is read-only in nais. Only `.next/cache` is mounted writable, so on-demand
+     * renders fail with ENOENT on mkdir. Disabling this keeps them in memory instead.
+     * Prerendered pages are still read from disk.
+     */
+    isrFlushToDisk: false,
   },
   reactCompiler: true,
 
