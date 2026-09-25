@@ -134,6 +134,13 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           flip({
             padding: 5,
             fallbackPlacements: getOppositePlacement(placement),
+            /**
+             * When neither side fits, overflow below the anchor can be reached by scrolling,
+             * while overflow above the viewport often cannot.
+             */
+            fallbackStrategy: placement.startsWith("bottom")
+              ? "initialPlacement"
+              : "bestFit",
           }),
         shift({ padding: 12 }),
       ],
