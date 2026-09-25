@@ -53,15 +53,6 @@ jobs:
           # Needed for push to main
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create .npmrc for GPR
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            @navikt:registry=https://npm.pkg.github.com
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.GIT_REPO }}
-
       - name: Publish to GPR
         if: steps.changesets.outputs.published == 'true'
         id: changesets-gpr
@@ -71,6 +62,8 @@ jobs:
           create-github-releases: false
         env:
           NPM_TOKEN: ""
+          # changeset v3 publishes with `yarn npm publish`, which reads the @navikt scope (GPR) from .yarnrc.yml
+          NPM_AUTH_TOKEN: ${{ secrets.GIT_REPO }}
           # Needed for push to main
           github-token: ${{ secrets.GIT_REPO }}
 
