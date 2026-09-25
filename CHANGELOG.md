@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.17.1
+
+### @navikt/ds-react
+
+- Popover: Keep `bottom` placement when there is not enough space above or below the anchor, so the content stays reachable by scrolling. Fixes DatePicker being cut off above the viewport. ([#5297](https://github.com/navikt/aksel/pull/5297))
+
 ## 8.17.0
 
 ### @navikt/ds-css
