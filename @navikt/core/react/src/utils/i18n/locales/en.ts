@@ -19,6 +19,9 @@ export default {
       labelSuffix: "delete",
     },
   },
+  CoachmarkProgress: {
+    currentStep: "{current} of {total}",
+  },
   Combobox: {
     addOption: "Add",
     noMatches: "No search hits",

@@ -4,6 +4,7 @@ export { ActionMenu, type ActionMenuProps } from "./action-menu";
 export { Alert, type AlertProps } from "./legacy/alert";
 export { Button, type ButtonProps } from "./button";
 export { Chat, type ChatProps } from "./chat";
+export { Coachmark, type CoachmarkProps } from "./coachmark";
 export { Chips, type ChipsProps } from "./chips";
 export { CopyButton, type CopyButtonProps } from "./copybutton";
 export {
