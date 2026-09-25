@@ -10,6 +10,7 @@
   transition-property: border-color, box-shadow;
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0, 0, 0, 1);
+  overflow: clip;
 
   &[data-color="neutral"] {
     background-color: var(--ax-bg-raised);
@@ -19,6 +20,13 @@
     box-shadow: 0 0 0 1px var(--ax-border-default);
     border-color: var(--ax-border-default);
   }
+}
+
+details.aksel-expansioncard {
+  /* This is needed to avoid layout shift when we toggle content-visibility.
+     (Would happen if the component isn't stretched (e.g. flex with align:start)
+     + content is wider than header + header is narrower than avail. width.) */
+  width: 100%;
 }
 
 /* ------------------------ ExpansionCard Small-size ------------------------ */
@@ -51,12 +59,19 @@
   position: relative;
   justify-content: space-between;
   transition: background-color 300ms cubic-bezier(0, 0, 0, 1);
+  cursor: pointer;
+
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
 
   &:hover {
     background-color: var(--ax-bg-moderate-hoverA);
   }
 
-  &[data-open="true"] {
+  &[data-open="true"],
+  .aksel-expansioncard[open] > & {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
@@ -112,7 +127,7 @@
   }
 
   /* Makes the whole header clickable */
-  &::after {
+  .aksel-expansioncard__header:not(summary) > &::after {
     inset: 0;
     z-index: 1;
     position: absolute;
@@ -134,16 +149,29 @@
   transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.aksel-expansioncard__header[data-open="true"] .aksel-expansioncard__header-chevron {
+.aksel-expansioncard__header[data-open="true"] .aksel-expansioncard__header-chevron,
+.aksel-expansioncard[open] > .aksel-expansioncard__header .aksel-expansioncard__header-chevron {
   transform: rotateX(-180deg);
 }
 
 /* Even if animation always takes 250ms, the perceived effect of current timing function makes the 'closing'-animation take longer */
-.aksel-expansioncard__header[data-open="false"] .aksel-expansioncard__header-chevron {
+.aksel-expansioncard__header[data-open="false"] .aksel-expansioncard__header-chevron,
+details.aksel-expansioncard:not([open]) > .aksel-expansioncard__header .aksel-expansioncard__header-chevron {
   transition-duration: 400ms;
 }
 
 /* -------------------------- ExpansionCard Content ------------------------- */
+
+/**
+ * "Animating" content-visibility does not work in Safari. We can't leave it to the
+ * browser to toggle it, because we need it to be `visible` for the duration of
+ * the close animation. We also can't set it to `visible` all the time, because
+ * that breaks text fragments in Chrome and makes content available to text selection.
+*/
+.aksel-expansioncard[data-animate="true"]::details-content {
+  content-visibility: visible;
+}
+
 .aksel-expansioncard__content {
   border-end-end-radius: var(--__axc-expansioncard-border-radius);
   border-end-start-radius: var(--__axc-expansioncard-border-radius);
@@ -151,25 +179,55 @@
   padding-block: 0;
   display: grid;
   grid-template-rows: 0fr;
-  visibility: hidden;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-property: visibility, padding-block, grid-template-rows;
-  overflow: hidden;
 
+  .aksel-expansioncard[data-animate="true"] & {
+    transition-duration: 1000ms; /* Must be synced with `setTimeout` in ExpansionCardRoot! */
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    transition-property: visibility, padding, grid-template-rows;
+  }
+
+  .aksel-expansioncard[open] > &,
   &[data-open="true"] {
     grid-template-rows: 1fr;
-    visibility: visible;
     padding-block: var(--__axc-expansioncard-padding-block);
-
-    & .aksel-expansioncard__content-inner {
-      opacity: 1;
-    }
   }
 }
 
 .aksel-expansioncard__content-inner {
   min-height: 0;
   opacity: 0;
-  transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 1000ms cubic-bezier(0.2, 0, 0, 1);
+
+  .aksel-expansioncard[open] &,
+  .aksel-expansioncard__content[data-open="true"] & {
+    opacity: 1;
+  }
+}
+
+details.aksel-expansioncard .aksel-expansioncard__content-inner {
+  /* When using a fragment link to content within the card when the card is closed, the browser will
+     scroll past the visible part of the component, and the card will expand above the viewport (out of view).
+     Adding a scroll-margin helps, but only if the target is quite high up. */
+  scroll-margin-top: 1rem;
+  /*
+  TODO: PROBLEM: Når man har ankerlenke til inni kortet, vill ikke innholdet ende opp der nettleseren scroller, pga. animasjonen.
+  Siden scrollen havner nedenfor kortet siden det ikke har åpnet seg ennå, vil kortet ekspandere oppover i stedet for nedover.
+  Dette er jo vanligvis bra for å hindre at innholdet hopper rundt når ting ovenfor viewport endrer høyde, men gir problemer her.
+  Mulige løsninger:
+  - Animasjon kun når kortet åpnes med open-prop eller av brukeren.
+      Usikker på hvor lett det er å vite om det er brukeren som åpner, men bør holde å lytte på click- og keyboard-events.
+      Vi _kan_ lytte på navigate-event og sjekke om det er hashChange, men det blir jo veldig styrete.
+  */
+}
+
+.aksel-expansioncard:not(details) {
+  .aksel-expansioncard__content {
+    &[data-open="false"] {
+      visibility: hidden;
+    }
+
+    &[data-open="true"] {
+      visibility: visible;
+    }
+  }
 }
