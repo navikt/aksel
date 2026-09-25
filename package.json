@@ -24,7 +24,7 @@
     "changelog": "yarn update:repo-changelog",
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog && yarn",
-    "release": "yarn boot && yarn docgen:meta && changeset publish && yarn script:git-release",
+    "release": "yarn boot && yarn docgen:meta && node tooling/scripts/publish-npm.mts && yarn script:git-release",
     "postinstall": "husky"
   },
   "workspaces": [
