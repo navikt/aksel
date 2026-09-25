@@ -1,5 +1,13 @@
 # @navikt/ds-react
 
+## 8.17.2
+
+### Patch Changes
+
+- Updated dependencies [[`9673de4`](https://github.com/navikt/aksel/commit/9673de4c264479dd8ca04897003532595acad255)]:
+  - @navikt/aksel-icons@8.17.2
+  - @navikt/ds-tokens@8.17.2
+
 ## 8.17.1
 
 ### Patch Changes

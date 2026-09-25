@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.17.2
+
+### @navikt/aksel-icons
+
+- Package: Fixed regression where package was published without dist-files ([`9673de4`](https://github.com/navikt/aksel/commit/9673de4c264479dd8ca04897003532595acad255))
+
 ## 8.17.1
 
 ### @navikt/ds-react
@@ -3062,7 +3068,7 @@
 
 - - Alert: La til `closeButton`-prop ([#2079](https://github.com/navikt/aksel/pull/2079))
 
-* * Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
+* - Button: Fikset outline-bug i tertiary-variant ved `:active`-state ([#2079](https://github.com/navikt/aksel/pull/2079))
 
 ### @navikt/ds-react
 
