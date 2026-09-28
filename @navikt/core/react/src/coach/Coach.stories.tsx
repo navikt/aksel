@@ -7,7 +7,7 @@ import { HStack, VStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import { BodyShort, Heading } from "../typography";
 import { en } from "../utils/i18n/locales";
-import { Coach, type CoachDot } from "./root/CoachRoot";
+import { Coach, type CoachMark } from "./root/CoachRoot";
 
 export default {
   title: "ds-react/Coach",
@@ -268,12 +268,12 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
   );
 };
 
-export const Dot: StoryObj<typeof CoachDot> = {
+export const Mark: StoryObj<typeof CoachMark> = {
   render: (props) => {
     const { durationInMs, animation } = props;
     return (
       <VStack padding="space-40" gap="space-64">
-        <Coach.Dot
+        <Coach.Mark
           animation={animation}
           durationInMs={durationInMs}
           onClick={() => console.log("Coach dot clicked")}
@@ -281,10 +281,10 @@ export const Dot: StoryObj<typeof CoachDot> = {
           <Button onClick={() => console.log("Button clicked")}>
             {`Animation ${animation.toLocaleLowerCase()}`}
           </Button>
-        </Coach.Dot>
+        </Coach.Mark>
         <HStack gap="space-16" align="center">
           <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
-          <Coach.Dot
+          <Coach.Mark
             animation={animation}
             durationInMs={durationInMs}
             data-color="success"

@@ -10,7 +10,7 @@ export {
   CoachCloseTrigger,
   CoachNextTrigger,
   CoachPreviousTrigger,
-  CoachDot,
+  CoachMark,
 } from "./root/CoachRoot";
 export type {
   CoachStepType,
@@ -24,5 +24,5 @@ export type {
   CoachCloseTriggerProps,
   CoachPreviousTriggerProps,
   CoachNextTriggerProps,
-  CoachDotProps,
+  CoachMarkProps,
 } from "./root/CoachRoot";

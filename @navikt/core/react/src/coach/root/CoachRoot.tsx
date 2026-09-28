@@ -14,9 +14,9 @@ import {
   CoachDescription,
   type CoachDescriptionProps,
 } from "../description/CoachDescription";
-import { CoachDot, type CoachDotProps } from "../dot/CoachDot";
 import { CoachFooter, type CoachFooterProps } from "../footer/CoachFooter";
 import { CoachImage, type CoachImageProps } from "../image/CoachImage";
+import { CoachMark, type CoachMarkProps } from "../mark/CoachMark";
 import {
   CoachProgress,
   type CoachProgressProps,
@@ -331,7 +331,7 @@ const Coach = Object.assign(CoachRoot, {
   PreviousTrigger: CoachPreviousTrigger,
   Footer: CoachFooter,
   Image: CoachImage,
-  Dot: CoachDot,
+  Mark: CoachMark,
 });
 
 export {
@@ -345,7 +345,7 @@ export {
   CoachPreviousTrigger,
   CoachFooter,
   CoachImage,
-  CoachDot,
+  CoachMark,
 };
 
 export type {
@@ -360,5 +360,5 @@ export type {
   CoachPreviousTriggerProps,
   CoachFooterProps,
   CoachImageProps,
-  CoachDotProps,
+  CoachMarkProps,
 };

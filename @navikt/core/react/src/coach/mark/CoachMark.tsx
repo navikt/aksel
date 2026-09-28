@@ -2,10 +2,10 @@ import React, { forwardRef } from "react";
 import type { AkselColor } from "../../types";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 
-interface CoachDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CoachMarkProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Element the coach dot is anchored to.
-   * Leave empty to render the dot standalone.
+   * Element the coach mark is anchored to.
+   * Leave empty to render the mark standalone.
    */
   children?: React.ReactElement;
   /**
@@ -23,15 +23,15 @@ interface CoachDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * @see 🏷️ {@link CoachDotProps}
+ * @see 🏷️ {@link CoachMarkProps}
  * @example
  * ```jsx
- *    <Coach.Dot>
+ *    <Coach.Mark>
  *      <Button>Next step</Button>
- *    </Coach.Dot>
+ *    </Coach.Mark>
  * ```
  */
-const CoachDot = forwardRef<HTMLButtonElement, CoachDotProps>(
+const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
   (
     {
       children,
@@ -51,7 +51,7 @@ const CoachDot = forwardRef<HTMLButtonElement, CoachDotProps>(
       event.stopPropagation();
     };
 
-    const Dot = (
+    const Mark = (
       <button
         {...restProps}
         ref={forwardedRef}
@@ -59,35 +59,35 @@ const CoachDot = forwardRef<HTMLButtonElement, CoachDotProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
         aria-hidden={ariaHidden}
-        className={cl("aksel-coach__dot-container", className)}
+        className={cl("aksel-coach__mark-container", className)}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div
-          className="aksel-coach__dot-pulse-outer"
+          className="aksel-coach__mark-pulse-outer"
           data-animation={animation}
           style={{ animationDuration: `${durationInMs}ms` }}
         />
         <div
-          className="aksel-coach__dot-pulse-inner"
+          className="aksel-coach__mark-pulse-inner"
           data-animation={animation}
           style={{ animationDuration: `${durationInMs}ms` }}
         />
-        <div className="aksel-coach__dot" />
+        <div className="aksel-coach__mark" />
       </button>
     );
 
     if (!children) {
-      return Dot;
+      return Mark;
     }
 
     return (
-      <div className="aksel-coach__dot-anchor">
+      <div className="aksel-coach__mark-anchor">
         {children}
-        {Dot}
+        {Mark}
       </div>
     );
   },
 );
 
-export { CoachDot };
-export type { CoachDotProps };
+export { CoachMark };
+export type { CoachMarkProps };
