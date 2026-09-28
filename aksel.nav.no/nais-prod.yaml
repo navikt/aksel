@@ -13,10 +13,6 @@ spec:
   ingresses:
     - "https://aksel.nav.no"
     - "https://design.nav.no"
-  observability:
-    autoInstrumentation:
-      enabled: true
-      runtime: nodejs
   replicas:
     disableAutoScaling: true
     min: 1
