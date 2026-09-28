@@ -12,26 +12,28 @@ export default function NotFound() {
     <Page data-aksel-template="404-v3" footer={<Footer />} className="vk-error">
       <UmamiNotFoundPageLog />
       <Header />
-      <PageBlock as="main" width="xl" gutters>
-        <Box paddingBlock="space-80 space-64">
+      <PageBlock as="main" width="text" gutters>
+        <Box paddingBlock="space-64 space-80">
           <VStack gap="space-64">
             <VStack gap="space-48" align="start">
-              <VStack gap="space-16">
+              <VStack gap={{ xs: "space-12", md: "space-16" }}>
                 <Heading level="1" size="large" data-aksel-heading-color>
                   Beklager, vi fant ikke siden
                 </Heading>
-                <BodyShort>
-                  Denne siden kan være slettet eller flyttet, eller det er en
-                  feil i lenken.
-                </BodyShort>
-                <WebsiteList>
-                  <WebsiteListItem icon>
-                    Bruk søket eller menyen
-                  </WebsiteListItem>
-                  <WebsiteListItem icon>
-                    <Link href="/">Gå til forsiden</Link>
-                  </WebsiteListItem>
-                </WebsiteList>
+                <VStack gap="space-12">
+                  <BodyShort>
+                    Denne siden kan være slettet eller flyttet, eller det er en
+                    feil i lenken.
+                  </BodyShort>
+                  <WebsiteList>
+                    <WebsiteListItem icon>
+                      Bruk søket eller menyen
+                    </WebsiteListItem>
+                    <WebsiteListItem icon>
+                      <Link href="/">Gå til forsiden</Link>
+                    </WebsiteListItem>
+                  </WebsiteList>
+                </VStack>
               </VStack>
               <GitHubIssueLink
                 labels="bug 🐛"
