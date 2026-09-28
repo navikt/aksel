@@ -1,4 +1,4 @@
-import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
@@ -268,45 +268,20 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
   );
 };
 
-export const Mark: StoryObj<typeof CoachMark> = {
-  render: (props) => {
-    const { durationInMs, animation } = props;
-    return (
-      <VStack padding="space-40" gap="space-64">
+export const Mark: StoryFn<typeof CoachMark> = () => {
+  return (
+    <VStack padding="space-40" gap="space-64">
+      <Coach.Mark onClick={() => console.log("Coach dot clicked")}>
+        <Button onClick={() => console.log("Button clicked")}>Button</Button>
+      </Coach.Mark>
+      <HStack gap="space-16" align="center">
         <Coach.Mark
-          animation={animation}
-          durationInMs={durationInMs}
+          data-color="success"
           onClick={() => console.log("Coach dot clicked")}
-        >
-          <Button onClick={() => console.log("Button clicked")}>
-            {`Animation ${animation.toLocaleLowerCase()}`}
-          </Button>
-        </Coach.Mark>
-        <HStack gap="space-16" align="center">
-          <BodyShort>{`Animation ${animation.toLocaleLowerCase()}:`}</BodyShort>
-          <Coach.Mark
-            animation={animation}
-            durationInMs={durationInMs}
-            data-color="success"
-            onClick={() => console.log("Coach dot clicked")}
-          />
-        </HStack>
-      </VStack>
-    );
-  },
-  args: {
-    durationInMs: 4000,
-    animation: "ONE",
-  },
-  argTypes: {
-    durationInMs: {
-      control: { type: "number" },
-    },
-    animation: {
-      control: { type: "select" },
-      options: ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT"],
-    },
-  },
+        />
+      </HStack>
+    </VStack>
+  );
 };
 
 export const ProgressTranslations: StoryFn<typeof Coach> = () => {

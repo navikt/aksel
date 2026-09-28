@@ -15,11 +15,6 @@ interface CoachMarkProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
    * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
    */
   "data-color"?: AkselColor;
-
-  // TODO:C Remove - test
-  animation: string;
-  // TODO:C Test
-  durationInMs: number;
 }
 
 /**
@@ -37,8 +32,6 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
       children,
       onClick,
       className,
-      animation,
-      durationInMs,
       "data-color": color = "danger",
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
@@ -62,16 +55,7 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
         className={cl("aksel-coach__mark-container", className)}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
-        <div
-          className="aksel-coach__mark-pulse-outer"
-          data-animation={animation}
-          style={{ animationDuration: `${durationInMs}ms` }}
-        />
-        <div
-          className="aksel-coach__mark-pulse-inner"
-          data-animation={animation}
-          style={{ animationDuration: `${durationInMs}ms` }}
-        />
+        <div className="aksel-coach__mark-pulse" />
         <div className="aksel-coach__mark" />
       </button>
     );

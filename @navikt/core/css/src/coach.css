@@ -63,17 +63,13 @@
 
 .aksel-coach__mark-container {
   --__axc-coach__mark-size: var(--ax-space-16);
-  --__axc-coach__mark-opacity-inner: 0.5;
-  --__axc-coach__mark-opacity-outer: 0.4;
   --__axc-coach__mark-color: var(--ax-bg-strong);
-  --__axc-coach__mark-scale-inner: 1.4;
-  --__axc-coach__mark-scale-outer: 2;
 
   all: unset;
   cursor: pointer;
   position: relative;
-  width: calc(var(--__axc-coach__mark-size) * var(--__axc-coach__mark-scale-outer));
-  height: calc(var(--__axc-coach__mark-size) * var(--__axc-coach__mark-scale-outer));
+  width: calc(var(--__axc-coach__mark-size) * 2);
+  height: calc(var(--__axc-coach__mark-size) * 2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,379 +87,30 @@
   height: var(--__axc-coach__mark-size);
   background-color: var(--__axc-coach__mark-color);
   border-radius: var(--ax-radius-full);
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
 }
 
-.aksel-coach__mark-pulse-inner {
+.aksel-coach__mark-pulse {
   position: absolute;
   width: var(--__axc-coach__mark-size);
   height: var(--__axc-coach__mark-size);
   background-color: var(--__axc-coach__mark-color);
   border-radius: var(--ax-radius-full);
-  opacity: var(--__axc-coach__mark-opacity-inner);
+  animation: pulse 3s infinite;
 
-  &[data-animation="ONE"] {
-    animation-name: pulse-inner-ONE;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="TWO"] {
-    animation-name: pulse-inner-TWO;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="FOUR"] {
-    animation-name: pulse-inner-FOUR;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="FIVE"] {
-    animation-name: pulse-inner-FIVE;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="SIX"] {
-    animation-name: pulse-inner-SIX;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="SEVEN"] {
-    animation-name: pulse-inner-SEVEN;
-    animation-iteration-count: infinite;
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
   }
 }
 
-.aksel-coach__mark-pulse-outer {
-  position: absolute;
-  width: var(--__axc-coach__mark-size);
-  height: var(--__axc-coach__mark-size);
-  background-color: var(--__axc-coach__mark-color);
-  border-radius: var(--ax-radius-full);
-  opacity: var(--__axc-coach__mark-opacity-outer);
-
-  &[data-animation="ONE"] {
-    animation-name: pulse-outer-ONE;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="TWO"] {
-    animation-name: pulse-outer-TWO;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="THREE"] {
-    animation-name: pulse-outer-THREE;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="FOUR"] {
-    animation-name: pulse-outer-FOUR;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="FIVE"] {
-    animation-name: pulse-outer-FIVE;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="SIX"] {
-    animation-name: pulse-outer-SIX;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="SEVEN"] {
-    animation-name: pulse-outer-SEVEN;
-    animation-iteration-count: infinite;
-  }
-
-  &[data-animation="EIGHT"] {
-    animation-name: pulse-outer-EIGHT;
-    animation-iteration-count: infinite;
-  }
-}
-
-@keyframes pulse-inner-ONE {
-  0% {
-    transform: scale(0);
-  }
-
-  25% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-  }
-
-  50% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-  }
-
-  75% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-  }
-
-  100% {
-    transform: scale(0);
-  }
-}
-
-@keyframes pulse-outer-ONE {
-  0% {
-    transform: scale(0);
-  }
-
-  25% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-  }
-
-  50% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-  }
-
-  75% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-  }
-
-  100% {
-    transform: scale(0);
-  }
-}
-
-@keyframes pulse-inner-TWO {
-  0% {
-    transform: scale(0);
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  25% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  50% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  75% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  100% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-TWO {
-  0% {
-    transform: scale(0);
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  25% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  50% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  75% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-THREE {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-inner-FOUR {
-  0% {
-    transform: scale(0);
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  20% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  40% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  60% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-inner);
-  }
-
-  80% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-FOUR {
-  0% {
-    transform: scale(0);
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  20% {
-    transform: scale(var(--__axc-coach__mark-scale-inner));
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  40% {
-    transform: scale(var(--__axc-coach__mark-scale-outer));
-    opacity: var(--__axc-coach__mark-opacity-outer);
-  }
-
-  60% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-
-  80% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-inner-FIVE {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.6);
-    opacity: 0.5;
-  }
-
-  75% {
-    transform: scale(1.6);
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-FIVE {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(2);
-    opacity: 0.5;
-  }
-
-  75% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-inner-SIX {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: scale(1.9);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-SIX {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-inner-SEVEN {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-SEVEN {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-outer-EIGHT {
+@keyframes pulse {
   0% {
     transform: scale(1);
     opacity: 1;
