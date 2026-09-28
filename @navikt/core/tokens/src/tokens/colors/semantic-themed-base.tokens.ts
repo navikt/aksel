@@ -17,6 +17,9 @@ import type { AkselColorRole } from "../../../types";
  *   --ax-bg-moderate: var(--ax-bg-success-moderate);
  * }
  * ```
+ *
+ *
+ * Source for all our color generation: https://www.figma.com/design/NGULm4ljBe9o5xKbl5pJqD/Nye-farger?node-id=785-1106&p=f&t=sJq3Y4e1qfUNKkcI-0
  */
 export function semanticThemedBaseTokens(role: AkselColorRole) {
   return {
