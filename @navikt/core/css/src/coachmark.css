@@ -32,12 +32,17 @@
   padding-block: var(--__axc-coachmark__footer-p-b);
 }
 
-.aksel-coachmark__image {
-  width: var(--__axc-coachmark__content-width);
+.aksel-coachmark__image-container {
+  overflow: hidden;
+  grid-area: image;
+  position: relative;
+  padding-block-end: var(--ax-space-8);
 
-  > * {
+  & :is(img, picture) {
+    display: block;
     object-fit: cover;
-    width: 100%;
+    max-width: 100%;
+    height: 100%;
   }
 }
 
