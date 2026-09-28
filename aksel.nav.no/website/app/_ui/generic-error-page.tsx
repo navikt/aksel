@@ -15,7 +15,14 @@ export default function GenericErrorPage() {
   }, []);
 
   return (
-    <Page.Block as="main" width="xl" gutters data-aksel-template="500-v3">
+    <Page.Block
+      as="main"
+      id="hovedinnhold"
+      tabIndex={-1}
+      width="xl"
+      gutters
+      data-aksel-template="500-v3"
+    >
       <Box paddingBlock="space-80 space-32">
         <VStack gap="space-64">
           <VStack gap="space-48" align="start">
