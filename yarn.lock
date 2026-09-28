@@ -10790,7 +10790,7 @@ __metadata:
     tsdown: "npm:^0.22.3"
     typescript: "npm:6.0.3"
     vitest: "npm:4.1.11"
-    zod: "npm:^4.4.3"
+    zod: "npm:^4.6.5"
   languageName: unknown
   linkType: soft
 
@@ -26637,7 +26637,7 @@ __metadata:
     typescript: "npm:6.0.3"
     typescript-cookie: "npm:^1.0.6"
     vitest: "npm:4.1.11"
-    zod: "npm:^4.4.3"
+    zod: "npm:^4.6.5"
   languageName: unknown
   linkType: soft
 
@@ -27346,6 +27346,13 @@ __metadata:
   version: 4.6.1
   resolution: "zod@npm:4.6.1"
   checksum: 10/061c51d941fea3ec43055d908e6587bdf42556228b5ccb40227f5eca3050c6c7d987f7e7de8ff3720ecf764448af323cc876cf64501f8c6fb681199273744674
+  languageName: node
+  linkType: hard
+
+"zod@npm:^4.6.5":
+  version: 4.6.5
+  resolution: "zod@npm:4.6.5"
+  checksum: 10/db004952e4dc6eab38b70f0cdef9251a65da84f5d08c5a0ef85e2590cfa9c477544ce734161ff5c05f89a15f0967137607a7feb16716195e04965f030db47213
   languageName: node
   linkType: hard
 
