@@ -3,77 +3,77 @@ import type { StyleDictionaryTokenConfig } from "../../../tokens.util";
 export const brandBeigeSemanticTokenConfig = {
   bg: {
     "brand-beige-soft": {
-      value: "{ax.brand-beige.100.value}",
+      value: "{ax.brand-beige.100}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En svak bakgrunnsfarge som kun brukes til dekor. Dekker ingen kontrastkrav.",
     },
     "brand-beige-softA": {
-      value: "{ax.brand-beige.100A.value}",
+      value: "{ax.brand-beige.100A}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En svak bakgrunnsfarge som kun brukes til dekor. Dekker ingen kontrastkrav. Er delvis gjennomsiktig.",
     },
     "brand-beige-moderate": {
-      value: "{ax.brand-beige.200.value}",
+      value: "{ax.brand-beige.200}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til dekor. Om den brukes på meningsbærende elementer må den kombineres med en godkjent border.",
     },
     "brand-beige-moderateA": {
-      value: "{ax.brand-beige.200A.value}",
+      value: "{ax.brand-beige.200A}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til dekor. Om den brukes på meningsbærende elementer må den kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-beige-moderate-hover": {
-      value: "{ax.brand-beige.300.value}",
+      value: "{ax.brand-beige.300}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til hover-state på meningsbærende elementer. Må kombineres med en godkjent border.",
     },
     "brand-beige-moderate-hoverA": {
-      value: "{ax.brand-beige.300A.value}",
+      value: "{ax.brand-beige.300A}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til hover-state på meningsbærende elementer. Må kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-beige-moderate-pressed": {
-      value: "{ax.brand-beige.400.value}",
+      value: "{ax.brand-beige.400}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til active/selected-state på meningsbærende elementer. Må kombineres med en godkjent border.",
     },
     "brand-beige-moderate-pressedA": {
-      value: "{ax.brand-beige.400A.value}",
+      value: "{ax.brand-beige.400A}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til active/selected-state på meningsbærende elementer. Må kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-beige-strong": {
-      value: "{ax.brand-beige.600.value}",
+      value: "{ax.brand-beige.600}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En sterk bakgrunnsfarge som brukes på meningsbærende elementer.",
     },
     "brand-beige-strong-hover": {
-      value: "{ax.brand-beige.700.value}",
+      value: "{ax.brand-beige.700}",
       type: "color",
       group: "background.brand-beige",
       comment:
         "En sterk bakgrunnsfarge som brukes til hover-state på meningsbærende elementer.",
     },
     "brand-beige-strong-pressed": {
-      value: "{ax.brand-beige.800.value}",
+      value: "{ax.brand-beige.800}",
       type: "color",
       group: "background.brand-beige",
       comment:
@@ -82,28 +82,28 @@ export const brandBeigeSemanticTokenConfig = {
   },
   text: {
     "brand-beige": {
-      value: "{ax.brand-beige.1000.value}",
+      value: "{ax.brand-beige.1000}",
       type: "color",
       group: "text.brand-beige",
       comment:
         "Sterk farge for tekst og ikoner for rollen brand beige. Godkjent på alle bakgrunner unntatt strong.",
     },
     "brand-beige-subtle": {
-      value: "{ax.brand-beige.800.value}",
+      value: "{ax.brand-beige.800}",
       type: "color",
       group: "text.brand-beige",
       comment:
         "Standard farge for tekst og ikoner med rollen brand beige. Godkjent på alle bakgrunner unntatt strong.",
     },
     "brand-beige-decoration": {
-      value: "{ax.brand-beige.600.value}",
+      value: "{ax.brand-beige.600}",
       type: "color",
       group: "text.brand-beige",
       comment:
         "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "brand-beige-contrast": {
-      value: "{ax.neutral.000.value}",
+      value: "{ax.neutral.000}",
       type: "color",
       group: "text.brand-beige",
       comment:
@@ -112,27 +112,27 @@ export const brandBeigeSemanticTokenConfig = {
   },
   border: {
     "brand-beige": {
-      value: "{ax.brand-beige.600.value}",
+      value: "{ax.brand-beige.600}",
       type: "color",
       group: "border.brand-beige",
       comment: "Standard farge for border.",
     },
     "brand-beige-subtle": {
-      value: "{ax.brand-beige.400.value}",
+      value: "{ax.brand-beige.400}",
       type: "color",
       group: "border.brand-beige",
       comment:
         "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "brand-beige-subtleA": {
-      value: "{ax.brand-beige.400A.value}",
+      value: "{ax.brand-beige.400A}",
       type: "color",
       group: "border.brand-beige",
       comment:
         "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
     },
     "brand-beige-strong": {
-      value: "{ax.brand-beige.700.value}",
+      value: "{ax.brand-beige.700}",
       type: "color",
       group: "border.brand-beige",
       comment:
