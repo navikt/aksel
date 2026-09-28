@@ -48,7 +48,7 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Deploy to prod-gcp
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@v3
         env:
           RESOURCE: apps/mcp-server/.nais/app.yaml
           CLUSTER: prod-gcp
