@@ -2,9 +2,9 @@ import React, { forwardRef } from "react";
 import type { AkselColor } from "../../types";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 
-interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CoachDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Element the coachmark dot is anchored to.
+   * Element the coach dot is anchored to.
    * Leave empty to render the dot standalone.
    */
   children?: React.ReactElement;
@@ -23,15 +23,15 @@ interface CoachmarkDotProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 }
 
 /**
- * @see 🏷️ {@link CoachmarkDotProps}
+ * @see 🏷️ {@link CoachDotProps}
  * @example
  * ```jsx
- *    <Coachmark.Dot>
+ *    <Coach.Dot>
  *      <Button>Next step</Button>
- *    </Coachmark.Dot>
+ *    </Coach.Dot>
  * ```
  */
-const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
+const CoachDot = forwardRef<HTMLButtonElement, CoachDotProps>(
   (
     {
       children,
@@ -59,20 +59,20 @@ const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
         aria-hidden={ariaHidden}
-        className={cl("aksel-coachmark__dot-container", className)}
+        className={cl("aksel-coach__dot-container", className)}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div
-          className="aksel-coachmark__dot-pulse-outer"
+          className="aksel-coach__dot-pulse-outer"
           data-animation={animation}
           style={{ animationDuration: `${durationInMs}ms` }}
         />
         <div
-          className="aksel-coachmark__dot-pulse-inner"
+          className="aksel-coach__dot-pulse-inner"
           data-animation={animation}
           style={{ animationDuration: `${durationInMs}ms` }}
         />
-        <div className="aksel-coachmark__dot" />
+        <div className="aksel-coach__dot" />
       </button>
     );
 
@@ -81,7 +81,7 @@ const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
     }
 
     return (
-      <div className="aksel-coachmark__dot-anchor">
+      <div className="aksel-coach__dot-anchor">
         {children}
         {Dot}
       </div>
@@ -89,5 +89,5 @@ const CoachmarkDot = forwardRef<HTMLButtonElement, CoachmarkDotProps>(
   },
 );
 
-export { CoachmarkDot };
-export type { CoachmarkDotProps };
+export { CoachDot };
+export type { CoachDotProps };

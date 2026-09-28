@@ -1,26 +1,26 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../utils/components/slot/Slot";
 import { composeEventHandlers } from "../../utils/helpers";
-import { useCoachmarkContext } from "../root/Coachmark.context";
+import { useCoachContext } from "../root/Coach.context";
 
-interface CoachmarkPreviousTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CoachPreviousTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
 }
 
 /**
- * @see 🏷️ {@link CoachmarkPreviousTriggerProps}
+ * @see 🏷️ {@link CoachPreviousTriggerProps}
  * @example
  * ```jsx
- *    <Coachmark.PreviousTrigger>
+ *    <Coach.PreviousTrigger>
  *      <Button>Previous step</Button>
- *    </Coachmark.PreviousTrigger>
+ *    </Coach.PreviousTrigger>
  * ```
  */
-const CoachmarkPreviousTrigger = forwardRef<
+const CoachPreviousTrigger = forwardRef<
   HTMLButtonElement,
-  CoachmarkPreviousTriggerProps
+  CoachPreviousTriggerProps
 >(({ children, onClick, ...restProps }, forwardedRef) => {
-  const { goToPreviousStep } = useCoachmarkContext();
+  const { goToPreviousStep } = useCoachContext();
 
   return (
     <Slot
@@ -34,5 +34,5 @@ const CoachmarkPreviousTrigger = forwardRef<
   );
 });
 
-export { CoachmarkPreviousTrigger };
-export type { CoachmarkPreviousTriggerProps };
+export { CoachPreviousTrigger };
+export type { CoachPreviousTriggerProps };

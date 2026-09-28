@@ -8,53 +8,41 @@ import { HStack } from "../../primitives/stack";
 import { useClientLayoutEffect } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
-import { CoachmarkBackdrop } from "../backdrop/CoachmarkBackdrop";
+import { CoachBackdrop } from "../backdrop/CoachBackdrop";
+import { CoachContent, type CoachContentProps } from "../content/CoachContent";
 import {
-  CoachmarkContent,
-  type CoachmarkContentProps,
-} from "../content/CoachmarkContent";
+  CoachDescription,
+  type CoachDescriptionProps,
+} from "../description/CoachDescription";
+import { CoachDot, type CoachDotProps } from "../dot/CoachDot";
+import { CoachFooter, type CoachFooterProps } from "../footer/CoachFooter";
+import { CoachImage, type CoachImageProps } from "../image/CoachImage";
 import {
-  CoachmarkDescription,
-  type CoachmarkDescriptionProps,
-} from "../description/CoachmarkDescription";
-import { CoachmarkDot, type CoachmarkDotProps } from "../dot/CoachmarkDot";
+  CoachProgress,
+  type CoachProgressProps,
+} from "../progress/CoachProgress";
+import { CoachTitle, type CoachTitleProps } from "../title/CoachTitle";
 import {
-  CoachmarkFooter,
-  type CoachmarkFooterProps,
-} from "../footer/CoachmarkFooter";
+  CoachCloseTrigger,
+  type CoachCloseTriggerProps,
+} from "../trigger/CoachCloseTrigger";
 import {
-  CoachmarkImage,
-  type CoachmarkImageProps,
-} from "../image/CoachmarkImage";
+  CoachNextTrigger,
+  type CoachNextTriggerProps,
+} from "../trigger/CoachNextTrigger";
 import {
-  CoachmarkProgress,
-  type CoachmarkProgressProps,
-} from "../progress/CoachmarkProgress";
-import {
-  CoachmarkTitle,
-  type CoachmarkTitleProps,
-} from "../title/CoachmarkTitle";
-import {
-  CoachmarkCloseTrigger,
-  type CoachmarkCloseTriggerProps,
-} from "../trigger/CoachmarkCloseTrigger";
-import {
-  CoachmarkNextTrigger,
-  type CoachmarkNextTriggerProps,
-} from "../trigger/CoachmarkNextTrigger";
-import {
-  CoachmarkPreviousTrigger,
-  type CoachmarkPreviousTriggerProps,
-} from "../trigger/CoachmarkPreviousTrigger";
-import { CoachmarkContextProvider } from "./Coachmark.context";
+  CoachPreviousTrigger,
+  type CoachPreviousTriggerProps,
+} from "../trigger/CoachPreviousTrigger";
+import { CoachContextProvider } from "./Coach.context";
 
-interface CoachmarkStepTypeBase {
+interface CoachStepTypeBase {
   /**
-   * Unique identifier for the coachmark step.
+   * Unique identifier for the coach step.
    */
   id: string;
   /**
-   * Content within the coachmark step.
+   * Content within the coach step.
    */
   content: React.ReactNode;
   /**
@@ -63,41 +51,41 @@ interface CoachmarkStepTypeBase {
   allowToEndTour?: boolean;
 }
 
-type CoachmarkStepType = CoachmarkStepTypeBase &
+type CoachStepType = CoachStepTypeBase &
   (
     | {
         /**
-         * Dialog type coachmark step.
+         * Dialog type coach step.
          */
         type: "dialog";
       }
     | {
         /**
-         * Anchor type coachmark step.
+         * Anchor type coach step.
          */
         type: "anchor";
         /**
-         * Reference to the anchor element for the anchor type coachmark step.
+         * Reference to the anchor element for the anchor type coach step.
          */
         anchorRef: React.RefObject<HTMLElement | null>;
         /**
-         * Placement of the anchor type coachmark step relative to the anchor element.
+         * Placement of the anchor type coach step relative to the anchor element.
          */
         placement?: NonNullable<
           React.ComponentProps<typeof Popover>["placement"]
         >;
         /**
-         * Offset of the anchor type coachmark step relative to the anchor element.
+         * Offset of the anchor type coach step relative to the anchor element.
          */
         offset?: number;
       }
   );
 
-interface CoachmarkProps {
+interface CoachProps {
   /**
    * Steps shown in sequence.
    */
-  steps: readonly CoachmarkStepType[];
+  steps: readonly CoachStepType[];
   /**
    * Whether the tour is visible.
    */
@@ -120,7 +108,7 @@ interface CoachmarkProps {
    */
   endTour: () => void;
   /**
-   * Size of the coachmark.
+   * Size of the coach.
    * @default "medium"
    */
   size?: "small" | "medium";
@@ -131,7 +119,7 @@ interface CoachmarkProps {
  *
  * @example
  * ```tsx
- * <Coachmark
+ * <Coach
  *   steps={[
  *     { type: "dialog", content: "Welcome!" },
  *     { type: "anchor", anchorRef: buttonRef, content: "Start here." },
@@ -139,14 +127,14 @@ interface CoachmarkProps {
  * />
  * ```
  */
-const CoachmarkRoot = ({
+const CoachRoot = ({
   steps,
   tourStarted,
   currentStep: currentStepProp,
   defaultStep = 0,
   onStepChange,
   endTour,
-}: CoachmarkProps) => {
+}: CoachProps) => {
   const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
@@ -245,10 +233,10 @@ const CoachmarkRoot = ({
 
   const getInitialFocus = () => {
     const nextTriggers = document.querySelectorAll<HTMLElement>(
-      "[data-coachmark-next-trigger]",
+      "[data-coach-next-trigger]",
     );
     const closeTriggers = document.querySelectorAll<HTMLElement>(
-      "[data-coachmark-close-trigger]",
+      "[data-coach-close-trigger]",
     );
 
     return (
@@ -259,14 +247,14 @@ const CoachmarkRoot = ({
 
   const TopCloseButton = (
     <HStack width="full" justify="end" marginBlock="space-0 space-2">
-      <CoachmarkCloseTrigger data-coachmark-top-close-trigger>
+      <CoachCloseTrigger data-coach-top-close-trigger>
         <Button
           size="small"
           icon={<XMarkIcon title="Avslutt" />}
           variant="tertiary"
           data-color="neutral"
         />
-      </CoachmarkCloseTrigger>
+      </CoachCloseTrigger>
     </HStack>
   );
 
@@ -275,7 +263,7 @@ const CoachmarkRoot = ({
       return (
         <Dialog open={true}>
           <Dialog.Popup initialFocusTo={getInitialFocus} width="small">
-            <Dialog.Body className="aksel-coachmark__dialog-body">
+            <Dialog.Body className="aksel-coach__dialog-body">
               {currentStep.allowToEndTour && TopCloseButton}
               {currentStep.content}
             </Dialog.Body>
@@ -287,7 +275,7 @@ const CoachmarkRoot = ({
     if (currentStep?.type === "anchor" && anchorEl) {
       return (
         <Portal key={currentStep.id}>
-          <CoachmarkBackdrop anchorEl={anchorEl} />
+          <CoachBackdrop anchorEl={anchorEl} />
           <FocusGuards>
             <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
               <Popover
@@ -297,10 +285,10 @@ const CoachmarkRoot = ({
                 placement={currentStep.placement}
                 offset={currentStep.offset ?? 12}
                 role="dialog"
-                className="aksel-coachmark__popover"
+                className="aksel-coach__popover"
               >
                 <Popover.Content
-                  className="aksel-coachmark__popover_content"
+                  className="aksel-coach__popover_content"
                   data-top-close-button={currentStep.allowToEndTour ?? false}
                 >
                   {currentStep.allowToEndTour && TopCloseButton}
@@ -319,7 +307,7 @@ const CoachmarkRoot = ({
   if (!tourStarted) return null;
 
   return (
-    <CoachmarkContextProvider
+    <CoachContextProvider
       tourStarted={tourStarted}
       onClose={endTour}
       currentStep={currentStep}
@@ -329,48 +317,48 @@ const CoachmarkRoot = ({
       goToPreviousStep={goToPreviousStep}
     >
       {renderCurrentStep()}
-    </CoachmarkContextProvider>
+    </CoachContextProvider>
   );
 };
 
-const Coachmark = Object.assign(CoachmarkRoot, {
-  Content: CoachmarkContent,
-  Title: CoachmarkTitle,
-  Description: CoachmarkDescription,
-  CloseTrigger: CoachmarkCloseTrigger,
-  Progress: CoachmarkProgress,
-  NextTrigger: CoachmarkNextTrigger,
-  PreviousTrigger: CoachmarkPreviousTrigger,
-  Footer: CoachmarkFooter,
-  Image: CoachmarkImage,
-  Dot: CoachmarkDot,
+const Coach = Object.assign(CoachRoot, {
+  Content: CoachContent,
+  Title: CoachTitle,
+  Description: CoachDescription,
+  CloseTrigger: CoachCloseTrigger,
+  Progress: CoachProgress,
+  NextTrigger: CoachNextTrigger,
+  PreviousTrigger: CoachPreviousTrigger,
+  Footer: CoachFooter,
+  Image: CoachImage,
+  Dot: CoachDot,
 });
 
 export {
-  Coachmark,
-  CoachmarkContent,
-  CoachmarkTitle,
-  CoachmarkDescription,
-  CoachmarkCloseTrigger,
-  CoachmarkProgress,
-  CoachmarkNextTrigger,
-  CoachmarkPreviousTrigger,
-  CoachmarkFooter,
-  CoachmarkImage,
-  CoachmarkDot,
+  Coach,
+  CoachContent,
+  CoachTitle,
+  CoachDescription,
+  CoachCloseTrigger,
+  CoachProgress,
+  CoachNextTrigger,
+  CoachPreviousTrigger,
+  CoachFooter,
+  CoachImage,
+  CoachDot,
 };
 
 export type {
-  CoachmarkStepType,
-  CoachmarkProps,
-  CoachmarkContentProps,
-  CoachmarkTitleProps,
-  CoachmarkDescriptionProps,
-  CoachmarkCloseTriggerProps,
-  CoachmarkProgressProps,
-  CoachmarkNextTriggerProps,
-  CoachmarkPreviousTriggerProps,
-  CoachmarkFooterProps,
-  CoachmarkImageProps,
-  CoachmarkDotProps,
+  CoachStepType,
+  CoachProps,
+  CoachContentProps,
+  CoachTitleProps,
+  CoachDescriptionProps,
+  CoachCloseTriggerProps,
+  CoachProgressProps,
+  CoachNextTriggerProps,
+  CoachPreviousTriggerProps,
+  CoachFooterProps,
+  CoachImageProps,
+  CoachDotProps,
 };

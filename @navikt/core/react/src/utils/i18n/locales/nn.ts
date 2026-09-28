@@ -19,7 +19,7 @@ export default {
       labelSuffix: "slett",
     },
   },
-  CoachmarkProgress: {
+  CoachProgress: {
     currentStep: "{current} av {total}",
   },
   Combobox: {

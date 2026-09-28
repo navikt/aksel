@@ -149,14 +149,14 @@
         "default": "./cjs/chat/index.js"
       }
     },
-    "./Coachmark": {
+    "./Coach": {
       "import": {
-        "types": "./esm/coachmark/index.d.ts",
-        "default": "./esm/coachmark/index.js"
+        "types": "./esm/coach/index.d.ts",
+        "default": "./esm/coach/index.js"
       },
       "require": {
-        "types": "./cjs/coachmark/index.d.ts",
-        "default": "./cjs/coachmark/index.js"
+        "types": "./cjs/coach/index.d.ts",
+        "default": "./cjs/coach/index.js"
       }
     },
     "./Chips": {

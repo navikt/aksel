@@ -4,7 +4,7 @@ import { cl } from "../../utils/helpers";
 
 type ImageAspectRatio = "1/1" | "16/9" | "16/10" | "4/3" | (string & {});
 
-interface CoachmarkImageProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CoachImageProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * The aspect-ratio CSS property allows you to define the desired width-to-height ratio of an element's box.
@@ -14,21 +14,21 @@ interface CoachmarkImageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * @see 🏷️ {@link CoachmarkImageProps}
+ * @see 🏷️ {@link CoachImageProps}
  * @example
  * ```jsx
- *  <Coachmark.Image>
+ *  <Coach.Image>
  *    <img src="image.jpg" alt="Description" />
- *  </Coachmark.Image>
+ *  </Coach.Image>
  * ```
  */
-const CoachmarkImage = forwardRef<HTMLDivElement, CoachmarkImageProps>(
+const CoachImage = forwardRef<HTMLDivElement, CoachImageProps>(
   ({ className, children, style, aspectRatio, ...restProps }, forwardedRef) => {
     return (
       <Bleed asChild marginInline="space-16">
         <div
           ref={forwardedRef}
-          className={cl("aksel-coachmark__image-container", className)}
+          className={cl("aksel-coach__image-container", className)}
           style={{ aspectRatio, ...style }}
           {...restProps}
         >
@@ -39,5 +39,5 @@ const CoachmarkImage = forwardRef<HTMLDivElement, CoachmarkImageProps>(
   },
 );
 
-export { CoachmarkImage };
-export type { CoachmarkImageProps };
+export { CoachImage };
+export type { CoachImageProps };

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useClientLayoutEffect } from "../../utils-external";
 
-interface CoachmarkBackdropProps {
+interface CoachBackdropProps {
   anchorEl: Element;
 }
 
-const CoachmarkBackdrop = ({ anchorEl }: CoachmarkBackdropProps) => {
+const CoachBackdrop = ({ anchorEl }: CoachBackdropProps) => {
   const [rect, setRect] = useState<DOMRect | null>(null);
 
   useClientLayoutEffect(() => {
@@ -39,7 +39,7 @@ const CoachmarkBackdrop = ({ anchorEl }: CoachmarkBackdropProps) => {
   return (
     <div
       aria-hidden
-      className="aksel-coachmark__backdrop"
+      className="aksel-coach__backdrop"
       style={{
         position: "fixed",
         top: 0,
@@ -54,5 +54,5 @@ const CoachmarkBackdrop = ({ anchorEl }: CoachmarkBackdropProps) => {
   );
 };
 
-export { CoachmarkBackdrop };
-export type { CoachmarkBackdropProps };
+export { CoachBackdrop };
+export type { CoachBackdropProps };
