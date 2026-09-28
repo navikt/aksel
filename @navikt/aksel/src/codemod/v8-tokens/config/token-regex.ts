@@ -39,26 +39,30 @@ function getFrameworkRegexes({
   return regexes;
 }
 
+/**
+ * Lookarounds are zero-width, so the full match is only the token itself.
+ * Transforms replace the full match, so the regex must not consume surrounding characters.
+ */
 function getTokenRegex(
   variable: string,
   format: "css" | "scss" | "less" | "js",
 ) {
   switch (format) {
     case "css":
-      return new RegExp(`(\\s|^)?(${variable})(?=\\s|$|[^\\w-])`, "gm");
+      return new RegExp(`(?<![\\w-])(${variable})(?![\\w-])`, "gm");
     case "scss":
       return new RegExp(
-        `(\\s|^)?(\\${translateToken(variable, "scss")})(?=\\s|$|[^\\w-])`,
+        `(?<![\\w-])(\\${translateToken(variable, "scss")})(?![\\w-])`,
         "gm",
       );
     case "less":
       return new RegExp(
-        `(\\s|^)?(${translateToken(variable, "less")})(?=\\s|$|[^\\w-])`,
+        `(?<![\\w-])(${translateToken(variable, "less")})(?![\\w-])`,
         "gm",
       );
     case "js":
       return new RegExp(
-        `(\\s|^)?(${translateToken(variable, "js")})(?=\\s|$|[^\\w-])`,
+        `(?<![\\w$])(${translateToken(variable, "js")})(?![\\w$])`,
         "gm",
       );
   }
