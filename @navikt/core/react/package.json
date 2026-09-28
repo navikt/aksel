@@ -775,7 +775,7 @@
     "tsc-alias": "1.9.1",
     "tsx": "^4.23.1",
     "typescript": "6.0.3",
-    "vitest": "4.1.11"
+    "vitest": "5.0.1"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",
