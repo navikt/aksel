@@ -8,6 +8,7 @@ const Example = () => {
       <Badge count={5} aria-label="5 ulest" />
       <Badge count={999} aria-label="999 ulest" />
       <Badge count={10} maxCount={8} aria-label="10 ulest" />
+      <Badge count={200} maxCount={140} aria-label="200 ulest" />
     </HStack>
   );
 };
@@ -22,5 +23,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 4,
-  desc: "Prop `maxCount` lar deg sette en maksimal verdi som vises i badgen. Hvis `count` overstiger denne verdien, vises det som `maxCount+`.",
+  desc: "Prop `maxCount` endrer maksimal verdi som vises i badgen (standard er 99). Hvis `count` overstiger `maxCount`, vises det som `maxCount+`.",
 };

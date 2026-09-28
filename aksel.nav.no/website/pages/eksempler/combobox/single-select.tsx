@@ -8,19 +8,19 @@ const Example = () => {
 };
 
 const options = [
-  "ananas",
-  "banan",
-  "bringebær",
-  "drue",
-  "eple",
-  "grapefrukt",
-  "jordbær",
-  "kiwi",
-  "mandarin",
-  "mango",
-  "pære",
-  "pasjonsfrukt",
-  "vannmelon",
+  "Ananas",
+  "Banan",
+  "Bringebær",
+  "Drue",
+  "Eple",
+  "Grapefrukt",
+  "Jordbær",
+  "Kiwi",
+  "Mandarin",
+  "Mango",
+  "Pære",
+  "Pasjonsfrukt",
+  "Vannmelon",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -36,5 +36,4 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 0,
-  desc: "Ved Single Select velger brukeren kun ett valg fra nedtrekkslisten.",
 };

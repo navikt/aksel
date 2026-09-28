@@ -32,14 +32,48 @@ interface SearchPageT {
   overrideString?: string;
 }
 
-type SearchHitT = {
-  item: Omit<SearchPageT, "intro" | "ingress">;
-  description: string;
-  score?: number;
-  anchor?: string;
-};
-
 type SearchResultPageTypesT = keyof typeof globalSearchConfig;
 
-export { globalSearchConfig };
-export type { SearchHitT, SearchPageT, SearchResultPageTypesT };
+/* Sent to the client for every hit, keep it lean. */
+type SearchHitT = {
+  heading: string;
+  slug: string;
+  type: SearchResultPageTypesT;
+  description: string;
+  anchor?: string;
+  sectionHeading?: string;
+  statusTag?: string;
+  thumbnail?: string;
+};
+
+type SearchHitGroupT = {
+  type: SearchResultPageTypesT;
+  /* Hits before the per-type cap. */
+  total: number;
+  hits: SearchHitT[];
+};
+
+type GlobalSearchResultT = {
+  query: string;
+  result: {
+    totalHits: number;
+    topResults: SearchHitT[];
+    groupedHits: SearchHitGroupT[];
+  };
+};
+
+const GLOBAL_SEARCH_MIN_QUERY_LENGTH = 2;
+const GLOBAL_SEARCH_MAX_QUERY_LENGTH = 100;
+
+export {
+  GLOBAL_SEARCH_MAX_QUERY_LENGTH,
+  GLOBAL_SEARCH_MIN_QUERY_LENGTH,
+  globalSearchConfig,
+};
+export type {
+  GlobalSearchResultT,
+  SearchHitGroupT,
+  SearchHitT,
+  SearchPageT,
+  SearchResultPageTypesT,
+};

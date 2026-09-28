@@ -1,6 +1,7 @@
-import { createClient } from "next-sanity";
+import { createClient, defineQuery } from "next-sanity";
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
+import type { Redirect } from "@/app/_sanity/query-types";
 import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
@@ -18,6 +19,78 @@ const client = createClient({
   ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
   useCdn: true,
 });
+
+const REDIRECTS_QUERY = defineQuery(`
+  *[_type == 'redirect' && defined(source) && defined(destination)] {
+    _id,
+    source,
+    destination
+  }
+`);
+
+const REDIRECT_CACHE_TTL_MS = 60 * 60 * 1000;
+
+type RedirectEntry = Required<Pick<Redirect, "_id" | "source" | "destination">>;
+
+let redirectCache: Map<string, RedirectEntry> | null = null;
+let redirectCacheExpiresAt = 0;
+let redirectCacheRefresh: Promise<Map<string, RedirectEntry>> | null = null;
+
+function refreshRedirects() {
+  redirectCacheRefresh ??= client
+    .fetch<RedirectEntry[]>(
+      REDIRECTS_QUERY,
+      {},
+      { perspective: "published", useCdn: true },
+    )
+    .then((redirects) => {
+      redirectCache = new Map(
+        redirects.map((redirect) => [redirect.source, redirect]),
+      );
+      redirectCacheExpiresAt = Date.now() + REDIRECT_CACHE_TTL_MS;
+      return redirectCache;
+    })
+    .finally(() => {
+      redirectCacheRefresh = null;
+      console.info("[proxy] Finished refreshing redirects");
+    });
+
+  return redirectCacheRefresh;
+}
+
+/**
+ * Redirects are read on nearly every request, so we keep the full set in memory
+ * and serve stale entries while refreshing in the background.
+ */
+async function getRedirect(source: string) {
+  if (!redirectCache) {
+    return (await refreshRedirects()).get(source);
+  }
+
+  if (Date.now() > redirectCacheExpiresAt) {
+    after(async () =>
+      refreshRedirects().catch((error) => {
+        console.error("[proxy] Failed to refresh redirects:", error.message);
+      }),
+    );
+  }
+
+  return redirectCache.get(source);
+}
+
+/**
+ * Destinations come from Sanity, so treat them as untrusted input. Ensure
+ * relative values stay on our origin, since "//example.com" resolves off-origin.
+ */
+function resolveDestination(destination: string, origin: string) {
+  if (destination.startsWith("http://") || destination.startsWith("https://")) {
+    return new URL(destination);
+  }
+
+  const url = new URL(destination, origin);
+
+  return url.origin === origin ? url : null;
+}
 
 export async function proxy(req: NextRequest) {
   /*
@@ -56,37 +129,41 @@ export async function proxy(req: NextRequest) {
   }
 
   try {
-    /**
-     * TODO: Look into updating this using tag-based revalidation
-     */
-    const redirect = await client.fetch(
-      `
-  *[_type == 'redirect' && source == $source][0] {
-    _id,
-    destination,
-    redirects
-  }
-`,
-      { source: decodeURIComponent(req.nextUrl.pathname) },
-      { cache: "force-cache", next: { revalidate: 3600 } },
-    );
+    const lookup = decodeURIComponent(pathname);
+    const redirect = await getRedirect(lookup);
 
     if (redirect) {
-      /**
-       * TODO: Temp disabled due to revalidation issues causing excessive re-validations
-       */
-      /* const token = process.env.SANITY_WRITE;
-      if (token) {
-        client
-          .patch(redirect._id)
-          .set({ redirects: 1 + (redirect.redirects ?? 0) })
-          .commit();
-      } */
+      const destination = resolveDestination(
+        redirect.destination,
+        req.nextUrl.origin,
+      );
 
-      if (redirect.destination.startsWith("http")) {
-        return NextResponse.redirect(new URL(redirect.destination));
+      if (!destination) {
+        console.error("[proxy] Rejected off-origin redirect destination", {
+          _id: redirect._id,
+        });
+        return NextResponse.next();
       }
-      return NextResponse.redirect(new URL(redirect.destination, req.url));
+
+      const token = process.env.SANITY_WRITE;
+      if (token) {
+        after(async () => {
+          try {
+            await client
+              .patch(redirect._id)
+              .setIfMissing({ redirects: 0 })
+              .inc({ redirects: 1 })
+              .commit({ token });
+          } catch (error) {
+            console.error(
+              "[proxy] Failed to commit redirect count update:",
+              error,
+            );
+          }
+        });
+      }
+
+      return NextResponse.redirect(destination);
     }
 
     /* Check if the request is for a markdown version (.md extension) */
@@ -98,7 +175,8 @@ export async function proxy(req: NextRequest) {
     }
 
     return NextResponse.next();
-  } catch {
+  } catch (error) {
+    console.error("[proxy] redirect handling failed:", error);
     return NextResponse.next();
   }
 }

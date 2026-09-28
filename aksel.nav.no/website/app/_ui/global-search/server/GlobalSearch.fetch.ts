@@ -1,12 +1,16 @@
 import groupBy from "lodash/groupBy";
 import { cacheLife } from "next/cache";
+import { createHash } from "node:crypto";
 import "server-only";
 import { PAGE_ROUTES } from "@/app/(routes)/routing-config";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
 import type { SearchPageT } from "./GlobalSearch.config";
 
-async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
+async function fetchArticles(): Promise<{
+  articles: SearchPageT[];
+  version: string;
+}> {
   "use cache";
   cacheLife("hours");
 
@@ -18,7 +22,7 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
 
   if (!allArticles) {
     console.error("Failed to fetch search index");
-    return [];
+    return { articles: [], version: "empty" };
   }
 
   const sanitizedData = sanitizeSanityData(allArticles);
@@ -63,7 +67,12 @@ async function fetchArticles(): Promise<ReturnType<typeof sanitizeSanityData>> {
     }
   });
 
-  return sanitizedData;
+  return {
+    articles: sanitizedData,
+    version: createHash("sha1")
+      .update(JSON.stringify(sanitizedData))
+      .digest("hex"),
+  };
 }
 
 function sanitizeSanityData(_data: SearchPageT[]): SearchPageT[] {

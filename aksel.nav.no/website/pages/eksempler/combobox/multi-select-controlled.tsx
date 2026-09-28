@@ -4,9 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [value, setValue] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState(
-    initialSelectedOptions,
-  );
+  const [selectedOptions, setSelectedOptions] = useState(["Norge"]);
   const filteredOptions = useMemo(
     () => initialOptions.filter((option) => option.includes(value)),
     [value],
@@ -62,8 +60,6 @@ const initialOptions = [
   "Tyrkia",
 ];
 
-const initialSelectedOptions = ["Norge"];
-
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   variant: "static",
@@ -77,5 +73,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 5,
-  desc: "Du kan overstyre blant annet value, selectedOptions og filteredOptions.",
+  desc: "Du kan overstyre blant annet `value`, `selectedOptions` og `filteredOptions`.",
 };

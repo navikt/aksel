@@ -4,11 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Events } from "@navikt/analytics-types";
 import { Heading, Tag } from "@navikt/ds-react";
-import { urlForImage } from "@/app/_sanity/utils";
-import {
-  useGlobalSearch,
-  useGlobalSearchResults,
-} from "@/app/_ui/global-search/GlobalSearch.context";
+import { useGlobalSearch } from "@/app/_ui/global-search/GlobalSearch.context";
 import type {
   SearchHitT,
   SearchResultPageTypesT,
@@ -44,7 +40,7 @@ function GlobalSearchHitCollection({
       <ul>
         {searchHits.map((x) => (
           <GlobalSearchLink
-            key={`/${x.item.slug}${x.anchor ? `#${x.anchor}` : ""}`}
+            key={`/${x.slug}${x.anchor ? `#${x.anchor}` : ""}`}
             hit={x}
             tag={tag}
           />
@@ -55,19 +51,13 @@ function GlobalSearchHitCollection({
 }
 
 function GlobalSearchLink(props: {
-  hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
+  hit: SearchHitT;
   tag?: Partial<SearchResultPageTypesT>;
 }) {
-  const context = useGlobalSearch();
-  const { clearDebounce } = useGlobalSearchResults();
+  const { closeSearch } = useGlobalSearch();
   const { hit } = props;
 
-  const href =
-    "anchor" in hit && hit.anchor
-      ? `/${hit.item.slug}#${hit.anchor}`
-      : `/${hit.item.slug}`;
-
-  const imageUrl = urlForImage(hit.item.status?.bilde)?.auto("format").url();
+  const href = hit.anchor ? `/${hit.slug}#${hit.anchor}` : `/${hit.slug}`;
 
   return (
     <li className={styles.searchLinkLi}>
@@ -79,35 +69,32 @@ function GlobalSearchLink(props: {
             href={href}
             onClick={() =>
               umamiTrack(Events.NAVIGERE, {
-                lenketekst: hit.item.heading,
+                lenketekst: hit.heading,
                 destinasjon: href,
                 lenkegruppe: "globalt søk",
               })
             }
-            onNavigate={() => {
-              context.closeSearch();
-              clearDebounce();
-            }}
+            onNavigate={closeSearch}
             className={styles.searchLink}
             prefetch={false}
           >
-            {hit.item.heading}
+            {hit.heading}
           </Heading>
 
-          {hit.item?.status?.tag && <StatusTag status={hit.item.status.tag} />}
+          {hit.statusTag && <StatusTag status={hit.statusTag} />}
         </span>
 
         <p className={styles.searchLinkDescription}>{hit.description}</p>
       </div>
 
       <div className={styles.searchThumbnail}>
-        {imageUrl && (
+        {hit.thumbnail && (
           <Image
-            src={imageUrl}
+            src={hit.thumbnail}
             decoding="sync"
             width="96"
             height="96"
-            alt={`${hit.item?.heading} thumbnail`}
+            alt={`${hit.heading} thumbnail`}
             aria-hidden
           />
         )}

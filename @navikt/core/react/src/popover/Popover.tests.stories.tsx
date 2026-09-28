@@ -1,6 +1,6 @@
 import type { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import Popover from "./Popover";
 
 export default {
@@ -98,5 +98,61 @@ export const KeepOpenOnPopoverClick: Story = {
 
     await userEvent.click(popover);
     expect(popover).toBeVisible();
+  },
+};
+
+function PopoverPlacementTestRender({
+  anchorTop,
+  popoverHeight,
+}: {
+  anchorTop: string;
+  popoverHeight: string;
+}) {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  return (
+    <div style={{ paddingTop: anchorTop }}>
+      <button type="button" ref={setAnchorEl}>
+        anchor
+      </button>
+      <Popover
+        open
+        anchorEl={anchorEl}
+        onClose={() => null}
+        placement="bottom-start"
+        data-testid="popover"
+      >
+        <div style={{ height: popoverHeight }}>This is a popover</div>
+      </Popover>
+    </div>
+  );
+}
+
+export const FlipToTopWhenBottomOverflows: Story = {
+  render: () => (
+    <PopoverPlacementTestRender
+      anchorTop="calc(100vh - 6rem)"
+      popoverHeight="8rem"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const popover = within(canvasElement).getByTestId("popover");
+
+    await waitFor(() =>
+      expect(popover).toHaveAttribute("data-placement", "top-start"),
+    );
+  },
+};
+
+export const KeepBottomWhenNeitherSideFits: Story = {
+  render: () => (
+    <PopoverPlacementTestRender anchorTop="60vh" popoverHeight="150vh" />
+  ),
+  play: async ({ canvasElement }) => {
+    const popover = within(canvasElement).getByTestId("popover");
+
+    await waitFor(() =>
+      expect(popover).toHaveAttribute("data-placement", "bottom-start"),
+    );
   },
 };

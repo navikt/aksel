@@ -22,3 +22,8 @@
     margin-left: var(--ax-space-2);
   }
 }
+
+:root[data-platform="mac"] .nonMac,
+:root:not([data-platform="mac"]) .mac {
+  display: none;
+}

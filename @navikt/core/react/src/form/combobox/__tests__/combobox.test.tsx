@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test, vi } from "vitest";
@@ -304,6 +304,34 @@ describe("Render combobox", () => {
       hasVirtualFocus("mango");
       await pressKey("PageUp");
       hasVirtualFocus("apple");
+    });
+
+    test("should focus previously selected option when reopening with ArrowDown", async () => {
+      render(
+        <>
+          <App options={options} />
+          <button type="button">Outside</button>
+        </>,
+      );
+
+      const combobox = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+      await userEvent.click(combobox);
+      await userEvent.click(screen.getByRole("option", { name: "pear" }));
+
+      for (let i = 0; i < 3; i++) {
+        await userEvent.click(screen.getByRole("button", { name: "Outside" }));
+        act(() => combobox.focus());
+        expect(combobox).toHaveFocus();
+
+        await userEvent.keyboard("{ArrowDown}");
+        expect(combobox.getAttribute("aria-activedescendant")).toBe(
+          screen.getByRole("option", { name: "pear", selected: true }).id,
+        );
+        await userEvent.keyboard("{Escape}");
+      }
     });
   });
 });

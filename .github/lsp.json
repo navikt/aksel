@@ -1,0 +1,22 @@
+{
+  "lspServers": {
+    "typescript": {
+      "command": "node",
+      "args": [
+        "./node_modules/typescript-language-server/lib/cli.mjs",
+        "--stdio"
+      ],
+      "fileExtensions": {
+        ".ts": "typescript",
+        ".tsx": "typescriptreact",
+        ".js": "javascript",
+        ".jsx": "javascriptreact",
+        ".mjs": "javascript",
+        ".cjs": "javascript",
+        ".mts": "typescript",
+        ".cts": "typescript"
+      },
+      "rootUri": "."
+    }
+  }
+}

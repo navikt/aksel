@@ -4,43 +4,32 @@ import { type ButtonHTMLAttributes, forwardRef } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Events } from "@navikt/analytics-types";
 import { Bleed, Button, Detail, Dialog, HStack, Show } from "@navikt/ds-react";
-import { Kbd } from "@/app/_ui/kbd/Kbd";
+import { Kbd, ModKbd } from "@/app/_ui/kbd/Kbd";
 import { umamiTrack } from "@/app/_ui/umami/Umami.track";
 import styles from "./GlobalSearch.module.css";
+import { preloadSearchIndex } from "./server/GlobalSearch.actions";
 
-/**
- * Trigger is optional to allow for use in Suspense fallback
- */
-function GlobalSearchButton({
-  trigger = true,
-  isMac,
-}: {
-  trigger?: boolean;
-  isMac: boolean;
-}) {
-  if (trigger) {
-    return (
-      <Dialog.Trigger>
-        <SearchButton isMac={isMac} />
-      </Dialog.Trigger>
-    );
-  }
-
-  return <SearchButton isMac={isMac} />;
+function GlobalSearchButton() {
+  return (
+    <Dialog.Trigger>
+      <SearchButton />
+    </Dialog.Trigger>
+  );
 }
 
 const SearchButton = forwardRef<
   HTMLButtonElement,
-  ButtonHTMLAttributes<HTMLButtonElement> & { isMac: boolean }
->(({ isMac, onClick, ...rest }, forwardedRef) => {
+  ButtonHTMLAttributes<HTMLButtonElement>
+>(({ onClick, ...rest }, forwardedRef) => {
   return (
     <Button
       {...rest}
       ref={forwardedRef}
       variant="secondary-neutral"
-      aria-keyshortcuts={isMac ? "Meta+k" : "Control+k"}
+      aria-keyshortcuts="Meta+K Control+K"
       onClick={(e) => {
         umamiTrack(Events.MODAL_APNET, { tittel: "Søk" });
+        void preloadSearchIndex();
         onClick?.(e);
       }}
     >
@@ -56,7 +45,7 @@ const SearchButton = forwardRef<
               Søk
               <HStack gap="space-2" asChild>
                 <Detail as="span">
-                  <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
+                  <ModKbd />
                   <Kbd>k</Kbd>
                 </Detail>
               </HStack>

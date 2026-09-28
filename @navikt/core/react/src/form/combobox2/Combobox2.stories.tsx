@@ -33,18 +33,28 @@ type MyOption = {
   metadata?: string;
 };
 
-const countries: MyOption[] = [
+const nordicCountries: MyOption[] = [
   { label: "Norge", value: "opt-1", metadata: "foo1" },
   { label: "Finland", value: "opt-2" },
   { label: "Sverige", value: "opt-3", metadata: "foo3" },
   { label: "Danmark", value: "opt-4" },
   { label: "Island", value: "opt-5" },
-  { label: "Færøyene", value: "opt-6" },
-  { label: "Åland", value: "opt-7" },
-  { label: "Estland", value: "opt-8" },
-  { label: "Latvia", value: "opt-9" },
-  { label: "Litauen", value: "opt-10" },
+  { label: "Grønland", value: "opt-6" },
+  { label: "Færøyene", value: "opt-7" },
+  { label: "Åland", value: "opt-8" },
 ];
+const centralEuropeanCountries: MyOption[] = [
+  { label: "Tyskland", value: "opt-9" },
+  { label: "Østerrike", value: "opt-10" },
+  { label: "Sveits", value: "opt-11" },
+  { label: "Liechtenstein", value: "opt-12" },
+  { label: "Polen", value: "opt-13" },
+  { label: "Tsjekkia", value: "opt-14" },
+  { label: "Slovakia", value: "opt-15" },
+  { label: "Ungarn", value: "opt-16" },
+  { label: "Slovenia", value: "opt-17" },
+];
+const countries: MyOption[] = [...nordicCountries, ...centralEuropeanCountries];
 
 type MyGroup = {
   label: string;
@@ -54,14 +64,14 @@ type MyGroup = {
 
 const groupedCountries: (MyGroup | MyOption)[] = [
   {
-    label: "Nordiske land",
+    label: "Norden",
     id: "group-1",
-    options: countries.slice(0, 6),
+    options: nordicCountries,
   },
   {
-    label: "Baltiske land",
+    label: "Sentral-Europa",
     id: "group-2",
-    options: countries.slice(6),
+    options: centralEuropeanCountries,
   },
   { label: "Annet (ikke gruppert)", value: "opt-01" } satisfies MyOption,
 ];
@@ -453,6 +463,10 @@ export const Testing = () => {
 };
 
 /* TODO:
+- Mobil: Vurder å ikke fokusere søkefelt automatisk.
+- Mobil: Vurder å ikke ha virtuelt fokus i det hele tatt hvis man ikke har tastatur
+    Kan kanskje bruke media query, ev. ikke gi noe fokus før man begynner å trykke (som dagens CB. Sjekk hvordan SR takler at ingenting har virtuelt fokus.)
+    Sjekk om det er mulig å flytte virtuelt fokus uten tastatur (typ med skjermleser).
 - Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
 - Åpne på pil ned (og ev. opp)?
 - Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
