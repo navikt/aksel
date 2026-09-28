@@ -14,7 +14,7 @@ export function semanticRootTokens(theme: AkselColorTheme) {
   return {
     text: {
       logo: {
-        value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
+        value: theme === "light" ? "#C30000" : "{ax.neutral.1000}",
         type: "color",
         group: "text",
         comment: "Navs logo-farge",
@@ -43,17 +43,14 @@ export function semanticRootTokens(theme: AkselColorTheme) {
           "Bakgrunnsfargen som brukes på input-elementer (tekstfelt, sjekkbokser, o.l.) ",
       },
       raised: {
-        value:
-          theme === "light"
-            ? "{ax.neutral.000.value}"
-            : "{ax.neutral.200.value}",
+        value: theme === "light" ? "{ax.neutral.000}" : "{ax.neutral.200}",
         type: "color",
         group: "background",
         comment:
           "Bakgrunnsfarge på bokser som svever eller som skal fremheves i darkmode. F.eks. Card.",
       },
       sunken: {
-        value: theme === "light" ? "{ax.neutral.200.value}" : "#07090D",
+        value: theme === "light" ? "{ax.neutral.200}" : "#07090D",
         type: "color",
         group: "background",
         comment:
@@ -69,7 +66,7 @@ export function semanticRootTokens(theme: AkselColorTheme) {
     },
     border: {
       focus: {
-        value: "{ax.neutral.1000.value}",
+        value: "{ax.neutral.1000}",
         type: "color",
         group: "border",
         /**
