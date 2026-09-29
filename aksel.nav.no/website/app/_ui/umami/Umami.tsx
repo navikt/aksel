@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { useMemo } from "react";
 import { useCookieConsent } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
+import { UMAMI_READY_EVENT } from "@/app/_ui/umami/Umami.track";
 import { IS_NEXT_SERVERSIDE } from "@/ui-utils/is-server";
 
 const trackingId = process.env.UMAMI_TRACKING_ID;
@@ -44,6 +45,7 @@ function Umami({ isDraftMode = false }: { isDraftMode?: boolean }) {
       data-website-id={trackingId}
       data-tag={umamiTag}
       data-exclude-search="true"
+      onLoad={() => window.dispatchEvent(new Event(UMAMI_READY_EVENT))}
     />
   );
 }
