@@ -39,5 +39,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 6,
-  desc: "Bruk placement='top' hvis høyden kan endre seg (dynamisk innhold).",
+  desc: 'Bruk `placement="top"` hvis høyden kan endre seg (dynamisk innhold).',
 };

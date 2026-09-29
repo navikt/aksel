@@ -55,5 +55,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 3,
-  desc: "'selectionFollowsFocus' gjør at valgt tab følger fokus ved bruk av piltaster.",
+  desc: "`selectionFollowsFocus` gjør at valgt tab følger fokus ved bruk av piltaster.",
 };

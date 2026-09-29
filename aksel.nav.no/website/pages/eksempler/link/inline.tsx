@@ -1,4 +1,3 @@
-import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -10,7 +9,6 @@ const Example = () => {
       sit aute est duis{" "}
       <Link inlineText href="/eksempel">
         dette er en ganske lang lenke som brekker til flere linjer ved behov
-        <PlusCircleFillIcon aria-hidden />
       </Link>{" "}
       minim in in voluptate velit Incididunt laborum nisi nisi Lorem officia
       adipisicing non veniam occaecat commodo id ad aliquip.
@@ -28,5 +26,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 1,
-  desc: "Prop-en 'inlineText' gjør at teksten wrapper.",
+  desc: "Prop-en `inlineText` gjør at teksten wrapper.",
 };

@@ -1,4 +1,4 @@
-import { PrinterSmallIcon } from "@navikt/aksel-icons";
+import { ExternalLinkIcon } from "@navikt/aksel-icons";
 import { BodyLong, Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -6,9 +6,9 @@ const Example = () => {
   return (
     <BodyLong>
       Officia incididunt{" "}
-      <Link href="/eksempel">
+      <Link href="/eksempel" target="_blank">
         lenke til ny side
-        <PrinterSmallIcon title="Skriv ut dokument" />
+        <ExternalLinkIcon aria-hidden />
       </Link>{" "}
       occaecat commodo id ad aliquip.
     </BodyLong>

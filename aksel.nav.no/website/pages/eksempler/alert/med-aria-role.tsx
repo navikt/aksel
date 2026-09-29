@@ -34,5 +34,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 6,
-  desc: "Bruk 'role' dersom alerten vises dynamisk.",
+  desc: "Bruk `role` dersom alerten vises dynamisk.",
 };

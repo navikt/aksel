@@ -15,5 +15,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "Inverted-varianten passer bedre på mørkere flater.",
+  desc: "Inverted-varianten brukes på mørkere bakgrunner.",
 };

@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <VStack gap="space-8">
       <Skeleton variant="text" width="100%" />
-      {/* 'as'-prop kan brukes på all typografien vår med Skeleton */}
+      {/* `as`-prop kan brukes på all typografien vår med Skeleton */}
       <Heading as={Skeleton} size="xlarge" width="100%">
         Placeholder
       </Heading>
@@ -24,5 +24,5 @@ export const Demo = { render: Example };
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "Med `variant='text'` følger høyden skriftstørrelsen.",
+  desc: 'Med `variant="text"` følger høyden skriftstørrelsen.',
 };
