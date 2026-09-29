@@ -3,6 +3,27 @@ import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
+/**
+ * Packages released in lockstep must share one version, even when they are different dependency names.
+ */
+const PACKAGE_FAMILIES: {
+  name: string;
+  match: (dependency: string) => boolean;
+}[] = [
+  {
+    name: "vitest",
+    match: (dependency) =>
+      dependency === "vitest" ||
+      (dependency.startsWith("@vitest/") &&
+        dependency !== "@vitest/eslint-plugin"),
+  },
+  {
+    name: "storybook",
+    match: (dependency) =>
+      dependency === "storybook" || dependency.startsWith("@storybook/"),
+  },
+];
+
 validateVersions();
 
 function validateVersions() {
@@ -39,7 +60,7 @@ function validateVersions() {
   const depsOutOfSync: { dependency: string; filteredVersions: string[] }[] =
     [];
 
-  for (const [dependency, versions] of dependencies) {
+  const checkVersions = (dependency: string, versions: string[]) => {
     /**
      * While we could resolve these cases using "semver" or other packages,
      * we are going to keep it simple and just check "regular" cases.
@@ -59,6 +80,19 @@ function validateVersions() {
         filteredVersions: [...new Set(filteredVersions)],
       });
     }
+  };
+
+  for (const [dependency, versions] of dependencies) {
+    checkVersions(dependency, versions);
+  }
+
+  for (const family of PACKAGE_FAMILIES) {
+    const members = [...dependencies.keys()].filter(family.match);
+
+    checkVersions(
+      `${family.name} family (${members.join(", ")})`,
+      members.flatMap((member) => dependencies.get(member) ?? []),
+    );
   }
 
   if (depsOutOfSync.length > 0) {
