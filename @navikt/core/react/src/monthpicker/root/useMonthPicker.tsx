@@ -273,13 +273,15 @@ export const useMonthpicker = (
     const isBefore = getIsBefore({ fromDate, date: month });
     const isAfter = getIsAfter({ toDate, date: month });
 
+    const isMonthValidDate = isValidDate(month);
+
     if (
-      !isValidDate(month) ||
+      !isMonthValidDate ||
       (disabled && dateMatchModifiers(month, disabled))
     ) {
       updateMonth(undefined);
       updateValidation({
-        isInvalid: isValidDate(month),
+        isInvalid: !isMonthValidDate,
         isDisabled: disabled && dateMatchModifiers(month, disabled),
         isValidMonth: false,
         isEmpty: !e.target.value,
