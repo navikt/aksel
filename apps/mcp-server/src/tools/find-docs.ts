@@ -1,6 +1,7 @@
 import { z } from "zod";
 import pkg from "../../package.json" with { type: "json" };
 import { minMatchCharLength, searchDocs } from "../helpers/fuse-search.js";
+import { limitSearchQuery } from "../helpers/input-limits.js";
 import {
   getAvailableVersions,
   searchMigrations,
@@ -18,9 +19,7 @@ const findDocsInputSchema = {
     .describe(
       "What to search. 'docs' (default) = documentation pages (components, patterns, guides). 'migrations' = codemods for upgrading between major versions (use for any migration/upgrade/codemod/breaking-change question). 'tokens' = browse design tokens, then call aksel_get_token_details for full metadata.",
     ),
-  query: z
-    .string()
-    .trim()
+  query: limitSearchQuery(z.string().trim())
     .optional()
     .describe(
       "Keywords describing what you want. For kind='docs' prefer one or two words; component names work best (e.g. 'button', 'knapp', 'textfield', 'tailwind') and at least 3 characters are required. For kind='migrations' pass a version ('v8', '8', '7->8') or codemod keyword; omit to list all. For kind='tokens' pass a name/category keyword; omit to browse.",

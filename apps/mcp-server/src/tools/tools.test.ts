@@ -1,5 +1,9 @@
-import { describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { z } from "zod";
+import {
+  maxSearchQueryLength,
+  maxSearchQueryWords,
+} from "../helpers/input-limits.js";
 import { metadata } from "../resources/icons-catalog.js";
 import { findDocsTool } from "./find-docs.js";
 import { findIconsTool } from "./find-icons.js";
@@ -7,8 +11,98 @@ import { getComponentInfoTool } from "./get-component-info.js";
 import { getDocTool } from "./get-doc.js";
 import { getTokenDetailsTool } from "./get-token-details.js";
 
+const tooLong = "a".repeat(maxSearchQueryLength + 1);
+const tooLongPath = "a".repeat(201);
+const tooManyWords = Array.from(
+  { length: maxSearchQueryWords + 1 },
+  (_, i) => `w${i}`,
+).join(" ");
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
+
 describe("Tools", () => {
+  describe("input limits", () => {
+    test("should reject oversized free-text inputs", () => {
+      const cases = [
+        [findDocsTool.inputSchema, { query: tooLong }],
+        [findDocsTool.inputSchema, { query: tooManyWords }],
+        [findIconsTool.inputSchema, { keyword: tooLong }],
+        [findIconsTool.inputSchema, { keyword: tooManyWords }],
+        [getTokenDetailsTool.inputSchema, { tokenName: tooLong }],
+        [getComponentInfoTool.inputSchema, { component: tooLongPath }],
+        [getDocTool.inputSchema, { path: `/${tooLongPath}.md` }],
+      ] as const;
+
+      for (const [schema, input] of cases) {
+        expect(z.object(schema).safeParse(input).success).toBe(false);
+      }
+    });
+
+    test("should accept normal multi-word queries", () => {
+      expect(
+        z
+          .object(findDocsTool.inputSchema)
+          .safeParse({ query: "hvordan lage et skjema med datovelger" })
+          .success,
+      ).toBe(true);
+      expect(
+        z.object(findIconsTool.inputSchema).safeParse({ keyword: "arrow left" })
+          .success,
+      ).toBe(true);
+    });
+  });
+
   describe("getDocTool", () => {
+    test.each([
+      "/../../api/llm/docs?.md",
+      "/komponenter/core/button.md?a=1.md",
+      "/komponenter/core/button#.md",
+      "/komponenter/%2e%2e/button.md",
+      "//evil.example/x.md",
+      "/Komponenter/core/button.md",
+      "/.md",
+    ])("should reject path %s", (path) => {
+      const result = z.object(getDocTool.inputSchema).safeParse({ path });
+      expect(result.success).toBe(false);
+    });
+
+    test("should not cache or return non-markdown responses", async () => {
+      const fetchMock = vi.fn(
+        async () =>
+          new Response("<html></html>", {
+            status: 200,
+            headers: { "content-type": "text/html; charset=utf-8" },
+          }),
+      );
+      vi.stubGlobal("fetch", fetchMock);
+
+      const path = "/test/not-markdown.md";
+      const first = JSON.parse(await getDocTool.callback({ path }));
+      const second = JSON.parse(await getDocTool.callback({ path }));
+
+      expect(first.error).toBe("NOT_FOUND");
+      expect(second.error).toBe("NOT_FOUND");
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    test("should return and cache markdown responses", async () => {
+      const fetchMock = vi.fn(
+        async () =>
+          new Response("# Button", {
+            status: 200,
+            headers: { "content-type": "text/markdown; charset=utf-8" },
+          }),
+      );
+      vi.stubGlobal("fetch", fetchMock);
+
+      const path = "/test/markdown.md";
+      expect(await getDocTool.callback({ path })).toBe("# Button");
+      expect(await getDocTool.callback({ path })).toBe("# Button");
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
     test("should require path to end with .md", () => {
       const strictSchema = z.object(getDocTool.inputSchema).strict();
 
@@ -116,6 +210,21 @@ describe("Tools", () => {
       expect(docsPath.success).toBe(true);
       expect(empty.success).toBe(false);
     });
+
+    test.each(["button", "komponenter/core/button?x=1", "komponenter/../x/y"])(
+      "should reject invalid component %s without fetching",
+      async (component) => {
+        const fetchMock = vi.fn();
+        vi.stubGlobal("fetch", fetchMock);
+
+        const response = JSON.parse(
+          await getComponentInfoTool.callback({ component }),
+        );
+
+        expect(response.error).toBe("INVALID_COMPONENT");
+        expect(fetchMock).not.toHaveBeenCalled();
+      },
+    );
   });
 
   describe("findDocsTool", () => {
