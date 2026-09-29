@@ -64,7 +64,7 @@
     "swr": "^2.4.2",
     "tinycolor2": "^1.6.0",
     "typescript-cookie": "^1.0.6",
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
