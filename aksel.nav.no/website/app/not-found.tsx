@@ -9,7 +9,7 @@ import GitHubIssueLink from "./_ui/github-issue-link";
 
 export default function NotFound() {
   return (
-    <Page data-aksel-template="404-v3" footer={<Footer />} className="vk-error">
+    <Page data-aksel-template="404-v4" footer={<Footer />} className="vk-error">
       <UmamiNotFoundPageLog />
       <Header />
       <PageBlock as="main" width="text" gutters>
