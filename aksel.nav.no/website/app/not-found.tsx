@@ -16,23 +16,30 @@ export default function NotFound() {
         <Box paddingBlock="space-64 space-80">
           <VStack gap="space-64">
             <VStack gap="space-48" align="start">
-              <Heading level="1" size="large" data-aksel-heading-color spacing>
-                Beklager, vi fant ikke siden
-              </Heading>
-              <VStack gap="space-12">
-                <BodyShort>
-                  Denne siden kan være slettet eller flyttet, eller det er en
-                  feil i lenken.
-                </BodyShort>
-                <WebsiteList>
-                  <WebsiteListItem icon>
-                    Bruk søket eller menyen
-                  </WebsiteListItem>
-                  <WebsiteListItem icon>
-                    <Link href="/">Gå til forsiden</Link>
-                  </WebsiteListItem>
-                </WebsiteList>
-              </VStack>
+              <div>
+                <Heading
+                  level="1"
+                  size="large"
+                  data-aksel-heading-color
+                  spacing
+                >
+                  Beklager, vi fant ikke siden
+                </Heading>
+                <VStack gap="space-12">
+                  <BodyShort>
+                    Denne siden kan være slettet eller flyttet, eller det er en
+                    feil i lenken.
+                  </BodyShort>
+                  <WebsiteList>
+                    <WebsiteListItem icon>
+                      Bruk søket eller menyen
+                    </WebsiteListItem>
+                    <WebsiteListItem icon>
+                      <Link href="/">Gå til forsiden</Link>
+                    </WebsiteListItem>
+                  </WebsiteList>
+                </VStack>
+              </div>
 
               <GitHubIssueLink
                 labels="bug 🐛"

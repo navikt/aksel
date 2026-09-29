@@ -29,14 +29,12 @@ function Example() {
           data-aksel-template="500-v4"
         >
           <div>
-            <div>
-              <BodyShort textColor="subtle" size="small">
-                Statuskode 500
-              </BodyShort>
-              <Heading level="1" size="large" spacing>
-                Beklager, noe gikk galt
-              </Heading>
-            </div>
+            <BodyShort textColor="subtle" size="small">
+              Statuskode 500
+            </BodyShort>
+            <Heading level="1" size="large" spacing>
+              Beklager, noe gikk galt
+            </Heading>
             <VStack gap="space-24">
               {/* Tekster bør tilpasses den aktuelle 500-feilen. Teksten under er for en generisk 500-feil. */}
               <BodyShort>

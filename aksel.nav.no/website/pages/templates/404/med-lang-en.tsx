@@ -23,18 +23,17 @@ const Example = () => {
             <Heading level="1" size="large" spacing>
               Beklager, vi fant ikke siden
             </Heading>
-            <VStack gap="space-12">
-              <BodyShort>
-                Denne siden kan være slettet eller flyttet, eller det er en feil
-                i lenken.
-              </BodyShort>
-              <List>
-                <List.Item>Bruk gjerne søket eller menyen</List.Item>
-                <List.Item>
-                  <Link href="#">Gå til forsiden</Link>
-                </List.Item>
-              </List>
-            </VStack>
+
+            <BodyShort spacing>
+              Denne siden kan være slettet eller flyttet, eller det er en feil i
+              lenken.
+            </BodyShort>
+            <List>
+              <List.Item>Bruk gjerne søket eller menyen</List.Item>
+              <List.Item>
+                <Link href="#">Gå til forsiden</Link>
+              </List.Item>
+            </List>
           </div>
 
           <div>
