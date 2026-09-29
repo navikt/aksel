@@ -1,12 +1,4 @@
-import {
-  BodyShort,
-  Box,
-  Heading,
-  Link,
-  List,
-  Page,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 import {
   Env,
@@ -21,23 +13,22 @@ const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
-      <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="space-80 space-64" data-aksel-template="404-v3">
-          <VStack gap="space-16">
-            <Heading level="1" size="large">
-              Beklager, vi fant ikke siden
-            </Heading>
-            <BodyShort>
-              Denne siden kan være slettet eller flyttet, eller det er en feil i
-              lenken.
-            </BodyShort>
-            <List>
-              <List.Item>Bruk gjerne søket eller menyen</List.Item>
-              <List.Item>
-                <Link href="#">Gå til forsiden</Link>
-              </List.Item>
-            </List>
-          </VStack>
+      <Page.Block as="main" width="text" gutters>
+        <Box paddingBlock="space-64 space-80" data-aksel-template="404-v4">
+          <Heading level="1" size="large" spacing>
+            Beklager, vi fant ikke siden
+          </Heading>
+
+          <BodyShort spacing>
+            Denne siden kan være slettet eller flyttet, eller det er en feil i
+            lenken.
+          </BodyShort>
+          <List>
+            <List.Item>Bruk gjerne søket eller menyen</List.Item>
+            <List.Item>
+              <Link href="#">Gå til forsiden</Link>
+            </List.Item>
+          </List>
         </Box>
       </Page.Block>
       <Env />

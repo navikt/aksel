@@ -1,12 +1,4 @@
-import {
-  BodyShort,
-  Box,
-  Heading,
-  Link,
-  List,
-  Page,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyShort, Heading, Link, List, Page, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 import {
   Env,
@@ -21,39 +13,42 @@ const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
-      <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="space-80 space-64" data-aksel-template="404-v3">
-          <VStack gap="space-64">
-            <VStack gap="space-16">
-              <Heading level="1" size="large">
-                Beklager, vi fant ikke siden
-              </Heading>
-              <BodyShort>
-                Denne siden kan være slettet eller flyttet, eller det er en feil
-                i lenken.
-              </BodyShort>
-              <List>
-                <List.Item>Bruk gjerne søket eller menyen</List.Item>
-                <List.Item>
-                  <Link href="#">Gå til forsiden</Link>
-                </List.Item>
-              </List>
-            </VStack>
+      <Page.Block as="main" width="text" gutters>
+        <VStack
+          gap="space-64"
+          paddingBlock="space-64 space-80"
+          data-aksel-template="404-v4"
+        >
+          <div>
+            <Heading level="1" size="large" spacing>
+              Beklager, vi fant ikke siden
+            </Heading>
 
-            <div>
-              <Heading level="2" size="large" spacing>
-                Page not found
-              </Heading>
-              <BodyShort spacing>
-                The page you requested cannot be found.
-              </BodyShort>
-              <BodyShort>
-                Go to the <Link href="#">front page</Link>, or use one of the
-                links in the menu.
-              </BodyShort>
-            </div>
-          </VStack>
-        </Box>
+            <BodyShort spacing>
+              Denne siden kan være slettet eller flyttet, eller det er en feil i
+              lenken.
+            </BodyShort>
+            <List>
+              <List.Item>Bruk gjerne søket eller menyen</List.Item>
+              <List.Item>
+                <Link href="#">Gå til forsiden</Link>
+              </List.Item>
+            </List>
+          </div>
+
+          <div>
+            <Heading level="2" size="large" spacing>
+              Page not found
+            </Heading>
+            <BodyShort spacing>
+              The page you requested cannot be found.
+            </BodyShort>
+            <BodyShort>
+              Go to the <Link href="#">front page</Link>, or use one of the
+              links in the menu.
+            </BodyShort>
+          </div>
+        </VStack>
       </Page.Block>
       <Env />
     </Page>
