@@ -64,7 +64,7 @@ const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerProps>(
       onClose,
       onOpenToggle,
       strategy,
-      mode,
+      mode: _mode,
       ...rest
     },
     ref,
@@ -82,6 +82,8 @@ const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerProps>(
       defaultValue: false,
       value: _open,
     });
+
+    const mode = _mode ?? "single";
 
     const datePickerOpener = useRef<"from" | "to" | null>(null);
 
@@ -142,7 +144,7 @@ const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerProps>(
               }}
               locale={locale}
               translate={translate}
-              variant={mode ?? "single"}
+              variant={mode}
               popoverProps={{
                 id: ariaId,
                 strategy,
