@@ -119,7 +119,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
     "stylelint-value-no-unknown-custom-properties": "^6.1.1",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "typescript-eslint": "^8.70.0",
     "typescript-language-server": "6.0.0",
     "vite": "^8.1.5",
@@ -127,7 +127,7 @@
     "vitest": "4.1.11"
   },
   "resolutions": {
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "_note": "Typescript må tvinges til v6 for at Playroom skal fungere (både dev og build)",
   "packageManager": "yarn@4.18.0"
