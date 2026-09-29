@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { type ParsedMeta, parseMetaFiles } from "./parse-meta";
+import { type ParsedMeta, readMetaFiles } from "./parse-meta";
 import { validateMetas } from "./validate-meta";
 
 describe("component metadata files", () => {
   test("all meta files satisfy the metadata spec", () => {
-    const metas = parseMetaFiles();
+    const metas = readMetaFiles();
     expect(validateMetas(metas)).toEqual([]);
   });
 });
