@@ -40,8 +40,7 @@ function getFrameworkRegexes({
 }
 
 /**
- * Lookarounds are zero-width, so the full match is only the token itself.
- * Transforms replace the full match, so the regex must not consume surrounding characters.
+ * Transforms replace the full match. We use lookarounds so that the regex does not consume surrounding characters.
  */
 function getTokenRegex(
   variable: string,
