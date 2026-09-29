@@ -32,15 +32,16 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         })}
         data-color={hasError ? "danger" : props["data-color"]}
         onClick={(event) => {
-          if (inputProps.disabled || readOnly || cardContext === null) {
+          if (inputProps.disabled || readOnly || !cardContext) {
             return;
           }
 
           /* Let input and label handle their own click events */
-          if (
-            event.target instanceof HTMLInputElement ||
-            event.target instanceof HTMLLabelElement
-          ) {
+          const target = event.target;
+          const nativeHandler =
+            target instanceof Element ? target.closest("label, input") : null;
+
+          if (nativeHandler && event.currentTarget.contains(nativeHandler)) {
             return;
           }
 

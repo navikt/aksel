@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../utils/helpers";
-import Radio, { RadioCardContextProvider } from "../radio/Radio";
+import { Radio, RadioCardContextProvider } from "../radio/Radio";
 import type { RadioProps } from "../radio/types";
 
 type RadioCardProps = RadioProps;
@@ -10,15 +10,11 @@ type RadioCardProps = RadioProps;
  * @see 🏷️ {@link RadioCardProps}
  * @example
  * ```tsx
- * <RadioCard value="1" label="Option 1" />
- * <RadioCard value="2" label="Option 2" />
- * ```
- *
- * @example
- * ```tsx
- * <RadioCardGroup>
- *   <RadioCard value="1" label="Option 1" />
- *   <RadioCard value="2" label="Option 2" />
+ * <RadioCardGroup legend="Velg leveringsmåte">
+ *   <RadioCard value="digital" description="Sendes til innboksen din.">
+ *     Digital levering
+ *   </RadioCard>
+ *   <RadioCard value="post">Post</RadioCard>
  * </RadioCardGroup>
  * ```
  */
@@ -29,7 +25,7 @@ const RadioCard = forwardRef<HTMLInputElement, RadioCardProps>(
         <Radio
           {...rest}
           ref={ref}
-          className={cl(className, "aksel-radio-card")}
+          className={cl("aksel-radio-card", className)}
         />
       </RadioCardContextProvider>
     );
@@ -43,3 +39,4 @@ export namespace RadioCard {
 
 // eslint-disable-next-line import/export
 export { RadioCard };
+export type { RadioCardProps };
