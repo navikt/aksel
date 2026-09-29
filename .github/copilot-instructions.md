@@ -15,7 +15,7 @@
 - Answer-first. 0-2 sentences max.
 - No thinking aloud; do next edit. Explain only when asked or non-obvious.
 - Show only what changes. Minimal diffs; don't paste whole files.
-- Edits scoped to one file unless asked. Ask only when truly blocked.
+- Edit only the files the change needs (see Definition of done); no unrelated files. Ask only when truly blocked.
 - Favor perf/security; avoid re-renders, top-level side effects, unsafe HTML, env var leaks.
 
 ## Repo summary
@@ -27,7 +27,7 @@
 ## Start and validate
 
 1. `corepack enable`
-2. `corepack yarn install` (needs `NPM_AUTH_TOKEN` with `read:packages`). Without a token: `corepack yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
+2. `corepack yarn install` (needs `NPM_AUTH_TOKEN` with `read:packages`). Without a token: `corepack yarn workspaces focus aksel @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
 3. `corepack yarn boot` (builds all public packages; rerun after `corepack yarn clean`)
 
 - Run agent commands through `corepack yarn`. Order: existing root/workspace script → Yarn-local binary → add a pinned dependency only when new tooling is required.
