@@ -1,6 +1,5 @@
 import {
   BodyShort,
-  Box,
   Button,
   Heading,
   Link,
@@ -23,30 +22,33 @@ const Example = () => {
     <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="text" gutters>
-        <Box paddingBlock="space-64 space-80" data-aksel-template="404-v4">
-          <VStack gap="space-48" align="start">
-            <VStack gap={{ xs: "space-12", md: "space-16" }}>
-              <Heading level="1" size="large">
-                Beklager, vi fant ikke siden
-              </Heading>
-              <VStack gap="space-12">
-                <BodyShort>
-                  Denne siden kan være slettet eller flyttet, eller det er en
-                  feil i lenken.
-                </BodyShort>
-                <List>
-                  <List.Item>Bruk gjerne søket eller menyen</List.Item>
-                  <List.Item>
-                    <Link href="#">Gå til forsiden</Link>
-                  </List.Item>
-                </List>
-              </VStack>
+        <VStack
+          gap="space-48"
+          align="start"
+          paddingBlock="space-64 space-80"
+          data-aksel-template="404-v4"
+        >
+          <div>
+            <Heading level="1" size="large" spacing>
+              Beklager, vi fant ikke siden
+            </Heading>
+            <VStack gap="space-12">
+              <BodyShort>
+                Denne siden kan være slettet eller flyttet, eller det er en feil
+                i lenken.
+              </BodyShort>
+              <List>
+                <List.Item>Bruk gjerne søket eller menyen</List.Item>
+                <List.Item>
+                  <Link href="#">Gå til forsiden</Link>
+                </List.Item>
+              </List>
             </VStack>
-            <Button as="a" href="#">
-              Gå til Min side
-            </Button>
-          </VStack>
-        </Box>
+          </div>
+          <Button as="a" href="#">
+            Gå til Min side
+          </Button>
+        </VStack>
       </Page.Block>
       <Env />
     </Page>
