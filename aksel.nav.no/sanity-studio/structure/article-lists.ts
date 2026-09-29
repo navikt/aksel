@@ -8,6 +8,14 @@ type ArticleDocumentType = AllArticleDocumentsT;
 
 type Category = { title: string; value: string };
 
+/*
+ * Studio lists query with the "drafts" perspective, where drafts are overlaid on
+ * published documents and `_id` is always the published id. `_originalId` keeps
+ * the source id (`drafts.*`, `versions.*` or published), so filter on that.
+ */
+const IS_DRAFT = `_originalId in path("drafts.**")`;
+const IS_PUBLISHED = `!(_originalId in path("drafts.**")) && !(_originalId in path("versions.**"))`;
+
 export function listPublishedArticles(
   S: StructureBuilder,
   type: ArticleDocumentType,
@@ -19,7 +27,7 @@ export function listPublishedArticles(
     child: () =>
       S.documentTypeList(type)
         .title("Artikler")
-        .filter(`_type == $type && !(_id in path("drafts.**"))`)
+        .filter(`_type == $type && ${IS_PUBLISHED}`)
         .apiVersion(SANITY_API_VERSION)
         .params({ type })
         .initialValueTemplates([]),
@@ -37,7 +45,7 @@ export function listDraftArticles(
     child: () =>
       S.documentTypeList(type)
         .title("Artikler")
-        .filter(`_type == $type && _id in path("drafts.**")`)
+        .filter(`_type == $type && ${IS_DRAFT}`)
         .apiVersion(SANITY_API_VERSION)
         .params({ type })
         .initialValueTemplates([]),
@@ -57,7 +65,7 @@ export function listOutdatedArticles(
       S.documentTypeList(type)
         .title("Artikler")
         .filter(
-          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold) && !(_id in path("drafts.**"))`,
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold) && ${IS_PUBLISHED}`,
         )
         .apiVersion(SANITY_API_VERSION)
         .params({ type, threshold })

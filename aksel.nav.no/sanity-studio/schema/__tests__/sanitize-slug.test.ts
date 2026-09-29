@@ -41,4 +41,29 @@ describe("Testing sanitizeSlug function", () => {
     const result = sanitizeSlug("tést slüg ñ");
     expect(result).toBe("test-slug-n");
   });
+
+  test.each([
+    ["A & B", "a-b"],
+    ["Button \u2013 ny", "button-ny"],
+    ["Button \u2014 ny", "button-ny"],
+    ["Button – ny", "button-ny"],
+    ["Button – ny", "button-ny"],
+    ["trailing -", "trailing"],
+    ["Hva er nytt?", "hva-er-nytt"],
+    ["- leading", "leading"],
+    ["(Beta) Komponent", "beta-komponent"],
+  ])("sanitizeSlug(%j) should be %j", (input, expected) => {
+    expect(sanitizeSlug(input)).toBe(expected);
+  });
+
+  test.each([
+    "A & B",
+    "Button \u2013 ny",
+    "trailing -",
+    "Hva? Nytt!",
+    "tæst å",
+  ])("sanitizeSlug should accept its own output (%j)", (input) => {
+    const slug = sanitizeSlug(input);
+    expect(sanitizeSlug(slug)).toBe(slug);
+  });
 });
