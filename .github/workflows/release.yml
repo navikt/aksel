@@ -14,7 +14,8 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   build:
     name: Release packages
-    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
+    # Only publish from main, also when dispatched manually
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       id-token: "write"

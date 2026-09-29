@@ -12,6 +12,7 @@ jobs:
   upload:
     name: Upload fonts to CDN
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     permissions:
       contents: read
@@ -20,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: "actions/checkout@v7"
+        with:
+          persist-credentials: false
 
       - name: Upload fonts to CDN
         id: upload
