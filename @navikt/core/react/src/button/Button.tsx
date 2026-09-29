@@ -107,7 +107,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             "aksel-button--icon-only": !!icon && !children,
             "aksel-button--disabled": disabled ?? loading,
           })}
-          disabled={(disabled ?? loading) ? true : undefined}
+          disabled={disabled || loading ? true : undefined}
         >
           {icon && iconPosition === "left" && (
             <span className="aksel-button__icon">{icon}</span>
