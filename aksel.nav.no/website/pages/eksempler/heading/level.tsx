@@ -21,5 +21,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 2,
-  desc: "Propen 'level' bestemmer hvilken h-tagg som brukes. Du kan sette 'size' uavhengig av dette, men størrelsen bør samsvare med nivået.",
+  desc: "Propen `level` bestemmer hvilken h-tagg som brukes. Du kan sette `size` uavhengig av dette, men størrelsen bør samsvare med nivået.",
 };

@@ -36,6 +36,6 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 5,
-  desc: "Bruk 'as'-propen hvis du bruker et rammeverk som har sin egen link-komponent.",
+  desc: "Bruk `as`-propen hvis du bruker et rammeverk som har sin egen link-komponent.",
   sandbox: false,
 };
