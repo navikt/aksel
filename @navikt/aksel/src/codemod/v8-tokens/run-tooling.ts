@@ -31,6 +31,11 @@ type ToolingOptions = {
   dryRun: boolean;
   glob: string;
   ext: string;
+  /**
+   * Set when the caller has already validated git (e.g. `codemod v8`),
+   * since earlier migrations in the same run leave the tree dirty.
+   */
+  skipGitCheck?: boolean;
 };
 
 type CodeshiftOptions = {
@@ -90,6 +95,15 @@ export async function runTooling(
   // Show initial status
   const initialStatus = getStatus(filepaths);
 
+  // Only check git before the first write: later tasks see our own changes.
+  let gitChecked = !!options.skipGitCheck;
+  const ensureGitChecked = () => {
+    if (!gitChecked) {
+      validateGit(options, program);
+      gitChecked = true;
+    }
+  };
+
   // Task execution loop
   let task: TaskName = await getNextTask(initialStatus.status);
   let currentStatus = initialStatus;
@@ -105,6 +119,7 @@ export async function runTooling(
         program,
         currentStatus,
         () => getStatus(filepaths, "no-print"),
+        ensureGitChecked,
       );
     } catch (error) {
       program.error(
@@ -117,8 +132,6 @@ export async function runTooling(
 
     task = await getNextTask(currentStatus.status);
   }
-
-  process.exit(0);
 }
 
 /**
@@ -131,6 +144,7 @@ async function executeTask(
   program: Command,
   statusStore: TokenStatus,
   updateStatus: () => TokenStatus,
+  ensureGitChecked: () => void,
 ): Promise<TokenStatus> {
   switch (task) {
     case "status":
@@ -147,9 +161,7 @@ async function executeTask(
     case "less-tokens":
     case "js-tokens":
     case "tailwind-tokens": {
-      if (!options.force) {
-        validateGit(options, program);
-      }
+      ensureGitChecked();
       const scopedFiles = getScopedFilesForTask(
         task,
         filepaths,
@@ -179,9 +191,7 @@ async function executeTask(
         "tailwind-tokens",
       ] as const;
 
-      if (!options.force) {
-        validateGit(options, program);
-      }
+      ensureGitChecked();
 
       let currentStatus = statusStore;
       const summaryData: {

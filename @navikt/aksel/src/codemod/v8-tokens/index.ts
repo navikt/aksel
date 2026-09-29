@@ -4,7 +4,7 @@ import { runTooling } from "./run-tooling.js";
 
 const program = new Command();
 
-function v8TokensCommand() {
+function v8TokensCommand({ skipGitCheck = false } = {}) {
   program.allowExcessArguments();
   program.name(`${chalk.blueBright(`npx @navikt/aksel v8-tokens`)}`);
 
@@ -24,7 +24,10 @@ function v8TokensCommand() {
   program.parse();
   const options = program.opts();
 
-  runTooling(options as Parameters<typeof runTooling>["0"], program);
+  return runTooling(
+    { ...(options as Parameters<typeof runTooling>["0"]), skipGitCheck },
+    program,
+  );
 }
 
 export { v8TokensCommand };
