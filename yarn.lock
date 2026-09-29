@@ -5438,12 +5438,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:16.3.4":
-  version: 16.3.4
-  resolution: "@next/bundle-analyzer@npm:16.3.4"
+"@next/bundle-analyzer@npm:16.3.6":
+  version: 16.3.6
+  resolution: "@next/bundle-analyzer@npm:16.3.6"
   dependencies:
     webpack-bundle-analyzer: "npm:4.10.1"
-  checksum: 10/f0d2c3255bf44c6cdd79f14809970f1d4c7a2e01a7ded3b0d99d62f721f78b0e7e4435aae1278615754699ae8a1a5d297195b900cb1b9d96f285be24ce00a863
+  checksum: 10/45a9fa760ea416387b639eafe6e310c306b5382990ae7f9c4d7cea6b74bf3756803099dcbb7d235f03de136481f5732b8a9d9a4c748d221e5a4c342cd2ecc7cd
   languageName: node
   linkType: hard
 
@@ -26694,7 +26694,7 @@ __metadata:
     "@navikt/analytics-types": "npm:0.0.9"
     "@navikt/next-logger": "npm:5.0.1"
     "@navikt/oasis": "npm:4.1.4"
-    "@next/bundle-analyzer": "npm:16.3.4"
+    "@next/bundle-analyzer": "npm:16.3.6"
     "@next/eslint-plugin-next": "npm:16.3.5"
     "@playwright/test": "npm:1.61.1"
     "@portabletext/block-tools": "npm:^6.0.0"
