@@ -102,7 +102,7 @@ const ActionMenuRoot = ({
       rootElement={rootElement}
       size={size}
     >
-      <Menu open={open} onOpenChange={setOpen} modal>
+      <Menu open={open} onOpenChange={setOpen} modal={false}>
         {children}
       </Menu>
     </ActionMenuProvider>
