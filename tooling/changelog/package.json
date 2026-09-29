@@ -19,7 +19,7 @@
     "@types/mdast": "^4.0.4",
     "@types/node": "^24.10.9",
     "@types/unist": "^3.0.3",
-    "tsx": "^4.23.1",
+    "tsx": "^4.23.15",
     "typescript": "6.0.3"
   }
 }
