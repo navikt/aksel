@@ -19,7 +19,7 @@ const nonColorTokens = [
   "font-size",
   "font-line-height",
   "font-family",
-  "border-radius",
+  "radius",
   "breakpoint",
   "opacity",
 ];
@@ -48,6 +48,7 @@ export const config = {
       lineHeight: prefixTokens(extractTokensForCategory("font-line-height")),
       fontFamily: prefixTokens(extractTokensForCategory("font-family")),
       opacity: prefixTokens(extractTokensForCategory("opacity")),
+      borderRadius: prefixTokens(extractTokensForCategory("radius")),
     },
   },
 };
