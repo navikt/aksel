@@ -59,12 +59,10 @@ module.exports = defineConfig([
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   {
-    // eslint-plugin-import's recommended config sets ecmaVersion 2018
-    languageOptions: { ecmaVersion: "latest" },
-  },
-  {
     settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
     languageOptions: {
+      // eslint-plugin-import's recommended config sets ecmaVersion 2018
+      ecmaVersion: "latest",
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -94,11 +92,13 @@ module.exports = defineConfig([
       reportUnusedDisableDirectives: true,
     },
     rules: {
-      // Covered by TypeScript, and slow without a TS resolver
+      //
+      // Start: Covered by TypeScript, and slow without a TS resolver
       "import/default": "off",
       "import/export": "off",
       "import/named": "off",
       "import/no-named-as-default-member": "off",
+      // End
       "@typescript-eslint/no-explicit-any": "off", // Temporary
       "@typescript-eslint/no-unused-expressions": [
         "error",
