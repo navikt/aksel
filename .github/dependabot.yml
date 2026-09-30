@@ -16,6 +16,7 @@ updates:
       - npm-github
     groups:
       sanity:
+        applies-to: version-updates
         patterns:
           - "sanity"
           - "sanity-*"
@@ -23,17 +24,49 @@ updates:
           - "next-sanity"
           - "@portabletext/*"
       eslint:
+        applies-to: version-updates
         patterns:
           - "eslint"
           - "@eslint/*"
       react:
+        applies-to: version-updates
         patterns:
           - "react"
           - "react-dom"
       storybook:
+        applies-to: version-updates
         patterns:
           - "*storybook*"
       vitest:
+        applies-to: version-updates
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      # Security updates ignore version-update groups, so mirror them to keep lockstep packages together.
+      sanity-security:
+        applies-to: security-updates
+        patterns:
+          - "sanity"
+          - "sanity-*"
+          - "@sanity/*"
+          - "next-sanity"
+          - "@portabletext/*"
+      eslint-security:
+        applies-to: security-updates
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+      react-security:
+        applies-to: security-updates
+        patterns:
+          - "react"
+          - "react-dom"
+      storybook-security:
+        applies-to: security-updates
+        patterns:
+          - "*storybook*"
+      vitest-security:
+        applies-to: security-updates
         patterns:
           - "vitest"
           - "@vitest/*"

@@ -69,3 +69,22 @@ describe("Uncontrolled RadioGroup", () => {
     expect(input2.checked).toBe(true);
   });
 });
+
+describe("Radio outside RadioCard", () => {
+  test("does not select when clicking description", async () => {
+    const user = userEvent.setup();
+    render(
+      <RadioGroup legend="legend">
+        <Radio value={value1} description="Radio description">
+          {label1}
+        </Radio>
+      </RadioGroup>,
+    );
+
+    await user.click(screen.getByText("Radio description"));
+
+    expect(
+      screen.getByRole<HTMLInputElement>("radio", { name: label1 }).checked,
+    ).toBe(false);
+  });
+});

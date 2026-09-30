@@ -37,7 +37,7 @@ På Windows kan du legge inn tokenet som en lokal miljøvariabel.
 Nettsiden avhenger av pakker som ikke er åpent tilgjengelig. Du kan likevel bidra på andre deler av repoet ved å kjøre denne kommandoen i stedet for `yarn install`:
 
 ```sh
-yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint
+yarn workspaces focus aksel @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint
 ```
 
 ## Utviklingsmiljø

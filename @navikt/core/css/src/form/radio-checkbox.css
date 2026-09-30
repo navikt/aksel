@@ -19,6 +19,41 @@
   }
 }
 
+/* Radio card */
+.aksel-radio-card {
+  width: 100%;
+  align-content: flex-start;
+  padding: var(--ax-space-16) var(--ax-space-20);
+  cursor: pointer;
+  background-color: var(--ax-bg-default);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-8);
+
+  &:focus-within::after,
+  &.aksel-radio--small:focus-within::after {
+    inset: 0;
+    border-radius: calc(var(--ax-radius-8) - 1px);
+    outline-offset: 4px;
+  }
+}
+
+/* Radio card group */
+.aksel-radio-card-group {
+  & > .aksel-radio-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ax-space-12);
+
+    > .aksel-hgrid:not(.aksel-hgrid-gap) {
+      gap: var(--ax-space-12);
+    }
+  }
+
+  &.aksel-radio-group--small > .aksel-radio-buttons > .aksel-hgrid:not(.aksel-hgrid-gap) {
+    gap: var(--ax-space-8);
+  }
+}
+
 /* Small */
 .aksel-checkbox--small,
 .aksel-radio--small {
@@ -28,6 +63,14 @@
   &:focus-within::after {
     inset: var(--ax-space-6) 0;
   }
+}
+
+.aksel-radio-card.aksel-radio--small {
+  padding: var(--ax-space-12) var(--ax-space-16);
+}
+
+.aksel-radio-card-group.aksel-radio-group--small > .aksel-radio-buttons {
+  gap: var(--ax-space-8);
 }
 
 /* Label */
@@ -203,9 +246,27 @@
   --__axc-radio-checkbox-marker-border: 7px;
 }
 
+/* Radio card border in hover and checked states */
+.aksel-radio-card:is(
+  :hover:not(:where(.aksel-radio--disabled, .aksel-radio--readonly, .aksel-radio--error)),
+  :has(> .aksel-radio__input:checked):not(:where(.aksel-radio--disabled, .aksel-radio--readonly))
+) {
+  border-color: var(--ax-border-default);
+  box-shadow: 0 0 0 1px var(--ax-border-default);
+}
+
+/* Radio card background in checked state */
+.aksel-radio-card:has(> .aksel-radio__input:checked):not(
+    :where(.aksel-radio--disabled, .aksel-radio--readonly, .aksel-radio--error)
+  ) {
+  background-color: var(--ax-bg-accent-moderateA);
+}
+
 /* Marker colors in unchecked hover state (unless disabled) */
 .aksel-checkbox__input:hover:not(:disabled, :checked, :indeterminate),
-.aksel-radio__input:hover:not(:disabled, :checked) {
+.aksel-radio__input:hover:not(:disabled, :checked),
+.aksel-radio-card:hover:not(:where(.aksel-radio--disabled, .aksel-radio--readonly))
+  > .aksel-radio__input:not(:disabled, :checked) {
   border-color: var(--ax-border-strong);
   background-color: var(--ax-bg-moderate-hoverA);
 }
@@ -222,15 +283,26 @@
   opacity: var(--ax-opacity-disabled);
 }
 
+/* Radio card background in disabled and readonly states */
+.aksel-radio-card:where(.aksel-radio--readonly) {
+  background-color: var(--ax-bg-neutral-moderate);
+}
+
+.aksel-radio-card.aksel-radio--disabled > .aksel-radio__input:checked {
+  border-color: var(--ax-border-neutral-strong);
+}
+
 /* Cursor in disabled state on otherwise clickable elements */
 .aksel-checkbox--disabled :where(.aksel-checkbox__input, .aksel-checkbox__label),
-.aksel-radio--disabled > :where(.aksel-radio__input, .aksel-radio__label) {
+.aksel-radio--disabled > :where(.aksel-radio__input, .aksel-radio__label),
+.aksel-radio-card.aksel-radio--disabled {
   cursor: not-allowed;
 }
 
 /* Cursor in readonly state on otherwise clickable elements */
 .aksel-checkbox--readonly :where(.aksel-checkbox__input, .aksel-checkbox__label),
-.aksel-radio--readonly > :where(.aksel-radio__input, .aksel-radio__label) {
+.aksel-radio--readonly > :where(.aksel-radio__input, .aksel-radio__label),
+.aksel-radio-card.aksel-radio--readonly {
   cursor: default;
 }
 
