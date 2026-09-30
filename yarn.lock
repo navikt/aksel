@@ -5349,7 +5349,6 @@ __metadata:
     "@types/node": "npm:^24.10.9"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
-    aksel: "workspace:^"
     concurrently: "npm:10.0.4"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.1.0"
@@ -10943,7 +10942,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel@workspace:., aksel@workspace:^":
+"aksel@workspace:.":
   version: 0.0.0-use.local
   resolution: "aksel@workspace:."
   dependencies:
