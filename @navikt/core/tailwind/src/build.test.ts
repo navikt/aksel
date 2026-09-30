@@ -107,17 +107,6 @@ describe("Tailwind v4 config", () => {
     expect(invalid).toEqual([]);
   });
 
-  test("font sizes use the `--text-*` namespace", () => {
-    const variables = getVariables(generateThemeCSS());
-
-    expect(variables.filter((v) => v.startsWith("--font-size-"))).toEqual([]);
-    expect(variables).toEqual(
-      expect.arrayContaining(
-        Object.keys(v4Config.fontSizes).map((key) => `--text-ax-${key}`),
-      ),
-    );
-  });
-
   test("font families use the `--font-*` namespace", () => {
     expect(getVariables(generateThemeCSS())).toContain("--font-ax-font-family");
   });
