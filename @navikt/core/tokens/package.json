@@ -35,6 +35,7 @@
   "homepage": "https://aksel.nav.no/grunnleggende/styling/design-tokens/",
   "devDependencies": {
     "@figma/plugin-typings": "^1.131.0",
+    "@types/lodash": "4.17.25",
     "colorjs.io": "^0.7.1",
     "esbuild": "^0.28.2",
     "lightningcss": "^1.33.0",

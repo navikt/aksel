@@ -42,7 +42,7 @@
     "@sanity/export": "6.2.1",
     "@sanity/functions": "1.7.2",
     "@sanity/schema": "6.14.1",
-    "@types/lodash": "4.17.20",
+    "@types/lodash": "4.17.25",
     "@types/react": "19.2.14",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",

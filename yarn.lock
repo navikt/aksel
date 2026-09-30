@@ -5239,6 +5239,7 @@ __metadata:
     "@figma/rest-api-spec": "npm:^0.41.0"
     "@svgr/cli": "npm:8.1.0"
     "@types/js-yaml": "npm:^4.0.9"
+    "@types/lodash": "npm:4.17.25"
     "@types/react": "npm:19.2.14"
     adm-zip: "npm:^0.6.1"
     concurrently: "npm:10.0.4"
@@ -5281,6 +5282,7 @@ __metadata:
     "@types/cli-progress": "npm:3.11.6"
     "@types/is-git-clean": "npm:1.1.2"
     "@types/jscodeshift": "npm:17.3.0"
+    "@types/lodash": "npm:4.17.25"
     chalk: "npm:5.6.2"
     cli-progress: "npm:3.12.0"
     clipboardy: "npm:5.3.1"
@@ -5378,6 +5380,7 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@figma/plugin-typings": "npm:^1.131.0"
+    "@types/lodash": "npm:4.17.25"
     colorjs.io: "npm:^0.7.1"
     esbuild: "npm:^0.28.2"
     lightningcss: "npm:^1.33.0"
@@ -9260,10 +9263,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.17.20":
-  version: 4.17.20
-  resolution: "@types/lodash@npm:4.17.20"
-  checksum: 10/8cd8ad3bd78d2e06a93ae8d6c9907981d5673655fec7cb274a4d9a59549aab5bb5b3017361280773b8990ddfccf363e14d1b37c97af8a9fe363de677f9a61524
+"@types/lodash@npm:4.17.25":
+  version: 4.17.25
+  resolution: "@types/lodash@npm:4.17.25"
+  checksum: 10/f786e05664439cc8d327fd97c62c060d81b3c4ed52127d01fbc926139e1a669c1554bf3cd0dbb43f8fcc7d9b5c6c23c543cc36de8dc815c9f289ea852b26ebd6
   languageName: node
   linkType: hard
 
@@ -10876,7 +10879,7 @@ __metadata:
     "@sanity/schema": "npm:6.14.1"
     "@sanity/table": "npm:3.1.16"
     "@sanity/vision": "npm:6.14.1"
-    "@types/lodash": "npm:4.17.20"
+    "@types/lodash": "npm:4.17.25"
     "@types/react": "npm:19.2.14"
     date-fns: "npm:^4.0.0"
     lodash: "npm:4.18.1"
@@ -26708,7 +26711,7 @@ __metadata:
     "@slack/web-api": "npm:^8.0.0"
     "@types/jscodeshift": "npm:17.3.0"
     "@types/jsdom": "npm:^27.0.0"
-    "@types/lodash": "npm:4.17.20"
+    "@types/lodash": "npm:4.17.25"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
     "@types/semver": "npm:^7.7.1"
