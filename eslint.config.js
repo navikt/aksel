@@ -191,6 +191,8 @@ module.exports = defineConfig([
                 "use",
                 "cache",
                 "useEffectEvent",
+                "ViewTransition",
+                "addTransitionType",
               ],
               message:
                 "We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
@@ -200,6 +202,11 @@ module.exports = defineConfig([
               name: "react-dom/client",
               importNames: ["createRoot", "hydrateRoot"],
               message: "React 18+ API not allowed (targeting React 17).",
+            },
+            {
+              name: "react-dom",
+              importNames: ["browser"],
+              message: "React 19+ API not allowed (targeting React 17).",
             },
           ],
           patterns: [
