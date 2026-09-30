@@ -201,6 +201,7 @@ export {
   type DialogBodyProps,
   type DialogFooterProps,
 } from "./dialog";
+export { Badge } from "./badge";
 
 /**
  * Theming
