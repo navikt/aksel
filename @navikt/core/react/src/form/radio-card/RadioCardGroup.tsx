@@ -25,11 +25,10 @@ const RadioCardGroup = forwardRef<HTMLFieldSetElement, RadioCardGroupProps>(
   ),
 );
 
-// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace RadioCardGroup {
   export type Props = RadioCardGroupProps;
 }
 
-// eslint-disable-next-line import/export
 export { RadioCardGroup };
 export type { RadioCardGroupProps };

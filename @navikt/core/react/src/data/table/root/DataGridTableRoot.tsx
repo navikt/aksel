@@ -553,7 +553,7 @@ const DataGridTable = DataGridTableInternal as <RowT>(
   props: DataGridTableProps<RowT> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
-// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGridTable {
   export type Props<T = unknown> = DataGridTableProps<T>;
   export type Sorting = TableSortOptions;
@@ -566,7 +566,6 @@ export namespace DataGridTable {
 }
 
 // docgen doesn't work well with type params, so we let it use DataGridTableInternal instead
-// eslint-disable-next-line import/export
 export { DataGridTable, DataGridTableInternal };
 export type { DataGridTableProps };
 export default DataGridTable;

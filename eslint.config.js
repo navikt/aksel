@@ -10,7 +10,6 @@ const testingLibrary = require("eslint-plugin-testing-library");
 const { globalIgnores, defineConfig } = require("eslint/config");
 const globals = require("globals");
 const tseslint = require("typescript-eslint");
-const babelParser = require("@babel/eslint-parser");
 
 /**
  * TODO:
@@ -35,7 +34,18 @@ module.exports = defineConfig([
     "**/query-types.ts",
     ".yarn",
     "**/next-env.d.ts",
-    "stylelint.config.mjs",
+    // Generated/gitignored output (flat config does not read .gitignore)
+    "@navikt/aksel-icons/src/**",
+    "@navikt/aksel/src/version.ts",
+    "**/component-names.generated.ts",
+    "@navikt/core/tailwind/{src/tokens.ts,tailwind.config.js,tailwind.darkside.config.js}",
+    "@navikt/core/tokens/token_docs.js",
+    "apps/playroom/{playroom.config.js,src/auto-generated-imports.ts}",
+    "**/.build",
+    "**/coverage",
+    "**/storybook-static",
+    "**/test-results",
+    "tooling/analyzer/temp",
   ]),
   js.configs.recommended,
   reactPlugin.configs.flat.recommended,
@@ -51,6 +61,8 @@ module.exports = defineConfig([
   {
     settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
     languageOptions: {
+      // eslint-plugin-import's recommended config sets ecmaVersion 2018
+      ecmaVersion: "latest",
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -74,21 +86,19 @@ module.exports = defineConfig([
     },
   },
   {
-    files: ["**/*.js"],
-    languageOptions: {
-      parser: babelParser, // Required for using modern JS features in .js files
-      parserOptions: {
-        requireConfigFile: false,
-      },
-    },
-  },
-  {
     files: ["**/*.{ts,tsx}"],
     extends: [tseslint.configs.recommended],
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
     rules: {
+      //
+      // Start: Covered by TypeScript, and slow without a TS resolver
+      "import/default": "off",
+      "import/export": "off",
+      "import/named": "off",
+      "import/no-named-as-default-member": "off",
+      // End
       "@typescript-eslint/no-explicit-any": "off", // Temporary
       "@typescript-eslint/no-unused-expressions": [
         "error",

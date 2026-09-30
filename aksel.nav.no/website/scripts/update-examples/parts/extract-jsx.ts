@@ -1,6 +1,5 @@
 import { parse } from "@babel/parser";
 import traverse from "@babel/traverse";
-// eslint-disable-next-line import/default
 import prettier from "prettier";
 
 async function extractJsx(
