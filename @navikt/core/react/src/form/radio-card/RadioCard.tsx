@@ -32,11 +32,10 @@ const RadioCard = forwardRef<HTMLInputElement, RadioCardProps>(
   },
 );
 
-// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace RadioCard {
   export type Props = RadioCardProps;
 }
 
-// eslint-disable-next-line import/export
 export { RadioCard };
 export type { RadioCardProps };
