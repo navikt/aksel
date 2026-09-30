@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Masonry from "react-responsive-masonry";
 import { Box, HGrid, Heading } from "@navikt/ds-react";
+import { useMedia } from "@/app/_ui/utils/hooks/useMedia";
 import Card, { type ArticleT } from "./FrontpageMasonryCard";
 import { Highlight } from "./HighlightedArticle";
 import styles from "./frontpage.module.css";
@@ -40,6 +41,11 @@ const Latest = ({ block }: LatestArticlesProps) => {
 
   const articles = useMemo(() => getList(block), [block]);
 
+  /* ResponsiveMasonry reads window.innerWidth on first render, causing hydration mismatch */
+  const isLarge = useMedia("(min-width: 1025px)");
+  const isMedium = useMedia("(min-width: 769px)");
+  const columnsCount = isLarge ? 3 : isMedium ? 2 : 1;
+
   return (
     <>
       <Heading level="2" size="xlarge" className={styles.latestHeading}>
@@ -52,20 +58,11 @@ const Latest = ({ block }: LatestArticlesProps) => {
         aria-label="Nyeste artikler fra Aksel"
         className={styles.latestSection}
       >
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3 }}
-        >
-          <Masonry gutter="1.5rem">
-            {articles.map((x, index) => (
-              <Card
-                key={x._id}
-                article={x}
-                index={index}
-                visible={intersected}
-              />
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
+        <Masonry gutter="1.5rem" columnsCount={columnsCount}>
+          {articles.map((x, index) => (
+            <Card key={x._id} article={x} index={index} visible={intersected} />
+          ))}
+        </Masonry>
       </section>
     </>
   );
