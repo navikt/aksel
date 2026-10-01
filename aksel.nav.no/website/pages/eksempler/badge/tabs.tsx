@@ -3,8 +3,7 @@ import {
   InboxDownIcon,
   PaperplaneIcon,
 } from "@navikt/aksel-icons";
-import { BodyShort, HStack, Tabs } from "@navikt/ds-react";
-import { Badge } from "@navikt/ds-react/PREVIEW";
+import { Badge, BodyShort, HStack, Tabs } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
