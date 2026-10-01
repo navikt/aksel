@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.18.0
+
+### Patch Changes
+
+- ActionMenu: Faster and smoother open transition. ([#5296](https://github.com/navikt/aksel/pull/5296))
+
 ## 8.17.2
 
 ## 8.17.1

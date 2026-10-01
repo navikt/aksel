@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 8.18.0
+
+### Minor Changes
+
+- Radio: Add RadioCard and RadioCardGroup components ([#5276](https://github.com/navikt/aksel/pull/5276))
+
+### Patch Changes
+
+- Badge, Lookup: now available outside of Preview scope ([#5344](https://github.com/navikt/aksel/pull/5344))
+
+- DatePicker: Use without hook now correctly closes picker on date-selection ([#5327](https://github.com/navikt/aksel/pull/5327))
+
+- ActionMenu: Menu is no longer modal, Page scroll and interaction outside the menu are no longer blocked while open. ([#5296](https://github.com/navikt/aksel/pull/5296))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.18.0
+  - @navikt/aksel-icons@8.18.0
+
 ## 8.17.2
 
 ### Patch Changes

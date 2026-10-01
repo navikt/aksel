@@ -1,5 +1,33 @@
 # Changelog
 
+## 8.18.0
+
+### @navikt/aksel
+
+- Codemod: Migrations now run in folders that are not git repositories, and a missing git install gets its own error message. `codemod v8` no longer stops before `v8-tokens` because of changes made by earlier migrations in the same run. ([`470a820`](https://github.com/navikt/aksel/commit/470a8207f23aee71243b986ef2836967c2498e71))
+
+- Codemod: `v8-tokens` no longer removes whitespace before replaced tokens or rewrites longer names that contain a token name. ([#5322](https://github.com/navikt/aksel/pull/5322))
+
+### @navikt/ds-css
+
+- ActionMenu: Faster and smoother open transition. ([#5296](https://github.com/navikt/aksel/pull/5296))
+
+### @navikt/ds-react
+
+- Radio: Add RadioCard and RadioCardGroup components ([#5276](https://github.com/navikt/aksel/pull/5276))
+
+* Badge, Lookup: now available outside of Preview scope ([#5344](https://github.com/navikt/aksel/pull/5344))
+
+* DatePicker: Use without hook now correctly closes picker on date-selection ([#5327](https://github.com/navikt/aksel/pull/5327))
+
+* ActionMenu: Menu is no longer modal, Page scroll and interaction outside the menu are no longer blocked while open. ([#5296](https://github.com/navikt/aksel/pull/5296))
+
+### @navikt/ds-tailwind
+
+- v3 preset adds `rounded-ax-*` and no longer lists radius tokens as colors ([#5329](https://github.com/navikt/aksel/pull/5329))
+
+- v4 theme now uses `@theme inline`, so dark mode and `data-color` work with Tailwind utilities. Font sizes are available as `text-ax-*` and font family as `font-ax-font-family` (`font-family-ax-font-family` is deprecated) ([#5329](https://github.com/navikt/aksel/pull/5329))
+
 ## 8.17.2
 
 ### @navikt/aksel-icons

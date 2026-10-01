@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 8.18.0
+
+### Patch Changes
+
+- Codemod: Migrations now run in folders that are not git repositories, and a missing git install gets its own error message. `codemod v8` no longer stops before `v8-tokens` because of changes made by earlier migrations in the same run. ([`470a820`](https://github.com/navikt/aksel/commit/470a8207f23aee71243b986ef2836967c2498e71))
+
+- Codemod: `v8-tokens` no longer removes whitespace before replaced tokens or rewrites longer names that contain a token name. ([#5322](https://github.com/navikt/aksel/pull/5322))
+
 ## 8.17.2
 
 ## 8.17.1
