@@ -26,19 +26,21 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const [virtuallyFocusedOptionValue, setVirtuallyFocusedOptionValue] =
     useState("");
   const [filterString, setFilterString] = useState("");
-
   const rootContext = useComboboxRootContext();
-
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(
     function onOpen() {
+      const canHover = window.matchMedia("(hover: hover)").matches;
+
       // Virtually focus and scroll to first (selected) option
       const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
         '[aria-selected="true"]',
       );
       if (selectedOptionElm) {
-        setVirtuallyFocusedOptionValue(selectedOptionElm.dataset.id || "");
+        if (canHover) {
+          setVirtuallyFocusedOptionValue(selectedOptionElm.dataset.id || "");
+        }
         setTimeout(
           () => selectedOptionElm.scrollIntoView({ block: "nearest" }),
           0,
@@ -46,7 +48,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
       } else {
         const firstOptionElm =
           ref.current?.querySelector<HTMLElement>('[role="option"]');
-        if (firstOptionElm) {
+        if (firstOptionElm && canHover) {
           setVirtuallyFocusedOptionValue(firstOptionElm.dataset.id || "");
         }
       }
