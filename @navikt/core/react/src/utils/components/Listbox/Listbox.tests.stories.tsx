@@ -211,3 +211,54 @@ export const EnterKey: StoryObj<{
     onClick: fn(),
   },
 };
+
+const ListboxStoryWithSelectedOption = () => {
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
+  return (
+    <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+      <Listbox.Options>
+        <Listbox.Option
+          id="first-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "first-item"}
+          aria-selected={false}
+        >
+          First item
+        </Listbox.Option>
+        <Listbox.Option
+          id="selected-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "selected-item"}
+          aria-selected
+        >
+          Selected item
+        </Listbox.Option>
+        <Listbox.Option
+          id="last-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "last-item"}
+          aria-selected={false}
+        >
+          Last item
+        </Listbox.Option>
+      </Listbox.Options>
+    </Listbox>
+  );
+};
+
+// When there's a selected option, but no option has virtual focus,
+// pressing ArrowUp or ArrowDown should focus the selected option.
+export const ArrowDownFocusesSelectedOption: StoryObj = {
+  render: ListboxStoryWithSelectedOption,
+  play: async ({ canvasElement }) => {
+    pressKey(canvasElement, "ArrowDown");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("selected-item");
+  },
+};
+export const ArrowUpFocusesSelectedOption: StoryObj = {
+  render: ListboxStoryWithSelectedOption,
+  play: async ({ canvasElement }) => {
+    pressKey(canvasElement, "ArrowUp");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("selected-item");
+  },
+};
