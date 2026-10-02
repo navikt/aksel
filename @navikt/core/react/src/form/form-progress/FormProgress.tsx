@@ -100,7 +100,11 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           className="aksel-form-progress__bar"
         />
 
-        <Collapsible lazy open={open} onOpenChange={onOpenChange}>
+        <Collapsible
+          closedBehavior="hidden"
+          open={open}
+          onOpenChange={onOpenChange}
+        >
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
               {translate("step", { activeStep, totalSteps })}
