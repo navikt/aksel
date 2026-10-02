@@ -61,6 +61,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       readOnly,
       inputDescriptionId,
       readOnlyIconNeedsTitle,
+      disabled,
     } = useFieldset(props, legendId);
 
     const fieldset = useContext(FieldsetContext);
@@ -86,7 +87,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             [fieldset?.errorId ?? ""]: !!fieldset?.error,
           }),
           size,
-          disabled: props.disabled ?? false,
+          disabled,
           readOnly,
         }}
       >
