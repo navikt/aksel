@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "aksel.nav.no/**"
+      - "apps/playroom/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
