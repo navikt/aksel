@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.29.0",
-    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-react": "^8.0.1",
     "@babel/preset-typescript": "^7.28.5",
     "@types/node": "^24.10.9",
     "babel-loader": "^9.1.3",
