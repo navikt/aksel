@@ -88,3 +88,22 @@ describe("Checkbox handles controlled-state correctly", () => {
     );
   });
 });
+
+describe("Checkbox outside CheckboxCard", () => {
+  test("does not toggle when clicking description", () => {
+    render(
+      <CheckboxGroup legend="legend">
+        <Checkbox value="value1" description="Checkbox description">
+          label1
+        </Checkbox>
+      </CheckboxGroup>,
+    );
+
+    fireEvent.click(screen.getByText("Checkbox description"));
+
+    expect(
+      screen.getByRole<HTMLInputElement>("checkbox", { name: "label1" })
+        .checked,
+    ).toBe(false);
+  });
+});
