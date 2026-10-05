@@ -86,6 +86,10 @@
 
   .aksel-read-more[data-state="closed"] & {
     display: none;
+
+    @media print {
+      display: block;
+    }
   }
 }
 

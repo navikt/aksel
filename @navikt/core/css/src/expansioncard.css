@@ -19,6 +19,10 @@
     box-shadow: 0 0 0 1px var(--ax-border-default);
     border-color: var(--ax-border-default);
   }
+
+  @media print {
+    border-color: black;
+  }
 }
 
 /* ------------------------ ExpansionCard Small-size ------------------------ */
@@ -158,6 +162,16 @@
   overflow: hidden;
 
   &[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    padding-block: var(--__axc-expansioncard-padding-block);
+
+    & .aksel-expansioncard__content-inner {
+      opacity: 1;
+    }
+  }
+
+  @media print {
     grid-template-rows: 1fr;
     visibility: visible;
     padding-block: var(--__axc-expansioncard-padding-block);
