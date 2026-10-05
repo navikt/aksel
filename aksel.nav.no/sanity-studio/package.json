@@ -30,7 +30,7 @@
     "react-dom": "19.3.0",
     "react-rx": "^5.1.1",
     "rxjs": "^7.8.2",
-    "sanity": "6.14.1",
+    "sanity": "6.16.0",
     "sanity-plugin-iframe-pane": "5.0.35",
     "sanity-plugin-media": "6.1.8",
     "sanity-plugin-references": "1.2.0",
