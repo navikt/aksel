@@ -1,7 +1,6 @@
 /* stylelint-disable aksel/design-token-no-global-override */
 
-@layer tw-snapshot, aksel;
-
+@import "./layer-order.css";
 @import "../tailwind-snapshot.css" layer(tw-snapshot);
 @import "@navikt/ds-css" layer(aksel);
 

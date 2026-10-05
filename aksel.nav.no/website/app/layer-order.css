@@ -1,0 +1,2 @@
+/* Must be the first import in globals.css: Turbopack hoists @import content above the importing file's own rules. */
+@layer tw-snapshot, sui, aksel;
