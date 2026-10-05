@@ -5262,7 +5262,7 @@ __metadata:
     commander: "npm:15.0.0"
     enquirer: "npm:2.4.1"
     fast-glob: "npm:3.3.3"
-    figlet: "npm:1.11.0"
+    figlet: "npm:1.11.3"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:17.4.0"
     lodash: "npm:4.18.1"
@@ -14885,14 +14885,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:1.11.0":
-  version: 1.11.0
-  resolution: "figlet@npm:1.11.0"
+"figlet@npm:1.11.3":
+  version: 1.11.3
+  resolution: "figlet@npm:1.11.3"
   dependencies:
     commander: "npm:^14.0.0"
   bin:
     figlet: bin/index.js
-  checksum: 10/ed78dd3dcd7cd23daf43b84c53af9befc19c9e9e413ff061191d2b08413e5db1d97a9c383df7b1c488996c220e131c0e4dd8a1c8431257a3c97c761540b02025
+  checksum: 10/8bf77e217513b8df2d2a2d2b991486dfcec8208bf2d87bdb4b8afe7e18db1630e4ba82389294ef8e9fd03b5734f8c126811763f8fedf481d86cbfbfaab9439e2
   languageName: node
   linkType: hard
 
