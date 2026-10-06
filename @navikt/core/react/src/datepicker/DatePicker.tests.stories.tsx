@@ -564,6 +564,89 @@ export const HookFallbackToDate: Story = {
   },
 };
 
+const navigationToday = new Date("Jun 1 2025");
+
+export const HookIgnoresUnreasonableYear: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      today: navigationToday,
+    });
+
+    return (
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByLabelText("Velg dato"), "07.09.4582");
+    await userEvent.click(canvas.getByTitle("Åpne datovelger"));
+
+    const dialog = canvas.getByRole("dialog");
+    expect(
+      within(dialog).getByText(
+        format(navigationToday, "LLLL y", { locale: nb }),
+      ),
+    ).toBeInTheDocument();
+  },
+};
+
+export const HookNavigatesToReasonableYear: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      today: navigationToday,
+    });
+
+    return (
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByLabelText("Velg dato"), "07.09.2030");
+    await userEvent.click(canvas.getByTitle("Åpne datovelger"));
+
+    const dialog = canvas.getByRole("dialog");
+    expect(within(dialog).getByText("september 2030")).toBeInTheDocument();
+  },
+};
+
+export const RangeHookIgnoresUnreasonableYear: Story = {
+  render: () => {
+    const { datepickerProps, fromInputProps, toInputProps } =
+      useRangeDatepicker({ today: navigationToday });
+
+    return (
+      <DatePicker {...datepickerProps} open>
+        <HStack gap="space-16">
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
+        </HStack>
+      </DatePicker>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByLabelText("Fra"));
+    await userEvent.paste("07.09.4582");
+    await userEvent.click(canvas.getByLabelText("Til"));
+    await userEvent.paste("08.09.4582");
+
+    const dialog = canvas.getByRole("dialog");
+    expect(
+      within(dialog).getByText(
+        format(navigationToday, "LLLL y", { locale: nb }),
+      ),
+    ).toBeInTheDocument();
+  },
+};
+
 export const SelectSameRangedDate: Story = {
   render: () => {
     const { datepickerProps, toInputProps, fromInputProps } =

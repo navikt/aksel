@@ -3,7 +3,12 @@ import React, { useCallback, useState } from "react";
 import { type DayEventHandler, dateMatchModifiers } from "react-day-picker";
 import { getLocaleFromString } from "../../utils/components/date/Date.locale";
 import type { DateInputProps } from "../../utils/components/date/input/DateInput";
-import { formatDateForInput, isValidDate, parseDate } from "../../utils/date";
+import {
+  formatDateForInput,
+  isNavigableYear,
+  isValidDate,
+  parseDate,
+} from "../../utils/date";
 import { focusElement } from "../../utils/helpers/focus";
 import { useDateLocale } from "../../utils/i18n/i18n.hooks";
 import type { DatePickerProps } from "./DatePickerRoot";
@@ -173,10 +178,18 @@ export const useDatepicker = (
     (newOpen: boolean) => {
       setOpen(newOpen);
       if (newOpen) {
-        setMonth(selectedDay ?? defaultSelected ?? defaultMonth ?? today);
+        const navigableSelectedDay =
+          selectedDay &&
+          isNavigableYear({ day: selectedDay, today, fromDate, toDate })
+            ? selectedDay
+            : undefined;
+
+        setMonth(
+          navigableSelectedDay ?? defaultSelected ?? defaultMonth ?? today,
+        );
       }
     },
-    [defaultMonth, defaultSelected, selectedDay, today],
+    [defaultMonth, defaultSelected, fromDate, selectedDay, toDate, today],
   );
 
   const updateDate = (date?: Date) => {
@@ -221,7 +234,10 @@ export const useDatepicker = (
       const isAfter =
         toDate && day && differenceInCalendarDays(day, toDate) > 0;
 
-      !isBefore && !isAfter && setMonth(day);
+      !isBefore &&
+        !isAfter &&
+        isNavigableYear({ day, today, fromDate, toDate }) &&
+        setMonth(day);
     }
   };
 
@@ -313,7 +329,9 @@ export const useDatepicker = (
     }
     updateDate(day);
     updateValidation();
-    setMonth(defaultMonth ?? day);
+    if (defaultMonth || isNavigableYear({ day, today, fromDate, toDate })) {
+      setMonth(defaultMonth ?? day);
+    }
   };
 
   const datepickerProps = {

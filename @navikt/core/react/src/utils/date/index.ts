@@ -9,6 +9,7 @@ export {
   dateIsInCurrentMonth,
   isValidDate,
   isDateOutsideRange,
+  isNavigableYear,
 } from "./check-dates";
 export { isMatch, isDateInRange } from "./is-match";
 export { clampDisplayMonth, clampDisplayYear } from "./clamp-dates";

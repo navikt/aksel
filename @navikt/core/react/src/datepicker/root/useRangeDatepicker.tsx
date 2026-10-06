@@ -4,7 +4,12 @@ import { dateMatchModifiers } from "react-day-picker";
 import { getLocaleFromString } from "../../utils/components/date/Date.locale";
 import type { DateRange } from "../../utils/components/date/Date.typeutils";
 import type { DateInputProps } from "../../utils/components/date/input/DateInput";
-import { formatDateForInput, isValidDate, parseDate } from "../../utils/date";
+import {
+  formatDateForInput,
+  isNavigableYear,
+  isValidDate,
+  parseDate,
+} from "../../utils/date";
 import { focusElement } from "../../utils/helpers/focus";
 import { useDateLocale } from "../../utils/i18n/i18n.hooks";
 import type { DatePickerProps } from "./DatePickerRoot";
@@ -316,6 +321,11 @@ export const useRangeDatepicker = (
     setValidation(initialValidation(range, opt));
   };
 
+  /* Avoid navigating the calendar to unreasonable years, e.g. while typing */
+  const navigateToMonth = (day: Date) => {
+    isNavigableYear({ day, today, fromDate, toDate }) && setMonth(day);
+  };
+
   const handleFocus = (e, src: RangeT) => {
     if (e.target.readOnly) {
       return;
@@ -339,7 +349,7 @@ export const useRangeDatepicker = (
       const isAfter =
         toDate && day && differenceInCalendarDays(day, toDate) > 0;
 
-      !isBefore && !isAfter && setMonth(day);
+      !isBefore && !isAfter && navigateToMonth(day);
     }
   };
 
@@ -438,7 +448,7 @@ export const useRangeDatepicker = (
     ) {
       updateRange({ to: day, from: day });
       setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
-      setMonth(day);
+      navigateToMonth(day);
       updateValidation();
       return;
     }
@@ -453,14 +463,14 @@ export const useRangeDatepicker = (
       );
       if (validateDay(toDay)) {
         updateRange({ from: day, to: toDay });
-        setMonth(day);
+        navigateToMonth(day);
         updateValidation();
         return;
       }
     }
     updateRange({ ...selectedRange, from: day });
     updateValidation({}, validation.to);
-    setMonth(day);
+    navigateToMonth(day);
   };
 
   const toChange = (
@@ -508,7 +518,7 @@ export const useRangeDatepicker = (
     }
     updateRange({ from: selectedRange?.from, to: day });
     updateValidation(validation.from, {});
-    setMonth(day);
+    navigateToMonth(day);
   };
 
   /* live-update datepicker based on changes in inputfields */
