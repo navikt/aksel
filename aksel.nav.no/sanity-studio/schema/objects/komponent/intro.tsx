@@ -18,7 +18,6 @@ export const KomponentIntro = defineType({
       name: "brukes_til",
       title: "Egnet til:",
       of: [{ type: "string" }],
-      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       type: "array",
