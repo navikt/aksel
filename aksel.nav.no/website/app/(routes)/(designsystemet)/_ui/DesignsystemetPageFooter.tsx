@@ -1,4 +1,4 @@
-import { BodyShort, HGrid, Heading, VStack } from "@navikt/ds-react";
+import { BodyShort, Box, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { ContactCard } from "@/app/(routes)/(designsystemet)/_ui/DesignsystemetContactCard";
 import type { KOMPONENT_BY_SLUG_QUERY_RESULT } from "@/app/_sanity/query-types";
 import { Avatar, avatarUrl } from "@/app/_ui/avatar/Avatar";
@@ -29,25 +29,29 @@ async function DesignsystemetPageFooter({
 
   return (
     <VStack gap="space-8">
-      {contact && (
-        <>
-          <Heading level="2" size="small">
-            Forvalter
-          </Heading>
-          <Avatar
-            type={humanizeRedaksjonType(contact.type)}
-            name={contact.title ?? ""}
-            key={contact.title}
-            imageSrc={avatarUrl(contact.avatar_id?.current ?? "missing")}
-            showName
-          />
-        </>
-      )}
-      {updateDate && (
-        <BodyShort size="small" as="span" textColor="subtle">
-          {`Artikkel oppdatert ${updateDate}`}
-        </BodyShort>
-      )}
+      <div data-block-margin="space-28">
+        {contact && (
+          <>
+            <Heading level="2" size="small">
+              Forvalter
+            </Heading>
+            <Avatar
+              type={humanizeRedaksjonType(contact.type)}
+              name={contact.title ?? ""}
+              key={contact.title}
+              imageSrc={avatarUrl(contact.avatar_id?.current ?? "missing")}
+              showName
+            />
+          </>
+        )}
+        {updateDate && (
+          <Box marginBlock="space-12 space-0">
+            <BodyShort size="small" as="span" textColor="subtle">
+              {`Artikkel oppdatert ${updateDate}`}
+            </BodyShort>
+          </Box>
+        )}
+      </div>
 
       <HGrid gap="space-24" columns={{ md: 2 }} data-block-margin="space-28">
         {href && (
