@@ -29,9 +29,9 @@ async function DesignsystemetPageFooter({
 
   return (
     <VStack gap="space-8">
-      <div data-block-margin="space-28">
+      <Box marginBlock="space-28 space-0">
         {contact && (
-          <>
+          <VStack gap="space-8">
             <Heading level="2" size="small">
               Forvalter
             </Heading>
@@ -42,7 +42,7 @@ async function DesignsystemetPageFooter({
               imageSrc={avatarUrl(contact.avatar_id?.current ?? "missing")}
               showName
             />
-          </>
+          </VStack>
         )}
         {updateDate && (
           <Box marginBlock="space-12 space-0">
@@ -51,7 +51,7 @@ async function DesignsystemetPageFooter({
             </BodyShort>
           </Box>
         )}
-      </div>
+      </Box>
 
       <HGrid gap="space-24" columns={{ md: 2 }} data-block-margin="space-28">
         {href && (

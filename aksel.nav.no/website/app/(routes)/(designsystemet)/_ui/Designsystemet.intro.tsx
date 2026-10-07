@@ -8,18 +8,20 @@ function DesignsystemetKomponentIntro({
 }: {
   data: KOMPONENT_BY_SLUG_QUERY_RESULT;
 }) {
-  const useFor = data?.intro?.brukes_til;
-  const avoidUseFor = data?.intro?.brukes_ikke_til;
+  const useFor = data?.intro?.brukes_til ?? [];
+  const avoidUseFor = data?.intro?.brukes_ikke_til ?? [];
+  const internal = data?.status?.internal;
 
-  if (!useFor && !avoidUseFor) {
+  const showUseFor = internal || useFor.length > 0;
+  const showAvoidUseFor = avoidUseFor.length > 0;
+
+  if (!showUseFor && !showAvoidUseFor) {
     return null;
   }
 
-  const internal = data?.status?.internal;
-
   return (
     <VStack gap="space-24" marginBlock="space-0 space-28">
-      {useFor && (
+      {showUseFor && (
         <div>
           <Heading size="small" level="2" spacing>
             Egnet til:
@@ -29,7 +31,7 @@ function DesignsystemetKomponentIntro({
             {internal && (
               <WebsiteListItem icon>Bruk på interne flater</WebsiteListItem>
             )}
-            {data?.intro?.brukes_til?.map((x) => (
+            {useFor.map((x) => (
               <WebsiteListItem icon key={x}>
                 <MarkdownText>{x}</MarkdownText>
               </WebsiteListItem>
@@ -37,7 +39,7 @@ function DesignsystemetKomponentIntro({
           </WebsiteList>
         </div>
       )}
-      {avoidUseFor && (
+      {showAvoidUseFor && (
         <div>
           <Heading size="small" level="2" spacing>
             Uegnet til:
