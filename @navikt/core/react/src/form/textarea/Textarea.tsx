@@ -81,6 +81,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       hasError,
       size,
       inputDescriptionId,
+      readOnly,
     } = useFormField(props, "textarea");
 
     const {
@@ -92,7 +93,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       resize,
       UNSAFE_autoScrollbar,
       i18n,
-      readOnly,
       ...rest
     } = props;
 
@@ -147,7 +147,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </BodyShort>
         )}
         <TextareaAutosize
-          {...omit(rest, ["error", "errorId", "size"])}
+          {...omit(rest, ["error", "errorId", "size", "readOnly"])}
           {...inputProps}
           onChange={composeEventHandlers(
             props.onChange,
