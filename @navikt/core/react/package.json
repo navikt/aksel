@@ -159,6 +159,16 @@
         "default": "./cjs/chat/index.js"
       }
     },
+    "./Coach": {
+      "import": {
+        "types": "./esm/coach/index.d.ts",
+        "default": "./esm/coach/index.js"
+      },
+      "require": {
+        "types": "./cjs/coach/index.d.ts",
+        "default": "./cjs/coach/index.js"
+      }
+    },
     "./Chips": {
       "import": {
         "types": "./esm/chips/index.d.ts",

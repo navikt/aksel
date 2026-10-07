@@ -1,0 +1,144 @@
+.aksel-coach__popover {
+  z-index: 2000;
+  overflow: hidden;
+}
+
+.aksel-coach__popover_content {
+  --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-32));
+
+  max-width: var(--__axc-coach__content-width);
+  overflow: auto;
+}
+
+.aksel-coach__dialog-body,
+.aksel-coach__popover_content {
+  --__axc-coach__content-padding-block: var(--ax-space-0) var(--ax-space-24);
+
+  padding-block: var(--__axc-coach__content-padding-block);
+  padding-inline: var(--ax-space-16);
+
+  &[data-top-close-button="true"] {
+    --__axc-coach__content-padding-block: var(--ax-space-2) var(--ax-space-24);
+  }
+}
+
+.aksel-coach__footer {
+  --__axc-coach__footer-p-b: var(--ax-space-12) var(--ax-space-0);
+
+  justify-content: flex-end;
+  display: flex;
+  flex-flow: wrap;
+  gap: var(--ax-space-8);
+  padding-block: var(--__axc-coach__footer-p-b);
+}
+
+.aksel-coach__image-container {
+  overflow: hidden;
+  grid-area: image;
+  position: relative;
+  padding-block-end: var(--ax-space-8);
+
+  & :is(img, picture) {
+    display: block;
+    object-fit: cover;
+    max-width: 100%;
+    height: 100%;
+  }
+}
+
+.aksel-coach__mark-anchor {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: fit-content;
+  align-items: flex-start;
+}
+
+.aksel-coach__mark-anchor > .aksel-coach__mark-container {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(1rem, -1rem);
+}
+
+.aksel-coach__mark-container {
+  --__axc-coach__mark-size: var(--ax-space-16);
+  --__axc-coach__mark-color: var(--ax-bg-strong);
+
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  width: calc(var(--__axc-coach__mark-size) * 2);
+  height: calc(var(--__axc-coach__mark-size) * 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ax-radius-full);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.aksel-coach__mark {
+  position: absolute;
+  width: var(--__axc-coach__mark-size);
+  height: var(--__axc-coach__mark-size);
+  background-color: var(--__axc-coach__mark-color);
+  border-radius: var(--ax-radius-full);
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
+}
+
+.aksel-coach__mark-pulse {
+  position: absolute;
+  width: var(--__axc-coach__mark-size);
+  height: var(--__axc-coach__mark-size);
+  background-color: var(--__axc-coach__mark-color);
+  border-radius: var(--ax-radius-full);
+  animation: pulse 3s infinite;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.aksel-coach__title,
+.aksel-coach__description,
+.aksel-coach__progress {
+  margin-bottom: var(--ax-space-8);
+}
+
+.aksel-coach__backdrop {
+  position: fixed;
+  pointer-events: none;
+  min-height: 100dvh;
+  inset: 0;
+  background-color: var(--ax-bg-overlay);
+  transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 2000;
+
+  /* iOS 26+: Ensure the backdrop covers the entire visible viewport. */
+  @supports (-webkit-touch-callout: none) {
+    position: absolute;
+  }
+}
