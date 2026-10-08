@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 8.19.0
+
+### Minor Changes
+
+- Icons: Added new icon MenuHamburgerMagnifyingGlass ([#5368](https://github.com/navikt/aksel/pull/5368))
+
 ## 8.18.0
 
 ## 8.17.2

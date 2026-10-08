@@ -1,5 +1,13 @@
 # @navikt/aksel
 
+## 8.19.0
+
+### Patch Changes
+
+- CLI: Update clipboardy to v5.3.2 ([#5357](https://github.com/navikt/aksel/pull/5357))
+
+- CLI: Update figlet to 1.11.3 ([#5360](https://github.com/navikt/aksel/pull/5360))
+
 ## 8.18.0
 
 ### Patch Changes
