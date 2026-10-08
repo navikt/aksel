@@ -13,6 +13,7 @@ export const schema: SchemaPluginOptions = {
     document.ArticleViews,
     document.CookieTracker,
     document.DesignsystemStatistics,
+    document.NewsletterTodo,
 
     /* Komponentsider */
     document.KodeEksempelDoc,
