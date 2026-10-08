@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.9",
-    "simple-git": "^3.32.3",
+    "simple-git": "^4.0.2",
     "tsx": "^4.23.15"
   }
 }
