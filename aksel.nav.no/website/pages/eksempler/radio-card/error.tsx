@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { RadioCard, RadioCardGroup } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const [error, setError] = useState(
+    "Du må velge hva slags lønn du får før du kan gå videre.",
+  );
+
+  const handleChange = (val: string) => {
+    console.info(val);
+    setError("");
+  };
+
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      description="Dette gjelder også provisjon og andre tillegg."
+      onChange={handleChange}
+      error={error}
     >
       <RadioCard
         value="lott"
@@ -35,5 +46,5 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 0,
+  index: 5,
 };

@@ -5,7 +5,8 @@ const Example = () => {
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      description="Dette gjelder også provisjon og andre tillegg."
+
+      hideLegend
     >
       <RadioCard
         value="lott"
@@ -35,5 +36,6 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 0,
+  index: 4,
+  desc: "Legend må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };

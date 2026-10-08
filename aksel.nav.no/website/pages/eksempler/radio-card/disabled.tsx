@@ -5,7 +5,8 @@ const Example = () => {
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      description="Dette gjelder også provisjon og andre tillegg."
+      defaultValue="hyre"
+      disabled
     >
       <RadioCard
         value="lott"
@@ -35,5 +36,6 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 0,
+  index: 99,
+  desc: "Vi fraråder bruk av disabled state. Vurder om du trenger å vise feltet i det hele tatt, om du heller kan bruke `readOnly`, eller bare kan skrive det ut i ren tekst.",
 };

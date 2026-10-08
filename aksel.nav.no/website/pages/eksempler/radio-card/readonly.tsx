@@ -5,7 +5,8 @@ const Example = () => {
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      description="Dette gjelder også provisjon og andre tillegg."
+      value="hyre"
+      readOnly
     >
       <RadioCard
         value="lott"
@@ -35,5 +36,6 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 0,
+  index: 98,
+  desc: "Readonly-attributtet gjør at valget ikke kan endres, men brukere vil fortsatt kunne markere og kopiere teksten. Til forskjell fra disabled vil brukere også kunne tabbe til det, og feltet vil inkluderes når skjemaet sendes inn.",
 };

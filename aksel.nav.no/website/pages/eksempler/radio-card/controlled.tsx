@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { RadioCard, RadioCardGroup } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const [val, setVal] = useState("hyre");
+
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      description="Dette gjelder også provisjon og andre tillegg."
+      onChange={setVal}
+      value={val}
     >
       <RadioCard
         value="lott"
@@ -35,5 +39,5 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 0,
+  index: 6,
 };
