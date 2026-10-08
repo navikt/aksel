@@ -4723,77 +4723,81 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/client@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@modelcontextprotocol/client@npm:2.0.0"
+"@modelcontextprotocol/client@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@modelcontextprotocol/client@npm:2.2.0"
   dependencies:
-    "@modelcontextprotocol/core": "npm:2.0.0"
+    "@modelcontextprotocol/core": "npm:2.2.0"
     cross-spawn: "npm:^7.0.5"
     eventsource: "npm:^3.0.2"
     eventsource-parser: "npm:^3.0.0"
     jose: "npm:^6.1.3"
     pkce-challenge: "npm:^5.0.0"
     zod: "npm:^4.2.0"
-  checksum: 10/fd0c0d545a07d7c01b04d741bfa56197bae7304fb2d91b0a14822ba5c86c14986de9db55f306b7edb6bf568ee0c347a4cfa042b605752e54f60e6dae9a98c637
+  checksum: 10/f6f76637ae0a1c6eacf632817ddb4a0d270d9cbc4cb031407deb8bf2437a317f9be5e4d2ab519cb8af0b7f48e01f84bed52b43c192f70115ffe1e15dc6449ada
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/core@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@modelcontextprotocol/core@npm:2.0.0"
+"@modelcontextprotocol/core@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@modelcontextprotocol/core@npm:2.2.0"
   dependencies:
     zod: "npm:^4.2.0"
-  checksum: 10/65d695e0fb8def8fcaa72f49866dcf6adaefb06b03bfb17691c11a07b147ef60cbb0076f38438c774dfa8ceff21b14a9c21aa1d30fa665fe83e4bb2a447a9d51
+  checksum: 10/3788ecff0b86506aaeaf072acd5ef1000eb9508da5760154cef87dd762718eb7a5e8977222f34406e0f5801176bc6a4b311b537dd4d263998e93884f34adb477
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/ext-apps@npm:^1.7.4":
-  version: 1.7.5
-  resolution: "@modelcontextprotocol/ext-apps@npm:1.7.5"
+"@modelcontextprotocol/ext-apps@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "@modelcontextprotocol/ext-apps@npm:2.0.3"
   dependencies:
     "@standard-schema/spec": "npm:^1.1.0"
   peerDependencies:
-    "@modelcontextprotocol/sdk": ^1.29.0
+    "@modelcontextprotocol/client": ^2.0.0
+    "@modelcontextprotocol/core": ^2.0.0
+    "@modelcontextprotocol/server": ^2.0.0
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
-    zod: ^3.25.0 || ^4.0.0
+    zod: ^4.2.0
   peerDependenciesMeta:
+    "@modelcontextprotocol/server":
+      optional: true
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/92e87161cd124fcfb4649b38bc89be77f910cc0be341aeb045b3a7a677f844a43458a24a40251be5db8271d47358f0b3d26dab456b8f68033b8afd0a54443080
+  checksum: 10/a91a75006fd41465c87251d8b6bdb6c345d0a1c2501deeec179be689ca45552c9aecbbae11a4d3ea2cf898eb9008eb5c612b526b76ea950ceddcdb597b50f335
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/inspector@npm:^2.2.0":
-  version: 2.3.0
-  resolution: "@modelcontextprotocol/inspector@npm:2.3.0"
+"@modelcontextprotocol/inspector@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@modelcontextprotocol/inspector@npm:2.9.0"
   dependencies:
     "@hono/node-server": "npm:^2.0.12"
-    "@modelcontextprotocol/client": "npm:2.0.0"
-    "@modelcontextprotocol/core": "npm:2.0.0"
-    "@modelcontextprotocol/ext-apps": "npm:^1.7.4"
-    "@modelcontextprotocol/server": "npm:2.0.0"
-    "@modelcontextprotocol/server-legacy": "npm:2.0.0"
+    "@modelcontextprotocol/client": "npm:2.2.0"
+    "@modelcontextprotocol/core": "npm:2.2.0"
+    "@modelcontextprotocol/ext-apps": "npm:^2.0.0"
+    "@modelcontextprotocol/server": "npm:2.2.0"
     "@napi-rs/keyring": "npm:^1.3.0"
     "@vitejs/plugin-react": "npm:^6.0.0"
     ajv: "npm:^8.17.1"
     atomically: "npm:^2.1.1"
     chokidar: "npm:^4.0.3"
     commander: "npm:^13.1.0"
-    hono: "npm:^4.12.18"
+    hono: "npm:^4.13.7"
     ink: "npm:^6.0.0"
     open: "npm:^10.2.0"
     pino: "npm:^9.14.0"
+    proper-lockfile: "npm:^4.1.2"
     react: "npm:^19.0.0"
-    undici: "npm:^8.5.0"
+    undici: "npm:^8.11.2"
     vite: "npm:^8.1.5"
     yaml: "npm:^2.9.0"
     zod: "npm:^4.4.3"
   bin:
     mcp-inspector: clients/launcher/build/index.js
-  checksum: 10/ddc191f4b23d226e68cd5d7b9a82dd544a94545f653ae015cea89cdfb5c7703de99c0e600d768c2d241d58635d6d3e49d788f027f071024f6ffa1a105446ec9c
+  checksum: 10/bfced50424601d94c21218ee933585fc62e9271cc60832814fceea8f90b396d0da6e56b079ac430e5edab8cb8fd4a06e191c500c64b079308bc0745c3dbf640e
   languageName: node
   linkType: hard
 
@@ -4830,33 +4834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/server-legacy@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@modelcontextprotocol/server-legacy@npm:2.0.0"
+"@modelcontextprotocol/server@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@modelcontextprotocol/server@npm:2.2.0"
   dependencies:
-    "@modelcontextprotocol/core": "npm:2.0.0"
-    content-type: "npm:^1.0.5"
-    cors: "npm:^2.8.5"
-    express-rate-limit: "npm:^8.2.1"
-    pkce-challenge: "npm:^5.0.0"
-    raw-body: "npm:^3.0.0"
+    "@modelcontextprotocol/core": "npm:2.2.0"
     zod: "npm:^4.2.0"
-  peerDependencies:
-    express: ^4.18.0 || ^5.0.0
-  peerDependenciesMeta:
-    express:
-      optional: true
-  checksum: 10/b6648532ff214f7ad363aa013aa52824ec0f3897deb28ee32da01521761c8231a35b1fcffd83afbe49adf0c2544ed836397a1f7e067174e5a6ee44ed9b70a337
-  languageName: node
-  linkType: hard
-
-"@modelcontextprotocol/server@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@modelcontextprotocol/server@npm:2.0.0"
-  dependencies:
-    "@modelcontextprotocol/core": "npm:2.0.0"
-    zod: "npm:^4.2.0"
-  checksum: 10/32d50b224f8f00b60886c2c84a53d3c0b6a0e9cd37afe4782c895795cb979c4e57736b6b663966cf50da145f3b926fc559648d521abcdadd22de4366a085e681
+  checksum: 10/698bb13ff43171b191ac1fddf2c8eed00fc42d2bb79d43a1dfa96efbd459f438a195bdc214c5cbd9bf0fba283c82a459f540d5b77e9f153d5d4ceadad8aae68a
   languageName: node
   linkType: hard
 
@@ -10578,7 +10562,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-mcp@workspace:apps/mcp-server"
   dependencies:
-    "@modelcontextprotocol/inspector": "npm:^2.2.0"
+    "@modelcontextprotocol/inspector": "npm:^2.9.0"
     "@modelcontextprotocol/sdk": "npm:^1.31.0"
     "@navikt/aksel": "npm:^8.19.0"
     "@navikt/aksel-icons": "npm:^8.19.0"
@@ -16006,10 +15990,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.11.4, hono@npm:^4.12.18":
-  version: 4.13.9
-  resolution: "hono@npm:4.13.9"
-  checksum: 10/dd1274856461b84de420bde27f91bdec836de53fd446a6bd18e8ef7e89928943030548319a22336175934c264f1eb9acd8f86c82463c9a4610630b6848ba4c56
+"hono@npm:^4.11.4, hono@npm:^4.13.7":
+  version: 4.13.12
+  resolution: "hono@npm:4.13.12"
+  checksum: 10/95e4005183c05f6d852b52397cb78290256fbab4052ef29035bc41f54d4fb854f75c3b6a05613acb1399078fbbdd7e472b510c03d7c819566b221547546866c9
   languageName: node
   linkType: hard
 
@@ -21286,6 +21270,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proper-lockfile@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "proper-lockfile@npm:4.1.2"
+  dependencies:
+    graceful-fs: "npm:^4.2.4"
+    retry: "npm:^0.12.0"
+    signal-exit: "npm:^3.0.2"
+  checksum: 10/000a4875f543f591872b36ca94531af8a6463ddb0174f41c0b004d19e231d7445268b422ff1ea595e43d238655c702250cd3d27f408e7b9d97b56f1533ba26bf
+  languageName: node
+  linkType: hard
+
 "property-information@npm:^7.0.0":
   version: 7.2.0
   resolution: "property-information@npm:7.2.0"
@@ -22398,6 +22393,13 @@ __metadata:
     extend: "npm:^3.0.2"
     teeny-request: "npm:^11.0.0"
   checksum: 10/f6039a8615c547df8c9e29022b8b63df1fe991b2c6bffab8c1edaf9108f5ce21e1eda0455bd5eb4f36e4c5301bb5c65fa888885a8b0ee2acb5d3b586c873d9ed
+  languageName: node
+  linkType: hard
+
+"retry@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "retry@npm:0.12.0"
+  checksum: 10/1f914879f97e7ee931ad05fe3afa629bd55270fc6cf1c1e589b6a99fab96d15daad0fa1a52a00c729ec0078045fe3e399bd4fd0c93bcc906957bdc17f89cb8e6
   languageName: node
   linkType: hard
 
@@ -25378,24 +25380,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^7.21.0, undici@npm:^7.22.0, undici@npm:^7.25.0, undici@npm:^7.29.0":
-  version: 7.29.1
-  resolution: "undici@npm:7.29.1"
-  checksum: 10/8b9eaf83615e96f83826c9b6b129bd378c26f750f183e931df89bf07dfae24a39736b3648c16c25904e59e34f9e151e7a852c82ef0f1fb8e8a1297c52ff3170c
-  languageName: node
-  linkType: hard
-
-"undici@npm:^7.29.1":
+"undici@npm:^7.21.0, undici@npm:^7.22.0, undici@npm:^7.25.0, undici@npm:^7.29.0, undici@npm:^7.29.1":
   version: 7.30.0
   resolution: "undici@npm:7.30.0"
   checksum: 10/eb9e4bb5f1b4c35cb934c0d04fe676b62c3be06fb3be4a256ff73699bd77abc3d41f262597a4debd41f334c95ca3ea6e763268c3768882c3fc88a5d33234b8f6
   languageName: node
   linkType: hard
 
-"undici@npm:^8.4.1, undici@npm:^8.5.0":
-  version: 8.10.0
-  resolution: "undici@npm:8.10.0"
-  checksum: 10/254219966d4a2fb110f565ffe73131caa82e949f207b9dd88930ebc23dfb6561db72ca187391cbd408ceeba7c647cb47d4110e8ae00df44c0c66e8a21e091dc0
+"undici@npm:^8.11.2, undici@npm:^8.4.1":
+  version: 8.11.2
+  resolution: "undici@npm:8.11.2"
+  checksum: 10/a6d851b0a41a94ee11d351457a818f86094ab009af59d82c1e3c38a89cfbb3910f9dbccdef442b156b9d500490f05e9ef9acf312f1a4690a41fac4941a440b8e
   languageName: node
   linkType: hard
 

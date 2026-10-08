@@ -17,7 +17,7 @@
     "dist"
   ],
   "devDependencies": {
-    "@modelcontextprotocol/inspector": "^2.2.0",
+    "@modelcontextprotocol/inspector": "^2.9.0",
     "@modelcontextprotocol/sdk": "^1.31.0",
     "@navikt/aksel": "^8.19.0",
     "@navikt/aksel-icons": "^8.19.0",
