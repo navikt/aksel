@@ -2,12 +2,9 @@ import { RadioCard, RadioCardGroup } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: string) => console.info(val);
-
   return (
     <RadioCardGroup
       legend="Hva slags lønn får du fra fisket?"
-      onChange={handleChange}
       defaultValue="hyre"
       disabled
     >
