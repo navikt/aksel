@@ -21,7 +21,6 @@ export interface ComboboxPopupProps {
   children: React.ReactNode;
 }
 
-// TODO: Bør den hete Dropdown eller Menu? (Og Overlay -> Popup?)
 export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const [virtuallyFocusedOptionValue, setVirtuallyFocusedOptionValue] =
     useState("");
@@ -41,10 +40,10 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         if (canHover) {
           setVirtuallyFocusedOptionValue(selectedOptionElm.dataset.id || "");
         }
-        setTimeout(
-          () => selectedOptionElm.scrollIntoView({ block: "nearest" }),
-          0,
-        );
+        const scrollToSelectedOption = () =>
+          selectedOptionElm.scrollIntoView({ block: "nearest" });
+        setTimeout(scrollToSelectedOption, 0); // For when opened in Floating
+        queueMicrotask(scrollToSelectedOption); // For when opened in Dialog
       } else {
         const firstOptionElm =
           ref.current?.querySelector<HTMLElement>('[role="option"]');

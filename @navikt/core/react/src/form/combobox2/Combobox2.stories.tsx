@@ -137,7 +137,12 @@ export const Readonly = () => <BasicCombobox readOnly />;
 
 export const Disabled = () => <BasicCombobox disabled />;
 
-export const ErrorStory = () => <BasicCombobox error="Du må velge et land." />;
+export const ErrorStory = () => (
+  <VStack gap="space-16">
+    <BasicCombobox error="Du må velge et land." defaultSelectedOptions={[]} />
+    <BasicCombobox error="Ugyldig land." />
+  </VStack>
+);
 ErrorStory.storyName = "Error";
 
 export const DefaultOpen = () => <BasicCombobox defaultOpen />;
@@ -462,33 +467,50 @@ export const Testing = () => {
   );
 };
 
+function WithValidation() {
+  const [error, setError] = useState("Du må velge et land");
+  return (
+    <BasicCombobox
+      options={nordicCountries}
+      defaultSelectedOptions={[]}
+      error={error}
+      onToggleOption={(option) =>
+        setError(option.label === "Island" ? "" : "Du må velge Island")
+      }
+    />
+  );
+}
+
+export const ScreenreaderTesting = () => (
+  <div>
+    <h2>Med grupper</h2>
+    <BasicCombobox options={groupedCountries} defaultSelectedOptions={[]} />
+
+    <h2>Uten grupper</h2>
+    <BasicCombobox options={nordicCountries} defaultSelectedOptions={[]} />
+
+    <h2>Label skjult visuelt</h2>
+    <BasicCombobox options={nordicCountries} hideLabel />
+
+    <h2>Med feilmelding</h2>
+    <WithValidation />
+
+    <h2>Readonly med verdi</h2>
+    <BasicCombobox readOnly />
+
+    <h2>Readonly uten verdi</h2>
+    <BasicCombobox readOnly defaultSelectedOptions={[]} />
+
+    <h2>Disabled</h2>
+    <BasicCombobox disabled />
+  </div>
+);
+
 /* TODO:
-- Mobil: Vurder å ikke fokusere søkefelt automatisk.
-- Mobil: Vurder å ikke ha virtuelt fokus i det hele tatt hvis man ikke har tastatur
-    Kan kanskje bruke media query, ev. ikke gi noe fokus før man begynner å trykke (som dagens CB. Sjekk hvordan SR takler at ingenting har virtuelt fokus.)
-    Sjekk om det er mulig å flytte virtuelt fokus uten tastatur (typ med skjermleser).
-- Vurder om fokus skal låses til søkefelt (mest aktuelt ved multiselect).
-- Åpne på pil ned (og ev. opp)?
-- Vurder funksjoner fra gamle CB (ikke brukt: dropp, brukt lite: muliggjør med komposisjon, brukt mye: bygg inn støtte)
-  - allowNewValues (er dette ofte egentlig Autocomplete?)
-  - isLoading
-  - maxSelected
-- Skal den hete noe annet enn Combobox?
+
+- Navngivning: Vurder å dele opp i separate komponenter for single- og multiselect.
+- Hvordan unngå CSS-konflikt med dagens CB?
 - Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
-- Følge Combobox-pattern (mer)? Kan ikke følge det slavisk uansett.
-    Pil opp og ned velger
-    Ikke loop
-- A11y-sjekk (skjermleser, zoom, høykontrast...)
-- Beslutningsloggen?
+- Test med skjermleser
 
-
-Utfordringer med komposisjon:
-- Vanskelig å bruke
-- Utfordrende for oss å endre (ref FormSummary)
-- Context er litt magisk/uoversiktlig
-- Description: Hvordan skal root/trigger vite at aria-describedby skal settes?
-Forslag: Tilby enkeltkomponent for de vanligste tilfellene, men også subkomponentene for fleksibilitet.
-  Kan ev. ha slot/render-props for enkelte ting.
-  Kan ev. bruke children for å kunne bytte ut/skreddersy innholdet i popup.
-
-*/
+  */
