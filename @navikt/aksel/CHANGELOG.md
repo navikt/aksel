@@ -1,5 +1,7 @@
 # @navikt/aksel
 
+## 8.19.1
+
 ## 8.19.0
 
 ### Patch Changes
