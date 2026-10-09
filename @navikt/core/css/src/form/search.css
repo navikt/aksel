@@ -81,6 +81,10 @@
   pointer-events: none;
   font-size: 1.5rem;
 
+  @media (forced-colors: active) {
+    color: CanvasText;
+  }
+
   .aksel-search--disabled & {
     opacity: var(--ax-opacity-disabled);
   }
