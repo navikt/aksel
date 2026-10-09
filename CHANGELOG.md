@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.19.1
+
+### @navikt/ds-css
+
+- Accordion: `@media print` now auto-opens every Accordion ([#5363](https://github.com/navikt/aksel/pull/5363))
+
+- ExpansionCard: `@media print` now auto-opens every ExpansionCard ([#5363](https://github.com/navikt/aksel/pull/5363))
+
+- ReadMore: `@media print` now auto-opens every ReadMore ([#5363](https://github.com/navikt/aksel/pull/5363))
+
 ## 8.19.0
 
 ### @navikt/aksel
