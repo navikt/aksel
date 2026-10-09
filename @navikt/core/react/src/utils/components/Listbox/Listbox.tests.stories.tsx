@@ -104,7 +104,7 @@ export const ArrowDown: StoryObj = {
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("last");
 
     pressKey(canvasElement, "ArrowDown");
-    expect(getVirtuallyFocusedValue(canvasElement)).toBe("first");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("last"); // No looping
   },
 };
 
@@ -127,7 +127,7 @@ export const ArrowUp: StoryObj = {
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("first");
 
     pressKey(canvasElement, "ArrowUp");
-    expect(getVirtuallyFocusedValue(canvasElement)).toBe("last");
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("first"); // No looping
   },
 };
 
@@ -163,7 +163,7 @@ export const PageUpAndPageDownKeys: StoryObj = {
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("14"); // Last
 
     pressKey(canvasElement, "PageDown");
-    expect(getVirtuallyFocusedValue(canvasElement)).toBe("14"); // No looping for PageUp/Down
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("14"); // No looping
 
     pressKey(canvasElement, "PageUp");
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("9");
@@ -175,7 +175,7 @@ export const PageUpAndPageDownKeys: StoryObj = {
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("0");
 
     pressKey(canvasElement, "PageUp");
-    expect(getVirtuallyFocusedValue(canvasElement)).toBe("0"); // No looping for PageUp/Down
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("0"); // No looping
   },
 };
 
