@@ -171,8 +171,8 @@
 
   @media print {
     & > .aksel-accordion__content {
-      grid-template-rows: 1fr;
       visibility: visible;
+      display: block;
       margin-block: var(--ax-space-8);
       margin-block-end: var(--ax-space-24);
       opacity: 1;

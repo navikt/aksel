@@ -172,7 +172,7 @@
   }
 
   @media print {
-    grid-template-rows: 1fr;
+    display: block;
     visibility: visible;
     padding-block: var(--__axc-expansioncard-padding-block);
 
