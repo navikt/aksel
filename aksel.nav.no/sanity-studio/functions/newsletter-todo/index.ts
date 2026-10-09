@@ -16,7 +16,7 @@ const handler = documentEventHandler(async ({ context, event }) => {
 
   try {
     const alreadyAdded = await client.fetch<boolean>(
-      `count(*[_id == $todoId].todoList[articleRef._ref == $ref]) > 0`,
+      `count(*[_id == $todoId][0].todoList[articleRef._ref == $ref]) > 0`,
       { todoId: NEWSLETTER_TODO_ID, ref: data._id },
     );
 
