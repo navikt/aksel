@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.19.2
+
+### Patch Changes
+
+- Search: Icon more visible in forced-colors mode ([#5386](https://github.com/navikt/aksel/pull/5386))
+
 ## 8.19.1
 
 ### Patch Changes
