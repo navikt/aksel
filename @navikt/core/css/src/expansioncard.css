@@ -172,6 +172,7 @@
   }
 
   @media print {
+    /* Override grid layout for print. Grid causes element to stretch unexpectedly across printed pages in FF */
     display: block;
     visibility: visible;
     padding-block: var(--__axc-expansioncard-padding-block);
