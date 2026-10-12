@@ -4,17 +4,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-12">
-      <HStack align="center" gap="space-8">
+      <HStack align="center" gap="space-8" as="span">
         <BodyShort as="span" weight="semibold">
           Inbox
         </BodyShort>
-        <Badge count={5} data-color="neutral" aria-label="5 ulest" />
+        <Badge count={5} data-color="neutral" />
       </HStack>
-      <HStack align="center" gap="space-8">
+      <HStack align="center" gap="space-8" as="span">
         <BodyShort as="span" weight="semibold">
           Inbox
         </BodyShort>
-        <Badge count={120} data-color="neutral" aria-label="120 ulest" />
+        <Badge count={120} data-color="neutral" />
       </HStack>
     </VStack>
   );
@@ -30,5 +30,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 0,
-  desc: "Badge kan brukes på linje med tekst for å f.eks. indikere antall uleste meldinger. Husk å alltid inkludere en hjelpetekst for å forklare hva tallet representerer.",
+  desc: "Badge kan brukes på linje med tekst for å f.eks. indikere antall uleste meldinger.",
 };

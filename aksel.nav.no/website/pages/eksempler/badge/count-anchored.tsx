@@ -4,12 +4,12 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="space-12">
-      <Badge count={5}>
+      <Badge count={5} aria-hidden>
         <Button variant="secondary" aria-label="Meldinger, 5 uleste">
           Meldinger
         </Button>
       </Badge>
-      <Badge count={120}>
+      <Badge count={120} aria-hidden>
         <Button variant="secondary" aria-label="Meldinger, 120 uleste">
           Meldinger
         </Button>

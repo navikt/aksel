@@ -37,8 +37,8 @@ export const Default: Story = {
 export const Dot: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
-      {statuses.map(({ color, label }) => (
-        <Badge key={color} data-color={color} aria-label={label} />
+      {statuses.map(({ color }) => (
+        <Badge key={color} data-color={color} />
       ))}
     </HStack>
   ),
@@ -64,7 +64,7 @@ export const Anchored: Story = {
           aria-label="Innboks, 42 nye meldinger"
         />
       </Badge>
-      <Badge data-color="danger" aria-label="Nytt varsel">
+      <Badge data-color="danger">
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
       </Badge>
     </HStack>
