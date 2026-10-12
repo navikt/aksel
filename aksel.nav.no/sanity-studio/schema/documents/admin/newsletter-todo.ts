@@ -29,7 +29,6 @@ export const NewsletterTodo = defineType({
                 ...SchemaConfig.allArticleDocuments.map((type) => ({ type })),
                 { type: "ds_endringslogg_artikkel" },
               ],
-              description: "Which movie are we screening",
               options: {
                 disableNew: true,
               },
