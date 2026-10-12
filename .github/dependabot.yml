@@ -15,6 +15,12 @@ updates:
     registries:
       - npm-github
     groups:
+      next:
+        applies-to: version-updates
+        patterns:
+          - "@next/eslint-plugin-next"
+          - "@next/bundle-analyzer"
+          - "next"
       sanity:
         applies-to: version-updates
         patterns:
@@ -43,6 +49,12 @@ updates:
           - "vitest"
           - "@vitest/*"
       # Security updates ignore version-update groups, so mirror them to keep lockstep packages together.
+      next:
+        applies-to: security-updates
+        patterns:
+          - "@next/eslint-plugin-next"
+          - "@next/bundle-analyzer"
+          - "next"
       sanity-security:
         applies-to: security-updates
         patterns:
