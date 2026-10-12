@@ -2,7 +2,6 @@ import type { namedTypes } from "ast-types";
 import jscodeshift, { type ASTPath, type Collection } from "jscodeshift";
 import fs from "node:fs";
 import path from "node:path";
-// eslint-disable-next-line import/default
 import prettier from "prettier";
 
 const j = jscodeshift.withParser("tsx");

@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
-import simpleGit from "simple-git";
+import { simpleGit } from "simple-git";
 
 const git = simpleGit();
 

@@ -57,7 +57,8 @@ export async function POST(req: NextRequest) {
   }
 
   for (const tag of tags) {
-    revalidateTag(tag, "max");
+    /* "max" serves stale content to the first visitor after an edit; expire immediately instead. */
+    revalidateTag(tag, { expire: 0 });
   }
 
   console.info(

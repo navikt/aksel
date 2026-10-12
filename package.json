@@ -76,8 +76,7 @@
   },
   "devDependencies": {
     "@actions/core": "^3.0.1",
-    "@babel/eslint-parser": "^7.29.7",
-    "@biomejs/biome": "2.5.9",
+    "@biomejs/biome": "2.5.14",
     "@changesets/cli": "2.31.1",
     "@eslint/js": "^10.0.1",
     "@github-ui/storybook-addon-performance-panel": "^1.3.0",
@@ -92,9 +91,9 @@
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitest/browser": "4.1.10",
-    "@vitest/browser-playwright": "4.1.10",
-    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/browser": "4.1.11",
+    "@vitest/browser-playwright": "4.1.11",
+    "@vitest/coverage-v8": "4.1.11",
     "@vitest/eslint-plugin": "1.6.27",
     "chromatic": "18.0.1",
     "cross-env": "^10.1.0",
@@ -108,14 +107,14 @@
     "fast-glob": "3.3.3",
     "globals": "^17.7.0",
     "husky": "^9.1.7",
-    "lint-staged": "17.4.1",
+    "lint-staged": "17.6.0",
     "playwright": "1.61.1",
     "prettier": "3.9.6",
-    "react": "19.2.8",
+    "react": "19.3.0",
     "react-docgen-typescript": "2.4.0",
-    "react-dom": "19.2.8",
+    "react-dom": "19.3.0",
     "storybook": "^10.6.0",
-    "stylelint": "^17.14.1",
+    "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
     "stylelint-value-no-unknown-custom-properties": "^6.1.1",
@@ -126,9 +125,5 @@
     "vite-plugin-turbosnap": "^1.0.3",
     "vitest": "4.1.11"
   },
-  "resolutions": {
-    "typescript": "6.0.3"
-  },
-  "_note": "Typescript må tvinges til v6 for at Playroom skal fungere (både dev og build)",
   "packageManager": "yarn@4.18.0"
 }

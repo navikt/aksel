@@ -9,6 +9,9 @@ const { cacheGet, cacheSet } = createNodeCache(
   oneHourSeconds,
 );
 
+/* Same pattern as the website API (aksel.nav.no/website/app/api/component-props/route.ts) */
+const componentSlugPattern = /^komponenter(?:\/[a-z0-9-]+){2}$/;
+
 function normalizeComponentSlug(input: string) {
   return input.trim().replace(/^\/+/, "").replace(/\.md$/i, "");
 }
@@ -26,6 +29,7 @@ const getComponentInfoInputSchema = {
     .string()
     .trim()
     .min(1, "Component is required")
+    .max(200, "Component must be at most 200 characters")
     .describe(
       "Component slug or docs path (e.g. 'komponenter/core/button' or '/komponenter/core/button.md').",
     ),
@@ -45,10 +49,11 @@ Example: aksel_get_component_info({ component: "/komponenter/core/button.md" })`
   async callback({ component }) {
     const normalizedComponent = normalizeComponentSlug(component);
 
-    if (!normalizedComponent) {
+    if (!componentSlugPattern.test(normalizedComponent)) {
       return JSON.stringify({
         error: "INVALID_COMPONENT",
-        message: "component must contain a valid component path.",
+        message:
+          "component must be a component slug like 'komponenter/core/button' or a docs path like '/komponenter/core/button.md'. Find it with aksel_find_docs or aksel-docs://index.",
       });
     }
 

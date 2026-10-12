@@ -1,5 +1,6 @@
 import type { API, JSCodeshift } from "jscodeshift";
 import { tokens } from "../../../tokens-map.js";
+import { createIdentifierRegex } from "../../../utils/identifier-regex";
 import {
   getImportSpecifier,
   getImportSpecifierName,
@@ -60,8 +61,7 @@ export default function transformer(file: JSCodeshift, api: API) {
 
       let code = root.toSource(getLineTerminator(file.source));
 
-      const rgx = new RegExp(`(${localName})`, "gm");
-      code = code.replace(rgx, out);
+      code = code.replace(createIdentifierRegex(String(localName)), out);
       root = j(code);
     }
   });

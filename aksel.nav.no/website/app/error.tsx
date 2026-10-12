@@ -4,7 +4,8 @@ import { type ReactElement, useEffect } from "react";
 import { Page } from "@navikt/ds-react/Page";
 import { logger } from "@navikt/next-logger";
 import GenericErrorPage from "@/app/_ui/generic-error-page";
-import { umamiTrack } from "@/app/_ui/umami/Umami.track";
+import { SiteTracking } from "@/app/_ui/umami/SiteTracking";
+import { umamiTrackWhenReady } from "@/app/_ui/umami/Umami.track";
 
 export default function ErrorPage({
   error,
@@ -15,13 +16,17 @@ export default function ErrorPage({
     logger.error(error);
   }, [error]);
 
-  useEffect(() => {
-    umamiTrack("client-error", { url: window.location.pathname });
-  }, []);
+  useEffect(
+    () =>
+      umamiTrackWhenReady("client-error", { url: window.location.pathname }),
+    [],
+  );
 
   return (
-    <Page className="vk-error">
-      <GenericErrorPage />
-    </Page>
+    <SiteTracking>
+      <Page className="vk-error">
+        <GenericErrorPage />
+      </Page>
+    </SiteTracking>
   );
 }

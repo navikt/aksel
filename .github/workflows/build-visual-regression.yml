@@ -22,14 +22,14 @@ jobs:
     name: Run Chromatic
     runs-on: ubuntu-latest
     permissions:
-      issues: write
+      contents: read
       pull-requests: write
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup project
         uses: ./.github/actions/setup

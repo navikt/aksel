@@ -1,4 +1,4 @@
-import type { ParsedMeta } from "./parse-meta";
+import type { MetaSummary, ParsedMeta } from "./parse-meta";
 
 /** Characters allowed in a Sanity document `_id`. */
 const SANITY_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
@@ -9,7 +9,7 @@ const SANITY_ID_PATTERN = /^[A-Za-z0-9_.-]+$/;
  * valid). Kept pure so it can be exercised both by the extractor (which throws
  * on any error) and by the test-suite.
  */
-function validateMetas(metas: ParsedMeta[]): string[] {
+function validateMetas(metas: (ParsedMeta | MetaSummary)[]): string[] {
   const errors: string[] = [];
   const nameToMeta = new Map<string, string>();
 

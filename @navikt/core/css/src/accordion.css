@@ -123,6 +123,11 @@
 
 .aksel-accordion--indent > .aksel-accordion__item > .aksel-accordion__content {
   box-shadow: -2px 0 0 0 var(--ax-border-neutral-subtleA);
+
+  @media print {
+    border-left: 1px solid black;
+    margin-left: calc(var(--ax-space-24) - 2px);
+  }
 }
 
 .aksel-accordion__item {
@@ -161,6 +166,18 @@
 
     &:last-child {
       border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+    }
+  }
+
+  @media print {
+    & > .aksel-accordion__content {
+      visibility: visible;
+
+      /* Override grid layout for print. Grid causes element to stretch unexpectedly across printed pages in FF */
+      display: block;
+      margin-block: var(--ax-space-8);
+      margin-block-end: var(--ax-space-24);
+      opacity: 1;
     }
   }
 }

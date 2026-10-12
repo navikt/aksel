@@ -35,5 +35,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 5,
-  desc: "Husk at det er lett å klikke utenfor ved et uhell. Ikke bruk 'closeOnBackdropClick' hvis det kan føre til at brukeren mister data eller går glipp av viktig informasjon.",
+  desc: "Husk at det er lett å klikke utenfor ved et uhell. Ikke bruk `closeOnBackdropClick` hvis det kan føre til at brukeren mister data eller går glipp av viktig informasjon.",
 };

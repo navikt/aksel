@@ -41,7 +41,7 @@ export type StyleDictionaryToken<T extends TokenTypes> = {
    * Token value
    * @example "#000000"
    * @example "1px"
-   * @example "{a.neutral.100.value}"
+   * @example "{a.neutral.100}"
    */
   value: string;
   /**

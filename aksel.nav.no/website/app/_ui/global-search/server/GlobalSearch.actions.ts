@@ -7,7 +7,6 @@ let preloaded = false;
 
 async function preloadSearchIndex() {
   if (preloaded) {
-    console.info("preloaded");
     return;
   }
   preloaded = true;

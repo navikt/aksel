@@ -43,7 +43,14 @@ export function validateGit(options: any, program: Command) {
   try {
     clean = isGitClean.sync(process.cwd());
   } catch (err: any) {
-    if (err?.stderr && err.stderr.indexOf("Not a git repository") >= 0) {
+    if (err?.code === "ENOENT") {
+      program.error(
+        `${chalk.yellow(
+          "\nCould not find git, so we can't check for uncommitted changes.",
+        )}${"\nInstall git, or use the --force flag to override this safety check."}`,
+      );
+    }
+    if (/not a git repository/i.test(String(err?.stderr ?? ""))) {
       clean = true;
     }
   }

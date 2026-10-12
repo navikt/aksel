@@ -1,5 +1,4 @@
-import { BodyShort, HStack } from "@navikt/ds-react";
-import { Badge } from "@navikt/ds-react/PREVIEW";
+import { Badge, BodyShort, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {

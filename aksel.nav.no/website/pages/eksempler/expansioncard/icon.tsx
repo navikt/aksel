@@ -7,6 +7,7 @@ import {
   HStack,
   Label,
   Link,
+  Show,
   VStack,
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -16,9 +17,9 @@ const Example = () => {
     <ExpansionCard aria-label="Demo med ikon">
       <ExpansionCard.Header>
         <HStack wrap={false} gap="space-16" align="center">
-          <div>
+          <Show above="sm">
             <PlantIcon aria-hidden fontSize="3rem" />
-          </div>
+          </Show>
           <div>
             <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
             <ExpansionCard.Description>

@@ -45,15 +45,16 @@ export const getTokensForCollection = async (
   return dictionary.allTokens
     .filter((token) => !token.figmaIgnore)
     .map((token) => {
-      const reference = getReferences(token.original, dictionary.tokens);
+      const references = getReferences(token.original, dictionary.tokens);
       /*
        * Currently only supports 1 level of references.
+       * The array always includes the token itself as the last element.
        */
-      return reference.length > 0
+      return references.length > 1
         ? prepareToken(
             {
               ...(token as TransformedTokenWithScopes),
-              alias: createTokenName(reference[0]),
+              alias: createTokenName(references[0]),
             },
             dictionary,
           )

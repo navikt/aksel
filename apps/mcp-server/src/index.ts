@@ -11,7 +11,8 @@ import { setupResources } from "./resources/resources.js";
 import { setupTools } from "./tools/tools.js";
 
 const app = express();
-app.use(express.json({ limit: "5mb" }));
+/* MCP JSON-RPC requests are small. A low limit keeps oversized payloads from reaching the tools. */
+app.use(express.json({ limit: "64kb" }));
 
 const isProduction = process.env.NODE_ENV === "production";
 const allowedOrigins = isProduction
