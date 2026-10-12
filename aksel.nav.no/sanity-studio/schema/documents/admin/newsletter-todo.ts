@@ -22,7 +22,7 @@ export const NewsletterTodo = defineType({
           fields: [
             defineField({
               name: "articleRef",
-              title: "Artikkel eller endringslogg",
+              title: "Artikkel",
               type: "reference",
               weak: true,
               to: [
