@@ -1,9 +1,7 @@
 import { draftMode } from "next/headers";
 import { SanityLive } from "@/app/_sanity/live";
-import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
-import { CookieConsentProvider } from "@/app/_ui/cookie-consent/CookieConsent.Provider";
 import { DraftOverlay } from "@/app/_ui/draft-overlay/DraftOverlay";
-import { Umami } from "@/app/_ui/umami/Umami";
+import { SiteTracking } from "@/app/_ui/umami/SiteTracking";
 
 export default async function IndexLayout({
   children,
@@ -14,12 +12,10 @@ export default async function IndexLayout({
 
   return (
     <>
-      <CookieConsentProvider>
-        <Umami isDraftMode={isDraftMode} />
-        <ConsentBanner />
+      <SiteTracking isDraftMode={isDraftMode}>
         {children}
         {isDraftMode && <DraftOverlay />}
-      </CookieConsentProvider>
+      </SiteTracking>
       {isDraftMode && <SanityLive includeDrafts onWelcome={false} />}
     </>
   );
