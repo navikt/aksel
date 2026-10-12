@@ -49,7 +49,7 @@ updates:
           - "vitest"
           - "@vitest/*"
       # Security updates ignore version-update groups, so mirror them to keep lockstep packages together.
-      next:
+      next-security:
         applies-to: security-updates
         patterns:
           - "@next/eslint-plugin-next"
