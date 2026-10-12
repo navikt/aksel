@@ -35,7 +35,7 @@
   color: var(--ax-text-neutral);
   width: 100%;
   min-height: 3rem;
-  display: inline-block;
+  display: block;
   position: relative;
   padding: var(--ax-space-8);
   padding-right: var(--ax-space-40);
@@ -81,10 +81,11 @@
 
 .aksel-combobox2__field-chevron {
   position: absolute;
-  font-size: 1.5rem;
   right: var(--ax-space-8);
+  top: 0;
+  margin-top: 0.75rem; /* We don't use dynamic centering because we don't want it to move if height changes */
+  font-size: 1.5rem;
   pointer-events: none;
-  margin-top: 12px; /* We don't use dynamic centering because we don't want it to move if height changes */
   color: var(--ax-text-neutral);
 
   @media (forced-colors: active) {
@@ -92,7 +93,7 @@
   }
 
   .aksel-combobox2[data-size="small"] & {
-    margin-top: 4px;
+    margin-top: 0.25rem;
   }
 }
 
@@ -236,6 +237,12 @@
 .aksel-combobox2__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
   .aksel-listbox__option-inner {
   background-color: var(--ax-bg-moderate-pressedA);
+
+  @media (forced-colors: active) {
+    background-color: SelectedItem;
+    color: SelectedItemText;
+    forced-color-adjust: none;
+  }
 }
 
 .aksel-combobox2__option-checkmark {

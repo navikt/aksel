@@ -22,5 +22,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 3,
-  desc: "Propen 'spacing' legger til mellomrom under teksten. Avstanden varierer avhengig av 'size'.",
+  desc: "Propen `spacing` legger til mellomrom under teksten. Avstanden varierer avhengig av `size`.",
 };

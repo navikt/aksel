@@ -120,10 +120,9 @@ function normalizeCount(value: number, fallback: number) {
   return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : fallback;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Badge {
   export type Props = BadgeProps;
 }
 
-// eslint-disable-next-line import/export
 export { Badge };

@@ -12,33 +12,41 @@ export default function NotFound() {
   return (
     <SiteTracking>
       <Page
-        data-aksel-template="404-v3"
+        data-aksel-template="404-v4"
         footer={<Footer />}
         className="vk-error"
       >
         <UmamiNotFoundPageLog />
         <Header />
-        <PageBlock as="main" id="hovedinnhold" tabIndex={-1} width="xl" gutters>
-          <Box paddingBlock="space-80 space-64">
+        <PageBlock as="main" width="text" gutters>
+          <Box paddingBlock="space-64 space-80">
             <VStack gap="space-64">
               <VStack gap="space-48" align="start">
-                <VStack gap="space-16">
-                  <Heading level="1" size="large" data-aksel-heading-color>
+                <div>
+                  <Heading
+                    level="1"
+                    size="large"
+                    data-aksel-heading-color
+                    spacing
+                  >
                     Beklager, vi fant ikke siden
                   </Heading>
-                  <BodyShort>
-                    Denne siden kan være slettet eller flyttet, eller det er en
-                    feil i lenken.
-                  </BodyShort>
-                  <WebsiteList>
-                    <WebsiteListItem icon>
-                      Bruk søket eller menyen
-                    </WebsiteListItem>
-                    <WebsiteListItem icon>
-                      <Link href="/">Gå til forsiden</Link>
-                    </WebsiteListItem>
-                  </WebsiteList>
-                </VStack>
+                  <VStack gap="space-12">
+                    <BodyShort>
+                      Denne siden kan være slettet eller flyttet, eller det er
+                      en feil i lenken.
+                    </BodyShort>
+                    <WebsiteList>
+                      <WebsiteListItem icon>
+                        Bruk søket eller menyen
+                      </WebsiteListItem>
+                      <WebsiteListItem icon>
+                        <Link href="/">Gå til forsiden</Link>
+                      </WebsiteListItem>
+                    </WebsiteList>
+                  </VStack>
+                </div>
+
                 <GitHubIssueLink
                   labels="bug 🐛"
                   template="bug-report.md"

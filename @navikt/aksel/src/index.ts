@@ -27,13 +27,14 @@ async function run() {
 
   if (args[0] === "codemod") {
     if (args.includes("v8-tokens")) {
-      v8TokensCommand();
-      return;
+      await v8TokensCommand();
+      process.exit(0);
     }
 
-    codemodCommand((migration) => {
+    codemodCommand(async (migration) => {
       if (migration === "v8-tokens") {
-        v8TokensCommand();
+        /* `codemod v8` has already checked git before running earlier migrations */
+        await v8TokensCommand({ skipGitCheck: true });
       }
     });
     return;

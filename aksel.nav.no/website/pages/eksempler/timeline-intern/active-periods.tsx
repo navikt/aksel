@@ -138,7 +138,7 @@ export default withDsExample(Example, { variant: "full" });
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "'onSelectPeriod' og 'isActive' lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
+  desc: "`onSelectPeriod` og `isActive` lar deg velge aktive perioder for visning av ekstra informasjon en annen plass i UI.",
 };
 
 export const args: ExampleArgsT = {

@@ -103,10 +103,12 @@ function ComboboxModal({
   useEffect(() => {
     // See "Overlay" section in CSS file for context. This handles the case when
     // the list doesn't overflow and overscroll-behavior doesn't work on iOS.
-    const scrollToTop = () => (document.documentElement.scrollTop = 0);
-    visualViewport?.addEventListener("scroll", scrollToTop);
-    return () => visualViewport?.removeEventListener("scroll", scrollToTop);
-  }, []);
+    if (open) {
+      const scrollToTop = () => (document.documentElement.scrollTop = 0);
+      visualViewport?.addEventListener("scroll", scrollToTop);
+      return () => visualViewport?.removeEventListener("scroll", scrollToTop);
+    }
+  }, [open]);
 
   return (
     <Dialog

@@ -218,8 +218,25 @@ describe("getTokenRegex JS", () => {
 
     expect("ATextRed200").not.toMatch(regex);
     expect("AATextRed200").not.toMatch(regex);
+    expect("AATextRed").not.toMatch(regex);
+    expect("$ATextRed").not.toMatch(regex);
+  });
 
-    /* Since we cant do a positive lookbehind, these cases will be matched */
-    expect("AATextRed").toMatch(regex);
+  test("should not include surrounding whitespace in the match", () => {
+    const regex = getTokenRegex("--a-text-red", "js");
+
+    expect(" ATextRed ".match(regex)).toEqual(["ATextRed"]);
+  });
+});
+
+describe("getTokenRegex does not consume leading whitespace", () => {
+  test.each([
+    ["css", " var(--a-text-red)", "--a-text-red"],
+    ["scss", "margin: 0 $a-text-red", "$a-text-red"],
+    ["less", "margin: 0 @a-text-red", "@a-text-red"],
+  ] as const)("%s", (format, input, expected) => {
+    expect(input.match(getTokenRegex("--a-text-red", format))).toEqual([
+      expected,
+    ]);
   });
 });

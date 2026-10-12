@@ -13,6 +13,7 @@ const getTokenDetailsInputSchema = {
     })
     .trim()
     .min(1, "tokenName is required")
+    .max(100, "tokenName must be at most 100 characters")
     .describe(
       "Token name, e.g. 'bg-neutral-moderate', 'text-danger', 'shadow-dialog'. Tokens follow '<role>-<tone>-<emphasis>' patterns. To discover names, browse with aksel_find_docs using kind='tokens'.",
     ),

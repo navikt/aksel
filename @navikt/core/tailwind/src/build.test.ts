@@ -16,6 +16,7 @@ describe("Tailwind v3 config", () => {
   });
 });
 
+/* https://tailwindcss.com/docs/theme#theme-variable-namespaces */
 const allowedVariables = [
   "--color-",
   "--font-",
@@ -40,18 +41,32 @@ const allowedVariables = [
   "--opacity-",
 ];
 
+const getVariables = (css: string) =>
+  css
+    .split("\n")
+    .filter((line) => line.trim().startsWith("--"))
+    .map((line) => line.trim().split(":")[0]);
+
+const nonColorCategories = [
+  "space",
+  "shadow",
+  "font-weight",
+  "font-size",
+  "font-line-height",
+  "font-family",
+  "radius",
+  "breakpoint",
+  "opacity",
+];
+
 describe("Tailwind v4 config", () => {
   test("should have correct color tokens without non-color categories", () => {
     const colorKeys = Object.keys(v4Config.colors);
-    expect(colorKeys).not.toContain("spacing");
-    expect(colorKeys).not.toContain("shadow");
-    expect(colorKeys).not.toContain("font-weight");
-    expect(colorKeys).not.toContain("font-size");
-    expect(colorKeys).not.toContain("font-line-height");
-    expect(colorKeys).not.toContain("font-family");
-    expect(colorKeys).not.toContain("border-radius");
-    expect(colorKeys).not.toContain("breakpoint");
-    expect(colorKeys.some((k) => k.includes("radius"))).toBe(false);
+    const invalid = colorKeys.filter((key) =>
+      nonColorCategories.some((category) => key.includes(category)),
+    );
+
+    expect(invalid).toEqual([]);
   });
 
   test("should have shadow tokens", () => {
@@ -76,19 +91,32 @@ describe("Tailwind v4 config", () => {
     expect(Object.keys(v4Config.radius).length).toBeGreaterThan(0);
   });
 
+  test("uses `@theme inline` so aliases resolve where the utility is used", () => {
+    expect(generateThemeCSS().split("\n")[0]).toBe("@theme inline {");
+  });
+
   test("all generated variables should use allowed Tailwind v4 theme namespaces", () => {
-    const css = generateThemeCSS();
-    const variableLines = css
-      .split("\n")
-      .filter((line) => line.trim().startsWith("--"))
-      .map((line) => line.trim().split(":")[0]);
+    const variables = getVariables(generateThemeCSS());
 
-    expect(variableLines.length).toBeGreaterThan(0);
+    expect(variables.length).toBeGreaterThan(0);
 
-    const invalid = variableLines.filter(
+    const invalid = variables.filter(
       (v) => !allowedVariables.some((prefix) => v.startsWith(prefix)),
     );
 
     expect(invalid).toEqual([]);
+  });
+
+  test("font families use the `--font-*` namespace", () => {
+    expect(getVariables(generateThemeCSS())).toContain("--font-ax-font-family");
+  });
+
+  test("font-size keys don't collide with color keys in `text-ax-*`", () => {
+    const colorKeys = Object.keys(v4Config.colors);
+    const collisions = Object.keys(v4Config.fontSizes).filter((key) =>
+      colorKeys.includes(key),
+    );
+
+    expect(collisions).toEqual([]);
   });
 });

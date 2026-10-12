@@ -1,4 +1,5 @@
 import type { API, FileInfo } from "jscodeshift";
+import { createIdentifierRegex } from "../../utils/identifier-regex";
 import { getImportSpecifier } from "../../utils/imports";
 import { getLineTerminator } from "../../utils/lineterminator";
 import moveAndRenameImport from "../../utils/packageImports";
@@ -63,8 +64,9 @@ export default function transformer(file: FileInfo, api: API) {
 
         let code = root.toSource(getLineTerminator(src));
 
-        const rgx = new RegExp(`(\\s|^)?(${localName})(?=\\s|$|[^\\w-])`, "gm");
-        code = code.replace(rgx, jsToken);
+        if (localName) {
+          code = code.replace(createIdentifierRegex(localName), jsToken);
+        }
         src = code;
 
         root = j(code);

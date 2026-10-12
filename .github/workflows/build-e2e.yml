@@ -14,15 +14,15 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  actions: read
   contents: read
-  packages: write
-  id-token: write
 
 jobs:
   prebuild-app-for-playwright:
     name: Build app for Playwright
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Push E2E image to GHCR
     env:
       IMAGE_NAME: ${{ github.repository }}-e2e
       REGISTRY: ghcr.io
@@ -31,6 +31,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       - name: Setup and build Next.js application
         uses: ./.github/actions/build-website
@@ -61,6 +62,9 @@ jobs:
     needs: [prebuild-app-for-playwright]
     name: Playwright shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read # Pull E2E image from GHCR
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
     services:
@@ -81,6 +85,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v7

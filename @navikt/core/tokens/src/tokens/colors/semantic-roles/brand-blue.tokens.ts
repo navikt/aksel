@@ -3,77 +3,77 @@ import type { StyleDictionaryTokenConfig } from "../../../tokens.util";
 export const brandBlueSemanticTokenConfig = {
   bg: {
     "brand-blue-soft": {
-      value: "{ax.brand-blue.100.value}",
+      value: "{ax.brand-blue.100}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En svak bakgrunnsfarge som kun brukes til dekor. Dekker ingen kontrastkrav.",
     },
     "brand-blue-softA": {
-      value: "{ax.brand-blue.100A.value}",
+      value: "{ax.brand-blue.100A}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En svak bakgrunnsfarge som kun brukes til dekor. Dekker ingen kontrastkrav. Er delvis gjennomsiktig.",
     },
     "brand-blue-moderate": {
-      value: "{ax.brand-blue.200.value}",
+      value: "{ax.brand-blue.200}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til dekor. Om den brukes på meningsbærende elementer må den kombineres med en godkjent border.",
     },
     "brand-blue-moderateA": {
-      value: "{ax.brand-blue.200A.value}",
+      value: "{ax.brand-blue.200A}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til dekor. Om den brukes på meningsbærende elementer må den kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-blue-moderate-hover": {
-      value: "{ax.brand-blue.300.value}",
+      value: "{ax.brand-blue.300}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til hover-state på meningsbærende elementer. Må kombineres med en godkjent border.",
     },
     "brand-blue-moderate-hoverA": {
-      value: "{ax.brand-blue.300A.value}",
+      value: "{ax.brand-blue.300A}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til hover-state på meningsbærende elementer. Må kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-blue-moderate-pressed": {
-      value: "{ax.brand-blue.400.value}",
+      value: "{ax.brand-blue.400}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til active/selected-state på meningsbærende elementer. Må kombineres med en godkjent border.",
     },
     "brand-blue-moderate-pressedA": {
-      value: "{ax.brand-blue.400A.value}",
+      value: "{ax.brand-blue.400A}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En medium-svak bakgrunnsfarge som brukes til active/selected-state på meningsbærende elementer. Må kombineres med en godkjent border. Er delvis gjennomsiktig.",
     },
     "brand-blue-strong": {
-      value: "{ax.brand-blue.600.value}",
+      value: "{ax.brand-blue.600}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En sterk bakgrunnsfarge som brukes på meningsbærende elementer.",
     },
     "brand-blue-strong-hover": {
-      value: "{ax.brand-blue.700.value}",
+      value: "{ax.brand-blue.700}",
       type: "color",
       group: "background.brand-blue",
       comment:
         "En sterk bakgrunnsfarge som brukes til hover-state på meningsbærende elementer.",
     },
     "brand-blue-strong-pressed": {
-      value: "{ax.brand-blue.800.value}",
+      value: "{ax.brand-blue.800}",
       type: "color",
       group: "background.brand-blue",
       comment:
@@ -82,28 +82,28 @@ export const brandBlueSemanticTokenConfig = {
   },
   text: {
     "brand-blue": {
-      value: "{ax.brand-blue.1000.value}",
+      value: "{ax.brand-blue.1000}",
       type: "color",
       group: "text.brand-blue",
       comment:
         "Sterk farge for tekst og ikoner for rollen brand blue. Godkjent på alle bakgrunner unntatt strong.",
     },
     "brand-blue-subtle": {
-      value: "{ax.brand-blue.800.value}",
+      value: "{ax.brand-blue.800}",
       type: "color",
       group: "text.brand-blue",
       comment:
         "Standard farge for tekst og ikoner med rollen brand blue. Godkjent på alle bakgrunner unntatt strong.",
     },
     "brand-blue-decoration": {
-      value: "{ax.brand-blue.600.value}",
+      value: "{ax.brand-blue.600}",
       type: "color",
       group: "text.brand-blue",
       comment:
         "En farge som kun brukes på ikke-tekstlig innhold (ikoner og andre grafiske elementer). **Ikke godkjent på tekst altså**.",
     },
     "brand-blue-contrast": {
-      value: "{ax.neutral.000.value}",
+      value: "{ax.neutral.000}",
       type: "color",
       group: "text.brand-blue",
       comment:
@@ -112,27 +112,27 @@ export const brandBlueSemanticTokenConfig = {
   },
   border: {
     "brand-blue": {
-      value: "{ax.brand-blue.600.value}",
+      value: "{ax.brand-blue.600}",
       type: "color",
       group: "border.brand-blue",
       comment: "Standard farge for border.",
     },
     "brand-blue-subtle": {
-      value: "{ax.brand-blue.400.value}",
+      value: "{ax.brand-blue.400}",
       type: "color",
       group: "border.brand-blue",
       comment:
         "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "brand-blue-subtleA": {
-      value: "{ax.brand-blue.400A.value}",
+      value: "{ax.brand-blue.400A}",
       type: "color",
       group: "border.brand-blue",
       comment:
         "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
     },
     "brand-blue-strong": {
-      value: "{ax.brand-blue.700.value}",
+      value: "{ax.brand-blue.700}",
       type: "color",
       group: "border.brand-blue",
       comment:

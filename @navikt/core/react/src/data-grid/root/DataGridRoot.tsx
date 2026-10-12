@@ -140,7 +140,7 @@ const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 
-// eslint-disable-next-line @typescript-eslint/no-namespace, import/export
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
   export type Props<T = unknown> = DataGridProps<T>;
   export type Columns<T = unknown> = ColumnDefinitions<T>;
@@ -166,6 +166,5 @@ export namespace DataGrid {
   }
 }
 
-// eslint-disable-next-line import/export
 export { DataGrid, DataGridInternal }; // DataGridRoot needs to be exported b.c. of docgen
 export default DataGrid;

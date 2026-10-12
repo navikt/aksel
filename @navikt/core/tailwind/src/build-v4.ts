@@ -48,7 +48,8 @@ export const v4Config = {
 };
 
 function generateThemeCSS(): string {
-  const lines: string[] = ["@theme {"];
+  /* `inline` makes utilities reference `--ax-*` directly, so nested themes (`.dark`, `data-color`, `<Theme>`) resolve correctly */
+  const lines: string[] = ["@theme inline {"];
 
   for (const [key, value] of Object.entries(v4Config.colors)) {
     lines.push(`  --color-ax-${key}: ${value};`);
@@ -61,7 +62,7 @@ function generateThemeCSS(): string {
 
   lines.push("");
   for (const [key, value] of Object.entries(v4Config.fontSizes)) {
-    lines.push(`  --font-size-ax-${key}: ${value};`);
+    lines.push(`  --text-ax-${key}: ${value};`);
   }
 
   lines.push("");
@@ -76,6 +77,8 @@ function generateThemeCSS(): string {
 
   lines.push("");
   for (const [key, value] of Object.entries(v4Config.fontFamilies)) {
+    lines.push(`  --font-ax-${key}: ${value};`);
+    /* @deprecated Kept for backwards compatibility, use `font-ax-*` */
     lines.push(`  --font-family-ax-${key}: ${value};`);
   }
 

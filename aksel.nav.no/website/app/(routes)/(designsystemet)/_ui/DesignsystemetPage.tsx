@@ -1,4 +1,5 @@
-import type { PortableTextBlock } from "next-sanity";
+import { SchemaConfig } from "aksel-sanity-studio/schema";
+import { type PortableTextBlock, stegaClean } from "next-sanity";
 import { Box, Heading } from "@navikt/ds-react";
 import { DesignsystemetEyebrow } from "@/app/(routes)/(designsystemet)/_ui/Designsystemet.eyebrow";
 import type {
@@ -40,17 +41,40 @@ type DesignsystemetPageT = {
     | MONSTER_MALER_BY_SLUG_QUERY_RESULT;
 };
 
+const typeToName = (
+  type?: "komponent_artikkel" | "ds_artikkel" | "templates_artikkel",
+) => {
+  switch (stegaClean(type)) {
+    case "komponent_artikkel":
+      return "komponenter";
+    case "ds_artikkel":
+      return "grunnleggende";
+    case "templates_artikkel":
+      return "templates";
+    default:
+      return undefined;
+  }
+};
+
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const statusTag = getStatusTag(data?.status?.tag);
 
   const isComponentPage = data?._type === "komponent_artikkel";
+
+  const type = typeToName(data?._type);
+  const kategori = stegaClean(data?.kategori);
+  const eyebrowText = type
+    ? SchemaConfig.categoryLookup(type).find(
+        (category) => category.value === kategori,
+      )
+    : undefined;
 
   return (
     <Box
       marginBlock={`space-0 ${isComponentPage ? "space-28" : "space-0"}`}
       data-color={statusTag?.colorRole}
     >
-      <DesignsystemetEyebrow type={data?._type} />
+      <DesignsystemetEyebrow type={data?._type} text={eyebrowText?.title} />
       <Box
         marginBlock={`space-0 ${isComponentPage ? "space-8" : "space-0"}`}
         asChild

@@ -52,7 +52,6 @@ function refreshRedirects() {
     })
     .finally(() => {
       redirectCacheRefresh = null;
-      console.info("[proxy] Finished refreshing redirects");
     });
 
   return redirectCacheRefresh;

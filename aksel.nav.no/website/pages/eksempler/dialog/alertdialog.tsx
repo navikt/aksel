@@ -46,5 +46,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 6,
-  desc: 'Bruk gjerne role="alertdialog" på Dialog.Popup når dialogen formidler viktig informasjon. [Les mer og alertdialog-rollen](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alertdialog_role)',
+  desc: 'Bruk gjerne `role="alertdialog"` på Dialog.Popup når dialogen formidler viktig informasjon. [Les mer om alertdialog-rollen](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alertdialog_role)',
 };

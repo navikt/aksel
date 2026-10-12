@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { limitSearchQuery } from "../helpers/input-limits.js";
 import { searchIcons } from "../helpers/search-icons.js";
 import { metadata } from "../resources/icons-catalog.js";
 import type { McpTool } from "../types.js";
@@ -13,7 +14,7 @@ const variants = Array.from(
 
 const findIconsInputSchema = {
   category: z.enum(categories as [string, ...string[]]).optional(),
-  keyword: z.string().optional(),
+  keyword: limitSearchQuery(z.string()).optional(),
   variant: z
     .enum(variants as [string, ...string[]])
     .optional()

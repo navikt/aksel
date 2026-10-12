@@ -28,5 +28,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 1,
-  desc: "Propen 'spacing' legger til margin-bottom. Avstanden varierer avhengig av 'size'.",
+  desc: "Propen `spacing` legger til margin-bottom. Avstanden varierer avhengig av `size`.",
 };

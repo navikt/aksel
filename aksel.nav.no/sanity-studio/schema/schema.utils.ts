@@ -72,10 +72,8 @@ function sanitizeSlug(input: string) {
     input
       .toLowerCase()
       .trim()
-      /* Space */
-      .replace(/\s+/g, "-")
-      /* multiple - converted to single - */
-      .replace(/-+/gm, "-")
+      /* Space and en/em dash */
+      .replace(/[\s\u2013\u2014]+/g, "-")
       /* Special-characters */
       .replace(/[æåø]/g, (char) => {
         switch (char) {
@@ -94,6 +92,9 @@ function sanitizeSlug(input: string) {
       .replace(/[\u0300-\u036f]/g, "")
       // Replace any non [a-zA-Z0-9_]
       .replace(/[^\w-]+/g, "")
+      /* Collapse and trim - after stripping, so removed characters don't leave "--" or a trailing "-" */
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "")
   );
 }
 

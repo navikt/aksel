@@ -25,83 +25,83 @@ export function semanticThemedBaseTokens(role: AkselColorRole) {
   return {
     bg: {
       soft: {
-        value: `{ax.bg.${role}-soft.value}`,
+        value: `{ax.bg.${role}-soft}`,
         type: "themed-role",
       },
       softA: {
-        value: `{ax.bg.${role}-softA.value}`,
+        value: `{ax.bg.${role}-softA}`,
         type: "themed-role",
       },
       moderate: {
-        value: `{ax.bg.${role}-moderate.value}`,
+        value: `{ax.bg.${role}-moderate}`,
         type: "themed-role",
       },
       moderateA: {
-        value: `{ax.bg.${role}-moderateA.value}`,
+        value: `{ax.bg.${role}-moderateA}`,
         type: "themed-role",
       },
       "moderate-hover": {
-        value: `{ax.bg.${role}-moderate-hover.value}`,
+        value: `{ax.bg.${role}-moderate-hover}`,
         type: "themed-role",
       },
       "moderate-hoverA": {
-        value: `{ax.bg.${role}-moderate-hoverA.value}`,
+        value: `{ax.bg.${role}-moderate-hoverA}`,
         type: "themed-role",
       },
       "moderate-pressed": {
-        value: `{ax.bg.${role}-moderate-pressed.value}`,
+        value: `{ax.bg.${role}-moderate-pressed}`,
         type: "themed-role",
       },
       "moderate-pressedA": {
-        value: `{ax.bg.${role}-moderate-pressedA.value}`,
+        value: `{ax.bg.${role}-moderate-pressedA}`,
         type: "themed-role",
       },
       strong: {
-        value: `{ax.bg.${role}-strong.value}`,
+        value: `{ax.bg.${role}-strong}`,
         type: "themed-role",
       },
       "strong-hover": {
-        value: `{ax.bg.${role}-strong-hover.value}`,
+        value: `{ax.bg.${role}-strong-hover}`,
         type: "themed-role",
       },
       "strong-pressed": {
-        value: `{ax.bg.${role}-strong-pressed.value}`,
+        value: `{ax.bg.${role}-strong-pressed}`,
         type: "themed-role",
       },
     },
     text: {
       default: {
-        value: `{ax.text.${role}.value}`,
+        value: `{ax.text.${role}}`,
         type: "themed-role",
       },
       subtle: {
-        value: `{ax.text.${role}-subtle.value}`,
+        value: `{ax.text.${role}-subtle}`,
         type: "themed-role",
       },
       decoration: {
-        value: `{ax.text.${role}-decoration.value}`,
+        value: `{ax.text.${role}-decoration}`,
         type: "themed-role",
       },
       contrast: {
-        value: `{ax.text.${role}-contrast.value}`,
+        value: `{ax.text.${role}-contrast}`,
         type: "themed-role",
       },
     },
     border: {
       default: {
-        value: `{ax.border.${role}.value}`,
+        value: `{ax.border.${role}}`,
         type: "themed-role",
       },
       subtle: {
-        value: `{ax.border.${role}-subtle.value}`,
+        value: `{ax.border.${role}-subtle}`,
         type: "themed-role",
       },
       subtleA: {
-        value: `{ax.border.${role}-subtleA.value}`,
+        value: `{ax.border.${role}-subtleA}`,
         type: "themed-role",
       },
       strong: {
-        value: `{ax.border.${role}-strong.value}`,
+        value: `{ax.border.${role}-strong}`,
         type: "themed-role",
       },
     },

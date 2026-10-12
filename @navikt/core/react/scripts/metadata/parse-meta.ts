@@ -1,4 +1,5 @@
 import fg from "fast-glob";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import ts from "typescript";
 import { META_GLOB, packageRoot, tsconfigPath } from "./paths";
@@ -32,6 +33,21 @@ interface ParsedMeta {
   related: string[];
   components: ResolvedEntry[];
   utils: ResolvedEntry[];
+}
+
+/**
+ * Syntax-only contents of one `*.meta.ts` file. `components`/`utils` hold the
+ * map labels, e.g. `"Accordion.Item"`, without resolving their declarations.
+ */
+interface MetaSummary extends Omit<ParsedMeta, "components" | "utils"> {
+  components: string[];
+  utils: string[];
+}
+
+/** Syntactic parts of a meta file, shared by the summary and full parsers. */
+interface MetaSource extends Omit<ParsedMeta, "components" | "utils"> {
+  componentsMap: ts.ObjectLiteralExpression;
+  utilsMap: ts.ObjectLiteralExpression | undefined;
 }
 
 /**
@@ -147,13 +163,121 @@ function createTsProgram(metaFiles: string[]): ts.Program {
 }
 
 /**
+ * Returns the display label of a `components`/`utils` map entry, or
+ * `undefined` for entries that are neither `Name` nor `"Label": Name`.
+ */
+function getEntryLabel(entry: ts.ObjectLiteralElementLike) {
+  if (ts.isShorthandPropertyAssignment(entry)) {
+    return entry.name.text;
+  }
+  if (ts.isPropertyAssignment(entry) && ts.isIdentifier(entry.initializer)) {
+    return ts.isStringLiteral(entry.name)
+      ? entry.name.text
+      : entry.name.getText();
+  }
+  return undefined;
+}
+
+/**
+ * Reads a `components`/`utils` map from the metadata object. Throws when the
+ * property exists but is not an object literal.
+ */
+function readEntryMap(
+  metadataNode: ts.ObjectLiteralExpression,
+  key: "components" | "utils",
+  relMeta: string,
+) {
+  const prop = getObjectProperty(metadataNode, key);
+  if (!prop) {
+    return undefined;
+  }
+  if (
+    !ts.isPropertyAssignment(prop) ||
+    !ts.isObjectLiteralExpression(prop.initializer)
+  ) {
+    throw new Error(`[${relMeta}] metadata.${key} must be an object literal.`);
+  }
+  return prop.initializer;
+}
+
+/**
+ * Reads the syntactic parts of a meta file. Needs no type information, so it
+ * works on a standalone `ts.SourceFile`.
+ */
+function readMetaSource(
+  sourceFile: ts.SourceFile,
+  metaFile: string,
+): MetaSource {
+  const relMeta = path.relative(packageRoot, metaFile);
+
+  const metadataNode = findMetadataObject(sourceFile);
+  if (!metadataNode) {
+    throw new Error(`[${relMeta}] Could not find a "metadata" object.`);
+  }
+
+  const name = readStringLiteralProperty(metadataNode, "name");
+  if (!name) {
+    throw new Error(`[${relMeta}] metadata.name must be a string literal.`);
+  }
+
+  const componentsMap = readEntryMap(metadataNode, "components", relMeta);
+  if (!componentsMap) {
+    throw new Error(
+      `[${relMeta}] metadata.components must be an object literal.`,
+    );
+  }
+
+  return {
+    name,
+    dir: path.relative(packageRoot, path.dirname(metaFile)),
+    metaFile: relMeta,
+    keywords: readStringArrayProperty(metadataNode, "keywords"),
+    related: readStringArrayProperty(metadataNode, "related"),
+    componentsMap,
+    utilsMap: readEntryMap(metadataNode, "utils", relMeta),
+  };
+}
+
+function findMetaFiles() {
+  return fg.sync(META_GLOB, { cwd: packageRoot, absolute: true }).sort();
+}
+
+/**
+ * Reads every `*.meta.ts` file under the package without building a
+ * TypeScript program. Much faster than {@link parseMetaFiles}, but entries are
+ * not resolved to declarations. Use for spec validation only.
+ */
+function readMetaFiles(): MetaSummary[] {
+  const getLabels = (map: ts.ObjectLiteralExpression) =>
+    map.properties
+      .map(getEntryLabel)
+      .filter((label): label is string => Boolean(label));
+
+  return findMetaFiles().map((metaFile) => {
+    const sourceFile = ts.createSourceFile(
+      metaFile,
+      readFileSync(metaFile, "utf8"),
+      ts.ScriptTarget.Latest,
+      true,
+    );
+    const { componentsMap, utilsMap, ...meta } = readMetaSource(
+      sourceFile,
+      metaFile,
+    );
+    return {
+      ...meta,
+      components: getLabels(componentsMap),
+      utils: utilsMap ? getLabels(utilsMap) : [],
+    };
+  });
+}
+
+/**
  * Reads every `*.meta.ts` file under the package and resolves its
  * `components`/`utils` identifiers to their declarations.
  */
 function parseMetaFiles(): ParsedMeta[] {
-  const metaFiles = fg
-    .sync(META_GLOB, { cwd: packageRoot, absolute: true })
-    .sort();
+  const metaFiles = findMetaFiles();
 
   if (metaFiles.length === 0) {
     return [];
@@ -177,29 +301,18 @@ function parseMetaFiles(): ParsedMeta[] {
     const entries: ResolvedEntry[] = [];
 
     for (const entry of mapExpression.properties) {
-      let label: string | undefined;
-      let symbol: ts.Symbol | undefined;
-
-      if (ts.isShorthandPropertyAssignment(entry)) {
-        label = entry.name.text;
-        symbol = resolveAliasedSymbol(
-          typeChecker.getShorthandAssignmentValueSymbol(entry),
-        );
-      } else if (
-        ts.isPropertyAssignment(entry) &&
-        ts.isIdentifier(entry.initializer)
-      ) {
-        label = ts.isStringLiteral(entry.name)
-          ? entry.name.text
-          : entry.name.getText();
-        symbol = resolveAliasedSymbol(
-          typeChecker.getSymbolAtLocation(entry.initializer),
-        );
-      }
-
+      const label = getEntryLabel(entry);
       if (!label) {
         continue;
       }
+
+      let symbol: ts.Symbol | undefined;
+      if (ts.isShorthandPropertyAssignment(entry)) {
+        symbol = typeChecker.getShorthandAssignmentValueSymbol(entry);
+      } else if (ts.isPropertyAssignment(entry)) {
+        symbol = typeChecker.getSymbolAtLocation(entry.initializer);
+      }
+      symbol = resolveAliasedSymbol(symbol);
 
       const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
       if (!symbol || !declaration) {
@@ -222,74 +335,24 @@ function parseMetaFiles(): ParsedMeta[] {
     return entries;
   }
 
-  /**
-   * Reads a `components`/`utils` map from the metadata object and resolves its
-   * entries. Throws when a required map is missing or either map is not an
-   * object literal.
-   */
-  function resolveEntryMap(
-    metadataNode: ts.ObjectLiteralExpression,
-    key: "components" | "utils",
-    metaFile: string,
-    relMeta: string,
-    required: boolean,
-  ): ResolvedEntry[] {
-    const prop = getObjectProperty(metadataNode, key);
-    if (!prop) {
-      if (required) {
-        throw new Error(
-          `[${relMeta}] metadata.${key} must be an object literal.`,
-        );
-      }
-      return [];
-    }
-    if (
-      !ts.isPropertyAssignment(prop) ||
-      !ts.isObjectLiteralExpression(prop.initializer)
-    ) {
-      throw new Error(
-        `[${relMeta}] metadata.${key} must be an object literal.`,
-      );
-    }
-    return resolveEntries(prop.initializer, metaFile);
-  }
-
-  function parseMetaFile(metaFile: string): ParsedMeta {
-    const relMeta = path.relative(packageRoot, metaFile);
+  return metaFiles.map((metaFile) => {
     const sourceFile = tsProgram.getSourceFile(metaFile);
     if (!sourceFile) {
-      throw new Error(`Could not load meta file: ${relMeta}`);
+      throw new Error(
+        `Could not load meta file: ${path.relative(packageRoot, metaFile)}`,
+      );
     }
-
-    const metadataNode = findMetadataObject(sourceFile);
-    if (!metadataNode) {
-      throw new Error(`[${relMeta}] Could not find a "metadata" object.`);
-    }
-
-    const name = readStringLiteralProperty(metadataNode, "name");
-    if (!name) {
-      throw new Error(`[${relMeta}] metadata.name must be a string literal.`);
-    }
-
+    const { componentsMap, utilsMap, ...meta } = readMetaSource(
+      sourceFile,
+      metaFile,
+    );
     return {
-      name,
-      dir: path.relative(packageRoot, path.dirname(metaFile)),
-      metaFile: relMeta,
-      keywords: readStringArrayProperty(metadataNode, "keywords"),
-      related: readStringArrayProperty(metadataNode, "related"),
-      components: resolveEntryMap(
-        metadataNode,
-        "components",
-        metaFile,
-        relMeta,
-        true,
-      ),
-      utils: resolveEntryMap(metadataNode, "utils", metaFile, relMeta, false),
+      ...meta,
+      components: resolveEntries(componentsMap, metaFile),
+      utils: utilsMap ? resolveEntries(utilsMap, metaFile) : [],
     };
-  }
-
-  return metaFiles.map(parseMetaFile);
+  });
 }
 
-export { parseMetaFiles };
-export type { ResolvedEntry, ParsedMeta };
+export { parseMetaFiles, readMetaFiles };
+export type { ResolvedEntry, ParsedMeta, MetaSummary };

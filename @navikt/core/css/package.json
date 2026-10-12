@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "8.17.2",
+  "version": "8.19.1",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -32,12 +32,12 @@
     "css:get-version": "node config/get-version.js"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^8.17.2",
+    "@navikt/ds-tokens": "^8.19.1",
     "browserslist": "^4.28.7",
     "esbuild": "^0.28.2",
     "fast-glob": "3.3.3",
     "lightningcss": "^1.33.0",
-    "tsx": "^4.23.1"
+    "tsx": "^4.23.15"
   },
   "browserslist": [
     ">= 0.2% in NO",

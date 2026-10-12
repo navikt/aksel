@@ -5,6 +5,7 @@
 - Narrow search space; don't replace reading code.
 - Before editing: read target file + nearest related files (`index.ts`, story, test, exports).
 - Prefer known paths/scripts over broad searches.
+- User often edits files between turns. Before reviewing/refactoring, re-read the files (or `git diff`); never rely on earlier reads.
 - Ignore release/deploy/changelog/ops scripts unless asked.
 
 ## Behavior
@@ -15,7 +16,7 @@
 - Answer-first. 0-2 sentences max.
 - No thinking aloud; do next edit. Explain only when asked or non-obvious.
 - Show only what changes. Minimal diffs; don't paste whole files.
-- Edits scoped to one file unless asked. Ask only when truly blocked.
+- Edit only the files the change needs (see Definition of done); no unrelated files. Ask only when truly blocked.
 - Favor perf/security; avoid re-renders, top-level side effects, unsafe HTML, env var leaks.
 
 ## Repo summary
@@ -27,12 +28,13 @@
 ## Start and validate
 
 1. `corepack enable`
-2. `corepack yarn install` (needs `NPM_AUTH_TOKEN` with `read:packages`). Without a token: `corepack yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
+2. `corepack yarn install` (needs `NPM_AUTH_TOKEN` with `read:packages`). Without a token: `corepack yarn workspaces focus aksel @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navikt/ds-react @navikt/ds-tailwind @navikt/aksel @navikt/aksel-stylelint`
 3. `corepack yarn boot` (builds all public packages; rerun after `corepack yarn clean`)
 
 - Run agent commands through `corepack yarn`. Order: existing root/workspace script → Yarn-local binary → add a pinned dependency only when new tooling is required.
 - Never use `npx`, `pnpx`, `pnpm dlx`, `yarn dlx`, global binaries or curl-piped installers. Public consumer docs (`npx @navikt/aksel`) are intentional; keep them.
 - If Corepack/Yarn fails because of user-level configuration, report the exact error. Never edit user-home config.
+- Under the `navikt/cplt` sandbox, `Parse error when loading ~/.yarnrc.yml` means the home rc file is unreadable (EPERM), not a repo issue. Stop retrying, report it and ask the user to fix it outside the sandbox. Don't touch the repo `.yarnrc.yml`.
 - Choosing checks: use the `aksel-local-validation` skill. Changed-file lint first, then the affected workspace, then root suites only when needed.
 
 ## Definition of done
@@ -80,6 +82,7 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 ## Coding defaults
 
 - Small diffs. No drive-by refactors or new deps unless asked.
+- Propose the simplest maintainable solution first (explicit lists, member-name checks). No TS compiler API/AST tricks in tests (slow). Ask before escalating complexity.
 - Copy nearest existing pattern before writing new code.
 - Stable public APIs. Prefer additive props/exports.
 - `node:` imports for Node builtins. Never import from `esm/`/`cjs/` output.
