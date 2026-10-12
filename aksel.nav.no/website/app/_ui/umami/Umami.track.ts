@@ -14,4 +14,25 @@ function umamiTrack(event: string, properties?: Record<string, unknown>): void {
   }
 }
 
-export { umamiTrack };
+const UMAMI_READY_EVENT = "aksel:umami-ready";
+
+/**
+ * Tracks the event once the Umami script has loaded.
+ * Use on mount, where the script may not have loaded yet (e.g. direct visits).
+ * @returns Cleanup function that cancels a pending track.
+ */
+function umamiTrackWhenReady(
+  event: string,
+  properties?: Record<string, unknown>,
+): () => void {
+  if (window.umami) {
+    umamiTrack(event, properties);
+    return () => {};
+  }
+
+  const handler = () => umamiTrack(event, properties);
+  window.addEventListener(UMAMI_READY_EVENT, handler, { once: true });
+  return () => window.removeEventListener(UMAMI_READY_EVENT, handler);
+}
+
+export { UMAMI_READY_EVENT, umamiTrack, umamiTrackWhenReady };
