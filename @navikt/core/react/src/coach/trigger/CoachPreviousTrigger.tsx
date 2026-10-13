@@ -27,6 +27,7 @@ const CoachPreviousTrigger = forwardRef<
       type="button"
       {...restProps}
       ref={forwardedRef}
+      data-coach-previous-trigger
       onClick={composeEventHandlers(onClick, goToPreviousStep)}
     >
       {children}

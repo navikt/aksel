@@ -9,18 +9,18 @@ interface CoachProgressProps extends Omit<
   React.HTMLAttributes<HTMLParagraphElement>,
   "children"
 > {
-  translations?: ComponentTranslation<"CoachProgress">;
+  translations?: ComponentTranslation<"Coach">;
 }
 
 /**
  * @see 🏷️ {@link CoachProgressProps}
  * @example
  * ```jsx
- *  <Coach.Content>
+ *  <Coach.Step>
  *      <Coach.Progress />
  *      <Coach.Title>Coach title</Coach.Title>
  *      <Coach.Description>Coach description</Coach.Description>
- *  </Coach.Content>
+ *  </Coach.Step>
  * ```
  */
 const CoachProgress = forwardRef<HTMLParagraphElement, CoachProgressProps>(
@@ -28,7 +28,11 @@ const CoachProgress = forwardRef<HTMLParagraphElement, CoachProgressProps>(
     const { currentStepIndex, totalSteps } = useCoachContext();
     const readableCurrentStep = currentStepIndex + 1;
 
-    const translate = useI18n("CoachProgress", translations);
+    const translate = useI18n("Coach", translations);
+
+    if (totalSteps <= 1) {
+      return null;
+    }
 
     return (
       <BodyShort

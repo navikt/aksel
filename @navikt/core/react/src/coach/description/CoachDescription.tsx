@@ -7,10 +7,10 @@ type CoachDescriptionProps = React.HTMLAttributes<HTMLDivElement>;
  * @see 🏷️ {@link CoachDescriptionProps}
  * @example
  * ```jsx
- *  <Coach.Content>
+ *  <Coach.Step>
  *       <Coach.Title>Coach title</Coach.Title>
  *       <Coach.Description>Coach description</Coach.Description>
- *  </Coach.Content>
+ *  </Coach.Step>
  * ```
  */
 const CoachDescription = forwardRef<HTMLDivElement, CoachDescriptionProps>(
