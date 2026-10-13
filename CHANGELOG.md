@@ -1,5 +1,27 @@
 # Changelog
 
+## 8.19.1
+
+### @navikt/ds-css
+
+- Accordion: `@media print` now auto-opens every Accordion ([#5363](https://github.com/navikt/aksel/pull/5363))
+
+- ExpansionCard: `@media print` now auto-opens every ExpansionCard ([#5363](https://github.com/navikt/aksel/pull/5363))
+
+- ReadMore: `@media print` now auto-opens every ReadMore ([#5363](https://github.com/navikt/aksel/pull/5363))
+
+## 8.19.0
+
+### @navikt/aksel
+
+- CLI: Update clipboardy to v5.3.2 ([#5357](https://github.com/navikt/aksel/pull/5357))
+
+- CLI: Update figlet to 1.11.3 ([#5360](https://github.com/navikt/aksel/pull/5360))
+
+### @navikt/aksel-icons
+
+- Icons: Added new icon MenuHamburgerMagnifyingGlass ([#5368](https://github.com/navikt/aksel/pull/5368))
+
 ## 8.18.0
 
 ### @navikt/aksel

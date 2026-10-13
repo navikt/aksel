@@ -40,7 +40,7 @@ const SearchButton: SearchButtonType = forwardRef(
         size={size}
         variant={variant === "secondary" ? "secondary" : "primary"}
         className={cl("aksel-search__button-search", className)}
-        disabled={context?.disabled ?? disabled}
+        disabled={context?.disabled || disabled}
         onClick={composeEventHandlers(onClick, handleClick)}
         icon={
           <MagnifyingGlassIcon
