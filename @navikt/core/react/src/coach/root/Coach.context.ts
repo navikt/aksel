@@ -1,11 +1,11 @@
 import { createStrictContext } from "../../utils/helpers";
-import type { CoachStepType } from "./CoachRoot";
+import type { CoachStepItem } from "../types";
 
 interface CoachContextProps {
   /**
-   * Whether the dialog is currently open.
+   * Whether the tour is currently open.
    */
-  tourStarted: boolean;
+  showTour: boolean;
   /**
    * Called when the tour is dismissed or finished.
    */
@@ -13,9 +13,9 @@ interface CoachContextProps {
   /**
    * The index of the current step in the coach sequence.
    */
-  currentStep: CoachStepType | null;
+  currentStep: CoachStepItem | null;
   /**
-   * The index of the current step in the coach sequence.
+   * The index of the current step in the coach sequence (0-based).
    */
   currentStepIndex: number;
   /**
@@ -30,6 +30,18 @@ interface CoachContextProps {
    * Goes to the previous step in the coach sequence.
    */
   goToPreviousStep: () => void;
+  /**
+   * The size of the current step in the coach sequence.
+   */
+  currentStepSize: "small" | "medium";
+  /**
+   * ID of the title element for aria-labelledby.
+   */
+  titleId?: string;
+  /**
+   * Sets the title element ID.
+   */
+  setTitleId: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const { Provider: CoachContextProvider, useContext: useCoachContext } =
