@@ -19,12 +19,6 @@ export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-const statuses: { color: AkselColor; label: string }[] = [
-  { color: "danger", label: "Avslått" },
-  { color: "success", label: "Innvilget" },
-  { color: "info", label: "Under behandling" },
-  { color: "warning", label: "Mangler dokumentasjon" },
-  { color: "neutral", label: "Ikke startet" },
 const statuses: AkselColor[] = [
   "danger",
   "success",
@@ -43,7 +37,7 @@ export const Default: Story = {
 export const Dot: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
-      {statuses.map(({ color }) => (
+      {statuses.map((color) => (
         <Badge key={color} data-color={color} />
       ))}
     </HStack>
