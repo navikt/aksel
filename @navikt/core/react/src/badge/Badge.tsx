@@ -50,7 +50,8 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * // Anchored to an element
  * <Badge data-color="danger" count={42}>
- *   <Button icon={<InboxIcon />} aria-label="Inbox, 42 new messages" />
+* <Badge data-color="danger" count={42} aria-hidden>
+*   <Button icon={<InboxIcon />} aria-label="Inbox, 42 new messages" />
  * </Badge>
  * ```
  */
