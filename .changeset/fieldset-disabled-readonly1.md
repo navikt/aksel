@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Textarea: `readOnly` from Fieldset now applies to Textarea. Disabled and readOnly Textarea no longer gets read-only styling.
+Textarea: Now inherits `readOnly` from Fieldset. No longer gets read-only styling when `disabled` and `readOnly`.
