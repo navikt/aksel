@@ -17,13 +17,18 @@
 
 .aksel-coach__dialog-body,
 .aksel-coach__popover_content {
-  --__axc-coach__content-padding-block: var(--ax-space-0) var(--ax-space-24);
+  --__axc-coach__content-padding-block: var(--ax-space-24);
+
+  &[data-coach-step-size="small"] {
+    --__axc-coach__content-padding-block: var(--ax-space-20);
+  }
 
   padding-block: var(--__axc-coach__content-padding-block);
   padding-inline: var(--ax-space-16);
 
-  &[data-top-close-button="true"] {
-    --__axc-coach__content-padding-block: var(--ax-space-2) var(--ax-space-24);
+  &:has(.aksel-coach__step > :first-child:is(.aksel-coach__image-container)),
+  &:has(.aksel-coach__step > :first-child:is(.aksel-coach__top-close-trigger)) {
+    padding-block-start: var(--ax-space-0);
   }
 }
 
@@ -42,12 +47,14 @@
   grid-area: image;
   position: relative;
   padding-block-end: var(--ax-space-8);
+  display: flex;
 
-  & :is(img, picture) {
+  & :is(img, picture, svg, video) {
     display: block;
     object-fit: cover;
     max-width: 100%;
     height: 100%;
+    object-position: center;
   }
 }
 
@@ -130,7 +137,7 @@
 .aksel-coach__title,
 .aksel-coach__description,
 .aksel-coach__progress {
-  margin-bottom: var(--ax-space-8);
+  margin-block-end: var(--ax-space-8);
 }
 
 .aksel-coach__backdrop {
