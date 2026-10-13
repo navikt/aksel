@@ -58,13 +58,13 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <Badge data-color="danger" count={42}>
+      <Badge data-color="danger" count={42} aria-hidden>
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
         />
       </Badge>
-      <Badge data-color="danger">
+      <Badge data-color="danger" aria-hidden>
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
       </Badge>
     </HStack>

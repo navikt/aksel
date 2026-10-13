@@ -36,7 +36,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * anchor it to as `children` to pin the badge to one of its corners.
  *
  * When anchoring to an interactive element,
- * fold the state into that element's accessible name
+ * set `aria-hidden` on the badge and fold the count into that element's accessible name
  * (e.g. `aria-label="Inbox, 42 new messages"`).
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/badge)

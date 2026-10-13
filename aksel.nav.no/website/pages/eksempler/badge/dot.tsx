@@ -6,9 +6,9 @@ const Example = () => {
     <HStack align="center" gap="space-6">
       <Badge data-color="accent" />
       <BodyShort as="span" weight="semibold">
-        Inbox
+        Innboks
         <BodyShort as="span" visuallyHidden>
-          med uleste meldinger
+          , med nye meldinger
         </BodyShort>
       </BodyShort>
     </HStack>

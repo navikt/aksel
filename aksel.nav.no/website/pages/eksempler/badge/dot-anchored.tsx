@@ -7,7 +7,7 @@ const Example = () => {
     <Badge>
       <Button
         variant="secondary"
-        title="Uleste notifikasjoner"
+        title="Uleste varsler"
         icon={<BellIcon aria-hidden />}
       />
     </Badge>
