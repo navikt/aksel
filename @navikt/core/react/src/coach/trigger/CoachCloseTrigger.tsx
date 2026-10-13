@@ -18,12 +18,12 @@ interface CoachCloseTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonEl
  */
 const CoachCloseTrigger = forwardRef<HTMLButtonElement, CoachCloseTriggerProps>(
   ({ children, onClick, ...restProps }, forwardedRef) => {
-    const { tourStarted: open, onClose } = useCoachContext();
+    const { showTour, onClose } = useCoachContext();
 
     const handleClick = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     ) => {
-      if (open) {
+      if (showTour) {
         onClose?.(event);
       }
     };
