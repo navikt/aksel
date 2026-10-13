@@ -19,8 +19,11 @@ export default {
       labelSuffix: "slett",
     },
   },
-  CoachProgress: {
+  Coach: {
     currentStep: "{current} av {total}",
+    next: "Neste",
+    previous: "Førre",
+    close: "Lukk",
   },
   Combobox: {
     addOption: "Legg til",
