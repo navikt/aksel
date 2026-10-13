@@ -25,6 +25,12 @@ const statuses: { color: AkselColor; label: string }[] = [
   { color: "info", label: "Under behandling" },
   { color: "warning", label: "Mangler dokumentasjon" },
   { color: "neutral", label: "Ikke startet" },
+const statuses: AkselColor[] = [
+  "danger",
+  "success",
+  "info",
+  "warning",
+  "neutral",
 ];
 
 export const Default: Story = {
