@@ -4,9 +4,14 @@
 }
 
 .aksel-coach__popover_content {
-  --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-32));
+  --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-16));
+
+  &[data-coach-step-width="small"] {
+    --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-24));
+  }
 
   max-width: var(--__axc-coach__content-width);
+  width: var(--__axc-coach__content-width);
   overflow: auto;
 }
 
