@@ -1,7 +1,7 @@
 "use client";
 export {
   Coach,
-  CoachContent,
+  CoachStep,
   CoachTitle,
   CoachDescription,
   CoachFooter,
@@ -13,9 +13,15 @@ export {
   CoachMark,
 } from "./root/CoachRoot";
 export type {
-  CoachStepType,
+  CoachAnchorStep,
+  CoachDialogStep,
+  CoachStepBase,
+  CoachStepItem,
+  CoachStepTarget,
   CoachProps,
-  CoachContentProps,
+  CoachTourProps,
+  CoachSingleStepProps,
+  CoachStepProps,
   CoachTitleProps,
   CoachDescriptionProps,
   CoachFooterProps,
