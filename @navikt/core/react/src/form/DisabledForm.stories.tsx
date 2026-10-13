@@ -107,6 +107,18 @@ function DisabledFormElements() {
         <TextField label="Second field" />
       </Fieldset>
 
+      <Fieldset legend="Nested Fieldset (outer disabled)" disabled>
+        <Fieldset legend="Inner fieldset">
+          <TextField label="Nested field" />
+          <Switch>Nested switch</Switch>
+        </Fieldset>
+      </Fieldset>
+
+      <Fieldset legend="Fieldset (readOnly)" readOnly>
+        <TextField label="TextField" defaultValue="Read-only value" />
+        <Textarea label="Textarea" defaultValue="Read-only value" />
+      </Fieldset>
+
       <FileUpload.Dropzone
         label="FileUpload Dropzone"
         onSelect={console.log}
