@@ -32,7 +32,7 @@ export function adminStructure(S: StructureBuilder) {
             .schemaType(`aksel_ds_forside`)
             .icon(ImageIcon)
             .id(`aksel_ds_forside_dokument`),
-
+          S.listItem().singleton("newsletter_todo"),
           S.listItem()
             .title("Standalone-sider")
             .child(
