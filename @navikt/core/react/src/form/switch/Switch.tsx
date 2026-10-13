@@ -79,7 +79,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           `aksel-switch--${position}`,
           {
             "aksel-switch--loading": loading,
-            "aksel-switch--disabled": inputProps.disabled ?? loading,
+            "aksel-switch--disabled": inputProps.disabled || loading,
             "aksel-switch--readonly": readOnly,
             "aksel-switch--standalone": hideLabel,
           },
@@ -88,7 +88,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         <input
           {...omit(rest, ["size", "readOnly"])}
           {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
-          disabled={inputProps.disabled ?? loading}
+          disabled={inputProps.disabled || loading}
           checked={checkedProp}
           defaultChecked={defaultChecked}
           ref={ref}

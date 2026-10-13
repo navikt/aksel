@@ -54,6 +54,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hasError,
       size,
       inputDescriptionId,
+      readOnly,
     } = useFormField(props, "textField");
 
     const {
@@ -63,7 +64,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       htmlSize,
       hideLabel = false,
       type = "text",
-      readOnly,
       ...rest
     } = props;
 
@@ -107,7 +107,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           </BodyShort>
         )}
         <input
-          {...omit(rest, ["error", "errorId", "size"])}
+          {...omit(rest, ["error", "errorId", "size", "readOnly"])}
           {...inputProps}
           ref={ref}
           type={type}
