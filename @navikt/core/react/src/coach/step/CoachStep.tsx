@@ -1,25 +1,25 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../utils/helpers";
 
-type CoachContentProps = React.HTMLAttributes<HTMLDivElement>;
+type CoachStepProps = React.HTMLAttributes<HTMLDivElement>;
 
 /**
- * @see 🏷️ {@link CoachContentProps}
+ * @see 🏷️ {@link CoachStepProps}
  * @example
  * ```jsx
- *  <Coach.Content>
+ *  <Coach.Step>
  *    <Coach.Title>Coach title</Coach.Title>
  *    <Coach.Description>Coach description</Coach.Description>
- *  </Coach.Content>
+ *  </Coach.Step>
  * ```
  */
-const CoachContent = forwardRef<HTMLDivElement, CoachContentProps>(
+const CoachStep = forwardRef<HTMLDivElement, CoachStepProps>(
   ({ className, children, ...restProps }, forwardedRef) => {
     return (
       <div
         {...restProps}
         ref={forwardedRef}
-        className={cl("aksel-coach__content", className)}
+        className={cl("aksel-coach__step", className)}
       >
         {children}
       </div>
@@ -27,5 +27,5 @@ const CoachContent = forwardRef<HTMLDivElement, CoachContentProps>(
   },
 );
 
-export { CoachContent };
-export type { CoachContentProps };
+export { CoachStep };
+export type { CoachStepProps };
