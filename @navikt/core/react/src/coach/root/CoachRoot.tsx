@@ -8,8 +8,8 @@ import { HStack } from "../../primitives/stack";
 import { useClientLayoutEffect } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { CoachBackdrop } from "../backdrop/CoachBackdrop";
-import { CoachContent, type CoachContentProps } from "../content/CoachContent";
 import {
   CoachDescription,
   type CoachDescriptionProps,
@@ -21,6 +21,7 @@ import {
   CoachProgress,
   type CoachProgressProps,
 } from "../progress/CoachProgress";
+import { CoachStep, type CoachStepProps } from "../step/CoachStep";
 import { CoachTitle, type CoachTitleProps } from "../title/CoachTitle";
 import {
   CoachCloseTrigger,
@@ -34,85 +35,18 @@ import {
   CoachPreviousTrigger,
   type CoachPreviousTriggerProps,
 } from "../trigger/CoachPreviousTrigger";
+import type {
+  CoachAnchorStep,
+  CoachDialogStep,
+  CoachProps,
+  CoachSingleStepProps,
+  CoachStepBase,
+  CoachStepItem,
+  CoachStepTarget,
+  CoachTourProps,
+} from "../types";
+import { missingTriggersWarning } from "../warnings";
 import { CoachContextProvider } from "./Coach.context";
-
-interface CoachStepTypeBase {
-  /**
-   * Unique identifier for the coach step.
-   */
-  id: string;
-  /**
-   * Content within the coach step.
-   */
-  content: React.ReactNode;
-  /**
-   * Whether the user is allowed to end the tour at this step.
-   */
-  allowToEndTour?: boolean;
-}
-
-type CoachStepType = CoachStepTypeBase &
-  (
-    | {
-        /**
-         * Dialog type coach step.
-         */
-        type: "dialog";
-      }
-    | {
-        /**
-         * Anchor type coach step.
-         */
-        type: "anchor";
-        /**
-         * Reference to the anchor element for the anchor type coach step.
-         */
-        anchorRef: React.RefObject<HTMLElement | null>;
-        /**
-         * Placement of the anchor type coach step relative to the anchor element.
-         */
-        placement?: NonNullable<
-          React.ComponentProps<typeof Popover>["placement"]
-        >;
-        /**
-         * Offset of the anchor type coach step relative to the anchor element.
-         */
-        offset?: number;
-      }
-  );
-
-interface CoachProps {
-  /**
-   * Steps shown in sequence.
-   */
-  steps: readonly CoachStepType[];
-  /**
-   * Whether the tour is visible.
-   */
-  tourStarted: boolean;
-  /**
-   * Active step index when controlled.
-   */
-  currentStep?: number;
-  /**
-   * Initial active step index when uncontrolled.
-   * @default 0
-   */
-  defaultStep?: number;
-  /**
-   * Called when the active step changes.
-   */
-  onStepChange?: (step: number) => void;
-  /**
-   * Called when the tour is dismissed or finished.
-   */
-  endTour: () => void;
-  /**
-   * Size of the coach.
-   * @default "medium"
-   */
-  size?: "small" | "medium";
-}
 
 /**
  * Guides the user through a sequence of steps, anchored to elements or shown as dialogs.
@@ -121,30 +55,68 @@ interface CoachProps {
  * ```tsx
  * <Coach
  *   steps={[
- *     { type: "dialog", content: "Welcome!" },
- *     { type: "anchor", anchorRef: buttonRef, content: "Start here." },
+ *     { type: "dialog", title: "Welcome!" },
+ *     { type: "anchor", anchorRef: buttonRef, title: "Start here." },
  *   ]}
  * />
  * ```
  */
-const CoachRoot = ({
-  steps,
-  tourStarted,
-  currentStep: currentStepProp,
-  defaultStep = 0,
-  onStepChange,
-  endTour,
-}: CoachProps) => {
+const CoachRoot = (props: CoachProps) => {
+  const {
+    showTour,
+    currentStep: currentStepProp,
+    defaultStep = 0,
+    onStepChange,
+    endTour,
+    translations,
+  } = props;
+
+  const translate = useI18n("Coach", translations);
+
+  const steps: readonly CoachStepItem[] =
+    "steps" in props && props.steps !== undefined
+      ? props.steps
+      : [
+          {
+            id: props.id ?? "step-1",
+            type: props.type,
+            title: props.title,
+            description: props.description,
+            image: props.image,
+            allowToEndTour: props.allowToEndTour ?? true,
+            size: props.size,
+            width: props.width,
+            "aria-labelledby": props["aria-labelledby"],
+            ...(props.type === "anchor"
+              ? {
+                  anchorRef: props.anchorRef,
+                  placement: props.placement,
+                  offset: props.offset,
+                }
+              : {}),
+          } as CoachStepItem,
+        ];
+
+  const renderStep = "renderStep" in props ? props.renderStep : undefined;
+  const singleStepChildren = "children" in props ? props.children : undefined;
+
   const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [titleId, setTitleId] = useState<string>();
 
   const activeStep = currentStepProp ?? uncontrolledStep;
   const currentStep = steps[activeStep];
   const anchorRef =
     currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
 
+  const getStepSize = () => currentStep?.size ?? "medium";
+  const getStepWidth = () => currentStep?.width ?? "medium";
+
   useClientLayoutEffect(() => {
     const nextAnchorEl = anchorRef?.current ?? null;
+    if (!showTour) {
+      return;
+    }
 
     if (nextAnchorEl) {
       const { bottom, left, right, top } = nextAnchorEl.getBoundingClientRect();
@@ -164,13 +136,13 @@ const CoachRoot = ({
     }
 
     setAnchorEl(nextAnchorEl);
-  }, [anchorRef, tourStarted, activeStep]);
+  }, [anchorRef, showTour, activeStep]);
 
   useClientLayoutEffect(() => {
-    if (!tourStarted) {
+    if (!showTour) {
       setUncontrolledStep(defaultStep);
     }
-  }, [defaultStep, tourStarted]);
+  }, [defaultStep, showTour]);
 
   const setStep = useCallback(
     (nextStep: number) => {
@@ -197,7 +169,7 @@ const CoachRoot = ({
   }, [activeStep, setStep]);
 
   useEffect(() => {
-    if (!tourStarted) {
+    if (!showTour) {
       return;
     }
 
@@ -227,7 +199,7 @@ const CoachRoot = ({
     endTour,
     goToNextStep,
     goToPreviousStep,
-    tourStarted,
+    showTour,
     steps.length,
   ]);
 
@@ -245,27 +217,112 @@ const CoachRoot = ({
     );
   };
 
-  const TopCloseButton = (
-    <HStack width="full" justify="end" marginBlock="space-0 space-2">
-      <CoachCloseTrigger data-coach-top-close-trigger>
-        <Button
-          size="small"
-          icon={<XMarkIcon title="Avslutt" />}
-          variant="tertiary"
-          data-color="neutral"
-        />
-      </CoachCloseTrigger>
-    </HStack>
+  useClientLayoutEffect(() => {
+    if (!showTour || !currentStep) {
+      return;
+    }
+    missingTriggersWarning(activeStep, steps.length, currentStep);
+  }, [activeStep, currentStep, showTour, steps.length]);
+
+  const currentStepContent = (
+    <CoachStep>
+      {currentStep.allowToEndTour && (
+        <HStack
+          width="full"
+          justify="end"
+          marginBlock="space-2"
+          className="aksel-coach__top-close-trigger"
+        >
+          <CoachCloseTrigger data-coach-top-close-trigger>
+            <Button
+              size="small"
+              icon={<XMarkIcon title={translate("close")} />}
+              variant="tertiary"
+              data-color="neutral"
+            />
+          </CoachCloseTrigger>
+        </HStack>
+      )}
+      {currentStep?.image && <CoachImage>{currentStep.image}</CoachImage>}
+      <CoachProgress />
+      {currentStep?.title && <CoachTitle>{currentStep.title}</CoachTitle>}
+      {currentStep?.description && (
+        <CoachDescription>{currentStep.description}</CoachDescription>
+      )}
+      <CoachFooter>
+        {activeStep > 0 && (
+          <CoachPreviousTrigger>
+            <Button size={getStepSize()} variant="tertiary">
+              {translate("previous")}
+            </Button>
+          </CoachPreviousTrigger>
+        )}
+        {activeStep === steps.length - 1 ? (
+          <CoachCloseTrigger>
+            <Button size={getStepSize()} variant="primary">
+              {translate("close")}
+            </Button>
+          </CoachCloseTrigger>
+        ) : (
+          <CoachNextTrigger>
+            <Button size={getStepSize()} variant="primary">
+              {translate("next")}
+            </Button>
+          </CoachNextTrigger>
+        )}
+      </CoachFooter>
+    </CoachStep>
   );
 
+  const resolveSingleStepChildren = () => {
+    if (!singleStepChildren) {
+      return undefined;
+    }
+
+    if (typeof singleStepChildren === "function") {
+      return singleStepChildren({
+        defaultContent: currentStepContent,
+        title: currentStep.title,
+        description: currentStep.description,
+        image: currentStep.image,
+      });
+    }
+
+    return <CoachStep>{singleStepChildren}</CoachStep>;
+  };
+
+  const stepContent =
+    resolveSingleStepChildren() ??
+    renderStep?.(
+      {
+        id: currentStep.id,
+        title: currentStep.title,
+        description: currentStep.description,
+        image: currentStep.image,
+      },
+      {
+        defaultContent: currentStepContent,
+        index: activeStep,
+      },
+    ) ??
+    currentStepContent;
+
   const renderCurrentStep = () => {
+    const labelledBy = currentStep?.["aria-labelledby"] ?? titleId;
+
     if (currentStep?.type === "dialog") {
       return (
-        <Dialog open={true}>
-          <Dialog.Popup initialFocusTo={getInitialFocus} width="small">
-            <Dialog.Body className="aksel-coach__dialog-body">
-              {currentStep.allowToEndTour && TopCloseButton}
-              {currentStep.content}
+        <Dialog open={true} size={getStepSize()}>
+          <Dialog.Popup
+            initialFocusTo={getInitialFocus}
+            width={getStepWidth()}
+            aria-labelledby={labelledBy}
+          >
+            <Dialog.Body
+              className="aksel-coach__dialog-body"
+              data-coach-step-size={getStepSize()}
+            >
+              {stepContent}
             </Dialog.Body>
           </Dialog.Popup>
         </Dialog>
@@ -277,7 +334,11 @@ const CoachRoot = ({
         <Portal key={currentStep.id}>
           <CoachBackdrop anchorEl={anchorEl} />
           <FocusGuards>
-            <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
+            <FocusBoundary
+              loop
+              trapped
+              modal /*initialFocus={getInitialFocus}*/
+            >
               <Popover
                 anchorEl={anchorEl}
                 open
@@ -285,14 +346,16 @@ const CoachRoot = ({
                 placement={currentStep.placement}
                 offset={currentStep.offset ?? 12}
                 role="dialog"
+                aria-labelledby={labelledBy}
                 className="aksel-coach__popover"
               >
                 <Popover.Content
                   className="aksel-coach__popover_content"
                   data-top-close-button={currentStep.allowToEndTour ?? false}
+                  data-coach-step-size={getStepSize()}
+                  data-coach-step-width={getStepWidth()}
                 >
-                  {currentStep.allowToEndTour && TopCloseButton}
-                  {currentStep.content}
+                  {stepContent}
                 </Popover.Content>
               </Popover>
             </FocusBoundary>
@@ -304,17 +367,20 @@ const CoachRoot = ({
     return null;
   };
 
-  if (!tourStarted) return null;
+  if (!showTour) return null;
 
   return (
     <CoachContextProvider
-      tourStarted={tourStarted}
+      showTour={showTour}
+      currentStepSize={getStepSize()}
       onClose={endTour}
       currentStep={currentStep}
       currentStepIndex={activeStep}
       totalSteps={steps.length}
       goToNextStep={goToNextStep}
       goToPreviousStep={goToPreviousStep}
+      titleId={titleId}
+      setTitleId={setTitleId}
     >
       {renderCurrentStep()}
     </CoachContextProvider>
@@ -322,7 +388,7 @@ const CoachRoot = ({
 };
 
 const Coach = Object.assign(CoachRoot, {
-  Content: CoachContent,
+  Step: CoachStep,
   Title: CoachTitle,
   Description: CoachDescription,
   CloseTrigger: CoachCloseTrigger,
@@ -336,7 +402,7 @@ const Coach = Object.assign(CoachRoot, {
 
 export {
   Coach,
-  CoachContent,
+  CoachStep,
   CoachTitle,
   CoachDescription,
   CoachCloseTrigger,
@@ -349,9 +415,15 @@ export {
 };
 
 export type {
-  CoachStepType,
+  CoachAnchorStep,
+  CoachDialogStep,
+  CoachStepBase,
+  CoachStepItem,
+  CoachStepTarget,
   CoachProps,
-  CoachContentProps,
+  CoachTourProps,
+  CoachSingleStepProps,
+  CoachStepProps,
   CoachTitleProps,
   CoachDescriptionProps,
   CoachCloseTriggerProps,
