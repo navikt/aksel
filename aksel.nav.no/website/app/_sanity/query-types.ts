@@ -1181,26 +1181,6 @@ export type Templates_landingsside = {
   seo?: Seo;
 };
 
-export type Ds_endringslogg_artikkel = {
-  _id: string;
-  _type: "ds_endringslogg_artikkel";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  heading?: string;
-  slug?: Slug;
-  endringsdato?: string;
-  endringstype?: "design" | "dokumentasjon" | "kode";
-  content?: Riktekst_grunnleggende;
-  visMer?: boolean;
-  artikler?: ArrayOf<
-    | Ds_artikkelReference
-    | Komponent_artikkelReference
-    | Templates_artikkelReference
-  >;
-  seo?: Seo;
-};
-
 export type Grunnleggende_landingsside = {
   _id: string;
   _type: "grunnleggende_landingsside";
@@ -1280,6 +1260,55 @@ export type Kode_eksempler_fil = {
       _key: string;
     }>;
   };
+};
+
+export type Ds_endringslogg_artikkelReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ds_endringslogg_artikkel";
+};
+
+export type Newsletter_todo = {
+  _id: string;
+  _type: "newsletter_todo";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  todoList?: Array<{
+    articleRef?:
+      | Komponent_artikkelReference
+      | Ds_artikkelReference
+      | Aksel_artikkelReference
+      | Aksel_bloggReference
+      | Aksel_prinsippReference
+      | Aksel_standaloneReference
+      | Templates_artikkelReference
+      | Ds_endringslogg_artikkelReference;
+    dateAdded?: string;
+    _type: "inline";
+    _key: string;
+  }>;
+};
+
+export type Ds_endringslogg_artikkel = {
+  _id: string;
+  _type: "ds_endringslogg_artikkel";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  slug?: Slug;
+  endringsdato?: string;
+  endringstype?: "design" | "dokumentasjon" | "kode";
+  content?: Riktekst_grunnleggende;
+  visMer?: boolean;
+  artikler?: ArrayOf<
+    | Ds_artikkelReference
+    | Komponent_artikkelReference
+    | Templates_artikkelReference
+  >;
+  seo?: Seo;
 };
 
 export type DesignsystemStatistics = {
@@ -2059,11 +2088,13 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | Godpraksis_landingsside
   | Templates_landingsside
-  | Ds_endringslogg_artikkel
   | Grunnleggende_landingsside
   | Komponenter_landingsside
   | Token_kategori
   | Kode_eksempler_fil
+  | Ds_endringslogg_artikkelReference
+  | Newsletter_todo
+  | Ds_endringslogg_artikkel
   | DesignsystemStatistics
   | Cookie_tracker
   | Article_views

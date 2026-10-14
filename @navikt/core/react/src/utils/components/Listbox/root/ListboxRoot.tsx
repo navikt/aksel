@@ -34,8 +34,7 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
     }: ListboxProps,
     ref,
   ) => {
-    const id = useId();
-    const activeId = `aksel-listbox-${id}-active`;
+    const optionIdPrefix = useId();
 
     const virtuallyFocusOption = (element: HTMLElement | null) => {
       setVirtuallyFocusedOptionId(element?.dataset.id || "");
@@ -128,7 +127,7 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
         {...rest}
       >
         <ListboxProvider
-          activeId={activeId}
+          optionIdPrefix={optionIdPrefix}
           setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}
           size={size}
         >

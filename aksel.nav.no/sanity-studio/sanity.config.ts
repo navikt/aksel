@@ -52,6 +52,7 @@ export const workspaceConfig = defineConfig([
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
+      singletons: ["newsletter_todo"],
     },
     scheduledDrafts: {
       enabled: false,
@@ -98,6 +99,7 @@ export const workspaceConfig = defineConfig([
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
+      singletons: ["newsletter_todo"],
     },
     scheduledDrafts: {
       enabled: false,

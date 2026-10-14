@@ -7,7 +7,7 @@ import {
 } from "../root/ComboboxRoot";
 
 interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
+  children?: string;
   hasError?: boolean;
 }
 
@@ -16,6 +16,8 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
     const { options, selectedOptions, size } = useComboboxRootContext();
 
     const labels = getLabels(selectedOptions, options);
+    const label =
+      children ?? (labels.length > 1 ? `${labels.length} valgt` : labels[0]);
 
     return (
       <div className="aksel-combobox2__field-container">
@@ -28,10 +30,10 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
+          aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
           {...rest}
         >
-          {children ||
-            (labels.length > 1 ? `${labels.length} valgt` : labels[0])}
+          {label}
         </button>
         <ChevronDownIcon
           className="aksel-combobox2__field-chevron"

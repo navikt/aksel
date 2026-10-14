@@ -45,6 +45,15 @@ export default defineBlueprint({
       },
       src: "./functions/unpublish",
     }),
+    defineDocumentFunction({
+      name: "newsletter-todo",
+      event: {
+        on: ["create"],
+        filter: `_type in ${allPublishedAtDocuments} || (_type == "ds_endringslogg_artikkel" && endringstype == "dokumentasjon")`,
+        projection: "{_id}",
+      },
+      src: "./functions/newsletter-todo",
+    }),
     defineSyncTagInvalidateFunction({
       name: "invalidate-tags",
       event: {

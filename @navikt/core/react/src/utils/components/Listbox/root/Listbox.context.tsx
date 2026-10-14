@@ -3,10 +3,10 @@ import { createStrictContext } from "../../../helpers";
 export const { Provider: ListboxProvider, useContext: useListboxContext } =
   createStrictContext<{
     /**
-     * ID for the option that currently has virtual focus.
-     * Set on the active option and referenced by the combobox's `aria-activedescendant`.
+     * Unique ID for the Listbox instance. Used as prefix for the IDs of the options,
+     * which in turn are referenced in `aria-activedescendant` in InputSlot.
      */
-    activeId: string;
+    optionIdPrefix: string;
     /**
      * Updates which option currently has virtual focus.
      */

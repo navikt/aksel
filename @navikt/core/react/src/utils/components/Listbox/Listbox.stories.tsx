@@ -121,7 +121,7 @@ export const Default = () => {
       <div>Selected: {selectedItem}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-        <Listbox.InputSlot>
+        <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
           <Search
             label="Velg noe"
             hideLabel={false}
@@ -177,7 +177,7 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
       <div>Selected: {selectedItem}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
-        <Listbox.InputSlot>
+        <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
           <Search
             label="Velg noe"
             hideLabel={false}
@@ -269,7 +269,9 @@ export const WithFloating = () => {
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Floating.Anchor>
-          <Listbox.InputSlot>
+          <Listbox.InputSlot
+            virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+          >
             <Search
               label="Velg noe"
               hideLabel={false}

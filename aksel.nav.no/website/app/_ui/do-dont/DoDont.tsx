@@ -16,6 +16,7 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
 
   return (
     <HGrid
+      data-text-prose
       data-block-margin="space-28"
       columns="repeat(auto-fill, minmax(18rem, 1fr))"
       gap="space-24"
