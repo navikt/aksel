@@ -86,7 +86,9 @@ const AutoSuggest = forwardRef<HTMLInputElement, AutoSuggestProps>(
       <Floating>
         <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
           <Floating.Anchor>
-            <Listbox.InputSlot>
+            <Listbox.InputSlot
+              virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+            >
               <Search
                 label="Tabellsøk"
                 variant="simple"

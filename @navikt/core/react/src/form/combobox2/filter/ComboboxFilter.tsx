@@ -11,11 +11,12 @@ type ComboboxFilterProps = Pick<
 
 export const ComboboxFilter = (props: ComboboxFilterProps) => {
   const { size } = useComboboxRootContext();
-  const { filterString, setFilterString } = useComboboxPopupContext();
+  const { filterString, setFilterString, virtuallyFocusedOptionValue } =
+    useComboboxPopupContext();
 
   return (
     <div className="aksel-combobox2__filter">
-      <Listbox.InputSlot>
+      <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionValue}>
         <Search
           value={filterString}
           onChange={setFilterString}
