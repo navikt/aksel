@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 8.19.2
+
+### Patch Changes
+
+- TextField: Now inherits `readOnly` from Fieldset. No longer gets read-only styling when `disabled` and `readOnly`. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Textarea: Now inherits `readOnly` from Fieldset. No longer gets read-only styling when `disabled` and `readOnly`. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Fieldset: Nested Fieldsets now inherits the parent's `disabled` state. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Button: `loading={true}` and `disabled={false}` now disable the element. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Switch: `loading={true}` and `disabled={false}` now disable the element. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Search.Button: `loading={true}` and `disabled={false}` now disable SearchButton. ([#5328](https://github.com/navikt/aksel/pull/5328))
+
+- Badge: No longer sets aria-hidden internally automatically. ([#5397](https://github.com/navikt/aksel/pull/5397))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.19.2
+  - @navikt/aksel-icons@8.19.2
+
 ## 8.19.1
 
 ### Patch Changes
