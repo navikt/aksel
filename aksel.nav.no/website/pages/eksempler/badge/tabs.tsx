@@ -19,8 +19,8 @@ const Example = () => {
           value="inbox"
           label={
             <HStack align="center" gap="space-8">
-              <BodyShort as="span">Inbox</BodyShort>
-              <Badge count={5} data-color="accent" aria-label="5 ulest" />
+              <BodyShort as="span">Innboks</BodyShort>
+              <Badge count={5} data-color="accent" />
             </HStack>
           }
           icon={<InboxDownIcon aria-hidden />}

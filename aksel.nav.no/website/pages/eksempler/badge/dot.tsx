@@ -4,9 +4,12 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack align="center" gap="space-6">
-      <Badge data-color="accent" aria-label="Uleste meldinger" />
+      <Badge data-color="accent" />
       <BodyShort as="span" weight="semibold">
-        Inbox
+        Innboks
+        <BodyShort as="span" visuallyHidden>
+          , med nye meldinger
+        </BodyShort>
       </BodyShort>
     </HStack>
   );

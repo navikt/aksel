@@ -19,12 +19,12 @@ export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-const statuses: { color: AkselColor; label: string }[] = [
-  { color: "danger", label: "Avslått" },
-  { color: "success", label: "Innvilget" },
-  { color: "info", label: "Under behandling" },
-  { color: "warning", label: "Mangler dokumentasjon" },
-  { color: "neutral", label: "Ikke startet" },
+const statuses: AkselColor[] = [
+  "danger",
+  "success",
+  "info",
+  "warning",
+  "neutral",
 ];
 
 export const Default: Story = {
@@ -37,8 +37,8 @@ export const Default: Story = {
 export const Dot: Story = {
   render: () => (
     <HStack gap="space-16" align="center">
-      {statuses.map(({ color, label }) => (
-        <Badge key={color} data-color={color} aria-label={label} />
+      {statuses.map((color) => (
+        <Badge key={color} data-color={color} />
       ))}
     </HStack>
   ),
@@ -58,13 +58,13 @@ export const Count: Story = {
 export const Anchored: Story = {
   render: () => (
     <HStack gap="space-32" align="center">
-      <Badge data-color="danger" count={42}>
+      <Badge data-color="danger" count={42} aria-hidden>
         <Button
           icon={<InboxIcon aria-hidden />}
           aria-label="Innboks, 42 nye meldinger"
         />
       </Badge>
-      <Badge data-color="danger" aria-label="Nytt varsel">
+      <Badge data-color="danger" aria-hidden>
         <Button icon={<InboxIcon aria-hidden />} aria-label="Innboks" />
       </Badge>
     </HStack>
