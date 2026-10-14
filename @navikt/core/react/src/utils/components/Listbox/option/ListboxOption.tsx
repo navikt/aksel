@@ -36,7 +36,7 @@ function ListboxOption({
   className,
   ...rest
 }: ListboxOptionProps) {
-  const { activeId, size } = useListboxContext();
+  const { optionIdPrefix, size } = useListboxContext();
   return (
     <BodyShort
       as="div"
@@ -48,7 +48,7 @@ function ListboxOption({
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
-      id={hasVirtualFocus ? activeId : undefined}
+      id={`${optionIdPrefix}-${id}`}
     >
       <div className="aksel-listbox__option-inner">{children}</div>
     </BodyShort>
