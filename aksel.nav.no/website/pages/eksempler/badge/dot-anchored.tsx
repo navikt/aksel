@@ -7,7 +7,7 @@ const Example = () => {
     <Badge>
       <Button
         variant="secondary"
-        title="Uleste meldinger"
+        title="Uleste varsler"
         icon={<BellIcon aria-hidden />}
       />
     </Badge>
@@ -24,5 +24,4 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 3,
-  desc: "",
 };

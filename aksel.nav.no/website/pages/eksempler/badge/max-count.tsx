@@ -4,10 +4,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack align="center" gap="space-8">
-      <Badge count={5} aria-label="5 ulest" />
-      <Badge count={999} aria-label="999 ulest" />
-      <Badge count={10} maxCount={8} aria-label="10 ulest" />
-      <Badge count={200} maxCount={140} aria-label="200 ulest" />
+      <Badge count={5} />
+      <Badge count={999} />
+      <Badge count={10} maxCount={8} />
+      <Badge count={200} maxCount={140} />
     </HStack>
   );
 };
