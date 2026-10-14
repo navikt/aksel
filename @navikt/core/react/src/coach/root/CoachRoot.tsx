@@ -103,6 +103,7 @@ const CoachRoot = (props: CoachProps) => {
   const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [titleId, setTitleId] = useState<string>();
+  const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
 
   const activeStep = currentStepProp ?? uncontrolledStep;
   const currentStep = steps[activeStep];
@@ -137,6 +138,11 @@ const CoachRoot = (props: CoachProps) => {
 
     setAnchorEl(nextAnchorEl);
   }, [anchorRef, showTour, activeStep]);
+
+  useEffect(() => {
+    if (!showTour) return;
+    missingTriggersWarning(activeStep, steps.length, currentStep, stepElement);
+  }, [showTour, activeStep, steps.length, currentStep, stepElement]);
 
   useClientLayoutEffect(() => {
     if (!showTour) {
@@ -216,13 +222,6 @@ const CoachRoot = (props: CoachProps) => {
       closeTriggers[closeTriggers.length - 1]
     );
   };
-
-  useClientLayoutEffect(() => {
-    if (!showTour || !currentStep) {
-      return;
-    }
-    missingTriggersWarning(activeStep, steps.length, currentStep);
-  }, [activeStep, currentStep, showTour, steps.length]);
 
   const currentStepContent = (
     <CoachStep>
@@ -314,6 +313,8 @@ const CoachRoot = (props: CoachProps) => {
       return (
         <Dialog open={true} size={getStepSize()}>
           <Dialog.Popup
+            ref={setStepElement}
+            data-coach-step-id={currentStep.id}
             initialFocusTo={getInitialFocus}
             width={getStepWidth()}
             aria-labelledby={labelledBy}
@@ -337,9 +338,13 @@ const CoachRoot = (props: CoachProps) => {
             <FocusBoundary
               loop
               trapped
-              modal /*initialFocus={getInitialFocus}*/
+              modal
+              /* TODO:C initialFocus={getInitialFocus}
+               */
             >
               <Popover
+                ref={setStepElement}
+                data-coach-step-id={currentStep.id}
                 anchorEl={anchorEl}
                 open
                 onClose={() => {}}

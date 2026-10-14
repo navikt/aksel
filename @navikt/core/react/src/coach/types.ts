@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Popover } from "../popover";
-import { ComponentTranslation } from "../utils/i18n/i18n.types";
+import type { ComponentTranslation } from "../utils/i18n/i18n.types";
 
 interface CoachStepBase {
   /**
