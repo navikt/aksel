@@ -52,7 +52,7 @@
     "prism-react-renderer": "^2.0.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-hook-form": "^7.53.0",
+    "react-hook-form": "^7.89.0",
     "react-markdown": "^9.0.1",
     "react-responsive-masonry": "2.7.2",
     "react-snowfall": "^2.4.0",

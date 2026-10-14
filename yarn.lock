@@ -22137,21 +22137,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.53.0":
-  version: 7.86.0
-  resolution: "react-hook-form@npm:7.86.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10/b0ad65eb833c7df99dacc380b1fec31c67d9d05666c2b4e6d90dd923970140bb0602ebfcaa06a76c1f4686f3f47fa216b1e0d4a3415520b2d09932e262f4f4b3
-  languageName: node
-  linkType: hard
-
 "react-hook-form@npm:^7.85.0":
   version: 7.87.0
   resolution: "react-hook-form@npm:7.87.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
   checksum: 10/737ba6a3ba2062b9206fb717c0701866a9e60620059e49b5c24aad29126a8d78a6c79df412656ba0a2908593584ec4cba3c8804a3d6015c0d0882f882aca5841
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.89.0":
+  version: 7.89.0
+  resolution: "react-hook-form@npm:7.89.0"
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/9a7d5de9f20b694a9411180cdde6f9efd5966f7b810f279622a6d385bd8898a8f2274af7fed8764b0b6a33325bd176270968ccc041a65d26cbab9d65147895f4
   languageName: node
   linkType: hard
 
@@ -27005,7 +27009,7 @@ __metadata:
     prism-react-renderer: "npm:^2.0.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
-    react-hook-form: "npm:^7.53.0"
+    react-hook-form: "npm:^7.89.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.7.2"
     react-snowfall: "npm:^2.4.0"
