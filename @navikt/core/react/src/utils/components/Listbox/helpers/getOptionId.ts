@@ -1,4 +1,4 @@
 const getOptionId = (prefix: string, id: string) =>
-  `${prefix}-${id.replace(/\s/g, "_")}`;
+  `${prefix}-${encodeURIComponent(id)}`;
 
 export { getOptionId };
