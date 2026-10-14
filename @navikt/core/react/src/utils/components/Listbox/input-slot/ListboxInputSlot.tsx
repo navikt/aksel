@@ -1,5 +1,6 @@
 import React from "react";
 import { Slot } from "../../slot/Slot";
+import { getOptionId } from "../helpers/getOptionId";
 import { useListboxContext } from "../root/Listbox.context";
 
 interface ListboxInputSlotProps {
@@ -17,7 +18,7 @@ const ListboxInputSlot = ({
       // NB: Using a static ID and just change which option has the ID does not work in Safari with VoiceOver.
       aria-activedescendant={
         virtuallyFocusedOptionId
-          ? `${optionIdPrefix}-${virtuallyFocusedOptionId}`
+          ? getOptionId(optionIdPrefix, virtuallyFocusedOptionId)
           : undefined
       }
       // @ts-expect-error - You are meant to use an <input>, but Slot doesn't know that.

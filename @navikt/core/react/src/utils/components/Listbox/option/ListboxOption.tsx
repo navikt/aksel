@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyShort } from "../../../../typography";
 import { cl } from "../../../helpers";
+import { getOptionId } from "../helpers/getOptionId";
 import { useListboxContext } from "../root/Listbox.context";
 
 export interface ListboxOptionProps extends Omit<
@@ -48,7 +49,7 @@ function ListboxOption({
       tabIndex={-1}
       data-virtual-focus={hasVirtualFocus}
       data-id={id}
-      id={`${optionIdPrefix}-${id}`}
+      id={getOptionId(optionIdPrefix, id)}
     >
       <div className="aksel-listbox__option-inner">{children}</div>
     </BodyShort>
