@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.19.3
+
+### Patch Changes
+
+- Lookup, Badge: Mark as deprecated when imported from @navikt/ds-react/PREVIEW ([#5401](https://github.com/navikt/aksel/pull/5401))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.19.3
+  - @navikt/aksel-icons@8.19.3
+
 ## 8.19.2
 
 ### Patch Changes

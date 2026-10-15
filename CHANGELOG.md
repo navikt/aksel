@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.19.3
+
+### @navikt/ds-react
+
+- Lookup, Badge: Mark as deprecated when imported from @navikt/ds-react/PREVIEW ([#5401](https://github.com/navikt/aksel/pull/5401))
+
 ## 8.19.2
 
 ### @navikt/ds-css
