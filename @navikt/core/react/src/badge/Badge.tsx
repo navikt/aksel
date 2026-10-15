@@ -112,4 +112,11 @@ export namespace Badge {
   export type Props = BadgeProps;
 }
 
-export { Badge };
+/** @deprecated Badge is no longer in preview. Import it from `@navikt/ds-react` instead. */
+const BadgeDeprecated = Badge;
+// eslint-disable-next-line @typescript-eslint/no-namespace
+namespace BadgeDeprecated {
+  export type Props = BadgeProps;
+}
+
+export { Badge, BadgeDeprecated };

@@ -68,22 +68,22 @@
     },
     "./PREVIEW/Lookup": {
       "import": {
-        "types": "./esm/lookup/index.d.ts",
-        "default": "./esm/lookup/index.js"
+        "types": "./esm/lookup/index-deprecated.d.ts",
+        "default": "./esm/lookup/index-deprecated.js"
       },
       "require": {
-        "types": "./cjs/lookup/index.d.ts",
-        "default": "./cjs/lookup/index.js"
+        "types": "./cjs/lookup/index-deprecated.d.ts",
+        "default": "./cjs/lookup/index-deprecated.js"
       }
     },
     "./PREVIEW/Badge": {
       "import": {
-        "types": "./esm/badge/index.d.ts",
-        "default": "./esm/badge/index.js"
+        "types": "./esm/badge/index-deprecated.d.ts",
+        "default": "./esm/badge/index-deprecated.js"
       },
       "require": {
-        "types": "./cjs/badge/index.d.ts",
-        "default": "./cjs/badge/index.js"
+        "types": "./cjs/badge/index-deprecated.d.ts",
+        "default": "./cjs/badge/index-deprecated.js"
       }
     },
     "./PREVIEW/RadioCard": {
