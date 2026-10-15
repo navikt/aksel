@@ -21,6 +21,7 @@ import type {
 } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
+import { UmamiLink } from "@/app/_ui/umami/UmamiLink";
 import styles from "./Hero.module.css";
 
 type GpIntroHeroProps = {
@@ -28,6 +29,9 @@ type GpIntroHeroProps = {
   description?: string;
   image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERY_RESULT>["pictogram"];
   isCollapsible?: boolean;
+  overrides?: {
+    isNavnoTema?: boolean;
+  };
 } & DynamicFetchOptions;
 
 async function GodPraksisIntroHero({
@@ -37,6 +41,7 @@ async function GodPraksisIntroHero({
   isCollapsible = false,
   perspective,
   stega,
+  overrides,
 }: GpIntroHeroProps) {
   const imageUrl = urlForImage(image)?.url();
 
@@ -74,6 +79,19 @@ async function GodPraksisIntroHero({
           className={styles.godPraksisHeroDescription}
         >
           {description}
+          {overrides?.isNavnoTema && (
+            <>
+              {" "}
+              <UmamiLink
+                inlineText
+                href="https://aksel.nav.no/komponenter/dekoratoren/dekoratoren"
+                data-color="neutral"
+                lenkegruppe="tema-hero-custom"
+              >
+                Informasjon om dekoratøren finner du i designsystemet.
+              </UmamiLink>
+            </>
+          )}
         </BodyLong>
       )}
       {isCollapsible ? (

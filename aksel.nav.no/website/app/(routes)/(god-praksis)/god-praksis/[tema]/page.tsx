@@ -272,6 +272,14 @@ async function DynamicTemaPage(props: Props) {
     }
   }
 
+  /**
+   * Context:
+   * nav.no wanted to link to new dekoratoren article in /komponenter from their god-praksis page
+   */
+  const isNavnoTema = temaPage._id.includes(
+    "0ca17e98-86a9-4e9e-abc1-af53043a21c3",
+  );
+
   return (
     <div>
       <GodPraksisIntroHero
@@ -281,6 +289,9 @@ async function DynamicTemaPage(props: Props) {
         isCollapsible
         perspective={perspective}
         stega={stega}
+        overrides={{
+          isNavnoTema,
+        }}
       />
       <VStack
         gap="space-48"
