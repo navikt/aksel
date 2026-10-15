@@ -10,8 +10,8 @@
 
 ## Behavior
 
-- Only respond in same language as the input. Prefer english always.
-- Use caveman-skill unless asked not to
+- Only respond in same language as the input. Prefer English always.
+- Use caveman-skill unless asked not to.
 - No apologies, no "I think", no change summaries.
 - Answer-first. 0-2 sentences max.
 - No thinking aloud; do next edit. Explain only when asked or non-obvious.
@@ -88,3 +88,4 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - `node:` imports for Node builtins. Never import from `esm/`/`cjs/` output.
 - Preserve JSDoc on public props/components when changing public APIs.
 - Reuse helpers: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
+- No tests for trivial logic. Only tests for complex logic that has a higher risk of breaking.
