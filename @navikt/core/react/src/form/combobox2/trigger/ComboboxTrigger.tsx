@@ -28,13 +28,13 @@ const ComboboxTrigger = ({
           // Prevents "flash of focus" on trigger before focus is moved to input
           if (!readOnly && !rootContext.open) event.preventDefault();
         }}
-        /*onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-          if (event.key === "ArrowDown") {
-            context.onOpenChange(true);
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+            rootContext.setOpen(true);
             // Stop keydown from scrolling window
             event.preventDefault();
           }
-        })}*/
+        }}
         data-readonly={readOnly}
         aria-readonly={readOnly} // TODO: Vurder
         disabled={rootContext.disabled}
