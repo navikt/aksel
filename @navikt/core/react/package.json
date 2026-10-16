@@ -96,6 +96,16 @@
         "default": "./cjs/form/radio-card/index.js"
       }
     },
+    "./PREVIEW/CheckboxCard": {
+      "import": {
+        "types": "./esm/form/checkbox-card/index.d.ts",
+        "default": "./esm/form/checkbox-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/checkbox-card/index.d.ts",
+        "default": "./cjs/form/checkbox-card/index.js"
+      }
+    },
     "./types/theme": {
       "types": "./esm/types/theme.d.ts"
     },
