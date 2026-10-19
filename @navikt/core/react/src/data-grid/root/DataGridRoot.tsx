@@ -4,8 +4,13 @@ import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
+import { useDataGridPagination } from "../hooks/useDataGridPagination";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
-import type { DataGridSettings } from "./DataGrid.types";
+import type {
+  DataGridPaginationOptions,
+  DataGridSettings,
+} from "./DataGrid.types";
+import { DataGridPaginationContextProvider } from "./DataGridPagination.context";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
 interface DataGridProps<RowT> {
@@ -41,6 +46,10 @@ interface DataGridProps<RowT> {
    * @default false
    */
   isLoading?: boolean;
+  /**
+   * Pagination state and callbacks. Data must contain only the current page.
+   */
+  pagination?: DataGridPaginationOptions;
   /**
    * Settings for the data grid.
    */
@@ -105,6 +114,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       getRowId,
       selection,
       isLoading = false,
+      pagination,
       settings,
       defaultSettings,
       onSettingsChange,
@@ -129,12 +139,36 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {children}
+          {pagination !== undefined ? (
+            <DataGridPaginationProvider pagination={pagination} data={data}>
+              {children}
+            </DataGridPaginationProvider>
+          ) : (
+            children
+          )}
         </DataGridContextProvider>
       </div>
     );
   },
 );
+
+function DataGridPaginationProvider({
+  children,
+  pagination,
+  data,
+}: {
+  children: React.ReactNode;
+  pagination: DataGridPaginationOptions;
+  data: unknown[];
+}) {
+  const value = useDataGridPagination({ pagination, data });
+
+  return (
+    <DataGridPaginationContextProvider {...value}>
+      {children}
+    </DataGridPaginationContextProvider>
+  );
+}
 
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
