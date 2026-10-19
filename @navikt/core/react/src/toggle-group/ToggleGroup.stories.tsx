@@ -231,4 +231,5 @@ export const Chromatic = renderStoriesForChromatic({
   Label,
   Compositions,
   Small,
+  XSmall,
 });
