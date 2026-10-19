@@ -147,6 +147,32 @@ export const Small = () => {
   );
 };
 
+export const XSmall = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+
+  return (
+    <VStack gap="space-24">
+      <ToggleGroup size="xsmall" value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup size="xsmall" value={activeValue} onChange={setActiveValue}>
+        {Items(true, true)}
+      </ToggleGroup>
+      <ToggleGroup size="xsmall" value={activeValue} onChange={setActiveValue}>
+        {Items(true)}
+      </ToggleGroup>
+      <ToggleGroup
+        size="xsmall"
+        fill
+        value={activeValue}
+        onChange={setActiveValue}
+      >
+        {Items(true)}
+      </ToggleGroup>
+    </VStack>
+  );
+};
+
 export const PlayControlled: Story = {
   render: () => {
     const [activeValue, setActiveValue] = useState("ny");

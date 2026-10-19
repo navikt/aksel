@@ -4,7 +4,7 @@ import type { ToggleGroupProps } from "./ToggleGroup.types";
 import type { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleContextProps {
-  size: "medium" | "small";
+  size: "medium" | "small" | "xsmall";
 }
 
 export const ToggleGroupContext = ReactCreateContext<ToggleContextProps | null>(
