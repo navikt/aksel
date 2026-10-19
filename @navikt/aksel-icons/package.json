@@ -87,7 +87,7 @@
     "prettier": "3.9.6",
     "react": "19.3.0",
     "rehype-parse": "9.0.1",
-    "tsc-alias": "1.9.1",
+    "tsc-alias": "1.9.7",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
     "unified": "11.0.5",
