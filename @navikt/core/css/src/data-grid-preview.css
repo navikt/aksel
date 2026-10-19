@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
 }
 
 .aksel-data-table__border-wrapper {
