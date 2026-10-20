@@ -12,4 +12,4 @@ applyTo: "**/*.test.ts,**/*.test.tsx,**/*.stories.tsx"
 - Query by role and accessible name (`getByRole("button", { name })`). Avoid snapshots unless nearby tests already use them.
 - Cover the main path plus 1-2 meaningful edge cases. A behavior change updates the nearest story and test in the same change.
 - ds-react unit tests run with `TZ=UTC`. Date logic must not depend on the local timezone.
-- Browser tests need Playwright Firefox. Yarn has `enableScripts: false`, so if the browser is missing, report it instead of installing globally.
+- Browser tests need Playwright Firefox (Chromium under Copilot CLI, see `vitest.config.ts`). Yarn has `enableScripts: false`, so if the browser is missing, report it instead of installing globally.
