@@ -1,82 +1,28 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
 import React, { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useProvider } from "../provider/Provider";
-import { Detail, Heading } from "../typography";
-import { useId } from "../utils-external";
-import { useDateInputContext } from "../utils/components/date/input/DateInput";
-import { cl, composeEventHandlers } from "../utils/helpers";
-import { useMergeRefs, useScrollLock } from "../utils/hooks";
-import { ModalContextProvider, useModalContext } from "./Modal.context";
-import ModalBody from "./ModalBody";
-import ModalFooter from "./ModalFooter";
-import ModalHeader from "./ModalHeader";
+import { useProvider } from "../../provider/Provider";
+import { Detail, Heading } from "../../typography";
+import { useId } from "../../utils-external";
+import { useDateInputContext } from "../../utils/components/date/input/DateInput";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { useMergeRefs, useScrollLock } from "../../utils/hooks";
+import type { ModalProps } from "../Modal.types";
+import { ModalBody, type ModalBodyProps } from "../body/ModalBody";
+import { ModalFooter, type ModalFooterProps } from "../footer/ModalFooter";
+import { ModalHeader, type ModalHeaderProps } from "../header/ModalHeader";
+import { dialogPolyfill, needPolyfill } from "../helpers/dialog-polyfill";
 import {
   type MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
-  useIsModalOpen,
-} from "./ModalUtils";
-import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import type { ModalProps } from "./types";
+} from "../helpers/modal-utils";
+import { ModalContextProvider, useModalContext } from "./ModalRoot.context";
+import { useIsModalOpen } from "./useIsModalOpen";
 
 const polyfillClassName = "aksel-modal--polyfilled";
 
-interface ModalComponent extends React.ForwardRefExoticComponent<
-  ModalProps & React.RefAttributes<HTMLDialogElement>
-> {
-  Header: typeof ModalHeader;
-  Body: typeof ModalBody;
-  Footer: typeof ModalFooter;
-}
-
-/**
- * A component that displays a modal dialog.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/modal)
- * @see 🏷️ {@link ModalProps}
- *
- * @example
- * State change with `useRef`
- * ```jsx
- * const ref = useRef<HTMLDialogElement>(null);
- * <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
- * <Modal
- *   ref={ref}
- *   header={{
- *     label: "Optional label",
- *     icon: <FileIcon aria-hidden />,
- *     heading: "My heading",
- *   }}
- * >
- *   <Modal.Body>
- *     <BodyLong>Hello world</BodyLong>
- *   </Modal.Body>
- *   <Modal.Footer>
- *     <Button>Save</Button>
- *     <Button type="button" variant="tertiary" onClick={() => ref.current?.close()}>Close</Button>
- *   </Modal.Footer>
- * </Modal>
- * ```
- * @example
- * State change with `useState`
- * ```jsx
- * const [open, setOpen] = useState(false);
- * <Modal
- *   open={open}
- *   onClose={() => setOpen(false)}
- *   aria-labelledby="modal-heading"
- * >
- *   <Modal.Header>
- *     <Heading level="1" size="large" id="modal-heading">My heading</Heading>
- *   </Modal.Header>
- *   <Modal.Body>
- *     <BodyLong>Hello world</BodyLong>
- *   </Modal.Body>
- * </Modal>
- * ```
- */
-export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
+const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
   (
     {
       header,
@@ -285,10 +231,68 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     }
     return component;
   },
-) as ModalComponent;
+);
 
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
+/**
+ * A component that displays a modal dialog.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/modal)
+ * @see 🏷️ {@link ModalProps}
+ *
+ * @example
+ * State change with `useRef`
+ * ```jsx
+ * const ref = useRef<HTMLDialogElement>(null);
+ * <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
+ * <Modal
+ *   ref={ref}
+ *   header={{
+ *     label: "Optional label",
+ *     icon: <FileIcon aria-hidden />,
+ *     heading: "My heading",
+ *   }}
+ * >
+ *   <Modal.Body>
+ *     <BodyLong>Hello world</BodyLong>
+ *   </Modal.Body>
+ *   <Modal.Footer>
+ *     <Button>Save</Button>
+ *     <Button type="button" variant="tertiary" onClick={() => ref.current?.close()}>Close</Button>
+ *   </Modal.Footer>
+ * </Modal>
+ * ```
+ * @example
+ * State change with `useState`
+ * ```jsx
+ * const [open, setOpen] = useState(false);
+ * <Modal
+ *   open={open}
+ *   onClose={() => setOpen(false)}
+ *   aria-labelledby="modal-heading"
+ * >
+ *   <Modal.Header>
+ *     <Heading level="1" size="large" id="modal-heading">My heading</Heading>
+ *   </Modal.Header>
+ *   <Modal.Body>
+ *     <BodyLong>Hello world</BodyLong>
+ *   </Modal.Body>
+ * </Modal>
+ * ```
+ */
+const Modal = Object.assign(ModalRoot, {
+  /**
+   * @see 🏷️ {@link ModalHeaderProps}
+   */
+  Header: ModalHeader,
+  /**
+   * @see 🏷️ {@link ModalBodyProps}
+   */
+  Body: ModalBody,
+  /**
+   * @see 🏷️ {@link ModalFooterProps}
+   */
+  Footer: ModalFooter,
+});
 
-export default Modal;
+export { Modal, ModalBody, ModalFooter, ModalHeader };
+export type { ModalProps, ModalBodyProps, ModalFooterProps, ModalHeaderProps };

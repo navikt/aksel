@@ -1,7 +1,7 @@
 import type { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, waitFor, within } from "storybook/test";
-import Popover from "./Popover";
+import { Popover } from "./root/PopoverRoot";
 
 export default {
   title: "ds-react/Popover/tests",

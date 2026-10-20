@@ -6,7 +6,7 @@ import { Checkbox, CheckboxGroup } from "../form/checkbox";
 import { VStack } from "../primitives/stack";
 import { Tooltip } from "../tooltip";
 import { BodyLong, Heading } from "../typography";
-import Modal from "./Modal";
+import { Modal } from "./index";
 
 const meta: Meta<typeof Modal> = {
   title: "ds-react/Modal",
