@@ -1,5 +1,5 @@
 "use client";
-export { default as Tabs, TabsTab, TabsList, TabsPanel } from "./Tabs";
+export { Tabs, TabsTab, TabsList, TabsPanel } from "./Tabs";
 export type {
   TabsProps,
   TabsTabProps,

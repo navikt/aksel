@@ -7,51 +7,7 @@ import TabList, { type TabListProps } from "./parts/tablist/TabList";
 import TabPanel, { type TabPanelProps } from "./parts/tabpanel/TabPanel";
 import { useTabs } from "./useTabs";
 
-interface TabsComponent extends React.ForwardRefExoticComponent<
-  TabsProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link TabProps}
-   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
-   */
-  Tab: typeof Tab;
-  /**
-   * @see 🏷️ {@link TabListProps}
-   */
-  List: typeof TabList;
-  /**
-   * @see 🏷️ {@link TabPanelProps}
-   */
-  Panel: typeof TabPanel;
-}
-
-/**
- * A component that displays a set of tabs that can be used to switch between different views.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tabs)
- * @see 🏷️ {@link TabsProps}
- *
- * @example
- * ```jsx
- * <Tabs defaultValue="logg">
- *   <Tabs.List>
- *     <Tabs.Tab value="logg" label="Logg" />
- *     <Tabs.Tab value="inbox" label="Inbox" />
- *     <Tabs.Tab value="sendt" label="Sendt" />
- *   </Tabs.List>
- *   <Tabs.Panel value="logg">
- *     Logg-tab
- *   </Tabs.Panel>
- *   <Tabs.Panel value="inbox">
- *     Inbox-tab
- *   </Tabs.Panel>
- *   <Tabs.Panel value="sendt">
- *     Sendt-tab
- *   </Tabs.Panel>
- * </Tabs>
- * ```
- */
-export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
+const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
   (
     {
       className,
@@ -96,14 +52,51 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       </TabsProvider>
     );
   },
-) as TabsComponent;
+);
 
-Tabs.Tab = Tab;
-Tabs.List = TabList;
-Tabs.Panel = TabPanel;
+/**
+ * A component that displays a set of tabs that can be used to switch between different views.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/tabs)
+ * @see 🏷️ {@link TabsProps}
+ *
+ * @example
+ * ```jsx
+ * <Tabs defaultValue="logg">
+ *   <Tabs.List>
+ *     <Tabs.Tab value="logg" label="Logg" />
+ *     <Tabs.Tab value="inbox" label="Inbox" />
+ *     <Tabs.Tab value="sendt" label="Sendt" />
+ *   </Tabs.List>
+ *   <Tabs.Panel value="logg">
+ *     Logg-tab
+ *   </Tabs.Panel>
+ *   <Tabs.Panel value="inbox">
+ *     Inbox-tab
+ *   </Tabs.Panel>
+ *   <Tabs.Panel value="sendt">
+ *     Sendt-tab
+ *   </Tabs.Panel>
+ * </Tabs>
+ * ```
+ */
+const Tabs = Object.assign(TabsRoot, {
+  /**
+   * @see 🏷️ {@link TabProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Tab,
+  /**
+   * @see 🏷️ {@link TabListProps}
+   */
+  List: TabList,
+  /**
+   * @see 🏷️ {@link TabPanelProps}
+   */
+  Panel: TabPanel,
+});
 
-export default Tabs;
-export { Tab as TabsTab, TabList as TabsList, TabPanel as TabsPanel };
+export { Tabs, Tab as TabsTab, TabList as TabsList, TabPanel as TabsPanel };
 export type {
   TabsProps,
   TabProps as TabsTabProps,
