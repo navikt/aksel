@@ -739,12 +739,14 @@ html[data-dragging-cursor="true"] *::after {
   gap: var(--ax-space-4);
   margin-inline-start: auto;
 
+  /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
   & button[aria-disabled="true"] {
     cursor: default;
     opacity: var(--ax-opacity-disabled);
   }
 
   @media (forced-colors: active) {
+    /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
     & button[aria-disabled="true"] {
       color: GrayText;
       opacity: 1;
@@ -753,7 +755,20 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-grid__pagination-navigation-page {
+  display: inline-grid;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
   white-space: nowrap;
+
+  &::before {
+    content: attr(data-max-label);
+    visibility: hidden;
+  }
+
+  &::before,
+  & > span {
+    grid-area: 1 / 1;
+  }
 }
 
 .aksel-data-table__border-wrapper + .aksel-data-grid__pagination,

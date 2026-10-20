@@ -30,14 +30,16 @@ const columns: DataGrid.Columns<Row> = [
 
 function PagedGrid({
   children,
+  defaultPage = 0,
   defaultPageSize = 10,
   style,
 }: {
   children: React.ReactNode;
+  defaultPage?: number;
   defaultPageSize?: number;
   style?: React.CSSProperties;
 }) {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(defaultPage);
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const pageRows = ROWS.slice(page * pageSize, (page + 1) * pageSize);
 
@@ -74,6 +76,15 @@ export const AboveTable: Story = {
     <PagedGrid>
       <DataGrid.Pagination />
       <DataGrid.Table />
+    </PagedGrid>
+  ),
+};
+
+export const PageNumberWidth: Story = {
+  render: () => (
+    <PagedGrid defaultPage={8}>
+      <DataGrid.Table />
+      <DataGrid.Pagination />
     </PagedGrid>
   ),
 };

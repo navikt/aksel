@@ -76,8 +76,17 @@ const DataGridPaginationNavigation = forwardRef<
           }
         }}
       />
-      <span className="aksel-data-grid__pagination-navigation-page">
-        {pageLabel}
+      <span
+        className="aksel-data-grid__pagination-navigation-page"
+        data-max-label={
+          pageCount === undefined
+            ? translate("Pagination.pageOfUnknownTotal", {
+                page: "9".repeat(Math.max(3, String(page + 1).length)),
+              })
+            : translate("Pagination.pageOf", { page: pageCount, pageCount })
+        }
+      >
+        <span>{pageLabel}</span>
       </span>
       <Button
         type="button"
