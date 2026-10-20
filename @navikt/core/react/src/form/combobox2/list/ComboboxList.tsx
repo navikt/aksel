@@ -49,26 +49,20 @@ function ComboboxListContent<
 >({ children }: ComboboxListProps<T>) {
   const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
-  const {
-    setOpen,
-    options,
-    selectedOptions,
-    onToggleOption,
-    multiselect,
-    triggerRef,
-  } = useComboboxRootContext();
+  const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
+    useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
       memoizedOnToggleOption(option, isSelected);
-      if (!multiselect) {
+      if (!multiple) {
         setOpen(false);
         triggerRef.current?.focus();
       }
     },
-    [memoizedOnToggleOption, multiselect, triggerRef, setOpen],
+    [memoizedOnToggleOption, multiple, triggerRef, setOpen],
   );
 
   if (children && typeof children !== "function") {
@@ -99,7 +93,7 @@ function ComboboxListContent<
             key={option.value}
             option={option}
             onToggleOption={localOnToggleOption}
-            isSelected={selectedOptions.includes(option.value)}
+            isSelected={value.includes(option.value)}
             hasVirtualFocus={virtuallyFocusedOptionValue === option.value}
             highlightText={deferredFilterString}
           >
@@ -112,7 +106,7 @@ function ComboboxListContent<
         key={optOrGroup.value}
         option={optOrGroup}
         onToggleOption={localOnToggleOption}
-        isSelected={selectedOptions.includes(optOrGroup.value)}
+        isSelected={value.includes(optOrGroup.value)}
         hasVirtualFocus={virtuallyFocusedOptionValue === optOrGroup.value}
         highlightText={deferredFilterString} // TODO: Vurder å kunne slå av dette for bedre ytelse
       >

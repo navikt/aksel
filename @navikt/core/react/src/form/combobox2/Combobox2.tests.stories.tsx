@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { Combobox, type ComboboxProps } from "./Combobox";
+import { ComboboxSingle } from "./Combobox";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
 import { ComboboxList } from "./list/ComboboxList";
 import { ComboboxPopup } from "./popup/ComboboxPopup";
@@ -59,20 +59,14 @@ const groupedOptions = [
 
 function BaseCombobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->(props: Partial<ComboboxProps<T>>) {
-  const [selectedOptions, setSelectedOptions] = useState(["option-1"]);
+>(props: Partial<ComboboxSingle.Props<T>>) {
+  const [value, setValue] = useState<string | undefined>("option-1");
 
   return (
-    <Combobox
+    <ComboboxSingle
       options={countries as T[]}
-      selectedOptions={selectedOptions}
-      onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
-          newSelected
-            ? [...prev, option.value]
-            : prev.filter((v) => v !== option.value),
-        );
-      }}
+      value={value}
+      onChange={setValue}
       label="Velg land"
       description="Landet hvor du er født."
       {...props}
@@ -99,7 +93,7 @@ const optionMemoTestRenderFn = (
   return optOrGroup.label;
 };
 export const OptionMemoization = () => {
-  const [selectedOptions, setSelectedOptions] = useState(["option-1"]);
+  const [value, setValue] = useState(["option-1"]);
 
   return (
     <div style={{ minHeight: "450px" }}>
@@ -112,9 +106,9 @@ export const OptionMemoization = () => {
       <ComboboxRoot
         defaultOpen
         options={groupedOptions}
-        selectedOptions={selectedOptions}
+        value={value}
         onToggleOption={(option) => {
-          setSelectedOptions((prev) =>
+          setValue((prev) =>
             prev.includes(option.value)
               ? prev.filter((v) => v !== option.value)
               : [...prev, option.value],
