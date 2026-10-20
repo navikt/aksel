@@ -733,6 +733,29 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
+.aksel-data-grid__pagination-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-4);
+  margin-inline-start: auto;
+
+  & button[aria-disabled="true"] {
+    cursor: default;
+    opacity: var(--ax-opacity-disabled);
+  }
+
+  @media (forced-colors: active) {
+    & button[aria-disabled="true"] {
+      color: GrayText;
+      opacity: 1;
+    }
+  }
+}
+
+.aksel-data-grid__pagination-navigation-page {
+  white-space: nowrap;
+}
+
 .aksel-data-table__border-wrapper + .aksel-data-grid__pagination,
 .aksel-data-grid__pagination + .aksel-data-table__border-wrapper {
   margin-block-start: var(--ax-space-8);

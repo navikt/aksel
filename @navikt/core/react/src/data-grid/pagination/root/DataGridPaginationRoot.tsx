@@ -4,6 +4,10 @@ import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import type { DataGridPaginationOptions } from "../../root/DataGrid.types";
 import { useDataGridPaginationContext } from "../../root/DataGridPagination.context";
 import {
+  DataGridPaginationNavigation,
+  type DataGridPaginationNavigationProps,
+} from "../navigation/DataGridPaginationNavigation";
+import {
   DataGridPaginationSummary,
   type DataGridPaginationSummaryProps,
 } from "../summary/DataGridPaginationSummary";
@@ -55,7 +59,12 @@ const DataGridPaginationRoot = forwardRef<
       className={cl("aksel-data-grid__pagination", className)}
       data-sticky={sticky}
     >
-      {children ?? <DataGridPaginationSummary />}
+      {children ?? (
+        <>
+          <DataGridPaginationSummary />
+          <DataGridPaginationNavigation />
+        </>
+      )}
     </div>
   );
 });
@@ -65,6 +74,10 @@ const DataGridPagination = Object.assign(DataGridPaginationRoot, {
    * @see 🏷️ {@link DataGridPaginationSummaryProps}
    */
   Summary: DataGridPaginationSummary,
+  /**
+   * @see 🏷️ {@link DataGridPaginationNavigationProps}
+   */
+  Navigation: DataGridPaginationNavigation,
 });
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -72,6 +85,7 @@ export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
   export type Options = DataGridPaginationOptions;
   export type SummaryProps = DataGridPaginationSummaryProps;
+  export type NavigationProps = DataGridPaginationNavigationProps;
 }
 
 export { DataGridPagination };

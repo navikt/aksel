@@ -78,6 +78,18 @@ export const AboveTable: Story = {
   ),
 };
 
+export const CustomLayout: Story = {
+  render: () => (
+    <PagedGrid>
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Summary />
+        <DataGrid.Pagination.Navigation />
+      </DataGrid.Pagination>
+      <DataGrid.Table />
+    </PagedGrid>
+  ),
+};
+
 export const AboveAndBelowTable: Story = {
   render: () => (
     <PagedGrid>

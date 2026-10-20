@@ -217,6 +217,7 @@ export namespace DataGrid {
     export type Props = DataGridPagination.Props;
     export type Options = DataGridPagination.Options;
     export type SummaryProps = DataGridPagination.SummaryProps;
+    export type NavigationProps = DataGridPagination.NavigationProps;
   }
 }
 
