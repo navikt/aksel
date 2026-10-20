@@ -19,7 +19,7 @@ export interface CheckboxProps
    */
   children: React.ReactNode;
   /**
-   * Visually hides label and description, and makes it viewable for screen-readers only.
+   * Hides the label and description visually while keeping them available to screen readers.
    */
   hideLabel?: boolean;
   /**
