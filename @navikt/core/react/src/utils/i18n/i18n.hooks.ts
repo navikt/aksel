@@ -2,11 +2,12 @@ import type { Locale } from "date-fns";
 import { useCallback, useRef } from "react";
 import { useProvider } from "../../provider/Provider";
 import { get } from "./get";
+import { internalTranslations } from "./i18n.internal";
 import type {
   Component,
   ComponentTranslation,
-  PartialTranslations,
   TFunction,
+  TranslationObject,
 } from "./i18n.types";
 
 /* https://regex101.com/r/LYKWi3/1 */
@@ -17,13 +18,9 @@ function useI18n<T extends Component>(
   ...localTranslations: (ComponentTranslation<T> | undefined)[]
 ) {
   const context = useProvider();
-  const contextTranslations = context.translations || [];
-  const i18nObjects: (PartialTranslations | undefined)[] = [
+  const i18nObjects: (TranslationObject | undefined)[] = [
     ...localTranslations,
-    ...(Array.isArray(contextTranslations)
-      ? contextTranslations.map((t) => t[componentName])
-      : [contextTranslations[componentName]]),
-    context.locale[componentName],
+    ...geti18nObjects(componentName, context),
   ];
 
   const i18nRef = useRef(i18nObjects);
@@ -55,6 +52,31 @@ function useI18n<T extends Component>(
   );
 
   return translate;
+}
+
+function geti18nObjects(
+  componentName: Component,
+  context: ReturnType<typeof useProvider>,
+) {
+  if (isInternalComponent(componentName)) {
+    return [internalTranslations[componentName]];
+  }
+
+  const contextTranslations = context.translations || [];
+  const i18nObjects: (TranslationObject | undefined)[] = [
+    ...(Array.isArray(contextTranslations)
+      ? contextTranslations.map((t) => t[componentName])
+      : [contextTranslations[componentName]]),
+    context.locale[componentName],
+  ];
+
+  return i18nObjects;
+}
+
+function isInternalComponent(
+  componentName: Component,
+): componentName is keyof typeof internalTranslations {
+  return componentName in internalTranslations;
 }
 
 function useDateLocale() {
