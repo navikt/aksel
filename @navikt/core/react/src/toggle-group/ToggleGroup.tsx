@@ -65,6 +65,8 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
     const labelId = useId();
 
+    const labelSize = size === "xsmall" ? "small" : size;
+
     if (!value && !defaultValue) {
       console.error("ToggleGroup without value or defaultvalue is not allowed");
     }
@@ -84,7 +86,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           {label && (
             <Label
               as="div"
-              size={size}
+              size={labelSize}
               className="aksel-toggle-group__label"
               id={labelId}
             >

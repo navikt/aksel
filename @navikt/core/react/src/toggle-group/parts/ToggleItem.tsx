@@ -74,6 +74,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
       onKeyDown,
     });
     const ctx = useToggleGroupContext();
+    const size = ctx?.size === "xsmall" ? "small" : ctx?.size;
 
     return (
       <button
@@ -86,7 +87,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
         <BodyShort
           as="span"
           className="aksel-toggle-group__button-inner"
-          size={ctx?.size}
+          size={size}
         >
           {children ?? (
             <>

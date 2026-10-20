@@ -14,7 +14,7 @@ export interface ToggleGroupProps extends Omit<
    * Changes padding and font-size.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   /**
    * Controlled selected value.
    */

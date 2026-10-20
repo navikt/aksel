@@ -87,6 +87,18 @@
   }
 }
 
+/* Modifier xsmall size */
+.aksel-toggle-group--xsmall {
+  & .aksel-toggle-group__button {
+    padding: var(--ax-space-1) var(--ax-space-8);
+    min-height: 1.5rem;
+  }
+
+  & .aksel-toggle-group__button-inner > svg {
+    font-size: var(--ax-font-size-large);
+  }
+}
+
 /* High contrast */
 @media (forced-colors: active) {
   .aksel-toggle-group {
