@@ -718,6 +718,7 @@ html[data-dragging-cursor="true"] *::after {
   flex-wrap: wrap;
   flex-shrink: 0;
   align-items: center;
+  justify-content: space-between;
   gap: var(--ax-space-8) var(--ax-space-16);
   padding: var(--ax-space-12) var(--ax-space-16);
   background-color: var(--ax-bg-raised);
@@ -733,11 +734,25 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
+.aksel-data-grid__pagination-page-size {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+
+  & > .aksel-form-field__label {
+    margin: 0;
+  }
+
+  & > .aksel-select__container,
+  & .aksel-select__input {
+    width: auto;
+  }
+}
+
 .aksel-data-grid__pagination-navigation {
   display: flex;
   align-items: center;
   gap: var(--ax-space-4);
-  margin-inline-start: auto;
 
   /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
   & button[aria-disabled="true"] {
@@ -754,10 +769,10 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
+.aksel-data-grid__pagination-summary,
 .aksel-data-grid__pagination-navigation-page {
   display: inline-grid;
   font-variant-numeric: tabular-nums;
-  text-align: center;
   white-space: nowrap;
 
   &::before {
@@ -769,6 +784,10 @@ html[data-dragging-cursor="true"] *::after {
   & > span {
     grid-area: 1 / 1;
   }
+}
+
+.aksel-data-grid__pagination-navigation-page {
+  text-align: center;
 }
 
 .aksel-data-table__border-wrapper + .aksel-data-grid__pagination,

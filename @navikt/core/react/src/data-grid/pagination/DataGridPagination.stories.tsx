@@ -89,6 +89,15 @@ export const PageNumberWidth: Story = {
   ),
 };
 
+export const SummaryWidth: Story = {
+  render: () => (
+    <PagedGrid defaultPage={9}>
+      <DataGrid.Table />
+      <DataGrid.Pagination />
+    </PagedGrid>
+  ),
+};
+
 export const CustomLayout: Story = {
   render: () => (
     <PagedGrid>

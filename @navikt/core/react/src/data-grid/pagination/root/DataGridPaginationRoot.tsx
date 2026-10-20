@@ -8,6 +8,10 @@ import {
   type DataGridPaginationNavigationProps,
 } from "../navigation/DataGridPaginationNavigation";
 import {
+  DataGridPaginationPageSize,
+  type DataGridPaginationPageSizeProps,
+} from "../page-size/DataGridPaginationPageSize";
+import {
   DataGridPaginationSummary,
   type DataGridPaginationSummaryProps,
 } from "../summary/DataGridPaginationSummary";
@@ -62,6 +66,7 @@ const DataGridPaginationRoot = forwardRef<
       {children ?? (
         <>
           <DataGridPaginationSummary />
+          <DataGridPaginationPageSize />
           <DataGridPaginationNavigation />
         </>
       )}
@@ -75,6 +80,10 @@ const DataGridPagination = Object.assign(DataGridPaginationRoot, {
    */
   Summary: DataGridPaginationSummary,
   /**
+   * @see 🏷️ {@link DataGridPaginationPageSizeProps}
+   */
+  PageSize: DataGridPaginationPageSize,
+  /**
    * @see 🏷️ {@link DataGridPaginationNavigationProps}
    */
   Navigation: DataGridPaginationNavigation,
@@ -85,6 +94,7 @@ export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
   export type Options = DataGridPaginationOptions;
   export type SummaryProps = DataGridPaginationSummaryProps;
+  export type PageSizeProps = DataGridPaginationPageSizeProps;
   export type NavigationProps = DataGridPaginationNavigationProps;
 }
 

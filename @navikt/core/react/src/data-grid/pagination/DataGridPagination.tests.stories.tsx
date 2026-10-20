@@ -115,6 +115,134 @@ export const TestControlledNavigation: Story = {
   },
 };
 
+const testSummaryWidth: Story["play"] = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await canvasElement.ownerDocument.fonts.ready;
+  const getBounds = () =>
+    [
+      canvas.getByTestId("summary"),
+      canvas.getByRole("combobox", { name: "Rader per side" }),
+      ...canvas.getAllByRole("button"),
+    ].map((element) => {
+      const { x, y, width, height } = element.getBoundingClientRect();
+      return { x, y, width, height };
+    });
+  const bounds = getBounds();
+
+  for (let page = 1; page < 14; page++) {
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(getBounds()).toEqual(bounds);
+  }
+  for (let page = 13; page > 0; page--) {
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
+    expect(getBounds()).toEqual(bounds);
+  }
+};
+
+export const TestSummaryWidth: Story = {
+  render: () => (
+    <PaginationGrid pagination={{ totalRows: 137 }}>
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Summary data-testid="summary" />
+        <DataGrid.Pagination.PageSize />
+        <DataGrid.Pagination.Navigation />
+      </DataGrid.Pagination>
+    </PaginationGrid>
+  ),
+  play: testSummaryWidth,
+};
+
+export const TestUnknownTotalSummaryWidth: Story = {
+  render: () => (
+    <PaginationGrid pagination={{ defaultPage: 98, hasNextPage: true }}>
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Summary data-testid="summary" />
+        <DataGrid.Pagination.PageSize />
+        <DataGrid.Pagination.Navigation />
+      </DataGrid.Pagination>
+    </PaginationGrid>
+  ),
+  play: testSummaryWidth,
+};
+
+export const TestPageSizeChange: Story = {
+  render: () => {
+    const [page, setPage] = useState(2);
+    const [pageSize, setPageSize] = useState(10);
+    const [lastPageChange, setLastPageChange] = useState<number | null>(null);
+    const [lastPageSizeChange, setLastPageSizeChange] = useState<number | null>(
+      null,
+    );
+
+    return (
+      <>
+        <output data-testid="last-page-change">{lastPageChange}</output>
+        <output data-testid="last-page-size-change">
+          {lastPageSizeChange}
+        </output>
+        <DataGrid
+          columns={columns}
+          data={ROWS.slice(page * pageSize, (page + 1) * pageSize)}
+          getRowId={getRowId}
+          pagination={{
+            page,
+            onPageChange: (nextPage) => {
+              setLastPageChange(nextPage);
+              setPage(nextPage);
+            },
+            pageSize,
+            onPageSizeChange: (nextPageSize) => {
+              setLastPageSizeChange(nextPageSize);
+              setPageSize(nextPageSize);
+            },
+            pageSizeOptions: [5, 10],
+            totalRows: ROWS.length,
+          }}
+        >
+          <DataGrid.Table />
+          <DataGrid.Pagination />
+        </DataGrid>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const pageSize = canvas.getByRole("combobox", { name: "Rader per side" });
+
+    expect(canvas.getByText("Viser 21–25 av 25 rader")).toBeInTheDocument();
+    await userEvent.selectOptions(pageSize, "5");
+    expect(
+      await canvas.findByTestId("last-page-size-change"),
+    ).toHaveTextContent("5");
+    expect(canvas.getByTestId("last-page-change")).toHaveTextContent("0");
+    expect(canvas.getByText("Viser 1–5 av 25 rader")).toBeInTheDocument();
+    expect(canvas.getByText("Side 1 av 5")).toBeInTheDocument();
+  },
+};
+
+export const TestPageSizeMissingFromOptions: Story = {
+  render: () => (
+    <PaginationGrid
+      pagination={{
+        defaultPageSize: 7,
+        pageSizeOptions: [10, 25],
+        totalRows: ROWS.length,
+      }}
+    >
+      <DataGrid.Pagination />
+    </PaginationGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const pageSize = canvas.getByRole("combobox", { name: "Rader per side" });
+
+    expect(pageSize).toHaveValue("7");
+    expect(
+      within(pageSize).getByRole("option", { name: "7" }),
+    ).toBeInTheDocument();
+  },
+};
+
 export const TestNavigationBounds: Story = {
   render: () => (
     <PaginationGrid
