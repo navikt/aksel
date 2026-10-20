@@ -11,8 +11,12 @@ type ComboboxFilterProps = Pick<
 
 export const ComboboxFilter = (props: ComboboxFilterProps) => {
   const { size } = useComboboxRootContext();
-  const { filterString, setFilterString, virtuallyFocusedOptionValue } =
-    useComboboxPopupContext();
+  const {
+    filterString,
+    setFilterString,
+    virtuallyFocusedOptionValue,
+    setVirtuallyFocusedOptionValue,
+  } = useComboboxPopupContext();
 
   return (
     <div className="aksel-combobox2__filter">
@@ -28,6 +32,11 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
           onKeyUp={(event) => {
             if (["ArrowUp", "ArrowDown"].includes(event.key)) {
               event.preventDefault(); // Prevents navigation with screen reader
+            }
+          }}
+          onKeyDown={(event) => {
+            if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
+              setVirtuallyFocusedOptionValue("");
             }
           }}
           aria-autocomplete="list"
