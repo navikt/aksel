@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-feat(ToggleGroup): Add xsmall as size
+ToggleGroup: Add xsmall as size
