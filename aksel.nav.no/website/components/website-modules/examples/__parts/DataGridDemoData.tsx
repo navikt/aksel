@@ -115,7 +115,7 @@ function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } =
       isSortable: withSorting,
     },
     {
-      id: "age",
+      id: "created",
       header: "Saksalder",
       bodyCell: ({ created }) =>
         `${Math.floor((Date.now() - created.getTime()) / daysInMs(1))}d`,
