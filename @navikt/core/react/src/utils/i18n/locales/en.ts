@@ -29,6 +29,21 @@ export default {
     title: "Copy",
     activeText: "Copied!",
   },
+  DataGrid: {
+    Pagination: {
+      summary: "Showing {from}–{to} of {totalRows} rows",
+      summaryUnknownTotal: "Showing rows {from}–{to}",
+      summaryEmpty: "No rows",
+      pageSize: "Rows per page",
+      pageOf: "Page {page} of {pageCount}",
+      pageOfUnknownTotal: "Page {page}",
+      first: "First page",
+      previous: "Previous page",
+      next: "Next page",
+      last: "Last page",
+      navLabel: "Pagination",
+    },
+  },
   DatePicker: {
     chooseDate: "Choose date",
     chooseDates: "Choose dates",

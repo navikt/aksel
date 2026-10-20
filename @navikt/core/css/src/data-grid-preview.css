@@ -711,3 +711,31 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
+
+/* ------------------------ DataGrid.Pagination Start ----------------------- */
+.aksel-data-grid__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--ax-space-8) var(--ax-space-16);
+  padding: var(--ax-space-12) var(--ax-space-16);
+  background-color: var(--ax-bg-raised);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-radius: var(--ax-radius-12);
+
+  &[data-sticky="true"] {
+    position: sticky;
+    bottom: 0;
+
+    /* Above table sticky header/columns (z-index 3) */
+    z-index: 4;
+  }
+}
+
+.aksel-data-table__border-wrapper + .aksel-data-grid__pagination,
+.aksel-data-grid__pagination + .aksel-data-table__border-wrapper {
+  margin-block-start: var(--ax-space-8);
+}
+
+/* ------------------------- DataGrid.Pagination End ------------------------ */

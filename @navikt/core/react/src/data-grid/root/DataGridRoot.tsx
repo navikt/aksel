@@ -6,6 +6,7 @@ import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridPagination } from "../hooks/useDataGridPagination";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
+import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
 import type {
   DataGridPaginationOptions,
   DataGridSettings,
@@ -86,6 +87,16 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
+  /**
+   * @see 🏷️ {@link DataGridPagination.Props}
+   *
+   * @example
+   * <DataGrid columns={columns} data={pageRows} pagination={{ totalRows: 150 }}>
+   *   <DataGrid.Table />
+   *   <DataGrid.Pagination />
+   * </DataGrid>
+   */
+  Pagination: typeof DataGridPagination;
 }
 
 /**
@@ -173,6 +184,7 @@ function DataGridPaginationProvider({
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
+DataGrid.Pagination = DataGridPagination;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -197,6 +209,14 @@ export namespace DataGrid {
   export namespace Preferences {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPreferences.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Pagination {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPagination.Props;
+    export type Options = DataGridPagination.Options;
+    export type SummaryProps = DataGridPagination.SummaryProps;
   }
 }
 

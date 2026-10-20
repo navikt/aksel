@@ -35,6 +35,21 @@ export default {
     title: "Kopier",
     activeText: "Kopiert!",
   },
+  DataGrid: {
+    Pagination: {
+      summary: "Viser {from}–{to} av {totalRows} rader",
+      summaryUnknownTotal: "Viser rad {from}–{to}",
+      summaryEmpty: "Ingen rader",
+      pageSize: "Rader per side",
+      pageOf: "Side {page} av {pageCount}",
+      pageOfUnknownTotal: "Side {page}",
+      first: "Første side",
+      previous: "Forrige side",
+      next: "Neste side",
+      last: "Siste side",
+      navLabel: "Sidenavigering",
+    },
+  },
   DatePicker: {
     chooseDate: "Velg dato",
     chooseDates: "Velg datoer",
