@@ -117,6 +117,7 @@ interface CoachTourProps extends CoachBaseProps {
     context: {
       defaultContent: React.ReactNode;
       index: number;
+      totalSteps: number;
     },
   ) => React.ReactNode | undefined;
   children?: never;

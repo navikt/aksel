@@ -302,6 +302,7 @@ const CoachRoot = (props: CoachProps) => {
       {
         defaultContent: currentStepContent,
         index: activeStep,
+        totalSteps: steps.length,
       },
     ) ??
     currentStepContent;
