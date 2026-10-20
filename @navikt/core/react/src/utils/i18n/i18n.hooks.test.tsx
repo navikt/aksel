@@ -1,27 +1,9 @@
 import { renderHook } from "@testing-library/react";
 import React from "react";
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { Provider } from "../../provider";
 import { useDateLocale, useI18n } from "./i18n.hooks";
 import { en, nb, nn } from "./locales";
-
-vi.mock("./i18n.internal", () => ({
-  internalTranslations: {
-    INTERNAL_DATAGRID: {
-      label: "Internal grid",
-      selected: "{count} rows selected",
-    },
-  },
-}));
-
-/* Mocked registry keys differ from the real (WIP) registry, so loosen the types. */
-const useInternalI18n = useI18n as unknown as (
-  componentName: "INTERNAL_DATAGRID",
-  ...localTranslations: (Record<string, string> | undefined)[]
-) => (
-  keypath: string,
-  replacements?: Record<string, string | number>,
-) => string;
 
 describe("useI18n", () => {
   test("should throw error if key is not found", () => {
@@ -130,19 +112,20 @@ describe("useI18n", () => {
   });
 
   test("should use internal defaults without entries in the public locales", () => {
-    const { result } = renderHook(() => useInternalI18n("INTERNAL_DATAGRID"), {
+    const { result } = renderHook(() => useI18n("TEST_DATA"), {
       wrapper: ({ children }) => <Provider locale={en}>{children}</Provider>,
     });
 
     expect(result.current("label")).toBe("Internal grid");
     expect(result.current("selected", { count: 3 })).toBe("3 rows selected");
+    /* @ts-expect-error Testing nonexistent key */
     expect(() => result.current("nonexistentKey")).toThrowError();
   });
 
   test("should prioritize local internal translations and fall back to internal defaults", () => {
     const { result } = renderHook(() =>
-      useInternalI18n(
-        "INTERNAL_DATAGRID",
+      useI18n(
+        "TEST_DATA",
         undefined,
         { label: "First override" },
         { label: "Second override" },
@@ -155,7 +138,7 @@ describe("useI18n", () => {
 
   test("should update internal overrides without changing the translate function", () => {
     const { result, rerender } = renderHook(
-      ({ label }) => useInternalI18n("INTERNAL_DATAGRID", { label }),
+      ({ label }) => useI18n("TEST_DATA", { label }),
       { initialProps: { label: "Initial label" } },
     );
     const translate = result.current;
