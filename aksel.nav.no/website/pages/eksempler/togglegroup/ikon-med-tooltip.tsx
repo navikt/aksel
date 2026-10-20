@@ -38,4 +38,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 6,
+  desc: "Bruk Tooltip på knapper som kun inneholder ikon.",
 };

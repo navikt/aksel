@@ -53,7 +53,6 @@ export interface LookupProps
  * </Lookup>
  * ```
  */
-
 export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
   (
     {
@@ -174,3 +173,7 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
 );
 
 export default Lookup;
+
+/** @deprecated Lookup is no longer in preview. Import it from `@navikt/ds-react` instead. */
+const LookupDeprecated = Lookup;
+export { LookupDeprecated };

@@ -68,22 +68,22 @@
     },
     "./PREVIEW/Lookup": {
       "import": {
-        "types": "./esm/lookup/index.d.ts",
-        "default": "./esm/lookup/index.js"
+        "types": "./esm/lookup/index-deprecated.d.ts",
+        "default": "./esm/lookup/index-deprecated.js"
       },
       "require": {
-        "types": "./cjs/lookup/index.d.ts",
-        "default": "./cjs/lookup/index.js"
+        "types": "./cjs/lookup/index-deprecated.d.ts",
+        "default": "./cjs/lookup/index-deprecated.js"
       }
     },
     "./PREVIEW/Badge": {
       "import": {
-        "types": "./esm/badge/index.d.ts",
-        "default": "./esm/badge/index.js"
+        "types": "./esm/badge/index-deprecated.d.ts",
+        "default": "./esm/badge/index-deprecated.js"
       },
       "require": {
-        "types": "./cjs/badge/index.d.ts",
-        "default": "./cjs/badge/index.js"
+        "types": "./cjs/badge/index-deprecated.d.ts",
+        "default": "./cjs/badge/index-deprecated.js"
       }
     },
     "./PREVIEW/RadioCard": {
@@ -811,7 +811,7 @@
     "react-dom": "19.3.0",
     "rimraf": "6.1.3",
     "swr": "^2.4.2",
-    "tsc-alias": "1.9.1",
+    "tsc-alias": "1.9.7",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
     "vitest": "4.1.11"

@@ -69,7 +69,7 @@ Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. 
 
 ### Tests and docs (🟡)
 
-- A behavior change has a story `play` test or Vitest test proving the user-facing contract. Queries use role and accessible name.
+- Complex logic with a higher risk of breaking has a story `play` test or Vitest test proving the user-facing contract. Queries use role and accessible name.
 - Tests are deterministic: no dependence on timezone, current time or randomness.
 - Edge cases that are easy to miss: controlled vs. uncontrolled, `ref`/`className`/`...rest` forwarding, `as` prop, empty and very long content.
 - Website examples (`aksel.nav.no/website/pages/eksempler/`) are updated when usage changes.

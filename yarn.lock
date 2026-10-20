@@ -5241,7 +5241,7 @@ __metadata:
     prettier: "npm:3.9.6"
     react: "npm:19.3.0"
     rehype-parse: "npm:9.0.1"
-    tsc-alias: "npm:1.9.1"
+    tsc-alias: "npm:1.9.7"
     tsx: "npm:^4.23.15"
     typescript: "npm:6.0.3"
     unified: "npm:11.0.5"
@@ -5279,7 +5279,7 @@ __metadata:
     commander: "npm:15.0.0"
     enquirer: "npm:2.4.1"
     fast-glob: "npm:3.3.3"
-    figlet: "npm:1.11.3"
+    figlet: "npm:1.12.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:17.4.0"
     lodash: "npm:4.18.1"
@@ -5338,7 +5338,7 @@ __metadata:
     react-dom: "npm:19.3.0"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.4.2"
-    tsc-alias: "npm:1.9.1"
+    tsc-alias: "npm:1.9.7"
     tsx: "npm:^4.23.15"
     typescript: "npm:6.0.3"
     vitest: "npm:4.1.11"
@@ -15184,14 +15184,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:1.11.3":
-  version: 1.11.3
-  resolution: "figlet@npm:1.11.3"
+"figlet@npm:1.12.0":
+  version: 1.12.0
+  resolution: "figlet@npm:1.12.0"
   dependencies:
     commander: "npm:^14.0.0"
   bin:
     figlet: bin/index.js
-  checksum: 10/8bf77e217513b8df2d2a2d2b991486dfcec8208bf2d87bdb4b8afe7e18db1630e4ba82389294ef8e9fd03b5734f8c126811763f8fedf481d86cbfbfaab9439e2
+  checksum: 10/1f2805189f243d5e04ea42132c37e6ac41f7b2cf5f9970fae0950041f7cd91e5948c0b7e87e9c908b274b5c0df1b6e12fd6f1e6b7609db7a6ee390f8b88ec3dd
   languageName: node
   linkType: hard
 
@@ -22146,16 +22146,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.89.0":
-  version: 7.89.0
-  resolution: "react-hook-form@npm:7.89.0"
+"react-hook-form@npm:^7.90.0":
+  version: 7.90.0
+  resolution: "react-hook-form@npm:7.90.0"
   peerDependencies:
     "@types/react": "*"
     react: ^16.8.0 || ^17 || ^18 || ^19
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/9a7d5de9f20b694a9411180cdde6f9efd5966f7b810f279622a6d385bd8898a8f2274af7fed8764b0b6a33325bd176270968ccc041a65d26cbab9d65147895f4
+  checksum: 10/407576c6ffac5cbbe3c15b6a6e1274e2417e85a175b5de55f80c526367cd924f22c0c0f5d164f1e403420ac7b7c81f418322f9c1d3e6f02dc6eb7319a148a756
   languageName: node
   linkType: hard
 
@@ -25481,9 +25481,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsc-alias@npm:1.9.1":
-  version: 1.9.1
-  resolution: "tsc-alias@npm:1.9.1"
+"tsc-alias@npm:1.9.7":
+  version: 1.9.7
+  resolution: "tsc-alias@npm:1.9.7"
   dependencies:
     chokidar: "npm:^3.5.3"
     commander: "npm:^9.0.0"
@@ -25494,7 +25494,7 @@ __metadata:
     plimit-lit: "npm:^1.2.6"
   bin:
     tsc-alias: dist/bin/index.js
-  checksum: 10/92016e074dd40bba8de3838a1f4c9685f902e8cc7b9f0c25194714dfe02c5c553c7c9e33ca08b8dee2432ad7ca4efcf69cf092cbc6132baddd985c311b59ce29
+  checksum: 10/9d4d37609c4aee4e31ae996283a2b78770d3bd7ba15341a7ae6c44b3036457c65591e0e761063bdcc3e943f13b2db7c705327332fbc2c4489594e9c1181321fa
   languageName: node
   linkType: hard
 
@@ -27009,7 +27009,7 @@ __metadata:
     prism-react-renderer: "npm:^2.0.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
-    react-hook-form: "npm:^7.89.0"
+    react-hook-form: "npm:^7.90.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.7.2"
     react-snowfall: "npm:^2.4.0"

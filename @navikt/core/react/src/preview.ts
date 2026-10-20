@@ -1,5 +1,5 @@
 "use client";
 export { DataGrid } from "./data-grid";
-export { Lookup } from "./lookup";
-export { Badge } from "./badge";
+export { LookupDeprecated as Lookup } from "./lookup/Lookup";
+export { BadgeDeprecated as Badge } from "./badge/Badge";
 export { RadioCard, RadioCardGroup } from "./form/radio-card";
