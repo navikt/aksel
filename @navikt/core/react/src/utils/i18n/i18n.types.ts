@@ -29,6 +29,3 @@ export type Component = keyof Translations | keyof InternalTranslations;
 export type ComponentTranslation<T extends Component> = RecursivePartial<
   (Translations & InternalTranslations)[T]
 >;
-
-export type TranslationObject =
-  PartialTranslations | ComponentTranslation<Component>;

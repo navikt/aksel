@@ -1,8 +1,11 @@
-import type { TranslationObject } from "./i18n.types";
+import type { Component, ComponentTranslation } from "./i18n.types";
 
 // Based on https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts
 
-export function get(keypath: string, objs: (TranslationObject | undefined)[]) {
+export function get<T extends Component>(
+  keypath: string,
+  objs: (ComponentTranslation<T> | undefined)[],
+) {
   const keys = keypath.split(".");
 
   for (const obj of objs) {
@@ -10,7 +13,7 @@ export function get(keypath: string, objs: (TranslationObject | undefined)[]) {
       continue;
     }
 
-    let acc: string | TranslationObject = obj;
+    let acc: string | ComponentTranslation<T> = obj;
 
     for (let i = 0; i < keys.length; i++) {
       const val = acc[keys[i]];
