@@ -1,3 +1,6 @@
 "use client";
-export { default as ToggleGroup, ToggleGroupItem } from "./ToggleGroup";
-export type { ToggleGroupProps, ToggleGroupItemProps } from "./ToggleGroup";
+export { ToggleGroup, ToggleGroupItem } from "./root/ToggleGroupRoot";
+export type {
+  ToggleGroupProps,
+  ToggleGroupItemProps,
+} from "./root/ToggleGroupRoot";

@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { composeEventHandlers } from "../../utils/helpers";
 import { rovingFocus } from "../../utils/helpers/roving-focus";
-import { useToggleGroupContext } from "../ToggleGroup.context";
+import { useToggleGroupContext } from "../root/ToggleGroupRoot.context";
 
 const TOGGLE_ITEM_SELECTOR = "[data-aksel-toggle-item]:not([data-disabled])";
 
-export interface UseToggleItemProps {
+interface UseToggleItemProps {
   /**
    * If `true`, the `ToggleItem` won't be toggleable
    * @default false
@@ -17,7 +17,7 @@ export interface UseToggleItemProps {
   value: string;
 }
 
-export function useToggleItem<P extends UseToggleItemProps>({
+function useToggleItem<P extends UseToggleItemProps>({
   value,
   disabled = false,
   onFocus: _onFocus,
@@ -92,3 +92,6 @@ export function useToggleItem<P extends UseToggleItemProps>({
     "data-disabled": disabled ? "" : undefined,
   };
 }
+
+export { useToggleItem };
+export type { UseToggleItemProps };

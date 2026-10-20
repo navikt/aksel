@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography/BodyShort";
 import { cl } from "../../utils/helpers";
-import { useToggleGroupContext } from "../ToggleGroup.context";
+import { useToggleGroupContext } from "../root/ToggleGroupRoot.context";
 import { useToggleItem } from "./useToggleItem";
 
 type BaseProps = Omit<
@@ -47,10 +47,10 @@ type IconProps = {
   icon: React.ReactNode;
 };
 
-export type ToggleGroupItemProps = BaseProps &
+type ToggleGroupItemProps = BaseProps &
   (ChildrenProps | LabelProps | IconProps);
 
-const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
+const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
   (
     {
       className,
@@ -101,4 +101,5 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
   },
 );
 
-export default ToggleItem;
+export { ToggleGroupItem };
+export type { ToggleGroupItemProps };

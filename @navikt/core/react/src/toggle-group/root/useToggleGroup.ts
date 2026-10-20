@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useControllableState } from "../utils/hooks";
-import type { ToggleGroupProps } from "./ToggleGroup.types";
+import { useControllableState } from "../../utils/hooks";
+import type { ToggleGroupProps } from "../ToggleGroup.types";
 
-export function useToggleGroup({
+function useToggleGroup({
   onChange,
   value,
   defaultValue = "",
@@ -28,3 +28,5 @@ export function useToggleGroup({
     setFocusedValue,
   };
 }
+
+export { useToggleGroup };
