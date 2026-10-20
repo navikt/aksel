@@ -3,7 +3,7 @@ import React from "react";
 import { PersonIcon } from "@navikt/aksel-icons";
 import { VStack } from "../primitives/stack";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import { Chat, POSITIONS, SIZES, VARIANTS } from "./Chat";
+import { Chat, POSITIONS, SIZES, VARIANTS } from "./root/ChatRoot";
 
 export default {
   title: "ds-react/Chat",

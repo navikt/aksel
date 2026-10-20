@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
-import { BodyShort } from "../../../typography";
-import type { OverridableComponent } from "../../../utils-external";
-import { cl } from "../../../utils/helpers";
-import { useTabsContext } from "../../Tabs.context";
+import { BodyShort } from "../../typography";
+import type { OverridableComponent } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useTabsContext } from "../root/TabsRoot.context";
 import { useTab } from "./useTab";
 
-export interface TabProps extends Omit<
+interface TabsTabProps extends Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   "children"
 > {
@@ -30,7 +30,7 @@ export interface TabProps extends Omit<
   id?: string;
 }
 
-export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
+const TabsTab: OverridableComponent<TabsTabProps, HTMLButtonElement> =
   forwardRef(
     (
       {
@@ -94,4 +94,5 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
     },
   );
 
-export default Tab;
+export { TabsTab };
+export type { TabsTabProps };

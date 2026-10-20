@@ -61,13 +61,13 @@ const ChipsRoot = forwardRef<HTMLUListElement, ChipsProps>(
 const Chips = Object.assign(ChipsRoot, {
   /**
    * Toggle between selected-states.
-   * @see 🏷️ {@link ToggleChipsProps}
+   * @see 🏷️ {@link ChipsToggleProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
   Toggle: ChipsToggle,
   /**
    * Remove filter or the likes on click.
-   * @see 🏷️ {@link RemovableChipsProps}
+   * @see 🏷️ {@link ChipsRemovableProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
   Removable: ChipsRemovable,

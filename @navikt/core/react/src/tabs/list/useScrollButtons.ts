@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { debounce } from "../../../utils-external";
-import { ownerDocument } from "../../../utils/helpers";
+import { debounce } from "../../utils-external";
+import { ownerDocument } from "../../utils/helpers";
 
-export function useScrollButtons(
-  listRef: React.RefObject<HTMLDivElement | null>,
-) {
+function useScrollButtons(listRef: React.RefObject<HTMLDivElement | null>) {
   const [displayScroll, setDisplayScroll] = useState({
     start: false,
     end: false,
@@ -70,3 +68,5 @@ export function useScrollButtons(
     },
   };
 }
+
+export { useScrollButtons };

@@ -1,9 +1,9 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import type { AkselColor } from "../types";
-import { BodyLong, type HeadingProps } from "../typography";
-import { cl } from "../utils/helpers";
-import Bubble, { type ChatBubbleProps } from "./Bubble";
+import type { AkselColor } from "../../types";
+import { BodyLong, type HeadingProps } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { ChatBubble, type ChatBubbleProps } from "../bubble/ChatBubble";
 
 const VARIANTS = ["subtle", "info", "neutral"] as const;
 const POSITIONS = ["left", "right"] as const;
@@ -153,8 +153,8 @@ const Chat = Object.assign(ChatRoot, {
   /**
    * @see 🏷️ {@link ChatBubbleProps}
    */
-  Bubble,
+  Bubble: ChatBubble,
 });
 
-export { Chat, Bubble as ChatBubble, VARIANTS, POSITIONS, SIZES };
+export { Chat, ChatBubble, VARIANTS, POSITIONS, SIZES };
 export type { ChatProps, ChatBubbleProps };

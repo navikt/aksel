@@ -1,8 +1,8 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
-import { Detail, Heading, type HeadingProps } from "../typography";
-import { cl } from "../utils/helpers";
+import { Detail, Heading, type HeadingProps } from "../../typography";
+import { cl } from "../../utils/helpers";
 
-export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
+interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Bubble text.
    */
@@ -26,7 +26,7 @@ export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
 }
 
-const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
+const ChatBubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
   (
     {
       children,
@@ -65,4 +65,5 @@ const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
   },
 );
 
-export default Bubble;
+export { ChatBubble };
+export type { ChatBubbleProps };

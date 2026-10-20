@@ -4,7 +4,7 @@ import type { AkselColor } from "../../types";
 import { cl, composeEventHandlers } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 
-export interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
    * @deprecated Use `data-color` prop instead.
@@ -22,10 +22,7 @@ export interface ChipsRemovableProps extends React.ButtonHTMLAttributes<HTMLButt
   "data-color"?: AkselColor;
 }
 
-export const ChipsRemovable = forwardRef<
-  HTMLButtonElement,
-  ChipsRemovableProps
->(
+const ChipsRemovable = forwardRef<HTMLButtonElement, ChipsRemovableProps>(
   (
     {
       children,
@@ -76,4 +73,5 @@ function variantToColor(
   }
 }
 
-export default ChipsRemovable;
+export { ChipsRemovable };
+export type { ChipsRemovableProps };

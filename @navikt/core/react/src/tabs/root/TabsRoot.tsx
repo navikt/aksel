@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
-import { cl } from "../utils/helpers";
-import { TabsProvider } from "./Tabs.context";
-import type { TabsProps } from "./Tabs.types";
-import Tab, { type TabProps } from "./parts/tab/Tab";
-import TabList, { type TabListProps } from "./parts/tablist/TabList";
-import TabPanel, { type TabPanelProps } from "./parts/tabpanel/TabPanel";
+import { cl } from "../../utils/helpers";
+import type { TabsProps } from "../Tabs.types";
+import { TabsList, type TabsListProps } from "../list/TabsList";
+import { TabsPanel, type TabsPanelProps } from "../panel/TabsPanel";
+import { TabsTab, type TabsTabProps } from "../tab/TabsTab";
+import { TabsProvider } from "./TabsRoot.context";
 import { useTabs } from "./useTabs";
 
 const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
@@ -82,24 +82,19 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
  */
 const Tabs = Object.assign(TabsRoot, {
   /**
-   * @see 🏷️ {@link TabProps}
+   * @see 🏷️ {@link TabsTabProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Tab,
+  Tab: TabsTab,
   /**
-   * @see 🏷️ {@link TabListProps}
+   * @see 🏷️ {@link TabsListProps}
    */
-  List: TabList,
+  List: TabsList,
   /**
-   * @see 🏷️ {@link TabPanelProps}
+   * @see 🏷️ {@link TabsPanelProps}
    */
-  Panel: TabPanel,
+  Panel: TabsPanel,
 });
 
-export { Tabs, Tab as TabsTab, TabList as TabsList, TabPanel as TabsPanel };
-export type {
-  TabsProps,
-  TabProps as TabsTabProps,
-  TabListProps as TabsListProps,
-  TabPanelProps as TabsPanelProps,
-};
+export { Tabs, TabsTab, TabsList, TabsPanel };
+export type { TabsProps, TabsTabProps, TabsListProps, TabsPanelProps };

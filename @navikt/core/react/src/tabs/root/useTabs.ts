@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useId } from "../utils-external";
-import { useControllableState } from "../utils/hooks";
-import type { TabsProps } from "./Tabs.types";
+import { useId } from "../../utils-external";
+import { useControllableState } from "../../utils/hooks";
+import type { TabsProps } from "../Tabs.types";
 
-export function useTabs({
+function useTabs({
   onChange,
   value,
   defaultValue = "",
@@ -45,3 +45,5 @@ function makeTabId(id: string, value: string) {
 function makeTabPanelId(id: string, value: string) {
   return `${id}--tabpanel-${value}`;
 }
+
+export { useTabs };

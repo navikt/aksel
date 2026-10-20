@@ -1,7 +1,7 @@
-import { composeEventHandlers } from "../../../utils/helpers";
-import { useTabsContext } from "../../Tabs.context";
+import { composeEventHandlers } from "../../utils/helpers";
+import { useTabsContext } from "../root/TabsRoot.context";
 
-export interface UseTabProps {
+interface UseTabProps {
   id?: string;
   /**
    * If `true`, the `Tab` won't be toggleable
@@ -56,3 +56,4 @@ function useTab({
 }
 
 export { useTab };
+export type { UseTabProps };
