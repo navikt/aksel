@@ -65,8 +65,9 @@ function createDemoRows(count: number): CaseT[] {
   });
 }
 
-/* prettier-ignore */
-function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } = {}): DataGrid.Columns<CaseT> {
+function createDemoColumns({
+  withSorting = false,
+}: { withSorting?: boolean } = {}): DataGrid.Columns<CaseT> {
   return [
     {
       id: "caseId",
@@ -160,7 +161,8 @@ function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } =
       align: "center",
       width: { autoResizeOnce: true },
     },
-  ];
+  ] satisfies (DataGrid.Columns<CaseT>[number] &
+    ({ isSortable?: never } | { isSortable: boolean; id: keyof CaseT }))[];
 }
 
 const PriorityNames = {
