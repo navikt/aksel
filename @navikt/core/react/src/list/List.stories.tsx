@@ -9,7 +9,7 @@ import {
 import { Box } from "../primitives/box";
 import { VStack } from "../primitives/stack";
 import { BodyLong } from "../typography";
-import List from "./List";
+import { List } from "./index";
 
 export default {
   title: "ds-react/List",

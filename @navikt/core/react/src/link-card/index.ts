@@ -7,7 +7,7 @@ export {
   LinkCardAnchor,
   LinkCardIcon,
   LinkCardImage,
-} from "./LinkCard";
+} from "./root/LinkCardRoot";
 
 export type {
   LinkCardProps,
@@ -17,4 +17,4 @@ export type {
   LinkCardAnchorProps,
   LinkCardIconProps,
   LinkCardImageProps,
-} from "./LinkCard";
+} from "./root/LinkCardRoot";

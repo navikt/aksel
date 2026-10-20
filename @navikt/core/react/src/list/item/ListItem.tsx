@@ -1,14 +1,14 @@
 import React, { forwardRef, useContext } from "react";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { consoleWarning } from "../utils/helpers/consoleWarning";
-import { ListContext } from "./List.context";
-import type { ListItemProps } from "./List.types";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import type { ListItemProps } from "../List.types";
+import { ListContext } from "../root/ListRoot.context";
 
 /**
  * @see 🏷️ {@link ListItemProps}
  */
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
+const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType, size } = useContext(ListContext);
 
@@ -57,4 +57,6 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
 );
 
 ListItem.displayName = "List.Item";
-export default ListItem;
+
+export { ListItem };
+export type { ListItemProps };

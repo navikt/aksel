@@ -1,35 +1,11 @@
 import React, { forwardRef, useContext } from "react";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { ListItem } from "./List.Item";
-import { ListContext } from "./List.context";
-import type { ListItemProps, ListProps } from "./List.types";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import type { ListItemProps, ListProps } from "../List.types";
+import { ListItem } from "../item/ListItem";
+import { ListContext } from "./ListRoot.context";
 
-interface ListComponent extends React.ForwardRefExoticComponent<
-  ListProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link ListItemProps}
-   */
-  Item: typeof ListItem;
-}
-
-/**
- * A list component
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/list)
- * @see 🏷️ {@link ListProps | Props}
- *
- * @example
- * ```jsx
- * <List>
- *   <List.Item>Coffee</List.Item>
- *   <List.Item>Tea</List.Item>
- *   <List.Item>Milk</List.Item>
- * </List>
- * ```
- */
-export const List = forwardRef<HTMLDivElement, ListProps>(
+const ListRoot = forwardRef<HTMLDivElement, ListProps>(
   (
     {
       children,
@@ -71,10 +47,29 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       </ListContext.Provider>
     );
   },
-) as ListComponent;
+);
 
-List.Item = ListItem;
+/**
+ * A list component
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/list)
+ * @see 🏷️ {@link ListProps | Props}
+ *
+ * @example
+ * ```jsx
+ * <List>
+ *   <List.Item>Coffee</List.Item>
+ *   <List.Item>Tea</List.Item>
+ *   <List.Item>Milk</List.Item>
+ * </List>
+ * ```
+ */
+const List = Object.assign(ListRoot, {
+  /**
+   * @see 🏷️ {@link ListItemProps}
+   */
+  Item: ListItem,
+});
 
-export default List;
-export { ListItem };
+export { List, ListItem };
 export type { ListProps, ListItemProps };

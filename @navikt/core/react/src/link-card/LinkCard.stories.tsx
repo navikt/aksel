@@ -13,7 +13,7 @@ import {
   LinkCardIcon,
   LinkCardImage,
   LinkCardTitle,
-} from "./LinkCard";
+} from "./index";
 
 type Story = StoryObj<typeof LinkCard>;
 

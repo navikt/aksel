@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { cl } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
-import { ExpansionCardContext } from "./context";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { ExpansionCardContext } from "../root/ExpansionCardRoot.context";
 
-export interface ExpansionCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ExpansionCardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -46,4 +46,5 @@ const ExpansionCardHeader = forwardRef<
   );
 });
 
-export default ExpansionCardHeader;
+export { ExpansionCardHeader };
+export type { ExpansionCardHeaderProps };
