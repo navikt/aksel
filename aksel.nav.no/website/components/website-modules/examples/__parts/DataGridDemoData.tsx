@@ -19,7 +19,7 @@ type CaseT = {
   keywords: string[];
   priority: 0 | 1 | 2 | 3;
   sender: string;
-  age: Date;
+  created: Date;
   status:
     | "Mottatt"
     | "Under behandling"
@@ -29,9 +29,8 @@ type CaseT = {
   deadline: Date;
 };
 
-const now = Date.now();
-
 function createDemoRows(count: number): CaseT[] {
+  const now = Date.now();
   /* prettier-ignore */
   const names = ["Emma","Olivia","Nora","Sofie","Leah","Ella","Frida","Sofia","Ellinor","Astrid","Noah","Jakob","Lucas","Emil","Oskar","William","Elias","Isak","Oliver","Ludvig"];
   /* prettier-ignore */
@@ -59,15 +58,16 @@ function createDemoRows(count: number): CaseT[] {
       keywords: Array.from(keywords),
       priority: ([0, 1, 2, 3] as const)[rng(4)],
       sender: names[rng(names.length)],
-      age: new Date(now - index * daysInMs(1)),
+      created: new Date(now - index * daysInMs(1)),
       status: statuses[rng(statuses.length)],
       deadline: new Date(now - daysInMs(8) + (index % 50) * daysInMs(1)),
     };
   });
 }
 
-/* prettier-ignore */
-function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } = {}): DataGrid.Columns<CaseT> {
+function createDemoColumns({
+  withSorting = false,
+}: { withSorting?: boolean } = {}): DataGrid.Columns<CaseT> {
   return [
     {
       id: "caseId",
@@ -116,10 +116,10 @@ function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } =
       isSortable: withSorting,
     },
     {
-      id: "age",
+      id: "created",
       header: "Saksalder",
-      bodyCell: ({ age }) =>
-        `${Math.floor((Date.now() - age.getTime()) / daysInMs(1))}d`,
+      bodyCell: ({ created }) =>
+        `${Math.floor((Date.now() - created.getTime()) / daysInMs(1))}d`,
       align: "right",
       width: { defaultValue: 110 },
       isSortable: withSorting,
@@ -161,7 +161,8 @@ function createDemoColumns({ withSorting = false }: { withSorting?: boolean; } =
       align: "center",
       width: { autoResizeOnce: true },
     },
-  ];
+  ] satisfies (DataGrid.Columns<CaseT>[number] &
+    ({ isSortable?: never } | { isSortable: boolean; id: keyof CaseT }))[];
 }
 
 const PriorityNames = {
@@ -188,7 +189,7 @@ function PriorityTag({ priority }: { priority: CaseT["priority"] }) {
 }
 
 function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
-  const isOverdue = deadline.getTime() < now;
+  const isOverdue = deadline.getTime() < Date.now(); // eslint-disable-line react-hooks/purity
 
   return (
     <HGrid
