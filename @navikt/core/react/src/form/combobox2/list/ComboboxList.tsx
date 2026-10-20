@@ -47,7 +47,7 @@ function ComboboxList<
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
-  const { virtuallyFocusedOptionValue, filterString } =
+  const { virtuallyFocusedOptionValue, filterString, setAnnounceText } =
     useComboboxPopupContext();
   const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
     useComboboxRootContext();
@@ -74,12 +74,15 @@ function ComboboxListContent<
     : options;
 
   if (filteredOptions.length === 0) {
+    setAnnounceText("Ingen treff");
     return (
       <div className="aksel-combobox2__no-results" role="status">
         Ingen treff
       </div>
     );
   }
+
+  setAnnounceText("");
 
   return filteredOptions.map((optOrGroup) =>
     "options" in optOrGroup ? (

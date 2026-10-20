@@ -29,7 +29,10 @@ const ComboboxTrigger = ({
           if (!readOnly && !rootContext.open) event.preventDefault();
         }}
         onKeyDown={(event) => {
-          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          if (
+            !readOnly &&
+            (event.key === "ArrowDown" || event.key === "ArrowUp")
+          ) {
             rootContext.setOpen(true);
             // Stop keydown from scrolling window
             event.preventDefault();

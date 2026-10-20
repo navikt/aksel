@@ -7,6 +7,7 @@ interface ComboboxPopupContextProps {
   virtuallyFocusedOptionValue: string;
   filterString: string;
   setFilterString: (value: string) => void;
+  setAnnounceText: (text: string) => void;
 }
 
 export const {
@@ -27,6 +28,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const [filterString, setFilterString] = useState("");
   const rootContext = useComboboxRootContext();
   const ref = useRef<HTMLDivElement | null>(null);
+  const [announceText, setAnnounceText] = useState("");
 
   useEffect(
     function onOpen() {
@@ -82,8 +84,12 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         virtuallyFocusedOptionValue={virtuallyFocusedOptionValue}
         filterString={filterString}
         setFilterString={setFilterString}
+        setAnnounceText={setAnnounceText}
       >
         {children}
+        <div className="aksel-sr-only" role="status">
+          {announceText}
+        </div>
       </ComboboxPopupContextProvider>
     </Listbox>
   );
