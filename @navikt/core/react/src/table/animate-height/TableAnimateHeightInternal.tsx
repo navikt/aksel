@@ -1,10 +1,10 @@
 /* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
 import React, { type CSSProperties, useEffect, useRef, useState } from "react";
-import { useTimeout } from "../utils/hooks";
+import { useTimeout } from "../../utils/hooks";
 
 // ------------------ Types
 
-export type Height = "auto" | number | `${number}%`;
+type Height = "auto" | number | `${number}%`;
 type Overflow = "auto" | "visible" | "hidden" | undefined;
 
 // ------------------ Helpers
@@ -58,7 +58,7 @@ interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
   innerClassName?: string;
 }
 
-const AnimateHeight: React.FC<AnimateHeightProps> = ({
+const TableAnimateHeightInternal: React.FC<AnimateHeightProps> = ({
   children,
   className,
   innerClassName,
@@ -251,4 +251,5 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   );
 };
 
-export default AnimateHeight;
+export { TableAnimateHeightInternal };
+export type { Height };

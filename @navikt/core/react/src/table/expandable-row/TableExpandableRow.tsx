@@ -1,18 +1,15 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useId } from "../utils-external";
-import { cl, composeEventHandlers } from "../utils/helpers";
-import { useControllableState } from "../utils/hooks";
-import { useI18n } from "../utils/i18n/i18n.hooks";
-import AnimateHeight from "./AnimateHeight";
-import DataCell from "./DataCell";
-import Row, { type RowProps } from "./Row";
-import { isElementInteractiveTarget } from "./Table.utils";
+import { useId } from "../../utils-external";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { useControllableState } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { TableAnimateHeightInternal } from "../animate-height/TableAnimateHeightInternal";
+import { TableDataCell } from "../data-cell/TableDataCell";
+import { isElementInteractiveTarget } from "../helpers/table-utils";
+import { type RowProps, TableRow } from "../row/TableRow";
 
-export interface ExpandableRowProps extends Omit<
-  RowProps,
-  "content" | "onRowClick"
-> {
+interface ExpandableRowProps extends Omit<RowProps, "content" | "onRowClick"> {
   /**
    * Content of the expanded row
    */
@@ -58,11 +55,7 @@ export interface ExpandableRowProps extends Omit<
   contentGutter?: "left" | "right" | "none";
 }
 
-export type ExpandableRowType = React.ForwardRefExoticComponent<
-  ExpandableRowProps & React.RefAttributes<HTMLTableRowElement>
->;
-
-export const ExpandableRow: ExpandableRowType = forwardRef(
+const TableExpandableRow = forwardRef<HTMLTableRowElement, ExpandableRowProps>(
   (
     {
       className,
@@ -104,7 +97,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
 
     return (
       <>
-        <Row
+        <TableRow
           {...rest}
           ref={ref}
           className={cl("aksel-table__expandable-row", className, {
@@ -116,7 +109,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           onClick={composeEventHandlers(onClick, handleRowClick)}
         >
           {togglePlacement === "right" && children}
-          <DataCell
+          <TableDataCell
             className={cl("aksel-table__toggle-expand-cell", {
               "aksel-table__toggle-expand-cell--open": _open,
             })}
@@ -136,9 +129,9 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 />
               </button>
             )}
-          </DataCell>
+          </TableDataCell>
           {togglePlacement === "left" && children}
-        </Row>
+        </TableRow>
         <tr
           data-state={_open ? "open" : "closed"}
           className="aksel-table__expanded-row"
@@ -146,7 +139,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           id={id}
         >
           <td colSpan={colSpan} className="aksel-table__expanded-row-cell">
-            <AnimateHeight
+            <TableAnimateHeightInternal
               className="aksel-table__expanded-row-collapse"
               innerClassName={`aksel-table__expanded-row-content aksel-table__expanded-row-content--gutter-${
                 contentGutter ?? togglePlacement
@@ -156,7 +149,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               easing="cubic-bezier(0.39,0.57,0.56,1)"
             >
               {content}
-            </AnimateHeight>
+            </TableAnimateHeightInternal>
           </td>
         </tr>
       </>
@@ -164,4 +157,5 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
   },
 );
 
-export default ExpandableRow;
+export { TableExpandableRow };
+export type { ExpandableRowProps };

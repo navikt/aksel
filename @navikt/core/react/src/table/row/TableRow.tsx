@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { cl, composeEventHandlers } from "../utils/helpers";
-import { isElementInteractiveTarget } from "./Table.utils";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { isElementInteractiveTarget } from "../helpers/table-utils";
 
-export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * Row is selected
    * @default false
@@ -22,11 +22,7 @@ export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void;
 }
 
-export type RowType = React.ForwardRefExoticComponent<
-  RowProps & React.RefAttributes<HTMLTableRowElement>
->;
-
-export const Row: RowType = forwardRef(
+const TableRow = forwardRef<HTMLTableRowElement, RowProps>(
   (
     {
       className,
@@ -63,4 +59,5 @@ export const Row: RowType = forwardRef(
   },
 );
 
-export default Row;
+export { TableRow };
+export type { RowProps };

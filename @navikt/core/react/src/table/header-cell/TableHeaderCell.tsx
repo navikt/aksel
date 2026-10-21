@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { cl } from "../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-export interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
+interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
   /**
    * Content alignment inside cell
@@ -14,11 +14,7 @@ export interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellEle
   textSize?: "medium" | "small";
 }
 
-export type HeaderCellType = React.ForwardRefExoticComponent<
-  HeaderCellProps & React.RefAttributes<HTMLTableCellElement>
->;
-
-export const HeaderCell: HeaderCellType = forwardRef(
+const TableHeaderCell = forwardRef<HTMLTableCellElement, HeaderCellProps>(
   ({ className, children, align, textSize, ...rest }, ref) => {
     return (
       <th
@@ -35,4 +31,5 @@ export const HeaderCell: HeaderCellType = forwardRef(
   },
 );
 
-export default HeaderCell;
+export { TableHeaderCell };
+export type { HeaderCellProps };

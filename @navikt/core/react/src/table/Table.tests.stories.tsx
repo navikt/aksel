@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
-import { Button } from "../../../button";
-import { Link } from "../../../link";
-import { VStack } from "../../../primitives/stack";
-import Table from "../../Table";
+import { Button } from "../button";
+import { Link } from "../link";
+import { VStack } from "../primitives/stack";
+import { Table } from "./index";
 
 export default {
   title: "ds-react/Table/Tests",
