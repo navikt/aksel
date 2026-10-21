@@ -1,7 +1,10 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../utils/helpers";
-import { ChipsRemovable } from "../removable/ChipsRemovable";
-import { ChipsToggle } from "../toggle/ChipsToggle";
+import {
+  ChipsRemovable,
+  type ChipsRemovableProps,
+} from "../removable/ChipsRemovable";
+import { ChipsToggle, type ChipsToggleProps } from "../toggle/ChipsToggle";
 
 interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -73,5 +76,5 @@ const Chips = Object.assign(ChipsRoot, {
   Removable: ChipsRemovable,
 });
 
-export { Chips };
-export type { ChipsProps };
+export { Chips, ChipsRemovable, ChipsToggle };
+export type { ChipsProps, ChipsRemovableProps, ChipsToggleProps };
