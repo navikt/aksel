@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { getSteps } from "./Pagination";
+import { getSteps } from "./get-steps";
 
 describe("getSteps", () => {
   test("lists all pages when count is <= 7", () => {

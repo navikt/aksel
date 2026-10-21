@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
-import { Button, type ButtonProps } from "../button";
-import type { OverridableComponent } from "../utils-external";
-import { cl } from "../utils/helpers";
+import { Button, type ButtonProps } from "../../button";
+import type { OverridableComponent } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 
-export interface PaginationItemProps extends ButtonProps {
+interface PaginationItemProps extends ButtonProps {
   children: React.ReactNode;
   /**
    * Sets selected styling if true
@@ -22,12 +22,12 @@ export interface PaginationItemProps extends ButtonProps {
   size?: "medium" | "small" | "xsmall";
 }
 
-export type PaginationItemType = OverridableComponent<
+type PaginationItemType = OverridableComponent<
   PaginationItemProps,
   HTMLAnchorElement
 >;
 
-export const Item: PaginationItemType = forwardRef(
+const PaginationItem: PaginationItemType = forwardRef(
   (
     {
       children,
@@ -63,4 +63,5 @@ export const Item: PaginationItemType = forwardRef(
   },
 );
 
-export default Item;
+export { PaginationItem };
+export type { PaginationItemProps };
