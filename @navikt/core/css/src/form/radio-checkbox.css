@@ -249,8 +249,8 @@
 }
 
 /* Card border error-state */
-.aksel-checkbox-card-group:not(.aksel-checkbox--disabled, .aksel-checkbox--readonly),
-.aksel-radio-card:not(.aksel-radio--disabled, .aksel-radio--readonly) {
+.aksel-checkbox-card:is(.aksel-checkbox--error:not(.aksel-checkbox--disabled, .aksel-checkbox--readonly)),
+.aksel-radio-card:is(.aksel-radio--error:not(.aksel-radio--disabled, .aksel-radio--readonly)) {
   border-color: var(--ax-border-default);
 }
 
