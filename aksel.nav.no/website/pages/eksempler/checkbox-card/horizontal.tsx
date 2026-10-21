@@ -23,5 +23,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 1,
-  desc: "Bruk `HGrid` for å plassere kortene horisontalt. Egner seg best for få alternativer med korte tekster. Du trenger ikke legge til eget `gap`-prop for å få avstand mellom kortene.",
+  desc: "Bruk `HGrid` for å plassere kortene horisontalt. Egner seg best for få alternativer med korte tekster. Du trenger ikke legge til egen `gap`-prop for å få avstand mellom kortene.",
 };
