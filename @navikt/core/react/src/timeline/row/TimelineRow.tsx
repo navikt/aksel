@@ -1,23 +1,20 @@
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
-import { BodyShort } from "../typography/BodyShort";
-import { cl } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
+import { BodyShort } from "../../typography/BodyShort";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { TimelinePeriod } from "../period/TimelinePeriod";
+import { PeriodContext } from "../period/TimelinePeriod.context";
 import {
   useTimelineKeyboardActiveRow,
   useTimelineKeyboardContext,
-} from "./hooks/TimelineKeyboardNavProvider";
-import { PeriodContext } from "./hooks/usePeriodContext";
-import { useRowContext } from "./hooks/useRowContext";
-import Period from "./period";
-import type {
-  PositionedPeriod,
-  TimelineComponentTypes,
-} from "./utils/types.internal";
+} from "../root/TimelineKeyboardNavProvider";
+import type { PositionedPeriod } from "../utils/types.internal";
+import { useRowContext } from "./TimelineRow.context";
 
 type TimelineRowBaseProps = React.HTMLAttributes<HTMLOListElement>;
 
-export type TimelineRowProps = TimelineRowBaseProps &
+type TimelineRowProps = TimelineRowBaseProps &
   (
     | {
         /**
@@ -44,13 +41,7 @@ export type TimelineRowProps = TimelineRowBaseProps &
       }
   );
 
-export interface TimelineRowType extends React.ForwardRefExoticComponent<
-  TimelineRowProps & React.RefAttributes<HTMLOListElement>
-> {
-  componentType: TimelineComponentTypes;
-}
-
-export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
+const TimelineRowBase = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
     const { periods } = useRowContext();
     const { updateActiveRow, handleRowKeyDown } = useTimelineKeyboardContext();
@@ -117,7 +108,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                       restProps: period?.restProps,
                     }}
                   >
-                    <Period
+                    <TimelinePeriod
                       start={period.start}
                       end={period.endInclusive}
                       icon={period.icon}
@@ -132,8 +123,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
       </>
     );
   },
-) as TimelineRowType;
+);
 
-TimelineRow.componentType = "row";
+const TimelineRow = Object.assign(TimelineRowBase, {
+  componentType: "row" as const,
+});
 
-export default TimelineRow;
+export { TimelineRow };
+export type { TimelineRowProps };

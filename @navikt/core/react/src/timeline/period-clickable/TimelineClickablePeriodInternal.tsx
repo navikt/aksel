@@ -16,8 +16,8 @@ import React, { useState } from "react";
 import { cl } from "../../utils/helpers";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
+import type { PeriodProps } from "../Timeline.types";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import type { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (
@@ -32,7 +32,7 @@ interface TimelineClickablePeriodProps extends PeriodProps {
   placement?: "top" | "bottom";
 }
 
-const ClickablePeriod = React.memo(
+const TimelineClickablePeriodInternal = React.memo(
   ({
     onSelectPeriod,
     start,
@@ -161,4 +161,4 @@ const ClickablePeriod = React.memo(
   },
 );
 
-export default ClickablePeriod;
+export { TimelineClickablePeriodInternal };

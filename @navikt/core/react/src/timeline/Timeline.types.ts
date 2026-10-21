@@ -1,6 +1,6 @@
-import type { TimelinePeriodProps } from ".";
+import type { TimelinePeriodProps } from "./period/TimelinePeriod";
 
-export interface PeriodProps {
+interface PeriodProps {
   start: Date;
   end: Date;
   status: Exclude<TimelinePeriodProps["status"], undefined>;
@@ -13,3 +13,5 @@ export interface PeriodProps {
   statusLabel?: string;
   restProps?: any;
 }
+
+export type { PeriodProps };

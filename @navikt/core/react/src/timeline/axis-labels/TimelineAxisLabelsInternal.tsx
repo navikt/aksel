@@ -15,15 +15,15 @@ import {
   subDays,
 } from "date-fns";
 import React, { useCallback, useMemo } from "react";
-import { Detail } from "../typography/Detail";
-import { useDateLocale, useI18n } from "../utils/i18n/i18n.hooks";
-import type { TFunction } from "../utils/i18n/i18n.types";
-import { useTimelineContext } from "./hooks/useTimelineContext";
-import { isVisible } from "./utils";
-import { horizontalPositionAndWidth } from "./utils/calc";
-import type { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
+import { Detail } from "../../typography/Detail";
+import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";
+import type { TFunction } from "../../utils/i18n/i18n.types";
+import { useTimelineContext } from "../root/TimelineRoot.context";
+import { isVisible } from "../utils";
+import { horizontalPositionAndWidth } from "../utils/calc";
+import type { AxisLabel, AxisLabelTemplates } from "../utils/types.external";
 
-export const dayLabels = (
+const dayLabels = (
   start: Date,
   end: Date,
   totalDays: number,
@@ -52,7 +52,7 @@ export const dayLabels = (
   });
 };
 
-export const monthLabels = (
+const monthLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
@@ -80,7 +80,7 @@ export const monthLabels = (
   });
 };
 
-export const yearLabels = (
+const yearLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right",
@@ -136,7 +136,7 @@ const getLabels = (
   return yearLabels(start, end, direction, yearTemplate, locale);
 };
 
-export const AxisLabels = ({
+const TimelineAxisLabelsInternal = ({
   templates,
 }: {
   templates?: AxisLabelTemplates;
@@ -188,3 +188,5 @@ export const AxisLabels = ({
     </div>
   );
 };
+
+export { TimelineAxisLabelsInternal };

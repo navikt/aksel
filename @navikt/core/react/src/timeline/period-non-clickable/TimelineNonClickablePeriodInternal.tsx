@@ -1,14 +1,14 @@
 import React from "react";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
+import type { PeriodProps } from "../Timeline.types";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import type { PeriodProps } from "./types";
 
 interface TimelineNonClickablePeriodProps extends PeriodProps {
   periodRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
-const NonClickablePeriod = ({
+const TimelineNonClickablePeriodInternal = ({
   start,
   end,
   status,
@@ -57,4 +57,4 @@ const NonClickablePeriod = ({
   );
 };
 
-export default NonClickablePeriod;
+export { TimelineNonClickablePeriodInternal };

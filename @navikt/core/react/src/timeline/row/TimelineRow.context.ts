@@ -8,13 +8,13 @@ interface RowContextProps {
   index: number;
 }
 
-export const RowContext = createContext<RowContextProps>({
+const RowContext = createContext<RowContextProps>({
   periods: [],
   id: "",
   index: 0,
 });
 
-export const useRowContext = () => {
+const useRowContext = () => {
   const context = useContext(RowContext);
 
   if (!context) {
@@ -23,3 +23,5 @@ export const useRowContext = () => {
 
   return context;
 };
+
+export { RowContext, useRowContext };

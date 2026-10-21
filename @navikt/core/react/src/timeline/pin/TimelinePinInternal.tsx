@@ -16,11 +16,11 @@ import { format } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { useTimelineKeyboardContext } from "../hooks/TimelineKeyboardNavProvider";
-import { useTimelineContext } from "../hooks/useTimelineContext";
+import { useTimelineKeyboardContext } from "../root/TimelineKeyboardNavProvider";
+import { useTimelineContext } from "../root/TimelineRoot.context";
 import { position } from "../utils/calc";
 
-export interface TimelinePinProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface TimelinePinProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Date position for the pin.
    */
@@ -31,7 +31,7 @@ export interface TimelinePinProps extends React.HTMLAttributes<HTMLButtonElement
   children?: React.ReactNode;
 }
 
-export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
+const TimelinePinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
     const { startDate, endDate, direction } = useTimelineContext();
     const { handlePinKeyDown } = useTimelineKeyboardContext();
@@ -127,4 +127,5 @@ export const PinInternal = forwardRef<HTMLButtonElement, TimelinePinProps>(
   },
 );
 
-export default PinInternal;
+export { TimelinePinInternal };
+export type { TimelinePinProps };
