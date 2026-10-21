@@ -248,6 +248,12 @@
   --__axc-radio-checkbox-marker-border: 7px;
 }
 
+/* Card border error-state */
+.aksel-checkbox-card:is(:not(:where(.aksel-checkbox--disabled, .aksel-checkbox--readonly))),
+.aksel-radio-card:is(:not(:where(.aksel-radio--disabled, .aksel-radio--readonly))) {
+  border-color: var(--ax-border-default);
+}
+
 /* Card border in hover and checked states */
 .aksel-checkbox-card:is(
   :hover:not(:where(.aksel-checkbox--disabled, .aksel-checkbox--readonly, .aksel-checkbox--error)),
@@ -298,16 +304,6 @@
 .aksel-checkbox-card:where(.aksel-checkbox--readonly),
 .aksel-radio-card:where(.aksel-radio--readonly) {
   background-color: var(--ax-bg-neutral-moderate);
-}
-
-/* Card marker colors in disabled + checked state */
-.aksel-checkbox-card.aksel-checkbox--disabled .aksel-checkbox__input:where(:checked, :indeterminate) {
-  background-color: var(--ax-bg-neutral-strong);
-  border-color: var(--ax-border-neutral-strong);
-}
-
-.aksel-radio-card.aksel-radio--disabled > .aksel-radio__input:checked {
-  border-color: var(--ax-border-neutral-strong);
 }
 
 /* Cursor in disabled state on otherwise clickable elements */
