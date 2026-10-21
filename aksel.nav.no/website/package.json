@@ -87,7 +87,7 @@
     "@types/showdown": "^2.0.6",
     "@types/umami": "^2.10.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "concurrently": "10.0.4",
+    "concurrently": "10.0.6",
     "copyfiles": "^2.4.1",
     "cross-env": "^10.1.0",
     "jsdom": "29.1.1",

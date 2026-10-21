@@ -78,7 +78,7 @@
     "@types/lodash": "4.17.25",
     "@types/react": "19.2.14",
     "adm-zip": "^0.6.1",
-    "concurrently": "10.0.4",
+    "concurrently": "10.0.6",
     "copyfiles": "^2.4.1",
     "fast-glob": "3.3.3",
     "hast-util-select": "6.0.4",
