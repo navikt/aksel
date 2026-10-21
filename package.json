@@ -68,7 +68,8 @@
     "*.{ts,tsx,js,jsx}": "eslint --max-warnings=0 --no-warn-ignored",
     "*.css": "stylelint",
     "*.{ts,tsx,js,jsx,css,json}": "biome lint --no-errors-on-unmatched",
-    "*": "prettier --write --ignore-unknown"
+    "*": "prettier --write --ignore-unknown",
+    "package.json": "yarn lint:versions"
   },
   "repository": {
     "type": "git",
