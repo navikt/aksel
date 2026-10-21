@@ -11,8 +11,13 @@ const serverSafeEntrypoints = new Set(["./utils-external"]);
 describe("public entrypoint client boundaries", () => {
   test("marks every public component entrypoint as a client module", () => {
     const rootSource = readFileSync(resolve(sourceDir, "index.ts"), "utf8");
+    const previewSource = readFileSync(
+      resolve(sourceDir, "preview.ts"),
+      "utf8",
+    );
     const exportSources = [
-      ...rootSource.matchAll(/\bfrom\s+["'](\.[^"']+)["']/g),
+      ...rootSource.matchAll(/\bfrom\s+["'](\.[\w./-]+)["']/g),
+      ...previewSource.matchAll(/\bfrom\s+["'](\.[\w./-]+)["']/g),
     ];
 
     expect(exportSources.length).toBeGreaterThan(0);
@@ -22,14 +27,25 @@ describe("public entrypoint client boundaries", () => {
         continue;
       }
 
+      const isPreviewOverride = specifier.includes("index-deprecated");
+
+      const fileToCheck = isPreviewOverride
+        ? "index-deprecated.ts"
+        : "index.ts";
+
       const entrypoint = readFileSync(
-        resolve(sourceDir, specifier, "index.ts"),
+        resolve(
+          sourceDir,
+          specifier.replace("/index-deprecated", ""),
+          fileToCheck,
+        ),
         "utf8",
       );
 
-      expect(entrypoint, `${specifier}/index.ts`).toMatch(
-        /^\s*["']use client["'];/,
-      );
+      expect(
+        entrypoint,
+        `${specifier.replace("/index-deprecated", "")}/${fileToCheck}`,
+      ).toMatch(/^\s*["']use client["'];/);
     }
   });
 });
