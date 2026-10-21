@@ -248,18 +248,14 @@
   --__axc-radio-checkbox-marker-border: 7px;
 }
 
-/* Card border error-state */
-.aksel-checkbox-card:is(.aksel-checkbox--error:not(.aksel-checkbox--disabled, .aksel-checkbox--readonly)),
-.aksel-radio-card:is(.aksel-radio--error:not(.aksel-radio--disabled, .aksel-radio--readonly)) {
-  border-color: var(--ax-border-default);
-}
-
 /* Card border in hover and checked states */
 .aksel-checkbox-card:is(
+  .aksel-checkbox--error:not(:where(.aksel-checkbox--disabled, .aksel-checkbox--readonly)),
   :hover:not(:where(.aksel-checkbox--disabled, .aksel-checkbox--readonly, .aksel-checkbox--error)),
   :has(.aksel-checkbox__input:checked):not(:where(.aksel-checkbox--disabled, .aksel-checkbox--readonly))
 ),
 .aksel-radio-card:is(
+  .aksel-radio--error:not(:where(.aksel-radio--disabled, .aksel-radio--readonly)),
   :hover:not(:where(.aksel-radio--disabled, .aksel-radio--readonly, .aksel-radio--error)),
   :has(> .aksel-radio__input:checked):not(:where(.aksel-radio--disabled, .aksel-radio--readonly))
 ) {
