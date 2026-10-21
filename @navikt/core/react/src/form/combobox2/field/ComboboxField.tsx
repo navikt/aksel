@@ -30,7 +30,8 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
-          aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
+          // TODO: This results in other problems. Find another fix!
+          //aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
           {...rest}
         >
           {label}

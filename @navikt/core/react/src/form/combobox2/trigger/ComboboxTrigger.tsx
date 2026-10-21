@@ -39,7 +39,6 @@ const ComboboxTrigger = ({
           }
         }}
         data-readonly={readOnly}
-        aria-readonly={readOnly} // TODO: Vurder
         disabled={rootContext.disabled}
         {...rest}
       >
