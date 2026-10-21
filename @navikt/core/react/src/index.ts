@@ -1,4 +1,3 @@
-"use client";
 export { Accordion, type AccordionProps } from "./accordion";
 export { ActionMenu, type ActionMenuProps } from "./action-menu";
 export { Alert, type AlertProps } from "./legacy/alert";
