@@ -289,7 +289,7 @@ export const Composition = () => {
       </ComboboxRoot>
 
       <ComboboxRoot {...rootProps}>
-        <ComboboxTrigger>
+        <ComboboxTrigger openWhenStartsTyping={false}>
           <Button>Uten input</Button>
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -305,7 +305,7 @@ export const Composition = () => {
         onToggleOption={setSelectedOption}
         multiple={false}
       >
-        <ComboboxTrigger>
+        <ComboboxTrigger openWhenStartsTyping={false}>
           <Button>Single select</Button>
         </ComboboxTrigger>
         <ComboboxOverlay>
