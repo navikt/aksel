@@ -873,9 +873,11 @@ export const RowExpansionAll: Story = {
       selection={{
         mode: args.selection?.mode ?? "none",
       }}
+      settings={{ stickyColumns: { start: 1 } }}
     >
       <DataGrid.Table<UserDataTest>
         onRowAction={() => console.info("Row clicked!")}
+
         detailsPanel={{
           getContent: (rowData) => {
             return (
