@@ -1,18 +1,26 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useDataGridPagination } from "../hooks/useDataGridPagination";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
 import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
+import { DataGridPaginationSummary } from "../pagination/summary/DataGridPaginationSummary";
 import type {
   DataGridPaginationOptions,
   DataGridSettings,
 } from "./DataGrid.types";
-import { DataGridPaginationContextProvider } from "./DataGridPagination.context";
-import { DataGridContextProvider } from "./DataGridRoot.context";
+import {
+  DataGridPaginationContextProvider,
+  useDataGridPaginationContext,
+} from "./DataGridPagination.context";
+import {
+  DataGridContextProvider,
+  useDataGridContext,
+} from "./DataGridRoot.context";
 
 interface DataGridProps<RowT> {
   children: React.ReactNode;
@@ -151,7 +159,11 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           updateTableSettings={updateSettings}
         >
           {pagination !== undefined ? (
-            <DataGridPaginationProvider pagination={pagination} data={data}>
+            <DataGridPaginationProvider
+              pagination={pagination}
+              data={data}
+              isLoading={isLoading}
+            >
               {children}
             </DataGridPaginationProvider>
           ) : (
@@ -167,17 +179,56 @@ function DataGridPaginationProvider({
   children,
   pagination,
   data,
+  isLoading,
 }: {
   children: React.ReactNode;
   pagination: DataGridPaginationOptions;
   data: unknown[];
+  isLoading: boolean;
 }) {
-  const value = useDataGridPagination({ pagination, data });
+  const value = useDataGridPagination({ pagination, data, isLoading });
 
   return (
     <DataGridPaginationContextProvider {...value}>
       {children}
+      <DataGridPaginationLiveRegion />
     </DataGridPaginationContextProvider>
+  );
+}
+
+function DataGridPaginationLiveRegion() {
+  const { page, pageCount, pageSize, isLoading } =
+    useDataGridPaginationContext();
+  const { isLoading: gridIsLoading = false } = useDataGridContext();
+  const loading = isLoading || gridIsLoading;
+  const translate = useI18n("DataGrid");
+  const pageLabel =
+    pageCount === undefined
+      ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
+      : translate("Pagination.pageOf", { page: page + 1, pageCount });
+  const lastAnnouncedPage = useRef({ page, pageSize });
+  const shouldAnnounce =
+    !loading &&
+    (lastAnnouncedPage.current.page !== page ||
+      lastAnnouncedPage.current.pageSize !== pageSize);
+
+  useEffect(() => {
+    if (!loading) {
+      lastAnnouncedPage.current = { page, pageSize };
+    }
+  }, [loading, page, pageSize]);
+
+  return (
+    <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">
+      {shouldAnnounce && !loading && (
+        <>
+          <DataGridPaginationSummary />
+          <span>
+            {pageLabel}. {translate("Pagination.pageSize")}: {pageSize}
+          </span>
+        </>
+      )}
+    </div>
   );
 }
 

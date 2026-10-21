@@ -327,6 +327,71 @@ export const TestMultipleBarsStayInSync: Story = {
   },
 };
 
+export const TestLoadingNavigationAndAnnouncement: Story = {
+  render: () => {
+    const [page, setPage] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+    const dataPage = isLoading ? 0 : page;
+
+    return (
+      <>
+        <button type="button" onClick={() => setIsLoading(false)}>
+          Complete request
+        </button>
+        <DataGrid
+          columns={columns}
+          data={ROWS.slice(dataPage * 10, (dataPage + 1) * 10)}
+          getRowId={getRowId}
+          isLoading={isLoading}
+          pagination={{
+            page,
+            onPageChange: (nextPage) => {
+              setPage(nextPage);
+              setIsLoading(true);
+            },
+            defaultPageSize: 10,
+            hasNextPage: true,
+          }}
+        >
+          <DataGrid.Pagination />
+          <DataGrid.Table />
+          <DataGrid.Pagination />
+        </DataGrid>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const navigation = canvas.getAllByRole("navigation", {
+      name: "Sidenavigering",
+    });
+    const next = within(navigation[0]).getByRole("button", {
+      name: "Neste side",
+    });
+    const liveRegions = canvasElement.querySelectorAll('[aria-live="polite"]');
+
+    expect(liveRegions).toHaveLength(1);
+    expect(liveRegions[0]).toBeEmptyDOMElement();
+    await userEvent.click(next);
+    expect(next).toHaveAttribute("aria-disabled", "true");
+    expect(next).toHaveFocus();
+    expect(
+      canvas.getAllByRole("combobox", { name: "Rader per side" })[0],
+    ).not.toBeDisabled();
+    expect(canvas.getAllByText("Side 2")).toHaveLength(2);
+    expect(canvas.getAllByText("Viser rad 1–10")).toHaveLength(2);
+    expect(liveRegions[0]).toBeEmptyDOMElement();
+
+    await userEvent.click(next);
+    expect(canvas.getAllByText("Side 2")).toHaveLength(2);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Complete request" }),
+    );
+    expect(await canvas.findAllByText("Viser rad 11–20")).toHaveLength(2);
+    await expect(liveRegions[0]).toHaveTextContent("Viser rad 11–20");
+  },
+};
+
 export const TestUnknownTotalNavigation: Story = {
   render: () => {
     const [page, setPage] = useState(0);
@@ -356,6 +421,41 @@ export const TestUnknownTotalNavigation: Story = {
       "aria-disabled",
       "true",
     );
+  },
+};
+
+export const TestRepeatedSummaryStillAnnouncesPage: Story = {
+  render: () => {
+    const [page, setPage] = useState(0);
+
+    return (
+      <DataGrid
+        columns={columns}
+        data={[]}
+        pagination={{
+          page,
+          onPageChange: setPage,
+          hasNextPage: true,
+        }}
+      >
+        <DataGrid.Pagination />
+      </DataGrid>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const liveRegion = canvasElement.querySelector('[aria-live="polite"]');
+
+    expect(liveRegion).toBeEmptyDOMElement();
+    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    await expect(liveRegion).toHaveTextContent("Side 2");
+    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    await expect(liveRegion).toHaveTextContent("Side 3");
+    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
   },
 };
 

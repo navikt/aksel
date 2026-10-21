@@ -30,7 +30,7 @@ const DataGridPaginationNavigation = forwardRef<
   HTMLElement,
   DataGridPaginationNavigationProps
 >(({ className, ...rest }, forwardedRef) => {
-  const { page, pageCount, canPrevious, canNext, setPage } =
+  const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridPaginationContext(
       true,
       "[Aksel] DataGrid.Pagination.Navigation must be used within <DataGrid pagination={...} />",
@@ -55,9 +55,9 @@ const DataGridPaginationNavigation = forwardRef<
         data-color="neutral"
         icon={<ChevronLeftFirstIcon aria-hidden />}
         aria-label={translate("Pagination.first")}
-        aria-disabled={!canPrevious}
+        aria-disabled={isLoading || !canPrevious}
         onClick={() => {
-          if (canPrevious) {
+          if (!isLoading && canPrevious) {
             setPage(0);
           }
         }}
@@ -69,9 +69,9 @@ const DataGridPaginationNavigation = forwardRef<
         data-color="neutral"
         icon={<ChevronLeftIcon aria-hidden />}
         aria-label={translate("Pagination.previous")}
-        aria-disabled={!canPrevious}
+        aria-disabled={isLoading || !canPrevious}
         onClick={() => {
-          if (canPrevious) {
+          if (!isLoading && canPrevious) {
             setPage(page - 1);
           }
         }}
@@ -95,9 +95,9 @@ const DataGridPaginationNavigation = forwardRef<
         data-color="neutral"
         icon={<ChevronRightIcon aria-hidden />}
         aria-label={translate("Pagination.next")}
-        aria-disabled={!canNext}
+        aria-disabled={isLoading || !canNext}
         onClick={() => {
-          if (canNext) {
+          if (!isLoading && canNext) {
             setPage(page + 1);
           }
         }}
@@ -110,9 +110,9 @@ const DataGridPaginationNavigation = forwardRef<
           data-color="neutral"
           icon={<ChevronRightLastIcon aria-hidden />}
           aria-label={translate("Pagination.last")}
-          aria-disabled={!canNext}
+          aria-disabled={isLoading || !canNext}
           onClick={() => {
-            if (canNext) {
+            if (!isLoading && canNext) {
               setPage(pageCount - 1);
             }
           }}

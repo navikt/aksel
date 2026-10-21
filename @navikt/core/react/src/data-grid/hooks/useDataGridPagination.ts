@@ -9,9 +9,11 @@ const defaultPageSizeOptions = [10, 25, 50, 100];
 function useDataGridPagination({
   pagination,
   data,
+  isLoading,
 }: {
   pagination: DataGridPaginationOptions;
   data: unknown[];
+  isLoading: boolean;
 }) {
   const {
     page: controlledPage,
@@ -47,6 +49,13 @@ function useDataGridPagination({
     data,
     ...totals,
   });
+  const previousSummaryRange = useRef({ from: range.from, to: range.to });
+
+  useEffect(() => {
+    if (!isLoading) {
+      previousSummaryRange.current = { from: range.from, to: range.to };
+    }
+  }, [isLoading, range.from, range.to]);
 
   const setPage = useEventCallback((page: number) => {
     setStoredPage(getPaginationRange({ page, pageSize, data, ...totals }).page);
@@ -119,11 +128,17 @@ function useDataGridPagination({
     }
   }
 
+  const summaryRange =
+    totalRows === undefined && isLoading ? previousSummaryRange.current : range;
+
   return {
     ...range,
+    from: summaryRange.from,
+    to: summaryRange.to,
     pageSize,
     pageSizeOptions,
     totalRows,
+    isLoading,
     setPage,
     setPageSize,
   };
