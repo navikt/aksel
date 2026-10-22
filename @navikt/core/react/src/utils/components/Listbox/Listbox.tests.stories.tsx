@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { expect, fireEvent, fn, within } from "storybook/test";
 import type { ListboxOptionProps } from "./option/ListboxOption";
 import { Listbox } from "./root/ListboxRoot";
@@ -215,15 +215,10 @@ export const EnterKey: StoryObj<{
 const ListboxStoryWithFilterInput = () => {
   const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] =
     useState("second-item");
-  const ref = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    ref.current?.focus();
-  }, []);
-  console.log({ virtuallyFocusedOptionId });
   return (
     <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
       <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
-        <input ref={ref} type="text" aria-label="Filter" />
+        <input type="text" aria-label="Filter" />
       </Listbox.InputSlot>
       <Listbox.Options>
         <Listbox.Option
@@ -263,6 +258,7 @@ export const ArrowUpOnFirstOptionFocusInput: StoryObj = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("Filter");
+    input.focus();
     fireEvent.keyDown(input, { key: "ArrowUp" });
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("first-item");
     fireEvent.keyDown(input, { key: "ArrowUp" });
