@@ -257,13 +257,12 @@ const ListboxStoryWithFilterInput = () => {
 
 // When a filter input has real focus, ArrowUp on first option and
 // ArrowDown on last option should remove virtual focus so that
-// the filter input gets focus.
+// perceived focus is returned to the input.
 export const ArrowUpOnFirstOptionFocusInput: StoryObj = {
   render: ListboxStoryWithFilterInput,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("Filter");
-    input.focus();
     fireEvent.keyDown(input, { key: "ArrowUp" });
     expect(getVirtuallyFocusedValue(canvasElement)).toBe("first-item");
     fireEvent.keyDown(input, { key: "ArrowUp" });
