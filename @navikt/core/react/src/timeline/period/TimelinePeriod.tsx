@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import type { AkselColor } from "../../types";
 import { TimelineClickablePeriodInternal } from "../period-clickable/TimelineClickablePeriodInternal";
 import { TimelineNonClickablePeriodInternal } from "../period-non-clickable/TimelineNonClickablePeriodInternal";
@@ -65,7 +65,9 @@ const TimelinePeriodBase = forwardRef<
   const { periods } = useRowContext();
   const { periodId, restProps } = usePeriodContext();
 
-  const period = periods.find((p) => p.id === periodId);
+  const period = useMemo(() => {
+    return periods.find((p) => p.id === periodId);
+  }, [periods, periodId]);
 
   if (!period) {
     return null;
