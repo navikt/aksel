@@ -417,6 +417,32 @@ export const Mark: StoryObj<typeof CoachMark> = {
   },
 };
 
+export const MarkBorder: StoryObj<typeof CoachMark> = {
+  render: (props) => {
+    return (
+      <VStack padding="space-40" gap="space-64">
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          whiteBorder={props.whiteBorder}
+        >
+          <Button onClick={() => console.log("Button clicked")}>
+            Click me
+          </Button>
+        </Coach.Mark>
+        <HStack gap="space-16" align="center">
+          <Coach.Mark
+            data-color="success"
+            onClick={() => console.log("Coach dot clicked")}
+          />
+        </HStack>
+      </VStack>
+    );
+  },
+  args: {
+    whiteBorder: 1,
+  },
+};
+
 export const Translations: StoryFn<typeof Coach> = () => {
   const translations = {
     Coach: {

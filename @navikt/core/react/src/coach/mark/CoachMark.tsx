@@ -12,6 +12,8 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
      * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
      */
     "data-color"?: AkselColor;
+    // TODO:C DELETE
+    whiteBorder?: number;
   } & (
     | {
         /**
@@ -53,6 +55,7 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
       "aria-labelledby": ariaLabelledby,
       "aria-hidden": ariaHidden,
       style,
+      whiteBorder,
       ...restProps
     },
     forwardedRef,
@@ -96,7 +99,10 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
         onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div className="aksel-coach__mark-pulse" />
-        <div className="aksel-coach__mark" />
+        <div
+          className="aksel-coach__mark"
+          style={{ borderWidth: whiteBorder ?? 0 }}
+        />
       </button>
     );
 
