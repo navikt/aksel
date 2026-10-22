@@ -50,7 +50,10 @@
   display: none;
 }
 
-/* A single query swaps tiers, so subpixel container sizes cannot show both or neither. */
+/*
+ * 4.5rem leaves room for the longest default abbreviated date label.
+ * Below that, hide this tier and reveal the next coarser one in the same query.
+ */
 @container aksel-timeline-axis-labels (inline-size < 4.5rem) {
   .aksel-timeline__axislabels-tier:not([data-axis-labels-coarsest]) > .aksel-timeline__axislabels-label {
     display: none;

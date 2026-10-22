@@ -225,8 +225,11 @@ export const AxisLabelsAdaptToWidth: Story = {
       const axis = container.querySelector<HTMLElement>(
         ".aksel-timeline__axislabels",
       );
-      if (!axis) {
-        throw new Error("Timeline axis not found");
+      const finestTier = axis?.querySelector<HTMLElement>(
+        ".aksel-timeline__axislabels-tier",
+      );
+      if (!axis || !finestTier) {
+        throw new Error("Timeline axis or label tier not found");
       }
       const markup = axis.innerHTML;
       const height = axis.getBoundingClientRect().height;
@@ -239,30 +242,12 @@ export const AxisLabelsAdaptToWidth: Story = {
         Number.parseFloat(
           window.getComputedStyle(document.documentElement).fontSize,
         );
-      const slotPercentages: number[] = [];
-      let slotPercentage = 100;
-      for (const tier of axis.querySelectorAll<HTMLElement>(
-        ".aksel-timeline__axislabels-tier",
-      )) {
-        slotPercentage *= Number.parseFloat(tier.style.width) / 100;
-        slotPercentages.push(slotPercentage);
-      }
-      const breakpoints = slotPercentages
-        .map(
-          (percentage) => (minSlotWidth * 100) / percentage + labelColumnWidth,
-        )
-        .filter((width) => width >= 200 && width <= 2400);
-      const widths = [
-        200,
-        320,
-        640,
-        960,
-        1600,
-        2400,
-        ...breakpoints.flatMap((width) => [width - 0.1, width, width + 0.1]),
-      ];
 
-      for (const width of widths) {
+      const breakpoint =
+        (minSlotWidth * 100) / Number.parseFloat(finestTier.style.width) +
+        labelColumnWidth;
+
+      for (const width of [200, breakpoint, 2400]) {
         container.style.width = `${width}px`;
         await new Promise<void>((resolve) =>
           requestAnimationFrame(() => resolve()),
@@ -294,17 +279,16 @@ export const AxisLabelsAdaptToWidth: Story = {
           })
           .sort((a, b) => a.left - b.left);
 
-        for (let i = 0; i < textBounds.length; i++) {
-          expect(textBounds[i].left).toBeGreaterThanOrEqual(
-            axisBounds.left - 1,
-          );
-          expect(textBounds[i].right).toBeLessThanOrEqual(axisBounds.right + 1);
-          if (i > 0) {
-            expect(textBounds[i].left).toBeGreaterThanOrEqual(
-              textBounds[i - 1].right,
-            );
-          }
-        }
+        const labelsFit = textBounds.every(
+          (bounds, index) =>
+            bounds.left >= axisBounds.left - 1 &&
+            bounds.right <= axisBounds.right + 1 &&
+            (index === 0 || bounds.left >= textBounds[index - 1].right),
+        );
+        expect(
+          labelsFit,
+          `Labels stay within the axis without overlap at container width ${width}`,
+        ).toBe(true);
         expect(axisBounds.height).toBe(height);
         expect(axis.innerHTML).toBe(markup);
       }

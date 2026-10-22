@@ -23,7 +23,7 @@ import { useTimelineContext } from "../root/TimelineRoot.context";
 import { horizontalPositionAndWidth } from "../utils/calc";
 import type { AxisLabel, AxisLabelTemplates } from "../utils/types.external";
 
-// Include candidate intervals even when a calendar day is shortened by DST.
+// Use 23 hours as a conservative day length so DST-shortened days still qualify.
 const MIN_SAFE_DAY_IN_MILLISECONDS = 23 * 60 * 60 * 1000;
 const MAX_LABEL_COUNT = 100;
 
@@ -43,6 +43,7 @@ const dayLabels = (
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
   const count = Math.ceil(totalDays / intervalDays) + 1;
+
   if (count > MAX_LABEL_COUNT) {
     return [];
   }
@@ -76,6 +77,7 @@ const monthLabels = (
 ): AxisLabel[] => {
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
+  // Count calendar boundaries at this interval, not elapsed 30-day periods.
   const numberOfMonths =
     Math.floor(differenceInMonths(endMonth, startMonth) / intervalMonths) + 1;
   if (numberOfMonths > MAX_LABEL_COUNT) {
@@ -110,6 +112,7 @@ const yearLabels = (
 ): AxisLabel[] => {
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
+
   const yearCount =
     Math.floor(differenceInYears(lastYear, start) / intervalYears) + 1;
   if (yearCount > MAX_LABEL_COUNT) {
@@ -149,13 +152,15 @@ const getLabelSets = (
   const dayTemplate = translate("dayFormat");
   const monthTemplate = translate("monthFormat");
   const yearTemplate = translate("yearFormat");
+
   const intervals: {
     id: string;
     template: string;
     getLabels: () => AxisLabel[];
   }[] = [];
 
-  for (const intervalDays of [1, 2, 8, 7, 14]) {
+  /* CSS progressively reveals nested tiers */
+  for (const intervalDays of [1, 2, 7, 8, 14]) {
     if (intervalDays * MIN_SAFE_DAY_IN_MILLISECONDS > duration) {
       continue;
     }
@@ -203,6 +208,7 @@ const getLabelSets = (
   return intervals
     .map(({ id, template, getLabels }) => {
       const labels = getLabels();
+      /* Use the narrowest calendar slot so this tier fits even in shorter periods */
       const slotWidth = Math.min(100, ...labels.map(({ width }) => width));
       const visibleLabels = labels
         .filter(
@@ -211,7 +217,7 @@ const getLabelSets = (
         )
         .sort((a, b) => a.horizontalPosition - b.horizontalPosition);
 
-      // A coarse interval may have no calendar boundary inside the range.
+      /* Coarse interval may have no calendar boundary inside the range */
       if (labels.length > 0 && visibleLabels.length === 0) {
         visibleLabels.push({
           ...labels[0],
