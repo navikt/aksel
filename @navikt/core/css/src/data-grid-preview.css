@@ -137,6 +137,26 @@
     border-radius: var(--ax-radius-12);
     z-index: 3;
   }
+
+  [data-attachment-before="true"] & {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    &::after {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  [data-attachment-after="true"] & {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &::after {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
 }
 
 .aksel-data-table {
@@ -710,3 +730,23 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
+
+/* WIP ATTACHMENT TEST */
+.aksel-data-table__attachment {
+  z-index: 10;
+  padding: var(--ax-space-12) var(--ax-space-16);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  background-color: var(--ax-bg-raised);
+
+  &[data-attachment="before"] {
+    border-bottom: none;
+    border-top-left-radius: var(--ax-radius-12);
+    border-top-right-radius: var(--ax-radius-12);
+  }
+
+  &[data-attachment="after"] {
+    border-top: none;
+    border-bottom-left-radius: var(--ax-radius-12);
+    border-bottom-right-radius: var(--ax-radius-12);
+  }
+}

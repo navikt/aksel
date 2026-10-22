@@ -138,6 +138,14 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * @default "row"
    */
   selectionTrigger?: "row" | "control";
+  /**
+   * Content to render before or after the table.
+   * `before` will be rendered above the table, and `after` will be rendered below the table.
+   */
+  attachment?: {
+    before?: React.ReactNode;
+    after?: React.ReactNode;
+  };
 }
 
 const DataGridTableInternal = forwardRef<
@@ -161,6 +169,7 @@ const DataGridTableInternal = forwardRef<
       subRows,
       sorting,
       selectionTrigger = "row",
+      attachment,
       ...rest
     }: DataGridTableProps<unknown>,
     forwardedRef,
@@ -205,78 +214,103 @@ const DataGridTableInternal = forwardRef<
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
     return (
-      <DataTableContextProvider
-        layout={layout}
-        withKeyboardNav={true}
-        selectionState={tableSelectionState}
-        stickyStart={stickyStart}
-        stickyHeader={stickyHeader}
-        tableId={tableId}
-        loading={loadingContent}
-        onRowAction={onRowAction}
-        columns={columns}
-        totalColSpan={totalColSpan}
-        tableItems={tableItems}
-        sortingState={sortingState}
+      <div
+        style={{ maxHeight: "100%", display: "grid" }}
+        data-attachment-before={attachment?.before ? true : undefined}
+        data-attachment-after={attachment?.after ? true : undefined}
       >
-        <TableElementWrapper
-          enabled={true}
-          hasStickyColumns={
-            !!(
-              tableSettings?.stickyColumns?.start ||
-              tableSettings?.stickyColumns?.end
-            )
-          }
-        >
-          <table
-            {...rest}
-            ref={forwardedRef}
-            className={cl("aksel-data-table", className)}
-            data-zebra-stripes={tableSettings?.zebraStripes}
-            data-column-dividers={tableSettings?.columnDividers}
-            data-truncate-content={truncateContent}
-            data-density={tableSettings?.rowDensity}
-            data-text-size={tableSettings?.textSize}
-            data-layout={layout}
-            data-loading={isLoading || undefined}
-            aria-busy={isLoading || undefined}
+        {attachment?.before && (
+          <div
+            className="aksel-data-table__attachment"
+            data-attachment="before"
           >
-            <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
-              <DataTableThead data-sticky={stickyHeader || undefined}>
-                <DataTableTr>
-                  {columns.map(
-                    ({ isSticky, isStickyLast, stickyLeftOffset, colDef }) => {
-                      return (
-                        <DataTableColumnHeader
-                          id={colDef.id}
-                          width={colDef.width}
-                          align={colDef.align ?? "left"}
-                          key={colDef.id}
-                          isSticky={isSticky}
-                          sortable={colDef.isSortable}
-                          label={colDef.header}
-                          style={
-                            stickyLeftOffset
-                              ? { left: stickyLeftOffset }
-                              : undefined
-                          }
-                          data-sticky-last={isStickyLast || undefined}
-                        >
-                          {colDef.headerCell ?? colDef.header}
-                        </DataTableColumnHeader>
-                      );
-                    },
-                  )}
-                </DataTableTr>
-              </DataTableThead>
+            {attachment.before}
+          </div>
+        )}
 
-              <DataTableTbody>
-                <DataTableTBodyContent emptyContent={emptyContent} />
-              </DataTableTbody>
-            </DataTableDetailsPanelProvider>
-          </table>
-        </TableElementWrapper>
-      </DataTableContextProvider>
+        <DataTableContextProvider
+          layout={layout}
+          withKeyboardNav={true}
+          selectionState={tableSelectionState}
+          stickyStart={stickyStart}
+          stickyHeader={stickyHeader}
+          tableId={tableId}
+          loading={loadingContent}
+          onRowAction={onRowAction}
+          columns={columns}
+          totalColSpan={totalColSpan}
+          tableItems={tableItems}
+          sortingState={sortingState}
+        >
+          <TableElementWrapper
+            enabled={true}
+            hasStickyColumns={
+              !!(
+                tableSettings?.stickyColumns?.start ||
+                tableSettings?.stickyColumns?.end
+              )
+            }
+          >
+            <table
+              {...rest}
+              ref={forwardedRef}
+              className={cl("aksel-data-table", className)}
+              data-zebra-stripes={tableSettings?.zebraStripes}
+              data-column-dividers={tableSettings?.columnDividers}
+              data-truncate-content={truncateContent}
+              data-density={tableSettings?.rowDensity}
+              data-text-size={tableSettings?.textSize}
+              data-layout={layout}
+              data-loading={isLoading || undefined}
+              aria-busy={isLoading || undefined}
+            >
+              <DataTableDetailsPanelProvider detailsPanel={detailsPanel}>
+                <DataTableThead data-sticky={stickyHeader || undefined}>
+                  <DataTableTr>
+                    {columns.map(
+                      ({
+                        isSticky,
+                        isStickyLast,
+                        stickyLeftOffset,
+                        colDef,
+                      }) => {
+                        return (
+                          <DataTableColumnHeader
+                            id={colDef.id}
+                            width={colDef.width}
+                            align={colDef.align ?? "left"}
+                            key={colDef.id}
+                            isSticky={isSticky}
+                            sortable={colDef.isSortable}
+                            label={colDef.header}
+                            style={
+                              stickyLeftOffset
+                                ? { left: stickyLeftOffset }
+                                : undefined
+                            }
+                            data-sticky-last={isStickyLast || undefined}
+                          >
+                            {colDef.headerCell ?? colDef.header}
+                          </DataTableColumnHeader>
+                        );
+                      },
+                    )}
+                  </DataTableTr>
+                </DataTableThead>
+
+                <DataTableTbody>
+                  <DataTableTBodyContent emptyContent={emptyContent} />
+                </DataTableTbody>
+              </DataTableDetailsPanelProvider>
+            </table>
+          </TableElementWrapper>
+        </DataTableContextProvider>
+        {attachment?.after && (
+          <div className="aksel-data-table__attachment" data-attachment="after">
+            {attachment.after}
+          </div>
+        )}
+      </div>
     );
   },
 );
