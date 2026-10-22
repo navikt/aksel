@@ -1,5 +1,5 @@
-import { createStrictContext } from "../utils/helpers";
-import type { TabsProps } from "./Tabs.types";
+import { createStrictContext } from "../../utils/helpers";
+import type { TabsProps } from "../Tabs.types";
 import type { useTabs } from "./useTabs";
 
 type TabsProviderProps = ReturnType<typeof useTabs> &
@@ -9,9 +9,11 @@ type TabsProviderProps = ReturnType<typeof useTabs> &
   >;
 
 /* State context */
-export const { Provider: TabsProvider, useContext: useTabsContext } =
+const { Provider: TabsProvider, useContext: useTabsContext } =
   createStrictContext<TabsProviderProps>({
     name: "TabsContext",
     errorMessage:
       "Tabs.List, Tabs.Tag and Tabs.Panel needs to be wrapped within <Tabs>",
   });
+
+export { TabsProvider, useTabsContext };

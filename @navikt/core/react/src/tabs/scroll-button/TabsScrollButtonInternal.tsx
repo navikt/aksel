@@ -1,14 +1,18 @@
 import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { cl } from "../../../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-interface ScrollButtonProps {
+interface TabsScrollButtonInternalProps {
   hidden: boolean;
   onClick: () => void;
   dir: "left" | "right";
 }
 
-function ScrollButton({ hidden, onClick, dir }: ScrollButtonProps) {
+function TabsScrollButtonInternal({
+  hidden,
+  onClick,
+  dir,
+}: TabsScrollButtonInternalProps) {
   return (
     <div
       className={cl("aksel-tabs__scroll-button", {
@@ -22,4 +26,5 @@ function ScrollButton({ hidden, onClick, dir }: ScrollButtonProps) {
   );
 }
 
-export default ScrollButton;
+export { TabsScrollButtonInternal };
+export type { TabsScrollButtonInternalProps };

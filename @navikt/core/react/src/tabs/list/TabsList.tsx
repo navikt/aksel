@@ -1,18 +1,18 @@
 import React, { forwardRef, useRef } from "react";
-import { cl, composeEventHandlers } from "../../../utils/helpers";
-import { useMergeRefs } from "../../../utils/hooks";
-import ScrollButton from "./ScrollButtons";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
+import { TabsScrollButtonInternal } from "../scroll-button/TabsScrollButtonInternal";
 import { useScrollButtons } from "./useScrollButtons";
 import { useTabList } from "./useTabList";
 
-export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TabsListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * <Tabs.Tab /> elements.
    */
   children: React.ReactNode;
 }
 
-export const TabList = forwardRef<HTMLDivElement, TabListProps>(
+const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
   ({ className, onKeyDown, ...rest }, ref) => {
     const { onKeyDown: _onKeyDown } = useTabList();
 
@@ -24,7 +24,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     return (
       <div className="aksel-tabs__tablist-wrapper">
         {scrollCtx.show && (
-          <ScrollButton
+          <TabsScrollButtonInternal
             dir="left"
             hidden={!scrollCtx.start}
             onClick={scrollCtx.scrollLeft}
@@ -40,7 +40,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
           onKeyDown={composeEventHandlers(onKeyDown, _onKeyDown)}
         />
         {scrollCtx.show && (
-          <ScrollButton
+          <TabsScrollButtonInternal
             dir="right"
             hidden={!scrollCtx.end}
             onClick={scrollCtx.scrollRight}
@@ -51,4 +51,5 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   },
 );
 
-export default TabList;
+export { TabsList };
+export type { TabsListProps };

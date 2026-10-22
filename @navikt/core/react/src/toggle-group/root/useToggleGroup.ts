@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useId } from "../utils-external";
-import { useControllableState } from "../utils/hooks";
-import type { TabsProps } from "./Tabs.types";
+import { useControllableState } from "../../utils/hooks";
+import type { ToggleGroupProps } from "../ToggleGroup.types";
 
-export function useTabs({
+function useToggleGroup({
   onChange,
   value,
   defaultValue = "",
-  id,
-}: Pick<TabsProps, "onChange" | "value" | "defaultValue" | "id">) {
+}: Pick<ToggleGroupProps, "onChange" | "value" | "defaultValue">) {
   const [focusedValue, setFocusedValue] = useState(defaultValue);
-
   const [selectedValue, setSelectedValue] = useControllableState({
     defaultValue,
     value,
@@ -24,24 +21,12 @@ export function useTabs({
     }
   }, [value]);
 
-  /* Scope ids for better tracking */
-  const uuid = useId();
-
   return {
-    id: `tabs-${id ?? uuid}`,
     selectedValue,
     setSelectedValue,
     focusedValue,
     setFocusedValue,
-    makeTabId,
-    makeTabPanelId,
   };
 }
 
-function makeTabId(id: string, value: string) {
-  return `${id}--tab-${value}`;
-}
-
-function makeTabPanelId(id: string, value: string) {
-  return `${id}--tabpanel-${value}`;
-}
+export { useToggleGroup };

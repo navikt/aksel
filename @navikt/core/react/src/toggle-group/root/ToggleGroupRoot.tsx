@@ -1,38 +1,17 @@
 import React, { forwardRef } from "react";
-import type { AkselColor } from "../types";
-import { Label } from "../typography";
-import { useId } from "../utils-external";
-import { cl } from "../utils/helpers";
-import { ToggleGroupProvider } from "./ToggleGroup.context";
-import type { ToggleGroupProps } from "./ToggleGroup.types";
-import ToggleItem, { type ToggleGroupItemProps } from "./parts/ToggleItem";
+import type { AkselColor } from "../../types";
+import { Label } from "../../typography";
+import { useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import type { ToggleGroupProps } from "../ToggleGroup.types";
+import {
+  ToggleGroupItem,
+  type ToggleGroupItemProps,
+} from "../item/ToggleGroupItem";
+import { ToggleGroupProvider } from "./ToggleGroupRoot.context";
 import { useToggleGroup } from "./useToggleGroup";
 
-interface ToggleGroupComponent extends React.ForwardRefExoticComponent<
-  ToggleGroupProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link ToggleGroupItemProps}
-   */
-  Item: typeof ToggleItem;
-}
-
-/**
- * A component that displays a group of toggle buttons.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/toggle-group)
- * @see 🏷️ {@link ToggleGroupProps}
- *
- * @example
- * ```jsx
- * <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
- *   <ToggleGroup.Item value="ulest" label="Ulest" />
- *   <ToggleGroup.Item value="lest" label="Leste" />
- *   <ToggleGroup.Item value="sendt" label="Sendt" />
- * </ToggleGroup>
- * ```
- */
-export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
+const ToggleGroupRoot = forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {
       className,
@@ -107,7 +86,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       </ToggleGroupProvider>
     );
   },
-) as ToggleGroupComponent;
+);
 
 function variantToColor(
   variant?: ToggleGroupProps["variant"],
@@ -122,8 +101,27 @@ function variantToColor(
   }
 }
 
-ToggleGroup.Item = ToggleItem;
+/**
+ * A component that displays a group of toggle buttons.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/toggle-group)
+ * @see 🏷️ {@link ToggleGroupProps}
+ *
+ * @example
+ * ```jsx
+ * <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
+ *   <ToggleGroup.Item value="ulest" label="Ulest" />
+ *   <ToggleGroup.Item value="lest" label="Leste" />
+ *   <ToggleGroup.Item value="sendt" label="Sendt" />
+ * </ToggleGroup>
+ * ```
+ */
+const ToggleGroup = Object.assign(ToggleGroupRoot, {
+  /**
+   * @see 🏷️ {@link ToggleGroupItemProps}
+   */
+  Item: ToggleGroupItem,
+});
 
-export default ToggleGroup;
-export { ToggleItem as ToggleGroupItem };
+export { ToggleGroup, ToggleGroupItem };
 export type { ToggleGroupProps, ToggleGroupItemProps };

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { rovingFocus } from "../../../utils/helpers/roving-focus";
-import { useTabsContext } from "../../Tabs.context";
+import { rovingFocus } from "../../utils/helpers/roving-focus";
+import { useTabsContext } from "../root/TabsRoot.context";
 
 const TAB_SELECTOR = "[data-aksel-tab]:not([data-disabled])";
 
@@ -8,7 +8,7 @@ const TAB_SELECTOR = "[data-aksel-tab]:not([data-disabled])";
  * TabList hook to manage multiple tab buttons,
  * and ensures only one tab is selected at a time.
  */
-export function useTabList() {
+function useTabList() {
   const { loop, selectedValue, setFocusedValue } = useTabsContext();
 
   /**
@@ -52,3 +52,5 @@ export function useTabList() {
 
   return { onKeyDown };
 }
+
+export { useTabList };

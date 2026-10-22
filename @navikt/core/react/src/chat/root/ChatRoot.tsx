@@ -1,13 +1,13 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import type { AkselColor } from "../types";
-import { BodyLong, type HeadingProps } from "../typography";
-import { cl } from "../utils/helpers";
-import Bubble, { type ChatBubbleProps } from "./Bubble";
+import type { AkselColor } from "../../types";
+import { BodyLong, type HeadingProps } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { ChatBubble, type ChatBubbleProps } from "../bubble/ChatBubble";
 
-export const VARIANTS = ["subtle", "info", "neutral"] as const;
-export const POSITIONS = ["left", "right"] as const;
-export const SIZES = ["medium", "small"] as const;
+const VARIANTS = ["subtle", "info", "neutral"] as const;
+const POSITIONS = ["left", "right"] as const;
+const SIZES = ["medium", "small"] as const;
 
 interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -62,33 +62,7 @@ interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
-interface ChatComponent extends React.ForwardRefExoticComponent<
-  ChatProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * @see 🏷️ {@link ChatBubbleProps}
-   */
-  Bubble: typeof Bubble;
-}
-
-/**
- * A component for communicating a dialog between two or more parties.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
- * @see 🏷️ {@link ChatProps}
- *
- * @example
- * ```jsx
- * <Chat avatar="A" name="Alice" timestamp="01.01.21 14:00">
- *   <Chat.Bubble>Hello!</Chat.Bubble>
- *   <Chat.Bubble>How can I help you?</Chat.Bubble>
- * </Chat>
- * <Chat avatar="B" name="Bob" timestamp="01.01.21 14:01" position="right">
- *   <Chat.Bubble>Hi there!</Chat.Bubble>
- * </Chat>
- * ```
- */
-export const Chat = forwardRef<HTMLDivElement, ChatProps>(
+const ChatRoot = forwardRef<HTMLDivElement, ChatProps>(
   (
     {
       children,
@@ -143,7 +117,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       </div>
     );
   },
-) as ChatComponent;
+);
 
 function variantToColor(variant: ChatProps["variant"]): AkselColor {
   switch (variant) {
@@ -158,8 +132,29 @@ function variantToColor(variant: ChatProps["variant"]): AkselColor {
   }
 }
 
-Chat.Bubble = Bubble;
+/**
+ * A component for communicating a dialog between two or more parties.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
+ * @see 🏷️ {@link ChatProps}
+ *
+ * @example
+ * ```jsx
+ * <Chat avatar="A" name="Alice" timestamp="01.01.21 14:00">
+ *   <Chat.Bubble>Hello!</Chat.Bubble>
+ *   <Chat.Bubble>How can I help you?</Chat.Bubble>
+ * </Chat>
+ * <Chat avatar="B" name="Bob" timestamp="01.01.21 14:01" position="right">
+ *   <Chat.Bubble>Hi there!</Chat.Bubble>
+ * </Chat>
+ * ```
+ */
+const Chat = Object.assign(ChatRoot, {
+  /**
+   * @see 🏷️ {@link ChatBubbleProps}
+   */
+  Bubble: ChatBubble,
+});
 
-export default Chat;
-export { Bubble as ChatBubble };
+export { Chat, ChatBubble, VARIANTS, POSITIONS, SIZES };
 export type { ChatProps, ChatBubbleProps };

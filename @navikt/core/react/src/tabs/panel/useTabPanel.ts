@@ -1,13 +1,13 @@
-import { useTabsContext } from "../../Tabs.context";
+import { useTabsContext } from "../root/TabsRoot.context";
 
-type TabPanelProps = {
+type UseTabPanelProps = {
   value: string;
 };
 
 /**
  * Tabs hook for managing the visible/hidden state of Tabs.Panel
  */
-export function useTabPanel({ value }: TabPanelProps) {
+function useTabPanel({ value }: UseTabPanelProps) {
   const { id, selectedValue, makeTabId, makeTabPanelId } = useTabsContext();
 
   return {
@@ -16,3 +16,5 @@ export function useTabPanel({ value }: TabPanelProps) {
     id: makeTabPanelId(id, value),
   };
 }
+
+export { useTabPanel };

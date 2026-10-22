@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../../utils/helpers";
+import { cl } from "../../utils/helpers";
 import { useTabPanel } from "./useTabPanel";
 
-export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TabsPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Tab panel content.
    */
@@ -25,7 +25,7 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
 }
 
-const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
+const TabsPanel = forwardRef<HTMLDivElement, TabsPanelProps>(
   ({ className, value, children, lazy = true, id, ...rest }, ref) => {
     const ctx = useTabPanel({ value });
 
@@ -48,4 +48,5 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   },
 );
 
-export default TabPanel;
+export { TabsPanel };
+export type { TabsPanelProps };
