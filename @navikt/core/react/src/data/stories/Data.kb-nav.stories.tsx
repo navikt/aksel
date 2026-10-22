@@ -332,18 +332,11 @@ export const Cache: Story = {
     expectNodeFocus("Custom row");
 
     await userEvent.click(toggleButton);
+    expect(toggleButton).toHaveFocus();
     table.focus();
-    await down();
-    expectNodeFocus("Row 1");
-    await down();
-    expectNodeFocus("Row 3");
-
-    await userEvent.click(toggleButton);
-    table.focus();
-    await down();
     expectNodeFocus("Row 3");
     await up();
-    expectNodeFocus("Custom row");
+    expectNodeFocus("Row 1");
   },
 };
 

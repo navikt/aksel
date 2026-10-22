@@ -29,7 +29,7 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
 const DataGridPaginationNavigation = forwardRef<
   HTMLElement,
   DataGridPaginationNavigationProps
->(({ className, ...rest }, forwardedRef) => {
+>(({ className, "aria-label": ariaLabel, ...rest }, forwardedRef) => {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridPaginationContext(
       true,
@@ -45,7 +45,7 @@ const DataGridPaginationNavigation = forwardRef<
     <nav
       {...rest}
       ref={forwardedRef}
-      aria-label={translate("Pagination.navLabel")}
+      aria-label={ariaLabel ?? translate("Pagination.navLabel")}
       className={cl("aksel-data-grid__pagination-navigation", className)}
     >
       <Button

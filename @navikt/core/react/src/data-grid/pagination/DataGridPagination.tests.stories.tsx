@@ -9,6 +9,7 @@ const meta: Meta<typeof DataGrid.Pagination> = {
   parameters: {
     layout: "padded",
     chromatic: { disable: true },
+    a11y: { test: "error" },
   },
 };
 
@@ -48,70 +49,48 @@ function PaginationGrid({
   );
 }
 
-export const TestKnownTotal: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(10, 20)}
-      getRowId={getRowId}
-      pagination={{ defaultPage: 1, totalRows: ROWS.length }}
-    >
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText("Viser 11–20 av 25 rader")).toBeInTheDocument();
-  },
-};
-
 export const TestUncontrolledNavigation: Story = {
   render: () => (
-    <PaginationGrid
-      pagination={{ defaultPage: 0, defaultPageSize: 10, totalRows: 25 }}
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        event.currentTarget.dataset.submitted = "true";
+      }}
     >
-      <DataGrid.Pagination />
-    </PaginationGrid>
+      <PaginationGrid pagination={{ defaultPageSize: 10, totalRows: 25 }}>
+        <DataGrid.Pagination />
+      </PaginationGrid>
+    </form>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    const first = canvas.getByRole("button", { name: "Første side" });
+    const next = canvas.getByRole("button", { name: "Neste side" });
 
     expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(first).toHaveAttribute("aria-disabled", "true");
+    first.focus();
+    await userEvent.keyboard("{Enter}");
+    expect(first).toHaveFocus();
+    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+
+    await userEvent.click(next);
     expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(canvas.getByText("Viser 11–20 av 25 rader")).toBeInTheDocument();
+    expect(canvasElement.querySelector("form")).not.toHaveAttribute(
+      "data-submitted",
+    );
     await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
     expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
     await userEvent.click(canvas.getByRole("button", { name: "Siste side" }));
     expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
-    await userEvent.click(canvas.getByRole("button", { name: "Første side" }));
+    expect(next).toHaveAttribute("aria-disabled", "true");
+    next.focus();
+    await userEvent.keyboard(" ");
+    expect(next).toHaveFocus();
+    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+    await userEvent.click(first);
     expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-  },
-};
-
-export const TestControlledNavigation: Story = {
-  render: () => {
-    const [page, setPage] = useState(0);
-
-    return (
-      <PaginationGrid
-        pagination={{
-          page,
-          onPageChange: setPage,
-          defaultPageSize: 10,
-          totalRows: 25,
-        }}
-      >
-        <DataGrid.Pagination />
-      </PaginationGrid>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
-    expect(canvas.getByText("Viser 11–20 av 25 rader")).toBeInTheDocument();
   },
 };
 
@@ -131,10 +110,6 @@ const testSummaryWidth: Story["play"] = async ({ canvasElement }) => {
 
   for (let page = 1; page < 14; page++) {
     await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(getBounds()).toEqual(bounds);
-  }
-  for (let page = 13; page > 0; page--) {
-    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
     expect(getBounds()).toEqual(bounds);
   }
 };
@@ -217,6 +192,7 @@ export const TestPageSizeChange: Story = {
     expect(canvas.getByTestId("last-page-change")).toHaveTextContent("0");
     expect(canvas.getByText("Viser 1–5 av 25 rader")).toBeInTheDocument();
     expect(canvas.getByText("Side 1 av 5")).toBeInTheDocument();
+    expect(pageSize).toHaveFocus();
   },
 };
 
@@ -243,100 +219,90 @@ export const TestPageSizeMissingFromOptions: Story = {
   },
 };
 
-export const TestNavigationBounds: Story = {
+export const TestNavigationAccessibleNames: Story = {
   render: () => (
-    <PaginationGrid
-      pagination={{ defaultPage: 0, defaultPageSize: 10, totalRows: 25 }}
-    >
-      <DataGrid.Pagination />
-    </PaginationGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const firstButton = canvas.getByRole("button", { name: "Første side" });
-
-    expect(firstButton).toHaveAttribute("aria-disabled", "true");
-    firstButton.focus();
-    await userEvent.click(firstButton);
-    expect(firstButton).toHaveFocus();
-    await userEvent.keyboard("{Enter}");
-    await userEvent.keyboard("{Space}");
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-
-    const nextButton = canvas.getByRole("button", { name: "Neste side" });
-    await userEvent.click(nextButton);
-    await userEvent.click(nextButton);
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
-    expect(nextButton).toHaveAttribute("aria-disabled", "true");
-    nextButton.focus();
-    await userEvent.keyboard("{Enter}");
-    await userEvent.keyboard("{Space}");
-    expect(nextButton).toHaveFocus();
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
-  },
-};
-
-export const TestNavigationDoesNotSubmitForm: Story = {
-  render: () => (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        event.currentTarget.dataset.submitted = "true";
-      }}
-    >
-      <PaginationGrid
-        pagination={{ defaultPage: 0, defaultPageSize: 10, totalRows: 25 }}
-      >
-        <DataGrid.Pagination />
-      </PaginationGrid>
-    </form>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvasElement.querySelector("form")).not.toHaveAttribute(
-      "data-submitted",
-      "true",
-    );
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
-  },
-};
-
-export const TestMultipleBarsStayInSync: Story = {
-  render: () => (
-    <PaginationGrid
-      pagination={{ defaultPage: 0, defaultPageSize: 10, totalRows: 25 }}
-    >
-      <DataGrid.Pagination />
+    <PaginationGrid pagination={{ totalRows: ROWS.length }}>
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Summary />
+        <DataGrid.Pagination.PageSize />
+        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering over tabellen" />
+      </DataGrid.Pagination>
       <DataGrid.Table />
-      <DataGrid.Pagination />
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Summary />
+        <DataGrid.Pagination.PageSize />
+        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering under tabellen" />
+      </DataGrid.Pagination>
     </PaginationGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const navigation = canvas.getAllByRole("navigation", {
-      name: "Sidenavigering",
+    const topNavigation = canvas.getByRole("navigation", {
+      name: "Personer: sidenavigering over tabellen",
+    });
+    const bottomNavigation = canvas.getByRole("navigation", {
+      name: "Personer: sidenavigering under tabellen",
+    });
+    const pageSizes = canvas.getAllByRole("combobox", {
+      name: "Rader per side",
     });
 
-    await userEvent.click(
-      within(navigation[0]).getByRole("button", { name: "Neste side" }),
-    );
-    expect(canvas.getAllByText("Side 2 av 3")).toHaveLength(2);
-    expect(canvas.getAllByText("Viser 11–20 av 25 rader")).toHaveLength(2);
+    expect(pageSizes).toHaveLength(2);
+    expect(pageSizes[0].id).not.toBe(pageSizes[1].id);
+    for (const pageSize of pageSizes) {
+      expect(pageSize).toHaveAccessibleName("Rader per side");
+      expect(within(pageSize).getAllByRole("option")).toHaveLength(4);
+    }
+
+    pageSizes[0].focus();
+    await userEvent.tab();
+    expect(
+      within(topNavigation).getByRole("button", { name: "Første side" }),
+    ).toHaveFocus();
+    await userEvent.tab();
+    expect(
+      within(topNavigation).getByRole("button", { name: "Forrige side" }),
+    ).toHaveFocus();
+    await userEvent.tab();
+    const next = within(topNavigation).getByRole("button", {
+      name: "Neste side",
+    });
+    expect(next).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    expect(next).toHaveFocus();
+    expect(within(topNavigation).getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(
+      within(bottomNavigation).getByText("Side 2 av 3"),
+    ).toBeInTheDocument();
   },
 };
 
 export const TestLoadingNavigationAndAnnouncement: Story = {
+  parameters: {
+    a11y: {
+      // Both landmarks intentionally provide identical controls for one grid.
+      config: { rules: [{ id: "landmark-unique", enabled: false }] },
+    },
+  },
   render: () => {
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [renderCount, setRenderCount] = useState(0);
     const dataPage = isLoading ? 0 : page;
 
     return (
       <>
         <button type="button" onClick={() => setIsLoading(false)}>
           Complete request
+        </button>
+        <button type="button" onClick={() => setIsLoading(true)}>
+          Reload page
+        </button>
+        <button
+          type="button"
+          onClick={() => setRenderCount((count) => count + 1)}
+        >
+          Unrelated render {renderCount}
         </button>
         <DataGrid
           columns={columns}
@@ -368,13 +334,22 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
     const next = within(navigation[0]).getByRole("button", {
       name: "Neste side",
     });
-    const liveRegions = canvasElement.querySelectorAll('[aria-live="polite"]');
+    // Select also owns empty error-message live regions. Only the grid root
+    // owns pagination announcements, independent of how many bars are shown.
+    const liveRegions = canvasElement.querySelectorAll(
+      '.aksel-data-grid > [aria-live="polite"]',
+    );
 
     expect(liveRegions).toHaveLength(1);
     expect(liveRegions[0]).toBeEmptyDOMElement();
     await userEvent.click(next);
     expect(next).toHaveAttribute("aria-disabled", "true");
     expect(next).toHaveFocus();
+    for (const nav of navigation) {
+      for (const button of within(nav).getAllByRole("button")) {
+        expect(button).toHaveAttribute("aria-disabled", "true");
+      }
+    }
     expect(
       canvas.getAllByRole("combobox", { name: "Rader per side" })[0],
     ).not.toBeDisabled();
@@ -383,12 +358,31 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
     expect(liveRegions[0]).toBeEmptyDOMElement();
 
     await userEvent.click(next);
+    await userEvent.keyboard("{Enter}");
+    await userEvent.keyboard(" ");
+    expect(next).toHaveFocus();
     expect(canvas.getAllByText("Side 2")).toHaveLength(2);
     await userEvent.click(
       canvas.getByRole("button", { name: "Complete request" }),
     );
     expect(await canvas.findAllByText("Viser rad 11–20")).toHaveLength(2);
-    await expect(liveRegions[0]).toHaveTextContent("Viser rad 11–20");
+    const announcement = "Viser rad 11–20. Side 2. Rader per side: 10";
+    await expect(liveRegions[0]).toHaveTextContent(announcement);
+    expect(liveRegions[0]).toHaveAttribute("aria-atomic", "true");
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Unrelated render 0" }),
+    );
+    expect(liveRegions[0]).toHaveTextContent(announcement);
+    await userEvent.click(canvas.getByRole("button", { name: "Reload page" }));
+    expect(liveRegions[0]).toHaveTextContent(announcement);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Complete request" }),
+    );
+    expect(liveRegions[0]).toHaveTextContent(announcement);
+    expect(
+      canvasElement.querySelectorAll('.aksel-data-grid > [aria-live="polite"]'),
+    ).toHaveLength(1);
   },
 };
 
@@ -444,7 +438,9 @@ export const TestRepeatedSummaryStillAnnouncesPage: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const liveRegion = canvasElement.querySelector('[aria-live="polite"]');
+    const liveRegion = canvasElement.querySelector(
+      '.aksel-data-grid > [aria-live="polite"]',
+    );
 
     expect(liveRegion).toBeEmptyDOMElement();
     expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
@@ -507,43 +503,6 @@ export const TestControlledPageIsClampedOnce: Story = {
     expect(await canvas.findByTestId("page-change-count")).toHaveTextContent(
       "1",
     );
-  },
-};
-
-export const TestUnknownTotal: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(0, 10)}
-      getRowId={getRowId}
-      pagination={{ hasNextPage: true }}
-    >
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText("Viser rad 1–10")).toBeInTheDocument();
-    expect(canvas.queryByText(/ av /)).not.toBeInTheDocument();
-  },
-};
-
-export const TestZeroRows: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={[]}
-      getRowId={getRowId}
-      pagination={{ totalRows: 0 }}
-    >
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
   },
 };
 

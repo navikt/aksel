@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useValueAsRef } from "../../../utils/hooks";
-import { type GridCache, buildTableGridMap } from "../helpers/table-grid-nav";
+import {
+  type GridCache,
+  buildTableGridMap,
+  findFirstCell,
+  findFirstCellInRow,
+  isCellFocusable,
+} from "../helpers/table-grid-nav";
 
 /**
  * Manages the table grid cache and observes DOM changes that require grid rebuilding.
@@ -13,9 +19,29 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
     dirty: true,
   });
 
-  const [activeCell, setActiveCell] = useState<Element | null>(null);
+  const [activeCell, setActiveCellState] = useState<Element | null>(null);
   const activeCellRef = useValueAsRef(activeCell);
   const observerRef = useRef<MutationObserver | null>(null);
+
+  const getTableGrid = useCallback((_tableRef: HTMLTableElement) => {
+    if (gridCacheRef.current.dirty || !gridCacheRef.current.grid) {
+      gridCacheRef.current.grid = buildTableGridMap(_tableRef);
+      gridCacheRef.current.dirty = false;
+    }
+
+    return gridCacheRef.current.grid;
+  }, []);
+
+  const setActiveCell = useCallback(
+    (cell: Element | null) => {
+      if (tableRef && cell) {
+        // Retain the active cell's coordinates before its row is removed.
+        getTableGrid(tableRef);
+      }
+      setActiveCellState(cell);
+    },
+    [getTableGrid, tableRef],
+  );
 
   useEffect(() => {
     if (!tableRef || !enabled) {
@@ -25,8 +51,19 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
     observerRef.current = new MutationObserver(() => {
       gridCacheRef.current.dirty = true;
 
-      if (activeCellRef.current && !activeCellRef.current.isConnected) {
-        setActiveCell(null);
+      const currentCell = activeCellRef.current;
+      if (currentCell && !tableRef.contains(currentCell)) {
+        const position = gridCacheRef.current.grid?.positions.get(currentCell);
+        const { grid } = getTableGrid(tableRef);
+        const rowIndex = Math.min(position?.y ?? 0, grid.length - 1);
+        const row = grid[rowIndex] ?? [];
+        const cell = row[Math.min(position?.x ?? 0, row.length - 1)];
+        const nextCell = isCellFocusable(cell)
+          ? cell
+          : (findFirstCellInRow(grid, rowIndex) ?? findFirstCell(grid));
+
+        // Keep pagination controls focused; restore this cell on table re-entry.
+        setActiveCell(nextCell);
       }
     });
 
@@ -43,7 +80,7 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
         observerRef.current = null;
       }
     };
-  }, [tableRef, enabled, activeCellRef]);
+  }, [tableRef, enabled, activeCellRef, getTableGrid, setActiveCell]);
 
   /**
    * If keyboard-nav is re-enabled, mark grid as dirty since
@@ -54,15 +91,6 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
       gridCacheRef.current.dirty = true;
     }
   }, [enabled]);
-
-  const getTableGrid = useCallback((_tableRef: HTMLTableElement) => {
-    if (gridCacheRef.current.dirty || !gridCacheRef.current.grid) {
-      gridCacheRef.current.grid = buildTableGridMap(_tableRef);
-      gridCacheRef.current.dirty = false;
-    }
-
-    return gridCacheRef.current.grid;
-  }, []);
 
   return {
     getTableGrid,

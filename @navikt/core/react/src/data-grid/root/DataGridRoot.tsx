@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
@@ -8,7 +8,6 @@ import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { useDataGridPagination } from "../hooks/useDataGridPagination";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
 import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
-import { DataGridPaginationSummary } from "../pagination/summary/DataGridPaginationSummary";
 import type {
   DataGridPaginationOptions,
   DataGridSettings,
@@ -197,37 +196,45 @@ function DataGridPaginationProvider({
 }
 
 function DataGridPaginationLiveRegion() {
-  const { page, pageCount, pageSize, isLoading } =
+  const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
     useDataGridPaginationContext();
   const { isLoading: gridIsLoading = false } = useDataGridContext();
   const loading = isLoading || gridIsLoading;
   const translate = useI18n("DataGrid");
-  const pageLabel =
-    pageCount === undefined
-      ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
-      : translate("Pagination.pageOf", { page: page + 1, pageCount });
   const lastAnnouncedPage = useRef({ page, pageSize });
-  const shouldAnnounce =
-    !loading &&
-    (lastAnnouncedPage.current.page !== page ||
-      lastAnnouncedPage.current.pageSize !== pageSize);
+  const [announcement, setAnnouncement] = useState("");
 
   useEffect(() => {
-    if (!loading) {
-      lastAnnouncedPage.current = { page, pageSize };
+    if (
+      loading ||
+      (lastAnnouncedPage.current.page === page &&
+        lastAnnouncedPage.current.pageSize === pageSize)
+    ) {
+      return;
     }
-  }, [loading, page, pageSize]);
+
+    const summary =
+      to === 0
+        ? translate("Pagination.summaryEmpty")
+        : totalRows === undefined
+          ? translate("Pagination.summaryUnknownTotal", { from, to })
+          : translate("Pagination.summary", { from, to, totalRows });
+    const pageLabel =
+      pageCount === undefined
+        ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
+        : translate("Pagination.pageOf", { page: page + 1, pageCount });
+
+    lastAnnouncedPage.current = { page, pageSize };
+    // Retain the completed message across loading and unrelated renders so
+    // assistive technology has time to announce this single root-owned update.
+    setAnnouncement(
+      `${summary}. ${pageLabel}. ${translate("Pagination.pageSize")}: ${pageSize}`,
+    );
+  }, [loading, page, pageCount, pageSize, from, to, totalRows, translate]);
 
   return (
     <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">
-      {shouldAnnounce && !loading && (
-        <>
-          <DataGridPaginationSummary />
-          <span>
-            {pageLabel}. {translate("Pagination.pageSize")}: {pageSize}
-          </span>
-        </>
-      )}
+      {announcement}
     </div>
   );
 }

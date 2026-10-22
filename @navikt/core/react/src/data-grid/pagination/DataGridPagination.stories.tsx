@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { DataGrid } from "../root/DataGridRoot";
 
 const meta: Meta<typeof DataGrid.Pagination> = {
@@ -28,18 +28,19 @@ const columns: DataGrid.Columns<Row> = [
   { id: "role", header: "Rolle", bodyCell: (row) => row.role },
 ];
 
+const sortableColumns: DataGrid.Columns<Row> = columns.map((column) => ({
+  ...column,
+  isSortable: column.id === "id",
+}));
+
 function PagedGrid({
   children,
-  defaultPage = 0,
   defaultPageSize = 10,
-  style,
 }: {
   children: React.ReactNode;
-  defaultPage?: number;
   defaultPageSize?: number;
-  style?: React.CSSProperties;
 }) {
-  const [page, setPage] = useState(defaultPage);
+  const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const pageRows = ROWS.slice(page * pageSize, (page + 1) * pageSize);
 
@@ -48,7 +49,6 @@ function PagedGrid({
       columns={columns}
       data={pageRows}
       getRowId={(row) => String(row.id)}
-      style={style}
       pagination={{
         page,
         onPageChange: setPage,
@@ -67,45 +67,6 @@ export const BelowTable: Story = {
     <PagedGrid>
       <DataGrid.Table />
       <DataGrid.Pagination />
-    </PagedGrid>
-  ),
-};
-
-export const AboveTable: Story = {
-  render: () => (
-    <PagedGrid>
-      <DataGrid.Pagination />
-      <DataGrid.Table />
-    </PagedGrid>
-  ),
-};
-
-export const PageNumberWidth: Story = {
-  render: () => (
-    <PagedGrid defaultPage={8}>
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </PagedGrid>
-  ),
-};
-
-export const SummaryWidth: Story = {
-  render: () => (
-    <PagedGrid defaultPage={9}>
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </PagedGrid>
-  ),
-};
-
-export const CustomLayout: Story = {
-  render: () => (
-    <PagedGrid>
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary />
-        <DataGrid.Pagination.Navigation />
-      </DataGrid.Pagination>
-      <DataGrid.Table />
     </PagedGrid>
   ),
 };
@@ -139,4 +100,62 @@ export const FixedHeight: Story = {
       </PagedGrid>
     </div>
   ),
+};
+
+export const ResetPageOnSort: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Pagination only manages display and state; the consumer sorts the full dataset before slicing the current page. Controlled pagination lets onSortChange call setPage(0) alongside setSort. Pass this handler to sorting.onSortOrderChange. For filtering, call setPage(0) in the filter-change handler as well, then filter and sort before slicing; use the filtered row count as totalRows. Neither sorting nor filtering resets the page automatically. When the document owns scrolling, scroll the table into view in the controlled onPageChange callback with tableRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); DataGrid only resets its internal table scroller.',
+      },
+    },
+  },
+  render: () => {
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(10);
+    const [sort, setSort] = useState<DataGrid.Table.SortEntry[]>([]);
+    const tableRef = useRef<HTMLTableElement>(null);
+    const direction = sort[0]?.direction;
+    const sortedRows = [...ROWS].sort((a, b) =>
+      direction === "desc" ? b.id - a.id : a.id - b.id,
+    );
+    const pageRows = sortedRows.slice(page * pageSize, (page + 1) * pageSize);
+    const onPageChange = (nextPage: number) => {
+      setPage(nextPage);
+      tableRef.current?.scrollIntoView({
+        block: "start",
+        behavior: "instant",
+      });
+    };
+    const onSortChange = (nextSort: DataGrid.Table.SortEntry[]) => {
+      setSort(nextSort);
+      setPage(0);
+    };
+
+    return (
+      <DataGrid
+        columns={sortableColumns}
+        data={pageRows}
+        getRowId={(row) => String(row.id)}
+        pagination={{
+          page,
+          onPageChange,
+          pageSize,
+          onPageSizeChange: setPageSize,
+          totalRows: ROWS.length,
+        }}
+      >
+        <DataGrid.Table
+          ref={tableRef}
+          sorting={{
+            sortOrder: sort,
+            onSortOrderChange: onSortChange,
+            allowMultiSort: false,
+          }}
+        />
+        <DataGrid.Pagination />
+      </DataGrid>
+    );
+  },
 };
