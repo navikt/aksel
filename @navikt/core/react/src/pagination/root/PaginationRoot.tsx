@@ -1,15 +1,16 @@
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
-import type { AkselColor } from "../types";
-import { BodyShort, Heading } from "../typography";
-import { useId } from "../utils-external";
-import { cl } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
-import PaginationItem, {
+import type { AkselColor } from "../../types";
+import { BodyShort, Heading } from "../../typography";
+import { useId } from "../../utils-external";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { getSteps } from "../helpers/get-steps";
+import {
+  PaginationItem,
   type PaginationItemProps,
-  type PaginationItemType,
-} from "./PaginationItem";
+} from "../item/PaginationItem";
 
 interface RenderItemProps extends Pick<
   PaginationItemProps,
@@ -21,7 +22,7 @@ interface RenderItemProps extends Pick<
   size: Exclude<PaginationProps["size"], undefined>;
 }
 
-export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
+interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Current page.
    *
@@ -80,66 +81,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   "data-color"?: Exclude<AkselColor, AkselStatusColorRole>;
 }
 
-interface PaginationType extends React.ForwardRefExoticComponent<
-  PaginationProps & React.RefAttributes<HTMLElement>
-> {
-  Item: PaginationItemType;
-}
-
-export const getSteps = ({
-  page,
-  count,
-  boundaryCount = 1,
-  siblingCount = 1,
-}: Pick<
-  PaginationProps,
-  "page" | "count" | "boundaryCount" | "siblingCount"
->) => {
-  const range = (start: number, end: number) =>
-    Array.from({ length: end - start + 1 }, (_, i) => start + i);
-
-  if (count <= (boundaryCount + siblingCount) * 2 + 3) return range(1, count);
-
-  const startPages = range(1, boundaryCount);
-  const endPages = range(count - boundaryCount + 1, count);
-
-  const siblingsStart = Math.max(
-    Math.min(page - siblingCount, count - boundaryCount - siblingCount * 2 - 1),
-    boundaryCount + 2,
-  );
-  const siblingsEnd = siblingsStart + siblingCount * 2;
-
-  return [
-    ...startPages,
-    siblingsStart - (startPages[startPages.length - 1] ?? 0) === 2
-      ? siblingsStart - 1
-      : "ellipsis",
-    ...range(siblingsStart, siblingsEnd),
-    (endPages[0] ?? count + 1) - siblingsEnd === 2
-      ? siblingsEnd + 1
-      : "ellipsis",
-    ...endPages,
-  ];
-};
-
-/**
- * A component that displays pagination controls.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
- * @see 🏷️ {@link PaginationProps}
- *
- * @example
- * ```jsx
- * <Pagination
- *   page={pageState}
- *   onPageChange={setPageState}
- *   count={9}
- *   boundaryCount={1}
- *   siblingCount={1}
- * />
- * ```
- */
-export const Pagination = forwardRef<HTMLElement, PaginationProps>(
+const PaginationRoot = forwardRef<HTMLElement, PaginationProps>(
   (
     {
       page,
@@ -282,8 +224,31 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       </nav>
     );
   },
-) as PaginationType;
+);
 
-Pagination.Item = PaginationItem;
+/**
+ * A component that displays pagination controls.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
+ * @see 🏷️ {@link PaginationProps}
+ *
+ * @example
+ * ```jsx
+ * <Pagination
+ *   page={pageState}
+ *   onPageChange={setPageState}
+ *   count={9}
+ *   boundaryCount={1}
+ *   siblingCount={1}
+ * />
+ * ```
+ */
+const Pagination = Object.assign(PaginationRoot, {
+  /**
+   * @see 🏷️ {@link PaginationItemProps}
+   */
+  Item: PaginationItem,
+});
 
-export default Pagination;
+export { Pagination, PaginationItem };
+export type { PaginationProps, PaginationItemProps };
