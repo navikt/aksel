@@ -1,33 +1,36 @@
 import { differenceInDays } from "date-fns";
-import type { PeriodProps } from "../period/types";
+import type { PeriodProps } from "../Timeline.types";
 import type { Spatial } from "./types.internal";
 
-export interface Positioned {
+interface Positioned {
   horizontalPosition: number;
   direction: "left" | "right";
 }
 
-export const isVisible = ({ horizontalPosition }: Positioned): boolean => {
+const isVisible = ({ horizontalPosition }: Positioned): boolean => {
   return horizontalPosition <= 96 && horizontalPosition >= 0;
 };
 
-export const getFirstDate = (periods: any) => {
+const getFirstDate = (periods: any) => {
   return periods.sort(
     (a: PeriodProps, b: PeriodProps) => a.start.getTime() - b.start.getTime(),
   )[0].start;
 };
 
-export const getLastDate = (periods: any) => {
+const getLastDate = (periods: any) => {
   return periods.sort(
     (a: PeriodProps, b: PeriodProps) => a.end.getTime() - b.end.getTime(),
   )[periods.length - 1].end;
 };
 
-export const withinADay = (date1: Date, date2: Date): boolean =>
+const withinADay = (date1: Date, date2: Date): boolean =>
   differenceInDays(date1, date2) <= 1;
 
-export const invisiblePeriods = ({
+const invisiblePeriods = ({
   horizontalPosition,
   width,
 }: Positioned & Spatial) =>
   horizontalPosition >= 0 && horizontalPosition <= 100 && width > 0;
+
+export { isVisible, getFirstDate, getLastDate, withinADay, invisiblePeriods };
+export type { Positioned };

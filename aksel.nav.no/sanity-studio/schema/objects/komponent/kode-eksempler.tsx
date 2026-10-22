@@ -27,6 +27,7 @@ export const KodeEksempler = defineType({
         "Mindre padding i forhåndsvisningen, og koden er skjult som standard.",
       name: "compact",
       type: "boolean",
+      initialValue: false,
     }),
   ],
   preview: {

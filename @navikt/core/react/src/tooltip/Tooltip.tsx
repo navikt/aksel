@@ -17,7 +17,7 @@ import React, {
   forwardRef,
   useRef,
 } from "react";
-import { useModalContext } from "../modal/Modal.context";
+import { useModalContext } from "../modal/root/ModalRoot.context";
 import { Portal } from "../portal";
 import { HStack } from "../primitives/stack";
 import { Detail } from "../typography";
@@ -166,7 +166,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       whileElementsMounted: modalContext
         ? (reference, floating, update) =>
             // Reduces jumping in Chrome when used in a Modal and it's the first focusable element.
-            // Can be removed when autofocus starts working on <dialog> in Chrome. See also Modal.tsx
+            // Can be removed when autofocus starts working on <dialog> in Chrome. See also ModalRoot.tsx
             autoUpdate(reference, floating, update, { animationFrame: true })
         : autoUpdate,
       strategy: modalContext ? "fixed" : undefined,

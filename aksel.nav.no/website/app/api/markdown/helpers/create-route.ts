@@ -20,7 +20,7 @@ type RouteConfig<T extends RouteItemBase> = {
   heading: string;
   description: string;
   buildAttributes: (item: T) => Record<string, string>;
-  getIntro?: (item: T) => any[] | undefined;
+  getIntro?: (item: T) => string;
 };
 
 function createRoute<T extends RouteItemBase>(config: RouteConfig<T>) {
@@ -96,7 +96,7 @@ function buildItemMarkdown<T extends RouteItemBase>(
   return buildMarkdown(
     open,
     { heading: item.heading ?? "" },
-    portableMarkdown(config.getIntro?.(item)),
+    config.getIntro?.(item) ?? null,
     portableMarkdown(item.content ?? undefined),
     MetadataSeksjonMarkdown(item.component_metadata),
     close,

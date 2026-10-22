@@ -57,17 +57,15 @@ const groupedOptions: (MyGroup | MyOption)[] = [
 ];
 
 export const Default = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-3",
-  ]);
+  const [value, setValue] = useState<MyOption["value"][]>(["opt-3"]);
 
   return (
     <ComboboxRoot
       defaultOpen
       options={options}
-      selectedOptions={selectedOptions}
+      value={value}
       onToggleOption={(option, newSelected) => {
-        setSelectedOptions((prev) =>
+        setValue((prev) =>
           newSelected
             ? [...prev, option.value]
             : prev.filter((v) => v !== option.value),
@@ -89,7 +87,7 @@ export const SingleSelect = () => {
     <ComboboxRoot
       defaultOpen
       options={options}
-      selectedOptions={[selectedOption.value]}
+      value={[selectedOption.value]}
       onToggleOption={setSelectedOption}
     >
       <ComboboxPopup>
@@ -108,7 +106,7 @@ export const Groups = () => {
       <ComboboxRoot
         defaultOpen
         options={groupedOptions}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
@@ -121,7 +119,7 @@ export const Groups = () => {
         size="small"
         defaultOpen
         options={groupedOptions}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
@@ -147,7 +145,7 @@ export const WithoutFilter = () => {
             options: options.slice(0, 3),
           },
         ]}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
@@ -158,7 +156,7 @@ export const WithoutFilter = () => {
       <ComboboxRoot
         defaultOpen
         options={options.slice(0, 3)}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
       >
         <ComboboxPopup>
@@ -170,20 +168,18 @@ export const WithoutFilter = () => {
 };
 
 export const CustomOptionRendering = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
+  const [value, setValue] = useState<MyOption["value"][]>(["opt-1"]);
 
   return (
     <ComboboxRoot
       defaultOpen
       options={options}
-      selectedOptions={selectedOptions}
+      value={value}
       onToggleOption={(option, isSelected) => {
-        setSelectedOptions(
+        setValue(
           isSelected
-            ? [...selectedOptions, option.value]
-            : selectedOptions.filter((v) => v !== option.value),
+            ? [...value, option.value]
+            : value.filter((v) => v !== option.value),
         );
       }}
     >
@@ -212,7 +208,7 @@ export const CustomOptionRenderingGroups = () => {
     <ComboboxRoot
       defaultOpen
       options={groupedOptions}
-      selectedOptions={[selectedOption.value]}
+      value={[selectedOption.value]}
       onToggleOption={setSelectedOption}
     >
       <ComboboxPopup>
@@ -239,9 +235,7 @@ export const CustomOptionRenderingGroups = () => {
 // Alternativer: Kun støtte option, måtte iterere selv, renderOption/group-props på root, flytte props ned (hvordan få tak i valgte i Input?) 🤔
 
 export const ControlledInput = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
+  const [value, setValue] = useState<MyOption["value"][]>(["opt-1"]);
   const [filterString, setFilterString] = useState("");
   const filterStringLowerCase = filterString.toLocaleLowerCase();
 
@@ -266,9 +260,9 @@ export const ControlledInput = () => {
     <ComboboxRoot
       defaultOpen
       options={filteredOptions}
-      selectedOptions={selectedOptions}
+      value={value}
       onToggleOption={(option) => {
-        setSelectedOptions((prev) =>
+        setValue((prev) =>
           prev.includes(option.value)
             ? prev.filter((v) => v !== option.value)
             : [...prev, option.value],
@@ -290,7 +284,7 @@ export const States: StoryFn = () => {
     <ComboboxRoot
       defaultOpen
       options={options.slice(0, 3)}
-      selectedOptions={[selectedOption.value]}
+      value={[selectedOption.value]}
       onToggleOption={setSelectedOption}
     >
       <ComboboxPopup>

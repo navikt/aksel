@@ -3,7 +3,7 @@ import { Button } from "../../button";
 import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { Radio, RadioGroup } from "../../form/radio";
 import { Link } from "../../link";
-import Table from "../Table";
+import { Table } from "../index";
 
 export default {
   title: "ds-react/Table",

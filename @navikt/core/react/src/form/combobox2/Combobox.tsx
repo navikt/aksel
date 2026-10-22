@@ -21,20 +21,19 @@ import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 interface ComboboxProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >
-  extends
-    Omit<
-      ComboboxRootProps<T>,
-      "children" | "selectedOptions" | "onToggleOption"
-    >,
-    Partial<Pick<ComboboxRootProps<T>, "selectedOptions" | "onToggleOption">>,
-    Omit<FormFieldProps, "size"> {
+  extends Omit<ComboboxRootProps<T>, "children">, Omit<FormFieldProps, "size"> {
+  /**
+   * Label
+   */
   label: string;
+  /**
+   * Hides the label and description visually while keeping them available to screen readers.
+   */
   hideLabel?: boolean;
+  /**
+   * Field name. When provided, the field value will be included in form submissions.
+   */
   name?: string;
-  defaultSelectedOptions?: ComboboxRootProps<T>["selectedOptions"];
-  onSelectedOptionsChange?: (
-    newSelectedOptions: ComboboxRootProps<T>["selectedOptions"],
-  ) => void;
 }
 
 function Combobox<
@@ -43,8 +42,6 @@ function Combobox<
   label,
   hideLabel,
   name,
-  defaultSelectedOptions,
-  onSelectedOptionsChange,
   size: sizeProp,
   error,
   errorId: errorIdProp,
@@ -52,9 +49,7 @@ function Combobox<
   description,
   id,
   readOnly: readOnlyProp,
-  multiselect = false, // Default value should be synced with ComboboxRoot
-  selectedOptions: selectedOptionsProp,
-  onToggleOption: onToggleOptionProp,
+  multiple,
   ...rest
 }: ComboboxProps<T>) {
   const {
@@ -78,35 +73,11 @@ function Combobox<
     "combobox",
   );
 
-  const [selectedOptions, setSelectedOptions] = useControllableState({
-    defaultValue: defaultSelectedOptions || [],
-    value: selectedOptionsProp,
-    onChange: onSelectedOptionsChange,
-  });
-
-  const onToggleOption: ComboboxRootProps<T>["onToggleOption"] = (
-    option,
-    isSelected,
-  ) => {
-    onToggleOptionProp?.(option, isSelected);
-    setSelectedOptions((prevSelectedOptions) => {
-      if (!multiselect) {
-        return [option.value];
-      }
-      if (isSelected) {
-        return [...prevSelectedOptions, option.value];
-      }
-      return prevSelectedOptions.filter((value) => value !== option.value);
-    });
-  };
-
   return (
     <ComboboxRoot
       size={size}
       disabled={inputProps.disabled}
-      multiselect={multiselect}
-      selectedOptions={selectedOptions}
-      onToggleOption={onToggleOption}
+      multiple={multiple}
       {...rest}
     >
       <ComboboxLabel
@@ -146,8 +117,8 @@ function Combobox<
       </div>
 
       {name &&
-        selectedOptions.map((value) => (
-          <input key={value} type="hidden" name={name} value={value} />
+        rest.value.map((val) => (
+          <input key={val} type="hidden" name={name} value={val} />
         ))}
 
       <ComboboxOverlay
@@ -169,5 +140,126 @@ function Combobox<
   );
 }
 
-export { Combobox };
-export type { ComboboxProps };
+// ----------- ComboboxSingle ----------- //
+
+interface ComboboxSingleProps<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+> extends Omit<ComboboxProps<T>, "multiple" | "value" | "onToggleOption"> {
+  /**
+   * Called when selected option changes.
+   */
+  onChange?: (
+    newValue: NonNullable<ComboboxProps<T>["value"]>[number] | undefined,
+  ) => void;
+  /**
+   * Value of the selected option.
+   */
+  value?: NonNullable<ComboboxProps<T>["value"]>[number];
+  /**
+   * Initial value when uncontrolled.
+   */
+  defaultValue?: NonNullable<ComboboxProps<T>["value"]>[number];
+}
+
+function ComboboxSingle<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>({ onChange, value, defaultValue, ...rest }: ComboboxSingleProps<T>) {
+  const [localValue, setLocalValue] = useControllableState({
+    defaultValue,
+    value,
+    onChange,
+  });
+
+  const onToggleOption: ComboboxProps<T>["onToggleOption"] = (
+    option,
+    isSelected,
+  ) => {
+    setLocalValue(isSelected ? option.value : undefined);
+  }; // TODO: Dumt at ikke får hele option-objektet... Legge til i onChange? Hvis vi tilbyr onToggle så blir det så likt onChange...
+
+  return (
+    <Combobox
+      {...rest}
+      value={localValue ? [localValue] : []}
+      defaultValue={defaultValue ? [defaultValue] : []}
+      multiple={false}
+      onToggleOption={onToggleOption}
+    />
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace ComboboxSingle {
+  export type Props<
+    T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  > = ComboboxSingleProps<T>;
+}
+
+// ----------- ComboboxMulti ----------- //
+
+interface ComboboxMultiProps<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>
+  extends
+    Omit<ComboboxProps<T>, "multiple" | "value" | "onToggleOption">,
+    Partial<Pick<ComboboxProps<T>, "onToggleOption">> {
+  /**
+   * Called when selected options change.
+   */
+  onChange?: (newValue: ComboboxProps<T>["value"]) => void;
+  /**
+   * Value of the selected options.
+   */
+  value?: ComboboxProps<T>["value"];
+  /**
+   * Initial value when uncontrolled.
+   */
+  defaultValue?: ComboboxProps<T>["value"];
+}
+
+function ComboboxMulti<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>({
+  onChange,
+  value,
+  defaultValue,
+  onToggleOption,
+  ...rest
+}: ComboboxMultiProps<T>) {
+  const [localValue, setLocalValue] = useControllableState({
+    defaultValue: defaultValue || [],
+    value,
+    onChange,
+  });
+
+  const localOnToggleOption: ComboboxProps<T>["onToggleOption"] = (
+    option,
+    isSelected,
+  ) => {
+    onToggleOption?.(option, isSelected);
+    setLocalValue((prevSelectedOptions) =>
+      isSelected
+        ? [...prevSelectedOptions, option.value]
+        : prevSelectedOptions.filter((optVal) => optVal !== option.value),
+    );
+  };
+
+  return (
+    <Combobox
+      {...rest}
+      value={localValue}
+      defaultValue={defaultValue}
+      multiple
+      onToggleOption={localOnToggleOption}
+    />
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace ComboboxMulti {
+  export type Props<
+    T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  > = ComboboxMultiProps<T>;
+}
+
+export { ComboboxSingle, ComboboxMulti };

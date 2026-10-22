@@ -9,11 +9,18 @@ interface ComboboxTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElem
    */
   children: React.ReactNode;
   readOnly?: boolean;
+  /**
+   * Whether to open when the user starts typing.
+   * Set to `false` if the filter input is omitted.
+   * @default true
+   */
+  openWhenStartsTyping?: boolean; // TODO: Check ComboboxFilter presence automatically? Or check in dev and warn if prop wrong.
 }
 
 const ComboboxTrigger = ({
   children,
   readOnly,
+  openWhenStartsTyping = true,
   ...rest
 }: ComboboxTriggerProps) => {
   const rootContext = useComboboxRootContext();
@@ -29,14 +36,25 @@ const ComboboxTrigger = ({
           if (!readOnly && !rootContext.open) event.preventDefault();
         }}
         onKeyDown={(event) => {
+          if (readOnly) {
+            return;
+          }
           if (event.key === "ArrowDown" || event.key === "ArrowUp") {
             rootContext.setOpen(true);
-            // Stop keydown from scrolling window
-            event.preventDefault();
+            event.preventDefault(); // Stop keydown from scrolling window
+          } else if (
+            openWhenStartsTyping &&
+            !event.nativeEvent.isComposing &&
+            !event.ctrlKey &&
+            !event.metaKey &&
+            !event.altKey &&
+            event.key.length === 1 &&
+            event.key !== " "
+          ) {
+            rootContext.setOpen(true); // Open when you start writing
           }
         }}
         data-readonly={readOnly}
-        aria-readonly={readOnly} // TODO: Vurder
         disabled={rootContext.disabled}
         {...rest}
       >

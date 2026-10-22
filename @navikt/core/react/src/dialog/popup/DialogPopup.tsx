@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useModalContext } from "../../modal/Modal.context";
+import { useModalContext } from "../../modal/root/ModalRoot.context";
 import { Portal, type PortalProps } from "../../portal";
 import { DialogBackdropInternal } from "../backdrop/DialogBackdropInternal";
 import { useDialogContext } from "../root/DialogRoot.context";

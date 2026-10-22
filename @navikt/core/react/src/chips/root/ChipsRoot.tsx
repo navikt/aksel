@@ -1,7 +1,10 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../utils/helpers";
-import { ChipsRemovable } from "../removable/ChipsRemovable";
-import { ChipsToggle } from "../toggle/ChipsToggle";
+import {
+  ChipsRemovable,
+  type ChipsRemovableProps,
+} from "../removable/ChipsRemovable";
+import { ChipsToggle, type ChipsToggleProps } from "../toggle/ChipsToggle";
 
 interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -12,22 +15,24 @@ interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   size?: "medium" | "small";
 }
 
-interface ChipsComponent extends React.ForwardRefExoticComponent<
-  ChipsProps & React.RefAttributes<HTMLUListElement>
-> {
-  /**
-   * Toggle between selected-states.
-   * @see 🏷️ {@link ToggleChipsProps}
-   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
-   */
-  Toggle: typeof ChipsToggle;
-  /**
-   * Remove filter or the likes on click.
-   * @see 🏷️ {@link RemovableChipsProps}
-   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
-   */
-  Removable: typeof ChipsRemovable;
-}
+const ChipsRoot = forwardRef<HTMLUListElement, ChipsProps>(
+  ({ className, size = "medium", children, ...rest }, ref) => {
+    return (
+      <ul
+        {...rest}
+        ref={ref}
+        className={cl("aksel-chips", className, `aksel-chips--${size}`, {
+          "aksel-body-short aksel-body-short--small": size === "medium",
+          "aksel-detail aksel-detail--small": size === "small",
+        })}
+      >
+        {React.Children.map(children, (chip, index) => {
+          return <li key={chip?.toString() || index}>{chip}</li>;
+        })}
+      </ul>
+    );
+  },
+);
 
 /**
  * A component that displays a list of items as chips.
@@ -56,27 +61,20 @@ interface ChipsComponent extends React.ForwardRefExoticComponent<
  *    </Chips>
  * ```
  */
-export const Chips = forwardRef<HTMLUListElement, ChipsProps>(
-  ({ className, size = "medium", children, ...rest }, ref) => {
-    return (
-      <ul
-        {...rest}
-        ref={ref}
-        className={cl("aksel-chips", className, `aksel-chips--${size}`, {
-          "aksel-body-short aksel-body-short--small": size === "medium",
-          "aksel-detail aksel-detail--small": size === "small",
-        })}
-      >
-        {React.Children.map(children, (chip, index) => {
-          return <li key={chip?.toString() || index}>{chip}</li>;
-        })}
-      </ul>
-    );
-  },
-) as ChipsComponent;
+const Chips = Object.assign(ChipsRoot, {
+  /**
+   * Toggle between selected-states.
+   * @see 🏷️ {@link ChipsToggleProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Toggle: ChipsToggle,
+  /**
+   * Remove filter or the likes on click.
+   * @see 🏷️ {@link ChipsRemovableProps}
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   */
+  Removable: ChipsRemovable,
+});
 
-Chips.Toggle = ChipsToggle;
-Chips.Removable = ChipsRemovable;
-
-export default Chips;
-export type { ChipsProps };
+export { Chips, ChipsRemovable, ChipsToggle };
+export type { ChipsProps, ChipsRemovableProps, ChipsToggleProps };
