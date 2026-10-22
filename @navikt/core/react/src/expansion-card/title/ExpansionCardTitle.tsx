@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import type { OverridableComponent } from "../utils-external";
-import { cl } from "../utils/helpers";
+import type { OverridableComponent } from "../../utils-external";
+import { cl } from "../../utils/helpers";
 
-export interface ExpansionCardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface ExpansionCardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   /**
    * Changes text-sizing
@@ -11,7 +11,7 @@ export interface ExpansionCardTitleProps extends React.HTMLAttributes<HTMLHeadin
   size?: "large" | "medium" | "small";
 }
 
-export const ExpansionCardTitle: OverridableComponent<
+const ExpansionCardTitle: OverridableComponent<
   ExpansionCardTitleProps,
   HTMLHeadingElement
 > = forwardRef(
@@ -32,4 +32,5 @@ export const ExpansionCardTitle: OverridableComponent<
   },
 );
 
-export default ExpansionCardTitle;
+export { ExpansionCardTitle };
+export type { ExpansionCardTitleProps };

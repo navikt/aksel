@@ -1,3 +1,3 @@
 "use client";
-export { default as List, ListItem } from "./List";
-export type { ListProps, ListItemProps } from "./List";
+export { List, ListItem } from "./root/ListRoot";
+export type { ListProps, ListItemProps } from "./root/ListRoot";

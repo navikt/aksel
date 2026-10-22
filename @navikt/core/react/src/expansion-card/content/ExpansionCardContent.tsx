@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext } from "react";
-import { useThemeInternal } from "../theme/Theme";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { ExpansionCardContext } from "./context";
+import { useThemeInternal } from "../../theme/Theme";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { ExpansionCardContext } from "../root/ExpansionCardRoot.context";
 
-export interface ExpansionCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ExpansionCardContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -44,4 +44,5 @@ const ExpansionCardContent = forwardRef<
   );
 });
 
-export default ExpansionCardContent;
+export { ExpansionCardContent };
+export type { ExpansionCardContentProps };

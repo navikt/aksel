@@ -1,13 +1,13 @@
 import React, { forwardRef, useContext } from "react";
-import { BodyLong } from "../typography";
-import { cl } from "../utils/helpers";
-import { ExpansionCardContext } from "./context";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { ExpansionCardContext } from "../root/ExpansionCardRoot.context";
 
-export interface ExpansionCardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface ExpansionCardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
   children: React.ReactNode;
 }
 
-export const ExpansionCardDescription = forwardRef<
+const ExpansionCardDescription = forwardRef<
   HTMLParagraphElement,
   ExpansionCardDescriptionProps
 >(({ className, ...rest }, ref) => {
@@ -31,4 +31,5 @@ export const ExpansionCardDescription = forwardRef<
   );
 });
 
-export default ExpansionCardDescription;
+export { ExpansionCardDescription };
+export type { ExpansionCardDescriptionProps };
