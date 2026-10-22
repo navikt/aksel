@@ -9,7 +9,7 @@ interface TimelineContextProps {
   setEndInclusive: (d: Date) => void;
 }
 
-export const TimelineContext = createContext<TimelineContextProps>({
+const TimelineContext = createContext<TimelineContextProps>({
   startDate: new Date(),
   endDate: new Date(),
   direction: "left",
@@ -17,7 +17,7 @@ export const TimelineContext = createContext<TimelineContextProps>({
   setEndInclusive: () => null,
 });
 
-export const useTimelineContext = () => {
+const useTimelineContext = () => {
   const context = useContext(TimelineContext);
 
   if (!context) {
@@ -28,3 +28,5 @@ export const useTimelineContext = () => {
 
   return context;
 };
+
+export { TimelineContext, useTimelineContext };

@@ -92,7 +92,7 @@ const trimmedPeriods = (period: PositionedPeriod) => {
   };
 };
 
-export const useTimelineRows = (
+const useTimelineRows = (
   rows: any,
   startDate: Date,
   endDate: Date,
@@ -134,7 +134,7 @@ export const useTimelineRows = (
     [rows, startDate, endDate, direction],
   );
 
-export const useEarliestDate = ({
+const useEarliestDate = ({
   startDate,
   rows,
 }: {
@@ -168,8 +168,10 @@ const latestDate = (latest: Date, period: Period) =>
 const latestTomDate = (rows: Period[][]) =>
   rows.flat().reduce(latestDate, new Date(0));
 
-export const useLatestDate = ({ endDate, rows }: any) =>
+const useLatestDate = ({ endDate, rows }: any) =>
   useMemo(
     () => (endDate ? endDate : addDays(latestTomDate(rows), 1)),
     [endDate, rows],
   );
+
+export { useTimelineRows, useEarliestDate, useLatestDate };

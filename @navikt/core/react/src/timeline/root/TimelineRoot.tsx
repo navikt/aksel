@@ -1,23 +1,30 @@
 import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
-import { consoleWarning } from "../utils/helpers/consoleWarning";
-import { AxisLabels } from "./AxisLabels";
-import TimelineRow, { type TimelineRowType } from "./TimelineRow";
-import { TimelineKeyboardNavProvider } from "./hooks/TimelineKeyboardNavProvider";
-import { RowContext } from "./hooks/useRowContext";
-import { TimelineContext } from "./hooks/useTimelineContext";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { TimelineAxisLabelsInternal } from "../axis-labels/TimelineAxisLabelsInternal";
+import {
+  TimelinePeriod,
+  type TimelinePeriodProps,
+} from "../period/TimelinePeriod";
+import { TimelinePin, type TimelinePinProps } from "../pin/TimelinePin";
+import { TimelineRow, type TimelineRowProps } from "../row/TimelineRow";
+import { RowContext } from "../row/TimelineRow.context";
+import { parseRows } from "../utils/timeline";
+import type { AxisLabelTemplates } from "../utils/types.external";
+import {
+  TimelineZoomButton,
+  type TimelineZoomButtonProps,
+} from "../zoom-button/TimelineZoomButton";
+import { TimelineZoom, type TimelineZoomProps } from "../zoom/TimelineZoom";
+import { TimelineKeyboardNavProvider } from "./TimelineKeyboardNavProvider";
+import { TimelineContext } from "./TimelineRoot.context";
 import {
   useEarliestDate,
   useLatestDate,
   useTimelineRows,
-} from "./hooks/useTimelineRows";
-import Period, { type PeriodType } from "./period";
-import Pin, { type PinType } from "./pin/Pin";
-import { parseRows } from "./utils/timeline";
-import type { AxisLabelTemplates } from "./utils/types.external";
-import Zoom, { type ZoomType } from "./zoom";
+} from "./useTimelineRows";
 
-export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Decides startingpoint in timeline.
@@ -46,45 +53,7 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   axisLabelTemplates?: AxisLabelTemplates;
 }
 
-interface TimelineComponent extends React.ForwardRefExoticComponent<TimelineProps> {
-  /**
-   * @see 🏷️ {@link TimelineRowType}
-   */
-  Row: TimelineRowType;
-  /**
-   * @see 🏷️ {@link PeriodType}
-   */
-  Period: PeriodType;
-  /**
-   * @see 🏷️ {@link PinType}
-   */
-  Pin: PinType;
-  /**
-   * @see 🏷️ {@link ZoomType}
-   */
-  Zoom: ZoomType;
-}
-
-/**
- * A component that displays a timeline of events. Meant for Internal systems.
- *
- * Component is made for desktop enviroments and will start having issues on smaller screens.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/timeline)
- * @see 🏷️ {@link TimelineProps}
- *
- * @example
- * ```jsx
- * <Timeline>
- *   <Timeline.Row>
- *    <Timeline.Period start={new Date("2020-01-01")} end={new Date("2020-01-31")}>
- *    <p>Period 1</p>
- *   </Timeline.Period>
- *  <Timeline.Row>
- * </Timeline>
- * ```
- */
-export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
+const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
   (
     {
       children,
@@ -186,7 +155,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         <TimelineKeyboardNavProvider>
           <div {...rest} ref={forwardedRef}>
             <div className="aksel-timeline">
-              <AxisLabels templates={axisLabelTemplates} />
+              <TimelineAxisLabelsInternal templates={axisLabelTemplates} />
 
               {pins.map(({ key, PinChild }) => (
                 <PinChild key={key} />
@@ -219,11 +188,58 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       </TimelineContext.Provider>
     );
   },
-) as TimelineComponent;
+);
 
-Timeline.Row = TimelineRow;
-Timeline.Period = Period;
-Timeline.Pin = Pin;
-Timeline.Zoom = Zoom;
+/**
+ * A component that displays a timeline of events. Meant for Internal systems.
+ *
+ * Component is made for desktop enviroments and will start having issues on smaller screens.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/timeline)
+ * @see 🏷️ {@link TimelineProps}
+ *
+ * @example
+ * ```jsx
+ * <Timeline>
+ *   <Timeline.Row>
+ *    <Timeline.Period start={new Date("2020-01-01")} end={new Date("2020-01-31")}>
+ *    <p>Period 1</p>
+ *   </Timeline.Period>
+ *  <Timeline.Row>
+ * </Timeline>
+ * ```
+ */
+const Timeline = Object.assign(TimelineRoot, {
+  /**
+   * @see 🏷️ {@link TimelineRowProps}
+   */
+  Row: TimelineRow,
+  /**
+   * @see 🏷️ {@link TimelinePeriodProps}
+   */
+  Period: TimelinePeriod,
+  /**
+   * @see 🏷️ {@link TimelinePinProps}
+   */
+  Pin: TimelinePin,
+  /**
+   * @see 🏷️ {@link TimelineZoomProps}
+   */
+  Zoom: TimelineZoom,
+});
 
-export default Timeline;
+export {
+  Timeline,
+  TimelinePeriod,
+  TimelinePin,
+  TimelineRow,
+  TimelineZoomButton,
+};
+export type {
+  TimelinePeriodProps,
+  TimelinePinProps,
+  TimelineProps,
+  TimelineRowProps,
+  TimelineZoomButtonProps,
+  TimelineZoomProps,
+};

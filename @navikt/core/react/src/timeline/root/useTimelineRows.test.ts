@@ -5,7 +5,7 @@ import {
   useEarliestDate,
   useLatestDate,
   useTimelineRows,
-} from "../hooks/useTimelineRows";
+} from "./useTimelineRows";
 
 describe("useEarliestDate", () => {
   test("returns the provided startDate if it exists", () => {

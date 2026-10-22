@@ -6,11 +6,11 @@ interface PeriodContextProps {
   restProps?: any;
 }
 
-export const PeriodContext = createContext<PeriodContextProps>({
+const PeriodContext = createContext<PeriodContextProps>({
   periodId: "",
 });
 
-export const usePeriodContext = () => {
+const usePeriodContext = () => {
   const context = useContext(PeriodContext);
 
   if (!context) {
@@ -21,3 +21,5 @@ export const usePeriodContext = () => {
 
   return context;
 };
+
+export { PeriodContext, usePeriodContext };
