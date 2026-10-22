@@ -1,5 +1,5 @@
 import { expectTypeOf } from "vitest";
-import type { ModalProps } from "./types";
+import type { ModalProps } from "./Modal.types";
 
 test("ModalProps works as intended", () => {
   expectTypeOf({

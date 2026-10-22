@@ -9,14 +9,17 @@ import {
   useFloating,
 } from "@floating-ui/react";
 import React, { type HTMLAttributes, forwardRef } from "react";
-import { useModalContext } from "../modal/Modal.context";
-import { omit, useClientLayoutEffect } from "../utils-external";
-import { DismissableLayer } from "../utils/components/dismissablelayer/DismissableLayer";
-import { cl } from "../utils/helpers";
-import { useMergeRefs } from "../utils/hooks";
-import PopoverContent, { type PopoverContentType } from "./PopoverContent";
+import { useModalContext } from "../../modal/root/ModalRoot.context";
+import { omit, useClientLayoutEffect } from "../../utils-external";
+import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
+import { cl } from "../../utils/helpers";
+import { useMergeRefs } from "../../utils/hooks";
+import {
+  PopoverContent,
+  type PopoverContentProps,
+} from "../content/PopoverContent";
 
-export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
+interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Popover content
    */
@@ -74,33 +77,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   flip?: boolean;
 }
 
-interface PopoverComponent extends React.ForwardRefExoticComponent<
-  PopoverProps & React.RefAttributes<HTMLDivElement>
-> {
-  Content: PopoverContentType;
-}
-
-/**
- * A component that displays a popover.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/popover)
- * @see 🏷️ {@link PopoverProps}
- *
- * @example
- * ```jsx
- * <Button ref={buttonRef} onClick={() => setOpenState(true)}>
- *   Åpne popover
- * </Button>
- * <Popover
- *   open={openState}
- *   onClose={() => setOpenState(false)}
- *   anchorEl={buttonRef.current}
- * >
- *   <Popover.Content>Innhold her!</Popover.Content>
- * </Popover>
- * ```
- */
-export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+const PopoverRoot = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       className,
@@ -186,7 +163,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       </DismissableLayer>
     );
   },
-) as PopoverComponent;
+);
 
 const oppositeSideMap: Record<Side, Side> = {
   top: "bottom",
@@ -214,6 +191,32 @@ function getOppositePlacement(placement: Placement): Placement[] {
   return [alignment ? `${oppositeSide}-${alignment}` : oppositeSide];
 }
 
-Popover.Content = PopoverContent;
+/**
+ * A component that displays a popover.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/popover)
+ * @see 🏷️ {@link PopoverProps}
+ *
+ * @example
+ * ```jsx
+ * <Button ref={buttonRef} onClick={() => setOpenState(true)}>
+ *   Åpne popover
+ * </Button>
+ * <Popover
+ *   open={openState}
+ *   onClose={() => setOpenState(false)}
+ *   anchorEl={buttonRef.current}
+ * >
+ *   <Popover.Content>Innhold her!</Popover.Content>
+ * </Popover>
+ * ```
+ */
+const Popover = Object.assign(PopoverRoot, {
+  /**
+   * @see 🏷️ {@link PopoverContentProps}
+   */
+  Content: PopoverContent,
+});
 
-export default Popover;
+export { Popover, PopoverContent };
+export type { PopoverProps, PopoverContentProps };

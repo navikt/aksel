@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { Button } from "../button";
-import { cl } from "../utils/helpers";
-import { useI18n } from "../utils/i18n/i18n.hooks";
-import { useModalContext } from "./Modal.context";
+import { Button } from "../../button";
+import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { useModalContext } from "../root/ModalRoot.context";
 
-export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /**
    * Removes close-button (X) when false
@@ -43,4 +43,5 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   },
 );
 
-export default ModalHeader;
+export { ModalHeader };
+export type { ModalHeaderProps };

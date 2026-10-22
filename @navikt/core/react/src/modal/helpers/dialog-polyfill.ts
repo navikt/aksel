@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-export const needPolyfill =
+const needPolyfill =
   typeof window !== "undefined" &&
   (window.HTMLDialogElement === undefined ||
     navigator.userAgent.includes("jsdom"));
@@ -503,7 +503,10 @@ dialogPolyfillInfo.prototype = /** @type {HTMLDialogElement.prototype} */ {
   },
 };
 
-var dialogPolyfill = {};
+var dialogPolyfill = {} as {
+  registerDialog(dialog: HTMLDialogElement): void;
+  forceRegisterDialog(dialog: HTMLDialogElement): void;
+};
 
 dialogPolyfill.reposition = function (element) {
   var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -947,7 +950,4 @@ if (needPolyfill) {
   HTMLFormElement.prototype.submit = replacementFormSubmit;
 }
 
-export default dialogPolyfill as {
-  registerDialog(dialog: HTMLDialogElement): void;
-  forceRegisterDialog(dialog: HTMLDialogElement): void;
-};
+export { dialogPolyfill, needPolyfill };

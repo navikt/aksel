@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
-import { cl } from "../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-export interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
+interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export type PopoverContentType = React.ForwardRefExoticComponent<
+type PopoverContentType = React.ForwardRefExoticComponent<
   PopoverContentProps & React.RefAttributes<HTMLDivElement>
 >;
 
@@ -21,4 +21,5 @@ const PopoverContent: PopoverContentType = forwardRef(
   },
 );
 
-export default PopoverContent;
+export { PopoverContent };
+export type { PopoverContentProps, PopoverContentType };

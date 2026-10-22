@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React, { useState } from "react";
 import { describe, expect, test } from "vitest";
-import { Button, Modal } from "..";
+import { Button } from "../../button";
+import { Modal } from "../index";
 
 const Test = () => {
   const [open, setOpen] = useState(true);

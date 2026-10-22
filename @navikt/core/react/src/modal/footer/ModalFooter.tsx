@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { cl } from "../utils/helpers";
+import { cl } from "../../utils/helpers";
 
-export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -17,4 +17,5 @@ const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
   },
 );
 
-export default ModalFooter;
+export { ModalFooter };
+export type { ModalFooterProps };
