@@ -4,11 +4,14 @@ import {
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
-import { consoleWarning } from "../utils/helpers/consoleWarning";
-import HeaderCell, { type HeaderCellProps } from "./HeaderCell";
-import { TableContext } from "./context";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import {
+  type HeaderCellProps,
+  TableHeaderCell,
+} from "../header-cell/TableHeaderCell";
+import { TableContext } from "../root/TableRoot.context";
 
-export interface ColumnHeaderProps extends HeaderCellProps {
+interface ColumnHeaderProps extends HeaderCellProps {
   /**
    * Key to sort by
    */
@@ -20,11 +23,7 @@ export interface ColumnHeaderProps extends HeaderCellProps {
   sortable?: boolean;
 }
 
-export type ColumnHeaderType = React.ForwardRefExoticComponent<
-  ColumnHeaderProps & React.RefAttributes<HTMLTableCellElement>
->;
-
-export const ColumnHeader: ColumnHeaderType = forwardRef(
+const TableColumnHeader = forwardRef<HTMLTableCellElement, ColumnHeaderProps>(
   ({ children, sortable = false, sortKey, ...rest }, ref) => {
     const context = useContext(TableContext);
 
@@ -33,7 +32,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
     }
 
     return (
-      <HeaderCell
+      <TableHeaderCell
         scope="col"
         ref={ref}
         aria-sort={
@@ -70,9 +69,10 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
         ) : (
           children
         )}
-      </HeaderCell>
+      </TableHeaderCell>
     );
   },
 );
 
-export default ColumnHeader;
+export { TableColumnHeader };
+export type { ColumnHeaderProps };

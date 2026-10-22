@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { BodyShort } from "../typography";
-import { cl } from "../utils/helpers";
+import { BodyShort } from "../../typography";
+import { cl } from "../../utils/helpers";
 
-export interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
    * Content alignment inside cell
    * @default "left"
@@ -14,7 +14,7 @@ export interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellEleme
   textSize?: "medium" | "small";
 }
 
-export const DataCell = forwardRef<HTMLTableCellElement, DataCellProps>(
+const TableDataCell = forwardRef<HTMLTableCellElement, DataCellProps>(
   ({ className, children = "", align, textSize, ...rest }, ref) => {
     return (
       <BodyShort
@@ -32,4 +32,5 @@ export const DataCell = forwardRef<HTMLTableCellElement, DataCellProps>(
   },
 );
 
-export default DataCell;
+export { TableDataCell };
+export type { DataCellProps };
