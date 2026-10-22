@@ -87,7 +87,8 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
               return;
             }
             // No nextOption: Assume you pressed up on first option or down on last option
-            if (document.activeElement?.tagName === "INPUT") {
+            const activeElement = document.activeElement as HTMLElement;
+            if (activeElement.dataset?.akselListboxInput) {
               setVirtuallyFocusedOptionId("");
               return;
             }
