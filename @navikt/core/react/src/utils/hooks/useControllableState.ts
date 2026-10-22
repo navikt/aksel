@@ -27,8 +27,7 @@ export function useControllableState<StateT, ChangeT extends StateT = StateT>({
 
   const setValue = useEventCallback(
     (next: ChangeT | ((prevState: StateT) => ChangeT)) => {
-      const setter = next as (prevState?: StateT) => ChangeT;
-      const nextValue = typeof next === "function" ? setter(value) : next;
+      const nextValue = isFunction(next) ? next(value) : next;
 
       if (!controlled) {
         setUncontrolledState(nextValue);
@@ -40,3 +39,5 @@ export function useControllableState<StateT, ChangeT extends StateT = StateT>({
 
   return [value, setValue] as const;
 }
+
+const isFunction = (value: unknown) => typeof value === "function";
