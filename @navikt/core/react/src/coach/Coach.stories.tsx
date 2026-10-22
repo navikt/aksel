@@ -1,8 +1,18 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
+import {
+  EnvelopeClosedIcon,
+  EnvelopeOpenIcon,
+  PaperplaneIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { Chips } from "../chips";
+import { ExpansionCard } from "../expansion-card";
+import { GuidePanel } from "../guide-panel";
+import { InfoCard } from "../info-card";
 import { HStack, VStack } from "../primitives/stack";
 import { Provider } from "../provider";
+import { ToggleGroup } from "../toggle-group";
 import { en } from "../utils/i18n/locales";
 import { Coach, type CoachMark } from "./root/CoachRoot";
 
@@ -14,7 +24,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: "500px", minHeight: "5000px" }}>
+      <div style={{ minHeight: "5000px" }}>
         <Story />
       </div>
     ),
@@ -131,7 +141,6 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             id: "step-2",
             type: "anchor",
             size: "small",
-            allowToEndTour: true,
             anchorRef: dashboardRef,
             title: "Dashboard",
             description: "This tour takes 30 seconds.",
@@ -151,12 +160,12 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             width: "small",
             title: "Settings",
             description: "This tour takes 30 seconds.",
-            image: (
+            /*image: (
               <img
                 src="https://i.pinimg.com/originals/b3/ee/c0/b3eec03459b57860fe1f898b7584683b.jpg"
                 alt="Settings overview"
               />
-            ),
+            ),*/
           },
         ]}
       />
@@ -238,6 +247,9 @@ export const RenderStep: StoryFn<typeof CoachMark> = () => {
               <Coach.Progress />
               <Coach.Description>{step.description}</Coach.Description>
               <Coach.Footer>
+                <Coach.PreviousTrigger>
+                  <Button variant="secondary">Forrige</Button>
+                </Coach.PreviousTrigger>
                 <Coach.CloseTrigger>
                   <Button>Lukk</Button>
                 </Coach.CloseTrigger>
@@ -270,23 +282,141 @@ export const RenderStep: StoryFn<typeof CoachMark> = () => {
   );
 };
 
-export const Mark: StoryFn<typeof CoachMark> = () => {
-  return (
-    <VStack padding="space-40" gap="space-64">
-      <Coach.Mark onClick={() => console.log("Coach dot clicked")}>
-        <Button onClick={() => console.log("Button clicked")}>Button</Button>
-      </Coach.Mark>
-      <HStack gap="space-16" align="center">
+export const Mark: StoryObj<typeof CoachMark> = {
+  render: (props) => {
+    const [selected, setSelected] = useState(["Nittedal", "Arendal"]);
+    const options = [
+      "Lillehammer",
+      "Nittedal",
+      "Enebakk",
+      "Hamar",
+      "Arendal",
+      "Gjøvik",
+    ];
+
+    return (
+      <VStack padding="space-40" gap="space-64">
         <Coach.Mark
-          data-color="success"
           onClick={() => console.log("Coach dot clicked")}
-        />
-      </HStack>
-    </VStack>
-  );
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <ToggleGroup defaultValue="lest" onChange={console.info}>
+            <ToggleGroup.Item
+              value="ulest"
+              icon={<EnvelopeClosedIcon aria-hidden />}
+              label="Ulest"
+            />
+            <ToggleGroup.Item
+              value="lest"
+              icon={<EnvelopeOpenIcon aria-hidden />}
+              label="Lest"
+            />
+            <ToggleGroup.Item
+              value="sendt"
+              icon={<PaperplaneIcon aria-hidden />}
+              label="Sendt"
+            />
+          </ToggleGroup>
+        </Coach.Mark>
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <Button onClick={() => console.log("Button clicked")}>
+            Click me
+          </Button>
+        </Coach.Mark>
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <Chips>
+            {options.map((option) => (
+              <Chips.Toggle
+                key={option}
+                selected={selected.includes(option)}
+                onClick={() =>
+                  setSelected(
+                    selected.includes(option)
+                      ? selected.filter((x) => x !== option)
+                      : [...selected, option],
+                  )
+                }
+              >
+                {option}
+              </Chips.Toggle>
+            ))}
+          </Chips>
+        </Coach.Mark>
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <GuidePanel>
+            Saksbehandlingstiden varierer fra kommune til kommune. Hvis det går
+            mer enn X måneder siden du søkte, skal du få brev om at
+            saksbehandlingstiden er forlenget.
+          </GuidePanel>
+        </Coach.Mark>
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <ExpansionCard aria-label="Demo med bare tittel">
+            <ExpansionCard.Header>
+              <ExpansionCard.Title>
+                Utbetaling av sykepenger
+              </ExpansionCard.Title>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>
+              <p>Her er innholdet i ekspansjonskortet.</p>
+            </ExpansionCard.Content>
+          </ExpansionCard>
+        </Coach.Mark>
+        <Coach.Mark
+          onClick={() => console.log("Coach dot clicked")}
+          placement={props.placement}
+          offset={props.offset}
+        >
+          <InfoCard data-color="info">
+            <InfoCard.Header>
+              <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
+            </InfoCard.Header>
+            <InfoCard.Content>
+              InfoCard brukes for å fremheve informasjon på en side, uten at det
+              er like kritisk som en alert.
+            </InfoCard.Content>
+          </InfoCard>
+        </Coach.Mark>
+        <HStack gap="space-16" align="center">
+          <Coach.Mark
+            data-color="success"
+            onClick={() => console.log("Coach dot clicked")}
+          />
+        </HStack>
+      </VStack>
+    );
+  },
+  args: {
+    placement: "top-end",
+    offset: "space-16",
+  },
+  argTypes: {
+    placement: {
+      options: ["top-start", "top-end", "bottom-start", "bottom-end"],
+      control: {
+        type: "select",
+      },
+    },
+  },
 };
 
-export const ProgressTranslations: StoryFn<typeof Coach> = () => {
+export const Translations: StoryFn<typeof Coach> = () => {
   const translations = {
     Coach: {
       currentStep: "{current}/{total}",
@@ -305,13 +435,13 @@ export const ProgressTranslations: StoryFn<typeof Coach> = () => {
             id: "progress_translation",
             type: "dialog",
             title: "Progress Translations",
-            description: "This step demonstrates progress translations.",
+            description: "This step demonstrates translations.",
           },
           {
             id: "progress_translation_2",
             type: "dialog",
             title: "Translation Test",
-            description: "See the progress translation above.",
+            description: "See the translation above and on the buttons.",
           },
         ]}
       />
