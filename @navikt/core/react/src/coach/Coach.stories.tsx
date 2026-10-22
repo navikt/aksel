@@ -13,6 +13,7 @@ import { InfoCard } from "../info-card";
 import { HStack, VStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import { ToggleGroup } from "../toggle-group";
+import { BodyShort } from "../typography";
 import { en } from "../utils/i18n/locales";
 import { Coach, type CoachMark } from "./root/CoachRoot";
 
@@ -491,9 +492,7 @@ export const SingleStepCustomChildren: StoryFn<typeof Coach> = () => {
           <Coach.Step>
             <Coach.Title>{title}</Coach.Title>
             <Coach.Description>{description}</Coach.Description>
-            <p style={{ margin: "var(--ax-space-8) 0" }}>
-              Egendefinert innhold her!
-            </p>
+            <BodyShort>Egendefinert innhold her!</BodyShort>
             <Coach.Footer>
               <Coach.CloseTrigger>
                 <Button size="medium" variant="primary">
