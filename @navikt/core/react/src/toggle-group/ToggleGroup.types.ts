@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../types";
 
-export interface ToggleGroupProps extends Omit<
+interface ToggleGroupProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "onChange" | "dir"
 > {
@@ -14,7 +14,7 @@ export interface ToggleGroupProps extends Omit<
    * Changes padding and font-size.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   /**
    * Controlled selected value.
    */
@@ -49,3 +49,5 @@ export interface ToggleGroupProps extends Omit<
    */
   fill?: boolean;
 }
+
+export type { ToggleGroupProps };

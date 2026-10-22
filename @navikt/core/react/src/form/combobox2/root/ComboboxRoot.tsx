@@ -4,6 +4,26 @@ import { cl, createStrictContext } from "../../../utils/helpers";
 import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
+type HtmlAttributes = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  | "onChange"
+  | "defaultChecked"
+  | "autoCapitalize"
+  | "contentEditable"
+  | "enterKeyHint"
+  | "spellCheck"
+  | "inputMode"
+  | "autoCorrect"
+  | "autoSave"
+  | "color"
+  | "results"
+  | "security"
+  | "unselectable"
+  | "popover"
+  | "popoverTargetAction"
+  | "popoverTarget"
+>;
+
 /** Resolves the option type based on whether the parameter is a group or a single option */
 export type ResolveOption<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -28,9 +48,7 @@ export interface ComboboxRootProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >
-  extends
-    Pick<FormFieldProps, "disabled">,
-    React.HTMLAttributes<HTMLDivElement> {
+  extends Pick<FormFieldProps, "disabled" | "size">, HtmlAttributes {
   children: React.ReactNode;
   /**
    * Can be either an array of options ({@link ComboboxOptionData})
@@ -40,14 +58,25 @@ export interface ComboboxRootProps<
    * put the single options first.
    */
   options: T[];
-  selectedOptions: ResolveOption<T>["value"][]; // TODO: Vurder navn: value(s)
-  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"];
-  defaultOpen?: boolean;
-  multiselect?: boolean; // TODO: Hva skal være default? Vurder navn
   /**
-   * @default "medium"
+   * Value of the selected options.
    */
-  size?: "small" | "medium";
+  value: ResolveOption<T>["value"][];
+  /**
+   * Called when an option is toggled.
+   * @param option The option that was toggled.
+   * @param isSelected The new selected state of the option.
+   */
+  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"];
+  /**
+   * Whether the combobox is open by default.
+   */
+  defaultOpen?: boolean;
+  /**
+   * Whether multiple options can be selected.
+   * @default true
+   */
+  multiple?: boolean; // TODO: Hva skal være default?
 }
 
 export interface ComboboxRootContextProps {
@@ -55,9 +84,9 @@ export interface ComboboxRootContextProps {
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
   options: ComboboxRootProps["options"];
-  selectedOptions: ComboboxRootProps["selectedOptions"];
+  value: ComboboxRootProps["value"];
   onToggleOption: ComboboxRootProps["onToggleOption"];
-  multiselect: boolean;
+  multiple: boolean;
   size: Exclude<ComboboxRootProps["size"], undefined>;
   disabled: ComboboxRootProps["disabled"];
 }
@@ -75,10 +104,10 @@ export function ComboboxRoot<
 >({
   children,
   options,
-  selectedOptions,
+  value,
   onToggleOption,
   defaultOpen = false,
-  multiselect = true,
+  multiple = true,
   size = "medium",
   disabled,
   className,
@@ -99,11 +128,11 @@ export function ComboboxRoot<
         setOpen={setOpen}
         triggerRef={triggerRef}
         options={options}
-        selectedOptions={selectedOptions}
+        value={value}
         onToggleOption={
           onToggleOption as ComboboxRootContextProps["onToggleOption"]
         }
-        multiselect={multiselect}
+        multiple={multiple}
         size={size}
         disabled={disabled}
       >

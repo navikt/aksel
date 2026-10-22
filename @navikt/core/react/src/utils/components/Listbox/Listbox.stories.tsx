@@ -2,6 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useCallback, useMemo, useState } from "react";
 import { Search } from "../../../form/search";
 import { Box } from "../../../primitives/box";
+import { BodyShort } from "../../../typography";
 import { useDeferredValue } from "../../hooks/useDeferredValue";
 import { HighlightText } from "../HighlightText/HighlightText";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
@@ -17,84 +18,95 @@ const meta: Meta<typeof Listbox> = {
 };
 export default meta;
 
-type MyItem = {
+type MyOption = {
   label: string;
-  value: `item-${number}`;
+  value: `opt-${number}`;
   metadata?: string;
 };
-const myItems: MyItem[] = [
-  { label: "Norway", value: "item-1", metadata: "foo1" },
-  { label: "Finland", value: "item-2" },
-  { label: "Sweden", value: "item-3", metadata: "foo3" },
-  { label: "Denmark", value: "item-4" },
-  { label: "Iceland", value: "item-5" },
-  { label: "Faroe Islands", value: "item-6" },
-  { label: "Åland Islands", value: "item-7" },
-  { label: "Estonia", value: "item-8" },
-  { label: "Latvia", value: "item-9" },
-  { label: "Lithuania", value: "item-10" },
+
+const nordicCountries: MyOption[] = [
+  { label: "Norge", value: "opt-1", metadata: "foo1" },
+  { label: "Finland", value: "opt-2" },
+  { label: "Sverige", value: "opt-3", metadata: "foo3" },
+  { label: "Danmark", value: "opt-4" },
+  { label: "Island", value: "opt-5" },
+  { label: "Grønland", value: "opt-6" },
+  { label: "Færøyene", value: "opt-7" },
+  { label: "Åland", value: "opt-8" },
 ];
+const centralEuropeanCountries: MyOption[] = [
+  { label: "Tyskland", value: "opt-9" },
+  { label: "Østerrike", value: "opt-10" },
+  { label: "Sveits", value: "opt-11" },
+  { label: "Liechtenstein", value: "opt-12" },
+  { label: "Polen", value: "opt-13" },
+  { label: "Tsjekkia", value: "opt-14" },
+  { label: "Slovakia", value: "opt-15" },
+  { label: "Ungarn", value: "opt-16" },
+  { label: "Slovenia", value: "opt-17" },
+];
+const countries: MyOption[] = [...nordicCountries, ...centralEuropeanCountries];
 
 type MyGroup = {
   label: string;
   id: `group-${number}`;
-  items: MyItem[];
+  options: MyOption[];
 };
-const groupedItems: (MyGroup | MyItem)[] = [
-  { label: "Single item first", value: "item-01" },
+
+const groupedCountries: (MyGroup | MyOption)[] = [
   {
-    label: "Nordic countries",
+    label: "Norden",
     id: "group-1",
-    items: myItems.slice(0, 6),
+    options: nordicCountries,
   },
   {
-    label: "Baltic countries",
+    label: "Sentral-Europa",
     id: "group-2",
-    items: myItems.slice(6),
+    options: centralEuropeanCountries,
   },
-  { label: "Single item last", value: "item-02" },
+  { label: "Annet (ikke gruppert)", value: "opt-01" },
 ];
 
-interface RenderItemsProps {
-  items: (MyGroup | MyItem)[];
-  selectedItems: MyItem["value"][];
+interface RenderOptionsProps {
+  options: (MyGroup | MyOption)[];
+  selectedOptions: MyOption["value"][];
   filterString: string;
   virtuallyFocusedOptionId: string;
-  onSelect: (item: MyItem) => void;
+  onSelect: (option: MyOption) => void;
 }
-const RenderItems = ({
-  items,
-  selectedItems,
+const RenderOptions = ({
+  options,
+  selectedOptions,
   filterString,
   virtuallyFocusedOptionId,
   onSelect,
-}: RenderItemsProps) =>
-  items.map((itemOrGroup) =>
-    "items" in itemOrGroup ? (
-      <Listbox.Group key={itemOrGroup.label} label={itemOrGroup.label}>
-        {itemOrGroup.items.map((item) => (
+}: RenderOptionsProps) =>
+  options.map((optionOrGroup) =>
+    "options" in optionOrGroup ? (
+      <Listbox.Group key={optionOrGroup.label} label={optionOrGroup.label}>
+        {optionOrGroup.options.map((option) => (
           <Listbox.Option
-            key={item.value}
-            id={item.value}
-            onClick={() => onSelect(item)}
-            aria-selected={selectedItems.includes(item.value)}
-            hasVirtualFocus={virtuallyFocusedOptionId === item.value}
+            key={option.value}
+            id={option.value}
+            onClick={() => onSelect(option)}
+            aria-selected={selectedOptions.includes(option.value)}
+            hasVirtualFocus={virtuallyFocusedOptionId === option.value}
           >
-            <HighlightText text={filterString}>{item.label}</HighlightText>
-            {selectedItems.includes(item.value) && <Checkmark />}
+            <HighlightText text={filterString}>{option.label}</HighlightText>
+            {selectedOptions.includes(option.value) && <Checkmark />}
           </Listbox.Option>
         ))}
       </Listbox.Group>
     ) : (
       <Listbox.Option
-        key={itemOrGroup.value}
-        id={itemOrGroup.value}
-        onClick={() => onSelect(itemOrGroup)}
-        aria-selected={selectedItems.includes(itemOrGroup.value)}
-        hasVirtualFocus={virtuallyFocusedOptionId === itemOrGroup.value}
+        key={optionOrGroup.value}
+        id={optionOrGroup.value}
+        onClick={() => onSelect(optionOrGroup)}
+        aria-selected={selectedOptions.includes(optionOrGroup.value)}
+        hasVirtualFocus={virtuallyFocusedOptionId === optionOrGroup.value}
       >
-        <HighlightText text={filterString}>{itemOrGroup.label}</HighlightText>
-        {selectedItems.includes(itemOrGroup.value) && <Checkmark />}
+        <HighlightText text={filterString}>{optionOrGroup.label}</HighlightText>
+        {selectedOptions.includes(optionOrGroup.value) && <Checkmark />}
       </Listbox.Option>
     ),
   );
@@ -102,23 +114,23 @@ const Checkmark = () => <div style={{ float: "right" }}>✓</div>;
 
 export const Default = () => {
   const [filterString, setFilterString] = useState("");
-  const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
-    null,
-  );
+  const [selectedOption, setSelectedOption] = useState<
+    MyOption["value"] | null
+  >(null);
   const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
 
-  const filteredItems = filterString
-    ? filterItems(groupedItems, filterString)
-    : groupedItems;
+  const filteredOptions = filterString
+    ? filterOptions(groupedCountries, filterString)
+    : groupedCountries;
 
-  const onSelect = (item: MyItem) => {
-    setSelectedItem(item.value);
-    console.log(item);
+  const onSelect = (option: MyOption) => {
+    setSelectedOption(option.value);
+    console.log(option);
   };
 
   return (
     <>
-      <div>Selected: {selectedItem}</div>
+      <div>Selected: {selectedOption}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
@@ -132,9 +144,9 @@ export const Default = () => {
         </Listbox.InputSlot>
 
         <Listbox.Options>
-          <RenderItems
-            items={filteredItems}
-            selectedItems={selectedItem ? [selectedItem] : []}
+          <RenderOptions
+            options={filteredOptions}
+            selectedOptions={selectedOption ? [selectedOption] : []}
             filterString={filterString}
             virtuallyFocusedOptionId={virtuallyFocusedOptionId}
             onSelect={onSelect}
@@ -152,14 +164,14 @@ interface OptimizedProps {
 export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
   const [filterString, setFilterString] = useState("");
   const deferredFilterString = useDeferredValue(filterString);
-  const [selectedItem, setSelectedItem] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
 
   const allOptions = useMemo(
     () =>
       Array.from(
         { length: count },
-        (_, i) => `Item ${String(i + 1).padStart(4, "0")}`,
+        (_, i) => `Option ${String(i + 1).padStart(4, "0")}`,
       ),
     [count],
   );
@@ -174,7 +186,7 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
 
   return (
     <>
-      <div>Selected: {selectedItem}</div>
+      <div>Selected: {selectedOption}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
@@ -194,9 +206,9 @@ export const Optimized: StoryFn<OptimizedProps> = ({ count, highlight }) => {
                 key={option}
                 value={option}
                 filterString={highlight ? deferredFilterString : ""}
-                isSelected={selectedItem === option}
+                isSelected={selectedOption === option}
                 hasVirtualFocus={virtuallyFocusedOptionId === option}
-                onSelect={setSelectedItem}
+                onSelect={setSelectedOption}
               />
             ))}
           </Listbox.Options>
@@ -246,26 +258,26 @@ const MyMemoizedOption = React.memo(
 
 export const WithFloating = () => {
   const [filterString, setFilterString] = useState("");
-  const [selectedItem, setSelectedItem] = useState<MyItem["value"] | null>(
-    null,
-  );
+  const [selectedOption, setSelectedOption] = useState<
+    MyOption["value"] | null
+  >(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
   const [open, setOpen] = useState(false);
 
-  const filteredItems = filterString
-    ? filterItems(groupedItems, filterString)
-    : groupedItems;
+  const filteredOptions = filterString
+    ? filterOptions(groupedCountries, filterString)
+    : groupedCountries;
 
-  const onSelect = (item: MyItem) => {
-    setSelectedItem(item.value);
+  const onSelect = (option: MyOption) => {
+    setSelectedOption(option.value);
     //setOpen(false);
-    console.log(item);
+    console.log(option);
   };
 
   return (
     <Floating>
-      <div>Selected: {selectedItem}</div>
+      <div>Selected: {selectedOption}</div>
 
       <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
         <Floating.Anchor>
@@ -304,9 +316,9 @@ export const WithFloating = () => {
                 width="var(--__axc-floating-anchor-width)"
               >
                 <Listbox.Options>
-                  <RenderItems
-                    items={filteredItems}
-                    selectedItems={selectedItem ? [selectedItem] : []}
+                  <RenderOptions
+                    options={filteredOptions}
+                    selectedOptions={selectedOption ? [selectedOption] : []}
                     filterString={filterString}
                     virtuallyFocusedOptionId={virtuallyFocusedOptionId}
                     onSelect={onSelect}
@@ -321,40 +333,145 @@ export const WithFloating = () => {
   );
 };
 
-type Item = {
+export const UseCaseTeamkatalogen = () => {
+  const [filterString, setFilterString] = useState("");
+  const [selectedOption, setSelectedOption] = useState<
+    MyOption["value"] | null
+  >(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const filteredOptions =
+    filterString.length > 2 ? filterOptions(countries, filterString) : null;
+
+  const onSelect = (option: MyOption) => {
+    setSelectedOption(option.value);
+    close();
+    console.log(option);
+  };
+
+  function close() {
+    setVirtuallyFocusedOptionId("");
+    setFilterString("");
+    setOpen(false);
+  }
+
+  return (
+    <div style={{ maxWidth: "500px" }}>
+      <Floating>
+        <BodyShort spacing>
+          Søkefelt der resultatene vises som alternativer i en listbox. Omtrent
+          som dagens Combobox, men der valg fører til navigering og ikke huskes
+          (i feltet).
+        </BodyShort>
+
+        <BodyShort spacing>Valgt: {selectedOption}</BodyShort>
+
+        <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+          <Floating.Anchor>
+            <Listbox.InputSlot
+              virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+            >
+              <Search
+                label="Søk etter team, seksjon, person eller tagg"
+                placeholder="Søk etter team, seksjon, person eller tagg"
+                variant="simple"
+                ref={inputRef}
+                value={filterString}
+                onChange={(newValue) => {
+                  setFilterString(newValue);
+                  if (!open && newValue.length > 2) {
+                    setOpen(true);
+                  }
+                }}
+                onClear={close}
+                onClick={() => setOpen(true)}
+                onFocus={() => setOpen(true)}
+              />
+            </Listbox.InputSlot>
+          </Floating.Anchor>
+          {open && (
+            <DismissableLayer
+              asChild
+              onDismiss={close}
+              safeZone={{ anchor: inputRef.current }}
+            >
+              <Floating.Content
+                align="start"
+                side="bottom"
+                fallbackPlacements={[]}
+                sideOffset={4}
+              >
+                <Box
+                  background="default"
+                  borderWidth="1"
+                  maxHeight="calc(var(--__axc-floating-available-height) - 4px)"
+                  width="var(--__axc-floating-anchor-width)"
+                >
+                  {filteredOptions && filteredOptions.length > 0 && (
+                    <Listbox.Options>
+                      <RenderOptions
+                        options={filteredOptions}
+                        selectedOptions={[]}
+                        filterString={filterString}
+                        virtuallyFocusedOptionId={virtuallyFocusedOptionId}
+                        onSelect={onSelect}
+                      />
+                    </Listbox.Options>
+                  )}
+                  {filteredOptions && filteredOptions.length === 0 && (
+                    <Box padding="space-20" role="status">
+                      Ingen resultater
+                    </Box>
+                  )}
+                  {!filteredOptions && (
+                    <Box padding="space-20">Skriv minst 3 tegn for å søke</Box>
+                  )}
+                </Box>
+              </Floating.Content>
+            </DismissableLayer>
+          )}
+        </Listbox>
+      </Floating>
+    </div>
+  );
+};
+
+type Option = {
   label: string;
   value: string;
 };
 
-type Group<T extends Item> = {
+type Group<T extends Option> = {
   label: string;
   id: string;
-  items: T[];
+  options: T[];
 };
 
-function filterItems<T extends (Item | Group<Item>)[]>(
-  items: T,
+function filterOptions<T extends (Option | Group<Option>)[]>(
+  options: T,
   filterString: string,
 ): T {
   const filterStringLowerCase = filterString.toLocaleLowerCase();
 
-  return items
-    .map((itemOrGroup) => {
-      if ("items" in itemOrGroup) {
-        const matchingItems = itemOrGroup.items.filter((item) =>
-          item.label.toLocaleLowerCase().includes(filterStringLowerCase),
+  return options
+    .map((optionOrGroup) => {
+      if ("options" in optionOrGroup) {
+        const matchingOptions = optionOrGroup.options.filter((option) =>
+          option.label.toLocaleLowerCase().includes(filterStringLowerCase),
         );
-        if (matchingItems.length > 0) {
-          return { ...itemOrGroup, items: matchingItems };
+        if (matchingOptions.length > 0) {
+          return { ...optionOrGroup, options: matchingOptions };
         }
         return null;
       }
       if (
-        itemOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
+        optionOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
       ) {
-        return itemOrGroup;
+        return optionOrGroup;
       }
       return null;
     })
-    .filter((item) => item !== null) as T;
+    .filter((option) => option !== null) as T;
 }

@@ -3,7 +3,7 @@ import { isSameDay } from "date-fns";
 import React, { useState } from "react";
 import { Button } from "../button";
 import { Dialog } from "../dialog";
-import Modal from "../modal/Modal";
+import { Modal } from "../modal";
 import { Box } from "../primitives/box";
 import { HGrid } from "../primitives/grid";
 import { HStack, Spacer, VStack } from "../primitives/stack";

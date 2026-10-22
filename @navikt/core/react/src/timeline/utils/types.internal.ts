@@ -1,18 +1,17 @@
 import React from "react";
 
-export type TimelineComponentTypes = "row" | "pin" | "period";
+type TimelineComponentTypes = "row" | "pin" | "period";
 
-export type PeriodStatus =
-  "success" | "warning" | "danger" | "info" | "neutral";
+type PeriodStatus = "success" | "warning" | "danger" | "info" | "neutral";
 
-export type Percentage = number;
+type Percentage = number;
 
-export interface Positioned {
+interface Positioned {
   horizontalPosition: number;
   direction: "left" | "right";
 }
 
-export interface Period {
+interface Period {
   id: string;
   start: Date;
   endInclusive: Date;
@@ -25,7 +24,7 @@ export interface Period {
   isActive?: boolean;
 }
 
-export interface PositionedPeriod extends Period, Positioned {
+interface PositionedPeriod extends Period, Positioned {
   width: number;
   active?: boolean;
   cropped?: "left" | "right" | "both";
@@ -39,16 +38,16 @@ export interface PositionedPeriod extends Period, Positioned {
   ref?: any;
 }
 
-export interface Spatial {
+interface Spatial {
   width: number;
 }
 
-export interface AxisLabel extends Positioned, Spatial {
+interface AxisLabel extends Positioned, Spatial {
   label: string;
   date: Date;
 }
 
-export interface InternalSimpleTimeline {
+interface InternalSimpleTimeline {
   label: string;
   id: string;
   periods: PositionedPeriod[];
@@ -58,7 +57,7 @@ export interface InternalSimpleTimeline {
   ref: any;
 }
 
-export interface SelectedPeriod {
+interface SelectedPeriod {
   /**
    * Start of the period.
    */
@@ -72,3 +71,16 @@ export interface SelectedPeriod {
    */
   id: string;
 }
+
+export type {
+  TimelineComponentTypes,
+  PeriodStatus,
+  Percentage,
+  Positioned,
+  Period,
+  PositionedPeriod,
+  Spatial,
+  AxisLabel,
+  InternalSimpleTimeline,
+  SelectedPeriod,
+};

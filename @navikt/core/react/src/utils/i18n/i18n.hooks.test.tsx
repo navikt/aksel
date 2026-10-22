@@ -110,6 +110,44 @@ describe("useI18n", () => {
     const translate = result.current;
     expect(() => translate("item.uploading", { other: "John" })).toThrowError();
   });
+
+  test("should use internal defaults without entries in the public locales", () => {
+    const { result } = renderHook(() => useI18n("TEST_DATA"), {
+      wrapper: ({ children }) => <Provider locale={en}>{children}</Provider>,
+    });
+
+    expect(result.current("label")).toBe("Internal grid");
+    expect(result.current("selected", { count: 3 })).toBe("3 rows selected");
+    /* @ts-expect-error Testing nonexistent key */
+    expect(() => result.current("nonexistentKey")).toThrowError();
+  });
+
+  test("should prioritize local internal translations and fall back to internal defaults", () => {
+    const { result } = renderHook(() =>
+      useI18n(
+        "TEST_DATA",
+        undefined,
+        { label: "First override" },
+        { label: "Second override" },
+      ),
+    );
+
+    expect(result.current("label")).toBe("First override");
+    expect(result.current("selected", { count: 2 })).toBe("2 rows selected");
+  });
+
+  test("should update internal overrides without changing the translate function", () => {
+    const { result, rerender } = renderHook(
+      ({ label }) => useI18n("TEST_DATA", { label }),
+      { initialProps: { label: "Initial label" } },
+    );
+    const translate = result.current;
+
+    rerender({ label: "Updated label" });
+
+    expect(result.current).toBe(translate);
+    expect(translate("label")).toBe("Updated label");
+  });
 });
 
 describe("useDateLocale", () => {

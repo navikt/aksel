@@ -11,8 +11,8 @@ import { VStack } from "../primitives/stack";
 import { Provider } from "../provider";
 import en from "../utils/i18n/locales/en";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import Timeline, { type TimelineProps } from "./Timeline";
-import type { PeriodProps } from "./period/types";
+import type { PeriodProps } from "./Timeline.types";
+import { Timeline, type TimelineProps } from "./index";
 
 export default {
   title: "ds-react/Timeline",

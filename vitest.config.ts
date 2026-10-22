@@ -23,7 +23,10 @@ export default defineConfig({
             enabled: true,
             headless: true,
             provider: playwright(),
-            instances: [{ browser: "firefox" }],
+            /* Firefox can't start inside the cplt sandbox used by Copilot CLI */
+            instances: [
+              { browser: process.env.COPILOT_CLI ? "chromium" : "firefox" },
+            ],
           },
         },
       },

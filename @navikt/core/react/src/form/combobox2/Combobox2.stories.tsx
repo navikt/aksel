@@ -3,8 +3,7 @@ import React, { useMemo, useState } from "react";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { HStack, VStack } from "../../primitives/stack";
-import { Select } from "../select";
-import { Combobox, type ComboboxProps } from "./Combobox";
+import { ComboboxMulti, ComboboxSingle } from "./Combobox";
 import { ComboboxField } from "./field/ComboboxField";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
 import { ComboboxLabel } from "./label/ComboboxLabel";
@@ -18,9 +17,9 @@ import {
 } from "./root/ComboboxRoot";
 import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 
-const meta: Meta<typeof Combobox> = {
+const meta: Meta<typeof ComboboxSingle> = {
   title: "ds-react/Combobox2",
-  component: Combobox,
+  component: ComboboxSingle,
   parameters: {
     chromatic: { disable: true },
   },
@@ -77,13 +76,12 @@ const groupedCountries: (MyGroup | MyOption)[] = [
 ];
 
 type DefaultProps = Pick<
-  ComboboxProps<MyOption>,
+  ComboboxSingle.Props<MyOption>,
   | "label"
   | "description"
   | "hideLabel"
   | "size"
   | "defaultOpen"
-  | "multiselect"
   | "id"
   | "readOnly"
   | "disabled"
@@ -91,14 +89,13 @@ type DefaultProps = Pick<
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  return <Combobox defaultOpen options={countries} {...props} />;
+  return <ComboboxSingle options={countries} {...props} />;
 };
 Default.args = {
   label: "Velg land",
   description: "Landet hvor du er født.",
   hideLabel: false,
   defaultOpen: false,
-  multiselect: false,
   readOnly: false,
   disabled: false,
   error: "",
@@ -113,17 +110,21 @@ Default.argTypes = {
   },
 };
 
+export const Multiselect = () => {
+  return <ComboboxMulti label="Velg land" options={countries} />;
+};
+Multiselect.storyName = "Multiselect (WIP)";
+
 function BasicCombobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
     MyOption,
->(props: Partial<ComboboxProps<T>>) {
+>(props: Partial<ComboboxSingle.Props<T>>) {
   return (
-    <Combobox
+    <ComboboxSingle
       options={countries as T[]}
-      defaultSelectedOptions={["opt-1"]}
+      defaultValue="opt-1"
       label="Velg land"
       description="Landet hvor du er født."
-      multiselect={false}
       {...props}
     />
   );
@@ -133,13 +134,13 @@ export const Small = () => <BasicCombobox size="small" error="Error" />;
 
 export const Hidelabel = () => <BasicCombobox hideLabel />;
 
-export const Readonly = () => <BasicCombobox readOnly />;
+export const Readonly = () => <BasicCombobox readOnly error="Test" />;
 
-export const Disabled = () => <BasicCombobox disabled />;
+export const Disabled = () => <BasicCombobox disabled error="Test" />;
 
 export const ErrorStory = () => (
   <VStack gap="space-16">
-    <BasicCombobox error="Du må velge et land." defaultSelectedOptions={[]} />
+    <BasicCombobox error="Du må velge et land." defaultValue={undefined} />
     <BasicCombobox error="Ugyldig land." />
   </VStack>
 );
@@ -148,10 +149,8 @@ ErrorStory.storyName = "Error";
 export const DefaultOpen = () => <BasicCombobox defaultOpen />;
 DefaultOpen.storyName = "DefaultOpen";
 
-export const DefaultSelectedOptions = () => (
-  <BasicCombobox defaultSelectedOptions={["opt-1"]} />
-);
-DefaultSelectedOptions.storyName = "DefaultSelectedOptions";
+export const DefaultValue = () => <BasicCombobox defaultValue="opt-1" />;
+DefaultValue.storyName = "DefaultValue";
 
 export const Name = () => (
   <form
@@ -169,50 +168,19 @@ export const Name = () => (
 );
 
 export const Controlled = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
+  const [value, setValue] = useState<MyOption["value"] | undefined>("opt-1");
 
   return (
     <VStack gap="space-8" minWidth="250px">
-      <Combobox
+      <ComboboxSingle
         options={countries}
-        selectedOptions={selectedOptions}
-        onToggleOption={(option, newSelected) => {
-          setSelectedOptions((prev) =>
-            newSelected
-              ? [...prev, option.value]
-              : prev.filter((v) => v !== option.value),
-          );
-        }}
+        value={value}
+        onChange={setValue}
         label="Velg land"
       />
-      Selected: {selectedOptions.join(", ")}
+      Selected: {value}
       <div>
-        <button type="button" onClick={() => setSelectedOptions([])}>
-          Clear
-        </button>
-      </div>
-    </VStack>
-  );
-};
-
-export const Controlled2 = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
-
-  return (
-    <VStack gap="space-8" minWidth="250px">
-      <Combobox
-        options={countries}
-        selectedOptions={selectedOptions}
-        onSelectedOptionsChange={setSelectedOptions}
-        label="Velg land"
-      />
-      Selected: {selectedOptions.join(", ")}
-      <div>
-        <button type="button" onClick={() => setSelectedOptions([])}>
+        <button type="button" onClick={() => setValue(undefined)}>
           Clear
         </button>
       </div>
@@ -243,7 +211,7 @@ export const ManyOptions: StoryFn<ManyOptionsProps> = ({ count }) => {
 
   return (
     <div style={{ minHeight: "400px", width: "250px" }}>
-      <Combobox options={manyOptions} label="Test" />
+      <ComboboxSingle options={manyOptions} label="Test" />
     </div>
   );
 };
@@ -278,7 +246,7 @@ export const LongLabels = () => (
           ],
         },
       ]}
-      selectedOptions={["opt-1"]}
+      value={["opt-1"]}
       onToggleOption={() => {}}
     >
       <ComboboxField />
@@ -290,15 +258,13 @@ export const LongLabels = () => (
 );
 
 export const Composition = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MyOption["value"][]>([
-    "opt-1",
-  ]);
+  const [value, setSelectedOptions] = useState<MyOption["value"][]>(["opt-1"]);
 
   const [selectedOption, setSelectedOption] = useState<MyOption>(countries[0]);
 
   const rootProps = {
     options: countries,
-    selectedOptions,
+    value,
     onToggleOption: (option) => {
       setSelectedOptions((prev) =>
         prev.includes(option.value)
@@ -323,7 +289,7 @@ export const Composition = () => {
       </ComboboxRoot>
 
       <ComboboxRoot {...rootProps}>
-        <ComboboxTrigger>
+        <ComboboxTrigger openWhenStartsTyping={false}>
           <Button>Uten input</Button>
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -335,11 +301,11 @@ export const Composition = () => {
 
       <ComboboxRoot
         options={countries}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
-        multiselect={false}
+        multiple={false}
       >
-        <ComboboxTrigger>
+        <ComboboxTrigger openWhenStartsTyping={false}>
           <Button>Single select</Button>
         </ComboboxTrigger>
         <ComboboxOverlay>
@@ -366,9 +332,9 @@ export const Composition = () => {
 
       <ComboboxRoot
         options={countries}
-        selectedOptions={[selectedOption.value]}
+        value={[selectedOption.value]}
         onToggleOption={setSelectedOption}
-        multiselect={false}
+        multiple={false}
       >
         <ComboboxLabel htmlFor="demo2">Velg land (single select)</ComboboxLabel>
         <ComboboxTrigger id="demo2">
@@ -383,7 +349,7 @@ export const Composition = () => {
       </ComboboxRoot>
 
       <ComboboxRoot {...rootProps}>
-        <ComboboxLabel htmlFor="demo3">Velg land (multiselect)</ComboboxLabel>
+        <ComboboxLabel htmlFor="demo3">Velg land (multiple)</ComboboxLabel>
         <ComboboxTrigger id="demo3">
           <ComboboxField />
         </ComboboxTrigger>
@@ -423,60 +389,20 @@ export const InDialog = () => {
   );
 };
 
-export const Testing = () => {
-  return (
-    <VStack gap="space-32" width="300px">
-      <button type="button" onClick={() => console.log("Knapp før")}>
-        Knapp før
-      </button>
-
-      <Combobox
-        options={countries}
-        multiselect={false}
-        label="Velg land (Combobox)"
-        description="Beskrivelse"
-      />
-
-      <Select
-        label="Velg land (vanlig select)"
-        description="Dette er en vanlig select."
-        //error="Test"
-      >
-        <option value=""></option>
-        <option value="norway">Norway</option>
-        <option value="finland">Finland</option>
-        <option value="sweden">Sweden</option>
-        <option value="denmark">Denmark</option>
-        <option value="iceland">Iceland</option>
-        <option value="faroe-islands">Faroe Islands</option>
-        <option value="aland-islands">Åland Islands</option>
-        <option value="estonia">Estonia</option>
-        <option value="latvia">Latvia</option>
-        <option value="lithuania">Lithuania</option>
-      </Select>
-
-      <Select label="Mange alternativer (vanlig select)">
-        {Array.from({ length: 100 }, (_, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: Don't care
-          <option key={i} value={`opt-${i + 1}`}>
-            {`Option ${String(i + 1).padStart(4, "0")}`}
-          </option>
-        ))}
-      </Select>
-    </VStack>
-  );
-};
-
 function WithValidation() {
   const [error, setError] = useState("Du må velge et land");
   return (
     <BasicCombobox
       options={nordicCountries}
-      defaultSelectedOptions={[]}
+      defaultValue={undefined}
       error={error}
-      onToggleOption={(option) =>
-        setError(option.label === "Island" ? "" : "Du må velge Island")
-      }
+      onChange={(newVal) => {
+        if (!newVal) {
+          setError("Du må velge et land");
+          return;
+        }
+        setError(newVal === "opt-5" ? "" : "Du må velge Island");
+      }}
     />
   );
 }
@@ -484,10 +410,10 @@ function WithValidation() {
 export const ScreenreaderTesting = () => (
   <div>
     <h2>Med grupper</h2>
-    <BasicCombobox options={groupedCountries} defaultSelectedOptions={[]} />
+    <BasicCombobox options={groupedCountries} defaultValue={undefined} />
 
     <h2>Uten grupper</h2>
-    <BasicCombobox options={nordicCountries} defaultSelectedOptions={[]} />
+    <BasicCombobox options={nordicCountries} defaultValue={undefined} />
 
     <h2>Label skjult visuelt</h2>
     <BasicCombobox options={nordicCountries} hideLabel />
@@ -499,18 +425,9 @@ export const ScreenreaderTesting = () => (
     <BasicCombobox readOnly />
 
     <h2>Readonly uten verdi</h2>
-    <BasicCombobox readOnly defaultSelectedOptions={[]} />
+    <BasicCombobox readOnly defaultValue={undefined} />
 
     <h2>Disabled</h2>
     <BasicCombobox disabled />
   </div>
 );
-
-/* TODO:
-
-- Navngivning: Vurder å dele opp i separate komponenter for single- og multiselect.
-- Hvordan unngå CSS-konflikt med dagens CB?
-- Vurder om Label og Description (og error?) skal være sub-komponenter eller ikke.
-- Test med skjermleser
-
-  */

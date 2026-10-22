@@ -1,4 +1,4 @@
-export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * HTML list element to render.
@@ -16,7 +16,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: "small" | "medium" | "large";
 }
 
-export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
+interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * List item content.
    */
@@ -30,3 +30,5 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
    */
   icon?: React.ReactNode;
 }
+
+export type { ListProps, ListItemProps };

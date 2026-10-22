@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "8.19.2",
+  "version": "8.20.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -94,6 +94,16 @@
       "require": {
         "types": "./cjs/form/radio-card/index.d.ts",
         "default": "./cjs/form/radio-card/index.js"
+      }
+    },
+    "./PREVIEW/CheckboxCard": {
+      "import": {
+        "types": "./esm/form/checkbox-card/index.d.ts",
+        "default": "./esm/form/checkbox-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/checkbox-card/index.d.ts",
+        "default": "./cjs/form/checkbox-card/index.js"
       }
     },
     "./types/theme": {
@@ -788,8 +798,8 @@
   "dependencies": {
     "@floating-ui/react": "0.27.20",
     "@floating-ui/react-dom": "^2.1.9",
-    "@navikt/aksel-icons": "^8.19.2",
-    "@navikt/ds-tokens": "^8.19.2",
+    "@navikt/aksel-icons": "^8.20.0",
+    "@navikt/ds-tokens": "^8.20.0",
     "date-fns": "^4.0.0",
     "react-day-picker": "10.0.1"
   },
@@ -802,7 +812,7 @@
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "concurrently": "10.0.4",
+    "concurrently": "10.0.6",
     "copyfiles": "^2.4.1",
     "cross-env": "^10.1.0",
     "jscodeshift": "17.4.0",

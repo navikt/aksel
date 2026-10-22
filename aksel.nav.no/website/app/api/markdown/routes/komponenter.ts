@@ -4,7 +4,9 @@ import {
   KOMPONENT_BY_SLUG_MARKDOWN_QUERY,
 } from "@/app/_sanity/queries";
 import type { ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT } from "@/app/_sanity/query-types";
+import { buildMarkdown } from "../helpers/build-markdown";
 import { createRoute } from "../helpers/create-route";
+import { portableMarkdown } from "../helpers/portable-markdown";
 
 type KomponentItem = ALL_KOMPONENTS_MARKDOWN_QUERY_RESULT[number];
 
@@ -44,5 +46,27 @@ export default createRoute<KomponentItem>({
     packages: (item.kodepakker ?? []).join(", ") || "Ukjent",
     version: PackageJson?.version,
   }),
-  getIntro: (item) => item.intro?.body,
+  getIntro: (item) => {
+    const useFor = [
+      ...(item.status?.internal ? ["Bruk på interne flater"] : []),
+      ...(item.intro?.brukes_til ?? []),
+    ];
+    const avoidUseFor = item.intro?.brukes_ikke_til ?? [];
+
+    return buildMarkdown(
+      portableMarkdown(item.intro?.body),
+      useFor.length > 0
+        ? buildMarkdown(
+            { heading: "Egnet til:", level: 2 },
+            useFor.map((text) => `- ${text}`).join("\n"),
+          )
+        : null,
+      avoidUseFor.length > 0
+        ? buildMarkdown(
+            { heading: "Uegnet til:", level: 2 },
+            avoidUseFor.map((text) => `- ${text}`).join("\n"),
+          )
+        : null,
+    );
+  },
 });

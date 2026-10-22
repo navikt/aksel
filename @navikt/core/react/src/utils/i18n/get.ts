@@ -1,10 +1,10 @@
-import type { PartialTranslations } from "./i18n.types";
+import type { Component, ComponentTranslation } from "./i18n.types";
 
 // Based on https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts
 
-export function get(
+export function get<T extends Component>(
   keypath: string,
-  objs: (PartialTranslations | undefined)[],
+  objs: (ComponentTranslation<T> | undefined)[],
 ) {
   const keys = keypath.split(".");
 
@@ -13,7 +13,7 @@ export function get(
       continue;
     }
 
-    let acc: string | PartialTranslations = obj;
+    let acc: string | ComponentTranslation<T> = obj;
 
     for (let i = 0; i < keys.length; i++) {
       const val = acc[keys[i]];

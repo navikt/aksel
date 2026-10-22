@@ -1,0 +1,62 @@
+import React, { forwardRef, useContext } from "react";
+import { BodyLong } from "../../typography";
+import { cl } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import type { ListItemProps } from "../List.types";
+import { ListContext } from "../root/ListRoot.context";
+
+/**
+ * @see 🏷️ {@link ListItemProps}
+ */
+const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
+  ({ className, children, title, icon, ...rest }, ref) => {
+    const { listType, size } = useContext(ListContext);
+
+    if (listType === "ol" && icon) {
+      consoleWarning(
+        "<List />: Icon prop is not supported for ordered lists. Remove icon prop.",
+      );
+    }
+
+    return (
+      <li {...rest} ref={ref} className={cl("aksel-list__item", className)}>
+        {listType === "ul" && (
+          <div
+            className={cl("aksel-list__item-marker", {
+              "aksel-list__item-marker--icon": icon,
+              "aksel-list__item-marker--bullet": !icon,
+            })}
+          >
+            {icon ? (
+              icon
+            ) : (
+              <svg
+                viewBox="0 0 6 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+                focusable={false}
+              >
+                <rect width="6" height="6" rx="3" fill="currentColor" />
+              </svg>
+            )}
+          </div>
+        )}
+
+        <div>
+          {title && (
+            <BodyLong as="p" size={size} weight="semibold">
+              {title}
+            </BodyLong>
+          )}
+          {children}
+        </div>
+      </li>
+    );
+  },
+);
+
+ListItem.displayName = "List.Item";
+
+export { ListItem };
+export type { ListItemProps };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../button";
-import Popover from "./Popover";
+import { Popover } from "./root/PopoverRoot";
 
 const placements = [
   "top",

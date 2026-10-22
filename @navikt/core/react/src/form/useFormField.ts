@@ -16,6 +16,7 @@ export interface FormFieldProps {
   errorId?: string;
   /**
    * Changes font-size, padding and gaps.
+   * @default "medium"
    */
   size?: "medium" | "small";
   /**

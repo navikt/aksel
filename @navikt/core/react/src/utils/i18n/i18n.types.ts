@@ -1,3 +1,4 @@
+import type { internalTranslations } from "./i18n.internal";
 import type nb from "./locales/nb";
 
 /* https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3 */
@@ -7,8 +8,10 @@ type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
 
+type InternalTranslations = typeof internalTranslations;
+
 export type TFunction<T extends Component> = (
-  keypath: NestedKeyOf<Translations[T]>,
+  keypath: NestedKeyOf<(Translations & InternalTranslations)[T]>,
   replacements?: Record<string, string | number>,
 ) => string;
 
@@ -21,8 +24,8 @@ export type Translations = typeof nb;
 
 export type PartialTranslations = RecursivePartial<Translations>;
 
-export type Component = keyof Translations;
+export type Component = keyof Translations | keyof InternalTranslations;
 
 export type ComponentTranslation<T extends Component> = RecursivePartial<
-  Translations[T]
+  (Translations & InternalTranslations)[T]
 >;

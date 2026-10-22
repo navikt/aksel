@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { renderStoriesForChromatic } from "../utils/renderStoriesForChromatic";
-import Pagination from "./Pagination";
+import { Pagination } from "./index";
 
 const meta: Meta<typeof Pagination> = {
   title: "ds-react/Pagination",

@@ -1,6 +1,13 @@
 CHANGED=`git diff $1 $2 --stat -- yarn.lock | wc -l`
 if [ $CHANGED -gt 0 ];
 then
-    echo
-    echo "*** 🟡 yarn.lock has changed 🟡 ***"
+    printf '\n\033[1;33m'
+    printf '  ╔══════════════════════════════════════════╗\n'
+    printf '  ║                                          ║\n'
+    printf '  ║   !!  yarn.lock has changed  !!          ║\n'
+    printf '  ║                                          ║\n'
+    printf '  ║   Run: yarn install                      ║\n'
+    printf '  ║                                          ║\n'
+    printf '  ╚══════════════════════════════════════════╝\n'
+    printf '\033[0m\n'
 fi

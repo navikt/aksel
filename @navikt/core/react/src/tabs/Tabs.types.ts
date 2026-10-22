@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-export interface TabsProps extends Omit<
+interface TabsProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "onChange" | "dir"
 > {
@@ -43,3 +43,5 @@ export interface TabsProps extends Omit<
    */
   fill?: boolean;
 }
+
+export type { TabsProps };

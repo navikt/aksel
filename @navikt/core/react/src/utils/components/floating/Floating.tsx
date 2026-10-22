@@ -18,7 +18,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useModalContext } from "../../../modal/Modal.context";
+import { useModalContext } from "../../../modal/root/ModalRoot.context";
 import { useClientLayoutEffect } from "../../../utils-external";
 import { createStrictContext } from "../../helpers";
 import {

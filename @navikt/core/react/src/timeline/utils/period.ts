@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import { cl } from "../../utils/helpers";
 import type { TFunction } from "../../utils/i18n/i18n.types";
-import type { PeriodProps } from "../period/types";
+import type { PeriodProps } from "../Timeline.types";
 
-export const getConditionalClasses = (
+const getConditionalClasses = (
   cropped: string,
   direction: string,
   status: PeriodProps["status"],
@@ -19,7 +19,7 @@ export const getConditionalClasses = (
   });
 };
 
-export const ariaLabel = (
+const ariaLabel = (
   startDate: Date,
   endDate: Date,
   status: PeriodProps["status"],
@@ -35,3 +35,5 @@ export const ariaLabel = (
     end,
   });
 };
+
+export { getConditionalClasses, ariaLabel };
