@@ -86,6 +86,18 @@ const TimelineRowBase = forwardRef<HTMLOListElement, TimelineRowProps>(
           onKeyDown={handleRowKeyDown}
           data-timeline-row
         >
+          <span
+            className="aksel-timeline__row-line"
+            style={{ left: "12.75%" }}
+          />
+          <span
+            className="aksel-timeline__row-line"
+            style={{ left: "24.28%" }}
+          />
+          <span
+            className="aksel-timeline__row-line"
+            style={{ left: "49.37%" }}
+          />
           <ol
             {...rest}
             ref={ref}

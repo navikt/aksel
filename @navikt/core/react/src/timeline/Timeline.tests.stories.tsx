@@ -97,6 +97,40 @@ function TwoRowTimelineWithPins() {
   );
 }
 
+function ResponsiveAxisTimeline() {
+  return (
+    <>
+      {(["left", "right"] as const).flatMap((direction) =>
+        [
+          ["2026-05-04", "2026-05-31"],
+          ["2024-02-15", "2025-03-05"],
+          ["2022-06-15", "2047-07-05"],
+        ].map(([start, end]) => (
+          <div
+            key={`${direction}-${start}`}
+            data-axis-size
+            style={{ width: "320px" }}
+          >
+            <Timeline
+              direction={direction}
+              startDate={new Date(start)}
+              endDate={new Date(end)}
+            >
+              <Timeline.Row label="Row">
+                <Timeline.Period
+                  start={new Date(start)}
+                  end={new Date(end)}
+                  status="success"
+                />
+              </Timeline.Row>
+            </Timeline>
+          </div>
+        )),
+      )}
+    </>
+  );
+}
+
 export const HorizontalPeriodNavigation: Story = {
   render: () => <TwoRowTimeline />,
   play: async ({ canvasElement }) => {
@@ -177,5 +211,104 @@ export const PinNavigation: Story = {
     // ArrowUp from row 1 returns to first pin
     await userEvent.keyboard("{ArrowUp}");
     expect(pins[0]).toHaveFocus();
+  },
+};
+
+export const AxisLabelsAdaptToWidth: Story = {
+  render: () => <ResponsiveAxisTimeline />,
+  play: async ({ canvasElement }) => {
+    const containers =
+      canvasElement.querySelectorAll<HTMLElement>("[data-axis-size]");
+    expect(containers).toHaveLength(6);
+
+    for (const container of containers) {
+      const axis = container.querySelector<HTMLElement>(
+        ".aksel-timeline__axislabels",
+      );
+      if (!axis) {
+        throw new Error("Timeline axis not found");
+      }
+      const markup = axis.innerHTML;
+      const height = axis.getBoundingClientRect().height;
+      const selectedDensities = new Set<string | null>();
+      const labelColumnWidth =
+        container.getBoundingClientRect().width -
+        axis.getBoundingClientRect().width;
+      const minSlotWidth =
+        4.5 *
+        Number.parseFloat(
+          window.getComputedStyle(document.documentElement).fontSize,
+        );
+      const slotPercentages: number[] = [];
+      let slotPercentage = 100;
+      for (const tier of axis.querySelectorAll<HTMLElement>(
+        ".aksel-timeline__axislabels-tier",
+      )) {
+        slotPercentage *= Number.parseFloat(tier.style.width) / 100;
+        slotPercentages.push(slotPercentage);
+      }
+      const breakpoints = slotPercentages
+        .map(
+          (percentage) => (minSlotWidth * 100) / percentage + labelColumnWidth,
+        )
+        .filter((width) => width >= 200 && width <= 2400);
+      const widths = [
+        200,
+        320,
+        640,
+        960,
+        1600,
+        2400,
+        ...breakpoints.flatMap((width) => [width - 0.1, width, width + 0.1]),
+      ];
+
+      for (const width of widths) {
+        container.style.width = `${width}px`;
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+
+        const visibleLabels = [
+          ...axis.querySelectorAll<HTMLElement>(
+            ".aksel-timeline__axislabels-label",
+          ),
+        ].filter((label) => label.getClientRects().length > 0);
+        const densities = new Set(
+          visibleLabels.map((label) =>
+            label.getAttribute("data-axis-labels-density"),
+          ),
+        );
+        expect(densities.size, `Axis density at container width ${width}`).toBe(
+          1,
+        );
+        for (const density of densities) {
+          selectedDensities.add(density);
+        }
+
+        const axisBounds = axis.getBoundingClientRect();
+        const textBounds = visibleLabels
+          .map((label) => {
+            const range = document.createRange();
+            range.selectNodeContents(label);
+            return range.getBoundingClientRect();
+          })
+          .sort((a, b) => a.left - b.left);
+
+        for (let i = 0; i < textBounds.length; i++) {
+          expect(textBounds[i].left).toBeGreaterThanOrEqual(
+            axisBounds.left - 1,
+          );
+          expect(textBounds[i].right).toBeLessThanOrEqual(axisBounds.right + 1);
+          if (i > 0) {
+            expect(textBounds[i].left).toBeGreaterThanOrEqual(
+              textBounds[i - 1].right,
+            );
+          }
+        }
+        expect(axisBounds.height).toBe(height);
+        expect(axis.innerHTML).toBe(markup);
+      }
+      expect(selectedDensities.size).toBeGreaterThan(1);
+    }
   },
 };

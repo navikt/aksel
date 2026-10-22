@@ -599,7 +599,15 @@ export const CustomLabel: StoryFn = () => {
 
 export const OverflowingAxisLabels: StoryFn = () => {
   return (
-    <div style={{ width: "800px" }}>
+    <div
+      style={{
+        width: "800px",
+        maxWidth: "100%",
+        minWidth: "200px",
+        resize: "horizontal",
+        overflow: "auto",
+      }}
+    >
       <Timeline
         startDate={new Date("2026-05-04")}
         endDate={new Date("2026-05-31")}

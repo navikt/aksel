@@ -13,6 +13,7 @@
   box-sizing: content-box;
   grid-column: 2;
   margin-bottom: var(--ax-space-4);
+  overflow-x: clip;
 }
 
 .aksel-timeline__row-label {
@@ -30,11 +31,34 @@
   align-self: flex-end;
 }
 
+.aksel-timeline__axislabels-tier {
+  position: absolute;
+  top: 0;
+  container-name: aksel-timeline-axis-labels;
+  container-type: inline-size;
+}
+
 .aksel-timeline__axislabels-label {
   position: absolute;
+  width: 100%;
   color: var(--ax-text-neutral-subtle);
   white-space: nowrap;
   overflow-x: clip;
+}
+
+.aksel-timeline__axislabels-tier > .aksel-timeline__axislabels-tier {
+  display: none;
+}
+
+/* A single query swaps tiers, so subpixel container sizes cannot show both or neither. */
+@container aksel-timeline-axis-labels (inline-size < 4.5rem) {
+  .aksel-timeline__axislabels-tier:not([data-axis-labels-coarsest]) > .aksel-timeline__axislabels-label {
+    display: none;
+  }
+
+  .aksel-timeline__axislabels-tier > .aksel-timeline__axislabels-tier {
+    display: block;
+  }
 }
 
 .aksel-timeline__row {

@@ -4,6 +4,7 @@ import {
   addMonths,
   addYears,
   differenceInDays,
+  differenceInMilliseconds,
   differenceInMonths,
   differenceInYears,
   endOfMonth,
@@ -14,31 +15,44 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Detail } from "../../typography/Detail";
 import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";
 import type { TFunction } from "../../utils/i18n/i18n.types";
 import { useTimelineContext } from "../root/TimelineRoot.context";
-import { isVisible } from "../utils";
 import { horizontalPositionAndWidth } from "../utils/calc";
 import type { AxisLabel, AxisLabelTemplates } from "../utils/types.external";
+
+// Include candidate intervals even when a calendar day is shortened by DST.
+const MIN_SAFE_DAY_IN_MILLISECONDS = 23 * 60 * 60 * 1000;
+const MAX_LABEL_COUNT = 100;
+
+interface AxisLabelSet {
+  id: string;
+  labels: AxisLabel[];
+  slotWidth: number;
+}
 
 const dayLabels = (
   start: Date,
   end: Date,
-  totalDays: number,
+  intervalDays: number,
   direction: "left" | "right",
   template: string,
   locale: Locale,
 ): AxisLabel[] => {
-  const increment = Math.ceil(totalDays / 10);
+  const totalDays = differenceInDays(end, start);
+  const count = Math.ceil(totalDays / intervalDays) + 1;
+  if (count > MAX_LABEL_COUNT) {
+    return [];
+  }
+
   const lastDay = startOfDay(end);
-  const count = Math.ceil(totalDays / increment);
   return Array.from({ length: count }, (_, i) => {
-    const day: Date = subDays(lastDay, i * increment);
+    const day: Date = subDays(lastDay, i * intervalDays);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       day,
-      addDays(day, 1),
+      addDays(day, intervalDays),
       start,
       end,
     );
@@ -55,18 +69,24 @@ const dayLabels = (
 const monthLabels = (
   start: Date,
   end: Date,
+  intervalMonths: number,
   direction: "left" | "right",
   template: string,
   locale: Locale,
 ): AxisLabel[] => {
   const startMonth = startOfMonth(start);
   const endMonth = endOfMonth(end);
-  const numberOfMonths = differenceInMonths(endMonth, startMonth) + 1;
+  const numberOfMonths =
+    Math.floor(differenceInMonths(endMonth, startMonth) / intervalMonths) + 1;
+  if (numberOfMonths > MAX_LABEL_COUNT) {
+    return [];
+  }
+
   return Array.from({ length: numberOfMonths }, (_, i) => {
-    const month: Date = addMonths(startMonth, i);
+    const month: Date = addMonths(startMonth, i * intervalMonths);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       month,
-      addMonths(month, 1),
+      addMonths(month, intervalMonths),
       start,
       end,
     );
@@ -83,18 +103,24 @@ const monthLabels = (
 const yearLabels = (
   start: Date,
   end: Date,
+  intervalYears: number,
   direction: "left" | "right",
   template: string,
   locale: Locale,
 ): AxisLabel[] => {
   const firstYear = startOfYear(start);
   const lastYear = endOfYear(end);
-  const yearCount = differenceInYears(lastYear, start) + 1;
+  const yearCount =
+    Math.floor(differenceInYears(lastYear, start) / intervalYears) + 1;
+  if (yearCount > MAX_LABEL_COUNT) {
+    return [];
+  }
+
   return Array.from({ length: yearCount }, (_, i) => {
-    const year: Date = addYears(firstYear, i);
+    const year: Date = addYears(firstYear, i * intervalYears);
     const { horizontalPosition, width } = horizontalPositionAndWidth(
       year,
-      addYears(year, 1),
+      addYears(year, intervalYears),
       start,
       end,
     );
@@ -108,32 +134,96 @@ const yearLabels = (
   });
 };
 
-const getLabels = (
+const getLabelSets = (
   start: Date,
   end: Date,
   direction: "left" | "right",
   locale: Locale,
   translate: TFunction<"Timeline">,
-): AxisLabel[] => {
-  const totalDays = differenceInDays(end, start);
-
-  /* Zero or negative total days can break further calculations */
-  if (totalDays <= 0) {
+): AxisLabelSet[] => {
+  const duration = differenceInMilliseconds(end, start);
+  if (!Number.isFinite(duration) || duration <= 0) {
     return [];
   }
 
-  if (totalDays < 40) {
-    const dayTemplate = translate("dayFormat");
-    return dayLabels(start, end, totalDays, direction, dayTemplate, locale);
-  }
-
-  if (totalDays < 370) {
-    const monthTemplate = translate("monthFormat");
-    return monthLabels(start, end, direction, monthTemplate, locale);
-  }
-
+  const dayTemplate = translate("dayFormat");
+  const monthTemplate = translate("monthFormat");
   const yearTemplate = translate("yearFormat");
-  return yearLabels(start, end, direction, yearTemplate, locale);
+  const intervals: {
+    id: string;
+    template: string;
+    getLabels: () => AxisLabel[];
+  }[] = [];
+
+  for (const intervalDays of [1, 2, 8, 7, 14]) {
+    if (intervalDays * MIN_SAFE_DAY_IN_MILLISECONDS > duration) {
+      continue;
+    }
+    intervals.push({
+      id: `day-${intervalDays}`,
+      template: dayTemplate,
+      getLabels: () =>
+        dayLabels(start, end, intervalDays, direction, dayTemplate, locale),
+    });
+  }
+
+  for (const intervalMonths of [1, 2, 3, 6]) {
+    const intervalDays = intervalMonths * 28;
+    if (intervalDays * MIN_SAFE_DAY_IN_MILLISECONDS > duration) {
+      continue;
+    }
+    intervals.push({
+      id: `month-${intervalMonths}`,
+      template: monthTemplate,
+      getLabels: () =>
+        monthLabels(
+          start,
+          end,
+          intervalMonths,
+          direction,
+          monthTemplate,
+          locale,
+        ),
+    });
+  }
+
+  for (let intervalYears = 1; ; intervalYears *= 2) {
+    const intervalDays = intervalYears * 365;
+    if (intervalDays * MIN_SAFE_DAY_IN_MILLISECONDS > duration) {
+      break;
+    }
+    intervals.push({
+      id: `year-${intervalYears}`,
+      template: yearTemplate,
+      getLabels: () =>
+        yearLabels(start, end, intervalYears, direction, yearTemplate, locale),
+    });
+  }
+
+  return intervals
+    .map(({ id, template, getLabels }) => {
+      const labels = getLabels();
+      const slotWidth = Math.min(100, ...labels.map(({ width }) => width));
+      const visibleLabels = labels
+        .filter(
+          ({ horizontalPosition }) =>
+            horizontalPosition >= 0 && horizontalPosition + slotWidth <= 100,
+        )
+        .sort((a, b) => a.horizontalPosition - b.horizontalPosition);
+
+      // A coarse interval may have no calendar boundary inside the range.
+      if (labels.length > 0 && visibleLabels.length === 0) {
+        visibleLabels.push({
+          ...labels[0],
+          date: start,
+          horizontalPosition: 0,
+          label: format(start, template, { locale }),
+        });
+      }
+
+      return { id, slotWidth, labels: visibleLabels };
+    })
+    .filter(({ labels }) => labels.length > 0);
 };
 
 const TimelineAxisLabelsInternal = ({
@@ -150,41 +240,51 @@ const TimelineAxisLabelsInternal = ({
   });
   const locale = useDateLocale();
 
-  const labels = useMemo(
-    () =>
-      getLabels(startDate, endDate, direction, locale, translate)
-        .filter(isVisible)
-        .sort((a, b) => a.horizontalPosition - b.horizontalPosition),
+  const labelSets = useMemo(
+    () => getLabelSets(startDate, endDate, direction, locale, translate),
     [startDate, endDate, direction, locale, translate],
   );
 
-  const getLabelWidth = useCallback(
-    (index: number): string => {
-      const next = labels[index + 1];
-      const bound = next ? next.horizontalPosition : 100;
-      return `${(bound - labels[index].horizontalPosition).toFixed(3)}%`;
-    },
-    [labels],
-  );
-
-  const justifyContent = direction === "left" ? "flex-start" : "flex-end";
-
   return (
     <div className="aksel-timeline__axislabels" aria-hidden="true">
-      {labels.map((etikett, index) => (
-        <Detail
-          className="aksel-timeline__axislabels-label"
-          as="div"
-          key={etikett.label}
-          style={{
-            justifyContent,
-            [direction]: `${etikett.horizontalPosition.toFixed(3)}%`,
-            width: getLabelWidth(index),
-          }}
-        >
-          {etikett.label}
-        </Detail>
-      ))}
+      {labelSets.reduceRight<React.ReactNode>(
+        (coarserTier, labelSet, index) => (
+          <div
+            className="aksel-timeline__axislabels-tier"
+            key={labelSet.id}
+            data-axis-labels-coarsest={
+              index === labelSets.length - 1 || undefined
+            }
+            style={{
+              [direction]: 0,
+              width: `${
+                (labelSet.slotWidth /
+                  (labelSets[index - 1]?.slotWidth ?? 100)) *
+                100
+              }%`,
+            }}
+          >
+            {labelSet.labels.map((label) => (
+              <Detail
+                className="aksel-timeline__axislabels-label"
+                as="div"
+                key={label.date.getTime()}
+                data-axis-labels-density={labelSet.id}
+                style={{
+                  textAlign: direction,
+                  [direction]: `${
+                    (label.horizontalPosition / labelSet.slotWidth) * 100
+                  }%`,
+                }}
+              >
+                {label.label}
+              </Detail>
+            ))}
+            {coarserTier}
+          </div>
+        ),
+        null,
+      )}
     </div>
   );
 };
