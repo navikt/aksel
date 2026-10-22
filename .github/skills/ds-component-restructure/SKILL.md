@@ -95,7 +95,7 @@ Move stories to component root dir. If stories import from internal paths, updat
 
 ### 5. Update `index.ts`
 
-All exports are **named** — no `default` exports anywhere. The component `index.ts` re-exports the compound component, its sub-components, and their types from the root file:
+All exports are **named** — no `default` exports anywhere. For compound components, the root file is the single export source: it assembles the compound component, imports every publicly exported sub-component and its prop types, and exports all public values and types together. The component `index.ts` only re-exports these names from `./root/<Component>Root` — never directly from sub-component files or shared type files.
 
 ```ts
 "use client";
@@ -111,13 +111,18 @@ export type {
 } from "./root/<Component>Root";
 ```
 
-Group values first, then types. If types live in `<Component>.types.ts`, re-export them from there.
+Group values first, then types. If types live in `<Component>.types.ts`, import them into the root file and include them in its type export block. The `index.ts` still re-exports them from the root file.
 
 #### Compound root file export pattern
 
 In `<Component>Root.tsx`, assemble the compound component with `Object.assign` — **do not** use an `as <Component>Component` cast or a dedicated `<Component>Component` interface:
 
 ```tsx
+import {
+  <Component>Trigger,
+  type <Component>TriggerProps,
+} from "../trigger/<Component>Trigger";
+
 const <Component>Root = forwardRef<HTMLDivElement, <Component>Props>((props, ref) => {
   // ...
 });
@@ -137,6 +142,8 @@ const <Component> = Object.assign(<Component>Root, {
 export { <Component>, <Component>Trigger };
 export type { <Component>Props, <Component>TriggerProps };
 ```
+
+Follow `accordion/root/AccordionRoot.tsx`: export the imported sub-component values and prop types alongside the compound component at the bottom of the root file. Do not add internal-only sub-components to the public export chain. Sub-components must not import from the root file or component `index.ts`; use shared type/context/helper files to avoid circular dependencies.
 
 Why `Object.assign` instead of `as`: the cast types the const as an interface that has no runtime `valueDeclaration`, so `react-docgen-typescript` (used by `yarn docgen:meta`) fails to extract props and can't document the component when it is exported via a grouped `export { }` statement. `Object.assign` lets TypeScript infer the intersection type from the value, so metadata generation works with named, bottom-of-file exports.
 
@@ -172,6 +179,8 @@ Concretely: grep for `export` lines in both versions and diff them. All componen
 **Build.** Run `corepack yarn workspace @navikt/ds-react build` — must succeed with no TypeScript errors.
 
 **Package root.** Verify `@navikt/core/react/src/index.ts` still re-exports the component. No changes needed there unless the component's `index.ts` path changed (it shouldn't).
+
+**Root-only re-exports.** For compound components, verify every value and type export in the component `index.ts` comes from `./root/<Component>Root`, and every forwarded name is exported by that root file.
 
 **No case-duplicate tracked paths.** This is the most common restructure bug. On case-insensitive filesystems (macOS, Windows) git can end up tracking **two** entries that differ only in casing (e.g. `accordion.stories.tsx` **and** `Accordion.stories.tsx`) while the working tree shows only one file. The stale entry then breaks tests and checkout on other machines. `ls` / file search will NOT reveal it — you must ask git. Run:
 
@@ -281,6 +290,7 @@ dialog/
 
 - **No breaking changes.** Public export names and prop shapes must be identical after restructuring.
 - **Named exports only.** No `default` exports; group named exports at the bottom of each file (values first, then types).
+- **Compound exports flow through the root.** Component `index.ts` re-exports public values and types only from `root/<Component>Root.tsx`, not directly from sub-component or shared type files.
 - **Compound roots use `Object.assign`.** No `as <Component>Component` cast or `<Component>Component` interface — it breaks `yarn docgen:meta` prop extraction.
 - Component rules (React 17 compatibility, `"use client"`, `forwardRef`/`className`/`...rest`/`as`, tokens) live in `.github/instructions/ds-react-component.instructions.md`. They still apply.
 - Keep JSDoc on public props and components. The component-level JSDoc block sits directly above the `Object.assign` call; sub-component `@see` tags go on the keys inside the `Object.assign` object literal.
@@ -289,6 +299,6 @@ dialog/
 
 - Canonical example: `@navikt/core/react/src/dialog/`
 - Package public API: `@navikt/core/react/src/index.ts`
-- Component `index.ts` pattern: `@navikt/core/react/src/dialog/index.ts`
+- Component export pattern: `@navikt/core/react/src/accordion/root/AccordionRoot.tsx` and `@navikt/core/react/src/accordion/index.ts`
 - Context pattern: `@navikt/core/react/src/dialog/root/DialogRoot.context.ts`
 - Meta: `@navikt/core/react/src/accordion/Accordion.meta.ts`
