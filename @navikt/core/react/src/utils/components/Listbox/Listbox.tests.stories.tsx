@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, fireEvent, fn } from "storybook/test";
+import { expect, fireEvent, fn, within } from "storybook/test";
 import type { ListboxOptionProps } from "./option/ListboxOption";
 import { Listbox } from "./root/ListboxRoot";
 
@@ -209,5 +209,71 @@ export const EnterKey: StoryObj<{
   },
   args: {
     onClick: fn(),
+  },
+};
+
+const ListboxStoryWithFilterInput = () => {
+  const [virtuallyFocusedOptionId, setVirtuallyFocusedOptionId] =
+    useState("second-item");
+  return (
+    <Listbox setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionId}>
+      <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionId}>
+        <input type="text" aria-label="Filter" />
+      </Listbox.InputSlot>
+      <Listbox.Options>
+        <Listbox.Option
+          id="first-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "first-item"}
+          aria-selected={false}
+        >
+          First item
+        </Listbox.Option>
+        <Listbox.Option
+          id="second-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "second-item"}
+          aria-selected={false}
+        >
+          Second item
+        </Listbox.Option>
+        <Listbox.Option
+          id="last-item"
+          onClick={() => {}}
+          hasVirtualFocus={virtuallyFocusedOptionId === "last-item"}
+          aria-selected={false}
+        >
+          Last item
+        </Listbox.Option>
+      </Listbox.Options>
+    </Listbox>
+  );
+};
+
+// When a filter input has real focus, ArrowUp on first option and
+// ArrowDown on last option should remove virtual focus so that
+// perceived focus is returned to the input.
+export const ArrowUpOnFirstOptionFocusInput: StoryObj = {
+  render: ListboxStoryWithFilterInput,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText("Filter");
+    input.focus();
+    fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("first-item");
+    fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(getVirtuallyFocusedValue(canvasElement)).toBeUndefined();
+  },
+};
+export const ArrowDownOnLastOptionFocusInput: StoryObj = {
+  render: ListboxStoryWithFilterInput,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText("Filter");
+    input.focus();
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(getVirtuallyFocusedValue(canvasElement)).toBe("last-item");
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(getVirtuallyFocusedValue(canvasElement)).toBeUndefined();
   },
 };
