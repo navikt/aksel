@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
+import { debounce } from "../../../utils-external";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
@@ -10,6 +11,7 @@ import {
   type ResolveOption,
   useComboboxRootContext,
 } from "../root/ComboboxRoot";
+import { useAnnounce } from "./useAnnounce";
 
 interface ComboboxListProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -47,12 +49,19 @@ function ComboboxList<
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
-  const { virtuallyFocusedOptionValue, filterString, setAnnounceText } =
+  const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
   const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
     useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
+
+  const shouldAnnounceRef = useRef(false);
+  const announce = useAnnounce();
+  const announceHits = useMemo(
+    () => debounce((hits: number) => announce(`${hits} treff`), 2000),
+    [announce],
+  );
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
@@ -73,16 +82,22 @@ function ComboboxListContent<
     ? filterOptions(options, deferredFilterString)
     : options;
 
-  if (filteredOptions.length === 0) {
-    setAnnounceText("Ingen treff");
-    return (
-      <div className="aksel-combobox2__no-results" role="status">
-        Ingen treff
-      </div>
-    );
+  if (deferredFilterString !== filterString) {
+    shouldAnnounceRef.current = true;
+  } else if (shouldAnnounceRef.current) {
+    if (filteredOptions.length === 0) {
+      announceHits.clear();
+      announce("Ingen treff"); // Not debounced
+    } else {
+      const hits = getNumberOfOptions(filteredOptions);
+      announceHits(hits);
+    }
+    shouldAnnounceRef.current = false;
   }
 
-  setAnnounceText("");
+  if (filteredOptions.length === 0) {
+    return <div className="aksel-combobox2__no-results">Ingen treff</div>;
+  }
 
   return filteredOptions.map((optOrGroup) =>
     "options" in optOrGroup ? (
@@ -144,6 +159,17 @@ function filterOptions<T extends ComboboxOptionData>(
       return null;
     })
     .filter((option): option is T | ComboboxGroupData<T> => option !== null);
+}
+
+function getNumberOfOptions<T extends ComboboxOptionData>(
+  options: (T | ComboboxGroupData<T>)[],
+) {
+  return options.reduce((count, optOrGroup) => {
+    if ("options" in optOrGroup) {
+      return count + optOrGroup.options.length;
+    }
+    return count + 1;
+  }, 0);
 }
 
 export type { ComboboxListProps };
