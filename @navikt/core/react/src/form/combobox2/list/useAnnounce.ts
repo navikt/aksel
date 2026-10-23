@@ -1,3 +1,4 @@
+// Based on https://github.com/facebook/astryx/blob/main/packages/core/src/hooks/useAnnounce.ts
 // Copyright (c) Meta Platforms, Inc. and affiliates.
 /**
  * Provides imperative screen-reader announcements via persistently-mounted
