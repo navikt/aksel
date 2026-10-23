@@ -30,7 +30,7 @@ type Story = StoryObj<{ overflow: "none" | "x" | "y" | "both" }>;
 
 export const Attachments: Story = {
   render: ({ overflow }) => {
-    const Before = useCallback(
+    const Content = useCallback(
       () => (
         <HStack gap="space-8">
           <Button size="xsmall" variant="secondary" data-color="neutral">
@@ -49,10 +49,8 @@ export const Attachments: Story = {
         <div style={{ overflow: "hidden", display: "flex" }}>
           <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
             <DataGrid.Table
-              attachment={{
-                before: <Before />,
-                after: <Before />,
-              }}
+              topContent={<Content />}
+              bottomContent={<Content />}
             />
           </DataGrid>
         </div>

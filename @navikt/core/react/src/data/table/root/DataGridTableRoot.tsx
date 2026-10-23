@@ -139,13 +139,13 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   selectionTrigger?: "row" | "control";
   /**
-   * Content to render before or after the table.
-   * `before` will be rendered above the table, and `after` will be rendered below the table.
+   * Content to render above the table, outside its scrollable area.
    */
-  attachment?: {
-    before?: React.ReactNode;
-    after?: React.ReactNode;
-  };
+  topContent?: React.ReactNode;
+  /**
+   * Content to render below the table, outside its scrollable area.
+   */
+  bottomContent?: React.ReactNode;
 }
 
 const DataGridTableInternal = forwardRef<
@@ -169,7 +169,8 @@ const DataGridTableInternal = forwardRef<
       subRows,
       sorting,
       selectionTrigger = "row",
-      attachment,
+      topContent,
+      bottomContent,
       ...rest
     }: DataGridTableProps<unknown>,
     forwardedRef,
@@ -212,19 +213,26 @@ const DataGridTableInternal = forwardRef<
 
     /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
+    const hasTopContent = topContent != null;
+    const hasBottomContent = bottomContent != null;
+    let attachmentPosition: "top" | "bottom" | "both" | undefined;
+
+    if (hasTopContent && hasBottomContent) {
+      attachmentPosition = "both";
+    } else if (hasTopContent) {
+      attachmentPosition = "top";
+    } else if (hasBottomContent) {
+      attachmentPosition = "bottom";
+    }
 
     return (
       <div
-        style={{ maxHeight: "100%", display: "grid" }}
-        data-attachment-before={attachment?.before ? true : undefined}
-        data-attachment-after={attachment?.after ? true : undefined}
+        className="aksel-data-table__frame"
+        data-attachments={attachmentPosition}
       >
-        {attachment?.before && (
-          <div
-            className="aksel-data-table__attachment"
-            data-attachment="before"
-          >
-            {attachment.before}
+        {hasTopContent && (
+          <div className="aksel-data-table__attachment" data-attachment="top">
+            {topContent}
           </div>
         )}
 
@@ -305,9 +313,12 @@ const DataGridTableInternal = forwardRef<
             </table>
           </TableElementWrapper>
         </DataTableContextProvider>
-        {attachment?.after && (
-          <div className="aksel-data-table__attachment" data-attachment="after">
-            {attachment.after}
+        {hasBottomContent && (
+          <div
+            className="aksel-data-table__attachment"
+            data-attachment="bottom"
+          >
+            {bottomContent}
           </div>
         )}
       </div>

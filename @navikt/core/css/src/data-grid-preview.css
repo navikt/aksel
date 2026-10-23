@@ -9,15 +9,27 @@
   overflow: hidden;
 }
 
-.aksel-data-table__border-wrapper {
-  /* display:flex and max-height:100% is needed for a "no page scroll" layout */
+.aksel-data-table__frame {
   display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
   max-height: 100%;
+  min-height: 0;
+}
+
+.aksel-data-table__border-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  max-height: 100%;
+  min-height: 0;
 }
 
 .aksel-data-table__scroll-wrapper {
   overflow: auto;
+  flex: 1 1 auto;
   width: 100%;
+  min-height: 0;
   position: relative;
   scroll-timeline: --horizontal-table-scroll inline;
 }
@@ -138,7 +150,7 @@
     z-index: 3;
   }
 
-  [data-attachment-before="true"] & {
+  :is([data-attachments="top"], [data-attachments="both"]) & {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
@@ -148,7 +160,7 @@
     }
   }
 
-  [data-attachment-after="true"] & {
+  :is([data-attachments="bottom"], [data-attachments="both"]) & {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
@@ -731,20 +743,20 @@ html[data-dragging-cursor="true"] *::after {
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
 
-/* WIP ATTACHMENT TEST */
 .aksel-data-table__attachment {
   z-index: 10;
+  flex: 0 0 auto;
   padding: var(--ax-space-12) var(--ax-space-16);
   border: 1px solid var(--ax-border-neutral-subtle);
   background-color: var(--ax-bg-raised);
 
-  &[data-attachment="before"] {
+  &[data-attachment="top"] {
     border-bottom: none;
     border-top-left-radius: var(--ax-radius-12);
     border-top-right-radius: var(--ax-radius-12);
   }
 
-  &[data-attachment="after"] {
+  &[data-attachment="bottom"] {
     border-top: none;
     border-bottom-left-radius: var(--ax-radius-12);
     border-bottom-right-radius: var(--ax-radius-12);

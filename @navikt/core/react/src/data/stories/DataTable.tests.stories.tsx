@@ -57,6 +57,11 @@ const fallbackIdData: TestRow[] = [
   },
 ];
 
+const scrollableData: TestRow[] = Array.from({ length: 20 }, (_, index) => ({
+  id: `row-${index + 1}`,
+  name: `Row ${index + 1}`,
+}));
+
 const columns: ColumnDefinitions<TestRow> = [
   {
     id: "name",
@@ -226,5 +231,47 @@ export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
     expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[2].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[3].checked).toBe(false);
+  },
+};
+
+export const AttachedContentStaysVisibleWhileTableScrolls: Story = {
+  render: () => (
+    <div style={{ height: 240, display: "flex" }}>
+      <DataGrid
+        columns={columns}
+        data={scrollableData}
+        getRowId={(row) => row.id}
+      >
+        <DataGrid.Table
+          topContent={<button type="button">Top action</button>}
+          bottomContent={<button type="button">Bottom action</button>}
+        />
+      </DataGrid>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const topAction = canvas.getByRole("button", { name: "Top action" });
+    const bottomAction = canvas.getByRole("button", { name: "Bottom action" });
+    const scrollWrapper = canvasElement.querySelector(
+      ".aksel-data-table__scroll-wrapper",
+    );
+
+    if (!(scrollWrapper instanceof HTMLElement)) {
+      throw new Error("Expected table scroll wrapper");
+    }
+
+    expect(scrollWrapper.scrollHeight).toBeGreaterThan(
+      scrollWrapper.clientHeight,
+    );
+
+    const topPosition = topAction.getBoundingClientRect().top;
+    const bottomPosition = bottomAction.getBoundingClientRect().top;
+
+    scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
+
+    expect(scrollWrapper.scrollTop).toBeGreaterThan(0);
+    expect(topAction.getBoundingClientRect().top).toBe(topPosition);
+    expect(bottomAction.getBoundingClientRect().top).toBe(bottomPosition);
   },
 };
