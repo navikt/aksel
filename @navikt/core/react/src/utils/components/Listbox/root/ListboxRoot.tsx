@@ -78,10 +78,7 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
           ) => {
             event.preventDefault();
             if (!focusedOptionElm) {
-              const fallback =
-                listbox.querySelector<HTMLElement>('[aria-selected="true"]') ||
-                getFallback();
-              virtuallyFocusOption(fallback);
+              virtuallyFocusOption(getFallback());
               return;
             }
             const nextOption = getNextElement(focusedOptionElm);
