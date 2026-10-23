@@ -50,6 +50,6 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 7,
+  index: 8,
   desc: "`maxSelected` lar deg sette en grense for antall alternativer brukeren kan velge.",
 };
