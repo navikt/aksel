@@ -25,5 +25,5 @@ export const Demo = {
 };
 
 export const args: ExampleArgsT = {
-  index: 11,
+  index: 12,
 };
