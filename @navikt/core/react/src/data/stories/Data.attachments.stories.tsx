@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
 import { HStack, VStack } from "../../primitives/stack";
+import { BodyShort, Heading } from "../../typography";
 import { TEST_DATA, columnDef_TEST_DATA } from "./Data.test-data";
 
 const meta: Meta<typeof DataGrid> = {
@@ -46,7 +47,27 @@ export const Attachments: Story = {
 
     return (
       <VStack padding="space-16" gap="space-16" height="100vh">
-        <div style={{ overflow: "hidden", display: "flex" }}>
+        <VStack
+          gap="space-8"
+          justify="center"
+          style={{ minHeight: "20vh", flexShrink: 0 }}
+        >
+          <Heading size="large" level="1">
+            Attachments page layout
+          </Heading>
+          <BodyShort>
+            The table and its attachments fill the remaining space. Only the
+            table content scrolls.
+          </BodyShort>
+        </VStack>
+        <div
+          style={{
+            overflow: "hidden",
+            display: "flex",
+            flex: 1,
+            minHeight: 0,
+          }}
+        >
           <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
             <DataGrid.Table
               topContent={<Content />}
