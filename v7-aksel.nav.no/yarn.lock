@@ -13820,13 +13820,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-responsive-masonry@npm:2.2.0":
-  version: 2.2.0
-  resolution: "react-responsive-masonry@npm:2.2.0"
-  checksum: 10/398e55495d70f9d05f22a8dda1b560af4e67244e5712809d7747b2fb7e1b093d97759d945fc58f97f11b644403da32873d0680940921fecf4fa533033fc735bd
-  languageName: node
-  linkType: hard
-
 "react-rx@npm:^4.2.2":
   version: 4.2.2
   resolution: "react-rx@npm:4.2.2"
@@ -17120,7 +17113,6 @@ __metadata:
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
     react-markdown: "npm:^9.0.1"
-    react-responsive-masonry: "npm:2.2.0"
     remark-gfm: "npm:^4.0.0"
     sanity: "npm:4.14.1"
     server-only: "npm:^0.0.1"
