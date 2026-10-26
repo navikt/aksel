@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.20.1
+
+### Patch Changes
+
+- Badge: Increase inline padding by 1px for better optical balance ([#5443](https://github.com/navikt/aksel/pull/5443))
+
 ## 8.20.0
 
 ### Minor Changes
