@@ -49,7 +49,7 @@ export interface DateInputProps
    */
   label: React.ReactNode;
   /**
-   * Shows label and description for screen readers only
+   * Hides the label and description visually while keeping them available to screen readers
    * @default false
    */
   hideLabel?: boolean;
