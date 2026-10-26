@@ -30,18 +30,6 @@ function cancelScheduledClear(politeness: Politeness) {
   }
 }
 
-const pendingFrames: Record<Politeness, Set<number>> = {
-  polite: new Set(),
-  assertive: new Set(),
-};
-
-function cancelPendingFrames(politeness: Politeness) {
-  for (const frame of pendingFrames[politeness]) {
-    cancelAnimationFrame(frame);
-  }
-  pendingFrames[politeness].clear();
-}
-
 function scheduleClear(politeness: Politeness, target: HTMLElement) {
   cancelScheduledClear(politeness);
   clearTimers[politeness] = setTimeout(() => {
@@ -92,22 +80,13 @@ function announce(message: string, politeness: Politeness = "polite") {
   }
   const target = r[politeness];
   if (!message) {
-    cancelPendingFrames(politeness);
     cancelScheduledClear(politeness);
     target.textContent = "";
     return;
   }
-  // Clear first in case the new message equals the current text.
-  target.textContent = "";
-  // Defer setting text to the next animation frame so the browser doesn't
-  // batch the clear and re-set into a single no-op for screen readers.
-  // TODO: TEST på Mac. I BrowserStack ser det ut som dette ikke (alltid) hjelper (det funker ikke å gjenta samme beskjed innen 2 sek)
-  const frame = requestAnimationFrame(() => {
-    pendingFrames[politeness].delete(frame);
-    target.textContent = message;
-  });
-  pendingFrames[politeness].add(frame);
-  // Auto-clear so the last message does not linger indefinitely.
+  // If the message is the same as the current text,
+  // append a non-breaking space to force a re-announcement.
+  target.textContent = message === target.textContent ? `${message} ` : message; // eslint-disable-line no-irregular-whitespace
   scheduleClear(politeness, target);
 }
 
@@ -121,7 +100,8 @@ function announce(message: string, politeness: Politeness = "polite") {
  * text. Announcing again before the clear simply resets the countdown.
  */
 function useAnnounce() {
-  getRegions(); // Ensure regions are created on beforehand // TODO: Test på ekte Mac om faktisk trengs
+  getRegions(); // Ensure regions are created on beforehand
+  // If we use this hook several places, each instance should get their own live regions to avoid conflicts.
   return announce;
 }
 

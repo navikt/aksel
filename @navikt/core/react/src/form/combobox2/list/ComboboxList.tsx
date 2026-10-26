@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { debounce } from "../../../utils-external";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
@@ -55,13 +55,7 @@ function ComboboxListContent<
     useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
-
-  const shouldAnnounceRef = useRef(false);
-  const announce = useAnnounce();
-  const announceHits = useMemo(
-    () => debounce((hits: number) => announce(`${hits} treff`), 2000),
-    [announce],
-  );
+  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString, filterString);
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
@@ -82,18 +76,7 @@ function ComboboxListContent<
     ? filterOptions(options, deferredFilterString)
     : options;
 
-  if (deferredFilterString !== filterString) {
-    shouldAnnounceRef.current = true;
-  } else if (shouldAnnounceRef.current) {
-    if (filteredOptions.length === 0) {
-      announceHits.clear();
-      announce("Ingen treff"); // Not debounced
-    } else {
-      const hits = getNumberOfOptions(filteredOptions);
-      announceHits(hits);
-    }
-    shouldAnnounceRef.current = false;
-  }
+  maybeAnnouceHits(filteredOptions);
 
   if (filteredOptions.length === 0) {
     return <div className="aksel-combobox2__no-results">Ingen treff</div>;
@@ -170,6 +153,46 @@ function getNumberOfOptions<T extends ComboboxOptionData>(
     }
     return count + 1;
   }, 0);
+}
+
+function useHitsAnnouncer(deferredFilterString: string, filterString: string) {
+  const shouldAnnounceRef = useRef(false);
+  const announce = useAnnounce();
+  const announceHits = useMemo(
+    () => debounce((hits: number) => announce(`${hits} treff`), 2000),
+    [announce],
+  );
+  const announceNoHits = useMemo(
+    () => debounce(() => announce(`Ingen treff`), 500),
+    [announce],
+  );
+  useEffect(
+    () => () => {
+      announceHits.clear();
+      announceNoHits.clear();
+    },
+    [announceHits, announceNoHits],
+  );
+
+  return (
+    filteredOptions: (
+      ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>
+    )[],
+  ) => {
+    if (deferredFilterString !== filterString) {
+      shouldAnnounceRef.current = true;
+    } else if (shouldAnnounceRef.current) {
+      if (filteredOptions.length === 0) {
+        announceHits.clear();
+        announceNoHits();
+      } else {
+        const hits = getNumberOfOptions(filteredOptions);
+        announceNoHits.clear();
+        announceHits(hits);
+      }
+      shouldAnnounceRef.current = false;
+    }
+  };
 }
 
 export type { ComboboxListProps };
