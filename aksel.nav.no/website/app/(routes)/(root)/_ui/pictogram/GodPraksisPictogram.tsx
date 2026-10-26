@@ -1,4 +1,4 @@
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "isomorphic-dompurify";
 import "server-only";
 import styles from "./GodPraksisPictogram.module.css";
 
@@ -26,7 +26,7 @@ async function GodPraksisPictogram({
 
   const formattedSvgString = formatSvgString(svgString, active);
 
-  const cleanedSvg = DOMPurify.sanitize(formattedSvgString, {
+  const cleanedSvg = sanitize(formattedSvgString, {
     USE_PROFILES: { svg: true },
   });
 

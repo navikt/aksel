@@ -1,4 +1,4 @@
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "isomorphic-dompurify";
 import styles from "./ImageAsSvg.module.css";
 
 /**
@@ -27,7 +27,7 @@ async function ImageAsThemedSvg({
 
   const formattedSvgString = formatSvgString(svgString);
 
-  const cleanedSvg = DOMPurify.sanitize(formattedSvgString, {
+  const cleanedSvg = sanitize(formattedSvgString, {
     USE_PROFILES: { svg: true },
   });
 
