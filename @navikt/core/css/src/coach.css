@@ -32,6 +32,10 @@
   }
 }
 
+.aksel-coach__top-close-trigger {
+  margin-inline-end: calc(-1 * (var(--ax-space-12) + var(--ax-space-2)));
+}
+
 .aksel-coach__footer {
   --__axc-coach__footer-p-b: var(--ax-space-12) var(--ax-space-0);
 
