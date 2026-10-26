@@ -103,6 +103,66 @@ export const DropdownCaptionNavigation: Story = {
   },
 };
 
+export const ControlledMonthPreservesFocus: Story = {
+  tags: ["play-fn", "!skip-test"],
+  render: () => {
+    const [month, setMonth] = React.useState(new Date(2026, 2, 15));
+    const [selected, setSelected] = React.useState<Date | undefined>(
+      new Date(2026, 2, 15),
+    );
+
+    return (
+      <fieldset
+        onKeyDown={(event) => {
+          if (event.key.toLowerCase() === "j") {
+            const nextDate = new Date(2026, 10, 15);
+            setMonth(nextDate);
+            setSelected(nextDate);
+          }
+        }}
+      >
+        <legend>Bytt måned med J</legend>
+        <DatePicker.Standalone
+          locale="nb"
+          month={month}
+          onMonthChange={setMonth}
+          selected={selected}
+          onSelect={setSelected}
+        />
+      </fieldset>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const selectedDay = canvas.getByRole("button", {
+      name: "søndag 15",
+      pressed: true,
+    });
+
+    await userEvent.click(selectedDay);
+    await expect(selectedDay).toHaveFocus();
+    await userEvent.keyboard("j");
+
+    await expect(canvas.getByText("november 2026")).toBeInTheDocument();
+    await expect(
+      canvas.getByRole("button", { name: "søndag 15", pressed: true }),
+    ).toHaveFocus();
+
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(
+      canvas.getByRole("button", { name: "mandag 16" }),
+    ).toHaveFocus();
+
+    const nextMonthButton = canvas.getByRole("button", {
+      name: "Gå til neste måned",
+    });
+    await userEvent.click(nextMonthButton);
+
+    await expect(canvas.getByText("desember 2026")).toBeInTheDocument();
+    await expect(nextMonthButton).toHaveFocus();
+  },
+};
+
 export const Required: Story = {
   render: () => {
     const { datepickerProps } = useDatepicker({
