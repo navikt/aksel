@@ -1,5 +1,31 @@
 # @navikt/ds-react
 
+## 8.20.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.20.1
+  - @navikt/aksel-icons@8.20.1
+
+## 8.20.0
+
+### Minor Changes
+
+- Checkbox: Add `CheckboxCard` and `CheckboxCardGroup` components ([#5364](https://github.com/navikt/aksel/pull/5364))
+
+### Patch Changes
+
+- Lookup, Badge: Mark as deprecated when imported from @navikt/ds-react/PREVIEW ([#5401](https://github.com/navikt/aksel/pull/5401))
+
+- ToggleGroup: Add xsmall as size ([#5411](https://github.com/navikt/aksel/pull/5411))
+
+- Build: `next build --webpack` now works when package is part of `optimizePackageImports` ([#5422](https://github.com/navikt/aksel/pull/5422))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.20.0
+  - @navikt/aksel-icons@8.20.0
+
 ## 8.19.2
 
 ### Patch Changes

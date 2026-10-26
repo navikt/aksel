@@ -1,11 +1,12 @@
 import { differenceInMilliseconds } from "date-fns";
 import type { Period, PositionedPeriod } from "./types.internal";
 
-export const lastDate = (a: Date, b: Date): number =>
-  differenceInMilliseconds(a, b);
+const lastDate = (a: Date, b: Date): number => differenceInMilliseconds(a, b);
 
-export const lastPeriod = (a: PositionedPeriod, b: PositionedPeriod): number =>
+const lastPeriod = (a: PositionedPeriod, b: PositionedPeriod): number =>
   a.horizontalPosition - b.horizontalPosition;
 
-export const lastSinglePeriod = (a: Period, b: Period): number =>
+const lastSinglePeriod = (a: Period, b: Period): number =>
   differenceInMilliseconds(b.endInclusive, a.endInclusive);
+
+export { lastDate, lastPeriod, lastSinglePeriod };

@@ -24,6 +24,7 @@ const ListboxInputSlot = ({
       // @ts-expect-error - You are meant to use an <input>, but Slot doesn't know that.
       autoComplete="off"
       role="combobox"
+      data-aksel-listbox-input
     >
       {children}
     </Slot>

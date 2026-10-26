@@ -1,7 +1,7 @@
 import type { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
-import Timeline from "./Timeline";
+import { Timeline } from "./index";
 
 export default {
   title: "ds-react/Timeline/Tests",

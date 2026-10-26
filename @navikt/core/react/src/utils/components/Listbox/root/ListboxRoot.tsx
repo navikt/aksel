@@ -72,30 +72,34 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
             listbox.focus();
           }
 
-          const virtuallyFocusWithFallback = (
-            getNextElement: (currentOption: HTMLElement) => HTMLElement | null,
+          const handleArrowUpOrDown = (
+            getNextOption: (currentOption: HTMLElement) => HTMLElement | null,
             getFallback: () => HTMLElement | null,
           ) => {
             event.preventDefault();
             if (!focusedOptionElm) {
-              const fallback =
-                listbox.querySelector<HTMLElement>('[aria-selected="true"]') ||
-                getFallback();
-              virtuallyFocusOption(fallback);
+              virtuallyFocusOption(getFallback());
               return;
             }
-            const nextOption = getNextElement(focusedOptionElm);
+            const nextOption = getNextOption(focusedOptionElm);
             if (nextOption) {
               virtuallyFocusOption(nextOption);
+              return;
+            }
+            // No nextOption: Assume you pressed up on first option or down on last option
+            const activeElement = document.activeElement as HTMLElement;
+            if (activeElement.dataset?.akselListboxInput) {
+              setVirtuallyFocusedOptionId("");
+              return;
             }
           };
 
           switch (event.key) {
             case "ArrowUp":
-              virtuallyFocusWithFallback(findPrevOption, getLastOption);
+              handleArrowUpOrDown(findPrevOption, getLastOption);
               break;
             case "ArrowDown":
-              virtuallyFocusWithFallback(findNextOption, getFirstOption);
+              handleArrowUpOrDown(findNextOption, getFirstOption);
               break;
             case "PageUp":
               event.preventDefault();

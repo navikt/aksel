@@ -1,1 +1,2 @@
-yarn lint-staged
+# Runs the local lint-staged checks before committing
+./node_modules/.bin/lint-staged

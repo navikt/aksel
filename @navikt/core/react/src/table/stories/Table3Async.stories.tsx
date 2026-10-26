@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { Loader } from "../../loader";
 import { Pagination } from "../../pagination";
-import Table from "../Table";
-import type { SortState } from "../types";
+import type { SortState } from "../Table.types";
+import { Table } from "../index";
 import peopleJson from "./people.json";
 
 export default {

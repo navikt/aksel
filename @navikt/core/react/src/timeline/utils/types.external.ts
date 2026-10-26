@@ -1,16 +1,15 @@
 import React from "react";
 
-export type PeriodStatus =
-  "success" | "warning" | "danger" | "info" | "neutral";
+type PeriodStatus = "success" | "warning" | "danger" | "info" | "neutral";
 
-export type Percentage = number;
+type Percentage = number;
 
-export interface Positioned {
+interface Positioned {
   horizontalPosition: number;
   direction: "left" | "right";
 }
 
-export interface Period {
+interface Period {
   id: string;
   start: Date;
   endInclusive: Date;
@@ -27,7 +26,7 @@ export interface Period {
   ref?: React.Ref<HTMLDivElement | HTMLButtonElement>;
 }
 
-export interface PositionedPeriod extends Period, Positioned {
+interface PositionedPeriod extends Period, Positioned {
   width: number;
   active?: boolean;
   cropped?: "left" | "right" | "both";
@@ -38,21 +37,21 @@ export interface PositionedPeriod extends Period, Positioned {
   start: Date;
 }
 
-export interface Spatial {
+interface Spatial {
   width: number;
 }
 
-export interface AxisLabel extends Positioned, Spatial {
+interface AxisLabel extends Positioned, Spatial {
   label: string;
   date: Date;
 }
 
-export interface InternalSimpleTimeline {
+interface InternalSimpleTimeline {
   id: string;
   periods: PositionedPeriod[];
 }
 
-export interface SimplePeriod {
+interface SimplePeriod {
   /**
    * Startdato for perioden, mao. periodens høyre kant.
    */
@@ -63,8 +62,21 @@ export interface SimplePeriod {
   end: Date;
 }
 
-export type AxisLabelTemplates = {
+type AxisLabelTemplates = {
   day?: string;
   month?: string;
   year?: string;
+};
+
+export type {
+  PeriodStatus,
+  Percentage,
+  Positioned,
+  Period,
+  PositionedPeriod,
+  Spatial,
+  AxisLabel,
+  InternalSimpleTimeline,
+  SimplePeriod,
+  AxisLabelTemplates,
 };

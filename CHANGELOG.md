@@ -1,5 +1,31 @@
 # Changelog
 
+## 8.20.1
+
+### @navikt/ds-css
+
+- Badge: Increase inline padding by 1px for better optical balance ([#5443](https://github.com/navikt/aksel/pull/5443))
+
+## 8.20.0
+
+### @navikt/ds-css
+
+- Checkbox: Add `CheckboxCard` and `CheckboxCardGroup` components ([#5364](https://github.com/navikt/aksel/pull/5364))
+
+* ToggleGroup: Add xsmall as size ([#5411](https://github.com/navikt/aksel/pull/5411))
+
+* RadioCard, CheckboxCard: Updated border-color in unchecked error-state, input-color in checked disabled state ([#5425](https://github.com/navikt/aksel/pull/5425))
+
+### @navikt/ds-react
+
+- Checkbox: Add `CheckboxCard` and `CheckboxCardGroup` components ([#5364](https://github.com/navikt/aksel/pull/5364))
+
+* Lookup, Badge: Mark as deprecated when imported from @navikt/ds-react/PREVIEW ([#5401](https://github.com/navikt/aksel/pull/5401))
+
+* ToggleGroup: Add xsmall as size ([#5411](https://github.com/navikt/aksel/pull/5411))
+
+* Build: `next build --webpack` now works when package is part of `optimizePackageImports` ([#5422](https://github.com/navikt/aksel/pull/5422))
+
 ## 8.19.2
 
 ### @navikt/ds-css

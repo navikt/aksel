@@ -1,5 +1,23 @@
 # @navikt/ds-css
 
+## 8.20.1
+
+### Patch Changes
+
+- Badge: Increase inline padding by 1px for better optical balance ([#5443](https://github.com/navikt/aksel/pull/5443))
+
+## 8.20.0
+
+### Minor Changes
+
+- Checkbox: Add `CheckboxCard` and `CheckboxCardGroup` components ([#5364](https://github.com/navikt/aksel/pull/5364))
+
+### Patch Changes
+
+- ToggleGroup: Add xsmall as size ([#5411](https://github.com/navikt/aksel/pull/5411))
+
+- RadioCard, CheckboxCard: Updated border-color in unchecked error-state, input-color in checked disabled state ([#5425](https://github.com/navikt/aksel/pull/5425))
+
 ## 8.19.2
 
 ### Patch Changes

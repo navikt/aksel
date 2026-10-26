@@ -1,0 +1,52 @@
+import React, { forwardRef } from "react";
+import { cl } from "../../utils/helpers";
+import { useTabPanel } from "./useTabPanel";
+
+interface TabsPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Tab panel content.
+   */
+  children: React.ReactNode;
+  /**
+   * Value for state-handling.
+   */
+  value: string;
+  /**
+   * If true, will only render children when selected.
+   * @default true
+   */
+  lazy?: boolean;
+  /**
+   * Overrides auto-generated id.
+   *
+   * **Warning**: TabPanel generates an id if not provided. If you need to override it,
+   * make sure to also include the correct `aria-labelledby` id for the Tab that labels it.
+   */
+  id?: string;
+}
+
+const TabsPanel = forwardRef<HTMLDivElement, TabsPanelProps>(
+  ({ className, value, children, lazy = true, id, ...rest }, ref) => {
+    const ctx = useTabPanel({ value });
+
+    return (
+      <div
+        ref={ref}
+        {...rest}
+        className={cl("aksel-tabs__tabpanel", className)}
+        role="tabpanel"
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: TabPanel is a non-interactive element that requires a tabindex for keyboard navigation.
+        tabIndex={0}
+        aria-labelledby={rest["aria-labelledby"] ?? ctx.labelledbyId}
+        id={id ?? ctx.id}
+        hidden={ctx.hidden}
+        data-state={!ctx.hidden ? "active" : "inactive"}
+      >
+        {lazy && ctx.hidden ? null : children}
+      </div>
+    );
+  },
+);
+
+export { TabsPanel };
+export type { TabsPanelProps };

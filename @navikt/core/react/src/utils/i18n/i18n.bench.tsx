@@ -4,7 +4,7 @@ import { bench, describe } from "vitest";
 import { Provider } from "../../provider";
 import { get } from "./get";
 import { useI18n } from "./i18n.hooks";
-import type { PartialTranslations } from "./i18n.types";
+import type { ComponentTranslation } from "./i18n.types";
 import { nb } from "./locales";
 
 describe("translate function throughput", () => {
@@ -54,11 +54,11 @@ describe("translate with multiple context objects", () => {
 });
 
 describe("get() function throughput", () => {
-  const objects: (PartialTranslations | undefined)[] = [
+  const objects: (ComponentTranslation<"FileUpload"> | undefined)[] = [
     undefined,
-    { FileUpload: { item: { uploading: "First" } } },
-    { FileUpload: { item: { downloading: "Second" } } },
-    { FileUpload: nb.FileUpload },
+    { item: { uploading: "First" } },
+    { item: { downloading: "Second" } },
+    nb.FileUpload,
   ];
 
   bench("shallow key hit in first object", () => {
@@ -74,6 +74,6 @@ describe("get() function throughput", () => {
   });
 
   bench("long key dot notation parsing", () => {
-    get("dropzone.dragAndDropMultiple", [{ FileUpload: nb.FileUpload }]);
+    get("dropzone.dragAndDropMultiple", [nb.FileUpload]);
   });
 });

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useModalContext } from "../../modal/Modal.context";
+import { useModalContext } from "../../modal/root/ModalRoot.context";
 import { useId } from "../../utils-external";
 import {
   Menu,

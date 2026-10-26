@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react";
-import type { TimelinePeriod, TimelineRow, TimelineRowProps } from "..";
 import { omit } from "../../utils-external";
+import type { TimelinePeriod } from "../period/TimelinePeriod";
+import type { TimelineRow, TimelineRowProps } from "../row/TimelineRow";
 import type { Period } from "./types.external";
 
 type TimelineRowPropsWithRef = React.ComponentProps<typeof TimelineRow>;
@@ -15,7 +16,7 @@ type ParsedRow = {
   ref?: React.Ref<HTMLOListElement>;
 };
 
-export const parseRows = (rowChildren: ReactNode[]) => {
+const parseRows = (rowChildren: ReactNode[]) => {
   const parsedChildren: ParsedRow[] = [];
 
   rowChildren?.forEach((row: React.ReactNode) => {
@@ -77,3 +78,5 @@ function getChildRef<T>(
     ? (children.props as any).ref // React 19 (children.ref still works, but gives a warning)
     : (children as any).ref; // React <19
 }
+
+export { parseRows };

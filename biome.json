@@ -26,7 +26,7 @@
       "**",
       "!**/public",
       "!**/codemod/**/*.js",
-      "!**/modal/dialog-polyfill.ts",
+      "!**/modal/helpers/dialog-polyfill.ts",
       "!**/_sanity/query-types.ts",
       "!**/component-names.generated.ts",
       "!**/transforms/**/*.input.*",

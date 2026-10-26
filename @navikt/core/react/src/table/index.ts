@@ -1,16 +1,23 @@
 "use client";
-export { default as TableBody, type BodyProps } from "./Body";
 export {
-  default as TableColumnHeader,
-  type ColumnHeaderProps,
-} from "./ColumnHeader";
-export { default as TableDataCell, type DataCellProps } from "./DataCell";
-export {
-  default as TableExpandableRow,
-  type ExpandableRowProps,
-} from "./ExpandableRow";
-export { default as TableHeader, type HeaderProps } from "./Header";
-export { default as TableHeaderCell, type HeaderCellProps } from "./HeaderCell";
-export { default as TableRow, type RowProps } from "./Row";
-export { default as Table, type TableProps } from "./Table";
-export type { SortState } from "./types";
+  Table,
+  TableBody,
+  TableColumnHeader,
+  TableDataCell,
+  TableExpandableRow,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from "./root/TableRoot";
+
+export type {
+  BodyProps,
+  ColumnHeaderProps,
+  DataCellProps,
+  ExpandableRowProps,
+  HeaderCellProps,
+  HeaderProps,
+  RowProps,
+  SortState,
+  TableProps,
+} from "./root/TableRoot";

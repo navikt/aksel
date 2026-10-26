@@ -13,9 +13,9 @@ interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
   ({ children, hasError, ...rest }, ref) => {
-    const { options, selectedOptions, size } = useComboboxRootContext();
+    const { options, value, size } = useComboboxRootContext();
 
-    const labels = getLabels(selectedOptions, options);
+    const labels = getLabels(value, options);
     const label =
       children ?? (labels.length > 1 ? `${labels.length} valgt` : labels[0]);
 
@@ -30,7 +30,8 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
-          aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
+          // TODO: This results in other problems. Find another fix!
+          //aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
           {...rest}
         >
           {label}
@@ -45,7 +46,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
 );
 
 const getLabels = (
-  selectedOptions: ComboboxRootProps["selectedOptions"],
+  value: ComboboxRootProps["value"],
   options: ComboboxRootProps["options"],
 ) => {
   const labels: string[] = [];
@@ -54,13 +55,13 @@ const getLabels = (
     if ("options" in optOrGroup) {
       // It's a group
       for (const option of optOrGroup.options) {
-        if (selectedOptions.includes(option.value)) {
+        if (value.includes(option.value)) {
           labels.push(option.label);
         }
       }
     } else {
       // It's a single option
-      if (selectedOptions.includes(optOrGroup.value)) {
+      if (value.includes(optOrGroup.value)) {
         labels.push(optOrGroup.label);
       }
     }

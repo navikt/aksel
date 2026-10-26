@@ -39,7 +39,7 @@ export interface SearchProps
    */
   label: React.ReactNode;
   /**
-   * Shows label and description for screenreaders only.
+   * Hides the label and description visually while keeping them available to screen readers.
    * @default true
    */
   hideLabel?: boolean;

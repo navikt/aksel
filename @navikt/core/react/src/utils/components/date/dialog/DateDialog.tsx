@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Button } from "../../../../button";
 import { useDialogContext } from "../../../../dialog/root/DialogRoot.context";
 import { Modal } from "../../../../modal";
-import { useModalContext } from "../../../../modal/Modal.context";
+import { useModalContext } from "../../../../modal/root/ModalRoot.context";
 import { Popover } from "../../../../popover";
 import { cl } from "../../../helpers";
 import { focusElement } from "../../../helpers/focus";

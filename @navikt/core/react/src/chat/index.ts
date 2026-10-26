@@ -1,3 +1,3 @@
 "use client";
-export { default as Chat, ChatBubble } from "./Chat";
-export type { ChatProps, ChatBubbleProps } from "./Chat";
+export { Chat, ChatBubble } from "./root/ChatRoot";
+export type { ChatProps, ChatBubbleProps } from "./root/ChatRoot";
