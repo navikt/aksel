@@ -1,0 +1,469 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "import"],
+  "categories": {
+    "correctness": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "19.3.1"
+    }
+  },
+  "env": {
+    "builtin": true,
+    "es2026": true,
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "**/lib",
+    "**/public",
+    "**/esm",
+    "**/cjs",
+    "**/dist",
+    "@navikt/aksel/**/*.input.*",
+    "@navikt/aksel/**/*.output.*",
+    "**/codemod/**/*.js",
+    "**/playwright-report/**/*",
+    "**/tokens/**/plugin.js",
+    "**/.next",
+    "**/query-types.ts",
+    ".yarn",
+    "**/next-env.d.ts",
+    "@navikt/aksel-icons/src/**",
+    "@navikt/aksel/src/version.ts",
+    "**/component-names.generated.ts",
+    "@navikt/core/tailwind/{src/tokens.ts,tailwind.config.js,tailwind.darkside.config.js}",
+    "@navikt/core/tokens/token_docs.js",
+    "apps/playroom/{playroom.config.js,src/auto-generated-imports.ts}",
+    "**/.build",
+    "**/coverage",
+    "**/storybook-static",
+    "**/test-results",
+    "tooling/analyzer/temp",
+    "apps/figma-icon-plugin/src/ui/vite-env.d.ts"
+  ],
+  "rules": {
+    "constructor-super": "error",
+    "for-direction": "error",
+    "getter-return": "error",
+    "no-async-promise-executor": "error",
+    "no-case-declarations": "error",
+    "no-class-assign": "error",
+    "no-compare-neg-zero": "error",
+    "no-cond-assign": "error",
+    "no-const-assign": "error",
+    "no-constant-binary-expression": "error",
+    "no-constant-condition": "error",
+    "no-control-regex": "error",
+    "no-debugger": "error",
+    "no-delete-var": "error",
+    "no-dupe-class-members": "error",
+    "no-dupe-else-if": "error",
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": "error",
+    "no-empty-character-class": "error",
+    "no-empty-pattern": "error",
+    "no-empty-static-block": "error",
+    "no-ex-assign": "error",
+    "no-extra-boolean-cast": "error",
+    "no-fallthrough": "error",
+    "no-func-assign": "error",
+    "no-global-assign": "error",
+    "no-import-assign": "error",
+    "no-invalid-regexp": "error",
+    "no-irregular-whitespace": "error",
+    "no-loss-of-precision": "error",
+    "no-misleading-character-class": "error",
+    "no-new-native-nonconstructor": "error",
+    "no-nonoctal-decimal-escape": "error",
+    "no-obj-calls": "error",
+    "no-prototype-builtins": "error",
+    "no-redeclare": "error",
+    "no-regex-spaces": "error",
+    "no-self-assign": "error",
+    "no-setter-return": "error",
+    "no-shadow-restricted-names": "error",
+    "no-sparse-arrays": "error",
+    "no-this-before-super": "error",
+    "no-unassigned-vars": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error",
+    "no-unsafe-finally": "error",
+    "no-unsafe-negation": "error",
+    "no-unsafe-optional-chaining": "error",
+    "no-unused-labels": "error",
+    "no-unused-private-class-members": "error",
+    "no-unused-vars": "error",
+    "no-useless-backreference": "error",
+    "no-useless-catch": "error",
+    "no-useless-escape": "error",
+    "no-with": "error",
+    "preserve-caught-error": "error",
+    "require-yield": "error",
+    "use-isnan": "error",
+    "valid-typeof": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-comment-textnodes": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/no-children-prop": "error",
+    "react/no-danger-with-children": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-find-dom-node": "error",
+    "react/no-is-mounted": "error",
+    "react/no-render-return-value": "error",
+    "react/no-string-refs": "error",
+    "react/no-unescaped-entities": "error",
+    "react/no-unknown-property": "error",
+    "react/react-in-jsx-scope": "error",
+    "import/default": "error",
+    "import/no-named-as-default-member": "warn",
+    "import/no-duplicates": "warn",
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "propElementValues": "always"
+      }
+    ],
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useClientLayoutEffect)"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["aksel.nav.no/sanity-studio/**"],
+      "rules": {
+        "react/react-in-jsx-scope": "off"
+      }
+    },
+    {
+      "files": [
+        "**/*.stories.{ts,tsx,js,jsx,mjs,cjs}",
+        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}"
+      ],
+      "rules": {
+        "storybook/await-interactions": "error",
+        "storybook/context-in-play-function": "error",
+        "storybook/default-exports": "error",
+        "storybook/hierarchy-separator": "warn",
+        "storybook/no-redundant-story-name": "warn",
+        "storybook/no-renderer-packages": "error",
+        "storybook/prefer-pascal-case": "warn",
+        "storybook/story-exports": "error",
+        "storybook/use-storybook-expect": "error",
+        "storybook/use-storybook-testing-library": "error",
+        "import/no-anonymous-default-export": "off",
+        "react/rules-of-hooks": "off"
+      },
+      "jsPlugins": ["eslint-plugin-storybook"]
+    },
+    {
+      "files": [".storybook/main.{js,cjs,mjs,ts}"],
+      "rules": {
+        "storybook/no-uninstalled-addons": "error"
+      },
+      "jsPlugins": ["eslint-plugin-storybook"]
+    },
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "rules": {
+        "constructor-super": "off",
+        "getter-return": "off",
+        "no-class-assign": "off",
+        "no-const-assign": "off",
+        "no-dupe-class-members": "off",
+        "no-dupe-keys": "off",
+        "no-func-assign": "off",
+        "no-import-assign": "off",
+        "no-new-native-nonconstructor": "off",
+        "no-obj-calls": "off",
+        "no-redeclare": "off",
+        "no-setter-return": "off",
+        "no-this-before-super": "off",
+        "no-unreachable": "off",
+        "no-unsafe-negation": "off",
+        "no-with": "off",
+        "no-var": "error",
+        "prefer-const": "error",
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "no-array-constructor": "error",
+        "no-unused-expressions": [
+          "error",
+          {
+            "allowShortCircuit": true,
+            "allowTernary": true
+          }
+        ],
+        "typescript/ban-ts-comment": "error",
+        "typescript/no-duplicate-enum-values": "error",
+        "typescript/no-empty-object-type": "error",
+        "typescript/no-explicit-any": "off",
+        "typescript/no-extra-non-null-assertion": "error",
+        "typescript/no-misused-new": "error",
+        "typescript/no-namespace": "error",
+        "typescript/no-non-null-asserted-optional-chain": "error",
+        "typescript/no-require-imports": "error",
+        "typescript/no-this-alias": "error",
+        "typescript/no-unnecessary-type-constraint": "error",
+        "typescript/no-unsafe-declaration-merging": "error",
+        "typescript/no-unsafe-function-type": "error",
+        "typescript/no-wrapper-object-types": "error",
+        "typescript/prefer-as-const": "error",
+        "typescript/prefer-namespace-keyword": "error",
+        "typescript/triple-slash-reference": "error",
+        "import/default": "off",
+        "import/no-named-as-default-member": "off"
+      },
+      "plugins": ["typescript"]
+    },
+    {
+      "files": ["**/*.test.*", "**/__tests__/*"],
+      "rules": {
+        "testing-library/await-async-events": [
+          "error",
+          {
+            "eventModule": "userEvent"
+          }
+        ],
+        "testing-library/await-async-queries": "error",
+        "testing-library/await-async-utils": "error",
+        "testing-library/no-await-sync-events": [
+          "error",
+          {
+            "eventModules": ["fire-event"]
+          }
+        ],
+        "testing-library/no-await-sync-queries": "error",
+        "testing-library/no-container": "error",
+        "testing-library/no-debugging-utils": "warn",
+        "testing-library/no-dom-import": ["error", "react"],
+        "testing-library/no-global-regexp-flag-in-query": "error",
+        "testing-library/no-manual-cleanup": "error",
+        "testing-library/no-node-access": "error",
+        "testing-library/no-promise-in-fire-event": "error",
+        "testing-library/no-render-in-lifecycle": "error",
+        "testing-library/no-unnecessary-act": "error",
+        "testing-library/no-wait-for-multiple-assertions": "error",
+        "testing-library/no-wait-for-side-effects": "error",
+        "testing-library/no-wait-for-snapshot": "error",
+        "testing-library/prefer-find-by": "error",
+        "testing-library/prefer-presence-queries": "error",
+        "testing-library/prefer-query-by-disappearance": "error",
+        "testing-library/prefer-screen-queries": "error",
+        "testing-library/render-result-naming-convention": "error",
+        "vitest/expect-expect": "error",
+        "vitest/no-commented-out-tests": "error",
+        "vitest/no-disabled-tests": "warn",
+        "vitest/no-focused-tests": "error",
+        "vitest/no-identical-title": "error",
+        "vitest/no-import-node-test": "error",
+        "vitest/no-interpolation-in-snapshots": "error",
+        "vitest/no-mocks-import": "error",
+        "vitest/no-standalone-expect": "error",
+        "vitest/no-unneeded-async-expect-function": "error",
+        "vitest/prefer-called-exactly-once-with": "error",
+        "vitest/require-local-test-context-for-concurrent-snapshots": "error",
+        "vitest/valid-describe-callback": "error",
+        "vitest/valid-expect": "error",
+        "vitest/valid-expect-in-promise": "error",
+        "vitest/valid-title": "error"
+      },
+      "jsPlugins": ["eslint-plugin-testing-library"],
+      "plugins": ["vitest"]
+    },
+    {
+      "files": ["aksel.nav.no/website/**"],
+      "rules": {
+        "react/no-unknown-property": [
+          "error",
+          {
+            "ignore": ["jsx", "global"]
+          }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "nextjs/google-font-display": "warn",
+        "nextjs/google-font-preconnect": "warn",
+        "nextjs/next-script-for-ga": "warn",
+        "nextjs/no-async-client-component": "warn",
+        "nextjs/no-before-interactive-script-outside-document": "warn",
+        "nextjs/no-css-tags": "warn",
+        "nextjs/no-head-element": "warn",
+        "nextjs/no-img-element": "warn",
+        "nextjs/no-page-custom-font": "warn",
+        "nextjs/no-styled-jsx-in-document": "warn",
+        "nextjs/no-sync-scripts": "warn",
+        "nextjs/no-title-in-document-head": "warn",
+        "nextjs/no-typos": "warn",
+        "nextjs/no-unwanted-polyfillio": "warn",
+        "nextjs/inline-script-id": "error",
+        "nextjs/no-assign-module-variable": "error",
+        "nextjs/no-document-import-in-page": "error",
+        "nextjs/no-duplicate-head": "error",
+        "nextjs/no-head-import-in-document": "error",
+        "nextjs/no-script-component-in-head": "error"
+      },
+      "plugins": ["nextjs"]
+    },
+    {
+      "files": ["aksel.nav.no/website/pages/eksempler/**"],
+      "rules": {
+        "nextjs/no-img-element": "off"
+      },
+      "plugins": ["nextjs"]
+    },
+    {
+      "files": [
+        "aksel.nav.no/website/pages/eksempler/**/*.tsx",
+        "aksel.nav.no/website/pages/templates/**/*.tsx"
+      ],
+      "rules": {
+        "aksel-local/args-check": ["error"],
+        "aksel-local/comment-check": ["error"]
+      },
+      "jsPlugins": ["eslint-plugin-aksel-local"]
+    },
+    {
+      "files": [
+        "**/examples/__parts*/*.tsx",
+        "**/pages/templates/**/*.tsx",
+        "**/pages/eksempler/**/*.tsx"
+      ],
+      "rules": {
+        "aksel-local/import-check": ["error"]
+      },
+      "jsPlugins": ["eslint-plugin-aksel-local"]
+    },
+    {
+      "files": ["**/examples/__parts-inline/*.tsx"],
+      "rules": {
+        "arrow-body-style": ["error", "never"],
+        "func-style": ["error", "expression"],
+        "import/no-named-export": "error"
+      }
+    },
+    {
+      "files": ["@navikt/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "react",
+                "importNames": [
+                  "useId",
+                  "useInsertionEffect",
+                  "useSyncExternalStore",
+                  "useDeferredValue",
+                  "useTransition",
+                  "startTransition",
+                  "useOptimistic",
+                  "useActionState",
+                  "use",
+                  "cache",
+                  "useEffectEvent",
+                  "ViewTransition",
+                  "addTransitionType"
+                ],
+                "message": "We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
+              },
+              {
+                "name": "react-dom/client",
+                "importNames": ["createRoot", "hydrateRoot"],
+                "message": "React 18+ API not allowed (targeting React 17)."
+              },
+              {
+                "name": "react-dom",
+                "importNames": ["browser"],
+                "message": "React 19+ API not allowed (targeting React 17)."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["fs", "path"],
+                "message": "Use `node:` prefix when importing native node modules, e.g. `import path from \"node:path\"`."
+              },
+              {
+                "group": ["**/esm/**", "**/cjs/**"],
+                "message": "Do not import from build output directories. Import from source instead."
+              }
+            ]
+          }
+        ],
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "React",
+            "property": "useId",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useInsertionEffect",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useSyncExternalStore",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useDeferredValue",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useTransition",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "startTransition",
+            "message": "React 18+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useOptimistic",
+            "message": "React 19+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useActionState",
+            "message": "React 19+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "use",
+            "message": "React 19+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "cache",
+            "message": "React 19+ API not allowed (targeting React 17)."
+          },
+          {
+            "object": "React",
+            "property": "useEffectEvent",
+            "message": "React 19+ API not allowed (targeting React 17)."
+          }
+        ]
+      }
+    },
+    {
+      "files": ["@navikt/**/*.stories.tsx"],
+      "rules": {
+        "no-restricted-imports": "off",
+        "no-restricted-properties": "off"
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const akselLocal = require("eslint-plugin-aksel-local");
 const importPlugin = require("eslint-plugin-import");
+const oxlint = require("eslint-plugin-oxlint");
 const reactPlugin = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
@@ -48,6 +49,16 @@ module.exports = defineConfig([
     "tooling/analyzer/temp",
   ]),
   js.configs.recommended,
+  {
+    // Rules are split between oxlint and ESLint, so ESLint can't tell if a directive is unused
+    linterOptions: { reportUnusedDisableDirectives: "off" },
+    // Rules run by oxlint jsPlugins. Registered so disable-comments resolve.
+    plugins: {
+      "aksel-local": akselLocal,
+      storybook,
+      "testing-library": testingLibrary,
+    },
+  },
   reactPlugin.configs.flat.recommended,
   {
     // Uses the new JSX transform, so React does not need to be in scope
@@ -55,7 +66,6 @@ module.exports = defineConfig([
     ...reactPlugin.configs.flat["jsx-runtime"],
   },
   reactHooks.configs.flat["recommended-latest"],
-  storybook.configs["flat/recommended"],
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   {
@@ -88,9 +98,6 @@ module.exports = defineConfig([
   {
     files: ["**/*.{ts,tsx}"],
     extends: [tseslint.configs.recommended],
-    linterOptions: {
-      reportUnusedDisableDirectives: true,
-    },
     rules: {
       //
       // Start: Covered by TypeScript, and slow without a TS resolver
@@ -110,7 +117,7 @@ module.exports = defineConfig([
 
   {
     files: ["**/*.test.*", "**/__tests__/*"],
-    extends: [testingLibrary.configs["flat/react"], vitest.configs.recommended],
+    extends: [vitest.configs.recommended],
   },
   {
     files: ["aksel.nav.no/website/**"],
@@ -131,32 +138,6 @@ module.exports = defineConfig([
     files: ["aksel.nav.no/website/pages/eksempler/**"],
     rules: {
       "@next/next/no-img-element": "off",
-    },
-  },
-  {
-    files: [
-      "aksel.nav.no/website/pages/eksempler/**/*.tsx",
-      "aksel.nav.no/website/pages/templates/**/*.tsx",
-    ],
-    plugins: {
-      "aksel-local": akselLocal,
-    },
-    rules: {
-      "aksel-local/args-check": ["error"],
-      "aksel-local/comment-check": ["error"],
-    },
-  },
-  {
-    files: [
-      "**/examples/__parts*/*.tsx",
-      "**/pages/templates/**/*.tsx",
-      "**/pages/eksempler/**/*.tsx",
-    ],
-    plugins: {
-      "aksel-local": akselLocal,
-    },
-    rules: {
-      "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
     },
   },
   {
@@ -286,4 +267,6 @@ module.exports = defineConfig([
       ],
     },
   },
+  // Must be last: turns off rules already covered by oxlint (see .oxlintrc.json)
+  ...oxlint.buildFromOxlintConfig(require("./.oxlintrc.json")),
 ]);
