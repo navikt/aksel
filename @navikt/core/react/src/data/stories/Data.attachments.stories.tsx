@@ -51,6 +51,7 @@ export const Attachments: Story = {
             <DataGrid.Table
               topContent={<Content />}
               bottomContent={<Content />}
+              stickyHeader
             />
           </DataGrid>
         </div>
