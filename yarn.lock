@@ -5095,17 +5095,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:16.4.2":
+"@next/env@npm:16.4.2, @next/env@npm:^15.0.0 || ^16.0.0":
   version: 16.4.2
   resolution: "@next/env@npm:16.4.2"
   checksum: 10/6ac734ca99aa1fb31d1130fd6cffdec711ef460cb2b87fa880fa00201c06f61de62bc5d5b7835aa2861087e9587aa1a535ba85dbf37a40979075bc50dac3588f
-  languageName: node
-  linkType: hard
-
-"@next/env@npm:^15.0.0 || ^16.0.0":
-  version: 16.3.8
-  resolution: "@next/env@npm:16.3.8"
-  checksum: 10/986f34658f5f8f91c7e137e2d2e9f28eac17689a4f670208414ce2f2ae1a2243f35fe0228ff4eaf2cb9b9ea3c305917b69728a68e52bdfd643e74ad6002bc957
   languageName: node
   linkType: hard
 
