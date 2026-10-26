@@ -49,16 +49,15 @@ export const Default: StoryObj<DefaultStoryProps> = {
       toDate: new Date("Aug 23 2029"),
     });
 
-    const newProps = {
-      ...(!props.inputfield || props.mode === "multiple"
+    const newProps =
+      !props.inputfield || props.mode === "multiple"
         ? {
             open,
             onClose: () => setOpen(false),
             fromDate: new Date("Aug 23 2020"),
             toDate: new Date("Aug 23 2029"),
           }
-        : {}),
-    };
+        : {};
 
     const Comp = !props.standalone ? DatePicker : DatePicker.Standalone;
 

@@ -139,7 +139,6 @@ function useTableColumnResize({
     [resizeMin, resizeMax, setWidth],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this on mount and when autoResizeOnce changes
   useEffect(
     function autoResizeColumn() {
       if (!autoResizeOnce) {

@@ -28,6 +28,7 @@ const ComboboxTrigger = ({
   return (
     <Floating.Anchor asChild ref={rootContext.triggerRef}>
       <Slot
+        // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- aria-controls can be supplied through rest or the slotted trigger.
         role="combobox"
         aria-expanded={readOnly ? undefined : rootContext.open}
         onClick={() => !readOnly && rootContext.setOpen(!rootContext.open)}

@@ -154,7 +154,7 @@ const App = () => {
                       </Heading>
                       <div className="icons-wrapper">
                         {sub.icons.map((i) => {
-                          // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
+                          // oxlint-disable-next-line import/namespace -- We do not know which icon will be rendered at build time
                           const T = Icons[`${i.id}Icon`];
                           if (T === undefined) {
                             return null;

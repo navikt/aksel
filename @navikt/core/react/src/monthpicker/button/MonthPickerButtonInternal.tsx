@@ -75,6 +75,7 @@ const MonthPickerButtonInternal = ({
   const isThisMonth = dateIsInCurrentMonth(month, year);
 
   return (
+    // oxlint-disable-next-line jsx-a11y/control-has-associated-label -- The full month name is provided by the nested screen-reader-only span.
     <button
       ref={ref}
       type="button"

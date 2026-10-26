@@ -45,9 +45,7 @@ export const parseDate = (
       }
     }
 
-    for (const format of [
-      ...ALLOWED_FORMATS.map((x) => x.replace("yyyy", "yy")),
-    ]) {
+    for (const format of ALLOWED_FORMATS.map((x) => x.replace("yyyy", "yy"))) {
       parsed = parse(date, format, today, { locale });
       if (
         isValidDate(parsed) &&

@@ -139,14 +139,14 @@ async function bundle() {
 
   /* ------------------------------ /global build ----------------------------- */
   for (const style of BASELINE_CSS_LIST) {
-    function parser(input: string) {
+    const parser = (input: string) => {
       const parsed = input
         .split("\n")
         .filter((line) => line.startsWith("@import"))
         .filter((line) => line.includes(style))
         .join("\n");
       return `${layerDefinition}\n${parsed}`;
-    }
+    };
 
     await bundleCSS(parser).then((file) => {
       writeFile({
@@ -208,13 +208,13 @@ async function bundle() {
   }
 
   for (const componentLine of componentFiles()) {
-    function parser(input: string) {
+    const parser = (input: string) => {
       const parsed = input
         .split("\n")
         .filter((line) => line === componentLine)
         .join("\n");
       return `${layerDefinition}\n${parsed}`;
-    }
+    };
 
     await bundleCSS(parser).then((file) => {
       const componentName = componentLine

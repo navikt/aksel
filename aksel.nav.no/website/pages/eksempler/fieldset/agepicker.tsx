@@ -6,14 +6,14 @@ const Example = () => {
     <Fieldset legend="Når vil du ta ut alderspensjon?">
       <HStack gap="space-16">
         <Select label={<BodyShort as="span">Velg år</BodyShort>}>
-          <option></option>
+          <option aria-label="Velg år"></option>
           <option>62 år</option>
           <option>63 år</option>
           <option>64 år</option>
           <option>...</option>
         </Select>
         <Select label={<BodyShort as="span">Velg måneder</BodyShort>}>
-          <option></option>
+          <option aria-label="Velg måneder"></option>
           <option>0 mnd. (apr.)</option>
           <option>1 mnd. (mai)</option>
           <option>2 mnd. (juni)</option>

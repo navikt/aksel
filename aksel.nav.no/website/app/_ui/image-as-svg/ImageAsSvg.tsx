@@ -33,7 +33,7 @@ async function ImageAsThemedSvg({
 
   return (
     <div
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: We purify the SVG string, so its safer to use locally here.
+      // oxlint-disable-next-line react/no-danger -- We purify the SVG string, so its safer to use locally here.
       dangerouslySetInnerHTML={{ __html: cleanedSvg }}
       aria-hidden
       style={{ "--website-svg-size": `${size}px` }}

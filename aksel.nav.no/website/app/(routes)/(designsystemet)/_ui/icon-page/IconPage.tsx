@@ -142,7 +142,7 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
-                        // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
+                        // oxlint-disable-next-line import/namespace -- We do not know which icon will be rendered at build time
                         const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;

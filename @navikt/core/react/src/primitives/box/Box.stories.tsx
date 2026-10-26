@@ -155,32 +155,30 @@ const ChatBubble = () => (
   </Box>
 );
 const PricePill = () => (
-  <>
-    <HStack>
-      <Box
-        background="success-soft"
-        padding="space-16"
-        borderRadius="full 0 0 full"
-      >
-        <VStack align="center">
-          <Detail>Episk ny pris</Detail>
-          <Heading size="medium">889.99 kr</Heading>
-        </VStack>
-      </Box>
-      <Box
-        background="danger-soft"
-        padding="space-16"
-        borderRadius="0 full full 0"
-      >
-        <VStack align="center">
-          <Detail>Førpris</Detail>
-          <Heading size="medium" style={{ textDecoration: "line-through" }}>
-            399.99 kr
-          </Heading>
-        </VStack>
-      </Box>
-    </HStack>
-  </>
+  <HStack>
+    <Box
+      background="success-soft"
+      padding="space-16"
+      borderRadius="full 0 0 full"
+    >
+      <VStack align="center">
+        <Detail>Episk ny pris</Detail>
+        <Heading size="medium">889.99 kr</Heading>
+      </VStack>
+    </Box>
+    <Box
+      background="danger-soft"
+      padding="space-16"
+      borderRadius="0 full full 0"
+    >
+      <VStack align="center">
+        <Detail>Førpris</Detail>
+        <Heading size="medium" style={{ textDecoration: "line-through" }}>
+          399.99 kr
+        </Heading>
+      </VStack>
+    </Box>
+  </HStack>
 );
 
 export const PaddingBreakpoints = {

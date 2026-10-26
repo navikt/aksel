@@ -8,6 +8,12 @@ const j = jscodeshift.withParser("tsx");
 
 const FILTER_STRING = "// EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE";
 
+/* Matches lines that only contain a lint suppression comment, e.g.
+`// oxlint-disable-next-line rule`, `{/** oxlint-disable rule *\/}` or `/* oxlint-enable rule *\/`.
+ESLint directives are stripped too. */
+const LINT_SUPPRESSION_REGEX =
+  /^(\/\/|\/\*+|\{\s*\/\*+)\s*(eslint|oxlint)-(disable|enable)[\w-]*(\s.*)?$/;
+
 export async function filterCode(code: string, filePath: string) {
   if (!code.includes(FILTER_STRING)) {
     throw new Error(
@@ -19,7 +25,7 @@ export async function filterCode(code: string, filePath: string) {
     .substring(0, code.indexOf(FILTER_STRING))
     .split("\n")
     .filter((x) => !x.includes("examples/withDsExample"))
-    .filter((x) => !x.includes("biome-ignore"))
+    .filter((x) => !LINT_SUPPRESSION_REGEX.test(x.trim()))
     .join("\n")
     .trim();
 

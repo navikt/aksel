@@ -22,8 +22,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     const { className, description, children } = props;
 
     return (
-      // biome-ignore lint/a11y/noStaticElementInteractions: clickable div for radio card
-      // biome-ignore lint/a11y/useKeyWithClickEvents: clickable div for radio card
+      // oxlint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- clickable div for radio card
       <div
         className={cl(className, "aksel-radio", `aksel-radio--${size}`, {
           "aksel-radio--error": hasError,

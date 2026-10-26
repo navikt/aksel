@@ -2,7 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "biomejs.biome",
+    "oxc.oxc-vscode",
     "esbenp.prettier-vscode",
     "denoland.vscode-deno",
     "github.vscode-github-actions",

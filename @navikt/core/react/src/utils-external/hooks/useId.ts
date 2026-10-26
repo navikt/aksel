@@ -7,11 +7,9 @@ import React, { useEffect, useState } from "react";
 
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {
-  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   const [defaultId, setDefaultId] = useState(idOverride);
   const id = idOverride || defaultId;
 
-  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   useEffect(() => {
     if (defaultId == null) {
       // Fallback to this default id when possible.
@@ -39,7 +37,6 @@ function useId(idOverride?: string): string {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
   }
-  // biome-ignore lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime.
   return useGlobalId(idOverride) ?? "";
 }
 

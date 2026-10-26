@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="no" suppressHydrationWarning>
       <head>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Static inline script, no user input. */}
+        {/* oxlint-disable-next-line react/no-danger -- Static inline script, no user input. */}
         <script dangerouslySetInnerHTML={{ __html: PLATFORM_SCRIPT }} />
         <link
           rel="preload"

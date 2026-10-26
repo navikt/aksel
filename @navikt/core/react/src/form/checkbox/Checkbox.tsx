@@ -26,8 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       props;
 
     return (
-      // biome-ignore lint/a11y/noStaticElementInteractions: clickable div for checkbox card
-      // biome-ignore lint/a11y/useKeyWithClickEvents: clickable div for checkbox card
+      // oxlint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- clickable div for checkbox card
       <div
         className={cl(className, "aksel-checkbox", `aksel-checkbox--${size}`, {
           "aksel-checkbox--error": hasError,

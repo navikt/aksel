@@ -170,6 +170,7 @@ const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
         : ariaLabelledby;
 
     const component = (
+      // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Native dialog handles backdrop dismissal and bubbling Escape events.
       <dialog
         {...rest}
         ref={mergedRef}

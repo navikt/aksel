@@ -26,7 +26,7 @@ describe("v8-tokens-js keeps boundaries intact", () => {
     ["const a = ASurfaceDefault;", "const a = BgDefault;"],
     ["const a = [ASurfaceDefault];", "const a = [BgDefault];"],
     ["const a = {...ASurfaceDefault};", "const a = {...BgDefault};"],
-    // biome-ignore lint/suspicious/noTemplateCurlyInString: Testing token inside template literal
+    // oxlint-disable-next-line eslint/no-template-curly-in-string -- Testing token inside template literal
     ["const a = `${ASurfaceDefault}`;", "const a = `${BgDefault}`;"],
   ])("%s", (input, output) => {
     expect(runJs(`${importLine}\n${input}`)).toBe(

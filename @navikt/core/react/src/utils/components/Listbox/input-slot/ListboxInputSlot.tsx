@@ -23,6 +23,7 @@ const ListboxInputSlot = ({
       }
       // @ts-expect-error - You are meant to use an <input>, but Slot doesn't know that.
       autoComplete="off"
+      // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- Required ARIA attributes are supplied by the slotted input.
       role="combobox"
       data-aksel-listbox-input
     >

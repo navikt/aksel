@@ -112,7 +112,6 @@ const SelectedOptionsProvider = ({
   const newHideCaret =
     isLimitReached || (!isMultiSelect && selectedOptions.length > 0);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
     setHideCaret(newHideCaret);
   }, [newHideCaret, selectedOptions, setHideCaret]);

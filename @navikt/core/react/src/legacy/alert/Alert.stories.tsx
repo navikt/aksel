@@ -52,15 +52,15 @@ export const Variants: StoryFn = () => {
     <VStack gap="space-16">
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
+          {"Id elit esse enim reprehenderit enim nisi veniam nostrud. ".repeat(
+            i + 1,
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
+          {"Id elit esse enim reprehenderit enim nisi veniam nostrud. ".repeat(
+            i + 1,
           )}
         </Alert>
       ))}

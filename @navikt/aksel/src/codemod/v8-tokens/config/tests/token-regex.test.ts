@@ -209,7 +209,7 @@ describe("getTokenRegex JS", () => {
 
     expect("ATextRed").toMatch(regex);
     expect(" ATextRed ").toMatch(regex);
-    // biome-ignore lint/suspicious/noTemplateCurlyInString: Testing token match inside template string
+    // oxlint-disable-next-line eslint/no-template-curly-in-string -- Testing token match inside template string
     expect(" background: `${ATextRed}` ").toMatch(regex);
   });
 

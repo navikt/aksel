@@ -32,7 +32,7 @@ async function GodPraksisPictogram({
 
   return (
     <div
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: We trust the SVG content and sanitize it before using it.
+      // oxlint-disable-next-line react/no-danger -- We trust the SVG content and sanitize it before using it.
       dangerouslySetInnerHTML={{ __html: cleanedSvg }}
       data-active={active}
       aria-hidden

@@ -16,176 +16,162 @@ export default {
 
 export const Default = {
   render: () => (
-    <>
-      <VStack gap="space-8">
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginInline="space-40 space-0">
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+    <VStack gap="space-8">
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginInline="space-40 space-0">
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginInline="space-0 space-40">
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginInline="space-0 space-40">
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginBlock="space-40 space-0">
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginBlock="space-40 space-0">
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginBlock="space-0 space-40">
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginBlock="space-0 space-40">
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-      </VStack>
-    </>
+      </Box>
+    </VStack>
   ),
 };
 
 export const AsChild = {
   render: () => (
-    <>
-      <VStack gap="space-8">
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginInline="space-40 space-0" asChild>
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+    <VStack gap="space-8">
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginInline="space-40 space-0" asChild>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginInline=&quot;10 0&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginInline="space-0 space-40" asChild>
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginInline="space-0 space-40" asChild>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginInline=&quot;0 10&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginBlock="space-40 space-0" asChild>
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginBlock="space-40 space-0" asChild>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginBlock=&quot;10 0&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-        <Box background="meta-purple-moderate" padding="space-20">
-          <Box background="meta-lime-soft" padding="space-20">
-            <Bleed marginBlock="space-0 space-40" asChild>
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+      </Box>
+      <Box background="meta-purple-moderate" padding="space-20">
+        <Box background="meta-lime-soft" padding="space-20">
+          <Bleed marginBlock="space-0 space-40" asChild>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>marginBlock=&quot;0 10&quot;</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-      </VStack>
-    </>
+      </Box>
+    </VStack>
   ),
 };
 
 export const Breakpoints = {
   render: () => (
-    <>
-      <VStack gap="space-8">
+    <VStack gap="space-8">
+      <Box
+        background="meta-purple-moderate"
+        padding={{ xs: "space-20", md: "space-40" }}
+      >
         <Box
-          background="meta-purple-moderate"
+          background="meta-lime-soft"
           padding={{ xs: "space-20", md: "space-40" }}
         >
-          <Box
-            background="meta-lime-soft"
-            padding={{ xs: "space-20", md: "space-40" }}
+          <Bleed
+            marginInline={{ xs: "space-40 space-0", md: "space-80 space-0" }}
           >
-            <Bleed
-              marginInline={{ xs: "space-40 space-0", md: "space-80 space-0" }}
-            >
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>
-                  {'marginInline={{ xs: "10 0", md: "20 0" }}'}
-                </BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>{'marginInline={{ xs: "10 0", md: "20 0" }}'}</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
+      </Box>
+      <Box
+        background="meta-purple-moderate"
+        padding={{ xs: "space-20", md: "space-40" }}
+      >
         <Box
-          background="meta-purple-moderate"
+          background="meta-lime-soft"
           padding={{ xs: "space-20", md: "space-40" }}
         >
-          <Box
-            background="meta-lime-soft"
-            padding={{ xs: "space-20", md: "space-40" }}
+          <Bleed
+            marginInline={{ xs: "space-0 space-40", md: "space-0 space-80" }}
           >
-            <Bleed
-              marginInline={{ xs: "space-0 space-40", md: "space-0 space-80" }}
-            >
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>
-                  {'marginInline={{ xs: "0 10", md: "0 20" }}'}
-                </BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>{'marginInline={{ xs: "0 10", md: "0 20" }}'}</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
+      </Box>
+      <Box
+        background="meta-purple-moderate"
+        padding={{ xs: "space-20", md: "space-40" }}
+      >
         <Box
-          background="meta-purple-moderate"
+          background="meta-lime-soft"
           padding={{ xs: "space-20", md: "space-40" }}
         >
-          <Box
-            background="meta-lime-soft"
-            padding={{ xs: "space-20", md: "space-40" }}
+          <Bleed
+            marginBlock={{ xs: "space-40 space-0", md: "space-80 space-0" }}
           >
-            <Bleed
-              marginBlock={{ xs: "space-40 space-0", md: "space-80 space-0" }}
-            >
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>
-                  {'marginBlock={{ xs: "10 0", md: "20 0" }}'}
-                </BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>{'marginBlock={{ xs: "10 0", md: "20 0" }}'}</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
+      </Box>
+      <Box
+        background="meta-purple-moderate"
+        padding={{ xs: "space-20", md: "space-40" }}
+      >
         <Box
-          background="meta-purple-moderate"
+          background="meta-lime-soft"
           padding={{ xs: "space-20", md: "space-40" }}
         >
-          <Box
-            background="meta-lime-soft"
-            padding={{ xs: "space-20", md: "space-40" }}
+          <Bleed
+            marginBlock={{ xs: "space-0 space-40", md: "space-0 space-80" }}
           >
-            <Bleed
-              marginBlock={{ xs: "space-0 space-40", md: "space-0 space-80" }}
-            >
-              <Box padding="space-12" background="success-moderate">
-                <BodyLong>
-                  {'marginBlock={{ xs: "0 10", md: "0 20" }}'}
-                </BodyLong>
-              </Box>
-            </Bleed>
-          </Box>
+            <Box padding="space-12" background="success-moderate">
+              <BodyLong>{'marginBlock={{ xs: "0 10", md: "0 20" }}'}</BodyLong>
+            </Box>
+          </Bleed>
         </Box>
-      </VStack>
-    </>
+      </Box>
+    </VStack>
   ),
 };
 

@@ -135,7 +135,7 @@ export const InteractOutside: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
+          // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- testing only
           tabIndex={0}
         />
       </div>
@@ -182,7 +182,7 @@ export const DisableOutsidePointerEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
+          // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- testing only
           tabIndex={0}
         />
       </div>
@@ -212,7 +212,7 @@ export const SafeZone: Story = {
     return (
       <div>
         <div
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
+          // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- testing only
           tabIndex={0}
           ref={setSafeAnchor}
           data-testid="safe-anchor"
@@ -568,7 +568,7 @@ export const PreventEvents: Story = {
         <div
           data-testid="outside-focusable"
           style={{ padding: "1rem" }}
-          // biome-ignore lint/a11y/noNoninteractiveTabindex: testing only
+          // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- testing only
           tabIndex={0}
         />
       </div>

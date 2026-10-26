@@ -39,7 +39,6 @@ function DoDont(props: ExtractPortableComponentProps<"do_dont">) {
             className={styles.doDont}
           >
             <Notch block={block} />
-            {/** biome-ignore lint/performance/noImgElement: Img element is fine here */}
             <img
               className={`light ${styles.doDontImage}`}
               alt={block.alt}

@@ -65,7 +65,6 @@ const highlightSubstring = (text: string, substring: string) => {
   const end = text.substring(indexOfHighlightedText + substring.length);
   return (
     // Aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text
-    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: Doesn't matter if aria-label doesn't work
     <span aria-label={text}>
       {start}
       {highlight && <mark>{highlight}</mark>}

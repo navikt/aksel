@@ -28,6 +28,7 @@ const DatePickerDayButton = ({
 
   return (
     <button
+      type="button"
       {...rest}
       ref={ref}
       aria-hidden={day.outside}

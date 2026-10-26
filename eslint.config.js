@@ -76,7 +76,7 @@ module.exports = defineConfig([
       "react/prop-types": "off", // Temporary
       "react/display-name": "off", // Temporary
       "import/no-unresolved": "off",
-      "import/namespace": "off", // Biome has equivalent
+      "import/namespace": "off", // Covered by Oxlint
       "import/no-named-as-default": "off", // Temporary
       "react-hooks/refs": "off", // Too many false positives
       "react-hooks/exhaustive-deps": [

@@ -365,7 +365,6 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      *
      * We depend on `enabled` to clean up when the layer is disabled.
      */
-    // biome-ignore lint/correctness/useExhaustiveDependencies: We need to clean up after enabled changes.
     useEffect(() => {
       return () => {
         if (!node) {

@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/a11y/useKeyWithMouseEvents: We know what we are doing */
 import React from "react";
 import { cl } from "../../../helpers";
 import { useMedia } from "../../../hooks";
@@ -21,6 +20,7 @@ function ListboxOptions({ children, ...rest }: ListboxOptionsProps) {
       className={cl(rest.className, "aksel-listbox__options")}
       role="listbox"
       tabIndex={-1}
+      // oxlint-disable-next-line jsx-a11y/mouse-events-have-key-events -- Mouse hover updates virtual focus; the listbox wrapper handles keyboard navigation.
       onMouseOver={(event) => {
         if (cannotHover) {
           // onMouseOver can be triggered by touch, but we don't want virtual focus in that case.

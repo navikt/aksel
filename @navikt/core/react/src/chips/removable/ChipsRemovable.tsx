@@ -43,6 +43,7 @@ const ChipsRemovable = forwardRef<HTMLButtonElement, ChipsRemovableProps>(
         data-color={color ?? variantToColor(variant)}
         {...rest}
         ref={ref}
+        // oxlint-disable-next-line react/button-has-type -- React's button type union is validated by TypeScript and defaults to "button".
         type={type}
         className={cl(
           "aksel-chips__chip aksel-chips__removable aksel-chips--icon-right",

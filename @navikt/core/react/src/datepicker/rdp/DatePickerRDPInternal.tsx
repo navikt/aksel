@@ -104,6 +104,7 @@ const ReactDayPicker = ({
       selected={selected}
       classNames={LegacyClassNames}
       components={{
+        // oxlint-disable-next-line react/jsx-no-useless-fragment -- react-day-picker requires an Element return type, so null is not allowed.
         MonthCaption: () => <></>,
         DayButton: useCallback(
           (props) => <DatePickerDayButton {...props} locale={locale} />,

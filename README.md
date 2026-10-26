@@ -30,7 +30,7 @@ For å komme i gang, se [Aksel dokumentasjonen](https://aksel.nav.no/grunnleggen
 | `yarn dev`       | Starter dokumentasjonssiden                |
 | `yarn storybook` | Starter Storybook                          |
 | `yarn test`      | Kjører alle tester                         |
-| `yarn lint`      | Kjører ESLint, Stylelint og Biome          |
+| `yarn lint`      | Kjører ESLint, Stylelint og Oxlint         |
 | `yarn clean`     | Fjerner genererte filer                    |
 | `yarn changeset` | Oppretter en ny versjon.                   |
 

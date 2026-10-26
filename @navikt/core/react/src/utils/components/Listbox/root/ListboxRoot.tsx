@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
 import React, { forwardRef } from "react";
 import { useId } from "../../../../utils-external";
 import { cl } from "../../../helpers";
@@ -42,6 +41,7 @@ const ListboxComponent = forwardRef<HTMLDivElement, ListboxProps>(
     };
 
     return (
+      // oxlint-disable-next-line jsx-a11y/no-static-element-interactions -- Wrapper handles keyboard navigation for the listbox and input within.
       <div
         ref={ref}
         className={cl("aksel-listbox", className)}

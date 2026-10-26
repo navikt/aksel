@@ -12,7 +12,7 @@ const Example = () => {
     <Fieldset legend="Arbeidsgivers telefonnummer">
       <HStack gap="space-16">
         <Select label={<BodyShort as="span">Landkode</BodyShort>}>
-          <option></option>
+          <option aria-label="Velg landkode"></option>
           <option>+45</option>
           <option>+46</option>
           <option>+47</option>

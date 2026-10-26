@@ -26,7 +26,7 @@ argument-hint: "PR number, branch or files to review"
 - 🟡 **Suggestion**: should fix. Missing test, docs or changeset, maintainability risk, over-editing.
 - 💭 **Nit**: optional. Leave it out when in doubt.
 
-Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. No praise-only or speculative comments. Every finding says **why** it matters and what to do.
+Skip anything ESLint, Stylelint, Oxlint, Prettier or TypeScript already catches. No praise-only or speculative comments. Every finding says **why** it matters and what to do.
 
 ## Checklist
 

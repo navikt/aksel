@@ -98,7 +98,6 @@ const TableAnimateHeightInternal: React.FC<AnimateHeightProps> = ({
   const [useTransitions, setUseTransitions] = useState<boolean>(false);
   const didHideOnMount = useRef(false);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Only run this on mount
   useEffect(() => {
     /**
      * We check for multiple runs caused by React.StrictMode.
@@ -118,7 +117,6 @@ const TableAnimateHeightInternal: React.FC<AnimateHeightProps> = ({
   }, []);
 
   // ------------------ Height update
-  // biome-ignore lint/correctness/useExhaustiveDependencies: This should be explicitly run only on height change
   useEffect(() => {
     if (height !== prevHeight.current && contentElement.current) {
       showContent(contentElement.current, prevHeight.current);

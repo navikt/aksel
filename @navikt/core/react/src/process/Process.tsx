@@ -149,7 +149,7 @@ export const Process: ProcessComponent = forwardRef<
       <ol
         ref={mergedRef}
         data-color="info"
-        // biome-ignore lint/a11y/noRedundantRoles: See comment above
+        // oxlint-disable-next-line jsx-a11y/no-redundant-roles -- See comment above
         role="list"
         {...restProps}
         className={cl("aksel-process", className)}
@@ -218,7 +218,6 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
     const { syncAriaControls, hideStatusText, rootId } = useProcessContext();
 
     // syncAriaControls is already memoized with useCallback
-    // biome-ignore lint/correctness/useExhaustiveDependencies: We want to run this only when status changes
     useEffect(syncAriaControls, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isActive = status === "active";

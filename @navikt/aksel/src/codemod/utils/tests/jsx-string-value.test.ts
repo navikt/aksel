@@ -37,7 +37,7 @@ describe("getJSXLiteralValue", () => {
   });
 
   test("returns null for TemplateLiteral with expressions", () => {
-    // biome-ignore lint/suspicious/noTemplateCurlyInString: Testing only
+    // oxlint-disable-next-line eslint/no-template-curly-in-string -- Testing only
     const node = getAttrValue("<Component prop={`hello ${name}`} />");
     expect(getJSXLiteralValue(node)).toBe(null);
   });

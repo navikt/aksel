@@ -149,26 +149,24 @@ export const EmptyHeader: StoryFn = () => (
 );
 
 export const SizeSmall: StoryFn = () => (
-  <>
-    <Modal
-      open
-      onClose={() => null}
-      header={{
-        heading: "Simple header",
-        size: "small",
-      }}
-      size="small"
-    >
-      <Modal.Body>
-        <BodyLong>Lorem ipsum dolor sit amet.</BodyLong>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button size="small" variant="secondary">
-          Dummy button
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  </>
+  <Modal
+    open
+    onClose={() => null}
+    header={{
+      heading: "Simple header",
+      size: "small",
+    }}
+    size="small"
+  >
+    <Modal.Body>
+      <BodyLong>Lorem ipsum dolor sit amet.</BodyLong>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button size="small" variant="secondary">
+        Dummy button
+      </Button>
+    </Modal.Footer>
+  </Modal>
 );
 SizeSmall.storyName = "Size = Small";
 

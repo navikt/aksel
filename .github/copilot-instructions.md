@@ -22,7 +22,7 @@
 ## Repo summary
 
 - Nav's design system. Yarn 4 workspaces monorepo: published packages under `@navikt/` + docs site `aksel.nav.no/` + `apps/` + `tooling/`.
-- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2 (lint only), Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
+- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Oxlint (JS/TS lint), Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
 - Published `@navikt/*` packages must stay React 17 compatible (peer `react ^17 || ^18 || ^19`).
 
 ## Start and validate
@@ -45,7 +45,7 @@
 
 ## Commands
 
-- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` / `corepack yarn stylelint <files...>` / `corepack yarn biome lint --no-errors-on-unmatched <files...>`
+- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` / `corepack yarn stylelint <files...>` / `corepack yarn oxlint --deny-warnings <files...>`
 - `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted type-check
 - `corepack yarn workspace <name> <script>` - e.g. `@navikt/ds-react test` (Vitest + tsc), `website test`
 - `corepack yarn lint` / `corepack yarn test` / `corepack yarn boot` - root suites (slow; cross-workspace changes only)
@@ -64,7 +64,7 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - `@navikt/aksel/src/` - CLI and codemods
 - `aksel.nav.no/website/` - Next.js docs site · `aksel.nav.no/sanity-studio/` - CMS schema
 - `apps/playroom/`, `apps/mcp-server/`, `apps/figma-icon-plugin/` - apps · `tooling/` - ESLint plugin, scripts, changelog, analyzer
-- `.changeset/` - release notes · Root config: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `vitest.config.ts`, `.storybook/`
+- `.changeset/` - release notes · Root config: `eslint.config.js`, `stylelint.config.mjs`, `.oxlintrc.json`, `vitest.config.ts`, `.storybook/`
 
 ## Skills and agents
 
@@ -90,3 +90,4 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - Preserve JSDoc on public props/components when changing public APIs.
 - Reuse helpers: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
 - No tests for trivial logic. Only tests for complex logic that has a higher risk of breaking.
+- Suppress Oxlint rules with `oxlint-disable-next-line <rule>` / `oxlint-disable <rule>`, never `eslint-disable` (breaks ESLint).

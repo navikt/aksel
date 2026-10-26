@@ -13,8 +13,7 @@ files.forEach((file) => {
 
   data = data.map((x) => {
     return x.includes("React.ForwardRefExoticComponent")
-      ? x.split(":")[0] +
-          `: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement> & SVGRProps & React.RefAttributes<SVGSVGElement>>;`
+      ? `${x.split(":")[0]}: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement> & SVGRProps & React.RefAttributes<SVGSVGElement>>;`
       : x;
   });
 

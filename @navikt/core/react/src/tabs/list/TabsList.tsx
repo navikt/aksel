@@ -30,6 +30,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
             onClick={scrollCtx.scrollLeft}
           />
         )}
+        {/* oxlint-disable-next-line jsx-a11y/interactive-supports-focus -- Focus roves between child tabs; the tablist must not be an extra tab stop. */}
         <div
           ref={mergedRef}
           {...rest}
