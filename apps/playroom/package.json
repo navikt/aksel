@@ -23,6 +23,6 @@
     "@navikt/aksel-icons": "^8.20.0",
     "@navikt/ds-css": "^8.20.0",
     "@navikt/ds-react": "^8.20.0",
-    "react": "19.3.0"
+    "react": "19.3.1"
   }
 }
