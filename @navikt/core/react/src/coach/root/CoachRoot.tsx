@@ -131,7 +131,10 @@ const CoachRoot = (props: CoachProps) => {
         nextAnchorEl.scrollIntoView({
           block: "center",
           inline: "center",
-          behavior: "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
         });
       }
     }
@@ -217,10 +220,16 @@ const CoachRoot = (props: CoachProps) => {
       "[data-coach-close-trigger]",
     );
 
-    return (
+    const trigger =
       nextTriggers[nextTriggers.length - 1] ??
-      closeTriggers[closeTriggers.length - 1]
-    );
+      closeTriggers[closeTriggers.length - 1];
+
+    if (!trigger) return null;
+
+    trigger.focus?.({ preventScroll: true });
+
+    // Returns undefined to override the default focus behavior of the FocusBoundary and Dialog components
+    return undefined;
   };
 
   const currentStepContent = (
@@ -251,7 +260,7 @@ const CoachRoot = (props: CoachProps) => {
       <CoachFooter>
         {activeStep > 0 && (
           <CoachPreviousTrigger>
-            <Button size={getStepSize()} variant="tertiary">
+            <Button size={getStepSize()} variant="secondary">
               {translate("previous")}
             </Button>
           </CoachPreviousTrigger>
@@ -314,6 +323,8 @@ const CoachRoot = (props: CoachProps) => {
       return (
         <Dialog open={true} size={getStepSize()}>
           <Dialog.Popup
+            modal="trap-focus"
+            withBackdrop
             ref={setStepElement}
             data-coach-step-id={currentStep.id}
             initialFocusTo={getInitialFocus}
@@ -336,13 +347,7 @@ const CoachRoot = (props: CoachProps) => {
         <Portal key={currentStep.id}>
           <CoachBackdrop anchorEl={anchorEl} />
           <FocusGuards>
-            <FocusBoundary
-              loop
-              trapped
-              modal
-              /* TODO:C initialFocus={getInitialFocus}
-               */
-            >
+            <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
               <Popover
                 ref={setStepElement}
                 data-coach-step-id={currentStep.id}
