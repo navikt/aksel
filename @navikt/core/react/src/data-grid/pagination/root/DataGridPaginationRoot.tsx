@@ -22,11 +22,6 @@ interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
    * Renders the preset layout when omitted.
    */
   children?: React.ReactNode;
-  /**
-   * Sticks the bar to the bottom of the viewport or scroll container.
-   * @default false
-   */
-  sticky?: boolean;
 }
 
 /**
@@ -46,7 +41,7 @@ interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
 const DataGridPaginationRoot = forwardRef<
   HTMLDivElement,
   DataGridPaginationProps
->(({ children, className, sticky = false, ...rest }, forwardedRef) => {
+>(({ children, className, ...rest }, forwardedRef) => {
   const context = useDataGridPaginationContext(false);
 
   if (!context) {
@@ -61,7 +56,6 @@ const DataGridPaginationRoot = forwardRef<
       {...rest}
       ref={forwardedRef}
       className={cl("aksel-data-grid__pagination", className)}
-      data-sticky={sticky}
     >
       {children ?? (
         <>

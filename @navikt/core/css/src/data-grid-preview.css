@@ -724,14 +724,6 @@ html[data-dragging-cursor="true"] *::after {
   background-color: var(--ax-bg-raised);
   border: 1px solid var(--ax-border-neutral-subtle);
   border-radius: var(--ax-radius-12);
-
-  &[data-sticky="true"] {
-    position: sticky;
-    bottom: 0;
-
-    /* Above table sticky header/columns (z-index 3) */
-    z-index: 4;
-  }
 }
 
 .aksel-data-grid__pagination-page-size {
