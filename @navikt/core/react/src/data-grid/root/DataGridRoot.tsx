@@ -5,8 +5,15 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
-import type { DataGridSettings } from "./DataGrid.types";
-import { DataGridContextProvider } from "./DataGridRoot.context";
+import { useDataGridPagination } from "../pagination/root/useDataGridPagination";
+import type {
+  DataGridPaginationConfig,
+  DataGridSettings,
+} from "./DataGrid.types";
+import {
+  DataGridContextProvider,
+  DataGridRootPaginationContextProvider,
+} from "./DataGridRoot.context";
 
 interface DataGridProps<RowT> {
   children: React.ReactNode;
@@ -23,6 +30,13 @@ interface DataGridProps<RowT> {
    * object are used to render the cells based on `columnDefinitions`.
    */
   data: RowT[];
+  /**
+   * Enables root-owned pagination state.
+   *
+   * Client mode (default) accepts all rows; server mode accepts the current
+   * page and requires exactly one of `totalRows` or `hasNextPage`.
+   */
+  pagination?: DataGridPaginationConfig;
   /**
    * Function to get unique row ID from row data.
    *
@@ -102,6 +116,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       className,
       columns,
       data,
+      pagination,
       getRowId,
       selection,
       isLoading = false,
@@ -129,12 +144,66 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {children}
+          {pagination ? (
+            <DataGridRootPagination
+              pagination={pagination}
+              rowCount={data.length}
+              isLoading={isLoading}
+            >
+              {children}
+            </DataGridRootPagination>
+          ) : (
+            children
+          )}
         </DataGridContextProvider>
       </div>
     );
   },
 );
+
+/**
+ * Mounted only when `pagination` is set, so uncontrolled defaults apply
+ * when pagination is enabled and no state or warnings exist while it is off.
+ */
+function DataGridRootPagination({
+  pagination,
+  rowCount,
+  isLoading,
+  children,
+}: {
+  pagination: DataGridPaginationConfig;
+  rowCount: number;
+  isLoading: boolean;
+  children: React.ReactNode;
+}) {
+  const paginationState = useDataGridPagination({
+    pagination,
+    rows:
+      pagination.mode === "server"
+        ? pagination.totalRows !== undefined
+          ? {
+              mode: "server",
+              pageRowCount: rowCount,
+              totalRows: pagination.totalRows,
+            }
+          : {
+              mode: "server",
+              pageRowCount: rowCount,
+              hasNextPage: pagination.hasNextPage,
+            }
+        : { mode: "client", rowCount },
+    isLoading,
+  });
+
+  return (
+    <DataGridRootPaginationContextProvider
+      {...paginationState}
+      mode={pagination.mode ?? "client"}
+    >
+      {children}
+    </DataGridRootPaginationContextProvider>
+  );
+}
 
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;

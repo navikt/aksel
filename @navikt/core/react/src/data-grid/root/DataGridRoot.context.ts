@@ -2,6 +2,7 @@ import type { resolveDataGridSettings } from "../../data-grid-preferences/helper
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { createStrictContext } from "../../utils/helpers";
+import type { useDataGridPagination } from "../pagination/root/useDataGridPagination";
 import type { DataGridSettings } from "./DataGrid.types";
 
 type DataGridContextValue<RowT = unknown> = {
@@ -20,4 +21,22 @@ const { Provider: DataGridContextProvider, useContext: useDataGridContext } =
     errorMessage: "DataGrid hooks must be used within a <DataGrid />",
   });
 
-export { DataGridContextProvider, useDataGridContext };
+const {
+  Provider: DataGridRootPaginationContextProvider,
+  useContext: useDataGridRootPaginationContext,
+} = createStrictContext<
+  ReturnType<typeof useDataGridPagination> & {
+    mode: "client" | "server";
+  }
+>({
+  name: "DataGridRootPaginationContext",
+  errorMessage:
+    "DataGrid.Pagination must be used within a <DataGrid pagination={...}>",
+});
+
+export {
+  DataGridContextProvider,
+  DataGridRootPaginationContextProvider,
+  useDataGridContext,
+  useDataGridRootPaginationContext,
+};
