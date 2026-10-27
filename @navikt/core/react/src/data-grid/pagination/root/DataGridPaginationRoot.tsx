@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
+import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 import {
   DataGridPaginationNavigation,
   type DataGridPaginationNavigationProps,
@@ -13,107 +14,41 @@ import {
   DataGridPaginationSummary,
   type DataGridPaginationSummaryProps,
 } from "../summary/DataGridPaginationSummary";
-import type { DataGridPaginationOptions } from "./DataGridPagination.types";
-import {
-  DataGridPaginationContextProvider,
-  useDataGridPaginationContext,
-} from "./DataGridPaginationRoot.context";
-import { useDataGridPagination } from "./useDataGridPagination";
 
-type DataGridPaginationProps = React.HTMLAttributes<HTMLDivElement> &
-  DataGridPaginationOptions & {
-    /**
-     * Top-level rows on the current page. Used to calculate the visible range.
-     * Pagination does not slice the data.
-     */
-    data: unknown[];
-    /**
-     * Disables navigation and postpones announcements until loading completes.
-     * @default false
-     */
-    isLoading?: boolean;
-    /**
-     * Announces completed page and page-size changes.
-     * Disable on duplicate pagination bars controlling the same data.
-     * @default true
-     */
-    announcePageChanges?: boolean;
-    /**
-     * Custom layout built from the pagination parts.
-     * Renders the preset layout when omitted.
-     */
-    children?: React.ReactNode;
-  };
+interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Custom layout built from the pagination parts.
+   * Renders the preset layout when omitted.
+   */
+  children?: React.ReactNode;
+}
 
 const DataGridPaginationRoot = forwardRef<
   HTMLDivElement,
   DataGridPaginationProps
->(
-  (
-    {
-      children,
-      className,
-      data,
-      isLoading = false,
-      announcePageChanges = true,
-      page,
-      defaultPage,
-      onPageChange,
-      pageSize,
-      defaultPageSize,
-      onPageSizeChange,
-      pageSizeOptions,
-      totalRows,
-      hasNextPage,
-      ...rest
-    },
-    forwardedRef,
-  ) => {
-    const value = useDataGridPagination({
-      pagination: {
-        page,
-        defaultPage,
-        onPageChange,
-        pageSize,
-        defaultPageSize,
-        onPageSizeChange,
-        pageSizeOptions,
-      },
-      rows:
-        totalRows === undefined
-          ? {
-              mode: "server",
-              pageRowCount: data.length,
-              hasNextPage: hasNextPage === true,
-            }
-          : { mode: "server", pageRowCount: data.length, totalRows },
-      isLoading,
-    });
+>(({ children, className, ...rest }, forwardedRef) => {
+  useDataGridRootPaginationContext();
 
-    return (
-      <DataGridPaginationContextProvider {...value}>
-        <div
-          {...rest}
-          ref={forwardedRef}
-          className={cl("aksel-data-grid__pagination", className)}
-        >
-          {children ?? (
-            <>
-              <DataGridPaginationSummary />
-              <DataGridPaginationPageSize />
-              <DataGridPaginationNavigation />
-            </>
-          )}
-          {announcePageChanges && <DataGridPaginationLiveRegion />}
-        </div>
-      </DataGridPaginationContextProvider>
-    );
-  },
-);
+  return (
+    <div
+      {...rest}
+      ref={forwardedRef}
+      className={cl("aksel-data-grid__pagination", className)}
+    >
+      {children ?? (
+        <>
+          <DataGridPaginationSummary />
+          <DataGridPaginationPageSize />
+          <DataGridPaginationNavigation />
+        </>
+      )}
+    </div>
+  );
+});
 
 function DataGridPaginationLiveRegion() {
   const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
-    useDataGridPaginationContext();
+    useDataGridRootPaginationContext();
   const translate = useI18n("DataGrid");
   const lastAnnouncedPage = useRef({ page, pageSize });
   const [announcement, setAnnouncement] = useState("");
@@ -153,19 +88,16 @@ function DataGridPaginationLiveRegion() {
 }
 
 /**
- * Standalone pagination bar. State, callbacks, and announcements are local
- * to the pagination; no DataGrid provider is required.
+ * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
  *
  * @see 🏷️ {@link DataGridPaginationProps}
  *
  * @example
  * ```jsx
- * <DataGridPagination
- *   data={pageRows}
- *   page={page}
- *   onPageChange={setPage}
- *   totalRows={150}
- * />
+ * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
+ *   <DataGrid.Table />
+ *   <DataGrid.Pagination />
+ * </DataGrid>
  * ```
  */
 const DataGridPagination = Object.assign(DataGridPaginationRoot, {
@@ -186,11 +118,10 @@ const DataGridPagination = Object.assign(DataGridPaginationRoot, {
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
-  export type Options = DataGridPaginationOptions;
   export type SummaryProps = DataGridPaginationSummaryProps;
   export type PageSizeProps = DataGridPaginationPageSizeProps;
   export type NavigationProps = DataGridPaginationNavigationProps;
 }
 
-export { DataGridPagination };
+export { DataGridPagination, DataGridPaginationLiveRegion };
 export type { DataGridPaginationProps };

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import React from "react";
+import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../root/DataGridRoot";
-import { DataGridPagination } from "./index";
 
 const meta: Meta<typeof DataGrid> = {
   title: "ds-react/DataGrid/Pagination/Integration tests",
@@ -29,68 +28,20 @@ const columns: DataGrid.Columns<Row> = [
 ];
 
 function FixedHeightGrid() {
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
-
   return (
     <div style={{ display: "flex", height: 400 }}>
       <DataGrid
         columns={columns}
-        data={rows.slice(page * pageSize, (page + 1) * pageSize)}
+        data={rows}
         getRowId={(row) => String(row.id)}
+        pagination={{ defaultPageSize: 20, pageSizeOptions: [10, 20, 50] }}
       >
         <DataGrid.Table aria-label="Personer" />
-        <DataGridPagination
-          data={rows.slice(page * pageSize, (page + 1) * pageSize)}
-          page={page}
-          onPageChange={setPage}
-          pageSize={pageSize}
-          onPageSizeChange={setPageSize}
-          pageSizeOptions={[10, 20, 50]}
-          totalRows={rows.length}
-        />
+        <DataGrid.Pagination />
       </DataGrid>
     </div>
   );
 }
-
-function getScrollWrapper(canvasElement: HTMLElement) {
-  const wrapper = canvasElement.querySelector<HTMLElement>(
-    ".aksel-data-table__scroll-wrapper",
-  );
-  if (!wrapper) {
-    throw new Error("Table scroll wrapper not found");
-  }
-  return wrapper;
-}
-
-export const PaginationDoesNotOwnTableScroll: Story = {
-  render: () => <FixedHeightGrid />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const wrapper = getScrollWrapper(canvasElement);
-    const view = canvasElement.ownerDocument.defaultView ?? window;
-    const documentScrollTop = view.scrollY;
-
-    wrapper.scrollTop = 150;
-    expect(wrapper.scrollTop).toBeGreaterThan(0);
-    const tableScrollTop = wrapper.scrollTop;
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByRole("cell", { name: "Person 21" })).toBeInTheDocument();
-    await waitFor(() => expect(wrapper.scrollTop).toBe(tableScrollTop));
-    expect(view.scrollY).toBe(documentScrollTop);
-
-    wrapper.scrollTop = 150;
-    expect(wrapper.scrollTop).toBeGreaterThan(0);
-    await userEvent.selectOptions(
-      canvas.getByRole("combobox", { name: "Rader per side" }),
-      "10",
-    );
-    expect(canvas.getByText("Side 1 av 6")).toBeInTheDocument();
-    expect(wrapper.scrollHeight).toBeGreaterThan(wrapper.clientHeight);
-    expect(view.scrollY).toBe(documentScrollTop);
-  },
-};
 
 export const KeyboardCellClampedOnShorterLastPage: Story = {
   render: () => (

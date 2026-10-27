@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Select, type SelectProps } from "../../../form/select";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
+import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
 type DataGridPaginationPageSizeProps = Omit<
   SelectProps,
@@ -16,9 +16,11 @@ type DataGridPaginationPageSizeProps = Omit<
  *
  * @example
  * ```jsx
- * <DataGridPagination data={pageRows} totalRows={150}>
- *   <DataGridPagination.PageSize />
- * </DataGridPagination>
+ * <DataGrid columns={columns} data={rows} pagination={{}}>
+ *   <DataGrid.Pagination>
+ *     <DataGrid.Pagination.PageSize />
+ *   </DataGrid.Pagination>
+ * </DataGrid>
  * ```
  */
 const DataGridPaginationPageSize = forwardRef<
@@ -26,9 +28,9 @@ const DataGridPaginationPageSize = forwardRef<
   DataGridPaginationPageSizeProps
 >(({ className, style, ...rest }, forwardedRef) => {
   const { pageSize, pageSizeOptions, setPageSize } =
-    useDataGridPaginationContext(
+    useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGridPagination.PageSize must be used within <DataGridPagination />",
+      "[Aksel] DataGrid.Pagination.PageSize must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
   const options = pageSizeOptions.includes(pageSize)

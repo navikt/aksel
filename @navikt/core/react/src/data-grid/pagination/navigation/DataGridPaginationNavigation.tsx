@@ -8,7 +8,7 @@ import {
 import { Button } from "../../../button";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
+import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
 interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLElement> {
   children?: never;
@@ -21,9 +21,11 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
  *
  * @example
  * ```jsx
- * <DataGridPagination data={pageRows} totalRows={150}>
- *   <DataGridPagination.Navigation />
- * </DataGridPagination>
+ * <DataGrid columns={columns} data={rows} pagination={{}}>
+ *   <DataGrid.Pagination>
+ *     <DataGrid.Pagination.Navigation />
+ *   </DataGrid.Pagination>
+ * </DataGrid>
  * ```
  */
 const DataGridPaginationNavigation = forwardRef<
@@ -31,9 +33,9 @@ const DataGridPaginationNavigation = forwardRef<
   DataGridPaginationNavigationProps
 >(({ className, "aria-label": ariaLabel, ...rest }, forwardedRef) => {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
-    useDataGridPaginationContext(
+    useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGridPagination.Navigation must be used within <DataGridPagination />",
+      "[Aksel] DataGrid.Pagination.Navigation must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
   const pageLabel =

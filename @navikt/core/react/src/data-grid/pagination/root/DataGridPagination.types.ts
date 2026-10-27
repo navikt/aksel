@@ -24,18 +24,4 @@ type DataGridPaginationSharedOptions = {
   pageSizeOptions?: number[];
 };
 
-type DataGridPaginationOptions = DataGridPaginationSharedOptions &
-  (
-    | {
-        /** Known count of top-level data records. */
-        totalRows: number;
-        hasNextPage?: never;
-      }
-    | {
-        /** Whether another page exists when the total row count is unknown. */
-        hasNextPage: boolean;
-        totalRows?: never;
-      }
-  );
-
-export type { DataGridPaginationOptions, DataGridPaginationSharedOptions };
+export type { DataGridPaginationSharedOptions };

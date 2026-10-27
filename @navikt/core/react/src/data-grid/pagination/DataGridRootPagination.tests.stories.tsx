@@ -143,6 +143,83 @@ export const ServerModeUsesUnknownTotalState: Story = {
   },
 };
 
+export const ContextBoundBarsShareStateAndAnnounceOnce: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={rows}
+      pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
+    >
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Navigation aria-label="Top results navigation" />
+      </DataGrid.Pagination>
+      <DataGrid.Table />
+      <DataGrid.Pagination>
+        <DataGrid.Pagination.Navigation aria-label="Bottom results navigation" />
+      </DataGrid.Pagination>
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const top = canvas.getByRole("navigation", {
+      name: "Top results navigation",
+    });
+    const bottom = canvas.getByRole("navigation", {
+      name: "Bottom results navigation",
+    });
+    const liveRegions = canvasElement.querySelectorAll(
+      ".aksel-data-grid > .aksel-sr-only[aria-live='polite']",
+    );
+
+    expect(liveRegions).toHaveLength(1);
+    expect(within(top).getByText("Side 1 av 3")).toBeInTheDocument();
+    expect(within(bottom).getByText("Side 1 av 3")).toBeInTheDocument();
+
+    await userEvent.click(
+      within(top).getByRole("button", { name: "Neste side" }),
+    );
+    expect(within(top).getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(within(bottom).getByText("Side 2 av 3")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(liveRegions[0].textContent).toContain("Side 2 av 3"),
+    );
+  },
+};
+
+class RenderErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { error: Error | null }
+> {
+  state: { error: Error | null } = { error: null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+
+  render() {
+    if (this.state.error) {
+      return <p role="alert">{this.state.error.message}</p>;
+    }
+
+    return this.props.children;
+  }
+}
+
+export const RequiresRootPagination: Story = {
+  render: () => (
+    <RenderErrorBoundary>
+      <DataGrid columns={columns} data={rows}>
+        <DataGrid.Pagination />
+      </DataGrid>
+    </RenderErrorBoundary>
+  ),
+  play: async ({ canvasElement }) => {
+    expect(within(canvasElement).getByRole("alert")).toHaveTextContent(
+      "DataGrid.Pagination must be used within a <DataGrid pagination={...}>",
+    );
+  },
+};
+
 const manyRows: Row[] = Array.from({ length: 60 }, (_, index) => ({
   id: index + 1,
   name: `Person ${String(index + 1).padStart(2, "0")}`,

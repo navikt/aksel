@@ -5,6 +5,10 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
+import {
+  DataGridPagination,
+  DataGridPaginationLiveRegion,
+} from "../pagination/root/DataGridPaginationRoot";
 import { useDataGridPagination } from "../pagination/root/useDataGridPagination";
 import type {
   DataGridPaginationConfig,
@@ -91,6 +95,16 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
+  /**
+   * @see 🏷️ {@link DataGridPagination.Props}
+   *
+   * @example
+   * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
+   *   <DataGrid.Table />
+   *   <DataGrid.Pagination />
+   * </DataGrid>
+   */
+  Pagination: typeof DataGridPagination;
 }
 
 /**
@@ -201,6 +215,9 @@ function DataGridRootPagination({
       mode={pagination.mode ?? "client"}
     >
       {children}
+      {pagination.announcePageChanges !== false && (
+        <DataGridPaginationLiveRegion />
+      )}
     </DataGridRootPaginationContextProvider>
   );
 }
@@ -208,6 +225,7 @@ function DataGridRootPagination({
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
+DataGrid.Pagination = DataGridPagination;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -232,6 +250,15 @@ export namespace DataGrid {
   export namespace Preferences {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPreferences.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Pagination {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPagination.Props;
+    export type SummaryProps = DataGridPagination.SummaryProps;
+    export type PageSizeProps = DataGridPagination.PageSizeProps;
+    export type NavigationProps = DataGridPagination.NavigationProps;
   }
 }
 

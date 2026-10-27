@@ -66,16 +66,6 @@
         "default": "./cjs/data-grid/index.js"
       }
     },
-    "./PREVIEW/DataGridPagination": {
-      "import": {
-        "types": "./esm/data-grid/pagination/index.d.ts",
-        "default": "./esm/data-grid/pagination/index.js"
-      },
-      "require": {
-        "types": "./cjs/data-grid/pagination/index.d.ts",
-        "default": "./cjs/data-grid/pagination/index.js"
-      }
-    },
     "./PREVIEW/Lookup": {
       "import": {
         "types": "./esm/lookup/index-deprecated.d.ts",
