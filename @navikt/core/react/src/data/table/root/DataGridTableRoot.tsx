@@ -3,14 +3,19 @@ import React, {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
-import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
+import {
+  useDataGridContext,
+  useDataGridRootPaginationContext,
+} from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../../../utils/hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
@@ -173,13 +178,40 @@ const DataGridTableInternal = forwardRef<
       isLoading,
       tableSettings,
     } = useDataGridContext();
+    const pagination = useDataGridRootPaginationContext(false);
+    const clientPagination =
+      pagination?.mode === "client" ? pagination : undefined;
+    const isClientPagination = clientPagination !== undefined;
+    const clientStartIndex =
+      pagination?.mode === "client" ? pagination.startIndex : 0;
+    const clientEndIndex =
+      pagination?.mode === "client" ? pagination.endIndex : 0;
+    const tableData = useMemo(
+      () =>
+        isClientPagination
+          ? data.slice(clientStartIndex, clientEndIndex)
+          : data,
+      [data, isClientPagination, clientStartIndex, clientEndIndex],
+    );
+
+    if (
+      process.env.NODE_ENV !== "production" &&
+      clientPagination &&
+      !getRowId &&
+      ((selection && selection.mode !== "none") || subRows)
+    ) {
+      consoleWarning(
+        "DataGrid.Table: Provide `getRowId` when using client pagination with selection or subRows. Index-based fallback ids can change after sorting, filtering, or deleting rows.",
+      );
+    }
 
     const sortingState = useTableSort(sorting);
 
     const tableItems = useTableItems({
-      items: data,
+      items: tableData,
       getRowId,
       subRows,
+      indexOffset: clientPagination?.startIndex,
     });
 
     const tableSelectionState = useTableSelection({

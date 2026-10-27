@@ -55,15 +55,26 @@ export const ClientModeUsesRootPaginationState: Story = {
       pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
     >
       <PaginationStateProbe />
+      <DataGrid.Table />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    expect(canvas.getByRole("cell", { name: "Person 1" })).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 2" })).toBeInTheDocument();
+    expect(
+      canvas.queryByRole("cell", { name: "Person 3" }),
+    ).not.toBeInTheDocument();
     expect(
       canvas.getByText("Client mode · Page 1 of 3 · 2 rows"),
     ).toBeInTheDocument();
 
     await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    expect(
+      canvas.queryByRole("cell", { name: "Person 1" }),
+    ).not.toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 4" })).toBeInTheDocument();
     expect(
       canvas.getByText("Client mode · Page 2 of 3 · 2 rows"),
     ).toBeInTheDocument();
@@ -83,15 +94,20 @@ export const ServerModeUsesKnownTotalState: Story = {
       }}
     >
       <PaginationStateProbe />
+      <DataGrid.Table />
     </DataGrid>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    expect(canvas.getByRole("cell", { name: "Person 1" })).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 2" })).toBeInTheDocument();
     expect(
       canvas.getByText("Server mode · Page 1 of 3 · 2 rows"),
     ).toBeInTheDocument();
 
     await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    expect(canvas.getByRole("cell", { name: "Person 1" })).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 2" })).toBeInTheDocument();
     expect(
       canvas.getByText("Server mode · Page 2 of 3 · 2 rows"),
     ).toBeInTheDocument();
