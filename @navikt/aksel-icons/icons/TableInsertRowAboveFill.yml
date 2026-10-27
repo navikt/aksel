@@ -1,7 +1,7 @@
-name: TableInsertRowUnder
+name: TableInsertRowAboveFill
 category: Interface
 sub_category: Table
 keywords:
-  - TableInsertRowUnder
-variant: Stroke
+  - TableInsertRowAboveFill
+variant: Fill
 created_at: 26.10.2026

@@ -1,7 +1,8 @@
-name: TableInsertRowOver
+name: TextHeading
 category: Interface
-sub_category: Table
+sub_category: Editing
 keywords:
-  - TableInsertRowOver
+  - tekst
+  - overskrift
 variant: Stroke
 created_at: 26.10.2026

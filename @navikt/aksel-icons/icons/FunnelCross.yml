@@ -1,12 +1,10 @@
-name: FilterDismiss
+name: FunnelCross
 category: Interface
 sub_category: Filtering and sorting
 keywords:
   - filtrering
   - søkeresultater
-  - data
   - tabell
-  - fjern
-  - slett
+  - trakt
 variant: Stroke
 created_at: 26.10.2026

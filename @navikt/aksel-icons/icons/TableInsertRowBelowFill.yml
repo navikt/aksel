@@ -1,7 +1,7 @@
-name: Table2
+name: TableInsertRowBelowFill
 category: Interface
 sub_category: Table
 keywords:
-  - Table2
-variant: Stroke
+  - TableInsertRowBelowFill
+variant: Fill
 created_at: 26.10.2026

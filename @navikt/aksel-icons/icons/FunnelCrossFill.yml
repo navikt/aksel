@@ -1,4 +1,4 @@
-name: FunnelDismiss
+name: FunnelCrossFill
 category: Interface
 sub_category: Filtering and sorting
 keywords:
@@ -6,5 +6,5 @@ keywords:
   - søkeresultater
   - tabell
   - trakt
-variant: Stroke
+variant: Fill
 created_at: 26.10.2026

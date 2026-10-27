@@ -1,7 +1,7 @@
-name: TableDismiss
+name: TableInsertRowBelow
 category: Interface
 sub_category: Table
 keywords:
-  - TableDismiss
+  - TableInsertRowBelow
 variant: Stroke
 created_at: 26.10.2026

@@ -1,8 +1,9 @@
-name: TextDescription
+name: TextPlain
 category: Interface
 sub_category: Editing
 keywords:
   - tekst
   - avsnitt
+  - vanlig tekst
 variant: Stroke
 created_at: 26.10.2026
