@@ -1,34 +1,51 @@
-type PaginationRangeOptions<RowT> = {
+type PaginationRangeOptions = {
   page: number;
   pageSize: number;
-  data: RowT[];
 } & (
   | {
-      totalRows: number;
+      /** All top-level rows are available; the page is sliced from them. */
+      mode: "client";
+      rowCount: number;
+      pageRowCount?: never;
+      totalRows?: never;
       hasNextPage?: never;
     }
-  | {
-      hasNextPage: boolean;
-      totalRows?: never;
-    }
+  | ({
+      /** Only the current page is available. */
+      mode: "server";
+      pageRowCount: number;
+      rowCount?: never;
+    } & (
+      | {
+          totalRows: number;
+          hasNextPage?: never;
+        }
+      | {
+          hasNextPage: boolean;
+          totalRows?: never;
+        }
+    ))
 );
 
 type PaginationRange = {
   page: number;
   pageCount: number | undefined;
+  /** 1-based first visible row, or 0 when the page is empty. */
   from: number;
+  /** 1-based last visible row, or 0 when the page is empty. */
   to: number;
+  /** 0-based inclusive start index of the page among all top-level rows. */
+  startIndex: number;
+  /** 0-based exclusive end index of the page among all top-level rows. */
+  endIndex: number;
   canPrevious: boolean;
   canNext: boolean;
 };
 
-function getPaginationRange<RowT>({
-  page,
-  pageSize,
-  data,
-  totalRows,
-  hasNextPage,
-}: PaginationRangeOptions<RowT>): PaginationRange {
+function getPaginationRange(options: PaginationRangeOptions): PaginationRange {
+  const { page, pageSize, hasNextPage } = options;
+  const totalRows =
+    options.mode === "client" ? options.rowCount : options.totalRows;
   const pageCount =
     totalRows === undefined
       ? undefined
@@ -37,19 +54,25 @@ function getPaginationRange<RowT>({
     pageCount === undefined
       ? Math.max(page, 0)
       : Math.min(Math.max(page, 0), pageCount - 1);
-  const from = data.length === 0 ? 0 : currentPage * pageSize + 1;
-  const to =
-    data.length === 0
-      ? 0
-      : totalRows === undefined
-        ? from + data.length - 1
-        : Math.min(from + data.length - 1, totalRows);
+  const startIndex = currentPage * pageSize;
+  const pageRowCount =
+    options.mode === "client"
+      ? Math.min(Math.max(options.rowCount - startIndex, 0), pageSize)
+      : options.pageRowCount;
+  const visibleRows =
+    totalRows === undefined
+      ? pageRowCount
+      : Math.min(pageRowCount, Math.max(totalRows - startIndex, 0));
+  const from = visibleRows === 0 ? 0 : startIndex + 1;
+  const to = visibleRows === 0 ? 0 : startIndex + visibleRows;
 
   return {
     page: currentPage,
     pageCount,
     from,
     to,
+    startIndex,
+    endIndex: startIndex + visibleRows,
     canPrevious: currentPage > 0,
     canNext:
       pageCount === undefined
@@ -59,3 +82,4 @@ function getPaginationRange<RowT>({
 }
 
 export { getPaginationRange };
+export type { PaginationRange, PaginationRangeOptions };

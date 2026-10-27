@@ -1,4 +1,4 @@
-type DataGridPaginationOptions = {
+type DataGridPaginationSharedOptions = {
   /** Controlled, zero-indexed page. */
   page?: number;
   /**
@@ -22,17 +22,20 @@ type DataGridPaginationOptions = {
    * @default [10, 25, 50, 100]
    */
   pageSizeOptions?: number[];
-} & (
-  | {
-      /** Known count of top-level data records. */
-      totalRows: number;
-      hasNextPage?: never;
-    }
-  | {
-      /** Whether another page exists when the total row count is unknown. */
-      hasNextPage: boolean;
-      totalRows?: never;
-    }
-);
+};
 
-export type { DataGridPaginationOptions };
+type DataGridPaginationOptions = DataGridPaginationSharedOptions &
+  (
+    | {
+        /** Known count of top-level data records. */
+        totalRows: number;
+        hasNextPage?: never;
+      }
+    | {
+        /** Whether another page exists when the total row count is unknown. */
+        hasNextPage: boolean;
+        totalRows?: never;
+      }
+  );
+
+export type { DataGridPaginationOptions, DataGridPaginationSharedOptions };

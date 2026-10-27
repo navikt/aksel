@@ -2,17 +2,34 @@ import { useEffect, useRef } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useControllableState, useEventCallback } from "../../../utils/hooks";
 import { getPaginationRange } from "../helpers/pagination-range";
-import type { DataGridPaginationOptions } from "./DataGridPagination.types";
+import type { DataGridPaginationSharedOptions } from "./DataGridPagination.types";
 
 const defaultPageSizeOptions = [10, 25, 50, 100];
 
+type DataGridPaginationRows =
+  | {
+      /** Client mode: count of all top-level rows. DataGrid slices the page. */
+      mode: "client";
+      rowCount: number;
+      totalRows?: never;
+      hasNextPage?: never;
+    }
+  | ({
+      /** Server mode: count of top-level rows on the consumer-sliced page. */
+      mode: "server";
+      pageRowCount: number;
+    } & (
+      | { totalRows: number; hasNextPage?: never }
+      | { hasNextPage: boolean; totalRows?: never }
+    ));
+
 function useDataGridPagination({
   pagination,
-  data,
+  rows,
   isLoading,
 }: {
-  pagination: DataGridPaginationOptions;
-  data: unknown[];
+  pagination: DataGridPaginationSharedOptions;
+  rows: DataGridPaginationRows;
   isLoading: boolean;
 }) {
   const {
@@ -23,8 +40,6 @@ function useDataGridPagination({
     defaultPageSize,
     onPageSizeChange,
     pageSizeOptions = defaultPageSizeOptions,
-    totalRows,
-    hasNextPage,
   } = pagination;
 
   const [storedPage, setStoredPage] = useControllableState({
@@ -39,16 +54,13 @@ function useDataGridPagination({
     onChange: onPageSizeChange,
   });
 
-  const totals =
-    totalRows === undefined
-      ? { hasNextPage: hasNextPage === true }
-      : { totalRows };
-  const range = getPaginationRange({
-    page: storedPage,
-    pageSize,
-    data,
-    ...totals,
-  });
+  const totalRows =
+    rows.mode === "client"
+      ? rows.rowCount
+      : "totalRows" in rows
+        ? rows.totalRows
+        : undefined;
+  const range = getPaginationRange({ page: storedPage, pageSize, ...rows });
   const previousSummaryRange = useRef({ from: range.from, to: range.to });
 
   useEffect(() => {
@@ -58,7 +70,10 @@ function useDataGridPagination({
   }, [isLoading, range.from, range.to]);
 
   const setPage = useEventCallback((page: number) => {
-    setStoredPage(getPaginationRange({ page, pageSize, data, ...totals }).page);
+    const nextPage = getPaginationRange({ page, pageSize, ...rows }).page;
+    if (nextPage !== storedPage) {
+      setStoredPage(nextPage);
+    }
   });
   const setPageSize = useEventCallback((size: number) => {
     setStoredPageSize(size);
@@ -76,14 +91,16 @@ function useDataGridPagination({
       return;
     }
 
+    // Request each correction once, also when effects re-run (Strict Mode).
+    if (
+      lastCorrection.current?.storedPage === storedPage &&
+      lastCorrection.current.page === range.page
+    ) {
+      return;
+    }
+    lastCorrection.current = { storedPage, page: range.page };
+
     if (controlledPage !== undefined) {
-      if (
-        lastCorrection.current?.storedPage === storedPage &&
-        lastCorrection.current.page === range.page
-      ) {
-        return;
-      }
-      lastCorrection.current = { storedPage, page: range.page };
       consoleWarning(
         `DataGrid pagination: controlled page ${storedPage} is out of range. Requesting page ${range.page}.`,
       );
@@ -145,3 +162,4 @@ function useDataGridPagination({
 }
 
 export { useDataGridPagination };
+export type { DataGridPaginationRows };

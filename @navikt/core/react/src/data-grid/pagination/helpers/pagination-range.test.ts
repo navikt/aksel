@@ -7,7 +7,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 1,
         pageSize: 10,
-        data: Array.from({ length: 10 }),
+        mode: "server",
+        pageRowCount: 10,
         totalRows: 25,
       }),
     ).toEqual({
@@ -15,6 +16,8 @@ describe("getPaginationRange", () => {
       pageCount: 3,
       from: 11,
       to: 20,
+      startIndex: 10,
+      endIndex: 20,
       canPrevious: true,
       canNext: true,
     });
@@ -25,7 +28,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 2,
         pageSize: 10,
-        data: Array.from({ length: 4 }),
+        mode: "server",
+        pageRowCount: 4,
         hasNextPage: false,
       }),
     ).toEqual({
@@ -33,6 +37,8 @@ describe("getPaginationRange", () => {
       pageCount: undefined,
       from: 21,
       to: 24,
+      startIndex: 20,
+      endIndex: 24,
       canPrevious: true,
       canNext: false,
     });
@@ -43,7 +49,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 0,
         pageSize: 10,
-        data: [],
+        mode: "server",
+        pageRowCount: 0,
         totalRows: 0,
       }),
     ).toEqual({
@@ -51,6 +58,8 @@ describe("getPaginationRange", () => {
       pageCount: 1,
       from: 0,
       to: 0,
+      startIndex: 0,
+      endIndex: 0,
       canPrevious: false,
       canNext: false,
     });
@@ -61,7 +70,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 3,
         pageSize: 10,
-        data: [],
+        mode: "server",
+        pageRowCount: 0,
         hasNextPage: true,
       }),
     ).toEqual({
@@ -69,6 +79,8 @@ describe("getPaginationRange", () => {
       pageCount: undefined,
       from: 0,
       to: 0,
+      startIndex: 30,
+      endIndex: 30,
       canPrevious: true,
       canNext: true,
     });
@@ -79,7 +91,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: -1,
         pageSize: 10,
-        data: Array.from({ length: 3 }),
+        mode: "server",
+        pageRowCount: 3,
         hasNextPage: true,
       }),
     ).toEqual({
@@ -87,6 +100,8 @@ describe("getPaginationRange", () => {
       pageCount: undefined,
       from: 1,
       to: 3,
+      startIndex: 0,
+      endIndex: 3,
       canPrevious: false,
       canNext: true,
     });
@@ -97,7 +112,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 2,
         pageSize: 10,
-        data: Array.from({ length: 5 }),
+        mode: "server",
+        pageRowCount: 5,
         totalRows: 25,
       }),
     ).toEqual({
@@ -105,6 +121,8 @@ describe("getPaginationRange", () => {
       pageCount: 3,
       from: 21,
       to: 25,
+      startIndex: 20,
+      endIndex: 25,
       canPrevious: true,
       canNext: false,
     });
@@ -115,7 +133,8 @@ describe("getPaginationRange", () => {
       getPaginationRange({
         page: 4,
         pageSize: 10,
-        data: Array.from({ length: 2 }),
+        mode: "server",
+        pageRowCount: 2,
         totalRows: 22,
       }),
     ).toEqual({
@@ -123,8 +142,80 @@ describe("getPaginationRange", () => {
       pageCount: 3,
       from: 21,
       to: 22,
+      startIndex: 20,
+      endIndex: 22,
       canPrevious: true,
       canNext: false,
+    });
+  });
+
+  test("ends the slice at the known total when the page reports extra rows", () => {
+    expect(
+      getPaginationRange({
+        mode: "server",
+        page: 2,
+        pageSize: 10,
+        pageRowCount: 10,
+        totalRows: 25,
+      }),
+    ).toMatchObject({ from: 21, to: 25, startIndex: 20, endIndex: 25 });
+  });
+
+  describe("client mode", () => {
+    test("derives the page slice from the total row count", () => {
+      expect(
+        getPaginationRange({
+          mode: "client",
+          page: 2,
+          pageSize: 10,
+          rowCount: 25,
+        }),
+      ).toEqual({
+        page: 2,
+        pageCount: 3,
+        from: 21,
+        to: 25,
+        startIndex: 20,
+        endIndex: 25,
+        canPrevious: true,
+        canNext: false,
+      });
+    });
+
+    test("clamps the page when rows shrink", () => {
+      expect(
+        getPaginationRange({
+          mode: "client",
+          page: 4,
+          pageSize: 10,
+          rowCount: 12,
+        }),
+      ).toMatchObject({
+        page: 1,
+        from: 11,
+        to: 12,
+        startIndex: 10,
+        endIndex: 12,
+      });
+    });
+
+    test("returns an empty first page without rows", () => {
+      expect(
+        getPaginationRange({
+          mode: "client",
+          page: 3,
+          pageSize: 10,
+          rowCount: 0,
+        }),
+      ).toMatchObject({
+        page: 0,
+        pageCount: 1,
+        from: 0,
+        to: 0,
+        startIndex: 0,
+        endIndex: 0,
+        canNext: false,
+      });
     });
   });
 });

@@ -78,11 +78,15 @@ const DataGridPaginationRoot = forwardRef<
         defaultPageSize,
         onPageSizeChange,
         pageSizeOptions,
-        ...(totalRows === undefined
-          ? { hasNextPage: hasNextPage === true }
-          : { totalRows }),
       },
-      data,
+      rows:
+        totalRows === undefined
+          ? {
+              mode: "server",
+              pageRowCount: data.length,
+              hasNextPage: hasNextPage === true,
+            }
+          : { mode: "server", pageRowCount: data.length, totalRows },
       isLoading,
     });
 
