@@ -101,7 +101,7 @@ function announce(message: string, politeness: Politeness = "polite") {
  */
 function useAnnounce() {
   getRegions(); // Ensure regions are created on beforehand
-  // If we use this hook several places, each instance should get their own live regions to avoid conflicts.
+  // NOTE: Before using this hook several places, we should give each instance their own live regions to avoid conflicts.
   return announce;
 }
 
