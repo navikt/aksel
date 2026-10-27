@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import { debounce } from "../../../utils-external";
+import React, { useCallback } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
@@ -11,7 +10,7 @@ import {
   type ResolveOption,
   useComboboxRootContext,
 } from "../root/ComboboxRoot";
-import { useAnnounce } from "./useAnnounce";
+import { useHitsAnnouncer } from "./useHitsAnnouncer";
 
 interface ComboboxListProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -142,57 +141,6 @@ function filterOptions<T extends ComboboxOptionData>(
       return null;
     })
     .filter((option): option is T | ComboboxGroupData<T> => option !== null);
-}
-
-function getNumberOfOptions<T extends ComboboxOptionData>(
-  options: (T | ComboboxGroupData<T>)[],
-) {
-  return options.reduce((count, optOrGroup) => {
-    if ("options" in optOrGroup) {
-      return count + optOrGroup.options.length;
-    }
-    return count + 1;
-  }, 0);
-}
-
-function useHitsAnnouncer(deferredFilterString: string, filterString: string) {
-  const shouldAnnounceRef = useRef(false);
-  const announce = useAnnounce();
-  const announceHits = useMemo(
-    () => debounce((hits: number) => announce(`${hits} treff`), 2000),
-    [announce],
-  );
-  const announceNoHits = useMemo(
-    () => debounce(() => announce(`Ingen treff`), 500),
-    [announce],
-  );
-  useEffect(
-    () => () => {
-      announceHits.clear();
-      announceNoHits.clear();
-    },
-    [announceHits, announceNoHits],
-  );
-
-  return (
-    filteredOptions: (
-      ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>
-    )[],
-  ) => {
-    if (deferredFilterString !== filterString) {
-      shouldAnnounceRef.current = true;
-    } else if (shouldAnnounceRef.current) {
-      if (filteredOptions.length === 0) {
-        announceHits.clear();
-        announceNoHits();
-      } else {
-        const hits = getNumberOfOptions(filteredOptions);
-        announceNoHits.clear();
-        announceHits(hits);
-      }
-      shouldAnnounceRef.current = false;
-    }
-  };
 }
 
 export type { ComboboxListProps };
