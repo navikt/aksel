@@ -75,6 +75,30 @@ export const FixedHeight: Story = {
   ),
 };
 
+export const ClientSideLoading: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+
+    return (
+      <>
+        <button type="button" onClick={() => setIsLoading((value) => !value)}>
+          {isLoading ? "Complete load" : "Reload data"}
+        </button>
+        <DataGrid
+          columns={columns}
+          data={isLoading ? [] : ROWS}
+          getRowId={(row) => String(row.id)}
+          isLoading={isLoading}
+          pagination={{ defaultPage: 2 }}
+        >
+          <DataGrid.Table />
+          <DataGrid.Pagination />
+        </DataGrid>
+      </>
+    );
+  },
+};
+
 export const ServerSide: Story = {
   render: () => {
     const [page, setPage] = useState(0);

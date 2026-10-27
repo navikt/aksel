@@ -22,6 +22,9 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
   const [activeCell, setActiveCellState] = useState<Element | null>(null);
   const activeCellRef = useValueAsRef(activeCell);
   const observerRef = useRef<MutationObserver | null>(null);
+  const loadingCellPositionRef = useRef<{ x: number; y: number } | undefined>(
+    undefined,
+  );
 
   const getTableGrid = useCallback((_tableRef: HTMLTableElement) => {
     if (gridCacheRef.current.dirty || !gridCacheRef.current.grid) {
@@ -51,9 +54,16 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
     observerRef.current = new MutationObserver(() => {
       gridCacheRef.current.dirty = true;
 
+      const isLoading = tableRef.getAttribute("aria-busy") === "true";
       const currentCell = activeCellRef.current;
       if (currentCell && !tableRef.contains(currentCell)) {
-        const position = gridCacheRef.current.grid?.positions.get(currentCell);
+        const position =
+          loadingCellPositionRef.current ??
+          gridCacheRef.current.grid?.positions.get(currentCell);
+        if (isLoading) {
+          // Keep the original coordinates across temporary loading rows.
+          loadingCellPositionRef.current = position;
+        }
         const { grid } = getTableGrid(tableRef);
         const rowIndex = Math.min(position?.y ?? 0, grid.length - 1);
         const row = grid[rowIndex] ?? [];
@@ -65,13 +75,17 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
         // Keep pagination controls focused; restore this cell on table re-entry.
         setActiveCell(nextCell);
       }
+
+      if (!isLoading) {
+        loadingCellPositionRef.current = undefined;
+      }
     });
 
     observerRef.current.observe(tableRef, {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ["colspan", "rowspan", "hidden", "style"],
+      attributeFilter: ["colspan", "rowspan", "hidden", "style", "aria-busy"],
     });
 
     return () => {

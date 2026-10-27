@@ -184,7 +184,9 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
               {children}
             </DataGridRootPagination>
           ) : (
-            children
+            <DataGridRootPaginationContextProvider mode="none">
+              {children}
+            </DataGridRootPaginationContextProvider>
           )}
         </DataGridContextProvider>
       </div>

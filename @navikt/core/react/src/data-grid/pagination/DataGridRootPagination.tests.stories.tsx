@@ -85,6 +85,103 @@ export const ClientModeUsesRootPaginationState: Story = {
   },
 };
 
+function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
+  const [data, setData] = useState<Row[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
+  const [correctionCount, setCorrectionCount] = useState(0);
+
+  return (
+    <>
+      <output aria-label="Page corrections">{correctionCount}</output>
+      <button
+        type="button"
+        onClick={() => {
+          setData(rows);
+          setIsLoading(false);
+        }}
+      >
+        Complete load
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          setData([]);
+          setIsLoading(true);
+        }}
+      >
+        Reload
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          setData(rows.slice(0, 3));
+          setIsLoading(false);
+        }}
+      >
+        Complete smaller load
+      </button>
+      <DataGrid
+        columns={columns}
+        data={data}
+        getRowId={getRowId}
+        isLoading={isLoading}
+        pagination={{
+          page: controlled ? page : undefined,
+          defaultPage: 2,
+          defaultPageSize: 2,
+          pageSizeOptions: [2],
+          onPageChange: (nextPage) => {
+            setPage(nextPage);
+            setCorrectionCount((count) => count + 1);
+          },
+        }}
+      >
+        <DataGrid.Table />
+        <DataGrid.Pagination />
+      </DataGrid>
+    </>
+  );
+}
+
+const testLoadingPreservesPage: Story["play"] = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const corrections = canvas.getByRole("status", {
+    name: "Page corrections",
+  });
+  const completeLoad = canvas.getByRole("button", { name: "Complete load" });
+  const reload = canvas.getByRole("button", { name: "Reload" });
+
+  expect(corrections).toHaveTextContent("0");
+  await userEvent.click(completeLoad);
+  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
+
+  await userEvent.click(reload);
+  expect(corrections).toHaveTextContent("0");
+  await userEvent.click(completeLoad);
+  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expect(corrections).toHaveTextContent("0");
+
+  await userEvent.click(reload);
+  await userEvent.click(
+    canvas.getByRole("button", { name: "Complete smaller load" }),
+  );
+  expect(await canvas.findByText("Side 2 av 2")).toBeInTheDocument();
+  expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+  expect(corrections).toHaveTextContent("1");
+};
+
+export const LoadingPreservesUncontrolledPage: Story = {
+  render: () => <LoadingClientGrid />,
+  play: testLoadingPreservesPage,
+};
+
+export const LoadingPreservesControlledPage: Story = {
+  render: () => <LoadingClientGrid controlled />,
+  play: testLoadingPreservesPage,
+};
+
 export const ServerModeUsesKnownTotalState: Story = {
   render: () => (
     <DataGrid
@@ -226,6 +323,19 @@ export const RequiresRootPagination: Story = {
   },
 };
 
+export const NestedGridRequiresOwnPagination: Story = {
+  render: () => (
+    <DataGrid columns={columns} data={rows} getRowId={getRowId} pagination={{}}>
+      <RenderErrorBoundary>
+        <DataGrid columns={columns} data={rows}>
+          <DataGrid.Pagination />
+        </DataGrid>
+      </RenderErrorBoundary>
+    </DataGrid>
+  ),
+  play: RequiresRootPagination.play,
+};
+
 const manyRows: Row[] = Array.from({ length: 60 }, (_, index) => ({
   id: index + 1,
   name: `Person ${String(index + 1).padStart(2, "0")}`,
@@ -234,6 +344,42 @@ const manyRows: Row[] = Array.from({ length: 60 }, (_, index) => ({
 const sortableColumns: DataGrid.Columns<Row> = [
   { id: "name", header: "Name", bodyCell: (row) => row.name, isSortable: true },
 ];
+
+export const NestedGridDoesNotInheritPagination: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={rows}
+      getRowId={getRowId}
+      pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
+    >
+      <DataGrid.Table aria-label="Outer grid" />
+      <DataGrid columns={sortableColumns} data={rows} getRowId={getRowId}>
+        <DataGrid.Table aria-label="Nested grid" />
+      </DataGrid>
+      <DataGrid.Pagination />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nested = within(canvas.getByRole("table", { name: "Nested grid" }));
+    const outer = within(canvas.getByRole("table", { name: "Outer grid" }));
+
+    expect(nested.getAllByRole("row")).toHaveLength(6);
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(outer.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+    expect(nested.getAllByRole("row")).toHaveLength(6);
+
+    await userEvent.click(nested.getByRole("button", { name: "Name" }));
+    expect(nested.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+      "aria-sort",
+      "ascending",
+    );
+    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(outer.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+  },
+};
 
 function ResetControls({
   onSortProgrammatically,

@@ -86,6 +86,10 @@ function useDataGridPagination({
   } | null>(null);
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
     if (storedPage === range.page) {
       lastCorrection.current = null;
       return;
@@ -107,7 +111,7 @@ function useDataGridPagination({
     }
 
     setStoredPage(range.page);
-  }, [controlledPage, storedPage, range.page, setStoredPage]);
+  }, [controlledPage, isLoading, storedPage, range.page, setStoredPage]);
 
   if (process.env.NODE_ENV !== "production") {
     if (controlledPage !== undefined && !onPageChange) {

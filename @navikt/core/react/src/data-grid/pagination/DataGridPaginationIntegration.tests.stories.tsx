@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React from "react";
+import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../root/DataGridRoot";
 
@@ -76,4 +76,97 @@ export const KeyboardCellClampedOnShorterLastPage: Story = {
     await userEvent.keyboard("{ArrowLeft}");
     expect(canvas.getByRole("cell", { name: "52" })).toHaveFocus();
   },
+};
+
+function ServerLoadingGrid({
+  loadingContent,
+}: {
+  loadingContent?: DataGrid.Table.LoadingContent;
+}) {
+  const [page, setPage] = useState(0);
+  const [loadedPage, setLoadedPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <>
+      <button type="button">Før tabellen</button>
+      <DataGrid
+        columns={columns}
+        data={rows.slice(loadedPage * 20, (loadedPage + 1) * 20)}
+        getRowId={(row) => String(row.id)}
+        isLoading={isLoading}
+        pagination={{
+          mode: "server",
+          page,
+          onPageChange: (nextPage) => {
+            setPage(nextPage);
+            setIsLoading(true);
+          },
+          defaultPageSize: 20,
+          pageSizeOptions: [20],
+          totalRows: rows.length,
+        }}
+      >
+        <DataGrid.Table aria-label="Personer" loadingContent={loadingContent} />
+        <DataGrid.Pagination />
+      </DataGrid>
+      <button
+        type="button"
+        onClick={() => {
+          setLoadedPage(page);
+          setIsLoading(false);
+        }}
+      >
+        Complete request
+      </button>
+    </>
+  );
+}
+
+const testKeyboardCellThroughLoading: Story["play"] = async ({
+  canvasElement,
+}) => {
+  const canvas = within(canvasElement);
+  const before = canvas.getByRole("button", { name: "Før tabellen" });
+  const complete = canvas.getByRole("button", { name: "Complete request" });
+
+  await userEvent.click(before);
+  await userEvent.tab();
+  await userEvent.keyboard("{Control>}{End}{/Control}");
+  expect(canvas.getByRole("cell", { name: "Person 20" })).toHaveFocus();
+
+  const next = canvas.getByRole("button", { name: "Neste side" });
+  await userEvent.click(next);
+  expect(next).toHaveFocus();
+  await userEvent.click(complete);
+  await userEvent.click(before);
+  await userEvent.tab();
+  expect(canvas.getByRole("cell", { name: "Person 40" })).toHaveFocus();
+
+  await userEvent.click(canvas.getByRole("button", { name: "Siste side" }));
+  await userEvent.click(complete);
+  await userEvent.click(before);
+  await userEvent.tab();
+  expect(canvas.getByRole("cell", { name: "Person 53" })).toHaveFocus();
+  await userEvent.keyboard("{ArrowUp}");
+  expect(canvas.getByRole("cell", { name: "Person 52" })).toHaveFocus();
+};
+
+export const KeyboardCellPreservedThroughSkeletonLoading: Story = {
+  render: () => <ServerLoadingGrid />,
+  play: testKeyboardCellThroughLoading,
+};
+
+export const KeyboardCellPreservedThroughContentLoading: Story = {
+  render: () => (
+    <ServerLoadingGrid
+      loadingContent={{ variant: "content", content: "Loading rows" }}
+    />
+  ),
+  play: testKeyboardCellThroughLoading,
+};
+
+export const KeyboardCellPreservedThroughOverlayLoading: Story = {
+  render: () => <ServerLoadingGrid loadingContent={{ variant: "overlay" }} />,
+  play: testKeyboardCellThroughLoading,
 };
