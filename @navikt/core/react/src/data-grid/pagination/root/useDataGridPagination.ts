@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { consoleWarning } from "../../utils/helpers/consoleWarning";
-import { useControllableState, useEventCallback } from "../../utils/hooks";
-import { getPaginationRange } from "../pagination/helpers/pagination-range";
-import type { DataGridPaginationOptions } from "../root/DataGrid.types";
+import { consoleWarning } from "../../../utils/helpers/consoleWarning";
+import { useControllableState, useEventCallback } from "../../../utils/hooks";
+import { getPaginationRange } from "../helpers/pagination-range";
+import type { DataGridPaginationOptions } from "./DataGridPagination.types";
 
 const defaultPageSizeOptions = [10, 25, 50, 100];
 

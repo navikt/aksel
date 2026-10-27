@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Select, type SelectProps } from "../../../form/select";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridPaginationContext } from "../../root/DataGridPagination.context";
+import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
 
 type DataGridPaginationPageSizeProps = Omit<
   SelectProps,
@@ -10,15 +10,15 @@ type DataGridPaginationPageSizeProps = Omit<
 >;
 
 /**
- * Lets users choose how many rows DataGrid displays per page.
+ * Lets users choose how many rows to display per page.
  *
  * @see 🏷️ {@link DataGridPaginationPageSizeProps}
  *
  * @example
  * ```jsx
- * <DataGrid.Pagination>
- *   <DataGrid.Pagination.PageSize />
- * </DataGrid.Pagination>
+ * <DataGridPagination data={pageRows} totalRows={150}>
+ *   <DataGridPagination.PageSize />
+ * </DataGridPagination>
  * ```
  */
 const DataGridPaginationPageSize = forwardRef<
@@ -28,7 +28,7 @@ const DataGridPaginationPageSize = forwardRef<
   const { pageSize, pageSizeOptions, setPageSize } =
     useDataGridPaginationContext(
       true,
-      "[Aksel] DataGrid.Pagination.PageSize must be used within <DataGrid pagination={...} />",
+      "[Aksel] DataGridPagination.PageSize must be used within <DataGridPagination />",
     );
   const translate = useI18n("DataGrid");
   const options = pageSizeOptions.includes(pageSize)

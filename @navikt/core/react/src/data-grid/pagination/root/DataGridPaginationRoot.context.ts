@@ -1,5 +1,5 @@
-import { createStrictContext } from "../../utils/helpers";
-import type { useDataGridPagination } from "../hooks/useDataGridPagination";
+import { createStrictContext } from "../../../utils/helpers";
+import type { useDataGridPagination } from "./useDataGridPagination";
 
 const {
   Provider: DataGridPaginationContextProvider,
@@ -7,7 +7,7 @@ const {
 } = createStrictContext<ReturnType<typeof useDataGridPagination>>({
   name: "DataGridPaginationContext",
   errorMessage:
-    "DataGrid pagination hooks must be used within a <DataGrid pagination={...} />",
+    "DataGridPagination parts must be used within <DataGridPagination />",
 });
 
 export { DataGridPaginationContextProvider, useDataGridPaginationContext };

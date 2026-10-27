@@ -1,25 +1,12 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
-import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { useDataGridPagination } from "../hooks/useDataGridPagination";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
-import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
-import type {
-  DataGridPaginationOptions,
-  DataGridSettings,
-} from "./DataGrid.types";
-import {
-  DataGridPaginationContextProvider,
-  useDataGridPaginationContext,
-} from "./DataGridPagination.context";
-import {
-  DataGridContextProvider,
-  useDataGridContext,
-} from "./DataGridRoot.context";
+import type { DataGridSettings } from "./DataGrid.types";
+import { DataGridContextProvider } from "./DataGridRoot.context";
 
 interface DataGridProps<RowT> {
   children: React.ReactNode;
@@ -54,10 +41,6 @@ interface DataGridProps<RowT> {
    * @default false
    */
   isLoading?: boolean;
-  /**
-   * Pagination state and callbacks. Data must contain only the current page.
-   */
-  pagination?: DataGridPaginationOptions;
   /**
    * Settings for the data grid.
    */
@@ -94,16 +77,6 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
-  /**
-   * @see 🏷️ {@link DataGridPagination.Props}
-   *
-   * @example
-   * <DataGrid columns={columns} data={pageRows} pagination={{ totalRows: 150 }}>
-   *   <DataGrid.Table />
-   *   <DataGrid.Pagination />
-   * </DataGrid>
-   */
-  Pagination: typeof DataGridPagination;
 }
 
 /**
@@ -132,7 +105,6 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       getRowId,
       selection,
       isLoading = false,
-      pagination,
       settings,
       defaultSettings,
       onSettingsChange,
@@ -157,92 +129,16 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {pagination !== undefined ? (
-            <DataGridPaginationProvider
-              pagination={pagination}
-              data={data}
-              isLoading={isLoading}
-            >
-              {children}
-            </DataGridPaginationProvider>
-          ) : (
-            children
-          )}
+          {children}
         </DataGridContextProvider>
       </div>
     );
   },
 );
 
-function DataGridPaginationProvider({
-  children,
-  pagination,
-  data,
-  isLoading,
-}: {
-  children: React.ReactNode;
-  pagination: DataGridPaginationOptions;
-  data: unknown[];
-  isLoading: boolean;
-}) {
-  const value = useDataGridPagination({ pagination, data, isLoading });
-
-  return (
-    <DataGridPaginationContextProvider {...value}>
-      {children}
-      <DataGridPaginationLiveRegion />
-    </DataGridPaginationContextProvider>
-  );
-}
-
-function DataGridPaginationLiveRegion() {
-  const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
-    useDataGridPaginationContext();
-  const { isLoading: gridIsLoading = false } = useDataGridContext();
-  const loading = isLoading || gridIsLoading;
-  const translate = useI18n("DataGrid");
-  const lastAnnouncedPage = useRef({ page, pageSize });
-  const [announcement, setAnnouncement] = useState("");
-
-  useEffect(() => {
-    if (
-      loading ||
-      (lastAnnouncedPage.current.page === page &&
-        lastAnnouncedPage.current.pageSize === pageSize)
-    ) {
-      return;
-    }
-
-    const summary =
-      to === 0
-        ? translate("Pagination.summaryEmpty")
-        : totalRows === undefined
-          ? translate("Pagination.summaryUnknownTotal", { from, to })
-          : translate("Pagination.summary", { from, to, totalRows });
-    const pageLabel =
-      pageCount === undefined
-        ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
-        : translate("Pagination.pageOf", { page: page + 1, pageCount });
-
-    lastAnnouncedPage.current = { page, pageSize };
-    // Retain the completed message across loading and unrelated renders so
-    // assistive technology has time to announce this single root-owned update.
-    setAnnouncement(
-      `${summary}. ${pageLabel}. ${translate("Pagination.pageSize")}: ${pageSize}`,
-    );
-  }, [loading, page, pageCount, pageSize, from, to, totalRows, translate]);
-
-  return (
-    <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">
-      {announcement}
-    </div>
-  );
-}
-
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
-DataGrid.Pagination = DataGridPagination;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -267,16 +163,6 @@ export namespace DataGrid {
   export namespace Preferences {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPreferences.Props;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  export namespace Pagination {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
-    export type Props = DataGridPagination.Props;
-    export type Options = DataGridPagination.Options;
-    export type SummaryProps = DataGridPagination.SummaryProps;
-    export type PageSizeProps = DataGridPagination.PageSizeProps;
-    export type NavigationProps = DataGridPagination.NavigationProps;
   }
 }
 

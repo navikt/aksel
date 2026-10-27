@@ -6,10 +6,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useDataGridPaginationContext } from "../../../data-grid/root/DataGridPagination.context";
 import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
-import { useClientLayoutEffect, useId } from "../../../utils-external";
+import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
@@ -304,25 +303,6 @@ function TableElementWrapper({
   });
 
   const mergedTableRefs = useMergeRefs(tableRef, setTableRef);
-
-  const pagination = useDataGridPaginationContext(false);
-  const page = pagination?.page;
-  const pageSize = pagination?.pageSize;
-  const previousPagination = useRef({ page, pageSize });
-
-  useClientLayoutEffect(
-    function resetScrollOnPaginationChange() {
-      const previous = previousPagination.current;
-      if (previous.page === page && previous.pageSize === pageSize) {
-        return;
-      }
-      previousPagination.current = { page, pageSize };
-      if (tableWrapperRef.current) {
-        tableWrapperRef.current.scrollTop = 0;
-      }
-    },
-    [page, pageSize],
-  );
 
   const updateStickyStyles = useCallback(() => {
     if (!tableWrapperRef.current) {

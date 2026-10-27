@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { DataGrid } from "../root/DataGridRoot";
+import { DataGridPagination } from "./index";
 
-const meta: Meta<typeof DataGrid.Pagination> = {
+const meta: Meta<typeof DataGridPagination> = {
   title: "ds-react/DataGrid/Pagination",
-  component: DataGrid.Pagination,
+  component: DataGridPagination,
   parameters: {
     layout: "padded",
   },
@@ -12,7 +13,7 @@ const meta: Meta<typeof DataGrid.Pagination> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataGrid.Pagination>;
+type Story = StoryObj<typeof DataGridPagination>;
 
 type Row = { id: number; name: string; role: string };
 
@@ -34,70 +35,56 @@ const sortableColumns: DataGrid.Columns<Row> = columns.map((column) => ({
 }));
 
 function PagedGrid({
-  children,
+  paginationAbove = false,
   defaultPageSize = 10,
 }: {
-  children: React.ReactNode;
+  paginationAbove?: boolean;
   defaultPageSize?: number;
 }) {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const pageRows = ROWS.slice(page * pageSize, (page + 1) * pageSize);
+  const pagination: DataGridPagination.Props = {
+    data: pageRows,
+    page,
+    onPageChange: setPage,
+    pageSize,
+    onPageSizeChange: setPageSize,
+    totalRows: ROWS.length,
+  };
 
   return (
     <DataGrid
       columns={columns}
       data={pageRows}
       getRowId={(row) => String(row.id)}
-      pagination={{
-        page,
-        onPageChange: setPage,
-        pageSize,
-        onPageSizeChange: setPageSize,
-        totalRows: ROWS.length,
-      }}
     >
-      {children}
+      {paginationAbove && (
+        <DataGridPagination {...pagination} announcePageChanges={false} />
+      )}
+      <DataGrid.Table />
+      <DataGridPagination {...pagination} />
     </DataGrid>
   );
 }
 
 export const BelowTable: Story = {
-  render: () => (
-    <PagedGrid>
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </PagedGrid>
-  ),
+  render: () => <PagedGrid />,
 };
 
 export const AboveAndBelowTable: Story = {
-  render: () => (
-    <PagedGrid>
-      <DataGrid.Pagination />
-      <DataGrid.Table />
-      <DataGrid.Pagination />
-    </PagedGrid>
-  ),
+  render: () => <PagedGrid paginationAbove />,
 };
 
-export const StickyWithPageScroll: Story = {
-  render: () => (
-    <PagedGrid defaultPageSize={100}>
-      <DataGrid.Table />
-      <DataGrid.Pagination sticky />
-    </PagedGrid>
-  ),
+export const PageScroll: Story = {
+  render: () => <PagedGrid defaultPageSize={100} />,
 };
 
-/** The bar stays visible without `sticky` because the table scrolls internally. */
+/** The bar stays visible because the table scrolls internally. */
 export const FixedHeight: Story = {
   render: () => (
     <div style={{ display: "flex", height: "400px" }}>
-      <PagedGrid defaultPageSize={50}>
-        <DataGrid.Table />
-        <DataGrid.Pagination />
-      </PagedGrid>
+      <PagedGrid defaultPageSize={50} />
     </div>
   ),
 };
@@ -107,7 +94,7 @@ export const ResetPageOnSort: Story = {
     docs: {
       description: {
         story:
-          'Pagination only manages display and state; the consumer sorts the full dataset before slicing the current page. Controlled pagination lets onSortChange call setPage(0) alongside setSort. Pass this handler to sorting.onSortOrderChange. For filtering, call setPage(0) in the filter-change handler as well, then filter and sort before slicing; use the filtered row count as totalRows. Neither sorting nor filtering resets the page automatically. When the document owns scrolling, scroll the table into view in the controlled onPageChange callback with tableRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); DataGrid only resets its internal table scroller.',
+          'Pagination only manages display and state; the consumer sorts the full dataset before slicing the current page. Controlled pagination lets onSortChange call setPage(0) alongside setSort. Pass this handler to sorting.onSortOrderChange. For filtering, call setPage(0) in the filter-change handler as well, then filter and sort before slicing; use the filtered row count as totalRows. Neither sorting nor filtering resets the page automatically. Scrolling is consumer-owned. When the document owns scrolling, scroll the table into view in onPageChange with tableRef.current?.scrollIntoView({ block: "start", behavior: "instant" }).',
       },
     },
   },
@@ -138,13 +125,6 @@ export const ResetPageOnSort: Story = {
         columns={sortableColumns}
         data={pageRows}
         getRowId={(row) => String(row.id)}
-        pagination={{
-          page,
-          onPageChange,
-          pageSize,
-          onPageSizeChange: setPageSize,
-          totalRows: ROWS.length,
-        }}
       >
         <DataGrid.Table
           ref={tableRef}
@@ -154,8 +134,21 @@ export const ResetPageOnSort: Story = {
             allowMultiSort: false,
           }}
         />
-        <DataGrid.Pagination />
+        <DataGridPagination
+          data={pageRows}
+          page={page}
+          onPageChange={onPageChange}
+          pageSize={pageSize}
+          onPageSizeChange={setPageSize}
+          totalRows={ROWS.length}
+        />
       </DataGrid>
     );
   },
+};
+
+export const Standalone: Story = {
+  render: () => (
+    <DataGridPagination data={ROWS.slice(0, 10)} totalRows={ROWS.length} />
+  ),
 };

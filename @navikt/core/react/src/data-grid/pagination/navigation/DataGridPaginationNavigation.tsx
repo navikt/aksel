@@ -8,22 +8,22 @@ import {
 import { Button } from "../../../button";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridPaginationContext } from "../../root/DataGridPagination.context";
+import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
 
 interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLElement> {
   children?: never;
 }
 
 /**
- * Provides first, previous, next, and last page controls for DataGrid.
+ * Provides first, previous, next, and last page controls.
  *
  * @see 🏷️ {@link DataGridPaginationNavigationProps}
  *
  * @example
  * ```jsx
- * <DataGrid.Pagination>
- *   <DataGrid.Pagination.Navigation />
- * </DataGrid.Pagination>
+ * <DataGridPagination data={pageRows} totalRows={150}>
+ *   <DataGridPagination.Navigation />
+ * </DataGridPagination>
  * ```
  */
 const DataGridPaginationNavigation = forwardRef<
@@ -33,7 +33,7 @@ const DataGridPaginationNavigation = forwardRef<
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridPaginationContext(
       true,
-      "[Aksel] DataGrid.Pagination.Navigation must be used within <DataGrid pagination={...} />",
+      "[Aksel] DataGridPagination.Navigation must be used within <DataGridPagination />",
     );
   const translate = useI18n("DataGrid");
   const pageLabel =

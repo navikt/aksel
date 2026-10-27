@@ -2,10 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { DataGrid } from "../root/DataGridRoot";
+import { DataGridPagination } from "./index";
 
-const meta: Meta<typeof DataGrid.Pagination> = {
+const meta: Meta<typeof DataGridPagination> = {
   title: "ds-react/DataGrid/Pagination/tests",
-  component: DataGrid.Pagination,
+  component: DataGridPagination,
   parameters: {
     layout: "padded",
     chromatic: { disable: true },
@@ -15,7 +16,7 @@ const meta: Meta<typeof DataGrid.Pagination> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataGrid.Pagination>;
+type Story = StoryObj<typeof DataGridPagination>;
 
 type Row = { id: number; name: string };
 
@@ -30,25 +31,6 @@ const columns: DataGrid.Columns<Row> = [
 
 const getRowId = (row: Row) => String(row.id);
 
-function PaginationGrid({
-  children,
-  pagination,
-}: {
-  children: React.ReactNode;
-  pagination: DataGrid.Pagination.Options;
-}) {
-  return (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(0, 10)}
-      getRowId={getRowId}
-      pagination={pagination}
-    >
-      {children}
-    </DataGrid>
-  );
-}
-
 export const TestUncontrolledNavigation: Story = {
   render: () => (
     <form
@@ -57,9 +39,11 @@ export const TestUncontrolledNavigation: Story = {
         event.currentTarget.dataset.submitted = "true";
       }}
     >
-      <PaginationGrid pagination={{ defaultPageSize: 10, totalRows: 25 }}>
-        <DataGrid.Pagination />
-      </PaginationGrid>
+      <DataGridPagination
+        data={ROWS.slice(0, 10)}
+        defaultPageSize={10}
+        totalRows={25}
+      />
     </form>
   ),
   play: async ({ canvasElement }) => {
@@ -116,26 +100,22 @@ const testSummaryWidth: Story["play"] = async ({ canvasElement }) => {
 
 export const TestSummaryWidth: Story = {
   render: () => (
-    <PaginationGrid pagination={{ totalRows: 137 }}>
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary data-testid="summary" />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation />
-      </DataGrid.Pagination>
-    </PaginationGrid>
+    <DataGridPagination data={ROWS.slice(0, 10)} totalRows={137}>
+      <DataGridPagination.Summary data-testid="summary" />
+      <DataGridPagination.PageSize />
+      <DataGridPagination.Navigation />
+    </DataGridPagination>
   ),
   play: testSummaryWidth,
 };
 
 export const TestUnknownTotalSummaryWidth: Story = {
   render: () => (
-    <PaginationGrid pagination={{ defaultPage: 98, hasNextPage: true }}>
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary data-testid="summary" />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation />
-      </DataGrid.Pagination>
-    </PaginationGrid>
+    <DataGridPagination data={ROWS.slice(0, 10)} defaultPage={98} hasNextPage>
+      <DataGridPagination.Summary data-testid="summary" />
+      <DataGridPagination.PageSize />
+      <DataGridPagination.Navigation />
+    </DataGridPagination>
   ),
   play: testSummaryWidth,
 };
@@ -159,23 +139,23 @@ export const TestPageSizeChange: Story = {
           columns={columns}
           data={ROWS.slice(page * pageSize, (page + 1) * pageSize)}
           getRowId={getRowId}
-          pagination={{
-            page,
-            onPageChange: (nextPage) => {
-              setLastPageChange(nextPage);
-              setPage(nextPage);
-            },
-            pageSize,
-            onPageSizeChange: (nextPageSize) => {
-              setLastPageSizeChange(nextPageSize);
-              setPageSize(nextPageSize);
-            },
-            pageSizeOptions: [5, 10],
-            totalRows: ROWS.length,
-          }}
         >
           <DataGrid.Table />
-          <DataGrid.Pagination />
+          <DataGridPagination
+            data={ROWS.slice(page * pageSize, (page + 1) * pageSize)}
+            page={page}
+            onPageChange={(nextPage) => {
+              setLastPageChange(nextPage);
+              setPage(nextPage);
+            }}
+            pageSize={pageSize}
+            onPageSizeChange={(nextPageSize) => {
+              setLastPageSizeChange(nextPageSize);
+              setPageSize(nextPageSize);
+            }}
+            pageSizeOptions={[5, 10]}
+            totalRows={ROWS.length}
+          />
         </DataGrid>
       </>
     );
@@ -193,20 +173,24 @@ export const TestPageSizeChange: Story = {
     expect(canvas.getByText("Viser 1–5 av 25 rader")).toBeInTheDocument();
     expect(canvas.getByText("Side 1 av 5")).toBeInTheDocument();
     expect(pageSize).toHaveFocus();
+    expect(
+      canvasElement.querySelector(
+        '.aksel-data-grid__pagination > [aria-live="polite"]',
+      ),
+    ).toHaveTextContent(
+      "Viser 1–5 av 25 rader. Side 1 av 5. Rader per side: 5",
+    );
   },
 };
 
 export const TestPageSizeMissingFromOptions: Story = {
   render: () => (
-    <PaginationGrid
-      pagination={{
-        defaultPageSize: 7,
-        pageSizeOptions: [10, 25],
-        totalRows: ROWS.length,
-      }}
-    >
-      <DataGrid.Pagination />
-    </PaginationGrid>
+    <DataGridPagination
+      data={ROWS.slice(0, 7)}
+      defaultPageSize={7}
+      pageSizeOptions={[10, 25]}
+      totalRows={ROWS.length}
+    />
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -220,21 +204,35 @@ export const TestPageSizeMissingFromOptions: Story = {
 };
 
 export const TestNavigationAccessibleNames: Story = {
-  render: () => (
-    <PaginationGrid pagination={{ totalRows: ROWS.length }}>
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering over tabellen" />
-      </DataGrid.Pagination>
-      <DataGrid.Table />
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering under tabellen" />
-      </DataGrid.Pagination>
-    </PaginationGrid>
-  ),
+  render: () => {
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(10);
+    const data = ROWS.slice(page * pageSize, (page + 1) * pageSize);
+    const pagination: DataGridPagination.Props = {
+      data,
+      page,
+      onPageChange: setPage,
+      pageSize,
+      onPageSizeChange: setPageSize,
+      totalRows: ROWS.length,
+    };
+
+    return (
+      <DataGrid columns={columns} data={data} getRowId={getRowId}>
+        <DataGridPagination {...pagination} announcePageChanges={false}>
+          <DataGridPagination.Summary />
+          <DataGridPagination.PageSize />
+          <DataGridPagination.Navigation aria-label="Personer: sidenavigering over tabellen" />
+        </DataGridPagination>
+        <DataGrid.Table />
+        <DataGridPagination {...pagination}>
+          <DataGridPagination.Summary />
+          <DataGridPagination.PageSize />
+          <DataGridPagination.Navigation aria-label="Personer: sidenavigering under tabellen" />
+        </DataGridPagination>
+      </DataGrid>
+    );
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const topNavigation = canvas.getByRole("navigation", {
@@ -289,6 +287,18 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
     const [isLoading, setIsLoading] = useState(false);
     const [renderCount, setRenderCount] = useState(0);
     const dataPage = isLoading ? 0 : page;
+    const data = ROWS.slice(dataPage * 10, (dataPage + 1) * 10);
+    const pagination: DataGridPagination.Props = {
+      data,
+      page,
+      onPageChange: (nextPage) => {
+        setPage(nextPage);
+        setIsLoading(true);
+      },
+      isLoading,
+      defaultPageSize: 10,
+      hasNextPage: true,
+    };
 
     return (
       <>
@@ -304,25 +314,8 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
         >
           Unrelated render {renderCount}
         </button>
-        <DataGrid
-          columns={columns}
-          data={ROWS.slice(dataPage * 10, (dataPage + 1) * 10)}
-          getRowId={getRowId}
-          isLoading={isLoading}
-          pagination={{
-            page,
-            onPageChange: (nextPage) => {
-              setPage(nextPage);
-              setIsLoading(true);
-            },
-            defaultPageSize: 10,
-            hasNextPage: true,
-          }}
-        >
-          <DataGrid.Pagination />
-          <DataGrid.Table />
-          <DataGrid.Pagination />
-        </DataGrid>
+        <DataGridPagination {...pagination} announcePageChanges={false} />
+        <DataGridPagination {...pagination} />
       </>
     );
   },
@@ -334,10 +327,9 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
     const next = within(navigation[0]).getByRole("button", {
       name: "Neste side",
     });
-    // Select also owns empty error-message live regions. Only the grid root
-    // owns pagination announcements, independent of how many bars are shown.
+    // Select also owns empty error-message live regions.
     const liveRegions = canvasElement.querySelectorAll(
-      '.aksel-data-grid > [aria-live="polite"]',
+      '.aksel-data-grid__pagination > [aria-live="polite"]',
     );
 
     expect(liveRegions).toHaveLength(1);
@@ -381,7 +373,9 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
     );
     expect(liveRegions[0]).toHaveTextContent(announcement);
     expect(
-      canvasElement.querySelectorAll('.aksel-data-grid > [aria-live="polite"]'),
+      canvasElement.querySelectorAll(
+        '.aksel-data-grid__pagination > [aria-live="polite"]',
+      ),
     ).toHaveLength(1);
   },
 };
@@ -391,16 +385,13 @@ export const TestUnknownTotalNavigation: Story = {
     const [page, setPage] = useState(0);
 
     return (
-      <PaginationGrid
-        pagination={{
-          page,
-          onPageChange: setPage,
-          defaultPageSize: 10,
-          hasNextPage: page === 0,
-        }}
-      >
-        <DataGrid.Pagination />
-      </PaginationGrid>
+      <DataGridPagination
+        data={ROWS.slice(0, 10)}
+        page={page}
+        onPageChange={setPage}
+        defaultPageSize={10}
+        hasNextPage={page === 0}
+      />
     );
   },
   play: async ({ canvasElement }) => {
@@ -423,23 +414,18 @@ export const TestRepeatedSummaryStillAnnouncesPage: Story = {
     const [page, setPage] = useState(0);
 
     return (
-      <DataGrid
-        columns={columns}
+      <DataGridPagination
         data={[]}
-        pagination={{
-          page,
-          onPageChange: setPage,
-          hasNextPage: true,
-        }}
-      >
-        <DataGrid.Pagination />
-      </DataGrid>
+        page={page}
+        onPageChange={setPage}
+        hasNextPage
+      />
     );
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const liveRegion = canvasElement.querySelector(
-      '.aksel-data-grid > [aria-live="polite"]',
+      '.aksel-data-grid__pagination > [aria-live="polite"]',
     );
 
     expect(liveRegion).toBeEmptyDOMElement();
@@ -457,11 +443,12 @@ export const TestRepeatedSummaryStillAnnouncesPage: Story = {
 
 export const TestUncontrolledPageIsClamped: Story = {
   render: () => (
-    <PaginationGrid
-      pagination={{ defaultPage: 4, defaultPageSize: 10, totalRows: 25 }}
-    >
-      <DataGrid.Pagination />
-    </PaginationGrid>
+    <DataGridPagination
+      data={ROWS.slice(20)}
+      defaultPage={4}
+      defaultPageSize={10}
+      totalRows={25}
+    />
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -480,19 +467,16 @@ export const TestControlledPageIsClampedOnce: Story = {
     return (
       <>
         <output data-testid="page-change-count">{pageChangeCount}</output>
-        <PaginationGrid
-          pagination={{
-            page,
-            onPageChange: (nextPage) => {
-              setPageChangeCount((count) => count + 1);
-              setPage(nextPage);
-            },
-            defaultPageSize: 10,
-            totalRows: 25,
+        <DataGridPagination
+          data={ROWS.slice(20)}
+          page={page}
+          onPageChange={(nextPage) => {
+            setPageChangeCount((count) => count + 1);
+            setPage(nextPage);
           }}
-        >
-          <DataGrid.Pagination />
-        </PaginationGrid>
+          defaultPageSize={10}
+          totalRows={25}
+        />
       </>
     );
   },
@@ -508,20 +492,22 @@ export const TestControlledPageIsClampedOnce: Story = {
 
 export const TestCustomLayout: Story = {
   render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(0, 10)}
-      getRowId={getRowId}
-      pagination={{ totalRows: ROWS.length }}
-    >
-      <DataGrid.Pagination data-testid="custom-bar">
+    <>
+      <DataGridPagination
+        data={ROWS.slice(0, 10)}
+        totalRows={ROWS.length}
+        data-testid="custom-bar"
+      >
         <span>Egendefinert innhold</span>
-      </DataGrid.Pagination>
-      <DataGrid.Table />
-      <DataGrid.Pagination data-testid="summary-bar">
-        <DataGrid.Pagination.Summary />
-      </DataGrid.Pagination>
-    </DataGrid>
+      </DataGridPagination>
+      <DataGridPagination
+        data={ROWS.slice(0, 10)}
+        totalRows={ROWS.length}
+        data-testid="summary-bar"
+      >
+        <DataGridPagination.Summary />
+      </DataGridPagination>
+    </>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -535,15 +521,43 @@ export const TestCustomLayout: Story = {
   },
 };
 
-export const TestWithoutPaginationProp: Story = {
+export const TestIndependentPagination: Story = {
   render: () => (
-    <DataGrid columns={columns} data={ROWS.slice(0, 5)} getRowId={getRowId}>
-      <DataGrid.Table />
-      <DataGrid.Pagination data-testid="bar" />
-    </DataGrid>
+    <>
+      <DataGridPagination
+        data={ROWS.slice(0, 10)}
+        totalRows={25}
+        aria-label="First dataset"
+      >
+        <DataGridPagination.Summary />
+        <DataGridPagination.PageSize />
+        <DataGridPagination.Navigation aria-label="First dataset navigation" />
+      </DataGridPagination>
+      <DataGridPagination
+        data={ROWS.slice(0, 5)}
+        totalRows={5}
+        aria-label="Second dataset"
+      >
+        <DataGridPagination.Summary />
+        <DataGridPagination.PageSize />
+        <DataGridPagination.Navigation aria-label="Second dataset navigation" />
+      </DataGridPagination>
+    </>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.queryByTestId("bar")).not.toBeInTheDocument();
+    const first = within(canvas.getByLabelText("First dataset"));
+    const second = within(canvas.getByLabelText("Second dataset"));
+
+    await userEvent.click(first.getByRole("button", { name: "Neste side" }));
+    expect(first.getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(second.getByText("Side 1 av 1")).toBeInTheDocument();
+    expect(first.getByText(/Side 2.*Rader per side/)).toHaveAttribute(
+      "aria-live",
+      "polite",
+    );
+    expect(
+      second.getByText("", { selector: '[aria-live="polite"].aksel-sr-only' }),
+    ).toBeEmptyDOMElement();
   },
 };

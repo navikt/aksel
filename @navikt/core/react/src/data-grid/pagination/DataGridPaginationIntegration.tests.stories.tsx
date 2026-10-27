@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { DataGrid } from "../root/DataGridRoot";
+import { DataGridPagination } from "./index";
 
 const meta: Meta<typeof DataGrid> = {
   title: "ds-react/DataGrid/Pagination/Integration tests",
@@ -37,17 +38,17 @@ function FixedHeightGrid() {
         columns={columns}
         data={rows.slice(page * pageSize, (page + 1) * pageSize)}
         getRowId={(row) => String(row.id)}
-        pagination={{
-          page,
-          onPageChange: setPage,
-          pageSize,
-          onPageSizeChange: setPageSize,
-          pageSizeOptions: [10, 20, 50],
-          totalRows: rows.length,
-        }}
       >
         <DataGrid.Table aria-label="Personer" />
-        <DataGrid.Pagination />
+        <DataGridPagination
+          data={rows.slice(page * pageSize, (page + 1) * pageSize)}
+          page={page}
+          onPageChange={setPage}
+          pageSize={pageSize}
+          onPageSizeChange={setPageSize}
+          pageSizeOptions={[10, 20, 50]}
+          totalRows={rows.length}
+        />
       </DataGrid>
     </div>
   );
@@ -63,7 +64,7 @@ function getScrollWrapper(canvasElement: HTMLElement) {
   return wrapper;
 }
 
-export const ScrollResetOnPageAndPageSizeChange: Story = {
+export const PaginationDoesNotOwnTableScroll: Story = {
   render: () => <FixedHeightGrid />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -73,9 +74,10 @@ export const ScrollResetOnPageAndPageSizeChange: Story = {
 
     wrapper.scrollTop = 150;
     expect(wrapper.scrollTop).toBeGreaterThan(0);
+    const tableScrollTop = wrapper.scrollTop;
     await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
     expect(canvas.getByRole("cell", { name: "Person 21" })).toBeInTheDocument();
-    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+    await waitFor(() => expect(wrapper.scrollTop).toBe(tableScrollTop));
     expect(view.scrollY).toBe(documentScrollTop);
 
     wrapper.scrollTop = 150;
@@ -86,7 +88,6 @@ export const ScrollResetOnPageAndPageSizeChange: Story = {
     );
     expect(canvas.getByText("Side 1 av 6")).toBeInTheDocument();
     expect(wrapper.scrollHeight).toBeGreaterThan(wrapper.clientHeight);
-    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
     expect(view.scrollY).toBe(documentScrollTop);
   },
 };

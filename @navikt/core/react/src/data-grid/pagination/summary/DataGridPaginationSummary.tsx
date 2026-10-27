@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridPaginationContext } from "../../root/DataGridPagination.context";
+import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
 
 interface DataGridPaginationSummaryProps extends React.HTMLAttributes<HTMLParagraphElement> {
   children?: never;
@@ -15,9 +15,9 @@ interface DataGridPaginationSummaryProps extends React.HTMLAttributes<HTMLParagr
  *
  * @example
  * ```jsx
- * <DataGrid.Pagination>
- *   <DataGrid.Pagination.Summary />
- * </DataGrid.Pagination>
+ * <DataGridPagination data={pageRows} totalRows={150}>
+ *   <DataGridPagination.Summary />
+ * </DataGridPagination>
  * ```
  */
 const DataGridPaginationSummary = forwardRef<
@@ -26,7 +26,7 @@ const DataGridPaginationSummary = forwardRef<
 >(({ className, ...rest }, forwardedRef) => {
   const { from, to, totalRows, pageSize } = useDataGridPaginationContext(
     true,
-    "[Aksel] DataGrid.Pagination.Summary must be used within <DataGrid pagination={...} />",
+    "[Aksel] DataGridPagination.Summary must be used within <DataGridPagination />",
   );
   const translate = useI18n("DataGrid");
 

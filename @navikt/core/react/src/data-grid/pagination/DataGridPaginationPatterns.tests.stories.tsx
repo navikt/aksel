@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { DataGrid } from "../root/DataGridRoot";
 import { ResetPageOnSort } from "./DataGridPagination.stories";
+import { DataGridPagination } from "./index";
 
-const meta: Meta<typeof DataGrid.Pagination> = {
+const meta: Meta<typeof DataGridPagination> = {
   title: "ds-react/DataGrid/Pagination/patterns/tests",
-  component: DataGrid.Pagination,
+  component: DataGridPagination,
   parameters: {
     layout: "padded",
     chromatic: { disable: true },
@@ -15,7 +16,7 @@ const meta: Meta<typeof DataGrid.Pagination> = {
 
 export default meta;
 
-type Story = StoryObj<typeof DataGrid.Pagination>;
+type Story = StoryObj<typeof DataGridPagination>;
 
 type Row = { id: string; name: string; children?: Row[] };
 
@@ -70,16 +71,16 @@ export const TestSelectionAcrossPages: Story = {
             mode: "multiple",
             onSelectedRowIdsChange: setSelectedRowIds,
           }}
-          pagination={{
-            page,
-            onPageChange: setPage,
-            defaultPageSize: 2,
-            pageSizeOptions: [2],
-            totalRows: rows.length,
-          }}
         >
           <DataGrid.Table subRows={{ getRows: getSubRows }} />
-          <DataGrid.Pagination />
+          <DataGridPagination
+            data={rows.slice(page * 2, (page + 1) * 2)}
+            page={page}
+            onPageChange={setPage}
+            defaultPageSize={2}
+            pageSizeOptions={[2]}
+            totalRows={rows.length}
+          />
         </DataGrid>
       </>
     );
