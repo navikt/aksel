@@ -19,7 +19,39 @@ import {
   DataGridRootPaginationContextProvider,
 } from "./DataGridRoot.context";
 
-interface DataGridProps<RowT> {
+type DataGridRowIdProps<RowT> =
+  | {
+      pagination?: never;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * If not provided, the row index will be used as ID.
+       * This can cause issues if your data changes dynamically,
+       * so it's recommended to provide a stable ID if possible.
+       */
+      getRowId?: (rowData: RowT) => string;
+    }
+  | {
+      /**
+       * Enables root-owned pagination state. Pages are zero-indexed.
+       *
+       * Client mode (default) accepts all rows; server mode accepts the current
+       * page and requires exactly one of `totalRows` or `hasNextPage`.
+       *
+       * Requires `getRowId`.
+       */
+      pagination: DataGridPaginationConfig;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * Required with `pagination`, so row IDs stay unique across pages.
+       */
+      getRowId: (rowData: RowT) => string;
+    };
+
+type DataGridProps<RowT> = DataGridBaseProps<RowT> & DataGridRowIdProps<RowT>;
+
+interface DataGridBaseProps<RowT> {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -34,21 +66,6 @@ interface DataGridProps<RowT> {
    * object are used to render the cells based on `columnDefinitions`.
    */
   data: RowT[];
-  /**
-   * Enables root-owned pagination state.
-   *
-   * Client mode (default) accepts all rows; server mode accepts the current
-   * page and requires exactly one of `totalRows` or `hasNextPage`.
-   */
-  pagination?: DataGridPaginationConfig;
-  /**
-   * Function to get unique row ID from row data.
-   *
-   * If not provided, the row index will be used as ID.
-   * This can cause issues if your data changes dynamically,
-   * so it's recommended to provide a stable ID if possible.
-   */
-  getRowId?: (rowData: RowT) => string;
   /**
    * Object with props related to row selection.
    */
@@ -99,7 +116,7 @@ interface DataGridComponent {
    * @see 🏷️ {@link DataGridPagination.Props}
    *
    * @example
-   * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
+   * <DataGrid columns={columns} data={rows} getRowId={(row) => row.id} pagination={{ defaultPageSize: 10 }}>
    *   <DataGrid.Table />
    *   <DataGrid.Pagination />
    * </DataGrid>

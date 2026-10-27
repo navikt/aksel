@@ -43,6 +43,7 @@ export const TestUncontrolledNavigation: Story = {
       <DataGrid
         columns={columns}
         data={ROWS}
+        getRowId={getRowId}
         pagination={{ defaultPageSize: 10 }}
       >
         <DataGrid.Pagination />
@@ -116,6 +117,7 @@ export const TestSummaryWidth: Story = {
     <DataGrid
       columns={columns}
       data={ROWS.slice(0, 10)}
+      getRowId={getRowId}
       pagination={{ mode: "server", totalRows: 137 }}
     >
       <SummaryWidthBar />
@@ -129,6 +131,7 @@ export const TestUnknownTotalSummaryWidth: Story = {
     <DataGrid
       columns={columns}
       data={ROWS.slice(0, 10)}
+      getRowId={getRowId}
       pagination={{ mode: "server", defaultPage: 98, hasNextPage: true }}
     >
       <SummaryWidthBar />
@@ -200,6 +203,7 @@ export const TestPageSizeMissingFromOptions: Story = {
     <DataGrid
       columns={columns}
       data={ROWS}
+      getRowId={getRowId}
       pagination={{ defaultPageSize: 7, pageSizeOptions: [10, 25] }}
     >
       <DataGrid.Pagination />
@@ -310,6 +314,7 @@ export const TestLoadingNavigationAndAnnouncement: Story = {
           columns={columns}
           data={ROWS.slice(dataPage * 10, (dataPage + 1) * 10)}
           isLoading={isLoading}
+          getRowId={getRowId}
           pagination={{
             mode: "server",
             page,
@@ -390,6 +395,7 @@ export const TestUnknownTotalNavigation: Story = {
       <DataGrid
         columns={columns}
         data={ROWS.slice(0, 10)}
+        getRowId={getRowId}
         pagination={{
           mode: "server",
           page,
@@ -422,6 +428,7 @@ export const TestRepeatedSummaryStillAnnouncesPage: Story = {
     <DataGrid
       columns={columns}
       data={[]}
+      getRowId={getRowId}
       pagination={{ mode: "server", hasNextPage: true }}
     >
       <DataGrid.Pagination />
@@ -449,6 +456,7 @@ export const TestUncontrolledPageIsClamped: Story = {
     <DataGrid
       columns={columns}
       data={ROWS}
+      getRowId={getRowId}
       pagination={{ defaultPage: 4, defaultPageSize: 10 }}
     >
       <DataGrid.Pagination />
@@ -474,6 +482,7 @@ export const TestControlledPageIsClampedOnce: Story = {
         <DataGrid
           columns={columns}
           data={ROWS}
+          getRowId={getRowId}
           pagination={{
             page,
             onPageChange: (nextPage) => {
@@ -503,6 +512,7 @@ export const TestCustomLayout: Story = {
     <DataGrid
       columns={columns}
       data={ROWS}
+      getRowId={getRowId}
       pagination={{ defaultPageSize: 10 }}
     >
       <DataGrid.Pagination data-testid="custom-bar">
@@ -532,6 +542,7 @@ export const TestIndependentGrids: Story = {
         <DataGrid
           columns={columns}
           data={ROWS}
+          getRowId={getRowId}
           pagination={{ defaultPageSize: 10 }}
         >
           <DataGrid.Pagination>
@@ -545,6 +556,7 @@ export const TestIndependentGrids: Story = {
         <DataGrid
           columns={columns}
           data={ROWS.slice(0, 5)}
+          getRowId={getRowId}
           pagination={{ defaultPageSize: 10 }}
         >
           <DataGrid.Pagination>

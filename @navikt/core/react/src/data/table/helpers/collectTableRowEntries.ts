@@ -5,11 +5,6 @@ type CollectTableRowEntriesArgs<T> = {
   getRowId?: (rowData: T, index: number) => TableRowEntryId;
   getRows?: (rowData: T) => T[];
   isRowExpandable?: (rowData: T) => boolean;
-  /**
-   * Added to top-level row indexes, so fallback ids stay unique when `items` is a slice (e.g. one page).
-   * @default 0
-   */
-  indexOffset?: number;
 };
 
 interface ItemDetail<T> {
@@ -35,7 +30,6 @@ function collectTableRowEntries<T>({
   getRowId,
   getRows,
   isRowExpandable,
-  indexOffset = 0,
 }: CollectTableRowEntriesArgs<T>): CollectTableRowEntriesReturn<T> {
   const itemDetailsMap = new Map<TableRowEntryId, ItemDetail<T>>();
   const childRowIdsById = new Map<TableRowEntryId, TableRowEntryId[]>();
@@ -76,9 +70,7 @@ function collectTableRowEntries<T>({
   };
 
   for (let rowIndex = 0; rowIndex < items.length; rowIndex++) {
-    rootRowIds.push(
-      traverseRow(items[rowIndex], indexOffset + rowIndex, 0, null),
-    );
+    rootRowIds.push(traverseRow(items[rowIndex], rowIndex, 0, null));
   }
 
   return {

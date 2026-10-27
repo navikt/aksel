@@ -129,22 +129,6 @@ describe("useTableItems", () => {
     expect(result.current.childRowIdsById.get("0")).toEqual(["0.0"]);
   });
 
-  test("offsets top-level fallback ids so sliced pages get global ids", () => {
-    const { result } = renderHook(() =>
-      useTableItems({
-        items: [...fallbackRows, ...fallbackRows],
-        indexOffset: 10,
-        subRows: {
-          getRows: (row: any) => row.subRows ?? [],
-          defaultExpandedRowIds: ["11"],
-        },
-      }),
-    );
-
-    expect(result.current.visibleRowIds).toEqual(["10", "11", "11.0"]);
-    expect(result.current.childRowIdsById.get("10")).toEqual(["10.0"]);
-  });
-
   test("updates visible rows in depth-first order for controlled expanded ids", () => {
     const { result, rerender } = renderHook(
       ({ expandedIds }) =>

@@ -4,11 +4,10 @@ import {
   useDataGridRootPaginationContext,
 } from "../../../data-grid/root/DataGridRoot.context";
 import { useClientLayoutEffect } from "../../../utils-external";
-import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import type { SortEntry } from "../root/DataGridTable.types";
 
-function useTablePagination({ hasSubRows }: { hasSubRows: boolean }) {
-  const { data, getRowId, selection } = useDataGridContext();
+function useTablePagination() {
+  const { data } = useDataGridContext();
   const pagination = useDataGridRootPaginationContext(false);
   const clientPagination =
     pagination?.mode === "client" ? pagination : undefined;
@@ -20,24 +19,12 @@ function useTablePagination({ hasSubRows }: { hasSubRows: boolean }) {
     [data, startIndex, endIndex],
   );
 
-  const hasSelection = selection !== undefined && selection.mode !== "none";
-
-  if (
-    process.env.NODE_ENV !== "production" &&
-    clientPagination !== undefined &&
-    !getRowId &&
-    (hasSelection || hasSubRows)
-  ) {
-    consoleWarning(
-      "DataGrid.Table: Provide `getRowId` when using client pagination with selection or subRows. Index-based fallback ids can change after sorting, filtering, or deleting rows.",
-    );
-  }
-
-  return { items, indexOffset: startIndex };
+  return items;
 }
 
 /**
- * Root-owned pagination only: resets to page 0 when the applied sort model changes,
+ * Root-owned pagination only: in client mode, resets to page 0 when the applied sort model changes
+ * (server mode leaves this to the consumer to avoid fetching the old page with the new sort),
  * and scrolls the table's own scroll container to top on page, page size or sort changes.
  * Compares applied sort state, so rejected controlled sort requests do not reset.
  */
@@ -52,6 +39,7 @@ function useTablePaginationReset({
   const page = pagination?.page;
   const pageSize = pagination?.pageSize;
   const setPage = pagination?.setPage;
+  const isClientMode = pagination?.mode === "client";
 
   const sortKey = JSON.stringify(
     sortState.map(({ columnId, direction }) => [columnId, direction]),
@@ -68,7 +56,7 @@ function useTablePaginationReset({
     }
 
     const sortChanged = prev.sortKey !== sortKey;
-    if (sortChanged) {
+    if (sortChanged && isClientMode) {
       setPage(0);
     }
 
@@ -77,7 +65,7 @@ function useTablePaginationReset({
         scrollWrapperRef.current.scrollTop = 0;
       }
     }
-  }, [sortKey, page, pageSize, setPage, scrollWrapperRef]);
+  }, [sortKey, page, pageSize, setPage, isClientMode, scrollWrapperRef]);
 }
 
 export { useTablePagination, useTablePaginationReset };

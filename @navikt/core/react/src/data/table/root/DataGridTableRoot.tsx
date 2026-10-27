@@ -171,9 +171,7 @@ const DataGridTableInternal = forwardRef<
   ) => {
     const { columnDefinitions, getRowId, selection, isLoading, tableSettings } =
       useDataGridContext();
-    const paginatedItems = useTablePagination({
-      hasSubRows: subRows !== undefined,
-    });
+    const items = useTablePagination();
 
     const sortingState = useTableSort(sorting);
 
@@ -184,7 +182,7 @@ const DataGridTableInternal = forwardRef<
     });
 
     const tableItems = useTableItems({
-      ...paginatedItems,
+      items,
       getRowId,
       subRows,
     });

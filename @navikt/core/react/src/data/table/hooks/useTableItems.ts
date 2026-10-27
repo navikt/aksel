@@ -34,11 +34,6 @@ type UseTableItemsArgs<T> = {
   items: T[];
   getRowId?: (rowData: T) => string;
   subRows?: SubRowsProps<T>;
-  /**
-   * Global index of `items[0]`, used for fallback row ids when `items` is a page slice.
-   * @default 0
-   */
-  indexOffset?: number;
 };
 
 type UseTableItemsReturn<T> = {
@@ -53,7 +48,7 @@ type UseTableItemsReturn<T> = {
 };
 
 function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
-  const { items, subRows, getRowId, indexOffset } = args;
+  const { items, subRows, getRowId } = args;
 
   const {
     expandedRowIds,
@@ -86,7 +81,6 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
         getRowId,
         getRows,
         isRowExpandable,
-        indexOffset,
       });
 
       const localVisibleItems: T[] = [];
@@ -124,14 +118,7 @@ function useTableItems<T>(args: UseTableItemsArgs<T>): UseTableItemsReturn<T> {
         childRowIdsById: _childRowIdsById,
         itemDetails: rowEntriesMap,
       };
-    }, [
-      getRows,
-      items,
-      getRowId,
-      isRowExpandable,
-      indexOffset,
-      expandedIdsSet,
-    ]);
+    }, [getRows, items, getRowId, isRowExpandable, expandedIdsSet]);
 
   const handleExpandedSubRowIdChange = useCallback(
     (id: string) => {

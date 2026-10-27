@@ -19,6 +19,8 @@ export default meta;
 type Story = StoryObj<typeof DataGrid>;
 type Row = { id: number; name: string };
 
+const getRowId = (row: Row) => String(row.id);
+
 const rows: Row[] = Array.from({ length: 5 }, (_, index) => ({
   id: index + 1,
   name: `Person ${index + 1}`,
@@ -53,6 +55,7 @@ export const ClientModeUsesRootPaginationState: Story = {
     <DataGrid
       columns={columns}
       data={rows}
+      getRowId={getRowId}
       pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
     >
       <PaginationStateProbe />
@@ -87,6 +90,7 @@ export const ServerModeUsesKnownTotalState: Story = {
     <DataGrid
       columns={columns}
       data={rows.slice(0, 2)}
+      getRowId={getRowId}
       pagination={{
         mode: "server",
         defaultPageSize: 2,
@@ -120,6 +124,7 @@ export const ServerModeUsesUnknownTotalState: Story = {
     <DataGrid
       columns={columns}
       data={rows.slice(0, 2)}
+      getRowId={getRowId}
       pagination={{
         mode: "server",
         defaultPageSize: 2,
@@ -148,6 +153,7 @@ export const ContextBoundBarsShareStateAndAnnounceOnce: Story = {
     <DataGrid
       columns={columns}
       data={rows}
+      getRowId={getRowId}
       pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
     >
       <DataGrid.Pagination>
@@ -360,5 +366,46 @@ export const RejectedSortDoesNotReset: Story = {
     );
     expect(canvas.getByText("Page 1 · 20 rows")).toBeInTheDocument();
     await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+  },
+};
+
+function ServerResetGrid() {
+  const [sortOrder, setSortOrder] = useState<SortEntry[]>([]);
+
+  return (
+    <DataGrid
+      columns={sortableColumns}
+      data={manyRows.slice(0, 20)}
+      getRowId={getRowId}
+      pagination={{
+        mode: "server",
+        defaultPageSize: 20,
+        pageSizeOptions: [10, 20],
+        totalRows: manyRows.length,
+      }}
+    >
+      <ResetControls onSortProgrammatically={() => {}} />
+      <DataGrid.Table
+        aria-label="Personer"
+        sorting={{ sortOrder, onSortOrderChange: setSortOrder }}
+      />
+    </DataGrid>
+  );
+}
+
+export const ServerSortDoesNotResetPage: Story = {
+  render: () => <ServerResetGrid />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    expect(canvas.getByText("Page 2 · 20 rows")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+      "aria-sort",
+      "ascending",
+    );
+    expect(canvas.getByText("Page 2 · 20 rows")).toBeInTheDocument();
   },
 };
