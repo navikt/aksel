@@ -4992,7 +4992,7 @@ __metadata:
     jscodeshift: "npm:17.4.0"
     jsdom: "npm:29.1.1"
     react: "npm:19.3.1"
-    react-day-picker: "npm:10.0.1"
+    react-day-picker: "npm:10.0.2"
     react-dom: "npm:19.3.1"
     rimraf: "npm:6.1.3"
     swr: "npm:^2.4.2"
@@ -20555,9 +20555,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:10.0.1":
-  version: 10.0.1
-  resolution: "react-day-picker@npm:10.0.1"
+"react-day-picker@npm:10.0.2":
+  version: 10.0.2
+  resolution: "react-day-picker@npm:10.0.2"
   dependencies:
     "@date-fns/tz": "npm:^1.4.1"
     date-fns: "npm:^4.1.0"
@@ -20567,7 +20567,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/fdc1c30c5520b455832c624fd44214b94ec7f6b75d87616746c7c172b338032686b2b1496bccc44cc48383a1d18622295c63d58f092dca6bfd3d6214a0de0859
+  checksum: 10/85b5570e577e3ee84ad1c484cdcc0a8d2003346168afbc46d3889784d50290ee1db1f3356523634b08dd2f7f3b2898d4c710fc895008c8d6b91a83d74656ec24
   languageName: node
   linkType: hard
 
