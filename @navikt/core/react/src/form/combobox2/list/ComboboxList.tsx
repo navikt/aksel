@@ -10,6 +10,7 @@ import {
   type ResolveOption,
   useComboboxRootContext,
 } from "../root/ComboboxRoot";
+import { useHitsAnnouncer } from "./useHitsAnnouncer";
 
 interface ComboboxListProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -47,12 +48,13 @@ function ComboboxList<
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
-  const { virtuallyFocusedOptionValue, filterString, setAnnounceText } =
+  const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
   const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
     useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
+  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString, filterString);
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
@@ -73,16 +75,11 @@ function ComboboxListContent<
     ? filterOptions(options, deferredFilterString)
     : options;
 
-  if (filteredOptions.length === 0) {
-    setAnnounceText("Ingen treff");
-    return (
-      <div className="aksel-combobox2__no-results" role="status">
-        Ingen treff
-      </div>
-    );
-  }
+  maybeAnnouceHits(filteredOptions);
 
-  setAnnounceText("");
+  if (filteredOptions.length === 0) {
+    return <div className="aksel-combobox2__no-results">Ingen treff</div>;
+  }
 
   return filteredOptions.map((optOrGroup) =>
     "options" in optOrGroup ? (
