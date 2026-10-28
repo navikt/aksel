@@ -719,6 +719,18 @@ html[data-dragging-cursor="true"] *::after {
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8);
+
+  /* Equal side columns keep page size centered when summary width changes. */
+  &[data-layout="preset"] {
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+      & > :last-child {
+        justify-self: end;
+      }
+    }
+  }
 }
 
 .aksel-data-grid__pagination-page-size {
