@@ -33,19 +33,13 @@ const sortableColumns: DataGrid.Columns<Row> = columns.map((column) => ({
   isSortable: column.id === "id",
 }));
 
-function PagedGrid({
-  paginationAbove = false,
-  defaultPageSize = 10,
-}: {
-  paginationAbove?: boolean;
-  defaultPageSize?: number;
-}) {
+function PagedGrid({ paginationAbove = false }: { paginationAbove?: boolean }) {
   return (
     <DataGrid
       columns={columns}
       data={ROWS}
       getRowId={(row) => String(row.id)}
-      pagination={{ defaultPageSize }}
+      pagination={{ defaultPageSize: 10 }}
     >
       {paginationAbove && <DataGrid.Pagination />}
       <DataGrid.Table />
@@ -54,25 +48,8 @@ function PagedGrid({
   );
 }
 
-export const BelowTable: Story = {
+export const Default: Story = {
   render: () => <PagedGrid />,
-};
-
-export const AboveAndBelowTable: Story = {
-  render: () => <PagedGrid paginationAbove />,
-};
-
-export const PageScroll: Story = {
-  render: () => <PagedGrid defaultPageSize={100} />,
-};
-
-/** The bar stays visible because the table scrolls internally. */
-export const FixedHeight: Story = {
-  render: () => (
-    <div style={{ display: "flex", height: "400px" }}>
-      <PagedGrid defaultPageSize={50} />
-    </div>
-  ),
 };
 
 export const ClientSideLoading: Story = {
@@ -89,9 +66,10 @@ export const ClientSideLoading: Story = {
           data={isLoading ? [] : ROWS}
           getRowId={(row) => String(row.id)}
           isLoading={isLoading}
+
           pagination={{ defaultPage: 2 }}
         >
-          <DataGrid.Table />
+          <DataGrid.Table loadingContent={{ variant: "skeleton", rows: 10 }} />
           <DataGrid.Pagination />
         </DataGrid>
       </>
@@ -126,14 +104,6 @@ export const ServerSide: Story = {
 };
 
 export const ResetPageOnSort: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "The consumer sorts the full dataset; DataGrid slices the current page. An accepted sort change resets to the first page and scrolls the table to the top. For filtering, call setPage(0) in the filter-change handler.",
-      },
-    },
-  },
   render: () => {
     const [sort, setSort] = useState<DataGrid.Table.SortEntry[]>([]);
     const direction = sort[0]?.direction;

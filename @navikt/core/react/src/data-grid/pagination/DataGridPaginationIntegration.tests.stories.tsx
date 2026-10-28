@@ -43,6 +43,13 @@ function FixedHeightGrid() {
   );
 }
 
+/**
+ * When paginating, the number of rows on the last page may be less than the page size, and the keyboard navigation should correctly clamp to the available cells.
+ * This means:
+ * - If focus is on last row/cell (lets say 20)
+ * - We paginate to next page that only has 14 rows
+ * - The focus should clamp to the last available row
+ */
 export const KeyboardCellClampedOnShorterLastPage: Story = {
   render: () => (
     <>
