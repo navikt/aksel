@@ -4,6 +4,7 @@ import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
 import { HStack, VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { TEST_DATA, columnDef_TEST_DATA } from "./Data.test-data";
 
 const meta: Meta<typeof DataGrid> = {
@@ -12,8 +13,6 @@ const meta: Meta<typeof DataGrid> = {
   parameters: {
     chromatic: { disable: true },
     layout: "fullscreen",
-    a11y: { disable: true },
-    docs: { disable: true },
   },
 };
 
@@ -86,3 +85,7 @@ export const Attachments: Story = {
     },
   },
 };
+
+export const Chromatic = renderStoriesForChromatic({
+  Attachments,
+});
