@@ -498,6 +498,146 @@ export const SelectionPagination: Story = {
   },
 };
 
+type SelectionPageRow = {
+  id: string;
+  name: string;
+  children?: SelectionPageRow[];
+};
+
+const selectionPageRows: SelectionPageRow[] = [
+  {
+    id: "alpha",
+    name: "Alpha",
+    children: [
+      {
+        id: "alpha-child",
+        name: "Alpha child",
+        children: [{ id: "alpha-grandchild", name: "Alpha grandchild" }],
+      },
+    ],
+  },
+  { id: "beta", name: "Beta" },
+  {
+    id: "gamma",
+    name: "Gamma",
+    children: [
+      {
+        id: "gamma-child",
+        name: "Gamma child",
+        children: [{ id: "gamma-grandchild", name: "Gamma grandchild" }],
+      },
+    ],
+  },
+  { id: "delta", name: "Delta" },
+];
+
+const selectionPageColumnDef: ColumnDefinitions<SelectionPageRow> = [
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+];
+
+export const TestSelectionAcrossPages: Story = {
+  render: () => {
+    const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
+
+    return (
+      <>
+        <output aria-label="Selected row IDs">
+          {JSON.stringify([...selectedRowIds].sort())}
+        </output>
+        <DataGrid
+          columns={selectionPageColumnDef}
+          data={selectionPageRows}
+          getRowId={(row) => row.id}
+          selection={{
+            mode: "multiple",
+            onSelectedRowIdsChange: setSelectedRowIds,
+          }}
+          pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
+        >
+          <DataGrid.Table<SelectionPageRow>
+            subRows={{ getRows: (row) => row.children ?? [] }}
+          />
+          <DataGrid.Pagination />
+        </DataGrid>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const selectedIds = canvas.getByRole("status", {
+      name: "Selected row IDs",
+    });
+    const firstPageIds = ["alpha", "alpha-child", "alpha-grandchild", "beta"];
+    const secondPageIds = ["delta", "gamma", "gamma-child", "gamma-grandchild"];
+
+    expect(canvas.queryByText("Alpha child")).not.toBeInTheDocument();
+    expect(canvas.queryByText("Alpha grandchild")).not.toBeInTheDocument();
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Gamma")).toBeInTheDocument();
+    expect(canvas.queryByText("Alpha")).not.toBeInTheDocument();
+    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(
+      JSON.stringify([...firstPageIds, ...secondPageIds].sort()),
+    );
+
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).toBeChecked();
+    }
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe(JSON.stringify(secondPageIds));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).toBeChecked();
+    }
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis under-rader" }),
+    );
+    expect(
+      within(canvas.getByRole("row", { name: /Gamma child/ })).getByRole(
+        "checkbox",
+      ),
+    ).toBeChecked();
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis under-rader" }),
+    );
+    expect(
+      within(canvas.getByRole("row", { name: /Gamma grandchild/ })).getByRole(
+        "checkbox",
+      ),
+    ).toBeChecked();
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe("[]");
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+  },
+};
+
 export const StickySelection: Story = {
   render: () => {
     return (
