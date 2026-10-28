@@ -17,7 +17,7 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
 /**
  * Provides first, previous, next, and last page controls.
  *
- * @see 🏷️ {@link DataGridPaginationNavigationProps}
+ * @see 🏷️ {@link DataGridPagin dationNavigationProps}
  *
  * @example
  * ```jsx
@@ -38,10 +38,6 @@ const DataGridPaginationNavigation = forwardRef<
       "[Aksel] DataGrid.Pagination.Navigation must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
-  const pageLabel =
-    pageCount === undefined
-      ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
-      : translate("Pagination.pageOf", { page: page + 1, pageCount });
 
   return (
     <nav
@@ -89,7 +85,11 @@ const DataGridPaginationNavigation = forwardRef<
             : translate("Pagination.pageOf", { page: pageCount, pageCount })
         }
       >
-        <span>{pageLabel}</span>
+        <span>
+          {pageCount === undefined
+            ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
+            : translate("Pagination.pageOf", { page: page + 1, pageCount })}
+        </span>
       </span>
       <Button
         type="button"

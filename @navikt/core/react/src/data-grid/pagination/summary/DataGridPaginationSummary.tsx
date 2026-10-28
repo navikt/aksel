@@ -41,7 +41,7 @@ const DataGridPaginationSummary = forwardRef<
     text = translate("Pagination.summary", { from, to, totalRows });
   }
 
-  // Match Navigation's three-digit page reservation for unknown totals.
+  /* Match Navigation's three-digit page reservation for unknown totals. */
   const maxRow =
     totalRows ??
     "9".repeat(Math.max(3, String(Math.max(999 * pageSize, from, to)).length));

@@ -60,6 +60,7 @@ function useDataGridPagination({
       : "totalRows" in rows
         ? rows.totalRows
         : undefined;
+
   const range = getPaginationRange({ page: storedPage, pageSize, ...rows });
   const previousSummaryRange = useRef({ from: range.from, to: range.to });
 
@@ -75,6 +76,7 @@ function useDataGridPagination({
       setStoredPage(nextPage);
     }
   });
+
   const setPageSize = useEventCallback((size: number) => {
     setStoredPageSize(size);
     setPage(0);

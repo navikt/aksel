@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { Select, type SelectProps } from "../../../form/select";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -33,9 +33,13 @@ const DataGridPaginationPageSize = forwardRef<
       "[Aksel] DataGrid.Pagination.PageSize must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
-  const options = pageSizeOptions.includes(pageSize)
-    ? pageSizeOptions
-    : [...pageSizeOptions, pageSize];
+  const options = useMemo(
+    () =>
+      pageSizeOptions.includes(pageSize)
+        ? pageSizeOptions
+        : [...pageSizeOptions, pageSize],
+    [pageSize, pageSizeOptions],
+  );
 
   return (
     <Select
