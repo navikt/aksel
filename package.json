@@ -9,7 +9,8 @@
     "clean:reset": "node tooling/scripts/clean.mts --reset",
     "test": "yarn workspaces foreach -vv -pA run test",
     "dev": "yarn workspace aksel.nav.no dev",
-    "lint": "yarn lint:eslint && yarn lint:css && yarn lint:biome && yarn lint:cycle && yarn lint:versions",
+    "lint": "yarn lint:oxlint && yarn lint:eslint && yarn lint:css && yarn lint:biome && yarn lint:cycle && yarn lint:versions",
+    "lint:oxlint": "yarn oxlint --deny-warnings",
     "lint:eslint": "yarn eslint --max-warnings=0 .",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "lint:biome": "yarn biome lint .",
@@ -65,7 +66,10 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --max-warnings=0 --no-warn-ignored",
+    "*.{ts,tsx,js,jsx}": [
+      "oxlint --deny-warnings --no-error-on-unmatched-pattern",
+      "eslint --max-warnings=0 --no-warn-ignored"
+    ],
     "*.css": "stylelint",
     "*.{ts,tsx,js,jsx,css,json}": "biome lint --no-errors-on-unmatched",
     "*": "prettier --write --ignore-unknown",
@@ -101,6 +105,7 @@
     "eslint": "^9.39.2",
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-oxlint": "1.88.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-storybook": "^10.6.3",
@@ -109,6 +114,7 @@
     "globals": "^17.7.0",
     "husky": "^9.1.7",
     "lint-staged": "17.6.0",
+    "oxlint": "1.88.0",
     "playwright": "1.61.1",
     "prettier": "3.9.6",
     "react": "19.3.1",
