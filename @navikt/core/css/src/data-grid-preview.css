@@ -19,6 +19,7 @@
   overflow: auto;
   width: 100%;
   position: relative;
+  container-type: inline-size;
   scroll-timeline: --horizontal-table-scroll inline;
 }
 
@@ -683,6 +684,17 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-table__details-panel-row-cell {
+  > div {
+    position: sticky;
+
+    /* TODO: Sync 1px with `variants` that might not have outer border */
+    inset-inline-start: 1px;
+
+    /* 3px magic number: Avoids content from overflowing when scrolling all the way to the right */
+    max-inline-size: calc(100cqi - 3px);
+    box-sizing: border-box;
+  }
+
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
