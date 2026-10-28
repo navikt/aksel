@@ -2,18 +2,9 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
-import {
-  DataGridPaginationNavigation,
-  type DataGridPaginationNavigationProps,
-} from "../navigation/DataGridPaginationNavigation";
-import {
-  DataGridPaginationPageSize,
-  type DataGridPaginationPageSizeProps,
-} from "../page-size/DataGridPaginationPageSize";
-import {
-  DataGridPaginationSummary,
-  type DataGridPaginationSummaryProps,
-} from "../summary/DataGridPaginationSummary";
+import { DataGridPaginationNavigation } from "../navigation/DataGridPaginationNavigation";
+import { DataGridPaginationPageSize } from "../page-size/DataGridPaginationPageSize";
+import { DataGridPaginationSummary } from "../summary/DataGridPaginationSummary";
 
 interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -23,28 +14,40 @@ interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const DataGridPaginationRoot = forwardRef<
-  HTMLDivElement,
-  DataGridPaginationProps
->(({ children, className, ...rest }, forwardedRef) => {
-  useDataGridRootPaginationContext();
+/**
+ * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
+ *
+ * @see 🏷️ {@link DataGridPaginationProps}
+ *
+ * @example
+ * ```jsx
+ * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
+ *   <DataGrid.Table />
+ *   <DataGrid.Pagination />
+ * </DataGrid>
+ * ```
+ */
+const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
+  ({ children, className, ...rest }, forwardedRef) => {
+    useDataGridRootPaginationContext();
 
-  return (
-    <div
-      {...rest}
-      ref={forwardedRef}
-      className={cl("aksel-data-grid__pagination", className)}
-    >
-      {children ?? (
-        <>
-          <DataGridPaginationSummary />
-          <DataGridPaginationPageSize />
-          <DataGridPaginationNavigation />
-        </>
-      )}
-    </div>
-  );
-});
+    return (
+      <div
+        {...rest}
+        ref={forwardedRef}
+        className={cl("aksel-data-grid__pagination", className)}
+      >
+        {children ?? (
+          <>
+            <DataGridPaginationSummary />
+            <DataGridPaginationPageSize />
+            <DataGridPaginationNavigation />
+          </>
+        )}
+      </div>
+    );
+  },
+);
 
 function DataGridPaginationLiveRegion() {
   const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
@@ -87,40 +90,9 @@ function DataGridPaginationLiveRegion() {
   );
 }
 
-/**
- * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
- *
- * @see 🏷️ {@link DataGridPaginationProps}
- *
- * @example
- * ```jsx
- * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
- *   <DataGrid.Table />
- *   <DataGrid.Pagination />
- * </DataGrid>
- * ```
- */
-const DataGridPagination = Object.assign(DataGridPaginationRoot, {
-  /**
-   * @see 🏷️ {@link DataGridPaginationSummaryProps}
-   */
-  Summary: DataGridPaginationSummary,
-  /**
-   * @see 🏷️ {@link DataGridPaginationPageSizeProps}
-   */
-  PageSize: DataGridPaginationPageSize,
-  /**
-   * @see 🏷️ {@link DataGridPaginationNavigationProps}
-   */
-  Navigation: DataGridPaginationNavigation,
-});
-
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
-  export type SummaryProps = DataGridPaginationSummaryProps;
-  export type PageSizeProps = DataGridPaginationPageSizeProps;
-  export type NavigationProps = DataGridPaginationNavigationProps;
 }
 
 export { DataGridPagination, DataGridPaginationLiveRegion };

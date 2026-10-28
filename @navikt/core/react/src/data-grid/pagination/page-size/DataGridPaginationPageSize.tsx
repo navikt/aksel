@@ -18,7 +18,7 @@ type DataGridPaginationPageSizeProps = Omit<
  * ```jsx
  * <DataGrid columns={columns} data={rows} pagination={{}}>
  *   <DataGrid.Pagination>
- *     <DataGrid.Pagination.PageSize />
+ *     <DataGrid.PaginationPageSize />
  *   </DataGrid.Pagination>
  * </DataGrid>
  * ```
@@ -30,7 +30,7 @@ const DataGridPaginationPageSize = forwardRef<
   const { pageSize, pageSizeOptions, setPageSize } =
     useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGrid.Pagination.PageSize must be used within <DataGrid pagination={...}>",
+      "[Aksel] DataGrid.PaginationPageSize must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
   const options = useMemo(

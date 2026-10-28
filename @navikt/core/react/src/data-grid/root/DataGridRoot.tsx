@@ -5,11 +5,14 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
+import { DataGridPaginationNavigation } from "../pagination/navigation/DataGridPaginationNavigation";
+import { DataGridPaginationPageSize } from "../pagination/page-size/DataGridPaginationPageSize";
 import {
   DataGridPagination,
   DataGridPaginationLiveRegion,
 } from "../pagination/root/DataGridPaginationRoot";
 import { useDataGridPagination } from "../pagination/root/useDataGridPagination";
+import { DataGridPaginationSummary } from "../pagination/summary/DataGridPaginationSummary";
 import type {
   DataGridPaginationConfig,
   DataGridSettings,
@@ -122,6 +125,18 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Pagination: typeof DataGridPagination;
+  /**
+   * @see 🏷️ {@link DataGridPaginationSummary.Props}
+   */
+  PaginationSummary: typeof DataGridPaginationSummary;
+  /**
+   * @see 🏷️ {@link DataGridPaginationPageSize.Props}
+   */
+  PaginationPageSize: typeof DataGridPaginationPageSize;
+  /**
+   * @see 🏷️ {@link DataGridPaginationNavigation.Props}
+   */
+  PaginationNavigation: typeof DataGridPaginationNavigation;
 }
 
 /**
@@ -245,6 +260,9 @@ const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 DataGrid.Pagination = DataGridPagination;
+DataGrid.PaginationSummary = DataGridPaginationSummary;
+DataGrid.PaginationPageSize = DataGridPaginationPageSize;
+DataGrid.PaginationNavigation = DataGridPaginationNavigation;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -275,9 +293,24 @@ export namespace DataGrid {
   export namespace Pagination {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPagination.Props;
-    export type SummaryProps = DataGridPagination.SummaryProps;
-    export type PageSizeProps = DataGridPagination.PageSizeProps;
-    export type NavigationProps = DataGridPagination.NavigationProps;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationSummary {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationSummary.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationPageSize {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationPageSize.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationNavigation {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationNavigation.Props;
   }
 }
 

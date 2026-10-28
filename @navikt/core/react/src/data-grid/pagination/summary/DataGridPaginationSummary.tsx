@@ -17,7 +17,7 @@ interface DataGridPaginationSummaryProps extends React.HTMLAttributes<HTMLParagr
  * ```jsx
  * <DataGrid columns={columns} data={rows} pagination={{}}>
  *   <DataGrid.Pagination>
- *     <DataGrid.Pagination.Summary />
+ *     <DataGrid.PaginationSummary />
  *   </DataGrid.Pagination>
  * </DataGrid>
  * ```
@@ -28,7 +28,7 @@ const DataGridPaginationSummary = forwardRef<
 >(({ className, ...rest }, forwardedRef) => {
   const { from, to, totalRows, pageSize } = useDataGridRootPaginationContext(
     true,
-    "[Aksel] DataGrid.Pagination.Summary must be used within <DataGrid pagination={...}>",
+    "[Aksel] DataGrid.PaginationSummary must be used within <DataGrid pagination={...}>",
   );
   const translate = useI18n("DataGrid");
 

@@ -23,7 +23,7 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
  * ```jsx
  * <DataGrid columns={columns} data={rows} pagination={{}}>
  *   <DataGrid.Pagination>
- *     <DataGrid.Pagination.Navigation />
+ *     <DataGrid.PaginationNavigation />
  *   </DataGrid.Pagination>
  * </DataGrid>
  * ```
@@ -35,7 +35,7 @@ const DataGridPaginationNavigation = forwardRef<
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGrid.Pagination.Navigation must be used within <DataGrid pagination={...}>",
+      "[Aksel] DataGrid.PaginationNavigation must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
 
