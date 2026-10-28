@@ -23,10 +23,10 @@ function useTablePagination() {
 }
 
 /**
- * Root-owned pagination only: in client mode, resets to page 0 when the applied sort model changes
- * (server mode leaves this to the consumer to avoid fetching the old page with the new sort),
- * and scrolls the table's own scroll container to top on page, page size or sort changes.
- * Compares applied sort state, so rejected controlled sort requests do not reset.
+ * Resets client-side pagination to page 0 when the applied sort model changes. Server-side
+ * pagination leaves this to the consumer to avoid fetching the old page with the new sort.
+ * Scrolls the table's own container to top when the applied sort, page, or page size changes.
+ * Comparing applied sort state means rejected controlled sort requests do not reset.
  */
 function useTablePaginationReset({
   sortState,
@@ -51,13 +51,9 @@ function useTablePaginationReset({
     const prev = previous.current;
     previous.current = { sortKey, page, pageSize };
 
-    if (!setPage) {
-      return;
-    }
-
     const sortChanged = prev.sortKey !== sortKey;
     if (sortChanged && isClientMode) {
-      setPage(0);
+      setPage?.(0);
     }
 
     if (sortChanged || prev.page !== page || prev.pageSize !== pageSize) {
