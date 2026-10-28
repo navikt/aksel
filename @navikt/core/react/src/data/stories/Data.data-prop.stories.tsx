@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
+import { ResetPageOnSort } from "../../data-grid/pagination/DataGridPagination.stories";
 import { HGrid } from "../../primitives/grid";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
@@ -900,6 +901,36 @@ export const SortableColumnsUncontrolled: Story = {
         </DataGrid>
       </div>
     );
+  },
+};
+
+export const TestControlledSortResetsPage: Story = {
+  render: ResetPageOnSort.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const navigation = within(
+      canvas.getByRole("navigation", { name: "Sidenavigering" }),
+    );
+
+    for (const direction of ["ascending", "descending", "none"]) {
+      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+      expect(navigation.getByText("Side 3 av 14")).toBeInTheDocument();
+      await userEvent.click(canvas.getByRole("button", { name: "Id" }));
+
+      expect(navigation.getByText("Side 1 av 14")).toBeInTheDocument();
+      expect(canvas.getByRole("columnheader", { name: "Id" })).toHaveAttribute(
+        "aria-sort",
+        direction,
+      );
+      const firstRow = canvas.getAllByRole("row")[1];
+      expect(
+        within(firstRow).getByRole("cell", {
+          name: direction === "descending" ? "137" : "1",
+        }),
+      ).toBeInTheDocument();
+      expect(canvas.getAllByRole("row")).toHaveLength(11);
+    }
   },
 };
 
