@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
 }
 
 .aksel-data-table__border-wrapper {
@@ -719,41 +720,30 @@ html[data-dragging-cursor="true"] *::after {
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8) var(--ax-space-16);
-  padding: var(--ax-space-12) var(--ax-space-16);
-  background-color: var(--ax-bg-raised);
-  border: 1px solid var(--ax-border-neutral-subtle);
-  border-radius: var(--ax-radius-12);
 }
 
 .aksel-data-grid__pagination-page-size {
   display: flex;
   align-items: center;
   gap: var(--ax-space-8);
-
-  & > .aksel-form-field__label {
-    margin: 0;
-  }
-
-  & > .aksel-select__container,
-  & .aksel-select__input {
-    width: auto;
-  }
 }
 
 .aksel-data-grid__pagination-navigation {
   display: flex;
   align-items: center;
   gap: var(--ax-space-4);
+}
 
+.aksel-data-grid__pagnation-navigation-button {
   /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
-  & button[aria-disabled="true"] {
+  &[aria-disabled="true"] {
     cursor: default;
     opacity: var(--ax-opacity-disabled);
   }
 
   @media (forced-colors: active) {
     /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
-    & button[aria-disabled="true"] {
+    &[aria-disabled="true"] {
       color: GrayText;
       opacity: 1;
     }
@@ -779,11 +769,6 @@ html[data-dragging-cursor="true"] *::after {
 
 .aksel-data-grid__pagination-navigation-page {
   text-align: center;
-}
-
-.aksel-data-table__border-wrapper + .aksel-data-grid__pagination,
-.aksel-data-grid__pagination + .aksel-data-table__border-wrapper {
-  margin-block-start: var(--ax-space-8);
 }
 
 /* ------------------------- DataGrid.Pagination End ------------------------ */
