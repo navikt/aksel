@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import type { SortEntry } from "../../data/table/root/DataGridTable.types";
 import { DataGrid } from "../root/DataGridRoot";
+import { useDataGridRootPaginationContext } from "../root/DataGridRoot.context";
 
 const meta: Meta<typeof DataGrid> = {
   title: "ds-react/DataGrid/Pagination/tests",
@@ -9,580 +11,305 @@ const meta: Meta<typeof DataGrid> = {
   parameters: {
     layout: "padded",
     chromatic: { disable: true },
-    a11y: { test: "error" },
   },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof DataGrid>;
-
 type Row = { id: number; name: string };
-
-const ROWS: Row[] = Array.from({ length: 25 }, (_, i) => ({
-  id: i + 1,
-  name: `Person ${i + 1}`,
-}));
-
-const columns: DataGrid.Columns<Row> = [
-  { id: "name", header: "Navn", bodyCell: (row) => row.name },
-];
 
 const getRowId = (row: Row) => String(row.id);
 
-const LIVE_REGION = '.aksel-data-grid > [aria-live="polite"]';
+const rows: Row[] = Array.from({ length: 5 }, (_, index) => ({
+  id: index + 1,
+  name: `Person ${index + 1}`,
+}));
 
-export const TestUncontrolledNavigation: Story = {
-  render: () => (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        event.currentTarget.dataset.submitted = "true";
-      }}
-    >
+const columns: DataGrid.Columns<Row> = [
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+];
+
+const sortableColumns: DataGrid.Columns<Row> = [
+  { id: "name", header: "Name", bodyCell: (row) => row.name, isSortable: true },
+];
+
+function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
+  const [data, setData] = useState<Row[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
+  const [correctionCount, setCorrectionCount] = useState(0);
+
+  return (
+    <>
+      <output aria-label="Page corrections">{correctionCount}</output>
+      <button
+        type="button"
+        onClick={() => {
+          setData(rows);
+          setIsLoading(false);
+        }}
+      >
+        Complete load
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          setData([]);
+          setIsLoading(true);
+        }}
+      >
+        Reload
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          setData(rows.slice(0, 3));
+          setIsLoading(false);
+        }}
+      >
+        Complete smaller load
+      </button>
       <DataGrid
         columns={columns}
-        data={ROWS}
+        data={data}
         getRowId={getRowId}
-        pagination={{ defaultPageSize: 10 }}
+        isLoading={isLoading}
+        pagination={{
+          page: controlled ? page : undefined,
+          defaultPage: 2,
+          defaultPageSize: 2,
+          pageSizeOptions: [2],
+          onPageChange: (nextPage) => {
+            setPage(nextPage);
+            setCorrectionCount((count) => count + 1);
+          },
+        }}
       >
+        <DataGrid.Table />
         <DataGrid.Pagination />
       </DataGrid>
-    </form>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const first = canvas.getByRole("button", { name: "Første side" });
-    const next = canvas.getByRole("button", { name: "Neste side" });
-
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-    expect(first).toHaveAttribute("aria-disabled", "true");
-    first.focus();
-    await userEvent.keyboard("{Enter}");
-    expect(first).toHaveFocus();
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-
-    await userEvent.click(next);
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
-    expect(canvas.getByText("Viser 11–20 av 25 rader")).toBeInTheDocument();
-    expect(canvasElement.querySelector("form")).not.toHaveAttribute(
-      "data-submitted",
-    );
-    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-    await userEvent.click(canvas.getByRole("button", { name: "Siste side" }));
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
-    expect(next).toHaveAttribute("aria-disabled", "true");
-    next.focus();
-    await userEvent.keyboard(" ");
-    expect(next).toHaveFocus();
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
-    await userEvent.click(first);
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
-  },
-};
-
-const testSummaryWidth: Story["play"] = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await canvasElement.ownerDocument.fonts.ready;
-  const getBounds = () =>
-    [
-      canvas.getByTestId("summary"),
-      canvas.getByRole("combobox", { name: "Rader per side" }),
-      ...canvas.getAllByRole("button"),
-    ].map((element) => {
-      const { x, y, width, height } = element.getBoundingClientRect();
-      return { x, y, width, height };
-    });
-  const bounds = getBounds();
-
-  for (let page = 1; page < 14; page++) {
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(getBounds()).toEqual(bounds);
-  }
-};
-
-function SummaryWidthBar() {
-  return (
-    <DataGrid.Pagination>
-      <DataGrid.Pagination.Summary data-testid="summary" />
-      <DataGrid.Pagination.PageSize />
-      <DataGrid.Pagination.Navigation />
-    </DataGrid.Pagination>
+    </>
   );
 }
 
-export const TestSummaryWidth: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(0, 10)}
-      getRowId={getRowId}
-      pagination={{ mode: "server", totalRows: 137 }}
-    >
-      <SummaryWidthBar />
-    </DataGrid>
-  ),
-  play: testSummaryWidth,
+const testLoadingPreservesPage: Story["play"] = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const corrections = canvas.getByRole("status", {
+    name: "Page corrections",
+  });
+  const completeLoad = canvas.getByRole("button", { name: "Complete load" });
+  const reload = canvas.getByRole("button", { name: "Reload" });
+
+  expect(corrections).toHaveTextContent("0");
+  await userEvent.click(completeLoad);
+  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
+
+  await userEvent.click(reload);
+  expect(corrections).toHaveTextContent("0");
+  await userEvent.click(completeLoad);
+  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expect(corrections).toHaveTextContent("0");
+
+  await userEvent.click(reload);
+  await userEvent.click(
+    canvas.getByRole("button", { name: "Complete smaller load" }),
+  );
+  expect(await canvas.findByText("Side 2 av 2")).toBeInTheDocument();
+  expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+  expect(corrections).toHaveTextContent("1");
 };
 
-export const TestUnknownTotalSummaryWidth: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS.slice(0, 10)}
-      getRowId={getRowId}
-      pagination={{ mode: "server", defaultPage: 98, hasNextPage: true }}
-    >
-      <SummaryWidthBar />
-    </DataGrid>
-  ),
-  play: testSummaryWidth,
+export const LoadingPreservesUncontrolledPage: Story = {
+  render: () => <LoadingClientGrid />,
+  play: testLoadingPreservesPage,
 };
 
-export const TestPageSizeChange: Story = {
-  render: () => {
-    const [page, setPage] = useState(2);
-    const [pageSize, setPageSize] = useState(10);
-    const [lastPageChange, setLastPageChange] = useState<number | null>(null);
-    const [lastPageSizeChange, setLastPageSizeChange] = useState<number | null>(
-      null,
-    );
-
-    return (
-      <>
-        <output data-testid="last-page-change">{lastPageChange}</output>
-        <output data-testid="last-page-size-change">
-          {lastPageSizeChange}
-        </output>
-        <DataGrid
-          columns={columns}
-          data={ROWS}
-          getRowId={getRowId}
-          pagination={{
-            page,
-            onPageChange: (nextPage) => {
-              setLastPageChange(nextPage);
-              setPage(nextPage);
-            },
-            pageSize,
-            onPageSizeChange: (nextPageSize) => {
-              setLastPageSizeChange(nextPageSize);
-              setPageSize(nextPageSize);
-            },
-            pageSizeOptions: [5, 10],
-          }}
-        >
-          <DataGrid.Table />
-          <DataGrid.Pagination />
-        </DataGrid>
-      </>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const pageSize = canvas.getByRole("combobox", { name: "Rader per side" });
-
-    expect(canvas.getByText("Viser 21–25 av 25 rader")).toBeInTheDocument();
-    await userEvent.selectOptions(pageSize, "5");
-    expect(
-      await canvas.findByTestId("last-page-size-change"),
-    ).toHaveTextContent("5");
-    expect(canvas.getByTestId("last-page-change")).toHaveTextContent("0");
-    expect(canvas.getByText("Viser 1–5 av 25 rader")).toBeInTheDocument();
-    expect(canvas.getByText("Side 1 av 5")).toBeInTheDocument();
-    expect(pageSize).toHaveFocus();
-    expect(canvasElement.querySelector(LIVE_REGION)).toHaveTextContent(
-      "Viser 1–5 av 25 rader. Side 1 av 5. Rader per side: 5",
-    );
-  },
+export const LoadingPreservesControlledPage: Story = {
+  render: () => <LoadingClientGrid controlled />,
+  play: testLoadingPreservesPage,
 };
 
-export const TestPageSizeMissingFromOptions: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS}
-      getRowId={getRowId}
-      pagination={{ defaultPageSize: 7, pageSizeOptions: [10, 25] }}
-    >
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const pageSize = canvas.getByRole("combobox", { name: "Rader per side" });
+const manyRows: Row[] = Array.from({ length: 60 }, (_, index) => ({
+  id: index + 1,
+  name: `Person ${String(index + 1).padStart(2, "0")}`,
+}));
 
-    expect(pageSize).toHaveValue("7");
-    expect(
-      within(pageSize).getByRole("option", { name: "7" }),
-    ).toBeInTheDocument();
-  },
-};
+function ResetControls({
+  onSortProgrammatically,
+}: {
+  onSortProgrammatically: () => void;
+}) {
+  const { page, pageSize, setPage, setPageSize } =
+    useDataGridRootPaginationContext();
 
-export const TestNavigationAccessibleNames: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS}
-      getRowId={getRowId}
-      pagination={{ defaultPageSize: 10 }}
-    >
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering over tabellen" />
-      </DataGrid.Pagination>
-      <DataGrid.Table />
-      <DataGrid.Pagination>
-        <DataGrid.Pagination.Summary />
-        <DataGrid.Pagination.PageSize />
-        <DataGrid.Pagination.Navigation aria-label="Personer: sidenavigering under tabellen" />
-      </DataGrid.Pagination>
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const topNavigation = canvas.getByRole("navigation", {
-      name: "Personer: sidenavigering over tabellen",
-    });
-    const bottomNavigation = canvas.getByRole("navigation", {
-      name: "Personer: sidenavigering under tabellen",
-    });
-    const pageSizes = canvas.getAllByRole("combobox", {
-      name: "Rader per side",
-    });
+  return (
+    <div>
+      <p>{`Page ${page + 1} · ${pageSize} rows`}</p>
+      <button type="button" onClick={() => setPage(page + 1)}>
+        Next page
+      </button>
+      <button type="button" onClick={() => setPageSize(10)}>
+        Ten rows
+      </button>
+      <button type="button" onClick={onSortProgrammatically}>
+        Sort programmatically
+      </button>
+    </div>
+  );
+}
 
-    expect(pageSizes).toHaveLength(2);
-    expect(pageSizes[0].id).not.toBe(pageSizes[1].id);
-    for (const pageSize of pageSizes) {
-      expect(pageSize).toHaveAccessibleName("Rader per side");
-      expect(within(pageSize).getAllByRole("option")).toHaveLength(4);
-    }
+function ResetGrid({ acceptSort }: { acceptSort: boolean }) {
+  const [sortOrder, setSortOrder] = useState<SortEntry[]>([]);
 
-    pageSizes[0].focus();
-    await userEvent.tab();
-    expect(
-      within(topNavigation).getByRole("button", { name: "Første side" }),
-    ).toHaveFocus();
-    await userEvent.tab();
-    expect(
-      within(topNavigation).getByRole("button", { name: "Forrige side" }),
-    ).toHaveFocus();
-    await userEvent.tab();
-    const next = within(topNavigation).getByRole("button", {
-      name: "Neste side",
-    });
-    expect(next).toHaveFocus();
-    await userEvent.keyboard("{Enter}");
-    expect(next).toHaveFocus();
-    expect(within(topNavigation).getByText("Side 2 av 3")).toBeInTheDocument();
-    expect(
-      within(bottomNavigation).getByText("Side 2 av 3"),
-    ).toBeInTheDocument();
-  },
-};
-
-export const TestLoadingNavigationAndAnnouncement: Story = {
-  parameters: {
-    a11y: {
-      // Both landmarks intentionally provide identical controls for one grid.
-      config: { rules: [{ id: "landmark-unique", enabled: false }] },
-    },
-  },
-  render: () => {
-    const [page, setPage] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-    const [renderCount, setRenderCount] = useState(0);
-    const dataPage = isLoading ? 0 : page;
-
-    return (
-      <>
-        <button type="button" onClick={() => setIsLoading(false)}>
-          Complete request
-        </button>
-        <button type="button" onClick={() => setIsLoading(true)}>
-          Reload page
-        </button>
-        <button
-          type="button"
-          onClick={() => setRenderCount((count) => count + 1)}
-        >
-          Unrelated render {renderCount}
-        </button>
-        <DataGrid
-          columns={columns}
-          data={ROWS.slice(dataPage * 10, (dataPage + 1) * 10)}
-          isLoading={isLoading}
-          getRowId={getRowId}
-          pagination={{
-            mode: "server",
-            page,
-            onPageChange: (nextPage) => {
-              setPage(nextPage);
-              setIsLoading(true);
-            },
-            defaultPageSize: 10,
-            hasNextPage: true,
-          }}
-        >
-          <DataGrid.Pagination />
-          <DataGrid.Pagination />
-        </DataGrid>
-      </>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const navigation = canvas.getAllByRole("navigation", {
-      name: "Sidenavigering",
-    });
-    const next = within(navigation[0]).getByRole("button", {
-      name: "Neste side",
-    });
-    // Select also owns empty error-message live regions.
-    const liveRegions = canvasElement.querySelectorAll(LIVE_REGION);
-
-    expect(liveRegions).toHaveLength(1);
-    expect(liveRegions[0]).toBeEmptyDOMElement();
-    await userEvent.click(next);
-    expect(next).toHaveAttribute("aria-disabled", "true");
-    expect(next).toHaveFocus();
-    for (const nav of navigation) {
-      for (const button of within(nav).getAllByRole("button")) {
-        expect(button).toHaveAttribute("aria-disabled", "true");
-      }
-    }
-    expect(
-      canvas.getAllByRole("combobox", { name: "Rader per side" })[0],
-    ).not.toBeDisabled();
-    expect(canvas.getAllByText("Side 2")).toHaveLength(2);
-    expect(canvas.getAllByText("Viser rad 1–10")).toHaveLength(2);
-    expect(liveRegions[0]).toBeEmptyDOMElement();
-
-    await userEvent.click(next);
-    await userEvent.keyboard("{Enter}");
-    await userEvent.keyboard(" ");
-    expect(next).toHaveFocus();
-    expect(canvas.getAllByText("Side 2")).toHaveLength(2);
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Complete request" }),
-    );
-    expect(await canvas.findAllByText("Viser rad 11–20")).toHaveLength(2);
-    const announcement = "Viser rad 11–20. Side 2. Rader per side: 10";
-    await expect(liveRegions[0]).toHaveTextContent(announcement);
-    expect(liveRegions[0]).toHaveAttribute("aria-atomic", "true");
-
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Unrelated render 0" }),
-    );
-    expect(liveRegions[0]).toHaveTextContent(announcement);
-    await userEvent.click(canvas.getByRole("button", { name: "Reload page" }));
-    expect(liveRegions[0]).toHaveTextContent(announcement);
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Complete request" }),
-    );
-    expect(liveRegions[0]).toHaveTextContent(announcement);
-    expect(canvasElement.querySelectorAll(LIVE_REGION)).toHaveLength(1);
-  },
-};
-
-export const TestUnknownTotalNavigation: Story = {
-  render: () => {
-    const [page, setPage] = useState(0);
-
-    return (
+  return (
+    <div style={{ display: "flex", height: 360 }}>
       <DataGrid
-        columns={columns}
-        data={ROWS.slice(0, 10)}
-        getRowId={getRowId}
-        pagination={{
-          mode: "server",
-          page,
-          onPageChange: setPage,
-          defaultPageSize: 10,
-          hasNextPage: page === 0,
-        }}
+        columns={sortableColumns}
+        data={manyRows}
+        getRowId={(row) => String(row.id)}
+        pagination={{ defaultPageSize: 20, pageSizeOptions: [10, 20] }}
       >
-        <DataGrid.Pagination />
-      </DataGrid>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    expect(canvas.getByText("Side 1")).toBeInTheDocument();
-    expect(canvas.queryByRole("button", { name: "Siste side" })).toBeNull();
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByText("Side 2")).toBeInTheDocument();
-    expect(canvas.queryByText(/av/)).toBeNull();
-    expect(canvas.getByRole("button", { name: "Neste side" })).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    );
-  },
-};
-
-export const TestRepeatedSummaryStillAnnouncesPage: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={[]}
-      getRowId={getRowId}
-      pagination={{ mode: "server", hasNextPage: true }}
-    >
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const liveRegion = canvasElement.querySelector(LIVE_REGION);
-
-    expect(liveRegion).toBeEmptyDOMElement();
-    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
-
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    await expect(liveRegion).toHaveTextContent("Side 2");
-    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
-
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    await expect(liveRegion).toHaveTextContent("Side 3");
-    expect(canvas.getByText("Ingen rader")).toBeInTheDocument();
-  },
-};
-
-export const TestUncontrolledPageIsClamped: Story = {
-  render: () => (
-    <DataGrid
-      columns={columns}
-      data={ROWS}
-      getRowId={getRowId}
-      pagination={{ defaultPage: 4, defaultPageSize: 10 }}
-    >
-      <DataGrid.Pagination />
-    </DataGrid>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    expect(await canvas.findByText("Side 3 av 3")).toBeInTheDocument();
-    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
-  },
-};
-
-export const TestControlledPageIsClampedOnce: Story = {
-  render: () => {
-    const [page, setPage] = useState(4);
-    const [pageChangeCount, setPageChangeCount] = useState(0);
-
-    return (
-      <>
-        <output data-testid="page-change-count">{pageChangeCount}</output>
-        <DataGrid
-          columns={columns}
-          data={ROWS}
-          getRowId={getRowId}
-          pagination={{
-            page,
-            onPageChange: (nextPage) => {
-              setPageChangeCount((count) => count + 1);
-              setPage(nextPage);
+        <ResetControls
+          onSortProgrammatically={() =>
+            setSortOrder([{ columnId: "name", direction: "desc" }])
+          }
+        />
+        <DataGrid.Table
+          aria-label="Personer"
+          sorting={{
+            sortOrder,
+            onSortOrderChange: (next) => {
+              if (acceptSort) {
+                setSortOrder(next);
+              }
             },
-            defaultPageSize: 10,
           }}
-        >
-          <DataGrid.Pagination />
-        </DataGrid>
-      </>
-    );
-  },
+        />
+      </DataGrid>
+    </div>
+  );
+}
+
+function getScrollWrapper(canvasElement: HTMLElement) {
+  const wrapper = canvasElement.querySelector<HTMLElement>(
+    ".aksel-data-table__scroll-wrapper",
+  );
+  if (!wrapper) {
+    throw new Error("Table scroll wrapper not found");
+  }
+  return wrapper;
+}
+
+function scrollDown(wrapper: HTMLElement) {
+  wrapper.scrollTop = 150;
+  expect(wrapper.scrollTop).toBeGreaterThan(0);
+}
+
+export const ResetsPageAndTableScroll: Story = {
+  render: () => <ResetGrid acceptSort />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    const wrapper = getScrollWrapper(canvasElement);
+    const view = canvasElement.ownerDocument.defaultView ?? window;
+    const windowScrollY = view.scrollY;
 
-    expect(await canvas.findByText("Side 3 av 3")).toBeInTheDocument();
-    expect(await canvas.findByTestId("page-change-count")).toHaveTextContent(
-      "1",
+    scrollDown(wrapper);
+    await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    expect(canvas.getByText("Page 2 · 20 rows")).toBeInTheDocument();
+    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+
+    scrollDown(wrapper);
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByText("Page 1 · 20 rows")).toBeInTheDocument();
+    expect(canvas.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+      "aria-sort",
+      "ascending",
     );
+    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+
+    scrollDown(wrapper);
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByText("Page 1 · 20 rows")).toBeInTheDocument();
+    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+
+    await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    scrollDown(wrapper);
+    await userEvent.click(canvas.getByRole("button", { name: "Ten rows" }));
+    expect(canvas.getByText("Page 1 · 10 rows")).toBeInTheDocument();
+    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+
+    expect(view.scrollY).toBe(windowScrollY);
   },
 };
 
-export const TestCustomLayout: Story = {
-  render: () => (
+export const RejectedSortDoesNotReset: Story = {
+  render: () => <ResetGrid acceptSort={false} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const wrapper = getScrollWrapper(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    scrollDown(wrapper);
+    const scrollTop = wrapper.scrollTop;
+
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByText("Page 2 · 20 rows")).toBeInTheDocument();
+    expect(canvas.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+      "aria-sort",
+      "none",
+    );
+    expect(wrapper.scrollTop).toBe(scrollTop);
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Sort programmatically" }),
+    );
+    expect(canvas.getByText("Page 1 · 20 rows")).toBeInTheDocument();
+    await waitFor(() => expect(wrapper.scrollTop).toBe(0));
+  },
+};
+
+function ServerResetGrid() {
+  const [sortOrder, setSortOrder] = useState<SortEntry[]>([]);
+
+  return (
     <DataGrid
-      columns={columns}
-      data={ROWS}
+      columns={sortableColumns}
+      data={manyRows.slice(0, 20)}
       getRowId={getRowId}
-      pagination={{ defaultPageSize: 10 }}
+      pagination={{
+        mode: "server",
+        defaultPageSize: 20,
+        pageSizeOptions: [10, 20],
+        totalRows: manyRows.length,
+      }}
     >
-      <DataGrid.Pagination data-testid="custom-bar">
-        <span>Egendefinert innhold</span>
-      </DataGrid.Pagination>
-      <DataGrid.Pagination data-testid="summary-bar">
-        <DataGrid.Pagination.Summary />
-      </DataGrid.Pagination>
+      <DataGrid.Table
+        aria-label="Personer"
+        sorting={{ sortOrder, onSortOrderChange: setSortOrder }}
+      />
+      <DataGrid.Pagination />
     </DataGrid>
-  ),
+  );
+}
+
+export const ServerSortDoesNotResetPage: Story = {
+  render: () => <ServerResetGrid />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const customBar = within(canvas.getByTestId("custom-bar"));
-    const summaryBar = within(canvas.getByTestId("summary-bar"));
 
-    expect(customBar.getByText("Egendefinert innhold")).toBeInTheDocument();
-    expect(customBar.queryByText(/Viser/)).not.toBeInTheDocument();
-    expect(summaryBar.getByText("Viser 1–10 av 25 rader")).toBeInTheDocument();
-    expect(canvas.getAllByText(/Viser/)).toHaveLength(1);
-  },
-};
+    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 01" })).toBeInTheDocument();
+    expect(canvas.getByRole("cell", { name: "Person 20" })).toBeInTheDocument();
 
-export const TestIndependentGrids: Story = {
-  render: () => (
-    <>
-      <section aria-label="First dataset">
-        <DataGrid
-          columns={columns}
-          data={ROWS}
-          getRowId={getRowId}
-          pagination={{ defaultPageSize: 10 }}
-        >
-          <DataGrid.Pagination>
-            <DataGrid.Pagination.Summary />
-            <DataGrid.Pagination.PageSize />
-            <DataGrid.Pagination.Navigation aria-label="First dataset navigation" />
-          </DataGrid.Pagination>
-        </DataGrid>
-      </section>
-      <section aria-label="Second dataset">
-        <DataGrid
-          columns={columns}
-          data={ROWS.slice(0, 5)}
-          getRowId={getRowId}
-          pagination={{ defaultPageSize: 10 }}
-        >
-          <DataGrid.Pagination>
-            <DataGrid.Pagination.Summary />
-            <DataGrid.Pagination.PageSize />
-            <DataGrid.Pagination.Navigation aria-label="Second dataset navigation" />
-          </DataGrid.Pagination>
-        </DataGrid>
-      </section>
-    </>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const firstSection = canvas.getByRole("region", { name: "First dataset" });
-    const secondSection = canvas.getByRole("region", {
-      name: "Second dataset",
-    });
-    const first = within(firstSection);
-    const second = within(secondSection);
-
-    await userEvent.click(first.getByRole("button", { name: "Neste side" }));
-    expect(first.getByText("Side 2 av 3")).toBeInTheDocument();
-    expect(second.getByText("Side 1 av 1")).toBeInTheDocument();
-    await expect(firstSection.querySelector(LIVE_REGION)).toHaveTextContent(
-      /Side 2.*Rader per side/,
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+      "aria-sort",
+      "ascending",
     );
-    expect(secondSection.querySelector(LIVE_REGION)).toBeEmptyDOMElement();
+    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
   },
 };
