@@ -43,9 +43,30 @@ type PaginationRange = {
 };
 
 function getPaginationRange(options: PaginationRangeOptions): PaginationRange {
-  const { page, pageSize, hasNextPage } = options;
-  const totalRows =
-    options.mode === "client" ? options.rowCount : options.totalRows;
+  const { page, pageSize } = options;
+
+  if (options.mode === "client") {
+    const pageCount = Math.max(1, Math.ceil(options.rowCount / pageSize));
+    const currentPage = Math.min(Math.max(page, 0), pageCount - 1);
+    const startIndex = currentPage * pageSize;
+    const visibleRows = Math.min(
+      Math.max(options.rowCount - startIndex, 0),
+      pageSize,
+    );
+
+    return {
+      page: currentPage,
+      pageCount,
+      from: visibleRows === 0 ? 0 : startIndex + 1,
+      to: visibleRows === 0 ? 0 : startIndex + visibleRows,
+      startIndex,
+      endIndex: startIndex + visibleRows,
+      canPrevious: currentPage > 0,
+      canNext: currentPage < pageCount - 1,
+    };
+  }
+
+  const { totalRows, pageRowCount, hasNextPage } = options;
   const pageCount =
     totalRows === undefined
       ? undefined
@@ -55,10 +76,6 @@ function getPaginationRange(options: PaginationRangeOptions): PaginationRange {
       ? Math.max(page, 0)
       : Math.min(Math.max(page, 0), pageCount - 1);
   const startIndex = currentPage * pageSize;
-  const pageRowCount =
-    options.mode === "client"
-      ? Math.min(Math.max(options.rowCount - startIndex, 0), pageSize)
-      : options.pageRowCount;
   const visibleRows =
     totalRows === undefined
       ? pageRowCount
