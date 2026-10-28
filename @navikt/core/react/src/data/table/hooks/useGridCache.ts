@@ -56,10 +56,16 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
 
       const isLoading = tableRef.getAttribute("aria-busy") === "true";
       const currentCell = activeCellRef.current;
-      if (currentCell && !tableRef.contains(currentCell)) {
+      const hasLoadingPosition = loadingCellPositionRef.current !== undefined;
+      const wasRemoved =
+        currentCell !== null && !tableRef.contains(currentCell);
+      // Restore saved coordinates even if loading left no active cell.
+      if (wasRemoved || (!isLoading && hasLoadingPosition)) {
         const position =
           loadingCellPositionRef.current ??
-          gridCacheRef.current.grid?.positions.get(currentCell);
+          (currentCell
+            ? gridCacheRef.current.grid?.positions.get(currentCell)
+            : undefined);
         if (isLoading) {
           // Keep the original coordinates across temporary loading rows.
           loadingCellPositionRef.current = position;
@@ -72,7 +78,7 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
           ? cell
           : (findFirstCellInRow(grid, rowIndex) ?? findFirstCell(grid));
 
-        // Keep pagination controls focused; restore this cell on table re-entry.
+        // Update the tracked cell without moving focus from external controls.
         setActiveCell(nextCell);
       }
 
