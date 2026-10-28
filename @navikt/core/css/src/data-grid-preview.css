@@ -13,7 +13,6 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  width: 100%;
   max-height: 100%;
   min-height: 0;
 }
@@ -744,8 +743,6 @@ html[data-dragging-cursor="true"] *::after {
 /* ------------------------ DataGrid.Preferences End ------------------------ */
 
 .aksel-data-table__attachment {
-  z-index: 10;
-  flex: 0 0 auto;
   padding: var(--ax-space-12) var(--ax-space-16);
   border: 1px solid var(--ax-border-neutral-subtle);
   background-color: var(--ax-bg-raised);

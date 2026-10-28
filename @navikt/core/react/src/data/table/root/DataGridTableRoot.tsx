@@ -211,11 +211,12 @@ const DataGridTableInternal = forwardRef<
 
     const tableId = useId(id);
 
+    const hasTopContent = topContent != null && topContent !== false;
+    const hasBottomContent = bottomContent != null && bottomContent !== false;
+    let attachmentPosition: "top" | "bottom" | "both" | undefined;
+
     /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
-    const hasTopContent = topContent != null;
-    const hasBottomContent = bottomContent != null;
-    let attachmentPosition: "top" | "bottom" | "both" | undefined;
 
     if (hasTopContent && hasBottomContent) {
       attachmentPosition = "both";
