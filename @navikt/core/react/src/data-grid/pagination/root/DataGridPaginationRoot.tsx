@@ -36,6 +36,7 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-grid__pagination", className)}
+        data-layout={children ? "custom" : "preset"}
       >
         {children ?? (
           <>

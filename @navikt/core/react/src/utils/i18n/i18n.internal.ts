@@ -2,8 +2,8 @@
 const internalTranslations = {
   DataGrid: {
     Pagination: {
-      summary: "Viser {from}–{to} av {totalRows} rader",
-      summaryUnknownTotal: "Viser rad {from}–{to}",
+      summary: "Rad {from}–{to} av {totalRows}",
+      summaryUnknownTotal: "Rad {from}–{to}",
       summaryEmpty: "Ingen rader",
       pageSize: "Rader per side",
       pageOf: "Side {page} av {pageCount}",

@@ -715,17 +715,22 @@ html[data-dragging-cursor="true"] *::after {
 /* ------------------------ DataGrid.Pagination Start ----------------------- */
 .aksel-data-grid__pagination {
   display: flex;
-  flex-wrap: wrap;
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  gap: var(--ax-space-8) var(--ax-space-16);
+  gap: var(--ax-space-8);
 }
 
 .aksel-data-grid__pagination-page-size {
-  display: flex;
+  display: none;
   align-items: center;
   gap: var(--ax-space-8);
+
+  .aksel-data-grid__pagination[data-layout="preset"] & {
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
 }
 
 .aksel-data-grid__pagination-navigation {
@@ -769,6 +774,11 @@ html[data-dragging-cursor="true"] *::after {
 
 .aksel-data-grid__pagination-navigation-page {
   text-align: center;
+  display: none;
+
+  @media (min-width: 480px) {
+    display: inline-grid;
+  }
 }
 
 /* ------------------------- DataGrid.Pagination End ------------------------ */
