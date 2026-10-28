@@ -1,5 +1,6 @@
 import React from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { Search } from "../../search";
 import { useComboboxPopupContext } from "../popup/ComboboxPopup";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
@@ -10,6 +11,7 @@ type ComboboxFilterProps = Pick<
 >;
 
 export const ComboboxFilter = (props: ComboboxFilterProps) => {
+  const translate = useI18n("Combobox2");
   const { size } = useComboboxRootContext();
   const {
     filterString,
@@ -26,7 +28,7 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
           onChange={setFilterString}
           size={size}
           {...props}
-          label="Filtrer"
+          label={translate("filter")}
           hideLabel
           variant="simple"
           onKeyUp={(event) => {

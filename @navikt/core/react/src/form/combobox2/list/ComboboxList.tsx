@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
 import { ComboboxOption } from "../option/ComboboxOption";
 import { useComboboxPopupContext } from "../popup/ComboboxPopup";
@@ -55,6 +56,7 @@ function ComboboxListContent<
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
   const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString, filterString);
+  const translate = useI18n("Combobox2");
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
@@ -78,7 +80,9 @@ function ComboboxListContent<
   maybeAnnouceHits(filteredOptions);
 
   if (filteredOptions.length === 0) {
-    return <div className="aksel-combobox2__no-results">Ingen treff</div>;
+    return (
+      <div className="aksel-combobox2__no-results">{translate("noHits")}</div>
+    );
   }
 
   return filteredOptions.map((optOrGroup) =>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { debounce } from "../../../utils-external";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import type {
   ComboboxGroupData,
   ComboboxOptionData,
@@ -18,16 +19,23 @@ function getNumberOfOptions<T extends ComboboxOptionData>(
 }
 
 function useHitsAnnouncer(deferredFilterString: string, filterString: string) {
+  const translate = useI18n("Combobox2");
   const shouldAnnounceRef = useRef(false);
   const announce = useAnnounce();
-  const announceHits = useMemo(
-    () => debounce((hits: number) => announce(`${hits} treff`), 2000),
-    [announce],
-  );
+
+  const announceHits = useMemo(() => {
+    return debounce((count: number) => {
+      return announce(
+        count === 1 ? translate("oneHit") : translate("hitsCount", { count }),
+      );
+    }, 2000);
+  }, [announce, translate]);
+
   const announceNoHits = useMemo(
-    () => debounce(() => announce(`Ingen treff`), 500),
-    [announce],
+    () => debounce(() => announce(translate("noHits")), 500),
+    [announce, translate],
   );
+
   useEffect(
     () =>
       function cleanUp() {
