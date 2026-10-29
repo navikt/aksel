@@ -104,9 +104,8 @@ const useTimelineRows = (
         );
 
         /*
-         * Sorting by start also orders by horizontalPosition, since position is
-         * monotonic in start date. Edge cropping only reads neighbours' start/end,
-         * which are unchanged by positioning, so everything runs in one pass.
+         * Sorting by start also orders by horizontalPosition.
+         * Edge cropping only reads neighbours' start/end, which are unchanged by positioning, so everything runs in one pass.
          */
         const timelinePeriods: PositionedPeriod[] = [];
         for (let i = 0; i < sortedPeriods.length; i++) {
