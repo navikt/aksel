@@ -10,6 +10,7 @@ applyTo: "**/*.test.ts,**/*.test.tsx,**/*.stories.tsx"
 - Play-test files set `parameters: { chromatic: { disable: true } }`. Visual stories feed Chromatic; use `renderStoriesForChromatic` from `utils/` when adding visual variants.
 - Import from `@storybook/react-vite` and `storybook/test`, not `@storybook/react` or `@storybook/test`.
 - Query by role and accessible name (`getByRole("button", { name })`). Avoid snapshots unless nearby tests already use them.
-- Cover the main path plus 1-2 meaningful edge cases. A behavior change updates the nearest story and test in the same change.
+- Cover the main path and meaningful edge cases in the nearest existing story/play-test where they belong. Prefer combining overlapping cases over adding redundant stories; add a separate story for a distinct user-visible scenario.
+- A behavior change updates the nearest story and test in the same change. Use unit tests for small utilities and pure logic; use Storybook play tests for UI behavior.
 - ds-react unit tests run with `TZ=UTC`. Date logic must not depend on the local timezone.
 - Browser tests need Playwright Firefox (Chromium under Copilot CLI, see `vitest.config.ts`). Yarn has `enableScripts: false`, so if the browser is missing, report it instead of installing globally.

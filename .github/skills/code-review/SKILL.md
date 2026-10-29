@@ -14,7 +14,20 @@ argument-hint: "PR number, branch or files to review"
 
 ## Process
 
-1. **Scope**: get the diff (`gh pr diff <n>` or `git diff origin/main...HEAD`) and the PR description. Note the stated goal.
+1. **Scope**: identify what the user wants reviewed.
+   - PR: get `gh pr diff <n>` and the PR description. Note the stated goal.
+   - Branch: compare against its stated base (for example, `git diff origin/main...HEAD`).
+   - Current worktree or "my changes": inspect staged, unstaged, and relevant untracked files. Do not substitute the committed branch diff for worktree changes.
+
+   ```sh
+   git status --short
+   git diff
+   git diff --cached
+   git ls-files --others --exclude-standard
+   ```
+
+   Read in-scope untracked files too. If the requested review target is unclear, ask before choosing a scope.
+
 2. **Read**: for every changed file, read the surrounding code, component `index.ts`, stories, tests and the matching `.github/instructions/*.instructions.md`. Never review from the diff alone.
 3. **Check**: run the smallest validation that covers the change (`aksel-local-validation` skill). Tool output replaces style comments.
 4. **Analyze** against the checklist below.
