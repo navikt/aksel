@@ -100,8 +100,7 @@
   height: var(--__axc-coach__mark-size);
   background-color: var(--__axc-coach__mark-color);
   border-radius: var(--ax-radius-full);
-  border-style: solid;
-  border-color: white;
+  border: 2px solid var(--ax-bg-default);
 
   @media (forced-colors: active) {
     forced-color-adjust: none;

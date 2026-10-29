@@ -1,19 +1,22 @@
 import React, { forwardRef } from "react";
 import type { AkselColor } from "../../types";
 import { cl, composeEventHandlers } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import type { SpacingScale } from "../../utils/hooks/base-primitive/helpers/types";
+import { useCoachContext } from "../root/Coach.context";
 
 type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ({
     /**
+     * Opens the tour when used inside Coach.
+     * Outside Coach, use onClick to handle the mark interaction.
+     *
      * Badge color.
      * @default "danger"
      * @see 🏷️ {@link AkselColor}
      * @see [📝 Documentation](https://aksel.nav.no/grunnleggende/styling/farger-tokens)
      */
     "data-color"?: AkselColor;
-    // TODO:C DELETE
-    whiteBorder?: number;
   } & (
     | {
         /**
@@ -39,9 +42,11 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * @see 🏷️ {@link CoachMarkProps}
  * @example
  * ```jsx
+ * <Coach>
  *    <Coach.Mark>
  *      <Button>Next step</Button>
  *    </Coach.Mark>
+ * </Coach>
  * ```
  */
 const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
@@ -55,13 +60,21 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
       "aria-labelledby": ariaLabelledby,
       "aria-hidden": ariaHidden,
       style,
-      whiteBorder,
       ...restProps
     },
     forwardedRef,
   ) => {
+    const coach = useCoachContext(false);
+
+    if (coach === undefined && onClick === undefined) {
+      consoleWarning(
+        "Coach.Mark used outside of Coach and without onClick handler.",
+      );
+    }
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
+      coach?.openTour?.();
     };
 
     const placement =
@@ -94,18 +107,22 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledby}
         aria-hidden={ariaHidden}
+        aria-haspopup="dialog"
         className={cl("aksel-coach__mark-container", className)}
         style={containerStyle}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div className="aksel-coach__mark-pulse" />
-        <div
-          className="aksel-coach__mark"
-          style={{ borderWidth: whiteBorder ?? 0 }}
-        />
+        <div className="aksel-coach__mark" />
       </button>
     );
 
+    // If tour is disabled, only render the children without the mark
+    if (coach?.disableTour) {
+      return children ?? null;
+    }
+
+    // If there are no children, only render the mark itself
     if (!children) {
       return Mark;
     }
