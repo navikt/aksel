@@ -29,13 +29,8 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
          * @default "space-16"
          */
         offset?: SpacingScale | `${SpacingScale} ${SpacingScale}`;
-        /**
-         * Placement of the coach mark relative to its anchor.
-         * @default "top-end"
-         */
-        placement?: "top-start" | "top-end" | "bottom-start" | "bottom-end";
       }
-    | { children?: never; offset?: never; placement?: never }
+    | { children?: never; offset?: never }
   ));
 
 /**
@@ -77,24 +72,15 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
       coach?.openTour?.();
     };
 
-    const placement =
-      "placement" in restProps ? (restProps.placement ?? "top-end") : "top-end";
-    const blockPlacement = placement.split("-")[0] ?? "top";
-    const inlinePlacement = placement.split("-")[1] ?? "end";
-
     const offset =
       "offset" in restProps ? (restProps.offset ?? "space-16") : "space-16";
     const offsetValues = offset.split(" ");
     const offsetX = offsetValues[0] ?? "space-16";
     const offsetY = offsetValues[1] ?? offsetX;
-    const prefixOffsetX = inlinePlacement === "start" ? "-1" : "1";
-    const prefixOffsetY = blockPlacement === "top" ? `-1` : `1`;
 
     const containerStyle = children
       ? {
-          [`insetBlock${blockPlacement === "bottom" ? "End" : "Start"}`]: "0",
-          [`insetInline${inlinePlacement === "end" ? "End" : "Start"}`]: "0",
-          transform: `translate(calc(${prefixOffsetX} * var(--ax-${offsetX})), calc(${prefixOffsetY} * var(--ax-${offsetY})))`,
+          transform: `translate(var(--ax-${offsetX}), calc(-1 * var(--ax-${offsetY})))`,
           ...style,
         }
       : style;

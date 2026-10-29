@@ -154,7 +154,7 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.Mark>
-          <Button ref={dashboardRef}>Dashboard</Button>
+          <Button /*ref={dashboardRef}*/>Dashboard</Button>
         </Coach.Mark>
       </Coach>
       <HStack justify="end" width="100%">
@@ -283,7 +283,7 @@ export const Mark: StoryObj<typeof CoachMark> = {
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach type="dialog" title="Explore the page">
-          <Coach.Mark placement={props.placement} offset={props.offset}>
+          <Coach.Mark offset={props.offset}>
             <ToggleGroup defaultValue="lest" onChange={console.info}>
               <ToggleGroup.Item
                 value="ulest"
@@ -302,12 +302,12 @@ export const Mark: StoryObj<typeof CoachMark> = {
               />
             </ToggleGroup>
           </Coach.Mark>
-          <Coach.Mark placement={props.placement} offset={props.offset}>
+          <Coach.Mark offset={props.offset}>
             <Button onClick={() => console.log("Button clicked")}>
               Click me
             </Button>
           </Coach.Mark>
-          <Coach.Mark placement={props.placement} offset={props.offset}>
+          <Coach.Mark offset={props.offset}>
             <Chips>
               {options.map((option) => (
                 <Chips.Toggle
@@ -326,7 +326,7 @@ export const Mark: StoryObj<typeof CoachMark> = {
               ))}
             </Chips>
           </Coach.Mark>
-          <Coach.Mark placement={props.placement} offset={props.offset}>
+          <Coach.Mark offset={props.offset}>
             <GuidePanel>
               Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
               går mer enn X måneder siden du søkte, skal du få brev om at
@@ -335,7 +335,6 @@ export const Mark: StoryObj<typeof CoachMark> = {
           </Coach.Mark>
           <Coach.Mark
             onClick={() => console.log("Coach dot clicked")}
-            placement={props.placement}
             offset={props.offset}
           >
             <ExpansionCard aria-label="Demo med bare tittel">
@@ -349,7 +348,7 @@ export const Mark: StoryObj<typeof CoachMark> = {
               </ExpansionCard.Content>
             </ExpansionCard>
           </Coach.Mark>
-          <Coach.Mark placement={props.placement} offset={props.offset}>
+          <Coach.Mark offset={props.offset}>
             <InfoCard data-color="info">
               <InfoCard.Header>
                 <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
@@ -366,16 +365,7 @@ export const Mark: StoryObj<typeof CoachMark> = {
     );
   },
   args: {
-    placement: "top-end",
     offset: "space-16",
-  },
-  argTypes: {
-    placement: {
-      options: ["top-start", "top-end", "bottom-start", "bottom-end"],
-      control: {
-        type: "select",
-      },
-    },
   },
 };
 

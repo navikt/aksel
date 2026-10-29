@@ -8,6 +8,7 @@ import { HStack } from "../../primitives/stack";
 import { useClientLayoutEffect } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { CoachBackdrop } from "../backdrop/CoachBackdrop";
 import {
@@ -399,6 +400,11 @@ const CoachRoot = (props: CoachProps) => {
       );
     }
 
+    if (currentStep?.type === "anchor" && !anchorEl) {
+      consoleWarning(`Anchor element for step "${currentStep.id}" not found.`);
+    }
+
+    endTour();
     return null;
   };
 
