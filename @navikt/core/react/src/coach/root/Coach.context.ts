@@ -6,6 +6,10 @@ interface CoachContextProps {
    * Whether the tour is currently open.
    */
   showTour: boolean;
+  /** Opens the tour from a mark. */
+  openTour?: () => void;
+  /** Whether tour triggers are disabled. */
+  disableTour?: boolean;
   /**
    * Called when the tour is dismissed or finished.
    */

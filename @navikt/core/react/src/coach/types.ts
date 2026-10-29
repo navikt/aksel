@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Popover } from "../popover";
 import type { ComponentTranslation } from "../utils/i18n/i18n.types";
+import type { CoachMark } from "./mark/CoachMark";
 
 interface CoachStepBase {
   /**
@@ -72,13 +73,19 @@ type CoachStepItem = CoachStepBase & CoachStepTarget;
 
 interface CoachBaseProps {
   /**
-   * Whether the tour is visible.
+   * Controls whether the tour is visible.
+   * When omitted, Coach.Mark opens the tour using internal state.
    */
-  showTour: boolean;
+  showTour?: boolean;
   /**
-   * Called when the tour is dismissed or finished.
+   * Called when a mark opens the tour or the tour closes.
    */
-  endTour: () => void;
+  onShowTourChange?: React.Dispatch<React.SetStateAction<boolean>>;
+  /**
+   * Hides the tour and its marks without hiding the elements they are anchored to.
+   * @default false
+   */
+  disableTour?: boolean;
   /**
    * Active step index when controlled.
    */
@@ -91,18 +98,24 @@ interface CoachBaseProps {
   /**
    * Called when the active step changes.
    */
-  onStepChange?: (step: number) => void;
+  onStepChange?: React.Dispatch<React.SetStateAction<number>>;
   /**
    * Translations for buttons in the coach component: Next, Previous, Close.
    */
   translations?: ComponentTranslation<"Coach">;
-}
-
-interface CoachTourProps extends CoachBaseProps {
   /**
-   * Steps shown in sequence.
+   * Coach.Mark triggers rendered outside the popup.
+   * Provide step content through props or renderStep instead.
    */
-  steps: readonly CoachStepItem[];
+  children?:
+    | React.ReactElement<
+        React.ComponentProps<typeof CoachMark>,
+        typeof CoachMark
+      >
+    | React.ReactElement<
+        React.ComponentProps<typeof CoachMark>,
+        typeof CoachMark
+      >[];
   /**
    * Custom render function for each coach step.
    * Return `defaultContent` or `undefined` to keep standard layout for that step.
@@ -120,7 +133,13 @@ interface CoachTourProps extends CoachBaseProps {
       totalSteps: number;
     },
   ) => React.ReactNode | undefined;
-  children?: never;
+}
+
+interface CoachTourProps extends CoachBaseProps {
+  /**
+   * Steps shown in sequence.
+   */
+  steps: readonly CoachStepItem[];
   type?: never;
   id?: never;
   title?: never;
@@ -135,15 +154,6 @@ interface CoachTourProps extends CoachBaseProps {
   "aria-labelledby"?: never;
 }
 
-type CoachSingleStepChildren =
-  | React.ReactNode
-  | ((context: {
-      defaultContent: React.ReactNode;
-      title?: React.ReactNode;
-      description?: React.ReactNode;
-      image?: React.ReactNode;
-    }) => React.ReactNode);
-
 type CoachSingleStepProps = CoachBaseProps &
   (Omit<CoachStepBase, "id"> & {
     /**
@@ -154,12 +164,6 @@ type CoachSingleStepProps = CoachBaseProps &
   }) &
   CoachStepTarget & {
     steps?: never;
-    renderStep?: never;
-    /**
-     * Custom content for the single step.
-     * Can be elements or a render function taking `{ defaultContent, title, description, image }`.
-     */
-    children?: CoachSingleStepChildren;
   };
 
 type CoachProps = CoachTourProps | CoachSingleStepProps;
@@ -169,7 +173,6 @@ export type {
   CoachBaseProps,
   CoachDialogStep,
   CoachProps,
-  CoachSingleStepChildren,
   CoachSingleStepProps,
   CoachStepBase,
   CoachStepItem,

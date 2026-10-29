@@ -55,24 +55,41 @@ import { CoachContextProvider } from "./Coach.context";
  * ```tsx
  * <Coach
  *   steps={[
- *     { type: "dialog", title: "Welcome!" },
- *     { type: "anchor", anchorRef: buttonRef, title: "Start here." },
+ *     { id: "welcome", type: "dialog", title: "Welcome!" },
+ *     { id: "start", type: "anchor", anchorRef: buttonRef, title: "Start here." },
  *   ]}
- * />
+ * >
+ *   <Coach.Mark aria-label="Start tour" />
+ * </Coach>
  * ```
  */
 const CoachRoot = (props: CoachProps) => {
   const {
-    showTour,
-    currentStep: currentStepProp,
+    showTour: showTourControlled,
+    onShowTourChange,
+    disableTour = false,
+    currentStep: currentStepControlled,
     defaultStep = 0,
     onStepChange,
-    endTour,
     translations,
+    children,
+    renderStep,
   } = props;
 
+  // Translations for the Coach component
   const translate = useI18n("Coach", translations);
 
+  // States
+  const [uncontrolledShowTour, setUncontrolledShowTour] = useState(false);
+  const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [titleId, setTitleId] = useState<string>();
+  const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
+
+  // Whether the tour should be shown
+  const showTour = !disableTour && (showTourControlled ?? uncontrolledShowTour);
+
+  // Generate the steps for the tour based on props or fallback to single step.
   const steps: readonly CoachStepItem[] =
     "steps" in props && props.steps !== undefined
       ? props.steps
@@ -97,23 +114,16 @@ const CoachRoot = (props: CoachProps) => {
           } as CoachStepItem,
         ];
 
-  const renderStep = "renderStep" in props ? props.renderStep : undefined;
-  const singleStepChildren = "children" in props ? props.children : undefined;
-
-  const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-  const [titleId, setTitleId] = useState<string>();
-  const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
-
-  const activeStep = currentStepProp ?? uncontrolledStep;
-  const currentStep = steps[activeStep];
+  // Active step index
+  const activeStepIndex = currentStepControlled ?? uncontrolledStep;
+  // Current step object
+  const currentStep = steps[activeStepIndex];
+  // Anchor reference for the current step if it's an anchor type
   const anchorRef =
     currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
 
-  const getStepSize = () => currentStep?.size ?? "medium";
-  const getStepWidth = () => currentStep?.width ?? "medium";
-
   useClientLayoutEffect(() => {
+    // Smooth scroll to the anchor element if it's outside the viewport
     const nextAnchorEl = anchorRef?.current ?? null;
     if (!showTour) {
       return;
@@ -140,55 +150,84 @@ const CoachRoot = (props: CoachProps) => {
     }
 
     setAnchorEl(nextAnchorEl);
-  }, [anchorRef, showTour, activeStep]);
+  }, [anchorRef, showTour, activeStepIndex]);
 
   useEffect(() => {
+    // Show warning for missing triggers if the tour is active
     if (!showTour) return;
-    missingTriggersWarning(activeStep, steps.length, currentStep, stepElement);
-  }, [showTour, activeStep, steps.length, currentStep, stepElement]);
+    missingTriggersWarning(
+      activeStepIndex,
+      steps.length,
+      currentStep,
+      stepElement,
+    );
+  }, [showTour, activeStepIndex, steps.length, currentStep, stepElement]);
 
   useClientLayoutEffect(() => {
+    // Reset uncontrolled step when the tour is hidden
     if (!showTour) {
       setUncontrolledStep(defaultStep);
     }
   }, [defaultStep, showTour]);
 
+  // Get the size and width of the current step, with default values if not specified
+  const getStepSize = () => currentStep?.size ?? "medium";
+  const getStepWidth = () => currentStep?.width ?? "medium";
+
+  // Function to set the active step index
   const setStep = useCallback(
     (nextStep: number) => {
-      if (currentStepProp === undefined) {
+      if (currentStepControlled === undefined) {
         setUncontrolledStep(nextStep);
       }
       onStepChange?.(nextStep);
     },
-    [currentStepProp, onStepChange],
+    [currentStepControlled, onStepChange],
   );
 
+  // Function to show tour
+  const setShowTour = useCallback(
+    (open: boolean) => {
+      if (showTourControlled === undefined) {
+        setUncontrolledShowTour(open);
+      }
+      onShowTourChange?.(open);
+    },
+    [onShowTourChange, showTourControlled],
+  );
+
+  // Function to end the tour
+  const endTour = useCallback(() => setShowTour(false), [setShowTour]);
+
+  // Function to go to the next step in the tour
   const goToNextStep = useCallback(() => {
-    if (activeStep === steps.length - 1) {
+    if (activeStepIndex === steps.length - 1) {
       endTour();
       return;
     }
-    setStep(activeStep + 1);
-  }, [activeStep, endTour, setStep, steps.length]);
+    setStep(activeStepIndex + 1);
+  }, [activeStepIndex, endTour, setStep, steps.length]);
 
+  // Function to go to the previous step in the tour
   const goToPreviousStep = useCallback(() => {
-    if (activeStep > 0) {
-      setStep(activeStep - 1);
+    if (activeStepIndex > 0) {
+      setStep(activeStepIndex - 1);
     }
-  }, [activeStep, setStep]);
+  }, [activeStepIndex, setStep]);
 
   useEffect(() => {
+    // Handle keyboard navigation for the tour
     if (!showTour) {
       return;
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight" && activeStep < steps.length - 1) {
+      if (event.key === "ArrowRight" && activeStepIndex < steps.length - 1) {
         event.preventDefault();
         goToNextStep();
       }
 
-      if (event.key === "ArrowLeft" && activeStep > 0) {
+      if (event.key === "ArrowLeft" && activeStepIndex > 0) {
         event.preventDefault();
         goToPreviousStep();
       }
@@ -203,7 +242,7 @@ const CoachRoot = (props: CoachProps) => {
     document.addEventListener("keydown", handleKeyDown, true);
     return () => document.removeEventListener("keydown", handleKeyDown, true);
   }, [
-    activeStep,
+    activeStepIndex,
     currentStep?.allowToEndTour,
     endTour,
     goToNextStep,
@@ -212,6 +251,7 @@ const CoachRoot = (props: CoachProps) => {
     steps.length,
   ]);
 
+  // Function to focus on the next or close trigger within the current step
   const getInitialFocus = () => {
     const nextTriggers = document.querySelectorAll<HTMLElement>(
       "[data-coach-next-trigger]",
@@ -232,7 +272,8 @@ const CoachRoot = (props: CoachProps) => {
     return undefined;
   };
 
-  const currentStepContent = (
+  // Default content for a step
+  const defaultStepContent = (
     <CoachStep>
       {currentStep.allowToEndTour && (
         <HStack
@@ -258,14 +299,14 @@ const CoachRoot = (props: CoachProps) => {
         <CoachDescription>{currentStep.description}</CoachDescription>
       )}
       <CoachFooter>
-        {activeStep > 0 && (
+        {activeStepIndex > 0 && (
           <CoachPreviousTrigger>
             <Button size={getStepSize()} variant="secondary">
               {translate("previous")}
             </Button>
           </CoachPreviousTrigger>
         )}
-        {activeStep === steps.length - 1 ? (
+        {activeStepIndex === steps.length - 1 ? (
           <CoachCloseTrigger>
             <Button size={getStepSize()} variant="primary">
               {translate("close")}
@@ -282,25 +323,8 @@ const CoachRoot = (props: CoachProps) => {
     </CoachStep>
   );
 
-  const resolveSingleStepChildren = () => {
-    if (!singleStepChildren) {
-      return undefined;
-    }
-
-    if (typeof singleStepChildren === "function") {
-      return singleStepChildren({
-        defaultContent: currentStepContent,
-        title: currentStep.title,
-        description: currentStep.description,
-        image: currentStep.image,
-      });
-    }
-
-    return <CoachStep>{singleStepChildren}</CoachStep>;
-  };
-
+  // Step content, either custom rendered or default content
   const stepContent =
-    resolveSingleStepChildren() ??
     renderStep?.(
       {
         id: currentStep.id,
@@ -309,13 +333,13 @@ const CoachRoot = (props: CoachProps) => {
         image: currentStep.image,
       },
       {
-        defaultContent: currentStepContent,
-        index: activeStep,
+        defaultContent: defaultStepContent,
+        index: activeStepIndex,
         totalSteps: steps.length,
       },
-    ) ??
-    currentStepContent;
+    ) ?? defaultStepContent;
 
+  // Render the current step based on its type (dialog or anchor)
   const renderCurrentStep = () => {
     const labelledBy = currentStep?.["aria-labelledby"] ?? titleId;
 
@@ -378,22 +402,23 @@ const CoachRoot = (props: CoachProps) => {
     return null;
   };
 
-  if (!showTour) return null;
-
   return (
     <CoachContextProvider
       showTour={showTour}
+      openTour={() => setShowTour(true)}
+      disableTour={disableTour}
       currentStepSize={getStepSize()}
       onClose={endTour}
       currentStep={currentStep}
-      currentStepIndex={activeStep}
+      currentStepIndex={activeStepIndex}
       totalSteps={steps.length}
       goToNextStep={goToNextStep}
       goToPreviousStep={goToPreviousStep}
       titleId={titleId}
       setTitleId={setTitleId}
     >
-      {renderCurrentStep()}
+      {children}
+      {showTour && renderCurrentStep()}
     </CoachContextProvider>
   );
 };
