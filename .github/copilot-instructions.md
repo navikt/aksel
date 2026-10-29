@@ -10,11 +10,10 @@
 
 ## Behavior
 
-- Only respond in same language as the input. Prefer English always.
-- Use caveman-skill unless asked not to.
-- No apologies, no "I think", no change summaries.
-- Answer-first. 0-2 sentences max.
-- No thinking aloud; do next edit. Explain only when asked or non-obvious.
+- Respond in the language the user prompted in, unless they request another language.
+- Use concise, plain language without sacrificing technical precision or completeness.
+- Lead with the outcome. Avoid filler and unnecessary apologies; summarize meaningful changes and validation when useful.
+- Do not narrate routine tool use. Explain decisions, blockers, uncertainty, and tradeoffs when relevant.
 - Show only what changes. Minimal diffs; don't paste whole files.
 - Edit only the files the change needs (see Definition of done); no unrelated files. Ask only when truly blocked.
 - Favor perf/security; avoid re-renders, top-level side effects, unsafe HTML, env var leaks.
@@ -39,7 +38,7 @@
 
 ## Definition of done
 
-- Behavior/visual change: update impl + closest story + test.
+- Behavior/visual change: update the implementation and closest existing story. Prefer Storybook play tests for UI behavior and unit tests for small utilities; combine overlapping coverage into existing stories instead of adding redundant stories.
 - New public export: sync component `index.ts`, `src/index.ts` (or `src/preview.ts`) and `package.json` exports, then `corepack yarn workspace aksel-playroom sync-imports` (root `lint` fails on stale playroom imports).
 - User-facing change to a published package: add a changeset (`add-changeset` skill) unless told otherwise.
 
