@@ -86,8 +86,7 @@ function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
           },
         }}
       >
-        <DataGrid.Table />
-        <DataGrid.Pagination />
+        <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
       </DataGrid>
     </>
   );
@@ -288,8 +287,8 @@ function ServerResetGrid() {
       <DataGrid.Table
         aria-label="Personer"
         sorting={{ sortOrder, onSortOrderChange: setSortOrder }}
+        bottomContent={<DataGrid.Pagination />}
       />
-      <DataGrid.Pagination />
     </DataGrid>
   );
 }

@@ -41,9 +41,10 @@ function PagedGrid({ paginationAbove = false }: { paginationAbove?: boolean }) {
       getRowId={(row) => String(row.id)}
       pagination={{ defaultPageSize: 10 }}
     >
-      {paginationAbove && <DataGrid.Pagination />}
-      <DataGrid.Table />
-      <DataGrid.Pagination />
+      <DataGrid.Table
+        topContent={paginationAbove ? <DataGrid.Pagination /> : undefined}
+        bottomContent={<DataGrid.Pagination />}
+      />
     </DataGrid>
   );
 }
@@ -69,8 +70,10 @@ export const ClientSideLoading: Story = {
 
           pagination={{ defaultPage: 2 }}
         >
-          <DataGrid.Table loadingContent={{ variant: "skeleton", rows: 10 }} />
-          <DataGrid.Pagination />
+          <DataGrid.Table
+            loadingContent={{ variant: "skeleton", rows: 10 }}
+            bottomContent={<DataGrid.Pagination />}
+          />
         </DataGrid>
       </>
     );
@@ -96,8 +99,7 @@ export const ServerSide: Story = {
           totalRows: ROWS.length,
         }}
       >
-        <DataGrid.Table />
-        <DataGrid.Pagination />
+        <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
       </DataGrid>
     );
   },
@@ -124,8 +126,8 @@ export const ResetPageOnSort: Story = {
             onSortOrderChange: setSort,
             allowMultiSort: false,
           }}
+          bottomContent={<DataGrid.Pagination />}
         />
-        <DataGrid.Pagination />
       </DataGrid>
     );
   },
