@@ -777,11 +777,13 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-grid__pagination-page-size {
-  display: none;
+  display: flex;
   align-items: center;
   gap: var(--ax-space-8);
 
   .aksel-data-grid__pagination[data-layout="preset"] & {
+    display: none;
+
     @media (min-width: 768px) {
       display: flex;
     }
