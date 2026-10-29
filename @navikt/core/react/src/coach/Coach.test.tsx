@@ -33,6 +33,61 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
+describe("Coach.Mark", () => {
+  test("opens the tour without triggering its anchor click handler", async () => {
+    const user = userEvent.setup();
+    const openTour = vi.fn();
+    const onClick = vi.fn();
+    const onAnchorClick = vi.fn();
+    const ref = React.createRef<HTMLButtonElement>();
+
+    render(
+      <CoachContextProvider {...createContext({ openTour })}>
+        <Coach.Mark ref={ref} aria-label="Show help" onClick={onClick}>
+          <button type="button" onClick={onAnchorClick}>
+            Target
+          </button>
+        </Coach.Mark>
+      </CoachContextProvider>,
+    );
+
+    const mark = screen.getByRole("button", { name: "Show help" });
+    expect(ref.current).toBe(mark);
+    expect(mark).toHaveAttribute("aria-haspopup", "dialog");
+    await user.click(mark);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(openTour).toHaveBeenCalledTimes(1);
+    expect(onAnchorClick).not.toHaveBeenCalled();
+  });
+
+  test("allows the consumer to cancel opening", async () => {
+    const user = userEvent.setup();
+    const openTour = vi.fn();
+    render(
+      <CoachContextProvider {...createContext({ openTour })}>
+        <Coach.Mark
+          aria-label="Show help"
+          onClick={(event) => event.preventDefault()}
+        />
+      </CoachContextProvider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Show help" }));
+    expect(openTour).not.toHaveBeenCalled();
+  });
+
+  test("hides disabled marks without hiding their anchor", () => {
+    render(
+      <CoachContextProvider {...createContext({ disableTour: true })}>
+        <Coach.Mark aria-label="Show help">
+          <button type="button">Target</button>
+        </Coach.Mark>
+      </CoachContextProvider>,
+    );
+    expect(screen.queryByRole("button", { name: "Show help" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Target" })).toBeVisible();
+  });
+});
+
 describe.each([
   {
     name: "NextTrigger",

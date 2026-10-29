@@ -1,36 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Coach, HStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [mediumTour, setMediumTour] = useState<boolean>(false);
-  const [smallTour, setSmallTour] = useState<boolean>(false);
   const mediumRef = useRef<HTMLButtonElement>(null);
   const smallRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
-      <HStack gap="space-16">
-        <Button
-          ref={mediumRef}
-          onClick={() => setMediumTour(true)}
-          variant="secondary"
-        >
-          Medium (standard)
-        </Button>
-        <Button
-          ref={smallRef}
-          onClick={() => setSmallTour(true)}
-          variant="secondary"
-        >
-          Small
-        </Button>
-      </HStack>
+    <HStack gap="space-16">
       <Coach
-        showTour={mediumTour}
-        endTour={() => {
-          setMediumTour(false);
-        }}
         steps={[
           {
             id: "step-1",
@@ -48,12 +26,12 @@ const Example = () => {
               "Standard bredde for anchor i en Coach for de fleste brukstilfeller.",
           },
         ]}
-      />
+      >
+        <Coach.Mark>
+          <Button ref={mediumRef}>Medium (standard)</Button>
+        </Coach.Mark>
+      </Coach>
       <Coach
-        showTour={smallTour}
-        endTour={() => {
-          setSmallTour(false);
-        }}
         steps={[
           {
             id: "step-1",
@@ -71,8 +49,12 @@ const Example = () => {
             description: "En smal bredde for anchor i en Coach.",
           },
         ]}
-      />
-    </>
+      >
+        <Coach.Mark>
+          <Button ref={smallRef}>Small</Button>
+        </Coach.Mark>
+      </Coach>
+    </HStack>
   );
 };
 

@@ -35,16 +35,11 @@ export default {
 export const CoachAnchor: StoryFn<typeof Coach> = () => {
   const createRef = useRef<HTMLButtonElement>(null);
   const reviewRef = useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = useState(false);
 
   return (
     <HStack gap="space-16">
-      <Button onClick={() => setOpen(true)}>Start tour</Button>
-      <Button ref={createRef}>Create</Button>
       <Button ref={reviewRef}>Review</Button>
       <Coach
-        showTour={open}
-        endTour={() => setOpen(false)}
         steps={[
           {
             id: "step-1",
@@ -62,20 +57,19 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
             description: "Review your item before submitting it.",
           },
         ]}
-      />
+      >
+        <Coach.Mark>
+          <Button ref={createRef}>Create</Button>
+        </Coach.Mark>
+      </Coach>
     </HStack>
   );
 };
 
 export const CoachDialog: StoryFn<typeof Coach> = () => {
-  const [open, setOpen] = useState(false);
-
   return (
-    <>
-      <Button onClick={() => setOpen(true)}>Start tour</Button>
+    <HStack gap="space-16">
       <Coach
-        showTour={open}
-        endTour={() => setOpen(false)}
         steps={[
           {
             id: "step-1",
@@ -90,15 +84,18 @@ export const CoachDialog: StoryFn<typeof Coach> = () => {
             description: "Here is what changed since last time.",
           },
         ]}
-      />
-    </>
+      >
+        <Coach.Mark>
+          <Button>Next step</Button>
+        </Coach.Mark>
+      </Coach>
+    </HStack>
   );
 };
 
 export const CoachMixed: StoryFn<typeof Coach> = () => {
   const dashboardRef = useRef<HTMLButtonElement>(null);
   const settingsRef = useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = useState(false);
 
   return (
     <VStack
@@ -106,23 +103,9 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
       align="start"
       justify="space-between"
       height="5000px"
+      width="500px"
     >
-      <Button
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Start tour
-      </Button>
-      <Button ref={dashboardRef}>Dashboard</Button>
-      <HStack justify="end" width="100%">
-        <Button ref={settingsRef}>Settings</Button>
-      </HStack>
       <Coach
-        showTour={open}
-        endTour={() => {
-          setOpen(false);
-        }}
         steps={[
           {
             id: "step-1",
@@ -169,7 +152,14 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             ),*/
           },
         ]}
-      />
+      >
+        <Coach.Mark>
+          <Button ref={dashboardRef}>Dashboard</Button>
+        </Coach.Mark>
+      </Coach>
+      <HStack justify="end" width="100%">
+        <Button ref={settingsRef}>Settings</Button>
+      </HStack>
     </VStack>
   );
 };
@@ -177,42 +167,38 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
 export const SizeAndWidth: StoryObj<typeof Coach> = {
   render: (props) => {
     const buttonRef = useRef(null);
-    const [showTour, setShowTour] = useState(false);
     return (
-      <>
-        <Button ref={buttonRef} onClick={() => setShowTour(true)}>
-          Click me
-        </Button>
-        <Coach
-          showTour={showTour}
-          endTour={() => setShowTour(false)}
-          steps={[
-            {
-              id: "render_step",
-              type: "dialog",
-              title: "This is a title",
-              description: "This is some text",
-              width: props.width,
-              size: props.size,
-            },
-            {
-              id: "render_step_2",
-              type: "anchor",
-              anchorRef: buttonRef,
-              title: "This is a title",
-              width: props.width,
-              size: props.size,
-              description: "This is some text",
-              image: (
-                <img
-                  src="https://i.ytimg.com/vi/1M_oZgVBknw/maxresdefault.jpg"
-                  alt="Render step overview"
-                />
-              ),
-            },
-          ]}
-        />
-      </>
+      <Coach
+        steps={[
+          {
+            id: "render_step",
+            type: "dialog",
+            title: "This is a title",
+            description: "This is some text",
+            width: props.width,
+            size: props.size,
+          },
+          {
+            id: "render_step_2",
+            type: "anchor",
+            anchorRef: buttonRef,
+            title: "This is a title",
+            width: props.width,
+            size: props.size,
+            description: "This is some text",
+            image: (
+              <img
+                src="https://i.ytimg.com/vi/1M_oZgVBknw/maxresdefault.jpg"
+                alt="Render step overview"
+              />
+            ),
+          },
+        ]}
+      >
+        <Coach.Mark>
+          <Button ref={buttonRef}>Button</Button>
+        </Coach.Mark>
+      </Coach>
     );
   },
   args: {
@@ -231,12 +217,11 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
   },
 };
 
-export const RenderStep: StoryFn<typeof CoachMark> = () => {
+export const RenderStep: StoryFn<typeof Coach> = () => {
   return (
     <VStack padding="space-40" gap="space-64">
       <Coach
         showTour={true}
-        endTour={() => {}}
         renderStep={(step, context) => {
           if (context.index === 0) {
             return context.defaultContent;
@@ -297,109 +282,86 @@ export const Mark: StoryObj<typeof CoachMark> = {
 
     return (
       <VStack padding="space-40" gap="space-64">
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <ToggleGroup defaultValue="lest" onChange={console.info}>
-            <ToggleGroup.Item
-              value="ulest"
-              icon={<EnvelopeClosedIcon aria-hidden />}
-              label="Ulest"
-            />
-            <ToggleGroup.Item
-              value="lest"
-              icon={<EnvelopeOpenIcon aria-hidden />}
-              label="Lest"
-            />
-            <ToggleGroup.Item
-              value="sendt"
-              icon={<PaperplaneIcon aria-hidden />}
-              label="Sendt"
-            />
-          </ToggleGroup>
-        </Coach.Mark>
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <Button onClick={() => console.log("Button clicked")}>
-            Click me
-          </Button>
-        </Coach.Mark>
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <Chips>
-            {options.map((option) => (
-              <Chips.Toggle
-                key={option}
-                selected={selected.includes(option)}
-                onClick={() =>
-                  setSelected(
-                    selected.includes(option)
-                      ? selected.filter((x) => x !== option)
-                      : [...selected, option],
-                  )
-                }
-              >
-                {option}
-              </Chips.Toggle>
-            ))}
-          </Chips>
-        </Coach.Mark>
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <GuidePanel>
-            Saksbehandlingstiden varierer fra kommune til kommune. Hvis det går
-            mer enn X måneder siden du søkte, skal du få brev om at
-            saksbehandlingstiden er forlenget.
-          </GuidePanel>
-        </Coach.Mark>
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <ExpansionCard aria-label="Demo med bare tittel">
-            <ExpansionCard.Header>
-              <ExpansionCard.Title>
-                Utbetaling av sykepenger
-              </ExpansionCard.Title>
-            </ExpansionCard.Header>
-            <ExpansionCard.Content>
-              <p>Her er innholdet i ekspansjonskortet.</p>
-            </ExpansionCard.Content>
-          </ExpansionCard>
-        </Coach.Mark>
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          placement={props.placement}
-          offset={props.offset}
-        >
-          <InfoCard data-color="info">
-            <InfoCard.Header>
-              <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
-            </InfoCard.Header>
-            <InfoCard.Content>
-              InfoCard brukes for å fremheve informasjon på en side, uten at det
-              er like kritisk som en alert.
-            </InfoCard.Content>
-          </InfoCard>
-        </Coach.Mark>
-        <HStack gap="space-16" align="center">
+        <Coach type="dialog" title="Explore the page">
+          <Coach.Mark placement={props.placement} offset={props.offset}>
+            <ToggleGroup defaultValue="lest" onChange={console.info}>
+              <ToggleGroup.Item
+                value="ulest"
+                icon={<EnvelopeClosedIcon aria-hidden />}
+                label="Ulest"
+              />
+              <ToggleGroup.Item
+                value="lest"
+                icon={<EnvelopeOpenIcon aria-hidden />}
+                label="Lest"
+              />
+              <ToggleGroup.Item
+                value="sendt"
+                icon={<PaperplaneIcon aria-hidden />}
+                label="Sendt"
+              />
+            </ToggleGroup>
+          </Coach.Mark>
+          <Coach.Mark placement={props.placement} offset={props.offset}>
+            <Button onClick={() => console.log("Button clicked")}>
+              Click me
+            </Button>
+          </Coach.Mark>
+          <Coach.Mark placement={props.placement} offset={props.offset}>
+            <Chips>
+              {options.map((option) => (
+                <Chips.Toggle
+                  key={option}
+                  selected={selected.includes(option)}
+                  onClick={() =>
+                    setSelected(
+                      selected.includes(option)
+                        ? selected.filter((x) => x !== option)
+                        : [...selected, option],
+                    )
+                  }
+                >
+                  {option}
+                </Chips.Toggle>
+              ))}
+            </Chips>
+          </Coach.Mark>
+          <Coach.Mark placement={props.placement} offset={props.offset}>
+            <GuidePanel>
+              Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
+              går mer enn X måneder siden du søkte, skal du få brev om at
+              saksbehandlingstiden er forlenget.
+            </GuidePanel>
+          </Coach.Mark>
           <Coach.Mark
-            data-color="success"
             onClick={() => console.log("Coach dot clicked")}
-          />
-        </HStack>
+            placement={props.placement}
+            offset={props.offset}
+          >
+            <ExpansionCard aria-label="Demo med bare tittel">
+              <ExpansionCard.Header>
+                <ExpansionCard.Title>
+                  Utbetaling av sykepenger
+                </ExpansionCard.Title>
+              </ExpansionCard.Header>
+              <ExpansionCard.Content>
+                <p>Her er innholdet i ekspansjonskortet.</p>
+              </ExpansionCard.Content>
+            </ExpansionCard>
+          </Coach.Mark>
+          <Coach.Mark placement={props.placement} offset={props.offset}>
+            <InfoCard data-color="info">
+              <InfoCard.Header>
+                <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
+              </InfoCard.Header>
+              <InfoCard.Content>
+                InfoCard brukes for å fremheve informasjon på en side, uten at
+                det er like kritisk som en alert.
+              </InfoCard.Content>
+            </InfoCard>
+          </Coach.Mark>
+          <Coach.Mark data-color="success" />
+        </Coach>
       </VStack>
     );
   },
@@ -417,32 +379,6 @@ export const Mark: StoryObj<typeof CoachMark> = {
   },
 };
 
-export const MarkBorder: StoryObj<typeof CoachMark> = {
-  render: (props) => {
-    return (
-      <VStack padding="space-40" gap="space-64">
-        <Coach.Mark
-          onClick={() => console.log("Coach dot clicked")}
-          whiteBorder={props.whiteBorder}
-        >
-          <Button onClick={() => console.log("Button clicked")}>
-            Click me
-          </Button>
-        </Coach.Mark>
-        <HStack gap="space-16" align="center">
-          <Coach.Mark
-            data-color="success"
-            onClick={() => console.log("Coach dot clicked")}
-          />
-        </HStack>
-      </VStack>
-    );
-  },
-  args: {
-    whiteBorder: 1,
-  },
-};
-
 export const Translations: StoryFn<typeof Coach> = () => {
   const translations = {
     Coach: {
@@ -456,7 +392,6 @@ export const Translations: StoryFn<typeof Coach> = () => {
     <Provider locale={en} translations={translations}>
       <Coach
         showTour={true}
-        endTour={() => {}}
         steps={[
           {
             id: "progress_translation",
@@ -481,54 +416,71 @@ export const SingleStepAnchor: StoryFn<typeof Coach> = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <HStack gap="space-16">
-      <Button ref={buttonRef} onClick={() => setOpen((prev) => !prev)}>
-        Toggle coach
-      </Button>
-      <Coach
-        showTour={open}
-        endTour={() => setOpen(false)}
-        type="anchor"
-        anchorRef={buttonRef}
-        title="Enkeltsteg"
-        description="Dette er en enkeltstående coachmark uten steps-prop."
-      />
-    </HStack>
+    <Coach
+      showTour={open}
+      onShowTourChange={setOpen}
+      type="anchor"
+      anchorRef={buttonRef}
+      title="Enkeltsteg"
+      description="Dette er en enkeltstående coachmark uten steps-prop."
+    >
+      <Coach.Mark>
+        <Button ref={buttonRef} onClick={() => setOpen((prev) => !prev)}>
+          Feature
+        </Button>
+      </Coach.Mark>
+    </Coach>
   );
 };
 
-export const SingleStepCustomChildren: StoryFn<typeof Coach> = () => {
+export const SingleStepRenderStep: StoryFn<typeof Coach> = () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Coach
+      type="anchor"
+      anchorRef={buttonRef}
+      title="Opprett ny"
+      description="Standardtekst som kan brukes eller overstyres."
+      renderStep={({ title, description }) => (
+        <Coach.Step>
+          <Coach.Title>{title}</Coach.Title>
+          <Coach.Description>{description}</Coach.Description>
+          <BodyShort>Egendefinert innhold her!</BodyShort>
+          <Coach.Footer>
+            <Coach.CloseTrigger>
+              <Button size="medium" variant="primary">
+                Forstått
+              </Button>
+            </Coach.CloseTrigger>
+          </Coach.Footer>
+        </Coach.Step>
+      )}
+    >
+      <Coach.Mark>
+        <Button ref={buttonRef}>Feature</Button>
+      </Coach.Mark>
+    </Coach>
+  );
+};
+
+export const CoachControlled: StoryFn<typeof Coach> = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
 
   return (
-    <HStack gap="space-16">
+    <>
       <Button ref={buttonRef} onClick={() => setOpen((prev) => !prev)}>
-        Toggle custom coach
+        Toggle tour
       </Button>
       <Coach
         showTour={open}
-        endTour={() => setOpen(false)}
+        onShowTourChange={setOpen}
         type="anchor"
         anchorRef={buttonRef}
-        title="Opprett ny"
-        description="Standardtekst som kan brukes eller overstyres."
-      >
-        {({ title, description }) => (
-          <Coach.Step>
-            <Coach.Title>{title}</Coach.Title>
-            <Coach.Description>{description}</Coach.Description>
-            <BodyShort>Egendefinert innhold her!</BodyShort>
-            <Coach.Footer>
-              <Coach.CloseTrigger>
-                <Button size="medium" variant="primary">
-                  Forstått
-                </Button>
-              </Coach.CloseTrigger>
-            </Coach.Footer>
-          </Coach.Step>
-        )}
-      </Coach>
-    </HStack>
+        title="Kontrollert coach"
+        description="Denne coachen styres av state."
+      />
+    </>
   );
 };

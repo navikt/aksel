@@ -1,50 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Coach, Table, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [showTour, setShowTour] = useState(false);
   const opprettRef = useRef<HTMLButtonElement>(null);
   const statusRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
-      <VStack gap="space-16">
-        <Coach.Mark onClick={() => setShowTour(true)}>
-          <Button ref={opprettRef}>Opprett oppgave</Button>
-        </Coach.Mark>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Status</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row key="1">
-              <Table.HeaderCell scope="row">Scott, Michael</Table.HeaderCell>
-              <Table.DataCell>03999265463</Table.DataCell>
-              <Table.DataCell>
-                <span ref={statusRef}>Fullført</span>
-              </Table.DataCell>
-            </Table.Row>
-            <Table.Row key="2">
-              <Table.HeaderCell scope="row">Malone, Kevin</Table.HeaderCell>
-              <Table.DataCell>02334545234</Table.DataCell>
-              <Table.DataCell>Pågående</Table.DataCell>
-            </Table.Row>
-            <Table.Row key="3">
-              <Table.HeaderCell scope="row">Schrute, Dwight</Table.HeaderCell>
-              <Table.DataCell>34324234234</Table.DataCell>
-              <Table.DataCell>Pågående</Table.DataCell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-      </VStack>
+    <VStack gap="space-16">
       <Coach
-        showTour={showTour}
-        endTour={() => setShowTour(false)}
         steps={[
           {
             id: "velkommen",
@@ -82,8 +46,40 @@ const Example = () => {
             description: "Prøv å legge til en oppgave.",
           },
         ]}
-      />
-    </>
+      >
+        <Coach.Mark>
+          <Button ref={opprettRef}>Opprett oppgave</Button>
+        </Coach.Mark>
+      </Coach>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Status</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row key="1">
+            <Table.HeaderCell scope="row">Scott, Michael</Table.HeaderCell>
+            <Table.DataCell>03999265463</Table.DataCell>
+            <Table.DataCell>
+              <span ref={statusRef}>Fullført</span>
+            </Table.DataCell>
+          </Table.Row>
+          <Table.Row key="2">
+            <Table.HeaderCell scope="row">Malone, Kevin</Table.HeaderCell>
+            <Table.DataCell>02334545234</Table.DataCell>
+            <Table.DataCell>Pågående</Table.DataCell>
+          </Table.Row>
+          <Table.Row key="3">
+            <Table.HeaderCell scope="row">Schrute, Dwight</Table.HeaderCell>
+            <Table.DataCell>34324234234</Table.DataCell>
+            <Table.DataCell>Pågående</Table.DataCell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </VStack>
   );
 };
 
