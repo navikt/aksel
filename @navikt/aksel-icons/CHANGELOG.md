@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 8.21.0
+
+### Minor Changes
+
+- Icons: Add 46 icons for text editing, tables, keyboard input, and filtering. ([#5458](https://github.com/navikt/aksel/pull/5458))
+
 ## 8.20.1
 
 ## 8.20.0
