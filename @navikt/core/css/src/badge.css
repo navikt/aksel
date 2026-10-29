@@ -16,7 +16,9 @@
   justify-content: center;
   min-width: var(--__axc-badge-size);
   height: var(--__axc-badge-size);
-  padding: var(--ax-space-4);
+
+  /* 1px optical adjustment inline */
+  padding: var(--ax-space-4) calc(var(--ax-space-4) + var(--ax-space-1));
   border-radius: var(--ax-radius-16);
   background: var(--ax-bg-strong);
   color: var(--ax-text-contrast);

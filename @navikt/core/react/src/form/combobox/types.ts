@@ -60,8 +60,7 @@ export interface ComboboxProps
    */
   filteredOptions?: string[] | ComboboxOption[];
   /**
-   * Optionally hide the label visually.
-   * Not recommended, but can be considered for e.g. search fields in the top menu.
+   * Hides the label and description visually while keeping them available to screen readers.
    */
   hideLabel?: boolean;
   /**

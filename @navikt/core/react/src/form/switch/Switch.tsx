@@ -15,7 +15,7 @@ export interface SwitchProps
    */
   children: React.ReactNode;
   /**
-   * If enabled shows the label and description for screenreaders only.
+   * Hides the label and description visually while keeping them available to screen readers.
    */
   hideLabel?: boolean;
   /**

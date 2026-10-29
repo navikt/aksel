@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
 import { ComboboxOption } from "../option/ComboboxOption";
 import { useComboboxPopupContext } from "../popup/ComboboxPopup";
@@ -10,6 +11,7 @@ import {
   type ResolveOption,
   useComboboxRootContext,
 } from "../root/ComboboxRoot";
+import { useHitsAnnouncer } from "./useHitsAnnouncer";
 
 interface ComboboxListProps<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -47,12 +49,14 @@ function ComboboxList<
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >({ children }: ComboboxListProps<T>) {
-  const { virtuallyFocusedOptionValue, filterString, setAnnounceText } =
+  const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
   const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
     useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
+  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString, filterString);
+  const translate = useI18n("Combobox2");
 
   const localOnToggleOption = useCallback(
     (option: ComboboxOptionData, isSelected: boolean) => {
@@ -73,16 +77,13 @@ function ComboboxListContent<
     ? filterOptions(options, deferredFilterString)
     : options;
 
+  maybeAnnouceHits(filteredOptions);
+
   if (filteredOptions.length === 0) {
-    setAnnounceText("Ingen treff");
     return (
-      <div className="aksel-combobox2__no-results" role="status">
-        Ingen treff
-      </div>
+      <div className="aksel-combobox2__no-results">{translate("noHits")}</div>
     );
   }
-
-  setAnnounceText("");
 
   return filteredOptions.map((optOrGroup) =>
     "options" in optOrGroup ? (

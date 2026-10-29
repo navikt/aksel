@@ -10,16 +10,28 @@
   min-width: 0;
 }
 
-.aksel-data-table__border-wrapper {
-  /* display:flex and max-height:100% is needed for a "no page scroll" layout */
+.aksel-data-table__frame {
   display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   max-height: 100%;
+  min-height: 0;
+}
+
+.aksel-data-table__border-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  max-height: 100%;
+  min-height: 0;
 }
 
 .aksel-data-table__scroll-wrapper {
   overflow: auto;
+  flex: 1 1 auto;
   width: 100%;
+  min-height: 0;
   position: relative;
+  container-type: inline-size;
   scroll-timeline: --horizontal-table-scroll inline;
 }
 
@@ -137,6 +149,26 @@
     border: 1px solid var(--ax-border-neutral-subtle);
     border-radius: var(--ax-radius-12);
     z-index: 3;
+  }
+
+  :is([data-attachments="top"], [data-attachments="both"]) & {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    &::after {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  :is([data-attachments="bottom"], [data-attachments="both"]) & {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &::after {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 }
 
@@ -684,6 +716,17 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 .aksel-data-table__details-panel-row-cell {
+  > div {
+    position: sticky;
+
+    /* TODO: Sync 1px with `variants` that might not have outer border */
+    inset-inline-start: 1px;
+
+    /* 3px magic number: Avoids content from overflowing when scrolling all the way to the right */
+    max-inline-size: calc(100cqi - 3px);
+    box-sizing: border-box;
+  }
+
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: -4px;
@@ -798,3 +841,21 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ------------------------- DataGrid.Pagination End ------------------------ */
+
+.aksel-data-table__attachment {
+  padding: var(--ax-space-12) var(--ax-space-16);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  background-color: var(--ax-bg-raised);
+
+  &[data-attachment="top"] {
+    border-bottom: none;
+    border-top-left-radius: var(--ax-radius-12);
+    border-top-right-radius: var(--ax-radius-12);
+  }
+
+  &[data-attachment="bottom"] {
+    border-top: none;
+    border-bottom-left-radius: var(--ax-radius-12);
+    border-bottom-right-radius: var(--ax-radius-12);
+  }
+}
