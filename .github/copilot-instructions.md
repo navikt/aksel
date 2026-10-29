@@ -69,6 +69,7 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 
 - `aksel-local-validation` - pick and run the right lint/type/test commands
 - `code-review` - review a branch, diff or PR for consumer-facing risk
+- `component-contract` - define and verify component behavior, state ownership and accessibility contracts
 - `add-changeset` - write `.changeset/*.md` (never run interactive `yarn changeset`)
 - `ds-component-restructure` - move/rename component files to canonical layout
 - `website-example` - add aksel.nav.no examples/templates

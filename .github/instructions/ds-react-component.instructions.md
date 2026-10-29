@@ -7,6 +7,8 @@ applyTo: "@navikt/core/react/src/**"
 
 Read the whole component folder (`index.ts`, source, `.meta.ts`, stories, tests) before editing. Moving or renaming files: use the `ds-component-restructure` skill.
 
+For changes to component state, callbacks, async behavior, composition, semantics, keyboard or focus behavior, use the [component-contract skill](../skills/component-contract/SKILL.md).
+
 ## Compatibility (why: peer range is `react ^17 || ^18 || ^19`)
 
 - No React 18/19-only APIs. ESLint `no-restricted-imports` blocks e.g. `React.useId`. Use the internal `useId`, `useClientLayoutEffect`, etc. from `utils-external/`.
