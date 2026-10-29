@@ -128,4 +128,53 @@ describe("useTimelineRows", () => {
 
     expect(result.current[0].periods[0].start).toEqual(new Date(2023, 0, 15));
   });
+
+  test("does not mutate input period order", () => {
+    const later = { start: new Date(2023, 0, 15), end: new Date(2023, 0, 20) };
+    const earlier = { start: new Date(2023, 0, 1), end: new Date(2023, 0, 10) };
+    const input = [{ label: "Row", periods: [later, earlier] }];
+
+    const { result } = renderHook(() =>
+      useTimelineRows(
+        input,
+        new Date(2022, 0, 1),
+        new Date(2023, 0, 31),
+        "left",
+      ),
+    );
+
+    expect(input[0].periods).toEqual([later, earlier]);
+    expect(result.current[0].periods.map((p) => p.start)).toEqual([
+      earlier.start,
+      later.start,
+    ]);
+  });
+
+  test("crops edges of adjacent periods", () => {
+    const input = [
+      {
+        label: "Row",
+        periods: [
+          { start: new Date(2023, 0, 11), end: new Date(2023, 0, 20) },
+          { start: new Date(2023, 0, 1), end: new Date(2023, 0, 10) },
+          { start: new Date(2023, 0, 21), end: new Date(2023, 0, 25) },
+        ],
+      },
+    ];
+
+    const { result } = renderHook(() =>
+      useTimelineRows(
+        input,
+        new Date(2023, 0, 1),
+        new Date(2023, 0, 31),
+        "left",
+      ),
+    );
+
+    expect(result.current[0].periods.map((p) => p.cropped)).toEqual([
+      "right",
+      "both",
+      "left",
+    ]);
+  });
 });
