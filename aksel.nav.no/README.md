@@ -37,6 +37,14 @@ yarn build:next
 yarn serve:next
 ```
 
+The standard build skips RSS generation and Playroom compilation. To build the complete deployment output locally, run:
+
+```bash
+yarn workspace website update:rss
+yarn workspace website build:with-playroom
+yarn serve:next
+```
+
 **Rettigheter**
 
 Sanity-datasettet er privat, noe som betyr du må ha tilgang til Sanity-applikasjonen og følgende tokens:
