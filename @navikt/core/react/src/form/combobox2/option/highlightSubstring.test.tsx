@@ -12,7 +12,7 @@ describe("getHighlightRange", () => {
   });
 
   test("returns null when there is no match", () => {
-    expect(getHighlightRange("Norge", "x")).toBeNull();
+    expect(getHighlightRange("Norge", "x")).toBeUndefined();
   });
 
   test("handles characters that get longer when lowercased", () => {
