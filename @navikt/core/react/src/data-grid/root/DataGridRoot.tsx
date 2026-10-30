@@ -5,10 +5,53 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
-import type { DataGridSettings } from "./DataGrid.types";
-import { DataGridContextProvider } from "./DataGridRoot.context";
+import { DataGridPaginationInternal } from "../pagination/DataGridPaginationInternal";
+import { DataGridPaginationNavigation } from "../pagination/navigation/DataGridPaginationNavigation";
+import { DataGridPaginationPageSize } from "../pagination/page-size/DataGridPaginationPageSize";
+import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
+import { DataGridPaginationSummary } from "../pagination/summary/DataGridPaginationSummary";
+import type {
+  DataGridPaginationConfig,
+  DataGridSettings,
+} from "./DataGrid.types";
+import {
+  DataGridContextProvider,
+  DataGridRootPaginationContextProvider,
+} from "./DataGridRoot.context";
 
-interface DataGridProps<RowT> {
+type DataGridRowIdProps<RowT> =
+  | {
+      pagination?: never;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * If not provided, the row index will be used as ID.
+       * This can cause issues if your data changes dynamically,
+       * so it's recommended to provide a stable ID if possible.
+       */
+      getRowId?: (rowData: RowT) => string;
+    }
+  | {
+      /**
+       * Enables root-owned pagination state. Pages are zero-indexed.
+       *
+       * Client mode (default) accepts all rows; server mode accepts the current
+       * page and requires exactly one of `totalRows` or `hasNextPage`.
+       *
+       * Requires `getRowId`.
+       */
+      pagination: DataGridPaginationConfig;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * Required with `pagination`, so row IDs stay unique across pages.
+       */
+      getRowId: (rowData: RowT) => string;
+    };
+
+type DataGridProps<RowT> = DataGridBaseProps<RowT> & DataGridRowIdProps<RowT>;
+
+interface DataGridBaseProps<RowT> {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -23,14 +66,6 @@ interface DataGridProps<RowT> {
    * object are used to render the cells based on `columnDefinitions`.
    */
   data: RowT[];
-  /**
-   * Function to get unique row ID from row data.
-   *
-   * If not provided, the row index will be used as ID.
-   * This can cause issues if your data changes dynamically,
-   * so it's recommended to provide a stable ID if possible.
-   */
-  getRowId?: (rowData: RowT) => string;
   /**
    * Object with props related to row selection.
    */
@@ -77,6 +112,28 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
+  /**
+   * @see 🏷️ {@link DataGridPagination.Props}
+   *
+   * @example
+   * <DataGrid columns={columns} data={rows} getRowId={(row) => row.id} pagination={{ defaultPageSize: 10 }}>
+   *   <DataGrid.Table />
+   *   <DataGrid.Pagination />
+   * </DataGrid>
+   */
+  Pagination: typeof DataGridPagination;
+  /**
+   * @see 🏷️ {@link DataGridPaginationSummary.Props}
+   */
+  PaginationSummary: typeof DataGridPaginationSummary;
+  /**
+   * @see 🏷️ {@link DataGridPaginationPageSize.Props}
+   */
+  PaginationPageSize: typeof DataGridPaginationPageSize;
+  /**
+   * @see 🏷️ {@link DataGridPaginationNavigation.Props}
+   */
+  PaginationNavigation: typeof DataGridPaginationNavigation;
 }
 
 /**
@@ -102,6 +159,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       className,
       columns,
       data,
+      pagination,
       getRowId,
       selection,
       isLoading = false,
@@ -129,7 +187,19 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {children}
+          {pagination ? (
+            <DataGridPaginationInternal
+              pagination={pagination}
+              rowCount={data.length}
+              isLoading={isLoading}
+            >
+              {children}
+            </DataGridPaginationInternal>
+          ) : (
+            <DataGridRootPaginationContextProvider mode="none">
+              {children}
+            </DataGridRootPaginationContextProvider>
+          )}
         </DataGridContextProvider>
       </div>
     );
@@ -139,6 +209,10 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
+DataGrid.Pagination = DataGridPagination;
+DataGrid.PaginationSummary = DataGridPaginationSummary;
+DataGrid.PaginationPageSize = DataGridPaginationPageSize;
+DataGrid.PaginationNavigation = DataGridPaginationNavigation;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -163,6 +237,30 @@ export namespace DataGrid {
   export namespace Preferences {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPreferences.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Pagination {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPagination.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationSummary {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationSummary.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationPageSize {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationPageSize.Props;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace PaginationNavigation {
+    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    export type Props = DataGridPaginationNavigation.Props;
   }
 }
 

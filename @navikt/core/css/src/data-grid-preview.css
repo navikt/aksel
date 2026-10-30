@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
 }
 
 .aksel-data-table__frame {
@@ -753,6 +754,95 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
+
+/* ------------------------ DataGrid.Pagination Start ----------------------- */
+.aksel-data-grid__pagination {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ax-space-8);
+
+  /* Equal side columns keep page size centered when summary width changes. */
+  &[data-layout="preset"] {
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+      & > :last-child {
+        justify-self: end;
+      }
+    }
+  }
+}
+
+.aksel-data-grid__pagination-page-size {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+
+  .aksel-data-grid__pagination[data-layout="preset"] & {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+}
+
+.aksel-data-grid__pagination-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-4);
+}
+
+.aksel-data-grid__pagnation-navigation-button {
+  /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
+  &[aria-disabled="true"] {
+    cursor: default;
+    opacity: var(--ax-opacity-disabled);
+  }
+
+  @media (forced-colors: active) {
+    /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
+    &[aria-disabled="true"] {
+      color: GrayText;
+      opacity: 1;
+    }
+  }
+}
+
+.aksel-data-grid__pagination-summary {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.aksel-data-grid__pagination-navigation-page {
+  display: inline-grid;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  &::before {
+    content: attr(data-max-label);
+    visibility: hidden;
+  }
+
+  &::before,
+  & > span {
+    grid-area: 1 / 1;
+  }
+}
+
+.aksel-data-grid__pagination-navigation-page {
+  text-align: center;
+  display: none;
+
+  @media (min-width: 480px) {
+    display: inline-grid;
+  }
+}
+
+/* ------------------------- DataGrid.Pagination End ------------------------ */
 
 .aksel-data-table__attachment {
   padding: var(--ax-space-12) var(--ax-space-16);
