@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Dialog } from "../../dialog";
 import { BodyShort, ErrorMessage } from "../../typography";
 import { cl } from "../../utils/helpers";
@@ -36,109 +36,114 @@ interface ComboboxProps<
   name?: string;
 }
 
-function Combobox<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->({
-  label,
-  hideLabel,
-  name,
-  size: sizeProp,
-  error,
-  errorId: errorIdProp,
-  disabled: disabledProp,
-  description,
-  id,
-  readOnly: readOnlyProp,
-  multiple,
-  ...rest
-}: ComboboxProps<T>) {
-  const {
-    inputProps,
-    errorId,
-    showErrorMsg,
-    hasError,
-    size,
-    inputDescriptionId,
-    readOnly,
-  } = useFormField(
+const Combobox = forwardRef(
+  <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
     {
-      description,
-      disabled: disabledProp,
+      label,
+      hideLabel,
+      name,
+      size: sizeProp,
       error,
       errorId: errorIdProp,
+      disabled: disabledProp,
+      description,
       id,
       readOnly: readOnlyProp,
-      size: sizeProp,
-    },
-    "combobox",
-  );
+      multiple,
+      ...rest
+    }: ComboboxProps<T>,
+    ref: React.ForwardedRef<HTMLButtonElement>,
+  ) => {
+    const {
+      inputProps,
+      errorId,
+      showErrorMsg,
+      hasError,
+      size,
+      inputDescriptionId,
+      readOnly,
+    } = useFormField(
+      {
+        description,
+        disabled: disabledProp,
+        error,
+        errorId: errorIdProp,
+        id,
+        readOnly: readOnlyProp,
+        size: sizeProp,
+      },
+      "combobox",
+    );
 
-  return (
-    <ComboboxRoot
-      size={size}
-      disabled={inputProps.disabled}
-      multiple={multiple}
-      {...rest}
-    >
-      <ComboboxLabel
-        htmlFor={inputProps.id}
-        hide={hideLabel}
-        readOnly={readOnly}
+    return (
+      <ComboboxRoot
+        size={size}
+        disabled={inputProps.disabled}
+        multiple={multiple}
+        {...rest}
       >
-        {label}
-      </ComboboxLabel>
-      {!!description && (
-        <BodyShort
-          className={cl(
-            "aksel-form-field__description aksel-combobox2__description",
-            { "aksel-sr-only": hideLabel },
-          )}
-          id={inputDescriptionId}
-          size={size}
-          as="div"
+        <ComboboxLabel
+          htmlFor={inputProps.id}
+          hide={hideLabel}
+          readOnly={readOnly}
         >
-          {description}
-        </BodyShort>
-      )}
-      <ComboboxTrigger readOnly={readOnly} {...inputProps}>
-        <ComboboxField hasError={hasError} />
-      </ComboboxTrigger>
-      <div
-        className="aksel-form-field__error aksel-combobox2__error"
-        id={errorId}
-        aria-relevant="additions removals"
-        aria-live="polite"
-      >
-        {showErrorMsg && (
-          <ErrorMessage size={size} showIcon>
-            {error}
-          </ErrorMessage>
-        )}
-      </div>
-
-      {name &&
-        rest.value.map((val) => (
-          <input key={val} type="hidden" name={name} value={val} />
-        ))}
-
-      <ComboboxOverlay
-        mobileHeader={
-          <Dialog.Header>
-            <Dialog.Title>{label}</Dialog.Title>
-            {!!description && (
-              <Dialog.Description>{description}</Dialog.Description>
+          {label}
+        </ComboboxLabel>
+        {!!description && (
+          <BodyShort
+            className={cl(
+              "aksel-form-field__description aksel-combobox2__description",
+              { "aksel-sr-only": hideLabel },
             )}
-          </Dialog.Header>
-        }
-      >
-        <ComboboxPopup>
-          <ComboboxFilter />
-          <ComboboxList />
-        </ComboboxPopup>
-      </ComboboxOverlay>
-    </ComboboxRoot>
-  );
-}
+            id={inputDescriptionId}
+            size={size}
+            as="div"
+          >
+            {description}
+          </BodyShort>
+        )}
+        <ComboboxTrigger readOnly={readOnly} {...inputProps}>
+          <ComboboxField ref={ref} hasError={hasError} />
+        </ComboboxTrigger>
+        <div
+          className="aksel-form-field__error aksel-combobox2__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {showErrorMsg && (
+            <ErrorMessage size={size} showIcon>
+              {error}
+            </ErrorMessage>
+          )}
+        </div>
+
+        {name &&
+          rest.value.map((val) => (
+            <input key={val} type="hidden" name={name} value={val} />
+          ))}
+
+        <ComboboxOverlay
+          mobileHeader={
+            <Dialog.Header>
+              <Dialog.Title>{label}</Dialog.Title>
+              {!!description && (
+                <Dialog.Description>{description}</Dialog.Description>
+              )}
+            </Dialog.Header>
+          }
+        >
+          <ComboboxPopup>
+            <ComboboxFilter />
+            <ComboboxList />
+          </ComboboxPopup>
+        </ComboboxOverlay>
+      </ComboboxRoot>
+    );
+  },
+) as <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+  props: ComboboxProps<T> & React.RefAttributes<HTMLButtonElement>,
+) => React.ReactElement;
 
 // ----------- ComboboxSingle ----------- //
 
@@ -149,44 +154,67 @@ interface ComboboxSingleProps<
    * Called when selected option changes.
    */
   onChange?: (
-    newValue: NonNullable<ComboboxProps<T>["value"]>[number] | undefined,
+    newValue: NonNullable<ComboboxProps<T>["value"]>[number] | null,
   ) => void;
   /**
    * Value of the selected option.
    */
-  value?: NonNullable<ComboboxProps<T>["value"]>[number];
+  value?: NonNullable<ComboboxProps<T>["value"]>[number] | null;
   /**
    * Initial value when uncontrolled.
    */
   defaultValue?: NonNullable<ComboboxProps<T>["value"]>[number];
 }
 
-function ComboboxSingle<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->({ onChange, value, defaultValue, ...rest }: ComboboxSingleProps<T>) {
-  const [localValue, setLocalValue] = useControllableState({
-    defaultValue,
-    value,
-    onChange,
-  });
-
-  const onToggleOption: ComboboxProps<T>["onToggleOption"] = (
-    option,
-    isSelected,
+/**
+ * Component for selecting a value from a list of options that can be filtered.
+ *
+ * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
+ * @see 🏷️ {@link ComboboxSingleProps}
+ *
+ * @example
+ * ```jsx
+ * <ComboboxSingle
+ *   label="Select country"
+ *   name="country"
+ *   options={countries}
+ * />
+ * ```
+ */
+const ComboboxSingle = forwardRef(
+  <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+    { onChange, value, defaultValue, ...rest }: ComboboxSingleProps<T>,
+    ref: React.ForwardedRef<HTMLButtonElement>,
   ) => {
-    setLocalValue(isSelected ? option.value : undefined);
-  }; // TODO: Dumt at ikke får hele option-objektet... Legge til i onChange? Hvis vi tilbyr onToggle så blir det så likt onChange...
+    const [localValue, setLocalValue] = useControllableState({
+      defaultValue,
+      value,
+      onChange,
+    });
 
-  return (
-    <Combobox
-      {...rest}
-      value={localValue ? [localValue] : []}
-      defaultValue={defaultValue ? [defaultValue] : []}
-      multiple={false}
-      onToggleOption={onToggleOption}
-    />
-  );
-}
+    const onToggleOption: ComboboxProps<T>["onToggleOption"] = (
+      option,
+      isSelected,
+    ) => {
+      setLocalValue(isSelected ? option.value : null);
+    }; // TODO: Dumt at ikke får hele option-objektet... Legge til i onChange? Hvis vi tilbyr onToggle så blir det så likt onChange...
+
+    return (
+      <Combobox
+        {...rest}
+        ref={ref}
+        value={localValue ? [localValue] : []}
+        defaultValue={defaultValue ? [defaultValue] : []}
+        multiple={false}
+        onToggleOption={onToggleOption}
+      />
+    );
+  },
+) as <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+  props: ComboboxSingleProps<T> & React.RefAttributes<HTMLButtonElement>,
+) => React.ReactElement;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace ComboboxSingle {

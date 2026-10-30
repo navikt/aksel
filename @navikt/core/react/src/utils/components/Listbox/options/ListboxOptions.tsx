@@ -39,4 +39,12 @@ function ListboxOptions({ children, ...rest }: ListboxOptionsProps) {
   );
 }
 
+/**
+ * TODO: Things that should be fixed before we allow focus directly
+ * on the listbox (i.e. when there's no filter input/combobox elm.)
+ * - Set aria-activedescendant
+ * - Consider aria-multiselectable
+ * - Probably aria-label(ledby)?
+ */
+
 export { ListboxOptions };

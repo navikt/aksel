@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { createStrictContext } from "../../../utils/helpers";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
@@ -29,7 +29,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const rootContext = useComboboxRootContext();
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(
+  useLayoutEffect(
     function onOpen() {
       const canHover = window.matchMedia("(hover: hover)").matches;
 

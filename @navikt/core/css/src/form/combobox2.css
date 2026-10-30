@@ -142,7 +142,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  .aksel-combobox2:has(:not(.aksel-combobox2__modal)) & {
+  .aksel-combobox2:not(:has(.aksel-combobox2__modal)) & {
     outline: 1px solid var(--ax-border-neutral-subtleA);
     outline-offset: -1px;
     border-radius: var(--ax-radius-8);
@@ -158,26 +158,21 @@
   margin: -1px;
 }
 
-.aksel-combobox2__filter .aksel-search__wrapper {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.aksel-combobox2__filter .aksel-search__wrapper:has(.aksel-search__input:focus-visible) {
+  outline: none;
+  position: relative;
 
-  &:has(.aksel-search__input:focus-visible) {
-    outline: none;
-    position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 2px solid var(--ax-border-focus);
+  }
 
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border: 2px solid var(--ax-border-focus);
-    }
-
-    .aksel-combobox2:has(:not(.aksel-combobox2__modal)) &::after {
-      border-top-left-radius: var(--ax-radius-8);
-      border-top-right-radius: var(--ax-radius-8);
-    }
+  .aksel-combobox2:not(:has(.aksel-combobox2__modal)) &::after {
+    border-top-left-radius: var(--ax-radius-8);
+    border-top-right-radius: var(--ax-radius-8);
   }
 }
 
@@ -189,7 +184,7 @@
     border-color: var(--ax-border-neutral-subtleA);
   }
 
-  .aksel-combobox2[data-size="medium"] & {
+  .aksel-combobox2__popup[data-size="medium"] & {
     min-height: 0;
   }
 
@@ -222,15 +217,6 @@
 }
 
 /************************************************
- * Group                                        *
- ************************************************/
-
-.aksel-combobox2__group-label {
-  padding: var(--ax-space-8) var(--ax-space-8);
-  font-weight: bold;
-}
-
-/************************************************
  * Option                                       *
  ************************************************/
 
@@ -253,7 +239,7 @@
   margin-top: var(--ax-space-2);
   float: left;
 
-  .aksel-combobox2[data-size="small"] & {
+  .aksel-combobox2__popup[data-size="small"] & {
     --__axc-combobox2-option-checkmark-size: 1rem;
   }
 

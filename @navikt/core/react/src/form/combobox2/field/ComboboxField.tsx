@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import {
   type ComboboxRootProps,
   useComboboxRootContext,
@@ -14,10 +15,14 @@ interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
   ({ children, hasError, ...rest }, ref) => {
     const { options, value, size } = useComboboxRootContext();
+    const translate = useI18n("Combobox2");
 
     const labels = getLabels(value, options);
     const label =
-      children ?? (labels.length > 1 ? `${labels.length} valgt` : labels[0]);
+      children ??
+      (labels.length > 1
+        ? translate("selectedCount", { count: labels.length })
+        : labels[0]);
 
     return (
       <div className="aksel-combobox2__field-container">
