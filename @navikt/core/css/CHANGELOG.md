@@ -1,5 +1,7 @@
 # @navikt/ds-css
 
+## 8.21.1
+
 ## 8.21.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 8.21.1
+
+### Patch Changes
+
+- ESM: Mark ESM output as side-effect free, so bundlers like webpack, Turbopack and esbuild can tree-shake unused components and icons. ([#5472](https://github.com/navikt/aksel/pull/5472))
+
+- Updated dependencies [[`b69c5fc`](https://github.com/navikt/aksel/commit/b69c5fca305f28ad99b48dd74e4f736fe4257d48)]:
+  - @navikt/aksel-icons@8.21.1
+  - @navikt/ds-tokens@8.21.1
+
 ## 8.21.0
 
 ### Minor Changes
