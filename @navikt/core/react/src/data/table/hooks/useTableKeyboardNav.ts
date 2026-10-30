@@ -22,6 +22,7 @@ type UseTableKeyboardNavOptions = {
 
 function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
   const [tableRef, setTableRef] = useState<HTMLTableElement | null>(null);
+  const [isFocusWithin, setIsFocusWithin] = useState(false);
   const { getTableGrid, activeCell, setActiveCell } = useGridCache(
     tableRef,
     enabled,
@@ -122,6 +123,7 @@ function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
    * Make sure td/th elements have tabIndex={-1} so they can receive focus on click
    */
   const handleTableFocusIn = useEventCallback((event: FocusEvent): void => {
+    setIsFocusWithin(true);
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
@@ -146,6 +148,15 @@ function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
     }
   });
 
+  const handleTableFocusOut = useEventCallback((event: FocusEvent): void => {
+    if (
+      !(event.relatedTarget instanceof Node) ||
+      !tableRef?.contains(event.relatedTarget)
+    ) {
+      setIsFocusWithin(false);
+    }
+  });
+
   /**
    * Attach event listeners for keyboard navigation and focus management.
    */
@@ -156,16 +167,27 @@ function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
 
     tableRef.addEventListener("keydown", handleTableKeyDown);
     tableRef.addEventListener("focusin", handleTableFocusIn);
+    tableRef.addEventListener("focusout", handleTableFocusOut);
 
     return () => {
       tableRef.removeEventListener("keydown", handleTableKeyDown);
       tableRef.removeEventListener("focusin", handleTableFocusIn);
+      tableRef.removeEventListener("focusout", handleTableFocusOut);
     };
-  }, [tableRef, handleTableKeyDown, handleTableFocusIn, enabled]);
+  }, [
+    tableRef,
+    handleTableKeyDown,
+    handleTableFocusIn,
+    handleTableFocusOut,
+    enabled,
+  ]);
 
   return {
-    /* Table should only have tabIndex until the focus is moved inside and is enabled */
-    tabIndex: enabled ? 0 : undefined,
+    /*
+     * Table should only have tabIndex until the focus is moved inside and is enabled
+     * This allows focus to "escape" the table and move to other elements on the page.
+     */
+    tabIndex: enabled ? (isFocusWithin ? -1 : 0) : undefined,
     setTableRef,
   };
 }
