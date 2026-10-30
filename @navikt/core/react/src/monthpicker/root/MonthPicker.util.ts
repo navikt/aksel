@@ -56,14 +56,14 @@ export const nextEnabled = (
     }
   }
   if (key === "ArrowRight") {
-    const nextMonth = loopForward(
+    const nextMonth = searchEnabledMonth(
+      1,
       currentIndex,
       months,
+      disabled,
       yearState,
       setYearState,
-      disabled,
       false,
-      dropdownCaption,
       fromDate,
       toDate,
     );
@@ -72,14 +72,14 @@ export const nextEnabled = (
     }
   }
   if (key === "ArrowLeft") {
-    const prevMonth = loopBack(
-      currentIndex - 1,
+    const prevMonth = searchEnabledMonth(
+      -1,
+      currentIndex,
       months,
       disabled,
       yearState,
       setYearState,
       false,
-      dropdownCaption,
       fromDate,
       toDate,
     );
@@ -98,14 +98,14 @@ export const nextEnabled = (
       return setYear(months[currentIndex + 4], yearState.getFullYear());
     }
 
-    const fallbackNext = loopForward(
+    const fallbackNext = searchEnabledMonth(
+      1,
       currentIndex,
       months,
+      disabled,
       yearState,
       setYearState,
-      disabled,
       true,
-      dropdownCaption,
       fromDate,
       toDate,
     );
@@ -127,14 +127,14 @@ export const nextEnabled = (
       )
     )
       return setYear(months[currentIndex - 4], Number(yearState.getFullYear()));
-    const fallbackPrev = loopBack(
+    const fallbackPrev = searchEnabledMonth(
+      -1,
       currentIndex,
       months,
       disabled,
       yearState,
       setYearState,
       true,
-      dropdownCaption,
       fromDate,
       toDate,
     );
@@ -144,90 +144,57 @@ export const nextEnabled = (
   return currentMonth;
 };
 
-const loopBack = (
-  currentIndex: number,
-  months: Date[],
-  disabled: Matcher[],
-  yearState: Date,
-  setYearState: (date: Date) => void,
-  rowCheck: boolean,
-  dropdownCaption: boolean,
-  fromDate?: Date,
-  toDate?: Date,
-): { index: number; year: number } | undefined => {
-  let currentYear = setYear(yearState, Number(yearState.getFullYear()));
-  for (let i = currentIndex; i >= -1; i--) {
-    if (i === -1) {
-      if (
-        isOutOfRange(
-          dropdownCaption,
-          setYear(currentYear, Number(currentYear.getFullYear() - 1)),
-          fromDate,
-          toDate,
-        )
-      )
-        return;
-      currentYear = setYear(currentYear, Number(currentYear.getFullYear() - 1));
-      setYearState(currentYear);
-      i = 11;
-    }
-    const month = months[i];
-    const isDisabled = !isMatch(
-      setYear(month, Number(currentYear.getFullYear())),
-      disabled,
-    );
-    if (rowCheck) {
-      if (isDisabled && getRow(i) !== getRow(currentIndex)) {
-        return { index: i, year: Number(currentYear.getFullYear()) };
-      }
-    } else {
-      if (isDisabled) {
-        return { index: i, year: Number(currentYear.getFullYear()) };
-      }
-    }
-  }
-};
+/**
+ * Keyboard search for an enabled month never crosses fromDate/toDate years and
+ * gives up after this many years when no bounds are set, so a matcher that
+ * disables every remaining month cannot hang the page.
+ */
+const MAX_SEARCH_YEARS = 100;
 
-const loopForward = (
+const searchEnabledMonth = (
+  direction: 1 | -1,
   currentIndex: number,
   months: Date[],
+  disabled: Matcher[],
   yearState: Date,
   setYearState: (date: Date) => void,
-  disabled: Matcher[],
   rowCheck: boolean,
-  dropdownCaption: boolean,
   fromDate?: Date,
   toDate?: Date,
 ): { index: number; year: number } | undefined => {
-  let currentYear = setYear(yearState, Number(yearState.getFullYear()));
-  for (let i = currentIndex + 1; i < months.length + 1; i++) {
-    if (i === 12) {
-      if (
-        isOutOfRange(
-          dropdownCaption,
-          setYear(currentYear, Number(currentYear.getFullYear() + 1)),
-          fromDate,
-          toDate,
-        )
-      )
+  const startYear = yearState.getFullYear();
+  if (Number.isNaN(startYear)) {
+    return;
+  }
+
+  const boundYear =
+    direction === 1 ? toDate?.getFullYear() : fromDate?.getFullYear();
+  const horizonYear = startYear + direction * MAX_SEARCH_YEARS;
+  const lastYear =
+    boundYear === undefined || Number.isNaN(boundYear)
+      ? horizonYear
+      : direction === 1
+        ? Math.min(boundYear, horizonYear)
+        : Math.max(boundYear, horizonYear);
+
+  let year = startYear;
+  let i = currentIndex;
+  while (true) {
+    i += direction;
+    if (i < 0 || i > 11) {
+      if (year === lastYear || (year - lastYear) * direction > 0) {
         return;
-      currentYear = setYear(currentYear, Number(currentYear.getFullYear() + 1));
-      setYearState(currentYear);
-      i = 0;
+      }
+      year += direction;
+      i = direction === 1 ? 0 : 11;
     }
-    const month = months[i];
-    const isDisabled = !isMatch(
-      setYear(month, Number(currentYear.getFullYear())),
-      disabled,
-    );
-    if (rowCheck) {
-      if (isDisabled && getRow(i) !== getRow(currentIndex)) {
-        return { index: i, year: Number(currentYear.getFullYear()) };
+
+    const isEnabled = !isMatch(setYear(months[i], year), disabled);
+    if (isEnabled && (!rowCheck || getRow(i) !== getRow(currentIndex))) {
+      if (year !== startYear) {
+        setYearState(setYear(yearState, year));
       }
-    } else {
-      if (isDisabled) {
-        return { index: i, year: Number(currentYear.getFullYear()) };
-      }
+      return { index: i, year };
     }
   }
 };
@@ -236,25 +203,6 @@ const getRow = (index: number): number => {
   if (index >= 0 && index <= 3) return 1;
   if (index >= 4 && index <= 7) return 2;
   return 3;
-};
-
-const isOutOfRange = (
-  dropdownCaption: boolean,
-  year: Date,
-  fromDate?: Date,
-  toDate?: Date,
-): boolean => {
-  if (
-    dropdownCaption &&
-    fromDate &&
-    toDate &&
-    (year.getFullYear() < fromDate?.getFullYear() ||
-      year.getFullYear() > toDate?.getFullYear())
-  ) {
-    return true;
-  }
-
-  return false;
 };
 
 const nextOnRow = (

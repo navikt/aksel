@@ -83,6 +83,25 @@ export const DisabledMonths = () => (
   />
 );
 
+/**
+ * Only June is enabled. ArrowRight/ArrowLeft on June keeps focus on June instead
+ * of searching forever. Keyboard search stops at the
+ * fromDate/toDate years, or after 100 years when no bounds are set.
+ */
+export const KeyboardNoEnabledMonth = () => (
+  <div>
+    <p>Focus June and press ArrowRight or ArrowLeft. Focus stays on June.</p>
+    <MonthPicker.Standalone
+      defaultSelected={new Date(year, 5, 1)}
+      disabled={[
+        (date) => !(date.getFullYear() === year && date.getMonth() === 5),
+      ]}
+      fromDate={new Date(year, 0, 1)}
+      toDate={new Date(year, 11, 1)}
+    />
+  </div>
+);
+
 export const Standalone = () => {
   return <MonthPicker.Standalone defaultSelected={new Date(`Jan 1 ${year}`)} />;
 };
