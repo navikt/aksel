@@ -1,16 +1,14 @@
-import {
-  type Locale,
-  addYears,
-  eachMonthOfInterval,
-  endOfYear,
-  format,
-  getMonth,
-  getYear,
-  isBefore,
-  isSameYear,
-  startOfMonth,
-  startOfYear,
-} from "date-fns";
+import type { Locale } from "date-fns";
+import { addYears } from "date-fns/addYears";
+import { eachMonthOfInterval } from "date-fns/eachMonthOfInterval";
+import { endOfYear } from "date-fns/endOfYear";
+import { format } from "date-fns/format";
+import { getMonth } from "date-fns/getMonth";
+import { getYear } from "date-fns/getYear";
+import { isBefore } from "date-fns/isBefore";
+import { isSameYear } from "date-fns/isSameYear";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
 
 /** Return the months to show in the dropdown. */
 export function getMonthOptions({

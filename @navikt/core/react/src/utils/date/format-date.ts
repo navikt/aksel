@@ -1,4 +1,5 @@
-import { type Locale, format } from "date-fns";
+import type { Locale } from "date-fns";
+import { format } from "date-fns/format";
 import {
   INPUT_DATE_STRING_FORMAT_DATE,
   INPUT_DATE_STRING_FORMAT_MONTH,

@@ -1,12 +1,10 @@
-import {
-  type Locale,
-  format,
-  getMonth,
-  getYear,
-  setMonth,
-  setYear,
-  startOfMonth,
-} from "date-fns";
+import type { Locale } from "date-fns";
+import { format } from "date-fns/format";
+import { getMonth } from "date-fns/getMonth";
+import { getYear } from "date-fns/getYear";
+import { setMonth } from "date-fns/setMonth";
+import { setYear } from "date-fns/setYear";
+import { startOfMonth } from "date-fns/startOfMonth";
 import React, { type ChangeEvent, useCallback } from "react";
 import { type CalendarMonth, useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";

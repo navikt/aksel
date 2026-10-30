@@ -1,4 +1,5 @@
-import { differenceInCalendarDays, isWeekend } from "date-fns";
+import { differenceInCalendarDays } from "date-fns/differenceInCalendarDays";
+import { isWeekend } from "date-fns/isWeekend";
 import React, { useCallback, useState } from "react";
 import { type DayEventHandler, dateMatchModifiers } from "react-day-picker";
 import { getLocaleFromString } from "../../utils/components/date/Date.locale";

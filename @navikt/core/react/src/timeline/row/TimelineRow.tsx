@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography/BodyShort";
 import { cl } from "../../utils/helpers";

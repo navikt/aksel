@@ -1,4 +1,5 @@
-import { startOfMonth, startOfYear } from "date-fns";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
 import { describe, expect, test } from "vitest";
 import { isDateOutsideRange } from "./check-dates";
 import { clampDisplayMonth, clampDisplayYear } from "./clamp-dates";

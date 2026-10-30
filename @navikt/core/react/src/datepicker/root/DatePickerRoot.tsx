@@ -1,4 +1,4 @@
-import { isSameDay } from "date-fns";
+import { isSameDay } from "date-fns/isSameDay";
 import React, { forwardRef, useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { useId } from "../../utils-external";

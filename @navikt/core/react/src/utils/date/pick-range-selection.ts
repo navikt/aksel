@@ -1,4 +1,5 @@
-import { isBefore, isSameDay } from "date-fns";
+import { isBefore } from "date-fns/isBefore";
+import { isSameDay } from "date-fns/isSameDay";
 import type { DateRange } from "../components/date/Date.typeutils";
 
 /**

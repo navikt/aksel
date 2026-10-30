@@ -1,4 +1,4 @@
-import { setYear } from "date-fns";
+import { setYear } from "date-fns/setYear";
 import type { Matcher } from "../../utils/components/date/Date.typeutils";
 import { isMatch } from "../../utils/date";
 
