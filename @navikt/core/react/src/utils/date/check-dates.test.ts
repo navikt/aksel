@@ -1,4 +1,4 @@
-import { setYear } from "date-fns";
+import { setYear } from "date-fns/setYear";
 import { describe, expect, test } from "vitest";
 import { dateIsInCurrentMonth, isValidDate } from "./check-dates";
 

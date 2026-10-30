@@ -1,5 +1,5 @@
-import { getMonth } from "date-fns";
-import { nb } from "date-fns/locale";
+import { getMonth } from "date-fns/getMonth";
+import { nb } from "date-fns/locale/nb";
 import { describe, expect, test } from "vitest";
 import { isValidDate } from "./check-dates";
 import { parseDate } from "./parse-date";

@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import { addDays, isSameDay } from "date-fns";
+import { addDays } from "date-fns/addDays";
+import { isSameDay } from "date-fns/isSameDay";
 import { describe, expect, test } from "vitest";
 import {
   useEarliestDate,

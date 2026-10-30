@@ -1,19 +1,17 @@
-import {
-  type Locale,
-  addDays,
-  addMonths,
-  addYears,
-  differenceInDays,
-  differenceInMonths,
-  differenceInYears,
-  endOfMonth,
-  endOfYear,
-  format,
-  startOfDay,
-  startOfMonth,
-  startOfYear,
-  subDays,
-} from "date-fns";
+import type { Locale } from "date-fns";
+import { addDays } from "date-fns/addDays";
+import { addMonths } from "date-fns/addMonths";
+import { addYears } from "date-fns/addYears";
+import { differenceInDays } from "date-fns/differenceInDays";
+import { differenceInMonths } from "date-fns/differenceInMonths";
+import { differenceInYears } from "date-fns/differenceInYears";
+import { endOfMonth } from "date-fns/endOfMonth";
+import { endOfYear } from "date-fns/endOfYear";
+import { format } from "date-fns/format";
+import { startOfDay } from "date-fns/startOfDay";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
+import { subDays } from "date-fns/subDays";
 import React, { useCallback, useMemo } from "react";
 import { Detail } from "../../typography/Detail";
 import { useDateLocale, useI18n } from "../../utils/i18n/i18n.hooks";

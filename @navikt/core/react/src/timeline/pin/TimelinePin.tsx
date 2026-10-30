@@ -1,4 +1,4 @@
-import { isBefore } from "date-fns";
+import { isBefore } from "date-fns/isBefore";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "../root/TimelineRoot.context";
 import {

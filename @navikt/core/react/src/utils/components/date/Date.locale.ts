@@ -1,4 +1,6 @@
-import { enGB, nb, nn } from "date-fns/locale";
+import { enGB } from "date-fns/locale/en-GB";
+import { nb } from "date-fns/locale/nb";
+import { nn } from "date-fns/locale/nn";
 import { createStrictContext } from "../../helpers";
 import type { TFunction } from "../../i18n/i18n.types";
 import en_translations from "../../i18n/locales/en";

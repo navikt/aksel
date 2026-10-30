@@ -1,4 +1,6 @@
-import { endOfDay, isSameDay, startOfDay } from "date-fns";
+import { endOfDay } from "date-fns/endOfDay";
+import { isSameDay } from "date-fns/isSameDay";
+import { startOfDay } from "date-fns/startOfDay";
 import React, { forwardRef, useMemo, useState } from "react";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { TimelineAxisLabelsInternal } from "../axis-labels/TimelineAxisLabelsInternal";
