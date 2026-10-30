@@ -123,9 +123,13 @@ const PopoverRoot = forwardRef<HTMLDivElement, PopoverProps>(
       ],
     });
 
+    /**
+     * Only give Floating UI a reference while open. Otherwise every closed instance
+     * computes (and commits) a position
+     */
     useClientLayoutEffect(() => {
-      refs.setReference(anchorEl);
-    }, [anchorEl, refs]);
+      refs.setReference(open ? anchorEl : null);
+    }, [anchorEl, open, refs]);
 
     const floatingRef = useMergeRefs(refs.setFloating, ref);
 
