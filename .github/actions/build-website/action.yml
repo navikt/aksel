@@ -61,8 +61,14 @@ runs:
         SANITY_AUTH_TOKEN: ${{ inputs.sanity_deploy_studio }}
       shell: bash
 
+    - name: Generate RSS feed
+      run: yarn workspace website update:rss
+      env:
+        SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
+      shell: bash
+
     - name: Build Next.js website
-      run: yarn build:next
+      run: yarn workspace website build:with-playroom
       env:
         SANITY_READ: ${{ inputs.sanity_read_token }}
         SANITY_READ_NO_DRAFTS: ${{ inputs.sanity_read_no_drafts_token }}
