@@ -77,17 +77,14 @@ const CoachRoot = (props: CoachProps) => {
     renderStep,
   } = props;
 
-  // Translations for the Coach component
   const translate = useI18n("Coach", translations);
 
-  // States
   const [uncontrolledShowTour, setUncontrolledShowTour] = useState(false);
   const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [titleId, setTitleId] = useState<string>();
   const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
 
-  // Whether the tour should be shown
   const showTour = !disableTour && (showTourControlled ?? uncontrolledShowTour);
 
   // Generate the steps for the tour based on props or fallback to single step.
@@ -115,11 +112,8 @@ const CoachRoot = (props: CoachProps) => {
           } as CoachStepItem,
         ];
 
-  // Active step index
   const activeStepIndex = currentStepControlled ?? uncontrolledStep;
-  // Current step object
   const currentStep = steps[activeStepIndex];
-  // Anchor reference for the current step if it's an anchor type
   const anchorRef =
     currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
 
@@ -184,7 +178,6 @@ const CoachRoot = (props: CoachProps) => {
   const getStepSize = () => currentStep?.size ?? "medium";
   const getStepWidth = () => currentStep?.width ?? "medium";
 
-  // Function to set the active step index
   const setStep = useCallback(
     (nextStep: number) => {
       if (currentStepControlled === undefined) {
@@ -195,7 +188,6 @@ const CoachRoot = (props: CoachProps) => {
     [currentStepControlled, onStepChange],
   );
 
-  // Function to show tour
   const setShowTour = useCallback(
     (open: boolean) => {
       if (showTourControlled === undefined) {
@@ -206,10 +198,8 @@ const CoachRoot = (props: CoachProps) => {
     [onShowTourChange, showTourControlled],
   );
 
-  // Function to end the tour
   const endTour = useCallback(() => setShowTour(false), [setShowTour]);
 
-  // Function to go to the next step in the tour
   const goToNextStep = useCallback(() => {
     if (activeStepIndex === steps.length - 1) {
       endTour();
@@ -218,7 +208,6 @@ const CoachRoot = (props: CoachProps) => {
     setStep(activeStepIndex + 1);
   }, [activeStepIndex, endTour, setStep, steps.length]);
 
-  // Function to go to the previous step in the tour
   const goToPreviousStep = useCallback(() => {
     if (activeStepIndex > 0) {
       setStep(activeStepIndex - 1);
@@ -276,6 +265,7 @@ const CoachRoot = (props: CoachProps) => {
 
     if (!trigger) return null;
 
+    // Prevent focus from interrupting the smooth scroll to the anchor.
     trigger.focus?.({ preventScroll: true });
 
     // Returns undefined to override the default focus behavior of the FocusBoundary and Dialog components
@@ -352,6 +342,7 @@ const CoachRoot = (props: CoachProps) => {
       return (
         <Dialog open={true} size={getStepSize()}>
           <Dialog.Popup
+            // Keep focus trapped without locking scroll, so dialog-to-anchor transitions can scroll freely.
             modal="trap-focus"
             withBackdrop
             ref={setStepElement}

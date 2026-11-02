@@ -8,9 +8,6 @@ import { useCoachContext } from "../root/Coach.context";
 type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ({
     /**
-     * Opens the tour when used inside Coach.
-     * Outside Coach, use onClick to handle the mark interaction.
-     *
      * Badge color.
      * @default "danger"
      * @see 🏷️ {@link AkselColor}

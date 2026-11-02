@@ -185,7 +185,7 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.Mark>
-          <Button /*ref={dashboardRef}*/>Dashboard</Button>
+          <Button ref={dashboardRef}>Dashboard</Button>
         </Coach.Mark>
       </Coach>
       <HStack justify="end" width="100%">

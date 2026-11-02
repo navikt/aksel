@@ -7,6 +7,7 @@ function missingTriggersWarning(
   currentStep: CoachStepItem,
   container: HTMLElement | null,
 ) {
+  // Ignore detached popups and the previous step's popup during transitions.
   if (
     !container?.isConnected ||
     container.getAttribute("data-coach-step-id") !== currentStep.id
