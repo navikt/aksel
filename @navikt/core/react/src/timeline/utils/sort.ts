@@ -1,4 +1,4 @@
-import { differenceInMilliseconds } from "date-fns";
+import { differenceInMilliseconds } from "date-fns/differenceInMilliseconds";
 import type { Period, PositionedPeriod } from "./types.internal";
 
 const lastDate = (a: Date, b: Date): number => differenceInMilliseconds(a, b);

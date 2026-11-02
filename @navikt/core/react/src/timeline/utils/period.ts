@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import { cl } from "../../utils/helpers";
 import type { TFunction } from "../../utils/i18n/i18n.types";
 import type { PeriodProps } from "../Timeline.types";

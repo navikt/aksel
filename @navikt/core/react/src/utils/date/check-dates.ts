@@ -1,9 +1,7 @@
-import {
-  differenceInCalendarDays,
-  isThisMonth,
-  setYear,
-  startOfDay,
-} from "date-fns";
+import { differenceInCalendarDays } from "date-fns/differenceInCalendarDays";
+import { isThisMonth } from "date-fns/isThisMonth";
+import { setYear } from "date-fns/setYear";
+import { startOfDay } from "date-fns/startOfDay";
 
 export const dateIsInCurrentMonth = (
   date: Date,

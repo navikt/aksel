@@ -168,6 +168,31 @@ module.exports = defineConfig([
     },
   },
   {
+    files: ["@navikt/core/react/src/**/*.{ts,tsx}"],
+    ignores: ["**/*.stories.tsx"],
+    rules: {
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "date-fns",
+              allowTypeImports: true,
+              message:
+                'Import functions from their own path, e.g. `import { format } from "date-fns/format"`. The root barrel makes unbundled Node imports load all of date-fns.',
+            },
+            {
+              name: "date-fns/locale",
+              allowTypeImports: true,
+              message:
+                'Import locales from their own path, e.g. `import { nb } from "date-fns/locale/nb"`. The barrel makes unbundled Node imports load all locales.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ["@navikt/**"],
     ignores: ["**/*.stories.tsx"],
     rules: {

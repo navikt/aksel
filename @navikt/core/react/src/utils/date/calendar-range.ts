@@ -1,11 +1,9 @@
-import {
-  addYears,
-  endOfMonth,
-  endOfYear,
-  startOfDay,
-  startOfMonth,
-  startOfYear,
-} from "date-fns";
+import { addYears } from "date-fns/addYears";
+import { endOfMonth } from "date-fns/endOfMonth";
+import { endOfYear } from "date-fns/endOfYear";
+import { startOfDay } from "date-fns/startOfDay";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
 
 /**
  * Generates the min and max-dates possible to show and navigate to in the calendar.
