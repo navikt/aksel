@@ -1,4 +1,8 @@
-import { addDays, endOfDay, isAfter, startOfDay, subDays } from "date-fns";
+import { addDays } from "date-fns/addDays";
+import { endOfDay } from "date-fns/endOfDay";
+import { isAfter } from "date-fns/isAfter";
+import { startOfDay } from "date-fns/startOfDay";
+import { subDays } from "date-fns/subDays";
 import { useMemo } from "react";
 import { horizontalPositionAndWidth } from "../utils/calc";
 import { invisiblePeriods, withinADay } from "../utils/filter";

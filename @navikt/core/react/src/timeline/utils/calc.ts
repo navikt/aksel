@@ -1,4 +1,4 @@
-import { differenceInMilliseconds } from "date-fns";
+import { differenceInMilliseconds } from "date-fns/differenceInMilliseconds";
 
 const position = (date: Date, start: Date, endInclusive: Date) => {
   const diff = differenceInMilliseconds(endInclusive, start);

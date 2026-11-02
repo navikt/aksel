@@ -7,6 +7,7 @@ applyTo: "aksel.nav.no/website/**"
 
 - Both routers are in use: `app/` (App Router, `cacheComponents: true` in `next.config.ts`) and `pages/` (examples, templates, legacy). Stay in the router already used nearby. Don't move routes between them.
 - In `app/`, dynamic data needs Suspense or `"use cache"`, following nearby code. Cache Components errors at build time are real failures.
+- For website build, runtime, or performance issues, use the `website-debugging` skill to establish the cause before changing code.
 - `pages/eksempler/**` and `pages/templates/**` are public code snippets. Use the `website-example` skill. ESLint rules `aksel-local/{import-check,comment-check,args-check}` enforce their shape.
 - Reuse `@/` utils and components nearby before adding abstractions.
 - Examples/templates: `corepack yarn storybook:aksel` (no secrets). `corepack yarn dev` only for app behavior; it needs `SANITY_READ_NO_DRAFTS` and `NPM_AUTH_TOKEN`.

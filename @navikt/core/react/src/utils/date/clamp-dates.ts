@@ -1,4 +1,7 @@
-import { isAfter, isBefore, startOfMonth, startOfYear } from "date-fns";
+import { isAfter } from "date-fns/isAfter";
+import { isBefore } from "date-fns/isBefore";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
 
 /**
  * Makes sure the month is within the min and max daterange to avoid showing disabled months

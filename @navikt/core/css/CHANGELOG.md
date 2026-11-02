@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 8.21.0
+
+### Minor Changes
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+### Patch Changes
+
+- DataTable: Constrain details panel width to the visible table area. ([#5433](https://github.com/navikt/aksel/pull/5433))
+
 ## 8.20.1
 
 ### Patch Changes

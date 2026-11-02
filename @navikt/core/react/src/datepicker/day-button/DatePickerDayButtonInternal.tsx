@@ -1,4 +1,5 @@
-import { type Locale, format } from "date-fns";
+import type { Locale } from "date-fns";
+import { format } from "date-fns/format";
 import React, { useEffect, useRef } from "react";
 import type { CalendarDay, Modifiers } from "react-day-picker";
 import { cl } from "../../utils/helpers";

@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 8.21.0
+
+### Minor Changes
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+### Patch Changes
+
+- DatePicker: Preserve keyboard focus when controlled month changes replace the focused day. ([#5408](https://github.com/navikt/aksel/pull/5408))
+
+- Dialog, Lookup: Avoid setting aria-hidden on elements with role=alert/status when open ([#5466](https://github.com/navikt/aksel/pull/5466))
+
+- Updated dependencies [[`f87f195`](https://github.com/navikt/aksel/commit/f87f1951fef77430c433d3e36892f18fc1387eb3)]:
+  - @navikt/aksel-icons@8.21.0
+  - @navikt/ds-tokens@8.21.0
+
 ## 8.20.1
 
 ### Patch Changes

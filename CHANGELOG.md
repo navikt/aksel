@@ -1,5 +1,25 @@
 # Changelog
 
+## 8.21.0
+
+### @navikt/aksel-icons
+
+- Icons: Add 46 icons for text editing, tables, keyboard input, and filtering. ([#5458](https://github.com/navikt/aksel/pull/5458))
+
+### @navikt/ds-css
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+* DataTable: Constrain details panel width to the visible table area. ([#5433](https://github.com/navikt/aksel/pull/5433))
+
+### @navikt/ds-react
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+* DatePicker: Preserve keyboard focus when controlled month changes replace the focused day. ([#5408](https://github.com/navikt/aksel/pull/5408))
+
+* Dialog, Lookup: Avoid setting aria-hidden on elements with role=alert/status when open ([#5466](https://github.com/navikt/aksel/pull/5466))
+
 ## 8.20.1
 
 ### @navikt/ds-css

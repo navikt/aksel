@@ -157,7 +157,7 @@ export const Name = () => (
     onSubmit={(event) => {
       event.preventDefault();
       const formData = new FormData(event.target);
-      const land = formData.getAll("land");
+      const land = formData.get("land");
       console.log(land);
     }}
   >
@@ -168,7 +168,7 @@ export const Name = () => (
 );
 
 export const Controlled = () => {
-  const [value, setValue] = useState<MyOption["value"] | undefined>("opt-1");
+  const [value, setValue] = useState<MyOption["value"] | null>("opt-1");
 
   return (
     <VStack gap="space-8" minWidth="250px">
@@ -180,7 +180,7 @@ export const Controlled = () => {
       />
       Selected: {value}
       <div>
-        <button type="button" onClick={() => setValue(undefined)}>
+        <button type="button" onClick={() => setValue(null)}>
           Clear
         </button>
       </div>

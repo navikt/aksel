@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react-vite";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import { ComboboxSingle } from "./Combobox";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
@@ -60,7 +60,7 @@ const groupedOptions = [
 function BaseCombobox<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
 >(props: Partial<ComboboxSingle.Props<T>>) {
-  const [value, setValue] = useState<string | undefined>("option-1");
+  const [value, setValue] = useState<string | null>("opt-1");
 
   return (
     <ComboboxSingle
@@ -81,6 +81,27 @@ AccessibleNameAndDesc.play = async ({ canvasElement }) => {
   await expect(trigger).toHaveAccessibleDescription("Landet hvor du er født.");
 };
 
+export const FocusWithRef = () => {
+  const ref = useRef<HTMLButtonElement>(null);
+  return (
+    <div>
+      <button type="button" onClick={() => ref.current?.focus()}>
+        Fokuser combobox
+      </button>
+      <ComboboxSingle ref={ref} options={countries} label="Velg land" />
+    </div>
+  );
+};
+FocusWithRef.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const combobox = await canvas.findByRole("combobox", { name: "Velg land" });
+  await expect(combobox).not.toHaveFocus();
+  await userEvent.click(
+    canvas.getByRole("button", { name: "Fokuser combobox" }),
+  );
+  await expect(combobox).toHaveFocus();
+};
+
 let optionMemoTestRenderCnt = 0;
 const optionMemoTestRenderFn = (
   optOrGroup: (typeof groupedOptions)[number],
@@ -93,7 +114,7 @@ const optionMemoTestRenderFn = (
   return optOrGroup.label;
 };
 export const OptionMemoization = () => {
-  const [value, setValue] = useState(["option-1"]);
+  const [value, setValue] = useState(["opt-1"]);
 
   return (
     <div style={{ minHeight: "450px" }}>

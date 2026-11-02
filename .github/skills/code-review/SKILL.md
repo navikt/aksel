@@ -14,11 +14,26 @@ argument-hint: "PR number, branch or files to review"
 
 ## Process
 
-1. **Scope**: get the diff (`gh pr diff <n>` or `git diff origin/main...HEAD`) and the PR description. Note the stated goal.
+1. **Scope**: identify what the user wants reviewed.
+   - PR: get `gh pr diff <n>` and the PR description. Note the stated goal.
+   - Branch: compare against its stated base (for example, `git diff origin/main...HEAD`).
+   - Current worktree or "my changes": inspect staged, unstaged, and relevant untracked files. Do not substitute the committed branch diff for worktree changes.
+
+   ```sh
+   git status --short
+   git diff
+   git diff --cached
+   git ls-files --others --exclude-standard
+   ```
+
+   Read in-scope untracked files too. If the requested review target is unclear, ask before choosing a scope.
+
 2. **Read**: for every changed file, read the surrounding code, component `index.ts`, stories, tests and the matching `.github/instructions/*.instructions.md`. Never review from the diff alone.
 3. **Check**: run the smallest validation that covers the change (`aksel-local-validation` skill). Tool output replaces style comments.
 4. **Analyze** against the checklist below.
 5. **Report** in the output format.
+
+For changes to component state, callbacks, async behavior, composition, semantics, keyboard or focus behavior, use the [component-contract skill](../component-contract/SKILL.md) to trace the affected contract and identify observable evidence.
 
 ## Priorities
 
@@ -48,6 +63,7 @@ Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. 
 - Full keyboard support, logical focus order, focus returned after close, visible `:focus-visible`.
 - Works in `forced-colors`, dark theme and at 200% zoom. Motion relies on the global `prefers-reduced-motion` handling.
 - User-facing strings use `useI18n`, with keys in `nb`, `nn` and `en` under `@navikt/core/react/src/utils/i18n/locales/`.
+- Review only the interaction pattern in scope; do not apply modal focus or dismissal rules to unrelated popup patterns. Check changed accessible names and relationships against their rendered targets.
 
 ### Wiring (🔴 for new public components)
 
@@ -72,7 +88,14 @@ Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. 
 - Complex logic with a higher risk of breaking has a story `play` test or Vitest test proving the user-facing contract. Queries use role and accessible name.
 - Tests are deterministic: no dependence on timezone, current time or randomness.
 - Edge cases that are easy to miss: controlled vs. uncontrolled, `ref`/`className`/`...rest` forwarding, `as` prop, empty and very long content.
+- For behavior changes, check that tests distinguish the intended outcome from a no-op and cover relevant intermediate states. When tests are consolidated or removed, verify meaningful old scenarios have replacement coverage.
 - Website examples (`aksel.nav.no/website/pages/eksempler/`) are updated when usage changes.
+
+### Component contracts and public consumer impact
+
+- `COMP-01` **Contract evidence (🟡; 🔴 if behavior is broken):** For changed state, callbacks, async behavior, composition, keyboard or focus behavior, use the [component-contract skill](../component-contract/SKILL.md). Check that a nearby story or test demonstrates the changed user-visible outcome; if coverage is missing, request it.
+- `COMP-02` **Public impact (🟡; 🔴 if a consumer contract regresses):** For changed hooks, contexts, CSS or tokens, trace affected exported components and inspect a representative consumer-visible contract. Do not stop at the implementation diff; request a public-boundary example or test when impact is not demonstrated.
+- `COMP-03` **Generated API metadata (🟡; 🔴 if published API is wrong):** For public prop or JSDoc changes, check the relevant generated props metadata as well as exports and tests; request the documented metadata update or correction when stale.
 
 ### Release (🟡, 🔴 if breaking)
 
@@ -91,6 +114,13 @@ Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. 
 ### Summary
 
 What the change does, overall verdict and key risks (1–3 sentences).
+
+### Evidence and replay
+
+- **Inspected:** relevant files, stories and behavior states reviewed.
+- **Checks run:** exact command and result, or `Not run` with reason.
+- **Not inspected:** relevant surfaces or behavior not verified.
+- **Reviewer replay:** starting story/URL, action and expected result, or `Not needed`. Label unexecuted steps as unverified.
 
 ### Findings
 

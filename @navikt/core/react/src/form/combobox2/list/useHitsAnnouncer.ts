@@ -18,9 +18,9 @@ function getNumberOfOptions<T extends ComboboxOptionData>(
   }, 0);
 }
 
-function useHitsAnnouncer(deferredFilterString: string, filterString: string) {
+function useHitsAnnouncer(deferredFilterString: string) {
   const translate = useI18n("Combobox2");
-  const shouldAnnounceRef = useRef(false);
+  const oldFilterStringRef = useRef(deferredFilterString);
   const announce = useAnnounce();
 
   const announceHits = useMemo(() => {
@@ -50,20 +50,20 @@ function useHitsAnnouncer(deferredFilterString: string, filterString: string) {
       ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>
     )[],
   ) => {
-    // The options are filtered based on deferredFilterString, so we need to wait for it to settle.
-    if (deferredFilterString !== filterString) {
-      shouldAnnounceRef.current = true;
-    } else if (shouldAnnounceRef.current) {
-      if (filteredOptions.length === 0) {
-        announceHits.clear();
-        announceNoHits();
-      } else {
-        const hits = getNumberOfOptions(filteredOptions);
-        announceNoHits.clear();
-        announceHits(hits);
-      }
-      shouldAnnounceRef.current = false;
+    // Announce number of hits when filter string changes.
+    // We can't do this in a useEffect b.c. of how ComboboxList is structured. Consider refactoring.
+    if (deferredFilterString === oldFilterStringRef.current) {
+      return;
     }
+    if (filteredOptions.length === 0) {
+      announceHits.clear();
+      announceNoHits();
+    } else {
+      const hits = getNumberOfOptions(filteredOptions);
+      announceNoHits.clear();
+      announceHits(hits);
+    }
+    oldFilterStringRef.current = deferredFilterString;
   };
 }
 

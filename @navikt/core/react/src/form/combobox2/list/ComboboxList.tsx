@@ -55,7 +55,7 @@ function ComboboxListContent<
     useComboboxRootContext();
   const memoizedOnToggleOption = useEventCallback(onToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
-  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString, filterString);
+  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString);
   const translate = useI18n("Combobox2");
 
   const localOnToggleOption = useCallback(
@@ -80,6 +80,7 @@ function ComboboxListContent<
   maybeAnnouceHits(filteredOptions);
 
   if (filteredOptions.length === 0) {
+    // TODO: Consider moving outside of role=listbox
     return (
       <div className="aksel-combobox2__no-results">{translate("noHits")}</div>
     );
