@@ -44,17 +44,24 @@ export const CssIcons: Story = {
     <div
       style={{ display: "flex", gap: "1rem", color: "var(--ax-text-accent)" }}
     >
+      <style>
+        {`.css-icon {
+          display: inline-block;
+          width: 3rem;
+          height: 3rem;
+          background-color: currentColor;
+          print-color-adjust: exact;
+        }
+        @media (forced-colors: active) {
+          .css-icon { background-color: CanvasText; }
+        }`}
+      </style>
       {cssIconVariables.map((variable) => (
         <span
           key={variable}
           title={variable}
-          style={{
-            display: "inline-block",
-            width: "3rem",
-            height: "3rem",
-            backgroundColor: "currentColor",
-            mask: `var(${variable}) center / contain no-repeat`,
-          }}
+          className="css-icon"
+          style={{ mask: `var(${variable}) center / contain no-repeat` }}
         />
       ))}
     </div>
