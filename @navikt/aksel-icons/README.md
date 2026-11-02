@@ -59,6 +59,29 @@ declare module "*.svg" {
 }
 ```
 
+### CSS custom properties
+
+All icons are available as CSS custom properties behind `/css`, one file per icon. Each file declares a `--aksel-icon-<kebab-case-name>` variable on `:root`, containing the icon as an SVG data URI.
+
+```css
+@import "@navikt/aksel-icons/css/MagnifyingGlass.css";
+
+.search-button::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: currentColor;
+  mask: var(--aksel-icon-magnifying-glass) center / contain no-repeat;
+}
+```
+
+To get every icon, import `@navikt/aksel-icons/css/index.css`. This file contains all ~1000 icons (≈700 kB, ≈135 kB gzipped), so prefer importing only the icons you use.
+
+- Icons added with CSS are decorative only. Give the parent element an accessible name, e.g. with visible text or `aria-label`.
+- In forced colors mode (e.g. Windows High Contrast), `background-color` is overridden. Set `forced-color-adjust: none` or use `background-color: CanvasText` inside `@media (forced-colors: active)`.
+- If you use a Content Security Policy, `img-src` must allow `data:`.
+
 ## [Learn more](https://aksel.nav.no/ikoner)
 
 ## License
