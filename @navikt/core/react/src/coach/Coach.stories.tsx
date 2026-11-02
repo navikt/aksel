@@ -66,6 +66,37 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
   );
 };
 
+export const MissingAnchor: StoryFn<typeof Coach> = () => {
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const missingRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Coach
+      steps={[
+        {
+          id: "step-1",
+          type: "anchor",
+          anchorRef,
+          title: "Anchor",
+          description: "This step has a valid anchor.",
+        },
+        {
+          id: "step-2",
+          type: "anchor",
+          anchorRef: missingRef,
+          placement: "bottom-start",
+          title: "Missing anchor",
+          description: "This step has a missing anchor.",
+        },
+      ]}
+    >
+      <Coach.Mark>
+        <Button ref={anchorRef}>Create</Button>
+      </Coach.Mark>
+    </Coach>
+  );
+};
+
 export const CoachDialog: StoryFn<typeof Coach> = () => {
   return (
     <HStack gap="space-16">

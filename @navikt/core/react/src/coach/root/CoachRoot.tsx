@@ -164,6 +164,15 @@ const CoachRoot = (props: CoachProps) => {
     );
   }, [showTour, activeStepIndex, steps.length, currentStep, stepElement]);
 
+  useEffect(() => {
+    // Warn if the current step is an anchor type but its anchor element is not found
+    if (showTour && currentStep?.type === "anchor" && !anchorRef?.current) {
+      consoleWarning(
+        `Coach step "${currentStep.id}" cannot find its anchor. Attach anchorRef to a mounted element before showing this step.`,
+      );
+    }
+  }, [showTour, currentStep?.type, currentStep?.id, anchorRef]);
+
   useClientLayoutEffect(() => {
     // Reset uncontrolled step when the tour is hidden
     if (!showTour) {
@@ -276,13 +285,9 @@ const CoachRoot = (props: CoachProps) => {
   // Default content for a step
   const defaultStepContent = (
     <CoachStep>
-      {currentStep.allowToEndTour && (
-        <HStack
-          width="full"
-          justify="end"
-          marginBlock="space-2"
-          className="aksel-coach__top-close-trigger"
-        >
+      <HStack width="full" className="aksel-coach__top-close-trigger">
+        <CoachProgress />
+        {currentStep.allowToEndTour && (
           <CoachCloseTrigger data-coach-top-close-trigger>
             <Button
               size="small"
@@ -291,10 +296,9 @@ const CoachRoot = (props: CoachProps) => {
               data-color="neutral"
             />
           </CoachCloseTrigger>
-        </HStack>
-      )}
+        )}
+      </HStack>
       {currentStep?.image && <CoachImage>{currentStep.image}</CoachImage>}
-      <CoachProgress />
       {currentStep?.title && <CoachTitle>{currentStep.title}</CoachTitle>}
       {currentStep?.description && (
         <CoachDescription>{currentStep.description}</CoachDescription>
@@ -400,11 +404,6 @@ const CoachRoot = (props: CoachProps) => {
       );
     }
 
-    if (currentStep?.type === "anchor" && !anchorEl) {
-      consoleWarning(`Anchor element for step "${currentStep.id}" not found.`);
-    }
-
-    endTour();
     return null;
   };
 

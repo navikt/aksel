@@ -33,6 +33,49 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
+describe("Coach anchor warnings", () => {
+  test("warns when an active anchor step has no mounted anchor", () => {
+    render(
+      <Coach
+        type="anchor"
+        id="missing-anchor"
+        anchorRef={React.createRef<HTMLButtonElement>()}
+        showTour
+      />,
+    );
+
+    expect(consoleWarning).toHaveBeenCalledWith(
+      'Coach step "missing-anchor" cannot find its anchor. Attach anchorRef to a mounted element before showing this step.',
+    );
+  });
+
+  test("does not warn about a missing anchor while the tour is hidden", () => {
+    render(
+      <Coach
+        type="anchor"
+        anchorRef={React.createRef<HTMLButtonElement>()}
+        showTour={false}
+      />,
+    );
+
+    expect(consoleWarning).not.toHaveBeenCalled();
+  });
+
+  test("waits for anchor refs to attach during the commit", () => {
+    const anchorRef = React.createRef<HTMLButtonElement>();
+    render(
+      <>
+        <Coach type="anchor" anchorRef={anchorRef} showTour />
+        <button ref={anchorRef} type="button">
+          Target
+        </button>
+      </>,
+    );
+
+    expect(consoleWarning).not.toHaveBeenCalled();
+  });
+});
+
 describe("Coach.Mark", () => {
   test("opens the tour without triggering its anchor click handler", async () => {
     const user = userEvent.setup();
