@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Bleed } from "../../primitives/bleed";
 import { cl } from "../../utils/helpers";
+import { useCoachContext } from "../root/Coach.context";
 
 type ImageAspectRatio = "1/1" | "16/9" | "16/10" | "4/3" | (string & {});
 
@@ -24,8 +25,12 @@ interface CoachImageProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 const CoachImage = forwardRef<HTMLDivElement, CoachImageProps>(
   ({ className, children, style, aspectRatio, ...restProps }, forwardedRef) => {
+    const { currentStepSize } = useCoachContext();
     return (
-      <Bleed asChild marginInline="space-16">
+      <Bleed
+        asChild
+        marginInline={currentStepSize === "small" ? "space-16" : "space-20"}
+      >
         <div
           ref={forwardedRef}
           className={cl("aksel-coach__image-container", className)}

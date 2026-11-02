@@ -10,30 +10,14 @@
     --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-24));
   }
 
+  &[data-coach-step-size="small"] {
+    padding-block: var(--ax-space-12);
+    padding-inline: var(--ax-space-16);
+  }
+
   max-width: var(--__axc-coach__content-width);
   width: var(--__axc-coach__content-width);
   overflow: auto;
-}
-
-.aksel-coach__dialog-body,
-.aksel-coach__popover_content {
-  --__axc-coach__content-padding-block: var(--ax-space-24);
-
-  &[data-coach-step-size="small"] {
-    --__axc-coach__content-padding-block: var(--ax-space-20);
-  }
-
-  padding-block: var(--__axc-coach__content-padding-block);
-  padding-inline: var(--ax-space-16);
-
-  &:has(.aksel-coach__step > :first-child:is(.aksel-coach__image-container)),
-  &:has(.aksel-coach__step > :first-child:is(.aksel-coach__top-close-trigger)) {
-    padding-block-start: var(--ax-space-0);
-  }
-}
-
-.aksel-coach__top-close-trigger {
-  margin-inline-end: calc(-1 * (var(--ax-space-12) + var(--ax-space-2)));
 }
 
 .aksel-coach__footer {
