@@ -796,7 +796,7 @@ html[data-dragging-cursor="true"] *::after {
   gap: var(--ax-space-4);
 }
 
-.aksel-data-grid__pagnation-navigation-button {
+.aksel-data-grid__pagination-navigation-button {
   /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
   &[aria-disabled="true"] {
     cursor: default;

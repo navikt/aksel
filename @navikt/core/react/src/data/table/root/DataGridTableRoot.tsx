@@ -6,7 +6,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
+import {
+  useDataGridContext,
+  useDataGridRootPaginationContext,
+} from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
@@ -121,7 +124,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
    *
-   * @default { variant: "skeleton", rows: 5 }
+   * @default variant skeleton. Default rows: 5, "pageSize" from pagination if available.
    */
   loadingContent?: DataTableLoadingConfig;
   /**
@@ -164,11 +167,7 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent = {
-        variant: "skeleton",
-        rows: 5,
-        label: "Laster innhold",
-      }, // TODO translate label
+      loadingContent: _loadingContent, // TODO translate label
       detailsPanel,
       subRows,
       sorting,
@@ -182,6 +181,13 @@ const DataGridTableInternal = forwardRef<
     const { columnDefinitions, getRowId, selection, isLoading, tableSettings } =
       useDataGridContext();
     const items = useTablePagination();
+    const paginationContext = useDataGridRootPaginationContext(false);
+
+    const loadingContent = _loadingContent ?? {
+      variant: "skeleton",
+      rows: paginationContext?.pageSize ?? 5,
+      label: "Laster innhold",
+    };
 
     const sortingState = useTableSort(sorting);
 

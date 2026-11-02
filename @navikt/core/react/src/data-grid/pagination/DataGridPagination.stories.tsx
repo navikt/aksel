@@ -70,10 +70,7 @@ export const ClientSideLoading: Story = {
 
           pagination={{ defaultPage: 2 }}
         >
-          <DataGrid.Table
-            loadingContent={{ variant: "skeleton", rows: 10 }}
-            bottomContent={<DataGrid.Pagination />}
-          />
+          <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
         </DataGrid>
       </>
     );

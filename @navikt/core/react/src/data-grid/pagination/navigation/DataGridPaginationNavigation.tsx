@@ -48,7 +48,7 @@ const DataGridPaginationNavigation = forwardRef<
     >
       <Button
         type="button"
-        className="aksel-data-grid__pagnation-navigation-button"
+        className="aksel-data-grid__pagination-navigation-button"
         size="small"
         variant="tertiary"
         data-color="neutral"
@@ -63,7 +63,7 @@ const DataGridPaginationNavigation = forwardRef<
       />
       <Button
         type="button"
-        className="aksel-data-grid__pagnation-navigation-button"
+        className="aksel-data-grid__pagination-navigation-button"
         size="small"
         variant="tertiary"
         data-color="neutral"
@@ -94,7 +94,7 @@ const DataGridPaginationNavigation = forwardRef<
       </span>
       <Button
         type="button"
-        className="aksel-data-grid__pagnation-navigation-button"
+        className="aksel-data-grid__pagination-navigation-button"
         size="small"
         variant="tertiary"
         data-color="neutral"
@@ -110,7 +110,7 @@ const DataGridPaginationNavigation = forwardRef<
       {pageCount !== undefined && (
         <Button
           type="button"
-          className="aksel-data-grid__pagnation-navigation-button"
+          className="aksel-data-grid__pagination-navigation-button"
           size="small"
           variant="tertiary"
           data-color="neutral"
