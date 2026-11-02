@@ -37,7 +37,7 @@ yarn build:next
 yarn serve:next
 ```
 
-The standard build skips RSS generation and Playroom compilation. To build the complete deployment output locally, run:
+`yarn build:next` genererer ikke RSS-feeden og bygger ikke Playroom. Kjør dette for å bygge alt:
 
 ```bash
 yarn workspace website update:rss
