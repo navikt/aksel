@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -24,6 +24,15 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
         ? translate("selectedCount", { count: labels.length })
         : labels[0]);
 
+    // Workaround for issue where VO on Safari announces the old label when focusing this button right after selecting a new option
+    const [ariaLabel, setAriaLabel] = useState<string>();
+    useEffect(() => {
+      if (label) {
+        setAriaLabel(label);
+        setTimeout(() => setAriaLabel(undefined), 100);
+      }
+    }, [label]);
+
     return (
       <div className="aksel-combobox2__field-container">
         <button
@@ -35,8 +44,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
-          // TODO: This results in other problems. Find another fix!
-          //aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
+          aria-label={ariaLabel}
           {...rest}
         >
           {label}
