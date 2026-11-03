@@ -247,6 +247,45 @@ export const DropdownCaptionView: Story = {
 };
 
 /**
+ * Validate that the month grid keeps a tab stop after a month is focused with the mouse
+ * and focus then moves to an outside element.
+ */
+export const TabStopAfterMouseFocus: Story = {
+  // Overrides the file-level skip so this regression test runs in CI
+  tags: ["play-fn", "!skip-test"],
+  render: () => (
+    <>
+      <MonthPicker.Standalone year={new Date("2025")} />
+      <button type="button">Outside</button>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const monthButtons = () =>
+      canvas
+        .getAllByRole("button")
+        .filter((b) => b.classList.contains("aksel-date__month-button"));
+
+    expect(monthButtons().filter((b) => b.tabIndex === 0)).toHaveLength(1);
+
+    const febButton = canvas.getByRole("button", {
+      name: format(new Date("Feb 01 2025"), "LLLL", { locale: nb }),
+    });
+    await userEvent.click(febButton);
+    expect(febButton).toHaveFocus();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Outside" }));
+
+    const tabStops = monthButtons().filter((b) => b.tabIndex === 0);
+    expect(tabStops).toHaveLength(1);
+    expect(tabStops[0]).toBe(febButton);
+
+    await userEvent.tab({ shift: true });
+    expect(febButton).toHaveFocus();
+  },
+};
+
+/**
  * Validate that the monthpicker handles `dropdownCaption` prop correctly
  */
 export const MonthSelect: StoryObj<{

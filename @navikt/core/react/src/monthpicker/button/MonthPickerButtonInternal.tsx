@@ -106,7 +106,7 @@ const MonthPickerButtonInternal = ({
         setTabRoot(next);
       }}
       onFocus={() => {
-        setTabRoot(focus);
+        setTabRoot(month);
       }}
     >
       <div className="rdp-day__inner">
