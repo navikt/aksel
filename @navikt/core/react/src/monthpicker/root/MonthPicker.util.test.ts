@@ -1,4 +1,4 @@
-import { isSameMonth } from "date-fns";
+import { isSameMonth } from "date-fns/isSameMonth";
 import { describe, expect, test, vi } from "vitest";
 import { nextEnabled } from "./MonthPicker.util";
 
