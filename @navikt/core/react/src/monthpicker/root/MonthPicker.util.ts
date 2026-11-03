@@ -170,12 +170,11 @@ const searchEnabledMonth = (
   const boundYear =
     direction === 1 ? toDate?.getFullYear() : fromDate?.getFullYear();
   const horizonYear = startYear + direction * MAX_SEARCH_YEARS;
-  const lastYear =
-    boundYear === undefined || Number.isNaN(boundYear)
-      ? horizonYear
-      : direction === 1
-        ? Math.min(boundYear, horizonYear)
-        : Math.max(boundYear, horizonYear);
+  const lastYear = !boundYear
+    ? horizonYear
+    : direction === 1
+      ? Math.min(boundYear, horizonYear)
+      : Math.max(boundYear, horizonYear);
 
   let year = startYear;
   let i = currentIndex;
