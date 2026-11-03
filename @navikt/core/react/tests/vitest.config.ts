@@ -6,6 +6,7 @@ export default defineConfig({
     globals: true,
     setupFiles: "./tests/setup.ts",
     environment: "jsdom",
+    pool: "vmThreads",
     typecheck: {
       enabled: true,
     },
