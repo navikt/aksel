@@ -343,18 +343,22 @@ export const EnterNotSubmittingForm: StoryObj<{
   args: {
     onSubmit: fn(),
   },
-  render: ({ onSubmit }) => {
-    return (
-      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          isMultiSelect
-          allowNewValues
-        />
-      </form>
-    );
-  },
+  render: ({ onSubmit }) => (
+    <form
+      method="get"
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit(event);
+      }}
+    >
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        isMultiSelect
+        allowNewValues
+      />
+    </form>
+  ),
   play: async ({ canvasElement, args }) => {
     args.onSubmit.mockClear();
     const canvas = within(canvasElement);
