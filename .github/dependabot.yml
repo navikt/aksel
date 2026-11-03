@@ -19,7 +19,6 @@ updates:
         applies-to: version-updates
         patterns:
           - "@next/eslint-plugin-next"
-          - "@next/bundle-analyzer"
           - "next"
       sanity:
         applies-to: version-updates
@@ -53,7 +52,6 @@ updates:
         applies-to: security-updates
         patterns:
           - "@next/eslint-plugin-next"
-          - "@next/bundle-analyzer"
           - "next"
       sanity-security:
         applies-to: security-updates
