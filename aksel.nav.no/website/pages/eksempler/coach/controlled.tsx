@@ -12,7 +12,6 @@ const Example = () => {
         Opprett oppgave
       </Button>
       <Coach
-        disableTour={true}
         showTour={showTour}
         onShowTourChange={setShowTour}
         steps={[
