@@ -4,7 +4,6 @@ import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { Popover } from "../../popover";
 import { Portal } from "../../portal";
-import { HStack } from "../../primitives/stack";
 import { useClientLayoutEffect } from "../../utils-external";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
@@ -275,9 +274,9 @@ const CoachRoot = (props: CoachProps) => {
   // Default content for a step
   const defaultStepContent = (
     <CoachStep>
-      <HStack width="full" className="aksel-coach__top-close-trigger">
+      <div className="aksel-coach__top-bar">
         <CoachProgress />
-        {currentStep.allowToEndTour && (
+        {currentStep?.allowToEndTour && (
           <CoachCloseTrigger data-coach-top-close-trigger>
             <Button
               size="small"
@@ -287,7 +286,7 @@ const CoachRoot = (props: CoachProps) => {
             />
           </CoachCloseTrigger>
         )}
-      </HStack>
+      </div>
       {currentStep?.image && <CoachImage>{currentStep.image}</CoachImage>}
       {currentStep?.title && <CoachTitle>{currentStep.title}</CoachTitle>}
       {currentStep?.description && (
