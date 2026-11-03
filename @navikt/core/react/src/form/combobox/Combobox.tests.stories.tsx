@@ -345,7 +345,6 @@ export const EnterNotSubmittingForm: StoryObj<{
   },
   render: ({ onSubmit }) => (
     <form
-      method="get"
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit(event);
