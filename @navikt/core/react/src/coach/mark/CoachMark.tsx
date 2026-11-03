@@ -84,10 +84,11 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
 
     const Mark = (
       <button
+        type="button"
         {...restProps}
         ref={forwardedRef}
         data-color={color}
-        aria-label={ariaLabel}
+        aria-label={ariaLabel ?? "Åpne veiledning"}
         aria-labelledby={ariaLabelledby}
         aria-hidden={ariaHidden}
         aria-haspopup="dialog"
