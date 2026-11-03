@@ -162,38 +162,41 @@ const searchEnabledMonth = (
   fromDate?: Date,
   toDate?: Date,
 ): { index: number; year: number } | undefined => {
-  const startYear = yearState.getFullYear();
-  if (Number.isNaN(startYear)) {
+  const currentYear = yearState.getFullYear();
+  if (Number.isNaN(currentYear)) {
     return;
   }
 
   const boundYear =
     direction === 1 ? toDate?.getFullYear() : fromDate?.getFullYear();
-  const horizonYear = startYear + direction * MAX_SEARCH_YEARS;
+  const horizonYear = currentYear + direction * MAX_SEARCH_YEARS;
   const lastYear = !boundYear
     ? horizonYear
     : direction === 1
       ? Math.min(boundYear, horizonYear)
       : Math.max(boundYear, horizonYear);
 
-  let year = startYear;
-  let i = currentIndex;
+  let nextYear = currentYear;
+  let monthIndex = currentIndex;
   while (true) {
-    i += direction;
-    if (i < 0 || i > 11) {
-      if (year === lastYear || (year - lastYear) * direction > 0) {
+    monthIndex += direction;
+    if (monthIndex < 0 || monthIndex > 11) {
+      if (nextYear === lastYear || (nextYear - lastYear) * direction > 0) {
         return;
       }
-      year += direction;
-      i = direction === 1 ? 0 : 11;
+      nextYear += direction;
+      monthIndex = direction === 1 ? 0 : 11;
     }
 
-    const isEnabled = !isMatch(setYear(months[i], year), disabled);
-    if (isEnabled && (!rowCheck || getRow(i) !== getRow(currentIndex))) {
-      if (year !== startYear) {
-        setYearState(setYear(yearState, year));
+    const isEnabled = !isMatch(setYear(months[monthIndex], nextYear), disabled);
+    if (
+      isEnabled &&
+      (!rowCheck || getRow(monthIndex) !== getRow(currentIndex))
+    ) {
+      if (nextYear !== currentYear) {
+        setYearState(setYear(yearState, nextYear));
       }
-      return { index: i, year };
+      return { index: monthIndex, year: nextYear };
     }
   }
 };

@@ -70,7 +70,7 @@ describe("nextEnabled", () => {
     },
   );
 
-  test("skips disabled runs and moves to the next enabled year", () => {
+  test("skips disabled months/years and moves to the next enabled year", () => {
     const target = new Date(2027, 2, 1);
     const { result, setYearState } = search(
       "ArrowRight",
