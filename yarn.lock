@@ -20818,12 +20818,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-responsive-masonry@npm:2.7.2":
-  version: 2.7.2
-  resolution: "react-responsive-masonry@npm:2.7.2"
+"react-responsive-masonry@npm:2.9.0":
+  version: 2.9.0
+  resolution: "react-responsive-masonry@npm:2.9.0"
   dependencies:
     prop-types: "npm:^15.7.2"
-  checksum: 10/480ddee29adf0c400246dea0990f4f39e8a1d6c66e21f0055d59451ca4cb68711bba1df0e2e75a1a2419cbced961a1b00c0228658b2f86fb6547ed2ec5891c01
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/8256ed341e0bf13313155f3d89897f0a02f9824a188a96709c02610d5cb03a6d8dbfa9794816ba88fdbc7fa2647f51d070f722dc20389ab442f925c0ed961328
   languageName: node
   linkType: hard
 
@@ -25147,7 +25149,7 @@ __metadata:
     react-dom: "npm:19.3.1"
     react-hook-form: "npm:^7.90.0"
     react-markdown: "npm:^9.0.1"
-    react-responsive-masonry: "npm:2.7.2"
+    react-responsive-masonry: "npm:2.9.0"
     react-snowfall: "npm:^2.4.0"
     remark-gfm: "npm:^4.0.0"
     rss: "npm:^1.2.2"
