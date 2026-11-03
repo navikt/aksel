@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   ChevronLeftFirstIcon,
   ChevronLeftIcon,
@@ -6,6 +6,7 @@ import {
   ChevronRightLastIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
+import { useEventListener } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
@@ -15,9 +16,10 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
 }
 
 /**
- * Provides first, previous, next, and last page controls.
+ * Provides previous and next page controls. Hold Shift to jump to the first page,
+ * or to the last page when the total page count is known.
  *
- * @see 🏷️ {@link DataGridPagin dationNavigationProps}
+ * @see 🏷️ {@link DataGridPaginationNavigationProps}
  *
  * @example
  * ```jsx
@@ -39,6 +41,18 @@ const DataGridPaginationNavigation = forwardRef<
     );
   const translate = useI18n("DataGrid");
 
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
+
+  const syncShift = (event: KeyboardEvent) => setIsShiftPressed(event.shiftKey);
+  useEventListener("keydown", syncShift);
+  useEventListener("keyup", syncShift);
+  /* keyup never fires if focus leaves the window while Shift is held */
+  useEventListener("blur", () => setIsShiftPressed(false));
+
+  const canGoLast = pageCount !== undefined;
+  const showFirst = isShiftPressed;
+  const showLast = isShiftPressed && canGoLast;
+
   return (
     <nav
       {...rest}
@@ -52,28 +66,23 @@ const DataGridPaginationNavigation = forwardRef<
         size="small"
         variant="tertiary"
         data-color="neutral"
-        icon={<ChevronLeftFirstIcon aria-hidden />}
-        aria-label={translate("Pagination.first")}
+        icon={
+          showFirst ? (
+            <ChevronLeftFirstIcon aria-hidden />
+          ) : (
+            <ChevronLeftIcon aria-hidden />
+          )
+        }
+        aria-label={translate(
+          showFirst ? "Pagination.first" : "Pagination.previous",
+        )}
         aria-disabled={isLoading || !canPrevious}
-        onClick={() => {
-          if (!isLoading && canPrevious) {
-            setPage(0);
+        onClick={(event) => {
+          /* canPrevious (page > 0) is also the exact guard for jumping to the first page */
+          if (isLoading || !canPrevious) {
+            return;
           }
-        }}
-      />
-      <Button
-        type="button"
-        className="aksel-data-grid__pagination-navigation-button"
-        size="small"
-        variant="tertiary"
-        data-color="neutral"
-        icon={<ChevronLeftIcon aria-hidden />}
-        aria-label={translate("Pagination.previous")}
-        aria-disabled={isLoading || !canPrevious}
-        onClick={() => {
-          if (!isLoading && canPrevious) {
-            setPage(page - 1);
-          }
+          setPage(event.shiftKey ? 0 : page - 1);
         }}
       />
       <span
@@ -98,32 +107,23 @@ const DataGridPaginationNavigation = forwardRef<
         size="small"
         variant="tertiary"
         data-color="neutral"
-        icon={<ChevronRightIcon aria-hidden />}
-        aria-label={translate("Pagination.next")}
+        icon={
+          showLast ? (
+            <ChevronRightLastIcon aria-hidden />
+          ) : (
+            <ChevronRightIcon aria-hidden />
+          )
+        }
+        aria-label={translate(showLast ? "Pagination.last" : "Pagination.next")}
         aria-disabled={isLoading || !canNext}
-        onClick={() => {
-          if (!isLoading && canNext) {
-            setPage(page + 1);
+        onClick={(event) => {
+          /* With a known pageCount, canNext (page < pageCount - 1) is also the exact guard for jumping to the last page */
+          if (isLoading || !canNext) {
+            return;
           }
+          setPage(event.shiftKey && canGoLast ? pageCount - 1 : page + 1);
         }}
       />
-      {pageCount !== undefined && (
-        <Button
-          type="button"
-          className="aksel-data-grid__pagination-navigation-button"
-          size="small"
-          variant="tertiary"
-          data-color="neutral"
-          icon={<ChevronRightLastIcon aria-hidden />}
-          aria-label={translate("Pagination.last")}
-          aria-disabled={isLoading || !canNext}
-          onClick={() => {
-            if (!isLoading && canNext) {
-              setPage(pageCount - 1);
-            }
-          }}
-        />
-      )}
     </nav>
   );
 });

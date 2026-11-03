@@ -293,6 +293,68 @@ function ServerResetGrid() {
   );
 }
 
+export const ShiftJumpsToFirstAndLastPage: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={manyRows}
+      getRowId={getRowId}
+      pagination={{ defaultPageSize: 20, pageSizeOptions: [20] }}
+    >
+      <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const user = userEvent.setup();
+
+    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    expect(canvas.getByRole("button", { name: "Neste side" })).toBeVisible();
+
+    await user.keyboard("{Shift>}");
+    await user.click(canvas.getByRole("button", { name: "Siste side" }));
+    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+    await user.click(canvas.getByRole("button", { name: "Første side" }));
+    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    await user.keyboard("{/Shift}");
+
+    expect(canvas.getByRole("button", { name: "Forrige side" })).toBeVisible();
+    await user.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+  },
+};
+
+export const ShiftWithUnknownTotalGoesToNextPage: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={manyRows.slice(0, 20)}
+      getRowId={getRowId}
+      pagination={{
+        mode: "server",
+        defaultPageSize: 20,
+        pageSizeOptions: [20],
+        hasNextPage: true,
+      }}
+    >
+      <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const user = userEvent.setup();
+
+    expect(canvas.getByText("Side 1")).toBeInTheDocument();
+    await user.keyboard("{Shift>}");
+    expect(
+      canvas.queryByRole("button", { name: "Siste side" }),
+    ).not.toBeInTheDocument();
+    await user.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Side 2")).toBeInTheDocument();
+    await user.keyboard("{/Shift}");
+  },
+};
+
 export const ServerSortDoesNotResetPage: Story = {
   render: () => <ServerResetGrid />,
   play: async ({ canvasElement }) => {
