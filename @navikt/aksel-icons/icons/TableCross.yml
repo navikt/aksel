@@ -2,6 +2,9 @@ name: TableCross
 category: Interface
 sub_category: Table
 keywords:
-  - TableCross
+  - tabell
+  - datagrid
+  - fjern
+  - slett
 variant: Stroke
 created_at: 26.10.2026

@@ -37,6 +37,14 @@ yarn build:next
 yarn serve:next
 ```
 
+`yarn build:next` genererer ikke RSS-feeden og bygger ikke Playroom. Kjør dette for å bygge alt:
+
+```bash
+yarn workspace website update:rss
+yarn workspace website build:with-playroom
+yarn serve:next
+```
+
 **Rettigheter**
 
 Sanity-datasettet er privat, noe som betyr du må ha tilgang til Sanity-applikasjonen og følgende tokens:
