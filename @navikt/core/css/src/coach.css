@@ -15,8 +15,9 @@
     padding-inline: var(--ax-space-16);
   }
 
-  max-width: var(--__axc-coach__content-width);
   width: var(--__axc-coach__content-width);
+  /* Creates a small gutter between screen-edges on smaller devices */
+  max-width: calc(100vw - var(--ax-space-24));
   overflow: auto;
 }
 
@@ -123,8 +124,7 @@
 }
 
 .aksel-coach__title,
-.aksel-coach__description,
-.aksel-coach__progress {
+.aksel-coach__description {
   margin-block-end: var(--ax-space-8);
 }
 
