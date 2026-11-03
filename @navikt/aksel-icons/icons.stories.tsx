@@ -7,6 +7,7 @@ import "@navikt/aksel-icons/css/Buildings2Fill.css";
 import "@navikt/aksel-icons/css/MagnifyingGlass.css";
 import "@navikt/aksel-icons/css/StarFill.css";
 import "@navikt/aksel-icons/css/XMarkOctagonFill.css";
+import StarIcon from "@navikt/aksel-icons/svg/Star.svg?no-inline";
 
 const meta: Meta<typeof StarFillIcon> = {
   title: "aksel-icons/Icons",
@@ -70,5 +71,36 @@ export const CssIcons: Story = {
 
 export const CssIconsInverted: Story = {
   render: CssIcons.render,
+  globals: { theme: "dark" },
+};
+
+export const InlineSvgIcon: Story = {
+  render: () => (
+    <div style={{ color: "var(--ax-text-accent)" }}>
+      <svg aria-hidden width="3rem" height="3rem">
+        <use
+          href={`${StarIcon}`}
+          width="100%"
+          height="100%"
+          color="currentColor"
+        />
+      </svg>
+    </div>
+  ),
+};
+
+export const InlineSvgIconInverted: Story = {
+  render: () => (
+    <div style={{ color: "var(--ax-text-accent)" }}>
+      <svg aria-hidden width="3rem" height="3rem">
+        <use
+          href={`${StarIcon}`}
+          width="100%"
+          height="100%"
+          color="currentColor"
+        />
+      </svg>
+    </div>
+  ),
   globals: { theme: "dark" },
 };
