@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import React from "react";
-import { bench, describe } from "vitest";
+import { describe, test } from "vitest";
 import { Provider } from "../../provider";
 import { get } from "./get";
 import { useI18n } from "./i18n.hooks";
@@ -8,14 +8,16 @@ import type { ComponentTranslation } from "./i18n.types";
 import { nb } from "./locales";
 
 describe("translate function throughput", () => {
-  const { result } = renderHook(() => useI18n("FileUpload"));
+  test("translation lookups", async ({ bench }) => {
+    const { result } = renderHook(() => useI18n("FileUpload"));
 
-  bench("simple key lookup (no replacements)", () => {
-    result.current("item.uploading");
-  });
+    await bench("simple key lookup (no replacements)", () => {
+      result.current("item.uploading");
+    }).run();
 
-  bench("key lookup with replacements", () => {
-    result.current("item.uploading", { name: "Test", count: 5 } as never);
+    await bench("key lookup with replacements", () => {
+      result.current("item.uploading", { name: "Test", count: 5 } as never);
+    }).run();
   });
 });
 
@@ -23,10 +25,13 @@ describe("translate with local overrides", () => {
   const local = {
     item: { uploading: "Hello {name}, you have {count} files" },
   };
-  const { result } = renderHook(() => useI18n("FileUpload", local));
 
-  bench("local override with replacements", () => {
-    result.current("item.uploading", { name: "Test", count: 5 });
+  test("local override lookup", async ({ bench }) => {
+    const { result } = renderHook(() => useI18n("FileUpload", local));
+
+    await bench("local override with replacements", () => {
+      result.current("item.uploading", { name: "Test", count: 5 });
+    }).run();
   });
 });
 
@@ -38,18 +43,21 @@ describe("translate with multiple context objects", () => {
       {children}
     </Provider>
   );
-  const { result } = renderHook(() => useI18n("FileUpload"), { wrapper });
 
-  bench("hit in first context object", () => {
-    result.current("dropzone.button");
-  });
+  test("context lookups", async ({ bench }) => {
+    const { result } = renderHook(() => useI18n("FileUpload"), { wrapper });
 
-  bench("hit in second context object", () => {
-    result.current("item.uploading");
-  });
+    await bench("hit in first context object", () => {
+      result.current("dropzone.button");
+    }).run();
 
-  bench("fallback to locale default", () => {
-    result.current("item.downloading");
+    await bench("hit in second context object", () => {
+      result.current("item.uploading");
+    }).run();
+
+    await bench("fallback to locale default", () => {
+      result.current("item.downloading");
+    }).run();
   });
 });
 
@@ -61,19 +69,21 @@ describe("get() function throughput", () => {
     nb.FileUpload,
   ];
 
-  bench("shallow key hit in first object", () => {
-    get("item.uploading", objects);
-  });
+  test("translation lookup", async ({ bench }) => {
+    await bench("shallow key hit in first object", () => {
+      get("item.uploading", objects);
+    }).run();
 
-  bench("key hit in second object (skip first)", () => {
-    get("item.downloading", objects);
-  });
+    await bench("key hit in second object (skip first)", () => {
+      get("item.downloading", objects);
+    }).run();
 
-  bench("deep fallback to last object", () => {
-    get("dropzone.button", objects);
-  });
+    await bench("deep fallback to last object", () => {
+      get("dropzone.button", objects);
+    }).run();
 
-  bench("long key dot notation parsing", () => {
-    get("dropzone.dragAndDropMultiple", [nb.FileUpload]);
+    await bench("long key dot notation parsing", () => {
+      get("dropzone.dragAndDropMultiple", [nb.FileUpload]);
+    }).run();
   });
 });
