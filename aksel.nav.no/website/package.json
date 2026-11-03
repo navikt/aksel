@@ -6,7 +6,8 @@
   "author": "Aksel | Nav designsystem team",
   "scripts": {
     "dev": "next | pino-pretty --messageKey=message",
-    "build": "concurrently \"yarn workspace aksel-playroom build:playroom\" \"yarn next build\" \"yarn update:rss\" && yarn cp:assets",
+    "build": "yarn next build && yarn cp:assets",
+    "build:with-playroom": "concurrently \"yarn workspace aksel-playroom build:playroom\" \"yarn next build\" && yarn cp:assets:with-playroom",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "e2e:dev": "yarn generate-testpaths && playwright test --ui",
     "e2e:docker": "yarn generate-testpaths && playwright test",
@@ -26,7 +27,8 @@
     "cp:playroom": "copyfiles -E -u 5 '../../apps/playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
     "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
-    "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
+    "cp:assets": "yarn cp:public && yarn cp:static",
+    "cp:assets:with-playroom": "yarn cp:playroom && yarn cp:assets"
   },
   "dependencies": {
     "@navikt/analytics-types": "0.0.9",
