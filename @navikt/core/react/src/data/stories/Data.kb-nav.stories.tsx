@@ -435,19 +435,22 @@ export const KeyboardCellClampedOnShorterLastPage: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const table = canvas.getByRole("table", { name: "Personer" });
-    const lastPage = canvas.getByRole("button", { name: "Siste side" });
+    const nextPage = canvas.getByRole("button", { name: "Neste side" });
     const beforeTable = canvas.getByRole("button", { name: "Før tabellen" });
+    const user = userEvent.setup();
 
     await userEvent.click(beforeTable);
     await userEvent.tab();
     await userEvent.keyboard("{Control>}{End}{/Control}");
     expect(canvas.getByRole("cell", { name: "Person 20" })).toHaveFocus();
 
-    await userEvent.click(lastPage);
+    await user.keyboard("{Shift>}");
+    await user.click(nextPage);
+    await user.keyboard("{/Shift}");
 
     expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
     expect(within(table).getAllByRole("row")).toHaveLength(14);
-    expect(lastPage).toHaveFocus();
+    expect(nextPage).toHaveFocus();
 
     await userEvent.click(beforeTable);
     await userEvent.tab();
@@ -525,7 +528,10 @@ const testKeyboardCellThroughLoading: Story["play"] = async ({
   await userEvent.tab();
   expect(canvas.getByRole("cell", { name: "Person 40" })).toHaveFocus();
 
-  await userEvent.click(canvas.getByRole("button", { name: "Siste side" }));
+  const user = userEvent.setup();
+  await user.keyboard("{Shift>}");
+  await user.click(next);
+  await user.keyboard("{/Shift}");
   await userEvent.click(complete);
   await userEvent.click(before);
   await userEvent.tab();
