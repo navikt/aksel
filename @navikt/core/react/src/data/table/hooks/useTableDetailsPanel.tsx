@@ -76,10 +76,15 @@ function DataTableDetailsPanelProvider<T>({
     showExpandAll = false,
   } = detailsPanel || {};
 
-  const [expandedIds, setExpandedIds] = useControllableState({
-    value: expandedRowIds,
-    defaultValue: defaultExpandedRowIds,
-    onChange: onExpandedRowIdsChange,
+  const controlledExpandedIds = React.useMemo(
+    () => (expandedRowIds ? new Set(expandedRowIds) : undefined),
+    [expandedRowIds],
+  );
+
+  const [expandedIds, setExpandedIds] = useControllableState<Set<string>>({
+    value: controlledExpandedIds,
+    defaultValue: () => new Set(defaultExpandedRowIds),
+    onChange: (ids) => onExpandedRowIdsChange?.(Array.from(ids)),
   });
 
   /* TODO: False is just fallback until auto and root is merged */
@@ -116,8 +121,7 @@ function DataTableDetailsPanelProvider<T>({
   );
 
   const isExpanded = useCallback(
-    (id: string) =>
-      isDetailsPanelExpandableById(id) && expandedIds.includes(id),
+    (id: string) => isDetailsPanelExpandableById(id) && expandedIds.has(id),
     [expandedIds, isDetailsPanelExpandableById],
   );
 
@@ -127,21 +131,25 @@ function DataTableDetailsPanelProvider<T>({
         return;
       }
 
-      setExpandedIds((currentExpandedIds) =>
-        currentExpandedIds.includes(id)
-          ? currentExpandedIds.filter((expandedId) => expandedId !== id)
-          : [...currentExpandedIds, id],
-      );
+      setExpandedIds((currentExpandedIds) => {
+        const nextExpandedIds = new Set(currentExpandedIds);
+        if (nextExpandedIds.has(id)) {
+          nextExpandedIds.delete(id);
+        } else {
+          nextExpandedIds.add(id);
+        }
+        return nextExpandedIds;
+      });
     },
     [isDetailsPanelExpandableById, setExpandedIds],
   );
 
   const isAllExpanded =
     expandableIds.size > 0 &&
-    Array.from(expandableIds).every((key) => expandedIds.includes(key));
+    Array.from(expandableIds).every((key) => expandedIds.has(key));
 
   const toggleAll = useCallback(() => {
-    setExpandedIds(isAllExpanded ? [] : Array.from(expandableIds));
+    setExpandedIds(isAllExpanded ? new Set() : new Set(expandableIds));
   }, [expandableIds, isAllExpanded, setExpandedIds]);
 
   return (
