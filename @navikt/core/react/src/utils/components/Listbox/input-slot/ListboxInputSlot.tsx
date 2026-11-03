@@ -8,6 +8,9 @@ interface ListboxInputSlotProps {
   virtuallyFocusedOptionId: string;
 }
 
+/**
+ * Remember that role=combobox requires aria-expanded
+ */
 const ListboxInputSlot = ({
   children,
   virtuallyFocusedOptionId,
