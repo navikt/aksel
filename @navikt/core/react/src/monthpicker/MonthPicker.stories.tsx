@@ -85,7 +85,6 @@ export const DisabledMonths = () => (
 
 export const EverythingDisabledBesidesOneMonth = () => (
   <div>
-    <p>Focus June and press ArrowRight or ArrowLeft. Focus stays on June.</p>
     <MonthPicker.Standalone
       defaultSelected={new Date(2026, 5, 1)}
       disabled={[
