@@ -13,7 +13,7 @@ interface CoachStepBase {
    */
   allowToEndTour?: boolean;
   /**
-   * Updates sub-component padding + DialogTitle and DialogDescription font-size.
+   * Updates sub-component padding, Coach.Title font-size and button size.
    * @default "medium"
    */
   size?: "medium" | "small";
@@ -80,7 +80,7 @@ interface CoachBaseProps {
   /**
    * Called when a mark opens the tour or the tour closes.
    */
-  onShowTourChange?: React.Dispatch<React.SetStateAction<boolean>>;
+  onShowTourChange?: (show: boolean) => void;
   /**
    * Hides the tour and its marks without hiding the elements they are anchored to.
    * @default false
@@ -98,7 +98,7 @@ interface CoachBaseProps {
   /**
    * Called when the active step changes.
    */
-  onStepChange?: React.Dispatch<React.SetStateAction<number>>;
+  onStepChange?: (step: number) => void;
   /**
    * Translations for buttons in the coach component: Next, Previous, Close.
    */

@@ -15,7 +15,7 @@ interface CoachContextProps {
    */
   onClose?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   /**
-   * The index of the current step in the coach sequence.
+   * The object of the current step in the coach sequence.
    */
   currentStep: CoachStepItem | null;
   /**

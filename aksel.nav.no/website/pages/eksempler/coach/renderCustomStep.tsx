@@ -38,13 +38,13 @@ const Example = () => {
       }}
       steps={[
         {
-          id: "step-1",
+          id: "step-custom-format-dialog",
           type: "dialog",
           title: "Ulikt format",
           description: "Denne dialogen har ulikt format fra standard.",
         },
         {
-          id: "step-2",
+          id: "step-custom-format-anchor",
           type: "anchor",
           anchorRef: buttonRef,
           image: (
@@ -58,7 +58,7 @@ const Example = () => {
           description: "Denne anchor-steget har ulikt format fra standard.",
         },
         {
-          id: "step-2",
+          id: "step-standard-format",
           type: "anchor",
           anchorRef: buttonRef,
           title: "Standard format",

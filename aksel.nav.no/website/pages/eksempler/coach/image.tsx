@@ -9,7 +9,7 @@ const Example = () => {
     <Coach
       steps={[
         {
-          id: "step-1",
+          id: "step-dialog-with-image",
           type: "dialog",
           title: "Dialog med bilde",
           description: "Denne dialogen har et bilde.",
@@ -22,7 +22,7 @@ const Example = () => {
           ),
         },
         {
-          id: "step-2",
+          id: "step-anchor-with-image-and-close",
           type: "anchor",
           anchorRef: buttonRef,
           allowToEndTour: true,
@@ -38,7 +38,7 @@ const Example = () => {
           ),
         },
         {
-          id: "step-2",
+          id: "step-anchor-with-image",
           type: "anchor",
           anchorRef: buttonRef,
           title: "Anchor med bilde",
