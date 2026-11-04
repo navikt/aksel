@@ -76,6 +76,73 @@ describe("Coach anchor warnings", () => {
   });
 });
 
+describe("Coach invalid steps", () => {
+  test.each([false, true])(
+    "does not render empty steps when showTour is %s",
+    (showTour) => {
+      const renderStep = vi.fn(({ id }: { id: string }) => id.toUpperCase());
+      render(<Coach steps={[]} showTour={showTour} renderStep={renderStep} />);
+      expect(renderStep).not.toHaveBeenCalled();
+      expect(screen.queryByRole("dialog")).toBeNull();
+      expect(consoleWarning).toHaveBeenCalledWith(
+        expect.stringContaining("cannot find a step at index 0 in 0 steps"),
+      );
+    },
+  );
+
+  test.each([-1, 2, 0.5, NaN])(
+    "warns for invalid controlled index %s",
+    (currentStep) => {
+      const renderStep = vi.fn();
+      render(
+        <Coach
+          steps={[{ id: "first", type: "dialog" }]}
+          currentStep={currentStep}
+          renderStep={renderStep}
+        />,
+      );
+      expect(renderStep).not.toHaveBeenCalled();
+      expect(consoleWarning).toHaveBeenCalledWith(
+        expect.stringContaining(`index ${currentStep}`),
+      );
+    },
+  );
+
+  test("does not call the renderer after steps shrink, and recovers when the step exists again", () => {
+    const steps: CoachStepItem[] = [
+      { id: "first", type: "dialog" },
+      { id: "second", type: "dialog" },
+    ];
+    const renderStep = vi.fn(({ id }: { id: string }) => id.toUpperCase());
+    const { rerender } = render(
+      <Coach steps={steps} defaultStep={1} renderStep={renderStep} />,
+    );
+    expect(renderStep).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "second" }),
+      expect.anything(),
+    );
+    renderStep.mockClear();
+
+    rerender(
+      <Coach
+        steps={steps.slice(0, 1)}
+        defaultStep={1}
+        renderStep={renderStep}
+      />,
+    );
+    expect(renderStep).not.toHaveBeenCalled();
+    expect(consoleWarning).toHaveBeenCalledWith(
+      expect.stringContaining("index 1 in 1 steps"),
+    );
+
+    rerender(<Coach steps={steps} defaultStep={1} renderStep={renderStep} />);
+    expect(renderStep).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "second" }),
+      expect.anything(),
+    );
+  });
+});
+
 describe("Coach.Mark", () => {
   test("opens the tour without triggering its anchor click handler", async () => {
     const user = userEvent.setup();

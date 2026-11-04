@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { Button } from "../button";
+import { Popover } from "../popover";
+import { Portal } from "../portal";
 import { Provider } from "../provider";
 import { Coach } from "./index";
 import type {
@@ -118,16 +120,45 @@ export const UncontrolledNavigation: Story = {
     const second = await canvas.findByRole("dialog", { name: "Features" });
     expectLabelledByTitle(second, "Features");
     expect(within(second).getByText("2 av 3")).toBeVisible();
+    expect(second).toBe(first);
+    await waitFor(() =>
+      expect(
+        within(second).getByRole("button", { name: "Next" }),
+      ).toHaveFocus(),
+    );
     await userEvent.click(
       within(second).getByRole("button", { name: "Previous" }),
     );
     await canvas.findByRole("dialog", { name: "Welcome" });
+    await waitFor(() =>
+      expect(within(first).getByRole("button", { name: "Next" })).toHaveFocus(),
+    );
     await userEvent.keyboard("{ArrowRight}{ArrowRight}");
 
     const last = await canvas.findByRole("dialog", { name: "Finished" });
     expect(within(last).queryByRole("button", { name: "Next" })).toBeNull();
     const closeButtons = within(last).getAllByRole("button", { name: "Close" });
-    await userEvent.click(closeButtons[closeButtons.length - 1]);
+    await waitFor(() =>
+      expect(closeButtons[closeButtons.length - 1]).toHaveFocus(),
+    );
+    await userEvent.click(
+      within(last).getByRole("button", { name: "Previous" }),
+    );
+    await canvas.findByRole("dialog", { name: "Features" });
+    await waitFor(() =>
+      expect(
+        within(second).getByRole("button", { name: "Next" }),
+      ).toHaveFocus(),
+    );
+    await userEvent.keyboard("{ArrowRight}");
+    await canvas.findByRole("dialog", { name: "Finished" });
+    const finalCloseButtons = within(last).getAllByRole("button", {
+      name: "Close",
+    });
+    await waitFor(() =>
+      expect(finalCloseButtons[finalCloseButtons.length - 1]).toHaveFocus(),
+    );
+    await userEvent.click(finalCloseButtons[finalCloseButtons.length - 1]);
     await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
     expect(args.onStepChange).toHaveBeenNthCalledWith(1, 1);
     expect(args.onStepChange).toHaveBeenNthCalledWith(2, 0);
@@ -135,6 +166,49 @@ export const UncontrolledNavigation: Story = {
 
     await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
     await canvas.findByRole("dialog", { name: "Welcome" });
+  },
+};
+
+export const ShrinkingSteps: Story = {
+  args: {
+    steps: dialogSteps,
+  },
+  render: () => {
+    const [steps, setSteps] = useState(dialogSteps);
+    return (
+      <>
+        <Button onClick={() => setSteps(dialogSteps)}>Restore steps</Button>
+        <Coach
+          showTour
+          currentStep={1}
+          steps={steps}
+          renderStep={({ id }, { defaultContent }) => (
+            <>
+              {defaultContent}
+              <p>{id.toUpperCase()}</p>
+              <Button onClick={() => setSteps(dialogSteps.slice(0, 1))}>
+                Remove active step
+              </Button>
+            </>
+          )}
+        />
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const popup = await canvas.findByRole("dialog", { name: "Features" });
+    expect(within(popup).getByText("FEATURES")).toBeVisible();
+    await userEvent.click(
+      within(popup).getByRole("button", { name: "Remove active step" }),
+    );
+    await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Restore steps" }),
+    );
+    expect(
+      await canvas.findByRole("dialog", { name: "Features" }),
+    ).toBeVisible();
   },
 };
 
@@ -238,6 +312,218 @@ export const KeyboardNavigation: Story = {
   },
 };
 
+export const KeyboardNavigationInCustomContent: Story = {
+  args: {
+    showTour: false,
+    onShowTourChange: fn(),
+    onStepChange: fn(),
+    steps: dialogSteps,
+    renderStep: (_step, { defaultContent }) => (
+      <>
+        {defaultContent}
+        <input aria-label="Name" defaultValue="Coach" />
+        <textarea aria-label="Notes" defaultValue="Notes" />
+        <select aria-label="Choice" defaultValue="first">
+          <option value="first">First</option>
+          <option value="second">Second</option>
+        </select>
+        {/* biome-ignore lint/a11y/useSemanticElements: Exercise a contenteditable editor rather than a native input. */}
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          role="textbox"
+          aria-label="Editor"
+          tabIndex={0}
+        >
+          <span>Editable content</span>
+        </div>
+        <Button
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+              event.preventDefault();
+            }
+          }}
+        >
+          Handles arrows
+        </Button>
+      </>
+    ),
+  },
+  render: (args) => <Tour {...args} />,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
+    const first = await canvas.findByRole("dialog", { name: "Welcome" });
+    const name = within(first).getByRole<HTMLInputElement>("textbox", {
+      name: "Name",
+    });
+    await userEvent.click(name);
+    await userEvent.keyboard("{End}{ArrowLeft}");
+    expect(name.selectionStart).toBe(4);
+    await userEvent.keyboard("{ArrowRight}");
+    expect(name.selectionStart).toBe(5);
+
+    for (const control of [
+      within(first).getByRole("textbox", { name: "Notes" }),
+      within(first).getByRole("combobox", { name: "Choice" }),
+      within(first).getByRole("textbox", { name: "Editor" }),
+      within(first).getByRole("button", { name: "Handles arrows" }),
+    ]) {
+      await userEvent.click(control);
+      await userEvent.keyboard("{ArrowRight}{ArrowLeft}");
+      expect(first).toHaveAccessibleName("Welcome");
+    }
+
+    const next = within(first).getByRole("button", { name: "Next" });
+    await userEvent.click(
+      within(first).getByRole("heading", { name: "Welcome" }),
+    );
+    next.focus();
+    expect(next).toHaveFocus();
+    await userEvent.keyboard(
+      "{Shift>}{ArrowRight}{/Shift}{Control>}{ArrowRight}{/Control}{Alt>}{ArrowRight}{/Alt}{Meta>}{ArrowRight}{/Meta}",
+    );
+    expect(args.onStepChange).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{ArrowRight}");
+    const second = await canvas.findByRole("dialog", { name: "Features" });
+    within(second).getByRole("button", { name: "Previous" }).focus();
+    await userEvent.keyboard("{ArrowLeft}");
+    await canvas.findByRole("dialog", { name: "Welcome" });
+    await userEvent.keyboard("{ArrowRight}{ArrowRight}");
+    const last = await canvas.findByRole("dialog", { name: "Finished" });
+    await userEvent.click(within(last).getByRole("textbox", { name: "Name" }));
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
+    expect(args.onShowTourChange).toHaveBeenCalledWith(false);
+  },
+};
+
+export const AnchorKeyboardNavigationInCustomContent: Story = {
+  ...KeyboardNavigationInCustomContent,
+  play: KeyboardNavigationInCustomContent.play,
+  render: (args) => {
+    const anchorRef = useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <Button ref={anchorRef}>Target</Button>
+        <Tour
+          {...args}
+          steps={dialogSteps.map((step) => ({
+            ...step,
+            type: "anchor",
+            anchorRef,
+          }))}
+        />
+      </>
+    );
+  },
+};
+
+function NestedEscapeContent({ children }: { children: React.ReactNode }) {
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {children}
+      <input
+        aria-label="Handles Escape"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+          }
+        }}
+      />
+      <Button ref={setAnchor} onClick={() => setOpen(true)}>
+        Open nested help
+      </Button>
+      <Portal>
+        <Popover anchorEl={anchor} open={open} onClose={() => setOpen(false)}>
+          <Popover.Content>Nested help content</Popover.Content>
+        </Popover>
+      </Portal>
+    </>
+  );
+}
+
+export const NestedEscape: Story = {
+  args: {
+    showTour: false,
+    onShowTourChange: fn(),
+    steps: [dialogSteps[0], dialogSteps[2]],
+    renderStep: (_step, { defaultContent }) => (
+      <NestedEscapeContent>{defaultContent}</NestedEscapeContent>
+    ),
+  },
+  render: (args) => <Tour {...args} />,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
+
+    for (const title of ["Welcome", "Finished"]) {
+      const popup = await canvas.findByRole("dialog", { name: title });
+      await userEvent.click(
+        within(popup).getByRole("button", { name: "Open nested help" }),
+      );
+      expect(await canvas.findByText("Nested help content")).toBeVisible();
+      await userEvent.keyboard("{Escape}");
+      await waitFor(() =>
+        expect(canvas.queryByText("Nested help content")).not.toBeVisible(),
+      );
+      expect(popup).toBeVisible();
+      expect(args.onShowTourChange).not.toHaveBeenCalled();
+
+      await userEvent.click(
+        within(popup).getByRole("textbox", { name: "Handles Escape" }),
+      );
+      await userEvent.keyboard("{Escape}");
+      expect(popup).toBeVisible();
+      expect(args.onShowTourChange).not.toHaveBeenCalled();
+
+      // Move focus off the input without consuming Escape in its own handler.
+      within(popup)
+        .getByRole("button", {
+          name: title === "Welcome" ? "Next" : "Previous",
+        })
+        .focus();
+      await userEvent.keyboard("{Escape}");
+      if (title === "Welcome") {
+        expect(popup).toBeVisible();
+        expect(args.onShowTourChange).not.toHaveBeenCalled();
+        await userEvent.click(
+          within(popup).getByRole("button", { name: "Next" }),
+        );
+      }
+    }
+
+    await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
+    expect(args.onShowTourChange).toHaveBeenCalledTimes(1);
+    expect(args.onShowTourChange).toHaveBeenCalledWith(false);
+  },
+};
+
+export const AnchorNestedEscape: Story = {
+  ...NestedEscape,
+  play: NestedEscape.play,
+  render: (args) => {
+    const anchorRef = useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <Button ref={anchorRef}>Target</Button>
+        <Tour
+          {...args}
+          steps={[dialogSteps[0], dialogSteps[2]].map((step) => ({
+            ...step,
+            type: "anchor",
+            anchorRef,
+          }))}
+        />
+      </>
+    );
+  },
+};
+
 export const MixedSteps: StoryObj = {
   render: () => {
     const firstRef = useRef<HTMLButtonElement>(null);
@@ -277,6 +563,11 @@ export const MixedSteps: StoryObj = {
     await userEvent.click(within(first).getByRole("button", { name: "Next" }));
 
     const anchor = await canvas.findByRole("dialog", { name: "First anchor" });
+    await waitFor(() =>
+      expect(
+        within(anchor).getByRole("button", { name: "Next" }),
+      ).toHaveFocus(),
+    );
     expectLabelledByTitle(anchor, "First anchor");
     expect(canvas.queryByRole("button", { name: "First target" })).toBeNull();
     await userEvent.keyboard("{Escape}");
@@ -290,12 +581,66 @@ export const MixedSteps: StoryObj = {
     expect(second.contains(document.activeElement)).toBe(true);
     await userEvent.click(within(second).getByRole("button", { name: "Next" }));
     const last = await canvas.findByRole("dialog", { name: "Finished" });
+    const closeButtons = within(last).getAllByRole("button", { name: "Close" });
+    await waitFor(() =>
+      expect(closeButtons[closeButtons.length - 1]).toHaveFocus(),
+    );
     await userEvent.click(
       within(last).getByRole("button", { name: "Previous" }),
     );
     await canvas.findByRole("dialog", { name: "Second anchor" });
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
+  },
+};
+
+export const SpotlightBackdrop: StoryObj = {
+  render: () => {
+    const anchorRef = useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <section
+          aria-label="Scrollable targets"
+          style={{ height: 200, overflow: "auto" }}
+        >
+          <div style={{ height: 600, paddingTop: 80 }}>
+            <Button ref={anchorRef}>Spotlight target</Button>
+          </div>
+        </section>
+        <Tour type="anchor" anchorRef={anchorRef} title="Spotlight" />
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const scroller = canvas.getByRole("region", { name: "Scrollable targets" });
+    await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
+    await canvas.findByRole("dialog", { name: "Spotlight" });
+    const backdrop = canvasElement.querySelector<HTMLElement>(
+      ".aksel-coach__backdrop",
+    );
+    if (!backdrop) {
+      throw new Error("Expected a spotlight backdrop");
+    }
+
+    expect(backdrop.style.length).toBe(1);
+    backdrop.style.setProperty("--ax-bg-overlay", "rgb(10, 20, 30)");
+    expect(getComputedStyle(backdrop).backgroundColor).toBe("rgb(10, 20, 30)");
+    expect(getComputedStyle(backdrop).position).toBe("fixed");
+    expect(getComputedStyle(backdrop).pointerEvents).toBe("none");
+    const initialClipPath = backdrop.style.clipPath;
+    scroller.scrollTop = 40;
+    await waitFor(() => {
+      expect(scroller.scrollTop).toBe(40);
+      expect(backdrop.style.clipPath).not.toBe(initialClipPath);
+    });
+    const bounds = backdrop.getBoundingClientRect();
+    expect(bounds.top).toBe(0);
+    expect(bounds.left).toBe(0);
+    expect(bounds.width).toBe(document.documentElement.clientWidth);
+    expect(bounds.height).toBeGreaterThanOrEqual(
+      document.documentElement.clientHeight,
+    );
   },
 };
 

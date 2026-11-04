@@ -10,6 +10,7 @@ interface CoachStepBase {
   id: string;
   /**
    * Whether the user is allowed to end the tour at this step.
+   * TODO:C - Best naming? "allowEarlyEnd" or similar?
    */
   allowToEndTour?: boolean;
   /**

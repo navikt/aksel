@@ -37,20 +37,7 @@ const CoachBackdrop = ({ anchorEl }: CoachBackdropProps) => {
   const clipPath = `path(evenodd, "M 0 0 H ${window.innerWidth} V ${window.innerHeight} H 0 Z M ${left + radius} ${top} H ${right - radius} A ${radius} ${radius} 0 0 1 ${right} ${top + radius} V ${bottom - radius} A ${radius} ${radius} 0 0 1 ${right - radius} ${bottom} H ${left + radius} A ${radius} ${radius} 0 0 1 ${left} ${bottom - radius} V ${top + radius} A ${radius} ${radius} 0 0 1 ${left + radius} ${top} Z")`;
 
   return (
-    <div
-      aria-hidden
-      className="aksel-coach__backdrop"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        clipPath,
-        pointerEvents: "none",
-      }}
-    />
+    <div aria-hidden className="aksel-coach__backdrop" style={{ clipPath }} />
   );
 };
 

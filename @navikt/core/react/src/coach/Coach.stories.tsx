@@ -8,6 +8,7 @@ import {
 import { Button } from "../button";
 import { Chips } from "../chips";
 import { ExpansionCard } from "../expansion-card";
+import { Search } from "../form/search";
 import { GuidePanel } from "../guide-panel";
 import { InfoCard } from "../info-card";
 import { HStack, VStack } from "../primitives/stack";
@@ -143,6 +144,7 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             type: "dialog",
             size: "small",
             width: "small",
+            allowToEndTour: true,
             image: (
               <img
                 src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
@@ -250,52 +252,53 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
 
 export const RenderStep: StoryFn<typeof Coach> = () => {
   return (
-    <VStack padding="space-40" gap="space-64">
-      <Coach
-        showTour={true}
-        renderStep={(step, context) => {
-          if (context.index === 0) {
-            return context.defaultContent;
-          }
-          return (
-            <Coach.Step>
-              <Coach.Title>{step.title}</Coach.Title>
-              <Coach.Image>{step.image}</Coach.Image>
-              <Coach.Progress />
-              <Coach.Description>{step.description}</Coach.Description>
-              <Coach.Footer>
-                <Coach.PreviousTrigger>
-                  <Button variant="secondary">Forrige</Button>
-                </Coach.PreviousTrigger>
-                <Coach.CloseTrigger>
-                  <Button>Lukk</Button>
-                </Coach.CloseTrigger>
-              </Coach.Footer>
-            </Coach.Step>
-          );
-        }}
-        steps={[
-          {
-            id: "render_step",
-            type: "dialog",
-            title: "Normal step",
-            description: "This step demonstrates standard step.",
-          },
-          {
-            id: "render_step_2",
-            type: "dialog",
-            title: "Render Step",
-            description: "This step demonstrates custom renderStep.",
-            image: (
-              <img
-                src="https://i.ytimg.com/vi/1M_oZgVBknw/maxresdefault.jpg"
-                alt="Render step overview"
-              />
-            ),
-          },
-        ]}
-      />
-    </VStack>
+    <Coach
+      renderStep={(step, context) => {
+        if (context.index === 0) {
+          return context.defaultContent;
+        }
+        return (
+          <Coach.Step>
+            <Coach.Title>{step.title}</Coach.Title>
+            <Coach.Image>{step.image}</Coach.Image>
+            <Coach.Progress />
+            <Coach.Description>{step.description}</Coach.Description>
+            <Coach.Footer>
+              <Coach.PreviousTrigger>
+                <Button variant="secondary">Forrige</Button>
+              </Coach.PreviousTrigger>
+              <Coach.CloseTrigger>
+                <Button>Lukk</Button>
+              </Coach.CloseTrigger>
+            </Coach.Footer>
+          </Coach.Step>
+        );
+      }}
+      steps={[
+        {
+          id: "render_step",
+          type: "dialog",
+          title: "Normal step",
+          description: "This step demonstrates standard step.",
+        },
+        {
+          id: "render_step_2",
+          type: "dialog",
+          title: "Render Step",
+          description: "This step demonstrates custom renderStep.",
+          image: (
+            <img
+              src="https://i.ytimg.com/vi/1M_oZgVBknw/maxresdefault.jpg"
+              alt="Render step overview"
+            />
+          ),
+        },
+      ]}
+    >
+      <Coach.Mark>
+        <Button>Feature</Button>
+      </Coach.Mark>
+    </Coach>
   );
 };
 
@@ -412,7 +415,6 @@ export const Translations: StoryFn<typeof Coach> = () => {
   return (
     <Provider locale={en} translations={translations}>
       <Coach
-        showTour={true}
         steps={[
           {
             id: "progress_translation",
@@ -427,7 +429,11 @@ export const Translations: StoryFn<typeof Coach> = () => {
             description: "See the translation above and on the buttons.",
           },
         ]}
-      />
+      >
+        <Coach.Mark>
+          <Button>Feature</Button>
+        </Coach.Mark>
+      </Coach>
     </Provider>
   );
 };
@@ -503,5 +509,44 @@ export const CoachControlled: StoryFn<typeof Coach> = () => {
         description="Denne coachen styres av state."
       />
     </>
+  );
+};
+
+export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
+  const dashboardRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Coach
+      steps={[
+        {
+          id: "step-1",
+          type: "dialog",
+          size: "small",
+          width: "small",
+          allowToEndTour: true,
+          image: (
+            <img
+              src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
+              alt="Dashboard overview"
+            />
+          ),
+          title: "Dashboard",
+          description: <Search label="Search" />,
+        },
+        {
+          id: "step-2",
+          type: "anchor",
+          size: "small",
+          allowToEndTour: true,
+          anchorRef: dashboardRef,
+          title: "Dashboard",
+          description: <Search label="Search" />,
+        },
+      ]}
+    >
+      <Coach.Mark>
+        <Button ref={dashboardRef}>Dashboard</Button>
+      </Coach.Mark>
+    </Coach>
   );
 };

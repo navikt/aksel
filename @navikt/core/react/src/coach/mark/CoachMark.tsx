@@ -34,10 +34,10 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * @see 🏷️ {@link CoachMarkProps}
  * @example
  * ```jsx
- * <Coach>
- *    <Coach.Mark>
- *      <Button>Next step</Button>
- *    </Coach.Mark>
+ * <Coach type="dialog" title="Help">
+ *   <Coach.Mark>
+ *     <Button>Target</Button>
+ *   </Coach.Mark>
  * </Coach>
  * ```
  */

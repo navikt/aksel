@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { Popover } from "../../popover";
 import { Portal } from "../../portal";
 import { useClientLayoutEffect } from "../../utils-external";
+// import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { CoachBackdrop } from "../backdrop/CoachBackdrop";
 import {
@@ -83,6 +85,8 @@ const CoachRoot = (props: CoachProps) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [titleId, setTitleId] = useState<string>();
   const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
+  const stepRef = useRef<HTMLElement | null>(null);
+  const mergedStepRef = useMergeRefs(stepRef, setStepElement);
 
   const showTour = !disableTour && (showTourControlled ?? uncontrolledShowTour);
 
@@ -147,8 +151,16 @@ const CoachRoot = (props: CoachProps) => {
   }, [anchorRef, showTour, activeStepIndex]);
 
   useEffect(() => {
+    if (!currentStep) {
+      consoleWarning(
+        `Coach cannot find a step at index ${activeStepIndex} in ${steps.length} steps. Provide a non-empty steps array and a valid currentStep or defaultStep index.`,
+      );
+    }
+  }, [activeStepIndex, currentStep, steps.length]);
+
+  useEffect(() => {
     // Show warning for missing triggers if the tour is active
-    if (!showTour) return;
+    if (!showTour || !currentStep) return;
     missingTriggersWarning(
       activeStepIndex,
       steps.length,
@@ -213,48 +225,54 @@ const CoachRoot = (props: CoachProps) => {
     }
   }, [activeStepIndex, setStep]);
 
-  useEffect(() => {
-    // Handle keyboard navigation for the tour
-    if (!showTour) {
+  const handleEscapeKeyDown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+    event.preventDefault();
+    if (currentStep?.allowToEndTour) {
+      endTour();
+    }
+  };
+
+  const handleArrowKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    const target = event.target;
+    // Let editable content and nested widgets handle their own arrow keys first.
+    if (
+      event.defaultPrevented ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.nativeEvent.isComposing ||
+      (target instanceof HTMLElement && target.isContentEditable) ||
+      (target instanceof Element &&
+        target.closest(
+          'input, textarea, select, [role="textbox"], [role="combobox"]',
+        ))
+    ) {
       return;
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight" && activeStepIndex < steps.length - 1) {
-        event.preventDefault();
-        goToNextStep();
-      }
+    if (event.key === "ArrowRight" && activeStepIndex < steps.length - 1) {
+      event.preventDefault();
+      goToNextStep();
+    } else if (event.key === "ArrowLeft" && activeStepIndex > 0) {
+      event.preventDefault();
+      goToPreviousStep();
+    }
+  };
 
-      if (event.key === "ArrowLeft" && activeStepIndex > 0) {
-        event.preventDefault();
-        goToPreviousStep();
-      }
+  const getInitialFocus = useCallback(() => {
+    const popup = stepRef.current;
+    if (!popup || popup.dataset.coachStepId !== currentStep?.id) {
+      return null;
+    }
 
-      if (event.key === "Escape" && currentStep?.allowToEndTour) {
-        event.preventDefault();
-        event.stopPropagation();
-        endTour();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown, true);
-    return () => document.removeEventListener("keydown", handleKeyDown, true);
-  }, [
-    activeStepIndex,
-    currentStep?.allowToEndTour,
-    endTour,
-    goToNextStep,
-    goToPreviousStep,
-    showTour,
-    steps.length,
-  ]);
-
-  // Function to focus on the next or close trigger within the current step
-  const getInitialFocus = () => {
-    const nextTriggers = document.querySelectorAll<HTMLElement>(
+    const nextTriggers = popup.querySelectorAll<HTMLElement>(
       "[data-coach-next-trigger]",
     );
-    const closeTriggers = document.querySelectorAll<HTMLElement>(
+    const closeTriggers = popup.querySelectorAll<HTMLElement>(
       "[data-coach-close-trigger]",
     );
 
@@ -269,7 +287,14 @@ const CoachRoot = (props: CoachProps) => {
 
     // Returns undefined to override the default focus behavior of the FocusBoundary and Dialog components
     return undefined;
-  };
+  }, [currentStep?.id]);
+
+  useClientLayoutEffect(() => {
+    // Dialog stays mounted between dialog steps, so its initial focus does not rerun.
+    if (showTour && currentStep?.type === "dialog") {
+      getInitialFocus();
+    }
+  }, [showTour, currentStep?.type, getInitialFocus, stepElement]);
 
   // Default content for a step
   const defaultStepContent = (
@@ -319,19 +344,21 @@ const CoachRoot = (props: CoachProps) => {
 
   // Step content, either custom rendered or default content
   const stepContent =
-    renderStep?.(
-      {
-        id: currentStep.id,
-        title: currentStep.title,
-        description: currentStep.description,
-        image: currentStep.image,
-      },
-      {
-        defaultContent: defaultStepContent,
-        index: activeStepIndex,
-        totalSteps: steps.length,
-      },
-    ) ?? defaultStepContent;
+    (currentStep &&
+      renderStep?.(
+        {
+          id: currentStep.id,
+          title: currentStep.title,
+          description: currentStep.description,
+          image: currentStep.image,
+        },
+        {
+          defaultContent: defaultStepContent,
+          index: activeStepIndex,
+          totalSteps: steps.length,
+        },
+      )) ??
+    defaultStepContent;
 
   // Render the current step based on its type (dialog or anchor)
   const renderCurrentStep = () => {
@@ -339,14 +366,25 @@ const CoachRoot = (props: CoachProps) => {
 
     if (currentStep?.type === "dialog") {
       return (
-        <Dialog open={true} size={getStepSize()}>
+        <Dialog
+          open={true}
+          size={getStepSize()}
+          onOpenChange={(_open, event) => {
+            // TODO:C Look at this
+            console.log(_open);
+            if (event instanceof KeyboardEvent && event.key === "Escape") {
+              handleEscapeKeyDown(event);
+            }
+          }}
+        >
           <Dialog.Popup
             // Keep focus trapped without locking scroll, so dialog-to-anchor transitions can scroll freely.
             modal="trap-focus"
             withBackdrop
-            ref={setStepElement}
+            ref={mergedStepRef}
             data-coach-step-id={currentStep.id}
             initialFocusTo={getInitialFocus}
+            onKeyDown={handleArrowKeyDown}
             width={getStepWidth()}
             aria-labelledby={labelledBy}
           >
@@ -368,17 +406,22 @@ const CoachRoot = (props: CoachProps) => {
           <FocusGuards>
             <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
               <Popover
-                ref={setStepElement}
+                ref={mergedStepRef}
                 data-coach-step-id={currentStep.id}
                 anchorEl={anchorEl}
                 open
-                onClose={() => {}}
+                onClose={endTour}
+                onKeyDown={handleArrowKeyDown}
                 placement={currentStep.placement}
                 offset={currentStep.offset ?? 12}
                 role="dialog"
                 aria-labelledby={labelledBy}
                 className="aksel-coach__popover"
+                // TODO:C - onClose makes it close on any outside interaction, not just Escape key.
+                // Wanted to use the already built escape key handling.
               >
+                {/* Popover's onClose does not distinguish Escape from outside interactions. */}
+                {/*<DismissableLayer asChild onEscapeKeyDown={handleEscapeKeyDown}>*/}
                 <Popover.Content
                   className="aksel-coach__popover_content"
                   data-top-close-button={currentStep.allowToEndTour ?? false}
@@ -387,6 +430,7 @@ const CoachRoot = (props: CoachProps) => {
                 >
                   {stepContent}
                 </Popover.Content>
+                {/*</DismissableLayer>*/}
               </Popover>
             </FocusBoundary>
           </FocusGuards>
@@ -404,7 +448,7 @@ const CoachRoot = (props: CoachProps) => {
       disableTour={disableTour}
       currentStepSize={getStepSize()}
       onClose={endTour}
-      currentStep={currentStep}
+      currentStep={currentStep ?? null}
       currentStepIndex={activeStepIndex}
       totalSteps={steps.length}
       goToNextStep={goToNextStep}
