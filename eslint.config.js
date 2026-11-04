@@ -1,7 +1,6 @@
 const js = require("@eslint/js");
 const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
-const akselLocal = require("eslint-plugin-aksel-local");
 const importPlugin = require("eslint-plugin-import");
 const oxlint = require("eslint-plugin-oxlint");
 const reactPlugin = require("eslint-plugin-react");
@@ -51,10 +50,10 @@ module.exports = defineConfig([
   js.configs.recommended,
   {
     // Rules are split between oxlint and ESLint, so ESLint can't tell if a directive is unused
+    // Disable reporting of unused ESLint disable comments, as some rules are now handled by oxlint
     linterOptions: { reportUnusedDisableDirectives: "off" },
     // Rules run by oxlint jsPlugins. Registered so disable-comments resolve.
     plugins: {
-      "aksel-local": akselLocal,
       storybook,
       "testing-library": testingLibrary,
     },
