@@ -32,10 +32,10 @@ function resolveComponent(
   Component?: React.FunctionComponent,
 ) {
   if (typeof Story === "function") {
-    return <Story {...Story.args} />;
+    return <Story {...(Story.args || {})} />;
   }
   if (Story.render) {
-    return Story.render(Story.args);
+    return Story.render(Story.args || {});
   }
   if (Story.args && Component) {
     return <Component {...Story.args} />;
