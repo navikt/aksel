@@ -15,7 +15,6 @@ function IconDetails({
   iconName?: keyof typeof meta;
   iconSvg?: string;
 }) {
-  // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
   const IconComponent = Icons[`${iconName}Icon`];
   const metaData = iconName ? meta[iconName] : null;
 

@@ -54,7 +54,7 @@ const restrictedImportPatterns = [
 ];
 
 export default defineConfig({
-  plugins: ["react", "import"],
+  plugins: ["react", "import", "jsx-a11y"],
   options: {
     reportUnusedDisableDirectives: "error",
   },
@@ -83,6 +83,9 @@ export default defineConfig({
     "**/codemod/**/*.js",
     "**/tokens/**/plugin.js",
     "**/query-types.ts",
+    "**/modal/helpers/dialog-polyfill.ts",
+    "**/component-names.generated.ts",
+    "**/.sanity/runtime",
     ".yarn",
     "**/next-env.d.ts",
     "@navikt/aksel-icons/src/**",
@@ -191,6 +194,66 @@ export default defineConfig({
         additionalHooks: "(useClientLayoutEffect)",
       },
     ],
+    // Replaces the former Biome ruleset (a11y, style and suspicious rules)
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-has-content": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/aria-activedescendant-has-tabindex": "error",
+    "jsx-a11y/aria-props": "error",
+    "jsx-a11y/aria-proptypes": "error",
+    "jsx-a11y/aria-role": "error",
+    "jsx-a11y/aria-unsupported-elements": "error",
+    "jsx-a11y/autocomplete-valid": "error",
+    "jsx-a11y/click-events-have-key-events": "error",
+    "jsx-a11y/heading-has-content": "error",
+    "jsx-a11y/html-has-lang": "error",
+    "jsx-a11y/iframe-has-title": "error",
+    "jsx-a11y/img-redundant-alt": "error",
+    "jsx-a11y/label-has-associated-control": "error",
+    "jsx-a11y/lang": "error",
+    "jsx-a11y/media-has-caption": "error",
+    "jsx-a11y/mouse-events-have-key-events": "error",
+    "jsx-a11y/no-access-key": "error",
+    "jsx-a11y/no-aria-hidden-on-focusable": "error",
+    "jsx-a11y/no-autofocus": "error",
+    "jsx-a11y/no-distracting-elements": "error",
+    "jsx-a11y/no-interactive-element-to-noninteractive-role": "error",
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": "error",
+    "jsx-a11y/no-noninteractive-tabindex": "error",
+    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/no-static-element-interactions": "error",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/role-supports-aria-props": "error",
+    "jsx-a11y/scope": "error",
+    "jsx-a11y/tabindex-no-positive": "error",
+    "react/no-array-index-key": "error",
+    "react/no-danger": "error",
+    "oxc/no-accumulating-spread": "error",
+    "no-else-return": "error",
+    "object-shorthand": "error",
+    "no-shadow": "error",
+    "no-template-curly-in-string": "error",
+    "no-return-assign": "error",
+    "no-console": [
+      "warn",
+      {
+        allow: [
+          "info",
+          "warn",
+          "error",
+          "group",
+          "groupEnd",
+          "table",
+          "assert",
+          "countReset",
+          "count",
+          "dir",
+          "time",
+          "timeEnd",
+          "timeStamp",
+        ],
+      },
+    ],
     // React Compiler rules (from eslint-plugin-react-hooks "recommended-latest"). Components that
     // break these rules cannot be optimized by React Compiler and risk subtle bugs.
     // Not enabled here: `react/refs` (too many false positives) and `react/purity` (oxlint also
@@ -213,6 +276,18 @@ export default defineConfig({
     "react-hooks-js/gating": "error",
   },
   overrides: [
+    {
+      files: ["@navikt/**", "tooling/**"],
+      rules: {
+        "import/no-cycle": "error",
+      },
+    },
+    {
+      files: ["**/*.stories.{ts,tsx}", "**/scripts/*.ts"],
+      rules: {
+        "no-console": "off",
+      },
+    },
     {
       files: ["aksel.nav.no/sanity-studio/**"],
       rules: {

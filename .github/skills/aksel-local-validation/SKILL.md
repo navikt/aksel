@@ -59,7 +59,6 @@ Group only matching files:
 ```sh
 corepack yarn oxlint --deny-warnings <changed .ts/.tsx/.js/.jsx files>
 corepack yarn stylelint <changed .css files>
-corepack yarn biome lint --no-errors-on-unmatched <changed supported source/config files>
 ```
 
 Do not pass unsupported file types to make a command appear comprehensive. Documentation-only changes need no code validation unless a documentation check exists.
