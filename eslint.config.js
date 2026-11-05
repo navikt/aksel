@@ -1,4 +1,3 @@
-const importPlugin = require("eslint-plugin-import");
 const oxlint = require("eslint-plugin-oxlint");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
@@ -55,11 +54,8 @@ module.exports = (async () =>
       },
     },
     reactHooks.configs.flat["recommended-latest"],
-    importPlugin.flatConfigs.recommended,
-    importPlugin.flatConfigs.typescript,
     {
       languageOptions: {
-        // eslint-plugin-import's recommended config sets ecmaVersion 2018
         ecmaVersion: "latest",
         globals: {
           ...globals.browser,
@@ -67,26 +63,14 @@ module.exports = (async () =>
         },
       },
       rules: {
-        "import/no-unresolved": "off",
-        "import/namespace": "off", // Biome has equivalent
-        "import/no-named-as-default": "off", // Temporary
         // Still in ESLint: react-hooks compiler rules (no oxlint equivalent)
         "react-hooks/refs": "off", // Too many false positives
       },
     },
     {
+      // Parser and plugin registration only. All rules are handled by oxlint.
       files: ["**/*.{ts,tsx}"],
-      extends: [tseslint.configs.recommended],
-      rules: {
-        //
-        // Start: Covered by TypeScript, and slow without a TS resolver
-        "import/default": "off",
-        "import/export": "off",
-        "import/named": "off",
-        "import/no-named-as-default-member": "off",
-        // End
-        "@typescript-eslint/no-explicit-any": "off", // Temporary
-      },
+      extends: [tseslint.configs.base],
     },
 
     // Must be last: turns off rules already covered by oxlint (see oxlint.config.mts)

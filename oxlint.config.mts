@@ -169,6 +169,7 @@ export default defineConfig({
     "react/require-render-return": "error",
     "react/react-in-jsx-scope": "error",
     "import/default": "error",
+    "import/export": "error",
     "import/no-named-as-default-member": "warn",
     "import/no-duplicates": "warn",
     "react/jsx-curly-brace-presence": [
@@ -269,6 +270,7 @@ export default defineConfig({
         "typescript/prefer-namespace-keyword": "error",
         "typescript/triple-slash-reference": "error",
         "import/default": "off",
+        "import/export": "off", // False positives on namespace/declaration merging, and TypeScript already checks duplicate exports
         "import/no-named-as-default-member": "off",
       },
       plugins: ["typescript"],
