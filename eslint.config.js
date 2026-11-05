@@ -1,4 +1,3 @@
-const js = require("@eslint/js");
 const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const importPlugin = require("eslint-plugin-import");
@@ -48,8 +47,6 @@ module.exports = (async () =>
       "**/test-results",
       "tooling/analyzer/temp",
     ]),
-    // Still in ESLint from recommended: no-octal (no oxlint equivalent)
-    js.configs.recommended,
     {
       // Rules are split between oxlint and ESLint, so ESLint can't tell if a directive is unused
       // Disable reporting of unused ESLint disable comments, as some rules are now handled by oxlint
