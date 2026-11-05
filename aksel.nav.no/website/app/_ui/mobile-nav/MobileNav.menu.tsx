@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { HGrid, VStack } from "@navikt/ds-react";
+import { useMobileNav } from "@/app/_ui/mobile-nav/MobileNav.provider";
 import { NextLink } from "@/app/_ui/next-link/NextLink";
 import styles from "./MobileNav.module.css";
 
@@ -21,6 +22,7 @@ function MobileNavMenu({ children }: { children: React.ReactNode }) {
 }
 
 function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
+  const context = useMobileNav();
   return (
     <VStack marginInline="space-8" position="relative">
       <HGrid columns="1fr auto">
@@ -28,6 +30,7 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
           prefetch={false}
           href="/designsystemet"
           className={styles.mobileNavItem}
+          onNavigate={() => context.toggleOpen()}
         >
           Designsystemet
         </NextLink>
@@ -60,6 +63,7 @@ function DesignsystemView({
   children: React.ReactNode;
   toggleClose: () => void;
 }) {
+  const context = useMobileNav();
   return (
     <div>
       <HGrid
@@ -80,6 +84,7 @@ function DesignsystemView({
           prefetch={false}
           href="/designsystemet"
           className={`${styles.mobileNavItem} ${styles.mobileNavItemCentered}`}
+          onNavigate={() => context.toggleOpen()}
         >
           Designsystemet
         </NextLink>
