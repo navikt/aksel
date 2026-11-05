@@ -55,6 +55,9 @@ const restrictedImportPatterns = [
 
 export default defineConfig({
   plugins: ["react", "import"],
+  jsPlugins: [
+    { name: "react-hooks-js", specifier: "eslint-plugin-react-hooks" },
+  ],
   categories: {
     correctness: "off",
   },
@@ -185,6 +188,26 @@ export default defineConfig({
         additionalHooks: "(useClientLayoutEffect)",
       },
     ],
+    // React Compiler rules (from eslint-plugin-react-hooks "recommended-latest"). Components that
+    // break these rules cannot be optimized by React Compiler and risk subtle bugs.
+    // Not enabled here: `react/refs` (too many false positives) and `react/purity` (oxlint also
+    // flags `new Date()`, which we use deliberately; the ESLint version only flags Date.now/Math.random).
+    "react/immutability": "error", // Mutating props, state or hook values
+    "react/set-state-in-effect": "error", // Synchronous setState in effects causes cascading renders
+    "react/set-state-in-render": "error", // Unconditional setState during render causes infinite loops
+    "react/static-components": "error", // Components created during render lose state on every render
+    "react/use-memo": "error", // useMemo/useCallback must be used correctly
+    "react/void-use-memo": "error", // useMemo callback must return a value
+    // Remaining React Compiler rules, run through the ESLint plugin (jsPlugins) until oxlint has
+    // native equivalents. `react-hooks-js/purity` is here because oxlint's native version also flags `new Date()`.
+    "react-hooks-js/purity": "error",
+    "react-hooks-js/preserve-manual-memoization": "error",
+    "react-hooks-js/incompatible-library": "warn",
+    "react-hooks-js/globals": "error",
+    "react-hooks-js/error-boundaries": "error",
+    "react-hooks-js/unsupported-syntax": "warn",
+    "react-hooks-js/config": "error",
+    "react-hooks-js/gating": "error",
   },
   overrides: [
     {

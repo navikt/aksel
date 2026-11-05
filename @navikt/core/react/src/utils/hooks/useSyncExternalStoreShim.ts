@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /** biome-ignore-all lint/correctness/useExhaustiveDependencies: Explained bellow */
 /* eslint-disable react-hooks/immutability */
-/* eslint-disable react-hooks/globals */
+/* oxlint-disable react-hooks-js/globals */
 /** biome-ignore-all lint/complexity/useLiteralKeys: Explained bellow */
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
