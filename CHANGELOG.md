@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.22.1
+
+### @navikt/ds-css
+
+- DataGrid: Column dividers in the table header are now hidden when column dividers are disabled, and only shown on hover, focus or while resizing. ([#5505](https://github.com/navikt/aksel/pull/5505))
+
 ## 8.22.0
 
 ### @navikt/aksel-icons
