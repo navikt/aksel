@@ -82,8 +82,6 @@ interface DataGridComponent {
 /**
  * Component for displaying tabular data.
  *
- * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
- *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datagrid)
  * @see 🏷️ {@link DataGridProps}
  *
