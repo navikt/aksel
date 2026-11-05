@@ -1,4 +1,3 @@
-/* oxlint-disable nextjs/no-img-element */
 import { BodyShort } from "@navikt/ds-react";
 import type { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { urlForImage } from "@/app/_sanity/utils";

@@ -1,4 +1,3 @@
-/* oxlint-disable nextjs/no-img-element */
 import { HandKnotIcon, ThumbDownIcon, ThumbUpIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, HGrid } from "@navikt/ds-react";
 import type { AkselColor } from "@navikt/ds-react/types/theme";

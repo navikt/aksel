@@ -21,7 +21,7 @@
 ## Repo summary
 
 - Nav's design system. Yarn 4 workspaces monorepo: published packages under `@navikt/` + docs site `aksel.nav.no/` + `apps/` + `tooling/`.
-- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 4, Oxlint 1 (with ESLint plugins as JS plugins), Stylelint 17, Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
+- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 5, Oxlint 1 (with ESLint plugins as JS plugins), Stylelint 17, Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
 - Published `@navikt/*` packages must stay React 17 compatible (peer `react ^17 || ^18 || ^19`).
 
 ## Start and validate
