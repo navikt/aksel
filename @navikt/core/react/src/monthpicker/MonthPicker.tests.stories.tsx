@@ -12,7 +12,7 @@ export default {
     chromatic: { disable: true },
   },
   /* TODO: Temp disabled CI-tests */
-  tags: ["!play-fn", "skip-test"],
+  tags: ["skip-test"],
 } satisfies Meta<typeof MonthPicker>;
 
 type Story = StoryObj<typeof MonthPicker>;
@@ -252,7 +252,7 @@ export const DropdownCaptionView: Story = {
  */
 export const TabStopAfterMouseFocus: Story = {
   // Overrides the file-level skip so this regression test runs in CI
-  tags: ["play-fn", "!skip-test"],
+  tags: ["!skip-test"],
   render: () => (
     <>
       <MonthPicker.Standalone year={new Date("2025")} />
