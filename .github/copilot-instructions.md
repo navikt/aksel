@@ -49,7 +49,7 @@
 - `corepack yarn workspace <name> <script>` - e.g. `@navikt/ds-react test` (Vitest + tsc), `website test`
 - `corepack yarn lint` / `corepack yarn test` / `corepack yarn boot` - root suites (slow; cross-workspace changes only)
 - `corepack yarn storybook` (:6006) / `corepack yarn storybook:aksel` (website examples, :6007, no secrets) / `corepack yarn storybook:test` (play tests, Playwright Firefox; Chromium when `COPILOT_CLI` is set) / `corepack yarn dev` (website, :3000, needs Sanity token)
-- Targeted play tests: `corepack yarn vitest run --config ./vitest.config.mts --project=storybook <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs Chromium; if the browser can't launch, report tests as not run with the exact command.
+- Targeted play tests: `corepack yarn storybook:test <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs Chromium; if the browser can't launch, report tests as not run with the exact command.
 
 ## Where to edit
 
