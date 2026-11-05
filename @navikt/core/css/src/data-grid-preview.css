@@ -208,8 +208,17 @@
   padding: 0;
   font-size: var(--__axc-data-table-text-size);
 
-  .aksel-data-table__thead &,
   .aksel-data-table[data-column-dividers="true"] & {
+    box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
+  }
+
+  .aksel-data-table[data-column-dividers="false"] & {
+    transition: box-shadow 0.1s ease-in-out;
+  }
+
+  .aksel-data-table[data-column-dividers="false"]
+    .aksel-data-table__thead:where(:hover, :has(:focus-visible, .aksel-data-table__th-resize-handle:active))
+    & {
     box-shadow: inset 1px 1px 0 0 var(--ax-border-neutral-subtle);
   }
 
