@@ -1,21 +1,23 @@
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "import"],
-  "categories": {
-    "correctness": "off"
+import { defineConfig } from "oxlint";
+
+export default defineConfig({
+  plugins: ["react", "import"],
+  categories: {
+    correctness: "off",
   },
-  "settings": {
-    "react": {
-      "version": "19.3.1"
-    }
+  settings: {
+    react: {
+      version: "19.3.1",
+    },
   },
-  "env": {
-    "builtin": true,
-    "es2026": true,
-    "browser": true,
-    "node": true
+  env: {
+    builtin: true,
+    es2026: true,
+    browser: true,
+    node: true,
   },
-  "ignorePatterns": [
+  ignorePatterns: [
+    "**/lib",
     "**/public",
     "@navikt/aksel/**/*.input.*",
     "@navikt/aksel/**/*.output.*",
@@ -33,9 +35,9 @@
     "**/storybook-static",
     "**/test-results",
     "tooling/analyzer/temp",
-    "apps/figma-icon-plugin/src/ui/vite-env.d.ts"
+    "apps/figma-icon-plugin/src/ui/vite-env.d.ts",
   ],
-  "rules": {
+  rules: {
     "constructor-super": "error",
     "for-direction": "error",
     "getter-return": "error",
@@ -117,30 +119,30 @@
     "react/jsx-curly-brace-presence": [
       "error",
       {
-        "propElementValues": "always"
-      }
+        propElementValues: "always",
+      },
     ],
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": [
       "warn",
       {
-        "additionalHooks": "(useClientLayoutEffect)"
-      }
-    ]
+        additionalHooks: "(useClientLayoutEffect)",
+      },
+    ],
   },
-  "overrides": [
+  overrides: [
     {
-      "files": ["aksel.nav.no/sanity-studio/**"],
-      "rules": {
-        "react/react-in-jsx-scope": "off"
-      }
+      files: ["aksel.nav.no/sanity-studio/**"],
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
     },
     {
-      "files": [
+      files: [
         "**/*.stories.{ts,tsx,js,jsx,mjs,cjs}",
-        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}"
+        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}",
       ],
-      "rules": {
+      rules: {
         "storybook/await-interactions": "error",
         "storybook/context-in-play-function": "error",
         "storybook/default-exports": "error",
@@ -152,20 +154,20 @@
         "storybook/use-storybook-expect": "error",
         "storybook/use-storybook-testing-library": "error",
         "import/no-anonymous-default-export": "off",
-        "react/rules-of-hooks": "off"
+        "react/rules-of-hooks": "off",
       },
-      "jsPlugins": ["eslint-plugin-storybook"]
+      jsPlugins: ["eslint-plugin-storybook"],
     },
     {
-      "files": ["**/.storybook/main.{js,cjs,mjs,ts}"],
-      "rules": {
-        "storybook/no-uninstalled-addons": "error"
+      files: ["**/.storybook/main.{js,cjs,mjs,ts}"],
+      rules: {
+        "storybook/no-uninstalled-addons": "error",
       },
-      "jsPlugins": ["eslint-plugin-storybook"]
+      jsPlugins: ["eslint-plugin-storybook"],
     },
     {
-      "files": ["**/*.{ts,tsx}"],
-      "rules": {
+      files: ["**/*.{ts,tsx}"],
+      rules: {
         "constructor-super": "off",
         "getter-return": "off",
         "no-class-assign": "off",
@@ -190,9 +192,9 @@
         "no-unused-expressions": [
           "error",
           {
-            "allowShortCircuit": true,
-            "allowTernary": true
-          }
+            allowShortCircuit: true,
+            allowTernary: true,
+          },
         ],
         "typescript/ban-ts-comment": "error",
         "typescript/no-duplicate-enum-values": "error",
@@ -212,26 +214,26 @@
         "typescript/prefer-namespace-keyword": "error",
         "typescript/triple-slash-reference": "error",
         "import/default": "off",
-        "import/no-named-as-default-member": "off"
+        "import/no-named-as-default-member": "off",
       },
-      "plugins": ["typescript"]
+      plugins: ["typescript"],
     },
     {
-      "files": ["**/*.test.*", "**/__tests__/*"],
-      "rules": {
+      files: ["**/*.test.*", "**/__tests__/*"],
+      rules: {
         "testing-library/await-async-events": [
           "error",
           {
-            "eventModule": "userEvent"
-          }
+            eventModule: "userEvent",
+          },
         ],
         "testing-library/await-async-queries": "error",
         "testing-library/await-async-utils": "error",
         "testing-library/no-await-sync-events": [
           "error",
           {
-            "eventModules": ["fire-event"]
-          }
+            eventModules: ["fire-event"],
+          },
         ],
         "testing-library/no-await-sync-queries": "error",
         "testing-library/no-container": "error",
@@ -266,19 +268,19 @@
         "vitest/valid-describe-callback": "error",
         "vitest/valid-expect": "error",
         "vitest/valid-expect-in-promise": "error",
-        "vitest/valid-title": "error"
+        "vitest/valid-title": "error",
       },
-      "jsPlugins": ["eslint-plugin-testing-library"],
-      "plugins": ["vitest"]
+      jsPlugins: ["eslint-plugin-testing-library"],
+      plugins: ["vitest"],
     },
     {
-      "files": ["aksel.nav.no/website/**"],
-      "rules": {
+      files: ["aksel.nav.no/website/**"],
+      rules: {
         "react/no-unknown-property": [
           "error",
           {
-            "ignore": ["jsx", "global"]
-          }
+            ignore: ["jsx", "global"],
+          },
         ],
         "react/react-in-jsx-scope": "off",
         "nextjs/google-font-display": "warn",
@@ -300,168 +302,172 @@
         "nextjs/no-document-import-in-page": "error",
         "nextjs/no-duplicate-head": "error",
         "nextjs/no-head-import-in-document": "error",
-        "nextjs/no-script-component-in-head": "error"
+        "nextjs/no-script-component-in-head": "error",
       },
-      "plugins": ["nextjs"]
+      plugins: ["nextjs"],
     },
     {
-      "files": ["aksel.nav.no/website/pages/eksempler/**"],
-      "rules": {
-        "nextjs/no-img-element": "off"
+      files: ["aksel.nav.no/website/pages/eksempler/**"],
+      rules: {
+        "nextjs/no-img-element": "off",
       },
-      "plugins": ["nextjs"]
+      plugins: ["nextjs"],
     },
     {
-      "files": [
+      files: [
         "aksel.nav.no/website/pages/eksempler/**/*.tsx",
-        "aksel.nav.no/website/pages/templates/**/*.tsx"
+        "aksel.nav.no/website/pages/templates/**/*.tsx",
       ],
-      "rules": {
+      rules: {
         "aksel-local/args-check": ["error"],
-        "aksel-local/comment-check": ["error"]
+        "aksel-local/comment-check": ["error"],
       },
-      "jsPlugins": ["eslint-plugin-aksel-local"]
+      jsPlugins: ["eslint-plugin-aksel-local"],
     },
     {
-      "files": [
+      files: [
         "**/examples/__parts*/*.tsx",
         "**/pages/templates/**/*.tsx",
-        "**/pages/eksempler/**/*.tsx"
+        "**/pages/eksempler/**/*.tsx",
       ],
-      "rules": {
-        "aksel-local/import-check": ["error"]
+      rules: {
+        "aksel-local/import-check": ["error"],
       },
-      "jsPlugins": ["eslint-plugin-aksel-local"]
+      jsPlugins: ["eslint-plugin-aksel-local"],
     },
     {
-      "files": ["**/examples/__parts-inline/*.tsx"],
-      "rules": {
+      files: ["**/examples/__parts-inline/*.tsx"],
+      rules: {
         "arrow-body-style": ["error", "never"],
         "func-style": ["error", "expression"],
-        "import/no-named-export": "error"
-      }
+        "import/no-named-export": "error",
+      },
     },
     {
-      "files": ["@navikt/**"],
-      "rules": {
+      files: ["@navikt/**"],
+      rules: {
         "no-restricted-imports": [
           "error",
           {
-            "paths": [
+            paths: [
               {
-                "name": "react",
-                "importNames": [
+                name: "react",
+                importNames: [
                   "useId",
                   "useInsertionEffect",
                   "useSyncExternalStore",
                   "useDeferredValue",
                   "useTransition",
-                  "startTransition"
+                  "startTransition",
                 ],
-                "message": "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
+                message:
+                  "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
               },
               {
-                "name": "react",
-                "importNames": [
+                name: "react",
+                importNames: [
                   "useOptimistic",
                   "useActionState",
                   "use",
                   "cache",
                   "useEffectEvent",
                   "ViewTransition",
-                  "addTransitionType"
+                  "addTransitionType",
                 ],
-                "message": "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
+                message:
+                  "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
               },
               {
-                "name": "react-dom/client",
-                "importNames": ["createRoot", "hydrateRoot"],
-                "message": "React 18+ API not allowed (targeting React 17)."
+                name: "react-dom/client",
+                importNames: ["createRoot", "hydrateRoot"],
+                message: "React 18+ API not allowed (targeting React 17).",
               },
               {
-                "name": "react-dom",
-                "importNames": ["browser"],
-                "message": "React 19+ API not allowed (targeting React 17)."
-              }
+                name: "react-dom",
+                importNames: ["browser"],
+                message: "React 19+ API not allowed (targeting React 17).",
+              },
             ],
-            "patterns": [
+            patterns: [
               {
-                "group": ["fs", "path"],
-                "message": "Use `node:` prefix when importing native node modules, e.g. `import path from \"node:path\"`."
+                group: ["fs", "path"],
+                message:
+                  'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
               },
               {
-                "group": ["**/esm/**", "**/cjs/**"],
-                "message": "Do not import from build output directories. Import from source instead."
-              }
-            ]
-          }
+                group: ["**/esm/**", "**/cjs/**"],
+                message:
+                  "Do not import from build output directories. Import from source instead.",
+              },
+            ],
+          },
         ],
         "no-restricted-properties": [
           "error",
           {
-            "object": "React",
-            "property": "useId",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useId",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useInsertionEffect",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useInsertionEffect",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useSyncExternalStore",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useSyncExternalStore",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useDeferredValue",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useDeferredValue",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useTransition",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useTransition",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "startTransition",
-            "message": "React 18+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "startTransition",
+            message: "React 18+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useOptimistic",
-            "message": "React 19+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useOptimistic",
+            message: "React 19+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useActionState",
-            "message": "React 19+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "useActionState",
+            message: "React 19+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "use",
-            "message": "React 19+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "use",
+            message: "React 19+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "cache",
-            "message": "React 19+ API not allowed (targeting React 17)."
+            object: "React",
+            property: "cache",
+            message: "React 19+ API not allowed (targeting React 17).",
           },
           {
-            "object": "React",
-            "property": "useEffectEvent",
-            "message": "React 19+ API not allowed (targeting React 17)."
-          }
-        ]
-      }
+            object: "React",
+            property: "useEffectEvent",
+            message: "React 19+ API not allowed (targeting React 17).",
+          },
+        ],
+      },
     },
     {
-      "files": ["@navikt/**/*.stories.tsx"],
-      "rules": {
+      files: ["@navikt/**/*.stories.tsx"],
+      rules: {
         "no-restricted-imports": "off",
-        "no-restricted-properties": "off"
-      }
-    }
-  ]
-}
+        "no-restricted-properties": "off",
+      },
+    },
+  ],
+});
