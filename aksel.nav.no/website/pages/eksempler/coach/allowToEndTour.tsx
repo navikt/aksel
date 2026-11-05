@@ -50,9 +50,11 @@ const Example = () => {
         },
       ]}
     >
-      <Coach.Mark>
-        <Button ref={buttonRef}>Opprett oppgave</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={buttonRef}>Opprett oppgave</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };

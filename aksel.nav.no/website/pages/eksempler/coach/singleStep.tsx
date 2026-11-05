@@ -12,9 +12,11 @@ const Example = () => {
       title="Et stegs coach"
       description="Denne coachen har kun ett steg."
     >
-      <Coach.Mark>
-        <Button ref={buttonRef}>Opprett oppgave</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={buttonRef}>Opprett oppgave</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };

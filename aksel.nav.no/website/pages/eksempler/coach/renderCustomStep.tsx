@@ -66,9 +66,11 @@ const Example = () => {
         },
       ]}
     >
-      <Coach.Mark>
-        <Button ref={buttonRef}>Lorem ipsum</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={buttonRef}>Lorem ipsum</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };

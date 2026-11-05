@@ -1,11 +1,10 @@
 import React, { forwardRef } from "react";
 import type { AkselColor } from "../../types";
-import { cl, composeEventHandlers } from "../../utils/helpers";
-import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { cl } from "../../utils/helpers";
 import type { SpacingScale } from "../../utils/hooks/base-primitive/helpers/types";
 import { useCoachContext } from "../root/Coach.context";
 
-type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+type CoachMarkProps = React.ButtonHTMLAttributes<HTMLDivElement> &
   ({
     /**
      * Badge color.
@@ -35,39 +34,26 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
  * @example
  * ```jsx
  * <Coach type="dialog" title="Help">
- *   <Coach.Mark>
- *     <Button>Target</Button>
- *   </Coach.Mark>
+ *   <Coach.ShowTourTrigger>
+ *     <Coach.Mark>
+ *       <Button>Target</Button>
+ *     </Coach.Mark>
+ *   </Coach.ShowTourTrigger>
  * </Coach>
  * ```
  */
-const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
+const CoachMark = forwardRef<HTMLDivElement, CoachMarkProps>(
   (
     {
       children,
-      onClick,
       className,
       "data-color": color = "danger",
-      "aria-label": ariaLabel,
-      "aria-labelledby": ariaLabelledby,
-      "aria-hidden": ariaHidden,
       style,
       ...restProps
     },
     forwardedRef,
   ) => {
     const coach = useCoachContext(false);
-
-    if (coach === undefined && onClick === undefined) {
-      consoleWarning(
-        "Coach.Mark used outside of Coach and without onClick handler.",
-      );
-    }
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      coach?.openTour?.();
-    };
 
     const offset =
       "offset" in restProps ? (restProps.offset ?? "space-16") : "space-16";
@@ -83,22 +69,17 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
       : style;
 
     const Mark = (
-      <button
-        type="button"
-        {...restProps}
-        ref={forwardedRef}
+      <div
+        {...(!children ? restProps : {})}
+        ref={!children ? forwardedRef : undefined}
         data-color={color}
-        aria-label={ariaLabel ?? "Åpne veiledning"}
-        aria-labelledby={ariaLabelledby}
-        aria-hidden={ariaHidden}
-        aria-haspopup="dialog"
+        aria-hidden
         className={cl("aksel-coach__mark-container", className)}
         style={containerStyle}
-        onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div className="aksel-coach__mark-pulse" />
         <div className="aksel-coach__mark" />
-      </button>
+      </div>
     );
 
     // If tour is disabled, only render the children without the mark
@@ -112,7 +93,11 @@ const CoachMark = forwardRef<HTMLButtonElement, CoachMarkProps>(
     }
 
     return (
-      <div className="aksel-coach__mark-anchor">
+      <div
+        {...restProps}
+        ref={forwardedRef}
+        className="aksel-coach__mark-anchor"
+      >
         {children}
         {Mark}
       </div>

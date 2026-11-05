@@ -47,9 +47,11 @@ const Example = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={opprettRef}>Opprett oppgave</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={opprettRef}>Opprett oppgave</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
       <Table>
         <Table.Header>

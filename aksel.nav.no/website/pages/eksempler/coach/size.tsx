@@ -27,9 +27,11 @@ const Example = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={mediumRef}>Medium (standard)</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={mediumRef}>Medium (standard)</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
       <Coach
         steps={[
@@ -52,9 +54,11 @@ const Example = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={smallRef}>Small</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={smallRef}>Small</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
     </HStack>
   );

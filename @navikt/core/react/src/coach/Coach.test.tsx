@@ -143,42 +143,46 @@ describe("Coach invalid steps", () => {
   });
 });
 
-describe("Coach.Mark", () => {
-  test("opens the tour without triggering its anchor click handler", async () => {
+describe("Coach.ShowTourTrigger", () => {
+  test("opens the tour while preserving its anchor click handler", async () => {
     const user = userEvent.setup();
     const openTour = vi.fn();
     const onClick = vi.fn();
     const onAnchorClick = vi.fn();
-    const ref = React.createRef<HTMLButtonElement>();
+    const ref = React.createRef<HTMLDivElement>();
 
     render(
-      <CoachContextProvider {...createContext({ openTour })}>
-        <Coach.Mark ref={ref} aria-label="Show help" onClick={onClick}>
-          <button type="button" onClick={onAnchorClick}>
-            Target
-          </button>
-        </Coach.Mark>
+      <CoachContextProvider {...createContext({ openTour, showTour: false })}>
+        <Coach.ShowTourTrigger onClick={onClick}>
+          <Coach.Mark ref={ref}>
+            <button type="button" onClick={onAnchorClick}>
+              Target
+            </button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </CoachContextProvider>,
     );
 
-    const mark = screen.getByRole("button", { name: "Show help" });
-    expect(ref.current).toBe(mark);
-    expect(mark).toHaveAttribute("aria-haspopup", "dialog");
-    await user.click(mark);
+    const target = screen.getByRole("button", { name: "Target" });
+    expect(ref.current).toContainElement(target);
+    expect(ref.current).toHaveAttribute("aria-haspopup", "dialog");
+    await user.click(target);
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(openTour).toHaveBeenCalledTimes(1);
-    expect(onAnchorClick).not.toHaveBeenCalled();
+    expect(onAnchorClick).toHaveBeenCalledTimes(1);
   });
 
   test("allows the consumer to cancel opening", async () => {
     const user = userEvent.setup();
     const openTour = vi.fn();
     render(
-      <CoachContextProvider {...createContext({ openTour })}>
-        <Coach.Mark
+      <CoachContextProvider {...createContext({ openTour, showTour: false })}>
+        <Coach.ShowTourTrigger
           aria-label="Show help"
           onClick={(event) => event.preventDefault()}
-        />
+        >
+          <button type="button">Target</button>
+        </Coach.ShowTourTrigger>
       </CoachContextProvider>,
     );
     await user.click(screen.getByRole("button", { name: "Show help" }));

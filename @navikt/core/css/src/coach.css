@@ -84,8 +84,6 @@
   --__axc-coach__mark-size: var(--ax-space-16);
   --__axc-coach__mark-color: var(--ax-bg-strong);
 
-  all: unset;
-  cursor: pointer;
   position: relative;
   width: calc(var(--__axc-coach__mark-size) * 2);
   height: calc(var(--__axc-coach__mark-size) * 2);
@@ -95,11 +93,6 @@
   border-radius: var(--ax-radius-full);
   inset-block-start: 0;
   inset-inline-end: 0;
-
-  &:focus-visible {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 3px;
-  }
 }
 
 .aksel-coach__mark {

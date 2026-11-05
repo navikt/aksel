@@ -59,9 +59,11 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={createRef}>Create</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={createRef}>Create</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
     </HStack>
   );
@@ -91,9 +93,11 @@ export const MissingAnchor: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Mark>
-        <Button ref={anchorRef}>Create</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={anchorRef}>Create</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };
@@ -117,9 +121,11 @@ export const CoachDialog: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button>Next step</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button>Next step</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
     </HStack>
   );
@@ -186,9 +192,11 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={dashboardRef}>Dashboard</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={dashboardRef}>Dashboard</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
       <HStack justify="end" width="100%">
         <Button ref={settingsRef}>Settings</Button>
@@ -228,9 +236,11 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button ref={buttonRef}>Button</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button ref={buttonRef}>Button</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
     );
   },
@@ -295,9 +305,11 @@ export const RenderStep: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Mark>
-        <Button>Feature</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button>Feature</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };
@@ -317,82 +329,94 @@ export const Mark: StoryObj<typeof CoachMark> = {
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach type="dialog" title="Explore the page">
-          <Coach.Mark offset={props.offset}>
-            <ToggleGroup defaultValue="lest" onChange={console.info}>
-              <ToggleGroup.Item
-                value="ulest"
-                icon={<EnvelopeClosedIcon aria-hidden />}
-                label="Ulest"
-              />
-              <ToggleGroup.Item
-                value="lest"
-                icon={<EnvelopeOpenIcon aria-hidden />}
-                label="Lest"
-              />
-              <ToggleGroup.Item
-                value="sendt"
-                icon={<PaperplaneIcon aria-hidden />}
-                label="Sendt"
-              />
-            </ToggleGroup>
-          </Coach.Mark>
-          <Coach.Mark offset={props.offset}>
-            <Button onClick={() => console.log("Button clicked")}>
-              Click me
-            </Button>
-          </Coach.Mark>
-          <Coach.Mark offset={props.offset}>
-            <Chips>
-              {options.map((option) => (
-                <Chips.Toggle
-                  key={option}
-                  selected={selected.includes(option)}
-                  onClick={() =>
-                    setSelected(
-                      selected.includes(option)
-                        ? selected.filter((x) => x !== option)
-                        : [...selected, option],
-                    )
-                  }
-                >
-                  {option}
-                </Chips.Toggle>
-              ))}
-            </Chips>
-          </Coach.Mark>
-          <Coach.Mark offset={props.offset}>
-            <GuidePanel>
-              Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
-              går mer enn X måneder siden du søkte, skal du få brev om at
-              saksbehandlingstiden er forlenget.
-            </GuidePanel>
-          </Coach.Mark>
-          <Coach.Mark
-            onClick={() => console.log("Coach dot clicked")}
-            offset={props.offset}
-          >
-            <ExpansionCard aria-label="Demo med bare tittel">
-              <ExpansionCard.Header>
-                <ExpansionCard.Title>
-                  Utbetaling av sykepenger
-                </ExpansionCard.Title>
-              </ExpansionCard.Header>
-              <ExpansionCard.Content>
-                <p>Her er innholdet i ekspansjonskortet.</p>
-              </ExpansionCard.Content>
-            </ExpansionCard>
-          </Coach.Mark>
-          <Coach.Mark offset={props.offset}>
-            <InfoCard data-color="info">
-              <InfoCard.Header>
-                <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
-              </InfoCard.Header>
-              <InfoCard.Content>
-                InfoCard brukes for å fremheve informasjon på en side, uten at
-                det er like kritisk som en alert.
-              </InfoCard.Content>
-            </InfoCard>
-          </Coach.Mark>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark offset={props.offset}>
+              <ToggleGroup defaultValue="lest" onChange={console.info}>
+                <ToggleGroup.Item
+                  value="ulest"
+                  icon={<EnvelopeClosedIcon aria-hidden />}
+                  label="Ulest"
+                />
+                <ToggleGroup.Item
+                  value="lest"
+                  icon={<EnvelopeOpenIcon aria-hidden />}
+                  label="Lest"
+                />
+                <ToggleGroup.Item
+                  value="sendt"
+                  icon={<PaperplaneIcon aria-hidden />}
+                  label="Sendt"
+                />
+              </ToggleGroup>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark offset={props.offset}>
+              <Button onClick={() => console.log("Button clicked")}>
+                Click me
+              </Button>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark offset={props.offset}>
+              <Chips>
+                {options.map((option) => (
+                  <Chips.Toggle
+                    key={option}
+                    selected={selected.includes(option)}
+                    onClick={() =>
+                      setSelected(
+                        selected.includes(option)
+                          ? selected.filter((x) => x !== option)
+                          : [...selected, option],
+                      )
+                    }
+                  >
+                    {option}
+                  </Chips.Toggle>
+                ))}
+              </Chips>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark offset={props.offset}>
+              <GuidePanel>
+                Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
+                går mer enn X måneder siden du søkte, skal du få brev om at
+                saksbehandlingstiden er forlenget.
+              </GuidePanel>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark
+              onClick={() => console.log("Coach dot clicked")}
+              offset={props.offset}
+            >
+              <ExpansionCard aria-label="Demo med bare tittel">
+                <ExpansionCard.Header>
+                  <ExpansionCard.Title>
+                    Utbetaling av sykepenger
+                  </ExpansionCard.Title>
+                </ExpansionCard.Header>
+                <ExpansionCard.Content>
+                  <p>Her er innholdet i ekspansjonskortet.</p>
+                </ExpansionCard.Content>
+              </ExpansionCard>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+          <Coach.ShowTourTrigger>
+            <Coach.Mark offset={props.offset}>
+              <InfoCard data-color="info">
+                <InfoCard.Header>
+                  <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
+                </InfoCard.Header>
+                <InfoCard.Content>
+                  InfoCard brukes for å fremheve informasjon på en side, uten at
+                  det er like kritisk som en alert.
+                </InfoCard.Content>
+              </InfoCard>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
           <Coach.Mark data-color="success" />
         </Coach>
       </VStack>
@@ -430,9 +454,11 @@ export const Translations: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Mark>
-          <Button>Feature</Button>
-        </Coach.Mark>
+        <Coach.ShowTourTrigger>
+          <Coach.Mark>
+            <Button>Feature</Button>
+          </Coach.Mark>
+        </Coach.ShowTourTrigger>
       </Coach>
     </Provider>
   );
@@ -451,11 +477,11 @@ export const SingleStepAnchor: StoryFn<typeof Coach> = () => {
       title="Enkeltsteg"
       description="Dette er en enkeltstående coachmark uten steps-prop."
     >
-      <Coach.Mark>
-        <Button ref={buttonRef} onClick={() => setOpen((prev) => !prev)}>
-          Feature
-        </Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={buttonRef}>Feature</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };
@@ -484,9 +510,11 @@ export const SingleStepRenderStep: StoryFn<typeof Coach> = () => {
         </Coach.Step>
       )}
     >
-      <Coach.Mark>
-        <Button ref={buttonRef}>Feature</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={buttonRef}>Feature</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };
@@ -544,9 +572,11 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Mark>
-        <Button ref={dashboardRef}>Dashboard</Button>
-      </Coach.Mark>
+      <Coach.ShowTourTrigger>
+        <Coach.Mark>
+          <Button ref={dashboardRef}>Dashboard</Button>
+        </Coach.Mark>
+      </Coach.ShowTourTrigger>
     </Coach>
   );
 };
