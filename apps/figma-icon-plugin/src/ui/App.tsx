@@ -154,6 +154,7 @@ const App = () => {
                       </Heading>
                       <div className="icons-wrapper">
                         {sub.icons.map((i) => {
+                          // oxlint-disable-next-line import/namespace
                           const T = Icons[`${i.id}Icon`];
                           if (T === undefined) {
                             return null;
