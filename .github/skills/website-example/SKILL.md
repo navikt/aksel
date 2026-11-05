@@ -54,6 +54,7 @@ Hard rules (enforced by `tooling/eslint` rules `aksel-local/*`):
 ## 3. Validate
 
 ```sh
+corepack yarn oxlint --deny-warnings <file>
 corepack yarn eslint --max-warnings=0 --no-warn-ignored <file>
 corepack yarn workspace website validate:eksempler
 corepack yarn storybook:aksel   # visual check at :6007, needs no secrets
