@@ -73,6 +73,7 @@ const MonthPickerButtonInternal = ({
   const isThisMonth = dateIsInCurrentMonth(month, year);
 
   return (
+    // oxlint-disable-next-line jsx-a11y/control-has-associated-label
     <button
       ref={ref}
       type="button"
