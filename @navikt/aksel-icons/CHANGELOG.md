@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 8.22.0
+
+### Minor Changes
+
+- Icons: New icons `Gift`, `ArrowsPointingIn` and `ArrowsPointingOut`. ([#5484](https://github.com/navikt/aksel/pull/5484))
+
+### Patch Changes
+
+- ESM: Mark ESM output as side-effect free, so bundlers like webpack, Turbopack and esbuild can tree-shake unused components and icons. ([#5472](https://github.com/navikt/aksel/pull/5472))
+
 ## 8.21.0
 
 ### Minor Changes

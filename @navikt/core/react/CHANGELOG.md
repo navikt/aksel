@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 8.22.0
+
+### Patch Changes
+
+- Combobox: The list is no longer focusable ([#5490](https://github.com/navikt/aksel/pull/5490))
+
+- Popover: Closed popovers no longer calculate their position on mount. This makes pages with many Dropdowns or HelpTexts render faster. ([#5474](https://github.com/navikt/aksel/pull/5474))
+
+- ESM: Mark ESM output as side-effect free, so bundlers like webpack, Turbopack and esbuild can tree-shake unused components and icons. ([#5472](https://github.com/navikt/aksel/pull/5472))
+
+- MonthPicker: Fixed issue where navigating to a year without any enabled months could lead to re-render loop in React ([#5503](https://github.com/navikt/aksel/pull/5503))
+
+- MonthPicker: Arrow-key navigation no longer freezes the page when no later or earlier month is enabled. Keyboard search now respects `fromDate`/`toDate` with both caption types and looks at most 100 years ahead or back. ([#5477](https://github.com/navikt/aksel/pull/5477))
+
+- Date utilities: Import date-fns functions and locales from their own paths, so unbundled Node imports (SSR, Vitest/Jest) no longer load every date-fns locale. ([#5476](https://github.com/navikt/aksel/pull/5476))
+
+- DataGrid: Fixed text selection inside details panels when keyboard navigation is enabled. ([`0bdad46`](https://github.com/navikt/aksel/commit/0bdad462664e04abd89c4121de515f6ae6d9aad1))
+
+- Updated dependencies [[`16da3ce`](https://github.com/navikt/aksel/commit/16da3ce770041acc41589fcdd087717fab027126), [`b69c5fc`](https://github.com/navikt/aksel/commit/b69c5fca305f28ad99b48dd74e4f736fe4257d48)]:
+  - @navikt/aksel-icons@8.22.0
+  - @navikt/ds-tokens@8.22.0
+
 ## 8.21.0
 
 ### Minor Changes
