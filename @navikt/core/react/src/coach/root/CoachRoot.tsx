@@ -101,7 +101,7 @@ const CoachRoot = (props: CoachProps) => {
             title: props.title,
             description: props.description,
             image: props.image,
-            allowToEndTour: props.allowToEndTour ?? true,
+            allowCancelTour: props.allowCancelTour ?? true,
             size: props.size,
             width: props.width,
             "aria-labelledby": props["aria-labelledby"],
@@ -230,7 +230,7 @@ const CoachRoot = (props: CoachProps) => {
       return;
     }
     event.preventDefault();
-    if (currentStep?.allowToEndTour) {
+    if (currentStep?.allowCancelTour) {
       endTour();
     }
   };
@@ -301,7 +301,7 @@ const CoachRoot = (props: CoachProps) => {
     <CoachStep>
       <div className="aksel-coach__top-bar">
         <CoachProgress />
-        {currentStep?.allowToEndTour && (
+        {currentStep?.allowCancelTour && (
           <CoachCloseTrigger data-coach-top-close-trigger>
             <Button
               size="small"

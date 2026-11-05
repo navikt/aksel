@@ -144,7 +144,7 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             type: "dialog",
             size: "small",
             width: "small",
-            allowToEndTour: true,
+            allowCancelTour: true,
             image: (
               <img
                 src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
@@ -173,7 +173,7 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
             type: "anchor",
             anchorRef: settingsRef,
             placement: "left",
-            allowToEndTour: true,
+            allowCancelTour: true,
             width: "small",
             title: "Settings",
             description: "This tour takes 30 seconds.",
@@ -523,7 +523,7 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
           type: "dialog",
           size: "small",
           width: "small",
-          allowToEndTour: true,
+          allowCancelTour: true,
           image: (
             <img
               src="https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg"
@@ -537,7 +537,7 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
           id: "step-2",
           type: "anchor",
           size: "small",
-          allowToEndTour: true,
+          allowCancelTour: true,
           anchorRef: dashboardRef,
           title: "Dashboard",
           description: <Search label="Search" />,

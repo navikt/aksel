@@ -25,7 +25,7 @@ const Example = () => {
           id: "step-anchor-with-image-and-close",
           type: "anchor",
           anchorRef: buttonRef,
-          allowToEndTour: true,
+          allowCancelTour: true,
           title: "Anchor med bilde",
           description:
             "Dette anchoret har et bilde, og en lukkeknapp øverst til høyre.",

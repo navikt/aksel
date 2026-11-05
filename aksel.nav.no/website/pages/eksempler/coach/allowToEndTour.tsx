@@ -12,7 +12,7 @@ const Example = () => {
           id: "step-1",
           type: "dialog",
           title: "Lukkbar dialog",
-          allowToEndTour: true,
+          allowCancelTour: true,
           description:
             "Denne dialogen kan avslutte turen ved å trykke på krysset øverst til høyre.",
         },
@@ -28,7 +28,7 @@ const Example = () => {
           type: "anchor",
           anchorRef: buttonRef,
           title: "Lukkbar anchor",
-          allowToEndTour: true,
+          allowCancelTour: true,
           description:
             "Denne anchoren kan avslutte Coachen ved å trykke på krysset øverst til høyre.",
         },

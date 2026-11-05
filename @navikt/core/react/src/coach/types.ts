@@ -9,10 +9,9 @@ interface CoachStepBase {
    */
   id: string;
   /**
-   * Whether the user is allowed to end the tour at this step.
-   * TODO:C - Best naming? "allowEarlyEnd" or similar?
+   * Whether the user is allowed to cancel the tour at this step.
    */
-  allowToEndTour?: boolean;
+  allowCancelTour?: boolean;
   /**
    * Updates sub-component padding, Coach.Title font-size and button size.
    * @default "medium"
@@ -22,7 +21,7 @@ interface CoachStepBase {
    * Width of the coach step
    * @default "medium"
    */
-  width?: "small" | "medium";
+  width?: "medium" | "small";
   /**
    * Image content for the coach step.
    */
@@ -146,7 +145,7 @@ interface CoachTourProps extends CoachBaseProps {
   title?: never;
   description?: never;
   image?: never;
-  allowToEndTour?: never;
+  allowCancelTour?: never;
   size?: never;
   width?: never;
   anchorRef?: never;

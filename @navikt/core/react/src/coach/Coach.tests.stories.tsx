@@ -53,7 +53,7 @@ const translations = {
 const dialogSteps: CoachStepItem[] = [
   { id: "welcome", type: "dialog", title: "Welcome" },
   { id: "features", type: "dialog", title: "Features" },
-  { id: "finished", type: "dialog", title: "Finished", allowToEndTour: true },
+  { id: "finished", type: "dialog", title: "Finished", allowCancelTour: true },
 ];
 
 function Tour({
@@ -548,7 +548,7 @@ export const MixedSteps: StoryObj = {
               type: "anchor",
               anchorRef: secondRef,
               title: "Second anchor",
-              allowToEndTour: true,
+              allowCancelTour: true,
             },
             dialogSteps[2],
           ]}

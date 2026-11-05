@@ -26,6 +26,7 @@ interface CoachImageProps extends React.HTMLAttributes<HTMLDivElement> {
 const CoachImage = forwardRef<HTMLDivElement, CoachImageProps>(
   ({ className, children, style, aspectRatio, ...restProps }, forwardedRef) => {
     const { currentStepSize } = useCoachContext();
+
     return (
       <Bleed
         asChild
