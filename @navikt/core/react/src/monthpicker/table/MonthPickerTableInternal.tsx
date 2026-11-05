@@ -49,8 +49,15 @@ const MonthPickerTable = () => {
     hasSelected ? selected : getRootFallback(),
   );
 
-  if (tabRoot?.getFullYear() !== year.getFullYear()) {
-    setTabRoot(hasSelected ? selected : getRootFallback());
+  // Track the year instead of comparing tabRoot, since tabRoot is undefined
+  // when every month in the year is disabled and would re-trigger forever.
+  const [tabRootYear, setTabRootYear] = useState(year.getFullYear());
+
+  if (tabRootYear !== year.getFullYear()) {
+    setTabRootYear(year.getFullYear());
+    if (tabRoot?.getFullYear() !== year.getFullYear()) {
+      setTabRoot(hasSelected ? selected : getRootFallback());
+    }
   }
 
   const tableMonths = [

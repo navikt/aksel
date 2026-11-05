@@ -83,6 +83,17 @@ export const DisabledMonths = () => (
   />
 );
 
+export const EverythingDisabledBesidesOneMonth = () => (
+  <div>
+    <MonthPicker.Standalone
+      defaultSelected={new Date(2026, 5, 1)}
+      disabled={[
+        (date) => !(date.getFullYear() === year && date.getMonth() === 5),
+      ]}
+    />
+  </div>
+);
+
 /**
  * Only June is enabled. ArrowRight/ArrowLeft on June keeps focus on June instead
  * of searching forever. Keyboard search stops at the
