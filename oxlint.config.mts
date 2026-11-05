@@ -260,7 +260,6 @@ export default defineConfig({
         "testing-library/prefer-screen-queries": "error",
         "testing-library/render-result-naming-convention": "error",
         "vitest/no-commented-out-tests": "error",
-        "vitest/no-disabled-tests": "warn",
         "vitest/no-identical-title": "error",
         "vitest/no-import-node-test": "error",
         "vitest/no-interpolation-in-snapshots": "error",
@@ -274,22 +273,6 @@ export default defineConfig({
     },
     {
       files: ["aksel.nav.no/website/**"],
-      rules: {
-        "nextjs/google-font-display": "warn",
-        "nextjs/google-font-preconnect": "warn",
-        "nextjs/next-script-for-ga": "warn",
-        "nextjs/no-async-client-component": "warn",
-        "nextjs/no-before-interactive-script-outside-document": "warn",
-        "nextjs/no-css-tags": "warn",
-        "nextjs/no-head-element": "warn",
-        "nextjs/no-img-element": "warn",
-        "nextjs/no-page-custom-font": "warn",
-        "nextjs/no-styled-jsx-in-document": "warn",
-        "nextjs/no-sync-scripts": "warn",
-        "nextjs/no-title-in-document-head": "warn",
-        "nextjs/no-typos": "warn",
-        "nextjs/no-unwanted-polyfillio": "warn",
-      },
       plugins: ["nextjs"],
     },
     {
@@ -330,6 +313,8 @@ export default defineConfig({
     {
       files: ["@navikt/**"],
       rules: {
+        // Published packages use the classic JSX runtime, and tsc does not catch a missing React import
+        "react/react-in-jsx-scope": "error",
         "no-restricted-imports": [
           "error",
           { paths: restrictedImportPaths, patterns: restrictedImportPatterns },
