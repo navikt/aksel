@@ -65,7 +65,7 @@ function TableOfContents({
         <ul
           className={`${styles.tocMenuUl} ${styles.hideScrollbar}`}
           id="toc-scroll-wrapper"
-          // biome-ignore lint/a11y/noRedundantRoles: WebKit browsers remove list semantics when list-style-type is none
+          // oxlint-disable-next-line jsx-a11y/no-redundant-roles -- WebKit browsers remove list semantics when list-style-type is none
           role="list"
         >
           {toc.map((node) => {

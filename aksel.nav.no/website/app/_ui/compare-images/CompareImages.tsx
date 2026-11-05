@@ -34,7 +34,7 @@ function CompareImages(props: ExtractPortableComponentProps<"compare_images">) {
             className={styles.compareImagesImgContainer}
             data-position="left"
           >
-            {/** biome-ignore lint/performance/noImgElement: Img element is fine here */}
+            {/* oxlint-disable-next-line nextjs/no-img-element -- Img element is fine here */}
             <img
               src={imageOneUrl}
               alt={image_1.alt}
@@ -45,7 +45,7 @@ function CompareImages(props: ExtractPortableComponentProps<"compare_images">) {
             className={styles.compareImagesImgContainer}
             data-position="right"
           >
-            {/** biome-ignore lint/performance/noImgElement: Img elemnt is fine here */}
+            {/* oxlint-disable-next-line nextjs/no-img-element -- Img elemnt is fine here */}
             <img
               src={imageTwoUrl}
               alt={image_2.alt}
