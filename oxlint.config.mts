@@ -37,11 +37,6 @@ const restrictedImportPaths = [
 
 const restrictedImportPatterns = [
   {
-    group: ["fs", "path"],
-    message:
-      'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
-  },
-  {
     group: ["**/esm/**", "**/cjs/**"],
     message:
       "Do not import from build output directories. Import from source instead.",
@@ -49,7 +44,7 @@ const restrictedImportPatterns = [
 ];
 
 export default defineConfig({
-  plugins: ["react", "import", "jsx-a11y"],
+  plugins: ["oxc", "unicorn", "react", "import", "jsx-a11y"],
   options: {
     reportUnusedDisableDirectives: "error",
   },
@@ -76,6 +71,7 @@ export default defineConfig({
     "no-regex-spaces": "error",
     "no-unexpected-multiline": "error",
     "no-useless-assignment": "error",
+    "unicorn/prefer-node-protocol": "error",
     "preserve-caught-error": "error",
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-target-blank": "error",
