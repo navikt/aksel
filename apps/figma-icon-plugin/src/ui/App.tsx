@@ -1,4 +1,3 @@
-/* oxlint-disable react/react-in-jsx-scope */
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";

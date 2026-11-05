@@ -35,6 +35,16 @@ const restrictedImportPaths = [
   },
 ];
 
+const restrictedReactProperties = restrictedImportPaths
+  .filter((path) => path.name === "react")
+  .flatMap((path) =>
+    path.importNames.map((property) => ({
+      object: "React",
+      property,
+      message: path.message,
+    })),
+  );
+
 const restrictedImportPatterns = [
   {
     group: ["**/esm/**", "**/cjs/**"],
@@ -63,24 +73,28 @@ export default defineConfig({
     "apps/figma-icon-plugin/src/ui/vite-env.d.ts",
   ],
   rules: {
+    /* Rules to add and fix */
+    /* react/jsx-no-constructed-context-values */
+    /* END */
+    eqeqeq: ["error", "always", { null: "ignore" }],
     "no-case-declarations": "error",
+    "react/jsx-no-script-url": "error",
+    "typescript/no-non-null-assertion": "error",
+    "no-new-func": "error",
     "no-empty": "error",
     "no-fallthrough": "error",
     "no-prototype-builtins": "error",
-    "no-redeclare": "error",
     "no-regex-spaces": "error",
     "no-unexpected-multiline": "error",
     "no-useless-assignment": "error",
     "unicorn/prefer-node-protocol": "error",
     "preserve-caught-error": "error",
+    "react/button-has-type": "error",
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-target-blank": "error",
     "react/no-unescaped-entities": "error",
     "react/no-unknown-property": "error",
     "react/require-render-return": "error",
-    "react/react-in-jsx-scope": "error",
-    "import/export": "error",
-    "import/no-named-as-default-member": "warn",
     "import/no-duplicates": "warn",
     "react/jsx-curly-brace-presence": [
       "error",
@@ -104,6 +118,18 @@ export default defineConfig({
     "no-shadow": "error",
     "no-template-curly-in-string": "error",
     "no-return-assign": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "no-array-constructor": "error",
+    "no-unused-expressions": [
+      "error",
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+      },
+    ],
     "no-console": [
       "warn",
       {
@@ -156,15 +182,9 @@ export default defineConfig({
       },
     },
     {
-      files: ["**/*.stories.{ts,tsx}", "**/scripts/*.ts"],
+      files: ["**/*.stories.{ts,tsx}", "**/scripts/*.{ts,mts,cts}"],
       rules: {
         "no-console": "off",
-      },
-    },
-    {
-      files: ["aksel.nav.no/sanity-studio/**"],
-      rules: {
-        "react/react-in-jsx-scope": "off",
       },
     },
     {
@@ -193,29 +213,14 @@ export default defineConfig({
       },
     },
     {
-      files: ["**/*.{ts,tsx}"],
+      files: ["**/*.{ts,tsx,mts,cts}"],
       rules: {
-        "no-redeclare": "off",
-        "no-var": "error",
-        "prefer-const": "error",
-        "prefer-rest-params": "error",
-        "prefer-spread": "error",
-        "no-array-constructor": "error",
-        "no-unused-expressions": [
-          "error",
-          {
-            allowShortCircuit: true,
-            allowTernary: true,
-          },
-        ],
         "typescript/ban-ts-comment": "error",
         "typescript/no-empty-object-type": "error",
         "typescript/no-namespace": "error",
         "typescript/no-require-imports": "error",
         "typescript/no-unnecessary-type-constraint": "error",
         "typescript/no-unsafe-function-type": "error",
-        "import/export": "off", // False positives on namespace/declaration merging, and TypeScript already checks duplicate exports
-        "import/no-named-as-default-member": "off",
       },
       plugins: ["typescript"],
     },
@@ -270,7 +275,6 @@ export default defineConfig({
     {
       files: ["aksel.nav.no/website/**"],
       rules: {
-        "react/react-in-jsx-scope": "off",
         "nextjs/google-font-display": "warn",
         "nextjs/google-font-preconnect": "warn",
         "nextjs/next-script-for-ga": "warn",
@@ -330,64 +334,7 @@ export default defineConfig({
           "error",
           { paths: restrictedImportPaths, patterns: restrictedImportPatterns },
         ],
-        "no-restricted-properties": [
-          "error",
-          {
-            object: "React",
-            property: "useId",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useInsertionEffect",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useSyncExternalStore",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useDeferredValue",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useTransition",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "startTransition",
-            message: "React 18+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useOptimistic",
-            message: "React 19+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useActionState",
-            message: "React 19+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "use",
-            message: "React 19+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "cache",
-            message: "React 19+ API not allowed (targeting React 17).",
-          },
-          {
-            object: "React",
-            property: "useEffectEvent",
-            message: "React 19+ API not allowed (targeting React 17).",
-          },
-        ],
+        "no-restricted-properties": ["error", ...restrictedReactProperties],
       },
     },
     {
