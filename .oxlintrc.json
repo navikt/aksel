@@ -356,7 +356,13 @@
                   "useSyncExternalStore",
                   "useDeferredValue",
                   "useTransition",
-                  "startTransition",
+                  "startTransition"
+                ],
+                "message": "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
+              },
+              {
+                "name": "react",
+                "importNames": [
                   "useOptimistic",
                   "useActionState",
                   "use",
@@ -365,7 +371,7 @@
                   "ViewTransition",
                   "addTransitionType"
                 ],
-                "message": "We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
+                "message": "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change)."
               },
               {
                 "name": "react-dom/client",
