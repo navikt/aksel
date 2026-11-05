@@ -33,11 +33,6 @@ const restrictedImportPaths = [
     importNames: ["createRoot", "hydrateRoot"],
     message: "React 18+ API not allowed (targeting React 17).",
   },
-  {
-    name: "react-dom",
-    importNames: ["browser"],
-    message: "React 19+ API not allowed (targeting React 17).",
-  },
 ];
 
 const restrictedImportPatterns = [
@@ -60,43 +55,19 @@ export default defineConfig({
   },
   jsPlugins: [
     { name: "react-hooks-js", specifier: "eslint-plugin-react-hooks" },
+    "eslint-plugin-storybook",
+    "eslint-plugin-testing-library",
+    "eslint-plugin-aksel-local",
   ],
   categories: {
     correctness: "off",
   },
-  settings: {
-    react: {
-      version: "19.3.1",
-    },
-  },
-  env: {
-    builtin: true,
-    es2026: true,
-    browser: true,
-    node: true,
-  },
+  // Generated and build output is already covered by .gitignore, which Oxlint respects.
   ignorePatterns: [
-    "**/lib",
-    "**/public",
     "@navikt/aksel/**/*.input.*",
     "@navikt/aksel/**/*.output.*",
-    "**/codemod/**/*.js",
-    "**/tokens/**/plugin.js",
     "**/query-types.ts",
     "**/modal/helpers/dialog-polyfill.ts",
-    "**/component-names.generated.ts",
-    "**/.sanity/runtime",
-    ".yarn",
-    "**/next-env.d.ts",
-    "@navikt/aksel-icons/src/**",
-    "@navikt/aksel/src/version.ts",
-    "@navikt/core/tailwind/{src/tokens.ts,tailwind.config.js,tailwind.darkside.config.js}",
-    "@navikt/core/tokens/token_docs.js",
-    "apps/playroom/{playroom.config.js,src/auto-generated-imports.ts}",
-    "**/.build",
-    "**/storybook-static",
-    "**/test-results",
-    "tooling/analyzer/temp",
     "apps/figma-icon-plugin/src/ui/vite-env.d.ts",
   ],
   rules: {
@@ -310,37 +281,19 @@ export default defineConfig({
         "storybook/story-exports": "error",
         "storybook/use-storybook-expect": "error",
         "storybook/use-storybook-testing-library": "error",
-        "import/no-anonymous-default-export": "off",
         "react/rules-of-hooks": "off",
       },
-      jsPlugins: ["eslint-plugin-storybook"],
     },
     {
       files: ["**/.storybook/main.{js,cjs,mjs,ts}"],
       rules: {
         "storybook/no-uninstalled-addons": "error",
       },
-      jsPlugins: ["eslint-plugin-storybook"],
     },
     {
       files: ["**/*.{ts,tsx}"],
       rules: {
-        "constructor-super": "off",
-        "getter-return": "off",
-        "no-class-assign": "off",
-        "no-const-assign": "off",
-        "no-dupe-class-members": "off",
-        "no-dupe-keys": "off",
-        "no-func-assign": "off",
-        "no-import-assign": "off",
-        "no-new-native-nonconstructor": "off",
-        "no-obj-calls": "off",
         "no-redeclare": "off",
-        "no-setter-return": "off",
-        "no-this-before-super": "off",
-        "no-unreachable": "off",
-        "no-unsafe-negation": "off",
-        "no-with": "off",
         "no-var": "error",
         "prefer-const": "error",
         "prefer-rest-params": "error",
@@ -356,7 +309,6 @@ export default defineConfig({
         "typescript/ban-ts-comment": "error",
         "typescript/no-duplicate-enum-values": "error",
         "typescript/no-empty-object-type": "error",
-        "typescript/no-explicit-any": "off",
         "typescript/no-extra-non-null-assertion": "error",
         "typescript/no-misused-new": "error",
         "typescript/no-namespace": "error",
@@ -370,7 +322,6 @@ export default defineConfig({
         "typescript/prefer-as-const": "error",
         "typescript/prefer-namespace-keyword": "error",
         "typescript/triple-slash-reference": "error",
-        "import/default": "off",
         "import/export": "off", // False positives on namespace/declaration merging, and TypeScript already checks duplicate exports
         "import/no-named-as-default-member": "off",
       },
@@ -429,18 +380,11 @@ export default defineConfig({
         "vitest/valid-expect-in-promise": "error",
         "vitest/valid-title": "error",
       },
-      jsPlugins: ["eslint-plugin-testing-library"],
       plugins: ["vitest"],
     },
     {
       files: ["aksel.nav.no/website/**"],
       rules: {
-        "react/no-unknown-property": [
-          "error",
-          {
-            ignore: ["jsx", "global"],
-          },
-        ],
         "react/react-in-jsx-scope": "off",
         "nextjs/google-font-display": "warn",
         "nextjs/google-font-preconnect": "warn",
@@ -479,10 +423,9 @@ export default defineConfig({
         "aksel.nav.no/website/pages/templates/**/*.tsx",
       ],
       rules: {
-        "aksel-local/args-check": ["error"],
-        "aksel-local/comment-check": ["error"],
+        "aksel-local/args-check": "error",
+        "aksel-local/comment-check": "error",
       },
-      jsPlugins: ["eslint-plugin-aksel-local"],
     },
     {
       files: [
@@ -491,9 +434,8 @@ export default defineConfig({
         "**/pages/eksempler/**/*.tsx",
       ],
       rules: {
-        "aksel-local/import-check": ["error"],
+        "aksel-local/import-check": "error",
       },
-      jsPlugins: ["eslint-plugin-aksel-local"],
     },
     {
       files: ["**/examples/__parts-inline/*.tsx"],
@@ -600,7 +542,6 @@ export default defineConfig({
       files: ["@navikt/**/*.stories.tsx"],
       rules: {
         "no-restricted-imports": "off",
-        "no-restricted-properties": "off",
       },
     },
   ],
