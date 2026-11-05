@@ -1,4 +1,3 @@
-const vitest = require("@vitest/eslint-plugin");
 const importPlugin = require("eslint-plugin-import");
 const oxlint = require("eslint-plugin-oxlint");
 const reactHooks = require("eslint-plugin-react-hooks");
@@ -88,12 +87,6 @@ module.exports = (async () =>
         // End
         "@typescript-eslint/no-explicit-any": "off", // Temporary
       },
-    },
-
-    {
-      // Still in ESLint: vitest/no-conditional-expect (oxlint version has no `expectAssertions` option)
-      files: ["**/*.test.*", "**/__tests__/*"],
-      extends: [vitest.configs.recommended],
     },
 
     // Must be last: turns off rules already covered by oxlint (see oxlint.config.mts)
