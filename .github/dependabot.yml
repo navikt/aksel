@@ -18,7 +18,6 @@ updates:
       next:
         applies-to: version-updates
         patterns:
-          - "@next/eslint-plugin-next"
           - "next"
       sanity:
         applies-to: version-updates

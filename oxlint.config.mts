@@ -55,6 +55,9 @@ const restrictedImportPatterns = [
 
 export default defineConfig({
   plugins: ["react", "import"],
+  options: {
+    reportUnusedDisableDirectives: "error",
+  },
   jsPlugins: [
     { name: "react-hooks-js", specifier: "eslint-plugin-react-hooks" },
   ],
