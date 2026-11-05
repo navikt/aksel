@@ -105,7 +105,6 @@
     "eslint-plugin-aksel-local": "*",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-oxlint": "1.88.0",
-    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-storybook": "^10.6.3",
     "eslint-plugin-testing-library": "^7.16.0",

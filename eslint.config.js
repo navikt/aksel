@@ -2,7 +2,6 @@ const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const importPlugin = require("eslint-plugin-import");
 const oxlint = require("eslint-plugin-oxlint");
-const reactPlugin = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const storybook = require("eslint-plugin-storybook");
 const testingLibrary = require("eslint-plugin-testing-library");
@@ -57,12 +56,10 @@ module.exports = (async () =>
         "testing-library": testingLibrary,
       },
     },
-    reactPlugin.configs.flat.recommended,
     reactHooks.configs.flat["recommended-latest"],
     importPlugin.flatConfigs.recommended,
     importPlugin.flatConfigs.typescript,
     {
-      settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
       languageOptions: {
         // eslint-plugin-import's recommended config sets ecmaVersion 2018
         ecmaVersion: "latest",
@@ -72,14 +69,9 @@ module.exports = (async () =>
         },
       },
       rules: {
-        // Legacy rules that only mark variables as used for no-unused-vars, which oxlint now handles
-        "react/jsx-uses-react": "off",
-        "react/jsx-uses-vars": "off",
         // Handled by oxlint, but not auto-disabled by eslint-plugin-oxlint
         "no-useless-assignment": "off",
         "react/require-render-return": "off",
-        "react/prop-types": "off", // Temporary
-        "react/display-name": "off", // Temporary
         "import/no-unresolved": "off",
         "import/namespace": "off", // Biome has equivalent
         "import/no-named-as-default": "off", // Temporary
