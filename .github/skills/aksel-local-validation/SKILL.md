@@ -19,7 +19,7 @@ Validate the smallest relevant surface with repository-pinned tools. Expand only
 - Do not add a dependency only to run a one-off check. If the task truly needs new tooling, add and lock it explicitly.
 - Public consumer docs may intentionally show `npx @navikt/aksel`. Preserve those examples unless the task changes consumer setup.
 - If Corepack/Yarn reports a user-level configuration error, stop and report it. Never edit configuration outside the repository.
-- Do not claim type safety from ESLint or tests. Run a TypeScript-aware command when TypeScript behavior changed.
+- Do not claim type safety from Oxlint or tests. Run a TypeScript-aware command when TypeScript behavior changed.
 
 ## 1. Determine affected projects
 

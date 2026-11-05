@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* oxlint-disable react/exhaustive-deps -- Explained bellow */
 /* oxlint-disable react-hooks-js/globals */
 /**
