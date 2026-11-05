@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+/* oxlint-disable nextjs/no-img-element */
 /** biome-ignore-all lint/performance/noImgElement: img is fine here */
 import { BodyLong, HGrid, Link } from "@navikt/ds-react";
 import type { ExtractPortableComponentProps } from "@/app/_sanity/types";

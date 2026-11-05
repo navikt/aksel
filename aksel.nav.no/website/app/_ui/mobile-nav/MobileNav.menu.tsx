@@ -24,9 +24,13 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
   return (
     <VStack marginInline="space-8" position="relative">
       <HGrid columns="1fr auto">
-        <a href="/designsystemet" className={styles.mobileNavItem}>
+        <NextLink
+          prefetch={false}
+          href="/designsystemet"
+          className={styles.mobileNavItem}
+        >
           Designsystemet
-        </a>
+        </NextLink>
         <button
           className={styles.mobileNavItem}
           onClick={toggleOpen}
@@ -72,12 +76,13 @@ function DesignsystemView({
           <ArrowLeftIcon title="Lukk designsystem-meny" fontSize="1.5rem" />
         </button>
 
-        <a
+        <NextLink
+          prefetch={false}
           href="/designsystemet"
           className={`${styles.mobileNavItem} ${styles.mobileNavItemCentered}`}
         >
           Designsystemet
-        </a>
+        </NextLink>
       </HGrid>
 
       {children}

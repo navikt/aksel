@@ -1,4 +1,3 @@
-const nextPlugin = require("@next/eslint-plugin-next");
 const vitest = require("@vitest/eslint-plugin");
 const importPlugin = require("eslint-plugin-import");
 const oxlint = require("eslint-plugin-oxlint");
@@ -95,21 +94,6 @@ module.exports = (async () =>
       // Still in ESLint: vitest/no-conditional-expect (oxlint version has no `expectAssertions` option)
       files: ["**/*.test.*", "**/__tests__/*"],
       extends: [vitest.configs.recommended],
-    },
-    {
-      // Still in ESLint: @next/next/no-location-assign-relative-destination (no oxlint equivalent)
-      // and no-html-link-for-pages (oxlint can't limit it to the pages dir, and flags app-router links)
-      files: ["aksel.nav.no/website/**"],
-      plugins: {
-        "@next/next": nextPlugin,
-      },
-      rules: {
-        ...nextPlugin.configs.recommended.rules,
-        "@next/next/no-html-link-for-pages": [
-          "error",
-          "aksel.nav.no/website/pages/",
-        ],
-      },
     },
 
     // Must be last: turns off rules already covered by oxlint (see oxlint.config.mts)
