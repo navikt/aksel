@@ -86,7 +86,7 @@ function announce(message: string, politeness: Politeness = "polite") {
   }
   // If the message is the same as the current text,
   // append a non-breaking space to force a re-announcement.
-  target.textContent = message === target.textContent ? `${message} ` : message; // eslint-disable-line no-irregular-whitespace
+  target.textContent = message === target.textContent ? `${message} ` : message;
   scheduleClear(politeness, target);
 }
 
