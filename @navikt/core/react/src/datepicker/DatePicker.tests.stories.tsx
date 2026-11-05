@@ -16,7 +16,7 @@ export default {
     chromatic: { disable: true },
   },
   /* TODO: Temp disabled CI-tests */
-  tags: ["!play-fn", "skip-test"],
+  tags: ["skip-test"],
 } satisfies Meta<typeof DatePicker>;
 
 type Story = StoryObj<typeof DatePicker>;
@@ -104,7 +104,7 @@ export const DropdownCaptionNavigation: Story = {
 };
 
 export const ControlledMonthPreservesFocus: Story = {
-  tags: ["play-fn", "!skip-test"],
+  tags: ["!skip-test"],
   render: () => {
     const [month, setMonth] = React.useState(new Date(2026, 2, 15));
     const [selected, setSelected] = React.useState<Date | undefined>(
