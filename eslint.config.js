@@ -69,13 +69,10 @@ module.exports = (async () =>
         },
       },
       rules: {
-        // Handled by oxlint, but not auto-disabled by eslint-plugin-oxlint
-        "no-useless-assignment": "off",
-        "react/require-render-return": "off",
         "import/no-unresolved": "off",
         "import/namespace": "off", // Biome has equivalent
         "import/no-named-as-default": "off", // Temporary
-        // Still in ESLint: react/no-deprecated, react-hooks compiler rules (no oxlint equivalent)
+        // Still in ESLint: react-hooks compiler rules (no oxlint equivalent)
         "react-hooks/refs": "off", // Too many false positives
       },
     },
