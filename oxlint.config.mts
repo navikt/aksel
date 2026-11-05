@@ -99,12 +99,7 @@ export default defineConfig({
         additionalHooks: "(useClientLayoutEffect)",
       },
     ],
-    // Surfaced by the `correctness` category; kept off to preserve the previous ruleset.
-
-    "jsx-a11y/interactive-supports-focus": "off",
-    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/prefer-tag-over-role": "off",
-    "import/namespace": "off",
     "react/no-array-index-key": "error",
     "react/no-danger": "error",
     "oxc/no-accumulating-spread": "error",

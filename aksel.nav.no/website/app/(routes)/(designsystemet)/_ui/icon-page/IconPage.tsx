@@ -142,6 +142,7 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
+                        // oxlint-disable-next-line import/namespace
                         const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;

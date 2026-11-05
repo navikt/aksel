@@ -15,6 +15,7 @@ function IconDetails({
   iconName?: keyof typeof meta;
   iconSvg?: string;
 }) {
+  // oxlint-disable-next-line import/namespace
   const IconComponent = Icons[`${iconName}Icon`];
   const metaData = iconName ? meta[iconName] : null;
 
