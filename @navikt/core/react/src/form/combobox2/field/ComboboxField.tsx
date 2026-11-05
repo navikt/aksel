@@ -28,6 +28,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
     const [ariaLabel, setAriaLabel] = useState<string>();
     useEffect(() => {
       if (label) {
+        // oxlint-disable-next-line react/set-state-in-effect -- Briefly sets and resets the label as part of the VoiceOver workaround.
         setAriaLabel(label);
         setTimeout(() => setAriaLabel(undefined), 100);
       }

@@ -240,7 +240,7 @@ const MyMemoizedOption = React.memo(
     hasVirtualFocus,
     onSelect,
   }: MyMemoizedOptionProps) => {
-    //console.log(Date.now(), "Rendering option", value); // eslint-disable-line react-hooks/purity
+    //console.log(Date.now(), "Rendering option", value); // oxlint-disable-line react-hooks-js/purity
     return (
       <Listbox.Option
         key={value}

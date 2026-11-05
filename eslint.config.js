@@ -49,11 +49,11 @@ module.exports = (async () =>
       linterOptions: { reportUnusedDisableDirectives: "off" },
       // Rules run by oxlint jsPlugins. Registered so disable-comments resolve.
       plugins: {
+        "react-hooks": reactHooks,
         storybook,
         "testing-library": testingLibrary,
       },
     },
-    reactHooks.configs.flat["recommended-latest"],
     {
       languageOptions: {
         ecmaVersion: "latest",
@@ -61,10 +61,6 @@ module.exports = (async () =>
           ...globals.browser,
           ...globals.node,
         },
-      },
-      rules: {
-        // Still in ESLint: react-hooks compiler rules (no oxlint equivalent)
-        "react-hooks/refs": "off", // Too many false positives
       },
     },
     {
