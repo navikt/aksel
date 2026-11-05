@@ -1,5 +1,58 @@
 import { defineConfig } from "oxlint";
 
+const restrictedImportPaths = [
+  {
+    name: "react",
+    importNames: [
+      "useId",
+      "useInsertionEffect",
+      "useSyncExternalStore",
+      "useDeferredValue",
+      "useTransition",
+      "startTransition",
+    ],
+    message:
+      "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
+  },
+  {
+    name: "react",
+    importNames: [
+      "useOptimistic",
+      "useActionState",
+      "use",
+      "cache",
+      "useEffectEvent",
+      "ViewTransition",
+      "addTransitionType",
+    ],
+    message:
+      "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
+  },
+  {
+    name: "react-dom/client",
+    importNames: ["createRoot", "hydrateRoot"],
+    message: "React 18+ API not allowed (targeting React 17).",
+  },
+  {
+    name: "react-dom",
+    importNames: ["browser"],
+    message: "React 19+ API not allowed (targeting React 17).",
+  },
+];
+
+const restrictedImportPatterns = [
+  {
+    group: ["fs", "path"],
+    message:
+      'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
+  },
+  {
+    group: ["**/esm/**", "**/cjs/**"],
+    message:
+      "Do not import from build output directories. Import from source instead.",
+  },
+];
+
 export default defineConfig({
   plugins: ["react", "import"],
   categories: {
@@ -92,6 +145,7 @@ export default defineConfig({
     "no-unused-vars": "error",
     "no-useless-backreference": "error",
     "no-useless-catch": "error",
+    "no-useless-assignment": "error",
     "no-useless-escape": "error",
     "no-with": "error",
     "preserve-caught-error": "error",
@@ -112,6 +166,7 @@ export default defineConfig({
     "react/no-string-refs": "error",
     "react/no-unescaped-entities": "error",
     "react/no-unknown-property": "error",
+    "react/require-render-return": "error",
     "react/react-in-jsx-scope": "error",
     "import/default": "error",
     "import/no-named-as-default-member": "warn",
@@ -348,59 +403,7 @@ export default defineConfig({
       rules: {
         "no-restricted-imports": [
           "error",
-          {
-            paths: [
-              {
-                name: "react",
-                importNames: [
-                  "useId",
-                  "useInsertionEffect",
-                  "useSyncExternalStore",
-                  "useDeferredValue",
-                  "useTransition",
-                  "startTransition",
-                ],
-                message:
-                  "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
-              },
-              {
-                name: "react",
-                importNames: [
-                  "useOptimistic",
-                  "useActionState",
-                  "use",
-                  "cache",
-                  "useEffectEvent",
-                  "ViewTransition",
-                  "addTransitionType",
-                ],
-                message:
-                  "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
-              },
-              {
-                name: "react-dom/client",
-                importNames: ["createRoot", "hydrateRoot"],
-                message: "React 18+ API not allowed (targeting React 17).",
-              },
-              {
-                name: "react-dom",
-                importNames: ["browser"],
-                message: "React 19+ API not allowed (targeting React 17).",
-              },
-            ],
-            patterns: [
-              {
-                group: ["fs", "path"],
-                message:
-                  'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
-              },
-              {
-                group: ["**/esm/**", "**/cjs/**"],
-                message:
-                  "Do not import from build output directories. Import from source instead.",
-              },
-            ],
-          },
+          { paths: restrictedImportPaths, patterns: restrictedImportPatterns },
         ],
         "no-restricted-properties": [
           "error",
@@ -458,6 +461,32 @@ export default defineConfig({
             object: "React",
             property: "useEffectEvent",
             message: "React 19+ API not allowed (targeting React 17).",
+          },
+        ],
+      },
+    },
+    {
+      files: ["@navikt/core/react/src/**/*.{ts,tsx}"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            paths: [
+              ...restrictedImportPaths,
+              {
+                name: "date-fns",
+                allowTypeImports: true,
+                message:
+                  'Import functions from their own path, e.g. `import { format } from "date-fns/format"`. The root barrel makes unbundled Node imports load all of date-fns.',
+              },
+              {
+                name: "date-fns/locale",
+                allowTypeImports: true,
+                message:
+                  'Import locales from their own path, e.g. `import { nb } from "date-fns/locale/nb"`. The barrel makes unbundled Node imports load all locales.',
+              },
+            ],
+            patterns: restrictedImportPatterns,
           },
         ],
       },
