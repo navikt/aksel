@@ -58,7 +58,6 @@ Group only matching files:
 
 ```sh
 corepack yarn oxlint --deny-warnings <changed .ts/.tsx/.js/.jsx files>
-corepack yarn eslint --max-warnings=0 --no-warn-ignored <changed .ts/.tsx/.js/.jsx files>
 corepack yarn stylelint <changed .css files>
 corepack yarn biome lint --no-errors-on-unmatched <changed supported source/config files>
 ```
