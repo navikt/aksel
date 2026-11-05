@@ -18,279 +18,114 @@ const tseslint = require("typescript-eslint");
  * - Consider adding the rule "id-length"
  */
 
-module.exports = defineConfig([
-  globalIgnores([
-    "**/lib",
-    "**/public",
-    "**/esm",
-    "**/cjs",
-    "**/dist",
-    "@navikt/aksel/**/*.input.*",
-    "@navikt/aksel/**/*.output.*",
-    "**/codemod/**/*.js",
-    "**/playwright-report/**/*",
-    "**/tokens/**/plugin.js",
-    "**/.next",
-    "**/query-types.ts",
-    ".yarn",
-    "**/next-env.d.ts",
-    // Generated/gitignored output (flat config does not read .gitignore)
-    "@navikt/aksel-icons/src/**",
-    "@navikt/aksel/src/version.ts",
-    "**/component-names.generated.ts",
-    "@navikt/core/tailwind/{src/tokens.ts,tailwind.config.js,tailwind.darkside.config.js}",
-    "@navikt/core/tokens/token_docs.js",
-    "apps/playroom/{playroom.config.js,src/auto-generated-imports.ts}",
-    "**/.build",
-    "**/coverage",
-    "**/storybook-static",
-    "**/test-results",
-    "tooling/analyzer/temp",
-  ]),
-  js.configs.recommended,
-  {
-    // Rules are split between oxlint and ESLint, so ESLint can't tell if a directive is unused
-    // Disable reporting of unused ESLint disable comments, as some rules are now handled by oxlint
-    linterOptions: { reportUnusedDisableDirectives: "off" },
-    // Rules run by oxlint jsPlugins. Registered so disable-comments resolve.
-    plugins: {
-      storybook,
-      "testing-library": testingLibrary,
-    },
-  },
-  reactPlugin.configs.flat.recommended,
-  {
-    // Uses the new JSX transform, so React does not need to be in scope
-    files: ["aksel.nav.no/sanity-studio/**"],
-    ...reactPlugin.configs.flat["jsx-runtime"],
-  },
-  reactHooks.configs.flat["recommended-latest"],
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  {
-    settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
-    languageOptions: {
-      // eslint-plugin-import's recommended config sets ecmaVersion 2018
-      ecmaVersion: "latest",
-      globals: {
-        ...globals.browser,
-        ...globals.node,
+module.exports = (async () =>
+  defineConfig([
+    globalIgnores([
+      "**/lib",
+      "**/public",
+      "**/esm",
+      "**/cjs",
+      "**/dist",
+      "@navikt/aksel/**/*.input.*",
+      "@navikt/aksel/**/*.output.*",
+      "**/codemod/**/*.js",
+      "**/playwright-report/**/*",
+      "**/tokens/**/plugin.js",
+      "**/.next",
+      "**/query-types.ts",
+      ".yarn",
+      "**/next-env.d.ts",
+      // Generated/gitignored output (flat config does not read .gitignore)
+      "@navikt/aksel-icons/src/**",
+      "@navikt/aksel/src/version.ts",
+      "**/component-names.generated.ts",
+      "@navikt/core/tailwind/{src/tokens.ts,tailwind.config.js,tailwind.darkside.config.js}",
+      "@navikt/core/tokens/token_docs.js",
+      "apps/playroom/{playroom.config.js,src/auto-generated-imports.ts}",
+      "**/.build",
+      "**/coverage",
+      "**/storybook-static",
+      "**/test-results",
+      "tooling/analyzer/temp",
+    ]),
+    // Still in ESLint from recommended: no-octal (no oxlint equivalent)
+    js.configs.recommended,
+    {
+      // Rules are split between oxlint and ESLint, so ESLint can't tell if a directive is unused
+      // Disable reporting of unused ESLint disable comments, as some rules are now handled by oxlint
+      linterOptions: { reportUnusedDisableDirectives: "off" },
+      // Rules run by oxlint jsPlugins. Registered so disable-comments resolve.
+      plugins: {
+        storybook,
+        "testing-library": testingLibrary,
       },
     },
-    rules: {
-      "react/jsx-curly-brace-presence": [
-        "error",
-        { propElementValues: "always" },
-      ],
-      "react/prop-types": "off", // Temporary
-      "react/display-name": "off", // Temporary
-      "import/no-unresolved": "off",
-      "import/namespace": "off", // Biome has equivalent
-      "import/no-named-as-default": "off", // Temporary
-      "react-hooks/refs": "off", // Too many false positives
-      "react-hooks/exhaustive-deps": [
-        "warn",
-        { additionalHooks: "(useClientLayoutEffect)" },
-      ],
+    reactPlugin.configs.flat.recommended,
+    reactHooks.configs.flat["recommended-latest"],
+    importPlugin.flatConfigs.recommended,
+    importPlugin.flatConfigs.typescript,
+    {
+      settings: { react: { version: "detect" } }, // Allows eslint-plugin-react to detect installed react-version
+      languageOptions: {
+        // eslint-plugin-import's recommended config sets ecmaVersion 2018
+        ecmaVersion: "latest",
+        globals: {
+          ...globals.browser,
+          ...globals.node,
+        },
+      },
+      rules: {
+        // Legacy rules that only mark variables as used for no-unused-vars, which oxlint now handles
+        "react/jsx-uses-react": "off",
+        "react/jsx-uses-vars": "off",
+        // Handled by oxlint, but not auto-disabled by eslint-plugin-oxlint
+        "no-useless-assignment": "off",
+        "react/require-render-return": "off",
+        "react/prop-types": "off", // Temporary
+        "react/display-name": "off", // Temporary
+        "import/no-unresolved": "off",
+        "import/namespace": "off", // Biome has equivalent
+        "import/no-named-as-default": "off", // Temporary
+        // Still in ESLint: react/no-deprecated, react-hooks compiler rules (no oxlint equivalent)
+        "react-hooks/refs": "off", // Too many false positives
+      },
     },
-  },
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [tseslint.configs.recommended],
-    rules: {
-      //
-      // Start: Covered by TypeScript, and slow without a TS resolver
-      "import/default": "off",
-      "import/export": "off",
-      "import/named": "off",
-      "import/no-named-as-default-member": "off",
-      // End
-      "@typescript-eslint/no-explicit-any": "off", // Temporary
-      "@typescript-eslint/no-unused-expressions": [
-        "error",
-        /* https://eslint.org/docs/latest/rules/no-unused-expressions#allowshortcircuit-and-allowternary */
-        { allowShortCircuit: true, allowTernary: true },
-      ],
+    {
+      files: ["**/*.{ts,tsx}"],
+      extends: [tseslint.configs.recommended],
+      rules: {
+        //
+        // Start: Covered by TypeScript, and slow without a TS resolver
+        "import/default": "off",
+        "import/export": "off",
+        "import/named": "off",
+        "import/no-named-as-default-member": "off",
+        // End
+        "@typescript-eslint/no-explicit-any": "off", // Temporary
+      },
     },
-  },
 
-  {
-    files: ["**/*.test.*", "**/__tests__/*"],
-    extends: [vitest.configs.recommended],
-  },
-  {
-    files: ["aksel.nav.no/website/**"],
-    plugins: {
-      "@next/next": nextPlugin,
+    {
+      // Still in ESLint: vitest/no-conditional-expect (oxlint version has no `expectAssertions` option)
+      files: ["**/*.test.*", "**/__tests__/*"],
+      extends: [vitest.configs.recommended],
     },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      "react/no-unknown-property": [2, { ignore: ["jsx", "global"] }],
-      "react/react-in-jsx-scope": "off",
-      "@next/next/no-html-link-for-pages": [
-        "error",
-        "aksel.nav.no/website/pages/",
-      ],
+    {
+      // Still in ESLint: @next/next/no-location-assign-relative-destination (no oxlint equivalent)
+      // and no-html-link-for-pages (oxlint can't limit it to the pages dir, and flags app-router links)
+      files: ["aksel.nav.no/website/**"],
+      plugins: {
+        "@next/next": nextPlugin,
+      },
+      rules: {
+        ...nextPlugin.configs.recommended.rules,
+        "@next/next/no-html-link-for-pages": [
+          "error",
+          "aksel.nav.no/website/pages/",
+        ],
+      },
     },
-  },
-  {
-    files: ["aksel.nav.no/website/pages/eksempler/**"],
-    rules: {
-      "@next/next/no-img-element": "off",
-    },
-  },
-  {
-    files: ["**/examples/__parts-inline/*.tsx"],
-    rules: {
-      "arrow-body-style": ["error", "never"],
-      "func-style": ["error", "expression"],
-      "import/no-named-export": "error",
-    },
-  },
-  {
-    files: ["@navikt/core/react/src/**/*.{ts,tsx}"],
-    ignores: ["**/*.stories.tsx"],
-    rules: {
-      "@typescript-eslint/no-restricted-imports": [
-        "error",
-        {
-          paths: [
-            {
-              name: "date-fns",
-              allowTypeImports: true,
-              message:
-                'Import functions from their own path, e.g. `import { format } from "date-fns/format"`. The root barrel makes unbundled Node imports load all of date-fns.',
-            },
-            {
-              name: "date-fns/locale",
-              allowTypeImports: true,
-              message:
-                'Import locales from their own path, e.g. `import { nb } from "date-fns/locale/nb"`. The barrel makes unbundled Node imports load all locales.',
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["@navikt/**"],
-    ignores: ["**/*.stories.tsx"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          paths: [
-            {
-              name: "react",
-              importNames: [
-                // React 18
-                "useId",
-                "useInsertionEffect",
-                "useSyncExternalStore",
-                "useDeferredValue",
-                "useTransition",
-                "startTransition",
-                // React 19
-                "useOptimistic",
-                "useActionState",
-                "use",
-                "cache",
-                "useEffectEvent",
-                "ViewTransition",
-                "addTransitionType",
-              ],
-              message:
-                "We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
-            },
-            // react-dom 18+
-            {
-              name: "react-dom/client",
-              importNames: ["createRoot", "hydrateRoot"],
-              message: "React 18+ API not allowed (targeting React 17).",
-            },
-            {
-              name: "react-dom",
-              importNames: ["browser"],
-              message: "React 19+ API not allowed (targeting React 17).",
-            },
-          ],
-          patterns: [
-            {
-              group: ["fs", "path"],
-              message:
-                'Use `node:` prefix when importing native node modules, e.g. `import path from "node:path"`.',
-            },
-            {
-              group: ["**/esm/**", "**/cjs/**"],
-              message:
-                "Do not import from build output directories. Import from source instead.",
-            },
-          ],
-        },
-      ],
 
-      "no-restricted-properties": [
-        "error",
-        // React 18
-        {
-          object: "React",
-          property: "useId",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useInsertionEffect",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useSyncExternalStore",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useDeferredValue",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useTransition",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "startTransition",
-          message: "React 18+ API not allowed (targeting React 17).",
-        },
-        // React 19
-        {
-          object: "React",
-          property: "useOptimistic",
-          message: "React 19+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useActionState",
-          message: "React 19+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "use",
-          message: "React 19+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "cache",
-          message: "React 19+ API not allowed (targeting React 17).",
-        },
-        {
-          object: "React",
-          property: "useEffectEvent",
-          message: "React 19+ API not allowed (targeting React 17).",
-        },
-      ],
-    },
-  },
-  // Must be last: turns off rules already covered by oxlint (see .oxlintrc.json)
-  ...oxlint.buildFromOxlintConfig(require("./.oxlintrc.json")),
-]);
+    // Must be last: turns off rules already covered by oxlint (see oxlint.config.mts)
+    ...(await oxlint.buildFromConfigFile("./oxlint.config.mts")),
+  ]))();
