@@ -1,6 +1,5 @@
 import { Chat, Button } from "@navikt/ds-react";
 
-/* eslint-disable react/jsx-no-undef */
 export const Page = () => {
   return (
     <Chat
