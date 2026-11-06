@@ -10,7 +10,7 @@ export default function GenericErrorPage() {
 
   useEffect(() => {
     if (history && history.length > 1) {
-      setHasHistory(true); // eslint-disable-line react-hooks/set-state-in-effect
+      setHasHistory(true); // eslint-disable-line react/set-state-in-effect
     }
   }, []);
 

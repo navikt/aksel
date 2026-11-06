@@ -179,8 +179,6 @@ export default defineConfig({
     "react-hooks-js/globals": "error",
     "react-hooks-js/error-boundaries": "error",
     "react-hooks-js/unsupported-syntax": "warn",
-    "react-hooks-js/config": "error",
-    "react-hooks-js/gating": "error",
   },
   overrides: [
     {
@@ -311,6 +309,7 @@ export default defineConfig({
       files: ["@navikt/**/*.stories.tsx"],
       rules: {
         "no-restricted-imports": "off",
+        "no-restricted-properties": "off",
       },
     },
   ],

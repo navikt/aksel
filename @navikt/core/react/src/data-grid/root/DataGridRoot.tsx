@@ -138,14 +138,14 @@ const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line typescript/no-namespace
 export namespace DataGrid {
   export type Props<T = unknown> = DataGridProps<T>;
   export type Columns<T = unknown> = ColumnDefinitions<T>;
   export type Selection<T = unknown> = SelectionProps<T>;
   export type Settings = DataGridSettings;
 
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // eslint-disable-next-line typescript/no-namespace
   export namespace Table {
     // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props<T = unknown> = DataGridTable.Props<T>;
@@ -157,7 +157,7 @@ export namespace DataGrid {
     export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // eslint-disable-next-line typescript/no-namespace
   export namespace Preferences {
     // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props = DataGridPreferences.Props;

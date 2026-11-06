@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable typescript/no-empty-object-type */
 import type { AkselColorRole } from "@navikt/ds-tokens/types";
 
 /* Users can/will augment this interface */
