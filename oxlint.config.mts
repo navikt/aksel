@@ -1,5 +1,9 @@
+import storybook from "eslint-plugin-storybook";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig } from "oxlint";
+
+const [, storybookStories, storybookMain] =
+  storybook.configs["flat/recommended"];
 
 const restrictedImportPaths = [
   {
@@ -13,7 +17,7 @@ const restrictedImportPaths = [
       "startTransition",
     ],
     message:
-      "React 18+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
+      "React 18+ API not allowed. We currently only support React-features accessible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
   },
   {
     name: "react",
@@ -25,14 +29,30 @@ const restrictedImportPaths = [
       "useEffectEvent",
       "ViewTransition",
       "addTransitionType",
+      "Activity",
     ],
     message:
-      "React 19+ API not allowed. We currently only support React-features accesible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
+      "React 19+ API not allowed. We currently only support React-features accessible in React 17. To add new features, we will need to update peerDependencies (breaking change).",
   },
   {
     name: "react-dom/client",
     importNames: ["createRoot", "hydrateRoot"],
     message: "React 18+ API not allowed (targeting React 17).",
+  },
+  {
+    name: "react-dom",
+    importNames: [
+      "useFormStatus",
+      "useFormState",
+      "requestFormReset",
+      "preload",
+      "preloadModule",
+      "preinit",
+      "preinitModule",
+      "preconnect",
+      "prefetchDNS",
+    ],
+    message: "React 19+ API not allowed (targeting React 17).",
   },
 ];
 
@@ -65,7 +85,7 @@ export default defineConfig({
     "eslint-plugin-testing-library",
     "eslint-plugin-aksel-local",
   ],
-  // Generated and build outputs is already covered by .gitignore, which Oxlint respects.
+  // Generated and build outputs are already covered by .gitignore, which Oxlint respects.
   ignorePatterns: [
     "@navikt/aksel/**/*.input.*",
     "@navikt/aksel/**/*.output.*",
@@ -78,7 +98,6 @@ export default defineConfig({
     /* unicorn/no-array-for-each */
     /* END */
     "typescript/ban-ts-comment": "error",
-
     "typescript/no-empty-object-type": "error",
     "typescript/no-namespace": "error",
     "typescript/no-unnecessary-type-constraint": "error",
@@ -141,21 +160,7 @@ export default defineConfig({
     "no-console": [
       "warn",
       {
-        allow: [
-          "info",
-          "warn",
-          "error",
-          "group",
-          "groupEnd",
-          "table",
-          "assert",
-          "countReset",
-          "count",
-          "dir",
-          "time",
-          "timeEnd",
-          "timeStamp",
-        ],
+        allow: ["info", "warn", "error", "group", "groupEnd"],
       },
     ],
     // React Compiler rules (native, from eslint-plugin-react-hooks "recommended-latest") are enabled
@@ -180,24 +185,13 @@ export default defineConfig({
     {
       files: ["**/*.stories.{ts,tsx,js,jsx,mjs,cjs}"],
       rules: {
-        // Mirrors eslint-plugin-storybook "flat/recommended"; oxlint can't consume that preset directly
-        "storybook/await-interactions": "error",
-        "storybook/context-in-play-function": "error",
-        "storybook/default-exports": "error",
-        "storybook/hierarchy-separator": "warn",
-        "storybook/no-redundant-story-name": "warn",
-        "storybook/no-renderer-packages": "error",
-        "storybook/prefer-pascal-case": "warn",
-        "storybook/story-exports": "error",
-        "storybook/use-storybook-expect": "error",
-        "storybook/use-storybook-testing-library": "error",
-        "react/rules-of-hooks": "off",
+        ...storybookStories.rules,
       },
     },
     {
       files: ["**/.storybook/main.{js,cjs,mjs,ts}"],
       rules: {
-        "storybook/no-uninstalled-addons": "error",
+        ...storybookMain.rules,
       },
     },
     {
