@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback, useMemo } from "react";
 import type { AkselColor } from "../../types";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
@@ -88,14 +88,17 @@ const ExpansionCardRoot = forwardRef<HTMLDivElement, ExpansionCardProps>(
       defaultValue: defaultOpen,
     });
 
+    const isOpen = open ?? _open;
+
+    const toggleOpen = useCallback(() => _setOpen((x) => !x), [_setOpen]);
+
+    const contextValue = useMemo(
+      () => ({ open: isOpen, toggleOpen, size }),
+      [isOpen, toggleOpen, size],
+    );
+
     return (
-      <ExpansionCardContext.Provider
-        value={{
-          open: open ?? _open,
-          toggleOpen: () => _setOpen((x) => !x),
-          size,
-        }}
-      >
+      <ExpansionCardContext.Provider value={contextValue}>
         <section
           data-color={color}
           {...rest}

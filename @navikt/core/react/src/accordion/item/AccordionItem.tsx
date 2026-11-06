@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext, useMemo } from "react";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { useControllableState } from "../../utils/hooks";
@@ -46,6 +46,14 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       console.error("<Accordion.Item> has to be used within an <Accordion>");
     }
 
+    const contextValue = useMemo(
+      () => ({
+        open: _open,
+        toggleOpen: () => _setOpen((x) => !x),
+      }),
+      [_open, _setOpen],
+    );
+
     return (
       <div
         className={cl("aksel-accordion__item", className, {
@@ -55,12 +63,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         ref={ref}
         {...omit(rest, ["onClick"])}
       >
-        <AccordionItemContext.Provider
-          value={{
-            open: _open,
-            toggleOpen: () => _setOpen((x) => !x),
-          }}
-        >
+        <AccordionItemContext.Provider value={contextValue}>
           {children}
         </AccordionItemContext.Provider>
       </div>

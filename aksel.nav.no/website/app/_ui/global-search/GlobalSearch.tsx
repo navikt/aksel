@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { Events } from "@navikt/analytics-types";
 import { Dialog, debounce } from "@navikt/ds-react";
 import type { GlobalSearchResultT } from "@/app/_ui/global-search/server/GlobalSearch.config";
@@ -102,16 +109,29 @@ function GlobalSearch() {
     return () => document.removeEventListener("keydown", listener);
   }, [open]);
 
-  const closeSearch = () => {
+  const closeSearch = useCallback(() => {
     debouncedUpdateQuery.clear();
     setOpen(false);
-  };
+  }, [debouncedUpdateQuery]);
 
-  const resetSearch = () => {
+  const resetSearch = useCallback(() => {
     debouncedUpdateQuery.clear();
     setQuery("");
     writeQueryParam("");
-  };
+  }, [debouncedUpdateQuery]);
+
+  const contextValue = useMemo(
+    () => ({
+      open,
+      closeSearch,
+      query,
+      queryResults,
+      updateQuery: debouncedUpdateQuery,
+      resetSearch,
+      inputRef,
+    }),
+    [open, closeSearch, query, queryResults, debouncedUpdateQuery, resetSearch],
+  );
 
   return (
     <Dialog
@@ -132,17 +152,7 @@ function GlobalSearch() {
         }
       }}
     >
-      <GlobalSearchContext.Provider
-        value={{
-          open,
-          closeSearch,
-          query,
-          queryResults,
-          updateQuery: debouncedUpdateQuery,
-          resetSearch,
-          inputRef,
-        }}
-      >
+      <GlobalSearchContext.Provider value={contextValue}>
         <GlobalSearchButton />
         <GlobalSearchDialog>
           <GlobalSearchForm />

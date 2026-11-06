@@ -1,6 +1,8 @@
 import React, {
   type InputHTMLAttributes,
   forwardRef,
+  useCallback,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -150,9 +152,19 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       searchRef.current?.focus?.();
     };
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
       onSearchClick?.(`${value ?? internalValue}`);
-    };
+    }, [onSearchClick, value, internalValue]);
+
+    const searchContextValue = useMemo(
+      () => ({
+        size,
+        disabled: inputProps.disabled,
+        variant,
+        handleClick,
+      }),
+      [size, inputProps.disabled, variant, handleClick],
+    );
 
     const showClearButton =
       clearButton && !inputProps.disabled && (value ?? internalValue);
@@ -234,14 +246,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               />
             )}
           </div>
-          <SearchContext.Provider
-            value={{
-              size,
-              disabled: inputProps.disabled,
-              variant,
-              handleClick,
-            }}
-          >
+          <SearchContext.Provider value={searchContextValue}>
             {children
               ? children
               : variant !== "simple" && <SearchButton data-color={dataColor} />}

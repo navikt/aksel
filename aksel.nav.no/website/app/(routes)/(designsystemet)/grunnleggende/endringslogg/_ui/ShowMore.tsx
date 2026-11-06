@@ -5,6 +5,7 @@ import React, {
   type ReactElement,
   type ReactNode,
   useEffect,
+  useMemo,
   useRef,
   useState,
   version,
@@ -132,14 +133,17 @@ export const ShowMore = ({
   const [shouldFlash, setShouldFlash] = useState(false);
   const [shouldScroll, setShouldScroll] = useState(false);
   const internalScrollTargetRef = useRef(null);
-  const contextValue = {
-    isExpanded,
-    setIsExpanded,
-    shouldFlash,
-    setShouldFlash,
-    shouldScroll,
-    setShouldScroll,
-  };
+  const contextValue = useMemo(
+    () => ({
+      isExpanded,
+      setIsExpanded,
+      shouldFlash,
+      setShouldFlash,
+      shouldScroll,
+      setShouldScroll,
+    }),
+    [isExpanded, shouldFlash, shouldScroll],
+  );
 
   useEffect(() => {
     if (scrollBackOnCollapse && shouldScroll) {

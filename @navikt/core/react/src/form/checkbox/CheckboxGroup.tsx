@@ -1,4 +1,10 @@
-import React, { forwardRef, useContext, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { cl } from "../../utils/helpers";
 import { Fieldset, type FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
@@ -53,24 +59,26 @@ export const CheckboxGroup = forwardRef<
 
     const [state, setState] = useState<any[]>(defaultValue ?? []);
 
-    const toggleValue = (v: any) => {
-      const newValue = value ?? state;
-      const newState = newValue.includes(v)
-        ? newValue.filter((x) => x !== v)
-        : [...newValue, v];
+    const toggleValue = useCallback(
+      (v: any) => {
+        const newValue = value ?? state;
+        const newState = newValue.includes(v)
+          ? newValue.filter((x) => x !== v)
+          : [...newValue, v];
 
-      value === undefined && setState(newState);
-      onChange(newState);
-    };
+        value === undefined && setState(newState);
+        onChange(newState);
+      },
+      [value, state, onChange],
+    );
+
+    const contextValue = useMemo(
+      () => ({ value, defaultValue, toggleValue }),
+      [value, defaultValue, toggleValue],
+    );
 
     return (
-      <CheckboxGroupContext.Provider
-        value={{
-          value,
-          defaultValue,
-          toggleValue,
-        }}
-      >
+      <CheckboxGroupContext.Provider value={contextValue}>
         <Fieldset
           {...rest}
           ref={ref}

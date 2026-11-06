@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { useMedia } from "@/ui-utils/hooks/useMedia";
 
 type IconPageContextT = {
@@ -17,14 +17,13 @@ function IconPageProvider({ children }: { children?: React.ReactNode }) {
 
   const hideDialog = useMedia("screen and (min-width: 1280px)");
 
+  const contextValue = useMemo(
+    () => ({ activeIconButton, setActiveIconButton, hideDialog }),
+    [activeIconButton, hideDialog],
+  );
+
   return (
-    <IconPageContext.Provider
-      value={{
-        activeIconButton,
-        setActiveIconButton,
-        hideDialog,
-      }}
-    >
+    <IconPageContext.Provider value={contextValue}>
       {children}
     </IconPageContext.Provider>
   );

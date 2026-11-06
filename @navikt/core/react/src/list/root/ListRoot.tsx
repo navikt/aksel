@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext, useMemo } from "react";
 import { BodyLong } from "../../typography";
 import { cl } from "../../utils/helpers";
 import type { ListItemProps, ListProps } from "../List.types";
@@ -22,13 +22,16 @@ const ListRoot = forwardRef<HTMLDivElement, ListProps>(
 
     const listSize = size ?? contextSize;
 
+    const contextValue = useMemo(
+      () => ({
+        listType: ListTag,
+        size: listSize,
+      }),
+      [ListTag, listSize],
+    );
+
     return (
-      <ListContext.Provider
-        value={{
-          listType: ListTag,
-          size: listSize,
-        }}
-      >
+      <ListContext.Provider value={contextValue}>
         <BodyLong
           as="div"
           {...rest}

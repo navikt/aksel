@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext, useMemo } from "react";
 import { useId } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { Fieldset, type FieldsetProps } from "../fieldset";
@@ -65,16 +65,21 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
 
     const nameId = useId();
 
+    const contextName = name ?? `radioGroupName-${nameId}`;
+
+    const contextValue = useMemo(
+      () => ({
+        name: contextName,
+        defaultValue,
+        value,
+        onChange,
+        required,
+      }),
+      [contextName, defaultValue, value, onChange, required],
+    );
+
     return (
-      <RadioGroupContext.Provider
-        value={{
-          name: name ?? `radioGroupName-${nameId}`,
-          defaultValue,
-          value,
-          onChange,
-          required,
-        }}
-      >
+      <RadioGroupContext.Provider value={contextValue}>
         <Fieldset
           role="radiogroup"
           {...rest}

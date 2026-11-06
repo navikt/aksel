@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import type { Color } from "@/app/_sanity/query-types";
@@ -97,64 +98,77 @@ function CompareImagesProvider({
   }, [handlePointerMove]);
 
   /* Container */
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    // Only handle left mouse button (touch events also use 0).
-    if (event.button !== 0) {
-      return;
-    }
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      // Only handle left mouse button (touch events also use 0).
+      if (event.button !== 0) {
+        return;
+      }
 
-    setIsDragging(true);
-    updateOnCursorPosition(event);
-  };
-
-  const movePosition = (offset: number) => {
-    const newPosition = Math.max(-1, Math.min(100, handlePosition + offset));
-    setHandlePosition(newPosition);
-  };
+      setIsDragging(true);
+      updateOnCursorPosition(event);
+    },
+    [updateOnCursorPosition],
+  );
 
   /* Set on CompareHandle */
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-      event.preventDefault();
-      movePosition(-5);
-    } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-      event.preventDefault();
-      movePosition(5);
-    } else if (event.key === "Home") {
-      event.preventDefault();
-      movePosition(-100);
-    } else if (event.key === "End") {
-      event.preventDefault();
-      movePosition(100);
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      const movePosition = (offset: number) => {
+        setHandlePosition((prev) => Math.max(-1, Math.min(100, prev + offset)));
+      };
 
-  const appliedStyle: CSSProperties = {
-    "--image-clip-2": `${handlePosition}%`,
-    "--image-clip-1": `${100 - handlePosition}%`,
-    "--image-bg": background
-      ? `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`
-      : undefined,
-  };
+      if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+        event.preventDefault();
+        movePosition(-5);
+      } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+        event.preventDefault();
+        movePosition(5);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        movePosition(-100);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        movePosition(100);
+      }
+    },
+    [],
+  );
+
+  const contextValue = useMemo(() => {
+    const appliedStyle: CSSProperties = {
+      "--image-clip-2": `${handlePosition}%`,
+      "--image-clip-1": `${100 - handlePosition}%`,
+      "--image-bg": background
+        ? `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`
+        : undefined,
+    };
+
+    return {
+      registerContainer: setContainerRefElement,
+      container: {
+        styles: appliedStyle,
+        onPointerDown: handlePointerDown,
+      },
+      handle: {
+        onKeyDown: handleKeyDown,
+      },
+      handlePosition,
+      dragging: {
+        current: isDragging,
+        update: setIsDragging,
+      },
+    };
+  }, [
+    handlePosition,
+    background,
+    handlePointerDown,
+    handleKeyDown,
+    isDragging,
+  ]);
 
   return (
-    <CompareImagesContext.Provider
-      value={{
-        registerContainer: setContainerRefElement,
-        container: {
-          styles: appliedStyle,
-          onPointerDown: handlePointerDown,
-        },
-        handle: {
-          onKeyDown: handleKeyDown,
-        },
-        handlePosition,
-        dragging: {
-          current: isDragging,
-          update: setIsDragging,
-        },
-      }}
-    >
+    <CompareImagesContext.Provider value={contextValue}>
       {children}
     </CompareImagesContext.Provider>
   );

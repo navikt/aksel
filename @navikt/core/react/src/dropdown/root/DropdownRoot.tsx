@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useControllableState } from "../../utils/hooks";
 import { DropdownMenuDivider } from "../divider/DropdownMenuDivider";
 import { DropdownMenuGroupedListHeading } from "../grouped-list-heading/DropdownMenuGroupedListHeading";
@@ -54,19 +54,22 @@ const DropdownRoot = ({
     onChange: onOpenChange,
   });
 
+  const contextValue = useMemo(
+    () => ({
+      isOpen: _open,
+      handleToggle: _setOpen,
+      anchorEl,
+      setAnchorEl,
+      onSelect: (event) => {
+        onSelect?.(event);
+        closeOnSelect && _setOpen(false);
+      },
+    }),
+    [anchorEl, onSelect, closeOnSelect, _open, _setOpen],
+  );
+
   return (
-    <DropdownContext.Provider
-      value={{
-        isOpen: _open,
-        handleToggle: _setOpen,
-        anchorEl,
-        setAnchorEl,
-        onSelect: (event) => {
-          onSelect?.(event);
-          closeOnSelect && _setOpen(false);
-        },
-      }}
-    >
+    <DropdownContext.Provider value={contextValue}>
       {children}
     </DropdownContext.Provider>
   );

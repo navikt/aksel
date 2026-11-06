@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import type { AkselStatusColorRole } from "@navikt/ds-tokens/types";
 import type { AkselColor } from "../../types";
 import { omit } from "../../utils-external";
@@ -95,14 +95,17 @@ const AccordionRoot = forwardRef<HTMLDivElement, AccordionProps>(
       }
     }, []);
 
+    const contextValue = useMemo(
+      () => ({
+        size,
+        variant,
+        mounted: true,
+      }),
+      [size, variant],
+    );
+
     return (
-      <AccordionContext.Provider
-        value={{
-          size,
-          mounted: true,
-          variant,
-        }}
-      >
+      <AccordionContext.Provider value={contextValue}>
         <Component
           {...omit(rest, ["headingSize"])}
           className={cl(

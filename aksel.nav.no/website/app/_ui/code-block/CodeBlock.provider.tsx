@@ -3,8 +3,10 @@
 import {
   createContext,
   startTransition,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -67,18 +69,24 @@ function CodeBlockProvider({
   const [wrapCode, setWrapCode] = useState(defaultWrap);
   const [expanded, setExpanded] = useState(false);
 
-  const updateCodeSnippet = (value: string, isExpanded?: boolean) => {
-    const localExpanded = isExpanded ?? expanded;
+  const updateCodeSnippet = useCallback(
+    (value: string, isExpanded?: boolean) => {
+      const localExpanded = isExpanded ?? expanded;
 
-    const currentTab = tabs.find((tab) => tab.value === value);
-    if (currentTab) {
-      let code = currentTab.code;
-      if (localExpanded && currentTab.extraCode) {
-        code = currentTab.extraCode;
+      const currentTab = tabs.find((tab) => tab.value === value);
+      if (currentTab) {
+        let code = currentTab.code;
+        if (localExpanded && currentTab.extraCode) {
+          code = currentTab.extraCode;
+        }
+        setCurrentCodeSnippet(code);
       }
-      setCurrentCodeSnippet(code);
-    }
-  };
+    },
+    [expanded, tabs],
+  );
+
+  const toggleWrapCode = useCallback(() => setWrapCode((prev) => !prev), []);
+  const toggleExpanded = useCallback(() => setExpanded((prev) => !prev), []);
 
   useEffect(
     function syncGivenTabsWithCurrentCodeSnippet() {
@@ -91,26 +99,38 @@ function CodeBlockProvider({
     [tabs],
   );
 
+  const contextValue = useMemo(
+    () => ({
+      useTabs: tabs && tabs.length > 1,
+      tabs,
+      showLineNumbers,
+      codeSnippet: {
+        current: currentCodeSnippet,
+        update: updateCodeSnippet,
+      },
+      wrapCode: {
+        current: wrapCode,
+        toggle: toggleWrapCode,
+      },
+      expanded: {
+        current: expanded,
+        toggle: toggleExpanded,
+      },
+    }),
+    [
+      tabs,
+      showLineNumbers,
+      currentCodeSnippet,
+      updateCodeSnippet,
+      wrapCode,
+      toggleWrapCode,
+      expanded,
+      toggleExpanded,
+    ],
+  );
+
   return (
-    <CodeBlockContext.Provider
-      value={{
-        useTabs: tabs && tabs.length > 1,
-        tabs,
-        showLineNumbers,
-        codeSnippet: {
-          current: currentCodeSnippet,
-          update: updateCodeSnippet,
-        },
-        wrapCode: {
-          current: wrapCode,
-          toggle: () => setWrapCode((prev) => !prev),
-        },
-        expanded: {
-          current: expanded,
-          toggle: () => setExpanded((prev) => !prev),
-        },
-      }}
-    >
+    <CodeBlockContext.Provider value={contextValue}>
       {children}
     </CodeBlockContext.Provider>
   );

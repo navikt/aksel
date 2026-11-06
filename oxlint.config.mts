@@ -99,9 +99,9 @@ export default defineConfig({
   ],
   rules: {
     /* Rules to add and fix */
-    /* react/jsx-no-constructed-context-values */
     /* unicorn/no-array-for-each */
     /* END */
+    "react/jsx-no-constructed-context-values": "error",
     "typescript/ban-ts-comment": "error",
     "typescript/no-empty-object-type": "error",
     "typescript/no-namespace": "error",
