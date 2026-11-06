@@ -59,13 +59,14 @@ export default defineConfig({
   options: {
     reportUnusedDisableDirectives: "error",
   },
+
   jsPlugins: [
     { name: "react-hooks-js", specifier: "eslint-plugin-react-hooks" },
     "eslint-plugin-storybook",
     "eslint-plugin-testing-library",
     "eslint-plugin-aksel-local",
   ],
-  // Generated and build output is already covered by .gitignore, which Oxlint respects.
+  // Generated and build outputs is already covered by .gitignore, which Oxlint respects.
   ignorePatterns: [
     "@navikt/aksel/**/*.input.*",
     "@navikt/aksel/**/*.output.*",
@@ -194,6 +195,7 @@ export default defineConfig({
         "**/*.story.{ts,tsx,js,jsx,mjs,cjs}",
       ],
       rules: {
+        // Mirrors eslint-plugin-storybook "flat/recommended"; oxlint can't consume that preset directly
         "storybook/await-interactions": "error",
         "storybook/context-in-play-function": "error",
         "storybook/default-exports": "error",
