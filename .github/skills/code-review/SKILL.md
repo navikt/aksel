@@ -41,7 +41,7 @@ For changes to component state, callbacks, async behavior, composition, semantic
 - 🟡 **Suggestion**: should fix. Missing test, docs or changeset, maintainability risk, over-editing.
 - 💭 **Nit**: optional. Leave it out when in doubt.
 
-Skip anything ESLint, Stylelint, Biome, Prettier or TypeScript already catches. No praise-only or speculative comments. Every finding says **why** it matters and what to do.
+Skip anything Oxlint, Stylelint, Prettier or TypeScript already catches. No praise-only or speculative comments. Every finding says **why** it matters and what to do.
 
 ## Checklist
 

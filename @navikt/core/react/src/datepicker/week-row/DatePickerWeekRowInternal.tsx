@@ -23,7 +23,7 @@ const DatePickerWeekRow = ({
 
   return (
     <Show below="sm" asChild>
-      {/** biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: role="grid" improves a11y reading */}
+      {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- role="grid" improves a11y reading */}
       <table className="rdp-table" role="grid">
         <tbody className="rdp-tbody">
           <tr className="rdp-row aksel-date__week-row">

@@ -1,9 +1,5 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable react-hooks/exhaustive-deps */
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: Explained bellow */
-/* eslint-disable react-hooks/immutability */
-/* eslint-disable react-hooks/globals */
-/** biome-ignore-all lint/complexity/useLiteralKeys: Explained bellow */
+/* oxlint-disable react/exhaustive-deps -- Explained bellow */
+/* oxlint-disable react-hooks-js/globals */
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *

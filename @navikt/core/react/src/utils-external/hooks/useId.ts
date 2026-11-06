@@ -7,11 +7,9 @@ import React, { useEffect, useState } from "react";
 
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {
-  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   const [defaultId, setDefaultId] = useState(idOverride);
   const id = idOverride || defaultId;
 
-  // biome-ignore lint/correctness/useHookAtTopLevel: At runtime, `useGlobalId` is invariant.
   useEffect(() => {
     if (defaultId == null) {
       // Fallback to this default id when possible.
@@ -19,7 +17,7 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`aksel-id-${globalId}`); // eslint-disable-line react-hooks/set-state-in-effect
+      setDefaultId(`aksel-id-${globalId}`);
     }
   }, [defaultId]);
   return id;
@@ -39,7 +37,7 @@ function useId(idOverride?: string): string {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
   }
-  // biome-ignore lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime.
+  // oxlint-disable-next-line react/rules-of-hooks -- `useId` is invariant at runtime
   return useGlobalId(idOverride) ?? "";
 }
 

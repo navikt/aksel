@@ -96,7 +96,6 @@ export const SearchForm = ({
 
   const { years, categories } = params;
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to run this when urlParams changes
   useEffect(() => {
     if (!urlParams.has("fritekst")) {
       // In case you clear the URL params by clicking on "Endringslogg" again in the menu

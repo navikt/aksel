@@ -15,7 +15,6 @@ ymlList.forEach((file) => {
   const ymlData = load(fs.readFileSync(`${basePath}/${file}`), {
     schema: JSON_SCHEMA,
   });
-  // biome-ignore lint/complexity/useOptionalChain: optional chain not supported in enviroment. Consider revriting to Typescript
   if (ymlData.keywords && ymlData.keywords.includes("[ignore-docs]")) {
     return;
   }
