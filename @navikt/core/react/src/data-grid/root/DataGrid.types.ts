@@ -1,3 +1,35 @@
+import type { DataGridPaginationSharedOptions } from "../pagination/root/DataGridPagination.types";
+
+type DataGridPaginationConfig = DataGridPaginationSharedOptions & {
+  /**
+   * Whether completed page and page-size changes are announced.
+   * @default true
+   */
+  announcePageChanges?: boolean;
+} & (
+    | {
+        /**
+         * Client mode: DataGrid receives all rows and slices the current page.
+         * @default "client"
+         */
+        mode?: "client";
+        totalRows?: never;
+        hasNextPage?: never;
+      }
+    | {
+        /** Server mode: DataGrid receives the current page's rows. */
+        mode: "server";
+        totalRows: number;
+        hasNextPage?: never;
+      }
+    | {
+        /** Server mode: DataGrid receives the current page's rows. */
+        mode: "server";
+        totalRows?: never;
+        hasNextPage: boolean;
+      }
+  );
+
 type DataGridSettings = {
   /**
    * Controls vertical cell padding.
@@ -48,4 +80,4 @@ type DataGridSettings = {
   columnDisplay?: { id: string; visible: boolean | "always" }[];
 };
 
-export type { DataGridSettings };
+export type { DataGridPaginationConfig, DataGridSettings };

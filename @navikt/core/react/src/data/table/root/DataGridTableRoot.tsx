@@ -6,7 +6,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
+import {
+  useDataGridContext,
+  useDataGridRootPaginationContext,
+} from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
@@ -24,6 +27,10 @@ import {
 } from "../hooks/useTableDetailsPanel";
 import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
+import {
+  useTablePagination,
+  useTablePaginationReset,
+} from "../hooks/useTablePagination";
 import { useTableSelection } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
@@ -117,7 +124,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
    *
-   * @default { variant: "skeleton", rows: 5 }
+   * @default variant skeleton. Default rows: 5, "pageSize" from pagination if available.
    */
   loadingContent?: DataTableLoadingConfig;
   /**
@@ -160,11 +167,7 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent = {
-        variant: "skeleton",
-        rows: 5,
-        label: "Laster innhold",
-      }, // TODO translate label
+      loadingContent: _loadingContent, // TODO translate label
       detailsPanel,
       subRows,
       sorting,
@@ -175,19 +178,27 @@ const DataGridTableInternal = forwardRef<
     }: DataGridTableProps<unknown>,
     forwardedRef,
   ) => {
-    const {
-      columnDefinitions,
-      data,
-      getRowId,
-      selection,
-      isLoading,
-      tableSettings,
-    } = useDataGridContext();
+    const { columnDefinitions, getRowId, selection, isLoading, tableSettings } =
+      useDataGridContext();
+    const items = useTablePagination();
+    const paginationContext = useDataGridRootPaginationContext(false);
+
+    const loadingContent = _loadingContent ?? {
+      variant: "skeleton",
+      rows: paginationContext?.pageSize ?? 5,
+      label: "Laster innhold",
+    };
 
     const sortingState = useTableSort(sorting);
 
+    const scrollWrapperRef = useRef<HTMLDivElement>(null);
+    useTablePaginationReset({
+      sortState: sortingState.sortState,
+      scrollWrapperRef,
+    });
+
     const tableItems = useTableItems({
-      items: data,
+      items,
       getRowId,
       subRows,
     });
@@ -253,6 +264,7 @@ const DataGridTableInternal = forwardRef<
         >
           <TableElementWrapper
             enabled={true}
+            scrollWrapperRef={scrollWrapperRef}
             hasStickyColumns={
               !!(
                 tableSettings?.stickyColumns?.start ||
@@ -334,14 +346,17 @@ function TableElementWrapper({
   children,
   enabled,
   hasStickyColumns,
+  scrollWrapperRef,
 }: {
   children: React.ReactNode;
   enabled: boolean;
   hasStickyColumns: boolean;
+  scrollWrapperRef: React.Ref<HTMLDivElement>;
 }) {
   const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
 
   const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const mergedWrapperRefs = useMergeRefs(tableWrapperRef, scrollWrapperRef);
   const tableRef = useRef<HTMLTableElement>(null);
   const rafRef = useRef<number | null>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
@@ -413,7 +428,7 @@ function TableElementWrapper({
 
   return (
     <div className="aksel-data-table__border-wrapper">
-      <div ref={tableWrapperRef} className="aksel-data-table__scroll-wrapper">
+      <div ref={mergedWrapperRefs} className="aksel-data-table__scroll-wrapper">
         <Slot
           tabIndex={tabIndex}
           /* @ts-expect-error Ref is not typed correctly to handle this case */

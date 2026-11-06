@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
+import { ResetPageOnSort } from "../../data-grid/pagination/DataGridPagination.stories";
 import { HGrid } from "../../primitives/grid";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
@@ -498,6 +499,146 @@ export const SelectionPagination: Story = {
   },
 };
 
+type SelectionPageRow = {
+  id: string;
+  name: string;
+  children?: SelectionPageRow[];
+};
+
+const selectionPageRows: SelectionPageRow[] = [
+  {
+    id: "alpha",
+    name: "Alpha",
+    children: [
+      {
+        id: "alpha-child",
+        name: "Alpha child",
+        children: [{ id: "alpha-grandchild", name: "Alpha grandchild" }],
+      },
+    ],
+  },
+  { id: "beta", name: "Beta" },
+  {
+    id: "gamma",
+    name: "Gamma",
+    children: [
+      {
+        id: "gamma-child",
+        name: "Gamma child",
+        children: [{ id: "gamma-grandchild", name: "Gamma grandchild" }],
+      },
+    ],
+  },
+  { id: "delta", name: "Delta" },
+];
+
+const selectionPageColumnDef: ColumnDefinitions<SelectionPageRow> = [
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+];
+
+export const TestSelectionAcrossPages: Story = {
+  render: () => {
+    const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
+
+    return (
+      <>
+        <output aria-label="Selected row IDs">
+          {JSON.stringify([...selectedRowIds].sort())}
+        </output>
+        <DataGrid
+          columns={selectionPageColumnDef}
+          data={selectionPageRows}
+          getRowId={(row) => row.id}
+          selection={{
+            mode: "multiple",
+            onSelectedRowIdsChange: setSelectedRowIds,
+          }}
+          pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
+        >
+          <DataGrid.Table<SelectionPageRow>
+            subRows={{ getRows: (row) => row.children ?? [] }}
+          />
+          <DataGrid.Pagination />
+        </DataGrid>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const selectedIds = canvas.getByRole("status", {
+      name: "Selected row IDs",
+    });
+    const firstPageIds = ["alpha", "alpha-child", "alpha-grandchild", "beta"];
+    const secondPageIds = ["delta", "gamma", "gamma-child", "gamma-grandchild"];
+
+    expect(canvas.queryByText("Alpha child")).not.toBeInTheDocument();
+    expect(canvas.queryByText("Alpha grandchild")).not.toBeInTheDocument();
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Gamma")).toBeInTheDocument();
+    expect(canvas.queryByText("Alpha")).not.toBeInTheDocument();
+    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(
+      JSON.stringify([...firstPageIds, ...secondPageIds].sort()),
+    );
+
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).toBeChecked();
+    }
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe(JSON.stringify(secondPageIds));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).toBeChecked();
+    }
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis under-rader" }),
+    );
+    expect(
+      within(canvas.getByRole("row", { name: /Gamma child/ })).getByRole(
+        "checkbox",
+      ),
+    ).toBeChecked();
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis under-rader" }),
+    );
+    expect(
+      within(canvas.getByRole("row", { name: /Gamma grandchild/ })).getByRole(
+        "checkbox",
+      ),
+    ).toBeChecked();
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe("[]");
+    for (const checkbox of canvas.getAllByRole("checkbox")) {
+      expect(checkbox).not.toBeChecked();
+    }
+  },
+};
+
 export const StickySelection: Story = {
   render: () => {
     return (
@@ -760,6 +901,36 @@ export const SortableColumnsUncontrolled: Story = {
         </DataGrid>
       </div>
     );
+  },
+};
+
+export const TestControlledSortResetsPage: Story = {
+  render: ResetPageOnSort.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const navigation = within(
+      canvas.getByRole("navigation", { name: "Sidenavigering" }),
+    );
+
+    for (const direction of ["ascending", "descending", "none"]) {
+      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+      expect(navigation.getByText("Side 3 av 14")).toBeInTheDocument();
+      await userEvent.click(canvas.getByRole("button", { name: "Id" }));
+
+      expect(navigation.getByText("Side 1 av 14")).toBeInTheDocument();
+      expect(canvas.getByRole("columnheader", { name: "Id" })).toHaveAttribute(
+        "aria-sort",
+        direction,
+      );
+      const firstRow = canvas.getAllByRole("row")[1];
+      expect(
+        within(firstRow).getByRole("cell", {
+          name: direction === "descending" ? "137" : "1",
+        }),
+      ).toBeInTheDocument();
+      expect(canvas.getAllByRole("row")).toHaveLength(11);
+    }
   },
 };
 
