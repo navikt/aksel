@@ -1,5 +1,4 @@
 /* oxlint-disable react/exhaustive-deps -- Explained bellow */
-/* oxlint-disable react-hooks-js/globals */
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *

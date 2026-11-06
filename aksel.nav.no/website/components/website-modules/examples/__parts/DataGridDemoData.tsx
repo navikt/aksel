@@ -189,7 +189,7 @@ function PriorityTag({ priority }: { priority: CaseT["priority"] }) {
 }
 
 function DeadlineCell({ deadline }: { deadline: CaseT["deadline"] }) {
-  const isOverdue = deadline.getTime() < Date.now(); // oxlint-disable-line react-hooks-js/purity
+  const isOverdue = deadline.getTime() < Date.now(); // oxlint-disable-line react/purity
 
   return (
     <HGrid

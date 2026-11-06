@@ -61,7 +61,6 @@ export default defineConfig({
   },
 
   jsPlugins: [
-    { name: "react-hooks-js", specifier: "eslint-plugin-react-hooks" },
     "eslint-plugin-storybook",
     "eslint-plugin-testing-library",
     "eslint-plugin-aksel-local",
@@ -79,6 +78,7 @@ export default defineConfig({
     /* unicorn/no-array-for-each */
     /* END */
     "typescript/ban-ts-comment": "error",
+
     "typescript/no-empty-object-type": "error",
     "typescript/no-namespace": "error",
     "typescript/no-unnecessary-type-constraint": "error",
@@ -158,27 +158,11 @@ export default defineConfig({
         ],
       },
     ],
-    // React Compiler rules (from eslint-plugin-react-hooks "recommended-latest"). Components that
-    // break these rules cannot be optimized by React Compiler and risk subtle bugs.
-    // The native oxlint rules (immutability, set-state-in-effect, set-state-in-render,
-    // static-components, use-memo, void-use-memo) are enabled through the `correctness` category.
-    // Disabled native rules: `react/refs` (too many false positives), `react/purity` (oxlint also
-    // flags `new Date()`, which we use deliberately; the ESLint version only flags Date.now/Math.random)
-    // and the ones the ESLint plugin below runs instead.
+    // React Compiler rules (native, from eslint-plugin-react-hooks "recommended-latest") are enabled
+    // through the `correctness` category. Components that break them cannot be optimized by React Compiler.
+    // `react/refs` is disabled because of too many false positives.
     "react/refs": "off",
-    "react/purity": "off",
-    "react/globals": "off",
-    "react/error-boundaries": "off",
-    "react/incompatible-library": "off",
-    "react/preserve-manual-memoization": "off",
-    // Remaining React Compiler rules, run through the ESLint plugin (jsPlugins) until oxlint has
-    // native equivalents. `react-hooks-js/purity` is here because oxlint's native version also flags `new Date()`.
-    "react-hooks-js/purity": "error",
-    "react-hooks-js/preserve-manual-memoization": "error",
-    "react-hooks-js/incompatible-library": "warn",
-    "react-hooks-js/globals": "error",
-    "react-hooks-js/error-boundaries": "error",
-    "react-hooks-js/unsupported-syntax": "warn",
+    "react/unsupported-syntax": "warn",
   },
   overrides: [
     {
