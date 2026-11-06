@@ -55,7 +55,7 @@ const restrictedImportPatterns = [
 ];
 
 export default defineConfig({
-  plugins: ["oxc", "unicorn", "react", "import", "jsx-a11y"],
+  plugins: ["oxc", "unicorn", "react", "import", "jsx-a11y", "typescript"],
   options: {
     reportUnusedDisableDirectives: "error",
   },
@@ -78,10 +78,16 @@ export default defineConfig({
     /* Rules to add and fix */
     /* react/jsx-no-constructed-context-values */
     /* END */
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-empty-object-type": "error",
+    "typescript/no-namespace": "error",
+    "typescript/no-unnecessary-type-constraint": "error",
+    "typescript/no-unsafe-function-type": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
     eqeqeq: ["error", "always", { null: "ignore" }],
     "no-case-declarations": "error",
     "react/jsx-no-script-url": "error",
-    "typescript/no-non-null-assertion": "error",
     "no-new-func": "error",
     "no-empty": "error",
     "no-fallthrough": "error",
@@ -214,18 +220,6 @@ export default defineConfig({
       rules: {
         "storybook/no-uninstalled-addons": "error",
       },
-    },
-    {
-      files: ["**/*.{ts,tsx,mts,cts}"],
-      rules: {
-        "typescript/ban-ts-comment": "error",
-        "typescript/no-empty-object-type": "error",
-        "typescript/no-namespace": "error",
-        "typescript/no-require-imports": "error",
-        "typescript/no-unnecessary-type-constraint": "error",
-        "typescript/no-unsafe-function-type": "error",
-      },
-      plugins: ["typescript"],
     },
     {
       files: ["**/*.test.*", "**/__tests__/*"],
