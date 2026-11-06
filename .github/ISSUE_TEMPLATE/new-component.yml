@@ -1,5 +1,5 @@
 name: Ny komponent
-description: Send et ønske om en eller flere nye komponenter
+description: Send et ønske om én eller flere nye komponenter
 title: "[Ny komponent]: "
 labels: ["nytt ✨", "forespørsel 🥰", "komponenter 🧩"]
 body:

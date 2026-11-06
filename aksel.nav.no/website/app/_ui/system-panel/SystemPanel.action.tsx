@@ -6,14 +6,14 @@ import { BodyLong, Box, Button, Link, VStack } from "@navikt/ds-react";
 import { AnimatedArrowRight } from "@/app/_ui/animated-arrow/AnimatedArrow";
 import { SANITY_BASE_CONFIG } from "@/sanity/config";
 
-function SystemPanelAction() {
+function SystemPanelAction({ titleSuffix }: { titleSuffix?: string }) {
   return (
     <Box marginBlock="space-20 space-0">
       <Button
         size="small"
         variant="secondary-neutral"
         as="a"
-        href="https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9%2Cbeta+%F0%9F%A7%AA&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3CActionMenu%20/%3E"
+        href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9%2Cbeta+%F0%9F%A7%AA&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+${titleSuffix}`}
       >
         Send innspill
       </Button>
