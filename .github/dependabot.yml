@@ -22,12 +22,6 @@ updates:
           - "sanity-*"
           - "@sanity/*"
           - "@portabletext/*"
-      eslint:
-        applies-to: version-updates
-        patterns:
-          - "eslint"
-          - "eslint-*"
-          - "oxlint"
       react:
         applies-to: version-updates
         patterns:
@@ -50,12 +44,6 @@ updates:
           - "sanity-*"
           - "@sanity/*"
           - "@portabletext/*"
-      eslint-security:
-        applies-to: security-updates
-        patterns:
-          - "eslint"
-          - "eslint-*"
-          - "oxlint"
       react-security:
         applies-to: security-updates
         patterns:
