@@ -32,7 +32,7 @@ const CheckboxCard = forwardRef<HTMLInputElement, CheckboxCardProps>(
   },
 );
 
-// eslint-disable-next-line typescript/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace CheckboxCard {
   export type Props = CheckboxCardProps;
 }

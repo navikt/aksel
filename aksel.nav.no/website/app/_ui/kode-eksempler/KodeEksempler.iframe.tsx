@@ -61,7 +61,7 @@ function KodeEksemplerIFrame(props: {
 
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
-    setHasMounted(true); // eslint-disable-line react/set-state-in-effect
+    setHasMounted(true); // oxlint-disable-line react/set-state-in-effect
   }, []);
 
   const getCurrentCode = () => {

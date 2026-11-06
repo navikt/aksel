@@ -81,6 +81,7 @@ export default defineConfig({
   plugins: ["oxc", "unicorn", "react", "import", "jsx-a11y", "typescript"],
   options: {
     reportUnusedDisableDirectives: "error",
+    respectEslintDisableDirectives: false,
   },
 
   jsPlugins: [
@@ -94,6 +95,7 @@ export default defineConfig({
     "@navikt/aksel/**/*.output.*",
     "**/query-types.ts",
     "**/modal/helpers/dialog-polyfill.ts",
+    ".yarn/releases/*",
   ],
   rules: {
     /* Rules to add and fix */

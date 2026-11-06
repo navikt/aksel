@@ -43,7 +43,7 @@ function GlobalSearch() {
   useEffect(() => {
     const initialQuery = readQueryParam();
     if (initialQuery) {
-      // eslint-disable-next-line react/set-state-in-effect
+      // oxlint-disable-next-line react/set-state-in-effect
       setQuery(initialQuery);
       setOpen(true);
     }
