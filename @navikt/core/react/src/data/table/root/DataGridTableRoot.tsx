@@ -599,7 +599,7 @@ const DataGridTable = DataGridTableInternal as <RowT>(
   props: DataGridTableProps<RowT> & React.RefAttributes<HTMLTableElement>,
 ) => React.ReactElement | null;
 
-// eslint-disable-next-line typescript/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace DataGridTable {
   export type Props<T = unknown> = DataGridTableProps<T>;
   export type Sorting = TableSortOptions;

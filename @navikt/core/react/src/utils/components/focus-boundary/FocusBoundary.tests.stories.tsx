@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-// eslint-disable-next-line storybook/use-storybook-testing-library
+// oxlint-disable-next-line storybook/use-storybook-testing-library
 import { act } from "@testing-library/react";
 import React, { useState } from "react";
 import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";

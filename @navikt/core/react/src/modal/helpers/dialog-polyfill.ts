@@ -1,5 +1,5 @@
-/* eslint-disable no-var */
-// eslint-disable-next-line typescript/ban-ts-comment
+/* oxlint-disable no-var */
+// oxlint-disable-next-line typescript/ban-ts-comment
 // @ts-nocheck
 
 const needPolyfill =
