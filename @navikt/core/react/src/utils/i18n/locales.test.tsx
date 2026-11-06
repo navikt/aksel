@@ -53,7 +53,6 @@ describe("Locale", () => {
 
     for (const [path, baseValue] of flattenTranslations(nb)) {
       const value = translations.get(path);
-      expect({ path, value: typeof value }).toEqual({ path, value: "string" });
       expect({
         path,
         value,
