@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel",
-  "version": "8.22.1",
+  "version": "8.23.0",
   "description": "Aksel command line interface. Codemods and other utilities for Aksel users.",
   "author": "Aksel | Nav designsystem team",
   "license": "MIT",
