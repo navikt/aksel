@@ -8,6 +8,7 @@
     "**/cjs": true
   },
   "playwright.reuseBrowser": true,
+  "oxc.fixKind": "all",
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "deno.enablePaths": ["./scripts/deno"]
 }

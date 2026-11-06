@@ -1,7 +1,7 @@
 import { endOfDay } from "date-fns/endOfDay";
 import { isSameDay } from "date-fns/isSameDay";
 import { startOfDay } from "date-fns/startOfDay";
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { TimelineAxisLabelsInternal } from "../axis-labels/TimelineAxisLabelsInternal";
 import {
@@ -13,6 +13,7 @@ import { TimelineRow, type TimelineRowProps } from "../row/TimelineRow";
 import { RowContext } from "../row/TimelineRow.context";
 import { parseRows } from "../utils/timeline";
 import type { AxisLabelTemplates } from "../utils/types.external";
+import type { PositionedPeriod } from "../utils/types.internal";
 import {
   TimelineZoomButton,
   type TimelineZoomButtonProps,
@@ -54,6 +55,27 @@ interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   axisLabelTemplates?: AxisLabelTemplates;
 }
+
+const TimelineRowProvider = ({
+  periods,
+  id,
+  index,
+  children,
+}: {
+  periods: PositionedPeriod[];
+  id: string;
+  index: number;
+  children: React.ReactNode;
+}) => {
+  const contextValue = useMemo(
+    () => ({ periods, id, index }),
+    [periods, id, index],
+  );
+
+  return (
+    <RowContext.Provider value={contextValue}>{children}</RowContext.Provider>
+  );
+};
 
 const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
   (
@@ -122,38 +144,56 @@ const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
       direction,
     );
 
-    const handleZoomChange = (zoomStart: Date) => {
-      if (startDate || endDate) {
-        consoleWarning(
-          "<Timeline />: Zooming is not supported when `startDate` or `endDate` is set",
-        );
-        return;
-      }
-      if (direction === "left") {
-        if (isSameDay(zoomStart, start)) {
-          setStart(initialStartDate);
+    /* Dates are recreated every render, so depend on their timestamps to keep the callback stable */
+    const initialStartTime = initialStartDate.getTime();
+    const initialEndTime = initialEndDate.getTime();
+
+    const handleZoomChange = useCallback(
+      (zoomStart: Date) => {
+        if (startDate || endDate) {
+          consoleWarning(
+            "<Timeline />: Zooming is not supported when `startDate` or `endDate` is set",
+          );
           return;
         }
-        setStart(zoomStart);
-      } else {
-        if (isSameDay(zoomStart, endInclusive)) {
-          setEndInclusive(initialEndDate);
-          return;
+        if (direction === "left") {
+          if (isSameDay(zoomStart, start)) {
+            setStart(new Date(initialStartTime));
+            return;
+          }
+          setStart(zoomStart);
+        } else {
+          if (isSameDay(zoomStart, endInclusive)) {
+            setEndInclusive(new Date(initialEndTime));
+            return;
+          }
+          setEndInclusive(zoomStart);
         }
-        setEndInclusive(zoomStart);
-      }
-    };
+      },
+      [
+        startDate,
+        endDate,
+        direction,
+        start,
+        endInclusive,
+        initialStartTime,
+        initialEndTime,
+      ],
+    );
+
+    const contextValue = useMemo(
+      () => ({
+        startDate: startDate ?? start,
+        endDate: endDate ?? endInclusive,
+        direction,
+        setStart: handleZoomChange,
+        setEndInclusive,
+      }),
+      [startDate, start, endDate, endInclusive, direction, handleZoomChange],
+    );
 
     return (
-      <TimelineContext.Provider
-        value={{
-          startDate: startDate ?? start,
-          endDate: endDate ?? endInclusive,
-          direction,
-          setStart: (d) => handleZoomChange(d),
-          setEndInclusive: (d) => setEndInclusive(d),
-        }}
-      >
+      <TimelineContext.Provider value={contextValue}>
         <TimelineKeyboardNavProvider>
           <div {...rest} ref={forwardedRef}>
             <div className="aksel-timeline">
@@ -165,13 +205,11 @@ const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
 
               {processedRows.map((row, i) => {
                 return (
-                  <RowContext.Provider
+                  <TimelineRowProvider
                     key={`row-${row.id}`}
-                    value={{
-                      periods: row.periods,
-                      id: row.id,
-                      index: i,
-                    }}
+                    periods={row.periods}
+                    id={row.id}
+                    index={i}
                   >
                     <TimelineRow
                       {...row?.restProps}
@@ -180,7 +218,7 @@ const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
                       icon={row.icon}
                       headingTag={row.headingTag}
                     />
-                  </RowContext.Provider>
+                  </TimelineRowProvider>
                 );
               })}
             </div>

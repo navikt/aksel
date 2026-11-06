@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 
 type Context = {
   pauseAnimationState: boolean;
@@ -18,13 +18,13 @@ export const PauseAnimationProvider = ({
   children: React.ReactNode;
 }) => {
   const [pauseAnimationState, setPauseAnimationState] = useState(false);
+  const contextValue = useMemo(
+    () => ({ pauseAnimationState, setPauseAnimationState }),
+    [pauseAnimationState],
+  );
+
   return (
-    <PauseAnimationContext.Provider
-      value={{
-        pauseAnimationState,
-        setPauseAnimationState,
-      }}
-    >
+    <PauseAnimationContext.Provider value={contextValue}>
       {children}
     </PauseAnimationContext.Provider>
   );

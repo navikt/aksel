@@ -4,6 +4,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -108,14 +109,44 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
     return 0;
   };
 
-  function registerOpenDialogButtonRef(ref: HTMLButtonElement | null) {
-    setOpenDialogButton(ref);
-  }
+  const registerDialogRef = useCallback((ref: HTMLDivElement | null) => {
+    dialogRef.current = ref;
+  }, []);
 
-  function registerCloseDialogButtonRef(ref: HTMLButtonElement | null) {
-    setCloseDialogButton(ref);
-  }
+  const registerOpenDialogButtonRef = useCallback(
+    (ref: HTMLButtonElement | null) => setOpenDialogButton(ref),
+    [],
+  );
 
+  const registerCloseDialogButtonRef = useCallback(
+    (ref: HTMLButtonElement | null) => setCloseDialogButton(ref),
+    [],
+  );
+
+  const setClose = useCallback(() => setOpenDialog(false), []);
+
+  const contextValue = useMemo(
+    () => ({
+      dialogState: {
+        open: openDialog,
+        toggleOpen: handleToggleOpen,
+        setClose,
+      },
+      registerRef: {
+        dialogRef: registerDialogRef,
+        openDialogButtonRef: registerOpenDialogButtonRef,
+        closeDialogButtonRef: registerCloseDialogButtonRef,
+      },
+    }),
+    [
+      openDialog,
+      handleToggleOpen,
+      setClose,
+      registerDialogRef,
+      registerOpenDialogButtonRef,
+      registerCloseDialogButtonRef,
+    ],
+  );
   const customStyles: React.CSSProperties = {
     "--website-hero-selector-x": `${animationRef.x}px`,
     "--website-hero-selector-y": `${animationRef.y}px`,
@@ -126,22 +157,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
   };
 
   return (
-    <GodPraksisHeroContext.Provider
-      value={{
-        dialogState: {
-          open: openDialog,
-          toggleOpen: handleToggleOpen,
-          setClose: () => setOpenDialog(false),
-        },
-        registerRef: {
-          dialogRef: (ref) => {
-            dialogRef.current = ref;
-          },
-          openDialogButtonRef: registerOpenDialogButtonRef,
-          closeDialogButtonRef: registerCloseDialogButtonRef,
-        },
-      }}
-    >
+    <GodPraksisHeroContext.Provider value={contextValue}>
       <Box
         paddingInline={{ xs: "space-16", lg: "space-40" }}
         paddingBlock={{ xs: "space-16", lg: "space-40" }}

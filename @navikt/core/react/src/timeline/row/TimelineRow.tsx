@@ -1,5 +1,5 @@
 import { format } from "date-fns/format";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { BodyShort } from "../../typography/BodyShort";
 import { cl } from "../../utils/helpers";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
@@ -40,6 +40,27 @@ type TimelineRowProps = TimelineRowBaseProps &
         icon?: never;
       }
   );
+
+const TimelinePeriodProvider = ({
+  periodId,
+  restProps,
+  children,
+}: {
+  periodId: string;
+  restProps?: any;
+  children: React.ReactNode;
+}) => {
+  const contextValue = useMemo(
+    () => ({ periodId, restProps }),
+    [periodId, restProps],
+  );
+
+  return (
+    <PeriodContext.Provider value={contextValue}>
+      {children}
+    </PeriodContext.Provider>
+  );
+};
 
 const TimelineRowBase = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
@@ -102,11 +123,9 @@ const TimelineRowBase = forwardRef<HTMLOListElement, TimelineRowProps>(
             {periods?.map((period) => {
               return (
                 <li key={`period-${period.id}`}>
-                  <PeriodContext.Provider
-                    value={{
-                      periodId: period.id,
-                      restProps: period?.restProps,
-                    }}
+                  <TimelinePeriodProvider
+                    periodId={period.id}
+                    restProps={period?.restProps}
                   >
                     <TimelinePeriod
                       start={period.start}
@@ -114,7 +133,7 @@ const TimelineRowBase = forwardRef<HTMLOListElement, TimelineRowProps>(
                       icon={period.icon}
                       ref={period?.ref}
                     />
-                  </PeriodContext.Provider>
+                  </TimelinePeriodProvider>
                 </li>
               );
             })}

@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 type AccordionContextProps = {
   openToggle: (index: number) => void;
@@ -29,18 +36,19 @@ function WebsiteAccordionProvider({
     return () => document.removeEventListener("keydown", listener);
   }, [options]);
 
-  const handleOpenChange = (index: number) => {
-    if (openAccordions.includes(index)) {
-      setOpenAccordions(openAccordions.filter((i) => i !== index));
-    } else {
-      setOpenAccordions([...openAccordions, index]);
-    }
-  };
+  const handleOpenChange = useCallback((index: number) => {
+    setOpenAccordions((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+    );
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({ openToggle: handleOpenChange, currentOpen: openAccordions }),
+    [handleOpenChange, openAccordions],
+  );
 
   return (
-    <AccordionContext.Provider
-      value={{ openToggle: handleOpenChange, currentOpen: openAccordions }}
-    >
+    <AccordionContext.Provider value={contextValue}>
       {children}
     </AccordionContext.Provider>
   );

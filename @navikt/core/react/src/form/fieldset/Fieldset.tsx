@@ -2,6 +2,7 @@ import React, {
   type FieldsetHTMLAttributes,
   forwardRef,
   useContext,
+  useMemo,
 } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit, useId } from "../../utils-external";
@@ -76,21 +77,27 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       ...rest
     } = props;
 
+    const contextError = errorPropagation
+      ? (props.error ?? fieldset?.error)
+      : undefined;
+    const contextErrorId = cl({
+      [errorId]: showErrorMsg,
+      [fieldset?.errorId ?? ""]: !!fieldset?.error,
+    });
+
+    const contextValue = useMemo(
+      () => ({
+        error: contextError,
+        errorId: contextErrorId,
+        size,
+        disabled,
+        readOnly,
+      }),
+      [contextError, contextErrorId, size, disabled, readOnly],
+    );
+
     return (
-      <FieldsetContext.Provider
-        value={{
-          error: errorPropagation
-            ? (props.error ?? fieldset?.error)
-            : undefined,
-          errorId: cl({
-            [errorId]: showErrorMsg,
-            [fieldset?.errorId ?? ""]: !!fieldset?.error,
-          }),
-          size,
-          disabled,
-          readOnly,
-        }}
-      >
+      <FieldsetContext.Provider value={contextValue}>
         <fieldset
           {...omit(rest, ["errorId", "error", "size", "readOnly"])}
           {...inputProps}

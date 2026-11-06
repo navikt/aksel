@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { cl } from "../../utils/helpers";
 import type { SortState } from "../Table.types";
 import { type BodyProps, TableBody } from "../body/TableBody";
@@ -58,8 +58,13 @@ const TableRoot = forwardRef<HTMLTableElement, TableProps>(
     },
     ref,
   ) => {
+    const contextValue = useMemo(
+      () => ({ onSortChange, sort }),
+      [onSortChange, sort],
+    );
+
     return (
-      <TableContext.Provider value={{ onSortChange, sort }}>
+      <TableContext.Provider value={contextValue}>
         <table
           {...rest}
           ref={ref}

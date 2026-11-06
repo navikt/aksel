@@ -75,29 +75,36 @@ function KodeEksemplerProvider(props: {
     [searchParams],
   );
 
-  const updateActiveExample = (exampleName?: string) => {
-    if (!exampleName) {
-      return;
-    }
+  const updateActiveExample = useCallback(
+    (exampleName?: string) => {
+      if (!exampleName) {
+        return;
+      }
 
-    const foundExample = dir?.filer?.find((file) => file.navn === exampleName);
+      const foundExample = dir?.filer?.find(
+        (file) => file.navn === exampleName,
+      );
 
-    if (!foundExample) {
-      return;
-    }
+      if (!foundExample) {
+        return;
+      }
 
-    const id = nameToId(dir?.title ?? "", exampleName);
-    const newQueryString = createQueryString(id);
+      const id = nameToId(dir?.title ?? "", exampleName);
+      const newQueryString = createQueryString(id);
 
-    if (newQueryString === searchParams?.toString()) {
-      iframeRef.current?.contentWindow?.location.reload();
-      return;
-    }
+      if (newQueryString === searchParams?.toString()) {
+        iframeRef.current?.contentWindow?.location.reload();
+        return;
+      }
 
-    setLoaded(false);
-    router.push(`${pathname}?${newQueryString}`, { scroll: false });
-    iframeRef.current?.focus({ preventScroll: true });
-  };
+      setLoaded(false);
+      router.push(`${pathname}?${newQueryString}`, { scroll: false });
+      iframeRef.current?.focus({ preventScroll: true });
+    },
+    [dir?.filer, dir?.title, createQueryString, searchParams, router, pathname],
+  );
+
+  const toggleShowCode = useCallback(() => setShowCode((prev) => !prev), []);
 
   useEffect(() => {
     if (!selectedExample) {
@@ -128,22 +135,33 @@ function KodeEksemplerProvider(props: {
     iframeRef.current?.focus({ preventScroll: true });
   }, [selectedExample]);
 
+  const contextValue = useMemo(
+    () => ({
+      activeExample: {
+        current: selectedExample ?? dir?.filer?.[0] ?? null,
+        update: updateActiveExample,
+        loaded,
+        updateLoaded: setLoaded,
+      },
+      showCode,
+      toggleShowCode,
+      compact,
+      resizerRef,
+      iframeRef,
+    }),
+    [
+      selectedExample,
+      dir?.filer,
+      updateActiveExample,
+      loaded,
+      showCode,
+      toggleShowCode,
+      compact,
+    ],
+  );
+
   return (
-    <KodeEksemplerContext.Provider
-      value={{
-        activeExample: {
-          current: selectedExample ?? dir?.filer?.[0] ?? null,
-          update: updateActiveExample,
-          loaded,
-          updateLoaded: setLoaded,
-        },
-        showCode,
-        toggleShowCode: () => setShowCode((prev) => !prev),
-        compact,
-        resizerRef,
-        iframeRef,
-      }}
-    >
+    <KodeEksemplerContext.Provider value={contextValue}>
       {children}
     </KodeEksemplerContext.Provider>
   );
