@@ -100,6 +100,15 @@ export default defineConfig({
   rules: {
     /* Rules to add and fix */
     /* unicorn/no-array-for-each */
+    /* react/display-name */
+    /* react/no-object-type-as-default-prop */
+    /* react/no-unstable-nested-components */
+    /* react/checked-requires-onchange-or-readonly */
+    /* react/exhaustive-effect-dependencies */
+    /* self-closing-comp */
+    /* jsx-boolean-value */
+    /* jsx-no-useless-fragment */
+    /* jsx-fragments */
     /* END */
     "react/jsx-no-constructed-context-values": "error",
     "typescript/ban-ts-comment": "error",
