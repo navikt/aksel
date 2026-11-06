@@ -4891,6 +4891,7 @@ __metadata:
     prettier: "npm:3.9.6"
     react: "npm:19.3.1"
     rehype-parse: "npm:9.0.1"
+    svgo: "npm:3.3.5"
     tsc-alias: "npm:1.9.7"
     tsx: "npm:^4.23.15"
     typescript: "npm:6.0.3"
@@ -23401,7 +23402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svgo@npm:^3.0.2":
+"svgo@npm:3.3.5, svgo@npm:^3.0.2":
   version: 3.3.5
   resolution: "svgo@npm:3.3.5"
   dependencies:
