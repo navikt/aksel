@@ -72,11 +72,11 @@ export default defineConfig({
     "@navikt/aksel/**/*.output.*",
     "**/query-types.ts",
     "**/modal/helpers/dialog-polyfill.ts",
-    "apps/figma-icon-plugin/src/ui/vite-env.d.ts",
   ],
   rules: {
     /* Rules to add and fix */
     /* react/jsx-no-constructed-context-values */
+    /* unicorn/no-array-for-each */
     /* END */
     "typescript/ban-ts-comment": "error",
     "typescript/no-empty-object-type": "error",
@@ -196,10 +196,7 @@ export default defineConfig({
       },
     },
     {
-      files: [
-        "**/*.stories.{ts,tsx,js,jsx,mjs,cjs}",
-        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}",
-      ],
+      files: ["**/*.stories.{ts,tsx,js,jsx,mjs,cjs}"],
       rules: {
         // Mirrors eslint-plugin-storybook "flat/recommended"; oxlint can't consume that preset directly
         "storybook/await-interactions": "error",
@@ -222,7 +219,7 @@ export default defineConfig({
       },
     },
     {
-      files: ["**/*.test.*", "**/__tests__/*"],
+      files: ["**/*.test.*"],
       rules: {
         ...testingLibrary.configs["flat/react"].rules,
         "vitest/no-commented-out-tests": "error",
@@ -240,13 +237,9 @@ export default defineConfig({
     {
       files: ["aksel.nav.no/website/**"],
       plugins: ["nextjs"],
-    },
-    {
-      files: ["aksel.nav.no/website/pages/eksempler/**"],
       rules: {
         "nextjs/no-img-element": "off",
       },
-      plugins: ["nextjs"],
     },
     {
       files: [
