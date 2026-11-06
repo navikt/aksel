@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-require-imports
 const fastglob = require("fast-glob");
 const path = require("node:path");
 const { load, JSON_SCHEMA } = require("js-yaml");
