@@ -272,6 +272,7 @@ export const Composition = () => {
           : [...prev, option.value],
       );
     },
+    multiple: true,
   };
 
   return (

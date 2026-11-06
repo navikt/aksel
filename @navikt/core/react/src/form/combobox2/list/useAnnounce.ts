@@ -91,7 +91,7 @@ function announce(message: string, politeness: Politeness = "polite") {
 }
 
 /**
- * Speaks a message through a persistently-mounted, visually-hidden live region.
+ * Announces a message through a persistently-mounted, visually-hidden live region.
  *
  * The polite and assertive regions are created once and kept mounted.
  *

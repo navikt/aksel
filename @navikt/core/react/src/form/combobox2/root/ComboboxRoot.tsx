@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl, createStrictContext } from "../../../utils/helpers";
 import type { FormFieldProps } from "../../useFormField";
@@ -74,9 +74,8 @@ export interface ComboboxRootProps<
   defaultOpen?: boolean;
   /**
    * Whether multiple options can be selected.
-   * @default true
    */
-  multiple?: boolean; // TODO: Hva skal være default?
+  multiple?: boolean;
 }
 
 export interface ComboboxRootContextProps {
@@ -84,9 +83,10 @@ export interface ComboboxRootContextProps {
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
   options: ComboboxRootProps["options"];
+  /** Values of selected options */
   value: ComboboxRootProps["value"];
+  /** Consumer callback */
   onToggleOption: ComboboxRootProps["onToggleOption"];
-  multiple: boolean;
   size: Exclude<ComboboxRootProps["size"], undefined>;
   disabled: ComboboxRootProps["disabled"];
 }
@@ -107,7 +107,7 @@ export function ComboboxRoot<
   value,
   onToggleOption,
   defaultOpen = false,
-  multiple = true,
+  multiple = false,
   size = "medium",
   disabled,
   className,
@@ -125,14 +125,25 @@ export function ComboboxRoot<
     >
       <ComboboxRootContextProvider
         open={open}
-        setOpen={setOpen}
+        setOpen={useCallback((newOpen) => {
+          setOpen(newOpen);
+          if (!newOpen) {
+            // queueMicrotask is needed when closing with close button in Dialog
+            queueMicrotask(() => triggerRef.current?.focus());
+          }
+        }, [])}
         triggerRef={triggerRef}
         options={options}
         value={value}
-        onToggleOption={
-          onToggleOption as ComboboxRootContextProps["onToggleOption"]
-        }
-        multiple={multiple}
+        onToggleOption={useCallback(
+          (...args) => {
+            (onToggleOption as ComboboxRootProps["onToggleOption"])(...args);
+            if (!multiple) {
+              setOpen(false);
+            }
+          },
+          [onToggleOption, multiple],
+        )}
         size={size}
         disabled={disabled}
       >

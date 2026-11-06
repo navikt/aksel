@@ -19,16 +19,7 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
 
   if (isMobile) {
     return (
-      <ComboboxModal
-        open={rootContext.open}
-        onOpenChange={(open) => {
-          rootContext.setOpen(open);
-          !open && rootContext.triggerRef.current?.focus(); // This does not work when closing with button
-        }}
-        onOpenChangeComplete={(open) =>
-          !open && rootContext.triggerRef.current?.focus()
-        }
-      >
+      <ComboboxModal open={rootContext.open} onOpenChange={rootContext.setOpen}>
         {mobileHeader}
         {children}
       </ComboboxModal>
@@ -42,7 +33,6 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
   return (
     <DismissableLayer
       asChild
-      //safeZone={{ anchor: rootContext.triggerRef.current }}
       onDismiss={(event) => {
         // We don't have trigger as `safeZone` because we want to close when trigger is focused.
         // To avoid immediately re-opening the popup when trigger is clicked (blur closes, click opens),
@@ -55,7 +45,6 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
           return;
         }
         rootContext.setOpen(false);
-        rootContext.triggerRef.current?.focus();
       }}
       enabled={rootContext.open}
     >
@@ -77,7 +66,6 @@ type ComboboxModalProps = {
   children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onOpenChangeComplete: (open: boolean) => void;
 };
 
 function subscribeToResize(callback: () => void) {
@@ -89,12 +77,7 @@ function getVisualViewportHeight() {
   return visualViewport?.height; // Takes into account virtual keyboard etc.
 }
 
-function ComboboxModal({
-  children,
-  open,
-  onOpenChange,
-  onOpenChangeComplete,
-}: ComboboxModalProps) {
+function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
   const visualViewportHeight = useSyncExternalStore(
     subscribeToResize,
     getVisualViewportHeight,
@@ -112,12 +95,7 @@ function ComboboxModal({
   }, [open]);
 
   return (
-    <Dialog
-      size="small"
-      open={open}
-      onOpenChange={onOpenChange}
-      onOpenChangeComplete={onOpenChangeComplete}
-    >
+    <Dialog size="small" open={open} onOpenChange={onOpenChange}>
       <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
         <div
           className="aksel-combobox2__modal-inner"
