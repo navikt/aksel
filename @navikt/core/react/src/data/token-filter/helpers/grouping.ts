@@ -61,7 +61,7 @@ function createGroups<T>(
   }
 
   /* Custom groups first, then default group if it has items */
-  const groups: OptionGroup<T>[] = [...Object.values(customGroups)];
+  const groups: OptionGroup<T>[] = Object.values(customGroups);
 
   if (defaultGroup.options.length > 0) {
     groups.push(defaultGroup);

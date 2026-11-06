@@ -109,16 +109,17 @@ const DataGridPreferencesRoot = forwardRef<
      * with column labels from `columnDefinitions`. Falls back to all columns
      * visible in definition order when `columnDisplay` is unset.
      */
+    const columnDisplay = tableSettings?.columnDisplay;
     const columnEntries = useMemo((): DataGridPreferencesColumnDisplay[] => {
       const display =
-        tableSettings?.columnDisplay ??
+        columnDisplay ??
         columnDefinitions.map((col) => ({ id: col.id, visible: true }));
 
       return display.flatMap(({ id, visible }) => {
         const label = columnDefinitionMap.get(id);
         return label ? [{ id, label, visible }] : [];
       });
-    }, [columnDefinitionMap, tableSettings?.columnDisplay, columnDefinitions]);
+    }, [columnDefinitionMap, columnDisplay, columnDefinitions]);
 
     const handleColumnsChange = useCallback(
       (columns: DataGridPreferencesColumnDisplay[]) => {
@@ -221,7 +222,7 @@ function isFieldVisible(
   return fields?.[key] !== false;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line typescript/no-namespace
 export namespace DataGridPreferencesRoot {
   export type Props = DataGridPreferencesProps;
 }
