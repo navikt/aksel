@@ -107,14 +107,14 @@ function normalizeCount(value: number, fallback: number) {
   return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : fallback;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line typescript/no-namespace
 export namespace Badge {
   export type Props = BadgeProps;
 }
 
 /** @deprecated Badge is no longer in preview. Import it from `@navikt/ds-react` instead. */
 const BadgeDeprecated = Badge;
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line typescript/no-namespace
 namespace BadgeDeprecated {
   export type Props = BadgeProps;
 }

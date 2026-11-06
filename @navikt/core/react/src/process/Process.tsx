@@ -219,7 +219,7 @@ export const ProcessEvent = forwardRef<HTMLLIElement, ProcessEventProps>(
 
     // syncAriaControls is already memoized with useCallback
     // oxlint-disable-next-line react/exhaustive-deps -- We want to run this only when status changes
-    useEffect(syncAriaControls, [status]); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(syncAriaControls, [status]); // eslint-disable-line react/exhaustive-deps
 
     const isActive = status === "active";
 

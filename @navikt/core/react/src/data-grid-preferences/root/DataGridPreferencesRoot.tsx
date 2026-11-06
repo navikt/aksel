@@ -221,7 +221,7 @@ function isFieldVisible(
   return fields?.[key] !== false;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line typescript/no-namespace
 export namespace DataGridPreferencesRoot {
   export type Props = DataGridPreferencesProps;
 }

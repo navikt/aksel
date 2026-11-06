@@ -3,7 +3,7 @@
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
 import React, { useEffect, useState } from "react";
 
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/rules-of-hooks */
 
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {

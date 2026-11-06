@@ -150,7 +150,7 @@ function useTableColumnResize({
         setClampedWidth(pxToRelativeWidth(newColumnWidth));
       }
     },
-    [autoResizeOnce], // eslint-disable-line react-hooks/exhaustive-deps
+    [autoResizeOnce], // eslint-disable-line react/exhaustive-deps
   );
 
   const handleOnClick: DOMAttributes<HTMLButtonElement>["onClick"] =

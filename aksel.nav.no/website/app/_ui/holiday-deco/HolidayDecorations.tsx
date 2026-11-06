@@ -18,7 +18,7 @@ function HolidayDecorations({ type }: HolidayDecorationsProps) {
   const [isHolidaySeason, setIsHolidaySeason] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react/set-state-in-effect
     setIsHolidaySeason(
       resolvedTheme !== "light" && new Date().getMonth() === 11,
     );
