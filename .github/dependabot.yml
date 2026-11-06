@@ -26,7 +26,8 @@ updates:
         applies-to: version-updates
         patterns:
           - "eslint"
-          - "@eslint/*"
+          - "eslint-*"
+          - "oxlint"
       react:
         applies-to: version-updates
         patterns:
@@ -53,7 +54,8 @@ updates:
         applies-to: security-updates
         patterns:
           - "eslint"
-          - "@eslint/*"
+          - "eslint-*"
+          - "oxlint"
       react-security:
         applies-to: security-updates
         patterns:

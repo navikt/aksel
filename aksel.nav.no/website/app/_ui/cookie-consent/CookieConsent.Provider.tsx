@@ -62,7 +62,7 @@ function CookieConsentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react/set-state-in-effect
+    // oxlint-disable-next-line react/set-state-in-effect
     syncConsentState();
   }, [syncConsentState]);
 

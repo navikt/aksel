@@ -312,7 +312,7 @@ const FocusBoundary = forwardRef<HTMLDivElement, FocusBoundaryProps>(
 
         queueMicrotask(() => {
           if (
-            // eslint-disable-next-line react/exhaustive-deps
+            // oxlint-disable-next-line react/exhaustive-deps
             returnFocusRef.current &&
             returnElement &&
             returnElement !== activeEl
