@@ -17,6 +17,7 @@
  *
  * This hook is a more permissive version of React 19.2's `React.useEffectEvent` in that it can be passed through contexts and called in event handler props, not just effects.
  */
+// oxlint-disable-next-line no-restricted-imports -- Only compared by identity to detect Preact, never called.
 import React, { useLayoutEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
 

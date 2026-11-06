@@ -74,6 +74,9 @@ const restrictedImportPatterns = [
   },
 ];
 
+const useLayoutEffectMessage =
+  "Use `useClientLayoutEffect` from utils-external instead. `useLayoutEffect` warns during SSR before React 19.";
+
 export default defineConfig({
   plugins: ["oxc", "unicorn", "react", "import", "jsx-a11y", "typescript"],
   options: {
@@ -266,6 +269,11 @@ export default defineConfig({
             paths: [
               ...restrictedImportPaths,
               {
+                name: "react",
+                importNames: ["useLayoutEffect"],
+                message: useLayoutEffectMessage,
+              },
+              {
                 name: "date-fns",
                 allowTypeImports: true,
                 message:
@@ -279,6 +287,15 @@ export default defineConfig({
               },
             ],
             patterns: restrictedImportPatterns,
+          },
+        ],
+        "no-restricted-properties": [
+          "error",
+          ...restrictedReactProperties,
+          {
+            object: "React",
+            property: "useLayoutEffect",
+            message: useLayoutEffectMessage,
           },
         ],
       },

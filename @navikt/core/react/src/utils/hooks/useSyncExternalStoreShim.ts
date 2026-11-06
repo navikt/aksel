@@ -8,6 +8,7 @@
 import React, {
   useDebugValue,
   useEffect,
+  // oxlint-disable-next-line no-restricted-imports -- Vendored from React, kept as close to upstream as possible.
   useLayoutEffect,
   useState,
 } from "react";
