@@ -38,7 +38,7 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
           }}
           onKeyDown={(event) => {
             if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
-              setVirtuallyFocusedOptionValue("");
+              setVirtuallyFocusedOptionValue(""); // Assume you want to edit the input, so remove virtual focus
             }
           }}
           aria-autocomplete="list"

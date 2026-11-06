@@ -126,6 +126,7 @@ export const OptionMemoization = () => {
       </div>
       <ComboboxRoot
         defaultOpen
+        multiple
         options={groupedOptions}
         value={value}
         onToggleOption={(option) => {
