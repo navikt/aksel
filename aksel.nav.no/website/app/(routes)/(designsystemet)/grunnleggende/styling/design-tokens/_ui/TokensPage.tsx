@@ -23,8 +23,8 @@ const TokensPage = () => {
               Hvis du mener at du burde fått treff på søket ditt, så send oss
               gjerne en feilmelding på{" "}
               <Link
-                href={`https://github.com/navikt/aksel/issues/new?&title=[Aksel.nav.no%20-%20Tokens]%20Ingen%20treff%20på%20%22${searchParams?.get(
-                  "tokenQuery",
+                href={`https://github.com/navikt/aksel/issues/new?&title=[Aksel.nav.no%20-%20Tokens]%20Ingen%20treff%20på%20%22${encodeURIComponent(
+                  searchParams?.get("tokenQuery") ?? "",
                 )}%22`}
                 inlineText
               >
