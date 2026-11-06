@@ -220,6 +220,7 @@ export const useRangeDatepicker = (
   const {
     locale: _locale,
     defaultSelected: _defaultSelected,
+    // oxlint-disable-next-line react/purity -- Defaults `today` to the current date.
     today = new Date(),
     fromDate,
     toDate,
