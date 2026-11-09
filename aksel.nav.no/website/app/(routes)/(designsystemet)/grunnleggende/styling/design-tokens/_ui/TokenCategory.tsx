@@ -25,9 +25,8 @@ const TokenCategory = ({
   const searchParams = useSearchParams();
   const tokenQuery = searchParams?.get("tokenQuery") as string | undefined;
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to reset selectedRole when tokenQuery changes
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react/set-state-in-effect
     setSelectedRole(null);
   }, [tokenQuery]);
 

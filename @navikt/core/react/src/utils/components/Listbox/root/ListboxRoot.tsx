@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: We know what we are doing */
+/* oxlint-disable jsx-a11y/no-static-element-interactions -- We know what we are doing */
 import React, { forwardRef } from "react";
 import { useId } from "../../../../utils-external";
 import { cl } from "../../../helpers";

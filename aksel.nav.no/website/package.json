@@ -74,7 +74,6 @@
     "@babel/parser": "^7.27.5",
     "@babel/traverse": "^7.27.4",
     "@google-cloud/bigquery": "^9.5.0",
-    "@next/eslint-plugin-next": "16.4.3",
     "@playwright/test": "1.61.1",
     "@portabletext/block-tools": "^6.0.0",
     "@portabletext/markdown": "^2.5.1",

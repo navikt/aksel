@@ -1,4 +1,3 @@
-// biome-ignore lint/complexity/noStaticOnlyClass: single config namespace accessed via SchemaConfig.*
 class SchemaConfig {
   static readonly allArticleDocuments = [
     "komponent_artikkel",

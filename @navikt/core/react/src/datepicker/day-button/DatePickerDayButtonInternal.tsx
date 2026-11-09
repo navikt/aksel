@@ -49,6 +49,7 @@ const DatePickerDayButton = ({
         "rdp-day_outside": modifiers.outside,
         "rdp-day__weekend": modifiers.weekend,
       })}
+      type="button"
     >
       <div className="rdp-day__inner">{children}</div>
     </button>

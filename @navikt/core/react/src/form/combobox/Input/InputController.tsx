@@ -26,9 +26,9 @@ export const InputController = forwardRef<
   >
 >((props, ref) => {
   const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    // oxlint-disable-next-line typescript/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButton,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    // oxlint-disable-next-line typescript/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButtonLabel,
     toggleListButton = true,
     inputClassName,
@@ -54,8 +54,7 @@ export const InputController = forwardRef<
 
   return (
     <Floating.Anchor asChild ref={setAnchorRef}>
-      {/** biome-ignore lint/a11y/noStaticElementInteractions: Acts as wrapper list-toggle and input */}
-      {/** biome-ignore lint/a11y/useKeyWithClickEvents: key-events are handled by input itself */}
+      {/* oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- key-events are handled by input itself */}
       <div
         className={cl("aksel-combobox__wrapper-inner aksel-text-field__input", {
           "aksel-combobox__wrapper-inner--virtually-unfocused":

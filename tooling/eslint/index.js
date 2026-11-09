@@ -1,5 +1,8 @@
+// oxlint-disable-next-line typescript/no-require-imports
 const commentCheck = require("./comment-check");
+// oxlint-disable-next-line typescript/no-require-imports
 const importCheck = require("./import-check");
+// oxlint-disable-next-line typescript/no-require-imports
 const argsCheck = require("./args-check");
 
 module.exports = {

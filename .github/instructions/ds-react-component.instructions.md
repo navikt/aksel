@@ -11,7 +11,7 @@ For changes to component state, callbacks, async behavior, composition, semantic
 
 ## Compatibility (why: peer range is `react ^17 || ^18 || ^19`)
 
-- No React 18/19-only APIs. ESLint `no-restricted-imports` blocks e.g. `React.useId`. Use the internal `useId`, `useClientLayoutEffect`, etc. from `utils-external/`.
+- No React 18/19-only APIs. Oxlint `no-restricted-imports` blocks e.g. `React.useId`. Use the internal `useId`, `useClientLayoutEffect`, etc. from `utils-external/`.
 - Import React explicitly in TSX (`import React from "react"`). `tsconfig` uses classic `jsx: "react"`.
 - Component `index.ts` starts with `"use client"`.
 
