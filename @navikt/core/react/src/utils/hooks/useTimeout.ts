@@ -45,7 +45,7 @@ class Timeout {
 function useTimeout() {
   const timeout = useRefWithInit(Timeout.create).current;
 
-  // eslint-disable-next-line react/exhaustive-deps
+  // oxlint-disable-next-line react/exhaustive-deps
   useEffect(timeout.disposeEffect, []);
 
   return timeout;
