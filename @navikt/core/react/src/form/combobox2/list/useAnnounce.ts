@@ -46,9 +46,9 @@ let regions: {
 function createRegion(politeness: Politeness) {
   const el = document.createElement("div");
   el.dataset.akselAnnouncer = "";
-  el.className = "aksel-sr-only";
+  el.className = "aksel-sr-only"; // TODO: Bruk inline style fra FocusGuards.tsx
   el.role = politeness === "assertive" ? "alert" : "status";
-  document.body.appendChild(el);
+  document.body.appendChild(el); // TODO Bruk root fra Provider (se Portal.tsx)
   return el;
 }
 

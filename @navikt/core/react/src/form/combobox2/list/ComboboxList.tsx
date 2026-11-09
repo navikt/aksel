@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -34,21 +34,34 @@ function ComboboxList<
     });
   }, []);*/
 
+  const liveRegionRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Listbox.Options className="aksel-combobox2__list">
-      {/*isPending && (
+    <>
+      <Listbox.Options className="aksel-combobox2__list">
+        {/*isPending && (
         <div className="aksel-combobox2__loading" role="status">
           Laster...
         </div>
       )*/}
-      <ComboboxListContent<T>>{children}</ComboboxListContent>
-    </Listbox.Options>
+        <ComboboxListContent<T> liveRegionRef={liveRegionRef}>
+          {children}
+        </ComboboxListContent>
+      </Listbox.Options>
+      <div ref={liveRegionRef} className="aksel-sr-only" role="status" />
+    </>
   );
+}
+
+interface ComboboxListContentProps<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+> extends ComboboxListProps<T> {
+  liveRegionRef: React.RefObject<HTMLDivElement | null>;
 }
 
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->({ children }: ComboboxListProps<T>) {
+>({ children, liveRegionRef }: ComboboxListContentProps<T>) {
   const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
   const {
@@ -58,7 +71,10 @@ function ComboboxListContent<
   } = useComboboxRootContext();
   const onToggleOption = useEventCallback(originalOnToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
-  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString);
+  const maybeAnnouceHits = useHitsAnnouncer(
+    deferredFilterString,
+    liveRegionRef,
+  );
   const translate = useI18n("Combobox2");
 
   if (children && typeof children !== "function") {
