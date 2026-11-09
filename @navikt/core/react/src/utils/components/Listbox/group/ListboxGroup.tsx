@@ -11,7 +11,6 @@ function ListboxGroup({ label, children }: ListboxGroupProps) {
   const labelId = useId();
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: Fieldset is not generic enough
     <div
       role="group"
       className="aksel-listbox__group"

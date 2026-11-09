@@ -172,7 +172,7 @@ const PaginationRoot = forwardRef<HTMLElement, PaginationProps>(
               return Number.isNaN(n) ? (
                 <li
                   className="aksel-pagination__ellipsis"
-                  // biome-ignore lint/suspicious/noArrayIndexKey: Using index as key for ellipsis items
+                  // oxlint-disable-next-line react/no-array-index-key -- Using index as key for ellipsis items
                   key={`${step}-${i}`}
                 >
                   <BodyShort

@@ -1,9 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable react-hooks/exhaustive-deps */
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: Explained bellow */
-/* eslint-disable react-hooks/immutability */
-/* eslint-disable react-hooks/globals */
-/** biome-ignore-all lint/complexity/useLiteralKeys: Explained bellow */
+/* oxlint-disable react/exhaustive-deps -- Explained bellow */
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
@@ -13,6 +8,7 @@
 import React, {
   useDebugValue,
   useEffect,
+  // oxlint-disable-next-line no-restricted-imports -- Vendored from React, kept as close to upstream as possible.
   useLayoutEffect,
   useState,
 } from "react";

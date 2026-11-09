@@ -1,4 +1,4 @@
-/* biome-ignore-all lint/correctness/useHookAtTopLevel: `useId` is invariant at runtime. */
+/* oxlint-disable react/rules-of-hooks -- `useId` is invariant at runtime */
 import React, { useEffect, useState } from "react";
 
 // https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
@@ -14,7 +14,7 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`aksel-icon-${globalId}`); // eslint-disable-line react-hooks/set-state-in-effect
+      setDefaultId(`aksel-icon-${globalId}`);
     }
   }, [defaultId]);
   return id;
@@ -34,6 +34,6 @@ export function useId(idOverride?: string): string | undefined {
     const reactId = maybeReactUseId();
     return idOverride ?? reactId.replace(/(:)/g, "");
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- `useId` is invariant at runtime.
+  // oxlint-disable-next-line react/rules-of-hooks -- `useId` is invariant at runtime.
   return useGlobalId(idOverride) ?? "";
 }

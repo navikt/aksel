@@ -6,7 +6,6 @@ import { subDays } from "date-fns/subDays";
 import { useMemo } from "react";
 import { horizontalPositionAndWidth } from "../utils/calc";
 import { invisiblePeriods, withinADay } from "../utils/filter";
-import { lastPeriod } from "../utils/sort";
 import type { Period } from "../utils/types.external";
 import type {
   InternalSimpleTimeline,
@@ -19,7 +18,7 @@ const spatialPeriod = (
   timelineEndInclusive: Date,
   direction: "left" | "right" = "left",
   i: number,
-  periods: PositionedPeriod[],
+  periods: Period[],
   rowIndex: number,
 ): PositionedPeriod => {
   const start = period.start;
@@ -59,10 +58,9 @@ const spatialPeriod = (
 const adjustedEdges = (
   period: PositionedPeriod,
   i: number,
-  allPeriods: PositionedPeriod[],
+  allPeriods: Period[],
 ): PositionedPeriod => {
-  const left =
-    i > 0 && withinADay(period.start, allPeriods[i - 1].endInclusive);
+  const left = i > 0 && withinADay(period.start, allPeriods[i - 1].end);
   const right =
     i < allPeriods.length - 1 &&
     withinADay(allPeriods[i + 1].start, period.endInclusive);
@@ -105,25 +103,42 @@ const useTimelineRows = (
   useMemo(
     () =>
       rows.map((periods: InternalSimpleTimeline, rowIndex: number) => {
-        const timelinePeriods = periods.periods
-          .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
-          .map((period: Period & { restProps?: any; ref?: any }, i) => ({
-            ...spatialPeriod(
-              period,
-              startDate,
-              endDate,
-              direction,
+        const sortedPeriods = [...periods.periods].sort(
+          (a: Period, b: Period) => a.start.valueOf() - b.start.valueOf(),
+        );
+
+        /*
+         * Sorting by start also orders by horizontalPosition.
+         * Edge cropping only reads neighbours' start/end, which are unchanged by positioning, so everything runs in one pass.
+         */
+        const timelinePeriods: PositionedPeriod[] = [];
+        for (let i = 0; i < sortedPeriods.length; i++) {
+          const period: Period & { restProps?: any; ref?: any } =
+            sortedPeriods[i];
+          const positioned = trimmedPeriods(
+            adjustedEdges(
+              {
+                ...spatialPeriod(
+                  period,
+                  startDate,
+                  endDate,
+                  direction,
+                  i,
+                  sortedPeriods,
+                  rowIndex,
+                ),
+                restProps: period?.restProps,
+                ref: period?.ref,
+              },
               i,
-              periods.periods,
-              rowIndex,
+              sortedPeriods,
             ),
-            restProps: period?.restProps,
-            ref: period?.ref,
-          }))
-          .sort(lastPeriod)
-          .map(adjustedEdges)
-          .map(trimmedPeriods)
-          .filter(invisiblePeriods);
+          );
+          if (invisiblePeriods(positioned)) {
+            timelinePeriods.push(positioned);
+          }
+        }
+
         return {
           id: `tl-row-${rowIndex}`,
           label: periods.label,
@@ -156,6 +171,7 @@ const useEarliestDate = ({
       .map((period) => period.start);
 
     if (startDates.length === 0) {
+      // oxlint-disable-next-line react/purity -- Falls back to today when there are no periods.
       return new Date();
     }
 

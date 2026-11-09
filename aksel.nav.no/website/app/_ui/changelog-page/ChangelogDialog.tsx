@@ -31,7 +31,6 @@ function ChangelogDialog(props: ChangelogDialogProps) {
   const searchParams = useSearchParams();
   const firstRenderRef = useRef(true);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want to trigger this effect on URL change, not on initial render, and router object is stable
   useEffect(() => {
     if (firstRenderRef.current) {
       firstRenderRef.current = false;

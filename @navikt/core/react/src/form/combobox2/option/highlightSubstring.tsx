@@ -9,7 +9,6 @@ function highlightSubstring(text: string, substring: string) {
   const [rangeStart, rangeEnd] = range;
   return (
     // Aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text
-    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: Doesn't matter if it doesn't work in normal browsers
     <span aria-label={text}>
       {text.substring(0, rangeStart)}
       <mark>{text.substring(rangeStart, rangeEnd)}</mark>

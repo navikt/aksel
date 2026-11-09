@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-require-imports
 const fastglob = require("fast-glob");
 const kebabCase = require("lodash/kebabCase");
 const path = require("node:path");

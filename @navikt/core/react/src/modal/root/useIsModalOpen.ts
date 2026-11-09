@@ -8,7 +8,7 @@ function useIsModalOpen(modalRef: HTMLDialogElement | null) {
       return;
     }
 
-    setIsOpen(modalRef.open); // eslint-disable-line react-hooks/set-state-in-effect
+    setIsOpen(modalRef.open); // oxlint-disable-line react/set-state-in-effect
 
     const observer = new MutationObserver(() => {
       setIsOpen(modalRef.open);

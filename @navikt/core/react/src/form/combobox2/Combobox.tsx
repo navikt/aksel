@@ -216,7 +216,7 @@ const ComboboxSingle = forwardRef(
   props: ComboboxSingleProps<T> & React.RefAttributes<HTMLButtonElement>,
 ) => React.ReactElement;
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace ComboboxSingle {
   export type Props<
     T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
@@ -283,7 +283,7 @@ function ComboboxMulti<
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace ComboboxMulti {
   export type Props<
     T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
