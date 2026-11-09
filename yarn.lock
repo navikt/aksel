@@ -5045,15 +5045,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@navikt/oasis@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.1.4%2F0d9c93820b9b6d93b1bd9da134feb95461ad8a47"
+"@navikt/oasis@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@navikt/oasis@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.2.2%2F3c43e1e89bb2d46646a9a2aaf27972a024377a6f"
   dependencies:
-    "@navikt/texas": "npm:^4.1.4"
-    "@opentelemetry/api": "npm:^1.9.0"
-    jose: "npm:^6.1.3"
-    prom-client: "npm:^15.1.3"
-  checksum: 10/1f0a9df3aa1b79d17a4076579a140eae607f45d8974072330b3faee3f80706560945aee7ad84f8aac7429e7dc719bdcb4c96774395d1f6cd75d422bfdce0b534
+    "@navikt/texas": "npm:^4.2.2"
+    "@opentelemetry/api": "npm:^1.9.1"
+    "@prometheus-io/client": "npm:^0.16.1"
+    jose: "npm:^6.2.10"
+  checksum: 10/ff6c0ff545e39c7f358077de97f19e2e9d04045cfa948093d2cd1b7417b38fd4d35ee202894ef984257d1c74b19560345eafbd7620602aa159d42a36bbef8ab6
   languageName: node
   linkType: hard
 
@@ -5072,10 +5072,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/texas@npm:^4.1.4":
-  version: 4.1.4
-  resolution: "@navikt/texas@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.1.4%2F1725aca0fa0b803e0048212c3e202d24c10f3c3b"
-  checksum: 10/43a3e9a840e16893d919a5aa4e02c093d8b3b2263e5900de951e079b4788708e1d172ee1eadceac092e03b27a46b6bde088d64ebba5e98ed23c977b08d82bb0a
+"@navikt/texas@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@navikt/texas@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.2.2%2F862d743a1df21630a007a0d2d2a36a74dd8b5187"
+  checksum: 10/ee1067aa92437e688d1c035d028ae472e9eb0b554e41e739bac953a38adea125ada81dcf6eb2d215be076790d1bfa2157d3b9bead27920a42c917491929c2fb4
   languageName: node
   linkType: hard
 
@@ -5261,7 +5261,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0, @opentelemetry/api@npm:^1.9.1":
+"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.1":
   version: 1.9.1
   resolution: "@opentelemetry/api@npm:1.9.1"
   checksum: 10/b26032739d3c54ca99b5a2920844a1fbd4c3ee383cacbb0915e8c706a2626fe91e96feaa6e893397abe0545dc8d0a765b220aa18a31b1773176eeaf3a225e10e
@@ -6152,6 +6152,16 @@ __metadata:
   version: 4.0.2
   resolution: "@portabletext/types@npm:4.0.2"
   checksum: 10/4d09420df9e82ab89a54daa446f023c82dcdb4661e461a0d63d4b1fb835c591da268f4355a93e0338290dc72ca0b4220506a9a19a6a61470068c31965e428fcb
+  languageName: node
+  linkType: hard
+
+"@prometheus-io/client@npm:^0.16.1":
+  version: 0.16.1
+  resolution: "@prometheus-io/client@npm:0.16.1"
+  dependencies:
+    "@opentelemetry/api": "npm:^1.4.0"
+    tdigest: "npm:^0.1.1"
+  checksum: 10/6e8cdf0fbafc8506e3b5fb32815504fdfcf702e06b0d5d3d345a41ecf7e726e9a8e23b536eded80fdfb2073e14baee1622819129802104984c9fc179d1787048
   languageName: node
   linkType: hard
 
@@ -16545,6 +16555,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^6.2.10":
+  version: 6.2.15
+  resolution: "jose@npm:6.2.15"
+  checksum: 10/57ea834a3aae6612b603dc04e5e068dabf1582934ffc759f004a0c654632bec06e6184aee73246157d03fb56179d50ac4e5c56ad02cf939086ef888ae8d8ebec
+  languageName: node
+  linkType: hard
+
 "joycon@npm:^3.1.1":
   version: 3.1.1
   resolution: "joycon@npm:3.1.1"
@@ -25207,7 +25224,7 @@ __metadata:
     "@google-cloud/bigquery": "npm:^9.5.0"
     "@navikt/analytics-types": "npm:0.0.9"
     "@navikt/next-logger": "npm:5.0.1"
-    "@navikt/oasis": "npm:4.1.4"
+    "@navikt/oasis": "npm:4.2.2"
     "@next/eslint-plugin-next": "npm:16.4.3"
     "@playwright/test": "npm:1.61.1"
     "@portabletext/block-tools": "npm:^6.0.0"

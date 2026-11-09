@@ -33,7 +33,7 @@
   "dependencies": {
     "@navikt/analytics-types": "0.0.9",
     "@navikt/next-logger": "5.0.1",
-    "@navikt/oasis": "4.1.4",
+    "@navikt/oasis": "4.2.2",
     "@portabletext/react": "^8.0.1",
     "@sanity/client": "7.27.0",
     "@sanity/image-url": "2.1.1",
