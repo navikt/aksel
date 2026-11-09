@@ -56,6 +56,26 @@ describe("Render combobox", () => {
     });
   });
 
+  test("ignores option selection after the open Combobox becomes disabled", async () => {
+    const onToggleSelected = vi.fn();
+    const props = { options, selectedOptions: ["apple"], onToggleSelected };
+    const { rerender } = render(<App {...props} />);
+    const input = screen.getByRole("combobox");
+    await userEvent.click(input);
+    rerender(<App {...props} disabled />);
+    expect(input).toBeDisabled();
+    await userEvent.click(
+      await screen.findByRole("option", { name: "banana" }),
+    );
+    expect(onToggleSelected).not.toHaveBeenCalled();
+
+    rerender(<App {...props} />);
+    await userEvent.click(
+      await screen.findByRole("option", { name: "banana" }),
+    );
+    expect(onToggleSelected).toHaveBeenCalledWith("banana", true, false);
+  });
+
   describe("Combobox state-handling", () => {
     test("Should show loading icon when loading (used for async search)", async () => {
       render(<App options={[]} isListOpen isLoading />);
