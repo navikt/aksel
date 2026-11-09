@@ -111,7 +111,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
     "stylelint-value-no-unknown-custom-properties": "^6.1.1",
     "typescript": "6.0.3",
-    "typescript-language-server": "6.0.0",
+    "typescript-language-server": "6.0.3",
     "vite": "^8.3.5",
     "vite-plugin-turbosnap": "^1.0.3",
     "vitest": "5.0.5"
