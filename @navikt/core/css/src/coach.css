@@ -1,27 +1,36 @@
-.aksel-coach__popover {
+.aksel-coach__anchor {
   z-index: 2000;
+  background: var(--ax-bg-raised);
+  box-shadow: var(--ax-shadow-dialog);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  max-width: calc(100vw - var(--ax-space-24));
   overflow: hidden;
 }
 
-.aksel-coach__popover_content {
+.aksel-coach__anchor_content {
   --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-16));
+
+  padding: var(--ax-space-16) var(--ax-space-20);
+  width: var(--__axc-coach__content-width);
+  /* Creates a small gutter between screen-edges on smaller devices */
+  max-width: calc(100vw - var(--ax-space-24));
+  overflow: auto;
 
   &[data-coach-step-width="small"] {
     --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-24));
   }
 
   &[data-coach-step-size="small"] {
-    padding-block: var(--ax-space-12);
-    padding-inline: var(--ax-space-16);
+    padding: var(--ax-space-12) var(--ax-space-16);
   }
 
-  width: var(--__axc-coach__content-width);
-  /* Creates a small gutter between screen-edges on smaller devices */
-  max-width: calc(100vw - var(--ax-space-24));
-  overflow: auto;
+  @media (min-width: 480px) {
+    padding: var(--ax-space-16) var(--ax-space-20);
+  }
 }
 
-.aksel-coach__popover_content,
+.aksel-coach__anchor_content,
 .aksel-coach__dialog-body {
   --axc-coach__top-bar-padding-b-e: var(--ax-space-12);
   --axc-coach__image-padding-b-e: var(--ax-space-16);
@@ -84,6 +93,7 @@
   --__axc-coach__mark-size: var(--ax-space-16);
   --__axc-coach__mark-color: var(--ax-bg-strong);
 
+  cursor: pointer;
   position: relative;
   width: calc(var(--__axc-coach__mark-size) * 2);
   height: calc(var(--__axc-coach__mark-size) * 2);

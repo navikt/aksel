@@ -580,3 +580,31 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
     </Coach>
   );
 };
+
+export const DisableTour: StoryObj<typeof Coach> = {
+  render: (props) => {
+    return (
+      <VStack padding="space-40" gap="space-64">
+        <Coach
+          type="dialog"
+          title="Explore the page"
+          disableTour={props.disableTour}
+        >
+          <Coach.ShowTourTrigger>
+            <Coach.Mark>
+              <Button onClick={() => console.log("Button clicked")}>
+                Click me
+              </Button>
+            </Coach.Mark>
+          </Coach.ShowTourTrigger>
+        </Coach>
+      </VStack>
+    );
+  },
+  args: {
+    disableTour: true,
+  },
+  argTypes: {
+    disableTour: { control: "boolean" },
+  },
+};

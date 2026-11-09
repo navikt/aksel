@@ -24,11 +24,14 @@ const CoachShowTourTrigger = forwardRef<
     { children, onClick, "aria-label": ariaLabel, ...restProps },
     forwardedRef,
   ) => {
-    const { showTour, onClose, openTour } = useCoachContext();
+    const { showTour, onClose, openTour, disableTour } = useCoachContext();
 
     const handleClick = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     ) => {
+      if (disableTour) {
+        return;
+      }
       if (showTour) {
         onClose?.(event);
       } else {

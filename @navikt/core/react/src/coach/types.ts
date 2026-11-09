@@ -1,5 +1,5 @@
+import type { Placement } from "@floating-ui/react-dom";
 import type React from "react";
-import type { Popover } from "../popover";
 import type { ComponentTranslation } from "../utils/i18n/i18n.types";
 import type { CoachMark } from "./mark/CoachMark";
 
@@ -60,7 +60,7 @@ interface CoachAnchorStep {
   /**
    * Placement of the anchor type coach step relative to the anchor element.
    */
-  placement?: NonNullable<React.ComponentProps<typeof Popover>["placement"]>;
+  placement?: Placement;
   /**
    * Offset of the anchor type coach step relative to the anchor element.
    */

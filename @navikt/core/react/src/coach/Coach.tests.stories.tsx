@@ -547,6 +547,7 @@ export const MixedSteps: StoryObj = {
               id: "second-anchor",
               type: "anchor",
               anchorRef: secondRef,
+              placement: "bottom-start",
               title: "Second anchor",
               allowCancelTour: true,
             },
@@ -575,6 +576,18 @@ export const MixedSteps: StoryObj = {
     await userEvent.click(within(anchor).getByRole("button", { name: "Next" }));
     const second = await canvas.findByRole("dialog", { name: "Second anchor" });
     expectLabelledByTitle(second, "Second anchor");
+    await waitFor(() => {
+      expect(second).toHaveAttribute("data-side", "bottom");
+      expect(second).toHaveAttribute("data-align", "start");
+      const target = canvas.getByText("Second target").closest("button");
+      if (!target) {
+        throw new Error("Expected the second anchor button");
+      }
+      expect(second.getBoundingClientRect().top).toBeCloseTo(
+        target.getBoundingClientRect().bottom + 12,
+        0,
+      );
+    });
     await userEvent.tab();
     expect(second.contains(document.activeElement)).toBe(true);
     await userEvent.tab({ shift: true });
@@ -615,7 +628,7 @@ export const SpotlightBackdrop: StoryObj = {
     const canvas = within(canvasElement);
     const scroller = canvas.getByRole("region", { name: "Scrollable targets" });
     await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
-    await canvas.findByRole("dialog", { name: "Spotlight" });
+    const popup = await canvas.findByRole("dialog", { name: "Spotlight" });
     const backdrop = canvasElement.querySelector<HTMLElement>(
       ".aksel-coach__backdrop",
     );
@@ -629,10 +642,15 @@ export const SpotlightBackdrop: StoryObj = {
     expect(getComputedStyle(backdrop).position).toBe("fixed");
     expect(getComputedStyle(backdrop).pointerEvents).toBe("none");
     const initialClipPath = backdrop.style.clipPath;
+    await waitFor(() =>
+      expect(popup.getBoundingClientRect().bottom).toBeGreaterThan(0),
+    );
+    const initialPopupTop = popup.getBoundingClientRect().top;
     scroller.scrollTop = 40;
     await waitFor(() => {
       expect(scroller.scrollTop).toBe(40);
       expect(backdrop.style.clipPath).not.toBe(initialClipPath);
+      expect(popup.getBoundingClientRect().top).not.toBe(initialPopupTop);
     });
     const bounds = backdrop.getBoundingClientRect();
     expect(bounds.top).toBe(0);

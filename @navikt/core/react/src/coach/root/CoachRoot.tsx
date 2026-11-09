@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
-import { Popover } from "../../popover";
 import { Portal } from "../../portal";
+import Spacer from "../../primitives/stack/Spacer";
 import { useClientLayoutEffect } from "../../utils-external";
-// import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
+import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
+import { Floating } from "../../utils/components/floating/Floating";
+import { getSideAndAlignFromPlacement } from "../../utils/components/floating/Floating.utils";
 import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
 import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
@@ -37,6 +39,10 @@ import {
   CoachPreviousTrigger,
   type CoachPreviousTriggerProps,
 } from "../trigger/CoachPreviousTrigger";
+import {
+  CoachShowTourTrigger,
+  type CoachShowTourTriggerProps,
+} from "../trigger/CoachShowTourTrigger";
 import type {
   CoachAnchorStep,
   CoachDialogStep,
@@ -61,7 +67,11 @@ import { CoachContextProvider } from "./Coach.context";
  *     { id: "start", type: "anchor", anchorRef: buttonRef, title: "Start here." },
  *   ]}
  * >
- *   <Coach.Mark aria-label="Start tour" />
+ *   <Coach.ShowTourTrigger>
+ *     <Coach.Mark>
+ *       <Button>Start tour</Button>
+ *     </Coach.Mark>
+ *   </Coach.ShowTourTrigger>
  * </Coach>
  * ```
  */
@@ -229,6 +239,7 @@ const CoachRoot = (props: CoachProps) => {
     if (event.defaultPrevented) {
       return;
     }
+
     event.preventDefault();
     if (currentStep?.allowCancelTour) {
       endTour();
@@ -301,6 +312,7 @@ const CoachRoot = (props: CoachProps) => {
     <CoachStep>
       <div className="aksel-coach__top-bar">
         <CoachProgress />
+        <Spacer />
         {currentStep?.allowCancelTour && (
           <CoachCloseTrigger data-coach-top-close-trigger>
             <Button
@@ -370,9 +382,7 @@ const CoachRoot = (props: CoachProps) => {
           open={true}
           size={getStepSize()}
           onOpenChange={(_open, event) => {
-            // TODO:C Look at this
-            console.log(_open);
-            if (event instanceof KeyboardEvent && event.key === "Escape") {
+            if (event instanceof KeyboardEvent) {
               handleEscapeKeyDown(event);
             }
           }}
@@ -387,6 +397,7 @@ const CoachRoot = (props: CoachProps) => {
             onKeyDown={handleArrowKeyDown}
             width={getStepWidth()}
             aria-labelledby={labelledBy}
+            closeOnOutsideClick={false}
           >
             <Dialog.Body
               className="aksel-coach__dialog-body"
@@ -400,40 +411,46 @@ const CoachRoot = (props: CoachProps) => {
     }
 
     if (currentStep?.type === "anchor" && anchorEl) {
+      const [side, align] = getSideAndAlignFromPlacement(
+        currentStep.placement ?? "top",
+      );
+
       return (
         <Portal key={currentStep.id}>
           <CoachBackdrop anchorEl={anchorEl} />
-          <FocusGuards>
-            <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
-              <Popover
-                ref={mergedStepRef}
-                data-coach-step-id={currentStep.id}
-                anchorEl={anchorEl}
-                open
-                onClose={endTour}
-                onKeyDown={handleArrowKeyDown}
-                placement={currentStep.placement}
-                offset={currentStep.offset ?? 12}
-                role="dialog"
-                aria-labelledby={labelledBy}
-                className="aksel-coach__popover"
-                // TODO:C - onClose makes it close on any outside interaction, not just Escape key.
-                // Wanted to use the already built escape key handling.
-              >
-                {/* Popover's onClose does not distinguish Escape from outside interactions. */}
-                {/*<DismissableLayer asChild onEscapeKeyDown={handleEscapeKeyDown}>*/}
-                <Popover.Content
-                  className="aksel-coach__popover_content"
-                  data-top-close-button={currentStep.allowToEndTour ?? false}
-                  data-coach-step-size={getStepSize()}
-                  data-coach-step-width={getStepWidth()}
+          <Floating>
+            <Floating.Anchor virtualRef={anchorEl} />
+            <FocusGuards>
+              <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
+                <DismissableLayer
+                  asChild
+                  onEscapeKeyDown={handleEscapeKeyDown}
+                  safeZone={{ anchor: anchorEl }}
                 >
-                  {stepContent}
-                </Popover.Content>
-                {/*</DismissableLayer>*/}
-              </Popover>
-            </FocusBoundary>
-          </FocusGuards>
+                  <Floating.Content
+                    ref={mergedStepRef}
+                    data-coach-step-id={currentStep.id}
+                    onKeyDown={handleArrowKeyDown}
+                    side={side}
+                    align={align}
+                    sideOffset={currentStep.offset ?? 12}
+                    collisionPadding={12}
+                    role="dialog"
+                    aria-labelledby={labelledBy}
+                    className="aksel-coach__anchor"
+                  >
+                    <div
+                      className="aksel-coach__anchor_content"
+                      data-coach-step-size={getStepSize()}
+                      data-coach-step-width={getStepWidth()}
+                    >
+                      {stepContent}
+                    </div>
+                  </Floating.Content>
+                </DismissableLayer>
+              </FocusBoundary>
+            </FocusGuards>
+          </Floating>
         </Portal>
       );
     }
@@ -467,6 +484,7 @@ const Coach = Object.assign(CoachRoot, {
   Title: CoachTitle,
   Description: CoachDescription,
   CloseTrigger: CoachCloseTrigger,
+  ShowTourTrigger: CoachShowTourTrigger,
   Progress: CoachProgress,
   NextTrigger: CoachNextTrigger,
   PreviousTrigger: CoachPreviousTrigger,
@@ -481,6 +499,7 @@ export {
   CoachTitle,
   CoachDescription,
   CoachCloseTrigger,
+  CoachShowTourTrigger,
   CoachProgress,
   CoachNextTrigger,
   CoachPreviousTrigger,
@@ -502,6 +521,7 @@ export type {
   CoachTitleProps,
   CoachDescriptionProps,
   CoachCloseTriggerProps,
+  CoachShowTourTriggerProps,
   CoachProgressProps,
   CoachNextTriggerProps,
   CoachPreviousTriggerProps,
