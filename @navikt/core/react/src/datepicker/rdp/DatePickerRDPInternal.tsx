@@ -1,4 +1,4 @@
-import { isWeekend } from "date-fns";
+import { isWeekend } from "date-fns/isWeekend";
 import React, { useCallback, useState } from "react";
 import {
   type ClassNames,

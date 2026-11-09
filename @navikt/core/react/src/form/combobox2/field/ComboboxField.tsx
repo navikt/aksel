@@ -1,6 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { cl } from "../../../utils/helpers";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import {
   type ComboboxRootProps,
   useComboboxRootContext,
@@ -14,10 +15,24 @@ interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
   ({ children, hasError, ...rest }, ref) => {
     const { options, value, size } = useComboboxRootContext();
+    const translate = useI18n("Combobox2");
 
     const labels = getLabels(value, options);
     const label =
-      children ?? (labels.length > 1 ? `${labels.length} valgt` : labels[0]);
+      children ??
+      (labels.length > 1
+        ? translate("selectedCount", { count: labels.length })
+        : labels[0]);
+
+    // Workaround for issue where VO on Safari announces the old label when focusing this button right after selecting a new option
+    const [ariaLabel, setAriaLabel] = useState<string>();
+    useEffect(() => {
+      if (label) {
+        // oxlint-disable-next-line react/set-state-in-effect -- Briefly sets and resets the label as part of the VoiceOver workaround.
+        setAriaLabel(label);
+        setTimeout(() => setAriaLabel(undefined), 100);
+      }
+    }, [label]);
 
     return (
       <div className="aksel-combobox2__field-container">
@@ -30,8 +45,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
-          // TODO: This results in other problems. Find another fix!
-          //aria-label={label} // Without this, VO on Safari will announce the old label when focusing this button right after selecting a new option
+          aria-label={ariaLabel}
           {...rest}
         >
           {label}

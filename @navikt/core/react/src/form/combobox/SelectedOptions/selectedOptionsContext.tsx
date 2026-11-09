@@ -37,7 +37,12 @@ const SelectedOptionsProvider = ({
     "allowNewValues" | "isMultiSelect" | "onToggleSelected" | "maxSelected"
   > & { options: ComboboxOption[]; selectedOptions?: ComboboxOption[] };
 }) => {
-  const { clearInput, focusInput, setHideCaret } = useInputContext();
+  const {
+    clearInput,
+    focusInput,
+    setHideCaret,
+    inputProps: { disabled },
+  } = useInputContext();
   const {
     customOptions,
     removeCustomOption,
@@ -112,7 +117,6 @@ const SelectedOptionsProvider = ({
   const newHideCaret =
     isLimitReached || (!isMultiSelect && selectedOptions.length > 0);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
     setHideCaret(newHideCaret);
   }, [newHideCaret, selectedOptions, setHideCaret]);
@@ -122,6 +126,9 @@ const SelectedOptionsProvider = ({
       option: ComboboxOption,
       event: React.KeyboardEvent | React.PointerEvent,
     ) => {
+      if (disabled) {
+        return;
+      }
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
       } else if (isMultiSelect && isLimitReached) {
@@ -135,6 +142,7 @@ const SelectedOptionsProvider = ({
     [
       addSelectedOption,
       clearInput,
+      disabled,
       focusInput,
       removeSelectedOption,
       selectedOptions,

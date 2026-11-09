@@ -179,4 +179,3 @@ export const Chromatic = renderStoriesForChromatic({
   AsLink,
   ColorRole,
 });
-Chromatic.args = { count: 8, siblingCount: 1, boundaryCount: 1 };

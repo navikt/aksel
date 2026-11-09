@@ -11,7 +11,7 @@ export default {
     chromatic: { disable: false },
   },
   /* TODO: Temp disabled CI-tests */
-  tags: ["!play-fn", "skip-test"],
+  tags: ["skip-test"],
 } satisfies Meta<typeof UNSAFE_Combobox>;
 
 type StoryObject = StoryObj<typeof UNSAFE_Combobox>;
@@ -343,18 +343,21 @@ export const EnterNotSubmittingForm: StoryObj<{
   args: {
     onSubmit: fn(),
   },
-  render: ({ onSubmit }) => {
-    return (
-      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          isMultiSelect
-          allowNewValues
-        />
-      </form>
-    );
-  },
+  render: ({ onSubmit }) => (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit(event);
+      }}
+    >
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        isMultiSelect
+        allowNewValues
+      />
+    </form>
+  ),
   play: async ({ canvasElement, args }) => {
     args.onSubmit.mockClear();
     const canvas = within(canvasElement);

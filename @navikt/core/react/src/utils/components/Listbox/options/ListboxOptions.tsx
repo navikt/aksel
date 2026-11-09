@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/a11y/useKeyWithMouseEvents: We know what we are doing */
+/* oxlint-disable jsx-a11y/mouse-events-have-key-events -- We know what we are doing */
 import React from "react";
 import { cl } from "../../../helpers";
 import { useMedia } from "../../../hooks";
@@ -38,5 +38,13 @@ function ListboxOptions({ children, ...rest }: ListboxOptionsProps) {
     </div>
   );
 }
+
+/**
+ * TODO: Things that should be fixed before we allow focus directly
+ * on the listbox (i.e. when there's no filter input/combobox elm.)
+ * - Set aria-activedescendant
+ * - Consider aria-multiselectable
+ * - Probably aria-label(ledby)?
+ */
 
 export { ListboxOptions };

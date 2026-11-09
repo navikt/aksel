@@ -1,4 +1,6 @@
-import { differenceInCalendarDays, isSameDay, isWeekend } from "date-fns";
+import { differenceInCalendarDays } from "date-fns/differenceInCalendarDays";
+import { isSameDay } from "date-fns/isSameDay";
+import { isWeekend } from "date-fns/isWeekend";
 import React, { useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
 import { getLocaleFromString } from "../../utils/components/date/Date.locale";
@@ -218,6 +220,7 @@ export const useRangeDatepicker = (
   const {
     locale: _locale,
     defaultSelected: _defaultSelected,
+    // oxlint-disable-next-line react/purity -- Defaults `today` to the current date.
     today = new Date(),
     fromDate,
     toDate,

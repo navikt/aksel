@@ -9,7 +9,6 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-  tags: ["play-fn"],
 } satisfies Meta<typeof Lookup>;
 
 type Story = StoryObj<typeof Lookup>;

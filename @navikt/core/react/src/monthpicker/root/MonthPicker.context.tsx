@@ -1,4 +1,5 @@
-import { type Locale, isSameYear } from "date-fns";
+import type { Locale } from "date-fns";
+import { isSameYear } from "date-fns/isSameYear";
 import React from "react";
 import { clampDisplayYear } from "../../utils/date";
 import { createStrictContext } from "../../utils/helpers";
@@ -64,6 +65,7 @@ const MonthPickerProvider = ({
         month: year ?? selected ?? defaultSelected,
         start: fromDate,
         end: toDate,
+        // oxlint-disable-next-line react/purity -- Falls back to the current month when no year is set.
       }) ?? new Date(),
     value: year,
     onChange: onYearChange,

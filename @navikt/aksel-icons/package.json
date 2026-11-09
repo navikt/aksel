@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "8.20.1",
+  "version": "8.22.1",
   "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -23,7 +23,9 @@
     "access": "public",
     "provenance": true
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "license": "MIT",
   "main": "./dist/react/cjs/index.js",
   "module": "./dist/react/esm/index.js",
@@ -44,6 +46,7 @@
       "default": "./dist/metadata.js"
     },
     "./svg/*.svg": "./dist/svg/*.svg",
+    "./css/*.css": "./dist/css/*.css",
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -62,10 +65,11 @@
     "create-icons": "svgr --no-prettier --silent --index-template config/index-template.js --out-dir src icons && yarn prettify-icons",
     "prettify-icons": "yarn prettier ./src --write --ignore-path nonexisting-path --log-level silent --no-config",
     "parse-svg": "node -e 'require(\"./config/parse-svg.js\").main()'",
+    "css-icons": "node -e 'require(\"./config/css-icons.js\").main()'",
     "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
-    "write-packagejson": "echo '{\"type\": \"module\"}' > dist/react/esm/package.json",
-    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
+    "write-packagejson": "echo '{\"type\": \"module\", \"sideEffects\": false}' > dist/react/esm/package.json",
+    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg && yarn css-icons",
     "fetch-new:icons": "tsx --env-file=.env config/figma/index.ts",
     "zip:icons": "node config/zip.js",
     "test": "vitest run",
@@ -84,13 +88,14 @@
     "hast-util-select": "6.0.4",
     "js-yaml": "^5.5.0",
     "lodash": "4.18.1",
-    "prettier": "3.9.6",
+    "prettier": "3.9.10",
     "react": "19.3.1",
     "rehype-parse": "9.0.1",
-    "tsc-alias": "1.9.7",
+    "svgo": "3.3.5",
+    "tsc-alias": "1.9.10",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
     "unified": "11.0.5",
-    "vitest": "4.1.11"
+    "vitest": "5.0.5"
   }
 }

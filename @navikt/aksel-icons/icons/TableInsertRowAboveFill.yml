@@ -2,6 +2,9 @@ name: TableInsertRowAboveFill
 category: Interface
 sub_category: Table
 keywords:
-  - TableInsertRowAboveFill
+  - ny rad
+  - over
+  - tabell
+  - datagrid
 variant: Fill
 created_at: 26.10.2026

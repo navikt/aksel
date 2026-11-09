@@ -14,6 +14,7 @@ type VideoPlayerProps = React.VideoHTMLAttributes<HTMLVideoElement> & {
  */
 function VideoPlayer({ alt, children, ...rest }: VideoPlayerProps) {
   return (
+    // oxlint-disable-next-line jsx-a11y/media-has-caption -- Captions are passed as <track> children
     <video
       {...rest}
       onPlay={() => umamiTrack(Events.VIDEO_START, { tittel: alt })}

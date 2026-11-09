@@ -19,6 +19,6 @@ export function useEscapeKeydown(
     ownerDocument.addEventListener("keydown", handleKeyDown);
     return () => ownerDocument.removeEventListener("keydown", handleKeyDown);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [onEscapeKeyDown, ...deps]);
 }

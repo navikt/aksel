@@ -1,11 +1,11 @@
 ---
-description: "JS/TS conventions not enforced by ESLint/Biome: loops, export style and placement."
+description: "JS/TS conventions not enforced by Oxlint: loops, export style and placement."
 applyTo: "**/*.ts,**/*.tsx,**/*.js,**/*.mts,**/*.mjs"
 ---
 
 # JS/TS conventions
 
-Formatting, import order and `import type` are handled by Prettier and Biome. Don't hand-tune them.
+Formatting, import order and `import type` are handled by Prettier. Don't hand-tune them.
 
 - Use `for...of` instead of `Array.forEach`. It supports `break`/`continue`/`await` and reads top-down.
 - Use named exports only. Keep type exports separate from value exports (`export { X }` / `export type { XProps }`).

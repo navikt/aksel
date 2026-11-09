@@ -113,8 +113,9 @@ const FilteredOptions = () => {
         {shouldRenderFilteredOptionsList && (
           <ul
             ref={setFilteredOptionsRef}
-            // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: The <ul> element acts as a listbox in the combobox.
+            // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- The <ul> element acts as a listbox in the combobox
             role="listbox"
+            tabIndex={-1}
             className="aksel-combobox__list-options"
           >
             {isValueNew && !maxSelected.isLimitReached && allowNewValues && (

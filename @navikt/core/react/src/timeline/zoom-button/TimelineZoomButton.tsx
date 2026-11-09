@@ -1,11 +1,9 @@
-import {
-  addMonths,
-  addYears,
-  format,
-  isSameDay,
-  subMonths,
-  subYears,
-} from "date-fns";
+import { addMonths } from "date-fns/addMonths";
+import { addYears } from "date-fns/addYears";
+import { format } from "date-fns/format";
+import { isSameDay } from "date-fns/isSameDay";
+import { subMonths } from "date-fns/subMonths";
+import { subYears } from "date-fns/subYears";
 import React, { forwardRef } from "react";
 import { Detail } from "../../typography/Detail";
 import { useI18n } from "../../utils/i18n/i18n.hooks";

@@ -1,4 +1,7 @@
-import { isSameMonth, setMonth, setYear, startOfMonth } from "date-fns";
+import { isSameMonth } from "date-fns/isSameMonth";
+import { setMonth } from "date-fns/setMonth";
+import { setYear } from "date-fns/setYear";
+import { startOfMonth } from "date-fns/startOfMonth";
 import React, { useState } from "react";
 import { BodyShort } from "../../typography";
 import { isMatch } from "../../utils/date";
@@ -26,6 +29,7 @@ const MonthPickerTable = () => {
     months.some((m) => isSameMonth(setYear(m, year.getFullYear()), selected));
 
   const getRootFallback = () => {
+    // oxlint-disable-next-line react/purity -- Today is needed to mark the current month.
     const today = startOfMonth(new Date());
     if (
       year?.getFullYear() === today.getFullYear() &&
@@ -46,8 +50,15 @@ const MonthPickerTable = () => {
     hasSelected ? selected : getRootFallback(),
   );
 
-  if (tabRoot?.getFullYear() !== year.getFullYear()) {
-    setTabRoot(hasSelected ? selected : getRootFallback());
+  // Track the year instead of comparing tabRoot, since tabRoot is undefined
+  // when every month in the year is disabled and would re-trigger forever.
+  const [tabRootYear, setTabRootYear] = useState(year.getFullYear());
+
+  if (tabRootYear !== year.getFullYear()) {
+    setTabRootYear(year.getFullYear());
+    if (tabRoot?.getFullYear() !== year.getFullYear()) {
+      setTabRoot(hasSelected ? selected : getRootFallback());
+    }
   }
 
   const tableMonths = [

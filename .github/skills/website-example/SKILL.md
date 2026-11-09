@@ -4,7 +4,7 @@ description: >
   Add or update a code example or template shown on aksel.nav.no
   (aksel.nav.no/website/pages/eksempler/** or pages/templates/**). Use when
   asked to create a component example, demo, usage snippet or page template
-  for the documentation site, or when an example fails the aksel-local ESLint
+  for the documentation site, or when an example fails the aksel-local Oxlint
   rules or validate:eksempler.
 argument-hint: "Component group and example name, e.g. button/loading"
 ---
@@ -54,7 +54,7 @@ Hard rules (enforced by `tooling/eslint` rules `aksel-local/*`):
 ## 3. Validate
 
 ```sh
-corepack yarn eslint --max-warnings=0 --no-warn-ignored <file>
+corepack yarn oxlint --deny-warnings <file>
 corepack yarn workspace website validate:eksempler
 corepack yarn storybook:aksel   # visual check at :6007, needs no secrets
 ```
@@ -63,4 +63,4 @@ Never run `update:eksempler`. It writes to the Sanity CMS. Tell the user that a 
 
 ## Done when
 
-ESLint and `validate:eksempler` pass, and the story renders in `storybook:aksel`.
+Oxlint and `validate:eksempler` pass, and the story renders in `storybook:aksel`.

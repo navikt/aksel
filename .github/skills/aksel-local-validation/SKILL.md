@@ -19,7 +19,7 @@ Validate the smallest relevant surface with repository-pinned tools. Expand only
 - Do not add a dependency only to run a one-off check. If the task truly needs new tooling, add and lock it explicitly.
 - Public consumer docs may intentionally show `npx @navikt/aksel`. Preserve those examples unless the task changes consumer setup.
 - If Corepack/Yarn reports a user-level configuration error, stop and report it. Never edit configuration outside the repository.
-- Do not claim type safety from ESLint or tests. Run a TypeScript-aware command when TypeScript behavior changed.
+- Do not claim type safety from Oxlint or tests. Run a TypeScript-aware command when TypeScript behavior changed.
 
 ## 1. Determine affected projects
 
@@ -57,9 +57,8 @@ Read the current manifest before running a table command. A manifest is source o
 Group only matching files:
 
 ```sh
-corepack yarn eslint --max-warnings=0 --no-warn-ignored <changed .ts/.tsx/.js/.jsx files>
+corepack yarn oxlint --deny-warnings <changed .ts/.tsx/.js/.jsx files>
 corepack yarn stylelint <changed .css files>
-corepack yarn biome lint --no-errors-on-unmatched <changed supported source/config files>
 ```
 
 Do not pass unsupported file types to make a command appear comprehensive. Documentation-only changes need no code validation unless a documentation check exists.
