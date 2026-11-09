@@ -88,7 +88,7 @@
     "hast-util-select": "6.0.4",
     "js-yaml": "^5.5.0",
     "lodash": "4.18.1",
-    "prettier": "3.9.6",
+    "prettier": "3.9.10",
     "react": "19.3.1",
     "rehype-parse": "9.0.1",
     "svgo": "3.3.5",
