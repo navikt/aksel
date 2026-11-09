@@ -92,7 +92,7 @@
     "react": "19.3.1",
     "rehype-parse": "9.0.1",
     "svgo": "3.3.5",
-    "tsc-alias": "1.9.7",
+    "tsc-alias": "1.9.10",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
     "unified": "11.0.5",
