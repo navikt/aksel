@@ -1,5 +1,5 @@
 export default {
-  plugins: ["."],
+  plugins: ["./index.js"],
   rules: {
     "aksel/design-token-exists": true,
     "aksel/no-internal-tokens": true,
