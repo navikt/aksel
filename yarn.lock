@@ -9849,7 +9849,7 @@ __metadata:
     stylelint-declaration-block-no-ignored-properties: "npm:^3.0.0"
     stylelint-value-no-unknown-custom-properties: "npm:^6.1.1"
     typescript: "npm:6.0.3"
-    typescript-language-server: "npm:6.0.0"
+    typescript-language-server: "npm:6.0.3"
     vite: "npm:^8.3.5"
     vite-plugin-turbosnap: "npm:^1.0.3"
     vitest: "npm:5.0.5"
@@ -22915,12 +22915,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-language-server@npm:6.0.0":
-  version: 6.0.0
-  resolution: "typescript-language-server@npm:6.0.0"
+"typescript-language-server@npm:6.0.3":
+  version: 6.0.3
+  resolution: "typescript-language-server@npm:6.0.3"
   bin:
     typescript-language-server: lib/cli.mjs
-  checksum: 10/1ca63b957745a84699412a7e2e4478109dab4046021cf256b5715af2d4d4f4206348f0c8b621fe469fe9f6a68c1e56aad538d66e5a0545d2a0bd534dcf8a911d
+  checksum: 10/e0b7d7c0ef8744a500600ecd7637287317e2a9ff7fcb6723c8d068d832146eddc976e077de59b030debb0de0ba6615b948e894f11393e10d7cfd8df49abe3673
   languageName: node
   linkType: hard
 
