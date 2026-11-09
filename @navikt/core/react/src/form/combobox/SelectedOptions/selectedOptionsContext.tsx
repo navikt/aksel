@@ -37,7 +37,12 @@ const SelectedOptionsProvider = ({
     "allowNewValues" | "isMultiSelect" | "onToggleSelected" | "maxSelected"
   > & { options: ComboboxOption[]; selectedOptions?: ComboboxOption[] };
 }) => {
-  const { clearInput, focusInput, setHideCaret } = useInputContext();
+  const {
+    clearInput,
+    focusInput,
+    setHideCaret,
+    inputProps: { disabled },
+  } = useInputContext();
   const {
     customOptions,
     removeCustomOption,
@@ -122,6 +127,9 @@ const SelectedOptionsProvider = ({
       option: ComboboxOption,
       event: React.KeyboardEvent | React.PointerEvent,
     ) => {
+      if (disabled) {
+        return;
+      }
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
       } else if (isMultiSelect && isLimitReached) {
@@ -135,6 +143,7 @@ const SelectedOptionsProvider = ({
     [
       addSelectedOption,
       clearInput,
+      disabled,
       focusInput,
       removeSelectedOption,
       selectedOptions,
