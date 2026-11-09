@@ -29,6 +29,7 @@ const MonthPickerTable = () => {
     months.some((m) => isSameMonth(setYear(m, year.getFullYear()), selected));
 
   const getRootFallback = () => {
+    // oxlint-disable-next-line react/purity -- Today is needed to mark the current month.
     const today = startOfMonth(new Date());
     if (
       year?.getFullYear() === today.getFullYear() &&

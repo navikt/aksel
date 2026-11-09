@@ -156,6 +156,7 @@ const useEarliestDate = ({
       .map((period) => period.start);
 
     if (startDates.length === 0) {
+      // oxlint-disable-next-line react/purity -- Falls back to today when there are no periods.
       return new Date();
     }
 

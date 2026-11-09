@@ -1,5 +1,4 @@
 /* oxlint-disable react/exhaustive-deps -- Explained bellow */
-/* oxlint-disable react-hooks-js/globals */
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
@@ -9,6 +8,7 @@
 import React, {
   useDebugValue,
   useEffect,
+  // oxlint-disable-next-line no-restricted-imports -- Vendored from React, kept as close to upstream as possible.
   useLayoutEffect,
   useState,
 } from "react";

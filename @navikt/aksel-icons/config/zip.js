@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-require-imports
 const AdmZip = require("adm-zip");
 const {
   existsSync,

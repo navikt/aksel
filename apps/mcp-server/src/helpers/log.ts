@@ -6,7 +6,7 @@ function log(level: LogLevel, message: string, details?: LogDetails) {
   const payload = {
     level,
     message,
-    ...(details ?? {}),
+    ...details,
   };
 
   const line = JSON.stringify(payload);

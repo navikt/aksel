@@ -113,7 +113,7 @@ const TableAnimateHeightInternal: React.FC<AnimateHeightProps> = ({
     hideContent(contentElement.current, currentHeight);
 
     /* Only run on mount.  We use currentHeight since it might have changed and using React.Activity will re-mount the component */
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, []);
 
   // ------------------ Height update
@@ -215,7 +215,7 @@ const TableAnimateHeightInternal: React.FC<AnimateHeightProps> = ({
     };
 
     // This should be explicitly run only on height change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [height]);
 
   // ------------------ Render

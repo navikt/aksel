@@ -65,6 +65,7 @@ const MonthPickerProvider = ({
         month: year ?? selected ?? defaultSelected,
         start: fromDate,
         end: toDate,
+        // oxlint-disable-next-line react/purity -- Falls back to the current month when no year is set.
       }) ?? new Date(),
     value: year,
     onChange: onYearChange,

@@ -26,9 +26,9 @@ export const InputController = forwardRef<
   >
 >((props, ref) => {
   const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    // oxlint-disable-next-line typescript/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButton,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    // oxlint-disable-next-line typescript/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButtonLabel,
     toggleListButton = true,
     inputClassName,

@@ -99,10 +99,10 @@ export const SearchForm = ({
   useEffect(() => {
     if (!urlParams.has("fritekst")) {
       // In case you clear the URL params by clicking on "Endringslogg" again in the menu
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // oxlint-disable-next-line react/set-state-in-effect
       setSearchInput("");
     }
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams]); // oxlint-disable-line react/exhaustive-deps
 
   return (
     <VStack gap="space-24" paddingBlock="space-12 space-0">
