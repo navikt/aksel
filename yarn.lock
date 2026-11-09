@@ -4919,15 +4919,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/next-logger@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@navikt/next-logger@npm:5.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F5.0.1%2F9b62906c0f9db26caae24c314197f3e33f016474"
+"@navikt/next-logger@npm:5.0.2":
+  version: 5.0.2
+  resolution: "@navikt/next-logger@npm:5.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F5.0.2%2Fe0119897f7c5bb3eab51bebb182fcc9b09aef94f"
   dependencies:
-    "@navikt/pino-logger": "npm:^5.0.1"
+    "@navikt/pino-logger": "npm:^5.0.2"
   peerDependencies:
     next: 14 || 15 || 16
     pino: 8 || 9 || 10
-  checksum: 10/dc71498215610598c9f0ac2df73fe4dc013b9571ae90695d3968614c5a2d4e7bdd083f35d80ad7abf4f69490808ec39d47d1bc96d1e8cee8ca56c9a47cdee35e
+  checksum: 10/0871c2f66935684ac0b314393f776a0918bb76045c7c870d641f14f7014f73286ae17e751c7802e8121efafb452bf119c9634e4af0994489e05c573c645678cb
   languageName: node
   linkType: hard
 
@@ -4943,9 +4943,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/pino-logger@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@navikt/pino-logger@npm:5.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F5.0.1%2F819f7f398e4378c014dd39f704c26f691a0915a1"
+"@navikt/pino-logger@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@navikt/pino-logger@npm:5.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fpino-logger%2F5.0.2%2F7cb892a73d8c4b0480edf989cf46dfdb123b8361"
   dependencies:
     "@opentelemetry/api": "npm:^1.9.1"
     pino-socket: "npm:8.0.0"
@@ -4954,7 +4954,7 @@ __metadata:
   dependenciesMeta:
     pino-socket:
       optional: true
-  checksum: 10/6350de289e59e1a89e4b2d41e93ae31ae8a901cd5eb77d7d9e8899fd8ac497529abc4cbad50a6c2984c61cc94a16cafa89d7cbf9b0d3f2d63978151b4c45621e
+  checksum: 10/fa1bb553629f37b80978d98c05d0ebd98df8b29634776a2289b6972d346122a42deaefe3f73cbb5ab926898a7043550e08c297d5b889a6be9f4dd936d46618c0
   languageName: node
   linkType: hard
 
@@ -23885,7 +23885,7 @@ __metadata:
     "@babel/traverse": "npm:^7.27.4"
     "@google-cloud/bigquery": "npm:^9.5.0"
     "@navikt/analytics-types": "npm:0.0.9"
-    "@navikt/next-logger": "npm:5.0.1"
+    "@navikt/next-logger": "npm:5.0.2"
     "@navikt/oasis": "npm:4.2.2"
     "@playwright/test": "npm:1.61.1"
     "@portabletext/block-tools": "npm:^6.0.0"
