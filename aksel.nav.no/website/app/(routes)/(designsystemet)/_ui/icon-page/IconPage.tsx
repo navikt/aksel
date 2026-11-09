@@ -125,7 +125,7 @@ function IconPage({
                   actionComponent={
                     <Button
                       as="a"
-                      href="https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+"
+                      href="https://github.com/navikt/aksel/issues/new?template=new-icon.yaml"
                       variant="secondary-neutral"
                     >
                       Send innspill
