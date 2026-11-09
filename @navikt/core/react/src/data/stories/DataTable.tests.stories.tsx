@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { DataGrid } from "../../data-grid";
 import type { ColumnDefinitions } from "../table/root/DataGridTable.types";
 import { DataGridTable } from "../table/root/DataGridTableRoot";
@@ -226,5 +226,80 @@ export const SelectAllIncludesHiddenDescendantsForCollapsedParents: Story = {
     expect(getCheckboxes(canvasElement)[1].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[2].checked).toBe(false);
     expect(getCheckboxes(canvasElement)[3].checked).toBe(false);
+  },
+};
+
+const detailsPanelData: TestRow[] = [
+  { id: "a", name: "Alpha" },
+  { id: "b", name: "Beta" },
+  { id: "c", name: "Gamma" },
+];
+
+function ControlledDetailsPanel({
+  onExpandedRowIdsChange,
+}: {
+  onExpandedRowIdsChange: (ids: string[]) => void;
+}) {
+  const [expandedRowIds, setExpandedRowIds] = React.useState(["a"]);
+
+  return (
+    <DataGrid
+      columns={columns}
+      data={detailsPanelData}
+      getRowId={(row) => row.id}
+    >
+      <DataGrid.Table<TestRow>
+        detailsPanel={{
+          getContent: (row) => `Detaljer for ${row.name}`,
+          isRowExpandable: (row) => row.id !== "c",
+          expandedRowIds,
+          onExpandedRowIdsChange: (ids) => {
+            onExpandedRowIdsChange(ids);
+            setExpandedRowIds(ids);
+          },
+          showExpandAll: true,
+        }}
+      />
+    </DataGrid>
+  );
+}
+
+export const ControlledDetailsPanelExpansion: StoryObj<{
+  onExpandedRowIdsChange: ReturnType<typeof fn>;
+}> = {
+  args: {
+    onExpandedRowIdsChange: fn(),
+  },
+  render: (props) => <ControlledDetailsPanel {...props} />,
+  play: async ({ canvasElement, args }) => {
+    args.onExpandedRowIdsChange.mockClear();
+    const canvas = within(canvasElement);
+
+    expect(canvas.getByText("Detaljer for Alpha")).toBeInTheDocument();
+    expect(canvas.queryByText("Detaljer for Beta")).not.toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: "Vis alle rader" }),
+    ).toHaveAttribute("aria-expanded", "false");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Vis detaljer" }));
+
+    expect(args.onExpandedRowIdsChange).toHaveBeenLastCalledWith(["a", "b"]);
+    expect(canvas.getByText("Detaljer for Beta")).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Skjul alle rader" }),
+    );
+
+    expect(args.onExpandedRowIdsChange).toHaveBeenLastCalledWith([]);
+    expect(canvas.queryByText("Detaljer for Alpha")).not.toBeInTheDocument();
+    expect(canvas.queryByText("Detaljer for Beta")).not.toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis alle rader" }),
+    );
+
+    expect(args.onExpandedRowIdsChange).toHaveBeenLastCalledWith(["a", "b"]);
+    expect(canvas.queryByText("Detaljer for Gamma")).not.toBeInTheDocument();
+    expect(args.onExpandedRowIdsChange).toHaveBeenCalledTimes(3);
   },
 };

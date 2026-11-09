@@ -144,9 +144,19 @@ function DataTableDetailsPanelProvider<T>({
     [isDetailsPanelExpandableById, setExpandedIds],
   );
 
-  const isAllExpanded =
-    expandableIds.size > 0 &&
-    Array.from(expandableIds).every((key) => expandedIds.has(key));
+  const isAllExpanded = React.useMemo(() => {
+    if (expandableIds.size === 0) {
+      return false;
+    }
+
+    for (const id of expandableIds) {
+      if (!expandedIds.has(id)) {
+        return false;
+      }
+    }
+
+    return true;
+  }, [expandableIds, expandedIds]);
 
   const toggleAll = useCallback(() => {
     setExpandedIds(isAllExpanded ? new Set() : new Set(expandableIds));
