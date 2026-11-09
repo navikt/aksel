@@ -6584,19 +6584,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/color-input@npm:6.1.8":
-  version: 6.1.8
-  resolution: "@sanity/color-input@npm:6.1.8"
+"@sanity/color-input@npm:6.1.9":
+  version: 6.1.9
+  resolution: "@sanity/color-input@npm:6.1.9"
   dependencies:
     "@sanity/icons": "npm:^5.2.3"
-    "@sanity/ui": "npm:^4.4.5"
+    "@sanity/ui": "npm:^4.4.9"
     "@vanilla-extract/dynamic": "npm:^2.1.5"
     lodash-es: "npm:^4.18.1"
     tinycolor2: "npm:^1.6.0"
   peerDependencies:
     react: ^19.2
     sanity: ^5 || ^6.0.0-0
-  checksum: 10/5de1519e3a4a349c63016ad0066a572cfe25bce126156ba6a46df8da0075777624acb612516ac89204bfab5d20e4b7967fd0ed5784a6ac24e0029f5d46612641
+  checksum: 10/34c1cd0830b581ddf37dd4cd220816234a0fbb187ccad4bf30cd20072aaa82a257ef1280e56a833816d8847f5a95ad73edca9443d771444a8bc93b76c205cd84
   languageName: node
   linkType: hard
 
@@ -6673,9 +6673,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/export@npm:7.0.3":
-  version: 7.0.3
-  resolution: "@sanity/export@npm:7.0.3"
+"@sanity/export@npm:7.1.0":
+  version: 7.1.0
+  resolution: "@sanity/export@npm:7.1.0"
   dependencies:
     get-it: "npm:^9.5.4"
     modern-tar: "npm:^0.8.5"
@@ -6683,7 +6683,7 @@ __metadata:
     p-queue: "npm:^9.0.1"
   bin:
     detect-corrupt: bin/detect-corrupt.js
-  checksum: 10/465e4732307af43849253b473a70421d40afec1cd6b713d19048813b2fb8c744fe4ca99beec50796203d0cee12fcdcfa2e7517eeca66a54b5d0611af7252af7f
+  checksum: 10/bcc7bb315ba333e6a62865a456fc6af32ca6c1e4e77c8adbce7de23ae93da019fe35d31d55dad7bef67db97c74b89459207652200160006f25be96dd6c0e3fae
   languageName: node
   linkType: hard
 
@@ -6703,16 +6703,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/functions@npm:1.10.1":
-  version: 1.10.1
-  resolution: "@sanity/functions@npm:1.10.1"
+"@sanity/functions@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@sanity/functions@npm:1.11.0"
   peerDependencies:
     "@aws-lite/client": ^0.24.1
     "@aws-lite/dynamodb": ^0.3.9
     "@aws-lite/lambda": ^0.1.5
     "@aws-lite/sns": ^0.0.8
     "@aws-lite/sqs": ^0.2.4
-  checksum: 10/395637c288127e5bab5b7a2301df96a4406e78c166bbca5e3e60d11d6e3c93f4cf6fdf6fa915fbfa31dea179fe80365c7adde0f88601068de325e5a2aeb3cb6b
+  checksum: 10/ee6e6da36e3caf5fa841188ec5591c3939b01b53f1698b34f97ba168f5e39c0c3a4d224907f515e44e6ea5427a680f5478627a2b7ef473ef71a5ed59d1607a1b
   languageName: node
   linkType: hard
 
@@ -9755,9 +9755,9 @@ __metadata:
     "@sanity/blueprints": "npm:0.28.0"
     "@sanity/client": "npm:7.27.0"
     "@sanity/code-input": "npm:7.3.8"
-    "@sanity/color-input": "npm:6.1.8"
-    "@sanity/export": "npm:7.0.3"
-    "@sanity/functions": "npm:1.10.1"
+    "@sanity/color-input": "npm:6.1.9"
+    "@sanity/export": "npm:7.1.0"
+    "@sanity/functions": "npm:1.11.0"
     "@sanity/image-url": "npm:2.1.1"
     "@sanity/locale-nb-no": "npm:1.1.39"
     "@sanity/preview-url-secret": "npm:4.1.5"
@@ -9773,7 +9773,7 @@ __metadata:
     react-rx: "npm:^5.1.1"
     rxjs: "npm:^7.8.2"
     sanity: "npm:6.17.0"
-    sanity-plugin-iframe-pane: "npm:5.0.41"
+    sanity-plugin-iframe-pane: "npm:5.0.42"
     sanity-plugin-media: "npm:6.1.8"
     sanity-plugin-references: "npm:1.2.0"
     styled-components: "npm:6.4.4"
@@ -17480,7 +17480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion@npm:^14.2.0, motion@npm:^14.3.0":
+"motion@npm:^14.3.0":
   version: 14.3.1
   resolution: "motion@npm:14.3.1"
   dependencies:
@@ -20711,23 +20711,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-iframe-pane@npm:5.0.41":
-  version: 5.0.41
-  resolution: "sanity-plugin-iframe-pane@npm:5.0.41"
+"sanity-plugin-iframe-pane@npm:5.0.42":
+  version: 5.0.42
+  resolution: "sanity-plugin-iframe-pane@npm:5.0.42"
   dependencies:
     "@sanity/client": "npm:^8.9.0"
     "@sanity/icons": "npm:^5.2.3"
     "@sanity/preview-url-secret": "npm:^4.1.5"
     "@sanity/ui": "npm:^4.4.9"
     dequal: "npm:^2.0.3"
-    motion: "npm:^14.2.0"
+    motion: "npm:^14.3.0"
     suspend-react: "npm:^0.1.3"
   peerDependencies:
     react: ^19.2
     react-dom: ^19.2
     sanity: ^5 || ^6.0.0-0
     styled-components: ^6.1
-  checksum: 10/63b9ea51295e4b3f331216ed487a30d588253055c139f93c1bd1d535dc400e3619a93c757e99e19c705f26ab7f8c38751fdbc1db2e848c68d086253fa7385d34
+  checksum: 10/fbfc6d89ce4b3614d18879da3b87b098f8f5e410a3358c3d9a105b13fb8a3a0c97fec9af27a1d87bff752646ac74e5c611ed4e1766ee2ce2f37239bcc07fa84c
   languageName: node
   linkType: hard
 
