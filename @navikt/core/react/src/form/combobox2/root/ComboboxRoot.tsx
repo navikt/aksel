@@ -140,6 +140,7 @@ export function ComboboxRoot<
             (onToggleOption as ComboboxRootProps["onToggleOption"])(...args);
             if (!multiple) {
               setOpen(false);
+              triggerRef.current?.focus();
             }
           },
           [onToggleOption, multiple],
