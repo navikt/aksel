@@ -4,15 +4,11 @@ import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 import { DataGridPaginationNavigation } from "../navigation/DataGridPaginationNavigation";
 import { DataGridPaginationPageSize } from "../page-size/DataGridPaginationPageSize";
-import { DataGridPaginationSummary } from "../summary/DataGridPaginationSummary";
 
-interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Custom layout built from the pagination parts.
-   * Renders the preset layout when omitted.
-   */
-  children?: React.ReactNode;
-}
+type DataGridPaginationProps = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "children"
+>;
 
 /**
  * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
@@ -28,7 +24,7 @@ interface DataGridPaginationProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```
  */
 const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
-  ({ children, className, ...rest }, forwardedRef) => {
+  ({ className, ...rest }, forwardedRef) => {
     useDataGridRootPaginationContext();
 
     return (
@@ -36,15 +32,9 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
         {...rest}
         ref={forwardedRef}
         className={cl("aksel-data-grid__pagination", className)}
-        data-layout={children ? "custom" : "preset"}
       >
-        {children ?? (
-          <>
-            <DataGridPaginationSummary />
-            <DataGridPaginationPageSize />
-            <DataGridPaginationNavigation />
-          </>
-        )}
+        <DataGridPaginationPageSize />
+        <DataGridPaginationNavigation />
       </div>
     );
   },

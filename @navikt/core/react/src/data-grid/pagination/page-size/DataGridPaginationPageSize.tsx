@@ -1,12 +1,13 @@
 import React, { forwardRef, useMemo } from "react";
-import { Select, type SelectProps } from "../../../form/select";
-import { cl } from "../../../utils/helpers";
+import { CheckmarkHeavyIcon, ChevronDownIcon } from "@navikt/aksel-icons";
+import { ActionMenu } from "../../../action-menu";
+import { Button, type ButtonProps } from "../../../button";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
 type DataGridPaginationPageSizeProps = Omit<
-  SelectProps,
-  "children" | "label" | "value" | "onChange"
+  ButtonProps,
+  "children" | "size" | "variant" | "icon" | "iconPosition"
 >;
 
 /**
@@ -24,15 +25,30 @@ type DataGridPaginationPageSizeProps = Omit<
  * ```
  */
 const DataGridPaginationPageSize = forwardRef<
-  HTMLSelectElement,
+  HTMLButtonElement,
   DataGridPaginationPageSizeProps
->(({ className, style, ...rest }, forwardedRef) => {
+>((restProps, forwardedRef) => {
   const { pageSize, pageSizeOptions, setPageSize } =
     useDataGridRootPaginationContext(
       true,
       "[Aksel] DataGrid.PaginationPageSize must be used within <DataGrid pagination={...}>",
     );
+
+  const { from, to, totalRows } = useDataGridRootPaginationContext(
+    true,
+    "[Aksel] DataGrid.PaginationSummary must be used within <DataGrid pagination={...}>",
+  );
   const translate = useI18n("DataGrid");
+
+  let text: string;
+  if (to === 0) {
+    text = translate("Pagination.summaryEmpty");
+  } else if (totalRows === undefined) {
+    text = translate("Pagination.summaryUnknownTotal", { from, to });
+  } else {
+    text = translate("Pagination.summary", { from, to, totalRows });
+  }
+
   const options = useMemo(
     () =>
       pageSizeOptions.includes(pageSize)
@@ -42,22 +58,36 @@ const DataGridPaginationPageSize = forwardRef<
   );
 
   return (
-    <Select
-      {...rest}
-      ref={forwardedRef}
-      className={cl("aksel-data-grid__pagination-page-size", className)}
-      label={translate("Pagination.pageSize")}
-      size="small"
-      style={{ width: "auto", ...style }}
-      value={pageSize}
-      onChange={(event) => setPageSize(Number(event.currentTarget.value))}
-    >
-      {options.map((size) => (
-        <option key={size} value={size}>
-          {size}
-        </option>
-      ))}
-    </Select>
+    <ActionMenu>
+      <ActionMenu.Trigger>
+        <Button
+          ref={forwardedRef}
+          {...restProps}
+          variant="tertiary"
+          data-color="neutral"
+          size="small"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          {text}
+        </Button>
+      </ActionMenu.Trigger>
+      <ActionMenu.Content>
+        {options.map((size) => (
+          <ActionMenu.Item
+            key={size}
+            onSelect={() => setPageSize(size)}
+            role="menuitemcheckbox"
+            aria-checked={pageSize === size}
+            icon={
+              pageSize === size ? <CheckmarkHeavyIcon aria-hidden /> : <></>
+            }
+          >
+            {size}
+          </ActionMenu.Item>
+        ))}
+      </ActionMenu.Content>
+    </ActionMenu>
   );
 });
 

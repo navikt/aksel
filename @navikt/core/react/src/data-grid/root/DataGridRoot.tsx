@@ -9,7 +9,6 @@ import { DataGridPaginationInternal } from "../pagination/DataGridPaginationInte
 import { DataGridPaginationNavigation } from "../pagination/navigation/DataGridPaginationNavigation";
 import { DataGridPaginationPageSize } from "../pagination/page-size/DataGridPaginationPageSize";
 import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
-import { DataGridPaginationSummary } from "../pagination/summary/DataGridPaginationSummary";
 import type {
   DataGridPaginationConfig,
   DataGridSettings,
@@ -123,10 +122,6 @@ interface DataGridComponent {
    */
   Pagination: typeof DataGridPagination;
   /**
-   * @see 🏷️ {@link DataGridPaginationSummary.Props}
-   */
-  PaginationSummary: typeof DataGridPaginationSummary;
-  /**
    * @see 🏷️ {@link DataGridPaginationPageSize.Props}
    */
   PaginationPageSize: typeof DataGridPaginationPageSize;
@@ -210,7 +205,6 @@ const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 DataGrid.Pagination = DataGridPagination;
-DataGrid.PaginationSummary = DataGridPaginationSummary;
 DataGrid.PaginationPageSize = DataGridPaginationPageSize;
 DataGrid.PaginationNavigation = DataGridPaginationNavigation;
 
@@ -243,12 +237,6 @@ export namespace DataGrid {
   export namespace Pagination {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPagination.Props;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  export namespace PaginationSummary {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
-    export type Props = DataGridPaginationSummary.Props;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-namespace
