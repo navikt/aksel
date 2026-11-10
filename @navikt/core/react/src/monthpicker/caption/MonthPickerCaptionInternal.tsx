@@ -27,10 +27,12 @@ const MonthPickerCaption = ({ popupLabelId }: MonthPickerCaptionProps) => {
     const fromYear = fromDate.getFullYear();
     const toDateYear = toDate.getFullYear();
     for (let currYear = fromYear; currYear <= toDateYear; currYear++) {
+      // oxlint-disable-next-line react/purity -- Only the year is used, so the result is stable.
       years.push(setYear(startOfYear(new Date()), currYear));
     }
 
     if (!years.map((x) => x.getFullYear()).includes(year.getFullYear())) {
+      // oxlint-disable-next-line react/purity -- Only the year is used, so the result is stable.
       years.push(setYear(startOfYear(new Date()), year.getFullYear()));
     }
     years.sort((a, b) => b.getFullYear() - a.getFullYear());

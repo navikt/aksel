@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useClientLayoutEffect } from "../../../utils-external";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { createStrictContext } from "../../../utils/helpers";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
@@ -29,7 +30,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const rootContext = useComboboxRootContext();
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useLayoutEffect(
+  useClientLayoutEffect(
     function onOpen() {
       const canHover = window.matchMedia("(hover: hover)").matches;
 
@@ -85,7 +86,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         filterString={filterString}
         setFilterString={(newString) => {
           setFilterString(newString);
-          setVirtuallyFocusedOptionValue("");
+          setVirtuallyFocusedOptionValue(""); // Remove virtual focus when filter string changes
         }}
       >
         {children}

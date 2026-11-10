@@ -112,6 +112,7 @@ export const ControlledMonthPreservesFocus: Story = {
     );
 
     return (
+      // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <fieldset
         onKeyDown={(event) => {
           if (event.key.toLowerCase() === "j") {

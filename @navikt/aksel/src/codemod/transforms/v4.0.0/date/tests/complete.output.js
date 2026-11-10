@@ -6,7 +6,6 @@ import {
   useRangeDatepicker,
 } from "@navikt/ds-react";
 
-/* eslint-disable react/jsx-no-undef */
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),

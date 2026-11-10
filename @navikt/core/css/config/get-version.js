@@ -1,3 +1,4 @@
+// oxlint-disable-next-line typescript/no-require-imports
 const packageJson = require("../package.json");
 
 /* Make package-version accessible for github-workflow */

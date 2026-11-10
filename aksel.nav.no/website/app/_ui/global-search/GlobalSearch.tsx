@@ -43,7 +43,7 @@ function GlobalSearch() {
   useEffect(() => {
     const initialQuery = readQueryParam();
     if (initialQuery) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // oxlint-disable-next-line react/set-state-in-effect
       setQuery(initialQuery);
       setOpen(true);
     }
@@ -56,12 +56,11 @@ function GlobalSearch() {
 
     startTransition(async () => {
       try {
-
         if (!query) {
           setQueryResults(null);
           return;
         }
-        
+
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
           signal: controller.signal,
         });
