@@ -86,7 +86,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         filterString={filterString}
         setFilterString={(newString) => {
           setFilterString(newString);
-          setVirtuallyFocusedOptionValue("");
+          setVirtuallyFocusedOptionValue(""); // Remove virtual focus when filter string changes
         }}
       >
         {children}

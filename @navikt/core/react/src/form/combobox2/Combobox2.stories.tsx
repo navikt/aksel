@@ -89,7 +89,11 @@ type DefaultProps = Pick<
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  return <ComboboxSingle options={countries} {...props} />;
+  return (
+    <div style={{ minHeight: "300px" }}>
+      <ComboboxSingle options={countries} {...props} />
+    </div>
+  );
 };
 Default.args = {
   label: "Velg land",
@@ -272,6 +276,7 @@ export const Composition = () => {
           : [...prev, option.value],
       );
     },
+    multiple: true,
   };
 
   return (

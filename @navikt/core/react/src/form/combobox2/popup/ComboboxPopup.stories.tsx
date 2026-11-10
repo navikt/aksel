@@ -62,6 +62,7 @@ export const Default = () => {
   return (
     <ComboboxRoot
       defaultOpen
+      multiple
       options={options}
       value={value}
       onToggleOption={(option, newSelected) => {
@@ -173,6 +174,7 @@ export const CustomOptionRendering = () => {
   return (
     <ComboboxRoot
       defaultOpen
+      multiple
       options={options}
       value={value}
       onToggleOption={(option, isSelected) => {
@@ -259,6 +261,7 @@ export const ControlledInput = () => {
   return (
     <ComboboxRoot
       defaultOpen
+      multiple
       options={filteredOptions}
       value={value}
       onToggleOption={(option) => {

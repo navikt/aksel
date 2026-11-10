@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useRef } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -34,40 +34,48 @@ function ComboboxList<
     });
   }, []);*/
 
+  const liveRegionRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Listbox.Options className="aksel-combobox2__list">
-      {/*isPending && (
+    <>
+      <Listbox.Options className="aksel-combobox2__list">
+        {/*isPending && (
         <div className="aksel-combobox2__loading" role="status">
           Laster...
         </div>
       )*/}
-      <ComboboxListContent<T>>{children}</ComboboxListContent>
-    </Listbox.Options>
+        <ComboboxListContent<T> liveRegionRef={liveRegionRef}>
+          {children}
+        </ComboboxListContent>
+      </Listbox.Options>
+      <div ref={liveRegionRef} className="aksel-sr-only" role="status" />
+    </>
   );
+}
+
+interface ComboboxListContentProps<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+> extends ComboboxListProps<T> {
+  liveRegionRef: React.RefObject<HTMLDivElement | null>;
 }
 
 function ComboboxListContent<
   T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
->({ children }: ComboboxListProps<T>) {
+>({ children, liveRegionRef }: ComboboxListContentProps<T>) {
   const { virtuallyFocusedOptionValue, filterString } =
     useComboboxPopupContext();
-  const { setOpen, options, value, onToggleOption, multiple, triggerRef } =
-    useComboboxRootContext();
-  const memoizedOnToggleOption = useEventCallback(onToggleOption);
+  const {
+    options,
+    value, // Selected options
+    onToggleOption: originalOnToggleOption,
+  } = useComboboxRootContext();
+  const onToggleOption = useEventCallback(originalOnToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
-  const maybeAnnouceHits = useHitsAnnouncer(deferredFilterString);
-  const translate = useI18n("Combobox2");
-
-  const localOnToggleOption = useCallback(
-    (option: ComboboxOptionData, isSelected: boolean) => {
-      memoizedOnToggleOption(option, isSelected);
-      if (!multiple) {
-        setOpen(false);
-        triggerRef.current?.focus();
-      }
-    },
-    [memoizedOnToggleOption, multiple, triggerRef, setOpen],
+  const maybeAnnouceHits = useHitsAnnouncer(
+    deferredFilterString,
+    liveRegionRef,
   );
+  const translate = useI18n("Combobox2");
 
   if (children && typeof children !== "function") {
     return children;
@@ -97,7 +105,7 @@ function ComboboxListContent<
           <ComboboxOption
             key={option.value}
             option={option}
-            onToggleOption={localOnToggleOption}
+            onToggleOption={onToggleOption}
             isSelected={value.includes(option.value)}
             hasVirtualFocus={virtuallyFocusedOptionValue === option.value}
             highlightText={deferredFilterString}
@@ -110,7 +118,7 @@ function ComboboxListContent<
       <ComboboxOption
         key={optOrGroup.value}
         option={optOrGroup}
-        onToggleOption={localOnToggleOption}
+        onToggleOption={onToggleOption}
         isSelected={value.includes(optOrGroup.value)}
         hasVirtualFocus={virtuallyFocusedOptionValue === optOrGroup.value}
         highlightText={deferredFilterString} // TODO: Vurder å kunne slå av dette for bedre ytelse
@@ -126,26 +134,27 @@ function filterOptions<T extends ComboboxOptionData>(
   filterString: string,
 ): (T | ComboboxGroupData<T>)[] {
   const filterStringLowerCase = filterString.toLocaleLowerCase();
+  const results: (T | ComboboxGroupData<T>)[] = [];
 
-  return options
-    .map((optOrGroup) => {
-      if ("options" in optOrGroup) {
-        const matchingOptions = optOrGroup.options.filter((option) =>
-          option.label.toLocaleLowerCase().includes(filterStringLowerCase),
-        );
-        if (matchingOptions.length > 0) {
-          return { ...optOrGroup, options: matchingOptions };
+  for (const optOrGroup of options) {
+    if ("options" in optOrGroup) {
+      const matchingOptions: T[] = [];
+      for (const option of optOrGroup.options) {
+        if (option.label.toLocaleLowerCase().includes(filterStringLowerCase)) {
+          matchingOptions.push(option);
         }
-        return null;
       }
-      if (
-        optOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
-      ) {
-        return optOrGroup;
+      if (matchingOptions.length > 0) {
+        results.push({ ...optOrGroup, options: matchingOptions });
       }
-      return null;
-    })
-    .filter((option): option is T | ComboboxGroupData<T> => option !== null);
+    } else if (
+      optOrGroup.label.toLocaleLowerCase().includes(filterStringLowerCase)
+    ) {
+      results.push(optOrGroup);
+    }
+  }
+
+  return results;
 }
 
 export type { ComboboxListProps };
