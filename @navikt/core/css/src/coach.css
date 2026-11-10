@@ -1,0 +1,159 @@
+.aksel-coach__anchor {
+  z-index: 2000;
+  background: var(--ax-bg-raised);
+  box-shadow: var(--ax-shadow-dialog);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  border-radius: var(--ax-radius-12);
+  max-width: calc(100vw - var(--ax-space-24));
+  overflow: hidden;
+}
+
+.aksel-coach__anchor_content {
+  --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-16));
+
+  padding: var(--ax-space-16) var(--ax-space-20);
+  width: var(--__axc-coach__content-width);
+  /* Creates a small gutter between screen-edges on smaller devices */
+  max-width: calc(100vw - var(--ax-space-24));
+  overflow: auto;
+
+  &[data-coach-step-width="small"] {
+    --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-24));
+  }
+
+  &[data-coach-step-size="small"] {
+    padding: var(--ax-space-12) var(--ax-space-16);
+  }
+
+  @media (min-width: 480px) {
+    padding: var(--ax-space-16) var(--ax-space-20);
+  }
+}
+
+.aksel-coach__anchor_content,
+.aksel-coach__dialog-body {
+  --axc-coach__top-bar-padding-b-e: var(--ax-space-12);
+  --axc-coach__image-padding-b-e: var(--ax-space-16);
+
+  &[data-coach-step-size="small"] {
+    --axc-coach__top-bar-padding-b-e: var(--ax-space-8);
+    --axc-coach__image-padding-b-e: var(--ax-space-12);
+  }
+}
+
+.aksel-coach__top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--axc-coach__top-bar-padding-b-e);
+}
+
+.aksel-coach__title,
+.aksel-coach__description {
+  padding-block-end: var(--ax-space-8);
+}
+
+.aksel-coach__footer {
+  justify-content: flex-end;
+  display: flex;
+  flex-flow: wrap;
+  gap: var(--ax-space-8);
+  padding-block-start: var(--ax-space-16);
+}
+
+.aksel-coach__image-container {
+  overflow: hidden;
+  grid-area: image;
+  position: relative;
+  padding-block-end: var(--axc-coach__image-padding-b-e);
+  display: flex;
+
+  & :is(img, picture, svg, video) {
+    display: block;
+    object-fit: cover;
+    max-width: 100%;
+    height: 100%;
+    object-position: center;
+  }
+}
+
+.aksel-coach__mark-anchor {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: fit-content;
+  align-items: flex-start;
+}
+
+.aksel-coach__mark-anchor > .aksel-coach__mark-container {
+  position: absolute;
+}
+
+.aksel-coach__mark-container {
+  --__axc-coach__mark-size: var(--ax-space-16);
+  --__axc-coach__mark-color: var(--ax-bg-strong);
+
+  cursor: pointer;
+  position: relative;
+  width: calc(var(--__axc-coach__mark-size) * 2);
+  height: calc(var(--__axc-coach__mark-size) * 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ax-radius-full);
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.aksel-coach__mark {
+  position: absolute;
+  width: var(--__axc-coach__mark-size);
+  height: var(--__axc-coach__mark-size);
+  background-color: var(--__axc-coach__mark-color);
+  border-radius: var(--ax-radius-full);
+  border: 2px solid var(--ax-bg-default);
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
+}
+
+.aksel-coach__mark-pulse {
+  position: absolute;
+  width: var(--__axc-coach__mark-size);
+  height: var(--__axc-coach__mark-size);
+  background-color: var(--__axc-coach__mark-color);
+  border-radius: var(--ax-radius-full);
+  animation: pulse 3s infinite;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background: canvastext;
+    color: canvas;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.aksel-coach__backdrop {
+  /* Match the viewport coordinates used by the spotlight clip path. */
+  position: fixed;
+  pointer-events: none;
+  min-height: 100dvh;
+  inset: 0;
+  background-color: var(--ax-bg-overlay);
+  transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 2000;
+}
