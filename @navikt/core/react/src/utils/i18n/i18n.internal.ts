@@ -8,6 +8,8 @@ const internalTranslations = {
       pageSize: "Rader per side",
       pageOf: "Side {page} av {pageCount}",
       pageOfUnknownTotal: "Side {page}",
+      goToPage: "Gå til side",
+      ofPageCount: "av {pageCount}",
       first: "Første side",
       previous: "Forrige side",
       next: "Neste side",

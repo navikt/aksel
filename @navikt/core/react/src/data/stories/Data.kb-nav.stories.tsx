@@ -448,7 +448,9 @@ export const KeyboardCellClampedOnShorterLastPage: Story = {
     await user.click(nextPage);
     await user.keyboard("{/Shift}");
 
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+    expect(canvas.getByRole("textbox", { name: "Gå til side" })).toHaveValue(
+      "3",
+    );
     expect(within(table).getAllByRole("row")).toHaveLength(14);
     expect(nextPage).toHaveFocus();
 

@@ -811,6 +811,19 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
+.aksel-data-grid__pagination-navigation-page-input {
+  display: none;
+  align-items: center;
+  gap: var(--ax-space-8);
+  margin-inline: var(--ax-space-4);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  @media (min-width: 480px) {
+    display: inline-flex;
+  }
+}
+
 /* ------------------------- DataGrid.Pagination End ------------------------ */
 
 .aksel-data-table__attachment {

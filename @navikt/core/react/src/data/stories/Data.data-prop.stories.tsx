@@ -915,10 +915,14 @@ export const TestControlledSortResetsPage: Story = {
     for (const direction of ["ascending", "descending", "none"]) {
       await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
       await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-      expect(navigation.getByText("Side 3 av 14")).toBeInTheDocument();
+      expect(
+        navigation.getByRole("textbox", { name: "Gå til side" }),
+      ).toHaveValue("3");
       await userEvent.click(canvas.getByRole("button", { name: "Id" }));
 
-      expect(navigation.getByText("Side 1 av 14")).toBeInTheDocument();
+      expect(
+        navigation.getByRole("textbox", { name: "Gå til side" }),
+      ).toHaveValue("1");
       expect(canvas.getByRole("columnheader", { name: "Id" })).toHaveAttribute(
         "aria-sort",
         direction,

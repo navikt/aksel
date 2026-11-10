@@ -21,6 +21,17 @@ type Row = { id: number; name: string };
 
 const getRowId = (row: Row) => String(row.id);
 
+function expectPage(
+  canvas: ReturnType<typeof within>,
+  page: number,
+  pageCount: number,
+) {
+  expect(canvas.getByRole("textbox", { name: "Gå til side" })).toHaveValue(
+    String(page),
+  );
+  expect(canvas.getByText(`av ${pageCount}`)).toBeInTheDocument();
+}
+
 const rows: Row[] = Array.from({ length: 5 }, (_, index) => ({
   id: index + 1,
   name: `Person ${index + 1}`,
@@ -102,20 +113,20 @@ const testLoadingPreservesPage: Story["play"] = async ({ canvasElement }) => {
 
   expect(corrections).toHaveTextContent("0");
   await userEvent.click(completeLoad);
-  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expectPage(canvas, 3, 3);
   expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
 
   await userEvent.click(reload);
   expect(corrections).toHaveTextContent("0");
   await userEvent.click(completeLoad);
-  expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+  expectPage(canvas, 3, 3);
   expect(corrections).toHaveTextContent("0");
 
   await userEvent.click(reload);
   await userEvent.click(
     canvas.getByRole("button", { name: "Complete smaller load" }),
   );
-  expect(await canvas.findByText("Side 2 av 2")).toBeInTheDocument();
+  await waitFor(() => expectPage(canvas, 2, 2));
   expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
   expect(corrections).toHaveTextContent("1");
 };
@@ -308,19 +319,19 @@ export const ShiftJumpsToFirstAndLastPage: Story = {
     const canvas = within(canvasElement);
     const user = userEvent.setup();
 
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    expectPage(canvas, 1, 3);
     expect(canvas.getByRole("button", { name: "Neste side" })).toBeVisible();
 
     await user.keyboard("{Shift>}");
     await user.click(canvas.getByRole("button", { name: "Siste side" }));
-    expect(canvas.getByText("Side 3 av 3")).toBeInTheDocument();
+    expectPage(canvas, 3, 3);
     await user.click(canvas.getByRole("button", { name: "Første side" }));
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    expectPage(canvas, 1, 3);
     await user.keyboard("{/Shift}");
 
     expect(canvas.getByRole("button", { name: "Forrige side" })).toBeVisible();
     await user.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expectPage(canvas, 2, 3);
   },
 };
 
@@ -345,6 +356,9 @@ export const ShiftWithUnknownTotalGoesToNextPage: Story = {
     const user = userEvent.setup();
 
     expect(canvas.getByText("Side 1")).toBeInTheDocument();
+    expect(
+      canvas.queryByRole("textbox", { name: "Gå til side" }),
+    ).not.toBeInTheDocument();
     await user.keyboard("{Shift>}");
     expect(
       canvas.queryByRole("button", { name: "Siste side" }),
@@ -355,14 +369,60 @@ export const ShiftWithUnknownTotalGoesToNextPage: Story = {
   },
 };
 
+export const TypedPageJumpsToPage: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={manyRows}
+      getRowId={getRowId}
+      pagination={{ defaultPageSize: 20, pageSizeOptions: [20] }}
+    >
+      <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const user = userEvent.setup();
+    const input = canvas.getByRole("textbox", { name: "Gå til side" });
+
+    await user.click(input);
+    await user.keyboard("2{Enter}");
+    expectPage(canvas, 2, 3);
+    expect(canvas.getByRole("cell", { name: "Person 21" })).toBeInTheDocument();
+
+    await user.clear(input);
+    await user.keyboard("99{Enter}");
+    expectPage(canvas, 3, 3);
+
+    await user.clear(input);
+    await user.keyboard("0{Enter}");
+    expectPage(canvas, 1, 3);
+
+    await user.clear(input);
+    await user.keyboard("a2b");
+    expect(input).toHaveValue("2");
+    await user.keyboard("{Escape}");
+    expectPage(canvas, 1, 3);
+
+    await user.clear(input);
+    await user.keyboard("3");
+    await user.tab();
+    expectPage(canvas, 1, 3);
+
+    await user.clear(input);
+    await user.keyboard("{Enter}");
+    expectPage(canvas, 1, 3);
+  },
+};
+
 export const ServerSortDoesNotResetPage: Story = {
   render: () => <ServerResetGrid />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    expect(canvas.getByText("Side 1 av 3")).toBeInTheDocument();
+    expectPage(canvas, 1, 3);
     await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expectPage(canvas, 2, 3);
     expect(canvas.getByRole("cell", { name: "Person 01" })).toBeInTheDocument();
     expect(canvas.getByRole("cell", { name: "Person 20" })).toBeInTheDocument();
 
@@ -371,6 +431,6 @@ export const ServerSortDoesNotResetPage: Story = {
       "aria-sort",
       "ascending",
     );
-    expect(canvas.getByText("Side 2 av 3")).toBeInTheDocument();
+    expectPage(canvas, 2, 3);
   },
 };
