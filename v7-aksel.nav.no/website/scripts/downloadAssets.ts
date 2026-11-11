@@ -9,7 +9,7 @@ export async function downloadAssets(assets: any) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  console.log(`Found ${assets.length} assets to download.`);
+  console.info(`Found ${assets.length} assets to download.`);
 
   for (const asset of assets) {
     if (!asset.url) {
@@ -26,18 +26,18 @@ export async function downloadAssets(assets: any) {
     const dest = path.join(OUTPUT_DIR, filename);
 
     if (fs.existsSync(dest)) {
-      console.log(`Skipping ${filename} (already exists)`);
+      console.info(`Skipping ${filename} (already exists)`);
       continue;
     }
 
-    console.log(`Downloading ${filename}...`);
+    console.info(`Downloading ${filename}...`);
     try {
       await downloadFile(asset.url, dest);
     } catch (err) {
       console.error(`Error downloading ${filename}:`, err);
     }
   }
-  console.log("Done!");
+  console.info("Done!");
 }
 
 async function downloadFile(url: string, dest: string) {

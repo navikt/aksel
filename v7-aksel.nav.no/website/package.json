@@ -57,7 +57,7 @@
     "copyfiles": "^2.4.1",
     "cssnano": "7.1.1",
     "pino-pretty": "^10.0.0",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.32",
     "postcss-import": "^16.1.1",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
