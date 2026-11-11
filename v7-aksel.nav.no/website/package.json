@@ -39,7 +39,7 @@
     "remark-gfm": "^4.0.0",
     "sanity": "4.14.1",
     "server-only": "^0.0.1",
-    "sharp": "0.33.5",
+    "sharp": "0.35.5",
     "tailwindcss": "^3.3.3",
     "tinycolor2": "^1.6.0",
     "zod": "^3.22.4"
@@ -57,7 +57,7 @@
     "copyfiles": "^2.4.1",
     "cssnano": "7.1.1",
     "pino-pretty": "^10.0.0",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.32",
     "postcss-import": "^16.1.1",
     "tsx": "^4.20.6",
     "typescript": "5.9.3",
