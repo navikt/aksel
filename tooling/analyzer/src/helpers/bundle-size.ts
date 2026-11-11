@@ -4,8 +4,15 @@ import { join } from "node:path";
 import { gzipSync } from "node:zlib";
 import { rolldown } from "rolldown";
 
+/**
+ * Locale files are imported by Provider/Date.locale and would otherwise be
+ * counted in every component bundle. They are measured separately instead.
+ */
+const LOCALES_EXTERNAL = /[\\/]i18n[\\/]locales[\\/]/;
+
 async function getBundleSize(
   code: string,
+  options: { includeLocales?: boolean } = {},
 ): Promise<{ minified: number; gzip: number }> {
   const inputFile = join(process.cwd(), `.bundle-input-${randomUUID()}.js`);
   writeFileSync(inputFile, code);
@@ -16,7 +23,9 @@ async function getBundleSize(
   try {
     const minBundle = await rolldown({
       input: inputFile,
-      external: commonExternals,
+      external: options.includeLocales
+        ? commonExternals
+        : [...commonExternals, LOCALES_EXTERNAL],
       platform: "browser",
       treeshake: {
         moduleSideEffects: "no-external",
