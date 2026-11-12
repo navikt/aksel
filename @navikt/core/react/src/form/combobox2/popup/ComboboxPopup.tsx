@@ -34,7 +34,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
     function onOpen() {
       const canHover = window.matchMedia("(hover: hover)").matches;
 
-      // Virtually focus and scroll to first (selected) option
+      // Virtually focus (and scroll to) first (selected) option
       const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
         '[aria-selected="true"]',
       );
@@ -44,8 +44,8 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         }
         const scrollToSelectedOption = () =>
           selectedOptionElm.scrollIntoView({ block: "nearest" });
-        setTimeout(scrollToSelectedOption, 0); // For when opened in Floating
-        queueMicrotask(scrollToSelectedOption); // For when opened in Dialog
+        setTimeout(scrollToSelectedOption, 0); // Need a small delay to make it work in Floating
+        // See also ComboboxOverlay (special logic to account for virtual keyboard on mobile)
       } else {
         const firstOptionElm =
           ref.current?.querySelector<HTMLElement>('[role="option"]');

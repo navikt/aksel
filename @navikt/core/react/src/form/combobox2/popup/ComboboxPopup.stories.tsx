@@ -6,7 +6,12 @@ import { BodyShort } from "../../../typography";
 import { ComboboxFilter } from "../filter/ComboboxFilter";
 import { ComboboxList } from "../list/ComboboxList";
 import { ComboboxPopup } from "../popup/ComboboxPopup";
-import { ComboboxRoot } from "../root/ComboboxRoot";
+import {
+  type ComboboxGroupData,
+  type ComboboxOptionData,
+  ComboboxRoot,
+  type ComboboxRootProps,
+} from "../root/ComboboxRoot";
 
 const meta: Meta<typeof ComboboxRoot> = {
   title: "ds-react/Combobox2/Popup",
@@ -56,7 +61,11 @@ const groupedOptions: (MyGroup | MyOption)[] = [
   { label: "Ikke gruppert", value: "opt-01" } satisfies MyOption,
 ];
 
-export const Default = () => {
+type DefaultProps = Pick<
+  ComboboxRootProps<MyOption>,
+  "size" | "id" | "disabled"
+>;
+export const Default: StoryFn<DefaultProps> = (props) => {
   const [value, setValue] = useState<MyOption["value"][]>(["opt-3"]);
 
   return (
@@ -72,6 +81,7 @@ export const Default = () => {
             : prev.filter((v) => v !== option.value),
         );
       }}
+      {...props}
     >
       <ComboboxPopup>
         <ComboboxFilter />
@@ -80,54 +90,85 @@ export const Default = () => {
     </ComboboxRoot>
   );
 };
+Default.args = {
+  disabled: false,
+};
+Default.argTypes = {
+  size: {
+    control: { type: "select" },
+    options: ["small", "medium"],
+  },
+  id: {
+    control: { type: "text" },
+  },
+};
+
+function BasicComboboxPopup<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
+    MyOption,
+>(props: Partial<ComboboxRootProps<T>>) {
+  const [value, setValue] = useState(["opt-3"]);
+
+  return (
+    <ComboboxRoot
+      defaultOpen
+      multiple
+      options={options as T[]}
+      value={value}
+      onToggleOption={(option, newSelected) => {
+        setValue((prev) =>
+          newSelected
+            ? [...prev, option.value]
+            : prev.filter((v) => v !== option.value),
+        );
+      }}
+      {...props}
+    >
+      <ComboboxPopup>
+        <ComboboxFilter />
+        <ComboboxList />
+      </ComboboxPopup>
+    </ComboboxRoot>
+  );
+}
 
 export const SingleSelect = () => {
   const [selectedOption, setSelectedOption] = useState<MyOption>(options[2]);
 
   return (
-    <ComboboxRoot
-      defaultOpen
+    <BasicComboboxPopup
+      multiple={false}
       options={options}
       value={[selectedOption.value]}
       onToggleOption={setSelectedOption}
-    >
-      <ComboboxPopup>
-        <ComboboxFilter />
-        <ComboboxList />
-      </ComboboxPopup>
-    </ComboboxRoot>
+    />
+  );
+};
+
+export const Disabled = () => {
+  // TODO: Support disabled
+  const [disabled, setDisabled] = useState(true);
+  return (
+    <>
+      <BasicComboboxPopup disabled={disabled} />
+      <button
+        type="button"
+        onClick={() => document.querySelector("input")?.focus()}
+      >
+        Fokuser input
+      </button>
+      <button type="button" onClick={() => setDisabled(!disabled)}>
+        Toggle disabled
+      </button>
+    </>
   );
 };
 
 export const Groups = () => {
-  const [selectedOption, setSelectedOption] = useState<MyOption>(options[2]);
-
   return (
     <HStack gap="space-56">
-      <ComboboxRoot
-        defaultOpen
-        options={groupedOptions}
-        value={[selectedOption.value]}
-        onToggleOption={setSelectedOption}
-      >
-        <ComboboxPopup>
-          <ComboboxFilter />
-          <ComboboxList />
-        </ComboboxPopup>
-      </ComboboxRoot>
-
-      <ComboboxRoot
-        size="small"
-        defaultOpen
-        options={groupedOptions}
-        value={[selectedOption.value]}
-        onToggleOption={setSelectedOption}
-      >
-        <ComboboxPopup>
-          <ComboboxFilter />
-          <ComboboxList />
-        </ComboboxPopup>
-      </ComboboxRoot>
+      <BasicComboboxPopup options={groupedOptions} />
+      <BasicComboboxPopup options={groupedOptions} size="small" />
     </HStack>
   );
 };

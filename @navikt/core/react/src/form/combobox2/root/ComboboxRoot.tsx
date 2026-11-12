@@ -137,13 +137,16 @@ export function ComboboxRoot<
         value={value}
         onToggleOption={useCallback(
           (...args) => {
+            if (disabled) {
+              return;
+            }
             (onToggleOption as ComboboxRootProps["onToggleOption"])(...args);
             if (!multiple) {
               setOpen(false);
               triggerRef.current?.focus();
             }
           },
-          [onToggleOption, multiple],
+          [onToggleOption, multiple, disabled],
         )}
         size={size}
         disabled={disabled}

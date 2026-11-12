@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
@@ -37,10 +37,14 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
         // We don't have trigger as `safeZone` because we want to close when trigger is focused.
         // To avoid immediately re-opening the popup when trigger is clicked (blur closes, click opens),
         // we avoid closing here if the click is on the trigger. The trigger will handle closing in that case.
+        // (A connected <label> also acts like a trigger.)
+        const trigger = rootContext.triggerRef.current;
         if (
           event.type === "AKSEL_POINTER_DOWN_OUTSIDE" &&
           event.target instanceof HTMLElement &&
-          rootContext.triggerRef.current?.contains(event.target)
+          (trigger?.contains(event.target) ||
+            (event.target instanceof HTMLLabelElement &&
+              document.getElementById(event.target.htmlFor) === trigger))
         ) {
           return;
         }
@@ -82,6 +86,8 @@ function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
     subscribeToResize,
     getVisualViewportHeight,
   );
+  const ref = useRef<HTMLDivElement | null>(null);
+  const scrollOnResizeRef = useRef(false);
 
   useEffect(() => {
     // See "Overlay" section in CSS file for context. This handles the case when
@@ -94,10 +100,34 @@ function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
     }
   }, [open]);
 
+  /**
+   * Scroll to first selected option after virtual keyboard has appeared.
+   * See also useClientLayoutEffect in ComboboxPopup.
+   */
+  useEffect(() => {
+    if (open) {
+      scrollOnResizeRef.current = true;
+      setTimeout(() => {
+        scrollOnResizeRef.current = false;
+      }, 500); // We assume visual viewport stabilizes within 500ms
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!ref.current || !open || !scrollOnResizeRef.current) {
+      return;
+    }
+    const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
+      '[aria-selected="true"]',
+    );
+    selectedOptionElm?.scrollIntoView({ block: "center" }); // Don't use "nearest" (inconsistent)
+  }, [visualViewportHeight, open]);
+
   return (
     <Dialog size="small" open={open} onOpenChange={onOpenChange}>
       <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
         <div
+          ref={ref}
           className="aksel-combobox2__modal-inner"
           // The reported height is sometimes a bit too small,
           // so we let the dialog fill the entire normal viewport,
