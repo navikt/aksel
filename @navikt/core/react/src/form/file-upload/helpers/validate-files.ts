@@ -7,7 +7,7 @@ import {
 import { isAcceptedFileType } from "./is-accepted-file-type";
 import { isAcceptedSize } from "./is-accepted-size";
 
-export const validateFiles = (
+const validateFiles = (
   files: File[],
   accept?: string,
   validator?: FileUploadBaseProps["validator"],
@@ -60,3 +60,5 @@ export const validateFiles = (
     },
   };
 };
+
+export { validateFiles };

@@ -5,8 +5,8 @@ import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
 import { formatFileSize } from "../helpers/format-file-size";
-import { ItemActionField } from "../item-action-field/ItemActionField";
-import { ItemHeader } from "../item-header/ItemHeader";
+import { FileUploadItemActionFieldInternal } from "../item-action-field/FileUploadItemActionFieldInternal";
+import { FileUploadItemHeaderInternal } from "../item-header/FileUploadItemHeaderInternal";
 import { useFileUploadTranslation } from "../root/FileUploadRoot.context";
 import type { FileItem } from "./FileUploadItem.types";
 
@@ -62,7 +62,7 @@ interface FileUploadItemProps extends React.HTMLAttributes<HTMLDivElement> {
   translations?: ComponentTranslation<"FileUpload">["item"];
 }
 
-export const FileUploadItem: OverridableComponent<
+const FileUploadItem: OverridableComponent<
   FileUploadItemProps,
   HTMLDivElement
 > = forwardRef(
@@ -111,7 +111,11 @@ export const FileUploadItem: OverridableComponent<
       >
         <div className="aksel-file-item__inner">
           <BodyLong as="div" className="aksel-file-item__file-info">
-            <ItemHeader file={file} href={href} onClick={onFileClick} />
+            <FileUploadItemHeaderInternal
+              file={file}
+              href={href}
+              onClick={onFileClick}
+            />
             <BodyShort as="div" size="small">
               {getStatusText()}
             </BodyShort>
@@ -127,7 +131,7 @@ export const FileUploadItem: OverridableComponent<
               )}
             </div>
           </BodyLong>
-          <ItemActionField
+          <FileUploadItemActionFieldInternal
             isLoading={status !== "idle"}
             button={button}
             translate={translate}
@@ -138,5 +142,5 @@ export const FileUploadItem: OverridableComponent<
   },
 );
 
-export default FileUploadItem;
+export { FileUploadItem };
 export type { FileUploadItemProps };

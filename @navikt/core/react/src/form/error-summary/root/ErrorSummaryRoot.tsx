@@ -1,11 +1,14 @@
 import React, { type HTMLAttributes, forwardRef, useRef } from "react";
-import { BodyShort, Heading } from "../../typography";
-import { cl, composeEventHandlers } from "../../utils/helpers";
-import { useMergeRefs } from "../../utils/hooks";
-import { useI18n } from "../../utils/i18n/i18n.hooks";
-import ErrorSummaryItem from "./ErrorSummaryItem";
+import { BodyShort, Heading } from "../../../typography";
+import { cl, composeEventHandlers } from "../../../utils/helpers";
+import { useMergeRefs } from "../../../utils/hooks";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
+import {
+  ErrorSummaryItem,
+  type ErrorSummaryItemProps,
+} from "../item/ErrorSummaryItem";
 
-export interface ErrorSummaryProps extends Omit<
+interface ErrorSummaryProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "tabIndex"
 > {
@@ -30,43 +33,7 @@ export interface ErrorSummaryProps extends Omit<
   headingTag?: React.ElementType<any>;
 }
 
-interface ErrorSummaryComponent extends React.ForwardRefExoticComponent<
-  ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * Error message with link to field.
-   *
-   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
-   *
-   * @example
-   * ```jsx
-   * <ErrorSummary.Item href="#id-til-alderfelt">
-   *   Felt må fylles ut med alder
-   * </ErrorSummary.Item>
-   * ```
-   */
-  Item: typeof ErrorSummaryItem;
-}
-
-/**
- * Summary of errors in a form.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/errorsummary)
- * @see 🏷️ {@link ErrorSummaryProps}
- *
- * @example
- * ```jsx
- * <ErrorSummary heading="Du må rette disse feilene før du kan sende inn søknaden:">
- *   <ErrorSummary.Item href="#1">
- *     Felt må fylles ut med alder
- *   </ErrorSummary.Item>
- *   <ErrorSummary.Item href="#2">
- *     Tekstfeltet må ha en godkjent e-post
- *   </ErrorSummary.Item>
- * </ErrorSummary>
- * ```
- */
-export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
+const ErrorSummaryRoot = forwardRef<HTMLDivElement, ErrorSummaryProps>(
   (
     {
       children,
@@ -115,8 +82,41 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       </div>
     );
   },
-) as ErrorSummaryComponent;
+);
 
-ErrorSummary.Item = ErrorSummaryItem;
+/**
+ * Summary of errors in a form.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/errorsummary)
+ * @see 🏷️ {@link ErrorSummaryProps}
+ *
+ * @example
+ * ```jsx
+ * <ErrorSummary heading="Du må rette disse feilene før du kan sende inn søknaden:">
+ *   <ErrorSummary.Item href="#1">
+ *     Felt må fylles ut med alder
+ *   </ErrorSummary.Item>
+ *   <ErrorSummary.Item href="#2">
+ *     Tekstfeltet må ha en godkjent e-post
+ *   </ErrorSummary.Item>
+ * </ErrorSummary>
+ * ```
+ */
+const ErrorSummary = Object.assign(ErrorSummaryRoot, {
+  /**
+   * Error message with link to field.
+   *
+   * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
+   *
+   * @example
+   * ```jsx
+   * <ErrorSummary.Item href="#id-til-alderfelt">
+   *   Felt må fylles ut med alder
+   * </ErrorSummary.Item>
+   * ```
+   */
+  Item: ErrorSummaryItem,
+});
 
-export default ErrorSummary;
+export { ErrorSummary, ErrorSummaryItem };
+export type { ErrorSummaryProps, ErrorSummaryItemProps };

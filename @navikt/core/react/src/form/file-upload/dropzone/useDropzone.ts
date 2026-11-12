@@ -1,12 +1,12 @@
 import { useState } from "react";
-import type { UseFileUploadProps } from "../hooks/useFileUpload";
+import type { UseFileUploadProps } from "../root/useFileUpload";
 
 interface Props {
   upload: (fileList: FileList) => void;
   disabled: UseFileUploadProps["disabled"];
 }
 
-export const useDropzone = ({ upload, disabled }: Props) => {
+const useDropzone = ({ upload, disabled }: Props) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   const onDragEnter = () => {
@@ -41,3 +41,5 @@ export const useDropzone = ({ upload, disabled }: Props) => {
     onDrop: disabled ? undefined : onDrop,
   };
 };
+
+export { useDropzone };

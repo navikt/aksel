@@ -1,15 +1,19 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { Collapsible } from "../../collapsible";
-import { Stepper, type StepperStepProps } from "../../legacy/stepper";
-import { HStack } from "../../primitives/stack";
-import { ProgressBar } from "../../progress-bar";
-import { BodyShort } from "../../typography";
-import { useI18n } from "../../utils/i18n/i18n.hooks";
-import type { ComponentTranslation } from "../../utils/i18n/i18n.types";
+import { Button } from "../../../button";
+import { Collapsible } from "../../../collapsible";
+import { Stepper } from "../../../legacy/stepper";
+import { HStack } from "../../../primitives/stack";
+import { ProgressBar } from "../../../progress-bar";
+import { BodyShort } from "../../../typography";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
+import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
+import {
+  FormProgressStep,
+  type FormProgressStepProps,
+} from "../step/FormProgressStep";
 
-export interface FormProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FormProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Total number of steps.
    */
@@ -50,31 +54,7 @@ export interface FormProgressProps extends React.HTMLAttributes<HTMLDivElement> 
   translations?: ComponentTranslation<"FormProgress">;
 }
 
-export type FormProgressStepProps = StepperStepProps;
-
-interface FormProgressComponent extends React.ForwardRefExoticComponent<
-  FormProgressProps & React.RefAttributes<HTMLDivElement>
-> {
-  /**
-   * To be used inside `<FormProgress>`.
-   */
-  Step: typeof Stepper.Step;
-}
-
-/**
- * Component for visualizing progression in a form with multiple steps.
- *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formprogress)
- * @see 🏷️ {@link FormProgressProps}
- *
- * @example
- * <FormProgress activeStep={2} totalSteps={3}>
- *   <FormProgress.Step completed href="#">Children</FormProgress.Step>
- *   <FormProgress.Step href="#">Personal information</FormProgress.Step>
- *   <FormProgress.Step interactive={false}>Summary</FormProgress.Step>
- * </FormProgress>
- */
-export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
+const FormProgressRoot = forwardRef<HTMLDivElement, FormProgressProps>(
   (
     {
       totalSteps,
@@ -139,10 +119,28 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
       </div>
     );
   },
-) as FormProgressComponent;
+);
 
-FormProgress.Step = Stepper.Step;
+/**
+ * Component for visualizing progression in a form with multiple steps.
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formprogress)
+ * @see 🏷️ {@link FormProgressProps}
+ *
+ * @example
+ * <FormProgress activeStep={2} totalSteps={3}>
+ *   <FormProgress.Step completed href="#">Children</FormProgress.Step>
+ *   <FormProgress.Step href="#">Personal information</FormProgress.Step>
+ *   <FormProgress.Step interactive={false}>Summary</FormProgress.Step>
+ * </FormProgress>
+ */
+const FormProgress = Object.assign(FormProgressRoot, {
+  /**
+   * To be used inside `<FormProgress>`.
+   * @see 🏷️ {@link FormProgressStepProps}
+   */
+  Step: FormProgressStep,
+});
 
-export const FormProgressStep = Stepper.Step;
-
-export default FormProgress;
+export { FormProgress, FormProgressStep };
+export type { FormProgressProps, FormProgressStepProps };

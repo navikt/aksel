@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { Heading, type HeadingProps } from "../../typography";
+import { Heading, type HeadingProps } from "../../../typography";
 
-export interface FormSummaryHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface FormSummaryHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading text.
    */
@@ -12,11 +12,12 @@ export interface FormSummaryHeadingProps extends React.HTMLAttributes<HTMLHeadin
   level: Exclude<HeadingProps["level"], "1">;
 }
 
-export const FormSummaryHeading = forwardRef<
+const FormSummaryHeading = forwardRef<
   HTMLHeadingElement,
   FormSummaryHeadingProps
 >((props: FormSummaryHeadingProps, ref) => (
   <Heading ref={ref} {...props} size="medium" />
 ));
 
-export default FormSummaryHeading;
+export { FormSummaryHeading };
+export type { FormSummaryHeadingProps };

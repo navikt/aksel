@@ -1,7 +1,4 @@
-export function isAcceptedFileType(
-  file: File,
-  accept: string | undefined,
-): boolean {
+function isAcceptedFileType(file: File, accept: string | undefined): boolean {
   if (!accept) {
     return true;
   }
@@ -26,3 +23,5 @@ export function isAcceptedFileType(
     return mimeType === validType;
   });
 }
+
+export { isAcceptedFileType };

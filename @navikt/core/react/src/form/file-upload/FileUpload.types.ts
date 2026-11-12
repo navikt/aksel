@@ -1,29 +1,29 @@
-export const fileRejectionReason = {
+const fileRejectionReason = {
   FileType: "fileType" as const,
   FileSize: "fileSize" as const,
 };
 
-export type FileRejectionReason =
+type FileRejectionReason =
   (typeof fileRejectionReason)[keyof typeof fileRejectionReason];
 
-export type FileRejected = {
+type FileRejected = {
   file: File;
   error: true;
   reasons: string[];
 };
-export type FileAccepted = { file: File; error: false };
+type FileAccepted = { file: File; error: false };
 
-export type FileObject = FileRejected | FileAccepted;
-export type FileRejectedPartitioned = {
+type FileObject = FileRejected | FileAccepted;
+type FileRejectedPartitioned = {
   file: File;
   reasons: string[];
 };
-export type FilesPartitioned = {
+type FilesPartitioned = {
   accepted: File[];
   rejected: FileRejectedPartitioned[];
 };
 
-export interface FileUploadBaseProps {
+interface FileUploadBaseProps {
   /**
    * Indicates if it is possible to select multiple files at once.
    * @default true
@@ -55,3 +55,14 @@ export interface FileUploadBaseProps {
     current: number;
   };
 }
+
+export { fileRejectionReason };
+export type {
+  FileRejectionReason,
+  FileRejected,
+  FileAccepted,
+  FileObject,
+  FileRejectedPartitioned,
+  FilesPartitioned,
+  FileUploadBaseProps,
+};
