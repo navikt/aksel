@@ -21,7 +21,7 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
   } = useComboboxPopupContext();
 
   return (
-    <div className="aksel-combobox2__filter">
+    <div className="aksel-combo-box__filter">
       <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionValue}>
         <Search
           value={filterString}
