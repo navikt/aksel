@@ -571,12 +571,12 @@
     },
     "./Combobox": {
       "import": {
-        "types": "./esm/form/combobox/index.d.ts",
-        "default": "./esm/form/combobox/index.js"
+        "types": "./esm/legacy/combobox/index.d.ts",
+        "default": "./esm/legacy/combobox/index.js"
       },
       "require": {
-        "types": "./cjs/form/combobox/index.d.ts",
-        "default": "./cjs/form/combobox/index.js"
+        "types": "./cjs/legacy/combobox/index.d.ts",
+        "default": "./cjs/legacy/combobox/index.js"
       }
     },
     "./ConfirmationPanel": {
