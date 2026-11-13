@@ -76,7 +76,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   return (
     <Listbox
       ref={ref}
-      className="aksel-combobox2__popup"
+      className="aksel-combo-box__popup"
       setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionValue}
       size={rootContext.size}
     >

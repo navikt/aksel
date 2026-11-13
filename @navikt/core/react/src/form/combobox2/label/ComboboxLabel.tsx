@@ -23,7 +23,7 @@ const ComboboxLabel = ({
   return (
     <Label
       className={cl(
-        "aksel-form-field__label aksel-combobox2__label",
+        "aksel-form-field__label aksel-combo-box__label",
         className,
         { "aksel-sr-only": hide },
       )}

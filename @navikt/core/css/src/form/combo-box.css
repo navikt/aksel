@@ -1,4 +1,4 @@
-.aksel-combobox2[data-disabled="true"] {
+.aksel-combo-box[data-disabled="true"] {
   opacity: var(--ax-opacity-disabled);
   pointer-events: none;
 }
@@ -7,16 +7,16 @@
  * Label & description & error                  *
  ************************************************/
 
-.aksel-combobox2__label {
+.aksel-combo-box__label {
   display: flex;
   margin-bottom: var(--ax-space-8);
 }
 
-.aksel-combobox2__description {
+.aksel-combo-box__description {
   margin-bottom: var(--ax-space-8);
 }
 
-.aksel-combobox2__error {
+.aksel-combo-box__error {
   margin-top: var(--ax-space-8);
 }
 
@@ -24,11 +24,11 @@
  * Field                                        *
  ************************************************/
 
-.aksel-combobox2__field-container {
+.aksel-combo-box__field-container {
   position: relative;
 }
 
-.aksel-combobox2__field-btn {
+.aksel-combo-box__field-btn {
   background-color: var(--ax-bg-input);
   border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-neutral);
@@ -62,7 +62,7 @@
     color: ButtonText;
   }
 
-  .aksel-combobox2[data-size="small"] & {
+  .aksel-combo-box[data-size="small"] & {
     min-height: 2rem;
     padding-block: 0;
   }
@@ -79,7 +79,7 @@
   }
 }
 
-.aksel-combobox2__field-chevron {
+.aksel-combo-box__field-chevron {
   position: absolute;
   right: var(--ax-space-8);
   top: 0;
@@ -92,7 +92,7 @@
     color: ButtonText;
   }
 
-  .aksel-combobox2[data-size="small"] & {
+  .aksel-combo-box[data-size="small"] & {
     margin-top: 0.25rem;
   }
 }
@@ -101,7 +101,7 @@
  * Overlay                                      *
  ************************************************/
 
-.aksel-combobox2__modal {
+.aksel-combo-box__modal {
   /**
    * We set the height of the content to the visible viewport, but the virtual
    * keyboard will still compensate for it's precence by adding some empty space
@@ -119,7 +119,7 @@
   touch-action: pinch-zoom pan-x;
 }
 
-.aksel-combobox2__modal-inner {
+.aksel-combo-box__modal-inner {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -129,7 +129,7 @@
  * Popup                                        *
  ************************************************/
 
-.aksel-combobox2__popup {
+.aksel-combo-box__popup {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   min-width: var(--__axc-floating-anchor-width);
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
@@ -142,7 +142,7 @@
   flex-direction: column;
   overflow: hidden;
 
-  .aksel-combobox2:not(:has(.aksel-combobox2__modal)) & {
+  .aksel-combo-box:not(:has(.aksel-combo-box__modal)) & {
     outline: 1px solid var(--ax-border-neutral-subtleA);
     outline-offset: -1px;
     border-radius: var(--ax-radius-8);
@@ -154,11 +154,11 @@
  * Filter input                                 *
  ************************************************/
 
-.aksel-combobox2__filter {
+.aksel-combo-box__filter {
   margin: -1px;
 }
 
-.aksel-combobox2__filter .aksel-search__wrapper:has(.aksel-search__input:focus-visible) {
+.aksel-combo-box__filter .aksel-search__wrapper:has(.aksel-search__input:focus-visible) {
   outline: none;
   position: relative;
 
@@ -170,13 +170,13 @@
     border: 2px solid var(--ax-border-focus);
   }
 
-  .aksel-combobox2:not(:has(.aksel-combobox2__modal)) &::after {
+  .aksel-combo-box:not(:has(.aksel-combo-box__modal)) &::after {
     border-top-left-radius: var(--ax-radius-8);
     border-top-right-radius: var(--ax-radius-8);
   }
 }
 
-.aksel-combobox2__filter .aksel-search__input {
+.aksel-combo-box__filter .aksel-search__input {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 
@@ -184,11 +184,11 @@
     border-color: var(--ax-border-neutral-subtleA);
   }
 
-  .aksel-combobox2__popup[data-size="medium"] & {
+  .aksel-combo-box__popup[data-size="medium"] & {
     min-height: 0;
   }
 
-  .aksel-combobox2__modal & {
+  .aksel-combo-box__modal & {
     border-radius: 0;
   }
 }
@@ -197,10 +197,10 @@
  * List                                         *
  ************************************************/
 
-.aksel-combobox2__list {
+.aksel-combo-box__list {
   padding-block: var(--ax-space-12);
 
-  .aksel-combobox2__modal & {
+  .aksel-combo-box__modal & {
     padding-inline: var(--ax-space-16);
 
     /* Prevents scrolling to area taken up by virtual keyboard.
@@ -211,7 +211,7 @@
   }
 }
 
-.aksel-combobox2__no-results {
+.aksel-combo-box__no-results {
   padding: var(--ax-space-12) var(--ax-space-8);
   text-align: center;
 }
@@ -220,7 +220,7 @@
  * Option                                       *
  ************************************************/
 
-.aksel-combobox2__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
+.aksel-combo-box__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
   .aksel-listbox__option-inner {
   background-color: var(--ax-bg-moderate-pressedA);
 
@@ -231,30 +231,23 @@
   }
 }
 
-.aksel-combobox2__option-checkmark {
-  --__axc-combobox2-option-checkmark-size: 1.25rem;
+.aksel-combo-box__option-checkmark {
+  --__axc-combo-box-option-checkmark-size: 1.25rem;
 
-  width: var(--__axc-combobox2-option-checkmark-size);
-  height: var(--__axc-combobox2-option-checkmark-size);
+  width: var(--__axc-combo-box-option-checkmark-size);
+  height: var(--__axc-combo-box-option-checkmark-size);
   margin-top: var(--ax-space-2);
   float: left;
 
-  .aksel-combobox2__popup[data-size="small"] & {
-    --__axc-combobox2-option-checkmark-size: 1rem;
+  .aksel-combo-box__popup[data-size="small"] & {
+    --__axc-combo-box-option-checkmark-size: 1rem;
   }
 
   & svg {
-    font-size: var(--__axc-combobox2-option-checkmark-size);
+    font-size: var(--__axc-combo-box-option-checkmark-size);
   }
 }
 
-.aksel-combobox2__option-label {
+.aksel-combo-box__option-label {
   padding-left: var(--ax-space-24);
-
-  /* &[data-nowrap="true"] {
-    padding-left: var(--ax-space-2);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  } */
 }

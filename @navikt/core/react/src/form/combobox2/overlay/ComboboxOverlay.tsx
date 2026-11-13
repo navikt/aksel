@@ -125,10 +125,10 @@ function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
 
   return (
     <Dialog size="small" open={open} onOpenChange={onOpenChange}>
-      <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
+      <Dialog.Popup className="aksel-combo-box__modal" position="fullscreen">
         <div
           ref={ref}
-          className="aksel-combobox2__modal-inner"
+          className="aksel-combo-box__modal-inner"
           // The reported height is sometimes a bit too small,
           // so we let the dialog fill the entire normal viewport,
           // and only limit the inner content's height.

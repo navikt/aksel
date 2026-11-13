@@ -26,19 +26,16 @@ function ComboboxOptionComponent<T extends ComboboxOptionData>({
 
   return (
     <Listbox.Option
-      className="aksel-combobox2__option"
+      className="aksel-combo-box__option"
       id={option.value}
       onClick={() => onToggleOption(option, !isSelected)}
       aria-selected={isSelected}
       hasVirtualFocus={hasVirtualFocus}
     >
-      <div className="aksel-combobox2__option-checkmark" aria-hidden>
+      <div className="aksel-combo-box__option-checkmark" aria-hidden>
         {isSelected && <CheckmarkHeavyIcon aria-hidden />}
       </div>
-      <div
-        className="aksel-combobox2__option-label"
-        //data-nowrap={!children || typeof children === "string"}
-      >
+      <div className="aksel-combo-box__option-label">
         {typeof children === "function"
           ? children(option)
           : (children ??
