@@ -58,13 +58,13 @@ const groupedOptions = [
 ];
 
 function BaseCombobox<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 >(props: Partial<ComboboxSingle.Props<T>>) {
   const [value, setValue] = useState<string | null>("opt-1");
 
   return (
     <ComboboxSingle
-      options={countries as T[]}
+      options={countries as T}
       value={value}
       onChange={setValue}
       label="Velg land"

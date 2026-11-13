@@ -19,9 +19,16 @@ import { ComboboxRoot } from "./root/ComboboxRoot";
 import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 
 interface ComboboxProps<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 >
-  extends Omit<ComboboxRootProps<T>, "children">, Omit<FormFieldProps, "size"> {
+  extends
+    Omit<ComboboxRootProps<T[number]>, "children" | "options">,
+    Omit<FormFieldProps, "size"> {
+  /**
+   * Can be either an array of options ({@link ComboboxOptionData})
+   * or an array of groups ({@link ComboboxGroupData}) containing options.
+   */
+  options: T;
   /**
    * Label
    */
@@ -37,7 +44,7 @@ interface ComboboxProps<
 }
 
 const Combobox = forwardRef(
-  <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+  <T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[]>(
     {
       label,
       hideLabel,
@@ -141,14 +148,14 @@ const Combobox = forwardRef(
       </ComboboxRoot>
     );
   },
-) as <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+) as <T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[]>(
   props: ComboboxProps<T> & React.RefAttributes<HTMLButtonElement>,
 ) => React.ReactElement;
 
 // ----------- ComboboxSingle ----------- //
 
 interface ComboboxSingleProps<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 > extends Omit<ComboboxProps<T>, "multiple" | "value" | "onToggleOption"> {
   /**
    * Called when selected option changes.
@@ -184,7 +191,7 @@ interface ComboboxSingleProps<
  * ```
  */
 const ComboboxSingle = forwardRef(
-  <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+  <T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[]>(
     { onChange, value, defaultValue, ...rest }: ComboboxSingleProps<T>,
     ref: React.ForwardedRef<HTMLButtonElement>,
   ) => {
@@ -212,21 +219,21 @@ const ComboboxSingle = forwardRef(
       />
     );
   },
-) as <T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>>(
+) as <T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[]>(
   props: ComboboxSingleProps<T> & React.RefAttributes<HTMLButtonElement>,
 ) => React.ReactElement;
 
 // oxlint-disable-next-line typescript/no-namespace
 export namespace ComboboxSingle {
   export type Props<
-    T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+    T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
   > = ComboboxSingleProps<T>;
 }
 
 // ----------- ComboboxMulti ----------- //
 
 interface ComboboxMultiProps<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 >
   extends
     Omit<ComboboxProps<T>, "multiple" | "value" | "onToggleOption">,
@@ -246,7 +253,7 @@ interface ComboboxMultiProps<
 }
 
 function ComboboxMulti<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 >({
   onChange,
   value,
@@ -286,7 +293,7 @@ function ComboboxMulti<
 // oxlint-disable-next-line typescript/no-namespace
 export namespace ComboboxMulti {
   export type Props<
-    T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+    T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
   > = ComboboxMultiProps<T>;
 }
 

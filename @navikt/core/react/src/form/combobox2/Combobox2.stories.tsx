@@ -61,7 +61,7 @@ type MyGroup = {
   options: MyOption[];
 };
 
-const groupedCountries: (MyGroup | MyOption)[] = [
+const groupedCountries: MyGroup[] = [
   {
     label: "Norden",
     id: "group-1",
@@ -72,11 +72,10 @@ const groupedCountries: (MyGroup | MyOption)[] = [
     id: "group-2",
     options: centralEuropeanCountries,
   },
-  { label: "Annet (ikke gruppert)", value: "opt-01" } satisfies MyOption,
 ];
 
 type DefaultProps = Pick<
-  ComboboxSingle.Props<MyOption>,
+  ComboboxSingle.Props<MyOption[]>,
   | "label"
   | "description"
   | "hideLabel"
@@ -119,13 +118,29 @@ export const Multiselect = () => {
 };
 Multiselect.storyName = "Multiselect (WIP)";
 
+export const MultiselectControlled = () => {
+  const [value, setValue] = useState<MyOption["value"][]>(["opt-1"]);
+  return (
+    <ComboboxMulti
+      label="Velg land"
+      options={countries}
+      value={value}
+      onChange={setValue}
+      onToggleOption={(option, isSelected) => {
+        console.log("onToggleOption", option, isSelected);
+      }}
+    />
+  );
+};
+MultiselectControlled.storyName = "Multiselect controlled (WIP)";
+
 function BasicCombobox<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
-    MyOption,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[] =
+    MyOption[],
 >(props: Partial<ComboboxSingle.Props<T>>) {
   return (
     <ComboboxSingle
-      options={countries as T[]}
+      options={countries as T}
       defaultValue="opt-1"
       label="Velg land"
       description="Landet hvor du er født."
