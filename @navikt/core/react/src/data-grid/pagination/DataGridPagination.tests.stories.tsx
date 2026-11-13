@@ -45,37 +45,38 @@ const sortableColumns: DataGrid.Columns<Row> = [
   { id: "name", header: "Name", bodyCell: (row) => row.name, isSortable: true },
 ];
 
-function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
-  const [data, setData] = useState<Row[]>([]);
+function LoadingGrid({
+  controlled = false,
+  mode = "client",
+}: {
+  controlled?: boolean;
+  mode?: "client" | "server";
+}) {
+  const [loadedRows, setLoadedRows] = useState<Row[]>(rows);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(2);
   const [correctionCount, setCorrectionCount] = useState(0);
 
+  const pageSize = 2;
+  const data = isLoading
+    ? []
+    : mode === "server"
+      ? loadedRows.slice(page * pageSize, (page + 1) * pageSize)
+      : loadedRows;
+
   return (
     <>
       <output aria-label="Page corrections">{correctionCount}</output>
-      <button
-        type="button"
-        onClick={() => {
-          setData(rows);
-          setIsLoading(false);
-        }}
-      >
+      <button type="button" onClick={() => setIsLoading(false)}>
         Complete load
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          setData([]);
-          setIsLoading(true);
-        }}
-      >
+      <button type="button" onClick={() => setIsLoading(true)}>
         Reload
       </button>
       <button
         type="button"
         onClick={() => {
-          setData(rows.slice(0, 3));
+          setLoadedRows(rows.slice(0, 3));
           setIsLoading(false);
         }}
       >
@@ -87,12 +88,18 @@ function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
         getRowId={getRowId}
         isLoading={isLoading}
         pagination={{
+          ...(mode === "server"
+            ? { mode: "server" as const, totalRows: loadedRows.length }
+            : { mode: "client" as const }),
           page: controlled ? page : undefined,
           defaultPage: 2,
-          defaultPageSize: 2,
-          pageSizeOptions: [2],
+          defaultPageSize: pageSize,
+          pageSizeOptions: [pageSize],
           onPageChange: (nextPage) => {
             setPage(nextPage);
+            if (mode === "server") {
+              setIsLoading(true);
+            }
             setCorrectionCount((count) => count + 1);
           },
         }}
@@ -103,42 +110,107 @@ function LoadingClientGrid({ controlled = false }: { controlled?: boolean }) {
   );
 }
 
-const testLoadingPreservesPage: Story["play"] = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const corrections = canvas.getByRole("status", {
-    name: "Page corrections",
-  });
-  const completeLoad = canvas.getByRole("button", { name: "Complete load" });
-  const reload = canvas.getByRole("button", { name: "Reload" });
-
-  expect(corrections).toHaveTextContent("0");
-  await userEvent.click(completeLoad);
-  expectPage(canvas, 3, 3);
-  expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
-
-  await userEvent.click(reload);
-  expect(corrections).toHaveTextContent("0");
-  await userEvent.click(completeLoad);
-  expectPage(canvas, 3, 3);
-  expect(corrections).toHaveTextContent("0");
-
-  await userEvent.click(reload);
-  await userEvent.click(
-    canvas.getByRole("button", { name: "Complete smaller load" }),
-  );
-  await waitFor(() => expectPage(canvas, 2, 2));
-  expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
-  expect(corrections).toHaveTextContent("1");
-};
-
 export const LoadingPreservesUncontrolledPage: Story = {
-  render: () => <LoadingClientGrid />,
-  play: testLoadingPreservesPage,
+  render: () => <LoadingGrid />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const corrections = canvas.getByRole("status", {
+      name: "Page corrections",
+    });
+    const completeLoad = canvas.getByRole("button", { name: "Complete load" });
+    const reload = canvas.getByRole("button", { name: "Reload" });
+
+    expect(corrections).toHaveTextContent("0");
+    await userEvent.click(completeLoad);
+    expectPage(canvas, 3, 3);
+    expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(reload);
+    expect(corrections).toHaveTextContent("0");
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+    await userEvent.click(completeLoad);
+    expectPage(canvas, 3, 3);
+    expect(corrections).toHaveTextContent("0");
+
+    await userEvent.click(reload);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Complete smaller load" }),
+    );
+    await waitFor(() => expectPage(canvas, 2, 2));
+    expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: /Rad 3–3 av 3/ }),
+    ).toBeInTheDocument();
+    expect(corrections).toHaveTextContent("1");
+  },
 };
 
 export const LoadingPreservesControlledPage: Story = {
-  render: () => <LoadingClientGrid controlled />,
-  play: testLoadingPreservesPage,
+  render: () => <LoadingGrid controlled mode="server" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const corrections = canvas.getByRole("status", {
+      name: "Page corrections",
+    });
+    const completeLoad = canvas.getByRole("button", { name: "Complete load" });
+    const reload = canvas.getByRole("button", { name: "Reload" });
+
+    expect(corrections).toHaveTextContent("0");
+    await userEvent.click(completeLoad);
+    expectPage(canvas, 3, 3);
+    expect(canvas.getByRole("cell", { name: "Person 5" })).toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+
+    /* Changing page with empty data while fetching keeps previous summary */
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
+    expectPage(canvas, 2, 3);
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+    await userEvent.click(completeLoad);
+    expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: /Rad 3–4 av 5/ }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(
+      canvas.getByRole("button", { name: /Rad 3–4 av 5/ }),
+    ).toBeInTheDocument();
+    await userEvent.click(completeLoad);
+    expectPage(canvas, 3, 3);
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(reload);
+    expect(corrections).toHaveTextContent("2");
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Complete smaller load" }),
+    );
+    await waitFor(() => expect(corrections).toHaveTextContent("3"));
+    expect(
+      canvas.getByRole("button", { name: /Rad 5–5 av 5/ }),
+    ).toBeInTheDocument();
+    await userEvent.click(completeLoad);
+    expectPage(canvas, 2, 2);
+    expect(canvas.getByRole("cell", { name: "Person 3" })).toBeInTheDocument();
+    expect(
+      canvas.getByRole("button", { name: /Rad 3–3 av 3/ }),
+    ).toBeInTheDocument();
+    expect(corrections).toHaveTextContent("3");
+  },
 };
 
 const deferredRows: Row[] = Array.from({ length: 8 }, (_, index) => ({

@@ -62,13 +62,18 @@ function useDataGridPagination({
         : undefined;
 
   const range = getPaginationRange({ page: storedPage, pageSize, ...rows });
-  const previousSummaryRange = useRef({ from: range.from, to: range.to });
+  const currentSummary = { from: range.from, to: range.to, totalRows };
+  const previousSummary = useRef(currentSummary);
 
   useEffect(() => {
-    if (!isLoading) {
-      previousSummaryRange.current = { from: range.from, to: range.to };
+    if (!isLoading && (storedPage === range.page || totalRows === 0)) {
+      previousSummary.current = {
+        from: range.from,
+        to: range.to,
+        totalRows,
+      };
     }
-  }, [isLoading, range.from, range.to]);
+  }, [isLoading, range.from, range.to, range.page, storedPage, totalRows]);
 
   const setPage = useEventCallback((page: number) => {
     const nextPage = getPaginationRange({ page, pageSize, ...rows }).page;
@@ -162,16 +167,15 @@ function useDataGridPagination({
     }
   }
 
-  const summaryRange =
-    totalRows === undefined && isLoading ? previousSummaryRange.current : range;
+  const summary = isLoading ? previousSummary.current : currentSummary;
 
   return {
     ...range,
-    from: summaryRange.from,
-    to: summaryRange.to,
+    from: summary.from,
+    to: summary.to,
     pageSize,
     pageSizeOptions,
-    totalRows,
+    totalRows: summary.totalRows,
     isLoading,
     setPage,
     setPageSize,
