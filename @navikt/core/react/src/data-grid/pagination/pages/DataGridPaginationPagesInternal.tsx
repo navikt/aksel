@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { useState } from "react";
 import {
   ChevronLeftFirstIcon,
   ChevronLeftIcon,
@@ -9,14 +9,9 @@ import { Button } from "../../../button";
 import { TextField } from "../../../form/textfield";
 import { BodyShort } from "../../../typography";
 import { useId } from "../../../utils-external";
-import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 import { useShiftJumpPreview } from "./useShiftJumpPreview";
-
-interface DataGridPaginationPagesProps extends React.HTMLAttributes<HTMLElement> {
-  children?: never;
-}
 
 /**
  * Provides previous and next page controls. Hold Shift while hovering or focusing a button
@@ -24,27 +19,10 @@ interface DataGridPaginationPagesProps extends React.HTMLAttributes<HTMLElement>
  *
  * With a known total page count, a page number can be typed and submitted with Enter.
  * Out-of-range values are clamped to the first or last page; Escape or blur discards the input.
- *
- * @see 🏷️ {@link DataGridPaginationPagesProps}
- *
- * @example
- * ```jsx
- * <DataGrid columns={columns} data={rows} pagination={{}}>
- *   <DataGrid.Pagination>
- *     <DataGrid.PaginationPages />
- *   </DataGrid.Pagination>
- * </DataGrid>
- * ```
  */
-const DataGridPaginationPages = forwardRef<
-  HTMLElement,
-  DataGridPaginationPagesProps
->(({ className, "aria-label": ariaLabel, ...rest }, forwardedRef) => {
+function DataGridPaginationPagesInternal() {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
-    useDataGridRootPaginationContext(
-      true,
-      "[Aksel] DataGrid.PaginationPages must be used within <DataGrid pagination={...}>",
-    );
+    useDataGridRootPaginationContext();
   const translate = useI18n("DataGrid");
 
   /* Typed page while editing; null shows the current page */
@@ -60,10 +38,8 @@ const DataGridPaginationPages = forwardRef<
 
   return (
     <nav
-      {...rest}
-      ref={forwardedRef}
-      aria-label={ariaLabel ?? translate("Pagination.navLabel")}
-      className={cl("aksel-data-grid__pagination-pages", className)}
+      aria-label={translate("Pagination.navLabel")}
+      className="aksel-data-grid__pagination-pages"
     >
       <Button
         {...previousPreview.shiftJumpProps}
@@ -173,12 +149,6 @@ const DataGridPaginationPages = forwardRef<
       />
     </nav>
   );
-});
-
-// eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace DataGridPaginationPages {
-  export type Props = DataGridPaginationPagesProps;
 }
 
-export { DataGridPaginationPages };
-export type { DataGridPaginationPagesProps };
+export { DataGridPaginationPagesInternal };

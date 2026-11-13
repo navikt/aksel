@@ -6,9 +6,7 @@ import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
 import { DataGridPaginationInternal } from "../pagination/DataGridPaginationInternal";
-import { DataGridPaginationPages } from "../pagination/pages/DataGridPaginationPages";
 import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
-import { DataGridPaginationRows } from "../pagination/rows/DataGridPaginationRows";
 import type {
   DataGridPaginationConfig,
   DataGridSettings,
@@ -121,14 +119,6 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Pagination: typeof DataGridPagination;
-  /**
-   * @see 🏷️ {@link DataGridPaginationRows.Props}
-   */
-  PaginationRows: typeof DataGridPaginationRows;
-  /**
-   * @see 🏷️ {@link DataGridPaginationPages.Props}
-   */
-  PaginationPages: typeof DataGridPaginationPages;
 }
 
 /**
@@ -205,8 +195,6 @@ const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 DataGrid.Pagination = DataGridPagination;
-DataGrid.PaginationRows = DataGridPaginationRows;
-DataGrid.PaginationPages = DataGridPaginationPages;
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGrid {
@@ -237,18 +225,6 @@ export namespace DataGrid {
   export namespace Pagination {
     // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
     export type Props = DataGridPagination.Props;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  export namespace PaginationRows {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
-    export type Props = DataGridPaginationRows.Props;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  export namespace PaginationPages {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
-    export type Props = DataGridPaginationPages.Props;
   }
 }
 
