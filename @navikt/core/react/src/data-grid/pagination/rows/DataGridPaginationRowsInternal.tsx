@@ -42,6 +42,9 @@ function DataGridPaginationRowsInternal() {
           iconPosition="right"
         >
           {text}
+          <span className="aksel-sr-only">
+            {`, ${translate("Pagination.pageSize")}: ${pageSize}`}
+          </span>
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>

@@ -376,6 +376,9 @@ export const ShiftWithUnknownTotalGoesToNextPage: Story = {
     const canvas = within(canvasElement);
     const user = userEvent.setup();
 
+    expect(
+      canvas.getByRole("button", { name: /Rad 1–20.*Rader per side: 20/ }),
+    ).toBeInTheDocument();
     expect(canvas.getByText("Side 1")).toBeInTheDocument();
     expect(
       canvas.queryByRole("textbox", { name: "Gå til side" }),
@@ -433,6 +436,48 @@ export const TypedPageJumpsToPage: Story = {
     await user.clear(input);
     await user.keyboard("{Enter}");
     expectPage(canvas, 1, 3);
+  },
+};
+
+export const ChangesPageSize: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={manyRows}
+      getRowId={getRowId}
+      pagination={{ defaultPageSize: 20, pageSizeOptions: [10, 20] }}
+    >
+      <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    const user = userEvent.setup();
+
+    expect(
+      canvas.getByRole("button", {
+        name: /Rad 1–20 av 60.*Rader per side: 20/,
+      }),
+    ).toBeInTheDocument();
+
+    await user.click(canvas.getByRole("button", { name: "Neste side" }));
+    const rowsTrigger = canvas.getByRole("button", {
+      name: /Rad 21–40 av 60.*Rader per side: 20/,
+    });
+
+    await user.click(rowsTrigger);
+    expect(
+      body.getByRole("menuitemradio", { name: "20 per side" }),
+    ).toBeChecked();
+    await user.click(body.getByRole("menuitemradio", { name: "10 per side" }));
+
+    expectPage(canvas, 1, 6);
+    expect(
+      canvas.getByRole("button", {
+        name: /Rad 1–10 av 60.*Rader per side: 10/,
+      }),
+    ).toBeInTheDocument();
   },
 };
 
