@@ -88,7 +88,11 @@ function useDataGridPagination({
   } | null>(null);
 
   useEffect(() => {
-    if (isLoading) {
+    /*
+     * totalRows must be defined and non-zero to perform correction
+     * this avoids resetting the page when totalRows is not yet known (e.g., during initial load)
+     */
+    if (isLoading || totalRows === 0) {
       return;
     }
 
@@ -113,7 +117,14 @@ function useDataGridPagination({
     }
 
     setStoredPage(range.page);
-  }, [controlledPage, isLoading, storedPage, range.page, setStoredPage]);
+  }, [
+    controlledPage,
+    isLoading,
+    storedPage,
+    range.page,
+    setStoredPage,
+    totalRows,
+  ]);
 
   if (process.env.NODE_ENV !== "production") {
     if (controlledPage !== undefined && !onPageChange) {

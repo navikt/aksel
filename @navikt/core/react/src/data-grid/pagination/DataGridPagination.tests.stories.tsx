@@ -141,6 +141,61 @@ export const LoadingPreservesControlledPage: Story = {
   play: testLoadingPreservesPage,
 };
 
+const deferredRows: Row[] = Array.from({ length: 8 }, (_, index) => ({
+  id: index + 1,
+  name: `Person ${index + 1}`,
+}));
+
+function EmptyBeforeDataGrid() {
+  const [data, setData] = useState<Row[]>([]);
+  const [page, setPage] = useState(3);
+  const [calls, setCalls] = useState<number[]>([]);
+
+  return (
+    <>
+      <output aria-label="Page change calls">
+        {calls.join(",") || "none"}
+      </output>
+      <button type="button" onClick={() => setData(deferredRows)}>
+        Provide data
+      </button>
+      <DataGrid
+        columns={columns}
+        data={data}
+        getRowId={getRowId}
+        isLoading={false}
+        pagination={{
+          page,
+          defaultPageSize: 2,
+          pageSizeOptions: [2],
+          onPageChange: (nextPage) => {
+            setPage(nextPage);
+            setCalls((prev) => [...prev, nextPage]);
+          },
+        }}
+      >
+        <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+      </DataGrid>
+    </>
+  );
+}
+
+export const EmptyDataBeforeArrivalPreservesPage: Story = {
+  render: () => <EmptyBeforeDataGrid />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const calls = canvas.getByRole("status", { name: "Page change calls" });
+
+    expectPage(canvas, 1, 1);
+    expect(calls).toHaveTextContent("none");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Provide data" }));
+    expectPage(canvas, 4, 4);
+    expect(canvas.getByRole("cell", { name: "Person 7" })).toBeInTheDocument();
+    expect(calls).toHaveTextContent("none");
+  },
+};
+
 const manyRows: Row[] = Array.from({ length: 60 }, (_, index) => ({
   id: index + 1,
   name: `Person ${String(index + 1).padStart(2, "0")}`,
