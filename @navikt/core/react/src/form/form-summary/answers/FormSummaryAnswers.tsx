@@ -1,16 +1,16 @@
 import React, { forwardRef } from "react";
-import { cl } from "../../utils/helpers";
+import { cl } from "../../../utils/helpers";
 
 const FormSummaryAnswersContext = React.createContext(false);
 
-export interface FormSummaryAnswersProps extends React.HTMLAttributes<HTMLDListElement> {
+interface FormSummaryAnswersProps extends React.HTMLAttributes<HTMLDListElement> {
   /**
    * Must include one or more of `<FormSummary.Answer>`.
    */
   children: React.ReactNode;
 }
 
-export const FormSummaryAnswers = forwardRef<
+const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
 >(({ children, className, ...rest }: FormSummaryAnswersProps, ref) => {
@@ -30,4 +30,5 @@ export const FormSummaryAnswers = forwardRef<
   );
 });
 
-export default FormSummaryAnswers;
+export { FormSummaryAnswers };
+export type { FormSummaryAnswersProps };

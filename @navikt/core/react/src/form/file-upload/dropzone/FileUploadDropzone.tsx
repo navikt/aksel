@@ -6,9 +6,9 @@ import { omit, useId } from "../../../utils-external";
 import { cl, composeEventHandlers } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useFormField } from "../../useFormField";
-import { useFileUpload } from "../hooks/useFileUpload";
 import { useFileUploadTranslation } from "../root/FileUploadRoot.context";
-import type { FileUploadDropzoneProps } from "./dropzone.types";
+import { useFileUpload } from "../root/useFileUpload";
+import type { FileUploadDropzoneProps } from "./FileUploadDropzone.types";
 import { useDropzone } from "./useDropzone";
 
 const FileUploadDropzone = forwardRef<
@@ -175,6 +175,5 @@ const FileUploadDropzone = forwardRef<
   );
 });
 
-export default FileUploadDropzone;
 export { FileUploadDropzone };
 export type { FileUploadDropzoneProps };

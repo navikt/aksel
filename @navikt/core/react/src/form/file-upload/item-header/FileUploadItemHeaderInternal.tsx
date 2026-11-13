@@ -3,7 +3,7 @@ import { useThemeInternal } from "../../../theme/Theme";
 import { LinkAnchor } from "../../../utils/components/link-anchor";
 import { downloadFile } from "../helpers/download-file";
 import { isNativeFile } from "../helpers/file-type-checker";
-import ItemIcon from "../item-icon/ItemIcon";
+import { FileUploadItemIconInternal } from "../item-icon/FileUploadItemIconInternal";
 import type { FileItem } from "../item/FileUploadItem.types";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const ItemHeader = ({ file, href, onClick }: Props) => {
+const FileUploadItemHeaderInternal = ({ file, href, onClick }: Props) => {
   const ctx = useThemeInternal();
 
   if (onClick && href) {
@@ -23,7 +23,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
         className="aksel-file-item__link"
         data-color={ctx.color}
       >
-        <ItemIcon file={file} />
+        <FileUploadItemIconInternal file={file} />
         {file.name}
       </LinkAnchor>
     );
@@ -40,7 +40,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
         className="aksel-file-item__link"
         data-color={ctx.color}
       >
-        <ItemIcon file={file} />
+        <FileUploadItemIconInternal file={file} />
         {file.name}
       </LinkAnchor>
     );
@@ -53,7 +53,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
         className="aksel-file-item__link"
         data-color={ctx.color}
       >
-        <ItemIcon file={file} />
+        <FileUploadItemIconInternal file={file} />
         {file.name}
       </LinkAnchor>
     );
@@ -71,7 +71,7 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
         className="aksel-file-item__link"
         data-color={ctx.color}
       >
-        <ItemIcon file={file} />
+        <FileUploadItemIconInternal file={file} />
         {file.name}
       </LinkAnchor>
     );
@@ -79,10 +79,10 @@ const ItemHeader = ({ file, href, onClick }: Props) => {
 
   return (
     <span className="aksel-file-item__link">
-      <ItemIcon file={file} />
+      <FileUploadItemIconInternal file={file} />
       {file.name}
     </span>
   );
 };
 
-export { ItemHeader };
+export { FileUploadItemHeaderInternal };

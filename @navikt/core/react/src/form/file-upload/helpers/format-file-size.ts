@@ -2,7 +2,7 @@ import type { FileItem } from "../item/FileUploadItem.types";
 
 const MAX_MEGA_BYTES = 500;
 
-export function formatFileSize(file: FileItem): string | null {
+function formatFileSize(file: FileItem): string | null {
   if (!file.size) {
     return null;
   }
@@ -23,3 +23,5 @@ const formatter = new Intl.NumberFormat("nb-NO", {
   // @ts-expect-error - Looks like roundingMode hasn't been added to TypeScript yet
   roundingMode: "ceil",
 });
+
+export { formatFileSize };

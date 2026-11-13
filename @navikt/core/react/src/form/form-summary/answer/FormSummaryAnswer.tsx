@@ -1,8 +1,8 @@
 import React from "react";
-import { useThemeInternal } from "../../theme/Theme";
-import { cl } from "../../utils/helpers";
+import { useThemeInternal } from "../../../theme/Theme";
+import { cl } from "../../../utils/helpers";
 
-export interface FormSummaryAnswerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FormSummaryAnswerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Must include:
    * - `<FormSummary.Label>`
@@ -11,7 +11,7 @@ export interface FormSummaryAnswerProps extends React.HTMLAttributes<HTMLDivElem
   children: React.ReactNode;
 }
 
-export const FormSummaryAnswer = React.forwardRef<
+const FormSummaryAnswer = React.forwardRef<
   HTMLDivElement,
   FormSummaryAnswerProps
 >(({ children, className, ...rest }, ref) => {
@@ -29,4 +29,5 @@ export const FormSummaryAnswer = React.forwardRef<
   );
 });
 
-export default FormSummaryAnswer;
+export { FormSummaryAnswer };
+export type { FormSummaryAnswerProps };

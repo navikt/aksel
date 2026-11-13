@@ -1,6 +1,6 @@
 "use client";
 export {
-  default as FileUpload,
+  FileUpload,
   FileUploadTrigger,
   FileUploadDropzone,
   FileUploadItem,
@@ -9,13 +9,12 @@ export type {
   FileUploadTriggerProps,
   FileUploadDropzoneProps,
   FileUploadItemProps,
-} from "./root/FileUploadRoot";
-export type {
   FileObject,
   FileRejected,
   FileAccepted,
   FileRejectedPartitioned,
   FilesPartitioned,
   FileRejectionReason,
-} from "./FileUpload.types";
-export type { FileItem, FileMetadata } from "./item/FileUploadItem.types";
+  FileItem,
+  FileMetadata,
+} from "./root/FileUploadRoot";

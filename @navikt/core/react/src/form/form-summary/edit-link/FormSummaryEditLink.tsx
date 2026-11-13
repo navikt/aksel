@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import { PencilIcon } from "@navikt/aksel-icons";
-import { Link } from "../../link";
-import type { OverridableComponent } from "../../utils-external";
-import { CompositionWarning } from "../../utils/components/composition-warning";
-import { cl } from "../../utils/helpers";
-import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { Link } from "../../../link";
+import type { OverridableComponent } from "../../../utils-external";
+import { CompositionWarning } from "../../../utils/components/composition-warning";
+import { cl } from "../../../utils/helpers";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 
-export interface FormSummaryEditProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface FormSummaryEditProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * URL to the relevant part of the form, where the answers can be edited.
    */
@@ -20,7 +20,7 @@ export interface FormSummaryEditProps extends React.AnchorHTMLAttributes<HTMLAnc
   children?: React.ReactNode;
 }
 
-export const FormSummaryEditLink: OverridableComponent<
+const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
 > = forwardRef(({ children, className, as = "a", ...rest }, ref) => {
@@ -44,4 +44,5 @@ export const FormSummaryEditLink: OverridableComponent<
   );
 });
 
-export default FormSummaryEditLink;
+export { FormSummaryEditLink };
+export type { FormSummaryEditProps };

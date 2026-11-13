@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "../../link";
 import { VStack } from "../../primitives/stack";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
-import FormSummary from "./FormSummary";
+import { FormSummary } from "./root/FormSummaryRoot";
 
 const meta: Meta<typeof FormSummary> = {
   title: "ds-react/FormSummary",
