@@ -7,6 +7,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { TextField } from "../../../form/textfield";
+import { BodyShort } from "../../../typography";
 import { useEventListener, useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -94,7 +95,9 @@ const DataGridPaginationPages = forwardRef<
       />
       {pageCount === undefined ? (
         /* Without a known total, a typed page could land far past the last page */
-        <span
+        <BodyShort
+          size="small"
+          as="span"
           className="aksel-data-grid__pagination-pages-label"
           data-max-label={translate("Pagination.pageOfUnknownTotal", {
             page: "9".repeat(Math.max(3, String(page + 1).length)),
@@ -103,7 +106,7 @@ const DataGridPaginationPages = forwardRef<
           <span>
             {translate("Pagination.pageOfUnknownTotal", { page: page + 1 })}
           </span>
-        </span>
+        </BodyShort>
       ) : (
         <div className="aksel-data-grid__pagination-pages-input">
           <TextField
@@ -141,9 +144,9 @@ const DataGridPaginationPages = forwardRef<
               setPageDraft(null);
             }}
           />
-          <span id={pageCountId}>
+          <BodyShort size="small" as="span" id={pageCountId}>
             {translate("Pagination.ofPageCount", { pageCount })}
-          </span>
+          </BodyShort>
         </div>
       )}
       <Button

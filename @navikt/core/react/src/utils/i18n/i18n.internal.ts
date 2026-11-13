@@ -6,6 +6,7 @@ const internalTranslations = {
       summaryUnknownTotal: "Rad {from}–{to}",
       summaryEmpty: "Ingen rader",
       pageSize: "Rader per side",
+      pageSizeOption: "{size} per side",
       pageOf: "Side {page} av {pageCount}",
       pageOfUnknownTotal: "Side {page}",
       goToPage: "Gå til side",

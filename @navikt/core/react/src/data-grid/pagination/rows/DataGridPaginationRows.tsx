@@ -2,6 +2,7 @@ import React, { forwardRef, useMemo } from "react";
 import { CheckmarkHeavyIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../../action-menu";
 import { Button, type ButtonProps } from "../../../button";
+import { cl } from "../../../utils/helpers/className";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
@@ -58,6 +59,7 @@ const DataGridPaginationRows = forwardRef<
         <Button
           ref={forwardedRef}
           {...restProps}
+          className={cl("data-grid-pagination-rows", restProps.className)}
           variant="tertiary"
           data-color="neutral"
           size="small"
@@ -78,7 +80,7 @@ const DataGridPaginationRows = forwardRef<
               pageSize === size ? <CheckmarkHeavyIcon aria-hidden /> : <></>
             }
           >
-            {size}
+            {translate("Pagination.pageSizeOption", { size })}
           </ActionMenu.Item>
         ))}
       </ActionMenu.Content>
