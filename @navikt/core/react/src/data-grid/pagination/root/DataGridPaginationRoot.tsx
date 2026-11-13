@@ -20,6 +20,9 @@ interface DataGridPaginationProps extends Omit<
 /**
  * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
  *
+ * With a known total page count, a page number can be typed into the page field.
+ * Escape discards the input; Enter or blur submits.
+ *
  * @see 🏷️ {@link DataGridPaginationProps}
  *
  * @example

@@ -482,15 +482,19 @@ export const TypedPageJumpsToPage: Story = {
     expect(input).toHaveValue("2");
     await user.keyboard("{Escape}");
     expectPage(canvas, 1, 3);
-
-    await user.clear(input);
-    await user.keyboard("3");
     await user.tab();
     expectPage(canvas, 1, 3);
 
     await user.clear(input);
+    await user.keyboard("3");
+    await user.tab();
+    expectPage(canvas, 3, 3);
+
+    await user.clear(input);
     await user.keyboard("{Enter}");
-    expectPage(canvas, 1, 3);
+    expectPage(canvas, 3, 3);
+    await user.tab();
+    expectPage(canvas, 3, 3);
   },
 };
 

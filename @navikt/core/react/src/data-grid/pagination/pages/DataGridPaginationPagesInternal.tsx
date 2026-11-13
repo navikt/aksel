@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   ChevronLeftFirstIcon,
   ChevronLeftIcon,
@@ -17,8 +17,9 @@ import { useShiftJumpPreview } from "./useShiftJumpPreview";
  * Provides previous and next page controls. Hold Shift while hovering or focusing a button
  * to jump to the first page, or to the last page when the total page count is known.
  *
- * With a known total page count, a page number can be typed and submitted with Enter.
- * Out-of-range values are clamped to the first or last page; Escape or blur discards the input.
+ * With a known total page count, a page number can be typed and submitted.
+ * Out-of-range values are clamped to the first or last page.
+ * Escape discards the input; Enter or blur submits.
  */
 function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
@@ -35,6 +36,17 @@ function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
   const canGoLast = pageCount !== undefined;
   const showFirst = previousPreview.isShiftJump;
   const showLast = nextPreview.isShiftJump && canGoLast;
+
+  const commitPageDraft = useCallback(() => {
+    if (pageDraft === null) {
+      return;
+    }
+    const requestedPage = Number.parseInt(pageDraft, 10);
+    if (!isLoading && pageCount !== undefined && !Number.isNaN(requestedPage)) {
+      setPage(Math.min(Math.max(requestedPage, 1), pageCount) - 1);
+    }
+    setPageDraft(null);
+  }, [pageDraft, isLoading, pageCount, setPage]);
 
   return (
     <nav
@@ -89,6 +101,7 @@ function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
             hideLabel
             size="small"
             inputMode="numeric"
+            enterKeyHint="go"
             autoComplete="off"
             aria-describedby={pageCountId}
             value={pageDraft ?? String(page + 1)}
@@ -96,7 +109,7 @@ function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
             onChange={(event) =>
               setPageDraft(event.target.value.replace(/\D/g, ""))
             }
-            onBlur={() => setPageDraft(null)}
+            onBlur={commitPageDraft}
             onKeyDown={(event) => {
               if (event.key === "Escape" && pageDraft !== null) {
                 event.stopPropagation();
@@ -108,14 +121,7 @@ function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
               }
               /* Prevents submitting a surrounding form */
               event.preventDefault();
-              if (isLoading) {
-                return;
-              }
-              const requestedPage = Number.parseInt(pageDraft ?? "", 10);
-              if (!Number.isNaN(requestedPage)) {
-                setPage(Math.min(Math.max(requestedPage, 1), pageCount) - 1);
-              }
-              setPageDraft(null);
+              commitPageDraft();
             }}
           />
           <BodyShort size="small" as="span" id={pageCountId}>
