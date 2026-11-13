@@ -8,18 +8,19 @@ import {
 import { Button } from "../../../button";
 import { TextField } from "../../../form/textfield";
 import { BodyShort } from "../../../typography";
-import { useEventListener, useId } from "../../../utils-external";
+import { useId } from "../../../utils-external";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
+import { useShiftJumpPreview } from "./useShiftJumpPreview";
 
 interface DataGridPaginationPagesProps extends React.HTMLAttributes<HTMLElement> {
   children?: never;
 }
 
 /**
- * Provides previous and next page controls. Hold Shift to jump to the first page,
- * or to the last page when the total page count is known.
+ * Provides previous and next page controls. Hold Shift while hovering or focusing a button
+ * to jump to the first page, or to the last page when the total page count is known.
  *
  * With a known total page count, a page number can be typed and submitted with Enter.
  * Out-of-range values are clamped to the first or last page; Escape or blur discards the input.
@@ -46,20 +47,16 @@ const DataGridPaginationPages = forwardRef<
     );
   const translate = useI18n("DataGrid");
 
-  const [isShiftPressed, setIsShiftPressed] = useState(false);
   /* Typed page while editing; null shows the current page */
   const [pageDraft, setPageDraft] = useState<string | null>(null);
   const pageCountId = useId();
 
-  const syncShift = (event: KeyboardEvent) => setIsShiftPressed(event.shiftKey);
-  useEventListener("keydown", syncShift);
-  useEventListener("keyup", syncShift);
-  /* keyup never fires if focus leaves the window while Shift is held */
-  useEventListener("blur", () => setIsShiftPressed(false));
+  const previousPreview = useShiftJumpPreview();
+  const nextPreview = useShiftJumpPreview();
 
   const canGoLast = pageCount !== undefined;
-  const showFirst = isShiftPressed;
-  const showLast = isShiftPressed && canGoLast;
+  const showFirst = previousPreview.isShiftJump;
+  const showLast = nextPreview.isShiftJump && canGoLast;
 
   return (
     <nav
@@ -69,6 +66,7 @@ const DataGridPaginationPages = forwardRef<
       className={cl("aksel-data-grid__pagination-pages", className)}
     >
       <Button
+        {...previousPreview.shiftJumpProps}
         type="button"
         className="aksel-data-grid__pagination-pages-button"
         size="small"
@@ -150,6 +148,7 @@ const DataGridPaginationPages = forwardRef<
         </div>
       )}
       <Button
+        {...nextPreview.shiftJumpProps}
         type="button"
         className="aksel-data-grid__pagination-pages-button"
         size="small"

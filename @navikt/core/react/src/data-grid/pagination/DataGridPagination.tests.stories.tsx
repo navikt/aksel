@@ -318,20 +318,41 @@ export const ShiftJumpsToFirstAndLastPage: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const user = userEvent.setup();
+    const previous = canvas.getByRole("button", { name: "Forrige side" });
+    const next = canvas.getByRole("button", { name: "Neste side" });
 
     expectPage(canvas, 1, 3);
-    expect(canvas.getByRole("button", { name: "Neste side" })).toBeVisible();
 
+    /* Shift elsewhere on the page does not change the buttons */
     await user.keyboard("{Shift>}");
-    await user.click(canvas.getByRole("button", { name: "Siste side" }));
-    expectPage(canvas, 3, 3);
-    await user.click(canvas.getByRole("button", { name: "Første side" }));
-    expectPage(canvas, 1, 3);
-    await user.keyboard("{/Shift}");
+    expect(next).toHaveAccessibleName("Neste side");
+    expect(previous).toHaveAccessibleName("Forrige side");
 
-    expect(canvas.getByRole("button", { name: "Forrige side" })).toBeVisible();
-    await user.click(canvas.getByRole("button", { name: "Neste side" }));
+    await user.hover(next);
+    expect(next).toHaveAccessibleName("Siste side");
+    expect(previous).toHaveAccessibleName("Forrige side");
+    await user.click(next);
+    expectPage(canvas, 3, 3);
+
+    await user.hover(previous);
+    expect(previous).toHaveAccessibleName("Første side");
+    await user.click(previous);
+    expectPage(canvas, 1, 3);
+    /* Next lost both hover and focus */
+    expect(next).toHaveAccessibleName("Neste side");
+    await user.keyboard("{/Shift}");
+    expect(previous).toHaveAccessibleName("Forrige side");
+
+    await user.click(next);
     expectPage(canvas, 2, 3);
+
+    /* Keyboard: Shift on the focused button previews the jump */
+    await user.unhover(next);
+    expect(next).toHaveFocus();
+    await user.keyboard("{Shift>}");
+    expect(next).toHaveAccessibleName("Siste side");
+    await user.keyboard("{/Shift}");
+    expect(next).toHaveAccessibleName("Neste side");
   },
 };
 
