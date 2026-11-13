@@ -2,8 +2,8 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
-import { DataGridPaginationNavigation } from "../navigation/DataGridPaginationNavigation";
-import { DataGridPaginationPageSize } from "../page-size/DataGridPaginationPageSize";
+import { DataGridPaginationPages } from "../pages/DataGridPaginationPages";
+import { DataGridPaginationRows } from "../rows/DataGridPaginationRows";
 
 type DataGridPaginationProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -33,8 +33,8 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
         ref={forwardedRef}
         className={cl("aksel-data-grid__pagination", className)}
       >
-        <DataGridPaginationPageSize />
-        <DataGridPaginationNavigation />
+        <DataGridPaginationRows />
+        <DataGridPaginationPages />
       </div>
     );
   },

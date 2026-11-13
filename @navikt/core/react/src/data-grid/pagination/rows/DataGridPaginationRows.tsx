@@ -5,39 +5,34 @@ import { Button, type ButtonProps } from "../../../button";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
-type DataGridPaginationPageSizeProps = Omit<
+type DataGridPaginationRowsProps = Omit<
   ButtonProps,
   "children" | "size" | "variant" | "icon" | "iconPosition"
 >;
 
 /**
- * Lets users choose how many rows to display per page.
+ * Shows which rows are displayed (e.g. "1–10 of 245") and lets users choose how many rows to display per page.
  *
- * @see 🏷️ {@link DataGridPaginationPageSizeProps}
+ * @see 🏷️ {@link DataGridPaginationRowsProps}
  *
  * @example
  * ```jsx
  * <DataGrid columns={columns} data={rows} pagination={{}}>
  *   <DataGrid.Pagination>
- *     <DataGrid.PaginationPageSize />
+ *     <DataGrid.PaginationRows />
  *   </DataGrid.Pagination>
  * </DataGrid>
  * ```
  */
-const DataGridPaginationPageSize = forwardRef<
+const DataGridPaginationRows = forwardRef<
   HTMLButtonElement,
-  DataGridPaginationPageSizeProps
+  DataGridPaginationRowsProps
 >((restProps, forwardedRef) => {
-  const { pageSize, pageSizeOptions, setPageSize } =
+  const { pageSize, pageSizeOptions, setPageSize, from, to, totalRows } =
     useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGrid.PaginationPageSize must be used within <DataGrid pagination={...}>",
+      "[Aksel] DataGrid.PaginationRows must be used within <DataGrid pagination={...}>",
     );
-
-  const { from, to, totalRows } = useDataGridRootPaginationContext(
-    true,
-    "[Aksel] DataGrid.PaginationSummary must be used within <DataGrid pagination={...}>",
-  );
   const translate = useI18n("DataGrid");
 
   let text: string;
@@ -92,9 +87,9 @@ const DataGridPaginationPageSize = forwardRef<
 });
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace DataGridPaginationPageSize {
-  export type Props = DataGridPaginationPageSizeProps;
+export namespace DataGridPaginationRows {
+  export type Props = DataGridPaginationRowsProps;
 }
 
-export { DataGridPaginationPageSize };
-export type { DataGridPaginationPageSizeProps };
+export { DataGridPaginationRows };
+export type { DataGridPaginationRowsProps };

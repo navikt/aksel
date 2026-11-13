@@ -764,13 +764,13 @@ html[data-dragging-cursor="true"] *::after {
   gap: var(--ax-space-8);
 }
 
-.aksel-data-grid__pagination-navigation {
+.aksel-data-grid__pagination-pages {
   display: flex;
   align-items: center;
   gap: var(--ax-space-4);
 }
 
-.aksel-data-grid__pagination-navigation-button {
+.aksel-data-grid__pagination-pages-button {
   /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
   &[aria-disabled="true"] {
     cursor: default;
@@ -786,7 +786,7 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
-.aksel-data-grid__pagination-navigation-page {
+.aksel-data-grid__pagination-pages-label {
   display: inline-grid;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -802,7 +802,7 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
-.aksel-data-grid__pagination-navigation-page {
+.aksel-data-grid__pagination-pages-label {
   text-align: center;
   display: none;
 
@@ -811,7 +811,7 @@ html[data-dragging-cursor="true"] *::after {
   }
 }
 
-.aksel-data-grid__pagination-navigation-page-input {
+.aksel-data-grid__pagination-pages-input {
   display: none;
   align-items: center;
   gap: var(--ax-space-8);

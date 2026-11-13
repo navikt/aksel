@@ -12,7 +12,7 @@ import { cl } from "../../../utils/helpers";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
-interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLElement> {
+interface DataGridPaginationPagesProps extends React.HTMLAttributes<HTMLElement> {
   children?: never;
 }
 
@@ -23,25 +23,25 @@ interface DataGridPaginationNavigationProps extends React.HTMLAttributes<HTMLEle
  * With a known total page count, a page number can be typed and submitted with Enter.
  * Out-of-range values are clamped to the first or last page; Escape or blur discards the input.
  *
- * @see 🏷️ {@link DataGridPaginationNavigationProps}
+ * @see 🏷️ {@link DataGridPaginationPagesProps}
  *
  * @example
  * ```jsx
  * <DataGrid columns={columns} data={rows} pagination={{}}>
  *   <DataGrid.Pagination>
- *     <DataGrid.PaginationNavigation />
+ *     <DataGrid.PaginationPages />
  *   </DataGrid.Pagination>
  * </DataGrid>
  * ```
  */
-const DataGridPaginationNavigation = forwardRef<
+const DataGridPaginationPages = forwardRef<
   HTMLElement,
-  DataGridPaginationNavigationProps
+  DataGridPaginationPagesProps
 >(({ className, "aria-label": ariaLabel, ...rest }, forwardedRef) => {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridRootPaginationContext(
       true,
-      "[Aksel] DataGrid.PaginationNavigation must be used within <DataGrid pagination={...}>",
+      "[Aksel] DataGrid.PaginationPages must be used within <DataGrid pagination={...}>",
     );
   const translate = useI18n("DataGrid");
 
@@ -65,11 +65,11 @@ const DataGridPaginationNavigation = forwardRef<
       {...rest}
       ref={forwardedRef}
       aria-label={ariaLabel ?? translate("Pagination.navLabel")}
-      className={cl("aksel-data-grid__pagination-navigation", className)}
+      className={cl("aksel-data-grid__pagination-pages", className)}
     >
       <Button
         type="button"
-        className="aksel-data-grid__pagination-navigation-button"
+        className="aksel-data-grid__pagination-pages-button"
         size="small"
         variant="tertiary"
         data-color="neutral"
@@ -95,7 +95,7 @@ const DataGridPaginationNavigation = forwardRef<
       {pageCount === undefined ? (
         /* Without a known total, a typed page could land far past the last page */
         <span
-          className="aksel-data-grid__pagination-navigation-page"
+          className="aksel-data-grid__pagination-pages-label"
           data-max-label={translate("Pagination.pageOfUnknownTotal", {
             page: "9".repeat(Math.max(3, String(page + 1).length)),
           })}
@@ -105,7 +105,7 @@ const DataGridPaginationNavigation = forwardRef<
           </span>
         </span>
       ) : (
-        <div className="aksel-data-grid__pagination-navigation-page-input">
+        <div className="aksel-data-grid__pagination-pages-input">
           <TextField
             htmlSize={String(pageCount).length}
             label={translate("Pagination.goToPage")}
@@ -148,7 +148,7 @@ const DataGridPaginationNavigation = forwardRef<
       )}
       <Button
         type="button"
-        className="aksel-data-grid__pagination-navigation-button"
+        className="aksel-data-grid__pagination-pages-button"
         size="small"
         variant="tertiary"
         data-color="neutral"
@@ -174,9 +174,9 @@ const DataGridPaginationNavigation = forwardRef<
 });
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace DataGridPaginationNavigation {
-  export type Props = DataGridPaginationNavigationProps;
+export namespace DataGridPaginationPages {
+  export type Props = DataGridPaginationPagesProps;
 }
 
-export { DataGridPaginationNavigation };
-export type { DataGridPaginationNavigationProps };
+export { DataGridPaginationPages };
+export type { DataGridPaginationPagesProps };
