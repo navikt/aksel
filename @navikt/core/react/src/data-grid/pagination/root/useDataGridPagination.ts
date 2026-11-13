@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useControllableState, useEventCallback } from "../../../utils/hooks";
 import { getPaginationRange } from "../helpers/pagination-range";
@@ -75,16 +75,40 @@ function useDataGridPagination({
     }
   }, [isLoading, range.from, range.to, range.page, storedPage, totalRows]);
 
-  const setPage = useEventCallback((page: number) => {
+  /*
+   * Page and page size requested by pagination controls. The live region only announces a
+   * committed change matching this target, so sort resets, clamping and rejected controlled
+   * requests stay silent.
+   */
+  const announceTargetRef = useRef<{ page: number; pageSize: number } | null>(
+    null,
+  );
+
+  const requestPage = (page: number, announce: boolean) => {
     const nextPage = getPaginationRange({ page, pageSize, ...rows }).page;
     if (nextPage !== storedPage) {
+      if (announce) {
+        announceTargetRef.current = { page: nextPage, pageSize };
+      }
       setStoredPage(nextPage);
     }
-  });
+  };
+
+  /** For pagination controls. The resulting change is announced. */
+  const setPage = useEventCallback((page: number) => requestPage(page, true));
+
+  /** For internal resets, e.g. when sorting changes. Not announced. */
+  const resetPage = useEventCallback((page: number) =>
+    requestPage(page, false),
+  );
 
   const setPageSize = useEventCallback((size: number) => {
+    if (size === pageSize) {
+      return;
+    }
+    announceTargetRef.current = { page: 0, pageSize: size };
     setStoredPageSize(size);
-    setPage(0);
+    requestPage(0, false);
   });
 
   const lastCorrection = useRef<{
@@ -169,17 +193,44 @@ function useDataGridPagination({
 
   const summary = isLoading ? previousSummary.current : currentSummary;
 
-  return {
-    ...range,
-    from: summary.from,
-    to: summary.to,
-    pageSize,
-    pageSizeOptions,
-    totalRows: summary.totalRows,
-    isLoading,
-    setPage,
-    setPageSize,
-  };
+  const state = useMemo(
+    () => ({
+      page: range.page,
+      pageCount: range.pageCount,
+      startIndex: range.startIndex,
+      endIndex: range.endIndex,
+      canPrevious: range.canPrevious,
+      canNext: range.canNext,
+      from: summary.from,
+      to: summary.to,
+      totalRows: summary.totalRows,
+      pageSize,
+      pageSizeOptions,
+      isLoading,
+      setPage,
+      resetPage,
+      setPageSize,
+    }),
+    [
+      range.page,
+      range.pageCount,
+      range.startIndex,
+      range.endIndex,
+      range.canPrevious,
+      range.canNext,
+      summary.from,
+      summary.to,
+      summary.totalRows,
+      pageSize,
+      pageSizeOptions,
+      isLoading,
+      setPage,
+      resetPage,
+      setPageSize,
+    ],
+  );
+
+  return { state, announceTargetRef };
 }
 
 export { useDataGridPagination };

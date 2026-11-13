@@ -1,5 +1,5 @@
 type DataGridPaginationSharedOptions = {
-  /** Controlled, zero-indexed page. */
+  /** Controlled page. Zero-indexed (first page is 0). */
   page?: number;
   /**
    * Initial zero-indexed page when `page` is uncontrolled.
@@ -15,7 +15,10 @@ type DataGridPaginationSharedOptions = {
    * @default pageSizeOptions[0]
    */
   defaultPageSize?: number;
-  /** Called when the page size changes. */
+  /**
+   * Called when the page size changes.
+   * A page-size change also fires `onPageChange(0)`.
+   */
   onPageSizeChange?: (pageSize: number) => void;
   /**
    * Page-size options.

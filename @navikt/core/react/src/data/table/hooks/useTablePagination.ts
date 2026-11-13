@@ -38,7 +38,7 @@ function useTablePaginationReset({
   const pagination = useDataGridRootPaginationContext(false);
   const page = pagination?.page;
   const pageSize = pagination?.pageSize;
-  const setPage = pagination?.setPage;
+  const resetPage = pagination?.resetPage;
   const isClientMode = pagination?.mode === "client";
 
   const sortKey = JSON.stringify(
@@ -53,7 +53,7 @@ function useTablePaginationReset({
 
     const sortChanged = prev.sortKey !== sortKey;
     if (sortChanged && isClientMode) {
-      setPage?.(0);
+      resetPage?.(0);
     }
 
     if (sortChanged || prev.page !== page || prev.pageSize !== pageSize) {
@@ -61,7 +61,7 @@ function useTablePaginationReset({
         scrollWrapperRef.current.scrollTop = 0;
       }
     }
-  }, [sortKey, page, pageSize, setPage, isClientMode, scrollWrapperRef]);
+  }, [sortKey, page, pageSize, resetPage, isClientMode, scrollWrapperRef]);
 }
 
 export { useTablePagination, useTablePaginationReset };

@@ -30,7 +30,8 @@ type DataGridRowIdProps<RowT> =
     }
   | {
       /**
-       * Enables root-owned pagination state. Pages are zero-indexed.
+       * Enables root-owned pagination state. Pages are zero-indexed (`page`, `defaultPage`, `onPageChange`),
+       * unlike Aksel `<Pagination>`, which starts at 1.
        *
        * Client mode (default) accepts all rows; server mode accepts the current
        * page and requires exactly one of `totalRows` or `hasNextPage`.
@@ -181,7 +182,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
               {children}
             </DataGridPaginationInternal>
           ) : (
-            <DataGridRootPaginationContextProvider mode="none">
+            <DataGridRootPaginationContextProvider value={undefined}>
               {children}
             </DataGridRootPaginationContextProvider>
           )}

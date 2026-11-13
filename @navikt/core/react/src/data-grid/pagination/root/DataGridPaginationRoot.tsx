@@ -27,7 +27,7 @@ interface DataGridPaginationProps extends Omit<
  *
  * @example
  * ```jsx
- * <DataGrid columns={columns} data={rows} pagination={{ defaultPageSize: 10 }}>
+ * <DataGrid columns={columns} data={rows} getRowId={(row) => row.id} pagination={{ defaultPageSize: 10 }}>
  *   <DataGrid.Table />
  *   <DataGrid.Pagination />
  * </DataGrid>
@@ -50,7 +50,14 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
   },
 );
 
-function DataGridPaginationLiveRegion() {
+function DataGridPaginationLiveRegion({
+  announceTargetRef,
+}: {
+  announceTargetRef: React.MutableRefObject<{
+    page: number;
+    pageSize: number;
+  } | null>;
+}) {
   const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
     useDataGridRootPaginationContext();
   const translate = useI18n("DataGrid");
@@ -66,6 +73,13 @@ function DataGridPaginationLiveRegion() {
       return;
     }
 
+    lastAnnouncedPage.current = { page, pageSize };
+    const target = announceTargetRef.current;
+    announceTargetRef.current = null;
+    if (target?.page !== page || target.pageSize !== pageSize) {
+      return;
+    }
+
     const summary =
       to === 0
         ? translate("Pagination.summaryEmpty")
@@ -77,12 +91,21 @@ function DataGridPaginationLiveRegion() {
         ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
         : translate("Pagination.pageOf", { page: page + 1, pageCount });
 
-    lastAnnouncedPage.current = { page, pageSize };
     // Keep the completed message during loading and unrelated renders.
     setAnnouncement(
       `${summary}. ${pageLabel}. ${translate("Pagination.pageSize")}: ${pageSize}`,
     );
-  }, [isLoading, page, pageCount, pageSize, from, to, totalRows, translate]);
+  }, [
+    isLoading,
+    page,
+    pageCount,
+    pageSize,
+    from,
+    to,
+    totalRows,
+    translate,
+    announceTargetRef,
+  ]);
 
   return (
     <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">

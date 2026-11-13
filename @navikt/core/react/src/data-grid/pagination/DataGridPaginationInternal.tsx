@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { DataGridPaginationConfig } from "../root/DataGrid.types";
 import { DataGridRootPaginationContextProvider } from "../root/DataGridRoot.context";
 import { DataGridPaginationLiveRegion } from "./root/DataGridPaginationRoot";
@@ -19,7 +19,7 @@ function DataGridPaginationInternal({
   isLoading: boolean;
   children: React.ReactNode;
 }) {
-  const paginationState = useDataGridPagination({
+  const { state, announceTargetRef } = useDataGridPagination({
     pagination,
     rows:
       pagination.mode === "server"
@@ -38,14 +38,14 @@ function DataGridPaginationInternal({
     isLoading,
   });
 
+  const mode = pagination.mode ?? "client";
+  const value = useMemo(() => ({ ...state, mode }), [mode, state]);
+
   return (
-    <DataGridRootPaginationContextProvider
-      {...paginationState}
-      mode={pagination.mode ?? "client"}
-    >
+    <DataGridRootPaginationContextProvider value={value}>
       {children}
       {pagination.announcePageChanges !== false && (
-        <DataGridPaginationLiveRegion />
+        <DataGridPaginationLiveRegion announceTargetRef={announceTargetRef} />
       )}
     </DataGridRootPaginationContextProvider>
   );

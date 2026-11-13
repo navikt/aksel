@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import type { resolveDataGridSettings } from "../../data-grid-preferences/helpers/data-grid-settings";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
@@ -23,20 +24,21 @@ const { Provider: DataGridContextProvider, useContext: useDataGridContext } =
 
 type DataGridRootPaginationContextValue = ReturnType<
   typeof useDataGridPagination
-> & {
+>["state"] & {
   mode: "client" | "server";
 };
 
 const paginationContextErrorMessage =
   "DataGrid.Pagination must be used within a <DataGrid pagination={...}>";
 
-const {
-  Provider: DataGridRootPaginationContextProvider,
-  useContext: usePaginationContext,
-} = createStrictContext<DataGridRootPaginationContextValue | { mode: "none" }>({
-  name: "DataGridRootPaginationContext",
-  errorMessage: paginationContextErrorMessage,
-});
+/* `undefined` when the parent DataGrid has no `pagination`, so a nested grid never sees an outer grid's pagination. */
+const DataGridRootPaginationContext = React.createContext<
+  DataGridRootPaginationContextValue | undefined
+>(undefined);
+DataGridRootPaginationContext.displayName = "DataGridRootPaginationContext";
+
+const DataGridRootPaginationContextProvider =
+  DataGridRootPaginationContext.Provider;
 
 function useDataGridRootPaginationContext<S extends boolean = true>(
   strict?: S,
@@ -48,18 +50,15 @@ function useDataGridRootPaginationContext(
   strict = true,
   errorMessageOverride?: string,
 ) {
-  const context = usePaginationContext(strict, errorMessageOverride);
+  const context = useContext(DataGridRootPaginationContext);
 
-  if (context?.mode === "none") {
-    if (strict) {
-      const error = new Error(
-        errorMessageOverride ?? paginationContextErrorMessage,
-      );
-      error.name = "ContextError";
-      Error.captureStackTrace?.(error, useDataGridRootPaginationContext);
-      throw error;
-    }
-    return undefined;
+  if (!context && strict) {
+    const error = new Error(
+      errorMessageOverride ?? paginationContextErrorMessage,
+    );
+    error.name = "ContextError";
+    Error.captureStackTrace?.(error, useDataGridRootPaginationContext);
+    throw error;
   }
 
   return context;

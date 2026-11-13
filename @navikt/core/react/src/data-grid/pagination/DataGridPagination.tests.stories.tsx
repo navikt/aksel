@@ -631,3 +631,20 @@ export const ServerSortDoesNotResetPage: Story = {
     expectPage(canvas, 2, 3);
   },
 };
+
+export const SortResetIsNotAnnounced: Story = {
+  render: () => <ResetGrid acceptSort />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const liveRegion = canvasElement.querySelector<HTMLElement>(
+      '.aksel-sr-only[aria-live="polite"]',
+    );
+
+    await userEvent.click(canvas.getByRole("button", { name: "Next page" }));
+    await waitFor(() => expect(liveRegion).toHaveTextContent("Side 2 av 3"));
+
+    await userEvent.click(canvas.getByRole("button", { name: "Name" }));
+    expect(canvas.getByText("Page 1 · 20 rows")).toBeInTheDocument();
+    expect(liveRegion).toHaveTextContent("Side 2 av 3");
+  },
+};
