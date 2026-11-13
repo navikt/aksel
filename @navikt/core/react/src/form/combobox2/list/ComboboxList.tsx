@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
-import { useDeferredValue, useEventCallback } from "../../../utils/hooks";
+import { useDeferredValue } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { ComboboxGroup } from "../group/ComboboxGroup";
 import { ComboboxOption } from "../option/ComboboxOption";
@@ -67,9 +67,8 @@ function ComboboxListContent<
   const {
     options,
     value, // Selected options
-    onToggleOption: originalOnToggleOption,
+    onToggleOption,
   } = useComboboxRootContext();
-  const onToggleOption = useEventCallback(originalOnToggleOption);
   const deferredFilterString = useDeferredValue(filterString);
   const maybeAnnouceHits = useHitsAnnouncer(
     deferredFilterString,

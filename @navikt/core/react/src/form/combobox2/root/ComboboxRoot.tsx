@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl, createStrictContext } from "../../../utils/helpers";
+import { useEventCallback } from "../../../utils/hooks";
 import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
@@ -105,7 +106,7 @@ export function ComboboxRoot<
   children,
   options,
   value,
-  onToggleOption,
+  onToggleOption: originalOnToggleOption,
   defaultOpen = false,
   multiple = false,
   size = "medium",
@@ -114,6 +115,7 @@ export function ComboboxRoot<
   ...rest
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
+  const onToggleOption = useEventCallback(originalOnToggleOption);
   const [open, setOpen] = useState(defaultOpen);
 
   return (
