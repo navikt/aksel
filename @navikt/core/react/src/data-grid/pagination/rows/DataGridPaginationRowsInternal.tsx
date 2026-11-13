@@ -49,7 +49,7 @@ function DataGridPaginationRowsInternal() {
           <ActionMenu.Item
             key={size}
             onSelect={() => setPageSize(size)}
-            role="menuitemcheckbox"
+            role="menuitemradio"
             aria-checked={pageSize === size}
             icon={
               pageSize === size ? <CheckmarkHeavyIcon aria-hidden /> : <></>
