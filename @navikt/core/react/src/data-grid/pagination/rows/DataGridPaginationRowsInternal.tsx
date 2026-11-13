@@ -2,15 +2,24 @@ import React, { useMemo } from "react";
 import { CheckmarkHeavyIcon, ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu } from "../../../action-menu";
 import { Button } from "../../../button";
+import { BodyShort } from "../../../typography";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 
 /**
  * Shows which rows are displayed (e.g. "1–10 of 245") and lets users choose how many rows to display per page.
+ * Renders plain text when `allowPageSizeChange` is `false`.
  */
 function DataGridPaginationRowsInternal() {
-  const { pageSize, pageSizeOptions, setPageSize, from, to, totalRows } =
-    useDataGridRootPaginationContext();
+  const {
+    pageSize,
+    pageSizeOptions,
+    allowPageSizeChange,
+    setPageSize,
+    from,
+    to,
+    totalRows,
+  } = useDataGridRootPaginationContext();
   const translate = useI18n("DataGrid");
 
   let text: string;
@@ -29,6 +38,14 @@ function DataGridPaginationRowsInternal() {
         : [...pageSizeOptions, pageSize],
     [pageSize, pageSizeOptions],
   );
+
+  if (!allowPageSizeChange) {
+    return (
+      <BodyShort size="small" as="span">
+        {text}
+      </BodyShort>
+    );
+  }
 
   return (
     <ActionMenu>

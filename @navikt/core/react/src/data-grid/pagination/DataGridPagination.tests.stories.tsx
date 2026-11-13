@@ -612,6 +612,31 @@ export const ChangesPageSize: Story = {
   },
 };
 
+export const PageSizeChangeDisabled: Story = {
+  render: () => (
+    <DataGrid
+      columns={columns}
+      data={manyRows}
+      getRowId={getRowId}
+      pagination={{ defaultPageSize: 20, allowPageSizeChange: false }}
+    >
+      <DataGrid.Table bottomContent={<DataGrid.Pagination />} />
+    </DataGrid>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const user = userEvent.setup();
+
+    expect(canvas.getByText("Rad 1–20 av 60")).toBeInTheDocument();
+    expect(
+      canvas.queryByRole("button", { name: /Rader per side/ }),
+    ).not.toBeInTheDocument();
+
+    await user.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(canvas.getByText("Rad 21–40 av 60")).toBeInTheDocument();
+  },
+};
+
 export const ServerSortDoesNotResetPage: Story = {
   render: () => <ServerResetGrid />,
   play: async ({ canvasElement }) => {

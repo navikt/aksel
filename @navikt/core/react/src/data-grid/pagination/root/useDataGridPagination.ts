@@ -40,6 +40,7 @@ function useDataGridPagination({
     defaultPageSize,
     onPageSizeChange,
     pageSizeOptions = defaultPageSizeOptions,
+    allowPageSizeChange = true,
   } = pagination;
 
   const [storedPage, setStoredPage] = useControllableState({
@@ -166,25 +167,29 @@ function useDataGridPagination({
         "DataGrid pagination: controlled `pageSize` requires `onPageSizeChange`.",
       );
     }
-    if (pageSizeOptions.length === 0) {
-      consoleWarning(
-        "DataGrid pagination: `pageSizeOptions` must not be empty.",
-      );
-    }
-    if (new Set(pageSizeOptions).size !== pageSizeOptions.length) {
-      consoleWarning(
-        "DataGrid pagination: `pageSizeOptions` must contain unique values.",
-      );
-    }
-    if (pageSizeOptions.some((size) => !Number.isInteger(size) || size <= 0)) {
-      consoleWarning(
-        "DataGrid pagination: `pageSizeOptions` must contain positive integers.",
-      );
-    }
-    if (!pageSizeOptions.includes(pageSize)) {
-      consoleWarning(
-        "DataGrid pagination: the effective `pageSize` is missing from `pageSizeOptions`.",
-      );
+    if (allowPageSizeChange) {
+      if (pageSizeOptions.length === 0) {
+        consoleWarning(
+          "DataGrid pagination: `pageSizeOptions` must not be empty.",
+        );
+      }
+      if (new Set(pageSizeOptions).size !== pageSizeOptions.length) {
+        consoleWarning(
+          "DataGrid pagination: `pageSizeOptions` must contain unique values.",
+        );
+      }
+      if (
+        pageSizeOptions.some((size) => !Number.isInteger(size) || size <= 0)
+      ) {
+        consoleWarning(
+          "DataGrid pagination: `pageSizeOptions` must contain positive integers.",
+        );
+      }
+      if (!pageSizeOptions.includes(pageSize)) {
+        consoleWarning(
+          "DataGrid pagination: the effective `pageSize` is missing from `pageSizeOptions`.",
+        );
+      }
     }
     if (totalRows !== undefined && totalRows < 0) {
       consoleWarning("DataGrid pagination: `totalRows` must not be negative.");
@@ -206,6 +211,7 @@ function useDataGridPagination({
       totalRows: summary.totalRows,
       pageSize,
       pageSizeOptions,
+      allowPageSizeChange,
       isLoading,
       setPage,
       resetPage,
@@ -223,6 +229,7 @@ function useDataGridPagination({
       summary.totalRows,
       pageSize,
       pageSizeOptions,
+      allowPageSizeChange,
       isLoading,
       setPage,
       resetPage,

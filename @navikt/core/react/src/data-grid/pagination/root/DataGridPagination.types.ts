@@ -25,6 +25,12 @@ type DataGridPaginationSharedOptions = {
    * @default [10, 25, 50, 100]
    */
   pageSizeOptions?: number[];
+  /**
+   * Whether users can change the page size.
+   * When `false`, the row summary is shown as plain text and `pageSizeOptions` is ignored.
+   * @default true
+   */
+  allowPageSizeChange?: boolean;
 };
 
 export type { DataGridPaginationSharedOptions };
