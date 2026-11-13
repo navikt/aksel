@@ -5,10 +5,17 @@ import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.contex
 import { DataGridPaginationPagesInternal } from "../pages/DataGridPaginationPagesInternal";
 import { DataGridPaginationRowsInternal } from "../rows/DataGridPaginationRowsInternal";
 
-type DataGridPaginationProps = Omit<
+interface DataGridPaginationProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
   "children"
->;
+> {
+  /**
+   * Accessible name for the page navigation landmark.
+   * Use distinct labels when a grid has more than one pagination bar.
+   * @default "Sidenavigering"
+   */
+  navLabel?: string;
+}
 
 /**
  * Pagination bar for the parent DataGrid. Requires the `pagination` prop on `<DataGrid>`.
@@ -24,7 +31,7 @@ type DataGridPaginationProps = Omit<
  * ```
  */
 const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  ({ className, navLabel, ...rest }, forwardedRef) => {
     useDataGridRootPaginationContext();
 
     return (
@@ -34,7 +41,7 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
         className={cl("aksel-data-grid__pagination", className)}
       >
         <DataGridPaginationRowsInternal />
-        <DataGridPaginationPagesInternal />
+        <DataGridPaginationPagesInternal navLabel={navLabel} />
       </div>
     );
   },

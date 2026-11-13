@@ -20,7 +20,7 @@ import { useShiftJumpPreview } from "./useShiftJumpPreview";
  * With a known total page count, a page number can be typed and submitted with Enter.
  * Out-of-range values are clamped to the first or last page; Escape or blur discards the input.
  */
-function DataGridPaginationPagesInternal() {
+function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
     useDataGridRootPaginationContext();
   const translate = useI18n("DataGrid");
@@ -38,7 +38,7 @@ function DataGridPaginationPagesInternal() {
 
   return (
     <nav
-      aria-label={translate("Pagination.navLabel")}
+      aria-label={navLabel ?? translate("Pagination.navLabel")}
       className="aksel-data-grid__pagination-pages"
     >
       <Button
