@@ -49,7 +49,7 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
   },
 );
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
 }
