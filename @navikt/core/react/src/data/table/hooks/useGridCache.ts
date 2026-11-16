@@ -38,7 +38,10 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
   const setActiveCell = useCallback(
     (cell: Element | null) => {
       if (tableRef && cell) {
-        // Retain the active cell's coordinates before its row is removed.
+        /*
+         * Make sure the cached grid includes cell.
+         * Since setActiveCell is called with a potentially new cell, we need to rebuild the grid if it's dirty.
+         */
         getTableGrid(tableRef);
       }
       setActiveCellState(cell);
@@ -51,6 +54,19 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
       return;
     }
 
+    /*
+     * Keeps the active cell (the roving tabindex target) valid when rows change.
+     *
+     * When the active cell's row is removed (page change, filtering, sorting, loading rows),
+     * the table would otherwise have no tabbable cell. We then pick the cell at the same
+     * x/y position in the new grid, clamped to its size, and fall back to the first focusable
+     * cell in that row or table.
+     *
+     * Loading (`aria-busy="true"`): the real rows are often replaced by temporary loading rows,
+     * and then by the new data. We save the position of the original cell when it is first
+     * removed, keep it for the whole loading phase, and use it again when loading ends.
+     * Otherwise, the position would point to a loading row instead of the cell the user left.
+     */
     observerRef.current = new MutationObserver(() => {
       gridCacheRef.current.dirty = true;
 
@@ -59,17 +75,27 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
       const hasLoadingPosition = loadingCellPositionRef.current !== undefined;
       const wasRemoved =
         currentCell !== null && !tableRef.contains(currentCell);
-      // Restore saved coordinates even if loading left no active cell.
+      /*
+       * Restore when the active cell is gone, or when loading just ended with a saved position.
+       * The second case covers loading states that render no focusable cells, so no active cell
+       * was set while loading.
+       */
       if (wasRemoved || (!isLoading && hasLoadingPosition)) {
+        /*
+         * Prefer the position saved during loading. Otherwise, read the removed cell's last
+         * position from the cached grid. That grid was built before the mutation (see
+         * `setActiveCell`), so it still has the cell even though it's gone from the DOM.
+         */
         const position =
           loadingCellPositionRef.current ??
           (currentCell
             ? gridCacheRef.current.grid?.positions.get(currentCell)
             : undefined);
         if (isLoading) {
-          // Keep the original coordinates across temporary loading rows.
+          // Save the first position only (`??` above), so loading rows don't replace it.
           loadingCellPositionRef.current = position;
         }
+        // Rebuild from the current DOM, then pick the same x/y, clamped to the new grid.
         const { grid } = getTableGrid(tableRef);
         const rowIndex = Math.min(position?.y ?? 0, grid.length - 1);
         const row = grid[rowIndex] ?? [];
@@ -78,10 +104,14 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
           ? cell
           : (findFirstCellInRow(grid, rowIndex) ?? findFirstCell(grid));
 
-        // Update the tracked cell without moving focus from external controls.
+        /*
+         * Only updates which cell is tabbable. Focus is not moved, so focus stays on the
+         * control the user used (e.g. a pagination button).
+         */
         setActiveCell(nextCell);
       }
 
+      // Loading has ended and the position is restored. Clear it so the next load starts fresh.
       if (!isLoading) {
         loadingCellPositionRef.current = undefined;
       }
