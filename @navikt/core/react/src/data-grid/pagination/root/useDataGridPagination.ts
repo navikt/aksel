@@ -33,10 +33,10 @@ function useDataGridPagination({
 
   /* Keeps the reference stable when consumers pass a new array with the same values each render */
   const pageSizeOptionsKey = pageSizeOptionsProp.join(",");
-  // biome-ignore lint/correctness/useExhaustiveDependencies: pageSizeOptionsKey covers the array values.
+
   const pageSizeOptions = useMemo(
     () => pageSizeOptionsProp,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
     [pageSizeOptionsKey],
   );
 

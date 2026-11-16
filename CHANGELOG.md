@@ -1,5 +1,75 @@
 # Changelog
 
+## 8.23.0
+
+### @navikt/aksel-icons
+
+- Icons: All icons are now available as CSS custom properties. Import `@navikt/aksel-icons/css/<IconName>.css` for a single icon (e.g. `--aksel-icon-magnifying-glass`), or `@navikt/aksel-icons/css/index.css` for every icon. ([#5489](https://github.com/navikt/aksel/pull/5489))
+
+### @navikt/aksel-stylelint
+
+- Stylelint: `@navikt/aksel-stylelint/recommended` now references its plugin by explicit file path, fixing `Could not find "."` errors with Stylelint 18. ([#5527](https://github.com/navikt/aksel/pull/5527))
+
+### @navikt/ds-react
+
+- DataGrid: Faster rendering when many details panels are expanded. ([#5494](https://github.com/navikt/aksel/pull/5494))
+
+- DataGrid.Table: Keyboard navigation no longer rebuilds the internal grid map on every arrow key press, improving responsiveness in large tables. ([#5491](https://github.com/navikt/aksel/pull/5491))
+
+- Combobox: Ignore option selection when an open Combobox becomes disabled. ([#5520](https://github.com/navikt/aksel/pull/5520))
+
+- Timeline: Optimize period parsing. ([#5469](https://github.com/navikt/aksel/pull/5469))
+
+## 8.22.1
+
+### @navikt/ds-css
+
+- DataGrid: Column dividers in the table header are now hidden when column dividers are disabled, and only shown on hover, focus or while resizing. ([#5505](https://github.com/navikt/aksel/pull/5505))
+
+## 8.22.0
+
+### @navikt/aksel-icons
+
+- Icons: New icons `Gift`, `ArrowsPointingIn` and `ArrowsPointingOut`. ([#5484](https://github.com/navikt/aksel/pull/5484))
+
+* ESM: Mark ESM output as side-effect free, so bundlers like webpack, Turbopack and esbuild can tree-shake unused components and icons. ([#5472](https://github.com/navikt/aksel/pull/5472))
+
+### @navikt/ds-react
+
+- Combobox: The list is no longer focusable ([#5490](https://github.com/navikt/aksel/pull/5490))
+
+- Popover: Closed popovers no longer calculate their position on mount. This makes pages with many Dropdowns or HelpTexts render faster. ([#5474](https://github.com/navikt/aksel/pull/5474))
+
+- ESM: Mark ESM output as side-effect free, so bundlers like webpack, Turbopack and esbuild can tree-shake unused components and icons. ([#5472](https://github.com/navikt/aksel/pull/5472))
+
+- MonthPicker: Fixed issue where navigating to a year without any enabled months could lead to re-render loop in React ([#5503](https://github.com/navikt/aksel/pull/5503))
+
+- MonthPicker: Arrow-key navigation no longer freezes the page when no later or earlier month is enabled. Keyboard search now respects `fromDate`/`toDate` with both caption types and looks at most 100 years ahead or back. ([#5477](https://github.com/navikt/aksel/pull/5477))
+
+- Date utilities: Import date-fns functions and locales from their own paths, so unbundled Node imports (SSR, Vitest/Jest) no longer load every date-fns locale. ([#5476](https://github.com/navikt/aksel/pull/5476))
+
+- DataGrid: Fixed text selection inside details panels when keyboard navigation is enabled. ([`0bdad46`](https://github.com/navikt/aksel/commit/0bdad462664e04abd89c4121de515f6ae6d9aad1))
+
+## 8.21.0
+
+### @navikt/aksel-icons
+
+- Icons: Add 46 icons for text editing, tables, keyboard input, and filtering. ([#5458](https://github.com/navikt/aksel/pull/5458))
+
+### @navikt/ds-css
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+* DataTable: Constrain details panel width to the visible table area. ([#5433](https://github.com/navikt/aksel/pull/5433))
+
+### @navikt/ds-react
+
+- DataGrid: Add top and bottom content areas outside the table's scrollable viewport. ([#5442](https://github.com/navikt/aksel/pull/5442))
+
+* DatePicker: Preserve keyboard focus when controlled month changes replace the focused day. ([#5408](https://github.com/navikt/aksel/pull/5408))
+
+* Dialog, Lookup: Avoid setting aria-hidden on elements with role=alert/status when open ([#5466](https://github.com/navikt/aksel/pull/5466))
+
 ## 8.20.1
 
 ### @navikt/ds-css

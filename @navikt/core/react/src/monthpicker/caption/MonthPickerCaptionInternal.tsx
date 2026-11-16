@@ -1,11 +1,9 @@
-import {
-  format,
-  isAfter,
-  isBefore,
-  setYear,
-  startOfMonth,
-  startOfYear,
-} from "date-fns";
+import { format } from "date-fns/format";
+import { isAfter } from "date-fns/isAfter";
+import { isBefore } from "date-fns/isBefore";
+import { setYear } from "date-fns/setYear";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
 import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
@@ -29,10 +27,12 @@ const MonthPickerCaption = ({ popupLabelId }: MonthPickerCaptionProps) => {
     const fromYear = fromDate.getFullYear();
     const toDateYear = toDate.getFullYear();
     for (let currYear = fromYear; currYear <= toDateYear; currYear++) {
+      // oxlint-disable-next-line react/purity -- Only the year is used, so the result is stable.
       years.push(setYear(startOfYear(new Date()), currYear));
     }
 
     if (!years.map((x) => x.getFullYear()).includes(year.getFullYear())) {
+      // oxlint-disable-next-line react/purity -- Only the year is used, so the result is stable.
       years.push(setYear(startOfYear(new Date()), year.getFullYear()));
     }
     years.sort((a, b) => b.getFullYear() - a.getFullYear());

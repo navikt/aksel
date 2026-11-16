@@ -1,0 +1,253 @@
+.aksel-combo-box[data-disabled="true"] {
+  opacity: var(--ax-opacity-disabled);
+  pointer-events: none;
+}
+
+/************************************************
+ * Label & description & error                  *
+ ************************************************/
+
+.aksel-combo-box__label {
+  display: flex;
+  margin-bottom: var(--ax-space-8);
+}
+
+.aksel-combo-box__description {
+  margin-bottom: var(--ax-space-8);
+}
+
+.aksel-combo-box__error {
+  margin-top: var(--ax-space-8);
+}
+
+/************************************************
+ * Field                                        *
+ ************************************************/
+
+.aksel-combo-box__field-container {
+  position: relative;
+}
+
+.aksel-combo-box__field-btn {
+  background-color: var(--ax-bg-input);
+  border-radius: var(--ax-radius-8);
+  border: 1px solid var(--ax-border-neutral);
+  color: var(--ax-text-neutral);
+  width: 100%;
+  min-height: 3rem;
+  display: block;
+  position: relative;
+  padding: var(--ax-space-8);
+  padding-right: var(--ax-space-40);
+  scroll-margin-block-start: 4rem;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover {
+    border-color: var(--ax-border-strong);
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-color: var(--ax-border-strong);
+  }
+
+  @media (forced-colors: active) {
+    background-color: ButtonFace;
+    border-color: ButtonText;
+    color: ButtonText;
+  }
+
+  .aksel-combo-box[data-size="small"] & {
+    min-height: 2rem;
+    padding-block: 0;
+  }
+
+  &[data-readonly="true"] {
+    background-color: var(--ax-bg-neutral-moderate);
+    border-color: var(--ax-border-neutral-subtleA);
+    cursor: default;
+  }
+
+  &[data-error="true"] {
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+    border-color: var(--ax-border-danger-strong);
+  }
+}
+
+.aksel-combo-box__field-chevron {
+  position: absolute;
+  right: var(--ax-space-8);
+  top: 0;
+  margin-top: 0.75rem; /* We don't use dynamic centering because we don't want it to move if height changes */
+  font-size: 1.5rem;
+  pointer-events: none;
+  color: var(--ax-text-neutral);
+
+  @media (forced-colors: active) {
+    color: ButtonText;
+  }
+
+  .aksel-combo-box[data-size="small"] & {
+    margin-top: 0.25rem;
+  }
+}
+
+/************************************************
+ * Overlay                                      *
+ ************************************************/
+
+.aksel-combo-box__modal {
+  /**
+   * We set the height of the content to the visible viewport, but the virtual
+   * keyboard will still compensate for it's precence by adding some empty space
+   * at the bottom. We use overscroll-behavior and touch-action to prevent scrolling
+   * to this area. They overlap some, but both are needed to make it work everywhere.
+   * See also "List" section below and ComboboxOverlay.tsx.
+   *
+   * On iOS, overscroll-behavior has no effect on scroll containers that have
+   * no scrollable overflow, but it works well in Chrome on Android.
+   *
+   * touch-action works on iOS, but (on Chrome on Android at least) it's still
+   * possible to scroll by dragging from just bellow the list.
+   */
+  overscroll-behavior-y: contain;
+  touch-action: pinch-zoom pan-x;
+}
+
+.aksel-combo-box__modal-inner {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/************************************************
+ * Popup                                        *
+ ************************************************/
+
+.aksel-combo-box__popup {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  min-width: var(--__axc-floating-anchor-width);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  max-height: calc(var(--__axc-floating-available-height) - 4px);
+  background-color: var(--ax-bg-raised);
+  padding: 1px;
+
+  /* This is needed to get overflow:auto to work on child */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .aksel-combo-box:not(:has(.aksel-combo-box__modal)) & {
+    outline: 1px solid var(--ax-border-neutral-subtleA);
+    outline-offset: -1px;
+    border-radius: var(--ax-radius-8);
+    box-shadow: var(--ax-shadow-dialog);
+  }
+}
+
+/************************************************
+ * Filter input                                 *
+ ************************************************/
+
+.aksel-combo-box__filter {
+  margin: -1px;
+}
+
+.aksel-combo-box__filter .aksel-search__wrapper:has(.aksel-search__input:focus-visible) {
+  outline: none;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 2px solid var(--ax-border-focus);
+  }
+
+  .aksel-combo-box:not(:has(.aksel-combo-box__modal)) &::after {
+    border-top-left-radius: var(--ax-radius-8);
+    border-top-right-radius: var(--ax-radius-8);
+  }
+}
+
+.aksel-combo-box__filter .aksel-search__input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &:not(:hover) {
+    border-color: var(--ax-border-neutral-subtleA);
+  }
+
+  .aksel-combo-box__popup[data-size="medium"] & {
+    min-height: 0;
+  }
+
+  .aksel-combo-box__modal & {
+    border-radius: 0;
+  }
+}
+
+/************************************************
+ * List                                         *
+ ************************************************/
+
+.aksel-combo-box__list {
+  padding-block: var(--ax-space-12);
+
+  .aksel-combo-box__modal & {
+    padding-inline: var(--ax-space-16);
+
+    /* Prevents scrolling to area taken up by virtual keyboard.
+       Needed for iOS since it doesn't work to set it on the entire modal.
+       NB: Doesn't work if the list doesn't overflow.
+       See also "Overlay" section above and ComboboxOverlay.tsx. */
+    overscroll-behavior-y: contain;
+  }
+}
+
+.aksel-combo-box__no-results {
+  padding: var(--ax-space-12) var(--ax-space-8);
+  text-align: center;
+}
+
+/************************************************
+ * Option                                       *
+ ************************************************/
+
+.aksel-combo-box__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
+  .aksel-listbox__option-inner {
+  background-color: var(--ax-bg-moderate-pressedA);
+
+  @media (forced-colors: active) {
+    background-color: SelectedItem;
+    color: SelectedItemText;
+    forced-color-adjust: none;
+  }
+}
+
+.aksel-combo-box__option-checkmark {
+  --__axc-combo-box-option-checkmark-size: 1.25rem;
+
+  width: var(--__axc-combo-box-option-checkmark-size);
+  height: var(--__axc-combo-box-option-checkmark-size);
+  margin-top: var(--ax-space-2);
+  float: left;
+
+  .aksel-combo-box__popup[data-size="small"] & {
+    --__axc-combo-box-option-checkmark-size: 1rem;
+  }
+
+  & svg {
+    font-size: var(--__axc-combo-box-option-checkmark-size);
+  }
+}
+
+.aksel-combo-box__option-label {
+  padding-left: var(--ax-space-24);
+}

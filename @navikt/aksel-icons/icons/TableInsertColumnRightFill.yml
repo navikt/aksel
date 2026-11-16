@@ -2,6 +2,9 @@ name: TableInsertColumnRightFill
 category: Interface
 sub_category: Table
 keywords:
-  - TableInsertColumnRightFill
+  - ny kolonne
+  - høyre
+  - tabell
+  - datagrid
 variant: Fill
 created_at: 26.10.2026

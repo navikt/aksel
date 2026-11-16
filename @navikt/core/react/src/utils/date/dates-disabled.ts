@@ -1,4 +1,4 @@
-import { isSameDay } from "date-fns";
+import { isSameDay } from "date-fns/isSameDay";
 import { isDateRange } from "../components/date/Date.typeutils";
 
 export const disableDate = (

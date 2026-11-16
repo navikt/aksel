@@ -1,6 +1,5 @@
 {
   "cssVariables.lookupFiles": ["@navikt/core/tokens/dist/tokens.css"],
-  "eslint.problems.shortenToSingleLine": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.watcherExclude": {
     "**/.yarn/**": true,

@@ -43,7 +43,7 @@ function IconPageIconDetails({
       }),
     );
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react/set-state-in-effect
     setDownloadLink(url);
 
     return () => {
@@ -86,7 +86,7 @@ function IconPageIconDetails({
         <Button
           variant="secondary"
           as="a"
-          href={`https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`}
+          href={`https://github.com/navikt/aksel/issues/new?template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`}
           target="_blank"
           rel="noreferrer noopener"
           icon={<Icons.BugIcon aria-hidden />}

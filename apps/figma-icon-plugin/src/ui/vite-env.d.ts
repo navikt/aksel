@@ -21,7 +21,7 @@ declare module "**/metadata.mjs" {
     created_at: Date;
   };
 
-  declare const metadata: {
+  const metadata: {
     [iconId: string]: AkselIcon;
   };
 

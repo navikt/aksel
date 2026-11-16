@@ -1,3 +1,4 @@
+// oxlint-disable-next-line typescript/no-require-imports
 const template = require("./config/template");
 
 module.exports = {

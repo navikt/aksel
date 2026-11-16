@@ -1,8 +1,8 @@
 ---
 name: Feature Request
 about: Foreslå noe nytt!
-title: "[NEW]"
-labels: new ✨
+title: "[NEW] "
+labels: nytt ✨
 assignees: ""
 ---
 

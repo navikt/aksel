@@ -1,10 +1,8 @@
-import {
-  compareAsc,
-  compareDesc,
-  format,
-  isSameMonth,
-  setYear,
-} from "date-fns";
+import { compareAsc } from "date-fns/compareAsc";
+import { compareDesc } from "date-fns/compareDesc";
+import { format } from "date-fns/format";
+import { isSameMonth } from "date-fns/isSameMonth";
+import { setYear } from "date-fns/setYear";
 import React, { useEffect, useRef } from "react";
 import { dateIsInCurrentMonth, isMatch } from "../../utils/date";
 import { cl } from "../../utils/helpers";
@@ -75,6 +73,7 @@ const MonthPickerButtonInternal = ({
   const isThisMonth = dateIsInCurrentMonth(month, year);
 
   return (
+    // oxlint-disable-next-line jsx-a11y/control-has-associated-label
     <button
       ref={ref}
       type="button"
@@ -108,7 +107,7 @@ const MonthPickerButtonInternal = ({
         setTabRoot(next);
       }}
       onFocus={() => {
-        setTabRoot(focus);
+        setTabRoot(month);
       }}
     >
       <div className="rdp-day__inner">

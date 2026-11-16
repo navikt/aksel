@@ -42,7 +42,7 @@ export const Default: Story = {
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-    title: "LocalAlert Title",
+    title: "LocalAlert title",
     size: "medium",
     status: "announcement",
   },

@@ -80,7 +80,7 @@ export const useFormField = (
   const showErrorMsg =
     !disabled && !readOnly && !!error && typeof error !== "boolean";
 
-  const ariaInvalid = { ...(hasError ? { "aria-invalid": true } : {}) };
+  const ariaInvalid = hasError ? { "aria-invalid": true } : {};
 
   if ((props as any)?.required) {
     consoleWarning(

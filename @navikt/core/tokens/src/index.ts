@@ -285,7 +285,7 @@ async function buildOtherTokenFormats() {
     },
   });
 
-  await Promise.all([SDDictionaryNonCSSFormats.hasInitialized]);
+  await SDDictionaryNonCSSFormats.hasInitialized;
 
   SDDictionaryNonCSSFormats.registerTransform(transformCSS);
 
@@ -372,7 +372,7 @@ async function buildCSSBundleForTokens({
     },
   });
 
-  await Promise.all([SDictionary.hasInitialized]);
+  await SDictionary.hasInitialized;
 
   SDictionary.registerTransform(transformCSS);
   await SDictionary.buildAllPlatforms();

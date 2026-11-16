@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
+/* oxlint-disable typescript/no-require-imports */
 export async function register(): Promise<void> {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     /**

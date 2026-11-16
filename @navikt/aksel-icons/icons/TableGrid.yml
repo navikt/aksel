@@ -2,6 +2,7 @@ name: TableGrid
 category: Interface
 sub_category: Table
 keywords:
-  - TableGrid
+  - tabell
+  - datagrid
 variant: Stroke
 created_at: 26.10.2026

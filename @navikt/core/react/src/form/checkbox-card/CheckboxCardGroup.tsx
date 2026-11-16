@@ -28,7 +28,7 @@ const CheckboxCardGroup = forwardRef<
   />
 ));
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace CheckboxCardGroup {
   export type Props = CheckboxCardGroupProps;
 }

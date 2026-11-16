@@ -1,5 +1,9 @@
 import type { CompareResults } from "./helpers/compare.js";
 
+/* Ignore tiny size changes (bytes) to reduce noise from shared code */
+const MIN_MINIFIED_CHANGE = 100;
+const MIN_GZIP_CHANGE = 50;
+
 function markdownMessage(compareResults: CompareResults): string {
   const lines: string[] = [];
   const { cssSizeDiff, reactConfigDiff } = compareResults;
@@ -28,7 +32,10 @@ function markdownMessage(compareResults: CompareResults): string {
   });
 
   const pathsWithBundleSizeChanges = paths.filter(([, diff]) => {
-    return diff.bundleSize.gzip !== 0 || diff.bundleSize.minified !== 0;
+    return (
+      Math.abs(diff.bundleSize.minified) >= MIN_MINIFIED_CHANGE ||
+      Math.abs(diff.bundleSize.gzip) >= MIN_GZIP_CHANGE
+    );
   });
 
   if (

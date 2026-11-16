@@ -15,7 +15,7 @@ function IconDetails({
   iconName?: keyof typeof meta;
   iconSvg?: string;
 }) {
-  // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
+  // oxlint-disable-next-line import/namespace
   const IconComponent = Icons[`${iconName}Icon`];
   const metaData = iconName ? meta[iconName] : null;
 
@@ -52,7 +52,7 @@ function IntroInformation() {
   return (
     <div className={styles.iconDetails}>
       <Heading level="2" size="small" spacing>
-        React komponenter
+        React-komponenter
       </Heading>
       <VStack gap="space-24">
         <div>
@@ -71,18 +71,17 @@ function IntroInformation() {
             data-block-margin="space-0"
             tabs={[
               {
-                code: `import { ChevronDownIcon, TrashIcon, FilterIcon } from "@navikt/aksel-icons";
+                code: `import { ChevronDownIcon, TrashIcon } from "@navikt/aksel-icons";
 
-function MyComponent () {
+function MyComponent() {
   return (
     <div>
-      <FilterIcon />
       <TrashIcon aria-hidden />
       <ChevronDownIcon
         title="Åpne panel"
       />
     </div>
-  )
+  );
 }`,
                 lang: "tsx",
                 text: "React",

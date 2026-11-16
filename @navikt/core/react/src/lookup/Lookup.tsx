@@ -89,7 +89,6 @@ export const Lookup = forwardRef<HTMLSpanElement, LookupProps>(
 
     return (
       <>
-        {/** biome-ignore lint/a11y/useSemanticElements: We use a span since the built-in button styling does not allow for proper line-break. Lookup-text needs to be able to "flow" across multiple lines.  */}
         <span
           {...rest}
           role="button"

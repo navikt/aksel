@@ -13,9 +13,7 @@ const PACKAGE_FAMILIES: {
   {
     name: "vitest",
     match: (dependency) =>
-      dependency === "vitest" ||
-      (dependency.startsWith("@vitest/") &&
-        dependency !== "@vitest/eslint-plugin"),
+      dependency === "vitest" || dependency.startsWith("@vitest/"),
   },
   {
     name: "storybook",

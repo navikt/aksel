@@ -10,11 +10,10 @@
 
 ## Behavior
 
-- Only respond in same language as the input. Prefer English always.
-- Use caveman-skill unless asked not to.
-- No apologies, no "I think", no change summaries.
-- Answer-first. 0-2 sentences max.
-- No thinking aloud; do next edit. Explain only when asked or non-obvious.
+- Respond in the language the user prompted in, unless they request another language.
+- Use concise, plain language without sacrificing technical precision or completeness.
+- Lead with the outcome. Avoid filler and unnecessary apologies; summarize meaningful changes and validation when useful.
+- Do not narrate routine tool use. Explain decisions, blockers, uncertainty, and tradeoffs when relevant.
 - Show only what changes. Minimal diffs; don't paste whole files.
 - Edit only the files the change needs (see Definition of done); no unrelated files. Ask only when truly blocked.
 - Favor perf/security; avoid re-renders, top-level side effects, unsafe HTML, env var leaks.
@@ -22,7 +21,7 @@
 ## Repo summary
 
 - Nav's design system. Yarn 4 workspaces monorepo: published packages under `@navikt/` + docs site `aksel.nav.no/` + `apps/` + `tooling/`.
-- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 4, ESLint 9, Stylelint 17, Biome 2 (lint only), Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
+- Stack: TypeScript 6, React 19 (dev), Next.js 16, Storybook 10, Vitest 5, Oxlint 1 (with ESLint plugins as JS plugins), Stylelint 17, Prettier 3 (formatting). Node 22+, Yarn 4.18.0.
 - Published `@navikt/*` packages must stay React 17 compatible (peer `react ^17 || ^18 || ^19`).
 
 ## Start and validate
@@ -39,18 +38,18 @@
 
 ## Definition of done
 
-- Behavior/visual change: update impl + closest story + test.
+- Behavior/visual change: update the implementation and closest existing story. Prefer Storybook play tests for UI behavior and unit tests for small utilities; combine overlapping coverage into existing stories instead of adding redundant stories.
 - New public export: sync component `index.ts`, `src/index.ts` (or `src/preview.ts`) and `package.json` exports, then `corepack yarn workspace aksel-playroom sync-imports` (root `lint` fails on stale playroom imports).
 - User-facing change to a published package: add a changeset (`add-changeset` skill) unless told otherwise.
 
 ## Commands
 
-- `corepack yarn eslint --max-warnings=0 --no-warn-ignored <files...>` / `corepack yarn stylelint <files...>` / `corepack yarn biome lint --no-errors-on-unmatched <files...>`
+- `corepack yarn oxlint --deny-warnings <files...>` / `corepack yarn stylelint <files...>`
 - `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted type-check
 - `corepack yarn workspace <name> <script>` - e.g. `@navikt/ds-react test` (Vitest + tsc), `website test`
 - `corepack yarn lint` / `corepack yarn test` / `corepack yarn boot` - root suites (slow; cross-workspace changes only)
 - `corepack yarn storybook` (:6006) / `corepack yarn storybook:aksel` (website examples, :6007, no secrets) / `corepack yarn storybook:test` (play tests, Playwright Firefox; Chromium when `COPILOT_CLI` is set) / `corepack yarn dev` (website, :3000, needs Sanity token)
-- Targeted play tests: `corepack yarn vitest run --config ./vitest.config.ts --project=storybook <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs Chromium; if the browser can't launch, report tests as not run with the exact command.
+- Targeted play tests: `corepack yarn storybook:test <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs Chromium; if the browser can't launch, report tests as not run with the exact command.
 
 ## Where to edit
 
@@ -64,12 +63,13 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - `@navikt/aksel/src/` - CLI and codemods
 - `aksel.nav.no/website/` - Next.js docs site · `aksel.nav.no/sanity-studio/` - CMS schema
 - `apps/playroom/`, `apps/mcp-server/`, `apps/figma-icon-plugin/` - apps · `tooling/` - ESLint plugin, scripts, changelog, analyzer
-- `.changeset/` - release notes · Root config: `eslint.config.js`, `stylelint.config.mjs`, `biome.json`, `vitest.config.ts`, `.storybook/`
+- `.changeset/` - release notes · Root config: `oxlint.config.mts`, `stylelint.config.mjs`, `vitest.config.mts`, `.storybook/`
 
 ## Skills and agents
 
 - `aksel-local-validation` - pick and run the right lint/type/test commands
 - `code-review` - review a branch, diff or PR for consumer-facing risk
+- `component-contract` - define and verify component behavior, state ownership and accessibility contracts
 - `add-changeset` - write `.changeset/*.md` (never run interactive `yarn changeset`)
 - `ds-component-restructure` - move/rename component files to canonical layout
 - `website-example` - add aksel.nav.no examples/templates

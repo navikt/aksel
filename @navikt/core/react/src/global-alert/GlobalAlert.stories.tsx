@@ -48,7 +48,7 @@ export const Default: Story = {
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-    title: "GlobalAlert Title",
+    title: "GlobalAlert title",
     size: "medium",
     status: "announcement",
     centered: true,

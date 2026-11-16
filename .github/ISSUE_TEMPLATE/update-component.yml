@@ -1,5 +1,5 @@
 name: Innspill til komponent
-description: Send inn innspill til komponent
+description: Send inn tilbakemelding på komponent
 title: "[Innspill til komponent]: "
 labels: ["forespørsel 🥰", "komponenter 🧩", "nytt ✨", "beta 🧪"]
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         Takk for at du bidrar inn i Aksel!
   - type: textarea
-    id: feeback
+    id: feedback
     attributes:
       label: Tilbakemelding
       description: Beskriv hvilke tilbakemeldinger du har til komponenten

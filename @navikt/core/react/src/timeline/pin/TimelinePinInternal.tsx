@@ -12,7 +12,7 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import { format } from "date-fns";
+import { format } from "date-fns/format";
 import React, { forwardRef, useMemo, useState } from "react";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";

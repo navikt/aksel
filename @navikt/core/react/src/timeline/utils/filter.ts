@@ -1,4 +1,4 @@
-import { differenceInDays } from "date-fns";
+import { differenceInDays } from "date-fns/differenceInDays";
 import type { PeriodProps } from "../Timeline.types";
 import type { Spatial } from "./types.internal";
 

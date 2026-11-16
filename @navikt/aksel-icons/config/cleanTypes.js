@@ -1,7 +1,7 @@
 /**
  * Fikser https://github.com/navikt/aksel/issues/1758
  */
-
+// oxlint-disable-next-line typescript/no-require-imports
 const fs = require("node:fs");
 
 const basePath = "./dist/react/esm";

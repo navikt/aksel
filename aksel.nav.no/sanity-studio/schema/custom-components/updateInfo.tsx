@@ -69,7 +69,9 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
     return null;
   }
 
+  // oxlint-disable-next-line react/purity -- Age relative to now is intended.
   const diff = differenceInMonths(new Date(), new Date(verified));
+  // oxlint-disable-next-line react/purity -- Age relative to now is intended.
   const diffInDays = differenceInDays(new Date(), new Date(verified));
   const outDated = diff >= (articleType === "aksel_artikkel" ? 12 : 6);
 

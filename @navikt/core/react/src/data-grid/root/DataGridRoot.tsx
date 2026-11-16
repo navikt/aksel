@@ -121,8 +121,6 @@ interface DataGridComponent {
 /**
  * Component for displaying tabular data.
  *
- * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
- *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/datagrid)
  * @see 🏷️ {@link DataGridProps}
  *
@@ -198,16 +196,16 @@ DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
 DataGrid.Pagination = DataGridPagination;
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// oxlint-disable-next-line typescript/no-namespace
 export namespace DataGrid {
   export type Props<T = unknown> = DataGridProps<T>;
   export type Columns<T = unknown> = ColumnDefinitions<T>;
   export type Selection<T = unknown> = SelectionProps<T>;
   export type Settings = DataGridSettings;
 
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // oxlint-disable-next-line typescript/no-namespace
   export namespace Table {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props<T = unknown> = DataGridTable.Props<T>;
     export type Sorting = DataGridTable.Sorting;
     export type SortEntry = DataGridTable.SortEntry;
@@ -217,15 +215,15 @@ export namespace DataGrid {
     export type DetailsPanel<T = unknown> = DataGridTable.DetailsPanel<T>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // oxlint-disable-next-line typescript/no-namespace
   export namespace Preferences {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props = DataGridPreferences.Props;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // oxlint-disable-next-line typescript/no-namespace
   export namespace Pagination {
-    // biome-ignore lint/suspicious/noShadow: intentional namespace re-export
+    // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props = DataGridPagination.Props;
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Masonry from "react-responsive-masonry";
+import { Masonry } from "react-responsive-masonry";
 import { Box, HGrid, Heading } from "@navikt/ds-react";
 import { useMedia } from "@/app/_ui/utils/hooks/useMedia";
 import Card, { type ArticleT } from "./FrontpageMasonryCard";

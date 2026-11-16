@@ -114,6 +114,7 @@ async function CachedKomponenterPage({
           <SystemPanel
             variant={pageData.status?.tag as "beta" | "new"}
             unsafeBeta={pageData.status?.unsafe}
+            pageHeading={pageData.heading}
           />
         )}
 

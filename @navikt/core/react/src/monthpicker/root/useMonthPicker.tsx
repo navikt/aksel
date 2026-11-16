@@ -149,6 +149,7 @@ export const useMonthpicker = (
   const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
+  // oxlint-disable-next-line react/purity -- Memoized once per mount.
   const today = useMemo(() => new Date(), []);
   const localeFromProvider = useDateLocale();
   const locale = _locale ? getLocaleFromString(_locale) : localeFromProvider;

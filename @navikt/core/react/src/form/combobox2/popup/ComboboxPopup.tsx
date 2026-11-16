@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useClientLayoutEffect } from "../../../utils-external";
 import { Listbox } from "../../../utils/components/Listbox/root/ListboxRoot";
 import { createStrictContext } from "../../../utils/helpers";
 import { useComboboxRootContext } from "../root/ComboboxRoot";
@@ -29,11 +30,11 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   const rootContext = useComboboxRootContext();
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useEffect(
+  useClientLayoutEffect(
     function onOpen() {
       const canHover = window.matchMedia("(hover: hover)").matches;
 
-      // Virtually focus and scroll to first (selected) option
+      // Virtually focus (and scroll to) first (selected) option
       const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
         '[aria-selected="true"]',
       );
@@ -43,8 +44,8 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         }
         const scrollToSelectedOption = () =>
           selectedOptionElm.scrollIntoView({ block: "nearest" });
-        setTimeout(scrollToSelectedOption, 0); // For when opened in Floating
-        queueMicrotask(scrollToSelectedOption); // For when opened in Dialog
+        setTimeout(scrollToSelectedOption, 0); // Need a small delay to make it work in Floating
+        // See also ComboboxOverlay (special logic to account for virtual keyboard on mobile)
       } else {
         const firstOptionElm =
           ref.current?.querySelector<HTMLElement>('[role="option"]');
@@ -75,7 +76,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
   return (
     <Listbox
       ref={ref}
-      className="aksel-combobox2__popup"
+      className="aksel-combo-box__popup"
       setVirtuallyFocusedOptionId={setVirtuallyFocusedOptionValue}
       size={rootContext.size}
     >
@@ -85,7 +86,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
         filterString={filterString}
         setFilterString={(newString) => {
           setFilterString(newString);
-          setVirtuallyFocusedOptionValue("");
+          setVirtuallyFocusedOptionValue(""); // Remove virtual focus when filter string changes
         }}
       >
         {children}

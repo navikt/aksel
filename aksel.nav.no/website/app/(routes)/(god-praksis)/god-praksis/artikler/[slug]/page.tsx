@@ -178,6 +178,7 @@ async function CachedArticle({
     pageData?.publishedAt ??
     pageData?._updatedAt;
 
+  // oxlint-disable-next-line react/purity -- Server Component, rendered once per request.
   const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
   const writers = getValidRenderArray(pageData.writers);
 

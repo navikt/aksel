@@ -46,9 +46,9 @@ let regions: {
 function createRegion(politeness: Politeness) {
   const el = document.createElement("div");
   el.dataset.akselAnnouncer = "";
-  el.className = "aksel-sr-only";
+  el.className = "aksel-sr-only"; // TODO: Bruk inline style fra FocusGuards.tsx
   el.role = politeness === "assertive" ? "alert" : "status";
-  document.body.appendChild(el);
+  document.body.appendChild(el); // TODO Bruk root fra Provider (se Portal.tsx)
   return el;
 }
 
@@ -86,12 +86,12 @@ function announce(message: string, politeness: Politeness = "polite") {
   }
   // If the message is the same as the current text,
   // append a non-breaking space to force a re-announcement.
-  target.textContent = message === target.textContent ? `${message} ` : message; // eslint-disable-line no-irregular-whitespace
+  target.textContent = message === target.textContent ? `${message} ` : message;
   scheduleClear(politeness, target);
 }
 
 /**
- * Speaks a message through a persistently-mounted, visually-hidden live region.
+ * Announces a message through a persistently-mounted, visually-hidden live region.
  *
  * The polite and assertive regions are created once and kept mounted.
  *

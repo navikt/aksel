@@ -21,7 +21,7 @@ function WebsiteAccordionProvider({
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
-        setOpenAccordions(new Array(options).fill(0).map((_, i) => i));
+        setOpenAccordions(Array.from({ length: options }, (_, i) => i));
       }
     };
 

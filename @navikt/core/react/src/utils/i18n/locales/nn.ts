@@ -1,4 +1,4 @@
-import { nn } from "date-fns/locale";
+import { nn } from "date-fns/locale/nn";
 import type { Translations } from "../i18n.types";
 
 export default {

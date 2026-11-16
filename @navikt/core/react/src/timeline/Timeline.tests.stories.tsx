@@ -7,7 +7,6 @@ export default {
   title: "ds-react/Timeline/Tests",
   component: Timeline,
   parameters: { chromatic: { disable: true } },
-  tags: ["play-fn"],
 };
 
 type Story = StoryObj<typeof Timeline>;

@@ -62,7 +62,7 @@ async function main() {
       .replace(/### /g, "## "); // Bump package names down to h2
     const heading = `Versjon ${version}`;
     const blocks = htmlToBlocks(converter.makeHtml(text), blockContentType, {
-      parseHtml: (htmlStr) => new JSDOM(htmlStr).window._document,
+      parseHtml: (htmlStr) => new JSDOM(htmlStr).window.document,
     });
     const slug = `versjon-${version}`;
 

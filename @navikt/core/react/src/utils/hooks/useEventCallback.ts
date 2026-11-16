@@ -17,6 +17,7 @@
  *
  * This hook is a more permissive version of React 19.2's `React.useEffectEvent` in that it can be passed through contexts and called in event handler props, not just effects.
  */
+// oxlint-disable-next-line no-restricted-imports -- Only compared by identity to detect Preact, never called.
 import React, { useLayoutEffect } from "react";
 import { useRefWithInit } from "./useRefWithInit";
 
@@ -46,7 +47,7 @@ type Stable<T extends Callback> = {
 
 function useEventCallback<T extends Callback>(callback: T | undefined): T {
   const stable = useRefWithInit(createStableCallback).current as Stable<T>;
-  stable.next = callback; // eslint-disable-line react-hooks/immutability
+  stable.next = callback; // oxlint-disable-line react/immutability
   useSafeInsertionEffect(stable.effect);
   return stable.trampoline;
 }

@@ -17,7 +17,7 @@ function useToggleGroup({
   /* Sync focused `value` with controlled `selectedValue` */
   useEffect(() => {
     if (value != null) {
-      setFocusedValue(value); // eslint-disable-line react-hooks/set-state-in-effect
+      setFocusedValue(value); // oxlint-disable-line react/set-state-in-effect
     }
   }, [value]);
 

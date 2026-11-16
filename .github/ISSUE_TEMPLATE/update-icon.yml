@@ -1,6 +1,6 @@
 name: Innspill til ikon
-description: Send inn innspill til ikon
-title: "[Tilbakemelding på ikon]: "
+description: Send inn tilbakemelding på ikon
+title: "[Innspill til ikon]: "
 labels: ["forespørsel 🥰", "ikoner 🖼️"]
 body:
   - type: markdown
@@ -8,7 +8,7 @@ body:
       value: |
         Takk for at du bidrar inn i Aksel!
   - type: textarea
-    id: feeback
+    id: feedback
     attributes:
       label: Tilbakemelding
       description: Beskriv hvilke tilbakemeldinger du har til ikonet

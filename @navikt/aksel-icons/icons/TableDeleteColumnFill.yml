@@ -2,6 +2,9 @@ name: TableDeleteColumnFill
 category: Interface
 sub_category: Table
 keywords:
-  - TableDeleteColumnFill
+  - slett kolonne
+  - tabell
+  - datagrid
+  - fjern
 variant: Fill
 created_at: 26.10.2026

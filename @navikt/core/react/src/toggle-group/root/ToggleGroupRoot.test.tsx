@@ -77,7 +77,7 @@ describe("ToggleGroup", () => {
       "false",
     );
 
-    // eslint-disable-next-line testing-library/no-unnecessary-act
+    // oxlint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       await userEvent.keyboard(" ");
     });

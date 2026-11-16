@@ -74,6 +74,9 @@ export const Attachments: Story = {
       options: ["none", "x", "y", "both"],
     },
   },
+  args: {
+    overflow: "none",
+  },
 };
 
 export const Chromatic = renderStoriesForChromatic({

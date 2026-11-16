@@ -1,4 +1,3 @@
-import BundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
 import path from "node:path";
@@ -173,5 +172,4 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@navikt/next-logger", "next-logger", "pino"],
 };
 
-module.exports =
-  process.env.ANALYZE === "true" ? BundleAnalyzer()(nextConfig) : nextConfig;
+module.exports = nextConfig;

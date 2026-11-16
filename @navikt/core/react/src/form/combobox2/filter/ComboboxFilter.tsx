@@ -21,7 +21,7 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
   } = useComboboxPopupContext();
 
   return (
-    <div className="aksel-combobox2__filter">
+    <div className="aksel-combo-box__filter">
       <Listbox.InputSlot virtuallyFocusedOptionId={virtuallyFocusedOptionValue}>
         <Search
           value={filterString}
@@ -38,10 +38,11 @@ export const ComboboxFilter = (props: ComboboxFilterProps) => {
           }}
           onKeyDown={(event) => {
             if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
-              setVirtuallyFocusedOptionValue("");
+              setVirtuallyFocusedOptionValue(""); // Assume you want to edit the input, so remove virtual focus
             }
           }}
           aria-autocomplete="list"
+          aria-expanded="true"
           inputMode="text"
         />
       </Listbox.InputSlot>

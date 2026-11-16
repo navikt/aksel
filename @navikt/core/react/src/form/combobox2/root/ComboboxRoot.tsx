@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Floating } from "../../../utils/components/floating/Floating";
 import { cl, createStrictContext } from "../../../utils/helpers";
+import { useEventCallback } from "../../../utils/hooks";
 import type { FormFieldProps } from "../../useFormField";
 import type { ComboboxOptionProps } from "../option/ComboboxOption";
 
@@ -74,9 +75,8 @@ export interface ComboboxRootProps<
   defaultOpen?: boolean;
   /**
    * Whether multiple options can be selected.
-   * @default true
    */
-  multiple?: boolean; // TODO: Hva skal være default?
+  multiple?: boolean;
 }
 
 export interface ComboboxRootContextProps {
@@ -84,9 +84,10 @@ export interface ComboboxRootContextProps {
   setOpen: (newOpen: boolean) => void;
   triggerRef: React.RefObject<HTMLDivElement | null>;
   options: ComboboxRootProps["options"];
+  /** Values of selected options */
   value: ComboboxRootProps["value"];
+  /** Consumer callback */
   onToggleOption: ComboboxRootProps["onToggleOption"];
-  multiple: boolean;
   size: Exclude<ComboboxRootProps["size"], undefined>;
   disabled: ComboboxRootProps["disabled"];
 }
@@ -105,34 +106,50 @@ export function ComboboxRoot<
   children,
   options,
   value,
-  onToggleOption,
+  onToggleOption: originalOnToggleOption,
   defaultOpen = false,
-  multiple = true,
+  multiple = false,
   size = "medium",
   disabled,
   className,
   ...rest
 }: ComboboxRootProps<T>) {
   const triggerRef = useRef<HTMLDivElement | null>(null);
+  const onToggleOption = useEventCallback(originalOnToggleOption);
   const [open, setOpen] = useState(defaultOpen);
 
   return (
     <div
       {...rest}
-      className={cl("aksel-combobox2", className)}
+      className={cl("aksel-combo-box", className)}
       data-size={size}
       data-disabled={disabled}
     >
       <ComboboxRootContextProvider
         open={open}
-        setOpen={setOpen}
+        setOpen={useCallback((newOpen) => {
+          setOpen(newOpen);
+          if (!newOpen) {
+            // queueMicrotask is needed when closing with close button in Dialog
+            queueMicrotask(() => triggerRef.current?.focus());
+          }
+        }, [])}
         triggerRef={triggerRef}
         options={options}
         value={value}
-        onToggleOption={
-          onToggleOption as ComboboxRootContextProps["onToggleOption"]
-        }
-        multiple={multiple}
+        onToggleOption={useCallback(
+          (...args) => {
+            if (disabled) {
+              return;
+            }
+            (onToggleOption as ComboboxRootProps["onToggleOption"])(...args);
+            if (!multiple) {
+              setOpen(false);
+              triggerRef.current?.focus();
+            }
+          },
+          [onToggleOption, multiple, disabled],
+        )}
         size={size}
         disabled={disabled}
       >

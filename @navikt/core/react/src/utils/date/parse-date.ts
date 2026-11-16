@@ -1,4 +1,7 @@
-import { type Locale, isBefore, parse, sub } from "date-fns";
+import type { Locale } from "date-fns";
+import { isBefore } from "date-fns/isBefore";
+import { parse } from "date-fns/parse";
+import { sub } from "date-fns/sub";
 import { isValidDate } from "./check-dates";
 
 export const INPUT_DATE_STRING_FORMAT_DATE = "dd.MM.yyyy";
@@ -45,9 +48,7 @@ export const parseDate = (
       }
     }
 
-    for (const format of [
-      ...ALLOWED_FORMATS.map((x) => x.replace("yyyy", "yy")),
-    ]) {
+    for (const format of ALLOWED_FORMATS.map((x) => x.replace("yyyy", "yy"))) {
       parsed = parse(date, format, today, { locale });
       if (
         isValidDate(parsed) &&

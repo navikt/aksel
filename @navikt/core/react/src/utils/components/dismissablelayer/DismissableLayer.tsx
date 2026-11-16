@@ -340,6 +340,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       if (disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
           originalBodyPointerEvents = ownerDoc.body.style.pointerEvents;
+          // oxlint-disable-next-line react/immutability -- Intentional DOM mutation in an effect, restored on cleanup.
           ownerDoc.body.style.pointerEvents = "none";
         }
         context.layersWithOutsidePointerEventsDisabled.add(node);
@@ -365,7 +366,6 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      *
      * We depend on `enabled` to clean up when the layer is disabled.
      */
-    // biome-ignore lint/correctness/useExhaustiveDependencies: We need to clean up after enabled changes.
     useEffect(() => {
       return () => {
         if (!node) {

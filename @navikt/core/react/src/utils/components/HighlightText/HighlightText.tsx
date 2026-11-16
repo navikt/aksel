@@ -22,7 +22,6 @@ const HighlightText = ({ text, children }: HighlightTextProps) => {
   const end = children.substring(textIndex + text.length);
   return (
     // aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text
-    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: Doesn't matter if it doesn't work in the browser
     <span aria-label={children}>
       {start}
       {match && <mark>{match}</mark>}

@@ -18,6 +18,8 @@ export default meta;
 
 type Story = StoryObj<typeof Alert>;
 
+const LOREM = "Id elit esse enim reprehenderit enim nisi veniam nostrud. ";
+
 const variants: AlertProps["variant"][] = [
   "error",
   "warning",
@@ -52,16 +54,12 @@ export const Variants: StoryFn = () => {
     <VStack gap="space-16">
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
-          )}
+          {LOREM.repeat(i + 1)}
         </Alert>
       ))}
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
-          )}
+          {LOREM.repeat(i + 1)}
         </Alert>
       ))}
     </VStack>

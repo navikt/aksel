@@ -14,17 +14,25 @@ import {
   SystemPanelOutdatedAction,
 } from "./SystemPanel.action";
 
-type SystemPanelProps = {
-  variant: "outdated" | "beta" | "new";
-  /**
-   * @default false
-   */
-  unsafeBeta?: boolean;
-  /**
-   * Sanity document id
-   */
-  docId?: string;
-};
+type SystemPanelProps =
+  | {
+      variant: "outdated";
+      /**
+       * Sanity document id
+       */
+      docId: string;
+    }
+  | {
+      variant: "beta" | "new";
+      /**
+       * @default false
+       */
+      unsafeBeta?: boolean;
+      /**
+       * Typically the component name
+       */
+      pageHeading?: string;
+    };
 
 const VariantConfig = {
   outdated: {
@@ -56,7 +64,7 @@ const unsafeDescription =
   "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må selv ta stilling til om dere ønsker å bruke denne i produksjon.";
 
 function SystemPanel(props: SystemPanelProps) {
-  const { variant, docId, unsafeBeta = false } = props;
+  const { variant } = props;
 
   const config = VariantConfig[variant];
 
@@ -71,12 +79,14 @@ function SystemPanel(props: SystemPanelProps) {
 
       <InfoCardContent>
         <BodyLong data-text-prose>
-          {unsafeBeta ? unsafeDescription : config.description}
+          {variant !== "outdated" && props.unsafeBeta
+            ? unsafeDescription
+            : config.description}
         </BodyLong>
         {variant === "outdated" ? (
-          <SystemPanelOutdatedAction docId={docId} />
+          <SystemPanelOutdatedAction docId={props.docId} />
         ) : (
-          <SystemPanelAction />
+          <SystemPanelAction titleSuffix={props.pageHeading} />
         )}
       </InfoCardContent>
     </InfoCard>

@@ -158,7 +158,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       clearButton && !inputProps.disabled && (value ?? internalValue);
 
     return (
-      // biome-ignore lint/a11y/noStaticElementInteractions: Escape key handler for clearing input
+      // oxlint-disable-next-line jsx-a11y/no-static-element-interactions -- Escape key handler for clearing input
       <div
         onKeyDown={(event) => {
           if (event.key !== "Escape") {

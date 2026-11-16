@@ -36,32 +36,41 @@ async function globalSearch(
   }
 
   const fuse = await getSearchIndex();
-  const fuseResults = fuse
-    .search(query)
-    .filter((x) => x.score !== undefined && x.score < 0.3)
-    .sort((a, b) => Number(isOverrideHit(b)) - Number(isOverrideHit(a)));
+  const overrideResults: FuseResult<SearchPageT>[] = [];
+  const regularResults: FuseResult<SearchPageT>[] = [];
+  let totalHits = 0;
 
-  const topResults =
-    fuseResults.length > MAX_TOP_RESULTS
-      ? fuseResults
-          .filter((x) => x.score !== undefined && x.score < 0.1)
-          .slice(0, MAX_TOP_RESULTS)
-      : [];
-  const topResultSet = new Set(topResults);
-
-  const groups = new Map<SearchResultPageTypesT, SearchHitGroupT>();
-  for (const result of fuseResults) {
-    if (topResultSet.has(result)) {
+  for (const result of fuse.search(query)) {
+    if (result.score === undefined || result.score >= 0.3) {
       continue;
     }
 
-    const type = result.item._type;
-    const group = groups.get(type) ?? { type, total: 0, hits: [] };
-    groups.set(type, group);
+    totalHits++;
+    (isOverrideHit(result) ? overrideResults : regularResults).push(result);
+  }
 
-    group.total++;
-    if (group.hits.length < MAX_HITS_PER_TYPE) {
-      group.hits.push(toSearchHit(result));
+  const groups = new Map<SearchResultPageTypesT, SearchHitGroupT>();
+  const topResults: SearchHitT[] = [];
+  for (const rankedResults of [overrideResults, regularResults]) {
+    for (const result of rankedResults) {
+      if (
+        totalHits > MAX_TOP_RESULTS &&
+        topResults.length < MAX_TOP_RESULTS &&
+        result.score !== undefined &&
+        result.score < 0.1
+      ) {
+        topResults.push(toSearchHit(result));
+        continue;
+      }
+
+      const type = result.item._type;
+      const group = groups.get(type) ?? { type, total: 0, hits: [] };
+      groups.set(type, group);
+
+      group.total++;
+      if (group.hits.length < MAX_HITS_PER_TYPE) {
+        group.hits.push(toSearchHit(result));
+      }
     }
   }
 
@@ -72,8 +81,8 @@ async function globalSearch(
 
   return {
     result: {
-      totalHits: fuseResults.length,
-      topResults: topResults.map(toSearchHit),
+      totalHits,
+      topResults,
       groupedHits,
     },
     query,

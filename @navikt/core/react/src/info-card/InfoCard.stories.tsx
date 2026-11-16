@@ -41,7 +41,7 @@ export const Default: Story = {
 
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-    title: "InfoCard Title",
+    title: "InfoCard title",
     size: "medium",
     "data-color": "info",
   },

@@ -11,6 +11,7 @@ import styles from "./Footer.module.css";
 async function CopyrightYear() {
   "use cache";
   cacheLife("days");
+  // oxlint-disable-next-line react/purity -- Cached Server Component, refreshed daily.
   return <>{new Date().getFullYear()}</>;
 }
 

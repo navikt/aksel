@@ -36,7 +36,7 @@ function FocusGuards({
     <React.Fragment>
       <span
         ref={startRefCombined}
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: All focus guards are non-interactive and should be tabbable
+        // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- All focus guards are non-interactive and should be tabbable
         tabIndex={0}
         style={visuallyHidden}
         data-aksel-focus-guard=""
@@ -44,7 +44,7 @@ function FocusGuards({
       {children}
       <span
         ref={endRefCombined}
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: All focus guards are non-interactive and should be tabbable
+        // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- All focus guards are non-interactive and should be tabbable
         tabIndex={0}
         style={visuallyHidden}
         data-aksel-focus-guard=""

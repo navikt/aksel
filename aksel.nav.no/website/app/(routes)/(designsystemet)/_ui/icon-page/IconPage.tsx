@@ -125,7 +125,7 @@ function IconPage({
                   actionComponent={
                     <Button
                       as="a"
-                      href="https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+"
+                      href="https://github.com/navikt/aksel/issues/new?template=new-icon.yaml"
                       variant="secondary-neutral"
                     >
                       Send innspill
@@ -142,7 +142,7 @@ function IconPage({
 
                     <HStack gap="space-8" marginBlock="space-16 space-0">
                       {section.icons.map((icon) => {
-                        // biome-ignore lint/performance/noDynamicNamespaceImportAccess: We do not know which icon will be rendered at build time
+                        // oxlint-disable-next-line import/namespace
                         const T = Icons[`${icon.id}Icon`];
                         if (T === undefined) {
                           return null;

@@ -61,7 +61,7 @@ type MyGroup = {
   options: MyOption[];
 };
 
-const groupedCountries: (MyGroup | MyOption)[] = [
+const groupedCountries: MyGroup[] = [
   {
     label: "Norden",
     id: "group-1",
@@ -72,11 +72,10 @@ const groupedCountries: (MyGroup | MyOption)[] = [
     id: "group-2",
     options: centralEuropeanCountries,
   },
-  { label: "Annet (ikke gruppert)", value: "opt-01" } satisfies MyOption,
 ];
 
 type DefaultProps = Pick<
-  ComboboxSingle.Props<MyOption>,
+  ComboboxSingle.Props<MyOption[]>,
   | "label"
   | "description"
   | "hideLabel"
@@ -89,7 +88,11 @@ type DefaultProps = Pick<
 >;
 
 export const Default: StoryFn<DefaultProps> = (props) => {
-  return <ComboboxSingle options={countries} {...props} />;
+  return (
+    <div style={{ minHeight: "300px" }}>
+      <ComboboxSingle options={countries} {...props} />
+    </div>
+  );
 };
 Default.args = {
   label: "Velg land",
@@ -115,13 +118,29 @@ export const Multiselect = () => {
 };
 Multiselect.storyName = "Multiselect (WIP)";
 
+export const MultiselectControlled = () => {
+  const [value, setValue] = useState<MyOption["value"][]>(["opt-1"]);
+  return (
+    <ComboboxMulti
+      label="Velg land"
+      options={countries}
+      value={value}
+      onChange={setValue}
+      onToggleOption={(option, isSelected) => {
+        console.log("onToggleOption", option, isSelected);
+      }}
+    />
+  );
+};
+MultiselectControlled.storyName = "Multiselect controlled (WIP)";
+
 function BasicCombobox<
-  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
-    MyOption,
+  T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[] =
+    MyOption[],
 >(props: Partial<ComboboxSingle.Props<T>>) {
   return (
     <ComboboxSingle
-      options={countries as T[]}
+      options={countries as T}
       defaultValue="opt-1"
       label="Velg land"
       description="Landet hvor du er født."
@@ -157,7 +176,7 @@ export const Name = () => (
     onSubmit={(event) => {
       event.preventDefault();
       const formData = new FormData(event.target);
-      const land = formData.getAll("land");
+      const land = formData.get("land");
       console.log(land);
     }}
   >
@@ -168,7 +187,7 @@ export const Name = () => (
 );
 
 export const Controlled = () => {
-  const [value, setValue] = useState<MyOption["value"] | undefined>("opt-1");
+  const [value, setValue] = useState<MyOption["value"] | null>("opt-1");
 
   return (
     <VStack gap="space-8" minWidth="250px">
@@ -180,7 +199,7 @@ export const Controlled = () => {
       />
       Selected: {value}
       <div>
-        <button type="button" onClick={() => setValue(undefined)}>
+        <button type="button" onClick={() => setValue(null)}>
           Clear
         </button>
       </div>
@@ -272,6 +291,7 @@ export const Composition = () => {
           : [...prev, option.value],
       );
     },
+    multiple: true,
   };
 
   return (

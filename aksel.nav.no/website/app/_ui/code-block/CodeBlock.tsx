@@ -148,7 +148,7 @@ function CodeBlockEditor(props: {
 
                 return (
                   <div
-                    // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
+                    // oxlint-disable-next-line react/no-array-index-key -- Handle more gracefully in the future
                     key={i}
                     {...lineProps}
                     style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
@@ -163,7 +163,7 @@ function CodeBlockEditor(props: {
                       const tokenProps = { ...getTokenProps({ token }) };
                       return (
                         <span
-                          // biome-ignore lint/suspicious/noArrayIndexKey: Handle more gracefully in the future
+                          // oxlint-disable-next-line react/no-array-index-key -- Handle more gracefully in the future
                           key={key}
                           {...tokenProps}
                           style={{

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Dialog } from "../../../dialog";
 import { DismissableLayer } from "../../../utils/components/dismissablelayer/DismissableLayer";
 import {
@@ -19,16 +19,7 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
 
   if (isMobile) {
     return (
-      <ComboboxModal
-        open={rootContext.open}
-        onOpenChange={(open) => {
-          rootContext.setOpen(open);
-          !open && rootContext.triggerRef.current?.focus(); // This does not work when closing with button
-        }}
-        onOpenChangeComplete={(open) =>
-          !open && rootContext.triggerRef.current?.focus()
-        }
-      >
+      <ComboboxModal open={rootContext.open} onOpenChange={rootContext.setOpen}>
         {mobileHeader}
         {children}
       </ComboboxModal>
@@ -42,20 +33,22 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
   return (
     <DismissableLayer
       asChild
-      //safeZone={{ anchor: rootContext.triggerRef.current }}
       onDismiss={(event) => {
         // We don't have trigger as `safeZone` because we want to close when trigger is focused.
         // To avoid immediately re-opening the popup when trigger is clicked (blur closes, click opens),
         // we avoid closing here if the click is on the trigger. The trigger will handle closing in that case.
+        // (A connected <label> also acts like a trigger.)
+        const trigger = rootContext.triggerRef.current;
         if (
           event.type === "AKSEL_POINTER_DOWN_OUTSIDE" &&
           event.target instanceof HTMLElement &&
-          rootContext.triggerRef.current?.contains(event.target)
+          (trigger?.contains(event.target) ||
+            (event.target instanceof HTMLLabelElement &&
+              document.getElementById(event.target.htmlFor) === trigger))
         ) {
           return;
         }
         rootContext.setOpen(false);
-        rootContext.triggerRef.current?.focus();
       }}
       enabled={rootContext.open}
     >
@@ -77,7 +70,6 @@ type ComboboxModalProps = {
   children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onOpenChangeComplete: (open: boolean) => void;
 };
 
 function subscribeToResize(callback: () => void) {
@@ -89,16 +81,13 @@ function getVisualViewportHeight() {
   return visualViewport?.height; // Takes into account virtual keyboard etc.
 }
 
-function ComboboxModal({
-  children,
-  open,
-  onOpenChange,
-  onOpenChangeComplete,
-}: ComboboxModalProps) {
+function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
   const visualViewportHeight = useSyncExternalStore(
     subscribeToResize,
     getVisualViewportHeight,
   );
+  const ref = useRef<HTMLDivElement | null>(null);
+  const scrollOnResizeRef = useRef(false);
 
   useEffect(() => {
     // See "Overlay" section in CSS file for context. This handles the case when
@@ -111,16 +100,35 @@ function ComboboxModal({
     }
   }, [open]);
 
+  /**
+   * Scroll to first selected option after virtual keyboard has appeared.
+   * See also useClientLayoutEffect in ComboboxPopup.
+   */
+  useEffect(() => {
+    if (open) {
+      scrollOnResizeRef.current = true;
+      setTimeout(() => {
+        scrollOnResizeRef.current = false;
+      }, 500); // We assume visual viewport stabilizes within 500ms
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!ref.current || !open || !scrollOnResizeRef.current) {
+      return;
+    }
+    const selectedOptionElm = ref.current?.querySelector<HTMLElement>(
+      '[aria-selected="true"]',
+    );
+    selectedOptionElm?.scrollIntoView({ block: "center" }); // Don't use "nearest" (inconsistent)
+  }, [visualViewportHeight, open]);
+
   return (
-    <Dialog
-      size="small"
-      open={open}
-      onOpenChange={onOpenChange}
-      onOpenChangeComplete={onOpenChangeComplete}
-    >
-      <Dialog.Popup className="aksel-combobox2__modal" position="fullscreen">
+    <Dialog size="small" open={open} onOpenChange={onOpenChange}>
+      <Dialog.Popup className="aksel-combo-box__modal" position="fullscreen">
         <div
-          className="aksel-combobox2__modal-inner"
+          ref={ref}
+          className="aksel-combo-box__modal-inner"
           // The reported height is sometimes a bit too small,
           // so we let the dialog fill the entire normal viewport,
           // and only limit the inner content's height.

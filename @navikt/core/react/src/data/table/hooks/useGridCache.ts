@@ -11,7 +11,9 @@ import {
 /**
  * Manages the table grid cache and observes DOM changes that require grid rebuilding.
  * Watches for structural changes (rows/cells added/removed) and attribute changes
- * (colspan, rowspan, hidden, style) that affect grid layout and focusability.
+ * (colspan, rowspan, hidden) that affect grid layout.
+ * Inline `style` is intentionally not observed: focus navigation writes
+ * scroll-margin on every move, and the grid never reads styles.
  */
 function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
   const gridCacheRef = useRef<GridCache>({
@@ -121,7 +123,7 @@ function useGridCache(tableRef: HTMLTableElement | null, enabled: boolean) {
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ["colspan", "rowspan", "hidden", "style", "aria-busy"],
+      attributeFilter: ["colspan", "rowspan", "hidden", "aria-busy"],
     });
 
     return () => {

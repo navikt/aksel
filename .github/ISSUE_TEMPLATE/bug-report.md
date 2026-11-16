@@ -1,7 +1,7 @@
 ---
 name: Bug Report
 about: Meld inn bugs eller feil
-title: "[BUG]"
+title: "[BUG] "
 labels: "bug \U0001F41B"
 assignees: ""
 ---
@@ -21,7 +21,7 @@ assignees: ""
 ## Steg for å reprodusere problemet (valgfri)
 
 <!--
-1. Steg en
+1. Steg én
 2. Steg to
 3. ....
 -->
@@ -31,10 +31,10 @@ assignees: ""
 ## Eksempel/Tilleggsinformasjon (valgfri)
 
 <!--
-Screenshots eller kodesnippets
-Legg gjerne ved ekstrainfo som nettleser eller desktop/mobil hvis det er relevant.
+Screenshots, kodesnippets eller sandbox-lenke.
+Legg gjerne ved info som nettleser eller desktop/mobil hvis det er relevant.
 -->
 
 ```
- Hvis mulig, legg gjerne til kode her, evt lenke til kode i repo
+ Hvis mulig, legg gjerne til kode her, ev. lenke til kode i repo.
 ```

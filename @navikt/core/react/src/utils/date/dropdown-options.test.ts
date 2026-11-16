@@ -1,4 +1,4 @@
-import { nb } from "date-fns/locale";
+import { nb } from "date-fns/locale/nb";
 import { describe, expect, test } from "vitest";
 import { getMonthOptions, getYearOptions } from "./dropdown-options";
 

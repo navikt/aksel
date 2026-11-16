@@ -2,6 +2,9 @@ name: TableCrossFill
 category: Interface
 sub_category: Table
 keywords:
-  - TableCrossFill
+  - tabell
+  - datagrid
+  - fjern
+  - slett
 variant: Fill
 created_at: 26.10.2026
