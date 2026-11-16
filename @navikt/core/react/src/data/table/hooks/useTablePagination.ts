@@ -1,5 +1,5 @@
 import { type RefObject, useMemo, useRef } from "react";
-import { useDataGridPaginationContext } from "../../../data-grid/pagination/root/DataGridPaginationRoot.context";
+import { useOptionalDataGridPaginationContext } from "../../../data-grid/pagination/root/DataGridPaginationRoot.context";
 import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { useClientLayoutEffect } from "../../../utils-external";
 import type { SortEntry } from "../root/DataGridTable.types";
@@ -15,7 +15,7 @@ function getSortKey(sortState: SortEntry[]) {
  */
 function usePaginatedItems() {
   const { data } = useDataGridContext();
-  const pagination = useDataGridPaginationContext(false);
+  const pagination = useOptionalDataGridPaginationContext();
   const isClientMode = pagination?.mode === "client";
   const startIndex = isClientMode ? pagination.startIndex : undefined;
   const endIndex = isClientMode ? pagination.endIndex : undefined;
@@ -32,7 +32,7 @@ function usePaginatedItems() {
  * Comparing applied sort state means rejected controlled sort requests do not reset.
  */
 function useResetPageOnSort(sortState: SortEntry[]) {
-  const pagination = useDataGridPaginationContext(false);
+  const pagination = useOptionalDataGridPaginationContext();
   const resetPage =
     pagination?.mode === "client" ? pagination.resetPage : undefined;
 
@@ -59,7 +59,7 @@ function useScrollTopOnPageChange({
   sortState: SortEntry[];
   scrollWrapperRef: RefObject<HTMLElement | null>;
 }) {
-  const pagination = useDataGridPaginationContext(false);
+  const pagination = useOptionalDataGridPaginationContext();
   const isPaginated = pagination !== undefined;
   const page = pagination?.page;
   const pageSize = pagination?.pageSize;

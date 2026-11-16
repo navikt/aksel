@@ -21,22 +21,12 @@ DataGridPaginationContext.displayName = "DataGridPaginationContext";
 
 const DataGridPaginationContextProvider = DataGridPaginationContext.Provider;
 
-function useDataGridPaginationContext<S extends boolean = true>(
-  strict?: S,
-  errorMessageOverride?: string,
-): S extends true
-  ? DataGridPaginationContextValue
-  : DataGridPaginationContextValue | undefined;
-function useDataGridPaginationContext(
-  strict = true,
-  errorMessageOverride?: string,
-) {
+/** Pagination state of the closest paginated DataGrid. Throws outside one. */
+function useDataGridPaginationContext(): DataGridPaginationContextValue {
   const context = useContext(DataGridPaginationContext);
 
-  if (!context && strict) {
-    const error = new Error(
-      errorMessageOverride ?? paginationContextErrorMessage,
-    );
+  if (!context) {
+    const error = new Error(paginationContextErrorMessage);
     error.name = "ContextError";
     Error.captureStackTrace?.(error, useDataGridPaginationContext);
     throw error;
@@ -45,5 +35,14 @@ function useDataGridPaginationContext(
   return context;
 }
 
-export { DataGridPaginationContextProvider, useDataGridPaginationContext };
+/** Pagination state of the closest DataGrid, or `undefined` when it has no `pagination`. */
+function useOptionalDataGridPaginationContext() {
+  return useContext(DataGridPaginationContext);
+}
+
+export {
+  DataGridPaginationContextProvider,
+  useDataGridPaginationContext,
+  useOptionalDataGridPaginationContext,
+};
 export type { DataGridPaginationContextValue };

@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useDataGridPaginationContext } from "../../../data-grid/pagination/root/DataGridPaginationRoot.context";
+import { useOptionalDataGridPaginationContext } from "../../../data-grid/pagination/root/DataGridPaginationRoot.context";
 import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
@@ -181,7 +181,7 @@ const DataGridTableInternal = forwardRef<
     const { columnDefinitions, getRowId, selection, isLoading, tableSettings } =
       useDataGridContext();
     const items = usePaginatedItems();
-    const pageSize = useDataGridPaginationContext(false)?.pageSize;
+    const pageSize = useOptionalDataGridPaginationContext()?.pageSize;
 
     const loadingContent = loadingContentProp ?? {
       variant: "skeleton",
