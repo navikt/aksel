@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
+import { type FormFieldType, useFormField } from "../../../form/useFormField";
 import { useClientLayoutEffect } from "../../../utils-external";
 import { createStrictContext } from "../../../utils/helpers";
-import { type FormFieldType, useFormField } from "../../useFormField";
 import type { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {

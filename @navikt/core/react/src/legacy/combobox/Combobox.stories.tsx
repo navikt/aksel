@@ -2,11 +2,11 @@ import type { Meta, StoryFn } from "@storybook/react-vite";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "../../button";
 import { Chips } from "../../chips";
-import { Alert } from "../../legacy/alert";
+import { TextField } from "../../form/textfield";
 import { Modal } from "../../modal";
 import { VStack } from "../../primitives/stack";
 import { BodyLong } from "../../typography";
-import { TextField } from "../textfield";
+import { Alert } from "../alert";
 import { type ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
+import { ReadOnlyIconWithTitle } from "../../form/ReadOnlyIcon";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { Floating } from "../../utils/components/floating/Floating";
 import { cl } from "../../utils/helpers";
-import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useInputContext } from "./Input/Input.context";

@@ -1,5 +1,5 @@
 import React, { type InputHTMLAttributes } from "react";
-import type { FormFieldProps } from "../useFormField";
+import type { FormFieldProps } from "../../form/useFormField";
 
 /**
  * A more complex version of options for the Combobox.
