@@ -125,6 +125,12 @@ function useTableKeyboardNav({ enabled }: UseTableKeyboardNavOptions) {
     const target = event.target as Element | null;
 
     if (tableRef && target === tableRef) {
+      if (
+        event.relatedTarget instanceof Node &&
+        tableRef.contains(event.relatedTarget)
+      ) {
+        return;
+      }
       if (activeCell) {
         focusCell(activeCell);
         return;

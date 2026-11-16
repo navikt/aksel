@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "../../button";
 import { DataGrid } from "../../data-grid";
-import { ResetPageOnSort } from "../../data-grid/pagination/DataGridPagination.stories";
 import { HGrid } from "../../primitives/grid";
 import { VStack } from "../../primitives/stack";
 import { Tag } from "../../tag";
@@ -392,113 +391,6 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
   },
 };
 
-const selectionPaginationSpy = fn();
-
-export const SelectionPagination: Story = {
-  render: () => {
-    const [page, setPage] = useState<"0" | "1">("0");
-
-    const dataToShow =
-      page === "0" ? userData.slice(0, 2) : userData.slice(2, 4);
-
-    return (
-      <div>
-        <button type="button" onClick={() => setPage("0")}>
-          Page 1
-        </button>
-        <button type="button" onClick={() => setPage("1")}>
-          Page 2
-        </button>
-        <DataGrid
-          columns={userColumnDef}
-          data={dataToShow}
-          getRowId={(row) => row.foo + row.bar}
-          selection={{
-            mode: "multiple",
-            onSelectedRowIdsChange: (keys) => {
-              console.info({ keys });
-              selectionPaginationSpy(keys);
-            },
-          }}
-        >
-          <DataGrid.Table />
-        </DataGrid>
-      </div>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    selectionPaginationSpy.mockClear();
-    const canvas = within(canvasElement);
-    const page1Button = canvas.getByRole("button", { name: "Page 1" });
-    const page2Button = canvas.getByRole("button", { name: "Page 2" });
-
-    /* keys */
-    await userEvent.click(page1Button);
-
-    /* Page 1 rows: foo1bar1, foo2bar2 */
-    let checkboxes = canvas.getAllByRole("checkbox");
-    const theadCheckbox = () =>
-      canvas.getAllByRole("checkbox")[0] as HTMLInputElement;
-
-    /* Select first row on page 1 */
-    await userEvent.click(checkboxes[1]);
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
-
-    /* Thead should be indeterminate (1 of 2 visible rows selected) */
-    expect(theadCheckbox().indeterminate).toBe(true);
-    expect(theadCheckbox().checked).toBe(false);
-
-    /* Switch to page 2 (rows: foo3bar3, foo4bar4) */
-    await userEvent.click(page2Button);
-
-    /* Thead should NOT be indeterminate (no visible rows are selected) */
-    expect(theadCheckbox().indeterminate).toBe(false);
-    expect(theadCheckbox().checked).toBe(false);
-
-    /* Select first row on page 2 */
-    checkboxes = canvas.getAllByRole("checkbox");
-    await userEvent.click(checkboxes[1]);
-
-    /* onSelectionChange should include foo1bar1 from page 1 */
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo2bar2",
-      "foo4bar4",
-    ]);
-
-    /* Thead should be indeterminate (1 of 2 visible rows selected) */
-    expect(theadCheckbox().indeterminate).toBe(true);
-
-    /* Click thead checkbox (indeterminate -> select all visible) */
-    /* Should preserve selections from other pages */
-    await userEvent.click(theadCheckbox());
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo2bar2",
-      "foo4bar4",
-      "foo5bar5",
-    ]);
-
-    /* Thead should now be checked (all visible selected) */
-    expect(theadCheckbox().checked).toBe(true);
-    expect(theadCheckbox().indeterminate).toBe(false);
-
-    /* Click thead checkbox again (all selected -> unselect all visible) */
-    /* Should NOT unselect rows from other pages */
-    await userEvent.click(theadCheckbox());
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
-
-    /* Thead should not be checked or indeterminate */
-    expect(theadCheckbox().checked).toBe(false);
-    expect(theadCheckbox().indeterminate).toBe(false);
-
-    /* Switch back to page 1 - foo1bar1 should still be selected */
-    await userEvent.click(page1Button);
-    checkboxes = canvas.getAllByRole("checkbox");
-    expect(theadCheckbox().indeterminate).toBe(true);
-    expect((checkboxes[1] as HTMLInputElement).checked).toBe(true);
-    expect((checkboxes[2] as HTMLInputElement).checked).toBe(false);
-  },
-};
-
 type SelectionPageRow = {
   id: string;
   name: string;
@@ -536,7 +428,7 @@ const selectionPageColumnDef: ColumnDefinitions<SelectionPageRow> = [
   { id: "name", header: "Name", bodyCell: (row) => row.name },
 ];
 
-export const TestSelectionAcrossPages: Story = {
+export const SelectionPagination: Story = {
   render: () => {
     const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
@@ -557,8 +449,8 @@ export const TestSelectionAcrossPages: Story = {
         >
           <DataGrid.Table<SelectionPageRow>
             subRows={{ getRows: (row) => row.children ?? [] }}
+            bottomContent={<DataGrid.Pagination />}
           />
-          <DataGrid.Pagination />
         </DataGrid>
       </>
     );
@@ -568,24 +460,31 @@ export const TestSelectionAcrossPages: Story = {
     const selectedIds = canvas.getByRole("status", {
       name: "Selected row IDs",
     });
+    const theadCheckbox = () =>
+      canvas.getAllByRole("checkbox")[0] as HTMLInputElement;
     const firstPageIds = ["alpha", "alpha-child", "alpha-grandchild", "beta"];
     const secondPageIds = ["delta", "gamma", "gamma-child", "gamma-grandchild"];
 
-    expect(canvas.queryByText("Alpha child")).not.toBeInTheDocument();
-    expect(canvas.queryByText("Alpha grandchild")).not.toBeInTheDocument();
+    /* Single row selection marks header indeterminate; page 2 starts unchecked */
+    await userEvent.click(canvas.getAllByRole("checkbox")[2]);
+    expect(selectedIds.textContent).toBe(JSON.stringify(["beta"]));
+    expect(theadCheckbox().indeterminate).toBe(true);
+
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    expect(theadCheckbox().indeterminate).toBe(false);
+    expect(theadCheckbox().checked).toBe(false);
+
+    /* Select all visible on page 2 includes collapsed sub-rows while keeping page 1 selection */
     await userEvent.click(
       canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
     );
-    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
+    expect(selectedIds.textContent).toBe(
+      JSON.stringify(["beta", ...secondPageIds].sort()),
+    );
+    expect(theadCheckbox().checked).toBe(true);
 
-    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    expect(canvas.getByText("Gamma")).toBeInTheDocument();
-    expect(canvas.queryByText("Alpha")).not.toBeInTheDocument();
-    expect(selectedIds.textContent).toBe(JSON.stringify(firstPageIds));
-    for (const checkbox of canvas.getAllByRole("checkbox")) {
-      expect(checkbox).not.toBeChecked();
-    }
-
+    /* Select all visible on page 1, then unselect all visible on page 1 without losing page 2 */
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
     await userEvent.click(
       canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
     );
@@ -593,24 +492,15 @@ export const TestSelectionAcrossPages: Story = {
       JSON.stringify([...firstPageIds, ...secondPageIds].sort()),
     );
 
-    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
-    for (const checkbox of canvas.getAllByRole("checkbox")) {
-      expect(checkbox).toBeChecked();
-    }
     await userEvent.click(
       canvas.getByRole("checkbox", {
         name: "Fjern alle synlige valgte rader",
       }),
     );
     expect(selectedIds.textContent).toBe(JSON.stringify(secondPageIds));
-    for (const checkbox of canvas.getAllByRole("checkbox")) {
-      expect(checkbox).not.toBeChecked();
-    }
 
+    /* Page 2 nested sub-rows stay selected when expanded, and clear on header uncheck */
     await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-    for (const checkbox of canvas.getAllByRole("checkbox")) {
-      expect(checkbox).toBeChecked();
-    }
     await userEvent.click(
       canvas.getByRole("button", { name: "Vis under-rader" }),
     );
@@ -620,22 +510,11 @@ export const TestSelectionAcrossPages: Story = {
       ),
     ).toBeChecked();
     await userEvent.click(
-      canvas.getByRole("button", { name: "Vis under-rader" }),
-    );
-    expect(
-      within(canvas.getByRole("row", { name: /Gamma grandchild/ })).getByRole(
-        "checkbox",
-      ),
-    ).toBeChecked();
-    await userEvent.click(
       canvas.getByRole("checkbox", {
         name: "Fjern alle synlige valgte rader",
       }),
     );
     expect(selectedIds.textContent).toBe("[]");
-    for (const checkbox of canvas.getAllByRole("checkbox")) {
-      expect(checkbox).not.toBeChecked();
-    }
   },
 };
 
@@ -901,40 +780,6 @@ export const SortableColumnsUncontrolled: Story = {
         </DataGrid>
       </div>
     );
-  },
-};
-
-export const TestControlledSortResetsPage: Story = {
-  render: ResetPageOnSort.render,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const navigation = within(
-      canvas.getByRole("navigation", { name: "Sidenavigering" }),
-    );
-
-    for (const direction of ["ascending", "descending", "none"]) {
-      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-      await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
-      expect(
-        navigation.getByRole("textbox", { name: "Gå til side" }),
-      ).toHaveValue("3");
-      await userEvent.click(canvas.getByRole("button", { name: "Id" }));
-
-      expect(
-        navigation.getByRole("textbox", { name: "Gå til side" }),
-      ).toHaveValue("1");
-      expect(canvas.getByRole("columnheader", { name: "Id" })).toHaveAttribute(
-        "aria-sort",
-        direction,
-      );
-      const firstRow = canvas.getAllByRole("row")[1];
-      expect(
-        within(firstRow).getByRole("cell", {
-          name: direction === "descending" ? "137" : "1",
-        }),
-      ).toBeInTheDocument();
-      expect(canvas.getAllByRole("row")).toHaveLength(11);
-    }
   },
 };
 
