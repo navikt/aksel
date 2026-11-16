@@ -5778,15 +5778,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/block-tools@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@portabletext/block-tools@npm:6.0.0"
+"@portabletext/block-tools@npm:^6.0.7":
+  version: 6.0.7
+  resolution: "@portabletext/block-tools@npm:6.0.7"
   dependencies:
-    "@portabletext/html": "npm:^2.0.0"
-    "@portabletext/sanity-bridge": "npm:^4.0.0"
-    "@portabletext/schema": "npm:^3.0.0"
+    "@portabletext/html": "npm:^2.0.2"
+    "@portabletext/sanity-bridge": "npm:^5.0.0"
+    "@portabletext/schema": "npm:^3.1.0"
     "@sanity/types": "npm:^6.9.1"
-  checksum: 10/aab9636932663c6fda5ade211765ed836310dacce057582dd81b73d0d19260321acd3f0d41409b51bd8ada2f20be6e7f04536b42c18b8c93a9ee563abe4a1b14
+  checksum: 10/8b37564f9eb1f19b15ab8f792b69d004dd8b420493b34066ed09e70a3ba9b9b20c9aa8c3811b11ac718c4a59cca5174eebfd0e7781b716939a6fbe6f3daccdbc
   languageName: node
   linkType: hard
 
@@ -5817,6 +5817,16 @@ __metadata:
     "@portabletext/schema": "npm:^3.0.1"
     "@vercel/stega": "npm:^1.1.0"
   checksum: 10/580af59cea0f190444f46fcb5e27b2232ebc2c8e1e8e768532d25d4bee9e88be0d03065ea988670c343288475ee408e9b9af78f146f75cd2571a6c7cfb6ab858
+  languageName: node
+  linkType: hard
+
+"@portabletext/html@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@portabletext/html@npm:2.0.2"
+  dependencies:
+    "@portabletext/schema": "npm:^3.1.0"
+    "@vercel/stega": "npm:^1.1.0"
+  checksum: 10/1712d108c42f1dff1ae5427ab7dc0b4230a97f8e9d577fe52b2e2ffdc9a65582954f842c8c9024380e1da1826a7069d0959272d4fd6dd86447d3be16ff8bdf1b
   languageName: node
   linkType: hard
 
@@ -5978,7 +5988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/sanity-bridge@npm:^4.0.0, @portabletext/sanity-bridge@npm:^4.1.1":
+"@portabletext/sanity-bridge@npm:^4.1.1":
   version: 4.1.3
   resolution: "@portabletext/sanity-bridge@npm:4.1.3"
   dependencies:
@@ -5989,10 +5999,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@portabletext/schema@npm:^3.0.0, @portabletext/schema@npm:^3.0.1":
+"@portabletext/sanity-bridge@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@portabletext/sanity-bridge@npm:5.0.0"
+  dependencies:
+    "@portabletext/schema": "npm:^3.1.0"
+    "@sanity/types": "npm:^6.9.1"
+  checksum: 10/e17b480684f72128615adb66ec3d132cd5c710ca2a41487c882883e7fa61246e3a5c2cba421fe67d6500ce466592d10281f0cbd90173d9f295fc71a6986aebcf
+  languageName: node
+  linkType: hard
+
+"@portabletext/schema@npm:^3.0.1":
   version: 3.0.1
   resolution: "@portabletext/schema@npm:3.0.1"
   checksum: 10/7a8b26e2dd1bb4f5d9efe4a6f02feeaa837e44dec6899ac8124c41b9141fe4536eff145343f4dc44018a1c0be17192dc79d5533bf4d1c8b2456270aeed03099e
+  languageName: node
+  linkType: hard
+
+"@portabletext/schema@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@portabletext/schema@npm:3.1.0"
+  checksum: 10/280c0af185ef135f77a34886feb7dbd5169a638356de3f94f3c6e961ecc13832a939b2fc59c02f746206174c3f56c4eb36ba16f1eed4d224c7f9b18de82288bd
   languageName: node
   linkType: hard
 
@@ -6703,16 +6730,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/functions@npm:1.10.1":
-  version: 1.10.1
-  resolution: "@sanity/functions@npm:1.10.1"
+"@sanity/functions@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@sanity/functions@npm:1.11.0"
   peerDependencies:
     "@aws-lite/client": ^0.24.1
     "@aws-lite/dynamodb": ^0.3.9
     "@aws-lite/lambda": ^0.1.5
     "@aws-lite/sns": ^0.0.8
     "@aws-lite/sqs": ^0.2.4
-  checksum: 10/395637c288127e5bab5b7a2301df96a4406e78c166bbca5e3e60d11d6e3c93f4cf6fdf6fa915fbfa31dea179fe80365c7adde0f88601068de325e5a2aeb3cb6b
+  checksum: 10/ee6e6da36e3caf5fa841188ec5591c3939b01b53f1698b34f97ba168f5e39c0c3a4d224907f515e44e6ea5427a680f5478627a2b7ef473ef71a5ed59d1607a1b
   languageName: node
   linkType: hard
 
@@ -9778,7 +9805,7 @@ __metadata:
     "@sanity/code-input": "npm:7.3.8"
     "@sanity/color-input": "npm:6.1.8"
     "@sanity/export": "npm:7.0.3"
-    "@sanity/functions": "npm:1.10.1"
+    "@sanity/functions": "npm:1.11.0"
     "@sanity/image-url": "npm:2.1.1"
     "@sanity/locale-nb-no": "npm:1.1.39"
     "@sanity/preview-url-secret": "npm:4.1.5"
@@ -23930,7 +23957,7 @@ __metadata:
     "@navikt/next-logger": "npm:5.0.2"
     "@navikt/oasis": "npm:4.2.2"
     "@playwright/test": "npm:1.61.1"
-    "@portabletext/block-tools": "npm:^6.0.0"
+    "@portabletext/block-tools": "npm:^6.0.7"
     "@portabletext/markdown": "npm:^2.5.1"
     "@portabletext/react": "npm:^8.0.1"
     "@sanity/client": "npm:7.27.0"
