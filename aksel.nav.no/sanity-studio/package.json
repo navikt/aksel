@@ -34,7 +34,7 @@
     "sanity-plugin-iframe-pane": "5.0.41",
     "sanity-plugin-media": "6.1.8",
     "sanity-plugin-references": "1.2.0",
-    "styled-components": "6.4.4",
+    "styled-components": "6.6.0",
     "swr": "^2.4.2"
   },
   "devDependencies": {
