@@ -35,13 +35,13 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
     }, [label]);
 
     return (
-      <div className="aksel-combobox2__field-container">
+      <div className="aksel-combo-box__field-container">
         <button
           type="button"
           ref={ref}
           data-error={hasError}
           className={cl(
-            "aksel-combobox2__field-btn",
+            "aksel-combo-box__field-btn",
             "aksel-body-short",
             `aksel-body-short--${size ?? "medium"}`,
           )}
@@ -51,7 +51,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
           {label}
         </button>
         <ChevronDownIcon
-          className="aksel-combobox2__field-chevron"
+          className="aksel-combo-box__field-chevron"
           aria-hidden
         />
       </div>

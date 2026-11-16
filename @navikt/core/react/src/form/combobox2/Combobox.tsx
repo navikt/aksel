@@ -99,7 +99,7 @@ const Combobox = forwardRef(
         {!!description && (
           <BodyShort
             className={cl(
-              "aksel-form-field__description aksel-combobox2__description",
+              "aksel-form-field__description aksel-combo-box__description",
               { "aksel-sr-only": hideLabel },
             )}
             id={inputDescriptionId}
@@ -113,7 +113,7 @@ const Combobox = forwardRef(
           <ComboboxField ref={ref} hasError={hasError} />
         </ComboboxTrigger>
         <div
-          className="aksel-form-field__error aksel-combobox2__error"
+          className="aksel-form-field__error aksel-combo-box__error"
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

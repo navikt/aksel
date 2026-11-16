@@ -121,7 +121,7 @@ export function ComboboxRoot<
   return (
     <div
       {...rest}
-      className={cl("aksel-combobox2", className)}
+      className={cl("aksel-combo-box", className)}
       data-size={size}
       data-disabled={disabled}
     >

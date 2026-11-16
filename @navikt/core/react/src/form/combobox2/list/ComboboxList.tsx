@@ -38,9 +38,9 @@ function ComboboxList<
 
   return (
     <>
-      <Listbox.Options className="aksel-combobox2__list">
+      <Listbox.Options className="aksel-combo-box__list">
         {/*isPending && (
-        <div className="aksel-combobox2__loading" role="status">
+        <div className="aksel-combo-box__loading" role="status">
           Laster...
         </div>
       )*/}
@@ -89,7 +89,7 @@ function ComboboxListContent<
   if (filteredOptions.length === 0) {
     // TODO: Consider moving outside of role=listbox
     return (
-      <div className="aksel-combobox2__no-results">{translate("noHits")}</div>
+      <div className="aksel-combo-box__no-results">{translate("noHits")}</div>
     );
   }
 
