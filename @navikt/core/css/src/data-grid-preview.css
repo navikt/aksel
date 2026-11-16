@@ -8,7 +8,11 @@
   width: 100%;
   min-height: 0;
   min-width: 0;
-  container-type: inline-size;
+
+  /* Container for the responsive pagination bar, wherever it is placed inside the grid */
+  &[data-pagination="true"] {
+    container-type: inline-size;
+  }
 }
 
 .aksel-data-table__frame {

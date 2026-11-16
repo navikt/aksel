@@ -1,31 +1,9 @@
+import type { DataGridPaginationRows } from "../DataGridPagination.types";
+
 type PaginationRangeOptions = {
   page: number;
   pageSize: number;
-} & (
-  | {
-      /** All top-level rows are available; the page is sliced from them. */
-      mode: "client";
-      rowCount: number;
-      pageRowCount?: never;
-      totalRows?: never;
-      hasNextPage?: never;
-    }
-  | ({
-      /** Only the current page is available. */
-      mode: "server";
-      pageRowCount: number;
-      rowCount?: never;
-    } & (
-      | {
-          totalRows: number;
-          hasNextPage?: never;
-        }
-      | {
-          hasNextPage: boolean;
-          totalRows?: never;
-        }
-    ))
-);
+} & DataGridPaginationRows;
 
 type PaginationRange = {
   page: number;

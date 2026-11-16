@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import type { DataGridPaginationConfig } from "../root/DataGrid.types";
-import { DataGridRootPaginationContextProvider } from "../root/DataGridRoot.context";
-import { DataGridPaginationLiveRegion } from "./root/DataGridPaginationRoot";
-import { useDataGridPagination } from "./root/useDataGridPagination";
+import type { DataGridPaginationConfig } from "../DataGridPagination.types";
+import { DataGridPaginationLiveRegionInternal } from "../live-region/DataGridPaginationLiveRegionInternal";
+import { DataGridPaginationContextProvider } from "../root/DataGridPaginationRoot.context";
+import { useDataGridPagination } from "../root/useDataGridPagination";
 
 /**
- * Mounted only when `pagination` is set, so uncontrolled defaults apply
- * when pagination is enabled and no state or warnings exist while it is off.
+ * Owns pagination state for DataGrid. Mounted only when `pagination` is set, so uncontrolled
+ * defaults apply when pagination is enabled and no state or warnings exist while it is off.
  */
-function DataGridPaginationInternal({
+function DataGridPaginationProviderInternal({
   pagination,
   rowCount,
   isLoading,
@@ -42,13 +42,15 @@ function DataGridPaginationInternal({
   const value = useMemo(() => ({ ...state, mode }), [mode, state]);
 
   return (
-    <DataGridRootPaginationContextProvider value={value}>
+    <DataGridPaginationContextProvider value={value}>
       {children}
       {pagination.announcePageChanges !== false && (
-        <DataGridPaginationLiveRegion announceTargetRef={announceTargetRef} />
+        <DataGridPaginationLiveRegionInternal
+          announceTargetRef={announceTargetRef}
+        />
       )}
-    </DataGridRootPaginationContextProvider>
+    </DataGridPaginationContextProvider>
   );
 }
 
-export { DataGridPaginationInternal };
+export { DataGridPaginationProviderInternal };

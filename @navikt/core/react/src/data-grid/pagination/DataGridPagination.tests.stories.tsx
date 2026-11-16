@@ -113,7 +113,7 @@ export const ClientPaginationFlow: Story = {
     /* Page-size ActionMenu resets to page 1 */
     await user.click(
       canvas.getByRole("button", {
-        name: /Rad 41–60 av 60.*Rader per side: 20/,
+        name: "Rad 41–60 av 60, velg antall rader per side, 20 valgt",
       }),
     );
     expect(
@@ -124,7 +124,7 @@ export const ClientPaginationFlow: Story = {
     expectPage(canvas, 1, 6);
     expect(
       canvas.getByRole("button", {
-        name: /Rad 1–10 av 60.*Rader per side: 10/,
+        name: "Rad 1–10 av 60, velg antall rader per side, 10 valgt",
       }),
     ).toBeInTheDocument();
   },
@@ -165,7 +165,7 @@ export const ServerAndUnknownTotal: Story = {
     /* Plain summary text when allowPageSizeChange is false; no page textbox when total is unknown */
     expect(canvas.getByText("Rad 1–20")).toBeInTheDocument();
     expect(
-      canvas.queryByRole("button", { name: /Rader per side/ }),
+      canvas.queryByRole("button", { name: /rader per side/i }),
     ).not.toBeInTheDocument();
     expect(
       canvas.queryByRole("textbox", { name: "Gå til side" }),

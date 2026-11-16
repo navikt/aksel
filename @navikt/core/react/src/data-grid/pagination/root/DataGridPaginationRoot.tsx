@@ -1,9 +1,8 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
-import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
 import { DataGridPaginationPagesInternal } from "../pages/DataGridPaginationPagesInternal";
 import { DataGridPaginationRowsInternal } from "../rows/DataGridPaginationRowsInternal";
+import { useDataGridPaginationContext } from "./DataGridPaginationRoot.context";
 
 interface DataGridPaginationProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -35,7 +34,7 @@ interface DataGridPaginationProps extends Omit<
  */
 const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
   ({ className, navLabel, ...rest }, forwardedRef) => {
-    useDataGridRootPaginationContext();
+    useDataGridPaginationContext();
 
     return (
       <div
@@ -50,74 +49,10 @@ const DataGridPagination = forwardRef<HTMLDivElement, DataGridPaginationProps>(
   },
 );
 
-function DataGridPaginationLiveRegion({
-  announceTargetRef,
-}: {
-  announceTargetRef: React.MutableRefObject<{
-    page: number;
-    pageSize: number;
-  } | null>;
-}) {
-  const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
-    useDataGridRootPaginationContext();
-  const translate = useI18n("DataGrid");
-  const lastAnnouncedPage = useRef({ page, pageSize });
-  const [announcement, setAnnouncement] = useState("");
-
-  useEffect(() => {
-    if (
-      isLoading ||
-      (lastAnnouncedPage.current.page === page &&
-        lastAnnouncedPage.current.pageSize === pageSize)
-    ) {
-      return;
-    }
-
-    lastAnnouncedPage.current = { page, pageSize };
-    const target = announceTargetRef.current;
-    announceTargetRef.current = null;
-    if (target?.page !== page || target.pageSize !== pageSize) {
-      return;
-    }
-
-    const summary =
-      to === 0
-        ? translate("Pagination.summaryEmpty")
-        : totalRows === undefined
-          ? translate("Pagination.summaryUnknownTotal", { from, to })
-          : translate("Pagination.summary", { from, to, totalRows });
-    const pageLabel =
-      pageCount === undefined
-        ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
-        : translate("Pagination.pageOf", { page: page + 1, pageCount });
-
-    // Keep the completed message during loading and unrelated renders.
-    setAnnouncement(
-      `${summary}. ${pageLabel}. ${translate("Pagination.pageSize")}: ${pageSize}`,
-    );
-  }, [
-    isLoading,
-    page,
-    pageCount,
-    pageSize,
-    from,
-    to,
-    totalRows,
-    translate,
-    announceTargetRef,
-  ]);
-
-  return (
-    <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">
-      {announcement}
-    </div>
-  );
-}
-
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace DataGridPagination {
   export type Props = DataGridPaginationProps;
 }
 
-export { DataGridPagination, DataGridPaginationLiveRegion };
+export { DataGridPagination };
 export type { DataGridPaginationProps };

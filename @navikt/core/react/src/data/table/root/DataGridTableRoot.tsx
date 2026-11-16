@@ -6,15 +6,14 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  useDataGridContext,
-  useDataGridRootPaginationContext,
-} from "../../../data-grid/root/DataGridRoot.context";
+import { useDataGridPaginationContext } from "../../../data-grid/pagination/root/DataGridPaginationRoot.context";
+import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
@@ -28,8 +27,9 @@ import {
 import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
 import {
-  useTablePagination,
-  useTablePaginationReset,
+  usePaginatedItems,
+  useResetPageOnSort,
+  useScrollTopOnPageChange,
 } from "../hooks/useTablePagination";
 import { useTableSelection } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
@@ -124,7 +124,7 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * - `"skeleton"` — renders skeleton placeholder rows.
    * - `"overlay"` — keeps existing data visible with a loading overlay.
    *
-   * @default variant skeleton. Default rows: 5, "pageSize" from pagination if available.
+   * @default { variant: "skeleton", rows: 5 }. With pagination, `rows` defaults to the page size, capped at 25.
    */
   loadingContent?: DataTableLoadingConfig;
   /**
@@ -167,7 +167,7 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent: _loadingContent, // TODO translate label
+      loadingContent: loadingContentProp,
       detailsPanel,
       subRows,
       sorting,
@@ -180,19 +180,19 @@ const DataGridTableInternal = forwardRef<
   ) => {
     const { columnDefinitions, getRowId, selection, isLoading, tableSettings } =
       useDataGridContext();
-    const items = useTablePagination();
-    const paginationContext = useDataGridRootPaginationContext(false);
+    const items = usePaginatedItems();
+    const pageSize = useDataGridPaginationContext(false)?.pageSize;
 
-    const loadingContent = _loadingContent ?? {
+    const loadingContent = loadingContentProp ?? {
       variant: "skeleton",
-      rows: paginationContext?.pageSize ?? 5,
-      label: "Laster innhold",
+      rows: pageSize === undefined ? 5 : Math.min(pageSize, 25),
     };
 
     const sortingState = useTableSort(sorting);
 
     const scrollWrapperRef = useRef<HTMLDivElement>(null);
-    useTablePaginationReset({
+    useResetPageOnSort(sortingState.sortState);
+    useScrollTopOnPageChange({
       sortState: sortingState.sortState,
       scrollWrapperRef,
     });
@@ -449,6 +449,8 @@ interface DataTableTBodyContentProps {
 function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   const { columns, loading, totalColSpan, tableItems } = useDataTableContext();
   const { isLoading } = useDataGridContext();
+  const translate = useI18n("DataGrid");
+  const defaultLoadingLabel = translate("loading");
 
   if (isLoading && loading?.variant === "content") {
     return (
@@ -460,7 +462,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   if (isLoading && loading?.variant === "skeleton") {
     const rows = loading.rows ?? 5;
-    const label = loading.label ?? "Laster innhold"; // TODO translate
+    const label = loading.label ?? defaultLoadingLabel;
     return (
       <>
         <tr>
@@ -509,9 +511,8 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   const renderLoadingAnnouncement = isLoading && loading?.variant === "overlay";
 
   const overlayLabel =
-    loading?.variant === "overlay"
-      ? (loading.label ?? "Laster innhold") // TODO translate
-      : "Laster innhold";
+    (loading?.variant === "overlay" ? loading.label : undefined) ??
+    defaultLoadingLabel;
 
   return (
     <>

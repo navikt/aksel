@@ -4,7 +4,8 @@ import { ActionMenu } from "../../../action-menu";
 import { Button } from "../../../button";
 import { BodyShort } from "../../../typography";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
+import { getPaginationSummary } from "../helpers/pagination-summary";
+import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
 
 /**
  * Shows which rows are displayed (e.g. "1–10 of 245") and lets users choose how many rows to display per page.
@@ -19,17 +20,10 @@ function DataGridPaginationRowsInternal() {
     from,
     to,
     totalRows,
-  } = useDataGridRootPaginationContext();
+  } = useDataGridPaginationContext();
   const translate = useI18n("DataGrid");
 
-  let text: string;
-  if (to === 0) {
-    text = translate("Pagination.summaryEmpty");
-  } else if (totalRows === undefined) {
-    text = translate("Pagination.summaryUnknownTotal", { from, to });
-  } else {
-    text = translate("Pagination.summary", { from, to, totalRows });
-  }
+  const text = getPaginationSummary(translate, { from, to, totalRows });
 
   const options = useMemo(
     () =>
@@ -57,11 +51,13 @@ function DataGridPaginationRowsInternal() {
           size="small"
           icon={<ChevronDownIcon aria-hidden />}
           iconPosition="right"
+          /* Starts with the visible summary (label in name) and adds what the button does */
+          aria-label={translate("Pagination.pageSizeTrigger", {
+            summary: text,
+            size: pageSize,
+          })}
         >
           {text}
-          <span className="aksel-sr-only">
-            {`, ${translate("Pagination.pageSize")}: ${pageSize}`}
-          </span>
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>

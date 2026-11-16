@@ -1,9 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
-import {
-  type DataGridPaginationRows,
-  useDataGridPagination,
-} from "./useDataGridPagination";
+import type { DataGridPaginationRows } from "../DataGridPagination.types";
+import { useDataGridPagination } from "./useDataGridPagination";
 
 describe("useDataGridPagination", () => {
   test("preserves uncontrolled page and summary across loading, then clamps once when rows shrink", () => {

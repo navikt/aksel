@@ -5,16 +5,12 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
-import { DataGridPaginationInternal } from "../pagination/DataGridPaginationInternal";
+import type { DataGridPaginationConfig } from "../pagination/DataGridPagination.types";
+import { DataGridPaginationProviderInternal } from "../pagination/provider/DataGridPaginationProviderInternal";
 import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
-import type {
-  DataGridPaginationConfig,
-  DataGridSettings,
-} from "./DataGrid.types";
-import {
-  DataGridContextProvider,
-  DataGridRootPaginationContextProvider,
-} from "./DataGridRoot.context";
+import { DataGridPaginationContextProvider } from "../pagination/root/DataGridPaginationRoot.context";
+import type { DataGridSettings } from "./DataGrid.types";
+import { DataGridContextProvider } from "./DataGridRoot.context";
 
 type DataGridRowIdProps<RowT> =
   | {
@@ -163,7 +159,12 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
     });
 
     return (
-      <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
+      <div
+        {...rest}
+        ref={ref}
+        className={cl("aksel-data-grid", className)}
+        data-pagination={!!pagination}
+      >
         <DataGridContextProvider
           columnDefinitions={columns}
           data={data}
@@ -174,17 +175,17 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           updateTableSettings={updateSettings}
         >
           {pagination ? (
-            <DataGridPaginationInternal
+            <DataGridPaginationProviderInternal
               pagination={pagination}
               rowCount={data.length}
               isLoading={isLoading}
             >
               {children}
-            </DataGridPaginationInternal>
+            </DataGridPaginationProviderInternal>
           ) : (
-            <DataGridRootPaginationContextProvider value={undefined}>
+            <DataGridPaginationContextProvider value={undefined}>
               {children}
-            </DataGridRootPaginationContextProvider>
+            </DataGridPaginationContextProvider>
           )}
         </DataGridContextProvider>
       </div>

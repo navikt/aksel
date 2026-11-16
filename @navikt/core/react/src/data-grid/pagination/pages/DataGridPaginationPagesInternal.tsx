@@ -10,7 +10,7 @@ import { TextField } from "../../../form/textfield";
 import { BodyShort } from "../../../typography";
 import { useId } from "../../../utils-external";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
-import { useDataGridRootPaginationContext } from "../../root/DataGridRoot.context";
+import { useDataGridPaginationContext } from "../root/DataGridPaginationRoot.context";
 import { useShiftJumpPreview } from "./useShiftJumpPreview";
 
 /**
@@ -23,7 +23,7 @@ import { useShiftJumpPreview } from "./useShiftJumpPreview";
  */
 function DataGridPaginationPagesInternal({ navLabel }: { navLabel?: string }) {
   const { page, pageCount, canPrevious, canNext, isLoading, setPage } =
-    useDataGridRootPaginationContext();
+    useDataGridPaginationContext();
   const translate = useI18n("DataGrid");
 
   /* Typed page while editing; null shows the current page */

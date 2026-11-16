@@ -1,27 +1,15 @@
 import { useEffect, useMemo, useRef } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useControllableState, useEventCallback } from "../../../utils/hooks";
+import type {
+  DataGridPaginationRows,
+  DataGridPaginationSharedOptions,
+} from "../DataGridPagination.types";
 import { getPaginationRange } from "../helpers/pagination-range";
-import type { DataGridPaginationSharedOptions } from "./DataGridPagination.types";
 
 const defaultPageSizeOptions = [10, 25, 50, 100];
 
-type DataGridPaginationRows =
-  | {
-      /** Client mode: count of all top-level rows. DataGrid slices the page. */
-      mode: "client";
-      rowCount: number;
-      totalRows?: never;
-      hasNextPage?: never;
-    }
-  | ({
-      /** Server mode: count of top-level rows on the consumer-sliced page. */
-      mode: "server";
-      pageRowCount: number;
-    } & (
-      | { totalRows: number; hasNextPage?: never }
-      | { hasNextPage: boolean; totalRows?: never }
-    ));
+type PaginationAnnounceTarget = { page: number; pageSize: number };
 
 function useDataGridPagination({
   pagination,
@@ -39,9 +27,18 @@ function useDataGridPagination({
     pageSize: controlledPageSize,
     defaultPageSize,
     onPageSizeChange,
-    pageSizeOptions = defaultPageSizeOptions,
+    pageSizeOptions: pageSizeOptionsProp = defaultPageSizeOptions,
     allowPageSizeChange = true,
   } = pagination;
+
+  /* Keeps the reference stable when consumers pass a new array with the same values each render */
+  const pageSizeOptionsKey = pageSizeOptionsProp.join(",");
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pageSizeOptionsKey covers the array values.
+  const pageSizeOptions = useMemo(
+    () => pageSizeOptionsProp,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [pageSizeOptionsKey],
+  );
 
   const [storedPage, setStoredPage] = useControllableState({
     value: controlledPage,
@@ -81,9 +78,7 @@ function useDataGridPagination({
    * committed change matching this target, so sort resets, clamping and rejected controlled
    * requests stay silent.
    */
-  const announceTargetRef = useRef<{ page: number; pageSize: number } | null>(
-    null,
-  );
+  const announceTargetRef = useRef<PaginationAnnounceTarget | null>(null);
 
   const requestPage = (page: number, announce: boolean) => {
     const nextPage = getPaginationRange({ page, pageSize, ...rows }).page;
@@ -119,8 +114,8 @@ function useDataGridPagination({
 
   useEffect(() => {
     /*
-     * totalRows must be defined and non-zero to perform correction
-     * this avoids resetting the page when totalRows is not yet known (e.g., during initial load)
+     * Skip while loading or with zero rows: the row count is not settled yet (e.g. initial
+     * load or empty data before rows arrive), so clamping now would lose the requested page.
      */
     if (isLoading || totalRows === 0) {
       return;
@@ -241,4 +236,4 @@ function useDataGridPagination({
 }
 
 export { useDataGridPagination };
-export type { DataGridPaginationRows };
+export type { PaginationAnnounceTarget };
