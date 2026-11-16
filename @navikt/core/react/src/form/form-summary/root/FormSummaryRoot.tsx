@@ -58,6 +58,7 @@ const FormSummaryRoot = forwardRef<HTMLDivElement, FormSummaryProps>(
  * A summary of a previously answered form.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formsummary)
+ * @see 🏷️ {@link FormSummaryProps}
  *
  * @example
  * <FormSummary>
@@ -82,10 +83,12 @@ const FormSummary = Object.assign(FormSummaryRoot, {
   Header: FormSummaryHeader,
   /**
    * Typographic Heading to use in the `FormSummary.Header` component.
+   * @see 🏷️ {@link FormSummaryHeadingProps}
    */
   Heading: FormSummaryHeading,
   /**
    * Link to edit the answers to use in the `FormSummary.Footer` component. Should link to the relevant part of the form.
+   * @see 🏷️ {@link FormSummaryEditProps}
    */
   EditLink: FormSummaryEditLink,
   /**

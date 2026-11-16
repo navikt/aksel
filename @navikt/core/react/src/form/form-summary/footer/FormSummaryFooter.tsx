@@ -1,9 +1,6 @@
 import React, { forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 
-/**
- * Footer slot for actions in `FormSummary`.
- */
 interface FormSummaryFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Should include `<FormSummary.EditLink>`.
@@ -11,6 +8,9 @@ interface FormSummaryFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+/**
+ * Footer component for the form summary, if applicable this is a good place for `<FormSummary.EditLink>`.
+ */
 const FormSummaryFooter = forwardRef<HTMLDivElement, FormSummaryFooterProps>(
   ({ children, className, ...rest }, ref) => {
     return (

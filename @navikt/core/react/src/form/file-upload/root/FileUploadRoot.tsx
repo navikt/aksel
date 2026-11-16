@@ -1,14 +1,6 @@
 import React, { type HTMLAttributes, forwardRef } from "react";
 import { cl } from "../../../utils/helpers";
 import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
-import type {
-  FileAccepted,
-  FileObject,
-  FileRejected,
-  FileRejectedPartitioned,
-  FileRejectionReason,
-  FilesPartitioned,
-} from "../FileUpload.types";
 import {
   FileUploadDropzone,
   type FileUploadDropzoneProps,
@@ -17,7 +9,6 @@ import {
   FileUploadItem,
   type FileUploadItemProps,
 } from "../item/FileUploadItem";
-import type { FileItem, FileMetadata } from "../item/FileUploadItem.types";
 import {
   FileUploadTrigger,
   type FileUploadTriggerProps,
@@ -162,12 +153,4 @@ export type {
   FileUploadTriggerProps,
   FileUploadDropzoneProps,
   FileUploadItemProps,
-  FileRejectionReason,
-  FileRejected,
-  FileAccepted,
-  FileObject,
-  FileRejectedPartitioned,
-  FilesPartitioned,
-  FileItem,
-  FileMetadata,
 };

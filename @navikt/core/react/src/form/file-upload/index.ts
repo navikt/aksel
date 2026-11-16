@@ -9,12 +9,13 @@ export type {
   FileUploadTriggerProps,
   FileUploadDropzoneProps,
   FileUploadItemProps,
+} from "./root/FileUploadRoot";
+export type {
   FileObject,
   FileRejected,
   FileAccepted,
   FileRejectedPartitioned,
   FilesPartitioned,
   FileRejectionReason,
-  FileItem,
-  FileMetadata,
-} from "./root/FileUploadRoot";
+} from "./FileUpload.types";
+export type { FileItem, FileMetadata } from "./item/FileUploadItem.types";
