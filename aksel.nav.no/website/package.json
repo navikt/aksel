@@ -75,7 +75,7 @@
     "@babel/traverse": "^7.27.4",
     "@google-cloud/bigquery": "^9.5.0",
     "@playwright/test": "1.61.1",
-    "@portabletext/block-tools": "^6.0.0",
+    "@portabletext/block-tools": "^6.0.7",
     "@portabletext/markdown": "^2.5.1",
     "@sanity/schema": "6.17.0",
     "@types/jscodeshift": "17.3.0",
