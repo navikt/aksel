@@ -1,5 +1,11 @@
 # @navikt/aksel-stylelint
 
+## 8.23.0
+
+### Patch Changes
+
+- Stylelint: `@navikt/aksel-stylelint/recommended` now references its plugin by explicit file path, fixing `Could not find "."` errors with Stylelint 18. ([#5527](https://github.com/navikt/aksel/pull/5527))
+
 ## 8.22.1
 
 ## 8.22.0

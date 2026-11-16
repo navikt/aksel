@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 8.23.0
+
+### Patch Changes
+
+- DataGrid: Faster rendering when many details panels are expanded. ([#5494](https://github.com/navikt/aksel/pull/5494))
+
+- DataGrid.Table: Keyboard navigation no longer rebuilds the internal grid map on every arrow key press, improving responsiveness in large tables. ([#5491](https://github.com/navikt/aksel/pull/5491))
+
+- Combobox: Ignore option selection when an open Combobox becomes disabled. ([#5520](https://github.com/navikt/aksel/pull/5520))
+
+- Timeline: Optimize period parsing. ([#5469](https://github.com/navikt/aksel/pull/5469))
+
+- Updated dependencies [[`d9a529f`](https://github.com/navikt/aksel/commit/d9a529f3968581225579d935ab8d3df463d781d6)]:
+  - @navikt/aksel-icons@8.23.0
+  - @navikt/ds-tokens@8.23.0
+
 ## 8.22.1
 
 ### Patch Changes

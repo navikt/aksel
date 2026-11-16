@@ -1,5 +1,25 @@
 # Changelog
 
+## 8.23.0
+
+### @navikt/aksel-icons
+
+- Icons: All icons are now available as CSS custom properties. Import `@navikt/aksel-icons/css/<IconName>.css` for a single icon (e.g. `--aksel-icon-magnifying-glass`), or `@navikt/aksel-icons/css/index.css` for every icon. ([#5489](https://github.com/navikt/aksel/pull/5489))
+
+### @navikt/aksel-stylelint
+
+- Stylelint: `@navikt/aksel-stylelint/recommended` now references its plugin by explicit file path, fixing `Could not find "."` errors with Stylelint 18. ([#5527](https://github.com/navikt/aksel/pull/5527))
+
+### @navikt/ds-react
+
+- DataGrid: Faster rendering when many details panels are expanded. ([#5494](https://github.com/navikt/aksel/pull/5494))
+
+- DataGrid.Table: Keyboard navigation no longer rebuilds the internal grid map on every arrow key press, improving responsiveness in large tables. ([#5491](https://github.com/navikt/aksel/pull/5491))
+
+- Combobox: Ignore option selection when an open Combobox becomes disabled. ([#5520](https://github.com/navikt/aksel/pull/5520))
+
+- Timeline: Optimize period parsing. ([#5469](https://github.com/navikt/aksel/pull/5469))
+
 ## 8.22.1
 
 ### @navikt/ds-css
