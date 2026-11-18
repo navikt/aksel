@@ -391,110 +391,130 @@ export const LoadingWhileKeepingDataNoPlaceholders: Story = {
   },
 };
 
-const selectionPaginationSpy = fn();
+type SelectionPageRow = {
+  id: string;
+  name: string;
+  children?: SelectionPageRow[];
+};
+
+const selectionPageRows: SelectionPageRow[] = [
+  {
+    id: "alpha",
+    name: "Alpha",
+    children: [
+      {
+        id: "alpha-child",
+        name: "Alpha child",
+        children: [{ id: "alpha-grandchild", name: "Alpha grandchild" }],
+      },
+    ],
+  },
+  { id: "beta", name: "Beta" },
+  {
+    id: "gamma",
+    name: "Gamma",
+    children: [
+      {
+        id: "gamma-child",
+        name: "Gamma child",
+        children: [{ id: "gamma-grandchild", name: "Gamma grandchild" }],
+      },
+    ],
+  },
+  { id: "delta", name: "Delta" },
+];
+
+const selectionPageColumnDef: ColumnDefinitions<SelectionPageRow> = [
+  { id: "name", header: "Name", bodyCell: (row) => row.name },
+];
 
 export const SelectionPagination: Story = {
   render: () => {
-    const [page, setPage] = useState<"0" | "1">("0");
-
-    const dataToShow =
-      page === "0" ? userData.slice(0, 2) : userData.slice(2, 4);
+    const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
     return (
-      <div>
-        <button type="button" onClick={() => setPage("0")}>
-          Page 1
-        </button>
-        <button type="button" onClick={() => setPage("1")}>
-          Page 2
-        </button>
+      <>
+        <output aria-label="Selected row IDs">
+          {JSON.stringify([...selectedRowIds].sort())}
+        </output>
         <DataGrid
-          columns={userColumnDef}
-          data={dataToShow}
-          getRowId={(row) => row.foo + row.bar}
+          columns={selectionPageColumnDef}
+          data={selectionPageRows}
+          getRowId={(row) => row.id}
           selection={{
             mode: "multiple",
-            onSelectedRowIdsChange: (keys) => {
-              console.info({ keys });
-              selectionPaginationSpy(keys);
-            },
+            onSelectedRowIdsChange: setSelectedRowIds,
           }}
+          pagination={{ defaultPageSize: 2, pageSizeOptions: [2] }}
         >
-          <DataGrid.Table />
+          <DataGrid.Table<SelectionPageRow>
+            subRows={{ getRows: (row) => row.children ?? [] }}
+            bottomContent={<DataGrid.Pagination />}
+          />
         </DataGrid>
-      </div>
+      </>
     );
   },
   play: async ({ canvasElement }) => {
-    selectionPaginationSpy.mockClear();
     const canvas = within(canvasElement);
-    const page1Button = canvas.getByRole("button", { name: "Page 1" });
-    const page2Button = canvas.getByRole("button", { name: "Page 2" });
-
-    /* keys */
-    await userEvent.click(page1Button);
-
-    /* Page 1 rows: foo1bar1, foo2bar2 */
-    let checkboxes = canvas.getAllByRole("checkbox");
+    const selectedIds = canvas.getByRole("status", {
+      name: "Selected row IDs",
+    });
     const theadCheckbox = () =>
       canvas.getAllByRole("checkbox")[0] as HTMLInputElement;
+    const firstPageIds = ["alpha", "alpha-child", "alpha-grandchild", "beta"];
+    const secondPageIds = ["delta", "gamma", "gamma-child", "gamma-grandchild"];
 
-    /* Select first row on page 1 */
-    await userEvent.click(checkboxes[1]);
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
-
-    /* Thead should be indeterminate (1 of 2 visible rows selected) */
+    /* Single row selection marks header indeterminate; page 2 starts unchecked */
+    await userEvent.click(canvas.getAllByRole("checkbox")[2]);
+    expect(selectedIds.textContent).toBe(JSON.stringify(["beta"]));
     expect(theadCheckbox().indeterminate).toBe(true);
-    expect(theadCheckbox().checked).toBe(false);
 
-    /* Switch to page 2 (rows: foo3bar3, foo4bar4) */
-    await userEvent.click(page2Button);
-
-    /* Thead should NOT be indeterminate (no visible rows are selected) */
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
     expect(theadCheckbox().indeterminate).toBe(false);
     expect(theadCheckbox().checked).toBe(false);
 
-    /* Select first row on page 2 */
-    checkboxes = canvas.getAllByRole("checkbox");
-    await userEvent.click(checkboxes[1]);
-
-    /* onSelectionChange should include foo1bar1 from page 1 */
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo2bar2",
-      "foo4bar4",
-    ]);
-
-    /* Thead should be indeterminate (1 of 2 visible rows selected) */
-    expect(theadCheckbox().indeterminate).toBe(true);
-
-    /* Click thead checkbox (indeterminate -> select all visible) */
-    /* Should preserve selections from other pages */
-    await userEvent.click(theadCheckbox());
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith([
-      "foo2bar2",
-      "foo4bar4",
-      "foo5bar5",
-    ]);
-
-    /* Thead should now be checked (all visible selected) */
+    /* Select all visible on page 2 includes collapsed sub-rows while keeping page 1 selection */
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(
+      JSON.stringify(["beta", ...secondPageIds].sort()),
+    );
     expect(theadCheckbox().checked).toBe(true);
-    expect(theadCheckbox().indeterminate).toBe(false);
 
-    /* Click thead checkbox again (all selected -> unselect all visible) */
-    /* Should NOT unselect rows from other pages */
-    await userEvent.click(theadCheckbox());
-    expect(selectionPaginationSpy).toHaveBeenLastCalledWith(["foo2bar2"]);
+    /* Select all visible on page 1, then unselect all visible on page 1 without losing page 2 */
+    await userEvent.click(canvas.getByRole("button", { name: "Forrige side" }));
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Velg alle synlige rader" }),
+    );
+    expect(selectedIds.textContent).toBe(
+      JSON.stringify([...firstPageIds, ...secondPageIds].sort()),
+    );
 
-    /* Thead should not be checked or indeterminate */
-    expect(theadCheckbox().checked).toBe(false);
-    expect(theadCheckbox().indeterminate).toBe(false);
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe(JSON.stringify(secondPageIds));
 
-    /* Switch back to page 1 - foo1bar1 should still be selected */
-    await userEvent.click(page1Button);
-    checkboxes = canvas.getAllByRole("checkbox");
-    expect(theadCheckbox().indeterminate).toBe(true);
-    expect((checkboxes[1] as HTMLInputElement).checked).toBe(true);
-    expect((checkboxes[2] as HTMLInputElement).checked).toBe(false);
+    /* Page 2 nested sub-rows stay selected when expanded, and clear on header uncheck */
+    await userEvent.click(canvas.getByRole("button", { name: "Neste side" }));
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Vis under-rader" }),
+    );
+    expect(
+      within(canvas.getByRole("row", { name: /Gamma child/ })).getByRole(
+        "checkbox",
+      ),
+    ).toBeChecked();
+    await userEvent.click(
+      canvas.getByRole("checkbox", {
+        name: "Fjern alle synlige valgte rader",
+      }),
+    );
+    expect(selectedIds.textContent).toBe("[]");
   },
 };
 

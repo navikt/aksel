@@ -5,10 +5,47 @@ import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.type
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
+import type { DataGridPaginationConfig } from "../pagination/DataGridPagination.types";
+import { DataGridPaginationProviderInternal } from "../pagination/provider/DataGridPaginationProviderInternal";
+import { DataGridPagination } from "../pagination/root/DataGridPaginationRoot";
+import { DataGridPaginationContextProvider } from "../pagination/root/DataGridPaginationRoot.context";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
-interface DataGridProps<RowT> {
+type DataGridRowIdProps<RowT> =
+  | {
+      pagination?: never;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * If not provided, the row index will be used as ID.
+       * This can cause issues if your data changes dynamically,
+       * so it's recommended to provide a stable ID if possible.
+       */
+      getRowId?: (rowData: RowT) => string;
+    }
+  | {
+      /**
+       * Enables root-owned pagination state. Pages are zero-indexed (`page`, `defaultPage`, `onPageChange`),
+       * unlike Aksel `<Pagination>`, which starts at 1.
+       *
+       * Client mode (default) accepts all rows; server mode accepts the current
+       * page and requires exactly one of `totalRows` or `hasNextPage`.
+       *
+       * Requires `getRowId`.
+       */
+      pagination: DataGridPaginationConfig;
+      /**
+       * Function to get unique row ID from row data.
+       *
+       * Required with `pagination`, so row IDs stay unique across pages.
+       */
+      getRowId: (rowData: RowT) => string;
+    };
+
+type DataGridProps<RowT> = DataGridBaseProps<RowT> & DataGridRowIdProps<RowT>;
+
+interface DataGridBaseProps<RowT> {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -23,14 +60,6 @@ interface DataGridProps<RowT> {
    * object are used to render the cells based on `columnDefinitions`.
    */
   data: RowT[];
-  /**
-   * Function to get unique row ID from row data.
-   *
-   * If not provided, the row index will be used as ID.
-   * This can cause issues if your data changes dynamically,
-   * so it's recommended to provide a stable ID if possible.
-   */
-  getRowId?: (rowData: RowT) => string;
   /**
    * Object with props related to row selection.
    */
@@ -77,6 +106,16 @@ interface DataGridComponent {
    * </DataGrid>
    */
   Preferences: typeof DataGridPreferences;
+  /**
+   * @see 🏷️ {@link DataGridPagination.Props}
+   *
+   * @example
+   * <DataGrid columns={columns} data={rows} getRowId={(row) => row.id} pagination={{ defaultPageSize: 10 }}>
+   *   <DataGrid.Table />
+   *   <DataGrid.Pagination />
+   * </DataGrid>
+   */
+  Pagination: typeof DataGridPagination;
 }
 
 /**
@@ -100,6 +139,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       className,
       columns,
       data,
+      pagination,
       getRowId,
       selection,
       isLoading = false,
@@ -117,7 +157,12 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
     });
 
     return (
-      <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
+      <div
+        {...rest}
+        ref={ref}
+        className={cl("aksel-data-grid", className)}
+        data-pagination={!!pagination}
+      >
         <DataGridContextProvider
           columnDefinitions={columns}
           data={data}
@@ -127,7 +172,19 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {children}
+          {pagination ? (
+            <DataGridPaginationProviderInternal
+              pagination={pagination}
+              rowCount={data.length}
+              isLoading={isLoading}
+            >
+              {children}
+            </DataGridPaginationProviderInternal>
+          ) : (
+            <DataGridPaginationContextProvider value={undefined}>
+              {children}
+            </DataGridPaginationContextProvider>
+          )}
         </DataGridContextProvider>
       </div>
     );
@@ -137,6 +194,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
 const DataGrid = DataGridInternal as unknown as DataGridComponent;
 DataGrid.Table = DataGridTable;
 DataGrid.Preferences = DataGridPreferences;
+DataGrid.Pagination = DataGridPagination;
 
 // oxlint-disable-next-line typescript/no-namespace
 export namespace DataGrid {
@@ -161,6 +219,12 @@ export namespace DataGrid {
   export namespace Preferences {
     // oxlint-disable-next-line no-shadow -- intentional namespace re-export
     export type Props = DataGridPreferences.Props;
+  }
+
+  // oxlint-disable-next-line typescript/no-namespace
+  export namespace Pagination {
+    // oxlint-disable-next-line no-shadow -- intentional namespace re-export
+    export type Props = DataGridPagination.Props;
   }
 }
 

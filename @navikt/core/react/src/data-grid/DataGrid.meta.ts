@@ -7,6 +7,7 @@ const metadata: ComponentMetadata = {
     DataGrid,
     "DataGrid.Table": DataGridTable,
     "DataGrid.Preferences": DataGridPreferences,
+    "DataGrid.Pagination": DataGrid.Pagination,
   },
   keywords: ["data grid", "datagrid", "table", "tabell", "grid"],
   related: ["Table"],

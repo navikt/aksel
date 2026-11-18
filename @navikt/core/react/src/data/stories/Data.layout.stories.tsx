@@ -84,7 +84,7 @@ const sortableData: SortableRow[] = [
 
 export const AutoLayoutMinimal: StoryObj<{
   table: DataGrid.Table.Props<MinimalRow>;
-  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (
@@ -103,7 +103,7 @@ export const AutoLayoutMinimal: StoryObj<{
 
 export const AutoLayoutOverflowX: StoryObj<{
   table: DataGrid.Table.Props<PersonInfo>;
-  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (
@@ -133,7 +133,7 @@ export const AutoLayoutOverflowX: StoryObj<{
 
 export const AutoLayoutNoCellTruncation: StoryObj<{
   table: DataGrid.Table.Props<PersonInfo>;
-  grid: Omit<DataGrid.Props<PersonInfo>, "children">;
+  grid: Omit<DataGrid.Props<PersonInfo>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (
@@ -162,7 +162,7 @@ export const AutoLayoutNoCellTruncation: StoryObj<{
 
 export const AutoLayoutSortable: StoryObj<{
   table: DataGrid.Table.Props<SortableRow>;
-  grid: Omit<DataGrid.Props<SortableRow>, "children">;
+  grid: Omit<DataGrid.Props<SortableRow>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (
@@ -201,7 +201,7 @@ export const AutoLayoutSortable: StoryObj<{
 
 export const FixedLayoutMinimal: StoryObj<{
   table: DataGrid.Table.Props<MinimalRow>;
-  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (
@@ -218,7 +218,7 @@ export const FixedLayoutMinimal: StoryObj<{
 
 export const FixedLayoutDynamicWidth: StoryObj<{
   table: DataGrid.Table.Props<MinimalRow>;
-  grid: Omit<DataGrid.Props<MinimalRow>, "children">;
+  grid: Omit<DataGrid.Props<MinimalRow>, "children" | "pagination">;
 }> = {
   render: (args) => {
     return (

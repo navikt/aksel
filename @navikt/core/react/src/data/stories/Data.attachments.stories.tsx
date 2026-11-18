@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useCallback } from "react";
-import { Button } from "../../button";
+import React from "react";
 import { DataGrid } from "../../data-grid";
-import { HStack, VStack } from "../../primitives/stack";
+import { VStack } from "../../primitives/stack";
 import { BodyShort, Heading } from "../../typography";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { TEST_DATA, columnDef_TEST_DATA } from "./Data.test-data";
@@ -30,20 +29,6 @@ type Story = StoryObj<{ overflow: "none" | "x" | "y" | "both" }>;
 
 export const Attachments: Story = {
   render: ({ overflow }) => {
-    const Content = useCallback(
-      () => (
-        <HStack gap="space-8">
-          <Button size="xsmall" variant="secondary" data-color="neutral">
-            Button
-          </Button>
-          <Button size="xsmall" variant="secondary" data-color="neutral">
-            Button
-          </Button>
-        </HStack>
-      ),
-      [],
-    );
-
     return (
       <VStack padding="space-16" gap="space-16" height="100vh">
         <VStack
@@ -67,10 +52,15 @@ export const Attachments: Story = {
             minHeight: 0,
           }}
         >
-          <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
+          <DataGrid
+            columns={getColDefs(overflow)}
+            data={getData(overflow)}
+            getRowId={(row) => `${row.id}`}
+            pagination={{ defaultPage: 0 }}
+          >
             <DataGrid.Table
-              topContent={<Content />}
-              bottomContent={<Content />}
+              topContent={<DataGrid.Pagination />}
+              bottomContent={<DataGrid.Pagination />}
               stickyHeader
             />
           </DataGrid>

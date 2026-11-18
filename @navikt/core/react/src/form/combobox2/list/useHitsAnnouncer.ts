@@ -35,7 +35,7 @@ function useHitsAnnouncer(
       // If the message is the same as the current text,
       // append a non-breaking space to force a re-announcement.
       target.textContent =
-        message === target.textContent ? `${message} ` : message; // eslint-disable-line no-irregular-whitespace
+        message === target.textContent ? `${message} ` : message;
       timeout.start(2000, () => {
         target.textContent = "";
       });

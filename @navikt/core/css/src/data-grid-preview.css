@@ -6,7 +6,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
+
+  /* Container for the responsive pagination bar, wherever it is placed inside the grid */
+  &[data-pagination="true"] {
+    container-type: inline-size;
+  }
 }
 
 .aksel-data-table__frame {
@@ -762,6 +768,77 @@ html[data-dragging-cursor="true"] *::after {
 }
 
 /* ------------------------ DataGrid.Preferences End ------------------------ */
+
+/* ------------------------ DataGrid.Pagination Start ----------------------- */
+.aksel-data-grid__pagination {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ax-space-8);
+}
+
+.aksel-data-grid__pagination-rows > * {
+  font-weight: var(--ax-font-weight-regular);
+}
+
+.aksel-data-grid__pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-4);
+}
+
+.aksel-data-grid__pagination-pages-button {
+  /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
+  &[aria-disabled="true"] {
+    cursor: default;
+    opacity: var(--ax-opacity-disabled);
+  }
+
+  @media (forced-colors: active) {
+    /* TODO: Avoids focus loss now, but is unconventional so consider revisiting this approach */
+    &[aria-disabled="true"] {
+      color: GrayText;
+      opacity: 1;
+    }
+  }
+}
+
+.aksel-data-grid__pagination-pages-label {
+  display: none;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  &::before {
+    content: attr(data-max-label);
+    visibility: hidden;
+  }
+
+  &::before,
+  & > span {
+    grid-area: 1 / 1;
+  }
+
+  @container (inline-size >= 22rem) {
+    display: inline-grid;
+  }
+}
+
+.aksel-data-grid__pagination-pages-input {
+  display: none;
+  align-items: center;
+  gap: var(--ax-space-8);
+  margin-inline: var(--ax-space-4);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  @container (inline-size >= 22rem) {
+    display: inline-flex;
+  }
+}
+
+/* ------------------------- DataGrid.Pagination End ------------------------ */
 
 .aksel-data-table__attachment {
   padding: var(--ax-space-12) var(--ax-space-16);
