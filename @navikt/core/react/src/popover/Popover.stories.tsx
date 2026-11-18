@@ -48,6 +48,7 @@ export const Default = () => {
 
   return (
     <div tabIndex={-1}>
+      <Button>Before</Button>
       <Button ref={setAnchorEl} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>

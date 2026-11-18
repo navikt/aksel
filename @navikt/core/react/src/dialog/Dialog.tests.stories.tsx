@@ -8,7 +8,9 @@ import {
   waitFor,
   within,
 } from "storybook/test";
+import { ActionMenu } from "../action-menu";
 import { Button } from "../button";
+import { Popover } from "../popover";
 import { Provider } from "../provider";
 import {
   Dialog,
@@ -709,6 +711,128 @@ export const TabToLinks: Story = {
     expect(canvas.getByTestId("link-2")).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(canvas.getByTestId("link-1")).toHaveFocus();
+  },
+};
+
+/* ----------------------- Nested dismissable layers ------------------------ */
+function PopoverInDialog() {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null,
+  );
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        ref={setAnchorEl}
+        aria-expanded={open}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Popover trigger
+      </button>
+      <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
+        <Popover.Content>
+          <button type="button">Inside popover</button>
+        </Popover.Content>
+      </Popover>
+      <button type="button">Dialog button</button>
+    </>
+  );
+}
+
+export const PopoverInsideDialog: Story = {
+  render: BaseDialogComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
+      canvasElement,
+      args,
+    );
+    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
+
+    const popoverTrigger = canvas.getByRole("button", {
+      name: "Popover trigger",
+    });
+    const openPopover = async () => {
+      popoverTrigger.focus();
+      await userEvent.keyboard("{Enter}");
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "true");
+    };
+
+    await openPopover();
+    await userEvent.tab();
+    expect(
+      canvas.getByRole("button", { name: "Inside popover" }),
+    ).toHaveFocus();
+    await userEvent.tab();
+    expect(canvas.getByRole("button", { name: "Dialog button" })).toHaveFocus();
+    await waitFor(() =>
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "false"),
+    );
+    expectPopupOpen();
+
+    await openPopover();
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "false"),
+    );
+    expectPopupOpen();
+    expectOpenChangeCalls(0);
+  },
+  args: {
+    rootProps: { defaultOpen: true, onOpenChange: fn() },
+    popupProps: { children: <PopoverInDialog /> },
+  },
+};
+
+export const ActionMenuInsideDialog: Story = {
+  render: BaseDialogComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
+      canvasElement,
+      args,
+    );
+    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
+
+    const menuTrigger = canvas.getByRole("button", { name: "Menu" });
+    const expectMenuClosed = () =>
+      waitFor(() =>
+        expect(canvas.queryByRole("menuitem")).not.toBeInTheDocument(),
+      );
+
+    await userEvent.click(menuTrigger);
+    await canvas.findByRole("menuitem", { name: "Item" });
+    canvas.getByRole("button", { name: "Dialog button" }).focus();
+    await expectMenuClosed();
+    expectPopupOpen();
+
+    await userEvent.click(menuTrigger);
+    await canvas.findByRole("menuitem", { name: "Item" });
+    await userEvent.keyboard("{Escape}");
+    await expectMenuClosed();
+    await waitFor(() => expect(menuTrigger).toHaveFocus());
+    expectPopupOpen();
+    expectOpenChangeCalls(0);
+  },
+  args: {
+    rootProps: { defaultOpen: true, onOpenChange: fn() },
+    popupProps: {
+      children: (
+        <>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <button type="button">Menu</button>
+            </ActionMenu.Trigger>
+            <ActionMenu.Content>
+              <ActionMenu.Item>Item</ActionMenu.Item>
+            </ActionMenu.Content>
+          </ActionMenu>
+          <button type="button">Dialog button</button>
+        </>
+      ),
+    },
   },
 };
 
