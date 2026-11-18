@@ -108,7 +108,7 @@ function ShadowFocusTestRender() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <button type="button" ref={setAnchorEl} onClick={() => setOpen(true)}>
         Open popover
       </button>
@@ -122,7 +122,7 @@ function ShadowFocusTestRender() {
           )}
       </Popover>
       <button type="button">Another button</button>
-    </>
+    </div>
   );
 }
 
@@ -174,6 +174,59 @@ export const DismissOnFocusLeavingShadowPopover: Story = {
     outside.focus();
     await waitFor(() => expect(inside).not.toBeVisible());
     expect(root.activeElement).toBe(outside);
+  },
+};
+
+export const DismissOnFocusMovingToEnclosingShadowRoot: Story = {
+  globals: { webComponentWrapper: "open" },
+  render: function NestedShadowPopover() {
+    const [root, setRoot] = useState<ShadowRoot | null>(null);
+    const attachRoot = React.useCallback((host: HTMLDivElement | null) => {
+      if (host) {
+        setRoot(host.shadowRoot ?? host.attachShadow({ mode: "open" }));
+      }
+    }, []);
+
+    return (
+      <>
+        <div ref={attachRoot} data-testid="inner-host" />
+        {root && createPortal(<ShadowFocusTestRender />, root)}
+        <button type="button">Enclosing root button</button>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const outerRoot = canvasElement.firstElementChild?.shadowRoot;
+    const outerMount = outerRoot?.querySelector("div");
+    if (!outerRoot || !outerMount) {
+      throw new Error("Expected the open shadow root Storybook decorator");
+    }
+
+    const outerCanvas = within(outerMount);
+    const innerRoot = outerCanvas.getByTestId("inner-host").shadowRoot;
+    const innerMount = innerRoot?.querySelector("div");
+    if (!innerRoot || !innerMount) {
+      throw new Error("Expected a popover in the nested shadow root");
+    }
+
+    const innerCanvas = within(innerMount);
+    await userEvent.click(
+      innerCanvas.getByRole("button", { name: "Open popover" }),
+    );
+    const inside = innerCanvas.getByRole("button", { name: "Inside popover" });
+    inside.focus();
+    await tick();
+    expect(innerRoot.activeElement).toBe(inside);
+    const enclosingButton = outerCanvas.getByRole("button", {
+      name: "Enclosing root button",
+    });
+    enclosingButton.focus();
+    await waitFor(() =>
+      expect(
+        innerCanvas.queryByRole("button", { name: "Inside popover" }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(outerRoot.activeElement).toBe(enclosingButton);
   },
 };
 

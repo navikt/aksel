@@ -26,9 +26,18 @@ function useFocusOutside(
       return;
     }
 
-    const roots = new Set<Node>([node.ownerDocument, node.getRootNode()]);
-    if (anchor) {
-      roots.add(anchor.getRootNode());
+    // Focus moving between siblings in a shadow root may only reach that root.
+    const roots = new Set<Node>([node.ownerDocument]);
+    for (const element of [node, anchor]) {
+      const view = element?.ownerDocument.defaultView;
+      let root = element?.getRootNode();
+      while (root && !roots.has(root)) {
+        roots.add(root);
+        root =
+          view && root instanceof view.ShadowRoot
+            ? root.host.getRootNode()
+            : undefined;
+      }
     }
 
     const handleFocusIn = (event: FocusEvent) => {
@@ -68,11 +77,6 @@ function useFocusOutside(
       });
     };
 
-    /**
-     * Focus moving within a shadow root doesn't reach the document, so also
-     * listen on the roots of the layer and anchor. Repeated calls for the same
-     * event just restart the check.
-     */
     for (const root of roots) {
       root.addEventListener("focusin", handleFocusIn as EventListener, true);
     }
