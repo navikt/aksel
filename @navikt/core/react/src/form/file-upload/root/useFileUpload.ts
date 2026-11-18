@@ -3,15 +3,12 @@ import { useMergeRefs } from "../../../utils/hooks";
 import type { FileUploadBaseProps } from "../FileUpload.types";
 import { validateFiles } from "../helpers/validate-files";
 
-export interface UseFileUploadProps extends Omit<
-  FileUploadBaseProps,
-  "fileLimit"
-> {
+interface UseFileUploadProps extends Omit<FileUploadBaseProps, "fileLimit"> {
   ref: React.ForwardedRef<HTMLInputElement>;
   disabled?: boolean;
 }
 
-export const useFileUpload = ({
+const useFileUpload = ({
   ref,
   accept,
   onSelect,
@@ -54,3 +51,6 @@ export const useFileUpload = ({
     mergedRef,
   };
 };
+
+export { useFileUpload };
+export type { UseFileUploadProps };

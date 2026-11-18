@@ -1,13 +1,16 @@
 import { createStrictContext } from "../../../utils/helpers";
 import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
 
-export type FileUploadLocaleContextProps = {
+type FileUploadLocaleContextProps = {
   translations?: ComponentTranslation<"FileUpload">;
 };
 
-export const {
+const {
   Provider: FileUploadLocaleContextProvider,
   useContext: useFileUploadTranslation,
 } = createStrictContext<FileUploadLocaleContextProps>({
   name: "FileUploadLocaleContext",
 });
+
+export { FileUploadLocaleContextProvider, useFileUploadTranslation };
+export type { FileUploadLocaleContextProps };

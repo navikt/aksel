@@ -19,7 +19,7 @@ const iconProps = {
   "aria-hidden": true,
 };
 
-function ItemIcon({ file }: ItemIconProps) {
+function FileUploadItemIconInternal({ file }: ItemIconProps) {
   return (
     <div className="aksel-file-item__icon">
       <Icon file={file} />
@@ -54,4 +54,4 @@ function Icon({ file }: { file: FileItem }) {
   }
 }
 
-export default ItemIcon;
+export { FileUploadItemIconInternal };

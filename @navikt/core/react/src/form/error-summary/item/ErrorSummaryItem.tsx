@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import type { OverridableComponent } from "../../utils-external";
-import { cl } from "../../utils/helpers";
+import type { OverridableComponent } from "../../../utils-external";
+import { cl } from "../../../utils/helpers";
 
-export interface ErrorSummaryItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface ErrorSummaryItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Link text
    */
@@ -18,7 +18,7 @@ type ErrorSummaryItemType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
+const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
       <li>
@@ -34,4 +34,5 @@ export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   },
 );
 
-export default ErrorSummaryItem;
+export { ErrorSummaryItem };
+export type { ErrorSummaryItemProps };

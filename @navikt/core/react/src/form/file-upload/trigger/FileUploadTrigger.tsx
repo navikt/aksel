@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../../utils/components/slot/Slot";
 import type { FileUploadBaseProps } from "../FileUpload.types";
-import { useFileUpload } from "../hooks/useFileUpload";
+import { useFileUpload } from "../root/useFileUpload";
 
 interface FileUploadTriggerProps extends Omit<
   FileUploadBaseProps,
@@ -47,6 +47,5 @@ const FileUploadTrigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
   },
 );
 
-export default FileUploadTrigger;
 export { FileUploadTrigger };
 export type { FileUploadTriggerProps };

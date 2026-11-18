@@ -2,7 +2,7 @@ import type { ComponentTranslation } from "../../../utils/i18n/i18n.types";
 import type { FormFieldProps } from "../../useFormField";
 import type { FileUploadBaseProps } from "../FileUpload.types";
 
-export interface FileUploadDropzoneProps
+interface FileUploadDropzoneProps
   extends
     FileUploadBaseProps,
     Omit<FormFieldProps, "size" | "readOnly">,
@@ -24,3 +24,5 @@ export interface FileUploadDropzoneProps
    */
   translations?: ComponentTranslation<"FileUpload">["dropzone"];
 }
+
+export type { FileUploadDropzoneProps };

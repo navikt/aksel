@@ -5,7 +5,7 @@ import { Loader } from "../../../loader";
 import { Spacer } from "../../../primitives/stack";
 import type { TFunction } from "../../../utils/i18n/i18n.types";
 
-interface ItemActionFieldProps {
+interface FileUploadItemActionFieldInternalProps {
   isLoading: boolean;
   button?:
     | {
@@ -17,11 +17,11 @@ interface ItemActionFieldProps {
   translate: TFunction<"FileUpload">;
 }
 
-function ItemActionField({
+function FileUploadItemActionFieldInternal({
   isLoading,
   button,
   translate,
-}: ItemActionFieldProps) {
+}: FileUploadItemActionFieldInternalProps) {
   if (isLoading) {
     return (
       <>
@@ -83,4 +83,4 @@ function isCustomButton(
   return React.isValidElement(button);
 }
 
-export { ItemActionField };
+export { FileUploadItemActionFieldInternal };
