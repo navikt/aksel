@@ -82,7 +82,7 @@ function PagedGrid({
 
 export const Default: Story = {
   render: () => (
-    <StoryPage description="Paginering på klientsiden. 137 rader, 10 rader per side.">
+    <StoryPage description="Paginering på klientsiden. 137 rader, 10 rader per side. Hold Shift og klikk eller trykk Enter eller mellomrom på en sideknapp for å gå til første eller siste side.">
       <PagedGrid />
     </StoryPage>
   ),

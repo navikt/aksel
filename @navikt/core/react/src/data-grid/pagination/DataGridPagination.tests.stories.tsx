@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
 import type { SortEntry } from "../../data/table/root/DataGridTable.types";
 import { DataGrid } from "../root/DataGridRoot";
 
@@ -89,6 +89,43 @@ export const ClientPaginationFlow: Story = {
     await user.keyboard("{/Shift}");
     expect(next).toHaveAccessibleName("Neste side");
 
+    /* Shift+Tab must preview the same jump as keyboard activation. */
+    await user.clear(input);
+    await user.keyboard("3{Enter}{Shift>}{Tab}");
+    expect(previous).toHaveFocus();
+    expect(previous).toHaveAccessibleName("Første side");
+    await user.keyboard("{Enter}");
+    expectPage(canvas, 1, 3);
+    await user.keyboard("{/Shift}");
+    expect(previous).toHaveAccessibleName("Forrige side");
+
+    await user.tab();
+    await user.tab();
+    expect(next).toHaveFocus();
+    await user.keyboard("{Shift>}");
+    expect(next).toHaveAccessibleName("Siste side");
+    /* Releasing one Shift while the other is held keeps the modifier active. */
+    await fireEvent.keyUp(next, {
+      key: "Shift",
+      code: "ShiftLeft",
+      shiftKey: true,
+    });
+    expect(next).toHaveAccessibleName("Siste side");
+    await user.keyboard(" ");
+    expectPage(canvas, 3, 3);
+
+    await user.keyboard("{Tab}{Tab}");
+    expect(previous).toHaveFocus();
+    expect(previous).toHaveAccessibleName("Første side");
+    await user.keyboard(" ");
+    expectPage(canvas, 1, 3);
+    await user.keyboard("{/Shift}");
+    expect(previous).toHaveAccessibleName("Forrige side");
+    await user.tab();
+    await user.tab();
+    await user.keyboard(" ");
+    expectPage(canvas, 2, 3);
+
     /* Typed page: Enter submit, clamping, non-digit strip, Escape discard, blur commit */
     await user.clear(input);
     await user.keyboard("99{Enter}");
@@ -113,7 +150,7 @@ export const ClientPaginationFlow: Story = {
     /* Page-size ActionMenu resets to page 1 */
     await user.click(
       canvas.getByRole("button", {
-        name: "Rad 41–60 av 60, velg antall rader per side, 20 valgt",
+        name: "Fra 41 til 60 av 60, velg antall rader per side, 20 valgt",
       }),
     );
     expect(
@@ -124,7 +161,7 @@ export const ClientPaginationFlow: Story = {
     expectPage(canvas, 1, 6);
     expect(
       canvas.getByRole("button", {
-        name: "Rad 1–10 av 60, velg antall rader per side, 10 valgt",
+        name: "Fra 1 til 10 av 60, velg antall rader per side, 10 valgt",
       }),
     ).toBeInTheDocument();
   },
