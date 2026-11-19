@@ -3,8 +3,8 @@ const internalTranslations = {
   DataGrid: {
     loading: "Laster innhold",
     Pagination: {
-      summary: "Rad {from}–{to} av {totalRows}",
-      summaryUnknownTotal: "Rad {from}–{to}",
+      summary: "Fra {from} til {to} av {totalRows}",
+      summaryUnknownTotal: "Fra {from}–{to}",
       summaryEmpty: "Ingen rader",
       pageSize: "Rader per side",
       pageSizeTrigger: "{summary}, velg antall rader per side, {size} valgt",

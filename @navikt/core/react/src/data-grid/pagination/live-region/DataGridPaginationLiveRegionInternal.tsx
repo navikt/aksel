@@ -35,15 +35,9 @@ function DataGridPaginationLiveRegionInternal({
     }
 
     const summary = getPaginationSummary(translate, { from, to, totalRows });
-    const pageLabel =
-      pageCount === undefined
-        ? translate("Pagination.pageOfUnknownTotal", { page: page + 1 })
-        : translate("Pagination.pageOf", { page: page + 1, pageCount });
 
     // Keep the completed message during loading and unrelated renders.
-    setAnnouncement(
-      `${summary}. ${pageLabel}. ${translate("Pagination.pageSize")}: ${pageSize}`,
-    );
+    setAnnouncement(summary);
   }, [
     isLoading,
     page,
