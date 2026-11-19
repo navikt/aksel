@@ -4,7 +4,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import { UNSAFE_Combobox } from "./index";
 
 export default {
-  title: "ds-react/Combobox/Tests",
+  title: "ds-react/Combobox legacy/Tests",
   component: UNSAFE_Combobox,
   decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
   parameters: {

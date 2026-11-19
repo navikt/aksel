@@ -18,7 +18,7 @@ import {
 import { ComboboxTrigger } from "./trigger/ComboboxTrigger";
 
 const meta: Meta<typeof ComboboxSingle> = {
-  title: "ds-react/Combobox2",
+  title: "ds-react/Combobox",
   component: ComboboxSingle,
   parameters: {
     chromatic: { disable: true },

@@ -12,7 +12,7 @@ import {
 } from "./root/ComboboxRoot";
 
 const meta: Meta<typeof ComboboxRoot> = {
-  title: "ds-react/Combobox2/Tests",
+  title: "ds-react/Combobox/Tests",
   component: ComboboxRoot,
   parameters: {
     chromatic: { disable: true },

@@ -14,7 +14,7 @@ import {
 } from "../root/ComboboxRoot";
 
 const meta: Meta<typeof ComboboxRoot> = {
-  title: "ds-react/Combobox2/Popup",
+  title: "ds-react/Combobox/Popup",
   component: ComboboxRoot,
   parameters: {
     chromatic: { disable: true },
