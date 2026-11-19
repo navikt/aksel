@@ -157,6 +157,7 @@ const Combobox = forwardRef(
 interface ComboboxSingleProps<
   T extends ComboboxOptionData[] | ComboboxGroupData<ComboboxOptionData>[],
 > extends Omit<ComboboxProps<T>, "multiple" | "value" | "onToggleOption"> {
+  // TODO: Vurder å eksponere onToggleOption
   /**
    * Called when selected option changes.
    */
@@ -206,7 +207,7 @@ const ComboboxSingle = forwardRef(
       isSelected,
     ) => {
       setLocalValue(isSelected ? option.value : null);
-    }; // TODO: Dumt at ikke får hele option-objektet... Legge til i onChange? Hvis vi tilbyr onToggle så blir det så likt onChange...
+    };
 
     return (
       <Combobox

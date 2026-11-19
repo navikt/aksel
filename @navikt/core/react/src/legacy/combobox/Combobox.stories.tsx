@@ -10,7 +10,7 @@ import { Alert } from "../alert";
 import { type ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
-  title: "ds-react/Combobox",
+  title: "ds-react/Combobox legacy",
   component: UNSAFE_Combobox,
   decorators: [
     (story) => (
