@@ -2,7 +2,7 @@ import type { ComponentMetadata } from "../../utils/types/metadata";
 import { UNSAFE_Combobox } from "./index";
 
 const metadata: ComponentMetadata = {
-  name: "Combobox",
+  name: "Combobox-legacy",
   components: {
     Combobox: UNSAFE_Combobox,
   },
