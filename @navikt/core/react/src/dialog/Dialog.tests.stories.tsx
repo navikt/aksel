@@ -701,6 +701,7 @@ export const TabToLinks: Story = {
   play: async ({ canvasElement, args }) => {
     const { canvas } = testUtils(canvasElement, args);
 
+    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
     await userEvent.tab();
     expect(canvas.getByPlaceholderText("test")).toHaveFocus();
     await userEvent.tab();

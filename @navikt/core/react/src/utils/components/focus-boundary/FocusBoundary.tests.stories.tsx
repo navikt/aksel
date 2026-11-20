@@ -44,8 +44,7 @@ export const Loop: Story = {
     const middle = canvas.getByLabelText(Field_TWO);
     const last = canvas.getByText(BUTTON_THREE);
 
-    /* Regular focus */
-    first.focus();
+    /* Mount focus lands on the first field in the next frame. Wait so it can't steal focus mid-test */
     await waitFor(() => expect(first).toHaveFocus());
 
     await userEvent.tab();

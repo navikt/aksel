@@ -17,4 +17,4 @@ applyTo: "**/*.test.ts,**/*.test.tsx,**/*.stories.tsx"
 - Before removing or consolidating tests, map each meaningful old scenario/assertion to its replacement story or test. Keep coverage that still represents a supported behavior; explain when a scenario is intentionally obsolete.
 - For state, accessibility, keyboard or focus behavior, use the [component-contract skill](../skills/component-contract/SKILL.md) to identify the contract and evidence to preserve.
 - ds-react unit tests run with `TZ=UTC`. Date logic must not depend on the local timezone.
-- Browser tests need Playwright Firefox (Chromium under Copilot CLI, see `vitest.config.mts`). Yarn has `enableScripts: false`, so if the browser is missing, report it instead of installing globally.
+- Browser tests run in Playwright Chromium, Firefox and WebKit (one CI job each). Under Copilot CLI only Chromium runs, since Firefox/WebKit can't launch in the cplt sandbox (see `vitest.config.mts`). Run one browser with `--browser.name=<browser>`. Yarn has `enableScripts: false`, so if the browser is missing, report it instead of installing globally.
