@@ -11,7 +11,7 @@ type ComboboxFilterProps = Pick<
 >;
 
 export const ComboboxFilter = (props: ComboboxFilterProps) => {
-  const translate = useI18n("Combobox2");
+  const translate = useI18n("Combobox");
   const { size } = useComboboxRootContext();
   const {
     filterString,

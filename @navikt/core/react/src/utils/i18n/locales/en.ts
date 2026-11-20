@@ -24,6 +24,10 @@ export default {
     noMatches: "No search hits",
     loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
+    filter: "Filter",
+    noHits: "No hits",
+    oneHit: "One hit",
+    hitsCount: "{count} hits",
   },
   CopyButton: {
     title: "Copy",
