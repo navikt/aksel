@@ -6,7 +6,7 @@ const metadata: ComponentMetadata = {
   components: {
     Button,
   },
-  keywords: ["button", "knapp", "cta", "action", "submit", "test-change"],
+  keywords: ["button", "knapp", "cta", "action", "submit"],
 };
 
 export { metadata };
