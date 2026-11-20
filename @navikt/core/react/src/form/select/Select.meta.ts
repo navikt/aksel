@@ -7,7 +7,7 @@ const metadata: ComponentMetadata = {
     Select,
   },
   keywords: ["select", "nedtrekksliste", "dropdown", "form", "input"],
-  related: ["Combobox"],
+  related: ["Combobox-legacy"],
 };
 
 export { metadata };
