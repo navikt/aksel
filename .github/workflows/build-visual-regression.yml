@@ -77,7 +77,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ${{ steps.chromatic_tests.outputs.url != '' && format('## [Storybook demo]({0}) / [Chromatic]({1})', steps.chromatic_tests.outputs.storybookUrl, steps.chromatic_tests.outputs.url) || '## Chromatic skipped' }}
+            ${{ steps.chromatic_tests.outputs.url != 'undefined' && format('## [Storybook demo]({0}) / [Chromatic]({1})', steps.chromatic_tests.outputs.storybookUrl, steps.chromatic_tests.outputs.url) || '## Chromatic skipped' }}
              
             ${{ steps.chromatic_tests.outputs.changeCount > 0 && format('### 📝 Changes to review: {0}', steps.chromatic_tests.outputs.changeCount) || '' }}
             ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### ❌ Stories with errors: {0}', steps.chromatic_tests.outputs.errorCount) || '' }}
