@@ -121,3 +121,37 @@ export const HideOnCloseButtonClick: Story = {
     expect(trigger).toHaveFocus();
   },
 };
+
+/* The focus trap moves focus back through guards outside the Popover tree. */
+export const KeepOpenWhileTabbing: Story = {
+  render: () => (
+    <>
+      <button type="button">Before</button>
+      <Lookup {...defaultProps}>
+        A text with a <a href="#lookup">link</a>.
+      </Lookup>
+      <button type="button">After</button>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const page = within(document.body);
+
+    const trigger = canvas.getByRole("button", { name: "Lookup" });
+    trigger.focus();
+    await userEvent.keyboard("{Enter}");
+    const dialog = await page.findByRole("dialog");
+    await waitFor(() => expect(dialog).toHaveFocus());
+
+    for (const shift of [false, false, false, false, true, true, true]) {
+      await userEvent.tab({ shift });
+      expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    }
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    expect(dialog).toBeVisible();
+
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(dialog).not.toBeInTheDocument());
+    expect(trigger).toHaveFocus();
+  },
+};

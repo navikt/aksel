@@ -47,20 +47,36 @@ export const FocusOutside: Story = {
   render: (props) => {
     return (
       <div>
+        <button type="button">Before layer</button>
         <DismissableLayer asChild {...props}>
-          <input type="text" />
+          <button type="button">Inside layer</button>
         </DismissableLayer>
-        <input type="text" data-testid="outside" />
+        <button type="button">After layer</button>
       </div>
     );
   },
-  play: async ({ args }) => {
-    const canvas = within(document.body);
-    const outsideInput = canvas.getByTestId("outside");
-    outsideInput.focus();
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const before = canvas.getByRole("button", { name: "Before layer" });
+    const inside = canvas.getByRole("button", { name: "Inside layer" });
+    const after = canvas.getByRole("button", { name: "After layer" });
 
-    expect(args.onFocusOutside).toHaveBeenCalledOnce();
+    inside.focus();
+    expect(inside).toHaveFocus();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    expect(args.onFocusOutside).not.toHaveBeenCalled();
+
+    after.focus();
+    expect(after).toHaveFocus();
+    await waitFor(() => expect(args.onFocusOutside).toHaveBeenCalledOnce());
     expect(args.onDismiss).toHaveBeenCalledOnce();
+
+    // Focus that never entered the layer, e.g. Safari leaving focus on body after a trigger click.
+    after.blur();
+    expect(document.body).toHaveFocus();
+    before.focus();
+    await waitFor(() => expect(args.onFocusOutside).toHaveBeenCalledTimes(2));
+    expect(args.onDismiss).toHaveBeenCalledTimes(2);
   },
   args: {
     onDismiss: fn(),
@@ -158,7 +174,9 @@ export const InteractOutside: Story = {
 
     outsideFocus.focus();
 
-    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
+    await waitFor(() =>
+      expect(args.onInteractOutside).toHaveBeenCalledTimes(1),
+    );
     expect(args.onDismiss).toHaveBeenCalledTimes(2);
 
     await userEvent.click(outsideElement);
@@ -206,8 +224,6 @@ export const SafeZone: Story = {
     const [safeAnchor, setSafeAnchor] = React.useState<HTMLDivElement | null>(
       null,
     );
-    const [safeContainer, setSafeContainer] =
-      React.useState<HTMLDivElement | null>(null);
 
     return (
       <div>
@@ -223,38 +239,42 @@ export const SafeZone: Story = {
           {...props}
           safeZone={{
             anchor: safeAnchor,
-            dismissable: safeContainer,
           }}
         >
-          <div data-testid="safe-container" ref={setSafeContainer}>
-            <button type="button">test</button>
-          </div>
+          <button type="button">Inside layer</button>
         </DismissableLayer>
+        <button type="button">Outside layer</button>
       </div>
     );
   },
   play: async ({ args }) => {
     const canvas = within(document.body);
     const outsideAnchor = canvas.getByTestId("safe-anchor");
-    const outsideContainer = canvas.getByTestId("safe-container");
+    const inside = canvas.getByRole("button", { name: "Inside layer" });
+    const outside = canvas.getByRole("button", { name: "Outside layer" });
 
     expect(args.onDismiss).not.toHaveBeenCalled();
     expect(args.onInteractOutside).not.toHaveBeenCalled();
 
     outsideAnchor.focus();
+    inside.focus();
+    outsideAnchor.focus();
+    expect(outsideAnchor).toHaveFocus();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
-
-    outsideContainer.focus();
-    expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
+    expect(args.onInteractOutside).not.toHaveBeenCalled();
 
     await userEvent.click(outsideAnchor);
     expect(args.onDismiss).not.toHaveBeenCalled();
-    expect(args.onInteractOutside).toHaveBeenCalledTimes(2);
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
 
-    await userEvent.click(outsideContainer);
+    await userEvent.click(inside);
     expect(args.onDismiss).not.toHaveBeenCalled();
+    expect(args.onInteractOutside).toHaveBeenCalledTimes(1);
+
+    outsideAnchor.focus();
+    outside.focus();
+    await waitFor(() => expect(args.onDismiss).toHaveBeenCalledOnce());
     expect(args.onInteractOutside).toHaveBeenCalledTimes(2);
   },
   args: {
@@ -586,7 +606,7 @@ export const PreventEvents: Story = {
     expect(args.onDismiss).not.toHaveBeenCalled();
 
     outsideFocus.focus();
-
+    await waitFor(() => expect(args.onFocusOutside).toHaveBeenCalledOnce());
     expect(args.onDismiss).not.toHaveBeenCalled();
 
     await userEvent.click(outsideElement);
@@ -596,7 +616,7 @@ export const PreventEvents: Story = {
   args: {
     onDismiss: fn(),
     onInteractOutside: (event) => event.preventDefault(),
-    onFocusOutside: (event) => event.preventDefault(),
+    onFocusOutside: fn((event) => event.preventDefault()),
     onEscapeKeyDown: (event) => event.preventDefault(),
     onPointerDownOutside: (event) => event.preventDefault(),
   },

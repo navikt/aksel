@@ -18,11 +18,11 @@ function dispatchCustomEvent<
   detail: { originalEvent: OriginalEvent } & (E extends CustomEvent<infer D>
     ? D
     : never),
+  target = detail.originalEvent.target,
 ) {
   if (!handler) {
     return;
   }
-  const target = detail.originalEvent.target;
   const event = new CustomEvent(name, {
     bubbles: false,
     cancelable: true,
