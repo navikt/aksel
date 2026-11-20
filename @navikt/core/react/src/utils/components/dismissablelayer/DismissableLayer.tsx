@@ -191,7 +191,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         if (!shouldEnablePointerEvents) {
           return;
         }
-        focusOutside.ignoreFocusOutAfterPointerDown();
+        focusOutside.ignoreFocusOutsideAfterPointerDown();
 
         /**
          * We call these before checking the safe zone to give consumers a chance to prevent dismissal.
@@ -432,7 +432,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             () => {
               pointerDownOutside.onPointerDownCapture();
               pointerUpOutside.onPointerDownCapture();
-              focusOutside.ignoreFocusOutAfterPointerDown();
+              focusOutside.ignoreFocusOutsideAfterPointerDown();
             },
           )}
           onPointerUpCapture={composeEventHandlers(

@@ -96,7 +96,11 @@ function useFocusOutside(
     onFocusCapture: (event: ReactFocusEvent) => {
       insideFocusEventRef.current = event.nativeEvent;
     },
-    ignoreFocusOutAfterPointerDown: () => {
+    /**
+     * Pointer handling owns dismissal for pointer interactions, so focus moved by the same press
+     * must not dismiss on its own. Skips focus checks for the rest of the current task.
+     */
+    ignoreFocusOutsideAfterPointerDown: () => {
       focusCheck.clear();
       skipFocusCheckRef.current = true;
       pointerTimeout.start(0, () => {
