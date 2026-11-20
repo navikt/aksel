@@ -317,7 +317,6 @@ export const Chromatic: Story = {
     <VStack gap="space-24" align="center">
       <div>
         <h2>Medium</h2>
-        test change
         <ButtonGrid size="medium" />
       </div>
       <div>
