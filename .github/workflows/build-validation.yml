@@ -73,7 +73,7 @@ jobs:
   ui:
     name: UI tests (Storybook, ${{ matrix.browser }})
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
     strategy:
@@ -93,6 +93,12 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test UI
-        run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }} @navikt/core/react/src/dialog/Dialog.tests.stories.tsx
+        run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }}
+        env:
+          HOME: /root
+
+      - name: Test UI (no file parallelism)
+        if: always() && matrix.browser == 'webkit'
+        run: yarn storybook:test --no-file-parallelism --browser.name=${{ matrix.browser }}
         env:
           HOME: /root
