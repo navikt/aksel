@@ -31,7 +31,14 @@ export default defineConfig({
             enabled: true,
             headless: true,
             provider: playwright(),
-            instances: browsers.map((browser) => ({ browser })),
+            instances: browsers.map((browser) => ({
+              browser,
+              /*
+               * Parallel WebKit pages interfere with each other's focus, so focus
+               * assertions (e.g. Dialog mount focus) fail at random. Run WebKit files serially.
+               */
+              fileParallelism: browser !== "webkit",
+            })),
           },
         },
       },
