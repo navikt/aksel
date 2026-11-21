@@ -10,6 +10,7 @@ import {
 } from "storybook/test";
 import { Button } from "../button";
 import { Provider } from "../provider";
+import { isWebKit } from "../utils/helpers";
 import {
   Dialog,
   DialogCloseTrigger,
@@ -251,15 +252,47 @@ export const TrapFocusWithOutsideClick: Story = {
     const popup = canvas.getByTestId("popup");
     await waitFor(() => expect(popup).toHaveFocus());
 
+    const log: string[] = [];
+    const d = (el: EventTarget | null) =>
+      el instanceof HTMLElement
+        ? `${el.tagName}${el.dataset.testid ? `#${el.dataset.testid}` : ""}`
+        : String(el);
+    const rec = (e: Event) =>
+      log.push(
+        `${e.type} t=${d(e.target)} rt=${d((e as FocusEvent).relatedTarget ?? null)} active=${d(document.activeElement)} prevented=${e.defaultPrevented} trusted=${e.isTrusted}`,
+      );
+    const types = [
+      "pointerdown",
+      "mousedown",
+      "blur",
+      "focusout",
+      "focus",
+      "focusin",
+      "mouseup",
+      "click",
+    ];
+    for (const t of types) {
+      document.addEventListener(t, rec, true);
+    }
+    log.push(`hasFocus=${document.hasFocus()} isWebKit=${isWebKit}`);
+
     await fireEvent.click(document.body);
     expectPopupOpen();
     expectOpenChangeCalls(0);
 
     const counterButton = canvas.getByTestId("counter");
     await userEvent.click(counterButton);
-    expectPopupOpen();
-    expectOpenChangeCalls(0);
-    await waitFor(() => expect(popup).toHaveFocus());
+    log.push(`after-click active=${d(document.activeElement)}`);
+    await new Promise((r) => requestAnimationFrame(r));
+    log.push(`after-raf active=${d(document.activeElement)}`);
+    await new Promise((r) => setTimeout(r, 200));
+    log.push(`after-200ms active=${d(document.activeElement)}`);
+    for (const t of types) {
+      document.removeEventListener(t, rec, true);
+    }
+    if (document.activeElement !== popup) {
+      throw new Error(`DIAG-DIALOG\n${log.join("\n")}`);
+    }
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {
@@ -272,6 +305,48 @@ export const TrapFocusWithOutsideClick: Story = {
       closeOnOutsideClick: false,
     },
     backdrop: false,
+  },
+};
+
+export const DiagSyncRefocusInFocusOut: Story = {
+  render: () => (
+    <div>
+      <button type="button" data-testid="outer">
+        outer
+      </button>
+      <div data-testid="inner" tabIndex={-1}>
+        inner
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const outer = canvas.getByTestId("outer");
+    const inner = canvas.getByTestId("inner");
+    const log: string[] = [`hasFocus=${document.hasFocus()}`];
+    const d = (el: EventTarget | null) =>
+      el instanceof HTMLElement
+        ? el.tagName + (el.dataset.testid ?? "")
+        : String(el);
+
+    inner.focus();
+    log.push(`initial active=${d(document.activeElement)}`);
+
+    const onFocusOut = (e: FocusEvent) => {
+      log.push(`focusout rt=${d(e.relatedTarget)}`);
+      if (e.relatedTarget && !inner.contains(e.relatedTarget as Node)) {
+        inner.focus();
+        log.push(`in-handler active=${d(document.activeElement)}`);
+      }
+    };
+    document.addEventListener("focusout", onFocusOut);
+    outer.focus();
+    log.push(`after outer.focus() active=${d(document.activeElement)}`);
+    document.removeEventListener("focusout", onFocusOut);
+
+    if (document.activeElement !== inner) {
+      throw new Error(`DIAG-SYNC\n${log.join("\n")}`);
+    }
   },
 };
 

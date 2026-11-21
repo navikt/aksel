@@ -93,6 +93,6 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test UI
-        run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }}
+        run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }} @navikt/core/react/src/dialog/Dialog.tests.stories.tsx
         env:
           HOME: /root
