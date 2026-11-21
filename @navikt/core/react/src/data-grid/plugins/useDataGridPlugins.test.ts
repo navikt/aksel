@@ -1,38 +1,39 @@
 import { renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
+import * as consoleWarningModule from "../../utils/helpers/consoleWarning";
 import {
-  type TablePlugin,
-  type TablePlugins,
+  type DataGridPlugin,
+  type DataGridPlugins,
   applyTableContext,
   useDataGridPlugins,
 } from "./useDataGridPlugins";
 
-const createContextPlugin = (label: string): TablePlugin => ({
+const createContextPlugin = (label: string): DataGridPlugin => ({
   transformTableContext: (children) => `${label}(${children})`,
 });
 
 describe("useDataGridPlugins", () => {
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllEnvs();
   });
 
-  test("returns a stable empty array when plugins are undefined, empty, or all undefined", () => {
-    const { result, rerender } = renderHook(
-      ({ plugins }: { plugins?: TablePlugins }) => useDataGridPlugins(plugins),
-      { initialProps: { plugins: undefined } },
-    );
+  test("returns a stable empty array when plugins are undefined or empty", () => {
+    const { result, rerender } = renderHook<
+      readonly DataGridPlugin[],
+      { plugins?: DataGridPlugins }
+    >(({ plugins }) => useDataGridPlugins(plugins), {
+      initialProps: { plugins: undefined },
+    });
 
     const initialResult = result.current;
     expect(initialResult).toEqual([]);
 
     rerender({ plugins: {} });
     expect(result.current).toBe(initialResult);
-
-    rerender({ plugins: { pagination: undefined, custom: undefined } });
-    expect(result.current).toBe(initialResult);
   });
 
-  test("orders known plugins before unknown plugins and preserves unknown insertion order", () => {
+  test("orders known plugins before unknown plugins, ignores prototype keys, and skips non-object entries", () => {
     const customFirst = createContextPlugin("first");
     const customSecond = createContextPlugin("second");
     const pagination = createContextPlugin("pagination");
@@ -44,60 +45,91 @@ describe("useDataGridPlugins", () => {
         pagination,
       }),
     );
-
     expect(result.current).toEqual([pagination, customFirst, customSecond]);
+
+    const inherited = Object.create({ pagination }) as DataGridPlugins;
+    inherited.custom = customFirst;
+    const { result: inheritedResult } = renderHook(() =>
+      useDataGridPlugins(inherited),
+    );
+    expect(inheritedResult.current).toEqual([customFirst]);
+
+    // Runtime guard: nullish or primitive entries on known or custom keys are skipped instead of crashing WeakMap
+    const { result: invalidEntriesResult } = renderHook(() =>
+      useDataGridPlugins({
+        pagination: undefined,
+        customUndefined: undefined,
+        customNull: null,
+        customPrimitive: "not-an-object",
+        valid: customFirst,
+      } as unknown as DataGridPlugins),
+    );
+    expect(invalidEntriesResult.current).toEqual([customFirst]);
   });
 
-  test("preserves array reference across inline plugin record objects with the same plugin identities", () => {
+  test("interns array reference by plugin identity and order across inline objects", () => {
     const pagination = createContextPlugin("pagination");
-    const custom = createContextPlugin("custom");
+    const customA = createContextPlugin("a");
+    const customB = createContextPlugin("b");
 
-    const { result, rerender } = renderHook(
-      ({ plugins }: { plugins?: TablePlugins }) => useDataGridPlugins(plugins),
-      { initialProps: { plugins: { custom, pagination } } },
-    );
+    const { result, rerender } = renderHook<
+      readonly DataGridPlugin[],
+      { plugins?: DataGridPlugins }
+    >(({ plugins }) => useDataGridPlugins(plugins), {
+      initialProps: { plugins: { customA, pagination } },
+    });
 
     const first = result.current;
+    expect(Object.isFrozen(first)).toBe(true);
 
-    // New outer object literal with the same plugin instances (even in different key order)
-    rerender({ plugins: { pagination, custom } });
+    // New inline object with same plugin instances (even in different key order)
+    rerender({ plugins: { pagination, customA } });
     expect(result.current).toBe(first);
 
-    // Replacing a plugin instance produces a new array reference
-    const nextPagination = createContextPlugin("pagination-v2");
-    rerender({ plugins: { pagination: nextPagination, custom } });
+    // Removing a plugin returns a new array; restoring it returns the interned array
+    rerender({ plugins: { pagination } });
     expect(result.current).not.toBe(first);
-    expect(result.current).toEqual([nextPagination, custom]);
+    expect(result.current).toEqual([pagination]);
+
+    rerender({ plugins: { pagination, customA } });
+    expect(result.current).toBe(first);
+
+    // Changing plugin order or replacing an instance produces a new array
+    rerender({ plugins: { customA, customB } });
+    const ab = result.current;
+    rerender({ plugins: { customB, customA } });
+    expect(result.current).not.toBe(ab);
+    expect(result.current).toEqual([customB, customA]);
   });
 
-  test("warns in dev mode for unknown keys, non-function transforms, and empty plugins", () => {
-    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+  test("warns once per invalid plugin in dev mode without double-warning, and skips validation in production", () => {
+    const warnSpy = vi
+      .spyOn(consoleWarningModule, "consoleWarning")
+      .mockImplementation(() => {});
 
     const badUnknownKey = {
-      transformTableContext: (c) => c,
       transformTabelContext: (c: unknown) => c,
-    } as TablePlugin;
-
+    } as unknown as DataGridPlugin;
     const badNonFunction = {
       transformTableContext: "not-a-function",
-    } as unknown as TablePlugin;
+    } as unknown as DataGridPlugin;
+    const emptyPlugin: DataGridPlugin = {};
 
-    const emptyPlugin: TablePlugin = {};
-
-    const { rerender } = renderHook(
-      ({ plugins }: { plugins?: TablePlugins }) => useDataGridPlugins(plugins),
-      {
-        initialProps: {
-          plugins: {
-            typoPlugin: badUnknownKey,
-            wrongTypePlugin: badNonFunction,
-            noopPlugin: emptyPlugin,
-            disabledPlugin: undefined,
-          },
+    const { rerender } = renderHook<
+      readonly DataGridPlugin[],
+      { plugins?: DataGridPlugins }
+    >(({ plugins }) => useDataGridPlugins(plugins), {
+      initialProps: {
+        plugins: {
+          typoPlugin: badUnknownKey,
+          wrongTypePlugin: badNonFunction,
+          noopPlugin: emptyPlugin,
         },
       },
-    );
+    });
 
+    // Exactly one warning per invalid plugin (no extra "no transform methods" warning for typo/wrongType)
+    expect(warnSpy).toHaveBeenCalledTimes(3);
     const messages = warnSpy.mock.calls.map((args) => args.join(" "));
     expect(messages).toContainEqual(
       expect.stringContaining(
@@ -112,12 +144,8 @@ describe("useDataGridPlugins", () => {
     expect(messages).toContainEqual(
       expect.stringContaining('Plugin "noopPlugin" has no transform methods.'),
     );
-    expect(messages).not.toContainEqual(
-      expect.stringContaining("disabledPlugin"),
-    );
 
-    // Re-rendering with a new inline record for the same plugin instances does not re-warn
-    const callCountAfterFirstRender = warnSpy.mock.calls.length;
+    // Re-rendering with a new inline record for the same instances does not re-run validation
     rerender({
       plugins: {
         typoPlugin: badUnknownKey,
@@ -125,7 +153,13 @@ describe("useDataGridPlugins", () => {
         noopPlugin: emptyPlugin,
       },
     });
-    expect(warnSpy).toHaveBeenCalledTimes(callCountAfterFirstRender);
+    expect(warnSpy).toHaveBeenCalledTimes(3);
+
+    // Skips validation before calling consoleWarning in production
+    warnSpy.mockClear();
+    vi.stubEnv("NODE_ENV", "production");
+    renderHook(() => useDataGridPlugins({ prodEmptyPlugin: {} }));
+    expect(warnSpy).not.toHaveBeenCalled();
   });
 });
 
@@ -134,13 +168,38 @@ describe("applyTableContext", () => {
     vi.restoreAllMocks();
   });
 
-  test("wraps children in reverse plugin order so the earliest plugin is outermost", () => {
+  test("wraps children in reverse plugin order and skips plugins without a valid transform", () => {
     const pagination = createContextPlugin("pagination");
     const custom = createContextPlugin("custom");
-    const noopPlugin: TablePlugin = {};
+    const noopPlugin: DataGridPlugin = {};
+    const invalidPlugin = {
+      transformTableContext: "not-a-function",
+    } as unknown as DataGridPlugin;
 
-    expect(applyTableContext([pagination, noopPlugin, custom], "table")).toBe(
-      "pagination(custom(table))",
+    expect(applyTableContext([], "table")).toBe("table");
+    expect(
+      applyTableContext(
+        [pagination, noopPlugin, invalidPlugin, custom],
+        "table",
+      ),
+    ).toBe("pagination(custom(table))");
+  });
+
+  test("preserves previous content and warns when transformTableContext returns undefined", () => {
+    const warnSpy = vi
+      .spyOn(consoleWarningModule, "consoleWarning")
+      .mockImplementation(() => {});
+    const outer = createContextPlugin("outer");
+    const returnsUndefined: DataGridPlugin = {
+      transformTableContext: () => undefined,
+    };
+    const inner = createContextPlugin("inner");
+
+    expect(applyTableContext([outer, returnsUndefined, inner], "table")).toBe(
+      "outer(inner(table))",
+    );
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("transformTableContext returned undefined"),
     );
   });
 
@@ -148,7 +207,7 @@ describe("applyTableContext", () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const boom = new Error("plugin failure");
     const outer = createContextPlugin("outer");
-    const broken: TablePlugin = {
+    const broken: DataGridPlugin = {
       transformTableContext: () => {
         throw boom;
       },
