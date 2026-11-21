@@ -10,7 +10,6 @@ import {
 } from "storybook/test";
 import { Button } from "../button";
 import { Provider } from "../provider";
-import { isWebKit } from "../utils/helpers";
 import {
   Dialog,
   DialogCloseTrigger,
@@ -250,9 +249,7 @@ export const TrapFocusWithOutsideClick: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    const diag = (step: string) =>
-      `[${step}] active=${document.activeElement?.tagName}#${document.activeElement?.getAttribute("data-testid")} isWebKit=${isWebKit}`;
-    await waitFor(() => expect(popup, diag("mount")).toHaveFocus());
+    await waitFor(() => expect(popup).toHaveFocus());
 
     await fireEvent.click(document.body);
     expectPopupOpen();
@@ -262,7 +259,7 @@ export const TrapFocusWithOutsideClick: Story = {
     await userEvent.click(counterButton);
     expectPopupOpen();
     expectOpenChangeCalls(0);
-    await waitFor(() => expect(popup, diag("after-click")).toHaveFocus());
+    await waitFor(() => expect(popup).toHaveFocus());
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {

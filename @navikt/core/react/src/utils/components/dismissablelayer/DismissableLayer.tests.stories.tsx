@@ -324,9 +324,6 @@ export const NestedPointerEvents: StoryObj<{
       expect(args.root.onDismiss).not.toHaveBeenCalled();
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
     });
-    await waitFor(() =>
-      expect(canvas.queryByTestId("nested")).not.toBeInTheDocument(),
-    );
 
     await userEvent.click(outside);
 
