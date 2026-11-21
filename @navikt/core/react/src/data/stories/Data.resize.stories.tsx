@@ -280,12 +280,19 @@ export const ResizeAuto: Story = {
     const headers = canvas.getAllByRole("columnheader");
 
     expect(headers.length).toBe(7);
-    expect(headers[0]).toHaveStyle({ width: "126px" });
-    expect(headers[1]).toHaveStyle({ width: "80px" });
-    expect(headers[2]).toHaveStyle({ width: "82px" });
-    expect(headers[3]).toHaveStyle({ width: "103px" });
-    expect(headers[4]).toHaveStyle({ width: "168px" });
-    expect(headers[5]).toHaveStyle({ width: "248px" });
-    expect(headers[6]).toHaveStyle({ width: "168px" });
+    expectWidthNear(headers[0], 126);
+    expectWidthNear(headers[1], 80);
+    expectWidthNear(headers[2], 82);
+    expectWidthNear(headers[3], 103);
+    expectWidthNear(headers[4], 168);
+    expectWidthNear(headers[5], 248);
+    expectWidthNear(headers[6], 168);
   },
 };
+
+/* Auto-resized widths are measured from rendered text, which differs slightly between browser engines */
+function expectWidthNear(element: HTMLElement, expected: number) {
+  const width = parseFloat(getComputedStyle(element).width);
+  expect(width).toBeGreaterThanOrEqual(expected * 0.95);
+  expect(width).toBeLessThanOrEqual(expected * 1.05);
+}

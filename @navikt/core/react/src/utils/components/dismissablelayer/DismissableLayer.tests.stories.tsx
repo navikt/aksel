@@ -320,14 +320,14 @@ export const NestedPointerEvents: StoryObj<{
 
     await fireEvent.pointerDown(outside);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.root.onDismiss).not.toHaveBeenCalled();
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
     });
 
     await userEvent.click(outside);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
     });
