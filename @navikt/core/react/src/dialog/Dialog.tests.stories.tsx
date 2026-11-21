@@ -10,6 +10,7 @@ import {
 } from "storybook/test";
 import { Button } from "../button";
 import { Provider } from "../provider";
+import { isWebKit } from "../utils/helpers";
 import {
   Dialog,
   DialogCloseTrigger,
@@ -259,7 +260,12 @@ export const TrapFocusWithOutsideClick: Story = {
     await userEvent.click(counterButton);
     expectPopupOpen();
     expectOpenChangeCalls(0);
-    await waitFor(() => expect(popup).toHaveFocus());
+    if (isWebKit) {
+      /* WebKit does not focus buttons on click, so focus never moves to the counter and FocusBoundary leaves it alone */
+      expect(counterButton).not.toHaveFocus();
+    } else {
+      await waitFor(() => expect(popup).toHaveFocus());
+    }
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {
