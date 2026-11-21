@@ -250,7 +250,9 @@ export const TrapFocusWithOutsideClick: Story = {
     expectPopupOpen();
 
     const popup = canvas.getByTestId("popup");
-    await waitFor(() => expect(popup).toHaveFocus());
+    const diag = (step: string) =>
+      `[${step}] active=${document.activeElement?.tagName}#${document.activeElement?.getAttribute("data-testid")} isWebKit=${isWebKit}`;
+    await waitFor(() => expect(popup, diag("mount")).toHaveFocus());
 
     await fireEvent.click(document.body);
     expectPopupOpen();
@@ -260,12 +262,7 @@ export const TrapFocusWithOutsideClick: Story = {
     await userEvent.click(counterButton);
     expectPopupOpen();
     expectOpenChangeCalls(0);
-    if (isWebKit) {
-      /* WebKit does not focus buttons on click, so focus never moves to the counter and FocusBoundary leaves it alone */
-      expect(counterButton).not.toHaveFocus();
-    } else {
-      await waitFor(() => expect(popup).toHaveFocus());
-    }
+    await waitFor(() => expect(popup, diag("after-click")).toHaveFocus());
     expect(counterButton).toHaveTextContent("Counter 1");
   },
   args: {
