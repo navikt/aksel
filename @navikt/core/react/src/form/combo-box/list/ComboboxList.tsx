@@ -74,7 +74,7 @@ function ComboboxListContent<
     deferredFilterString,
     liveRegionRef,
   );
-  const translate = useI18n("Combobox2");
+  const translate = useI18n("Combobox");
 
   if (children && typeof children !== "function") {
     return children;

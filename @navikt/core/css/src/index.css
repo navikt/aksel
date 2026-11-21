@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 /* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
+
 @layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components.core, aksel.components.core.loader, aksel.components.core.button, aksel.components.form, aksel.components.modules, aksel.layout;
 
 /* ----------------------------- CSS foundations ---------------------------- */
@@ -12,20 +13,11 @@
 
 /* ------------------------------- Components ------------------------------- */
 @import "./theme.css" layer(aksel.components.core);
-@import "./typography.css" layer(aksel.components.core);
+@import "./typography.css" layer(aksel.components.core); /* Some components override typo */
 @import "./chips.css" layer(aksel.components.core);
 @import "./loader.css" layer(aksel.components.core.loader);
-@import "./button.css" layer(aksel.components.core.button);
-
-/**
-  * Most components depend on typo-styles, so we import them first.
-  *
-  * `./form/index.css` edits the following components:
-  * - Button
-  * - Chips
-  * To avoid specificity conflicts, we import those components before form.
-*/
-@import "./form/index.css" layer(aksel.components.form);
+@import "./button.css" layer(aksel.components.core.button); /* Overrides Loader */
+@import "./form/index.css" layer(aksel.components.form); /* Overrides Button and Chips */
 @import "./accordion.css" layer(aksel.components.modules);
 @import "./alert.css" layer(aksel.components.modules);
 @import "./chat.css" layer(aksel.components.modules);
@@ -61,6 +53,7 @@
 @import "./stepper.css" layer(aksel.components.modules);
 @import "./table.css" layer(aksel.components.modules);
 @import "./tabs.css" layer(aksel.components.modules);
+@import "./listbox.css" layer(aksel.components.modules);
 @import "./list.css" layer(aksel.components.modules);
 
 /* --------------------------------- Layout --------------------------------- */

@@ -7,13 +7,6 @@ const internalTranslations = {
   Combobox2: {
     /** The "value" that is shown when multiple options are selected. */
     selectedCount: "{count} valgt",
-    /** Label for filter input. Only visible to screen readers. */
-    filter: "Filtrer",
-    noHits: "Ingen treff",
-    /** Only announced to screen readers. */
-    oneHit: "Ett treff",
-    /** Only announced to screen readers. */
-    hitsCount: "{count} treff",
   },
 } satisfies Record<string, Record<string, string | Record<string, string>>>;
 
