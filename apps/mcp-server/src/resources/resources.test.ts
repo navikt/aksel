@@ -28,6 +28,13 @@ describe("Resources", () => {
       // Should NOT have verbose fields like rawValue, jsValue, etc.
       expect(firstToken).not.toHaveProperty("rawValue");
       expect(firstToken).not.toHaveProperty("jsValue");
+
+      // Should include dynamic data-color base tokens without duplicating names
+      const names = tokenList.map((t: { name: string }) => t.name);
+      expect(new Set(names).size).toBe(names.length);
+      expect(names).toContain("text-default");
+      expect(names).toContain("bg-soft");
+      expect(names).toContain("border-default");
     });
 
     test("should have proper metadata", () => {
