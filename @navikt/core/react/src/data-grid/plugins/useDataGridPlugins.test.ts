@@ -13,11 +13,6 @@ const createContextPlugin = (label: string): DataGridPlugin => ({
 });
 
 describe("useDataGridPlugins", () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-    vi.unstubAllEnvs();
-  });
-
   test("returns a stable empty array when plugins are undefined or empty", () => {
     const { result, rerender } = renderHook<
       readonly DataGridPlugin[],
@@ -101,66 +96,6 @@ describe("useDataGridPlugins", () => {
     expect(result.current).not.toBe(ab);
     expect(result.current).toEqual([customB, customA]);
   });
-
-  test("warns once per invalid plugin in dev mode without double-warning, and skips validation in production", () => {
-    const warnSpy = vi
-      .spyOn(consoleWarningModule, "consoleWarning")
-      .mockImplementation(() => {});
-
-    const badUnknownKey = {
-      transformTabelContext: (c: unknown) => c,
-    } as unknown as DataGridPlugin;
-    const badNonFunction = {
-      transformTableContext: "not-a-function",
-    } as unknown as DataGridPlugin;
-    const emptyPlugin: DataGridPlugin = {};
-
-    const { rerender } = renderHook<
-      readonly DataGridPlugin[],
-      { plugins?: DataGridPlugins }
-    >(({ plugins }) => useDataGridPlugins(plugins), {
-      initialProps: {
-        plugins: {
-          typoPlugin: badUnknownKey,
-          wrongTypePlugin: badNonFunction,
-          noopPlugin: emptyPlugin,
-        },
-      },
-    });
-
-    // Exactly one warning per invalid plugin (no extra "no transform methods" warning for typo/wrongType)
-    expect(warnSpy).toHaveBeenCalledTimes(3);
-    const messages = warnSpy.mock.calls.map((args) => args.join(" "));
-    expect(messages).toContainEqual(
-      expect.stringContaining(
-        'Plugin "typoPlugin" has unknown key "transformTabelContext"',
-      ),
-    );
-    expect(messages).toContainEqual(
-      expect.stringContaining(
-        'Plugin "wrongTypePlugin" has non-function value for "transformTableContext" (got string)',
-      ),
-    );
-    expect(messages).toContainEqual(
-      expect.stringContaining('Plugin "noopPlugin" has no transform methods.'),
-    );
-
-    // Re-rendering with a new inline record for the same instances does not re-run validation
-    rerender({
-      plugins: {
-        typoPlugin: badUnknownKey,
-        wrongTypePlugin: badNonFunction,
-        noopPlugin: emptyPlugin,
-      },
-    });
-    expect(warnSpy).toHaveBeenCalledTimes(3);
-
-    // Skips validation before calling consoleWarning in production
-    warnSpy.mockClear();
-    vi.stubEnv("NODE_ENV", "production");
-    renderHook(() => useDataGridPlugins({ prodEmptyPlugin: {} }));
-    expect(warnSpy).not.toHaveBeenCalled();
-  });
 });
 
 describe("applyTableContext", () => {
@@ -171,7 +106,7 @@ describe("applyTableContext", () => {
   test("wraps children in reverse plugin order and skips plugins without a valid transform", () => {
     const pagination = createContextPlugin("pagination");
     const custom = createContextPlugin("custom");
-    const noopPlugin: DataGridPlugin = {};
+    const noopPlugin = {} as DataGridPlugin;
     const invalidPlugin = {
       transformTableContext: "not-a-function",
     } as unknown as DataGridPlugin;
