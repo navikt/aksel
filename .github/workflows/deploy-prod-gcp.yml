@@ -68,7 +68,7 @@ jobs:
           next_encryption_key: ${{ secrets.NEXT_ENCRYPTION_KEY }}
 
       - name: Build and push Docker image
-        uses: nais/docker-build-push@v0
+        uses: nais/docker-build-push@v1
         id: docker-push
         with:
           team: designsystem

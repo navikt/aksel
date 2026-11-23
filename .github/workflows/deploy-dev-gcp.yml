@@ -35,7 +35,7 @@ jobs:
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
       - name: Build and push Docker image
-        uses: nais/docker-build-push@v0
+        uses: nais/docker-build-push@v1
         id: docker-push
         with:
           team: designsystem

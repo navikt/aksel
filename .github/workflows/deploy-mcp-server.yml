@@ -40,7 +40,7 @@ jobs:
         run: cd apps/mcp-server && yarn build
 
       - name: Build and push Docker image
-        uses: nais/docker-build-push@v0
+        uses: nais/docker-build-push@v1
         id: docker-push
         with:
           team: designsystem
