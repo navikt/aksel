@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { StructureBuilder } from "sanity/structure";
 import { FileXMarkIcon, HouseIcon } from "@navikt/aksel-icons";
-import { SANITY_API_VERSION } from "../sanity.env";
+import { DEFAULT_OUTDATED_THRESHOLD, SANITY_API_VERSION } from "../sanity.env";
 import type { AllArticleDocumentsT } from "../schema/schema.config";
 
 type ArticleDocumentType = AllArticleDocumentsT;
@@ -15,8 +15,6 @@ type Category = { title: string; value: string };
  */
 const IS_DRAFT = `_originalId in path("drafts.**")`;
 const IS_PUBLISHED = `!(_originalId in path("drafts.**")) && !(_originalId in path("versions.**"))`;
-
-export const DEFAULT_OUTDATED_THRESHOLD = 365;
 
 export function listPublishedArticles(
   S: StructureBuilder,

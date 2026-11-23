@@ -1,4 +1,4 @@
-import { differenceInDays, differenceInMonths, format } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { type ComponentType, useState } from "react";
 import {
   type ObjectFieldProps,
@@ -9,7 +9,10 @@ import {
 } from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, InfoCard } from "@navikt/ds-react";
-import { SANITY_API_VERSION } from "../../sanity.env";
+import {
+  DEFAULT_OUTDATED_THRESHOLD,
+  SANITY_API_VERSION,
+} from "../../sanity.env";
 
 const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
   const { onChange, readOnly } = props;
@@ -59,8 +62,6 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
 };
 
 const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
-  const articleType = useFormValue(["_type"]);
-
   const verified = useFormValue(["updateInfo", "lastVerified"]);
 
   if (typeof verified !== "string") {
@@ -68,12 +69,10 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   }
 
   // oxlint-disable-next-line react/purity -- Age relative to now is intended.
-  const diff = differenceInMonths(new Date(), new Date(verified));
-  // oxlint-disable-next-line react/purity -- Age relative to now is intended.
   const diffInDays = differenceInDays(new Date(), new Date(verified));
-  const outDated = diff >= (articleType === "aksel_artikkel" ? 12 : 6);
+  const outdated = diffInDays >= DEFAULT_OUTDATED_THRESHOLD;
 
-  if (!outDated) {
+  if (!outdated) {
     return null;
   }
 

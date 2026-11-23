@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { DEFAULT_OUTDATED_THRESHOLD } from "../../../structure/article-lists";
+import { DEFAULT_OUTDATED_THRESHOLD } from "../../../sanity.env";
 
 const isAfter = (date: string, threshold: number) =>
   differenceInDays(new Date(), new Date(date)) >= threshold;
