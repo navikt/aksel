@@ -8987,9 +8987,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "@vitejs/plugin-react@npm:6.2.1"
+"@vitejs/plugin-react@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "@vitejs/plugin-react@npm:6.3.0"
   dependencies:
     "@rolldown/pluginutils": "npm:^1.0.1"
   peerDependencies:
@@ -9004,7 +9004,7 @@ __metadata:
       optional: true
     oxc-transform-react:
       optional: true
-  checksum: 10/7274c52ad63fa5c28af0dc26451858456aa2c910a3a8c6957fd0a568fc1630e825865eeab2663c78f6cbc8f778b9dd59299c5b176bc16b39e21926208fc54460
+  checksum: 10/b46262a000b406c4d7c5a261952d2a1b8e519a0135a439092b25900f5d6cc2f8da74fb506f3bb0b638c866e83d36fd576ff1ef637a277dacd4517315657dbfa7
   languageName: node
   linkType: hard
 
@@ -9749,7 +9749,7 @@ __metadata:
     "@types/node": "npm:^24.10.9"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
-    "@vitejs/plugin-react": "npm:^6.2.1"
+    "@vitejs/plugin-react": "npm:^6.3.0"
     fuse.js: "npm:7.4.2"
     react: "npm:19.3.1"
     react-dom: "npm:19.3.1"
