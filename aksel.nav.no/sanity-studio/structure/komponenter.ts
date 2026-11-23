@@ -19,7 +19,7 @@ export function komponenterStructure(S: StructureBuilder) {
           landingssideItem(S, "komponenter_landingsside"),
           S.divider(),
           listDraftArticles(S, "komponent_artikkel"),
-          listOutdatedArticles(S, "komponent_artikkel", 180),
+          listOutdatedArticles(S, "komponent_artikkel"),
 
           S.divider(),
           ...categoryPanes(
