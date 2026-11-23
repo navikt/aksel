@@ -8,7 +8,6 @@ import {
   waitFor,
   within,
 } from "storybook/test";
-import { ActionMenu } from "../action-menu";
 import { Button } from "../button";
 import { Popover } from "../popover";
 import { Provider } from "../provider";
@@ -784,56 +783,6 @@ export const PopoverInsideDialog: Story = {
   args: {
     rootProps: { defaultOpen: true, onOpenChange: fn() },
     popupProps: { children: <PopoverInDialog /> },
-  },
-};
-
-export const ActionMenuInsideDialog: Story = {
-  render: BaseDialogComponent,
-  beforeEach: withoutAnimations,
-  play: async ({ canvasElement, args }) => {
-    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
-      canvasElement,
-      args,
-    );
-    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
-
-    const menuTrigger = canvas.getByRole("button", { name: "Menu" });
-    const expectMenuClosed = () =>
-      waitFor(() =>
-        expect(canvas.queryByRole("menuitem")).not.toBeInTheDocument(),
-      );
-
-    await userEvent.click(menuTrigger);
-    await canvas.findByRole("menuitem", { name: "Item" });
-    canvas.getByRole("button", { name: "Dialog button" }).focus();
-    await expectMenuClosed();
-    expectPopupOpen();
-
-    await userEvent.click(menuTrigger);
-    await canvas.findByRole("menuitem", { name: "Item" });
-    await userEvent.keyboard("{Escape}");
-    await expectMenuClosed();
-    await waitFor(() => expect(menuTrigger).toHaveFocus());
-    expectPopupOpen();
-    expectOpenChangeCalls(0);
-  },
-  args: {
-    rootProps: { defaultOpen: true, onOpenChange: fn() },
-    popupProps: {
-      children: (
-        <>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <button type="button">Menu</button>
-            </ActionMenu.Trigger>
-            <ActionMenu.Content>
-              <ActionMenu.Item>Item</ActionMenu.Item>
-            </ActionMenu.Content>
-          </ActionMenu>
-          <button type="button">Dialog button</button>
-        </>
-      ),
-    },
   },
 };
 

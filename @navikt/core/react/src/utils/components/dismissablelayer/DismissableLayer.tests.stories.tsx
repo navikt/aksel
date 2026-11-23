@@ -71,7 +71,7 @@ export const FocusOutside: Story = {
     await waitFor(() => expect(args.onFocusOutside).toHaveBeenCalledOnce());
     expect(args.onDismiss).toHaveBeenCalledOnce();
 
-    // Focus that never entered the layer, e.g. Safari leaving focus on body after a trigger click.
+    // Focus that never entered the layer (e.g. Safari leaving focus on body after click).
     after.blur();
     expect(document.body).toHaveFocus();
     before.focus();

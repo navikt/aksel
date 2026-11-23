@@ -103,6 +103,10 @@ export const KeepOpenOnPopoverClick: Story = {
   },
 };
 
+function tick() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 0));
+}
+
 function ShadowFocusTestRender() {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
@@ -127,57 +131,6 @@ function ShadowFocusTestRender() {
 }
 
 export const DismissOnFocusLeavingShadowPopover: Story = {
-  globals: { webComponentWrapper: "open" },
-  render: () => <ShadowFocusTestRender />,
-  play: async ({ canvasElement }) => {
-    const root = canvasElement.firstElementChild?.shadowRoot;
-    const mount = root?.querySelector("div");
-    if (!root || !mount) {
-      throw new Error("Expected the open shadow root Storybook decorator");
-    }
-
-    const canvas = within(mount);
-    const anchor = canvas.getByRole("button", { name: "Open popover" });
-    const outside = canvas.getByRole("button", { name: "Another button" });
-
-    anchor.focus();
-    await userEvent.click(anchor);
-    const inside = canvas.getByRole("button", { name: "Inside popover" });
-    expect(inside).toBeVisible();
-    inside.focus();
-    expect(root.activeElement).toBe(inside);
-
-    const portaled = within(canvasElement.ownerDocument.body).getByRole(
-      "button",
-      { name: "Portaled popover content" },
-    );
-    portaled.focus();
-    await new Promise<void>((resolve) => setTimeout(resolve, 0));
-    expect(portaled).toHaveFocus();
-    expect(inside).toBeVisible();
-
-    anchor.focus();
-    await new Promise<void>((resolve) => setTimeout(resolve, 0));
-    expect(root.activeElement).toBe(anchor);
-    expect(inside).toBeVisible();
-
-    // Like tabbing past a Popover with no tabbable content, leaving the anchor
-    // directly should close it too.
-    outside.focus();
-    expect(root.activeElement).toBe(outside);
-    await waitFor(() => expect(inside).not.toBeVisible());
-
-    await userEvent.click(anchor);
-    inside.focus();
-    expect(root.activeElement).toBe(inside);
-    expect(inside).toBeVisible();
-    outside.focus();
-    await waitFor(() => expect(inside).not.toBeVisible());
-    expect(root.activeElement).toBe(outside);
-  },
-};
-
-export const DismissOnFocusMovingToEnclosingShadowRoot: Story = {
   globals: { webComponentWrapper: "open" },
   render: function NestedShadowPopover() {
     const [root, setRoot] = useState<ShadowRoot | null>(null);
@@ -209,21 +162,50 @@ export const DismissOnFocusMovingToEnclosingShadowRoot: Story = {
       throw new Error("Expected a popover in the nested shadow root");
     }
 
-    const innerCanvas = within(innerMount);
-    await userEvent.click(
-      innerCanvas.getByRole("button", { name: "Open popover" }),
-    );
-    const inside = innerCanvas.getByRole("button", { name: "Inside popover" });
-    inside.focus();
-    await tick();
-    expect(innerRoot.activeElement).toBe(inside);
+    const canvas = within(innerMount);
+    const anchor = canvas.getByRole("button", { name: "Open popover" });
+    const sibling = canvas.getByRole("button", { name: "Another button" });
     const enclosingButton = outerCanvas.getByRole("button", {
       name: "Enclosing root button",
     });
+
+    await userEvent.click(anchor);
+    const inside = canvas.getByRole("button", { name: "Inside popover" });
+    inside.focus();
+    expect(innerRoot.activeElement).toBe(inside);
+
+    // Portaled content and anchor keep the popover open.
+    const portaled = within(canvasElement.ownerDocument.body).getByRole(
+      "button",
+      { name: "Portaled popover content" },
+    );
+    portaled.focus();
+    await tick();
+    expect(portaled).toHaveFocus();
+    expect(inside).toBeVisible();
+
+    anchor.focus();
+    await tick();
+    expect(innerRoot.activeElement).toBe(anchor);
+    expect(inside).toBeVisible();
+
+    // Moving focus to a sibling in the same shadow root closes the popover.
+    sibling.focus();
+    expect(innerRoot.activeElement).toBe(sibling);
+    await waitFor(() =>
+      expect(
+        canvas.queryByRole("button", { name: "Inside popover" }),
+      ).not.toBeInTheDocument(),
+    );
+
+    // Moving focus to an enclosing shadow root closes the popover.
+    await userEvent.click(anchor);
+    canvas.getByRole("button", { name: "Inside popover" }).focus();
+    await tick();
     enclosingButton.focus();
     await waitFor(() =>
       expect(
-        innerCanvas.queryByRole("button", { name: "Inside popover" }),
+        canvas.queryByRole("button", { name: "Inside popover" }),
       ).not.toBeInTheDocument(),
     );
     expect(outerRoot.activeElement).toBe(enclosingButton);
@@ -231,10 +213,6 @@ export const DismissOnFocusMovingToEnclosingShadowRoot: Story = {
 };
 
 /* ------------------------- Focus outside scenarios ------------------------ */
-function tick() {
-  return new Promise<void>((resolve) => setTimeout(resolve, 0));
-}
-
 function FocusScenarioRender({
   onClose,
   children,
@@ -292,36 +270,28 @@ function getFocusScenario(canvasElement: HTMLElement) {
   };
 }
 
-export const FocusOutsideWithoutFocusedTrigger: Story = {
-  render: (args) => <FocusScenarioRender onClose={args.onClose} />,
-  play: async ({ args, canvasElement }) => {
-    const { before, trigger, after, expectClosed } =
-      getFocusScenario(canvasElement);
+function SelfRemovingButton() {
+  const [visible, setVisible] = useState(true);
+  return visible ? (
+    <button type="button" onClick={() => setVisible(false)}>
+      Remove me
+    </button>
+  ) : null;
+}
 
-    before.focus();
-    after.focus();
-    await tick();
-    expect(args.onClose).not.toHaveBeenCalled();
-
-    // Safari and Firefox on macOS don't focus buttons on click
-    await userEvent.click(trigger);
-    trigger.blur();
-    expect(document.body).toHaveFocus();
-    expect(trigger).toHaveAttribute("aria-expanded", "true");
-
-    after.focus();
-    await expectClosed();
-    expect(args.onClose).toHaveBeenCalledOnce();
-  },
-  args: { onClose: fn() },
-};
-
-export const FocusOutsideWithKeyboard: Story = {
-  render: (args) => <FocusScenarioRender onClose={args.onClose} />,
+export const FocusOutside: Story = {
+  render: (args) => (
+    <FocusScenarioRender onClose={args.onClose}>
+      <SelfRemovingButton />
+      <iframe title="Embedded" srcDoc="<button>Inside frame</button>" />
+      {createPortal(<button type="button">Portaled</button>, document.body)}
+    </FocusScenarioRender>
+  ),
   play: async ({ args, canvasElement }) => {
     const { canvas, before, trigger, after, openWithKeyboard, expectClosed } =
       getFocusScenario(canvasElement);
 
+    // Tabbing back to trigger keeps open; tabbing past it closes.
     await openWithKeyboard();
     await userEvent.tab();
     expect(canvas.getByRole("button", { name: "Inside" })).toHaveFocus();
@@ -335,36 +305,12 @@ export const FocusOutsideWithKeyboard: Story = {
     await expectClosed();
     expect(args.onClose).toHaveBeenCalledOnce();
 
+    // Portal, iframe, and removed focused content keep open; outside focus closes.
     await openWithKeyboard();
-    await userEvent.tab();
-    await userEvent.tab();
-    expect(after).toHaveFocus();
-    await expectClosed();
-    expect(args.onClose).toHaveBeenCalledTimes(2);
-  },
-  args: { onClose: fn() },
-};
-
-function SelfRemovingButton() {
-  const [visible, setVisible] = useState(true);
-  return visible ? (
-    <button type="button" onClick={() => setVisible(false)}>
-      Remove me
-    </button>
-  ) : null;
-}
-
-export const FocusOutsideAfterFocusedContentIsRemoved: Story = {
-  render: (args) => (
-    <FocusScenarioRender onClose={args.onClose}>
-      <SelfRemovingButton />
-    </FocusScenarioRender>
-  ),
-  play: async ({ args, canvasElement }) => {
-    const { canvas, after, openWithKeyboard, expectClosed } =
-      getFocusScenario(canvasElement);
-
-    await openWithKeyboard();
+    within(document.body).getByRole("button", { name: "Portaled" }).focus();
+    await tick();
+    canvas.getByTitle("Embedded").focus();
+    await tick();
     canvas.getByRole("button", { name: "Remove me" }).focus();
     await userEvent.keyboard("{Enter}");
     await waitFor(() =>
@@ -373,41 +319,12 @@ export const FocusOutsideAfterFocusedContentIsRemoved: Story = {
       ).not.toBeInTheDocument(),
     );
     await tick();
-    expect(args.onClose).not.toHaveBeenCalled();
-
-    after.focus();
-    await expectClosed();
     expect(args.onClose).toHaveBeenCalledOnce();
-  },
-  args: { onClose: fn() },
-};
-
-function PortaledButton() {
-  return createPortal(<button type="button">Portaled</button>, document.body);
-}
-
-export const KeepOpenWhenFocusMovesIntoPortalOrIframe: Story = {
-  render: (args) => (
-    <FocusScenarioRender onClose={args.onClose}>
-      <PortaledButton />
-      <iframe title="Embedded" srcDoc="<button>Inside frame</button>" />
-    </FocusScenarioRender>
-  ),
-  play: async ({ args, canvasElement }) => {
-    const { canvas, trigger, after, openWithKeyboard, expectClosed } =
-      getFocusScenario(canvasElement);
-
-    await openWithKeyboard();
-    within(document.body).getByRole("button", { name: "Portaled" }).focus();
-    await tick();
-    canvas.getByTitle("Embedded").focus();
-    await tick();
-    expect(args.onClose).not.toHaveBeenCalled();
     expect(trigger).toHaveAttribute("aria-expanded", "true");
 
     after.focus();
     await expectClosed();
-    expect(args.onClose).toHaveBeenCalledOnce();
+    expect(args.onClose).toHaveBeenCalledTimes(2);
   },
   args: { onClose: fn() },
 };

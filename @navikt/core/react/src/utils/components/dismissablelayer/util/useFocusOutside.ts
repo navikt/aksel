@@ -43,26 +43,25 @@ function useFocusOutside(
     const handleFocusIn = (event: FocusEvent) => {
       // Read now: the browser clears targets in shadow trees after dispatch.
       const target = event.target;
+      const currentRoot =
+        (event.currentTarget as Document | ShadowRoot | null) ??
+        node.ownerDocument;
       if (!target || skipFocusCheckRef.current) {
         return;
       }
 
-      /**
-       * Defer the check so React's `onFocusCapture` has seen the event. When React
-       * is rendered into `document` (e.g. Next.js App Router), its capture listener
-       * may run before this one, so match on the event instead of clearing the timeout.
-       */
+      // Defer so React's onFocusCapture runs first; match the event since listener order varies.
       focusCheck.start(0, () => {
-        const activeElement = getDeepActiveElement(node.ownerDocument);
+        const activeElement = getDeepActiveElement(currentRoot);
         if (
           insideFocusEventRef.current === event ||
           !node.isConnected ||
           hasFocusWithin(node) ||
           hasFocusWithin(anchor) ||
-          /* Focus fell back to body, e.g. the outside target was removed before the check */
+          /* Ignore fallback to body (e.g. removed target) */
           !activeElement ||
           activeElement === node.ownerDocument.body ||
-          /* Focus guards redirect focus and are not real destinations */
+          /* Focus guards redirect focus */
           activeElement.hasAttribute("data-aksel-focus-guard")
         ) {
           return;
@@ -96,10 +95,7 @@ function useFocusOutside(
     onFocusCapture: (event: ReactFocusEvent) => {
       insideFocusEventRef.current = event.nativeEvent;
     },
-    /**
-     * Pointer handling owns dismissal for pointer interactions, so focus moved by the same press
-     * must not dismiss on its own. Skips focus checks for the rest of the current task.
-     */
+    /** Skips focus-outside checks for the current task while pointer handling owns dismissal. */
     ignoreFocusOutsideAfterPointerDown: () => {
       focusCheck.clear();
       skipFocusCheckRef.current = true;
@@ -110,9 +106,7 @@ function useFocusOutside(
   };
 }
 
-/**
- * Uses the active element of the element's own root, so focus inside shadow DOM is not retargeted away.
- */
+/** Checks activeElement on the element's own root so shadow DOM focus isn't retargeted. */
 function hasFocusWithin(element: Element | null | undefined) {
   if (!element?.isConnected) {
     return false;
@@ -121,8 +115,8 @@ function hasFocusWithin(element: Element | null | undefined) {
   return element.contains(root.activeElement);
 }
 
-function getDeepActiveElement(ownerDocument: Document) {
-  let activeElement = ownerDocument.activeElement;
+function getDeepActiveElement(root: Document | ShadowRoot) {
+  let activeElement = root.activeElement;
   while (activeElement?.shadowRoot?.activeElement) {
     activeElement = activeElement.shadowRoot.activeElement;
   }
