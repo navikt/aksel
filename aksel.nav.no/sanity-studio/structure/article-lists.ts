@@ -16,6 +16,8 @@ type Category = { title: string; value: string };
 const IS_DRAFT = `_originalId in path("drafts.**")`;
 const IS_PUBLISHED = `!(_originalId in path("drafts.**")) && !(_originalId in path("versions.**"))`;
 
+export const DEFAULT_OUTDATED_THRESHOLD = 365;
+
 export function listPublishedArticles(
   S: StructureBuilder,
   type: ArticleDocumentType,
@@ -55,7 +57,7 @@ export function listDraftArticles(
 export function listOutdatedArticles(
   S: StructureBuilder,
   type: ArticleDocumentType,
-  threshold: number = 365,
+  threshold: number = DEFAULT_OUTDATED_THRESHOLD,
 ) {
   return S.listItem({
     id: `article_${type}_outdated`,
@@ -65,7 +67,7 @@ export function listOutdatedArticles(
       S.documentTypeList(type)
         .title("Artikler")
         .filter(
-          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold) && ${IS_PUBLISHED}`,
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold)`,
         )
         .apiVersion(SANITY_API_VERSION)
         .params({ type, threshold })

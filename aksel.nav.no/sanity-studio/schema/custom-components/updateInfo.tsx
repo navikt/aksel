@@ -8,7 +8,7 @@ import {
   useFormValue,
 } from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { BodyLong, Box, Button, InfoCard } from "@navikt/ds-react";
+import { BodyLong, Button, InfoCard } from "@navikt/ds-react";
 import { SANITY_API_VERSION } from "../../sanity.env";
 
 const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
@@ -45,18 +45,16 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
   };
 
   return (
-    <Box marginBlock="space-16 space-0">
-      <Button
-        size="small"
-        variant="primary"
-        loading={updating}
-        onClick={handleUpdate}
-        disabled={readOnly}
-        data-color="neutral"
-      >
-        Oppdater godkjenningsdato
-      </Button>
-    </Box>
+    <Button
+      size="small"
+      variant="primary"
+      loading={updating}
+      onClick={handleUpdate}
+      disabled={readOnly}
+      data-color="neutral"
+    >
+      Oppdater godkjenningsdato
+    </Button>
   );
 };
 
@@ -91,10 +89,8 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
           Artikkelen trenger ny godkjenning. Les gjennom og oppdater innholdet,
           for så å oppdatere godkjenningsdatoen.
         </BodyLong>
-        <BodyLong size="small">
-          {articleType === "aksel_artikkel"
-            ? "En God praksis-artikkel regnes som utdatert etter 12 måneder."
-            : "En Designsystem-artikkel regnes som utdatert etter 6 måneder."}
+        <BodyLong size="small" spacing>
+          En artikkel regnes som utdatert etter 12 måneder.
         </BodyLong>
         {props.children}
       </InfoCard.Content>

@@ -16,7 +16,7 @@ export const GrunnleggendeArtikkel = defineType({
   name: "ds_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Grunnleggende", 6),
+  ...artikkelPreview("Grunnleggende"),
   renderMembers: (members) => {
     return [
       ...members,
