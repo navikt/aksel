@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 8.23.1
+
+### Patch Changes
+
+- DataGrid: Keyboard navigation in table no longer prevents shift+tabbing away from the table ([`7dbf1d5`](https://github.com/navikt/aksel/commit/7dbf1d5382367837b1f43fc76ca57d986218b64d))
+
+- Button: Preserve keyboard modifiers during native Space activation. ([#5564](https://github.com/navikt/aksel/pull/5564))
+
+- DataGrid.Table: Temporarily removed `topContent` and `bottomContent` props. ([#5579](https://github.com/navikt/aksel/pull/5579))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@8.23.1
+  - @navikt/aksel-icons@8.23.1
+
 ## 8.23.0
 
 ### Patch Changes
