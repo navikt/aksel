@@ -34,12 +34,12 @@
 
 .aksel-coach__anchor_content,
 .aksel-coach__dialog-body {
-  --axc-coach__top-bar-padding-b-e: var(--ax-space-12);
-  --axc-coach__image-padding-b-e: var(--ax-space-16);
+  --__axc-coach__top-bar-padding-b-e: var(--ax-space-12);
+  --__axc-coach__image-padding-b-e: var(--ax-space-16);
 
   &[data-coach-step-size="small"] {
-    --axc-coach__top-bar-padding-b-e: var(--ax-space-8);
-    --axc-coach__image-padding-b-e: var(--ax-space-12);
+    --__axc-coach__top-bar-padding-b-e: var(--ax-space-8);
+    --__axc-coach__image-padding-b-e: var(--ax-space-12);
   }
 }
 
@@ -47,7 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block-end: var(--axc-coach__top-bar-padding-b-e);
+  padding-block-end: var(--__axc-coach__top-bar-padding-b-e);
 }
 
 .aksel-coach__title,
@@ -67,7 +67,7 @@
   overflow: hidden;
   grid-area: image;
   position: relative;
-  padding-block-end: var(--axc-coach__image-padding-b-e);
+  padding-block-end: var(--__axc-coach__image-padding-b-e);
   display: flex;
 
   & :is(img, picture, svg, video) {
