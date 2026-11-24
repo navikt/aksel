@@ -13,5 +13,8 @@
     "@navikt/ds-css": "^7",
     "@navikt/ds-react": "^7",
     "@navikt/ds-tokens": "^7"
+  },
+  "resolutions": {
+    "postcss": "8.5.32"
   }
 }
