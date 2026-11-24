@@ -8,8 +8,8 @@ import {
   type DataGridPlugin,
   type DataGridPlugins,
   applyTableContext,
-  useDataGridPlugins,
-} from "./useDataGridPlugins";
+  resolveDataGridPlugins,
+} from "./dataGridPlugins";
 
 type InvoiceRow = {
   id: string;
@@ -93,7 +93,7 @@ const DEMO_COLUMNS: DataGrid.Columns<InvoiceRow> = [
 /**
  * Preview of how `DataGrid` will integrate the plugin API.
  * Only two lines are added around `DataGrid`'s children:
- * 1. `useDataGridPlugins(userPlugins)` to order and stabilize plugins
+ * 1. `resolveDataGridPlugins(userPlugins)` to order and stabilize plugins
  * 2. `applyTableContext(plugins, children)` to wrap the grid output
  */
 function PluginAwareDataGrid<RowT>({
@@ -101,7 +101,7 @@ function PluginAwareDataGrid<RowT>({
   children,
   ...dataGridProps
 }: DataGrid.Props<RowT> & { plugins?: DataGridPlugins }) {
-  const plugins = useDataGridPlugins(userPlugins);
+  const plugins = resolveDataGridPlugins(userPlugins);
 
   return (
     <DataGrid {...dataGridProps}>

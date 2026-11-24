@@ -1,31 +1,21 @@
-import { renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import * as consoleWarningModule from "../../utils/helpers/consoleWarning";
 import {
   type DataGridPlugin,
   type DataGridPlugins,
   applyTableContext,
-  useDataGridPlugins,
-} from "./useDataGridPlugins";
+  resolveDataGridPlugins,
+} from "./dataGridPlugins";
 
 const createContextPlugin = (label: string): DataGridPlugin => ({
   transformTableContext: (children) => `${label}(${children})`,
 });
 
-describe("useDataGridPlugins", () => {
+describe("resolveDataGridPlugins", () => {
   test("returns a stable empty array when plugins are undefined or empty", () => {
-    const { result, rerender } = renderHook<
-      readonly DataGridPlugin[],
-      { plugins?: DataGridPlugins }
-    >(({ plugins }) => useDataGridPlugins(plugins), {
-      initialProps: { plugins: undefined },
-    });
-
-    const initialResult = result.current;
+    const initialResult = resolveDataGridPlugins(undefined);
     expect(initialResult).toEqual([]);
-
-    rerender({ plugins: {} });
-    expect(result.current).toBe(initialResult);
+    expect(resolveDataGridPlugins({})).toBe(initialResult);
   });
 
   test("orders known plugins before unknown plugins, ignores prototype keys, and skips non-object entries", () => {
@@ -33,33 +23,28 @@ describe("useDataGridPlugins", () => {
     const customSecond = createContextPlugin("second");
     const pagination = createContextPlugin("pagination");
 
-    const { result } = renderHook(() =>
-      useDataGridPlugins({
+    expect(
+      resolveDataGridPlugins({
         zCustom: customFirst,
         aCustom: customSecond,
         pagination,
       }),
-    );
-    expect(result.current).toEqual([pagination, customFirst, customSecond]);
+    ).toEqual([pagination, customFirst, customSecond]);
 
     const inherited = Object.create({ pagination }) as DataGridPlugins;
     inherited.custom = customFirst;
-    const { result: inheritedResult } = renderHook(() =>
-      useDataGridPlugins(inherited),
-    );
-    expect(inheritedResult.current).toEqual([customFirst]);
+    expect(resolveDataGridPlugins(inherited)).toEqual([customFirst]);
 
     // Runtime guard: nullish or primitive entries on known or custom keys are skipped instead of crashing WeakMap
-    const { result: invalidEntriesResult } = renderHook(() =>
-      useDataGridPlugins({
+    expect(
+      resolveDataGridPlugins({
         pagination: undefined,
         customUndefined: undefined,
         customNull: null,
         customPrimitive: "not-an-object",
         valid: customFirst,
       } as unknown as DataGridPlugins),
-    );
-    expect(invalidEntriesResult.current).toEqual([customFirst]);
+    ).toEqual([customFirst]);
   });
 
   test("interns array reference by plugin identity and order across inline objects", () => {
@@ -67,34 +52,24 @@ describe("useDataGridPlugins", () => {
     const customA = createContextPlugin("a");
     const customB = createContextPlugin("b");
 
-    const { result, rerender } = renderHook<
-      readonly DataGridPlugin[],
-      { plugins?: DataGridPlugins }
-    >(({ plugins }) => useDataGridPlugins(plugins), {
-      initialProps: { plugins: { customA, pagination } },
-    });
-
-    const first = result.current;
+    const first = resolveDataGridPlugins({ customA, pagination });
     expect(Object.isFrozen(first)).toBe(true);
 
     // New inline object with same plugin instances (even in different key order)
-    rerender({ plugins: { pagination, customA } });
-    expect(result.current).toBe(first);
+    expect(resolveDataGridPlugins({ pagination, customA })).toBe(first);
 
     // Removing a plugin returns a new array; restoring it returns the interned array
-    rerender({ plugins: { pagination } });
-    expect(result.current).not.toBe(first);
-    expect(result.current).toEqual([pagination]);
+    const paginationOnly = resolveDataGridPlugins({ pagination });
+    expect(paginationOnly).not.toBe(first);
+    expect(paginationOnly).toEqual([pagination]);
 
-    rerender({ plugins: { pagination, customA } });
-    expect(result.current).toBe(first);
+    expect(resolveDataGridPlugins({ pagination, customA })).toBe(first);
 
     // Changing plugin order or replacing an instance produces a new array
-    rerender({ plugins: { customA, customB } });
-    const ab = result.current;
-    rerender({ plugins: { customB, customA } });
-    expect(result.current).not.toBe(ab);
-    expect(result.current).toEqual([customB, customA]);
+    const ab = resolveDataGridPlugins({ customA, customB });
+    const ba = resolveDataGridPlugins({ customB, customA });
+    expect(ba).not.toBe(ab);
+    expect(ba).toEqual([customB, customA]);
   });
 });
 

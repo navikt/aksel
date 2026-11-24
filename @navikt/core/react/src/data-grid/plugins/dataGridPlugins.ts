@@ -51,7 +51,7 @@ const EMPTY_PLUGINS: readonly never[] =
  * - Keeps the same array reference even when the consumer passes an inline
  *   `plugins={{ pagination }}` object on every render (`internByIdentity`).
  */
-function useDataGridPlugins(
+function resolveDataGridPlugins(
   userPlugins?: DataGridPlugins,
 ): readonly DataGridPlugin[] {
   return internByIdentity(orderPlugins(userPlugins));
@@ -197,5 +197,5 @@ function applyTableContext(
   return content;
 }
 
-export { applyTableContext, useDataGridPlugins };
+export { applyTableContext, resolveDataGridPlugins };
 export type { DataGridPlugin, DataGridPlugins };
