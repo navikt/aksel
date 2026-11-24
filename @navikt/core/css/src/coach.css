@@ -128,7 +128,7 @@
   height: var(--__axc-coach__mark-size);
   background-color: var(--__axc-coach__mark-color);
   border-radius: var(--ax-radius-full);
-  animation: pulse 3s infinite;
+  animation: aksel-coach-pulse 3s infinite;
 
   @media (forced-colors: active) {
     forced-color-adjust: none;
@@ -137,7 +137,7 @@
   }
 }
 
-@keyframes pulse {
+@keyframes aksel-coach-pulse {
   0% {
     transform: scale(1);
     opacity: 1;
