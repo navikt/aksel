@@ -16,7 +16,7 @@ import { Provider } from "../provider";
 import { ToggleGroup } from "../toggle-group";
 import { BodyShort } from "../typography";
 import { en } from "../utils/i18n/locales";
-import { Coach, type CoachMark } from "./root/CoachRoot";
+import { Coach, type CoachBeacon } from "./root/CoachRoot";
 
 export default {
   title: "ds-react/Coach",
@@ -60,9 +60,9 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button ref={createRef}>Create</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
     </HStack>
@@ -94,9 +94,9 @@ export const MissingAnchor: StoryFn<typeof Coach> = () => {
       ]}
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button ref={anchorRef}>Create</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
@@ -122,9 +122,9 @@ export const CoachDialog: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button>Next step</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
     </HStack>
@@ -191,9 +191,9 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button ref={dashboardRef}>Dashboard</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
       <HStack justify="end" width="100%">
@@ -235,9 +235,9 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button ref={buttonRef}>Button</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
     );
@@ -262,8 +262,8 @@ export const RenderStep: StoryFn<typeof Coach> = () => {
   return (
     <Coach
       renderStep={(step, context) => {
-        if (context.index === 0) {
-          return context.defaultContent;
+        if (context.isFirst) {
+          return null;
         }
         return (
           <Coach.Step>
@@ -304,15 +304,15 @@ export const RenderStep: StoryFn<typeof Coach> = () => {
       ]}
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button>Feature</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
 };
 
-export const Mark: StoryObj<typeof CoachMark> = {
+export const Beacon: StoryObj<typeof CoachBeacon> = {
   render: (props) => {
     const [selected, setSelected] = useState(["Nittedal", "Arendal"]);
     const options = [
@@ -328,7 +328,7 @@ export const Mark: StoryObj<typeof CoachMark> = {
       <VStack padding="space-40" gap="space-64">
         <Coach type="dialog" title="Explore the page">
           <Coach.ShowTourTrigger>
-            <Coach.Mark offset={props.offset}>
+            <Coach.Beacon offset={props.offset}>
               <ToggleGroup defaultValue="lest" onChange={console.info}>
                 <ToggleGroup.Item
                   value="ulest"
@@ -346,17 +346,17 @@ export const Mark: StoryObj<typeof CoachMark> = {
                   label="Sendt"
                 />
               </ToggleGroup>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
           <Coach.ShowTourTrigger>
-            <Coach.Mark offset={props.offset}>
+            <Coach.Beacon offset={props.offset}>
               <Button onClick={() => console.log("Button clicked")}>
                 Click me
               </Button>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
           <Coach.ShowTourTrigger>
-            <Coach.Mark offset={props.offset}>
+            <Coach.Beacon offset={props.offset}>
               <Chips>
                 {options.map((option) => (
                   <Chips.Toggle
@@ -374,19 +374,19 @@ export const Mark: StoryObj<typeof CoachMark> = {
                   </Chips.Toggle>
                 ))}
               </Chips>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
           <Coach.ShowTourTrigger>
-            <Coach.Mark offset={props.offset}>
+            <Coach.Beacon offset={props.offset}>
               <GuidePanel>
                 Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
                 går mer enn X måneder siden du søkte, skal du få brev om at
                 saksbehandlingstiden er forlenget.
               </GuidePanel>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
           <Coach.ShowTourTrigger>
-            <Coach.Mark
+            <Coach.Beacon
               onClick={() => console.log("Coach dot clicked")}
               offset={props.offset}
             >
@@ -400,10 +400,10 @@ export const Mark: StoryObj<typeof CoachMark> = {
                   <p>Her er innholdet i ekspansjonskortet.</p>
                 </ExpansionCard.Content>
               </ExpansionCard>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
           <Coach.ShowTourTrigger>
-            <Coach.Mark offset={props.offset}>
+            <Coach.Beacon offset={props.offset}>
               <InfoCard data-color="info">
                 <InfoCard.Header>
                   <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
@@ -413,9 +413,9 @@ export const Mark: StoryObj<typeof CoachMark> = {
                   det er like kritisk som en alert.
                 </InfoCard.Content>
               </InfoCard>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
-          <Coach.Mark data-color="success" />
+          <Coach.Beacon data-color="success" />
         </Coach>
       </VStack>
     );
@@ -453,9 +453,9 @@ export const Translations: StoryFn<typeof Coach> = () => {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button>Feature</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
     </Provider>
@@ -476,9 +476,9 @@ export const SingleStepAnchor: StoryFn<typeof Coach> = () => {
       description="Dette er en enkeltstående coachmark uten steps-prop."
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button ref={buttonRef}>Feature</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
@@ -509,9 +509,9 @@ export const SingleStepRenderStep: StoryFn<typeof Coach> = () => {
       )}
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button ref={buttonRef}>Feature</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
@@ -569,9 +569,9 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
       ]}
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button ref={dashboardRef}>Dashboard</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
@@ -582,16 +582,32 @@ export const DisableTour: StoryObj<typeof Coach> = {
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach
-          type="dialog"
-          title="Explore the page"
           disableTour={props.disableTour}
+          steps={[
+            {
+              id: "step-1",
+              type: "dialog",
+              size: "small",
+              width: "small",
+              title: "Step 1",
+              description: "This is the first step",
+            },
+            {
+              id: "step-2",
+              type: "dialog",
+              size: "small",
+              width: "small",
+              title: "Step 2",
+              description: "This is the second step",
+            },
+          ]}
         >
           <Coach.ShowTourTrigger>
-            <Coach.Mark>
+            <Coach.Beacon>
               <Button onClick={() => console.log("Button clicked")}>
                 Click me
               </Button>
-            </Coach.Mark>
+            </Coach.Beacon>
           </Coach.ShowTourTrigger>
         </Coach>
       </VStack>

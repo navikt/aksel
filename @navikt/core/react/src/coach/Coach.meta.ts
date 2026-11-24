@@ -6,7 +6,7 @@ const metadata: ComponentMetadata = {
   components: {
     Coach,
     "Coach.Step": Coach.Step,
-    "Coach.Mark": Coach.Mark,
+    "Coach.Beacon": Coach.Beacon,
     "Coach.Progress": Coach.Progress,
     "Coach.Title": Coach.Title,
     "Coach.Description": Coach.Description,

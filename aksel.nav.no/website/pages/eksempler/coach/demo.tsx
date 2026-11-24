@@ -45,9 +45,9 @@ const Example = () => {
         ]}
       >
         <Coach.ShowTourTrigger>
-          <Coach.Mark>
+          <Coach.Beacon>
             <Button ref={opprettRef}>Opprett oppgave</Button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </Coach>
       <Table>

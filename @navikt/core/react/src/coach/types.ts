@@ -74,6 +74,7 @@ interface CoachBaseProps {
   showTour?: boolean;
   /**
    * Called when a mark opens the tour or the tour closes.
+   * TODO: Change `show` to be more descriptive, e.g. "finished", "cancelled", or "skipped".
    */
   onShowTourChange?: (show: boolean) => void;
   /**
@@ -106,6 +107,7 @@ interface CoachBaseProps {
   /**
    * Custom render function for each coach step.
    * Return `defaultContent` or `undefined` to keep standard layout for that step.
+   * Return `null` to render no step content.
    */
   renderStep?: (
     step: {
@@ -118,8 +120,11 @@ interface CoachBaseProps {
       defaultContent: React.ReactNode;
       index: number;
       totalSteps: number;
+      stepType: "dialog" | "anchor";
+      isFirst: boolean;
+      isLast: boolean;
     },
-  ) => React.ReactNode | undefined;
+  ) => React.ReactNode | undefined | null;
 }
 
 interface CoachTourProps extends CoachBaseProps {

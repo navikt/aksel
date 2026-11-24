@@ -61,7 +61,6 @@
 
 .aksel-coach__image-container {
   overflow: hidden;
-  grid-area: image;
   position: relative;
   padding-block-end: var(--__axc-coach__image-padding-b-e);
   display: flex;
@@ -75,7 +74,7 @@
   }
 }
 
-.aksel-coach__mark-anchor {
+.aksel-coach__beacon-anchor {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -83,17 +82,17 @@
   align-items: flex-start;
 }
 
-.aksel-coach__mark-anchor > .aksel-coach__mark-container {
+.aksel-coach__beacon-anchor > .aksel-coach__beacon-container {
   position: absolute;
 }
 
-.aksel-coach__mark-container {
-  --__axc-coach__mark-size: var(--ax-space-16);
-  --__axc-coach__mark-color: var(--ax-bg-strong);
+.aksel-coach__beacon-container {
+  --__axc-coach__beacon-size: var(--ax-space-16);
+  --__axc-coach__beacon-color: var(--ax-bg-strong);
 
   position: relative;
-  width: calc(var(--__axc-coach__mark-size) * 2);
-  height: calc(var(--__axc-coach__mark-size) * 2);
+  width: calc(var(--__axc-coach__beacon-size) * 2);
+  height: calc(var(--__axc-coach__beacon-size) * 2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,12 +101,12 @@
   inset-inline-end: 0;
 }
 
-.aksel-coach__mark {
+.aksel-coach__beacon {
   cursor: pointer;
   position: absolute;
-  width: var(--__axc-coach__mark-size);
-  height: var(--__axc-coach__mark-size);
-  background-color: var(--__axc-coach__mark-color);
+  width: var(--__axc-coach__beacon-size);
+  height: var(--__axc-coach__beacon-size);
+  background-color: var(--__axc-coach__beacon-color);
   border-radius: var(--ax-radius-full);
   border: 2px solid var(--ax-bg-default);
 
@@ -118,11 +117,11 @@
   }
 }
 
-.aksel-coach__mark-pulse {
+.aksel-coach__beacon-pulse {
   position: absolute;
-  width: var(--__axc-coach__mark-size);
-  height: var(--__axc-coach__mark-size);
-  background-color: var(--__axc-coach__mark-color);
+  width: var(--__axc-coach__beacon-size);
+  height: var(--__axc-coach__beacon-size);
+  background-color: var(--__axc-coach__beacon-color);
   border-radius: var(--ax-radius-full);
   animation: aksel-coach-pulse 3s infinite;
 
