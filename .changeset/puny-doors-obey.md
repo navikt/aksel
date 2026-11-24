@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Switch: when all switch elements in a Fieldset are read only, render the icon in the fieldset header rather than each Switch element
+Switch:  `<Switch />` elements inside a `<Fieldset />` with `readOnly` now share a single padlock in the group legend instead of displaying one per switch. Each switch retains screen-reader text indicating its read-only state, and standalone switches keep their individual padlocks.

@@ -26,5 +26,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 98,
-  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra `disabled` vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn. Sett `readOnly` på `Fieldset` for å låse hele gruppen på samme måte som radio.",
+  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra `disabled` vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn. Sett `readOnly` på `Fieldset` for å låse hele gruppen.",
 };
