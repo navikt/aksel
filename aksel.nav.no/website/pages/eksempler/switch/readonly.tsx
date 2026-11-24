@@ -1,4 +1,4 @@
-import { Switch, VStack } from "@navikt/ds-react";
+import { Fieldset, Switch, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -8,6 +8,10 @@ const Example = () => {
       <Switch readOnly checked>
         Slå på notifikasjoner
       </Switch>
+      <Fieldset legend="Hvordan ønsker du å bli varslet?" readOnly>
+        <Switch>E-post</Switch>
+        <Switch defaultChecked>SMS</Switch>
+      </Fieldset>
     </VStack>
   );
 };
@@ -22,5 +26,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 98,
-  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra `disabled` vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn.",
+  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra `disabled` vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn. Sett `readOnly` på `Fieldset` for å låse hele gruppen på samme måte som radio.",
 };

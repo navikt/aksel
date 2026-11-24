@@ -1,9 +1,15 @@
-import React, { type InputHTMLAttributes, forwardRef, useState } from "react";
+import React, {
+  type InputHTMLAttributes,
+  forwardRef,
+  useContext,
+  useState,
+} from "react";
 import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
+import { FieldsetContext } from "../fieldset/context";
 import { type FormFieldProps, useFormField } from "../useFormField";
 
 export interface SwitchProps
@@ -47,6 +53,7 @@ export interface SwitchProps
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
     const { inputProps, size, readOnly } = useFormField(props, "switch");
+    const fieldset = useContext(FieldsetContext);
 
     const {
       children,
@@ -122,7 +129,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             })}
           >
             <BodyShort as="span" size={size} className="aksel-switch__label">
-              {readOnly && <ReadOnlyIconWithTitle />}
+              {readOnly && !fieldset?.readOnly && <ReadOnlyIconWithTitle />}
               {children}
             </BodyShort>
             {description && (
