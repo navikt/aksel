@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
@@ -100,32 +106,40 @@ const CoachRoot = (props: CoachProps) => {
   const showTour = !disableTour && (showTourControlled ?? uncontrolledShowTour);
 
   // Generate the steps for the tour based on props or fallback to single step.
-  const steps: readonly CoachStepItem[] =
-    "steps" in props && props.steps !== undefined
-      ? props.steps
-      : [
-          {
-            id: props.id ?? "step-1",
-            type: props.type,
-            title: props.title,
-            description: props.description,
-            image: props.image,
-            allowCancelTour: props.allowCancelTour ?? true,
-            size: props.size,
-            width: props.width,
-            "aria-labelledby": props["aria-labelledby"],
-            ...(props.type === "anchor"
-              ? {
-                  anchorRef: props.anchorRef,
-                  placement: props.placement,
-                  offset: props.offset,
-                }
-              : {}),
-          } as CoachStepItem,
-        ];
+  const steps: readonly CoachStepItem[] = useMemo(
+    () =>
+      "steps" in props && props.steps !== undefined
+        ? props.steps
+        : [
+            {
+              id: props.id ?? "step-1",
+              type: props.type,
+              title: props.title,
+              description: props.description,
+              image: props.image,
+              size: props.size,
+              width: props.width,
+              "aria-labelledby": props["aria-labelledby"],
+              ...(props.type === "anchor"
+                ? {
+                    anchorRef: props.anchorRef,
+                    placement: props.placement,
+                    offset: props.offset,
+                  }
+                : {}),
+            } as CoachStepItem,
+          ],
+    [props],
+  );
 
-  const activeStepIndex = currentStepControlled ?? uncontrolledStep;
-  const currentStep = steps[activeStepIndex];
+  const activeStepIndex = useMemo(
+    () => currentStepControlled ?? uncontrolledStep,
+    [currentStepControlled, uncontrolledStep],
+  );
+  const currentStep = useMemo(
+    () => steps[activeStepIndex],
+    [steps, activeStepIndex],
+  );
   const anchorRef =
     currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
 
