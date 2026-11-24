@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { composeEventHandlers, ownerDocument } from "../../helpers";
-import { useMergeRefs, useTimeout } from "../../hooks";
+import { useMergeRefs } from "../../hooks";
 import type { AsChildProps } from "../../types";
 import { Slot } from "../slot/Slot";
 import type {
@@ -49,7 +49,7 @@ interface DismissableLayerBaseProps extends React.HTMLAttributes<HTMLDivElement>
    */
   enablePointerUpOutside?: boolean;
   /**
-   * Event handler called when the focus moves outside of the `DismissableLayer`.
+   * Event handler called when focus moves outside the layer and its anchor.
    * Can be prevented.
    */
   onFocusOutside?: (event: CustomFocusEvent) => void;
@@ -118,8 +118,6 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const context = useContext(DismissableLayerContext);
 
     const triggerPointerDownRef = useRef<boolean>(false);
-    const dismissedWithPointerRef = useRef<boolean>(false);
-    const timeout = useTimeout();
 
     const [, forceRerender] = useState({});
     const [node, setNode] = React.useState<DismissableLayerElement | null>(
@@ -146,13 +144,10 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * We want to prevent the Layer from closing when the trigger/anchor element or its child elements are interacted with.
      * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent default event behavior.
      */
-    function handleOutsideEvent(event: CustomFocusEvent | CustomPointerEvent) {
+    function handleOutsidePointerEvent(event: CustomPointerEvent) {
       if (!safeZone?.anchor) {
         return;
       }
-
-      const eventType = event.detail.originalEvent.type as
-        "pointerup" | "pointerdown" | "focusin";
 
       const target = event.target as HTMLElement;
 
@@ -168,7 +163,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Therefore, checking anchor.contains(target) etc. won't work in that case.
        */
       if (
-        eventType === "pointerdown" &&
+        event.detail.originalEvent.type === "pointerdown" &&
         triggerPointerDownRef.current === true
       ) {
         event.preventDefault();
@@ -177,23 +172,29 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
       triggerPointerDownRef.current = false;
     }
 
+    const focusOutside = useFocusOutside(
+      (event) => {
+        onFocusOutside?.(event);
+        onInteractOutside?.(event);
+
+        if (!event.defaultPrevented) {
+          onDismiss?.(event);
+        }
+      },
+      node,
+      safeZone?.anchor,
+      enabled,
+    );
+
     const pointerDownOutside = usePointerDownOutside(
       (event) => {
         if (!shouldEnablePointerEvents) {
           return;
         }
-        dismissedWithPointerRef.current = true;
+        focusOutside.ignoreFocusOutsideAfterPointerDown();
 
         /**
-         * We reset dismissedWithPointerRef on the next tick.
-         * This allows pointerDown to run its effect, without re-running them here right after.
-         */
-        timeout.start(0, () => {
-          dismissedWithPointerRef.current = false;
-        });
-
-        /**
-         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
+         * We call these before checking the safe zone to give consumers a chance to prevent dismissal.
          */
         onPointerDownOutside?.(event);
         onInteractOutside?.(event);
@@ -201,7 +202,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         /**
          * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
          */
-        safeZone && handleOutsideEvent(event);
+        safeZone && handleOutsidePointerEvent(event);
 
         if (!event.defaultPrevented && onDismiss) {
           onDismiss(event);
@@ -218,7 +219,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         }
 
         /**
-         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+         * We call these before checking the safe zone to give consumers a chance to prevent dismissal.
          */
         onPointerUpOutside?.(event);
         onInteractOutside?.(event);
@@ -226,36 +227,12 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         /**
          * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
          */
-        safeZone && handleOutsideEvent(event);
+        safeZone && handleOutsidePointerEvent(event);
 
         /**
-         * Both `onPointerUpOutside`, `onInteractOutside` and `handleOutsideEvent`
+         * Both `onPointerUpOutside`, `onInteractOutside` and `handleOutsidePointerEvent`
          * are able to preventDefault the event, thus stopping call for `onDismiss`.
          */
-        if (!event.defaultPrevented && onDismiss) {
-          onDismiss(event);
-        }
-      },
-      ownerDoc,
-      enabled,
-    );
-
-    const focusOutside = useFocusOutside(
-      (event) => {
-        if (dismissedWithPointerRef.current) {
-          return;
-        }
-        /**
-         * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault.
-         */
-        onFocusOutside?.(event);
-        onInteractOutside?.(event);
-
-        /**
-         * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
-         */
-        safeZone && handleOutsideEvent(event);
-
         if (!event.defaultPrevented && onDismiss) {
           onDismiss(event);
         }
@@ -276,7 +253,7 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
         }
 
         /**
-         * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+         * Give consumers a chance to prevent dismissal.
          */
         onEscapeKeyDown?.(event);
         /**
@@ -450,16 +427,12 @@ const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
             restProps.onFocusCapture,
             focusOutside.onFocusCapture,
           )}
-          onBlurCapture={composeEventHandlers(
-            restProps.onBlurCapture,
-            focusOutside.onBlurCapture,
-          )}
           onPointerDownCapture={composeEventHandlers(
             restProps.onPointerDownCapture,
             () => {
               pointerDownOutside.onPointerDownCapture();
               pointerUpOutside.onPointerDownCapture();
-              focusOutside.onPointerDownCapture();
+              focusOutside.ignoreFocusOutsideAfterPointerDown();
             },
           )}
           onPointerUpCapture={composeEventHandlers(

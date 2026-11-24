@@ -31,7 +31,7 @@
     "cp:assets:with-playroom": "yarn cp:playroom && yarn cp:assets"
   },
   "dependencies": {
-    "@navikt/analytics-types": "0.0.9",
+    "@navikt/analytics-types": "0.0.13",
     "@navikt/next-logger": "5.0.2",
     "@navikt/oasis": "4.2.2",
     "@portabletext/react": "^8.0.1",
@@ -73,7 +73,7 @@
     "@babel/core": "^7.19.0",
     "@babel/parser": "^7.27.5",
     "@babel/traverse": "^7.27.4",
-    "@google-cloud/bigquery": "^9.5.0",
+    "@google-cloud/bigquery": "^9.6.1",
     "@playwright/test": "1.61.1",
     "@portabletext/block-tools": "^6.0.7",
     "@portabletext/markdown": "^2.5.1",

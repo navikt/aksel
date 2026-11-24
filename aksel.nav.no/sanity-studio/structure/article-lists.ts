@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { StructureBuilder } from "sanity/structure";
 import { FileXMarkIcon, HouseIcon } from "@navikt/aksel-icons";
-import { SANITY_API_VERSION } from "../sanity.env";
+import { DEFAULT_OUTDATED_THRESHOLD, SANITY_API_VERSION } from "../sanity.env";
 import type { AllArticleDocumentsT } from "../schema/schema.config";
 
 type ArticleDocumentType = AllArticleDocumentsT;
@@ -55,7 +55,7 @@ export function listDraftArticles(
 export function listOutdatedArticles(
   S: StructureBuilder,
   type: ArticleDocumentType,
-  threshold: number = 365,
+  threshold: number = DEFAULT_OUTDATED_THRESHOLD,
 ) {
   return S.listItem({
     id: `article_${type}_outdated`,
@@ -65,7 +65,7 @@ export function listOutdatedArticles(
       S.documentTypeList(type)
         .title("Artikler")
         .filter(
-          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold) && ${IS_PUBLISHED}`,
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold)`,
         )
         .apiVersion(SANITY_API_VERSION)
         .params({ type, threshold })
