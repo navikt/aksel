@@ -11,6 +11,8 @@
 .aksel-coach__anchor_content {
   --__axc-coach__content-width: calc(var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-128) + var(--ax-space-16));
 
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  max-height: var(--__axc-floating-available-height);
   padding: var(--ax-space-16) var(--ax-space-20);
   width: var(--__axc-coach__content-width);
   /* Creates a small gutter between screen-edges on smaller devices */
