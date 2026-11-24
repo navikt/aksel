@@ -9,10 +9,6 @@ interface CoachStepBase {
    */
   id: string;
   /**
-   * Whether the user is allowed to cancel the tour at this step.
-   */
-  allowCancelTour?: boolean;
-  /**
    * Updates sub-component padding, Coach.Title font-size and button size.
    * @default "medium"
    */
@@ -145,7 +141,6 @@ interface CoachTourProps extends CoachBaseProps {
   title?: never;
   description?: never;
   image?: never;
-  allowCancelTour?: never;
   size?: never;
   width?: never;
   anchorRef?: never;

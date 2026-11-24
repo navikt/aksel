@@ -240,9 +240,7 @@ const CoachRoot = (props: CoachProps) => {
     }
 
     event.preventDefault();
-    if (currentStep?.allowCancelTour) {
-      endTour();
-    }
+    endTour();
   };
 
   const handleArrowKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -312,16 +310,14 @@ const CoachRoot = (props: CoachProps) => {
       <div className="aksel-coach__top-bar">
         <CoachProgress />
         <Spacer />
-        {currentStep?.allowCancelTour && (
-          <CoachCloseTrigger data-coach-top-close-trigger>
-            <Button
-              size="small"
-              icon={<XMarkIcon title={translate("close")} />}
-              variant="tertiary"
-              data-color="neutral"
-            />
-          </CoachCloseTrigger>
-        )}
+        <CoachCloseTrigger data-coach-top-close-trigger>
+          <Button
+            size="small"
+            icon={<XMarkIcon title={translate("close")} />}
+            variant="tertiary"
+            data-color="neutral"
+          />
+        </CoachCloseTrigger>
       </div>
       {currentStep?.image && <CoachImage>{currentStep.image}</CoachImage>}
       {currentStep?.title && <CoachTitle>{currentStep.title}</CoachTitle>}

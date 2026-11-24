@@ -13,7 +13,6 @@ const Example = () => {
           {
             id: "velkommen",
             type: "dialog",
-            allowCancelTour: true,
             title: "Velkommen til oppgavelisten!",
             description:
               "Her får du oversikt over oppgavene dine. Vi viser deg hvordan du legger til oppgaver og finner dem som gjenstår.",
@@ -23,7 +22,6 @@ const Example = () => {
             type: "anchor",
             anchorRef: opprettRef,
             placement: "bottom-end",
-            allowCancelTour: true,
             title: "Legg til en oppgave",
             description:
               "Bruk denne knappen når du har noe nytt å gjøre. Etter omvisningen kan du prøve å legge til en oppgave selv.",
@@ -33,7 +31,6 @@ const Example = () => {
             type: "anchor",
             anchorRef: statusRef,
             placement: "bottom-start",
-            allowCancelTour: true,
             title: "Se status på oppgavene",
             description:
               "I denne kolonnen kan du se statusen på oppgavene dine.",
@@ -41,7 +38,6 @@ const Example = () => {
           {
             id: "ferdig",
             type: "dialog",
-            allowCancelTour: true,
             title: "Nå er du klar!",
             description: "Prøv å legge til en oppgave.",
           },

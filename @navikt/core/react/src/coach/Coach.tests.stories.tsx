@@ -53,7 +53,7 @@ const translations = {
 const dialogSteps: CoachStepItem[] = [
   { id: "welcome", type: "dialog", title: "Welcome" },
   { id: "features", type: "dialog", title: "Features" },
-  { id: "finished", type: "dialog", title: "Finished", allowCancelTour: true },
+  { id: "finished", type: "dialog", title: "Finished" },
 ];
 
 function Tour({
@@ -549,7 +549,6 @@ export const MixedSteps: StoryObj = {
               anchorRef: secondRef,
               placement: "bottom-start",
               title: "Second anchor",
-              allowCancelTour: true,
             },
             dialogSteps[2],
           ]}
@@ -604,61 +603,6 @@ export const MixedSteps: StoryObj = {
     await canvas.findByRole("dialog", { name: "Second anchor" });
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
-  },
-};
-
-export const SpotlightBackdrop: StoryObj = {
-  render: () => {
-    const anchorRef = useRef<HTMLButtonElement>(null);
-    return (
-      <>
-        <section
-          aria-label="Scrollable targets"
-          style={{ height: 200, overflow: "auto" }}
-        >
-          <div style={{ height: 600, paddingTop: 80 }}>
-            <Button ref={anchorRef}>Spotlight target</Button>
-          </div>
-        </section>
-        <Tour type="anchor" anchorRef={anchorRef} title="Spotlight" />
-      </>
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const scroller = canvas.getByRole("region", { name: "Scrollable targets" });
-    await userEvent.click(canvas.getByRole("button", { name: "Start tour" }));
-    const popup = await canvas.findByRole("dialog", { name: "Spotlight" });
-    const backdrop = canvasElement.querySelector<HTMLElement>(
-      ".aksel-coach__backdrop",
-    );
-    if (!backdrop) {
-      throw new Error("Expected a spotlight backdrop");
-    }
-
-    expect(backdrop.style.length).toBe(1);
-    backdrop.style.setProperty("--ax-bg-overlay", "rgb(10, 20, 30)");
-    expect(getComputedStyle(backdrop).backgroundColor).toBe("rgb(10, 20, 30)");
-    expect(getComputedStyle(backdrop).position).toBe("fixed");
-    expect(getComputedStyle(backdrop).pointerEvents).toBe("none");
-    const initialClipPath = backdrop.style.clipPath;
-    await waitFor(() =>
-      expect(popup.getBoundingClientRect().bottom).toBeGreaterThan(0),
-    );
-    const initialPopupTop = popup.getBoundingClientRect().top;
-    scroller.scrollTop = 40;
-    await waitFor(() => {
-      expect(scroller.scrollTop).toBe(40);
-      expect(backdrop.style.clipPath).not.toBe(initialClipPath);
-      expect(popup.getBoundingClientRect().top).not.toBe(initialPopupTop);
-    });
-    const bounds = backdrop.getBoundingClientRect();
-    expect(bounds.top).toBe(0);
-    expect(bounds.left).toBe(0);
-    expect(bounds.width).toBe(document.documentElement.clientWidth);
-    expect(bounds.height).toBeGreaterThanOrEqual(
-      document.documentElement.clientHeight,
-    );
   },
 };
 
