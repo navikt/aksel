@@ -24,6 +24,7 @@ export default {
     next: "Neste",
     previous: "Førre",
     close: "Lukk",
+    openCoach: "Opne rettleiar",
   },
   Combobox: {
     addOption: "Legg til",

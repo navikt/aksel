@@ -480,6 +480,7 @@ const CoachRoot = (props: CoachProps) => {
       goToPreviousStep={goToPreviousStep}
       titleId={titleId}
       setTitleId={setTitleId}
+      coachTranslations={translations}
     >
       {children}
       {showTour && renderCurrentStep()}

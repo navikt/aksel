@@ -24,6 +24,7 @@ export default {
     next: "Next",
     previous: "Previous",
     close: "Close",
+    openCoach: "Open coach",
   },
   Combobox: {
     addOption: "Add",

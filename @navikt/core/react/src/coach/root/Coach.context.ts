@@ -1,4 +1,5 @@
 import { createStrictContext } from "../../utils/helpers";
+import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 import type { CoachStepItem } from "../types";
 
 interface CoachContextProps {
@@ -6,9 +7,13 @@ interface CoachContextProps {
    * Whether the tour is currently open.
    */
   showTour: boolean;
-  /** Opens the tour from a mark. */
+  /**
+   * Opens the tour from a mark.
+   *  */
   openTour?: () => void;
-  /** Whether tour triggers are disabled. */
+  /**
+   * Whether tour triggers are disabled.
+   *  */
   disableTour?: boolean;
   /**
    * Called when the tour is dismissed or finished.
@@ -46,6 +51,10 @@ interface CoachContextProps {
    * Sets the title element ID.
    */
   setTitleId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  /**
+   * Translations for the Coach component.
+   */
+  coachTranslations?: ComponentTranslation<"Coach">;
 }
 
 const { Provider: CoachContextProvider, useContext: useCoachContext } =

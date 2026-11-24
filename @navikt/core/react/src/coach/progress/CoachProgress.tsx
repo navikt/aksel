@@ -25,10 +25,11 @@ interface CoachProgressProps extends Omit<
  */
 const CoachProgress = forwardRef<HTMLParagraphElement, CoachProgressProps>(
   ({ className, translations, ...restProps }, forwardedRef) => {
-    const { currentStepIndex, totalSteps } = useCoachContext();
+    const { currentStepIndex, totalSteps, coachTranslations } =
+      useCoachContext();
     const readableCurrentStep = currentStepIndex + 1;
 
-    const translate = useI18n("Coach", translations);
+    const translate = useI18n("Coach", translations, coachTranslations);
 
     if (totalSteps <= 1) {
       return null;
