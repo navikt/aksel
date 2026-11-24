@@ -1,7 +1,6 @@
 import type { Placement } from "@floating-ui/react-dom";
 import type React from "react";
 import type { ComponentTranslation } from "../utils/i18n/i18n.types";
-import type { CoachMark } from "./mark/CoachMark";
 
 interface CoachStepBase {
   /**
@@ -103,15 +102,7 @@ interface CoachBaseProps {
    * Coach.Mark triggers rendered outside the popup.
    * Provide step content through props or renderStep instead.
    */
-  children?:
-    | React.ReactElement<
-        React.ComponentProps<typeof CoachMark>,
-        typeof CoachMark
-      >
-    | React.ReactElement<
-        React.ComponentProps<typeof CoachMark>,
-        typeof CoachMark
-      >[];
+  children?: React.ReactNode;
   /**
    * Custom render function for each coach step.
    * Return `defaultContent` or `undefined` to keep standard layout for that step.
