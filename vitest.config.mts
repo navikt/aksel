@@ -31,14 +31,22 @@ export default defineConfig({
             enabled: true,
             headless: true,
             provider: playwright(),
-            instances: browsers.map((browser) => ({
-              browser,
-              /*
-               * Parallel WebKit pages interfere with each other's focus, so focus
-               * assertions (e.g. Dialog mount focus) fail at random. Run WebKit files serially.
-               */
-              fileParallelism: browser !== "webkit",
-            })),
+            instances: browsers.map((browser) => {
+              return {
+                browser,
+                /*
+                 * Parallel WebKit pages interfere with each other's focus, so focus
+                 * assertions (e.g. Dialog mount focus) fail at random. Run WebKit files serially.
+                 */
+                fileParallelism: browser !== "webkit",
+                provider:
+                  browser === "chromium"
+                    ? playwright({
+                        launchOptions: { args: ["--font-render-hinting=none"] },
+                      })
+                    : undefined,
+              };
+            }),
           },
         },
       },
