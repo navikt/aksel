@@ -26,10 +26,6 @@
   &[data-coach-step-size="small"] {
     padding: var(--ax-space-12) var(--ax-space-16);
   }
-
-  @media (min-width: 480px) {
-    padding: var(--ax-space-16) var(--ax-space-20);
-  }
 }
 
 .aksel-coach__anchor_content,
