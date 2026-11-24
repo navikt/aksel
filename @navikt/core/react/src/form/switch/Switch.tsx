@@ -8,6 +8,7 @@ import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../utils-external";
 import { cl } from "../../utils/helpers";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FieldsetContext } from "../fieldset/context";
 import { type FormFieldProps, useFormField } from "../useFormField";
@@ -53,7 +54,6 @@ export interface SwitchProps
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
     const { inputProps, size, readOnly } = useFormField(props, "switch");
-    const fieldset = useContext(FieldsetContext);
 
     const {
       children,
@@ -129,7 +129,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             })}
           >
             <BodyShort as="span" size={size} className="aksel-switch__label">
-              {readOnly && !fieldset?.readOnly && <ReadOnlyIconWithTitle />}
+              {readOnly && <ReadOnlyIcon />}
               {children}
             </BodyShort>
             {description && (
@@ -147,6 +147,16 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     );
   },
 );
+
+const ReadOnlyIcon = () => {
+  const fieldset = useContext(FieldsetContext);
+  const readOnlyText = useI18n("global")("readOnly");
+
+  if (fieldset?.readOnly) {
+    return <span className="aksel-sr-only">{readOnlyText}</span>;
+  }
+  return <ReadOnlyIconWithTitle />;
+};
 
 const SwitchIcon = ({
   size,
