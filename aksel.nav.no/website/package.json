@@ -31,7 +31,7 @@
     "cp:assets:with-playroom": "yarn cp:playroom && yarn cp:assets"
   },
   "dependencies": {
-    "@navikt/analytics-types": "0.0.9",
+    "@navikt/analytics-types": "0.0.13",
     "@navikt/next-logger": "5.0.2",
     "@navikt/oasis": "4.2.2",
     "@portabletext/react": "^8.0.1",
