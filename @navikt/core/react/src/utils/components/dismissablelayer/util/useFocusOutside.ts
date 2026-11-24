@@ -50,7 +50,10 @@ function useFocusOutside(
         return;
       }
 
-      // Defer so React's onFocusCapture runs first; match the event since listener order varies.
+      /*
+       * Defer so React's onFocusCapture has also run (native vs. React listener order varies).
+       * Comparing event identity confirms this focusin came from inside the React subtree (e.g. a portal).
+       */
       focusCheck.start(0, () => {
         const activeElement = getDeepActiveElement(currentRoot);
         if (
@@ -95,7 +98,7 @@ function useFocusOutside(
     onFocusCapture: (event: ReactFocusEvent) => {
       insideFocusEventRef.current = event.nativeEvent;
     },
-    /** Skips focus-outside checks for the current task while pointer handling owns dismissal. */
+    /** Ignores focusin events triggered by an outside pointerdown until the next tick, since pointer handling already owns dismissal. */
     ignoreFocusOutsideAfterPointerDown: () => {
       focusCheck.clear();
       skipFocusCheckRef.current = true;
@@ -106,7 +109,7 @@ function useFocusOutside(
   };
 }
 
-/** Checks activeElement on the element's own root so shadow DOM focus isn't retargeted. */
+/** Uses the element's own root because document.activeElement points to the shadow host instead of the focused element inside a shadow root. */
 function hasFocusWithin(element: Element | null | undefined) {
   if (!element?.isConnected) {
     return false;

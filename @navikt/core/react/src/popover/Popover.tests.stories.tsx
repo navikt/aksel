@@ -212,7 +212,6 @@ export const DismissOnFocusLeavingShadowPopover: Story = {
   },
 };
 
-/* ------------------------- Focus outside scenarios ------------------------ */
 function FocusScenarioRender({
   onClose,
   children,
