@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Button, Coach, HStack } from "@navikt/ds-react";
+import { Button, HStack } from "@navikt/ds-react";
+import { Coach } from "@navikt/ds-react/PREVIEW";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {

@@ -169,7 +169,7 @@
         "default": "./cjs/chat/index.js"
       }
     },
-    "./Coach": {
+    "./PREVIEW/Coach": {
       "import": {
         "types": "./esm/coach/index.d.ts",
         "default": "./esm/coach/index.js"
