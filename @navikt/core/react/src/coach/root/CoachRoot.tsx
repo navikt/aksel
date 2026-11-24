@@ -13,7 +13,6 @@ import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
-import { CoachBackdrop } from "../backdrop/CoachBackdrop";
 import {
   CoachDescription,
   type CoachDescriptionProps,
@@ -417,7 +416,6 @@ const CoachRoot = (props: CoachProps) => {
 
       return (
         <Portal key={currentStep.id}>
-          <CoachBackdrop anchorEl={anchorEl} />
           <Floating>
             <Floating.Anchor virtualRef={anchorEl} />
             <FocusGuards>
