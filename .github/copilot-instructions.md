@@ -39,7 +39,7 @@
 
 ## Definition of done
 
-- Behavior/visual change: update the implementation and closest existing story. Keep tests lean: put pure logic/hooks in Vitest or DOM/a11y/focus behavior in Storybook play tests.Don't duplicate coverage across both. Fold secondary invariants into existing stories instead of adding a dedicated story per edge case.
+- Behavior/visual change: update the implementation and closest existing story. Keep tests lean: put pure logic/hooks in Vitest or DOM/a11y/focus behavior in Storybook play tests. Don't duplicate coverage across both. Fold secondary invariants into existing stories instead of adding a dedicated story per edge case.
 - New public export: sync component `index.ts`, `src/index.ts` (or `src/preview.ts`) and `package.json` exports, then `corepack yarn workspace aksel-playroom sync-imports` (root `lint` fails on stale playroom imports).
 - User-facing change to a published package: add a changeset (`add-changeset` skill) unless told otherwise.
 
@@ -66,7 +66,7 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - `apps/playroom/`, `apps/mcp-server/`, `apps/figma-icon-plugin/` - apps · `tooling/` - ESLint plugin, scripts, changelog, analyzer
 - `.changeset/` - release notes · Root config: `oxlint.config.mts`, `stylelint.config.mjs`, `vitest.config.mts`, `.storybook/`
 
-## Skills and agents
+## Skills
 
 - `aksel-local-validation` - pick and run the right lint/type/test commands
 - `code-review` - review a branch, diff or PR for consumer-facing risk

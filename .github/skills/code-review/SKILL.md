@@ -37,7 +37,7 @@ For changes to component state, callbacks, async behavior, composition, semantic
 
 ## Priorities
 
-- 🔴 **Blocker**: must fix before merge. Breaks consumers, regresses accessibility, security issue or wrong behavior.
+- 🔴 **Blocker**: must fix before merge. Breaks consumers, regresses accessibility, security issue or wrong behavior. Prioritize real end-consumer impact; don't inflate unlikely edge cases to blockers.
 - 🟡 **Suggestion**: should fix. Missing test, docs or changeset, maintainability risk, over-editing.
 - 💭 **Nit**: optional. Leave it out when in doubt.
 
@@ -47,7 +47,7 @@ Skip anything Oxlint, Stylelint, Prettier or TypeScript already catches. No prai
 
 ### Public API (🔴)
 
-- Removed or renamed prop, export, CSS class, token or CLI command, or a changed default, on something already published → needs a `major` changeset, a deprecation path, or a revert.
+- Removed or renamed prop, export, CSS class, token or CLI command, or a changed default, on a stable published API → needs a `major` changeset, a deprecation path, or a revert. Unpublished/WIP/preview (`PREVIEW/*`) props and exports can change or be removed directly without compatibility fallbacks (use a `patch` changeset).
 - New props and exports follow nearby naming and defaults. Prefer additive changes. Colors go through `data-color`, not new `variant` values.
 - Public props and components have JSDoc. `@default` and `@example` match behavior.
 
@@ -62,7 +62,7 @@ Skip anything Oxlint, Stylelint, Prettier or TypeScript already catches. No prai
 - Semantic HTML first. Correct roles, accessible names and states.
 - Full keyboard support, logical focus order, focus returned after close, visible `:focus-visible`.
 - Works in `forced-colors`, dark theme and at 200% zoom. Motion relies on the global `prefers-reduced-motion` handling.
-- User-facing strings use `useI18n`, with keys in `nb`, `nn` and `en` under `@navikt/core/react/src/utils/i18n/locales/`.
+- User-facing strings use `useI18n`, with keys in `nb`, `nn` and `en` under `@navikt/core/react/src/utils/i18n/locales/` for stable components, or `@navikt/core/react/src/utils/i18n/i18n.internal.ts` for unpublished/WIP/preview components.
 - Review only the interaction pattern in scope; do not apply modal focus or dismissal rules to unrelated popup patterns. Check changed accessible names and relationships against their rendered targets.
 
 ### Wiring (🔴 for new public components)

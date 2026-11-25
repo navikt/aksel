@@ -109,5 +109,6 @@ Stop when every behavior and type surface touched by the change has a passing ch
 
 ## 6. Report gaps and issues
 
-- If no issues found, just report "All tests passed."
-- If issues are found, provide a clear description of the problem, the steps to reproduce it, and any relevant context or logs.
+- If all checks pass, list each command run with its result concisely (or `All checks passed` with the commands when no full report is needed).
+- If checks were not run (e.g. missing browser or secret), state which command was skipped and why.
+- If issues are found, provide a clear description of the problem, the failing command or steps to reproduce it, and relevant logs.
