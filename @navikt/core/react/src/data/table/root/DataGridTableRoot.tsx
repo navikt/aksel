@@ -6,12 +6,14 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useOptionalDataGridPaginationContext } from "../../../data-grid/plugins/pagination/context/DataGridPagination.context";
 import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
 import { useId } from "../../../utils-external";
 import { Slot } from "../../../utils/components/slot/Slot";
 import { cl } from "../../../utils/helpers";
 import { useMergeRefs } from "../../../utils/hooks";
+import { useI18n } from "../../../utils/i18n/i18n.hooks";
 import { DataTableBaseCell } from "../base-cell/DataTableBaseCell";
 import { DataTableColumnHeader } from "../column-header/DataTableColumnHeader";
 import { DataTableDetailsPanelRow } from "../details-panel-row/DataTableDetailsPanelRow";
@@ -24,6 +26,7 @@ import {
 } from "../hooks/useTableDetailsPanel";
 import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
+import { useScrollTopOnPageChange } from "../hooks/useTablePagination";
 import { useTableSelection } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
@@ -162,11 +165,7 @@ const DataGridTableInternal = forwardRef<
       stickyHeader = true,
       onRowAction,
       emptyContent,
-      loadingContent = {
-        variant: "skeleton",
-        rows: 5,
-        label: "Laster innhold",
-      }, // TODO translate label
+      loadingContent,
       detailsPanel,
       subRows,
       sorting,
@@ -183,8 +182,42 @@ const DataGridTableInternal = forwardRef<
       isLoading,
       tableSettings,
     } = useDataGridContext();
+    const pagination = useOptionalDataGridPaginationContext();
+    const translate = useI18n("DataGrid");
+    const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
     const sortingState = useTableSort(sorting);
+
+    useScrollTopOnPageChange({
+      sortState: sortingState.sortState,
+      scrollWrapperRef,
+    });
+
+    const defaultSkeletonRows =
+      pagination?.pageSize === undefined
+        ? 5
+        : Math.min(pagination.pageSize, 25);
+    const defaultLoadingLabel = translate("loading");
+
+    const resolvedLoadingContent: DataTableLoadingConfig =
+      loadingContent === undefined
+        ? {
+            variant: "skeleton",
+            rows: defaultSkeletonRows,
+            label: defaultLoadingLabel,
+          }
+        : loadingContent.variant === "skeleton"
+          ? {
+              ...loadingContent,
+              rows: loadingContent.rows ?? defaultSkeletonRows,
+              label: loadingContent.label ?? defaultLoadingLabel,
+            }
+          : loadingContent.variant === "overlay"
+            ? {
+                ...loadingContent,
+                label: loadingContent.label ?? defaultLoadingLabel,
+              }
+            : loadingContent;
 
     const tableItems = useTableItems({
       items: data,
@@ -244,7 +277,7 @@ const DataGridTableInternal = forwardRef<
           stickyStart={stickyStart}
           stickyHeader={stickyHeader}
           tableId={tableId}
-          loading={loadingContent}
+          loading={resolvedLoadingContent}
           onRowAction={onRowAction}
           columns={columns}
           totalColSpan={totalColSpan}
@@ -259,6 +292,7 @@ const DataGridTableInternal = forwardRef<
                 tableSettings?.stickyColumns?.end
               )
             }
+            scrollWrapperRef={scrollWrapperRef}
           >
             <table
               {...rest}
@@ -334,14 +368,20 @@ function TableElementWrapper({
   children,
   enabled,
   hasStickyColumns,
+  scrollWrapperRef,
 }: {
   children: React.ReactNode;
   enabled: boolean;
   hasStickyColumns: boolean;
+  scrollWrapperRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
 
   const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const mergedScrollWrapperRefs = useMergeRefs(
+    tableWrapperRef,
+    scrollWrapperRef,
+  );
   const tableRef = useRef<HTMLTableElement>(null);
   const rafRef = useRef<number | null>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
@@ -413,7 +453,10 @@ function TableElementWrapper({
 
   return (
     <div className="aksel-data-table__border-wrapper">
-      <div ref={tableWrapperRef} className="aksel-data-table__scroll-wrapper">
+      <div
+        ref={mergedScrollWrapperRefs}
+        className="aksel-data-table__scroll-wrapper"
+      >
         <Slot
           tabIndex={tabIndex}
           /* @ts-expect-error Ref is not typed correctly to handle this case */
@@ -434,6 +477,8 @@ interface DataTableTBodyContentProps {
 function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
   const { columns, loading, totalColSpan, tableItems } = useDataTableContext();
   const { isLoading } = useDataGridContext();
+  const translate = useI18n("DataGrid");
+  const defaultLoadingLabel = translate("loading");
 
   if (isLoading && loading?.variant === "content") {
     return (
@@ -445,7 +490,7 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   if (isLoading && loading?.variant === "skeleton") {
     const rows = loading.rows ?? 5;
-    const label = loading.label ?? "Laster innhold"; // TODO translate
+    const label = loading.label ?? defaultLoadingLabel;
     return (
       <>
         <tr>
@@ -495,8 +540,8 @@ function DataTableTBodyContent({ emptyContent }: DataTableTBodyContentProps) {
 
   const overlayLabel =
     loading?.variant === "overlay"
-      ? (loading.label ?? "Laster innhold") // TODO translate
-      : "Laster innhold";
+      ? (loading.label ?? defaultLoadingLabel)
+      : defaultLoadingLabel;
 
   return (
     <>
