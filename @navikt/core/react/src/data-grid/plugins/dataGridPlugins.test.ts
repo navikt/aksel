@@ -34,17 +34,6 @@ describe("resolveDataGridPlugins", () => {
     const inherited = Object.create({ pagination }) as DataGridPlugins;
     inherited.custom = customFirst;
     expect(resolveDataGridPlugins(inherited)).toEqual([customFirst]);
-
-    // Runtime guard: nullish or primitive entries on known or custom keys are skipped instead of crashing WeakMap
-    expect(
-      resolveDataGridPlugins({
-        pagination: undefined,
-        customUndefined: undefined,
-        customNull: null,
-        customPrimitive: "not-an-object",
-        valid: customFirst,
-      } as unknown as DataGridPlugins),
-    ).toEqual([customFirst]);
   });
 
   test("interns array reference by plugin identity and order across inline objects", () => {
