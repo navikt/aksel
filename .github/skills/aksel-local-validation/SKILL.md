@@ -33,22 +33,22 @@ git ls-files --others --exclude-standard
 
 For each file, read its nearest `package.json`, `tsconfig.json`, test, story, and export surface before choosing commands.
 
-| Path                            | Workspace                  | Preferred package checks                                                           |
-| ------------------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
-| `@navikt/core/react/**`         | `@navikt/ds-react`         | `test` (Vitest + `tsc` type-check); `build` for export/type changes                |
-| `@navikt/core/css/**`           | `@navikt/ds-css`           | no `test` script: targeted `stylelint`, then `build` for imports/layers            |
-| `@navikt/core/tokens/**`        | `@navikt/ds-tokens`        | `test`, then `build` for generated output                                          |
-| `@navikt/core/tailwind/**`      | `@navikt/ds-tailwind`      | build `@navikt/ds-tokens` first, then `test` and `build`                           |
-| `@navikt/aksel-icons/**`        | `@navikt/aksel-icons`      | `test`; `build` for generation/export changes                                      |
-| `@navikt/aksel-stylelint/**`    | `@navikt/aksel-stylelint`  | `test`                                                                             |
-| `@navikt/aksel/**`              | `@navikt/aksel`            | `build` **before** `test` (`migrations.test.ts` reads `dist/`)                     |
-| `aksel.nav.no/website/**`       | `website`                  | `test`; `validate:eksempler` for examples/templates; avoid `build` (needs secrets) |
-| `aksel.nav.no/sanity-studio/**` | `aksel-sanity-studio`      | `type-check`, then `test` when behavior changes                                    |
-| `apps/playroom/**`              | `aksel-playroom`           | no `test` script: `sync-imports` when ds-react exports change                      |
-| `apps/mcp-server/**`            | `aksel-mcp`                | `test`, then `build`                                                               |
-| `apps/figma-icon-plugin/**`     | `aksel-icons-figma-plugin` | no `test` script: `build:plugin`                                                   |
-| `tooling/changelog/**`          | `aksel-changelog`          | `typecheck`                                                                        |
-| `tooling/analyzer/**`           | `aksel-analyzer`           | `test`                                                                             |
+| Path                            | Workspace                  | Preferred package checks                                                                                              |
+| ------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `@navikt/core/react/**`         | `@navikt/ds-react`         | `test` (Vitest + `tsc` type-check); `build` for export/type changes; `docgen:meta` for public prop/JSDoc/meta changes |
+| `@navikt/core/css/**`           | `@navikt/ds-css`           | no `test` script: targeted `stylelint`, then `build` for imports/layers                                               |
+| `@navikt/core/tokens/**`        | `@navikt/ds-tokens`        | `test`, then `build` for generated output                                                                             |
+| `@navikt/core/tailwind/**`      | `@navikt/ds-tailwind`      | build `@navikt/ds-tokens` first, then `test` and `build`                                                              |
+| `@navikt/aksel-icons/**`        | `@navikt/aksel-icons`      | `test`; `build` for generation/export changes                                                                         |
+| `@navikt/aksel-stylelint/**`    | `@navikt/aksel-stylelint`  | `test`                                                                                                                |
+| `@navikt/aksel/**`              | `@navikt/aksel`            | `build` **before** `test` (`migrations.test.ts` reads `dist/`)                                                        |
+| `aksel.nav.no/website/**`       | `website`                  | `test`; `validate:eksempler` for examples/templates; avoid `build` (needs secrets)                                    |
+| `aksel.nav.no/sanity-studio/**` | `aksel-sanity-studio`      | `type-check`, then `test` when behavior changes                                                                       |
+| `apps/playroom/**`              | `aksel-playroom`           | no `test` script: `sync-imports` when ds-react exports change                                                         |
+| `apps/mcp-server/**`            | `aksel-mcp`                | `test`, then `build`                                                                                                  |
+| `apps/figma-icon-plugin/**`     | `aksel-icons-figma-plugin` | no `test` script: `build:plugin`                                                                                      |
+| `tooling/changelog/**`          | `aksel-changelog`          | `typecheck`                                                                                                           |
+| `tooling/analyzer/**`           | `aksel-analyzer`           | `test`                                                                                                                |
 
 Read the current manifest before running a table command. A manifest is source of truth if scripts change.
 
@@ -59,6 +59,8 @@ Group only matching files:
 ```sh
 corepack yarn oxlint --deny-warnings <changed .ts/.tsx/.js/.jsx files>
 corepack yarn stylelint <changed .css files>
+corepack yarn prettier --check <changed files>
+corepack yarn lint:versions   # when package.json files change
 ```
 
 Do not pass unsupported file types to make a command appear comprehensive. Documentation-only changes need no code validation unless a documentation check exists.
@@ -87,9 +89,18 @@ If no suitable TypeScript command exists, report the gap. Do not substitute lint
 
 Run the closest test file or workspace test command supported by that package. For visual or interaction changes, include the nearest story and Storybook browser test required by repository instructions.
 
+Root `vitest.config.mts` only runs Storybook browser tests; `@navikt/ds-react` unit tests use `tests/vitest.config.mts` with `TZ=UTC`.
+
 Examples:
 
 ```sh
+# Targeted ds-react unit test (path relative to @navikt/core/react)
+corepack yarn workspace @navikt/ds-react cross-env TZ=UTC vitest run -c tests/vitest.config.mts src/<path/to/file.test.ts>
+
+# Targeted Storybook play test (repo root)
+corepack yarn storybook:test <path/to/X.tests.stories.tsx>
+
+# Full workspace suites
 corepack yarn workspace @navikt/ds-react test
 corepack yarn workspace website test
 corepack yarn workspace aksel-mcp test
@@ -106,3 +117,9 @@ Escalation order:
 5. root `lint`, `test`, or `boot` only for cross-workspace changes, shared configuration, generated public output, or a failure that requires broader evidence.
 
 Stop when every behavior and type surface touched by the change has a passing check. Report pre-existing or environment failures exactly; do not hide them with a weaker fallback.
+
+## 6. Report gaps and issues
+
+- If all checks pass, list each command run with its result concisely (or `All checks passed`).
+- If checks were not run (e.g. missing browser or secret), state which command was skipped and why.
+- If issues are found, provide a clear description of the problem, the failing command or steps to reproduce it, and relevant logs.
