@@ -11,9 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "^8.22.1",
-    "@navikt/ds-css": "^8.22.1",
-    "@navikt/ds-react": "^8.22.1",
+    "@navikt/aksel-icons": "^8.23.1",
+    "@navikt/ds-css": "^8.23.1",
+    "@navikt/ds-react": "^8.23.1",
     "fuse.js": "7.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1"
@@ -25,7 +25,7 @@
     "@types/node": "^24.10.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^6.2.1",
+    "@vitejs/plugin-react": "^6.3.0",
     "typescript": "6.0.3",
     "vite": "^8.3.5",
     "vite-plugin-singlefile": "^2.3.4"

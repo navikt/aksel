@@ -2,10 +2,17 @@
   "cssVariables.lookupFiles": ["@navikt/core/tokens/dist/tokens.css"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
     "**/.yarn/**": true,
-    "**/dist": true,
-    "**/esm": true,
-    "**/cjs": true
+    "**/dist/**": true,
+    "**/esm/**": true,
+    "**/cjs/**": true,
+    "**/lib/**": true,
+    "**/@navikt/aksel-icons/src/**": true,
+    "**/.next/**": true,
+    "**/storybook-static/**": true
   },
   "playwright.reuseBrowser": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",

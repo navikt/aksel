@@ -1,0 +1,160 @@
+import React, { useCallback, useRef, useState } from "react";
+import { Floating } from "../../../utils/components/floating/Floating";
+import { cl, createStrictContext } from "../../../utils/helpers";
+import { useEventCallback } from "../../../utils/hooks";
+import type { FormFieldProps } from "../../useFormField";
+import type { ComboboxOptionProps } from "../option/ComboboxOption";
+
+type HtmlAttributes = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  | "onChange"
+  | "defaultChecked"
+  | "autoCapitalize"
+  | "contentEditable"
+  | "enterKeyHint"
+  | "spellCheck"
+  | "inputMode"
+  | "autoCorrect"
+  | "autoSave"
+  | "color"
+  | "results"
+  | "security"
+  | "unselectable"
+  | "popover"
+  | "popoverTargetAction"
+  | "popoverTarget"
+>;
+
+/** Resolves the option type based on whether the parameter is a group or a single option */
+export type ResolveOption<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+> = T extends ComboboxOptionData
+  ? T
+  : T extends ComboboxGroupData<infer U>
+    ? U
+    : never;
+
+export type ComboboxOptionData = {
+  label: string;
+  value: string;
+};
+
+export type ComboboxGroupData<T extends ComboboxOptionData> = {
+  label: string;
+  id: string;
+  options: T[];
+};
+
+export interface ComboboxRootProps<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData> =
+    ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>
+  extends Pick<FormFieldProps, "disabled" | "size">, HtmlAttributes {
+  children: React.ReactNode;
+  /**
+   * Can be either an array of options ({@link ComboboxOptionData})
+   * or an array of groups ({@link ComboboxGroupData}) containing options.
+   *
+   * NB: It is not recommended to mix single options and groups, but if you do,
+   * put the single options first.
+   */
+  options: T[];
+  /**
+   * Value of the selected options.
+   */
+  value: ResolveOption<T>["value"][];
+  /**
+   * Called when an option is toggled.
+   * @param option The option that was toggled.
+   * @param isSelected The new selected state of the option.
+   */
+  onToggleOption: ComboboxOptionProps<ResolveOption<T>>["onToggleOption"];
+  /**
+   * Whether the combobox is open by default.
+   */
+  defaultOpen?: boolean;
+  /**
+   * Whether multiple options can be selected.
+   */
+  multiple?: boolean;
+}
+
+export interface ComboboxRootContextProps {
+  open: boolean;
+  setOpen: (newOpen: boolean) => void;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
+  options: ComboboxRootProps["options"];
+  /** Values of selected options */
+  value: ComboboxRootProps["value"];
+  /** Consumer callback */
+  onToggleOption: ComboboxRootProps["onToggleOption"];
+  size: Exclude<ComboboxRootProps["size"], undefined>;
+  disabled: ComboboxRootProps["disabled"];
+}
+
+export const {
+  Provider: ComboboxRootContextProvider,
+  useContext: useComboboxRootContext,
+} = createStrictContext<ComboboxRootContextProps>({
+  name: "ComboboxRootContext",
+  errorMessage: "The component must be used within <Combobox.Root>",
+});
+
+export function ComboboxRoot<
+  T extends ComboboxOptionData | ComboboxGroupData<ComboboxOptionData>,
+>({
+  children,
+  options,
+  value,
+  onToggleOption: originalOnToggleOption,
+  defaultOpen = false,
+  multiple = false,
+  size = "medium",
+  disabled,
+  className,
+  ...rest
+}: ComboboxRootProps<T>) {
+  const triggerRef = useRef<HTMLDivElement | null>(null);
+  const onToggleOption = useEventCallback(originalOnToggleOption);
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <div
+      {...rest}
+      className={cl("aksel-combo-box", className)}
+      data-size={size}
+      data-disabled={disabled}
+    >
+      <ComboboxRootContextProvider
+        open={open}
+        setOpen={useCallback((newOpen) => {
+          setOpen(newOpen);
+          if (!newOpen) {
+            // queueMicrotask is needed when closing with close button in Dialog
+            queueMicrotask(() => triggerRef.current?.focus());
+          }
+        }, [])}
+        triggerRef={triggerRef}
+        options={options}
+        value={value}
+        onToggleOption={useCallback(
+          (...args) => {
+            if (disabled) {
+              return;
+            }
+            (onToggleOption as ComboboxRootProps["onToggleOption"])(...args);
+            if (!multiple) {
+              setOpen(false);
+              triggerRef.current?.focus();
+            }
+          },
+          [onToggleOption, multiple, disabled],
+        )}
+        size={size}
+        disabled={disabled}
+      >
+        <Floating>{children}</Floating>
+      </ComboboxRootContextProvider>
+    </div>
+  );
+}

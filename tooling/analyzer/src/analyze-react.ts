@@ -17,6 +17,9 @@ type ExportPathConfig = {
   } | null;
 };
 
+/* Synthetic entry, not a real package export */
+const LOCALES_KEY = "i18n-locales";
+
 type ExportPathsConfig = Record<string, ExportPathConfig>;
 
 async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
@@ -94,6 +97,20 @@ async function analyzeReact(tarLocation: string): Promise<ExportPathsConfig> {
     reactConfig[name].exportedComponents = components;
     reactConfig[name].bundleSize = bundleSizes;
   }
+
+  /* Locales are excluded from component bundles, so track their size separately */
+  const localesFile = "esm/utils/i18n/locales/index.js";
+  const localesPath = await resolvePackagePath(
+    resolve(reactPackageDir, localesFile),
+  );
+  reactConfig[LOCALES_KEY] = {
+    ...createNewConfig(),
+    jsFile: localesFile,
+    bundleSize: await getBundleSize(
+      `import * as _mod from "${localesPath}";\nconsole.info(_mod);`,
+      { includeLocales: true },
+    ),
+  };
 
   return reactConfig;
 }

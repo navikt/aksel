@@ -68,7 +68,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
-          body-includes: Storybook demo
+          body-includes: Chromatic
 
       - name: Create or update comment
         if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]') && github.actor != 'dependabot[bot]'
@@ -77,11 +77,11 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}}) / [Chromatic](${{steps.chromatic_tests.outputs.url}})
-
+            ${{ steps.chromatic_tests.outputs.url != 'undefined' && format('## [Storybook demo]({0}) / [Chromatic]({1})', steps.chromatic_tests.outputs.storybookUrl, steps.chromatic_tests.outputs.url) || '## Chromatic skipped' }}
+             
             ${{ steps.chromatic_tests.outputs.changeCount > 0 && format('### 📝 Changes to review: {0}', steps.chromatic_tests.outputs.changeCount) || '' }}
             ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### ❌ Stories with errors: {0}', steps.chromatic_tests.outputs.errorCount) || '' }}
             ${{ steps.chromatic_tests.outputs.interactionTestFailuresCount > 0 && format('### ❌ Failed interaction tests: {0}', steps.chromatic_tests.outputs.interactionTestFailuresCount) || '' }}
 
-            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} components | ${{steps.chromatic_tests.outputs.specCount}} stories
+            [${{steps.vars.outputs.sha_short}}](https://github.com/navikt/aksel/commit/${{steps.vars.outputs.sha_short}}) | ${{steps.chromatic_tests.outputs.componentCount}} components | ${{steps.chromatic_tests.outputs.specCount}} stories | ${{steps.chromatic_tests.outputs.actualCaptureCount}} captured snapshots | ${{steps.chromatic_tests.outputs.inheritedCaptureCount}} inherited snapshots
           edit-mode: replace

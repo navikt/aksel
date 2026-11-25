@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Button } from "../button";
+import { UNSAFE_Combobox } from "../legacy/combobox";
 import { HStack, VStack } from "../primitives/stack";
 import { Checkbox, CheckboxGroup } from "./checkbox";
-import { UNSAFE_Combobox } from "./combobox";
 import { Fieldset } from "./fieldset";
 import { FileUpload } from "./file-upload";
 import { Radio, RadioGroup } from "./radio";

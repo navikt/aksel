@@ -11,7 +11,7 @@ export const locations: DocumentLocationResolver = (params, context) => {
   const doc$ = context.documentStore.listenQuery(
     `*[(_type != $type && references($id)) || _id == $id && _type in $articleTypes ]{_type, slug, title, heading, "tema": undertema[]->tema->title}`,
     { id: params.id, type: params.type, articleTypes: validTypes },
-    { perspective: "previewDrafts" },
+    { perspective: "drafts" },
   ) as Observable<
     | {
         _type: string;

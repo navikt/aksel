@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 8.23.1
+
+### Patch Changes
+
+- DataGrid: Change `overflow:hidden` to `min-height:0` and `min-width:0` on root ([#5568](https://github.com/navikt/aksel/pull/5568))
+
+## 8.23.0
+
 ## 8.22.1
 
 ### Patch Changes

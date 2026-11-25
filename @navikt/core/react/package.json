@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "8.22.1",
+  "version": "8.23.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -581,12 +581,12 @@
     },
     "./Combobox": {
       "import": {
-        "types": "./esm/form/combobox/index.d.ts",
-        "default": "./esm/form/combobox/index.js"
+        "types": "./esm/legacy/combobox/index.d.ts",
+        "default": "./esm/legacy/combobox/index.js"
       },
       "require": {
-        "types": "./cjs/form/combobox/index.d.ts",
-        "default": "./cjs/form/combobox/index.js"
+        "types": "./cjs/legacy/combobox/index.d.ts",
+        "default": "./cjs/legacy/combobox/index.js"
       }
     },
     "./ConfirmationPanel": {
@@ -798,8 +798,8 @@
   "dependencies": {
     "@floating-ui/react": "0.27.20",
     "@floating-ui/react-dom": "^2.1.9",
-    "@navikt/aksel-icons": "^8.22.1",
-    "@navikt/ds-tokens": "^8.22.1",
+    "@navikt/aksel-icons": "^8.23.1",
+    "@navikt/ds-tokens": "^8.23.1",
     "date-fns": "^4.0.0",
     "react-day-picker": "10.0.2"
   },
@@ -824,7 +824,7 @@
     "tsc-alias": "1.9.10",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",
-    "vitest": "5.0.5"
+    "vitest": "5.1.0"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18 || ^19",
