@@ -4,12 +4,7 @@ import { DataGrid } from "..";
 import { Pagination } from "../../pagination";
 import { HStack, VStack } from "../../primitives/stack";
 import { Detail } from "../../typography";
-import {
-  type DataGridPlugin,
-  type DataGridPlugins,
-  applyTableContext,
-  resolveDataGridPlugins,
-} from "./dataGridPlugins";
+import type { DataGridPlugin } from "./dataGridPlugins";
 
 type InvoiceRow = {
   id: string;
@@ -91,26 +86,6 @@ const DEMO_COLUMNS: DataGrid.Columns<InvoiceRow> = [
 ];
 
 /**
- * Preview of how `DataGrid` will integrate the plugin API.
- * Only two lines are added around `DataGrid`'s children:
- * 1. `resolveDataGridPlugins(userPlugins)` to order and stabilize plugins
- * 2. `applyTableContext(plugins, children)` to wrap the grid output
- */
-function PluginAwareDataGrid<RowT>({
-  plugins: userPlugins,
-  children,
-  ...dataGridProps
-}: DataGrid.Props<RowT> & { plugins?: DataGridPlugins }) {
-  const plugins = resolveDataGridPlugins(userPlugins);
-
-  return (
-    <DataGrid {...dataGridProps}>
-      {applyTableContext(plugins, children)}
-    </DataGrid>
-  );
-}
-
-/**
  * Example first-party plugin hook.
  * The consumer owns pagination state; the hook returns a memoized `DataGridPlugin`
  * that wraps the table with Aksel's `<Pagination />`.
@@ -187,14 +162,14 @@ export const PaginationPlugin: Story = {
     );
 
     return (
-      <PluginAwareDataGrid
+      <DataGrid
         columns={DEMO_COLUMNS}
         data={pageRows}
         getRowId={(row) => row.id}
         plugins={{ pagination: paginationPlugin }}
       >
         <DataGrid.Table />
-      </PluginAwareDataGrid>
+      </DataGrid>
     );
   },
 };

@@ -1,6 +1,6 @@
 type DataGridPaginationPosition = "below" | "above" | "both" | "none";
 
-type DataGridPaginationAlign = "start" | "center" | "end";
+type DataGridPaginationAlign = "start" | "end";
 
 /** Known total row count, or cursor-style unknown total via `hasNextPage`. */
 type DataGridPaginationTotal =

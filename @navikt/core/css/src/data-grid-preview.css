@@ -785,10 +785,6 @@ html[data-dragging-cursor="true"] *::after {
     justify-content: flex-start;
   }
 
-  &[data-align="center"] {
-    justify-content: center;
-  }
-
   &[data-align="end"] {
     justify-content: flex-end;
   }
