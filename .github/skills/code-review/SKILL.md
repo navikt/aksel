@@ -47,7 +47,7 @@ Skip anything Oxlint, Stylelint, Prettier or TypeScript already catches. No prai
 
 ### Public API (🔴)
 
-- Removed or renamed prop, export, CSS class, token or CLI command, or a changed default, on a stable published API → needs a `major` changeset, a deprecation path, or a revert. Unpublished/WIP/preview (`PREVIEW/*`) props and exports can change or be removed directly without compatibility fallbacks (use a `patch` changeset).
+- Removed or renamed prop, export, CSS class, token or CLI command, or a changed default, on a stable published API → needs a `major` changeset, a deprecation path, or a revert. Unpublished/WIP props and exports can change or be removed directly without compatibility fallbacks (use a `patch` changeset).
 - New props and exports follow nearby naming and defaults. Prefer additive changes. Colors go through `data-color`, not new `variant` values.
 - Public props and components have JSDoc. `@default` and `@example` match behavior.
 
