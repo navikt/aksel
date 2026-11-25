@@ -79,6 +79,7 @@ interface CoachBaseProps {
   onShowTourChange?: (show: boolean) => void;
   /**
    * Hides the tour and its marks without hiding the elements they are anchored to.
+   * Note: when true it will not reset the current step index.
    * @default false
    */
   disableTour?: boolean;

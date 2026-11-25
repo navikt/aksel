@@ -18,7 +18,7 @@ export const KomponentArtikkel = defineType({
   name: "komponent_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Komponenter", 6),
+  ...artikkelPreview("Komponenter"),
   renderMembers: (members) => {
     return [
       ...members,

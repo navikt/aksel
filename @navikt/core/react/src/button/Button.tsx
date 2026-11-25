@@ -89,7 +89,12 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         disabled || loading ? omit(rest, ["href"]) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (e.key === " " && !disabled && !loading) {
+        if (
+          e.key === " " &&
+          e.currentTarget.tagName !== "BUTTON" &&
+          !disabled &&
+          !loading
+        ) {
           e.currentTarget.click();
         }
       };

@@ -579,9 +579,15 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
 
 export const DisableTour: StoryObj<typeof Coach> = {
   render: (props) => {
+    const [open, setOpen] = useState(false);
+    const [step, setStep] = useState(0);
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach
+          showTour={open}
+          onShowTourChange={setOpen}
+          currentStep={step}
+          onStepChange={setStep}
           disableTour={props.disableTour}
           steps={[
             {

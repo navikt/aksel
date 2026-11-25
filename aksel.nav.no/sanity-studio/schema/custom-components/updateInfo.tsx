@@ -1,4 +1,4 @@
-import { differenceInDays, differenceInMonths, format } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { type ComponentType, useState } from "react";
 import {
   type ObjectFieldProps,
@@ -8,8 +8,11 @@ import {
   useFormValue,
 } from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { BodyLong, Box, Button, InfoCard } from "@navikt/ds-react";
-import { SANITY_API_VERSION } from "../../sanity.env";
+import { BodyLong, Button, InfoCard } from "@navikt/ds-react";
+import {
+  DEFAULT_OUTDATED_THRESHOLD,
+  SANITY_API_VERSION,
+} from "../../sanity.env";
 
 const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
   const { onChange, readOnly } = props;
@@ -45,24 +48,20 @@ const UpdateInfoInput: ComponentType<ObjectInputProps> = (props) => {
   };
 
   return (
-    <Box marginBlock="space-16 space-0">
-      <Button
-        size="small"
-        variant="primary"
-        loading={updating}
-        onClick={handleUpdate}
-        disabled={readOnly}
-        data-color="neutral"
-      >
-        Oppdater godkjenningsdato
-      </Button>
-    </Box>
+    <Button
+      size="small"
+      variant="primary"
+      loading={updating}
+      onClick={handleUpdate}
+      disabled={readOnly}
+      data-color="neutral"
+    >
+      Oppdater godkjenningsdato
+    </Button>
   );
 };
 
 const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
-  const articleType = useFormValue(["_type"]);
-
   const verified = useFormValue(["updateInfo", "lastVerified"]);
 
   if (typeof verified !== "string") {
@@ -70,12 +69,10 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   }
 
   // oxlint-disable-next-line react/purity -- Age relative to now is intended.
-  const diff = differenceInMonths(new Date(), new Date(verified));
-  // oxlint-disable-next-line react/purity -- Age relative to now is intended.
   const diffInDays = differenceInDays(new Date(), new Date(verified));
-  const outDated = diff >= (articleType === "aksel_artikkel" ? 12 : 6);
+  const outdated = diffInDays >= DEFAULT_OUTDATED_THRESHOLD;
 
-  if (!outDated) {
+  if (!outdated) {
     return null;
   }
 
@@ -91,10 +88,8 @@ const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
           Artikkelen trenger ny godkjenning. Les gjennom og oppdater innholdet,
           for så å oppdatere godkjenningsdatoen.
         </BodyLong>
-        <BodyLong size="small">
-          {articleType === "aksel_artikkel"
-            ? "En God praksis-artikkel regnes som utdatert etter 12 måneder."
-            : "En Designsystem-artikkel regnes som utdatert etter 6 måneder."}
+        <BodyLong size="small" spacing>
+          En artikkel regnes som utdatert etter 12 måneder.
         </BodyLong>
         {props.children}
       </InfoCard.Content>

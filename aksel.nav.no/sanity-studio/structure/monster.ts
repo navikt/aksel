@@ -19,7 +19,7 @@ export function monsterStructure(S: StructureBuilder) {
           landingssideItem(S, "templates_landingsside"),
           S.divider(),
           listDraftArticles(S, "templates_artikkel"),
-          listOutdatedArticles(S, "templates_artikkel", 180),
+          listOutdatedArticles(S, "templates_artikkel"),
 
           S.divider(),
           ...categoryPanes(

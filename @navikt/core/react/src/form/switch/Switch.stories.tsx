@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
+import { Fieldset } from "../fieldset";
 import Switch from "./Switch";
 
 export default {
@@ -125,6 +126,15 @@ export const Readonly: Story = {
   parameters: { controls: { disable: true } },
 };
 
+export const ReadonlyGroup: Story = {
+  render: () => (
+    <Fieldset legend="Notifikasjoner" readOnly>
+      <Switch defaultChecked>SMS</Switch>
+      <Switch>E-post</Switch>
+    </Fieldset>
+  ),
+};
+
 export const ColorRole: Story = {
   render: () => (
     <div className="colgap" data-color="brand-magenta">
@@ -158,6 +168,7 @@ export const Chromatic = renderStoriesForChromatic(
     Disabled,
     HideLabel,
     Readonly,
+    ReadonlyGroup,
     ColorRole,
   },
   Switch,

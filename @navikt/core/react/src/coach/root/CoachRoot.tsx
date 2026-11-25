@@ -191,13 +191,6 @@ const CoachRoot = (props: CoachProps) => {
     }
   }, [showTour, currentStep?.type, currentStep?.id, anchorRef]);
 
-  useClientLayoutEffect(() => {
-    // Reset uncontrolled step when the tour is hidden
-    if (!showTour) {
-      setUncontrolledStep(defaultStep);
-    }
-  }, [defaultStep, showTour]);
-
   // Get the size and width of the current step, with default values if not specified
   const getStepSize = () => currentStep?.size ?? "medium";
   const getStepWidth = () => currentStep?.width ?? "medium";
@@ -222,7 +215,11 @@ const CoachRoot = (props: CoachProps) => {
     [onShowTourChange, showTourControlled],
   );
 
-  const endTour = useCallback(() => setShowTour(false), [setShowTour]);
+  const endTour = useCallback(() => {
+    setShowTour(false);
+    setStep(defaultStep);
+    // TODO:C Reset uncontrolled only or controlled too?
+  }, [setShowTour, setStep, defaultStep]);
 
   const goToNextStep = useCallback(() => {
     if (activeStepIndex === steps.length - 1) {
@@ -308,15 +305,15 @@ const CoachRoot = (props: CoachProps) => {
     }
   }, [showTour, currentStep?.type, getInitialFocus, stepElement]);
 
-  /*const disableTourRef = useRef(false);
+  const disableTourRef = useRef(false);
   useEffect(() => {
     const tourWasDisabled = disableTour && !disableTourRef.current;
     disableTourRef.current = disableTour;
 
     if (tourWasDisabled) {
-      endTour();
+      setShowTour(false);
     }
-  }, [disableTour, endTour]);*/
+  }, [disableTour, setShowTour]);
 
   // Default content for a step
   const defaultStepContent = (

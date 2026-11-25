@@ -8,7 +8,7 @@ const metadata: ComponentMetadata = {
     "Search.Button": SearchButton,
   },
   keywords: ["search", "søk", "input", "filter", "find"],
-  related: ["Combobox"],
+  related: ["Combobox-legacy"],
 };
 
 export { metadata };

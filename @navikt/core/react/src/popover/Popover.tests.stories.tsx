@@ -1,6 +1,8 @@
 import type { StoryObj } from "@storybook/react-vite";
 import React, { useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { createPortal } from "react-dom";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { Dialog, DialogPopup, DialogTitle, DialogTrigger } from "../dialog";
 import { Popover } from "./root/PopoverRoot";
 
 export default {
@@ -99,6 +101,283 @@ export const KeepOpenOnPopoverClick: Story = {
     await userEvent.click(popover);
     expect(popover).toBeVisible();
   },
+};
+
+function tick() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 0));
+}
+
+function ShadowFocusTestRender() {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button type="button" ref={setAnchorEl} onClick={() => setOpen(true)}>
+        Open popover
+      </button>
+      <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
+        <button type="button">Inside popover</button>
+        {open &&
+          anchorEl &&
+          createPortal(
+            <button type="button">Portaled popover content</button>,
+            anchorEl.ownerDocument.body,
+          )}
+      </Popover>
+      <button type="button">Another button</button>
+    </div>
+  );
+}
+
+export const DismissOnFocusLeavingShadowPopover: Story = {
+  globals: { webComponentWrapper: "open" },
+  render: function NestedShadowPopover() {
+    const [root, setRoot] = useState<ShadowRoot | null>(null);
+    const attachRoot = React.useCallback((host: HTMLDivElement | null) => {
+      if (host) {
+        setRoot(host.shadowRoot ?? host.attachShadow({ mode: "open" }));
+      }
+    }, []);
+
+    return (
+      <>
+        <div ref={attachRoot} data-testid="inner-host" />
+        {root && createPortal(<ShadowFocusTestRender />, root)}
+        <button type="button">Enclosing root button</button>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const outerRoot = canvasElement.firstElementChild?.shadowRoot;
+    const outerMount = outerRoot?.querySelector("div");
+    if (!outerRoot || !outerMount) {
+      throw new Error("Expected the open shadow root Storybook decorator");
+    }
+
+    const outerCanvas = within(outerMount);
+    const innerRoot = outerCanvas.getByTestId("inner-host").shadowRoot;
+    const innerMount = innerRoot?.querySelector("div");
+    if (!innerRoot || !innerMount) {
+      throw new Error("Expected a popover in the nested shadow root");
+    }
+
+    const canvas = within(innerMount);
+    const anchor = canvas.getByRole("button", { name: "Open popover" });
+    const sibling = canvas.getByRole("button", { name: "Another button" });
+    const enclosingButton = outerCanvas.getByRole("button", {
+      name: "Enclosing root button",
+    });
+
+    await userEvent.click(anchor);
+    const inside = canvas.getByRole("button", { name: "Inside popover" });
+    inside.focus();
+    expect(innerRoot.activeElement).toBe(inside);
+
+    // Portaled content and anchor keep the popover open.
+    const portaled = within(canvasElement.ownerDocument.body).getByRole(
+      "button",
+      { name: "Portaled popover content" },
+    );
+    portaled.focus();
+    await tick();
+    expect(portaled).toHaveFocus();
+    expect(inside).toBeVisible();
+
+    anchor.focus();
+    await tick();
+    expect(innerRoot.activeElement).toBe(anchor);
+    expect(inside).toBeVisible();
+
+    // Moving focus to a sibling in the same shadow root closes the popover.
+    sibling.focus();
+    expect(innerRoot.activeElement).toBe(sibling);
+    await waitFor(() =>
+      expect(
+        canvas.queryByRole("button", { name: "Inside popover" }),
+      ).not.toBeInTheDocument(),
+    );
+
+    // Moving focus to an enclosing shadow root closes the popover.
+    await userEvent.click(anchor);
+    canvas.getByRole("button", { name: "Inside popover" }).focus();
+    await tick();
+    enclosingButton.focus();
+    await waitFor(() =>
+      expect(
+        canvas.queryByRole("button", { name: "Inside popover" }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(outerRoot.activeElement).toBe(enclosingButton);
+  },
+};
+
+function FocusScenarioRender({
+  onClose,
+  children,
+}: {
+  onClose?: () => void;
+  children?: React.ReactNode;
+}) {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button type="button">Before</button>
+      <button
+        type="button"
+        ref={setAnchorEl}
+        aria-expanded={open}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Trigger
+      </button>
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => {
+          onClose?.();
+          setOpen(false);
+        }}
+      >
+        <Popover.Content>
+          <button type="button">Inside</button>
+          {children}
+        </Popover.Content>
+      </Popover>
+      <button type="button">After</button>
+    </div>
+  );
+}
+
+function getFocusScenario(canvasElement: HTMLElement) {
+  const canvas = within(canvasElement);
+  const trigger = canvas.getByRole("button", { name: "Trigger" });
+  return {
+    canvas,
+    before: canvas.getByRole("button", { name: "Before" }),
+    trigger,
+    after: canvas.getByRole("button", { name: "After" }),
+    openWithKeyboard: async () => {
+      trigger.focus();
+      await userEvent.keyboard("{Enter}");
+      expect(trigger).toHaveAttribute("aria-expanded", "true");
+    },
+    expectClosed: () =>
+      waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "false")),
+  };
+}
+
+function SelfRemovingButton() {
+  const [visible, setVisible] = useState(true);
+  return visible ? (
+    <button type="button" onClick={() => setVisible(false)}>
+      Remove me
+    </button>
+  ) : null;
+}
+
+export const FocusOutside: Story = {
+  render: (args) => (
+    <FocusScenarioRender onClose={args.onClose}>
+      <SelfRemovingButton />
+      <iframe title="Embedded" srcDoc="<button>Inside frame</button>" />
+      {createPortal(<button type="button">Portaled</button>, document.body)}
+    </FocusScenarioRender>
+  ),
+  play: async ({ args, canvasElement }) => {
+    const { canvas, before, trigger, after, openWithKeyboard, expectClosed } =
+      getFocusScenario(canvasElement);
+
+    // Tabbing back to trigger keeps open; tabbing past it closes.
+    await openWithKeyboard();
+    await userEvent.tab();
+    expect(canvas.getByRole("button", { name: "Inside" })).toHaveFocus();
+    await userEvent.tab({ shift: true });
+    expect(trigger).toHaveFocus();
+    await tick();
+    expect(args.onClose).not.toHaveBeenCalled();
+
+    await userEvent.tab({ shift: true });
+    expect(before).toHaveFocus();
+    await expectClosed();
+    expect(args.onClose).toHaveBeenCalledOnce();
+
+    // Portal, iframe, and removed focused content keep open; outside focus closes.
+    await openWithKeyboard();
+    within(document.body).getByRole("button", { name: "Portaled" }).focus();
+    await tick();
+    canvas.getByTitle("Embedded").focus();
+    await tick();
+    canvas.getByRole("button", { name: "Remove me" }).focus();
+    await userEvent.keyboard("{Enter}");
+    await waitFor(() =>
+      expect(
+        canvas.queryByRole("button", { name: "Remove me" }),
+      ).not.toBeInTheDocument(),
+    );
+    await tick();
+    expect(args.onClose).toHaveBeenCalledOnce();
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    after.focus();
+    await expectClosed();
+    expect(args.onClose).toHaveBeenCalledTimes(2);
+  },
+  args: { onClose: fn() },
+};
+
+export const KeepOpenWhileNestedDialogIsOpen: Story = {
+  render: (args) => (
+    <FocusScenarioRender onClose={args.onClose}>
+      <Dialog>
+        <DialogTrigger>
+          <button type="button">Open dialog</button>
+        </DialogTrigger>
+        <DialogPopup aria-labelledby="nested-dialog-title">
+          <DialogTitle id="nested-dialog-title">Nested dialog</DialogTitle>
+          <button type="button">Dialog button</button>
+        </DialogPopup>
+      </Dialog>
+    </FocusScenarioRender>
+  ),
+  beforeEach: () => {
+    globalThis.AKSEL_NO_EXIT_ANIMATIONS = true;
+    return () => {
+      globalThis.AKSEL_NO_EXIT_ANIMATIONS = false;
+    };
+  },
+  play: async ({ args, canvasElement }) => {
+    const { canvas, trigger, openWithKeyboard, expectClosed } =
+      getFocusScenario(canvasElement);
+    const page = within(document.body);
+
+    await openWithKeyboard();
+    const dialogTrigger = canvas.getByRole("button", { name: "Open dialog" });
+    dialogTrigger.focus();
+    await userEvent.keyboard("{Enter}");
+
+    const dialog = await page.findByRole("dialog", { name: "Nested dialog" });
+    await waitFor(() => expect(dialog).toHaveFocus());
+    await userEvent.tab();
+    expect(page.getByRole("button", { name: "Dialog button" })).toHaveFocus();
+    await userEvent.tab();
+    await userEvent.tab({ shift: true });
+    await tick();
+    expect(args.onClose).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(dialog).not.toBeInTheDocument());
+    await waitFor(() => expect(dialogTrigger).toHaveFocus());
+    await tick();
+    expect(args.onClose).not.toHaveBeenCalled();
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+    await userEvent.keyboard("{Escape}");
+    await expectClosed();
+  },
+  args: { onClose: fn() },
 };
 
 function PopoverPlacementTestRender({

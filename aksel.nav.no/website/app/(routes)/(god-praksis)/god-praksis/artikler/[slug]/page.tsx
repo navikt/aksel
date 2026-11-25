@@ -1,4 +1,5 @@
-import { differenceInMonths, isSameDay } from "date-fns";
+import { DEFAULT_OUTDATED_THRESHOLD } from "aksel-sanity-studio/env";
+import { differenceInDays, isSameDay } from "date-fns";
 import type { Metadata } from "next";
 import { type PortableTextBlock, stegaClean } from "next-sanity";
 import { draftMode } from "next/headers";
@@ -177,11 +178,11 @@ async function CachedArticle({
     pageData?.updateInfo?.lastVerified ??
     pageData?.publishedAt ??
     pageData?._updatedAt;
-
   // oxlint-disable-next-line react/purity -- Server Component, rendered once per request.
-  const outdated = differenceInMonths(new Date(), new Date(verifiedDate)) >= 12;
-  const writers = getValidRenderArray(pageData.writers);
+  const diffInDays = differenceInDays(new Date(), new Date(verifiedDate));
+  const outdated = diffInDays >= DEFAULT_OUTDATED_THRESHOLD;
 
+  const writers = getValidRenderArray(pageData.writers);
   const undertema = getValidRenderArray(pageData.undertema);
   const relevanteArtikler = getValidRenderArray(pageData.relevante_artikler);
 
