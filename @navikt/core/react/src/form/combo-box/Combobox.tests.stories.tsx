@@ -103,11 +103,11 @@ FocusWithRef.play = async ({ canvasElement }) => {
 };
 
 export const FocusAfterClose = () => (
-  <div>
+  <>
     <button type="button">Knapp før</button>
     <BaseCombobox />
     <button type="button">Knapp etter</button>
-  </div>
+  </>
 );
 FocusAfterClose.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
