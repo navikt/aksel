@@ -59,11 +59,9 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button ref={createRef}>Create</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon>
+          <Button ref={createRef}>Create</Button>
+        </Coach.Beacon>
       </Coach>
     </HStack>
   );
@@ -93,11 +91,9 @@ export const MissingAnchor: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button ref={anchorRef}>Create</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon>
+        <Button ref={anchorRef}>Create</Button>
+      </Coach.Beacon>
     </Coach>
   );
 };
@@ -121,11 +117,9 @@ export const CoachDialog: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button>Next step</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon>
+          <Button>Next step</Button>
+        </Coach.Beacon>
       </Coach>
     </HStack>
   );
@@ -190,11 +184,9 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button ref={dashboardRef}>Dashboard</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon>
+          <Button ref={dashboardRef}>Dashboard</Button>
+        </Coach.Beacon>
       </Coach>
       <HStack justify="end" width="100%">
         <Button ref={settingsRef}>Settings</Button>
@@ -234,11 +226,9 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
           },
         ]}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button ref={buttonRef}>Button</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon>
+          <Button ref={buttonRef}>Button</Button>
+        </Coach.Beacon>
       </Coach>
     );
   },
@@ -303,11 +293,9 @@ export const RenderStep: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button>Feature</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon>
+        <Button>Feature</Button>
+      </Coach.Beacon>
     </Coach>
   );
 };
@@ -327,94 +315,82 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach type="dialog" title="Explore the page">
-          <Coach.Trigger>
-            <Coach.Beacon offset={props.offset}>
-              <ToggleGroup defaultValue="lest" onChange={console.info}>
-                <ToggleGroup.Item
-                  value="ulest"
-                  icon={<EnvelopeClosedIcon aria-hidden />}
-                  label="Ulest"
-                />
-                <ToggleGroup.Item
-                  value="lest"
-                  icon={<EnvelopeOpenIcon aria-hidden />}
-                  label="Lest"
-                />
-                <ToggleGroup.Item
-                  value="sendt"
-                  icon={<PaperplaneIcon aria-hidden />}
-                  label="Sendt"
-                />
-              </ToggleGroup>
-            </Coach.Beacon>
-          </Coach.Trigger>
-          <Coach.Trigger>
-            <Coach.Beacon offset={props.offset}>
-              <Button onClick={() => console.log("Button clicked")}>
-                Click me
-              </Button>
-            </Coach.Beacon>
-          </Coach.Trigger>
-          <Coach.Trigger>
-            <Coach.Beacon offset={props.offset}>
-              <Chips>
-                {options.map((option) => (
-                  <Chips.Toggle
-                    key={option}
-                    selected={selected.includes(option)}
-                    onClick={() =>
-                      setSelected(
-                        selected.includes(option)
-                          ? selected.filter((x) => x !== option)
-                          : [...selected, option],
-                      )
-                    }
-                  >
-                    {option}
-                  </Chips.Toggle>
-                ))}
-              </Chips>
-            </Coach.Beacon>
-          </Coach.Trigger>
-          <Coach.Trigger>
-            <Coach.Beacon offset={props.offset}>
-              <GuidePanel>
-                Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
-                går mer enn X måneder siden du søkte, skal du få brev om at
-                saksbehandlingstiden er forlenget.
-              </GuidePanel>
-            </Coach.Beacon>
-          </Coach.Trigger>
-          <Coach.Trigger>
-            <Coach.Beacon
-              onClick={() => console.log("Coach dot clicked")}
-              offset={props.offset}
-            >
-              <ExpansionCard aria-label="Demo med bare tittel">
-                <ExpansionCard.Header>
-                  <ExpansionCard.Title>
-                    Utbetaling av sykepenger
-                  </ExpansionCard.Title>
-                </ExpansionCard.Header>
-                <ExpansionCard.Content>
-                  <p>Her er innholdet i ekspansjonskortet.</p>
-                </ExpansionCard.Content>
-              </ExpansionCard>
-            </Coach.Beacon>
-          </Coach.Trigger>
-          <Coach.Trigger>
-            <Coach.Beacon offset={props.offset}>
-              <InfoCard data-color="info">
-                <InfoCard.Header>
-                  <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
-                </InfoCard.Header>
-                <InfoCard.Content>
-                  InfoCard brukes for å fremheve informasjon på en side, uten at
-                  det er like kritisk som en alert.
-                </InfoCard.Content>
-              </InfoCard>
-            </Coach.Beacon>
-          </Coach.Trigger>
+          <Coach.Beacon offset={props.offset}>
+            <ToggleGroup defaultValue="lest" onChange={console.info}>
+              <ToggleGroup.Item
+                value="ulest"
+                icon={<EnvelopeClosedIcon aria-hidden />}
+                label="Ulest"
+              />
+              <ToggleGroup.Item
+                value="lest"
+                icon={<EnvelopeOpenIcon aria-hidden />}
+                label="Lest"
+              />
+              <ToggleGroup.Item
+                value="sendt"
+                icon={<PaperplaneIcon aria-hidden />}
+                label="Sendt"
+              />
+            </ToggleGroup>
+          </Coach.Beacon>
+          <Coach.Beacon offset={props.offset}>
+            <Button onClick={() => console.log("Button clicked")}>
+              Click me
+            </Button>
+          </Coach.Beacon>
+          <Coach.Beacon offset={props.offset}>
+            <Chips>
+              {options.map((option) => (
+                <Chips.Toggle
+                  key={option}
+                  selected={selected.includes(option)}
+                  onClick={() =>
+                    setSelected(
+                      selected.includes(option)
+                        ? selected.filter((x) => x !== option)
+                        : [...selected, option],
+                    )
+                  }
+                >
+                  {option}
+                </Chips.Toggle>
+              ))}
+            </Chips>
+          </Coach.Beacon>
+          <Coach.Beacon offset={props.offset}>
+            <GuidePanel>
+              Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
+              går mer enn X måneder siden du søkte, skal du få brev om at
+              saksbehandlingstiden er forlenget.
+            </GuidePanel>
+          </Coach.Beacon>
+          <Coach.Beacon
+            onClick={() => console.log("Coach dot clicked")}
+            offset={props.offset}
+          >
+            <ExpansionCard aria-label="Demo med bare tittel">
+              <ExpansionCard.Header>
+                <ExpansionCard.Title>
+                  Utbetaling av sykepenger
+                </ExpansionCard.Title>
+              </ExpansionCard.Header>
+              <ExpansionCard.Content>
+                <p>Her er innholdet i ekspansjonskortet.</p>
+              </ExpansionCard.Content>
+            </ExpansionCard>
+          </Coach.Beacon>
+          <Coach.Beacon offset={props.offset}>
+            <InfoCard data-color="info">
+              <InfoCard.Header>
+                <InfoCard.Title>Fremhevet informasjon</InfoCard.Title>
+              </InfoCard.Header>
+              <InfoCard.Content>
+                InfoCard brukes for å fremheve informasjon på en side, uten at
+                det er like kritisk som en alert.
+              </InfoCard.Content>
+            </InfoCard>
+          </Coach.Beacon>
           <Coach.Beacon data-color="success" />
         </Coach>
       </VStack>
@@ -452,11 +428,9 @@ export const Translations: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button>Feature</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon>
+          <Button>Feature</Button>
+        </Coach.Beacon>
       </Coach>
     </Provider>
   );
@@ -475,11 +449,9 @@ export const SingleStepAnchor: StoryFn<typeof Coach> = () => {
       title="Enkeltsteg"
       description="Dette er en enkeltstående coachmark uten steps-prop."
     >
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button ref={buttonRef}>Feature</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon>
+        <Button ref={buttonRef}>Feature</Button>
+      </Coach.Beacon>
     </Coach>
   );
 };
@@ -508,11 +480,9 @@ export const SingleStepRenderStep: StoryFn<typeof Coach> = () => {
         </Coach.Step>
       )}
     >
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button ref={buttonRef}>Feature</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon>
+        <Button ref={buttonRef}>Feature</Button>
+      </Coach.Beacon>
     </Coach>
   );
 };
@@ -568,26 +538,18 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button ref={dashboardRef}>Dashboard</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon>
+        <Button ref={dashboardRef}>Dashboard</Button>
+      </Coach.Beacon>
     </Coach>
   );
 };
 
 export const DisableTour: StoryObj<typeof Coach> = {
   render: (props) => {
-    const [open, setOpen] = useState(false);
-    const [step, setStep] = useState(0);
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach
-          showTour={open}
-          onShowTourChange={setOpen}
-          currentStep={step}
-          onStepChange={setStep}
           disableTour={props.disableTour}
           steps={[
             {
@@ -608,13 +570,11 @@ export const DisableTour: StoryObj<typeof Coach> = {
             },
           ]}
         >
-          <Coach.Trigger>
-            <Coach.Beacon>
-              <Button onClick={() => console.log("Button clicked")}>
-                Click me
-              </Button>
-            </Coach.Beacon>
-          </Coach.Trigger>
+          <Coach.Beacon>
+            <Button onClick={() => console.log("Button clicked")}>
+              Click me
+            </Button>
+          </Coach.Beacon>
         </Coach>
       </VStack>
     );
@@ -625,4 +585,21 @@ export const DisableTour: StoryObj<typeof Coach> = {
   argTypes: {
     disableTour: { control: "boolean" },
   },
+};
+
+export const CoachTrigger: StoryFn<typeof Coach> = () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Coach
+      type="anchor"
+      anchorRef={buttonRef}
+      title="Åpne coach med trigger"
+      description="Denne coachen åpnes med trigger."
+    >
+      <Coach.Trigger>
+        <Button ref={buttonRef}>Open Coach</Button>
+      </Coach.Trigger>
+    </Coach>
+  );
 };

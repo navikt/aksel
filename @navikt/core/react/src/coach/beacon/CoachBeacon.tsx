@@ -1,10 +1,11 @@
 import React, { forwardRef } from "react";
 import type { AkselColor } from "../../types";
-import { cl } from "../../utils/helpers";
+import { cl, composeEventHandlers } from "../../utils/helpers";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import type { SpacingScale } from "../../utils/hooks/base-primitive/helpers/types";
 import { useCoachContext } from "../root/Coach.context";
 
-type CoachBeaconProps = React.ButtonHTMLAttributes<HTMLDivElement> &
+type CoachBeaconProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ({
     /**
      * Badge color.
@@ -42,18 +43,33 @@ type CoachBeaconProps = React.ButtonHTMLAttributes<HTMLDivElement> &
  * </Coach>
  * ```
  */
-const CoachBeacon = forwardRef<HTMLDivElement, CoachBeaconProps>(
+const CoachBeacon = forwardRef<HTMLButtonElement, CoachBeaconProps>(
   (
     {
       children,
       className,
+      onClick,
       "data-color": color = "danger",
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-hidden": ariaHidden,
       style,
       ...restProps
     },
     forwardedRef,
   ) => {
     const coach = useCoachContext(false);
+
+    if (coach === undefined && onClick === undefined) {
+      consoleWarning(
+        "Coach.Mark used outside of Coach and without onClick handler.",
+      );
+    }
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      coach?.openTour?.();
+    };
 
     const offset =
       "offset" in restProps ? (restProps.offset ?? "space-16") : "space-16";
@@ -69,17 +85,22 @@ const CoachBeacon = forwardRef<HTMLDivElement, CoachBeaconProps>(
       : style;
 
     const Beacon = (
-      <div
-        {...(!children ? restProps : {})}
-        ref={!children ? forwardedRef : undefined}
+      <button
+        type="button"
+        {...restProps}
+        ref={forwardedRef}
         data-color={color}
-        aria-hidden
+        aria-hidden={ariaHidden}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-haspopup="dialog"
         className={cl("aksel-coach__beacon-container", className)}
         style={containerStyle}
+        onClick={composeEventHandlers(onClick, handleClick)}
       >
         <div className="aksel-coach__beacon-pulse" />
         <div className="aksel-coach__beacon" />
-      </div>
+      </button>
     );
 
     // If tour is disabled, only render the children without the beacon
@@ -93,11 +114,7 @@ const CoachBeacon = forwardRef<HTMLDivElement, CoachBeaconProps>(
     }
 
     return (
-      <div
-        {...restProps}
-        ref={forwardedRef}
-        className="aksel-coach__beacon-anchor"
-      >
+      <div className="aksel-coach__beacon-anchor">
         {children}
         {Beacon}
       </div>

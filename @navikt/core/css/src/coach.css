@@ -91,6 +91,8 @@
   --__axc-coach__beacon-color: var(--ax-bg-strong);
 
   position: relative;
+  all: unset;
+  cursor: pointer;
   width: calc(var(--__axc-coach__beacon-size) * 2);
   height: calc(var(--__axc-coach__beacon-size) * 2);
   display: flex;
@@ -99,10 +101,14 @@
   border-radius: var(--ax-radius-full);
   inset-block-start: 0;
   inset-inline-end: 0;
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }
 
 .aksel-coach__beacon {
-  cursor: pointer;
   position: absolute;
   width: var(--__axc-coach__beacon-size);
   height: var(--__axc-coach__beacon-size);
