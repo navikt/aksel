@@ -106,3 +106,8 @@ Escalation order:
 5. root `lint`, `test`, or `boot` only for cross-workspace changes, shared configuration, generated public output, or a failure that requires broader evidence.
 
 Stop when every behavior and type surface touched by the change has a passing check. Report pre-existing or environment failures exactly; do not hide them with a weaker fallback.
+
+## 6. Report gaps and issues
+
+- If no issues found, just report "All tests passed."
+- If issues are found, provide a clear description of the problem, the steps to reproduce it, and any relevant context or logs.
