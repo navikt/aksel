@@ -10090,7 +10090,7 @@ __metadata:
     lodash: "npm:4.18.1"
     react: "npm:19.3.1"
     react-dom: "npm:19.3.1"
-    react-rx: "npm:^5.1.1"
+    react-rx: "npm:^7.1.0"
     rxjs: "npm:^7.8.2"
     sanity: "npm:6.17.0"
     sanity-plugin-iframe-pane: "npm:5.0.43"
@@ -20389,18 +20389,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-rx@npm:^5.1.1":
-  version: 5.1.2
-  resolution: "react-rx@npm:5.1.2"
-  dependencies:
-    use-effect-event: "npm:^2.0.3"
-  peerDependencies:
-    react: ^19.2
-    rxjs: ^7.2
-  checksum: 10/51a776cb626f648ba99c171eb88354345aeb5bd14472dbfb8a146afe25b64b3ee10502f98a1ce8c033080361277c4b35e1e1fd4210967abc783fc105b4675f81
-  languageName: node
-  linkType: hard
-
 "react-rx@npm:^7.0.1":
   version: 7.0.1
   resolution: "react-rx@npm:7.0.1"
@@ -20408,6 +20396,16 @@ __metadata:
     react: ^19.2
     rxjs: ^7.2
   checksum: 10/46c249cc79d352bfc8be6156625971b360d4f11257fadf1fb0cd929f5ab888f23316d6ad61e6be2c8d188aac229c17461451fc1941e7fe6ce0a1d07fe36471cd
+  languageName: node
+  linkType: hard
+
+"react-rx@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "react-rx@npm:7.1.0"
+  peerDependencies:
+    react: ^19.2
+    rxjs: ^7.2
+  checksum: 10/6c7945ea9c954a4cc353b35f1c495c285695f87a9e0472a307df77939898a5457465577729a19c11c013b13024482460c2e19c5f2df704526f83fa96847ae585
   languageName: node
   linkType: hard
 
@@ -23762,7 +23760,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-effect-event@npm:^2.0.3, use-effect-event@npm:^2.0.4":
+"use-effect-event@npm:^2.0.4":
   version: 2.0.4
   resolution: "use-effect-event@npm:2.0.4"
   peerDependencies:
