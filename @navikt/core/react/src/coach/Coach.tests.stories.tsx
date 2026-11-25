@@ -781,31 +781,29 @@ export const Beacon: StoryObj = {
   render: () => {
     return (
       <Coach type="dialog" title="Help" translations={translations}>
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button>Target action</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon aria-label="Show help">
+          <Button>Target action</Button>
+        </Coach.Beacon>
       </Coach>
     );
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(
-      canvasElement.querySelector(".aksel-coach__beacon-container"),
-    ).toHaveAttribute("aria-hidden", "true");
+    const beacon = canvas.getByRole("button", { name: "Show help" });
+    expect(beacon).toHaveAttribute("aria-haspopup", "dialog");
     await userEvent.click(
       canvas.getByRole("button", { name: "Target action" }),
     );
+    expect(canvas.queryByRole("dialog")).toBeNull();
+    await userEvent.click(beacon);
     const popup = await canvas.findByRole("dialog", { name: "Help" });
     const closeButtons = within(popup).getAllByRole("button", {
       name: "Close",
     });
     await userEvent.click(closeButtons[closeButtons.length - 1]);
     await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
-    await userEvent.click(
-      canvas.getByRole("button", { name: "Target action" }),
-    );
+    beacon.focus();
+    await userEvent.keyboard("{Enter}");
     await canvas.findByRole("dialog", { name: "Help" });
   },
 };
@@ -828,11 +826,9 @@ export const ControlledBeacon: Story = {
         }}
         translations={translations}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button>Start tour</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon aria-label="Start tour">
+          <Button>Target action</Button>
+        </Coach.Beacon>
       </Coach>
     );
   },
@@ -857,18 +853,14 @@ export const ControlledBeacon: Story = {
 export const DisabledBeacon: StoryObj = {
   render: () => (
     <Coach type="dialog" title="Help" disableTour showTour>
-      <Coach.Trigger>
-        <Coach.Beacon>
-          <Button>Target action</Button>
-        </Coach.Beacon>
-      </Coach.Trigger>
+      <Coach.Beacon aria-label="Show help">
+        <Button>Target action</Button>
+      </Coach.Beacon>
     </Coach>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(
-      canvasElement.querySelector(".aksel-coach__beacon-container"),
-    ).toBeNull();
+    expect(canvas.queryByRole("button", { name: "Show help" })).toBeNull();
     expect(canvas.getByRole("button", { name: "Target action" })).toBeVisible();
     await userEvent.click(
       canvas.getByRole("button", { name: "Target action" }),
@@ -898,11 +890,9 @@ export const BeaconWithCustomStep: StoryObj = {
           </Coach.Step>
         )}
       >
-        <Coach.Trigger>
-          <Coach.Beacon>
-            <Button ref={anchorRef}>Target</Button>
-          </Coach.Beacon>
-        </Coach.Trigger>
+        <Coach.Beacon aria-label="Show help">
+          <Button ref={anchorRef}>Target</Button>
+        </Coach.Beacon>
       </Coach>
     );
   },
@@ -910,13 +900,13 @@ export const BeaconWithCustomStep: StoryObj = {
     const canvas = within(canvasElement);
     const target = canvas.getByRole("button", { name: "Target" });
     expect(canvas.queryByText("Default description")).toBeNull();
-    await userEvent.click(target);
+    await userEvent.click(canvas.getByRole("button", { name: "Show help" }));
     const popup = await canvas.findByRole("dialog", { name: "Default title" });
     expect(within(popup).getByText("Default description")).toBeVisible();
     await userEvent.click(within(popup).getByRole("button", { name: "Done" }));
     await waitFor(() => expect(canvas.queryByRole("dialog")).toBeNull());
     expect(canvas.getByRole("button", { name: "Target" })).toBe(target);
-    await userEvent.click(target);
+    await userEvent.click(canvas.getByRole("button", { name: "Show help" }));
     await canvas.findByRole("dialog", { name: "Default title" });
   },
 };

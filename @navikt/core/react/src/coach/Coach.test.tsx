@@ -149,22 +149,20 @@ describe("Coach.Trigger", () => {
     const openTour = vi.fn();
     const onClick = vi.fn();
     const onAnchorClick = vi.fn();
-    const ref = React.createRef<HTMLDivElement>();
+    const ref = React.createRef<HTMLButtonElement>();
 
     render(
       <CoachContextProvider {...createContext({ openTour, showTour: false })}>
-        <Coach.Trigger onClick={onClick}>
-          <Coach.Beacon ref={ref}>
-            <button type="button" onClick={onAnchorClick}>
-              Target
-            </button>
-          </Coach.Beacon>
+        <Coach.Trigger ref={ref} onClick={onClick} aria-label="Show help">
+          <button type="button" onClick={onAnchorClick}>
+            Target
+          </button>
         </Coach.Trigger>
       </CoachContextProvider>,
     );
 
-    const target = screen.getByRole("button", { name: "Target" });
-    expect(ref.current).toContainElement(target);
+    const target = screen.getByRole("button", { name: "Show help" });
+    expect(ref.current).toBe(target);
     expect(ref.current).toHaveAttribute("aria-haspopup", "dialog");
     await user.click(target);
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -188,34 +186,64 @@ describe("Coach.Trigger", () => {
     await user.click(screen.getByRole("button", { name: "Show help" }));
     expect(openTour).not.toHaveBeenCalled();
   });
+});
+
+describe("Coach.Beacon", () => {
+  test("opens the tour independently of its anchor", async () => {
+    const user = userEvent.setup();
+    const openTour = vi.fn();
+    const onClick = vi.fn();
+    const onAnchorClick = vi.fn();
+    const ref = React.createRef<HTMLButtonElement>();
+
+    render(
+      <CoachContextProvider {...createContext({ openTour, showTour: false })}>
+        <Coach.Beacon ref={ref} onClick={onClick} aria-label="Show help">
+          <button type="button" onClick={onAnchorClick}>
+            Target
+          </button>
+        </Coach.Beacon>
+      </CoachContextProvider>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Target" }));
+    expect(onAnchorClick).toHaveBeenCalledTimes(1);
+    expect(onClick).not.toHaveBeenCalled();
+    expect(openTour).not.toHaveBeenCalled();
+
+    const beacon = screen.getByRole("button", { name: "Show help" });
+    expect(ref.current).toBe(beacon);
+    expect(beacon).toHaveAttribute("aria-haspopup", "dialog");
+    await user.click(beacon);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(openTour).toHaveBeenCalledTimes(1);
+    expect(onAnchorClick).toHaveBeenCalledTimes(1);
+  });
 
   test("hides disabled beacons without hiding their anchor", () => {
     const { rerender } = render(
       <CoachContextProvider {...createContext({ disableTour: false })}>
-        <Coach.Beacon data-testid="beacon">
+        <Coach.Beacon aria-label="Show help">
           <button type="button">Target</button>
         </Coach.Beacon>
-        <Coach.Beacon data-testid="standalone-beacon" />
+        <Coach.Beacon aria-label="Start tour" />
       </CoachContextProvider>,
     );
     const target = screen.getByRole("button", { name: "Target" });
     expect(target).toBeVisible();
-    expect(screen.getByTestId("beacon")).toBeInTheDocument();
-    expect(screen.getByTestId("standalone-beacon")).toHaveAttribute(
-      "aria-hidden",
-      "true",
-    );
+    expect(screen.getByRole("button", { name: "Show help" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Start tour" })).toBeVisible();
 
     rerender(
       <CoachContextProvider {...createContext({ disableTour: true })}>
-        <Coach.Beacon data-testid="beacon">
+        <Coach.Beacon aria-label="Show help">
           <button type="button">Target</button>
         </Coach.Beacon>
-        <Coach.Beacon data-testid="standalone-beacon" />
+        <Coach.Beacon aria-label="Start tour" />
       </CoachContextProvider>,
     );
-    expect(screen.queryByTestId("beacon")).toBeNull();
-    expect(screen.queryByTestId("standalone-beacon")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Show help" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Start tour" })).toBeNull();
     expect(screen.getByRole("button", { name: "Target" })).toBeVisible();
   });
 });
