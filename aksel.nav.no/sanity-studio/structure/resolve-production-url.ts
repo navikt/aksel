@@ -6,9 +6,10 @@ type SlugDocument = {
   slug?: { current?: string };
 };
 
-export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
-  const rootPath = `${window.location.protocol}//${window.location.host}`;
+export const resolveProductionUrlAppdir: UrlResolver = (doc) =>
+  resolveUrl(doc, `${window.location.protocol}//${window.location.host}`);
 
+export const resolveUrl = (doc: unknown, rootPath: string) => {
   const toUrl = (path?: string) => (path ? `${rootPath}/${path}` : "");
 
   const typedDoc = doc as SlugDocument | undefined;
@@ -35,6 +36,10 @@ export const resolveProductionUrlAppdir: UrlResolver = (doc) => {
 
   if (type === "gp_endringslogg_artikkel") {
     return toUrl(slug && `god-praksis/endring/${slug}`);
+  }
+
+  if (type === "ds_endringslogg_artikkel") {
+    return toUrl(slug && `grunnleggende/endringslogg/${slug}`);
   }
 
   return rootPath;
