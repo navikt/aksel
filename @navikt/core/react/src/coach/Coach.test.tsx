@@ -154,11 +154,11 @@ describe("Coach.ShowTourTrigger", () => {
     render(
       <CoachContextProvider {...createContext({ openTour, showTour: false })}>
         <Coach.ShowTourTrigger onClick={onClick}>
-          <Coach.Mark ref={ref}>
+          <Coach.Beacon ref={ref}>
             <button type="button" onClick={onAnchorClick}>
               Target
             </button>
-          </Coach.Mark>
+          </Coach.Beacon>
         </Coach.ShowTourTrigger>
       </CoachContextProvider>,
     );
@@ -189,15 +189,33 @@ describe("Coach.ShowTourTrigger", () => {
     expect(openTour).not.toHaveBeenCalled();
   });
 
-  test("hides disabled marks without hiding their anchor", () => {
-    render(
-      <CoachContextProvider {...createContext({ disableTour: true })}>
-        <Coach.Mark aria-label="Show help">
+  test("hides disabled beacons without hiding their anchor", () => {
+    const { rerender } = render(
+      <CoachContextProvider {...createContext({ disableTour: false })}>
+        <Coach.Beacon data-testid="beacon">
           <button type="button">Target</button>
-        </Coach.Mark>
+        </Coach.Beacon>
+        <Coach.Beacon data-testid="standalone-beacon" />
       </CoachContextProvider>,
     );
-    expect(screen.queryByRole("button", { name: "Show help" })).toBeNull();
+    const target = screen.getByRole("button", { name: "Target" });
+    expect(target).toBeVisible();
+    expect(screen.getByTestId("beacon")).toBeInTheDocument();
+    expect(screen.getByTestId("standalone-beacon")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
+
+    rerender(
+      <CoachContextProvider {...createContext({ disableTour: true })}>
+        <Coach.Beacon data-testid="beacon">
+          <button type="button">Target</button>
+        </Coach.Beacon>
+        <Coach.Beacon data-testid="standalone-beacon" />
+      </CoachContextProvider>,
+    );
+    expect(screen.queryByTestId("beacon")).toBeNull();
+    expect(screen.queryByTestId("standalone-beacon")).toBeNull();
     expect(screen.getByRole("button", { name: "Target" })).toBeVisible();
   });
 });

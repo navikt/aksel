@@ -11,7 +11,7 @@ export {
   CoachShowTourTrigger,
   CoachNextTrigger,
   CoachPreviousTrigger,
-  CoachMark,
+  CoachBeacon,
 } from "./root/CoachRoot";
 export type {
   CoachAnchorStep,
@@ -32,5 +32,5 @@ export type {
   CoachShowTourTriggerProps,
   CoachPreviousTriggerProps,
   CoachNextTriggerProps,
-  CoachMarkProps,
+  CoachBeaconProps,
 } from "./root/CoachRoot";

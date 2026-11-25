@@ -29,9 +29,9 @@ const Example = () => {
       ]}
     >
       <Coach.ShowTourTrigger>
-        <Coach.Mark>
+        <Coach.Beacon>
           <Button ref={opprettRef}>Opprett oppgave</Button>
-        </Coach.Mark>
+        </Coach.Beacon>
       </Coach.ShowTourTrigger>
     </Coach>
   );
@@ -47,5 +47,5 @@ export const Demo = {
 
 export const args: ExampleArgsT = {
   index: 8,
-  desc: "Når `disableTour` er satt til `true`, vil `Coach.Mark` ikke vises og omvisningen vil være deaktivert.",
+  desc: "Når `disableTour` er satt til `true`, vil `Coach.Beacon` ikke vises og omvisningen vil være deaktivert.",
 };

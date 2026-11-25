@@ -4,7 +4,7 @@ import { cl } from "../../utils/helpers";
 import type { SpacingScale } from "../../utils/hooks/base-primitive/helpers/types";
 import { useCoachContext } from "../root/Coach.context";
 
-type CoachMarkProps = React.ButtonHTMLAttributes<HTMLDivElement> &
+type CoachBeaconProps = React.ButtonHTMLAttributes<HTMLDivElement> &
   ({
     /**
      * Badge color.
@@ -16,12 +16,12 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLDivElement> &
   } & (
     | {
         /**
-         * Element the coach mark is anchored to.
-         * Leave empty to render the mark standalone.
+         * Element the coach beacon is anchored to.
+         * Leave empty to render the beacon standalone.
          */
         children: React.ReactElement;
         /**
-         * Offset for the coach mark relative to its anchor.
+         * Offset for the coach beacon relative to its anchor.
          * @default "space-16"
          */
         offset?: SpacingScale | `${SpacingScale} ${SpacingScale}`;
@@ -30,19 +30,19 @@ type CoachMarkProps = React.ButtonHTMLAttributes<HTMLDivElement> &
   ));
 
 /**
- * @see 🏷️ {@link CoachMarkProps}
+ * @see 🏷️ {@link CoachBeaconProps}
  * @example
  * ```jsx
  * <Coach type="dialog" title="Help">
  *   <Coach.ShowTourTrigger>
- *     <Coach.Mark>
+ *     <Coach.Beacon>
  *       <Button>Target</Button>
- *     </Coach.Mark>
+ *     </Coach.Beacon>
  *   </Coach.ShowTourTrigger>
  * </Coach>
  * ```
  */
-const CoachMark = forwardRef<HTMLDivElement, CoachMarkProps>(
+const CoachBeacon = forwardRef<HTMLDivElement, CoachBeaconProps>(
   (
     {
       children,
@@ -68,42 +68,42 @@ const CoachMark = forwardRef<HTMLDivElement, CoachMarkProps>(
         }
       : style;
 
-    const Mark = (
+    const Beacon = (
       <div
         {...(!children ? restProps : {})}
         ref={!children ? forwardedRef : undefined}
         data-color={color}
         aria-hidden
-        className={cl("aksel-coach__mark-container", className)}
+        className={cl("aksel-coach__beacon-container", className)}
         style={containerStyle}
       >
-        <div className="aksel-coach__mark-pulse" />
-        <div className="aksel-coach__mark" />
+        <div className="aksel-coach__beacon-pulse" />
+        <div className="aksel-coach__beacon" />
       </div>
     );
 
-    // If tour is disabled, only render the children without the mark
+    // If tour is disabled, only render the children without the beacon
     if (coach?.disableTour) {
       return children ?? null;
     }
 
-    // If there are no children, only render the mark itself
+    // If there are no children, only render the beacon itself
     if (!children) {
-      return Mark;
+      return Beacon;
     }
 
     return (
       <div
         {...restProps}
         ref={forwardedRef}
-        className="aksel-coach__mark-anchor"
+        className="aksel-coach__beacon-anchor"
       >
         {children}
-        {Mark}
+        {Beacon}
       </div>
     );
   },
 );
 
-export { CoachMark };
-export type { CoachMarkProps };
+export { CoachBeacon };
+export type { CoachBeaconProps };

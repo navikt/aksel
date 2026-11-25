@@ -19,13 +19,13 @@ import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
 import { consoleWarning } from "../../utils/helpers/consoleWarning";
 import { useMergeRefs } from "../../utils/hooks";
 import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { CoachBeacon, type CoachBeaconProps } from "../beacon/CoachBeacon";
 import {
   CoachDescription,
   type CoachDescriptionProps,
 } from "../description/CoachDescription";
 import { CoachFooter, type CoachFooterProps } from "../footer/CoachFooter";
 import { CoachImage, type CoachImageProps } from "../image/CoachImage";
-import { CoachMark, type CoachMarkProps } from "../mark/CoachMark";
 import {
   CoachProgress,
   type CoachProgressProps,
@@ -73,9 +73,9 @@ import { CoachContextProvider } from "./Coach.context";
  *   ]}
  * >
  *   <Coach.ShowTourTrigger>
- *     <Coach.Mark>
+ *     <Coach.Beacon>
  *       <Button>Start tour</Button>
- *     </Coach.Mark>
+ *     </Coach.Beacon>
  *   </Coach.ShowTourTrigger>
  * </Coach>
  * ```
@@ -151,23 +151,13 @@ const CoachRoot = (props: CoachProps) => {
     }
 
     if (nextAnchorEl) {
-      const { bottom, left, right, top } = nextAnchorEl.getBoundingClientRect();
-      const isOutsideViewport =
-        top < 0 ||
-        left < 0 ||
-        bottom > window.innerHeight ||
-        right > window.innerWidth;
-
-      if (isOutsideViewport) {
-        nextAnchorEl.scrollIntoView({
-          block: "center",
-          inline: "center",
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
-            ? "auto"
-            : "smooth",
-        });
-      }
+      nextAnchorEl.scrollIntoView({
+        block: "nearest",
+        inline: "center",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
     }
 
     setAnchorEl(nextAnchorEl);
@@ -318,6 +308,16 @@ const CoachRoot = (props: CoachProps) => {
     }
   }, [showTour, currentStep?.type, getInitialFocus, stepElement]);
 
+  /*const disableTourRef = useRef(false);
+  useEffect(() => {
+    const tourWasDisabled = disableTour && !disableTourRef.current;
+    disableTourRef.current = disableTour;
+
+    if (tourWasDisabled) {
+      endTour();
+    }
+  }, [disableTour, endTour]);*/
+
   // Default content for a step
   const defaultStepContent = (
     <CoachStep>
@@ -363,23 +363,29 @@ const CoachRoot = (props: CoachProps) => {
     </CoachStep>
   );
 
+  // Render custom step if renderStep is provided
+  const renderedStep =
+    currentStep &&
+    renderStep?.(
+      {
+        id: currentStep.id,
+        title: currentStep.title,
+        description: currentStep.description,
+        image: currentStep.image,
+      },
+      {
+        defaultContent: defaultStepContent,
+        index: activeStepIndex,
+        totalSteps: steps.length,
+        stepType: currentStep.type,
+        isFirst: activeStepIndex === 0,
+        isLast: activeStepIndex === steps.length - 1,
+      },
+    );
+
   // Step content, either custom rendered or default content
   const stepContent =
-    (currentStep &&
-      renderStep?.(
-        {
-          id: currentStep.id,
-          title: currentStep.title,
-          description: currentStep.description,
-          image: currentStep.image,
-        },
-        {
-          defaultContent: defaultStepContent,
-          index: activeStepIndex,
-          totalSteps: steps.length,
-        },
-      )) ??
-    defaultStepContent;
+    renderedStep === undefined ? defaultStepContent : renderedStep;
 
   // Render the current step based on its type (dialog or anchor)
   const renderCurrentStep = () => {
@@ -397,6 +403,7 @@ const CoachRoot = (props: CoachProps) => {
           }}
         >
           <Dialog.Popup
+            key={currentStep.id}
             // Keep focus trapped without locking scroll, so dialog-to-anchor transitions can scroll freely.
             modal="trap-focus"
             withBackdrop
@@ -499,7 +506,7 @@ const Coach = Object.assign(CoachRoot, {
   PreviousTrigger: CoachPreviousTrigger,
   Footer: CoachFooter,
   Image: CoachImage,
-  Mark: CoachMark,
+  Beacon: CoachBeacon,
 });
 
 export {
@@ -514,7 +521,7 @@ export {
   CoachPreviousTrigger,
   CoachFooter,
   CoachImage,
-  CoachMark,
+  CoachBeacon,
 };
 
 export type {
@@ -536,5 +543,5 @@ export type {
   CoachPreviousTriggerProps,
   CoachFooterProps,
   CoachImageProps,
-  CoachMarkProps,
+  CoachBeaconProps,
 };

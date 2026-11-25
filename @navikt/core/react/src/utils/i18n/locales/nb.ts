@@ -26,7 +26,7 @@ export default {
   },
   Coach: {
     currentStep: "{current} av {total}",
-    next: "Neste!!!",
+    next: "Neste",
     previous: "Forrige",
     close: "Lukk",
     openCoach: "Åpne veileder",
