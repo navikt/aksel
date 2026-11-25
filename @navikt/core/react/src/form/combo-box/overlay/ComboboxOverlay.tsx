@@ -19,7 +19,11 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
 
   if (isMobile) {
     return (
-      <ComboboxModal open={rootContext.open} onOpenChange={rootContext.setOpen}>
+      <ComboboxModal
+        open={rootContext.open}
+        onOpenChange={rootContext.setOpen}
+        triggerRef={rootContext.triggerRef}
+      >
         {mobileHeader}
         {children}
       </ComboboxModal>
@@ -49,6 +53,9 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
           return;
         }
         rootContext.setOpen(false);
+        if (event.type === "keydown") {
+          trigger?.focus(); // Focus trigger when closed with Escape key
+        }
       }}
       enabled={rootContext.open}
     >
@@ -70,6 +77,7 @@ type ComboboxModalProps = {
   children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  triggerRef: React.RefObject<HTMLElement | null>;
 };
 
 function subscribeToResize(callback: () => void) {
@@ -81,7 +89,12 @@ function getVisualViewportHeight() {
   return visualViewport?.height; // Takes into account virtual keyboard etc.
 }
 
-function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
+function ComboboxModal({
+  children,
+  open,
+  onOpenChange,
+  triggerRef,
+}: ComboboxModalProps) {
   const visualViewportHeight = useSyncExternalStore(
     subscribeToResize,
     getVisualViewportHeight,
@@ -125,7 +138,11 @@ function ComboboxModal({ children, open, onOpenChange }: ComboboxModalProps) {
 
   return (
     <Dialog size="small" open={open} onOpenChange={onOpenChange}>
-      <Dialog.Popup className="aksel-combo-box__modal" position="fullscreen">
+      <Dialog.Popup
+        className="aksel-combo-box__modal"
+        position="fullscreen"
+        returnFocusTo={triggerRef}
+      >
         <div
           ref={ref}
           className="aksel-combo-box__modal-inner"

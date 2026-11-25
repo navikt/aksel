@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react-vite";
 import React, { useRef, useState } from "react";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { ComboboxSingle } from "./Combobox";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
 import { ComboboxList } from "./list/ComboboxList";
@@ -100,6 +100,48 @@ FocusWithRef.play = async ({ canvasElement }) => {
     canvas.getByRole("button", { name: "Fokuser combobox" }),
   );
   await expect(combobox).toHaveFocus();
+};
+
+export const FocusAfterClose = () => (
+  <div>
+    <button type="button">Knapp før</button>
+    <BaseCombobox />
+    <button type="button">Knapp etter</button>
+  </div>
+);
+FocusAfterClose.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const trigger = await canvas.findByRole("combobox", { name: "Velg land" });
+  const buttonAfter = canvas.getByRole("button", { name: "Knapp etter" });
+
+  await userEvent.click(trigger);
+  expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
+  await userEvent.keyboard("{Escape}");
+  expect(trigger).toHaveFocus();
+  expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+  await userEvent.click(trigger);
+  await userEvent.click(canvas.getByRole("option", { name: "Finland" }));
+  expect(trigger).toHaveFocus();
+  expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+  await userEvent.click(trigger);
+  expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
+  await userEvent.tab({ shift: true });
+  expect(trigger).toHaveFocus();
+  expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+  await userEvent.click(trigger);
+  expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
+  await userEvent.tab();
+  await waitFor(() => expect(buttonAfter).toHaveFocus());
+  expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+  await userEvent.click(trigger);
+  expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
+  await userEvent.click(buttonAfter);
+  expect(buttonAfter).toHaveFocus();
+  expect(trigger).toHaveAttribute("aria-expanded", "false");
 };
 
 let optionMemoTestRenderCnt = 0;
