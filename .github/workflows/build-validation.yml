@@ -71,11 +71,15 @@ jobs:
         run: yarn test
 
   ui:
-    name: UI tests (Storybook)
+    name: UI tests (Storybook, ${{ matrix.browser }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -89,6 +93,6 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Test UI
-        run: yarn storybook:test --max-workers=2
+        run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }}
         env:
           HOME: /root

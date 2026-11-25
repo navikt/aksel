@@ -9,7 +9,7 @@
     "sync-imports": "tsx --tsconfig ./scripts/tsconfig.json ./scripts/generate-imports.ts"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-env": "^7.29.14",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@types/node": "^24.10.9",
@@ -20,9 +20,9 @@
     "typescript": "6.0.3"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "^8.23.0",
-    "@navikt/ds-css": "^8.23.0",
-    "@navikt/ds-react": "^8.23.0",
+    "@navikt/aksel-icons": "^8.23.1",
+    "@navikt/ds-css": "^8.23.1",
+    "@navikt/ds-react": "^8.23.1",
     "react": "19.3.1"
   }
 }

@@ -138,14 +138,16 @@ interface DataGridTableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    * @default "row"
    */
   selectionTrigger?: "row" | "control";
+
+  /* TODO: Temp removed to better integrate with plugins API */
   /**
    * Content to render above the table, outside its scrollable area.
    */
-  topContent?: React.ReactNode;
+  //topContent?: React.ReactNode;
   /**
    * Content to render below the table, outside its scrollable area.
    */
-  bottomContent?: React.ReactNode;
+  //bottomContent?: React.ReactNode;
 }
 
 const DataGridTableInternal = forwardRef<
@@ -169,8 +171,6 @@ const DataGridTableInternal = forwardRef<
       subRows,
       sorting,
       selectionTrigger = "row",
-      topContent,
-      bottomContent,
       ...rest
     }: DataGridTableProps<unknown>,
     forwardedRef,
@@ -211,31 +211,31 @@ const DataGridTableInternal = forwardRef<
 
     const tableId = useId(id);
 
-    const hasTopContent = topContent != null && topContent !== false;
-    const hasBottomContent = bottomContent != null && bottomContent !== false;
-    let attachmentPosition: "top" | "bottom" | "both" | undefined;
+    // const hasTopContent = topContent != null && topContent !== false;
+    // const hasBottomContent = bottomContent != null && bottomContent !== false;
+    // let attachmentPosition: "top" | "bottom" | "both" | undefined;
 
     /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
-    if (hasTopContent && hasBottomContent) {
-      attachmentPosition = "both";
-    } else if (hasTopContent) {
-      attachmentPosition = "top";
-    } else if (hasBottomContent) {
-      attachmentPosition = "bottom";
-    }
+    // if (hasTopContent && hasBottomContent) {
+    //   attachmentPosition = "both";
+    // } else if (hasTopContent) {
+    //   attachmentPosition = "top";
+    // } else if (hasBottomContent) {
+    //   attachmentPosition = "bottom";
+    // }
 
     return (
       <div
         className="aksel-data-table__frame"
-        data-attachments={attachmentPosition}
+        // data-attachments={attachmentPosition}
       >
-        {hasTopContent && (
+        {/* {hasTopContent && (
           <div className="aksel-data-table__attachment" data-attachment="top">
             {topContent}
           </div>
-        )}
+        )} */}
 
         <DataTableContextProvider
           layout={layout}
@@ -314,14 +314,14 @@ const DataGridTableInternal = forwardRef<
             </table>
           </TableElementWrapper>
         </DataTableContextProvider>
-        {hasBottomContent && (
+        {/* {hasBottomContent && (
           <div
             className="aksel-data-table__attachment"
             data-attachment="bottom"
           >
             {bottomContent}
           </div>
-        )}
+        )} */}
       </div>
     );
   },

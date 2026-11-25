@@ -135,7 +135,7 @@ export const OpenDelay: Story = {
       { timeout: 250 },
     );
     await waitFor(() => expect(canvas.getByRole("tooltip")).toBeVisible(), {
-      timeout: 500,
+      timeout: 1000,
     });
   },
 };
