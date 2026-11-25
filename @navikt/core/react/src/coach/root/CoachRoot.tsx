@@ -218,6 +218,7 @@ const CoachRoot = (props: CoachProps) => {
   const endTour = useCallback(() => {
     setShowTour(false);
     setStep(defaultStep);
+    // TODO:C Reset uncontrolled only or controlled too?
   }, [setShowTour, setStep, defaultStep]);
 
   const goToNextStep = useCallback(() => {
