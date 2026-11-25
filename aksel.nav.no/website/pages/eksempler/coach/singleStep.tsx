@@ -13,11 +13,11 @@ const Example = () => {
       title="Et stegs coach"
       description="Denne coachen har kun ett steg."
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={buttonRef}>Opprett oppgave</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };

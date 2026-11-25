@@ -14,7 +14,7 @@ const metadata: ComponentMetadata = {
     "Coach.NextTrigger": Coach.NextTrigger,
     "Coach.PreviousTrigger": Coach.PreviousTrigger,
     "Coach.CloseTrigger": Coach.CloseTrigger,
-    "Coach.ShowTourTrigger": Coach.ShowTourTrigger,
+    "Coach.Trigger": Coach.Trigger,
     "Coach.Image": Coach.Image,
   },
   keywords: [

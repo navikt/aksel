@@ -28,11 +28,11 @@ const Example = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={opprettRef}>Opprett oppgave</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };

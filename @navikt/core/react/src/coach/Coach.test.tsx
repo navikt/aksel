@@ -143,7 +143,7 @@ describe("Coach invalid steps", () => {
   });
 });
 
-describe("Coach.ShowTourTrigger", () => {
+describe("Coach.Trigger", () => {
   test("opens the tour while preserving its anchor click handler", async () => {
     const user = userEvent.setup();
     const openTour = vi.fn();
@@ -153,13 +153,13 @@ describe("Coach.ShowTourTrigger", () => {
 
     render(
       <CoachContextProvider {...createContext({ openTour, showTour: false })}>
-        <Coach.ShowTourTrigger onClick={onClick}>
+        <Coach.Trigger onClick={onClick}>
           <Coach.Beacon ref={ref}>
             <button type="button" onClick={onAnchorClick}>
               Target
             </button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </CoachContextProvider>,
     );
 
@@ -177,12 +177,12 @@ describe("Coach.ShowTourTrigger", () => {
     const openTour = vi.fn();
     render(
       <CoachContextProvider {...createContext({ openTour, showTour: false })}>
-        <Coach.ShowTourTrigger
+        <Coach.Trigger
           aria-label="Show help"
           onClick={(event) => event.preventDefault()}
         >
           <button type="button">Target</button>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </CoachContextProvider>,
     );
     await user.click(screen.getByRole("button", { name: "Show help" }));

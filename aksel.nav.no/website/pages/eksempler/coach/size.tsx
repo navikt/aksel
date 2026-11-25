@@ -28,11 +28,11 @@ const Example = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={mediumRef}>Medium (standard)</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
       <Coach
         steps={[
@@ -55,11 +55,11 @@ const Example = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={smallRef}>Small</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     </HStack>
   );

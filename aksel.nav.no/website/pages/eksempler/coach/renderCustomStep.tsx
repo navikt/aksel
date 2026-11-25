@@ -67,11 +67,11 @@ const Example = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={buttonRef}>Lorem ipsum</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };

@@ -781,11 +781,11 @@ export const Beacon: StoryObj = {
   render: () => {
     return (
       <Coach type="dialog" title="Help" translations={translations}>
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button>Target action</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     );
   },
@@ -828,11 +828,11 @@ export const ControlledBeacon: Story = {
         }}
         translations={translations}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button>Start tour</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     );
   },
@@ -857,11 +857,11 @@ export const ControlledBeacon: Story = {
 export const DisabledBeacon: StoryObj = {
   render: () => (
     <Coach type="dialog" title="Help" disableTour showTour>
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button>Target action</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   ),
   play: async ({ canvasElement }) => {
@@ -898,11 +898,11 @@ export const BeaconWithCustomStep: StoryObj = {
           </Coach.Step>
         )}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={anchorRef}>Target</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     );
   },

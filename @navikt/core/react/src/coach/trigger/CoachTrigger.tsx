@@ -5,24 +5,21 @@ import { useI18n } from "../../utils/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../utils/i18n/i18n.types";
 import { useCoachContext } from "../root/Coach.context";
 
-interface CoachShowTourTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CoachTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
   translations?: ComponentTranslation<"Coach">;
 }
 
 /**
- * @see 🏷️ {@link CoachShowTourTriggerProps}
+ * @see 🏷️ {@link CoachTriggerProps}
  * @example
  * ```jsx
- *    <Coach.ShowTourTrigger>
+ *    <Coach.Trigger>
  *      <Button>Show tour</Button>
- *    </Coach.ShowTourTrigger>
+ *    </Coach.Trigger>
  * ```
  */
-const CoachShowTourTrigger = forwardRef<
-  HTMLButtonElement,
-  CoachShowTourTriggerProps
->(
+const CoachTrigger = forwardRef<HTMLButtonElement, CoachTriggerProps>(
   (
     { children, onClick, "aria-label": ariaLabel, translations, ...restProps },
     forwardedRef,
@@ -59,5 +56,5 @@ const CoachShowTourTrigger = forwardRef<
   },
 );
 
-export { CoachShowTourTrigger };
-export type { CoachShowTourTriggerProps };
+export { CoachTrigger };
+export type { CoachTriggerProps };

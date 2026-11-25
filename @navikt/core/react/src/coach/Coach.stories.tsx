@@ -59,11 +59,11 @@ export const CoachAnchor: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={createRef}>Create</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     </HStack>
   );
@@ -93,11 +93,11 @@ export const MissingAnchor: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={anchorRef}>Create</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
@@ -121,11 +121,11 @@ export const CoachDialog: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button>Next step</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     </HStack>
   );
@@ -190,11 +190,11 @@ export const CoachMixed: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={dashboardRef}>Dashboard</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
       <HStack justify="end" width="100%">
         <Button ref={settingsRef}>Settings</Button>
@@ -234,11 +234,11 @@ export const SizeAndWidth: StoryObj<typeof Coach> = {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button ref={buttonRef}>Button</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     );
   },
@@ -303,11 +303,11 @@ export const RenderStep: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button>Feature</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
@@ -327,7 +327,7 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
     return (
       <VStack padding="space-40" gap="space-64">
         <Coach type="dialog" title="Explore the page">
-          <Coach.ShowTourTrigger>
+          <Coach.Trigger>
             <Coach.Beacon offset={props.offset}>
               <ToggleGroup defaultValue="lest" onChange={console.info}>
                 <ToggleGroup.Item
@@ -347,15 +347,15 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
                 />
               </ToggleGroup>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
-          <Coach.ShowTourTrigger>
+          </Coach.Trigger>
+          <Coach.Trigger>
             <Coach.Beacon offset={props.offset}>
               <Button onClick={() => console.log("Button clicked")}>
                 Click me
               </Button>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
-          <Coach.ShowTourTrigger>
+          </Coach.Trigger>
+          <Coach.Trigger>
             <Coach.Beacon offset={props.offset}>
               <Chips>
                 {options.map((option) => (
@@ -375,8 +375,8 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
                 ))}
               </Chips>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
-          <Coach.ShowTourTrigger>
+          </Coach.Trigger>
+          <Coach.Trigger>
             <Coach.Beacon offset={props.offset}>
               <GuidePanel>
                 Saksbehandlingstiden varierer fra kommune til kommune. Hvis det
@@ -384,8 +384,8 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
                 saksbehandlingstiden er forlenget.
               </GuidePanel>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
-          <Coach.ShowTourTrigger>
+          </Coach.Trigger>
+          <Coach.Trigger>
             <Coach.Beacon
               onClick={() => console.log("Coach dot clicked")}
               offset={props.offset}
@@ -401,8 +401,8 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
                 </ExpansionCard.Content>
               </ExpansionCard>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
-          <Coach.ShowTourTrigger>
+          </Coach.Trigger>
+          <Coach.Trigger>
             <Coach.Beacon offset={props.offset}>
               <InfoCard data-color="info">
                 <InfoCard.Header>
@@ -414,7 +414,7 @@ export const Beacon: StoryObj<typeof CoachBeacon> = {
                 </InfoCard.Content>
               </InfoCard>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
+          </Coach.Trigger>
           <Coach.Beacon data-color="success" />
         </Coach>
       </VStack>
@@ -452,11 +452,11 @@ export const Translations: StoryFn<typeof Coach> = () => {
           },
         ]}
       >
-        <Coach.ShowTourTrigger>
+        <Coach.Trigger>
           <Coach.Beacon>
             <Button>Feature</Button>
           </Coach.Beacon>
-        </Coach.ShowTourTrigger>
+        </Coach.Trigger>
       </Coach>
     </Provider>
   );
@@ -475,11 +475,11 @@ export const SingleStepAnchor: StoryFn<typeof Coach> = () => {
       title="Enkeltsteg"
       description="Dette er en enkeltstående coachmark uten steps-prop."
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={buttonRef}>Feature</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
@@ -508,11 +508,11 @@ export const SingleStepRenderStep: StoryFn<typeof Coach> = () => {
         </Coach.Step>
       )}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={buttonRef}>Feature</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
@@ -568,11 +568,11 @@ export const KeyboardNavigation: StoryFn<typeof Coach> = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={dashboardRef}>Dashboard</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
@@ -608,13 +608,13 @@ export const DisableTour: StoryObj<typeof Coach> = {
             },
           ]}
         >
-          <Coach.ShowTourTrigger>
+          <Coach.Trigger>
             <Coach.Beacon>
               <Button onClick={() => console.log("Button clicked")}>
                 Click me
               </Button>
             </Coach.Beacon>
-          </Coach.ShowTourTrigger>
+          </Coach.Trigger>
         </Coach>
       </VStack>
     );

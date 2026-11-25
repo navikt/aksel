@@ -34,11 +34,11 @@ type CoachBeaconProps = React.ButtonHTMLAttributes<HTMLDivElement> &
  * @example
  * ```jsx
  * <Coach type="dialog" title="Help">
- *   <Coach.ShowTourTrigger>
+ *   <Coach.Trigger>
  *     <Coach.Beacon>
  *       <Button>Target</Button>
  *     </Coach.Beacon>
- *   </Coach.ShowTourTrigger>
+ *   </Coach.Trigger>
  * </Coach>
  * ```
  */

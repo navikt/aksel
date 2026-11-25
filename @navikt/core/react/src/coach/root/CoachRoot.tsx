@@ -44,10 +44,7 @@ import {
   CoachPreviousTrigger,
   type CoachPreviousTriggerProps,
 } from "../trigger/CoachPreviousTrigger";
-import {
-  CoachShowTourTrigger,
-  type CoachShowTourTriggerProps,
-} from "../trigger/CoachShowTourTrigger";
+import { CoachTrigger, type CoachTriggerProps } from "../trigger/CoachTrigger";
 import type {
   CoachAnchorStep,
   CoachDialogStep,
@@ -72,11 +69,11 @@ import { CoachContextProvider } from "./Coach.context";
  *     { id: "start", type: "anchor", anchorRef: buttonRef, title: "Start here." },
  *   ]}
  * >
- *   <Coach.ShowTourTrigger>
+ *   <Coach.Trigger>
  *     <Coach.Beacon>
  *       <Button>Start tour</Button>
  *     </Coach.Beacon>
- *   </Coach.ShowTourTrigger>
+ *   </Coach.Trigger>
  * </Coach>
  * ```
  */
@@ -497,7 +494,7 @@ const Coach = Object.assign(CoachRoot, {
   Title: CoachTitle,
   Description: CoachDescription,
   CloseTrigger: CoachCloseTrigger,
-  ShowTourTrigger: CoachShowTourTrigger,
+  Trigger: CoachTrigger,
   Progress: CoachProgress,
   NextTrigger: CoachNextTrigger,
   PreviousTrigger: CoachPreviousTrigger,
@@ -512,7 +509,7 @@ export {
   CoachTitle,
   CoachDescription,
   CoachCloseTrigger,
-  CoachShowTourTrigger,
+  CoachTrigger,
   CoachProgress,
   CoachNextTrigger,
   CoachPreviousTrigger,
@@ -534,7 +531,7 @@ export type {
   CoachTitleProps,
   CoachDescriptionProps,
   CoachCloseTriggerProps,
-  CoachShowTourTriggerProps,
+  CoachTriggerProps,
   CoachProgressProps,
   CoachNextTriggerProps,
   CoachPreviousTriggerProps,

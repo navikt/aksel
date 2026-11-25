@@ -53,11 +53,11 @@ const Example = () => {
         },
       ]}
     >
-      <Coach.ShowTourTrigger>
+      <Coach.Trigger>
         <Coach.Beacon>
           <Button ref={buttonRef}>Opprett oppgave</Button>
         </Coach.Beacon>
-      </Coach.ShowTourTrigger>
+      </Coach.Trigger>
     </Coach>
   );
 };
