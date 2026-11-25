@@ -858,7 +858,8 @@ function PortalContainer({ children }: { children: React.ReactNode }) {
 
   return (
     <Provider rootElement={container ?? undefined}>
-      {children}
+      {/* Wait for #portal-container before mounting children so DialogPopup/FocusBoundary don't mount to document.body and immediately remount */}
+      {container && children}
       <div id="portal-container" ref={setContainer} />
     </Provider>
   );

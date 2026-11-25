@@ -32,7 +32,7 @@ export const EscapeKeyDown: Story = {
   },
   play: async ({ args }) => {
     await userEvent.keyboard("{Escape}");
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.onEscapeKeyDown).toHaveBeenCalledOnce();
       expect(args.onDismiss).toHaveBeenCalledOnce();
     });
@@ -167,7 +167,7 @@ export const InteractOutside: Story = {
 
     await userEvent.keyboard("{Escape}");
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.onDismiss).toHaveBeenCalledTimes(1);
       expect(args.onInteractOutside).not.toHaveBeenCalled();
     });
@@ -338,11 +338,18 @@ export const NestedPointerEvents: StoryObj<{
     expect(args.root.onDismiss).not.toHaveBeenCalled();
     expect(args.nested.onDismiss).not.toHaveBeenCalled();
 
-    await fireEvent.pointerDown(outside);
+    /**
+     * usePointerDownOutside registers its document listener via setTimeout(..., 0)
+     * so we need to wait for the next tick before firing the pointer down event.
+     */
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    fireEvent.pointerDown(outside);
 
     await waitFor(() => {
       expect(args.root.onDismiss).not.toHaveBeenCalled();
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+      expect(canvas.queryByTestId("nested")).not.toBeInTheDocument();
+      expect(document.body.style.pointerEvents).not.toBe("none");
     });
 
     await userEvent.click(outside);
@@ -413,20 +420,23 @@ export const NestedEscapeKeydown: StoryObj<{
       </div>
     );
   },
-  play: async ({ args }) => {
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
     expect(args.root.onDismiss).not.toHaveBeenCalled();
     expect(args.nested.onDismiss).not.toHaveBeenCalled();
 
     await userEvent.keyboard("{Escape}");
 
-    waitFor(() => {
-      expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(args.root.onDismiss).not.toHaveBeenCalled();
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
+      expect(canvas.queryByTestId("nested")).not.toBeInTheDocument();
     });
 
     await userEvent.keyboard("{Escape}");
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.root.onDismiss).toHaveBeenCalledTimes(1);
       expect(args.nested.onDismiss).toHaveBeenCalledTimes(1);
     });
@@ -476,20 +486,23 @@ export const MultipleEscapeKeydown: StoryObj<{
       </div>
     );
   },
-  play: async ({ args }) => {
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
     expect(args.first.onDismiss).not.toHaveBeenCalled();
     expect(args.last.onDismiss).not.toHaveBeenCalled();
 
     await userEvent.keyboard("{Escape}");
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.first.onDismiss).not.toHaveBeenCalled();
       expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+      expect(canvas.queryByTestId("last")).not.toBeInTheDocument();
     });
 
     await userEvent.keyboard("{Escape}");
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
       expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
     });
@@ -552,16 +565,23 @@ export const MultipleOutsideClick: StoryObj<{
     expect(args.first.onDismiss).not.toHaveBeenCalled();
     expect(args.last.onDismiss).not.toHaveBeenCalled();
 
-    await fireEvent.pointerDown(outside);
+    /**
+     * usePointerDownOutside registers its document listener via setTimeout(..., 0)
+     * so we need to wait for the next tick before firing the pointer down event.
+     */
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    fireEvent.pointerDown(outside);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.first.onDismiss).not.toHaveBeenCalled();
       expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
+      expect(canvas.queryByTestId("last")).not.toBeInTheDocument();
+      expect(document.body.style.pointerEvents).not.toBe("none");
     });
 
     await userEvent.click(outside);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(args.first.onDismiss).toHaveBeenCalledTimes(1);
       expect(args.last.onDismiss).toHaveBeenCalledTimes(1);
     });
