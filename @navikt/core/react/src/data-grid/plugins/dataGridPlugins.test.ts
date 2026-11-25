@@ -7,7 +7,7 @@ import {
   resolveDataGridPlugins,
 } from "./dataGridPlugins";
 
-const createContextPlugin = (label: string): DataGridPlugin => ({
+const createTestPlugin = (label: string): DataGridPlugin => ({
   transformTableContext: (children) => `${label}(${children})`,
 });
 
@@ -19,9 +19,9 @@ describe("resolveDataGridPlugins", () => {
   });
 
   test("orders known plugins before unknown plugins, ignores prototype keys, and skips non-object entries", () => {
-    const customFirst = createContextPlugin("first");
-    const customSecond = createContextPlugin("second");
-    const pagination = createContextPlugin("pagination");
+    const customFirst = createTestPlugin("first");
+    const customSecond = createTestPlugin("second");
+    const pagination = createTestPlugin("pagination");
 
     expect(
       resolveDataGridPlugins({
@@ -48,9 +48,9 @@ describe("resolveDataGridPlugins", () => {
   });
 
   test("interns array reference by plugin identity and order across inline objects", () => {
-    const pagination = createContextPlugin("pagination");
-    const customA = createContextPlugin("a");
-    const customB = createContextPlugin("b");
+    const pagination = createTestPlugin("pagination");
+    const customA = createTestPlugin("a");
+    const customB = createTestPlugin("b");
 
     const first = resolveDataGridPlugins({ customA, pagination });
     expect(Object.isFrozen(first)).toBe(true);
@@ -79,8 +79,8 @@ describe("applyTableContext", () => {
   });
 
   test("wraps children in reverse plugin order and skips plugins without a valid transform", () => {
-    const pagination = createContextPlugin("pagination");
-    const custom = createContextPlugin("custom");
+    const pagination = createTestPlugin("pagination");
+    const custom = createTestPlugin("custom");
     const noopPlugin = {} as DataGridPlugin;
     const invalidPlugin = {
       transformTableContext: "not-a-function",
@@ -95,41 +95,36 @@ describe("applyTableContext", () => {
     ).toBe("pagination(custom(table))");
   });
 
-  test("preserves previous content and warns when transformTableContext returns undefined", () => {
+  test("preserves previous content and warns when transformTableContext returns a falsy value", () => {
     const warnSpy = vi
       .spyOn(consoleWarningModule, "consoleWarning")
       .mockImplementation(() => {});
-    const outer = createContextPlugin("outer");
+    const outer = createTestPlugin("outer");
     const returnsUndefined: DataGridPlugin = {
       transformTableContext: () => undefined,
     };
-    const inner = createContextPlugin("inner");
+    const returnsNull: DataGridPlugin = {
+      transformTableContext: () => null,
+    };
+    const returnsFalse: DataGridPlugin = {
+      transformTableContext: () => false,
+    };
+    const inner = createTestPlugin("inner");
 
-    expect(applyTableContext([outer, returnsUndefined, inner], "table")).toBe(
-      "outer(inner(table))",
+    expect(
+      applyTableContext(
+        [outer, returnsUndefined, returnsNull, returnsFalse, inner],
+        "table",
+      ),
+    ).toBe("outer(inner(table))");
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('transformTableContext returned "undefined"'),
     );
     expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining("transformTableContext returned undefined"),
+      expect.stringContaining('transformTableContext returned "null"'),
     );
-  });
-
-  test("catches plugin errors, logs them, and continues applying remaining plugins", () => {
-    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const boom = new Error("plugin failure");
-    const outer = createContextPlugin("outer");
-    const broken: DataGridPlugin = {
-      transformTableContext: () => {
-        throw boom;
-      },
-    };
-    const inner = createContextPlugin("inner");
-
-    expect(applyTableContext([outer, broken, inner], "table")).toBe(
-      "outer(inner(table))",
-    );
-    expect(errorSpy).toHaveBeenCalledWith(
-      "[Aksel] DataGrid: Plugin threw in transformTableContext:",
-      boom,
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('transformTableContext returned "false"'),
     );
   });
 });

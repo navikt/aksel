@@ -37,12 +37,7 @@ type DataGridPlugins = Partial<
 > &
   Record<string, DataGridPlugin>;
 
-/**
- * We freeze in dev-mode to enforce immutability of the empty plugin array.
- * Based on React best practices: https://react.dev/reference/react/createElement#caveats
- */
-const EMPTY_PLUGINS: readonly never[] =
-  process.env.NODE_ENV !== "production" ? Object.freeze([]) : [];
+const EMPTY_PLUGINS: readonly never[] = [];
 
 /**
  * Turns a `plugins={{ ... }}` object into an ordered, stable plugin array.
@@ -55,11 +50,6 @@ function resolveDataGridPlugins(
   userPlugins?: DataGridPlugins,
 ): readonly DataGridPlugin[] {
   return internByIdentity(orderPlugins(userPlugins));
-}
-
-// WeakMap keys must be objects; guard against nullish/primitive entries at runtime.
-function isPluginObject(value: unknown): value is DataGridPlugin {
-  return typeof value === "object" && value !== null;
 }
 
 /**
@@ -84,18 +74,14 @@ function orderPlugins(
     /* TS target does not support Object.hasOwn */
     if (Object.prototype.hasOwnProperty.call(userPlugins, name)) {
       const plugin = userPlugins[name];
-      if (isPluginObject(plugin)) {
-        ordered.push(plugin);
-      }
+      plugin && ordered.push(plugin);
     }
   }
 
   for (const name of keys) {
     if (!KNOWN_PLUGINS.has(name)) {
       const plugin = userPlugins[name];
-      if (isPluginObject(plugin)) {
-        ordered.push(plugin);
-      }
+      plugin && ordered.push(plugin);
     }
   }
 
@@ -134,7 +120,9 @@ const internRoot: InternNode = { next: new WeakMap() };
  * 2. Cache a copy at the terminal node so future calls with the same sequence return the exact same (`===`) array.
  * 3. Unused branches are garbage-collected automatically once any plugin object in the path is no longer referenced.
  */
-function internByIdentity<T extends object>(items: readonly T[]): readonly T[] {
+function internByIdentity(
+  items: readonly DataGridPlugin[],
+): readonly DataGridPlugin[] {
   if (items.length === 0) {
     return EMPTY_PLUGINS;
   }
@@ -155,14 +143,14 @@ function internByIdentity<T extends object>(items: readonly T[]): readonly T[] {
     node.array =
       process.env.NODE_ENV !== "production" ? Object.freeze(copy) : copy;
   }
-  return node.array as readonly T[];
+  return node.array as readonly DataGridPlugin[];
 }
 
 /**
  * Wraps `children` with each plugin's `transformTableContext`.
  * Runs in reverse so the first plugin wraps outermost.
- * Synchronous errors are caught and logged, and an `undefined` return preserves
- * the previous content so one broken plugin doesn't blank or crash the grid.
+ * A falsy return (`undefined`, `null`, `false`, etc.) preserves the previous
+ * content so one broken plugin doesn't accidentally blank the grid.
  */
 function applyTableContext(
   plugins: readonly DataGridPlugin[],
@@ -177,21 +165,14 @@ function applyTableContext(
       continue;
     }
 
-    try {
-      const next = transform(content);
-      if (next === undefined) {
-        consoleWarning(
-          "DataGrid: Plugin transformTableContext returned undefined. Preserving previous content.",
-        );
-        continue;
-      }
-      content = next;
-    } catch (error) {
-      console.error(
-        "[Aksel] DataGrid: Plugin threw in transformTableContext:",
-        error,
+    const next = transform(content);
+    if (!next) {
+      consoleWarning(
+        `DataGrid: Plugin transformTableContext returned "${String(next)}". Preserving previous content.`,
       );
+      continue;
     }
+    content = next;
   }
 
   return content;
