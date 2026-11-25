@@ -141,6 +141,8 @@ function ComboboxModal({
       <Dialog.Popup
         className="aksel-combo-box__modal"
         position="fullscreen"
+        // Manually set what to focus after closing, because FocusBoundary errorously registrers
+        // the filter input as previously focused element since we focus it immediately on open.
         returnFocusTo={triggerRef}
       >
         <div
