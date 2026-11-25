@@ -1,5 +1,27 @@
 /** Defaults for internal components, independent of the public locales. Cant be overridden by users. */
 const internalTranslations = {
+  DataGrid: {
+    loading: "Laster innhold",
+    Pagination: {
+      summary: "Fra {from} til {to} av {totalRows}",
+      summaryUnknownTotal: "Fra {from}–{to}",
+      summaryEmpty: "Ingen rader",
+      pageSize: "Rader per side",
+      pageSizeTrigger: "{summary}, velg antall rader per side, {size} valgt",
+      pageSizeOption: "{size} per side",
+      pageOf: "Side {page} av {pageCount}",
+      pageOfUnknownTotal: "Side {page}",
+      goToPage: "Gå til side",
+      ofPageCount: "av {pageCount}",
+      first: "Første side",
+      previous: "Forrige side",
+      next: "Neste side",
+      last: "Siste side",
+      navLabel: "Sidenavigering",
+      navLabelAbove: "{label} (øverst)",
+      navLabelBelow: "{label} (nederst)",
+    },
+  },
   TEST_DATA: {
     label: "Internal grid",
     selected: "{count} rows selected",
