@@ -65,7 +65,9 @@ export const PostToSlackButton = ({
       >
         <Modal.Body>
           <BodyLong>
-            Aksel-boten (@aksel3) er klar til å sende meldingen til Slack.
+            {posting
+              ? "Meldingen sendes til Slack. Sendingen fortsetter selv om du lukker vinduet."
+              : "Aksel-boten (@aksel3) er klar til å sende meldingen til Slack."}
           </BodyLong>
         </Modal.Body>
         <Modal.Footer>
@@ -77,7 +79,7 @@ export const PostToSlackButton = ({
             variant="secondary"
             onClick={() => setOpen(false)}
           >
-            Avbryt
+            {posting ? "Lukk" : "Avbryt"}
           </Button>
         </Modal.Footer>
       </Modal>
