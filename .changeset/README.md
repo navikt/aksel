@@ -23,7 +23,7 @@ Hvis du ikke velger major eller minor, så vil pakkene få en patch-bump.
 
 `Please enter a summary for this change`
 
-Skriv inn en kort beskrivelse av endringen på formatet `<Komponent>: <gitmoji?> <Beskrivelse>`, f.eks. "Button: ✨ Add feature xyz".
+Skriv inn en kort beskrivelse av endringen på formatet `<Component>: <what changed for consumers>`, f.eks. "Combobox: Prevent focus from moving to the listbox".
 
 3. Commit og push.
 
