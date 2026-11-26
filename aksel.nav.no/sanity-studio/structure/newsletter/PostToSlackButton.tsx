@@ -52,7 +52,7 @@ export const PostToSlackButton = ({
           onFeedback(null);
           setOpen(true);
         }}
-        disabled={!text}
+        disabled={!text || status === "posting"}
       >
         Send til Slack
       </Button>
