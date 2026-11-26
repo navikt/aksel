@@ -35,13 +35,20 @@ export function adminStructure(S: StructureBuilder) {
             .icon(ImageIcon)
             .id(`aksel_ds_forside_dokument`),
           S.listItem().singleton("newsletter_todo"),
-          S.listItem()
-            .title("Nyhetsbrev til Slack")
-            .icon(NewsletterIcon)
-            .id("nyhetsbrev")
-            .child(
-              S.component(NewsletterSlackView).title("Nyhetsbrev til Slack"),
-            ),
+          /* Production only: the view builds aksel.nav.no URLs and posts to a shared Slack channel */
+          ...(S.context.dataset === "production"
+            ? [
+                S.listItem()
+                  .title("Nyhetsbrev til Slack")
+                  .icon(NewsletterIcon)
+                  .id("nyhetsbrev")
+                  .child(
+                    S.component(NewsletterSlackView).title(
+                      "Nyhetsbrev til Slack",
+                    ),
+                  ),
+              ]
+            : []),
           S.listItem()
             .title("Standalone-sider")
             .child(
