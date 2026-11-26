@@ -76,6 +76,9 @@ jobs:
     timeout-minutes: 10
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
+      # --ipc=host prevents Chromium OOM/connection-closed crashes caused by Docker's default 64MB /dev/shm;
+      # --init reaps zombie browser processes cleanly (recommended by Playwright and Vitest in Docker).
+      options: --ipc=host --init
     strategy:
       fail-fast: false
       matrix:
@@ -96,3 +99,8 @@ jobs:
         run: yarn storybook:test --max-workers=2 --browser.name=${{ matrix.browser }}
         env:
           HOME: /root
+          # Workaround for Chromium Linux shared-memory leak across torn-down Vitest iframes
+          # (https://issues.chromium.org/issues/530892387): Vitest's built-in CDP garbage collection
+          # only triggers when /tmp free disk drops below 4 GiB, so raise the threshold on CI runners
+          # (ignored by Vitest for Firefox and WebKit).
+          VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB: "1000"

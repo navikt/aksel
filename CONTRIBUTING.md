@@ -75,6 +75,11 @@ Det er ikke satt opp noen generator for nye komponenter, men vi følger en fast 
 
 Dokumentasjon for komponenter finner man på [aksel.nav.no](https://aksel.nav.no/). Hvis man ønsker å skrive noe dokumentasjon selv gjør vi det via CMS-et Sanity. Kode-eksempler blir skrevet lokalt i [/pages/eksempler](https://github.com/navikt/aksel/tree/main/aksel.nav.no/website/pages/eksempler)
 
+## Pull requests
+
+Bruk formatet `<type>(<scope>): <description>` i PR-titler, for eksempel `fix(Combobox): make listbox unfocusable`.
+Type kan være `feat`, `fix`, `perf`, `docs`, `refactor`, `test` eller `chore`. Scope angir komponenten eller området som endres.
+
 ## Versjonering av pakker
 
 Vi bruker `changeset` for versjonering av pakker. Se [README](./README.md) for mer informasjon.
