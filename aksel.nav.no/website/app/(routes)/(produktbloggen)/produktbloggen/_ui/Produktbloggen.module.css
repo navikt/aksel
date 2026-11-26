@@ -1,5 +1,5 @@
 .overviewTitle {
-  font-size: 48px;
+  font-size: 3rem;
   color: var(--ax-text-brand-blue);
   text-align: center;
 }
@@ -112,14 +112,14 @@
 }
 
 /* sm */
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .bloggPosts {
     padding-inline: var(--ax-space-24);
   }
 }
 
 /* md */
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .latestBloggPosts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -131,7 +131,7 @@
 }
 
 /* lg */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .remainingPosts {
     gap: var(--ax-space-40);
   }
@@ -175,7 +175,7 @@
   color: var(--ax-text-brand-blue);
   hyphens: auto;
 
-  @media (max-width: 480px) {
+  @media (width <= 480px) {
     font-size: 2.5rem;
     line-height: var(--ax-font-line-height-heading-2xlarge);
   }
@@ -248,7 +248,7 @@
 
 /* 480 === sm
 min-width: X == X is the minimum width needed before styles apply */
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .intro {
     width: 90%;
   }

@@ -52,7 +52,7 @@
   padding-inline: var(--__axc-page-padding-inline);
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .aksel-pageblock--gutters {
     --__axc-page-padding-inline: var(--ax-space-48);
   }

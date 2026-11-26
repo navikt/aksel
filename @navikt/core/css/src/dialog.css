@@ -26,7 +26,7 @@
   }
 
   /* Needed to accommodate 400% zoom */
-  @media (max-height: 400px) {
+  @media (height <= 400px) {
     overflow: auto;
   }
 
@@ -92,11 +92,10 @@
     }
 
     &[data-nested-dialog-open="true"] {
-      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by DialogPopupInternal */
       transform: translateY(calc(1rem * var(--__axc-nested-level) * -1)) scale(calc(1 - 0.02 * var(--__axc-nested-level)));
     }
 
-    @media (max-width: 480px) or (max-height: 479px) {
+    @media (width <= 480px) or (height <= 479px) {
       --__axc-dialog-transform: translateY(35%);
 
       max-height: calc(100dvh - max(16px, 10dvh));
@@ -162,7 +161,6 @@
     height: auto;
 
     &[data-nested-dialog-open="true"] {
-      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by DialogPopupInternal */
       transform: translateY(calc(1rem * var(--__axc-nested-level) * -1)) scale(calc(1 - 0.02 * var(--__axc-nested-level)));
     }
   }
@@ -238,7 +236,7 @@
   background-repeat: no-repeat;
 
   /* Needed to accommodate 400% zoom */
-  @media (max-height: 400px) {
+  @media (height <= 400px) {
     overflow: unset;
   }
 }

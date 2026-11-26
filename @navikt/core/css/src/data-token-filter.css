@@ -8,7 +8,6 @@
   border-radius: var(--ax-radius-8);
   border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   transform-origin: var(--__axc-floating-transform-origin);
   transition: opacity 150ms ease allow-discrete;
 
@@ -30,7 +29,6 @@
   max-width: min(95vw, 640px);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
 }
 

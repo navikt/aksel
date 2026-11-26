@@ -83,14 +83,9 @@
     }
   }
 
-  &:not(:last-of-type) {
-    &:hover,
-    &:focus-visible {
-      & + .akselLayersLink {
-        .akselLayersDottedLine {
-          border-bottom-width: 3px;
-        }
-      }
+  &:not(:last-of-type):is(:hover, :focus-visible) + .akselLayersLink {
+    .akselLayersDottedLine {
+      border-bottom-width: 3px;
     }
   }
 }

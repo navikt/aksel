@@ -72,7 +72,7 @@
   width: 450px;
 }
 
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .aksel-modal {
     max-width: calc(100% - 2em);
   }
@@ -82,7 +82,7 @@
   }
 }
 
-@media (min-height: 480px) {
+@media (height >= 480px) {
   .aksel-modal {
     max-height: calc(100% - 2em);
   }
@@ -155,7 +155,7 @@
   background-repeat: no-repeat;
 
   /* Needed to accommodate 400% zoom */
-  @media (max-height: 400px) {
+  @media (height <= 400px) {
     overflow: unset;
   }
 }
