@@ -53,10 +53,8 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
           return;
         }
         rootContext.setOpen(false);
-        if (event.type === "keydown") {
-          trigger?.focus(); // Focus trigger when closed with Escape key
-        }
       }}
+      onEscapeKeyDown={() => rootContext.triggerRef.current?.focus()}
       enabled={rootContext.open}
     >
       <Floating.Content
