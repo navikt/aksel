@@ -102,14 +102,14 @@ FocusWithRef.play = async ({ canvasElement }) => {
   await expect(combobox).toHaveFocus();
 };
 
-export const FocusAfterClose = () => (
+export const CloseBehavior = () => (
   <>
     <button type="button">Knapp før</button>
     <BaseCombobox />
     <button type="button">Knapp etter</button>
   </>
 );
-FocusAfterClose.play = async ({ canvasElement }) => {
+CloseBehavior.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const trigger = await canvas.findByRole("combobox", { name: "Velg land" });
   const buttonAfter = canvas.getByRole("button", { name: "Knapp etter" });
@@ -120,7 +120,18 @@ FocusAfterClose.play = async ({ canvasElement }) => {
   // like tabbing or clicking outside.
 
   await userEvent.click(trigger);
-  expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
+  const filter = canvas.getByRole("combobox", { name: "Filtrer" });
+  expect(filter).toHaveFocus();
+  await userEvent.type(filter, "Norge");
+  expect(filter).toHaveValue("Norge");
+  expect(
+    canvas.queryByRole("option", { name: "Finland" }),
+  ).not.toBeInTheDocument();
+  await userEvent.keyboard("{Escape}");
+  expect(filter).toHaveValue("");
+  expect(filter).toHaveFocus();
+  expect(trigger).toHaveAttribute("aria-expanded", "true");
+  expect(canvas.getByRole("option", { name: "Finland" })).toBeInTheDocument();
   await userEvent.keyboard("{Escape}");
   expect(trigger).toHaveFocus();
   expect(trigger).toHaveAttribute("aria-expanded", "false");

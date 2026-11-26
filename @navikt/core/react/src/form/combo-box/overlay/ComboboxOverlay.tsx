@@ -54,7 +54,11 @@ function ComboboxOverlay({ children, mobileHeader }: ComboboxOverlayProps) {
         }
         rootContext.setOpen(false);
       }}
-      onEscapeKeyDown={() => rootContext.triggerRef.current?.focus()}
+      onEscapeKeyDown={(event) => {
+        if (!event.defaultPrevented) {
+          rootContext.triggerRef.current?.focus();
+        }
+      }}
       enabled={rootContext.open}
     >
       <Floating.Content
