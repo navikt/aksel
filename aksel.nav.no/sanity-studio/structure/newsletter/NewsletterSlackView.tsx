@@ -15,6 +15,7 @@ import {
 } from "@navikt/ds-react";
 import { CopyForSlackButton } from "./CopyForSlackButton";
 import { PostToSlackButton } from "./PostToSlackButton";
+import type { FeedbackT } from "./feedback";
 import { formatSlackMessage } from "./format-slack-message";
 import {
   type QueryDateRangeT,
@@ -52,6 +53,8 @@ export const NewsletterSlackView = () => {
   const setText = (value: string) =>
     setEdit({ base: generatedText, text: value });
 
+  const [feedback, setFeedback] = useState<FeedbackT>(null);
+
   return (
     <Box padding="space-24" maxWidth="60rem">
       <VStack gap="space-24">
@@ -81,8 +84,8 @@ export const NewsletterSlackView = () => {
           />
         )}
         <HStack gap="space-8" align="center" wrap>
-          <PostToSlackButton text={text} />
-          <CopyForSlackButton text={text} />
+          <PostToSlackButton text={text} onFeedback={setFeedback} />
+          <CopyForSlackButton text={text} onFeedback={setFeedback} />
           <Button
             variant="secondary"
             size="small"
@@ -92,6 +95,11 @@ export const NewsletterSlackView = () => {
             Tilbakestill tekst
           </Button>
         </HStack>
+        {feedback && (
+          <InlineMessage status={feedback.status}>
+            {feedback.message}
+          </InlineMessage>
+        )}
       </VStack>
     </Box>
   );

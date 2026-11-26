@@ -1,57 +1,60 @@
 import { useState } from "react";
 import { PaperplaneIcon } from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  Button,
-  HStack,
-  InlineMessage,
-  Link,
-  Modal,
-} from "@navikt/ds-react";
+import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import type { FeedbackT } from "./feedback";
 import { toSlackMrkdwn } from "./format-slack-message";
 
-type PostStatusT = "idle" | "posting" | "posted" | "unauthorized" | "error";
-
 /* The website route only exists when the Studio runs inside the website (/admin, /admin-dev) */
-const postToSlack = async (text: string): Promise<PostStatusT> => {
+const postToSlack = async (text: string) => {
   try {
     const response = await fetch("/api/newsletter/slack", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: toSlackMrkdwn(text) }),
     });
-    if (response.status === 401) {
-      return "unauthorized";
-    }
-    return response.ok ? "posted" : "error";
+    return response.ok;
   } catch {
-    return "error";
+    return false;
   }
 };
 
-export const PostToSlackButton = ({ text }: { text: string }) => {
+type PostToSlackButtonProps = {
+  text: string;
+  onFeedback: (feedback: FeedbackT) => void;
+};
+
+export const PostToSlackButton = ({
+  text,
+  onFeedback,
+}: PostToSlackButtonProps) => {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState<PostStatusT>("idle");
+  const [posting, setPosting] = useState(false);
 
   const post = async () => {
-    setStatus("posting");
-    setStatus(await postToSlack(text));
+    setPosting(true);
+    const posted = await postToSlack(text);
+    setPosting(false);
     setOpen(false);
+    onFeedback(
+      posted
+        ? { status: "success", message: "Sendt til Slack." }
+        : { status: "error", message: "Klarte ikke å sende til Slack." },
+    );
   };
 
   return (
-    <HStack gap="space-8" align="center" wrap>
+    <>
       <Button
         variant="primary"
         size="small"
         icon={<PaperplaneIcon aria-hidden />}
         onClick={() => {
-          setStatus("idle");
+          onFeedback(null);
           setOpen(true);
         }}
         disabled={!text}
       >
-        Post til Slack
+        Send til Slack
       </Button>
 
       <Modal
@@ -66,8 +69,8 @@ export const PostToSlackButton = ({ text }: { text: string }) => {
           </BodyLong>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={post} loading={status === "posting"}>
-            Post
+          <Button type="button" onClick={post} loading={posting}>
+            Send
           </Button>
           <Button
             type="button"
@@ -78,25 +81,6 @@ export const PostToSlackButton = ({ text }: { text: string }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {status === "posted" && (
-        <InlineMessage status="success">Postet til Slack.</InlineMessage>
-      )}
-      {status === "unauthorized" && (
-        <InlineMessage status="error">
-          Du må være logget inn med Nav-bruker for å poste.{" "}
-          <Link
-            href={`/oauth2/login?redirect=${encodeURIComponent(window.location.pathname)}`}
-          >
-            Logg inn
-          </Link>
-        </InlineMessage>
-      )}
-      {status === "error" && (
-        <InlineMessage status="error">
-          Klarte ikke å poste til Slack.
-        </InlineMessage>
-      )}
-    </HStack>
+    </>
   );
 };

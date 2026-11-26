@@ -1,14 +1,22 @@
 import { useState } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
-import { Button, InlineMessage } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
+import type { FeedbackT } from "./feedback";
 import { toSlackHtml } from "./format-slack-message";
 
-export const CopyForSlackButton = ({ text }: { text: string }) => {
-  const [copyStatus, setCopyStatus] = useState<
-    "idle" | "copied" | "copiedAsPlainText" | "error"
-  >("idle");
+type CopyForSlackButtonProps = {
+  text: string;
+  onFeedback: (feedback: FeedbackT) => void;
+};
+
+export const CopyForSlackButton = ({
+  text,
+  onFeedback,
+}: CopyForSlackButtonProps) => {
+  const [copied, setCopied] = useState(false);
 
   const copyAsRichText = async () => {
+    onFeedback(null);
     try {
       await navigator.clipboard.write([
         new ClipboardItem({
@@ -16,46 +24,36 @@ export const CopyForSlackButton = ({ text }: { text: string }) => {
           "text/plain": new Blob([text], { type: "text/plain" }),
         }),
       ]);
-      setCopyStatus("copied");
-      setTimeout(() => setCopyStatus("idle"), 2000);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       // Some browsers don't support ClipboardItem or deny rich-text write
       try {
         await navigator.clipboard.writeText(text);
-        setCopyStatus("copiedAsPlainText");
+        onFeedback({
+          status: "warning",
+          message:
+            "Kopierte som ren tekst. Lenkene blir ikke klikkbare i Slack.",
+        });
       } catch {
-        setCopyStatus("error");
+        onFeedback({
+          status: "error",
+          message: "Klarte ikke å kopiere. Kopier teksten manuelt.",
+        });
       }
     }
   };
 
+  /* Only the icon changes, so the button keeps its width */
   return (
-    <>
-      <Button
-        variant="secondary"
-        size="small"
-        icon={
-          copyStatus === "copied" ? (
-            <CheckmarkIcon aria-hidden />
-          ) : (
-            <FilesIcon aria-hidden />
-          )
-        }
-        onClick={copyAsRichText}
-        disabled={!text}
-      >
-        {copyStatus === "copied" ? "Kopiert!" : "Kopier tekst"}
-      </Button>
-      {copyStatus === "copiedAsPlainText" && (
-        <InlineMessage status="warning">
-          Kopierte som ren tekst. Lenkene blir ikke klikkbare i Slack.
-        </InlineMessage>
-      )}
-      {copyStatus === "error" && (
-        <InlineMessage status="error">
-          Klarte ikke å kopiere. Kopier teksten manuelt.
-        </InlineMessage>
-      )}
-    </>
+    <Button
+      variant="secondary"
+      size="small"
+      icon={copied ? <CheckmarkIcon aria-hidden /> : <FilesIcon aria-hidden />}
+      onClick={copyAsRichText}
+      disabled={!text}
+    >
+      Kopier tekst
+    </Button>
   );
 };
