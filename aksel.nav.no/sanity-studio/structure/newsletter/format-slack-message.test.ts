@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { formatSlackMessage, toSlackHtml } from "./format-slack-message";
+import {
+  formatSlackMessage,
+  toSlackHtml,
+  toSlackMrkdwn,
+} from "./format-slack-message";
 
 const period = { from: new Date(2026, 10, 16), to: new Date(2026, 10, 20) };
 
@@ -74,6 +78,18 @@ describe("toSlackHtml", () => {
       ),
     ).toBe(
       '<b>Komponenter</b><br>• <a href="https://aksel.nav.no/a?b=1&amp;c=2">Dialog &lt;ny&gt;</a>',
+    );
+  });
+});
+
+describe("toSlackMrkdwn", () => {
+  test("converts links and escapes Slack control characters", () => {
+    expect(
+      toSlackMrkdwn(
+        "*Komponenter*\n• [Dialog <ny>](https://aksel.nav.no/a?b=1&c=2)",
+      ),
+    ).toBe(
+      "*Komponenter*\n• <https://aksel.nav.no/a?b=1&amp;c=2|Dialog &lt;ny&gt;>",
     );
   });
 });

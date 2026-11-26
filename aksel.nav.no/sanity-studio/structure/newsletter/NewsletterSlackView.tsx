@@ -2,7 +2,6 @@ import { endOfDay } from "date-fns/endOfDay";
 import { startOfDay } from "date-fns/startOfDay";
 import { subDays } from "date-fns/subDays";
 import { useMemo, useState } from "react";
-import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
@@ -14,7 +13,9 @@ import {
   VStack,
   useRangeDatepicker,
 } from "@navikt/ds-react";
-import { formatSlackMessage, toSlackHtml } from "./format-slack-message";
+import { CopyForSlackButton } from "./CopyForSlackButton";
+import { PostToSlackButton } from "./PostToSlackButton";
+import { formatSlackMessage } from "./format-slack-message";
 import {
   type QueryDateRangeT,
   useBuildNewsletterEntries,
@@ -51,37 +52,12 @@ export const NewsletterSlackView = () => {
   const setText = (value: string) =>
     setEdit({ base: generatedText, text: value });
 
-  const [copyStatus, setCopyStatus] = useState<
-    "idle" | "copied" | "copiedAsPlainText" | "error"
-  >("idle");
-
-  const copyAsRichText = async () => {
-    try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          "text/html": new Blob([toSlackHtml(text)], { type: "text/html" }),
-          "text/plain": new Blob([text], { type: "text/plain" }),
-        }),
-      ]);
-      setCopyStatus("copied");
-      setTimeout(() => setCopyStatus("idle"), 2000);
-    } catch {
-      // Some browsers don't support ClipboardItem or deny rich-text write
-      try {
-        await navigator.clipboard.writeText(text);
-        setCopyStatus("copiedAsPlainText");
-      } catch {
-        setCopyStatus("error");
-      }
-    }
-  };
-
   return (
     <Box padding="space-24" maxWidth="60rem">
       <VStack gap="space-24">
         <BodyLong>
           Samler nye artikler og endringslogg-innlegg for perioden. Rediger
-          teksten og kopier den inn i Slack.
+          teksten og kopier den inn i Slack, eller legg den ut direkte.
         </BodyLong>
         <DatePicker {...datepickerProps}>
           <HStack wrap gap="space-16">
@@ -104,22 +80,9 @@ export const NewsletterSlackView = () => {
             readOnly={status === "loading"}
           />
         )}
-
-        <HStack gap="space-8" align="center">
-          <Button
-            size="small"
-            icon={
-              copyStatus === "copied" ? (
-                <CheckmarkIcon aria-hidden />
-              ) : (
-                <FilesIcon aria-hidden />
-              )
-            }
-            onClick={copyAsRichText}
-            disabled={!text}
-          >
-            {copyStatus === "copied" ? "Kopiert!" : "Kopier tekst"}
-          </Button>
+        <HStack gap="space-8" align="center" wrap>
+          <PostToSlackButton text={text} />
+          <CopyForSlackButton text={text} />
           <Button
             variant="secondary"
             size="small"
@@ -129,16 +92,6 @@ export const NewsletterSlackView = () => {
             Tilbakestill tekst
           </Button>
         </HStack>
-        {copyStatus === "copiedAsPlainText" && (
-          <InlineMessage status="warning">
-            Kopierte som ren tekst. Lenkene blir ikke klikkbare i Slack.
-          </InlineMessage>
-        )}
-        {copyStatus === "error" && (
-          <InlineMessage status="error">
-            Klarte ikke å kopiere. Kopier teksten manuelt.
-          </InlineMessage>
-        )}
       </VStack>
     </Box>
   );

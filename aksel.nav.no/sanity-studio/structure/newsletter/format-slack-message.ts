@@ -88,6 +88,12 @@ export const formatSlackMessage = (
 };
 
 /**
+ * [title](https://url). Title can't contain "]" or line breaks, url can't contain ")" or spaces.
+ * Groups: $1 = title, $2 = url.
+ */
+const MARKDOWN_LINK = /\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g;
+
+/**
  * Converts the text from `formatSlackMessage` to HTML.
  * Slack's message composer keeps links and bold text from pasted HTML, but not from pasted markdown.
  */
@@ -98,8 +104,18 @@ export const toSlackHtml = (text: string) =>
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
-    /* [title](https://url) -> link. Title can't contain "]" or line breaks, url can't contain ")" or spaces */
-    .replace(/\[([^\n]+?)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>')
+    .replace(MARKDOWN_LINK, '<a href="$2">$1</a>')
     /* *text* -> bold, within a single line */
     .replace(/\*([^*\n]+)\*/g, "<b>$1</b>")
     .replaceAll("\n", "<br>");
+
+/**
+ * Converts the text from `formatSlackMessage` to Slack mrkdwn, used when posting through the Slack API.
+ * `*bold*` is already valid mrkdwn, so only links and the characters Slack requires escaped are changed.
+ */
+export const toSlackMrkdwn = (text: string) =>
+  text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replace(MARKDOWN_LINK, "<$2|$1>");
