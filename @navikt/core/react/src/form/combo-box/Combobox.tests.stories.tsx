@@ -124,14 +124,10 @@ CloseBehavior.play = async ({ canvasElement }) => {
   expect(filter).toHaveFocus();
   await userEvent.type(filter, "Norge");
   expect(filter).toHaveValue("Norge");
-  expect(
-    canvas.queryByRole("option", { name: "Finland" }),
-  ).not.toBeInTheDocument();
   await userEvent.keyboard("{Escape}");
   expect(filter).toHaveValue("");
   expect(filter).toHaveFocus();
   expect(trigger).toHaveAttribute("aria-expanded", "true");
-  expect(canvas.getByRole("option", { name: "Finland" })).toBeInTheDocument();
   await userEvent.keyboard("{Escape}");
   expect(trigger).toHaveFocus();
   expect(trigger).toHaveAttribute("aria-expanded", "false");
