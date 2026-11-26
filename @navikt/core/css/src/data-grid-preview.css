@@ -1,5 +1,5 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- --__axc-data-table-nested-depth is set at runtime */
+/* stylelint-disable no-duplicate-selectors -- Preview stylesheet groups rules by feature section */
 
 .aksel-data-grid {
   flex-grow: 1;

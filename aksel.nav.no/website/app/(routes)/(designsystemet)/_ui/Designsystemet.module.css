@@ -14,7 +14,7 @@
   position: relative;
   max-width: 1920px;
 
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Defined in globals.css */
   min-height: calc(100vh - var(--website-header-sticky-height));
 }
 

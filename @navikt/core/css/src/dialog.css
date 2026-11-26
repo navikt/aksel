@@ -92,7 +92,7 @@
     }
 
     &[data-nested-dialog-open="true"] {
-      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by DialogPopupInternal */
       transform: translateY(calc(1rem * var(--__axc-nested-level) * -1)) scale(calc(1 - 0.02 * var(--__axc-nested-level)));
     }
 
@@ -109,7 +109,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- Explicit sides keep top: auto override clear */
       top: auto;
       margin-block: 0;
     }
@@ -162,7 +162,7 @@
     height: auto;
 
     &[data-nested-dialog-open="true"] {
-      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+      /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by DialogPopupInternal */
       transform: translateY(calc(1rem * var(--__axc-nested-level) * -1)) scale(calc(1 - 0.02 * var(--__axc-nested-level)));
     }
   }

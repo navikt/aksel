@@ -26,7 +26,7 @@
     display: inline;
 
     & > svg {
-      /* stylelint-disable-next-line plugin/declaration-block-no-ignored-properties */
+      /* stylelint-disable-next-line plugin/declaration-block-no-ignored-properties -- <svg> is a replaced element so vertical margin applies with display: inline */
       margin: 0.1em 0.1em -0.1em;
       transform: translateY(0.05em);
       display: inline;

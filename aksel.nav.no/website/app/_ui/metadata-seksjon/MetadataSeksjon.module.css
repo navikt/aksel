@@ -47,6 +47,6 @@
 }
 
 .propsSeksjonCode {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Defined in globals.css */
   font-family: var(--website-font-mono);
 }

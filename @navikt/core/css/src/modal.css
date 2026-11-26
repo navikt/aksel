@@ -45,7 +45,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- Preserves dialog-polyfill longhand side declarations */
   left: 0;
 }
 
@@ -110,7 +110,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties -- Preserves dialog-polyfill longhand side declarations */
   left: 0;
 }
 

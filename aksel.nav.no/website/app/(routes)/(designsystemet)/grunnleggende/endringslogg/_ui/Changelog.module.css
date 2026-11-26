@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- Uses --website-header-sticky-height from globals.css */
 .monthSpacer {
   height: var(--ax-space-12);
 }

@@ -4,7 +4,7 @@
   display: none;
   min-width: 12.5rem;
   height: fit-content;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Defined in globals.css */
   top: calc(var(--website-header-sticky-height) + var(--ax-space-24));
 
   &[data-variant="subtle"] {
@@ -50,13 +50,11 @@
 
 .tocShadowTop {
   top: 0;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(180deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 
 .tocShadowBottom {
   bottom: 0;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(0deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 
