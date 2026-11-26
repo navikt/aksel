@@ -10,6 +10,6 @@
 - [ ] Storybook
 - [ ] CSS class deprecations (`@navikt/aksel-stylelint/src/deprecations.ts`)
 - [ ] Exports (`@navikt/core/react/src/index.ts` and `@navikt/core/react/package.json`)
-- [ ] New component? CSS import (`@navikt/core/css/index.css`)
+- [ ] New component? CSS import (`@navikt/core/css/src/index.css`)
 - [ ] Breaking change? Update migration guide. Consider codemod.
-- [ ] Changeset (Format: `<Component>: <gitmoji?> <Text>` E.g. "Button: :sparkles: Add feature xyz")
+- [ ] Changeset (Format: `<Component>: <what changed for consumers>` E.g. "DataGrid: Change `overflow:hidden` to `min-height:0` and `min-width:0` on root")

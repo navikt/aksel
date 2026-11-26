@@ -1,5 +1,49 @@
 # Changelog
 
+## 8.23.2
+
+### @navikt/ds-react
+
+- Popover and other floating components: Dismiss when focus leaves the overlay and its trigger, including inside web components. ([#5559](https://github.com/navikt/aksel/pull/5559))
+
+- Select: Prevent opening by clicking label when `readOnly` on Mac+Chrome ([#5595](https://github.com/navikt/aksel/pull/5595))
+
+- Switch:  `<Switch />` elements inside a `<Fieldset />` with `readOnly` now share a single padlock in the group legend instead of displaying one per switch. Each switch retains screen-reader text indicating its read-only state, and standalone switches keep their individual padlocks. ([#5583](https://github.com/navikt/aksel/pull/5583))
+
+## 8.23.1
+
+### @navikt/ds-css
+
+- DataGrid: Change `overflow:hidden` to `min-height:0` and `min-width:0` on root ([#5568](https://github.com/navikt/aksel/pull/5568))
+
+### @navikt/ds-react
+
+- DataGrid: Keyboard navigation in table no longer prevents shift+tabbing away from the table ([`7dbf1d5`](https://github.com/navikt/aksel/commit/7dbf1d5382367837b1f43fc76ca57d986218b64d))
+
+- Button: Preserve keyboard modifiers during native Space activation. ([#5564](https://github.com/navikt/aksel/pull/5564))
+
+- DataGrid.Table: Temporarily removed `topContent` and `bottomContent` props. ([#5579](https://github.com/navikt/aksel/pull/5579))
+
+## 8.23.0
+
+### @navikt/aksel-icons
+
+- Icons: All icons are now available as CSS custom properties. Import `@navikt/aksel-icons/css/<IconName>.css` for a single icon (e.g. `--aksel-icon-magnifying-glass`), or `@navikt/aksel-icons/css/index.css` for every icon. ([#5489](https://github.com/navikt/aksel/pull/5489))
+
+### @navikt/aksel-stylelint
+
+- Stylelint: `@navikt/aksel-stylelint/recommended` now references its plugin by explicit file path, fixing `Could not find "."` errors with Stylelint 18. ([#5527](https://github.com/navikt/aksel/pull/5527))
+
+### @navikt/ds-react
+
+- DataGrid: Faster rendering when many details panels are expanded. ([#5494](https://github.com/navikt/aksel/pull/5494))
+
+- DataGrid.Table: Keyboard navigation no longer rebuilds the internal grid map on every arrow key press, improving responsiveness in large tables. ([#5491](https://github.com/navikt/aksel/pull/5491))
+
+- Combobox: Ignore option selection when an open Combobox becomes disabled. ([#5520](https://github.com/navikt/aksel/pull/5520))
+
+- Timeline: Optimize period parsing. ([#5469](https://github.com/navikt/aksel/pull/5469))
+
 ## 8.22.1
 
 ### @navikt/ds-css

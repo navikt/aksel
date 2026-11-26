@@ -1,7 +1,6 @@
 "use client";
-export {
-  default as FormProgress,
-  type FormProgressProps,
-  FormProgressStep,
-  type FormProgressStepProps,
-} from "./FormProgress";
+export { FormProgress, FormProgressStep } from "./root/FormProgressRoot";
+export type {
+  FormProgressProps,
+  FormProgressStepProps,
+} from "./root/FormProgressRoot";

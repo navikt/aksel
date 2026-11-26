@@ -9,6 +9,7 @@ import {
   within,
 } from "storybook/test";
 import { Button } from "../button";
+import { Popover } from "../popover";
 import { Provider } from "../provider";
 import {
   Dialog,
@@ -701,6 +702,7 @@ export const TabToLinks: Story = {
   play: async ({ canvasElement, args }) => {
     const { canvas } = testUtils(canvasElement, args);
 
+    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
     await userEvent.tab();
     expect(canvas.getByPlaceholderText("test")).toHaveFocus();
     await userEvent.tab();
@@ -709,6 +711,78 @@ export const TabToLinks: Story = {
     expect(canvas.getByTestId("link-2")).toHaveFocus();
     await userEvent.tab({ shift: true });
     expect(canvas.getByTestId("link-1")).toHaveFocus();
+  },
+};
+
+/* ----------------------- Nested dismissable layers ------------------------ */
+function PopoverInDialog() {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null,
+  );
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        ref={setAnchorEl}
+        aria-expanded={open}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Popover trigger
+      </button>
+      <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
+        <Popover.Content>
+          <button type="button">Inside popover</button>
+        </Popover.Content>
+      </Popover>
+      <button type="button">Dialog button</button>
+    </>
+  );
+}
+
+export const PopoverInsideDialog: Story = {
+  render: BaseDialogComponent,
+  beforeEach: withoutAnimations,
+  play: async ({ canvasElement, args }) => {
+    const { canvas, expectPopupOpen, expectOpenChangeCalls } = testUtils(
+      canvasElement,
+      args,
+    );
+    await waitFor(() => expect(canvas.getByTestId("popup")).toHaveFocus());
+
+    const popoverTrigger = canvas.getByRole("button", {
+      name: "Popover trigger",
+    });
+    const openPopover = async () => {
+      popoverTrigger.focus();
+      await userEvent.keyboard("{Enter}");
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "true");
+    };
+
+    await openPopover();
+    await userEvent.tab();
+    expect(
+      canvas.getByRole("button", { name: "Inside popover" }),
+    ).toHaveFocus();
+    await userEvent.tab();
+    expect(canvas.getByRole("button", { name: "Dialog button" })).toHaveFocus();
+    await waitFor(() =>
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "false"),
+    );
+    expectPopupOpen();
+
+    await openPopover();
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(popoverTrigger).toHaveAttribute("aria-expanded", "false"),
+    );
+    expectPopupOpen();
+    expectOpenChangeCalls(0);
+  },
+  args: {
+    rootProps: { defaultOpen: true, onOpenChange: fn() },
+    popupProps: { children: <PopoverInDialog /> },
   },
 };
 
@@ -784,7 +858,8 @@ function PortalContainer({ children }: { children: React.ReactNode }) {
 
   return (
     <Provider rootElement={container ?? undefined}>
-      {children}
+      {/* Wait for #portal-container before mounting children so DialogPopup/FocusBoundary don't mount to document.body and immediately remount */}
+      {container && children}
       <div id="portal-container" ref={setContainer} />
     </Provider>
   );

@@ -26,9 +26,36 @@ interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   translations?: ComponentTranslation<"FileUpload">;
 }
 
-interface FileUploadComponent extends React.ForwardRefExoticComponent<
-  FileUploadProps & React.RefAttributes<HTMLDivElement>
-> {
+const FileUploadRoot = forwardRef<HTMLDivElement, FileUploadProps>(
+  ({ children, className, translations, ...rest }: FileUploadProps, ref) => {
+    return (
+      <FileUploadLocaleContextProvider translations={translations}>
+        <div ref={ref} {...rest} className={cl("aksel-file-upload", className)}>
+          {children}
+        </div>
+      </FileUploadLocaleContextProvider>
+    );
+  },
+);
+
+/**
+ * A set of components used to upload and display files.
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fileupload)
+ * @example Dropzone
+ * ```jsx
+ *  <FileUpload.Dropzone />
+ * ```
+ *
+ * @example
+ * Items
+ * ```jsx
+ * <VStack gap="space-16" as="ul">
+ *   <FileUpload.Item as="li" file={myFile} />
+ *   <FileUpload.Item as="li" file={mySecondFile} />
+ * </VStack>
+ * ```
+ */
+const FileUpload = Object.assign(FileUploadRoot, {
   /**
    * Framed area to drag-n-drop files, upload files with button-click or copy-paste.
    * @see 🏷️ {@link FileUploadDropzoneProps}
@@ -62,7 +89,7 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * />
    * ```
    */
-  Dropzone: typeof FileUploadDropzone;
+  Dropzone: FileUploadDropzone,
 
   /**
    * Displays a file with status, file size, action and error message.
@@ -106,7 +133,7 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * <FileUpload.Item file={file} button={{ action:"delete", onClick:... }} />
    * ```
    */
-  Item: typeof FileUploadItem;
+  Item: FileUploadItem,
   /**
    * Wrapper for a button to trigger file select.
    * @see 🏷️ {@link FileUploadTriggerProps}
@@ -117,46 +144,12 @@ interface FileUploadComponent extends React.ForwardRefExoticComponent<
    * </FileUpload.Trigger>
    * ```
    */
-  Trigger: typeof FileUploadTrigger;
-}
+  Trigger: FileUploadTrigger,
+});
 
-/**
- * A set of components used to upload and display files.
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fileupload)
- * @example Dropzone
- * ```jsx
- *  <FileUpload.Dropzone />
- * ```
- *
- * @example
- * Items
- * ```jsx
- * <VStack gap="space-16" as="ul">
- *   <FileUpload.Item as="li" file={myFile} />
- *   <FileUpload.Item as="li" file={mySecondFile} />
- * </VStack>
- * ```
- */
-export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
-  ({ children, className, translations, ...rest }: FileUploadProps, ref) => {
-    return (
-      <FileUploadLocaleContextProvider translations={translations}>
-        <div ref={ref} {...rest} className={cl("aksel-file-upload", className)}>
-          {children}
-        </div>
-      </FileUploadLocaleContextProvider>
-    );
-  },
-) as FileUploadComponent;
-
-FileUpload.Dropzone = FileUploadDropzone;
-FileUpload.Item = FileUploadItem;
-FileUpload.Trigger = FileUploadTrigger;
-
-export default FileUpload;
-
-export { FileUploadTrigger, FileUploadDropzone, FileUploadItem };
+export { FileUpload, FileUploadTrigger, FileUploadDropzone, FileUploadItem };
 export type {
+  FileUploadProps,
   FileUploadTriggerProps,
   FileUploadDropzoneProps,
   FileUploadItemProps,

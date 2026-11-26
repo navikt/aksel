@@ -62,7 +62,7 @@ export default function GenericErrorPage() {
               <BodyShort>
                 Dersom problemet vedvarer, kan du{" "}
                 <Link
-                  href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
+                  href="https://github.com/navikt/aksel/issues/new?template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
                   target="_blank"
                 >
                   kontakte oss (åpnes i ny fane)
@@ -82,7 +82,7 @@ export default function GenericErrorPage() {
             <BodyShort>
               <Link
                 target="_blank"
-                href="https://github.com/navikt/aksel/issues/new?assignees=&labels=bug+%F0%9F%90%9B&projects=&template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
+                href="https://github.com/navikt/aksel/issues/new?template=bug-report.md&title=[Aksel.nav.no%20-%20500]"
               >
                 Contact us (opens in new tab)
               </Link>{" "}

@@ -162,6 +162,45 @@ describe("Tools", () => {
       expect(token).toHaveProperty("jsValue");
     });
 
+    test("should fetch details for dynamic data-color base tokens without JS/SCSS/LESS accessors", async () => {
+      const textDefault = JSON.parse(
+        await getTokenDetailsTool.callback({ tokenName: "text-default" }),
+      );
+      expect(textDefault).toMatchObject({
+        name: "text-default",
+        cssValue: "var(--ax-text-default)",
+        resolvesTo: "var(--ax-text-<color>)",
+        defaultRole: "accent",
+        type: "themed-role",
+        category: "textColor",
+      });
+      expect(textDefault).not.toHaveProperty("jsValue");
+      expect(textDefault).not.toHaveProperty("scssValue");
+      expect(textDefault).not.toHaveProperty("lessValue");
+
+      const bgSoft = JSON.parse(
+        await getTokenDetailsTool.callback({ tokenName: "bg-soft" }),
+      );
+      expect(bgSoft).toMatchObject({
+        name: "bg-soft",
+        cssValue: "var(--ax-bg-soft)",
+        resolvesTo: "var(--ax-bg-<color>-soft)",
+        type: "themed-role",
+        category: "backgroundColor",
+      });
+
+      const borderDefault = JSON.parse(
+        await getTokenDetailsTool.callback({ tokenName: "border-default" }),
+      );
+      expect(borderDefault).toMatchObject({
+        name: "border-default",
+        cssValue: "var(--ax-border-default)",
+        resolvesTo: "var(--ax-border-<color>)",
+        type: "themed-role",
+        category: "borderColor",
+      });
+    });
+
     test("should return error with suggestions for similar tokens", async () => {
       const result = await getTokenDetailsTool.callback({
         tokenName: "shadow",

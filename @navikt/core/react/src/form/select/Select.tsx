@@ -2,7 +2,7 @@ import React, { type SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../utils-external";
-import { cl } from "../../utils/helpers";
+import { cl, composeEventHandlers } from "../../utils/helpers";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { type FormFieldProps, useFormField } from "../useFormField";
 
@@ -87,6 +87,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           event.preventDefault();
         }
       },
+      onClick: composeEventHandlers(
+        props.onClick,
+        (event: React.MouseEvent<HTMLSelectElement>) => {
+          // Chrome on Mac does not trigger onMouseDown when clicking the label
+          event.preventDefault();
+        },
+      ),
     };
 
     return (

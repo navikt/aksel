@@ -16,6 +16,7 @@
 - Do not narrate routine tool use. Explain decisions, blockers, uncertainty, and tradeoffs when relevant.
 - Show only what changes. Minimal diffs; don't paste whole files.
 - Edit only the files the change needs (see Definition of done); no unrelated files. Ask only when truly blocked.
+- Reviews and preflight: prioritize real end-consumer impact (UX, a11y, breaking API, runtime bugs) over theoretical edge cases; don't inflate unlikely scenarios to blockers, and log unrelated issues separately instead of fixing them on the current feature branch.
 - Favor perf/security; avoid re-renders, top-level side effects, unsafe HTML, env var leaks.
 
 ## Repo summary
@@ -38,7 +39,7 @@
 
 ## Definition of done
 
-- Behavior/visual change: update the implementation and closest existing story. Prefer Storybook play tests for UI behavior and unit tests for small utilities; combine overlapping coverage into existing stories instead of adding redundant stories.
+- Behavior/visual change: update the implementation and closest existing story. Keep tests lean: put pure logic/hooks in Vitest or DOM/a11y/focus behavior in Storybook play tests. Don't duplicate coverage across both. Fold secondary invariants into existing stories instead of adding a dedicated story per edge case.
 - New public export: sync component `index.ts`, `src/index.ts` (or `src/preview.ts`) and `package.json` exports, then `corepack yarn workspace aksel-playroom sync-imports` (root `lint` fails on stale playroom imports).
 - User-facing change to a published package: add a changeset (`add-changeset` skill) unless told otherwise.
 
@@ -48,8 +49,8 @@
 - `corepack yarn tsc --noEmit --incremental false --project <tsconfig>` - targeted type-check
 - `corepack yarn workspace <name> <script>` - e.g. `@navikt/ds-react test` (Vitest + tsc), `website test`
 - `corepack yarn lint` / `corepack yarn test` / `corepack yarn boot` - root suites (slow; cross-workspace changes only)
-- `corepack yarn storybook` (:6006) / `corepack yarn storybook:aksel` (website examples, :6007, no secrets) / `corepack yarn storybook:test` (play tests, Playwright Firefox; Chromium when `COPILOT_CLI` is set) / `corepack yarn dev` (website, :3000, needs Sanity token)
-- Targeted play tests: `corepack yarn storybook:test <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs Chromium; if the browser can't launch, report tests as not run with the exact command.
+- `corepack yarn storybook` (:6006) / `corepack yarn storybook:aksel` (website examples, :6007, no secrets) / `corepack yarn storybook:test` (play tests in Playwright Chromium, Firefox and WebKit; only Chromium when `COPILOT_CLI` is set; filter with `--browser.name=<browser>`) / `corepack yarn dev` (website, :3000, needs Sanity token)
+- Targeted play tests: `corepack yarn storybook:test <path/to/X.tests.stories.tsx>` (repo root). Run after changing play tests. Under Copilot CLI this runs only Chromium (Firefox/WebKit can't launch in the cplt sandbox; CI covers them); if the browser can't launch, report tests as not run with the exact command.
 
 ## Where to edit
 
@@ -65,7 +66,7 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 - `apps/playroom/`, `apps/mcp-server/`, `apps/figma-icon-plugin/` - apps · `tooling/` - ESLint plugin, scripts, changelog, analyzer
 - `.changeset/` - release notes · Root config: `oxlint.config.mts`, `stylelint.config.mjs`, `vitest.config.mts`, `.storybook/`
 
-## Skills and agents
+## Skills
 
 - `aksel-local-validation` - pick and run the right lint/type/test commands
 - `code-review` - review a branch, diff or PR for consumer-facing risk
@@ -84,9 +85,10 @@ Path-specific rules load automatically from `.github/instructions/` (see each `a
 
 - Small diffs. No drive-by refactors or new deps unless asked.
 - Propose the simplest maintainable solution first (explicit lists, member-name checks). No TS compiler API/AST tricks in tests (slow). Ask before escalating complexity.
+- Assume consumers use TypeScript: rely on strict TS types instead of runtime type/key validation, dev-only schema warnings, or defensive guards unless a real runtime boundary requires them. Avoid extra state/plumbing for speculative edge cases.
 - Copy nearest existing pattern before writing new code.
-- Stable public APIs. Prefer additive props/exports.
+- Stable public APIs. Prefer additive props/exports. For unpublished/WIP/preview components: put translations in `@navikt/core/react/src/utils/i18n/i18n.internal.ts` (not public `locales/{nb,nn,en}.ts`), change/remove unpublished props directly without compatibility fallbacks, and keep compound sub-components flat (`Root.Sub`, never `Root.Sub.SubSub`).
 - `node:` imports for Node builtins. Never import from `esm/`/`cjs/` output.
-- Preserve JSDoc on public props/components when changing public APIs.
+- Preserve JSDoc on public props/components when changing public APIs. Keep inline comments short and plain-language, explaining _why_ non-obvious workarounds or invariants exist (avoid verbose or jargon-heavy prose for simple code). Write brief descriptions on visual Storybook stories stating what the story shows, not test instructions.
 - Reuse helpers: `cl`, `composeEventHandlers`, `useId`, `omit`, `useClientLayoutEffect`, `useEventListener`.
 - No tests for trivial logic. Only tests for complex logic that has a higher risk of breaking.

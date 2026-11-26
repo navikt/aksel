@@ -1,14 +1,18 @@
-import { differenceInMonths } from "date-fns";
+import { differenceInDays } from "date-fns";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
+import { DEFAULT_OUTDATED_THRESHOLD } from "../../../sanity.env";
 
 const isAfter = (date: string, threshold: number) =>
-  differenceInMonths(new Date(), new Date(date)) >= threshold;
+  differenceInDays(new Date(), new Date(date)) >= threshold;
 
 /**
  * @param _type document type
- * @param threshold number of months before article is considered outdated in **months**
+ * @param threshold number of days before article is considered outdated
  */
-export const artikkelPreview = (_type: string, threshold: number = 12) => {
+export const artikkelPreview = (
+  _type: string,
+  threshold: number = DEFAULT_OUTDATED_THRESHOLD,
+) => {
   return {
     preview: {
       select: {

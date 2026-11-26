@@ -120,7 +120,7 @@ export {
   type CheckboxGroupProps,
   type CheckboxProps,
 } from "./form/checkbox";
-export { UNSAFE_Combobox, type ComboboxProps } from "./form/combobox";
+export { UNSAFE_Combobox, type ComboboxProps } from "./legacy/combobox";
 export {
   ConfirmationPanel,
   type ConfirmationPanelProps,

@@ -1,6 +1,6 @@
 "use client";
 export {
-  default as FileUpload,
+  FileUpload,
   FileUploadTrigger,
   FileUploadDropzone,
   FileUploadItem,

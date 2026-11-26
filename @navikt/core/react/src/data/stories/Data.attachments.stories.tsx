@@ -59,6 +59,7 @@ export const Attachments: Story = {
             table content scrolls.
           </BodyShort>
         </VStack>
+        <Content />
         <div
           style={{
             overflow: "hidden",
@@ -69,8 +70,8 @@ export const Attachments: Story = {
         >
           <DataGrid columns={getColDefs(overflow)} data={getData(overflow)}>
             <DataGrid.Table
-              topContent={<Content />}
-              bottomContent={<Content />}
+              // topContent={<Content />}
+              // bottomContent={<Content />}
               stickyHeader
             />
           </DataGrid>

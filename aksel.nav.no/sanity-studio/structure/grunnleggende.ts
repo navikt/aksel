@@ -19,7 +19,7 @@ export function grunnleggendeStructure(S: StructureBuilder) {
           landingssideItem(S, "grunnleggende_landingsside"),
           S.divider(),
           listDraftArticles(S, "ds_artikkel"),
-          listOutdatedArticles(S, "ds_artikkel", 180),
+          listOutdatedArticles(S, "ds_artikkel"),
 
           S.divider(),
           ...categoryPanes(

@@ -192,8 +192,7 @@ function GodPraksisFeedbackForm({
       </Heading>
       <Box asChild paddingBlock="space-4 space-24">
         <BodyLong>
-          Har du innspill til artikkelen? Meldingen blir sendt med Slack til
-          folka som har lagd artikkelen 🙌
+         Har du innspill til artikkelen? Meldingen sendes i Slack til oss i Aksel og folka som har laget artikkelen 🙌
         </BodyLong>
       </Box>
       <HStack gap="space-8" paddingBlock="space-0 space-24">
