@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { Button } from "../../button";
 import { Dialog } from "../../dialog";
 import { HStack, VStack } from "../../primitives/stack";
+import { renderStoriesForChromatic } from "../../utils/renderStoriesForChromatic";
 import { ComboboxMulti, ComboboxSingle } from "./Combobox";
 import { ComboboxField } from "./field/ComboboxField";
 import { ComboboxFilter } from "./filter/ComboboxFilter";
@@ -87,13 +88,16 @@ type DefaultProps = Pick<
   | "error"
 >;
 
-export const Default: StoryFn<DefaultProps> = (props) => {
-  return (
+export const Default: StoryFn<DefaultProps> = (props) => (
+  <ComboboxSingle options={countries} {...props} />
+);
+Default.decorators = [
+  (Story) => (
     <div style={{ minHeight: "300px" }}>
-      <ComboboxSingle options={countries} {...props} />
+      <Story />
     </div>
-  );
-};
+  ),
+];
 Default.args = {
   label: "Velg land",
   description: "Landet hvor du er født.",
@@ -451,3 +455,17 @@ export const ScreenreaderTesting = () => (
     <BasicCombobox disabled />
   </div>
 );
+
+export const Chromatic = renderStoriesForChromatic({
+  Default,
+  Small,
+  Hidelabel,
+  Readonly,
+  Disabled,
+  ErrorStory,
+  DefaultOpen: () => (
+    <div style={{ marginBlock: "160px 200px" }}>
+      <BasicCombobox defaultOpen options={nordicCountries.slice(0, 3)} />
+    </div>
+  ),
+});
