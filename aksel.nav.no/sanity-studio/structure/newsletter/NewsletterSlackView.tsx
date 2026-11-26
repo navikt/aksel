@@ -24,7 +24,7 @@ import {
 
 export const NewsletterSlackView = () => {
   const [initialRange] = useState(() => ({
-    from: subDays(startOfDay(new Date()), 7),
+    from: subDays(startOfDay(new Date()), 6),
     to: new Date(),
   }));
   const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
