@@ -26,6 +26,10 @@ export const CopyForSlackButton = ({
       ]);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      onFeedback({
+        status: "success",
+        message: "Kopiert. Lim inn teksten i Slack.",
+      });
     } catch {
       // Some browsers don't support ClipboardItem or deny rich-text write
       try {

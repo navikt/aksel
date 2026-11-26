@@ -95,11 +95,14 @@ export const NewsletterSlackView = () => {
             Tilbakestill tekst
           </Button>
         </HStack>
-        {feedback && (
-          <InlineMessage status={feedback.status}>
-            {feedback.message}
-          </InlineMessage>
-        )}
+        {/* Always mounted, so screen readers announce messages when they appear */}
+        <div aria-live="polite">
+          {feedback && (
+            <InlineMessage status={feedback.status}>
+              {feedback.message}
+            </InlineMessage>
+          )}
+        </div>
       </VStack>
     </Box>
   );
