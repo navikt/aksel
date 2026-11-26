@@ -1,5 +1,5 @@
 import { useClient } from "sanity";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 import { SANITY_API_VERSION } from "../../sanity.env";
 import {
   NEWSLETTER_ENTRIES_QUERY,
@@ -24,14 +24,17 @@ export const useBuildNewsletterEntries = (
     ? newsletterQueryParams(dateRange.from, dateRange.to)
     : null;
 
-  const { data, error } = useSWR(
+  /*
+   * useSWRImmutable fetches each period once and then reuses the cached result.
+   * Unlike useSWR, it never refetches in the background
+   * because a refetch could change the generated text and discard the user's edits.
+   */
+  const { data, error } = useSWRImmutable(
     params && [NEWSLETTER_ENTRIES_QUERY, params],
     ([query, queryParams]) =>
       client.fetch<NewsletterEntriesT>(query, queryParams, {
         perspective: "published", // default with our api version. Maybe worth keeping in case we downgrade or it changes in future versions
       }),
-    /* do not refetch on focus. it would replace the text the user is editing */
-    { revalidateOnFocus: false, revalidateOnReconnect: false },
   );
 
   if (error) {
