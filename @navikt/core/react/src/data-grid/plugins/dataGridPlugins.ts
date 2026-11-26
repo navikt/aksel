@@ -89,8 +89,8 @@ function orderPlugins(
 }
 
 interface InternNode {
-  readonly next: WeakMap<object, InternNode>;
-  array?: readonly object[];
+  readonly next: WeakMap<DataGridPlugin, InternNode>;
+  array?: readonly DataGridPlugin[];
 }
 
 /**
@@ -143,7 +143,7 @@ function internByIdentity(
     node.array =
       process.env.NODE_ENV !== "production" ? Object.freeze(copy) : copy;
   }
-  return node.array as readonly DataGridPlugin[];
+  return node.array;
 }
 
 /**
