@@ -170,7 +170,7 @@ function applyTableContext(
     const next = transform(content);
     if (!next) {
       consoleWarning(
-        `DataGrid: Plugin transformTableContext returned "${String(next)}". Preserving previous content.`,
+        `DataGrid: A plugin's transformTableContext returned "${String(next)}". Preserving previous content.`,
       );
       continue;
     }
