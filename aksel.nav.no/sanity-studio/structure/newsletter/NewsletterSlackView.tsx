@@ -9,6 +9,7 @@ import {
   DatePicker,
   HStack,
   InlineMessage,
+  type RangeValidationT,
   Textarea,
   VStack,
   useRangeDatepicker,
@@ -23,12 +24,16 @@ import {
 } from "./useBuildNewsletterEntries";
 
 export const NewsletterSlackView = () => {
+  const [validation, setValidation] = useState<RangeValidationT>();
   const [initialRange] = useState(() => ({
     from: subDays(startOfDay(new Date()), 6),
     to: new Date(),
   }));
   const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
-    useRangeDatepicker({ defaultSelected: initialRange });
+    useRangeDatepicker({
+      defaultSelected: initialRange,
+      onValidate: setValidation,
+    });
 
   const range = useMemo<QueryDateRangeT | undefined>(
     () =>
@@ -64,8 +69,16 @@ export const NewsletterSlackView = () => {
         </BodyLong>
         <DatePicker {...datepickerProps}>
           <HStack wrap gap="space-16">
-            <DatePicker.Input {...fromInputProps} label="Fra" />
-            <DatePicker.Input {...toInputProps} label="Til" />
+            <DatePicker.Input
+              {...fromInputProps}
+              label="Fra"
+              error={validation && getDateError(validation.from)}
+            />
+            <DatePicker.Input
+              {...toInputProps}
+              label="Til"
+              error={validation && getDateError(validation.to)}
+            />
           </HStack>
         </DatePicker>
 
@@ -80,7 +93,7 @@ export const NewsletterSlackView = () => {
             value={text}
             onChange={(event) => setText(event.target.value)}
             minRows={16}
-            readOnly={status === "loading"}
+            readOnly={status !== "ready"}
           />
         )}
         <HStack gap="space-8" align="center" wrap>
@@ -106,4 +119,17 @@ export const NewsletterSlackView = () => {
       </VStack>
     </Box>
   );
+};
+
+const getDateError = (validation: RangeValidationT["to"]) => {
+  if (validation.isEmpty) {
+    return "Velg en dato.";
+  }
+  if (validation.isInvalid) {
+    return "Ugyldig dato. Bruk formatet dd.mm.åååå.";
+  }
+  if (validation.isBeforeFrom) {
+    return "Til-datoen kan ikke være før fra-datoen.";
+  }
+  return undefined;
 };
