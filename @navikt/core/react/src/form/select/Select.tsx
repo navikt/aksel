@@ -87,6 +87,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           event.preventDefault();
         }
       },
+      onClick: (event: React.MouseEvent<HTMLSelectElement>) => {
+        props.onClick?.(event);
+        // Chrome on Mac does not trigger onMouseDown when clicking the label
+        event.preventDefault();
+      },
     };
 
     return (
