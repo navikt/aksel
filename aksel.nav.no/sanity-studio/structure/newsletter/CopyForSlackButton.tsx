@@ -25,6 +25,7 @@ export const CopyForSlackButton = ({
         }),
       ]);
       setCopied(true);
+      onFeedback({ status: "success", message: "Kopiert." });
       setTimeout(() => setCopied(false), 2000);
       onFeedback({
         status: "success",
