@@ -99,7 +99,7 @@ export const toSlackHtml = (text: string) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     /* [title](https://url) -> link. Title can't contain "]" or line breaks, url can't contain ")" or spaces */
-    .replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\[([^\n]+?)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>')
     /* *text* -> bold, within a single line */
     .replace(/\*([^*\n]+)\*/g, "<b>$1</b>")
     .replaceAll("\n", "<br>");
