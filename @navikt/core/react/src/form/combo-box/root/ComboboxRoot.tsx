@@ -127,13 +127,7 @@ export function ComboboxRoot<
     >
       <ComboboxRootContextProvider
         open={open}
-        setOpen={useCallback((newOpen) => {
-          setOpen(newOpen);
-          if (!newOpen) {
-            // queueMicrotask is needed when closing with close button in Dialog
-            queueMicrotask(() => triggerRef.current?.focus());
-          }
-        }, [])}
+        setOpen={setOpen}
         triggerRef={triggerRef}
         options={options}
         value={value}
