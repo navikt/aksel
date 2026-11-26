@@ -24,23 +24,19 @@ export const useBuildNewsletterEntries = (
     ? newsletterQueryParams(dateRange.from, dateRange.to)
     : null;
 
-  /*
-   * useSWRImmutable fetches each period once and then reuses the cached result.
-   * Unlike useSWR, it never refetches in the background
-   * because a refetch could change the generated text and discard the user's edits.
-   */
-  const { data, error } = useSWRImmutable(
+  const { data, error, isValidating } = useSWRImmutable(
     params && [NEWSLETTER_ENTRIES_QUERY, params],
     ([query, queryParams]) =>
       client.fetch<NewsletterEntriesT>(query, queryParams, {
         perspective: "published", // default with our api version. Maybe worth keeping in case we downgrade or it changes in future versions
       }),
+    { revalidateOnMount: true },
   );
 
   if (error) {
     return { status: "error", entries: undefined };
   }
-  if (!data) {
+  if (!data || isValidating) {
     return { status: "loading", entries: undefined };
   }
   return { status: "ready", entries: data };
