@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { PaperplaneIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, InlineMessage, Link, Modal } from "@navikt/ds-react";
+import {
+  BodyLong,
+  Button,
+  HStack,
+  InlineMessage,
+  Link,
+  Modal,
+} from "@navikt/ds-react";
 import { toSlackMrkdwn } from "./format-slack-message";
 
 type PostStatusT = "idle" | "posting" | "posted" | "unauthorized" | "error";
@@ -33,7 +40,7 @@ export const PostToSlackButton = ({ text }: { text: string }) => {
   };
 
   return (
-    <>
+    <HStack gap="space-8" align="center" wrap>
       <Button
         variant="primary"
         size="small"
@@ -55,8 +62,7 @@ export const PostToSlackButton = ({ text }: { text: string }) => {
       >
         <Modal.Body>
           <BodyLong>
-            Meldingen postes av Aksel-boten (@aksel3) og kan ikke trekkes
-            tilbake herfra.
+            Aksel-boten (@aksel3) er klar til å sende meldingen til Slack.
           </BodyLong>
         </Modal.Body>
         <Modal.Footer>
@@ -91,6 +97,6 @@ export const PostToSlackButton = ({ text }: { text: string }) => {
           Klarte ikke å poste til Slack.
         </InlineMessage>
       )}
-    </>
+    </HStack>
   );
 };

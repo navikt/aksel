@@ -56,7 +56,7 @@ export const NewsletterSlackView = () => {
     <Box padding="space-24" maxWidth="60rem">
       <VStack gap="space-24">
         <BodyLong>
-          Samler nye artikler og endringslogg-innlegg for perioden. Rediger
+          Samler nye artikler og endringslogg-innlegg for valgt periode. Rediger
           teksten og kopier den inn i Slack, eller legg den ut direkte.
         </BodyLong>
         <DatePicker {...datepickerProps}>
