@@ -151,6 +151,8 @@ function internByIdentity(
  * Runs in reverse so the first plugin wraps outermost.
  * A falsy return (`undefined`, `null`, `false`, etc.) preserves the previous
  * content so one broken plugin doesn't accidentally blank the grid.
+ *
+ * TODO: Consier returning plugin name with plugin for better debugging and error messages.
  */
 function applyTableContext(
   plugins: readonly DataGridPlugin[],
