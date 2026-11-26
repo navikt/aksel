@@ -114,6 +114,11 @@ FocusAfterClose.play = async ({ canvasElement }) => {
   const trigger = await canvas.findByRole("combobox", { name: "Velg land" });
   const buttonAfter = canvas.getByRole("button", { name: "Knapp etter" });
 
+  // Focus trigger when closing is triggered by pressing Esc,
+  // or by other actions in the combobox (like selecting an option).
+  // Don't override focus when combobox closes for other reasons,
+  // like tabbing or clicking outside.
+
   await userEvent.click(trigger);
   expect(canvas.getByRole("combobox", { name: "Filtrer" })).toHaveFocus();
   await userEvent.keyboard("{Escape}");
