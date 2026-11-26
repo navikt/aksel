@@ -32,9 +32,7 @@ export function usePointerDownOutside(
        * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
        * if `usePointerDownOutside` runs `event.preventDefault()`.
        *
-       * Altrough `pointerdown` is already a cancelable event,
-       * to to make sure the batching of events works corretly with `focusIn` in `useFocusOutside`,
-       * we still use a custom event like in `useFocusOutside`.
+       * Use the same cancelable event contract as the other outside interactions.
        */
       function dispatchPointerEvent() {
         dispatchCustomEvent(

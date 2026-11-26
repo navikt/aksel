@@ -20,7 +20,7 @@ For changes to component state, callbacks, async behavior, composition, semantic
 - Preserve `forwardRef`, `className` merged via `cl("aksel-<name>", className)`, `...rest` spread, and `as`/`OverridableComponent` where they already exist.
 - Compound components: `const X = Object.assign(XRoot, { Item: XItem })`. Never cast with `as XComponent`, because `docgen:meta` can't extract props from a cast.
 - Colors: `data-color?: AkselColor`, not new `variant` color values.
-- User-facing strings come from `useI18n("<Component>")` with keys in `utils/i18n/locales/{nb,nn,en}.ts`. Add the key to all three.
+- User-facing strings come from `useI18n("<Component>")` with keys in `utils/i18n/locales/{nb,nn,en}.ts` (add the key to all three). For unpublished/WIP/preview components, put translations in `utils/i18n/i18n.internal.ts` instead.
 - Public props and components need JSDoc. Component JSDoc sits above the exported value, with `@see 🏷️ {@link XProps}` and an `@example`. Add `@default` when the default isn't obvious.
 
 ## Public API surface (breaking = major changeset)

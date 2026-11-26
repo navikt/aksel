@@ -12,4 +12,4 @@ applyTo: "@navikt/core/css/src/**"
 - Focus uses `:focus-visible` (outline + `outline-offset`). Check `forced-colors`, print and dark theme in Storybook.
 - `prefers-reduced-motion` is handled globally in `baseline/baseline.css`. Don't duplicate it per component.
 - `baseline/tokens.css` re-exports `@navikt/ds-tokens` build output. Edit tokens in `@navikt/core/tokens/src`, not here.
-- Removing or renaming a class is breaking for consumers (for allready published components. Ignore for new components). Add it to `@navikt/aksel-stylelint/src/deprecations.ts`.
+- Removing or renaming a class is breaking for consumers (for already published components; ignore for new/preview components). Add it to `@navikt/aksel-stylelint/src/deprecations.ts`.

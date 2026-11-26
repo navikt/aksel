@@ -1,5 +1,29 @@
 # Changelog
 
+## 8.23.2
+
+### @navikt/ds-react
+
+- Popover and other floating components: Dismiss when focus leaves the overlay and its trigger, including inside web components. ([#5559](https://github.com/navikt/aksel/pull/5559))
+
+- Select: Prevent opening by clicking label when `readOnly` on Mac+Chrome ([#5595](https://github.com/navikt/aksel/pull/5595))
+
+- Switch:  `<Switch />` elements inside a `<Fieldset />` with `readOnly` now share a single padlock in the group legend instead of displaying one per switch. Each switch retains screen-reader text indicating its read-only state, and standalone switches keep their individual padlocks. ([#5583](https://github.com/navikt/aksel/pull/5583))
+
+## 8.23.1
+
+### @navikt/ds-css
+
+- DataGrid: Change `overflow:hidden` to `min-height:0` and `min-width:0` on root ([#5568](https://github.com/navikt/aksel/pull/5568))
+
+### @navikt/ds-react
+
+- DataGrid: Keyboard navigation in table no longer prevents shift+tabbing away from the table ([`7dbf1d5`](https://github.com/navikt/aksel/commit/7dbf1d5382367837b1f43fc76ca57d986218b64d))
+
+- Button: Preserve keyboard modifiers during native Space activation. ([#5564](https://github.com/navikt/aksel/pull/5564))
+
+- DataGrid.Table: Temporarily removed `topContent` and `bottomContent` props. ([#5579](https://github.com/navikt/aksel/pull/5579))
+
 ## 8.23.0
 
 ### @navikt/aksel-icons
