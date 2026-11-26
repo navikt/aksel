@@ -51,17 +51,29 @@ export const NewsletterSlackView = () => {
   const setText = (value: string) =>
     setEdit({ base: generatedText, text: value });
 
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<
+    "idle" | "copied" | "copiedAsPlainText" | "error"
+  >("idle");
 
   const copyAsRichText = async () => {
-    await navigator.clipboard.write([
-      new ClipboardItem({
-        "text/html": new Blob([toSlackHtml(text)], { type: "text/html" }),
-        "text/plain": new Blob([text], { type: "text/plain" }),
-      }),
-    ]);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/html": new Blob([toSlackHtml(text)], { type: "text/html" }),
+          "text/plain": new Blob([text], { type: "text/plain" }),
+        }),
+      ]);
+      setCopyStatus("copied");
+      setTimeout(() => setCopyStatus("idle"), 2000);
+    } catch {
+      // Some browsers don't support ClipboardItem or deny rich-text write
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopyStatus("copiedAsPlainText");
+      } catch {
+        setCopyStatus("error");
+      }
+    }
   };
 
   return (
@@ -97,12 +109,16 @@ export const NewsletterSlackView = () => {
           <Button
             size="small"
             icon={
-              copied ? <CheckmarkIcon aria-hidden /> : <FilesIcon aria-hidden />
+              copyStatus === "copied" ? (
+                <CheckmarkIcon aria-hidden />
+              ) : (
+                <FilesIcon aria-hidden />
+              )
             }
             onClick={copyAsRichText}
             disabled={!text}
           >
-            {copied ? "Kopiert!" : "Kopier tekst"}
+            {copyStatus === "copied" ? "Kopiert!" : "Kopier tekst"}
           </Button>
           <Button
             variant="secondary"
@@ -113,6 +129,16 @@ export const NewsletterSlackView = () => {
             Tilbakestill tekst
           </Button>
         </HStack>
+        {copyStatus === "copiedAsPlainText" && (
+          <InlineMessage status="warning">
+            Kopierte som ren tekst. Lenkene blir ikke klikkbare i Slack.
+          </InlineMessage>
+        )}
+        {copyStatus === "error" && (
+          <InlineMessage status="error">
+            Klarte ikke å kopiere. Kopier teksten manuelt.
+          </InlineMessage>
+        )}
       </VStack>
     </Box>
   );
