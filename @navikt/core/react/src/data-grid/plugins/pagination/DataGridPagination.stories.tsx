@@ -4,7 +4,7 @@ import { VStack } from "../../../primitives/stack";
 import { BodyLong } from "../../../typography";
 import { DataGrid } from "../../root/DataGridRoot";
 import type { UseDataGridPaginationConfig } from "./DataGridPagination.types";
-import { paginateData } from "./helpers/paginateData";
+import { paginateData } from "./helpers/paginate-data";
 import { useDataGridPagination } from "./useDataGridPagination";
 
 const meta: Meta<typeof DataGrid> = {

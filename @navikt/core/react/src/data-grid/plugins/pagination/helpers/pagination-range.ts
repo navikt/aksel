@@ -1,5 +1,5 @@
 import type { DataGridPaginationTotal } from "../DataGridPagination.types";
-import { sanitizePage, sanitizePageSize } from "./paginateData";
+import { sanitizePage, sanitizePageSize } from "./paginate-data";
 
 type PaginationRangeOptions = {
   /** 1-based requested page number. */

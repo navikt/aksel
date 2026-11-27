@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { paginateData } from "./paginateData";
+import { paginateData } from "./paginate-data";
 
 const ROWS = Array.from({ length: 25 }, (_, i) => i + 1);
 

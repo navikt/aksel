@@ -14,7 +14,7 @@ import {
   type DataGridPaginationContextValue,
   type PaginationAnnounceTarget,
 } from "./context/DataGridPagination.context";
-import { DEFAULT_PAGE_SIZE, sanitizePageSize } from "./helpers/paginateData";
+import { DEFAULT_PAGE_SIZE, sanitizePageSize } from "./helpers/paginate-data";
 import { getPaginationRange } from "./helpers/pagination-range";
 import { DataGridPaginationLiveRegionInternal } from "./live-region/DataGridPaginationLiveRegionInternal";
 
