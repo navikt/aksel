@@ -11,7 +11,7 @@
     "dev": "yarn workspace aksel.nav.no dev",
     "lint": "yarn lint:oxlint && yarn lint:css && yarn lint:versions",
     "lint:oxlint": "yarn oxlint --deny-warnings",
-    "lint:css": "yarn stylelint '@navikt/**/*.css'",
+    "lint:css": "yarn stylelint '**/*.css' '**/.storybook/**/*.css'",
     "lint:versions": "node tooling/scripts/in-sync-versions.mts",
     "storybook": "WITH_WEBSITE=true storybook dev -p 6006",
     "storybook:aksel": "WITH_WEBSITE=true storybook dev -c aksel.nav.no/website/.storybook -p 6007",

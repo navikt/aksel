@@ -21,7 +21,6 @@
   pointer-events: none;
 
   & svg {
-    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
     color: var(--cube-stroke-color-light);
 
     & path {

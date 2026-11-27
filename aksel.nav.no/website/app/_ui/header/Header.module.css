@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- Uses website custom properties defined in globals.css */
 .header {
   background-color: var(--ax-bg-default);
   top: 0;

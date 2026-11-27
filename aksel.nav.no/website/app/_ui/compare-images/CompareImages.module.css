@@ -35,12 +35,12 @@
   background-color: var(--image-bg, transparent);
 
   &[data-position="left"] {
-    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by CompareImages provider */
     clip-path: inset(0 var(--image-clip-1) 0 0);
   }
 
   &[data-position="right"] {
-    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by CompareImages provider */
     clip-path: inset(0 0 0 var(--image-clip-2));
   }
 }
@@ -63,7 +63,7 @@
   transition: opacity 0.2s ease-in-out;
   transform: translate3d(-50%, 0, 0);
 
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by CompareImages provider */
   left: var(--image-clip-2);
 
   &[data-dragging="true"] {

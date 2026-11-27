@@ -1,4 +1,3 @@
-/* stylelint-disable aksel/design-token-exists */
 .aksel-combobox__wrapper {
   --__axc-combobox-icon-size: 1.5rem;
   --__axc-combobox-wrapper-inner-padding: var(--ax-space-8);
@@ -242,7 +241,7 @@
 /* dropdown & non selectable dropdown items */
 
 .aksel-combobox__list {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   width: var(--__axc-floating-anchor-width);
   overflow: clip;
   border: 1px solid var(--ax-border-neutral-subtleA);

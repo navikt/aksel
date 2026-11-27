@@ -130,9 +130,9 @@
  ************************************************/
 
 .aksel-combo-box__popup {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   min-width: var(--__axc-floating-anchor-width);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   max-height: calc(var(--__axc-floating-available-height) - 4px);
   background-color: var(--ax-bg-raised);
   padding: 1px;

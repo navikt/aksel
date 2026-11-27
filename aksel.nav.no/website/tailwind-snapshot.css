@@ -108,7 +108,7 @@ object {
   display: block;
 
   /* 2 */
-  /* stylelint-disable-next-line plugin/declaration-block-no-ignored-properties */
+  /* stylelint-disable-next-line plugin/declaration-block-no-ignored-properties -- Kept from Tailwind Preflight snapshot for replaced elements */
   vertical-align: middle;
 }
 

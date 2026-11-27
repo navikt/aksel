@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- Uses --website-font-mono from globals.css and runtime --line */
 
 .codeBlock {
   background: var(--ax-bg-default);

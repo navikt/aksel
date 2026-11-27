@@ -14,6 +14,10 @@ const tokensPath = resolve(
 );
 
 export default {
+  reportNeedlessDisables: true,
+  reportInvalidScopeDisables: true,
+  reportDescriptionlessDisables: true,
+  reportUnscopedDisables: true,
   overrides: [
     {
       files: ["@navikt/core/css/**/*"],
@@ -44,7 +48,6 @@ export default {
     "stylelint-declaration-block-no-ignored-properties",
   ],
   rules: {
-    "declaration-property-value-no-unknown": true,
     "plugin/declaration-block-no-ignored-properties": true,
     "no-descending-specificity": null,
     "selector-class-pattern": null,
@@ -52,7 +55,6 @@ export default {
     "keyframes-name-pattern": null,
     "function-url-quotes": null,
     "property-no-vendor-prefix": null,
-    "comment-empty-line-before": null,
     "alpha-value-notation": "number",
     "media-feature-range-notation": "prefix",
     "import-notation": "string",
@@ -81,10 +83,10 @@ export default {
   },
   ignoreFiles: [
     "**/dist/**",
-    "**/@navikt/codemod/**",
+    "**/.next/**",
+    "**/storybook-static/**",
     "**/@navikt/aksel/**",
     "**/examples/**",
-    "plugin.js",
     "**/tailwind4.css",
   ],
 };

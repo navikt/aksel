@@ -1,4 +1,4 @@
-/* stylelint-disable media-feature-range-notation */
+/* stylelint-disable media-feature-range-notation -- Website supports modern media query range syntax */
 .searchForm {
   display: flex;
   align-items: center;
