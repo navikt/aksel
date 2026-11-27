@@ -9,7 +9,7 @@
     "content";
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   .pageArticle {
     grid-template-areas:
       "intro aside"

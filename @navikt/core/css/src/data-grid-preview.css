@@ -1,4 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties -- --__axc-data-table-nested-depth is set at runtime */
 /* stylelint-disable no-duplicate-selectors -- Preview stylesheet groups rules by feature section */
 
 .aksel-data-grid {
@@ -734,6 +733,7 @@ html[data-dragging-cursor="true"] *::after {
     inset-inline-start: 1px;
 
     /* 3px magic number: Avoids content from overflowing when scrolling all the way to the right */
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Container query units require Safari 16+; WIP preview component */
     max-inline-size: calc(100cqi - 3px);
     box-sizing: border-box;
   }

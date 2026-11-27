@@ -4,7 +4,6 @@
   display: none;
   min-width: 12.5rem;
   height: fit-content;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Defined in globals.css */
   top: calc(var(--website-header-sticky-height) + var(--ax-space-24));
 
   &[data-variant="subtle"] {
@@ -15,7 +14,7 @@
     --aksel-toc-fade-shadow-color: var(--ax-bg-default);
   }
 
-  @media (min-width: 1280px) {
+  @media (width >= 1280px) {
     display: block;
   }
 }

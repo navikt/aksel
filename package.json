@@ -109,6 +109,7 @@
     "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
+    "stylelint-no-unsupported-browser-features": "8.1.2",
     "stylelint-value-no-unknown-custom-properties": "^6.1.1",
     "typescript": "6.0.3",
     "typescript-language-server": "6.0.3",

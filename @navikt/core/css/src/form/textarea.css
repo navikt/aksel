@@ -1,5 +1,4 @@
 .aksel-textarea__input {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by TextareaAutoSize */
   height: var(--__axc-textarea-height);
   appearance: none;
   padding: var(--ax-space-8);

@@ -13,7 +13,7 @@
   gap: 0 var(--ax-space-12);
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .aksel-form-summary__header {
     padding: var(--ax-space-12) var(--ax-space-16);
     flex-direction: column;
@@ -34,7 +34,7 @@
   margin: 0;
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .aksel-form-summary__answers {
     padding: var(--ax-space-12) var(--ax-space-16) var(--ax-space-16) var(--ax-space-16);
   }
@@ -54,7 +54,7 @@
   padding-bottom: 0;
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .aksel-form-summary__answer:not(:last-child) {
     margin-bottom: var(--ax-space-12);
     padding-bottom: var(--ax-space-12);
@@ -88,7 +88,7 @@
   border-top: 1px solid var(--ax-border-neutral-subtleA);
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .aksel-form-summary__footer {
     padding: var(--ax-space-12) var(--ax-space-16);
   }

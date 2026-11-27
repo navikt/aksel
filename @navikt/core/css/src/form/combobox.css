@@ -241,7 +241,6 @@
 /* dropdown & non selectable dropdown items */
 
 .aksel-combobox__list {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Set at runtime by Floating UI */
   width: var(--__axc-floating-anchor-width);
   overflow: clip;
   border: 1px solid var(--ax-border-neutral-subtleA);
@@ -383,7 +382,7 @@
 }
 
 /* Mobile */
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .aksel-combobox__button-toggle-list {
     right: 0.5rem;
   }

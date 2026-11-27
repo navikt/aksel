@@ -13,12 +13,10 @@
   z-index: 0;
   position: relative;
   max-width: 1920px;
-
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties -- Defined in globals.css */
   min-height: calc(100vh - var(--website-header-sticky-height));
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .pageLayout {
     grid-template-columns: min-content 1fr;
   }
@@ -46,13 +44,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .pageLayoutMain {
     padding-inline: var(--ax-space-40);
   }
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   .pageLayoutMain[data-layout="with-toc"] {
     grid-template-areas:
       "intro aside"
