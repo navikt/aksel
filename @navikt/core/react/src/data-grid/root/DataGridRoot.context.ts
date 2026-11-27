@@ -5,6 +5,7 @@ import { createStrictContext } from "../../utils/helpers";
 import type { DataGridSettings } from "./DataGrid.types";
 
 type DataGridContextValue<RowT = unknown> = {
+  gridId: symbol;
   data: RowT[];
   columnDefinitions: ColumnDefinitions<RowT>;
   getRowId?: (rowData: RowT) => string;
