@@ -10786,6 +10786,7 @@ __metadata:
     tsx: "npm:^4.23.15"
     typescript: "npm:6.0.3"
     vitest: "npm:5.1.1"
+    zod: "npm:^4.6.5"
   languageName: unknown
   linkType: soft
 

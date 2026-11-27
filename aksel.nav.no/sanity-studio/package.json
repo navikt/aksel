@@ -35,7 +35,8 @@
     "sanity-plugin-media": "6.6.3",
     "sanity-plugin-references": "1.2.0",
     "styled-components": "6.6.0",
-    "swr": "^2.4.2"
+    "swr": "^2.4.2",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@sanity/blueprints": "0.34.1",
@@ -58,6 +59,11 @@
       "types": "./sanity.env.ts",
       "import": "./sanity.env.ts",
       "default": "./sanity.env.ts"
+    },
+    "./newsletter-schema": {
+      "types": "./structure/newsletter/newsletter-schema.ts",
+      "import": "./structure/newsletter/newsletter-schema.ts",
+      "default": "./structure/newsletter/newsletter-schema.ts"
     },
     "./studio-config": {
       "types": "./sanity.config.ts",

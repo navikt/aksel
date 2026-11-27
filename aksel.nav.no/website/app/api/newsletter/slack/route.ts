@@ -1,7 +1,7 @@
 import { fetchSecretQuery } from "@sanity/preview-url-secret/constants";
 import { WebClient } from "@slack/web-api";
+import { newsletterPayloadSchema } from "aksel-sanity-studio/newsletter-schema";
 import { type NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { logger } from "@navikt/next-logger";
 import { client } from "@/app/_sanity/client";
 
@@ -9,12 +9,6 @@ import { client } from "@/app/_sanity/client";
 const NEWSLETTER_CHANNEL_ID = "C0CM7HFLAJV";
 
 const slackClient = new WebClient(process.env.SLACK_BOT_USER_TOKEN);
-
-// slack's limit for markdown_text
-const payloadSchema = z.object({
-  text: z.string().trim().min(1).max(12000),
-  secret: z.string().min(1),
-});
 
 // Only Contributors or above can create the secret (see PostToSlackButton).
 const isValidStudioSecret = async (secret: string) =>
@@ -27,7 +21,9 @@ const isValidStudioSecret = async (secret: string) =>
  * Expects `text` in standard markdown and the secret
  */
 export async function POST(req: NextRequest) {
-  const payload = payloadSchema.safeParse(await req.json().catch(() => null));
+  const payload = newsletterPayloadSchema.safeParse(
+    await req.json().catch(() => null),
+  );
 
   if (!payload.success) {
     return NextResponse.json({ error: "invalid-payload" }, { status: 400 });

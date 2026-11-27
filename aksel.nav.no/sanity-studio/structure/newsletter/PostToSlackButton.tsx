@@ -5,6 +5,7 @@ import { PaperplaneIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { SANITY_API_VERSION } from "../../sanity.env";
 import type { FeedbackT } from "./feedback";
+import { newsletterPayloadSchema } from "./newsletter-schema";
 
 // pinned @sanity/client 7 but useClient returns v8. maybe bump?
 type PreviewSecretClient = Parameters<typeof createPreviewSecret>[0];
@@ -63,10 +64,18 @@ export const PostToSlackButton = ({
         size="small"
         icon={<PaperplaneIcon aria-hidden />}
         onClick={() => {
+          const validation = newsletterPayloadSchema.shape.text.safeParse(text);
+          if (!validation.success) {
+            onFeedback({
+              status: "error",
+              message: validation.error.issues[0].message,
+            });
+            return;
+          }
           onFeedback(null);
           setOpen(true);
         }}
-        disabled={!text || posting}
+        disabled={!text.trim() || posting}
       >
         Send til Slack
       </Button>

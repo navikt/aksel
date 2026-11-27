@@ -25,7 +25,6 @@ export const CopyForSlackButton = ({
         }),
       ]);
       setCopied(true);
-      onFeedback({ status: "success", message: "Kopiert." });
       setTimeout(() => setCopied(false), 2000);
       onFeedback({
         status: "success",
@@ -56,7 +55,7 @@ export const CopyForSlackButton = ({
       size="small"
       icon={copied ? <CheckmarkIcon aria-hidden /> : <FilesIcon aria-hidden />}
       onClick={copyAsRichText}
-      disabled={!text}
+      disabled={!text.trim()}
     >
       Kopier tekst
     </Button>
