@@ -107,6 +107,7 @@ describe("useDataGridPagination", () => {
           plugins={{ pagination }}
         >
           <PaginationContextProbe />
+          <DataGrid.Table />
         </DataGrid>
       );
     }
@@ -297,5 +298,58 @@ describe("useDataGridPagination", () => {
     fireEvent.click(screen.getByRole("button", { name: "Single page" }));
 
     expect(onMount).toHaveBeenCalledTimes(1);
+  });
+
+  test("renders pagination bars around DataGrid.Table instead of outside sibling toolbar/footer", () => {
+    const allRows = makeRows(30);
+
+    function Harness() {
+      const pagination = useDataGridPagination({
+        page: 1,
+        onPageChange: () => {},
+        pageSize: 10,
+        totalRows: allRows.length,
+        position: "both",
+      });
+
+      return (
+        <DataGrid
+          columns={TEST_COLUMNS}
+          data={paginateData(allRows, 1, 10)}
+          getRowId={(r) => r.id}
+          plugins={{ pagination }}
+        >
+          <div data-testid="toolbar">Toolbar</div>
+          <DataGrid.Table aria-label="Personer" />
+          <div data-testid="footer">Footer</div>
+        </DataGrid>
+      );
+    }
+
+    render(<Harness />);
+
+    const toolbar = screen.getByTestId("toolbar");
+    const topNav = screen.getByRole("navigation", {
+      name: "Sidenavigering (øverst)",
+    });
+    const table = screen.getByRole("table", { name: "Personer" });
+    const bottomNav = screen.getByRole("navigation", {
+      name: "Sidenavigering (nederst)",
+    });
+    const footer = screen.getByTestId("footer");
+
+    /* Order: toolbar -> top pagination -> table -> bottom pagination -> footer */
+    expect(toolbar.compareDocumentPosition(topNav)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(topNav.compareDocumentPosition(table)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(table.compareDocumentPosition(bottomNav)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(bottomNav.compareDocumentPosition(footer)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   });
 });

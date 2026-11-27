@@ -9,7 +9,6 @@ import type {
   DataGridPaginationPosition,
   UseDataGridPaginationConfig,
 } from "./DataGridPagination.types";
-import { DataGridPaginationBarInternal } from "./bar/DataGridPaginationBarInternal";
 import {
   DataGridPaginationContextProvider,
   type DataGridPaginationContextValue,
@@ -190,6 +189,19 @@ function DataGridPaginationWrapperInternal({
 
   const summary = isLoading ? previousSummaryRef.current : currentSummary;
 
+  const baseNavLabel = navLabel ?? translate("Pagination.navLabel");
+  const aboveNavLabel =
+    position === "both"
+      ? translate("Pagination.navLabelAbove", { label: baseNavLabel })
+      : baseNavLabel;
+  const belowNavLabel =
+    position === "both"
+      ? translate("Pagination.navLabelBelow", { label: baseNavLabel })
+      : baseNavLabel;
+
+  const showAbove = !hideBars && (position === "above" || position === "both");
+  const showBelow = !hideBars && (position === "below" || position === "both");
+
   const contextValue: DataGridPaginationContextValue = useMemo(
     () => ({
       ownerGridId: gridId,
@@ -204,6 +216,11 @@ function DataGridPaginationWrapperInternal({
       pageSizeOptions,
       allowPageSizeChange,
       isLoading,
+      align,
+      showAbove,
+      showBelow,
+      aboveNavLabel,
+      belowNavLabel,
       setPage,
       setPageSize,
     }),
@@ -220,41 +237,19 @@ function DataGridPaginationWrapperInternal({
       pageSizeOptions,
       allowPageSizeChange,
       isLoading,
+      align,
+      showAbove,
+      showBelow,
+      aboveNavLabel,
+      belowNavLabel,
       setPage,
       setPageSize,
     ],
   );
 
-  const baseNavLabel = navLabel ?? translate("Pagination.navLabel");
-  const aboveNavLabel =
-    position === "both"
-      ? translate("Pagination.navLabelAbove", { label: baseNavLabel })
-      : baseNavLabel;
-  const belowNavLabel =
-    position === "both"
-      ? translate("Pagination.navLabelBelow", { label: baseNavLabel })
-      : baseNavLabel;
-
-  const showAbove = !hideBars && (position === "above" || position === "both");
-  const showBelow = !hideBars && (position === "below" || position === "both");
-
   return (
     <DataGridPaginationContextProvider value={contextValue}>
-      {showAbove && (
-        <DataGridPaginationBarInternal
-          position="above"
-          align={align}
-          navLabel={aboveNavLabel}
-        />
-      )}
       {children}
-      {showBelow && (
-        <DataGridPaginationBarInternal
-          position="below"
-          align={align}
-          navLabel={belowNavLabel}
-        />
-      )}
       {announcePageChanges && (
         <DataGridPaginationLiveRegionInternal
           announceTargetRef={announceTargetRef}

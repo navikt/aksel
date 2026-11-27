@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useDataGridContext } from "../../../root/DataGridRoot.context";
+import type { DataGridPaginationAlign } from "../DataGridPagination.types";
 
 /**
  * Page and/or page size requested by pagination controls.
@@ -25,6 +26,11 @@ type DataGridPaginationContextValue = {
   pageSizeOptions: number[];
   allowPageSizeChange: boolean;
   isLoading: boolean;
+  align: DataGridPaginationAlign;
+  showAbove: boolean;
+  showBelow: boolean;
+  aboveNavLabel: string;
+  belowNavLabel: string;
   setPage: (page: number) => void;
   setPageSize: (size: number) => void;
 };

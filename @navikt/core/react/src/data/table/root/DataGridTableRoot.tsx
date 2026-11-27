@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { DataGridPaginationBarInternal } from "../../../data-grid/plugins/pagination/bar/DataGridPaginationBarInternal";
 import { useOptionalDataGridPaginationContext } from "../../../data-grid/plugins/pagination/context/DataGridPagination.context";
 import { useDataGridContext } from "../../../data-grid/root/DataGridRoot.context";
 import { Skeleton } from "../../../skeleton";
@@ -244,31 +245,35 @@ const DataGridTableInternal = forwardRef<
 
     const tableId = useId(id);
 
-    // const hasTopContent = topContent != null && topContent !== false;
-    // const hasBottomContent = bottomContent != null && bottomContent !== false;
-    // let attachmentPosition: "top" | "bottom" | "both" | undefined;
+    const hasTopContent = Boolean(pagination?.showAbove);
+    const hasBottomContent = Boolean(pagination?.showBelow);
+    let attachmentPosition: "top" | "bottom" | "both" | undefined;
 
     /* TODO: Need to figure out how to handle this since settings is provided from root, not table itself */
     const truncateContent = tableSettings?.truncateContent ?? layout !== "auto";
 
-    // if (hasTopContent && hasBottomContent) {
-    //   attachmentPosition = "both";
-    // } else if (hasTopContent) {
-    //   attachmentPosition = "top";
-    // } else if (hasBottomContent) {
-    //   attachmentPosition = "bottom";
-    // }
+    if (hasTopContent && hasBottomContent) {
+      attachmentPosition = "both";
+    } else if (hasTopContent) {
+      attachmentPosition = "top";
+    } else if (hasBottomContent) {
+      attachmentPosition = "bottom";
+    }
 
     return (
       <div
         className="aksel-data-table__frame"
-        // data-attachments={attachmentPosition}
+        data-attachments={attachmentPosition}
       >
-        {/* {hasTopContent && (
+        {pagination?.showAbove && (
           <div className="aksel-data-table__attachment" data-attachment="top">
-            {topContent}
+            <DataGridPaginationBarInternal
+              position="above"
+              align={pagination.align}
+              navLabel={pagination.aboveNavLabel}
+            />
           </div>
-        )} */}
+        )}
 
         <DataTableContextProvider
           layout={layout}
@@ -348,14 +353,18 @@ const DataGridTableInternal = forwardRef<
             </table>
           </TableElementWrapper>
         </DataTableContextProvider>
-        {/* {hasBottomContent && (
+        {pagination?.showBelow && (
           <div
             className="aksel-data-table__attachment"
             data-attachment="bottom"
           >
-            {bottomContent}
+            <DataGridPaginationBarInternal
+              position="below"
+              align={pagination.align}
+              navLabel={pagination.belowNavLabel}
+            />
           </div>
-        )} */}
+        )}
       </div>
     );
   },
