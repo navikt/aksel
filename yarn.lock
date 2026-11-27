@@ -25486,6 +25486,7 @@ __metadata:
     "@portabletext/react": "npm:^8.0.1"
     "@sanity/client": "npm:7.27.0"
     "@sanity/image-url": "npm:2.2.0"
+    "@sanity/preview-url-secret": "npm:4.1.5"
     "@sanity/schema": "npm:6.24.0"
     "@slack/web-api": "npm:^8.0.0"
     "@types/jscodeshift": "npm:17.3.0"

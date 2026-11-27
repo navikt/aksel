@@ -1,16 +1,28 @@
+import { createPreviewSecret } from "@sanity/preview-url-secret/create-secret";
 import { useState } from "react";
+import { useClient } from "sanity";
 import { PaperplaneIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "../../sanity.env";
 import type { FeedbackT } from "./feedback";
 import { toSlackMrkdwn } from "./format-slack-message";
 
+// pinned @sanity/client 7 but useClient returns v8. maybe bump?
+type PreviewSecretClient = Parameters<typeof createPreviewSecret>[0];
+
 /* The website route only exists when the Studio runs inside the website (/admin, /admin-dev) */
-const postToSlack = async (text: string) => {
+const postToSlack = async (text: string, client: PreviewSecretClient) => {
   try {
+    // prove to the website route that the user is at least a contributor. it has a short expiration time and its a draft
+    const { secret } = await createPreviewSecret(
+      client,
+      "aksel-newsletter",
+      window.location.href,
+    );
     const response = await fetch("/api/newsletter/slack", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: toSlackMrkdwn(text) }),
+      body: JSON.stringify({ text: toSlackMrkdwn(text), secret }),
     });
     return response.ok;
   } catch {
@@ -29,10 +41,13 @@ export const PostToSlackButton = ({
 }: PostToSlackButtonProps) => {
   const [open, setOpen] = useState(false);
   const [posting, setPosting] = useState(false);
+  const client = useClient({
+    apiVersion: SANITY_API_VERSION,
+  }) as unknown as PreviewSecretClient;
 
   const post = async () => {
     setPosting(true);
-    const posted = await postToSlack(text);
+    const posted = await postToSlack(text, client);
     setPosting(false);
     setOpen(false);
     onFeedback(

@@ -37,6 +37,7 @@
     "@portabletext/react": "^8.0.1",
     "@sanity/client": "7.27.0",
     "@sanity/image-url": "2.2.0",
+    "@sanity/preview-url-secret": "4.1.5",
     "@slack/web-api": "^8.0.0",
     "aksel-sanity-studio": "workspace:*",
     "codesandbox-import-utils": "^2.2.3",
