@@ -11,21 +11,28 @@ import { getPaginationSummary } from "../helpers/pagination-summary";
  */
 function DataGridPaginationLiveRegionInternal({
   announceTargetRef,
+  announceRequestId,
 }: {
   announceTargetRef: React.MutableRefObject<PaginationAnnounceTarget | null>;
+  announceRequestId: number;
 }) {
-  const { page, pageCount, pageSize, from, to, totalRows, isLoading } =
+  const { page, pageSize, from, to, totalRows, isLoading } =
     useDataGridPaginationContext();
   const translate = useI18n("DataGrid");
   const lastAnnouncedPage = useRef({ page, pageSize });
-  const [announcement, setAnnouncement] = useState("");
+  const [announcement, setAnnouncement] = useState({ id: 0, text: "" });
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
     if (
-      isLoading ||
-      (lastAnnouncedPage.current.page === page &&
-        lastAnnouncedPage.current.pageSize === pageSize)
+      lastAnnouncedPage.current.page === page &&
+      lastAnnouncedPage.current.pageSize === pageSize
     ) {
+      /* Clear rejected requests so a later external change does not falsely announce. */
+      announceTargetRef.current = null;
       return;
     }
 
@@ -43,22 +50,29 @@ function DataGridPaginationLiveRegionInternal({
     const summary = getPaginationSummary(translate, { from, to, totalRows });
 
     // Keep the completed message during loading and unrelated renders.
-    setAnnouncement(summary);
+    setAnnouncement((prev) => ({ id: prev.id + 1, text: summary }));
   }, [
     isLoading,
     page,
-    pageCount,
     pageSize,
     from,
     to,
     totalRows,
     translate,
     announceTargetRef,
+    announceRequestId,
   ]);
 
   return (
-    <div aria-live="polite" aria-atomic="true" className="aksel-sr-only">
-      {announcement}
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className="aksel-sr-only"
+    >
+      {announcement.text && (
+        <div key={announcement.id}>{announcement.text}</div>
+      )}
     </div>
   );
 }

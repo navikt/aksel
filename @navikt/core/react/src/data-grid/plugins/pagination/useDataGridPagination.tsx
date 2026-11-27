@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useEventCallback } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -85,6 +85,7 @@ function DataGridPaginationWrapperInternal({
    * user-driven transitions are announced; clamping and rejected requests stay silent.
    */
   const announceTargetRef = useRef<PaginationAnnounceTarget | null>(null);
+  const [announceRequestId, setAnnounceRequestId] = useState(0);
 
   const setPage = useEventCallback((requestedPage: number) => {
     const nextRange = getPaginationRange(
@@ -98,7 +99,10 @@ function DataGridPaginationWrapperInternal({
           },
     );
     if (nextRange.page !== page) {
-      announceTargetRef.current = { page: nextRange.page, pageSize };
+      if (announcePageChanges) {
+        announceTargetRef.current = { page: nextRange.page, pageSize };
+        setAnnounceRequestId((id) => id + 1);
+      }
       onPageChange(nextRange.page);
     }
   });
@@ -107,7 +111,10 @@ function DataGridPaginationWrapperInternal({
     if (nextSize === pageSize) {
       return;
     }
-    announceTargetRef.current = { pageSize: nextSize };
+    if (announcePageChanges) {
+      announceTargetRef.current = { pageSize: nextSize };
+      setAnnounceRequestId((id) => id + 1);
+    }
     onPageSizeChange(nextSize);
   });
 
@@ -251,6 +258,7 @@ function DataGridPaginationWrapperInternal({
       {announcePageChanges && (
         <DataGridPaginationLiveRegionInternal
           announceTargetRef={announceTargetRef}
+          announceRequestId={announceRequestId}
         />
       )}
     </DataGridPaginationContextProvider>
