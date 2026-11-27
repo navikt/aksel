@@ -41,6 +41,12 @@ interface ComboboxProps<
    * Field name. When provided, the field value will be included in form submissions.
    */
   name?: string;
+  /**
+   * Maximum width of the field that shows current value.
+   *
+   * **NB: Use a unit that scales with the font size, such as rem or em.**
+   */
+  fieldMaxWidth?: string;
 }
 
 const Combobox = forwardRef(
@@ -49,6 +55,7 @@ const Combobox = forwardRef(
       label,
       hideLabel,
       name,
+      fieldMaxWidth,
       size: sizeProp,
       error,
       errorId: errorIdProp,
@@ -110,7 +117,13 @@ const Combobox = forwardRef(
           </BodyShort>
         )}
         <ComboboxTrigger readOnly={readOnly} {...inputProps}>
-          <ComboboxField ref={ref} hasError={hasError} />
+          <ComboboxField
+            ref={ref}
+            hasError={hasError}
+            containerStyle={
+              fieldMaxWidth ? { maxWidth: fieldMaxWidth } : undefined
+            }
+          />
         </ComboboxTrigger>
         <div
           className="aksel-form-field__error aksel-combo-box__error"
@@ -127,7 +140,13 @@ const Combobox = forwardRef(
 
         {name &&
           rest.value.map((val) => (
-            <input key={val} type="hidden" name={name} value={val} />
+            <input
+              key={val}
+              type="hidden"
+              name={name}
+              value={val}
+              disabled={inputProps.disabled}
+            />
           ))}
 
         <ComboboxOverlay
@@ -179,7 +198,7 @@ interface ComboboxSingleProps<
  *
  * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/combobox-single)
  * @see 🏷️ {@link ComboboxSingleProps}
  *
  * @example
@@ -188,6 +207,7 @@ interface ComboboxSingleProps<
  *   label="Select country"
  *   name="country"
  *   options={countries}
+ *   fieldMaxWidth="12rem"
  * />
  * ```
  */
