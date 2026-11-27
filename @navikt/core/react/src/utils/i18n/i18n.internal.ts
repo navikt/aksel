@@ -1,6 +1,7 @@
 /** Defaults for internal components, independent of the public locales. Cant be overridden by users. */
 const internalTranslations = {
   DataGrid: {
+    loading: "Laster innhold",
     Pagination: {
       summary: "Fra {from} til {to} av {totalRows}",
       summaryUnknownTotal: "Fra {from}–{to}",
