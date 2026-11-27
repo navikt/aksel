@@ -24,6 +24,13 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Coach: {
+    currentStep: "{current} av {total}",
+    next: "Neste",
+    previous: "Forrige",
+    close: "Lukk",
+    openCoach: "Åpne veileder",
+  },
   Combobox: {
     /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
     addOption: "Legg til",

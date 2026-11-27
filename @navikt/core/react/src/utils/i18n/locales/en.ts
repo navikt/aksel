@@ -19,6 +19,13 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Coach: {
+    currentStep: "{current} of {total}",
+    next: "Next",
+    previous: "Previous",
+    close: "Close",
+    openCoach: "Open coach",
+  },
   Combobox: {
     addOption: "Add",
     noMatches: "No search hits",

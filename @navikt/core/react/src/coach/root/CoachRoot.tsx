@@ -1,0 +1,541 @@
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
+import { Dialog } from "../../dialog";
+import { Portal } from "../../portal";
+import Spacer from "../../primitives/stack/Spacer";
+import { useClientLayoutEffect } from "../../utils-external";
+import { DismissableLayer } from "../../utils/components/dismissablelayer/DismissableLayer";
+import { Floating } from "../../utils/components/floating/Floating";
+import { getSideAndAlignFromPlacement } from "../../utils/components/floating/Floating.utils";
+import { FocusBoundary } from "../../utils/components/focus-boundary/FocusBoundary";
+import { FocusGuards } from "../../utils/components/focus-guards/FocusGuards";
+import { consoleWarning } from "../../utils/helpers/consoleWarning";
+import { useMergeRefs } from "../../utils/hooks";
+import { useI18n } from "../../utils/i18n/i18n.hooks";
+import { CoachBeacon, type CoachBeaconProps } from "../beacon/CoachBeacon";
+import {
+  CoachDescription,
+  type CoachDescriptionProps,
+} from "../description/CoachDescription";
+import { CoachFooter, type CoachFooterProps } from "../footer/CoachFooter";
+import { CoachImage, type CoachImageProps } from "../image/CoachImage";
+import {
+  CoachProgress,
+  type CoachProgressProps,
+} from "../progress/CoachProgress";
+import { CoachStep, type CoachStepProps } from "../step/CoachStep";
+import { CoachTitle, type CoachTitleProps } from "../title/CoachTitle";
+import {
+  CoachCloseTrigger,
+  type CoachCloseTriggerProps,
+} from "../trigger/CoachCloseTrigger";
+import {
+  CoachNextTrigger,
+  type CoachNextTriggerProps,
+} from "../trigger/CoachNextTrigger";
+import {
+  CoachPreviousTrigger,
+  type CoachPreviousTriggerProps,
+} from "../trigger/CoachPreviousTrigger";
+import { CoachTrigger, type CoachTriggerProps } from "../trigger/CoachTrigger";
+import type {
+  CoachAnchorStep,
+  CoachDialogStep,
+  CoachProps,
+  CoachSingleStepProps,
+  CoachStepBase,
+  CoachStepItem,
+  CoachStepTarget,
+  CoachTourProps,
+} from "../types";
+import { missingTriggersWarning } from "../warnings";
+import { CoachContextProvider } from "./Coach.context";
+
+/**
+ * Guides the user through a sequence of steps, anchored to elements or shown as dialogs.
+ *
+ * @example
+ * ```tsx
+ * <Coach
+ *   steps={[
+ *     { id: "welcome", type: "dialog", title: "Welcome!" },
+ *     { id: "start", type: "anchor", anchorRef: buttonRef, title: "Start here." },
+ *   ]}
+ * >
+ *   <Coach.Trigger>
+ *     <Coach.Beacon>
+ *       <Button>Start tour</Button>
+ *     </Coach.Beacon>
+ *   </Coach.Trigger>
+ * </Coach>
+ * ```
+ */
+const CoachRoot = (props: CoachProps) => {
+  const {
+    showTour: showTourControlled,
+    onShowTourChange,
+    disableTour = false,
+    currentStep: currentStepControlled,
+    defaultStep = 0,
+    onStepChange,
+    translations,
+    children,
+    renderStep,
+  } = props;
+
+  const translate = useI18n("Coach", translations);
+
+  const [uncontrolledShowTour, setUncontrolledShowTour] = useState(false);
+  const [uncontrolledStep, setUncontrolledStep] = useState(defaultStep);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [titleId, setTitleId] = useState<string>();
+  const [stepElement, setStepElement] = useState<HTMLElement | null>(null);
+  const stepRef = useRef<HTMLElement | null>(null);
+  const mergedStepRef = useMergeRefs(stepRef, setStepElement);
+
+  const showTour = !disableTour && (showTourControlled ?? uncontrolledShowTour);
+
+  // Generate the steps for the tour based on props or fallback to single step.
+  const steps: readonly CoachStepItem[] = useMemo(
+    () =>
+      "steps" in props && props.steps !== undefined
+        ? props.steps
+        : [
+            {
+              id: props.id ?? "step-1",
+              type: props.type,
+              title: props.title,
+              description: props.description,
+              image: props.image,
+              size: props.size,
+              width: props.width,
+              "aria-labelledby": props["aria-labelledby"],
+              ...(props.type === "anchor"
+                ? {
+                    anchorRef: props.anchorRef,
+                    placement: props.placement,
+                    offset: props.offset,
+                  }
+                : {}),
+            } as CoachStepItem,
+          ],
+    [props],
+  );
+
+  const activeStepIndex = useMemo(
+    () => currentStepControlled ?? uncontrolledStep,
+    [currentStepControlled, uncontrolledStep],
+  );
+  const currentStep = useMemo(
+    () => steps[activeStepIndex],
+    [steps, activeStepIndex],
+  );
+  const anchorRef =
+    currentStep?.type === "anchor" ? currentStep.anchorRef : undefined;
+
+  useClientLayoutEffect(() => {
+    // Smooth scroll to the anchor element if it's outside the viewport
+    const nextAnchorEl = anchorRef?.current ?? null;
+    if (!showTour) {
+      return;
+    }
+
+    if (nextAnchorEl) {
+      nextAnchorEl.scrollIntoView({
+        block: "nearest",
+        inline: "center",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    }
+
+    setAnchorEl(nextAnchorEl);
+  }, [anchorRef, showTour, activeStepIndex]);
+
+  useEffect(() => {
+    if (!currentStep) {
+      consoleWarning(
+        `Coach cannot find a step at index ${activeStepIndex} in ${steps.length} steps. Provide a non-empty steps array and a valid currentStep or defaultStep index.`,
+      );
+    }
+  }, [activeStepIndex, currentStep, steps.length]);
+
+  useEffect(() => {
+    // Show warning for missing triggers if the tour is active
+    if (!showTour || !currentStep) return;
+    missingTriggersWarning(
+      activeStepIndex,
+      steps.length,
+      currentStep,
+      stepElement,
+    );
+  }, [showTour, activeStepIndex, steps.length, currentStep, stepElement]);
+
+  useEffect(() => {
+    // Warn if the current step is an anchor type but its anchor element is not found
+    if (showTour && currentStep?.type === "anchor" && !anchorRef?.current) {
+      consoleWarning(
+        `Coach step "${currentStep.id}" cannot find its anchor. Attach anchorRef to a mounted element before showing this step.`,
+      );
+    }
+  }, [showTour, currentStep?.type, currentStep?.id, anchorRef]);
+
+  // Get the size and width of the current step, with default values if not specified
+  const getStepSize = () => currentStep?.size ?? "medium";
+  const getStepWidth = () => currentStep?.width ?? "medium";
+
+  const setStep = useCallback(
+    (nextStep: number) => {
+      if (currentStepControlled === undefined) {
+        setUncontrolledStep(nextStep);
+      }
+      onStepChange?.(nextStep);
+    },
+    [currentStepControlled, onStepChange],
+  );
+
+  const setShowTour = useCallback(
+    (open: boolean) => {
+      if (showTourControlled === undefined) {
+        setUncontrolledShowTour(open);
+      }
+      onShowTourChange?.(open);
+    },
+    [onShowTourChange, showTourControlled],
+  );
+
+  const endTour = useCallback(() => {
+    setShowTour(false);
+    setStep(defaultStep);
+    // TODO:C Reset uncontrolled only or controlled too?
+  }, [setShowTour, setStep, defaultStep]);
+
+  const goToNextStep = useCallback(() => {
+    if (activeStepIndex === steps.length - 1) {
+      endTour();
+      return;
+    }
+    setStep(activeStepIndex + 1);
+  }, [activeStepIndex, endTour, setStep, steps.length]);
+
+  const goToPreviousStep = useCallback(() => {
+    if (activeStepIndex > 0) {
+      setStep(activeStepIndex - 1);
+    }
+  }, [activeStepIndex, setStep]);
+
+  const handleEscapeKeyDown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    event.preventDefault();
+    endTour();
+  };
+
+  const handleArrowKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    const target = event.target;
+    // Let editable content and nested widgets handle their own arrow keys first.
+    if (
+      event.defaultPrevented ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.nativeEvent.isComposing ||
+      (target instanceof HTMLElement && target.isContentEditable) ||
+      (target instanceof Element &&
+        target.closest(
+          'input, textarea, select, [role="textbox"], [role="combobox"]',
+        ))
+    ) {
+      return;
+    }
+
+    if (event.key === "ArrowRight" && activeStepIndex < steps.length - 1) {
+      event.preventDefault();
+      goToNextStep();
+    } else if (event.key === "ArrowLeft" && activeStepIndex > 0) {
+      event.preventDefault();
+      goToPreviousStep();
+    }
+  };
+
+  const getInitialFocus = useCallback(() => {
+    const popup = stepRef.current;
+    if (!popup || popup.dataset.coachStepId !== currentStep?.id) {
+      return null;
+    }
+
+    const nextTriggers = popup.querySelectorAll<HTMLElement>(
+      "[data-coach-next-trigger]",
+    );
+    const closeTriggers = popup.querySelectorAll<HTMLElement>(
+      "[data-coach-close-trigger]",
+    );
+
+    const trigger =
+      nextTriggers[nextTriggers.length - 1] ??
+      closeTriggers[closeTriggers.length - 1];
+
+    if (!trigger) return null;
+
+    // Prevent focus from interrupting the smooth scroll to the anchor.
+    trigger.focus?.({ preventScroll: true });
+
+    // Returns undefined to override the default focus behavior of the FocusBoundary and Dialog components
+    return undefined;
+  }, [currentStep?.id]);
+
+  useClientLayoutEffect(() => {
+    // Dialog stays mounted between dialog steps, so its initial focus does not rerun.
+    if (showTour && currentStep?.type === "dialog") {
+      getInitialFocus();
+    }
+  }, [showTour, currentStep?.type, getInitialFocus, stepElement]);
+
+  const disableTourRef = useRef(false);
+  useEffect(() => {
+    const tourWasDisabled = disableTour && !disableTourRef.current;
+    disableTourRef.current = disableTour;
+
+    if (tourWasDisabled) {
+      setShowTour(false);
+    }
+  }, [disableTour, setShowTour]);
+
+  // Default content for a step
+  const defaultStepContent = (
+    <CoachStep>
+      <div className="aksel-coach__top-bar">
+        <CoachProgress />
+        <Spacer />
+        <CoachCloseTrigger data-coach-top-close-trigger>
+          <Button
+            size="small"
+            icon={<XMarkIcon title={translate("close")} />}
+            variant="tertiary"
+            data-color="neutral"
+          />
+        </CoachCloseTrigger>
+      </div>
+      {currentStep?.image && <CoachImage>{currentStep.image}</CoachImage>}
+      {currentStep?.title && <CoachTitle>{currentStep.title}</CoachTitle>}
+      {currentStep?.description && (
+        <CoachDescription>{currentStep.description}</CoachDescription>
+      )}
+      <CoachFooter>
+        {activeStepIndex > 0 && (
+          <CoachPreviousTrigger>
+            <Button size={getStepSize()} variant="secondary">
+              {translate("previous")}
+            </Button>
+          </CoachPreviousTrigger>
+        )}
+        {activeStepIndex === steps.length - 1 ? (
+          <CoachCloseTrigger>
+            <Button size={getStepSize()} variant="primary">
+              {translate("close")}
+            </Button>
+          </CoachCloseTrigger>
+        ) : (
+          <CoachNextTrigger>
+            <Button size={getStepSize()} variant="primary">
+              {translate("next")}
+            </Button>
+          </CoachNextTrigger>
+        )}
+      </CoachFooter>
+    </CoachStep>
+  );
+
+  // Render custom step if renderStep is provided
+  const renderedStep =
+    currentStep &&
+    renderStep?.(
+      {
+        id: currentStep.id,
+        title: currentStep.title,
+        description: currentStep.description,
+        image: currentStep.image,
+      },
+      {
+        defaultContent: defaultStepContent,
+        index: activeStepIndex,
+        totalSteps: steps.length,
+        stepType: currentStep.type,
+        isFirst: activeStepIndex === 0,
+        isLast: activeStepIndex === steps.length - 1,
+      },
+    );
+
+  // Step content, either custom rendered or default content
+  const stepContent =
+    renderedStep === undefined ? defaultStepContent : renderedStep;
+
+  // Render the current step based on its type (dialog or anchor)
+  const renderCurrentStep = () => {
+    const labelledBy = currentStep?.["aria-labelledby"] ?? titleId;
+
+    if (currentStep?.type === "dialog") {
+      return (
+        <Dialog
+          open={true}
+          size={getStepSize()}
+          onOpenChange={(_open, event) => {
+            if (event instanceof KeyboardEvent) {
+              handleEscapeKeyDown(event);
+            }
+          }}
+        >
+          <Dialog.Popup
+            key={currentStep.id}
+            // Keep focus trapped without locking scroll, so dialog-to-anchor transitions can scroll freely.
+            modal="trap-focus"
+            withBackdrop
+            ref={mergedStepRef}
+            data-coach-step-id={currentStep.id}
+            initialFocusTo={getInitialFocus}
+            onKeyDown={handleArrowKeyDown}
+            width={getStepWidth()}
+            aria-labelledby={labelledBy}
+            closeOnOutsideClick={false}
+          >
+            <Dialog.Body
+              className="aksel-coach__dialog-body"
+              data-coach-step-size={getStepSize()}
+            >
+              {stepContent}
+            </Dialog.Body>
+          </Dialog.Popup>
+        </Dialog>
+      );
+    }
+
+    if (currentStep?.type === "anchor" && anchorEl) {
+      const [side, align] = getSideAndAlignFromPlacement(
+        currentStep.placement ?? "top",
+      );
+
+      return (
+        <Portal key={currentStep.id}>
+          <Floating>
+            <Floating.Anchor virtualRef={anchorEl} />
+            <FocusGuards>
+              <FocusBoundary loop trapped modal initialFocus={getInitialFocus}>
+                <DismissableLayer
+                  asChild
+                  onEscapeKeyDown={handleEscapeKeyDown}
+                  safeZone={{ anchor: anchorEl }}
+                >
+                  <Floating.Content
+                    ref={mergedStepRef}
+                    data-coach-step-id={currentStep.id}
+                    onKeyDown={handleArrowKeyDown}
+                    side={side}
+                    align={align}
+                    sideOffset={currentStep.offset ?? 12}
+                    collisionPadding={12}
+                    role="dialog"
+                    aria-labelledby={labelledBy}
+                    className="aksel-coach__anchor"
+                  >
+                    <div
+                      className="aksel-coach__anchor_content"
+                      data-coach-step-size={getStepSize()}
+                      data-coach-step-width={getStepWidth()}
+                    >
+                      {stepContent}
+                    </div>
+                  </Floating.Content>
+                </DismissableLayer>
+              </FocusBoundary>
+            </FocusGuards>
+          </Floating>
+        </Portal>
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <CoachContextProvider
+      showTour={showTour}
+      openTour={() => setShowTour(true)}
+      disableTour={disableTour}
+      currentStepSize={getStepSize()}
+      onClose={endTour}
+      currentStep={currentStep ?? null}
+      currentStepIndex={activeStepIndex}
+      totalSteps={steps.length}
+      goToNextStep={goToNextStep}
+      goToPreviousStep={goToPreviousStep}
+      titleId={titleId}
+      setTitleId={setTitleId}
+      coachTranslations={translations}
+    >
+      {children}
+      {showTour && renderCurrentStep()}
+    </CoachContextProvider>
+  );
+};
+
+const Coach = Object.assign(CoachRoot, {
+  Step: CoachStep,
+  Title: CoachTitle,
+  Description: CoachDescription,
+  CloseTrigger: CoachCloseTrigger,
+  Trigger: CoachTrigger,
+  Progress: CoachProgress,
+  NextTrigger: CoachNextTrigger,
+  PreviousTrigger: CoachPreviousTrigger,
+  Footer: CoachFooter,
+  Image: CoachImage,
+  Beacon: CoachBeacon,
+});
+
+export {
+  Coach,
+  CoachStep,
+  CoachTitle,
+  CoachDescription,
+  CoachCloseTrigger,
+  CoachTrigger,
+  CoachProgress,
+  CoachNextTrigger,
+  CoachPreviousTrigger,
+  CoachFooter,
+  CoachImage,
+  CoachBeacon,
+};
+
+export type {
+  CoachAnchorStep,
+  CoachDialogStep,
+  CoachStepBase,
+  CoachStepItem,
+  CoachStepTarget,
+  CoachProps,
+  CoachTourProps,
+  CoachSingleStepProps,
+  CoachStepProps,
+  CoachTitleProps,
+  CoachDescriptionProps,
+  CoachCloseTriggerProps,
+  CoachTriggerProps,
+  CoachProgressProps,
+  CoachNextTriggerProps,
+  CoachPreviousTriggerProps,
+  CoachFooterProps,
+  CoachImageProps,
+  CoachBeaconProps,
+};
