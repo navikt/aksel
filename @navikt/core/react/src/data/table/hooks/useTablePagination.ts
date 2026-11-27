@@ -9,7 +9,6 @@ function getSortKey(sortState: SortEntry[]) {
   );
 }
 
-// TODO: Design pagination + reset-on-sort handling (currently consumers reset `page` to 1 in `onSortOrderChange`).
 
 /**
  * With pagination, scrolls the table's scroll container to top when the applied sort,
