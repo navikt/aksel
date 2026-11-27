@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 8.23.3
+
+### Patch Changes
+
+- ActionMenu: Use `rem` instead of `px` for indicator icon. ([#5597](https://github.com/navikt/aksel/pull/5597))
+
 ## 8.23.2
 
 ## 8.23.1
