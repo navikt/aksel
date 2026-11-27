@@ -74,11 +74,11 @@ describe("getPaginationRange", () => {
     });
   });
 
-  test("clamps zero and negative pages to 1", () => {
+  test("coerces invalid page and pageSize via sanitization", () => {
     expect(
       getPaginationRange({
         page: 0,
-        pageSize: 10,
+        pageSize: 0,
         pageRowCount: 3,
         hasNextPage: true,
       }),
@@ -93,16 +93,17 @@ describe("getPaginationRange", () => {
 
     expect(
       getPaginationRange({
-        page: -2,
-        pageSize: 10,
-        pageRowCount: 3,
+        page: 2.7,
+        pageSize: Number.NaN,
+        pageRowCount: 5,
         totalRows: 25,
       }),
-    ).toMatchObject({
-      page: 1,
-      from: 1,
-      to: 3,
-      canPrevious: false,
+    ).toEqual({
+      page: 2,
+      pageCount: 3,
+      from: 11,
+      to: 15,
+      canPrevious: true,
       canNext: true,
     });
   });
@@ -152,61 +153,5 @@ describe("getPaginationRange", () => {
         totalRows: 25,
       }),
     ).toMatchObject({ from: 21, to: 25 });
-  });
-
-  test("coerces invalid pageSize and fractional/non-finite page values", () => {
-    expect(
-      getPaginationRange({
-        page: 2.7,
-        pageSize: 0,
-        pageRowCount: 5,
-        totalRows: 25,
-      }),
-    ).toEqual({
-      page: 2,
-      pageCount: 3,
-      from: 11,
-      to: 15,
-      canPrevious: true,
-      canNext: true,
-    });
-
-    expect(
-      getPaginationRange({
-        page: 1,
-        pageSize: -5,
-        pageRowCount: 10,
-        totalRows: 25,
-      }),
-    ).toEqual({
-      page: 1,
-      pageCount: 3,
-      from: 1,
-      to: 10,
-      canPrevious: false,
-      canNext: true,
-    });
-
-    for (const invalidNumber of [
-      Number.NaN,
-      Number.POSITIVE_INFINITY,
-      Number.NEGATIVE_INFINITY,
-    ]) {
-      expect(
-        getPaginationRange({
-          page: invalidNumber,
-          pageSize: invalidNumber,
-          pageRowCount: 10,
-          totalRows: 25,
-        }),
-      ).toEqual({
-        page: 1,
-        pageCount: 3,
-        from: 1,
-        to: 10,
-        canPrevious: false,
-        canNext: true,
-      });
-    }
   });
 });

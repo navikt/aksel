@@ -30,18 +30,12 @@ function createRows(count: number): Row[] {
 }
 
 const ROWS = createRows(137);
-const MANY_ROWS = createRows(1000);
 
 const columns: DataGrid.Columns<Row> = [
   { id: "id", header: "Id", bodyCell: (row) => row.id, align: "right" },
   { id: "name", header: "Navn", bodyCell: (row) => row.name },
   { id: "role", header: "Rolle", bodyCell: (row) => row.role },
 ];
-
-const sortableColumns: DataGrid.Columns<Row> = columns.map((column) => ({
-  ...column,
-  isSortable: column.id === "id",
-}));
 
 const getRowId = (row: Row) => String(row.id);
 
@@ -65,13 +59,11 @@ function ClientPagedGrid({
   initialPageSize = 10,
   position,
   align,
-  withPreferences = false,
 }: {
   data?: Row[];
   initialPageSize?: number;
   position?: UseDataGridPaginationConfig["position"];
   align?: UseDataGridPaginationConfig["align"];
-  withPreferences?: boolean;
 }) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(initialPageSize);
@@ -101,7 +93,6 @@ function ClientPagedGrid({
       getRowId={getRowId}
       plugins={{ pagination }}
     >
-      {withPreferences && <DataGrid.Preferences />}
       <DataGrid.Table aria-label="Personer" />
     </DataGrid>
   );
@@ -113,80 +104,6 @@ export const Default: Story = {
       <ClientPagedGrid />
     </StoryPage>
   ),
-};
-
-export const ClientSideLoading: Story = {
-  render: function ClientSideLoadingStory() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [page, setPage] = useState(3);
-    const [pageSize, setPageSize] = useState(10);
-
-    const pagination = useDataGridPagination({
-      page,
-      onPageChange: setPage,
-      pageSize,
-      onPageSizeChange: (nextSize) => {
-        setPageSize(nextSize);
-        setPage(1);
-      },
-      totalRows: isLoading ? 0 : ROWS.length,
-    });
-
-    const pageRows = useMemo(
-      () => (isLoading ? [] : paginateData(ROWS, page, pageSize)),
-      [isLoading, page, pageSize],
-    );
-
-    return (
-      <StoryPage description="Paginering på klientsiden med lasting. Starter i lastetilstand uten data, med side 3 som startside. Knappen veksler mellom lasting og ferdig lastet data.">
-        <div>
-          <button type="button" onClick={() => setIsLoading((value) => !value)}>
-            {isLoading ? "Fullfør lasting" : "Last inn på nytt"}
-          </button>
-        </div>
-        <DataGrid
-          columns={columns}
-          data={pageRows}
-          getRowId={getRowId}
-          isLoading={isLoading}
-          plugins={{ pagination }}
-        >
-          <DataGrid.Table aria-label="Personer" />
-        </DataGrid>
-      </StoryPage>
-    );
-  },
-};
-
-export const ServerSide: Story = {
-  render: function ServerSideStory() {
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-
-    const pagination = useDataGridPagination({
-      page,
-      onPageChange: setPage,
-      pageSize,
-      onPageSizeChange: (nextSize) => {
-        setPageSize(nextSize);
-        setPage(1);
-      },
-      totalRows: ROWS.length,
-    });
-
-    return (
-      <StoryPage description="Paginering på serversiden med kjent antall rader (totalRows). Tabellen får bare radene for gjeldende side.">
-        <DataGrid
-          columns={columns}
-          data={paginateData(ROWS, page, pageSize)}
-          getRowId={getRowId}
-          plugins={{ pagination }}
-        >
-          <DataGrid.Table aria-label="Personer" />
-        </DataGrid>
-      </StoryPage>
-    );
-  },
 };
 
 export const ServerSideWithLoading: Story = {
@@ -304,14 +221,6 @@ export const PositionAboveAndBoth: Story = {
   ),
 };
 
-export const WithPreferences: Story = {
-  render: () => (
-    <StoryPage description="Paginering kombinert med DataGrid.Preferences.">
-      <ClientPagedGrid withPreferences />
-    </StoryPage>
-  ),
-};
-
 export const NarrowContainer: Story = {
   render: () => (
     <StoryPage description="Tabellen ligger i en container på 20rem. Under 22rem skjules sidefeltet og «Side X av Y».">
@@ -320,127 +229,4 @@ export const NarrowContainer: Story = {
       </div>
     </StoryPage>
   ),
-};
-
-export const SinglePage: Story = {
-  render: () => (
-    <StoryPage description="7 rader, alle på én side — pagineringslinjen skjules automatisk.">
-      <ClientPagedGrid data={ROWS.slice(0, 7)} />
-    </StoryPage>
-  ),
-};
-
-export const EmptyData: Story = {
-  render: () => (
-    <StoryPage description="Ingen rader og ingen lasting — pagineringslinjen skjules automatisk.">
-      <ClientPagedGrid data={[]} />
-    </StoryPage>
-  ),
-};
-
-export const ManyPages: Story = {
-  render: () => (
-    <StoryPage description="1000 rader fordelt på 100 sider.">
-      <ClientPagedGrid data={MANY_ROWS} />
-    </StoryPage>
-  ),
-};
-
-export const WithRowSelection: Story = {
-  render: function WithRowSelectionStory() {
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [selected, setSelected] = useState<string[]>([]);
-
-    const pagination = useDataGridPagination({
-      page,
-      onPageChange: setPage,
-      pageSize,
-      onPageSizeChange: (nextSize) => {
-        setPageSize(nextSize);
-        setPage(1);
-      },
-      totalRows: ROWS.length,
-    });
-
-    const pageRows = useMemo(
-      () => paginateData(ROWS, page, pageSize),
-      [page, pageSize],
-    );
-
-    return (
-      <StoryPage
-        description={`Flervalg av rader med paginering. «Velg alle» velger bare radene på gjeldende side. Valgte rader: ${selected.length}.`}
-      >
-        <DataGrid
-          columns={columns}
-          data={pageRows}
-          getRowId={getRowId}
-          plugins={{ pagination }}
-          selection={{
-            mode: "multiple",
-            onSelectedRowIdsChange: (ids) => setSelected([...ids]),
-          }}
-        >
-          <DataGrid.Table aria-label="Personer" />
-        </DataGrid>
-      </StoryPage>
-    );
-  },
-};
-
-export const ResetPageOnSort: Story = {
-  render: function ResetPageOnSortStory() {
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [sort, setSort] = useState<DataGrid.Table.SortEntry[]>([]);
-    const direction = sort[0]?.direction;
-
-    const sortedRows = useMemo(
-      () =>
-        [...ROWS].sort((a, b) =>
-          direction === "desc" ? b.id - a.id : a.id - b.id,
-        ),
-      [direction],
-    );
-
-    const pagination = useDataGridPagination({
-      page,
-      onPageChange: setPage,
-      pageSize,
-      onPageSizeChange: (nextSize) => {
-        setPageSize(nextSize);
-        setPage(1);
-      },
-      totalRows: sortedRows.length,
-    });
-
-    const pageRows = useMemo(
-      () => paginateData(sortedRows, page, pageSize),
-      [sortedRows, page, pageSize],
-    );
-
-    return (
-      <StoryPage description="Tilbakestilling til side 1 ved sortering håndteres i onSortOrderChange. Id-kolonnen kan sorteres.">
-        <DataGrid
-          columns={sortableColumns}
-          data={pageRows}
-          getRowId={getRowId}
-          plugins={{ pagination }}
-        >
-          <DataGrid.Table
-            aria-label="Personer"
-            sorting={{
-              sortOrder: sort,
-              onSortOrderChange: (nextSort) => {
-                setSort(nextSort);
-                setPage(1);
-              },
-              allowMultiSort: false,
-            }}
-          />
-        </DataGrid>
-      </StoryPage>
-    );
-  },
 };

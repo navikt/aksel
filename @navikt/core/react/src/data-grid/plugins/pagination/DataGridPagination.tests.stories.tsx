@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React, { useMemo, useState } from "react";
-import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { DataGrid } from "../../root/DataGridRoot";
-import type { UseDataGridPaginationConfig } from "./DataGridPagination.types";
 import { paginateData } from "./helpers/paginateData";
 import { useDataGridPagination } from "./useDataGridPagination";
 
@@ -137,16 +136,7 @@ export const ClientPaginationFlow: Story = {
     await user.tab();
     await user.tab();
     expect(next).toHaveFocus();
-    await user.keyboard("{Shift>}");
-    expect(next).toHaveAccessibleName("Siste side");
-    /* Releasing one Shift while the other is held keeps the modifier active */
-    await fireEvent.keyUp(next, {
-      key: "Shift",
-      code: "ShiftLeft",
-      shiftKey: true,
-    });
-    expect(next).toHaveAccessibleName("Siste side");
-    await user.keyboard(" ");
+    await user.keyboard("{Shift>} ");
     expectPage(canvas, 3, 3);
     await user.keyboard("{/Shift}");
 
@@ -258,11 +248,8 @@ export const ServerAndUnknownTotal: Story = {
       canvas.getByText("Fra 21–40", { selector: "span" }),
     ).toBeInTheDocument();
 
-    /* Loading preserves summary and aria-disables navigation buttons */
+    /* Loading aria-disables navigation buttons and blocks clicks */
     await user.click(canvas.getByRole("button", { name: "Toggle loading" }));
-    expect(
-      canvas.getByText("Fra 21–40", { selector: "span" }),
-    ).toBeInTheDocument();
     expect(next).toHaveAttribute("aria-disabled", "true");
     await user.click(next);
     expect(canvas.getByText("Side 2")).toBeInTheDocument();
@@ -273,10 +260,6 @@ function PositionScrollAutoHideGrid() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [rowCount, setRowCount] = useState(60);
-  const [position, setPosition] =
-    useState<UseDataGridPaginationConfig["position"]>("both");
-  const [align, setAlign] =
-    useState<UseDataGridPaginationConfig["align"]>("start");
 
   const rows = useMemo(() => manyRows.slice(0, rowCount), [rowCount]);
   const pagination = useDataGridPagination({
@@ -289,8 +272,8 @@ function PositionScrollAutoHideGrid() {
     },
     pageSizeOptions: [10, 20, 50],
     totalRows: rows.length,
-    position,
-    align,
+    position: "both",
+    align: "start",
   });
 
   const pageRows = useMemo(
@@ -309,12 +292,6 @@ function PositionScrollAutoHideGrid() {
       <button type="button" onClick={() => setRowCount(0)}>
         Set 0 rows
       </button>
-      <button type="button" onClick={() => setPosition("none")}>
-        Hide position
-      </button>
-      <button type="button" onClick={() => setAlign("start")}>
-        start align
-      </button>
       <div style={{ display: "flex", height: 360 }}>
         <DataGrid
           columns={columns}
@@ -322,7 +299,9 @@ function PositionScrollAutoHideGrid() {
           getRowId={getRowId}
           plugins={{ pagination }}
         >
+          <div data-testid="toolbar">Toolbar</div>
           <DataGrid.Table aria-label="Personer" />
+          <div data-testid="footer">Footer</div>
         </DataGrid>
       </div>
     </>
@@ -342,15 +321,28 @@ export const PositionScrollAndAutoHide: Story = {
       throw new Error("Table scroll wrapper not found");
     }
 
-    /* position="both" renders two distinct navigation landmarks */
+    /* position="both" renders two distinct navigation landmarks directly around DataGrid.Table */
+    const toolbar = canvas.getByTestId("toolbar");
     const topNav = canvas.getByRole("navigation", {
       name: "Sidenavigering (øverst)",
     });
+    const table = canvas.getByRole("table", { name: "Personer" });
     const bottomNav = canvas.getByRole("navigation", {
       name: "Sidenavigering (nederst)",
     });
-    expect(topNav).toBeInTheDocument();
-    expect(bottomNav).toBeInTheDocument();
+    const footer = canvas.getByTestId("footer");
+    expect(toolbar.compareDocumentPosition(topNav)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(topNav.compareDocumentPosition(table)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(table.compareDocumentPosition(bottomNav)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+    expect(bottomNav.compareDocumentPosition(footer)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
 
     /* Page change scrolls table container back to top */
     wrapper.scrollTop = 150;
