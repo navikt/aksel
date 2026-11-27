@@ -41,6 +41,12 @@ interface ComboboxProps<
    * Field name. When provided, the field value will be included in form submissions.
    */
   name?: string;
+  /**
+   * Maximum width of the field that shows current value.
+   *
+   * **NB: Use a unit that scales with the font size, such as rem or em.**
+   */
+  fieldMaxWidth?: string;
 }
 
 const Combobox = forwardRef(
@@ -49,6 +55,7 @@ const Combobox = forwardRef(
       label,
       hideLabel,
       name,
+      fieldMaxWidth,
       size: sizeProp,
       error,
       errorId: errorIdProp,
@@ -110,7 +117,13 @@ const Combobox = forwardRef(
           </BodyShort>
         )}
         <ComboboxTrigger readOnly={readOnly} {...inputProps}>
-          <ComboboxField ref={ref} hasError={hasError} />
+          <ComboboxField
+            ref={ref}
+            hasError={hasError}
+            containerStyle={
+              fieldMaxWidth ? { maxWidth: fieldMaxWidth } : undefined
+            }
+          />
         </ComboboxTrigger>
         <div
           className="aksel-form-field__error aksel-combo-box__error"

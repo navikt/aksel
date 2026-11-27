@@ -10,10 +10,11 @@ import {
 interface ComboboxFieldProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: string;
   hasError?: boolean;
+  containerStyle?: React.CSSProperties;
 }
 
 const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
-  ({ children, hasError, ...rest }, ref) => {
+  ({ children, hasError, containerStyle, ...rest }, ref) => {
     const { options, value, size } = useComboboxRootContext();
     const translate = useI18n("Combobox2");
 
@@ -35,7 +36,7 @@ const ComboboxField = forwardRef<HTMLButtonElement, ComboboxFieldProps>(
     }, [label]);
 
     return (
-      <div className="aksel-combo-box__field-container">
+      <div className="aksel-combo-box__field-container" style={containerStyle}>
         <button
           type="button"
           ref={ref}
