@@ -2,6 +2,18 @@
 const internalTranslations = {
   DataGrid: {
     Pagination: {
+      summary: "Fra {from} til {to} av {totalRows}",
+      summaryUnknownTotal: "Fra {from}–{to}",
+      summaryEmpty: "Ingen rader",
+      pageSizeTrigger: "{summary}, velg antall rader per side, {size} valgt",
+      pageSizeOption: "{size} per side",
+      pageOfUnknownTotal: "Side {page}",
+      goToPage: "Gå til side",
+      ofPageCount: "av {pageCount}",
+      first: "Første side",
+      previous: "Forrige side",
+      next: "Neste side",
+      last: "Siste side",
       navLabel: "Sidenavigering",
       navLabelAbove: "{label} (øverst)",
       navLabelBelow: "{label} (nederst)",

@@ -2,6 +2,16 @@ import React, { useContext } from "react";
 import { useDataGridContext } from "../../../root/DataGridRoot.context";
 import type { DataGridPaginationAlign } from "../DataGridPagination.types";
 
+/**
+ * Page and/or page size requested by pagination controls.
+ * `page` is omitted for page-size changes so the announcement still fires whether
+ * or not the consumer resets `page` to 1 inside `onPageSizeChange`.
+ */
+type PaginationAnnounceTarget = {
+  page?: number;
+  pageSize: number;
+};
+
 type DataGridPaginationContextValue = {
   ownerGridId: symbol;
   /** 1-based resolved page number. */
@@ -63,4 +73,4 @@ export {
   useDataGridPaginationContext,
   useOptionalDataGridPaginationContext,
 };
-export type { DataGridPaginationContextValue };
+export type { DataGridPaginationContextValue, PaginationAnnounceTarget };

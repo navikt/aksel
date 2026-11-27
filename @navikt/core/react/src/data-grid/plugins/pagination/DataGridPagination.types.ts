@@ -56,6 +56,12 @@ type UseDataGridPaginationConfig = {
    * When `position` is `"both"`, each landmark is suffixed with its position so both remain distinct.
    */
   navLabel?: string;
+  /**
+   * Whether completed page and page-size changes are announced to screen readers.
+   * When fetching asynchronously, set `isLoading` on `DataGrid` while loading so the announcement reflects the new rows.
+   * @default true
+   */
+  announcePageChanges?: boolean;
 } & DataGridPaginationTotal;
 
 export type {
