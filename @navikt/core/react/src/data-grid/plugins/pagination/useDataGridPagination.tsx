@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { consoleWarning } from "../../../utils/helpers/consoleWarning";
 import { useEventCallback } from "../../../utils/hooks";
 import { useI18n } from "../../../utils/i18n/i18n.hooks";
@@ -12,9 +12,11 @@ import type {
 import {
   DataGridPaginationContextProvider,
   type DataGridPaginationContextValue,
+  type PaginationAnnounceTarget,
 } from "./context/DataGridPagination.context";
 import { DEFAULT_PAGE_SIZE, sanitizePageSize } from "./helpers/paginate-data";
 import { getPaginationRange } from "./helpers/pagination-range";
+import { DataGridPaginationLiveRegionInternal } from "./live-region/DataGridPaginationLiveRegionInternal";
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
 
@@ -28,6 +30,7 @@ interface DataGridPaginationWrapperInternalProps {
   position: DataGridPaginationPosition;
   align: DataGridPaginationAlign;
   navLabel: string | undefined;
+  announcePageChanges: boolean;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;
   children: React.ReactNode;
@@ -43,6 +46,7 @@ function DataGridPaginationWrapperInternal({
   position,
   align,
   navLabel,
+  announcePageChanges,
   onPageChange,
   onPageSizeChange,
   children,
@@ -75,6 +79,13 @@ function DataGridPaginationWrapperInternal({
     }
   }, [isLoading, page, range.from, range.to, range.page, totalRows]);
 
+  /*
+   * Tracks page/page-size requests initiated by pagination controls so only
+   * user-driven transitions are announced; clamping and rejected requests stay silent.
+   */
+  const announceTargetRef = useRef<PaginationAnnounceTarget | null>(null);
+  const [announceRequestId, setAnnounceRequestId] = useState(0);
+
   const setPage = useEventCallback((requestedPage: number) => {
     const nextRange = getPaginationRange(
       totalRows !== undefined
@@ -87,6 +98,10 @@ function DataGridPaginationWrapperInternal({
           },
     );
     if (nextRange.page !== page) {
+      if (announcePageChanges) {
+        announceTargetRef.current = { page: nextRange.page, pageSize };
+        setAnnounceRequestId((id) => id + 1);
+      }
       onPageChange(nextRange.page);
     }
   });
@@ -94,6 +109,10 @@ function DataGridPaginationWrapperInternal({
   const setPageSize = useEventCallback((nextSize: number) => {
     if (nextSize === pageSize) {
       return;
+    }
+    if (announcePageChanges) {
+      announceTargetRef.current = { pageSize: nextSize };
+      setAnnounceRequestId((id) => id + 1);
     }
     onPageSizeChange(nextSize);
   });
@@ -231,6 +250,12 @@ function DataGridPaginationWrapperInternal({
   return (
     <DataGridPaginationContextProvider value={contextValue}>
       {children}
+      {announcePageChanges && (
+        <DataGridPaginationLiveRegionInternal
+          announceTargetRef={announceTargetRef}
+          announceRequestId={announceRequestId}
+        />
+      )}
     </DataGridPaginationContextProvider>
   );
 }
@@ -279,6 +304,7 @@ function useDataGridPagination(
     position = "below",
     align = "end",
     navLabel,
+    announcePageChanges = true,
   } = config;
 
   const pageSize = sanitizePageSize(pageSizeProp);
@@ -341,6 +367,7 @@ function useDataGridPagination(
           position={position}
           align={align}
           navLabel={navLabel}
+          announcePageChanges={announcePageChanges}
           onPageChange={stableOnPageChange}
           onPageSizeChange={stableOnPageSizeChange}
         >
@@ -358,6 +385,7 @@ function useDataGridPagination(
       position,
       align,
       navLabel,
+      announcePageChanges,
       stableOnPageChange,
       stableOnPageSizeChange,
     ],
