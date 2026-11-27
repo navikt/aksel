@@ -2,7 +2,6 @@
   border-radius: var(--ax-radius-2);
   background-color: var(--ax-bg-neutral-softA);
   padding: var(--ax-space-2) var(--ax-space-4);
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   font-family: var(--website-font-mono);
   display: inline;
   box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
@@ -22,6 +21,7 @@
 .typoList {
   max-width: 600px;
 
+  /* stylelint-disable-next-line aksel/no-class-override -- Adjacent sibling selector adjusts .typoList margin, not Aksel classes */
   :global(.aksel-body-long.aksel-typo--spacing) + & {
     margin-top: -1rem;
   }

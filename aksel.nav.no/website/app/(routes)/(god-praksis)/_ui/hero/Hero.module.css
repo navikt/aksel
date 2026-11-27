@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- Uses --website-hero-selector-x/y set inline by Hero provider */
 .godPraksisHero {
   border-radius: var(--ax-radius-12);
   border: 1px solid var(--ax-border-brand-blue-subtleA);

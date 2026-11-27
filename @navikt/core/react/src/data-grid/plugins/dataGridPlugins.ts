@@ -89,8 +89,8 @@ function orderPlugins(
 }
 
 interface InternNode {
-  readonly next: WeakMap<object, InternNode>;
-  array?: readonly object[];
+  readonly next: WeakMap<DataGridPlugin, InternNode>;
+  array?: readonly DataGridPlugin[];
 }
 
 /**
@@ -143,7 +143,7 @@ function internByIdentity(
     node.array =
       process.env.NODE_ENV !== "production" ? Object.freeze(copy) : copy;
   }
-  return node.array as readonly DataGridPlugin[];
+  return node.array;
 }
 
 /**
@@ -151,6 +151,8 @@ function internByIdentity(
  * Runs in reverse so the first plugin wraps outermost.
  * A falsy return (`undefined`, `null`, `false`, etc.) preserves the previous
  * content so one broken plugin doesn't accidentally blank the grid.
+ *
+ * TODO: Consier returning plugin name with plugin for better debugging and error messages.
  */
 function applyTableContext(
   plugins: readonly DataGridPlugin[],
@@ -168,7 +170,7 @@ function applyTableContext(
     const next = transform(content);
     if (!next) {
       consoleWarning(
-        `DataGrid: Plugin transformTableContext returned "${String(next)}". Preserving previous content.`,
+        `DataGrid: A plugin's transformTableContext returned "${String(next)}". Preserving previous content.`,
       );
       continue;
     }

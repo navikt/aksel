@@ -3,7 +3,7 @@
   width: 32px;
 }
 
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .godPraksisPictogramSvg {
     height: 48px;
     width: 48px;

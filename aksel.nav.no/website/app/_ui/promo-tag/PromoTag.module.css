@@ -1,4 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .promoTag {
   border-radius: var(--ax-radius-12);
   width: fit-content;

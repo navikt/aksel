@@ -111,6 +111,7 @@
 }
 
 .aksel-timeline__period--inner {
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Container query units require Safari 16+, we assume most use will be modern browsers */
   margin: 0 clamp(var(--ax-space-4), 17cqi, var(--ax-space-8));
   overflow: hidden;
   white-space: nowrap;
@@ -124,8 +125,10 @@
   flex-shrink: 1;
 }
 
+/* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Container queries require Safari 16+, we assume most use will be modern browsers */
 @container (inline-size < 1.4rem) {
   .aksel-timeline__period--inner {
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Container query units require Safari 16+, we assume most use will be modern browsers */
     margin: 0 10cqi;
   }
 }
