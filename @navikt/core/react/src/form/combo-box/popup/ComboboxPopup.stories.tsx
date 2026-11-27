@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { fireEvent } from "storybook/test";
 import { HStack } from "../../../primitives/stack";
 import { BodyShort } from "../../../typography";
+import { renderStoriesForChromatic } from "../../../utils/renderStoriesForChromatic";
 import { ComboboxFilter } from "../filter/ComboboxFilter";
 import { ComboboxList } from "../list/ComboboxList";
 import { ComboboxPopup } from "../popup/ComboboxPopup";
@@ -347,5 +348,8 @@ States.play = async ({ canvasElement }) => {
   console.log(listbox);
   fireEvent.keyDown(listbox, { key: "ArrowDown" });
 };
+States.parameters = { chromatic: { disable: false } };
 
-//export const Chromatic = renderStoriesForChromatic();
+export const Chromatic = renderStoriesForChromatic({
+  Groups,
+});

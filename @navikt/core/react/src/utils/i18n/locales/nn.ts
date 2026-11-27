@@ -24,6 +24,10 @@ export default {
     noMatches: "Ingen søketreff",
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
+    filter: "Filtrer",
+    noHits: "Ingen treff",
+    oneHit: "Eitt treff",
+    hitsCount: "{count} treff",
   },
   CopyButton: {
     title: "Kopier",

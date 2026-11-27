@@ -55,4 +55,14 @@
       outline-color: Highlight;
     }
   }
+
+  .aksel-listbox__option[aria-selected="true"] & {
+    background-color: var(--ax-bg-moderate-pressedA);
+
+    @media (forced-colors: active) {
+      background-color: SelectedItem;
+      color: SelectedItemText;
+      forced-color-adjust: none;
+    }
+  }
 }

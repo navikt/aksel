@@ -218,17 +218,6 @@
  * Option                                       *
  ************************************************/
 
-.aksel-combo-box__option:is([aria-selected="true"], [aria-selected="true"][data-virtual-focus="true"])
-  .aksel-listbox__option-inner {
-  background-color: var(--ax-bg-moderate-pressedA);
-
-  @media (forced-colors: active) {
-    background-color: SelectedItem;
-    color: SelectedItemText;
-    forced-color-adjust: none;
-  }
-}
-
 .aksel-combo-box__option-checkmark {
   --__axc-combo-box-option-checkmark-size: 1.25rem;
 

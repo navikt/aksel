@@ -31,6 +31,14 @@ export default {
     /** Loader title */
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",
+    /** ComboboxSingle. Label for filter input. Only visible to screen readers. */
+    filter: "Filtrer",
+    /** ComboboxSingle */
+    noHits: "Ingen treff",
+    /** ComboboxSingle. Only announced to screen readers. */
+    oneHit: "Ett treff",
+    /** ComboboxSingle. Only announced to screen readers. */
+    hitsCount: "{count} treff",
   },
   CopyButton: {
     title: "Kopier",

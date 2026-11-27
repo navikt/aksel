@@ -22,7 +22,7 @@ function useHitsAnnouncer(
   deferredFilterString: string,
   liveRegionRef: React.RefObject<HTMLDivElement | null>,
 ) {
-  const translate = useI18n("Combobox2");
+  const translate = useI18n("Combobox");
   const oldFilterStringRef = useRef(deferredFilterString);
   const timeout = useTimeout();
 
