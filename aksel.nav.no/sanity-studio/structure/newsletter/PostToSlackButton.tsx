@@ -2,7 +2,7 @@ import { createPreviewSecret } from "@sanity/preview-url-secret/create-secret";
 import { useState } from "react";
 import { useClient } from "sanity";
 import { PaperplaneIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { BodyLong, Button, Dialog } from "@navikt/ds-react";
 import { SANITY_API_VERSION } from "../../sanity.env";
 import type { FeedbackT } from "./feedback";
 import { newsletterPayloadSchema } from "./newsletter-schema";
@@ -45,6 +45,19 @@ export const PostToSlackButton = ({
     apiVersion: SANITY_API_VERSION,
   }) as unknown as PreviewSecretClient;
 
+  const handleTriggerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const validation = newsletterPayloadSchema.shape.text.safeParse(text);
+    if (!validation.success) {
+      event.preventDefault(); // close the dialog
+      onFeedback({
+        status: "error",
+        message: validation.error.issues[0].message,
+      });
+      return;
+    }
+    onFeedback(null); // clear old messages
+  };
+
   const post = async () => {
     setPosting(true);
     const posted = await postToSlack(text, client);
@@ -58,54 +71,38 @@ export const PostToSlackButton = ({
   };
 
   return (
-    <>
-      <Button
-        variant="primary"
-        size="small"
-        icon={<PaperplaneIcon aria-hidden />}
-        onClick={() => {
-          const validation = newsletterPayloadSchema.shape.text.safeParse(text);
-          if (!validation.success) {
-            onFeedback({
-              status: "error",
-              message: validation.error.issues[0].message,
-            });
-            return;
-          }
-          onFeedback(null);
-          setOpen(true);
-        }}
-        disabled={!text.trim() || posting}
-      >
-        Send til Slack
-      </Button>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger onClick={handleTriggerClick}>
+        <Button
+          variant="primary"
+          size="small"
+          icon={<PaperplaneIcon aria-hidden />}
+          disabled={!text.trim() || posting}
+        >
+          Send til Slack
+        </Button>
+      </Dialog.Trigger>
 
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        header={{ heading: "Post til Slack?" }}
-        width="small"
-      >
-        <Modal.Body>
+      <Dialog.Popup width="small">
+        <Dialog.Header>
+          <Dialog.Title>Send til Slack?</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
           <BodyLong>
             {posting
               ? "Meldingen sendes til Slack. Sendingen fortsetter selv om du lukker vinduet."
               : "Aksel-boten (@aksel3) er klar til å sende meldingen til Slack."}
           </BodyLong>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="button" onClick={post} loading={posting}>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.CloseTrigger>
+            <Button variant="secondary">{posting ? "Lukk" : "Avbryt"}</Button>
+          </Dialog.CloseTrigger>
+          <Button onClick={post} loading={posting}>
             Send
           </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => setOpen(false)}
-          >
-            {posting ? "Lukk" : "Avbryt"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
