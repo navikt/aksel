@@ -1,10 +1,16 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { DataGridPreferences } from "../../data-grid-preferences";
 import type { SelectionProps } from "../../data/table/hooks/useTableSelection";
 import type { ColumnDefinitions } from "../../data/table/root/DataGridTable.types";
 import { DataGridTable } from "../../data/table/root/DataGridTableRoot";
 import { cl } from "../../utils/helpers";
 import { useDataGridSettings } from "../hooks/useDataGridSettings";
+import {
+  type DataGridPlugin,
+  type DataGridPlugins,
+  applyTableContext,
+  resolveDataGridPlugins,
+} from "../plugins/dataGridPlugins";
 import type { DataGridSettings } from "./DataGrid.types";
 import { DataGridContextProvider } from "./DataGridRoot.context";
 
@@ -53,6 +59,10 @@ interface DataGridProps<RowT> {
    * Callback fired when settings are changed. The new settings will be passed as an argument.
    */
   onSettingsChange?: (newSettings: DataGridSettings) => void;
+  /**
+   * Plugins that extend DataGrid rendering (e.g. pagination).
+   */
+  plugins?: DataGridPlugins;
 }
 
 interface DataGridComponent {
@@ -106,10 +116,13 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
       settings,
       defaultSettings,
       onSettingsChange,
+      plugins,
       ...rest
     }: DataGridProps<unknown>,
     ref,
   ) => {
+    const [gridId] = useState(() => Symbol());
+    const resolvedPlugins = resolveDataGridPlugins(plugins);
     const { settings: resolvedSettings, updateSettings } = useDataGridSettings({
       settings,
       defaultSettings,
@@ -119,6 +132,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
     return (
       <div {...rest} ref={ref} className={cl("aksel-data-grid", className)}>
         <DataGridContextProvider
+          gridId={gridId}
           columnDefinitions={columns}
           data={data}
           getRowId={getRowId}
@@ -127,7 +141,7 @@ const DataGridInternal = forwardRef<HTMLDivElement, DataGridProps<any>>(
           tableSettings={resolvedSettings}
           updateTableSettings={updateSettings}
         >
-          {children}
+          {applyTableContext(resolvedPlugins, children)}
         </DataGridContextProvider>
       </div>
     );
@@ -144,6 +158,8 @@ export namespace DataGrid {
   export type Columns<T = unknown> = ColumnDefinitions<T>;
   export type Selection<T = unknown> = SelectionProps<T>;
   export type Settings = DataGridSettings;
+  export type Plugin = DataGridPlugin;
+  export type Plugins = DataGridPlugins;
 
   // oxlint-disable-next-line typescript/no-namespace
   export namespace Table {
