@@ -22,15 +22,15 @@ const ARTICLE_SECTIONS: { title: string; types: string[] }[] = [
 const formatLine = (entry: NewsletterArticleT) => {
   const title = entry.heading?.trim() || "";
   const url = resolveUrl(entry, "https://aksel.nav.no");
-  return url ? `• [${title}](${url})` : `• ${title}`;
+  return url ? `- [${title}](${url})` : `- ${title}`;
 };
 
-const formatSection = (title: string, lines: string[]) =>
-  lines.length > 0 ? [`*${title}*`, ...lines].join("\n") : null;
+const formatSection = (heading: string, lines: string[]) =>
+  lines.length > 0 ? [heading, ...lines].join("\n") : null;
 
 /**
- * Formats the entries as editable text, with `*bold*` headings and `[title](url)` links.
- * We use `toSlackHtml` when copying, so the links become clickable when pasted into Slack.
+ * Formats the entries as editable markdown, with `#` headings, `- ` lists and `[title](url)` links.
+ * Posted as is through the Slack API (`markdown_text`), and converted with `toSlackHtml` when copying.
  */
 export const formatSlackMessage = (
   { articles, changelog }: NewsletterEntriesT,
@@ -38,7 +38,7 @@ export const formatSlackMessage = (
 ) => {
   const articleSections = ARTICLE_SECTIONS.map(({ title, types }) =>
     formatSection(
-      title,
+      `## ${title}`,
       articles
         .filter((article) => types.includes(article._type))
         .map(formatLine),
@@ -52,11 +52,11 @@ export const formatSlackMessage = (
   // sequence matters
   const changelogSections = [
     formatSection(
-      "Design",
+      "### Design",
       changelogLines((entry) => entry.endringstype === "design"),
     ),
     formatSection(
-      "Endringer i dokumentasjonen",
+      "### Endringer i dokumentasjonen",
       changelogLines(
         (entry) =>
           entry._type === "gp_endringslogg_artikkel" ||
@@ -64,7 +64,7 @@ export const formatSlackMessage = (
       ),
     ),
     formatSection(
-      "Kode",
+      "### Kode",
       changelogLines((entry) => entry.endringstype === "kode"),
     ),
   ].filter((section): section is string => section !== null);
@@ -72,7 +72,7 @@ export const formatSlackMessage = (
   const sections = [
     ...articleSections,
     ...(changelogSections.length > 0
-      ? ["*📝 Endringslogg*", ...changelogSections] // heading for the changelog section
+      ? ["## 📝 Endringslogg", ...changelogSections] // heading for the changelog section
       : []),
   ];
 
@@ -81,10 +81,10 @@ export const formatSlackMessage = (
     : `${format(from, "dd.MM.yyyy")}–${format(to, "dd.MM.yyyy")}`;
 
   if (sections.length === 0) {
-    return `:newspaper: *Nytt fra Aksel (${period})*\n\nIngen nye publiseringer denne perioden.`;
+    return `# 📰 Nytt fra Aksel (${period})\n\nIngen nye publiseringer denne perioden.`;
   }
 
-  return [`:newspaper: *Nytt fra Aksel (${period})*`, ...sections].join("\n\n");
+  return [`# 📰 Nytt fra Aksel (${period})`, ...sections].join("\n\n");
 };
 
 /**
@@ -96,6 +96,7 @@ const MARKDOWN_LINK = /\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g;
 /**
  * Converts the text from `formatSlackMessage` to HTML.
  * Slack's message composer keeps links and bold text from pasted HTML, but not from pasted markdown.
+ * It has no headings, so headings become bold.
  */
 export const toSlackHtml = (text: string) =>
   text
@@ -105,17 +106,7 @@ export const toSlackHtml = (text: string) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replace(MARKDOWN_LINK, '<a href="$2">$1</a>')
-    /* *text* -> bold, within a single line */
-    .replace(/\*([^*\n]+)\*/g, "<b>$1</b>")
+    .replace(/^#{1,6} (.+)$/gm, "<b>$1</b>")
+    .replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>")
+    .replace(/^- /gm, "• ")
     .replaceAll("\n", "<br>");
-
-/**
- * Converts the text from `formatSlackMessage` to Slack mrkdwn, used when posting through the Slack API.
- * `*bold*` is already valid mrkdwn, so only links and the characters Slack requires escaped are changed.
- */
-export const toSlackMrkdwn = (text: string) =>
-  text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replace(MARKDOWN_LINK, "<$2|$1>");

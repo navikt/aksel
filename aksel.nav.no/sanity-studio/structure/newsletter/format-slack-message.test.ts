@@ -1,9 +1,5 @@
 import { describe, expect, test } from "vitest";
-import {
-  formatSlackMessage,
-  toSlackHtml,
-  toSlackMrkdwn,
-} from "./format-slack-message";
+import { formatSlackMessage, toSlackHtml } from "./format-slack-message";
 
 const period = { from: new Date(2026, 10, 16), to: new Date(2026, 10, 20) };
 
@@ -43,15 +39,15 @@ describe("formatSlackMessage", () => {
 
     expect(message).toContain("Nytt fra Aksel (uke 47)");
     expect(message).toContain(
-      "*Designsystemkomponenter*\n• [Dialog](https://aksel.nav.no/komponenter/core/dialog)",
+      "## Designsystemkomponenter\n- [Dialog](https://aksel.nav.no/komponenter/core/dialog)",
     );
     expect(message).toContain(
-      "*Kode*\n• [ds-react 8.1.0](https://aksel.nav.no/grunnleggende/endringslogg/ds-react-8-1-0)",
+      "### Kode\n- [ds-react 8.1.0](https://aksel.nav.no/grunnleggende/endringslogg/ds-react-8-1-0)",
     );
     expect(message).toContain(
-      "*Endringer i dokumentasjonen*\n• [Oppdatert skjemaveiledning](https://aksel.nav.no/god-praksis/endring/skjema)",
+      "### Endringer i dokumentasjonen\n- [Oppdatert skjemaveiledning](https://aksel.nav.no/god-praksis/endring/skjema)",
     );
-    expect(message).not.toContain("*Design*");
+    expect(message).not.toContain("### Design\n");
   });
 
   test("uses full dates when the period spans more than one week", () => {
@@ -71,25 +67,13 @@ describe("formatSlackMessage", () => {
 });
 
 describe("toSlackHtml", () => {
-  test("converts links, bold text and line breaks, and escapes HTML", () => {
+  test("converts headings, bold text, lists, links and line breaks, and escapes HTML", () => {
     expect(
       toSlackHtml(
-        "*Komponenter*\n• [Dialog <ny>](https://aksel.nav.no/a?b=1&c=2)",
+        "## Komponenter\n- [Dialog <ny>](https://aksel.nav.no/a?b=1&c=2) er **ny**",
       ),
     ).toBe(
-      '<b>Komponenter</b><br>• <a href="https://aksel.nav.no/a?b=1&amp;c=2">Dialog &lt;ny&gt;</a>',
-    );
-  });
-});
-
-describe("toSlackMrkdwn", () => {
-  test("converts links and escapes Slack control characters", () => {
-    expect(
-      toSlackMrkdwn(
-        "*Komponenter*\n• [Dialog <ny>](https://aksel.nav.no/a?b=1&c=2)",
-      ),
-    ).toBe(
-      "*Komponenter*\n• <https://aksel.nav.no/a?b=1&amp;c=2|Dialog &lt;ny&gt;>",
+      '<b>Komponenter</b><br>• <a href="https://aksel.nav.no/a?b=1&amp;c=2">Dialog &lt;ny&gt;</a> er <b>ny</b>',
     );
   });
 });

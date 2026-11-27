@@ -10,9 +10,9 @@ const NEWSLETTER_CHANNEL_ID = "C0CM7HFLAJV";
 
 const slackClient = new WebClient(process.env.SLACK_BOT_USER_TOKEN);
 
-// slack truncates messages longer than 40 000 characters
+// slack's limit for markdown_text
 const payloadSchema = z.object({
-  text: z.string().trim().min(1).max(40000),
+  text: z.string().trim().min(1).max(12000),
   secret: z.string().min(1),
 });
 
@@ -24,7 +24,7 @@ const isValidStudioSecret = async (secret: string) =>
 
 /**
  * Posts the newsletter from the "Nyhetsbrev til Slack" (admin pane) in Sanity Studio to Slack.
- * Expects `text` in Slack mrkdwn (see `toSlackMrkdwn` in the Studio) and the secret
+ * Expects `text` in standard markdown and the secret
  */
 export async function POST(req: NextRequest) {
   const payload = payloadSchema.safeParse(await req.json().catch(() => null));
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
   try {
     await slackClient.chat.postMessage({
       channel: NEWSLETTER_CHANNEL_ID,
-      text: payload.data.text,
+      markdown_text: payload.data.text,
       unfurl_links: false,
       unfurl_media: false,
     });

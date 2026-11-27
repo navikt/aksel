@@ -5,7 +5,6 @@ import { PaperplaneIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { SANITY_API_VERSION } from "../../sanity.env";
 import type { FeedbackT } from "./feedback";
-import { toSlackMrkdwn } from "./format-slack-message";
 
 // pinned @sanity/client 7 but useClient returns v8. maybe bump?
 type PreviewSecretClient = Parameters<typeof createPreviewSecret>[0];
@@ -22,7 +21,7 @@ const postToSlack = async (text: string, client: PreviewSecretClient) => {
     const response = await fetch("/api/newsletter/slack", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: toSlackMrkdwn(text), secret }),
+      body: JSON.stringify({ text, secret }),
     });
     return response.ok;
   } catch {
