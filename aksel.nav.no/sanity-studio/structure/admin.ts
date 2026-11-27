@@ -4,10 +4,12 @@ import {
   EyeIcon,
   FileTextIcon,
   ImageIcon,
+  NewsletterIcon,
   PieChartIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "../sanity.env";
 import { isAdminOrDev } from "./access";
+import { NewsletterSlackView } from "./newsletter/NewsletterSlackView";
 
 export function adminStructure(S: StructureBuilder) {
   if (!isAdminOrDev(S)) {
@@ -33,6 +35,20 @@ export function adminStructure(S: StructureBuilder) {
             .icon(ImageIcon)
             .id(`aksel_ds_forside_dokument`),
           S.listItem().singleton("newsletter_todo"),
+          /* Production only: the view builds aksel.nav.no URLs and posts to a shared Slack channel */
+          ...(S.context.dataset === "production"
+            ? [
+                S.listItem()
+                  .title("Nyhetsbrev til Slack")
+                  .icon(NewsletterIcon)
+                  .id("nyhetsbrev")
+                  .child(
+                    S.component(NewsletterSlackView).title(
+                      "Nyhetsbrev til Slack",
+                    ),
+                  ),
+              ]
+            : []),
           S.listItem()
             .title("Standalone-sider")
             .child(
