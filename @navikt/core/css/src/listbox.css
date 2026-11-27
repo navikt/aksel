@@ -25,7 +25,7 @@
     margin-bottom: var(--ax-space-2);
   }
 
-  /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- :nth-child(of S) in WIP preview component */
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Progressive enhancement */
   .aksel-listbox__group:first-child &:nth-child(1 of &) {
     /* When we scroll to the first option, and that option is in a group,
        scroll to the very top so that the group label is visible as well.

@@ -127,7 +127,13 @@ const Combobox = forwardRef(
 
         {name &&
           rest.value.map((val) => (
-            <input key={val} type="hidden" name={name} value={val} />
+            <input
+              key={val}
+              type="hidden"
+              name={name}
+              value={val}
+              disabled={inputProps.disabled}
+            />
           ))}
 
         <ComboboxOverlay
@@ -179,7 +185,7 @@ interface ComboboxSingleProps<
  *
  * **WARNING: This component is in active development and may receive breaking changes outside major releases!**
  *
- * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/TODO)
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/combobox-single)
  * @see 🏷️ {@link ComboboxSingleProps}
  *
  * @example
@@ -188,6 +194,7 @@ interface ComboboxSingleProps<
  *   label="Select country"
  *   name="country"
  *   options={countries}
+ *   fieldMaxWidth="12rem"
  * />
  * ```
  */

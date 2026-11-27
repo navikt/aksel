@@ -60,7 +60,7 @@ export const ComboboxPopup = ({ children }: ComboboxPopupProps) => {
       }
       const inputElm = ref.current?.querySelector<HTMLInputElement>("input");
       if (inputElm) {
-        inputElm.focus();
+        inputElm.focus({ preventScroll: true });
         return;
       }
       const listElm =
