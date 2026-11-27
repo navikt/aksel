@@ -235,6 +235,7 @@ describe("useDataGridPagination", () => {
           <PaginationContextProbe testId="outer" />
           <DataGrid columns={TEST_COLUMNS} data={makeRows(2)}>
             <PaginationContextProbe testId="inner" />
+            <DataGrid.Table aria-label="Inner" />
           </DataGrid>
         </DataGrid>
       );
@@ -243,6 +244,7 @@ describe("useDataGridPagination", () => {
     render(<Harness />);
     expect(screen.getByTestId("outer").textContent).toContain("page=1");
     expect(screen.getByTestId("inner").textContent).toBe("none");
+    expect(screen.queryByRole("navigation")).toBeNull();
   });
 
   test("does not remount children when bar visibility or position changes", () => {

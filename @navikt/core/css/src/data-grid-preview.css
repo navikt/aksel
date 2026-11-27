@@ -773,14 +773,6 @@ html[data-dragging-cursor="true"] *::after {
   flex-shrink: 0;
   container-type: inline-size;
 
-  &[data-position="above"] {
-    margin-block-end: var(--ax-space-8);
-  }
-
-  &[data-position="below"] {
-    margin-block-start: var(--ax-space-8);
-  }
-
   &[data-align="start"] {
     justify-content: flex-start;
   }

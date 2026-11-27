@@ -268,7 +268,6 @@ const DataGridTableInternal = forwardRef<
         {pagination?.showAbove && (
           <div className="aksel-data-table__attachment" data-attachment="top">
             <DataGridPaginationBarInternal
-              position="above"
               align={pagination.align}
               navLabel={pagination.aboveNavLabel}
             />
@@ -359,7 +358,6 @@ const DataGridTableInternal = forwardRef<
             data-attachment="bottom"
           >
             <DataGridPaginationBarInternal
-              position="below"
               align={pagination.align}
               navLabel={pagination.belowNavLabel}
             />
