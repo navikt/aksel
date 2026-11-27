@@ -26,6 +26,7 @@ import {
 } from "../hooks/useTableDetailsPanel";
 import { type SubRowsProps, useTableItems } from "../hooks/useTableItems";
 import { useTableKeyboardNav } from "../hooks/useTableKeyboardNav";
+import { useScrollTopOnPageChange } from "../hooks/useTablePagination";
 import { useTableSelection } from "../hooks/useTableSelection";
 import { type TableSortOptions, useTableSort } from "../hooks/useTableSort";
 import { DataTableLoadingState } from "../loading-state/DataTableLoadingState";
@@ -186,8 +187,14 @@ const DataGridTableInternal = forwardRef<
       tableSettings,
     } = useDataGridContext();
     const pagination = useOptionalDataGridPaginationContext();
+    const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
     const sortingState = useTableSort(sorting);
+
+    useScrollTopOnPageChange({
+      sortState: sortingState.sortState,
+      scrollWrapperRef,
+    });
 
     const tableItems = useTableItems({
       items: data,
@@ -265,6 +272,7 @@ const DataGridTableInternal = forwardRef<
                 tableSettings?.stickyColumns?.end
               )
             }
+            scrollWrapperRef={scrollWrapperRef}
           >
             <table
               {...rest}
@@ -343,14 +351,20 @@ function TableElementWrapper({
   children,
   enabled,
   hasStickyColumns,
+  scrollWrapperRef,
 }: {
   children: React.ReactNode;
   enabled: boolean;
   hasStickyColumns: boolean;
+  scrollWrapperRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const [applyStickyStyles, setApplyStickyStyles] = useState<boolean>(false);
 
   const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const mergedScrollWrapperRefs = useMergeRefs(
+    tableWrapperRef,
+    scrollWrapperRef,
+  );
   const tableRef = useRef<HTMLTableElement>(null);
   const rafRef = useRef<number | null>(null);
   const { tabIndex, setTableRef } = useTableKeyboardNav({
@@ -422,7 +436,10 @@ function TableElementWrapper({
 
   return (
     <div className="aksel-data-table__border-wrapper">
-      <div ref={tableWrapperRef} className="aksel-data-table__scroll-wrapper">
+      <div
+        ref={mergedScrollWrapperRefs}
+        className="aksel-data-table__scroll-wrapper"
+      >
         <Slot
           tabIndex={tabIndex}
           /* @ts-expect-error Ref is not typed correctly to handle this case */
