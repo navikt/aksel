@@ -4,7 +4,6 @@
   display: none;
   min-width: 12.5rem;
   height: fit-content;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   top: calc(var(--website-header-sticky-height) + var(--ax-space-24));
 
   &[data-variant="subtle"] {
@@ -15,7 +14,7 @@
     --aksel-toc-fade-shadow-color: var(--ax-bg-default);
   }
 
-  @media (min-width: 1280px) {
+  @media (width >= 1280px) {
     display: block;
   }
 }
@@ -50,13 +49,11 @@
 
 .tocShadowTop {
   top: 0;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(180deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 
 .tocShadowBottom {
   bottom: 0;
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(0deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 

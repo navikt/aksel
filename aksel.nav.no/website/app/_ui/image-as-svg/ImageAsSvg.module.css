@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- --website-svg-size is set inline by ImageAsSvg */
 .imageAsModule {
   width: var(--website-svg-size);
   height: var(--website-svg-size);

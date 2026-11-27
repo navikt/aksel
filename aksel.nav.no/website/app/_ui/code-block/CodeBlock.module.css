@@ -1,4 +1,4 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
+/* stylelint-disable csstools/value-no-unknown-custom-properties -- Uses --line set inline by CodeBlock */
 
 .codeBlock {
   background: var(--ax-bg-default);

@@ -30,7 +30,7 @@
   padding-inline: var(--ax-space-12);
   font-size: var(--ax-font-size-medium);
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     flex-direction: row;
   }
 }
@@ -47,6 +47,5 @@
 }
 
 .propsSeksjonCode {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   font-family: var(--website-font-mono);
 }
