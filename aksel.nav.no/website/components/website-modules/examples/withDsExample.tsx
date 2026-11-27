@@ -22,10 +22,10 @@ import { ExampleThemingSwitch } from "./withDsExample.theme";
 
 type withDsT = {
   /**
-   * Full: No horizontal centering (i.e. full width with padding).
-   * Static: No vertical centering and static (but responsive) width. Used for dynamic-height examples like ExpansionCard.
-   * Static-full: No centering in any direction.
-   * Fullscreen: No centering and no padding.
+   * - `full` = No horizontal centering (i.e. full width with padding).
+   * - `static` = No vertical centering and static (but responsive) width. Used for dynamic-height examples like ExpansionCard.
+   * - `static-full` = No centering in any direction.
+   * - `fullscreen` = No centering and no padding.
    */
   variant?: "full" | "static" | "static-full" | "fullscreen";
   background?: "inverted" | "subtle";
